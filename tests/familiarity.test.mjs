@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {EMPTY,LEVELS,assessmentSample,assessmentAdvice,recordFamiliarity,pickDaily,practiceIds} from '../lib/learning.ts';
+import {EMPTY,LEVELS,assessmentSample,assessmentAdvice,recordFamiliarity,revealFamiliarity,confirmFamiliarity,pickDaily,practiceIds} from '../lib/learning.ts';
 const words=JSON.parse(readFileSync(new URL('../data/words.json',import.meta.url)));
 const find=(word,pos='n.')=>words.find(w=>w.word===word&&w.pos===pos);
 const assessment=(level,known,unfamiliar)=>{const ids=assessmentSample(words,level);return {ids,index:20,completed:true,marks:Object.fromEntries(ids.map((id,i)=>[id,i<known?'known':i<known+unfamiliar?'new':'uncertain']))};};
@@ -30,4 +30,19 @@ test('known marks never erase an unfinished recall or grammar task',()=>{
 });
 test('classification drives uncertain-before-new selection and known follow-up independently',()=>{
  const state=structuredClone(EMPTY);const a=find('apple'),b=find('book'),c=find('cat');state.progress[a.id]=recordFamiliarity(undefined,'known');state.progress[b.id]=recordFamiliarity(undefined,'new');state.progress[c.id]=recordFamiliarity(undefined,'uncertain');const picked=pickDaily(words,state,'2026-09-21');assert.deepEqual(picked.slice(0,2),[c.id,b.id]);assert.ok(!picked.includes(a.id));assert.deepEqual(practiceIds(state,'known'),[a.id]);assert.equal(state.progress[find('book','v.').id],undefined);
+});
+
+test('revealing a meaning freezes the prior belief without measuring or classifying the word',()=>{
+ const revealed=revealFamiliarity(undefined,'known','  도착하다  ','도착하다');assert.equal(revealed.familiarity,undefined);assert.equal(revealed.en,undefined);assert.equal(revealed.lastStudied,undefined);assert.deepEqual(revealed.familiarityCheck,{initial:'known',answer:'도착하다',meaning:'도착하다'});
+ assert.deepEqual(revealFamiliarity(revealed,'new','','different'),revealed);
+});
+test('comparison can lower a known guess and preserves both decisions without grading recall',()=>{
+ const revealed=revealFamiliarity(undefined,'known','다른 뜻','도착하다');const confirmed=confirmFamiliarity(revealed,'uncertain');assert.equal(confirmed.familiarity,'uncertain');assert.equal(confirmed.familiarityCheck.initial,'known');assert.equal(confirmed.familiarityCheck.final,'uncertain');assert.equal(confirmed.familiarityCheck.answer,'다른 뜻');assert.equal(confirmed.en,undefined);assert.equal(confirmed.ko,undefined);assert.throws(()=>confirmFamiliarity(confirmed,'known'));
+});
+test('newly revealed answers cannot become a preexisting known result',()=>{
+ for(const initial of ['uncertain','new']){const p=revealFamiliarity(undefined,initial,'','뜻');assert.throws(()=>confirmFamiliarity(p,'known'));assert.equal(confirmFamiliarity(p,initial).familiarity,initial);}
+ assert.throws(()=>confirmFamiliarity(undefined,'known'));
+});
+test('a completed comparison starts with a fresh concealed question on reassessment',()=>{
+ const previous=confirmFamiliarity(revealFamiliarity(undefined,'known','old guess','old meaning'),'known');const next=revealFamiliarity(previous,'uncertain','new guess','new meaning');assert.equal(next.familiarity,'known');assert.equal(next.familiarityCheck.final,undefined);assert.equal(next.familiarityCheck.answer,'new guess');
 });

@@ -1,3 +1,4 @@
+const {markFamiliarity}=require('./familiarity-actions.cjs');
 const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base='http://127.0.0.1:8787';const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
@@ -7,13 +8,13 @@ const base='http://127.0.0.1:8787';const words=JSON.parse(fs.readFileSync('data/
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:1366,height:1000}});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
   const saved=()=>page.getByText('서버에 저장됨',{exact:true}).waitFor();const state=async()=> (await context.request.get(base+'/api/state')).json();
   await page.goto(base);await saved();await page.getByRole('button',{name:'20개 친숙도부터 확인',exact:true}).click();
-  await page.getByRole('button',{name:'뜻을 알아요',exact:false}).click();await saved();await page.getByRole('button',{name:'여기까지 저장 · 나중에 계속'}).click();await page.reload();await saved();
+  await markFamiliarity(page,'known');await saved();await page.getByRole('button',{name:'여기까지 저장 · 나중에 계속'}).click();await page.reload();await saved();
   await page.getByRole('button',{name:'20개 친숙도부터 확인',exact:true}).click();await page.getByText('1 / 20',{exact:true}).waitFor();
-  for(let i=1;i<20;i++){await page.getByRole('button',{name:'뜻을 알아요',exact:false}).click();await saved();}
+  for(let i=1;i<20;i++){await markFamiliarity(page,'known');await saved();}
   await page.getByRole('button',{name:'다른 수준 확인',exact:true}).waitFor();await page.getByRole('button',{name:'오늘은 준비만 마치기'}).click();assert.equal(Object.keys((await state()).state.sessions).length,0);checks.push('first-day preparation resumes and can end without fabricated study');
   await page.getByRole('button',{name:'오늘의 학습 시작',exact:true}).click();await page.getByRole('heading',{name:'오늘 후보의 친숙도를 확인해요.'}).waitFor();
-  const knownWord=await page.locator('.word-stage h3').innerText();await page.getByRole('button',{name:'뜻을 알아요',exact:true}).click();await saved();
-  for(let i=0;i<3;i++){await page.getByRole('button',{name:'조금 헷갈려요',exact:true}).click();await saved();}
+  const knownWord=await page.locator('.word-stage h3').innerText();await markFamiliarity(page,'known');await saved();
+  for(let i=0;i<3;i++){await markFamiliarity(page,'uncertain');await saved();}
   assert.ok(!(await page.locator('.prepared-words').innerText()).split(' · ').includes(knownWord));await page.getByRole('button',{name:'이 단어들로 시작'}).click();await saved();
   let snapshot=await state();let active=snapshot.state.sessions[snapshot.state.settings.activeSessionId];assert.ok(active.ids.every(id=>active.records[id].familiarity==='uncertain'));assert.ok(!active.ids.some(id=>words.find(w=>w.id===id).word===knownWord));checks.push('unmarked candidates are classified; known replacements are excluded before learning');
   await page.locator('a[href^="/sources/oxford-source.pdf#page="]').waitFor();
@@ -23,7 +24,7 @@ const base='http://127.0.0.1:8787';const words=JSON.parse(fs.readFileSync('data/
   await page.getByRole('tab',{name:'전체 단어장'}).click();await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');await page.locator('.word-link').first().click();
   await page.getByLabel('생활에서 자주 쓸 단어',{exact:false}).check();await page.getByLabel('새로 만난 표현',{exact:true}).fill('an apple a day — reading note');await page.getByRole('button',{name:'이 행에 표현 덧붙이기'}).click();await page.getByRole('button',{name:'기록 저장',exact:true}).click();await saved();
   snapshot=await state();const apple=words.find(w=>w.word==='apple'&&w.pos==='n.');assert.equal(snapshot.state.progress[apple.id].useful,true);assert.equal(snapshot.state.progress[apple.id].encounters[0].source,'reading');
-  await page.locator('.word-link').first().click();await page.getByText('an apple a day — reading note',{exact:true}).waitFor();await page.getByRole('button',{name:'Close',exact:true}).click();checks.push('usefulness and reading/listening encounters persist in the same notebook entry');
+  await page.getByRole('dialog').waitFor({state:'hidden'});await page.locator('.word-link').first().click();await page.getByText('an apple a day — reading note',{exact:true}).waitFor();await page.getByRole('button',{name:'Close',exact:true}).click();checks.push('usefulness and reading/listening encounters persist in the same notebook entry');
   await page.getByRole('tab',{name:'학습 기록'}).click();const download=page.waitForEvent('download');await page.getByRole('button',{name:'튜터 프롬프트·최근 기록 받기'}).click();await (await download).saveAs('work/tutor-handoff.txt');const handoff=fs.readFileSync('work/tutor-handoff.txt','utf8');assert.ok(handoff.includes('미측정')&&handoff.includes('정답을 숨긴'));checks.push('portable tutor prompt includes factual recent records');
 
   // Focused practice starts from realistic prior results, without touching real account data.

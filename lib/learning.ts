@@ -1,6 +1,7 @@
 export const LEVELS = ["A1", "A2", "B1", "B2"] as const;
 export type Level = typeof LEVELS[number];
 export type Familiarity = "known" | "uncertain" | "new";
+export type FamiliarityCheck = {initial:Familiarity;answer:string;meaning:string;final?:Familiarity};
 export type Result = "independent" | "help" | "unmeasured";
 export type SentenceResult = "written" | "improve" | "unmeasured";
 export type Stage = "warmup" | "learn" | "en" | "ko" | "sentence" | "checkpoint" | "done";
@@ -9,7 +10,7 @@ export type PracticeMode = "known" | "ko" | "sentence";
 export type Word = {id:string;word:string;headword:string;pos:string;level:Level;page:number;personal?:boolean};
 export type Content = {meaning:string;ipa?:string;expression:string;example:string;translation:string;source:string;attribution?:string;url?:string};
 export type Progress = {
-  familiarity?: Familiarity; meaning?: string; expression?:string; example?:string; translation?:string;
+  familiarity?: Familiarity; familiarityCheck?:FamiliarityCheck; meaning?: string; expression?:string; example?:string; translation?:string;
   en?:Result;ko?:Result;sentenceStatus?:SentenceResult;sentence?:string;notes?:string;
   studyDates?:string[];lastStudied?:string;needsReview?:boolean;personal?:Word;
   useful?:boolean;lastReviewed?:string;encounters?:{date:string;source:"reading"|"listening";text:string}[];
@@ -63,6 +64,17 @@ export function recordFamiliarity(p:Progress|undefined,familiarity:Familiarity):
  // A renewed difficulty signal reopens completed vocabulary without rewriting test results.
  // Marking a meaning as known never clears an actual recall/sentence weakness.
  return {...p,familiarity,...(familiarity!=="known"&&p?.lastStudied?{needsReview:true}:{})};
+}
+export function revealFamiliarity(p:Progress|undefined,initial:Familiarity,answer:string,meaning:string):Progress{
+ // Keep the original, pre-reveal commitment across saves and devices.
+ if(p?.familiarityCheck&&!p.familiarityCheck.final)return p;
+ return {...p,familiarityCheck:{initial,answer:answer.trim(),meaning}};
+}
+export function confirmFamiliarity(p:Progress|undefined,final:Familiarity):Progress{
+ const check=p?.familiarityCheck;
+ if(!check||check.final)throw new Error("뜻을 확인한 뒤 친숙도를 확정해 주세요.");
+ if(final!==check.initial&&!(check.initial==="known"&&final==="uncertain"))throw new Error("뜻을 보기 전의 판단을 기준으로 기록해 주세요.");
+ return {...recordFamiliarity(p,final),familiarityCheck:{...check,final}};
 }
 const everyday=["arrive","busy","breakfast","work","home","food","water","time","help","need","want","buy","travel","meet","friend","family","learn","call","plan","use","important"];
 export function pickDaily(words:Word[],state:State,date=today()):string[]{

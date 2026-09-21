@@ -1,3 +1,4 @@
+const {markFamiliarity}=require('./familiarity-actions.cjs');
 const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -7,7 +8,7 @@ const fs=require('node:fs');
   const context=await browser.newContext({viewport:{width:1366,height:900},extraHTTPHeaders:{'oai-authenticated-user-id':account,'oai-authenticated-user-email':account+'@example.test'}});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:8787/');await page.getByText('서버에 저장됨',{exact:true}).waitFor();
   const initial=await (await context.request.get('http://127.0.0.1:8787/api/state')).json();assert.equal(Object.keys(initial.state.progress).length,0);
-  await page.getByRole('button',{name:'20개 친숙도부터 확인',exact:true}).click();for(let i=0;i<20;i++){await page.getByRole('button',{name:'조금 헷갈려요',exact:false}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}await page.getByRole('button',{name:'이 수준에서 학습하기'}).click();await page.getByRole('heading',{name:'단어 익히기',exact:true}).waitFor();
+  await page.getByRole('button',{name:'20개 친숙도부터 확인',exact:true}).click();for(let i=0;i<20;i++){await markFamiliarity(page,'uncertain');await page.getByText('서버에 저장됨',{exact:true}).waitFor();}await page.getByRole('button',{name:'이 수준에서 학습하기'}).click();await page.getByRole('heading',{name:'단어 익히기',exact:true}).waitFor();
   let model=await (await context.request.get('http://127.0.0.1:8787/api/state')).json();const session=model.state.sessions[model.state.settings.activeSessionId];const catalog=JSON.parse(fs.readFileSync('data/words.json','utf8'));const data=JSON.parse(fs.readFileSync('data/content.json','utf8'));const targetWords=session.ids.map(id=>catalog.find(w=>w.id===id).word);for(let i=0;i<3;i++){await page.getByRole('button',{name:'뜻을 확인했어요'}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}
   await page.getByRole('heading',{name:'영어 → 뜻',exact:true}).waitFor();assert.equal(await page.locator('.answer-box').count(),0);
   for(let i=0;i<3;i++){await page.getByLabel('한국어 뜻 입력').fill(data[session.ids[i]].meaning);await page.getByRole('button',{name:'내 답 확인'}).click();await page.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}
