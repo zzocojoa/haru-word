@@ -33,7 +33,7 @@ Tatoeba 프로젝트와 문장별 기여자. ManyThings.org Korean–English sen
 https://www.manythings.org/anki/ (자료 날짜: 2026-02-13)
 https://tatoeba.org/
 CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
-영어·한국어 문장 및 문장별 저작자 정보를 그대로 제공하며 문장 일부를 표현으로 발췌했습니다.
+영어·한국어 문장 및 문장별 저작자 정보를 제공하며, 표현은 문장에서 발췌하거나 학습용으로 따로 작성했습니다.
 학습 카드에 원문 문장 ID와 영어·한국어 기여자 정보를 표시합니다.
 학습용 작성 예문은 새로 작성한 문장으로 Oxford 사전 또는 Tatoeba 문장이 아닙니다.
 모든 내용이 전문가의 검수를 받은 것은 아닙니다. 연결된 사전으로 용례를 확인하고 나만의 뜻을 기록할 수 있습니다.
@@ -44,7 +44,8 @@ CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
 
 5. 학습 결과
 회상·문장 평가는 학습자의 자기 평가이며 자동 문법 판정이나 정식 CEFR 시험이 아닙니다.
-별도 AI API를 호출하지 않습니다.
+AI 문장 점검 버튼을 누를 때 Google Gemini API에 목표 단어·뜻·작성 문장을 보냅니다.
+AI 의견은 참고 자료이며 결과는 학습자가 확인합니다. 무료 한도·연결 오류 시 자기 점검으로 계속할 수 있습니다.
 '''
 (root/'content-attribution.txt').write_text(credits,encoding='utf-8')
 shutil.copyfile('work/dictionary-credits.md',root/'dictionary-credits.md')

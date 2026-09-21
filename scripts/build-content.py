@@ -50,6 +50,10 @@ for w in words:
     content={'meaning':meaning,'ipa':'','expression':'','example':'','translation':'','source':'참고 풀이',**(own or example)}
     output[w['id']]=content
     if not content['example'] or not content['meaning']:missing.append({**w,'meaning':content['meaning']})
+for key,patch in json.loads(Path('data/reviewed-content-overrides.json').read_text('utf-8')).items():
+    output[key].update(patch)
+    if patch.get('source')=='학습용 작성 예문':
+        output[key].pop('attribution',None);output[key].pop('url',None)
 Path('data/content.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 Path('work/missing-content.json').write_text(json.dumps(missing,ensure_ascii=False,indent=2),encoding='utf-8')
 unique=list(dict.fromkeys((w['headword'],w['pos'],w['meaning']) for w in missing))

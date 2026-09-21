@@ -2,7 +2,7 @@ import { env } from 'cloudflare:workers';
 import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { database } from '@/db/store';
 import { WORD_MAP } from '@/lib/catalog';
-import { currentId,today,type Session,type Progress } from '@/lib/learning';
+import { currentId,entryIdFor,today,type Session,type Progress } from '@/lib/learning';
 import { FEEDBACK_DAILY_LIMIT,FEEDBACK_MODEL,feedbackRequestSchema } from '@/lib/sentence-feedback';
 import { FeedbackError,FEEDBACK_QUOTA_SQL,generateSentenceFeedback } from '@/lib/gemini-feedback';
 
@@ -32,8 +32,9 @@ export async function POST(request:Request){
     if(!row)return json({error:'학습 회차를 찾지 못했습니다.'},404);
     const session=JSON.parse(row.document) as Session;
     if(session.finished||session.stage!=='sentence'||currentId(session)!==entryId)return json({error:'현재 문장 연습에서만 교정할 수 있어요.'},409);
-    let word=WORD_MAP.get(entryId);
-    if(!word){const p=await db.prepare('SELECT document FROM word_progress WHERE user_id=? AND entry_id=?').bind(user.userId,entryId).first<{document:string}>();word=p?(JSON.parse(p.document) as Progress).personal:undefined;}
+    const wordId=entryIdFor(session,entryId);
+    let word=WORD_MAP.get(wordId);
+    if(!word){const p=await db.prepare('SELECT document FROM word_progress WHERE user_id=? AND entry_id=?').bind(user.userId,wordId).first<{document:string}>();word=p?(JSON.parse(p.document) as Progress).personal:undefined;}
     const meaning=session.records[entryId]?.meaning;
     if(!word||!meaning)return json({error:'단어와 오늘의 뜻을 먼저 저장해 주세요.'},400);
     const now=Date.now();

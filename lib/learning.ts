@@ -11,14 +11,16 @@ export type PracticeMode = "known" | "ko" | "sentence" | "repeat";
 export type Word = {id:string;word:string;headword:string;pos:string;level:Level;page:number;personal?:boolean};
 export type Content = {meaning:string;ipa?:string;expression:string;example:string;translation:string;source:string;attribution?:string;url?:string};
 export type Progress = {
+  senses?:Record<string,SenseProgress>;
   familiarity?: Familiarity; familiarityCheck?:FamiliarityCheck; meaning?: string; expression?:string; example?:string; translation?:string;
   en?:Result;ko?:Result;sentenceStatus?:SentenceResult;sentence?:string;notes?:string;
   studyDates?:string[];lastStudied?:string;needsReview?:boolean;personal?:Word;
   useful?:boolean;lastReviewed?:string;encounters?:{date:string;source:"reading"|"listening";text:string}[];
 };
+export type SenseProgress = Pick<Progress,"meaning"|"expression"|"example"|"translation"|"en"|"ko"|"sentenceStatus"|"sentence"|"notes"|"studyDates"|"lastStudied"|"lastReviewed"|"needsReview">;
 export type Assessment = {ids:string[];index:number;marks:Record<string,Familiarity>;completed:boolean};
 export type Settings = {level:Level;dailyGoal:number;assessments:Partial<Record<Level,Assessment>>;activeSessionId:string|null;newWordsPaused?:boolean;monthlyBatchSize?:number;reviewDay?:number};
-export type RecordItem = {aiFeedback?:SentenceFeedback;meaning:string;familiarity?:Familiarity;en:Result;ko:Result;sentenceStatus:SentenceResult;sentence:string;notes:string;spoken?:boolean;enAnswer?:string;koAnswer?:string;hintEn?:boolean;hintKo?:boolean;retryEn?:Result;retryKo?:Result;draft?:{answer:string;hinted:boolean;revealed:boolean;stage:"en"|"ko";retry:boolean}};
+export type RecordItem = {entryId?:string;learnedOn?:string;lastPracticedOn?:string;material?:Content;historicalMeaningUnknown?:boolean;aiFeedback?:SentenceFeedback;meaning:string;familiarity?:Familiarity;en:Result;ko:Result;sentenceStatus:SentenceResult;sentence:string;notes:string;spoken?:boolean;enAnswer?:string;koAnswer?:string;hintEn?:boolean;hintKo?:boolean;retryEn?:Result;retryKo?:Result;draft?:{answer:string;hinted:boolean;revealed:boolean;stage:"en"|"ko";retry:boolean}};
 export type Session = {id:string;kind:Kind;date:string;period:string;ids:string[];wordKeys?:Record<string,string>;warmupIds:string[];warmupResults?:Record<string,Result>;warmupDraft?:{id:string;answer:string;hinted:boolean;revealed:boolean};stage:Stage;index:number;records:Record<string,RecordItem>;retry: {id:string;direction:"en"|"ko";seen?:string[]}[];retryMode:boolean;resumeAfterRetry?:{stage:Stage;index:number};batchSize?:number;batchStart?:number;practiceMode?:PracticeMode;elapsed:number;finished:boolean;paused:boolean;createdAt:string};
 export type State = {settings:Settings;progress:Record<string,Progress>;sessions:Record<string,Session>};
 export const EMPTY:State = {settings:{level:"A1",dailyGoal:3,assessments:{},activeSessionId:null},progress:{},sessions:{}};
@@ -81,23 +83,70 @@ const everyday=["arrive","busy","breakfast","work","home","food","water","time",
 export function pickDaily(words:Word[],state:State,date=today()):string[]{
  const progress=state.progress; const recentTargets=new Set(Object.values(state.sessions).filter(s=>s.kind==="daily"&&s.date===date).flatMap(s=>s.ids));
  const pauseNew=state.settings.newWordsPaused||Object.values(state.sessions).some(s=>s.kind==="monthly"&&!s.finished);
- const candidates=words.filter(w=>!recentTargets.has(w.id)&&(progress[w.id]?.needsReview || (!pauseNew&&w.level===state.settings.level && progress[w.id]?.familiarity!=="known"&&!progress[w.id]?.lastStudied)));
- function priority(w:Word){const p=progress[w.id]; return p?.needsReview?0:p?.familiarity==="uncertain"?1:p?.familiarity==="new"?2:3;}
+ const candidates=words.filter(w=>!recentTargets.has(w.id)&&(hasReviewWork(progress[w.id]) || (!pauseNew&&(w.personal||w.level===state.settings.level) && progress[w.id]?.familiarity!=="known"&&!senseProgress(progress[w.id],progress[w.id]?.meaning||"").lastStudied)));
+ function priority(w:Word){const p=progress[w.id]; return hasReviewWork(p)?0:p?.familiarity==="uncertain"?1:p?.familiarity==="new"?2:3;}
  candidates.sort((a,b)=>priority(a)-priority(b)||Number(!!progress[b.id]?.useful)-Number(!!progress[a.id]?.useful)||(everyday.includes(a.word)?0:1)-(everyday.includes(b.word)?0:1)||hash(date+a.id)-hash(date+b.id));
  const out:string[]=[]; const seen=new Set<string>(); for(const w of candidates){if(seen.has(w.headword))continue;out.push(w.id);seen.add(w.headword);if(out.length>=state.settings.dailyGoal)break;}return out;
 }
-export function reviewIds(state:State,kind:"weekly"|"monthly",period:string):string[]{
- const ids=new Set<string>(); if(kind==="monthly"){for(const [id,p]of Object.entries(state.progress))if(p.studyDates?.some(date=>date.slice(0,7)===period))ids.add(id);}else for(const s of Object.values(state.sessions)){if(s.kind==="daily"&&weekStart(s.date)===period)s.ids.forEach(id=>ids.add(id));}
- // A deterministic interleave avoids alphabetic cueing and resumes without reshuffling.
- return [...ids].sort((a,b)=>hash(period+a)-hash(period+b));
+export type LearningTarget={entryId:string;meaning:string;familiarity?:Familiarity;material?:Content;historicalMeaningUnknown?:boolean};
+export function targetIdentity(entryId:string,meaning:string):string{return JSON.stringify([entryId,meaning.trim()]);}
+export function entryIdFor(s:Session,id:string):string{return s.records[id]?.entryId||id;}
+export function reviewTargets(state:State,kind:"weekly"|"monthly",period:string):LearningTarget[]{
+ const targets=new Map<string,LearningTarget>();const represented=new Set<string>();
+ for(const s of Object.values(state.sessions).filter(s=>s.kind==="daily").sort((a,b)=>a.createdAt.localeCompare(b.createdAt))){
+  for(const id of s.ids){const entryId=entryIdFor(s,id),r=s.records[id];if(!r)continue;
+   const learnedOn=r.learnedOn||(!r.entryId&&state.progress[entryId]?.studyDates?.includes(s.date)?s.date:undefined);
+   const included=kind==="monthly"?learnedOn?.slice(0,7)===period:weekStart(s.date)===period||!!learnedOn&&weekStart(learnedOn)===period;
+   if(!included)continue;
+   targets.set(targetIdentity(entryId,r.meaning),{entryId,meaning:r.meaning,familiarity:r.familiarity,material:r.material});represented.add(entryId);
+  }
+ }
+ // Older backups may have only progress dates, with no surviving original lesson.
+ if(kind==="monthly")for(const [entryId,p]of Object.entries(state.progress))if(!represented.has(entryId)&&p.studyDates?.some(d=>d.slice(0,7)===period)){
+  const senses=Object.values(p.senses||{}).filter(x=>x.studyDates?.some(d=>d.slice(0,7)===period));
+  for(const sense of senses.length?senses:[p]){const meaning=sense.meaning||"";targets.set(targetIdentity(entryId,meaning),{entryId,meaning,familiarity:p.familiarity,historicalMeaningUnknown:!senses.length});}
+ }
+ return [...targets.values()].sort((a,b)=>hash(period+a.entryId)-hash(period+b.entryId)||a.meaning.localeCompare(b.meaning));
+}
+export function reviewIds(state:State,kind:"weekly"|"monthly",period:string):string[]{return [...new Set(reviewTargets(state,kind,period).map(t=>t.entryId))];}
+export function senseProgress(p:Progress|undefined,meaning:string):SenseProgress{
+ const key=meaning.trim();const saved=p?.senses?.[key];
+ if(!p||p.meaning?.trim()!==key)return saved||{meaning:key};
+ return {meaning:key,expression:p.expression,example:p.example,translation:p.translation,en:p.en,ko:p.ko,sentenceStatus:p.sentenceStatus,sentence:p.sentence,notes:p.notes,studyDates:saved?saved.studyDates:p.studyDates,lastStudied:saved?saved.lastStudied:p.lastStudied,lastReviewed:saved?saved.lastReviewed:p.lastReviewed,needsReview:p.needsReview};
+}
+export function allSenses(p:Progress|undefined):SenseProgress[]{const senses={...p?.senses};if(p?.meaning)senses[p.meaning.trim()]=senseProgress(p,p.meaning);return Object.values(senses);}
+export function hasReviewWork(p:Progress|undefined):boolean{return !!p?.needsReview||allSenses(p).some(x=>x.needsReview);}
+export function storeSense(p:Progress|undefined,sense:SenseProgress):Progress{
+ const meaning=sense.meaning?.trim()||"";const old=p?.meaning?senseProgress(p,p.meaning):undefined;
+ const senses={...p?.senses,...(old?{[p!.meaning!.trim()]:old}:{}),[meaning]:{...sense,meaning}};
+ const dates=[...new Set([...(p?.studyDates||[]),...(sense.studyDates||[])])].sort();
+ const result={...p,...(!p?.meaning||p.meaning.trim()===meaning?sense:{}),senses};
+ return {...result,...(dates.length?{studyDates:dates,lastStudied:dates[dates.length-1]}:{}),...(sense.lastReviewed?{lastReviewed:[p?.lastReviewed||"",sense.lastReviewed].sort().pop()}:{} )};
+}
+export function selectSense(p:Progress|undefined,sense:SenseProgress):Progress{
+ const selected:SenseProgress={expression:"",example:"",translation:"",en:"unmeasured",ko:"unmeasured",sentenceStatus:"unmeasured",sentence:"",notes:"",needsReview:false,...sense};
+ const stored=storeSense(p,selected);return {...stored,...selected,studyDates:stored.studyDates,lastStudied:stored.lastStudied,lastReviewed:stored.lastReviewed};
+}
+export function pendingReviews(state:State):Session[]{return Object.values(state.sessions).filter(s=>(s.kind==="weekly"||s.kind==="monthly")&&!s.finished).sort((a,b)=>a.period.localeCompare(b.period)||a.createdAt.localeCompare(b.createdAt));}
+export function reviewRemaining(s:Session):number{return s.ids.filter(id=>{const r=s.records[id];return !r||(s.kind==="monthly"?r.ko==="unmeasured":r.en==="unmeasured"||r.ko==="unmeasured"||r.sentenceStatus==="unmeasured");}).length;}
+export function dailyMeaning(p:Progress|undefined,fallback:string):string{return allSenses(p).filter(x=>x.needsReview).sort((a,b)=>(a.lastReviewed||"").localeCompare(b.lastReviewed||""))[0]?.meaning||p?.meaning||fallback;}
+function targetRecords(targets:LearningTarget[]):{ids:string[];records:Record<string,RecordItem>}{
+ const records:Record<string,RecordItem>={};
+ for(const t of targets){const key=records[t.entryId]?"target_"+crypto.randomUUID():t.entryId;records[key]={...emptyRecord(t.meaning,t.familiarity),entryId:t.entryId,...(t.material?{material:t.material}:{}),...(t.historicalMeaningUnknown?{historicalMeaningUnknown:true}:{})};}
+ return {ids:Object.keys(records),records};
 }
 function hash(v:string):number{let h=0;for(const c of v)h=(h*31+c.charCodeAt(0))>>>0;return h;}
-export function practiceIds(state:State,mode:PracticeMode):string[]{if(mode==="repeat")return [];return Object.entries(state.progress).filter(([,p])=>mode==="known"?p.familiarity==="known":mode==="ko"?p.ko==="help":p.sentenceStatus==="improve").sort((a,b)=>(a[1].lastReviewed||"").localeCompare(b[1].lastReviewed||"")||hash(a[0])-hash(b[0])).slice(0,20).map(([id])=>id);}
+export function practiceIds(state:State,mode:PracticeMode):string[]{if(mode==="repeat")return [];return Object.entries(state.progress).filter(([,p])=>mode==="known"?p.familiarity==="known":mode==="ko"?p.ko==="help"||allSenses(p).some(x=>x.ko==="help"):p.sentenceStatus==="improve"||allSenses(p).some(x=>x.sentenceStatus==="improve")).sort((a,b)=>(a[1].lastReviewed||"").localeCompare(b[1].lastReviewed||"")||hash(a[0])-hash(b[0])).slice(0,20).map(([id])=>id);}
 export function newSession(state:State,words:Word[],content:(id:string)=>Content,kind:Kind,date=today(),period=periodKey(kind,date),practiceMode?:PracticeMode):Session|null{
- const ids=kind==="daily"?pickDaily(words,state,date):kind==="practice"?practiceIds(state,practiceMode||"known"):reviewIds(state,kind,period); if(!ids.length)return null;
- const warmupIds=kind==="daily"?Object.entries(state.progress).filter(([,p])=>p.lastStudied).sort((a,b)=>Number(!!b[1].needsReview)-Number(!!a[1].needsReview)||(b[1].lastStudied||"").localeCompare(a[1].lastStudied||"")).slice(0,3).map(([id])=>id):[];
- const records=Object.fromEntries(ids.map(id=>[id,emptyRecord(state.progress[id]?.meaning||content(id).meaning,state.progress[id]?.familiarity)]));
- return {id:crypto.randomUUID(),kind,date,period,ids,wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===id)?.word.toLowerCase()||id])),warmupIds,stage:kind==="daily"?(warmupIds.length?"warmup":"learn"):kind==="monthly"||practiceMode==="ko"?"ko":practiceMode==="sentence"?"sentence":"en",index:0,records,retry:[],retryMode:false,...(kind==="monthly"?{batchSize:state.settings.monthlyBatchSize||15,batchStart:0}:{}),...(kind==="practice"?{practiceMode:practiceMode||"known"}:{}),elapsed:0,finished:false,paused:false,createdAt:new Date().toISOString()};
+ const targets:LearningTarget[]=kind==="weekly"||kind==="monthly"?reviewTargets(state,kind,period):
+ (kind==="daily"?pickDaily(words,state,date):practiceIds(state,practiceMode||"known")).flatMap(entryId=>{
+  const p=state.progress[entryId];const choices=kind==="practice"?allSenses(p).filter(x=>practiceMode==="ko"?x.ko==="help":practiceMode==="sentence"?x.sentenceStatus==="improve":true):[];
+  return (choices.length?choices.map(x=>x.meaning||content(entryId).meaning):[dailyMeaning(p,content(entryId).meaning)]).map(meaning=>({entryId,meaning,familiarity:p?.familiarity}));
+ }).slice(0,kind==="practice"?20:3);
+ if(!targets.length)return null;
+ const {ids,records}=targetRecords(targets.map(t=>({...t,meaning:t.meaning||content(t.entryId).meaning})));
+ const warmupIds=kind==="daily"?Object.entries(state.progress).filter(([,p])=>p.lastStudied).sort((a,b)=>Number(hasReviewWork(b[1]))-Number(hasReviewWork(a[1]))||(b[1].lastStudied||"").localeCompare(a[1].lastStudied||"")).slice(0,3).map(([id])=>id):[];
+ return {id:crypto.randomUUID(),kind,date,period,ids,wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===entryIdFor({records} as Session,id))?.word.toLowerCase()||id])),warmupIds,stage:kind==="daily"?(warmupIds.length?"warmup":"learn"):kind==="monthly"||practiceMode==="ko"?"ko":practiceMode==="sentence"?"sentence":"en",index:0,records,retry:[],retryMode:false,...(kind==="monthly"?{batchSize:state.settings.monthlyBatchSize||15,batchStart:0}:{}),...(kind==="practice"?{practiceMode:practiceMode||"known"}:{}),elapsed:0,finished:false,paused:false,createdAt:new Date().toISOString()};
 }
 export function currentId(s:Session):string|undefined{return s.retryMode?s.retry[0]?.id:s.stage==="warmup"?s.warmupIds[s.index]:s.ids[s.index];}
 // A repeat is a separate optional practice, tied to the original daily date.
@@ -107,15 +156,14 @@ export function repeatDailySession(state:State,words:Word[],sourceDate:string,da
  if(!sources.length||sources.some(s=>!s.finished))return null;
  const existing=Object.values(state.sessions).find(s=>s.kind==="practice"&&s.practiceMode==="repeat"&&s.period===sourceDate&&!s.finished);
  if(existing)return {...existing,paused:false};
- const records:Record<string,RecordItem>={};
+ const targets=new Map<string,LearningTarget>();
  for(const s of sources.sort((a,b)=>a.createdAt.localeCompare(b.createdAt)))for(const id of s.ids){
-  const record=s.records[id];
-  if(!record||!words.some(w=>w.id===id))return null;
-  records[id]=emptyRecord(record.meaning,record.familiarity);
+  const r=s.records[id];const entryId=entryIdFor(s,id);if(!r||!words.some(w=>w.id===entryId))return null;
+  targets.set(targetIdentity(entryId,r.meaning),{entryId,meaning:r.meaning,familiarity:r.familiarity,material:r.material});
  }
- const ids=Object.keys(records);if(!ids.length)return null;
+ const {ids,records}=targetRecords([...targets.values()]);if(!ids.length)return null;
  return {id:crypto.randomUUID(),kind:"practice",practiceMode:"repeat",date,period:sourceDate,ids,
-  wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===id)!.word.toLowerCase()])),
+  wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===(records[id].entryId||id))!.word.toLowerCase()])),
   warmupIds:[],stage:"learn",index:0,records,retry:[],retryMode:false,elapsed:0,finished:false,paused:false,createdAt:new Date().toISOString()};
 }
 export function stepSession(s:Session):Session{
@@ -140,16 +188,17 @@ export function stepSession(s:Session):Session{
  return {...next,retry,finished:next.stage==="done",paused:next.stage==="done"||next.stage==="checkpoint"};
 }
 export function continueBatch(s:Session):Session{return s.stage==="checkpoint"?{...s,batchStart:s.index,stage:"ko",paused:false}:s;}
-export function applyRecord(state:State,s:Session,id:string,patch:Partial<RecordItem>,advance=true):State{
+export function applyRecord(state:State,s:Session,id:string,patch:Partial<RecordItem>,advance=true,activityDate=today()):State{
  const wasRetry=s.retryMode;
  if(wasRetry){patch={...patch};if(patch.en){patch.retryEn=patch.en;delete patch.en;}if(patch.ko){patch.retryKo=patch.ko;delete patch.ko;}}
- const record={...s.records[id],...patch};
+ const learnedNow=s.kind==="daily"&&s.stage==="learn"&&advance;
+ const record={...s.records[id],...patch,...(learnedNow?{learnedOn:activityDate}:{}),...(advance?{lastPracticedOn:activityDate}:{})};
  const failed=(patch.en==="help"||patch.ko==="help")&&!wasRetry;
  const retry=failed?[...s.retry,{id,direction:patch.en?"en" as const:"ko" as const,seen:[]}]:s.retry;
  const nextSession={...s,records:{...s.records,[id]:record},retry};
- const p=state.progress[id]||{};
- const learnedNow=s.kind==="daily"&&s.stage==="learn"&&advance;
- const studyDates=learnedNow?[...new Set([...(p.studyDates||[]),s.date])]:p.studyDates;
+ const entryId=entryIdFor(s,id);const original=state.progress[entryId];
+ const p=original?.meaning?senseProgress(original,record.meaning):original||{};
+ const studyDates=learnedNow?[...new Set([...(p.studyDates||[]),activityDate])]:p.studyDates;
  // Monthly writing does not overwrite an untested English-to-Korean result.
  const en=record.en==="unmeasured"?p.en:record.en, ko=record.ko==="unmeasured"?p.ko:record.ko;
  const sentenceStatus=record.sentenceStatus==="unmeasured"?p.sentenceStatus:record.sentenceStatus;
@@ -157,12 +206,22 @@ export function applyRecord(state:State,s:Session,id:string,patch:Partial<Record
  const otherGap=s.practiceMode==="ko"?(en!=="independent"||sentenceStatus!=="written"):s.practiceMode==="sentence"?(en!=="independent"||ko!=="independent"):s.kind==="monthly"?(en==="help"||sentenceStatus==="improve"):false;
  // Optional repetition only reopens a previously learned word on measured difficulty.
  const needsReview=s.practiceMode==="repeat"?(hasMeasuredDifficulty(record)?true:complete?false:p.needsReview):!complete||otherGap;
- const updated:Progress={...p,meaning:record.meaning,en,ko,sentenceStatus,sentence:record.sentence||p.sentence,notes:record.notes||p.notes,studyDates,lastStudied:learnedNow?s.date:p.lastStudied,lastReviewed:s.kind!=="daily"&&advance?s.date:p.lastReviewed,needsReview};
- return {...state,progress:{...state.progress,[id]:updated},sessions:{...state.sessions,[s.id]:advance?stepSession(nextSession):nextSession}};
+ const updated:SenseProgress={...p,...(record.material?{expression:record.material.expression,example:record.material.example,translation:record.material.translation}:{}),meaning:record.meaning,en,ko,sentenceStatus,sentence:record.sentence||p.sentence,notes:record.notes||p.notes,studyDates,lastStudied:learnedNow?activityDate:p.lastStudied,lastReviewed:s.kind!=="daily"&&advance?activityDate:p.lastReviewed,needsReview};
+ let progress=storeSense(original,updated);
+ if(learnedNow){
+  const assigned=s.records[id]?.meaning;
+  if(assigned&&assigned!==record.meaning){
+   const prior=senseProgress(progress,assigned);
+   // Choosing one specific sense should not leave an unlearned reference gloss due forever.
+   if(!prior.lastStudied&&(!prior.en||prior.en==="unmeasured")&&(!prior.ko||prior.ko==="unmeasured")&&(!prior.sentenceStatus||prior.sentenceStatus==="unmeasured"))progress=storeSense(progress,{...prior,needsReview:false});
+  }
+  progress=selectSense(progress,updated);
+ }
+ return {...state,progress:{...state.progress,[entryId]:progress},sessions:{...state.sessions,[s.id]:advance?stepSession(nextSession):nextSession}};
 }
 function hasMeasuredDifficulty(r:RecordItem):boolean{return r.en==="help"||r.ko==="help"||r.sentenceStatus==="improve";}
-export function ensureCarryover(state:State,s:Session):State{const progress={...state.progress};for(const id of s.ids){const r=s.records[id];if(s.practiceMode==="repeat"?r&&hasMeasuredDifficulty(r):!r||!sessionRecordComplete(s,r)){progress[id]={...progress[id],needsReview:true};}}return {...state,progress};}
-export function exportLog(state:State,words:Word[]):string{const map=new Map(words.map(w=>[w.id,w]));const rows=[["학습일","종류","단어","품사","수준","학습 뜻","처음 표시","영어→뜻","뜻→영어","문장 상태","말하기","내 문장","보완점","재시도 영어→뜻","재시도 뜻→영어","다음 할 일","AI 검토 원문","AI 교정 제안","AI 설명"]];for(const s of Object.values(state.sessions).sort((a,b)=>a.createdAt.localeCompare(b.createdAt))){for(const id of s.ids){const w=map.get(id);const r=s.records[id]||emptyRecord();rows.push([s.date,s.kind,w?.word||id,w?.pos||"",w?.level||"",r.meaning,r.familiarity?FAMILIARITY_TEXT[r.familiarity]:"미표시",RESULT_TEXT[r.en],RESULT_TEXT[r.ko],SENTENCE_TEXT[r.sentenceStatus],r.spoken?"말해 봄":"미측정",r.sentence,r.notes,RESULT_TEXT[r.retryEn||"unmeasured"],RESULT_TEXT[r.retryKo||"unmeasured"],nextAction(r,s),r.aiFeedback?.original||"",r.aiFeedback?.correctedSentence||"",r.aiFeedback?.explanation||""]);}}return "\ufeff"+rows.map(row=>row.map(x=>'"'+(/^[=+@\-]/.test(x)?"'":"")+x.replaceAll('"','""')+'"').join(',')).join('\r\n');}
+export function ensureCarryover(state:State,s:Session):State{const progress={...state.progress};for(const id of s.ids){const r=s.records[id];if(s.practiceMode==="repeat"?r&&hasMeasuredDifficulty(r):!r||!sessionRecordComplete(s,r)){const entryId=entryIdFor(s,id);const p=progress[entryId];progress[entryId]=storeSense(p,{...senseProgress(p,r?.meaning||p?.meaning||""),needsReview:true});}}return {...state,progress};}
+export function exportLog(state:State,words:Word[]):string{const map=new Map(words.map(w=>[w.id,w]));const rows=[["학습일","종류","단어","품사","수준","학습 뜻","처음 표시","영어→뜻","뜻→영어","문장 상태","말하기","내 문장","보완점","재시도 영어→뜻","재시도 뜻→영어","다음 할 일","AI 검토 원문","AI 교정 제안","AI 설명","회차 시작일","실제 학습일","마지막 연습일"]];for(const s of Object.values(state.sessions).sort((a,b)=>a.createdAt.localeCompare(b.createdAt))){for(const id of s.ids){const w=map.get(entryIdFor(s,id));const r=s.records[id]||emptyRecord();rows.push([r.lastPracticedOn||r.learnedOn||s.date,s.kind,w?.word||id,w?.pos||"",w?.personal?"개인 추가":w?.level||"",r.meaning,r.familiarity?FAMILIARITY_TEXT[r.familiarity]:"미표시",RESULT_TEXT[r.en],RESULT_TEXT[r.ko],SENTENCE_TEXT[r.sentenceStatus],r.spoken?"말해 봄":"미측정",r.sentence,r.notes,RESULT_TEXT[r.retryEn||"unmeasured"],RESULT_TEXT[r.retryKo||"unmeasured"],nextAction(r,s),r.aiFeedback?.original||"",r.aiFeedback?.correctedSentence||"",r.aiFeedback?.explanation||"",s.date,r.learnedOn||"기존 기록·미확인",r.lastPracticedOn||"기존 기록·미확인"]);}}return "\ufeff"+rows.map(row=>row.map(x=>'"'+(/^[=+@\-]/.test(x)?"'":"")+x.replaceAll('"','""')+'"').join(',')).join('\r\n');}
 
 export function exportTutor(state:State,words:Word[]):string {
  const latest=Object.values(state.sessions).sort((a,b)=>b.createdAt.localeCompare(a.createdAt))[0];
@@ -180,7 +239,7 @@ export function exportTutor(state:State,words:Word[]):string {
 
 공식 목록 파일: 사이트의 /sources/learning-data.json (아래 해당 단어 정보와 별도로 함께 제공할 수 있습니다.)
 마지막 회차의 단어 정보:
-${JSON.stringify(words.filter(w=>latest?.ids.includes(w.id)),null,2)}
+${JSON.stringify(words.filter(w=>latest?.ids.some(id=>entryIdFor(latest,id)===w.id)),null,2)}
 
 마지막 학습 기록:
 ${exportLog(snapshot,words)}`;

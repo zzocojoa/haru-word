@@ -80,3 +80,12 @@ test('daily quota rejects concurrent-style extra reservations, resets by day, an
  assert.equal(reserve('quota','2026-09-21',500000),undefined);assert.equal(reserve('quota','2026-09-22',500000).request_count,1);assert.equal(reserve('different','2026-09-21',500000).request_count,1);
  assert.equal(reserve('different','2026-09-21',500000),undefined);
 });
+test('sense targets resolve the owned entry and send the recorded sense to the provider',async()=>{
+ const target='target_'+crypto.randomUUID();const r={...record,entryId:word.id,meaning:'목적지에 도착하다'};
+ const s={...session,kind:'monthly',period:'2026-09',ids:[target],records:{[target]:r}};
+ assert.equal(saveSchema.safeParse({revision:0,progress:{},sessions:{[sid]:s}}).success,true);
+ assert.equal(saveSchema.safeParse({revision:0,progress:{},sessions:{[sid]:{...s,records:{[target]:record}}}}).success,false);
+ insertSession(s);sqlite.exec('DELETE FROM ai_daily_usage');let sent;
+ globalThis.fetch=async(url,init)=>{sent=JSON.parse(JSON.parse(init.body).contents[0].parts[0].text);return success()};
+ assert.equal((await route.POST(req({...body,entryId:target}))).status,200);assert.equal(sent.word,'arrive');assert.equal(sent.meaning,r.meaning);
+});

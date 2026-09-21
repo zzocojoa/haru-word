@@ -13,7 +13,7 @@ export function FamiliarityCard({word,check,busy,onReveal,onConfirm}:Props){
  useEffect(()=>{heading.current?.focus()},[word.id,revealed]);
  return <div className="familiarity-card">
   <ol className="familiarity-steps" aria-label="친숙도 확인 순서"><li aria-current={!pending?'step':undefined}>1 먼저 떠올리기</li><li aria-current={pending?'step':undefined}>2 뜻 비교·확정</li></ol>
-  <div className="word-stage"><h3 ref={heading} tabIndex={-1} lang="en">{word.word}</h3><span className="muted">{POS[word.pos]} · {word.level}</span></div>
+  <div className="word-stage"><h3 ref={heading} tabIndex={-1} lang="en">{word.word}</h3><span className="muted">{POS[word.pos]} · {word.personal?'개인 추가':word.level}</span></div>
   {!pending?<>
    <p className="muted">이 품사에서 어떤 뜻인가요? 아직 뜻은 숨겨 두었어요.</p>
    <label htmlFor="familiarity-answer">내가 떠올린 뜻 <span>선택 · 머릿속으로 떠올려도 좋아요</span></label>
