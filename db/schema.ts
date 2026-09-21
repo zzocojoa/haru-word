@@ -18,3 +18,11 @@ export const studySessions = sqliteTable("study_sessions", {
   sessionId: text("session_id").notNull(),
   document: text("document").notNull(),
 }, table => [primaryKey({ columns: [table.userId, table.sessionId] })]);
+
+// Durable quota survives Worker restarts and simultaneous requests.
+export const aiDailyUsage = sqliteTable("ai_daily_usage", {
+  userId: text("user_id").notNull(),
+  day: text("day").notNull(),
+  requestCount: integer("request_count").notNull(),
+  lastRequestAt: integer("last_request_at").notNull(),
+}, table => [primaryKey({ columns: [table.userId, table.day] })]);

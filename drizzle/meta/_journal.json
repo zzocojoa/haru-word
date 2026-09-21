@@ -8,6 +8,13 @@
       "when": 1789962200195,
       "tag": "0000_worthless_doctor_faustus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1789973702164,
+      "tag": "0001_ai_daily_usage",
+      "breakpoints": true
     }
   ]
 }

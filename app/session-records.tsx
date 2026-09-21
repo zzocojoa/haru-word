@@ -1,3 +1,4 @@
+import { FeedbackDetail } from "./sentence-feedback";
 import { FAMILIARITY_TEXT, POS, RESULT_TEXT, SENTENCE_TEXT, nextAction, type Session, type Word } from '@/lib/learning';
 
 /** The same full record is shown after a pause and after completing a session. */
@@ -14,6 +15,7 @@ export function SessionRecords({session:s,words}:{session:Session;words:Word[]})
     <div><dt>말하기</dt><dd>{r.spoken?"소리 내어 말해 봄":"미측정"}</dd></div><div><dt>보완점</dt><dd>{r.notes||'기록 없음'}</dd></div>
     <div><dt>다음 할 일</dt><dd>{nextAction(r,s)}</dd></div>
    </dl>
+   {r.aiFeedback&&<details className="notes-details"><summary>저장한 AI 교정 의견</summary><FeedbackDetail feedback={r.aiFeedback}/></details>}
   </article>;
  })}</div>;
 }
