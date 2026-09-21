@@ -1,0 +1,21 @@
+{
+  "source": "American_Oxford_3000_by_CEFR_level.pdf",
+  "sha256": "f145488be88ef0b43d12b2030c5d19eeb0e4018670a4d96fed60eb99bfb298b2",
+  "pages": 13,
+  "sourceRows": 3308,
+  "uniqueHeadwords": 3000,
+  "learningEntries": 3809,
+  "rowsByLevel": {
+    "A1": 900,
+    "A2": 869,
+    "B1": 809,
+    "B2": 730
+  },
+  "entriesByLevel": {
+    "A1": 1077,
+    "A2": 990,
+    "B1": 903,
+    "B2": 839
+  },
+  "uniqueEntryIds": 3809
+}

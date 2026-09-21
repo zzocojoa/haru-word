@@ -1,0 +1,51 @@
+"""Build redistributable learning data and attribution from the exact shipped content."""
+import json,shutil
+from pathlib import Path
+root=Path('public/sources');root.mkdir(parents=True,exist_ok=True)
+words=json.loads(Path('data/words.json').read_text('utf-8'))
+content=json.loads(Path('data/content.json').read_text('utf-8'))
+records=[{**w,**content[w['id']]} for w in words]
+(root/'learning-data.json').write_text(json.dumps({'glossLicense':'CC BY-SA 4.0','exampleLicenses':{'Tatoeba 참고 예문':'CC BY 2.0','학습용 작성 예문':'CC BY-SA 4.0'},'records':records},ensure_ascii=False),encoding='utf-8')
+shutil.copyfile('data/source-audit.json',root/'source-audit.json')
+credits='''하루단어 데이터 출처 및 변경 내역 · 2026-09-21
+
+1. 공식 단어·품사·CEFR 수준
+사용자가 제공한 American Oxford 3000 by CEFR level, Oxford University Press.
+원문 13쪽, 표제어 3,000개, 원문 행 3,308개, 품사·수준별 학습 항목 3,809개.
+원문 PDF의 저작권은 Oxford University Press에 있습니다.
+이 사이트는 사용자의 비공개 학습 도구이며 Oxford의 공식 제품이 아닙니다.
+원문 PDF: /sources/oxford-source.pdf
+추출 감사 자료: /sources/source-audit.json
+
+2. 한국어 뜻
+LexiSnap Open English-Korean Dictionary, jhseo1211 및 기여자.
+https://github.com/jhseo1211/open-english-korean-dict
+CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+한국어 뜻만 기초 자료로 사용했습니다. 사전의 CEFR·빈도·발음 기호는 사용하지 않습니다.
+품사·뜻이 어긋난 항목은 수정하고, 직접 작성한 학습 뜻을 추가했습니다.
+변경된 한국어 풀이와 직접 작성한 예문은 CC BY-SA 4.0으로 제공합니다.
+이는 Oxford 원문의 별도 권리를 변경하지 않습니다.
+기초 사전의 전체 기여·라이선스: /sources/dictionary-credits.md
+학습 데이터와 문장별 기여 정보: /sources/learning-data.json
+
+3. 참고 예문
+Tatoeba 프로젝트와 문장별 기여자. ManyThings.org Korean–English sentence pairs
+https://www.manythings.org/anki/ (자료 날짜: 2026-02-13)
+https://tatoeba.org/
+CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
+영어·한국어 문장 및 문장별 저작자 정보를 그대로 제공하며 문장 일부를 표현으로 발췌했습니다.
+학습 카드에 원문 문장 ID와 영어·한국어 기여자 정보를 표시합니다.
+학습용 작성 예문은 새로 작성한 문장으로 Oxford 사전 또는 Tatoeba 문장이 아닙니다.
+모든 내용이 전문가의 검수를 받은 것은 아닙니다. 연결된 사전으로 용례를 확인하고 나만의 뜻을 기록할 수 있습니다.
+
+4. 발음
+브라우저 SpeechSynthesis의 en-US 음성과 Oxford American English 사전 링크를 제공합니다.
+기기에 따라 음성 제공 여부·품질이 다릅니다.
+
+5. 학습 결과
+회상·문장 평가는 학습자의 자기 평가이며 자동 문법 판정이나 정식 CEFR 시험이 아닙니다.
+별도 AI API를 호출하지 않습니다.
+'''
+(root/'content-attribution.txt').write_text(credits,encoding='utf-8')
+shutil.copyfile('work/dictionary-credits.md',root/'dictionary-credits.md')
+print(json.dumps({'entries':len(records),'sourceFiles':len(list(root.iterdir()))}))

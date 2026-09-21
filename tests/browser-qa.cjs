@@ -1,0 +1,32 @@
+const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+(async()=>{
+ const browser=await chromium.launch({headless:true});const errors=[];const account='qa_'+Date.now();
+ try{
+  const context=await browser.newContext({viewport:{width:1366,height:900},extraHTTPHeaders:{'oai-authenticated-user-id':account,'oai-authenticated-user-email':account+'@example.test'}});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:8787/');await page.getByText('서버에 저장됨',{exact:true}).waitFor();
+  const initial=await (await context.request.get('http://127.0.0.1:8787/api/state')).json();assert.equal(Object.keys(initial.state.progress).length,0);
+  await page.getByRole('button',{name:'오늘의 학습 시작',exact:true}).click();await page.getByRole('heading',{name:'단어 익히기',exact:true}).waitFor();
+  for(let i=0;i<3;i++){await page.getByRole('button',{name:'뜻을 확인했어요'}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}
+  await page.getByRole('heading',{name:'영어 → 뜻',exact:true}).waitFor();assert.equal(await page.locator('.answer-box').count(),0);
+  for(let i=0;i<3;i++){await page.getByLabel('한국어 뜻 입력').fill(['도착하다','바쁜','아침 식사'][i]);await page.getByRole('button',{name:'내 답 확인'}).click();await page.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}
+  await page.getByRole('heading',{name:'뜻 → 영어',exact:true}).waitFor();let visible=await page.locator('[role=tabpanel]:not([hidden])').innerText();assert.ok(!visible.includes('arrive'),'English answer must be hidden during Korean cue');
+  await page.getByRole('button',{name:'생각이 안 나요'}).click();assert.ok(await page.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).isDisabled());await page.getByRole('button',{name:'도움이 필요했어요',exact:true}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();
+  for(const word of ['busy','breakfast']){await page.getByLabel('영어 단어 입력').fill(word);await page.getByRole('button',{name:'내 답 확인'}).click();await page.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}
+  await page.getByRole('heading',{name:'내 문장 만들기',exact:true}).waitFor();assert.ok(await page.getByRole('button',{name:'문장을 완성했어요'}).isDisabled());
+  for(const sentence of ['I arrive home at seven.','I am busy today.','I eat breakfast at home.']){await page.getByLabel('내 영어 문장',{exact:true}).fill(sentence);await page.getByRole('button',{name:'문장을 완성했어요'}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}
+  await page.getByRole('heading',{name:'다시 떠올리기',exact:true}).waitFor();await page.getByLabel('영어 단어 입력').fill('arrive');await page.getByRole('button',{name:'내 답 확인'}).click();await page.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();await page.getByRole('heading',{name:'오늘의 기록을 남겼어요.',exact:true}).waitFor();
+  await page.reload();await page.getByText('서버에 저장됨',{exact:true}).waitFor();const after=await (await context.request.get('http://127.0.0.1:8787/api/state')).json();assert.equal(Object.keys(after.state.progress).length,3);assert.equal(Object.values(after.state.sessions).filter(s=>s.finished).length,1);
+  await page.getByRole('tab',{name:'주간·월말 점검'}).click();assert.equal(await page.getByRole('button',{name:'전체 점검 시작'}).count(),2);
+  await page.getByRole('tab',{name:'전체 단어장'}).click();await page.getByLabel('단어 또는 한국어 뜻 검색').fill('book');assert.ok(await page.getByRole('button',{name:/^book/}).count()>=2);
+  await page.setViewportSize({width:390,height:844});await page.getByRole('tab',{name:'오늘의 학습'}).click();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:'work/qa-mobile.png',fullPage:true});
+  // API isolation, revision conflicts, validation, and cross-origin rejection.
+  const unauthorized=await browser.newContext();assert.equal((await unauthorized.request.get('http://127.0.0.1:8787/api/state')).status(),401);await unauthorized.close();
+  const other=await browser.newContext({extraHTTPHeaders:{'oai-authenticated-user-id':account+'_other','oai-authenticated-user-email':'other@example.test'}});const otherState=await (await other.request.get('http://127.0.0.1:8787/api/state')).json();assert.equal(Object.keys(otherState.state.progress).length,0);await other.close();
+  assert.equal((await context.request.put('http://127.0.0.1:8787/api/state',{data:{revision:0,progress:{},sessions:{}}})).status(),409);
+  assert.equal((await context.request.put('http://127.0.0.1:8787/api/state',{data:{revision:after.revision,progress:{bad:{}},sessions:{}}})).status(),400);
+  assert.equal((await context.request.put('http://127.0.0.1:8787/api/state',{headers:{Origin:'https://different.example'},data:{revision:after.revision,progress:{},sessions:{}}})).status(),403);
+  assert.deepEqual(errors,[]);const report={passed:true,checks:['daily study','answers hidden','hints cannot pass independently','sentence required','delayed retry','server reload','weekly and monthly targets','all-word search','mobile overflow','anonymous rejection','account isolation','optimistic conflict','input validation','origin rejection'],browserErrors:errors};fs.writeFileSync('work/browser-qa.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+ }finally{await browser.close()}
+})().catch(e=>{console.error(e);process.exit(1)});

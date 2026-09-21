@@ -1,0 +1,20 @@
+import { z } from "zod";
+import rawWords from "@/data/words.json";
+const ids=new Set(rawWords.map(w=>w.id));
+const entryId=z.string().refine(id=>ids.has(id)||/^personal_[a-zA-Z0-9-]{36}$/.test(id),"알 수 없는 단어입니다.");
+const level=z.enum(["A1","A2","B1","B2"]);
+const result=z.enum(["independent","help","unmeasured"]);
+const familiarity=z.enum(["known","uncertain","new"]);
+const date=z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+const text=z.string().max(2000);
+const personal=z.object({id:entryId,word:z.string().trim().min(1).max(80),headword:z.string().max(100),pos:z.string().max(30),level,page:z.literal(0),personal:z.literal(true)}).strict();
+export const progressSchema=z.object({familiarity:familiarity.optional(),meaning:text.optional(),expression:text.optional(),example:text.optional(),translation:text.optional(),en:result.optional(),ko:result.optional(),sentenceStatus:z.enum(["written","improve","unmeasured"]).optional(),sentence:text.optional(),notes:text.optional(),studyDates:z.array(date).max(20000).optional(),lastStudied:date.optional(),needsReview:z.boolean().optional(),personal:personal.optional()}).strict();
+const assessment=z.object({ids:z.array(entryId).max(20),index:z.number().int().min(0).max(20),marks:z.record(entryId,familiarity),completed:z.boolean()}).strict();
+export const settingsSchema=z.object({level,dailyGoal:z.number().int().min(1).max(3),assessments:z.object({A1:assessment.optional(),A2:assessment.optional(),B1:assessment.optional(),B2:assessment.optional()}).strict(),activeSessionId:z.string().uuid().nullable()}).strict();
+const record=z.object({meaning:text,familiarity:familiarity.optional(),en:result,ko:result,sentenceStatus:z.enum(["written","improve","unmeasured"]),sentence:text,notes:text,enAnswer:text.optional(),koAnswer:text.optional(),hintEn:z.boolean().optional(),hintKo:z.boolean().optional(),retryEn:result.optional(),retryKo:result.optional(),draft:z.object({answer:text,hinted:z.boolean(),revealed:z.boolean(),stage:z.enum(["en","ko"]),retry:z.boolean()}).strict().optional()}).strict();
+export const sessionSchema=z.object({id:z.string().uuid(),kind:z.enum(["daily","weekly","monthly"]),date,period:z.string().regex(/^\d{4}-\d{2}(?:-\d{2})?$/),ids:z.array(entryId).max(5000),warmupIds:z.array(entryId).max(3),warmupResults:z.record(entryId,result).optional(),stage:z.enum(["warmup","learn","en","ko","sentence","done"]),index:z.number().int().min(0).max(5000),records:z.record(entryId,record),retry:z.array(z.object({id:entryId,direction:z.enum(["en","ko"])}).strict()).max(10000),retryMode:z.boolean(),elapsed:z.number().int().min(0).max(31536000),finished:z.boolean(),paused:z.boolean(),createdAt:z.string().datetime()}).strict().superRefine((s,ctx)=>{
+ if(new Set(s.ids).size!==s.ids.length)ctx.addIssue({code:"custom",message:"중복 학습 항목"});
+ const valid=new Set(s.ids);if(Object.keys(s.records).some(id=>!valid.has(id))||s.retry.some(x=>!valid.has(x.id)))ctx.addIssue({code:"custom",message:"목표 목록과 기록이 일치하지 않습니다."});
+ if(s.kind==="daily"&&s.ids.length>3)ctx.addIssue({code:"custom",message:"하루 목표는 최대 3개입니다."});
+});
+export const saveSchema=z.object({revision:z.number().int().min(0),settings:settingsSchema.optional(),progress:z.record(entryId,progressSchema).refine(v=>Object.keys(v).length<=100),sessions:z.record(z.string().uuid(),sessionSchema).refine(v=>Object.keys(v).length<=3)}).strict().superRefine((v,c)=>{for(const [key,s] of Object.entries(v.sessions))if(s.id!==key)c.addIssue({code:"custom",message:"회차 식별자 불일치"});for(const [key,p] of Object.entries(v.progress))if(p.personal&&p.personal.id!==key)c.addIssue({code:"custom",message:"개인 단어 식별자 불일치"});});
