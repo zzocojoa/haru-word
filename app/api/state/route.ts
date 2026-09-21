@@ -20,17 +20,18 @@ export async function GET(){
 }
 export async function PUT(request:Request){
  const user=await getChatGPTUser();if(!user)return json({error:"로그인이 필요합니다."},401);
- const origin=request.headers.get("origin");if(origin&&origin!==new URL(request.url).origin)return json({error:"요청 출처를 확인할 수 없습니다."},403);
+ const origin=request.headers.get("origin");if((origin&&origin!==new URL(request.url).origin)||request.headers.get('sec-fetch-site')==='cross-site')return json({error:"요청 출처를 확인할 수 없습니다."},403);
  if(!request.headers.get("content-type")?.startsWith("application/json"))return json({error:"JSON 요청만 지원합니다."},415);
  let body:unknown;
- try{const raw=await request.text();if(raw.length>1_800_000)return json({error:"기록이 너무 큽니다. 회차를 나눠 주세요."},413);body=JSON.parse(raw);}catch{return json({error:"요청 형식이 잘못되었습니다."},400);}
+ try{const raw=await request.text();if(new TextEncoder().encode(raw).byteLength>1_800_000)return json({error:"기록이 너무 큽니다. 회차를 나눠 주세요."},413);body=JSON.parse(raw);}catch{return json({error:"요청 형식이 잘못되었습니다."},400);}
  const parsed=saveSchema.safeParse(body);if(!parsed.success)return json({error:"저장할 기록의 형식을 확인해 주세요."},400);
  const data=parsed.data;
  try{
   const db=database(); const statements:D1PreparedStatement[]=[];
   // All mutations are conditional on the same revision; D1 batch is transactional.
   // Updating the revision LAST ensures either every delta applies or none do.
-  for(const [id,p] of Object.entries(data.progress))statements.push(db.prepare("INSERT INTO word_progress(user_id,entry_id,document) SELECT ?,?,? WHERE EXISTS(SELECT 1 FROM learner_states WHERE user_id=? AND revision=?) ON CONFLICT(user_id,entry_id) DO UPDATE SET document=excluded.document").bind(user.userId,id,JSON.stringify(p),user.userId,data.revision));
+  // One bounded JSON parameter keeps a full monthly carryover within D1 query limits.
+  if(Object.keys(data.progress).length)statements.push(db.prepare("INSERT INTO word_progress(user_id,entry_id,document) SELECT ?,entry.key,entry.value FROM json_each(?) AS entry WHERE EXISTS(SELECT 1 FROM learner_states WHERE user_id=? AND revision=?) ON CONFLICT(user_id,entry_id) DO UPDATE SET document=excluded.document").bind(user.userId,JSON.stringify(data.progress),user.userId,data.revision));
   for(const [id,s] of Object.entries(data.sessions))statements.push(db.prepare("INSERT INTO study_sessions(user_id,session_id,document) SELECT ?,?,? WHERE EXISTS(SELECT 1 FROM learner_states WHERE user_id=? AND revision=?) ON CONFLICT(user_id,session_id) DO UPDATE SET document=excluded.document").bind(user.userId,id,JSON.stringify(s),user.userId,data.revision));
   statements.push(data.settings?db.prepare("UPDATE learner_states SET revision=revision+1,settings=?,updated_at=? WHERE user_id=? AND revision=?").bind(JSON.stringify(data.settings),new Date().toISOString(),user.userId,data.revision):db.prepare("UPDATE learner_states SET revision=revision+1,updated_at=? WHERE user_id=? AND revision=?").bind(new Date().toISOString(),user.userId,data.revision));
   const results=await db.batch(statements); if(results[results.length-1].meta.changes!==1)return json({error:"다른 기기에서 기록이 바뀌었습니다. 현재 입력을 백업한 뒤 최신 기록을 불러와 주세요.",conflict:true},409);
