@@ -4,6 +4,19 @@ import {readFileSync} from 'node:fs';
 const words=JSON.parse(readFileSync('data/words.json','utf8'));
 const data=JSON.parse(readFileSync('data/content.json','utf8'));
 const find=(word,pos)=>data[words.find(w=>w.word===word&&w.pos===pos).id];
+test('all 3809 shipped entries have complete content and matching published records',()=>{
+ const published=JSON.parse(readFileSync('public/sources/learning-data.json','utf8')).records;
+ assert.equal(words.length,3809);assert.equal(new Set(words.map(w=>w.headword)).size,3000);
+ assert.equal(Object.keys(data).length,words.length);assert.equal(published.length,words.length);
+ const map=new Map(published.map(w=>[w.id,w]));
+ for(const w of words){for(const field of ['meaning','expression','example','translation','source'])assert.ok(data[w.id][field]?.trim(),w.id+': '+field);assert.deepEqual(map.get(w.id),{...w,...data[w.id]});}
+});
+test('higher-level expressions include the missing objects and complete useful phrases',()=>{
+ assert.equal(find('borrow','v.').expression,'borrow books from the library');
+ assert.equal(find('avoid','v.').expression,'avoid drinks with sugar');
+ assert.equal(find('concentrate','v.').expression,'concentrate on your work');
+ assert.equal(find('concerned','adj.').expression,'concerned about his health');
+});
 test('train and work have complete expressions rather than clipped word windows',()=>{
  assert.equal(find('train','n.').expression,'miss the train');assert.equal(find('work','n.').expression,'a lot of work');
 });
