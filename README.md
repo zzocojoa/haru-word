@@ -128,3 +128,9 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+
+## JSON 백업 복원
+
+학습 기록의 ‘백업 가져오기’에서 기존 전체 백업과 이전 ‘현재 입력 백업’ JSON을 복원합니다. 형식과 참조를 확인한 뒤 현재·백업 기록의 차이를 보여 주며, 현재 기록 다운로드와 명시적 교체 확인을 거칩니다. 백업 시점의 설정·기록으로 전체 교체하므로 자동 병합은 하지 않습니다.
+
+복원은 최대 8 MB, 단어 기록 5,000개, 회차 10,000개입니다. 한 기록이 서버 문자열 한도를 넘으면 일부를 버리지 않고 거절합니다. 진행 중 작성하던 답은 ‘오늘 종료 · 저장’ 후 홈으로 돌아와 보관합니다. 다른 기기에서 수정했거나 응답이 끊기면 서버 기록을 다시 확인해야 합니다.

@@ -404,3 +404,22 @@ footer { color: var(--notebook-caption); padding-block: 25px; align-items: cente
 /* Secondary guidance remains legible at WCAG AA contrast. */
 .empty-state p, .skip, .familiarity-card > label span,
 .familiarity-steps, .familiarity-comparison .precheck-mark { color: var(--notebook-caption); }
+
+/* Backup review uses the same notebook sheet with an explicit replacement step. */
+.backup-dialog { max-width: 620px; }
+.backup-dialog .small-note, .backup-file-info p, .backup-impact p, .backup-ack { font-size: .875rem; line-height: 1.65; }
+.backup-file input { width: 100%; padding: 12px; font-size: .875rem; }
+.backup-file-info { border-bottom: 1px solid #dde5f0; padding-bottom: 12px; overflow-wrap: anywhere; }
+.backup-file-info p { color: var(--notebook-caption); margin-top: 4px; }
+.backup-comparison { width: 100%; border-collapse: collapse; font-size: .875rem; }
+.backup-comparison caption { text-align: left; font-weight: 700; padding-bottom: 10px; }
+.backup-comparison th, .backup-comparison td { padding: 9px 8px; border-bottom: 1px solid #dde5f0; text-align: right; }
+.backup-comparison th:first-child { text-align: left; }
+.backup-comparison th { font-weight: 600; }
+.backup-comparison td:last-child { color: #1847b8; font-weight: 700; }
+.backup-impact { background: #fff6e7; border: 1px solid #e6c99b; border-radius: 12px; padding: 14px; color: #6b421b; }
+.backup-impact b { display: block; font-size: .875rem; line-height: 1.65; margin-top: 8px; }
+.backup-ack { display: flex; align-items: flex-start; gap: 10px; }
+.backup-ack [data-slot=checkbox] { flex: 0 0 auto; margin-top: 3px; }
+.backup-error { color: #a82332; font-size: .875rem; line-height: 1.65; overflow-wrap: anywhere; }
+.backup-confirm { max-height: 90dvh; overflow-y: auto; }
