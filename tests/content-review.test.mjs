@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {resolveCardContent} from '../lib/content.ts';
 const words=JSON.parse(readFileSync('data/words.json','utf8'));
 const data=JSON.parse(readFileSync('data/content.json','utf8'));
 const find=(word,pos)=>data[words.find(w=>w.word===word&&w.pos===pos).id];
@@ -34,6 +36,39 @@ test('all reviewed corrections are published and retained by the content build',
 });
 test('A1 ending candidates left after review are valid particles, letters or a complete party size',()=>{
  const ending=/\b(?:a|an|the|of|to|for|with|in|on|at|by|from|my|your|his|her|their|our|two)$/i;
- const valid=new Set(['B comes after A','come in','turn on','a table for two','introduce him to her','you two']);
+ const valid=new Set(['B comes after A','come in','turn on','a table for two','introduce him to her','you two','for me','help us','see him']);
  for(const w of words.filter(w=>w.level==='A1'))if(ending.test(data[w.id].expression))assert.ok(valid.has(data[w.id].expression),w.word+': '+data[w.id].expression);
+});
+
+test('A1 review ledger covers each A1 entry once and hashes the exact shipped revision',()=>{
+ const ledger=JSON.parse(readFileSync('data/a1-content-review.json','utf8'));
+ const entries=ledger.batches.flatMap(b=>b.entries);const a1=words.filter(w=>w.level==='A1');
+ assert.equal(entries.length,1077);assert.equal(new Set(entries.map(e=>e.id)).size,1077);
+ assert.deepEqual(new Set(entries.map(e=>e.id)),new Set(a1.map(w=>w.id)));
+ const fields=['meaning','expression','example','translation','source','attribution','url'];
+ for(const entry of entries){
+  const hash=createHash('sha256').update(JSON.stringify(fields.map(k=>data[entry.id][k]??null))).digest('hex');
+  assert.equal(entry.afterHash,hash,'reviewed content changed without updating evidence: '+entry.id);
+  assert.match(entry.beforeHash,/^[a-f0-9]{64}$/);
+  if(entry.status==='corrected'){assert.ok(entry.reason);assert.notEqual(entry.beforeHash,entry.afterHash);}
+  else{assert.equal(entry.status,'kept');assert.equal(entry.beforeHash,entry.afterHash);}
+ }
+});
+
+test('A1 noun, pronoun and single-sense corrections retain their reviewed examples',()=>{
+ const checks=[['favorite','n.','my favorite'],['some','pron.','Please have some.'],['when','pron.','Since when'],['lesson','n.','English lesson'],['line','n.','straight line'],['play','v.','play in the park'],['word','n.','three new words']];
+ for(const [word,pos,part]of checks){const c=find(word,pos);assert.ok(c.example.includes(part),word);assert.equal(c.source,'학습용 작성 예문');assert.equal(c.attribution,undefined);assert.equal(c.url,undefined);}
+ assert.equal(find('yes','exclam.').meaning,'네; 그렇습니다');
+ assert.equal(find('cook','v.').meaning,'요리하다');assert.equal(find('short','adj.').meaning,'키가 작은');
+});
+
+test('catalog corrections never combine a saved older meaning with another sense examples',()=>{
+ const base=find('bar','n.');assert.equal(base.meaning,'술집');
+ assert.deepEqual(resolveCardContent(base),base);
+ const old=resolveCardContent(base,{meaning:'막대·덩어리',en:'independent'});
+ assert.equal(old.meaning,'막대·덩어리');for(const key of ['expression','example','translation'])assert.equal(old[key],'');
+ assert.match(old.source,/사전에서 확인/);assert.equal(old.attribution,undefined);assert.equal(old.url,undefined);
+ const custom={meaning:'막대·덩어리',example:'This is a gold bar.',translation:'이것은 금괴예요.',expression:'a gold bar'};
+ const saved=resolveCardContent(base,custom);for(const key of Object.keys(custom))assert.equal(saved[key],custom[key]);
+ const same=resolveCardContent(base,{meaning:' 술집 ',notes:'내 메모'});assert.equal(same.example,base.example);
 });
