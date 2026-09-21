@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./study-design.css";
 
 export const metadata: Metadata = {
   title: "하루단어 · Oxford 3000",

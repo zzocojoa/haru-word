@@ -1,15 +1,28 @@
-# 하루단어
+# 하루단어 · OpenDesign
 
-OpenDesign frontend-design 지침 적용. 개인 영어 학습을 위한 차분한 학습 노트.
+성인 기초 영어 학습자를 위한 파란 잉크의 학습 노트. 목표는 매일 15분 학습을 쉽게 시작하고, 큰 단어와 짧은 한국어 설명에 집중하는 것입니다. 기존 cobalt 브랜드와 로고를 유지합니다. 장식용 이미지는 넣지 않습니다.
 
 ## Color
-White study surface, cool gray workspace, cobalt #2458d3 actions, deep blue #153c88 routine panel. Amber reserved for attention and pending review.
+
+- 작업 배경 `#f2f5f9`, 학습 종이 `#ffffff`, 글자 `#182b45`.
+- 주 행동은 cobalt `#2458d3`, 보조 설명은 `#5e7088`, 구분선은 `#dce3ed`.
+- 루틴 안내는 navy `#172e52`. 주의·미완료는 amber, 확인한 독립 성공만 green.
+- 색만으로 상태를 전달하지 않고 항상 결과 문구를 표시합니다.
 
 ## Typography
-DM Sans for English vocabulary; Noto Sans KR for Korean UI. 16px body, 14px regular labels, 12px secondary metadata. Oversized central English word is the signature.
+
+DM Sans의 큰 영어 단어와 Noto Sans KR의 짧은 한국어 안내를 함께 사용합니다. 페이지 제목 29~36px, 학습 단어 44~76px, 본문 14~16px, 입력 16px 이상. 보조 정보는 11~13px이며 대비를 확보합니다. 사전에서 온 긴 단어와 문장은 줄바꿈합니다.
 
 ## Layout
-Desktop two-column study desk, centered 1220px maximum. Primary study card always above the fold. Mobile single-column with compact view navigation.
+
+- 데스크톱: 1220px 안의 학습 노트와 15분 루틴. 상단 메뉴는 하나의 명확한 선택 막대입니다.
+- 모바일 600px 이하: 안전 영역을 포함한 하단 4개 메뉴. 시작·이어서·다시 학습 버튼은 단어 목록보다 먼저 보입니다. 페이지 끝의 여백으로 메뉴가 마지막 내용을 가리지 않습니다.
+- 학습 중에는 모바일 소개 영역을 시각적으로 줄여 현재 단계와 단어가 먼저 보입니다. 기능을 숨기거나 시험 답을 공개하지 않습니다.
+- 단어장: 모바일에서도 뜻을 보이는 항목별 배열. 기록: 모바일은 기존 SessionRecords 카드, 데스크톱은 비교 표. 동일한 서버 기록을 사용합니다.
+- 모바일 대화상자는 아래에서 열리고 화면의 92dvh 안에서 스크롤합니다. 기존 Radix의 초점 제어·ESC 닫기·오버레이를 유지합니다.
 
 ## Components
-Use bundled Radix/Shadcn primitives. Restrained 8px controls / 18px study surfaces. Clear focus rings, explicit save status, no invented progress. Korean task labels; no marketing blocks.
+
+`app/globals.css`는 기존 기능별 기본 스타일, `app/study-design.css`는 이 디자인의 토큰·우선순위·반응형 조합을 담당합니다. Radix/Shadcn 기본 컴포넌트는 수정하지 않습니다. 새 외부 라이브러리나 저장 필드는 없습니다.
+
+버튼 44~52px, 카드 모서리 12~14px, 본문 여백 20~36px. 키보드 초점은 파란 외곽선, 선택 상태는 색과 면으로 표현합니다. 저장 실패·비활성·불러오기·빈 목록 상태를 포함합니다. 로딩 중 가짜 학습 성적을 보여 주지 않습니다. 동작 줄이기 설정에서는 화면 전환 애니메이션을 끕니다.
