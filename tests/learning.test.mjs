@@ -6,6 +6,18 @@ const words=JSON.parse(readFileSync(new URL('../data/words.json',import.meta.url
 const find=(word,pos='n.')=>words.find(w=>w.word===word&&w.pos===pos);
 const content=()=>({meaning:'오늘의 뜻',expression:'',example:'',translation:'',source:'test'});
 const fresh=()=>structuredClone(EMPTY);
+
+test('daily goals 1 through 10 allocate the selected count and preserve an existing session',()=>{
+ const date='2026-09-21';const carry=words.find(w=>w.level==='A1');
+ for(let goal=1;goal<=10;goal++){
+  const s=fresh();s.settings.dailyGoal=goal;s.progress[carry.id]={needsReview:true,familiarity:'known'};
+  const selected=pickDaily(words,s,date);assert.equal(selected.length,goal);assert.equal(selected[0],carry.id);
+  const session=newSession(s,words,content,'daily',date);assert.equal(session.ids.length,goal);assert.equal(Object.keys(session.records).length,goal);
+  s.sessions[session.id]=session;const original=structuredClone(session);s.settings.dailyGoal=goal===10?1:10;
+  assert.deepEqual(s.sessions[session.id],original);
+  assert.equal(newSession(s,words,content,'daily','2026-09-22').ids.length,s.settings.dailyGoal);
+ }
+});
 test('all 3000 PDF headwords and every part of speech are retained',()=>{const report=JSON.parse(readFileSync(new URL('../data/source-audit.json',import.meta.url)));assert.equal(new Set(words.map(w=>w.headword)).size,3000);assert.equal(words.length,3809);assert.equal(new Set(words.map(w=>w.id)).size,words.length);assert.equal(report.sourceRows,3308);assert.ok(find('wish','v.'));assert.ok(find('wish','n.'));assert.equal(find('exit','v.').level,'B2');});
 test('assessment spans the selected level and contains 20 distinct headwords',()=>{for(const l of ['A1','A2','B1','B2']){const ids=assessmentSample(words,l);assert.equal(ids.length,20);assert.equal(new Set(ids).size,20);assert.ok(ids.every(id=>words.find(w=>w.id===id).level===l));}});
 test('daily priority is carryover, uncertain, unfamiliar and excludes known',()=>{const s=fresh();const a=find('abandon','v.'),b=find('apple'),c=find('cat'),d=find('arrive','v.');s.progress[a.id]={needsReview:true};s.progress[b.id]={familiarity:'uncertain'};s.progress[c.id]={familiarity:'new'};s.progress[d.id]={familiarity:'known'};assert.deepEqual(pickDaily(words,s,'2026-09-21'),[a.id,b.id,c.id]);s.settings.dailyGoal=1;assert.deepEqual(pickDaily(words,s,'2026-09-21'),[a.id]);});

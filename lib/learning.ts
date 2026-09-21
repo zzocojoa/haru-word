@@ -1,5 +1,6 @@
 import type { SentenceFeedback } from './sentence-feedback';
 export const LEVELS = ["A1", "A2", "B1", "B2"] as const;
+export const MAX_DAILY_GOAL = 10;
 export type Level = typeof LEVELS[number];
 export type Familiarity = "known" | "uncertain" | "new";
 export type FamiliarityCheck = {initial:Familiarity;answer:string;meaning:string;final?:Familiarity};
@@ -142,7 +143,7 @@ export function newSession(state:State,words:Word[],content:(id:string)=>Content
  (kind==="daily"?pickDaily(words,state,date):practiceIds(state,practiceMode||"known")).flatMap(entryId=>{
   const p=state.progress[entryId];const choices=kind==="practice"?allSenses(p).filter(x=>practiceMode==="ko"?x.ko==="help":practiceMode==="sentence"?x.sentenceStatus==="improve":true):[];
   return (choices.length?choices.map(x=>x.meaning||content(entryId).meaning):[dailyMeaning(p,content(entryId).meaning)]).map(meaning=>({entryId,meaning,familiarity:p?.familiarity}));
- }).slice(0,kind==="practice"?20:3);
+ }).slice(0,kind==="practice"?20:state.settings.dailyGoal);
  if(!targets.length)return null;
  const {ids,records}=targetRecords(targets.map(t=>({...t,meaning:t.meaning||content(t.entryId).meaning})));
  const warmupIds=kind==="daily"?Object.entries(state.progress).filter(([,p])=>p.lastStudied).sort((a,b)=>Number(hasReviewWork(b[1]))-Number(hasReviewWork(a[1]))||(b[1].lastStudied||"").localeCompare(a[1].lastStudied||"")).slice(0,3).map(([id])=>id):[];
