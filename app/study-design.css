@@ -7,7 +7,7 @@
   --muted-foreground: #5e6d82;
   --notebook-ink: #172e52;
   --notebook-soft: #edf3ff;
-  --notebook-caption: #5e7088;
+  --notebook-caption: #53657d;
   --notebook-radius: 14px;
   --notebook-shadow: 0 3px 0 #e7ecf3, 0 12px 32px #1c335706;
 }
@@ -161,7 +161,7 @@ input::placeholder, textarea::placeholder { color: #69798e; }
 .record-card dd { color: #2d4364; }
 .record-card dd[data-result=independent] { color: #176248; font-weight: 600; }
 .record-card dd[data-result=help] { color: #895712; font-weight: 600; }
-.record-card dd[data-result=unmeasured] { color: #61718a; }
+.record-card dd[data-result=unmeasured] { color: var(--notebook-caption); }
 
 /* The library and journal use compact rows on a desk, readable entries on a phone. */
 .wide-panel { padding: 30px 32px; }
@@ -271,7 +271,7 @@ footer { color: var(--notebook-caption); padding-block: 25px; align-items: cente
   .daily-label { display: none; }
   .main-tabs { gap: 20px; }
   .main-nav[data-slot] { position: fixed; z-index: 40; inset: auto 0 0; width: 100%; height: auto; padding: 7px 10px calc(7px + env(safe-area-inset-bottom, 0px)); gap: 4px; border-radius: 0; border-top: 1px solid #dbe3ee; background: #fff; box-shadow: 0 -4px 18px #172e5208; }
-  .main-nav [data-slot=tabs-trigger] { flex: 1; min-width: 0; min-height: 55px; padding: 7px 2px; gap: 4px; flex-direction: column; font-size: 11px; line-height: 1.4; border-radius: 9px; color: #61718a; }
+  .main-nav [data-slot=tabs-trigger] { flex: 1; min-width: 0; min-height: 55px; padding: 7px 2px; gap: 4px; flex-direction: column; font-size: 11px; line-height: 1.4; border-radius: 9px; color: var(--notebook-caption); }
   .main-nav [data-slot=tabs-trigger][data-state=active] { background: #edf3ff; color: #214fac; box-shadow: none; }
   .main-nav [data-slot=tabs-trigger] svg { width: 21px; height: 21px; }
   .nav-label-wide { display: none; }
@@ -400,3 +400,7 @@ footer { color: var(--notebook-caption); padding-block: 25px; align-items: cente
 @media (prefers-reduced-motion: reduce) {
   [data-slot=dialog-content][data-state] { animation: none; }
 }
+
+/* Secondary guidance remains legible at WCAG AA contrast. */
+.empty-state p, .skip, .familiarity-card > label span,
+.familiarity-steps, .familiarity-comparison .precheck-mark { color: var(--notebook-caption); }
