@@ -7,7 +7,7 @@ export type Result = "independent" | "help" | "unmeasured";
 export type SentenceResult = "written" | "improve" | "unmeasured";
 export type Stage = "warmup" | "learn" | "en" | "ko" | "sentence" | "checkpoint" | "done";
 export type Kind = "daily" | "weekly" | "monthly" | "practice";
-export type PracticeMode = "known" | "ko" | "sentence";
+export type PracticeMode = "known" | "ko" | "sentence" | "repeat";
 export type Word = {id:string;word:string;headword:string;pos:string;level:Level;page:number;personal?:boolean};
 export type Content = {meaning:string;ipa?:string;expression:string;example:string;translation:string;source:string;attribution?:string;url?:string};
 export type Progress = {
@@ -92,7 +92,7 @@ export function reviewIds(state:State,kind:"weekly"|"monthly",period:string):str
  return [...ids].sort((a,b)=>hash(period+a)-hash(period+b));
 }
 function hash(v:string):number{let h=0;for(const c of v)h=(h*31+c.charCodeAt(0))>>>0;return h;}
-export function practiceIds(state:State,mode:PracticeMode):string[]{return Object.entries(state.progress).filter(([,p])=>mode==="known"?p.familiarity==="known":mode==="ko"?p.ko==="help":p.sentenceStatus==="improve").sort((a,b)=>(a[1].lastReviewed||"").localeCompare(b[1].lastReviewed||"")||hash(a[0])-hash(b[0])).slice(0,20).map(([id])=>id);}
+export function practiceIds(state:State,mode:PracticeMode):string[]{if(mode==="repeat")return [];return Object.entries(state.progress).filter(([,p])=>mode==="known"?p.familiarity==="known":mode==="ko"?p.ko==="help":p.sentenceStatus==="improve").sort((a,b)=>(a[1].lastReviewed||"").localeCompare(b[1].lastReviewed||"")||hash(a[0])-hash(b[0])).slice(0,20).map(([id])=>id);}
 export function newSession(state:State,words:Word[],content:(id:string)=>Content,kind:Kind,date=today(),period=periodKey(kind,date),practiceMode?:PracticeMode):Session|null{
  const ids=kind==="daily"?pickDaily(words,state,date):kind==="practice"?practiceIds(state,practiceMode||"known"):reviewIds(state,kind,period); if(!ids.length)return null;
  const warmupIds=kind==="daily"?Object.entries(state.progress).filter(([,p])=>p.lastStudied).sort((a,b)=>Number(!!b[1].needsReview)-Number(!!a[1].needsReview)||(b[1].lastStudied||"").localeCompare(a[1].lastStudied||"")).slice(0,3).map(([id])=>id):[];
@@ -100,6 +100,24 @@ export function newSession(state:State,words:Word[],content:(id:string)=>Content
  return {id:crypto.randomUUID(),kind,date,period,ids,wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===id)?.word.toLowerCase()||id])),warmupIds,stage:kind==="daily"?(warmupIds.length?"warmup":"learn"):kind==="monthly"||practiceMode==="ko"?"ko":practiceMode==="sentence"?"sentence":"en",index:0,records,retry:[],retryMode:false,...(kind==="monthly"?{batchSize:state.settings.monthlyBatchSize||15,batchStart:0}:{}),...(kind==="practice"?{practiceMode:practiceMode||"known"}:{}),elapsed:0,finished:false,paused:false,createdAt:new Date().toISOString()};
 }
 export function currentId(s:Session):string|undefined{return s.retryMode?s.retry[0]?.id:s.stage==="warmup"?s.warmupIds[s.index]:s.ids[s.index];}
+// A repeat is a separate optional practice, tied to the original daily date.
+// Reuse its saved cursor before creating another attempt; never reset daily records.
+export function repeatDailySession(state:State,words:Word[],sourceDate:string,date=today()):Session|null{
+ const sources=Object.values(state.sessions).filter(s=>s.kind==="daily"&&s.date===sourceDate);
+ if(!sources.length||sources.some(s=>!s.finished))return null;
+ const existing=Object.values(state.sessions).find(s=>s.kind==="practice"&&s.practiceMode==="repeat"&&s.period===sourceDate&&!s.finished);
+ if(existing)return {...existing,paused:false};
+ const records:Record<string,RecordItem>={};
+ for(const s of sources.sort((a,b)=>a.createdAt.localeCompare(b.createdAt)))for(const id of s.ids){
+  const record=s.records[id];
+  if(!record||!words.some(w=>w.id===id))return null;
+  records[id]=emptyRecord(record.meaning,record.familiarity);
+ }
+ const ids=Object.keys(records);if(!ids.length)return null;
+ return {id:crypto.randomUUID(),kind:"practice",practiceMode:"repeat",date,period:sourceDate,ids,
+  wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===id)!.word.toLowerCase()])),
+  warmupIds:[],stage:"learn",index:0,records,retry:[],retryMode:false,elapsed:0,finished:false,paused:false,createdAt:new Date().toISOString()};
+}
 export function stepSession(s:Session):Session{
  const id=currentId(s);const wordKey=(id:string)=>s.wordKeys?.[id]||id;
  // Count distinct intervening words, not elapsed clicks or a repeat of the same word.
@@ -111,7 +129,7 @@ export function stepSession(s:Session):Session{
   const end=s.stage==="warmup"?s.warmupIds.length:s.kind==="monthly"&&s.batchSize?Math.min(start+s.batchSize,s.ids.length):s.ids.length;
   if(s.index+1<end)next={...s,index:s.index+1};
   else {
-   const sequence:Stage[]=s.kind==="daily"?["warmup","learn","en","ko","sentence","done"]:s.kind==="monthly"?["ko","sentence","done"]:s.practiceMode==="ko"?["ko","done"]:s.practiceMode==="sentence"?["sentence","done"]:["en","ko","sentence","done"];
+   const sequence:Stage[]=s.kind==="daily"?["warmup","learn","en","ko","sentence","done"]:s.kind==="monthly"?["ko","sentence","done"]:s.practiceMode==="repeat"?["learn","en","ko","sentence","done"]:s.practiceMode==="ko"?["ko","done"]:s.practiceMode==="sentence"?["sentence","done"]:["en","ko","sentence","done"];
    let stage=sequence[sequence.indexOf(s.stage)+1]||"done";
    if(stage==="done"&&s.kind==="monthly"&&end<s.ids.length)stage="checkpoint";
    next={...s,stage,index:stage==="checkpoint"?end:stage==="done"?0:start};
@@ -137,10 +155,13 @@ export function applyRecord(state:State,s:Session,id:string,patch:Partial<Record
  const sentenceStatus=record.sentenceStatus==="unmeasured"?p.sentenceStatus:record.sentenceStatus;
  const complete=sessionRecordComplete(s,record);
  const otherGap=s.practiceMode==="ko"?(en!=="independent"||sentenceStatus!=="written"):s.practiceMode==="sentence"?(en!=="independent"||ko!=="independent"):s.kind==="monthly"?(en==="help"||sentenceStatus==="improve"):false;
- const updated:Progress={...p,meaning:record.meaning,en,ko,sentenceStatus,sentence:record.sentence||p.sentence,notes:record.notes||p.notes,studyDates,lastStudied:learnedNow?s.date:p.lastStudied,lastReviewed:s.kind!=="daily"&&advance?s.date:p.lastReviewed,needsReview:!complete||otherGap};
+ // Optional repetition only reopens a previously learned word on measured difficulty.
+ const needsReview=s.practiceMode==="repeat"?(hasMeasuredDifficulty(record)?true:complete?false:p.needsReview):!complete||otherGap;
+ const updated:Progress={...p,meaning:record.meaning,en,ko,sentenceStatus,sentence:record.sentence||p.sentence,notes:record.notes||p.notes,studyDates,lastStudied:learnedNow?s.date:p.lastStudied,lastReviewed:s.kind!=="daily"&&advance?s.date:p.lastReviewed,needsReview};
  return {...state,progress:{...state.progress,[id]:updated},sessions:{...state.sessions,[s.id]:advance?stepSession(nextSession):nextSession}};
 }
-export function ensureCarryover(state:State,s:Session):State{const progress={...state.progress};for(const id of s.ids){const r=s.records[id];if(!r||!sessionRecordComplete(s,r)){progress[id]={...progress[id],needsReview:true};}}return {...state,progress};}
+function hasMeasuredDifficulty(r:RecordItem):boolean{return r.en==="help"||r.ko==="help"||r.sentenceStatus==="improve";}
+export function ensureCarryover(state:State,s:Session):State{const progress={...state.progress};for(const id of s.ids){const r=s.records[id];if(s.practiceMode==="repeat"?r&&hasMeasuredDifficulty(r):!r||!sessionRecordComplete(s,r)){progress[id]={...progress[id],needsReview:true};}}return {...state,progress};}
 export function exportLog(state:State,words:Word[]):string{const map=new Map(words.map(w=>[w.id,w]));const rows=[["학습일","종류","단어","품사","수준","학습 뜻","처음 표시","영어→뜻","뜻→영어","문장 상태","말하기","내 문장","보완점","재시도 영어→뜻","재시도 뜻→영어","다음 할 일","AI 검토 원문","AI 교정 제안","AI 설명"]];for(const s of Object.values(state.sessions).sort((a,b)=>a.createdAt.localeCompare(b.createdAt))){for(const id of s.ids){const w=map.get(id);const r=s.records[id]||emptyRecord();rows.push([s.date,s.kind,w?.word||id,w?.pos||"",w?.level||"",r.meaning,r.familiarity?FAMILIARITY_TEXT[r.familiarity]:"미표시",RESULT_TEXT[r.en],RESULT_TEXT[r.ko],SENTENCE_TEXT[r.sentenceStatus],r.spoken?"말해 봄":"미측정",r.sentence,r.notes,RESULT_TEXT[r.retryEn||"unmeasured"],RESULT_TEXT[r.retryKo||"unmeasured"],nextAction(r,s),r.aiFeedback?.original||"",r.aiFeedback?.correctedSentence||"",r.aiFeedback?.explanation||""]);}}return "\ufeff"+rows.map(row=>row.map(x=>'"'+(/^[=+@\-]/.test(x)?"'":"")+x.replaceAll('"','""')+'"').join(',')).join('\r\n');}
 
 export function exportTutor(state:State,words:Word[]):string {
