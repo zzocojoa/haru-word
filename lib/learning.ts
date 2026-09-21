@@ -81,13 +81,18 @@ export function confirmFamiliarity(p:Progress|undefined,final:Familiarity):Progr
  return {...recordFamiliarity(p,final),familiarityCheck:{...check,final}};
 }
 const everyday=["arrive","busy","breakfast","work","home","food","water","time","help","need","want","buy","travel","meet","friend","family","learn","call","plan","use","important"];
+export function dailyAssignedIds(state:State,date=today()):string[]{
+ return [...new Set(Object.values(state.sessions).filter(s=>s.kind==="daily"&&s.date===date).flatMap(s=>s.ids.map(id=>entryIdFor(s,id))))];
+}
 export function pickDaily(words:Word[],state:State,date=today()):string[]{
- const progress=state.progress; const recentTargets=new Set(Object.values(state.sessions).filter(s=>s.kind==="daily"&&s.date===date).flatMap(s=>s.ids));
+ const progress=state.progress;const recentTargets=new Set(dailyAssignedIds(state,date));
+ const remaining=Math.max(0,state.settings.dailyGoal-recentTargets.size);if(!remaining)return [];
+ const seen=new Set(words.filter(w=>recentTargets.has(w.id)).map(w=>w.headword));
  const pauseNew=state.settings.newWordsPaused||Object.values(state.sessions).some(s=>s.kind==="monthly"&&!s.finished);
  const candidates=words.filter(w=>!recentTargets.has(w.id)&&(hasReviewWork(progress[w.id]) || (!pauseNew&&(w.personal||w.level===state.settings.level) && progress[w.id]?.familiarity!=="known"&&!senseProgress(progress[w.id],progress[w.id]?.meaning||"").lastStudied)));
  function priority(w:Word){const p=progress[w.id]; return hasReviewWork(p)?0:p?.familiarity==="uncertain"?1:p?.familiarity==="new"?2:3;}
  candidates.sort((a,b)=>priority(a)-priority(b)||Number(!!progress[b.id]?.useful)-Number(!!progress[a.id]?.useful)||(everyday.includes(a.word)?0:1)-(everyday.includes(b.word)?0:1)||hash(date+a.id)-hash(date+b.id));
- const out:string[]=[]; const seen=new Set<string>(); for(const w of candidates){if(seen.has(w.headword))continue;out.push(w.id);seen.add(w.headword);if(out.length>=state.settings.dailyGoal)break;}return out;
+ const out:string[]=[];for(const w of candidates){if(seen.has(w.headword))continue;out.push(w.id);seen.add(w.headword);if(out.length>=remaining)break;}return out;
 }
 export type LearningTarget={entryId:string;meaning:string;familiarity?:Familiarity;material?:Content;historicalMeaningUnknown?:boolean};
 export function targetIdentity(entryId:string,meaning:string):string{return JSON.stringify([entryId,meaning.trim()]);}
@@ -139,6 +144,8 @@ function targetRecords(targets:LearningTarget[]):{ids:string[];records:Record<st
 function hash(v:string):number{let h=0;for(const c of v)h=(h*31+c.charCodeAt(0))>>>0;return h;}
 export function practiceIds(state:State,mode:PracticeMode):string[]{if(mode==="repeat")return [];return Object.entries(state.progress).filter(([,p])=>mode==="known"?p.familiarity==="known":mode==="ko"?p.ko==="help"||allSenses(p).some(x=>x.ko==="help"):p.sentenceStatus==="improve"||allSenses(p).some(x=>x.sentenceStatus==="improve")).sort((a,b)=>(a[1].lastReviewed||"").localeCompare(b[1].lastReviewed||"")||hash(a[0])-hash(b[0])).slice(0,20).map(([id])=>id);}
 export function newSession(state:State,words:Word[],content:(id:string)=>Content,kind:Kind,date=today(),period=periodKey(kind,date),practiceMode?:PracticeMode):Session|null{
+ // Resume the assigned daily work before allocating another same-day session.
+ if(kind==="daily"&&Object.values(state.sessions).some(s=>s.kind==="daily"&&s.date===date&&!s.finished))return null;
  const targets:LearningTarget[]=kind==="weekly"||kind==="monthly"?reviewTargets(state,kind,period):
  (kind==="daily"?pickDaily(words,state,date):practiceIds(state,practiceMode||"known")).flatMap(entryId=>{
   const p=state.progress[entryId];const choices=kind==="practice"?allSenses(p).filter(x=>practiceMode==="ko"?x.ko==="help":practiceMode==="sentence"?x.sentenceStatus==="improve":true):[];
@@ -146,7 +153,7 @@ export function newSession(state:State,words:Word[],content:(id:string)=>Content
  }).slice(0,kind==="practice"?20:state.settings.dailyGoal);
  if(!targets.length)return null;
  const {ids,records}=targetRecords(targets.map(t=>({...t,meaning:t.meaning||content(t.entryId).meaning})));
- const warmupIds=kind==="daily"?Object.entries(state.progress).filter(([,p])=>p.lastStudied).sort((a,b)=>Number(hasReviewWork(b[1]))-Number(hasReviewWork(a[1]))||(b[1].lastStudied||"").localeCompare(a[1].lastStudied||"")).slice(0,3).map(([id])=>id):[];
+ const warmupIds=kind==="daily"&&!dailyAssignedIds(state,date).length?Object.entries(state.progress).filter(([,p])=>p.lastStudied).sort((a,b)=>Number(hasReviewWork(b[1]))-Number(hasReviewWork(a[1]))||(b[1].lastStudied||"").localeCompare(a[1].lastStudied||"")).slice(0,3).map(([id])=>id):[];
  return {id:crypto.randomUUID(),kind,date,period,ids,wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===entryIdFor({records} as Session,id))?.word.toLowerCase()||id])),warmupIds,stage:kind==="daily"?(warmupIds.length?"warmup":"learn"):kind==="monthly"||practiceMode==="ko"?"ko":practiceMode==="sentence"?"sentence":"en",index:0,records,retry:[],retryMode:false,...(kind==="monthly"?{batchSize:state.settings.monthlyBatchSize||15,batchStart:0}:{}),...(kind==="practice"?{practiceMode:practiceMode||"known"}:{}),elapsed:0,finished:false,paused:false,createdAt:new Date().toISOString()};
 }
 export function currentId(s:Session):string|undefined{return s.retryMode?s.retry[0]?.id:s.stage==="warmup"?s.warmupIds[s.index]:s.ids[s.index];}
