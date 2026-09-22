@@ -94,13 +94,16 @@ const checks=[];const errors=[];
   await shot('05-mobile-completed');
   await p.getByRole('tab',{name:'학습 기록',exact:true}).click();
   const journal=p.getByRole('tabpanel',{name:'학습 기록',exact:true});
+  assert.equal(await journal.locator('.record-card').count(),0);
+  await journal.locator('.journal-session-trigger').click();
   assert.ok(await journal.locator('.journal-mobile').isVisible());
+  await journal.locator('.journal-word-trigger').first().click();
   assert.ok(!await journal.locator('.journal-desktop').isVisible());
   const card=journal.locator('.record-card').first();
   for(const text of ['영어→뜻','뜻→영어','독립 성공','도움 필요','내 문장','보완점','전치사와 시제를 다시 확인하기'])assert.ok((await card.innerText()).includes(text));
   await fit();await shot('06-mobile-records');
   await p.setViewportSize({width:1440,height:1050});assert.ok(await journal.locator('.journal-desktop').isVisible());assert.ok(!await journal.locator('.journal-mobile').isVisible());await fit();await shot('07-desktop-records');
-  checks.push('completed-study actions stay accessible; mobile records show both recall directions, sentences and notes, while desktop retains the comparison table');
+  checks.push('completed-study actions stay accessible; collapsed sessions and mobile word details show both recall directions, sentences and notes, while desktop retains the comparison table');
 
   await p.setViewportSize({width:390,height:844});await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();
   await p.getByRole('button',{name:'오늘 단어 다시 학습',exact:true}).click();await saved();

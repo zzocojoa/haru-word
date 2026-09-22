@@ -1,5 +1,11 @@
 "use client";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -75,6 +81,7 @@ export function LearningLog({
   );
   const [selected, setSelected] = useState("all");
   const [limit, setLimit] = useState(LOG_PAGE_SIZE);
+  const [openSession, setOpenSession] = useState("");
   const list = useMemo(
     () => sessions.filter((s) => selected === "all" || s.kind === selected),
     [sessions, selected],
@@ -86,7 +93,7 @@ export function LearningLog({
           <p className="eyebrow">LEARNING JOURNAL</p>
           <h2>쌓이는 나의 영어</h2>
           <p className="muted">
-            친숙도, 양방향 회상, 문장 사용을 따로 기록해요.
+            날짜를 누르면 단어별 기록을 볼 수 있어요.
           </p>
         </div>
         <div className="button-row">
@@ -149,6 +156,7 @@ export function LearningLog({
         onValueChange={(v) => {
           setSelected(v);
           setLimit(LOG_PAGE_SIZE);
+          setOpenSession("");
         }}
       >
         <SelectTrigger aria-label="기록 종류 필터">
@@ -165,25 +173,34 @@ export function LearningLog({
       {!list.length ? (
         <div className="empty-state">
           <NotebookPen size={32} />
-          <h3>첫 학습 기록을 기다리고 있어요.</h3>
-          <p>오늘의 단어를 배우면 이곳에 기록이 쌓여요.</p>
+          <h3>{selected === "all" ? "첫 학습 기록을 기다리고 있어요." : "이 종류의 학습 기록이 아직 없어요."}</h3>
+          <p>{selected === "all" ? "오늘의 단어를 배우면 이곳에 기록이 쌓여요." : "다른 종류를 선택하면 이전 기록을 볼 수 있어요."}</p>
         </div>
       ) : (
-        <div className="journal-list">
-          {list.slice(0, limit).map((s) => (
-            <article className="journal-session" key={s.id}>
-              <header>
-                <div>
-                  <span className="journal-date">{s.date}</span>
+        <Accordion type="single" collapsible value={openSession} onValueChange={setOpenSession} className="journal-list">
+          {list.slice(0, limit).map((s) => {
+            const complete = s.ids.filter(id => s.records[id] && sessionRecordComplete(s, s.records[id])).length;
+            const preview = s.ids.slice(0, 3).map(id => words.find(w => w.id === entryIdFor(s, id))?.word || "단어").join(" · ");
+            return <AccordionItem className="journal-session" key={s.id} value={s.id}>
+              <AccordionTrigger className="journal-session-trigger">
+                <span className="journal-session-summary">
+                  <span className="journal-session-heading">
+                  <time className="journal-date" dateTime={s.date}>{s.date}</time>
                   <span className="level-badge">
                     {s.practiceMode === "repeat"
                       ? "다시 학습 · " + s.period
                       : KIND_TEXT[s.kind]}
                   </span>
-                  <span className="muted">
-                    {s.ids.length}개 · {s.finished ? "회차 종료" : "진행 중"}
                   </span>
-                </div>
+                  <span className="journal-session-count">
+                    {s.ids.length}개 · 완료 {complete}개 · {s.finished ? "회차 종료" : "진행 중"}
+                  </span>
+                  <span className="journal-session-preview"><span lang="en">{preview}</span>{s.ids.length > 3 && ` 외 ${s.ids.length - 3}개`}</span>
+                </span>
+                <span className="journal-toggle-label">{openSession === s.id ? "접기" : "기록 보기"}</span>
+              </AccordionTrigger>
+              <AccordionContent className="journal-session-content">
+              <div className="button-row journal-session-actions">
                 {s.finished && s.kind === "daily" && (
                   <button
                     className="text-button"
@@ -211,16 +228,17 @@ export function LearningLog({
                     이어서 학습 <ArrowRight size={15} />
                   </button>
                 )}
-              </header>
+              </div>
               <div className="journal-mobile">
-                <SessionRecords session={s} words={words} />
+                <SessionRecords session={s} words={words} compact />
               </div>
               <div className="journal-desktop">
                 <SessionLogTable session={s} words={words} />
               </div>
-            </article>
-          ))}
-        </div>
+              </AccordionContent>
+            </AccordionItem>;
+          })}
+        </Accordion>
       )}
       {list.length > 0 && (
         <p className="small-note" role="status">
