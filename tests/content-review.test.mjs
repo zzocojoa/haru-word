@@ -62,6 +62,45 @@ test('A1 noun, pronoun and single-sense corrections retain their reviewed exampl
  assert.equal(find('cook','v.').meaning,'요리하다');assert.equal(find('short','adj.').meaning,'키가 작은');
 });
 
+test('A2 review ledger covers all 990 entries and hashes the shipped revision',()=>{
+ const ledger=JSON.parse(readFileSync('data/a2-content-review.json','utf8'));
+ const entries=ledger.batches.flatMap(b=>b.entries),a2=words.filter(w=>w.level==='A2');
+ assert.equal(entries.length,990);assert.equal(new Set(entries.map(e=>e.id)).size,990);
+ assert.deepEqual(new Set(entries.map(e=>e.id)),new Set(a2.map(w=>w.id)));
+ assert.equal(entries.filter(e=>e.status==='corrected').length,552);
+ const fields=['meaning','expression','example','translation','source','attribution','url'];
+ for(const entry of entries){
+  const hash=createHash('sha256').update(JSON.stringify(fields.map(k=>data[entry.id][k]??null))).digest('hex');
+  assert.equal(entry.afterHash,hash,'A2 revision changed without review evidence: '+entry.id);
+  assert.match(entry.beforeHash,/^[a-f0-9]{64}$/);
+  if(entry.status==='corrected'){assert.ok(entry.reason);assert.notEqual(entry.beforeHash,entry.afterHash);}
+  else{assert.equal(entry.status,'kept');assert.equal(entry.beforeHash,entry.afterHash);}
+ }
+});
+
+test('A2 examples align with selected meanings and separate POS uses',()=>{
+ const a2=(word,pos)=>data[words.find(w=>w.level==='A2'&&w.word===word&&w.pos===pos).id];
+ for(const [word,pos,meaning,part] of [
+  ['hold','v.','잡다','hold my bag'],['pass','v.','건네주다','pass me the salt'],
+  ['gas','n.','휘발유','Gas prices'],['side','n.','편 (지지하는 쪽)','on our side'],
+  ['thin','adj.','얇은','paper is too thin'],['whose','pron.','누구의 것','Whose is this'],
+  ['source','n.','출처','source of this information'],['wheel','n.','바퀴','front wheel']
+ ]){const c=a2(word,pos);assert.equal(c.meaning,meaning,word);assert.ok(c.example.includes(part),word);}
+ assert.equal(a2('cash','n.').translation,'이 가게는 현금만 받아요.');
+ for(const word of ['double','downtown','least','less','percent']){
+  const cards=words.filter(w=>w.level==='A2'&&w.word===word).map(w=>data[w.id]);
+  assert.equal(new Set(cards.map(c=>c.example)).size,cards.length,word+' uses separate POS examples');
+ }
+});
+
+test('A2 saved senses and user examples survive catalog sense changes',()=>{
+ const gas=find('gas','n.');
+ const old=resolveCardContent(gas,{meaning:'가스',en:'independent',notes:'기존 메모'});
+ assert.equal(old.meaning,'가스');assert.equal(old.example,'');assert.equal(old.translation,'');
+ const custom={meaning:'가스',expression:'natural gas',example:'We use gas for cooking.',translation:'우리는 요리에 가스를 써요.'};
+ const saved=resolveCardContent(gas,custom);for(const [k,v] of Object.entries(custom))assert.equal(saved[k],v);
+});
+
 test('catalog corrections never combine a saved older meaning with another sense examples',()=>{
  const base=find('bar','n.');assert.equal(base.meaning,'술집');
  assert.deepEqual(resolveCardContent(base),base);

@@ -306,10 +306,12 @@
     "source": "학습용 작성 예문"
   },
   "a1b1c7e3c26f0096": {
-    "expression": "act like a jerk"
+    "expression": "act like a jerk",
+    "meaning": "행동하다"
   },
   "4db7c8ec214bd313": {
-    "expression": "actually play the piano"
+    "expression": "actually play the piano",
+    "meaning": "사실은"
   },
   "0d23aef42bdd111a": {
     "expression": "almost ready to leave"
@@ -327,22 +329,33 @@
     "expression": "do better on the test"
   },
   "f700d1982a2723a8": {
-    "expression": "six billion people"
+    "expression": "one billion",
+    "example": "One billion is a thousand million.",
+    "translation": "십억은 백만의 천 배예요.",
+    "source": "학습용 작성 예문"
   },
   "e7338738fcb36c35": {
-    "expression": "borrow books from the library"
+    "expression": "borrow books from the library",
+    "meaning": "빌리다"
   },
   "23cf1e98fd99bbdd": {
-    "expression": "at the bottom of the class"
+    "expression": "at the bottom of the bag",
+    "example": "Your shoes are at the bottom of the bag.",
+    "translation": "네 신발은 가방 맨 아래에 있어요.",
+    "source": "학습용 작성 예문"
   },
   "9406577544ae25fe": {
     "expression": "brighter than the moon"
   },
   "c7b7ce35d38d3a76": {
-    "expression": "a kind of candy"
+    "expression": "a kind of candy",
+    "meaning": "사탕"
   },
   "b5736e59adcc8964": {
-    "expression": "take care not to catch a cold"
+    "expression": "daily care",
+    "example": "The dog needs daily care.",
+    "translation": "그 개는 매일 돌봄이 필요해요.",
+    "source": "학습용 작성 예문"
   },
   "b46ad64c7a5a69ba": {
     "expression": "be careful not to catch a cold"
@@ -354,13 +367,19 @@
     "expression": "have no choice but to go"
   },
   "89713f6284c9ee23": {
-    "expression": "the old church by the lake"
+    "expression": "go to church",
+    "example": "The church is next to the park.",
+    "translation": "교회는 공원 옆에 있어요.",
+    "source": "학습용 작성 예문"
   },
   "ac2ec93e646e537d": {
     "expression": "our climate"
   },
   "ff74059ffb2093fb": {
-    "expression": "comfortable with the situation"
+    "expression": "a comfortable chair",
+    "example": "I feel comfortable in this chair.",
+    "translation": "이 의자에 앉으면 편안해요.",
+    "source": "학습용 작성 예문"
   },
   "dadfa7e9eb916929": {
     "expression": "compete in the race"
@@ -369,19 +388,33 @@
     "expression": "consider changing jobs"
   },
   "a960c4f3a846d213": {
-    "expression": "continue down to the river"
+    "expression": "continue reading",
+    "example": "Please continue reading the story.",
+    "translation": "이야기를 계속 읽어 주세요.",
+    "source": "학습용 작성 예문"
   },
   "dd01c1f13ca9c904": {
     "expression": "take control of the capital"
   },
   "79f537f10a41abcc": {
-    "expression": "deal with a problem"
+    "expression": "deal with a problem",
+    "meaning": "처리하다",
+    "example": "We need to deal with this problem today.",
+    "translation": "우리는 오늘 이 문제를 처리해야 해요.",
+    "source": "학습용 작성 예문"
   },
   "a1b06df415866f0e": {
-    "expression": "depend on the context"
+    "expression": "depend on the weather",
+    "meaning": "~에 달려 있다",
+    "example": "Our plans depend on the weather.",
+    "translation": "우리 계획은 날씨에 달려 있어요.",
+    "source": "학습용 작성 예문"
   },
   "fb053e909becb891": {
-    "expression": "give directions to the station"
+    "expression": "in that direction",
+    "example": "The station is in that direction.",
+    "translation": "역은 저쪽 방향에 있어요.",
+    "source": "학습용 작성 예문"
   },
   "3087b32b09a4a2d7": {
     "expression": "a disease"
@@ -399,7 +432,8 @@
     "expression": "be employed in a bank"
   },
   "9edb9ae212f17299": {
-    "expression": "expect someone to be late"
+    "expression": "expect someone to be late",
+    "meaning": "예상하다"
   },
   "dc89c7099d86636d": {
     "expression": "finally get a job"
@@ -408,58 +442,86 @@
     "expression": "be fired from a job"
   },
   "8606575eacf9606e": {
-    "expression": "a frog in a well"
+    "expression": "a frog in a pond",
+    "example": "A small frog jumped into the pond.",
+    "translation": "작은 개구리가 연못으로 뛰어들었어요.",
+    "source": "학습용 작성 예문"
   },
   "bd8b95ab8b53f3cd": {
-    "expression": "the government"
+    "expression": "the local government",
+    "example": "The local government opened a new library.",
+    "translation": "지방 정부가 새 도서관을 열었어요.",
+    "source": "학습용 작성 예문"
   },
   "497abc9c08bfab19": {
-    "expression": "the average height"
+    "expression": "the average height",
+    "meaning": "키"
   },
   "b26334ea178e9f47": {
     "expression": "warm herself by the fire"
   },
   "509059b42449bfab": {
-    "expression": "hide himself behind a rock"
+    "expression": "hide himself behind a rock",
+    "meaning": "그 자신"
   },
   "79e38ef33cf3d139": {
     "expression": "be hit by a truck"
   },
   "0f7ecfd8e5f1db95": {
-    "expression": "a musical instrument"
+    "expression": "a musical instrument",
+    "meaning": "악기"
   },
   "d48b66fc2e7e2b1a": {
     "expression": "knock on the door"
   },
   "1dffa5d15ec1aa17": {
-    "expression": "the law of the jungle"
+    "expression": "obey the law",
+    "example": "Everyone must obey the law.",
+    "translation": "모든 사람은 법을 지켜야 해요.",
+    "source": "학습용 작성 예문"
   },
   "4cd8a08b069dee59": {
     "expression": "lead the parade"
   },
   "bb8501631a875472": {
-    "expression": "be married to someone"
+    "expression": "marry someone",
+    "example": "She married her best friend last year.",
+    "translation": "그녀는 작년에 가장 친한 친구와 결혼했어요.",
+    "source": "학습용 작성 예문"
   },
   "5a5b2d6058f95069": {
-    "expression": "social media"
+    "expression": "social media",
+    "example": "I use social media to keep in touch with friends.",
+    "translation": "나는 친구들과 연락을 주고받으려고 소셜 미디어를 사용해요.",
+    "source": "학습용 작성 예문"
   },
   "b77833c3dfbe8d07": {
-    "expression": "a good memory"
+    "expression": "a good memory",
+    "meaning": "기억력"
   },
   "e25e602ba560816c": {
-    "expression": "mind answering a few questions"
+    "expression": "would you mind doing something",
+    "meaning": "꺼리다",
+    "example": "Would you mind opening the window?",
+    "translation": "창문을 열어 주시겠어요? (열어 주는 것이 꺼려지시나요?)",
+    "source": "학습용 작성 예문"
   },
   "a89bb2d0c37a0d3f": {
-    "expression": "mostly consist of nitrogen"
+    "expression": "mostly consist of",
+    "meaning": "대부분"
   },
   "de8d706854d85b0f": {
-    "expression": "the outside of a wall"
+    "expression": "the outside of a cup",
+    "example": "The outside of the cup is warm.",
+    "translation": "컵 바깥쪽이 따뜻해요.",
+    "source": "학습용 작성 예문"
   },
   "921e716cc0d5f3ff": {
     "expression": "be overseas"
   },
   "8aa8b22d16c25777": {
-    "expression": "pass me the salt"
+    "expression": "pass someone the salt",
+    "meaning": "건네주다"
   },
   "a91f4391c115e5ff": {
     "expression": "passengers on the bus"
@@ -468,7 +530,8 @@
     "expression": "study physics"
   },
   "51046a96638c6f86": {
-    "expression": "prevent someone from doing something"
+    "expression": "prevent someone from doing something",
+    "meaning": "막다"
   },
   "ea7382e17a4b4eec": {
     "expression": "pull out a book"
@@ -486,7 +549,8 @@
     "expression": "the rest of the story"
   },
   "a48b6ff00f2964a4": {
-    "expression": "bus service to the airport"
+    "expression": "bus service to the airport",
+    "meaning": "운행 서비스"
   },
   "ca1f92753fbfdbc2": {
     "expression": "a bad smell"
@@ -495,13 +559,20 @@
     "expression": "quit smoking"
   },
   "adcc56bf510d7aae": {
-    "expression": "a specific sequence"
+    "expression": "a specific example",
+    "example": "Can you give me a specific example?",
+    "translation": "구체적인 예를 들어 줄 수 있나요?",
+    "source": "학습용 작성 예문"
   },
   "4af12b5df984d738": {
     "expression": "thick enough to walk on"
   },
   "2c821e4b308e1445": {
-    "expression": "as thin as a rail"
+    "expression": "thin paper",
+    "meaning": "얇은",
+    "example": "This paper is too thin for the box.",
+    "translation": "이 종이는 상자를 만들기에는 너무 얇아요.",
+    "source": "학습용 작성 예문"
   },
   "14e6f03e4a4aeb6e": {
     "expression": "a whole bottle of wine"
@@ -1950,5 +2021,1913 @@
     "example": "Since when have you lived in Seoul?",
     "translation": "언제부터 서울에 살고 계세요?",
     "source": "학습용 작성 예문"
+  },
+  "e3260a545093637b": {
+    "expression": "be able to fix a computer"
+  },
+  "bce1ef3a413b4215": {
+    "expression": "accept your role"
+  },
+  "049c977e28154ee1": {
+    "expression": "a traffic accident",
+    "example": "There was an accident near the station.",
+    "translation": "역 근처에서 사고가 났어요.",
+    "source": "학습용 작성 예문"
+  },
+  "832cda0d41e34f8e": {
+    "expression": "achieve a goal"
+  },
+  "1c74999b526de67f": {
+    "expression": "be active at night"
+  },
+  "7697e83000411188": {
+    "meaning": "광고업"
+  },
+  "dfd57c328215192e": {
+    "meaning": "완전히"
+  },
+  "30d50624247232f3": {
+    "meaning": "잘"
+  },
+  "b10a3e3074595aef": {
+    "expression": "be allowed here"
+  },
+  "e226279bd746d348": {
+    "meaning": "함께",
+    "expression": "come along"
+  },
+  "e8947c72081005d8": {
+    "meaning": "양"
+  },
+  "56ecc20111ebbe91": {
+    "meaning": "누구든"
+  },
+  "2a74e54685b0cd8e": {
+    "meaning": "더 이상 (부정문에서)",
+    "expression": "not play anymore"
+  },
+  "63b676fcd6c2ff8f": {
+    "expression": "appear at the window",
+    "example": "A small bird appeared at the window.",
+    "translation": "창가에 작은 새 한 마리가 나타났어요.",
+    "source": "학습용 작성 예문"
+  },
+  "59a940c0f77acb09": {
+    "meaning": "외모"
+  },
+  "8671b1cdacf281dc": {
+    "meaning": "지원하다"
+  },
+  "a7e5d98188a2674e": {
+    "meaning": "건축"
+  },
+  "7c465ea97bd4f798": {
+    "meaning": "논쟁하다",
+    "expression": "argue about money",
+    "example": "We sometimes argue about money.",
+    "translation": "우리는 가끔 돈 문제로 논쟁해요.",
+    "source": "학습용 작성 예문"
+  },
+  "163fb023c5d76782": {
+    "meaning": "일정을 잡다"
+  },
+  "73df85a9aa759e75": {
+    "meaning": "준비"
+  },
+  "bb8eaa2208be9166": {
+    "expression": "as light as",
+    "example": "This bag is as light as that one.",
+    "translation": "이 가방은 저것만큼 가벼워요.",
+    "source": "학습용 작성 예문"
+  },
+  "2126c6f1c67de5b8": {
+    "meaning": "~하는 동안"
+  },
+  "89ee451c07bab2ba": {
+    "meaning": "보조 직원",
+    "expression": "an office assistant",
+    "example": "The assistant helped me organize the files.",
+    "translation": "보조 직원이 서류 정리를 도와줬어요.",
+    "source": "학습용 작성 예문"
+  },
+  "1bc2c00fbdd4b6c6": {
+    "expression": "attend a meeting"
+  },
+  "7dccb3e73ee549e6": {
+    "expression": "pay attention to the instructions",
+    "example": "Please pay attention to the instructions.",
+    "translation": "안내 사항에 주의를 기울여 주세요.",
+    "source": "학습용 작성 예문"
+  },
+  "f5a5db71948d8f0f": {
+    "meaning": "주목"
+  },
+  "e767803c90f1c141": {
+    "meaning": "관객"
+  },
+  "dd992d201d01fe48": {
+    "expression": "your favorite author"
+  },
+  "16d6db25672bc02c": {
+    "meaning": "상"
+  },
+  "ebfc914b5aa275d6": {
+    "meaning": "아주 나쁜"
+  },
+  "0fe0062966b79656": {
+    "meaning": "심하게",
+    "expression": "badly damaged",
+    "example": "The roof was badly damaged in the storm.",
+    "translation": "폭풍으로 지붕이 심하게 파손됐어요.",
+    "source": "학습용 작성 예문"
+  },
+  "9be2726130bb1e5f": {
+    "expression": "bean soup"
+  },
+  "7bf5a49ae6ff3fb4": {
+    "meaning": "이기다",
+    "expression": "beat someone at chess",
+    "example": "She beat me at chess.",
+    "translation": "그녀는 체스에서 나를 이겼어요.",
+    "source": "학습용 작성 예문"
+  },
+  "953e0a90d481ab6a": {
+    "expression": "buy beef"
+  },
+  "5b3a65677d2502f6": {
+    "meaning": "~의 것이다"
+  },
+  "3418e141abdf01fd": {
+    "expression": "wear a belt",
+    "example": "She wore a brown belt with her jeans.",
+    "translation": "그녀는 청바지에 갈색 벨트를 했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "669b73f9f541baa1": {
+    "meaning": "이점"
+  },
+  "1951fc82a2af708f": {
+    "example": "I learn best when I write things down.",
+    "translation": "나는 적어 볼 때 가장 잘 배워요.",
+    "source": "학습용 작성 예문"
+  },
+  "a9b2cdd6fac6914a": {
+    "meaning": "최선"
+  },
+  "55b18081f5715ce9": {
+    "expression": "at birth",
+    "example": "The baby weighed three kilograms at birth.",
+    "translation": "그 아기는 태어났을 때 몸무게가 3킬로그램이었어요.",
+    "source": "학습용 작성 예문"
+  },
+  "ca521e0a6fd45ac3": {
+    "meaning": "아무것도 쓰이지 않은"
+  },
+  "bc4a1e0dde830f8d": {
+    "meaning": "블록 (거리 단위)"
+  },
+  "062e4678d5c09ede": {
+    "expression": "a blood vessel"
+  },
+  "41f068ef26068c78": {
+    "expression": "my boss"
+  },
+  "620d55cea53ca7fc": {
+    "meaning": "그릇"
+  },
+  "2bc65e2dd342d47a": {
+    "meaning": "부러진"
+  },
+  "47f1d1d1f2360c8c": {
+    "meaning": "빗다"
+  },
+  "e4d967c4d8feb87d": {
+    "meaning": "빗"
+  },
+  "8e08c73dbfe21b65": {
+    "meaning": "태우다",
+    "expression": "burn gas"
+  },
+  "3280d715d313676b": {
+    "expression": "press this button"
+  },
+  "6e5a010d946af952": {
+    "meaning": "캠프"
+  },
+  "dfdcf8506b914510": {
+    "meaning": "캠핑"
+  },
+  "6a4c37966f19db40": {
+    "meaning": "캠퍼스"
+  },
+  "a4fbd9511967a4b7": {
+    "meaning": "캔"
+  },
+  "7f7d6417c9ff31c4": {
+    "expression": "care about the color",
+    "example": "I don't care about the color.",
+    "translation": "나는 색깔은 신경 쓰지 않아요.",
+    "source": "학습용 작성 예문"
+  },
+  "652ce56c10862b3a": {
+    "meaning": "만화 영화"
+  },
+  "714a426a222d07fb": {
+    "expression": "in that case",
+    "example": "In that case, we can take the bus.",
+    "translation": "그런 경우에는 버스를 타면 돼요.",
+    "source": "학습용 작성 예문"
+  },
+  "7757e6adeb3d00f9": {
+    "expression": "accept cash",
+    "example": "This shop accepts only cash.",
+    "translation": "이 가게는 현금만 받아요.",
+    "source": "학습용 작성 예문"
+  },
+  "518bd7d01e7d07bd": {
+    "expression": "catch a ball",
+    "example": "Can you catch the ball?",
+    "translation": "공을 잡을 수 있니?",
+    "source": "학습용 작성 예문"
+  },
+  "05017a51b924c6d3": {
+    "expression": "cause inconvenience"
+  },
+  "9557bb47570a66e1": {
+    "expression": "celebrate my birthday"
+  },
+  "7fc359efbbba8530": {
+    "meaning": "세기 (100년)"
+  },
+  "cf8c398251efd2af": {
+    "expression": "be certain"
+  },
+  "3565344f0d295c18": {
+    "expression": "a chance to speak English",
+    "example": "I had a chance to speak English at work.",
+    "translation": "나는 직장에서 영어로 말할 기회가 있었어요.",
+    "source": "학습용 작성 예문"
+  },
+  "b8ef09b688b9e630": {
+    "meaning": "성격",
+    "expression": "our character"
+  },
+  "91be1ebe5c022d5e": {
+    "expression": "give clothes to charity"
+  },
+  "dd1d6d4038bee464": {
+    "meaning": "점검"
+  },
+  "802416ddb627102b": {
+    "meaning": "감자칩"
+  },
+  "f9624313618e3b71": {
+    "meaning": "원"
+  },
+  "bd24979a5ec2f978": {
+    "meaning": "클래식의"
+  },
+  "b621df261e50d91e": {
+    "meaning": "또렷하게"
+  },
+  "faccefd32347980e": {
+    "meaning": "점원"
+  },
+  "bfb19cf723ef383c": {
+    "expression": "close relatives"
+  },
+  "a3adc6f408ec7c96": {
+    "meaning": "문을 닫은"
+  },
+  "bd236aee9df69054": {
+    "expression": "in the closet"
+  },
+  "aa95c0b5fb7a257d": {
+    "meaning": "의류"
+  },
+  "51e68737b58acdad": {
+    "meaning": "코치"
+  },
+  "87280900670e0aae": {
+    "expression": "on the coast",
+    "example": "I grew up on the coast.",
+    "translation": "나는 해안 지역에서 자랐어요.",
+    "source": "학습용 작성 예문"
+  },
+  "2b657e2b5f50dda3": {
+    "meaning": "암호",
+    "expression": "crack a code"
+  },
+  "434236902f37c770": {
+    "expression": "collect old coins"
+  },
+  "24d6931cb54dc445": {
+    "meaning": "코미디"
+  },
+  "29c33b4684561856": {
+    "meaning": "의견"
+  },
+  "d98aacc4229813c1": {
+    "meaning": "지역 사회",
+    "expression": "our local community",
+    "example": "People in our community help each other.",
+    "translation": "우리 지역 사회의 사람들은 서로 도와요.",
+    "source": "학습용 작성 예문"
+  },
+  "bfe49a1406278f81": {
+    "meaning": "대회"
+  },
+  "8a54b104b0d6758d": {
+    "expression": "complain about the food"
+  },
+  "39272d581bbc9368": {
+    "expression": "on one condition",
+    "example": "I agreed on one condition.",
+    "translation": "나는 한 가지 조건을 달고 동의했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "afde69c8aff98550": {
+    "expression": "attend a conference",
+    "example": "I met my colleague at a conference.",
+    "translation": "나는 회의에서 동료를 만났어요.",
+    "source": "학습용 작성 예문"
+  },
+  "40b5deaf0b9e7dbd": {
+    "expression": "contain vitamin C"
+  },
+  "0754e868e7a89fe5": {
+    "meaning": "문맥",
+    "expression": "in context",
+    "example": "There is not enough context to understand this sentence.",
+    "translation": "이 문장을 이해하기에는 문맥이 충분하지 않아요.",
+    "source": "학습용 작성 예문"
+  },
+  "83c085d2bef67600": {
+    "expression": "a good cook"
+  },
+  "5e5d8e742db81b2f": {
+    "meaning": "사본"
+  },
+  "ce1d77c0801831b2": {
+    "meaning": "한 쌍"
+  },
+  "d8f7d54c7214f64c": {
+    "meaning": "제정신이 아닌"
+  },
+  "ef69ed9dca0f18aa": {
+    "expression": "a credit card",
+    "example": "Do you have a credit card?",
+    "translation": "신용카드가 있나요?",
+    "source": "학습용 작성 예문"
+  },
+  "5c0bca46fcb83086": {
+    "expression": "cross the street"
+  },
+  "bb68a85e56c27f0c": {
+    "expression": "start to cry"
+  },
+  "eadb9fb021d60322": {
+    "meaning": "순환"
+  },
+  "958708f8675aac6c": {
+    "expression": "be in danger"
+  },
+  "96729d232654a601": {
+    "expression": "collect data"
+  },
+  "c353c142a3ef735a": {
+    "meaning": "죽음",
+    "expression": "death and taxes"
+  },
+  "92f0229cb55357ea": {
+    "expression": "deep water"
+  },
+  "2c36edda4a68bfa5": {
+    "meaning": "틀림없이",
+    "expression": "definitely call",
+    "example": "I will definitely call you tomorrow.",
+    "translation": "내일 꼭 전화할게요.",
+    "source": "학습용 작성 예문"
+  },
+  "c843602fbf73c425": {
+    "meaning": "도 (각도의 단위)",
+    "expression": "180 degrees"
+  },
+  "9a42ecee29adb583": {
+    "meaning": "부서",
+    "expression": "the sales department",
+    "example": "I work in the sales department.",
+    "translation": "나는 영업부에서 일해요.",
+    "source": "학습용 작성 예문"
+  },
+  "cccc09ea38b2a7b5": {
+    "expression": "destroy a building",
+    "example": "Fire destroyed the old building.",
+    "translation": "화재가 그 오래된 건물을 파괴했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "60848e18e947e145": {
+    "meaning": "형사"
+  },
+  "3823f53fff761e3f": {
+    "meaning": "발전시키다"
+  },
+  "fa9819242afa581d": {
+    "meaning": "기기"
+  },
+  "3e946ab93d0452ce": {
+    "meaning": "일기"
+  },
+  "8a161a428bc9c83f": {
+    "meaning": "직행의"
+  },
+  "a3e50ebeda3e2ab5": {
+    "meaning": "감독"
+  },
+  "ab7796c6521ba405": {
+    "meaning": "재난"
+  },
+  "5aed41a1feea3826": {
+    "meaning": "논의"
+  },
+  "40b3af47f84ba5c9": {
+    "expression": "read a document"
+  },
+  "8ad8c80f233feb92": {
+    "meaning": "2인용의"
+  },
+  "4be8755ae207a250": {
+    "expression": "double the usual price",
+    "example": "This ticket costs double the usual price.",
+    "translation": "이 표는 평소 가격의 두 배예요.",
+    "source": "학습용 작성 예문"
+  },
+  "4b8fb17174928647": {
+    "expression": "buy double",
+    "example": "I bought five apples, but she bought double.",
+    "translation": "나는 사과를 다섯 개 샀지만, 그녀는 그 두 배를 샀어요.",
+    "source": "학습용 작성 예문"
+  },
+  "0e98143411ac1ed1": {
+    "expression": "double in number",
+    "example": "The number of visitors doubled last year.",
+    "translation": "지난해 방문객 수가 두 배로 늘었어요.",
+    "source": "학습용 작성 예문"
+  },
+  "61b5a5cce9b74996": {
+    "example": "You can download the guide to your phone.",
+    "translation": "안내서를 휴대전화로 내려받을 수 있어요.",
+    "source": "학습용 작성 예문"
+  },
+  "df126c9e28dbe771": {
+    "meaning": "다운로드 파일",
+    "example": "The guide is available as a free download.",
+    "translation": "안내서는 무료로 내려받을 수 있는 파일로 제공돼요.",
+    "source": "학습용 작성 예문"
+  },
+  "c63f57c3709ea736": {
+    "meaning": "도심으로",
+    "example": "We went downtown after lunch.",
+    "translation": "우리는 점심을 먹은 뒤 도심으로 갔어요.",
+    "source": "학습용 작성 예문"
+  },
+  "a4d2cbad08bd21b8": {
+    "expression": "the heart of downtown",
+    "example": "Most of downtown is quiet on Sundays.",
+    "translation": "일요일에는 도심 대부분이 조용해요.",
+    "source": "학습용 작성 예문"
+  },
+  "282d84576ee02871": {
+    "expression": "downtown streets",
+    "example": "The downtown streets are busy.",
+    "translation": "도심의 거리는 붐벼요.",
+    "source": "학습용 작성 예문"
+  },
+  "642b6c4da107121a": {
+    "meaning": "연극"
+  },
+  "b923067188ffd201": {
+    "meaning": "그림"
+  },
+  "8b0e9558086bc05a": {
+    "expression": "a weird dream"
+  },
+  "65cef3db08ea8e58": {
+    "expression": "dream of someone"
+  },
+  "a30f329dd6f38010": {
+    "expression": "do the driving",
+    "example": "Can you do the driving today?",
+    "translation": "오늘은 네가 운전을 맡아 줄 수 있니?",
+    "source": "학습용 작성 예문"
+  },
+  "743417175292d10d": {
+    "meaning": "마약"
+  },
+  "66fdc47c3b5c814e": {
+    "meaning": "건조한",
+    "expression": "a dry throat"
+  },
+  "ad54dcc5464c58cd": {
+    "meaning": "말리다"
+  },
+  "0abfbb7d179a586f": {
+    "expression": "earn money"
+  },
+  "1badd04b5f3b5a6c": {
+    "expression": "not like cookies either"
+  },
+  "b1c3e5a18076d9a4": {
+    "example": "An electrical engineer checked the system.",
+    "translation": "전기 기술자가 시스템을 점검했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "f11ba822533962ad": {
+    "expression": "take an elevator",
+    "example": "We took the elevator to the third floor.",
+    "translation": "우리는 엘리베이터를 타고 3층으로 갔어요.",
+    "source": "학습용 작성 예문"
+  },
+  "9b6e1a43bd046738": {
+    "meaning": "직원"
+  },
+  "685a108773b4e21d": {
+    "meaning": "텅 빈",
+    "expression": "an empty bottle",
+    "example": "The bottle is empty.",
+    "translation": "병이 비어 있어요.",
+    "source": "학습용 작성 예문"
+  },
+  "fc71ba1452808ca7": {
+    "meaning": "엔진"
+  },
+  "c97ff7a4ecb469eb": {
+    "expression": "a software engineer"
+  },
+  "1e3b07d9b8d6f7f5": {
+    "expression": "enter the room"
+  },
+  "6deba7b7d48c4c6c": {
+    "expression": "climbing equipment"
+  },
+  "3df796c467957fff": {
+    "expression": "especially difficult"
+  },
+  "138806a3b3111bfb": {
+    "meaning": "에세이"
+  },
+  "4628ee2a534cd041": {
+    "expression": "have no evidence"
+  },
+  "e987f3c8a9bcec93": {
+    "expression": "excellent wine"
+  },
+  "d571a289f1738207": {
+    "expression": "everyone except Tom"
+  },
+  "bb70d1cfc2f08c4f": {
+    "expression": "exist on other planets",
+    "example": "Does life exist on other planets?",
+    "translation": "다른 행성에도 생명체가 존재할까요?",
+    "source": "학습용 작성 예문"
+  },
+  "cfc3e70e1fdec319": {
+    "expression": "experience in teaching"
+  },
+  "26df39c0aa77be8d": {
+    "meaning": "전문적인"
+  },
+  "7fa3461577dc6afe": {
+    "expression": "a clear explanation",
+    "example": "The teacher gave a clear explanation.",
+    "translation": "선생님이 명확한 설명을 해 주셨어요.",
+    "source": "학습용 작성 예문"
+  },
+  "0214b69182705a5a": {
+    "expression": "my favorite expression"
+  },
+  "b0935e3925ecacae": {
+    "meaning": "극심한"
+  },
+  "ad6eb44bcc5141c4": {
+    "expression": "extremely limited"
+  },
+  "76c1c218c4406618": {
+    "expression": "a tire factory"
+  },
+  "0205736496c87088": {
+    "expression": "fail to fix a clock",
+    "example": "I tried to fix the clock, but I failed.",
+    "translation": "시계를 고치려고 했지만 실패했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "f9c983c379edb53f": {
+    "expression": "be fair to someone"
+  },
+  "48f8cbfd8682a0b5": {
+    "meaning": "선풍기"
+  },
+  "fe1ddbbd62ece89a": {
+    "meaning": "농업"
+  },
+  "50c3169c2c77a8df": {
+    "meaning": "패션",
+    "expression": "changes in fashion"
+  },
+  "3fc659362da7344a": {
+    "expression": "fears come true"
+  },
+  "8a5a8a8749b20e3d": {
+    "meaning": "기능"
+  },
+  "5ec8725e71ee83ec": {
+    "expression": "feed a dog"
+  },
+  "d4e4374fb58d5fff": {
+    "meaning": "암컷의",
+    "example": "A female bird is sitting on the nest.",
+    "translation": "암컷 새 한 마리가 둥지 위에 앉아 있어요.",
+    "source": "학습용 작성 예문"
+  },
+  "9d9a5095f3fe35b7": {
+    "meaning": "암컷",
+    "example": "The female is larger than the male.",
+    "translation": "암컷이 수컷보다 커요.",
+    "source": "학습용 작성 예문"
+  },
+  "4b0b77023e1eae76": {
+    "meaning": "소설",
+    "expression": "science fiction"
+  },
+  "7e0393d08699a565": {
+    "meaning": "분야"
+  },
+  "aeec7a1d7b95bff3": {
+    "expression": "fight over a toy",
+    "example": "The children fought over a toy.",
+    "translation": "아이들은 장난감 하나를 두고 싸웠어요.",
+    "source": "학습용 작성 예문"
+  },
+  "de14b154808344d1": {
+    "expression": "during a fight"
+  },
+  "e597537219b240dd": {
+    "meaning": "수치"
+  },
+  "3eb64296bd2f4163": {
+    "expression": "a film based on a novel"
+  },
+  "ddbcfb973852d79c": {
+    "expression": "break a finger"
+  },
+  "0e546f1fbb9d485d": {
+    "meaning": "경기 등의 마지막 부분"
+  },
+  "1029c98c2cd7ca0c": {
+    "expression": "go fishing with a friend"
+  },
+  "f976c8f57741f871": {
+    "expression": "fix a computer"
+  },
+  "e383c82e4826d05b": {
+    "meaning": "비행기 여행"
+  },
+  "7517a0f27d1af750": {
+    "expression": "the following morning",
+    "example": "The following morning, the snowman had completely melted.",
+    "translation": "다음 날 아침, 눈사람은 완전히 녹아 있었어요.",
+    "source": "학습용 작성 예문"
+  },
+  "0b18940660d27796": {
+    "expression": "a foreign country"
+  },
+  "73e8581fff1e80cd": {
+    "expression": "fortunately for us",
+    "example": "Fortunately for us, the rain stopped before we left.",
+    "translation": "우리에게 다행스럽게도, 출발하기 전에 비가 그쳤어요.",
+    "source": "학습용 작성 예문"
+  },
+  "69990ba905625a7c": {
+    "expression": "fresh pasta"
+  },
+  "54f0c2d0df1f49f0": {
+    "meaning": "미술관"
+  },
+  "b3fb6b51fd5fab0e": {
+    "meaning": "틈"
+  },
+  "2b46d6b1484fe9f0": {
+    "expression": "collect garbage"
+  },
+  "1dffc0248c90640e": {
+    "meaning": "휘발유",
+    "expression": "gas prices"
+  },
+  "90910d6d0f6a5026": {
+    "meaning": "문"
+  },
+  "f0e44e9a1134cc32": {
+    "meaning": "전반적인"
+  },
+  "dec52f1f69df8bed": {
+    "expression": "a great gift"
+  },
+  "d6b53bcbcbc86707": {
+    "expression": "reach a goal"
+  },
+  "4416845d3b1ccfa6": {
+    "meaning": "신",
+    "expression": "a Greek god",
+    "example": "Zeus is a god in Greek mythology.",
+    "translation": "제우스는 그리스 신화에 나오는 신이에요.",
+    "source": "학습용 작성 예문"
+  },
+  "39c70d213c30a720": {
+    "expression": "gold bars"
+  },
+  "d18e6766bbf3e25a": {
+    "expression": "play golf"
+  },
+  "ec0489d20750317f": {
+    "meaning": "도움이 되는 것"
+  },
+  "9cabba51cfed9d06": {
+    "meaning": "잔디"
+  },
+  "d0c9fdb1d36da827": {
+    "meaning": "맞이하다"
+  },
+  "8d6565d5007cf10e": {
+    "meaning": "식료품점",
+    "expression": "a grocery store"
+  },
+  "f4fda69565db03c8": {
+    "meaning": "땅"
+  },
+  "5969ca5f127f43b4": {
+    "meaning": "남자"
+  },
+  "5d0385bf00fc8ec4": {
+    "expression": "form a bad habit"
+  },
+  "6c9b2b0f4b84e7d8": {
+    "meaning": "홀 (큰 방이나 강당)"
+  },
+  "f76993caa6c1db9d": {
+    "meaning": "행복하게"
+  },
+  "7353f4eb711d3782": {
+    "expression": "a slight headache"
+  },
+  "97e69d718b00c12f": {
+    "meaning": "더위",
+    "expression": "be bothered by the heat"
+  },
+  "8578895e94bd1a46": {
+    "meaning": "데우다"
+  },
+  "c4e60027594c66a4": {
+    "expression": "too heavy to carry"
+  },
+  "91832e09e24bfac0": {
+    "meaning": "숨기다",
+    "expression": "hide a cake"
+  },
+  "c478bbd6c71a2910": {
+    "meaning": "인기작"
+  },
+  "9abf11934cd100c0": {
+    "expression": "hold a bag",
+    "example": "Can you hold my bag for a moment?",
+    "translation": "잠깐 내 가방을 들어 줄 수 있나요?",
+    "source": "학습용 작성 예문"
+  },
+  "c62a94dac99fadd2": {
+    "expression": "a hole in a bucket"
+  },
+  "b9f79fcb065c4fb4": {
+    "expression": "a national holiday"
+  },
+  "03edc9571945f588": {
+    "meaning": "자기 지역의"
+  },
+  "3831bc9056520a61": {
+    "expression": "the last hope"
+  },
+  "6064380e32a4a5e1": {
+    "expression": "human desire"
+  },
+  "03ea86deb362dee9": {
+    "expression": "humans and animals",
+    "example": "Humans and other animals need water to live.",
+    "translation": "인간과 다른 동물들은 살아가는 데 물이 필요해요.",
+    "source": "학습용 작성 예문"
+  },
+  "10447f2536435d95": {
+    "meaning": "다치게 하다",
+    "expression": "hurt your knee",
+    "example": "I hurt my knee when I fell.",
+    "translation": "나는 넘어지면서 무릎을 다쳤어요.",
+    "source": "학습용 작성 예문"
+  },
+  "be262ec2a8f3b89f": {
+    "meaning": "다친"
+  },
+  "20885c306789f396": {
+    "meaning": "식별하다"
+  },
+  "e58dccae950ef2f9": {
+    "expression": "a serious illness"
+  },
+  "ffa098a3267bc9a6": {
+    "meaning": "이미지 (그림이나 사진)",
+    "expression": "image editing software"
+  },
+  "93b4fd36517333fe": {
+    "meaning": "늘리다",
+    "expression": "increase prices"
+  },
+  "753662b7bb1f11e6": {
+    "meaning": "굉장한"
+  },
+  "9e38d04504bae76a": {
+    "meaning": "개별적인"
+  },
+  "fe1934ef41502799": {
+    "expression": "a serious injury"
+  },
+  "4ebcfc5b4fcaba49": {
+    "expression": "not an insect"
+  },
+  "6f2b496af1482dc2": {
+    "meaning": "~ 안에"
+  },
+  "3115651f4894e8c4": {
+    "meaning": "안쪽"
+  },
+  "9699b27184eda2bc": {
+    "meaning": "지시"
+  },
+  "115c58922a566b17": {
+    "meaning": "강사"
+  },
+  "3f72bc8a073e1ce0": {
+    "expression": "an intelligent person"
+  },
+  "c459b8636078475b": {
+    "meaning": "서론"
+  },
+  "621c8a4a6be8f2d6": {
+    "expression": "invent a machine",
+    "example": "She invented a machine that sorts plastic bottles.",
+    "translation": "그녀는 플라스틱 병을 분류하는 기계를 발명했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "c2ce784635cf7c05": {
+    "expression": "demonstrate an invention"
+  },
+  "f71df6090ee2f453": {
+    "meaning": "초대장"
+  },
+  "a10e9777fd9808e8": {
+    "expression": "invite a friend",
+    "example": "Would you like to invite a friend to dinner?",
+    "translation": "저녁 식사에 친구를 초대하고 싶나요?",
+    "source": "학습용 작성 예문"
+  },
+  "46c91393613cf672": {
+    "meaning": "수반하다"
+  },
+  "123acd4ac731b9bc": {
+    "meaning": "물건"
+  },
+  "f2e8cac6dd4a686e": {
+    "meaning": "장신구"
+  },
+  "ae81170d9b707bf6": {
+    "expression": "joke about something",
+    "example": "Please do not joke about my mistake.",
+    "translation": "내 실수를 두고 농담하지 말아 주세요.",
+    "source": "학습용 작성 예문"
+  },
+  "76b9edaa5b1217d3": {
+    "meaning": "뛰어넘다"
+  },
+  "3fa7b2d820b280a2": {
+    "expression": "a lazy kid"
+  },
+  "39936b3cf5e89c0a": {
+    "expression": "run ten kilometers"
+  },
+  "1f6aac467cf74002": {
+    "expression": "bend your knees"
+  },
+  "0856681857f2dac8": {
+    "expression": "lend someone a knife"
+  },
+  "0aa8897dc7c085fe": {
+    "meaning": "여성"
+  },
+  "5a08f2bfafe2744a": {
+    "meaning": "램프"
+  },
+  "e9e87f7e2a1cc142": {
+    "expression": "last three hours"
+  },
+  "57efc33ec3cf51b4": {
+    "meaning": "웃음소리"
+  },
+  "85e7d88919e75af9": {
+    "meaning": "변호사",
+    "expression": "work as a lawyer"
+  },
+  "66b3eb3cefe5a2d2": {
+    "expression": "a wise leader"
+  },
+  "e9584c4902a5492f": {
+    "example": "Of the three plans, this one requires the least money.",
+    "translation": "세 가지 계획 중 이 계획에 돈이 가장 적게 들어요.",
+    "source": "학습용 작성 예문"
+  },
+  "98f0bac33c8aef60": {
+    "example": "Of the three tickets, this one costs the least.",
+    "translation": "세 장의 표 중 이 표가 가장 싸요.",
+    "source": "학습용 작성 예문"
+  },
+  "9b070ce518011fd2": {
+    "example": "This is the least expensive hotel in town.",
+    "translation": "이곳은 마을에서 가장 덜 비싼 호텔이에요.",
+    "source": "학습용 작성 예문"
+  },
+  "02e287a7d0d9ac86": {
+    "example": "Her lecture on history starts at two.",
+    "translation": "그녀의 역사 강의는 두 시에 시작해요.",
+    "source": "학습용 작성 예문"
+  },
+  "29356a5898250fd1": {
+    "example": "She lectures on history at the university.",
+    "translation": "그녀는 그 대학교에서 역사를 강의해요.",
+    "source": "학습용 작성 예문"
+  },
+  "a8c55f4f21ad2635": {
+    "expression": "lend someone money"
+  },
+  "4b776ae079821640": {
+    "example": "Use less sugar in this cake.",
+    "translation": "이 케이크에는 설탕을 더 적게 쓰세요.",
+    "source": "학습용 작성 예문"
+  },
+  "ddc1e16c885bc9e6": {
+    "example": "I used to drink a lot of coffee, but now I drink less.",
+    "translation": "예전에는 커피를 많이 마셨지만 지금은 더 적게 마셔요.",
+    "source": "학습용 작성 예문"
+  },
+  "bf81863c4030473c": {
+    "example": "This cake is less sweet than that one.",
+    "translation": "이 케이크는 저 케이크보다 덜 달아요.",
+    "source": "학습용 작성 예문"
+  },
+  "2ff74e6aeb45f91b": {
+    "meaning": "수준"
+  },
+  "9cadd2e113fbd4bd": {
+    "meaning": "불을 붙이다"
+  },
+  "6b2b60bfb9277283": {
+    "expression": "be likely to make a mistake"
+  },
+  "ebbf2d7aecea5f82": {
+    "meaning": "링크"
+  },
+  "ff1c95cb69af190a": {
+    "meaning": "듣는 사람"
+  },
+  "4aea3e9e83e92c10": {
+    "meaning": "조금 (a little)"
+  },
+  "d55032310d8d473c": {
+    "expression": "lock the door"
+  },
+  "e36a20d91892047a": {
+    "meaning": "잠금장치"
+  },
+  "db8efa4e530530a5": {
+    "expression": "a lower price"
+  },
+  "fd7e80399f3a1cd7": {
+    "meaning": "우편물"
+  },
+  "c2d0f967ffeab6b0": {
+    "expression": "mail a package"
+  },
+  "704d7963c6260e16": {
+    "meaning": "수컷의",
+    "example": "The male bird has bright feathers.",
+    "translation": "수컷 새는 밝은 색의 깃털을 가지고 있어요.",
+    "source": "학습용 작성 예문"
+  },
+  "7a24c25958841a5d": {
+    "meaning": "수컷",
+    "example": "The male is smaller than the female.",
+    "translation": "수컷이 암컷보다 작아요.",
+    "source": "학습용 작성 예문"
+  },
+  "3d6440de1f8de2de": {
+    "meaning": "어렵게 해내다",
+    "expression": "manage to do something"
+  },
+  "d7e59079a7f6c901": {
+    "meaning": "태도"
+  },
+  "e5099727c974d993": {
+    "meaning": "표시"
+  },
+  "b8020329b52f2990": {
+    "expression": "a light material"
+  },
+  "80b9c68e70f89c96": {
+    "expression": "be good at math"
+  },
+  "5a900e134c172c24": {
+    "expression": "study mathematics"
+  },
+  "0631596982366483": {
+    "meaning": "사안"
+  },
+  "56e9ccca7495b7fd": {
+    "meaning": "중요하다"
+  },
+  "b745cf29c1952a5b": {
+    "expression": "may take an hour"
+  },
+  "609a416517723030": {
+    "meaning": "의료의",
+    "expression": "medical equipment"
+  },
+  "4d1aeb485debd2a2": {
+    "expression": "might be late"
+  },
+  "849fe702321052e8": {
+    "expression": "change your mind"
+  },
+  "9817ea7dafdbc8ac": {
+    "meaning": "없어진"
+  },
+  "f552974b7de3aaa7": {
+    "expression": "a small monkey"
+  },
+  "dbac6cb8c45a021d": {
+    "expression": "a full moon"
+  },
+  "466f1132a69538f4": {
+    "expression": "ride a motorcycle"
+  },
+  "729c86e6e1be8c2b": {
+    "meaning": "음악의",
+    "expression": "a musical instrument"
+  },
+  "f27f6a348f26de69": {
+    "expression": "a professional musician"
+  },
+  "2acce4b3e5841426": {
+    "expression": "a narrow path"
+  },
+  "487ad505537b6c40": {
+    "expression": "nearly drown"
+  },
+  "ed994b3c87c91ab9": {
+    "expression": "not necessary"
+  },
+  "b6b7e130749118c3": {
+    "meaning": "불안한",
+    "expression": "feel nervous"
+  },
+  "45d93b9e9a9692bb": {
+    "meaning": "네트워크"
+  },
+  "460b71524ef6a1cd": {
+    "expression": "a normal pulse"
+  },
+  "e49747e4d17db657": {
+    "meaning": "보통"
+  },
+  "cf0e07e80302cfd6": {
+    "expression": "notice a difference"
+  },
+  "8e2b09910a343ba1": {
+    "meaning": "제공하다"
+  },
+  "7fb1c22d9061f52b": {
+    "expression": "withdraw an offer"
+  },
+  "3bef69fd4fa0a087": {
+    "meaning": "경찰관"
+  },
+  "3fea3a7ce8c208b5": {
+    "meaning": "석유",
+    "expression": "make a fortune in oil"
+  },
+  "b89b6598a7fe0aca": {
+    "meaning": "~ 위로"
+  },
+  "0d899efea38d71d9": {
+    "meaning": "선택지"
+  },
+  "7bae50875c337b2d": {
+    "meaning": "단체",
+    "expression": "an international organization"
+  },
+  "d1bcf189b8d63a4e": {
+    "meaning": "준비하다"
+  },
+  "82aa044700b9d6af": {
+    "meaning": "원래의"
+  },
+  "1c9c0c1f660ff088": {
+    "expression": "do the work ourselves"
+  },
+  "0510076bd540f1d4": {
+    "meaning": "~ 밖에",
+    "example": "The children are waiting outside the house.",
+    "translation": "아이들은 집 밖에서 기다리고 있어요.",
+    "source": "학습용 작성 예문"
+  },
+  "632f504c8c33e366": {
+    "example": "We painted the outside wall blue.",
+    "translation": "우리는 외벽을 파란색으로 칠했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "f284e429d1dff76d": {
+    "expression": "own a dog"
+  },
+  "d00ba04aedb81c7f": {
+    "expression": "the owner of a company"
+  },
+  "a92cd37ca21ad69f": {
+    "example": "I packed my bag for the weekend trip.",
+    "translation": "나는 주말 여행을 위해 가방에 짐을 쌌어요.",
+    "source": "학습용 작성 예문"
+  },
+  "e095477e590bcf11": {
+    "expression": "pain in your knee",
+    "example": "I felt a sharp pain in my knee.",
+    "translation": "나는 무릎에 날카로운 통증을 느꼈어요.",
+    "source": "학습용 작성 예문"
+  },
+  "002923057a066d12": {
+    "meaning": "일정한 양식이나 규칙",
+    "expression": "recognize patterns"
+  },
+  "e2a3a141ec9b7d9f": {
+    "meaning": "평온",
+    "expression": "leave someone in peace"
+  },
+  "a33af27b50deb21f": {
+    "meaning": "1센트 동전"
+  },
+  "1adf4fe8badae16a": {
+    "expression": "per month"
+  },
+  "512e04fc150e8c67": {
+    "meaning": "퍼센트 (백분율의 단위)",
+    "example": "Ten percent of one hundred is ten.",
+    "translation": "100의 10퍼센트는 10이에요.",
+    "source": "학습용 작성 예문"
+  },
+  "f6b337446318b235": {
+    "example": "The store offers a ten percent discount.",
+    "translation": "그 가게는 10퍼센트 할인을 제공해요.",
+    "source": "학습용 작성 예문"
+  },
+  "5fe77cfef6f6506d": {
+    "example": "This ticket is ten percent cheaper online.",
+    "translation": "이 표는 온라인에서 10퍼센트 더 저렴해요.",
+    "source": "학습용 작성 예문"
+  },
+  "853c98377f7ac334": {
+    "meaning": "공연하다"
+  },
+  "a3356117de7986b5": {
+    "expression": "perhaps tomorrow",
+    "example": "Perhaps we can meet tomorrow.",
+    "translation": "아마 내일 만날 수 있을 거예요.",
+    "source": "학습용 작성 예문"
+  },
+  "7cc933f387075d5e": {
+    "expression": "a friendly personality",
+    "example": "She has a friendly personality.",
+    "translation": "그녀는 친근한 성격이에요.",
+    "source": "학습용 작성 예문"
+  },
+  "d1ce59b4cfc826fc": {
+    "expression": "keep a pet",
+    "example": "Our family keeps a rabbit as a pet.",
+    "translation": "우리 가족은 토끼를 반려동물로 키워요.",
+    "source": "학습용 작성 예문"
+  },
+  "e29e9c33a0907125": {
+    "expression": "pick apples",
+    "example": "We picked apples from the tree.",
+    "translation": "우리는 나무에서 사과를 땄어요.",
+    "source": "학습용 작성 예문"
+  },
+  "5002d4b84a025b2d": {
+    "expression": "plant a tree"
+  },
+  "172e3f4473f17c7e": {
+    "expression": "a clean plate"
+  },
+  "b03a7ce8496ebeb6": {
+    "meaning": "승강장",
+    "expression": "from platform five"
+  },
+  "b7f24a0553f4e44e": {
+    "meaning": "기쁜"
+  },
+  "6e324c90d346c7ae": {
+    "expression": "the population of a town",
+    "example": "The population of our town is growing.",
+    "translation": "우리 마을의 인구가 늘고 있어요.",
+    "source": "학습용 작성 예문"
+  },
+  "6fbbcb06c4fdab5d": {
+    "meaning": "소유물"
+  },
+  "9bcfe6206cd1e25a": {
+    "meaning": "전력"
+  },
+  "764eaa2a7ea1a887": {
+    "expression": "predict how someone will feel"
+  },
+  "1080224424f392de": {
+    "meaning": "발표하다"
+  },
+  "732bd587e457764e": {
+    "meaning": "회사 대표"
+  },
+  "3edd93f50d65404a": {
+    "meaning": "상",
+    "expression": "win first prize"
+  },
+  "704ac19153932d62": {
+    "meaning": "과정"
+  },
+  "8db95369c7b8e4ad": {
+    "expression": "produce machines"
+  },
+  "19fd123083f18877": {
+    "meaning": "직업으로 하는",
+    "expression": "a professional musician"
+  },
+  "065ff1cf1e3b5b93": {
+    "meaning": "프로필 (간단한 소개)"
+  },
+  "b863e256f56f3dde": {
+    "meaning": "발전"
+  },
+  "7e36a245afc0bec2": {
+    "expression": "promise not to tell anyone"
+  },
+  "9ba383919e0cc19c": {
+    "expression": "pronounce a name"
+  },
+  "ade9bb1bc1465b0e": {
+    "expression": "protect your head"
+  },
+  "7b04b300babf4592": {
+    "expression": "a public park",
+    "example": "This public park is open to everyone.",
+    "translation": "이 공원은 누구나 이용할 수 있는 공공 공원이에요.",
+    "source": "학습용 작성 예문"
+  },
+  "f670d122c57e37fa": {
+    "meaning": "출판하다"
+  },
+  "547d0490002429f4": {
+    "expression": "push a wheelchair"
+  },
+  "b5f8d090317482f3": {
+    "expression": "of the same quality"
+  },
+  "c286f39082596074": {
+    "expression": "quality over quantity"
+  },
+  "eb71078582fac0d4": {
+    "meaning": "여왕"
+  },
+  "543bf056f4f55096": {
+    "meaning": "의문을 제기하다"
+  },
+  "4a999a1a27f86a67": {
+    "meaning": "요금"
+  },
+  "546d18967fcea73f": {
+    "meaning": "꽤",
+    "expression": "rather busy"
+  },
+  "7b7cf247ec10246f": {
+    "meaning": "알아차리다",
+    "expression": "realize you are lost"
+  },
+  "0dfd1e68a0b99517": {
+    "expression": "receive a letter"
+  },
+  "168cd93f1dbf79ee": {
+    "meaning": "접수처"
+  },
+  "5031c805925f2236": {
+    "expression": "recognize patterns"
+  },
+  "a4f7e9a03dec0cf9": {
+    "expression": "recommend doing something"
+  },
+  "edc5dbe7137fd1e4": {
+    "expression": "beat a record"
+  },
+  "0cfe94787a643244": {
+    "meaning": "녹음하다"
+  },
+  "c29d8ce9bb968aa7": {
+    "meaning": "녹음물"
+  },
+  "a523f3b92be85600": {
+    "meaning": "참조하다"
+  },
+  "055fc173bb761b2e": {
+    "expression": "in the refrigerator"
+  },
+  "910cf4240f714dc5": {
+    "expression": "refuse to move"
+  },
+  "961e7224a55031bd": {
+    "meaning": "단골의"
+  },
+  "c91dae819205fa7e": {
+    "expression": "human relationships"
+  },
+  "5b0d0252173be3bc": {
+    "meaning": "답장하다",
+    "expression": "reply to an email"
+  },
+  "1574e9e66b03b1df": {
+    "meaning": "신고하다"
+  },
+  "5b8c14fc6d72a418": {
+    "expression": "research and development"
+  },
+  "4c7614195963ef26": {
+    "meaning": "연구하다"
+  },
+  "156ac05a7b9ab471": {
+    "meaning": "연구원"
+  },
+  "fdeb9fe9a8742879": {
+    "meaning": "응답"
+  },
+  "5be649fa5d078051": {
+    "expression": "get some time to rest"
+  },
+  "f544fe6fed354fb4": {
+    "meaning": "서평"
+  },
+  "f8fc2025e28ba677": {
+    "expression": "review a case"
+  },
+  "a20d1fbc6ae0cbd8": {
+    "meaning": "타고 가는 것"
+  },
+  "03e362b48329969d": {
+    "expression": "wear a ring"
+  },
+  "aca98b66eceb0fea": {
+    "meaning": "뜨다 (해가)",
+    "expression": "the sun rises"
+  },
+  "330888efcadb27ad": {
+    "expression": "a large rock"
+  },
+  "bf0247b98dbe871f": {
+    "expression": "a green roof"
+  },
+  "d7c3cc7e1f0b4e47": {
+    "meaning": "반대 방향으로",
+    "expression": "turn round"
+  },
+  "74218af0e3386c4b": {
+    "meaning": "~ 주위에"
+  },
+  "35868655e066c490": {
+    "meaning": "달리기 선수"
+  },
+  "96beb14a2c95c41a": {
+    "meaning": "슬프게"
+  },
+  "6a9ee52de8c35073": {
+    "expression": "a safe place",
+    "example": "This is a safe place for children to play.",
+    "translation": "이곳은 아이들이 놀기에 안전한 장소예요.",
+    "source": "학습용 작성 예문"
+  },
+  "73f226d991ad786d": {
+    "meaning": "요트 타기"
+  },
+  "13d195c1512a2e79": {
+    "meaning": "봉급"
+  },
+  "d8c0297b578dea9c": {
+    "meaning": "판매"
+  },
+  "e0f88f4c2ef39247": {
+    "example": "Turn off the lights to save energy.",
+    "translation": "에너지를 절약하려면 불을 끄세요.",
+    "source": "학습용 작성 예문"
+  },
+  "74aa07a93b5cd58c": {
+    "meaning": "현장",
+    "expression": "arrive on the scene"
+  },
+  "c9391cf38b2bdc20": {
+    "expression": "swim in the sea"
+  },
+  "5b13ef2775e76ed5": {
+    "meaning": "검색"
+  },
+  "d4b8a027fb45d848": {
+    "meaning": "검색하다"
+  },
+  "12c5a086a15a8e68": {
+    "expression": "a favorite season"
+  },
+  "7c292f87aae95f90": {
+    "expression": "keep something secret"
+  },
+  "739c4b549cde3d93": {
+    "expression": "reveal a secret"
+  },
+  "0af2aaa1c0b4b6b0": {
+    "expression": "seem to be busy"
+  },
+  "5a396591dca7062b": {
+    "expression": "a sense of beauty"
+  },
+  "7b1f593d7cfb5574": {
+    "meaning": "별개의"
+  },
+  "252d3f74194576e3": {
+    "meaning": "연속되는 일련의 것"
+  },
+  "d516eeeb089e0c69": {
+    "meaning": "심각한"
+  },
+  "7ec5ea9c13ab18d3": {
+    "meaning": "응대하다",
+    "expression": "serve a customer",
+    "example": "A friendly waiter served us at the cafe.",
+    "translation": "카페에서 친절한 웨이터가 우리를 응대했어요.",
+    "source": "학습용 작성 예문"
+  },
+  "417424170b23acb0": {
+    "meaning": "몇몇의",
+    "example": "I bought several books yesterday.",
+    "translation": "나는 어제 책을 몇 권 샀어요.",
+    "source": "학습용 작성 예문"
+  },
+  "acc0eb2df4dff2b2": {
+    "example": "I bought ten books and have read several already.",
+    "translation": "나는 책을 열 권 샀고 벌써 그중 몇 권을 읽었어요.",
+    "source": "학습용 작성 예문"
+  },
+  "d98744775955db2a": {
+    "example": "Shake the bottle gently before you open it.",
+    "translation": "병을 열기 전에 부드럽게 흔드세요.",
+    "source": "학습용 작성 예문"
+  },
+  "bbd57fc86bfbbd4f": {
+    "meaning": "한 장 (종이 등의)"
+  },
+  "849584771a898b33": {
+    "expression": "on a ship"
+  },
+  "b36393430a3bb7f8": {
+    "expression": "shout something"
+  },
+  "ca8334e3e931942c": {
+    "expression": "shut the window",
+    "example": "Please shut the window before you leave.",
+    "translation": "나가기 전에 창문을 닫아 주세요.",
+    "source": "학습용 작성 예문"
+  },
+  "9b29dd6365d6d2a8": {
+    "meaning": "편 (지지하는 쪽)",
+    "expression": "on our side"
+  },
+  "16f7d67af4878c66": {
+    "meaning": "신호",
+    "expression": "a good sign"
+  },
+  "22220f9d03a05b19": {
+    "expression": "sign your name"
+  },
+  "bf38c23fb8d9a155": {
+    "expression": "the value of silver"
+  },
+  "cd831507323cd0f5": {
+    "meaning": "은으로 된"
+  },
+  "de2017fa31fb0fea": {
+    "expression": "a simple recipe",
+    "example": "This is a simple recipe for soup.",
+    "translation": "이것은 간단한 수프 조리법이에요.",
+    "source": "학습용 작성 예문"
+  },
+  "5396a4e35025f354": {
+    "meaning": "~ 이후로",
+    "expression": "since high school"
+  },
+  "09d845d626cc99a8": {
+    "meaning": "1인용의",
+    "expression": "a single room"
+  },
+  "04c2b84a433ef6a7": {
+    "meaning": "싱글 음반"
+  },
+  "7c8c496b9844015f": {
+    "meaning": "남성에게 쓰는 정중한 호칭"
+  },
+  "d8050df38254139a": {
+    "meaning": "웹사이트",
+    "expression": "a useful site"
+  },
+  "a9d49295186c3c54": {
+    "meaning": "크기"
+  },
+  "495ba3fa79ac9eb9": {
+    "expression": "learn to ski"
+  },
+  "e2a3d8de2a05c18b": {
+    "meaning": "스키 (눈 위를 미끄러지는 장비)",
+    "expression": "a pair of skis"
+  },
+  "48b78f6aad896dbf": {
+    "expression": "go skiing",
+    "example": "We go skiing in the mountains every winter.",
+    "translation": "우리는 겨울마다 산으로 스키를 타러 가요.",
+    "source": "학습용 작성 예문"
+  },
+  "71313861fb40bf6f": {
+    "expression": "a cloudy sky"
+  },
+  "62747829f1a290b0": {
+    "expression": "lack of sleep"
+  },
+  "ce044f65853dc8fb": {
+    "meaning": "냄새를 맡다",
+    "expression": "smell perfume"
+  },
+  "6ce502761c106836": {
+    "expression": "see someone smile"
+  },
+  "ba1a40bdddb7eefd": {
+    "expression": "use soap and water"
+  },
+  "e4822832dca903fe": {
+    "expression": "play soccer",
+    "example": "We play soccer in the park on Sundays.",
+    "translation": "우리는 일요일마다 공원에서 축구를 해요.",
+    "source": "학습용 작성 예문"
+  },
+  "9a08735073c219ad": {
+    "expression": "a social problem",
+    "example": "Unemployment is a serious social problem.",
+    "translation": "실업은 심각한 사회 문제예요.",
+    "source": "학습용 작성 예문"
+  },
+  "0248f6f25f766e24": {
+    "expression": "a pair of socks"
+  },
+  "fc390fd2260ec434": {
+    "expression": "a solution to a problem"
+  },
+  "019bde6813d825a3": {
+    "expression": "solve a problem"
+  },
+  "73d8fdfdad75bbaf": {
+    "expression": "somewhere else"
+  },
+  "ca29edbcbc895dbd": {
+    "meaning": "어느 곳"
+  },
+  "2a4f58f413c14407": {
+    "expression": "a reliable source",
+    "example": "Please check the source of this information.",
+    "translation": "이 정보의 출처를 확인해 주세요.",
+    "source": "학습용 작성 예문"
+  },
+  "4fc4ec6412cb2594": {
+    "meaning": "말하는 사람",
+    "expression": "a native English speaker"
+  },
+  "b657b3d33cf80e41": {
+    "expression": "make a speech"
+  },
+  "bc3678157a71ffae": {
+    "expression": "at a steady speed"
+  },
+  "fbfd4cf732941d75": {
+    "expression": "be afraid of spiders"
+  },
+  "1f37c6b1fe7fc3fe": {
+    "meaning": "정사각형",
+    "expression": "draw a square",
+    "example": "Draw a square with four equal sides.",
+    "translation": "네 변의 길이가 같은 정사각형을 그리세요.",
+    "source": "학습용 작성 예문"
+  },
+  "f69bde89a5877bfe": {
+    "expression": "steal money"
+  },
+  "a55319d96ef25206": {
+    "expression": "the first step",
+    "example": "The first step is to choose a topic.",
+    "translation": "첫 번째 단계는 주제를 고르는 거예요.",
+    "source": "학습용 작성 예문"
+  },
+  "a456ad62204fea3e": {
+    "meaning": "배"
+  },
+  "56363d5d9718626d": {
+    "expression": "an ordinary storm"
+  },
+  "73bd3e4e53362781": {
+    "meaning": "가스레인지"
+  },
+  "69f6d9834ca7a471": {
+    "meaning": "일직선의"
+  },
+  "50da5fd385e833ff": {
+    "expression": "causes of stress"
+  },
+  "dcd5b261ea7e74a9": {
+    "expression": "succeed in doing something"
+  },
+  "20574e469c51f8da": {
+    "meaning": "성공적인"
+  },
+  "11b986d291eb63e1": {
+    "meaning": "그렇게 ~한",
+    "example": "It is such a nice day that we want to eat outside.",
+    "translation": "날씨가 정말 좋아서 우리는 밖에서 먹고 싶어요.",
+    "source": "학습용 작성 예문"
+  },
+  "33bb411ea972e531": {
+    "example": "This is only a suggestion, and you should treat it as such.",
+    "translation": "이것은 그저 제안일 뿐이니 그렇게 받아들여야 해요.",
+    "source": "학습용 작성 예문"
+  },
+  "9206d859b8211ae9": {
+    "meaning": "갑자기",
+    "expression": "suddenly feel worried"
+  },
+  "f5ad6f09a16e22ff": {
+    "expression": "suggest something else"
+  },
+  "014528ea80ba8d89": {
+    "expression": "a better suggestion"
+  },
+  "f2f094a66d64e872": {
+    "expression": "wear a suit"
+  },
+  "ee1fc78bbb30075f": {
+    "meaning": "부양하다",
+    "expression": "support a family"
+  },
+  "a341e772905f0f3f": {
+    "meaning": "지원"
+  },
+  "374516a2864a9d69": {
+    "meaning": "뜻밖의 일"
+  },
+  "f3c2a9522bf6b049": {
+    "expression": "surprise everyone"
+  },
+  "e8afa90f2adeb1c5": {
+    "expression": "be very surprised"
+  },
+  "8bdf5ebd7f04f1cd": {
+    "expression": "a sweet apple",
+    "example": "This apple is very sweet.",
+    "translation": "이 사과는 아주 달아요.",
+    "source": "학습용 작성 예문"
+  },
+  "02c40d2cbf50d5a7": {
+    "meaning": "사탕"
+  },
+  "42f38317bcf41710": {
+    "meaning": "상징"
+  },
+  "29267e6a93bbeae6": {
+    "meaning": "시스템"
+  },
+  "a1f840d8d9dd9dfa": {
+    "meaning": "태블릿 컴퓨터"
+  },
+  "7570ba0920cb5ab5": {
+    "meaning": "표적",
+    "expression": "aim at a target"
+  },
+  "b4eae1bb47579d6f": {
+    "meaning": "할 일"
+  },
+  "c388a616defc8764": {
+    "meaning": "맛보다",
+    "expression": "taste the milk"
+  },
+  "b6f97e1c1a25911c": {
+    "meaning": "교직",
+    "expression": "go back into teaching"
+  },
+  "99d442dde73ab72b": {
+    "expression": "science and technology"
+  },
+  "73c8172a2aca248f": {
+    "meaning": "학기"
+  },
+  "48bde952f9144069": {
+    "expression": "do the work themselves"
+  },
+  "d79351504d6a3ff1": {
+    "expression": "catch a thief"
+  },
+  "d59391ad31b7798e": {
+    "meaning": "생각"
+  },
+  "008423567c90552c": {
+    "expression": "give something some thought"
+  },
+  "b792c565536be153": {
+    "expression": "throw a ball",
+    "example": "Throw the ball to me.",
+    "translation": "내게 공을 던져 주세요.",
+    "source": "학습용 작성 예문"
+  },
+  "5c2dc02005853a7f": {
+    "expression": "tie your shoes",
+    "example": "I stopped to tie my shoes.",
+    "translation": "나는 신발 끈을 묶으려고 멈췄어요.",
+    "source": "학습용 작성 예문"
+  },
+  "064a1e76853180ed": {
+    "expression": "a new tie"
+  },
+  "f0ea9b690eac2f66": {
+    "meaning": "조언"
+  },
+  "8d4c7577cb8ab0ad": {
+    "expression": "a useful tool"
+  },
+  "482f50905e578567": {
+    "meaning": "꼭대기"
+  },
+  "89a5463a10f87901": {
+    "expression": "touch a wire"
+  },
+  "9a5dd6677252d60b": {
+    "meaning": "관광"
+  },
+  "cb7c74ecb3093629": {
+    "meaning": "관광업"
+  },
+  "4ebb4b99d1c1d19d": {
+    "expression": "a tall tower"
+  },
+  "6421372b112f35d4": {
+    "meaning": "경주로"
+  },
+  "c7617ec18ec7ab8d": {
+    "expression": "train the mind"
+  },
+  "7c69d8eab6cceb94": {
+    "meaning": "교통"
+  },
+  "f26974fb14e1f06f": {
+    "expression": "pick up trash"
+  },
+  "51f4bff8340b092b": {
+    "expression": "get into trouble",
+    "example": "I do not want to get into trouble.",
+    "translation": "나는 말썽에 휘말리고 싶지 않아요.",
+    "source": "학습용 작성 예문"
+  },
+  "e3105c45a664fb09": {
+    "meaning": "짝을 이루는"
+  },
+  "4bd079ab4048c782": {
+    "meaning": "보통의"
+  },
+  "f5fe39ae347ad0dc": {
+    "example": "Unfortunately, the shop was closed.",
+    "translation": "안타깝게도 가게가 문을 닫았어요.",
+    "expression": "unfortunately for us",
+    "source": "학습용 작성 예문"
+  },
+  "dcc0a7284a41e43b": {
+    "expression": "feel unhappy"
+  },
+  "5efb79d23d0b5123": {
+    "meaning": "제복"
+  },
+  "c8fb4666d819403c": {
+    "meaning": "학습 단원"
+  },
+  "9c9c38b7f9a9049e": {
+    "meaning": "단결한"
+  },
+  "c4089de0873de3cf": {
+    "meaning": "쓸모",
+    "expression": "have a use"
+  },
+  "8ca92c6de89c0f87": {
+    "meaning": "종류"
+  },
+  "21788ee496e1ed73": {
+    "meaning": "경치",
+    "expression": "a nice view"
+  },
+  "2d6e9d4b4e03a032": {
+    "expression": "a small village"
+  },
+  "99e4148a6260791e": {
+    "expression": "a virus infection"
+  },
+  "6ca8d30d55de27a1": {
+    "expression": "tone of voice"
+  },
+  "9c11c62d869b79bc": {
+    "meaning": "세탁"
+  },
+  "2a23e2301c9cec1d": {
+    "meaning": "빨래"
+  },
+  "5e0dfa992a33beea": {
+    "meaning": "거미줄",
+    "expression": "spin a web"
+  },
+  "eec9b54547b713f4": {
+    "meaning": "체중"
+  },
+  "b52055d79e9a7aef": {
+    "expression": "a bicycle wheel",
+    "example": "The front wheel of my bicycle is damaged.",
+    "translation": "내 자전거의 앞바퀴가 망가졌어요.",
+    "source": "학습용 작성 예문"
+  },
+  "e5cb969127064516": {
+    "meaning": "누구의 것",
+    "expression": "whose is this",
+    "example": "Whose is this blue bag?",
+    "translation": "이 파란 가방은 누구의 것인가요?",
+    "source": "학습용 작성 예문"
+  },
+  "456a93db2a4b00d2": {
+    "expression": "a strong wind",
+    "example": "A strong wind blew all night.",
+    "translation": "밤새 강한 바람이 불었어요.",
+    "source": "학습용 작성 예문"
+  },
+  "1c3485b330508a16": {
+    "meaning": "승자"
+  },
+  "ca36cae1be8b9efc": {
+    "expression": "wish I were"
+  },
+  "e1da20632091c885": {
+    "meaning": "소망"
+  },
+  "959dfbe1f7b5413b": {
+    "meaning": "목재"
+  },
+  "6e3ef7cd3bf280d3": {
+    "meaning": "작동하는"
+  },
+  "dbd3f4e9fbbb0750": {
+    "expression": "be really worried"
+  },
+  "1c8fe70cfa5546fd": {
+    "expression": "worry about something",
+    "example": "I worry about my exams.",
+    "translation": "나는 시험이 걱정돼요.",
+    "source": "학습용 작성 예문"
+  },
+  "60376d84601631bf": {
+    "expression": "could not be worse"
+  },
+  "52af51cfcf241693": {
+    "expression": "your worst fears"
+  },
+  "91d9c196fafaafdb": {
+    "expression": "not yet"
+  },
+  "4a542a94224f78e8": {
+    "meaning": "영 (0)"
   }
 }
