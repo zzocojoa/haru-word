@@ -24,3 +24,6 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - `client-request.test.mjs`: 응답 헤더/본문 제한, 취소 구분, 타이머/이벤트 정리, HTTP 오류 전달과 자동 재전송 없음.
 - `request-timeout-qa.cjs`: 불러오기 20초·저장 25초·AI 35초·복원 45초 지연, 적용 후 응답 유실, 초안 백업·재시도·늦은 응답 무시·수동 학습. 가상 시계를 이용해 실제로 수십 초씩 기다리지 않습니다. 결과는 `outputs/request-reliability/`입니다.
 - `history-performance-qa.cjs`: 365/1,825개 가상 회차를 별도 로컬 계정에 생성하고 3회씩 조회·탭·설정 저장을 측정합니다. Chromium 390px와 CPU 4배 지연이며 운영 성능/Safari 성능 검증이 아닙니다. 이 측정 중 다른 브라우저 검사는 실행하지 않는 것이 좋습니다. 결과는 `outputs/history-performance/`입니다.
+
+- `toolchain.test.mjs`: 보안 패치한 compiler를 구형 Drizzle 로더가 사용해 TypeScript CJS/ESM을 변환하고 실행하는지 검사합니다. 단순 버전 검사와 구분합니다.
+- `startup-performance-qa.cjs`: 캐시 없는 390px Chromium·CPU 4배 지연의 초기 화면 3회와 자산 크기를 측정합니다. 다른 브라우저 검사를 함께 실행하지 마세요. 실기기·운영망 성능이 아닙니다. 최종 광역 결과는 `outputs/final-audit/`입니다.
