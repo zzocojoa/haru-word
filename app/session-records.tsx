@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { FeedbackDetail } from "./sentence-feedback";
 import { entryIdFor, FAMILIARITY_TEXT, POS, RESULT_TEXT, SENTENCE_TEXT, nextAction, type Session, type Word } from '@/lib/learning';
 
 /** The same full record is shown after a pause and after completing a session. */
-export function SessionRecords({session:s,words}:{session:Session;words:Word[]}) {
+export const SessionRecords=memo(function SessionRecords({session:s,words}:{session:Session;words:Word[]}) {
  return <div className="record-cards">{s.warmupIds.length>0&&<article className="record-card"><h3>기억 깨우기 기록</h3><dl>{s.warmupIds.map(id=><div key={id}><dt>{words.find(w=>w.id===id)?.word}</dt><dd>{RESULT_TEXT[s.warmupResults?.[id]||'unmeasured']}</dd></div>)}</dl></article>}{s.ids.map(id=>{
   const r=s.records[id];const w=words.find(w=>w.id===entryIdFor(s,id));if(!r)return null;
   return <article className="record-card" key={id}>
@@ -18,4 +19,4 @@ export function SessionRecords({session:s,words}:{session:Session;words:Word[]})
    {r.aiFeedback&&<details className="notes-details"><summary>저장한 AI 교정 의견</summary><FeedbackDetail feedback={r.aiFeedback}/></details>}
   </article>;
  })}</div>;
-}
+});

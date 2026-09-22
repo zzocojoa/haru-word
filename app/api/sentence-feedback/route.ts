@@ -17,6 +17,7 @@ export async function GET(){
 }
 
 export async function POST(request:Request){
+  const started=Date.now();
   const user=await getChatGPTUser();if(!user)return json({error:'로그인이 필요합니다.'},401);
   const origin=request.headers.get('origin');
   if((origin&&origin!==new URL(request.url).origin)||request.headers.get('sec-fetch-site')==='cross-site')return json({error:'요청 출처를 확인할 수 없습니다.'},403);
@@ -41,11 +42,11 @@ export async function POST(request:Request){
     const quota=await db.prepare(FEEDBACK_QUOTA_SQL).bind(user.userId,today(),now,FEEDBACK_DAILY_LIMIT,now-10000).first<{request_count:number}>();
     if(!quota)return json({error:`잠시 뒤 다시 시도하거나 자기 점검으로 계속하세요. AI 교정은 10초 간격, 하루 ${FEEDBACK_DAILY_LIMIT}회까지 요청할 수 있어요.`},429);
     const feedback=await generateSentenceFeedback(env.google_api!,{word:word.word,pos:word.pos,meaning,sentence});
-    console.info(JSON.stringify({event:'sentence_feedback_succeeded',model:FEEDBACK_MODEL}));
+    console.info(JSON.stringify({event:'sentence_feedback_succeeded',model:FEEDBACK_MODEL,durationMs:Date.now()-started}));
     return json({feedback,remaining:FEEDBACK_DAILY_LIMIT-quota.request_count});
   }catch(error){
     const known=error instanceof FeedbackError;
-    console.error(JSON.stringify({event:'sentence_feedback_failed',code:known?error.code:'storage_or_internal'}));
+    console.error(JSON.stringify({event:'sentence_feedback_failed',durationMs:Date.now()-started,code:known?error.code:'storage_or_internal'}));
     return json({error:known?error.message:'교정을 준비하지 못했어요. 자기 점검으로 계속할 수 있어요.'},known?error.status:503);
   }
 }

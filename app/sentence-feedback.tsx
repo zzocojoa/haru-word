@@ -2,6 +2,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {Loader2,Sparkles} from 'lucide-react';
 import {GRAMMAR_TEXT,MEANING_USAGE_TEXT,sentenceFeedbackSchema,type SentenceFeedback} from '@/lib/sentence-feedback';
+import {requestJson,RequestTimeoutError,REQUEST_TIMEOUT_MS} from '@/lib/client-request';
 
 export function FeedbackDetail({feedback}:{feedback:SentenceFeedback}){
  return <div className="ai-feedback-result">
@@ -23,8 +24,7 @@ export function SentenceFeedbackPanel({sessionId,entryId,sentence,feedback,busy,
   lock.current=true;setPending(true);onPending(true);setError('');
   const controller=new AbortController();request.current=controller;
   try{
-   const response=await fetch('/api/sentence-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId,entryId,sentence:sentence.trim()}),signal:controller.signal});
-   const data=await response.json() as {error?:unknown;feedback?:unknown;remaining?:unknown};
+   const {response,data}=await requestJson<{error?:unknown;feedback?:unknown;remaining?:unknown}>('/api/sentence-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId,entryId,sentence:sentence.trim()}),signal:controller.signal},REQUEST_TIMEOUT_MS.feedback);
    if(!response.ok)throw new Error(typeof data.error==='string'?data.error:'AI 응답을 받지 못했어요. 자기 점검으로 계속해 주세요.');
    const parsed=sentenceFeedbackSchema.safeParse(data.feedback);
    if(!parsed.success)throw new Error('AI 교정 형식을 확인하지 못했어요. 자기 점검으로 계속해 주세요.');
@@ -34,7 +34,7 @@ export function SentenceFeedbackPanel({sessionId,entryId,sentence,feedback,busy,
    setRemaining(typeof data.remaining==='number'?data.remaining:undefined);
    // The shared save banner owns persistence errors and clears them after retry.
    await onFeedback(result);
-  }catch(e){if(!controller.signal.aborted)setError(e instanceof Error&&!(e instanceof SyntaxError)&&!(e instanceof TypeError)?e.message:'AI 응답을 확인하지 못했어요. 자기 점검으로 계속해 주세요.')}
+  }catch(e){if(!controller.signal.aborted)setError(e instanceof RequestTimeoutError?'AI 응답이 늦어 기다림을 끝냈어요. 문장은 그대로 남아 있으니 자기 점검으로 계속해 주세요. 요청은 사용량에 포함될 수 있어요.':e instanceof Error&&!(e instanceof SyntaxError)&&!(e instanceof TypeError)?e.message:'AI 응답을 확인하지 못했어요. 자기 점검으로 계속해 주세요.')}
   finally{lock.current=false;if(!controller.signal.aborted){setPending(false);onPending(false)}}
  }
  const unchanged=feedback?.original===sentence.trim();

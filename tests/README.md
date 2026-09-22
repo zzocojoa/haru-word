@@ -20,3 +20,7 @@ A1 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-review/`에 
 
 - `backup.test.mjs`: 백업 형식·참조·상태 전이·UTF-8 분할, 실제 SQLite를 사용한 원자적 교체·롤백·revision 충돌·계정/AI 사용량 격리. Node의 실험적 `node:sqlite`를 사용합니다.
 - `backup-qa.cjs`: 가져오기 미리보기·확인·복원·취소, 기기 간 재개·충돌, 서버 실패, 커밋 후 응답 유실, 큰 JSON 복원, 320/390/1440px·200% 글자, axe 5상태. `work/axe/package/axe.min.js`가 필요합니다. 결과는 `outputs/backup-restore/`에 저장합니다. 실제 사용자의 백업을 이 검사에 넣지 않습니다.
+
+- `client-request.test.mjs`: 응답 헤더/본문 제한, 취소 구분, 타이머/이벤트 정리, HTTP 오류 전달과 자동 재전송 없음.
+- `request-timeout-qa.cjs`: 불러오기 20초·저장 25초·AI 35초·복원 45초 지연, 적용 후 응답 유실, 초안 백업·재시도·늦은 응답 무시·수동 학습. 가상 시계를 이용해 실제로 수십 초씩 기다리지 않습니다. 결과는 `outputs/request-reliability/`입니다.
+- `history-performance-qa.cjs`: 365/1,825개 가상 회차를 별도 로컬 계정에 생성하고 3회씩 조회·탭·설정 저장을 측정합니다. Chromium 390px와 CPU 4배 지연이며 운영 성능/Safari 성능 검증이 아닙니다. 이 측정 중 다른 브라우저 검사는 실행하지 않는 것이 좋습니다. 결과는 `outputs/history-performance/`입니다.
