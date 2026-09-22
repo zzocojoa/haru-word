@@ -40,6 +40,13 @@ export function sessionRecordComplete(s:Session,r:RecordItem):boolean{
  if(s.kind==="practice"&&s.practiceMode==="sentence")return r.sentenceStatus==="written";
  return isComplete(r);
 }
+// Measurement and success are different: a checked error is measured, a skipped
+// sentence is not a completed weekly check, and monthly sentences are optional.
+export function sessionRecordMeasured(s:Session,r:RecordItem):boolean{
+ if(s.kind==="monthly"||s.practiceMode==="ko")return r.ko!=="unmeasured";
+ if(s.practiceMode==="sentence")return r.sentenceStatus!=="unmeasured";
+ return r.en!=="unmeasured"&&r.ko!=="unmeasured"&&r.sentenceStatus!=="unmeasured";
+}
 export const SENTENCE_TEXT:Record<SentenceResult,string>={written:"작성",improve:"보완 필요",unmeasured:"미측정"};
 export const KIND_TEXT:Record<Kind,string>={daily:"일일 학습",weekly:"주간 점검",monthly:"월말 쓰기",practice:"보완 연습"};
 export function nextAction(r:Pick<RecordItem,"en"|"ko"|"sentenceStatus">,s?:Session):string {
@@ -108,9 +115,9 @@ export function reviewTargets(state:State,kind:"weekly"|"monthly",period:string)
   }
  }
  // Older backups may have only progress dates, with no surviving original lesson.
- if(kind==="monthly")for(const [entryId,p]of Object.entries(state.progress))if(!represented.has(entryId)&&p.studyDates?.some(d=>d.slice(0,7)===period)){
+ if(kind==="monthly")for(const [entryId,p]of Object.entries(state.progress))if(p.studyDates?.some(d=>d.slice(0,7)===period)){
   const senses=Object.values(p.senses||{}).filter(x=>x.studyDates?.some(d=>d.slice(0,7)===period));
-  for(const sense of senses.length?senses:[p]){const meaning=sense.meaning||"";targets.set(targetIdentity(entryId,meaning),{entryId,meaning,familiarity:p.familiarity,historicalMeaningUnknown:!senses.length});}
+  for(const sense of senses.length?senses:represented.has(entryId)?[]:[p]){const meaning=sense.meaning||"",key=targetIdentity(entryId,meaning);if(!targets.has(key))targets.set(key,{entryId,meaning,familiarity:p.familiarity,historicalMeaningUnknown:!senses.length});}
  }
  return [...targets.values()].sort((a,b)=>hash(period+a.entryId)-hash(period+b.entryId)||a.meaning.localeCompare(b.meaning));
 }
@@ -122,6 +129,14 @@ export function senseProgress(p:Progress|undefined,meaning:string):SenseProgress
 }
 export function allSenses(p:Progress|undefined):SenseProgress[]{const senses={...p?.senses};if(p?.meaning)senses[p.meaning.trim()]=senseProgress(p,p.meaning);return Object.values(senses);}
 export function hasReviewWork(p:Progress|undefined):boolean{return !!p?.needsReview||allSenses(p).some(x=>x.needsReview);}
+export function learningMetrics(state:State){
+ const progress=Object.values(state.progress);
+ const measured=progress.flatMap(p=>{const senses=allSenses(p);return (senses.length?senses:[p]).flatMap(x=>[x.en,x.ko])}).filter(r=>r&&r!=="unmeasured");
+ return {learned:progress.filter(p=>p.lastStudied).length,officialLearned:progress.filter(p=>p.lastStudied&&!p.personal).length,personalLearned:progress.filter(p=>p.lastStudied&&p.personal).length,carry:progress.filter(hasReviewWork).length,measured:measured.length,successes:measured.filter(r=>r==="independent").length};
+}
+export function needsInitialAssessment(state:State):boolean{
+ return !state.settings.assessments[state.settings.level]?.completed&&!Object.values(state.progress).some(p=>p.lastStudied||hasReviewWork(p));
+}
 export function storeSense(p:Progress|undefined,sense:SenseProgress):Progress{
  const meaning=sense.meaning?.trim()||"";const old=p?.meaning?senseProgress(p,p.meaning):undefined;
  const senses={...p?.senses,...(old?{[p!.meaning!.trim()]:old}:{}),[meaning]:{...sense,meaning}};
@@ -134,7 +149,7 @@ export function selectSense(p:Progress|undefined,sense:SenseProgress):Progress{
  const stored=storeSense(p,selected);return {...stored,...selected,studyDates:stored.studyDates,lastStudied:stored.lastStudied,lastReviewed:stored.lastReviewed};
 }
 export function pendingReviews(state:State):Session[]{return Object.values(state.sessions).filter(s=>(s.kind==="weekly"||s.kind==="monthly")&&!s.finished).sort((a,b)=>a.period.localeCompare(b.period)||a.createdAt.localeCompare(b.createdAt));}
-export function reviewRemaining(s:Session):number{return s.ids.filter(id=>{const r=s.records[id];return !r||(s.kind==="monthly"?r.ko==="unmeasured":r.en==="unmeasured"||r.ko==="unmeasured"||r.sentenceStatus==="unmeasured");}).length;}
+export function reviewRemaining(s:Session):number{return s.ids.filter(id=>!s.records[id]||!sessionRecordMeasured(s,s.records[id])).length;}
 export function missingReviewTargets(state:State,s:Session):LearningTarget[]{
  if(s.finished||(s.kind!=="weekly"&&s.kind!=="monthly"))return [];
  const assigned=new Set(s.ids.map(id=>targetIdentity(entryIdFor(s,id),s.records[id]?.meaning||"")));
@@ -166,25 +181,35 @@ function targetRecords(targets:LearningTarget[]):{ids:string[];records:Record<st
 }
 function hash(v:string):number{let h=0;for(const c of v)h=(h*31+c.charCodeAt(0))>>>0;return h;}
 export function practiceIds(state:State,mode:PracticeMode):string[]{if(mode==="repeat")return [];return Object.entries(state.progress).filter(([,p])=>mode==="known"?p.familiarity==="known":mode==="ko"?p.ko==="help"||allSenses(p).some(x=>x.ko==="help"):p.sentenceStatus==="improve"||allSenses(p).some(x=>x.sentenceStatus==="improve")).sort((a,b)=>(a[1].lastReviewed||"").localeCompare(b[1].lastReviewed||"")||hash(a[0])-hash(b[0])).slice(0,20).map(([id])=>id);}
+export function practiceTargets(state:State,mode:PracticeMode,content:(id:string)=>Content):LearningTarget[]{
+ return practiceIds(state,mode).flatMap(entryId=>{
+  const p=state.progress[entryId],choices=allSenses(p).filter(x=>mode==="ko"?x.ko==="help":mode==="sentence"?x.sentenceStatus==="improve":true);
+  return (choices.length?choices.map(x=>x.meaning||content(entryId).meaning):[dailyMeaning(p,content(entryId).meaning)]).map(meaning=>({entryId,meaning,familiarity:p?.familiarity}));
+ }).slice(0,20);
+}
 export function newSession(state:State,words:Word[],content:(id:string)=>Content,kind:Kind,date=today(),period=periodKey(kind,date),practiceMode?:PracticeMode):Session|null{
  // Resume the assigned daily work before allocating another same-day session.
  if(kind==="daily"&&Object.values(state.sessions).some(s=>s.kind==="daily"&&s.date===date&&!s.finished))return null;
- const targets:LearningTarget[]=kind==="weekly"||kind==="monthly"?reviewTargets(state,kind,period):
- (kind==="daily"?pickDaily(words,state,date):practiceIds(state,practiceMode||"known")).flatMap(entryId=>{
-  const p=state.progress[entryId];const choices=kind==="practice"?allSenses(p).filter(x=>practiceMode==="ko"?x.ko==="help":practiceMode==="sentence"?x.sentenceStatus==="improve":true):[];
-  return (choices.length?choices.map(x=>x.meaning||content(entryId).meaning):[dailyMeaning(p,content(entryId).meaning)]).map(meaning=>({entryId,meaning,familiarity:p?.familiarity}));
- }).slice(0,kind==="practice"?20:state.settings.dailyGoal);
+ const targets:LearningTarget[]=kind==="weekly"||kind==="monthly"?reviewTargets(state,kind,period):kind==="practice"?practiceTargets(state,practiceMode||"known",content):
+ pickDaily(words,state,date).map(entryId=>({entryId,meaning:dailyMeaning(state.progress[entryId],content(entryId).meaning),familiarity:state.progress[entryId]?.familiarity}));
  if(!targets.length)return null;
  const {ids,records}=targetRecords(targets.map(t=>({...t,meaning:t.meaning||content(t.entryId).meaning})));
  const warmupIds=kind==="daily"&&!dailyAssignedIds(state,date).length?Object.entries(state.progress).filter(([,p])=>p.lastStudied).sort((a,b)=>Number(hasReviewWork(b[1]))-Number(hasReviewWork(a[1]))||(b[1].lastStudied||"").localeCompare(a[1].lastStudied||"")).slice(0,3).map(([id])=>id):[];
  return {id:crypto.randomUUID(),kind,date,period,ids,wordKeys:Object.fromEntries(ids.map(id=>[id,words.find(w=>w.id===entryIdFor({records} as Session,id))?.word.toLowerCase()||id])),warmupIds,stage:kind==="daily"?(warmupIds.length?"warmup":"learn"):kind==="monthly"||practiceMode==="ko"?"ko":practiceMode==="sentence"?"sentence":"en",index:0,records,retry:[],retryMode:false,...(kind==="monthly"?{batchSize:state.settings.monthlyBatchSize||15,batchStart:0}:{}),...(kind==="practice"?{practiceMode:practiceMode||"known"}:{}),elapsed:0,finished:false,paused:false,createdAt:new Date().toISOString()};
 }
 export function currentId(s:Session):string|undefined{return s.retryMode?s.retry[0]?.id:s.stage==="warmup"?s.warmupIds[s.index]:s.ids[s.index];}
+export function dailyReplaySources(state:State,date:string):Session[]{
+ const daily=Object.values(state.sessions).filter(s=>s.kind==="daily"&&s.date===date);
+ if(daily.length)return daily;
+ // A date correction may move the original lesson. Its saved repeat remains a
+ // valid snapshot; keep its cards and further practice reachable from history.
+ return Object.values(state.sessions).filter(s=>s.kind==="practice"&&s.practiceMode==="repeat"&&s.period===date).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,1);
+}
 // A repeat is a separate optional practice, tied to the original daily date.
 // Reuse its saved cursor before creating another attempt; never reset daily records.
 export function repeatDailySession(state:State,words:Word[],sourceDate:string,date=today()):Session|null{
- const sources=Object.values(state.sessions).filter(s=>s.kind==="daily"&&s.date===sourceDate);
- if(!sources.length||sources.some(s=>!s.finished))return null;
+ const sources=dailyReplaySources(state,sourceDate);
+ if(!sources.length||sources.some(s=>s.kind==="daily"&&!s.finished))return null;
  const existing=Object.values(state.sessions).find(s=>s.kind==="practice"&&s.practiceMode==="repeat"&&s.period===sourceDate&&!s.finished);
  if(existing)return {...existing,paused:false};
  const targets=new Map<string,LearningTarget>();
@@ -231,14 +256,17 @@ export function applyRecord(state:State,s:Session,id:string,patch:Partial<Record
  const entryId=entryIdFor(s,id);const original=state.progress[entryId];
  const p=original?.meaning?senseProgress(original,record.meaning):original||{};
  const studyDates=learnedNow?[...new Set([...(p.studyDates||[]),activityDate])]:p.studyDates;
- // Monthly writing does not overwrite an untested English-to-Korean result.
- const en=record.en==="unmeasured"?p.en:record.en, ko=record.ko==="unmeasured"?p.ko:record.ko;
- const sentenceStatus=record.sentenceStatus==="unmeasured"?p.sentenceStatus:record.sentenceStatus;
- const complete=sessionRecordComplete(s,record);
+ // Only the newly assessed dimension changes current progress. Replaying an old
+ // record while saving a draft must not restore its obsolete scores or material.
+ const en=patch.en&&patch.en!=="unmeasured"?patch.en:p.en??(wasRetry?record.en:undefined);
+ const ko=patch.ko&&patch.ko!=="unmeasured"?patch.ko:p.ko??(wasRetry?record.ko:undefined);
+ const sentenceStatus=patch.sentenceStatus&&patch.sentenceStatus!=="unmeasured"?patch.sentenceStatus:p.sentenceStatus;
+ const assessed=!!patch.en&&patch.en!=="unmeasured"||!!patch.ko&&patch.ko!=="unmeasured"||!!patch.sentenceStatus&&patch.sentenceStatus!=="unmeasured";
+ const complete=sessionRecordComplete(s,s.kind==="daily"?record:{...record,en:en||"unmeasured",ko:ko||"unmeasured",sentenceStatus:sentenceStatus||"unmeasured"});
  const otherGap=s.practiceMode==="ko"?(en!=="independent"||sentenceStatus!=="written"):s.practiceMode==="sentence"?(en!=="independent"||ko!=="independent"):s.kind==="monthly"?(en==="help"||sentenceStatus==="improve"):false;
- // Optional repetition only reopens a previously learned word on measured difficulty.
- const needsReview=s.practiceMode==="repeat"?(hasMeasuredDifficulty(record)?true:complete?false:p.needsReview):!complete||otherGap;
- const updated:SenseProgress={...p,...(record.material?{expression:record.material.expression,example:record.material.example,translation:record.material.translation}:{}),meaning:record.meaning,en,ko,sentenceStatus,sentence:record.sentence||p.sentence,notes:record.notes||p.notes,studyDates,lastStudied:learnedNow?activityDate:p.lastStudied,lastReviewed:s.kind!=="daily"&&advance?activityDate:p.lastReviewed,needsReview};
+ const difficulty=en==="help"||ko==="help"||sentenceStatus==="improve";
+ const needsReview=difficulty?true:assessed&&complete&&!otherGap?false:learnedNow?true:p.needsReview;
+ const updated:SenseProgress={...p,...(patch.material?{expression:patch.material.expression,example:patch.material.example,translation:patch.material.translation}:{}),meaning:record.meaning,en,ko,sentenceStatus,sentence:patch.sentenceStatus&&patch.sentenceStatus!=="unmeasured"?patch.sentence??p.sentence:p.sentence,notes:patch.sentenceStatus&&patch.sentenceStatus!=="unmeasured"?patch.notes??p.notes:p.notes,studyDates,lastStudied:learnedNow?activityDate:p.lastStudied,lastReviewed:s.kind!=="daily"&&assessed?activityDate:p.lastReviewed,needsReview};
  let progress=storeSense(original,updated);
  if(learnedNow){
   const assigned=s.records[id]?.meaning;
@@ -251,8 +279,20 @@ export function applyRecord(state:State,s:Session,id:string,patch:Partial<Record
  }
  return {...state,progress:{...state.progress,[entryId]:progress},sessions:{...state.sessions,[s.id]:advance?stepSession(nextSession):nextSession}};
 }
-function hasMeasuredDifficulty(r:RecordItem):boolean{return r.en==="help"||r.ko==="help"||r.sentenceStatus==="improve";}
-export function ensureCarryover(state:State,s:Session):State{const progress={...state.progress};for(const id of s.ids){const r=s.records[id];if(s.practiceMode==="repeat"?r&&hasMeasuredDifficulty(r):!r||!sessionRecordComplete(s,r)){const entryId=entryIdFor(s,id);const p=progress[entryId];progress[entryId]=storeSense(p,{...senseProgress(p,r?.meaning||p?.meaning||""),needsReview:true});}}return {...state,progress};}
+export function ensureCarryover(state:State,s:Session):State{
+ // Optional practice does not create an obligation merely by opening/pausing it.
+ // Actual difficulties are already applied by applyRecord to the assessed sense.
+ if(s.kind==="practice")return state;
+ const progress={...state.progress};
+ for(const id of s.ids){const r=s.records[id];if(r&&sessionRecordComplete(s,r))continue;
+  const entryId=entryIdFor(s,id),p=progress[entryId],sense=senseProgress(p,r?.meaning||p?.meaning||"");
+  // Historical errors must not undo a newer successful practice. Unmeasured
+  // required work still carries forward without being counted as a failed test.
+  if(r&&sessionRecordMeasured(s,r)&&sense.en==="independent"&&sense.ko==="independent"&&sense.sentenceStatus==="written")continue;
+  progress[entryId]=storeSense(p,{...sense,needsReview:true});
+ }
+ return {...state,progress};
+}
 export function exportLog(state:State,words:Word[]):string{const map=new Map(words.map(w=>[w.id,w]));const rows=[["학습일","종류","단어","품사","수준","학습 뜻","처음 표시","영어→뜻","뜻→영어","문장 상태","말하기","내 문장","보완점","재시도 영어→뜻","재시도 뜻→영어","다음 할 일","AI 검토 원문","AI 교정 제안","AI 설명","회차 시작일","실제 학습일","마지막 연습일"]];for(const s of Object.values(state.sessions).sort((a,b)=>a.createdAt.localeCompare(b.createdAt))){for(const id of s.ids){const w=map.get(entryIdFor(s,id));const r=s.records[id]||emptyRecord();rows.push([r.lastPracticedOn||r.learnedOn||s.date,s.kind,w?.word||id,w?.pos||"",w?.personal?"개인 추가":w?.level||"",r.meaning,r.familiarity?FAMILIARITY_TEXT[r.familiarity]:"미표시",RESULT_TEXT[r.en],RESULT_TEXT[r.ko],SENTENCE_TEXT[r.sentenceStatus],r.spoken?"말해 봄":"미측정",r.sentence,r.notes,RESULT_TEXT[r.retryEn||"unmeasured"],RESULT_TEXT[r.retryKo||"unmeasured"],nextAction(r,s),r.aiFeedback?.original||"",r.aiFeedback?.correctedSentence||"",r.aiFeedback?.explanation||"",s.date,r.learnedOn||"기존 기록·미확인",r.lastPracticedOn||"기존 기록·미확인"]);}}return "\ufeff"+rows.map(row=>row.map(x=>'"'+(/^(?:[\s\ufeff]*[=+@\-]|[\t\r\n])/.test(x)?"'":"")+x.replaceAll('"','""')+'"').join(',')).join('\r\n');}
 
 export function exportTutor(state:State,words:Word[]):string {

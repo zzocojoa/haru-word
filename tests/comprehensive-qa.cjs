@@ -18,7 +18,7 @@ const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent'
    const seed=await ctx.request.put(base+'/api/state',{data:{revision:data.revision,progress,sessions:{}}});assert.equal(seed.status(),200,await seed.text());
    const p=await page(ctx);await p.goto(base);await saved(p);await p.getByRole('tab',{name:'주간·월말 점검'}).click();await p.getByRole('button',{name:'전체 점검 시작',exact:true}).click();await saved(p);
    await p.getByRole('heading',{name:'뜻 → 영어',exact:true}).waitFor();
-   data=await state(ctx);const session=data.state.sessions[data.state.settings.activeSessionId];assert.equal(session.ids.length,count);assert.ok(Object.values(data.state.progress).every(p=>p.needsReview));assert.ok(Object.values(session.records).every(r=>r.ko==='unmeasured'));
+   data=await state(ctx);const session=data.state.sessions[data.state.settings.activeSessionId];assert.equal(session.ids.length,count);assert.ok(Object.values(data.state.progress).every(p=>!p.needsReview));assert.ok(Object.values(session.records).every(r=>r.ko==='unmeasured'));
    await p.getByLabel('영어 단어 입력').fill('saved monthly draft');await p.getByRole('button',{name:'오늘 종료 · 저장'}).click();await saved(p);
    await p.reload();await saved(p);await p.getByRole('button',{name:date.slice(0,7)+' 월말 쓰기 이어서',exact:true}).click();await saved(p);assert.equal(await p.getByLabel('영어 단어 입력').inputValue(),'saved monthly draft');
    if(count===120)await p.screenshot({path:out+'/monthly-after.png',fullPage:true});

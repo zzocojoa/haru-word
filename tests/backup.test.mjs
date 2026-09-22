@@ -77,3 +77,8 @@ test('failure after deletions rolls back the entire replacement and keeps the re
 test('an explicit empty backup restores empty study state without resetting AI limits',async()=>{
  seed();assert.equal((await POST(req(EMPTY))).status,200);assert.equal(sqlite.prepare('SELECT count(*) AS n FROM word_progress WHERE user_id=?').get('owner').n,0);assert.equal(sqlite.prepare('SELECT count(*) AS n FROM study_sessions WHERE user_id=?').get('owner').n,0);assert.equal(sqlite.prepare('SELECT request_count FROM ai_daily_usage WHERE user_id=?').get('owner').request_count,4);
 });
+
+test('backup timestamp accepts the synchronized server clock without changing state',()=>{
+ const now=new Date('2026-09-22T02:00:00Z');const state=fixture();const backup=makeBackup(state,now);
+ assert.equal(backup.exportedAt,now.toISOString());assert.deepEqual(parseBackup(JSON.stringify(backup)).state,jsonValue(state));
+});

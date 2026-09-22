@@ -59,7 +59,7 @@ export function parseBackup(raw:string):ParsedBackup {
  restoreChunks(result.state.progress);restoreChunks(result.state.sessions);
  return result;
 }
-export function makeBackup(state:State){return {format:'haru-words-v1' as const,exportedAt:new Date().toISOString(),state};}
+export function makeBackup(state:State,now=new Date()){return {format:'haru-words-v1' as const,exportedAt:now.toISOString(),state};}
 export function backupSummary(state:State){return {words:Object.keys(state.progress).length,sessions:Object.keys(state.sessions).length,personal:Object.values(state.progress).filter(p=>p.personal).length,unfinished:Object.values(state.sessions).filter(s=>!s.finished).length,level:state.settings.level,goal:state.settings.dailyGoal};}
 export function replacementChanges(before:State,after:State){
  const equal=(a:unknown,b:unknown):boolean=>{
