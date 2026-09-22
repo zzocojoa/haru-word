@@ -22,7 +22,7 @@ export type SenseProgress = Pick<Progress,"meaning"|"expression"|"example"|"tran
 export type Assessment = {ids:string[];index:number;marks:Record<string,Familiarity>;completed:boolean};
 export type Settings = {level:Level;dailyGoal:number;assessments:Partial<Record<Level,Assessment>>;activeSessionId:string|null;newWordsPaused?:boolean;monthlyBatchSize?:number;reviewDay?:number};
 export type RecordItem = {entryId?:string;learnedOn?:string;lastPracticedOn?:string;material?:Content;historicalMeaningUnknown?:boolean;aiFeedback?:SentenceFeedback;meaning:string;familiarity?:Familiarity;en:Result;ko:Result;sentenceStatus:SentenceResult;sentence:string;notes:string;spoken?:boolean;enAnswer?:string;koAnswer?:string;hintEn?:boolean;hintKo?:boolean;retryEn?:Result;retryKo?:Result;draft?:{answer:string;hinted:boolean;revealed:boolean;stage:"en"|"ko";retry:boolean}};
-export type Session = {id:string;kind:Kind;date:string;period:string;ids:string[];wordKeys?:Record<string,string>;warmupIds:string[];warmupResults?:Record<string,Result>;warmupDraft?:{id:string;answer:string;hinted:boolean;revealed:boolean};stage:Stage;index:number;records:Record<string,RecordItem>;retry: {id:string;direction:"en"|"ko";seen?:string[]}[];retryMode:boolean;resumeAfterRetry?:{stage:Stage;index:number};batchSize?:number;batchStart?:number;practiceMode?:PracticeMode;elapsed:number;finished:boolean;paused:boolean;createdAt:string};
+export type Session = {id:string;kind:Kind;date:string;period:string;ids:string[];wordKeys?:Record<string,string>;warmupIds:string[];warmupResults?:Record<string,Result>;warmupDraft?:{id:string;answer:string;hinted:boolean;revealed:boolean};stage:Stage;index:number;records:Record<string,RecordItem>;retry: {id:string;direction:"en"|"ko";seen?:string[]}[];retryMode:boolean;resumeAfterRetry?:{stage:Stage;index:number};batchSize?:number;batchStart?:number;reviewEnd?:number;practiceMode?:PracticeMode;elapsed:number;finished:boolean;paused:boolean;createdAt:string};
 export type State = {settings:Settings;progress:Record<string,Progress>;sessions:Record<string,Session>};
 export const EMPTY:State = {settings:{level:"A1",dailyGoal:3,assessments:{},activeSessionId:null},progress:{},sessions:{}};
 export const RESULT_TEXT:Record<Result,string>={independent:"독립 성공",help:"도움 필요",unmeasured:"미측정"};
@@ -135,6 +135,29 @@ export function selectSense(p:Progress|undefined,sense:SenseProgress):Progress{
 }
 export function pendingReviews(state:State):Session[]{return Object.values(state.sessions).filter(s=>(s.kind==="weekly"||s.kind==="monthly")&&!s.finished).sort((a,b)=>a.period.localeCompare(b.period)||a.createdAt.localeCompare(b.createdAt));}
 export function reviewRemaining(s:Session):number{return s.ids.filter(id=>{const r=s.records[id];return !r||(s.kind==="monthly"?r.ko==="unmeasured":r.en==="unmeasured"||r.ko==="unmeasured"||r.sentenceStatus==="unmeasured");}).length;}
+export function missingReviewTargets(state:State,s:Session):LearningTarget[]{
+ if(s.finished||(s.kind!=="weekly"&&s.kind!=="monthly"))return [];
+ const assigned=new Set(s.ids.map(id=>targetIdentity(entryIdFor(s,id),s.records[id]?.meaning||"")));
+ return reviewTargets(state,s.kind,s.period).filter(t=>!assigned.has(targetIdentity(t.entryId,t.meaning))&&(t.meaning||!s.ids.some(id=>entryIdFor(s,id)===t.entryId)));
+}
+// Keep the current block and cursor intact. New targets start their own full
+// recall sequence after that block, even if the saved cursor is in KO or sentence.
+export function extendReviewSession(state:State,words:Word[],s:Session,content:(id:string)=>Content):Session{
+ const missing=missingReviewTargets(state,s);if(!missing.length)return s;
+ if(s.ids.length+missing.length>5000)throw new Error('점검 대상이 5,000개를 넘어요. 기존 점검을 마친 뒤 다음 회차로 나눠 주세요.');
+ const records={...s.records},ids=[...s.ids],wordKeys={...s.wordKeys};
+ for(const t of missing){
+  const id=records[t.entryId]?"target_"+crypto.randomUUID():t.entryId;
+  ids.push(id);records[id]={...emptyRecord(t.meaning||content(t.entryId).meaning,t.familiarity),entryId:t.entryId,...(t.material?{material:t.material}:{}),...(t.historicalMeaningUnknown?{historicalMeaningUnknown:true}:{})};
+  wordKeys[id]=words.find(w=>w.id===t.entryId)?.word.toLowerCase()||t.entryId;
+ }
+ const resumeAfterRetry=s.resumeAfterRetry?.stage==="done"?{stage:"checkpoint" as Stage,index:s.ids.length}:s.resumeAfterRetry;
+ return {...s,ids,records,wordKeys,reviewEnd:s.reviewEnd??s.ids.length,...(resumeAfterRetry?{resumeAfterRetry}:{})};
+}
+export function reviewBatchEnd(s:Session):number{
+ const end=s.reviewEnd??s.ids.length;
+ return s.kind==="monthly"&&s.batchSize?Math.min((s.batchStart||0)+s.batchSize,end):end;
+}
 export function dailyMeaning(p:Progress|undefined,fallback:string):string{return allSenses(p).filter(x=>x.needsReview).sort((a,b)=>(a.lastReviewed||"").localeCompare(b.lastReviewed||""))[0]?.meaning||p?.meaning||fallback;}
 function targetRecords(targets:LearningTarget[]):{ids:string[];records:Record<string,RecordItem>}{
  const records:Record<string,RecordItem>={};
@@ -181,13 +204,14 @@ export function stepSession(s:Session):Session{
  let next:Session;
  if(s.retryMode){const cursor=s.resumeAfterRetry||{stage:"done" as Stage,index:0};next={...s,...cursor,retryMode:false,resumeAfterRetry:undefined};}
  else {
-  const start=s.kind==="monthly"?(s.batchStart||0):0;
-  const end=s.stage==="warmup"?s.warmupIds.length:s.kind==="monthly"&&s.batchSize?Math.min(start+s.batchSize,s.ids.length):s.ids.length;
+  const review=s.kind==="monthly"||s.kind==="weekly";
+  const start=review?(s.batchStart||0):0;
+  const end=s.stage==="warmup"?s.warmupIds.length:review?reviewBatchEnd(s):s.ids.length;
   if(s.index+1<end)next={...s,index:s.index+1};
   else {
    const sequence:Stage[]=s.kind==="daily"?["warmup","learn","en","ko","sentence","done"]:s.kind==="monthly"?["ko","sentence","done"]:s.practiceMode==="repeat"?["learn","en","ko","sentence","done"]:s.practiceMode==="ko"?["ko","done"]:s.practiceMode==="sentence"?["sentence","done"]:["en","ko","sentence","done"];
    let stage=sequence[sequence.indexOf(s.stage)+1]||"done";
-   if(stage==="done"&&s.kind==="monthly"&&end<s.ids.length)stage="checkpoint";
+   if(stage==="done"&&review&&end<s.ids.length)stage="checkpoint";
    next={...s,stage,index:stage==="checkpoint"?end:stage==="done"?0:start};
   }
  }
@@ -195,7 +219,7 @@ export function stepSession(s:Session):Session{
  if(due>=0){const ready=retry[due];return {...next,retry:[ready,...retry.filter((_,i)=>i!==due)],resumeAfterRetry:{stage:next.stage,index:next.index},retryMode:true,stage:ready.direction,finished:false,paused:false};}
  return {...next,retry,finished:next.stage==="done",paused:next.stage==="done"||next.stage==="checkpoint"};
 }
-export function continueBatch(s:Session):Session{return s.stage==="checkpoint"?{...s,batchStart:s.index,stage:"ko",paused:false}:s;}
+export function continueBatch(s:Session):Session{return s.stage==="checkpoint"?{...s,batchStart:s.index,reviewEnd:s.reviewEnd&&s.index<s.reviewEnd?s.reviewEnd:undefined,stage:s.kind==="weekly"?"en":"ko",paused:false}:s;}
 export function applyRecord(state:State,s:Session,id:string,patch:Partial<RecordItem>,advance=true,activityDate=today()):State{
  const wasRetry=s.retryMode;
  if(wasRetry){patch={...patch};if(patch.en){patch.retryEn=patch.en;delete patch.en;}if(patch.ko){patch.retryKo=patch.ko;delete patch.ko;}}

@@ -1,8 +1,9 @@
 "use client";
+import { useMemo } from "react";
 import { ArrowRight } from "lucide-react";
-import { pendingReviews,reviewRemaining,KIND_TEXT,type State,type Session } from "@/lib/learning";
+import { pendingReviews,reviewRemaining,missingReviewTargets,KIND_TEXT,type State,type Session } from "@/lib/learning";
 
 export function PendingReviews({state,busy,onResume}:{state:State;busy:boolean;onResume:(s:Session)=>void}){
- const pending=pendingReviews(state);if(!pending.length)return null;
- return <section className="pending-reviews" aria-label="이어서 할 점검"><h3>이어서 할 점검</h3><p className="small-note">지난 기간의 점검도 여기서 계속할 수 있어요.</p>{pending.map(s=><article key={s.id}><div><b>{s.period} · {KIND_TEXT[s.kind]}</b><p>전체 {s.ids.length}개 · 미점검 {reviewRemaining(s)}개</p></div><button className="secondary-button" disabled={busy} onClick={()=>onResume(s)} aria-label={`${s.period} ${KIND_TEXT[s.kind]} 이어서`}>이어서 <ArrowRight size={15}/></button></article>)}</section>;
+ const pending=useMemo(()=>pendingReviews(state).map(session=>({session,added:missingReviewTargets(state,session).length})),[state]);if(!pending.length)return null;
+ return <section className="pending-reviews" aria-label="이어서 할 점검"><h3>이어서 할 점검</h3><p className="small-note">하루 목표 수가 아닌 해당 기간의 학습 목록을 기준으로 해요. 지난 점검도 계속할 수 있어요.</p>{pending.map(({session:s,added})=>{return <article key={s.id}><div><b>{s.period} · {KIND_TEXT[s.kind]}</b><p>전체 {s.ids.length+added}개 · 미점검 {reviewRemaining(s)+added}개</p>{added>0&&<p className="small-note">새로 추가된 {added}개 포함 · 이어서 누르면 기존 진행 뒤에 연결해요.</p>}</div><button className="secondary-button" disabled={busy} onClick={()=>onResume(s)} aria-label={`${s.period} ${KIND_TEXT[s.kind]} 이어서`}>이어서 <ArrowRight size={15}/></button></article>})}</section>;
 }

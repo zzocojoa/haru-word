@@ -29,6 +29,7 @@ export async function PUT(request:Request){
  try{const raw=await request.text();if(new TextEncoder().encode(raw).byteLength>1_800_000)return json({error:"기록이 너무 큽니다. 회차를 나눠 주세요."},413);body=JSON.parse(raw);}catch{return json({error:"요청 형식이 잘못되었습니다."},400);}
  const parsed=saveSchema.safeParse(body);if(!parsed.success)return json({error:"저장할 기록의 형식을 확인해 주세요."},400);
  const data=parsed.data;
+ if(Object.values(data.sessions).some(s=>s.reviewEnd!==undefined||(s.kind==='weekly'&&(s.batchStart||0)>0))&&request.headers.get('x-study-review-resume')!=='1')return json({error:'점검 이어가기가 업데이트되었어요. 현재 입력을 백업한 뒤 페이지를 새로고침해 주세요.'},426);
  try{
   const db=database(); const statements:D1PreparedStatement[]=[];
   // All mutations are conditional on the same revision; D1 batch is transactional.

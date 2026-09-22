@@ -36,7 +36,7 @@ export const backupStateSchema=z.object({
   if(v.warmupIds.some(id=>!validEntry(id))||new Set(v.warmupIds).size!==v.warmupIds.length||Object.keys(v.warmupResults||{}).some(id=>!v.warmupIds.includes(id))||v.warmupDraft&&!v.warmupIds.includes(v.warmupDraft.id))issue('이전 복습의 단어 정보가 맞지 않아요.');
   if(Object.keys(v.wordKeys||{}).some(id=>!v.ids.includes(id))||v.retry.some(r=>r.seen?.some(id=>!v.ids.includes(id))))issue('재시도 순서가 맞지 않아요.');
   if(v.finished!==(v.stage==='done')||v.retryMode&&!v.retry.length||v.index>(v.stage==='warmup'?v.warmupIds.length:v.ids.length)||(!v.finished&&!v.retryMode&&v.stage!=='checkpoint'&&v.index>=(v.stage==='warmup'?v.warmupIds.length:v.ids.length)))issue('학습을 이어갈 위치가 맞지 않아요.');
-  if(v.stage==='checkpoint'&&(v.kind!=='monthly'||v.index>=v.ids.length)||v.resumeAfterRetry&&v.resumeAfterRetry.index>v.ids.length)issue('점검을 이어갈 위치가 맞지 않아요.');
+  if(v.stage==='checkpoint'&&((v.kind!=='monthly'&&v.kind!=='weekly')||v.index>=v.ids.length)||v.resumeAfterRetry&&v.resumeAfterRetry.index>v.ids.length)issue('점검을 이어갈 위치가 맞지 않아요.');
   for(const r of Object.values(v.records)){checkDate(r.learnedOn);checkDate(r.lastPracticedOn);}
  }
 });

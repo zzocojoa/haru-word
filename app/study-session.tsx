@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, BookOpen, Check, Eye, PencilLine } from "lucide-react";
 import { Progress as ProgressBar } from "@/components/ui/progress";
-import { currentId,entryIdFor,stepSession,applyRecord,ensureCarryover,sessionRecordComplete,continueBatch,exportLog,KIND_TEXT,POS,type State,type Session,type Word,type Result,type SentenceResult } from "@/lib/learning";
+import { currentId,entryIdFor,stepSession,applyRecord,ensureCarryover,sessionRecordComplete,continueBatch,reviewBatchEnd,exportLog,KIND_TEXT,POS,type State,type Session,type Word,type Result,type SentenceResult } from "@/lib/learning";
 import { studyContent } from "@/lib/catalog";
 import { SentenceFeedbackPanel } from "./sentence-feedback";
 import type { SentenceFeedback } from "@/lib/sentence-feedback";
@@ -48,7 +48,8 @@ export function StudySession({currentState,state,session:s,words,save,busy:store
  return <section className="learning-panel session-panel"><div className="panel-top"><div className="stage-label"><span className="level-badge">{word.personal?'개인 추가':word.level}</span><span>{s.practiceMode==='repeat'?'다시 학습':KIND_TEXT[s.kind]}</span></div><Clock seconds={seconds-boutStart} paused={paused} onToggle={toggleClock} disabled={busy}/></div><div className="session-step-row"><h2 ref={focus} tabIndex={-1}>{s.retryMode?'다시 떠올리기':STAGES[s.stage]}</h2><span className="muted">{s.retryMode?s.retry.length+'개 남음':`${s.index+1} / ${s.stage==='warmup'?s.warmupIds.length:total}`}</span></div><ProgressBar aria-label="현재 학습 단계 진행률" className="session-progress" value={s.retryMode?90:((s.index)/(s.stage==='warmup'?s.warmupIds.length:total))*100}/>
  {s.kind==='daily'&&<ol className="phase-strip" aria-label="15분 학습 순서">{[['warmup','기억 3분'],['learn','익히기 6분'],['en','회상 3분'],['sentence','문장 3분']].map(([stage,label])=><li key={stage} aria-current={s.stage===stage||(stage==='en'&&s.stage==='ko')?'step':undefined}>{label}</li>)}</ol>}
  {s.practiceMode==='repeat'&&<p className="small-note">{s.period}의 단어를 다시 학습해요. 원래 완료 기록은 그대로 보관합니다.</p>}
- {s.kind==='monthly'&&<p className="small-note">{Math.floor((s.batchStart||0)/(s.batchSize||s.ids.length))+1} / {Math.ceil(total/(s.batchSize||total))} 묶음 · 이번 묶음 {Math.min(s.batchSize||total,total-(s.batchStart||0))}개 · 문장은 선택 연습이에요.</p>}
+ {s.kind==='monthly'&&<p className="small-note">전체 {total}개 · 이번 묶음 {reviewBatchEnd(s)-(s.batchStart||0)}개 · 문장은 선택 연습이에요.</p>}
+ {s.reviewEnd!==undefined&&<p className="small-note">새로 추가된 {s.ids.length-s.reviewEnd}개는 진행 중인 점검을 마친 뒤 이어서 확인해요. 기존 답과 순서는 그대로예요.</p>}
  {s.records[id!]?.historicalMeaningUnknown&&<p className="notice">당시 뜻이 남아 있지 않은 이전 기록이에요. 현재 단어장의 뜻을 참고하므로 사전과 함께 확인해 주세요.</p>}
  {seconds-boutStart>=900&&<p className="notice">이번 활동이 15분을 넘었어요. 오늘 종료로 저장한 뒤 다음에 이어가도 좋아요.</p>}
 
