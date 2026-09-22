@@ -16,6 +16,7 @@ import {
 import { MAX_DAILY_GOAL } from "@/lib/learning";
 import { LevelSelect } from "../ui";
 import type { LearningController } from "./use-learning-controller";
+import { DiagnosticDownload } from "./diagnostic-download";
 type SettingsDialogProps = Pick<
   LearningController,
   | "settings"
@@ -137,6 +138,11 @@ export function SettingsDialog({
           Google Gemini API를 사용해요. 무료 한도나 연결 오류가 있으면 자기
           점검으로 계속할 수 있어요.
         </p>
+        <details className="notes-details">
+          <summary>문제가 생겼을 때</summary>
+          <p className="small-note">최근 연결 상태와 버튼 대기 이유를 파일로 받아요. 답안·문장·계정 정보·API 키는 포함하지 않으며 자동 전송하지 않아요. 새로고침하면 초기화됩니다.</p>
+          <DiagnosticDownload />
+        </details>
       </DialogContent>
     </Dialog>
   );

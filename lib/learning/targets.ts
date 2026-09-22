@@ -112,6 +112,21 @@ export function entryIdFor(s: Session, id: string): string {
   return s.records[id]?.entryId || id;
 }
 
+export function reviewWeeks(state: Pick<State, "sessions">, date: string, selected = weekStart(date)): string[] {
+  const weeks = new Set([selected, weekStart(date)]);
+  const dates = new Set<string>();
+  for (const session of Object.values(state.sessions)) {
+    if (session.kind === "weekly") weeks.add(session.period);
+    if (session.kind !== "daily") continue;
+    dates.add(session.date);
+    for (const record of Object.values(session.records))
+      if (record.learnedOn) dates.add(record.learnedOn);
+  }
+  // A date can occur in many records and repeat sessions. Convert it once.
+  for (const day of dates) weeks.add(weekStart(day));
+  return [...weeks].sort().reverse();
+}
+
 export function reviewTargets(
   state: State,
   kind: "weekly" | "monthly",
@@ -119,9 +134,16 @@ export function reviewTargets(
 ): LearningTarget[] {
   const targets = new Map<string, LearningTarget>();
   const represented = new Set<string>();
+  const weeks = new Map<string, string>();
+  const weekOf = (date: string) => {
+    let week = weeks.get(date);
+    if (week === undefined) { week = weekStart(date); weeks.set(date, week); }
+    return week;
+  };
   for (const s of Object.values(state.sessions)
     .filter((s) => s.kind === "daily")
     .sort((a, b) => a.createdAt.localeCompare(b.createdAt))) {
+    const sessionInWeek = kind === "weekly" && weekOf(s.date) === period;
     for (const id of s.ids) {
       const entryId = entryIdFor(s, id),
         r = s.records[id];
@@ -134,8 +156,7 @@ export function reviewTargets(
       const included =
         kind === "monthly"
           ? learnedOn?.slice(0, 7) === period
-          : weekStart(s.date) === period ||
-            (!!learnedOn && weekStart(learnedOn) === period);
+          : sessionInWeek || (!!learnedOn && weekOf(learnedOn) === period);
       if (!included) continue;
       targets.set(targetIdentity(entryId, r.meaning), {
         entryId,
@@ -234,13 +255,13 @@ export function practiceIds(state: State, mode: PracticeMode): string[] {
           : p.sentenceStatus === "improve" ||
             allSenses(p).some((x) => x.sentenceStatus === "improve"),
     )
+    .map(([id, progress]) => ({ id, lastReviewed: progress.lastReviewed || "", order: hash(id) }))
     .sort(
       (a, b) =>
-        (a[1].lastReviewed || "").localeCompare(b[1].lastReviewed || "") ||
-        hash(a[0]) - hash(b[0]),
+        a.lastReviewed.localeCompare(b.lastReviewed) || a.order - b.order,
     )
     .slice(0, 20)
-    .map(([id]) => id);
+    .map(({ id }) => id);
 }
 
 export function practiceTargets(

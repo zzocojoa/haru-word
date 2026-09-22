@@ -1,5 +1,11 @@
 # 학습 앱 검증
 
+- `study-clock-race-qa.cjs`: 실제 시간 훅의 중복 재시도, 화면 복귀 이벤트 묶음, 숨김 시 취소, 늦은 이전 응답, unmount를 검사합니다. `CLOCK_BASELINE=1`은 수정 전 구현 전용 재현 모드입니다. 수정 전 결과는 `outputs/clock-reliability/before.json`이며 일반 모드는 기준 파일 없이 실행합니다.
+- `client-diagnostics.test.mjs`: 진단 허용 필드, 비공개 입력 제외, 오류/취소/시간 초과 구분, 중복 종료 및 최대 120개 제한을 검사합니다.
+- `clock-continuity-qa.cjs`: 10초 시간 동기화 실패와 전체 탭 복구, 진단 다운로드, 자정과 연결 복구, 두 기기의 동일 초안 재개·revision 충돌·입력 백업·최신 기록 확인을 검사합니다. 가상 로컬 계정만 사용하며 Google 호출은 없습니다.
+- `review-calendar.test.mjs`, `review-calendar-qa.cjs`: 중복 날짜·서로 다른 학습일·과거/선택 기간·뜻별 대상/자료/순서 불변성, 기본 선택기의 키보드 조작·탭 복귀·읽기 전용·axe 2상태를 검사합니다. OS 선택 팝업 내부와 실제 VoiceOver는 자동 검사 범위 밖입니다.
+- 이번 3단계 변경의 재현 결과·성능 측정 조건·남은 한계는 [RELIABILITY_PLAN.md](../RELIABILITY_PLAN.md)에 정리합니다.
+
 - `study-draft.test.mjs`: 문제 소속·복습/양방향/재시도 초안 복원과 직렬화, 성적 미변경, 객체 불변성, 자료 출처, 쓰기 차단 64조합과 독립 성공 조건.
 - `study-controller-render-qa.cjs`: 실제 컨트롤러와 테스트용 React 화면에서 매 DOM 반영을 관찰합니다. 새 문제에 이전 답·힌트·공개 상태가 전달되지 않는지, 방향/재시도 전환·동일 문제 저장·늦은 콜백을 확인합니다. 서버나 Google을 호출하지 않습니다. `study-controller-harness.tsx`는 테스트 전용이며 배포 앱에서 import하지 않습니다.
 - `draft-interaction-qa.cjs`: 빌드한 로컬 Worker의 가상 계정으로 복습/양방향/재시도 저장 지연·실패·잠금 해제·재접속, 빈 답의 힌트 유지, 시계 재동기화를 통제합니다. 실패 진단은 `outputs/draft-refactor/`에 남기며 운영 계정으로 실행하지 않습니다.

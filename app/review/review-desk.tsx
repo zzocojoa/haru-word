@@ -1,16 +1,10 @@
 "use client";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { cardContent } from "@/lib/catalog";
 import {
   entryIdFor,
   practiceTargets,
   reviewTargets,
+  reviewWeeks,
   sessionRecordMeasured,
   targetIdentity,
   weekStart,
@@ -47,26 +41,7 @@ export function ReviewDesk({
   const week = selectedWeek ?? weekStart(date),
     month = selectedMonth ?? date.slice(0, 7);
   const weeks = useMemo(
-    () =>
-      [
-        ...new Set([
-          week,
-          weekStart(date),
-          ...Object.values(state.sessions)
-            .filter((s) => s.kind === "weekly")
-            .map((s) => s.period),
-          ...Object.values(state.sessions)
-            .filter((s) => s.kind === "daily")
-            .flatMap((s) => [
-              weekStart(s.date),
-              ...Object.values(s.records).flatMap((r) =>
-                r.learnedOn ? [weekStart(r.learnedOn)] : [],
-              ),
-            ]),
-        ]),
-      ]
-        .sort()
-        .reverse(),
+    () => reviewWeeks({ sessions: state.sessions }, date, week),
     [week, date, state.sessions],
   );
   const months = useMemo(
@@ -169,26 +144,19 @@ export function ReviewDesk({
                     ? "그 주의 목표 단어를 빠짐없이 섞어서 점검해요."
                     : "주간 통과와 관계없이 그달 배운 단어 전체를 확인해요."}
                 </p>
-                <Select
+                <select
+                  className="review-period"
+                  aria-label={kind === "weekly" ? "주간 점검 기간" : "월말 점검 기간"}
                   value={period}
-                  onValueChange={kind === "weekly" ? setWeek : setMonth}
+                  onChange={(event) => (kind === "weekly" ? setWeek : setMonth)(event.target.value)}
                 >
-                  <SelectTrigger
-                    aria-label={
-                      kind === "weekly" ? "주간 점검 기간" : "월말 점검 기간"
-                    }
-                  >
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
                     {(kind === "weekly" ? weeks : months).map((p) => (
-                      <SelectItem key={p} value={p}>
+                      <option key={p} value={p}>
                         {p}
                         {kind === "weekly" ? "부터 한 주" : ""}
-                      </SelectItem>
+                      </option>
                     ))}
-                  </SelectContent>
-                </Select>
+                </select>
                 <div className="review-count">
                   <b>{ids.length}</b>
                   <span>

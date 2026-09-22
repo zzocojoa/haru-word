@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { download } from "../ui";
 import type { LearningController } from "./use-learning-controller";
+import { DiagnosticDownload } from "./diagnostic-download";
 type SaveErrorProps = Pick<
   LearningController,
   "saveError" | "error" | "conflict" | "saving" | "unsaved" | "store" | "state"
@@ -79,6 +80,7 @@ export function SaveError({
             </AlertDialogContent>
           </AlertDialog>
         )}
+        <DiagnosticDownload />
       </div>
     </div>
   );

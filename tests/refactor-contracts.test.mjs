@@ -21,6 +21,7 @@ const freeze = value => {
 
 test('learning facade retains the pre-refactor public runtime API', () => {
   const expected = `EMPTY FAMILIARITY_TEXT KIND_TEXT LEVELS MAX_DAILY_GOAL POS RESULT_TEXT SENTENCE_TEXT allSenses applyRecord assessmentAdvice assessmentSample confirmFamiliarity continueBatch currentId dailyAssignedIds dailyMeaning dailyReplaySources emptyRecord ensureCarryover entryIdFor exportLog exportTutor extendReviewSession hasReviewWork isComplete learningMetrics missingReviewTargets needsInitialAssessment newSession nextAction pendingReviews periodKey pickDaily practiceIds practiceTargets recordFamiliarity repeatDailySession revealFamiliarity reviewBatchEnd reviewIds reviewRemaining reviewTargets selectSense senseProgress sessionRecordComplete sessionRecordMeasured stepSession storeSense targetIdentity today weekStart`.split(' ');
+  expected.push('reviewWeeks'); // Additive calendar helper; all prior exports remain.
   assert.deepEqual(Object.keys(learning).sort(), expected.sort());
 });
 

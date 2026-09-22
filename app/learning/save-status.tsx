@@ -14,7 +14,7 @@ export function SaveStatus({
   return (
     <span
       className="save-state"
-      data-state={unsaved ? "error" : saving ? "saving" : "saved"}
+      data-state={saving || loading ? "saving" : unsaved ? "error" : "saved"}
       role="status"
     >
       {saving ? <Loader2 size={15} className="spin" /> : <Cloud size={16} />}

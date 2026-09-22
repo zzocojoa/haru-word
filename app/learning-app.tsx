@@ -18,6 +18,7 @@ import { FamiliarityAssessment } from "./learning/familiarity-assessment";
 import { LearningAside } from "./learning/learning-aside";
 import { SaveError } from "./learning/save-error";
 import { SaveStatus } from "./learning/save-status";
+import { ClockStatus } from "./learning/clock-status";
 import { SettingsDialog } from "./learning/settings-dialog";
 import { SourceDialog } from "./learning/source-dialog";
 import { TodayOverview } from "./learning/today-overview";
@@ -234,21 +235,10 @@ export default function LearningApp({
               {message}
             </p>
           )}
+          {!loading && signedIn && <ClockStatus clock={clock} />}
           <TabsContent value="today" forceMount hidden={tab !== "today"}>
             <div className="workspace">
               <div className="main-study">
-                {clock.error && (
-                  <p className="notice" role="alert">
-                    한국 시간을 확인하지 못했어요. 기록은 보존돼요. 연결을
-                    확인하고{" "}
-                    <button
-                      className="text-button"
-                      onClick={() => void clock.refresh()}
-                    >
-                      시간 다시 확인
-                    </button>
-                  </p>
-                )}
                 {loading ? (
                   <section
                     className="learning-panel loading-surface"

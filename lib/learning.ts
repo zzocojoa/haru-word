@@ -58,6 +58,7 @@ export {
   targetIdentity,
   entryIdFor,
   reviewTargets,
+  reviewWeeks,
   reviewIds,
   pendingReviews,
   reviewRemaining,

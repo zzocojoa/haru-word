@@ -19,6 +19,7 @@ import type { StudySessionProps } from "./types";
 import { useActivityTimer } from "./use-activity-timer";
 import { useStudyDraft } from "./use-study-draft";
 import { studyMaterial, withAnswerDraft } from "@/lib/study-draft";
+import { recordAvailability } from "@/lib/client-diagnostics";
 export function useStudySessionController({
   date,
   activityDate,
@@ -52,6 +53,10 @@ export function useStudySessionController({
   } = useStudyDraft(s, id, content);
   const { meaning, expression, example, translation, answer, sentence, notes, spoken, revealed, hint } = draft;
   const busy = storeBusy || aiPending;
+  const answerPresent = !!answer.trim();
+  useEffect(() => {
+    if (visible) recordAvailability("lesson", { storeBusy, aiPending, answerPresent, hinted: hint, revealed }, s.stage);
+  }, [visible, storeBusy, aiPending, answerPresent, hint, revealed, s.stage]);
   const focus = useRef<HTMLHeadingElement>(null);
   const [showSummary, setShowSummary] = useState(false);
   useEffect(() => { focus.current?.focus(); }, [question]);
