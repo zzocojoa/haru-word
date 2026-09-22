@@ -12,7 +12,7 @@ await build({entryPoints:['app/api/sentence-feedback/route.ts'],outfile:'work/fe
   b.onLoad({filter:/.*/,namespace:'test-boundaries'},a=>({contents:a.path==='cloudflare:workers'?'export const env=globalThis.testRuntime.env':a.path.endsWith('chatgpt-auth')?'export const getChatGPTUser=async()=>globalThis.testRuntime.user':'export const database=()=>globalThis.testRuntime.db',loader:'js'}));
  }
 }]});
-const {generateSentenceFeedback,FEEDBACK_QUOTA_SQL}=await import('../work/feedback-tests/gemini-feedback.mjs');
+const {generateSentenceFeedback,FEEDBACK_USAGE_SQL}=await import('../work/feedback-tests/gemini-feedback.mjs');
 const {saveSchema}=await import('../work/feedback-tests/validation.mjs');
 const input={word:'arrive',pos:'v.',meaning:'도착하다',sentence:'I arrive home yesterday.'};
 const content={meaningUsage:'appropriate',grammar:'needs_work',correctedSentence:'I arrived home yesterday.',explanation:'어제 일어난 일이므로 arrive를 arrived로 바꿔요.'};
@@ -57,7 +57,7 @@ test('route requires authentication and rejects cross-origin requests',async()=>
  assert.equal((await route.POST(req(body,{'sec-fetch-site':'cross-site'}))).status,403);assert.equal(calls,0);
 });
 test('configuration endpoint exposes availability, never the secret; disabled mode blocks provider calls',async()=>{
- const response=await route.GET();const text=await response.text();assert.ok(!text.includes('test-secret'));assert.equal(JSON.parse(text).available,true);
+ const response=await route.GET();const text=await response.text();assert.ok(!text.includes('test-secret'));assert.equal(JSON.parse(text).available,true);assert.equal(Object.hasOwn(JSON.parse(text),'dailyLimit'),false);
  testRuntime.env.google_ai_enabled='false';assert.equal((await route.POST(req())).status,503);assert.equal(calls,0);testRuntime.env.google_ai_enabled='true';
 });
 test('empty, oversized, and injected request parameters fail before provider access',async()=>{
@@ -68,17 +68,31 @@ test('another user cannot request feedback for an owned session; recall stage ca
  testRuntime.user={userId:'other'};assert.equal((await route.POST(req())).status,404);testRuntime.user={userId:'owner'};
  insertSession({...session,stage:'ko'});assert.equal((await route.POST(req())).status,409);insertSession(session);assert.equal(calls,0);
 });
-test('valid feedback consumes one durable reservation without changing proficiency or session records',async()=>{
- const response=await route.POST(req());assert.equal(response.status,200);const data=await response.json();assert.equal(data.remaining,29);assert.equal(data.feedback.original,input.sentence);assert.equal(calls,1);
+test('valid feedback records usage without an artificial balance or cooldown and preserves learning records',async()=>{
+ const response=await route.POST(req());assert.equal(response.status,200);const data=await response.json();assert.equal(Object.hasOwn(data,'remaining'),false);assert.equal(data.feedback.original,input.sentence);assert.equal(calls,1);
  assert.deepEqual(JSON.parse(sqlite.prepare('SELECT document FROM study_sessions WHERE user_id=? AND session_id=?').get('owner',sid).document),session);
  assert.equal(saveSchema.safeParse({revision:0,progress:{},sessions:{[sid]:{...session,records:{[word.id]:{...record,aiFeedback:data.feedback}}}}}).success,true);
- assert.equal((await route.POST(req())).status,429);assert.equal(calls,1);
+ assert.equal((await route.POST(req())).status,200);assert.equal(calls,2);
+ assert.equal(sqlite.prepare('SELECT request_count FROM ai_daily_usage WHERE user_id=?').get('owner').request_count,2);
 });
-test('daily quota rejects concurrent-style extra reservations, resets by day, and separates users',()=>{
- const reserve=(user,day,now)=>sqlite.prepare(FEEDBACK_QUOTA_SQL).get(user,day,now,30,now-10000);
- for(let i=0;i<30;i++)assert.equal(reserve('quota','2026-09-21',i*10001).request_count,i+1);
- assert.equal(reserve('quota','2026-09-21',500000),undefined);assert.equal(reserve('quota','2026-09-22',500000).request_count,1);assert.equal(reserve('different','2026-09-21',500000).request_count,1);
- assert.equal(reserve('different','2026-09-21',500000),undefined);
+test('usage counters allow more than 30 immediate attempts and keep days and users separate',()=>{
+ const count=(user,day,now)=>sqlite.prepare(FEEDBACK_USAGE_SQL).get(user,day,now);
+ for(let i=0;i<65;i++)assert.equal(count('usage','2026-09-21',1000).request_count,i+1);
+ assert.equal(count('usage','2026-09-22',1000).request_count,1);assert.equal(count('different','2026-09-21',1000).request_count,1);
+ assert.equal(count('different','2026-09-21',1000).request_count,2);
+});
+test('existing 30-use accounts reach Google; only its 429 limits a request and later retries can succeed',async()=>{
+ sqlite.prepare('UPDATE ai_daily_usage SET request_count=30,last_request_at=? WHERE user_id=?').run(Date.now(),'owner');
+ const originalFetch=globalThis.fetch;let providerCalls=0;
+ globalThis.fetch=async()=>{providerCalls++;return providerCalls===1?new Response('private provider details',{status:429}):success()};
+ try{
+  const limited=await route.POST(req());assert.equal(limited.status,429);
+  const error=await limited.json();assert.match(error.error,/Google/);assert.doesNotMatch(error.error,/private|30회|10초|내일/);
+  assert.equal(providerCalls,1);
+  assert.equal((await route.POST(req())).status,200);assert.equal(providerCalls,2);
+  assert.equal(sqlite.prepare('SELECT request_count FROM ai_daily_usage WHERE user_id=?').get('owner').request_count,32);
+  assert.deepEqual(JSON.parse(sqlite.prepare('SELECT document FROM study_sessions WHERE user_id=? AND session_id=?').get('owner',sid).document),session);
+ }finally{globalThis.fetch=originalFetch}
 });
 test('sense targets resolve the owned entry and send the recorded sense to the provider',async()=>{
  const target='target_'+crypto.randomUUID();const r={...record,entryId:word.id,meaning:'목적지에 도착하다'};

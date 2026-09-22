@@ -12,7 +12,7 @@ Node 22.13 이상에서 `npm test`, `npm run typecheck`를 실행합니다. 앱 
 - `browser-qa.cjs`, `workflow-qa.cjs`, `resume-qa.cjs`: 일일·주간·월간, 보완 연습, 저장 실패와 재개.
 - `familiarity-qa.cjs`, `familiarity-reveal-qa.cjs`: 20개 표본, 답 숨기기·비교·확정.
 - `repeat-learning-qa.cjs`, `purpose-improvements-qa.cjs`: 완료 후 재학습, 실제 학습일, 뜻별 보존, 이월.
-- `sentence-feedback-qa.cjs`: 모의 Google 응답, 오류·한도, 기록 보존. 실제 유료 호출을 하지 않습니다.
+- `sentence-feedback.test.mjs`, `sentence-feedback-qa.cjs`: 모의 Google 응답, 30회 초과·연속 요청 허용, 실제 공급자 429 후 재요청 성공, 임의 남은 횟수 제거, 오류·한도·기록 보존. 실제 유료 호출이나 실제 한도 소진을 하지 않습니다.
 - `design-qa.cjs`: 화면 너비, 모바일 시트, 초점·스크롤·로딩·기록.
 - `accessibility-qa.cjs`: axe-core WCAG A/AA 자동 검사. 별도 `axe.min.js` 경로를 `AXE_CORE_PATH`로 지정합니다. 현재 감사는 axe-core 4.13.0을 `work/axe/package/axe.min.js`에 풀어 사용했습니다. 실제 VoiceOver 검사를 대체하지 않습니다.
 - `a1-content-qa.cjs`: 기본 A1이며 `node tests/a1-content-qa.cjs A2` 또는 `B1`, `B2`로 해당 수준을 검사합니다. 각 수준의 대표 교정 카드 8개, 전체 내려받기 자료, 과거 회차 스냅샷·재학습·뜻만 있는 구형 기록의 예문 보존을 확인합니다. `set (put)`처럼 공식 표제어에 구분이 있는 버튼도 전체 접근성 이름으로 찾습니다. `content-review.test.mjs`는 전체 항목 구조와 A1/A2/B1/B2 검토 원장의 정확한 콘텐츠 해시를 검사하며 의미의 무오류를 자동 증명하지 않습니다.

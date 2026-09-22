@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 export const FEEDBACK_MODEL = 'gemini-3.1-flash-lite';
-export const FEEDBACK_DAILY_LIMIT = 30;
 export const feedbackContentSchema = z.object({
   meaningUsage: z.enum(['appropriate', 'needs_work', 'uncertain']),
   grammar: z.enum(['natural', 'needs_work', 'uncertain']),

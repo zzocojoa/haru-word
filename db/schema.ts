@@ -19,7 +19,7 @@ export const studySessions = sqliteTable("study_sessions", {
   document: text("document").notNull(),
 }, table => [primaryKey({ columns: [table.userId, table.sessionId] })]);
 
-// Durable quota survives Worker restarts and simultaneous requests.
+// Durable request counts are operational metrics, not an app-enforced quota.
 export const aiDailyUsage = sqliteTable("ai_daily_usage", {
   userId: text("user_id").notNull(),
   day: text("day").notNull(),

@@ -6,10 +6,10 @@ export class FeedbackError extends Error {
   constructor(code: string, status: number, message: string) { super(message); this.code=code; this.status=status; }
 }
 
-export const FEEDBACK_QUOTA_SQL = `INSERT INTO ai_daily_usage (user_id,day,request_count,last_request_at)
+// Count attempts for operations only. Google decides the actual project/model limits.
+export const FEEDBACK_USAGE_SQL = `INSERT INTO ai_daily_usage (user_id,day,request_count,last_request_at)
 VALUES (?,?,1,?) ON CONFLICT(user_id,day) DO UPDATE SET
-request_count=request_count+1,last_request_at=excluded.last_request_at
-WHERE request_count < ? AND last_request_at <= ? RETURNING request_count`;
+request_count=request_count+1,last_request_at=excluded.last_request_at RETURNING request_count`;
 
 const systemInstruction = `You are a concise Korean-speaking tutor for an adult learning American English.
 Evaluate only the supplied English sentence, target word, part of speech, and today's Korean meaning.
@@ -51,7 +51,7 @@ export async function generateSentenceFeedback(
   } catch { throw new FeedbackError('provider_unavailable',503,'AI 응답을 받지 못했어요. 입력은 그대로 두고 자기 점검으로 계속할 수 있어요.'); }
   // Never forward upstream error bodies: they can contain request or credential details.
   if(!response.ok){
-    if(response.status===429)throw new FeedbackError('provider_limit',429,'Google 사용 한도에 도달했어요. 지금은 자기 점검으로 이어가세요.');
+    if(response.status===429)throw new FeedbackError('provider_limit',429,'Google의 현재 요청·사용 한도에 도달했어요. 잠시 후 다시 시도하거나 자기 점검으로 계속해 주세요.');
     if([400,401,403,404].includes(response.status))throw new FeedbackError('provider_configuration',503,'Google 키 또는 모델 사용 권한을 확인해 주세요. 자기 점검으로 계속할 수 있어요.');
     throw new FeedbackError('provider_unavailable',503,'AI가 잠시 응답하지 않아요. 자기 점검으로 계속할 수 있어요.');
   }

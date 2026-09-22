@@ -3,8 +3,8 @@ import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { database } from '@/db/store';
 import { WORD_MAP } from '@/lib/catalog';
 import { currentId,entryIdFor,today,type Session,type Progress } from '@/lib/learning';
-import { FEEDBACK_DAILY_LIMIT,FEEDBACK_MODEL,feedbackRequestSchema } from '@/lib/sentence-feedback';
-import { FeedbackError,FEEDBACK_QUOTA_SQL,generateSentenceFeedback } from '@/lib/gemini-feedback';
+import { FEEDBACK_MODEL,feedbackRequestSchema } from '@/lib/sentence-feedback';
+import { FeedbackError,FEEDBACK_USAGE_SQL,generateSentenceFeedback } from '@/lib/gemini-feedback';
 
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'no-store','Content-Type':'application/json'};
@@ -13,7 +13,7 @@ const enabled=()=>!!env.google_api?.trim()&&env.google_ai_enabled==='true';
 
 export async function GET(){
   if(!await getChatGPTUser())return json({error:'로그인이 필요합니다.'},401);
-  return json({available:enabled(),configured:!!env.google_api?.trim(),model:FEEDBACK_MODEL,dailyLimit:FEEDBACK_DAILY_LIMIT});
+  return json({available:enabled(),configured:!!env.google_api?.trim(),model:FEEDBACK_MODEL});
 }
 
 export async function POST(request:Request){
@@ -39,11 +39,10 @@ export async function POST(request:Request){
     const meaning=session.records[entryId]?.meaning;
     if(!word||!meaning)return json({error:'단어와 오늘의 뜻을 먼저 저장해 주세요.'},400);
     const now=Date.now();
-    const quota=await db.prepare(FEEDBACK_QUOTA_SQL).bind(user.userId,today(),now,FEEDBACK_DAILY_LIMIT,now-10000).first<{request_count:number}>();
-    if(!quota)return json({error:`잠시 뒤 다시 시도하거나 자기 점검으로 계속하세요. AI 교정은 10초 간격, 하루 ${FEEDBACK_DAILY_LIMIT}회까지 요청할 수 있어요.`},429);
+    await db.prepare(FEEDBACK_USAGE_SQL).bind(user.userId,today(),now).first<{request_count:number}>();
     const feedback=await generateSentenceFeedback(env.google_api!,{word:word.word,pos:word.pos,meaning,sentence});
     console.info(JSON.stringify({event:'sentence_feedback_succeeded',model:FEEDBACK_MODEL,durationMs:Date.now()-started}));
-    return json({feedback,remaining:FEEDBACK_DAILY_LIMIT-quota.request_count});
+    return json({feedback});
   }catch(error){
     const known=error instanceof FeedbackError;
     console.error(JSON.stringify({event:'sentence_feedback_failed',durationMs:Date.now()-started,code:known?error.code:'storage_or_internal'}));
