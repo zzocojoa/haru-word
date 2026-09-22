@@ -24,3 +24,6 @@
 @media(max-width:600px){[data-slot=dialog-content].completed-lesson{padding:24px 20px}.completed-word .word-stage h3{font-size:32px}.completed-lesson .expression-line{flex-wrap:wrap;gap:4px 12px}}
 
 .pending-reviews{margin:20px 0 24px;padding:22px;border:1px solid #d7e2f4;border-radius:14px;background:#f5f8fe}.pending-reviews h3{font-size:17px;color:#254c87;font-weight:600}.pending-reviews article{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid #dfe7f3}.pending-reviews article:last-child{border:0;padding-bottom:0}.pending-reviews b{font-size:14px}.pending-reviews article p{font-size:12px;color:#657b9a;margin-top:4px}.pending-reviews button{white-space:nowrap}.sense-selector{border:1px solid #dce5f3;border-radius:10px;padding:16px;margin:18px 0}.sense-selector .button-row{margin-top:12px}.sense-selector select{width:100%}.sense-selector .small-note{margin-top:10px}
+
+.daily-allocation{margin:18px 0 0;font-size:14px;line-height:1.6;color:#526780}.study-date-dialog input[type=date]{max-width:100%;min-height:44px;padding:10px;border:1px solid #bbc8da;border-radius:8px}.study-date-dialog .button-row{flex-wrap:wrap}
+.home-panel .panel-top time{display:block;font-size:14px;letter-spacing:0;line-height:1.5;margin-bottom:4px}

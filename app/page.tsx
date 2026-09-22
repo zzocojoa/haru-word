@@ -1,4 +1,5 @@
 import LearningApp from "./learning-app";
-import { today } from "@/lib/learning";
 export const dynamic="force-dynamic";
-export default function Home(){return <LearningApp initialDate={today()}/>}
+// This dynamic server component intentionally samples the server clock per request.
+// eslint-disable-next-line react-hooks/purity
+export default function Home(){return <LearningApp initialServerTime={Date.now()}/>}

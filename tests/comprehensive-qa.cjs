@@ -10,6 +10,7 @@ const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent'
  const state=async ctx=>(await ctx.request.get(base+'/api/state')).json();
  const page=async ctx=>{const p=await ctx.newPage();p.on('pageerror',e=>errors.push(e.message));return p};
  const saved=async p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
+ const syncClock=async p=>p.route('**/api/study-clock',async r=>r.fulfill({json:{serverTime:await p.evaluate(()=>Date.now())}}));
  try{
   for(const count of [120,310]){
    const ctx=await context();let data=await state(ctx);
@@ -25,7 +26,7 @@ const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent'
    checks.push(count+'-word monthly review starts atomically, preserves unmeasured outcomes, resumes its draft and rejects stale large writes');await ctx.close();
   }
   for(const initial of ['2026-09-27T14:59:55Z','2026-09-30T14:59:55Z']){
-   const ctx=await context(),p=await page(ctx);await p.clock.install({time:new Date(initial)});await p.goto(base);await saved(p);await p.getByRole('tab',{name:'주간·월말 점검'}).click();
+   const ctx=await context(),p=await page(ctx);await p.clock.install({time:new Date(initial)});await syncClock(p);await p.goto(base);await saved(p);await p.getByRole('tab',{name:'주간·월말 점검'}).click();
    const before=await p.locator('.daily-label').innerText();await p.clock.fastForward(70000);await p.evaluate(()=>window.dispatchEvent(new Event('focus')));
    assert.notEqual(await p.locator('.daily-label').innerText(),before);
    if(initial.includes('09-27'))assert.match(await p.getByRole('combobox',{name:'주간 점검 기간'}).innerText(),/2026-09-28/);
@@ -33,7 +34,7 @@ const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent'
    checks.push('open page refreshes Korean date and default review period at '+initial);await ctx.close();
   }
   const historic=await context(),hp=await page(historic),historicState=await state(historic);assert.equal((await historic.request.put(base+'/api/state',{data:{revision:historicState.revision,progress:{[words[0].id]:{meaning:content[words[0].id].meaning,studyDates:['2026-08-01'],lastStudied:'2026-08-01'}},sessions:{}}})).status(),200);
-  await hp.clock.install({time:new Date('2026-09-30T14:59:55Z')});await hp.goto(base);await saved(hp);await hp.getByRole('tab',{name:'주간·월말 점검'}).click();
+  await hp.clock.install({time:new Date('2026-09-30T14:59:55Z')});await syncClock(hp);await hp.goto(base);await saved(hp);await hp.getByRole('tab',{name:'주간·월말 점검'}).click();
   await hp.getByRole('combobox',{name:'월말 점검 기간'}).click();await hp.getByRole('option',{name:'2026-08',exact:true}).click();await hp.getByRole('combobox',{name:'월말 점검 기간'}).click();await hp.getByRole('option',{name:'2026-09',exact:true}).click();await hp.clock.fastForward(70000);
   assert.match(await hp.getByRole('combobox',{name:'월말 점검 기간'}).innerText(),/2026-09/);await hp.getByRole('combobox',{name:'월말 점검 기간'}).click();assert.equal(await hp.getByRole('option',{name:'2026-09',exact:true}).count(),1);assert.equal(await hp.getByRole('option',{name:'2026-10',exact:true}).count(),1);await historic.close();
   checks.push('a deliberately chosen historical month remains selectable after midnight');
@@ -41,7 +42,7 @@ const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent'
   const ctx=await context();let data=await state(ctx);const sid=crypto.randomUUID(),id=words[0].id;
   const s={id:sid,kind:'daily',date:'2026-09-30',period:'2026-09-30',ids:[id],warmupIds:[],stage:'en',index:0,records:{[id]:{...record(id),en:'unmeasured',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:''}},retry:[],retryMode:false,elapsed:0,finished:false,paused:false,createdAt:'2026-09-30T14:50:00Z'};
   assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:data.revision,settings:{...data.state.settings,activeSessionId:sid},progress:{},sessions:{[sid]:s}}})).status(),200);
-  const p=await page(ctx);await p.clock.install({time:new Date('2026-09-30T14:59:55Z')});await p.goto(base);await saved(p);await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved(p);await p.getByLabel('한국어 뜻 입력').fill('자정에도 남겨야 할 답');await p.clock.fastForward(70000);assert.equal(await p.getByLabel('한국어 뜻 입력').inputValue(),'자정에도 남겨야 할 답');assert.equal((await state(ctx)).state.settings.activeSessionId,sid);checks.push('midnight does not reset the active lesson or unsaved answer');
+  const p=await page(ctx);await p.clock.install({time:new Date('2026-09-30T14:59:55Z')});await syncClock(p);await p.goto(base);await saved(p);await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved(p);await p.getByLabel('한국어 뜻 입력').fill('자정에도 남겨야 할 답');await p.clock.fastForward(70000);assert.equal(await p.getByLabel('한국어 뜻 입력').inputValue(),'자정에도 남겨야 할 답');assert.equal((await state(ctx)).state.settings.activeSessionId,sid);checks.push('midnight does not reset the active lesson or unsaved answer');
   // Boundary protections and isolation cover the new set-based database path.
   data=await state(ctx);
   const cross=await ctx.request.put(base+'/api/state',{headers:{'sec-fetch-site':'cross-site'},data:{revision:data.revision,progress:{},sessions:{}}});assert.equal(cross.status(),403);

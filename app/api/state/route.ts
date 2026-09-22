@@ -1,6 +1,6 @@
 import { getChatGPTUser } from "@/app/chatgpt-auth";
 import { database } from "@/db/store";
-import { EMPTY } from "@/lib/learning";
+import { EMPTY,today } from "@/lib/learning";
 import { saveSchema } from "@/lib/validation";
 export const dynamic="force-dynamic";
 const headers={"Cache-Control":"no-store","Content-Type":"application/json"};
@@ -32,6 +32,17 @@ export async function PUT(request:Request){
  if(Object.values(data.sessions).some(s=>s.reviewEnd!==undefined||(s.kind==='weekly'&&(s.batchStart||0)>0))&&request.headers.get('x-study-review-resume')!=='1')return json({error:'점검 이어가기가 업데이트되었어요. 현재 입력을 백업한 뒤 페이지를 새로고침해 주세요.'},426);
  try{
   const db=database(); const statements:D1PreparedStatement[]=[];
+  if(request.headers.get('x-study-server-clock')==='1'){
+   const date=today(),daily=Object.values(data.sessions).filter(s=>s.kind==='daily'&&s.date!==date);
+   if(daily.length){
+    const existing=await db.prepare('SELECT session_id FROM study_sessions WHERE user_id=? AND session_id IN (SELECT value FROM json_each(?))').bind(user.userId,JSON.stringify(daily.map(s=>s.id))).all<{session_id:string}>();
+    const known=new Set(existing.results.map(s=>s.session_id));
+    if(daily.some(s=>!known.has(s.id))){
+     console.warn(JSON.stringify({event:'learning_day_mismatch',serverStudyDate:date}));
+     return json({error:'한국 날짜가 바뀌었어요. 현재 입력을 보관한 뒤 최신 기록을 불러와 오늘 학습을 다시 시작해 주세요.'},409);
+    }
+   }
+  }
   // All mutations are conditional on the same revision; D1 batch is transactional.
   // Updating the revision LAST ensures either every delta applies or none do.
   // One bounded JSON parameter keeps a full monthly carryover within D1 query limits.
