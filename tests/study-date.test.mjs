@@ -45,3 +45,7 @@ test('another session, sense and actual study day survive a correction',()=>{
  const next=correctDailyStudyDate(state,session.id,'2026-09-21','2026-09-23');
  assert.deepEqual(next.sessions[other.id],other);assert.deepEqual(next.progress[id].studyDates,['2026-09-21','2026-09-22']);assert.deepEqual(next.progress[id].senses['a second meaning'],state.progress[id].senses['a second meaning']);assert.equal(next.sessions[session.id].records[session.ids[1]].learnedOn,'2026-09-23');
 });
+test('pending practice work is shown as carryover, not as new vocabulary',()=>{
+ const state=structuredClone(EMPTY),id=words[0].id;
+ state.progress[id]={needsReview:true};assert.deepEqual(dailyOrigins(state,[id,words[1].id],'2026-09-22'),{returning:1,newCount:1});
+});

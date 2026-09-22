@@ -1,4 +1,4 @@
-import { entryIdFor,senseProgress,type State,type Session } from './learning';
+import { entryIdFor,senseProgress,hasReviewWork,type State,type Session } from './learning';
 
 export function isCalendarDate(value:string){
  if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;
@@ -42,5 +42,9 @@ export function previousDate(date:string){const d=new Date(date+'T12:00:00Z');d.
 
 export function dailyOrigins(state:State,ids:string[],date:string){
  const earlier=new Set(Object.values(state.sessions).filter(s=>s.kind==='daily'&&s.date<date).flatMap(s=>s.ids.map(id=>entryIdFor(s,id))));
- return {returning:ids.filter(id=>earlier.has(id)).length,newCount:ids.filter(id=>!earlier.has(id)).length};
+ const assignedToday=new Set(Object.values(state.sessions).filter(s=>s.kind==='daily'&&s.date===date).flatMap(s=>s.ids.map(id=>entryIdFor(s,id))));
+ // Before assignment, actual pending review work is carryover even when it came
+ // from a focused practice session rather than an earlier daily lesson.
+ const returning=ids.filter(id=>earlier.has(id)||state.progress[id]?.studyDates?.some(d=>d<date)||!assignedToday.has(id)&&hasReviewWork(state.progress[id])).length;
+ return {returning,newCount:ids.length-returning};
 }
