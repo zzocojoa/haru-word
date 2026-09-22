@@ -50,7 +50,7 @@ const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent'
   checks.push('cross-site requests, oversized UTF-8 payloads and stale revisions cannot modify another account or partially save records');
   // Static assets, source downloads and secrets stay separate from the client.
   const assetPage=await page(ctx);await assetPage.goto(base);await saved(assetPage);const paths=await assetPage.locator('link[rel*=icon]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
-  for(const path of [...new Set([...paths,'/sources/oxford-source.pdf','/sources/learning-data.json','/sources/content-attribution.txt'])])assert.equal((await ctx.request.get(base+path)).status(),200,path);
+  for(const path of [...new Set([...paths,'/apple-touch-icon-precomposed.png','/sources/oxford-source.pdf','/sources/learning-data.json','/sources/content-attribution.txt'])])assert.equal((await ctx.request.get(base+path)).status(),200,path);
   const assets=await assetPage.locator('script[src]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('src')));for(const url of assets){const text=await(await ctx.request.get(base+url)).text();assert.doesNotMatch(text,/AIza[0-9A-Za-z_-]{35}/);assert.doesNotMatch(text,/x-goog-api-key/);}
   checks.push('icons and source downloads return successfully and client entry scripts contain no Google key or server key header');
   for(const width of [320,390,768,1440]){await assetPage.setViewportSize({width,height:900});for(const label of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){await assetPage.getByRole('tab',{name:label,exact:true}).click();assert.equal(await assetPage.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,label+' at '+width);}}

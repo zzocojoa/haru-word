@@ -27,3 +27,7 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 
 - `toolchain.test.mjs`: 보안 패치한 compiler를 구형 Drizzle 로더가 사용해 TypeScript CJS/ESM을 변환하고 실행하는지 검사합니다. 단순 버전 검사와 구분합니다.
 - `startup-performance-qa.cjs`: 캐시 없는 390px Chromium·CPU 4배 지연의 초기 화면 3회와 자산 크기를 측정합니다. 다른 브라우저 검사를 함께 실행하지 마세요. 실기기·운영망 성능이 아닙니다. 최종 광역 결과는 `outputs/final-audit/`입니다.
+
+- `state-delta.test.mjs`: 변경하지 않은 기록은 직렬화하지 않고, 값이 같은 복제본은 전송하지 않습니다. 실제 학습·이월·실패 후 재시도의 변경분으로 다음 상태를 재구성하고 기존 상태 불변성을 확인합니다.
+- `history-performance-qa.cjs`: `PERF_OUTPUT`으로 출력 디렉터리를 구분할 수 있습니다. `SLOW_NETWORK=1`은 1,825회차에서 캐시를 끄고 150ms 지연·다운로드 500,000 B/s·업로드 125,000 B/s로 브라우저를 1회 측정합니다. 별도 API 클라이언트 측정에는 이 제한이 적용되지 않습니다. 운영망 성능으로 일반화하지 마세요.
+- 추가 학습 저장 대기가 실패하면 `daily-topup-qa.cjs`가 상태 API의 메서드·상태 코드·소요 시간, 저장 배너·오류·학습 단계를 `save-wait-failure.json`에 남깁니다. 임시 로컬 계정만 검사합니다.

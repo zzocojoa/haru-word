@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { EMPTY, type State } from "@/lib/learning";
+import { stateDelta } from '@/lib/state-delta';
 import { requestJson,RequestTimeoutError,REQUEST_TIMEOUT_MS } from '@/lib/client-request';
 export function useLearningStore(){
  const [state,setState]=useState<State>(structuredClone(EMPTY));const current=useRef(state);const persisted=useRef(state);const revision=useRef(0);
@@ -13,10 +14,7 @@ export function useLearningStore(){
  const save=useCallback(async(next:State)=>{
   if(lock.current||conflict)return false;if(!signedIn){setError("로그인 후 학습 기록을 저장할 수 있어요.");return false;}
   lock.current=true;setSaving(true);setError("");current.current=next;setState(next);setUnsaved(true);
-  const base=persisted.current;
-  const progress=Object.fromEntries(Object.entries(next.progress).filter(([id,v])=>JSON.stringify(base.progress[id])!==JSON.stringify(v)));
-  const sessions=Object.fromEntries(Object.entries(next.sessions).filter(([id,v])=>JSON.stringify(base.sessions[id])!==JSON.stringify(v)));
-  const settings=JSON.stringify(base.settings)!==JSON.stringify(next.settings)?next.settings:undefined;
+  const {progress,sessions,settings}=stateDelta(persisted.current,next);
   try{const {response,data}=await requestJson<{revision:number;error?:string}>('/api/state',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({revision:revision.current,settings,progress,sessions})},REQUEST_TIMEOUT_MS.save);if(!response.ok){setConflict(response.status===409);throw new Error(data.error||"저장하지 못했습니다.");}revision.current=data.revision;persisted.current=next;setUnsaved(false);setConflict(false);return true;}catch(e){setError(e instanceof RequestTimeoutError?"저장 응답이 늦어 결과를 확인하지 못했어요. 입력은 화면에 남아 있어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.":e instanceof Error?e.message:"저장 실패");return false;}finally{lock.current=false;setSaving(false);}
  },[signedIn,conflict]);
  const restore=useCallback(async(next:State,expected:State)=>{

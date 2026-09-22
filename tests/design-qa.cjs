@@ -25,7 +25,8 @@ const checks=[];const errors=[];
   await p.locator('.loading-surface[aria-busy=true]').waitFor();
   assert.equal(await p.locator('.home-panel').count(),0);
   release();await saved();await p.unroute('**/api/state');
-  checks.push('initial loading exposes a busy state instead of empty-account learning results');
+  assert.equal(await p.locator('.library-panel,.review-grid,.journal-list').count(),0);
+  checks.push('initial loading is honest and unopened secondary views do not render');
 
   const before=await state();
   for(const width of [320,390,600,820,1440]){
@@ -56,6 +57,9 @@ const checks=[];const errors=[];
   checks.push('mobile meanings remain visible, bottom navigation stays reachable after scrolling, keyboard tab navigation works');
 
   await p.getByLabel('단어 또는 한국어 뜻 검색').fill('work');
+  await p.getByRole('tab',{name:'학습 기록',exact:true}).click();
+  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
+  assert.equal(await p.getByLabel('단어 또는 한국어 뜻 검색').inputValue(),'work');
   const wordButton=p.getByRole('button',{name:'work 동사',exact:true});await wordButton.click();
   const dialog=p.getByRole('dialog');await dialog.waitFor();
   const box=await dialog.boundingBox();assert.ok(box.x>=0&&box.y>=0&&box.x+box.width<=391&&box.y+box.height<=845);
@@ -102,9 +106,11 @@ const checks=[];const errors=[];
   await p.getByRole('button',{name:'오늘 단어 다시 학습',exact:true}).click();await saved();
   await p.getByLabel('오늘 공부할 뜻',{exact:false}).waitFor();await fit();await shot('08-mobile-study');
   assert.ok(await p.getByRole('heading',{name:'단어 익히기',exact:true}).isVisible());
+  await p.getByLabel('오늘 공부할 뜻',{exact:false}).fill('탭을 바꿔도 유지할 초안');
   await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
   assert.ok((await p.getByRole('heading',{name:'나의 단어장',exact:true}).boundingBox()).width>100);
   await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();
+  assert.equal(await p.getByLabel('오늘 공부할 뜻',{exact:false}).inputValue(),'탭을 바꿔도 유지할 초안');
   await p.getByRole('button',{name:'오늘 종료 · 저장',exact:true}).click();await saved();
   checks.push('active mobile repeat study shows the current stage and can end with a saved record');
   assert.deepEqual(errors,[]);
