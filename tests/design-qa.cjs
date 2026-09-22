@@ -95,6 +95,7 @@ const checks=[];const errors=[];
   await p.getByRole('tab',{name:'학습 기록',exact:true}).click();
   const journal=p.getByRole('tabpanel',{name:'학습 기록',exact:true});
   assert.equal(await journal.locator('.record-card').count(),0);
+  await journal.locator('.journal-day-trigger').click();
   await journal.locator('.journal-session-trigger').click();
   assert.ok(await journal.locator('.journal-mobile').isVisible());
   await journal.locator('.journal-word-trigger').first().click();

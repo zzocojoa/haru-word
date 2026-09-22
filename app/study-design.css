@@ -424,12 +424,21 @@ footer { color: var(--notebook-caption); padding-block: 25px; align-items: cente
 .backup-error { color: #a82332; font-size: .875rem; line-height: 1.65; overflow-wrap: anywhere; }
 .backup-confirm { max-height: 90dvh; overflow-y: auto; }
 
-/* Browse the journal by session; open only the record needed on a phone. */
+/* One row per study day, then individual attempts and mobile word details. */
 .journal-list { margin-top: 22px; }
+.journal-day { border-color: var(--border); }
+.journal-day-trigger { align-items: center; gap: 12px; padding: 20px 0; }
+.journal-day-trigger:hover { text-decoration: none; }
+.journal-day-trigger:hover .journal-date { color: var(--primary); }
+.journal-day-trigger > svg { color: var(--notebook-caption); }
+.journal-day-summary { font-size: .875rem; font-weight: 400; color: var(--notebook-caption); overflow-wrap: anywhere; }
+.journal-day-content { padding-bottom: 16px; }
+.journal-day-sessions { border-left: 2px solid #dce6f8; padding-left: 16px; }
+.journal-session-number { font-size: .875rem; color: var(--notebook-caption); }
 .journal-session { margin-bottom: 0; padding-top: 0; border-top: 0; border-bottom: 1px solid var(--border); }
 .journal-session-trigger { align-items: center; gap: 12px; padding: 20px 0; }
 .journal-session-trigger:hover, .journal-word-trigger:hover { text-decoration: none; }
-.journal-session-trigger:hover .journal-date, .journal-word-trigger:hover b { color: var(--primary); }
+.journal-session-trigger:hover .journal-session-number, .journal-word-trigger:hover b { color: var(--primary); }
 .journal-session-trigger > svg, .journal-word-trigger > svg { color: var(--notebook-caption); }
 .journal-session-summary { display: grid; gap: 5px; flex: 1; min-width: 0; }
 .journal-session-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
@@ -453,7 +462,8 @@ footer { color: var(--notebook-caption); padding-block: 25px; align-items: cente
 .journal-word-detail .record-card { margin: 0; background: #f8faff; }
 .journal-word-detail .record-card dl { font-size: .875rem; }
 @media(max-width:560px) {
-  .journal-session-trigger { gap: 8px; padding: 18px 0; }
+  .journal-day-trigger, .journal-session-trigger { gap: 8px; padding: 18px 0; }
+  .journal-day-sessions { padding-left: 10px; }
   .journal-toggle-label { display: none; }
   .journal-session-heading { gap: 6px 10px; }
 }

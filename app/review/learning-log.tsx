@@ -25,7 +25,6 @@ import {
   exportLog,
   exportTutor,
   FAMILIARITY_TEXT,
-  KIND_TEXT,
   nextAction,
   POS,
   RESULT_TEXT,
@@ -37,6 +36,7 @@ import {
   type State,
   type Word,
 } from "@/lib/learning";
+import { groupJournalSessions, journalSessionLabel } from "@/lib/learning-journal";
 import { ArrowRight, Download, NotebookPen } from "lucide-react";
 import { memo, useMemo, useState } from "react";
 import { FeedbackDetail } from "../sentence-feedback";
@@ -72,20 +72,15 @@ export function LearningLog({
   onRestoreOpen: () => void;
   onCorrectDate: (id: string) => void;
 }) {
-  const sessions = useMemo(
-    () =>
-      Object.values(state.sessions).sort((a, b) =>
-        b.createdAt.localeCompare(a.createdAt),
-      ),
-    [state.sessions],
-  );
-  const [selected, setSelected] = useState("all");
+  const [selected, setSelected] = useState<"all" | Kind>("all");
   const [limit, setLimit] = useState(LOG_PAGE_SIZE);
+  const [openDate, setOpenDate] = useState("");
   const [openSession, setOpenSession] = useState("");
   const list = useMemo(
-    () => sessions.filter((s) => selected === "all" || s.kind === selected),
-    [sessions, selected],
+    () => groupJournalSessions(Object.values(state.sessions), selected),
+    [state.sessions, selected],
   );
+  const sessionCount = list.reduce((count, day) => count + day.sessions.length, 0);
   return (
     <section className="wide-panel">
       <div className="section-heading">
@@ -93,7 +88,7 @@ export function LearningLog({
           <p className="eyebrow">LEARNING JOURNAL</p>
           <h2>쌓이는 나의 영어</h2>
           <p className="muted">
-            날짜를 누르면 단어별 기록을 볼 수 있어요.
+            같은 날의 학습을 모았어요. 날짜를 눌러 회차별 기록을 확인하세요.
           </p>
         </div>
         <div className="button-row">
@@ -154,8 +149,9 @@ export function LearningLog({
       <Select
         value={selected}
         onValueChange={(v) => {
-          setSelected(v);
+          setSelected(v as "all" | Kind);
           setLimit(LOG_PAGE_SIZE);
+          setOpenDate("");
           setOpenSession("");
         }}
       >
@@ -177,73 +173,58 @@ export function LearningLog({
           <p>{selected === "all" ? "오늘의 단어를 배우면 이곳에 기록이 쌓여요." : "다른 종류를 선택하면 이전 기록을 볼 수 있어요."}</p>
         </div>
       ) : (
-        <Accordion type="single" collapsible value={openSession} onValueChange={setOpenSession} className="journal-list">
-          {list.slice(0, limit).map((s) => {
-            const complete = s.ids.filter(id => s.records[id] && sessionRecordComplete(s, s.records[id])).length;
-            const preview = s.ids.slice(0, 3).map(id => words.find(w => w.id === entryIdFor(s, id))?.word || "단어").join(" · ");
-            return <AccordionItem className="journal-session" key={s.id} value={s.id}>
-              <AccordionTrigger className="journal-session-trigger">
-                <span className="journal-session-summary">
-                  <span className="journal-session-heading">
-                  <time className="journal-date" dateTime={s.date}>{s.date}</time>
-                  <span className="level-badge">
-                    {s.practiceMode === "repeat"
-                      ? "다시 학습 · " + s.period
-                      : KIND_TEXT[s.kind]}
+        <Accordion
+          type="single"
+          collapsible
+          value={openDate}
+          onValueChange={(value) => { setOpenDate(value); setOpenSession(""); }}
+          className="journal-list"
+        >
+          {list.slice(0, limit).map((day) => {
+            const kinds = new Map<string, number>();
+            for (const { session } of day.sessions) {
+              const label = journalSessionLabel(session);
+              kinds.set(label, (kinds.get(label) || 0) + 1);
+            }
+            const summary = [...kinds].map(([label, count]) => `${label} ${count}`).join(" · ");
+            return (
+              <AccordionItem className="journal-day" value={day.date} key={day.date}>
+                <AccordionTrigger className="journal-day-trigger">
+                  <span className="journal-session-summary">
+                    <span className="journal-session-heading">
+                      <time className="journal-date" dateTime={day.date}>{day.date}</time>
+                      <span className="level-badge">{day.sessions.length}회차</span>
+                    </span>
+                    <span className="journal-day-summary">{summary}</span>
                   </span>
-                  </span>
-                  <span className="journal-session-count">
-                    {s.ids.length}개 · 완료 {complete}개 · {s.finished ? "회차 종료" : "진행 중"}
-                  </span>
-                  <span className="journal-session-preview"><span lang="en">{preview}</span>{s.ids.length > 3 && ` 외 ${s.ids.length - 3}개`}</span>
-                </span>
-                <span className="journal-toggle-label">{openSession === s.id ? "접기" : "기록 보기"}</span>
-              </AccordionTrigger>
-              <AccordionContent className="journal-session-content">
-              <div className="button-row journal-session-actions">
-                {s.finished && s.kind === "daily" && (
-                  <button
-                    className="text-button"
-                    disabled={busy}
-                    onClick={() => onCorrectDate(s.id)}
-                    aria-label={`${s.date} ${s.ids.length}개 학습일 수정`}
-                  >
-                    학습일 수정
-                  </button>
-                )}
-                {s.finished && s.kind === "daily" && (
-                  <button
-                    className="text-button"
-                    onClick={() => onReview(s.date)}
-                  >
-                    단어 다시 보기 <ArrowRight size={15} />
-                  </button>
-                )}
-                {!s.finished && (
-                  <button
-                    className="text-button"
-                    disabled={busy}
-                    onClick={() => start(s.kind, s.period, s)}
-                  >
-                    이어서 학습 <ArrowRight size={15} />
-                  </button>
-                )}
-              </div>
-              <div className="journal-mobile">
-                <SessionRecords session={s} words={words} compact />
-              </div>
-              <div className="journal-desktop">
-                <SessionLogTable session={s} words={words} />
-              </div>
-              </AccordionContent>
-            </AccordionItem>;
+                  <span className="journal-toggle-label">{openDate === day.date ? "접기" : "회차 보기"}</span>
+                </AccordionTrigger>
+                <AccordionContent className="journal-day-content">
+                  <Accordion type="single" collapsible value={openSession} onValueChange={setOpenSession} className="journal-day-sessions">
+                    {day.sessions.map(({ session, number }) => (
+                      <JournalSessionItem
+                        key={session.id}
+                        session={session}
+                        number={number}
+                        open={openSession === session.id}
+                        words={words}
+                        busy={busy}
+                        start={start}
+                        onReview={onReview}
+                        onCorrectDate={onCorrectDate}
+                      />
+                    ))}
+                  </Accordion>
+                </AccordionContent>
+              </AccordionItem>
+            );
           })}
         </Accordion>
       )}
       {list.length > 0 && (
         <p className="small-note" role="status">
-          전체 {list.length.toLocaleString()}회차 중{" "}
-          {Math.min(limit, list.length).toLocaleString()}회차를 보고 있어요.
+          {selected === "all" ? "전체" : "선택한 종류의"} {list.length.toLocaleString()}일 · {sessionCount.toLocaleString()}회차 중{" "}
+          {Math.min(limit, list.length).toLocaleString()}일의 기록을 보고 있어요.
         </p>
       )}
       {list.length > limit && (
@@ -261,6 +242,69 @@ export function LearningLog({
     </section>
   );
 }
+function JournalSessionItem({
+  session: s, number, open, words, busy, start, onReview, onCorrectDate,
+}: Pick<Props, "words" | "busy" | "start"> & {
+  session: Session;
+  number: number;
+  open: boolean;
+  onReview: (date: string) => void;
+  onCorrectDate: (id: string) => void;
+}) {
+  const complete = s.ids.filter(id => s.records[id] && sessionRecordComplete(s, s.records[id])).length;
+  const preview = s.ids.slice(0, 3)
+    .map(id => words.find(w => w.id === entryIdFor(s, id))?.word || "단어")
+    .join(" · ");
+  return (
+    <AccordionItem className="journal-session" value={s.id}>
+      <AccordionTrigger className="journal-session-trigger">
+        <span className="journal-session-summary">
+          <span className="journal-session-heading">
+            <span className="journal-session-number">{number}회차</span>
+            <span className="level-badge">{journalSessionLabel(s)}</span>
+          </span>
+          <span className="journal-session-count">
+            {s.ids.length}개 · 완료 {complete}개 · {s.finished ? "회차 종료" : "진행 중"}
+          </span>
+          <span className="journal-session-preview">
+            <span lang="en">{preview}</span>{s.ids.length > 3 && ` 외 ${s.ids.length - 3}개`}
+          </span>
+          {s.practiceMode === "repeat" && s.period !== s.date && (
+            <span className="journal-session-count">원래 학습일 {s.period}</span>
+          )}
+        </span>
+        <span className="journal-toggle-label">{open ? "접기" : "기록 보기"}</span>
+      </AccordionTrigger>
+      <AccordionContent className="journal-session-content">
+        <div className="button-row journal-session-actions">
+          {s.finished && s.kind === "daily" && (
+            <>
+              <button
+                className="text-button"
+                disabled={busy}
+                onClick={() => onCorrectDate(s.id)}
+                aria-label={`${s.date} ${s.ids.length}개 학습일 수정`}
+              >
+                학습일 수정
+              </button>
+              <button className="text-button" onClick={() => onReview(s.date)}>
+                단어 다시 보기 <ArrowRight size={15} />
+              </button>
+            </>
+          )}
+          {!s.finished && (
+            <button className="text-button" disabled={busy} onClick={() => start(s.kind, s.period, s)}>
+              이어서 학습 <ArrowRight size={15} />
+            </button>
+          )}
+        </div>
+        <div className="journal-mobile"><SessionRecords session={s} words={words} compact /></div>
+        <div className="journal-desktop"><SessionLogTable session={s} words={words} /></div>
+      </AccordionContent>
+    </AccordionItem>
+  );
+}
+
 const SessionLogTable = memo(function SessionLogTable({
   session: s,
   words,
