@@ -1,5 +1,8 @@
 # 학습 앱 검증
 
+- `refactor-contracts.test.mjs`: 기존 공개 API, 학습 모듈의 순환·역방향 의존성, 변경하지 않은 객체 참조와 저장 변경분, 무변경 재개의 동일성을 확인합니다.
+- `refactor-lifecycle-qa.cjs`: 임시 로컬 계정으로 초안의 탭 전환/설정 변경/재접속 보존, 타이머의 가시성·일시 정지, 다음 문제 초기화·초점, axe 3상태를 확인합니다. 타이머 시나리오만 가상 시간을 사용합니다. 결과는 `outputs/refactor-audit/`입니다.
+
 Node 22.13 이상에서 `npm test`, `npm run typecheck`를 실행합니다. 앱 소스 린트는 `node node_modules/eslint/bin/eslint.js app lib db`입니다.
 
 브라우저 검증은 프로덕션 빌드 후 로컬 Worker의 8787 포트에서 실행합니다. 각 `*-qa.cjs`를 Node로 실행하며, 로컬 임시 계정만 생성합니다. 배포 URL에 테스트 인증 헤더를 보내거나 운영 학습 기록을 수정하지 마세요. Playwright 경로는 현재 Codex 번들에 맞춰져 있으므로 다른 환경에서는 해당 경로를 변경해야 합니다.

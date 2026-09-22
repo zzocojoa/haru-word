@@ -1,85 +1,489 @@
 "use client";
-import { lazy,Suspense,useCallback,useEffect, useMemo, useRef,useState } from "react";
-import { ArrowRight, BookOpen, CalendarCheck, CalendarDays, Check, ChevronRight, Cloud, Info, Loader2, NotebookPen, RotateCcw, Settings2 } from "lucide-react";
-import { Tabs,TabsList,TabsTrigger,TabsContent } from "@/components/ui/tabs";
-import { Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription } from "@/components/ui/dialog";
-import { AlertDialog,AlertDialogAction,AlertDialogCancel,AlertDialogContent,AlertDialogDescription,AlertDialogFooter,AlertDialogHeader,AlertDialogTitle,AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { Select,SelectContent,SelectItem,SelectTrigger,SelectValue } from "@/components/ui/select";
-import { Progress as ProgressBar } from "@/components/ui/progress";
-import { WORDS,cardContent } from "@/lib/catalog";
-import { MAX_DAILY_GOAL,learningMetrics,needsInitialAssessment,dailyAssignedIds,hasReviewWork,POS,FAMILIARITY_TEXT,pickDaily,assessmentSample,assessmentAdvice,revealFamiliarity,confirmFamiliarity,newSession,repeatDailySession,ensureCarryover,extendReviewSession,type Level,type Familiarity,type Kind,type PracticeMode,type Session } from "@/lib/learning";
-import { dailyOrigins } from "@/lib/study-date-correction";
-import { StudyDateDialog } from "./study-date-dialog";
-import { useStudyDate } from "./use-study-date";
-import { useLearningStore } from "./use-learning-store";
-import { LevelSelect,download } from "./ui";
-import { FamiliarityCard } from "./familiarity-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ArrowRight,
+  BookOpen,
+  CalendarCheck,
+  CalendarDays,
+  ChevronRight,
+  Info,
+  NotebookPen,
+  RotateCcw,
+  Settings2,
+} from "lucide-react";
+import { Suspense, lazy } from "react";
 import { CompletedLesson } from "./completed-lesson";
+import { CandidatePreparation } from "./learning/candidate-preparation";
+import { FamiliarityAssessment } from "./learning/familiarity-assessment";
+import { LearningAside } from "./learning/learning-aside";
+import { SaveError } from "./learning/save-error";
+import { SaveStatus } from "./learning/save-status";
+import { SettingsDialog } from "./learning/settings-dialog";
+import { SourceDialog } from "./learning/source-dialog";
+import { TodayOverview } from "./learning/today-overview";
+import type { View } from "./learning/types";
+import { useLearningController } from "./learning/use-learning-controller";
+import { PendingReviews } from "./pending-reviews";
+import { LearningLog, ReviewDesk } from "./review-and-log";
+import { StudyDateDialog } from "./study-date-dialog";
 import { StudySession } from "./study-session";
 import { WordLibrary } from "./word-library";
-import { PendingReviews } from "./pending-reviews";
-import { ReviewDesk,LearningLog } from "./review-and-log";
-type View='today'|'library'|'review'|'log';
-const BackupDialog=lazy(()=>import('./backup-dialog'));
-export default function LearningApp({initialServerTime}:{initialServerTime:number}){
- const store=useLearningStore();const {state,save,loading,saving,error,signedIn,unsaved,conflict,current:currentState}=store;
- const [reviewDate,setReviewDate]=useState<string|null>(null);
- const [backupOpen,setBackupOpen]=useState(false);
- const [correctingSession,setCorrectingSession]=useState<string|null>(null);
- const saveError=useRef<HTMLDivElement>(null);
- useEffect(()=>{if(error&&!backupOpen)saveError.current?.scrollIntoView({block:'center',behavior:'auto'})},[error,backupOpen]);
- const [navigation,setNavigation]=useState<{view:View;visited:View[]}>({view:'today',visited:['today']});
- const tab=navigation.view;
- const setTab=useCallback((view:View)=>setNavigation(previous=>({view,visited:previous.visited.includes(view)?previous.visited:[...previous.visited,view]})),[]);
- const [preparing,setPreparing]=useState(false);const [assessing,setAssessing]=useState(false);const [showSession,setShowSession]=useState(false);const [about,setAbout]=useState(false);const [settings,setSettings]=useState(false);const [message,setMessage]=useState('');
- const words=useMemo(()=>[...WORDS,...Object.values(state.progress).flatMap(p=>p.personal?[p.personal]:[])],[state.progress]);
- const clock=useStudyDate(initialServerTime);const date=clock.date;const currentStudyDate=clock.currentDate;const busy=loading||saving||!signedIn||unsaved||conflict||!clock.ready;
- const active=state.settings.activeSessionId?state.sessions[state.settings.activeSessionId]:undefined;
- const todays=Object.values(state.sessions).filter(s=>s.kind==='daily'&&s.date===date);const unfinished=todays.find(s=>!s.finished);const finished=todays.length>0&&todays.every(s=>s.finished);
- const repeating=Object.values(state.sessions).find(s=>s.kind==='practice'&&s.practiceMode==='repeat'&&s.period===date&&!s.finished);
- const assessment=state.settings.assessments[state.settings.level];const assessed=!!assessment?.completed;
- const initialAssessment=needsInitialAssessment(state);
- const assignedIds=useMemo(()=>dailyAssignedIds(state,date),[state,date]);const remaining=Math.max(0,state.settings.dailyGoal-assignedIds.length);
- const suggestions=useMemo(()=>pickDaily(words,state,date),[words,state,date]);const metrics=useMemo(()=>learningMetrics(state),[state]);const carry=metrics.carry;
- const visibleIds=unfinished?.ids||(finished?assignedIds:suggestions);
- const origins=useMemo(()=>dailyOrigins(state,visibleIds,date),[state,visibleIds,date]);
 
- async function changeGoal(dailyGoal:number){if(await save({...state,settings:{...state.settings,dailyGoal}})){if(finished&&dailyGoal>assignedIds.length&&showSession&&active?.finished){setShowSession(false);setTab('today');}setMessage('');}}
- async function changeLevel(level:Level){await save({...state,settings:{...state.settings,level}});setMessage('');}
- async function beginAssessment(level=state.settings.level){let next={...state,settings:{...state.settings,level}};const current=state.settings.assessments[level];if(!current||current.completed)next={...state,settings:{...state.settings,level,assessments:{...state.settings.assessments,[level]:{ids:assessmentSample(words,level),index:0,marks:{},completed:false}}}};if(await save(next)){setAssessing(true);setPreparing(false);setShowSession(false);setTab('today');}}
- async function revealMeaning(id:string,initial:Familiarity,answer:string){await save({...state,progress:{...state.progress,[id]:revealFamiliarity(state.progress[id],initial,answer,cardContent(id,state.progress[id]).meaning)}})}
- async function markFamiliarity(f:Familiarity){if(!assessment)return;const id=assessment.ids[assessment.index];const a={...assessment,index:assessment.index+1,marks:{...assessment.marks,[id]:f},completed:assessment.index+1>=assessment.ids.length};await save({...state,progress:{...state.progress,[id]:confirmFamiliarity(state.progress[id],f)},settings:{...state.settings,assessments:{...state.settings.assessments,[state.settings.level]:a}}});}
- async function start(kind:Kind,period?:string,existing?:Session,practiceMode?:PracticeMode){if(busy)return;
- if(kind==='daily'&&!existing&&clock.currentDate()!==date){setMessage('날짜가 바뀌었어요. 오늘 목록이 갱신된 뒤 다시 시작해 주세요.');void clock.refresh();return;}
- if(kind==='daily'&&!existing&&!unfinished){if(initialAssessment){await beginAssessment();return;}if(suggestions.some(id=>!state.progress[id]?.familiarity&&!hasReviewWork(state.progress[id]))){setPreparing(true);setAssessing(false);return;}}
-const current=existing||(kind==='daily'?unfinished:undefined);let resumed=current;try{if(current)resumed=extendReviewSession(state,words,current,id=>cardContent(id,state.progress[id]))}catch(error){setMessage(error instanceof Error?error.message:'점검을 준비하지 못했어요.');return;}const s=resumed?{...resumed,paused:false}:newSession(state,words,id=>cardContent(id,state.progress[id]),kind,clock.currentDate(),period,practiceMode);if(s&&!resumed)s.createdAt=new Date(clock.now()).toISOString();if(!s){setMessage('학습할 대상이 없어요. 다른 수준을 선택하거나 친숙도를 확인해 주세요.');return;}const next={...state,settings:{...state.settings,activeSessionId:s.id},sessions:{...state.sessions,[s.id]:s}};if(await save(s.kind==='daily'?ensureCarryover(next,s):next)){setShowSession(true);setAssessing(false);setPreparing(false);setTab('today');setMessage('');}}
- async function repeat(sourceDate:string){if(busy)return;const latest=currentState.current;const s=repeatDailySession(latest,words,sourceDate,clock.currentDate());if(s&&!latest.sessions[s.id])s.createdAt=new Date(clock.now()).toISOString();if(!s){setMessage('일일 학습을 먼저 마친 뒤 다시 학습할 수 있어요.');return;}if(await save({...latest,settings:{...latest.settings,activeSessionId:s.id},sessions:{...latest.sessions,[s.id]:s}})){setReviewDate(null);setShowSession(true);setAssessing(false);setPreparing(false);setTab('today');setMessage('');}}
- function closeSession(){setShowSession(false);setAssessing(false);setPreparing(false)}
- function restored(){closeSession();setReviewDate(null);setTab('log');setMessage('');}
- function openRestore(){
-  if(showSession&&active&&!active.finished||assessing||preparing){setTab('today');setMessage(showSession?'작성 중인 답을 보관하려면 ‘오늘 종료 · 저장’을 누른 뒤 ‘학습 홈으로’ 돌아와서 백업을 가져와 주세요.':'친숙도 확인을 마치고 ‘여기까지 저장’으로 홈에 돌아온 뒤 백업을 가져와 주세요.');return;}
-  setBackupOpen(true);
- }
- useEffect(()=>{type Context={registerTool:(tool:{name:string;description:string;inputSchema:object;annotations:object;execute:(input:unknown)=>unknown},options:{signal:AbortSignal})=>void|Promise<void>};const context=(document as Document&{modelContext?:Context}).modelContext;if(!context?.registerTool)return;const lifecycle=new AbortController();const register=(tool:Parameters<Context['registerTool']>[0])=>{try{void Promise.resolve(context.registerTool(tool,{signal:lifecycle.signal})).catch(()=>console.warn('Learning tool unavailable'));}catch{console.warn('Learning tool unavailable')}};register({name:'get_learning_summary',description:'Read the saved learning counts and current level. Does not grade or complete items.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:true},execute:()=>{const s=currentState.current;return {level:s.settings.level,dailyGoal:s.settings.dailyGoal,learned:Object.values(s.progress).filter(p=>p.lastStudied).length,carryover:Object.values(s.progress).filter(p=>hasReviewWork(p)).length,activeSessionId:s.settings.activeSessionId,studyDate:currentStudyDate(),sessions:Object.values(s.sessions).map(x=>({id:x.id,kind:x.kind,date:x.date,createdAt:x.createdAt,finished:x.finished,count:x.ids.length}))}}});register({name:'show_learning_view',description:'Navigate to a study view. Does not start or complete learning.',inputSchema:{type:'object',properties:{view:{type:'string',enum:['today','library','review','log']}},required:['view'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:input=>{if(!input||typeof input!=='object'||Object.keys(input).length!==1||!('view'in input)||!['today','library','review','log'].includes(String(input.view)))throw new Error('Invalid view');setTab(input.view as View);return {view:input.view,completed:false}}});return()=>lifecycle.abort();},[currentState,setTab,currentStudyDate]);
- const candidate=words.find(w=>w.id===suggestions.find(id=>!state.progress[id]?.familiarity&&!hasReviewWork(state.progress[id])));
- const assessmentWord=assessment?.ids[assessment.index]?words.find(w=>w.id===assessment.ids[assessment.index]):undefined;
- return <main className="shell" data-studying={tab==='today'&&(showSession&&active&&!active.finished||assessing||preparing)?"true":undefined}><header className="topbar"><div className="brand"><span className="brand-icon"><BookOpen size={22}/></span>하루단어<span className="brand-en">WORD BY WORD</span></div><div className="top-actions"><span className="save-state" data-state={unsaved?"error":saving?"saving":"saved"} role="status">{saving?<Loader2 size={15} className="spin"/>:<Cloud size={16}/>}<span>{loading?'기록 불러오는 중':saving?'저장 중':unsaved?'저장 필요':signedIn?'서버에 저장됨':'로그인 전'}</span></span><button className="icon-button" aria-label="학습 설정" onClick={()=>setSettings(true)}><Settings2 size={19}/></button></div></header><div className="page-wrap"><div className="page-heading"><div><p className="eyebrow">하루 15분, 나를 위한 영어</p><h1>{tab==='today'?'오늘도, 한 단어씩.':tab==='library'?'나의 단어장':tab==='review'?'다시 만나는 단어들':'나의 학습 기록'}</h1><p className="muted">{tab==='today'?'헷갈리는 뜻에서, 나만의 문장까지.':'조금씩 배우고, 여러 번 꺼내 보세요.'}</p></div><span className="daily-label"><CalendarDays size={17}/>{new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',month:'long',day:'numeric',weekday:'short'}).format(new Date(date+"T12:00:00+09:00"))}</span></div>
- <Tabs key={store.epoch} value={tab} onValueChange={v=>{setTab(v as View);window.scrollTo({top:0,behavior:"auto"})}} className="main-tabs"><TabsList className="main-nav" aria-label="학습 화면"><TabsTrigger value="today" aria-label="오늘의 학습"><BookOpen/><span className="nav-label-wide">오늘의 학습</span><span className="nav-label-compact" aria-hidden="true">오늘 학습</span></TabsTrigger><TabsTrigger value="library" aria-label="전체 단어장"><NotebookPen/><span className="nav-label-wide">전체 단어장</span><span className="nav-label-compact" aria-hidden="true">단어장</span></TabsTrigger><TabsTrigger value="review" aria-label="주간·월말 점검"><RotateCcw/><span className="nav-label-wide">주간·월말 점검</span><span className="nav-label-compact" aria-hidden="true">복습 점검</span></TabsTrigger><TabsTrigger value="log" aria-label="학습 기록"><CalendarCheck/><span className="nav-label-wide">학습 기록</span><span className="nav-label-compact" aria-hidden="true">학습 기록</span></TabsTrigger></TabsList>
- {!loading&&!signedIn&&!error&&<div className="notice sign-in-notice"><div><b>학습 기록을 안전하게 이어가세요.</b><p>ChatGPT 계정으로 로그인하면 다른 기기에서도 같은 기록을 사용할 수 있어요.</p></div><a className="primary-button" href="/signin-with-chatgpt?return_to=%2F" target="_top">로그인하고 학습하기 <ArrowRight size={17}/></a></div>}
- {error&&<div ref={saveError} className="error-banner" role="alert"><p>{error}</p><div className="button-row">{!conflict&&<button className="secondary-button" disabled={saving} onClick={()=>unsaved?store.retry():store.load()}>다시 시도</button>}{unsaved&&<button className="text-button" onClick={()=>download('haru-unsaved-backup.json',JSON.stringify(state,null,2))}>현재 입력 백업</button>}{conflict&&<AlertDialog><AlertDialogTrigger asChild><button className="secondary-button">최신 기록 불러오기</button></AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>서버의 최신 기록을 불러올까요?</AlertDialogTitle><AlertDialogDescription>저장하지 못한 현재 변경 내용은 교체됩니다. 필요한 입력은 먼저 백업하세요.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>취소</AlertDialogCancel><AlertDialogAction onClick={()=>{void store.load()}}>최신 기록 불러오기</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>}</div></div>}
- {message&&<p className="notice" role="status">{message}</p>}
- <TabsContent value="today" forceMount hidden={tab!=='today'}><div className="workspace"><div className="main-study">
- {clock.error&&<p className="notice" role="alert">한국 시간을 확인하지 못했어요. 기록은 보존돼요. 연결을 확인하고 <button className="text-button" onClick={()=>void clock.refresh()}>시간 다시 확인</button></p>}{loading?<section className="learning-panel loading-surface" aria-busy="true"><p className="eyebrow">나의 학습 노트</p><h2>학습 기록을 불러오고 있어요.</h2><div className="loading-lines" aria-hidden="true"><span/><span/><span/></div></section>:showSession&&active&&!(active.finished&&active.kind==='daily'&&active.date!==date)?<StudySession key={active.id} currentState={currentState} state={state} session={active} words={words} activityDate={clock.currentDate} date={date} save={save} busy={busy} saved={!saving&&!unsaved} visible={tab==='today'} onClose={closeSession} onReview={setReviewDate} onRepeat={repeat}/>:
- assessing&&assessment?<section className="learning-panel"><div className="panel-top"><span className="eyebrow">01 · 나의 출발점</span><span className="level-badge">{state.settings.level}</span></div>{assessment.completed?<><div className="success-icon"><Check/></div><h2>나의 출발점을 찾았어요.</h2><p className="muted">{assessmentAdvice(assessment,state.settings.level).text}</p><div className="assessment-results">{(['known','uncertain','new']as const).map(f=><div key={f}><b>{Object.values(assessment.marks).filter(x=>x===f).length}</b><span>{FAMILIARITY_TEXT[f]}</span></div>)}</div><p className="small-note">같은 표시가 20개 중 14개 이상이면 수준 조정을 안내해요. 이 앱의 탐색 기준이며, 정식 CEFR 시험이나 말하기 능력 판정이 아닙니다.</p><div className="button-row"><button className="primary-button" disabled={busy} onClick={()=>{setAssessing(false);void start('daily')}}>이 수준에서 학습하기 <ArrowRight size={17}/></button>{assessmentAdvice(assessment,state.settings.level).suggested!==state.settings.level&&<button className="secondary-button" disabled={busy} onClick={()=>beginAssessment(assessmentAdvice(assessment,state.settings.level).suggested)}>다른 수준 확인</button>}</div>{assessmentAdvice(assessment,state.settings.level).goal&&<div className="button-row batch-actions">{[1,2].map(n=><button className="secondary-button" disabled={busy} aria-pressed={state.settings.dailyGoal===n} key={n} onClick={()=>save({...state,settings:{...state.settings,dailyGoal:n}})}>하루 {n}개로 설정</button>)}</div>}<button className="text-button skip" onClick={()=>{setAssessing(false);setMessage('준비를 저장했어요. 다음 방문부터 일일 루틴을 시작하세요.')}}>오늘은 준비만 마치기</button></>:<><h2>뜻을 떠올리고, 확인해 보세요.</h2><p className="muted">먼저 나의 생각을 남기고 풀이와 비교해요. 말하기·문장 능력은 따로 확인합니다.</p>{assessmentWord&&<FamiliarityCard key={assessmentWord.id} word={assessmentWord} check={state.progress[assessmentWord.id]?.familiarityCheck} busy={busy} onReveal={(initial,answer)=>revealMeaning(assessmentWord.id,initial,answer)} onConfirm={markFamiliarity}/>}<div className="progress-caption"><span>범위 탐색용 표본 · 정식 수준 시험이 아니에요</span><span>{assessment.index} / {assessment.ids.length}</span></div><ProgressBar aria-label="친숙도 확인 진행률" value={assessment.index/assessment.ids.length*100}/><button className="text-button skip" onClick={()=>setAssessing(false)}>여기까지 저장 · 나중에 계속</button></>}</section>:
- preparing?<section className="learning-panel"><p className="eyebrow">TODAY’S WORDS</p><h2>{candidate?'오늘 후보의 친숙도를 확인해요.':'오늘의 목표를 정했어요.'}</h2><p className="muted">이월 → 헷갈림 → 처음 순서예요. 아는 단어는 새 목표에서 제외하고 후속 점검에 남겨요.</p>{candidate?<FamiliarityCard key={candidate.id} word={candidate} check={state.progress[candidate.id]?.familiarityCheck} busy={busy} onReveal={(initial,answer)=>revealMeaning(candidate.id,initial,answer)} onConfirm={f=>save({...state,progress:{...state.progress,[candidate.id]:confirmFamiliarity(state.progress[candidate.id],f)}})}/>:<><p className="prepared-words">{suggestions.map(id=>words.find(w=>w.id===id)?.word).join(' · ')}</p><button className="primary-button full" disabled={busy||!suggestions.length} onClick={()=>start('daily')}>이 단어들로 시작 <ArrowRight size={17}/></button></>}<button className="text-button skip" onClick={()=>setPreparing(false)}>여기까지 저장 · 홈으로</button></section>:
- <><section className="learning-panel home-panel"><div className="panel-top"><span className="eyebrow"><time dateTime={date}>{date}</time>오늘의 학습 노트</span><LevelSelect value={state.settings.level} onChange={changeLevel} disabled={busy}/></div><div className="home-title"><h2>{finished?'오늘의 작은 성취를 쌓았어요.':unfinished?'배우던 단어를 이어서 만나요.':'오늘, 단어 '+state.settings.dailyGoal+'개만 내 것으로.'}</h2><p className="muted">{finished?remaining?`오늘 ${assignedIds.length}개 학습을 마쳤어요. 목표 ${state.settings.dailyGoal}개까지 ${remaining}개를 더 배울 수 있어요.`:'오늘 단어를 다시 살펴보거나, 같은 단어로 한 번 더 학습해 보세요.':unfinished&&remaining?`배우던 ${unfinished.ids.length}개를 먼저 마치면 목표까지 ${remaining}개를 추가할 수 있어요.`:carry?`이월된 ${carry}개 중 오늘 목표 안에 먼저 배정해요.`:'헷갈리는 단어부터, 뜻을 넘어 나의 문장까지.'}</p></div><div className="daily-metrics"><div><span>오늘의 목표</span><b>{Math.max(assignedIds.length,state.settings.dailyGoal)}<small>단어</small></b></div><div><span>나를 위한 시간</span><b>15<small>분</small></b></div><div><span>{finished&&!remaining?'다음 학습 범위':'학습 범위'}</span><b>{state.settings.level}<small>{assessed?'탐색 완료':'임시 시작점'}</small></b></div></div><p className="daily-allocation">{date} 배정 · 이월·복습 {origins.returning}개 · 새 학습 {origins.newCount}개</p><div className="today-words"><header><span>{finished?"오늘 배운 단어":unfinished?(todays.length>1?"이번 회차 목표 단어":"오늘의 목표 단어"):"오늘 만날 단어"}</span><small>{finished?"언제든 다시 볼 수 있어요":"이월 → 헷갈림 → 처음"}</small></header>{visibleIds.map((id,i)=>{const w=words.find(w=>w.id===id)!;const p=state.progress[id];return <div key={id}><span className="today-word-number">{String(i+1).padStart(2,'0')}</span><div><b lang="en">{w.word}</b><small>{POS[w.pos]} · {w.personal?'개인 추가':w.level}</small></div><span className={hasReviewWork(p)?'status-warn':'word-reason'}>{hasReviewWork(p)?(finished?'보완할 단어':'이월'):finished?'학습한 단어':p?.familiarity==='uncertain'?'헷갈리는 단어':p?.familiarity==='new'?'처음 보는 단어':'학습 후보'}</span></div>})}</div>{finished?<div className="completed-actions">{remaining>0&&suggestions.length>0&&<button className="primary-button full" disabled={busy} onClick={()=>start('daily')}>추가 {suggestions.length}개 학습하기 <ArrowRight size={17}/></button>}{remaining>0&&<p className="small-note">{suggestions.length?`기존 ${assignedIds.length}개 기록은 그대로 두고, 추가 단어를 새 회차에 저장해요.${suggestions.length<remaining?' 현재 배정 가능한 단어부터 시작해요.':''}`:'현재 추가할 수 있는 단어가 없어요. 신규 단어 쉬기 설정이나 학습 수준·친숙도를 확인해 주세요.'}</p>}<button className={remaining&&suggestions.length?"secondary-button full":"primary-button full"} onClick={()=>setReviewDate(date)}><BookOpen size={17}/>오늘 단어 다시 보기</button><button className="secondary-button full" disabled={busy} onClick={()=>repeat(date)}><RotateCcw size={17}/>{repeating?'오늘 단어 다시 학습 이어서':'오늘 단어 다시 학습'}</button><p className="small-note">기존 완료 기록은 유지하고, 다시 학습한 결과는 별도 회차로 저장해요.</p><p className="small-note">오늘 배정한 {assignedIds.length}개 회차를 종료했어요. 다음 학습일에는 이월 단어부터 목표를 다시 정해요.</p><button className="text-button" disabled={busy} onClick={()=>setCorrectingSession(todays.at(-1)!.id)}>이 학습을 다른 날 했나요? 학습일 수정</button><button className="text-button" onClick={()=>setTab('log')}>오늘의 기록 보기 <ArrowRight size={17}/></button></div>:<button className="primary-button full" disabled={busy||(!unfinished&&!initialAssessment&&!suggestions.length)} onClick={()=>start('daily')}>{unfinished?'중단한 학습 이어서':initialAssessment?'20개 친숙도부터 확인':!suggestions.length?'지금 배정할 단어가 없어요':'오늘의 학습 시작'}<ArrowRight size={17}/></button>}{(state.settings.newWordsPaused||Object.values(state.sessions).some(s=>s.kind==='monthly'&&!s.finished))&&<p className="notice">신규 단어를 쉬고 있어요. 이월 단어와 진행 중인 월말 점검을 먼저 마쳐요.</p>}{new Date(date+'T12:00:00Z').getUTCDay()===(state.settings.reviewDay??0)&&<button className="text-button" onClick={()=>setTab('review')}>오늘은 정해 둔 주간 점검일이에요 →</button>}<p className="small-note centered">답을 먼저 보지 않고, 스스로 떠올리는 연습을 해요.</p></section><PendingReviews state={state} busy={busy} onResume={s=>start(s.kind,s.period,s)}/>{!assessed&&<section className="assessment-invite"><div><span className="assessment-icon">Aa</span><div><h3>{initialAssessment?'처음이라면, 아는 단어부터 확인해요.':'학습 범위를 다시 확인할 수 있어요.'}</h3><p>{state.settings.level} 목록 여러 부분에서 20개를 살펴봐요. 뜻과 말하기 실력은 따로 기록해요.{!initialAssessment&&' 탐색 중에도 기존 학습은 계속할 수 있어요.'}</p></div></div><button className="text-button" disabled={busy} onClick={()=>beginAssessment()}>{assessment&&!assessment.completed?'탐색 이어서':'친숙도 확인'}<ChevronRight size={17}/></button></section>}</>}
- </div><aside className="study-aside"><section className="routine-panel"><p className="eyebrow">LITTLE BY LITTLE</p><div className="routine-minutes">15<span>분</span></div><h2>기억에 남는 하루의 루틴</h2><div className="routine-list">{[['01','기억 깨우기','이전 단어 확인 · 3분'],['02','오늘의 단어','뜻과 표현 익히기 · 6분'],['03','스스로 떠올리기','양방향 회상 · 3분'],['04','내 문장으로','말하고 써 보기 · 3분']].map(([n,t,d])=><div key={n}><span>{n}</span><p><b>{t}</b><small>{d}</small></p></div>)}</div><p className="routine-note">완벽하게 외우기보다,<br/>다시 꺼내 보는 경험을 쌓아요.</p></section><section className="progress-note"><div><span>지금까지 배운 항목</span><b>{loading?"—":metrics.officialLearned.toLocaleString()}<small> / 3,809</small></b></div><div><span>회상 독립 성공</span><b>{loading?'—':metrics.measured?Math.round(metrics.successes/metrics.measured*100)+'%':'미측정'}</b></div><p>뜻별로 확인한 두 방향의 결과만 계산해요.{metrics.personalLearned>0&&` 개인 추가 ${metrics.personalLearned}개도 학습했어요.`}</p></section></aside></div></TabsContent>
- <TabsContent value="library" forceMount hidden={tab!=='library'}>{navigation.visited.includes('library')&&<WordLibrary activityDate={clock.currentDate} state={state} words={words} save={save} busy={busy}/>}</TabsContent><TabsContent value="review" forceMount hidden={tab!=='review'}>{navigation.visited.includes('review')&&<ReviewDesk date={date} state={state} words={words} start={start} busy={busy} save={save}/>}</TabsContent><TabsContent value="log" forceMount hidden={tab!=='log'}>{navigation.visited.includes('log')&&<LearningLog now={clock.now} date={date} state={state} words={words} start={start} busy={busy} onReview={setReviewDate} onRestoreOpen={openRestore} onCorrectDate={setCorrectingSession}/>}</TabsContent>
- </Tabs><footer><span>매일 조금씩, 내 것이 되는 영어.</span><button className="text-button" onClick={()=>setAbout(true)}>학습 방식·출처 <Info size={14}/></button></footer></div>
- <Dialog open={settings} onOpenChange={setSettings}><DialogContent className="settings-dialog"><DialogHeader><DialogTitle>나의 학습 속도</DialogTitle><DialogDescription>학습 목표에는 이월 단어가 먼저 포함됩니다.</DialogDescription></DialogHeader><label>학습 수준<LevelSelect value={state.settings.level} onChange={changeLevel} disabled={busy}/></label><label>하루 목표 단어 수<Select value={String(state.settings.dailyGoal)} disabled={busy} onValueChange={v=>changeGoal(Number(v))}><SelectTrigger aria-label="하루 목표"><SelectValue/></SelectTrigger><SelectContent>{Array.from({length:MAX_DAILY_GOAL},(_,i)=>i+1).map(n=><SelectItem key={n} value={String(n)}>{n}개{n===3?' · 기본 목표':''}</SelectItem>)}</SelectContent></Select></label><label className="check-label"><input type="checkbox" checked={!!state.settings.newWordsPaused} disabled={busy} onChange={e=>save({...state,settings:{...state.settings,newWordsPaused:e.target.checked}})}/> 신규 단어 잠시 쉬기 · 이월만 배정</label><label>주간 점검 요일<Select value={String(state.settings.reviewDay??0)} disabled={busy} onValueChange={v=>save({...state,settings:{...state.settings,reviewDay:Number(v)}})}><SelectTrigger aria-label="주간 점검 요일"><SelectValue/></SelectTrigger><SelectContent>{['일','월','화','수','목','금','토'].map((day,i)=><SelectItem value={String(i)} key={day}>{day}요일</SelectItem>)}</SelectContent></Select></label><p className="small-note">하루 목표는 1~{MAX_DAILY_GOAL}개로 선택할 수 있어요. 기본은 3개예요. 목표를 늘리면 오늘 학습을 마친 뒤 학습 홈에서 남은 개수를 추가할 수 있어요. 목표를 줄여도 이미 배정한 단어와 기록은 유지해요. 15분 안에 마치지 못한 단어는 다음에 이어서 학습해요.</p><button className="secondary-button" disabled={busy} onClick={()=>{setSettings(false);void beginAssessment()}}>친숙도 다시 확인하기</button><p className="small-note">계정별 서버 저장 · 한국 시간 기준. AI 문장 점검은 버튼을 누를 때만 Google Gemini API를 사용해요. 무료 한도나 연결 오류가 있으면 자기 점검으로 계속할 수 있어요.</p></DialogContent></Dialog>
- {correctingSession&&<StudyDateDialog key={correctingSession} state={state} sessionId={correctingSession} date={date} saving={saving} conflict={conflict} save={save} onClose={()=>setCorrectingSession(null)} onSaved={corrected=>{closeSession();setReviewDate(null);setTab("today");setMessage(`학습일을 ${corrected}로 수정했어요. 오늘 목표를 다시 계산했어요.`)}}/>}
- {reviewDate&&<CompletedLesson todayDate={date} key={reviewDate} state={state} words={words} date={reviewDate} busy={busy} onClose={()=>setReviewDate(null)} onRepeat={repeat}/>}
- {backupOpen&&<Suspense fallback={<p role="status">백업 도구를 여는 중이에요.</p>}><BackupDialog date={date} now={clock.now} state={state} busy={busy} restoring={store.restoring} error={error} conflict={conflict} onClose={()=>setBackupOpen(false)} onRestore={store.restore} onReload={store.load} onComplete={restored}/></Suspense>}
- <SourceDialog open={about} onOpenChange={setAbout}/></main>
+const BackupDialog = lazy(() => import("./backup-dialog"));
+export default function LearningApp({
+  initialServerTime,
+}: {
+  initialServerTime: number;
+}) {
+  const {
+    tab,
+    showSession,
+    active,
+    assessing,
+    preparing,
+    unsaved,
+    saving,
+    loading,
+    signedIn,
+    setSettings,
+    date,
+    store,
+    setTab,
+    error,
+    saveError,
+    conflict,
+    state,
+    message,
+    clock,
+    currentState,
+    words,
+    save,
+    busy,
+    closeSession,
+    setReviewDate,
+    repeat,
+    assessment,
+    setAssessing,
+    start,
+    beginAssessment,
+    setMessage,
+    assessmentWord,
+    revealMeaning,
+    markFamiliarity,
+    candidate,
+    suggestions,
+    setPreparing,
+    changeLevel,
+    finished,
+    unfinished,
+    remaining,
+    assignedIds,
+    carry,
+    assessed,
+    origins,
+    todays,
+    visibleIds,
+    repeating,
+    setCorrectingSession,
+    initialAssessment,
+    metrics,
+    navigation,
+    openRestore,
+    setAbout,
+    settings,
+    changeGoal,
+    correctingSession,
+    reviewDate,
+    backupOpen,
+    setBackupOpen,
+    restored,
+    about,
+  } = useLearningController(initialServerTime);
+  return (
+    <main
+      className="shell"
+      data-studying={
+        tab === "today" &&
+        ((showSession && active && !active.finished) || assessing || preparing)
+          ? "true"
+          : undefined
+      }
+    >
+      <header className="topbar">
+        <div className="brand">
+          <span className="brand-icon">
+            <BookOpen size={22} />
+          </span>
+          하루단어<span className="brand-en">WORD BY WORD</span>
+        </div>
+        <div className="top-actions">
+          <SaveStatus
+            unsaved={unsaved}
+            saving={saving}
+            loading={loading}
+            signedIn={signedIn}
+          />
+          <button
+            className="icon-button"
+            aria-label="학습 설정"
+            onClick={() => setSettings(true)}
+          >
+            <Settings2 size={19} />
+          </button>
+        </div>
+      </header>
+      <div className="page-wrap">
+        <div className="page-heading">
+          <div>
+            <p className="eyebrow">하루 15분, 나를 위한 영어</p>
+            <h1>
+              {tab === "today"
+                ? "오늘도, 한 단어씩."
+                : tab === "library"
+                  ? "나의 단어장"
+                  : tab === "review"
+                    ? "다시 만나는 단어들"
+                    : "나의 학습 기록"}
+            </h1>
+            <p className="muted">
+              {tab === "today"
+                ? "헷갈리는 뜻에서, 나만의 문장까지."
+                : "조금씩 배우고, 여러 번 꺼내 보세요."}
+            </p>
+          </div>
+          <span className="daily-label">
+            <CalendarDays size={17} />
+            {new Intl.DateTimeFormat("ko-KR", {
+              timeZone: "Asia/Seoul",
+              month: "long",
+              day: "numeric",
+              weekday: "short",
+            }).format(new Date(date + "T12:00:00+09:00"))}
+          </span>
+        </div>
+        <Tabs
+          key={store.epoch}
+          value={tab}
+          onValueChange={(v) => {
+            setTab(v as View);
+            window.scrollTo({ top: 0, behavior: "auto" });
+          }}
+          className="main-tabs"
+        >
+          <TabsList className="main-nav" aria-label="학습 화면">
+            <TabsTrigger value="today" aria-label="오늘의 학습">
+              <BookOpen />
+              <span className="nav-label-wide">오늘의 학습</span>
+              <span className="nav-label-compact" aria-hidden="true">
+                오늘 학습
+              </span>
+            </TabsTrigger>
+            <TabsTrigger value="library" aria-label="전체 단어장">
+              <NotebookPen />
+              <span className="nav-label-wide">전체 단어장</span>
+              <span className="nav-label-compact" aria-hidden="true">
+                단어장
+              </span>
+            </TabsTrigger>
+            <TabsTrigger value="review" aria-label="주간·월말 점검">
+              <RotateCcw />
+              <span className="nav-label-wide">주간·월말 점검</span>
+              <span className="nav-label-compact" aria-hidden="true">
+                복습 점검
+              </span>
+            </TabsTrigger>
+            <TabsTrigger value="log" aria-label="학습 기록">
+              <CalendarCheck />
+              <span className="nav-label-wide">학습 기록</span>
+              <span className="nav-label-compact" aria-hidden="true">
+                학습 기록
+              </span>
+            </TabsTrigger>
+          </TabsList>
+          {!loading && !signedIn && !error && (
+            <div className="notice sign-in-notice">
+              <div>
+                <b>학습 기록을 안전하게 이어가세요.</b>
+                <p>
+                  ChatGPT 계정으로 로그인하면 다른 기기에서도 같은 기록을 사용할
+                  수 있어요.
+                </p>
+              </div>
+              <a
+                className="primary-button"
+                href="/signin-with-chatgpt?return_to=%2F"
+                target="_top"
+              >
+                로그인하고 학습하기 <ArrowRight size={17} />
+              </a>
+            </div>
+          )}
+          {error && (
+            <SaveError
+              saveError={saveError}
+              error={error}
+              conflict={conflict}
+              saving={saving}
+              unsaved={unsaved}
+              store={store}
+              state={state}
+            />
+          )}
+          {message && (
+            <p className="notice" role="status">
+              {message}
+            </p>
+          )}
+          <TabsContent value="today" forceMount hidden={tab !== "today"}>
+            <div className="workspace">
+              <div className="main-study">
+                {clock.error && (
+                  <p className="notice" role="alert">
+                    한국 시간을 확인하지 못했어요. 기록은 보존돼요. 연결을
+                    확인하고{" "}
+                    <button
+                      className="text-button"
+                      onClick={() => void clock.refresh()}
+                    >
+                      시간 다시 확인
+                    </button>
+                  </p>
+                )}
+                {loading ? (
+                  <section
+                    className="learning-panel loading-surface"
+                    aria-busy="true"
+                  >
+                    <p className="eyebrow">나의 학습 노트</p>
+                    <h2>학습 기록을 불러오고 있어요.</h2>
+                    <div className="loading-lines" aria-hidden="true">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                  </section>
+                ) : showSession &&
+                  active &&
+                  !(
+                    active.finished &&
+                    active.kind === "daily" &&
+                    active.date !== date
+                  ) ? (
+                  <StudySession
+                    key={active.id}
+                    currentState={currentState}
+                    state={state}
+                    session={active}
+                    words={words}
+                    activityDate={clock.currentDate}
+                    date={date}
+                    save={save}
+                    busy={busy}
+                    saved={!saving && !unsaved}
+                    visible={tab === "today"}
+                    onClose={closeSession}
+                    onReview={setReviewDate}
+                    onRepeat={repeat}
+                  />
+                ) : assessing && assessment ? (
+                  <FamiliarityAssessment
+                    state={state}
+                    assessment={assessment}
+                    busy={busy}
+                    setAssessing={setAssessing}
+                    start={start}
+                    beginAssessment={beginAssessment}
+                    save={save}
+                    setMessage={setMessage}
+                    assessmentWord={assessmentWord}
+                    revealMeaning={revealMeaning}
+                    markFamiliarity={markFamiliarity}
+                  />
+                ) : preparing ? (
+                  <CandidatePreparation
+                    candidate={candidate}
+                    state={state}
+                    busy={busy}
+                    revealMeaning={revealMeaning}
+                    save={save}
+                    suggestions={suggestions}
+                    words={words}
+                    start={start}
+                    setPreparing={setPreparing}
+                  />
+                ) : (
+                  <>
+                    <TodayOverview
+                      date={date}
+                      state={state}
+                      changeLevel={changeLevel}
+                      busy={busy}
+                      finished={finished}
+                      unfinished={unfinished}
+                      remaining={remaining}
+                      assignedIds={assignedIds}
+                      carry={carry}
+                      assessed={assessed}
+                      origins={origins}
+                      todays={todays}
+                      visibleIds={visibleIds}
+                      words={words}
+                      suggestions={suggestions}
+                      start={start}
+                      setReviewDate={setReviewDate}
+                      repeat={repeat}
+                      repeating={repeating}
+                      setCorrectingSession={setCorrectingSession}
+                      setTab={setTab}
+                      initialAssessment={initialAssessment}
+                    />
+                    <PendingReviews
+                      state={state}
+                      busy={busy}
+                      onResume={(s) => start(s.kind, s.period, s)}
+                    />
+                    {!assessed && (
+                      <section className="assessment-invite">
+                        <div>
+                          <span className="assessment-icon">Aa</span>
+                          <div>
+                            <h3>
+                              {initialAssessment
+                                ? "처음이라면, 아는 단어부터 확인해요."
+                                : "학습 범위를 다시 확인할 수 있어요."}
+                            </h3>
+                            <p>
+                              {state.settings.level} 목록 여러 부분에서 20개를
+                              살펴봐요. 뜻과 말하기 실력은 따로 기록해요.
+                              {!initialAssessment &&
+                                " 탐색 중에도 기존 학습은 계속할 수 있어요."}
+                            </p>
+                          </div>
+                        </div>
+                        <button
+                          className="text-button"
+                          disabled={busy}
+                          onClick={() => beginAssessment()}
+                        >
+                          {assessment && !assessment.completed
+                            ? "탐색 이어서"
+                            : "친숙도 확인"}
+                          <ChevronRight size={17} />
+                        </button>
+                      </section>
+                    )}
+                  </>
+                )}
+              </div>
+              <LearningAside loading={loading} metrics={metrics} />
+            </div>
+          </TabsContent>
+          <TabsContent value="library" forceMount hidden={tab !== "library"}>
+            {navigation.visited.includes("library") && (
+              <WordLibrary
+                activityDate={clock.currentDate}
+                state={state}
+                words={words}
+                save={save}
+                busy={busy}
+              />
+            )}
+          </TabsContent>
+          <TabsContent value="review" forceMount hidden={tab !== "review"}>
+            {navigation.visited.includes("review") && (
+              <ReviewDesk
+                date={date}
+                state={state}
+                words={words}
+                start={start}
+                busy={busy}
+                save={save}
+              />
+            )}
+          </TabsContent>
+          <TabsContent value="log" forceMount hidden={tab !== "log"}>
+            {navigation.visited.includes("log") && (
+              <LearningLog
+                now={clock.now}
+                date={date}
+                state={state}
+                words={words}
+                start={start}
+                busy={busy}
+                onReview={setReviewDate}
+                onRestoreOpen={openRestore}
+                onCorrectDate={setCorrectingSession}
+              />
+            )}
+          </TabsContent>
+        </Tabs>
+        <footer>
+          <span>매일 조금씩, 내 것이 되는 영어.</span>
+          <button className="text-button" onClick={() => setAbout(true)}>
+            학습 방식·출처 <Info size={14} />
+          </button>
+        </footer>
+      </div>
+      <SettingsDialog
+        settings={settings}
+        setSettings={setSettings}
+        state={state}
+        changeLevel={changeLevel}
+        busy={busy}
+        changeGoal={changeGoal}
+        save={save}
+        beginAssessment={beginAssessment}
+      />
+      {correctingSession && (
+        <StudyDateDialog
+          key={correctingSession}
+          state={state}
+          sessionId={correctingSession}
+          date={date}
+          saving={saving}
+          conflict={conflict}
+          save={save}
+          onClose={() => setCorrectingSession(null)}
+          onSaved={(corrected) => {
+            closeSession();
+            setReviewDate(null);
+            setTab("today");
+            setMessage(
+              `학습일을 ${corrected}로 수정했어요. 오늘 목표를 다시 계산했어요.`,
+            );
+          }}
+        />
+      )}
+      {reviewDate && (
+        <CompletedLesson
+          todayDate={date}
+          key={reviewDate}
+          state={state}
+          words={words}
+          date={reviewDate}
+          busy={busy}
+          onClose={() => setReviewDate(null)}
+          onRepeat={repeat}
+        />
+      )}
+      {backupOpen && (
+        <Suspense fallback={<p role="status">백업 도구를 여는 중이에요.</p>}>
+          <BackupDialog
+            date={date}
+            now={clock.now}
+            state={state}
+            busy={busy}
+            restoring={store.restoring}
+            error={error}
+            conflict={conflict}
+            onClose={() => setBackupOpen(false)}
+            onRestore={store.restore}
+            onReload={store.load}
+            onComplete={restored}
+          />
+        </Suspense>
+      )}
+      <SourceDialog open={about} onOpenChange={setAbout} />
+    </main>
+  );
 }
-function SourceDialog({open,onOpenChange}:{open:boolean;onOpenChange:(open:boolean)=>void}){return <Dialog open={open} onOpenChange={onOpenChange}><DialogContent className="source-dialog"><DialogHeader><DialogTitle>학습 방식과 자료 출처</DialogTitle><DialogDescription>공식 목록과 학습을 돕는 풀이·예문을 구분합니다.</DialogDescription></DialogHeader><h3>전체 목록</h3><p>첨부 American Oxford 3000 by CEFR level PDF 13쪽의 표제어 3,000개, 원문 행 3,308개를 추출했습니다. 품사와 수준을 분리한 학습 항목은 3,809개입니다. 공식 목록의 수준을 그대로 사용합니다.</p><a className="source-link" href="/sources/oxford-source.pdf" target="_blank" rel="noreferrer">첨부 원문 PDF 보기</a><h3>한국어 풀이와 예문</h3><p>한국어 참고 풀이: LexiSnap Open English-Korean Dictionary를 바탕으로 일부 뜻을 수정했습니다. 이 사전의 CEFR 등급은 사용하지 않습니다.</p><a className="source-link" href="https://github.com/jhseo1211/open-english-korean-dict" target="_blank" rel="noreferrer">사전 출처 · CC BY-SA 4.0</a><p>‘Tatoeba 참고 예문’은 문장별 기여자와 원문 링크를 표시합니다. ‘학습용 작성 예문’은 이 학습 도구를 위해 작성했으며 Oxford 사전 예문이 아닙니다. 뜻과 용례는 연결된 사전으로 확인하고 수정할 수 있습니다.</p><a className="source-link" href="https://www.manythings.org/anki/" target="_blank" rel="noreferrer">Tatoeba 문장 자료 · CC BY 2.0</a><h3>기록과 점검</h3><p>친숙도는 뜻의 익숙함이며 정식 CEFR 판정이 아닙니다. 영어→뜻, 뜻→영어, 문장 사용을 따로 기록합니다. 미측정 항목은 성공이나 실패로 계산하지 않습니다. 주간에는 목표 전체, 월말에는 배운 단어 전체를 확인합니다.</p><p>AI 문장 점검을 누르면 문장과 목표 단어·뜻을 Google Gemini에 보내 교정 의견을 받습니다. 무료 API의 입력·응답은 Google의 서비스 개선에 사용될 수 있습니다. AI 의견은 참고 자료이며, 문장 평가 버튼은 학습자의 자기 평가입니다. 서비스는 Oxford University Press의 공식 제품이 아닙니다.</p><a className="source-link" href="/sources/content-attribution.txt" target="_blank" rel="noreferrer">데이터 변경·라이선스 안내</a></DialogContent></Dialog>}
