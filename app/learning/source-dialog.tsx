@@ -54,6 +54,11 @@ export function SourceDialog({
           작성 예문’은 이 학습 도구를 위해 작성했으며 Oxford 사전 예문이
           아닙니다. 뜻과 용례는 연결된 사전으로 확인하고 수정할 수 있습니다.
         </p>
+        <p>
+          ‘함께 익힐 표현’의 한국어 뜻은 3,809개 기본 항목에 별도로 작성한 학습용
+          해석입니다. 사전 공식 번역이 아니며 학습 중 API 호출 없이 표시됩니다.
+          표현을 바꾸면 새 표현에 맞는 해석을 직접 입력할 수 있습니다.
+        </p>
         <a
           className="source-link"
           href="https://www.manythings.org/anki/"

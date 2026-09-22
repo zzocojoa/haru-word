@@ -20,7 +20,11 @@ export function useStudyDraft(session: Session, id: string | undefined, content?
     setSnapshot(previous => {
       if (previous.question !== question || previous.generation !== generation) return previous;
       const next = typeof value === 'function' ? value(previous.draft[field]) : value;
-      return { ...previous, draft: { ...previous.draft, [field]: next } };
+      const changedPhrase = (field === 'expression' || field === 'meaning')
+        && String(next).trim() !== String(previous.draft[field]).trim();
+      return { ...previous, draft: { ...previous.draft, [field]: next,
+        ...(changedPhrase ? { expressionTranslation: '' } : {}),
+      } };
     });
   }, [question, generation]);
   const setAiPending = useCallback((value: SetStateAction<boolean>) => {
@@ -40,6 +44,7 @@ export function useStudyDraft(session: Session, id: string | undefined, content?
     question, draft: active.draft, aiPending: active.aiPending, setAiPending,
     setMeaning: (value: SetStateAction<string>) => setField('meaning', value),
     setExpression: (value: SetStateAction<string>) => setField('expression', value),
+    setExpressionTranslation: (value: SetStateAction<string>) => setField('expressionTranslation', value),
     setExample: (value: SetStateAction<string>) => setField('example', value),
     setTranslation: (value: SetStateAction<string>) => setField('translation', value),
     setAnswer: (value: SetStateAction<string>) => setField('answer', value),

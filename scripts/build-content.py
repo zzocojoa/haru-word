@@ -1,6 +1,7 @@
 import json,re,hashlib
 from pathlib import Path
 from collections import defaultdict,Counter
+from expression_translations import apply_expression_translations
 import nltk
 nltk.data.path.insert(0,str(Path('work/nltk_data').resolve()))
 from nltk.stem import WordNetLemmatizer
@@ -54,6 +55,7 @@ for key,patch in json.loads(Path('data/reviewed-content-overrides.json').read_te
     output[key].update(patch)
     if patch.get('source')=='학습용 작성 예문':
         output[key].pop('attribution',None);output[key].pop('url',None)
+apply_expression_translations(output)
 Path('data/content.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 Path('work/missing-content.json').write_text(json.dumps(missing,ensure_ascii=False,indent=2),encoding='utf-8')
 unique=list(dict.fromkeys((w['headword'],w['pos'],w['meaning']) for w in missing))

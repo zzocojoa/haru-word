@@ -3,6 +3,7 @@ import type { Content, RecordItem, Session } from './learning';
 export type StudyDraft = {
   meaning: string;
   expression: string;
+  expressionTranslation: string;
   example: string;
   translation: string;
   answer: string;
@@ -26,6 +27,7 @@ export function restoreStudyDraft(session: Session, id: string | undefined, cont
   return {
     meaning: content?.meaning || '',
     expression: content?.expression || '',
+    expressionTranslation: content?.expressionTranslation || '',
     example: content?.example || '',
     translation: content?.translation || '',
     answer: remembered?.answer || '',
@@ -43,6 +45,7 @@ export function studyMaterial(draft: StudyDraft, content: Content, personal: boo
     ...content,
     meaning: draft.meaning.trim(),
     expression: draft.expression,
+    expressionTranslation: draft.expressionTranslation,
     example: draft.example,
     translation: draft.translation,
     ...(edited ? { source: personal ? '개인 추가 예문' : '내가 수정한 예문', attribution: undefined, url: undefined } : {}),
@@ -70,6 +73,7 @@ export function withAnswerDraft(session: Session, id: string, draft: StudyDraft)
 export function hasStudyDraftInput(draft: StudyDraft, stage: Session['stage'], content?: Content): boolean {
   return !!(draft.answer || draft.sentence || draft.notes || (stage === 'learn' && (
     draft.meaning !== content?.meaning || draft.expression !== content?.expression ||
+    draft.expressionTranslation !== (content?.expressionTranslation || '') ||
     draft.example !== content?.example || draft.translation !== content?.translation
   )));
 }

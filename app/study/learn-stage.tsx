@@ -2,6 +2,7 @@
 import { POS } from "@/lib/learning";
 import { ArrowRight, BookOpen, PencilLine } from "lucide-react";
 import { DictionaryLinks, Speak } from "../ui";
+import { ExpressionLine } from "../expression-line";
 import type { StudySessionController } from "./use-study-session-controller";
 type LearnStageProps = Pick<
   StudySessionController,
@@ -10,7 +11,9 @@ type LearnStageProps = Pick<
   | "example"
   | "translation"
   | "expression"
+  | "expressionTranslation"
   | "setExpression"
+  | "setExpressionTranslation"
   | "setExample"
   | "setTranslation"
   | "busy"
@@ -27,7 +30,9 @@ export function LearnStage({
   example,
   translation,
   expression,
+  expressionTranslation,
   setExpression,
+  setExpressionTranslation,
   setExample,
   setTranslation,
   busy,
@@ -95,6 +100,13 @@ export function LearnStage({
           />
         </label>
         <label>
+          표현의 한국어 뜻
+          <input value={expressionTranslation} maxLength={2000}
+            onChange={(e) => setExpressionTranslation(e.target.value)}
+            placeholder="영어 표현에 맞는 짧은 해석" />
+        </label>
+        <p className="small-note">표현이나 학습 뜻을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요.</p>
+        <label>
           영어 예문
           <textarea
             value={example}
@@ -103,7 +115,7 @@ export function LearnStage({
           />
         </label>
         <label>
-          한국어 해석
+          예문의 한국어 해석
           <textarea
             value={translation}
             maxLength={2000}
@@ -111,12 +123,7 @@ export function LearnStage({
           />
         </label>
       </details>
-      {expression && (
-        <div className="expression-line">
-          <span>함께 익힐 표현</span>
-          <b lang="en">{expression}</b>
-        </div>
-      )}
+      <ExpressionLine expression={expression} translation={expressionTranslation} />
       <DictionaryLinks word={word.word} />
       {!word.personal && (
         <a

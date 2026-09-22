@@ -10,6 +10,7 @@ export function senseProgress(
   return {
     meaning: key,
     expression: p.expression,
+    expressionTranslation: p.expressionTranslation,
     example: p.example,
     translation: p.translation,
     en: p.en,
@@ -93,6 +94,7 @@ export function selectSense(
 ): Progress {
   const selected: SenseProgress = {
     expression: "",
+    expressionTranslation: "",
     example: "",
     translation: "",
     en: "unmeasured",

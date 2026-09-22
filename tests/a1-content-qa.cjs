@@ -26,7 +26,7 @@ const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'
   await p.getByRole('button',{name:cardName,exact:true}).click();const dialog=p.getByRole('dialog');
   assert.equal(await dialog.getByLabel('오늘의 뜻',{exact:true}).inputValue(),c.meaning);
   assert.equal(await dialog.getByRole('textbox',{name:'영어 예문',exact:true}).inputValue(),c.example);
-  assert.equal(await dialog.getByRole('textbox',{name:'한국어 해석',exact:true}).inputValue(),c.translation);
+  assert.equal(await dialog.getByRole('textbox',{name:'예문의 한국어 해석',exact:true}).inputValue(),c.translation);
   assert.equal(await dialog.getByLabel('함께 익힐 표현',{exact:true}).inputValue(),c.expression);
   assert.match(await dialog.innerText(),new RegExp(c.source));
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
@@ -49,7 +49,7 @@ const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'
  checks.push('a completed pre-correction sense keeps its material, sentence, results and server revision');
  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();await p.getByLabel('단어 또는 한국어 뜻 검색',{exact:true}).fill(legacyWord);await p.getByRole('button',{name:new RegExp('^'+legacyWord+'\\s명사$')}).click();dialog=p.getByRole('dialog');
  assert.equal(await dialog.getByLabel('오늘의 뜻',{exact:true}).inputValue(),old.meaning);
- for(const label of ['영어 예문','한국어 해석','함께 익힐 표현'])assert.equal(await dialog.getByRole('textbox',{name:label,exact:true}).inputValue(),'');
+ for(const label of ['영어 예문','예문의 한국어 해석','함께 익힐 표현'])assert.equal(await dialog.getByRole('textbox',{name:label,exact:true}).inputValue(),'');
  assert.match(await dialog.innerText(),/이 뜻의 예문은 사전에서 확인/);checks.push('legacy progress without material never receives the new unrelated sense example');
  await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'hidden'});
  await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();await p.getByRole('button',{name:'오늘 단어 다시 학습',exact:true}).click();await saved();

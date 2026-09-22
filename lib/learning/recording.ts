@@ -108,6 +108,7 @@ export function applyRecord(
     ...(patch.material
       ? {
           expression: patch.material.expression,
+          expressionTranslation: patch.material.expressionTranslation,
           example: patch.material.example,
           translation: patch.material.translation,
         }

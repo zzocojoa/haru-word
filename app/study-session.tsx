@@ -55,7 +55,9 @@ export function StudySession(props: StudySessionProps) {
     example,
     translation,
     expression,
+    expressionTranslation,
     setExpression,
+    setExpressionTranslation,
     setExample,
     setTranslation,
     learn,
@@ -250,6 +252,8 @@ export function StudySession(props: StudySessionProps) {
               example={example}
               translation={translation}
               expression={expression}
+              expressionTranslation={expressionTranslation}
+              setExpressionTranslation={setExpressionTranslation}
               setExpression={setExpression}
               setExample={setExample}
               setTranslation={setTranslation}

@@ -5,6 +5,7 @@ import { Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription } from 
 import { studyContent } from "@/lib/catalog";
 import { POS,dailyReplaySources,entryIdFor,targetIdentity,type State,type Word } from "@/lib/learning";
 import { DictionaryLinks,Speak } from "./ui";
+import { ExpressionLine } from "./expression-line";
 
 type Props={state:State;words:Word[];date:string;todayDate:string;busy:boolean;onClose:()=>void;onRepeat:(date:string)=>void};
 export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepeat}:Props){
@@ -17,7 +18,7 @@ export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepea
   {item&&word&&content?<>{sessions[0]?.kind==='practice'&&<p className="small-note">원래 일일 학습일이 변경되어, 이 다시 학습 회차에 보관된 단어를 보여 드려요.</p>}<nav className="review-word-tabs" aria-label="다시 볼 단어">{items.map((entry,i)=><button className="secondary-button" key={targetIdentity(entry.id,entry.record.meaning)} aria-pressed={index===i} onClick={()=>setIndex(i)}>{words.find(w=>w.id===entry.id)?.word}</button>)}</nav>
    <div className="completed-word" aria-live="polite" aria-atomic="true"><div className="word-stage compact"><span className="word-index">{word.personal?'개인 추가':`OXFORD ${word.level}`} · {POS[word.pos]}</span><h3 lang="en">{word.word}<Speak text={word.word}/></h3>{content.ipa&&<span className="phonetic">{content.ipa}</span>}</div>
     <p className="eyebrow">그날 공부한 뜻</p><p className="review-meaning">{item.record?.meaning||'기록된 뜻이 없어요.'}</p>
-    {content.expression&&<div className="expression-line"><span>함께 익힐 표현</span><b lang="en">{content.expression}</b></div>}
+    <ExpressionLine expression={content.expression} translation={content.expressionTranslation}/>
     <div className="example-box"><div className="example-label"><BookOpen size={15}/><span>{content.source}</span></div><p lang="en">{content.example}</p><p className="translation">{content.translation}</p>{content.attribution&&<a className="source-credit" href={content.url} target="_blank" rel="noreferrer">{content.attribution}</a>}</div>
     {item.record?.sentence&&<div className="review-my-sentence"><b>그날 쓴 내 문장</b><p lang="en">{item.record.sentence}</p>{item.record.notes&&<p className="muted">보완점 · {item.record.notes}</p>}</div>}
     <DictionaryLinks word={word.word}/>{!word.personal&&<a className="source-credit" href={`/sources/oxford-source.pdf#page=${word.page}`} target="_blank" rel="noreferrer">공식 목록 {word.page}쪽 · {word.level} · {POS[word.pos]}</a>}

@@ -16,7 +16,7 @@ test('question identity separates sessions, targets, directions and retry mode b
 
 test('initial drafts copy materials and sentence notes without inventing a recall answer or result', () => {
   const s = freeze(session()), before = structuredClone(s), draft = restoreStudyDraft(s, 'a', content);
-  assert.deepEqual(draft, { meaning: '뜻', expression: 'my expression', example: 'Example.', translation: '예문.', answer: '', hint: false, revealed: false, sentence: 'My sentence.', notes: '메모', spoken: true });
+  assert.deepEqual(draft, { meaning: '뜻', expression: 'my expression', expressionTranslation: '', example: 'Example.', translation: '예문.', answer: '', hint: false, revealed: false, sentence: 'My sentence.', notes: '메모', spoken: true });
   assert.deepEqual(s, before);
   const absent = restoreStudyDraft(s, undefined);
   assert.equal(absent.meaning, ''); assert.equal(absent.answer, ''); assert.equal(absent.revealed, false);

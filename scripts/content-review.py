@@ -1,6 +1,7 @@
 """Apply reviewed fixes and emit heuristic candidates, never auto-certify semantics."""
 import argparse,csv,json,re
 from pathlib import Path
+from expression_translations import apply_expression_translations
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--apply',action='store_true')
@@ -15,6 +16,7 @@ if args.apply:
         if patch.get('source')=='학습용 작성 예문':
             content[key].pop('attribution',None)
             content[key].pop('url',None)
+    apply_expression_translations(content)
     path.write_text(json.dumps(content,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 words=json.loads(Path('data/words.json').read_text('utf-8'))
 # Includes valid particles/pronouns/numerals: these are review candidates, not failures.

@@ -42,6 +42,7 @@ export function WordEditor({
   const [fam, setFam] = useState<Familiarity | undefined>(p?.familiarity);
   const [familiarityTouched, setFamiliarityTouched] = useState(false);
   const [expression, setExpression] = useState(content.expression);
+  const [expressionTranslation, setExpressionTranslation] = useState(content.expressionTranslation || "");
   const [example, setExample] = useState(content.example);
   const [translation, setTranslation] = useState(content.translation);
   const [notes, setNotes] = useState(p?.notes || "");
@@ -52,10 +53,11 @@ export function WordEditor({
   function chooseSense(key: string) {
     const c = key
       ? cardContent(word.id, { ...senseProgress(base, key), meaning: key })
-      : { meaning: "", expression: "", example: "", translation: "" };
+      : { meaning: "", expression: "", expressionTranslation: "", example: "", translation: "" };
     setSenseKey(key);
     setMeaning(c.meaning);
     setExpression(c.expression);
+    setExpressionTranslation(c.expressionTranslation || "");
     setExample(c.example);
     setTranslation(c.translation);
     setNotes(key ? senseProgress(base, key).notes || "" : "");
@@ -141,7 +143,10 @@ export function WordEditor({
           aria-label="오늘의 뜻"
           maxLength={2000}
           value={meaning}
-          onChange={(e) => setMeaning(e.target.value)}
+          onChange={(e) => {
+            if(e.target.value.trim()!==meaning.trim())setExpressionTranslation("");
+            setMeaning(e.target.value);
+          }}
         />
       </label>
       <label>
@@ -149,9 +154,19 @@ export function WordEditor({
         <input
           maxLength={2000}
           value={expression}
-          onChange={(e) => setExpression(e.target.value)}
+          onChange={(e) => {
+            if(e.target.value.trim()!==expression.trim())setExpressionTranslation("");
+            setExpression(e.target.value);
+          }}
         />
       </label>
+      <label>
+        표현의 한국어 뜻
+        <input maxLength={2000} value={expressionTranslation}
+          onChange={(e) => setExpressionTranslation(e.target.value)}
+          placeholder="영어 표현에 맞는 짧은 해석" />
+      </label>
+      <p className="small-note">영어 표현을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요.</p>
       <label>
         영어 예문
         <textarea
@@ -161,7 +176,7 @@ export function WordEditor({
         />
       </label>
       <label>
-        한국어 해석
+        예문의 한국어 해석
         <textarea
           maxLength={2000}
           value={translation}
@@ -274,6 +289,7 @@ export function WordEditor({
             ...selectedSense,
             meaning: meaning.trim(),
             expression,
+            expressionTranslation,
             example,
             translation,
             notes,

@@ -48,10 +48,10 @@ export function useStudySessionController({
     : undefined;
   const {
     question, draft, aiPending, setAiPending,
-    setMeaning, setExpression, setExample, setTranslation, setAnswer,
+    setMeaning, setExpression, setExpressionTranslation, setExample, setTranslation, setAnswer,
     setSentence, setNotes, setSpoken, setRevealed, setHint,
   } = useStudyDraft(s, id, content);
-  const { meaning, expression, example, translation, answer, sentence, notes, spoken, revealed, hint } = draft;
+  const { meaning, expression, expressionTranslation, example, translation, answer, sentence, notes, spoken, revealed, hint } = draft;
   const busy = storeBusy || aiPending;
   const answerPresent = !!answer.trim();
   useEffect(() => {
@@ -311,7 +311,9 @@ export function useStudySessionController({
     example,
     translation,
     expression,
+    expressionTranslation,
     setExpression,
+    setExpressionTranslation,
     setExample,
     setTranslation,
     learn,

@@ -46,6 +46,7 @@ export type Content = {
   meaning: string;
   ipa?: string;
   expression: string;
+  expressionTranslation?: string;
   example: string;
   translation: string;
   source: string;
@@ -59,6 +60,7 @@ export type Progress = {
   familiarityCheck?: FamiliarityCheck;
   meaning?: string;
   expression?: string;
+  expressionTranslation?: string;
   example?: string;
   translation?: string;
   en?: Result;
@@ -83,6 +85,7 @@ export type SenseProgress = Pick<
   Progress,
   | "meaning"
   | "expression"
+  | "expressionTranslation"
   | "example"
   | "translation"
   | "en"
