@@ -2,9 +2,13 @@
 const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
-const level=process.argv[2]||'A1';assert.ok(['A1','A2'].includes(level));
-const cases=level==='A1'?[['bar','n.'],['favorite','n.'],['some','pron.'],['when','pron.'],['lesson','n.'],['line','n.'],['play','v.'],['yes','exclam.']]:[['cash','n.'],['hold','v.'],['double','pron.'],['downtown','n.'],['gas','n.'],['whose','pron.'],['source','n.'],['thin','adj.']];
-const legacy=level==='A1'?{word:'bar',meaning:'막대·덩어리',expression:'a gold bar',example:'This is a gold bar.',translation:'이것은 금괴예요.'}:{word:'gas',meaning:'가스',expression:'natural gas',example:'We use gas for cooking.',translation:'우리는 요리에 가스를 써요.'};
+const level=process.argv[2]||'A1';assert.ok(['A1','A2','B1'].includes(level));
+const samples={
+ A1:{cases:[['bar','n.'],['favorite','n.'],['some','pron.'],['when','pron.'],['lesson','n.'],['line','n.'],['play','v.'],['yes','exclam.']],legacy:{word:'bar',meaning:'막대·덩어리',expression:'a gold bar',example:'This is a gold bar.',translation:'이것은 금괴예요.'}},
+ A2:{cases:[['cash','n.'],['hold','v.'],['double','pron.'],['downtown','n.'],['gas','n.'],['whose','pron.'],['source','n.'],['thin','adj.']],legacy:{word:'gas',meaning:'가스',expression:'natural gas',example:'We use gas for cooking.',translation:'우리는 요리에 가스를 써요.'}},
+ B1:{cases:[['alarm','n.'],['damage','n.'],['garage','n.'],['nation','n.'],['sensible','adj.'],['account','n.'],['total','adj.'],['set','v.']],legacy:{word:'account',meaning:'계정',expression:'an online account',example:'This is my online account.',translation:'이것은 내 온라인 계정이에요.'}}
+};
+const {cases,legacy}=samples[level];
 const base='http://127.0.0.1:8787',out='outputs/'+level.toLowerCase()+'-content-review';fs.mkdirSync(out,{recursive:true});
 const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 (async()=>{const browser=await chromium.launch({headless:true});try{
@@ -17,7 +21,8 @@ const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'
   const w=words.find(w=>w.level===level&&w.word===term&&w.pos===pos),c=content[w.id];
   await p.getByLabel('단어 또는 한국어 뜻 검색',{exact:true}).fill(term);
   const posName={'n.':'명사','v.':'동사','pron.':'대명사','exclam.':'감탄사','adj.':'형용사'}[pos];
-  await p.getByRole('button',{name:new RegExp('^'+term+'\\s'+posName+'$')}).click();const dialog=p.getByRole('dialog');
+  const cardName=term+' '+posName+(w.headword!==w.word?' · '+w.headword:'');
+  await p.getByRole('button',{name:cardName,exact:true}).click();const dialog=p.getByRole('dialog');
   assert.equal(await dialog.getByLabel('오늘의 뜻',{exact:true}).inputValue(),c.meaning);
   assert.equal(await dialog.getByRole('textbox',{name:'영어 예문',exact:true}).inputValue(),c.example);
   assert.equal(await dialog.getByRole('textbox',{name:'한국어 해석',exact:true}).inputValue(),c.translation);
@@ -25,6 +30,7 @@ const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'
   assert.match(await dialog.innerText(),new RegExp(c.source));
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   if(pos==='pron.')await p.screenshot({path:out+'/corrected-pronoun-mobile.png'});
+  if(term==='sensible')await p.screenshot({path:out+'/corrected-sense-mobile.png'});
   await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'hidden'});
  }
  assert.deepEqual(await get(),initial);checks.push('eight corrected sense/POS cards show the published fields without saving or changing learner data');
