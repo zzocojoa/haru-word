@@ -17,6 +17,8 @@ import type { SentenceFeedback } from "@/lib/sentence-feedback";
 import { useEffect, useRef, useState } from "react";
 import type { StudySessionProps } from "./types";
 import { useActivityTimer } from "./use-activity-timer";
+import { useStudyDraft } from "./use-study-draft";
+import { studyMaterial, withAnswerDraft } from "@/lib/study-draft";
 export function useStudySessionController({
   date,
   activityDate,
@@ -32,8 +34,6 @@ export function useStudySessionController({
   onReview,
   onRepeat,
 }: StudySessionProps) {
-  const [aiPending, setAiPending] = useState(false);
-  const busy = storeBusy || aiPending;
   const id = currentId(s);
   const entryId = id ? entryIdFor(s, id) : undefined;
   const word = words.find((w) => w.id === entryId);
@@ -45,97 +45,20 @@ export function useStudySessionController({
         p,
       )
     : undefined;
-  const [meaning, setMeaning] = useState("");
-  const [expression, setExpression] = useState("");
-  const [example, setExample] = useState("");
-  const [translation, setTranslation] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [sentence, setSentence] = useState("");
-  const [notes, setNotes] = useState("");
-  const [revealed, setRevealed] = useState(false);
-  const [hint, setHint] = useState(false);
-
+  const {
+    question, draft, aiPending, setAiPending,
+    setMeaning, setExpression, setExample, setTranslation, setAnswer,
+    setSentence, setNotes, setSpoken, setRevealed, setHint,
+  } = useStudyDraft(s, id, content);
+  const { meaning, expression, example, translation, answer, sentence, notes, spoken, revealed, hint } = draft;
+  const busy = storeBusy || aiPending;
   const focus = useRef<HTMLHeadingElement>(null);
-
   const [showSummary, setShowSummary] = useState(false);
-  const [spoken, setSpoken] = useState(false);
-  // Reset local drafts only when the question changes; saves within a question must not erase typing.
-  useEffect(() => {
-    const c = entryId
-      ? studyContent(
-          entryId,
-          s.stage === "warmup" ? undefined : s.records[id!],
-          state.progress[entryId],
-        )
-      : null;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMeaning(c?.meaning || "");
-    setExpression(c?.expression || "");
-    setExample(c?.example || "");
-    setTranslation(c?.translation || "");
-    const draft = s.records[id || ""]?.draft;
-    const matching = draft?.stage === s.stage && draft?.retry === s.retryMode;
-    setAnswer(
-      s.stage === "warmup" && s.warmupDraft && s.warmupDraft.id === id
-        ? s.warmupDraft.answer
-        : matching
-          ? draft.answer
-          : "",
-    );
-    setSentence(s.records[id || ""]?.sentence || "");
-    setNotes(s.records[id || ""]?.notes || "");
-    setSpoken(!!s.records[id || ""]?.spoken);
-    setAiPending(false);
-    setRevealed(
-      s.stage === "warmup" && s.warmupDraft && s.warmupDraft.id === id
-        ? s.warmupDraft.revealed
-        : matching
-          ? draft.revealed
-          : false,
-    );
-    setHint(
-      s.stage === "warmup" && s.warmupDraft && s.warmupDraft.id === id
-        ? s.warmupDraft.hinted
-        : matching
-          ? draft.hinted
-          : false,
-    );
-    focus.current?.focus();
-    // Snapshot the saved draft only on a question transition, not on each save.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, s.stage, s.retryMode]);
+  useEffect(() => { focus.current?.focus(); }, [question]);
 
   const { seconds, paused, boutStart, setPaused, setBoutStart } =
     useActivityTimer(s, showSummary, visible);
 
-  useEffect(() => {
-    const dirty =
-      answer ||
-      sentence ||
-      notes ||
-      (s.stage === "learn" &&
-        (meaning !== content?.meaning ||
-          expression !== content?.expression ||
-          example !== content?.example ||
-          translation !== content?.translation));
-    if (!dirty) return;
-    const warn = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue = "";
-    };
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
-  }, [
-    answer,
-    sentence,
-    notes,
-    s.stage,
-    meaning,
-    expression,
-    example,
-    translation,
-    content,
-  ]);
   function timed(): Session {
     return { ...s, elapsed: seconds, paused };
   }
@@ -149,22 +72,7 @@ export function useStudySessionController({
   }
 
   function material() {
-    const edited =
-      example !== content?.example || translation !== content?.translation;
-    return {
-      ...content!,
-      meaning: meaning.trim(),
-      expression,
-      example,
-      translation,
-      ...(edited
-        ? {
-            source: word?.personal ? "개인 추가 예문" : "내가 수정한 예문",
-            attribution: undefined,
-            url: undefined,
-          }
-        : {}),
-    };
+    return studyMaterial(draft, content!, !!word?.personal);
   }
   async function learn() {
     if (!id || !meaning.trim()) return;
@@ -184,27 +92,11 @@ export function useStudySessionController({
     const hinted = hint || needsHint || !answer.trim();
     setHint(hinted);
     setRevealed(true);
-    const session = timed();
     await save({
       ...state,
       sessions: {
         ...state.sessions,
-        [s.id]: {
-          ...session,
-          records: {
-            ...s.records,
-            [id]: {
-              ...s.records[id],
-              draft: {
-                answer,
-                hinted,
-                revealed: true,
-                stage: s.stage === "en" ? "en" : "ko",
-                retry: s.retryMode,
-              },
-            },
-          },
-        },
+        [s.id]: withAnswerDraft(timed(), id, { ...draft, hint: hinted, revealed: true }),
       },
     });
   }
@@ -309,10 +201,7 @@ export function useStudySessionController({
       ...state,
       sessions: {
         ...state.sessions,
-        [s.id]: {
-          ...timed(),
-          warmupDraft: { id, answer, hinted, revealed: true },
-        },
+        [s.id]: withAnswerDraft(timed(), id, { ...draft, hint: hinted, revealed: true }),
       },
     });
   }
@@ -345,8 +234,6 @@ export function useStudySessionController({
           },
         },
       };
-    if (id && s.stage === "warmup")
-      next.sessions[s.id].warmupDraft = { id, answer, hinted: hint, revealed };
     if (id && s.stage === "sentence")
       next = applyRecord(
         next,
@@ -356,18 +243,12 @@ export function useStudySessionController({
         false,
         activityDate(),
       );
-    if (id && (s.stage === "en" || s.stage === "ko")) {
-      next.sessions[s.id].records = {
-        ...next.sessions[s.id].records,
-        [id]: {
-          ...next.sessions[s.id].records[id],
-          draft: {
-            answer,
-            hinted: hint,
-            revealed,
-            stage: s.stage,
-            retry: s.retryMode,
-          },
+    if (id) {
+      next = {
+        ...next,
+        sessions: {
+          ...next.sessions,
+          [s.id]: withAnswerDraft(next.sessions[s.id], id, draft),
         },
       };
     }

@@ -25,6 +25,7 @@ import { useLearningStore } from "../use-learning-store";
 import { useStudyDate } from "../use-study-date";
 import type { View } from "./types";
 import { useLearningTools } from "./use-learning-tools";
+import { isLearningWriteBlocked } from "@/lib/study-availability";
 export function useLearningController(initialServerTime: number) {
   const store = useLearningStore();
   const {
@@ -80,8 +81,7 @@ export function useLearningController(initialServerTime: number) {
   const clock = useStudyDate(initialServerTime);
   const date = clock.date;
   const currentStudyDate = clock.currentDate;
-  const busy =
-    loading || saving || !signedIn || unsaved || conflict || !clock.ready;
+  const busy = isLearningWriteBlocked({ loading, saving, signedIn, unsaved, conflict, clockReady: clock.ready });
   const active = state.settings.activeSessionId
     ? state.sessions[state.settings.activeSessionId]
     : undefined;

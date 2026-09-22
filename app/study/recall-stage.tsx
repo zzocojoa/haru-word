@@ -1,5 +1,6 @@
 "use client";
 import { POS } from "@/lib/learning";
+import { canGradeIndependently } from "@/lib/study-availability";
 import { ArrowRight } from "lucide-react";
 import type { StudySessionController } from "./use-study-session-controller";
 type RecallStageProps = Pick<
@@ -106,7 +107,7 @@ export function RecallStage({
           <div className="button-row">
             <button
               className="primary-button"
-              disabled={busy || hint || !answer.trim()}
+              disabled={!canGradeIndependently(busy, hint, answer)}
               onClick={() => recall("independent")}
             >
               도움 없이 맞혔어요

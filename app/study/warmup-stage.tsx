@@ -1,5 +1,6 @@
 "use client";
 import { POS } from "@/lib/learning";
+import { canGradeIndependently } from "@/lib/study-availability";
 import { Eye } from "lucide-react";
 import type { StudySessionController } from "./use-study-session-controller";
 type WarmupStageProps = Pick<
@@ -51,7 +52,7 @@ export function WarmupStage({
           <div className="button-row">
             <button
               className="secondary-button"
-              disabled={busy || hint || !answer.trim()}
+              disabled={!canGradeIndependently(busy, hint, answer)}
               onClick={() => warmup("independent")}
             >
               스스로 떠올렸어요
