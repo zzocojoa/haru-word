@@ -1,8 +1,7 @@
 "use client";
-import {useEffect,useRef,useState} from 'react';
 import {Loader2,Sparkles} from 'lucide-react';
-import {GRAMMAR_TEXT,MEANING_USAGE_TEXT,sentenceFeedbackSchema,type SentenceFeedback} from '@/lib/sentence-feedback';
-import {requestJson,RequestTimeoutError,REQUEST_TIMEOUT_MS} from '@/lib/client-request';
+import {GRAMMAR_TEXT,MEANING_USAGE_TEXT,type SentenceFeedback} from '@/lib/sentence-feedback';
+import {useSentenceFeedback} from './study/use-sentence-feedback';
 
 export function FeedbackDetail({feedback}:{feedback:SentenceFeedback}){
  return <div className="ai-feedback-result">
@@ -16,26 +15,7 @@ export function FeedbackDetail({feedback}:{feedback:SentenceFeedback}){
 
 type Props={sessionId:string;entryId:string;sentence:string;feedback?:SentenceFeedback;busy:boolean;onPending:(value:boolean)=>void;onFeedback:(feedback:SentenceFeedback)=>Promise<boolean>;onUse:(sentence:string)=>void};
 export function SentenceFeedbackPanel({sessionId,entryId,sentence,feedback,busy,onPending,onFeedback,onUse}:Props){
- const [pending,setPending]=useState(false);const [error,setError]=useState('');
- const request=useRef<AbortController|null>(null);const lock=useRef(false);
- useEffect(()=>()=>{request.current?.abort()},[]);
- async function check(){
-  if(lock.current||busy||!sentence.trim())return;
-  lock.current=true;setPending(true);onPending(true);setError('');
-  const controller=new AbortController();request.current=controller;
-  try{
-   const {response,data}=await requestJson<{error?:unknown;feedback?:unknown}>('/api/sentence-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId,entryId,sentence:sentence.trim()}),signal:controller.signal},REQUEST_TIMEOUT_MS.feedback);
-   if(!response.ok)throw new Error(typeof data.error==='string'?data.error:'AI 응답을 받지 못했어요. 자기 점검으로 계속해 주세요.');
-   const parsed=sentenceFeedbackSchema.safeParse(data.feedback);
-   if(!parsed.success)throw new Error('AI 교정 형식을 확인하지 못했어요. 자기 점검으로 계속해 주세요.');
-   const result=parsed.data;
-   if(controller.signal.aborted)return;
-   if(result.original!==sentence.trim())throw new Error('다른 문장의 교정 결과입니다. 다시 확인해 주세요.');
-   // The shared save banner owns persistence errors and clears them after retry.
-   await onFeedback(result);
-  }catch(e){if(!controller.signal.aborted)setError(e instanceof RequestTimeoutError?'AI 응답이 늦어 기다림을 끝냈어요. 문장은 그대로 남아 있으니 자기 점검으로 계속해 주세요. 요청은 사용량에 포함될 수 있어요.':e instanceof Error&&!(e instanceof SyntaxError)&&!(e instanceof TypeError)?e.message:'AI 응답을 확인하지 못했어요. 자기 점검으로 계속해 주세요.')}
-  finally{lock.current=false;if(!controller.signal.aborted){setPending(false);onPending(false)}}
- }
+ const {pending,error,check}=useSentenceFeedback({sessionId,entryId,sentence,busy,onPending,onFeedback});
  const unchanged=feedback?.original===sentence.trim();
  return <section className="ai-feedback-panel" aria-label="AI 문장 점검">
   <div className="ai-feedback-heading"><h3><Sparkles size={17}/> AI 문장 점검</h3><span className="small-note">선택</span></div>

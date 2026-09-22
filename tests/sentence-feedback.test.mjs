@@ -12,7 +12,9 @@ await build({entryPoints:['app/api/sentence-feedback/route.ts'],outfile:'work/fe
   b.onLoad({filter:/.*/,namespace:'test-boundaries'},a=>({contents:a.path==='cloudflare:workers'?'export const env=globalThis.testRuntime.env':a.path.endsWith('chatgpt-auth')?'export const getChatGPTUser=async()=>globalThis.testRuntime.user':'export const database=()=>globalThis.testRuntime.db',loader:'js'}));
  }
 }]});
-const {generateSentenceFeedback,FEEDBACK_USAGE_SQL}=await import('../work/feedback-tests/gemini-feedback.mjs');
+await build({entryPoints:['db/feedback.ts'],outfile:'work/feedback-tests/feedback-store.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
+const {generateSentenceFeedback}=await import('../work/feedback-tests/gemini-feedback.mjs');
+const {recordFeedbackAttempt}=await import('../work/feedback-tests/feedback-store.mjs');
 const {saveSchema}=await import('../work/feedback-tests/validation.mjs');
 const input={word:'arrive',pos:'v.',meaning:'도착하다',sentence:'I arrive home yesterday.'};
 const content={meaningUsage:'appropriate',grammar:'needs_work',correctedSentence:'I arrived home yesterday.',explanation:'어제 일어난 일이므로 arrive를 arrived로 바꿔요.'};
@@ -75,11 +77,11 @@ test('valid feedback records usage without an artificial balance or cooldown and
  assert.equal((await route.POST(req())).status,200);assert.equal(calls,2);
  assert.equal(sqlite.prepare('SELECT request_count FROM ai_daily_usage WHERE user_id=?').get('owner').request_count,2);
 });
-test('usage counters allow more than 30 immediate attempts and keep days and users separate',()=>{
- const count=(user,day,now)=>sqlite.prepare(FEEDBACK_USAGE_SQL).get(user,day,now);
- for(let i=0;i<65;i++)assert.equal(count('usage','2026-09-21',1000).request_count,i+1);
- assert.equal(count('usage','2026-09-22',1000).request_count,1);assert.equal(count('different','2026-09-21',1000).request_count,1);
- assert.equal(count('different','2026-09-21',1000).request_count,2);
+test('usage counters allow more than 30 immediate attempts and keep days and users separate',async()=>{
+ const count=async(user,day,now)=>{await recordFeedbackAttempt(db,user,day,now);return sqlite.prepare('SELECT request_count FROM ai_daily_usage WHERE user_id=? AND day=?').get(user,day)};
+ for(let i=0;i<65;i++)assert.equal((await count('usage','2026-09-21',1000)).request_count,i+1);
+ assert.equal((await count('usage','2026-09-22',1000)).request_count,1);assert.equal((await count('different','2026-09-21',1000)).request_count,1);
+ assert.equal((await count('different','2026-09-21',1000)).request_count,2);
 });
 test('existing 30-use accounts reach Google; only its 429 limits a request and later retries can succeed',async()=>{
  sqlite.prepare('UPDATE ai_daily_usage SET request_count=30,last_request_at=? WHERE user_id=?').run(Date.now(),'owner');
@@ -102,4 +104,18 @@ test('sense targets resolve the owned entry and send the recorded sense to the p
  insertSession(s);sqlite.exec('DELETE FROM ai_daily_usage');let sent;
  globalThis.fetch=async(url,init)=>{sent=JSON.parse(JSON.parse(init.body).contents[0].parts[0].text);return success()};
  assert.equal((await route.POST(req({...body,entryId:target}))).status,200);assert.equal(sent.word,'arrive');assert.equal(sent.meaning,r.meaning);
+});
+
+test('personal word lookup stays account-scoped and never substitutes another learner definition',async()=>{
+ const id='personal_'+crypto.randomUUID(),personal={id,word:'commute',headword:'commute',pos:'v.',level:'A1',page:0,personal:true};
+ const s={...session,ids:[id],records:{[id]:{...record,entryId:id,meaning:'통근하다'}}};
+ insertSession(s);
+ sqlite.prepare('INSERT INTO word_progress VALUES (?,?,?)').run('other',id,JSON.stringify({personal}));
+ let sent,count=0;
+ globalThis.fetch=async(url,init)=>{count++;sent=JSON.parse(JSON.parse(init.body).contents[0].parts[0].text);return success()};
+ const ownRequest=()=>req({...body,entryId:id,sentence:'I commute by bus.'});
+ assert.equal((await route.POST(ownRequest())).status,400);assert.equal(count,0);
+ sqlite.prepare('INSERT INTO word_progress VALUES (?,?,?)').run('owner',id,JSON.stringify({personal}));
+ assert.equal((await route.POST(ownRequest())).status,200);assert.equal(count,1);
+ assert.deepEqual(sent,{word:'commute',pos:'v.',meaning:'통근하다',sentence:'I commute by bus.'});
 });

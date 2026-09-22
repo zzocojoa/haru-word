@@ -11,7 +11,7 @@ function observe(page){
  page.on('requestfailed',request=>{if(starts.has(request))saveEvents.push({method:request.method(),failure:request.failure()?.errorText,durationMs:Math.round(performance.now()-starts.get(request))})});
  page.on('pageerror',error=>errors.push(error.message));
 }
-(async()=>{const browser=await chromium.launch({headless:true});
+(async()=>{const browser=await chromium.launch({headless:true});let p;
  try{
   const headers={'oai-authenticated-user-id':'topup_'+Date.now(),'oai-authenticated-user-email':'topup@example.test'};
   const ctx=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});
@@ -24,7 +24,7 @@ function observe(page){
   for(const id of ids)progress[id]={meaning:content[id].meaning,familiarity:'known',en:'independent',ko:'independent',sentenceStatus:'written',sentence:'Original sentence.',notes:'Original note.',lastStudied:date,studyDates:[date]};
   const settings={...data.state.settings,activeSessionId:sid,assessments:{A1:{ids:sample,index:20,marks:Object.fromEntries(sample.map(id=>[id,'uncertain'])),completed:true}}};
   assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:data.revision,settings,progress,sessions:{[sid]:first}}})).status(),200);
-  let p=await ctx.newPage();observe(p);const saved=async()=>{try{await p.getByText('서버에 저장됨',{exact:true}).waitFor()}catch(error){fs.writeFileSync(out+'/save-wait-failure.json',JSON.stringify({saveEvents,browserErrors:errors,status:await p.locator('.save-state').innerText(),alerts:await p.getByRole('alert').allTextContents(),stage:await p.locator('.session-step-row').allTextContents()},null,2));throw error}};
+  p=await ctx.newPage();observe(p);const saved=async()=>{try{await p.getByText('서버에 저장됨',{exact:true}).waitFor()}catch(error){fs.writeFileSync(out+'/save-wait-failure.json',JSON.stringify({saveEvents,browserErrors:errors,status:await p.locator('.save-state').innerText(),alerts:await p.getByRole('alert').allTextContents(),stage:await p.locator('.session-step-row').allTextContents()},null,2));throw error}};
   async function goal(value){await p.getByRole('button',{name:'학습 설정',exact:true}).click();await p.getByRole('combobox',{name:'하루 목표',exact:true}).click();await p.getByRole('option',{name:value+'개',exact:true}).click();await saved();await p.getByRole('button',{name:'Close',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});}
   await p.goto(base);await saved();await goal(10);
   await p.getByRole('button',{name:'추가 7개 학습하기',exact:true}).waitFor();assert.equal((await p.locator('.daily-metrics b').first().innerText()).replace(/\s/g,''),'10단어');assert.equal(await p.locator('.today-words>div').count(),3);
@@ -70,5 +70,9 @@ function observe(page){
   assert.equal(await p.getByLabel('오늘 공부할 뜻',{exact:false}).inputValue(),'진행 중인 재학습의 임시 뜻');
   checks.push('raising the goal during optional repeat study keeps its current screen and unsaved input');
   assert.deepEqual(errors,[]);const result={passed:true,checks,browserErrors:errors,saveEvents};fs.writeFileSync(out+'/validation.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+ }catch(error){
+  // Capture failures outside saved(), including a disabled grading button.
+  fs.writeFileSync(out+'/interaction-failure.json',JSON.stringify({checks,saveEvents,browserErrors:errors,error:String(error),status:p?await p.locator('.save-state').innerText():null,alerts:p?await p.getByRole('alert').allTextContents():[],stage:p?await p.locator('.session-step-row').allTextContents():[],answer:p?await p.locator('#recall-answer').inputValue().catch(()=>null):null,hint:p?await p.getByText('답을 먼저 확인했으므로 이번 결과는 ‘도움 필요’로 기록해요.').count():null},null,2));
+  if(p)await p.screenshot({path:out+'/interaction-failure.png'});throw error;
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exit(1)});
