@@ -147,6 +147,46 @@ test('B1 stored account senses do not receive unrelated bank examples',()=>{
  const saved=resolveCardContent(account,custom);for(const [k,v] of Object.entries(custom))assert.equal(saved[k],v);
 });
 
+test('B2 review ledger covers all 839 entries and hashes the shipped revision',()=>{
+ const ledger=JSON.parse(readFileSync('data/b2-content-review.json','utf8'));
+ const entries=ledger.batches.flatMap(b=>b.entries),b2=words.filter(w=>w.level==='B2');
+ assert.equal(entries.length,839);assert.equal(new Set(entries.map(e=>e.id)).size,839);
+ assert.deepEqual(new Set(entries.map(e=>e.id)),new Set(b2.map(w=>w.id)));
+ assert.equal(entries.filter(e=>e.status==='corrected').length,418);
+ const fields=['meaning','expression','example','translation','source','attribution','url'];
+ for(const entry of entries){
+  const hash=createHash('sha256').update(JSON.stringify(fields.map(k=>data[entry.id][k]??null))).digest('hex');
+  assert.equal(entry.afterHash,hash,'B2 revision changed without review evidence: '+entry.id);
+  assert.match(entry.beforeHash,/^[a-f0-9]{64}$/);
+  if(entry.status==='corrected'){assert.ok(entry.reason);assert.notEqual(entry.beforeHash,entry.afterHash);}
+  else{assert.equal(entry.status,'kept');assert.equal(entry.beforeHash,entry.afterHash);}
+ }
+});
+
+test('B2 selected senses, phrasal meanings and corrected translations remain aligned',()=>{
+ const b2=(word,pos)=>data[words.find(w=>w.level==='B2'&&w.word===word&&w.pos===pos).id];
+ for(const [word,pos,meaning,part] of [
+  ['bet','v.','확신하다','I bet'],['dismiss','v.','해고하다','dismissed'],
+  ['dig','v.','파다','digging a hole'],['melt','v.','녹다','begun to melt'],
+  ['hunting','n.','찾기','house hunting'],['means','n.','수단','means of transport'],
+  ['stuff','v.','채워 넣다','stuffed my clothes'],['capture','n.','촬영','image capture']
+ ]){const c=b2(word,pos);assert.equal(c.meaning,meaning,word);assert.ok(c.example.includes(part),word);}
+ assert.equal(b2('relatively','adv.').translation,'할아버지는 연세에 비해 비교적 건강하세요.');
+ assert.equal(b2('proof','n.').translation,'우리는 결정을 내리기 전에 증거가 필요해요.');
+ for(const word of ['characteristic','curve','display','maximum','outline','regard','rubber','struggle']){
+  const cards=words.filter(w=>w.level==='B2'&&w.word===word).map(w=>data[w.id]);
+  assert.equal(new Set(cards.map(c=>c.example)).size,cards.length,word+' separates POS examples');
+ }
+});
+
+test('B2 stored capture senses do not receive unrelated photography examples',()=>{
+ const capture=find('capture','n.');assert.equal(capture.meaning,'촬영');
+ const old=resolveCardContent(capture,{meaning:'생포',en:'independent'});
+ assert.equal(old.meaning,'생포');assert.equal(old.example,'');assert.equal(old.translation,'');
+ const custom={meaning:'생포',expression:'the capture of a prisoner',example:'The story describes the capture of a prisoner.',translation:'그 이야기는 한 포로의 생포를 묘사해요.'};
+ const saved=resolveCardContent(capture,custom);for(const [k,v] of Object.entries(custom))assert.equal(saved[k],v);
+});
+
 test('catalog corrections never combine a saved older meaning with another sense examples',()=>{
  const base=find('bar','n.');assert.equal(base.meaning,'술집');
  assert.deepEqual(resolveCardContent(base),base);
