@@ -28,6 +28,8 @@ type TodayOverviewProps = Pick<
   | "setCorrectingSession"
   | "setTab"
   | "initialAssessment"
+  | "monthlyRepair"
+  | "correctMonthlyCarryover"
 >;
 export function TodayOverview({
   date,
@@ -51,6 +53,8 @@ export function TodayOverview({
   setCorrectingSession,
   setTab,
   initialAssessment,
+  monthlyRepair,
+  correctMonthlyCarryover,
 }: TodayOverviewProps) {
   const statuses = useMemo(() => todayWordStatuses(state, visibleIds, date, unfinished),
     [state, visibleIds, date, unfinished]);
@@ -111,6 +115,16 @@ export function TodayOverview({
           </b>
         </div>
       </div>
+      {(monthlyRepair.cleared > 0 || monthlyRepair.replacements.length > 0 || monthlyRepair.unavailable > 0) && (
+        <section className="monthly-repair" aria-label="중복 배정 바로잡기">
+          <h3>완료한 단어가 다시 배정되었나요?</h3>
+          <p>이전 월말 점검의 미측정 항목이 일일 복습으로 표시된 기록을 찾았어요.</p>
+          <p>잘못된 복습 표시 {monthlyRepair.cleared}건 · 오늘 교체할 단어 {monthlyRepair.replacements.length}개</p>
+          <p>과거 성적과 월말 점검은 유지하고, 오늘 답·문장·수정 내용을 저장하지 않은 단어만 교체해요.</p>
+          {monthlyRepair.unavailable > 0 && <p>대체 후보가 부족한 {monthlyRepair.unavailable}개는 유지해요. 신규 단어 쉬기 설정이나 학습 수준을 확인해 주세요.</p>}
+          <button className="secondary-button full" disabled={busy || monthlyRepair.state === state} onClick={correctMonthlyCarryover}>오늘 배정 바로잡기</button>
+        </section>
+      )}
       <div className="today-words" role="region" aria-labelledby="today-targets-heading">
         <header>
           <h3 id="today-targets-heading">{month}월 {day}일 목표 단어</h3>

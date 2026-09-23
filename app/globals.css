@@ -55,6 +55,10 @@
 .today-targets-note{font-size:14px;line-height:1.8;color:#52617b;margin:0 0 10px}
 .home-panel>.notice{order:4;margin-top:20px}
 .home-panel>.centered{order:5}
+.monthly-repair{padding:18px;border:1px solid #b7c9e8;border-radius:10px;background:#f2f6fd;margin-bottom:18px}
+.monthly-repair h3{font-size:17px;color:#172e52;margin:0 0 8px}
+.monthly-repair p{font-size:14px;line-height:1.8;color:#445875;margin:8px 0}
+.monthly-repair button{margin-top:10px}
 @media(max-width:480px){
  .today-words>div{grid-template-columns:18px minmax(0,1fr);gap:6px 12px}
  .today-word-status{grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:center;max-width:none}

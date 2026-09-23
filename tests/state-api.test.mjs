@@ -136,3 +136,15 @@ test('review-resume compatibility marker remains required before writing expande
   assert.equal(response.status, 426); assert.deepEqual(dump(), before);
   assert.equal((await route.PUT(req(data, { 'x-study-review-resume': '1' }))).status, 200);
 });
+
+test('old monthly clients cannot reintroduce legacy carryover flags; current clients retain atomic saves', async () => {
+  const s = { ...session(), kind: 'monthly', period: today().slice(0, 7), stage: 'ko' }, initial = delta(s);
+  assert.equal((await route.PUT(req(initial))).status, 200);
+  const before = dump(), update = { ...initial, revision: 1, progress: { [s.ids[0]]: { meaning: '학습 뜻', needsReview: true } } };
+  assert.equal((await route.PUT(req(update))).status, 426);
+  assert.deepEqual(dump(), before);
+  assert.equal((await route.PUT(req(update, { 'x-study-monthly-carryover': '1' }))).status, 200);
+  const after = dump();
+  assert.equal((await route.PUT(req(update, { 'x-study-monthly-carryover': '1' }))).status, 409);
+  assert.deepEqual(dump(), after);
+});

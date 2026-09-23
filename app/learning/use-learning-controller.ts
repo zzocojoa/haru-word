@@ -20,6 +20,7 @@ import {
   type Session,
 } from "@/lib/learning";
 import { dailyOrigins } from "@/lib/study-date-correction";
+import { repairMonthlyCarryover } from "@/lib/learning/monthly-carryover-repair";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLearningStore } from "../use-learning-store";
 import { useStudyDate } from "../use-study-date";
@@ -122,6 +123,19 @@ export function useLearningController(initialServerTime: number) {
     () => dailyOrigins(state, visibleIds, date),
     [state, visibleIds, date],
   );
+  const monthlyRepair = useMemo(() => repairMonthlyCarryover(
+    state, words, id => cardContent(id, state.progress[id]), date,
+  ), [state, words, date]);
+
+  async function correctMonthlyCarryover() {
+    if (busy || showSession || currentStudyDate() !== date) return;
+    const latest = currentState.current;
+    const repair = repairMonthlyCarryover(latest, words, id => cardContent(id, latest.progress[id]), date);
+    if (repair.state === latest) return;
+    if (await save(repair.state)) {
+      setMessage(`복습 표시 ${repair.cleared}건을 바로잡고, 아직 입력하지 않은 오늘 단어 ${repair.replacements.length}개를 다시 배정했어요. 기존 성적과 월말 점검은 보존했어요.`);
+    }
+  }
 
   async function changeGoal(dailyGoal: number) {
     if (await save({ ...state, settings: { ...state.settings, dailyGoal } })) {
@@ -404,6 +418,8 @@ export function useLearningController(initialServerTime: number) {
     setCorrectingSession,
     initialAssessment,
     metrics,
+    monthlyRepair,
+    correctMonthlyCarryover,
     navigation,
     openRestore,
     setAbout,

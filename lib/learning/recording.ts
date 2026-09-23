@@ -158,9 +158,10 @@ export function applyRecord(
 }
 
 export function ensureCarryover(state: State, s: Session): State {
-  // Optional practice does not create an obligation merely by opening/pausing it.
-  // Actual difficulties are already applied by applyRecord to the assessed sense.
-  if (s.kind === "practice") return state;
+  // Monthly untested writing stays in its own resumable session. Opening or
+  // pausing that check must not turn previously mastered words into daily work.
+  // Actual difficulties (including monthly ones) are applied by applyRecord.
+  if (s.kind === "practice" || s.kind === "monthly") return state;
   const progress = { ...state.progress };
   for (const id of s.ids) {
     const r = s.records[id];

@@ -32,7 +32,7 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     }]; }));
     const seed = { revision: initial.revision, settings: { ...initial.state.settings, dailyGoal: 3, activeSessionId: monthly.id },
       progress, sessions: { [daily.id]: daily, [monthly.id]: monthly } };
-    const put = async value => { const r = await c.request.put(base + '/api/state', { data: value }); assert.equal(r.status(), 200, await r.text()); };
+    const put = async value => { const r = await c.request.put(base + '/api/state', { data: value, headers: { 'X-Study-Monthly-Carryover': '1' } }); assert.equal(r.status(), 200, await r.text()); };
     await put(seed); await p.reload(); await saved(p);
     const before = await get(c);
     const rows = p.locator('.today-words > div'), home = p.locator('.home-panel');

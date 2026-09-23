@@ -25,6 +25,7 @@ test('client load/save/restore keep their exact wire contracts and do not mutate
   assert.equal(calls[1].init.method, 'PUT'); assert.deepEqual(JSON.parse(calls[1].init.body), delta);
   assert.equal(calls[1].init.headers['X-Study-Review-Resume'], '1');
   assert.equal(calls[1].init.headers['X-Study-Server-Clock'], '1');
+  assert.equal(calls[1].init.headers['X-Study-Monthly-Carryover'], '1');
   assert.equal(calls[2].url, '/api/state/restore'); assert.equal(calls[2].init.headers['X-Study-Revision'], '4');
   const envelope = JSON.parse(calls[2].init.body);
   assert.equal(envelope.format, 'haru-words-v1'); assert.ok(Number.isFinite(Date.parse(envelope.exportedAt)));

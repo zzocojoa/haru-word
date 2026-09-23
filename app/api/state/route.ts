@@ -43,6 +43,13 @@ export async function PUT(request: Request) {
   }
   try {
     const db = database();
+    if (request.headers.get('x-study-monthly-carryover') !== '1') {
+      const monthly = Object.values(data.sessions).filter(s => s.kind === 'monthly').map(s => s.id);
+      if (monthly.length && (await existingSessionIds(db, user.userId, monthly)).size) {
+        console.warn(JSON.stringify({ event: 'learning_monthly_client_outdated', durationMs: Date.now() - started }));
+        return json({ error: '월말 점검 저장 방식이 업데이트되었어요. 현재 입력을 백업한 뒤 페이지를 새로고침해 주세요.' }, 426);
+      }
+    }
     if (request.headers.get('x-study-server-clock') === '1') {
       const date = today();
       const daily = Object.values(data.sessions).filter(s => s.kind === 'daily' && s.date !== date);

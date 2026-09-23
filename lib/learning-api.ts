@@ -28,6 +28,7 @@ export function saveLearningState(data: SaveStateRequest) {
       'Content-Type': 'application/json',
       'X-Study-Review-Resume': '1',
       'X-Study-Server-Clock': '1',
+      'X-Study-Monthly-Carryover': '1',
     },
     body: JSON.stringify(data),
   }, REQUEST_TIMEOUT_MS.save);

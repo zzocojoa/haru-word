@@ -87,6 +87,8 @@ export default function LearningApp({
     setCorrectingSession,
     initialAssessment,
     metrics,
+    monthlyRepair,
+    correctMonthlyCarryover,
     navigation,
     openRestore,
     setAbout,
@@ -324,6 +326,8 @@ export default function LearningApp({
                       setCorrectingSession={setCorrectingSession}
                       setTab={setTab}
                       initialAssessment={initialAssessment}
+                      monthlyRepair={monthlyRepair}
+                      correctMonthlyCarryover={correctMonthlyCarryover}
                     />
                     <PendingReviews
                       state={state}
