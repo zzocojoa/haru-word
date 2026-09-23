@@ -38,18 +38,21 @@ export function correctDailyStudyDate(state:State,sessionId:string,date:string,c
 export function previousDate(date:string){const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()-1);return d.toISOString().slice(0,10)}
 
 export function dailyOriginSummary(state:State,ids:string[],date:string){
- const earlier=new Set(Object.values(state.sessions).filter(s=>s.kind==='daily'&&s.date<date).flatMap(s=>s.ids.map(id=>entryIdFor(s,id))));
+ const earlier=new Set<string>(),assignedToday=new Set<string>();
  // Actual practice/review results remain evidence after daily assignment.
  // Merely appearing in an unmeasured review queue is not prior learning.
  for(const s of Object.values(state.sessions)){
-  if(s.kind==='daily')continue;
+  if(s.kind==='daily'){
+   const target=s.date<date?earlier:s.date===date?assignedToday:undefined;
+   if(target)for(const id of s.ids)target.add(entryIdFor(s,id));
+   continue;
+  }
   for(const id of s.ids){
    const r=s.records[id];
    if(r&&(r.lastPracticedOn||s.date)<=date&&
     (r.en!=='unmeasured'||r.ko!=='unmeasured'||r.sentenceStatus!=='unmeasured'))earlier.add(entryIdFor(s,id));
   }
  }
- const assignedToday=new Set(Object.values(state.sessions).filter(s=>s.kind==='daily'&&s.date===date).flatMap(s=>s.ids.map(id=>entryIdFor(s,id))));
  // Before assignment, actual pending review work is carryover even when it came
  // from a focused practice session rather than an earlier daily lesson.
  const byId:Record<string,'returning'|'new'>=Object.fromEntries(ids.map(id=>[id,earlier.has(id)||state.progress[id]?.studyDates?.some(d=>d<date)||!assignedToday.has(id)&&hasReviewWork(state.progress[id])?'returning':'new']));
