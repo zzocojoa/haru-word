@@ -105,6 +105,23 @@ export default function LearningApp({
   } = useLearningController(initialServerTime);
   const keyboardOpen = useKeyboardInset();
   const visitTab = useTabPosition(tab, store.epoch, setTab);
+  // Render recovery controls on the active surface, never behind the settings modal.
+  const connectionStatus = (
+    <>
+      {error && (
+        <SaveError
+          saveError={saveError}
+          error={error}
+          conflict={conflict}
+          saving={saving}
+          unsaved={unsaved}
+          store={store}
+          state={state}
+        />
+      )}
+      {!loading && signedIn && <ClockStatus clock={clock} />}
+    </>
+  );
   return (
     <main
       className="shell"
@@ -216,23 +233,12 @@ export default function LearningApp({
               </a>
             </div>
           )}
-          {error && (
-            <SaveError
-              saveError={saveError}
-              error={error}
-              conflict={conflict}
-              saving={saving}
-              unsaved={unsaved}
-              store={store}
-              state={state}
-            />
-          )}
+          {!settings && connectionStatus}
           {message && (
             <p className="notice" role="status">
               {message}
             </p>
           )}
-          {!loading && signedIn && <ClockStatus clock={clock} />}
           <TabsContent value="today" forceMount hidden={tab !== "today"}>
             <div className="workspace">
               <div className="main-study">
@@ -418,6 +424,23 @@ export default function LearningApp({
         changeGoal={changeGoal}
         save={save}
         beginAssessment={beginAssessment}
+        availability={
+          <>
+            {connectionStatus}
+            {loading ? (
+              <p className="notice" role="status">기록을 불러오면 설정을 변경할 수 있어요.</p>
+            ) : saving ? (
+              <p className="notice" role="status">변경한 설정을 저장하고 있어요.</p>
+            ) : !signedIn ? (
+              <div className="notice">
+                <p>로그인하면 설정을 변경할 수 있어요.</p>
+                <a className="text-button" href="/signin-with-chatgpt?return_to=%2F" target="_top">로그인하기</a>
+              </div>
+            ) : unsaved && !error ? (
+              <p className="notice" role="status">변경 내용을 저장한 뒤 설정을 변경할 수 있어요.</p>
+            ) : null}
+          </>
+        }
       />
       {correctingSession && (
         <StudyDateDialog

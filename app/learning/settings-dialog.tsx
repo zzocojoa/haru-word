@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -28,7 +29,7 @@ type SettingsDialogProps = Pick<
   | "changeGoal"
   | "save"
   | "beginAssessment"
->;
+> & { availability: ReactNode };
 export function SettingsDialog({
   settings,
   setSettings,
@@ -38,6 +39,7 @@ export function SettingsDialog({
   changeGoal,
   save,
   beginAssessment,
+  availability,
 }: SettingsDialogProps) {
   return (
     <Dialog open={settings} onOpenChange={setSettings}>
@@ -49,6 +51,7 @@ export function SettingsDialog({
           </DialogDescription>
         </DialogHeader>
         <div className="dialog-scroll">
+        {availability}
         <label>
           학습 수준
           <LevelSelect
