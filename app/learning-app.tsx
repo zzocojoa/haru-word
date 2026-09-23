@@ -229,7 +229,7 @@ export default function LearningApp({
           )}
           {!settings && availability}
           {message && (
-            <LearningMessage key={messageId} message={message} onDismiss={dismissMessage} />
+            <LearningMessage messageId={messageId} message={message} onDismiss={dismissMessage} />
           )}
           <TabsContent value="today" forceMount hidden={tab !== "today"}>
             <div className="workspace">

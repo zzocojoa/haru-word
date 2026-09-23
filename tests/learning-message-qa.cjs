@@ -15,8 +15,8 @@ const checks = [];
     function Harness(){const m=useLearningMessage();window.noticeHarness=m;return <main>
       <h1>학습 안내 확인</h1><button onClick={()=>m.setMessage('학습할 대상이 없어요. 다른 수준을 선택하거나 친숙도를 확인해 주세요.')}>안내 표시</button>
       <label>연습 답<input defaultValue="기존 입력" /></label>
-      {m.message&&<LearningMessage key={m.messageId} message={m.message} onDismiss={m.dismissMessage}/>}</main>}
-    createRoot(document.getElementById('root')).render(<Harness/>);`, resolveDir: process.cwd(), loader: 'tsx' },
+      {m.message&&<LearningMessage messageId={m.messageId} message={m.message} onDismiss={m.dismissMessage}/>}</main>}
+    createRoot(document.getElementById('root')).render(<React.StrictMode><Harness/></React.StrictMode>);`, resolveDir: process.cwd(), loader: 'tsx' },
     outfile: 'work/learning-message-harness.js', bundle: true, format: 'iife', platform: 'browser', logLevel: 'silent', define: { 'process.env.NODE_ENV': '"development"' } });
   const browser = await launchBrowser(); const errors = [];
   try {
@@ -52,6 +52,33 @@ const checks = [];
     await page.evaluate(() => window.flushNotice(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: false }); document.dispatchEvent(new Event('visibilitychange')); }));
     await page.clock.runFor(10100); await notice.waitFor({ state: 'hidden' });
     checks.push('hidden pages preserve the notice until a fresh visible reading interval');
+
+    await show(); await notice.hover(); await close.focus();
+    await page.mouse.move(0, 0); await page.clock.runFor(20000); assert.equal(await notice.count(), 1);
+    await notice.hover(); await page.getByRole('textbox', { name: '연습 답' }).focus();
+    await page.clock.runFor(20000); assert.equal(await notice.count(), 1);
+    await page.mouse.move(0, 0); await page.clock.runFor(9000); assert.equal(await notice.count(), 1);
+    await page.clock.runFor(1100); await notice.waitFor({ state: 'hidden' });
+    checks.push('overlapping hover and focus require both pause reasons to clear');
+
+    await show(); await close.focus();
+    await page.evaluate(() => window.flushNotice(() => window.noticeHarness.setMessage(window.noticeHarness.message)));
+    await page.clock.runFor(9000); assert.equal(await notice.count(), 1);
+    await page.clock.runFor(1100); await notice.waitFor({ state: 'hidden' });
+    checks.push('replacing a focused message resets its reading state without a caller key');
+
+    await show(); await page.clock.runFor(9000);
+    await page.evaluate(() => window.flushNotice(() => window.noticeHarness.setMessage('')));
+    await notice.waitFor({ state: 'hidden' });
+    await show(); await page.clock.runFor(2000); assert.equal(await notice.count(), 1);
+    await page.clock.runFor(8100); await notice.waitFor({ state: 'hidden' });
+    checks.push('clearing and remounting leaves no previous timer affecting a later message');
+
+    await show();
+    await notice.dispatchEvent('pointerover', { pointerType: 'touch' });
+    await page.clock.runFor(10100); await notice.waitFor({ state: 'hidden' });
+    checks.push('touch interaction does not leave a permanent hover pause');
+
     await show(); await close.focus();
     for (const width of [320, 390, 768]) {
       await page.setViewportSize({ width, height: 844 });
