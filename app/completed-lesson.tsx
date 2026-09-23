@@ -14,7 +14,7 @@ export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepea
  const items=[...new Map(sessions.flatMap(s=>s.ids.map(id=>[targetIdentity(entryIdFor(s,id),s.records[id].meaning),{id:entryIdFor(s,id),record:s.records[id]}] as const))).values()];
  const item=items[index];const word=words.find(w=>w.id===item?.id);const content=word?studyContent(word.id,item?.record,state.progress[word.id]):undefined;
  const resuming=Object.values(state.sessions).some(s=>s.practiceMode==='repeat'&&s.period===date&&!s.finished);
- return <Dialog open onOpenChange={open=>{if(!open)onClose()}}><DialogContent className="completed-lesson"><DialogHeader><DialogTitle>{date===todayDate?'오늘 단어 다시 보기':date+' 단어 다시 보기'}</DialogTitle><DialogDescription>완료한 기록은 그대로 두고 뜻과 표현을 다시 살펴보세요.</DialogDescription></DialogHeader>
+ return <Dialog open onOpenChange={open=>{if(!open)onClose()}}><DialogContent className="completed-lesson framed-dialog"><DialogHeader><DialogTitle>{date===todayDate?'오늘 단어 다시 보기':date+' 단어 다시 보기'}</DialogTitle><DialogDescription>완료한 기록은 그대로 두고 뜻과 표현을 다시 살펴보세요.</DialogDescription></DialogHeader><div className="dialog-scroll">
   {item&&word&&content?<>{sessions[0]?.kind==='practice'&&<p className="small-note">원래 일일 학습일이 변경되어, 이 다시 학습 회차에 보관된 단어를 보여 드려요.</p>}<nav className="review-word-tabs" aria-label="다시 볼 단어">{items.map((entry,i)=><button className="secondary-button" key={targetIdentity(entry.id,entry.record.meaning)} aria-pressed={index===i} onClick={()=>setIndex(i)}>{words.find(w=>w.id===entry.id)?.word}</button>)}</nav>
    <div className="completed-word" aria-live="polite" aria-atomic="true"><div className="word-stage compact"><span className="word-index">{word.personal?'개인 추가':`OXFORD ${word.level}`} · {POS[word.pos]}</span><h3 lang="en">{word.word}<Speak text={word.word}/></h3>{content.ipa&&<span className="phonetic">{content.ipa}</span>}</div>
     <p className="eyebrow">그날 공부한 뜻</p><p className="review-meaning">{item.record?.meaning||'기록된 뜻이 없어요.'}</p>
@@ -24,7 +24,8 @@ export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepea
     <DictionaryLinks word={word.word}/>{!word.personal&&<a className="source-credit" href={`/sources/oxford-source.pdf#page=${word.page}`} target="_blank" rel="noreferrer">공식 목록 {word.page}쪽 · {word.level} · {POS[word.pos]}</a>}
    </div><div className="review-card-navigation"><button className="secondary-button" disabled={index===0} onClick={()=>setIndex(i=>i-1)}><ArrowLeft size={16}/>이전</button><span>{index+1} / {items.length}</span><button className="secondary-button" disabled={index===items.length-1} onClick={()=>setIndex(i=>i+1)}>다음<ArrowRight size={16}/></button></div>
    <p className="small-note">저장된 뜻·예문·내 문장을 다시 살펴봐요. 예문이 없는 이전 기록은 같은 뜻의 단어장 풀이를 참고해요. 다시 보기만으로는 학습 결과가 바뀌지 않아요.</p>
-   <button className="primary-button full" disabled={busy} onClick={()=>onRepeat(date)}><RotateCcw size={17}/>{resuming?'다시 학습 이어서':'이 단어들 다시 학습'}</button>
+
   </>:<p className="muted">완료한 단어 기록이 없어요.</p>}
+ </div>{item&&word&&content&&<div className="dialog-actions"><button className="primary-button full" disabled={busy} onClick={()=>onRepeat(date)}><RotateCcw size={17}/>{resuming?'다시 학습 이어서':'이 단어들 다시 학습'}</button></div>}
  </DialogContent></Dialog>;
 }

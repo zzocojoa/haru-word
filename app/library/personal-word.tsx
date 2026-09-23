@@ -33,6 +33,7 @@ export function PersonalWord({
           Oxford 공식 목록과 구분하여 ‘개인 추가’로 저장해요.
         </DialogDescription>
       </DialogHeader>
+      <div className="dialog-scroll">
       <label>
         영어 단어
         <input
@@ -77,6 +78,8 @@ export function PersonalWord({
           maxLength={2000}
         />
       </label>
+      </div>
+      <div className="dialog-actions">
       <button
         className="primary-button full"
         disabled={busy || !word.trim() || !meaning.trim()}
@@ -102,6 +105,7 @@ export function PersonalWord({
       >
         내 단어장에 추가
       </button>
+      </div>
     </>
   );
 }

@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FeedbackDetail } from "./sentence-feedback";
+import { StatusBadge } from "./study-ui";
 import {
   entryIdFor,
   FAMILIARITY_TEXT,
@@ -93,9 +94,9 @@ export const SessionRecords = memo(function SessionRecords({
             </span>
             <span className="journal-word-meaning">{r.meaning || "뜻 미입력"}</span>
           </span>
-          <span className={complete ? "status-good" : needsHelp ? "status-warn" : "journal-word-status"}>
+          <StatusBadge tone={complete ? "success" : needsHelp ? "warning" : "neutral"}>
             {complete ? "독립 성공" : needsHelp ? "보완 필요" : unmeasured ? "미측정" : "진행 중"}
-          </span>
+          </StatusBadge>
         </AccordionTrigger>
         <AccordionContent className="journal-word-detail">{detail}</AccordionContent>
       </AccordionItem>

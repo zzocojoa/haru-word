@@ -2,7 +2,8 @@
 import { POS } from "@/lib/learning";
 import { todayWordStatuses } from "@/lib/today-status";
 import { useMemo, useState } from "react";
-import { HelpDetails } from "../study-ui";
+import { dailyOrigins } from "@/lib/study-date-correction";
+import { HelpDetails, StatusBadge } from "../study-ui";
 import { ArrowRight, BookOpen, RotateCcw } from "lucide-react";
 import { LevelSelect } from "../ui";
 import type { LearningController } from "./use-learning-controller";
@@ -59,6 +60,7 @@ export function TodayOverview({
 }: TodayOverviewProps) {
   const statuses = useMemo(() => todayWordStatuses(state, visibleIds, date, unfinished),
     [state, visibleIds, date, unfinished]);
+  const assignmentTypes = useMemo(() => Object.fromEntries(visibleIds.map(id => [id, dailyOrigins(state, [id], date).returning ? '이전 학습·복습 항목' : '새 학습 항목'])), [state, visibleIds, date]);
   const checked = visibleIds.filter(id => statuses[id].learning === '오늘 학습 완료').length;
   const assigned = assignedIds.length > 0;
   const [year, month, day] = date.split('-').map(Number);
@@ -230,9 +232,9 @@ export function TodayOverview({
                 </small>
               </div>
               <div className="today-word-status">
-                {status.learning && <span className={status.learning === '오늘 학습 완료' ? 'status-good' : 'today-progress'}>{status.learning === '오늘 학습 완료' ? '기록 완료' : status.learning === '오늘 회차 종료' ? '회차 종료' : '진행 중'}</span>}
-                {status.notices.some(n => n.warning) && <span className="status-warn">보완 필요</span>}
-                {status.notices.length > 0 && <HelpDetails title="상태 상세"><ul>{status.notices.map(notice => <li key={notice.label}>{notice.label}</li>)}</ul></HelpDetails>}
+                {status.learning && <StatusBadge tone={status.learning === '오늘 학습 완료' ? 'success' : 'neutral'}>{status.learning === '오늘 학습 완료' ? '기록 완료' : status.learning === '오늘 회차 종료' ? '회차 종료' : '진행 중'}</StatusBadge>}
+                {status.notices.some(n => n.warning) && <StatusBadge tone="warning">보완 필요</StatusBadge>}
+                {<HelpDetails title="상태 상세"><p>{assignmentTypes[id]}</p><ul>{status.notices.map(notice => <li key={notice.label}>{notice.label}</li>)}</ul></HelpDetails>}
               </div>
             </div>
           );

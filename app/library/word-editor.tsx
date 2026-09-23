@@ -79,30 +79,7 @@ export function WordEditor({
           {word.personal ? "개인 추가" : `첨부 Oxford PDF ${word.page}쪽`}
         </DialogDescription>
       </DialogHeader>
-      <div className="familiarity-actions mini">
-        {(["known", "uncertain", "new"] as const).map((f) => (
-          <button
-            key={f}
-            aria-pressed={fam === f}
-            className={fam === f ? "selected" : ""}
-            onClick={() => {
-              setFam(f);
-              setFamiliarityTouched(true);
-            }}
-          >
-            {FAMILIARITY_TEXT[f]}
-          </button>
-        ))}
-      </div>
-      <HelpDetails title="친숙도와 성적은 달라요"><p>친숙도를 바꿔도 회상·문장 성적은 유지해요. 다시 헷갈리는 단어는 재학습에 넣어요.</p></HelpDetails>
-      <label className="check-label">
-        <input
-          type="checkbox"
-          checked={useful}
-          onChange={(e) => setUseful(e.target.checked)}
-        />{" "}
-        자주 쓸 단어 · 같은 순위에서 먼저
-      </label>
+      <div className="dialog-scroll">
       <section className="sense-selector">
         <label>
           학습할 뜻 선택
@@ -167,12 +144,38 @@ export function WordEditor({
           <>
             {" "}
             ·{" "}
-            <a href={content.url} target="_blank" rel="noreferrer">
+            <a className="source-link" href={content.url} target="_blank" rel="noreferrer">
               {content.attribution}
             </a>
           </>
         )}
       </p>
+      <HelpDetails title="친숙도·학습 우선순위">
+      <div className="familiarity-actions mini">
+        {(["known", "uncertain", "new"] as const).map((f) => (
+          <button
+            key={f}
+            aria-pressed={fam === f}
+            className={fam === f ? "selected" : ""}
+            onClick={() => {
+              setFam(f);
+              setFamiliarityTouched(true);
+            }}
+          >
+            {FAMILIARITY_TEXT[f]}
+          </button>
+        ))}
+      </div>
+      <p className="small-note">친숙도를 바꿔도 회상·문장 성적은 유지해요. 다시 헷갈리는 단어는 재학습에 넣어요.</p>
+      <label className="check-label">
+        <input
+          type="checkbox"
+          checked={useful}
+          onChange={(e) => setUseful(e.target.checked)}
+        />{" "}
+        자주 쓸 단어 · 같은 순위에서 먼저
+      </label>
+      </HelpDetails>
       <HelpDetails title="내 성적·문장·보완점">
       {p?.familiarityCheck && (
         <div className="example-box">
@@ -260,6 +263,8 @@ export function WordEditor({
           이미 저장된 뜻이에요. 위 목록에서 선택해 주세요.
         </p>
       )}
+      </div>
+      <div className="dialog-actions">
       <button
         className="primary-button full"
         disabled={busy || !meaning.trim() || duplicate}
@@ -296,6 +301,7 @@ export function WordEditor({
       >
         기록 저장
       </button>
+      </div>
     </>
   );
 }

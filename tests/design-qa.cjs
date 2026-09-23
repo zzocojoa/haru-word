@@ -67,10 +67,10 @@ const checks=[];const errors=[];
   assert.equal(await dialog.evaluate(el=>getComputedStyle(el).animationName),'none');
   const save=p.getByRole('button',{name:'기록 저장',exact:true});
   for(const offset of [0,200,5000]){
-   await dialog.evaluate((el,top)=>{el.scrollTop=top},offset);
+   await dialog.locator('.dialog-scroll').evaluate((el,top)=>{el.scrollTop=top},offset);
    const button=await save.boundingBox();assert.ok(button.y>=box.y&&button.y+button.height<=845,'save must remain within the sheet');
   }
-  await dialog.evaluate(el=>{el.scrollTop=0});await shot('04-mobile-editor');
+  await dialog.locator('.dialog-scroll').evaluate(el=>{el.scrollTop=0});await shot('04-mobile-editor');
   await p.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});
   await p.waitForFunction(()=>document.activeElement?.matches('.word-link'));
   assert.ok(await wordButton.evaluate(el=>document.activeElement===el));

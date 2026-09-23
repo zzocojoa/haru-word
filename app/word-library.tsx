@@ -86,25 +86,8 @@ export const WordLibrary = memo(function WordLibrary({
   const visible = filtered.slice(currentPage * 30, (currentPage + 1) * 30);
   return (
     <section className="wide-panel library-panel">
-      <div className="section-heading">
-        <div>
-          <h2>단어 찾기</h2>
-          <p className="muted">
-            Oxford 3000 · {words.filter((w) => !w.personal).length.toLocaleString()}개 학습 항목
-          </p>
-        </div>
-        <button
-          className="secondary-button"
-          onClick={(event) => {
-            dialogTrigger.current = event.currentTarget;
-            setAdding(true);
-          }}
-          disabled={busy}
-        >
-          <Plus size={17} />
-          개인 단어 추가
-        </button>
-      </div>
+      <h2 className="sr-only">단어 찾기</h2>
+      <div className="library-controls" role="region" aria-label="단어 검색과 필터">
       <div className="filters">
         <div className="search-box">
           <Search size={18} />
@@ -158,10 +141,22 @@ export const WordLibrary = memo(function WordLibrary({
           </SelectContent>
         </Select>
       </div>
-      <div className="list-count">
+      <div className="library-tools"><div className="list-count">
         {filtered.length.toLocaleString()}개 학습 항목{" "}
         {(query || level !== 'all' || familiarity !== 'all') && <button className="text-button" onClick={() => {setQuery('');setLevel('all');setFamiliarity('all');setPage(0);searchInput.current?.focus();}}>필터 초기화</button>}
       </div>
+              <button
+          className="secondary-button"
+          onClick={(event) => {
+            dialogTrigger.current = event.currentTarget;
+            setAdding(true);
+          }}
+          disabled={busy}
+        >
+          <Plus size={17} />
+          개인 단어 추가
+        </button>
+      </div></div>
       <Table className="word-table" aria-label="나의 단어 목록">
         <TableHeader>
           <TableRow>
@@ -258,7 +253,7 @@ export const WordLibrary = memo(function WordLibrary({
           if (!open) setSelected(null);
         }}
       >
-        <DialogContent className="word-dialog" onCloseAutoFocus={restoreFocus}>
+        <DialogContent className="word-dialog framed-dialog" onCloseAutoFocus={restoreFocus}>
           {selected && (
             <WordEditor
               activityDate={activityDate}
@@ -280,7 +275,7 @@ export const WordLibrary = memo(function WordLibrary({
         </DialogContent>
       </Dialog>
       <Dialog open={adding} onOpenChange={setAdding}>
-        <DialogContent className="word-dialog" onCloseAutoFocus={restoreFocus}>
+        <DialogContent className="word-dialog framed-dialog" onCloseAutoFocus={restoreFocus}>
           <PersonalWord
             busy={busy}
             onSave={async (w, p) => {

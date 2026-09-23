@@ -15,13 +15,14 @@ export function SourceDialog({
 }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="source-dialog">
+      <DialogContent className="source-dialog framed-dialog">
         <DialogHeader>
           <DialogTitle>학습 방식과 자료 출처</DialogTitle>
           <DialogDescription>
             공식 목록과 학습을 돕는 풀이·예문을 구분합니다.
           </DialogDescription>
         </DialogHeader>
+        <div className="dialog-scroll">
         <h3>전체 목록</h3>
         <p>
           첨부 American Oxford 3000 by CEFR level PDF 13쪽의 표제어 3,000개,
@@ -87,6 +88,7 @@ export function SourceDialog({
         >
           데이터 변경·라이선스 안내
         </a>
+        </div>
       </DialogContent>
     </Dialog>
   );

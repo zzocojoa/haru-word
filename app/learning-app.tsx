@@ -30,6 +30,7 @@ import { StudyDateDialog } from "./study-date-dialog";
 import { StudySession } from "./study-session";
 import { WordLibrary } from "./word-library";
 import { useKeyboardInset } from "./use-keyboard-inset";
+import { useTabPosition } from "./use-tab-position";
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 export default function LearningApp({
@@ -103,6 +104,7 @@ export default function LearningApp({
     about,
   } = useLearningController(initialServerTime);
   const keyboardOpen = useKeyboardInset();
+  const visitTab = useTabPosition(tab, store.epoch, setTab);
   return (
     <main
       className="shell"
@@ -163,10 +165,7 @@ export default function LearningApp({
         <Tabs
           key={store.epoch}
           value={tab}
-          onValueChange={(v) => {
-            setTab(v as View);
-            window.scrollTo({ top: 0, behavior: "auto" });
-          }}
+          onValueChange={(v) => visitTab(v as View)}
           className="main-tabs"
         >
           <TabsList className="main-nav" aria-label="학습 화면">
