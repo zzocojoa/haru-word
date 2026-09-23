@@ -1,5 +1,17 @@
 import { type Session, type Stage } from "./model.ts";
 
+// Reuse the saved batch cursor; preserve all records and the relative order of
+// outstanding words. This also makes previously closed, incomplete rounds resumable.
+export function resumeMonthlyWriting(s: Session): Session {
+  if (s.kind !== 'monthly' || s.stage !== 'done') return s;
+  const pending = s.ids.filter(id => s.records[id]?.ko === 'unmeasured');
+  if (!pending.length) return s;
+  const measured = s.ids.filter(id => s.records[id]?.ko !== 'unmeasured');
+  return { ...s, ids: [...measured, ...pending], index: measured.length,
+    batchStart: measured.length, reviewEnd: undefined, stage: 'checkpoint',
+    finished: false, paused: true, retryMode: false, resumeAfterRetry: undefined };
+}
+
 export function reviewBatchEnd(s: Session): number {
   const end = s.reviewEnd ?? s.ids.length;
   return s.kind === "monthly" && s.batchSize
@@ -85,12 +97,8 @@ export function stepSession(s: Session): Session {
       paused: false,
     };
   }
-  return {
-    ...next,
-    retry,
-    finished: next.stage === "done",
-    paused: next.stage === "done" || next.stage === "checkpoint",
-  };
+  return resumeMonthlyWriting({ ...next, retry, finished: next.stage === 'done',
+    paused: next.stage === 'done' || next.stage === 'checkpoint' });
 }
 
 export function continueBatch(s: Session): Session {

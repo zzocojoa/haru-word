@@ -1,4 +1,4 @@
-import { applyRecord, ensureCarryover, entryIdFor, recordFamiliarity, selectSense, stepSession,
+import { applyRecord, ensureCarryover, entryIdFor, recordFamiliarity, selectSense, senseProgress, storeSense, stepSession,
   type Content, type Familiarity, type Progress, type Result, type SenseProgress, type Session, type State } from './learning.ts';
 import { withAnswerDraft, type StudyDraft } from './study-draft';
 import type { ExpressionDraft } from './expression';
@@ -32,11 +32,16 @@ export function applyWarmupResult(state: State, session: Session, id: string, re
 }
 
 export function pausedStudyState(state: State, session: Session, id: string | undefined,
-  draft: StudyDraft, material: Content | undefined, activityDate: string): State {
+  draft: StudyDraft, material: Content | undefined, activityDate: string, materialUpdate?: Partial<Content>): State {
   let next = { ...state, sessions: { ...state.sessions, [session.id]: { ...session, paused: true } } };
   if (id && session.stage === 'learn' && material) {
     next.sessions[session.id] = { ...next.sessions[session.id], records: { ...session.records,
       [id]: { ...session.records[id], meaning: draft.meaning.trim(), material } } };
+    if (materialUpdate && Object.keys(materialUpdate).length) {
+      const entryId = entryIdFor(session, id), original = state.progress[entryId];
+      next = { ...next, progress: { ...next.progress, [entryId]: storeSense(original,
+        { ...senseProgress(original, material.meaning), ...materialUpdate, meaning: material.meaning }) } };
+    }
   }
   if (id && session.stage === 'sentence') {
     next = applyRecord(next, next.sessions[session.id], id,

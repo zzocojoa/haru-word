@@ -61,6 +61,8 @@ export function StudySession(props: StudySessionProps) {
     setExample,
     setTranslation,
     learn,
+    materialConflict,
+    useLibraryMaterial,
     revealAnswer,
     recall,
     aiPending,
@@ -259,6 +261,8 @@ export function StudySession(props: StudySessionProps) {
               setTranslation={setTranslation}
               busy={busy}
               learn={learn}
+              materialConflict={materialConflict}
+              useLibraryMaterial={useLibraryMaterial}
             />
           )}
           {recallStage && (

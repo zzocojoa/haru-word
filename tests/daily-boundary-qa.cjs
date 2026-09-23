@@ -30,7 +30,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     for (const id of ids) progress[id] = { familiarity: 'known', meaning: content[id].meaning, lastStudied: yesterday, studyDates: [yesterday],
       en: 'independent', ko: id === ids[0] ? 'help' : 'independent', sentenceStatus: 'written', needsReview: id === ids[0] };
     await put(c, { revision: initial.revision, progress, settings: { ...initial.state.settings, activeSessionId: monthly.id, dailyGoal: 3,
-      assessments: { A1: { ids: [], index: 0, marks: {}, completed: true } } }, sessions: { [daily.id]: daily, [monthly.id]: monthly } });
+      assessments: { A1: require('./qa/fixtures.cjs').completedAssessment(words, 'A1') } }, sessions: { [daily.id]: daily, [monthly.id]: monthly } });
     const p = await c.newPage();
     p.on('pageerror', e => errors.push(e.message));
     p.on('request', r => { if (/sentence-feedback|generativelanguage/.test(r.url())) aiRequests.push(r.url()); });
@@ -132,7 +132,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     const practiceProgress = Object.fromEntries(words.filter(w => w.level === 'A1').map(w => [w.id, { familiarity: 'uncertain' }]));
     practiceProgress[ids[0]] = { familiarity: 'known', meaning: content[ids[0]].meaning, ko: 'help', needsReview: true };
     await put(practiceContext, { revision: practiceInitial.revision, progress: practiceProgress, sessions: { [practice.id]: practice },
-      settings: { ...practiceInitial.state.settings, dailyGoal: 3, assessments: { A1: { ids: [], index: 0, marks: {}, completed: true } } } });
+      settings: { ...practiceInitial.state.settings, dailyGoal: 3, assessments: { A1: require('./qa/fixtures.cjs').completedAssessment(words, 'A1') } } });
     const practicePage = await practiceContext.newPage();
     practicePage.on('pageerror', e => errors.push(e.message));
     practicePage.on('request', r => { if (/sentence-feedback|generativelanguage/.test(r.url())) aiRequests.push(r.url()); });

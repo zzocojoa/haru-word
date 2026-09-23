@@ -4,6 +4,7 @@ import {
   type SenseProgress,
   type Session,
   type State,
+  type Content,
 } from "./model.ts";
 import { sessionRecordComplete, sessionRecordMeasured } from "./outcomes.ts";
 import { selectSense, senseProgress, storeSense } from "./progress.ts";
@@ -17,6 +18,7 @@ export function applyRecord(
   patch: Partial<RecordItem>,
   advance = true,
   activityDate = today(),
+  materialUpdate: Partial<Content> | undefined = patch.material,
 ): State {
   const wasRetry = s.retryMode;
   if (wasRetry) {
@@ -105,14 +107,9 @@ export function applyRecord(
         : p.needsReview;
   const updated: SenseProgress = {
     ...p,
-    ...(patch.material
-      ? {
-          expression: patch.material.expression,
-          expressionTranslation: patch.material.expressionTranslation,
-          example: patch.material.example,
-          translation: patch.material.translation,
-        }
-      : {}),
+    ...Object.fromEntries(['expression', 'expressionTranslation', 'example', 'translation']
+      .filter(key => materialUpdate && Object.hasOwn(materialUpdate, key))
+      .map(key => [key, materialUpdate![key as keyof Content]])),
     meaning: record.meaning,
     en,
     ko,

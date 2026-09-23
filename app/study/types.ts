@@ -13,4 +13,5 @@ export type StudySessionProps = {
   onClose: () => void;
   onReview: (date: string) => void;
   onRepeat: (date: string) => void;
+  registerLeave?: (handler: () => Promise<boolean>) => () => void;
 };

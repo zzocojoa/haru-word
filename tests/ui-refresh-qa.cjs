@@ -23,7 +23,7 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
   const restore=await c.request.post(base+'/api/state/restore',{headers:{'x-study-revision':String(initial.revision)},data:{format:'haru-words-v1',exportedAt:new Date().toISOString(),state}});
   assert.equal(restore.status(),200,await restore.text());
   const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
-  await p.goto(base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();
+  await p.goto(base, { waitUntil: 'domcontentloaded' });await p.getByText('서버에 저장됨',{exact:true}).waitFor();
   const before=await get(), rows=p.locator('.today-word-row');
   assert.equal(await rows.count(),3);
   await p.getByRole('button',{name:'남은 단어 1',exact:true}).click();

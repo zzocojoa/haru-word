@@ -29,6 +29,20 @@ export async function existingSessionIds(db: D1Database, userId: string, ids: st
   return new Set(rows.results.map(row => row.session_id));
 }
 
+// Validate delta references against this account, not a full history reload.
+// The revision-guarded write rejects any concurrent restore/change after this read.
+export async function validSaveReferences(db: D1Database, userId: string, data: SaveStateRequest): Promise<boolean> {
+  const active = data.settings?.activeSessionId;
+  if (active && !data.sessions[active] && !(await existingSessionIds(db, userId, [active])).has(active)) return false;
+  const personalIds = [...new Set(Object.values(data.sessions).flatMap(s =>
+    [...s.ids.map(id => s.records[id].entryId || id), ...s.warmupIds]))]
+    .filter(id => id.startsWith('personal_') && !data.progress[id]?.personal);
+  if (!personalIds.length) return true;
+  const rows = await db.prepare("SELECT entry_id FROM word_progress WHERE user_id=? AND entry_id IN (SELECT value FROM json_each(?)) AND json_extract(document,'$.personal.id')=entry_id")
+    .bind(userId, JSON.stringify(personalIds)).all<{ entry_id: string }>();
+  return rows.results.length === personalIds.length;
+}
+
 export async function saveState(db: D1Database, userId: string, data: SaveStateRequest): Promise<boolean> {
   const statements: D1PreparedStatement[] = [];
   // One atomic D1 batch. All deltas test the same revision, which advances LAST.

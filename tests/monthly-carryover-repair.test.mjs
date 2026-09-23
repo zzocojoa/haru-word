@@ -25,6 +25,23 @@ function fixture() {
 }
 const repair = state => repairMonthlyCarryover(state, words, content, date);
 
+test('renewed familiarity and recent warmup help are never erased by legacy repair', () => {
+  for (const familiarity of ['uncertain', 'new', undefined]) {
+    const state = fixture(), id = words[0].id; state.progress[id].familiarity = familiarity;
+    const next = repair(state).state;
+    assert.equal(next.progress[id].needsReview, true);
+    assert.ok(next.sessions.current.ids.includes(id));
+  }
+  for (const day of [prior, date]) {
+    const state = fixture(), id = words[0].id;
+    state.sessions.warmup = session('warmup', 'daily', [words[4].id], { date: day, warmupIds: [id], warmupResults: { [id]: 'help' } });
+    assert.equal(repair(state).state.progress[id].needsReview, true);
+  }
+  const state = fixture(), id = words[0].id;
+  state.sessions.oldWarmup = session('oldWarmup', 'daily', [words[4].id], { date: '2026-09-20', warmupIds: [id], warmupResults: { [id]: 'help' } });
+  assert.equal(repair(state).state.progress[id].needsReview, false);
+});
+
 test('pausing untested monthly writing never turns mastered vocabulary into daily carryover', () => {
   let state = fixture(); delete state.sessions.current;
   for (const p of Object.values(state.progress)) p.needsReview = false;

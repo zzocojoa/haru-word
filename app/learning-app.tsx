@@ -101,6 +101,7 @@ export default function LearningApp({
     setBackupOpen,
     restored,
     about,
+    registerLeave,
   } = useLearningController(initialServerTime);
   const keyboardOpen = useKeyboardInset();
   const visitTab = useTabPosition(tab, store.epoch, setTab);
@@ -253,6 +254,7 @@ export default function LearningApp({
                     active.date !== date
                   ) ? (
                   <StudySession
+                    registerLeave={registerLeave}
                     key={active.id}
                     currentState={currentState}
                     state={state}

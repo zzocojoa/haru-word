@@ -19,6 +19,8 @@ type LearnStageProps = Pick<
   | "setTranslation"
   | "busy"
   | "learn"
+  | "materialConflict"
+  | "useLibraryMaterial"
 > & {
   word: NonNullable<StudySessionController["word"]>;
   content: NonNullable<StudySessionController["content"]>;
@@ -38,6 +40,8 @@ export function LearnStage({
   setTranslation,
   busy,
   learn,
+  materialConflict,
+  useLibraryMaterial,
 }: LearnStageProps) {
   return (
     <>
@@ -124,6 +128,10 @@ export function LearnStage({
           공식 목록 {word.page}쪽 · {word.level} · {POS[word.pos]}
         </a>
       )}
+      {materialConflict && <div className="notice" role="alert">
+        <p>단어장에서 같은 자료가 바뀌었어요. 최신 내용을 불러온 뒤 다시 수정해 주세요.</p>
+        <button className="secondary-button" disabled={busy} onClick={useLibraryMaterial}>단어장 최신 내용 적용</button>
+      </div>}
       <div className="study-actions"><button
         className="primary-button full"
         disabled={busy || !meaning.trim()}

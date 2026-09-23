@@ -13,7 +13,7 @@ const checks=[],errors=[];let serial=0;
   const records=Object.fromEntries(selected.map(w=>[w.id,{meaning:content[w.id].meaning,material:content[w.id],learnedOn:date,lastPracticedOn:date,en:'independent',ko:needsReview?'help':'independent',sentenceStatus:'written',sentence:'Preserved sentence.',notes:'Preserved note.'}]));
   for(const w of selected)progress[w.id]={...progress[w.id],meaning:content[w.id].meaning,studyDates:[date],lastStudied:date,en:'independent',ko:needsReview?'help':'independent',sentenceStatus:'written',needsReview};
   const session={id:sid,kind:'daily',date,period:date,ids:selected.map(w=>w.id),warmupIds:[],stage:'done',index:10,records,retry:[],retryMode:false,elapsed:900,finished:true,paused:true,createdAt:date+'T01:00:00Z'};
-  const r=await c.request.put(base+'/api/state',{data:{revision:data.revision,settings:{...data.state.settings,dailyGoal:10,activeSessionId:sid,assessments:{A1:{ids:[],index:0,marks:{},completed:true}}},progress,sessions:{[sid]:session}}});assert.equal(r.status(),200,await r.text());return session;
+  const r=await c.request.put(base+'/api/state',{data:{revision:data.revision,settings:{...data.state.settings,dailyGoal:10,activeSessionId:sid,assessments:{A1:require('./qa/fixtures.cjs').completedAssessment(words, 'A1')}},progress,sessions:{[sid]:session}}});assert.equal(r.status(),200,await r.text());return session;
  };
  const clock=async(p,value=now+'T02:00:00Z')=>p.route('**/api/study-clock',r=>r.fulfill({json:{serverTime:Date.parse(value)}}));
  const open=async(p)=>{await p.goto(base);await saved(p);await p.locator('.daily-label').filter({hasText:dayLabel}).waitFor({state:'attached'})};

@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { MAX_DAILY_GOAL } from './learning/model';
+import { MAX_DAILY_GOAL, POS } from './learning/model';
 import { sentenceFeedbackSchema } from './sentence-feedback';
 import { isCalendarDate } from './calendar-date';
 // Structure and local invariants only. Callers choose catalog validation at their boundary.
-export function createStateSchemas(entryId: z.ZodType<string>) {
+export function createStateSchemas(entryId: z.ZodType<string>, entryLevel?: (id: string) => string | undefined) {
     const targetId = z.string().max(100).refine(id => entryId.safeParse(id).success || /^target_[a-f0-9-]{36}$/.test(id), "알 수 없는 학습 대상입니다.");
     const level = z.enum(["A1", "A2", "B1", "B2"]);
     const result = z.enum(["independent", "help", "unmeasured"]);
@@ -19,7 +19,7 @@ export function createStateSchemas(entryId: z.ZodType<string>) {
     });
     const optionalMaterialText = materialText.partial().shape;
     const personal = z.object({
-        id: entryId, word: z.string().trim().min(1).max(80), headword: z.string().max(100), pos: z.string().max(30), level, page: z.literal(0), personal: z.literal(true)
+        id: entryId, word: z.string().trim().min(1).max(80), headword: z.string().max(100), pos: z.string().max(30).refine(p => Object.hasOwn(POS, p)), level, page: z.literal(0), personal: z.literal(true)
     }).strict();
     const familiarityCheck = z.object({
         initial: familiarity, answer: text, meaning: text, final: familiarity.optional()
@@ -34,15 +34,17 @@ export function createStateSchemas(entryId: z.ZodType<string>) {
         senses: z.record(z.string().max(2000), sense).refine(v => Object.keys(v).length <= 100).optional(), familiarity: familiarity.optional(), familiarityCheck: familiarityCheck.optional(), ...optionalMaterialText, en: result.optional(), ko: result.optional(), sentenceStatus: z.enum(["written", "improve", "unmeasured"]).optional(), sentence: text.optional(), notes: text.optional(), studyDates: z.array(date).max(20000).optional(), lastStudied: date.optional(), needsReview: z.boolean().optional(), personal: personal.optional(), useful: z.boolean().optional(), lastReviewed: date.optional(), encounters: z.array(z.object({
             date, source: z.enum(["reading", "listening"]), text
         }).strict()).max(200).optional()
-    }).strict();
+    }).strict().refine(p => Object.entries(p.senses || {}).every(([meaning, s]) => s.meaning === undefined || s.meaning === meaning), '뜻별 기록이 일치하지 않아요.');
     const assessment = z.object({
-        ids: z.array(entryId).max(20), index: z.number().int().min(0).max(20), marks: z.record(entryId, familiarity), completed: z.boolean()
-    }).strict();
+        ids: z.array(entryId).min(1).max(20), index: z.number().int().min(0).max(20), marks: z.record(entryId, familiarity), completed: z.boolean()
+    }).strict().refine(a => new Set(a.ids).size === a.ids.length && a.index <= a.ids.length
+        && a.completed === (a.index === a.ids.length) && Object.keys(a.marks).length === a.index
+        && a.ids.slice(0, a.index).every(id => Object.hasOwn(a.marks, id)), '친숙도 확인 순서가 맞지 않아요.');
     const settingsSchema = z.object({
         level, dailyGoal: z.number().int().min(1).max(MAX_DAILY_GOAL), assessments: z.object({
             A1: assessment.optional(), A2: assessment.optional(), B1: assessment.optional(), B2: assessment.optional()
         }).strict(), activeSessionId: z.string().uuid().nullable(), newWordsPaused: z.boolean().optional(), monthlyBatchSize: z.number().int().min(1).max(15).optional(), reviewDay: z.number().int().min(0).max(6).optional()
-    }).strict();
+    }).strict().refine(s => !entryLevel || Object.entries(s.assessments).every(([level, a]) => !a || a.ids.every(id => entryLevel(id) === level)), '친숙도 확인 수준이 맞지 않아요.');
     const record = z.object({
         entryId: entryId.optional(), learnedOn: date.optional(), lastPracticedOn: date.optional(), material: material.optional(), historicalMeaningUnknown: z.boolean().optional(), aiFeedback: sentenceFeedbackSchema.optional(), meaning: text, familiarity: familiarity.optional(), en: result, ko: result, sentenceStatus: z.enum(["written", "improve", "unmeasured"]), sentence: text, notes: text, spoken: z.boolean().optional(), enAnswer: text.optional(), koAnswer: text.optional(), hintEn: z.boolean().optional(), hintKo: z.boolean().optional(), retryEn: result.optional(), retryKo: result.optional(), draft: z.object({
             answer: text, hinted: z.boolean(), revealed: z.boolean(), stage: z.enum(["en", "ko"]), retry: z.boolean()

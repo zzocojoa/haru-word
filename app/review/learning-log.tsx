@@ -1,4 +1,5 @@
 "use client";
+import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
 import {
   Accordion,
   AccordionContent,
@@ -192,6 +193,7 @@ function JournalSessionItem({
   onCorrectDate: (id: string) => void;
 }) {
   const counts = sessionCounts(s);
+  const resumable = !resumeMonthlyWriting(s).finished;
   const preview = s.ids.slice(0, 3)
     .map(id => words.find(w => w.id === entryIdFor(s, id))?.word || "단어")
     .join(" · ");
@@ -204,7 +206,7 @@ function JournalSessionItem({
             <span className="level-badge">{journalSessionLabel(s)}</span>
           </span>
           <span className="journal-session-count">
-            {counts.total}개 · 기록 완료 {counts.recorded} · 독립 성공 {counts.successful} · {s.finished ? "회차 종료" : "진행 중"}
+            {counts.total}개 · 기록 완료 {counts.recorded} · 독립 성공 {counts.successful} · {resumable ? "진행 중" : "회차 종료"}
           </span>
           <span className="journal-session-preview">
             <span lang="en">{preview}</span>{s.ids.length > 3 && ` 외 ${s.ids.length - 3}개`}
@@ -232,7 +234,7 @@ function JournalSessionItem({
               </button>
             </>
           )}
-          {!s.finished && (
+          {resumable && (
             <button className="text-button" disabled={busy} onClick={() => start(s.kind, s.period, s)}>
               이어서 학습 <ArrowRight size={15} />
             </button>

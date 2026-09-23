@@ -54,11 +54,23 @@ export function repairMonthlyCarryover(
   }
   const eligible = new Set<string>();
   for (const [id, p] of Object.entries(state.progress)) {
+    // A renewed familiarity signal is a legitimate obligation, even while old
+    // recall scores still say independent. Its timestamp is unknown; retain it.
+    if (p.familiarity !== 'known') continue;
     for (const sense of allSenses(p)) {
       const key = targetIdentity(id, sense.meaning || '');
       if (monthlyWaiting.has(key) && completedOn.has(key)
         && sense.en === 'independent' && sense.ko === 'independent' && sense.sentenceStatus === 'written')
         eligible.add(key);
+    }
+  }
+  for (const s of sessions) {
+    for (const [id, result] of Object.entries(s.warmupResults || {})) {
+      if (result !== 'help') continue;
+      for (const sense of allSenses(state.progress[id])) {
+        const key = targetIdentity(id, sense.meaning || '');
+        if (s.date >= (completedOn.get(key) || '')) eligible.delete(key);
+      }
     }
   }
   // A new daily attempt with input is a real obligation even if progress still

@@ -6,6 +6,7 @@ import { AlertDialog,AlertDialogContent,AlertDialogHeader,AlertDialogTitle,Alert
 import { Checkbox } from '@/components/ui/checkbox';
 import { MAX_BACKUP_BYTES,parseBackup,makeBackup,backupSummary,replacementChanges,type ParsedBackup } from '@/lib/backup';
 import { KIND_TEXT,type State } from '@/lib/learning';
+import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
 import { download } from './ui';
 
 type Props={date:string;now:()=>number;state:State;busy:boolean;restoring:boolean;error:string;conflict:boolean;onClose:()=>void;onRestore:(state:State,expected:State)=>Promise<boolean>;onReload:()=>Promise<boolean>;onComplete:()=>void};
@@ -32,7 +33,7 @@ export default function BackupDialog({date,now,state,busy,restoring,error,confli
      {([['단어 기록',before.words,after.words],['학습 회차',before.sessions,after.sessions],['개인 단어',before.personal,after.personal],['미완료 회차',before.unfinished,after.unfinished],['학습 수준',before.level,after.level],['하루 목표',before.goal+'개',after.goal+'개']]as const).map(([label,a,b])=><tr key={label}><th scope="row">{label}</th><td>{a}</td><td>{b}</td></tr>)}
     </tbody></table>
     <div className="backup-impact"><p>단어 기록: 추가 {changes.words.added} · 변경 {changes.words.changed} · 제거 {changes.words.removed}</p><p>학습 회차: 추가 {changes.sessions.added} · 변경 {changes.sessions.changed} · 제거 {changes.sessions.removed}</p><b>현재 기록 전체를 이 백업으로 교체해요. 백업 이후의 학습과 파일에 없는 기록은 사라져요.</b></div>
-    <details className="notes-details"><summary>백업의 최근 회차 확인</summary>{Object.values(backup.state.sessions).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,3).map(s=><p key={s.id}>{s.date} · {KIND_TEXT[s.kind]} · {s.ids.length}개 · {s.finished?'회차 종료':'진행 중'}</p>)}{!after.sessions&&<p>학습 회차가 없는 백업이에요.</p>}</details>
+    <details className="notes-details"><summary>백업의 최근 회차 확인</summary>{Object.values(backup.state.sessions).sort((a,b)=>b.createdAt.localeCompare(a.createdAt)).slice(0,3).map(s=><p key={s.id}>{s.date} · {KIND_TEXT[s.kind]} · {s.ids.length}개 · {resumeMonthlyWriting(s).finished?'회차 종료':'진행 중'}</p>)}{!after.sessions&&<p>학습 회차가 없는 백업이에요.</p>}</details>
     <button className="secondary-button full" disabled={busy||stale} onClick={()=>{download('haru-before-restore-'+date+'.json',JSON.stringify(makeBackup(state,new Date(now())),null,2));setBackedUp(true)}}><Download size={16}/>현재 기록 먼저 백업받기</button>
     <label className="backup-ack"><Checkbox checked={acknowledged} disabled={!backedUp||busy||stale} onCheckedChange={v=>setAcknowledged(v===true)}/><span>현재 기록의 백업을 보관했고, 위 내용으로 교체됨을 확인했어요.</span></label>
     {stale&&!conflict&&<p role="alert" className="backup-error">현재 기록이 바뀌었어요. 창을 닫고 복원 미리보기를 다시 열어 주세요.</p>}

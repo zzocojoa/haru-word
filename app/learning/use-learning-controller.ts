@@ -18,6 +18,7 @@ import { useSessionCommands } from "./use-session-commands";
 import { useLearningTools } from "./use-learning-tools";
 import { isLearningWriteBlocked } from "@/lib/study-availability";
 import { recordAvailability } from "@/lib/client-diagnostics";
+import { useStudyTransition } from './use-study-transition';
 export function useLearningController(initialServerTime: number) {
   const store = useLearningStore();
   const {
@@ -60,7 +61,16 @@ export function useLearningController(initialServerTime: number) {
   const [showSession, setShowSession] = useState(false);
   const [about, setAbout] = useState(false);
   const [settings, setSettings] = useState(false);
+  const { register: registerLeave, prepare: flushStudy } = useStudyTransition();
   const [message, setMessage] = useState("");
+  const prepareTransition = useCallback(async () => {
+    const ready = await flushStudy();
+    if (!ready) {
+      setTab('today');
+      setMessage('작성 중인 학습을 먼저 확인해 주세요. 저장이나 AI 교정이 끝나고 자료 충돌이 해결되면 다른 회차로 이동할 수 있어요.');
+    }
+    return ready;
+  }, [flushStudy, setTab]);
   const words = useMemo(
     () => [
       ...WORDS,
@@ -92,7 +102,7 @@ export function useLearningController(initialServerTime: number) {
       s.period === date &&
       !s.finished,
   );
-  const { assessment, assessed, initialAssessment, assessmentWord, beginAssessment, revealMeaning, markFamiliarity } = useFamiliarityFlow({ state, words, save, setAssessing, setPreparing, setShowSession, setTab });
+  const { assessment, assessed, initialAssessment, assessmentWord, beginAssessment, revealMeaning, markFamiliarity } = useFamiliarityFlow({ state, currentState, prepareTransition, words, save, setAssessing, setPreparing, setShowSession, setTab });
   const assignedIds = useMemo(
     () => dailyAssignedIds(state, date),
     [state, date],
@@ -143,8 +153,8 @@ export function useLearningController(initialServerTime: number) {
     await save({ ...state, settings: { ...state.settings, level } });
     setMessage("");
   }
-  const { start, repeat } = useSessionCommands({ state, words, currentState, save, clock, date, busy,
-    unfinished, suggestions, initialAssessment, beginAssessment, setMessage, setReviewDate,
+  const { start, repeat } = useSessionCommands({ words, currentState, save, clock, date, busy,
+    prepareTransition, beginAssessment, setMessage, setReviewDate,
     setPreparing, setAssessing, setShowSession, setTab });
   function closeSession() {
     setShowSession(false);
@@ -230,7 +240,10 @@ export function useLearningController(initialServerTime: number) {
     todays,
     visibleIds,
     repeating,
-    setCorrectingSession,
+    setCorrectingSession: async (id: string | null) => {
+      if (!id || (!busy && await prepareTransition())) setCorrectingSession(id);
+    },
+    registerLeave,
     initialAssessment,
     metrics,
     monthlyRepair,

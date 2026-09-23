@@ -20,6 +20,7 @@ import { useStudyDraft } from "./use-study-draft";
 import { applyWarmupResult, pausedStudyState } from "@/lib/learning-commands";
 import { studyMaterial, withAnswerDraft } from "@/lib/study-draft";
 import { recordAvailability } from "@/lib/client-diagnostics";
+import { studyMaterialEdit } from '@/lib/study-material-edit';
 export function useStudySessionController({
   date,
   activityDate,
@@ -34,6 +35,7 @@ export function useStudySessionController({
   onClose,
   onReview,
   onRepeat,
+  registerLeave,
 }: StudySessionProps) {
   const id = currentId(s);
   const entryId = id ? entryIdFor(s, id) : undefined;
@@ -50,7 +52,9 @@ export function useStudySessionController({
     question, draft, aiPending, setAiPending,
     setMeaning, setExpression, setExpressionTranslation, setExample, setTranslation, setAnswer,
     setSentence, setNotes, setSpoken, setRevealed, setHint,
-  } = useStudyDraft(s, id, content);
+    materialBaseline, openedProgress, replaceMaterial,
+  } = useStudyDraft(s, id, content, p);
+  const [materialConflict, setMaterialConflict] = useState(false);
   const { meaning, expression, expressionTranslation, example, translation, answer, sentence, notes, spoken, revealed, hint } = draft;
   const busy = storeBusy || aiPending;
   const answerPresent = !!answer.trim();
@@ -81,14 +85,19 @@ export function useStudySessionController({
   }
   async function learn() {
     if (!id || !meaning.trim()) return;
+    const latest = currentState.current;
+    const update = studyMaterialEdit(material(), materialBaseline!, openedProgress, latest.progress[entryId!]);
+    if (update.conflicts.length) { setMaterialConflict(true); return; }
+    setMaterialConflict(false);
     await commit(
       applyRecord(
-        state,
+        latest,
         timed(),
         id,
         { meaning: meaning.trim(), material: material() },
         true,
         activityDate(),
+        update.patch,
       ),
     );
   }
@@ -209,11 +218,26 @@ export function useStudySessionController({
     });
   }
   async function pauseAndExit() {
-    const next = pausedStudyState(state, timed(), id, draft,
-      id && s.stage === "learn" ? material() : undefined, activityDate());
-    setPaused(true);
-    if (await save(next)) setShowSummary(true);
+    if (await prepareLeave()) setShowSummary(true);
   }
+  async function prepareLeave() {
+    if (storeBusy || aiPending) return false;
+    const latest = currentState.current;
+    const session = latest.sessions[s.id];
+    if (!session || session.finished || showSummary) return true;
+    if (currentId(session) !== id || session.stage !== s.stage || session.retryMode !== s.retryMode) return false;
+    const draftMaterial = id && session.stage === 'learn' ? material() : undefined;
+    const update = draftMaterial ? studyMaterialEdit(draftMaterial, materialBaseline!, openedProgress, latest.progress[entryId!]) : undefined;
+    if (update?.conflicts.length) { setMaterialConflict(true); return false; }
+    setPaused(true);
+    const next = pausedStudyState(latest, { ...session, elapsed: Math.max(session.elapsed, seconds), paused: true }, id, draft,
+      draftMaterial, activityDate(), update?.patch);
+    const ok = await save(next);
+    if (ok && draftMaterial) replaceMaterial(draftMaterial, next.progress[entryId!]);
+    return ok;
+  }
+  // Re-register the current render's draft; cleanup only removes its own handler.
+  useEffect(() => registerLeave?.(prepareLeave));
   async function toggleClock() {
     const value = !paused;
     setPaused(value);
@@ -231,6 +255,13 @@ export function useStudySessionController({
   ).length;
 
   return {
+    materialConflict,
+    useLibraryMaterial: () => {
+      if (!id || !entryId) return;
+      const latest = currentState.current.progress[entryId];
+      replaceMaterial(studyContent(entryId, { ...s.records[id], meaning: meaning.trim(), material: undefined }, latest), latest);
+      setMaterialConflict(false);
+    },
     s,
     showSummary,
     saved,

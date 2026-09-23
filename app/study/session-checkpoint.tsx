@@ -1,4 +1,5 @@
 "use client";
+import { reviewRemaining } from '@/lib/learning';
 import type { StudySessionController } from "./use-study-session-controller";
 type SessionCheckpointProps = Pick<
   StudySessionController,
@@ -14,9 +15,8 @@ export function SessionCheckpoint({
     <section className="learning-panel">
       <h2>한 묶음을 마쳤어요.</h2>
       <p className="muted">
-        {s.ids.length}개 중 {s.index}개를 확인했어요. 남은{" "}
-        {s.ids.length - s.index}개는 정해진 순서대로 이어집니다. 확인하지 않은
-        항목은 미측정이에요.
+        전체 {s.ids.length}개 · 미점검 {reviewRemaining(s)}개.
+        건너뛴 항목은 완료로 처리하지 않고 다음 묶음에서 이어가요.
       </p>
       <div className="button-row batch-actions">
         <button

@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { progressSchema,sessionSchema,settingsSchema } from './validation';
-import { POS,type State } from './learning';
+import { progressSchema,sessionSchema,settingsSchema,validProgressIdentity } from './validation';
+import { type State } from './learning';
 import rawWords from '@/data/words.json';
+import { resumeMonthlyWriting } from './learning/session-flow';
 
 export const MAX_BACKUP_BYTES=8_000_000;
 export const RESTORE_CHUNK_BYTES=1_800_000;
@@ -17,12 +18,7 @@ export const backupStateSchema=z.object({
  const validEntry=(id:string)=>catalog.has(id)||!!s.progress[id]?.personal;
  for(const [id,p]of Object.entries(s.progress)){
   if(!catalog.has(id)&&!/^personal_[a-zA-Z0-9-]{36}$/.test(id))issue('목록에 없는 단어가 있어요.');
-  if(id.startsWith('personal_')!==!!p.personal||p.personal&&(p.personal.id!==id||!POS[p.personal.pos]))issue('개인 단어의 정보가 맞지 않아요.');
-  for(const [meaning,sense]of Object.entries(p.senses||{}))if(sense.meaning!==undefined&&sense.meaning!==meaning)issue('뜻별 기록이 일치하지 않아요.');
- }
- for(const [level,a]of Object.entries(s.settings.assessments)){
-  if(!a)continue;
-  if(!a.ids.length||new Set(a.ids).size!==a.ids.length||a.index>a.ids.length||a.completed!==(a.index===a.ids.length)||Object.keys(a.marks).length!==a.index||a.ids.slice(0,a.index).some(id=>!a.marks[id])||Object.keys(a.marks).some(id=>!a.ids.includes(id))||a.ids.some(id=>catalog.get(id)?.level!==level))issue('친숙도 확인 순서가 맞지 않아요.');
+  if(!validProgressIdentity(id,p))issue('개인 단어의 정보가 맞지 않아요.');
  }
  if(s.settings.activeSessionId&&!s.sessions[s.settings.activeSessionId])issue('이어갈 학습 회차가 파일에 없어요.');
  for(const [key,v]of Object.entries(s.sessions)){
@@ -51,7 +47,7 @@ export function parseBackup(raw:string):ParsedBackup {
  return result;
 }
 export function makeBackup(state:State,now=new Date()){return {format:'haru-words-v1' as const,exportedAt:now.toISOString(),state};}
-export function backupSummary(state:State){return {words:Object.keys(state.progress).length,sessions:Object.keys(state.sessions).length,personal:Object.values(state.progress).filter(p=>p.personal).length,unfinished:Object.values(state.sessions).filter(s=>!s.finished).length,level:state.settings.level,goal:state.settings.dailyGoal};}
+export function backupSummary(state:State){return {words:Object.keys(state.progress).length,sessions:Object.keys(state.sessions).length,personal:Object.values(state.progress).filter(p=>p.personal).length,unfinished:Object.values(state.sessions).filter(s=>!resumeMonthlyWriting(s).finished).length,level:state.settings.level,goal:state.settings.dailyGoal};}
 export function replacementChanges(before:State,after:State){
  const equal=(a:unknown,b:unknown):boolean=>{
   if(a===b)return true;

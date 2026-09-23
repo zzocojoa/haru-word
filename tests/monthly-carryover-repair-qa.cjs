@@ -31,7 +31,7 @@ const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, peri
       for (const id of ids) progress[id] = { familiarity: 'known', meaning: content[id].meaning, en: 'independent', ko: 'independent', sentenceStatus: 'written',
         sentence: 'Existing sentence.', notes: 'Existing notes.', lastStudied: yesterday, studyDates: [yesterday], needsReview: true };
       await put(c, { revision: snapshot.revision, progress, settings: { ...snapshot.state.settings, dailyGoal: 3, activeSessionId: monthly.id,
-        assessments: { A1: { ids: [], index: 0, marks: {}, completed: true } } }, sessions: { [old.id]: old, [monthly.id]: monthly, [current.id]: current } });
+        assessments: { A1: require('./qa/fixtures.cjs').completedAssessment(words, 'A1') } }, sessions: { [old.id]: old, [monthly.id]: monthly, [current.id]: current } });
       await p.goto(base); await saved(p); await p.getByRole('region', { name: '중복 배정 바로잡기', exact: true }).waitFor();
       return { c, p, headers, old, monthly, current };
     }

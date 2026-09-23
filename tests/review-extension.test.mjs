@@ -40,11 +40,13 @@ test('goal changes alone do not invent review targets; weekly allocation and mon
 test('every saved stage resumes its original cursor then tests every added target without skipping or regrading old stages',()=>{
  for(const kind of ['weekly','monthly'])for(const stage of kind==='weekly'?['en','ko','sentence']:['ko','sentence']){
   const {state,session}=fixture(kind);session.stage=stage;session.index=1;session.elapsed=123;
+  // A saved cursor after KO implies those prior answers were actually recorded.
+  if(kind==='monthly') for(const id of stage==='sentence'?session.ids:session.ids.slice(0,session.index)) session.records[id].ko='independent';
   const current=session.ids[1];session.records[current]={...session.records[current],notes:'keep this',draft:{answer:'saved answer',hinted:true,revealed:true,stage:stage==='ko'?'ko':'en',retry:false}};
   addDaily(state,words.slice(3,10));let s=extendReviewSession(state,words,session,content);
   assert.equal(currentId(s),current);assert.equal(s.elapsed,123);assert.deepEqual(s.records[current],session.records[current]);
   const added=s.ids.slice(3),visits=[];let steps=0;
-  while(!s.finished){assert.ok(steps++<100);s=roundTrip(state,s);if(s.stage==='checkpoint'){s=continueBatch(s);continue;}visits.push([currentId(s),s.stage]);s=stepSession(s)}
+  while(!s.finished){assert.ok(steps++<100);s=roundTrip(state,s);if(s.stage==='checkpoint'){s=continueBatch(s);continue;}visits.push([currentId(s),s.stage]);if(s.stage==='ko')s.records[currentId(s)].ko='independent';s=stepSession(s)}
   roundTrip(state,s);
   for(const id of added)assert.deepEqual(visits.filter(([target])=>target===id).map(([,stage])=>stage),kind==='weekly'?['en','ko','sentence']:['ko','sentence']);
   assert.equal(visits.some(([id,step])=>id===current&&step==='en'&&stage!=='en'),false);
@@ -78,6 +80,7 @@ test('repeated extensions are idempotent, preserve meaning-specific snapshots an
 
 test('monthly batch boundaries preserve an unfinished partial block before new writing targets',()=>{
  const {state,session}=fixture('monthly');state.settings.monthlyBatchSize=1;
+ for(const id of session.ids)session.records[id].ko='independent';
  let s={...session,stage:'sentence',index:2,batchSize:15};addDaily(state,words.slice(3,10));s=extendReviewSession(state,words,s,content);
  assert.equal(s.batchSize,15);s=stepSession(s);assert.equal(s.stage,'checkpoint');assert.equal(s.index,3);
  s=continueBatch(roundTrip(state,s));assert.equal(s.stage,'ko');assert.equal(s.batchStart,3);assert.equal(s.reviewEnd,undefined);

@@ -82,7 +82,7 @@ test('saving a draft never registers an unlearned word in the monthly population
  let state=fresh();const x=newSession(state,words,content,'daily','2026-09-21');const id=x.ids[0];state=applyRecord(state,x,id,{meaning:'draft'},false);assert.deepEqual(reviewIds(state,'monthly','2026-09'),[]);state=applyRecord(state,x,id,{meaning:'confirmed'},true);assert.deepEqual(reviewIds(state,'monthly','2026-09'),[id]);
 });
 test('legacy sessions without batch or interval fields continue without losing records',()=>{
- const state=fresh();const a=find('apple');state.progress[a.id]={studyDates:['2026-09-21']};let x=newSession(state,words,content,'monthly','2026-09-30');delete x.batchSize;delete x.batchStart;x=stepSession(x);assert.equal(x.stage,'sentence');x=stepSession(x);assert.equal(x.finished,true);assert.equal(x.records[a.id].ko,'unmeasured');
+ const state=fresh();const a=find('apple');state.progress[a.id]={studyDates:['2026-09-21']};let x=newSession(state,words,content,'monthly','2026-09-30');delete x.batchSize;delete x.batchStart;x=stepSession(x);assert.equal(x.stage,'sentence');x=stepSession(x);assert.equal(x.finished,false);assert.equal(x.stage,'checkpoint');assert.equal(x.records[a.id].ko,'unmeasured');assert.equal(continueBatch(x).stage,'ko');
 });
 test('different parts of speech of one spelling are not two intervening words',()=>{
  const state=fresh();const a=find('apple'),noun=find('book'),verb=find('book','v.');let x=newSession(state,[a,noun,verb],content,'daily','2026-09-21');

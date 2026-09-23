@@ -1,5 +1,6 @@
 "use client";
 import { cardContent } from "@/lib/catalog";
+import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
 import {
   entryIdFor,
   practiceTargets,
@@ -72,6 +73,7 @@ export function ReviewDesk({
           targetIdentity(t.entryId, t.meaning),
         );
         const sessions = Object.values(state.sessions)
+          .map(resumeMonthlyWriting)
           .filter((s) => s.kind === kind && s.period === period)
           .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
         const session = sessions.find((s) => !s.finished);

@@ -8,6 +8,7 @@ import {
   type Word,
 } from "./model.ts";
 import { sessionRecordMeasured } from "./outcomes.ts";
+import { resumeMonthlyWriting } from './session-flow.ts';
 import {
   allSenses,
   dailyMeaning,
@@ -205,6 +206,7 @@ export function reviewIds(
 
 export function pendingReviews(state: State): Session[] {
   return Object.values(state.sessions)
+    .map(resumeMonthlyWriting)
     .filter((s) => (s.kind === "weekly" || s.kind === "monthly") && !s.finished)
     .sort(
       (a, b) =>

@@ -6,6 +6,7 @@ module.exports = [
   "browser-qa.cjs",
   "clock-continuity-qa.cjs",
   "comprehensive-qa.cjs",
+  "connection-integrity-qa.cjs",
   "daily-boundary-qa.cjs",
   "daily-goal-qa.cjs",
   "daily-topup-qa.cjs",

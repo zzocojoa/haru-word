@@ -1,19 +1,20 @@
 "use client";
 import { cardContent } from '@/lib/catalog';
-import { ensureCarryover, extendReviewSession, hasReviewWork, newSession, repeatDailySession, type Kind, type Level, type PracticeMode, type Session, type State, type Word } from '@/lib/learning';
+import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
+import { ensureCarryover, extendReviewSession, hasReviewWork, needsInitialAssessment, newSession, pickDaily, repeatDailySession, type Kind, type Level, type PracticeMode, type Session, type State, type Word } from '@/lib/learning';
 import type { RefObject } from 'react';
 import type { useStudyDate } from '../use-study-date';
 import type { LearningFlowNavigation, SaveLearningState } from './types';
 
 type SessionCommandInput = LearningFlowNavigation & {
-  state: State; words: Word[]; currentState: RefObject<State>; save: SaveLearningState;
+  words: Word[]; currentState: RefObject<State>; save: SaveLearningState;
   clock: ReturnType<typeof useStudyDate>; date: string; busy: boolean;
-  unfinished?: Session; suggestions: string[]; initialAssessment: boolean;
+  prepareTransition: () => Promise<boolean>;
   beginAssessment: (level?: Level) => Promise<void>;
   setMessage: (message: string) => void; setReviewDate: (date: string | null) => void;
 };
-export function useSessionCommands({ state, words, currentState, save, clock, date, busy,
-  unfinished, suggestions, initialAssessment, beginAssessment, setMessage, setReviewDate,
+export function useSessionCommands({ words, currentState, save, clock, date, busy,
+  prepareTransition, beginAssessment, setMessage, setReviewDate,
   setPreparing, setAssessing, setShowSession, setTab }: SessionCommandInput) {
   async function start(
     kind: Kind,
@@ -29,11 +30,16 @@ export function useSessionCommands({ state, words, currentState, save, clock, da
       void clock.refresh();
       return;
     }
+    if (kind === 'daily' && !existing && needsInitialAssessment(currentState.current)
+      && !Object.values(currentState.current.sessions).some(s => s.kind === 'daily' && s.date === date && !s.finished)) {
+      await beginAssessment();
+      return;
+    }
+    if (!await prepareTransition()) return;
+    const state = currentState.current;
+    const unfinished = Object.values(state.sessions).find(s => s.kind === 'daily' && s.date === date && !s.finished);
+    const suggestions = pickDaily(words, state, date);
     if (kind === "daily" && !existing && !unfinished) {
-      if (initialAssessment) {
-        await beginAssessment();
-        return;
-      }
       if (
         suggestions.some(
           (id) =>
@@ -46,11 +52,11 @@ export function useSessionCommands({ state, words, currentState, save, clock, da
         return;
       }
     }
-    const current = existing || (kind === "daily" ? unfinished : undefined);
+    const current = (existing && state.sessions[existing.id]) || (kind === "daily" ? unfinished : undefined);
     let resumed = current;
     try {
       if (current)
-        resumed = extendReviewSession(state, words, current, (id) =>
+        resumed = extendReviewSession(state, words, resumeMonthlyWriting(current), (id) =>
           cardContent(id, state.progress[id]),
         );
     } catch (error) {
@@ -92,6 +98,7 @@ export function useSessionCommands({ state, words, currentState, save, clock, da
   }
   async function repeat(sourceDate: string) {
     if (busy) return;
+    if (!await prepareTransition()) return;
     const latest = currentState.current;
     const s = repeatDailySession(
       latest,

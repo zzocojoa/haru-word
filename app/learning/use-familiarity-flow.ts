@@ -2,14 +2,17 @@
 import { cardContent } from '@/lib/catalog';
 import { assessmentSample, confirmFamiliarity, needsInitialAssessment, revealFamiliarity, type Familiarity, type State, type Word } from '@/lib/learning';
 import type { LearningFlowNavigation, SaveLearningState } from './types';
+import type { RefObject } from 'react';
 
-type FamiliarityFlowInput = LearningFlowNavigation & { state: State; words: Word[]; save: SaveLearningState };
-export function useFamiliarityFlow({ state, words, save, setAssessing, setPreparing, setShowSession, setTab }: FamiliarityFlowInput) {
+type FamiliarityFlowInput = LearningFlowNavigation & { state: State; currentState: RefObject<State>; prepareTransition: () => Promise<boolean>; words: Word[]; save: SaveLearningState };
+export function useFamiliarityFlow({ state, currentState, prepareTransition, words, save, setAssessing, setPreparing, setShowSession, setTab }: FamiliarityFlowInput) {
   const assessment = state.settings.assessments[state.settings.level];
   const assessed = !!assessment?.completed;
   const initialAssessment = needsInitialAssessment(state);
   const assessmentWord = words.find(word => word.id === assessment?.ids[assessment.index]);
   async function beginAssessment(level = state.settings.level) {
+    if (!await prepareTransition()) return;
+    const state = currentState.current;
     let next = { ...state, settings: { ...state.settings, level } };
     const current = state.settings.assessments[level];
     if (!current || current.completed)

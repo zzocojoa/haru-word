@@ -1,6 +1,6 @@
 import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { database } from '@/db/store';
-import { existingSessionIds, loadState, saveState } from '@/db/learning-state';
+import { existingSessionIds, loadState, saveState, validSaveReferences } from '@/db/learning-state';
 import { today } from '@/lib/learning';
 import { saveSchema } from '@/lib/validation';
 import { json, validateJsonMutation } from '@/lib/server/http';
@@ -43,6 +43,10 @@ export async function PUT(request: Request) {
   }
   try {
     const db = database();
+    if (!await validSaveReferences(db, user.userId, data)) {
+      console.warn(JSON.stringify({ event: 'learning_state_invalid_reference' }));
+      return json({ error: '이어갈 회차나 개인 단어의 정보가 빠졌어요. 기록을 확인해 주세요.' }, 400);
+    }
     if (request.headers.get('x-study-monthly-carryover') !== '1') {
       const monthly = Object.values(data.sessions).filter(s => s.kind === 'monthly').map(s => s.id);
       if (monthly.length && (await existingSessionIds(db, user.userId, monthly)).size) {

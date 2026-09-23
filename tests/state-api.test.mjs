@@ -43,6 +43,8 @@ const db = {
 };
 globalThis.stateApiRuntime = { user: { userId: 'owner' }, db };
 const route = await import('../work/state-api-tests/route.mjs');
+await build({ entryPoints: ['lib/backup.ts'], outfile: 'work/state-api-tests/backup.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
+const { parseBackup, makeBackup } = await import('../work/state-api-tests/backup.mjs');
 const words = JSON.parse(readFileSync('data/words.json', 'utf8'));
 const contents = JSON.parse(readFileSync('data/content.json', 'utf8'));
 const session = (date = today()) => newSession(structuredClone(EMPTY), words, id => contents[id], 'daily', date);
@@ -50,7 +52,7 @@ const req = (data, headers = {}) => new Request('https://study.example/api/state
   method: 'PUT', headers: { origin: 'https://study.example', 'content-type': 'application/json', ...headers },
   body: typeof data === 'string' ? data : JSON.stringify(data),
 });
-const delta = s => ({ revision: 0, settings: { ...EMPTY.settings, activeSessionId: s.id }, progress: { [s.ids[0]]: { meaning: '학습 뜻' } }, sessions: { [s.id]: s } });
+const delta = s => ({ revision: 0, settings: { ...structuredClone(EMPTY.settings), activeSessionId: s.id }, progress: { [s.ids[0]]: { meaning: '학습 뜻' } }, sessions: { [s.id]: s } });
 const dump = () => ['learner_states', 'word_progress', 'study_sessions', 'ai_daily_usage']
   .map(table => sqlite.prepare(`SELECT * FROM ${table} ORDER BY user_id`).all());
 beforeEach(() => {
@@ -158,4 +160,39 @@ test('old monthly clients cannot reintroduce legacy carryover flags; current cli
   const after = dump();
   assert.equal((await route.PUT(req(update, { 'x-study-monthly-carryover': '1' }))).status, 409);
   assert.deepEqual(dump(), after);
+});
+
+test('save and restore agree on assessment, sense, and personal identity invariants', async () => {
+  const s = session(), id = s.ids[0], before = dump();
+  const invalid = [
+    d => { d.settings.assessments.A1 = { ids: [id], index: 1, marks: {}, completed: false }; },
+    d => { d.settings.assessments.A1 = { ids: [], index: 0, marks: {}, completed: true }; },
+    d => { d.settings.assessments.A1 = { ids: [words.find(w => w.level === 'B1').id], index: 0, marks: {}, completed: false }; },
+    d => { d.settings.activeSessionId = crypto.randomUUID(); },
+    d => { d.progress['personal_' + crypto.randomUUID()] = { meaning: 'undefined personal' }; },
+    d => { d.progress[id].senses = { A: { meaning: 'B' } }; },
+  ];
+  for (const mutate of invalid) {
+    const d = delta(s); mutate(d);
+    assert.equal((await route.PUT(req(d))).status, 400);
+    assert.throws(() => parseBackup(JSON.stringify(makeBackup({ settings: d.settings, progress: d.progress, sessions: d.sessions }))));
+    assert.deepEqual(dump(), before);
+  }
+});
+
+test('delta references allow owned existing or same-request records and reject missing/foreign references', async () => {
+  const s = session(), id = 'personal_' + crypto.randomUUID();
+  const personal = { id, word: 'my word', headword: 'my word', pos: 'n.', level: 'A1', page: 0, personal: true };
+  const data = delta(s); data.progress[id] = { personal, meaning: '개인 뜻' };
+  assert.equal((await route.PUT(req(data))).status, 200);
+  assert.equal((await route.PUT(req({ revision: 1, settings: data.settings, sessions: {}, progress: {} }))).status, 200);
+  const extra = { ...session(), warmupIds: [id] };
+  assert.equal((await route.PUT(req({ revision: 2, sessions: { [extra.id]: extra }, progress: {} }))).status, 200);
+  const snapshot = await (await route.GET()).json();
+  assert.deepEqual(parseBackup(JSON.stringify(makeBackup(snapshot.state))).state, snapshot.state);
+  const before = dump(); stateApiRuntime.user = { userId: 'other' };
+  assert.equal((await route.PUT(req({ revision: 0, settings: data.settings, sessions: {}, progress: {} }))).status, 400);
+  assert.equal((await route.PUT(req({ revision: 0, sessions: { [extra.id]: extra }, progress: {} }))).status, 400);
+  assert.deepEqual(dump(), before);
+  assert.equal((await route.PUT(req({ revision: 0, sessions: { [extra.id]: extra }, progress: { [id]: { personal, meaning: '개인 뜻' } } }))).status, 200);
 });
