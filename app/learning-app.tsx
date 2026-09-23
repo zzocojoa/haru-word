@@ -18,6 +18,7 @@ import { FamiliarityAssessment } from "./learning/familiarity-assessment";
 import { LearningAside } from "./learning/learning-aside";
 import { AvailabilityNotice } from "./learning/availability-notice";
 import { SaveStatus } from "./learning/save-status";
+import { LearningMessage } from './learning/learning-message';
 import { SettingsDialog } from "./learning/settings-dialog";
 import { SourceDialog } from "./learning/source-dialog";
 import { TodayOverview } from "./learning/today-overview";
@@ -56,6 +57,8 @@ export default function LearningApp({
     conflict,
     state,
     message,
+    messageId,
+    dismissMessage,
     clock,
     currentState,
     words,
@@ -226,9 +229,7 @@ export default function LearningApp({
           )}
           {!settings && availability}
           {message && (
-            <p className="notice" role="status">
-              {message}
-            </p>
+            <LearningMessage key={messageId} message={message} onDismiss={dismissMessage} />
           )}
           <TabsContent value="today" forceMount hidden={tab !== "today"}>
             <div className="workspace">

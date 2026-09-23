@@ -3244,6 +3244,39 @@ p {
   font-size: .875rem;
   padding: 14px var(--space-4);
 }
+.learning-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 10px 10px var(--space-4);
+}
+.learning-message > p {
+  flex: 1;
+  min-width: 0;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+.learning-message-close {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+.learning-message-close:hover {
+  background: var(--border);
+  color: var(--ink);
+}
+.learning-message-close:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
 .error-banner {
   background: var(--danger-soft);
   color: var(--danger);

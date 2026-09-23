@@ -19,6 +19,7 @@ module.exports = [
   "history-performance-qa.cjs",
   "integration-consistency-qa.cjs",
   "journal-navigation-qa.cjs",
+  "learning-message-qa.cjs",
   "monthly-carryover-repair-qa.cjs",
   "purpose-improvements-qa.cjs",
   "refactor-lifecycle-qa.cjs",

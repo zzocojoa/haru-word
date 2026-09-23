@@ -19,6 +19,7 @@ import { useLearningTools } from "./use-learning-tools";
 import { isLearningWriteBlocked } from "@/lib/study-availability";
 import { recordAvailability } from "@/lib/client-diagnostics";
 import { useStudyTransition } from './use-study-transition';
+import { useLearningMessage } from './use-learning-message';
 export function useLearningController(initialServerTime: number) {
   const store = useLearningStore();
   const {
@@ -38,6 +39,7 @@ export function useLearningController(initialServerTime: number) {
     null,
   );
   const saveError = useRef<HTMLDivElement>(null);
+  const { message, messageId, setMessage, dismissMessage } = useLearningMessage();
   useEffect(() => {
     if (error && !backupOpen)
       saveError.current?.scrollIntoView({ block: "center", behavior: "auto" });
@@ -47,14 +49,16 @@ export function useLearningController(initialServerTime: number) {
   );
   const tab = navigation.view;
   const setTab = useCallback(
-    (view: View) =>
+    (view: View) => {
+      setMessage('');
       setNavigation((previous) => ({
         view,
         visited: previous.visited.includes(view)
           ? previous.visited
           : [...previous.visited, view],
-      })),
-    [],
+      }));
+    },
+    [setMessage],
   );
   const [preparing, setPreparing] = useState(false);
   const [assessing, setAssessing] = useState(false);
@@ -62,7 +66,6 @@ export function useLearningController(initialServerTime: number) {
   const [about, setAbout] = useState(false);
   const [settings, setSettings] = useState(false);
   const { register: registerLeave, prepare: flushStudy } = useStudyTransition();
-  const [message, setMessage] = useState("");
   const prepareTransition = useCallback(async () => {
     const ready = await flushStudy();
     if (!ready) {
@@ -70,7 +73,7 @@ export function useLearningController(initialServerTime: number) {
       setMessage('작성 중인 학습을 먼저 확인해 주세요. 저장이나 AI 교정이 끝나고 자료 충돌이 해결되면 다른 회차로 이동할 수 있어요.');
     }
     return ready;
-  }, [flushStudy, setTab]);
+  }, [flushStudy, setTab, setMessage]);
   const words = useMemo(
     () => [
       ...WORDS,
@@ -210,6 +213,8 @@ export function useLearningController(initialServerTime: number) {
     conflict,
     state,
     message,
+    messageId,
+    dismissMessage,
     clock,
     currentState,
     words,
