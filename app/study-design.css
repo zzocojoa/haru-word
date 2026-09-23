@@ -2938,10 +2938,18 @@ p {
   min-width: 0;
   white-space: normal;
   overflow-wrap: anywhere;
+  word-break: keep-all;
   color: var(--caption);
   min-height: 48px;
   border-radius: 8px;
   padding: 10px var(--space-4);
+}
+/* Enlarged text may turn the desktop navigation into two readable rows. */
+@media (min-width:641px) {
+  .main-nav[data-slot] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(min(100%,8rem),1fr));
+  }
 }
 .main-nav [data-slot=tabs-trigger][data-state=active] {
   background: var(--action);
