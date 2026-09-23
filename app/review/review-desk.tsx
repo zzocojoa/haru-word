@@ -17,6 +17,7 @@ import {
 import { ArrowRight, NotebookPen, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { PendingReviews } from "../pending-reviews";
+import { HelpDetails } from "../study-ui";
 type Props = {
   state: State;
   words: Word[];
@@ -118,6 +119,7 @@ export function ReviewDesk({
         state={state}
         busy={busy}
         onResume={(s) => start(s.kind, s.period, s)}
+        excludeSessionIds={reviews.flatMap(r => r.session ? [r.session.id] : [])}
       />
       <div className="review-grid">
         {reviews.map(
@@ -131,18 +133,15 @@ export function ReviewDesk({
                 <div className="review-icon">
                   {kind === "weekly" ? <RotateCcw /> : <NotebookPen />}
                 </div>
-                <p className="eyebrow">
-                  {kind === "weekly" ? "WEEKLY REVIEW" : "MONTHLY WRITING"}
-                </p>
                 <h2>
                   {kind === "weekly"
-                    ? "이번 주, 다시 꺼내 보기"
-                    : "이번 달, 쓰면서 기억하기"}
+                    ? "주간 점검"
+                    : "월말 쓰기"}
                 </h2>
                 <p className="muted">
                   {kind === "weekly"
-                    ? "그 주의 목표 단어를 빠짐없이 섞어서 점검해요."
-                    : "주간 통과와 관계없이 그달 배운 단어 전체를 확인해요."}
+                    ? "그 주의 목표 단어 전체"
+                    : "그달 배운 단어 전체 · 주간 통과 포함"}
                 </p>
                 <select
                   className="review-period"
@@ -160,10 +159,9 @@ export function ReviewDesk({
                 <div className="review-count">
                   <b>{ids.length}</b>
                   <span>
-                    뜻별 전체 대상{" "}
+                    전체 항목{" "}
                     <small>
-                      {ids.filter((id) => checked.has(id)).length}개 점검 기록
-                      있음
+                      점검함 {ids.filter((id) => checked.has(id)).length} · 미점검 {ids.filter((id) => !checked.has(id)).length}
                     </small>
                   </span>
                 </div>
@@ -173,22 +171,22 @@ export function ReviewDesk({
                     유지해요. 저장된 답과 순서는 바꾸지 않아요.
                   </p>
                 )}
-                <div className="review-checklist">
+                <HelpDetails title="점검 방식" className="review-checklist">
                   <p>
                     {kind === "weekly"
                       ? "뜻 확인 → 영어 회상 → 문장"
                       : "한국어 단서 → 영어 쓰기 → 선택 문장"}
                   </p>
-                  <p>도움을 받거나 미완료인 항목은 우선 이월</p>
+                  <p>{kind === 'monthly' ? '미점검은 이 회차에 남아요. 실제 도움·문장 보완은 일일 복습에 반영해요.' : '도움 필요·미완료 항목은 다음 학습에 먼저 배정해요.'}</p>
                   <p>
                     {kind === "weekly"
                       ? "진행 순서를 저장하고 다음 회차에 계속"
                       : "15개 안팎으로 나누어 모든 항목 완료"}
                   </p>
-                </div>
+                </HelpDetails>
                 {kind === "monthly" && (
                   <label>
-                    다음 새 점검의 묶음 크기
+                    새 점검의 묶음 크기
                     <select
                       aria-label="월말 묶음 크기"
                       value={state.settings.monthlyBatchSize || 15}
@@ -255,11 +253,9 @@ export function ReviewDesk({
         )}
       </div>
       <section className="wide-panel practice-desk">
-        <p className="eyebrow">FOCUSED PRACTICE</p>
-        <h2>필요한 부분만 더 연습해요.</h2>
+        <h2>보완 연습</h2>
         <p className="muted">
-          친숙도는 그대로 두고, 확인한 능력만 기록해요. 한 회차에 뜻별 최대
-          20개를 점검합니다.
+          친숙도는 유지 · 한 회차 최대 20개
         </p>
         <div className="practice-options">
           {practices.map(({ mode, ids, session }) => {

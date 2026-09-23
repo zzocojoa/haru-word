@@ -15,10 +15,10 @@ export function FamiliarityCard({word,check,busy,onReveal,onConfirm}:Props){
   <ol className="familiarity-steps" aria-label="친숙도 확인 순서"><li aria-current={!pending?'step':undefined}>1 먼저 떠올리기</li><li aria-current={pending?'step':undefined}>2 뜻 비교·확정</li></ol>
   <div className="word-stage"><h3 ref={heading} tabIndex={-1} lang="en">{word.word}</h3><span className="muted">{POS[word.pos]} · {word.personal?'개인 추가':word.level}</span></div>
   {!pending?<>
-   <p className="muted">이 품사에서 어떤 뜻인가요? 아직 뜻은 숨겨 두었어요.</p>
-   <label htmlFor="familiarity-answer">내가 떠올린 뜻 <span>선택 · 머릿속으로 떠올려도 좋아요</span></label>
+   <p className="muted">먼저 뜻을 떠올려 보세요.</p>
+   <label htmlFor="familiarity-answer">내가 떠올린 뜻 <span>선택 입력</span></label>
    <input id="familiarity-answer" value={answer} maxLength={2000} onChange={e=>setAnswer(e.target.value)} placeholder="비교할 수 있도록 짧게 적어 보세요" autoComplete="off"/>
-   <p className="familiarity-prompt"><Eye size={16}/> 확인 전 생각을 고르면 뜻이 열려요.</p>
+   <p className="familiarity-prompt"><Eye size={16}/> 표시를 고르면 뜻을 확인해요.</p>
    <div className="familiarity-actions">{(['known','uncertain','new']as const).map((f,i)=><button key={f} disabled={busy} onClick={()=>onReveal(f,answer)}><span className="mark-symbol">{i===0?'✓✓':i===1?'✓':'?'}</span>{FAMILIARITY_TEXT[f]}</button>)}</div>
   </>:<>
    <section className="familiarity-comparison" aria-label="뜻 비교" aria-live="polite">
@@ -27,7 +27,7 @@ export function FamiliarityCard({word,check,busy,onReveal,onConfirm}:Props){
    </section>
    <p className="small-note">표현이 달라도 같은 품사의 유효한 뜻이면 인정해요. 풀이가 애매하면 사전으로 확인하고 ‘헷갈림’으로 남겨도 좋아요.</p>
    <DictionaryLinks word={word.word}/>
-   {pending.initial==='known'?<div className="confirmation-actions"><button className="primary-button full" disabled={busy} onClick={()=>onConfirm('known')}><Check size={17}/>생각한 뜻이 맞아요 · 안다로 확정</button><button className="secondary-button full" disabled={busy} onClick={()=>onConfirm('uncertain')}>다른 뜻이었거나 불확실해요 · 헷갈림으로 확정</button></div>:<>
+   {pending.initial==='known'?<div className="confirmation-actions"><button className="primary-button full" disabled={busy} onClick={()=>onConfirm('known')}><Check size={17}/>맞아요 · 안다로 확정</button><button className="secondary-button full" disabled={busy} onClick={()=>onConfirm('uncertain')}>불확실해요 · 헷갈림으로 확정</button></div>:<>
     <p className="notice">{pending.initial==='new'?'방금 뜻을 처음 확인했어요. 처음 보는 단어로 기록하고 학습에서 다시 만나요.':'뜻을 보기 전에는 불확실했어요. 헷갈리는 단어로 기록하여 먼저 배워요.'}</p>
     <button className="primary-button full" disabled={busy} onClick={()=>onConfirm(pending.initial)}>{pending.initial==='new'?'처음으로 확정 · 다음':'헷갈림으로 확정 · 다음'}<ArrowRight size={17}/></button>
    </>}

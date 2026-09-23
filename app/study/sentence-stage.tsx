@@ -120,7 +120,7 @@ export function SentenceStage({
         </div>
         <DictionaryLinks word={word.word} />
       </details>
-      <div className="button-row">
+      <div className="button-row study-actions">
         <button
           className="primary-button"
           disabled={busy || !sentence.trim()}

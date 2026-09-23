@@ -124,13 +124,13 @@ export function LearnStage({
           공식 목록 {word.page}쪽 · {word.level} · {POS[word.pos]}
         </a>
       )}
-      <button
+      <div className="study-actions"><button
         className="primary-button full"
         disabled={busy || !meaning.trim()}
         onClick={learn}
       >
         뜻을 확인했어요 <ArrowRight size={17} />
-      </button>
+      </button></div>
       <p className="small-note">
         음성은 기기의 미국식 영어 음성입니다. 사전 발음과 함께 확인하세요.
       </p>

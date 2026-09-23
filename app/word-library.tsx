@@ -88,12 +88,9 @@ export const WordLibrary = memo(function WordLibrary({
     <section className="wide-panel library-panel">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">YOUR WORD LIBRARY</p>
-          <h2>3,000단어, 나의 속도로.</h2>
+          <h2>단어 찾기</h2>
           <p className="muted">
-            품사·수준별{" "}
-            {words.filter((w) => !w.personal).length.toLocaleString()}개 항목을
-            모두 담았어요.
+            Oxford 3000 · {words.filter((w) => !w.personal).length.toLocaleString()}개 학습 항목
           </p>
         </div>
         <button
@@ -163,7 +160,7 @@ export const WordLibrary = memo(function WordLibrary({
       </div>
       <div className="list-count">
         {filtered.length.toLocaleString()}개 학습 항목{" "}
-        <span>단어를 누르면 뜻과 기록을 볼 수 있어요.</span>
+        {(query || level !== 'all' || familiarity !== 'all') && <button className="text-button" onClick={() => {setQuery('');setLevel('all');setFamiliarity('all');setPage(0);searchInput.current?.focus();}}>필터 초기화</button>}
       </div>
       <Table className="word-table" aria-label="나의 단어 목록">
         <TableHeader>
@@ -212,9 +209,9 @@ export const WordLibrary = memo(function WordLibrary({
                   </span>
                 </TableCell>
                 <TableCell>
-                  <span className={hasReviewWork(p) ? "status-warn" : "muted"}>
+                  <span className={hasReviewWork(p) ? "today-review" : "muted"}>
                     {hasReviewWork(p)
-                      ? "다시 학습"
+                      ? "진행·복습 남음"
                       : p?.lastStudied
                         ? "학습 기록 있음"
                         : "학습 전"}

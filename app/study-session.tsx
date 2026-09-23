@@ -320,7 +320,6 @@ export function StudySession(props: StudySessionProps) {
 function PauseMessage() {
   return (
     <div>
-      <p className="eyebrow">TAKE A BREATH</p>
       <h2>잠시 쉬어 가요.</h2>
       <p className="muted">타이머가 멈췄어요. 준비되면 이어서 해요.</p>
     </div>

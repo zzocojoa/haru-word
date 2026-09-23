@@ -88,12 +88,12 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.deepEqual(await sessions.locator('.journal-session-number').allTextContents(), ['4회차', '3회차', '2회차', '1회차']);
     const first = sessions.last(), rows = first.locator('.journal-word-trigger');
     const firstTrigger = first.locator('.journal-session-trigger');
-    assert.match(await firstTrigger.innerText(), /10개 · 완료 7개 · 회차 종료/);
+    assert.match(await firstTrigger.innerText(), /10개 · 기록 완료 8 · 독립 성공 7 · 회차 종료/);
     await firstTrigger.focus(); await p.keyboard.press('Enter');
     assert.equal(await firstTrigger.getAttribute('aria-expanded'), 'true');
     assert.equal(await rows.count(), 11); // ten targets plus warmup
     assert.equal(await first.locator('.record-card:visible').count(), 0);
-    for (const label of ['완료', '보완 필요', '미측정', '진행 중']) assert.ok((await first.locator('.journal-mobile').innerText()).includes(label));
+    for (const label of ['독립 성공', '보완 필요', '미측정', '진행 중']) assert.ok((await first.locator('.journal-mobile').innerText()).includes(label));
     const targetRows = first.locator('.journal-word .journal-word-trigger');
     await targetRows.nth(0).click();
     let detail = first.locator('.record-card:visible');
@@ -144,7 +144,8 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     checks.push('pagination keeps dates whole; all 23 dates and 26 attempts remain reachable; filtering updates counts and preserves original attempt numbers');
 
     const downloadText = async name => {
-      const pending = p.waitForEvent('download'); await panel.getByRole('button', { name, exact: true }).click();
+      await panel.getByRole('button', { name: '기록 관리', exact: true }).click();
+      const pending = p.waitForEvent('download'); await p.getByRole('menuitem', { name, exact: true }).click();
       const d = await pending; return fs.readFileSync(await d.path(), 'utf8');
     };
     const backup = JSON.parse(await downloadText('전체 백업'));
@@ -163,7 +164,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
       if (width === 320) {
         await targetRows.first().click();
         await p.addStyleTag({ content: 'html {font-size:200% !important}' });
-        assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, '200% text');
+        assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, JSON.stringify(await p.evaluate(() => [...document.querySelectorAll('body *')].filter(el => {const r=el.getBoundingClientRect();return r.width && r.right>innerWidth+1}).map(el=>({tag:el.tagName,class:el.className,width:el.getBoundingClientRect().width})))));
         await p.addStyleTag({ content: 'html {font-size:100% !important}' });
       }
     }

@@ -3,6 +3,7 @@ import { exportLog } from "@/lib/learning";
 import { ArrowRight, Check } from "lucide-react";
 import { SessionRecords } from "../session-records";
 import { download } from "../ui";
+import { sessionCounts } from '@/lib/learning-display';
 import type { StudySessionController } from "./use-study-session-controller";
 type SessionSummaryProps = Pick<
   StudySessionController,
@@ -25,7 +26,6 @@ export function SessionSummary({
   s,
   date,
   total,
-  completed,
   seconds,
   words,
   onClose,
@@ -35,12 +35,12 @@ export function SessionSummary({
   resume,
   state,
 }: SessionSummaryProps) {
+  const counts = sessionCounts(s);
   return (
     <section className="learning-panel session-summary">
       <div className="success-icon">
         <Check />
       </div>
-      <p className="eyebrow">{saved ? "SESSION SAVED" : "SAVE PENDING"}</p>
       <h2>
         {saved
           ? s.date === date
@@ -66,8 +66,8 @@ export function SessionSummary({
           <span>목표 단어</span>
         </div>
         <div>
-          <b>{completed}</b>
-          <span>이번 점검 완료</span>
+          <b>{counts.recorded}</b>
+          <span>기록 완료</span>
         </div>
         <div>
           <b>
@@ -77,13 +77,13 @@ export function SessionSummary({
           <span>누적 활동 시간</span>
         </div>
       </div>
+      <p className="small-note">독립 성공 {counts.successful} · 보완 필요 {counts.needsHelp} · 미측정 {counts.unmeasured}</p>
       {s.retry.length > 0 && (
         <p className="notice">
           재시도 {s.retry.length}개가 남았어요. 다른 단어 두 개를 거칠 수 없었던
           항목은 ‘도움 필요’를 유지하고 다음 학습에 우선 배정해요.
         </p>
       )}
-      <SessionRecords session={s} words={words} />
       <div className="button-row">
         <button className="primary-button" onClick={onClose}>
           학습 홈으로 <ArrowRight size={17} />
@@ -127,6 +127,7 @@ export function SessionSummary({
           이번 기록 받기
         </button>
       </div>
+      <SessionRecords session={s} words={words} compact />
     </section>
   );
 }

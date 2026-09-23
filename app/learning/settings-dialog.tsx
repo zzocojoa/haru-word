@@ -16,6 +16,7 @@ import {
 import { MAX_DAILY_GOAL } from "@/lib/learning";
 import { LevelSelect } from "../ui";
 import type { LearningController } from "./use-learning-controller";
+import { HelpDetails } from "../study-ui";
 import { DiagnosticDownload } from "./diagnostic-download";
 type SettingsDialogProps = Pick<
   LearningController,
@@ -42,9 +43,9 @@ export function SettingsDialog({
     <Dialog open={settings} onOpenChange={setSettings}>
       <DialogContent className="settings-dialog">
         <DialogHeader>
-          <DialogTitle>나의 학습 속도</DialogTitle>
+          <DialogTitle>학습 설정</DialogTitle>
           <DialogDescription>
-            학습 목표에는 이월 단어가 먼저 포함됩니다.
+            변경하면 계정에 바로 저장돼요.
           </DialogDescription>
         </DialogHeader>
         <label>
@@ -117,12 +118,7 @@ export function SettingsDialog({
             </SelectContent>
           </Select>
         </label>
-        <p className="small-note">
-          하루 목표는 1~{MAX_DAILY_GOAL}개로 선택할 수 있어요. 기본은 3개예요.
-          목표를 늘리면 오늘 학습을 마친 뒤 학습 홈에서 남은 개수를 추가할 수
-          있어요. 목표를 줄여도 이미 배정한 단어와 기록은 유지해요. 15분 안에
-          마치지 못한 단어는 다음에 이어서 학습해요.
-        </p>
+        <HelpDetails title="목표 수를 바꾸면?"><p>1~{MAX_DAILY_GOAL}개 · 기본 3개. 늘린 목표는 회차를 마친 뒤 추가할 수 있어요. 줄여도 이미 배정한 단어와 기록은 유지해요.</p></HelpDetails>
         <button
           className="secondary-button"
           disabled={busy}
@@ -133,11 +129,7 @@ export function SettingsDialog({
         >
           친숙도 다시 확인하기
         </button>
-        <p className="small-note">
-          계정별 서버 저장 · 한국 시간 기준. AI 문장 점검은 버튼을 누를 때만
-          Google Gemini API를 사용해요. 무료 한도나 연결 오류가 있으면 자기
-          점검으로 계속할 수 있어요.
-        </p>
+        <HelpDetails title="저장·날짜·AI 안내"><p>계정별 서버 저장 · 한국 시간 기준. AI는 버튼을 누를 때만 호출해요. 한도나 연결 문제 시 자기 점검으로 계속할 수 있어요.</p></HelpDetails>
         <details className="notes-details">
           <summary>문제가 생겼을 때</summary>
           <p className="small-note">최근 연결 상태와 버튼 대기 이유를 파일로 받아요. 답안·문장·계정 정보·API 키는 포함하지 않으며 자동 전송하지 않아요. 새로고침하면 초기화됩니다.</p>

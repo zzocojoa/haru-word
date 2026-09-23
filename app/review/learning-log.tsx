@@ -22,8 +22,6 @@ import {
 } from "@/components/ui/table";
 import {
   entryIdFor,
-  exportLog,
-  exportTutor,
   FAMILIARITY_TEXT,
   nextAction,
   POS,
@@ -37,11 +35,12 @@ import {
   type Word,
 } from "@/lib/learning";
 import { groupJournalSessions, journalSessionLabel } from "@/lib/learning-journal";
-import { ArrowRight, Download, NotebookPen } from "lucide-react";
+import { ArrowRight, NotebookPen } from "lucide-react";
 import { memo, useMemo, useState } from "react";
 import { FeedbackDetail } from "../sentence-feedback";
 import { SessionRecords } from "../session-records";
-import { download } from "../ui";
+import { RecordActions } from "./record-actions";
+import { sessionCounts } from "@/lib/learning-display";
 const LOG_PAGE_SIZE = 10;
 type Props = {
   state: State;
@@ -84,67 +83,8 @@ export function LearningLog({
   return (
     <section className="wide-panel">
       <div className="section-heading">
-        <div>
-          <p className="eyebrow">LEARNING JOURNAL</p>
-          <h2>쌓이는 나의 영어</h2>
-          <p className="muted">
-            같은 날의 학습을 모았어요. 날짜를 눌러 회차별 기록을 확인하세요.
-          </p>
-        </div>
-        <div className="button-row">
-          <button
-            className="secondary-button"
-            onClick={() =>
-              download(
-                "haru-words-" + date + ".csv",
-                exportLog(state, words),
-                "text/csv;charset=utf-8",
-              )
-            }
-          >
-            <Download size={16} />
-            CSV 받기
-          </button>
-          <button
-            className="text-button"
-            onClick={() =>
-              download(
-                "haru-words-backup-" + date + ".json",
-                JSON.stringify(
-                  {
-                    format: "haru-words-v1",
-                    exportedAt: new Date(now()).toISOString(),
-                    state,
-                  },
-                  null,
-                  2,
-                ),
-              )
-            }
-          >
-            전체 백업
-          </button>
-          <button
-            className="text-button"
-            data-backup-trigger
-            disabled={busy}
-            onClick={onRestoreOpen}
-          >
-            백업 가져오기
-          </button>
-          <button
-            className="text-button"
-            onClick={() =>
-              download(
-                "tutor-handoff-" + date + ".txt",
-                exportTutor(state, words),
-                "text/plain;charset=utf-8",
-              )
-            }
-          >
-            튜터 프롬프트·최근 기록 받기
-          </button>
-        </div>
+        <div><h2>날짜별 기록</h2><p className="muted">{list.length}일 · {sessionCount}회차</p></div>
+        <RecordActions state={state} words={words} date={date} now={now} busy={busy} onRestoreOpen={onRestoreOpen}/>
       </div>
       <Select
         value={selected}
@@ -155,7 +95,7 @@ export function LearningLog({
           setOpenSession("");
         }}
       >
-        <SelectTrigger aria-label="기록 종류 필터">
+        <SelectTrigger className="journal-filter" aria-label="기록 종류 필터">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -251,7 +191,7 @@ function JournalSessionItem({
   onReview: (date: string) => void;
   onCorrectDate: (id: string) => void;
 }) {
-  const complete = s.ids.filter(id => s.records[id] && sessionRecordComplete(s, s.records[id])).length;
+  const counts = sessionCounts(s);
   const preview = s.ids.slice(0, 3)
     .map(id => words.find(w => w.id === entryIdFor(s, id))?.word || "단어")
     .join(" · ");
@@ -264,7 +204,7 @@ function JournalSessionItem({
             <span className="level-badge">{journalSessionLabel(s)}</span>
           </span>
           <span className="journal-session-count">
-            {s.ids.length}개 · 완료 {complete}개 · {s.finished ? "회차 종료" : "진행 중"}
+            {counts.total}개 · 기록 완료 {counts.recorded} · 독립 성공 {counts.successful} · {s.finished ? "회차 종료" : "진행 중"}
           </span>
           <span className="journal-session-preview">
             <span lang="en">{preview}</span>{s.ids.length > 3 && ` 외 ${s.ids.length - 3}개`}

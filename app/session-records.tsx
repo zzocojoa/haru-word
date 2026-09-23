@@ -94,7 +94,7 @@ export const SessionRecords = memo(function SessionRecords({
             <span className="journal-word-meaning">{r.meaning || "뜻 미입력"}</span>
           </span>
           <span className={complete ? "status-good" : needsHelp ? "status-warn" : "journal-word-status"}>
-            {complete ? "완료" : needsHelp ? "보완 필요" : unmeasured ? "미측정" : "진행 중"}
+            {complete ? "독립 성공" : needsHelp ? "보완 필요" : unmeasured ? "미측정" : "진행 중"}
           </span>
         </AccordionTrigger>
         <AccordionContent className="journal-word-detail">{detail}</AccordionContent>

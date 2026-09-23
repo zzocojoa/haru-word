@@ -77,7 +77,7 @@ export function RecallStage({
           spellCheck={false}
         />
         {!revealed && (
-          <div className="button-row">
+          <div className="button-row study-actions">
             <button type="submit" disabled={busy} className="primary-button">
               내 답 확인 <ArrowRight size={17} />
             </button>
@@ -104,7 +104,7 @@ export function RecallStage({
             의미와 품사가 맞는 다른 표현도 인정해요. 직접 비교하여 기록합니다.
             도움이 필요하면 다른 단어 두 개 뒤 다시 시도해요.
           </p>
-          <div className="button-row">
+          <div className="button-row study-actions">
             <button
               className="primary-button"
               disabled={!canGradeIndependently(busy, hint, answer)}

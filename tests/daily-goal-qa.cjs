@@ -19,7 +19,7 @@ const base='http://127.0.0.1:8787',out='outputs/daily-goal';fs.mkdirSync(out,{re
    await p.getByRole('option',{name:goal+'개',exact:true}).click();await saved();assert.equal((await get()).state.settings.dailyGoal,goal);
    if(goal===10)await p.screenshot({path:out+'/settings-10.png',animations:'disabled'});
    await p.getByRole('button',{name:'Close',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});
-   assert.equal(await p.locator('.today-words>div').count(),goal);
+   assert.equal(await p.locator('.today-words>.today-word-row').count(),goal);
   }
   await p.reload();await saved();assert.equal((await get()).state.settings.dailyGoal,10);assert.equal(await p.locator('.today-word-number').last().innerText(),'10');
   checks.push('settings exposes all 1–10 choices; 1, 5 and 10 persist and the home displays the entire selected list');
@@ -34,7 +34,7 @@ const base='http://127.0.0.1:8787',out='outputs/daily-goal';fs.mkdirSync(out,{re
   checks.push('a new daily session contains ten records and advances through all ten learning cards before recall; pausing saves the draft');
   await p.getByRole('button',{name:'학습 홈으로',exact:false}).click();await p.getByRole('button',{name:'학습 설정',exact:true}).click();
   await p.getByRole('combobox',{name:'하루 목표',exact:true}).click();await p.getByRole('option',{name:'1개',exact:true}).click();await saved();await p.getByRole('button',{name:'Close',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});
-  assert.deepEqual((await get()).state.sessions[sid],session);assert.equal(await p.locator('.today-words>div').count(),10);
+  assert.deepEqual((await get()).state.sessions[sid],session);assert.equal(await p.locator('.today-words>.today-word-row').count(),10);
   const device=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:1366,height:1000}});const second=await device.newPage();second.on('pageerror',e=>errors.push(e.message));await second.goto(base);await second.getByText('서버에 저장됨',{exact:true}).waitFor();await second.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await second.getByText('서버에 저장됨',{exact:true}).waitFor();assert.equal(await second.getByLabel('한국어 뜻 입력',{exact:true}).inputValue(),'열 단어 학습의 임시 답');assert.equal((await get()).state.sessions[sid].ids.length,10);
   checks.push('lowering the next goal to one keeps the existing ten-word session and another device resumes the same draft');
   const before=await get();

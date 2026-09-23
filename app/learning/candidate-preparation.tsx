@@ -28,11 +28,10 @@ export function CandidatePreparation({
 }: CandidatePreparationProps) {
   return (
     <section className="learning-panel">
-      <p className="eyebrow">TODAY’S WORDS</p>
       <h2>
         {candidate
-          ? "오늘 후보의 친숙도를 확인해요."
-          : "오늘의 목표를 정했어요."}
+          ? "이 단어, 얼마나 익숙한가요?"
+          : "오늘 단어 준비 완료"}
       </h2>
       <p className="muted">
         이월 → 헷갈림 → 처음 순서예요. 아는 단어는 새 목표에서 제외하고 후속

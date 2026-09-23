@@ -49,7 +49,7 @@ export function WarmupStage({
       {revealed ? (
         <div className="answer-box">
           <b>{content.meaning}</b>
-          <div className="button-row">
+          <div className="button-row study-actions">
             <button
               className="secondary-button"
               disabled={!canGradeIndependently(busy, hint, answer)}

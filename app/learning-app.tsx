@@ -29,6 +29,7 @@ import { LearningLog, ReviewDesk } from "./review-and-log";
 import { StudyDateDialog } from "./study-date-dialog";
 import { StudySession } from "./study-session";
 import { WordLibrary } from "./word-library";
+import { useKeyboardInset } from "./use-keyboard-inset";
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 export default function LearningApp({
@@ -101,9 +102,11 @@ export default function LearningApp({
     restored,
     about,
   } = useLearningController(initialServerTime);
+  const keyboardOpen = useKeyboardInset();
   return (
     <main
       className="shell"
+      data-keyboard={keyboardOpen ? 'open' : undefined}
       data-studying={
         tab === "today" &&
         ((showSession && active && !active.finished) || assessing || preparing)
@@ -116,7 +119,7 @@ export default function LearningApp({
           <span className="brand-icon">
             <BookOpen size={22} />
           </span>
-          하루단어<span className="brand-en">WORD BY WORD</span>
+          하루단어
         </div>
         <div className="top-actions">
           <SaveStatus
@@ -137,21 +140,15 @@ export default function LearningApp({
       <div className="page-wrap">
         <div className="page-heading">
           <div>
-            <p className="eyebrow">하루 15분, 나를 위한 영어</p>
             <h1>
               {tab === "today"
-                ? "오늘도, 한 단어씩."
+                ? "오늘의 학습"
                 : tab === "library"
                   ? "나의 단어장"
                   : tab === "review"
-                    ? "다시 만나는 단어들"
+                    ? "주간·월말 점검"
                     : "나의 학습 기록"}
             </h1>
-            <p className="muted">
-              {tab === "today"
-                ? "헷갈리는 뜻에서, 나만의 문장까지."
-                : "조금씩 배우고, 여러 번 꺼내 보세요."}
-            </p>
           </div>
           <span className="daily-label">
             <CalendarDays size={17} />
@@ -341,14 +338,11 @@ export default function LearningApp({
                           <div>
                             <h3>
                               {initialAssessment
-                                ? "처음이라면, 아는 단어부터 확인해요."
-                                : "학습 범위를 다시 확인할 수 있어요."}
+                                ? "어디서 시작할까요?"
+                                : "친숙도 탐색"}
                             </h3>
                             <p>
-                              {state.settings.level} 목록 여러 부분에서 20개를
-                              살펴봐요. 뜻과 말하기 실력은 따로 기록해요.
-                              {!initialAssessment &&
-                                " 탐색 중에도 기존 학습은 계속할 수 있어요."}
+                              {state.settings.level} 단어 20개 · 정식 수준 시험은 아니에요.
                             </p>
                           </div>
                         </div>
@@ -410,7 +404,7 @@ export default function LearningApp({
           </TabsContent>
         </Tabs>
         <footer>
-          <span>매일 조금씩, 내 것이 되는 영어.</span>
+          <span>Oxford 3000</span>
           <button className="text-button" onClick={() => setAbout(true)}>
             학습 방식·출처 <Info size={14} />
           </button>

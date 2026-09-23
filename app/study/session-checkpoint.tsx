@@ -12,7 +12,6 @@ export function SessionCheckpoint({
 }: SessionCheckpointProps) {
   return (
     <section className="learning-panel">
-      <p className="eyebrow">BATCH SAVED</p>
       <h2>한 묶음을 마쳤어요.</h2>
       <p className="muted">
         {s.ids.length}개 중 {s.index}개를 확인했어요. 남은{" "}

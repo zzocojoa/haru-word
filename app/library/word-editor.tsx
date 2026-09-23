@@ -21,6 +21,7 @@ import {
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { DictionaryLinks, Speak } from "../ui";
+import { HelpDetails } from "../study-ui";
 import { ExpressionFields } from "../expression-fields";
 export function WordEditor({
   activityDate,
@@ -93,18 +94,14 @@ export function WordEditor({
           </button>
         ))}
       </div>
-      <p className="small-note">
-        친숙도는 뜻의 익숙함이에요. 배운 단어를 다시 헷갈리거나 처음 본다고
-        표시하면 재학습에 넣고, 이전 회상·문장 결과는 보존해요. ‘안다’로 바꿔도
-        남은 보완점은 유지합니다.
-      </p>
+      <HelpDetails title="친숙도와 성적은 달라요"><p>친숙도를 바꿔도 회상·문장 성적은 유지해요. 다시 헷갈리는 단어는 재학습에 넣어요.</p></HelpDetails>
       <label className="check-label">
         <input
           type="checkbox"
           checked={useful}
           onChange={(e) => setUseful(e.target.checked)}
         />{" "}
-        생활에서 자주 쓸 단어 · 같은 우선순위 안에서 먼저
+        자주 쓸 단어 · 같은 순위에서 먼저
       </label>
       <section className="sense-selector">
         <label>
@@ -132,11 +129,7 @@ export function WordEditor({
             다른 뜻 추가
           </button>
         </div>
-        <p className="small-note">
-          각 뜻의 회상·문장 결과를 따로 보관해요. 기존 뜻의 표현과 예문은
-          아래에서 수정할 수 있어요. 뜻 자체를 바꾸려면 ‘다른 뜻 추가’를 눌러
-          주세요.
-        </p>
+        <p className="small-note">뜻별 성적은 따로 저장해요. 다른 뜻은 추가해 주세요.</p>
       </section>
       <label>
         {senseKey ? "선택한 학습 뜻" : "새로 학습할 뜻"}
@@ -180,6 +173,7 @@ export function WordEditor({
           </>
         )}
       </p>
+      <HelpDetails title="내 성적·문장·보완점">
       {p?.familiarityCheck && (
         <div className="example-box">
           <p className="eyebrow">최근 친숙도 확인</p>
@@ -212,8 +206,8 @@ export function WordEditor({
           onChange={(e) => setNotes(e.target.value)}
         />
       </label>
-      <section className="encounter-journal">
-        <h3>읽기·듣기에서 다시 만났어요.</h3>
+      </HelpDetails>
+      <HelpDetails title="읽기·듣기 기록"><section className="encounter-journal">
         {encounters.map((item, i) => (
           <p key={i}>
             <small>
@@ -259,7 +253,7 @@ export function WordEditor({
           아래 ‘기록 저장’을 누르면 표현도 함께 저장됩니다. 최대 200개를
           보관해요.
         </p>
-      </section>
+      </section></HelpDetails>
       <DictionaryLinks word={word.word} />
       {duplicate && (
         <p className="status-warn" role="alert">

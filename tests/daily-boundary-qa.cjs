@@ -84,6 +84,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
       await p.getByRole('option', { name: '10개', exact: true }).click();
     });
     await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).waitFor();
+    await p.getByText('오늘 배정 기준', {exact:true}).click();
     await p.getByText(/목표까지 7개는 아직 배정 전/).waitFor();
     await setting(() => p.getByRole('checkbox', { name: /신규 단어 잠시 쉬기/ }).check());
     assert.equal(await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).count(), 0);
@@ -92,10 +93,10 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     await p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(p);
     await p.getByRole('button', { name: '학습 홈으로', exact: false }).click();
     await p.locator('.home-panel').waitFor();
-    const rows = p.locator('.today-words > div');
+    const rows = p.locator('.today-words > .today-word-row');
     assert.equal(await rows.count(), 10);
-    assert.equal(await rows.getByText('오늘 학습 완료', { exact: true }).count(), 3);
-    assert.equal(await rows.getByText('오늘 진행 중', { exact: true }).count(), 7);
+    assert.equal(await rows.getByText('기록 완료', { exact: true }).count(), 3);
+    assert.equal(await rows.getByText('진행 중', { exact: true }).count(), 7);
     assert.match(await p.locator('.daily-metrics > div').nth(1).innerText(), /3\s*\/ 10개/);
     state = (await get(c)).state;
     const topup = state.sessions[state.settings.activeSessionId];
@@ -115,7 +116,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     checks.push('320–1440px and 200% text fit without horizontal overflow; axe reports no violations');
     const c2 = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: headers });
     const p2 = await c2.newPage(); await p2.goto(base); await saved(p2);
-    assert.equal(await p2.locator('.today-words > div').count(), 10);
+    assert.equal(await p2.locator('.today-words > .today-word-row').count(), 10);
     await p2.getByRole('heading', { name: heading(today), exact: true }).waitFor();
     assert.match(await p2.locator('.daily-metrics > div').nth(1).innerText(), /3\s*\/ 10개/);
     await p2.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click(); await saved(p2);

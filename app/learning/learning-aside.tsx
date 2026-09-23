@@ -1,15 +1,11 @@
 "use client";
 import type { LearningController } from "./use-learning-controller";
+import { HelpDetails } from "../study-ui";
 type LearningAsideProps = Pick<LearningController, "loading" | "metrics">;
 export function LearningAside({ loading, metrics }: LearningAsideProps) {
   return (
     <aside className="study-aside">
-      <section className="routine-panel">
-        <p className="eyebrow">LITTLE BY LITTLE</p>
-        <div className="routine-minutes">
-          15<span>분</span>
-        </div>
-        <h2>기억에 남는 하루의 루틴</h2>
+      <HelpDetails title="15분 학습 루틴" className="routine-panel">
         <div className="routine-list">
           {[
             ["01", "기억 깨우기", "이전 단어 확인 · 3분"],
@@ -26,12 +22,7 @@ export function LearningAside({ loading, metrics }: LearningAsideProps) {
             </div>
           ))}
         </div>
-        <p className="routine-note">
-          완벽하게 외우기보다,
-          <br />
-          다시 꺼내 보는 경험을 쌓아요.
-        </p>
-      </section>
+      </HelpDetails>
       <section className="progress-note">
         <div>
           <span>지금까지 배운 항목</span>
@@ -50,8 +41,8 @@ export function LearningAside({ loading, metrics }: LearningAsideProps) {
                 : "미측정"}
           </b>
         </div>
-        <p>
-          뜻별로 확인한 두 방향의 결과만 계산해요.
+        <p className="small-note">
+          미측정 제외 · 양방향 회상 기준
           {metrics.personalLearned > 0 &&
             ` 개인 추가 ${metrics.personalLearned}개도 학습했어요.`}
         </p>

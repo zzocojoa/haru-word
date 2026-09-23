@@ -35,23 +35,25 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     const put = async value => { const r = await c.request.put(base + '/api/state', { data: value, headers: { 'X-Study-Monthly-Carryover': '1' } }); assert.equal(r.status(), 200, await r.text()); };
     await put(seed); await p.reload(); await saved(p);
     const before = await get(c);
-    const rows = p.locator('.today-words > div'), home = p.locator('.home-panel');
-    assert.match(await rows.nth(0).innerText(), /오늘 학습 완료/);
+    const rows = p.locator('.today-words > .today-word-row'), home = p.locator('.home-panel');
+    assert.match(await rows.nth(0).innerText(), /기록 완료/);
+    await rows.nth(0).getByText('상태 상세',{exact:true}).click();
     assert.match(await rows.nth(0).innerText(), /월말 점검 대기/);
     assert.equal(await rows.nth(0).locator('.status-warn').count(), 0);
-    assert.match(await rows.nth(1).innerText(), /오늘 진행 중/);
+    assert.match(await rows.nth(1).innerText(), /진행 중/);
+    await rows.nth(2).getByText('상태 상세',{exact:true}).click();
     assert.match(await rows.nth(2).innerText(), /재학습 필요/);
     assert.match(await rows.nth(2).innerText(), /문장 보완 필요/);
     assert.equal(await rows.getByText('이월', { exact: true }).count(), 0);
-    await home.getByText(/오늘 배정한 전체 3개 중 2개의 회상·문장 결과/).waitFor();
-    await home.getByText(/월말 점검이 남아 있어도 오늘과 다음 날 학습을 시작/).waitFor();
+    await home.getByText(/기록 완료 2\/3개/).waitFor();
+    await home.getByText('오늘 배정 기준',{exact:true}).click();await home.getByText(/월말 점검이 남아 있어도 다음 날 학습할 수/).waitFor();
     await p.getByRole('region', { name: '이어서 할 점검', exact: true }).getByText('전체 3개 · 미점검 3개', { exact: true }).waitFor();
     assert.deepEqual(await get(c), before);
     checks.push('today progress, completed records, real difficulties and monthly waiting are distinct; read-only rendering preserves all saved data');
     for (const width of [320, 390, 768, 1440]) { await p.setViewportSize({ width, height: 900 }); assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false); }
     await p.setViewportSize({ width: 320, height: 900 });
     await p.addStyleTag({ content: 'html{font-size:200%}' });
-    assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+    assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, JSON.stringify(await p.evaluate(() => [...document.querySelectorAll('body *')].filter(el => {const r=el.getBoundingClientRect();return r.width && r.right>innerWidth+1}).map(el=>({tag:el.tagName,class:el.className,width:el.getBoundingClientRect().width})))));
     await p.reload(); await saved(p); await p.setViewportSize({ width: 390, height: 844 });
     await p.screenshot({ path: out + '/in-progress-mobile.png', fullPage: true });
     async function audit(name) {
@@ -67,10 +69,10 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     const updated = await get(c);
     await put({ revision: updated.revision, settings: { ...updated.state.settings, newWordsPaused: true }, progress: {}, sessions: { [daily.id]: daily } });
     await p.reload(); await saved(p);
-    await p.getByRole('heading', { name: '오늘의 작은 성취를 쌓았어요.', exact: true }).waitFor();
-    assert.equal(await rows.getByText('오늘 학습 완료', { exact: true }).count(), 3);
+    await p.getByRole('heading', { name: '오늘 회차를 마쳤어요', exact: true }).waitFor();
+    assert.equal(await rows.getByText('기록 완료', { exact: true }).count(), 3);
     assert.equal(await rows.getByText('월말 점검 대기', { exact: true }).count(), 3);
-    await home.getByText(/설정에서 신규 단어 쉬기를 켜 두었어요/).waitFor();
+    await home.getByText(/신규 단어 쉬기 켜짐/).waitFor();
     await p.getByRole('button', { name: '오늘 단어 다시 보기', exact: true }).click();
     await p.getByRole('dialog').getByRole('button', { name: 'arrive', exact: true }).click();
     await p.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();
@@ -79,7 +81,7 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     checks.push('finishing today preserves a separate monthly wait, explains explicit new-word pause and retains completed lesson review');
     const c2 = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: headers });
     const p2 = await c2.newPage(); await p2.goto(base); await saved(p2);
-    assert.equal(await p2.locator('.today-word-status').getByText('오늘 학습 완료', { exact: true }).count(), 3);
+    assert.equal(await p2.locator('.today-word-status').getByText('기록 완료', { exact: true }).count(), 3);
     assert.equal(await p2.locator('.today-word-status').getByText('월말 점검 대기', { exact: true }).count(), 3);
     await c2.close();
     checks.push('a separate browser restores the same daily-complete and monthly-waiting statuses');
@@ -90,7 +92,7 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     await p.reload(); await saved(p);
     assert.equal(await rows.getByText('월말 점검 대기', { exact: true }).count(), 0);
     assert.equal(await p.getByRole('region', { name: '이어서 할 점검', exact: true }).count(), 0);
-    await home.getByText(/설정에서 신규 단어 쉬기를 켜 두었어요/).waitFor();
+    await home.getByText(/신규 단어 쉬기 켜짐/).waitFor();
     assert.deepEqual((await get(c)).state.sessions[daily.id], completedBefore);
     checks.push('finishing monthly review removes its waiting labels without rewriting daily completion; manual pause remains explicit');
     assert.deepEqual(errors, []); assert.deepEqual(aiRequests, []);
