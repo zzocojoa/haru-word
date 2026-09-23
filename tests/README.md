@@ -62,3 +62,5 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - `expression-translation-qa.cjs`: 로컬 Worker의 임시 계정으로 완료 자료·단어장·표현 수정·뜻 전환·중단/재개·두 번째 브라우저·회상 숨기기·전체 다운로드와 API 무호출을 확인합니다. 320–1440px, axe 3화면을 포함하며 결과는 `outputs/expression-translation/`입니다.
 - 표현 리팩토링: `expression-translation.test.mjs`는 공통 편집의 불변성·공백 처리, 보완 우선순위, material/progress/sense의 선택 필드·필수 필드·길이 제한·strict 검증도 확인합니다. `study-controller-render-qa.cjs`는 일괄 함수형 입력과 같은 카드 재방문 후 늦은 표현/해석 콜백의 무효화를 포함합니다.
 - `python tests/expression_translations_test.py`: 표준 라이브러리만 사용하는 7개 데이터 검사입니다. 전체 검증 후 불변 병합, 누락/추가 ID·문맥·형식 오류, 적용된 해석 검증, 3,809개 공개 자료의 바이트 단위 동일성과 실패 시 기존 출력 보존을 검사합니다. 출력은 임시 디렉터리에만 생성합니다.
+- `today-status.test.mjs`: 오늘 신규 배정·오늘 완료와 월말 대기의 공존·실제 회상/문장 보완·미측정 문장·점검 확장·뜻별 격리·이전 학습 미완료·근거 없는 구형 복습 표시·입력/배정 불변성을 검사합니다.
+- `today-status-qa.cjs`: 로컬 임시 계정으로 진행 중/완료/점검 대기/실제 보완 표시, 새 단어 중단 사유 3조합, 완료 자료 다시 보기, 별도 브라우저 재접속, 월말 점검 종료 후 일일 기록 보존을 확인합니다. 320–1440px·200% 글자·axe 2화면을 포함하며 `outputs/today-status/`에 결과를 저장합니다.

@@ -35,3 +35,18 @@
 /* Scoped selected-state colors also hold while the selected tab is hovered. */
 .completed-lesson .review-word-tabs button[aria-pressed=true]{background:#eaf0ff;color:#244b9a}
 .completed-lesson .review-my-sentence b{color:#526681}
+
+/* Daily progress and periodic review needs can coexist without implying failure. */
+.today-words>div{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:12px}
+.today-words>div>div{min-width:0}
+.today-words b{overflow-wrap:anywhere}
+.today-word-status{display:flex;flex-direction:column;align-items:flex-end;gap:5px;max-width:180px}
+.today-word-status>span{font-size:13px;line-height:1.6;white-space:normal;overflow-wrap:anywhere}
+.today-progress,.today-review{display:inline-block;padding:3px 8px;border-radius:5px;color:#35527b;background:#eef3fc}
+.today-review{color:#52617b;background:#f2f4f8}
+.today-status-guide{font-size:14px;color:#52617b;line-height:1.8;margin:16px 0 0}
+.pending-reviews>.small-note{font-size:14px;color:#52617b;line-height:1.8}
+@media(max-width:480px){
+ .today-words>div{grid-template-columns:18px minmax(0,1fr);gap:6px 12px}
+ .today-word-status{grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:center;max-width:none}
+}

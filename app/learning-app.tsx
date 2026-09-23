@@ -79,7 +79,6 @@ export default function LearningApp({
     unfinished,
     remaining,
     assignedIds,
-    carry,
     assessed,
     origins,
     todays,
@@ -312,7 +311,6 @@ export default function LearningApp({
                       unfinished={unfinished}
                       remaining={remaining}
                       assignedIds={assignedIds}
-                      carry={carry}
                       assessed={assessed}
                       origins={origins}
                       todays={todays}

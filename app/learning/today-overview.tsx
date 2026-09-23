@@ -1,5 +1,7 @@
 "use client";
-import { POS, hasReviewWork } from "@/lib/learning";
+import { POS } from "@/lib/learning";
+import { todayWordStatuses } from "@/lib/today-status";
+import { useMemo } from "react";
 import { ArrowRight, BookOpen, RotateCcw } from "lucide-react";
 import { LevelSelect } from "../ui";
 import type { LearningController } from "./use-learning-controller";
@@ -13,7 +15,6 @@ type TodayOverviewProps = Pick<
   | "unfinished"
   | "remaining"
   | "assignedIds"
-  | "carry"
   | "assessed"
   | "origins"
   | "todays"
@@ -37,7 +38,6 @@ export function TodayOverview({
   unfinished,
   remaining,
   assignedIds,
-  carry,
   assessed,
   origins,
   todays,
@@ -52,6 +52,10 @@ export function TodayOverview({
   setTab,
   initialAssessment,
 }: TodayOverviewProps) {
+  const statuses = useMemo(() => todayWordStatuses(state, visibleIds, date, unfinished),
+    [state, visibleIds, date, unfinished]);
+  const checked = visibleIds.filter(id => statuses[id].learning === '오늘 학습 완료').length;
+  const monthlyPending = Object.values(state.sessions).some(s => s.kind === 'monthly' && !s.finished);
   return (
     <section className="learning-panel home-panel">
       <div className="panel-top">
@@ -77,11 +81,9 @@ export function TodayOverview({
             ? remaining
               ? `오늘 ${assignedIds.length}개 학습을 마쳤어요. 목표 ${state.settings.dailyGoal}개까지 ${remaining}개를 더 배울 수 있어요.`
               : "오늘 단어를 다시 살펴보거나, 같은 단어로 한 번 더 학습해 보세요."
-            : unfinished && remaining
-              ? `배우던 ${unfinished.ids.length}개를 먼저 마치면 목표까지 ${remaining}개를 추가할 수 있어요.`
-              : carry
-                ? `이월된 ${carry}개 중 오늘 목표 안에 먼저 배정해요.`
-                : "헷갈리는 단어부터, 뜻을 넘어 나의 문장까지."}
+            : unfinished
+              ? `이번 회차 ${visibleIds.length}개 중 ${checked}개의 회상·문장 결과를 기록했어요.${remaining ? ` 회차를 마치면 목표까지 ${remaining}개를 추가할 수 있어요.` : ' 남은 단계부터 이어서 해요.'}`
+              : "남은 학습·복습 → 헷갈리는 단어 → 처음 보는 단어 순으로 배정해요."}
         </p>
       </div>
       <div className="daily-metrics">
@@ -107,7 +109,7 @@ export function TodayOverview({
         </div>
       </div>
       <p className="daily-allocation">
-        {date} 배정 · 이월·복습 {origins.returning}개 · 새 학습{" "}
+        {date} 배정 · 이전 학습·복습 {origins.returning}개 · 새 학습{" "}
         {origins.newCount}개
       </p>
       <div className="today-words">
@@ -122,12 +124,12 @@ export function TodayOverview({
                 : "오늘 만날 단어"}
           </span>
           <small>
-            {finished ? "언제든 다시 볼 수 있어요" : "이월 → 헷갈림 → 처음"}
+            {finished ? "언제든 다시 볼 수 있어요" : unfinished ? "오늘의 진행과 복습 상태" : "배정 이유"}
           </small>
         </header>
         {visibleIds.map((id, i) => {
           const w = words.find((w) => w.id === id)!;
-          const p = state.progress[id];
+          const status = statuses[id];
           return (
             <div key={id}>
               <span className="today-word-number">
@@ -139,24 +141,15 @@ export function TodayOverview({
                   {POS[w.pos]} · {w.personal ? "개인 추가" : w.level}
                 </small>
               </div>
-              <span
-                className={hasReviewWork(p) ? "status-warn" : "word-reason"}
-              >
-                {hasReviewWork(p)
-                  ? finished
-                    ? "보완할 단어"
-                    : "이월"
-                  : finished
-                    ? "학습한 단어"
-                    : p?.familiarity === "uncertain"
-                      ? "헷갈리는 단어"
-                      : p?.familiarity === "new"
-                        ? "처음 보는 단어"
-                        : "학습 후보"}
-              </span>
+              <div className="today-word-status">
+                {status.learning && <span className={status.learning === '오늘 학습 완료' ? 'status-good' : 'today-progress'}>{status.learning}</span>}
+                {status.notices.map(notice => <span key={notice.label}
+                  className={notice.warning ? 'status-warn' : 'today-review'}>{notice.label}</span>)}
+              </div>
             </div>
           );
         })}
+        <p className="today-status-guide">오늘의 진행과 정기 점검은 따로 표시해요. 점검 대기는 아직 확인하지 않은 항목이에요.</p>
       </div>
       {finished ? (
         <div className="completed-actions">
@@ -231,13 +224,13 @@ export function TodayOverview({
           <ArrowRight size={17} />
         </button>
       )}
-      {(state.settings.newWordsPaused ||
-        Object.values(state.sessions).some(
-          (s) => s.kind === "monthly" && !s.finished,
-        )) && (
+      {unfinished && <p className="small-note">‘오늘 종료 · 저장’은 중단한 위치를 저장해요. 남은 단계까지 마치면 오늘 회차가 완료돼요.</p>}
+      {(state.settings.newWordsPaused || monthlyPending) && (
         <p className="notice">
-          신규 단어를 쉬고 있어요. 이월 단어와 진행 중인 월말 점검을 먼저
-          마쳐요.
+          {monthlyPending
+            ? '진행 중인 월말 점검이 있어 새 단어 배정을 잠시 쉬고 있어요. 아래 ‘이어서 할 점검’에서 계속할 수 있어요.'
+            : '설정에서 신규 단어 쉬기를 켜 두었어요. 남은 학습·복습 항목만 배정해요.'}
+          {monthlyPending && state.settings.newWordsPaused && ' 신규 단어 쉬기 설정도 켜져 있어, 점검 후 새 단어를 배우려면 설정에서 꺼 주세요.'}
         </p>
       )}
       {new Date(date + "T12:00:00Z").getUTCDay() ===
