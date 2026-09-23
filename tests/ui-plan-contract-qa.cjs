@@ -1,12 +1,12 @@
 // Verify the approved UI contract on the built LOCAL Worker; all records are synthetic.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/ui-plan-contract';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const selected=words.filter(w=>w.level==='A1').slice(0,10),ids=selected.map(w=>w.id);
 const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 (async()=>{
- const browser=await chromium.launch(),checks=[],audits=[],errors=[],touch=[];
+ const browser=await launchBrowser(),checks=[],audits=[],errors=[],touch=[];
  try{
   const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('ui_contract_'),'oai-authenticated-user-email':'qa@example.test'}});
   const get=async()=> (await c.request.get(base+'/api/state')).json();const before=await get();
@@ -83,5 +83,5 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
   await close.click();assert.deepEqual((await get()).state.sessions,initial.state.sessions);assert.deepEqual(errors,[]);for(const t of touch)assert.deepEqual(t.small,[],t.name+' 44px touch area');
   checks.push('all tabs fit five widths/200% text; first-screen action, 16px content/inputs and icon-labelled allocation states satisfy the plan');
   const report={passed:true,checks,audits,errors,touch};fs.writeFileSync(out+'/after.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
- }finally{await browser.close();}
+ }finally{await closeBrowser(browser);}
 })().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,5 +1,5 @@
 // Built LOCAL Worker only. Synthetic history; no production data or AI calls.
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const base = require('./qa/runtime.cjs').base, out = 'outputs/journal-navigation';
@@ -39,7 +39,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
 }
 
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   try {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: {
       'oai-authenticated-user-id': require('./qa/runtime.cjs').account('journal_'), 'oai-authenticated-user-email': 'journal@example.test',
@@ -197,5 +197,5 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.deepEqual(errors, []);
     const result = { passed: true, checks, accessibility, fixture: { dates: 23, sessions: 26, sameDayAttempts: 4 }, listHeight: height, browserErrors: errors };
     fs.writeFileSync(out + '/verification.json', JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exit(1); });

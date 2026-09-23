@@ -1,8 +1,8 @@
 const {markFamiliarity}=require('./familiarity-actions.cjs');
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base;
-(async()=>{const browser=await chromium.launch({headless:true});const errors=[];const checks=[];
+(async()=>{const browser=await launchBrowser({headless:true});const errors=[];const checks=[];
 try{
  const identity=require('./qa/runtime.cjs').account('resume_');const headers={'oai-authenticated-user-id':identity,'oai-authenticated-user-email':'qa@example.test'};const context=await browser.newContext({extraHTTPHeaders:headers});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base);await page.getByText('서버에 저장됨',{exact:true}).waitFor();
  await page.getByRole('button',{name:'친숙도 확인',exact:true}).click();for(let i=0;i<20;i++){await markFamiliarity(page,'new');await page.getByText('서버에 저장됨',{exact:true}).waitFor();}await page.getByRole('heading',{name:'나의 출발점을 찾았어요.'}).waitFor();let data=await (await context.request.get(base+'/api/state')).json();assert.equal(data.state.settings.assessments.A1.completed,true);assert.equal(Object.keys(data.state.settings.assessments.A1.marks).length,20);checks.push('20-word assessment persists and recommends a smaller A1 goal');
@@ -14,4 +14,4 @@ try{
  const device=await browser.newContext({extraHTTPHeaders:h2});const p3=await device.newPage();await p3.goto(base);await p3.getByText('서버에 저장됨',{exact:true}).waitFor();await p3.getByRole('tab',{name:'주간·월말 점검'}).click();await p3.getByRole('button',{name:'중단한 점검 이어서'}).click();await p3.getByRole('button',{name:'다음 묶음 계속'}).click();await p3.getByText('16 / 21',{exact:true}).waitFor();checks.push('21-word monthly review resumes on another device after 15 without marking untested words');
  await p3.getByRole('tab',{name:'학습 기록'}).click();const download=p3.waitForEvent('download');await p3.getByRole('button',{name:'기록 관리',exact:true}).click();await p3.getByRole('menuitem',{name:'CSV 받기',exact:true}).click();const file=await download;await file.saveAs('work/qa-export.csv');assert.ok(fs.readFileSync('work/qa-export.csv','utf8').includes('미측정'));checks.push('CSV download contains unmeasured results');
  assert.deepEqual(errors,[]);fs.writeFileSync('work/resume-qa.json',JSON.stringify({passed:true,checks,browserErrors:errors},null,2));console.log(JSON.stringify({passed:true,checks}));
-}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

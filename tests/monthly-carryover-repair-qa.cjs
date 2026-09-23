@@ -1,5 +1,5 @@
 // Local built Worker and synthetic accounts only. Never grades real user work.
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
 const base = require('./qa/runtime.cjs').base, out = 'outputs/monthly-carryover-repair';
 fs.mkdirSync(out, { recursive: true });
@@ -17,7 +17,7 @@ const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, peri
   ids, records: Object.fromEntries(ids.map(id => [id, plain(id)])), warmupIds: [], stage: kind === 'monthly' ? 'ko' : 'learn', index: 0,
   retry: [], retryMode: false, paused: true, finished: false, elapsed: 42, createdAt: day + 'T01:00:00Z' });
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   try {
     async function fixture(suffix, draft = false) {
       const headers = { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('monthly_repair_') + suffix, 'oai-authenticated-user-email': 'qa@example.test' };
@@ -106,5 +106,5 @@ const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, peri
     assert.deepEqual(errors, []); assert.deepEqual(aiRequests, []);
     const result = { passed: true, checks, audits, errors, aiRequests };
     fs.writeFileSync(out + '/verification.json', JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -1,10 +1,10 @@
 // Built local Worker only; synthetic account, no production or Google writes.
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
 const base = require('./qa/runtime.cjs').base, out = 'outputs/settings-dialog';
 fs.mkdirSync(out, { recursive: true });
 (async () => {
-  const browser = await chromium.launch(), checks = [], errors = [], audits = [];
+  const browser = await launchBrowser(), checks = [], errors = [], audits = [];
   try {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('settings_dialog_'), 'oai-authenticated-user-email': 'qa@example.test' } });
     const get = async () => (await c.request.get(base + '/api/state')).json();
@@ -96,5 +96,5 @@ fs.mkdirSync(out, { recursive: true });
     assert.deepEqual((await get()).state.sessions, preserved.state.sessions); assert.deepEqual(errors, []);
     checks.push('conflict backup/cancel/explicit reload preserve historical scores and remote settings across reconnect');
     fs.writeFileSync(out + '/result.json', JSON.stringify({ passed: true, checks, audits, errors }, null, 2)); console.log(JSON.stringify({ passed: true, checks }));
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

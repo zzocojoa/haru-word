@@ -1,4 +1,4 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base,out='outputs/daily-topup';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
@@ -11,7 +11,7 @@ function observe(page){
  page.on('requestfailed',request=>{if(starts.has(request))saveEvents.push({method:request.method(),failure:request.failure()?.errorText,durationMs:Math.round(performance.now()-starts.get(request))})});
  page.on('pageerror',error=>errors.push(error.message));
 }
-(async()=>{const browser=await chromium.launch({headless:true});let p;
+(async()=>{const browser=await launchBrowser({headless:true});let p;
  try{
   const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('topup_'),'oai-authenticated-user-email':'topup@example.test'};
   const ctx=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});
@@ -74,5 +74,5 @@ function observe(page){
   // Capture failures outside saved(), including a disabled grading button.
   fs.writeFileSync(out+'/interaction-failure.json',JSON.stringify({checks,saveEvents,browserErrors:errors,error:String(error),status:p?await p.locator('.save-state').innerText():null,alerts:p?await p.getByRole('alert').allTextContents():[],stage:p?await p.locator('.session-step-row').allTextContents():[],answer:p?await p.locator('#recall-answer').inputValue().catch(()=>null):null,hint:p?await p.getByText('답을 먼저 확인했으므로 이번 결과는 ‘도움 필요’로 기록해요.').count():null},null,2));
   if(p)await p.screenshot({path:out+'/interaction-failure.png'});throw error;
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

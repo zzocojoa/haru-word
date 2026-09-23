@@ -1,8 +1,8 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));
 const base=require('./qa/runtime.cjs').base,out='outputs/daily-goal';fs.mkdirSync(out,{recursive:true});
-(async()=>{const browser=await chromium.launch({headless:true});const checks=[],errors=[];
+(async()=>{const browser=await launchBrowser({headless:true});const checks=[],errors=[];
  try{
   const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('goal_'),'oai-authenticated-user-email':'goal@example.test'};
   const ctx=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});
@@ -43,5 +43,5 @@ const base=require('./qa/runtime.cjs').base,out='outputs/daily-goal';fs.mkdirSyn
   assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:before.revision,progress:{},sessions:{[sid]:oversized}}})).status(),400);assert.deepEqual(await get(),before);
   checks.push('the server rejects zero, eleven, fractional goals and an eleven-word daily session without changing stored records');
   assert.deepEqual(errors,[]);const result={passed:true,checks,browserErrors:errors};fs.writeFileSync(out+'/validation.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

@@ -1,5 +1,5 @@
 // Built local Worker only; every identity and record below is synthetic.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/backup-restore';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
@@ -14,7 +14,7 @@ const sample=()=>{
  state.progress[personal]={personal:{id:personal,word:'commute',headword:'commute',pos:'v.',level:'A1',page:0,personal:true},meaning:'통근하다',notes:'개인 단어 메모'};
  state.sessions[id]={id,kind:'daily',date,period:date,ids:[w.id],wordKeys:{[w.id]:'arrive'},warmupIds:[],stage:'ko',index:0,records:{[w.id]:{entryId:w.id,material:content[w.id],meaning:content[w.id].meaning,familiarity:'known',en:'independent',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:'I arrived at home.',notes:'내 메모',draft:{answer:'arr',revealed:false,hinted:false,stage:'ko',retry:false},learnedOn:date}},retry:[],retryMode:false,elapsed:173,finished:false,paused:true,createdAt:new Date().toISOString()};return state;
 };
-(async()=>{const browser=await chromium.launch({headless:true});try{
+(async()=>{const browser=await launchBrowser({headless:true});try{
  const make=async()=>{const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('backup_')+'_'+serial++,'oai-authenticated-user-email':'backup@example.test'};const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:headers});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>{if(r.url().endsWith('/api/state/restore'))posts++;if(r.url().includes('/api/sentence-feedback'))aiCalls++});await p.goto(base);await saved(p);return {c,p,headers}};
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  const get=async c=>{const r=await c.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};
@@ -45,4 +45,4 @@ const sample=()=>{
  const large=empty();large.progress=Object.fromEntries(words.slice(0,650).map(w=>[w.id,{meaning:content[w.id].meaning,notes:'가'.repeat(1900)}]));const payload=envelope(large);const bytes=Buffer.byteLength(JSON.stringify(payload));assert.ok(bytes>3_000_000&&bytes<8_000_000);const start=Date.now();await preview(p,payload);await acknowledge(p);await confirm(p);await success(p);assert.deepEqual((await get(c)).state,large);performance.push({case:'650 words, UTF-8 backup over 3 MB',bytes,previewAndRestoreMs:Date.now()-start});await close(p);checks.push('a 3 MB+ UTF-8 backup crosses D1 chunk boundaries and restores all 650 records through the real Worker');
  await preview(p,envelope(empty()));await acknowledge(p);await confirm(p);await success(p);assert.deepEqual((await get(c)).state,empty());await close(p);checks.push('explicitly confirmed empty backup removes only this synthetic account’s study records');
  assert.equal(aiCalls,0);assert.deepEqual(errors,[]);const report={passed:true,checks,a11y,performance,browserErrors:errors,restoreRequests:posts,aiCalls};fs.writeFileSync(out+'/browser.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
-}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

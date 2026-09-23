@@ -1,11 +1,11 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 // Local synthetic learners only; test every stage at all required widths and text sizes.
 const base=require('./qa/runtime.cjs').base,out='outputs/completion-matrix';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const chosen=['breakfast','arrive','busy'].map(name=>words.find(w=>w.word===name));const ids=chosen.map(w=>w.id);
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-(async()=>{const browser=await chromium.launch();const rows=[],errors=[],issues=[];
+(async()=>{const browser=await launchBrowser();const rows=[],errors=[],issues=[];
 try{
  for(const stage of ['warmup','learn','en','ko','sentence']){
   const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':'completion_'+stage+require('./qa/runtime.cjs').account('_'),'oai-authenticated-user-email':'qa@example.test'}});
@@ -32,5 +32,5 @@ try{
   await c.close();
  }
  const report={passed:issues.length===0&&errors.length===0,states:[...new Set(rows.map(r=>r.state))],combinations:rows.length,issues,errors};fs.writeFileSync(out+'/result.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));assert.equal(report.passed,true,'study layout contract');
-}finally{await browser.close();}
+}finally{await closeBrowser(browser);}
 })().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,8 +1,8 @@
 const {markFamiliarity}=require('./familiarity-actions.cjs');
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
-(async()=>{const browser=await chromium.launch({headless:true});const errors=[];const checks=[];
+(async()=>{const browser=await launchBrowser({headless:true});const errors=[];const checks=[];
  try{
   const account=require('./qa/runtime.cjs').account('workflow_');const headers={'oai-authenticated-user-id':account,'oai-authenticated-user-email':'qa@example.test'};
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:1366,height:1000}});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
@@ -45,5 +45,5 @@ const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSy
   const w=await warm.newPage();w.on('pageerror',e=>errors.push(e.message));await w.goto(base);await w.getByText('서버에 저장됨',{exact:true}).waitFor();await w.getByRole('button',{name:'중단한 학습 이어서'}).click();await w.getByRole('button',{name:'뜻 확인',exact:true}).click();await w.getByText('서버에 저장됨',{exact:true}).waitFor();assert.ok(await w.getByRole('button',{name:'스스로 떠올렸어요'}).isDisabled());
   await w.getByRole('button',{name:'오늘 종료 · 저장'}).click();await w.getByRole('heading',{name:'오늘의 기록을 남겼어요.'}).waitFor();await w.reload();await w.getByText('서버에 저장됨',{exact:true}).waitFor();await w.getByRole('button',{name:'중단한 학습 이어서'}).click();assert.ok(await w.getByRole('button',{name:'스스로 떠올렸어요'}).isDisabled());await w.getByRole('button',{name:'다시 볼게요'}).click();await w.getByText('서버에 저장됨',{exact:true}).waitFor();const warmResult=await (await warm.request.get(base+'/api/state')).json();assert.equal(warmResult.state.sessions[sid].warmupResults[apple.id],'help');checks.push('warmup answer exposure remains assisted after reload and is saved separately');
   assert.deepEqual(errors,[]);fs.writeFileSync('work/workflow-qa.json',JSON.stringify({passed:true,checks,browserErrors:errors},null,2));console.log(JSON.stringify({passed:true,checks}));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

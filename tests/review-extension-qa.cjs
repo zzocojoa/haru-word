@@ -1,5 +1,5 @@
 // Local built Worker only; synthetic accounts, no real learner records or AI calls.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/review-extension';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
@@ -9,7 +9,7 @@ const firstIds=['arrive','busy','breakfast'].map(term=>words.find(w=>w.word===te
 const record=id=>({entryId:id,meaning:content[id].meaning,material:content[id],familiarity:'known',en:'independent',ko:'independent',sentenceStatus:'written',sentence:'My original sentence.',notes:'keep source record',learnedOn:date});
 const daily=ids=>{const id=crypto.randomUUID();return {id,kind:'daily',date,period:date,ids,warmupIds:[],stage:'done',index:0,records:Object.fromEntries(ids.map(id=>[id,record(id)])),retry:[],retryMode:false,elapsed:900,finished:true,paused:true,createdAt:date+'T01:00:00Z'}};
 const checks=[],errors=[];
-(async()=>{const browser=await chromium.launch();try{
+(async()=>{const browser=await launchBrowser();try{
  for(const kind of ['weekly','monthly']){
   const ctx=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('review_extension_')+'_'+kind,'oai-authenticated-user-email':'test@example.test'}});
   const get=async()=>{const r=await ctx.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};let data=await get();
@@ -44,4 +44,4 @@ const checks=[],errors=[];
   checks.push(kind+': all ten finish, every added recall direction is measured, original daily records remain unchanged and the pending card clears');await ctx.close();
  }
  assert.deepEqual(errors,[]);const result={passed:true,checks,browserErrors:errors};fs.writeFileSync(out+'/validation.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
-}finally{await browser.close()}})().catch(error=>{console.error(error);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(error=>{console.error(error);process.exit(1)});

@@ -1,9 +1,9 @@
 const {markFamiliarity}=require('./familiarity-actions.cjs');
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 (async()=>{
- const browser=await chromium.launch({headless:true});const errors=[];const account=require('./qa/runtime.cjs').account('qa_');
+ const browser=await launchBrowser({headless:true});const errors=[];const account=require('./qa/runtime.cjs').account('qa_');
  try{
   const context=await browser.newContext({viewport:{width:1366,height:900},extraHTTPHeaders:{'oai-authenticated-user-id':account,'oai-authenticated-user-email':account+'@example.test'}});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(require('./qa/runtime.cjs').base + '/');await page.getByText('서버에 저장됨',{exact:true}).waitFor();
@@ -30,5 +30,5 @@ const fs=require('node:fs');
   assert.equal((await context.request.put(require('./qa/runtime.cjs').base + '/api/state',{data:{revision:after.revision,progress:{bad:{}},sessions:{}}})).status(),400);
   assert.equal((await context.request.put(require('./qa/runtime.cjs').base + '/api/state',{headers:{Origin:'https://different.example'},data:{revision:after.revision,progress:{},sessions:{}}})).status(),403);
   assert.deepEqual(errors,[]);const report={passed:true,checks:['daily study','answers hidden','hints cannot pass independently','sentence required','delayed retry','server reload','weekly and monthly targets','all-word search','mobile overflow','anonymous rejection','account isolation','optimistic conflict','input validation','origin rejection'],browserErrors:errors};fs.writeFileSync('work/browser-qa.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

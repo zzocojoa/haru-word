@@ -17,6 +17,33 @@ function account(prefix = 'qa') { return `${prefix}_${randomUUID()}`; }
 function accountHeaders(prefix) {
   return { 'oai-authenticated-user-id': account(prefix), 'oai-authenticated-user-email': 'qa@example.test' };
 }
+const browsers = new Set();
+let cleanupInstalled = false;
+async function closeBrowser(browser) {
+  const results = await Promise.allSettled(browser.contexts().map(context => context.close()));
+  try { await browser.close(); }
+  finally { browsers.delete(browser); }
+  const errors = results.filter(result => result.status === 'rejected').map(result => result.reason);
+  if (errors.length) throw new AggregateError(errors, 'Could not close every QA browser context.');
+}
+async function stopBrowsers(code) {
+  const results = await Promise.allSettled([...browsers].map(closeBrowser));
+  if (results.some(result => result.status === 'rejected')) console.error('QA browser cleanup failed.');
+  process.exit(code);
+}
+async function launchBrowser(options = {}) {
+  if (!cleanupInstalled) {
+    cleanupInstalled = true;
+    for (const [signal, code] of [['SIGINT', 130], ['SIGTERM', 143], ['SIGHUP', 129]])
+      process.once(signal, () => { void stopBrowsers(code); });
+    process.on('message', message => { if (message === 'qa-stop') void stopBrowsers(124); });
+    process.channel?.unref();
+  }
+  const browser = await playwright().chromium.launch({ ...options, handleSIGINT: false, handleSIGTERM: false, handleSIGHUP: false });
+  browsers.add(browser);
+  browser.once('disconnected', () => browsers.delete(browser));
+  return browser;
+}
 async function waitForWorker(base = localBase(), timeout = 30_000) {
   const end = Date.now() + timeout;
   while (Date.now() < end) {
@@ -30,7 +57,6 @@ async function waitForWorker(base = localBase(), timeout = 30_000) {
   throw new Error('Local built Worker is not ready. Build and start the site before running browser QA.');
 }
 module.exports = {
-  localBase, base: localBase(), account, accountHeaders, waitForWorker,
+  localBase, base: localBase(), account, accountHeaders, waitForWorker, launchBrowser, closeBrowser,
   axePath: path.resolve(process.env.AXE_CORE_PATH || 'work/axe/package/axe.min.js'),
-  get chromium() { return playwright().chromium; },
 };

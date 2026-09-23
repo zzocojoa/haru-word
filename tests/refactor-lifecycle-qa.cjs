@@ -1,7 +1,7 @@
 // Local synthetic accounts only. Never point this at the deployed site.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const base = require('./qa/runtime.cjs').base;
 const out = 'outputs/refactor-audit';
 fs.mkdirSync(out, { recursive: true });
@@ -33,7 +33,7 @@ const timerSeconds = async page => {
 };
 
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   let serial = 0;
   const fresh = async (stage, freezeClock = false) => {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: {
@@ -180,6 +180,6 @@ const timerSeconds = async page => {
     fs.writeFileSync(out + '/verification.json', JSON.stringify({ passed: false, checks, pageErrors: errors, error: String(error) }, null, 2));
     throw error;
   } finally {
-    await browser.close();
+    await closeBrowser(browser);
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });

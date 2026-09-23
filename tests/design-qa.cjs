@@ -1,5 +1,5 @@
 // Run against the local built Worker, using isolated accounts only.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base;
@@ -9,7 +9,7 @@ const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const checks=[];const errors=[];
 
 (async()=>{
- const browser=await chromium.launch({headless:true});
+ const browser=await launchBrowser({headless:true});
  try {
   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('design_'),'oai-authenticated-user-email':'design@example.test'}});
   const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
@@ -119,5 +119,5 @@ const checks=[];const errors=[];
   checks.push('active mobile repeat study shows the current stage and can end with a saved record');
   assert.deepEqual(errors,[]);
   const report={passed:true,checks,browserErrors:errors};fs.writeFileSync(out+'/validation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
- } finally {await browser.close()}
+ } finally {await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

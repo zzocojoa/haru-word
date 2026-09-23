@@ -19,7 +19,7 @@
 
 Node 22.13 이상에서 `npm test`, `npm run typecheck`를 실행합니다. 앱 소스 린트는 `node node_modules/eslint/bin/eslint.js app lib db`입니다.
 
-브라우저 검증은 프로덕션 빌드 후 로컬 Worker의 8787 포트에서 실행합니다. 각 `*-qa.cjs`를 Node로 실행하며, 로컬 임시 계정만 생성합니다. 배포 URL에 테스트 인증 헤더를 보내거나 운영 학습 기록을 수정하지 마세요. Playwright 경로는 현재 Codex 번들에 맞춰져 있으므로 다른 환경에서는 해당 경로를 변경해야 합니다.
+브라우저 검증은 프로덕션 빌드 후 로컬 Worker의 8787 포트에서 실행합니다. 각 `*-qa.cjs`를 Node로 실행하며, 로컬 임시 계정만 생성합니다. 배포 URL에 테스트 인증 헤더를 보내거나 운영 학습 기록을 수정하지 마세요. Playwright는 설치된 모듈 또는 `QA_PLAYWRIGHT_PATH`로 찾습니다.
 
 - `comprehensive-qa.cjs`: 월말 120/310개 저장, 날짜·주·월 경계, 입력 보존, 충돌·계정 격리, UTF-8 크기 제한, 아이콘·출처, 반응형 화면.
 - `daily-topup-qa.cjs`, `daily-goal-qa.cjs`: 목표 1~10개와 당일 추가 학습.
@@ -86,3 +86,4 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - 빌드한 로컬 Worker를 시작한 뒤 `npm run test:browser`로 기능 검사를 순서대로 실행한다. A1~B2 콘텐츠 시나리오가 모두 포함된다. `npm run test:performance`는 성능 두 검사를 단독 실행한다. `node tests/qa/run.cjs functional --list`로 실행 목록을 확인할 수 있다.
 - 실행 도구는 각 검사 전에 로컬 서버 응답 본문까지 확인한다. 재접속 회귀 검사는 브라우저 초점을 먼저 확보하고 이어가기 요청의 실제 저장 응답을 기다린다. 이전 저장 상태 표시나 검사 자동 재시도로 실패를 숨기지 않는다.
 - 결과와 검사별 로그는 `outputs/browser-suite/<group>-<run>/`에 모인다. 실패·시간 초과·미완료는 전체 성공으로 처리하지 않는다. 각 브라우저 스크립트의 직접 실행도 유지한다. 실제 사용자 계정이나 운영 URL을 환경변수로 넣지 않는다.
+- `manifest.cjs`는 전체 브라우저 검사 등록부다. 파일 추가·삭제를 등록부와 대조하며 누락을 거부한다. 기능/성능 실행은 공통 잠금으로 겹치지 않는다. `launchBrowser`와 `closeBrowser`가 컨텍스트·브라우저 종료를 공유하고, 시간 초과에는 IPC로 종료를 요청한 뒤 이 실행이 만든 프로세스 트리만 정리한다. 시간 초과 후 정상 종료해도 실패로 집계한다.

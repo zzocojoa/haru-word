@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
-const { chromium, base, accountHeaders } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser, base, accountHeaders } = require('./qa/runtime.cjs');
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   try {
     const context = await browser.newContext({ extraHTTPHeaders: accountHeaders('response_contract') });
     const page = await context.newPage(); let writes = 0;
@@ -34,5 +34,5 @@ const { chromium, base, accountHeaders } = require('./qa/runtime.cjs');
     const saved = await (await context.request.get(base + '/api/state')).json();
     assert.ok(Object.values(saved.state.progress).some(p => p.expression === 'keep this draft'));
     console.log(JSON.stringify({ passed: true, checks: ['invalid success keeps draft and unsaved state; no retry; explicit reconciliation restores the committed state'] }));
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

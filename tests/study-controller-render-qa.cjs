@@ -1,12 +1,12 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { build } = require('esbuild');
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const dir = 'work/draft-controller-tests';
 fs.mkdirSync(dir, { recursive: true });
 (async () => {
   await build({ entryPoints: ['tests/study-controller-harness.tsx'], outfile: dir + '/harness.js', bundle: true, format: 'iife', platform: 'browser', logLevel: 'silent', define: { 'process.env.NODE_ENV': '"development"' } });
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   const page = await browser.newPage();
   const errors = [], checks = [];
   page.on('pageerror', e => errors.push(e.message));
@@ -100,5 +100,5 @@ fs.mkdirSync(dir, { recursive: true });
     checks.push('phrase fields restore together and stale setters cannot change a later visit to the same learning card');
     assert.deepEqual(errors, []);
     console.log(JSON.stringify({ passed: true, checks, errors }));
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

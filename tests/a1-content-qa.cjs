@@ -1,5 +1,5 @@
 // Local built Worker only. Isolated test identities never touch hosted learner records.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const level=process.argv[2]||'A1';assert.ok(['A1','A2','B1','B2'].includes(level));
@@ -12,7 +12,7 @@ const samples={
 const {cases,legacy}=samples[level];
 const base=require('./qa/runtime.cjs').base,out='outputs/'+level.toLowerCase()+'-content-review';fs.mkdirSync(out,{recursive:true});
 const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-(async()=>{const browser=await chromium.launch({headless:true});try{
+(async()=>{const browser=await launchBrowser({headless:true});try{
  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':level.toLowerCase()+require('./qa/runtime.cjs').account('content_'),'oai-authenticated-user-email':'a1@example.test'}});
  const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));const saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  const get=async()=>{const r=await context.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};
@@ -56,4 +56,4 @@ const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'
  assert.equal(await p.getByLabel('오늘 공부할 뜻',{exact:false}).inputValue(),old.meaning);assert.ok((await p.locator('.learning-panel').innerText()).includes(old.example));
  assert.deepEqual((await get()).state.sessions[sid],s);checks.push('repeat learning starts from the old snapshot and does not overwrite the source session');
  assert.deepEqual(errors,[]);fs.writeFileSync(out+'/browser.json',JSON.stringify({passed:true,checks,browserErrors:errors},null,2));console.log(JSON.stringify({passed:true,checks,browserErrors:errors}));
-}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

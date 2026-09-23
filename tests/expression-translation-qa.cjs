@@ -1,5 +1,5 @@
 // Local built Worker only: isolated accounts, no hosted records or Google calls.
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
 const base = require('./qa/runtime.cjs').base, out = 'outputs/expression-translation';
 fs.mkdirSync(out, { recursive: true });
@@ -11,7 +11,7 @@ const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor()
 const get = async c => { const r = await c.request.get(base + '/api/state'); assert.equal(r.status(), 200); return r.json(); };
 const oldContent = id => { const { expressionTranslation, ...old } = content[id]; return old; };
 (async () => {
- const browser = await chromium.launch();
+ const browser = await launchBrowser();
  const headers = { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('expression_'), 'oai-authenticated-user-email': 'qa@example.test' };
  try {
   const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: headers });
@@ -90,5 +90,5 @@ const oldContent = id => { const { expressionTranslation, ...old } = content[id]
   checks.push('all 3809 downloadable glosses are available with zero AI requests and zero browser errors');
   fs.writeFileSync(out + '/browser.json', JSON.stringify({ passed: true, checks, axe, errors }, null, 2));
   console.log(JSON.stringify({ passed: true, checks, axe, errors }));
- } finally { await browser.close(); }
+ } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

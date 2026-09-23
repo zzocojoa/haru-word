@@ -1,7 +1,7 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
-(async()=>{const browser=await chromium.launch({headless:true});const checks=[];const errors=[];
+(async()=>{const browser=await launchBrowser({headless:true});const checks=[];const errors=[];
  try{
   const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('repeat_'),'oai-authenticated-user-email':'repeat@example.test'};
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});let p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
@@ -28,5 +28,5 @@ const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSy
   await p.getByRole('heading',{name:'오늘의 기록을 남겼어요.',exact:true}).waitFor();data=await get();assert.equal(data.state.sessions[repeatId].finished,true);assert.deepEqual(data.state.sessions[sid],source);assert.ok(ids.every(id=>JSON.stringify(data.state.progress[id].studyDates)===JSON.stringify([date])));assert.equal(Object.values(data.state.sessions).filter(x=>x.kind==='daily').length,1);checks.push('complete replay stores separate results while original daily records and learned-day counts stay unchanged');
   await p.getByRole('button',{name:'단어 다시 보기',exact:true}).click();await dialog().waitFor();assert.match(await dialog().innerText(),/This is my original sentence/);await p.keyboard.press('Escape');await dialog().waitFor({state:'hidden'});await p.getByRole('button',{name:'다시 학습하기',exact:true}).click();await saved();data=await get();assert.notEqual(data.state.settings.activeSessionId,repeatId);assert.equal(data.state.sessions[repeatId].finished,true);await p.getByRole('button',{name:'오늘 종료 · 저장',exact:true}).click();await saved();await p.getByRole('button',{name:'학습 홈으로',exact:false}).click();await p.getByRole('tab',{name:'학습 기록',exact:true}).click();await p.locator('.journal-day-trigger').filter({hasText:source.date}).click();await p.locator('.journal-session-trigger').filter({hasText:'일일 학습'}).click();await p.getByRole('tabpanel',{name:'학습 기록',exact:true}).getByRole('button',{name:'단어 다시 보기',exact:false}).click();await dialog().waitFor();assert.equal(await dialog().locator('.review-meaning').innerText(),source.records[ids[0]].meaning);checks.push('completion summary can view or repeat again; historical daily entries expose the same original cards');
   await p.screenshot({path:'work/repeat-cards-desktop.png',fullPage:true});assert.deepEqual(errors,[]);const report={passed:true,checks,browserErrors:errors};fs.writeFileSync('work/repeat-learning-qa.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

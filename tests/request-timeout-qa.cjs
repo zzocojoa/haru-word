@@ -1,10 +1,10 @@
 // Local built Worker; faults and provider replies are injected only into synthetic accounts.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/request-reliability';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),w=words.find(w=>w.word==='arrive'&&w.pos==='v.');
 const checks=[],errors=[];let serial=0;
-(async()=>{const browser=await chromium.launch();try{
+(async()=>{const browser=await launchBrowser();try{
  const fresh=async()=>{const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('timeouts_')+'_'+serial++,'oai-authenticated-user-email':'qa@example.test'}});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.clock.install();return {c,p}};
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  const get=async c=>{const r=await c.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};
@@ -24,4 +24,4 @@ const checks=[],errors=[];let serial=0;
  // Restore uses a longer deadline and forces read reconciliation, never blind replacement.
  await a.p.getByRole('tab',{name:'학습 기록',exact:true}).click();await a.p.getByRole('button',{name:'기록 관리',exact:true}).click();await a.p.getByRole('menuitem',{name:'백업 가져오기',exact:true}).click();const snapshot=(await get(a.c)).state;await a.p.locator('input[type=file]').setInputFiles({name:'backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({format:'haru-words-v1',exportedAt:new Date().toISOString(),state:snapshot}))});const back=a.p.waitForEvent('download');await a.p.getByRole('button',{name:'현재 기록 먼저 백업받기'}).click();await back;await a.p.getByRole('checkbox').check();let restoreCalls=0;await a.p.route('**/api/state/restore',r=>{restoreCalls++;held=r});await a.p.getByRole('button',{name:'이 백업으로 복원',exact:true}).click();await a.p.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click();await a.p.getByRole('button',{name:'서버에 복원 중',exact:false}).waitFor();await a.p.clock.fastForward(45_050);await a.p.getByRole('dialog').getByRole('button',{name:'서버 기록 확인하기'}).waitFor();assert.equal(restoreCalls,1);assert.deepEqual((await get(a.c)).state,snapshot);await held.abort().catch(()=>{});await a.p.unroute('**/api/state/restore');await a.p.getByRole('dialog').getByRole('button',{name:'서버 기록 확인하기'}).click();await saved(a.p);checks.push('45-second restore timeout keeps writes blocked until the existing server state is verified');
  assert.deepEqual(errors,[]);const report={passed:true,checks,browserErrors:errors,realGoogleCalls:0};fs.writeFileSync(out+'/browser.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
-}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

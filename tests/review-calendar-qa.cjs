@@ -1,7 +1,7 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/review-calendar';fs.mkdirSync(out,{recursive:true});
-(async()=>{const browser=await chromium.launch();const checks=[],errors=[];try{
+(async()=>{const browser=await launchBrowser();const checks=[],errors=[];try{
  const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('calendar_'),'oai-authenticated-user-email':'qa@example.test'}}),p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
  const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
  const get=async()=>(await c.request.get(base+'/api/state')).json();let data=await get();
@@ -28,4 +28,4 @@ const base=require('./qa/runtime.cjs').base,out='outputs/review-calendar';fs.mkd
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await p.screenshot({path:out+'/historical-periods-mobile.png'});assert.deepEqual(await get(),original);assert.deepEqual(errors,[]);
  checks.push('both period selection states have zero axe violations; 390px layout fits and all interactions are read-only; OS picker UI is outside axe coverage');
  fs.writeFileSync(out+'/verification.json',JSON.stringify({passed:true,checks,axeStates:2,pageErrors:errors},null,2));console.log(JSON.stringify({passed:true,checks}));
-}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

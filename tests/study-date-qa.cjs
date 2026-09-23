@@ -1,11 +1,11 @@
 // Built local Worker only: synthetic accounts and controlled clock responses.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/study-date';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const now=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const prior=new Date(now+'T12:00:00Z');prior.setUTCDate(prior.getUTCDate()-1);const yesterday=prior.toISOString().slice(0,10),dayLabel=new Intl.DateTimeFormat('ko-KR',{month:'long',day:'numeric',timeZone:'Asia/Seoul'}).format(new Date(now+'T12:00:00Z')),selected=words.filter(w=>w.level==='A1').slice(0,10);
 const checks=[],errors=[];let serial=0;
-(async()=>{const browser=await chromium.launch();
+(async()=>{const browser=await launchBrowser();
  const fresh=async()=>{const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('dates_')+'_'+serial++,'oai-authenticated-user-email':'dates@example.test'}});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));return {c,p}};
  const state=async c=>(await c.request.get(base+'/api/state')).json();
  const saved=async p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
@@ -42,5 +42,5 @@ const checks=[],errors=[];let serial=0;
   const failure=await fresh();await seed(failure.c);await failure.p.route('**/api/study-clock',r=>r.fulfill({status:503,json:{error:'clock unavailable'}}));await failure.p.goto(base);await saved(failure.p);await failure.p.getByRole('button',{name:'시간 다시 확인'}).waitFor();await failure.p.unroute('**/api/study-clock');await clock(failure.p);await failure.p.getByRole('button',{name:'시간 다시 확인'}).click();await failure.p.getByRole('button',{name:'학습일 수정'}).click();await failure.p.getByRole('dialog').waitFor();data=await state(failure.c);assert.equal((await failure.c.request.put(base+'/api/state',{data:{revision:data.revision,progress:{},sessions:{}}})).status(),200);await failure.p.getByRole('button',{name:'학습일 수정하기',exact:true}).click();await failure.p.getByRole('dialog').getByRole('alert').filter({hasText:'다른 기기'}).waitFor();assert.equal(Object.values((await state(failure.c)).state.sessions)[0].date,now);checks.push('clock fetch failure is recoverable; revision conflict prevents date overwrite');
   await failure.p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const axe=await failure.p.evaluate(async()=>axe.run(document.querySelector('[role="dialog"]'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(axe.violations.length,0,JSON.stringify(axe.violations));assert.equal(await failure.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);checks.push('390px correction dialog: no horizontal overflow and zero axe violations');await failure.c.close();
   assert.deepEqual(errors,[]);fs.writeFileSync(out+'/verification.json',JSON.stringify({checks,pageErrors:errors,passed:true},null,2));console.log(JSON.stringify({passed:true,checks},null,2));
- }catch(e){fs.writeFileSync(out+'/verification.json',JSON.stringify({checks,pageErrors:errors,error:String(e)},null,2));throw e}finally{await browser.close()}
+ }catch(e){fs.writeFileSync(out+'/verification.json',JSON.stringify({checks,pageErrors:errors,error:String(e)},null,2));throw e}finally{await closeBrowser(browser)}
 })();

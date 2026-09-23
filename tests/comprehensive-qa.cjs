@@ -1,11 +1,11 @@
 // Production-built Worker only. Every mutation uses an isolated local test account.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base,out='outputs/comprehensive-audit';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent',sentenceStatus:'written',sentence:'A saved example.',notes:'preserve this note',learnedOn:date});
-(async()=>{const browser=await chromium.launch();const checks=[],errors=[];let serial=0;
+(async()=>{const browser=await launchBrowser();const checks=[],errors=[];let serial=0;
  const context=async()=>browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('full_audit_')+'_'+serial++,'oai-authenticated-user-email':'audit@example.test'}});
  const state=async ctx=>(await ctx.request.get(base+'/api/state')).json();
  const page=async ctx=>{const p=await ctx.newPage();p.on('pageerror',e=>errors.push(e.message));return p};
@@ -58,5 +58,5 @@ const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent'
   await assetPage.setViewportSize({width:640,height:720});await assetPage.evaluate(()=>document.documentElement.style.fontSize='200%');for(const label of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){await assetPage.getByRole('tab',{name:label,exact:true}).click();assert.equal(await assetPage.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,label+' at 200% text');}
   checks.push('all four views fit 320–1440px and 200% root text sizing without document overflow');await ctx.close();
   assert.deepEqual(errors,[]);const result={passed:true,checks,browserErrors:errors};fs.writeFileSync(out+'/validation.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exitCode=1});

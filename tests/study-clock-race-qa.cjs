@@ -1,10 +1,10 @@
 const {build} = require('esbuild');
-const {chromium} = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const assert = require('node:assert/strict'), fs = require('node:fs');
 const out = 'outputs/clock-reliability'; fs.mkdirSync(out, {recursive:true});
 (async()=>{
  await build({entryPoints:['tests/study-clock-harness.tsx'],outfile:out+'/harness.js',bundle:true,format:'iife',platform:'browser',logLevel:'silent',define:{'process.env.NODE_ENV':'"development"'}});
- const browser=await chromium.launch();
+ const browser=await launchBrowser();
  try {
   const page=await browser.newPage(); await page.setContent('<html lang="ko"><body><div id="root"></div></body></html>'); await page.addScriptTag({path:out+'/harness.js'});
   await page.waitForFunction(()=>window.clockHarness?.count()===1); await page.evaluate(()=>window.clockHarness.fail(0)); await page.waitForFunction(()=>window.clockHarness.clock.error);
@@ -43,5 +43,5 @@ const out = 'outputs/clock-reliability'; fs.mkdirSync(out, {recursive:true});
   await page.evaluate(()=>window.clockHarness.resolve(7)); assert.equal(await page.locator('#clock-state').count(),0);
   const result={passed:true,checks:['overlapping manual refreshes share one request','wake event bursts do not reset the request timeout','successful synchronization clears errors and applies the Korean midnight date','hiding cancels a pending clock request; waking synchronizes before enabling writes','late failures and stale dates cannot overwrite a newer wake synchronization','unmount cancels the request and ignores its late response']};
   fs.writeFileSync(out+'/after.json',JSON.stringify(result,null,2)); console.log(JSON.stringify(result));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

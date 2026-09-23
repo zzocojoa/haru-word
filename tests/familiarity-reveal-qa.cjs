@@ -1,7 +1,7 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
-(async()=>{const browser=await chromium.launch({headless:true});const checks=[];const errors=[];const name=require('./qa/runtime.cjs').account('reveal_');const headers={'oai-authenticated-user-id':name,'oai-authenticated-user-email':'reveal@example.test'};
+(async()=>{const browser=await launchBrowser({headless:true});const checks=[];const errors=[];const name=require('./qa/runtime.cjs').account('reveal_');const headers={'oai-authenticated-user-id':name,'oai-authenticated-user-email':'reveal@example.test'};
  try{
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});let p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
   const get=async()=> (await context.request.get(base+'/api/state')).json();const saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
@@ -16,5 +16,5 @@ const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSy
   await p.route('**/api/state',route=>route.request().method()==='PUT'?route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'테스트 저장 실패'})}):route.continue());await p.getByRole('button',{name:'조금 헷갈려요',exact:false}).click();await p.getByRole('alert').waitFor();assert.ok(await p.getByRole('button',{name:'헷갈림으로 확정 · 다음',exact:true}).isDisabled());await p.unroute('**/api/state');await p.getByRole('button',{name:'다시 시도',exact:true}).click();await saved();await p.getByRole('button',{name:'헷갈림으로 확정 · 다음',exact:true}).click();await saved();data=await get();assert.equal(data.state.settings.assessments.A1.index,4);checks.push('failed reveal save blocks confirmation until retry succeeds');
   const invalid={...data.state.progress[ids[1]],familiarityCheck:{...data.state.progress[ids[1]].familiarityCheck,final:'known'}};assert.equal((await context.request.put(base+'/api/state',{data:{revision:data.revision,progress:{[ids[1]]:invalid},sessions:{}}})).status(),400);checks.push('server validation rejects promoting a previously new answer after reveal');
   assert.deepEqual(errors,[]);const report={passed:true,checks,browserErrors:errors};fs.writeFileSync('work/familiarity-reveal-qa.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

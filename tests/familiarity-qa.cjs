@@ -1,9 +1,9 @@
 const {markFamiliarity}=require('./familiarity-actions.cjs');
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 (async()=>{
- const {assessmentSample}=await import('../lib/learning.ts');const browser=await chromium.launch({headless:true});const checks=[];const errors=[];const prefix=require('./qa/runtime.cjs').account('familiarity_');
+ const {assessmentSample}=await import('../lib/learning.ts');const browser=await launchBrowser({headless:true});const checks=[];const errors=[];const prefix=require('./qa/runtime.cjs').account('familiarity_');
  const account=async name=>{const headers={'oai-authenticated-user-id':prefix+'_'+name,'oai-authenticated-user-email':'qa@example.test'};const context=await browser.newContext({extraHTTPHeaders:headers});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));const get=async()=> (await context.request.get(base+'/api/state')).json();const put=async delta=>{const state=await get();const response=await context.request.put(base+'/api/state',{data:{revision:state.revision,progress:{},sessions:{},...delta}});assert.equal(response.status(),200);};return {context,page,get,put,headers};};
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  try{
@@ -30,5 +30,5 @@ const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSy
 
   const e=await account('lower');data=await e.get();const a2=assessmentSample(words,'A2');await e.put({settings:{...data.state.settings,level:'A2',assessments:{A1:{ids,index:4,completed:false,marks:Object.fromEntries(ids.slice(0,4).map(id=>[id,'uncertain']))},A2:{ids:a2,index:19,completed:false,marks:Object.fromEntries(a2.slice(0,19).map((id,i)=>[id,i<13?'new':'known']))}}}});p=e.page;await p.goto(base);await saved(p);await p.getByRole('button',{name: /^(20개 친숙도부터 확인|친숙도 확인|탐색 이어서)$/}).first().click();await markFamiliarity(p,'new');await saved(p);await p.getByText('처음 보는 단어가 많아요.',{exact:false}).waitFor();await p.getByRole('button',{name:'다른 수준 확인',exact:true}).click();await p.getByText('4 / 20',{exact:true}).waitFor();data=await e.get();assert.equal(data.state.settings.level,'A1');assert.equal(data.state.settings.assessments.A2.completed,true);assert.equal(data.state.settings.assessments.A1.index,4);checks.push('lower-level advice resumes the correct partial assessment without discarding either level');
   assert.deepEqual(errors,[]);const report={passed:true,checks,browserErrors:errors};fs.writeFileSync('work/familiarity-qa.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

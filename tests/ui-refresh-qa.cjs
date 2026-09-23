@@ -1,5 +1,5 @@
 // Built local Worker only. Synthetic learner; viewport keyboard is simulated.
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const base = require('./qa/runtime.cjs').base, out = 'outputs/ui-refresh';
@@ -12,7 +12,7 @@ const record = id => ({entryId:id,meaning:content[id].meaning,material:content[i
 const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,date,period:kind==='monthly'?date.slice(0,7):date,ids,warmupIds:[],records:Object.fromEntries(ids.map(id=>[id,record(id)])),stage:kind==='monthly'?'ko':'learn',index:0,retry:[],retryMode:false,elapsed:0,paused:true,finished:false,createdAt:date+'T'+time+':00:00Z'};};
 
 (async()=>{
- const browser=await chromium.launch();const checks=[],errors=[],audits=[];
+ const browser=await launchBrowser();const checks=[],errors=[],audits=[];
  try {
   const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('ui_refresh_'),'oai-authenticated-user-email':'qa@example.test'}});
   const get=async()=> (await c.request.get(base+'/api/state')).json();
@@ -100,5 +100,5 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
   checks.push('menu Escape returns focus; simulated keyboard releases sticky actions and preserves input; summary expands one record and keeps prior scores');
   assert.deepEqual(errors,[]);
   const report={passed:true,checks,audits,errors};fs.writeFileSync(out+'/validation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
- }finally{await browser.close();}
+ }finally{await closeBrowser(browser);}
 })().catch(e=>{console.error(e);process.exitCode=1;});

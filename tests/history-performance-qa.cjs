@@ -1,5 +1,5 @@
 // Synthetic 1-year and 5-year histories on the LOCAL built Worker. No hosted data.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out=process.env.PERF_OUTPUT||'outputs/history-performance';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
@@ -7,7 +7,7 @@ const makeState=count=>{const state={settings:{level:'A1',dailyGoal:3,assessment
  const date=new Date(end-(count-i)*86400000).toISOString().slice(0,10),sid=crypto.randomUUID(),ids=[0,1,2].map(j=>words[(i*3+j)%words.length].id);const records={};for(const id of ids){const c=content[id];records[id]={entryId:id,meaning:c.meaning,material:c,familiarity:'known',en:'independent',ko:'independent',sentenceStatus:'written',sentence:c.example,notes:'통계용 가상 학습 기록',learnedOn:date};const p=state.progress[id];state.progress[id]={meaning:c.meaning,familiarity:'known',en:'independent',ko:'independent',sentenceStatus:'written',studyDates:[...(p?.studyDates||[]),date],lastStudied:date};}
  state.sessions[sid]={id:sid,kind:'daily',date,period:date,ids,warmupIds:[],stage:'done',index:0,records,retry:[],retryMode:false,elapsed:900,finished:true,paused:true,createdAt:date+'T12:00:00.000Z'};
  }return state;};
-(async()=>{const browser=await chromium.launch();const results=[],errors=[];try{
+(async()=>{const browser=await launchBrowser();const results=[],errors=[];try{
  for(const count of (process.env.SLOW_NETWORK?[1825]:[365,1825])){const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('history_perf_')+'_'+count,'oai-authenticated-user-email':'perf@example.test'}});let r=await c.request.get(base+'/api/state');assert.equal(r.status(),200);const initial=await r.json();const state=makeState(count),body=JSON.stringify({format:'haru-words-v1',exportedAt:new Date().toISOString(),state});
  if(Buffer.byteLength(body)<=8_000_000){r=await c.request.post(base+'/api/state/restore',{headers:{'x-study-revision':String(initial.revision),'content-type':'application/json'},data:body});assert.equal(r.status(),200,await r.text())}else{
  // Public normal-save contract accepts three changed sessions per request. Seed without weakening any limits.
@@ -20,4 +20,4 @@ const makeState=count=>{const state={settings:{level:'A1',dailyGoal:3,assessment
  const revision=received.revision;await p.getByRole('button',{name:'학습 설정',exact:true}).click();const start=performance.now();await p.getByRole('combobox',{name:'하루 목표',exact:true}).click();await p.getByRole('option',{name:'4개',exact:true}).click();await p.getByText('서버에 저장됨',{exact:true}).waitFor();const saveMs=Math.round(performance.now()-start);r=await c.request.get(base+'/api/state');received=await r.json();assert.equal(received.revision,revision+1);assert.deepEqual(received.state.sessions,state.sessions);assert.deepEqual(received.state.progress,state.progress);results.push({sessions:count,targetRecords:count*3,progressWords:Object.keys(state.progress).length,stateBytes:Buffer.byteLength(JSON.stringify(state)),backupBytes:Buffer.byteLength(body),apiRoundTripMs:api,cpuThrottle:4,samples,goalSaveInteractionMs:saveMs,network:process.env.SLOW_NETWORK?{latencyMs:150,downloadBytesPerSecond:500000,uploadBytesPerSecond:125000}:'loopback'});await c.close();
  }
  assert.deepEqual(errors,[]);const report={passed:true,environment:'Local Worker, Chromium 390px, simulated 4x CPU slowdown, loopback with optional network throttling recorded per result. Not real-device or production latency.',results,browserErrors:errors};fs.writeFileSync(out+'/measurements.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
-}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

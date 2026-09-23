@@ -1,5 +1,5 @@
 // Local built Worker only. Synthetic account, controlled server clock; no Google calls.
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/clock-continuity';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
@@ -7,7 +7,7 @@ const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric'
 const yesterday=new Date(Date.parse(date+'T12:00:00Z')-86400000).toISOString().slice(0,10);
 const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('clock_continuity_'),'oai-authenticated-user-email':'qa@example.test'};
 const checks=[],errors=[];
-(async()=>{const browser=await chromium.launch();try{
+(async()=>{const browser=await launchBrowser();try{
  const a=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:headers}),p=await a.newPage();
  p.on('pageerror',e=>errors.push(e.message));
  const get=async c=>(await c.request.get(base+'/api/state')).json(),saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
@@ -52,4 +52,4 @@ const checks=[],errors=[];
  await p.getByRole('button',{name:'최신 기록 불러오기',exact:true}).click();await p.getByRole('alertdialog').getByRole('button',{name:'최신 기록 불러오기',exact:true}).click();await saved();assert.deepEqual(await get(a),remote);
  checks.push('a second device resumes the saved draft; stale-device grading cannot overwrite it, current input remains exportable, and explicit refresh reconciles the latest state');
  assert.deepEqual(errors,[]);fs.writeFileSync(out+'/verification.json',JSON.stringify({passed:true,checks,pageErrors:errors,axeViolations:0,realGoogleCalls:0},null,2));console.log(JSON.stringify({passed:true,checks}));
-}finally{await browser.close()}})().catch(e=>{fs.writeFileSync(out+'/failure.json',JSON.stringify({checks,error:String(e)},null,2));console.error(e);process.exit(1)});
+}finally{await closeBrowser(browser)}})().catch(e=>{fs.writeFileSync(out+'/failure.json',JSON.stringify({checks,error:String(e)},null,2));console.error(e);process.exit(1)});

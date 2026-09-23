@@ -1,9 +1,9 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const word=words.find(w=>w.word==='arrive'&&w.pos==='v.');
 const original='I arrive home yesterday.';const correction='I arrived home yesterday.';const explanation='어제 일어난 일이므로 arrive를 arrived로 바꿔요.';
 const feedback={original,correctedSentence:correction,meaningUsage:'appropriate',grammar:'needs_work',explanation,model:'gemini-3.1-flash-lite',createdAt:new Date().toISOString()};
-(async()=>{const browser=await chromium.launch({headless:true});const checks=[],errors=[];let calls=0;
+(async()=>{const browser=await launchBrowser({headless:true});const checks=[],errors=[];let calls=0;
  try{
   const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('feedback_'),'oai-authenticated-user-email':'qa@example.test'};
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});const state=async()=> (await context.request.get(base+'/api/state')).json();let data=await state();
@@ -30,5 +30,5 @@ const feedback={original,correctedSentence:correction,meaningUsage:'appropriate'
   await p.getByRole('button',{name:'문장 보완이 필요해요',exact:true}).click();await p.getByRole('heading',{name:'오늘의 기록을 남겼어요.',exact:true}).waitFor();await saved();data=await state();assert.equal(data.state.progress[word.id].familiarity,'known');assert.equal(data.state.progress[word.id].en,'independent');assert.equal(data.state.progress[word.id].ko,'help');assert.equal(data.state.progress[word.id].sentenceStatus,'improve');
   await p.getByRole('tab',{name:'학습 기록',exact:true}).click();await p.locator('.journal-day-trigger').first().click();await p.locator('.journal-session-trigger').first().click();const desktopLog=p.getByRole('tabpanel',{name:'학습 기록',exact:true}).locator('.journal-desktop');await desktopLog.getByText('AI 교정 의견',{exact:true}).click();await desktopLog.getByText(second.correctedSentence,{exact:true}).waitFor();const download=p.waitForEvent('download');await p.getByRole('button',{name:'기록 관리',exact:true}).click();await p.getByRole('menuitem',{name:'CSV 받기',exact:true}).click();await (await download).saveAs('work/ai-feedback-export.csv');assert.ok(fs.readFileSync('work/ai-feedback-export.csv','utf8').includes(second.correctedSentence));checks.push('history and CSV retain AI comments while grammar remediation stays separate from familiarity and recall');
   assert.deepEqual(errors,[]);fs.writeFileSync('work/sentence-feedback-qa.json',JSON.stringify({passed:true,checks,errors},null,2));console.log(JSON.stringify({passed:true,checks}));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

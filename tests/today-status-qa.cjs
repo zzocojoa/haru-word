@@ -1,5 +1,5 @@
 // Local built Worker only, synthetic account; no production data or AI requests.
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
 const base = require('./qa/runtime.cjs').base, out = 'outputs/today-status';
 fs.mkdirSync(out, { recursive: true });
@@ -16,7 +16,7 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
   ids, warmupIds: [], stage: kind === 'monthly' ? 'ko' : 'learn', index: 0, retry: [], retryMode: false,
   elapsed: 200, paused: true, finished: false, createdAt: date + 'T01:00:00Z', records: Object.fromEntries(ids.map(id => [id, rawRecord(id)])) }; };
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   try {
     const headers = { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('today_status_'), 'oai-authenticated-user-email': 'qa@example.test' };
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: headers });
@@ -98,5 +98,5 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     assert.deepEqual(errors, []); assert.deepEqual(aiRequests, []);
     const result = { passed: true, checks, axe: axeResults, errors, aiRequests };
     fs.writeFileSync(out + '/verification.json', JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

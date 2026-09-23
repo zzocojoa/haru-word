@@ -1,8 +1,8 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { chromium, base, accountHeaders, axePath } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('./qa/runtime.cjs');
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   const checks = [];
   try {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('editor_save') });
@@ -60,5 +60,5 @@ const { chromium, base, accountHeaders, axePath } = require('./qa/runtime.cjs');
     fs.mkdirSync('outputs/editor-save', { recursive: true });
     fs.writeFileSync('outputs/editor-save/result.json', JSON.stringify({ passed: true, checks, errors }, null, 2));
     console.log(JSON.stringify({ passed: true, checks }));
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

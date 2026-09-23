@@ -1,6 +1,6 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs');
-(async()=>{const b=await chromium.launch();const results=[];try{
+(async()=>{const b=await launchBrowser();const results=[];try{
  const c=await b.newContext({extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('axe_'),'oai-authenticated-user-email':'axe@example.test'},reducedMotion:'reduce',viewport:{width:390,height:844}});const p=await c.newPage();await p.goto(require('./qa/runtime.cjs').base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});
  const check=async name=>{const r=await p.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));results.push({name,violations:r.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})),incomplete:r.incomplete.map(v=>v.id)});};
  for(const width of [390,1440]){await p.setViewportSize({width,height:900});for(const name of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){await p.getByRole('tab',{name,exact:true}).click();await check(name+' '+width);}}
@@ -10,4 +10,4 @@ const fs=require('node:fs');
  const assets=fs.readdirSync('dist/client/_next/static/chunks').filter(n=>n.endsWith('.js')).map(n=>({name:n,bytes:fs.statSync('dist/client/_next/static/chunks/'+n).size,gzip:require('node:zlib').gzipSync(fs.readFileSync('dist/client/_next/static/chunks/'+n)).length})).sort((a,b)=>b.bytes-a.bytes);
  require('node:assert/strict').deepEqual(results.filter(r=>r.violations.length),[]);
  fs.writeFileSync('outputs/comprehensive-audit/accessibility.json',JSON.stringify({results,largestAssets:assets.slice(0,5)},null,2));console.log(JSON.stringify({checks:results.length,violations:results.filter(r=>r.violations.length),largestAssets:assets.slice(0,3)}));
-}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});
+}finally{await closeBrowser(b)}})().catch(e=>{console.error(e);process.exitCode=1});

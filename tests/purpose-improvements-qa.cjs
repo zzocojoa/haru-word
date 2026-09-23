@@ -1,4 +1,4 @@
-const {chromium}=require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs');const assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base;const out='outputs/purpose-improvements';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));const word=(name,pos='n.')=>words.find(w=>w.word===name&&w.pos===pos);
@@ -6,7 +6,7 @@ const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric'
 const record=(meaning)=>({meaning,familiarity:'uncertain',en:'independent',ko:'independent',sentenceStatus:'written',sentence:'I wrote this before.',notes:''});
 const session=(w,d=old,extra={})=>({id:crypto.randomUUID(),kind:'daily',date:d,period:d,ids:[w.id],warmupIds:[],stage:'done',index:0,records:{[w.id]:record(content[w.id].meaning)},retry:[],retryMode:false,elapsed:90,finished:true,paused:true,createdAt:d+'T04:00:00.000Z',...extra});
 const checks=[];const errors=[];const evidence=[];
-(async()=>{const browser=await chromium.launch({headless:true});let counter=0;
+(async()=>{const browser=await launchBrowser({headless:true});let counter=0;
  async function user(label,seed){const ctx=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('purpose_fixed_')+'_'+(++counter),'oai-authenticated-user-email':'audit@example.test'}});let data=await(await ctx.request.get(base+'/api/state')).json();const partial=seed?seed(data.state):{};assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:data.revision,progress:{},sessions:{},...partial}})).status(),200);const p=await ctx.newPage();p.on('pageerror',e=>errors.push(label+': '+e.message));await p.goto(base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();return {ctx,p,get:async()=> (await(await ctx.request.get(base+'/api/state')).json()).state};}
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  async function shot(p,file){await p.screenshot({path:out+'/'+file+'.png',fullPage:true,animations:'disabled'});evidence.push(file+'.png');}
@@ -45,5 +45,5 @@ const checks=[];const errors=[];const evidence=[];
   await logIssue('CONTENT',{confirmed:true,corrected:['train: miss the train','would: 정중한 권유','fit: 건강한']});
   await e.p.getByRole('button',{name:'학습 설정',exact:true}).click();await e.p.getByText('저장·날짜·AI 안내',{exact:true}).click();assert.match(await e.p.getByRole('dialog').innerText(),/AI는 버튼을 누를 때만 호출/);assert.ok(!(await e.p.getByRole('dialog').innerText()).includes('별도 AI API를 사용하지'));await shot(e.p,'06-settings-ai-copy');await logIssue('SETTINGS_COPY',{confirmed:true,text:'Google Gemini 사용 조건 안내'});await e.ctx.close();
   assert.deepEqual(errors,[]);fs.writeFileSync(out+'/evidence.json',JSON.stringify({date,checks,errors,evidence},null,2));console.log(JSON.stringify({verifiedFixes:checks.length,statefulFixesCheckedTwice:4,screenshots:evidence.length,browserErrors:errors}));
- }finally{await browser.close()}
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

@@ -1,5 +1,5 @@
 // Built local Worker, synthetic accounts only; never calls Google.
-const { chromium } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
 const base = require('./qa/runtime.cjs').base, out = 'outputs/draft-refactor';
 fs.mkdirSync(out, { recursive: true });
@@ -10,7 +10,7 @@ const checks = [], errors = [], requests = []; let serial = 0, activePage;
 const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor();
 const get = async c => (await c.request.get(base + '/api/state')).json();
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await launchBrowser();
   async function fresh(stage, retry = false) {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('draft_') + '_' + serial++, 'oai-authenticated-user-email': 'qa@example.test' } });
     const initial = await get(c), id = crypto.randomUUID(), first = selected[0].id;
@@ -90,5 +90,5 @@ const get = async c => (await c.request.get(base + '/api/state')).json();
       await activePage.screenshot({ path: out + '/interaction-failure.png' });
     }
     fs.writeFileSync(out + '/interaction-failure.json', JSON.stringify(diagnostic, null, 2)); throw error;
-  } finally { await browser.close(); }
+  } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exitCode = 1; });
