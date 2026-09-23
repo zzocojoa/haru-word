@@ -115,7 +115,9 @@ export function useLearningController(initialServerTime: number) {
   );
   const metrics = useMemo(() => learningMetrics(state), [state]);
   const carry = metrics.carry;
-  const visibleIds = unfinished?.ids || (finished ? assignedIds : suggestions);
+  // The overview represents the whole study date, including completed rounds
+  // before a goal increase. Resuming still uses the original unfinished session.
+  const visibleIds = assignedIds.length ? assignedIds : suggestions;
   const origins = useMemo(
     () => dailyOrigins(state, visibleIds, date),
     [state, visibleIds, date],

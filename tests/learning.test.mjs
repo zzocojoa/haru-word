@@ -67,8 +67,8 @@ test('unmeasured monthly writing is incomplete; optional sentence is not a false
 test('warmup prioritizes unfinished words even when assigned in today targets',()=>{
  const state=fresh();const [a,b,c,d]=words.filter(w=>w.level==='A1').slice(0,4);state.progress=Object.fromEntries([a,b,c,d].map((w,i)=>[w.id,{lastStudied:'2026-09-'+(10+i),needsReview:i===0}]));const x=newSession(state,words,content,'daily','2026-09-21');assert.equal(x.warmupIds[0],a.id);assert.ok(x.ids.includes(a.id));
 });
-test('paused new words and unfinished monthly reviews do not add fresh words',()=>{
- const state=fresh();state.settings.newWordsPaused=true;assert.deepEqual(pickDaily(words,state,'2026-09-21'),[]);const a=find('apple');state.progress[a.id]={needsReview:true,studyDates:['2026-09-21']};assert.deepEqual(pickDaily(words,state,'2026-09-21'),[a.id]);state.settings.newWordsPaused=false;const x=newSession(state,words,content,'monthly','2026-09-30');state.sessions[x.id]=x;assert.deepEqual(pickDaily(words,state,'2026-09-22'),[a.id]);
+test('only explicit new-word pause prevents fresh words; pending monthly review keeps carryover priority',()=>{
+ const state=fresh();state.settings.newWordsPaused=true;assert.deepEqual(pickDaily(words,state,'2026-09-21'),[]);const a=find('apple');state.progress[a.id]={needsReview:true,studyDates:['2026-09-21']};assert.deepEqual(pickDaily(words,state,'2026-09-21'),[a.id]);state.settings.newWordsPaused=false;const x=newSession(state,words,content,'monthly','2026-09-30');state.sessions[x.id]=x;const next=pickDaily(words,state,'2026-09-22');assert.equal(next.length,3);assert.equal(next[0],a.id);
 });
 test('personal useful priority does not override carryover or familiarity',()=>{
  const state=fresh();const a=find('apple'),b=find('cat'),c=find('water');state.progress[a.id]={familiarity:'uncertain',useful:true};state.progress[b.id]={needsReview:true};state.progress[c.id]={familiarity:'new',useful:true};assert.deepEqual(pickDaily(words,state,'2026-09-21'),[b.id,a.id,c.id]);

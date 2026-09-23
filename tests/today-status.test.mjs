@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { todayWordStatuses } from '../lib/today-status.ts';
-import { EMPTY, emptyRecord, ensureCarryover, pickDaily } from '../lib/learning.ts';
+import { EMPTY, dailyAssignedIds, emptyRecord, ensureCarryover, pickDaily } from '../lib/learning.ts';
 
 const date = '2026-09-23';
 const material = { meaning: '도착하다', expression: 'arrive home', example: '', translation: '', source: 'test' };
@@ -87,4 +87,38 @@ test('status rendering is read-only and leaves assignment ordering, records and 
   assert.deepEqual(pickDaily([word], state, date), candidates);
   state.progress[word.id].familiarity = 'new';
   assert.deepEqual(labels(status(state)), ['처음 보는 단어']);
+});
+
+test('all same-day rounds count together while other dates and periodic checks stay separate', () => {
+  const state = fresh(), extraId = 'busy-adj';
+  state.sessions.first = session({ id: 'first', finished: true, records: { [word.id]: passed() } });
+  const second = session({ id: 'second', ids: [extraId], records: { [extraId]: record() } });
+  state.sessions.second = second;
+  state.sessions.yesterday = session({ id: 'yesterday', date: '2026-09-22', ids: ['old'], records: { old: passed() } });
+  state.sessions.monthly = monthly({ ids: ['old'], records: { old: record() } });
+  const before = structuredClone(state), ids = dailyAssignedIds(state, date);
+  assert.deepEqual(ids, [word.id, extraId]);
+  const statuses = todayWordStatuses(state, ids, date, second);
+  assert.equal(statuses[word.id].learning, '오늘 학습 완료');
+  assert.equal(statuses[extraId].learning, '오늘 진행 중');
+  assert.deepEqual(dailyAssignedIds(state, '2026-09-24'), []);
+  assert.equal(todayWordStatuses(state, [word.id], '2026-09-24')[word.id].learning, null);
+  assert.deepEqual(state, before);
+});
+
+test('pending monthly checks leave new-word budgets open at both goal bounds and preserve saved sessions', () => {
+  const pool = Array.from({ length: 11 }, (_, i) => ({ ...word, id: 'entry-' + i, headword: 'word-' + i }));
+  const state = fresh();
+  state.progress[pool[0].id] = { meaning: material.meaning, needsReview: true, ko: 'help' };
+  state.sessions.monthly = monthly();
+  for (const goal of [1, 10]) {
+    state.settings.dailyGoal = goal;
+    const before = structuredClone(state), chosen = pickDaily(pool, state, date);
+    assert.equal(chosen.length, goal);
+    assert.equal(chosen[0], pool[0].id);
+    assert.equal(new Set(chosen).size, goal);
+    assert.deepEqual(state, before);
+  }
+  state.settings.newWordsPaused = true;
+  assert.deepEqual(pickDaily(pool, state, date), [pool[0].id]);
 });

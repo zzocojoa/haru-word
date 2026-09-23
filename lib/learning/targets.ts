@@ -61,11 +61,9 @@ export function pickDaily(
   const seen = new Set(
     words.filter((w) => recentTargets.has(w.id)).map((w) => w.headword),
   );
-  const pauseNew =
-    state.settings.newWordsPaused ||
-    Object.values(state.sessions).some(
-      (s) => s.kind === "monthly" && !s.finished,
-    );
+  // Periodic checks keep their own queue. Only the learner's explicit setting
+  // pauses new vocabulary; carryover still takes priority within the daily goal.
+  const pauseNew = state.settings.newWordsPaused;
   const candidates = words.filter(
     (w) =>
       !recentTargets.has(w.id) &&

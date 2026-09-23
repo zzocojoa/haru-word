@@ -56,12 +56,15 @@ export function TodayOverview({
     [state, visibleIds, date, unfinished]);
   const checked = visibleIds.filter(id => statuses[id].learning === '오늘 학습 완료').length;
   const monthlyPending = Object.values(state.sessions).some(s => s.kind === 'monthly' && !s.finished);
+  const assigned = assignedIds.length > 0;
+  const [year, month, day] = date.split('-').map(Number);
   return (
     <section className="learning-panel home-panel">
       <div className="panel-top">
-        <span className="eyebrow">
-          <time dateTime={date}>{date}</time>오늘의 학습 노트
-        </span>
+        <div className="today-date">
+          <span>오늘의 학습일 · 한국 시간</span>
+          <time dateTime={date}>{year}년 {month}월 {day}일</time>
+        </div>
         <LevelSelect
           value={state.settings.level}
           onChange={changeLevel}
@@ -82,7 +85,7 @@ export function TodayOverview({
               ? `오늘 ${assignedIds.length}개 학습을 마쳤어요. 목표 ${state.settings.dailyGoal}개까지 ${remaining}개를 더 배울 수 있어요.`
               : "오늘 단어를 다시 살펴보거나, 같은 단어로 한 번 더 학습해 보세요."
             : unfinished
-              ? `이번 회차 ${visibleIds.length}개 중 ${checked}개의 회상·문장 결과를 기록했어요.${remaining ? ` 회차를 마치면 목표까지 ${remaining}개를 추가할 수 있어요.` : ' 남은 단계부터 이어서 해요.'}`
+              ? `오늘 배정한 전체 ${assignedIds.length}개 중 ${checked}개의 회상·문장 결과를 기록했어요.${remaining ? ` 회차를 마치면 목표까지 ${remaining}개를 추가할 수 있어요.` : ' 남은 단계부터 이어서 해요.'}`
               : "남은 학습·복습 → 헷갈리는 단어 → 처음 보는 단어 순으로 배정해요."}
         </p>
       </div>
@@ -95,9 +98,9 @@ export function TodayOverview({
           </b>
         </div>
         <div>
-          <span>나를 위한 시간</span>
+          <span>오늘 연습 완료</span>
           <b>
-            15<small>분</small>
+            {checked}<small>/ {visibleIds.length}개</small>
           </b>
         </div>
         <div>
@@ -108,25 +111,18 @@ export function TodayOverview({
           </b>
         </div>
       </div>
-      <p className="daily-allocation">
-        {date} 배정 · 이전 학습·복습 {origins.returning}개 · 새 학습{" "}
-        {origins.newCount}개
-      </p>
-      <div className="today-words">
+      <div className="today-words" role="region" aria-labelledby="today-targets-heading">
         <header>
-          <span>
-            {finished
-              ? "오늘 배운 단어"
-              : unfinished
-                ? todays.length > 1
-                  ? "이번 회차 목표 단어"
-                  : "오늘의 목표 단어"
-                : "오늘 만날 단어"}
-          </span>
-          <small>
-            {finished ? "언제든 다시 볼 수 있어요" : unfinished ? "오늘의 진행과 복습 상태" : "배정 이유"}
-          </small>
+          <h3 id="today-targets-heading">{month}월 {day}일 목표 단어</h3>
+          <small>{assigned ? `배정 ${assignedIds.length}개` : '시작 전 · 배정 예정'}</small>
         </header>
+        <p className="daily-allocation">새 학습 {origins.newCount}개 · 이전 학습·복습 {origins.returning}개</p>
+        <p className="today-targets-note">
+          {assigned
+            ? '아래는 오늘 날짜에 배정된 전체 목록이에요. 이전에 본 단어도 오늘의 복습 목표에 포함돼요.'
+            : '오늘 시작하면 아래 단어가 배정돼요. 미완료·보완 단어부터 채우고, 남은 목표 수에 새 단어를 넣어요.'}
+          {assigned && remaining > 0 && ` 목표까지 ${remaining}개는 아직 배정 전이에요.`}
+        </p>
         {visibleIds.map((id, i) => {
           const w = words.find((w) => w.id === id)!;
           const status = statuses[id];
@@ -149,7 +145,7 @@ export function TodayOverview({
             </div>
           );
         })}
-        <p className="today-status-guide">오늘의 진행과 정기 점검은 따로 표시해요. 점검 대기는 아직 확인하지 않은 항목이에요.</p>
+        <p className="today-status-guide">오늘 연습 완료는 양방향 회상과 문장 결과를 모두 기록한 단어 수예요. 주간·월말 점검은 아래에서 별도로 이어가요.</p>
       </div>
       {finished ? (
         <div className="completed-actions">
@@ -227,10 +223,9 @@ export function TodayOverview({
       {unfinished && <p className="small-note">‘오늘 종료 · 저장’은 중단한 위치를 저장해요. 남은 단계까지 마치면 오늘 회차가 완료돼요.</p>}
       {(state.settings.newWordsPaused || monthlyPending) && (
         <p className="notice">
-          {monthlyPending
-            ? '진행 중인 월말 점검이 있어 새 단어 배정을 잠시 쉬고 있어요. 아래 ‘이어서 할 점검’에서 계속할 수 있어요.'
-            : '설정에서 신규 단어 쉬기를 켜 두었어요. 남은 학습·복습 항목만 배정해요.'}
-          {monthlyPending && state.settings.newWordsPaused && ' 신규 단어 쉬기 설정도 켜져 있어, 점검 후 새 단어를 배우려면 설정에서 꺼 주세요.'}
+          {state.settings.newWordsPaused
+            ? '설정에서 신규 단어 쉬기를 켜 두었어요. 남은 학습·복습 항목만 배정해요. 새 단어도 배우려면 설정에서 꺼 주세요.'
+            : '월말 점검이 남아 있어도 오늘과 다음 날 학습을 시작할 수 있어요. 미완료·보완 단어로 목표가 차면 새 단어는 배정되지 않을 수 있어요.'}
         </p>
       )}
       {new Date(date + "T12:00:00Z").getUTCDay() ===
@@ -240,7 +235,7 @@ export function TodayOverview({
         </button>
       )}
       <p className="small-note centered">
-        답을 먼저 보지 않고, 스스로 떠올리는 연습을 해요.
+        하루 약 15분 · 한국 시간 자정에 다음 학습일로 바뀌어요.
       </p>
     </section>
   );

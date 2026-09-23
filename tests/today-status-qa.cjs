@@ -43,7 +43,8 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     assert.match(await rows.nth(2).innerText(), /재학습 필요/);
     assert.match(await rows.nth(2).innerText(), /문장 보완 필요/);
     assert.equal(await rows.getByText('이월', { exact: true }).count(), 0);
-    await home.getByText(/이번 회차 3개 중 2개의 회상·문장 결과/).waitFor();
+    await home.getByText(/오늘 배정한 전체 3개 중 2개의 회상·문장 결과/).waitFor();
+    await home.getByText(/월말 점검이 남아 있어도 오늘과 다음 날 학습을 시작/).waitFor();
     await p.getByRole('region', { name: '이어서 할 점검', exact: true }).getByText('전체 3개 · 미점검 3개', { exact: true }).waitFor();
     assert.deepEqual(await get(c), before);
     checks.push('today progress, completed records, real difficulties and monthly waiting are distinct; read-only rendering preserves all saved data');
@@ -69,13 +70,13 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     await p.getByRole('heading', { name: '오늘의 작은 성취를 쌓았어요.', exact: true }).waitFor();
     assert.equal(await rows.getByText('오늘 학습 완료', { exact: true }).count(), 3);
     assert.equal(await rows.getByText('월말 점검 대기', { exact: true }).count(), 3);
-    await home.getByText(/신규 단어 쉬기 설정도 켜져 있어/).waitFor();
+    await home.getByText(/설정에서 신규 단어 쉬기를 켜 두었어요/).waitFor();
     await p.getByRole('button', { name: '오늘 단어 다시 보기', exact: true }).click();
     await p.getByRole('dialog').getByRole('button', { name: 'arrive', exact: true }).click();
     await p.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();
     await audit('today complete with pending monthly review');
     await p.screenshot({ path: out + '/completed-mobile.png', fullPage: true });
-    checks.push('finishing today preserves a separate monthly wait, explains both pause reasons and retains completed lesson review');
+    checks.push('finishing today preserves a separate monthly wait, explains explicit new-word pause and retains completed lesson review');
     const c2 = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: headers });
     const p2 = await c2.newPage(); await p2.goto(base); await saved(p2);
     assert.equal(await p2.locator('.today-word-status').getByText('오늘 학습 완료', { exact: true }).count(), 3);
