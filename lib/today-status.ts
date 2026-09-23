@@ -4,9 +4,16 @@ import {
   type RecordItem, type Session, type State,
 } from './learning.ts';
 
+export type RecordStatus = 'in-progress' | 'recorded' | 'session-ended';
+export const RECORD_STATUS_DISPLAY = {
+  'in-progress': { label: '진행 중', tone: 'neutral' },
+  recorded: { label: '기록 완료', tone: 'success' },
+  'session-ended': { label: '회차 종료', tone: 'neutral' },
+} as const satisfies Record<RecordStatus, { label: string; tone: 'neutral' | 'success' }>;
+
 type Notice = { label: string; warning: boolean };
 export type TodayWordStatus = {
-  learning: '오늘 진행 중' | '오늘 학습 완료' | '오늘 회차 종료' | null;
+  recordStatus: RecordStatus | null;
   notices: Notice[];
 };
 
@@ -70,9 +77,9 @@ export function todayWordStatuses(
     if (waiting.get(key)?.has('weekly'))
       notices.push({ label: '주간 점검 대기', warning: false });
 
-    const learning = !context ? null
-      : sessionRecordMeasured(context.session, context.record) ? '오늘 학습 완료'
-      : context.session.finished ? '오늘 회차 종료' : '오늘 진행 중';
+    const recordStatus: RecordStatus | null = !context ? null
+      : sessionRecordMeasured(context.session, context.record) ? 'recorded'
+      : context.session.finished ? 'session-ended' : 'in-progress';
     if (context?.session.finished && !sessionRecordMeasured(context.session, context.record))
       notices.push({ label: '미완료 연습 남음', warning: false });
     if (!context && !notices.length && hasReviewWork(p)) {
@@ -85,6 +92,6 @@ export function todayWordStatuses(
     if (!context && !notices.length)
       notices.push({ label: p?.familiarity === 'uncertain' ? '헷갈리는 단어'
         : p?.familiarity === 'new' ? '처음 보는 단어' : '학습 후보', warning: false });
-    return [id, { learning, notices }];
+    return [id, { recordStatus, notices }];
   }));
 }

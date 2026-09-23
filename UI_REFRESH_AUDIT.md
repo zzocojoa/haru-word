@@ -109,3 +109,7 @@ v38(`b29bf8b7af30626da144a990cc2f2ba064d952b2`) 배포 후 완료 기준을 대�
 - 설정 변경을 막는 시간 확인/저장/불러오기/로그인 상태를 창 안에서 설명한다. 기존 시간 재확인, 저장 재시도, 충돌 백업·확인 후 최신 기록 불러오기를 재사용하며 창 뒤에 중복 오류 배너를 만들지 않는다. 쓰기 차단 정책 자체는 유지한다.
 - 단위 212개, settings-dialog/ui-plan-contract/clock-continuity 브라우저 검사, 타입·린트·빌드·diff 검사 통과. 새 검사는 5폭×100/200% 글자, 상태별 axe, 재접속, 충돌 취소/백업/복구, 과거 성적 불변성을 확인한다. 결과는 outputs/settings-dialog/에 있다.
 - 위험도 낮음. API·DB·저장 형식·인증·AI 호출·진단 로그 변경과 마이그레이션은 없다. 주요 실패 모드는 기기별 시트 배치와 오래된 스타일 캐시이며, 실제 iPhone에서 수정 후의 모양은 아직 확인되지 않았다. 롤백은 v39(0c3d54c3edd5afdb8e65fb4712b762769e31f129) 재게시다.
+
+## 상태 표시 리팩토링 검증 (v41)
+
+표시 구조만 바꾸고 v40 디자인을 유지했다. AvailabilityNotice가 설정/페이지의 안내를 담당하며 recordStatus는 기록 완료와 독립 성공을 분리한다. 점검 집계는 순수 함수로 옮겼다. 단위 215개와 브라우저 6개(settings-dialog, today-status, clock-continuity, daily-boundary, ui-plan-contract, review-extension), 타입·린트·빌드 통과. 5폭/200% 글자 및 axe 검사는 기존 UI 계약/설정 검사에 포함한다. 실제 iPhone 검증은 별도이며 롤백은 v40이다. 운영·데이터·로그 계약은 OPERATIONS.md를 따른다.

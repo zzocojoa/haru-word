@@ -1,6 +1,6 @@
 "use client";
 import { POS } from "@/lib/learning";
-import { todayWordStatuses } from "@/lib/today-status";
+import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
 import { useMemo, useState } from "react";
 import { dailyOrigins } from "@/lib/study-date-correction";
 import { HelpDetails, StatusBadge } from "../study-ui";
@@ -61,11 +61,11 @@ export function TodayOverview({
   const statuses = useMemo(() => todayWordStatuses(state, visibleIds, date, unfinished),
     [state, visibleIds, date, unfinished]);
   const assignmentTypes = useMemo(() => Object.fromEntries(visibleIds.map(id => [id, dailyOrigins(state, [id], date).returning ? '이전 학습·복습 항목' : '새 학습 항목'])), [state, visibleIds, date]);
-  const checked = visibleIds.filter(id => statuses[id].learning === '오늘 학습 완료').length;
+  const checked = visibleIds.filter(id => statuses[id].recordStatus === 'recorded').length;
   const assigned = assignedIds.length > 0;
   const [year, month, day] = date.split('-').map(Number);
   const [filter, setFilter] = useState<'all' | 'remaining'>('all');
-  const filteredIds = visibleIds.filter(id => filter === 'all' || statuses[id].learning !== '오늘 학습 완료');
+  const filteredIds = visibleIds.filter(id => filter === 'all' || statuses[id].recordStatus !== 'recorded');
   return (
     <section className="learning-panel home-panel">
       <div className="panel-top">
@@ -232,7 +232,7 @@ export function TodayOverview({
                 </small>
               </div>
               <div className="today-word-status">
-                {status.learning && <StatusBadge tone={status.learning === '오늘 학습 완료' ? 'success' : 'neutral'}>{status.learning === '오늘 학습 완료' ? '기록 완료' : status.learning === '오늘 회차 종료' ? '회차 종료' : '진행 중'}</StatusBadge>}
+                {status.recordStatus && <StatusBadge tone={RECORD_STATUS_DISPLAY[status.recordStatus].tone}>{RECORD_STATUS_DISPLAY[status.recordStatus].label}</StatusBadge>}
                 {status.notices.some(n => n.warning) && <StatusBadge tone="warning">보완 필요</StatusBadge>}
                 {<HelpDetails title="상태 상세"><p>{assignmentTypes[id]}</p><ul>{status.notices.map(notice => <li key={notice.label}>{notice.label}</li>)}</ul></HelpDetails>}
               </div>

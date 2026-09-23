@@ -1,4 +1,10 @@
-import { sessionRecordComplete, sessionRecordMeasured, type Session } from './learning.ts';
+import { sessionRecordComplete, sessionRecordMeasured, missingReviewTargets, reviewRemaining, type Session, type State } from './learning.ts';
+
+/** Counts include newly learned period targets without modifying the saved queue. */
+export function pendingReviewCounts(state: State, session: Session) {
+  const added = missingReviewTargets(state, session).length;
+  return { total: session.ids.length + added, unmeasured: reviewRemaining(session) + added, added };
+}
 
 /** Presentation counts, not a new assessment or carryover policy. */
 export function sessionCounts(session: Session) {

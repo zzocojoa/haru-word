@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { todayWordStatuses } from '../lib/today-status.ts';
+import { todayWordStatuses, RECORD_STATUS_DISPLAY } from '../lib/today-status.ts';
 import { EMPTY, dailyAssignedIds, emptyRecord, ensureCarryover, pickDaily } from '../lib/learning.ts';
 
 const date = '2026-09-23';
@@ -15,25 +15,37 @@ const status = (state, current) => todayWordStatuses(state, [word.id], date, cur
 const labels = value => value.notices.map(n => n.label);
 const monthly = (patch = {}) => session({ id: 'monthly', kind: 'monthly', period: '2026-09', stage: 'ko', ...patch });
 
+test('recorded help is complete for recording, even while the session and remediation stay open', () => {
+  const state=fresh(), r=record({en:'help',ko:'independent',sentenceStatus:'improve'});
+  state.sessions.daily=session({records:{[word.id]:r}});
+  state.progress[word.id]={...r,needsReview:true};
+  const before=structuredClone(state);
+  assert.equal(status(state).recordStatus,'recorded');
+  assert.deepEqual(labels(status(state)),['재학습 필요','문장 보완 필요']);
+  assert.equal(state.sessions.daily.finished,false);
+  assert.deepEqual(RECORD_STATUS_DISPLAY.recorded,{label:'기록 완료',tone:'success'});
+  assert.deepEqual(state,before);
+});
+
 test('starting a new daily session is shown as today in progress, never historical carryover', () => {
   let state = fresh(); const s = session(); state.sessions[s.id] = s;
   state = ensureCarryover(state, s);
   assert.equal(state.progress[word.id].needsReview, true);
-  assert.deepEqual(status(state), { learning: '오늘 진행 중', notices: [] });
+  assert.deepEqual(status(state), { recordStatus: 'in-progress', notices: [] });
 });
 
 test('today completion and an unmeasured monthly check coexist without implying failure', () => {
   const state = fresh(); const s = session({ finished: true, stage: 'done', records: { [word.id]: passed() } });
   state.sessions = { daily: s, monthly: monthly() };
   state.progress[word.id] = { ...passed(), needsReview: true };
-  assert.deepEqual(status(state), { learning: '오늘 학습 완료', notices: [{ label: '월말 점검 대기', warning: false }] });
+  assert.deepEqual(status(state), { recordStatus: 'recorded', notices: [{ label: '월말 점검 대기', warning: false }] });
 });
 
 test('actual recall and sentence gaps stay distinct from pending checks and preserve today completion', () => {
   const state = fresh(); state.sessions.daily = session({ records: { [word.id]: passed() } });
   state.progress[word.id] = { ...passed(), en: 'help', sentenceStatus: 'improve' };
   const value = status(state);
-  assert.equal(value.learning, '오늘 학습 완료');
+  assert.equal(value.recordStatus, 'recorded');
   assert.deepEqual(value.notices, [{ label: '재학습 필요', warning: true }, { label: '문장 보완 필요', warning: true }]);
 });
 
@@ -41,7 +53,7 @@ test('skipping a required sentence ends the session without labelling an unmeasu
   const state = fresh(); const r = { ...passed(), sentenceStatus: 'unmeasured' };
   state.sessions.daily = session({ finished: true, records: { [word.id]: r } });
   state.progress[word.id] = { ...r, needsReview: true };
-  assert.deepEqual(status(state), { learning: '오늘 회차 종료', notices: [{ label: '미완료 연습 남음', warning: false }] });
+  assert.deepEqual(status(state), { recordStatus: 'session-ended', notices: [{ label: '미완료 연습 남음', warning: false }] });
 });
 
 test('pending checks follow each kind measurement rule and include newly added period targets', () => {
@@ -61,7 +73,7 @@ test('review needs never leak from a different sense or overwrite a newer succes
   state.sessions.monthly = monthly({ period: '2026-08', records: { [word.id]: record({ meaning: '다른 뜻' }) } });
   state.progress[word.id] = { meaning: '다른 뜻', en: 'help', needsReview: true,
     senses: { [material.meaning]: { ...passed(), needsReview: false } } };
-  assert.deepEqual(status(state), { learning: '오늘 학습 완료', notices: [] });
+  assert.deepEqual(status(state), { recordStatus: 'recorded', notices: [] });
 });
 
 test('earlier unmeasured daily work is identifiable, but unexplained legacy flags are not called errors', () => {
@@ -70,13 +82,13 @@ test('earlier unmeasured daily work is identifiable, but unexplained legacy flag
   state.progress[word.id] = { meaning: material.meaning, needsReview: true };
   assert.deepEqual(labels(status(state)), ['이전 학습 미완료']);
   state.sessions = {};
-  assert.deepEqual(status(state), { learning: null, notices: [{ label: '복습 예정', warning: false }] });
+  assert.deepEqual(status(state), { recordStatus: null, notices: [{ label: '복습 예정', warning: false }] });
 });
 
 test('the displayed unfinished session takes precedence over a later completed session', () => {
   const state = fresh(); const current = session(); state.sessions.daily = current;
   state.sessions.later = session({ id: 'later', finished: true, createdAt: date + 'T01:00:00Z', records: { [word.id]: passed() } });
-  assert.equal(status(state, current).learning, '오늘 진행 중');
+  assert.equal(status(state, current).recordStatus, 'in-progress');
 });
 
 test('status rendering is read-only and leaves assignment ordering, records and results unchanged', () => {
@@ -99,10 +111,10 @@ test('all same-day rounds count together while other dates and periodic checks s
   const before = structuredClone(state), ids = dailyAssignedIds(state, date);
   assert.deepEqual(ids, [word.id, extraId]);
   const statuses = todayWordStatuses(state, ids, date, second);
-  assert.equal(statuses[word.id].learning, '오늘 학습 완료');
-  assert.equal(statuses[extraId].learning, '오늘 진행 중');
+  assert.equal(statuses[word.id].recordStatus, 'recorded');
+  assert.equal(statuses[extraId].recordStatus, 'in-progress');
   assert.deepEqual(dailyAssignedIds(state, '2026-09-24'), []);
-  assert.equal(todayWordStatuses(state, [word.id], '2026-09-24')[word.id].learning, null);
+  assert.equal(todayWordStatuses(state, [word.id], '2026-09-24')[word.id].recordStatus, null);
   assert.deepEqual(state, before);
 });
 

@@ -16,9 +16,8 @@ import { CompletedLesson } from "./completed-lesson";
 import { CandidatePreparation } from "./learning/candidate-preparation";
 import { FamiliarityAssessment } from "./learning/familiarity-assessment";
 import { LearningAside } from "./learning/learning-aside";
-import { SaveError } from "./learning/save-error";
+import { AvailabilityNotice } from "./learning/availability-notice";
 import { SaveStatus } from "./learning/save-status";
-import { ClockStatus } from "./learning/clock-status";
 import { SettingsDialog } from "./learning/settings-dialog";
 import { SourceDialog } from "./learning/source-dialog";
 import { TodayOverview } from "./learning/today-overview";
@@ -105,22 +104,13 @@ export default function LearningApp({
   } = useLearningController(initialServerTime);
   const keyboardOpen = useKeyboardInset();
   const visitTab = useTabPosition(tab, store.epoch, setTab);
-  // Render recovery controls on the active surface, never behind the settings modal.
-  const connectionStatus = (
-    <>
-      {error && (
-        <SaveError
-          saveError={saveError}
-          error={error}
-          conflict={conflict}
-          saving={saving}
-          unsaved={unsaved}
-          store={store}
-          state={state}
-        />
-      )}
-      {!loading && signedIn && <ClockStatus clock={clock} />}
-    </>
+  const availability = (
+    <AvailabilityNotice
+      surface={settings ? "settings" : "page"}
+      loading={loading} saving={saving} signedIn={signedIn} unsaved={unsaved}
+      error={error} saveError={saveError} conflict={conflict}
+      store={store} state={state} clock={clock}
+    />
   );
   return (
     <main
@@ -233,7 +223,7 @@ export default function LearningApp({
               </a>
             </div>
           )}
-          {!settings && connectionStatus}
+          {!settings && availability}
           {message && (
             <p className="notice" role="status">
               {message}
@@ -424,23 +414,7 @@ export default function LearningApp({
         changeGoal={changeGoal}
         save={save}
         beginAssessment={beginAssessment}
-        availability={
-          <>
-            {connectionStatus}
-            {loading ? (
-              <p className="notice" role="status">기록을 불러오면 설정을 변경할 수 있어요.</p>
-            ) : saving ? (
-              <p className="notice" role="status">변경한 설정을 저장하고 있어요.</p>
-            ) : !signedIn ? (
-              <div className="notice">
-                <p>로그인하면 설정을 변경할 수 있어요.</p>
-                <a className="text-button" href="/signin-with-chatgpt?return_to=%2F" target="_top">로그인하기</a>
-              </div>
-            ) : unsaved && !error ? (
-              <p className="notice" role="status">변경 내용을 저장한 뒤 설정을 변경할 수 있어요.</p>
-            ) : null}
-          </>
-        }
+        availability={availability}
       />
       {correctingSession && (
         <StudyDateDialog
