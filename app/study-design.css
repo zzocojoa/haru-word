@@ -1486,7 +1486,14 @@ select {
   color: var(--ink);
 }
 .study-date-dialog input[type=date] {
+  /* Native date controls must shrink inside the mobile dialog body. */
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
   min-height: 44px;
   padding: 10px;
   border: 1px solid var(--border);
@@ -4300,6 +4307,11 @@ footer {
   padding: var(--space-1);
   margin: -4px;
   scroll-padding-block: 8px;
+}
+.study-date-dialog .dialog-scroll {
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
 }
 .dialog-actions {
   flex: 0 0 auto;
