@@ -19,6 +19,29 @@ const freeze = value => {
   return value;
 };
 
+test('extracted controller and validation boundaries have no runtime import cycles',()=>{
+  const visited=new Set();
+  function visit(file, stack=[]){
+    assert.ok(!stack.includes(file),`Runtime cycle: ${[...stack,file].map(f=>path.relative(root,f)).join(' -> ')}`);
+    if(visited.has(file)||file.endsWith('.json'))return;
+    const source=ts.createSourceFile(file,readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true);
+    for(const statement of source.statements){
+      if(!ts.isImportDeclaration(statement)&&!ts.isExportDeclaration(statement))continue;
+      if(statement.isTypeOnly||statement.importClause?.isTypeOnly)continue;
+      const named=statement.importClause?.namedBindings||statement.exportClause;
+      if(named?.elements?.length&&named.elements.every(item=>item.isTypeOnly))continue;
+      const specifier=statement.moduleSpecifier?.text;
+      if(!specifier||(!specifier.startsWith('.')&&!specifier.startsWith('@/')))continue;
+      const base=specifier.startsWith('@/')?path.resolve(root,specifier.slice(2)):path.resolve(path.dirname(file),specifier);
+      const dependency=[base,base+'.ts',base+'.tsx',path.join(base,'index.ts'),path.join(base,'index.tsx')].find(f=>existsSync(f)&&/\.(tsx?|json)$/.test(f));
+      assert.ok(dependency,`Unresolved local dependency: ${specifier}`);
+      visit(dependency,[...stack,file]);
+    }
+    visited.add(file);
+  }
+  for(const entry of ['app/learning/use-learning-controller.ts','app/study/use-study-session-controller.ts','lib/learning-commands.ts','lib/learning-api.ts','lib/validation.ts','lib/backup.ts'])visit(path.join(root,entry));
+});
+
 test('learning facade retains the pre-refactor public runtime API', () => {
   const expected = `EMPTY FAMILIARITY_TEXT KIND_TEXT LEVELS MAX_DAILY_GOAL POS RESULT_TEXT SENTENCE_TEXT allSenses applyRecord assessmentAdvice assessmentSample confirmFamiliarity continueBatch currentId dailyAssignedIds dailyMeaning dailyReplaySources emptyRecord ensureCarryover entryIdFor exportLog exportTutor extendReviewSession hasReviewWork isComplete learningMetrics missingReviewTargets needsInitialAssessment newSession nextAction pendingReviews periodKey pickDaily practiceIds practiceTargets recordFamiliarity repeatDailySession revealFamiliarity reviewBatchEnd reviewIds reviewRemaining reviewTargets selectSense senseProgress sessionRecordComplete sessionRecordMeasured stepSession storeSense targetIdentity today weekStart`.split(' ');
   expected.push('reviewWeeks'); // Additive calendar helper; all prior exports remain.

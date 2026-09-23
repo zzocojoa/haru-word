@@ -1,5 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync,mkdirSync} from 'node:fs';import {DatabaseSync} from 'node:sqlite';import {build} from 'esbuild';
 import {EMPTY,newSession,applyRecord,ensureCarryover,continueBatch,repeatDailySession} from '../lib/learning.ts';
+import { invalidSessionCases } from './invalid-session-cases.mjs';
 mkdirSync('work/backup-tests',{recursive:true});
 await build({entryPoints:['lib/backup.ts'],outfile:'work/backup-tests/backup.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
 const {parseBackup,makeBackup,replacementChanges,restoreChunks,RESTORE_CHUNK_BYTES}=await import('../work/backup-tests/backup.mjs');
@@ -55,6 +56,15 @@ globalThis.backupRuntime={user:{userId:'owner'},db};const {POST}=await import('.
 const req=(state=fixture(),revision=0,headers={})=>new Request('https://study.example/api/state/restore',{method:'POST',headers:{'content-type':'application/json',origin:'https://study.example','x-study-revision':String(revision),...headers},body:envelope(state)});
 const seed=()=>{sqlite.exec('DELETE FROM learner_states; DELETE FROM word_progress; DELETE FROM study_sessions; DELETE FROM ai_daily_usage;');for(const user of ['owner','other']){sqlite.prepare('INSERT INTO learner_states VALUES (?,0,?,?)').run(user,JSON.stringify(EMPTY.settings),'2026-09-22');sqlite.prepare('INSERT INTO word_progress VALUES (?,?,?)').run(user,words.at(-1).id,JSON.stringify({notes:'existing '+user}));sqlite.prepare('INSERT INTO ai_daily_usage VALUES (?,?,?,?)').run(user,'2026-09-22',4,0);}failureAt=-1;batches=0;};
 const dump=()=>JSON.stringify(['learner_states','word_progress','study_sessions','ai_daily_usage'].map(table=>sqlite.prepare('SELECT * FROM '+table+' ORDER BY user_id').all()));
+test('restore rejects the same invalid session positions as delta saves without DB changes',async()=>{
+ seed();const before=dump();
+ for(const [name,mutate] of invalidSessionCases){
+  const state=fixture();mutate(Object.values(state.sessions)[0]);
+  assert.equal((await POST(req(state))).status,400,name);
+  assert.equal(dump(),before,name);
+ }
+ assert.equal(batches,0);
+});
 test('restore rejects unauthenticated, cross-site, malformed, invalid and oversized requests without database writes',async()=>{
  seed();const before=dump();backupRuntime.user=null;assert.equal((await POST(req())).status,401);backupRuntime.user={userId:'owner'};
  assert.equal((await POST(req(undefined,0,{origin:'https://other.example'}))).status,403);assert.equal((await POST(req(undefined,0,{'sec-fetch-site':'cross-site'}))).status,403);assert.equal((await POST(req(undefined,0,{'content-type':'text/plain'}))).status,415);

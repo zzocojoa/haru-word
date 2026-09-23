@@ -67,8 +67,16 @@ export function createStateSchemas(entryId: z.ZodType<string>) {
         const limit = s.stage === 'warmup' ? s.warmupIds.length : s.ids.length;
         if (s.finished !== (s.stage === 'done') || s.retryMode && !s.retry.length || s.index > limit || (!s.finished && !s.retryMode && s.stage !== 'checkpoint' && s.index >= limit))
             issue('학습을 이어갈 위치가 맞지 않아요.');
-        if (s.stage === 'checkpoint' && ((s.kind !== 'monthly' && s.kind !== 'weekly') || s.index >= s.ids.length) || s.resumeAfterRetry && s.resumeAfterRetry.index > s.ids.length)
+        const validResume = (cursor: NonNullable<typeof s.resumeAfterRetry>) => {
+            const end = cursor.stage === 'warmup' ? s.warmupIds.length : s.ids.length;
+            if (cursor.stage === 'done') return cursor.index <= end;
+            if (cursor.stage === 'checkpoint' && !['monthly', 'weekly'].includes(s.kind)) return false;
+            return cursor.index < end;
+        };
+        if (s.stage === 'checkpoint' && ((s.kind !== 'monthly' && s.kind !== 'weekly') || s.index >= s.ids.length) || s.resumeAfterRetry && !validResume(s.resumeAfterRetry))
             issue('점검을 이어갈 위치가 맞지 않아요.');
+        if (s.batchStart !== undefined && s.batchStart >= s.ids.length)
+            issue('점검 묶음의 시작 위치가 맞지 않아요.');
         if (s.reviewEnd !== undefined && (!['weekly', 'monthly'].includes(s.kind) || s.reviewEnd >= s.ids.length || s.reviewEnd <= (s.batchStart || 0)))
             ctx.addIssue({ code: 'custom', message: '추가 점검의 진행 경계가 맞지 않습니다.' });
         for (const [key, r] of Object.entries(s.records))

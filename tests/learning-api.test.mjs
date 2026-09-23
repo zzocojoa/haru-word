@@ -5,10 +5,13 @@ import { build } from 'esbuild';
 import { EMPTY } from '../lib/learning.ts';
 
 mkdirSync('work/learning-api-tests', { recursive: true });
-await build({ entryPoints: ['lib/learning-api.ts'], outfile: 'work/learning-api-tests/api.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
+const bundle = await build({ entryPoints: ['lib/learning-api.ts'], outfile: 'work/learning-api-tests/api.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent', metafile: true });
 const api = await import('../work/learning-api-tests/api.mjs');
 const originalFetch = globalThis.fetch;
 after(() => { globalThis.fetch = originalFetch; });
+test('client response validation does not include vocabulary or content datasets',()=>{
+  assert.deepEqual(Object.keys(bundle.metafile.inputs).filter(file=>/data[\\/].*\.json$/.test(file)),[]);
+});
 
 test('client load/save/restore keep their exact wire contracts and do not mutate state', async () => {
   const calls = [], state = structuredClone(EMPTY), before = structuredClone(state);

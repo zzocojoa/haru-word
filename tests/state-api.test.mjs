@@ -4,6 +4,7 @@ import { readFileSync, mkdirSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import { build } from 'esbuild';
 import { EMPTY, newSession, today } from '../lib/learning.ts';
+import { invalidSessionCases } from './invalid-session-cases.mjs';
 
 mkdirSync('work/state-api-tests', { recursive: true });
 await build({
@@ -88,14 +89,9 @@ test('auth, origin, media type, JSON and UTF-8 size fail before any database mut
 
 test('session-local invariants reject corrupt deltas before any database write', async () => {
   const before = dump();
-  for (const mutate of [
-    s => { s.date = '2026-02-30'; }, s => { s.index = 999; },
-    s => { delete s.records[s.ids[0]]; }, s => { s.finished = true; },
-    s => { s.retryMode = true; }, s => { s.period = '2026-13-01'; },
-    s => { s.resumeAfterRetry = { stage: 'ko', index: 999 }; },
-  ]) {
+  for (const [name, mutate] of invalidSessionCases) {
     const s = session(); mutate(s);
-    assert.equal((await route.PUT(req(delta(s)))).status, 400);
+    assert.equal((await route.PUT(req(delta(s)))).status, 400, name);
     assert.deepEqual(dump(), before);
   }
   assert.equal(batches, 0);
