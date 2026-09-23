@@ -16,11 +16,11 @@ import {
 } from "@/components/ui/select";
 import { MAX_DAILY_GOAL } from "@/lib/learning";
 import { LevelSelect } from "../ui";
-import type { LearningController } from "./use-learning-controller";
+import type { LearningViewProps } from "./types";
 import { HelpDetails } from "../study-ui";
 import { DiagnosticDownload } from "./diagnostic-download";
 type SettingsDialogProps = Pick<
-  LearningController,
+  LearningViewProps,
   | "settings"
   | "setSettings"
   | "state"

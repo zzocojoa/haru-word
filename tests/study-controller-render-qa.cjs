@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { build } = require('esbuild');
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const dir = 'work/draft-controller-tests';
 fs.mkdirSync(dir, { recursive: true });
 (async () => {

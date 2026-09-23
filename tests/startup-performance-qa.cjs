@@ -1,10 +1,10 @@
 // Local built Worker and synthetic identities. No hosted learner records.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict'),zlib=require('node:zlib');
-const base='http://127.0.0.1:8787',out='outputs/startup-performance';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/startup-performance';fs.mkdirSync(out,{recursive:true});
 (async()=>{const browser=await chromium.launch(),samples=[],errors=[];try{
  for(let i=0;i<3;i++){
-  const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':'startup_'+Date.now()+'_'+i,'oai-authenticated-user-email':'startup@example.test'}});
+  const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('startup_')+'_'+i,'oai-authenticated-user-email':'startup@example.test'}});
   const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
   await p.addInitScript(()=>{window.__startup={longTasks:[],lcp:0};new PerformanceObserver(l=>window.__startup.longTasks.push(...l.getEntries().map(e=>Math.round(e.duration)))).observe({type:'longtask',buffered:true});new PerformanceObserver(l=>{window.__startup.lcp=l.getEntries().at(-1)?.startTime||0}).observe({type:'largest-contentful-paint',buffered:true});});
   const cdp=await c.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});

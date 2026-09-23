@@ -1,7 +1,7 @@
 // Built local Worker only; every identity and record below is synthetic.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base='http://127.0.0.1:8787',out='outputs/backup-restore';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/backup-restore';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const checks=[],errors=[],a11y=[],performance=[];let serial=0,posts=0,aiCalls=0;
@@ -15,7 +15,7 @@ const sample=()=>{
  state.sessions[id]={id,kind:'daily',date,period:date,ids:[w.id],wordKeys:{[w.id]:'arrive'},warmupIds:[],stage:'ko',index:0,records:{[w.id]:{entryId:w.id,material:content[w.id],meaning:content[w.id].meaning,familiarity:'known',en:'independent',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:'I arrived at home.',notes:'내 메모',draft:{answer:'arr',revealed:false,hinted:false,stage:'ko',retry:false},learnedOn:date}},retry:[],retryMode:false,elapsed:173,finished:false,paused:true,createdAt:new Date().toISOString()};return state;
 };
 (async()=>{const browser=await chromium.launch({headless:true});try{
- const make=async()=>{const headers={'oai-authenticated-user-id':'backup_'+Date.now()+'_'+serial++,'oai-authenticated-user-email':'backup@example.test'};const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:headers});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>{if(r.url().endsWith('/api/state/restore'))posts++;if(r.url().includes('/api/sentence-feedback'))aiCalls++});await p.goto(base);await saved(p);return {c,p,headers}};
+ const make=async()=>{const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('backup_')+'_'+serial++,'oai-authenticated-user-email':'backup@example.test'};const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:headers});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>{if(r.url().endsWith('/api/state/restore'))posts++;if(r.url().includes('/api/sentence-feedback'))aiCalls++});await p.goto(base);await saved(p);return {c,p,headers}};
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  const get=async c=>{const r=await c.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};
  const log=async p=>p.getByRole('tab',{name:'학습 기록',exact:true}).click();
@@ -26,7 +26,7 @@ const sample=()=>{
  const confirm=async p=>{await p.getByRole('button',{name:'이 백업으로 복원',exact:true}).click();await p.getByRole('alertdialog').getByRole('button',{name:'기록 교체 · 복원',exact:true}).click()};
  const success=async p=>{await p.getByRole('heading',{name:'백업을 복원했어요.',exact:true}).waitFor();await saved(p)};
  const close=async p=>{await p.getByRole('button',{name:'학습 기록 확인하기',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});await p.locator('[data-backup-trigger]:focus').waitFor({state:'visible',timeout:3000})};
- const axe=async(p,label)=>{await p.addScriptTag({path:'work/axe/package/axe.min.js'});const r=await p.evaluate(async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});a11y.push({label,violations:r});assert.deepEqual(r,[],label)};
+ const axe=async(p,label)=>{await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const r=await p.evaluate(async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return r.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))});a11y.push({label,violations:r});assert.deepEqual(r,[],label)};
  const {c,p,headers}=await make();let data=await get(c);const old=words.find(w=>w.word==='busy'&&w.pos==='adj.');assert.equal((await c.request.put(base+'/api/state',{data:{revision:data.revision,progress:{[old.id]:{meaning:'바쁜',notes:'복원 전 보관할 기록'}},sessions:{}}})).status(),200);await p.reload();await saved(p);const original=await get(c);
  await open(p);for(const bad of ['not JSON',{...envelope(empty()),format:'haru-words-v2'},{...envelope(empty()),state:{...empty(),settings:{...empty().settings,activeSessionId:crypto.randomUUID()}}}]){await file(p,bad);await p.getByRole('dialog').getByRole('alert').waitFor();assert.equal(await p.getByRole('table').count(),0);assert.deepEqual(await get(c),original)}
  assert.equal(posts,0);await axe(p,'invalid file');checks.push('invalid JSON, unsupported version and broken references never reach the restore endpoint');

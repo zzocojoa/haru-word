@@ -1,9 +1,9 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8787';const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
+const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 (async()=>{const browser=await chromium.launch({headless:true});const checks=[];const errors=[];
  try{
-  const headers={'oai-authenticated-user-id':'repeat_'+Date.now(),'oai-authenticated-user-email':'repeat@example.test'};
+  const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('repeat_'),'oai-authenticated-user-email':'repeat@example.test'};
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});let p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
   const get=async()=> (await context.request.get(base+'/api/state')).json();const saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
   const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());

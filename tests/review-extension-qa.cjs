@@ -1,7 +1,7 @@
 // Local built Worker only; synthetic accounts, no real learner records or AI calls.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base='http://127.0.0.1:8787',out='outputs/review-extension';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/review-extension';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const weekday=new Date(date+'T12:00:00Z');weekday.setUTCDate(weekday.getUTCDate()-(weekday.getUTCDay()+6)%7);const week=weekday.toISOString().slice(0,10);
@@ -11,7 +11,7 @@ const daily=ids=>{const id=crypto.randomUUID();return {id,kind:'daily',date,peri
 const checks=[],errors=[];
 (async()=>{const browser=await chromium.launch();try{
  for(const kind of ['weekly','monthly']){
-  const ctx=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':'review_extension_'+Date.now()+'_'+kind,'oai-authenticated-user-email':'test@example.test'}});
+  const ctx=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('review_extension_')+'_'+kind,'oai-authenticated-user-email':'test@example.test'}});
   const get=async()=>{const r=await ctx.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};let data=await get();
   const source=daily(firstIds),sid=crypto.randomUUID(),period=kind==='weekly'?week:date.slice(0,7);
   const review={...daily(firstIds),id:sid,kind,period,stage:'ko',index:1,finished:false,elapsed:120,records:Object.fromEntries(firstIds.map((id,i)=>[id,{...record(id),ko:i===0?'independent':'unmeasured',sentenceStatus:'unmeasured',sentence:'',notes:'keep review note',...(i===1?{draft:{answer:'kept answer',stage:'ko',retry:false,hinted:false,revealed:false}}:{})}])),...(kind==='monthly'?{batchSize:15,batchStart:0}:{})};

@@ -1,8 +1,8 @@
 "use client";
 import { Cloud, Loader2 } from "lucide-react";
-import type { LearningController } from "./use-learning-controller";
+import type { LearningViewProps } from "./types";
 type SaveStatusProps = Pick<
-  LearningController,
+  LearningViewProps,
   "unsaved" | "saving" | "loading" | "signedIn"
 >;
 export function SaveStatus({

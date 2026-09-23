@@ -1,7 +1,7 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs');
 (async()=>{const b=await chromium.launch();const results=[];try{
- const c=await b.newContext({extraHTTPHeaders:{'oai-authenticated-user-id':'axe_'+Date.now(),'oai-authenticated-user-email':'axe@example.test'},reducedMotion:'reduce',viewport:{width:390,height:844}});const p=await c.newPage();await p.goto('http://127.0.0.1:8787');await p.getByText('서버에 저장됨',{exact:true}).waitFor();await p.addScriptTag({path:process.env.AXE_CORE_PATH||'work/axe/package/axe.min.js'});
+ const c=await b.newContext({extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('axe_'),'oai-authenticated-user-email':'axe@example.test'},reducedMotion:'reduce',viewport:{width:390,height:844}});const p=await c.newPage();await p.goto(require('./qa/runtime.cjs').base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});
  const check=async name=>{const r=await p.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));results.push({name,violations:r.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})),incomplete:r.incomplete.map(v=>v.id)});};
  for(const width of [390,1440]){await p.setViewportSize({width,height:900});for(const name of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){await p.getByRole('tab',{name,exact:true}).click();await check(name+' '+width);}}
  await p.getByRole('button',{name:'학습 설정',exact:true}).click();await check('settings');await p.getByRole('button',{name:'Close',exact:true}).click();

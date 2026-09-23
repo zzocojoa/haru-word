@@ -1,12 +1,12 @@
 // Production-built Worker only. Every mutation uses an isolated local test account.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8787',out='outputs/comprehensive-audit';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/comprehensive-audit';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const record=id=>({meaning:content[id].meaning,en:'independent',ko:'independent',sentenceStatus:'written',sentence:'A saved example.',notes:'preserve this note',learnedOn:date});
 (async()=>{const browser=await chromium.launch();const checks=[],errors=[];let serial=0;
- const context=async()=>browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':'full_audit_'+Date.now()+'_'+serial++,'oai-authenticated-user-email':'audit@example.test'}});
+ const context=async()=>browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('full_audit_')+'_'+serial++,'oai-authenticated-user-email':'audit@example.test'}});
  const state=async ctx=>(await ctx.request.get(base+'/api/state')).json();
  const page=async ctx=>{const p=await ctx.newPage();p.on('pageerror',e=>errors.push(e.message));return p};
  const saved=async p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();

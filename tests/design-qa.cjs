@@ -1,8 +1,8 @@
 // Run against the local built Worker, using isolated accounts only.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
-const base='http://127.0.0.1:8787';
+const base=require('./qa/runtime.cjs').base;
 const out='outputs/open-design-ui';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));
 const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
@@ -11,7 +11,7 @@ const checks=[];const errors=[];
 (async()=>{
  const browser=await chromium.launch({headless:true});
  try {
-  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':'design_'+Date.now(),'oai-authenticated-user-email':'design@example.test'}});
+  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('design_'),'oai-authenticated-user-email':'design@example.test'}});
   const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
   const saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
   const state=async()=> (await context.request.get(base+'/api/state')).json();

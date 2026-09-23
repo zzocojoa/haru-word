@@ -7,7 +7,6 @@ import {
   ensureCarryover,
   entryIdFor,
   sessionRecordComplete,
-  stepSession,
   type Result,
   type SentenceResult,
   type Session,
@@ -18,6 +17,7 @@ import { useEffect, useRef, useState } from "react";
 import type { StudySessionProps } from "./types";
 import { useActivityTimer } from "./use-activity-timer";
 import { useStudyDraft } from "./use-study-draft";
+import { applyWarmupResult, pausedStudyState } from "@/lib/learning-commands";
 import { studyMaterial, withAnswerDraft } from "@/lib/study-draft";
 import { recordAvailability } from "@/lib/client-diagnostics";
 export function useStudySessionController({
@@ -130,23 +130,9 @@ export function useStudySessionController({
   }
   async function warmup(result: Result) {
     if (!id) return;
-    result = hint && result === "independent" ? "help" : result;
-    await commit({
-      ...state,
-      progress:
-        result === "help"
-          ? { ...state.progress, [entryId!]: { ...p, needsReview: true } }
-          : state.progress,
-      sessions: {
-        ...state.sessions,
-        [s.id]: stepSession({
-          ...timed(),
-          warmupDraft: undefined,
-          warmupResults: { ...s.warmupResults, [id]: result },
-        }),
-      },
-    });
+    await commit(applyWarmupResult(state, timed(), id, result, hint));
   }
+
   async function storeFeedback(feedback: SentenceFeedback) {
     if (!id) return false;
     const latest = currentState.current;
@@ -223,41 +209,8 @@ export function useStudySessionController({
     });
   }
   async function pauseAndExit() {
-    let next = {
-      ...state,
-      sessions: { ...state.sessions, [s.id]: { ...timed(), paused: true } },
-    };
-    if (id && s.stage === "learn")
-      next.sessions[s.id] = {
-        ...next.sessions[s.id],
-        records: {
-          ...s.records,
-          [id]: {
-            ...s.records[id],
-            meaning: meaning.trim(),
-            material: material(),
-          },
-        },
-      };
-    if (id && s.stage === "sentence")
-      next = applyRecord(
-        next,
-        next.sessions[s.id],
-        id,
-        { sentence, notes, spoken },
-        false,
-        activityDate(),
-      );
-    if (id) {
-      next = {
-        ...next,
-        sessions: {
-          ...next.sessions,
-          [s.id]: withAnswerDraft(next.sessions[s.id], id, draft),
-        },
-      };
-    }
-    next = ensureCarryover(next, next.sessions[s.id]);
+    const next = pausedStudyState(state, timed(), id, draft,
+      id && s.stage === "learn" ? material() : undefined, activityDate());
     setPaused(true);
     if (await save(next)) setShowSummary(true);
   }

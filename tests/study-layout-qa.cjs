@@ -1,14 +1,14 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 // Local synthetic learners only; test every stage at all required widths and text sizes.
-const base='http://127.0.0.1:8787',out='outputs/completion-matrix';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/completion-matrix';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const chosen=['breakfast','arrive','busy'].map(name=>words.find(w=>w.word===name));const ids=chosen.map(w=>w.id);
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 (async()=>{const browser=await chromium.launch();const rows=[],errors=[],issues=[];
 try{
  for(const stage of ['warmup','learn','en','ko','sentence']){
-  const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':'completion_'+stage+'_'+Date.now(),'oai-authenticated-user-email':'qa@example.test'}});
+  const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':'completion_'+stage+require('./qa/runtime.cjs').account('_'),'oai-authenticated-user-email':'qa@example.test'}});
   const get=async()=> (await c.request.get(base+'/api/state')).json();const initial=await get(),id=crypto.randomUUID();
   const session={id,kind:'daily',date,period:date,ids,warmupIds:stage==='warmup'?[ids[0]]:[],stage,index:0,records:Object.fromEntries(ids.map(id=>[id,{meaning:content[id].meaning,material:content[id],en:'unmeasured',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:'',notes:''}])),retry:[],retryMode:false,elapsed:0,paused:true,finished:false,createdAt:new Date().toISOString()};
   const res=await c.request.put(base+'/api/state',{data:{revision:initial.revision,settings:{...initial.state.settings,activeSessionId:id},progress:{},sessions:{[id]:session}}});assert.equal(res.status(),200,await res.text());

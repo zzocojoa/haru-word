@@ -1,8 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {requestJson,RequestTimeoutError} from '../lib/client-request.ts';
+import {requestJson,RequestTimeoutError,InvalidResponseError} from '../lib/client-request.ts';
+import { exportClientDiagnostics } from '../lib/client-diagnostics.ts';
 
 const untilAbort=signal=>new Promise((_,reject)=>{if(signal.aborted)reject(signal.reason);else signal.addEventListener('abort',()=>reject(signal.reason),{once:true});});
+test('response validation is diagnosed as invalid_response, not a successful write',async t=>{
+ t.mock.method(globalThis,'fetch',async()=>Response.json({}));
+ await assert.rejects(requestJson('/api/state',{method:'PUT'},100,()=>{throw new InvalidResponseError()}),InvalidResponseError);
+ const events=JSON.parse(exportClientDiagnostics()).events;
+ assert.equal(events.at(-1).outcome,'invalid_response');
+ assert.equal(events.filter(e=>e.request===events.at(-1).request&&e.outcome==='success').length,0);
+});
 test('header timeout aborts exactly one request and does not retry',async t=>{
  let calls=0,signal;t.mock.method(globalThis,'fetch',(_url,init)=>{calls++;signal=init.signal;return untilAbort(signal)});
  await assert.rejects(requestJson('/api/state',{},10),RequestTimeoutError);assert.equal(calls,1);assert.equal(signal.aborted,true);

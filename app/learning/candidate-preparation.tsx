@@ -2,9 +2,9 @@
 import { confirmFamiliarity } from "@/lib/learning";
 import { ArrowRight } from "lucide-react";
 import { FamiliarityCard } from "../familiarity-card";
-import type { LearningController } from "./use-learning-controller";
+import type { LearningViewProps } from "./types";
 type CandidatePreparationProps = Pick<
-  LearningController,
+  LearningViewProps,
   | "candidate"
   | "state"
   | "busy"

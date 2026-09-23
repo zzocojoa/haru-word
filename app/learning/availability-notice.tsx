@@ -1,9 +1,9 @@
 import { settingsActivity, SETTINGS_ACTIVITY_TEXT, type NoticeSurface } from '@/lib/learning-notices';
 import { ClockStatus } from './clock-status';
 import { SaveError } from './save-error';
-import type { LearningController } from './use-learning-controller';
+import type { LearningViewProps } from './types';
 
-type AvailabilityNoticeProps = Pick<LearningController,
+type AvailabilityNoticeProps = Pick<LearningViewProps,
   'loading' | 'saving' | 'signedIn' | 'unsaved' | 'error' | 'saveError' | 'conflict' | 'store' | 'state' | 'clock'
 > & { surface: NoticeSurface };
 

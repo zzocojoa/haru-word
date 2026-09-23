@@ -76,3 +76,13 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - `settings-dialog-qa.cjs`: 설정창의 반투명 배경, 16px 행 간격, 5폭×100/200% 글자, 고정 제목/닫기와 44px 조작을 확인한다. 시간 대기/오류/재확인, 저장 대기/오류/재시도, 충돌 백업/취소/명시적 재조회, 재접속 후 목표 값과 기존 성적 보존을 검사한다. 로컬 가상 계정만 사용하고 Google API는 호출하지 않는다. 상태별 axe 결과와 이미지는 `outputs/settings-dialog/`에 저장한다.
 
 - 상태 표시 리팩토링: `learning-notices.test.mjs`는 32개 상태 조합의 설정 안내 우선순위와 페이지 표시 제외를 검증한다. `today-status.test.mjs`는 기록 완료와 보완 필요/회차 진행의 공존 및 내부 상태 코드를 검사한다. `learning-display.test.mjs`는 새 뜻·누락 기록을 포함한 월간/주간 점검 집계와 입력/배정 불변성을 검사한다. `settings-dialog-qa.cjs`는 설정창 닫기/키보드 재열기 전후 단일 복구 버튼과 기존 재시도 동작을 검증한다.
+
+## 저장 계약·편집기 리팩토링
+
+- `editor-save-qa.cjs`: 저장 중 입력·뜻 전환 잠금, A 저장 중 B 열기, 같은 단어 재열기, 실패·수동 재시도·재접속, 개인 단어 추가와 접근성을 검사한다. 창 닫기와 다른 단어 열기는 허용한다.
+- `response-contract-qa.cjs`: 서버가 저장했지만 성공 본문의 revision이 누락된 경우를 주입한다. 초안과 미저장 상태, 백업·명시적 재조회, 자동 재전송 없음을 확인한다.
+- `learning-commands.test.mjs`: 단어장 수정·기억 깨우기·중단 초안의 불변성과 성적 보존을 검사한다. `learning-api.test.mjs`와 `state-api.test.mjs`는 잘못된 응답과 회차 내부 오류의 저장 거부를 확인한다.
+- 공통 `tests/qa/runtime.cjs`는 Playwright·axe 경로와 loopback 주소, 충돌 없는 가상 계정을 제공한다. 특정 PC 사용자 경로는 소스에 넣지 않는다. `QA_PLAYWRIGHT_PATH`에는 설치된 Playwright 모듈 디렉터리를 지정하며, 생략 시 일반 모듈 해석을 사용한다. `AXE_CORE_PATH` 기본값은 `work/axe/package/axe.min.js`, `QA_BASE_URL` 기본값은 `http://127.0.0.1:8787`이다.
+- 빌드한 로컬 Worker를 시작한 뒤 `npm run test:browser`로 기능 검사를 순서대로 실행한다. A1~B2 콘텐츠 시나리오가 모두 포함된다. `npm run test:performance`는 성능 두 검사를 단독 실행한다. `node tests/qa/run.cjs functional --list`로 실행 목록을 확인할 수 있다.
+- 실행 도구는 각 검사 전에 로컬 서버 응답 본문까지 확인한다. 재접속 회귀 검사는 브라우저 초점을 먼저 확보하고 이어가기 요청의 실제 저장 응답을 기다린다. 이전 저장 상태 표시나 검사 자동 재시도로 실패를 숨기지 않는다.
+- 결과와 검사별 로그는 `outputs/browser-suite/<group>-<run>/`에 모인다. 실패·시간 초과·미완료는 전체 성공으로 처리하지 않는다. 각 브라우저 스크립트의 직접 실행도 유지한다. 실제 사용자 계정이나 운영 URL을 환경변수로 넣지 않는다.

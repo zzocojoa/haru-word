@@ -1,8 +1,8 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base='http://127.0.0.1:8787',out='outputs/review-calendar';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/review-calendar';fs.mkdirSync(out,{recursive:true});
 (async()=>{const browser=await chromium.launch();const checks=[],errors=[];try{
- const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':'calendar_'+Date.now(),'oai-authenticated-user-email':'qa@example.test'}}),p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
+ const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('calendar_'),'oai-authenticated-user-email':'qa@example.test'}}),p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
  const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
  const get=async()=>(await c.request.get(base+'/api/state')).json();let data=await get();
  const sessions={},progress={};for(const [i,date] of ['2024-01-01','2025-12-31'].entries()){
@@ -20,7 +20,7 @@ const base='http://127.0.0.1:8787',out='outputs/review-calendar';fs.mkdirSync(ou
  await month.selectOption('2025-12');assert.equal(await month.inputValue(),'2025-12');assert.equal(await p.locator('[data-review-kind=monthly] .review-count b').innerText(),'1');
  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();await p.getByRole('tab',{name:'주간·월말 점검',exact:true}).click();assert.equal(await month.inputValue(),'2025-12');assert.equal(await week.inputValue(),'2024-01-01');
  checks.push('historical monthly targets and explicit period selections survive tab changes without modifying saved history');
- await p.addScriptTag({path:'work/axe/package/axe.min.js'});
+ await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});
  for(const control of [week,month]){
   await control.focus();await p.keyboard.press('Home');await p.keyboard.press('Enter');
   const result=await p.evaluate(async()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(result.violations.length,0,JSON.stringify(result.violations));

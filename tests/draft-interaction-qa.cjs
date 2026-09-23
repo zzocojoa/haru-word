@@ -1,7 +1,7 @@
 // Built local Worker, synthetic accounts only; never calls Google.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
-const base = 'http://127.0.0.1:8787', out = 'outputs/draft-refactor';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/draft-refactor';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.parse(fs.readFileSync('data/content.json'));
 const selected = ['apple', 'book'].map(name => words.find(w => w.word === name && w.pos === 'n.'));
@@ -12,7 +12,7 @@ const get = async c => (await c.request.get(base + '/api/state')).json();
 (async () => {
   const browser = await chromium.launch();
   async function fresh(stage, retry = false) {
-    const c = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: { 'oai-authenticated-user-id': 'draft_' + Date.now() + '_' + serial++, 'oai-authenticated-user-email': 'qa@example.test' } });
+    const c = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('draft_') + '_' + serial++, 'oai-authenticated-user-email': 'qa@example.test' } });
     const initial = await get(c), id = crypto.randomUUID(), first = selected[0].id;
     const s = { id, kind: 'daily', date, period: date, ids: selected.map(w => w.id), warmupIds: stage === 'warmup' ? [first] : [], stage, index: 0,
       records: Object.fromEntries(selected.map(w => [w.id, { meaning: content[w.id].meaning, material: content[w.id], en: retry ? 'help' : 'unmeasured', ko: 'unmeasured', sentenceStatus: 'unmeasured', sentence: '', notes: '' }])),

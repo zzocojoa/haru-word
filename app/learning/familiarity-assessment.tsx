@@ -3,9 +3,9 @@ import { Progress as ProgressBar } from "@/components/ui/progress";
 import { FAMILIARITY_TEXT, assessmentAdvice } from "@/lib/learning";
 import { ArrowRight, Check } from "lucide-react";
 import { FamiliarityCard } from "../familiarity-card";
-import type { LearningController } from "./use-learning-controller";
+import type { LearningViewProps } from "./types";
 type FamiliarityAssessmentProps = Pick<
-  LearningController,
+  LearningViewProps,
   | "state"
   | "busy"
   | "setAssessing"
@@ -16,7 +16,7 @@ type FamiliarityAssessmentProps = Pick<
   | "assessmentWord"
   | "revealMeaning"
   | "markFamiliarity"
-> & { assessment: NonNullable<LearningController["assessment"]> };
+> & { assessment: NonNullable<LearningViewProps["assessment"]> };
 export function FamiliarityAssessment({
   state,
   assessment,

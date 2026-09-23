@@ -1,10 +1,7 @@
 import { entryIdFor,senseProgress,hasReviewWork,type State,type Session } from './learning';
 
-export function isCalendarDate(value:string){
- if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;
- const parsed=new Date(value+'T00:00:00Z');
- return Number.isFinite(parsed.getTime())&&parsed.toISOString().slice(0,10)===value;
-}
+import { isCalendarDate } from './calendar-date';
+export { isCalendarDate } from './calendar-date';
 
 // An explicit correction, never an automatic inference from a device clock.
 // Saved review/practice snapshots and all assessment results remain untouched.
@@ -40,7 +37,7 @@ export function correctDailyStudyDate(state:State,sessionId:string,date:string,c
 
 export function previousDate(date:string){const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()-1);return d.toISOString().slice(0,10)}
 
-export function dailyOrigins(state:State,ids:string[],date:string){
+export function dailyOriginSummary(state:State,ids:string[],date:string){
  const earlier=new Set(Object.values(state.sessions).filter(s=>s.kind==='daily'&&s.date<date).flatMap(s=>s.ids.map(id=>entryIdFor(s,id))));
  // Actual practice/review results remain evidence after daily assignment.
  // Merely appearing in an unmeasured review queue is not prior learning.
@@ -55,6 +52,13 @@ export function dailyOrigins(state:State,ids:string[],date:string){
  const assignedToday=new Set(Object.values(state.sessions).filter(s=>s.kind==='daily'&&s.date===date).flatMap(s=>s.ids.map(id=>entryIdFor(s,id))));
  // Before assignment, actual pending review work is carryover even when it came
  // from a focused practice session rather than an earlier daily lesson.
- const returning=ids.filter(id=>earlier.has(id)||state.progress[id]?.studyDates?.some(d=>d<date)||!assignedToday.has(id)&&hasReviewWork(state.progress[id])).length;
- return {returning,newCount:ids.length-returning};
+ const byId:Record<string,'returning'|'new'>=Object.fromEntries(ids.map(id=>[id,earlier.has(id)||state.progress[id]?.studyDates?.some(d=>d<date)||!assignedToday.has(id)&&hasReviewWork(state.progress[id])?'returning':'new']));
+ const returning=ids.filter(id=>byId[id]==='returning').length;
+ return {byId,returning,newCount:ids.length-returning};
+}
+
+// Compatibility for callers that only need counts.
+export function dailyOrigins(state:State,ids:string[],date:string){
+ const {returning,newCount}=dailyOriginSummary(state,ids,date);
+ return {returning,newCount};
 }

@@ -1,15 +1,15 @@
 // Local built Worker only. Synthetic account, controlled server clock; no Google calls.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base='http://127.0.0.1:8787',out='outputs/clock-continuity';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/clock-continuity';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const yesterday=new Date(Date.parse(date+'T12:00:00Z')-86400000).toISOString().slice(0,10);
-const headers={'oai-authenticated-user-id':'clock_continuity_'+Date.now(),'oai-authenticated-user-email':'qa@example.test'};
+const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('clock_continuity_'),'oai-authenticated-user-email':'qa@example.test'};
 const checks=[],errors=[];
 (async()=>{const browser=await chromium.launch();try{
  const a=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:headers}),p=await a.newPage();
- p.on('pageerror',e=>errors.push(e.message));await p.clock.install({time:new Date('2030-01-01T00:00:00Z')});
+ p.on('pageerror',e=>errors.push(e.message));
  const get=async c=>(await c.request.get(base+'/api/state')).json(),saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  let data=await get(a);const w=words.find(w=>w.word==='arrive'&&w.pos==='v.'),sid=crypto.randomUUID(),meaning=content[w.id].meaning;
  const record={entryId:w.id,meaning,material:content[w.id],learnedOn:yesterday,familiarity:'known',en:'unmeasured',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:'',notes:''};
@@ -17,6 +17,8 @@ const checks=[],errors=[];
  assert.equal((await a.request.put(base+'/api/state',{data:{revision:data.revision,settings:{...data.state.settings,activeSessionId:sid},progress:{[w.id]:{familiarity:'known',meaning,studyDates:[yesterday],lastStudied:yesterday,needsReview:true}},sessions:{[sid]:session}}})).status(),200);
  let time=yesterday+'T14:59:55Z',held,clockCalls=0,hold=false;
  await p.route('**/api/study-clock',r=>{clockCalls++;if(hold){held=r;return}return r.fulfill({json:{serverTime:Date.parse(time)}})});
+ // Seed through the real API before installing the page's deliberately incorrect device clock.
+ await p.clock.install({time:new Date('2030-01-01T00:00:00Z')});
  await p.goto(base,{waitUntil:'domcontentloaded'});await saved();await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved();
  const field=p.getByLabel('한국어 뜻 입력');const answer='나만의 비공개 답 123';await field.fill(answer);
  hold=true;const request=p.waitForRequest('**/api/study-clock');await p.evaluate(()=>window.dispatchEvent(new Event('focus')));await request;
@@ -33,7 +35,7 @@ const checks=[],errors=[];
  assert.ok(events.some(e=>e.operation==='clock'&&e.outcome==='timeout'));assert.ok(events.some(e=>e.gates?.clockReady===false));
  for(const secret of [answer,sid,w.id,headers['oai-authenticated-user-id'],headers['oai-authenticated-user-email']])assert.ok(!diagnostic.includes(secret));
  await p.getByRole('dialog').getByRole('button',{name:'Close',exact:true}).click();
- await p.addScriptTag({path:'work/axe/package/axe.min.js'});const axe=await p.evaluate(async()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(axe.violations.length,0,JSON.stringify(axe.violations));
+ await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const axe=await p.evaluate(async()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(axe.violations.length,0,JSON.stringify(axe.violations));
  checks.push('manual diagnostic export identifies the blocking clock without answers, account IDs, word IDs or session IDs; recovery screen has no axe violations');
  await held.abort().catch(()=>{});hold=false;time=date+'T00:01:00Z';await p.getByRole('button',{name:'시간 다시 확인',exact:true}).click();
  await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();assert.equal(await field.inputValue(),answer);

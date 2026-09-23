@@ -47,8 +47,8 @@ export const WordLibrary = memo(function WordLibrary({
   const [level, setLevel] = useState("all");
   const [familiarity, setFamiliarity] = useState("all");
   const [page, setPage] = useState(0);
-  const [selected, setSelected] = useState<Word | null>(null);
-  const [adding, setAdding] = useState(false);
+  const [selected, setSelected] = useState<{ word: Word; instance: string } | null>(null);
+  const [adding, setAdding] = useState<string | null>(null);
   const dialogTrigger = useRef<HTMLButtonElement | null>(null);
   const searchInput = useRef<HTMLInputElement | null>(null);
   function restoreFocus(event: Event) {
@@ -149,7 +149,7 @@ export const WordLibrary = memo(function WordLibrary({
           className="secondary-button"
           onClick={(event) => {
             dialogTrigger.current = event.currentTarget;
-            setAdding(true);
+            setAdding(crypto.randomUUID());
           }}
           disabled={busy}
         >
@@ -177,7 +177,7 @@ export const WordLibrary = memo(function WordLibrary({
                     className="word-link"
                     onClick={(event) => {
                       dialogTrigger.current = event.currentTarget;
-                      setSelected(w);
+                      setSelected({ word: w, instance: crypto.randomUUID() });
                     }}
                   >
                     <b lang="en">{w.word}</b>
@@ -257,40 +257,39 @@ export const WordLibrary = memo(function WordLibrary({
           {selected && (
             <WordEditor
               activityDate={activityDate}
-              key={selected.id}
-              word={selected}
-              p={state.progress[selected.id]}
+              key={selected.instance}
+              word={selected.word}
+              p={state.progress[selected.word.id]}
               busy={busy}
               onSave={async (p) => {
-                if (
-                  await save({
-                    ...state,
-                    progress: { ...state.progress, [selected.id]: p },
-                  })
-                )
-                  setSelected(null);
+                const saved = await save({
+                  ...state,
+                  progress: { ...state.progress, [selected.word.id]: p },
+                });
+                if (saved) setSelected(current => current?.instance === selected.instance ? null : current);
+                return saved;
               }}
             />
           )}
         </DialogContent>
       </Dialog>
-      <Dialog open={adding} onOpenChange={setAdding}>
+      <Dialog open={!!adding} onOpenChange={open => { if (!open) setAdding(null); }}>
         <DialogContent className="word-dialog framed-dialog" onCloseAutoFocus={restoreFocus}>
-          <PersonalWord
+          {adding && <PersonalWord
+            key={adding}
             busy={busy}
             onSave={async (w, p) => {
-              if (
-                await save({
+              const saved = await save({
                   ...state,
                   progress: {
                     ...state.progress,
                     [w.id]: { ...p, personal: w },
                   },
-                })
-              )
-                setAdding(false);
+                });
+              if (saved) setAdding(current => current === adding ? null : current);
+              return saved;
             }}
-          />
+          />}
         </DialogContent>
       </Dialog>
     </section>

@@ -1,9 +1,9 @@
 const {markFamiliarity}=require('./familiarity-actions.cjs');
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8787';const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
+const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 (async()=>{
- const {assessmentSample}=await import('../lib/learning.ts');const browser=await chromium.launch({headless:true});const checks=[];const errors=[];const prefix='familiarity_'+Date.now();
+ const {assessmentSample}=await import('../lib/learning.ts');const browser=await chromium.launch({headless:true});const checks=[];const errors=[];const prefix=require('./qa/runtime.cjs').account('familiarity_');
  const account=async name=>{const headers={'oai-authenticated-user-id':prefix+'_'+name,'oai-authenticated-user-email':'qa@example.test'};const context=await browser.newContext({extraHTTPHeaders:headers});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));const get=async()=> (await context.request.get(base+'/api/state')).json();const put=async delta=>{const state=await get();const response=await context.request.put(base+'/api/state',{data:{revision:state.revision,progress:{},sessions:{},...delta}});assert.equal(response.status(),200);};return {context,page,get,put,headers};};
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  try{

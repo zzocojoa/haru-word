@@ -13,7 +13,9 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "typecheck": "tsc --noEmit",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "test:browser": "node tests/qa/run.cjs functional",
+    "test:performance": "node tests/qa/run.cjs performance"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

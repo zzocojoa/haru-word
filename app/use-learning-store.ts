@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { EMPTY, type State } from '@/lib/learning';
 import { stateDelta } from '@/lib/state-delta';
-import { RequestTimeoutError } from '@/lib/client-request';
+import { InvalidResponseError, RequestTimeoutError } from '@/lib/client-request';
 import { loadLearningState, restoreLearningState, saveLearningState } from '@/lib/learning-api';
 
 export function useLearningStore() {
@@ -42,6 +42,7 @@ export function useLearningStore() {
       setEpoch(n => n + 1);
       return true;
     } catch (e) {
+      if (e instanceof InvalidResponseError) setConflict(true);
       setError(e instanceof RequestTimeoutError
         ? '기록을 불러오는 데 시간이 오래 걸려요. 연결을 확인하고 다시 시도해 주세요.'
         : e instanceof Error ? e.message : '불러오기 실패');
@@ -88,6 +89,7 @@ export function useLearningStore() {
       setConflict(false);
       return true;
     } catch (e) {
+      if (e instanceof InvalidResponseError) setConflict(true);
       setError(e instanceof RequestTimeoutError
         ? '저장 응답이 늦어 결과를 확인하지 못했어요. 입력은 화면에 남아 있어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.'
         : e instanceof Error ? e.message : '저장 실패');

@@ -11,10 +11,10 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { download } from "../ui";
-import type { LearningController } from "./use-learning-controller";
+import type { LearningViewProps } from "./types";
 import { DiagnosticDownload } from "./diagnostic-download";
 type SaveErrorProps = Pick<
-  LearningController,
+  LearningViewProps,
   "saveError" | "error" | "conflict" | "saving" | "unsaved" | "store" | "state"
 >;
 export function SaveError({

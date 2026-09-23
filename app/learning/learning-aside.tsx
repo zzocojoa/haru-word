@@ -1,7 +1,7 @@
 "use client";
-import type { LearningController } from "./use-learning-controller";
+import type { LearningViewProps } from "./types";
 import { HelpDetails } from "../study-ui";
-type LearningAsideProps = Pick<LearningController, "loading" | "metrics">;
+type LearningAsideProps = Pick<LearningViewProps, "loading" | "metrics">;
 export function LearningAside({ loading, metrics }: LearningAsideProps) {
   return (
     <aside className="study-aside">

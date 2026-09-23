@@ -1,10 +1,10 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));
-const base='http://127.0.0.1:8787',out='outputs/daily-goal';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/daily-goal';fs.mkdirSync(out,{recursive:true});
 (async()=>{const browser=await chromium.launch({headless:true});const checks=[],errors=[];
  try{
-  const headers={'oai-authenticated-user-id':'goal_'+Date.now(),'oai-authenticated-user-email':'goal@example.test'};
+  const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('goal_'),'oai-authenticated-user-email':'goal@example.test'};
   const ctx=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});
   const get=async()=> (await ctx.request.get(base+'/api/state')).json();let data=await get();
   const sample=words.filter(w=>w.level==='A1').slice(0,20).map(w=>w.id);

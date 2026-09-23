@@ -1,7 +1,7 @@
 // Local built Worker only: isolated accounts, no hosted records or Google calls.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
-const base = 'http://127.0.0.1:8787', out = 'outputs/expression-translation';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/expression-translation';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.parse(fs.readFileSync('data/content.json'));
 const selected = ['arrive', 'busy', 'breakfast'].map(name => words.find(w => w.word === name));
@@ -12,7 +12,7 @@ const get = async c => { const r = await c.request.get(base + '/api/state'); ass
 const oldContent = id => { const { expressionTranslation, ...old } = content[id]; return old; };
 (async () => {
  const browser = await chromium.launch();
- const headers = { 'oai-authenticated-user-id': 'expression_' + Date.now(), 'oai-authenticated-user-email': 'qa@example.test' };
+ const headers = { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('expression_'), 'oai-authenticated-user-email': 'qa@example.test' };
  try {
   const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: headers });
   const p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
@@ -34,7 +34,7 @@ const oldContent = id => { const { expressionTranslation, ...old } = content[id]
   for (const width of [320, 390, 768, 1440]) { await p.setViewportSize({ width, height: 900 }); assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false); }
   await p.setViewportSize({ width: 390, height: 844 }); await p.screenshot({ path: out + '/completed-mobile.png' });
   async function audit(name) {
-   await p.addScriptTag({ path: 'work/axe/package/axe.min.js' });
+   await p.addScriptTag({ path: require('./qa/runtime.cjs').axePath });
    const result = await p.evaluate(() => axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
    axe.push({ name, violations: result.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })) });
    assert.equal(result.violations.length, 0, JSON.stringify(axe.at(-1)));

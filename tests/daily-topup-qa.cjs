@@ -1,6 +1,6 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8787',out='outputs/daily-topup';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/daily-topup';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const checks=[],errors=[],saveEvents=[];
@@ -13,7 +13,7 @@ function observe(page){
 }
 (async()=>{const browser=await chromium.launch({headless:true});let p;
  try{
-  const headers={'oai-authenticated-user-id':'topup_'+Date.now(),'oai-authenticated-user-email':'topup@example.test'};
+  const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('topup_'),'oai-authenticated-user-email':'topup@example.test'};
   const ctx=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});
   const get=async()=> (await ctx.request.get(base+'/api/state')).json();let data=await get();
   const ids=['arrive','busy','breakfast'].map(term=>words.find(w=>w.word===term).id);const sid=crypto.randomUUID();

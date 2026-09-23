@@ -1,8 +1,8 @@
 // Built LOCAL Worker only. Synthetic history; no production data or AI calls.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const base = 'http://127.0.0.1:8787', out = 'outputs/journal-navigation';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/journal-navigation';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json', 'utf8'));
 const content = JSON.parse(fs.readFileSync('data/content.json', 'utf8'));
@@ -42,7 +42,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
   const browser = await chromium.launch();
   try {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: {
-      'oai-authenticated-user-id': 'journal_' + Date.now(), 'oai-authenticated-user-email': 'journal@example.test',
+      'oai-authenticated-user-id': require('./qa/runtime.cjs').account('journal_'), 'oai-authenticated-user-email': 'journal@example.test',
     } });
     const get = async () => (await c.request.get(base + '/api/state')).json();
     const initial = await get();
@@ -76,7 +76,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     checks.push('same-day attempts share one date heading, with accurate attempt and type counts and no double-counted word total');
 
     const axe = async label => {
-      await p.addScriptTag({ path: 'work/axe/package/axe.min.js' });
+      await p.addScriptTag({ path: require('./qa/runtime.cjs').axePath });
       const violations = await p.evaluate(async () => (await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) })));
       accessibility.push({ label, violations }); assert.deepEqual(violations, [], label);
     };

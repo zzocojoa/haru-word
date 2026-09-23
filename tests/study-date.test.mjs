@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {build} from 'esbuild';
 import {EMPTY,newSession,dailyAssignedIds,pickDaily,reviewTargets,storeSense,emptyRecord,ensureCarryover} from '../lib/learning.ts';
 await build({entryPoints:['lib/study-date-correction.ts','lib/study-clock.ts','lib/backup.ts'],outdir:'work/study-date-tests',outExtension:{'.js':'.mjs'},bundle:true,format:'esm',platform:'node',logLevel:'silent'});
-const {correctDailyStudyDate,isCalendarDate,dailyOrigins}=await import('../work/study-date-tests/study-date-correction.mjs');
+const {correctDailyStudyDate,isCalendarDate,dailyOrigins,dailyOriginSummary}=await import('../work/study-date-tests/study-date-correction.mjs');
 const {createStudyClock}=await import('../work/study-date-tests/study-clock.mjs');
 const {parseBackup,makeBackup}=await import('../work/study-date-tests/backup.mjs');
 const words=JSON.parse(readFileSync('data/words.json','utf8'));
@@ -12,6 +12,17 @@ function fixture(date='2026-09-22'){
  for(const id of session.ids){session.records[id]={...session.records[id],learnedOn:date,lastPracticedOn:date,en:'independent',ko:'help',sentenceStatus:'written',sentence:'Keep my sentence.',notes:'Keep my note.',retryKo:'independent'};state.progress[id]={meaning:'one meaning',studyDates:[date],lastStudied:date,lastReviewed:date,en:'independent',ko:'help',sentenceStatus:'written',needsReview:true}}
  state.sessions[session.id]=session;state.settings.activeSessionId=session.id;return {state,session};
 }
+
+test('one origin summary supplies matching counts and labels without mutating history',()=>{
+ const {state,session}=fixture(); const previous=structuredClone(state);
+ const fresh=words.find(w=>!session.ids.includes(w.id)).id;
+ const ids=[...session.ids,fresh],summary=dailyOriginSummary(state,ids,'2026-09-23');
+ assert.equal(summary.returning,10); assert.equal(summary.newCount,1);
+ assert.deepEqual(session.ids.map(id=>summary.byId[id]),Array(10).fill('returning'));
+ assert.equal(summary.byId[fresh],'new');
+ assert.deepEqual(dailyOrigins(state,ids,'2026-09-23'),{returning:10,newCount:1});
+ assert.deepEqual(state,previous);
+});
 test('server clock ignores device wall time and rolls over in Seoul',()=>{
  let tick=0;const clock=createStudyClock(Date.parse('2026-09-21T14:59:55Z'),()=>tick);
  assert.equal(clock.date(),'2026-09-21');tick=6000;assert.equal(clock.date(),'2026-09-22');

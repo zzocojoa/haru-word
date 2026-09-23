@@ -1,7 +1,7 @@
 // Local built Worker only, synthetic account; no production data or AI requests.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
-const base = 'http://127.0.0.1:8787', out = 'outputs/today-status';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/today-status';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.parse(fs.readFileSync('data/content.json'));
 const selected = ['arrive', 'busy', 'breakfast'].map(name => words.find(w => w.word === name));
@@ -18,7 +18,7 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
 (async () => {
   const browser = await chromium.launch();
   try {
-    const headers = { 'oai-authenticated-user-id': 'today_status_' + Date.now(), 'oai-authenticated-user-email': 'qa@example.test' };
+    const headers = { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('today_status_'), 'oai-authenticated-user-email': 'qa@example.test' };
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: headers });
     const p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
     p.on('request', r => { if (/sentence-feedback|generativelanguage/.test(r.url())) aiRequests.push(r.url()); });
@@ -57,7 +57,7 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     await p.reload(); await saved(p); await p.setViewportSize({ width: 390, height: 844 });
     await p.screenshot({ path: out + '/in-progress-mobile.png', fullPage: true });
     async function audit(name) {
-      await p.addScriptTag({ path: 'work/axe/package/axe.min.js' });
+      await p.addScriptTag({ path: require('./qa/runtime.cjs').axePath });
       const result = await p.evaluate(() => axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
       axeResults.push({ name, violations: result.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })) });
       assert.equal(result.violations.length, 0, JSON.stringify(axeResults.at(-1)));

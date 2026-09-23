@@ -1,11 +1,11 @@
 // Local built Worker; faults and provider replies are injected only into synthetic accounts.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base='http://127.0.0.1:8787',out='outputs/request-reliability';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/request-reliability';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),w=words.find(w=>w.word==='arrive'&&w.pos==='v.');
 const checks=[],errors=[];let serial=0;
 (async()=>{const browser=await chromium.launch();try{
- const fresh=async()=>{const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':'timeouts_'+Date.now()+'_'+serial++,'oai-authenticated-user-email':'qa@example.test'}});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.clock.install();return {c,p}};
+ const fresh=async()=>{const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('timeouts_')+'_'+serial++,'oai-authenticated-user-email':'qa@example.test'}});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.clock.install();return {c,p}};
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  const get=async c=>{const r=await c.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};
  const goal=async(p,n)=>{await p.getByRole('button',{name:'학습 설정',exact:true}).click();await p.getByRole('combobox',{name:'하루 목표',exact:true}).click();await p.getByRole('option',{name:n+'개',exact:true}).click();await p.getByRole('dialog').getByRole('button',{name:'Close',exact:true}).click()};

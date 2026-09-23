@@ -1,8 +1,8 @@
 // Built local Worker only. Synthetic learner; viewport keyboard is simulated.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const base = 'http://127.0.0.1:8787', out = 'outputs/ui-refresh';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/ui-refresh';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json'));
 const content = JSON.parse(fs.readFileSync('data/content.json'));
@@ -14,7 +14,7 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
 (async()=>{
  const browser=await chromium.launch();const checks=[],errors=[],audits=[];
  try {
-  const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':'ui_refresh_'+Date.now(),'oai-authenticated-user-email':'qa@example.test'}});
+  const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('ui_refresh_'),'oai-authenticated-user-email':'qa@example.test'}});
   const get=async()=> (await c.request.get(base+'/api/state')).json();
   const initial=await get(), daily=session('daily','01'), older=session('monthly','02'), latest=session('monthly','03');
   Object.assign(daily.records[ids[0]],{en:'independent',ko:'independent',sentenceStatus:'written',sentence:'I arrive home.'});
@@ -43,7 +43,7 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
   assert.equal(await p.locator('[data-review-kind=monthly]').getByRole('button',{name:/이어서/}).count(),1);
   assert.deepEqual(await get(),before);
   checks.push('selected monthly session appears once; a separate older session for the same month remains reachable without writes');
-  const audit=async name=>{await p.addScriptTag({path:'work/axe/package/axe.min.js'});const violations=await p.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));audits.push({name,violations});assert.deepEqual(violations,[],name);};
+  const audit=async name=>{await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const violations=await p.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));audits.push({name,violations});assert.deepEqual(violations,[],name);};
   for(const width of [320,390,430,768,1440]){
    await p.setViewportSize({width,height:900});
    for(const name of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){

@@ -1,7 +1,7 @@
 // Built local Worker only. Synthetic account and clock; no production or AI calls.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
-const base = 'http://127.0.0.1:8787', out = 'outputs/daily-boundary';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/daily-boundary';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.parse(fs.readFileSync('data/content.json'));
 const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
@@ -22,7 +22,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
 (async () => {
   const browser = await chromium.launch();
   try {
-    const headers = { 'oai-authenticated-user-id': 'daily_boundary_' + Date.now(), 'oai-authenticated-user-email': 'qa@example.test' };
+    const headers = { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('daily_boundary_'), 'oai-authenticated-user-email': 'qa@example.test' };
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: headers, reducedMotion: 'reduce' });
     const initial = await get(c), daily = makeSession('daily'), monthly = makeSession('monthly');
     daily.records[ids[0]].ko = 'help';
@@ -108,7 +108,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     await p.setViewportSize({ width: 320, height: 900 }); await p.addStyleTag({ content: 'html{font-size:200%}' });
     assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
     await p.reload(); await saved(p); await p.setViewportSize({ width: 390, height: 844 });
-    await p.addScriptTag({ path: 'work/axe/package/axe.min.js' });
+    await p.addScriptTag({ path: require('./qa/runtime.cjs').axePath });
     const axeResult = await p.evaluate(() => axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
     audits.push({ name: 'dated all-round daily goals with periodic review', violations: axeResult.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })) });
     assert.equal(axeResult.violations.length, 0, JSON.stringify(audits));

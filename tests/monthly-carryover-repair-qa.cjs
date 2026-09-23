@@ -1,7 +1,7 @@
 // Local built Worker and synthetic accounts only. Never grades real user work.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
-const base = 'http://127.0.0.1:8787', out = 'outputs/monthly-carryover-repair';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/monthly-carryover-repair';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.parse(fs.readFileSync('data/content.json'));
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
@@ -20,7 +20,7 @@ const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, peri
   const browser = await chromium.launch();
   try {
     async function fixture(suffix, draft = false) {
-      const headers = { 'oai-authenticated-user-id': 'monthly_repair_' + Date.now() + suffix, 'oai-authenticated-user-email': 'qa@example.test' };
+      const headers = { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('monthly_repair_') + suffix, 'oai-authenticated-user-email': 'qa@example.test' };
       const c = await browser.newContext({ extraHTTPHeaders: headers, viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
       const p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
       p.on('request', r => { if (/sentence-feedback|generativelanguage/.test(r.url())) aiRequests.push(r.url()); });
@@ -47,7 +47,7 @@ const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, peri
     assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
     await p.reload(); await saved(p); await p.setViewportSize({ width: 390, height: 844 });
     async function audit(name) {
-      await p.addScriptTag({ path: 'work/axe/package/axe.min.js' });
+      await p.addScriptTag({ path: require('./qa/runtime.cjs').axePath });
       const r = await p.evaluate(() => axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
       audits.push({ name, violations: r.violations.map(v => ({ id: v.id, targets: v.nodes.map(n => n.target) })) });
       assert.equal(r.violations.length, 0, JSON.stringify(audits));

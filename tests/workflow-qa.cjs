@@ -1,10 +1,10 @@
 const {markFamiliarity}=require('./familiarity-actions.cjs');
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8787';const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
+const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 (async()=>{const browser=await chromium.launch({headless:true});const errors=[];const checks=[];
  try{
-  const account='workflow_'+Date.now();const headers={'oai-authenticated-user-id':account,'oai-authenticated-user-email':'qa@example.test'};
+  const account=require('./qa/runtime.cjs').account('workflow_');const headers={'oai-authenticated-user-id':account,'oai-authenticated-user-email':'qa@example.test'};
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:1366,height:1000}});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
   const saved=()=>page.getByText('서버에 저장됨',{exact:true}).waitFor();const state=async()=> (await context.request.get(base+'/api/state')).json();
   await page.goto(base);await saved();await page.getByRole('button',{name:'20개 친숙도부터 확인',exact:true}).click();

@@ -1,12 +1,12 @@
 // Built local Worker only; synthetic account, no production or Google writes.
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { chromium } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
-const base = 'http://127.0.0.1:8787', out = 'outputs/settings-dialog';
+const base = require('./qa/runtime.cjs').base, out = 'outputs/settings-dialog';
 fs.mkdirSync(out, { recursive: true });
 (async () => {
   const browser = await chromium.launch(), checks = [], errors = [], audits = [];
   try {
-    const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: { 'oai-authenticated-user-id': 'settings_dialog_' + Date.now(), 'oai-authenticated-user-email': 'qa@example.test' } });
+    const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('settings_dialog_'), 'oai-authenticated-user-email': 'qa@example.test' } });
     const get = async () => (await c.request.get(base + '/api/state')).json();
     const initial = await get(), words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.parse(fs.readFileSync('data/content.json'));
     const w = words.find(w => w.word === 'arrive' && w.pos === 'v.'), date = '2026-09-01', sid = crypto.randomUUID();
@@ -30,7 +30,7 @@ fs.mkdirSync(out, { recursive: true });
     await p.getByRole('button', { name: '학습 설정', exact: true }).click();
     const d = p.getByRole('dialog'), body = d.locator('.dialog-scroll'), goal = d.getByRole('combobox', { name: '하루 목표', exact: true });
     const enabled = async () => { await p.waitForFunction(() => { const el = document.querySelector('.settings-dialog [aria-label="하루 목표"]'); return el && !el.disabled; }); assert.ok(await goal.isEnabled()); };
-    const axe = async label => { await p.addScriptTag({ path: 'work/axe/package/axe.min.js' }); const issues = await p.evaluate(async () => (await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) }))); audits.push({ label, issues }); assert.deepEqual(issues, [], label); };
+    const axe = async label => { await p.addScriptTag({ path: require('./qa/runtime.cjs').axePath }); const issues = await p.evaluate(async () => (await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) }))); audits.push({ label, issues }); assert.deepEqual(issues, [], label); };
     await enabled();
     for (const width of [320, 390, 430, 768, 1440]) {
       await p.setViewportSize({ width, height: 844 });

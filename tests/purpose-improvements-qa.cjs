@@ -1,13 +1,13 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs');const assert=require('node:assert/strict');
-const base='http://127.0.0.1:8787';const out='outputs/purpose-improvements';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base;const out='outputs/purpose-improvements';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));const word=(name,pos='n.')=>words.find(w=>w.word===name&&w.pos===pos);
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const old='2026-08-31';const month=date.slice(0,7);
 const record=(meaning)=>({meaning,familiarity:'uncertain',en:'independent',ko:'independent',sentenceStatus:'written',sentence:'I wrote this before.',notes:''});
 const session=(w,d=old,extra={})=>({id:crypto.randomUUID(),kind:'daily',date:d,period:d,ids:[w.id],warmupIds:[],stage:'done',index:0,records:{[w.id]:record(content[w.id].meaning)},retry:[],retryMode:false,elapsed:90,finished:true,paused:true,createdAt:d+'T04:00:00.000Z',...extra});
 const checks=[];const errors=[];const evidence=[];
 (async()=>{const browser=await chromium.launch({headless:true});let counter=0;
- async function user(label,seed){const ctx=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':'purpose_fixed_'+Date.now()+'_'+(++counter),'oai-authenticated-user-email':'audit@example.test'}});let data=await(await ctx.request.get(base+'/api/state')).json();const partial=seed?seed(data.state):{};assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:data.revision,progress:{},sessions:{},...partial}})).status(),200);const p=await ctx.newPage();p.on('pageerror',e=>errors.push(label+': '+e.message));await p.goto(base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();return {ctx,p,get:async()=> (await(await ctx.request.get(base+'/api/state')).json()).state};}
+ async function user(label,seed){const ctx=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('purpose_fixed_')+'_'+(++counter),'oai-authenticated-user-email':'audit@example.test'}});let data=await(await ctx.request.get(base+'/api/state')).json();const partial=seed?seed(data.state):{};assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:data.revision,progress:{},sessions:{},...partial}})).status(),200);const p=await ctx.newPage();p.on('pageerror',e=>errors.push(label+': '+e.message));await p.goto(base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();return {ctx,p,get:async()=> (await(await ctx.request.get(base+'/api/state')).json()).state};}
  const saved=p=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  async function shot(p,file){await p.screenshot({path:out+'/'+file+'.png',fullPage:true,animations:'disabled'});evidence.push(file+'.png');}
  async function pick(p,label,text){await p.getByRole('combobox',{name:label,exact:true}).selectOption(text);await saved(p);}

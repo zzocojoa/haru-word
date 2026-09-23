@@ -1,5 +1,5 @@
 const {build} = require('esbuild');
-const {chromium} = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium} = require('./qa/runtime.cjs');
 const assert = require('node:assert/strict'), fs = require('node:fs');
 const out = 'outputs/clock-reliability'; fs.mkdirSync(out, {recursive:true});
 (async()=>{

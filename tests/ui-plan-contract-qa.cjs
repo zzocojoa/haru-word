@@ -1,14 +1,14 @@
 // Verify the approved UI contract on the built LOCAL Worker; all records are synthetic.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base='http://127.0.0.1:8787',out='outputs/ui-plan-contract';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/ui-plan-contract';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const selected=words.filter(w=>w.level==='A1').slice(0,10),ids=selected.map(w=>w.id);
 const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 (async()=>{
  const browser=await chromium.launch(),checks=[],audits=[],errors=[],touch=[];
  try{
-  const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':'ui_contract_'+Date.now(),'oai-authenticated-user-email':'qa@example.test'}});
+  const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('ui_contract_'),'oai-authenticated-user-email':'qa@example.test'}});
   const get=async()=> (await c.request.get(base+'/api/state')).json();const before=await get();
   const state={...before.state,sessions:{},progress:{}};
   for(let i=0;i<14;i++){
@@ -21,7 +21,7 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
   const nav=name=>p.getByRole('tab',{name,exact:true}).click();
   const fit=async label=>assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,label+' '+JSON.stringify(await p.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,x:scrollX,items:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&(r.right>innerWidth||r.left<0||el.scrollWidth>el.clientWidth+1)}).map(el=>({tag:el.tagName,class:el.className,scroll:el.scrollWidth,client:el.clientWidth,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right,text:el.textContent.slice(0,50)}))}))));
   const checkTouch=async name=>{const small=await p.evaluate(()=>[...document.querySelectorAll('[role=dialog] button,[role=dialog] summary,[role=dialog] a')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&(r.width<44||r.height<44)}).map(el=>({text:el.textContent.trim().slice(0,40),class:el.className,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));touch.push({name,small});assert.deepEqual(small,[],name+' 44px touch area');};
-  const axe=async label=>{await p.addScriptTag({path:'work/axe/package/axe.min.js'});const issues=await p.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));audits.push({label,issues});assert.deepEqual(issues,[],label);};
+  const axe=async label=>{await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const issues=await p.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));audits.push({label,issues});assert.deepEqual(issues,[],label);};
   await nav('학습 기록');
   await p.locator('.journal-day-trigger').first().click();await p.locator('.journal-session-trigger').first().click();await p.locator('.journal-word-trigger').first().click();
   await p.evaluate(()=>window.scrollTo(0,650));const at=await p.evaluate(()=>scrollY);

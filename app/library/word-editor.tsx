@@ -10,9 +10,7 @@ import {
   allSenses,
   FAMILIARITY_TEXT,
   POS,
-  recordFamiliarity,
   RESULT_TEXT,
-  selectSense,
   senseProgress,
   type Familiarity,
   type Progress,
@@ -22,6 +20,8 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { DictionaryLinks, Speak } from "../ui";
 import { HelpDetails } from "../study-ui";
+import { editedWordProgress } from "@/lib/learning-commands";
+import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
 export function WordEditor({
   activityDate,
@@ -34,8 +34,9 @@ export function WordEditor({
   word: Word;
   p?: Progress;
   busy: boolean;
-  onSave: (p: Progress) => void;
+  onSave: (p: Progress) => Promise<boolean>;
 }) {
+  const { submitting, submit } = useEditorSubmission();
   const content = cardContent(word.id, p);
   const base = { ...p, meaning: p?.meaning || content.meaning };
   const senses = allSenses(base);
@@ -79,7 +80,7 @@ export function WordEditor({
           {word.personal ? "개인 추가" : `첨부 Oxford PDF ${word.page}쪽`}
         </DialogDescription>
       </DialogHeader>
-      <div className="dialog-scroll">
+      <fieldset className="dialog-scroll editor-fields" disabled={submitting}>
       <section className="sense-selector">
         <label>
           학습할 뜻 선택
@@ -263,40 +264,16 @@ export function WordEditor({
           이미 저장된 뜻이에요. 위 목록에서 선택해 주세요.
         </p>
       )}
-      </div>
+      </fieldset>
       <div className="dialog-actions">
       <button
         className="primary-button full"
-        disabled={busy || !meaning.trim() || duplicate}
+        disabled={busy || submitting || !meaning.trim() || duplicate}
         onClick={() => {
-          const edited = selectSense(base, {
-            ...selectedSense,
-            meaning: meaning.trim(),
-            expression,
-            expressionTranslation,
-            example,
-            translation,
-            notes,
-            ...(!senseKey
-              ? {
-                  en: "unmeasured",
-                  ko: "unmeasured",
-                  sentenceStatus: "unmeasured",
-                  sentence: "",
-                  studyDates: [],
-                  needsReview: true,
-                }
-              : {}),
-          });
-          onSave({
-            ...edited,
-            ...(familiarityTouched && fam
-              ? recordFamiliarity(edited, fam)
-              : {}),
-            familiarity: fam,
-            useful,
-            encounters,
-          });
+          void submit(() => onSave(editedWordProgress(base, selectedSense, {
+            meaning, expression, expressionTranslation, example, translation, notes,
+            newSense: !senseKey, familiarity: fam, familiarityTouched, useful, encounters,
+          })));
         }}
       >
         기록 저장

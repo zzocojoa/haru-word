@@ -1,6 +1,6 @@
-import type { LearningController } from "./use-learning-controller";
+import type { LearningViewProps } from "./types";
 
-export function ClockStatus({ clock }: Pick<LearningController, "clock">) {
+export function ClockStatus({ clock }: Pick<LearningViewProps, "clock">) {
   if (clock.ready) return null;
   return (
     <div className="notice" role={clock.error ? "alert" : "status"}>

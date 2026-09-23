@@ -1,8 +1,8 @@
 // Local synthetic accounts only. Never point this at the deployed site.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { chromium } = require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const base = 'http://127.0.0.1:8787';
+const { chromium } = require('./qa/runtime.cjs');
+const base = require('./qa/runtime.cjs').base;
 const out = 'outputs/refactor-audit';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json'));
@@ -13,6 +13,18 @@ const checks = [], errors = [];
 const requests = [];
 let currentPage;
 const saved = page => page.getByText('서버에 저장됨', { exact: true }).waitFor();
+const resume = async page => {
+  // Reconnection starts a clock sync on browser focus. Establish focus before
+  // clicking, and await this action's acknowledgement, not an earlier status.
+  await page.bringToFront();
+  const button = page.getByRole('button', { name: '중단한 학습 이어서', exact: true });
+  await button.focus();
+  await Promise.all([
+    page.waitForResponse(response => response.url().endsWith('/api/state') && response.request().method() === 'PUT' && response.status() === 200),
+    button.click(),
+  ]);
+  await saved(page);
+};
 const read = async context => (await context.request.get(base + '/api/state')).json();
 const timerSeconds = async page => {
   const text = await page.locator('.timer > span').first().innerText();
@@ -25,7 +37,7 @@ const timerSeconds = async page => {
   let serial = 0;
   const fresh = async (stage, freezeClock = false) => {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: {
-      'oai-authenticated-user-id': 'refactor_' + Date.now() + '_' + serial++,
+      'oai-authenticated-user-id': require('./qa/runtime.cjs').account('refactor_') + '_' + serial++,
       'oai-authenticated-user-email': 'refactor@example.test',
     } });
     const data = await read(context);
@@ -50,8 +62,7 @@ const timerSeconds = async page => {
     if (freezeClock) await page.clock.install();
     await page.goto(base, { waitUntil: 'domcontentloaded' });
     await saved(page);
-    await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
-    await saved(page);
+    await resume(page);
     if (freezeClock) await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
     return { context, page, session };
   };
@@ -92,10 +103,9 @@ const timerSeconds = async page => {
       assert.equal(stage === 'learn' ? stored.meaning : stage === 'en' ? stored.draft.answer : stored.sentence, draft);
       await page.reload({ waitUntil: 'domcontentloaded' });
       await saved(page);
-      await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
-      await saved(page);
+      await resume(page);
       assert.equal(await field.inputValue(), draft);
-      await page.addScriptTag({ path: 'work/axe/package/axe.min.js' });
+      await page.addScriptTag({ path: require('./qa/runtime.cjs').axePath });
       const accessibility = await page.evaluate(() => axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } }));
       assert.deepEqual(accessibility.violations, []);
       await page.screenshot({ path: `${out}/${stage}-resumed.png`, fullPage: true });

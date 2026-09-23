@@ -13,13 +13,16 @@ import {
 } from "@/components/ui/select";
 import { POS, type Progress, type Word } from "@/lib/learning";
 import { useState } from "react";
+import { useEditorSubmission } from "./use-editor-submission";
 export function PersonalWord({
   busy,
   onSave,
 }: {
   busy: boolean;
-  onSave: (w: Word, p: Progress) => void;
+  onSave: (w: Word, p: Progress) => Promise<boolean>;
 }) {
+  const { submitting, submit } = useEditorSubmission();
+  const [id] = useState(() => "personal_" + crypto.randomUUID());
   const [word, setWord] = useState("");
   const [meaning, setMeaning] = useState("");
   const [pos, setPos] = useState("n.");
@@ -33,7 +36,7 @@ export function PersonalWord({
           Oxford 공식 목록과 구분하여 ‘개인 추가’로 저장해요.
         </DialogDescription>
       </DialogHeader>
-      <div className="dialog-scroll">
+      <fieldset className="dialog-scroll editor-fields" disabled={submitting}>
       <label>
         영어 단어
         <input
@@ -42,7 +45,7 @@ export function PersonalWord({
           maxLength={80}
         />
       </label>
-      <Select value={pos} onValueChange={setPos}>
+      <Select disabled={submitting} value={pos} onValueChange={setPos}>
         <SelectTrigger aria-label="개인 단어 품사">
           <SelectValue />
         </SelectTrigger>
@@ -78,15 +81,15 @@ export function PersonalWord({
           maxLength={2000}
         />
       </label>
-      </div>
+      </fieldset>
       <div className="dialog-actions">
       <button
         className="primary-button full"
-        disabled={busy || !word.trim() || !meaning.trim()}
+        disabled={busy || submitting || !word.trim() || !meaning.trim()}
         onClick={() =>
-          onSave(
+          void submit(() => onSave(
             {
-              id: "personal_" + crypto.randomUUID(),
+              id,
               word: word.trim(),
               headword: word.trim(),
               pos,
@@ -100,7 +103,7 @@ export function PersonalWord({
               translation,
               familiarity: "new",
             },
-          )
+          ))
         }
       >
         내 단어장에 추가

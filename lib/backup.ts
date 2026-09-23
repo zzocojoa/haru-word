@@ -7,7 +7,6 @@ export const MAX_BACKUP_BYTES=8_000_000;
 export const RESTORE_CHUNK_BYTES=1_800_000;
 const catalog=new Map(rawWords.map(w=>[w.id,w]));
 const bytes=(value:string)=>new TextEncoder().encode(value).byteLength;
-const realDate=(value:string)=>/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value+'T12:00:00Z'))&&new Date(value+'T12:00:00Z').toISOString().slice(0,10)===value;
 
 export const backupStateSchema=z.object({
  settings:settingsSchema,
@@ -16,13 +15,10 @@ export const backupStateSchema=z.object({
 }).strict().superRefine((s,c)=>{
  const issue=(message:string)=>c.addIssue({code:'custom',message});
  const validEntry=(id:string)=>catalog.has(id)||!!s.progress[id]?.personal;
- const checkDate=(d:string|undefined)=>{if(d&&!realDate(d))issue('존재하지 않는 학습 날짜가 있어요.');};
  for(const [id,p]of Object.entries(s.progress)){
   if(!catalog.has(id)&&!/^personal_[a-zA-Z0-9-]{36}$/.test(id))issue('목록에 없는 단어가 있어요.');
   if(id.startsWith('personal_')!==!!p.personal||p.personal&&(p.personal.id!==id||!POS[p.personal.pos]))issue('개인 단어의 정보가 맞지 않아요.');
-  for(const sense of [p,...Object.values(p.senses||{})]){checkDate(sense.lastStudied);checkDate(sense.lastReviewed);sense.studyDates?.forEach(checkDate);}
   for(const [meaning,sense]of Object.entries(p.senses||{}))if(sense.meaning!==undefined&&sense.meaning!==meaning)issue('뜻별 기록이 일치하지 않아요.');
-  p.encounters?.forEach(e=>checkDate(e.date));
  }
  for(const [level,a]of Object.entries(s.settings.assessments)){
   if(!a)continue;
@@ -31,13 +27,8 @@ export const backupStateSchema=z.object({
  if(s.settings.activeSessionId&&!s.sessions[s.settings.activeSessionId])issue('이어갈 학습 회차가 파일에 없어요.');
  for(const [key,v]of Object.entries(s.sessions)){
   if(key!==v.id)issue('학습 회차의 식별자가 맞지 않아요.');
-  checkDate(v.date);if(v.kind==='monthly'){if(!/^\d{4}-\d{2}$/.test(v.period)||!realDate(v.period+'-01'))issue('월말 점검 기간이 잘못되었어요.');}else checkDate(v.period.length===10?v.period:'invalid');
-  if(!v.ids.length||v.ids.some(id=>!v.records[id]||!validEntry(v.records[id].entryId||id)))issue('회차의 목표 단어나 개인 단어 정보가 빠졌어요.');
-  if(v.warmupIds.some(id=>!validEntry(id))||new Set(v.warmupIds).size!==v.warmupIds.length||Object.keys(v.warmupResults||{}).some(id=>!v.warmupIds.includes(id))||v.warmupDraft&&!v.warmupIds.includes(v.warmupDraft.id))issue('이전 복습의 단어 정보가 맞지 않아요.');
-  if(Object.keys(v.wordKeys||{}).some(id=>!v.ids.includes(id))||v.retry.some(r=>r.seen?.some(id=>!v.ids.includes(id))))issue('재시도 순서가 맞지 않아요.');
-  if(v.finished!==(v.stage==='done')||v.retryMode&&!v.retry.length||v.index>(v.stage==='warmup'?v.warmupIds.length:v.ids.length)||(!v.finished&&!v.retryMode&&v.stage!=='checkpoint'&&v.index>=(v.stage==='warmup'?v.warmupIds.length:v.ids.length)))issue('학습을 이어갈 위치가 맞지 않아요.');
-  if(v.stage==='checkpoint'&&((v.kind!=='monthly'&&v.kind!=='weekly')||v.index>=v.ids.length)||v.resumeAfterRetry&&v.resumeAfterRetry.index>v.ids.length)issue('점검을 이어갈 위치가 맞지 않아요.');
-  for(const r of Object.values(v.records)){checkDate(r.learnedOn);checkDate(r.lastPracticedOn);}
+  if(v.ids.some(id=>!validEntry(v.records[id]?.entryId||id)))issue('회차의 목표 단어나 개인 단어 정보가 빠졌어요.');
+  if(v.warmupIds.some(id=>!validEntry(id)))issue('이전 복습의 단어 정보가 맞지 않아요.');
  }
 });
 

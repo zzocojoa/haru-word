@@ -1,11 +1,11 @@
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8787';const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const word=words.find(w=>w.word==='arrive'&&w.pos==='v.');
+const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const word=words.find(w=>w.word==='arrive'&&w.pos==='v.');
 const original='I arrive home yesterday.';const correction='I arrived home yesterday.';const explanation='어제 일어난 일이므로 arrive를 arrived로 바꿔요.';
 const feedback={original,correctedSentence:correction,meaningUsage:'appropriate',grammar:'needs_work',explanation,model:'gemini-3.1-flash-lite',createdAt:new Date().toISOString()};
 (async()=>{const browser=await chromium.launch({headless:true});const checks=[],errors=[];let calls=0;
  try{
-  const headers={'oai-authenticated-user-id':'feedback_'+Date.now(),'oai-authenticated-user-email':'qa@example.test'};
+  const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('feedback_'),'oai-authenticated-user-email':'qa@example.test'};
   const context=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});const state=async()=> (await context.request.get(base+'/api/state')).json();let data=await state();
   const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const sid=crypto.randomUUID();
   const rec={meaning:'도착하다',familiarity:'known',en:'independent',ko:'help',sentenceStatus:'unmeasured',sentence:'',notes:''};

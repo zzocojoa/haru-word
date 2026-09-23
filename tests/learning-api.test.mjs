@@ -54,3 +54,27 @@ test('feedback transport sends only study input and forwards caller cancellation
   controller.abort(reason);
   await assert.rejects(pending, e => e === reason); assert.equal(calls, 1);
 });
+
+test('invalid success revisions never acknowledge save or restore and never retry', async () => {
+  for (const payload of [{}, { revision: '2' }, { revision: -1 }, { revision: 1.5 }, { revision: 1 }, { revision: 3 }, null]) {
+    let calls = 0;
+    globalThis.fetch = async () => { calls++; return Response.json(payload); };
+    await assert.rejects(api.saveLearningState({ revision: 1, progress: {}, sessions: {} }), { name: 'InvalidResponseError' });
+    await assert.rejects(api.restoreLearningState(structuredClone(EMPTY), 1), { name: 'InvalidResponseError' });
+    assert.equal(calls, 2);
+  }
+});
+
+test('invalid snapshots fail before the store receives replacement state', async () => {
+  for (const payload of [{}, { revision: 0 }, { revision: 0, state: {} }, { revision: '0', state: EMPTY }, { revision: 0, state: { ...EMPTY, sessions: [] } }]) {
+    globalThis.fetch = async () => Response.json(payload);
+    await assert.rejects(api.loadLearningState(), { name: 'InvalidResponseError' });
+  }
+});
+
+test('malformed JSON from a state request also requires explicit reconciliation', async () => {
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; return new Response('not JSON'); };
+  await assert.rejects(api.saveLearningState({ revision: 0, progress: {}, sessions: {} }), { name: 'InvalidResponseError' });
+  assert.equal(calls, 1);
+});

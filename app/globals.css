@@ -67,3 +67,6 @@
   --space-6:24px;
   --space-8:32px;
 }
+
+/* Semantic input lock without changing the framed editor layout. */
+.editor-fields { border: 0; padding: var(--space-1); margin: 0; min-inline-size: 0; }

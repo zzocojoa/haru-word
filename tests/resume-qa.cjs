@@ -1,10 +1,10 @@
 const {markFamiliarity}=require('./familiarity-actions.cjs');
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
-const base='http://127.0.0.1:8787';
+const base=require('./qa/runtime.cjs').base;
 (async()=>{const browser=await chromium.launch({headless:true});const errors=[];const checks=[];
 try{
- const identity='resume_'+Date.now();const headers={'oai-authenticated-user-id':identity,'oai-authenticated-user-email':'qa@example.test'};const context=await browser.newContext({extraHTTPHeaders:headers});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base);await page.getByText('서버에 저장됨',{exact:true}).waitFor();
+ const identity=require('./qa/runtime.cjs').account('resume_');const headers={'oai-authenticated-user-id':identity,'oai-authenticated-user-email':'qa@example.test'};const context=await browser.newContext({extraHTTPHeaders:headers});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base);await page.getByText('서버에 저장됨',{exact:true}).waitFor();
  await page.getByRole('button',{name:'친숙도 확인',exact:true}).click();for(let i=0;i<20;i++){await markFamiliarity(page,'new');await page.getByText('서버에 저장됨',{exact:true}).waitFor();}await page.getByRole('heading',{name:'나의 출발점을 찾았어요.'}).waitFor();let data=await (await context.request.get(base+'/api/state')).json();assert.equal(data.state.settings.assessments.A1.completed,true);assert.equal(Object.keys(data.state.settings.assessments.A1.marks).length,20);checks.push('20-word assessment persists and recommends a smaller A1 goal');
  await page.getByRole('button',{name:'하루 2개로 설정',exact:true}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();await page.getByRole('button',{name:'이 수준에서 학습하기'}).click();for(let i=0;i<2;i++){await page.getByRole('button',{name:'뜻을 확인했어요'}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();}
  await page.getByRole('button',{name:'생각이 안 나요'}).click();await page.getByText('서버에 저장됨',{exact:true}).waitFor();await page.getByRole('button',{name:'오늘 종료 · 저장'}).click();await page.getByRole('heading',{name:'오늘의 기록을 남겼어요.'}).waitFor();await page.getByRole('button',{name:'이어서 학습',exact:true}).click();await page.getByRole('heading',{name:'영어 → 뜻',exact:true}).waitFor();assert.ok(await page.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).isDisabled());assert.ok(await page.getByLabel('한국어 뜻 입력').getAttribute('readonly')!==null);checks.push('hint and revealed answer persist through save/resume');

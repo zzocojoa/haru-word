@@ -1,5 +1,5 @@
 // Local built Worker only. Isolated test identities never touch hosted learner records.
-const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const level=process.argv[2]||'A1';assert.ok(['A1','A2','B1','B2'].includes(level));
@@ -10,10 +10,10 @@ const samples={
  B2:{cases:[['bet','v.'],['dismiss','v.'],['dig','v.'],['melt','v.'],['capture','n.'],['regard','n.'],['soul','n.'],['relatively','adv.']],legacy:{word:'capture',meaning:'생포',expression:'the capture of a prisoner',example:'The story describes the capture of a prisoner.',translation:'그 이야기는 한 포로의 생포를 묘사해요.'}}
 };
 const {cases,legacy}=samples[level];
-const base='http://127.0.0.1:8787',out='outputs/'+level.toLowerCase()+'-content-review';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out='outputs/'+level.toLowerCase()+'-content-review';fs.mkdirSync(out,{recursive:true});
 const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 (async()=>{const browser=await chromium.launch({headless:true});try{
- const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':level.toLowerCase()+'content_'+Date.now(),'oai-authenticated-user-email':'a1@example.test'}});
+ const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':level.toLowerCase()+require('./qa/runtime.cjs').account('content_'),'oai-authenticated-user-email':'a1@example.test'}});
  const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));const saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
  const get=async()=>{const r=await context.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};
  await p.goto(base);await saved();const initial=await get();
