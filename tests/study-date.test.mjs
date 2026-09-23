@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {build} from 'esbuild';
-import {EMPTY,newSession,dailyAssignedIds,pickDaily,reviewTargets,storeSense} from '../lib/learning.ts';
+import {EMPTY,newSession,dailyAssignedIds,pickDaily,reviewTargets,storeSense,emptyRecord,ensureCarryover} from '../lib/learning.ts';
 await build({entryPoints:['lib/study-date-correction.ts','lib/study-clock.ts','lib/backup.ts'],outdir:'work/study-date-tests',outExtension:{'.js':'.mjs'},bundle:true,format:'esm',platform:'node',logLevel:'silent'});
 const {correctDailyStudyDate,isCalendarDate,dailyOrigins}=await import('../work/study-date-tests/study-date-correction.mjs');
 const {createStudyClock}=await import('../work/study-date-tests/study-clock.mjs');
@@ -48,4 +48,27 @@ test('another session, sense and actual study day survive a correction',()=>{
 test('pending practice work is shown as carryover, not as new vocabulary',()=>{
  const state=structuredClone(EMPTY),id=words[0].id;
  state.progress[id]={needsReview:true};assert.deepEqual(dailyOrigins(state,[id,words[1].id],'2026-09-22'),{returning:1,newCount:1});
+});
+test('assessed practice stays returning before assignment, after assignment and reload',()=>{
+ const state=structuredClone(EMPTY),date='2026-09-23',daily=newSession(state,words,content,'daily',date),[failed,written,fresh]=daily.ids;
+ const practice={...structuredClone(daily),id:crypto.randomUUID(),kind:'practice',date,ids:['failed-sense',written],records:{
+  'failed-sense':{...emptyRecord('one meaning'),entryId:failed,ko:'help'},
+  [written]:{...emptyRecord('one meaning'),entryId:written,sentenceStatus:'written'},
+ }};
+ state.sessions[practice.id]=practice;state.progress[failed]={needsReview:true};
+ const before=structuredClone(state),expected={returning:2,newCount:1};
+ assert.deepEqual(dailyOrigins(state,[failed,written,fresh],date),expected);assert.deepEqual(state,before);
+ const assigned=ensureCarryover({...state,sessions:{...state.sessions,[daily.id]:daily}},daily);
+ assert.deepEqual(dailyOrigins(assigned,daily.ids,date),expected);
+ assert.deepEqual(dailyOrigins(JSON.parse(JSON.stringify(assigned)),daily.ids,date),expected);
+});
+test('unmeasured review targets, future results and today-only daily work stay new',()=>{
+ const state=structuredClone(EMPTY),date='2026-09-23',daily=newSession(state,words,content,'daily',date),[waiting,future,current]=daily.ids;
+ daily.records[current]={...daily.records[current],en:'independent',learnedOn:date};
+ const monthly={...structuredClone(daily),id:crypto.randomUUID(),kind:'monthly',date:'2026-09-22',ids:[waiting,future],records:{
+  [waiting]:emptyRecord('one meaning'),[future]:{...emptyRecord('one meaning'),ko:'help',lastPracticedOn:'2026-09-24'},
+ }};
+ state.sessions={[daily.id]:daily,[monthly.id]:monthly};
+ const assigned=ensureCarryover(state,daily);
+ assert.deepEqual(dailyOrigins(assigned,daily.ids,date),{returning:0,newCount:3});
 });

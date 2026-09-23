@@ -124,6 +124,27 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     assert.equal(resumed.sessions[topup.id].index, topup.index); assert.equal(resumed.sessions[topup.id].stage, topup.stage);
     await c2.close();
     checks.push('another browser restores the whole-day overview and resumes only the unfinished seven-word round');
+    const practiceContext = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: { ...headers,
+      'oai-authenticated-user-id': headers['oai-authenticated-user-id'] + '_practice' } });
+    const practiceInitial = await get(practiceContext), practice = makeSession('practice');
+    practice.ids = [ids[0]]; practice.records = { [ids[0]]: { ...record(ids[0], false), ko: 'help' } };
+    const practiceProgress = Object.fromEntries(words.filter(w => w.level === 'A1').map(w => [w.id, { familiarity: 'uncertain' }]));
+    practiceProgress[ids[0]] = { familiarity: 'known', meaning: content[ids[0]].meaning, ko: 'help', needsReview: true };
+    await put(practiceContext, { revision: practiceInitial.revision, progress: practiceProgress, sessions: { [practice.id]: practice },
+      settings: { ...practiceInitial.state.settings, dailyGoal: 3, assessments: { A1: { ids: [], index: 0, marks: {}, completed: true } } } });
+    const practicePage = await practiceContext.newPage();
+    practicePage.on('pageerror', e => errors.push(e.message));
+    practicePage.on('request', r => { if (/sentence-feedback|generativelanguage/.test(r.url())) aiRequests.push(r.url()); });
+    await practicePage.goto(base); await saved(practicePage);
+    const origins = () => practicePage.getByText('새 학습 2개 · 이전 학습·복습 1개', { exact: true }).waitFor();
+    await origins();
+    await practicePage.getByRole('button', { name: '오늘의 학습 시작', exact: true }).click(); await saved(practicePage);
+    await practicePage.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(practicePage);
+    await practicePage.getByRole('button', { name: '학습 홈으로', exact: false }).click(); await origins();
+    await practicePage.reload(); await saved(practicePage); await origins();
+    assert.deepEqual((await get(practiceContext)).state.sessions[practice.id], practice);
+    await practiceContext.close();
+    checks.push('actual practice failures remain returning vocabulary before assignment, after pause and on reload without altering the practice record');
     assert.deepEqual(errors, []); assert.deepEqual(aiRequests, []);
     const result = { passed: true, checks, audits, errors, aiRequests };
     fs.writeFileSync(out + '/verification.json', JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
