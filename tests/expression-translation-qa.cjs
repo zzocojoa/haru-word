@@ -46,6 +46,7 @@ const oldContent = id => { const { expressionTranslation, ...old } = content[id]
   await p.getByRole('button', { name: 'arrive 동사', exact: true }).click(); dialog = p.getByRole('dialog');
   const phrase = dialog.getByLabel('함께 익힐 표현', { exact: true }), gloss = dialog.getByLabel('표현의 한국어 뜻', { exact: true });
   assert.equal(await gloss.inputValue(), '집에 도착하다');
+  await phrase.fill(' arrive home '); assert.equal(await gloss.inputValue(), '집에 도착하다');
   await phrase.fill('arrive at school'); assert.equal(await gloss.inputValue(), '');
   await gloss.fill('학교에 도착하다'); await audit('editable phrase gloss'); await p.screenshot({ path: out + '/editor-mobile.png' });
   await dialog.getByRole('button', { name: '기록 저장', exact: true }).click(); await saved(p); await dialog.waitFor({ state: 'hidden' });

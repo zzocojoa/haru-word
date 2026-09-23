@@ -63,6 +63,41 @@ fs.mkdirSync(dir, { recursive: true });
     const accepted = await page.evaluate(() => window.lateFeedback({ original: 'My old sentence.', correctedSentence: 'My old sentence.', meaningUsage: 'appropriate', grammar: 'natural', explanation: '검사', model: 'gemini-3.1-flash-lite', createdAt: new Date().toISOString() }));
     assert.equal(accepted, false);
     checks.push('late AI feedback does not attach to a different current target');
+    await page.evaluate(() => window.studyHarness.patch({ stage: 'learn', index: 0 }));
+    await page.getByRole('heading', { name: /harness-word learn/ }).waitFor();
+    await page.evaluate(() => {
+      const c = window.studyHarness.controller;
+      c.setMeaning(value => ' ' + value + ' ');
+      c.setExpression(value => ' ' + value + ' ');
+    });
+    await page.waitForFunction(() => window.studyHarness.controller.expression === ' an example ');
+    assert.equal(await page.evaluate(() => window.studyHarness.controller.expressionTranslation), '하나의 예');
+    await page.evaluate(() => {
+      const c = window.studyHarness.controller;
+      c.setExpression('another');
+      c.setExpression(value => value + ' example');
+      c.setExpressionTranslation('또 다른 예');
+    });
+    await page.waitForFunction(() => window.studyHarness.controller.expressionTranslation === '또 다른 예');
+    assert.equal(await page.evaluate(() => window.studyHarness.controller.expression), 'another example');
+    await page.evaluate(() => window.studyHarness.controller.setMeaning('다른 뜻'));
+    await page.waitForFunction(() => window.studyHarness.controller.meaning === '다른 뜻');
+    assert.equal(await page.evaluate(() => window.studyHarness.controller.expressionTranslation), '');
+    checks.push('batched functional phrase edits use current values, preserve whitespace-only edits and clear changed meanings');
+    await page.evaluate(() => {
+      window.lateExpression = window.studyHarness.controller.setExpression;
+      window.lateGloss = window.studyHarness.controller.setExpressionTranslation;
+      window.studyHarness.patch({ index: 1 });
+    });
+    await page.getByRole('heading', { name: /harness-next learn/ }).waitFor();
+    await page.evaluate(() => window.studyHarness.patch({ index: 0 }));
+    await page.getByRole('heading', { name: /harness-word learn/ }).waitFor();
+    await page.evaluate(() => { window.lateExpression('stale phrase'); window.lateGloss('오래된 해석'); });
+    assert.deepEqual(await page.evaluate(() => {
+      const c = window.studyHarness.controller;
+      return [c.meaning, c.expression, c.expressionTranslation];
+    }), ['예', 'an example', '하나의 예']);
+    checks.push('phrase fields restore together and stale setters cannot change a later visit to the same learning card');
     assert.deepEqual(errors, []);
     console.log(JSON.stringify({ passed: true, checks, errors }));
   } finally { await browser.close(); }

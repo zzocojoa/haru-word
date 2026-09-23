@@ -1,10 +1,13 @@
 """Build redistributable learning data and attribution from the exact shipped content."""
 import json,shutil
 from pathlib import Path
-root=Path('public/sources');root.mkdir(parents=True,exist_ok=True)
+from expression_translations import load_expression_translations, validate_expression_translations
+
 words=json.loads(Path('data/words.json').read_text('utf-8'))
 content=json.loads(Path('data/content.json').read_text('utf-8'))
+validate_expression_translations(content, load_expression_translations(), require_applied=True)
 records=[{**w,**content[w['id']]} for w in words]
+root=Path('public/sources');root.mkdir(parents=True,exist_ok=True)
 (root/'learning-data.json').write_text(json.dumps({'glossLicense':'CC BY-SA 4.0','exampleLicenses':{'Tatoeba 참고 예문':'CC BY 2.0','학습용 작성 예문':'CC BY-SA 4.0'},'records':records},ensure_ascii=False),encoding='utf-8')
 shutil.copyfile('data/source-audit.json',root/'source-audit.json')
 credits='''하루단어 데이터 출처 및 변경 내역 · 2026-09-22

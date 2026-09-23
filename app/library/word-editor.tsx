@@ -5,6 +5,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { cardContent } from "@/lib/catalog";
+import { editExpression, expressionDraft, type ExpressionDraft } from "@/lib/expression";
 import {
   allSenses,
   FAMILIARITY_TEXT,
@@ -20,6 +21,7 @@ import {
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { DictionaryLinks, Speak } from "../ui";
+import { ExpressionFields } from "../expression-fields";
 export function WordEditor({
   activityDate,
   word,
@@ -38,11 +40,13 @@ export function WordEditor({
   const senses = allSenses(base);
   const [senseKey, setSenseKey] = useState(content.meaning);
   const selectedSense = senseKey ? senseProgress(base, senseKey) : undefined;
-  const [meaning, setMeaning] = useState(content.meaning);
+  const [phrase, setPhrase] = useState(() => expressionDraft(content));
+  const { meaning, expression, expressionTranslation } = phrase;
+  function setPhraseField(field: keyof ExpressionDraft, value: string) {
+    setPhrase(previous => editExpression(previous, field, value));
+  }
   const [fam, setFam] = useState<Familiarity | undefined>(p?.familiarity);
   const [familiarityTouched, setFamiliarityTouched] = useState(false);
-  const [expression, setExpression] = useState(content.expression);
-  const [expressionTranslation, setExpressionTranslation] = useState(content.expressionTranslation || "");
   const [example, setExample] = useState(content.example);
   const [translation, setTranslation] = useState(content.translation);
   const [notes, setNotes] = useState(p?.notes || "");
@@ -55,9 +59,7 @@ export function WordEditor({
       ? cardContent(word.id, { ...senseProgress(base, key), meaning: key })
       : { meaning: "", expression: "", expressionTranslation: "", example: "", translation: "" };
     setSenseKey(key);
-    setMeaning(c.meaning);
-    setExpression(c.expression);
-    setExpressionTranslation(c.expressionTranslation || "");
+    setPhrase(expressionDraft(c));
     setExample(c.example);
     setTranslation(c.translation);
     setNotes(key ? senseProgress(base, key).notes || "" : "");
@@ -143,30 +145,13 @@ export function WordEditor({
           aria-label="오늘의 뜻"
           maxLength={2000}
           value={meaning}
-          onChange={(e) => {
-            if(e.target.value.trim()!==meaning.trim())setExpressionTranslation("");
-            setMeaning(e.target.value);
-          }}
+          onChange={(e) => setPhraseField('meaning', e.target.value)}
         />
       </label>
-      <label>
-        함께 익힐 표현
-        <input
-          maxLength={2000}
-          value={expression}
-          onChange={(e) => {
-            if(e.target.value.trim()!==expression.trim())setExpressionTranslation("");
-            setExpression(e.target.value);
-          }}
-        />
-      </label>
-      <label>
-        표현의 한국어 뜻
-        <input maxLength={2000} value={expressionTranslation}
-          onChange={(e) => setExpressionTranslation(e.target.value)}
-          placeholder="영어 표현에 맞는 짧은 해석" />
-      </label>
-      <p className="small-note">영어 표현을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요.</p>
+      <ExpressionFields expression={expression} expressionTranslation={expressionTranslation}
+        onExpressionChange={value => setPhraseField('expression', value)}
+        onTranslationChange={value => setPhraseField('expressionTranslation', value)}
+        help="영어 표현을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요." />
       <label>
         영어 예문
         <textarea

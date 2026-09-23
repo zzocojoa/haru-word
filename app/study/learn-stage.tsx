@@ -3,6 +3,7 @@ import { POS } from "@/lib/learning";
 import { ArrowRight, BookOpen, PencilLine } from "lucide-react";
 import { DictionaryLinks, Speak } from "../ui";
 import { ExpressionLine } from "../expression-line";
+import { ExpressionFields } from "../expression-fields";
 import type { StudySessionController } from "./use-study-session-controller";
 type LearnStageProps = Pick<
   StudySessionController,
@@ -91,21 +92,9 @@ export function LearnStage({
         <summary>
           <PencilLine size={15} /> 표현·예문 수정하기
         </summary>
-        <label>
-          함께 익힐 표현
-          <input
-            value={expression}
-            maxLength={2000}
-            onChange={(e) => setExpression(e.target.value)}
-          />
-        </label>
-        <label>
-          표현의 한국어 뜻
-          <input value={expressionTranslation} maxLength={2000}
-            onChange={(e) => setExpressionTranslation(e.target.value)}
-            placeholder="영어 표현에 맞는 짧은 해석" />
-        </label>
-        <p className="small-note">표현이나 학습 뜻을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요.</p>
+        <ExpressionFields expression={expression} expressionTranslation={expressionTranslation}
+          onExpressionChange={setExpression} onTranslationChange={setExpressionTranslation}
+          help="표현이나 학습 뜻을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요." />
         <label>
           영어 예문
           <textarea

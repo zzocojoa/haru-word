@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { resolveCardContent, withExpressionTranslation } from '../lib/content.ts';
+import { editExpression, expressionDraft } from '../lib/expression.ts';
 import { restoreStudyDraft, studyMaterial, hasStudyDraftInput } from '../lib/study-draft.ts';
 import { EMPTY, newSession, applyRecord, senseProgress, selectSense, repeatDailySession } from '../lib/learning.ts';
 
@@ -11,11 +12,71 @@ for (const name of ['catalog', 'validation', 'backup']) {
   await build({ entryPoints: [`lib/${name}.ts`], outfile: `work/expression-tests/${name}.mjs`, bundle: true, platform: 'node', format: 'esm', logLevel: 'silent' });
 }
 const { WORDS, studyContent } = await import('../work/expression-tests/catalog.mjs');
-const { saveSchema } = await import('../work/expression-tests/validation.mjs');
+const { saveSchema, progressSchema } = await import('../work/expression-tests/validation.mjs');
 const { makeBackup, parseBackup } = await import('../work/expression-tests/backup.mjs');
 const base = { meaning: '도착하다', expression: 'arrive home', expressionTranslation: '집에 도착하다', example: 'I arrive home at seven.', translation: '나는 일곱 시에 집에 도착한다.', source: '학습용 작성 예문' };
 const word = WORDS.find(w => w.word === 'arrive' && w.pos === 'v.');
 const legacy = () => { const { expressionTranslation, ...rest } = base; return rest; };
+
+test('phrase editing clears changed contexts atomically, preserves whitespace edits and never mutates its input', () => {
+  const draft = Object.freeze({ ...expressionDraft(base), answer: 'keep my answer' });
+  for (const [field, value] of [['meaning', '다다르다'], ['expression', 'arrive at school']]) {
+    const next = editExpression(draft, field, value);
+    assert.deepEqual(next, { ...draft, [field]: value, expressionTranslation: '' });
+    assert.equal(draft.expressionTranslation, base.expressionTranslation);
+  }
+  for (const field of ['meaning', 'expression']) {
+    assert.equal(editExpression(draft, field, ` ${draft[field]} `).expressionTranslation, base.expressionTranslation);
+    assert.equal(editExpression(draft, field, draft[field]), draft);
+    assert.equal(editExpression(draft, field, '').expressionTranslation, '');
+  }
+  assert.deepEqual(editExpression(draft, 'expressionTranslation', '집으로 도착하다'), { ...draft, expressionTranslation: '집으로 도착하다' });
+  assert.equal(editExpression(draft, 'expressionTranslation', '').expressionTranslation, '');
+});
+
+test('phrase initialization restores all context fields together and preserves explicit blank glosses', () => {
+  assert.deepEqual(expressionDraft(), { meaning: '', expression: '', expressionTranslation: '' });
+  assert.equal(expressionDraft(legacy()).expressionTranslation, '');
+  assert.deepEqual(expressionDraft({ ...base, expressionTranslation: '' }), { meaning: base.meaning, expression: base.expression, expressionTranslation: '' });
+  assert.deepEqual(expressionDraft(base), { meaning: base.meaning, expression: base.expression, expressionTranslation: base.expressionTranslation });
+});
+
+test('matching glosses respect candidate order, explicit blank and no-op identity', () => {
+  const old = Object.freeze(legacy());
+  const wrong = { ...base, meaning: '다른 뜻', expressionTranslation: '무관한 해석' };
+  const preferred = { ...base, expressionTranslation: '저장된 해석' };
+  assert.equal(withExpressionTranslation(old, undefined, wrong, preferred, base).expressionTranslation, '저장된 해석');
+  assert.equal(withExpressionTranslation(old, { ...preferred, expressionTranslation: '' }, base).expressionTranslation, '');
+  assert.equal(withExpressionTranslation(old, { ...preferred, expression: 'ARRIVE HOME' }), old);
+  assert.equal(withExpressionTranslation(base, preferred), base);
+  assert.equal(resolveCardContent(base), base);
+});
+
+test('material, progress and sense schemas keep strictness, requiredness and the same optional gloss boundary', () => {
+  const s = newSession(structuredClone(EMPTY), [word], () => base, 'daily', '2026-09-23');
+  s.records[word.id].material = { ...base };
+  const payload = { revision: 0, progress: { [word.id]: { ...base, senses: { [base.meaning]: { expressionTranslation: '' } } } }, sessions: { [s.id]: s } };
+  // source is material-only, not a progress field.
+  delete payload.progress[word.id].source;
+  const targets = [p => p.progress[word.id], p => p.progress[word.id].senses[base.meaning], p => p.sessions[s.id].records[word.id].material];
+  for (const target of targets) {
+    for (const value of [undefined, '', '가'.repeat(2000)]) {
+      const copy = structuredClone(payload); target(copy).expressionTranslation = value;
+      assert.equal(saveSchema.safeParse(copy).success, true);
+    }
+    for (const value of [null, 7, '가'.repeat(2001)]) {
+      const copy = structuredClone(payload); target(copy).expressionTranslation = value;
+      assert.equal(saveSchema.safeParse(copy).success, false);
+    }
+    const unknown = structuredClone(payload); target(unknown).unexpected = 'reject';
+    assert.equal(saveSchema.safeParse(unknown).success, false);
+  }
+  for (const field of ['meaning', 'expression', 'example', 'translation', 'source']) {
+    const copy = structuredClone(payload); delete copy.sessions[s.id].records[word.id].material[field];
+    assert.equal(saveSchema.safeParse(copy).success, false, field);
+  }
+  assert.equal(progressSchema.safeParse({ senses: { '선택한 뜻': {} } }).success, true);
+});
 
 test('all 3809 authored phrase glosses are bound to their exact catalog phrase and sense', () => {
   const glosses = JSON.parse(readFileSync('data/expression-translations.json', 'utf8'));

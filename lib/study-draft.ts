@@ -1,9 +1,7 @@
 import type { Content, RecordItem, Session } from './learning';
+import { expressionDraft, type ExpressionDraft } from './expression.ts';
 
-export type StudyDraft = {
-  meaning: string;
-  expression: string;
-  expressionTranslation: string;
+export type StudyDraft = ExpressionDraft & {
   example: string;
   translation: string;
   answer: string;
@@ -25,9 +23,7 @@ export function restoreStudyDraft(session: Session, id: string | undefined, cont
   const remembered = session.stage === 'warmup' && session.warmupDraft?.id === id
     ? session.warmupDraft : matching ? recall : undefined;
   return {
-    meaning: content?.meaning || '',
-    expression: content?.expression || '',
-    expressionTranslation: content?.expressionTranslation || '',
+    ...expressionDraft(content),
     example: content?.example || '',
     translation: content?.translation || '',
     answer: remembered?.answer || '',

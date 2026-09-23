@@ -5,7 +5,7 @@ import { useStudySessionController } from '../app/study/use-study-session-contro
 import { EMPTY, type Session, type State, type Word } from '../lib/learning';
 
 const word: Word = { id: 'harness-word', word: 'example', headword: 'example', pos: 'n.', level: 'A1', page: 1 };
-const material = { meaning: '예', expression: '', example: '', translation: '', source: 'test' };
+const material = { meaning: '예', expression: 'an example', expressionTranslation: '하나의 예', example: '', translation: '', source: 'test' };
 const record = { meaning: '예', en: 'unmeasured', ko: 'unmeasured', sentenceStatus: 'unmeasured', sentence: '', notes: '', material } as const;
 const first: Session = {
   id: 'harness-session', kind: 'daily', date: '2026-09-22', period: '2026-09-22',

@@ -16,7 +16,7 @@ if args.apply:
         if patch.get('source')=='학습용 작성 예문':
             content[key].pop('attribution',None)
             content[key].pop('url',None)
-    apply_expression_translations(content)
+    content=apply_expression_translations(content)
     path.write_text(json.dumps(content,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
 words=json.loads(Path('data/words.json').read_text('utf-8'))
 # Includes valid particles/pronouns/numerals: these are review candidates, not failures.

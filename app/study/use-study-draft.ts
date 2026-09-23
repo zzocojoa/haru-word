@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState, type SetStateAction } from 'react';
 import type { Content, Session } from '@/lib/learning';
+import { editExpression } from '@/lib/expression';
 import { hasStudyDraftInput, restoreStudyDraft, studyQuestionKey, type StudyDraft } from '@/lib/study-draft';
 
 export function useStudyDraft(session: Session, id: string | undefined, content?: Content) {
@@ -20,11 +21,11 @@ export function useStudyDraft(session: Session, id: string | undefined, content?
     setSnapshot(previous => {
       if (previous.question !== question || previous.generation !== generation) return previous;
       const next = typeof value === 'function' ? value(previous.draft[field]) : value;
-      const changedPhrase = (field === 'expression' || field === 'meaning')
-        && String(next).trim() !== String(previous.draft[field]).trim();
-      return { ...previous, draft: { ...previous.draft, [field]: next,
-        ...(changedPhrase ? { expressionTranslation: '' } : {}),
-      } };
+      const draft = (field === 'expression' || field === 'meaning' || field === 'expressionTranslation')
+        && typeof next === 'string'
+        ? editExpression(previous.draft, field, next)
+        : { ...previous.draft, [field]: next };
+      return draft === previous.draft ? previous : { ...previous, draft };
     });
   }, [question, generation]);
   const setAiPending = useCallback((value: SetStateAction<boolean>) => {
