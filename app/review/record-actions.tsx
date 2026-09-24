@@ -1,5 +1,6 @@
 "use client";
-import { lazy,Suspense,useRef,useState } from 'react';
+import { lazy,Suspense,useRef } from 'react';
+import { useNavigationState } from '../navigation';
 import { Download, MoreHorizontal } from 'lucide-react';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { exportLog, exportTutor, type State, type Word } from '@/lib/learning';
@@ -8,7 +9,7 @@ const BackupExportDialog=lazy(()=>import('../backup-export-dialog'));
 
 export function RecordActions({state,words,date,now,busy,onRestoreOpen}:{state:State;words:Word[];date:string;now:()=>number;busy:boolean;onRestoreOpen:()=>void}) {
   const openingRestore=useRef(false);
-  const [exportOpen,setExportOpen]=useState(false);
+  const [exportOpen,setExportOpen]=useNavigationState('log.export',false);
   return <><DropdownMenu modal={false}>
     <DropdownMenuTrigger asChild><button className="secondary-button" data-backup-trigger><MoreHorizontal size={18}/>기록 관리</button></DropdownMenuTrigger>
     <DropdownMenuContent align="end" className="record-menu" onCloseAutoFocus={event=>{if(openingRestore.current){event.preventDefault();openingRestore.current=false;}}}>

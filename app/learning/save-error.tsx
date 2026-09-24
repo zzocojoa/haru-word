@@ -13,6 +13,8 @@ import {
 import { download } from "../ui";
 import type { LearningViewProps } from "./types";
 import { DiagnosticDownload } from "./diagnostic-download";
+import { useId } from 'react';
+import { useNavigationState } from '../navigation';
 type SaveErrorProps = Pick<
   LearningViewProps,
   "saveError" | "error" | "conflict" | "saving" | "unsaved" | "store" | "state"
@@ -26,6 +28,8 @@ export function SaveError({
   store,
   state,
 }: SaveErrorProps) {
+  const id = useId();
+  const [confirm, setConfirm] = useNavigationState(`reload.${id}`, false, true);
   return (
     <div ref={saveError} className="error-banner" role="alert">
       <p>{error}</p>
@@ -53,7 +57,7 @@ export function SaveError({
           </button>
         )}
         {conflict && (
-          <AlertDialog>
+          <AlertDialog open={confirm} onOpenChange={setConfirm}>
             <AlertDialogTrigger asChild>
               <button className="secondary-button">최신 기록 불러오기</button>
             </AlertDialogTrigger>

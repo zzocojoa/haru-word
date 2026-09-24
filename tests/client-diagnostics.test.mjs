@@ -61,3 +61,9 @@ test('the in-memory journal stays bounded after many requests', () => {
   assert.equal(exportData.format, 'haru-diagnostics-v1');
   assert.ok(Number.isFinite(Date.parse(exportData.exportedAt)));
 });
+test('navigation diagnostics contain only the failure category and timestamp', () => {
+  diagnostics.recordNavigationDiagnostic('guard_error');
+  const event = events().at(-1);
+  assert.deepEqual(Object.keys(event).sort(), ['at', 'outcome', 'type']);
+  assert.equal(event.type, 'navigation'); assert.equal(event.outcome, 'guard_error');
+});

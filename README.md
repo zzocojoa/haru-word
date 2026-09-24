@@ -6,6 +6,8 @@
 
 승인 플랜 대조 검사에서 발견한 문제와 회귀 검증은 [GRAMMAR_PLAN_AUDIT.md](GRAMMAR_PLAN_AUDIT.md)에 정리합니다.
 
+iPhone 스와이프·브라우저 뒤로가기의 화면 범위와 저장 보호·검증·롤백은 [NAVIGATION.md](NAVIGATION.md)를 참조하세요.
+
 # vinext-starter
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.

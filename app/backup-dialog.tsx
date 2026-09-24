@@ -14,10 +14,11 @@ import { Progress } from '@/components/ui/progress';
 import { KIND_TEXT,type State } from '@/lib/learning';
 import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
 import { download } from './ui';
+import { useNavigationState } from './navigation';
 
 type Props={date:string;now:()=>number;state:State;getRevision?:()=>number;busy:boolean;restoring:boolean;error:string;conflict:boolean;onClose:()=>void;onRestore:(state:State,expected:State,jobId?:string)=>Promise<boolean>;onReload:()=>Promise<boolean>;onComplete:()=>void};
 export default function BackupDialog({date,now,state,getRevision=()=>0,busy,restoring,error,conflict,onClose,onRestore,onReload,onComplete}:Props){
- const [backup,setBackup]=useState<ParsedBackup|null>(null);const [baseline,setBaseline]=useState<State|null>(null);const [name,setName]=useState('');const [reading,setReading]=useState(false);const [fileError,setFileError]=useState('');const [backedUpState,setBackedUpState]=useState<State|null>(null);const [safetyError,setSafetyError]=useState('');const [acknowledged,setAcknowledged]=useState(false);const [confirm,setConfirm]=useState(false);const [success,setSuccess]=useState(false);const attempt=useRef(0);
+ const [backup,setBackup]=useState<ParsedBackup|null>(null);const [baseline,setBaseline]=useState<State|null>(null);const [name,setName]=useState('');const [reading,setReading]=useState(false);const [fileError,setFileError]=useState('');const [backedUpState,setBackedUpState]=useState<State|null>(null);const [safetyError,setSafetyError]=useState('');const [acknowledged,setAcknowledged]=useState(false);const [confirm,setConfirm]=useNavigationState('backup.confirm',false,true);const [success,setSuccess]=useState(false);const attempt=useRef(0);
  const [caps,setCaps]=useState<RestoreCapabilities|null>(null),[analysis,setAnalysis]=useState<AnalyzedBackup|null>(null),[job,setJob]=useState<RestoreJob|null>(null),[working,setWorking]=useState(false),[phase,setPhase]=useState('');
  const task=useRef<AbortController|null>(null),current=useRef(state);
  const [reloadRequired,setReloadRequired]=useState(false);

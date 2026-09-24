@@ -36,6 +36,7 @@ import { ChevronLeft, ChevronRight, Plus, Search, CircleHelp, ArrowRight } from 
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { PersonalWord } from "./library/personal-word";
 import { WordEditor } from "./library/word-editor";
+import { useNavigationState } from './navigation';
 type Props = {
   activityDate: () => string;
   state: State;
@@ -45,9 +46,9 @@ type Props = {
 };
 type LibraryProps = Props & { grammarEnabled?: boolean; persistence: GrammarPersistence };
 export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
-  const [view, setView] = useState('words'), [lessonId, setLessonId] = useState<LessonId | null>(null);
+  const [view, setView] = useNavigationState('library.view', 'words'), [lessonId, setLessonId] = useNavigationState<LessonId | null>('library.lesson', null);
   const [grammarFilter, setGrammarFilter] = useState<GrammarFilter>('all');
-  const [help, setHelp] = useState<LessonId | null>(null), [pos, setPos] = useState('all'), [page, setPage] = useState(0);
+  const [help, setHelp] = useNavigationState<LessonId | null>('library.help', null), [pos, setPos] = useState('all'), [page, setPage] = useState(0);
   const leave = useRef<GrammarLeave | null>(null), listPosition = useRef(0), focusReturn = useRef<HTMLElement | null>(null);
   const listPanel = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null), pendingPosition = useRef<number | null>(null);
@@ -106,8 +107,8 @@ const WordList = memo(function WordList({
   const [query, setQuery] = useState("");
   const [level, setLevel] = useState("all");
   const [familiarity, setFamiliarity] = useState("all");
-  const [selected, setSelected] = useState<{ word: Word; instance: string } | null>(null);
-  const [adding, setAdding] = useState<string | null>(null);
+  const [selected, setSelected] = useNavigationState<{ word: Word; instance: string } | null>('library.word', null);
+  const [adding, setAdding] = useNavigationState<string | null>('library.add', null);
   const dialogTrigger = useRef<HTMLButtonElement | null>(null);
   const searchInput = useRef<HTMLInputElement | null>(null);
   function restoreFocus(event: Event) {

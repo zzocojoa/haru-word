@@ -32,9 +32,13 @@ import { StudySession } from "./study-session";
 import { WordLibrary } from "./word-library";
 import { useKeyboardInset } from "./use-keyboard-inset";
 import { useTabPosition } from "./use-tab-position";
+import { NavigationProvider, useNavigationGuard, useNavigationEpoch } from './navigation';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
-export default function LearningApp({
+export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean }) {
+  return <NavigationProvider><LearningScreens {...props} /></NavigationProvider>;
+}
+function LearningScreens({
   initialServerTime,
   grammarEnabled = false,
 }: {
@@ -109,12 +113,23 @@ export default function LearningApp({
     restored,
     about,
     registerLeave,
+    flushStudy,
   } = useLearningController(initialServerTime);
+  useNavigationEpoch(store.epoch);
   const keyboardOpen = useKeyboardInset();
   const visitTab = useTabPosition(tab, store.epoch, setTab);
   const grammarLeave = useRef<GrammarLeave | null>(null);
   const registerGrammarLeave = useCallback((fn: GrammarLeave) => { grammarLeave.current = fn; return () => { if (grammarLeave.current === fn) grammarLeave.current = null; }; }, []);
   async function flushGrammar() { return await grammarLeave.current?.() ?? true; }
+  useNavigationGuard(async changed => {
+    if (store.restoring || (saving && [...changed].some(key => ['app.correctDate', 'app.backup', 'backup.confirm', 'library.word', 'library.add'].includes(key)))) return false;
+    if ([...changed].some(key => key === 'app.tab' || key === 'library.view' || key === 'library.lesson') && !await flushGrammar()) return false;
+    if ([...changed].some(key => ['app.tab', 'app.session', 'app.assessing', 'app.preparing'].includes(key)) && !await flushStudy()) {
+      setMessage('작성 중인 학습을 먼저 확인해 주세요. 저장이나 AI 교정이 끝나면 돌아갈 수 있어요.');
+      return false;
+    }
+    return true;
+  });
   const availability = (
     <AvailabilityNotice
       surface={settings ? "settings" : "page"}
@@ -160,7 +175,7 @@ export default function LearningApp({
       <div className="page-wrap">
         <div className="page-heading">
           <div>
-            <h1>
+            <h1 tabIndex={-1}>
               {tab === "today"
                 ? "오늘의 학습"
                 : tab === "library"

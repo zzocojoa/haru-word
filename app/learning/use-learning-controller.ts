@@ -18,6 +18,7 @@ import { isLearningWriteBlocked } from "@/lib/study-availability";
 import { recordAvailability } from "@/lib/client-diagnostics";
 import { useStudyTransition } from './use-study-transition';
 import { useLearningMessage } from './use-learning-message';
+import { useNavigationState } from '../navigation';
 export function useLearningController(initialServerTime: number) {
   const store = useLearningStore();
   const {
@@ -31,38 +32,33 @@ export function useLearningController(initialServerTime: number) {
     conflict,
     current: currentState,
   } = store;
-  const [reviewDate, setReviewDate] = useState<string | null>(null);
-  const [backupOpen, setBackupOpen] = useState(false);
-  const [correctingSession, setCorrectingSession] = useState<string | null>(
-    null,
-  );
+  const [reviewDate, setReviewDate] = useNavigationState<string | null>('app.reviewDate', null);
+  const [backupOpen, setBackupOpen] = useNavigationState('app.backup', false);
+  const [correctingSession, setCorrectingSession] = useNavigationState<string | null>('app.correctDate', null);
   const saveError = useRef<HTMLDivElement>(null);
   const { message, messageId, setMessage, dismissMessage } = useLearningMessage();
   useEffect(() => {
     if (error && !backupOpen)
       saveError.current?.scrollIntoView({ block: "center", behavior: "auto" });
   }, [error, backupOpen]);
-  const [navigation, setNavigation] = useState<{ view: View; visited: View[] }>(
-    { view: "today", visited: ["today"] },
-  );
-  const tab = navigation.view;
+  const [tab, navigateTab] = useNavigationState<View>('app.tab', 'today');
+  const [visited, setVisited] = useState<View[]>(['today']);
+  const navigation = { view: tab, visited: visited.includes(tab) ? visited : [...visited, tab] };
+  if (!visited.includes(tab)) setVisited([...visited, tab]);
   const setTab = useCallback(
     (view: View) => {
       setMessage('');
-      setNavigation((previous) => ({
-        view,
-        visited: previous.visited.includes(view)
-          ? previous.visited
-          : [...previous.visited, view],
-      }));
+      navigateTab(view);
     },
-    [setMessage],
+    [setMessage, navigateTab],
   );
-  const [preparing, setPreparing] = useState(false);
-  const [assessing, setAssessing] = useState(false);
-  const [showSession, setShowSession] = useState(false);
-  const [about, setAbout] = useState(false);
-  const [settings, setSettings] = useState(false);
+  const [preparing, setPreparing] = useNavigationState('app.preparing', false);
+  const [assessing, setAssessing] = useNavigationState('app.assessing', false);
+  const [sessionId, setSessionId] = useNavigationState<string | null>('app.session', null);
+  const showSession = !!sessionId;
+  const setShowSession = (show: boolean) => setSessionId(show ? currentState.current.settings.activeSessionId ?? null : null);
+  const [about, setAbout] = useNavigationState('app.about', false);
+  const [settings, setSettings] = useNavigationState('app.settings', false);
   const { register: registerLeave, prepare: flushStudy } = useStudyTransition();
   const prepareTransition = useCallback(async () => {
     const ready = await flushStudy();
@@ -88,8 +84,9 @@ export function useLearningController(initialServerTime: number) {
   useEffect(() => {
     recordAvailability("app", { loading, saving, signedIn, unsaved, conflict, clockReady: clock.ready, clockSyncing: clock.syncing });
   }, [loading, saving, signedIn, unsaved, conflict, clock.ready, clock.syncing]);
-  const active = state.settings.activeSessionId
-    ? state.sessions[state.settings.activeSessionId]
+  const activeId = sessionId ?? state.settings.activeSessionId;
+  const active = activeId
+    ? state.sessions[activeId]
     : undefined;
   const todays = Object.values(state.sessions).filter(
     (s) => s.kind === "daily" && s.date === date,
@@ -244,6 +241,7 @@ export function useLearningController(initialServerTime: number) {
       if (!id || (!busy && await prepareTransition())) setCorrectingSession(id);
     },
     registerLeave,
+    flushStudy,
     initialAssessment,
     metrics,
     monthlyRepair,

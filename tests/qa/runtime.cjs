@@ -32,6 +32,8 @@ async function stopBrowsers(code) {
   process.exit(code);
 }
 async function launchBrowser(options = {}) {
+  const { engine = 'chromium', ...launchOptions } = options;
+  if (!['chromium', 'webkit'].includes(engine)) throw new Error('Unsupported QA browser engine');
   if (!cleanupInstalled) {
     cleanupInstalled = true;
     for (const [signal, code] of [['SIGINT', 130], ['SIGTERM', 143], ['SIGHUP', 129]])
@@ -39,7 +41,7 @@ async function launchBrowser(options = {}) {
     process.on('message', message => { if (message === 'qa-stop') void stopBrowsers(124); });
     process.channel?.unref();
   }
-  const browser = await playwright().chromium.launch({ ...options, handleSIGINT: false, handleSIGTERM: false, handleSIGHUP: false });
+  const browser = await playwright()[engine].launch({ ...launchOptions, handleSIGINT: false, handleSIGTERM: false, handleSIGHUP: false });
   browsers.add(browser);
   browser.once('disconnected', () => browsers.delete(browser));
   return browser;

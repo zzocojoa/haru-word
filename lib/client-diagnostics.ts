@@ -11,6 +11,7 @@ type Gates = {
 type Event = { at: string } & (
   | { type: "request"; request: number; operation: Operation; outcome: Outcome; durationMs?: number; status?: number }
   | { type: "availability"; surface: "app" | "lesson"; stage?: string; gates: Gates }
+  | { type: "navigation"; outcome: "blocked" | "guard_error" }
 );
 const events: Event[] = [];
 let sequence = 0;
@@ -51,4 +52,7 @@ export function recordAvailability(surface: "app" | "lesson", values: Gates, sta
 }
 export function exportClientDiagnostics() {
   return JSON.stringify({ format: "haru-diagnostics-v1", exportedAt: new Date().toISOString(), events }, null, 2);
+}
+export function recordNavigationDiagnostic(outcome: 'blocked' | 'guard_error') {
+  append({ at: new Date().toISOString(), type: 'navigation', outcome });
 }
