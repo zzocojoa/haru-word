@@ -37,7 +37,21 @@ export type QuestionKey = 'q1' | 'q2' | 'q3';
 export const QUESTION_KEYS: QuestionKey[] = ['q1', 'q2', 'q3'];
 export const newGrammarProgress = (now = new Date().toISOString()): GrammarProgress => ({ stage: 0, answers: {}, sentence: '', updatedAt: now });
 export function recordAnswer(previous: GrammarAnswer | undefined, answer: string, helped = false): GrammarAnswer {
-  return { first: previous?.first ?? answer, latest: answer, helped: !!previous?.helped || helped, attempts: Math.min(1000, (previous?.attempts ?? 0) + 1) };
+  // Every submitted answer reveals an explanation. A retry is therefore no
+  // longer an unaided first response, even without pressing the hint button.
+  return { first: previous?.first ?? answer, latest: answer, helped: !!previous || helped, attempts: Math.min(1000, (previous?.attempts ?? 0) + 1) };
+}
+export function revealGrammarAnswer(progress: GrammarProgress, key: QuestionKey, reviewing: boolean): GrammarProgress {
+  const target = reviewing ? progress.review : progress;
+  if (!target) return progress;
+  const answer = target.answers[key];
+  const update = {
+    hints: [...new Set([...(target.hints ?? []), key])],
+    answers: answer ? { ...target.answers, [key]: { ...answer, helped: true } } : target.answers,
+  };
+  // Viewing help must be recorded even when the learner proceeds without
+  // submitting another answer. It is not itself an answer or another attempt.
+  return reviewing ? { ...progress, review: { ...progress.review!, ...update } } : { ...progress, ...update };
 }
 export function updateGrammarSentence(progress: GrammarProgress, sentence: string): GrammarProgress {
   if (progress.sentence === sentence) return progress;

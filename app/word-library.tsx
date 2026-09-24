@@ -46,6 +46,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   const [view, setView] = useState('words'), [lessonId, setLessonId] = useState<LessonId | null>(null);
   const [help, setHelp] = useState<LessonId | null>(null), [pos, setPos] = useState('all'), [page, setPage] = useState(0);
   const leave = useRef<GrammarLeave | null>(null), listPosition = useRef(0), focusReturn = useRef<HTMLElement | null>(null);
+  const listPanel = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null), pendingPosition = useRef<number | null>(null);
   const registerLeave = useCallback((fn: GrammarLeave) => { leave.current = fn; return () => { if (leave.current === fn) leave.current = null; }; }, []);
   const flush = useCallback(async () => await leave.current?.() ?? true, []);
@@ -53,12 +54,24 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   useEffect(() => registerOuterLeave(flush), [registerOuterLeave, flush]);
   useLayoutEffect(() => {
     if (pendingPosition.current === null) return;
-    window.scrollTo({ top: pendingPosition.current, behavior: 'instant' }); pendingPosition.current = null;
-    (view === 'words' ? focusReturn.current : heading.current)?.focus({ preventScroll: true });
+    const top = pendingPosition.current;
+    pendingPosition.current = null;
+    // The tab trigger's native pointer focus runs after the state change.
+    // Restore inside the now-visible panel on the next frame, and cancel stale
+    // restoration if another navigation supersedes this one.
+    const frame = requestAnimationFrame(() => {
+      const target = view === 'words'
+        ? focusReturn.current?.isConnected && listPanel.current?.contains(focusReturn.current)
+          ? focusReturn.current : listPanel.current?.querySelector<HTMLInputElement>('input[type="text"], input:not([type])')
+        : heading.current;
+      target?.focus({ preventScroll: true });
+      window.scrollTo({ top, behavior: 'instant' });
+    });
+    return () => cancelAnimationFrame(frame);
   }, [view, lessonId]);
   async function switchView(next: string) {
     if (next === view || !await flush()) return;
-    if (view === 'words') { listPosition.current = window.scrollY; focusReturn.current = document.activeElement as HTMLElement; }
+    if (view === 'words') listPosition.current = window.scrollY;
     pendingPosition.current = next === 'words' ? listPosition.current : 0;
     setView(next);
   }
@@ -70,9 +83,9 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   const lesson = lessonId ? LESSON_MAP.get(lessonId) : undefined;
   return <Tabs value={view} onValueChange={next => void switchView(next)} className="library-modes">
     {props.grammarEnabled && <TabsList className="library-mode-tabs" aria-label="단어장 학습 종류"><TabsTrigger value="words">단어 목록</TabsTrigger><TabsTrigger value="grammar">품사·문장 연습</TabsTrigger></TabsList>}
-    <TabsContent value="words" forceMount hidden={view !== 'words'}><WordList {...props} pos={pos} setPos={setPos} page={page} setPage={setPage} onHelp={props.grammarEnabled ? (id, button) => { focusReturn.current = button; setHelp(id); } : undefined} /></TabsContent>
+    <TabsContent ref={listPanel} value="words" forceMount hidden={view !== 'words'} onFocusCapture={e => { if (e.currentTarget.contains(e.target)) focusReturn.current = e.target as HTMLElement; }}><WordList {...props} pos={pos} setPos={setPos} page={page} setPage={setPage} onHelp={props.grammarEnabled ? (id, button) => { focusReturn.current = button; setHelp(id); } : undefined} /></TabsContent>
     {props.grammarEnabled && <TabsContent value="grammar" forceMount hidden={view !== 'grammar'}>
-      {lesson ? <GrammarLesson key={lesson.id} lesson={lesson} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { setPos(lesson.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} /> : <section className="grammar-catalog wide-panel">
+      {lesson ? <GrammarLesson key={lesson.id} lesson={lesson} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { focusReturn.current = null; setPos(lesson.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} /> : <section className="grammar-catalog wide-panel">
         <div className="grammar-catalog-heading"><h2 ref={heading} tabIndex={-1}>문장 속 역할을 익혀요</h2><p>15개 미니 수업 · 수업당 약 3~5분</p><p className="small-note">하루 목표와 별도로, 원하는 수업부터 시작하세요. 관사·조동사처럼 큰 품사에 속하는 표기도 함께 배워요.</p></div>
         {[...new Set(GRAMMAR_LESSONS.map(l => l.group))].map(group => <section key={group} className="grammar-group"><h3>{group}</h3><div className="grammar-grid">{GRAMMAR_LESSONS.filter(l => l.group === group).map(l => {
           const progress = props.state.grammar?.[l.id], status = progress?.completedAt && !(progress.review && !progress.review.completedAt) ? '수업 마침' : progress ? '이어 하기' : '시작 전';

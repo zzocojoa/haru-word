@@ -30,10 +30,16 @@ function session() {
         progress: { [word.id]: { meaning: content[word.id].meaning, familiarity: 'uncertain', en: 'independent', ko: 'independent', needsReview: true, studyDates: [date], lastStudied: date } } } });
       assert.equal(seeded.status(), 200);
       const page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
+      try {
       await page.goto(base, { waitUntil: 'domcontentloaded' }); await saved(page);
       await page.getByRole('button', { name: '중단한 학습 이어서', exact: false }).click(); await saved(page);
       await (stage === 'learn' ? page.getByLabel('오늘 공부할 뜻', { exact: false }) : page.getByLabel(
         stage === 'en' ? '한국어 뜻 입력' : stage === 'ko' ? '영어 단어 입력' : stage === 'warmup' ? '떠오르는 한국어 뜻' : '내 영어 문장', { exact: true })).waitFor();
+      } catch (error) {
+        await page.screenshot({ path: `${out}/setup-${label}-failure.png`, fullPage: true });
+        fs.writeFileSync(`${out}/setup-${label}-failure.json`, JSON.stringify({ label, stage, error: String(error), body: await page.locator('body').innerText(), state: await get(), pageErrors: errors }, null, 2));
+        throw error;
+      }
       return { context, page, get, s };
     }
     for (let attempt = 1; attempt <= 2; attempt++) {

@@ -9,18 +9,27 @@ export type GrammarPersistence = {
   save: (state: State) => Promise<boolean>;
   stage: (id: LessonId, progress: GrammarProgress) => void;
   canSave: boolean;
+  saved: boolean;
   registerLeave: (leave: GrammarLeave) => () => void;
 };
 
 // Latest local input remains editable while each snapshot is acknowledged in order.
 // A failed save pauses the queue; retry is explicit, and navigation waits for the queue.
-export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSave, registerLeave }: GrammarPersistence) {
+export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSave, saved }: GrammarPersistence) {
   const [draft, setDraft] = useState(() => currentState.current.grammar?.[id] ?? newGrammarProgress());
   const latest = useRef(draft), version = useRef(0), acknowledged = useRef(0);
   const task = useRef<Promise<boolean> | null>(null), alive = useRef(true), allowed = useRef(canSave);
   const [dirty, setDirty] = useState(false), [saving, setSaving] = useState(false), [error, setError] = useState('');
   useEffect(() => { allowed.current = canSave; }, [canSave]);
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
+  useEffect(() => {
+    // The shared error banner can retry this same staged snapshot. Acknowledge
+    // that success too, but never a response for an older local sentence.
+    if (!saved || currentState.current.grammar?.[id] !== latest.current || acknowledged.current === version.current) return;
+    acknowledged.current = version.current;
+    setDirty(false);
+    setError('');
+  }, [saved, currentState, id]);
   const change = useCallback((update: (p: GrammarProgress) => GrammarProgress) => {
     const next = { ...update(latest.current), updatedAt: new Date().toISOString() };
     latest.current = next; version.current++; setDraft(next); setDirty(true);
@@ -51,7 +60,6 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
     task.current = work();
     return task.current;
   }, [currentState, id, save]);
-  useEffect(() => registerLeave(flush), [flush, registerLeave]);
   useEffect(() => {
     if (!dirty || error || !canSave) return;
     const timer = window.setTimeout(() => { void flush(); }, 500);

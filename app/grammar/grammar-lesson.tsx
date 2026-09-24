@@ -1,9 +1,9 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Check, RotateCcw } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
-import { answerCorrect, firstAnswerLabel, type GrammarLesson as Lesson, type GrammarQuestion } from '@/lib/grammar/content';
-import { QUESTION_KEYS, recordAnswer, updateGrammarSentence, type GrammarAnswer, type QuestionKey } from '@/lib/grammar/model';
+import { answerCorrect, exampleFocusStart, firstAnswerLabel, type GrammarLesson as Lesson, type GrammarQuestion } from '@/lib/grammar/content';
+import { QUESTION_KEYS, recordAnswer, revealGrammarAnswer, updateGrammarSentence, type GrammarAnswer, type QuestionKey } from '@/lib/grammar/model';
 import { sentenceFeedbackSchema, GRAMMAR_TEXT } from '@/lib/sentence-feedback';
 import { requestJson, REQUEST_TIMEOUT_MS } from '@/lib/client-request';
 import { useGrammarDraft, type GrammarPersistence } from './use-grammar-draft';
@@ -24,7 +24,12 @@ export function GrammarLesson({ lesson, persistence, onBack, onWords }: { lesson
   const selection = (reviewing ? p.review!.order : p.order) ?? [];
   useEffect(() => { heading.current?.focus({ preventScroll: true }); }, [p.stage, p.review?.index, reviewing]);
   useEffect(() => () => { generation.current++; request.current?.abort(); }, []);
-  function invalidateAi() { generation.current++; request.current?.abort(); aiLock.current = false; setAiPending(false); setAiError(''); }
+  const invalidateAi = useCallback(() => { generation.current++; request.current?.abort(); aiLock.current = false; setAiPending(false); setAiError(''); }, []);
+  const registerLeave = persistence.registerLeave;
+  const prepareLeave = useCallback(async () => { invalidateAi(); return flush(); }, [invalidateAi, flush]);
+  // Tabs remain mounted while hidden. All exits, including parent navigation
+  // and settings, must invalidate AI before waiting for pending draft saves.
+  useEffect(() => registerLeave(prepareLeave), [registerLeave, prepareLeave]);
   function move(stage: number) { change(v => ({ ...v, stage, order: undefined })); }
   function setOrder(order: number[]) { change(v => reviewing ? { ...v, review: { ...v.review!, order } } : { ...v, order }); }
   function answer(value: string) {
@@ -32,12 +37,12 @@ export function GrammarLesson({ lesson, persistence, onBack, onWords }: { lesson
       ? { ...v, review: { ...v.review!, answers: { ...v.review!.answers, [key]: recordAnswer(v.review!.answers[key], value, hints.includes(key)) } } }
       : { ...v, answers: { ...v.answers, [key]: recordAnswer(v.answers[key], value, hints.includes(key)) } });
   }
-  function reveal() { change(v => reviewing ? { ...v, review: { ...v.review!, hints: [...new Set([...(v.review!.hints ?? []), key])] } } : { ...v, hints: [...new Set([...(v.hints ?? []), key])] }); }
+  function reveal() { change(v => revealGrammarAnswer(v, key, reviewing)); }
   function nextQuestion() {
     if (reviewing) change(v => ({ ...v, review: { ...v.review!, index: index + 1, order: undefined, ...(index === 2 ? { completedAt: new Date().toISOString() } : {}) } }));
     else move(p.stage + 1);
   }
-  async function leave(action: () => void) { invalidateAi(); if (await flush()) action(); }
+  async function leave(action: () => void) { if (await prepareLeave()) action(); }
   async function ai() {
     if (aiLock.current || !persistence.canSave || !latest.current.sentence.trim()) return;
     aiLock.current = true; setAiPending(true); setAiError('');
@@ -83,7 +88,7 @@ export function GrammarLesson({ lesson, persistence, onBack, onWords }: { lesson
       <div className="grammar-actions"><button className="text-button" onClick={() => { invalidateAi(); move(1); }}>설명 다시 보기</button><button className="primary-button" disabled={!p.sentence.trim() || !p.check || !persistence.canSave || aiPending} onClick={async () => { change(v => ({ ...v, stage: 6, completedAt: new Date().toISOString() })); await flush(); }}>수업 마치기<Check size={18} /></button></div>
     </div>}
     {!reviewing && p.stage === 6 && <div className="grammar-stage">
-      <p className="grammar-role">수업을 마쳤어요.</p><p className="small-note">처음 답과 도움 사용을 따로 보관해요. 수업 완료가 숙달을 뜻하지는 않아요.</p>
+      <p className="grammar-role" role="status">{dirty ? error ? '완료 기록을 저장해 주세요.' : '완료 기록을 저장하고 있어요.' : '수업을 마쳤어요.'}</p><p className="small-note">처음 답과 도움 사용을 따로 보관해요. 수업 완료가 숙달을 뜻하지는 않아요.</p>
       <ResultList questions={lesson.questions} answers={p.answers} title="처음 연습" />
       {p.review?.completedAt && <ResultList questions={lesson.review} answers={p.review.answers} title="최근 다시 확인" />}
       <div className="grammar-example"><p lang="en">{p.sentence}</p><small>자기 점검 · {p.check && CHECK_TEXT[p.check]}</small></div>
@@ -95,8 +100,8 @@ export function GrammarLesson({ lesson, persistence, onBack, onWords }: { lesson
 }
 function Examples({ lesson }: { lesson: Lesson }) {
   return <div className="grammar-examples">{lesson.examples.map(([en, ko, focus]) => {
-    const start = en.indexOf(focus);
-    return <div className="grammar-example" key={en}><p lang="en">{en.slice(0, start)}<mark>{focus}</mark>{en.slice(start + focus.length)}</p><p>{ko}</p></div>;
+    const start = exampleFocusStart(en, focus);
+    return <div className="grammar-example" key={en}><p lang="en">{start < 0 ? en : <>{en.slice(0, start)}<mark>{focus}</mark>{en.slice(start + focus.length)}</>}</p><p>{ko}</p></div>;
   })}<small>밑줄: 살펴볼 표현 · 학습용 작성 예문</small></div>;
 }
 function Question({ question: q, answer, hinted, selection, onOrder, onAnswer, onHint, onNext, disabled }: { question: GrammarQuestion; answer?: GrammarAnswer; hinted: boolean; selection: number[]; onOrder: (v: number[]) => void; onAnswer: (v: string) => void; onHint: () => void; onNext: () => void; disabled: boolean }) {

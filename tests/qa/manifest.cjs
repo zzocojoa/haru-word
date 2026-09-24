@@ -21,6 +21,7 @@ module.exports = [
   "familiarity-qa.cjs",
   "familiarity-reveal-qa.cjs",
   "grammar-qa.cjs",
+  "grammar-plan-qa.cjs",
   "history-performance-qa.cjs",
   "integration-consistency-qa.cjs",
   "journal-navigation-qa.cjs",

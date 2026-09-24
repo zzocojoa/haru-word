@@ -1,6 +1,6 @@
 import type { LessonId, GrammarAnswer, GrammarProgress } from './model';
 
-export type GrammarQuestion = { kind: 'choice' | 'order'; prompt: string; context: string; translation: string; options: string[]; answer: string; explanation: string };
+export type GrammarQuestion = { kind: 'choice' | 'order'; prompt: string; context: string; translation: string; options: string[]; answer: string; alternatives?: string[]; explanation: string };
 export type GrammarLesson = {
   id: LessonId; pos: string; title: string; group: string; role: string; pattern: string; mistake: string;
   examples: [string, string, string][]; notice: string; noticeAnswer: string;
@@ -69,7 +69,7 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
     questions: [
       choice('She walks slowly.', '그녀는 천천히 걸어요.', '걷는 방식을 설명하는 말은?', ['She', 'slowly', 'walks'], 'slowly', 'slowly가 walks라는 행동을 어떻게 하는지 설명해요.'),
       choice('He drives ___.', '그는 조심스럽게 운전해요.', '빈칸에 알맞은 말은?', ['careful', 'care', 'carefully'], 'carefully', '운전하는 방식을 설명할 때 부사 carefully를 써요.'),
-      order('나는 자주 집에서 요리해요.', ['at home.', 'often', 'I', 'cook'], 'I often cook at home.', '빈도 부사 often은 이 문장에서 일반 동사 cook 앞에 와요.'),
+      { ...order('나는 자주 집에서 요리해요.', ['at home.', 'often', 'I', 'cook'], 'I often cook at home.', 'often은 보통 cook 앞에 놓아요. I cook often at home.처럼 동사 뒤에 놓아도 뜻이 맞아요.'), alternatives: ['I cook often at home.', 'often I cook at home.'] },
     ], review: [
       choice('She runs fast.', '그녀는 빨리 달려요.', '이 문장의 fast는?', ['명사', '부사', '관사'], '부사', '-ly가 없어도 달리는 방식을 설명하므로 부사예요.'),
       choice('The tea is ___ hot.', '그 차는 매우 뜨거워요.', '정도를 나타내는 말은?', ['very', 'friend', 'heat'], 'very', 'very는 형용사 hot의 정도를 나타내요.'),
@@ -155,7 +155,7 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
     ], stem: 'I am tired but happy.', writing: '두 상태 중 하나를 바꾸고 연결 관계를 확인하세요.', check: '연결한 두 내용의 관계에 맞는 접속사를 골랐나요?', reference: classes,
   },
   {
-    id: 'auxiliary', pos: 'auxiliary v.', title: '기본 조동사', group: '동사를 돕는 표현', role: 'be·do·have가 다른 동사와 함께 진행·완료·의문·부정 등을 만들어요.', pattern: 'be + -ing: I am reading. / do + 동사원형: Do you work? / have + 과거분사: I have finished.', mistake: '같은 be·do·have도 본동사일 수 있어요. I have a bag.의 have는 소유, I have finished.의 have는 완료를 돕는 말이에요.',
+    id: 'auxiliary', pos: 'auxiliary v.', title: '기본 조동사', group: '동사를 돕는 표현', role: 'be·do·have가 다른 동사와 함께 진행·완료·의문·부정 등을 만들어요.', pattern: 'be + -ing: I am reading. / do + 동사원형: Do you work? / have + 과거분사: I have finished.', mistake: '같은 be·do·have도 본동사일 수 있어요. I am happy.의 am은 상태를 연결하고, I am reading.의 am은 진행형을 도와요. I do homework.의 do는 행동, Do you work?의 Do는 질문을 도와요. I have a bag.의 have는 소유, I have finished.의 have는 완료를 도와요.',
     examples: [['I have a bag.', '나는 가방이 있어요.', 'have'], ['I have finished my work.', '나는 일을 끝냈어요.', 'have']], notice: '다른 동사를 도와 완료를 만드는 have는 어느 쪽인가요?', noticeAnswer: '두 번째 have가 finished와 함께 완료를 만들어요. 첫 번째 have는 소유를 나타내는 본동사예요.',
     questions: [
       choice('She is reading a book.', '그녀는 책을 읽고 있어요.', '진행형을 돕는 조동사는?', ['reading', 'is', 'book'], 'is', 'be의 형태 is가 reading과 함께 지금 진행 중임을 나타내요.'),
@@ -209,14 +209,23 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
 ];
 export const LESSON_MAP = new Map(GRAMMAR_LESSONS.map(l => [l.id, l]));
 export const POS_LESSON = new Map(GRAMMAR_LESSONS.map(l => [l.pos, l]));
-export function answerCorrect(question: GrammarQuestion, answer: string) { return answer.trim().replace(/\s+/g, ' ') === question.answer; }
+export function answerCorrect(question: GrammarQuestion, answer: string) { return [question.answer, ...(question.alternatives ?? [])].includes(answer.trim().replace(/\s+/g, ' ')); }
+export function exampleFocusStart(sentence: string, focus: string) {
+  const escaped = focus.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return sentence.search(new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, 'u'));
+}
 export function needsGrammarReview(lesson: GrammarLesson, progress?: GrammarProgress) {
   if (!progress) return false;
+  if (progress.review && !progress.review.completedAt) return true;
   const answers = progress.review?.completedAt ? progress.review.answers : progress.answers;
   const questions = progress.review?.completedAt ? lesson.review : lesson.questions;
-  return questions.some((q, i) => { const a = answers[`q${i + 1}` as keyof typeof answers]; return !!a && (!answerCorrect(q, a.first) || a.helped); }) || progress.check === 'needs_work' || progress.check === 'uncertain';
+  const hints = (progress.review?.completedAt ? progress.review.hints : progress.hints) ?? [];
+  return questions.some((q, i) => {
+    const key = `q${i + 1}` as keyof typeof answers, a = answers[key];
+    return hints.includes(key) || !!a && (!answerCorrect(q, a.first) || !answerCorrect(q, a.latest) || a.helped);
+  }) || progress.check === 'needs_work' || progress.check === 'uncertain';
 }
 export function firstAnswerLabel(question: GrammarQuestion, answer?: GrammarAnswer) {
   if (!answer) return '미응답';
-  return answer.helped ? '도움 사용' : answerCorrect(question, answer.first) ? '처음에 맞힘' : '처음엔 오답';
+  return `${answerCorrect(question, answer.first) ? '첫 답 정답' : '처음엔 오답'}${answer.helped ? ' · 도움 사용' : ''}`;
 }

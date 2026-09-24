@@ -7,7 +7,7 @@ import { EMPTY, pickDaily, learningMetrics } from '../lib/learning.ts';
 mkdirSync('work/grammar-tests', { recursive: true });
 await build({ entryPoints: ['lib/grammar/model.ts', 'lib/grammar/content.ts', 'lib/grammar/feedback.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'db/restore-jobs.ts', 'db/learning-state.ts', 'lib/state-delta.ts'], outdir: 'work/grammar-tests', entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
 const model = await import('../work/grammar-tests/model.mjs');
-const { GRAMMAR_LESSONS, answerCorrect, needsGrammarReview } = await import('../work/grammar-tests/content.mjs');
+const { GRAMMAR_LESSONS, answerCorrect, exampleFocusStart, firstAnswerLabel, needsGrammarReview } = await import('../work/grammar-tests/content.mjs');
 const { analyzeBackup } = await import('../work/grammar-tests/backup-analysis.mjs');
 const { manifestSchema, parsePart } = await import('../work/grammar-tests/restore-validation.mjs');
 const jobs = await import('../work/grammar-tests/restore-jobs.mjs');
@@ -35,7 +35,7 @@ test('all 15 catalog labels have six contextual authored exercises and a unique 
   assert.equal(GRAMMAR_LESSONS.length, 15);
   for (const l of GRAMMAR_LESSONS) {
     assert.equal(l.examples.length, 2); assert.equal(l.questions.length, 3); assert.equal(l.review.length, 3);
-    for (const [en, ko, focus] of l.examples) { assert.ok(en.includes(focus)); assert.ok(ko.trim()); }
+    for (const [en, ko, focus] of l.examples) { assert.ok(exampleFocusStart(en, focus) >= 0); assert.ok(ko.trim()); }
     for (const bank of [l.questions, l.review]) {
       assert.equal(bank.filter(q => q.kind === 'order').length, 1);
       for (const q of bank) {
@@ -46,6 +46,46 @@ test('all 15 catalog labels have six contextual authored exercises and a unique 
     }
     assert.notDeepEqual(l.questions, l.review); assert.ok(l.reference.startsWith('https://'));
   }
+});
+test('example emphasis uses word boundaries and prepared alternative word orders are accepted', () => {
+  assert.equal(exampleFocusStart('I have a bag.', 'a'), 7);
+  assert.equal(exampleFocusStart('I ate an apple.', 'an'), 6);
+  assert.equal(exampleFocusStart('I have a bag.', 'an'), -1);
+  const q = GRAMMAR_LESSONS.find(l => l.id === 'adverb').questions[2];
+  for (const answer of [q.answer, ...q.alternatives]) assert.equal(answerCorrect(q, answer), true);
+  assert.equal(answerCorrect(q, 'I often at home. cook'), false);
+  for (const l of GRAMMAR_LESSONS) for (const q of [...l.questions, ...l.review]) for (const answer of q.alternatives ?? []) {
+    assert.equal(q.kind, 'order');
+    assert.equal(answer.split(' ').sort().join(' '), q.options.join(' ').split(' ').sort().join(' '));
+  }
+});
+test('help on an already answered question records help without replacing first answer or counting an attempt', () => {
+  const original = { ...initial(), answers: { q1: model.recordAnswer(undefined, 'teacher') } }, before = structuredClone(original);
+  const hinted = model.revealGrammarAnswer(original, 'q1', false);
+  assert.deepEqual(original, before);
+  assert.deepEqual(hinted.answers.q1, { first: 'teacher', latest: 'teacher', helped: true, attempts: 1 });
+  assert.deepEqual(hinted.hints, ['q1']);
+  assert.deepEqual(model.revealGrammarAnswer(hinted, 'q1', false), hinted);
+  const noAnswer = model.revealGrammarAnswer(initial(), 'q2', false);
+  assert.deepEqual(noAnswer.answers, {}); assert.deepEqual(noAnswer.hints, ['q2']);
+  const review = { ...completed(), review: { index: 0, answers: { q1: model.recordAnswer(undefined, '명사') } } };
+  const reviewed = model.revealGrammarAnswer(review, 'q1', true);
+  assert.equal(reviewed.review.answers.q1.helped, true); assert.deepEqual(reviewed.answers, review.answers);
+  const retried = model.recordAnswer(model.recordAnswer(undefined, 'reads'), 'teacher');
+  assert.equal(retried.helped, true);
+  assert.equal(firstAnswerLabel(GRAMMAR_LESSONS[0].questions[0], retried), '처음엔 오답 · 도움 사용');
+});
+test('review badge includes hints, latest wrong answers and an unfinished review; successful independent review clears it', () => {
+  const lesson = GRAMMAR_LESSONS[0];
+  const answers = bank => Object.fromEntries(bank.map((q, i) => [`q${i + 1}`, model.recordAnswer(undefined, q.answer)]));
+  const p = { ...completed(), answers: answers(lesson.questions) };
+  assert.equal(needsGrammarReview(lesson, p), false);
+  assert.equal(needsGrammarReview(lesson, { ...p, hints: ['q1'] }), true); // legacy hint/answer discrepancy
+  assert.equal(needsGrammarReview(lesson, { ...p, answers: { ...p.answers, q1: { ...p.answers.q1, latest: 'reads' } } }), true);
+  assert.equal(needsGrammarReview(lesson, { ...p, review: { index: 0, answers: {} } }), true);
+  const checked = { ...p, hints: ['q1'], review: { index: 3, answers: answers(lesson.review), completedAt: date } };
+  assert.equal(needsGrammarReview(lesson, checked), false);
+  assert.equal(needsGrammarReview(lesson, { ...checked, check: 'uncertain' }), true);
 });
 test('first response/help remains intact after successful retries, without mutating input', () => {
   const first = model.recordAnswer(undefined, 'reads', true), copy = structuredClone(first);

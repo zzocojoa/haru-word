@@ -374,7 +374,7 @@ export default function LearningApp({
             {navigation.visited.includes("library") && (
               <WordLibrary
                 grammarEnabled={grammarEnabled}
-                persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, registerLeave: registerGrammarLeave }}
+                persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, saved: signedIn && !loading && !saving && !unsaved && !conflict, registerLeave: registerGrammarLeave }}
                 activityDate={clock.currentDate}
                 state={state}
                 words={words}
