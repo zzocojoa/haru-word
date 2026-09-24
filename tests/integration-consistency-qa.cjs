@@ -29,5 +29,17 @@ const checks=[],errors=[];let serial=0;
   const f=await fresh(),source=session('daily',yesterday),repeat=session('practice');source.finished=true;source.stage='done';source.records[id]={...record(),en:'independent',ko:'independent',sentenceStatus:'written',sentence:'Saved.',learnedOn:yesterday};repeat.practiceMode='repeat';repeat.period=date;repeat.stage='sentence';repeat.records[id]={...record(),en:'independent',ko:'independent',material:contents[id],sentence:'I work today.'};await seed(f.c,{[id]:{...good,familiarity:'known'}},{[source.id]:source,[repeat.id]:repeat});await open(f.p);await f.p.getByRole('tab',{name:'학습 기록'}).click();await f.p.locator('.journal-day-trigger').filter({hasText:repeat.date}).click();await f.p.locator('.journal-session-trigger').filter({hasText:'다시 학습'}).click();await f.p.getByRole('button',{name:'이어서 학습',exact:false}).click();await f.p.getByRole('button',{name:'문장을 완성했어요',exact:false}).click();await f.p.getByRole('button',{name:'단어 다시 보기',exact:true}).click();await f.p.getByRole('dialog').getByText('원래 일일 학습일이 변경되어',{exact:false}).waitFor();await f.p.getByRole('button',{name:'이 단어들 다시 학습',exact:false}).click();await f.p.getByRole('heading',{name:'단어 익히기',exact:true}).waitFor();checks.push('date-corrected source cannot orphan saved repeat cards or next repetition');await f.c.close();
   const g=await fresh();await seed(g.c,{[id]:{...good,familiarity:'known'}},{},{newWordsPaused:true});await open(g.p);assert.ok(await g.p.getByRole('button',{name:'지금 배정할 단어가 없어요',exact:false}).isDisabled());await g.p.addScriptTag({path:require('./qa/runtime.cjs').axePath});let axe=await g.p.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(axe.violations.length,0,JSON.stringify(axe.violations));for(const width of [320,390,768,1440]){await g.p.setViewportSize({width,height:900});assert.equal(await g.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false)}checks.push('no-candidate state is explicit and disabled; updated home has zero axe violations and fits 320–1440px');await g.c.close();
   assert.deepEqual(errors,[]);fs.writeFileSync(out+'/verification.json',JSON.stringify({passed:true,checks,pageErrors:errors},null,2));console.log(JSON.stringify({passed:true,checks},null,2));
- }catch(e){fs.writeFileSync(out+'/verification.json',JSON.stringify({passed:false,checks,pageErrors:errors,error:String(e)},null,2));throw e}finally{await closeBrowser(browser)}
+ }catch(e){
+  // Capture the failing synthetic screen before cleanup; never inspect hosted learners.
+  const diagnostics=[];
+  for(const [i,context] of browser.contexts().entries()){
+   const page=context.pages().at(-1);if(!page||page.isClosed())continue;
+   try{
+    await page.screenshot({path:out+`/failure-${i}.png`,fullPage:true});
+    const data=await read(context);
+    diagnostics.push({screen:await page.locator('body').innerText(),activeSessionId:data.state?.settings?.activeSessionId,sessions:Object.values(data.state?.sessions??{}).map(s=>({kind:s.kind,stage:s.stage,paused:s.paused,finished:s.finished,warmupIndex:s.warmupIndex,warmupCount:s.warmupIds?.length}))});
+   }catch(diagnosticError){diagnostics.push({error:String(diagnosticError)})}
+  }
+  fs.writeFileSync(out+'/verification.json',JSON.stringify({passed:false,checks,pageErrors:errors,error:String(e),diagnostics},null,2));throw e
+ }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exitCode=1});
