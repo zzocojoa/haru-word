@@ -3,6 +3,8 @@ import { progressSchema,sessionSchema,settingsSchema,validProgressIdentity } fro
 import { type State } from './learning';
 import rawWords from '@/data/words.json';
 import { resumeMonthlyWriting } from './learning/session-flow';
+import { serializeBackup } from './backup-format';
+export { makeBackup } from './backup-format';
 
 export const MAX_BACKUP_BYTES=8_000_000;
 export const RESTORE_CHUNK_BYTES=1_800_000;
@@ -46,7 +48,13 @@ export function parseBackup(raw:string):ParsedBackup {
  restoreChunks(result.state.progress);restoreChunks(result.state.sessions);
  return result;
 }
-export function makeBackup(state:State,now=new Date()){return {format:'haru-words-v1' as const,exportedAt:now.toISOString(),state};}
+export function prepareSafetyBackup(state:State,now=new Date()):string {
+ const raw=serializeBackup(state,now);
+ // Validate the exact bytes to download through the same parser as import.
+ // A successful serialization alone is not proof that recovery is possible.
+ parseBackup(raw);
+ return raw;
+}
 export function backupSummary(state:State){return {words:Object.keys(state.progress).length,sessions:Object.keys(state.sessions).length,personal:Object.values(state.progress).filter(p=>p.personal).length,unfinished:Object.values(state.sessions).filter(s=>!resumeMonthlyWriting(s).finished).length,level:state.settings.level,goal:state.settings.dailyGoal};}
 export function replacementChanges(before:State,after:State){
  const equal=(a:unknown,b:unknown):boolean=>{

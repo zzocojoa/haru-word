@@ -45,7 +45,7 @@ export function SaveError({
             onClick={() =>
               download(
                 "haru-unsaved-backup.json",
-                JSON.stringify(state, null, 2),
+                JSON.stringify(state),
               )
             }
           >

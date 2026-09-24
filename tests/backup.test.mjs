@@ -1,13 +1,45 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync,mkdirSync} from 'node:fs';import {DatabaseSync} from 'node:sqlite';import {build} from 'esbuild';
 import {EMPTY,newSession,applyRecord,ensureCarryover,continueBatch,repeatDailySession} from '../lib/learning.ts';
 import { invalidSessionCases } from './invalid-session-cases.mjs';
+import { history, oversizedState } from './fixtures/backup-history.cjs';
+import { serializeBackup } from '../lib/backup-format.ts';
 mkdirSync('work/backup-tests',{recursive:true});
 await build({entryPoints:['lib/backup.ts'],outfile:'work/backup-tests/backup.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
-const {parseBackup,makeBackup,replacementChanges,restoreChunks,RESTORE_CHUNK_BYTES}=await import('../work/backup-tests/backup.mjs');
+const {parseBackup,makeBackup,prepareSafetyBackup,replacementChanges,restoreChunks,RESTORE_CHUNK_BYTES,MAX_BACKUP_BYTES}=await import('../work/backup-tests/backup.mjs');
 const words=JSON.parse(readFileSync('data/words.json','utf8')),contents=JSON.parse(readFileSync('data/content.json','utf8'));
 const fixture=()=>{let state=structuredClone(EMPTY);const s=newSession(state,words,id=>contents[id],'daily','2026-09-22');state=ensureCarryover({...state,settings:{...state.settings,activeSessionId:s.id},sessions:{[s.id]:s}},s);return state;};
 const envelope=s=>JSON.stringify(makeBackup(s));
 const jsonValue=v=>JSON.parse(JSON.stringify(v));
+
+test('730-session safety and whole backups share compact bytes and preserve every record',()=>{
+ const state=history(),now=new Date('2026-09-24T00:00:00Z');
+ const pretty=JSON.stringify(makeBackup(state,now),null,2);
+ assert.ok(Buffer.byteLength(pretty)>MAX_BACKUP_BYTES);
+ assert.throws(()=>parseBackup(pretty),/8 MB/);
+ const before=JSON.stringify(state),raw=prepareSafetyBackup(state,now);
+ assert.equal(raw,serializeBackup(state,now));
+ assert.ok(Buffer.byteLength(raw)<MAX_BACKUP_BYTES);
+ assert.deepEqual(parseBackup(raw).state,state);
+ assert.equal(JSON.stringify(state),before);
+});
+
+test('safety backup blocks oversized UTF-8 state but ordinary export preserves its data',()=>{
+ const state=oversizedState(),raw=serializeBackup(state);
+ assert.ok(raw.length<MAX_BACKUP_BYTES,'UTF-16 length alone must not be used');
+ assert.ok(Buffer.byteLength(raw)>MAX_BACKUP_BYTES);
+ assert.throws(()=>prepareSafetyBackup(state),/8 MB/);
+ assert.deepEqual(JSON.parse(raw).state,state);
+});
+
+test('safety backup runs the actual import reference and per-row validation',()=>{
+ const broken=fixture();broken.settings.activeSessionId=crypto.randomUUID();
+ assert.throws(()=>prepareSafetyBackup(broken),/이어갈 학습 회차/);
+ const largeRow=fixture(),session=Object.values(largeRow.sessions)[0];
+ session.kind='weekly';session.period='2026-09-21';session.ids=words.slice(0,350).map(w=>w.id);delete session.wordKeys;
+ session.records=Object.fromEntries(session.ids.map(id=>[id,{entryId:id,meaning:contents[id].meaning,en:'unmeasured',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:'',notes:'가'.repeat(1900)}]));
+ const raw=serializeBackup(largeRow);assert.ok(Buffer.byteLength(raw)<MAX_BACKUP_BYTES);
+ assert.throws(()=>prepareSafetyBackup(largeRow),/한 학습 기록이 너무 커서/);
+});
 
 test('current and legacy backups round-trip without changing snapshots, scores, notes or drafts',()=>{
  const s=fixture(),id=s.settings.activeSessionId,word=s.sessions[id].ids[0];s.sessions[id].records[word]={...s.sessions[id].records[word],material:contents[word],draft:{answer:'내 임시 답',hinted:true,revealed:true,stage:'en',retry:false},sentence:'My sentence.',notes:'내 메모'};
