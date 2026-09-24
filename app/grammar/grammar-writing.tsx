@@ -6,6 +6,7 @@ import { GRAMMAR_TEXT, type SentenceFeedback } from '@/lib/sentence-feedback';
 import { CHECK_TEXT, SELF_CHECKS, grammarFeedbackTone } from './grammar-presentation';
 import type { FeedbackIssue } from '@/lib/feedback-issue';
 import { FeedbackIssueNotice } from '../feedback-issue-notice';
+import { FeedbackAttribution } from '../feedback-attribution';
 
 type Props = {
   lesson: GrammarLesson;
@@ -34,7 +35,7 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
       <button className="secondary-button" disabled={aiPending || !sentence.trim() || !canSave} onClick={onAi}>
         <Sparkles size={18} aria-hidden="true" />{aiPending ? '문장을 점검하고 있어요' : 'AI로 문장 점검'}
       </button>
-      <p className="small-note">선택 사항 · 문장을 Google에 보내요.<br />자기 점검만으로도 마칠 수 있어요.</p>
+      <p className="small-note">Google로 먼저 점검하고, 응답 실패 시 Groq에 문장을 보내요.<br />Google 무료 API의 입력·응답은 서비스 개선에 사용될 수 있어요. 개인정보는 빼고 작성해 주세요.</p>
     </div>
     <FeedbackIssueNotice issue={aiError} />
     {feedback && <Feedback feedback={feedback} sentence={sentence} onSentence={onSentence} />}
@@ -56,6 +57,7 @@ function Feedback({ feedback, sentence, onSentence }: { feedback: SentenceFeedba
   const meaningLabel = meaningUsage === 'appropriate' ? '목표 문법에 맞아요' : meaningUsage === 'needs_work' ? '목표 문법을 확인해요' : '목표 문법 판단이 어려워요';
   return <div className="grammar-feedback" data-tone={grammarFeedbackTone(feedback)}>
     <h3>AI 의견</h3><p>{meaningLabel} · {GRAMMAR_TEXT[grammar]}</p><p>{explanation}</p>
+    <FeedbackAttribution feedback={feedback} />
     {correctedSentence && <>
       <p lang="en">{correctedSentence}</p>
       {correctedSentence !== sentence && <button className="secondary-button" onClick={() => onSentence(correctedSentence)}>수정안 사용하기</button>}

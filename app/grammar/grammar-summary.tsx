@@ -3,6 +3,7 @@ import { ArrowRight, Check, CheckCircle2, CircleHelp, LoaderCircle, RotateCcw } 
 import { answerCorrect, firstAnswerLabel, type GrammarLesson, type GrammarQuestion } from '@/lib/grammar/content';
 import { QUESTION_KEYS, type GrammarProgress } from '@/lib/grammar/model';
 import { CHECK_TEXT } from './grammar-presentation';
+import { FeedbackAttribution } from '../feedback-attribution';
 
 type Props = {
   lesson: GrammarLesson;
@@ -26,6 +27,7 @@ export function GrammarSummary({ lesson, progress, dirty, error, canSave, onRevi
     <ResultList questions={lesson.questions} answers={progress.answers} title="처음 연습" />
     {progress.review?.completedAt && <ResultList questions={lesson.review} answers={progress.review.answers} title="최근 다시 확인" />}
     <div className="grammar-example"><small>내 문장</small><p lang="en">{progress.sentence}</p><small>자기 점검 · {progress.check && CHECK_TEXT[progress.check]}</small></div>
+    {progress.feedback && <FeedbackAttribution feedback={progress.feedback} />}
     <div className="grammar-actions">
       <button className="secondary-button" disabled={!canSave} onClick={onReview}><RotateCcw size={17} />다른 3문제로 확인</button>
       <button className="text-button" onClick={onWriting}>내 문장 보완</button>

@@ -1329,11 +1329,15 @@ select {
   margin: 20px 0;
   border-radius: 12px;
 }
-.ai-feedback-issue {
+.ai-feedback-issue, .ai-feedback-failure {
   display: grid;
   gap: 8px;
   min-width: 0;
   overflow-wrap: anywhere;
+}
+.ai-feedback-failure + .ai-feedback-failure {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
 }
 .ai-feedback-issue p {
   margin: 0;

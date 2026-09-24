@@ -8,7 +8,7 @@ import { grammarProgressSchema } from '@/lib/grammar/model';
 import { generateGrammarFeedback, grammarFeedbackRequestSchema } from '@/lib/grammar/feedback';
 import { FeedbackError } from '@/lib/gemini-feedback';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
-import { FEEDBACK_MODEL } from '@/lib/sentence-feedback';
+import { feedbackProvider } from '@/lib/sentence-feedback';
 import { json, validateJsonMutation } from '@/lib/server/http';
 
 export const dynamic = 'force-dynamic';
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   } catch { return json(feedbackErrorBody('invalid_request'), 400); }
   const parsed = grammarFeedbackRequestSchema.safeParse(body);
   if (!parsed.success) return json(feedbackErrorBody('invalid_request'), 400);
-  if (env.grammar_enabled !== 'true' || env.google_ai_enabled !== 'true' || !env.google_api?.trim()) return json(feedbackErrorBody(!env.google_api?.trim() ? 'not_configured' : 'disabled'), 503);
+  if (env.grammar_enabled !== 'true' || env.google_ai_enabled !== 'true') return json(feedbackErrorBody('disabled'), 503);
   try {
     const { lessonId, sentence } = parsed.data, db = database();
     const row = await db.prepare('SELECT document FROM grammar_progress WHERE user_id=? AND lesson_id=?').bind(user.userId, lessonId).first<{ document: string }>();
@@ -33,12 +33,12 @@ export async function POST(request: Request) {
     const progress = grammarProgressSchema.parse(JSON.parse(row.document));
     if (progress.stage !== 5 || !sentence.trim() || progress.sentence !== sentence) return json(feedbackErrorBody('stale_input'), 409);
     await recordFeedbackAttempt(db, user.userId, today(), Date.now());
-    const feedback = await generateGrammarFeedback(env.google_api, LESSON_MAP.get(lessonId)!, sentence);
-    console.info(JSON.stringify({ event: 'grammar_feedback_succeeded', model: FEEDBACK_MODEL, lessonId, durationMs: Date.now() - started }));
+    const feedback = await generateGrammarFeedback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, signal: request.signal }, LESSON_MAP.get(lessonId)!, sentence);
+    console.info(JSON.stringify({ event: 'grammar_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), lessonId, durationMs: Date.now() - started }));
     return json({ feedback });
   } catch (e) {
     const known = e instanceof FeedbackError;
-    console.error(JSON.stringify({ event: 'grammar_feedback_failed', code: known ? e.code : 'storage_or_internal', durationMs: Date.now() - started }));
+    console.error(JSON.stringify({ event: 'grammar_feedback_failed', code: known ? e.code : 'storage_or_internal', ...(known && e.issue.previous ? { primaryCode: e.issue.previous.code } : {}), durationMs: Date.now() - started }));
     return json(known ? feedbackErrorBody(e.code, e.issue) : feedbackErrorBody('site_error'), known ? e.status : 503);
   }
 }

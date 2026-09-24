@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-export const FEEDBACK_MODEL = 'gemini-3.1-flash-lite';
+import { FEEDBACK_MODEL, GROQ_FEEDBACK_MODEL } from './learning/feedback-identity.ts';
+export { FEEDBACK_MODEL, GROQ_FEEDBACK_MODEL, feedbackProvider } from './learning/feedback-identity.ts';
 export const feedbackContentSchema = z.object({
   meaningUsage: z.enum(['appropriate', 'needs_work', 'uncertain']),
   grammar: z.enum(['natural', 'needs_work', 'uncertain']),
@@ -9,7 +10,7 @@ export const feedbackContentSchema = z.object({
 }).strict();
 export const sentenceFeedbackSchema = feedbackContentSchema.extend({
   original: z.string().min(1).max(2000),
-  model: z.literal(FEEDBACK_MODEL),
+  model: z.enum([FEEDBACK_MODEL, GROQ_FEEDBACK_MODEL]),
   createdAt: z.string().datetime(),
 });
 export type SentenceFeedback = z.infer<typeof sentenceFeedbackSchema>;

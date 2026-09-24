@@ -43,6 +43,10 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         { status: 503, body: { code: 'untrusted', error: 'PRIVATE_PROVIDER_MESSAGE' }, code: 'site_error', title: '사이트 처리 실패' },
         { status: 200, body: null, code: 'invalid_response', title: '사이트 응답 형식 오류' },
         { abort: true, code: 'client_network', title: '사이트 연결 실패' },
+        { status: 429, body: { code: 'groq_limit', providerStatus: 429, retryAfterSeconds: 8, previous: { code: 'provider_daily_limit', providerStatus: 429 } }, code: 'groq_limit', title: 'Groq 사용 한도' },
+        { status: 503, body: { code: 'groq_key_invalid', providerStatus: 401, previous: { code: 'provider_timeout' } }, code: 'groq_key_invalid', title: 'Groq 키 인증 실패' },
+        { status: 503, body: { code: 'groq_timeout', previous: { code: 'provider_network' } }, code: 'groq_timeout', title: 'Groq 응답 시간 초과' },
+        { status: 502, body: { code: 'groq_invalid_response', previous: { code: 'provider_limit' } }, code: 'groq_invalid_response', title: 'Groq 교정 형식 오류' },
       ];
       for (const sample of cases) {
         response = sample;
@@ -53,9 +57,26 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         assert.equal(await input.inputValue(), original);
         assert.ok(await page.getByRole('button', { name: domain === 'sentence' ? '문장을 완성했어요' : '수업 마치기', exact: false }).isEnabled());
         const before = calls; await page.waitForTimeout(80); assert.equal(calls, before, 'no automatic provider retry');
-        if (sample.body?.retryAfterSeconds) {
+        if (sample.body?.previous) {
+          assert.match(await notice.innerText(), /Google·Groq 점검을 마치지 못했어요/);
+          assert.equal(await notice.locator('.ai-feedback-failure').count(), 2);
+          await notice.getByText('Groq 확인 코드', { exact: true }).click();
+          assert.match(await notice.innerText(), new RegExp(sample.code));
+          await page.setViewportSize({ width: 320, height: 900 });
+          assert.equal(await notice.evaluate(el => el.scrollWidth > el.clientWidth + 1), false);
+          if (sample.code === 'groq_limit') {
+            await page.addStyleTag({ content: 'html { font-size: 200% !important; }' });
+            assert.equal(await notice.evaluate(el => el.scrollWidth > el.clientWidth + 1), false, '200% dual-provider error text');
+            await page.addStyleTag({ content: 'html { font-size: 100% !important; }' });
+            const violations = await page.evaluate(async () => (await axe.run('.ai-feedback-issue', { runOnly: ['wcag2a', 'wcag2aa'] })).violations);
+            assert.deepEqual(violations.map(v => v.id), []);
+            await notice.screenshot({ path: 'work/groq-dual-error-' + domain + '-' + engine + '.png' });
+          }
+          await page.setViewportSize({ width: 390, height: 844 });
+        }
+        if (sample.code === 'provider_minute_limit') {
           assert.match(await notice.innerText(), /15초/);
-          await notice.getByText('확인 코드', { exact: true }).focus(); await page.keyboard.press('Enter');
+          await notice.getByText('Google 확인 코드', { exact: true }).focus(); await page.keyboard.press('Enter');
           assert.match(await notice.innerText(), /provider_minute_limit · Google HTTP 429/);
           for (const width of [320, 390, 1440]) {
             await page.setViewportSize({ width, height: 900 });
@@ -73,8 +94,36 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
           await page.setViewportSize({ width: 390, height: 844 });
         }
       }
-      assert.equal(calls, cases.length); assert.deepEqual(errors, []);
+      assert.equal(calls, cases.length);
+      const waitSaved = async model => {
+        for (let i = 0; i < 100; i++) {
+          const state = (await snapshot()).state;
+          const feedback = domain === 'sentence' ? state.sessions[sid].records[word.id].aiFeedback : state.grammar.noun.feedback;
+          if (feedback?.model === model) return state;
+          await page.waitForTimeout(100);
+        }
+        throw Error('feedback not saved');
+      };
+      const success = (model, sentence) => ({ status: 200, body: { feedback: { original: sentence, model, createdAt: now, meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '알맞게 사용했어요.' } } });
+      response = success('openai/gpt-oss-120b', original);
+      await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+      await page.locator('[data-feedback-provider="Groq"]').waitFor();
+      await page.locator('[data-feedback-provider="Groq"]').screenshot({ path: 'work/groq-attribution-' + domain + '-' + engine + '.png' });
+      const stored = await waitSaved('openai/gpt-oss-120b');
+      if (domain === 'sentence') assert.equal(stored.sessions[sid].records[word.id].sentenceStatus, 'unmeasured');
+      await page.reload();
+      if (domain === 'sentence') await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
+      else { await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); }
+      await page.locator('[data-feedback-provider="Groq"]').waitFor();
+      assert.equal(calls, cases.length + 1, 'reload never calls a provider');
+      const next = 'I like tea.'; await input.fill(next);
+      response = success('gemini-3.1-flash-lite', next);
+      await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+      await page.locator('[data-feedback-provider="Google Gemini"]').waitFor();
+      await waitSaved('gemini-3.1-flash-lite');
+      assert.equal(calls, cases.length + 2); assert.deepEqual(errors, []);
       checks.push(domain + ': ' + cases.length + ' failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility');
+      checks.push(domain + ': Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks');
       await context.close();
     }
     fs.writeFileSync('work/feedback-issue-qa-' + engine + '.json', JSON.stringify({ passed: true, checks }, null, 2));

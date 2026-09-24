@@ -4,17 +4,19 @@ import { database } from '@/db/store';
 import { loadFeedbackSession, loadPersonalWord, recordFeedbackAttempt } from '@/db/feedback';
 import { WORD_MAP } from '@/lib/catalog';
 import { currentId, entryIdFor, today } from '@/lib/learning';
-import { FEEDBACK_MODEL, feedbackRequestSchema } from '@/lib/sentence-feedback';
-import { FeedbackError, generateSentenceFeedback } from '@/lib/gemini-feedback';
+import { FEEDBACK_MODEL, feedbackRequestSchema, feedbackProvider } from '@/lib/sentence-feedback';
+import { FeedbackError } from '@/lib/gemini-feedback';
+import { generateSentenceFeedbackWithFallback } from '@/lib/feedback-fallback';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { json, validateJsonMutation } from '@/lib/server/http';
 
 export const dynamic = 'force-dynamic';
-const enabled = () => !!env.google_api?.trim() && env.google_ai_enabled === 'true';
+const enabled = () => env.google_ai_enabled === 'true';
 
 export async function GET() {
   if (!await getChatGPTUser()) return json(feedbackErrorBody('login_required'), 401);
-  return json({ available: enabled(), configured: !!env.google_api?.trim(), model: FEEDBACK_MODEL });
+  const configured = !!env.google_api?.trim() || (!!env.groq_api?.trim() && env.groq_ai_enabled !== 'false');
+  return json({ available: enabled() && configured, configured, model: FEEDBACK_MODEL });
 }
 
 export async function POST(request: Request) {
@@ -33,7 +35,7 @@ export async function POST(request: Request) {
   }
   const parsed = feedbackRequestSchema.safeParse(raw);
   if (!parsed.success) return json(feedbackErrorBody('invalid_request'), 400);
-  if (!enabled()) return json(feedbackErrorBody(!env.google_api?.trim() ? 'not_configured' : 'disabled'), 503);
+  if (!enabled()) return json(feedbackErrorBody('disabled'), 503);
   const { sessionId, entryId, sentence } = parsed.data;
   try {
     const db = database();
@@ -48,12 +50,12 @@ export async function POST(request: Request) {
     if (!word || !meaning) return json(feedbackErrorBody('save_required'), 400);
     const now = Date.now();
     await recordFeedbackAttempt(db, user.userId, today(), now);
-    const feedback = await generateSentenceFeedback(env.google_api!, { word: word.word, pos: word.pos, meaning, sentence });
-    console.info(JSON.stringify({ event: 'sentence_feedback_succeeded', model: FEEDBACK_MODEL, durationMs: Date.now() - started }));
+    const feedback = await generateSentenceFeedbackWithFallback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, signal: request.signal }, { word: word.word, pos: word.pos, meaning, sentence });
+    console.info(JSON.stringify({ event: 'sentence_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), durationMs: Date.now() - started }));
     return json({ feedback });
   } catch (error) {
     const known = error instanceof FeedbackError;
-    console.error(JSON.stringify({ event: 'sentence_feedback_failed', durationMs: Date.now() - started, code: known ? error.code : 'storage_or_internal' }));
+    console.error(JSON.stringify({ event: 'sentence_feedback_failed', durationMs: Date.now() - started, code: known ? error.code : 'storage_or_internal', ...(known && error.issue.previous ? { primaryCode: error.issue.previous.code } : {}) }));
     return json(known ? feedbackErrorBody(error.code, error.issue) : feedbackErrorBody('site_error'), known ? error.status : 503);
   }
 }

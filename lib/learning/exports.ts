@@ -8,6 +8,7 @@ import {
 import { emptyRecord, nextAction } from "./outcomes.ts";
 import { entryIdFor } from "./targets.ts";
 import { dailyAllocationRule } from './daily-allocation.ts';
+import { feedbackProvider } from './feedback-identity.ts';
 
 export function exportLog(state: State, words: Word[]): string {
   const map = new Map(words.map((w) => [w.id, w]));
@@ -35,6 +36,8 @@ export function exportLog(state: State, words: Word[]): string {
       "회차 시작일",
       "실제 학습일",
       "마지막 연습일",
+      "AI 제공사",
+      "AI 모델",
     ],
   ];
   for (const s of Object.values(state.sessions).sort((a, b) =>
@@ -66,6 +69,8 @@ export function exportLog(state: State, words: Word[]): string {
         s.date,
         r.learnedOn || "기존 기록·미확인",
         r.lastPracticedOn || "기존 기록·미확인",
+        r.aiFeedback ? feedbackProvider(r.aiFeedback) : "",
+        r.aiFeedback?.model || "",
       ]);
     }
   }

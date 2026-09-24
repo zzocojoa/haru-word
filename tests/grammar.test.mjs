@@ -261,12 +261,23 @@ test('grammar feedback returns the same safe failure contract and preserves stor
   try {
     globalThis.fetch=async()=>Response.json({error:{message:'PRIVATE_KEY_SENTENCE',details:[{'@type':'type.googleapis.com/google.rpc.QuotaFailure',violations:[{quotaId:'RequestsPerDay'}]}]}},{status:429});
     const result=await feedbackRoute.POST(request(body)), data=await result.json();
-    assert.equal(result.status,429); assert.equal(data.code,'provider_daily_limit'); assert.equal(data.providerStatus,429);
+    assert.equal(result.status,503); assert.equal(data.code,'groq_not_configured'); assert.equal(data.previous.code,'provider_daily_limit'); assert.equal(data.previous.providerStatus,429);
     assert.doesNotMatch(JSON.stringify(data)+logs.join(''),/PRIVATE|RequestsPerDay/);
     globalThis.fetch=async()=>Response.json({candidates:[{finishReason:'MAX_TOKENS'}]});
-    assert.equal((await (await feedbackRoute.POST(request(body))).json()).code,'provider_truncated');
+    assert.equal((await (await feedbackRoute.POST(request(body))).json()).previous.code,'provider_truncated');
     assert.deepEqual(JSON.parse(readGrammar()[0].document),p);
   } finally { globalThis.fetch=originalFetch; console.error=originalError; }
+});
+
+test('owned grammar route uses Groq fallback and retains both failure causes',async()=>{
+ const p={...completed(),stage:5},body={lessonId:'noun',sentence:p.sentence};sqlite.prepare('INSERT OR REPLACE INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));grammarRuntime.user={userId:'owner'};
+ grammarRuntime.env.groq_api='synthetic-groq';const originalFetch=globalThis.fetch;
+ try{
+  let calls=0;globalThis.fetch=async url=>{calls++;return url.includes('googleapis')?new Response('',{status:503}):Response.json({model:'openai/gpt-oss-120b',choices:[{finish_reason:'stop',message:{content:JSON.stringify({meaningUsage:'appropriate',grammar:'natural',correctedSentence:p.sentence,explanation:'명사를 알맞게 사용했어요.'})}}]})};
+  const response=await feedbackRoute.POST(request(body)),data=await response.json();assert.equal(response.status,200);assert.equal(calls,2);assert.equal(data.feedback.model,'openai/gpt-oss-120b');
+  assert.equal(model.grammarProgressSchema.safeParse({...p,feedback:data.feedback}).success,true);assert.deepEqual(JSON.parse(readGrammar()[0].document),p);
+  globalThis.fetch=async url=>new Response('PRIVATE',{status:url.includes('googleapis')?429:401});const failed=await (await feedbackRoute.POST(request(body))).json();assert.equal(failed.code,'groq_key_invalid');assert.equal(failed.previous.code,'provider_limit');
+ }finally{globalThis.fetch=originalFetch;delete grammarRuntime.env.groq_api}
 });
 test('state API negotiates grammar snapshots; strict old clients retain their shape', async () => {
   grammarRuntime.user = { userId: 'owner' };

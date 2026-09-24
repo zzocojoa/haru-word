@@ -135,7 +135,7 @@ export function SettingsDialog({
         >
           친숙도 다시 확인하기
         </button>
-        <HelpDetails title="저장·날짜·AI 안내"><p>계정별 서버 저장 · 한국 시간 기준. AI는 버튼을 누를 때만 호출해요. 한도나 연결 문제 시 자기 점검으로 계속할 수 있어요.</p></HelpDetails>
+        <HelpDetails title="저장·날짜·AI 안내"><p>계정별 서버 저장 · 한국 시간 기준. AI 버튼을 누르면 Google을 먼저 사용하고, 응답 실패 시 Groq로 자동 전환해요. 결과에 사용한 제공사를 표시해요. 두 계정은 Free 상태를 유지해 주세요.</p></HelpDetails>
         <details className="notes-details">
           <summary>문제가 생겼을 때</summary>
           <p className="small-note">최근 연결 상태와 버튼 대기 이유를 파일로 받아요. 답안·문장·계정 정보·API 키는 포함하지 않으며 자동 전송하지 않아요. 새로고침하면 초기화됩니다.</p>

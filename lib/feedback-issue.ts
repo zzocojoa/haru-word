@@ -27,21 +27,43 @@ export const FEEDBACK_ISSUES = {
   provider_truncated: ['AI 응답 길이 초과', 'AI 답변이 설정된 최대 출력 길이에 도달해 중간에 끝났어요.', '문장을 짧게 나누어 다시 점검해 주세요. 사용 횟수 한도 초과는 아니에요.'],
   provider_incomplete: ['AI 응답 미완료', 'Google이 완성된 교정 결과를 보내지 않았고, 구체적인 중단 원인은 확인되지 않았어요.', '다시 시도하거나 자기 점검으로 계속해 주세요.'],
   provider_invalid_response: ['AI 교정 형식 오류', 'Google의 응답이 교정 결과 형식에 맞지 않아 사용할 수 없어요.', '다시 시도해 주세요. 잘못된 응답을 학습 결과로 저장하지 않았어요.'],
-  client_timeout: ['사이트 응답 시간 초과', 'AI 응답이 늦어 35초 후 기다림을 끝냈어요. Google 처리 결과는 확인되지 않았어요.', '연결 상태를 확인한 뒤 다시 눌러 주세요. 이전 요청이 사용량에 포함될 수 있어요.'],
-  client_network: ['사이트 연결 실패', '기기와 사이트 사이의 통신을 완료하지 못했어요. Google 처리 여부는 확인되지 않았어요.', '인터넷 연결을 확인한 뒤 다시 눌러 주세요. 이전 요청이 사용량에 포함될 수 있어요.'],
+  groq_not_configured: ['Groq 키 미설정', 'Google 대신 사용할 Groq API 키가 등록되지 않았어요.', '사이트의 groq_api 설정을 확인해 주세요.'],
+  groq_disabled: ['Groq 전환 꺼짐', '사이트 설정에서 Groq 자동 전환이 꺼져 있어요.', 'Groq 자동 전환 설정을 확인하거나 자기 점검으로 계속해 주세요.'],
+  groq_limit: ['Groq 사용 한도', 'Groq가 요청·토큰 사용 한도 초과를 알려왔어요. 구체적인 한도 종류는 확인되지 않았어요.', 'Groq Console에서 무료 계정의 사용 한도를 확인해 주세요.'],
+  groq_key_invalid: ['Groq 키 인증 실패', 'Groq가 API 키 인증을 거절했어요.', 'Groq Console의 키와 사이트의 groq_api 설정을 확인해 주세요.'],
+  groq_permission: ['Groq 사용 권한 오류', 'Groq가 현재 키나 프로젝트의 사용 권한을 거절했어요.', '키와 모델 접근 권한을 확인해 주세요. 유료 플랜으로 자동 전환하지 않아요.'],
+  groq_billing: ['Groq 요금·계정 제한', 'Groq가 결제 또는 계정 한도 관련 오류를 반환했어요.', '무료 계정 상태를 확인해 주세요. 앱이 결제나 업그레이드를 진행하지 않아요.'],
+  groq_model: ['Groq 모델 사용 불가', 'Groq가 요청한 모델 또는 API 리소스를 찾지 못했어요.', '현재 모델의 제공 여부와 계정 접근 권한을 확인해 주세요.'],
+  groq_request: ['Groq 요청 거절', 'Groq가 요청 형식이나 매개변수를 받아들이지 않았어요.', '반복되면 확인 코드를 알려 주세요. 자기 점검으로 계속할 수 있어요.'],
+  groq_timeout: ['Groq 응답 시간 초과', '사이트가 Groq 응답을 기다리다가 제한 시간에 도달했어요.', '잠시 후 다시 눌러 주세요. 이전 요청이 사용량에 포함될 수 있어요.'],
+  groq_network: ['Groq 연결 실패', '사이트에서 Groq로의 통신을 완료하지 못했어요. 구체적인 연결 실패 원인은 확인되지 않았어요.', '잠시 후 다시 시도하거나 자기 점검으로 계속해 주세요.'],
+  groq_unavailable: ['Groq 서비스 오류', 'Groq 서버가 현재 요청을 처리할 수 없다고 응답했어요.', '잠시 후 다시 시도해 주세요. 복구 시각은 확인되지 않았어요.'],
+  groq_blocked: ['Groq 응답 제한', 'Groq가 콘텐츠 제한 또는 응답 거절을 알려왔어요.', '문장을 확인하거나 자기 점검으로 계속해 주세요.'],
+  groq_truncated: ['Groq 응답 길이 초과', 'Groq 답변이 최대 출력 길이에 도달해 중간에 끝났어요.', '문장을 짧게 나누어 다시 점검해 주세요. 사용 횟수 한도 초과는 아니에요.'],
+  groq_incomplete: ['Groq 응답 미완료', 'Groq가 완성된 교정 결과를 보내지 않았어요. 세부 원인은 확인되지 않았어요.', '다시 시도하거나 자기 점검으로 계속해 주세요.'],
+  groq_invalid_response: ['Groq 교정 형식 오류', 'Groq 응답이 교정 결과 형식에 맞지 않아 사용할 수 없어요.', '다시 시도해 주세요. 잘못된 응답을 학습 결과로 저장하지 않았어요.'],
+  client_timeout: ['사이트 응답 시간 초과', 'AI 응답이 늦어 35초 후 기다림을 끝냈어요. Google·Groq 처리 결과는 확인되지 않았어요.', '연결 상태를 확인한 뒤 다시 눌러 주세요. 이전 요청이 사용량에 포함될 수 있어요.'],
+  client_network: ['사이트 연결 실패', '기기와 사이트 사이의 통신을 완료하지 못했어요. Google·Groq 처리 여부는 확인되지 않았어요.', '인터넷 연결을 확인한 뒤 다시 눌러 주세요. 이전 요청이 사용량에 포함될 수 있어요.'],
   invalid_response: ['사이트 응답 형식 오류', '사이트에서 확인 가능한 교정 응답을 받지 못했어요.', '다시 시도해 주세요. 반복되면 확인 코드를 알려 주세요.'],
   unknown: ['원인 확인 불가', '현재 확인 가능한 정보만으로 AI 점검이 중단된 이유를 판단할 수 없어요.', '다시 시도하거나 자기 점검으로 계속해 주세요.'],
 } as const;
 export type FeedbackIssueCode = keyof typeof FEEDBACK_ISSUES;
-export type FeedbackIssue = { code: FeedbackIssueCode; providerStatus?: number; retryAfterSeconds?: number };
+export type FeedbackFailure = { code: FeedbackIssueCode; providerStatus?: number; retryAfterSeconds?: number };
+export type FeedbackIssue = FeedbackFailure & { previous?: FeedbackFailure };
 const object = (value: unknown): Record<string, unknown> => value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
-export function parseFeedbackIssue(value: unknown): FeedbackIssue | undefined {
+function parseFailure(value: unknown): FeedbackFailure | undefined {
   const raw = object(value);
   if (typeof raw.code !== 'string' || !Object.hasOwn(FEEDBACK_ISSUES, raw.code)) return;
   return { code: raw.code as FeedbackIssueCode,
     ...(Number.isInteger(raw.providerStatus) && Number(raw.providerStatus) >= 100 && Number(raw.providerStatus) <= 599 ? { providerStatus: Number(raw.providerStatus) } : {}),
     ...(Number.isInteger(raw.retryAfterSeconds) && Number(raw.retryAfterSeconds) > 0 && Number(raw.retryAfterSeconds) <= 604800 ? { retryAfterSeconds: Number(raw.retryAfterSeconds) } : {}),
   };
+}
+export function parseFeedbackIssue(value: unknown): FeedbackIssue | undefined {
+  const issue = parseFailure(value);
+  if (!issue) return;
+  const previous = parseFailure(object(value).previous);
+  return { ...issue, ...(previous ? { previous } : {}) };
 }
 export function feedbackErrorBody(code: FeedbackIssueCode, details: Omit<FeedbackIssue, 'code'> = {}) {
   const issue = parseFeedbackIssue({ ...details, code })!;

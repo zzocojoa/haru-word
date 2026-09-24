@@ -83,13 +83,14 @@ test('usage counters allow more than 30 immediate attempts and keep days and use
  assert.equal((await count('usage','2026-09-22',1000)).request_count,1);assert.equal((await count('different','2026-09-21',1000)).request_count,1);
  assert.equal((await count('different','2026-09-21',1000)).request_count,2);
 });
-test('existing 30-use accounts reach Google; only its 429 limits a request and later retries can succeed',async()=>{
+test('existing 30-use accounts reach Google; missing fallback is reported and later retries can succeed',async()=>{
  sqlite.prepare('UPDATE ai_daily_usage SET request_count=30,last_request_at=? WHERE user_id=?').run(Date.now(),'owner');
  const originalFetch=globalThis.fetch;let providerCalls=0;
  globalThis.fetch=async()=>{providerCalls++;return providerCalls===1?new Response('private provider details',{status:429}):success()};
  try{
-  const limited=await route.POST(req());assert.equal(limited.status,429);
+  const limited=await route.POST(req());assert.equal(limited.status,503);
   const error=await limited.json();assert.match(error.error,/Google/);assert.doesNotMatch(error.error,/private|30회|10초|내일/);
+  assert.equal(error.previous.code,'provider_limit'); assert.equal(error.code,'groq_not_configured');
   assert.equal(providerCalls,1);
   assert.equal((await route.POST(req())).status,200);assert.equal(providerCalls,2);
   assert.equal(sqlite.prepare('SELECT request_count FROM ai_daily_usage WHERE user_id=?').get('owner').request_count,32);
@@ -127,11 +128,25 @@ test('sentence route returns safe failure reasons, provider evidence and configu
  try {
   globalThis.fetch=async()=>Response.json({error:{message:'PRIVATE_KEY_SENTENCE',details:[{'@type':'type.googleapis.com/google.rpc.QuotaFailure',violations:[{quotaId:'RequestsPerMinute'}]},{'@type':'type.googleapis.com/google.rpc.RetryInfo',retryDelay:'12s'}]}},{status:429});
   const result=await route.POST(req()), data=await result.json();
-  assert.equal(result.status,429); assert.equal(data.code,'provider_minute_limit'); assert.equal(data.providerStatus,429); assert.equal(data.retryAfterSeconds,12);
+  assert.equal(result.status,503); assert.equal(data.code,'groq_not_configured'); assert.equal(data.previous.code,'provider_minute_limit'); assert.equal(data.previous.providerStatus,429); assert.equal(data.previous.retryAfterSeconds,12);
   assert.doesNotMatch(JSON.stringify(data)+logs.join(''),/PRIVATE|RequestsPerMinute|test-secret|I arrive/);
   globalThis.fetch=async()=>Response.json({promptFeedback:{blockReason:'SAFETY'}});
   assert.equal((await (await route.POST(req())).json()).code,'provider_blocked');
-  testRuntime.env.google_api=''; assert.equal((await (await route.POST(req())).json()).code,'not_configured');
+  testRuntime.env.google_api=''; assert.equal((await (await route.POST(req())).json()).previous.code,'not_configured');
   testRuntime.env.google_api='test-secret'; testRuntime.env.google_ai_enabled='false'; assert.equal((await (await route.POST(req())).json()).code,'disabled');
  } finally { globalThis.fetch=originalFetch; console.error=originalError; testRuntime.env.google_api='test-secret'; testRuntime.env.google_ai_enabled='true'; }
+});
+
+test('sentence route falls back once, reports the real model and preserves owned records',async()=>{
+ insertSession(session); testRuntime.user={userId:'owner'};testRuntime.env.groq_api='synthetic-groq';
+ const originalFetch=globalThis.fetch, originalInfo=console.info, originalError=console.error,logs=[];console.info=console.error=value=>logs.push(value);
+ try{
+  let calls=0;globalThis.fetch=async(url,init)=>{calls++;if(url.includes('googleapis'))return new Response('PRIVATE',{status:429});assert.match(init.headers.Authorization,/^Bearer /);return Response.json({model:'openai/gpt-oss-120b',choices:[{finish_reason:'stop',message:{content:JSON.stringify(content)}}]})};
+  const response=await route.POST(req()),data=await response.json();assert.equal(response.status,200);assert.equal(calls,2);assert.equal(data.feedback.model,'openai/gpt-oss-120b');
+  assert.equal(saveSchema.safeParse({revision:0,progress:{},sessions:{[sid]:{...session,records:{[word.id]:{...record,aiFeedback:data.feedback}}}}}).success,true);
+  assert.deepEqual(JSON.parse(sqlite.prepare('SELECT document FROM study_sessions WHERE user_id=? AND session_id=?').get('owner',sid).document),session);
+  globalThis.fetch=async url=>new Response('PRIVATE',{status:url.includes('googleapis')?503:429,headers:{'retry-after':'7'}});
+  const failed=await (await route.POST(req())).json();assert.equal(failed.code,'groq_limit');assert.equal(failed.previous.code,'provider_unavailable');assert.equal(failed.retryAfterSeconds,7);
+  assert.doesNotMatch(logs.join('')+JSON.stringify(failed),/PRIVATE|synthetic-groq|I arrive/);
+ }finally{globalThis.fetch=originalFetch;console.info=originalInfo;console.error=originalError;delete testRuntime.env.groq_api}
 });
