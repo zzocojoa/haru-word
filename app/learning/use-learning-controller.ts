@@ -4,10 +4,9 @@ import {
   dailyAssignedIds,
   hasReviewWork,
   learningMetrics,
-  pickDaily,
   type Level,
 } from "@/lib/learning";
-import { dailyOriginSummary } from "@/lib/study-date-correction";
+import { dailyPlan } from "@/lib/learning/daily-allocation";
 import { repairMonthlyCarryover } from "@/lib/learning/monthly-carryover-repair";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLearningStore } from "../use-learning-store";
@@ -111,19 +110,19 @@ export function useLearningController(initialServerTime: number) {
     [state, date],
   );
   const remaining = Math.max(0, state.settings.dailyGoal - assignedIds.length);
-  const suggestions = useMemo(
-    () => pickDaily(words, state, date),
+  const allocation = useMemo(
+    () => dailyPlan(words, state, date),
     [words, state, date],
   );
+  const suggestions = allocation.ids;
   const metrics = useMemo(() => learningMetrics(state), [state]);
   const carry = metrics.carry;
   // The overview represents the whole study date, including completed rounds
   // before a goal increase. Resuming still uses the original unfinished session.
   const visibleIds = assignedIds.length ? assignedIds : suggestions;
-  const origins = useMemo(
-    () => dailyOriginSummary(state, visibleIds, date),
-    [state, visibleIds, date],
-  );
+  const returning = visibleIds.filter(id => allocation.origins[id] === 'returning').length;
+  const origins = { byId: allocation.origins, returning, newCount: visibleIds.length - returning };
+  const pendingReviewIds = allocation.pendingReviewIds;
   const monthlyRepair = useMemo(() => repairMonthlyCarryover(
     state, words, id => cardContent(id, state.progress[id]), date,
   ), [state, words, date]);
@@ -242,6 +241,7 @@ export function useLearningController(initialServerTime: number) {
     carry,
     assessed,
     origins,
+    pendingReviewIds,
     todays,
     visibleIds,
     repeating,

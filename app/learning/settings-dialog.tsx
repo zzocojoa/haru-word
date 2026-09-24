@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { MAX_DAILY_GOAL } from "@/lib/learning";
+import { dailyAllocationRule } from "@/lib/learning/daily-allocation";
 import { LevelSelect } from "../ui";
 import type { LearningViewProps } from "./types";
 import { HelpDetails } from "../study-ui";
@@ -81,6 +82,7 @@ export function SettingsDialog({
             </SelectContent>
           </Select>
         </label>
+        <p className="small-note goal-allocation" role="status">{dailyAllocationRule(state.settings.dailyGoal, state.settings.newWordsPaused)} {state.settings.newWordsPaused ? '복습 후보가 없으면 새 단어를 배정하지 않아요.' : '한쪽이 부족하면 다른 쪽으로 채워요.'}</p>
         <label className="check-label">
           <input
             type="checkbox"

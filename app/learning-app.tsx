@@ -85,6 +85,7 @@ export default function LearningApp({
     assignedIds,
     assessed,
     origins,
+    pendingReviewIds,
     todays,
     visibleIds,
     repeating,
@@ -310,6 +311,7 @@ export default function LearningApp({
                       assignedIds={assignedIds}
                       assessed={assessed}
                       origins={origins}
+                      pendingReviewIds={pendingReviewIds}
                       todays={todays}
                       visibleIds={visibleIds}
                       words={words}

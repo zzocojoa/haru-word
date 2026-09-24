@@ -116,8 +116,11 @@ export type Settings = {
   reviewDay?: number;
 };
 
+export type DailyOrigin = 'new' | 'returning';
+
 export type RecordItem = {
   entryId?: string;
+  dailyOrigin?: DailyOrigin;
   learnedOn?: string;
   lastPracticedOn?: string;
   material?: Content;

@@ -7,6 +7,7 @@ import {
 } from "./model.ts";
 import { emptyRecord, nextAction } from "./outcomes.ts";
 import { entryIdFor } from "./targets.ts";
+import { dailyAllocationRule } from './daily-allocation.ts';
 
 export function exportLog(state: State, words: Word[]): string {
   const map = new Map(words.map((w) => [w.id, w]));
@@ -97,7 +98,8 @@ export function exportTutor(state: State, words: Word[]): string {
   return `한국어로 짧게 설명하는 성인 기초 영어 어휘 튜터로 진행해 주세요.
 학습 목록: American Oxford 3000 by CEFR level. 공식 단어·품사·수준은 함께 제공한 목록에서 확인하세요. 확인할 자료가 없으면 목록을 요청하고 공식 단어라고 추측하지 마세요.
 선택 수준: ${state.settings.level} (정식 CEFR 판정 아님). 하루 목표: 이월 포함 ${state.settings.dailyGoal}개, 약 15분.
-친숙도 미확인 시 목록 여러 부분의 20개를 한 개씩 보여 주고 ✓✓ 안다 / ✓ 불확실 / ? 처음으로 확인하세요. 미완료 → ✓ → ? 순으로 고르세요.
+친숙도 미확인 시 목록 여러 부분의 20개를 한 개씩 보여 주고 ✓✓ 안다 / ✓ 불확실 / ? 처음으로 확인하세요.
+일일 배정: ${dailyAllocationRule(state.settings.dailyGoal, state.settings.newWordsPaused)} 복습은 보완할 단어와 오래 기다린 단어부터 고르세요. ${state.settings.newWordsPaused ? '신규 단어 쉬기가 켜져 있으므로 새 단어로 채우지 마세요.' : '새 단어는 ✓ → ? 순으로 고르세요. 한쪽이 부족하면 다른 쪽으로 채우세요. 목표가 1개이고 이전 기록이 없으면 새 단어부터 시작하세요.'} 남은 복습은 완료 처리하지 마세요. 이미 배정한 단어는 유지하고 목표 증가 시 오늘 전체 비율을 기준으로 추가하세요.
 한 단어의 뜻 하나·품사·유용한 표현·짧은 예문과 해석·사전 링크를 제공하세요. 직접 만든 예문은 ‘학습용 작성 예문’으로 표시하세요.
 영어→한국어, 한국어→영어, 문장을 한 문제씩 진행하고, 정답을 숨긴 채 답을 기다리세요. 다른 유효한 정답도 인정하세요.
 도움을 받은 답과 독립 성공을 구분하고 다른 단어 2~3개 뒤 재시도하세요. 문법 오류만 있으면 ‘문장 보완’이며 친숙도를 낮추지 마세요.

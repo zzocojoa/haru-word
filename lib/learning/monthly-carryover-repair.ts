@@ -1,7 +1,8 @@
 import type { Content, RecordItem, Session, State, Word } from './model.ts';
 import { allSenses, dailyMeaning, storeSense } from './progress.ts';
 import { emptyRecord, isComplete, sessionRecordComplete } from './outcomes.ts';
-import { dailyAssignedIds, entryIdFor, pickDaily, targetIdentity } from './targets.ts';
+import { dailyAssignedIds, entryIdFor, targetIdentity } from './targets.ts';
+import { dailyPlan } from './daily-allocation.ts';
 import { ensureCarryover } from './recording.ts';
 
 // Only allocation placeholders are replaceable. Even an empty saved draft or
@@ -118,13 +119,14 @@ export function repairMonthlyCarryover(
     // of the removed word. Never enlarge an existing round during this repair.
     const removedEntries = new Set(candidates.map(id => entryIdFor(current, id)));
     const removedHeads = new Set(words.filter(w => removedEntries.has(w.id)).map(w => w.headword));
-    const available = pickDaily(words.filter(w => !removedHeads.has(w.headword)), planning, date).slice(0, candidates.length);
+    const plan = dailyPlan(words.filter(w => !removedHeads.has(w.headword)), planning, date);
+    const available = plan.ids.slice(0, candidates.length);
     const ids = [...current.ids], records = { ...current.records }, wordKeys = { ...current.wordKeys };
     for (let i = 0; i < available.length; i++) {
       const from = candidates[i], to = available[i];
       ids[ids.indexOf(from)] = to;
       delete records[from]; delete wordKeys[from];
-      records[to] = { ...emptyRecord(dailyMeaning(next.progress[to], content(to).meaning), next.progress[to]?.familiarity), entryId: to };
+      records[to] = { ...emptyRecord(dailyMeaning(next.progress[to], content(to).meaning), next.progress[to]?.familiarity), entryId: to, dailyOrigin: plan.origins[to] };
       wordKeys[to] = words.find(w => w.id === to)!.word.toLowerCase();
       replacements.push({ from: entryIdFor(current, from), to });
     }

@@ -4343,6 +4343,29 @@ footer {
 .settings-dialog .dialog-scroll>.check-label {
   justify-content: flex-start;
 }
+.pending-daily-review {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.pending-daily-review ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 4px 0;
+  list-style: none;
+}
+.pending-daily-review li {
+  padding: 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.pending-daily-review small { color: var(--caption); }
 .status-badge {
   display: inline-flex;
   align-items: center;

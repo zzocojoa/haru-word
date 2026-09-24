@@ -1,5 +1,6 @@
 "use client";
 import { POS } from "@/lib/learning";
+import { dailyAllocationRule } from "@/lib/learning/daily-allocation";
 import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
 import { useMemo, useState } from "react";
 import { HelpDetails, StatusBadge } from "../study-ui";
@@ -18,6 +19,7 @@ type TodayOverviewProps = Pick<
   | "assignedIds"
   | "assessed"
   | "origins"
+  | "pendingReviewIds"
   | "todays"
   | "visibleIds"
   | "words"
@@ -43,6 +45,7 @@ export function TodayOverview({
   assignedIds,
   assessed,
   origins,
+  pendingReviewIds,
   todays,
   visibleIds,
   words,
@@ -63,6 +66,9 @@ export function TodayOverview({
   const assigned = assignedIds.length > 0;
   const [year, month, day] = date.split('-').map(Number);
   const [filter, setFilter] = useState<'all' | 'remaining'>('all');
+  const [showPendingReview, setShowPendingReview] = useState(false);
+  const [pendingLimit, setPendingLimit] = useState(20);
+  const wordById = useMemo(() => new Map(words.map(w => [w.id, w])), [words]);
   const filteredIds = visibleIds.filter(id => filter === 'all' || statuses[id].recordStatus !== 'recorded');
   return (
     <section className="learning-panel home-panel">
@@ -92,7 +98,7 @@ export function TodayOverview({
               : "다시 보기와 재학습도 할 수 있어요."
             : unfinished
               ? `기록 완료 ${checked}/${assignedIds.length}개${remaining ? ` · 회차 후 ${remaining}개 추가 가능` : ''}`
-              : "미완료·보완 단어부터, 남은 자리는 새 단어로."}
+              : dailyAllocationRule(state.settings.dailyGoal, state.settings.newWordsPaused)}
         </p>
       </div>
       <div className="daily-metrics">
@@ -200,13 +206,15 @@ export function TodayOverview({
           <small>{assigned ? `배정 ${assignedIds.length}개` : '시작 전 · 배정 예정'}</small>
         </header>
         <p className="daily-allocation">새 학습 {origins.newCount}개 · 이전 학습·복습 {origins.returning}개</p>
+        {assigned && suggestions.length > 0 && <p className="small-note planned-allocation">추가 예정: 새 학습 {suggestions.filter(id => origins.byId[id] === 'new').length}개 · 복습 {suggestions.filter(id => origins.byId[id] === 'returning').length}개</p>}
         <HelpDetails title="오늘 배정 기준">
         <p className="today-targets-note">
           {assigned
             ? '아래는 오늘 날짜에 배정된 전체 목록이에요. 이전에 본 단어도 오늘의 복습 목표에 포함돼요.'
-            : '오늘 시작하면 아래 단어가 배정돼요. 미완료·보완 단어부터 채우고, 남은 목표 수에 새 단어를 넣어요.'}
+            : state.settings.newWordsPaused ? '오늘 시작하면 아래 복습 단어가 배정돼요.' : '오늘 시작하면 아래 단어가 배정돼요. 새 단어 자리를 확보하고, 복습은 보완할 단어와 오래 기다린 단어부터 골라요.'}
           {assigned && remaining > 0 && ` 목표까지 ${remaining}개는 아직 배정 전이에요.`}
         </p>
+        <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 중에는 복습만 배정해요.' : '한쪽 후보가 부족하면 다른 쪽으로 채워요.'} 이미 배정한 단어는 바꾸지 않으며, 목표를 늘리면 오늘 전체 비율을 보고 추가해요.</p>
         <p className="small-note">기록 완료는 회상·문장 결과를 남긴 수예요. 독립 성공과는 달라요. 월말 점검이 남아 있어도 다음 날 학습할 수 있어요.</p>
         </HelpDetails>
         <div className="target-filters" role="group" aria-label="오늘 단어 필터">
@@ -216,7 +224,7 @@ export function TodayOverview({
         {filteredIds.length === 0 && <p className="empty-note" role="status">남은 단어가 없어요.</p>}
         {filteredIds.map((id) => {
           const i = visibleIds.indexOf(id);
-          const w = words.find((w) => w.id === id)!;
+          const w = wordById.get(id)!;
           const status = statuses[id];
           return (
             <div key={id} className="today-word-row">
@@ -238,6 +246,19 @@ export function TodayOverview({
           );
         })}
       </div>
+      {pendingReviewIds.length > 0 && (
+        <details className="pending-daily-review notes-details" onToggle={e => setShowPendingReview(e.currentTarget.open)}>
+          <summary>대기 중인 복습 {pendingReviewIds.length}개</summary>
+          <p className="small-note">오늘 목록과 추가 배정 예정에 없는 복습이에요. 기록을 유지하고 다음 배정에서 다시 골라요. 주간·월말 점검과는 별개예요.</p>
+          {showPendingReview && <ul aria-label="대기 중인 복습 단어" tabIndex={0}>
+            {pendingReviewIds.slice(0, pendingLimit).map(id => {
+              const word = wordById.get(id)!;
+              return <li key={id}><span lang="en">{word.word}</span> <small>{POS[word.pos]} · {word.level}</small></li>;
+            })}
+          </ul>}
+          {showPendingReview && pendingReviewIds.length > pendingLimit && <button className="text-button" onClick={() => setPendingLimit(n => n + 20)}>복습 목록 더 보기 · {pendingReviewIds.length - pendingLimit}개 남음</button>}
+        </details>
+      )}
       {unfinished && <p className="small-note pause-note">중단한 위치와 입력은 저장돼요.</p>}
       {state.settings.newWordsPaused && (
         <p className="notice">

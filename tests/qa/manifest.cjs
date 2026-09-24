@@ -3,6 +3,7 @@ module.exports = [
   "a1-content-qa.cjs",
   "accessibility-qa.cjs",
   "backup-qa.cjs",
+  "balanced-daily-qa.cjs",
   "browser-qa.cjs",
   "clock-continuity-qa.cjs",
   "comprehensive-qa.cjs",

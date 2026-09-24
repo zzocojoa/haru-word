@@ -127,7 +127,7 @@ test('pending monthly checks leave new-word budgets open at both goal bounds and
     state.settings.dailyGoal = goal;
     const before = structuredClone(state), chosen = pickDaily(pool, state, date);
     assert.equal(chosen.length, goal);
-    assert.equal(chosen[0], pool[0].id);
+    if (goal > 1) assert.equal(chosen[0], pool[0].id); else assert.ok(!chosen.includes(pool[0].id));
     assert.equal(new Set(chosen).size, goal);
     assert.deepEqual(state, before);
   }

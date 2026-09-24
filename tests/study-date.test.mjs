@@ -32,7 +32,7 @@ test('server clock ignores device wall time and rolls over in Seoul',()=>{
 test('correcting the finished ten frees today without deleting or passing any work',()=>{
  const {state,session}=fixture(),before=structuredClone(state),next=correctDailyStudyDate(state,session.id,'2026-09-21','2026-09-22');
  assert.deepEqual(state,before);assert.equal(dailyAssignedIds(next,'2026-09-22').length,0);assert.equal(dailyAssignedIds(next,'2026-09-21').length,10);
- assert.deepEqual(new Set(pickDaily(words,next,'2026-09-22')),new Set(session.ids));
+ assert.equal(pickDaily(words,next,'2026-09-22').filter(id=>session.ids.includes(id)).length,5);
  assert.equal(next.sessions[session.id].createdAt,session.createdAt);assert.equal(next.sessions[session.id].finished,true);
  for(const id of session.ids){assert.deepEqual(next.sessions[session.id].records[id],{...session.records[id],learnedOn:'2026-09-21',lastPracticedOn:'2026-09-21'});assert.deepEqual(next.progress[id].studyDates,['2026-09-21']);assert.equal(next.progress[id].needsReview,true);assert.equal(next.progress[id].lastReviewed,'2026-09-22')}
  assert.deepEqual(dailyOrigins(next,session.ids,'2026-09-22'),{returning:10,newCount:0});
@@ -66,6 +66,8 @@ test('assessed practice stays returning before assignment, after assignment and 
   'failed-sense':{...emptyRecord('one meaning'),entryId:failed,ko:'help'},
   [written]:{...emptyRecord('one meaning'),entryId:written,sentenceStatus:'written'},
  }};
+ // Legacy records did not freeze allocation origins.
+ for(const r of Object.values(daily.records))delete r.dailyOrigin;
  state.sessions[practice.id]=practice;state.progress[failed]={needsReview:true};
  const before=structuredClone(state),expected={returning:2,newCount:1};
  assert.deepEqual(dailyOrigins(state,[failed,written,fresh],date),expected);assert.deepEqual(state,before);

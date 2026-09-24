@@ -1,107 +1,19 @@
-import { today, weekStart } from "./dates.ts";
+import { weekStart } from "./dates.ts";
 import {
   type Content,
   type LearningTarget,
   type PracticeMode,
   type Session,
   type State,
-  type Word,
 } from "./model.ts";
 import { sessionRecordMeasured } from "./outcomes.ts";
 import { resumeMonthlyWriting } from './session-flow.ts';
 import {
   allSenses,
   dailyMeaning,
-  hasReviewWork,
-  senseProgress,
 } from "./progress.ts";
 
-const everyday = [
-  "arrive",
-  "busy",
-  "breakfast",
-  "work",
-  "home",
-  "food",
-  "water",
-  "time",
-  "help",
-  "need",
-  "want",
-  "buy",
-  "travel",
-  "meet",
-  "friend",
-  "family",
-  "learn",
-  "call",
-  "plan",
-  "use",
-  "important",
-];
-
-export function dailyAssignedIds(state: State, date = today()): string[] {
-  return [
-    ...new Set(
-      Object.values(state.sessions)
-        .filter((s) => s.kind === "daily" && s.date === date)
-        .flatMap((s) => s.ids.map((id) => entryIdFor(s, id))),
-    ),
-  ];
-}
-
-export function pickDaily(
-  words: Word[],
-  state: State,
-  date = today(),
-): string[] {
-  const progress = state.progress;
-  const recentTargets = new Set(dailyAssignedIds(state, date));
-  const remaining = Math.max(0, state.settings.dailyGoal - recentTargets.size);
-  if (!remaining) return [];
-  const seen = new Set(
-    words.filter((w) => recentTargets.has(w.id)).map((w) => w.headword),
-  );
-  // Periodic checks keep their own queue. Only the learner's explicit setting
-  // pauses new vocabulary; carryover still takes priority within the daily goal.
-  const pauseNew = state.settings.newWordsPaused;
-  const candidates = words.filter(
-    (w) =>
-      !recentTargets.has(w.id) &&
-      (hasReviewWork(progress[w.id]) ||
-        (!pauseNew &&
-          (w.personal || w.level === state.settings.level) &&
-          progress[w.id]?.familiarity !== "known" &&
-          !senseProgress(progress[w.id], progress[w.id]?.meaning || "")
-            .lastStudied)),
-  );
-  function priority(w: Word) {
-    const p = progress[w.id];
-    return hasReviewWork(p)
-      ? 0
-      : p?.familiarity === "uncertain"
-        ? 1
-        : p?.familiarity === "new"
-          ? 2
-          : 3;
-  }
-  candidates.sort(
-    (a, b) =>
-      priority(a) - priority(b) ||
-      Number(!!progress[b.id]?.useful) - Number(!!progress[a.id]?.useful) ||
-      (everyday.includes(a.word) ? 0 : 1) -
-        (everyday.includes(b.word) ? 0 : 1) ||
-      hash(date + a.id) - hash(date + b.id),
-  );
-  const out: string[] = [];
-  for (const w of candidates) {
-    if (seen.has(w.headword)) continue;
-    out.push(w.id);
-    seen.add(w.headword);
-    if (out.length >= remaining) break;
-  }
-  return out;
-}
+export { dailyAssignedIds, pickDaily } from "./daily-allocation.ts";
 
 export function targetIdentity(entryId: string, meaning: string): string {
   return JSON.stringify([entryId, meaning.trim()]);

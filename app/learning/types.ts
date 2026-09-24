@@ -40,6 +40,7 @@ export type LearningViewProps = LearningStatusProps & LearningCommandProps & Lea
   unfinished?: Session; repeating?: Session; todays: Session[];
   remaining: number; assignedIds: string[]; visibleIds: string[]; suggestions: string[];
   origins: ReturnType<typeof dailyOriginSummary>;
+  pendingReviewIds: string[];
   metrics: ReturnType<typeof learningMetrics>;
   monthlyRepair: ReturnType<typeof repairMonthlyCarryover>;
 };

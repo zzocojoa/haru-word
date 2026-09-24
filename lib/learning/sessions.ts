@@ -11,12 +11,12 @@ import {
   type Word,
 } from "./model.ts";
 import { emptyRecord } from "./outcomes.ts";
+import { dailyPlan } from './daily-allocation.ts';
 import { dailyMeaning, hasReviewWork } from "./progress.ts";
 import {
   dailyAssignedIds,
   entryIdFor,
   missingReviewTargets,
-  pickDaily,
   practiceTargets,
   reviewTargets,
   targetIdentity,
@@ -101,12 +101,13 @@ export function newSession(
     )
   )
     return null;
+  const plan = kind === 'daily' ? dailyPlan(words, state, date) : undefined;
   const targets: LearningTarget[] =
     kind === "weekly" || kind === "monthly"
       ? reviewTargets(state, kind, period)
       : kind === "practice"
         ? practiceTargets(state, practiceMode || "known", content)
-        : pickDaily(words, state, date).map((entryId) => ({
+        : plan!.ids.map((entryId) => ({
             entryId,
             meaning: dailyMeaning(
               state.progress[entryId],
@@ -121,6 +122,7 @@ export function newSession(
       meaning: t.meaning || content(t.entryId).meaning,
     })),
   );
+  if (plan) for (const id of ids) records[id].dailyOrigin = plan.origins[records[id].entryId || id];
   const warmupIds =
     kind === "daily" && !dailyAssignedIds(state, date).length
       ? Object.entries(state.progress)
