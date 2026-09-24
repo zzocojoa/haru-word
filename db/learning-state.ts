@@ -1,8 +1,14 @@
 import { EMPTY, type State } from '@/lib/learning';
 import { restoreChunks } from '@/lib/backup';
-import type { SaveStateRequest, StateSnapshot } from '@/lib/api-contracts';
+import type { SaveStateRequest } from '@/lib/api-contracts';
 
-export async function loadState(db: D1Database, userId: string): Promise<StateSnapshot> {
+export type StoredStateDocuments = {
+  revision: number; settings: string;
+  progress: { entry_id: string; document: string }[];
+  sessions: { session_id: string; document: string }[];
+};
+
+export async function loadStateDocuments(db: D1Database, userId: string): Promise<StoredStateDocuments> {
   await db.prepare('INSERT OR IGNORE INTO learner_states (user_id,revision,settings,updated_at) VALUES (?,0,?,?)')
     .bind(userId, JSON.stringify(EMPTY.settings), new Date().toISOString()).run();
   const rows = await db.batch([
@@ -13,13 +19,9 @@ export async function loadState(db: D1Database, userId: string): Promise<StateSn
   const profile = rows[0].results[0] as { revision: number; settings: string };
   return {
     revision: profile.revision,
-    state: {
-      settings: JSON.parse(profile.settings),
-      progress: Object.fromEntries((rows[1].results as { entry_id: string; document: string }[])
-        .map(row => [row.entry_id, JSON.parse(row.document)])),
-      sessions: Object.fromEntries((rows[2].results as { session_id: string; document: string }[])
-        .map(row => [row.session_id, JSON.parse(row.document)])),
-    },
+    settings: profile.settings,
+    progress: rows[1].results as StoredStateDocuments['progress'],
+    sessions: rows[2].results as StoredStateDocuments['sessions'],
   };
 }
 

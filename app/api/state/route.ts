@@ -1,6 +1,7 @@
 import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { database } from '@/db/store';
-import { existingSessionIds, loadState, saveState, validSaveReferences } from '@/db/learning-state';
+import { existingSessionIds, loadStateDocuments, saveState, validSaveReferences } from '@/db/learning-state';
+import { stateResponse } from '@/lib/server/state-response';
 import { today } from '@/lib/learning';
 import { saveSchema } from '@/lib/validation';
 import { json, validateJsonMutation } from '@/lib/server/http';
@@ -12,9 +13,11 @@ export async function GET() {
   const user = await getChatGPTUser();
   if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
   try {
-    const snapshot = await loadState(database(), user.userId);
-    console.info(JSON.stringify({ event: 'learning_state_loaded', wordCount: Object.keys(snapshot.state.progress).length, sessionCount: Object.keys(snapshot.state.sessions).length, durationMs: Date.now() - started }));
-    return json(snapshot);
+    const snapshot = await loadStateDocuments(database(), user.userId);
+    const wordCount = snapshot.progress.length, sessionCount = snapshot.sessions.length;
+    return stateResponse(snapshot,
+      bytes => console.info(JSON.stringify({ event: 'learning_state_loaded', wordCount, sessionCount, bytes, durationMs: Date.now() - started })),
+      () => console.error(JSON.stringify({ event: 'learning_state_load_failed', durationMs: Date.now() - started })));
   } catch {
     console.error(JSON.stringify({ event: 'learning_state_load_failed', durationMs: Date.now() - started }));
     return json({ error: '기록을 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요.' }, 503);

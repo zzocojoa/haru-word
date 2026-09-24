@@ -75,3 +75,21 @@ test('staged parts reject oversized collections and deep objects before per-row 
  let deep={};for(let i=0;i<26;i++)deep={nested:deep};
  assert.throws(()=>parsePart(JSON.stringify(deep),descriptor),/기록 수나 구조/);
 });
+
+test('interrupted validation resumes its cursor and preserves live records until commit',async()=>{
+ reset();const before=dump(),data=await analyzeBackup(raw(history(2)));let job=await api.createRestoreJob(db,'owner',0,data.manifest);
+ for(let i=0;i<data.parts.length;i++)await api.uploadRestorePart(db,'owner',job.id,i,data.parts[i]);
+ job=await api.validateRestoreJob(db,'owner',job.id);assert.equal(job.status,'validating');assert.equal(job.validated,1);
+ const resumed=await api.createRestoreJob(db,'owner',0,data.manifest);assert.equal(resumed.id,job.id);assert.equal(resumed.validated,1);assert.equal(dump(),before);
+ while(job.status!=='ready')job=await api.validateRestoreJob(db,'owner',job.id);
+ assert.equal(job.validated,data.parts.length);assert.equal(dump(),before);
+});
+
+test('active jobs expire after 24 hours and completed receipts after seven days',async()=>{
+ reset();const started=Date.now(),{job}=await ready();
+ assert.ok(job.expiresAt>=started+24*60*60*1000&&job.expiresAt<=Date.now()+24*60*60*1000);
+ const committedAt=Date.now(),receipt=await api.commitRestoreJob(db,'owner',job.id);
+ assert.ok(receipt.expiresAt>=committedAt+7*24*60*60*1000&&receipt.expiresAt<=Date.now()+7*24*60*60*1000);
+ const after=dump();await api.cleanupRestoreJobs(db,'owner',receipt.expiresAt-1);assert.equal((await api.getRestoreJob(db,'owner',job.id)).status,'committed');
+ await api.cleanupRestoreJobs(db,'owner',receipt.expiresAt);await assert.rejects(api.getRestoreJob(db,'owner',job.id),e=>e.status===404);assert.equal(dump(),after);
+});

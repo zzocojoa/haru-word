@@ -3,10 +3,10 @@ import { catalogIds, parsePart } from '@/lib/restore-validation';
 import { RESTORE_JOB_TTL, RESTORE_RECEIPT_TTL, sha256, utf8Bytes, type RestoreJob, type RestoreManifest } from '@/lib/restore-protocol';
 
 export class RestoreError extends Error {
-  constructor(message: string, public status = 400) { super(message); }
+  constructor(message: string, public status = 400, public code = 'invalid_restore') { super(message); }
 }
 type JobRow = { id: string; user_id: string; base_revision: number; manifest: string; file_hash: string; status: RestoreJob['status']; validated: number; expires_at: number; committed_revision: number | null };
-const changed = () => new RestoreError('현재 기록이 바뀌었어요. 최신 기록을 불러와 안전 백업부터 다시 진행해 주세요.', 409);
+const changed = () => new RestoreError('현재 기록이 바뀌었어요. 최신 기록을 불러와 안전 백업부터 다시 진행해 주세요.', 409, 'revision_conflict');
 
 export async function cleanupRestoreJobs(db: D1Database, owner: string, now = Date.now()) {
   // Bounded global cleanup plus this owner's expired slot. FK cascade owns parts.

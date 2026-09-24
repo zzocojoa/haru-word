@@ -90,7 +90,8 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     const archive = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); }); assert.deepEqual(JSON.parse(archive).state, protectedSnapshot.state);
     await menu('백업 가져오기'); await file(envelope(emptyState()));
     const beforePosts = posts; let downloads = 0; page.on('download', () => downloads++);
-    await safety().click(); await page.getByRole('alert').filter({ hasText: '안전 백업을 준비하지 못해' }).waitFor();
+    await page.getByRole('alert').filter({ hasText: '안전 백업을 준비하지 못해' }).waitFor();
+    assert.equal(await safety().isDisabled(),true);
     assert.match(await page.getByRole('alert').innerText(), /8 MB/);
     assert.equal(await page.getByRole('checkbox').isDisabled(), true); assert.equal(await replace().isDisabled(), true);
     assert.equal(downloads, 0); assert.equal(posts, beforePosts); assert.deepEqual(await get(), protectedSnapshot);

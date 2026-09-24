@@ -2,6 +2,9 @@ import { z } from 'zod';
 import { requestJson, InvalidResponseError, RequestTimeoutError } from './client-request';
 import { LARGE_BACKUP_BYTES, RESTORE_PART_BYTES, type RestoreManifest } from './restore-protocol';
 const hash=z.string().regex(/^[a-f0-9]{64}$/);
+export class RestoreRequestError extends Error {
+ constructor(message:string,public status:number,public code:string){super(message);}
+}
 export const restoreJobSchema=z.object({id:z.string().uuid(),baseRevision:z.number().int().nonnegative().safe(),fileHash:hash,status:z.enum(['uploading','validating','ready','committed','cancelled']),received:z.array(z.number().int().min(0).max(63)).max(64),validated:z.number().int().min(0).max(64),total:z.number().int().min(0).max(64),expiresAt:z.number().int().positive().safe(),revision:z.number().int().nonnegative().safe().nullable()}).strict().refine(j=>
  j.validated<=j.total&&new Set(j.received).size===j.received.length&&j.received.every(i=>i<j.total)&&
  (j.status==='committed'?j.revision===j.baseRevision+1&&j.validated===j.total&&j.received.length===0:j.revision===null)&&
@@ -16,10 +19,11 @@ async function call<T>(path:string,schema:z.ZodType<T>,method='GET',body?:string
   return data;
  }).catch(error=>{
   if(signal?.aborted)throw error;
+  if(error instanceof SyntaxError)throw new InvalidResponseError();
   if(error instanceof RequestTimeoutError||error instanceof TypeError)throw new Error('연결이 끊기거나 응답이 늦어졌어요. 같은 파일을 선택해 이어갈 수 있어요.');
   throw error;
  });
- if(!result.response.ok){const data=result.data as {error?:string};throw new Error(data?.error||'복원 요청을 처리하지 못했어요.');}
+ if(!result.response.ok){const data=z.object({error:z.string(),code:z.enum(['revision_conflict','invalid_restore','internal_error']).optional()}).safeParse(result.data);throw new RestoreRequestError(data.success?data.data.error:'복원 요청을 처리하지 못했어요.',result.response.status,data.success?data.data.code||'invalid_restore':'invalid_response');}
  const parsed=schema.safeParse(result.data);if(!parsed.success)throw new InvalidResponseError();return parsed.data;
 }
 const root='/api/state/restore/jobs';
