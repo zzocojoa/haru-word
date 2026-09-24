@@ -1,0 +1,77 @@
+.library-mode-tabs { display:flex; width:fit-content; max-width:100%; height:auto; padding:4px; margin-bottom:16px; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+/* Let the existing account header reflow when learners enlarge text. */
+.topbar { height:auto; min-height:64px; flex-wrap:wrap; gap:8px 16px; padding-block:8px; }
+.topbar .brand,.topbar .top-actions { flex-shrink:0; }
+@media(max-width:640px) { .topbar { min-height:60px; } }
+.library-mode-tabs [role=tab] { white-space:normal; min-height:44px; padding:10px 20px; font-size:1rem; color:var(--caption); }
+.library-mode-tabs [role=tab][data-state=active] { background:var(--action); color:var(--ink); box-shadow:none; }
+.pos-help-button { display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; color:var(--caption); border-radius:8px; vertical-align:middle; }
+.pos-help-button:hover { background:var(--accent); color:var(--ink); }
+.grammar-catalog-heading { max-width:640px; margin-bottom:32px; }
+.grammar-catalog h2,.grammar-lesson h2 { font-size:1.5rem; line-height:1.4; margin:0 0 12px; font-weight:700; letter-spacing:normal; }
+.grammar-catalog p,.grammar-lesson p { line-height:1.75; overflow-wrap:anywhere; }
+.grammar-catalog-heading p { margin:8px 0; }
+.grammar-group + .grammar-group { margin-top:32px; }
+.grammar-group h3 { font-size:1rem; color:var(--caption); margin:0 0 12px; }
+.grammar-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.grammar-tile { border:1px solid var(--border); border-radius:14px; padding:20px; text-align:left; display:flex; flex-direction:column; justify-content:space-between; gap:24px; min-width:0; background:var(--card); transition:background .15s,border-color .15s; }
+.grammar-tile:hover { background:var(--surface); border-color:var(--ink); }
+.grammar-tile-code { display:block; color:var(--caption); font-size:.875rem; margin-bottom:8px; overflow-wrap:anywhere; }
+.grammar-tile b { display:block; font-size:1.125rem; }
+.grammar-tile p { margin:8px 0 0; font-size:.9375rem; }
+.grammar-tile-status { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:.875rem; }
+.grammar-tile-status svg { margin-left:auto; flex-shrink:0; }
+.grammar-complete { color:var(--success); }
+.grammar-review-tag { background:var(--warning-soft); color:var(--warning); padding:3px 8px; border-radius:5px; }
+.grammar-lesson { max-width:760px; margin:0 auto; padding:28px; border:1px solid var(--border); background:var(--card); border-radius:18px; min-width:0; }
+.grammar-toolbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.grammar-lesson-heading { margin-bottom:20px; }
+.grammar-lesson-heading .level-badge { display:inline-block; margin-bottom:10px; }
+.grammar-stage { display:flex; flex-direction:column; gap:20px; padding-top:28px; }
+.grammar-stage > p { margin:0; }
+.grammar-question { font-weight:600; font-size:1.125rem; line-height:1.6; }
+.grammar-role { font-size:1.25rem; font-weight:600; }
+.grammar-example { padding:20px; background:var(--surface); border-radius:12px; min-width:0; }
+.grammar-example p { margin:0; }
+.grammar-example p[lang=en] { font-size:1.25rem; line-height:1.6; margin-bottom:8px; }
+.grammar-example small,.grammar-examples > small { display:block; color:var(--caption); font-size:.875rem; line-height:1.6; }
+.grammar-example mark { color:var(--ink); background:var(--action); text-decoration:underline; text-underline-offset:5px; border-radius:3px; }
+.grammar-examples { display:grid; gap:12px; }
+.grammar-rules { margin:0; }
+.grammar-rules dt { font-weight:700; margin:0 0 8px; }
+.grammar-rules dd { margin:0 0 24px; line-height:1.8; overflow-wrap:anywhere; }
+.grammar-actions,.grammar-options { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+.grammar-choices { display:grid; gap:12px; }
+.grammar-choices .secondary-button { width:100%; justify-content:flex-start; white-space:normal; text-align:left; }
+.grammar-choices .is-selected { background:var(--accent); border-color:var(--ink); }
+.grammar-order-answer { padding:20px; border:1px dashed var(--input); border-radius:12px; min-height:76px; font-size:1.125rem; line-height:1.7; overflow-wrap:anywhere; }
+.grammar-writing { display:grid; gap:10px; font-weight:600; }
+.grammar-writing textarea { width:100%; min-width:0; padding:14px; border:1px solid var(--input); border-radius:10px; font-size:1rem; font-weight:400; line-height:1.7; resize:vertical; background:var(--card); }
+.grammar-check { border:1px solid var(--border); border-radius:12px; padding:20px; min-width:0; }
+.grammar-check legend { padding:0 8px; font-weight:700; }
+.grammar-check label { display:flex; align-items:center; gap:12px; min-height:48px; font-size:1rem; }
+.grammar-check input { width:20px; height:20px; flex-shrink:0; accent-color:var(--ink); }
+.grammar-message,.grammar-feedback { padding:20px; border-radius:12px; background:var(--accent); overflow-wrap:anywhere; }
+.grammar-feedback { border-left:3px solid var(--success); }
+.grammar-feedback p { margin:8px 0; }
+.grammar-feedback h3,.grammar-results h3 { font-size:1rem; font-weight:700; margin:0; }
+.grammar-results ul { padding:0; list-style:none; margin:8px 0 0; }
+.grammar-results li { padding:14px 0; border-bottom:1px solid var(--border); }
+.grammar-results p { margin:4px 0 0; color:var(--caption); }
+.grammar-source { margin:28px 0 0; padding-top:20px; border-top:1px solid var(--border); }
+.grammar-source a { text-decoration:underline; text-underline-offset:3px; }
+.grammar-lesson button { min-height:44px; white-space:normal; }
+.grammar-lesson button svg { flex-shrink:0; }
+.grammar-catalog :focus-visible,.grammar-lesson :focus-visible,.pos-help-button:focus-visible { outline:2px solid var(--ink); outline-offset:4px; }
+@media(max-width:800px) { .grammar-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:520px) {
+  .library-mode-tabs { width:100%; } .library-mode-tabs [role=tab] { flex:1; padding:10px 8px; }
+  .grammar-grid { grid-template-columns:minmax(0,1fr); }
+  .grammar-tile { padding:18px; gap:16px; }
+  .grammar-lesson { padding:20px 16px; border-radius:14px; }
+  .grammar-lesson h2 { font-size:1.25rem; }
+  .grammar-stage { gap:16px; padding-top:24px; }
+  .grammar-example,.grammar-message,.grammar-feedback,.grammar-check { padding:16px; }
+  .grammar-actions > .primary-button { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) { .grammar-tile { transition:none; } }

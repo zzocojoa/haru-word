@@ -72,9 +72,9 @@ export async function validateRestoreJob(db: D1Database, user: string, id: strin
   job = await row(db, user, id);
   // Only identifiers cross chunk boundaries. No full history is materialized.
   const keys = await db.prepare('SELECT p.kind,e.key AS id FROM restore_parts p,json_each(p.document) e WHERE p.job_id=?').bind(id).all<{ kind: string; id: string }>();
-  const progress = new Set<string>(), sessions = new Set<string>();
+  const progress = new Set<string>(), sessions = new Set<string>(), grammar = new Set<string>();
   for (const item of keys.results) {
-    const set = item.kind === 'progress' ? progress : sessions;
+    const set = item.kind === 'progress' ? progress : item.kind === 'grammar' ? grammar : sessions;
     if (set.has(item.id)) throw new RestoreError('여러 전송 조각에 같은 기록이 중복되어 있어요.');
     set.add(item.id);
   }
@@ -109,6 +109,10 @@ export async function commitRestoreJob(db: D1Database, user: string, id: string)
     db.prepare(`DELETE FROM study_sessions WHERE user_id=? AND ${condition}`).bind(user, id, user),
     db.prepare(`INSERT INTO word_progress(user_id,entry_id,document) SELECT ?,e.key,e.value FROM restore_parts p,json_each(p.document) e WHERE p.job_id=? AND p.kind='progress' AND ${condition}`).bind(user, id, id, user),
     db.prepare(`INSERT INTO study_sessions(user_id,session_id,document) SELECT ?,e.key,e.value FROM restore_parts p,json_each(p.document) e WHERE p.job_id=? AND p.kind='sessions' AND ${condition}`).bind(user, id, id, user),
+    ...(manifest.parts.some(p => p.kind === 'grammar') ? [
+      db.prepare(`DELETE FROM grammar_progress WHERE user_id=? AND ${condition}`).bind(user, id, user),
+      db.prepare(`INSERT INTO grammar_progress(user_id,lesson_id,document) SELECT ?,e.key,e.value FROM restore_parts p,json_each(p.document) e WHERE p.job_id=? AND p.kind='grammar' AND ${condition}`).bind(user, id, id, user),
+    ] : []),
     db.prepare(`UPDATE learner_states SET settings=?,revision=revision+1,updated_at=? WHERE user_id=? AND revision=? AND ${condition}`).bind(JSON.stringify(manifest.settings), new Date().toISOString(), user, job.base_revision, id, user),
     db.prepare("UPDATE restore_jobs SET status='committed',committed_revision=?,active_owner=NULL,expires_at=? WHERE id=? AND user_id=? AND status='committing'").bind(job.base_revision + 1, Date.now() + RESTORE_RECEIPT_TTL, id, user),
     db.prepare("DELETE FROM restore_parts WHERE job_id=? AND EXISTS(SELECT 1 FROM restore_jobs WHERE id=? AND user_id=? AND status='committed')").bind(id, id, user),

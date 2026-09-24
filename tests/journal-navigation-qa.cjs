@@ -150,7 +150,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
       const d = await pending; return fs.readFileSync(await d.path(), 'utf8');
     };
     const backup = JSON.parse(await downloadText('전체 백업'));
-    assert.deepEqual(backup.state, before.state);
+    assert.deepEqual(backup.state, {...before.state,grammar:{}});
     const csv = await downloadText('CSV 받기');
     assert.ok(csv.includes(Object.values(state.sessions)[22].date));
     assert.ok(csv.includes('보존할 보완점 0'));

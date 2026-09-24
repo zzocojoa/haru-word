@@ -19,6 +19,11 @@ export const studySessions = sqliteTable("study_sessions", {
   document: text("document").notNull(),
 }, table => [primaryKey({ columns: [table.userId, table.sessionId] })]);
 
+// Bounded, independent mini-lesson progress. Shares learner_states.revision.
+export const grammarProgress = sqliteTable('grammar_progress', {
+  userId: text('user_id').notNull(), lessonId: text('lesson_id').notNull(), document: text('document').notNull(),
+}, table => [primaryKey({ columns: [table.userId, table.lessonId] })]);
+
 // Durable request counts are operational metrics, not an app-enforced quota.
 export const aiDailyUsage = sqliteTable("ai_daily_usage", {
   userId: text("user_id").notNull(),

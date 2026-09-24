@@ -5,6 +5,7 @@ import { stateDelta } from '@/lib/state-delta';
 import { InvalidResponseError, RequestTimeoutError } from '@/lib/client-request';
 import { loadLearningState, restoreLearningState, saveLearningState } from '@/lib/learning-api';
 import { commitRestore } from '@/lib/restore-client';
+import type { GrammarProgress, LessonId } from '@/lib/grammar/model';
 
 export function useLearningStore() {
   const [state, setState] = useState<State>(structuredClone(EMPTY));
@@ -20,6 +21,12 @@ export function useLearningStore() {
   const [unsaved, setUnsaved] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [epoch, setEpoch] = useState(0);
+  const stageGrammar = useCallback((id: LessonId, draft: GrammarProgress) => {
+    const next = { ...current.current, grammar: { ...current.current.grammar, [id]: draft } };
+    current.current = next;
+    setState(next);
+    setUnsaved(true);
+  }, []);
 
   const load = useCallback(async () => {
     if (lock.current) return false;
@@ -77,16 +84,17 @@ export function useLearningStore() {
     setState(next);
     setUnsaved(true);
     // Compare with the last acknowledged state, including earlier failed changes.
-    const { progress, sessions, settings } = stateDelta(persisted.current, next);
+    const { progress, sessions, settings, grammar } = stateDelta(persisted.current, next);
     try {
-      const result = await saveLearningState({ revision: revision.current, settings, progress, sessions });
+      const result = await saveLearningState({ revision: revision.current, settings, progress, sessions, grammar });
       if (!result.ok) {
         setConflict(result.response.status === 409);
         throw new Error(result.data.error || '저장하지 못했습니다.');
       }
       revision.current = result.data.revision;
       persisted.current = next;
-      setUnsaved(false);
+      // A grammar draft may have advanced while this snapshot was in flight.
+      setUnsaved(current.current !== next);
       setConflict(false);
       return true;
     } catch (e) {
@@ -126,9 +134,10 @@ export function useLearningStore() {
         return false;
       }
       revision.current = result.data.revision;
-      persisted.current = next;
-      current.current = next;
-      setState(next);
+      const restored = next.grammar === undefined ? { ...next, grammar: current.current.grammar } : next;
+      persisted.current = restored;
+      current.current = restored;
+      setState(restored);
       setUnsaved(false);
       setConflict(false);
       setEpoch(n => n + 1);
@@ -145,5 +154,5 @@ export function useLearningStore() {
     }
   }, [signedIn, unsaved, conflict]);
 
-  return { state, current, getRevision:()=>revision.current, loading, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
+  return { state, current, stageGrammar, getRevision:()=>revision.current, loading, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
 }

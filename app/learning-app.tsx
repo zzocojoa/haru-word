@@ -11,7 +11,8 @@ import {
   RotateCcw,
   Settings2,
 } from "lucide-react";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useCallback, useRef } from "react";
+import type { GrammarLeave } from './grammar/use-grammar-draft';
 import { CompletedLesson } from "./completed-lesson";
 import { CandidatePreparation } from "./learning/candidate-preparation";
 import { FamiliarityAssessment } from "./learning/familiarity-assessment";
@@ -35,8 +36,10 @@ import { useTabPosition } from "./use-tab-position";
 const BackupDialog = lazy(() => import("./backup-dialog"));
 export default function LearningApp({
   initialServerTime,
+  grammarEnabled = false,
 }: {
   initialServerTime: number;
+  grammarEnabled?: boolean;
 }) {
   const {
     tab,
@@ -109,6 +112,9 @@ export default function LearningApp({
   } = useLearningController(initialServerTime);
   const keyboardOpen = useKeyboardInset();
   const visitTab = useTabPosition(tab, store.epoch, setTab);
+  const grammarLeave = useRef<GrammarLeave | null>(null);
+  const registerGrammarLeave = useCallback((fn: GrammarLeave) => { grammarLeave.current = fn; return () => { if (grammarLeave.current === fn) grammarLeave.current = null; }; }, []);
+  async function flushGrammar() { return await grammarLeave.current?.() ?? true; }
   const availability = (
     <AvailabilityNotice
       surface={settings ? "settings" : "page"}
@@ -145,7 +151,7 @@ export default function LearningApp({
           <button
             className="icon-button"
             aria-label="학습 설정"
-            onClick={() => setSettings(true)}
+            onClick={async () => { if (await flushGrammar()) setSettings(true); }}
           >
             <Settings2 size={19} />
           </button>
@@ -177,7 +183,7 @@ export default function LearningApp({
         <Tabs
           key={store.epoch}
           value={tab}
-          onValueChange={(v) => visitTab(v as View)}
+          onValueChange={async (v) => { if (await flushGrammar()) visitTab(v as View); }}
           className="main-tabs"
         >
           <TabsList className="main-nav" aria-label="학습 화면">
@@ -367,6 +373,8 @@ export default function LearningApp({
           <TabsContent value="library" forceMount hidden={tab !== "library"}>
             {navigation.visited.includes("library") && (
               <WordLibrary
+                grammarEnabled={grammarEnabled}
+                persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, registerLeave: registerGrammarLeave }}
                 activityDate={clock.currentDate}
                 state={state}
                 words={words}

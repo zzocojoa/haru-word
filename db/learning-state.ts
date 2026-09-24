@@ -6,15 +6,17 @@ export type StoredStateDocuments = {
   revision: number; settings: string;
   progress: { entry_id: string; document: string }[];
   sessions: { session_id: string; document: string }[];
+  grammar?: { lesson_id: string; document: string }[];
 };
 
-export async function loadStateDocuments(db: D1Database, userId: string): Promise<StoredStateDocuments> {
+export async function loadStateDocuments(db: D1Database, userId: string, includeGrammar = false): Promise<StoredStateDocuments> {
   await db.prepare('INSERT OR IGNORE INTO learner_states (user_id,revision,settings,updated_at) VALUES (?,0,?,?)')
     .bind(userId, JSON.stringify(EMPTY.settings), new Date().toISOString()).run();
   const rows = await db.batch([
     db.prepare('SELECT revision,settings FROM learner_states WHERE user_id=?').bind(userId),
     db.prepare('SELECT entry_id,document FROM word_progress WHERE user_id=?').bind(userId),
     db.prepare('SELECT session_id,document FROM study_sessions WHERE user_id=?').bind(userId),
+    ...(includeGrammar ? [db.prepare('SELECT lesson_id,document FROM grammar_progress WHERE user_id=?').bind(userId)] : []),
   ]);
   const profile = rows[0].results[0] as { revision: number; settings: string };
   return {
@@ -22,6 +24,7 @@ export async function loadStateDocuments(db: D1Database, userId: string): Promis
     settings: profile.settings,
     progress: rows[1].results as StoredStateDocuments['progress'],
     sessions: rows[2].results as StoredStateDocuments['sessions'],
+    ...(includeGrammar ? { grammar: rows[3].results as NonNullable<StoredStateDocuments['grammar']> } : {}),
   };
 }
 
@@ -47,6 +50,10 @@ export async function validSaveReferences(db: D1Database, userId: string, data: 
 
 export async function saveState(db: D1Database, userId: string, data: SaveStateRequest): Promise<boolean> {
   const statements: D1PreparedStatement[] = [];
+  if (data.grammar && Object.keys(data.grammar).length) {
+    statements.push(db.prepare('INSERT INTO grammar_progress(user_id,lesson_id,document) SELECT ?,entry.key,entry.value FROM json_each(?) AS entry WHERE EXISTS(SELECT 1 FROM learner_states WHERE user_id=? AND revision=?) ON CONFLICT(user_id,lesson_id) DO UPDATE SET document=excluded.document')
+      .bind(userId, JSON.stringify(data.grammar), userId, data.revision));
+  }
   // One atomic D1 batch. All deltas test the same revision, which advances LAST.
   // One bounded JSON parameter keeps monthly carryover within D1 query limits.
   if (Object.keys(data.progress).length) {
@@ -73,6 +80,10 @@ export async function restoreState(db: D1Database, userId: string, revision: num
     db.prepare(`DELETE FROM word_progress WHERE user_id=? AND ${condition}`).bind(userId, userId, revision),
     db.prepare(`DELETE FROM study_sessions WHERE user_id=? AND ${condition}`).bind(userId, userId, revision),
   ];
+  if (state.grammar !== undefined) {
+    statements.push(db.prepare(`DELETE FROM grammar_progress WHERE user_id=? AND ${condition}`).bind(userId, userId, revision));
+    for (const chunk of restoreChunks(state.grammar)) statements.push(db.prepare(`INSERT INTO grammar_progress(user_id,lesson_id,document) SELECT ?,entry.key,entry.value FROM json_each(?) AS entry WHERE ${condition}`).bind(userId, chunk, userId, revision));
+  }
   for (const chunk of restoreChunks(state.progress)) {
     statements.push(db.prepare(`INSERT INTO word_progress(user_id,entry_id,document) SELECT ?,entry.key,entry.value FROM json_each(?) AS entry WHERE ${condition}`)
       .bind(userId, chunk, userId, revision));

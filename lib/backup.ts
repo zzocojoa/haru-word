@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { grammarStateSchema } from './grammar/model';
 import { progressSchema,sessionSchema,settingsSchema,validProgressIdentity } from './validation';
 import { type State } from './learning';
 import rawWords from '@/data/words.json';
@@ -13,6 +14,7 @@ const catalog=new Map(rawWords.map(w=>[w.id,w]));
 const bytes=(value:string)=>new TextEncoder().encode(value).byteLength;
 
 export const backupStateSchema=z.object({
+ grammar:grammarStateSchema.optional(),
  settings:settingsSchema,
  progress:z.record(z.string(),progressSchema).refine(v=>Object.keys(v).length<=5000,'단어 기록은 최대 5,000개까지 복원할 수 있어요.'),
  sessions:z.record(z.string().uuid(),sessionSchema).refine(v=>Object.keys(v).length<=10000,'학습 회차는 최대 10,000개까지 복원할 수 있어요.'),
@@ -45,7 +47,7 @@ export function parseBackup(raw:string,maxBytes=MAX_BACKUP_BYTES):ParsedBackup {
  if(!parsed.success)throw new Error(parsed.error.issues.find(i=>i.code==='custom')?.message||'하루단어 백업 형식이나 버전을 확인해 주세요. 파일은 수정하지 않고 보관해 주세요.');
  const data=parsed.data;const result:ParsedBackup='state'in data?{state:data.state,exportedAt:data.exportedAt,legacy:false}:{state:data,legacy:true};
  // Verify row/parameter limits before showing a restorable preview.
- restoreChunks(result.state.progress);restoreChunks(result.state.sessions);
+ restoreChunks(result.state.progress);restoreChunks(result.state.sessions);if(result.state.grammar)restoreChunks(result.state.grammar);
  return result;
 }
 export function prepareSafetyBackup(state:State,now=new Date()):string {

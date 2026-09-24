@@ -17,10 +17,19 @@ export function stateResponse(snapshot: StoredStateDocuments, complete: (bytes: 
       const row = snapshot.sessions[i];
       yield `${i ? ',' : ''}${JSON.stringify(row.session_id)}:${row.document}`;
     }
-    yield '}}}';
+    yield '}';
+    if (snapshot.grammar) {
+      yield ',"grammar":{';
+      for (let i = 0; i < snapshot.grammar.length; i++) {
+        const row = snapshot.grammar[i];
+        yield `${i ? ',' : ''}${JSON.stringify(row.lesson_id)}:${row.document}`;
+      }
+      yield '}';
+    }
+    yield '}}';
   }
   const iterator = fragments();
-  const release = () => { iterator.return(); snapshot.progress.length = 0; snapshot.sessions.length = 0; };
+  const release = () => { iterator.return(); snapshot.progress.length = 0; snapshot.sessions.length = 0; if (snapshot.grammar) snapshot.grammar.length = 0; };
   const body = new ReadableStream<Uint8Array>({
     pull(controller) {
       try {

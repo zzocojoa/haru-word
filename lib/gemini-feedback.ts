@@ -32,13 +32,21 @@ export async function generateSentenceFeedback(
   input:{word:string;pos:string;meaning:string;sentence:string},
   fetcher:typeof fetch=fetch,
 ):Promise<SentenceFeedback>{
+  return generateTutorFeedback(key, input, systemInstruction, fetcher);
+}
+
+// Both study domains share provider transport and strict response validation.
+// Instructions and the trusted target stay server-owned at their call sites.
+export async function generateTutorFeedback(
+  key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch,
+): Promise<SentenceFeedback> {
   let response:Response;
   try {
     response=await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${FEEDBACK_MODEL}:generateContent`,{
       method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},
       signal:AbortSignal.timeout(20000),
       body:JSON.stringify({
-        systemInstruction:{parts:[{text:systemInstruction}]},
+        systemInstruction:{parts:[{text:instruction}]},
         contents:[{role:'user',parts:[{text:JSON.stringify(input)}]}],
         generationConfig:{maxOutputTokens:1536,responseMimeType:'application/json',responseJsonSchema},
       }),

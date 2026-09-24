@@ -2,6 +2,8 @@
 
 완성된 학습 기능, 출처, 테스트, 보안·롤백 안내는 [OPERATIONS.md](OPERATIONS.md)를 참조하세요. 화면은 한국어이며 전체 3,809개 학습 항목을 제공합니다. 아래는 기반 런타임의 유지보수 문서입니다.
 
+단어장 내 15개 품사 수업·90개 연습 문제의 진도, AI, 백업 호환 및 배포 지침은 [GRAMMAR_LEARNING.md](GRAMMAR_LEARNING.md)를 참조하세요.
+
 # vinext-starter
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.

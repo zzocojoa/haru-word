@@ -9,6 +9,13 @@ export async function analyzeBackup(raw:string,maxBytes=LARGE_BACKUP_BYTES):Prom
  for(const kind of ['progress','sessions']as const)for(const text of restoreChunks(parsed.state[kind])){
   parts.push(text);manifest.parts.push({kind,hash:await sha256(text),bytes:utf8Bytes(text),count:Object.keys(JSON.parse(text)).length});
  }
+ // An explicit empty grammar part means replace with empty; no part means preserve (old backup).
+ if(parsed.state.grammar !== undefined) {
+  const grammarParts=restoreChunks(parsed.state.grammar);
+  for(const text of grammarParts.length ? grammarParts : ['{}']) {
+   parts.push(text);manifest.parts.push({kind:'grammar',hash:await sha256(text),bytes:utf8Bytes(text),count:Object.keys(JSON.parse(text)).length});
+  }
+ }
  if(!manifestSchema.safeParse(manifest).success)throw new Error('복원할 기록이 지원 범위를 넘었어요.');
  return {parsed,manifest,parts,bytes:utf8Bytes(raw)};
 }

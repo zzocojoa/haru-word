@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { grammarStateSchema } from './grammar/model';
 import { createStateSchemas } from './state-shape';
 import { InvalidResponseError } from './client-request';
 import type { StateRevision, StateSnapshot } from './api-contracts';
@@ -7,6 +8,7 @@ import type { StateRevision, StateSnapshot } from './api-contracts';
 const { settingsSchema, progressSchema, sessionSchema } = createStateSchemas(z.string().min(1).max(100));
 const revisionSchema = z.object({ revision: z.number().int().nonnegative().safe() }).strict();
 const snapshotSchema = revisionSchema.extend({ state: z.object({
+  grammar: grammarStateSchema.optional(),
   settings: settingsSchema,
   progress: z.record(z.string(), progressSchema),
   sessions: z.record(z.string().uuid(), sessionSchema),

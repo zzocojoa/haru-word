@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { grammarStateSchema } from './grammar/model';
 import rawWords from '@/data/words.json';
 import { createStateSchemas } from './state-shape';
 const ids = new Set(rawWords.map(w => w.id));
@@ -9,6 +10,7 @@ export function validProgressIdentity(id: string, p: { personal?: { id: string }
     return id.startsWith('personal_') === !!p.personal && (!p.personal || p.personal.id === id);
 }
 export const saveSchema = z.object({
+    grammar: grammarStateSchema.optional(),
     revision: z.number().int().min(0), settings: settingsSchema.optional(), progress: z.record(entryId, progressSchema).refine(v => Object.keys(v).length <= 5000), sessions: z.record(z.string().uuid(), sessionSchema).refine(v => Object.keys(v).length <= 3)
 }).strict().superRefine((v, c) => {
     for (const [key, s] of Object.entries(v.sessions))

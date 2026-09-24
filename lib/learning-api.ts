@@ -26,7 +26,7 @@ async function requestApi<T>(url: string, init: RequestInit, timeoutMs: number, 
 }
 
 export function loadLearningState() {
-  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store' }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
+  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store', headers: { 'X-Study-Grammar': '1' } }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
 }
 
 export function saveLearningState(data: SaveStateRequest) {

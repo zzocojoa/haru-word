@@ -58,14 +58,14 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     const confirm = async () => { await replace().click(); await page.getByRole('button', { name: '기록 교체 · 복원', exact: true }).click(); await page.getByRole('heading', { name: '백업을 복원했어요.', exact: true }).waitFor(); await saved(); await page.getByRole('button', { name: '학습 기록 확인하기', exact: true }).click(); await page.getByRole('dialog').waitFor({ state: 'hidden' }); };
     await page.goto(base); await saved(); await page.getByRole('tab', { name: '학습 기록', exact: true }).click();
     const whole = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); });
-    assert.ok(Buffer.byteLength(whole) < MAX_BACKUP_BYTES); assert.deepEqual(parseBackup(whole).state, original);
+    assert.ok(Buffer.byteLength(whole) < MAX_BACKUP_BYTES); assert.deepEqual(parseBackup(whole).state, {...original,grammar:{}});
     await menu('백업 가져오기'); await file(envelope(emptyState()));
 
     // Download failure must never be counted as a saved safety copy.
     await page.evaluate(() => { const original = URL.createObjectURL; URL.createObjectURL = (...args) => { URL.createObjectURL = original; throw new Error('다운로드를 시작하지 못했어요.'); }; });
     await safety().click(); await page.getByRole('alert').filter({ hasText: '안전 백업을 준비하지 못해' }).waitFor();
     assert.equal(await page.getByRole('checkbox').isDisabled(), true); assert.equal(await replace().isDisabled(), true); assert.equal(posts, 0);
-    const safetyRaw = await download(() => safety().click()); assert.deepEqual(parseBackup(safetyRaw).state, original);
+    const safetyRaw = await download(() => safety().click()); assert.deepEqual(parseBackup(safetyRaw).state, {...original,grammar:{}});
     assert.equal(Buffer.byteLength(safetyRaw), Buffer.byteLength(whole)); await page.getByRole('checkbox').check();
     assert.equal(await replace().isEnabled(), true);
     // Choosing another target requires a new safety copy and acknowledgment.
@@ -87,7 +87,7 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     }
     const protectedSnapshot = await get(); assert.ok(Buffer.byteLength(envelope(protectedSnapshot.state)) > MAX_BACKUP_BYTES);
     await page.reload(); await saved(); await page.getByRole('tab', { name: '학습 기록', exact: true }).click();
-    const archive = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); }); assert.deepEqual(JSON.parse(archive).state, protectedSnapshot.state);
+    const archive = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); }); assert.deepEqual(JSON.parse(archive).state, {...protectedSnapshot.state,grammar:{}});
     await menu('백업 가져오기'); await file(envelope(emptyState()));
     const beforePosts = posts; let downloads = 0; page.on('download', () => downloads++);
     await page.getByRole('alert').filter({ hasText: '안전 백업을 준비하지 못해' }).waitFor();

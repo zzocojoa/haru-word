@@ -11,6 +11,7 @@ function changedEntries<T>(before:Record<string,T>,after:Record<string,T>):Recor
 
 export function stateDelta(before:State,after:State){
  return {
+  ...(after.grammar === undefined ? {} : { grammar: changedEntries(before.grammar ?? {}, after.grammar) }),
   settings:before.settings!==after.settings&&JSON.stringify(before.settings)!==JSON.stringify(after.settings)?after.settings:undefined,
   progress:changedEntries(before.progress,after.progress),
   sessions:changedEntries(before.sessions,after.sessions),

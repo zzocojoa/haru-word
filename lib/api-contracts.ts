@@ -6,6 +6,7 @@ export type ApiError = { error: string; conflict?: boolean };
 export type StateSnapshot = { revision: number; state: State };
 export type StateRevision = { revision: number };
 export type SaveStateRequest = StateRevision & {
+  grammar?: State['grammar'];
   settings?: State['settings'];
   progress: State['progress'];
   sessions: State['sessions'];

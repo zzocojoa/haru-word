@@ -1,4 +1,5 @@
 import type { SentenceFeedback } from "../sentence-feedback";
+import type { GrammarState } from '../grammar/model';
 
 export const LEVELS = ["A1", "A2", "B1", "B2"] as const;
 
@@ -181,6 +182,7 @@ export type Session = {
 };
 
 export type State = {
+  grammar?: GrammarState;
   settings: Settings;
   progress: Record<string, Progress>;
   sessions: Record<string, Session>;
@@ -219,8 +221,8 @@ export const POS: Record<string, string> = {
   "det.": "한정사",
   "conj.": "접속사",
   "exclam.": "감탄사",
-  "modal v.": "조동사",
-  "auxiliary v.": "조동사",
+  "modal v.": "법조동사",
+  "auxiliary v.": "기본 조동사",
   number: "수사",
   "indefinite article": "부정관사",
   "definite article": "정관사",

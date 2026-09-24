@@ -8,15 +8,15 @@ import { json, validateJsonMutation } from '@/lib/server/http';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(request?: Request) {
   const started = Date.now();
   const user = await getChatGPTUser();
   if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
   try {
-    const snapshot = await loadStateDocuments(database(), user.userId);
-    const wordCount = snapshot.progress.length, sessionCount = snapshot.sessions.length;
+    const snapshot = await loadStateDocuments(database(), user.userId, request?.headers.get('x-study-grammar') === '1');
+    const wordCount = snapshot.progress.length, sessionCount = snapshot.sessions.length, grammarCount = snapshot.grammar?.length;
     return stateResponse(snapshot,
-      bytes => console.info(JSON.stringify({ event: 'learning_state_loaded', wordCount, sessionCount, bytes, durationMs: Date.now() - started })),
+      bytes => console.info(JSON.stringify({ event: 'learning_state_loaded', wordCount, sessionCount, grammarCount, bytes, durationMs: Date.now() - started })),
       () => console.error(JSON.stringify({ event: 'learning_state_load_failed', durationMs: Date.now() - started })));
   } catch {
     console.error(JSON.stringify({ event: 'learning_state_load_failed', durationMs: Date.now() - started }));
@@ -72,7 +72,7 @@ export async function PUT(request: Request) {
       console.warn(JSON.stringify({ event: 'learning_state_conflict', durationMs: Date.now() - started }));
       return json({ error: '다른 기기에서 기록이 바뀌었습니다. 현재 입력을 백업한 뒤 최신 기록을 불러와 주세요.', conflict: true }, 409);
     }
-    console.info(JSON.stringify({ event: 'learning_state_saved', wordCount: Object.keys(data.progress).length, sessionCount: Object.keys(data.sessions).length, durationMs: Date.now() - started }));
+    console.info(JSON.stringify({ event: 'learning_state_saved', wordCount: Object.keys(data.progress).length, sessionCount: Object.keys(data.sessions).length, grammarCount: Object.keys(data.grammar ?? {}).length, durationMs: Date.now() - started }));
     return json({ revision: data.revision + 1 });
   } catch {
     console.error(JSON.stringify({ event: 'learning_state_save_failed', durationMs: Date.now() - started, wordCount: Object.keys(data.progress).length, sessionCount: Object.keys(data.sessions).length }));
