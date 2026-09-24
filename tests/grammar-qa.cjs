@@ -77,7 +77,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     await page.unroute('**/api/grammar-feedback');
     await page.route('**/api/grammar-feedback', route => route.fulfill({ status: 429, json: { error: 'Google 한도에 도달했어요.' } }));
     await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
-    await page.getByText(/Google 한도에 도달했어요/).waitFor(); assert.equal(await getSentence().inputValue(), 'I like books.');
+    await page.locator('[data-feedback-code="request_limited"]').waitFor(); assert.equal(await getSentence().inputValue(), 'I like books.');
     await page.getByLabel('뜻과 형태를 확인했어요', { exact: true }).check();
     await page.getByRole('button', { name: '수업 마치기', exact: true }).click();
     await until(async () => !!(await snapshot()).state.grammar.noun.completedAt, 'completion');

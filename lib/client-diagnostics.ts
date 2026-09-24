@@ -26,7 +26,7 @@ export function beginRequestDiagnostic(url: string, method = "GET") {
   const operation: Operation | undefined = url === "/api/state"
     ? method === "PUT" ? "save" : method === "GET" ? "load" : undefined
     : url === "/api/state/restore" || url.startsWith('/api/state/restore/jobs') ? "restore"
-    : url === "/api/sentence-feedback" ? "feedback"
+    : url === "/api/sentence-feedback" || url === "/api/grammar-feedback" ? "feedback"
     : url === "/api/study-clock" ? "clock" : undefined;
   if (!operation) return () => {};
   const request = ++sequence, start = performance.now();

@@ -4,13 +4,15 @@ import type { GrammarLesson } from '@/lib/grammar/content';
 import type { GrammarProgress } from '@/lib/grammar/model';
 import { GRAMMAR_TEXT, type SentenceFeedback } from '@/lib/sentence-feedback';
 import { CHECK_TEXT, SELF_CHECKS, grammarFeedbackTone } from './grammar-presentation';
+import type { FeedbackIssue } from '@/lib/feedback-issue';
+import { FeedbackIssueNotice } from '../feedback-issue-notice';
 
 type Props = {
   lesson: GrammarLesson;
   progress: GrammarProgress;
   canSave: boolean;
   aiPending: boolean;
-  aiError: string;
+  aiError: FeedbackIssue | null;
   onAi: () => void;
   onSentence: (sentence: string) => void;
   onCheck: (check: NonNullable<GrammarProgress['check']>) => void;
@@ -34,7 +36,7 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
       </button>
       <p className="small-note">선택 사항 · 문장을 Google에 보내요.<br />자기 점검만으로도 마칠 수 있어요.</p>
     </div>
-    {aiError && <p role="alert" className="grammar-message">{aiError} 입력은 유지돼요. 자기 점검으로 계속할 수 있어요.</p>}
+    <FeedbackIssueNotice issue={aiError} />
     {feedback && <Feedback feedback={feedback} sentence={sentence} onSentence={onSentence} />}
     <fieldset className="grammar-check">
       <legend>내가 점검하기</legend><p>{lesson.check}</p>

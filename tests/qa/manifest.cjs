@@ -20,6 +20,7 @@ module.exports = [
   "expression-translation-qa.cjs",
   "familiarity-qa.cjs",
   "familiarity-reveal-qa.cjs",
+  "feedback-issue-qa.cjs",
   "grammar-qa.cjs",
   "grammar-plan-qa.cjs",
   "grammar-ui-qa.cjs",

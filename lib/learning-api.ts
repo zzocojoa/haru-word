@@ -1,5 +1,6 @@
 import { InvalidResponseError, requestJson, REQUEST_TIMEOUT_MS } from './client-request';
 import { parseRevision, parseSnapshot } from './response-validation';
+import { parseFeedbackIssue } from './feedback-issue';
 import type { State } from './learning';
 import type {
   ApiError, FeedbackRequest, FeedbackResponse, SaveStateRequest, StateRevision, StateSnapshot,
@@ -15,7 +16,7 @@ async function requestApi<T>(url: string, init: RequestInit, timeoutMs: number, 
   const { response, data } = await requestJson<T | ApiError>(url, init, timeoutMs, (raw, response) => {
     if (response.ok) return validate ? validate(raw) : raw as T;
     const error = raw as Partial<ApiError> | null;
-    return { error: typeof error?.error === 'string' ? error.error : '요청을 처리하지 못했어요.', ...(error?.conflict === true ? { conflict: true } : {}) };
+    return { error: typeof error?.error === 'string' ? error.error : '요청을 처리하지 못했어요.', ...(error?.conflict === true ? { conflict: true } : {}), ...parseFeedbackIssue(raw) };
   }).catch(error => {
     if (validate && error instanceof SyntaxError) throw new InvalidResponseError();
     throw error;

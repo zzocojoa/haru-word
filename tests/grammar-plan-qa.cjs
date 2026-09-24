@@ -90,7 +90,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         });
         for (let attempt = 1; attempt <= 2; attempt++) {
           await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
-          await page.locator('.grammar-message[role=alert]').waitFor();
+          await page.locator('.ai-feedback-issue[role=alert]').waitFor();
           assert.equal(await sentence.inputValue(), original);
           assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
           assert.equal(await page.getByRole('radio', { name: '뜻과 형태를 확인했어요', exact: true }).isChecked(), true);

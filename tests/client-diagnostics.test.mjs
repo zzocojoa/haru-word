@@ -67,3 +67,12 @@ test('navigation diagnostics contain only the failure category and timestamp', (
   assert.deepEqual(Object.keys(event).sort(), ['at', 'outcome', 'type']);
   assert.equal(event.type, 'navigation'); assert.equal(event.outcome, 'guard_error');
 });
+
+test('both AI endpoints record the same safe request diagnostic without learner text', async () => {
+  for (const url of ['/api/sentence-feedback', '/api/grammar-feedback']) {
+    globalThis.fetch = async () => Response.json({ code: 'provider_limit', error: 'PRIVATE' }, { status: 429 });
+    await requestJson(url, { method: 'POST', body: JSON.stringify({ sentence: 'PRIVATE' }) }, 1000);
+    assert.equal(events().at(-1).operation, 'feedback'); assert.equal(events().at(-1).status, 429);
+  }
+  assert.doesNotMatch(diagnostics.exportClientDiagnostics(), /PRIVATE|grammar-feedback|sentence-feedback/);
+});

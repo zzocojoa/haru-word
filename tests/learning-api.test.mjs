@@ -58,6 +58,13 @@ test('feedback transport sends only study input and forwards caller cancellation
   await assert.rejects(pending, e => e === reason); assert.equal(calls, 1);
 });
 
+test('feedback failures preserve safe reason metadata without forwarding arbitrary provider fields', async () => {
+  globalThis.fetch = async () => Response.json({ error: '한도 안내', code: 'provider_minute_limit', providerStatus: 429, retryAfterSeconds: 12, details: 'PRIVATE' }, { status: 429 });
+  const result = await api.requestSentenceFeedback({ sessionId: crypto.randomUUID(), entryId: 'word', sentence: 'My sentence.' }, new AbortController().signal);
+  assert.equal(result.ok, false);
+  assert.deepEqual(result.data, { error: '한도 안내', code: 'provider_minute_limit', providerStatus: 429, retryAfterSeconds: 12 });
+});
+
 test('invalid success revisions never acknowledge save or restore and never retry', async () => {
   for (const payload of [{}, { revision: '2' }, { revision: -1 }, { revision: 1.5 }, { revision: 1 }, { revision: 3 }, null]) {
     let calls = 0;

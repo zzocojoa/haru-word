@@ -2,6 +2,7 @@
 import {Loader2,Sparkles} from 'lucide-react';
 import {GRAMMAR_TEXT,MEANING_USAGE_TEXT,type SentenceFeedback} from '@/lib/sentence-feedback';
 import {useSentenceFeedback} from './study/use-sentence-feedback';
+import {FeedbackIssueNotice} from './feedback-issue-notice';
 
 export function FeedbackDetail({feedback}:{feedback:SentenceFeedback}){
  return <div className="ai-feedback-result">
@@ -22,7 +23,7 @@ export function SentenceFeedbackPanel({sessionId,entryId,sentence,feedback,busy,
   <p className="small-note">버튼을 누르면 이 문장과 목표 단어·뜻을 Google에 보내요. 무료 API의 입력·응답은 Google의 서비스 개선에 사용될 수 있어요. 개인정보는 빼고 작성해 주세요.</p>
   <button type="button" className="secondary-button" disabled={busy||pending||!sentence.trim()||unchanged} onClick={check}>{pending?<><Loader2 size={16} className="spin"/>문장을 확인하고 있어요</>:unchanged?'이 문장의 교정 결과가 있어요':'AI로 문장 점검'}</button>
   <p className="small-note">앱 자체 횟수 제한 없이 사용해요. Google의 실제 한도에 도달하거나 오류가 있으면 자기 점검으로 계속할 수 있어요.</p>
-  {error&&<p role="alert" className="notice">{error}</p>}
+  <FeedbackIssueNotice issue={error}/>
   {feedback&&<div aria-live="polite">
    {!unchanged&&<p className="notice">문장이 바뀌었어요. 아래 결과는 수정 전 원문에 대한 의견입니다.</p>}
    <FeedbackDetail feedback={feedback}/>

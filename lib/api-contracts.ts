@@ -1,8 +1,9 @@
 import type { State } from './learning';
 import type { SentenceFeedback } from './sentence-feedback';
+import type { FeedbackIssue } from './feedback-issue';
 
 // Wire contracts shared by the client and server. Imports here must remain type-only.
-export type ApiError = { error: string; conflict?: boolean };
+export type ApiError = { error: string; conflict?: boolean } & Partial<FeedbackIssue>;
 export type StateSnapshot = { revision: number; state: State };
 export type StateRevision = { revision: number };
 export type SaveStateRequest = StateRevision & {

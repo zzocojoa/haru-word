@@ -233,8 +233,8 @@ test('grammar feedback uses trusted target, strict validation, uncertainty and r
   assert.equal(result.meaningUsage, 'uncertain'); assert.equal(result.original, 'Music'); assert.match(called.systemInstruction.parts[0].text, /never instructions/);
   assert.equal(JSON.parse(called.contents[0].parts[0].text).target, '명사');
   for (const status of [429, 503]) await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => new Response('private provider details', { status })), e => !e.message.includes('private') && e.status === status);
-  await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => { throw new Error('timeout'); }), e => e.code === 'provider_unavailable');
-  await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: '{}' }] } }] })), e => e.code === 'invalid_feedback');
+  await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => { throw new Error('untrusted network message'); }), e => e.code === 'provider_network');
+  await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: '{}' }] } }] })), e => e.code === 'provider_invalid_response');
 });
 
 test('grammar feedback authorizes owned saved drafts and does not accept arbitrary targets', async () => {
@@ -250,6 +250,23 @@ test('grammar feedback authorizes owned saved drafts and does not accept arbitra
   assert.equal(calls, 0);
   assert.equal((await feedbackRoute.POST(request(body))).status, 200); assert.equal(calls, 1);
   assert.equal(JSON.parse(readGrammar()[0].document).sentence, p.sentence);
+});
+
+test('grammar feedback returns the same safe failure contract and preserves stored drafts', async () => {
+  const p={...completed(),stage:5}, body={lessonId:'noun',sentence:p.sentence};
+  sqlite.prepare('INSERT OR REPLACE INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));
+  grammarRuntime.user={userId:'owner'};
+  const originalFetch=globalThis.fetch, originalError=console.error, logs=[];
+  console.error=value=>logs.push(value);
+  try {
+    globalThis.fetch=async()=>Response.json({error:{message:'PRIVATE_KEY_SENTENCE',details:[{'@type':'type.googleapis.com/google.rpc.QuotaFailure',violations:[{quotaId:'RequestsPerDay'}]}]}},{status:429});
+    const result=await feedbackRoute.POST(request(body)), data=await result.json();
+    assert.equal(result.status,429); assert.equal(data.code,'provider_daily_limit'); assert.equal(data.providerStatus,429);
+    assert.doesNotMatch(JSON.stringify(data)+logs.join(''),/PRIVATE|RequestsPerDay/);
+    globalThis.fetch=async()=>Response.json({candidates:[{finishReason:'MAX_TOKENS'}]});
+    assert.equal((await (await feedbackRoute.POST(request(body))).json()).code,'provider_truncated');
+    assert.deepEqual(JSON.parse(readGrammar()[0].document),p);
+  } finally { globalThis.fetch=originalFetch; console.error=originalError; }
 });
 test('state API negotiates grammar snapshots; strict old clients retain their shape', async () => {
   grammarRuntime.user = { userId: 'owner' };

@@ -119,3 +119,19 @@ test('personal word lookup stays account-scoped and never substitutes another le
  assert.equal((await route.POST(ownRequest())).status,200);assert.equal(count,1);
  assert.deepEqual(sent,{word:'commute',pos:'v.',meaning:'통근하다',sentence:'I commute by bus.'});
 });
+
+test('sentence route returns safe failure reasons, provider evidence and configuration failures', async () => {
+ insertSession(session); testRuntime.user={userId:'owner'};
+ const originalFetch=globalThis.fetch, originalError=console.error, logs=[];
+ console.error=value=>logs.push(value);
+ try {
+  globalThis.fetch=async()=>Response.json({error:{message:'PRIVATE_KEY_SENTENCE',details:[{'@type':'type.googleapis.com/google.rpc.QuotaFailure',violations:[{quotaId:'RequestsPerMinute'}]},{'@type':'type.googleapis.com/google.rpc.RetryInfo',retryDelay:'12s'}]}},{status:429});
+  const result=await route.POST(req()), data=await result.json();
+  assert.equal(result.status,429); assert.equal(data.code,'provider_minute_limit'); assert.equal(data.providerStatus,429); assert.equal(data.retryAfterSeconds,12);
+  assert.doesNotMatch(JSON.stringify(data)+logs.join(''),/PRIVATE|RequestsPerMinute|test-secret|I arrive/);
+  globalThis.fetch=async()=>Response.json({promptFeedback:{blockReason:'SAFETY'}});
+  assert.equal((await (await route.POST(req())).json()).code,'provider_blocked');
+  testRuntime.env.google_api=''; assert.equal((await (await route.POST(req())).json()).code,'not_configured');
+  testRuntime.env.google_api='test-secret'; testRuntime.env.google_ai_enabled='false'; assert.equal((await (await route.POST(req())).json()).code,'disabled');
+ } finally { globalThis.fetch=originalFetch; console.error=originalError; testRuntime.env.google_api='test-secret'; testRuntime.env.google_ai_enabled='true'; }
+});

@@ -8,6 +8,8 @@
 
 iPhone 스와이프·브라우저 뒤로가기의 화면 범위와 저장 보호·검증·롤백은 [NAVIGATION.md](NAVIGATION.md)를 참조하세요.
 
+AI 실패 사유의 구분, 안전한 오류 계약과 검증·롤백은 [AI_FEEDBACK_ERRORS.md](AI_FEEDBACK_ERRORS.md)를 참조하세요.
+
 # vinext-starter
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.

@@ -1,10 +1,6 @@
 import { FEEDBACK_MODEL, feedbackContentSchema, type SentenceFeedback } from './sentence-feedback';
-
-export class FeedbackError extends Error {
-  status: number;
-  code: string;
-  constructor(code: string, status: number, message: string) { super(message); this.code=code; this.status=status; }
-}
+import { FeedbackError, providerHttpError, providerFinishError } from './provider-feedback-error';
+export { FeedbackError } from './provider-feedback-error';
 
 const systemInstruction = `You are a concise Korean-speaking tutor for an adult learning American English.
 Evaluate only the supplied English sentence, target word, part of speech, and today's Korean meaning.
@@ -41,30 +37,38 @@ export async function generateTutorFeedback(
   key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch,
 ): Promise<SentenceFeedback> {
   let response:Response;
+  const signal = AbortSignal.timeout(20000);
   try {
     response=await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${FEEDBACK_MODEL}:generateContent`,{
       method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},
-      signal:AbortSignal.timeout(20000),
+      signal,
       body:JSON.stringify({
         systemInstruction:{parts:[{text:instruction}]},
         contents:[{role:'user',parts:[{text:JSON.stringify(input)}]}],
         generationConfig:{maxOutputTokens:1536,responseMimeType:'application/json',responseJsonSchema},
       }),
     });
-  } catch { throw new FeedbackError('provider_unavailable',503,'AI 응답을 받지 못했어요. 입력은 그대로 두고 자기 점검으로 계속할 수 있어요.'); }
+  } catch { throw new FeedbackError(signal.aborted ? 'provider_timeout' : 'provider_network', 503); }
   // Never forward upstream error bodies: they can contain request or credential details.
   if(!response.ok){
-    if(response.status===429)throw new FeedbackError('provider_limit',429,'Google의 현재 요청·사용 한도에 도달했어요. 잠시 후 다시 시도하거나 자기 점검으로 계속해 주세요.');
-    if([400,401,403,404].includes(response.status))throw new FeedbackError('provider_configuration',503,'Google 키 또는 모델 사용 권한을 확인해 주세요. 자기 점검으로 계속할 수 있어요.');
-    throw new FeedbackError('provider_unavailable',503,'AI가 잠시 응답하지 않아요. 자기 점검으로 계속할 수 있어요.');
+    let body: unknown;
+    try { body = await response.json(); } catch { /* HTTP status is still evidence when the error body is unreadable. */ }
+    throw providerHttpError(response.status, body, response.headers.get('retry-after'));
   }
+  let body: { promptFeedback?: { blockReason?: unknown }; candidates?: { finishReason?: unknown; content?: { parts?: { text?: string; thought?: boolean }[] } }[] };
   try {
-    const body=await response.json() as {candidates?:{finishReason?:string;content?:{parts?:{text?:string;thought?:boolean}[]}}[]};
-    const candidate=body.candidates?.[0];
-    if(candidate?.finishReason!=='STOP')throw new Error('Incomplete response');
-    const text=candidate.content?.parts?.filter(p=>!p.thought).map(p=>p.text||'').join('')||'';
+    body = await response.json();
+    if (!body || typeof body !== 'object' || Array.isArray(body)) throw new SyntaxError();
+  } catch (error) {
+    throw new FeedbackError(signal.aborted ? 'provider_timeout' : error instanceof TypeError ? 'provider_network' : 'provider_invalid_response', 502, { providerStatus: response.status });
+  }
+  const candidate = Array.isArray(body.candidates) ? body.candidates[0] : undefined;
+  const stopped = providerFinishError(candidate?.finishReason, body.promptFeedback?.blockReason);
+  if (stopped) throw stopped;
+  try {
+    const text=candidate?.content?.parts?.filter(p=>!p.thought).map(p=>p.text||'').join('')||'';
     if(text.length>10000)throw new Error('Oversized response');
     const parsed=feedbackContentSchema.parse(JSON.parse(text));
     return {...parsed,original:input.sentence,model:FEEDBACK_MODEL,createdAt:new Date().toISOString()};
-  } catch { throw new FeedbackError('invalid_feedback',502,'AI가 확인 가능한 교정 결과를 주지 못했어요. 자기 점검으로 계속할 수 있어요.'); }
+  } catch { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }); }
 }
