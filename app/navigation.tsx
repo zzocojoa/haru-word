@@ -2,6 +2,7 @@
 import { createContext, useContext, useLayoutEffect, useCallback, useRef, useState, type ReactNode, type Dispatch, type SetStateAction } from 'react';
 import { NavigationHistory, type NavigationGuard } from '@/lib/navigation-history';
 import { recordNavigationDiagnostic } from '@/lib/client-diagnostics';
+import { installSwipeBack } from './swipe-back';
 
 const NavigationContext = createContext<NavigationHistory | null>(null);
 type Position = { top: number; focus: HTMLElement | null };
@@ -9,14 +10,8 @@ type Position = { top: number; focus: HTMLElement | null };
 export function NavigationProvider({ children }: { children: ReactNode }) {
   const [navigation] = useState(() => new NavigationHistory());
   useLayoutEffect(() => {
-    const previousScroll = history.scrollRestoration;
     let frame = 0;
-    history.scrollRestoration = 'manual';
     navigation.start({
-      state: () => history.state,
-      replace: state => history.replaceState(state, ''),
-      push: state => history.pushState(state, ''),
-      go: delta => history.go(delta),
       report: recordNavigationDiagnostic,
       capture: (): Position => {
         let focus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -39,13 +34,11 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
           window.scrollTo({ top: saved?.top ?? 0, behavior: 'instant' });
         }); });
       },
-    }, crypto.randomUUID());
-    const pop = (event: PopStateEvent) => { void navigation.pop(event.state); };
-    window.addEventListener('popstate', pop);
+    });
+    const removeSwipe = installSwipeBack(navigation);
     return () => {
       navigation.stop(); cancelAnimationFrame(frame);
-      window.removeEventListener('popstate', pop);
-      history.scrollRestoration = previousScroll;
+      removeSwipe();
     };
   }, [navigation]);
   return <NavigationContext.Provider value={navigation}>{children}</NavigationContext.Provider>;

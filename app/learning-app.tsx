@@ -231,6 +231,7 @@ function LearningScreens({
               </span>
             </TabsTrigger>
           </TabsList>
+          <div className="navigation-body">
           {!loading && !signedIn && !error && (
             <div className="notice sign-in-notice">
               <div>
@@ -425,6 +426,7 @@ function LearningScreens({
               />
             )}
           </TabsContent>
+          </div>
         </Tabs>
         <footer>
           <span>Oxford 3000</span>

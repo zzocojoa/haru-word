@@ -1,54 +1,36 @@
-/** In-memory view history. Never put learner records or drafts in history.state. */
+/** Tab-local UI history only. Never stores answers or writes browser history. */
 export type NavigationGuard = (changed: ReadonlySet<string>) => boolean | Promise<boolean>;
 type Values = Record<string, unknown>;
-type Entry = { values: Values; position?: unknown };
-type Marker = { scope: string; index: number };
+type Entry = { before: Values; keys: Set<string>; position: unknown };
 export type HistoryPort = {
-  state: () => unknown;
-  replace: (state: unknown) => void;
-  push: (state: unknown) => void;
-  go: (delta: number) => void;
   capture: () => unknown;
   restore: (position: unknown) => void;
   report?: (outcome: 'blocked' | 'guard_error') => void;
 };
-const KEY = 'haruNavigation';
+const TAB = 'app.tab';
 
 export class NavigationHistory {
-  private scope = '';
   private port?: HistoryPort;
-  private entries: Entry[] = [];
-  private index = 0;
-  private physical = 0;
+  private stacks = new Map<string, Entry[]>();
   private values: Values = {};
   private defaults: Values = {};
   private listeners = new Map<string, (value: unknown) => void>();
   private guards = new Set<NavigationGuard>();
-  private queued = false;
-  private returning = true;
+  private batch?: { before: Values; position: unknown };
   private pending = false;
-  private repairing = false;
-  private requested = 0;
-  private afterTraversal: Array<() => void> = [];
+  private generation = 0;
 
-  start(port: HistoryPort, scope: string) {
-    this.port = port;
-    this.scope = scope;
-    this.entries = [{ values: { ...this.values } }];
-    this.index = this.physical = this.requested = 0;
-    port.replace(this.marker(0));
-  }
-  stop() { this.port = undefined; }
+  start(port: HistoryPort) { this.port = port; }
+  stop() { this.generation++; this.port = undefined; }
   read<T>(key: string, initial: T): T {
     if (!(key in this.defaults)) this.defaults[key] = initial;
-    return (key in this.values ? this.values[key] : this.defaults[key]) as T;
+    return this.value(this.values, key) as T;
   }
   fresh<T>(key: string, initial: T): T {
     this.defaults[key] = initial;
     this.values = { ...this.values, [key]: initial };
-    // A remounted destructive confirmation has no retained file/preview.
-    // Forward may reopen the tool, but must require a fresh confirmation.
-    if (this.entries[this.index]) this.entries[this.index].values = { ...this.values };
+    // Remounting a confirmation must never restore an earlier approval.
+    for (const stack of this.stacks.values()) for (const entry of stack) entry.before[key] = initial;
     return initial;
   }
   subscribe(key: string, listener: (value: unknown) => void) {
@@ -60,102 +42,88 @@ export class NavigationHistory {
     return () => { this.guards.delete(guard); };
   }
   reset(preserve: readonly string[]) {
-    const clean = (values: Values) => Object.fromEntries(Object.entries(values).filter(([key]) => preserve.includes(key)));
-    this.values = clean(this.values);
-    for (const entry of this.entries) entry.values = clean(entry.values);
-    for (const [key, listener] of this.listeners) if (!preserve.includes(key)) listener(this.read(key, this.defaults[key]));
+    this.generation++;
+    this.batch = undefined;
+    this.stacks.clear();
+    this.values = Object.fromEntries(Object.entries(this.values).filter(([key]) => preserve.includes(key)));
+    // Account refresh may keep Settings/Backup open. Rebase those tools onto
+    // the fresh tab root so they can still be dismissed without reviving records.
+    const keys = this.changed({}, this.values);
+    if (keys.size) this.stack().push({ before: {}, keys, position: this.port?.capture() });
+    for (const [key, listener] of this.listeners) listener(this.value(this.values, key));
   }
   change<T>(key: string, update: T | ((previous: T) => T)) {
-    // A second action must not race an asynchronous leave/save decision.
-    if (this.repairing) { this.afterTraversal.push(() => this.change(key, update)); return; }
     if (this.pending) return;
     const previous = this.read<T>(key, undefined as T);
     const next = typeof update === 'function' ? (update as (value: T) => T)(previous) : update;
     if (Object.is(previous, next)) return;
-    if (!this.queued) {
-      this.returning = true;
-      if (this.port) this.entries[this.index].position = this.port.capture();
-    }
-    if (next !== null && next !== false) this.returning = false;
-    this.values = { ...this.values, [key]: next };
-    this.listeners.get(key)?.(next);
-    if (!this.queued) {
-      this.queued = true;
-      // One click can update a tab, close a dialog and open a lesson together.
+    if (!this.batch) {
+      this.batch = { before: { ...this.values }, position: this.port?.capture() };
       queueMicrotask(() => this.commit());
     }
+    this.values = { ...this.values, [key]: next };
+    this.listeners.get(key)?.(next);
   }
+  private value(values: Values, key: string) { return key in values ? values[key] : this.defaults[key]; }
   private changed(a: Values, b: Values) {
-    return new Set(Object.keys(this.defaults).filter(key =>
-      !Object.is(key in a ? a[key] : this.defaults[key], key in b ? b[key] : this.defaults[key])));
+    return new Set(Object.keys(this.defaults).filter(key => key !== TAB && !Object.is(this.value(a, key), this.value(b, key))));
   }
-  private marker(index: number) {
-    const state = this.port?.state();
-    return { ...(state && typeof state === 'object' ? state : {}), [KEY]: { scope: this.scope, index } };
+  private tab() { return this.read(TAB, 'today'); }
+  private stack() {
+    const tab = this.tab();
+    if (!this.stacks.has(tab)) this.stacks.set(tab, []);
+    return this.stacks.get(tab)!;
   }
   private commit() {
-    if (!this.queued) return;
-    this.queued = false;
-    if (!this.port || !this.changed(this.entries[this.index].values, this.values).size) return;
-    // Existing Back/Close buttons consume the same entry instead of adding a
-    // second entry that would reopen the screen on the next browser Back.
-    let match = this.returning ? this.index - 1 : -1;
-    while (match >= 0 && this.changed(this.entries[match].values, this.values).size) match--;
-    if (match >= 0) {
-      this.repairing = true;
-      const delta = match - this.physical;
-      this.index = match;
-      this.port.go(delta);
-    } else {
-      this.entries.splice(this.index + 1);
-      this.entries.push({ values: { ...this.values } });
-      this.index++;
-      this.physical = this.index;
-      this.port.push(this.marker(this.index));
+    const batch = this.batch;
+    if (!batch) return;
+    this.batch = undefined;
+    const keys = this.changed(batch.before, this.values);
+    // Cross-tab commands must not reopen a dialog from the source tab.
+    if (this.value(batch.before, TAB) !== this.tab()) {
+      for (const key of keys) if (this.value(this.values, key) === null || this.value(this.values, key) === false) keys.delete(key);
     }
-  }
-  async pop(state: unknown) {
-    const marker = state && typeof state === 'object' ? (state as Record<string, Marker>)[KEY] : undefined;
-    // Entries from before a reload are intentionally not replayed. Native Back
-    // can continue out of the site; no dummy entry traps the visitor at home.
-    if (!marker || marker.scope !== this.scope || !Number.isInteger(marker.index) || !this.entries[marker.index]) return;
-    this.physical = marker.index;
-    if (this.repairing) {
-      if (this.physical === this.index) {
-        this.repairing = false;
-        const waiting = this.afterTraversal.splice(0);
-        for (const change of waiting) change();
-      }
-      else this.port?.go(this.index - this.physical);
-      return;
-    }
-    this.requested = marker.index;
-    if (this.pending) return;
-    this.pending = true;
-    this.entries[this.index].position = this.port?.capture();
-    try {
-      let target: number;
-      let allowed: boolean;
-      do {
-        target = this.requested;
-        const changed = this.changed(this.values, this.entries[target].values);
-        allowed = true;
-        for (const guard of this.guards) {
-          try { if (!await guard(changed)) { allowed = false; break; } }
-          catch { this.port?.report?.('guard_error'); allowed = false; break; }
-        }
-      } while (allowed && target !== this.requested);
-      if (!this.port) return;
-      if (!allowed) {
-        this.port.report?.('blocked');
-        this.repairing = this.physical !== this.index;
-        if (this.repairing) this.port.go(this.index - this.physical);
+    if (!keys.size) return; // Main tab visits are never Back entries.
+    const stack = this.stack();
+    const candidate = { ...batch.before };
+    for (let i = stack.length - 1; i >= 0; i--) {
+      for (const key of stack[i].keys) candidate[key] = this.value(stack[i].before, key);
+      if (!this.changed(candidate, this.values).size) {
+        const position = stack[i].position;
+        stack.splice(i); // Existing Back/Close buttons consume the same path.
+        this.port?.restore(position);
         return;
       }
-      this.index = target;
-      this.values = { ...this.entries[target].values };
-      for (const [key, listener] of this.listeners) listener(this.read(key, this.defaults[key]));
-      this.port.restore(this.entries[target].position);
+    }
+    stack.push({ before: batch.before, keys, position: batch.position });
+  }
+  canBack() {
+    this.commit();
+    const stack = this.stack();
+    while (stack.length && [...stack.at(-1)!.keys].every(key => Object.is(this.value(stack.at(-1)!.before, key), this.value(this.values, key)))) stack.pop();
+    return !this.pending && stack.length > 0;
+  }
+  async back(): Promise<boolean> {
+    this.commit();
+    if (!this.canBack()) return false;
+    const stack = this.stack(), entry = stack.at(-1)!;
+    const generation = this.generation;
+    this.pending = true;
+    try {
+      for (const guard of this.guards) {
+        let allowed = false;
+        try { allowed = await guard(entry.keys); }
+        catch { this.port?.report?.('guard_error'); }
+        if (!allowed) { this.port?.report?.('blocked'); return false; }
+        if (generation !== this.generation || !this.port) return false;
+      }
+      if (generation !== this.generation || !this.port) return false;
+      stack.pop();
+      // Restore only this step's keys; other tabs keep their current views.
+      for (const key of entry.keys) this.values[key] = this.value(entry.before, key);
+      for (const key of entry.keys) this.listeners.get(key)?.(this.value(this.values, key));
+      this.port.restore(entry.position);
+      return true;
     } finally { this.pending = false; }
   }
 }

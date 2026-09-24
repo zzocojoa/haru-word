@@ -1,84 +1,104 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { NavigationHistory } from '../lib/navigation-history.ts';
-
+import { completesSwipe, swipeDirection } from '../lib/swipe-back.ts';
 const tick = () => new Promise(resolve => queueMicrotask(resolve));
 function setup() {
-  const navigation = new NavigationHistory(), stack = [{ framework: 'preserved' }], moves = [], restored = [];
-  let cursor = 0;
-  navigation.read('tab', 'today'); navigation.read('dialog', false); navigation.read('lesson', null);
-  navigation.start({ state: () => stack[cursor], replace: value => stack[cursor] = value,
-    push: value => { stack.splice(++cursor); stack.push(value); }, go: delta => moves.push(delta),
-    capture: () => ({ top: cursor * 100 }), restore: value => restored.push(value),
-  }, 'test-session');
-  const pop = async index => { cursor = index; await navigation.pop(stack[cursor]); };
-  return { navigation, stack, moves, restored, pop };
+  const n = new NavigationHistory(), restored = [], reports = [];
+  n.read('app.tab', 'today'); n.read('app.settings', false); n.read('library.lesson', null);
+  n.read('library.view', 'words'); n.read('app.session', null);
+  n.start({ capture: () => ({ top: 240 }), restore: p => restored.push(p), report: x => reports.push(x) });
+  return { n, restored, reports };
 }
-
-test('groups one navigation action, stores opaque markers only and preserves framework state', async () => {
-  const { navigation: n, stack } = setup();
-  n.change('tab', 'library'); n.change('lesson', 'noun'); await tick();
-  assert.equal(stack.length, 2);
-  assert.deepEqual(stack[1], { framework: 'preserved', haruNavigation: { scope: 'test-session', index: 1 } });
-  n.change('lesson', 'noun'); await tick(); assert.equal(stack.length, 2);
+test('main tab visits never create a Back path', async () => {
+  const { n } = setup();
+  for (const tab of ['library', 'review', 'log', 'today', 'library']) {
+    n.change('app.tab', tab); await tick();
+    assert.equal(n.canBack(), false); assert.equal(await n.back(), false);
+    assert.equal(n.read('app.tab', ''), tab);
+  }
 });
-test('native Back/Forward restores screens, while a Close button consumes its entry', async () => {
-  const { navigation: n, stack, moves, pop } = setup();
-  n.change('tab', 'library'); await tick(); n.change('dialog', true); await tick();
-  await pop(1); assert.equal(n.read('dialog', false), false);
-  await pop(2); assert.equal(n.read('dialog', false), true);
-  n.change('dialog', false); await tick(); assert.deepEqual(moves, [-1]); await pop(1);
-  await pop(0); assert.equal(n.read('tab', ''), 'today'); assert.equal(stack.length, 3);
+test('each tab retains only its own internal path; other live views are not rewound', async () => {
+  const { n, restored } = setup();
+  n.change('app.tab', 'library'); await tick();
+  n.change('library.view', 'grammar'); await tick(); n.change('library.lesson', 'noun'); await tick();
+  n.change('app.tab', 'today'); await tick(); n.change('app.session', 'daily'); await tick();
+  assert.equal(await n.back(), true); assert.equal(n.read('app.session', ''), null);
+  assert.equal(n.canBack(), false); assert.equal(n.read('library.lesson', ''), 'noun');
+  n.change('app.tab', 'library'); await tick();
+  await n.back(); assert.equal(n.read('library.lesson', ''), null); assert.equal(n.read('library.view', ''), 'grammar');
+  await n.back(); assert.equal(n.read('library.view', ''), 'words'); assert.equal(n.canBack(), false);
+  assert.equal(n.read('app.tab', ''), 'library'); assert.equal(n.read('app.session', ''), null);
+  assert.deepEqual(restored, [{ top: 240 }, { top: 240 }, { top: 240 }]);
 });
-test('choosing a previously visited tab creates a new visit rather than consuming earlier history', async () => {
-  const { navigation: n, stack, moves, pop } = setup();
-  n.change('tab', 'library'); await tick(); n.change('tab', 'review'); await tick();
-  n.change('tab', 'library'); await tick();
-  assert.equal(stack.length, 4); assert.deepEqual(moves, []);
-  await pop(2); assert.equal(n.read('tab', ''), 'review');
+test('Close buttons and multi-key return to words consume the same entries', async () => {
+  const { n } = setup();
+  n.change('app.tab', 'library'); await tick();
+  n.change('app.settings', true); await tick(); n.change('app.settings', false); await tick();
+  assert.equal(n.canBack(), false);
+  n.change('library.view', 'grammar'); await tick(); n.change('library.lesson', 'noun'); await tick();
+  n.change('library.lesson', null); n.change('library.view', 'words'); await tick();
+  assert.equal(n.canBack(), false);
 });
-test('an asynchronous lesson opening is not lost while its settings Close traverses history', async () => {
-  const { navigation: n, pop } = setup();
-  n.change('dialog', true); await tick(); n.change('dialog', false); await tick();
-  n.change('lesson', 'noun'); assert.equal(n.read('lesson', null), null);
-  await pop(0); await tick(); assert.equal(n.read('lesson', null), 'noun');
+test('closing settings then asynchronously opening familiarity retains a Back path', async () => {
+  const { n } = setup();
+  n.read('app.assessing', false);
+  n.change('app.settings', true); await tick(); n.change('app.settings', false); await tick();
+  n.change('app.assessing', true); await tick(); await n.back();
+  assert.equal(n.read('app.assessing', true), false); assert.equal(n.read('app.settings', true), false);
+  assert.equal(n.canBack(), false);
 });
-test('failed save restores the history cursor and leaves current input owner mounted', async () => {
-  const { navigation: n, moves, pop } = setup();
-  n.change('tab', 'library'); await tick(); n.change('lesson', 'noun'); await tick();
-  let allowed = false;
-  n.guard(changed => !changed.has('lesson') || allowed);
-  await pop(1); assert.equal(n.read('lesson', null), 'noun'); assert.deepEqual(moves, [1]);
-  await pop(2); allowed = true; await pop(1); assert.equal(n.read('lesson', null), null);
+test('cross-tab study commands do not resurrect the source dialog on Today', async () => {
+  const { n } = setup(); n.read('app.reviewDate', null);
+  n.change('app.tab', 'log'); await tick(); n.change('app.reviewDate', '2026-09-24'); await tick();
+  n.change('app.reviewDate', null); n.change('app.session', 'repeat'); n.change('app.tab', 'today'); await tick();
+  await n.back();
+  assert.equal(n.read('app.tab', ''), 'today'); assert.equal(n.read('app.session', ''), null); assert.equal(n.read('app.reviewDate', ''), null);
+  n.change('app.tab', 'log'); await tick(); assert.equal(n.canBack(), false);
 });
-test('rapid Back coalesces and reruns guards for the complete target; other actions cannot race a save', async () => {
-  const { navigation: n, pop } = setup();
-  n.change('tab', 'library'); await tick(); n.change('lesson', 'noun'); await tick();
-  let release; const changes = [];
-  n.guard(async changed => { changes.push([...changed]); if (changes.length === 1) await new Promise(resolve => release = resolve); return true; });
-  const first = pop(1); await pop(0); n.change('dialog', true); release(); await first;
-  assert.equal(n.read('tab', ''), 'today'); assert.equal(n.read('dialog', false), false);
-  assert.deepEqual(changes, [['lesson'], ['tab', 'lesson']]);
+test('failed saves and thrown guards leave the view and its Back path intact', async () => {
+  const { n, reports } = setup(); n.change('library.lesson', 'noun'); await tick();
+  const remove = n.guard(() => false);
+  assert.equal(await n.back(), false); assert.equal(n.read('library.lesson', ''), 'noun');
+  remove(); const removeError = n.guard(() => { throw Error('private draft'); });
+  assert.equal(await n.back(), false); assert.deepEqual(reports, ['blocked', 'guard_error', 'blocked']);
+  removeError(); assert.equal(await n.back(), true);
 });
-test('a thrown guard fails closed and a new visit after Back discards the old Forward branch', async () => {
-  const { navigation: n, stack, moves, pop } = setup();
-  n.change('tab', 'library'); await tick(); n.change('lesson', 'noun'); await tick();
-  const remove = n.guard(() => { throw new Error('offline'); });
-  await pop(1); assert.deepEqual(moves, [1]); await pop(2); remove();
-  await pop(1); n.change('lesson', 'verb'); await tick();
-  assert.equal(stack.length, 3); assert.equal(n.read('lesson', null), 'verb');
+test('rapid gestures and new view actions cannot race a pending leave decision', async () => {
+  const { n } = setup(); n.change('library.lesson', 'noun'); await tick();
+  let release; n.guard(() => new Promise(resolve => release = resolve));
+  const first = n.back(); assert.equal(await n.back(), false);
+  n.change('app.tab', 'log'); n.change('library.lesson', 'verb'); release(true); await first;
+  assert.equal(n.read('app.tab', ''), 'today'); assert.equal(n.read('library.lesson', ''), null);
 });
-test('fresh destructive confirmations are reset on remount; foreign history is never trapped', async () => {
-  const { navigation: n, moves } = setup();
-  n.read('confirm', false); n.change('confirm', true); await tick();
-  assert.equal(n.fresh('confirm', false), false); assert.equal(n.read('confirm', true), false);
-  await n.pop(null); await n.pop({ haruNavigation: { scope: 'old-session', index: 1 } });
-  assert.deepEqual(moves, []);
+test('epoch reset invalidates pending responses and paths in every tab', async () => {
+  const { n } = setup();
+  n.change('library.lesson', 'noun'); await tick();
+  let release; n.guard(() => new Promise(resolve => release = resolve));
+  const pending = n.back(); n.reset(['app.tab']); release(true);
+  assert.equal(await pending, false); assert.equal(n.canBack(), false); assert.equal(n.read('library.lesson', ''), null);
 });
-test('account reload invalidates record views in both Back and Forward history', async () => {
-  const { navigation: n, pop } = setup();
-  n.change('tab', 'library'); await tick(); n.change('lesson', 'noun'); await tick();
-  n.reset(['tab']); assert.equal(n.read('lesson', null), null);
-  await pop(1); await pop(2); assert.equal(n.read('lesson', null), null);
-  assert.equal(n.read('tab', ''), 'library');
+test('fresh destructive confirmation does not restore prior consent', async () => {
+  const { n } = setup(); n.read('confirm', false);
+  n.change('confirm', true); await tick(); n.fresh('confirm', false);
+  assert.equal(n.canBack(), false); assert.equal(n.read('confirm', true), false);
+});
+test('account refresh keeps preserved tools dismissible but discards record history', async () => {
+  const { n } = setup();
+  n.change('app.tab', 'library'); await tick();
+  n.change('library.lesson', 'noun'); await tick();
+  n.change('app.settings', true); await tick();
+  n.reset(['app.tab', 'app.settings']);
+  assert.equal(n.read('library.lesson', ''), null);
+  assert.equal(n.canBack(), true); await n.back();
+  assert.equal(n.read('app.settings', true), false);
+  assert.equal(n.read('app.tab', ''), 'library'); assert.equal(n.canBack(), false);
+});
+test('a swipe requires horizontal intent and sufficient distance', () => {
+  assert.equal(swipeDirection(3, 4), 'pending');
+  assert.equal(swipeDirection(-100, 0), 'cancel'); assert.equal(swipeDirection(30, 90), 'cancel');
+  assert.equal(completesSwipe(40, 0, 390), false);
+  assert.equal(completesSwipe(100, 8, 390), true);
+  assert.equal(completesSwipe(150, 120, 390), false);
+  assert.equal(completesSwipe(120, 0, 1440), true);
 });

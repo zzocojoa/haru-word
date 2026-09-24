@@ -1,4 +1,4 @@
-// Native history events used by Safari edge-swipe; synthetic local learners only.
+// Body-only touch gestures and tab-local navigation; synthetic local learners only.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { build } = require('esbuild');
@@ -25,34 +25,68 @@ const until = async (check, label) => {
     retry: [], retryMode: false, elapsed: 0, finished: false, paused: false, createdAt: now };
   assert.equal((await context.request.put(base + '/api/state', { data: { revision: before.revision, settings: { ...before.state.settings, activeSessionId: id }, grammar, progress: {}, sessions: { [id]: session } } })).status(), 200);
   const page = await context.newPage(); page.setDefaultTimeout(10_000); page.on('pageerror', error => errors.push(error.message));
-  await page.addInitScript(() => {
-    window.navigationTrace = [];
-    addEventListener('popstate', event => window.navigationTrace.push({ index: event.state?.haruNavigation?.index, length: history.length }));
-  });
+
   const tab = name => page.getByRole('tab', { name, exact: true });
-  const back = () => page.evaluate(() => history.back());
-  const forward = () => page.evaluate(() => history.forward());
+  const swipe = async ({ dx = 180, dy = 0, cancel = false, x = 5 } = {}) => {
+    await page.waitForTimeout(220); // Let the existing dialog entrance animation finish.
+    const result = await page.evaluate(({ dx, dy, cancel, x }) => {
+      const dialogs = [...document.querySelectorAll('[role="dialog"],[role="alertdialog"]')].filter(e => e.getClientRects().length && !e.closest('[aria-hidden="true"]'));
+      const dialog = dialogs.at(-1), bounds = dialog?.getBoundingClientRect();
+      const y = bounds ? Math.min(innerHeight - 40, bounds.top + 40) : document.querySelector('.topbar').getBoundingClientRect().bottom + 100;
+      const target = document.elementFromPoint(x, y);
+      const rect = selector => { const r = document.querySelector(selector).getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; };
+      const chrome = () => ({ header: rect('.topbar'), nav: rect('.main-nav') });
+      const before = chrome(), length = history.length;
+      const fire = (type, point) => {
+        const event = new Event(type, { bubbles: true, cancelable: true });
+        Object.defineProperties(event, {
+          touches: { value: type === 'touchend' || type === 'touchcancel' ? [] : [point] },
+          changedTouches: { value: [point] },
+        });
+        target.dispatchEvent(event); return event.defaultPrevented;
+      };
+      const prevented = fire('touchstart', { identifier: 1, clientX: x, clientY: y });
+      fire('touchmove', { identifier: 1, clientX: x + dx, clientY: y + dy });
+      const during = chrome();
+      const moved = [...document.querySelectorAll('.navigation-body,[role="dialog"],[role="alertdialog"]')].some(e => e.style.transform.includes('translateX('));
+      const translation = document.querySelector('.navigation-body').style.transform;
+      fire(cancel ? 'touchcancel' : 'touchend', { identifier: 1, clientX: x + dx, clientY: y + dy });
+      return { before, during, length, prevented, moved, translation };
+    }, { dx, dy, cancel, x });
+    assert.deepEqual(result.during, result.before, 'header and main nav must stay fixed during drag');
+    await page.waitForTimeout(240);
+    assert.equal(await page.evaluate(() => history.length), result.length, 'gestures must not add browser history entries');
+    return result;
+  };
+  const back = () => swipe();
   const at = async name => {
     await until(async () => await tab(name).getAttribute('aria-selected') === 'true', 'tab ' + name);
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve)))));
     assert.equal(await tab(name).getAttribute('aria-selected'), 'true', 'focus restoration must not activate a different tab');
   };
-  const marker = () => page.evaluate(() => history.state.haruNavigation.index);
+  const marker = () => page.evaluate(() => history.length);
   try {
     await page.goto(base + '/favicon.svg'); await page.goto(base, { waitUntil: 'domcontentloaded' });
     await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-    for (const name of ['전체 단어장', '주간·월말 점검', '학습 기록']) await tab(name).click();
-    await back(); await at('주간·월말 점검'); await back(); await at('전체 단어장'); await forward(); await at('주간·월말 점검');
+    const initialHistory = await marker();
+    for (const name of ['전체 단어장', '주간·월말 점검', '학습 기록', '오늘의 학습', '전체 단어장']) {
+      await tab(name).click(); const rootSwipe = await back(); await at(name);
+      assert.equal(rootSwipe.moved, false, 'tab root is not a Back destination');
+    }
+    assert.equal(await marker(), initialHistory);
+    assert.equal(await page.evaluate(() => {
+      const target = document.elementFromPoint(5, 25);
+      const event = new Event('touchstart', { bubbles: true, cancelable: true });
+      Object.defineProperty(event, 'touches', { value: [{ identifier: 1, clientX: 5, clientY: 25 }] });
+      target.dispatchEvent(event);
+      return event.defaultPrevented && !document.documentElement.hasAttribute('data-swiping');
+    }), true, 'fixed header edge must not trigger a full-page native transition');
     await page.getByRole('button', { name: '학습 설정', exact: true }).click(); await page.getByRole('dialog').waitFor();
-    await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' }); await at('주간·월말 점검');
+    await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' }); await at('전체 단어장');
     await page.getByRole('button', { name: '학습 설정', exact: true }).click();
     await page.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();
-    await until(async () => await marker() === 2, 'Close consumes settings entry');
-    await back(); await at('전체 단어장');
-    checks.push('all main tabs, native Forward, settings and existing Close share one history');
-    await tab('주간·월말 점검').click(); await tab('전체 단어장').click();
-    await back(); await at('주간·월말 점검'); await forward(); await at('전체 단어장');
-    checks.push('explicit tab revisits retain the previous visited page');
+    await page.getByRole('dialog').waitFor({ state: 'hidden' }); await back(); await at('전체 단어장');
+    checks.push('all tab roots ignore Back; tab visits do not add browser history; settings swipe and Close work');
 
     const search = page.getByLabel('단어 또는 한국어 뜻 검색'); await search.fill('apple');
     await page.getByRole('button', { name: 'apple 명사', exact: true }).click(); await page.getByRole('dialog').waitFor();
@@ -63,16 +97,46 @@ const until = async (check, label) => {
     checks.push('word editor, personal word, POS help and source dialog close without resetting filters');
 
     await tab('품사·문장 연습').click(); await page.locator('.grammar-tile').first().click();
-    const input = page.getByRole('textbox', { name: '내 문장', exact: true }), lessonIndex = await marker();
+    const input = page.getByRole('textbox', { name: '내 문장', exact: true });
+    if (engine === 'chromium') {
+      const client = await context.newCDPSession(page);
+      const chrome = () => page.evaluate(() => ['.topbar', '.main-nav'].map(selector => {
+        const r = document.querySelector(selector).getBoundingClientRect(); return [r.x, r.y, r.width, r.height];
+      }));
+      const beforeDrag = await chrome();
+      await client.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 5, y: 160 }] });
+      await client.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 150, y: 162 }] });
+      assert.equal(await page.locator('.navigation-body').evaluate(e => e.style.transform.includes('translateX(')), true);
+      assert.deepEqual(await chrome(), beforeDrag);
+      fs.mkdirSync('outputs/navigation', { recursive: true });
+      await page.screenshot({ path: 'outputs/navigation/body-swipe.png' });
+      await client.send('Input.dispatchTouchEvent', { type: 'touchCancel', touchPoints: [] });
+      assert.equal(await input.isVisible(), true);
+      await client.detach();
+      checks.push('browser-injected touch moves only body; header/nav coordinates unchanged; touchcancel keeps lesson');
+    }
+    await swipe({ dx: 30 }); assert.equal(await input.isVisible(), true);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    const reduced = await swipe({ dx: 180, cancel: true });
+    assert.match(reduced.translation, /translateX\(0px\)/, 'reduced motion does not translate the body');
+    assert.equal(await page.locator('.navigation-body').evaluate(e => e.style.transform), '', 'cancel clears inline styles');
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await swipe({ dx: 180, cancel: true }); assert.equal(await input.isVisible(), true);
+    await swipe({ dx: 20, dy: 160 }); assert.equal(await input.isVisible(), true);
+    await swipe({ dx: -100 }); assert.equal(await input.isVisible(), true);
+    await swipe({ x: 150 }); assert.equal(await input.isVisible(), true);
+    await tab('오늘의 학습').click(); await back(); await at('오늘의 학습');
+    await tab('전체 단어장').click(); assert.equal(await input.isVisible(), true);
+    checks.push('short/cancelled/vertical/leftward/mid-page touches do not navigate; each tab retains its own internal view');
     await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '검사 저장 실패' } }) : route.continue());
     await input.fill('I like coffee and books.'); await back();
     await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
-    await until(async () => await marker() === lessonIndex, 'blocked Back restores browser cursor');
+    assert.equal(await input.isVisible(), true);
     assert.equal(await input.inputValue(), 'I like coffee and books.');
     await page.unroute('**/api/state'); await back(); await page.locator('.grammar-catalog').waitFor();
     assert.equal((await get()).state.grammar.noun.sentence, 'I like coffee and books.');
     assert.deepEqual((await get()).state.grammar.noun.answers, grammar.noun.answers);
-    await forward(); await input.waitFor(); assert.equal(await input.inputValue(), 'I like coffee and books.');
+    await page.locator('.grammar-tile').first().click(); await input.waitFor(); assert.equal(await input.inputValue(), 'I like coffee and books.');
     let aiRoute;
     await page.route('**/api/grammar-feedback', route => { aiRoute = route; });
     await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click(); await until(() => !!aiRoute, 'AI request');
@@ -80,7 +144,7 @@ const until = async (check, label) => {
     await aiRoute.fulfill({ json: { feedback: { original: 'I like coffee and books.', correctedSentence: 'I like tea.', explanation: '합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {});
     await page.waitForTimeout(200); assert.equal((await get()).state.grammar.noun.feedback, undefined);
     await back(); await search.waitFor(); assert.equal(await search.inputValue(), 'apple');
-    checks.push('grammar Back saves drafts, failed saves block departure, Forward resumes, late AI is ignored');
+    checks.push('grammar Back saves drafts, failed saves block departure, reopening resumes, late AI is ignored');
 
     await tab('학습 기록').click(); await page.getByRole('button', { name: '기록 관리', exact: true }).click(); await page.getByRole('menuitem', { name: '전체 백업', exact: true }).click();
     await page.getByRole('dialog').waitFor(); await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
@@ -94,14 +158,11 @@ const until = async (check, label) => {
     await page.getByRole('checkbox').check(); await page.getByRole('button', { name: '이 백업으로 복원', exact: true }).click();
     await page.getByRole('alertdialog').waitFor(); await back(); await page.getByRole('alertdialog').waitFor({ state: 'hidden' });
     assert.equal(await page.getByRole('dialog').isVisible(), true);
-    await forward(); await page.getByRole('alertdialog').waitFor();
-    // Jump past the entire tool; Forward must not re-open a stale destructive confirmation.
-    // The underlying dialog is aria-hidden while the confirmation is open.
-    // Wait for traversal itself, not that already-hidden accessibility node.
-    const confirmationIndex = await marker();
-    await page.evaluate(() => history.go(-2)); await until(async () => await marker() === confirmationIndex - 2, 'leave both backup layers');
-    await page.getByRole('alertdialog').waitFor({ state: 'hidden' }); await page.getByRole('dialog').waitFor({ state: 'hidden' });
-    await page.evaluate(() => history.go(2)); await page.getByRole('dialog').waitFor();
+    await page.getByRole('button', { name: '이 백업으로 복원', exact: true }).click(); await page.getByRole('alertdialog').waitFor();
+    await back(); await page.getByRole('alertdialog').waitFor({ state: 'hidden' });
+    await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
+    await page.getByRole('button', { name: '기록 관리', exact: true }).click();
+    await page.getByRole('menuitem', { name: '백업 가져오기', exact: true }).click(); await page.getByRole('dialog').waitFor();
     assert.equal(await page.getByRole('alertdialog').count(), 0);
     assert.equal((await get()).state.sessions[id].records[word.id].en, 'unmeasured');
     await page.keyboard.press('Escape'); await page.getByRole('dialog').waitFor({ state: 'hidden' });
@@ -146,6 +207,21 @@ const until = async (check, label) => {
     assert.equal((await get()).state.sessions[id].date, previous.toISOString().slice(0, 10));
     checks.push('completed lesson and date editor support Back; date save in flight cannot be dismissed');
 
+    // A real revision conflict reloads the account while Settings stays open.
+    // The new account epoch must retain a dismissible tool, not old lesson paths.
+    await page.getByRole('button', { name: '학습 설정', exact: true }).click();
+    const remote = await get();
+    assert.equal((await context.request.put(base + '/api/state', { data: { revision: remote.revision, settings: { ...remote.state.settings, dailyGoal: 2 }, progress: {}, sessions: {} } })).status(), 200);
+    await page.getByRole('combobox', { name: '하루 목표', exact: true }).click();
+    await page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).click();
+    await page.getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
+    await page.getByRole('alertdialog').getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
+    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByRole('dialog').waitFor();
+    await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
+    assert.equal((await get()).state.settings.dailyGoal, 2);
+    checks.push('account reload preserves Settings dismissal while invalidating old record views');
+
     await page.addScriptTag({ path: axePath });
     assert.deepEqual(await page.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa'] })).violations), []);
     for (const width of [320, 390, 768, 1440]) {
@@ -161,7 +237,7 @@ const until = async (check, label) => {
     fs.writeFileSync(`outputs/navigation/${engine}.json`, JSON.stringify({ passed: true, engine, checks, actualIPhone: false, realGoogleCalls: 0 }, null, 2));
     console.log(JSON.stringify({ passed: true, engine, checks }));
   } catch (error) {
-    console.error(JSON.stringify({ engine, checks, errors, navigation: await page.evaluate(() => ({ trace: window.navigationTrace, marker: history.state?.haruNavigation, tab: document.querySelector('[role=tab][aria-selected=true]')?.textContent, dialogs: document.querySelectorAll('[role=dialog], [role=alertdialog]').length })) }));
+    console.error(JSON.stringify({ engine, checks, errors, navigation: await page.evaluate(() => ({ trace: window.navigationTrace, historyLength: history.length, tab: document.querySelector('[role=tab][aria-selected=true]')?.textContent, dialogs: document.querySelectorAll('[role=dialog], [role=alertdialog]').length })) }));
     throw error;
   } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

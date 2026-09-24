@@ -2891,6 +2891,9 @@ p {
 }
 .topbar {
   height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
   padding-inline: max(var(--space-6),calc((100vw - 1152px)/2));
   background: #fff;
   border-bottom: 1px solid var(--border);
@@ -2917,6 +2920,7 @@ p {
 .page-wrap {
   max-width: 1200px;
   padding: 0 var(--space-6);
+  overflow-x: clip;
 }
 .page-heading {
   padding: var(--space-6) 0 20px;
@@ -2933,6 +2937,27 @@ p {
 }
 .main-tabs {
   gap: var(--space-6);
+}
+.navigation-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-width: 0;
+}
+.navigation-swipe-cue {
+  position: fixed;
+  left: 8px;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--action);
+  font-size: 28px;
+  line-height: 1;
+  pointer-events: none;
 }
 .main-nav[data-slot] {
   background: var(--surface);
