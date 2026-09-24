@@ -5,7 +5,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { build } from 'esbuild';
 import { EMPTY, pickDaily, learningMetrics } from '../lib/learning.ts';
 mkdirSync('work/grammar-tests', { recursive: true });
-await build({ entryPoints: ['lib/grammar/model.ts', 'lib/grammar/content.ts', 'lib/grammar/feedback.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'db/restore-jobs.ts', 'db/learning-state.ts', 'lib/state-delta.ts'], outdir: 'work/grammar-tests', entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
+await build({ entryPoints: ['lib/grammar/model.ts', 'lib/grammar/content.ts', 'lib/grammar/feedback.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'db/restore-jobs.ts', 'db/learning-state.ts', 'lib/state-delta.ts', 'app/grammar/grammar-presentation.ts'], outdir: 'work/grammar-tests', entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
 const model = await import('../work/grammar-tests/model.mjs');
 const { GRAMMAR_LESSONS, answerCorrect, exampleFocusStart, firstAnswerLabel, needsGrammarReview } = await import('../work/grammar-tests/content.mjs');
 const { analyzeBackup } = await import('../work/grammar-tests/backup-analysis.mjs');
@@ -14,10 +14,71 @@ const jobs = await import('../work/grammar-tests/restore-jobs.mjs');
 const { saveState, restoreState, loadStateDocuments } = await import('../work/grammar-tests/learning-state.mjs');
 const { stateDelta } = await import('../work/grammar-tests/state-delta.mjs');
 const { generateGrammarFeedback } = await import('../work/grammar-tests/feedback.mjs');
+const { grammarStep, grammarCatalog, grammarFeedbackTone } = await import('../work/grammar-tests/grammar-presentation.mjs');
 const date = '2026-09-24T00:00:00.000Z', words = JSON.parse(readFileSync('data/words.json', 'utf8'));
 const initial = () => model.newGrammarProgress(date);
 const completed = () => ({ ...initial(), stage: 6, answers: Object.fromEntries(['q1', 'q2', 'q3'].map(k => [k, model.recordAnswer(undefined, 'answer')])), sentence: 'I like music.', check: 'appropriate', completedAt: date });
 const raw = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: date, state });
+
+test('seven stored lesson positions map to the existing five visible phases', () => {
+  const labels = ['살펴보기', '이해하기', '연습 1', '연습 2', '연습 3', '써 보기', '정리하기'];
+  const phases = [0, 1, 2, 2, 2, 3, 4];
+  for (let stage = 0; stage <= 6; stage++) {
+    const p = { ...initial(), stage };
+    const view = grammarStep(p);
+    assert.equal(view.label, labels[stage]);
+    assert.equal(view.phase, phases[stage]);
+    assert.equal(view.percent, stage / 6 * 100);
+    assert.equal(view.reviewing, false);
+    assert.equal(view.answers, p.answers);
+  }
+});
+test('active review uses its own answers, hints and order without falling back to the first practice', () => {
+  const p = { ...completed(), hints: ['q1'], order: [1], review: { index: 0, answers: {} } };
+  for (let index = 0; index < 3; index++) {
+    p.review.index = index;
+    const before = structuredClone(p), view = grammarStep(p);
+    assert.equal(view.reviewing, true);
+    assert.equal(view.answers, p.review.answers);
+    assert.deepEqual(view.hints, []); assert.deepEqual(view.selection, []);
+    assert.equal(view.label, `다시 확인 ${index + 1}/3`);
+    assert.equal(view.phase, index); assert.equal(view.percent, index / 3 * 100);
+    assert.deepEqual(p, before);
+  }
+  p.review = { index: 3, answers: {}, completedAt: date };
+  const summary = grammarStep(p);
+  assert.equal(summary.reviewing, false); assert.equal(summary.label, '정리하기');
+  assert.equal(summary.answers, p.answers); assert.deepEqual(summary.hints, ['q1']);
+});
+test('catalog counts, badges and filtered rows agree without changing lesson progress', () => {
+  const done = id => ({ ...completed(), answers: Object.fromEntries(GRAMMAR_LESSONS.find(l => l.id === id).questions.map((q, i) => [`q${i + 1}`, model.recordAnswer(undefined, q.answer)])) });
+  const progress = { noun: initial(), adjective: done('adjective'), modal: { ...done('modal'), review: { index: 0, answers: {} } } };
+  progress.adjective.answers.q1.helped = true;
+  const before = structuredClone(progress);
+  for (const filter of ['all', 'continue', 'review']) {
+    const view = grammarCatalog(progress, filter), rows = view.groups.flatMap(g => g.entries);
+    assert.deepEqual(view.counts, { all: 15, continue: 2, review: 2, complete: 1 });
+    assert.equal(rows.length, view.counts[filter]); assert.equal(view.visibleCount, rows.length);
+    if (filter === 'review') {
+      assert.deepEqual(rows.map(row => row.lesson.id), ['adjective', 'modal']);
+      assert.deepEqual(view.groups.map(group => group.number), ['02', '05']);
+      assert.equal(rows[0].complete, true); assert.equal(rows[1].continuing, true);
+    }
+  }
+  assert.deepEqual(progress, before);
+  assert.deepEqual(grammarCatalog({}, 'continue').groups, []);
+  assert.deepEqual(grammarCatalog({}, 'review').groups, []);
+});
+test('AI feedback is green only when both judgments confirm, and uncertainty remains neutral', () => {
+  for (const meaningUsage of ['appropriate', 'needs_work', 'uncertain']) {
+    for (const grammar of ['natural', 'needs_work', 'uncertain']) {
+      const result = grammarFeedbackTone({ meaningUsage, grammar });
+      if (meaningUsage === 'needs_work' || grammar === 'needs_work') assert.equal(result, 'review');
+      else if (meaningUsage === 'uncertain' || grammar === 'uncertain') assert.equal(result, 'neutral');
+      else assert.equal(result, 'success');
+    }
+  }
+});
 
 await build({ entryPoints: ['app/api/grammar-feedback/route.ts', 'app/api/state/route.ts'], outdir: 'work/grammar-tests/routes', entryNames: '[dir]/[name]', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent', plugins: [{ name: 'test-boundaries', setup(b) {
   b.onResolve({ filter: /^(cloudflare:workers|@\/app\/chatgpt-auth|@\/db\/store)$/ }, a => ({ path: a.path, namespace: 'test' }));

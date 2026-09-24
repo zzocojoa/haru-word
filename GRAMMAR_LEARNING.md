@@ -58,3 +58,14 @@ OpenDesign의 기존 화이트·차콜·라임 방향을 유지한다. `app/gram
 `tests/grammar-ui-qa.cjs`는 상태 필터·빈 결과 복귀·키보드 선택·첫 답 보존·수업 복귀 필터와 화면별 320–1440px/200% 확대/접근성을 검사한다. 스크린샷과 결과는 `outputs/grammar-ui/`에 보관한다. 실제 iPhone·VoiceOver 점검과 실제 AI 언어 품질 검증은 별도 항목이다.
 
 UI 배포 검증: 단위 297/297, 타입·app/lib/db 린트·공식 빌드·diff 검사 통과. 전체 기능 48건 중 첫 실행은 46건 통과, 기존 일일 이어 하기와 대용량 복원 검사에서 시간 초과 2건이 발생했다(`outputs/browser-suite/functional-1790258968803/results.json`). 조건이나 단언을 완화하지 않은 개별 재실행에서는 두 검사 모두 통과했다(`work/grammar-ui-integration-recheck.log`, `work/grammar-ui-backup-recheck.log`). 최초 시간 초과의 원인은 확정하지 못했으며, 이어 하기 검사에 실패 화면·회차 상태 진단을 추가했다. 성능은 3/3 통과했다(`outputs/browser-suite/performance-1790259452768/results.json`). 새 UI 검사와 기존 수업 검사에서 저장 지연·실패·재접속·기기 충돌·AI 지연/429·단어 성적 보존을 확인했다.
+
+## UI 코드 책임 분리
+
+- `grammar-lesson.tsx`: 진도 변경 명령, 저장 대기, 이동 및 초점 제어를 연결한다.
+- `grammar-question.tsx`, `grammar-writing.tsx`, `grammar-summary.tsx`: 문제·문장 작성·결과를 표시하고 사용자의 행동을 콜백으로 전달한다. 직접 저장하거나 API를 호출하지 않는다.
+- `grammar-presentation.ts`: 목록의 배지·필터 수·그룹, 7개 저장 위치와 5개 표시 단계, AI 의견 색상을 순수 함수로 계산한다. 기본 연습과 재점검의 답·힌트·어순을 섞지 않는다.
+- `use-grammar-feedback.ts`: 명시적 AI 요청, 저장 선행, 중복 클릭 방지, 시간 제한, 응답 검증과 요청 취소를 담당한다. 문장 변경과 모든 화면 이동은 `invalidate`를 호출한다. 숨겨진 탭은 마운트 상태이므로 언마운트 정리만으로 대체하지 않는다.
+
+리팩토링은 표시·성적·저장 계약을 유지한다. 저장 훅과 서버·DB·백업 코드는 수정하지 않으며 의존성·마이그레이션·진단 로그를 추가하지 않는다. 위험도는 중간으로, AI 응답이 새 입력에 적용되거나 저장 전 이동하는 회귀가 주요 확인 대상이다. 장애 시 직전 버전 55로 복구한다. 실제 iPhone과 실제 AI 언어 품질은 자동 테스트 범위에 포함하지 않는다.
+
+리팩토링 검증: 단위 301/301, 타입·린트·공식 빌드·diff 검사 및 성능 3/3 통과(`outputs/browser-suite/performance-1790260771747/results.json`). 전체 브라우저 48건 중 최초 47건 통과, 친숙도 검사 한 건은 페이지 `load` 대기 시간 초과로 실패했다(`outputs/browser-suite/functional-1790260334598/results.json`). 조건·단언을 바꾸지 않은 개별 재실행에서 모든 친숙도 시나리오가 통과했다(`work/grammar-refactor-familiarity-recheck.log`). 최초 로딩 시간 초과 원인은 확정하지 못했다. 문법 전용 검사에서는 잘못된 AI 응답의 입력 보존·재시도, 수정안 적용 후 자기 점검 초기화, 화면 전환·저장 충돌·재접속과 320–1440px/글자 200%/접근성을 확인했다.

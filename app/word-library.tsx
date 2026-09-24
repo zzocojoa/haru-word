@@ -4,7 +4,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { GRAMMAR_LESSONS, POS_LESSON, LESSON_MAP } from '@/lib/grammar/content';
 import type { LessonId } from '@/lib/grammar/model';
 import { GrammarLesson } from './grammar/grammar-lesson';
-import { GrammarCatalog, type GrammarFilter } from './grammar/grammar-catalog';
+import { GrammarCatalog } from './grammar/grammar-catalog';
+import type { GrammarFilter } from './grammar/grammar-presentation';
 import type { GrammarPersistence, GrammarLeave } from './grammar/use-grammar-draft';
 import {
   Select,

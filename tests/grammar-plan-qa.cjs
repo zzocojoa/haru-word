@@ -76,6 +76,38 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         assert.equal((await get()).state.grammar.adjective.feedback, undefined);
       } finally { release(); await context.close(); }
     });
+    await check('invalid AI replies preserve input and allow a valid retry; applying a correction requires a fresh self-check', async () => {
+      const { context, page, get } = await open({ noun: progress('noun') });
+      try {
+        await page.locator('.grammar-tile').first().click();
+        const sentence = page.getByRole('textbox', { name: '내 문장', exact: true });
+        const original = await sentence.inputValue(), corrected = 'I like books.';
+        let calls = 0;
+        await page.route('**/api/grammar-feedback', async route => {
+          calls++;
+          const feedback = { original, correctedSentence: corrected, explanation: '학습용 합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now };
+          await route.fulfill({ json: { feedback: calls === 1 ? { ...feedback, original: 'Another sentence.' } : calls === 2 ? {} : feedback } });
+        });
+        for (let attempt = 1; attempt <= 2; attempt++) {
+          await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+          await page.locator('.grammar-message[role=alert]').waitFor();
+          assert.equal(await sentence.inputValue(), original);
+          assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
+          assert.equal(await page.getByRole('radio', { name: '뜻과 형태를 확인했어요', exact: true }).isChecked(), true);
+        }
+        await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+        await page.getByRole('heading', { name: 'AI 의견', exact: true }).waitFor();
+        assert.equal(calls, 3); assert.equal(await sentence.inputValue(), original, 'AI never replaces text automatically');
+        await page.getByRole('button', { name: '수정안 사용하기', exact: true }).click();
+        assert.equal(await sentence.inputValue(), corrected);
+        assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
+        assert.equal(await page.getByRole('radio', { checked: true }).count(), 0);
+        assert.equal(await page.getByRole('button', { name: '수업 마치기', exact: true }).isDisabled(), true);
+        await until(async () => (await get()).state.grammar.noun.sentence === corrected, 'correction saved');
+        const saved = (await get()).state.grammar.noun;
+        assert.equal(saved.check, undefined); assert.equal(saved.feedback, undefined);
+      } finally { await context.close(); }
+    });
     await check('lesson return retains word filters/page/scroll and keeps focus on a visible control', async () => {
       const all = Object.fromEntries([...LESSON_MAP.keys()].map(id => [id, { ...progress(id, 6), completedAt: now }]));
       const { context, page } = await open(all);
