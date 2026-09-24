@@ -1,6 +1,6 @@
 "use client";
 import { POS } from "@/lib/learning";
-import { dailyAllocationRule } from "@/lib/learning/daily-allocation";
+import { countDailyOrigins, dailyAllocationRule } from "@/lib/learning/daily-allocation";
 import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
 import { useMemo, useState } from "react";
 import { HelpDetails, StatusBadge } from "../study-ui";
@@ -70,6 +70,7 @@ export function TodayOverview({
   const [pendingLimit, setPendingLimit] = useState(20);
   const wordById = useMemo(() => new Map(words.map(w => [w.id, w])), [words]);
   const filteredIds = visibleIds.filter(id => filter === 'all' || statuses[id].recordStatus !== 'recorded');
+  const additions = countDailyOrigins(suggestions, origins.byId);
   return (
     <section className="learning-panel home-panel">
       <div className="panel-top">
@@ -206,7 +207,7 @@ export function TodayOverview({
           <small>{assigned ? `배정 ${assignedIds.length}개` : '시작 전 · 배정 예정'}</small>
         </header>
         <p className="daily-allocation">새 학습 {origins.newCount}개 · 이전 학습·복습 {origins.returning}개</p>
-        {assigned && suggestions.length > 0 && <p className="small-note planned-allocation">추가 예정: 새 학습 {suggestions.filter(id => origins.byId[id] === 'new').length}개 · 복습 {suggestions.filter(id => origins.byId[id] === 'returning').length}개</p>}
+        {assigned && suggestions.length > 0 && <p className="small-note planned-allocation">추가 예정: 새 학습 {additions.newCount}개 · 복습 {additions.returning}개</p>}
         <HelpDetails title="오늘 배정 기준">
         <p className="today-targets-note">
           {assigned

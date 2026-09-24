@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 import { readFileSync } from 'node:fs';
 import { EMPTY, newSession, ensureCarryover, applyRecord, dailyAssignedIds, reviewTargets, exportTutor } from '../lib/learning.ts';
-import { dailyPlan, dailyOriginSummary } from '../lib/learning/daily-allocation.ts';
+import { countDailyOrigins, dailyAllocationRule, dailyPlan, dailyOriginSummary } from '../lib/learning/daily-allocation.ts';
 
 const date = '2026-09-24';
 const words = Array.from({ length: 40 }, (_, i) => ({ id: `entry-${i}`, word: `word${i}`, headword: `word${i}`, level: 'A1', pos: 'n.', page: 1 }));
@@ -218,4 +218,43 @@ test('exported tutor rules honor the goal and the explicit pause without contrad
   const exported = exportTutor(state, words);
   assert.match(exported, /복습만 최대 5개/);
   assert.doesNotMatch(exported, /한쪽이 부족하면 다른 쪽으로 채우세요/);
+});
+
+test('one plan supplies deduplicated assignments and consistent visible/top-up counts across rounds', () => {
+  const state = fixture(3), first = finish(state, newSession(state, words, content, 'daily', date), date);
+  const entryId = first.ids[0], alias = `${entryId}::another-sense`;
+  const copy = { ...structuredClone(first), id: 'second-round', ids: [alias],
+    records: { [alias]: { ...first.records[entryId], entryId, meaning: '다른 뜻' } } };
+  state.sessions[copy.id] = copy;
+  for (const [id, kind, day] of [['periodic', 'monthly', date], ['future', 'daily', '2026-09-25']]) {
+    state.sessions[id] = { ...structuredClone(copy), id, kind, date: day, ids: [words[39].id],
+      records: { [words[39].id]: { ...copy.records[alias], entryId: words[39].id } } };
+  }
+  state.settings.dailyGoal = 10;
+  const before = structuredClone(state), plan = dailyPlan(words, freeze(state), date);
+  assert.deepEqual(plan.assignedIds, first.ids);
+  assert.deepEqual(plan.assignedIds, dailyAssignedIds(state, date));
+  assert.deepEqual(countDailyOrigins(plan.assignedIds, plan.origins), { newCount: 2, returning: 1 });
+  assert.deepEqual(countDailyOrigins(plan.ids, plan.origins), { newCount: 3, returning: 4 });
+  assert.deepEqual(countDailyOrigins([...plan.assignedIds, ...plan.ids], plan.origins), { newCount: 5, returning: 5 });
+  assert.deepEqual(countDailyOrigins([], plan.origins), { newCount: 0, returning: 0 });
+  assert.deepEqual(state, before);
+});
+
+test('allocation guidance and computed quotas agree for every supported goal and pause setting', () => {
+  for (let goal = 1; goal <= 10; goal++) {
+    for (const paused of [false, true]) {
+      const state = fixture(goal); state.settings.newWordsPaused = paused;
+      const plan = dailyPlan(words, state, date), rule = dailyAllocationRule(goal, paused);
+      assert.equal(plan.newQuota + plan.reviewQuota, goal);
+      if (paused) {
+        assert.equal(plan.newQuota, 0);
+        assert.equal(rule, `복습만 최대 ${plan.reviewQuota}개 배정해요.`);
+      } else if (goal > 1) {
+        assert.equal(rule, `새 단어 ${plan.newQuota}개 · 복습 ${plan.reviewQuota}개를 우선 배정해요.`);
+      } else {
+        assert.match(rule, /학습한 날.*번갈아/);
+      }
+    }
+  }
 });

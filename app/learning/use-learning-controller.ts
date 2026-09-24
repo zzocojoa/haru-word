@@ -1,12 +1,11 @@
 "use client";
 import { WORDS, cardContent } from "@/lib/catalog";
 import {
-  dailyAssignedIds,
   hasReviewWork,
   learningMetrics,
   type Level,
 } from "@/lib/learning";
-import { dailyPlan } from "@/lib/learning/daily-allocation";
+import { countDailyOrigins, dailyPlan } from "@/lib/learning/daily-allocation";
 import { repairMonthlyCarryover } from "@/lib/learning/monthly-carryover-repair";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLearningStore } from "../use-learning-store";
@@ -105,23 +104,19 @@ export function useLearningController(initialServerTime: number) {
       !s.finished,
   );
   const { assessment, assessed, initialAssessment, assessmentWord, beginAssessment, revealMeaning, markFamiliarity } = useFamiliarityFlow({ state, currentState, prepareTransition, words, save, setAssessing, setPreparing, setShowSession, setTab });
-  const assignedIds = useMemo(
-    () => dailyAssignedIds(state, date),
-    [state, date],
-  );
-  const remaining = Math.max(0, state.settings.dailyGoal - assignedIds.length);
   const allocation = useMemo(
     () => dailyPlan(words, state, date),
     [words, state, date],
   );
   const suggestions = allocation.ids;
+  const assignedIds = allocation.assignedIds;
+  const remaining = Math.max(0, state.settings.dailyGoal - assignedIds.length);
   const metrics = useMemo(() => learningMetrics(state), [state]);
   const carry = metrics.carry;
   // The overview represents the whole study date, including completed rounds
   // before a goal increase. Resuming still uses the original unfinished session.
   const visibleIds = assignedIds.length ? assignedIds : suggestions;
-  const returning = visibleIds.filter(id => allocation.origins[id] === 'returning').length;
-  const origins = { byId: allocation.origins, returning, newCount: visibleIds.length - returning };
+  const origins = { byId: allocation.origins, ...countDailyOrigins(visibleIds, allocation.origins) };
   const pendingReviewIds = allocation.pendingReviewIds;
   const monthlyRepair = useMemo(() => repairMonthlyCarryover(
     state, words, id => cardContent(id, state.progress[id]), date,
