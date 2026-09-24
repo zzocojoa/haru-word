@@ -24,7 +24,7 @@ function append(event: Event) {
 export function beginRequestDiagnostic(url: string, method = "GET") {
   const operation: Operation | undefined = url === "/api/state"
     ? method === "PUT" ? "save" : method === "GET" ? "load" : undefined
-    : url === "/api/state/restore" ? "restore"
+    : url === "/api/state/restore" || url.startsWith('/api/state/restore/jobs') ? "restore"
     : url === "/api/sentence-feedback" ? "feedback"
     : url === "/api/study-clock" ? "clock" : undefined;
   if (!operation) return () => {};

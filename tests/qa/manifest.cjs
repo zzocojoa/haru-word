@@ -22,6 +22,7 @@ module.exports = [
   "integration-consistency-qa.cjs",
   "journal-navigation-qa.cjs",
   "learning-message-qa.cjs",
+  "large-backup-qa.cjs",
   "monthly-carryover-repair-qa.cjs",
   "purpose-improvements-qa.cjs",
   "refactor-lifecycle-qa.cjs",

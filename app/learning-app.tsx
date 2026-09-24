@@ -465,6 +465,7 @@ export default function LearningApp({
             conflict={conflict}
             onClose={() => setBackupOpen(false)}
             onRestore={store.restore}
+            getRevision={store.getRevision}
             onReload={store.load}
             onComplete={restored}
           />

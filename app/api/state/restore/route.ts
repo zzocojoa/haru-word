@@ -3,8 +3,16 @@ import { database } from '@/db/store';
 import { restoreState } from '@/db/learning-state';
 import { MAX_BACKUP_BYTES, parseBackup } from '@/lib/backup';
 import { json, validateJsonMutation } from '@/lib/server/http';
+import { largeRestoreEnabled } from '@/lib/server/restore-http';
+import { LARGE_BACKUP_BYTES, RESTORE_PART_BYTES } from '@/lib/restore-protocol';
 
 export const dynamic = 'force-dynamic';
+
+export async function GET() {
+  if (!await getChatGPTUser()) return json({ error: '로그인이 필요합니다.' }, 401);
+  const enabled = largeRestoreEnabled();
+  return json({ enabled, maxBytes: enabled ? LARGE_BACKUP_BYTES : MAX_BACKUP_BYTES, partBytes: RESTORE_PART_BYTES });
+}
 
 export async function POST(request: Request) {
   const user = await getChatGPTUser();

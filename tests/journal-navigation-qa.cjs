@@ -146,6 +146,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     const downloadText = async name => {
       await panel.getByRole('button', { name: '기록 관리', exact: true }).click();
       const pending = p.waitForEvent('download'); await p.getByRole('menuitem', { name, exact: true }).click();
+      if (name === '전체 백업') await p.getByRole('button', { name: '백업 파일 다운로드', exact: true }).click();
       const d = await pending; return fs.readFileSync(await d.path(), 'utf8');
     };
     const backup = JSON.parse(await downloadText('전체 백업'));

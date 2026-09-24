@@ -4,6 +4,7 @@ import { EMPTY, type State } from '@/lib/learning';
 import { stateDelta } from '@/lib/state-delta';
 import { InvalidResponseError, RequestTimeoutError } from '@/lib/client-request';
 import { loadLearningState, restoreLearningState, saveLearningState } from '@/lib/learning-api';
+import { commitRestore } from '@/lib/restore-client';
 
 export function useLearningStore() {
   const [state, setState] = useState<State>(structuredClone(EMPTY));
@@ -100,7 +101,7 @@ export function useLearningStore() {
     }
   }, [signedIn, conflict]);
 
-  const restore = useCallback(async (next: State, expected: State) => {
+  const restore = useCallback(async (next: State, expected: State, jobId?: string) => {
     if (lock.current || !signedIn || unsaved || conflict || current.current !== expected) {
       setError('현재 기록이 바뀌었어요. 복원 미리보기를 다시 열어 주세요.');
       return false;
@@ -110,6 +111,14 @@ export function useLearningStore() {
     setRestoring(true);
     setError('');
     try {
+      if(jobId){
+        const receipt=await commitRestore(jobId);
+        if(receipt.status!=='committed'||receipt.baseRevision!==revision.current||receipt.revision!==revision.current+1)throw new InvalidResponseError();
+        const fresh=await loadLearningState();
+        if(!fresh.ok||fresh.data.revision<receipt.revision)throw new InvalidResponseError();
+        revision.current=fresh.data.revision;persisted.current=fresh.data.state;current.current=fresh.data.state;
+        setState(fresh.data.state);setUnsaved(false);setConflict(false);setEpoch(n=>n+1);return true;
+      }
       const result = await restoreLearningState(next, revision.current);
       if (!result.ok || result.data.revision !== revision.current + 1) {
         setError((!result.ok && result.data.error) || '복원 결과를 확인하지 못했어요. 서버 기록을 확인해 주세요.');
@@ -136,5 +145,5 @@ export function useLearningStore() {
     }
   }, [signedIn, unsaved, conflict]);
 
-  return { state, current, loading, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
+  return { state, current, getRevision:()=>revision.current, loading, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
 }

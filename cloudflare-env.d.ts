@@ -4,5 +4,6 @@ declare namespace Cloudflare {
     BUCKET?: R2Bucket;
     google_api?: string;
     google_ai_enabled?: string;
+    large_backup_restore_enabled?: string;
   }
 }

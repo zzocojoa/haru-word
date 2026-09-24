@@ -21,17 +21,17 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
         busy={false} restoring={false} error="" conflict={false} onClose={()=>{}}
         onRestore={async()=>{window.restoreCalls++;return true}} onReload={async()=>true} onComplete={()=>{}}/>}
     createRoot(document.getElementById('root')).render(<React.StrictMode><Harness/></React.StrictMode>);`, loader: 'tsx', resolveDir: process.cwd() },
-    outfile: 'work/backup-safety-harness.js', bundle: true, format: 'iife', platform: 'browser', logLevel: 'silent', define: { 'process.env.NODE_ENV': '"development"' } });
+    plugins:[{name:'worker-boundary',setup(b){b.onResolve({filter:/backup-worker-client$/},()=>({path:'worker',namespace:'harness'}));b.onLoad({filter:/.*/,namespace:'harness'},()=>({contents:"import {analyzeBackup,analyzeExport} from './lib/backup-analysis'; export const inspectBackupFile=async(file,max)=>analyzeBackup(await file.text(),max); export const inspectBackupExport=analyzeExport;",resolveDir:process.cwd(),loader:'ts'}));}}], outfile: 'work/backup-safety-harness.js', bundle: true, format: 'iife', platform: 'browser', logLevel: 'silent', define: { 'process.env.NODE_ENV': '"development"' } });
   const { parseBackup, MAX_BACKUP_BYTES } = await import('../work/backup-safety-parser.mjs');
   const browser = await launchBrowser(), checks = [], errors = []; let posts = 0;
   try {
     // A same-tab state replacement must invalidate an already approved copy,
     // including while the final confirmation is open.
-    const harnessContext = await browser.newContext(); const harness = await harnessContext.newPage();
+    const harnessContext = await browser.newContext(); const harness = await harnessContext.newPage(); await require('./qa/restore-compat.cjs').legacyRestore(harnessContext); await harnessContext.route('**/api/state/restore/jobs',r=>r.fulfill({json:{job:null}}));
     harness.on('pageerror', error => errors.push(error.message));
-    await harness.setContent('<!doctype html><html lang="ko"><head><title>안전 백업 검사</title></head><body><div id="root"></div></body></html>');
+    await harness.route(base+'/backup-harness',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><html lang="ko"><head><title>안전 백업 검사</title></head><body><div id="root"></div></body></html>'})); await harness.goto(base+'/backup-harness');
     await harness.addScriptTag({ path: 'work/backup-safety-harness.js' });
-    await harness.locator('input[type=file]').setInputFiles({ name: 'backup.json', mimeType: 'application/json', buffer: Buffer.from(envelope(emptyState())) });
+    await harness.waitForFunction(()=>document.querySelector('input[type=file]')&&!document.querySelector('input[type=file]').disabled); await harness.locator('input[type=file]').setInputFiles({ name: 'backup.json', mimeType: 'application/json', buffer: Buffer.from(envelope(emptyState())) });
     const downloaded = harness.waitForEvent('download'); await harness.getByRole('button', { name: '현재 기록 먼저 백업받기' }).click(); await downloaded;
     await harness.getByRole('checkbox').check(); await harness.getByRole('button', { name: '이 백업으로 복원', exact: true }).click();
     await harness.evaluate(() => window.changeBackupState());
@@ -47,17 +47,17 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     const original = history(); let snapshot = await get();
     const seeded = await context.request.post(base + '/api/state/restore', { headers: { 'content-type': 'application/json', 'x-study-revision': String(snapshot.revision) }, data: envelope(original) });
     assert.equal(seeded.status(), 200, await seeded.text());
-    const page = await context.newPage(); page.on('pageerror', error => errors.push(error.message));
-    page.on('request', request => { if (request.url().endsWith('/api/state/restore')) posts++; });
+    await require('./qa/restore-compat.cjs').legacyRestore(context); const page = await context.newPage(); page.on('pageerror', error => errors.push(error.message));
+    page.on('request', request => { if (request.method()==='POST' && request.url().endsWith('/api/state/restore')) posts++; });
     const saved = () => page.getByText('서버에 저장됨', { exact: true }).waitFor();
     const menu = async name => { await page.getByRole('button', { name: '기록 관리', exact: true }).click(); await page.getByRole('menuitem', { name, exact: true }).click(); };
-    const file = async raw => { await page.locator('input[type=file]').setInputFiles({ name: 'backup.json', mimeType: 'application/json', buffer: Buffer.from(raw) }); await page.getByRole('table', { name: '현재 기록과 복원할 기록' }).waitFor(); };
+    const file = async raw => { await page.waitForFunction(()=>document.querySelector('input[type=file]')&&!document.querySelector('input[type=file]').disabled); await page.locator('input[type=file]').setInputFiles({ name: 'backup.json', mimeType: 'application/json', buffer: Buffer.from(raw) }); await page.getByRole('table', { name: '현재 기록과 복원할 기록' }).waitFor(); };
     const safety = () => page.getByRole('button', { name: '현재 기록 먼저 백업받기', exact: true });
     const replace = () => page.getByRole('button', { name: '이 백업으로 복원', exact: true });
     const download = async action => { const event = page.waitForEvent('download'); await action(); return fs.readFileSync(await (await event).path(), 'utf8'); };
     const confirm = async () => { await replace().click(); await page.getByRole('button', { name: '기록 교체 · 복원', exact: true }).click(); await page.getByRole('heading', { name: '백업을 복원했어요.', exact: true }).waitFor(); await saved(); await page.getByRole('button', { name: '학습 기록 확인하기', exact: true }).click(); await page.getByRole('dialog').waitFor({ state: 'hidden' }); };
     await page.goto(base); await saved(); await page.getByRole('tab', { name: '학습 기록', exact: true }).click();
-    const whole = await download(() => menu('전체 백업'));
+    const whole = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); });
     assert.ok(Buffer.byteLength(whole) < MAX_BACKUP_BYTES); assert.deepEqual(parseBackup(whole).state, original);
     await menu('백업 가져오기'); await file(envelope(emptyState()));
 
@@ -87,7 +87,7 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     }
     const protectedSnapshot = await get(); assert.ok(Buffer.byteLength(envelope(protectedSnapshot.state)) > MAX_BACKUP_BYTES);
     await page.reload(); await saved(); await page.getByRole('tab', { name: '학습 기록', exact: true }).click();
-    const archive = await download(() => menu('전체 백업')); assert.deepEqual(JSON.parse(archive).state, protectedSnapshot.state);
+    const archive = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); }); assert.deepEqual(JSON.parse(archive).state, protectedSnapshot.state);
     await menu('백업 가져오기'); await file(envelope(emptyState()));
     const beforePosts = posts; let downloads = 0; page.on('download', () => downloads++);
     await safety().click(); await page.getByRole('alert').filter({ hasText: '안전 백업을 준비하지 못해' }).waitFor();
@@ -100,8 +100,9 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
       assert.equal(await page.locator('.dialog-scroll').evaluate(el => el.scrollWidth > el.clientWidth + 1), false);
     }
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{}))));
     await page.addScriptTag({ path: axePath });
-    const violations = await page.evaluate(async () => (await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => v.id));
+    const violations = await page.evaluate(async () => (await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({html:n.html,summary:n.failureSummary}))})));fs.writeFileSync(out+'/accessibility.json',JSON.stringify(violations,null,2));
     assert.deepEqual(violations, []); await page.getByRole('alert').scrollIntoViewIfNeeded(); await page.screenshot({ path: out + '/blocked-mobile.png' });
     checks.push('valid accumulated records exceeding 8 MB block safety approval and replacement, keep server state unchanged, and remain exportable as an archive');
     checks.push('blocked-state mobile/desktop layout and automated accessibility pass');

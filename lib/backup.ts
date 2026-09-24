@@ -4,6 +4,7 @@ import { type State } from './learning';
 import rawWords from '@/data/words.json';
 import { resumeMonthlyWriting } from './learning/session-flow';
 import { serializeBackup } from './backup-format';
+import { assertBackupStructure } from './backup-structure';
 export { makeBackup } from './backup-format';
 
 export const MAX_BACKUP_BYTES=8_000_000;
@@ -32,15 +33,14 @@ export const backupStateSchema=z.object({
 
 export type ParsedBackup={state:State;exportedAt?:string;legacy:boolean};
 const envelope=z.object({format:z.literal('haru-words-v1'),exportedAt:z.string().datetime(),state:backupStateSchema}).strict();
-export function parseBackup(raw:string):ParsedBackup {
- if(bytes(raw)>MAX_BACKUP_BYTES)throw new Error('백업 파일은 8 MB까지 복원할 수 있어요. 파일을 임의로 나누거나 일부 기록을 지우지 마세요.');
+export function parseBackup(raw:string,maxBytes=MAX_BACKUP_BYTES):ParsedBackup {
+ if(bytes(raw)>maxBytes)throw new Error(`백업 파일은 ${maxBytes/1_000_000} MB까지 복원할 수 있어요. 파일을 임의로 나누거나 일부 기록을 지우지 마세요.`);
  let value:unknown;try{value=JSON.parse(raw.replace(/^\uFEFF/,''),(key,v)=>{if(['__proto__','constructor','prototype'].includes(key))throw new Error('Unsafe key');return v;});}catch{throw new Error('올바른 JSON 백업 파일을 선택해 주세요.');}
  const wrapped=!!value&&typeof value==='object'&&('format'in value||'state'in value);
  const candidate=wrapped?(value as {state?:unknown}).state:value;
  if(candidate&&typeof candidate==='object')for(const [key,max]of [['progress',5000],['sessions',10000]]as const){const rows=(candidate as Record<string,unknown>)[key];if(rows&&typeof rows==='object'&&Object.keys(rows).length>max)throw new Error(key==='progress'?'단어 기록은 최대 5,000개까지 복원할 수 있어요.':'학습 회차는 최대 10,000개까지 복원할 수 있어요.');}
  // Bound collections before Zod clones them or builds a large issue list.
- const stack:[unknown,number][]=[[value,0]];
- while(stack.length){const [item,depth]=stack.pop()!;if(!item||typeof item!=='object')continue;const values=Object.values(item);if(depth>24||values.length>(Array.isArray(item)?20000:10000))throw new Error('백업 내부의 기록 수나 구조가 지원 범위를 넘었어요.');for(const v of values)if(v&&typeof v==='object')stack.push([v,depth+1]);}
+ assertBackupStructure(value);
  const parsed=wrapped?envelope.safeParse(value):backupStateSchema.safeParse(value);
  if(!parsed.success)throw new Error(parsed.error.issues.find(i=>i.code==='custom')?.message||'하루단어 백업 형식이나 버전을 확인해 주세요. 파일은 수정하지 않고 보관해 주세요.');
  const data=parsed.data;const result:ParsedBackup='state'in data?{state:data.state,exportedAt:data.exportedAt,legacy:false}:{state:data,legacy:true};
