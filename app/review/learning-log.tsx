@@ -177,8 +177,7 @@ export function LearningLog({
         </button>
       )}
       <p className="small-note">
-        ‘미측정’은 확인하지 않은 항목으로, 성공률 계산에 넣지 않습니다. 날짜는
-        한국 시간 기준이에요.
+        미측정은 성공률에서 제외 · 날짜는 한국 시간
       </p>
     </section>
   );

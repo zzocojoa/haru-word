@@ -22,7 +22,7 @@ export function GrammarSummary({ lesson, progress, dirty, error, canSave, onRevi
   return <div className="grammar-stage">
     <div className="grammar-summary-heading" data-pending={dirty}>
       <StatusIcon size={26} aria-hidden="true" />
-      <div><p className="grammar-role" role="status">{message}</p><p className="small-note">처음 답과 도움 사용은 따로 남겨요.<br />수업 완료가 숙달을 뜻하지는 않아요.</p></div>
+      <div><p className="grammar-role" role="status">{message}</p><p className="small-note">수업 마침은 숙달 판정이 아니에요.</p></div>
     </div>
     <ResultList questions={lesson.questions} answers={progress.answers} title="처음 연습" />
     {progress.review?.completedAt && <ResultList questions={lesson.review} answers={progress.review.answers} title="최근 다시 확인" />}

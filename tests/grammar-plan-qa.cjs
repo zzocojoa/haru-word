@@ -15,7 +15,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
     const initial = await get();
     assert.equal((await context.request.put(base + '/api/state', { data: { revision: initial.revision, grammar, progress: {}, sessions: {} } })).status(), 200);
     const page = await context.newPage(); page.setDefaultTimeout(8000);
-    await page.goto(base); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
     await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click();
     return { context, page, get };
   };
@@ -128,6 +128,9 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         assert.ok(Math.abs((await page.evaluate(() => scrollY)) - scroll) <= 2);
         await page.getByRole('button', { name, exact: true }).click(); await page.getByRole('button', { name: '이 품사 배우기', exact: true }).click();
         await page.getByRole('button', { name: '같은 품사의 단어 보기', exact: true }).click();
+        // The hidden word list stays mounted; wait for navigation and focus restoration.
+        await query.waitFor({ state: 'visible' });
+        await until(async () => await query.evaluate(el => document.activeElement === el), 'word search focus restored');
         assert.equal(await query.inputValue(), 'a'); assert.match(await page.getByRole('combobox', { name: '단어장 수준 필터' }).innerText(), /A1/);
         assert.match(await page.getByRole('combobox', { name: '친숙도 필터' }).innerText(), /아직 미표시/);
         assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('aria-label')), '단어 또는 한국어 뜻 검색');

@@ -169,8 +169,7 @@ export function ReviewDesk({
                 </div>
                 {retained > 0 && (
                   <p className="small-note">
-                    학습일이 바뀐 {retained}개도 이미 시작한 점검에서는
-                    유지해요. 저장된 답과 순서는 바꾸지 않아요.
+                    날짜 변경 {retained}개 · 기존 점검의 답·순서 유지
                   </p>
                 )}
                 <HelpDetails title="점검 방식" className="review-checklist">

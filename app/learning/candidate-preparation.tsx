@@ -34,8 +34,7 @@ export function CandidatePreparation({
           : "오늘 단어 준비 완료"}
       </h2>
       <p className="muted">
-        이월 → 헷갈림 → 처음 순서예요. 아는 단어는 새 목표에서 제외하고 후속
-        점검에 남겨요.
+        이월 → 헷갈림 → 처음 순서 · 아는 단어는 후속 점검
       </p>
       {candidate ? (
         <FamiliarityCard

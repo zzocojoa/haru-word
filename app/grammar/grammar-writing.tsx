@@ -6,6 +6,7 @@ import { GRAMMAR_TEXT, type SentenceFeedback } from '@/lib/sentence-feedback';
 import { CHECK_TEXT, SELF_CHECKS, grammarFeedbackTone } from './grammar-presentation';
 import type { FeedbackIssue } from '@/lib/feedback-issue';
 import { FeedbackIssueNotice } from '../feedback-issue-notice';
+import { AiUseNotice } from '../ai-use-notice';
 import { FeedbackAttribution } from '../feedback-attribution';
 
 type Props = {
@@ -35,7 +36,7 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
       <button className="secondary-button" disabled={aiPending || !sentence.trim() || !canSave} onClick={onAi}>
         <Sparkles size={18} aria-hidden="true" />{aiPending ? '문장을 점검하고 있어요' : 'AI로 문장 점검'}
       </button>
-      <p className="small-note">Google로 먼저 점검하고, 응답 실패 시 Groq에 문장을 보내요.<br />Google 무료 API의 입력·응답은 서비스 개선에 사용될 수 있어요. 개인정보는 빼고 작성해 주세요.</p>
+      <AiUseNotice grammar />
     </div>
     <FeedbackIssueNotice issue={aiError} />
     {feedback && <Feedback feedback={feedback} sentence={sentence} onSentence={onSentence} />}

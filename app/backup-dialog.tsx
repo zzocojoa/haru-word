@@ -77,7 +77,7 @@ export default function BackupDialog({date,now,state,getRevision=()=>0,busy,rest
  const readyToConfirm=job?.status==='ready'&&job.fileHash===analysis?.manifest.fileHash&&allowed;
  const step=success?'6/6 · 반영 완료':restoring?'5/6 · 서버에 반영 중':confirm||readyToConfirm?'5/6 · 최종 확인':phase.startsWith('전체 검증')?'4/6 · 전체 검증':phase.startsWith('전송')?'3/6 · 전송':backup?'2/6 · 안전 백업 보관':'1/6 · 파일 확인';
  return <><Dialog open onOpenChange={open=>{if(!open&&!restoring)onClose()}}><DialogContent className="backup-dialog framed-dialog" showCloseButton={!restoring} onCloseAutoFocus={e=>{e.preventDefault();document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus()}} onEscapeKeyDown={e=>{if(restoring)e.preventDefault()}} onInteractOutside={e=>e.preventDefault()}>
-  <DialogHeader><DialogTitle>{success?'백업을 복원했어요.':'백업에서 복원'}</DialogTitle><DialogDescription>{success?'학습 기록과 설정을 서버에 저장했어요. 다른 기기에서도 이어갈 수 있어요.':'파일을 먼저 확인하고, 백업 시점의 학습 기록과 설정으로 되돌려요.'}</DialogDescription></DialogHeader>
+  <DialogHeader><DialogTitle>{success?'백업을 복원했어요.':'백업에서 복원'}</DialogTitle><DialogDescription>{success?'복원 내용을 저장했어요. 다른 기기에서도 이어갈 수 있어요.':'백업 시점의 기록·설정으로 교체해요.'}</DialogDescription></DialogHeader>
   <p className="small-note" data-backup-step role="status">{conflict?'복원 결과 확인 필요':reloadRequired?'최신 기록 확인 필요':step}</p>
   <div className="dialog-scroll">{success?<><p role="status">{after?.words.toLocaleString()}개 단어 기록 · {after?.sessions.toLocaleString()}개 회차를 복원했어요.</p></>:<>
    <label className="backup-file">하루단어 JSON 백업<input type="file" accept=".json,application/json" disabled={busy||working||reading||conflict||reloadRequired||!caps} onChange={e=>void select(e.target.files?.[0])}/></label>

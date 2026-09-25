@@ -21,7 +21,7 @@ export function GrammarCatalog({ progress, headingRef, onOpen, filter, onFilter 
     <div className="grammar-filters" role="group" aria-label="수업 표시">
       {GRAMMAR_FILTERS.map(([value, label]) => <button key={value} ref={value === 'all' ? allFilter : undefined} aria-pressed={filter === value} onClick={() => onFilter(value)}>{label}<span>{counts[value]}</span></button>)}
     </div>
-    <p className="grammar-filter-result small-note" role="status">{filter === 'all' ? '원하는 수업부터 시작하세요. 하루 목표와 별도예요.' : `${filter === 'continue' ? '이어 할' : '다시 확인할'} 수업 ${visibleCount}개`}</p>
+    <p className="grammar-filter-result small-note" role="status">{filter === 'all' ? '자유롭게 선택 · 하루 목표와 별도' : `${filter === 'continue' ? '이어 할' : '다시 확인할'} 수업 ${visibleCount}개`}</p>
     {groups.map(({ title, number, entries }) => {
       return <section key={title} className="grammar-group"><h3><span aria-hidden="true">{number}</span>{title}</h3><div className="grammar-grid">{entries.map(({ lesson, complete, continuing, review }) =>
         <button className="grammar-tile" key={lesson.id} onClick={() => onOpen(lesson.id)}>
@@ -32,6 +32,6 @@ export function GrammarCatalog({ progress, headingRef, onOpen, filter, onFilter 
       )}</div></section>;
     })}
     {!visibleCount && <div className="grammar-empty"><p>{filter === 'continue' ? '이어 할 수업이 없어요.' : '다시 확인할 수업이 없어요.'}</p><button className="secondary-button" onClick={() => { onFilter('all'); allFilter.current?.focus(); }}>전체 수업 보기<ArrowRight size={18} aria-hidden="true" /></button></div>}
-    <details className="grammar-guide"><summary>수업 진행 안내</summary><p>관사·조동사처럼 큰 품사에 속하는 표기도 함께 배워요. 수업을 마쳐도 완전히 이해했다는 뜻은 아니에요. 도움받은 문제는 ‘다시 확인’으로 남아요.</p></details>
+    <details className="grammar-guide"><summary>수업 진행 안내</summary><p>처음 답·도움 사용은 따로 기록해요. 도움받은 문제는 ‘다시 확인’으로 남아요.</p></details>
   </section>;
 }

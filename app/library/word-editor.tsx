@@ -107,7 +107,7 @@ export function WordEditor({
             다른 뜻 추가
           </button>
         </div>
-        <p className="small-note">뜻별 성적은 따로 저장해요. 다른 뜻은 추가해 주세요.</p>
+        <p className="small-note">다른 뜻은 추가해요. 성적도 따로 저장돼요.</p>
       </section>
       <label>
         {senseKey ? "선택한 학습 뜻" : "새로 학습할 뜻"}
@@ -167,7 +167,7 @@ export function WordEditor({
           </button>
         ))}
       </div>
-      <p className="small-note">친숙도를 바꿔도 회상·문장 성적은 유지해요. 다시 헷갈리는 단어는 재학습에 넣어요.</p>
+      <p className="small-note">성적은 유지돼요. 헷갈리는 단어는 재학습에 넣어요.</p>
       <label className="check-label">
         <input
           type="checkbox"

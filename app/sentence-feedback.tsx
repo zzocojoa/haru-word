@@ -3,6 +3,7 @@ import {Loader2,Sparkles} from 'lucide-react';
 import {GRAMMAR_TEXT,MEANING_USAGE_TEXT,type SentenceFeedback} from '@/lib/sentence-feedback';
 import {useSentenceFeedback} from './study/use-sentence-feedback';
 import {FeedbackIssueNotice} from './feedback-issue-notice';
+import {AiUseNotice} from './ai-use-notice';
 import {FeedbackAttribution} from './feedback-attribution';
 
 export function FeedbackDetail({feedback}:{feedback:SentenceFeedback}){
@@ -21,12 +22,11 @@ export function SentenceFeedbackPanel({sessionId,entryId,sentence,feedback,busy,
  const unchanged=feedback?.original===sentence.trim();
  return <section className="ai-feedback-panel" aria-label="AI 문장 점검">
   <div className="ai-feedback-heading"><h3><Sparkles size={17}/> AI 문장 점검</h3><span className="small-note">선택</span></div>
-  <p className="small-note">Google로 먼저 점검하고, 응답 실패 시 Groq로 자동 전환해요. 문장과 목표 단어·뜻을 전송하며, Google 무료 API의 입력·응답은 서비스 개선에 사용될 수 있어요. 개인정보는 빼고 작성해 주세요.</p>
+  <AiUseNotice />
   <button type="button" className="secondary-button" disabled={busy||pending||!sentence.trim()||unchanged} onClick={check}>{pending?<><Loader2 size={16} className="spin"/>문장을 확인하고 있어요</>:unchanged?'이 문장의 교정 결과가 있어요':'AI로 문장 점검'}</button>
-  <p className="small-note">앱 자체 횟수 제한 없이 사용해요. 두 서비스 모두 사용할 수 없으면 자기 점검으로 계속할 수 있어요.</p>
   <FeedbackIssueNotice issue={error}/>
   {feedback&&<div aria-live="polite">
-   {!unchanged&&<p className="notice">문장이 바뀌었어요. 아래 결과는 수정 전 원문에 대한 의견입니다.</p>}
+   {!unchanged&&<p className="notice">수정 전 문장의 교정 결과예요.</p>}
    <FeedbackDetail feedback={feedback}/>
    {feedback.correctedSentence&&feedback.correctedSentence!==sentence.trim()&&<button className="text-button" disabled={busy||pending} onClick={()=>onUse(feedback.correctedSentence)}>교정 제안을 내 문장에 적용</button>}
   </div>}

@@ -16,7 +16,7 @@ export function SessionCheckpoint({
       <h2>한 묶음을 마쳤어요.</h2>
       <p className="muted">
         전체 {s.ids.length}개 · 미점검 {reviewRemaining(s)}개.
-        건너뛴 항목은 완료로 처리하지 않고 다음 묶음에서 이어가요.
+        건너뛴 항목은 미완료로 남아 다음 묶음에서 이어가요.
       </p>
       <div className="button-row batch-actions">
         <button

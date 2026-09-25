@@ -92,15 +92,13 @@ export function TodayOverview({
               ? "남은 단어를 이어서"
               : "오늘 목표 " + state.settings.dailyGoal + "개"}
         </h2>
-        <p className="muted">
+        {(!finished || remaining > 0) && <p className="muted">
           {finished
-            ? remaining
-              ? `오늘 ${assignedIds.length}개 학습을 마쳤어요. 목표 ${state.settings.dailyGoal}개까지 ${remaining}개를 더 배울 수 있어요.`
-              : "다시 보기와 재학습도 할 수 있어요."
+            ? `목표까지 ${remaining}개 더 배울 수 있어요.`
             : unfinished
               ? `기록 완료 ${checked}/${assignedIds.length}개${remaining ? ` · 회차 후 ${remaining}개 추가 가능` : ''}`
               : dailyAllocationRule(state.settings.dailyGoal, state.settings.newWordsPaused)}
-        </p>
+        </p>}
       </div>
       <div className="daily-metrics">
         <div>
@@ -148,7 +146,7 @@ export function TodayOverview({
           {remaining > 0 && (
             <p className="small-note">
               {suggestions.length
-                ? `기존 ${assignedIds.length}개 기록은 그대로 두고, 추가 단어를 새 회차에 저장해요.${suggestions.length < remaining ? " 현재 배정 가능한 단어부터 시작해요." : ""}`
+                ? `기존 기록 유지 · 추가 단어는 새 회차에 저장${suggestions.length < remaining ? " · 가능한 단어부터 배정" : ""}`
                 : "현재 추가할 수 있는 단어가 없어요. 신규 단어 쉬기 설정이나 학습 수준·친숙도를 확인해 주세요."}
             </p>
           )}
@@ -171,7 +169,7 @@ export function TodayOverview({
             <RotateCcw size={17} />
             {repeating ? "오늘 단어 다시 학습 이어서" : "오늘 단어 다시 학습"}
           </button>
-          <p className="small-note">재학습은 기존 성적을 유지하고 별도 회차로 저장해요.</p>
+          <p className="small-note">기존 성적은 유지돼요.</p>
           <button
             className="text-button"
             disabled={busy}
@@ -211,11 +209,11 @@ export function TodayOverview({
         <HelpDetails title="오늘 배정 기준">
         <p className="today-targets-note">
           {assigned
-            ? '아래는 오늘 날짜에 배정된 전체 목록이에요. 이전에 본 단어도 오늘의 복습 목표에 포함돼요.'
-            : state.settings.newWordsPaused ? '오늘 시작하면 아래 복습 단어가 배정돼요.' : '오늘 시작하면 아래 단어가 배정돼요. 새 단어 자리를 확보하고, 복습은 보완할 단어와 오래 기다린 단어부터 골라요.'}
+            ? '오늘 배정 목록이며, 이전 단어도 복습으로 포함돼요.'
+            : state.settings.newWordsPaused ? '오늘 시작하면 아래 복습 단어가 배정돼요.' : '시작하면 배정돼요. 새 단어와 보완·대기 복습을 함께 골라요.'}
           {assigned && remaining > 0 && ` 목표까지 ${remaining}개는 아직 배정 전이에요.`}
         </p>
-        <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 중에는 복습만 배정해요.' : '한쪽 후보가 부족하면 다른 쪽으로 채워요.'} 이미 배정한 단어는 바꾸지 않으며, 목표를 늘리면 오늘 전체 비율을 보고 추가해요.</p>
+        <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 중에는 복습만 배정해요.' : '한쪽 후보가 부족하면 다른 쪽으로 채워요.'} 목표를 늘려도 기존 배정은 유지해요. 추가·재학습은 새 회차에 저장해요.</p>
         <p className="small-note">기록 완료는 회상·문장 결과를 남긴 수예요. 독립 성공과는 달라요. 월말 점검이 남아 있어도 다음 날 학습할 수 있어요.</p>
         </HelpDetails>
         <div className="target-filters" role="group" aria-label="오늘 단어 필터">
@@ -250,7 +248,7 @@ export function TodayOverview({
       {pendingReviewIds.length > 0 && (
         <details className="pending-daily-review notes-details" onToggle={e => setShowPendingReview(e.currentTarget.open)}>
           <summary>대기 중인 복습 {pendingReviewIds.length}개</summary>
-          <p className="small-note">오늘 목록과 추가 배정 예정에 없는 복습이에요. 기록을 유지하고 다음 배정에서 다시 골라요. 주간·월말 점검과는 별개예요.</p>
+          <p className="small-note">오늘 미배정 복습 · 다음 배정에서 다시 골라요. 주간·월말 점검과 별도예요.</p>
           {showPendingReview && <ul aria-label="대기 중인 복습 단어" tabIndex={0}>
             {pendingReviewIds.slice(0, pendingLimit).map(id => {
               const word = wordById.get(id)!;

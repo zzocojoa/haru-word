@@ -24,8 +24,8 @@ export default function BackupExportDialog({state,date,now,onClose}:{state:State
   })();return()=>controller.abort();
  },[state,now]);
  const ready=result?.state===state?result:null;
- return <Dialog open onOpenChange={v=>{if(!v)onClose();}}><DialogContent className="framed-dialog" onCloseAutoFocus={e=>{e.preventDefault();document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus();}}><DialogHeader><DialogTitle>전체 백업</DialogTitle><DialogDescription>학습 기록과 설정을 하나의 JSON 파일로 보관해요.</DialogDescription></DialogHeader>
- <div className="dialog-scroll">{ready?<><p>단어 기록 {Object.keys(state.progress).length.toLocaleString()}개 · 회차 {Object.keys(state.sessions).length.toLocaleString()}개</p><p>파일 크기 {(ready.bytes/1_000_000).toFixed(2)} MB</p><p role={ready.error?'alert':'status'} className={ready.error?'backup-error':'small-note'}>{ready.error||'현재 앱에서 복원 가능한 백업이에요.'}</p></>:<p role="status">백업 크기와 복원 가능 여부를 확인하고 있어요.</p>}</div>
+ return <Dialog open onOpenChange={v=>{if(!v)onClose();}}><DialogContent className="framed-dialog" onCloseAutoFocus={e=>{e.preventDefault();document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus();}}><DialogHeader><DialogTitle>전체 백업</DialogTitle><DialogDescription>학습 기록·설정을 JSON 파일로 보관해요.</DialogDescription></DialogHeader>
+ <div className="dialog-scroll">{ready?<><p>단어 기록 {Object.keys(state.progress).length.toLocaleString()}개 · 회차 {Object.keys(state.sessions).length.toLocaleString()}개</p><p>파일 크기 {(ready.bytes/1_000_000).toFixed(2)} MB</p><p role={ready.error?'alert':'status'} className={ready.error?'backup-error':'small-note'}>{ready.error||'현재 앱에서 복원 가능한 백업이에요.'}</p></>:<p role="status">파일 크기·복원 가능 여부 확인 중</p>}</div>
  <div className="dialog-actions"><button className="primary-button full" disabled={!ready} onClick={()=>{if(ready){download('haru-words-backup-'+date+'.json',ready.raw);onClose();}}}>{ready?.error?'원본 보관용 다운로드':'백업 파일 다운로드'}</button></div>
  </DialogContent></Dialog>;
 }

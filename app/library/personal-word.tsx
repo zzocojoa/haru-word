@@ -33,7 +33,7 @@ export function PersonalWord({
       <DialogHeader>
         <DialogTitle>나에게 필요한 단어 추가</DialogTitle>
         <DialogDescription>
-          Oxford 공식 목록과 구분하여 ‘개인 추가’로 저장해요.
+          공식 목록과 별도로 ‘개인 추가’로 저장해요.
         </DialogDescription>
       </DialogHeader>
       <fieldset className="dialog-scroll editor-fields" disabled={submitting}>

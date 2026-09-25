@@ -69,7 +69,7 @@ export function LearnStage({
           placeholder="영한사전에서 확인한 한국어 뜻"
         />
         <p className="small-note">
-          참고 풀이에서 오늘의 품사에 맞는 뜻 하나를 확인해 주세요.
+          오늘 품사에 맞는 뜻 하나를 골라요.
         </p>
       </div>
       <div className="example-box">

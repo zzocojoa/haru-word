@@ -44,7 +44,7 @@ export function SentenceStage({
 }: SentenceStageProps) {
   return (
     <>
-      <p className="muted">나의 하루와 연결해 짧은 문장을 말하고 써 보세요.</p>
+      <p className="muted">내 이야기로 한 문장을 써 보세요.</p>
       <div className="sentence-target">
         <h3 lang="en">
           {word.word}

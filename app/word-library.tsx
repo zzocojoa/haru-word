@@ -52,6 +52,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   const leave = useRef<GrammarLeave | null>(null), listPosition = useRef(0), focusReturn = useRef<HTMLElement | null>(null);
   const listPanel = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null), pendingPosition = useRef<number | null>(null);
+  const pendingSearchFocus = useRef(false);
   const registerLeave = useCallback((fn: GrammarLeave) => { leave.current = fn; return () => { if (leave.current === fn) leave.current = null; }; }, []);
   const flush = useCallback(async () => await leave.current?.() ?? true, []);
   const registerOuterLeave = props.persistence.registerLeave;
@@ -60,17 +61,24 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
     if (pendingPosition.current === null) return;
     const top = pendingPosition.current;
     pendingPosition.current = null;
+    const focusSearch = pendingSearchFocus.current;
+    pendingSearchFocus.current = false;
     // The tab trigger's native pointer focus runs after the state change.
     // Restore inside the now-visible panel on the next frame, and cancel stale
     // restoration if another navigation supersedes this one.
-    const frame = requestAnimationFrame(() => {
+    const restore = () => {
       const target = view === 'words'
-        ? focusReturn.current?.isConnected && listPanel.current?.contains(focusReturn.current)
+        ? !focusSearch && focusReturn.current?.isConnected && listPanel.current?.contains(focusReturn.current)
           ? focusReturn.current : listPanel.current?.querySelector<HTMLInputElement>('input[type="text"], input:not([type])')
         : heading.current;
       target?.focus({ preventScroll: true });
       window.scrollTo({ top, behavior: 'instant' });
-    });
+    };
+    // Returning to filtered words is an explicit destination, not history's
+    // previous help button. Apply it after NavigationProvider's two-frame restore.
+    let frame = requestAnimationFrame(focusSearch
+      ? () => { frame = requestAnimationFrame(() => { frame = requestAnimationFrame(restore); }); }
+      : restore);
     return () => cancelAnimationFrame(frame);
   }, [view, lessonId]);
   async function switchView(next: string) {
@@ -89,7 +97,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
     {props.grammarEnabled && <TabsList className="library-mode-tabs" aria-label="단어장 학습 종류"><TabsTrigger value="words">단어 목록</TabsTrigger><TabsTrigger value="grammar">품사·문장 연습</TabsTrigger></TabsList>}
     <TabsContent ref={listPanel} value="words" forceMount hidden={view !== 'words'} onFocusCapture={e => { if (e.currentTarget.contains(e.target)) focusReturn.current = e.target as HTMLElement; }}><WordList {...props} pos={pos} setPos={setPos} page={page} setPage={setPage} onHelp={props.grammarEnabled ? (id, button) => { focusReturn.current = button; setHelp(id); } : undefined} /></TabsContent>
     {props.grammarEnabled && <TabsContent value="grammar" forceMount hidden={view !== 'grammar'}>
-      {lesson ? <GrammarLesson key={lesson.id} lesson={lesson} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { focusReturn.current = null; setPos(lesson.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} /> : <GrammarCatalog progress={props.state.grammar ?? {}} headingRef={heading} filter={grammarFilter} onFilter={setGrammarFilter} onOpen={id => void openLesson(id)} />}
+      {lesson ? <GrammarLesson key={lesson.id} lesson={lesson} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { pendingSearchFocus.current = true; focusReturn.current = null; setPos(lesson.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} /> : <GrammarCatalog progress={props.state.grammar ?? {}} headingRef={heading} filter={grammarFilter} onFilter={setGrammarFilter} onOpen={id => void openLesson(id)} />}
     </TabsContent>}
     <Dialog open={!!help} onOpenChange={open => { if (!open) setHelp(null); }}><DialogContent className="framed-dialog grammar-help" onCloseAutoFocus={event => { event.preventDefault(); if (!lessonId) focusReturn.current?.focus({ preventScroll: true }); }}>
       {help && (() => { const l = LESSON_MAP.get(help)!; return <><DialogHeader><DialogTitle>{l.title} · {l.pos}</DialogTitle><DialogDescription>{l.role}</DialogDescription></DialogHeader><div className="dialog-scroll"><p lang="en">{l.examples[0][0]}</p><p>{l.examples[0][1]}</p><p className="small-note">학습용 작성 예문</p></div><div className="dialog-actions"><button className="primary-button" onClick={() => void openLesson(help)}>이 품사 배우기<ArrowRight size={18} /></button></div></>; })()}

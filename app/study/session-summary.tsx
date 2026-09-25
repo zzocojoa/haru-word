@@ -50,7 +50,7 @@ export function SessionSummary({
       </h2>
       <p className="muted">
         {s.finished
-          ? "회차를 마쳤어요."
+          ? "회차 종료"
           : "이 위치에서 다음에 이어갈 수 있어요."}{" "}
         미측정은 성공·실패로 계산하지 않아요.
       </p>
@@ -80,8 +80,7 @@ export function SessionSummary({
       <p className="small-note">독립 성공 {counts.successful} · 보완 필요 {counts.needsHelp} · 미측정 {counts.unmeasured}</p>
       {s.retry.length > 0 && (
         <p className="notice">
-          재시도 {s.retry.length}개가 남았어요. 다른 단어 두 개를 거칠 수 없었던
-          항목은 ‘도움 필요’를 유지하고 다음 학습에 우선 배정해요.
+          재시도 {s.retry.length}개는 ‘도움 필요’로 남아 다음 학습에 우선 배정돼요.
         </p>
       )}
       <div className="button-row">

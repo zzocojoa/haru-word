@@ -1,5 +1,7 @@
 # 학습 앱 검증
 
+- `node tests/copy-density.cjs`: 기준 커밋과 현재 안내 컴포넌트를 같은 CSS로 비교한다. 4개 폭 × 글자 100/200% × 3개 화면에서 높이 증가·가로 넘침과 AI 필수 안내 누락을 검사한다. 결과와 이미지는 `outputs/copy-density/`에 저장한다. 정적 렌더링 비교이며 실제 화면 동작은 기존 브라우저 회귀 검사로 확인한다.
+
 - `study-clock-race-qa.cjs`: 실제 시간 훅의 중복 재시도, 화면 복귀 이벤트 묶음, 숨김 시 취소, 늦은 이전 응답, unmount를 검사합니다. `CLOCK_BASELINE=1`은 수정 전 구현 전용 재현 모드입니다. 수정 전 결과는 `outputs/clock-reliability/before.json`이며 일반 모드는 기준 파일 없이 실행합니다.
 - `client-diagnostics.test.mjs`: 진단 허용 필드, 비공개 입력 제외, 오류/취소/시간 초과 구분, 중복 종료 및 최대 120개 제한을 검사합니다.
 - `clock-continuity-qa.cjs`: 10초 시간 동기화 실패와 전체 탭 복구, 진단 다운로드, 자정과 연결 복구, 두 기기의 동일 초안 재개·revision 충돌·입력 백업·최신 기록 확인을 검사합니다. 가상 로컬 계정만 사용하며 Google 호출은 없습니다.

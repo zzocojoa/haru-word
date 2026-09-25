@@ -101,8 +101,8 @@ export function RecallStage({
               : word.word}
           </h3>
           <p className="small-note">
-            의미와 품사가 맞는 다른 표현도 인정해요. 직접 비교하여 기록합니다.
-            도움이 필요하면 다른 단어 두 개 뒤 다시 시도해요.
+            뜻·품사가 맞으면 다른 표현도 인정해요.
+            도움받은 항목은 다른 단어 두 개 뒤 재시도해요.
           </p>
           <div className="button-row study-actions">
             <button

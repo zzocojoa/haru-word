@@ -59,8 +59,7 @@ export function FamiliarityAssessment({
             ))}
           </div>
           <p className="small-note">
-            같은 표시가 20개 중 14개 이상이면 수준 조정을 안내해요. 이 앱의 탐색
-            기준이며, 정식 CEFR 시험이나 말하기 능력 판정이 아닙니다.
+            정식 CEFR 시험·말하기 판정이 아니에요. 같은 표시가 14개 이상이면 수준 조정을 제안해요.
           </p>
           <div className="button-row">
             <button
@@ -128,8 +127,7 @@ export function FamiliarityAssessment({
         <>
           <h2>뜻을 떠올리고, 확인해 보세요.</h2>
           <p className="muted">
-            먼저 나의 생각을 남기고 풀이와 비교해요. 말하기·문장 능력은 따로
-            확인합니다.
+            표시를 고른 뒤 뜻을 비교해요.
           </p>
           {assessmentWord && (
             <FamiliarityCard
@@ -144,7 +142,7 @@ export function FamiliarityAssessment({
             />
           )}
           <div className="progress-caption">
-            <span>범위 탐색용 표본 · 정식 수준 시험이 아니에요</span>
+            <span>정식 수준 시험이 아니에요</span>
             <span>
               {assessment.index} / {assessment.ids.length}
             </span>
