@@ -54,7 +54,7 @@ function observe(page){
   for(const id of extra.ids){await p.getByLabel('내 영어 문장',{exact:true}).fill('I use '+words.find(w=>w.id===id).word+' in a sentence.');await p.getByRole('button',{name:'문장을 완성했어요',exact:false}).click();await saved();}
   await p.getByRole('heading',{name:'오늘의 기록을 남겼어요.',exact:true}).waitFor();data=await get();assert.ok(data.state.sessions[topupId].finished);assert.deepEqual(data.state.sessions[sid],first);
   await p.getByRole('button',{name:'학습 홈으로',exact:false}).click();assert.equal(await p.getByRole('button',{name:/추가 \d+개 학습하기/}).count(),0);assert.equal(await p.locator('.today-words>.today-word-row').count(),10);
-  await p.getByRole('button',{name:'오늘 단어 다시 보기',exact:true}).click();assert.equal(await p.getByRole('dialog').locator('.review-word-tabs button').count(),10);await p.getByRole('button',{name:'Close',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});
+  await p.getByRole('button',{name:'오늘 단어 다시 보기',exact:true}).click();await p.getByRole('combobox',{name:'다시 볼 단어 선택'}).click();assert.equal(await p.getByRole('option').count(),10);await p.keyboard.press('Escape');await p.getByRole('button',{name:'Close',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});
   await p.getByRole('tab',{name:'주간·월말 점검',exact:true}).click();assert.deepEqual(await p.locator('.review-count>b').allTextContents(),['10','10']);
   checks.push('finishing the extra seven yields ten unique daily targets, all ten review cards and weekly/monthly targets, with the original results unchanged');
 

@@ -50,5 +50,6 @@ module.exports = [
   "ui-plan-contract-qa.cjs",
   "ui-refresh-qa.cjs",
   "ui-density-qa.cjs",
+  "ui-continuity-qa.cjs",
   "workflow-qa.cjs"
 ];

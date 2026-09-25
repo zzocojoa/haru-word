@@ -4,7 +4,7 @@ import { countDailyOrigins, dailyAllocationRule } from "@/lib/learning/daily-all
 import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
 import { useMemo, useState } from "react";
 import { HelpDetails, StatusBadge } from "../study-ui";
-import { ArrowRight, BookOpen, RotateCcw } from "lucide-react";
+import { ArrowRight, BookOpen, RotateCcw, Sparkles } from "lucide-react";
 import { LevelSelect } from "../ui";
 import type { LearningViewProps } from "./types";
 type TodayOverviewProps = Pick<
@@ -30,6 +30,8 @@ type TodayOverviewProps = Pick<
   | "repeating"
   | "setCorrectingSession"
   | "setTab"
+  | "setSettings"
+  | "beginAssessment"
   | "initialAssessment"
   | "monthlyRepair"
   | "correctMonthlyCarryover"
@@ -56,6 +58,8 @@ export function TodayOverview({
   repeating,
   setCorrectingSession,
   setTab,
+  setSettings,
+  beginAssessment,
   initialAssessment,
   monthlyRepair,
   correctMonthlyCarryover,
@@ -147,7 +151,7 @@ export function TodayOverview({
             <p className="small-note">
               {suggestions.length
                 ? `기존 기록 유지 · 추가 단어는 새 회차에 저장${suggestions.length < remaining ? " · 가능한 단어부터 배정" : ""}`
-                : "현재 추가할 수 있는 단어가 없어요. 신규 단어 쉬기 설정이나 학습 수준·친숙도를 확인해 주세요."}
+                : "현재 추가할 수 있는 단어가 없어요."}
             </p>
           )}
           <button
@@ -199,6 +203,10 @@ export function TodayOverview({
           <ArrowRight size={17} />
         </button>
       )}
+      {(!finished || remaining > 0) && !unfinished && !initialAssessment && !suggestions.length && <div className="no-target-actions">
+        <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 설정을 확인해 주세요.' : '수준을 바꾸거나 친숙도를 다시 확인해 보세요.'}</p>
+        <div className="button-row"><button className="secondary-button" disabled={busy} onClick={()=>setSettings(true)}>배정 설정 확인</button><button className="text-button" disabled={busy} onClick={()=>void beginAssessment()}>친숙도 확인</button></div>
+      </div>}
       <div className="today-words" role="region" aria-labelledby="today-targets-heading">
         <header>
           <h3 id="today-targets-heading">{month}월 {day}일 목표 단어</h3>
@@ -220,7 +228,7 @@ export function TodayOverview({
           <button type="button" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>전체 {visibleIds.length}</button>
           <button type="button" aria-pressed={filter === 'remaining'} onClick={() => setFilter('remaining')}>남은 단어 {visibleIds.length - checked}</button>
         </div>
-        {filteredIds.length === 0 && <p className="empty-note" role="status">남은 단어가 없어요.</p>}
+        {filteredIds.length === 0 && <p className="empty-note" role="status">{visibleIds.length ? '남은 단어가 없어요.' : '배정할 단어가 없어요.'}</p>}
         {filteredIds.map((id) => {
           const i = visibleIds.indexOf(id);
           const w = wordById.get(id)!;
@@ -232,9 +240,8 @@ export function TodayOverview({
               </span>
               <div>
                 <b lang="en">{w.word}</b>
-                <small>
-                  {POS[w.pos]} · {w.personal ? "개인 추가" : w.level}
-                </small>
+                <small>{POS[w.pos]} · {w.personal ? "개인 추가" : w.level}</small>
+                <span className={`daily-origin ${origins.byId[id] === 'returning' ? 'returning' : 'new'}`}>{origins.byId[id] === 'returning' ? <RotateCcw size={12} aria-hidden="true"/> : <Sparkles size={12} aria-hidden="true"/>}{origins.byId[id] === 'returning' ? '복습' : '새 학습'}</span>
               </div>
               <div className="today-word-status">
                 {status.recordStatus && <StatusBadge tone={RECORD_STATUS_DISPLAY[status.recordStatus].tone}>{RECORD_STATUS_DISPLAY[status.recordStatus].label}</StatusBadge>}

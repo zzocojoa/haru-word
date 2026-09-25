@@ -37,7 +37,7 @@ import {
 } from "@/lib/learning";
 import { groupJournalSessions, journalSessionLabel } from "@/lib/learning-journal";
 import { ArrowRight, NotebookPen } from "lucide-react";
-import { memo, useMemo, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import { FeedbackDetail } from "../sentence-feedback";
 import { SessionRecords } from "../session-records";
 import { RecordActions } from "./record-actions";
@@ -65,14 +65,17 @@ export function LearningLog({
   onReview,
   onRestoreOpen,
   onCorrectDate,
+  onStudyHome,
 }: Props & {
   date: string;
   now: () => number;
   onReview: (date: string) => void;
   onRestoreOpen: () => void;
   onCorrectDate: (id: string) => void;
+  onStudyHome: () => void;
 }) {
   const [selected, setSelected] = useState<"all" | Kind>("all");
+  const filterRef = useRef<HTMLButtonElement>(null);
   const [limit, setLimit] = useState(LOG_PAGE_SIZE);
   const [openDate, setOpenDate] = useState("");
   const [openSession, setOpenSession] = useState("");
@@ -81,6 +84,12 @@ export function LearningLog({
     [state.sessions, selected],
   );
   const sessionCount = list.reduce((count, day) => count + day.sessions.length, 0);
+  function changeFilter(value: string) {
+    setSelected(value as "all" | Kind);
+    setLimit(LOG_PAGE_SIZE);
+    setOpenDate("");
+    setOpenSession("");
+  }
   return (
     <section className="wide-panel">
       <div className="section-heading">
@@ -89,14 +98,9 @@ export function LearningLog({
       </div>
       <Select
         value={selected}
-        onValueChange={(v) => {
-          setSelected(v as "all" | Kind);
-          setLimit(LOG_PAGE_SIZE);
-          setOpenDate("");
-          setOpenSession("");
-        }}
+        onValueChange={changeFilter}
       >
-        <SelectTrigger className="journal-filter" aria-label="기록 종류 필터">
+        <SelectTrigger ref={filterRef} className="journal-filter" aria-label="기록 종류 필터">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -111,7 +115,7 @@ export function LearningLog({
         <div className="empty-state">
           <NotebookPen size={32} />
           <h3>{selected === "all" ? "첫 학습 기록을 기다리고 있어요." : "이 종류의 학습 기록이 아직 없어요."}</h3>
-          <p>{selected === "all" ? "오늘의 단어를 배우면 이곳에 기록이 쌓여요." : "다른 종류를 선택하면 이전 기록을 볼 수 있어요."}</p>
+          {selected === "all" ? <button className="secondary-button" onClick={onStudyHome}>오늘의 학습으로 <ArrowRight size={16}/></button> : <button className="secondary-button" onClick={() => { changeFilter("all"); filterRef.current?.focus(); }}>전체 기록 보기</button>}
         </div>
       ) : (
         <Accordion

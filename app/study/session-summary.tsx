@@ -1,6 +1,6 @@
 "use client";
 import { exportLog } from "@/lib/learning";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, CircleDashed } from "lucide-react";
 import { SessionRecords } from "../session-records";
 import { download } from "../ui";
 import { sessionCounts } from '@/lib/learning-display';
@@ -38,8 +38,8 @@ export function SessionSummary({
   const counts = sessionCounts(s);
   return (
     <section className="learning-panel session-summary">
-      <div className="success-icon">
-        <Check />
+      <div className={saved ? "success-icon" : "summary-pending-icon"} aria-hidden="true">
+        {saved ? <Check /> : <CircleDashed />}
       </div>
       <h2>
         {saved

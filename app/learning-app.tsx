@@ -344,6 +344,8 @@ function LearningScreens({
                       repeating={repeating}
                       setCorrectingSession={setCorrectingSession}
                       setTab={setTab}
+                      setSettings={setSettings}
+                      beginAssessment={beginAssessment}
                       initialAssessment={initialAssessment}
                       monthlyRepair={monthlyRepair}
                       correctMonthlyCarryover={correctMonthlyCarryover}
@@ -423,6 +425,7 @@ function LearningScreens({
                 onReview={setReviewDate}
                 onRestoreOpen={openRestore}
                 onCorrectDate={setCorrectingSession}
+                onStudyHome={() => setTab("today")}
               />
             )}
           </TabsContent>
