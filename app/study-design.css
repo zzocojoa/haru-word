@@ -4364,8 +4364,9 @@ footer {
     display: flex;
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    margin-inline: auto;
     align-items: center;
     justify-content: center;
     width: 88px;
@@ -4379,7 +4380,15 @@ footer {
   }
   .sheet-handle>span { width: 36px; height: 4px; border-radius: 4px; background: var(--caption); opacity: .55; }
   .sheet-handle:active { cursor: grabbing; }
-  .sheet-dialog[data-sheet-dragging] { user-select: none; }
+  .sheet-handle[data-disabled] { cursor: default; }
+  .sheet-dialog[data-sheet-motion] {
+    animation: none;
+    transition: none;
+    transform: translateY(var(--sheet-offset, 0px));
+    user-select: none;
+  }
+  .sheet-dialog[data-sheet-touched][data-state=open] { animation: none; transition: none; }
+  .sheet-dialog[data-sheet-dismissed][data-state] { animation: none; }
   .sheet-dialog[data-state=closed] { animation-name: sheet-dismiss; }
 }
 @keyframes sheet-dismiss { to { transform: translateY(100%); opacity: 0; } }

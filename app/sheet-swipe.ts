@@ -2,23 +2,45 @@ import { completesSheetSwipe, sheetSwipeDirection } from '@/lib/sheet-swipe';
 
 const controls = 'input,textarea,select,button,a,[contenteditable=true],[role=combobox],[role=listbox],[role=menu]';
 const visible = (el: HTMLElement) => !!el.getClientRects().length && !el.closest('[aria-hidden=true],[hidden]');
+type Close = (beforeClose?: () => Promise<boolean>) => Promise<boolean>;
 
 /** Header/handle only. Never converts the content's scroll into dismissal. */
-export function installSheetSwipe(element: HTMLElement, close: () => Promise<boolean>, blocked: () => boolean) {
-  let drag: { id: number; x: number; y: number; dx: number; dy: number; moving: boolean; handle: boolean; height: number; transform: string; transition: string; base: string } | undefined;
-  let timer = 0, settling = false, disposed = false, suppressClickUntil = 0;
-  function reset() {
-    clearTimeout(timer);
-    if (drag) { element.style.transform = drag.transform; element.style.transition = drag.transition; }
-    drag = undefined; settling = false;
-    element.removeAttribute('data-sheet-dragging');
+export function installSheetSwipe(element: HTMLElement, close: Close, blocked: () => boolean, dirty: () => boolean) {
+  let drag: { id: number; x: number; y: number; height: number; moving: boolean } | undefined;
+  let animation: Animation | undefined;
+  let offset = 0, settling = false, disposed = false;
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function position(y: number) {
+    offset = y;
+    element.style.setProperty('--sheet-offset', `${y}px`);
+    element.setAttribute('data-sheet-touched', '');
+    element.setAttribute('data-sheet-motion', '');
   }
-  function home() {
-    if (!drag) return;
-    element.style.transition = 'transform 160ms ease-out';
-    element.style.transform = drag.base;
+  function reset() {
+    animation?.cancel(); animation = undefined;
+    drag = undefined; settling = false; offset = 0;
+    element.style.removeProperty('--sheet-offset');
+    for (const attr of ['data-sheet-motion', 'data-sheet-dragging', 'data-sheet-dismissed']) element.removeAttribute(attr);
+  }
+  async function animateTo(y: number, duration: number) {
+    if (!drag || disposed) return false;
+    if (reduced()) { position(y); return true; }
+    const current = element.animate([
+      { transform: `translateY(${offset}px)` }, { transform: `translateY(${y}px)` },
+    ], { duration, easing: 'cubic-bezier(.22, .61, .36, 1)', fill: 'forwards' });
+    animation = current;
+    try {
+      await current.finished;
+      if (disposed || animation !== current || !drag) return false;
+      position(y); current.cancel(); animation = undefined; return true;
+    } catch { return false; } // Touch/viewport cancellation keeps the dialog open.
+  }
+  async function home() {
+    const current = drag;
+    if (!current) return;
     settling = true;
-    timer = window.setTimeout(reset, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 170);
+    await animateTo(0, 180);
+    if (drag === current && !disposed) reset();
   }
   function start(e: TouchEvent) {
     if (drag || settling || blocked() || !matchMedia('(max-width:640px)').matches ||
@@ -33,46 +55,43 @@ export function installSheetSwipe(element: HTMLElement, close: () => Promise<boo
     // Existing left-edge Back owns its 24px strip; these recognizers cannot race.
     if (t.clientX <= 24 || t.clientX >= innerWidth - 24) return;
     e.preventDefault();
-    drag = { id: t.identifier, x: t.clientX, y: t.clientY, dx: 0, dy: 0, moving: false, handle: !!target.closest('[data-sheet-handle]'),
-      height: element.getBoundingClientRect().height, transform: element.style.transform,
-      transition: element.style.transition, base: getComputedStyle(element).transform };
+    drag = { id: t.identifier, x: t.clientX, y: t.clientY, height: element.getBoundingClientRect().height, moving: false };
   }
   function move(e: TouchEvent) {
     if (!drag || settling) return;
     if (e.touches.length !== 1 || blocked()) { reset(); return; }
     const t = [...e.touches].find(t => t.identifier === drag!.id);
     if (!t) { reset(); return; }
-    drag.dx = t.clientX - drag.x; drag.dy = t.clientY - drag.y;
-    const direction = sheetSwipeDirection(drag.dx, drag.dy);
-    if (direction === 'cancel') { reset(); return; }
+    const dx = t.clientX - drag.x, dy = t.clientY - drag.y;
+    const direction = sheetSwipeDirection(dx, dy);
+    if (direction === 'cancel') { void home(); return; }
     if (direction === 'pending') return;
     if (e.cancelable) e.preventDefault();
     drag.moving = true; element.setAttribute('data-sheet-dragging', '');
-    const dy = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : Math.min(drag.dy, drag.height);
-    element.style.transition = 'none';
-    element.style.transform = `translateY(${dy}px) ${drag.base === 'none' ? '' : drag.base}`;
+    position(reduced() ? 0 : Math.min(dy, drag.height));
   }
   async function end(e: TouchEvent) {
     if (!drag || settling) return;
     const t = [...e.changedTouches].find(t => t.identifier === drag!.id);
     if (!t) { reset(); return; }
-    if (!drag.moving) {
-      const tap = drag.handle && Math.max(Math.abs(t.clientX - drag.x), Math.abs(t.clientY - drag.y)) < 10;
-      reset();
-      if (tap) { suppressClickUntil = performance.now() + 500; await close(); }
-      return;
-    }
-    suppressClickUntil = performance.now() + 500;
+    if (!drag.moving) { reset(); return; } // A handle tap is never a close command.
     if (e.cancelable) e.preventDefault();
-    if (blocked() || !completesSheetSwipe(t.clientX - drag.x, t.clientY - drag.y, drag.height)) { home(); return; }
-    // Return the sheet before showing an unsaved-input confirmation.
-    reset(); settling = true;
-    try { await close(); } finally { if (!disposed) reset(); }
+    if (blocked() || !completesSheetSwipe(t.clientX - drag.x, t.clientY - drag.y, drag.height)) { await home(); return; }
+    settling = true;
+    // Restore only when an input-discard question is needed. Clean dismissal
+    // continues from the release position instead of jumping back to the top.
+    if (dirty() && !await animateTo(0, 180)) return;
+    const allowed = await close(async () => {
+      if (!drag || blocked() || disposed) return false;
+      if (!await animateTo(drag.height + 24, 220)) return false;
+      element.setAttribute('data-sheet-dismissed', ''); // No second Radix exit animation.
+      return true;
+    });
+    if (!allowed && !disposed) await home();
   }
   const cancel = () => reset();
   const click = (e: MouseEvent) => {
-    const ghostTap = e.detail !== 0 && performance.now() < suppressClickUntil && e.target instanceof Element && e.target.closest('[data-sheet-handle]');
-    if (settling || drag?.moving || ghostTap) { e.preventDefault(); e.stopPropagation(); }
+    if (settling || drag?.moving) { e.preventDefault(); e.stopPropagation(); }
   };
   element.addEventListener('touchstart', start, { passive: false });
   element.addEventListener('touchmove', move, { passive: false });
@@ -82,7 +101,10 @@ export function installSheetSwipe(element: HTMLElement, close: () => Promise<boo
   window.addEventListener('resize', cancel);
   visualViewport?.addEventListener('resize', cancel);
   return () => {
-    disposed = true; reset();
+    disposed = true;
+    // A closing Radix node can survive until its presence cleanup. Keep its
+    // offscreen pose so disposing the listener cannot flash it back onscreen.
+    if (element.hasAttribute('data-sheet-dismissed')) animation?.cancel(); else reset();
     element.removeEventListener('touchstart', start); element.removeEventListener('touchmove', move);
     element.removeEventListener('touchend', end); element.removeEventListener('touchcancel', cancel);
     element.removeEventListener('click', click, true); window.removeEventListener('resize', cancel);

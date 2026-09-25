@@ -6,7 +6,7 @@ import { useNavigationGuard } from './navigation';
 import { installSheetSwipe } from './sheet-swipe';
 
 type Protection = { dirty: boolean; blocked: boolean };
-type SheetContext = { register: (id: string, value: Protection) => () => void; close: () => Promise<boolean>; blocked: () => boolean; disabled: boolean };
+type SheetContext = { register: (id: string, value: Protection) => () => void; close: (beforeClose?: () => Promise<boolean>) => Promise<boolean>; blocked: () => boolean; dirty: () => boolean; disabled: boolean };
 const Context = createContext<SheetContext | null>(null);
 
 /** UI dismissal only. Saved state and successful submit commands keep their existing paths. */
@@ -20,6 +20,7 @@ export function SheetDialog({ navigationKey, blocked = false, dirty = false, ope
   const latest = useRef({ open, blocked, dirty, onOpenChange });
   useLayoutEffect(() => { latest.current = { open, blocked, dirty, onOpenChange }; });
   const isBlocked = useCallback(() => latest.current.blocked || [...guards.current.values()].some(g => g.blocked), []);
+  const isDirty = useCallback(() => latest.current.dirty || [...guards.current.values()].some(g => g.dirty), []);
   const settle = useCallback((answer: boolean) => {
     pending.current?.resolve(answer); pending.current = null; setConfirm(false);
   }, []);
@@ -28,24 +29,26 @@ export function SheetDialog({ navigationKey, blocked = false, dirty = false, ope
   if (!open && confirm) setConfirm(false);
   const permit = useCallback(async () => {
     if (!alive.current || !latest.current.open || isBlocked()) return false;
-    if (!(latest.current.dirty || [...guards.current.values()].some(g => g.dirty))) return true;
+    if (!isDirty()) return true;
     if (!pending.current) {
       let resolve!: (answer: boolean) => void;
       const promise = new Promise<boolean>(done => { resolve = done; });
       pending.current = { promise, resolve }; setConfirm(true);
     }
     return await pending.current.promise && alive.current && !!latest.current.open && !isBlocked();
-  }, [isBlocked]);
-  const close = useCallback(async () => {
+  }, [isBlocked, isDirty]);
+  const close = useCallback(async (beforeClose?: () => Promise<boolean>) => {
     if (!await permit()) return false;
+    if (beforeClose && !await beforeClose()) return false;
+    if (!alive.current || !latest.current.open || isBlocked()) return false;
     latest.current.onOpenChange?.(false); return true;
-  }, [permit]);
+  }, [permit, isBlocked]);
   const register = useCallback((id: string, value: Protection) => {
     guards.current.set(id, value); setChildrenBlocked([...guards.current.values()].some(g => g.blocked));
     return () => { guards.current.delete(id); setChildrenBlocked([...guards.current.values()].some(g => g.blocked)); };
   }, []);
   const disabled = blocked || childrenBlocked;
-  const context = useMemo(() => ({ register, close, blocked: isBlocked, disabled }), [register, close, isBlocked, disabled]);
+  const context = useMemo(() => ({ register, close, blocked: isBlocked, dirty: isDirty, disabled }), [register, close, isBlocked, isDirty, disabled]);
   useNavigationGuard(changed => !open || !changed.has(navigationKey) ? true : permit());
   return <Context.Provider value={context}>
     <Dialog {...props} open={open} onOpenChange={value => { if (value) onOpenChange?.(true); else void close(); }}>{children}</Dialog>
@@ -66,9 +69,10 @@ export function useSheetProtection(dirty: boolean, blocked = false) {
 export function SheetDialogContent({ children, className = '', ...props }: ComponentProps<typeof DialogContent>) {
   const context = useContext(Context);
   const [element, setElement] = useState<HTMLDivElement | null>(null);
-  useLayoutEffect(() => element && context ? installSheetSwipe(element, context.close, context.blocked) : undefined, [element, context]);
+  const close = context?.close, blocked = context?.blocked, dirty = context?.dirty;
+  useLayoutEffect(() => element && close && blocked && dirty ? installSheetSwipe(element, close, blocked, dirty) : undefined, [element, close, blocked, dirty]);
   return <DialogContent {...props} ref={setElement} className={`sheet-dialog ${className}`}>
-    <button className="sheet-handle" data-sheet-handle type="button" disabled={context?.disabled} aria-label="아래로 쓸거나 눌러 닫기" onClick={() => void context?.close()}><span aria-hidden="true"/></button>
+    <div className="sheet-handle" data-sheet-handle data-disabled={context?.disabled || undefined} aria-hidden="true"><span/></div>
     {children}
   </DialogContent>;
 }

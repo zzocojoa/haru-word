@@ -38,7 +38,7 @@ export function installSwipeBack(navigation: NavigationHistory) {
     const dialogs = [...document.querySelectorAll<HTMLElement>('[role="dialog"], [role="alertdialog"]')].filter(visible);
     if (dialogs.length) {
       const dialog = dialogs.at(-1)!;
-      if (dialog.matches('.sheet-discard-confirm')) return null;
+      if (dialog.matches('.sheet-discard-confirm, [data-sheet-motion]')) return null;
       const bounds = dialog.getBoundingClientRect();
       // Portalled dialogs keep their existing Back/Close and the same save guards.
       return y >= bounds.top && y <= bounds.bottom && (dialog.contains(target) || !!target.closest('[data-slot="dialog-overlay"], [data-slot="alert-dialog-overlay"]')) ? [dialog] : null;
