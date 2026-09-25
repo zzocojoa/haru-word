@@ -12,7 +12,20 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated build, preview, test and audit output; keep authored tests linted.
+    "dist/**",
+    "work/**",
+    "outputs/**",
+    "coverage/**",
+    ".vinext/**",
+    ".wrangler/**",
+    ".sites-runtime/**",
   ]),
+  {
+    // Browser QA runs in Node's CommonJS loader; require() is intentional here.
+    files: ["tests/**/*.cjs"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
+  },
   {
     files: ["components/ui/**/*.{ts,tsx}", "hooks/use-mobile.ts"],
     rules: {

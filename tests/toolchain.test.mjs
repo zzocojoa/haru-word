@@ -15,9 +15,9 @@ const source = `
 
 test('patched toolchain preserves TypeScript configuration values through the legacy CJS loader',()=>{
  const compiled=transformSync(source,path.resolve('work/toolchain-config.cts'));
- const module={exports:{}};
- vm.runInNewContext(compiled.code,{module,exports:module.exports,require:()=>{throw new Error('Unexpected import')}});
- assert.deepEqual(JSON.parse(JSON.stringify(module.exports.result)),{level:'B2',total:3});
+ const cjsModule={exports:{}};
+ vm.runInNewContext(compiled.code,{module:cjsModule,exports:cjsModule.exports,require:()=>{throw new Error('Unexpected import')}});
+ assert.deepEqual(JSON.parse(JSON.stringify(cjsModule.exports.result)),{level:'B2',total:3});
  assert.ok(compiled.map);
 });
 

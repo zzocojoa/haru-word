@@ -98,7 +98,7 @@ export function SettingsDialog({
               })
             }
           />{" "}
-          신규 단어 잠시 쉬기 · 이월만 배정
+          신규 단어 잠시 쉬기 · 복습만 배정
         </label>
         <label>
           주간 점검 요일

@@ -57,7 +57,9 @@ CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
 
 5. 학습 결과
 회상·문장 평가는 학습자의 자기 평가이며 자동 문법 판정이나 정식 CEFR 시험이 아닙니다.
-AI 문장 점검 버튼을 누를 때 Google Gemini API에 목표 단어·뜻·작성 문장을 보냅니다.
+AI 문장 점검 버튼을 누르면 Google Gemini API를 먼저 사용합니다.
+Google 응답 실패 시 같은 작성 문장과 목표 정보(단어·뜻 또는 문법 수업 목표)를 Groq API로 보내 자동 전환합니다.
+결과에 실제 사용한 제공사를 표시합니다. 두 서비스의 계정은 Free 상태를 유지해야 하며, 앱이 결제나 요금제 변경을 진행하지 않습니다.
 AI 의견은 참고 자료이며 결과는 학습자가 확인합니다. 무료 한도·연결 오류 시 자기 점검으로 계속할 수 있습니다.
 '''
 (root/'content-attribution.txt').write_text(credits,encoding='utf-8')

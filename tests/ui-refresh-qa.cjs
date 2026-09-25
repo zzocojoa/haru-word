@@ -44,11 +44,13 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
   assert.deepEqual(await get(),before);
   checks.push('selected monthly session appears once; a separate older session for the same month remains reachable without writes');
   const audit=async name=>{await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const violations=await p.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));audits.push({name,violations});assert.deepEqual(violations,[],name);};
-  for(const width of [320,390,430,768,1440]){
+  for(const width of [320,390,430,600,601,620,640,641,768,1440]){
    await p.setViewportSize({width,height:900});
    for(const name of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){
     await p.getByRole('tab',{name,exact:true}).click();
     assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,name+' '+width);
+    const labels=await p.getByRole('tablist',{name:'학습 화면',exact:true}).locator('[role=tab]').evaluateAll(tabs=>tabs.map(tab=>[...tab.querySelectorAll('.nav-label-wide,.nav-label-compact')].filter(label=>label.getClientRects().length>0).map(label=>label.className)));
+    assert.deepEqual(labels,Array.from({length:4},()=>[width<=640?'nav-label-compact':'nav-label-wide']),'one visible label per tab at '+width);
     if(width===390){await audit(name);await p.screenshot({path:out+'/'+name+'.png'});}
    }
   }
@@ -59,7 +61,7 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
    assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,name+' 200%');
   }
   await zoom.evaluate(el=>el.remove());
-  checks.push('all four tabs fit five widths and 200% text; four populated mobile views pass axe');
+  checks.push('all four tabs fit ten widths and 200% text; breakpoint labels stay unique; four populated mobile views pass axe');
   await p.setViewportSize({width:390,height:844});
   await p.getByRole('button',{name:'기록 관리',exact:true}).click();await audit('record menu');
   await p.keyboard.press('Escape');assert.ok(await p.getByRole('button',{name:'기록 관리',exact:true}).evaluate(el=>document.activeElement===el));

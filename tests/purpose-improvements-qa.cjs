@@ -43,7 +43,15 @@ const checks=[];const errors=[];const evidence=[];
 
   const e=await user('content');await e.p.getByRole('tab',{name:'전체 단어장',exact:true}).click();for(const [name,label,file]of [['train','train 명사','05-truncated-expression'],['would','would 법조동사','05-would-sense'],['fit','fit 형용사','05-fit-translation']]){await e.p.getByLabel('단어 또는 한국어 뜻 검색').fill(name);await e.p.getByRole('button',{name:label,exact:true}).click();await e.p.getByRole('dialog').waitFor();await shot(e.p,file);await e.p.getByRole('button',{name:'Close',exact:true}).click();await e.p.getByRole('dialog').waitFor({state:'hidden'});}
   await logIssue('CONTENT',{confirmed:true,corrected:['train: miss the train','would: 정중한 권유','fit: 건강한']});
-  await e.p.getByRole('button',{name:'학습 설정',exact:true}).click();await e.p.getByText('저장·날짜·AI 안내',{exact:true}).click();assert.match(await e.p.getByRole('dialog').innerText(),/AI는 버튼을 누를 때만 호출/);assert.ok(!(await e.p.getByRole('dialog').innerText()).includes('별도 AI API를 사용하지'));await shot(e.p,'06-settings-ai-copy');await logIssue('SETTINGS_COPY',{confirmed:true,text:'Google Gemini 사용 조건 안내'});await e.ctx.close();
+  await e.p.getByRole('button',{name:'학습 설정',exact:true}).click();await e.p.getByText('저장·날짜·AI 안내',{exact:true}).click();
+  const settingsCopy=await e.p.getByRole('dialog').innerText();
+  for(const text of ['AI 버튼을 누르면 Google을 먼저 사용','응답 실패 시 Groq로 자동 전환','결과에 사용한 제공사를 표시','두 계정은 Free 상태를 유지'])assert.ok(settingsCopy.includes(text),text);
+  assert.ok(!settingsCopy.includes('별도 AI API를 사용하지'));
+  await e.p.getByRole('checkbox',{name:'신규 단어 잠시 쉬기 · 복습만 배정',exact:true}).waitFor();
+  const attribution=await e.ctx.request.get(base+'/sources/content-attribution.txt');assert.equal(attribution.status(),200);
+  const sourceCopy=await attribution.text();
+  for(const text of ['Google Gemini API를 먼저 사용','같은 작성 문장과 목표 정보','Groq API로 보내 자동 전환','계정은 Free 상태를 유지'])assert.ok(sourceCopy.includes(text),text);
+  await shot(e.p,'06-settings-ai-copy');await logIssue('SETTINGS_COPY',{confirmed:true,text:'Google 우선·Groq 전환·제공사 표시·무료 조건·복습 배정 안내'});await e.ctx.close();
   assert.deepEqual(errors,[]);fs.writeFileSync(out+'/evidence.json',JSON.stringify({date,checks,errors,evidence},null,2));console.log(JSON.stringify({verifiedFixes:checks.length,statefulFixesCheckedTwice:4,screenshots:evidence.length,browserErrors:errors}));
  }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

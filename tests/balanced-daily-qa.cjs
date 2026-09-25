@@ -52,10 +52,10 @@ const oldDate = new Date(Date.parse(date + 'T12:00:00Z') - 86400000).toISOString
       if (width === 390) await p.screenshot({ path: out + '/balanced-mobile.png', fullPage: true });
     }
     checks.push('pending review remains inspectable; four viewport widths have no overflow or automated accessibility violations');
-    await openSettings(); await p.getByRole('checkbox', { name: '신규 단어 잠시 쉬기 · 이월만 배정' }).check(); await saved();
+    await openSettings(); await p.getByRole('checkbox', { name: '신규 단어 잠시 쉬기 · 복습만 배정' }).check(); await saved();
     assert.match(await p.locator('.goal-allocation').innerText(), /복습만 최대 10개/);
     await closeSettings(); await split(0, 10);
-    await openSettings(); await p.getByRole('checkbox', { name: '신규 단어 잠시 쉬기 · 이월만 배정' }).uncheck(); await saved(); await setGoal(3); await closeSettings(); await split(2, 1);
+    await openSettings(); await p.getByRole('checkbox', { name: '신규 단어 잠시 쉬기 · 복습만 배정' }).uncheck(); await saved(); await setGoal(3); await closeSettings(); await split(2, 1);
     checks.push('new-word pause overrides the balanced rule and unpausing restores it');
     await p.getByRole('button', { name: '오늘의 학습 시작', exact: true }).click(); await saved();
     let data = await get(); const firstId = data.state.settings.activeSessionId, first = data.state.sessions[firstId];
