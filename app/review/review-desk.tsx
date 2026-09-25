@@ -19,6 +19,7 @@ import { ArrowRight, NotebookPen, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { PendingReviews } from "../pending-reviews";
 import { HelpDetails } from "../study-ui";
+import { reviewSessionLabels } from '@/lib/learning-display';
 type Props = {
   state: State;
   words: Word[];
@@ -40,6 +41,7 @@ export function ReviewDesk({
 }: Props & { date: string }) {
   const [selectedWeek, setWeek] = useState<string | null>(null);
   const [selectedMonth, setMonth] = useState<string | null>(null);
+  const sessionLabels = useMemo(() => reviewSessionLabels(state.sessions), [state.sessions]);
   const week = selectedWeek ?? weekStart(date),
     month = selectedMonth ?? date.slice(0, 7);
   const weeks = useMemo(
@@ -75,7 +77,7 @@ export function ReviewDesk({
         const sessions = Object.values(state.sessions)
           .map(resumeMonthlyWriting)
           .filter((s) => s.kind === kind && s.period === period)
-          .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+          .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id));
         const session = sessions.find((s) => !s.finished);
         const latest = sessions[0];
         const ids = [
@@ -167,6 +169,7 @@ export function ReviewDesk({
                     </small>
                   </span>
                 </div>
+                {session && <p className="review-session-label small-note">{sessionLabels.get(session.id)?.number}회차 · {sessionLabels.get(session.id)?.started} 시작{sessionLabels.get(session.id)?.latest ? ' · 최신 회차' : ''}</p>}
                 {retained > 0 && (
                   <p className="small-note">
                     날짜 변경 {retained}개 · 기존 점검의 답·순서 유지
@@ -185,7 +188,7 @@ export function ReviewDesk({
                       : "15개 안팎으로 나누어 모든 항목 완료"}
                   </p>
                 </HelpDetails>
-                {kind === "monthly" && (
+                {kind === "monthly" && !session && (
                   <label>
                     새 점검의 묶음 크기
                     <select
@@ -258,7 +261,7 @@ export function ReviewDesk({
         <p className="muted">
           친숙도는 유지 · 한 회차 최대 20개
         </p>
-        <div className="practice-options">
+        {!practices.some(({ ids, session }) => ids.length || session) ? <p className="empty-practice" role="status">지금 보완할 항목이 없어요.</p> : <div className="practice-options">
           {practices.map(({ mode, ids, session }) => {
             return (
               <button
@@ -276,7 +279,7 @@ export function ReviewDesk({
               </button>
             );
           })}
-        </div>
+        </div>}
       </section>
     </>
   );

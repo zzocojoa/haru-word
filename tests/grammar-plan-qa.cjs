@@ -25,6 +25,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
     await check('article emphasis matches the standalone article, not a letter in have', async () => {
       const { context, page } = await open({});
       try {
+        await page.locator('.grammar-group > summary').filter({ hasText: '명사를 특정하는 말' }).click();
         await page.locator('.grammar-tile').filter({ hasText: '부정관사' }).click();
         const before = await page.locator('.grammar-examples mark').first().evaluate(el => el.previousSibling?.textContent);
         assert.equal(before, 'I have ');
@@ -67,6 +68,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
       const { context, page, get } = await open({ adjective: progress('adjective') });
       let release; const hold = new Promise(r => release = r); let calls = 0;
       try {
+        await page.locator('.grammar-group > summary').filter({ hasText: '설명을 더하는 말' }).click();
         await page.locator('.grammar-tile').filter({ hasText: /^adj\./ }).click();
         await page.route('**/api/grammar-feedback', async route => { calls++; const sentence = route.request().postDataJSON().sentence; await hold; await route.fulfill({ json: { feedback: { original: sentence, correctedSentence: sentence, explanation: '합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {}); });
         await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).evaluate(button => { button.click(); button.click(); });
@@ -117,14 +119,14 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         await query.fill('a');
         await page.getByRole('combobox', { name: '단어장 수준 필터' }).click(); await page.getByRole('option', { name: 'A1', exact: true }).click();
         await page.getByRole('combobox', { name: '친숙도 필터' }).click(); await page.getByRole('option', { name: '아직 미표시', exact: true }).click();
-        await page.getByRole('button', { name: '다음 페이지', exact: true }).click();
-        const trigger = page.locator('.pos-help-button').nth(10), name = await trigger.getAttribute('aria-label');
+        await page.getByRole('navigation', { name: '단어 목록 상단 페이지 이동' }).getByRole('button', { name: '다음 페이지', exact: true }).click();
+        const trigger = page.locator('.pos-help-button').nth(5), name = await trigger.getAttribute('aria-label');
         await trigger.click(); const scroll = await page.evaluate(() => scrollY);
         await page.getByRole('button', { name: '이 품사 배우기', exact: true }).click();
         await page.getByRole('button', { name: '같은 품사의 단어 보기', exact: true }).waitFor();
         await page.getByRole('tab', { name: '단어 목록', exact: true }).click();
         await until(async () => await page.getByRole('button', { name, exact: true }).evaluate(el => document.activeElement === el), 'word help focus restored');
-        assert.equal(await query.inputValue(), 'a'); assert.match(await page.locator('.pagination').innerText(), /2 \//);
+        assert.equal(await query.inputValue(), 'a'); assert.match(await page.locator('.pagination').first().innerText(), /2 \//);
         assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('aria-label')), name, JSON.stringify(await page.evaluate(() => ({ active: document.activeElement?.outerHTML.slice(0, 250), scroll: scrollY }))));
         assert.ok(Math.abs((await page.evaluate(() => scrollY)) - scroll) <= 2);
         await page.getByRole('button', { name, exact: true }).click(); await page.getByRole('button', { name: '이 품사 배우기', exact: true }).click();

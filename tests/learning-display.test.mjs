@@ -1,7 +1,22 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {sessionCounts, pendingReviewCounts} from '../lib/learning-display.ts';
+import {sessionCounts, pendingReviewCounts, reviewSessionLabels} from '../lib/learning-display.ts';
 import {emptyRecord, EMPTY, pickDaily} from '../lib/learning.ts';
 const record=(patch={})=>({...emptyRecord('뜻'),...patch});
+
+test('review labels distinguish same-period sessions, retain finished ordinals and use Korean start dates', () => {
+ const make=(id,createdAt,patch={})=>({id,kind:'monthly',period:'2026-09',date:'2026-09-25',createdAt,...patch});
+ const sessions={b:make('b','2026-09-24T16:00:00Z'),a:make('a','2026-09-23T01:00:00Z',{finished:true}),w:make('w','2026-09-25T00:00:00Z',{kind:'weekly'}),o:make('o','2026-08-25T00:00:00Z',{period:'2026-08'})};
+ const before=structuredClone(sessions),labels=reviewSessionLabels(sessions);
+ assert.deepEqual(labels.get('a'),{number:1,latest:false,started:'2026-09-23'});
+ assert.deepEqual(labels.get('b'),{number:2,latest:true,started:'2026-09-25'});
+ assert.equal(labels.get('w').number,1);assert.equal(labels.get('o').number,1);
+ assert.deepEqual(sessions,before);
+});
+
+test('equal timestamps have deterministic review labels regardless of record insertion order', () => {
+ const a={id:'a',kind:'monthly',period:'2026-09',date:'2026-09-25',createdAt:'2026-09-25T00:00:00Z'},b={...a,id:'b'};
+ assert.deepEqual(reviewSessionLabels({b,a}),reviewSessionLabels({a,b}));
+});
 test('recorded errors, independent success and unmeasured remain distinct without mutation',()=>{
  const s={kind:'daily',ids:['success','help','skip','missing'],records:{success:record({en:'independent',ko:'independent',sentenceStatus:'written'}),help:record({en:'independent',ko:'help',sentenceStatus:'improve'}),skip:record({en:'independent',ko:'independent'})}};
  const before=structuredClone(s);assert.deepEqual(sessionCounts(s),{total:4,recorded:2,successful:1,needsHelp:1,unmeasured:2});assert.deepEqual(s,before);

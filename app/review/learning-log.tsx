@@ -162,7 +162,7 @@ export function LearningLog({
           })}
         </Accordion>
       )}
-      {list.length > 0 && (
+      {list.length > limit && (
         <p className="small-note" role="status">
           {selected === "all" ? "전체" : "선택한 종류의"} {list.length.toLocaleString()}일 · {sessionCount.toLocaleString()}회차 중{" "}
           {Math.min(limit, list.length).toLocaleString()}일의 기록을 보고 있어요.

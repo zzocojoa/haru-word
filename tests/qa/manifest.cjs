@@ -49,5 +49,6 @@ module.exports = [
   "today-status-qa.cjs",
   "ui-plan-contract-qa.cjs",
   "ui-refresh-qa.cjs",
+  "ui-density-qa.cjs",
   "workflow-qa.cjs"
 ];

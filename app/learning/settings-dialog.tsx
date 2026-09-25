@@ -125,7 +125,7 @@ export function SettingsDialog({
           </Select>
         </label>
         <HelpDetails title="목표 수를 바꾸면?"><p>1~{MAX_DAILY_GOAL}개 · 기본 3개. 목표를 늘리면 회차 종료 후 추가해요. 줄여도 기존 배정·기록은 유지해요.</p><p>후보가 부족하면 다른 쪽으로 채워요. 신규 쉬기 중에는 복습만 배정해요.</p></HelpDetails>
-        <button
+        <section className="settings-section" aria-label="학습 범위 다시 확인"><h3>학습 범위 다시 확인</h3><button
           className="secondary-button"
           disabled={busy}
           onClick={() => {
@@ -134,13 +134,12 @@ export function SettingsDialog({
           }}
         >
           친숙도 다시 확인하기
-        </button>
+        </button></section>
         <HelpDetails title="저장·날짜·AI 안내"><p>계정별 서버 저장 · 한국 시간 기준. AI 버튼을 누르면 Google을 먼저 사용하고, 응답 실패 시 Groq로 자동 전환해요. 결과에 사용한 제공사를 표시해요. 두 계정은 Free 상태를 유지해 주세요.</p><p>앱 자체 횟수 제한은 없으며, 서비스의 실제 한도를 따라요.</p></HelpDetails>
-        <details className="notes-details">
-          <summary>문제가 생겼을 때</summary>
+        <HelpDetails title="문제가 생겼을 때">
           <p className="small-note">연결·대기 상태를 내려받아요. 답안·문장·계정·키는 제외해요. 자동 전송은 없으며 새로고침 시 초기화돼요.</p>
           <DiagnosticDownload />
-        </details>
+        </HelpDetails>
         </div>
       </DialogContent>
     </Dialog>

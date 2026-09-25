@@ -4432,3 +4432,23 @@ footer {
 .library-tools { display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap; margin-block:var(--space-4); }
 .library-tools .list-count { margin:0; flex:1; min-width:0; flex-wrap:wrap; }
 .library-controls .filters { margin-top:0; }
+
+/* Compact working surfaces; keep 44px controls and readable content. */
+.word-identity { display:flex; align-items:center; gap:4px; min-width:0; }
+.word-identity .word-link { flex:1; min-width:0; width:auto; }
+.word-identity .pos-help-button { flex:0 0 44px; }
+.library-page-controls { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-block:12px; }
+.library-page-controls > label { display:flex; align-items:center; gap:8px; font-size:.875rem; margin:0; }
+.library-page-controls select { min-height:44px; min-width:72px; padding:8px; border:1px solid var(--border); border-radius:8px; background:var(--card); }
+.library-page-controls .pagination { flex:1; margin:0; padding:0; min-width:170px; }
+.library-pagination { gap:8px; }
+.library-pagination > span { white-space:nowrap; }
+.library-panel h2 { scroll-margin-top:88px; }
+.session-panel .study-actions.learn-actions { position:static; }
+.review-grid { align-items:start; }
+.review-card .review-checklist { padding-top:0; margin-block:8px; }
+.review-card > .primary-button { margin-top:12px; }
+.review-session-label { color:var(--caption); font-size:.875rem; margin-block:4px; }
+.empty-practice { background:var(--surface); border-radius:8px; padding:12px 16px; margin-top:16px; }
+.settings-section { border-top:1px solid var(--border); padding-top:16px; }
+.settings-section > button { width:100%; }

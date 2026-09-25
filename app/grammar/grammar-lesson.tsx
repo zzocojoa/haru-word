@@ -65,7 +65,7 @@ export function GrammarLesson({ lesson, persistence, onBack, onWords }: Props) {
     <div className="grammar-lesson-heading">
       <span className="level-badge">{lesson.pos}</span>
       <h2 ref={heading} tabIndex={-1} aria-label={`${lesson.title} · ${step.label}`}>{lesson.title}</h2>
-      <span className="grammar-stage-label">{step.label}</span>
+      <span className="grammar-stage-label"><span className="grammar-phase-count">{step.phase + 1}/{step.steps.length} · </span>{step.label}</span>
     </div>
     <ol className="grammar-stepper" aria-label={reviewing ? '다시 확인 단계' : '수업 단계'}>{step.steps.map((label, index) =>
       <li key={label} aria-current={index === step.phase ? 'step' : undefined} data-done={index < step.phase}>

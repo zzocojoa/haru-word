@@ -72,6 +72,7 @@ export function LearnStage({
           오늘 품사에 맞는 뜻 하나를 골라요.
         </p>
       </div>
+      <ExpressionLine expression={expression} translation={expressionTranslation} />
       <div className="example-box">
         <div className="example-label">
           <BookOpen size={15} />
@@ -116,7 +117,6 @@ export function LearnStage({
           />
         </label>
       </details>
-      <ExpressionLine expression={expression} translation={expressionTranslation} />
       <DictionaryLinks word={word.word} />
       {!word.personal && (
         <a
@@ -132,7 +132,7 @@ export function LearnStage({
         <p>단어장에서 같은 자료가 바뀌었어요. 최신 내용을 불러온 뒤 다시 수정해 주세요.</p>
         <button className="secondary-button" disabled={busy} onClick={useLibraryMaterial}>단어장 최신 내용 적용</button>
       </div>}
-      <div className="study-actions"><button
+      <div className="study-actions learn-actions"><button
         className="primary-button full"
         disabled={busy || !meaning.trim()}
         onClick={learn}
