@@ -37,6 +37,7 @@ import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useStat
 import { PersonalWord } from "./library/personal-word";
 import { WordEditor } from "./library/word-editor";
 import { useNavigationState } from './navigation';
+import { useViewRestoration } from './use-view-restoration';
 type Props = {
   activityDate: () => string;
   state: State;
@@ -53,6 +54,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   const listPanel = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null), pendingPosition = useRef<number | null>(null);
   const pendingSearchFocus = useRef(false);
+  const restoration = useViewRestoration();
   const registerLeave = useCallback((fn: GrammarLeave) => { leave.current = fn; return () => { if (leave.current === fn) leave.current = null; }; }, []);
   const flush = useCallback(async () => await leave.current?.() ?? true, []);
   const registerOuterLeave = props.persistence.registerLeave;
@@ -63,24 +65,15 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
     pendingPosition.current = null;
     const focusSearch = pendingSearchFocus.current;
     pendingSearchFocus.current = false;
-    // The tab trigger's native pointer focus runs after the state change.
-    // Restore inside the now-visible panel on the next frame, and cancel stale
-    // restoration if another navigation supersedes this one.
-    const restore = () => {
+    return restoration.schedule(focusSearch ? 'destination' : 'view', () => {
       const target = view === 'words'
         ? !focusSearch && focusReturn.current?.isConnected && listPanel.current?.contains(focusReturn.current)
           ? focusReturn.current : listPanel.current?.querySelector<HTMLInputElement>('input[type="text"], input:not([type])')
         : heading.current;
       target?.focus({ preventScroll: true });
       window.scrollTo({ top, behavior: 'instant' });
-    };
-    // Returning to filtered words is an explicit destination, not history's
-    // previous help button. Apply it after NavigationProvider's two-frame restore.
-    let frame = requestAnimationFrame(focusSearch
-      ? () => { frame = requestAnimationFrame(() => { frame = requestAnimationFrame(restore); }); }
-      : restore);
-    return () => cancelAnimationFrame(frame);
-  }, [view, lessonId]);
+    });
+  }, [view, lessonId, restoration]);
   async function switchView(next: string) {
     if (next === view || !await flush()) return;
     if (view === 'words') listPosition.current = window.scrollY;

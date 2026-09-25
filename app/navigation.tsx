@@ -3,17 +3,19 @@ import { createContext, useContext, useLayoutEffect, useCallback, useRef, useSta
 import { NavigationHistory, type NavigationGuard } from '@/lib/navigation-history';
 import { recordNavigationDiagnostic } from '@/lib/client-diagnostics';
 import { installSwipeBack } from './swipe-back';
+import { createViewRestoration, ViewRestorationContext } from './use-view-restoration';
 
 const NavigationContext = createContext<NavigationHistory | null>(null);
 type Position = { top: number; focus: HTMLElement | null };
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
   const [navigation] = useState(() => new NavigationHistory());
+  const [restoration] = useState(createViewRestoration);
   useLayoutEffect(() => {
-    let frame = 0;
     navigation.start({
       report: recordNavigationDiagnostic,
       capture: (): Position => {
+        restoration.cancel();
         let focus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
         // Pointer focus may already be on the destination tab before its value
         // changes. Keep the source tab's focus with the source history entry.
@@ -23,8 +25,7 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
         return { top: window.scrollY, focus };
       },
       restore: position => {
-        cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(() => { frame = requestAnimationFrame(() => {
+        restoration.schedule('history', () => {
           const saved = position as Position | undefined;
           const target = saved?.focus;
           // Radix tabs activate on focus. Restoring an inactive tab would
@@ -32,16 +33,16 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
           if (target?.isConnected && target.getClientRects().length && !target.matches('[role="tab"][aria-selected="false"]')) target.focus({ preventScroll: true });
           else document.querySelector<HTMLElement>('[role="dialog"] h2, main h1')?.focus({ preventScroll: true });
           window.scrollTo({ top: saved?.top ?? 0, behavior: 'instant' });
-        }); });
+        });
       },
     });
     const removeSwipe = installSwipeBack(navigation);
     return () => {
-      navigation.stop(); cancelAnimationFrame(frame);
+      navigation.stop(); restoration.cancel();
       removeSwipe();
     };
-  }, [navigation]);
-  return <NavigationContext.Provider value={navigation}>{children}</NavigationContext.Provider>;
+  }, [navigation, restoration]);
+  return <NavigationContext.Provider value={navigation}><ViewRestorationContext.Provider value={restoration}>{children}</ViewRestorationContext.Provider></NavigationContext.Provider>;
 }
 
 /** Only screen identifiers belong here. Answers, filters and progress stay in their existing stores. */

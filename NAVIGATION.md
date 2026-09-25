@@ -38,3 +38,17 @@
 이번 검증: 전체 단위 313개, 타입·린트·공식 빌드 통과. 기능 회귀 49개가 통과한 뒤 계정 재조회 시 열린 도구의 경로를 보완했으며, 최종 빌드에서 Chromium/WebKit 이동 검사와 백업 워크플로우·응답 계약·학습 수명주기를 다시 통과했습니다. 결과는 `outputs/navigation/`, `outputs/browser-suite/functional-1790265257171/`, `work/fixed-nav-*.log`에 보관합니다. 실제 iPhone과 실제 Google 호출은 이 검증에 포함하지 않습니다.
 
 근거: [Apple 터치 이벤트](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html), [WebKit iOS touchstart 제스처 중재](https://bugs.webkit.org/show_bug.cgi?id=240892), [MDN touch 이벤트](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events).
+
+## 복원 처리 리팩토링
+
+안내 문구 개선 이후 사용하던 ‘공통 복원 2프레임, 검색창 복원 3프레임’의 실행 순서 의존을 제거했다. `lib/view-restoration.ts`가 한 이동의 요청을 합치고 명시적 목적지 > 뒤로가기 기록 > 일반 화면 기본값 순으로 하나만 적용한다. DOM 준비를 위한 프레임 대기는 이 처리에만 있으며 호출부는 프레임 수를 알지 않는다.
+
+`app/use-view-restoration.tsx`를 통해 공통 이동 처리와 단어장이 같은 인스턴스를 사용한다. 새 이동·언마운트·요청 교체는 미실행 복원을 취소하며, 오래된 요청의 정리 함수가 새 요청을 취소하지 않는다. 단독 컴포넌트 검사에는 로컬 인스턴스를 제공한다. 복원은 메모리에만 존재하며 URL·API·백업 형식은 바꾸지 않는다.
+
+`app/study-date-dialog.tsx`는 기존 저장 스냅샷·재시도·충돌 규칙을 유지하면서 오류 표시, 날짜 검증, 버튼 상태를 명시적으로 나누었다. 화면 문구·필드·접근성 이름은 유지한다.
+
+단위 검사는 등록 순서와 무관한 우선순위, 같은 우선순위의 최신 요청, 두 대기 단계의 취소, 오래된 콜백, 취소 후 재사용을 확인한다. 브라우저 검사는 숨겨진 목록의 값만 확인하지 않고 원래 도움말 버튼 또는 명시적 검색창으로의 실제 초점 복원을 기다린다.
+
+이 리팩토링의 위험은 초점·스크롤 복원이 다른 이동과 충돌하는 것이다. 학습 성적·배정·저장 계약과 진단 로그는 변경하지 않는다. 마이그레이션은 없고 문제 발생 시 직전 v62로 되돌린다. 실제 iPhone 시스템 제스처·VoiceOver는 별도 확인 대상이다.
+
+리팩토링 검증: 단위 342개, 타입·빌드 통과. 전체 린트 오류 0개·기존 경고 14개, 변경 파일 린트 오류·경고 0개. 문법 계획·문법 UI·학습일 수정·Chromium/WebKit 이동 검사와 안내 높이 24조건을 통과했다. 최초 문법 검사의 즉시 초점 단언은 공통 복원이 끝나는 시점을 기다리도록 수정했으며, 동일한 목표 버튼·검색창·스크롤·필터 조건을 유지했다. 결과는 `outputs/refactor-*.log`에 보관한다.

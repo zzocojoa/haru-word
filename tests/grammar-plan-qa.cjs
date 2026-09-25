@@ -123,6 +123,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         await page.getByRole('button', { name: '이 품사 배우기', exact: true }).click();
         await page.getByRole('button', { name: '같은 품사의 단어 보기', exact: true }).waitFor();
         await page.getByRole('tab', { name: '단어 목록', exact: true }).click();
+        await until(async () => await page.getByRole('button', { name, exact: true }).evaluate(el => document.activeElement === el), 'word help focus restored');
         assert.equal(await query.inputValue(), 'a'); assert.match(await page.locator('.pagination').innerText(), /2 \//);
         assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('aria-label')), name, JSON.stringify(await page.evaluate(() => ({ active: document.activeElement?.outerHTML.slice(0, 250), scroll: scrollY }))));
         assert.ok(Math.abs((await page.evaluate(() => scrollY)) - scroll) <= 2);
