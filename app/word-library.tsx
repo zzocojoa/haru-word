@@ -1,5 +1,6 @@
 "use client";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { GRAMMAR_LESSONS, POS_LESSON, LESSON_MAP } from '@/lib/grammar/content';
 import type { LessonId } from '@/lib/grammar/model';
@@ -52,6 +53,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   const [expandedGroups, setExpandedGroups] = useState(['문장 뼈대']);
   const [help, setHelp] = useNavigationState<LessonId | null>('library.help', null), [pos, setPos] = useState('all'), [page, setPage] = useState(0);
   const leave = useRef<GrammarLeave | null>(null), listPosition = useRef(0), focusReturn = useRef<HTMLElement | null>(null);
+  const helpReturn = useRef<HTMLButtonElement | null>(null);
   const listPanel = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null), pendingPosition = useRef<number | null>(null);
   const pendingSearchFocus = useRef(false);
@@ -89,11 +91,11 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   const lesson = lessonId ? LESSON_MAP.get(lessonId) : undefined;
   return <Tabs value={view} onValueChange={next => void switchView(next)} className="library-modes" data-lesson={view === 'grammar' && !!lesson}>
     {props.grammarEnabled && <TabsList className="library-mode-tabs" aria-label="단어장 학습 종류"><TabsTrigger value="words">단어 목록</TabsTrigger><TabsTrigger value="grammar">품사·문장 연습</TabsTrigger></TabsList>}
-    <TabsContent ref={listPanel} value="words" forceMount hidden={view !== 'words'} onFocusCapture={e => { if (e.currentTarget.contains(e.target)) focusReturn.current = e.target as HTMLElement; }}><WordList {...props} pos={pos} setPos={setPos} page={page} setPage={setPage} onHelp={props.grammarEnabled ? (id, button) => { focusReturn.current = button; setHelp(id); } : undefined} /></TabsContent>
+    <TabsContent ref={listPanel} value="words" forceMount hidden={view !== 'words'} onFocusCapture={e => { if (e.currentTarget.contains(e.target)) focusReturn.current = e.target as HTMLElement; }}><WordList {...props} pos={pos} setPos={setPos} page={page} setPage={setPage} onHelp={props.grammarEnabled ? (id, button) => { focusReturn.current = button; helpReturn.current = button; setHelp(id); } : undefined} /></TabsContent>
     {props.grammarEnabled && <TabsContent value="grammar" forceMount hidden={view !== 'grammar'}>
       {lesson ? <GrammarLesson key={lesson.id} lesson={lesson} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { pendingSearchFocus.current = true; focusReturn.current = null; setPos(lesson.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} /> : <GrammarCatalog expandedGroups={expandedGroups} onExpandedGroups={setExpandedGroups} progress={props.state.grammar ?? {}} headingRef={heading} filter={grammarFilter} onFilter={setGrammarFilter} onOpen={id => void openLesson(id)} />}
     </TabsContent>}
-    <Dialog open={!!help} onOpenChange={open => { if (!open) setHelp(null); }}><DialogContent className="framed-dialog grammar-help" onCloseAutoFocus={event => { event.preventDefault(); if (!lessonId) focusReturn.current?.focus({ preventScroll: true }); }}>
+    <Dialog navigationKey="library.help" open={!!help} onOpenChange={open => { if (!open) setHelp(null); }}><DialogContent className="framed-dialog grammar-help" onCloseAutoFocus={event => { event.preventDefault(); if (!lessonId) restoration.schedule('destination', () => helpReturn.current?.focus({ preventScroll: true })); }}>
       {help && (() => { const l = LESSON_MAP.get(help)!; return <><DialogHeader><DialogTitle>{l.title} · {l.pos}</DialogTitle><DialogDescription>{l.role}</DialogDescription></DialogHeader><div className="dialog-scroll"><p lang="en">{l.examples[0][0]}</p><p>{l.examples[0][1]}</p><p className="small-note">학습용 작성 예문</p></div><div className="dialog-actions"><button className="primary-button" onClick={() => void openLesson(help)}>이 품사 배우기<ArrowRight size={18} /></button></div></>; })()}
     </DialogContent></Dialog>
   </Tabs>;
@@ -308,6 +310,8 @@ const WordList = memo(function WordList({
       )}
       {pagination(true)}
       <Dialog
+        key={selected?.instance || 'closed-editor'}
+        navigationKey="library.word"
         open={!!selected}
         onOpenChange={(open) => {
           if (!open) setSelected(null);
@@ -333,7 +337,7 @@ const WordList = memo(function WordList({
           )}
         </DialogContent>
       </Dialog>
-      <Dialog open={!!adding} onOpenChange={open => { if (!open) setAdding(null); }}>
+      <Dialog key={adding || 'closed-personal'} navigationKey="library.add" open={!!adding} onOpenChange={open => { if (!open) setAdding(null); }}>
         <DialogContent className="word-dialog framed-dialog" onCloseAutoFocus={restoreFocus}>
           {adding && <PersonalWord
             key={adding}

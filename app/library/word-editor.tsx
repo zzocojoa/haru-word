@@ -23,6 +23,7 @@ import { HelpDetails } from "../study-ui";
 import { editedWordProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
+import { useSheetProtection } from '../sheet-dialog';
 export function WordEditor({
   activityDate,
   word,
@@ -56,6 +57,12 @@ export function WordEditor({
   const [encounters, setEncounters] = useState(p?.encounters || []);
   const [encounter, setEncounter] = useState("");
   const [source, setSource] = useState<"reading" | "listening">("reading");
+  const savedContent = senseKey ? cardContent(word.id, { ...selectedSense, meaning: senseKey }) : null;
+  const dirty = !savedContent || meaning !== savedContent.meaning || expression !== savedContent.expression ||
+    expressionTranslation !== (savedContent.expressionTranslation || '') || example !== savedContent.example ||
+    translation !== savedContent.translation || notes !== (selectedSense?.notes || '') || familiarityTouched ||
+    useful !== !!p?.useful || JSON.stringify(encounters) !== JSON.stringify(p?.encounters || []) || !!encounter.trim();
+  useSheetProtection(dirty, submitting);
   function chooseSense(key: string) {
     const c = key
       ? cardContent(word.id, { ...senseProgress(base, key), meaning: key })

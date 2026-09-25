@@ -1,11 +1,10 @@
 "use client";
 import {
-  Dialog,
-  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from '../sheet-dialog';
 export function SourceDialog({
   open,
   onOpenChange,
@@ -14,7 +13,7 @@ export function SourceDialog({
   onOpenChange: (open: boolean) => void;
 }) {
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog navigationKey="app.about" open={open} onOpenChange={onOpenChange}>
       <DialogContent className="source-dialog framed-dialog">
         <DialogHeader>
           <DialogTitle>학습 방식과 자료 출처</DialogTitle>

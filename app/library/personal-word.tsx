@@ -14,6 +14,7 @@ import {
 import { POS, type Progress, type Word } from "@/lib/learning";
 import { useState } from "react";
 import { useEditorSubmission } from "./use-editor-submission";
+import { useSheetProtection } from '../sheet-dialog';
 export function PersonalWord({
   busy,
   onSave,
@@ -28,6 +29,7 @@ export function PersonalWord({
   const [pos, setPos] = useState("n.");
   const [example, setExample] = useState("");
   const [translation, setTranslation] = useState("");
+  useSheetProtection(!!(word || meaning || example || translation || pos !== 'n.'), submitting);
   return (
     <>
       <DialogHeader>

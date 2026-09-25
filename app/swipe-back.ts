@@ -5,6 +5,7 @@ type Surface = { element: HTMLElement; transform: string; transition: string; ba
 type Drag = { id: number; x: number; y: number; dx: number; dy: number; moving: boolean; surfaces: Surface[] };
 const visible = (node: HTMLElement) => !!node.getClientRects().length && !node.closest('[hidden], [aria-hidden="true"]');
 const interactive = 'input, textarea, select, button, a, [contenteditable="true"], [role="slider"], [role="listbox"], [role="menu"]';
+const dismissConfirmation = (target: EventTarget | null) => target instanceof Element && !!target.closest('.sheet-discard-confirm');
 
 /** Own only the body's narrow left-edge gesture, not scrolling or browser toolbar Back. */
 export function installSwipeBack(navigation: NavigationHistory) {
@@ -37,6 +38,7 @@ export function installSwipeBack(navigation: NavigationHistory) {
     const dialogs = [...document.querySelectorAll<HTMLElement>('[role="dialog"], [role="alertdialog"]')].filter(visible);
     if (dialogs.length) {
       const dialog = dialogs.at(-1)!;
+      if (dialog.matches('.sheet-discard-confirm')) return null;
       const bounds = dialog.getBoundingClientRect();
       // Portalled dialogs keep their existing Back/Close and the same save guards.
       return y >= bounds.top && y <= bounds.bottom && (dialog.contains(target) || !!target.closest('[data-slot="dialog-overlay"], [data-slot="alert-dialog-overlay"]')) ? [dialog] : null;
@@ -48,7 +50,7 @@ export function installSwipeBack(navigation: NavigationHistory) {
     return [...document.querySelectorAll<HTMLElement>('.page-heading, .navigation-body, .page-wrap > footer')].filter(visible);
   }
   function start(event: TouchEvent) {
-    if (settling) { if (event.cancelable) event.preventDefault(); return; }
+    if (settling) { if (!dismissConfirmation(event.target) && event.cancelable) event.preventDefault(); return; }
     if (drag) { reset(); return; }
     if (event.touches.length !== 1 || !event.cancelable || (window.visualViewport?.scale ?? 1) !== 1) return;
     const touch = event.touches[0], target = event.target;
@@ -109,7 +111,7 @@ export function installSwipeBack(navigation: NavigationHistory) {
     if (allowed) reset(); else animateHome();
   }
   const cancel = () => { if (!settling) reset(); };
-  const click = (event: MouseEvent) => { if (settling || drag?.moving) { event.preventDefault(); event.stopPropagation(); } };
+  const click = (event: MouseEvent) => { if (!dismissConfirmation(event.target) && (settling || drag?.moving)) { event.preventDefault(); event.stopPropagation(); } };
   document.addEventListener('touchstart', start, { passive: false, capture: true });
   document.addEventListener('touchmove', move, { passive: false, capture: true });
   document.addEventListener('touchend', end, { passive: false, capture: true });

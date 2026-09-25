@@ -1,12 +1,11 @@
 "use client";
 import type { ReactNode } from "react";
 import {
-  Dialog,
-  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from '../sheet-dialog';
 import {
   Select,
   SelectContent,
@@ -43,7 +42,7 @@ export function SettingsDialog({
   availability,
 }: SettingsDialogProps) {
   return (
-    <Dialog open={settings} onOpenChange={setSettings}>
+    <Dialog navigationKey="app.settings" open={settings} onOpenChange={setSettings}>
       <DialogContent className="settings-dialog framed-dialog">
         <DialogHeader>
           <DialogTitle>학습 설정</DialogTitle>

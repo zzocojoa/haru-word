@@ -4357,6 +4357,32 @@ footer {
   margin: -4px;
   scroll-padding-block: 8px;
 }
+.sheet-handle { display: none; }
+@media (max-width:640px) {
+  .sheet-dialog.framed-dialog>[data-slot=dialog-header] { margin-top: 20px; }
+  .sheet-dialog .sheet-handle {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    cursor: grab;
+    touch-action: none;
+  }
+  .sheet-handle>span { width: 36px; height: 4px; border-radius: 4px; background: var(--caption); opacity: .55; }
+  .sheet-handle:active { cursor: grabbing; }
+  .sheet-dialog[data-sheet-dragging] { user-select: none; }
+  .sheet-dialog[data-state=closed] { animation-name: sheet-dismiss; }
+}
+@keyframes sheet-dismiss { to { transform: translateY(100%); opacity: 0; } }
 .study-date-dialog .dialog-scroll {
   min-width: 0;
   overflow-x: hidden;

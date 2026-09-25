@@ -1,7 +1,8 @@
 "use client";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, BookOpen, RotateCcw } from "lucide-react";
-import { Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription } from "@/components/ui/dialog";
+import { DialogHeader,DialogTitle,DialogDescription } from "@/components/ui/dialog";
+import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { studyContent } from "@/lib/catalog";
 import { POS,dailyReplaySources,entryIdFor,targetIdentity,type State,type Word } from "@/lib/learning";
 import { DictionaryLinks,Speak } from "./ui";
@@ -20,7 +21,7 @@ export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepea
  const item=items[currentIndex];const word=wordById.get(item?.id);const content=word?studyContent(word.id,item?.record,state.progress[word.id]):undefined;
  useLayoutEffect(()=>{ if(scrollBody.current)scrollBody.current.scrollTop=0; },[currentIndex,date]);
  const resuming=Object.values(state.sessions).some(s=>s.practiceMode==='repeat'&&s.period===date&&!s.finished);
- return <Dialog open onOpenChange={open=>{if(!open)onClose()}}><DialogContent className="completed-lesson framed-dialog"><DialogHeader><DialogTitle>{date===todayDate?'오늘 단어 다시 보기':date+' 단어 다시 보기'}</DialogTitle><DialogDescription>저장된 뜻·표현을 확인해요. 성적은 바뀌지 않아요.</DialogDescription></DialogHeader>
+ return <Dialog navigationKey="app.reviewDate" open onOpenChange={open=>{if(!open)onClose()}}><DialogContent className="completed-lesson framed-dialog"><DialogHeader><DialogTitle>{date===todayDate?'오늘 단어 다시 보기':date+' 단어 다시 보기'}</DialogTitle><DialogDescription>저장된 뜻·표현을 확인해요. 성적은 바뀌지 않아요.</DialogDescription></DialogHeader>
   {!!items.length&&<nav className="replay-controls" aria-label="다시 볼 단어 이동">
    <button className="icon-button" aria-label="이전" disabled={currentIndex===0} onClick={()=>{setIndex(currentIndex-1);if(currentIndex===1)selector.current?.focus();}}><ArrowLeft size={18}/></button>
    <Select value={String(currentIndex)} onValueChange={value=>setIndex(Number(value))}><SelectTrigger ref={selector} aria-label="다시 볼 단어 선택"><SelectValue>{currentIndex+1} / {items.length} · {word?.word}</SelectValue></SelectTrigger><SelectContent className="replay-options" position="popper">{items.map((entry,i)=>{const candidate=wordById.get(entry.id);return <SelectItem value={String(i)} key={targetIdentity(entry.id,entry.record.meaning)}>{i+1}. {candidate?.word} · {candidate?POS[candidate.pos]:''} · {entry.record.meaning||'뜻 미기록'}</SelectItem>;})}</SelectContent></Select>

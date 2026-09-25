@@ -24,13 +24,14 @@ const oldContent = id => { const { expressionTranslation, ...old } = content[id]
   assert.equal((await c.request.put(base + '/api/state', { data: { revision: initial.revision, settings: { ...initial.state.settings, dailyGoal: 3, activeSessionId: sid }, progress, sessions: { [sid]: s } } })).status(), 200);
   await p.reload(); await saved(p); const before = await get(c);
   await p.getByRole('button', { name: '오늘 단어 다시 보기', exact: true }).click(); let dialog = p.getByRole('dialog');
+  const selectReplay = async w => { await dialog.getByRole('combobox', { name:'다시 볼 단어 선택', exact:true }).click(); await p.getByRole('option').filter({hasText: `${w.word} ·`}).click(); };
   for (const w of selected) {
-   await dialog.getByRole('button', { name: w.word, exact: true }).click();
+   await selectReplay(w);
    assert.equal(await dialog.locator('.expression-translation').innerText(), content[w.id].expressionTranslation);
    assert.equal(await dialog.locator('.example-box .translation').innerText(), content[w.id].translation);
   }
   assert.deepEqual(await get(c), before); checks.push('legacy completed records backfill only the phrase gloss without rewriting records, results or revision');
-  await dialog.getByRole('button', { name: arrive.word, exact: true }).click();
+  await selectReplay(arrive);
   for (const width of [320, 390, 768, 1440]) { await p.setViewportSize({ width, height: 900 }); assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false); }
   await p.setViewportSize({ width: 390, height: 844 }); await p.screenshot({ path: out + '/completed-mobile.png' });
   async function audit(name) {

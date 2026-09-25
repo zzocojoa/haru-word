@@ -18,7 +18,7 @@ const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('
     const search = page.getByLabel('단어 또는 한국어 뜻 검색'), dialog = page.getByRole('dialog');
     const expression = () => dialog.getByLabel('함께 익힐 표현', { exact: true });
     async function open(word) { await search.fill(word); await page.getByRole('button', { name: word + ' 동사', exact: true }).click(); }
-    async function close() { await page.keyboard.press('Escape'); await dialog.waitFor({ state: 'hidden' }); }
+    async function close() { await page.keyboard.press('Escape'); if(await page.getByRole('alertdialog').count()) await page.getByRole('button',{name:'변경 버리고 닫기',exact:true}).click(); await dialog.waitFor({ state: 'hidden' }); }
     async function saved() { await page.getByText('서버에 저장됨', { exact: true }).waitFor(); }
     const get = async () => (await context.request.get(base + '/api/state')).json();
     await open('work'); await expression().fill('work today');
@@ -26,16 +26,17 @@ const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('
     await page.getByText('저장 중', { exact: true }).waitFor();
     assert.equal(await expression().isDisabled(), true);
     assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
-    await close(); await open('want'); await expression().fill('want a new draft');
-    await held.continue(); await saved();
-    assert.equal(await dialog.isVisible(), true); assert.equal(await expression().inputValue(), 'want a new draft');
-    checks.push('submitting editor locks inputs and sense changes; previous word save cannot close another editor');
+    await page.keyboard.press('Escape'); await dialog.getByRole('button',{name:'Close',exact:true}).click();
+    assert.equal(await dialog.isVisible(), true); assert.equal(await expression().inputValue(), 'work today');
+    await held.continue(); await saved(); await dialog.waitFor({state:'hidden'});
+    await open('want'); await expression().fill('want a new draft');
+    checks.push('submitting editor locks input, sense changes and dismissal until its response; another editor opens only after completion');
     await close(); await open('work'); await expression().fill('work again');
     await dialog.getByRole('button', { name: '기록 저장', exact: true }).click(); await page.getByText('저장 중', { exact: true }).waitFor();
-    await close(); await open('work'); await expression().fill('reopened work draft');
-    await held.continue(); await saved();
-    assert.equal(await dialog.isVisible(), true); assert.equal(await expression().inputValue(), 'reopened work draft');
-    checks.push('closing and reopening the same word creates an independent editor instance');
+    await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(),true);
+    await held.continue(); await saved(); await dialog.waitFor({state:'hidden'});
+    await open('work'); await expression().fill('reopened work draft');
+    checks.push('a completed save and reopened word have independent editor drafts');
     mode = 'fail'; await dialog.getByRole('button', { name: '기록 저장', exact: true }).click();
     await page.getByText('temporary failure', { exact: true }).waitFor();
     assert.equal(await dialog.isVisible(), true); assert.equal(await expression().inputValue(), 'reopened work draft');
@@ -49,11 +50,12 @@ const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('
     mode = 'hold'; await dialog.getByRole('button', { name: '내 단어장에 추가', exact: true }).click(); await page.getByText('저장 중', { exact: true }).waitFor();
     assert.equal(await dialog.getByLabel('영어 단어', { exact: true }).isDisabled(), true);
     assert.equal(await dialog.getByRole('combobox').isDisabled(), true);
-    await close(); await open('want'); await expression().fill('want preserved');
-    await held.continue(); await saved(); assert.equal(await dialog.isVisible(), true);
+    await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(),true);
+    await held.continue(); await saved(); await dialog.waitFor({state:'hidden'});
+    await open('want'); await expression().fill('want preserved'); assert.equal(await dialog.isVisible(),true);
     assert.equal(await expression().inputValue(), 'want preserved');
     const snapshot = await get(); assert.equal(Object.values(snapshot.state.progress).filter(p => p.personal?.word === 'commute').length, 1);
-    checks.push('personal addition locks all inputs and preserves a subsequently opened editor');
+    checks.push('personal addition locks input and dismissal; subsequent editor input remains independent');
     await page.addScriptTag({ path: axePath });
     const audit = await page.evaluate(async () => (await axe.run(document)).violations);
     assert.deepEqual(audit, []); assert.deepEqual(errors, []);

@@ -40,6 +40,7 @@ module.exports = [
   "review-calendar-qa.cjs",
   "review-extension-qa.cjs",
   "sentence-feedback-qa.cjs",
+  "sheet-dismiss-qa.cjs",
   "settings-dialog-qa.cjs",
   "startup-performance-qa.cjs",
   "study-clock-race-qa.cjs",

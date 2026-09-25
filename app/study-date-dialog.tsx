@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { DialogClose, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { correctDailyStudyDate, isCalendarDate, previousDate } from '@/lib/study-date-correction';
 import type { State } from '@/lib/learning';
 import { HelpDetails } from './study-ui';
@@ -19,7 +20,8 @@ type Props = {
 export function StudyDateDialog({ state, sessionId, date, saving, conflict, save, onClose, onSaved }: Props) {
   const [baseline] = useState(state);
   const source = baseline.sessions[sessionId];
-  const [chosen, setChosen] = useState(() => source.date === date ? previousDate(date) : source.date);
+  const [initialDate] = useState(() => source.date === date ? previousDate(date) : source.date);
+  const [chosen, setChosen] = useState(initialDate);
   const [error, setError] = useState('');
   const [pending, setPending] = useState<State | null>(null);
   // A failed save retries the same snapshot; an unrelated update must not replace it.
@@ -48,7 +50,7 @@ export function StudyDateDialog({ state, sessionId, date, saving, conflict, save
   }
 
   return (
-    <Dialog open onOpenChange={open => { if (!open && !saving) onClose(); }}>
+    <Dialog navigationKey="app.correctDate" blocked={saving} dirty={chosen !== initialDate} open onOpenChange={open => { if (!open && !saving) onClose(); }}>
       <DialogContent
         className="study-date-dialog framed-dialog"
         onInteractOutside={event => { if (saving) event.preventDefault(); }}
@@ -78,7 +80,7 @@ export function StudyDateDialog({ state, sessionId, date, saving, conflict, save
         </div>
         <div className="button-row dialog-actions">
           <button className="primary-button" disabled={blocked || invalidDate} onClick={submit}>{submitLabel}</button>
-          <button className="secondary-button" disabled={saving} onClick={onClose}>닫기</button>
+          <DialogClose asChild><button className="secondary-button" disabled={saving}>닫기</button></DialogClose>
         </div>
       </DialogContent>
     </Dialog>

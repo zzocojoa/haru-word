@@ -1,6 +1,7 @@
 'use client';
 import { useEffect,useState } from 'react';
-import { Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription } from '@/components/ui/dialog';
+import { DialogHeader,DialogTitle,DialogDescription } from '@/components/ui/dialog';
+import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { restoreCapabilities } from '@/lib/restore-client';
 import { serializeBackup } from '@/lib/backup-format';
 import type { State } from '@/lib/learning';
@@ -24,7 +25,7 @@ export default function BackupExportDialog({state,date,now,onClose}:{state:State
   })();return()=>controller.abort();
  },[state,now]);
  const ready=result?.state===state?result:null;
- return <Dialog open onOpenChange={v=>{if(!v)onClose();}}><DialogContent className="framed-dialog" onCloseAutoFocus={e=>{e.preventDefault();document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus();}}><DialogHeader><DialogTitle>전체 백업</DialogTitle><DialogDescription>학습 기록·설정을 JSON 파일로 보관해요.</DialogDescription></DialogHeader>
+ return <Dialog navigationKey="log.export" open onOpenChange={v=>{if(!v)onClose();}}><DialogContent className="framed-dialog" onCloseAutoFocus={e=>{e.preventDefault();document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus();}}><DialogHeader><DialogTitle>전체 백업</DialogTitle><DialogDescription>학습 기록·설정을 JSON 파일로 보관해요.</DialogDescription></DialogHeader>
  <div className="dialog-scroll">{ready?<><p>단어 기록 {Object.keys(state.progress).length.toLocaleString()}개 · 회차 {Object.keys(state.sessions).length.toLocaleString()}개</p><p>파일 크기 {(ready.bytes/1_000_000).toFixed(2)} MB</p><p role={ready.error?'alert':'status'} className={ready.error?'backup-error':'small-note'}>{ready.error||'현재 앱에서 복원 가능한 백업이에요.'}</p></>:<p role="status">파일 크기·복원 가능 여부 확인 중</p>}</div>
  <div className="dialog-actions"><button className="primary-button full" disabled={!ready} onClick={()=>{if(ready){download('haru-words-backup-'+date+'.json',ready.raw);onClose();}}}>{ready?.error?'원본 보관용 다운로드':'백업 파일 다운로드'}</button></div>
  </DialogContent></Dialog>;
