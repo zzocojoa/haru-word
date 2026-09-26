@@ -1,0 +1,57 @@
+.app-splash {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  background: #fff;
+  color: #242621;
+  text-align: center;
+  /* Ready immediately, even when optional web fonts are still pending. */
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.app-splash-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 100%;
+}
+
+.app-splash h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.app-splash p {
+  margin: 0;
+  color: #62675c;
+  font-size: .875rem;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.app-splash-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-splash-spinner {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  border: 2px solid #daddd4;
+  border-top-color: #242621;
+  border-radius: 50%;
+  animation: splash-spin .9s linear infinite;
+}
+
+@keyframes splash-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .app-splash-spinner { animation: none; }
+}

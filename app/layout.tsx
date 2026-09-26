@@ -4,11 +4,11 @@ import { startupImages } from '@/lib/startup-images';
 import "./globals.css";
 import "./study-design.css";
 import './grammar.css';
+import './startup-screen.css';
 
 export const metadata: Metadata = {
   title: "하루단어 · Oxford 3000",
   description: "하루 15분, 헷갈리는 단어부터 내 문장으로. American Oxford 3000 전체 목록으로 배우는 영어.",
-  manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     title: '하루단어',
@@ -37,6 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        {/* The private Site requires credentials even for its same-origin manifest. */}
+        <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
+      </head>
       <body className="antialiased"><WebFonts />{children}</body>
     </html>
   );

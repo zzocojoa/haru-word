@@ -33,6 +33,7 @@ import { WordLibrary } from "./word-library";
 import { useKeyboardInset } from "./use-keyboard-inset";
 import { useTabPosition } from "./use-tab-position";
 import { NavigationProvider, useNavigationGuard, useNavigationEpoch } from './navigation';
+import { StartupScreen } from './startup-screen';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean }) {
@@ -138,6 +139,7 @@ function LearningScreens({
       store={store} state={state} clock={clock}
     />
   );
+  if (store.initializing) return <StartupScreen />;
   return (
     <main
       className="shell"

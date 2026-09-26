@@ -14,6 +14,8 @@ export function useLearningStore() {
   const revision = useRef(0);
   const lock = useRef(false);
   const [loading, setLoading] = useState(true);
+  // Only the first account read owns the splash. Retries/reloads keep recovery UI visible.
+  const [initializing, setInitializing] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [conflict, setConflict] = useState(false);
@@ -58,6 +60,7 @@ export function useLearningStore() {
     } finally {
       lock.current = false;
       setLoading(false);
+      setInitializing(false);
     }
   }, []);
 
@@ -154,5 +157,5 @@ export function useLearningStore() {
     }
   }, [signedIn, unsaved, conflict]);
 
-  return { state, current, stageGrammar, getRevision:()=>revision.current, loading, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
+  return { state, current, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
 }

@@ -43,15 +43,18 @@ async function visibleShell(page) {
         page.on('pageerror', e => errors.push(e.message));
         try {
           await page.goto(base, { waitUntil: 'commit' });
-          await visibleShell(page);
+          if (mode === 'javascript-pending' || mode === 'state-pending') {
+            await page.getByRole('heading', { name: '하루단어', exact: true }).waitFor({ timeout: 5000 });
+            assert.ok(await page.locator('.app-splash').isVisible());
+            assert.ok(await page.getByRole('status').filter({ hasText: '학습 기록을 불러오는 중' }).isVisible());
+            assert.equal(await page.locator('.shell').count(), 0);
+          } else await visibleShell(page);
           if (mode !== 'font-failed') {
             const until = Date.now() + 5000;
             while (!delayed && Date.now() < until) await page.waitForTimeout(20);
             assert.ok(delayed > 0, 'the intended request must actually be pending');
           }
-          if (mode === 'javascript-pending' || mode === 'state-pending')
-            assert.ok(await page.getByRole('heading', { name: '학습 기록을 불러오고 있어요.', exact: true }).isVisible());
-          else {
+          if (mode !== 'javascript-pending' && mode !== 'state-pending') {
             // Optional font failures/delays must not prevent loading the account or using controls.
             await page.getByText('서버에 저장됨', { exact: true }).waitFor({ timeout: 5000 });
             await page.getByRole('button', { name: '학습 설정', exact: true }).click();
@@ -62,6 +65,7 @@ async function visibleShell(page) {
           await page.screenshot({ path: `${out}/${engine}-${mode}.png`, timeout: 5000 });
           release();
           await page.getByText('서버에 저장됨', { exact: true }).waitFor({ timeout: 10000 });
+          assert.equal(await page.locator('.app-splash').count(), 0);
           if (mode !== 'font-failed') await page.waitForFunction(() =>
             getComputedStyle(document.documentElement).getPropertyValue('--qa-font-ready').trim() === 'yes');
           assert.equal(await page.locator('link[data-web-fonts]').count(), 1);
@@ -73,8 +77,11 @@ async function visibleShell(page) {
       const noJS = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 568 } });
       const page = await noJS.newPage();
       await page.goto(base);
-      await visibleShell(page);
-      assert.ok(await page.locator('.loading-surface').isVisible());
+      assert.ok(await page.getByRole('heading', { name: '하루단어', exact: true }).isVisible());
+      // Playwright's text engine deliberately skips noscript descendants.
+      assert.ok(await page.locator('noscript p').isVisible());
+      assert.equal(await page.locator('noscript p').textContent(), 'JavaScript를 켠 뒤 다시 열어 주세요.');
+      assert.equal(await page.locator('.app-splash-status').isVisible(), false);
       assert.equal(await page.locator('link[href*="fonts.googleapis.com"]').count(), 0);
       await noJS.close();
       results.push({ engine, mode: 'no-javascript', passed: true });
@@ -97,6 +104,7 @@ async function visibleShell(page) {
         assert.equal(await page.locator('meta[name="theme-color"]').getAttribute('content'), '#ffffff');
         assert.equal(await page.locator('meta[name="apple-mobile-web-app-capable"]').getAttribute('content'), 'yes');
         assert.equal(await page.locator('link[rel="manifest"]').getAttribute('href'), '/manifest.webmanifest');
+        assert.equal(await page.locator('link[rel="manifest"]').getAttribute('crossorigin'), 'use-credentials');
         const manifest = await context.request.get(base + '/manifest.webmanifest');
         assert.equal(manifest.status(), 200);
         assert.equal((await manifest.json()).start_url, '/');

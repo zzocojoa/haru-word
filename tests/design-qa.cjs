@@ -22,7 +22,7 @@ const checks=[];const errors=[];
   let release;const gate=new Promise(resolve=>{release=resolve});
   await p.route('**/api/state',async route=>{await gate;await route.continue()});
   await p.goto(base,{waitUntil:'domcontentloaded'});
-  await p.locator('.loading-surface[aria-busy=true]').waitFor();
+  await p.locator('.app-splash[aria-busy=true]').waitFor();
   assert.equal(await p.locator('.home-panel').count(),0);
   release();await saved();await p.unroute('**/api/state');
   assert.equal(await p.locator('.library-panel,.review-grid,.journal-list').count(),0);
