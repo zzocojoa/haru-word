@@ -44,6 +44,7 @@ module.exports = [
   "sheet-motion-qa.cjs",
   "settings-dialog-qa.cjs",
   "startup-performance-qa.cjs",
+  "startup-render-qa.cjs",
   "study-clock-race-qa.cjs",
   "study-controller-render-qa.cjs",
   "study-date-qa.cjs",

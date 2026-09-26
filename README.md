@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+iPhone 홈 화면 실행 시 초기 흰 화면의 원인, 폰트·시작 화면 개선과 검증·롤백은 [STARTUP_RENDERING.md](STARTUP_RENDERING.md)를 참조하세요.
+
 완성된 학습 기능, 출처, 테스트, 보안·롤백 안내는 [OPERATIONS.md](OPERATIONS.md)를 참조하세요. 화면은 한국어이며 전체 3,809개 학습 항목을 제공합니다. 아래는 기반 런타임의 유지보수 문서입니다.
 
 단어장 내 15개 품사 수업·90개 연습 문제의 진도, AI, 백업 호환 및 배포 지침은 [GRAMMAR_LEARNING.md](GRAMMAR_LEARNING.md)를 참조하세요.
