@@ -46,16 +46,34 @@ fs.mkdirSync(out, { recursive: true });
             assert.equal(calls, 1, 'initial failure must not trigger automatic retries');
             release();
             await context.unroute('**/api/state');
-            let retryRelease;
-            const retryGate = new Promise(resolve => { retryRelease = resolve; });
             let retries = 0;
-            await context.route('**/api/state', async route => { retries++; await retryGate; await route.continue(); });
-            await page.getByRole('button', { name: '다시 시도', exact: true }).click();
-            await page.getByText('기록 불러오는 중', { exact: true }).waitFor();
-            assert.equal(await page.locator('.app-splash').count(), 0, 'retry must preserve the normal recovery surface');
-            retryRelease();
-            await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-            assert.equal(retries, 1);
+            // A second failure must still settle to usable recovery controls;
+            // neither a failed retry nor a successful one may replay startup.
+            for (const retryFails of [true, false]) {
+              let retryRelease;
+              const retryGate = new Promise(resolve => { retryRelease = resolve; });
+              await context.route('**/api/state', async route => {
+                retries++;
+                await retryGate;
+                if (retryFails) return route.fulfill({ status: 503, json: { error: '재시도 연결 실패' } });
+                await route.continue();
+              });
+              try {
+                await page.getByRole('button', { name: '다시 시도', exact: true }).click();
+                await page.getByText('기록 불러오는 중', { exact: true }).waitFor();
+                assert.equal(await page.locator('.app-splash').count(), 0, 'retry must preserve the normal recovery surface');
+                retryRelease();
+                if (retryFails) {
+                  await page.getByRole('alert').filter({ hasText: '재시도 연결 실패' }).waitFor();
+                  assert.ok(await page.getByRole('button', { name: '다시 시도', exact: true }).isEnabled());
+                } else await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+                assert.equal(await page.locator('.app-splash').count(), 0);
+              } finally {
+                retryRelease();
+                await context.unroute('**/api/state');
+              }
+            }
+            assert.equal(retries, 2, 'one request per manual retry, even after repeated failures');
             const before = await (await context.request.get(base + '/api/state')).json();
             for (const name of ['전체 단어장', '주간·월말 점검', '학습 기록', '오늘의 학습']) {
               await page.getByRole('tab', { name, exact: true }).click();

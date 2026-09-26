@@ -5,17 +5,22 @@ import { stateDelta } from '@/lib/state-delta';
 import { InvalidResponseError, RequestTimeoutError } from '@/lib/client-request';
 import { loadLearningState, restoreLearningState, saveLearningState } from '@/lib/learning-api';
 import { commitRestore } from '@/lib/restore-client';
+import type { StateSnapshot } from '@/lib/api-contracts';
 import type { GrammarProgress, LessonId } from '@/lib/grammar/model';
 
+type LoadPhase = 'initializing' | 'reloading' | 'idle';
+
 export function useLearningStore() {
-  const [state, setState] = useState<State>(structuredClone(EMPTY));
+  const [state, setState] = useState<State>(() => structuredClone(EMPTY));
   const current = useRef(state);
   const persisted = useRef(state);
   const revision = useRef(0);
   const lock = useRef(false);
-  const [loading, setLoading] = useState(true);
-  // Only the first account read owns the splash. Retries/reloads keep recovery UI visible.
-  const [initializing, setInitializing] = useState(true);
+  // A single phase keeps loading and splash visibility in sync. Once settled,
+  // retries/reloads use the normal recovery surface, never the startup screen.
+  const [loadPhase, setLoadPhase] = useState<LoadPhase>('initializing');
+  const loading = loadPhase !== 'idle';
+  const initializing = loadPhase === 'initializing';
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [conflict, setConflict] = useState(false);
@@ -23,6 +28,19 @@ export function useLearningStore() {
   const [unsaved, setUnsaved] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [epoch, setEpoch] = useState(0);
+
+  // Only validated reads/restores replace the entire local snapshot. Saves keep
+  // their own acknowledgement path so newer in-flight grammar drafts survive.
+  const applySnapshot = useCallback(({ state: next, revision: nextRevision }: StateSnapshot) => {
+    revision.current = nextRevision;
+    persisted.current = next;
+    current.current = next;
+    setState(next);
+    setUnsaved(false);
+    setConflict(false);
+    setEpoch(n => n + 1);
+  }, []);
+
   const stageGrammar = useCallback((id: LessonId, draft: GrammarProgress) => {
     const next = { ...current.current, grammar: { ...current.current.grammar, [id]: draft } };
     current.current = next;
@@ -33,7 +51,7 @@ export function useLearningStore() {
   const load = useCallback(async () => {
     if (lock.current) return false;
     lock.current = true;
-    setLoading(true);
+    setLoadPhase(phase => phase === 'initializing' ? phase : 'reloading');
     setError('');
     try {
       const result = await loadLearningState();
@@ -42,14 +60,8 @@ export function useLearningStore() {
         return false;
       }
       if (!result.ok) throw new Error(result.data.error || '기록을 불러오지 못했습니다.');
-      revision.current = result.data.revision;
-      persisted.current = result.data.state;
-      current.current = result.data.state;
-      setState(result.data.state);
+      applySnapshot(result.data);
       setSignedIn(true);
-      setUnsaved(false);
-      setConflict(false);
-      setEpoch(n => n + 1);
       return true;
     } catch (e) {
       if (e instanceof InvalidResponseError) setConflict(true);
@@ -59,10 +71,9 @@ export function useLearningStore() {
       return false;
     } finally {
       lock.current = false;
-      setLoading(false);
-      setInitializing(false);
+      setLoadPhase('idle');
     }
-  }, []);
+  }, [applySnapshot]);
 
   // Load and subscribe to the external account state on mount.
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -122,13 +133,15 @@ export function useLearningStore() {
     setRestoring(true);
     setError('');
     try {
-      if(jobId){
-        const receipt=await commitRestore(jobId);
-        if(receipt.status!=='committed'||receipt.baseRevision!==revision.current||receipt.revision!==revision.current+1)throw new InvalidResponseError();
-        const fresh=await loadLearningState();
-        if(!fresh.ok||fresh.data.revision<receipt.revision)throw new InvalidResponseError();
-        revision.current=fresh.data.revision;persisted.current=fresh.data.state;current.current=fresh.data.state;
-        setState(fresh.data.state);setUnsaved(false);setConflict(false);setEpoch(n=>n+1);return true;
+      if (jobId) {
+        const receipt = await commitRestore(jobId);
+        if (receipt.status !== 'committed' || receipt.baseRevision !== revision.current || receipt.revision !== revision.current + 1) {
+          throw new InvalidResponseError();
+        }
+        const fresh = await loadLearningState();
+        if (!fresh.ok || fresh.data.revision < receipt.revision) throw new InvalidResponseError();
+        applySnapshot(fresh.data);
+        return true;
       }
       const result = await restoreLearningState(next, revision.current);
       if (!result.ok || result.data.revision !== revision.current + 1) {
@@ -136,14 +149,8 @@ export function useLearningStore() {
         setConflict(true);
         return false;
       }
-      revision.current = result.data.revision;
       const restored = next.grammar === undefined ? { ...next, grammar: current.current.grammar } : next;
-      persisted.current = restored;
-      current.current = restored;
-      setState(restored);
-      setUnsaved(false);
-      setConflict(false);
-      setEpoch(n => n + 1);
+      applySnapshot({ state: restored, revision: result.data.revision });
       return true;
     } catch {
       // An uncertain replacement must be reconciled by loading, never blindly retried.
@@ -155,7 +162,7 @@ export function useLearningStore() {
       setSaving(false);
       setRestoring(false);
     }
-  }, [signedIn, unsaved, conflict]);
+  }, [signedIn, unsaved, conflict, applySnapshot]);
 
   return { state, current, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
 }
