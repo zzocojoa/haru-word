@@ -1,4 +1,33 @@
 /* Grammar practice uses the shared white/charcoal/lime palette. */
+.grammar-reading { border:1px solid var(--border); border-radius:12px; padding:20px; background:var(--surface); }
+.grammar-reading-tools,.grammar-gloss-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.grammar-reading-line + .grammar-reading-line { margin-top:16px; }
+.grammar-reading-text { font-size:1.2rem; line-height:2.1 !important; margin:8px 0; }
+.grammar-gloss-word { display:inline; padding:5px 2px; text-align:left; text-decoration:underline; text-decoration-style:dotted; text-underline-offset:5px; border-radius:3px; font:inherit; color:inherit; }
+.grammar-gloss-word:hover,.grammar-gloss-word[data-state=open] { background:var(--accent); }
+.grammar-gloss-word[data-revealed=true] { background:var(--action); text-decoration-style:solid; }
+.grammar-inline-role { font-size:.75rem; margin-left:4px; font-weight:600; }
+.grammar-gloss { width:20rem; max-width:calc(100vw - 32px); max-height:var(--radix-popover-content-available-height); overflow:auto; padding:16px; background:var(--card); color:var(--ink); border:1px solid var(--border); border-radius:12px; box-shadow:0 8px 30px #0002; z-index:60; }
+.grammar-gloss[data-state] { animation:none; }
+.grammar-gloss p { margin:10px 0 0; line-height:1.6; overflow-wrap:anywhere; font-size:1rem; }
+.grammar-gloss-heading b { font-size:1.25rem; overflow-wrap:anywhere; }
+.grammar-gloss .icon-button { min-width:44px; min-height:44px; }
+.grammar-gloss :focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+.grammar-reading-translation { color:var(--caption); font-size:1rem; }
+.grammar-stage > .grammar-stage { padding-top:0; }
+.grammar-frame { border:1px solid var(--border); border-radius:12px; padding:16px; }
+.grammar-frame summary { font-weight:600; min-height:44px; cursor:pointer; padding-block:10px; }
+.grammar-frame-slots { display:grid; gap:16px; margin-block:12px; }
+.grammar-frame legend { font-size:.875rem; margin-bottom:8px; }
+.grammar-frame [aria-pressed=true] { background:var(--action); border-color:var(--ink); }
+.grammar-frame > p { font-size:1.25rem; padding:12px; background:var(--surface); border-radius:8px; }
+.grammar-frame > button { margin:12px 0 0 8px; }
+.grammar-self-checks { display:grid; gap:16px; }
+.grammar-self-checks h3 { font-weight:600; }
+.grammar-check-options { display:flex; flex-wrap:wrap; gap:8px; }
+.grammar-check-options label { flex:1 1 115px; padding:8px; margin:0; font-size:.875rem; gap:8px; }
+.grammar-review-recommendation { padding:12px 16px; border-left:3px solid var(--ink); background:var(--surface); font-size:.875rem; }
+@media(max-width:520px) { .grammar-reading { padding:16px; } .grammar-reading-tools { align-items:flex-start; } }
 .library-mode-tabs { display:flex; width:fit-content; max-width:100%; height:auto; padding:4px; margin-bottom:24px; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
 .topbar { height:auto; min-height:64px; flex-wrap:wrap; gap:8px 16px; padding-block:8px; }
 .topbar .brand,.topbar .top-actions { flex-shrink:0; }

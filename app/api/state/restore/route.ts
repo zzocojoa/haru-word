@@ -5,6 +5,8 @@ import { MAX_BACKUP_BYTES, parseBackup } from '@/lib/backup';
 import { json, validateJsonMutation } from '@/lib/server/http';
 import { largeRestoreEnabled } from '@/lib/server/restore-http';
 import { LARGE_BACKUP_BYTES, RESTORE_PART_BYTES } from '@/lib/restore-protocol';
+import { hasSavedModernGrammar } from '@/db/grammar-compatibility';
+import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar } from '@/lib/grammar/compatibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,6 +50,9 @@ export async function POST(request: Request) {
   catch (e) { return json({ error: e instanceof Error ? e.message : '백업 파일을 확인해 주세요.' }, 400); }
   const started = Date.now();
   try {
+    if (state.grammar !== undefined && request.headers.get('x-study-grammar') !== '2' &&
+        (Object.values(state.grammar).some(hasModernGrammar) || await hasSavedModernGrammar(database(), user.userId)))
+      return json({ error: GRAMMAR_UPGRADE_MESSAGE }, 426);
     if (!await restoreState(database(), user.userId, revision, state)) {
       return json({ error: '다른 기기에서 기록이 바뀌었어요. 최신 기록을 확인하고 다시 복원해 주세요.', conflict: true }, 409);
     }

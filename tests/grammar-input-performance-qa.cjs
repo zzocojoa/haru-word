@@ -5,14 +5,15 @@ const { build } = require('esbuild');
 const { launchBrowser, closeBrowser, base, accountHeaders } = require('./qa/runtime.cjs');
 const { history } = require('./fixtures/backup-history.cjs');
 (async () => {
-  await build({ entryPoints: ['lib/grammar/content.ts'], outfile: 'work/grammar-input-content.cjs', bundle: true, platform: 'node', format: 'cjs', logLevel: 'silent' });
-  const noun = require('../work/grammar-input-content.cjs').LESSON_MAP.get('noun');
+  await build({ entryPoints: ['lib/grammar/content-v2.ts', 'lib/grammar/practice.ts'], outdir: 'work/grammar-input-v2', outExtension: { '.js': '.cjs' }, bundle: true, platform: 'node', format: 'cjs', logLevel: 'silent' });
+  const noun = require('../work/grammar-input-v2/content-v2.cjs').PRACTICE_LESSONS.noun;
+  const { newLessonProgress } = require('../work/grammar-input-v2/practice.cjs');
   const browser = await launchBrowser(), results = [], errors = [];
   try {
     for (const count of [0, 1825]) for (let sample = 1; sample <= 3; sample++) {
       let state = history(count, 3), revision = 1, writes = 0;
       const original = { settings: state.settings, progress: state.progress, sessions: state.sessions };
-      state.grammar = { noun: { stage: 5, answers: Object.fromEntries(noun.questions.map((q, i) => ['q' + (i + 1), { first: q.answer, latest: q.answer, helped: false, attempts: 1 }])), sentence: 'I like books.', updatedAt: new Date().toISOString() } };
+      state.grammar = { noun: { ...newLessonProgress('noun'), stage: 5, observation: { first: noun.observation.answer, latest: noun.observation.answer, helped: false, attempts: 1 }, answers: Object.fromEntries(noun.questions.map((q, i) => ['q' + (i + 1), { first: q.answer, latest: q.answer, helped: false, attempts: 1 }])), sentence: 'I like books.' } };
       const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('grammar_input_perf') });
       const page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
       await page.route('**/api/state', route => {

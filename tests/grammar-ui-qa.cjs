@@ -65,6 +65,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     assert.match(await page.locator('.grammar-stepper [aria-current=step]').innerText(), /연습하기/);
     assert.equal(await page.locator('.grammar-feedback').getAttribute('data-tone'), 'review');
     await page.getByRole('button', { name: 'teacher', exact: true }).focus(); await page.keyboard.press('Enter');
+    await page.getByRole('button', { name: '답 확인', exact: true }).click();
     assert.equal(await page.getByRole('button', { name: 'teacher', exact: true }).getAttribute('aria-pressed'), 'true');
     assert.equal(await page.locator('.grammar-feedback').getAttribute('data-tone'), 'success');
     assert.match(await page.locator('.grammar-feedback').innerText(), /처음엔 오답/);

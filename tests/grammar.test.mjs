@@ -5,7 +5,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { build } from 'esbuild';
 import { EMPTY, pickDaily, learningMetrics } from '../lib/learning.ts';
 mkdirSync('work/grammar-tests', { recursive: true });
-await build({ entryPoints: ['lib/grammar/model.ts', 'lib/grammar/content.ts', 'lib/grammar/feedback.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'db/restore-jobs.ts', 'db/learning-state.ts', 'lib/state-delta.ts', 'app/grammar/grammar-presentation.ts'], outdir: 'work/grammar-tests', entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
+await build({ entryPoints: ['lib/grammar/content-v2.ts', 'lib/grammar/practice.ts', 'lib/grammar/compatibility.ts', 'lib/grammar/model.ts', 'lib/grammar/content.ts', 'lib/grammar/feedback.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'db/restore-jobs.ts', 'db/learning-state.ts', 'lib/state-delta.ts', 'app/grammar/grammar-presentation.ts'], outdir: 'work/grammar-tests', entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
 const model = await import('../work/grammar-tests/model.mjs');
 const { GRAMMAR_LESSONS, answerCorrect, exampleFocusStart, firstAnswerLabel, needsGrammarReview } = await import('../work/grammar-tests/content.mjs');
 const { analyzeBackup } = await import('../work/grammar-tests/backup-analysis.mjs');
@@ -15,6 +15,9 @@ const { saveState, restoreState, loadStateDocuments } = await import('../work/gr
 const { stateDelta } = await import('../work/grammar-tests/state-delta.mjs');
 const { generateGrammarFeedback } = await import('../work/grammar-tests/feedback.mjs');
 const { grammarStep, grammarCatalog, grammarFeedbackTone } = await import('../work/grammar-tests/grammar-presentation.mjs');
+const { PRACTICE_LESSONS, glossRanges, frameSentence } = await import('../work/grammar-tests/content-v2.mjs');
+const practice = await import('../work/grammar-tests/practice.mjs');
+const { hasModernGrammar, legacyGrammarDocument } = await import('../work/grammar-tests/compatibility.mjs');
 const date = '2026-09-24T00:00:00.000Z', words = JSON.parse(readFileSync('data/words.json', 'utf8'));
 const initial = () => model.newGrammarProgress(date);
 const completed = () => ({ ...initial(), stage: 6, answers: Object.fromEntries(['q1', 'q2', 'q3'].map(k => [k, model.recordAnswer(undefined, 'answer')])), sentence: 'I like music.', check: 'appropriate', completedAt: date });
@@ -286,4 +289,137 @@ test('state API negotiates grammar snapshots; strict old clients retain their sh
   const modern = await (await stateRoute.GET(new Request('https://study.example/api/state', { headers: { 'X-Study-Grammar': '1' } }))).json(); assert.deepEqual(modern.state.grammar, { noun: initial() });
   const oldPut = new Request('https://study.example/api/state', { method: 'PUT', headers: { 'content-type': 'application/json', origin: 'https://study.example' }, body: JSON.stringify({ revision: 0, sessions: {}, progress: {} }) });
   assert.equal((await stateRoute.PUT(oldPut)).status, 200); assert.equal(readGrammar().length, 1);
+});
+
+function v2Completed(id = 'noun', studyDate = '2026-09-27') {
+  let p = practice.newLessonProgress(id, date), l = PRACTICE_LESSONS[id];
+  p.observation = model.recordAnswer(undefined, l.observation.answer);
+  p.answers = Object.fromEntries(l.questions.map((q, i) => [`q${i + 1}`, model.recordAnswer(undefined, q.answer)]));
+  p.sentence = frameSentence(l.frame, []); p.checks = { meaning: 'appropriate', form: 'appropriate' }; p.check = 'appropriate';
+  return practice.completeLesson(p, studyDate, studyDate + 'T03:00:00.000Z');
+}
+function reviewAnswers(id, p, helped = false) {
+  p = structuredClone(p);
+  p.review.answers = Object.fromEntries(practice.questionsFor(id, p, true).map((q, i) => [`q${i + 1}`, model.recordAnswer(undefined, q.answer, helped)]));
+  return p;
+}
+test('v2 has 15 contextual readings, 135 versioned problems and unambiguous gloss positions', () => {
+  let questions = 0; const unique = new Set();
+  for (const id of model.LESSON_IDS) {
+    const l = PRACTICE_LESSONS[id], words = l.reading.map(line => line.en).join(' ').split(/\s+/).length;
+    assert.ok(l.reading.length >= 2 && l.reading.length <= 3); assert.ok(words >= 20 && words <= 40, `${id}: ${words} words`);
+    for (const line of l.reading) {
+      assert.ok(line.ko); let end = 0;
+      for (const g of glossRanges(line)) { assert.ok(g.start >= end, `${id}: ${g.text}`); assert.equal(line.en.slice(g.start, g.end), g.text); end = g.end; assert.ok(g.pos && g.role && g.meaning && g.lemma); }
+    }
+    assert.equal(l.checks.length, 2); assert.ok(l.commonMistake); assert.equal(l.frame.parts.length, (l.frame.bindings?.length ?? l.frame.slots.length) + 1); assert.ok(frameSentence(l.frame, []));
+    assert.ok(l.observation.id && l.observation.options.includes(l.observation.answer));
+    for (const bank of [l.questions, l.reviews.a, l.reviews.b]) {
+      assert.equal(bank.length, 3);
+      for (const q of bank) {
+        questions++; assert.ok(!unique.has(q.id)); unique.add(q.id); assert.ok(q.clue && q.translation && q.explanation);
+        if (q.kind === 'choice') for (const option of q.options) { if (option !== q.answer) assert.ok(q.wrong[option]); }
+        else { assert.ok(q.options.every(token => !token.includes(' ')), q.id); assert.equal(q.options.slice().sort().join(' '), q.answer.split(' ').sort().join(' ')); }
+      }
+    }
+    assert.notDeepEqual(l.reviews.a.map(q => q.context + q.answer), l.reviews.b.map(q => q.context + q.answer));
+  }
+  assert.equal(questions, 135);
+});
+
+test('v2 accepts authored alternative orders without changing legacy scoring or allowing arbitrary orders', () => {
+  const q = PRACTICE_LESSONS.verb.reviews.b[2];
+  assert.equal(answerCorrect(q, 'every night. They read'), true);
+  assert.equal(answerCorrect(q, 'They every read night.'), false);
+  assert.equal(answerCorrect({ ...q, id: undefined }, 'every night. They read'), false);
+  assert.equal(frameSentence(PRACTICE_LESSONS['definite-article'].frame, ['pen']), 'I have a pen. The pen is blue.');
+});
+
+test('observation errors remain visible until a fresh review; writing checks do not grade retrieval', () => {
+  const p = v2Completed(); p.observation = model.recordAnswer(undefined, '일하는 행동');
+  assert.equal(practice.grammarReviewStatus('noun', p, '2026-09-27').needsWork, true);
+  const next = practice.finishGrammarReview('noun', reviewAnswers('noun', practice.startGrammarReview('noun', p, '2026-09-28')), '2026-09-28');
+  assert.equal(practice.grammarReviewStatus('noun', next, '2026-09-28').needsWork, false);
+  assert.equal(next.observation.first, '일하는 행동');
+  p.check = 'uncertain'; p.checks = { meaning: 'uncertain', form: 'appropriate' };
+  const uncertain = practice.finishGrammarReview('noun', reviewAnswers('noun', practice.startGrammarReview('noun', p, '2026-09-28')), '2026-09-28');
+  assert.equal(uncertain.schedule.passed, 1); assert.equal(uncertain.schedule.nextDate, '2026-10-05');
+  assert.equal(practice.grammarReviewStatus('noun', uncertain, '2026-09-28').needsWork, true);
+});
+
+test('v2 metadata requires its version and a later valid recommendation date', () => {
+  const p = v2Completed();
+  for (const mutate of [p => delete p.contentVersion, p => delete p.schedule.nextDate, p => p.schedule.nextDate = p.schedule.lastDate]) {
+    const bad = structuredClone(p); mutate(bad); assert.equal(model.grammarProgressSchema.safeParse(bad).success, false);
+  }
+  const review = practice.startGrammarReview('noun', p, '2026-09-28'); delete review.review.contentVersion;
+  assert.equal(model.grammarProgressSchema.safeParse(review).success, false);
+});
+test('v2 completion requires observation and both checks; drafts and backups preserve all optional fields', async () => {
+  for (const id of model.LESSON_IDS) {
+    const p = v2Completed(id);
+    assert.equal(model.grammarStateSchema.safeParse({ [id]: p }).success, true, id);
+    for (const mutate of [p => delete p.observation, p => delete p.checks.form, p => p.questionIds[0] = 'wrong:2:base:q1', p => p.check = 'uncertain']) {
+      const bad = structuredClone(p); mutate(bad); assert.equal(model.grammarStateSchema.safeParse({ [id]: bad }).success, false, id);
+    }
+    const state = { ...structuredClone(EMPTY), grammar: { [id]: { ...p, frame: ['books'], clues: ['q1'] } } };
+    const backup = await analyzeBackup(raw(state)); assert.deepEqual(backup.parsed.state, state);
+    assert.deepEqual(parsePart(backup.parts[0], backup.manifest.parts[0]), state.grammar);
+  }
+  const p = practice.newLessonProgress('noun', date);
+  assert.equal(model.grammarProgressSchema.safeParse({ ...p, stage: 1 }).success, false);
+  assert.equal(model.combinedCheck({ meaning: 'appropriate', form: 'uncertain' }), 'uncertain');
+  assert.equal(model.combinedCheck({ meaning: 'appropriate' }), undefined);
+});
+test('review recommendations separate same-day extras, failed next-day attempts and two delayed independent passes', () => {
+  const original = v2Completed(), before = structuredClone(original);
+  let p = practice.startGrammarReview('noun', original, '2026-09-27'); assert.equal(p.review.mode, 'extra');
+  p = practice.finishGrammarReview('noun', reviewAnswers('noun', p), '2026-09-27');
+  assert.equal(p.schedule.passed, 0); assert.equal(p.schedule.nextDate, '2026-09-28'); assert.equal(p.schedule.nextSet, 'b');
+  p = practice.startGrammarReview('noun', p, '2026-09-28'); assert.equal(p.review.mode, 'scheduled');
+  p = practice.finishGrammarReview('noun', reviewAnswers('noun', p, true), '2026-09-28');
+  assert.equal(p.schedule.nextDate, '2026-09-29'); assert.equal(p.schedule.passed, 0);
+  p = practice.startGrammarReview('noun', p, '2026-09-29'); assert.equal(p.review.reused, true);
+  p = practice.finishGrammarReview('noun', reviewAnswers('noun', p), '2026-09-29');
+  assert.equal(p.schedule.nextDate, '2026-10-06'); assert.equal(p.schedule.passed, 1);
+  p = practice.startGrammarReview('noun', p, '2026-10-06');
+  p = practice.finishGrammarReview('noun', reviewAnswers('noun', p), '2026-10-06');
+  assert.equal(p.schedule.passed, 2); assert.equal(p.schedule.nextDate, undefined);
+  assert.equal(practice.startGrammarReview('noun', p, '2026-10-07').review.mode, 'extra');
+  assert.deepEqual(original, before); assert.ok(model.grammarStateSchema.safeParse({ noun: p }).success);
+  assert.equal(practice.grammarReviewStatus('noun', original, '2026-09-27').due, false);
+  assert.equal(practice.grammarReviewStatus('noun', original, '2026-09-28').due, true);
+  assert.equal(grammarCatalog({ noun: original }, 'review', '2026-09-28').visibleCount, 1);
+});
+test('v1 answers and in-progress reviews stay pinned; only a new review uses v2', () => {
+  const p = completed(), original = structuredClone(p);
+  assert.deepEqual(practice.questionsFor('noun', p), GRAMMAR_LESSONS[0].questions);
+  const reviewing = { ...p, review: { index: 0, answers: {} } };
+  assert.deepEqual(practice.questionsFor('noun', reviewing, true), GRAMMAR_LESSONS[0].review);
+  assert.deepEqual(practice.startGrammarReview('noun', reviewing, '2026-09-28'), reviewing);
+  const next = practice.startGrammarReview('noun', p, '2026-09-28');
+  assert.equal(next.review.contentVersion, 2); assert.deepEqual(next.answers, original.answers);
+  assert.equal(legacyGrammarDocument(next).review, undefined); assert.equal(legacyGrammarDocument(v2Completed()), undefined);
+  const pendingChoice = { ...reviewing, review: { ...reviewing.review, choice: 'tea' } };
+  assert.equal(hasModernGrammar(pendingChoice), true); assert.equal(legacyGrammarDocument(pendingChoice).review.choice, undefined);
+  assert.deepEqual(p, original);
+});
+test('v2 state negotiation protects against old writes and keeps vocabulary-only clients working', async () => {
+  grammarRuntime.user = { userId: 'owner' };
+  const modern = v2Completed(); sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner', 'noun', JSON.stringify(modern));
+  const get = async version => (await (await stateRoute.GET(new Request('https://study.example/api/state', { headers: { 'X-Study-Grammar': version } }))).json()).state;
+  assert.deepEqual((await get('2')).grammar, { noun: modern }); assert.deepEqual((await get('1')).grammar, {});
+  const put = (data, version) => stateRoute.PUT(new Request('https://study.example/api/state', { method: 'PUT', headers: { 'content-type': 'application/json', origin: 'https://study.example', ...(version ? { 'X-Study-Grammar': version } : {}) }, body: JSON.stringify({ revision: 0, progress: {}, sessions: {}, ...data }) }));
+  const before = readGrammar(); assert.equal((await put({ grammar: { noun: initial() } })).status, 426); assert.deepEqual(readGrammar(), before);
+  assert.equal((await put({})).status, 200); assert.deepEqual(readGrammar(), before);
+  assert.equal((await put({ revision: 1, grammar: { noun: modern } }, '2')).status, 200);
+});
+test('old chunk restore cannot drop v2 grammar; modern restore remains atomic and round-trips', async () => {
+  const current = v2Completed(); sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner', 'noun', JSON.stringify(current));
+  const job = await prepareRestore({ ...structuredClone(EMPTY), grammar: {} }); const before = readGrammar();
+  await assert.rejects(jobs.commitRestoreJob(db, 'owner', job.id, 1), e => e.status === 426); assert.deepEqual(readGrammar(), before);
+  await jobs.cancelRestoreJob(db, 'owner', job.id);
+  const good = await prepareRestore({ ...structuredClone(EMPTY), grammar: { verb: v2Completed('verb') } });
+  failAt = 4; await assert.rejects(jobs.commitRestoreJob(db, 'owner', good.id, 2)); assert.deepEqual(readGrammar(), before);
+  failAt = -1; await jobs.commitRestoreJob(db, 'owner', good.id, 2); assert.deepEqual(JSON.parse(readGrammar()[0].document), v2Completed('verb'));
 });

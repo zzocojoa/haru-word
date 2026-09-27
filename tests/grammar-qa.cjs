@@ -1,6 +1,5 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const path = require('node:path');
 const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('./qa/runtime.cjs');
 
 (async () => {
@@ -8,12 +7,14 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
   const context = await browser.newContext({ extraHTTPHeaders: headers, viewport: { width: 390, height: 844 } });
   const page = await context.newPage(), errors = [];
   page.on('pageerror', e => errors.push(e.message));
-  const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1' } })).json();
+  const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '2' } })).json();
   const until = async (check, label) => { for (let i = 0; i < 100; i++) { if (await check()) return; await page.waitForTimeout(100); } throw Error(label); };
   const grammar = () => page.getByRole('tab', { name: '품사·문장 연습', exact: true });
   const getSentence = () => page.getByRole('textbox', { name: '내 문장', exact: true });
   fs.mkdirSync('outputs/grammar', { recursive: true });
   try {
+    const seed = await snapshot();
+    assert.equal((await context.request.put(base + '/api/state', { data: { revision: seed.revision, progress: {}, sessions: {}, grammar: { noun: { stage: 0, answers: {}, sentence: '', updatedAt: new Date().toISOString() } } } })).status(), 200);
     await page.goto(base); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
     await grammar().click(); assert.equal(await page.locator('.grammar-tile').count(), 15);
     for (const width of [320, 390, 768, 1440]) {
@@ -30,11 +31,14 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     await page.getByRole('button', { name: '역할 알아보기' }).click();
     await page.getByRole('button', { name: '3문제 연습' }).click();
     await page.getByRole('button', { name: 'reads', exact: true }).click();
+    await page.getByRole('button', { name: '답 확인', exact: true }).click();
     await page.getByRole('button', { name: 'teacher', exact: true }).click();
+    await page.getByRole('button', { name: '답 확인', exact: true }).click();
     assert.match(await page.locator('.grammar-feedback').innerText(), /처음 답: reads/);
     await page.getByRole('button', { name: '다음', exact: true }).click();
     await page.getByRole('button', { name: '답을 보고 도움받기', exact: true }).click();
     await page.getByRole('button', { name: 'bag', exact: true }).click();
+    await page.getByRole('button', { name: '답 확인', exact: true }).click();
     await page.getByRole('button', { name: '다음', exact: true }).click();
     for (const text of ['I', 'like', 'music.']) { const b = page.getByRole('button', { name: text, exact: true }); await b.focus(); await page.keyboard.press('Enter'); }
     await page.getByRole('button', { name: '정답 확인', exact: true }).click();
@@ -84,9 +88,9 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     assert.match(await page.locator('.grammar-results').innerText(), /처음엔 오답/);
     assert.match(await page.locator('.grammar-results').innerText(), /도움 사용/);
     await page.getByRole('button', { name: '다른 3문제로 확인', exact: true }).click();
-    await page.getByRole('button', { name: '명사', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
-    await page.getByRole('button', { name: 'shop', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
-    for (const text of ['My friend', 'likes', 'tea.']) await page.getByRole('button', { name: text, exact: true }).click();
+    await page.getByRole('button', { name: '명사', exact: true }).click(); await page.getByRole('button', { name: '답 확인', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
+    await page.getByRole('button', { name: 'shop', exact: true }).click(); await page.getByRole('button', { name: '답 확인', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
+    for (const text of ['My', 'friend', 'likes', 'tea.']) await page.getByRole('button', { name: text, exact: true }).click();
     await page.getByRole('button', { name: '정답 확인', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
     await page.getByRole('button', { name: '같은 품사의 단어 보기' }).click();
     assert.match(await page.getByRole('combobox', { name: '품사 필터' }).innerText(), /명사/);

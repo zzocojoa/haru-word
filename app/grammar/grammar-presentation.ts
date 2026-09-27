@@ -1,4 +1,6 @@
-import { GRAMMAR_LESSONS, needsGrammarReview } from '@/lib/grammar/content';
+import { GRAMMAR_LESSONS } from '@/lib/grammar/content';
+import { grammarReviewStatus } from '@/lib/grammar/practice';
+import { today } from '@/lib/learning/dates';
 import type { GrammarProgress, GrammarState } from '@/lib/grammar/model';
 import type { SentenceFeedback } from '@/lib/sentence-feedback';
 
@@ -33,18 +35,19 @@ export function grammarStep(progress: GrammarProgress) {
 
 // Counts, badges and visible rows share the same projection. A pending review
 // keeps its existing "이어 하기" status; display filters never modify progress.
-export function grammarCatalog(progress: GrammarState, filter: GrammarFilter) {
+export function grammarCatalog(progress: GrammarState, filter: GrammarFilter, date = today()) {
   const counts = { all: 0, continue: 0, review: 0, complete: 0 };
   const lessons = GRAMMAR_LESSONS.map(lesson => {
     const saved = progress[lesson.id];
     const complete = !!saved?.completedAt && !(saved.review && !saved.review.completedAt);
     const continuing = !!saved && !complete;
-    const review = needsGrammarReview(lesson, saved);
+    const recommendation = grammarReviewStatus(lesson.id, saved, date);
+    const review = recommendation.needsWork || recommendation.due;
     counts.all++;
     if (complete) counts.complete++;
     if (continuing) counts.continue++;
     if (review) counts.review++;
-    return { lesson, complete, continuing, review };
+    return { lesson, complete, continuing, review, recommendation };
   });
   const visible = lessons.filter(lesson => filter === 'all' || (filter === 'continue' ? lesson.continuing : lesson.review));
   const groups = GROUPS.map((title, index) => ({

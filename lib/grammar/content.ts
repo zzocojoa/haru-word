@@ -1,6 +1,6 @@
 import type { LessonId, GrammarAnswer, GrammarProgress } from './model';
 
-export type GrammarQuestion = { kind: 'choice' | 'order'; prompt: string; context: string; translation: string; options: string[]; answer: string; alternatives?: string[]; explanation: string };
+export type GrammarQuestion = { id?: string; clue?: string; wrong?: Record<string, string>; kind: 'choice' | 'order'; prompt: string; context: string; translation: string; options: string[]; answer: string; alternatives?: string[]; explanation: string };
 export type GrammarLesson = {
   id: LessonId; pos: string; title: string; group: string; role: string; pattern: string; mistake: string;
   examples: [string, string, string][]; notice: string; noticeAnswer: string;
@@ -209,16 +209,26 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
 ];
 export const LESSON_MAP = new Map(GRAMMAR_LESSONS.map(l => [l.id, l]));
 export const POS_LESSON = new Map(GRAMMAR_LESSONS.map(l => [l.pos, l]));
-export function answerCorrect(question: GrammarQuestion, answer: string) { return [question.answer, ...(question.alternatives ?? [])].includes(answer.trim().replace(/\s+/g, ' ')); }
+export function answerCorrect(question: GrammarQuestion, answer: string) {
+  // Movable v2 tokens retain their printed case and punctuation. Assess the
+  // authored word order, not where a fixed full stop happens to be attached.
+  // Legacy answers keep their original grading contract.
+  const normalize = (value: string) => {
+    const text = value.trim().replace(/\s+/g, ' ');
+    return question.kind === 'order' && question.id?.includes(':2:')
+      ? text.toLowerCase().replace(/[.,!?]/g, '') : text;
+  };
+  return [question.answer, ...(question.alternatives ?? [])].some(candidate => normalize(candidate) === normalize(answer));
+}
 export function exampleFocusStart(sentence: string, focus: string) {
   const escaped = focus.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return sentence.search(new RegExp(`(?<![\\p{L}\\p{N}])${escaped}(?![\\p{L}\\p{N}])`, 'u'));
 }
-export function needsGrammarReview(lesson: GrammarLesson, progress?: GrammarProgress) {
+export function needsGrammarReview(lesson: GrammarLesson, progress?: GrammarProgress, resolvedQuestions?: GrammarQuestion[]) {
   if (!progress) return false;
   if (progress.review && !progress.review.completedAt) return true;
   const answers = progress.review?.completedAt ? progress.review.answers : progress.answers;
-  const questions = progress.review?.completedAt ? lesson.review : lesson.questions;
+  const questions = resolvedQuestions ?? (progress.review?.completedAt ? lesson.review : lesson.questions);
   const hints = (progress.review?.completedAt ? progress.review.hints : progress.hints) ?? [];
   return questions.some((q, i) => {
     const key = `q${i + 1}` as keyof typeof answers, a = answers[key];

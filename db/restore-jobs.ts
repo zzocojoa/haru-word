@@ -1,6 +1,9 @@
 import type { State } from '@/lib/learning';
 import { catalogIds, parsePart } from '@/lib/restore-validation';
 import { RESTORE_JOB_TTL, RESTORE_RECEIPT_TTL, sha256, utf8Bytes, type RestoreJob, type RestoreManifest } from '@/lib/restore-protocol';
+import { hasSavedModernGrammar } from './grammar-compatibility';
+import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar } from '@/lib/grammar/compatibility';
+import { grammarStateSchema } from '@/lib/grammar/model';
 
 export class RestoreError extends Error {
   constructor(message: string, public status = 400, public code = 'invalid_restore') { super(message); }
@@ -95,11 +98,16 @@ export async function validateRestoreJob(db: D1Database, user: string, id: strin
   return getRestoreJob(db, user, id);
 }
 
-export async function commitRestoreJob(db: D1Database, user: string, id: string) {
+export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion = 2) {
   const job = await row(db, user, id);
   if (job.status === 'committed') return view(db, job);
   if (job.status !== 'ready') throw new RestoreError('전체 검증이 끝난 후 복원할 수 있어요.', 409);
   const manifest = JSON.parse(job.manifest) as RestoreManifest;
+  if (grammarVersion !== 2 && manifest.parts.some(p => p.kind === 'grammar')) {
+    const parts = await db.prepare("SELECT document FROM restore_parts WHERE job_id=? AND kind='grammar'").bind(id).all<{ document: string }>();
+    if (await hasSavedModernGrammar(db, user) || parts.results.some(part => Object.values(grammarStateSchema.parse(JSON.parse(part.document))).some(hasModernGrammar)))
+      throw new RestoreError(GRAMMAR_UPGRADE_MESSAGE, 426, 'grammar_client_outdated');
+  }
   const condition = "EXISTS(SELECT 1 FROM restore_jobs WHERE id=? AND user_id=? AND status='committing')";
   // The transient marker exists only inside this transaction. If any statement
   // fails, even deletions and the receipt roll back together.

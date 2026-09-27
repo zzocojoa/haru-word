@@ -27,7 +27,7 @@ async function requestApi<T>(url: string, init: RequestInit, timeoutMs: number, 
 }
 
 export function loadLearningState() {
-  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store', headers: { 'X-Study-Grammar': '1' } }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
+  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store', headers: { 'X-Study-Grammar': '2' } }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
 }
 
 export function saveLearningState(data: SaveStateRequest) {
@@ -35,6 +35,7 @@ export function saveLearningState(data: SaveStateRequest) {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'X-Study-Grammar': '2',
       'X-Study-Review-Resume': '1',
       'X-Study-Server-Clock': '1',
       'X-Study-Monthly-Carryover': '1',
@@ -46,7 +47,7 @@ export function saveLearningState(data: SaveStateRequest) {
 export function restoreLearningState(state: State, revision: number) {
   return requestApi<StateRevision>('/api/state/restore', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Study-Revision': String(revision) },
+    headers: { 'Content-Type': 'application/json', 'X-Study-Revision': String(revision), 'X-Study-Grammar': '2' },
     body: JSON.stringify({ format: 'haru-words-v1', exportedAt: new Date().toISOString(), state }),
   }, REQUEST_TIMEOUT_MS.restore, value => parseRevision(value, revision));
 }

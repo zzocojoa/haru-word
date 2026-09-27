@@ -23,7 +23,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
   const check = async (name, fn) => { try { await fn(); checks.push({ name, passed: true }); } catch (e) { checks.push({ name, passed: false, error: e.message }); if (!baseline) throw e; } };
   try {
     await check('article emphasis matches the standalone article, not a letter in have', async () => {
-      const { context, page } = await open({});
+      const { context, page } = await open({ 'indefinite-article': progress('indefinite-article', 0) });
       try {
         await page.locator('.grammar-group > summary').filter({ hasText: '명사를 특정하는 말' }).click();
         await page.locator('.grammar-tile').filter({ hasText: '부정관사' }).click();
@@ -36,6 +36,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
       try {
         await page.locator('.grammar-tile').first().click();
         await page.getByRole('button', { name: 'teacher', exact: true }).click();
+        await page.getByRole('button', { name: '답 확인', exact: true }).click();
         await page.getByRole('button', { name: '답을 보고 도움받기', exact: true }).click();
         await page.getByRole('button', { name: '다음', exact: true }).click();
         await until(async () => (await get()).state.grammar.noun.stage === 3, 'next saved');

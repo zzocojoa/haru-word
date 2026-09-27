@@ -4,6 +4,7 @@ import { database } from '@/db/store';
 import { recordFeedbackAttempt } from '@/db/feedback';
 import { today } from '@/lib/learning';
 import { LESSON_MAP } from '@/lib/grammar/content';
+import { lessonForVersion } from '@/lib/grammar/content-v2';
 import { grammarProgressSchema } from '@/lib/grammar/model';
 import { generateGrammarFeedback, grammarFeedbackRequestSchema } from '@/lib/grammar/feedback';
 import { FeedbackError } from '@/lib/gemini-feedback';
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
     const progress = grammarProgressSchema.parse(JSON.parse(row.document));
     if (progress.stage !== 5 || !sentence.trim() || progress.sentence !== sentence) return json(feedbackErrorBody('stale_input'), 409);
     await recordFeedbackAttempt(db, user.userId, today(), Date.now());
-    const feedback = await generateGrammarFeedback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, signal: request.signal }, LESSON_MAP.get(lessonId)!, sentence);
+    const feedback = await generateGrammarFeedback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, signal: request.signal }, lessonForVersion(LESSON_MAP.get(lessonId)!, progress.contentVersion), sentence);
     console.info(JSON.stringify({ event: 'grammar_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), lessonId, durationMs: Date.now() - started }));
     return json({ feedback });
   } catch (e) {

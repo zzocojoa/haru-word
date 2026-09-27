@@ -38,15 +38,17 @@ import { useLearningTools } from './learning/use-learning-tools';
 import { useTabNavigation } from './learning/use-tab-navigation';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
-export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean }) {
+export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean }) {
   return <NavigationProvider><LearningScreens {...props} /></NavigationProvider>;
 }
 function LearningScreens({
   initialServerTime,
   grammarEnabled = false,
+  grammarPracticeEnabled = false,
 }: {
   initialServerTime: number;
   grammarEnabled?: boolean;
+  grammarPracticeEnabled?: boolean;
 }) {
   const {
     tab,
@@ -398,6 +400,7 @@ function LearningScreens({
             {navigation.visited.includes("library") && (
               <WordLibrary
                 grammarEnabled={grammarEnabled}
+                grammarPracticeEnabled={grammarPracticeEnabled}
                 persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, saved: signedIn && !loading && !saving && !unsaved && !conflict, registerLeave: registerGrammarLeave }}
                 activityDate={clock.currentDate}
                 state={state}

@@ -5,6 +5,9 @@ import { stateResponse } from '@/lib/server/state-response';
 import { today } from '@/lib/learning';
 import { saveSchema } from '@/lib/validation';
 import { json, validateJsonMutation } from '@/lib/server/http';
+import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar, legacyGrammarDocument } from '@/lib/grammar/compatibility';
+import { hasSavedModernGrammar } from '@/db/grammar-compatibility';
+import { grammarProgressSchema } from '@/lib/grammar/model';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,7 +16,12 @@ export async function GET(request?: Request) {
   const user = await getChatGPTUser();
   if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
   try {
-    const snapshot = await loadStateDocuments(database(), user.userId, request?.headers.get('x-study-grammar') === '1');
+    const grammarVersion = request?.headers.get('x-study-grammar');
+    const snapshot = await loadStateDocuments(database(), user.userId, grammarVersion === '1' || grammarVersion === '2');
+    if (grammarVersion === '1' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
+      const legacy = legacyGrammarDocument(grammarProgressSchema.parse(JSON.parse(row.document)));
+      return legacy ? [{ ...row, document: JSON.stringify(legacy) }] : [];
+    });
     const wordCount = snapshot.progress.length, sessionCount = snapshot.sessions.length, grammarCount = snapshot.grammar?.length;
     return stateResponse(snapshot,
       bytes => console.info(JSON.stringify({ event: 'learning_state_loaded', wordCount, sessionCount, grammarCount, bytes, durationMs: Date.now() - started })),
@@ -46,6 +54,11 @@ export async function PUT(request: Request) {
   }
   try {
     const db = database();
+    if (data.grammar && request.headers.get('x-study-grammar') !== '2' &&
+        (Object.values(data.grammar).some(hasModernGrammar) || await hasSavedModernGrammar(db, user.userId, Object.keys(data.grammar)))) {
+      console.warn(JSON.stringify({ event: 'grammar_client_outdated', version: 1 }));
+      return json({ error: GRAMMAR_UPGRADE_MESSAGE }, 426);
+    }
     if (!await validSaveReferences(db, user.userId, data)) {
       console.warn(JSON.stringify({ event: 'learning_state_invalid_reference' }));
       return json({ error: '이어갈 회차나 개인 단어의 정보가 빠졌어요. 기록을 확인해 주세요.' }, 400);
