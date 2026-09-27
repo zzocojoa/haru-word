@@ -32,7 +32,9 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
     setError('');
   }, [saved, currentState, id]);
   const change = useCallback((update: (p: GrammarProgress) => GrammarProgress) => {
-    const next = { ...update(latest.current), updatedAt: new Date().toISOString() };
+    const updated = update(latest.current);
+    if (updated === latest.current) return;
+    const next = { ...updated, updatedAt: new Date().toISOString() };
     latest.current = next; version.current++; setDraft(next); setDirty(true);
     // Global emergency/whole backups must contain the latest input, not only
     // the last snapshot that happened to reach the network.

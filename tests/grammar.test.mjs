@@ -2,6 +2,7 @@ import test, { after, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
+import { createHash } from 'node:crypto';
 import { build } from 'esbuild';
 import { EMPTY, pickDaily, learningMetrics } from '../lib/learning.ts';
 mkdirSync('work/grammar-tests', { recursive: true });
@@ -334,6 +335,14 @@ test('v2 accepts authored alternative orders without changing legacy scoring or 
   assert.equal(answerCorrect({ ...q, id: undefined }, 'every night. They read'), false);
   assert.equal(frameSentence(PRACTICE_LESSONS['definite-article'].frame, ['pen']), 'I have a pen. The pen is blue.');
 });
+test('published v2 question identities and grading keys stay frozen for saved answers', () => {
+  // Recorded from the shipped v73 content, including 15 observation questions.
+  // A change to these grading keys requires a new content version, not a regrade.
+  const keys = Object.values(PRACTICE_LESSONS).flatMap(l => [l.observation, ...l.questions, ...l.reviews.a, ...l.reviews.b])
+    .map(q => ({ id: q.id, kind: q.kind, options: q.options, answer: q.answer, alternatives: q.alternatives ?? [] }));
+  assert.equal(keys.length, 150);
+  assert.equal(createHash('sha256').update(JSON.stringify(keys)).digest('hex'), 'b6b587ec3a9bb00ab807aeeb26974d02d7c40a62cf6c05fe14baccdfde40e738');
+});
 
 test('observation errors remain visible until a fresh review; writing checks do not grade retrieval', () => {
   const p = v2Completed(); p.observation = model.recordAnswer(undefined, '일하는 행동');
@@ -375,11 +384,11 @@ test('review recommendations separate same-day extras, failed next-day attempts 
   const original = v2Completed(), before = structuredClone(original);
   let p = practice.startGrammarReview('noun', original, '2026-09-27'); assert.equal(p.review.mode, 'extra');
   p = practice.finishGrammarReview('noun', reviewAnswers('noun', p), '2026-09-27');
-  assert.equal(p.schedule.passed, 0); assert.equal(p.schedule.nextDate, '2026-09-28'); assert.equal(p.schedule.nextSet, 'b');
+  assert.equal(p.schedule.passed, 0); assert.equal(p.schedule.nextDate, '2026-09-28'); assert.equal(p.schedule.nextSet, 'a');
   p = practice.startGrammarReview('noun', p, '2026-09-28'); assert.equal(p.review.mode, 'scheduled');
   p = practice.finishGrammarReview('noun', reviewAnswers('noun', p, true), '2026-09-28');
   assert.equal(p.schedule.nextDate, '2026-09-29'); assert.equal(p.schedule.passed, 0);
-  p = practice.startGrammarReview('noun', p, '2026-09-29'); assert.equal(p.review.reused, true);
+  p = practice.startGrammarReview('noun', p, '2026-09-29'); assert.equal(p.review.reused, false);
   p = practice.finishGrammarReview('noun', reviewAnswers('noun', p), '2026-09-29');
   assert.equal(p.schedule.nextDate, '2026-10-06'); assert.equal(p.schedule.passed, 1);
   p = practice.startGrammarReview('noun', p, '2026-10-06');
@@ -390,6 +399,68 @@ test('review recommendations separate same-day extras, failed next-day attempts 
   assert.equal(practice.grammarReviewStatus('noun', original, '2026-09-27').due, false);
   assert.equal(practice.grammarReviewStatus('noun', original, '2026-09-28').due, true);
   assert.equal(grammarCatalog({ noun: original }, 'review', '2026-09-28').visibleCount, 1);
+});
+test('extra practice alternates without consuming the set reserved for the next delayed review', () => {
+  let p = practice.startGrammarReview('noun', v2Completed(), '2026-09-28');
+  assert.equal(p.review.setId, 'a');
+  p = practice.finishGrammarReview('noun', reviewAnswers('noun', p), '2026-09-28');
+  assert.equal(p.schedule.nextSet, 'b');
+  const scheduled = structuredClone(p.schedule);
+  for (const set of ['b', 'a', 'b']) {
+    p = practice.startGrammarReview('noun', p, '2026-09-28');
+    assert.equal(p.review.setId, set); assert.equal(p.review.mode, 'extra');
+    p = practice.finishGrammarReview('noun', reviewAnswers('noun', p), '2026-09-28');
+    assert.deepEqual({ ...p.schedule, used: scheduled.used }, scheduled);
+  }
+  p = practice.startGrammarReview('noun', p, '2026-10-05');
+  assert.equal(p.review.setId, 'b'); assert.equal(p.review.mode, 'scheduled'); assert.equal(p.review.reused, true);
+  assert.ok(model.grammarStateSchema.safeParse({ noun: p }).success);
+});
+test('legacy completion recommends a later day without inventing answers or delayed successes', () => {
+  const p = completed(), before = structuredClone(p);
+  assert.equal(practice.grammarReviewStatus('noun', p, '2026-09-24').due, false);
+  assert.equal(practice.grammarReviewStatus('noun', p, '2026-09-25').due, true);
+  const next = practice.startGrammarReview('noun', p, '2026-09-25');
+  assert.equal(next.schedule.passed, 0); assert.equal(next.review.mode, 'scheduled');
+  assert.equal(next.observation, undefined); assert.deepEqual(next.answers, p.answers); assert.deepEqual(p, before);
+  const reviewed = { ...p, review: { index: 3, answers: p.answers, completedAt: '2026-09-26T16:00:00.000Z' } };
+  assert.equal(practice.grammarReviewStatus('noun', reviewed, '2026-09-27').due, false);
+  assert.equal(practice.grammarReviewStatus('noun', reviewed, '2026-09-28').due, true);
+});
+test('glosses after observation do not turn an independent answer into help; pre-answer support still counts', () => {
+  const initial = practice.newLessonProgress('noun', date), answered = { ...initial, observation: model.recordAnswer(undefined, PRACTICE_LESSONS.noun.observation.answer) };
+  const before = structuredClone(answered);
+  for (const level of ['gloss', 'translation']) {
+    assert.equal(model.recordObservationHelp(answered, level), answered);
+    const helped = model.recordObservationHelp(initial, level);
+    assert.equal(helped.observationHelp, level); assert.equal(helped.observation, undefined);
+    assert.equal(initial.observationHelp, undefined);
+  }
+  for (const level of ['clue', 'answer']) {
+    const helped = model.recordObservationHelp(answered, level);
+    assert.equal(helped.observation.helped, true); assert.equal(helped.observation.attempts, 1);
+    assert.equal(helped.observation.first, answered.observation.first);
+    assert.equal(model.recordObservationHelp(helped, level), helped);
+  }
+  assert.equal(model.recordObservationHelp({ ...initial, observationHelp: 'answer' }, 'clue').observationHelp, 'answer');
+  assert.deepEqual(answered, before);
+});
+test('every observation and multiple-choice distractor has a contextual reason with no extra IDs or choices', () => {
+  const source = readFileSync('lib/grammar/wrong-choice-reasons.ts', 'utf8');
+  const ids = [];
+  for (const l of Object.values(PRACTICE_LESSONS)) for (const q of [l.observation, ...l.questions, ...l.reviews.a, ...l.reviews.b]) {
+    if (q.kind !== 'choice') continue;
+    ids.push(q.id);
+    const wrong = q.options.filter(option => option !== q.answer);
+    assert.deepEqual(Object.keys(q.wrong).sort(), wrong.sort(), q.id);
+    assert.equal(new Set(Object.values(q.wrong)).size, wrong.length, q.id);
+    for (const reason of Object.values(q.wrong)) {
+      assert.ok(reason.length > 10 && reason.length < 250, q.id);
+      assert.notEqual(reason, q.explanation, q.id);
+    }
+  }
+  assert.equal(ids.length, 105);
+  assert.deepEqual([...source.matchAll(/'([^']+:2:[^']+)':\s*\{/g)].map(m => m[1]).sort(), ids.sort());
 });
 test('v1 answers and in-progress reviews stay pinned; only a new review uses v2', () => {
   const p = completed(), original = structuredClone(p);

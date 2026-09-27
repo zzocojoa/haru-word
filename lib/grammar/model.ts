@@ -82,6 +82,15 @@ export function recordAnswer(previous: GrammarAnswer | undefined, answer: string
   // longer an unaided first response, even without pressing the hint button.
   return { first: previous?.first ?? answer, latest: answer, helped: !!previous || helped, attempts: Math.min(1000, (previous?.attempts ?? 0) + 1) };
 }
+export function recordObservationHelp(progress: GrammarProgress, level: NonNullable<GrammarProgress['observationHelp']>): GrammarProgress {
+  // Reading the explanation after answering is normal follow-up, not help
+  // received before the first response. Explicit answer/clue requests still count.
+  if (progress.observation && (level === 'gloss' || level === 'translation')) return progress;
+  const observationHelp = progress.observationHelp === 'answer' || level === 'answer' ? 'answer'
+    : progress.observationHelp === 'clue' ? 'clue' : level;
+  if (observationHelp === progress.observationHelp && (!progress.observation || progress.observation.helped)) return progress;
+  return { ...progress, observationHelp, observation: progress.observation ? { ...progress.observation, helped: true } : undefined };
+}
 export function revealGrammarAnswer(progress: GrammarProgress, key: QuestionKey, reviewing: boolean): GrammarProgress {
   const target = reviewing ? progress.review : progress;
   if (!target) return progress;

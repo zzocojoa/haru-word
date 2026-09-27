@@ -1,5 +1,6 @@
 import { GRAMMAR_LESSONS, type GrammarLesson, type GrammarQuestion } from './content';
 import type { LessonId } from './model';
+import { WRONG_CHOICE_REASONS } from './wrong-choice-reasons';
 
 export type Gloss = { text: string; lemma: string; meaning: string; pos: string; role: string; occurrence?: number };
 export type ReadingLine = { en: string; ko: string; glosses: Gloss[] };
@@ -139,7 +140,7 @@ function prepare(question: GrammarQuestion, id: string, clue: string): GrammarQu
   const result = question.kind === 'order'
     ? { ...question, ...arrange(question.answer, question.translation, question.explanation, clue), alternatives: [...(question.alternatives ?? []), ...(alternativeOrders[id] ?? [])] }
     : { ...question, clue };
-  return { ...result, id, wrong: result.kind === 'choice' ? Object.fromEntries(result.options.filter(o => o !== result.answer).map(o => [o, `‘${o}’ 대신 이 문맥에서는 ‘${result.answer}’을 써요. ${result.explanation}`])) : undefined };
+  return { ...result, id, wrong: result.kind === 'choice' ? WRONG_CHOICE_REASONS[id] : undefined };
 }
 const reviewClues: Record<LessonId, [string, string, string]> = {
   noun: ['소유 표현 My 뒤에서 무엇을 가리키나요?', '열려 있는 장소의 이름이 필요해요.', '사람, 좋아하는 행동, 대상을 놓아요.'],
@@ -178,7 +179,7 @@ const commonMistakes: Record<LessonId, string> = {
 export const PRACTICE_LESSONS = Object.fromEntries(GRAMMAR_LESSONS.map((lesson): [LessonId, LessonPractice] => {
   const data = authored[lesson.id];
   return [lesson.id, {
-    ...data, commonMistake: commonMistakes[lesson.id], observation: { ...data.observation, id: `${lesson.id}:2:notice` },
+    ...data, commonMistake: commonMistakes[lesson.id], observation: { ...data.observation, id: `${lesson.id}:2:notice`, wrong: WRONG_CHOICE_REASONS[`${lesson.id}:2:notice`] },
     questions: lesson.questions.map((question, i) => prepare(question, `${lesson.id}:2:base:q${i + 1}`, data.clues[i])),
     reviews: {
       a: lesson.review.map((question, i) => prepare(question, `${lesson.id}:2:a:q${i + 1}`, reviewClues[lesson.id][i])),

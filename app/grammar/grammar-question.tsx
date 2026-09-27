@@ -23,14 +23,14 @@ type Props = {
 
 export function GrammarQuestion({ question, answer, hinted, clued, choice, onChoice, onClue, nextLabel = '다음', selection, onOrder, onAnswer, onHint, onNext, disabled }: Props) {
   const [localChoice, setLocalChoice] = useState('');
-  const selectedChoice = choice ?? localChoice;
+  const selectedChoice = choice ?? (localChoice || answer?.latest || '');
   const correct = !!answer && answerCorrect(question, answer.latest);
   const feedbackTitle = answer ? correct ? '이번 답은 맞아요.' : '다시 확인해 보세요.' : '답을 확인했어요.';
   return <div className="grammar-stage">
     {question.context && <div className="grammar-example"><p lang="en">{question.context}</p><p>{question.translation}</p></div>}
     <h3 className="grammar-question">{question.prompt}</h3>
     {question.kind === 'order'
-      ? <OrderAnswer question={question} selection={selection} onOrder={onOrder} onAnswer={onAnswer} disabled={disabled} />
+      ? <OrderAnswer question={question} answer={answer} selection={selection} onOrder={onOrder} onAnswer={onAnswer} disabled={disabled} />
       : <div className="grammar-choices">{question.options.map((option, index) => {
         const selected = selectedChoice === option;
         return <button key={option} disabled={disabled} aria-pressed={selected}
@@ -38,7 +38,7 @@ export function GrammarQuestion({ question, answer, hinted, clued, choice, onCho
           <span className="grammar-choice-number" aria-hidden="true">{selected ? <Check size={16} /> : index + 1}</span>{option}
         </button>;
       })}</div>}
-    {question.kind === 'choice' && <button className="secondary-button" disabled={disabled || !selectedChoice} onClick={() => onAnswer(selectedChoice)}>답 확인</button>}
+    {question.kind === 'choice' && <button className="secondary-button" disabled={disabled || !selectedChoice || selectedChoice === answer?.latest} onClick={() => onAnswer(selectedChoice)}>답 확인</button>}
     {question.clue && onClue && <button className="text-button grammar-hint" disabled={disabled || clued} onClick={onClue}><CircleHelp size={17} aria-hidden="true" />생각할 단서</button>}
     {clued && !hinted && question.clue && <p className="grammar-message">{question.clue}</p>}
     <button className="text-button grammar-hint" disabled={disabled || hinted} onClick={onHint}>
@@ -56,7 +56,7 @@ export function GrammarQuestion({ question, answer, hinted, clued, choice, onCho
   </div>;
 }
 
-function OrderAnswer({ question, selection, onOrder, onAnswer, disabled }: Pick<Props, 'question' | 'selection' | 'onOrder' | 'onAnswer' | 'disabled'>) {
+function OrderAnswer({ question, answer, selection, onOrder, onAnswer, disabled }: Pick<Props, 'question' | 'answer' | 'selection' | 'onOrder' | 'onAnswer' | 'disabled'>) {
   const selected = selection.filter(index => index < question.options.length);
   const text = selected.map(index => question.options[index]).join(' ');
   return <>
@@ -68,7 +68,7 @@ function OrderAnswer({ question, selection, onOrder, onAnswer, disabled }: Pick<
     <div className="grammar-actions grammar-order-actions">
       <button className="text-button" disabled={disabled || !selected.length} onClick={() => onOrder(selected.slice(0, -1))}>마지막 조각 취소</button>
       <button className="text-button" disabled={disabled || !selected.length} onClick={() => onOrder([])}>처음부터 놓기</button>
-      <button className="secondary-button" disabled={disabled || selected.length !== question.options.length} onClick={() => onAnswer(text)}>정답 확인</button>
+      <button className="secondary-button" disabled={disabled || selected.length !== question.options.length || text === answer?.latest} onClick={() => onAnswer(text)}>정답 확인</button>
     </div>
   </>;
 }

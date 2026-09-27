@@ -16,6 +16,13 @@ export function questionsFor(id: LessonId, progress: GrammarProgress, reviewing 
 function afterDays(date: string, days: number) {
   const d = new Date(`${date}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + days); return d.toISOString().slice(0, 10);
 }
+function reviewSchedule(progress: GrammarProgress) {
+  if (progress.schedule) return progress.schedule;
+  if (!progress.completedAt) return undefined;
+  const lastDate = today(new Date(progress.review?.completedAt ?? progress.completedAt));
+  // Legacy completion is a known date, not evidence of an independent v2 pass.
+  return { nextDate: afterDays(lastDate, 1), lastDate, passed: 0, nextSet: 'a' as const, used: { a: 0, b: 0 } };
+}
 export function completeLesson(progress: GrammarProgress, date: string, now = new Date().toISOString()): GrammarProgress {
   return { ...progress, stage: 6, completedAt: now, schedule: progress.schedule ?? {
     nextDate: afterDays(date, 1), lastDate: date, passed: 0, nextSet: 'a', used: { a: 0, b: 0 },
@@ -25,14 +32,14 @@ export function startGrammarReview(id: LessonId, progress: GrammarProgress, date
   if (!progress.completedAt || progress.review && !progress.review.completedAt) return progress;
   // Old results are not retested against new answers. A new review uses v2;
   // a review already in progress keeps its original content until completion.
-  const schedule = progress.schedule ?? {
-    nextDate: afterDays(today(new Date(progress.completedAt)), 1),
-    lastDate: today(new Date(progress.completedAt)), passed: 0, nextSet: 'a' as const, used: { a: 0, b: 0 },
-  };
-  const setId = schedule.nextSet;
+  const schedule = reviewSchedule(progress)!;
+  const scheduled = !!schedule.nextDate && date >= schedule.nextDate && date > schedule.lastDate;
+  const latestSet = progress.review?.completedAt && progress.review.contentVersion === 2 ? progress.review.setId : undefined;
+  // Extras alternate too, but must not consume the set reserved for a later day.
+  const setId = scheduled || !latestSet ? schedule.nextSet : latestSet === 'a' ? 'b' : 'a';
   return { ...progress, schedule, review: {
     contentVersion: 2, questionIds: ids(PRACTICE_LESSONS[id].reviews[setId]), setId,
-    mode: schedule.nextDate && date >= schedule.nextDate && date > schedule.lastDate ? 'scheduled' : 'extra',
+    mode: scheduled ? 'scheduled' : 'extra',
     startedOn: date, reused: schedule.used[setId] > 0, index: 0, answers: {},
   } };
 }
@@ -45,8 +52,9 @@ export function finishGrammarReview(id: LessonId, progress: GrammarProgress, dat
     return a && !a.helped && !review.hints?.includes(key) && !review.clues?.includes(key)
       && answerCorrect(q, a.first) && answerCorrect(q, a.latest);
   });
-  const schedule = { ...progress.schedule, used: { ...progress.schedule.used, [review.setId]: Math.min(10000, progress.schedule.used[review.setId] + 1) }, nextSet: review.setId === 'a' ? 'b' as const : 'a' as const };
+  const schedule = { ...progress.schedule, used: { ...progress.schedule.used, [review.setId]: Math.min(10000, progress.schedule.used[review.setId] + 1) } };
   if (review.mode === 'scheduled' && date > schedule.lastDate && date >= (schedule.nextDate ?? date)) {
+    schedule.nextSet = review.setId === 'a' ? 'b' : 'a';
     schedule.passed = independent ? Math.min(2, schedule.passed + 1) : schedule.passed;
     schedule.lastDate = date;
     schedule.nextDate = schedule.passed === 2 ? undefined : afterDays(date, independent ? 7 : 1);
@@ -63,8 +71,9 @@ export function grammarReviewStatus(id: LessonId, progress?: GrammarProgress, da
     (observation.helped || !answerCorrect(PRACTICE_LESSONS[id].observation, observation.first)
       || !answerCorrect(PRACTICE_LESSONS[id].observation, observation.latest));
   const needsWork = needsGrammarReview(LESSON_MAP.get(id)!, progress, questions) || observationNeedsWork;
-  const due = !!progress.schedule?.nextDate && progress.schedule.nextDate <= date;
-  const text = progress.schedule?.nextDate ? due ? '다른 날 다시 확인할 차례예요.' : `${progress.schedule.nextDate} 다시 확인 추천`
-    : progress.schedule?.passed === 2 ? '두 차례 확인했어요 · 자유 연습 가능' : '';
+  const schedule = reviewSchedule(progress);
+  const due = !!schedule?.nextDate && schedule.nextDate <= date;
+  const text = schedule?.nextDate ? due ? '다른 날 다시 확인할 차례예요.' : `${schedule.nextDate} 다시 확인 추천`
+    : schedule?.passed === 2 ? '두 차례 확인했어요 · 자유 연습 가능' : '';
   return { needsWork, due, text };
 }

@@ -17,10 +17,11 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
   const until = async fn => { for (let i = 0; i < 100; i++) { if (await fn()) return; await page.waitForTimeout(100); } throw Error('save timeout'); };
   const click = name => page.getByRole('button', { name, exact: true }).click();
   async function solve(q) {
-    if (q.kind === 'choice') { await click(q.answer); await click('답 확인'); }
+    if (q.kind === 'choice') { await click(q.answer); await click('답 확인'); assert.equal(await page.getByRole('button', { name: '답 확인', exact: true }).isDisabled(), true); }
     else {
       for (const token of q.answer.split(' ')) await page.locator('.grammar-options button:not([disabled])').filter({ hasText: new RegExp('^' + token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') }).first().click();
       await click('정답 확인');
+      assert.equal(await page.getByRole('button', { name: '정답 확인', exact: true }).isDisabled(), true);
     }
     await click('다음');
   }
@@ -67,6 +68,15 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
           await page.screenshot({ path: `outputs/grammar-v2/popover-${process.env.QA_ENGINE || 'chromium'}-${width}.png`, fullPage: true });
           await click('뜻풀이 닫기');
         }
+        await page.setViewportSize({ width: 320, height: 900 });
+        const readingZoom = await page.addStyleTag({ content: 'html{font-size:200%!important}' });
+        await word.focus(); await page.keyboard.press('Enter');
+        const zoomBox = await page.locator('.grammar-gloss').boundingBox();
+        assert.ok(zoomBox.x >= 0 && zoomBox.x + zoomBox.width <= 321, '200% reading gloss fits');
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+        await page.keyboard.press('Escape'); await until(() => word.evaluate(el => el === document.activeElement));
+        await page.screenshot({ path: `outputs/grammar-v2/reading-${process.env.QA_ENGINE || 'chromium'}-200.png`, fullPage: true });
+        await readingZoom.evaluate(el => el.remove());
         await page.setViewportSize({ width: 390, height: 844 });
         await page.addScriptTag({ path: axePath });
         await word.click();
@@ -77,8 +87,18 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
         await click('일하는 행동');
         assert.equal(await page.locator('.grammar-feedback').count(), 0, 'selection is not a submission');
         await click('답 확인');
+        assert.equal(await page.locator('.grammar-feedback').getByText(l.observation.wrong['일하는 행동'], { exact: true }).count(), 1);
       }
       await click(l.observation.answer); await click('답 확인');
+      assert.equal(await page.getByRole('button', { name: '답 확인', exact: true }).isDisabled(), true);
+      if (lesson.id === 'verb') {
+        await until(async () => !!(await snapshot()).state.grammar.verb?.observation);
+        const beforeHelp = (await snapshot()).state.grammar.verb.observation;
+        await page.getByRole('button', { name: 'knows 뜻과 쓰임', exact: true }).click(); await click('뜻풀이 닫기'); await click('한국어 해석');
+        await page.waitForTimeout(650);
+        assert.deepEqual((await snapshot()).state.grammar.verb.observation, beforeHelp);
+        assert.equal(beforeHelp.helped, false); assert.equal(beforeHelp.attempts, 1);
+      }
       assert.ok(await page.locator('.grammar-inline-role').count());
       await click('역할 알아보기'); await click('3문제 연습');
       for (const q of l.questions) await solve(q);

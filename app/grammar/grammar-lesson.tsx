@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Check, Lightbulb } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { exampleFocusStart, type GrammarLesson as Lesson } from '@/lib/grammar/content';
-import { QUESTION_KEYS, combinedCheck, recordAnswer, revealGrammarAnswer, updateGrammarSentence, type GrammarProgress } from '@/lib/grammar/model';
+import { QUESTION_KEYS, combinedCheck, recordAnswer, recordObservationHelp, revealGrammarAnswer, updateGrammarSentence, type GrammarProgress } from '@/lib/grammar/model';
 import { PRACTICE_LESSONS, lessonForVersion } from '@/lib/grammar/content-v2';
 import { completeLesson, finishGrammarReview, questionsFor, startGrammarReview } from '@/lib/grammar/practice';
 import { useGrammarDraft, type GrammarPersistence } from './use-grammar-draft';
@@ -56,10 +56,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, persist
     const patch = { clues: [...new Set([...(target.clues ?? []), key])], answers: existing ? { ...target.answers, [key]: { ...existing, helped: true } } : target.answers };
     return reviewing ? { ...value, review: { ...value.review!, ...patch } } : { ...value, ...patch };
   }); }
-  function observationHelp(level: NonNullable<GrammarProgress['observationHelp']>) { change(value => ({ ...value,
-    observationHelp: value.observationHelp === 'answer' ? 'answer' : level === 'answer' ? 'answer' : value.observationHelp === 'clue' ? 'clue' : level,
-    observation: value.observation ? { ...value.observation, helped: true } : undefined,
-  })); }
+  function observationHelp(level: NonNullable<GrammarProgress['observationHelp']>) { change(value => recordObservationHelp(value, level)); }
   function nextQuestion() {
     if (reviewing) change(value => index === 2 ? finishGrammarReview(lessonId, value, activityDate()) : ({ ...value, review: { ...value.review!, index: index + 1, order: undefined, choice: undefined } }));
     else move(progress.stage + 1);
