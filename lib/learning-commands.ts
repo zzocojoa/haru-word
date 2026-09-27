@@ -2,6 +2,7 @@ import { applyRecord, ensureCarryover, entryIdFor, recordFamiliarity, selectSens
   type Content, type Familiarity, type Progress, type Result, type SenseProgress, type Session, type State } from './learning.ts';
 import { withAnswerDraft, type StudyDraft } from './study-draft';
 import type { ExpressionDraft } from './expression';
+import { wordSenseEdits, type WordEditorDraft } from './word-editor-draft';
 
 export type WordEdit = ExpressionDraft & {
   example: string; translation: string; notes: string; newSense: boolean;
@@ -19,6 +20,15 @@ export function editedWordProgress(base: Progress, selected: SenseProgress | und
     ...(edit.familiarityTouched && edit.familiarity ? recordFamiliarity(edited, edit.familiarity) : {}),
     familiarity: edit.familiarity, useful: edit.useful, encounters: edit.encounters,
   };
+}
+
+export function editedWordDraftsProgress(base: Progress, draft: WordEditorDraft,
+  common: Pick<WordEdit, 'familiarity' | 'familiarityTouched' | 'useful' | 'encounters'>): Progress {
+  const edits = wordSenseEdits(draft);
+  return edits.reduce((progress, { key, value }, index) => editedWordProgress(progress,
+    key ? senseProgress(progress, key) : undefined,
+    { ...value, ...common, newSense: !key,
+      familiarityTouched: common.familiarityTouched && index === edits.length - 1 }), base);
 }
 
 export function applyWarmupResult(state: State, session: Session, id: string, result: Result, hinted: boolean): State {

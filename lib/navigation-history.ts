@@ -52,17 +52,18 @@ export class NavigationHistory {
     if (keys.size) this.stack().push({ before: {}, keys, position: this.port?.capture() });
     for (const [key, listener] of this.listeners) listener(this.value(this.values, key));
   }
-  change<T>(key: string, update: T | ((previous: T) => T)) {
-    if (this.pending) return;
+  change<T>(key: string, update: T | ((previous: T) => T)): boolean {
+    if (this.pending) return false;
     const previous = this.read<T>(key, undefined as T);
     const next = typeof update === 'function' ? (update as (value: T) => T)(previous) : update;
-    if (Object.is(previous, next)) return;
+    if (Object.is(previous, next)) return true;
     if (!this.batch) {
       this.batch = { before: { ...this.values }, position: this.port?.capture() };
       queueMicrotask(() => this.commit());
     }
     this.values = { ...this.values, [key]: next };
     this.listeners.get(key)?.(next);
+    return true;
   }
   private value(values: Values, key: string) { return key in values ? values[key] : this.defaults[key]; }
   private changed(a: Values, b: Values) {

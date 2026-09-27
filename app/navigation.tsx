@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useLayoutEffect, useCallback, useRef, useState, type ReactNode, type Dispatch, type SetStateAction } from 'react';
+import { createContext, useContext, useLayoutEffect, useCallback, useRef, useState, type ReactNode, type SetStateAction } from 'react';
 import { NavigationHistory, type NavigationGuard } from '@/lib/navigation-history';
 import { recordNavigationDiagnostic } from '@/lib/client-diagnostics';
 import { installSwipeBack } from './swipe-back';
@@ -46,12 +46,15 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
 }
 
 /** Only screen identifiers belong here. Answers, filters and progress stay in their existing stores. */
-export function useNavigationState<T>(key: string, initial: T, fresh = false): [T, Dispatch<SetStateAction<T>>] {
+type NavigationSetter<T> = (next: SetStateAction<T>) => boolean;
+export function useNavigationState<T>(key: string, initial: T, fresh = false): [T, NavigationSetter<T>] {
   const navigation = useContext(NavigationContext);
   const [value, setValue] = useState(() => navigation ? fresh ? navigation.fresh(key, initial) : navigation.read(key, initial) : initial);
   useLayoutEffect(() => navigation?.subscribe(key, next => setValue(next as T)), [key, navigation]);
-  const change = useCallback<Dispatch<SetStateAction<T>>>(next => {
-    if (navigation) navigation.change(key, next); else setValue(next);
+  const change = useCallback<NavigationSetter<T>>(next => {
+    if (navigation) return navigation.change(key, next);
+    setValue(next);
+    return true;
   }, [key, navigation]);
   return [value, change];
 }

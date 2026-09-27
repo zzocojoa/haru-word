@@ -4,7 +4,7 @@ import type { View } from './types';
 
 /** Explicit tab visits share exit preparation; internal lesson commands keep their own transitions. */
 export function useTabNavigation(view: View, epoch: number, blocked: boolean,
-  prepare: () => Promise<boolean>, visit: (view: View) => void) {
+  prepare: () => Promise<boolean>, visit: (view: View) => boolean) {
   const latest = useRef({ view, epoch, blocked, prepare, visit });
   const pending = useRef(false);
   const alive = useRef(true);
@@ -18,8 +18,7 @@ export function useTabNavigation(view: View, epoch: number, blocked: boolean,
     try {
       if (!await from.prepare() || !alive.current || latest.current.blocked
         || latest.current.epoch !== from.epoch || latest.current.view !== from.view) return false;
-      latest.current.visit(next);
-      return true;
+      return latest.current.visit(next);
     } finally { pending.current = false; }
   }, []);
 }

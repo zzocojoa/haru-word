@@ -5,7 +5,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { cardContent } from "@/lib/catalog";
-import { editExpression, expressionDraft, type ExpressionDraft } from "@/lib/expression";
+import { changedWordSenseKeys, createWordEditorDraft, editWordEditorDraft, selectWordEditorDraft,
+  wordEditorDraftIssue, wordSenseDraft, type WordSenseDraft } from '@/lib/word-editor-draft';
 import {
   allSenses,
   FAMILIARITY_TEXT,
@@ -20,11 +21,10 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 import { DictionaryLinks, Speak } from "../ui";
 import { HelpDetails } from "../study-ui";
-import { editedWordProgress } from "@/lib/learning-commands";
+import { editedWordDraftsProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
 import { useSheetProtection } from '../sheet-dialog';
-import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/components/ui/alert-dialog';
 export function WordEditor({
   activityDate,
   word,
@@ -40,53 +40,33 @@ export function WordEditor({
 }) {
   const { submitting, submit } = useEditorSubmission();
   const content = cardContent(word.id, p);
-  const base = { ...p, meaning: p?.meaning || content.meaning };
+  // One editor instance owns its baseline, including after a failed optimistic save.
+  const [base] = useState(() => ({ ...p, meaning: p?.meaning || content.meaning }));
   const senses = allSenses(base);
-  const [senseKey, setSenseKey] = useState(content.meaning);
+  const [draft, setDraft] = useState(() => createWordEditorDraft(content.meaning, wordSenseDraft({ ...content, notes: p?.notes })));
+  const senseKey = draft.selected;
   const selectedSense = senseKey ? senseProgress(base, senseKey) : undefined;
-  const [phrase, setPhrase] = useState(() => expressionDraft(content));
-  const { meaning, expression, expressionTranslation } = phrase;
-  function setPhraseField(field: keyof ExpressionDraft, value: string) {
-    setPhrase(previous => editExpression(previous, field, value));
+  const { meaning, expression, expressionTranslation, example, translation, notes } = draft.senses[senseKey].value;
+  function setDraftField(field: keyof WordSenseDraft, value: string) {
+    setDraft(previous => editWordEditorDraft(previous, field, value));
   }
   const [fam, setFam] = useState<Familiarity | undefined>(p?.familiarity);
   const [familiarityTouched, setFamiliarityTouched] = useState(false);
-  const [example, setExample] = useState(content.example);
-  const [translation, setTranslation] = useState(content.translation);
-  const [notes, setNotes] = useState(p?.notes || "");
   const [useful, setUseful] = useState(!!p?.useful);
   const [encounters, setEncounters] = useState(p?.encounters || []);
   const [encounter, setEncounter] = useState("");
   const [source, setSource] = useState<"reading" | "listening">("reading");
-  const [pendingSense, setPendingSense] = useState<string | null>(null);
-  const savedContent = senseKey ? cardContent(word.id, { ...selectedSense, meaning: senseKey }) : null;
-  const senseDirty = savedContent ? meaning !== savedContent.meaning || expression !== savedContent.expression ||
-    expressionTranslation !== (savedContent.expressionTranslation || '') || example !== savedContent.example ||
-    translation !== savedContent.translation || notes !== (selectedSense?.notes || '')
-    : !!(meaning || expression || expressionTranslation || example || translation || notes);
-  const dirty = senseDirty || familiarityTouched ||
+  const changedKeys = changedWordSenseKeys(draft);
+  const dirty = changedKeys.length > 0 || familiarityTouched ||
     useful !== !!p?.useful || JSON.stringify(encounters) !== JSON.stringify(p?.encounters || []) || !!encounter.trim();
-  // The nested sense confirmation owns dismissal until it settles. In particular,
-  // Escape must not start the underlying sheet's discard confirmation as well.
-  useSheetProtection(dirty, submitting || pendingSense !== null);
+  useSheetProtection(dirty, submitting);
   function chooseSense(key: string) {
     if (submitting || key === senseKey) return;
-    if (senseDirty) { setPendingSense(key); return; }
-    replaceSense(key);
+    const saved = key ? senseProgress(base, key) : undefined;
+    const initial = key ? wordSenseDraft({ ...cardContent(word.id, { ...saved, meaning: key }), notes: saved?.notes }) : wordSenseDraft();
+    setDraft(previous => selectWordEditorDraft(previous, key, initial));
   }
-  function replaceSense(key: string) {
-    const c = key
-      ? cardContent(word.id, { ...senseProgress(base, key), meaning: key })
-      : { meaning: "", expression: "", expressionTranslation: "", example: "", translation: "" };
-    setSenseKey(key);
-    setPhrase(expressionDraft(c));
-    setExample(c.example);
-    setTranslation(c.translation);
-    setNotes(key ? senseProgress(base, key).notes || "" : "");
-    setPendingSense(null);
-  }
-  const duplicate =
-    !senseKey && senses.some((x) => x.meaning === meaning.trim());
+  const issue = wordEditorDraftIssue(draft, senses.map(sense => sense.meaning || ''));
   return (
     <>
       <DialogHeader>
@@ -113,7 +93,7 @@ export function WordEditor({
                 {x.meaning}
               </option>
             ))}
-            {!senseKey && <option value="">새로운 뜻</option>}
+            {Object.hasOwn(draft.senses, '') && <option value="">새로운 뜻 · 초안</option>}
           </select>
         </label>
         <div className="button-row">
@@ -135,19 +115,19 @@ export function WordEditor({
           aria-label="오늘의 뜻"
           maxLength={2000}
           value={meaning}
-          onChange={(e) => setPhraseField('meaning', e.target.value)}
+          onChange={(e) => setDraftField('meaning', e.target.value)}
         />
       </label>
       <ExpressionFields expression={expression} expressionTranslation={expressionTranslation}
-        onExpressionChange={value => setPhraseField('expression', value)}
-        onTranslationChange={value => setPhraseField('expressionTranslation', value)}
+        onExpressionChange={value => setDraftField('expression', value)}
+        onTranslationChange={value => setDraftField('expressionTranslation', value)}
         help="영어 표현을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요." />
       <label>
         영어 예문
         <textarea
           maxLength={2000}
           value={example}
-          onChange={(e) => setExample(e.target.value)}
+          onChange={(e) => setDraftField('example', e.target.value)}
         />
       </label>
       <label>
@@ -155,7 +135,7 @@ export function WordEditor({
         <textarea
           maxLength={2000}
           value={translation}
-          onChange={(e) => setTranslation(e.target.value)}
+          onChange={(e) => setDraftField('translation', e.target.value)}
         />
       </label>
       <p className="small-note">
@@ -226,7 +206,7 @@ export function WordEditor({
         <textarea
           maxLength={2000}
           value={notes}
-          onChange={(e) => setNotes(e.target.value)}
+          onChange={(e) => setDraftField('notes', e.target.value)}
         />
       </label>
       </HelpDetails>
@@ -278,36 +258,28 @@ export function WordEditor({
         </p>
       </section></HelpDetails>
       <DictionaryLinks word={word.word} />
-      {duplicate && (
+      {issue && (
         <p className="status-warn" role="alert">
-          이미 저장된 뜻이에요. 위 목록에서 선택해 주세요.
+          {issue === 'duplicate' ? '이미 저장된 뜻이에요. 새 뜻 초안을 수정해 주세요.'
+            : issue === 'limit' ? '뜻은 최대 100개까지 저장할 수 있어요.' : '새 뜻 초안에 뜻을 입력해 주세요.'}
+          {senseKey && <button className="text-button" onClick={() => chooseSense('')}>새 뜻 초안 보기</button>}
         </p>
       )}
+      {changedKeys.length > 1 && <p className="small-note">수정한 뜻 {changedKeys.length}개를 함께 저장해요.</p>}
       </fieldset>
       <div className="dialog-actions">
       <button
         className="primary-button full"
-        disabled={busy || submitting || !meaning.trim() || duplicate}
+        disabled={busy || submitting || !meaning.trim() || !!issue}
         onClick={() => {
-          void submit(() => onSave(editedWordProgress(base, selectedSense, {
-            meaning, expression, expressionTranslation, example, translation, notes,
-            newSense: !senseKey, familiarity: fam, familiarityTouched, useful, encounters,
+          void submit(() => onSave(editedWordDraftsProgress(base, draft, {
+            familiarity: fam, familiarityTouched, useful, encounters,
           })));
         }}
       >
         기록 저장
       </button>
       </div>
-      <AlertDialog open={pendingSense !== null} onOpenChange={open => { if (!open) setPendingSense(null); }}>
-        <AlertDialogContent onEscapeKeyDown={event => { event.preventDefault(); setPendingSense(null); }} onKeyDownCapture={event => {
-          if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); setPendingSense(null); }
-        }}><AlertDialogHeader><AlertDialogTitle>다른 뜻으로 바꿀까요?</AlertDialogTitle>
-          <AlertDialogDescription>현재 뜻에서 저장하지 않은 표현·예문·보완점은 사라져요.</AlertDialogDescription></AlertDialogHeader>
-          <AlertDialogFooter><AlertDialogCancel>계속 편집</AlertDialogCancel>
-            <AlertDialogAction disabled={submitting} onClick={() => { if (!submitting && pendingSense !== null) replaceSense(pendingSense); }}>변경 버리고 전환</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
   );
 }

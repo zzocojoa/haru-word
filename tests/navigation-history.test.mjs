@@ -68,8 +68,22 @@ test('rapid gestures and new view actions cannot race a pending leave decision',
   const { n } = setup(); n.change('library.lesson', 'noun'); await tick();
   let release; n.guard(() => new Promise(resolve => release = resolve));
   const first = n.back(); assert.equal(await n.back(), false);
-  n.change('app.tab', 'log'); n.change('library.lesson', 'verb'); release(true); await first;
+  assert.equal(n.change('app.tab', 'log'), false);
+  assert.equal(n.change('library.lesson', 'verb'), false); release(true); await first;
   assert.equal(n.read('app.tab', ''), 'today'); assert.equal(n.read('library.lesson', ''), null);
+  assert.equal(n.change('app.tab', 'log'), true);
+  assert.equal(n.change('app.tab', 'log'), true);
+});
+
+test('cancelled Back unblocks the next acknowledged navigation', async () => {
+  const { n } = setup(); n.change('library.lesson', 'noun'); await tick();
+  let release; n.guard(() => new Promise(resolve => release = resolve));
+  const back = n.back();
+  assert.equal(n.change('app.tab', 'library'), false);
+  release(false); assert.equal(await back, false);
+  assert.equal(n.change('app.tab', 'library'), true);
+  assert.equal(n.read('app.tab', ''), 'library');
+  assert.equal(n.read('library.lesson', ''), 'noun');
 });
 test('epoch reset invalidates pending responses and paths in every tab', async () => {
   const { n } = setup();

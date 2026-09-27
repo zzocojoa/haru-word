@@ -48,8 +48,9 @@ export function useLearningController(initialServerTime: number) {
   if (!visited.includes(tab)) setVisited([...visited, tab]);
   const setTab = useCallback(
     (view: View) => {
-      setMessage('');
-      navigateTab(view);
+      const accepted = navigateTab(view);
+      if (accepted) setMessage('');
+      return accepted;
     },
     [setMessage, navigateTab],
   );

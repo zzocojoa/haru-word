@@ -53,7 +53,11 @@ export function SheetDialog({ navigationKey, blocked = false, dirty = false, ope
   return <Context.Provider value={context}>
     <Dialog {...props} open={open} onOpenChange={value => { if (value) onOpenChange?.(true); else void close(); }}>{children}</Dialog>
     <AlertDialog open={confirm} onOpenChange={value => { if (!value) settle(false); }}>
-      <AlertDialogContent className="sheet-discard-confirm"><AlertDialogHeader><AlertDialogTitle>변경 내용을 버릴까요?</AlertDialogTitle><AlertDialogDescription>저장하지 않은 입력은 사라져요.</AlertDialogDescription></AlertDialogHeader>
+      <AlertDialogContent className="sheet-discard-confirm"
+        onEscapeKeyDown={event => { event.preventDefault(); event.stopPropagation(); settle(false); }}
+        onKeyDownCapture={event => {
+          if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); settle(false); }
+        }}><AlertDialogHeader><AlertDialogTitle>변경 내용을 버릴까요?</AlertDialogTitle><AlertDialogDescription>저장하지 않은 입력은 사라져요.</AlertDialogDescription></AlertDialogHeader>
         <AlertDialogFooter><AlertDialogCancel onClick={() => settle(false)}>계속 편집</AlertDialogCancel><AlertDialogAction disabled={disabled} onClick={() => settle(true)}>변경 버리고 닫기</AlertDialogAction></AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
