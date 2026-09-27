@@ -34,6 +34,8 @@ import { useKeyboardInset } from "./use-keyboard-inset";
 import { useTabPosition } from "./use-tab-position";
 import { NavigationProvider, useNavigationGuard, useNavigationEpoch } from './navigation';
 import { StartupScreen } from './startup-screen';
+import { useLearningTools } from './learning/use-learning-tools';
+import { useTabNavigation } from './learning/use-tab-navigation';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean }) {
@@ -122,6 +124,8 @@ function LearningScreens({
   const grammarLeave = useRef<GrammarLeave | null>(null);
   const registerGrammarLeave = useCallback((fn: GrammarLeave) => { grammarLeave.current = fn; return () => { if (grammarLeave.current === fn) grammarLeave.current = null; }; }, []);
   async function flushGrammar() { return await grammarLeave.current?.() ?? true; }
+  const requestTab = useTabNavigation(tab, store.epoch, store.restoring, flushGrammar, visitTab);
+  useLearningTools(currentState, requestTab, clock.currentDate);
   useNavigationGuard(async changed => {
     if (store.restoring || (saving && [...changed].some(key => ['app.correctDate', 'app.backup', 'backup.confirm', 'library.word', 'library.add'].includes(key)))) return false;
     if ([...changed].some(key => key === 'app.tab' || key === 'library.view' || key === 'library.lesson') && !await flushGrammar()) return false;
@@ -200,7 +204,7 @@ function LearningScreens({
         <Tabs
           key={store.epoch}
           value={tab}
-          onValueChange={async (v) => { if (await flushGrammar()) visitTab(v as View); }}
+          onValueChange={v => { void requestTab(v as View); }}
           className="main-tabs"
         >
           <TabsList className="main-nav" aria-label="학습 화면">
@@ -345,7 +349,7 @@ function LearningScreens({
                       repeat={repeat}
                       repeating={repeating}
                       setCorrectingSession={setCorrectingSession}
-                      setTab={setTab}
+                      setTab={requestTab}
                       setSettings={setSettings}
                       beginAssessment={beginAssessment}
                       initialAssessment={initialAssessment}
@@ -427,7 +431,7 @@ function LearningScreens({
                 onReview={setReviewDate}
                 onRestoreOpen={openRestore}
                 onCorrectDate={setCorrectingSession}
-                onStudyHome={() => setTab("today")}
+                onStudyHome={() => { void requestTab("today"); }}
               />
             )}
           </TabsContent>

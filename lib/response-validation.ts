@@ -3,20 +3,22 @@ import { grammarStateSchema } from './grammar/model';
 import { createStateSchemas } from './state-shape';
 import { InvalidResponseError } from './client-request';
 import type { StateRevision, StateSnapshot } from './api-contracts';
+import { stateReferenceIssues } from './state-integrity';
 
 // Do not pull the vocabulary catalog into the client transport bundle.
-const { settingsSchema, progressSchema, sessionSchema } = createStateSchemas(z.string().min(1).max(100));
+const entryId = z.string().min(1).max(100);
+const { settingsSchema, progressSchema, sessionSchema } = createStateSchemas(entryId);
 const revisionSchema = z.object({ revision: z.number().int().nonnegative().safe() }).strict();
 const snapshotSchema = revisionSchema.extend({ state: z.object({
   grammar: grammarStateSchema.optional(),
   settings: settingsSchema,
-  progress: z.record(z.string(), progressSchema),
+  progress: z.record(entryId, progressSchema),
   sessions: z.record(z.string().uuid(), sessionSchema),
 }).strict() }).strict();
 
 export function parseSnapshot(value: unknown): StateSnapshot {
   const parsed = snapshotSchema.safeParse(value);
-  if (!parsed.success) throw new InvalidResponseError();
+  if (!parsed.success || stateReferenceIssues(parsed.data.state).length) throw new InvalidResponseError();
   return parsed.data;
 }
 export function parseRevision(value: unknown, previous: number): StateRevision {

@@ -4,6 +4,7 @@ import words from '@/data/words.json';
 import { progressSchema, sessionSchema, settingsSchema, validProgressIdentity } from './validation';
 import { LARGE_BACKUP_BYTES, RESTORE_PART_BYTES, utf8Bytes, type RestorePart } from './restore-protocol';
 import { assertBackupStructure } from './backup-structure';
+import { validSessionIdentity } from './state-integrity';
 export const catalogIds = new Set(words.map(w => w.id));
 export const digestSchema = z.string().regex(/^[a-f0-9]{64}$/);
 export const manifestSchema = z.object({
@@ -31,7 +32,7 @@ export function parsePart(raw: string, part: RestorePart): Record<string, unknow
       if (!p.success || !(catalogIds.has(id) || /^personal_[a-zA-Z0-9-]{36}$/.test(id)) || !validProgressIdentity(id, p.data)) throw new Error('단어 기록의 형식이 잘못되었어요.');
     } else {
       const s = sessionSchema.safeParse(row);
-      if (!s.success || s.data.id !== id) throw new Error('학습 회차의 형식이나 진행 위치가 잘못되었어요.');
+      if (!s.success || !validSessionIdentity(id, s.data)) throw new Error('학습 회차의 형식이나 진행 위치가 잘못되었어요.');
     }
   }
   return value as Record<string, unknown>;

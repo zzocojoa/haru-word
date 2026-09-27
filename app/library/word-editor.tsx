@@ -24,6 +24,7 @@ import { editedWordProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
 import { useSheetProtection } from '../sheet-dialog';
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/components/ui/alert-dialog';
 export function WordEditor({
   activityDate,
   word,
@@ -57,13 +58,23 @@ export function WordEditor({
   const [encounters, setEncounters] = useState(p?.encounters || []);
   const [encounter, setEncounter] = useState("");
   const [source, setSource] = useState<"reading" | "listening">("reading");
+  const [pendingSense, setPendingSense] = useState<string | null>(null);
   const savedContent = senseKey ? cardContent(word.id, { ...selectedSense, meaning: senseKey }) : null;
-  const dirty = !savedContent || meaning !== savedContent.meaning || expression !== savedContent.expression ||
+  const senseDirty = savedContent ? meaning !== savedContent.meaning || expression !== savedContent.expression ||
     expressionTranslation !== (savedContent.expressionTranslation || '') || example !== savedContent.example ||
-    translation !== savedContent.translation || notes !== (selectedSense?.notes || '') || familiarityTouched ||
+    translation !== savedContent.translation || notes !== (selectedSense?.notes || '')
+    : !!(meaning || expression || expressionTranslation || example || translation || notes);
+  const dirty = senseDirty || familiarityTouched ||
     useful !== !!p?.useful || JSON.stringify(encounters) !== JSON.stringify(p?.encounters || []) || !!encounter.trim();
-  useSheetProtection(dirty, submitting);
+  // The nested sense confirmation owns dismissal until it settles. In particular,
+  // Escape must not start the underlying sheet's discard confirmation as well.
+  useSheetProtection(dirty, submitting || pendingSense !== null);
   function chooseSense(key: string) {
+    if (submitting || key === senseKey) return;
+    if (senseDirty) { setPendingSense(key); return; }
+    replaceSense(key);
+  }
+  function replaceSense(key: string) {
     const c = key
       ? cardContent(word.id, { ...senseProgress(base, key), meaning: key })
       : { meaning: "", expression: "", expressionTranslation: "", example: "", translation: "" };
@@ -72,6 +83,7 @@ export function WordEditor({
     setExample(c.example);
     setTranslation(c.translation);
     setNotes(key ? senseProgress(base, key).notes || "" : "");
+    setPendingSense(null);
   }
   const duplicate =
     !senseKey && senses.some((x) => x.meaning === meaning.trim());
@@ -286,6 +298,16 @@ export function WordEditor({
         기록 저장
       </button>
       </div>
+      <AlertDialog open={pendingSense !== null} onOpenChange={open => { if (!open) setPendingSense(null); }}>
+        <AlertDialogContent onEscapeKeyDown={event => { event.preventDefault(); setPendingSense(null); }} onKeyDownCapture={event => {
+          if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); setPendingSense(null); }
+        }}><AlertDialogHeader><AlertDialogTitle>다른 뜻으로 바꿀까요?</AlertDialogTitle>
+          <AlertDialogDescription>현재 뜻에서 저장하지 않은 표현·예문·보완점은 사라져요.</AlertDialogDescription></AlertDialogHeader>
+          <AlertDialogFooter><AlertDialogCancel>계속 편집</AlertDialogCancel>
+            <AlertDialogAction disabled={submitting} onClick={() => { if (!submitting && pendingSense !== null) replaceSense(pendingSense); }}>변경 버리고 전환</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

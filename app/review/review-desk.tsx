@@ -17,6 +17,7 @@ import {
 } from "@/lib/learning";
 import { ArrowRight, NotebookPen, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useVocabularyState } from '../learning/use-vocabulary-state';
 import { PendingReviews } from "../pending-reviews";
 import { HelpDetails } from "../study-ui";
 import { reviewSessionLabels } from '@/lib/learning-display';
@@ -39,6 +40,7 @@ export function ReviewDesk({
   save,
   date,
 }: Props & { date: string }) {
+  const vocabulary = useVocabularyState(state);
   const [selectedWeek, setWeek] = useState<string | null>(null);
   const [selectedMonth, setMonth] = useState<string | null>(null);
   const sessionLabels = useMemo(() => reviewSessionLabels(state.sessions), [state.sessions]);
@@ -70,11 +72,11 @@ export function ReviewDesk({
     () =>
       (["weekly", "monthly"] as const).map((kind) => {
         const period = kind === "weekly" ? week : month;
-        const targets = reviewTargets(state, kind, period);
+        const targets = reviewTargets(vocabulary, kind, period);
         const targetIds = targets.map((t) =>
           targetIdentity(t.entryId, t.meaning),
         );
-        const sessions = Object.values(state.sessions)
+        const sessions = Object.values(vocabulary.sessions)
           .map(resumeMonthlyWriting)
           .filter((s) => s.kind === kind && s.period === period)
           .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id));
@@ -101,21 +103,21 @@ export function ReviewDesk({
         );
         return { kind, period, ids, session, latest, checked, retained };
       }),
-    [state, week, month],
+    [vocabulary, week, month],
   );
   const practices = useMemo(
     () =>
       (["known", "ko", "sentence"] as const).map((mode) => ({
         mode,
-        ids: practiceTargets(state, mode, (id) =>
-          cardContent(id, state.progress[id]),
+        ids: practiceTargets(vocabulary, mode, (id) =>
+          cardContent(id, vocabulary.progress[id]),
         ),
-        session: Object.values(state.sessions).find(
+        session: Object.values(vocabulary.sessions).find(
           (s) =>
             s.kind === "practice" && s.practiceMode === mode && !s.finished,
         ),
       })),
-    [state],
+    [vocabulary],
   );
   return (
     <>

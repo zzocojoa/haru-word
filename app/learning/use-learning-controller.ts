@@ -13,7 +13,7 @@ import { useStudyDate } from "../use-study-date";
 import type { View } from "./types";
 import { useFamiliarityFlow } from "./use-familiarity-flow";
 import { useSessionCommands } from "./use-session-commands";
-import { useLearningTools } from "./use-learning-tools";
+import { useVocabularyState } from './use-vocabulary-state';
 import { isLearningWriteBlocked } from "@/lib/study-availability";
 import { recordAvailability } from "@/lib/client-diagnostics";
 import { useStudyTransition } from './use-study-transition';
@@ -32,6 +32,7 @@ export function useLearningController(initialServerTime: number) {
     conflict,
     current: currentState,
   } = store;
+  const vocabulary = useVocabularyState(state);
   const [reviewDate, setReviewDate] = useNavigationState<string | null>('app.reviewDate', null);
   const [backupOpen, setBackupOpen] = useNavigationState('app.backup', false);
   const [correctingSession, setCorrectingSession] = useNavigationState<string | null>('app.correctDate', null);
@@ -88,36 +89,39 @@ export function useLearningController(initialServerTime: number) {
   const active = activeId
     ? state.sessions[activeId]
     : undefined;
-  const todays = Object.values(state.sessions).filter(
+  const todays = useMemo(() => Object.values(state.sessions).filter(
     (s) => s.kind === "daily" && s.date === date,
-  );
+  ), [state.sessions, date]);
   const unfinished = todays.find((s) => !s.finished);
   const finished = todays.length > 0 && todays.every((s) => s.finished);
-  const repeating = Object.values(state.sessions).find(
+  const repeating = useMemo(() => Object.values(state.sessions).find(
     (s) =>
       s.kind === "practice" &&
       s.practiceMode === "repeat" &&
       s.period === date &&
       !s.finished,
-  );
+  ), [state.sessions, date]);
   const { assessment, assessed, initialAssessment, assessmentWord, beginAssessment, revealMeaning, markFamiliarity } = useFamiliarityFlow({ state, currentState, prepareTransition, words, save, setAssessing, setPreparing, setShowSession, setTab });
   const allocation = useMemo(
-    () => dailyPlan(words, state, date),
-    [words, state, date],
+    () => dailyPlan(words, vocabulary, date),
+    [words, vocabulary, date],
   );
   const suggestions = allocation.ids;
   const assignedIds = allocation.assignedIds;
   const remaining = Math.max(0, state.settings.dailyGoal - assignedIds.length);
-  const metrics = useMemo(() => learningMetrics(state), [state]);
+  const metrics = useMemo(() => learningMetrics(vocabulary), [vocabulary]);
   const carry = metrics.carry;
   // The overview represents the whole study date, including completed rounds
   // before a goal increase. Resuming still uses the original unfinished session.
   const visibleIds = assignedIds.length ? assignedIds : suggestions;
   const origins = { byId: allocation.origins, ...countDailyOrigins(visibleIds, allocation.origins) };
   const pendingReviewIds = allocation.pendingReviewIds;
-  const monthlyRepair = useMemo(() => repairMonthlyCarryover(
-    state, words, id => cardContent(id, state.progress[id]), date,
-  ), [state, words, date]);
+  const monthlyRepair = useMemo(() => {
+    const { state: repaired, ...details } = repairMonthlyCarryover(
+      vocabulary, words, id => cardContent(id, vocabulary.progress[id]), date,
+    );
+    return { ...details, changed: repaired !== vocabulary };
+  }, [vocabulary, words, date]);
 
   async function correctMonthlyCarryover() {
     if (busy || showSession || currentStudyDate() !== date) return;
@@ -173,7 +177,6 @@ export function useLearningController(initialServerTime: number) {
     }
     setBackupOpen(true);
   }
-  useLearningTools(currentState, setTab, currentStudyDate);
   const candidate = words.find(
     (w) =>
       w.id ===

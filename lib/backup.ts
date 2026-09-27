@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { grammarStateSchema } from './grammar/model';
-import { progressSchema,sessionSchema,settingsSchema,validProgressIdentity } from './validation';
+import { progressSchema,sessionSchema,settingsSchema } from './validation';
+import { stateReferenceIssues } from './state-integrity';
 import { type State } from './learning';
 import rawWords from '@/data/words.json';
 import { resumeMonthlyWriting } from './learning/session-flow';
@@ -20,17 +21,10 @@ export const backupStateSchema=z.object({
  sessions:z.record(z.string().uuid(),sessionSchema).refine(v=>Object.keys(v).length<=10000,'학습 회차는 최대 10,000개까지 복원할 수 있어요.'),
 }).strict().superRefine((s,c)=>{
  const issue=(message:string)=>c.addIssue({code:'custom',message});
- const validEntry=(id:string)=>catalog.has(id)||!!s.progress[id]?.personal;
- for(const [id,p]of Object.entries(s.progress)){
+ for(const id of Object.keys(s.progress)){
   if(!catalog.has(id)&&!/^personal_[a-zA-Z0-9-]{36}$/.test(id))issue('목록에 없는 단어가 있어요.');
-  if(!validProgressIdentity(id,p))issue('개인 단어의 정보가 맞지 않아요.');
  }
- if(s.settings.activeSessionId&&!s.sessions[s.settings.activeSessionId])issue('이어갈 학습 회차가 파일에 없어요.');
- for(const [key,v]of Object.entries(s.sessions)){
-  if(key!==v.id)issue('학습 회차의 식별자가 맞지 않아요.');
-  if(v.ids.some(id=>!validEntry(v.records[id]?.entryId||id)))issue('회차의 목표 단어나 개인 단어 정보가 빠졌어요.');
-  if(v.warmupIds.some(id=>!validEntry(id)))issue('이전 복습의 단어 정보가 맞지 않아요.');
- }
+ for(const message of stateReferenceIssues(s,id=>catalog.has(id)))issue(message);
 });
 
 export type ParsedBackup={state:State;exportedAt?:string;legacy:boolean};

@@ -74,7 +74,9 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     assert.equal(await rows.getByText('월말 점검 대기', { exact: true }).count(), 3);
     await home.getByText(/신규 단어 쉬기 켜짐/).waitFor();
     await p.getByRole('button', { name: '오늘 단어 다시 보기', exact: true }).click();
-    await p.getByRole('dialog').getByRole('button', { name: 'arrive', exact: true }).click();
+    await p.getByRole('dialog').getByRole('combobox', { name: '다시 볼 단어 선택', exact: true }).click();
+    await p.getByRole('option', { name: /^1\. arrive/ }).click();
+    assert.match(await p.getByRole('dialog').locator('.completed-word h3').innerText(), /arrive/);
     await p.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();
     await audit('today complete with pending monthly review');
     await p.screenshot({ path: out + '/completed-mobile.png', fullPage: true });

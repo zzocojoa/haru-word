@@ -42,5 +42,5 @@ export type LearningViewProps = LearningStatusProps & LearningCommandProps & Lea
   origins: ReturnType<typeof dailyOriginSummary>;
   pendingReviewIds: string[];
   metrics: ReturnType<typeof learningMetrics>;
-  monthlyRepair: ReturnType<typeof repairMonthlyCarryover>;
+  monthlyRepair: Omit<ReturnType<typeof repairMonthlyCarryover>, 'state'> & { changed: boolean };
 };

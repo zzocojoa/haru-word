@@ -5,7 +5,7 @@ import type { View } from "./types";
 // Tools expose saved metadata only; all mutations still use the normal UI/store path.
 export function useLearningTools(
   currentState: { current: State },
-  setTab: (view: View) => void,
+  visitTab: (view: View) => Promise<boolean>,
   currentStudyDate: () => string,
 ) {
   useEffect(() => {
@@ -79,7 +79,7 @@ export function useLearningTools(
         additionalProperties: false,
       },
       annotations: { readOnlyHint: false, untrustedContentHint: false },
-      execute: (input) => {
+      execute: async (input) => {
         if (
           !input ||
           typeof input !== "object" ||
@@ -88,10 +88,10 @@ export function useLearningTools(
           !["today", "library", "review", "log"].includes(String(input.view))
         )
           throw new Error("Invalid view");
-        setTab(input.view as View);
-        return { view: input.view, completed: false };
+        const navigated = await visitTab(input.view as View);
+        return { requestedView: input.view, ...(navigated ? { view: input.view } : {}), navigated, completed: false };
       },
     });
     return () => lifecycle.abort();
-  }, [currentState, setTab, currentStudyDate]);
+  }, [currentState, visitTab, currentStudyDate]);
 }

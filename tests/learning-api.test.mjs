@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdirSync } from 'node:fs';
 import { build } from 'esbuild';
 import { EMPTY } from '../lib/learning.ts';
+import { history } from './fixtures/backup-history.cjs';
 
 mkdirSync('work/learning-api-tests', { recursive: true });
 const bundle = await build({ entryPoints: ['lib/learning-api.ts'], outfile: 'work/learning-api-tests/api.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent', metafile: true });
@@ -80,6 +81,31 @@ test('invalid snapshots fail before the store receives replacement state', async
     globalThis.fetch = async () => Response.json(payload);
     await assert.rejects(api.loadLearningState(), { name: 'InvalidResponseError' });
   }
+});
+
+test('snapshot identity and personal references are rejected before replacing state', async () => {
+  const invalid = [
+    s => { s.settings.activeSessionId = crypto.randomUUID(); },
+    s => { Object.values(s.sessions)[0].id = crypto.randomUUID(); },
+    s => { s.progress['personal_' + crypto.randomUUID()] = { meaning: '검사' }; },
+    s => { const row = Object.values(s.sessions)[0]; row.warmupIds = ['personal_' + crypto.randomUUID()]; },
+    s => { const row = Object.values(s.sessions)[0]; row.records[row.ids[0]].entryId = 'personal_' + crypto.randomUUID(); },
+  ];
+  for (const mutate of invalid) {
+    const state = history(1, 3); mutate(state);
+    globalThis.fetch = async () => Response.json({ revision: 4, state });
+    await assert.rejects(api.loadLearningState(), { name: 'InvalidResponseError' });
+  }
+});
+
+test('valid older snapshots and personal references retain all saved fields', async () => {
+  const state = history(1, 3), personal = 'personal_' + crypto.randomUUID();
+  state.progress[personal] = { personal: { id: personal, word: 'commute', headword: 'commute', pos: 'v.', level: 'A1', page: 0, personal: true }, meaning: '통근하다' };
+  const row = Object.values(state.sessions)[0]; row.warmupIds = [personal]; state.settings.activeSessionId = row.id;
+  const before = structuredClone(state);
+  globalThis.fetch = async () => Response.json({ revision: 4, state });
+  const result = await api.loadLearningState();
+  assert.equal(result.ok, true); assert.deepEqual(result.data.state, before); assert.deepEqual(state, before);
 });
 
 test('malformed JSON from a state request also requires explicit reconciliation', async () => {

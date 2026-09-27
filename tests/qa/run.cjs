@@ -3,7 +3,7 @@ const path = require('node:path');
 const { runCase } = require('./process.cjs');
 const manifest = require('./manifest.cjs');
 const { waitForWorker, localBase } = require('./runtime.cjs');
-const performanceTests = new Set(['history-performance-qa.cjs', 'startup-performance-qa.cjs', 'backup-resource-qa.cjs']);
+const performanceTests = new Set(['history-performance-qa.cjs', 'startup-performance-qa.cjs', 'backup-resource-qa.cjs', 'grammar-input-performance-qa.cjs']);
 const group = process.argv[2] || 'functional';
 if (!['functional', 'performance'].includes(group)) throw new Error('Choose functional or performance.');
 const files = readdirSync(path.resolve('tests')).filter(name => name.endsWith('-qa.cjs')).sort();

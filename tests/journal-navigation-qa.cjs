@@ -128,7 +128,8 @@ for (let attempt = 1; attempt <= 3; attempt++) {
 
     await panel.getByRole('button', { name: '이전 기록 더 보기' }).click(); assert.equal(await days.count(), 20);
     await panel.getByRole('button', { name: '이전 기록 더 보기' }).click(); assert.equal(await days.count(), 23);
-    assert.match(await panel.getByRole('status').innerText(), /23일 · 26회차 중 23일/);
+    assert.match(await panel.locator('.section-heading').innerText(), /23일 · 26회차/);
+    assert.equal(await panel.getByRole('status').count(), 0); // The range hint disappears once all dates are visible.
     await panel.getByRole('combobox', { name: '기록 종류 필터' }).click(); await p.getByRole('option', { name: '주간 점검', exact: true }).click();
     assert.equal(await days.count(), 1); assert.equal(await dayTriggers.first().getAttribute('aria-expanded'), 'false');
     await panel.getByRole('combobox', { name: '기록 종류 필터' }).click(); await p.getByRole('option', { name: '일일 학습', exact: true }).click();

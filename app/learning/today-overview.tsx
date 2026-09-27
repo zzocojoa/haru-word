@@ -3,6 +3,7 @@ import { POS } from "@/lib/learning";
 import { countDailyOrigins, dailyAllocationRule } from "@/lib/learning/daily-allocation";
 import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
 import { useMemo, useState } from "react";
+import { useVocabularyState } from './use-vocabulary-state';
 import { HelpDetails, StatusBadge } from "../study-ui";
 import { ArrowRight, BookOpen, RotateCcw, Sparkles } from "lucide-react";
 import { LevelSelect } from "../ui";
@@ -64,8 +65,9 @@ export function TodayOverview({
   monthlyRepair,
   correctMonthlyCarryover,
 }: TodayOverviewProps) {
-  const statuses = useMemo(() => todayWordStatuses(state, visibleIds, date, unfinished),
-    [state, visibleIds, date, unfinished]);
+  const vocabulary = useVocabularyState(state);
+  const statuses = useMemo(() => todayWordStatuses(vocabulary, visibleIds, date, unfinished),
+    [vocabulary, visibleIds, date, unfinished]);
   const checked = visibleIds.filter(id => statuses[id].recordStatus === 'recorded').length;
   const assigned = assignedIds.length > 0;
   const [year, month, day] = date.split('-').map(Number);
@@ -133,7 +135,7 @@ export function TodayOverview({
           <p>잘못된 복습 표시 {monthlyRepair.cleared}건 · 오늘 교체할 단어 {monthlyRepair.replacements.length}개</p>
           <p>과거 성적과 월말 점검은 유지하고, 오늘 답·문장·수정 내용을 저장하지 않은 단어만 교체해요.</p>
           {monthlyRepair.unavailable > 0 && <p>대체 후보가 부족한 {monthlyRepair.unavailable}개는 유지해요. 신규 단어 쉬기 설정이나 학습 수준을 확인해 주세요.</p>}
-          <button className="secondary-button full" disabled={busy || monthlyRepair.state === state} onClick={correctMonthlyCarryover}>오늘 배정 바로잡기</button>
+          <button className="secondary-button full" disabled={busy || !monthlyRepair.changed} onClick={correctMonthlyCarryover}>오늘 배정 바로잡기</button>
         </section>
       )}
       {finished ? (
