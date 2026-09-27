@@ -79,7 +79,8 @@ export function WordEditor({
           {word.personal ? "개인 추가" : `첨부 Oxford PDF ${word.page}쪽`}
         </DialogDescription>
       </DialogHeader>
-      <fieldset className="dialog-scroll editor-fields" disabled={submitting}>
+      <div className="dialog-scroll">
+      <fieldset className="editor-fields" disabled={submitting}>
       <section className="sense-selector">
         <label>
           학습할 뜻 선택
@@ -267,6 +268,7 @@ export function WordEditor({
       )}
       {changedKeys.length > 1 && <p className="small-note">수정한 뜻 {changedKeys.length}개를 함께 저장해요.</p>}
       </fieldset>
+      </div>
       <div className="dialog-actions">
       <button
         className="primary-button full"

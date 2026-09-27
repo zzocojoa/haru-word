@@ -49,7 +49,7 @@ fs.mkdirSync(out, { recursive: true });
       await p.addScriptTag({ path: axePath }); assert.deepEqual(await p.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations.map(v => ({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))), []);
     };
     await settings();
-    for (const options of [{dy:30},{dy:-150},{dx:150,dy:10},{cancel:true},{multiple:true},{resize:true},{region:'body'}]) { await gesture(options); assert.ok(await dialog.isVisible()); }
+    for (const options of [{dy:30},{dy:-150},{dx:150,dy:10},{cancel:true},{multiple:true},{resize:true},{region:'body',dy:-150}]) { await gesture(options); assert.ok(await dialog.isVisible()); }
     await p.emulateMedia({ reducedMotion:'reduce' }); const reduced = await gesture({cancel:true}); assert.equal(reduced.offset,'0px'); await p.emulateMedia({ reducedMotion:'no-preference' });
     for (const width of [320,390,430,768,1440]) for (const size of [100,200]) {
       await p.setViewportSize({width,height:844}); await p.evaluate(size => document.documentElement.style.fontSize = `${size}%`,size);
@@ -71,7 +71,7 @@ fs.mkdirSync(out, { recursive: true });
     await settings(); await gesture({dy:0}); assert.ok(await dialog.isVisible());
     await p.locator('.sheet-handle').click(); assert.ok(await dialog.isVisible());
     await dialog.getByRole('button',{name:'Close',exact:true}).focus(); await p.keyboard.press('Enter'); await gone();
-    checks.push('settings: cancel/short/up/horizontal/multitouch/resize/body scroll excluded; reduced motion, fixed chrome, 5 widths and 200% text; desktop unchanged');
+    checks.push('settings: cancel/short/up/horizontal/multitouch/resize and upward body gestures excluded; reduced motion, fixed chrome, 5 widths and 200% text; desktop unchanged');
     await p.getByRole('button',{name:'학습 방식·출처',exact:true}).click(); await down(); await gone();
     await p.getByRole('button',{name:'오늘 단어 다시 보기',exact:true}).click(); await down(); await gone();
     await p.getByRole('button',{name:'학습일 수정',exact:true}).click(); await down(); await gone();

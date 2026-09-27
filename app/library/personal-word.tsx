@@ -38,7 +38,8 @@ export function PersonalWord({
           공식 목록과 별도로 ‘개인 추가’로 저장해요.
         </DialogDescription>
       </DialogHeader>
-      <fieldset className="dialog-scroll editor-fields" disabled={submitting}>
+      <div className="dialog-scroll">
+      <fieldset className="editor-fields" disabled={submitting}>
       <label>
         영어 단어
         <input
@@ -84,6 +85,7 @@ export function PersonalWord({
         />
       </label>
       </fieldset>
+      </div>
       <div className="dialog-actions">
       <button
         className="primary-button full"

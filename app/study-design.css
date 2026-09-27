@@ -3835,7 +3835,7 @@ label {
   color: var(--ink);
   padding-right: 40px;
 }
-.word-dialog .dialog-scroll>label, .word-dialog .help-content>label {
+.word-dialog :is(.dialog-scroll,.editor-fields)>label, .word-dialog .help-content>label {
   display: block;
   margin: var(--space-3) 0 var(--space-2);
 }
@@ -3843,7 +3843,7 @@ label {
   min-height: 44px;
   margin-block: var(--space-3);
 }
-.word-dialog .dialog-scroll>label>input:not([type=checkbox]):not([type=radio]), .word-dialog .dialog-scroll>label>textarea, .word-dialog .help-content>label>textarea {
+.word-dialog :is(.dialog-scroll,.editor-fields)>label>input:not([type=checkbox]):not([type=radio]), .word-dialog :is(.dialog-scroll,.editor-fields)>label>textarea, .word-dialog .help-content>label>textarea {
   width: 100%;
   margin-top: var(--space-2);
 }
@@ -4460,11 +4460,11 @@ footer {
 .no-target-actions { margin-top: var(--space-3); }
 .no-target-actions .button-row { margin-top: var(--space-2); }
 .empty-state>.secondary-button { margin: var(--space-4) auto 0; }
-.dialog-scroll>label {
+:is(.dialog-scroll,.editor-fields)>label {
   display: block;
   margin: var(--space-3) 0;
 }
-.dialog-scroll>label:first-child {
+:is(.dialog-scroll,.editor-fields)>label:first-child {
   margin-top: 0;
 }
 .dialog-scroll input:not([type=checkbox]):not([type=radio]),.dialog-scroll textarea {

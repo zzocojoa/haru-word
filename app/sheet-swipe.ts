@@ -1,12 +1,12 @@
 import { completesSheetSwipe, sheetSwipeDirection } from '@/lib/sheet-swipe';
 
-const controls = 'input,textarea,select,button,a,[contenteditable=true],[role=combobox],[role=listbox],[role=menu]';
+const controls = 'input,textarea,select,button,a,summary,[contenteditable=true],[role=combobox],[role=listbox],[role=menu]';
 const visible = (el: HTMLElement) => !!el.getClientRects().length && !el.closest('[aria-hidden=true],[hidden]');
 type Close = (beforeClose?: () => Promise<boolean>) => Promise<boolean>;
 
-/** Header/handle only. Never converts the content's scroll into dismissal. */
+/** The body can dismiss only when the gesture starts at its scroll boundary. */
 export function installSheetSwipe(element: HTMLElement, close: Close, blocked: () => boolean, dirty: () => boolean) {
-  let drag: { id: number; x: number; y: number; height: number; moving: boolean } | undefined;
+  let drag: { id: number; x: number; y: number; height: number; moving: boolean; body: boolean } | undefined;
   let animation: Animation | undefined;
   let offset = 0, settling = false, disposed = false;
   const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -47,15 +47,27 @@ export function installSheetSwipe(element: HTMLElement, close: Close, blocked: (
       !e.cancelable || e.touches.length !== 1 || (visualViewport?.scale ?? 1) !== 1 ||
       document.documentElement.hasAttribute('data-swiping') || document.querySelector('.shell[data-keyboard=open]')) return;
     const target = e.target;
-    if (!(target instanceof HTMLElement) || !target.closest('[data-sheet-handle],[data-slot=dialog-header]')) return;
-    if (!target.closest('[data-sheet-handle]') && target.closest(controls)) return;
+    if (!(target instanceof HTMLElement) || target.closest(controls)) return;
+    const header = target.closest('[data-sheet-handle],[data-slot=dialog-header]');
+    const body = target.closest('.dialog-scroll');
+    if (!header) {
+      if (!body || !element.contains(body)) return;
+      // Do not take over a scroll that started below the top, even if it reaches
+      // the boundary later. Nested scrollers and text selection keep ownership.
+      if (window.getSelection()?.isCollapsed === false) return;
+      for (let node: HTMLElement | null = target; node && node !== element; node = node.parentElement) {
+        if (node.scrollTop > 1) return;
+      }
+    }
     const top = [...document.querySelectorAll<HTMLElement>('[role=dialog],[role=alertdialog],[role=listbox],[role=menu]')].filter(visible).at(-1);
     if (top !== element) return;
     const t = e.touches[0];
     // Existing left-edge Back owns its 24px strip; these recognizers cannot race.
     if (t.clientX <= 24 || t.clientX >= innerWidth - 24) return;
-    e.preventDefault();
-    drag = { id: t.identifier, x: t.clientX, y: t.clientY, height: element.getBoundingClientRect().height, moving: false };
+    // Body taps and upward scrolling stay native. Claim only a downward move;
+    // the handle/header retain their existing touchstart gesture ownership.
+    if (header) e.preventDefault();
+    drag = { id: t.identifier, x: t.clientX, y: t.clientY, height: element.getBoundingClientRect().height, moving: false, body: !header };
   }
   function move(e: TouchEvent) {
     if (!drag || settling) return;
@@ -64,8 +76,13 @@ export function installSheetSwipe(element: HTMLElement, close: Close, blocked: (
     if (!t) { reset(); return; }
     const dx = t.clientX - drag.x, dy = t.clientY - drag.y;
     const direction = sheetSwipeDirection(dx, dy);
-    if (direction === 'cancel') { void home(); return; }
-    if (direction === 'pending') return;
+    if (direction === 'cancel') { if (drag.body && !drag.moving) reset(); else void home(); return; }
+    if (direction === 'pending') {
+      // Reserve the first small downward move at the top before the browser
+      // starts rubber-band scrolling. Upward/horizontal moves are untouched.
+      if (drag.body && dy > 0 && dy > Math.abs(dx) * 1.5 && e.cancelable) e.preventDefault();
+      return;
+    }
     if (e.cancelable) e.preventDefault();
     drag.moving = true; element.setAttribute('data-sheet-dragging', '');
     position(reduced() ? 0 : Math.min(dy, drag.height));

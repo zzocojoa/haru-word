@@ -67,5 +67,5 @@
   --space-8:32px;
 }
 
-/* Semantic input lock without changing the framed editor layout. */
-.editor-fields { border: 0; padding: var(--space-1); margin: 0; min-inline-size: 0; }
+/* Keep the semantic input lock inside an explicit, measurable scroll container. */
+.editor-fields { border: 0; padding: 0; margin: 0; min-inline-size: 0; }
