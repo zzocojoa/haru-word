@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+AI 제공자 공통 계약·읽기 전용 결과·재점검 버튼 상태의 리팩토링과 검증은 [REFACTORING_2026-09-30.md](REFACTORING_2026-09-30.md)를 참조하세요.
+
 오늘 학습의 영어 품사 코드와 S/V/O/C 도움말·회귀 검사 범위는 [GRAMMAR_TERMS.md](GRAMMAR_TERMS.md)를 참조하세요.
 
 AI 교정문의 역할별 구조·해석과 저장·구형 호환·복구 지침은 [AI_SENTENCE_STRUCTURE.md](AI_SENTENCE_STRUCTURE.md)를 참조하세요.

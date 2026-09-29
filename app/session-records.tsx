@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { FeedbackDetail } from "./sentence-feedback";
+import { FeedbackDetail } from "./feedback-detail";
 import { StatusBadge } from "./study-ui";
 import {
   entryIdFor,

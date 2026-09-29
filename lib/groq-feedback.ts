@@ -1,5 +1,5 @@
-import { GROQ_FEEDBACK_MODEL, feedbackContentSchema, type SentenceFeedback } from './sentence-feedback';
-import { responseJsonSchema } from './gemini-feedback';
+import { GROQ_FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
+import { FEEDBACK_OUTPUT_LIMITS, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
 import { FeedbackError } from './provider-feedback-error';
 import type { FeedbackIssueCode } from './feedback-issue';
 import { structureInstruction } from './sentence-structure';
@@ -22,7 +22,7 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
     response = await fetcher('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` }, signal,
       body: JSON.stringify({ model: GROQ_FEEDBACK_MODEL, service_tier: 'on_demand', reasoning_effort: 'low', include_reasoning: false,
-        max_completion_tokens: 4096, stream: false,
+        max_completion_tokens: FEEDBACK_OUTPUT_LIMITS.tokens, stream: false,
         messages: [{ role: 'system', content: instruction + structureInstruction }, { role: 'user', content: JSON.stringify(input) }],
         response_format: { type: 'json_schema', json_schema: { name: 'sentence_feedback', strict: true, schema: responseJsonSchema } },
       }),
@@ -49,8 +49,7 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
   if (candidate?.finish_reason !== 'stop') throw new FeedbackError('groq_incomplete', 502, { providerStatus: 200 });
   try {
     const text = candidate?.message?.content;
-    if (body?.model !== GROQ_FEEDBACK_MODEL || typeof text !== 'string' || text.length > 30000) throw new Error('Invalid response');
-    const content = feedbackContentSchema.parse(JSON.parse(text));
-    return { ...content, original: input.sentence, model: GROQ_FEEDBACK_MODEL, createdAt: new Date().toISOString() };
+    if (body?.model !== GROQ_FEEDBACK_MODEL) throw new Error('Invalid response');
+    return parseProviderFeedback(text, input.sentence, GROQ_FEEDBACK_MODEL);
   } catch { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }); }
 }

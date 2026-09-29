@@ -1,7 +1,9 @@
-import { FEEDBACK_MODEL, feedbackContentSchema, type SentenceFeedback } from './sentence-feedback';
+import { FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
 import { FeedbackError, providerHttpError, providerFinishError } from './provider-feedback-error';
-import { structureInstruction, structureJsonSchema } from './sentence-structure';
+import { structureInstruction } from './sentence-structure';
+import { FEEDBACK_OUTPUT_LIMITS, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
 export { FeedbackError } from './provider-feedback-error';
+export { responseJsonSchema } from './provider-feedback-contract';
 
 export const systemInstruction = `You are a concise Korean-speaking tutor for an adult learning American English.
 Evaluate only the supplied English sentence, target word, part of speech, and today's Korean meaning.
@@ -12,18 +14,6 @@ Use uncertain for insufficient, ambiguous, or non-sentence input. Do not invent 
 Provide a minimally corrected English sentence preserving intent and today's target use; use an empty string if a responsible correction is impossible.
 For a correct sentence, repeat it unchanged. Write explanation in Korean, at most three short sentences about specific improvements.
 Never assess familiarity, CEFR level, recall proficiency, or pronunciation. Return only the requested JSON.`;
-
-export const responseJsonSchema = {
-  type:'object',
-  properties:{
-    meaningUsage:{type:'string',enum:['appropriate','needs_work','uncertain']},
-    grammar:{type:'string',enum:['natural','needs_work','uncertain']},
-    correctedSentence:{type:'string'},
-    explanation:{type:'string'},
-    structure: structureJsonSchema,
-  },
-  required:['meaningUsage','grammar','correctedSentence','explanation','structure'],additionalProperties:false,
-};
 
 export async function generateSentenceFeedback(
   key:string,
@@ -48,7 +38,7 @@ export async function generateTutorFeedback(
       body:JSON.stringify({
         systemInstruction:{parts:[{text:instruction + structureInstruction}]},
         contents:[{role:'user',parts:[{text:JSON.stringify(input)}]}],
-        generationConfig:{maxOutputTokens:4096,responseMimeType:'application/json',responseJsonSchema},
+        generationConfig:{maxOutputTokens:FEEDBACK_OUTPUT_LIMITS.tokens,responseMimeType:'application/json',responseJsonSchema},
       }),
     });
   } catch {
@@ -75,8 +65,6 @@ export async function generateTutorFeedback(
   if (stopped) throw stopped;
   try {
     const text=candidate?.content?.parts?.filter(p=>!p.thought).map(p=>p.text||'').join('')||'';
-    if(text.length>30000)throw new Error('Oversized response');
-    const parsed=feedbackContentSchema.parse(JSON.parse(text));
-    return {...parsed,original:input.sentence,model:FEEDBACK_MODEL,createdAt:new Date().toISOString()};
+    return parseProviderFeedback(text, input.sentence, FEEDBACK_MODEL);
   } catch { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }); }
 }

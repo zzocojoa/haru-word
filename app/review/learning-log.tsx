@@ -38,7 +38,7 @@ import {
 import { groupJournalSessions, journalSessionLabel } from "@/lib/learning-journal";
 import { ArrowRight, NotebookPen } from "lucide-react";
 import { Fragment, memo, useMemo, useRef, useState } from "react";
-import { FeedbackDetail } from "../sentence-feedback";
+import { FeedbackDetail } from "../feedback-detail";
 import { SessionRecords } from "../session-records";
 import { RecordActions } from "./record-actions";
 import { sessionCounts } from "@/lib/learning-display";

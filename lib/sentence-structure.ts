@@ -1,16 +1,17 @@
 import { z } from 'zod';
 
+export const STRUCTURE_ROLE_CODES = ['S', 'V', 'O', 'C', 'M', 'X'] as const;
 export const STRUCTURE_ROLES = {
   S: { ko: '주어', en: 'Subject' }, V: { ko: '동사', en: 'Verb' },
   O: { ko: '목적어', en: 'Object' }, C: { ko: '보어', en: 'Complement' },
   M: { ko: '수식어', en: 'Modifier' }, X: { ko: '연결·기타', en: 'Other' },
-} as const;
+} as const satisfies Record<(typeof STRUCTURE_ROLE_CODES)[number], { ko: string; en: string }>;
 export const sentenceStructureSchema = z.object({
   status: z.enum(['available', 'unavailable']),
   translation: z.string().max(2000),
   parts: z.array(z.object({
     text: z.string().trim().min(1).max(2000),
-    role: z.enum(['S', 'V', 'O', 'C', 'M', 'X']),
+    role: z.enum(STRUCTURE_ROLE_CODES),
     explanation: z.string().trim().min(1).max(140),
   }).strict()).max(20),
   note: z.string().max(300),
@@ -48,7 +49,7 @@ export const structureJsonSchema = {
     status: { type: 'string', enum: ['available', 'unavailable'] },
     translation: { type: 'string' },
     parts: { type: 'array', items: { type: 'object', additionalProperties: false,
-      properties: { text: { type: 'string' }, role: { type: 'string', enum: ['S', 'V', 'O', 'C', 'M', 'X'] }, explanation: { type: 'string' } },
+      properties: { text: { type: 'string' }, role: { type: 'string', enum: STRUCTURE_ROLE_CODES }, explanation: { type: 'string' } },
       required: ['text', 'role', 'explanation'] } },
     note: { type: 'string' },
   }, required: ['status', 'translation', 'parts', 'note'],
