@@ -14,6 +14,7 @@ import { GrammarWriting } from './grammar-writing';
 import { GrammarSummary } from './grammar-summary';
 import { GrammarReading } from './grammar-reading';
 import { Speak } from '../ui';
+import { GrammarTermsHelp } from '../grammar-terms';
 
 type Props = { lesson: Lesson; enhanced?: boolean; persistence: GrammarPersistence; activityDate: () => string; onBack: () => void; onWords: () => void };
 
@@ -106,7 +107,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, persist
       <p className="grammar-role">{lesson.role}</p>
       <dl className="grammar-rules"><dt>놓이는 자리</dt><dd>{lesson.pattern}</dd>{progress.contentVersion === 2 && <><dt>흔한 실수</dt><dd>{practice.commonMistake}</dd></>}</dl>
       <details className="grammar-guide"><summary>{progress.contentVersion === 2 ? '더 비교해 보기' : '흔한 실수와 비교'}</summary><p>{lesson.mistake}</p>{progress.contentVersion === 2 && practice.extra && <p>{practice.extra}</p>}</details>
-      <details className="grammar-guide"><summary>품사와 문장 속 역할</summary><p>품사는 단어의 종류, 주어·목적어는 문장 속 자리예요. I like music.에서 music은 명사이며 목적어예요.</p><p>15개는 Oxford 목록의 학습 표기예요. 관사는 한정사의 한 종류이고, 조동사는 동사와 연결해 익혀요.</p></details>
+      <GrammarTermsHelp pos={lesson.pos} />
       <div className="grammar-actions">
         <button className="text-button" onClick={() => move(0)}>예문 다시 보기</button>
         <button className="primary-button" disabled={!persistence.canSave} onClick={() => move(2)}>3문제 연습<ArrowRight size={18} /></button>

@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, PencilLine } from "lucide-react";
 import { DictionaryLinks, Speak } from "../ui";
 import { ExpressionLine } from "../expression-line";
 import { ExpressionFields } from "../expression-fields";
+import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
 import type { StudySessionController } from "./use-study-session-controller";
 type LearnStageProps = Pick<
   StudySessionController,
@@ -47,9 +48,7 @@ export function LearnStage({
     <>
       <div className="word-stage compact">
         <span className="word-index">
-          {word.personal
-            ? "MY VOCABULARY"
-            : `OXFORD ${word.level} · ${POS[word.pos]}`}
+          {word.personal ? "개인 추가" : `OXFORD ${word.level}`} · <PartOfSpeechLabel pos={word.pos} />
         </span>
         <h3 lang="en">
           {word.word}
@@ -57,6 +56,7 @@ export function LearnStage({
         </h3>
         {content.ipa && <span className="phonetic">{content.ipa}</span>}
       </div>
+      <GrammarTermsHelp pos={word.pos} />
       <div className="meaning-section">
         <label htmlFor="study-meaning">
           오늘 공부할 뜻 <span className="muted">하나만 골라요</span>

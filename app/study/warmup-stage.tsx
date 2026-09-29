@@ -1,5 +1,5 @@
 "use client";
-import { POS } from "@/lib/learning";
+import { PartOfSpeechLabel } from '../grammar-terms';
 import { canGradeIndependently } from "@/lib/study-availability";
 import { Eye } from "lucide-react";
 import type { StudySessionController } from "./use-study-session-controller";
@@ -34,7 +34,7 @@ export function WarmupStage({
       </p>
       <div className="word-stage">
         <h3 lang="en">{word.word}</h3>
-        <span>{POS[word.pos]}</span>
+        <span><PartOfSpeechLabel pos={word.pos} /></span>
       </div>
       <label>
         떠오르는 한국어 뜻

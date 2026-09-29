@@ -1,5 +1,5 @@
 "use client";
-import { POS } from "@/lib/learning";
+import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
 import { Check } from "lucide-react";
 import { SentenceFeedbackPanel } from "../sentence-feedback";
 import { DictionaryLinks, Speak } from "../ui";
@@ -51,9 +51,10 @@ export function SentenceStage({
           <Speak text={word.word} />
         </h3>
         <span>
-          {POS[word.pos]} · {s.records[id!]?.meaning || content.meaning}
+          <PartOfSpeechLabel pos={word.pos} /> · {s.records[id!]?.meaning || content.meaning}
         </span>
       </div>
+      <GrammarTermsHelp pos={word.pos} />
       <label htmlFor="my-sentence">내 영어 문장</label>
       <textarea
         id="my-sentence"
@@ -99,7 +100,7 @@ export function SentenceStage({
         <summary>스스로 점검하기</summary>
         <ul>
           <li>오늘의 뜻과 품사로 썼나요?</li>
-          <li>주어와 동사, 시제, 전치사가 자연스러운가요?</li>
+          <li>주어(S)와 동사(V), 시제, 전치사가 자연스러운가요?</li>
           <li>예문에서 사람·시간·장소를 하나 바꿔 보세요.</li>
         </ul>
         <button

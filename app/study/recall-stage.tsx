@@ -1,5 +1,5 @@
 "use client";
-import { POS } from "@/lib/learning";
+import { PartOfSpeechLabel } from '../grammar-terms';
 import { canGradeIndependently } from "@/lib/study-availability";
 import { ArrowRight } from "lucide-react";
 import type { StudySessionController } from "./use-study-session-controller";
@@ -44,7 +44,7 @@ export function RecallStage({
           "word-stage recall " + (s.stage === "ko" ? "korean-cue" : "")
         }
       >
-        <span className="word-index">{POS[word.pos]}</span>
+        <span className="word-index"><PartOfSpeechLabel pos={word.pos} /></span>
         <h3 lang={s.stage === "en" ? "en" : "ko"}>
           {s.stage === "en"
             ? word.word

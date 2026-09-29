@@ -1,5 +1,5 @@
 "use client";
-import { POS } from "@/lib/learning";
+import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
 import { countDailyOrigins, dailyAllocationRule } from "@/lib/learning/daily-allocation";
 import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
 import { useMemo, useState } from "react";
@@ -226,6 +226,7 @@ export function TodayOverview({
         <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 중에는 복습만 배정해요.' : '한쪽 후보가 부족하면 다른 쪽으로 채워요.'} 목표를 늘려도 기존 배정은 유지해요. 추가·재학습은 새 회차에 저장해요.</p>
         <p className="small-note">기록 완료는 회상·문장 결과를 남긴 수예요. 독립 성공과는 달라요. 월말 점검이 남아 있어도 다음 날 학습할 수 있어요.</p>
         </HelpDetails>
+        <GrammarTermsHelp />
         <div className="target-filters" role="group" aria-label="오늘 단어 필터">
           <button type="button" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>전체 {visibleIds.length}</button>
           <button type="button" aria-pressed={filter === 'remaining'} onClick={() => setFilter('remaining')}>남은 단어 {visibleIds.length - checked}</button>
@@ -242,7 +243,7 @@ export function TodayOverview({
               </span>
               <div>
                 <b lang="en">{w.word}</b>
-                <small>{POS[w.pos]} · {w.personal ? "개인 추가" : w.level}</small>
+                <small><PartOfSpeechLabel pos={w.pos} /> · {w.personal ? "개인 추가" : w.level}</small>
                 <span className={`daily-origin ${origins.byId[id] === 'returning' ? 'returning' : 'new'}`}>{origins.byId[id] === 'returning' ? <RotateCcw size={12} aria-hidden="true"/> : <Sparkles size={12} aria-hidden="true"/>}{origins.byId[id] === 'returning' ? '복습' : '새 학습'}</span>
               </div>
               <div className="today-word-status">
@@ -261,7 +262,7 @@ export function TodayOverview({
           {showPendingReview && <ul aria-label="대기 중인 복습 단어" tabIndex={0}>
             {pendingReviewIds.slice(0, pendingLimit).map(id => {
               const word = wordById.get(id)!;
-              return <li key={id}><span lang="en">{word.word}</span> <small>{POS[word.pos]} · {word.level}</small></li>;
+              return <li key={id}><span lang="en">{word.word}</span> <small><PartOfSpeechLabel pos={word.pos} /> · {word.level}</small></li>;
             })}
           </ul>}
           {showPendingReview && pendingReviewIds.length > pendingLimit && <button className="text-button" onClick={() => setPendingLimit(n => n + 20)}>복습 목록 더 보기 · {pendingReviewIds.length - pendingLimit}개 남음</button>}

@@ -26,6 +26,7 @@ module.exports = [
   "grammar-v2-qa.cjs",
   "grammar-plan-qa.cjs",
   "grammar-ui-qa.cjs",
+  "grammar-terms-qa.cjs",
   "grammar-input-performance-qa.cjs",
   "history-performance-qa.cjs",
   "integration-consistency-qa.cjs",
