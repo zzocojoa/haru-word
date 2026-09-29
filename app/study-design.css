@@ -560,7 +560,7 @@ label input, label textarea {
 .notes-details {
   font-size: 0.875rem;
 }
-.notes-details summary {
+.notes-details > summary {
   display: flex;
   align-items: center;
   gap: 7px;
@@ -569,12 +569,12 @@ label input, label textarea {
   padding: 5px 0;
   list-style: revert;
 }
-.notes-details summary::before {
+.notes-details > summary::before {
   content: '+';
   font-size: 17px;
   line-height: 1;
 }
-.notes-details[open] summary::before {
+.notes-details[open] > summary::before {
   content: '−';
 }
 .notes-details label {
@@ -1163,15 +1163,15 @@ label input, label textarea {
   font-size: 0.875rem;
   margin: var(--space-1) 0 14px;
 }
-.record-card dl {
+.record-card > dl {
   margin: 0;
 }
-.record-card dl>div {
+.record-card > dl>div {
   display: grid;
   grid-template-columns: 88px 1fr;
   gap: 10px;
 }
-.record-card dd {
+.record-card > dl dd {
   margin: 0;
 }
 .check-label {
@@ -1231,7 +1231,7 @@ select {
   .practice-options {
     flex-direction: column;
   }
-  .record-card dl>div {
+  .record-card > dl>div {
     grid-template-columns: 76px 1fr;
   }
   .batch-actions {
@@ -1996,15 +1996,15 @@ input[readonly] {
   font-size: .75rem;
   color: var(--caption);
 }
-.record-card dl>div {
+.record-card > dl>div {
   padding-block: 6px;
   margin: 0;
   border-bottom: 1px solid var(--border);
 }
-.record-card dl>div:last-child {
+.record-card > dl>div:last-child {
   border: 0;
 }
-.record-card dd[data-result=independent], .record-card dd[data-result=help] {
+.record-card > dl dd[data-result=independent], .record-card > dl dd[data-result=help] {
   font-weight: 600;
 }
 .section-heading .eyebrow {
@@ -2542,11 +2542,11 @@ footer {
   .record-card>p {
     margin-bottom: 10px;
   }
-  .record-card dl>div {
+  .record-card > dl>div {
     grid-template-columns: 72px minmax(0, 1fr);
     gap: 7px;
   }
-  .record-card dd {
+  .record-card > dl dd {
     overflow-wrap: anywhere;
   }
   .section-heading>.button-row {
@@ -2854,7 +2854,7 @@ footer {
 .journal-word-detail .record-card {
   margin: 0;
 }
-.journal-word-detail .record-card dl {
+.journal-word-detail .record-card > dl {
   font-size: .875rem;
 }
 @media (max-width:560px) {
@@ -3649,7 +3649,7 @@ label {
 .notes-details {
   margin: var(--space-3) 0;
 }
-.notes-details summary {
+.notes-details > summary {
   min-height: 44px;
   font-size: .875rem;
   color: var(--ink);
@@ -3760,22 +3760,22 @@ label {
   font-size: 1.25rem;
   color: var(--ink);
 }
-.record-card dl {
+.record-card > dl {
   font-size: .875rem;
 }
-.record-card dt {
+.record-card > dl dt {
   color: var(--caption);
 }
-.record-card dd {
+.record-card > dl dd {
   color: var(--ink);
 }
-.record-card dd[data-result=independent] {
+.record-card > dl dd[data-result=independent] {
   color: var(--success);
 }
-.record-card dd[data-result=help] {
+.record-card > dl dd[data-result=help] {
   color: var(--warning);
 }
-.record-card dd[data-result=unmeasured] {
+.record-card > dl dd[data-result=unmeasured] {
   color: var(--caption);
 }
 .journal-day-trigger, .journal-session-trigger {
@@ -4258,17 +4258,17 @@ footer {
   .word-dialog .dialog-word {
     font-size: 1.75rem;
   }
-  .record-card dl>div {
+  .record-card > dl>div {
     grid-template-columns: 76px minmax(0,1fr);
     gap: var(--space-2);
   }
-  .record-card dl {
+  .record-card > dl {
     font-size: .875rem;
   }
-  .record-card dd {
+  .record-card > dl dd {
     font-size: 1rem;
   }
-  .record-card dt {
+  .record-card > dl dt {
     font-size: .875rem;
   }
   .journal-day-trigger, .journal-session-trigger {

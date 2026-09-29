@@ -37,7 +37,7 @@ import {
 } from "@/lib/learning";
 import { groupJournalSessions, journalSessionLabel } from "@/lib/learning-journal";
 import { ArrowRight, NotebookPen } from "lucide-react";
-import { memo, useMemo, useRef, useState } from "react";
+import { Fragment, memo, useMemo, useRef, useState } from "react";
 import { FeedbackDetail } from "../sentence-feedback";
 import { SessionRecords } from "../session-records";
 import { RecordActions } from "./record-actions";
@@ -275,7 +275,7 @@ const SessionLogTable = memo(function SessionLogTable({
           const r = s.records[id];
           if (!r) return null;
           return (
-            <TableRow key={id}>
+            <Fragment key={id}><TableRow>
               <TableCell>
                 <b>{w?.word}</b>
                 <small className="block">
@@ -316,12 +316,6 @@ const SessionLogTable = memo(function SessionLogTable({
                   <span className="status-warn">문장 보완</span>
                 )}
                 {r.notes && <small>{r.notes}</small>}
-                {r.aiFeedback && (
-                  <details className="notes-details">
-                    <summary>AI 교정 의견</summary>
-                    <FeedbackDetail feedback={r.aiFeedback} />
-                  </details>
-                )}
               </TableCell>
               <TableCell>
                 {sessionRecordComplete(s, r)
@@ -329,6 +323,15 @@ const SessionLogTable = memo(function SessionLogTable({
                   : nextAction(r, s)}
               </TableCell>
             </TableRow>
+            {r.aiFeedback && <TableRow className="journal-feedback-row">
+              <TableCell colSpan={6}>
+                <details className="notes-details">
+                  <summary aria-label={`${w?.word || '단어'} AI 교정 의견`}>AI 교정 의견</summary>
+                  <FeedbackDetail feedback={r.aiFeedback} />
+                </details>
+              </TableCell>
+            </TableRow>}
+            </Fragment>
           );
         })}
       </TableBody>

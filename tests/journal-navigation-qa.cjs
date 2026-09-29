@@ -171,7 +171,10 @@ for (let attempt = 1; attempt <= 3; attempt++) {
       }
     }
     assert.ok(await first.locator('.journal-desktop').isVisible());
-    assert.equal(await first.locator('.log-table tbody tr').count(), 10);
+    assert.equal(await first.locator('.log-table tbody tr:not(.journal-feedback-row)').count(), 10);
+    const feedbackRows = first.locator('.journal-feedback-row');
+    assert.equal(await feedbackRows.count(), 1);
+    assert.equal(await feedbackRows.locator('td').getAttribute('colspan'), '6');
     await axe('expanded desktop journal');
     await p.screenshot({ path: out + '/expanded-desktop.png', fullPage: true });
     checks.push('320–1440 px, 200% text, reduced motion and desktop comparison table remain usable');
