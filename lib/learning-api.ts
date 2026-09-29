@@ -1,6 +1,7 @@
 import { InvalidResponseError, requestJson, REQUEST_TIMEOUT_MS } from './client-request';
 import { parseRevision, parseSnapshot } from './response-validation';
 import { parseFeedbackIssue } from './feedback-issue';
+import { FEEDBACK_STRUCTURE_HEADERS } from './feedback-compatibility';
 import type { State } from './learning';
 import type {
   ApiError, FeedbackRequest, FeedbackResponse, SaveStateRequest, StateRevision, StateSnapshot,
@@ -27,13 +28,14 @@ async function requestApi<T>(url: string, init: RequestInit, timeoutMs: number, 
 }
 
 export function loadLearningState() {
-  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store', headers: { 'X-Study-Grammar': '2' } }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
+  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store', headers: { 'X-Study-Grammar': '2', ...FEEDBACK_STRUCTURE_HEADERS } }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
 }
 
 export function saveLearningState(data: SaveStateRequest) {
   return requestApi<StateRevision>('/api/state', {
     method: 'PUT',
     headers: {
+      ...FEEDBACK_STRUCTURE_HEADERS,
       'Content-Type': 'application/json',
       'X-Study-Grammar': '2',
       'X-Study-Review-Resume': '1',
@@ -47,7 +49,7 @@ export function saveLearningState(data: SaveStateRequest) {
 export function restoreLearningState(state: State, revision: number) {
   return requestApi<StateRevision>('/api/state/restore', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Study-Revision': String(revision), 'X-Study-Grammar': '2' },
+    headers: { 'Content-Type': 'application/json', 'X-Study-Revision': String(revision), 'X-Study-Grammar': '2', ...FEEDBACK_STRUCTURE_HEADERS },
     body: JSON.stringify({ format: 'haru-words-v1', exportedAt: new Date().toISOString(), state }),
   }, REQUEST_TIMEOUT_MS.restore, value => parseRevision(value, revision));
 }
@@ -55,7 +57,7 @@ export function restoreLearningState(state: State, revision: number) {
 export function requestSentenceFeedback(input: FeedbackRequest, signal: AbortSignal) {
   return requestApi<FeedbackResponse>('/api/sentence-feedback', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...FEEDBACK_STRUCTURE_HEADERS },
     body: JSON.stringify(input),
     signal,
   }, REQUEST_TIMEOUT_MS.feedback);

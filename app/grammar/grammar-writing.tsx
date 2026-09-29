@@ -10,6 +10,7 @@ import { AiUseNotice } from '../ai-use-notice';
 import { FeedbackAttribution } from '../feedback-attribution';
 import { PRACTICE_LESSONS, frameSentence } from '@/lib/grammar/content-v2';
 import { Speak } from '../ui';
+import { SentenceStructureView } from '../sentence-structure';
 
 type Props = {
   lesson: GrammarLesson;
@@ -69,8 +70,9 @@ function Feedback({ feedback, sentence, onSentence }: { feedback: SentenceFeedba
     <h3>AI 의견</h3><p>{meaningLabel} · {GRAMMAR_TEXT[grammar]}</p><p>{explanation}</p>
     <FeedbackAttribution feedback={feedback} />
     {correctedSentence && <>
-      <p lang="en">{correctedSentence}</p>
+      <p className="small-note">AI 교정 제안</p><p lang="en">{correctedSentence}</p>
       {correctedSentence !== sentence && <button className="secondary-button" onClick={() => onSentence(correctedSentence)}>수정안 사용하기</button>}
     </>}
+    {(correctedSentence || feedback.structure) && <SentenceStructureView structure={feedback.structure} />}
   </div>;
 }

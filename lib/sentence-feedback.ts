@@ -1,18 +1,22 @@
 import { z } from 'zod';
 
 import { FEEDBACK_MODEL, GROQ_FEEDBACK_MODEL } from './learning/feedback-identity.ts';
+import { sentenceStructureSchema, validSentenceStructure } from './sentence-structure.ts';
 export { FEEDBACK_MODEL, GROQ_FEEDBACK_MODEL, feedbackProvider } from './learning/feedback-identity.ts';
-export const feedbackContentSchema = z.object({
+const feedbackFields = z.object({
   meaningUsage: z.enum(['appropriate', 'needs_work', 'uncertain']),
   grammar: z.enum(['natural', 'needs_work', 'uncertain']),
   correctedSentence: z.string().max(2000),
   explanation: z.string().min(1).max(1500),
+  structure: sentenceStructureSchema.optional(),
 }).strict();
-export const sentenceFeedbackSchema = feedbackContentSchema.extend({
+const validStructure = (feedback: z.infer<typeof feedbackFields>) => !feedback.structure || validSentenceStructure(feedback.structure, feedback.correctedSentence);
+export const feedbackContentSchema = feedbackFields.refine(validStructure, '문장 구조와 교정문이 일치하지 않아요.');
+export const sentenceFeedbackSchema = feedbackFields.extend({
   original: z.string().min(1).max(2000),
   model: z.enum([FEEDBACK_MODEL, GROQ_FEEDBACK_MODEL]),
   createdAt: z.string().datetime(),
-});
+}).refine(validStructure, '문장 구조와 교정문이 일치하지 않아요.');
 export type SentenceFeedback = z.infer<typeof sentenceFeedbackSchema>;
 export const feedbackRequestSchema = z.object({
   sessionId: z.string().uuid(),

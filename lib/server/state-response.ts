@@ -1,9 +1,10 @@
 import type { StoredStateDocuments } from '@/db/learning-state';
+import { legacyFeedbackDocument } from '../feedback-compatibility.ts';
 
 // D1 returns all three collections in one atomic batch. Keep that snapshot,
 // but avoid parsing every document and building a second giant JSON string.
 // This consumes the private query result; no caller may reuse it afterwards.
-export function stateResponse(snapshot: StoredStateDocuments, complete: (bytes: number) => void, failed: () => void) {
+export function stateResponse(snapshot: StoredStateDocuments, complete: (bytes: number) => void, failed: () => void, structureSupported = true) {
   const encoder = new TextEncoder(); let bytes = 0;
   function* fragments() {
     yield `{"revision":${snapshot.revision},"state":{"settings":${snapshot.settings},"progress":{`;
@@ -15,14 +16,14 @@ export function stateResponse(snapshot: StoredStateDocuments, complete: (bytes: 
     yield '},"sessions":{';
     for (let i = 0; i < snapshot.sessions.length; i++) {
       const row = snapshot.sessions[i];
-      yield `${i ? ',' : ''}${JSON.stringify(row.session_id)}:${row.document}`;
+      yield `${i ? ',' : ''}${JSON.stringify(row.session_id)}:${structureSupported ? row.document : legacyFeedbackDocument(row.document, 'session')}`;
     }
     yield '}';
     if (snapshot.grammar) {
       yield ',"grammar":{';
       for (let i = 0; i < snapshot.grammar.length; i++) {
         const row = snapshot.grammar[i];
-        yield `${i ? ',' : ''}${JSON.stringify(row.lesson_id)}:${row.document}`;
+        yield `${i ? ',' : ''}${JSON.stringify(row.lesson_id)}:${structureSupported ? row.document : legacyFeedbackDocument(row.document, 'grammar')}`;
       }
       yield '}';
     }

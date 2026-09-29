@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { LessonId } from '@/lib/grammar/model';
 import { sentenceFeedbackSchema } from '@/lib/sentence-feedback';
+import { FEEDBACK_STRUCTURE_HEADERS } from '@/lib/feedback-compatibility';
 import { requestJson, REQUEST_TIMEOUT_MS } from '@/lib/client-request';
 import { clientFeedbackIssue } from '@/lib/client-feedback-error';
 import { FeedbackIssueError, issueFromResponse, type FeedbackIssue } from '@/lib/feedback-issue';
@@ -44,7 +45,7 @@ export function useGrammarFeedback({ lessonId, canSave, latest, change, flush }:
       if (!await flush()) throw new FeedbackIssueError({ code: 'save_required' });
       if (!isCurrent()) return;
       const result = await requestJson<{ feedback?: unknown; error?: string }>('/api/grammar-feedback', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json', ...FEEDBACK_STRUCTURE_HEADERS },
         body: JSON.stringify({ lessonId, sentence }), signal: controller.signal,
       }, REQUEST_TIMEOUT_MS.feedback);
       if (!isCurrent()) return;

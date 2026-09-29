@@ -26,8 +26,10 @@ test('server calls only the fixed model and separates meaning from grammar witho
  assert.equal(feedback.original,input.sentence);assert.equal(feedback.meaningUsage,'appropriate');assert.equal(feedback.grammar,'needs_work');
  assert.match(request.url,/^https:\/\/generativelanguage\.googleapis\.com\/v1beta\/models\/gemini-3\.1-flash-lite:generateContent$/);
  assert.ok(!request.url.includes('test-secret'));assert.equal(request.init.headers['x-goog-api-key'],'test-secret');
- const sent=JSON.parse(request.init.body);assert.deepEqual(JSON.parse(sent.contents[0].parts[0].text),input);assert.equal(sent.generationConfig.maxOutputTokens,1536);assert.ok(!sent.tools);assert.ok(request.init.signal);
+ const sent=JSON.parse(request.init.body);assert.deepEqual(JSON.parse(sent.contents[0].parts[0].text),input);assert.equal(sent.generationConfig.maxOutputTokens,4096);assert.ok(!sent.tools);assert.ok(request.init.signal);
 });
+
+
 test('429 is a recoverable limit with no automatic provider retries or raw error disclosure',async()=>{
  let calls=0;await assert.rejects(generateSentenceFeedback('test-secret',input,async()=>{calls++;return new Response('secret upstream body',{status:429})}),e=>e.status===429&&!e.message.includes('secret'));
  assert.equal(calls,1);
@@ -149,4 +151,19 @@ test('sentence route falls back once, reports the real model and preserves owned
   const failed=await (await route.POST(req())).json();assert.equal(failed.code,'groq_limit');assert.equal(failed.previous.code,'provider_unavailable');assert.equal(failed.retryAfterSeconds,7);
   assert.doesNotMatch(logs.join('')+JSON.stringify(failed),/PRIVATE|synthetic-groq|I arrive/);
  }finally{globalThis.fetch=originalFetch;console.info=originalInfo;console.error=originalError;delete testRuntime.env.groq_api}
+});
+
+test('sentence structure is negotiated at the HTTP boundary; legacy feedback shape stays readable',async()=>{
+ insertSession(session);testRuntime.user={userId:'owner'};testRuntime.env.google_ai_enabled='true';
+ const originalFetch=globalThis.fetch;
+ const structure={status:'available',translation:'나는 어제 집에 도착했어요.',parts:[
+  {text:'I',role:'S',explanation:'도착한 사람'}, {text:'arrived',role:'V',explanation:'과거의 동작'},
+  {text:'home yesterday.',role:'M',explanation:'장소와 시간'},
+ ],note:''};
+ globalThis.fetch=async()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({...content,structure})}]}}]});
+ try{
+  const legacy=await (await route.POST(req())).json();assert.equal(Object.hasOwn(legacy.feedback,'structure'),false);
+  const modern=await (await route.POST(req(body,{'X-Study-Feedback-Structure':'1'}))).json();assert.deepEqual(modern.feedback.structure,structure);
+  assert.deepEqual(JSON.parse(sqlite.prepare('SELECT document FROM study_sessions WHERE user_id=? AND session_id=?').get('owner',sid).document),session);
+ }finally{globalThis.fetch=originalFetch}
 });

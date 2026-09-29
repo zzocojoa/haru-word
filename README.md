@@ -2,6 +2,8 @@
 
 오늘 학습의 영어 품사 코드와 S/V/O/C 도움말·회귀 검사 범위는 [GRAMMAR_TERMS.md](GRAMMAR_TERMS.md)를 참조하세요.
 
+AI 교정문의 역할별 구조·해석과 저장·구형 호환·복구 지침은 [AI_SENTENCE_STRUCTURE.md](AI_SENTENCE_STRUCTURE.md)를 참조하세요.
+
 입력·화면 이동·집계·응답 검증·백업 복원의 리팩토링 경계와 회귀 검사는 [REFACTORING_2026-09-27.md](REFACTORING_2026-09-27.md)를 참조하세요.
 
 iPhone 홈 화면 실행 시 초기 흰 화면의 원인, 폰트·시작 화면 개선과 검증·롤백은 [STARTUP_RENDERING.md](STARTUP_RENDERING.md)를 참조하세요.

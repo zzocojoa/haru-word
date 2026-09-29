@@ -1,5 +1,6 @@
 import { FEEDBACK_MODEL, feedbackContentSchema, type SentenceFeedback } from './sentence-feedback';
 import { FeedbackError, providerHttpError, providerFinishError } from './provider-feedback-error';
+import { structureInstruction, structureJsonSchema } from './sentence-structure';
 export { FeedbackError } from './provider-feedback-error';
 
 export const systemInstruction = `You are a concise Korean-speaking tutor for an adult learning American English.
@@ -19,8 +20,9 @@ export const responseJsonSchema = {
     grammar:{type:'string',enum:['natural','needs_work','uncertain']},
     correctedSentence:{type:'string'},
     explanation:{type:'string'},
+    structure: structureJsonSchema,
   },
-  required:['meaningUsage','grammar','correctedSentence','explanation'],additionalProperties:false,
+  required:['meaningUsage','grammar','correctedSentence','explanation','structure'],additionalProperties:false,
 };
 
 export async function generateSentenceFeedback(
@@ -44,9 +46,9 @@ export async function generateTutorFeedback(
       method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},
       signal,
       body:JSON.stringify({
-        systemInstruction:{parts:[{text:instruction}]},
+        systemInstruction:{parts:[{text:instruction + structureInstruction}]},
         contents:[{role:'user',parts:[{text:JSON.stringify(input)}]}],
-        generationConfig:{maxOutputTokens:1536,responseMimeType:'application/json',responseJsonSchema},
+        generationConfig:{maxOutputTokens:4096,responseMimeType:'application/json',responseJsonSchema},
       }),
     });
   } catch {
@@ -73,7 +75,7 @@ export async function generateTutorFeedback(
   if (stopped) throw stopped;
   try {
     const text=candidate?.content?.parts?.filter(p=>!p.thought).map(p=>p.text||'').join('')||'';
-    if(text.length>10000)throw new Error('Oversized response');
+    if(text.length>30000)throw new Error('Oversized response');
     const parsed=feedbackContentSchema.parse(JSON.parse(text));
     return {...parsed,original:input.sentence,model:FEEDBACK_MODEL,createdAt:new Date().toISOString()};
   } catch { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }); }

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { FEEDBACK_STRUCTURE_HEADERS } from './feedback-compatibility';
 import { requestJson, InvalidResponseError, RequestTimeoutError } from './client-request';
 import { LARGE_BACKUP_BYTES, RESTORE_PART_BYTES, type RestoreManifest } from './restore-protocol';
 const hash=z.string().regex(/^[a-f0-9]{64}$/);
@@ -14,7 +15,7 @@ export const restoreJobSchema=z.object({id:z.string().uuid(),baseRevision:z.numb
 );
 const capabilitiesSchema=z.object({enabled:z.boolean(),maxBytes:z.union([z.literal(8_000_000),z.literal(LARGE_BACKUP_BYTES)]),partBytes:z.literal(RESTORE_PART_BYTES)}).strict();
 async function call<T>(path:string,schema:z.ZodType<T>,method='GET',body?:string,signal?:AbortSignal):Promise<T>{
- const result=await requestJson(path,{method,cache:'no-store',headers:method==='GET'?undefined:{'Content-Type':'application/json','X-Study-Grammar':'2'},body,signal},method==='GET'?20_000:45_000,(data,response)=>{
+ const result=await requestJson(path,{method,cache:'no-store',headers:method==='GET'?undefined:{'Content-Type':'application/json','X-Study-Grammar':'2',...FEEDBACK_STRUCTURE_HEADERS},body,signal},method==='GET'?20_000:45_000,(data,response)=>{
   if(response.ok&&!schema.safeParse(data).success)throw new InvalidResponseError();
   return data;
  }).catch(error=>{

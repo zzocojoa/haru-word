@@ -25,6 +25,7 @@ const db = {
     sql, args,
     async run() { return { meta: { changes: Number(sqlite.prepare(sql).run(...args).changes) } }; },
     async all() { return { results: sqlite.prepare(sql).all(...args) }; },
+    async first() { return sqlite.prepare(sql).get(...args) ?? null; },
   }; } }; },
   async batch(statements) {
     batches++;

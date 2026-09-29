@@ -45,6 +45,7 @@ module.exports = [
   "review-calendar-qa.cjs",
   "review-extension-qa.cjs",
   "sentence-feedback-qa.cjs",
+  "sentence-structure-qa.cjs",
   "sheet-dismiss-qa.cjs",
   "sheet-body-swipe-qa.cjs",
   "sheet-motion-qa.cjs",

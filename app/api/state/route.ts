@@ -8,6 +8,8 @@ import { json, validateJsonMutation } from '@/lib/server/http';
 import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar, legacyGrammarDocument } from '@/lib/grammar/compatibility';
 import { hasSavedModernGrammar } from '@/db/grammar-compatibility';
 import { grammarProgressSchema } from '@/lib/grammar/model';
+import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
+import { hasSavedStructuredFeedback } from '@/db/feedback-compatibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,7 +27,7 @@ export async function GET(request?: Request) {
     const wordCount = snapshot.progress.length, sessionCount = snapshot.sessions.length, grammarCount = snapshot.grammar?.length;
     return stateResponse(snapshot,
       bytes => console.info(JSON.stringify({ event: 'learning_state_loaded', wordCount, sessionCount, grammarCount, bytes, durationMs: Date.now() - started })),
-      () => console.error(JSON.stringify({ event: 'learning_state_load_failed', durationMs: Date.now() - started })));
+      () => console.error(JSON.stringify({ event: 'learning_state_load_failed', durationMs: Date.now() - started })), supportsFeedbackStructure(request));
   } catch {
     console.error(JSON.stringify({ event: 'learning_state_load_failed', durationMs: Date.now() - started }));
     return json({ error: '기록을 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요.' }, 503);
@@ -54,6 +56,11 @@ export async function PUT(request: Request) {
   }
   try {
     const db = database();
+    if (!supportsFeedbackStructure(request) && (hasStructuredFeedback(data) ||
+      await hasSavedStructuredFeedback(db, user.userId, Object.keys(data.sessions), Object.keys(data.grammar ?? {})))) {
+      console.warn(JSON.stringify({ event: 'feedback_client_outdated', version: 1 }));
+      return json({ error: FEEDBACK_UPGRADE_MESSAGE }, 426);
+    }
     if (data.grammar && request.headers.get('x-study-grammar') !== '2' &&
         (Object.values(data.grammar).some(hasModernGrammar) || await hasSavedModernGrammar(db, user.userId, Object.keys(data.grammar)))) {
       console.warn(JSON.stringify({ event: 'grammar_client_outdated', version: 1 }));

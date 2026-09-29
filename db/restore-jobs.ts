@@ -4,6 +4,9 @@ import { RESTORE_JOB_TTL, RESTORE_RECEIPT_TTL, sha256, utf8Bytes, type RestoreJo
 import { hasSavedModernGrammar } from './grammar-compatibility';
 import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar } from '@/lib/grammar/compatibility';
 import { grammarStateSchema } from '@/lib/grammar/model';
+import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback } from '@/lib/feedback-compatibility';
+import { hasSavedStructuredFeedback } from './feedback-compatibility';
+import type { Session } from '@/lib/learning';
 
 export class RestoreError extends Error {
   constructor(message: string, public status = 400, public code = 'invalid_restore') { super(message); }
@@ -98,11 +101,22 @@ export async function validateRestoreJob(db: D1Database, user: string, id: strin
   return getRestoreJob(db, user, id);
 }
 
-export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion = 2) {
+export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion = 2, structureSupported = true) {
   const job = await row(db, user, id);
   if (job.status === 'committed') return view(db, job);
   if (job.status !== 'ready') throw new RestoreError('전체 검증이 끝난 후 복원할 수 있어요.', 409);
   const manifest = JSON.parse(job.manifest) as RestoreManifest;
+    if (!structureSupported) {
+      if (await hasSavedStructuredFeedback(db, user, null, manifest.parts.some(p => p.kind === 'grammar') ? null : []))
+        throw new RestoreError(FEEDBACK_UPGRADE_MESSAGE, 426, 'feedback_client_outdated');
+      // Parts were validated before entering ready. Read only for legacy clients
+      // and check the exact documents that this transaction would replace.
+      const parts = await db.prepare("SELECT kind,document FROM restore_parts WHERE job_id=? AND kind IN ('sessions','grammar')").bind(id).all<{ kind: string; document: string }>();
+      if (parts.results.some(p => hasStructuredFeedback(p.kind === 'sessions'
+        ? { sessions: JSON.parse(p.document) as Record<string, Session> }
+        : { sessions: {}, grammar: grammarStateSchema.parse(JSON.parse(p.document)) })))
+        throw new RestoreError(FEEDBACK_UPGRADE_MESSAGE, 426, 'feedback_client_outdated');
+    }
   if (grammarVersion !== 2 && manifest.parts.some(p => p.kind === 'grammar')) {
     const parts = await db.prepare("SELECT document FROM restore_parts WHERE job_id=? AND kind='grammar'").bind(id).all<{ document: string }>();
     if (await hasSavedModernGrammar(db, user) || parts.results.some(part => Object.values(grammarStateSchema.parse(JSON.parse(part.document))).some(hasModernGrammar)))

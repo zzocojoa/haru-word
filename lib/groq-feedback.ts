@@ -2,6 +2,7 @@ import { GROQ_FEEDBACK_MODEL, feedbackContentSchema, type SentenceFeedback } fro
 import { responseJsonSchema } from './gemini-feedback';
 import { FeedbackError } from './provider-feedback-error';
 import type { FeedbackIssueCode } from './feedback-issue';
+import { structureInstruction } from './sentence-structure';
 
 export const GROQ_TIMEOUT_MS = 15000;
 export function groqHttpError(status: number, retryHeader: string | null): FeedbackError {
@@ -21,8 +22,8 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
     response = await fetcher('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` }, signal,
       body: JSON.stringify({ model: GROQ_FEEDBACK_MODEL, service_tier: 'on_demand', reasoning_effort: 'low', include_reasoning: false,
-        max_completion_tokens: 2048, stream: false,
-        messages: [{ role: 'system', content: instruction }, { role: 'user', content: JSON.stringify(input) }],
+        max_completion_tokens: 4096, stream: false,
+        messages: [{ role: 'system', content: instruction + structureInstruction }, { role: 'user', content: JSON.stringify(input) }],
         response_format: { type: 'json_schema', json_schema: { name: 'sentence_feedback', strict: true, schema: responseJsonSchema } },
       }),
     });
@@ -48,7 +49,7 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
   if (candidate?.finish_reason !== 'stop') throw new FeedbackError('groq_incomplete', 502, { providerStatus: 200 });
   try {
     const text = candidate?.message?.content;
-    if (body?.model !== GROQ_FEEDBACK_MODEL || typeof text !== 'string' || text.length > 10000) throw new Error('Invalid response');
+    if (body?.model !== GROQ_FEEDBACK_MODEL || typeof text !== 'string' || text.length > 30000) throw new Error('Invalid response');
     const content = feedbackContentSchema.parse(JSON.parse(text));
     return { ...content, original: input.sentence, model: GROQ_FEEDBACK_MODEL, createdAt: new Date().toISOString() };
   } catch { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }); }

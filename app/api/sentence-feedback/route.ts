@@ -9,6 +9,7 @@ import { FeedbackError } from '@/lib/gemini-feedback';
 import { generateSentenceFeedbackWithFallback } from '@/lib/feedback-fallback';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { json, validateJsonMutation } from '@/lib/server/http';
+import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 
 export const dynamic = 'force-dynamic';
 const enabled = () => env.google_ai_enabled === 'true';
@@ -52,7 +53,7 @@ export async function POST(request: Request) {
     await recordFeedbackAttempt(db, user.userId, today(), now);
     const feedback = await generateSentenceFeedbackWithFallback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, signal: request.signal }, { word: word.word, pos: word.pos, meaning, sentence });
     console.info(JSON.stringify({ event: 'sentence_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), durationMs: Date.now() - started }));
-    return json({ feedback });
+    return json({ feedback: supportsFeedbackStructure(request) ? feedback : legacyFeedback(feedback) });
   } catch (error) {
     const known = error instanceof FeedbackError;
     console.error(JSON.stringify({ event: 'sentence_feedback_failed', durationMs: Date.now() - started, code: known ? error.code : 'storage_or_internal', ...(known && error.issue.previous ? { primaryCode: error.issue.previous.code } : {}) }));

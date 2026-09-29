@@ -11,6 +11,7 @@ import { FeedbackError } from '@/lib/gemini-feedback';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { feedbackProvider } from '@/lib/sentence-feedback';
 import { json, validateJsonMutation } from '@/lib/server/http';
+import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 
 export const dynamic = 'force-dynamic';
 export async function POST(request: Request) {
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
     await recordFeedbackAttempt(db, user.userId, today(), Date.now());
     const feedback = await generateGrammarFeedback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, signal: request.signal }, lessonForVersion(LESSON_MAP.get(lessonId)!, progress.contentVersion), sentence);
     console.info(JSON.stringify({ event: 'grammar_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), lessonId, durationMs: Date.now() - started }));
-    return json({ feedback });
+    return json({ feedback: supportsFeedbackStructure(request) ? feedback : legacyFeedback(feedback) });
   } catch (e) {
     const known = e instanceof FeedbackError;
     console.error(JSON.stringify({ event: 'grammar_feedback_failed', code: known ? e.code : 'storage_or_internal', ...(known && e.issue.previous ? { primaryCode: e.issue.previous.code } : {}), durationMs: Date.now() - started }));
