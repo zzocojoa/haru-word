@@ -64,13 +64,13 @@ async function main() {
       const { accuracyCases, accuracyRequest, accuracyPromptHash, accuracyModels } = await import('./../.sites-runtime/english-accuracy/requests.mjs');
       const fixtureHash = createHash('sha256').update(readFileSync('tests/fixtures/english-accuracy.json')).digest('hex');
       const profiles = {};
-      for (const domain of ['word', 'grammar']) profiles[domain] = { promptHash: await accuracyPromptHash(accuracyRequest(accuracyCases.find(c => c.domain === domain)).instruction), models: accuracyModels };
+      for (const domain of ['word', 'grammar']) profiles[domain] = { promptHash: await accuracyPromptHash(accuracyRequest(accuracyCases.find(c => c.domain === domain), round).instruction), models: accuracyModels };
       evaluationProfiles(ledger.attempts, round, fixtureHash, profiles);
       for (const sample of accuracyCases) for (const provider of ['google', 'groq']) {
         stop.signal.throwIfAborted();
         if (ledger.attempts.some(r => r.round === round && r.caseId === sample.id && r.provider === provider)) continue;
         evaluationBudget(ledger.attempts, round);
-        const promptHash = await accuracyPromptHash(accuracyRequest(sample).instruction);
+        const promptHash = await accuracyPromptHash(accuracyRequest(sample, round).instruction);
         const attempt = { number: ledger.attempts.length + 1, round, domain: sample.domain, caseId: sample.id, provider, fixtureHash, promptHash, expectedModel: accuracyModels[provider], startedAt: new Date().toISOString(), status: 'started' };
         // Persist BEFORE HTTP. A crash/failed request consumes its slot; never retry.
         ledger.attempts.push(attempt); atomicJson(ledgerPath, ledger);
@@ -83,7 +83,8 @@ async function main() {
           attempt.httpStatus = response.status;
           if (response.ok && result.promptHash === promptHash && result.caseId === sample.id && result.provider === provider && result.feedback?.original === sample.sentence && result.feedback.model === attempt.expectedModel) {
             attempt.status = 'response'; attempt.feedback = result.feedback; attempt.durationMs = result.durationMs;
-          } else { attempt.status = 'failure'; attempt.code = /^[a-z_]{1,60}$/.test(result.code ?? '') ? result.code : 'evaluation_invalid_response'; attempt.providerStatus = result.providerStatus; }
+          } else { attempt.status = 'failure'; attempt.code = /^[a-z_]{1,60}$/.test(result.code ?? '') ? result.code : 'evaluation_invalid_response'; attempt.providerStatus = result.providerStatus;
+            if (['envelope','model','content_type','content_limit','json_syntax','fields','structure'].includes(result.validationStage)) attempt.validationStage = result.validationStage; }
         } catch { attempt.status = 'failure'; attempt.code = 'evaluation_transport'; }
         attempt.finishedAt = new Date().toISOString(); atomicJson(ledgerPath, ledger);
         if (ledger.attempts.length % 10 === 0) console.log(JSON.stringify({ attempts: ledger.attempts.length, responses: ledger.attempts.filter(r => r.status === 'response').length }));

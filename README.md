@@ -176,3 +176,7 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 실제 AI 평가 실행·판정·중단 복구는 [ENGLISH_ACCURACY_EVALUATION.md](ENGLISH_ACCURACY_EVALUATION.md)를 따른다.
 
 2026-09-30 실제 120회 평가와 프롬프트 게시 보류 판정은 [ENGLISH_ACCURACY_RESULTS.md](ENGLISH_ACCURACY_RESULTS.md)에 기록했다.
+
+출력 실패 단계 조사·평가 전용 후보·두 번째 비교의 게시 기준은 [AI_FEEDBACK_IMPROVEMENT.md](AI_FEEDBACK_IMPROVEMENT.md)를 따른다.
+
+후보 재평가240회 종료·Google48/60/Groq55/60·핵심 오류로 인한 게시 보류와 평가 경로 종료는 [ENGLISH_ACCURACY_REEVALUATION.md](ENGLISH_ACCURACY_REEVALUATION.md)를 따른다.

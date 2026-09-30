@@ -1,7 +1,7 @@
 import { FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
 import { FeedbackError, providerHttpError, providerFinishError } from './provider-feedback-error';
 import { structureInstruction } from './sentence-structure';
-import { FEEDBACK_OUTPUT_LIMITS, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
+import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
 export { FeedbackError } from './provider-feedback-error';
 export { responseJsonSchema } from './provider-feedback-contract';
 
@@ -57,7 +57,7 @@ export async function generateTutorFeedback(
     if (!body || typeof body !== 'object' || Array.isArray(body)) throw new SyntaxError();
   } catch (error) {
     if (externalSignal?.aborted) throw externalSignal.reason;
-    throw new FeedbackError(signal.aborted ? 'provider_timeout' : error instanceof TypeError ? 'provider_network' : 'provider_invalid_response', 502, { providerStatus: response.status });
+    throw new FeedbackError(signal.aborted ? 'provider_timeout' : error instanceof TypeError ? 'provider_network' : 'provider_invalid_response', 502, { providerStatus: response.status }, 'envelope');
   }
   externalSignal?.throwIfAborted();
   const candidate = Array.isArray(body.candidates) ? body.candidates[0] : undefined;
@@ -66,5 +66,5 @@ export async function generateTutorFeedback(
   try {
     const text=candidate?.content?.parts?.filter(p=>!p.thought).map(p=>p.text||'').join('')||'';
     return parseProviderFeedback(text, input.sentence, FEEDBACK_MODEL);
-  } catch { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }); }
+  } catch (error) { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }, error instanceof FeedbackValidationError ? error.stage : 'envelope'); }
 }

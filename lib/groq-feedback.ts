@@ -1,5 +1,5 @@
 import { GROQ_FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
-import { FEEDBACK_OUTPUT_LIMITS, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
+import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
 import { FeedbackError } from './provider-feedback-error';
 import type { FeedbackIssueCode } from './feedback-issue';
 import { structureInstruction } from './sentence-structure';
@@ -40,7 +40,7 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
   try { body = await response.json(); }
   catch (error) {
     if (externalSignal?.aborted) throw externalSignal.reason;
-    throw new FeedbackError(deadline.aborted ? 'groq_timeout' : error instanceof TypeError ? 'groq_network' : 'groq_invalid_response', 502, { providerStatus: response.status });
+    throw new FeedbackError(deadline.aborted ? 'groq_timeout' : error instanceof TypeError ? 'groq_network' : 'groq_invalid_response', 502, { providerStatus: response.status }, 'envelope');
   }
   if (externalSignal?.aborted) throw externalSignal.reason;
   const candidate = Array.isArray(body?.choices) ? body.choices[0] : undefined;
@@ -49,7 +49,7 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
   if (candidate?.finish_reason !== 'stop') throw new FeedbackError('groq_incomplete', 502, { providerStatus: 200 });
   try {
     const text = candidate?.message?.content;
-    if (body?.model !== GROQ_FEEDBACK_MODEL) throw new Error('Invalid response');
+    if (body?.model !== GROQ_FEEDBACK_MODEL) throw new FeedbackValidationError('model');
     return parseProviderFeedback(text, input.sentence, GROQ_FEEDBACK_MODEL);
-  } catch { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }); }
+  } catch (error) { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }, error instanceof FeedbackValidationError ? error.stage : 'envelope'); }
 }
