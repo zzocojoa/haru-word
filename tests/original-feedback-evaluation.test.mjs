@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync, realpathSy
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { originalComparisonBudget, validateOriginalComparison, collectOriginalComparison, originalComparisonPreflight, verifyOriginalComparisonSource } from '../scripts/evaluate-original-feedback.mjs';
+import { originalComparisonBudget, originalComparisonFixture, validateOriginalComparison, collectOriginalComparison, originalComparisonPreflight, verifyOriginalComparisonSource } from '../scripts/evaluate-original-feedback.mjs';
 import { evaluationBudget } from '../scripts/evaluate-english-accuracy.mjs';
 
 globalThis.originalEvalEnv={};
@@ -17,9 +17,10 @@ const production=await import('../work/original-evaluation-tests/production.mjs'
 const {LESSON_MAP}=await import('../work/original-evaluation-tests/content.mjs'),{lessonForVersion}=await import('../work/original-evaluation-tests/v3.mjs');
 const {accuracyCases:cases,accuracyModels:models}=helper;
 const digest=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
-const fixtureHash=createHash('sha256').update(readFileSync('tests/fixtures/english-accuracy.json')).digest('hex'),sourceCommit='a'.repeat(40),profiles={};
+const fixtureText=readFileSync('tests/fixtures/english-accuracy.json','utf8'),recordedHash=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-09-30.json')).fixtureHash;
+const {fixtureHash,fixtureContentHash}=originalComparisonFixture(fixtureText,recordedHash),sourceCommit='a'.repeat(40),profiles={};
 for(const sample of cases)profiles[sample.id]={domain:sample.domain,...await helper.originalAccuracyHashes(sample)};
-const expected={fixtureHash,sourceCommit,profiles,models};
+const expected={fixtureHash,fixtureContentHash,sourceCommit,profiles,models};
 const previous=[1,2].flatMap(round=>cases.flatMap(sample=>['google','groq'].map(provider=>({round,caseId:sample.id,provider,domain:sample.domain,fixtureHash,expectedModel:models[provider],status:'failure'})))).map((r,i)=>({...r,number:i+1}));
 const fresh=()=>({comparison:'original-first',approvedCalls:120,previousHash:digest(previous),...structuredClone(expected),attempts:[]});
 const config={origin:'https://wordgrain-oxford-study.hoihou-o.chatgpt.site',evaluationToken:'b'.repeat(64),sourceCommit};
@@ -44,6 +45,10 @@ test('comparison pins changed input as well as prompt and output policy',async()
  const sample=cases[0],base=await helper.originalAccuracyHashes(sample),changed=await helper.originalAccuracyHashes({...sample,sentence:sample.sentence+' '});
  assert.equal(base.promptHash,changed.promptHash);assert.notEqual(base.requestHash,changed.requestHash);
  assert.match(base.requestHash,/^[a-f0-9]{64}$/);assert.equal(fixtureHash,'02a84a0c86252524e2627cbf7cd69f8d725ade70ebbf107c8aed986eabcd8e54');
+ const lf=fixtureText.replace(/\r\n/g,'\n'),crlf=lf.replace(/\n/g,'\r\n');
+ assert.deepEqual(originalComparisonFixture(lf,recordedHash),originalComparisonFixture(crlf,recordedHash));
+ assert.equal(fixtureContentHash,'76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a');
+ assert.throws(()=>originalComparisonFixture(lf+' ',recordedHash));assert.throws(()=>originalComparisonFixture(lf,'other'));
 });
 test('direct named comparison never falls back or retries a failed selected provider',async()=>{
  for(const domain of ['word','grammar'])for(const provider of ['google','groq']){
@@ -82,7 +87,11 @@ test('actual named POST sends the active production profile to each direct provi
 test('preserved 240-call budget cannot be extended; separate context pins all prior attempts and models',()=>{
  const ledger=fresh();assert.doesNotThrow(()=>validateOriginalComparison(previous,ledger,expected));assert.throws(()=>evaluationBudget(previous,2));assert.throws(()=>evaluationBudget(previous,3));
  for(const records of [previous.slice(1),[...previous,{...previous[0],number:241}]])assert.throws(()=>validateOriginalComparison(records,ledger,expected));
- for(const change of [{previousHash:'changed'},{fixtureHash:'changed'},{sourceCommit:'f'.repeat(40)},{approvedCalls:240},{models:{...models,google:'changed'}},{profiles:{...profiles,[cases[0].id]:{...profiles[cases[0].id],requestHash:'changed'}}}])assert.throws(()=>validateOriginalComparison(previous,{...ledger,...change},expected));
+ for(const change of [{previousHash:'changed'},{fixtureHash:'changed'},{fixtureContentHash:'changed'},{sourceCommit:'f'.repeat(40)},{approvedCalls:240},{models:{...models,google:'changed'}},{profiles:{...profiles,[cases[0].id]:{...profiles[cases[0].id],requestHash:'changed'}}}])assert.throws(()=>validateOriginalComparison(previous,{...ledger,...change},expected));
+ for(const fixtureContentHash of [undefined,'', 'changed']){
+  const invalid={...ledger,fixtureContentHash},storedContext={...expected,fixtureContentHash};
+  assert.throws(()=>validateOriginalComparison(previous,invalid,storedContext));
+ }
  const duplicated=structuredClone(previous);duplicated[1]={...duplicated[0],number:2};assert.throws(()=>validateOriginalComparison(duplicated,{...ledger,previousHash:digest(duplicated)},expected));
  assert.doesNotThrow(()=>originalComparisonBudget(Array.from({length:119},()=>({status:'failure'}))));
  for(const status of ['started','failure','response'])assert.throws(()=>originalComparisonBudget(Array.from({length:120},()=>({status}))));
@@ -104,7 +113,7 @@ test('collector persists before HTTP, caps at120, preserves parent and hides pro
 });
 test('crashed consumed slots are skipped; failures have no retries, fallback or untrusted diagnostics',async()=>{
  const ledger=fresh(),sample=cases[0],profile=profiles[sample.id];
- ledger.attempts.push({number:241,round:3,comparison:'original-first',caseId:sample.id,domain:sample.domain,provider:'google',fixtureHash,promptHash:profile.promptHash,requestHash:profile.requestHash,expectedModel:models.google,status:'started'});
+ ledger.attempts.push({number:241,round:3,comparison:'original-first',caseId:sample.id,domain:sample.domain,provider:'google',fixtureHash,fixtureContentHash,promptHash:profile.promptHash,requestHash:profile.requestHash,expectedModel:models.google,status:'started'});
  let calls=0;
  await collectOriginalComparison({...context(ledger),cases:[sample]},{save:()=>{},pause:async()=>{},fetcher:async(_url,init)=>{calls++;assert.equal(JSON.parse(init.body).provider,'groq');return Response.json({code:'PRIVATE_BODY',providerStatus:999,validationStage:'PRIVATE_FIELD'},{status:502});}});
  assert.equal(calls,1);assert.equal(ledger.attempts.length,2);assert.equal(ledger.attempts[0].status,'started');assert.equal(ledger.attempts[1].status,'failure');assert.equal(ledger.attempts[1].code,'evaluation_invalid_response');
@@ -166,7 +175,7 @@ test('incomplete live comparison requires clean local source matching the native
 });
 test('complete comparison recovery reuses one blind bundle, no project files/HTTP and no parent mutation',()=>{
  const directory=mkdtempSync(join(tmpdir(),'haru-original-eval-')),root=join(directory,'.sites-runtime','english-accuracy'),store=join(root,'original-first');mkdirSync(store,{recursive:true});
- const ledger=fresh();ledger.attempts=cases.flatMap(sample=>['google','groq'].map(provider=>({round:3,comparison:'original-first',caseId:sample.id,provider,domain:sample.domain,fixtureHash,...profiles[sample.id],expectedModel:models[provider],status:'failure'}))).map((r,i)=>({...r,number:241+i}));
+ const ledger=fresh();ledger.attempts=cases.flatMap(sample=>['google','groq'].map(provider=>({round:3,comparison:'original-first',caseId:sample.id,provider,domain:sample.domain,fixtureHash,fixtureContentHash,...profiles[sample.id],expectedModel:models[provider],status:'failure'}))).map((r,i)=>({...r,number:241+i}));
  const parent=JSON.stringify({attempts:previous});writeFileSync(join(root,'ledger.json'),parent);writeFileSync(join(store,'ledger.json'),JSON.stringify(ledger));
  const guard=join(directory,'no-http.mjs');writeFileSync(guard,"globalThis.fetch=()=>{throw Error('HTTP is prohibited during recovery')};");
  const run=()=>execFileSync(process.execPath,['--import',pathToFileURL(guard).href,resolve('scripts/evaluate-original-feedback.mjs'),'--live','--approved-additional-calls','120'],{cwd:directory,encoding:'utf8',env:{...process.env,CI:''},input:JSON.stringify(config)+'\n'});

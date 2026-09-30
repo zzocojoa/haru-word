@@ -11,6 +11,15 @@ import { reviewBundle } from './evaluate-english-accuracy.mjs';
 
 const comparison = 'original-first', additionalCalls = 120, previousCalls = 240;
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+export function originalComparisonFixture(text, recordedHash) {
+  // Preserve the recorded baseline byte hash, but tolerate Git's CRLF/LF
+  // materialization of the identical authored JSON. Do not rewrite the fixture.
+  const normalized = text.replace(/\r\n/g, '\n');
+  const bytesHash = value => createHash('sha256').update(value).digest('hex');
+  const fixtureContentHash = bytesHash(normalized);
+  if (!/^[a-f0-9]{64}$/.test(recordedHash) || ![fixtureContentHash, bytesHash(normalized.replace(/\n/g, '\r\n'))].includes(recordedHash)) throw Error('Fixture content changed from the preserved baseline.');
+  return { fixtureHash: recordedHash, fixtureContentHash };
+}
 function atomicJson(path, value) { writeFileSync(path + '.tmp', JSON.stringify(value, null, 2) + '\n'); renameSync(path + '.tmp', path); }
 export function originalComparisonBudget(attempts) {
   if (attempts.length >= additionalCalls) throw Error('Additional comparison budget exhausted.');
@@ -24,7 +33,8 @@ export function verifyOriginalComparisonSource(sourceCommit, cwd = process.cwd()
 }
 export function validateOriginalComparison(previous, ledger, expected) {
   if (previous.length !== previousCalls || ledger.comparison !== comparison || ledger.approvedCalls !== additionalCalls
-      || ledger.previousHash !== hash(previous) || ledger.fixtureHash !== expected.fixtureHash || ledger.sourceCommit !== expected.sourceCommit
+      || ledger.previousHash !== hash(previous) || ledger.fixtureHash !== expected.fixtureHash || ledger.fixtureContentHash !== expected.fixtureContentHash || ledger.sourceCommit !== expected.sourceCommit
+      || !/^[a-f0-9]{64}$/.test(expected.fixtureHash) || !/^[a-f0-9]{64}$/.test(expected.fixtureContentHash)
       || !/^[a-f0-9]{40}$/.test(expected.sourceCommit) || ledger.attempts.length > additionalCalls) throw Error('Comparison context changed or invalid.');
   const seen = new Set();
   for (const [i, r] of previous.entries()) {
@@ -39,7 +49,7 @@ export function validateOriginalComparison(previous, ledger, expected) {
   for (const [i, r] of ledger.attempts.entries()) {
     const profile = expected.profiles[r.caseId], key = `${r.caseId}:${r.provider}`;
     if (!profile || !['google', 'groq'].includes(r.provider) || r.number !== previousCalls + i + 1 || r.round !== 3 || r.comparison !== comparison || seen.has(key)
-        || r.fixtureHash !== expected.fixtureHash || r.domain !== profile.domain || r.expectedModel !== expected.models[r.provider]
+        || r.fixtureHash !== expected.fixtureHash || r.fixtureContentHash !== expected.fixtureContentHash || r.domain !== profile.domain || r.expectedModel !== expected.models[r.provider]
         || r.promptHash !== profile.promptHash || r.requestHash !== profile.requestHash || !['started', 'response', 'failure'].includes(r.status)) throw Error('Comparison attempt changed.');
     seen.add(key);
   }
@@ -64,7 +74,7 @@ export async function collectOriginalComparison(context, options) {
     originalComparisonBudget(ledger.attempts);
     const profile = expected.profiles[sample.id];
     const attempt = { number: previousCalls + ledger.attempts.length + 1, round: 3, comparison, caseId: sample.id, domain: sample.domain, provider,
-      fixtureHash: expected.fixtureHash, promptHash: profile.promptHash, requestHash: profile.requestHash, expectedModel: expected.models[provider],
+      fixtureHash: expected.fixtureHash, fixtureContentHash: expected.fixtureContentHash, promptHash: profile.promptHash, requestHash: profile.requestHash, expectedModel: expected.models[provider],
       startedAt: new Date().toISOString(), status: 'started' };
     ledger.attempts.push(attempt); save(ledger); // Persist before any HTTP.
     try {
@@ -113,15 +123,15 @@ async function main() {
     const ledgerPath = resolve(directory, 'ledger.json');
     let ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : undefined;
     if (ledger?.attempts.length === additionalCalls) {
-      validateOriginalComparison(previous, ledger, { fixtureHash: ledger.fixtureHash, sourceCommit: config.sourceCommit, profiles: ledger.profiles, models: ledger.models });
+      validateOriginalComparison(previous, ledger, { fixtureHash: ledger.fixtureHash, fixtureContentHash: ledger.fixtureContentHash, sourceCommit: config.sourceCommit, profiles: ledger.profiles, models: ledger.models });
     } else {
       verifyOriginalComparisonSource(config.sourceCommit);
       const bundlePath = resolve(directory, 'requests.mjs');
       await build({ entryPoints: ['lib/original-feedback-evaluation.ts'], outfile: bundlePath, bundle: true, platform: 'node', format: 'esm', logLevel: 'silent' });
       const helper = await import(pathToFileURL(bundlePath).href);
-      const fixtureHash = createHash('sha256').update(readFileSync('tests/fixtures/english-accuracy.json')).digest('hex'), profiles = {};
+      const fixture = originalComparisonFixture(readFileSync('tests/fixtures/english-accuracy.json', 'utf8'), previous[0]?.fixtureHash), profiles = {};
       for (const sample of helper.accuracyCases) profiles[sample.id] = { domain: sample.domain, ...await helper.originalAccuracyHashes(sample) };
-      const expected = { fixtureHash, sourceCommit: config.sourceCommit, profiles, models: helper.accuracyModels };
+      const expected = { ...fixture, sourceCommit: config.sourceCommit, profiles, models: helper.accuracyModels };
       ledger ??= { comparison, approvedCalls: additionalCalls, previousHash: hash(previous), ...expected, attempts: [] };
       validateOriginalComparison(previous, ledger, expected);
       await originalComparisonPreflight(config, fetch, AbortSignal.any([AbortSignal.timeout(15_000), stop.signal]));
