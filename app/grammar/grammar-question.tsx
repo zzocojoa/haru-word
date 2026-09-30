@@ -1,11 +1,12 @@
 'use client';
 import { ArrowRight, Check, CheckCircle2, CircleHelp } from 'lucide-react';
 import { useState } from 'react';
-import { answerCorrect, firstAnswerLabel, type GrammarQuestion as Question } from '@/lib/grammar/content';
+import { answerCorrect, assembledOrder, firstAnswerLabel, type GrammarQuestion as Question } from '@/lib/grammar/content';
 import type { GrammarAnswer } from '@/lib/grammar/model';
 
 type Props = {
   question: Question;
+  legacyNote?:string;
   answer?: GrammarAnswer;
   hinted: boolean;
   clued?: boolean;
@@ -21,7 +22,7 @@ type Props = {
   disabled: boolean;
 };
 
-export function GrammarQuestion({ question, answer, hinted, clued, choice, onChoice, onClue, nextLabel = '다음', selection, onOrder, onAnswer, onHint, onNext, disabled }: Props) {
+export function GrammarQuestion({ question, legacyNote, answer, hinted, clued, choice, onChoice, onClue, nextLabel = '다음', selection, onOrder, onAnswer, onHint, onNext, disabled }: Props) {
   const [localChoice, setLocalChoice] = useState('');
   const selectedChoice = choice ?? (localChoice || answer?.latest || '');
   const correct = !!answer && answerCorrect(question, answer.latest);
@@ -51,6 +52,7 @@ export function GrammarQuestion({ question, answer, hinted, clued, choice, onCho
       {hinted && <p>답: <span>{question.answer}</span></p>}
       {answer && <p className="small-note">처음 답: {answer.first} · {firstAnswerLabel(question, answer)}{answer.attempts > 1 ? ` · ${answer.attempts}번 시도` : ''}</p>}
       <p>{answer && !correct ? question.wrong?.[answer.latest] ?? question.explanation : question.explanation}</p>
+      {legacyNote&&<p className="small-note">{legacyNote}</p>}
     </div>}
     <button className="primary-button" disabled={disabled || !answer} onClick={onNext}>{nextLabel}<ArrowRight size={18} /></button>
   </div>;
@@ -58,7 +60,7 @@ export function GrammarQuestion({ question, answer, hinted, clued, choice, onCho
 
 function OrderAnswer({ question, answer, selection, onOrder, onAnswer, disabled }: Pick<Props, 'question' | 'answer' | 'selection' | 'onOrder' | 'onAnswer' | 'disabled'>) {
   const selected = selection.filter(index => index < question.options.length);
-  const text = selected.map(index => question.options[index]).join(' ');
+  const text = assembledOrder(question,selected);
   return <>
     <p>{question.translation}</p>
     <div className="grammar-order-answer" aria-live="polite" lang={text ? 'en' : 'ko'} data-empty={!text}>{text || '아래 조각을 차례로 눌러 보세요.'}</div>

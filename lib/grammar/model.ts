@@ -16,14 +16,14 @@ const dateSchema = z.string().refine(isCalendarDate, '올바른 한국 날짜를
 const questionIdsSchema = z.tuple([z.string().max(80), z.string().max(80), z.string().max(80)]);
 const helpSchema = z.enum(['clue', 'answer', 'gloss', 'translation']);
 const practiceFields = {
-  contentVersion: z.literal(2).optional(), questionIds: questionIdsSchema.optional(),
+  contentVersion: z.union([z.literal(2),z.literal(3)]).optional(), questionIds: questionIdsSchema.optional(),
   clues: questionHintsSchema.optional(), choice: z.string().max(200).optional(),
 };
 export const selfCheckSchema = z.enum(['appropriate', 'needs_work', 'uncertain']);
 const reviewSchema = z.object({ ...practiceFields, setId: z.enum(['a', 'b']).optional(), mode: z.enum(['extra', 'scheduled']).optional(), startedOn: dateSchema.optional(), reused: z.boolean().optional(), index: z.number().int().min(0).max(3), answers: answersSchema, hints: questionHintsSchema.optional(), order: orderSelectionSchema.optional(), completedAt: z.string().datetime().optional() }).strict().superRefine((r, c) => {
   for (let i = 1; i <= r.index; i++) if (!r.answers[`q${i}` as keyof typeof r.answers]) c.addIssue({ code: 'custom', message: '재점검 답변이 빠졌어요.' });
   if ((r.index === 3) !== !!r.completedAt) c.addIssue({ code: 'custom', message: '재점검의 완료 상태와 위치가 달라요.' });
-  if (r.contentVersion === 2 && (!r.questionIds || !r.setId || !r.mode || !r.startedOn)) c.addIssue({ code: 'custom', message: '재점검 문제 정보가 빠졌어요.' });
+  if (r.contentVersion && (!r.questionIds || !r.setId || !r.mode || !r.startedOn)) c.addIssue({ code: 'custom', message: '재점검 문제 정보가 빠졌어요.' });
   if (!r.contentVersion && (r.questionIds || r.setId || r.mode || r.startedOn || r.reused !== undefined)) c.addIssue({ code: 'custom', message: '재점검 콘텐츠 버전이 빠졌어요.' });
 });
 export const grammarProgressSchema = z.object({
@@ -48,7 +48,7 @@ export const grammarProgressSchema = z.object({
   if (p.review && !p.completedAt) c.addIssue({ code: 'custom', message: '수업을 마친 뒤 다시 점검할 수 있어요.' });
   if (p.stage === 6 && !p.completedAt) c.addIssue({ code: 'custom', message: '수업의 완료 정보가 빠졌어요.' });
   if (p.feedback && p.feedback.original !== p.sentence) c.addIssue({ code: 'custom', message: 'AI 의견의 원문과 현재 문장이 달라요.' });
-  if (p.contentVersion === 2) {
+  if (p.contentVersion) {
     if (!p.questionIds || (p.stage > 0 && !p.observation)) c.addIssue({ code: 'custom', message: '살펴보기 답변과 문제 정보를 확인해 주세요.' });
     if ((p.stage === 6 || p.completedAt) && (!p.checks?.meaning || !p.checks.form)) c.addIssue({ code: 'custom', message: '뜻과 형태를 각각 점검해 주세요.' });
     if (p.check && p.check !== combinedCheck(p.checks)) c.addIssue({ code: 'custom', message: '자기 점검 결과가 일치하지 않아요.' });
@@ -61,7 +61,7 @@ export const grammarProgressSchema = z.object({
 export const grammarStateSchema = z.record(lessonIdSchema, grammarProgressSchema).superRefine((state, ctx) => {
   for (const [id, p] of Object.entries(state)) {
     for (const [bank, entry] of [['base', p], [p.review?.setId, p.review]] as const) {
-      if (entry?.contentVersion === 2 && entry.questionIds?.some((qid, i) => qid !== `${id}:2:${bank}:q${i + 1}`))
+      if (entry?.contentVersion && entry.questionIds?.some((qid, i) => qid !== `${id}:${entry.contentVersion}:${bank}:q${i + 1}`))
         ctx.addIssue({ code: 'custom', path: [id, 'questionIds'], message: '문제와 수업의 식별자가 맞지 않아요.' });
     }
   }

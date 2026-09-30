@@ -170,3 +170,5 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 운영 수명·기능 플래그·롤백·실기기 확인 범위는 [완료 감사](BACKUP_RESTORE_AUDIT.md)와 [운영 기록](OPERATIONS.md)을 참조합니다. `npm run test:browser`는 기능 검사, `npm run test:performance`는 장기 기록·초기 로딩·20 MB 복원/조회 자원 검사입니다. 성능 모음은 다른 검사와 겹치지 않게 실행합니다. 자원 검사는 테스트용 V8 제한을 적용한 별도 로컬 Worker를 사용하며 배포 설정을 바꾸지 않습니다.
 
 학습 기록은 날짜별로 묶어 10일씩 펼쳐 볼 수 있습니다. 검색·기간 선택과 작성 중 답은 탭을 바꿔도 유지하며, CSV·전체 백업에는 모든 회차가 포함됩니다. 네트워크 응답이 오래 지연되면 화면에서 다시 시도하거나 입력을 백업할 수 있습니다. AI 응답 지연 후에는 같은 문장을 자기 점검으로 이어갑니다.
+
+문법 v3의 버전 협상과 단계적 게시·롤백은 [GRAMMAR_PRACTICE_V3.md](GRAMMAR_PRACTICE_V3.md)를 따른다.

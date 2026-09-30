@@ -9,5 +9,6 @@ declare namespace Cloudflare {
     large_backup_restore_enabled?: string;
     grammar_enabled?: string;
     grammar_practice_v2_enabled?: string;
+    grammar_practice_v3_enabled?: string;
   }
 }

@@ -1,8 +1,8 @@
 import type { State } from '@/lib/learning';
 import { catalogIds, parsePart } from '@/lib/restore-validation';
 import { RESTORE_JOB_TTL, RESTORE_RECEIPT_TTL, sha256, utf8Bytes, type RestoreJob, type RestoreManifest } from '@/lib/restore-protocol';
-import { hasSavedModernGrammar } from './grammar-compatibility';
-import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar } from '@/lib/grammar/compatibility';
+import { hasSavedUnsupportedGrammar } from './grammar-compatibility';
+import { GRAMMAR_UPGRADE_MESSAGE, grammarUnsupported, type GrammarClientVersion } from '@/lib/grammar/compatibility';
 import { grammarStateSchema } from '@/lib/grammar/model';
 import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback } from '@/lib/feedback-compatibility';
 import { hasSavedStructuredFeedback } from './feedback-compatibility';
@@ -104,7 +104,7 @@ export async function validateRestoreJob(db: D1Database, user: string, id: strin
   return getRestoreJob(db, user, id);
 }
 
-export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion = 2, structureSupported = true, senseKeysSupported = true) {
+export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion:GrammarClientVersion = 2, structureSupported = true, senseKeysSupported = true) {
   const job = await row(db, user, id);
   if (job.status === 'committed') return view(db, job);
   if (job.status !== 'ready') throw new RestoreError('전체 검증이 끝난 후 복원할 수 있어요.', 409);
@@ -129,9 +129,9 @@ export async function commitRestoreJob(db: D1Database, user: string, id: string,
         : { sessions: {}, grammar: grammarStateSchema.parse(JSON.parse(p.document)) })))
         throw new RestoreError(FEEDBACK_UPGRADE_MESSAGE, 426, 'feedback_client_outdated');
     }
-  if (grammarVersion !== 2 && manifest.parts.some(p => p.kind === 'grammar')) {
+  if (grammarVersion<3 && manifest.parts.some(p => p.kind === 'grammar')) {
     const parts = await db.prepare("SELECT document FROM restore_parts WHERE job_id=? AND kind='grammar'").bind(id).all<{ document: string }>();
-    if (await hasSavedModernGrammar(db, user) || parts.results.some(part => Object.values(grammarStateSchema.parse(JSON.parse(part.document))).some(hasModernGrammar)))
+    if (await hasSavedUnsupportedGrammar(db, user,grammarVersion) || parts.results.some(part => Object.values(grammarStateSchema.parse(JSON.parse(part.document))).some(p=>grammarUnsupported(p,grammarVersion))))
       throw new RestoreError(GRAMMAR_UPGRADE_MESSAGE, 426, 'grammar_client_outdated');
   }
   const condition = "EXISTS(SELECT 1 FROM restore_jobs WHERE id=? AND user_id=? AND status='committing')";

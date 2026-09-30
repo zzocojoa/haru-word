@@ -1,6 +1,6 @@
 import type { LessonId, GrammarAnswer, GrammarProgress } from './model';
 
-export type GrammarQuestion = { id?: string; clue?: string; wrong?: Record<string, string>; kind: 'choice' | 'order'; prompt: string; context: string; translation: string; options: string[]; answer: string; alternatives?: string[]; explanation: string };
+export type GrammarQuestion = { id?: string; clue?: string; wrong?: Record<string, string>; kind: 'choice' | 'order'; prompt: string; context: string; translation: string; options: string[]; answer: string; alternatives?: string[]; explanation: string; orderFormat?: {punctuation:string;properWords:string[]} };
 export type GrammarLesson = {
   id: LessonId; pos: string; title: string; group: string; role: string; pattern: string; mistake: string;
   examples: [string, string, string][]; notice: string; noticeAnswer: string;
@@ -215,10 +215,20 @@ export function answerCorrect(question: GrammarQuestion, answer: string) {
   // Legacy answers keep their original grading contract.
   const normalize = (value: string) => {
     const text = value.trim().replace(/\s+/g, ' ');
-    return question.kind === 'order' && question.id?.includes(':2:')
+    return question.kind === 'order' && /:(2|3):/.test(question.id??'')
       ? text.toLowerCase().replace(/[.,!?]/g, '') : text;
   };
   return [question.answer, ...(question.alternatives ?? [])].some(candidate => normalize(candidate) === normalize(answer));
+}
+export function assembledOrder(question:GrammarQuestion,selection:number[]) {
+  const tokens=selection.filter(index=>index>=0&&index<question.options.length).map(index=>question.options[index]);
+  if(!question.orderFormat)return tokens.join(' ');
+  const {properWords,punctuation}=question.orderFormat;
+  return tokens.map((token,index)=>{
+    const authored=properWords.find(word=>word.toLowerCase()===token.toLowerCase());
+    const text=authored??token;
+    return index===0||/[.!?]$/.test(tokens[index-1])?text.charAt(0).toUpperCase()+text.slice(1):text;
+  }).join(' ')+(tokens.length===question.options.length?punctuation:'');
 }
 export function exampleFocusStart(sentence: string, focus: string) {
   const escaped = focus.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

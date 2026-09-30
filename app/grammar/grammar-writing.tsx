@@ -8,7 +8,8 @@ import type { FeedbackIssue } from '@/lib/feedback-issue';
 import { FeedbackIssueNotice } from '../feedback-issue-notice';
 import { AiUseNotice } from '../ai-use-notice';
 import { FeedbackAttribution } from '../feedback-attribution';
-import { PRACTICE_LESSONS, frameSentence } from '@/lib/grammar/content-v2';
+import { frameSentence } from '@/lib/grammar/content-v2';
+import { practiceForVersion } from '@/lib/grammar/content-v3';
 import { Speak } from '../ui';
 import { SentenceStructureView } from '../sentence-structure';
 
@@ -29,11 +30,11 @@ type Props = {
 
 export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, onAi, onSentence, onCheck, onChecks, onFrame, onExplain, onComplete }: Props) {
   const { sentence, check, feedback } = progress;
-  const practice = PRACTICE_LESSONS[lesson.id], values = practice.frame.slots.map((slot, i) => progress.frame?.[i] ?? slot.options[0]);
+  const practice = practiceForVersion(lesson.id,progress.contentVersion), values = practice.frame.slots.map((slot, i) => progress.frame?.[i] ?? slot.options[0]);
   const frame = frameSentence(practice.frame, values);
   return <div className="grammar-stage">
     <p className="grammar-question">{lesson.writing}</p>
-    {progress.contentVersion === 2 ? <details className="grammar-frame" open={!sentence}><summary>문장 틀로 시작하기</summary>
+    {!!progress.contentVersion ? <details className="grammar-frame" open={!sentence}><summary>문장 틀로 시작하기</summary>
       <div className="grammar-frame-slots">{practice.frame.slots.map((slot, i) => <fieldset key={slot.label}><legend>{slot.label}</legend><div className="grammar-options">{slot.options.map(option => <button key={option} className="secondary-button" aria-pressed={values[i] === option} disabled={!canSave} onClick={() => onFrame(values.map((v, j) => j === i ? option : v))} lang="en">{option}</button>)}</div></fieldset>)}</div>
       <p lang="en">{frame}</p><Speak text={frame} /><button className="secondary-button" disabled={!canSave} onClick={() => onSentence(frame)}>{sentence ? '이 틀로 내 문장 바꾸기' : '이 문장으로 시작'}</button>
     </details> : <div className="grammar-example"><small>문장 틀</small><p lang="en">{lesson.stem}</p><Speak text={lesson.stem} /></div>}
@@ -50,7 +51,7 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
     </div>
     <FeedbackIssueNotice issue={aiError} />
     {feedback && <Feedback feedback={feedback} sentence={sentence} onSentence={onSentence} />}
-    {progress.contentVersion === 2 ? <div className="grammar-self-checks"><h3>내가 점검하기</h3>{(['meaning', 'form'] as const).map((key, i) => <fieldset className="grammar-check" key={key}><legend>{practice.checks[i]}</legend><div className="grammar-check-options">{SELF_CHECKS.map(value => <label key={value}><input type="radio" name={`grammar-${lesson.id}-${key}`} checked={progress.checks?.[key] === value} onChange={() => onChecks(key, value)} />{value === 'appropriate' ? '확인했어요' : value === 'needs_work' ? '보완 필요' : '모르겠어요'}</label>)}</div></fieldset>)}</div> : <fieldset className="grammar-check">
+    {!!progress.contentVersion ? <div className="grammar-self-checks"><h3>내가 점검하기</h3>{(['meaning', 'form'] as const).map((key, i) => <fieldset className="grammar-check" key={key}><legend>{practice.checks[i]}</legend><div className="grammar-check-options">{SELF_CHECKS.map(value => <label key={value}><input type="radio" name={`grammar-${lesson.id}-${key}`} checked={progress.checks?.[key] === value} onChange={() => onChecks(key, value)} />{value === 'appropriate' ? '확인했어요' : value === 'needs_work' ? '보완 필요' : '모르겠어요'}</label>)}</div></fieldset>)}</div> : <fieldset className="grammar-check">
       <legend>내가 점검하기</legend><p>{lesson.check}</p>
       {SELF_CHECKS.map(value => <label key={value}>
         <input type="radio" name={`grammar-check-${lesson.id}`} checked={check === value} onChange={() => onCheck(value)} />{CHECK_TEXT[value]}

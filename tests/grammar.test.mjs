@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 import { build } from 'esbuild';
 import { EMPTY, pickDaily, learningMetrics } from '../lib/learning.ts';
 mkdirSync('work/grammar-tests', { recursive: true });
-await build({ entryPoints: ['lib/grammar/content-v2.ts', 'lib/grammar/practice.ts', 'lib/grammar/compatibility.ts', 'lib/grammar/model.ts', 'lib/grammar/content.ts', 'lib/grammar/feedback.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'db/restore-jobs.ts', 'db/learning-state.ts', 'lib/state-delta.ts', 'app/grammar/grammar-presentation.ts'], outdir: 'work/grammar-tests', entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
+await build({ entryPoints: ['lib/grammar/content-v3.ts', 'lib/grammar/content-v2.ts', 'lib/grammar/practice.ts', 'lib/grammar/compatibility.ts', 'lib/grammar/model.ts', 'lib/grammar/content.ts', 'lib/grammar/feedback.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'db/restore-jobs.ts', 'db/learning-state.ts', 'lib/state-delta.ts', 'app/grammar/grammar-presentation.ts'], outdir: 'work/grammar-tests', entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
 const model = await import('../work/grammar-tests/model.mjs');
 const { GRAMMAR_LESSONS, answerCorrect, exampleFocusStart, firstAnswerLabel, needsGrammarReview } = await import('../work/grammar-tests/content.mjs');
 const { analyzeBackup } = await import('../work/grammar-tests/backup-analysis.mjs');
@@ -84,7 +84,7 @@ test('AI feedback is green only when both judgments confirm, and uncertainty rem
   }
 });
 
-await build({ entryPoints: ['app/api/grammar-feedback/route.ts', 'app/api/state/route.ts'], outdir: 'work/grammar-tests/routes', entryNames: '[dir]/[name]', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent', plugins: [{ name: 'test-boundaries', setup(b) {
+await build({ entryPoints: ['app/api/state/restore/route.ts', 'app/api/grammar-feedback/route.ts', 'app/api/state/route.ts'], outdir: 'work/grammar-tests/routes', entryNames: '[dir]/[name]', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent', plugins: [{ name: 'test-boundaries', setup(b) {
   b.onResolve({ filter: /^(cloudflare:workers|@\/app\/chatgpt-auth|@\/db\/store)$/ }, a => ({ path: a.path, namespace: 'test' }));
   b.onLoad({ filter: /.*/, namespace: 'test' }, a => ({ loader: 'js', contents: a.path === 'cloudflare:workers' ? 'export const env=globalThis.grammarRuntime.env' : a.path.endsWith('chatgpt-auth') ? 'export const getChatGPTUser=async()=>globalThis.grammarRuntime.user' : 'export const database=()=>globalThis.grammarRuntime.db' }));
 } }] });
@@ -493,4 +493,112 @@ test('old chunk restore cannot drop v2 grammar; modern restore remains atomic an
   const good = await prepareRestore({ ...structuredClone(EMPTY), grammar: { verb: v2Completed('verb') } });
   failAt = 4; await assert.rejects(jobs.commitRestoreJob(db, 'owner', good.id, 2)); assert.deepEqual(readGrammar(), before);
   failAt = -1; await jobs.commitRestoreJob(db, 'owner', good.id, 2); assert.deepEqual(JSON.parse(readGrammar()[0].document), v2Completed('verb'));
+});
+
+const v3 = await import('../work/grammar-tests/content-v3.mjs');
+const compat = await import('../work/grammar-tests/compatibility.mjs');
+const { assembledOrder } = await import('../work/grammar-tests/content.mjs');
+const restoreRoute = await import('../work/grammar-tests/routes/state/restore/route.mjs');
+function v3Completed(id='noun') {
+ const p=v2Completed(id);p.contentVersion=3;p.questionIds=v3.PRACTICE_LESSONS_V3[id].questions.map(q=>q.id);
+ p.answers=Object.fromEntries(v3.PRACTICE_LESSONS_V3[id].questions.map((q,i)=>[`q${i+1}`,model.recordAnswer(undefined,q.answer)]));
+ return p;
+}
+const putV = (grammar,version,revision=0) => stateRoute.PUT(new Request('https://study.example/api/state',{method:'PUT',headers:{origin:'https://study.example','content-type':'application/json','X-Study-Grammar':version},body:JSON.stringify({revision,progress:{},sessions:{},...(grammar===undefined?{}:{grammar})})}));
+const restoreV=(state,version,revision=0)=>restoreRoute.POST(new Request('https://study.example/api/state/restore',{method:'POST',headers:{origin:'https://study.example','content-type':'application/json','X-Study-Grammar':version,'X-Study-Revision':String(revision)},body:raw(state)}));
+
+test('v3 accepts exactly three authored now positions; legacy keys remain unchanged',()=>{
+ const q=v3.PRACTICE_LESSONS_V3.auxiliary.questions[2],old=PRACTICE_LESSONS.auxiliary.questions[2];
+ for(const text of ['I am reading now.','Now I am reading.','I am now reading.'])assert.equal(answerCorrect(q,text),true,text);
+ for(const text of ['I now am reading.','Am I reading now.','Reading I am now.','I am reading.'])assert.equal(answerCorrect(q,text),false,text);
+ assert.equal(answerCorrect(old,'I am now reading.'),false);
+ assert.ok(v3.legacyNowNote('auxiliary',2,false,2));assert.equal(v3.legacyNowNote('auxiliary',3,false,2),undefined);
+});
+test('all v3 identities and order casing/terminal punctuation are authored and assemble correctly',()=>{
+ const seen=new Set();
+ for(const [id,l]of Object.entries(v3.PRACTICE_LESSONS_V3)){
+  for(const q of [l.observation,...l.questions,...l.reviews.a,...l.reviews.b]){
+   assert.match(q.id,new RegExp(`^${id}:3:`));assert.ok(!seen.has(q.id));seen.add(q.id);
+   if(q.kind!=='order')continue;
+   assert.ok(q.options.every(t=>!/[.?!]$/.test(t)||/[.?!].+/.test(q.answer.slice(0,-1))));
+   const remaining=q.options.map((t,i)=>({t,i}));
+   const order=q.answer.replace(/[.?!]+$/,'').split(' ').map(token=>{const index=remaining.findIndex(x=>x.t.toLowerCase()===token.toLowerCase());assert.ok(index>=0,q.id);return remaining.splice(index,1)[0].i;});
+   assert.equal(assembledOrder(q,order),q.answer,q.id);
+   assert.ok(!/[.?!]$/.test(assembledOrder(q,order.slice(0,-1))),q.id);
+  }
+ }
+ assert.equal(seen.size,150);
+ const q=v3.PRACTICE_LESSONS_V3.auxiliary.questions[2];
+ for(const text of ['Now I am reading.','I am now reading.']){const order=text.slice(0,-1).split(' ').map(t=>q.options.findIndex(x=>x.toLowerCase()===t.toLowerCase()));assert.equal(assembledOrder(q,order),text);}
+});
+test('v3 schemas and backups preserve versioned IDs and reject mismatched review/base versions',async()=>{
+ for(const id of model.LESSON_IDS){
+  const p=v3Completed(id);assert.equal(model.grammarStateSchema.safeParse({[id]:p}).success,true,id);
+  const wrong={...p,contentVersion:2};assert.equal(model.grammarStateSchema.safeParse({[id]:wrong}).success,false,id);
+  const a=await analyzeBackup(raw({...EMPTY,grammar:{[id]:p}}));assert.deepEqual(a.parsed.state.grammar,{[id]:p});assert.deepEqual(parsePart(a.parts[0],a.manifest.parts[0]),{[id]:p});
+ }
+});
+test('new v3 reviews retain old first answers and schedules while pending v1/v2 reviews stay pinned',()=>{
+ for(const p of [completed(),v2Completed()]){
+  const before=structuredClone(p),next=practice.startGrammarReview('noun',p,'2026-09-28',3);
+  assert.equal(next.review.contentVersion,3);assert.deepEqual(next.answers,p.answers);assert.deepEqual(p,before);
+  if(p.schedule)assert.deepEqual(next.schedule,p.schedule);
+  assert.equal(model.grammarStateSchema.safeParse({noun:next}).success,true);
+  const pending=practice.startGrammarReview('noun',p,'2026-09-28',2);
+  assert.deepEqual(practice.startGrammarReview('noun',pending,'2026-09-29',3),pending);
+  assert.ok(practice.questionsFor('noun',pending,true).every(q=>q.id.includes(':2:')));
+  const done=practice.finishGrammarReview('noun',reviewAnswers('noun',next),'2026-09-28');
+  assert.equal(done.schedule.passed,1);assert.deepEqual(done.answers,before.answers);
+ }
+});
+test('v2 projection hides v3 base/reviews without recalculating legacy answers and schedule',()=>{
+ const p=practice.startGrammarReview('noun',v2Completed(),'2026-09-28',3),before=structuredClone(p);
+ const projected=compat.grammarDocumentForClient(p,2);assert.equal(projected.review,undefined);assert.deepEqual(projected.answers,p.answers);assert.deepEqual(projected.schedule,p.schedule);
+ assert.equal(compat.grammarDocumentForClient(v3Completed(),2),undefined);assert.equal(compat.grammarDocumentForClient(v3Completed(),1),undefined);assert.deepEqual(compat.grammarDocumentForClient(p,3),p);assert.deepEqual(p,before);
+});
+test('old readers cannot overwrite v3 but may save unrelated grammar and vocabulary',async()=>{
+ grammarRuntime.user={userId:'owner'};
+ const current=v3Completed();sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(current));
+ const get=async version=>(await(await stateRoute.GET(new Request('https://study.example/api/state',{headers:{'X-Study-Grammar':version}}))).json()).state;
+ assert.deepEqual((await get('2')).grammar,{});assert.deepEqual((await get('3')).grammar,{noun:current});
+ const before=readGrammar();assert.equal((await putV({noun:v2Completed()},'2')).status,426);assert.deepEqual(readGrammar(),before);
+ assert.equal((await putV(undefined,'2')).status,200);assert.deepEqual(readGrammar(),before);
+ assert.equal((await putV({verb:v2Completed('verb')},'2',1)).status,200);
+ assert.equal((await putV({noun:current},'3',0)).status,409);
+ assert.equal((await putV({noun:current},'3',2)).status,200);
+});
+test('whole restore blocks deletion/downgrade by old clients and preserves omitted grammar',async()=>{
+ grammarRuntime.user={userId:'owner'};const current=v3Completed();sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(current));
+ const before=readGrammar();
+ for(const grammar of [{},{noun:v2Completed()},{noun:current}])assert.equal((await restoreV({...EMPTY,grammar},'2')).status,426);
+ assert.deepEqual(readGrammar(),before);assert.equal((await restoreV({...EMPTY},'2')).status,200);assert.deepEqual(readGrammar(),before);
+ assert.equal((await restoreV({...EMPTY,grammar:{noun:current}},'3',1)).status,200);assert.deepEqual(JSON.parse(readGrammar()[0].document),current);
+ const restored=readGrammar();
+ assert.equal((await restoreV({...EMPTY,grammar:{}},'3',1)).status,409);assert.deepEqual(readGrammar(),restored);
+});
+test('chunk restore protects v3 from old deletion and preserves atomic revision, retry and receipt',async()=>{
+ const current=v3Completed();sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(current));
+ const job=await prepareRestore({...EMPTY,grammar:{verb:v3Completed('verb')}}),before=readGrammar();
+ await assert.rejects(jobs.commitRestoreJob(db,'owner',job.id,2),e=>e.status===426);assert.deepEqual(readGrammar(),before);
+ failAt=4;await assert.rejects(jobs.commitRestoreJob(db,'owner',job.id,3));assert.deepEqual(readGrammar(),before);
+ failAt=-1;const result=await jobs.commitRestoreJob(db,'owner',job.id,3);assert.deepEqual(JSON.parse(readGrammar()[0].document),v3Completed('verb'));
+ assert.deepEqual(await jobs.commitRestoreJob(db,'owner',job.id,3),result);
+ const next=await prepareRestore({...EMPTY,grammar:{}},1);await assert.rejects(jobs.commitRestoreJob(db,'owner',next.id,2),e=>e.status===426);
+});
+test('v3 AI capability rejection happens before accounting or provider invocation',async()=>{
+ grammarRuntime.user={userId:'owner'};const p={...v3Completed(),stage:5},body={lessonId:'noun',sentence:p.sentence};sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('must not call');};
+ for(const version of [undefined,'1','2']){const req=request(body);if(version)req.headers.set('X-Study-Grammar',version);assert.equal((await feedbackRoute.POST(req)).status,426);}
+ assert.equal(calls,0);assert.equal(sqlite.prepare('SELECT count(*) AS n FROM ai_daily_usage').get().n,0);
+});
+test('old clients cannot import incoming v3 into an empty account',async()=>{
+ grammarRuntime.user={userId:'owner'};const state={...EMPTY,grammar:{noun:v3Completed()}};
+ for(const version of ['1','2']){
+  assert.equal((await putV(state.grammar,version)).status,426);
+  assert.equal((await restoreV(state,version)).status,426);
+ }
+ const job=await prepareRestore(state);
+ for(const version of [1,2])await assert.rejects(jobs.commitRestoreJob(db,'owner',job.id,version),e=>e.status===426);
+ assert.deepEqual(readGrammar(),[]);assert.equal(sqlite.prepare('SELECT revision FROM learner_states WHERE user_id=?').get('owner').revision,0);
+ assert.equal(sqlite.prepare('SELECT status FROM restore_jobs WHERE id=?').get(job.id).status,'ready');
 });

@@ -5,8 +5,8 @@ import { MAX_BACKUP_BYTES, parseBackup } from '@/lib/backup';
 import { json, validateJsonMutation } from '@/lib/server/http';
 import { largeRestoreEnabled } from '@/lib/server/restore-http';
 import { LARGE_BACKUP_BYTES, RESTORE_PART_BYTES } from '@/lib/restore-protocol';
-import { hasSavedModernGrammar } from '@/db/grammar-compatibility';
-import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar } from '@/lib/grammar/compatibility';
+import { hasSavedUnsupportedGrammar } from '@/db/grammar-compatibility';
+import { GRAMMAR_UPGRADE_MESSAGE, grammarClientVersion, grammarUnsupported } from '@/lib/grammar/compatibility';
 import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { hasSavedStructuredFeedback } from '@/db/feedback-compatibility';
 import { StateCapacityError } from '@/db/state-capacity';
@@ -51,8 +51,9 @@ export async function POST(request: Request) {
     if (!supportsFeedbackStructure(request) && (hasStructuredFeedback(state) ||
       await hasSavedStructuredFeedback(database(), user.userId, null, state.grammar === undefined ? [] : null)))
       return json({ error: FEEDBACK_UPGRADE_MESSAGE }, 426);
-    if (state.grammar !== undefined && request.headers.get('x-study-grammar') !== '2' &&
-        (Object.values(state.grammar).some(hasModernGrammar) || await hasSavedModernGrammar(database(), user.userId)))
+    const supportedGrammar=grammarClientVersion(request.headers.get('x-study-grammar'));
+    if (state.grammar !== undefined && supportedGrammar<3 &&
+        (Object.values(state.grammar).some(p=>grammarUnsupported(p,supportedGrammar)) || await hasSavedUnsupportedGrammar(database(), user.userId,supportedGrammar)))
       return json({ error: GRAMMAR_UPGRADE_MESSAGE }, 426);
     if (!await restoreState(database(), user.userId, revision, state)) {
       return json({ error: '다른 기기에서 기록이 바뀌었어요. 최신 기록을 확인하고 다시 복원해 주세요.', conflict: true }, 409);

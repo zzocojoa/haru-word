@@ -5,21 +5,22 @@ const { build } = require('esbuild');
 const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('./qa/runtime.cjs');
 
 (async () => {
-  await build({ entryPoints: ['lib/grammar/content-v2.ts', 'lib/grammar/content.ts'], outdir: 'work/grammar-v2-qa', bundle: true, platform: 'node', format: 'cjs', outExtension: { '.js': '.cjs' }, logLevel: 'silent' });
-  const { PRACTICE_LESSONS } = require('../work/grammar-v2-qa/content-v2.cjs');
+  const version = process.env.QA_GRAMMAR_VERSION === '3' ? 3 : 2;
+  await build({ entryPoints: ['lib/grammar/content-v3.ts', 'lib/grammar/content-v2.ts', 'lib/grammar/content.ts'], outdir: 'work/grammar-v2-qa', bundle: true, platform: 'node', format: 'cjs', outExtension: { '.js': '.cjs' }, logLevel: 'silent' });
+  const PRACTICE_LESSONS = version === 3 ? require('../work/grammar-v2-qa/content-v3.cjs').PRACTICE_LESSONS_V3 : require('../work/grammar-v2-qa/content-v2.cjs').PRACTICE_LESSONS;
   const { GRAMMAR_LESSONS } = require('../work/grammar-v2-qa/content.cjs');
   const browser = await launchBrowser({ engine: process.env.QA_ENGINE || 'chromium' });
   const context = await browser.newContext({ extraHTTPHeaders: accountHeaders('grammar_v2'), viewport: { width: 390, height: 844 }, ...(process.env.QA_ENGINE === 'webkit' ? { isMobile: true, hasTouch: true } : {}) });
   const page = await context.newPage(), errors = [];
   page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/grammar-feedback', route => route.fulfill({ status: 429, json: { code: 'provider_limit', provider: 'google', error: '테스트 한도' } }));
-  const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '2' } })).json();
+  const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': String(version) } })).json();
   const until = async fn => { for (let i = 0; i < 100; i++) { if (await fn()) return; await page.waitForTimeout(100); } throw Error('save timeout'); };
   const click = name => page.getByRole('button', { name, exact: true }).click();
   async function solve(q) {
     if (q.kind === 'choice') { await click(q.answer); await click('답 확인'); assert.equal(await page.getByRole('button', { name: '답 확인', exact: true }).isDisabled(), true); }
     else {
-      for (const token of q.answer.split(' ')) await page.locator('.grammar-options button:not([disabled])').filter({ hasText: new RegExp('^' + token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') }).first().click();
+      for (const word of (q.orderFormat ? q.answer.replace(/[.!?]+$/, '') : q.answer).split(' ')) { const token = q.orderFormat ? q.options.find(t => t.toLowerCase() === word.toLowerCase()) : word; await page.locator('.grammar-options button:not([disabled])').filter({ hasText: new RegExp('^' + token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') }).first().click(); }
       await click('정답 확인');
       assert.equal(await page.getByRole('button', { name: '정답 확인', exact: true }).isDisabled(), true);
     }
@@ -132,9 +133,10 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
         await click('수업 마치기');
       }
       await click('수업 목록');
-      console.log('PASS v2 flow ' + lesson.id);
+      console.log('PASS v' + version + ' flow ' + lesson.id);
     }
     const result = await snapshot(); assert.equal(Object.keys(result.state.grammar).length, 15);
+    for(const p of Object.values(result.state.grammar))assert.equal(p.contentVersion,version);
     for (const key of ['settings', 'progress', 'sessions']) assert.deepEqual(result.state[key], initial.state[key]);
     await page.reload(); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click();
     assert.match(await page.locator('.grammar-catalog-count').innerText(), /15\/15/);
