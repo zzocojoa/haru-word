@@ -104,7 +104,7 @@ fs.mkdirSync(out, { recursive: true });
     await p.route('**/api/state',route=>route.request().method()==='PUT'?held=route:route.continue());
     await dialog.getByRole('button',{name:'기록 저장',exact:true}).click(); await p.getByText('저장 중',{exact:true}).waitFor();
     assert.equal((await down()).moved,false); await dialog.getByRole('button',{name:'Close',exact:true}).click(); await p.keyboard.press('Escape'); assert.ok(await dialog.isVisible());
-    await held.fulfill({status:503,json:{error:'테스트 저장 실패'}}); await p.getByText('테스트 저장 실패',{exact:true}).waitFor(); assert.equal(await expression().inputValue(),'work after retry');
+    await held.fulfill({status:503,json:{error:'테스트 저장 실패'}}); await dialog.getByText('테스트 저장 실패',{exact:true}).waitFor(); assert.equal(await expression().inputValue(),'work after retry');
     await p.unroute('**/api/state'); await dialog.getByRole('button',{name:'Close',exact:true}).click();
     if(await p.getByRole('alertdialog').count())await p.getByRole('button',{name:'변경 버리고 닫기',exact:true}).click();
     await gone(); await p.getByRole('button',{name:'다시 시도',exact:true}).click(); await saved(); await openWord(); assert.equal(await expression().inputValue(),'work after retry'); await down(); await gone();

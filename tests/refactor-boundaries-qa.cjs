@@ -71,12 +71,12 @@ const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor()
     // A failed optimistic save must preserve new-sense identity and allow an identical retry.
     await p.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '합성 저장 실패' } }) : route.continue());
     await dialog.getByRole('button', { name: '기록 저장', exact: true }).click();
-    await p.getByText('합성 저장 실패', { exact: true }).waitFor();
+    await dialog.getByText('합성 저장 실패', { exact: true }).waitFor();
     assert.equal(await phrase.inputValue(), 'work on a new draft'); await sense.selectOption('');
     assert.equal(await phrase.inputValue(), 'new usage'); await sense.selectOption(original.meaning);
     await p.unroute('**/api/state');
-    await p.keyboard.press('Escape'); await confirm.getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
-    await dialog.waitFor({ state: 'hidden' }); await p.getByRole('button', { name: '다시 시도', exact: true }).click(); await saved(p);
+    await dialog.getByRole('button', { name: '다시 저장', exact: true }).click();
+    await dialog.waitFor({ state: 'hidden' }); await saved(p);
     assert.equal((await p.evaluate(() => window.auditTools.show_learning_view.execute({ view: 'today' }))).navigated, true);
     await p.getByRole('tabpanel', { name: '오늘의 학습', exact: true }).waitFor({ state: 'visible' });
     await p.reload(); await saved(p); await p.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await p.getByLabel('단어 또는 한국어 뜻 검색').fill('work'); await open();

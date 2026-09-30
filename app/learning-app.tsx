@@ -409,6 +409,7 @@ function LearningScreens({
                 words={words}
                 save={save}
                 busy={busy}
+                retryBlocked={loading || saving || !signedIn || conflict || !clock.ready || store.restoring}
               />
             )}
           </TabsContent>

@@ -18,13 +18,15 @@ import { useSheetProtection } from '../sheet-dialog';
 export function PersonalWord({
   error,
   busy,
+  retryBlocked,
   onSave,
 }: {
   error?: string;
   busy: boolean;
+  retryBlocked: boolean;
   onSave: (w: Word, p: Progress) => Promise<boolean>;
 }) {
-  const { submitting, submit } = useEditorSubmission();
+  const { submitting, failed, submit } = useEditorSubmission();
   const [id] = useState(() => "personal_" + crypto.randomUUID());
   const [word, setWord] = useState("");
   const [meaning, setMeaning] = useState("");
@@ -92,7 +94,8 @@ export function PersonalWord({
       <div className="dialog-actions">
       <button
         className="primary-button full"
-        disabled={busy || submitting || !word.trim() || !meaning.trim()}
+        disabled={(failed ? retryBlocked : busy) || submitting || !word.trim() || !meaning.trim()}
+        aria-busy={submitting}
         onClick={() =>
           void submit(() => onSave(
             {
@@ -113,7 +116,7 @@ export function PersonalWord({
           ))
         }
       >
-        내 단어장에 추가
+        {failed ? '다시 저장' : '내 단어장에 추가'}
       </button>
       </div>
     </>

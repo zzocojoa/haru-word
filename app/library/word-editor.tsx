@@ -31,6 +31,7 @@ export function WordEditor({
   word,
   p,
   busy,
+  retryBlocked,
   onSave,
 }: {
   error?: string;
@@ -38,9 +39,10 @@ export function WordEditor({
   word: Word;
   p?: Progress;
   busy: boolean;
+  retryBlocked: boolean;
   onSave: (p: Progress) => Promise<boolean>;
 }) {
-  const { submitting, submit } = useEditorSubmission();
+  const { submitting, failed, submit } = useEditorSubmission();
   const content = cardContent(word.id, p);
   // One editor instance owns its baseline, including after a failed optimistic save.
   const [base] = useState(() => ({ ...p, meaning: p?.meaning || content.meaning }));
@@ -275,14 +277,15 @@ export function WordEditor({
       <div className="dialog-actions">
       <button
         className="primary-button full"
-        disabled={busy || submitting || !meaning.trim() || !!issue}
+        disabled={(failed ? retryBlocked : busy) || submitting || !meaning.trim() || !!issue}
+        aria-busy={submitting}
         onClick={() => {
           void submit(() => onSave(editedWordDraftsProgress(base, draft, {
             familiarity: fam, familiarityTouched, useful, encounters,
           })));
         }}
       >
-        기록 저장
+        {failed ? '다시 저장' : '기록 저장'}
       </button>
       </div>
     </>

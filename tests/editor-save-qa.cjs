@@ -1,15 +1,20 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('./qa/runtime.cjs');
+const { launchBrowser, closeBrowser, base, accountHeaders, axePath, waitForWorker } = require('./qa/runtime.cjs');
+const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-${engine}`;
 (async () => {
-  const browser = await launchBrowser();
+  await waitForWorker();
+  const browser = await launchBrowser({ engine });
   const checks = [];
+  let currentPage;
   try {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('editor_save') });
-    const page = await context.newPage(); let mode = 'hold', held;
+    const page = await context.newPage(); currentPage = page; let mode = 'hold', held, writes = 0;
     const errors = []; page.on('pageerror', e => errors.push(e.message));
     await page.route('**/api/state', route => {
-      if (route.request().method() !== 'PUT' || mode === 'ready') return route.continue();
+      if (route.request().method() !== 'PUT') return route.continue();
+      writes++;
+      if (mode === 'ready') return route.continue();
       if (mode === 'fail') return route.fulfill({ status: 503, json: { error: 'temporary failure' } });
       held = route;
     });
@@ -17,10 +22,20 @@ const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('
     await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
     const search = page.getByLabel('단어 또는 한국어 뜻 검색'), dialog = page.getByRole('dialog');
     const expression = () => dialog.getByLabel('함께 익힐 표현', { exact: true });
-    async function open(word) { await search.fill(word); await page.getByRole('button', { name: word + ' 동사', exact: true }).click(); }
+    async function open(word) {
+      // Finish the sheet's real exit/focus restoration before editing the list.
+      await page.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
+      await search.click(); await search.fill(word); assert.equal(await search.inputValue(), word);
+      await page.getByRole('button', { name: word + ' 동사', exact: true }).click();
+    }
     async function close() { await page.keyboard.press('Escape'); if(await page.getByRole('alertdialog').count()) await page.getByRole('button',{name:'변경 버리고 닫기',exact:true}).click(); await dialog.waitFor({ state: 'hidden' }); }
     async function saved() { await page.getByText('서버에 저장됨', { exact: true }).waitFor(); }
     const get = async () => (await context.request.get(base + '/api/state')).json();
+    const audit = async () => {
+      await dialog.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished.catch(() => {}))));
+      await page.addScriptTag({ path: axePath });
+      assert.deepEqual(await page.evaluate(async () => (await axe.run(document)).violations), []);
+    };
     await open('work'); await expression().fill('work today');
     await dialog.getByRole('button', { name: '기록 저장', exact: true }).click();
     await page.getByText('저장 중', { exact: true }).waitFor();
@@ -38,29 +53,89 @@ const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('
     await open('work'); await expression().fill('reopened work draft');
     checks.push('a completed save and reopened word have independent editor drafts');
     mode = 'fail'; await dialog.getByRole('button', { name: '기록 저장', exact: true }).click();
-    await page.getByText('temporary failure', { exact: true }).waitFor();
+    await dialog.getByText('temporary failure', { exact: true }).waitFor();
     assert.equal(await dialog.isVisible(), true); assert.equal(await expression().inputValue(), 'reopened work draft');
-    mode = 'ready'; await close(); await page.getByRole('button', { name: '다시 시도', exact: true }).click(); await saved();
+    const retry = () => dialog.getByRole('button', { name: '다시 저장', exact: true });
+    await retry().waitFor(); assert.equal(await retry().isEnabled(), true);
+    await expression().fill('latest work draft'); await retry().click();
+    await dialog.getByText('temporary failure', { exact: true }).waitFor();
+    assert.equal(await retry().isEnabled(), true); assert.equal(await expression().inputValue(), 'latest work draft');
+    const beforeClockFailure = writes;
+    await page.route('**/api/study-clock', route => route.fulfill({ status: 503, json: {} }));
+    await page.evaluate(() => window.dispatchEvent(new Event('focus')));
+    await page.waitForFunction(() => [...document.querySelectorAll('[role=dialog] button')].some(button => button.textContent === '다시 저장' && button.disabled));
+    await retry().evaluate(button => button.click()); assert.equal(writes, beforeClockFailure);
+    await page.unroute('**/api/study-clock'); await page.evaluate(() => window.dispatchEvent(new Event('focus')));
+    await page.waitForFunction(() => [...document.querySelectorAll('[role=dialog] button')].some(button => button.textContent === '다시 저장' && !button.disabled));
+    fs.mkdirSync(out, { recursive: true });
+    for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
+      await audit();
+      assert.equal(await dialog.evaluate(el => el.scrollWidth > el.clientWidth || document.documentElement.scrollWidth > innerWidth), false);
+      assert.ok((await retry().boundingBox()).height >= 44);
+      await page.screenshot({ path: `${out}/retry-${width}-${size}.png` });
+    }
+    await page.evaluate(() => document.documentElement.style.fontSize = '100%'); await page.setViewportSize({ width: 390, height: 844 });
+    mode = 'hold'; const beforeRetry = writes;
+    await retry().evaluate(button => { button.click(); button.click(); });
+    await page.getByText('저장 중', { exact: true }).waitFor();
+    assert.equal(writes, beforeRetry + 1); assert.equal(await expression().isDisabled(), true);
+    assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
+    await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(), true);
+    await held.continue(); await saved(); await dialog.waitFor({ state: 'hidden' }); mode = 'ready';
     await page.reload({ waitUntil: 'domcontentloaded' }); await saved(); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await open('work');
-    assert.equal(await expression().inputValue(), 'reopened work draft'); await close();
-    checks.push('failed save retains draft; explicit retry and reconnect retain the submitted value');
+    assert.equal(await expression().inputValue(), 'latest work draft'); await close();
+    checks.push('in-editor retry survives repeated failures, blocks until the clock recovers, saves latest edits, locks duplicate clicks/input/dismissal, and persists on reconnect; 320/390/1440px at 100/200% text and axe pass');
+    await open('want'); await expression().fill('want outer retry'); mode = 'fail';
+    await dialog.getByRole('button', { name: '기록 저장', exact: true }).click(); await retry().waitFor();
+    await close(); await open('work');
+    assert.equal(await dialog.getByRole('button', { name: '기록 저장', exact: true }).isDisabled(), true);
+    assert.equal(await retry().count(), 0); await close();
+    mode = 'ready'; await page.getByRole('button', { name: '다시 시도', exact: true }).click(); await saved();
+    checks.push('an unrelated editor cannot bypass a pending failed save; existing page retry still works');
     await page.getByRole('button', { name: /개인 단어 추가/ }).click();
     await dialog.getByLabel('영어 단어', { exact: true }).fill('commute');
     await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).fill('통근하다');
-    mode = 'hold'; await dialog.getByRole('button', { name: '내 단어장에 추가', exact: true }).click(); await page.getByText('저장 중', { exact: true }).waitFor();
+    mode = 'fail'; await dialog.getByRole('button', { name: '내 단어장에 추가', exact: true }).click(); await retry().waitFor();
+    assert.equal(await retry().isEnabled(), true); await dialog.getByLabel('영어 단어', { exact: true }).fill('');
+    assert.equal(await retry().isDisabled(), true); await dialog.getByLabel('영어 단어', { exact: true }).fill('commuting');
+    await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).fill('통근');
+    await retry().click(); await dialog.getByText('temporary failure', { exact: true }).waitFor();
+    assert.equal(await retry().isEnabled(), true); await audit();
+    mode = 'hold'; const beforeAddition = writes;
+    await retry().evaluate(button => { button.click(); button.click(); }); await page.getByText('저장 중', { exact: true }).waitFor();
+    assert.equal(writes, beforeAddition + 1);
     assert.equal(await dialog.getByLabel('영어 단어', { exact: true }).isDisabled(), true);
     assert.equal(await dialog.getByRole('combobox').isDisabled(), true);
     await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(),true);
-    await held.continue(); await saved(); await dialog.waitFor({state:'hidden'});
+    await held.continue(); await saved(); await dialog.waitFor({state:'hidden'}); mode = 'ready';
     await open('want'); await expression().fill('want preserved'); assert.equal(await dialog.isVisible(),true);
     assert.equal(await expression().inputValue(), 'want preserved');
-    const snapshot = await get(); assert.equal(Object.values(snapshot.state.progress).filter(p => p.personal?.word === 'commute').length, 1);
-    checks.push('personal addition locks input and dismissal; subsequent editor input remains independent');
-    await page.addScriptTag({ path: axePath });
-    const audit = await page.evaluate(async () => (await axe.run(document)).violations);
-    assert.deepEqual(audit, []); assert.deepEqual(errors, []);
-    fs.mkdirSync('outputs/editor-save', { recursive: true });
-    fs.writeFileSync('outputs/editor-save/result.json', JSON.stringify({ passed: true, checks, errors }, null, 2));
+    const snapshot = await get(), personal = Object.values(snapshot.state.progress).filter(p => p.personal);
+    assert.equal(personal.length, 1); assert.equal(personal[0].personal.word, 'commuting'); assert.equal(personal[0].meaning, '통근');
+    checks.push('personal addition reuses its ID through repeated failures and changed input; duplicate clicks add exactly one word');
+    await audit(); await close();
+    await page.reload({ waitUntil: 'domcontentloaded' }); await saved();
+    const reconnected = await get(); assert.deepEqual(reconnected.state, snapshot.state);
+    await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await open('work'); await expression().fill('conflicting work draft');
+    const fresh = await get();
+    assert.equal((await context.request.put(base + '/api/state', { data: { revision: fresh.revision, settings: { ...fresh.state.settings, dailyGoal: 2 }, progress: {}, sessions: {} } })).status(), 200);
+    const serverBeforeConflict = await get();
+    await dialog.getByRole('button', { name: '기록 저장', exact: true }).click();
+    await dialog.getByRole('alert').waitFor(); await retry().waitFor();
+    assert.equal(await retry().isDisabled(), true); assert.equal(await expression().inputValue(), 'conflicting work draft');
+    const beforeConflictRetry = writes; await retry().evaluate(button => button.click()); assert.equal(writes, beforeConflictRetry);
+    assert.deepEqual(await get(), serverBeforeConflict); await audit(); await close();
+    assert.equal(await page.getByRole('button', { name: '현재 입력 백업', exact: true }).isVisible(), true);
+    assert.equal(await page.getByRole('button', { name: '최신 기록 불러오기', exact: true }).isVisible(), true);
+    checks.push('real revision conflict disables in-editor retry, retains input and server data, and preserves backup/reload recovery');
+    assert.deepEqual(errors, []);
+    fs.writeFileSync(`${out}/result.json`, JSON.stringify({ passed: true, checks, errors }, null, 2));
     console.log(JSON.stringify({ passed: true, checks }));
+  } catch (error) {
+    fs.mkdirSync(out, { recursive: true });
+    await currentPage?.screenshot({ path: `${out}/failure.png` });
+    throw error;
   } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

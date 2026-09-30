@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+단어 편집·개인 단어 추가의 창 안 저장 재시도와 충돌 보호는 [EDITOR_SAVE_RETRY.md](EDITOR_SAVE_RETRY.md)를 참조하세요.
+
 저장·AI·복원 요청의 스트림 크기 제한과 취소·오류 계약은 [REQUEST_BODY_LIMITS.md](REQUEST_BODY_LIMITS.md)를 참조하세요.
 
 저장·조회·전체/분할 복원의 뜻 키·누적 한도·구형 페이지 보호는 [STATE_ROUNDTRIP.md](STATE_ROUNDTRIP.md)를 참조하세요.

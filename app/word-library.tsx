@@ -45,6 +45,7 @@ type Props = {
   words: Word[];
   save: (s: State) => Promise<boolean>;
   busy: boolean;
+  retryBlocked: boolean;
   error?: string;
 };
 type LibraryProps = Props & { grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; persistence: GrammarPersistence };
@@ -108,6 +109,7 @@ const WordList = memo(function WordList({
   words,
   save,
   busy,
+  retryBlocked,
   pos, setPos, page, setPage, onHelp,
 }: Props & { pos: string; setPos: (pos: string) => void; page: number; setPage: (page: number) => void; onHelp?: (id: LessonId, button: HTMLButtonElement) => void }) {
   const [query, setQuery] = useState("");
@@ -328,6 +330,7 @@ const WordList = memo(function WordList({
               word={selected.word}
               p={state.progress[selected.word.id]}
               busy={busy}
+              retryBlocked={retryBlocked}
               onSave={async (p) => {
                 const saved = await save({
                   ...state,
@@ -346,6 +349,7 @@ const WordList = memo(function WordList({
             error={error}
             key={adding}
             busy={busy}
+            retryBlocked={retryBlocked}
             onSave={async (w, p) => {
               const saved = await save({
                   ...state,

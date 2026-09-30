@@ -94,7 +94,7 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - `refactor-boundaries-qa.cjs`: 뜻 전환 확인·취소·Escape·재접속과 기존 성적 보존, 탭/WebMCP의 늦은 AI 응답 폐기·저장 실패 시 이동 차단을 검사한다. AI는 합성 응답만 사용한다.
 - `grammar-input-performance-qa.cjs`: 모든 탭을 방문한 뒤 0/1,825회차의 문법 입력을 각 3회 측정하고 단어 기록·목표·회차 미변경을 확인한다. 기능 검사와 별도로 performance 그룹에서 실행한다.
 
-- `editor-save-qa.cjs`: 저장 중 입력·뜻 전환 잠금, A 저장 중 B 열기, 같은 단어 재열기, 실패·수동 재시도·재접속, 개인 단어 추가와 접근성을 검사한다. 창 닫기와 다른 단어 열기는 허용한다.
+- `editor-save-qa.cjs`: 저장·재시도 중 입력·뜻 전환·닫기와 중복 클릭을 차단하고, 실패 후 창 안에서 최신 입력을 다시 저장한다. 다른 편집창의 미저장 잠금, 시계 복구, 개인 단어 중복 방지, 실제 revision 충돌·백업/재조회, 재접속과 320/390/1440px·200% 글자·접근성을 검사한다. `QA_BROWSER=webkit`을 지원하며 실기기 검사와 구분한다.
 - `response-contract-qa.cjs`: 서버가 저장했지만 성공 본문의 revision이 누락된 경우를 주입한다. 초안과 미저장 상태, 백업·명시적 재조회, 자동 재전송 없음을 확인한다.
 - `learning-commands.test.mjs`: 단어장 수정·기억 깨우기·중단 초안의 불변성과 성적 보존을 검사한다. `learning-api.test.mjs`와 `state-api.test.mjs`는 잘못된 응답과 회차 내부 오류의 저장 거부를 확인한다.
 - 공통 `tests/qa/runtime.cjs`는 Playwright·axe 경로와 loopback 주소, 충돌 없는 가상 계정을 제공한다. 특정 PC 사용자 경로는 소스에 넣지 않는다. `QA_PLAYWRIGHT_PATH`에는 설치된 Playwright 모듈 디렉터리를 지정하며, 생략 시 일반 모듈 해석을 사용한다. `AXE_CORE_PATH` 기본값은 `work/axe/package/axe.min.js`, `QA_BASE_URL` 기본값은 `http://127.0.0.1:8787`이다.

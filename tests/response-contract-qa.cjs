@@ -19,9 +19,10 @@ const { launchBrowser, closeBrowser, base, accountHeaders } = require('./qa/runt
     const dialog = page.getByRole('dialog');
     await dialog.getByLabel('함께 익힐 표현', { exact: true }).fill('keep this draft');
     await dialog.getByRole('button', { name: '기록 저장', exact: true }).click();
-    await page.getByText('서버 응답을 확인하지 못했어요. 현재 입력을 백업한 뒤 서버 기록을 확인해 주세요.', { exact: true }).waitFor();
+    await dialog.getByText('서버 응답을 확인하지 못했어요. 현재 입력을 백업한 뒤 서버 기록을 확인해 주세요.', { exact: true }).waitFor();
     assert.equal(await dialog.isVisible(), true);
     assert.equal(await dialog.getByLabel('함께 익힐 표현', { exact: true }).inputValue(), 'keep this draft');
+    assert.equal(await dialog.getByRole('button', { name: '다시 저장', exact: true }).isDisabled(), true);
     await page.keyboard.press('Escape');
     await page.getByRole('alertdialog').getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
     await dialog.waitFor({ state: 'hidden' });
