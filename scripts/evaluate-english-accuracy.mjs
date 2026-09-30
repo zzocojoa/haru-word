@@ -59,36 +59,37 @@ async function main() {
   process.once('SIGINT', interrupt); process.once('SIGTERM', interrupt);
   try {
     const ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : { attempts: [] };
-    evaluationNeedsCalls(ledger.attempts, round);
-    await build({ entryPoints: ['lib/english-accuracy.ts'], outfile: resolve(directory, 'requests.mjs'), bundle: true, platform: 'node', format: 'esm', logLevel: 'silent' });
-    const { accuracyCases, accuracyRequest, accuracyPromptHash, accuracyModels } = await import('./../.sites-runtime/english-accuracy/requests.mjs');
-    const fixtureHash = createHash('sha256').update(readFileSync('tests/fixtures/english-accuracy.json')).digest('hex');
-    const profiles = {};
-    for (const domain of ['word', 'grammar']) profiles[domain] = { promptHash: await accuracyPromptHash(accuracyRequest(accuracyCases.find(c => c.domain === domain)).instruction), models: accuracyModels };
-    evaluationProfiles(ledger.attempts, round, fixtureHash, profiles);
-    for (const sample of accuracyCases) for (const provider of ['google', 'groq']) {
-      stop.signal.throwIfAborted();
-      if (ledger.attempts.some(r => r.round === round && r.caseId === sample.id && r.provider === provider)) continue;
-      evaluationBudget(ledger.attempts, round);
-      const promptHash = await accuracyPromptHash(accuracyRequest(sample).instruction);
-      const attempt = { number: ledger.attempts.length + 1, round, domain: sample.domain, caseId: sample.id, provider, fixtureHash, promptHash, expectedModel: accuracyModels[provider], startedAt: new Date().toISOString(), status: 'started' };
-      // Persist BEFORE HTTP. A crash/failed request consumes its slot; never retry.
-      ledger.attempts.push(attempt); atomicJson(ledgerPath, ledger);
-      try {
-        const response = await fetch(origin.origin + '/api/english-accuracy-evaluation', { method: 'POST', redirect: 'error', signal: AbortSignal.any([AbortSignal.timeout(45_000), stop.signal]),
-          headers: { 'Content-Type': 'application/json', Origin: origin.origin, 'X-English-Accuracy-Token': config.evaluationToken,
-            ...(config.siteToken ? { 'OAI-Sites-Authorization': config.siteToken.startsWith('Bearer ') ? config.siteToken : `Bearer ${config.siteToken}` } : {}) },
-          body: JSON.stringify({ caseId: sample.id, provider, round }) });
-        const result = await response.json();
-        attempt.httpStatus = response.status;
-        if (response.ok && result.promptHash === promptHash && result.caseId === sample.id && result.provider === provider && result.feedback?.original === sample.sentence && result.feedback.model === attempt.expectedModel) {
-          attempt.status = 'response'; attempt.feedback = result.feedback; attempt.durationMs = result.durationMs;
-        } else { attempt.status = 'failure'; attempt.code = /^[a-z_]{1,60}$/.test(result.code ?? '') ? result.code : 'evaluation_invalid_response'; attempt.providerStatus = result.providerStatus; }
-      } catch { attempt.status = 'failure'; attempt.code = 'evaluation_transport'; }
-      attempt.finishedAt = new Date().toISOString(); atomicJson(ledgerPath, ledger);
-      if (ledger.attempts.length % 10 === 0) console.log(JSON.stringify({ attempts: ledger.attempts.length, responses: ledger.attempts.filter(r => r.status === 'response').length }));
-      // Conservative spacing for this one-off comparison, never an app limit.
-      await new Promise(resolve => setTimeout(resolve, 3000));
+    if (evaluationNeedsCalls(ledger.attempts, round)) {
+      await build({ entryPoints: ['lib/english-accuracy.ts'], outfile: resolve(directory, 'requests.mjs'), bundle: true, platform: 'node', format: 'esm', logLevel: 'silent' });
+      const { accuracyCases, accuracyRequest, accuracyPromptHash, accuracyModels } = await import('./../.sites-runtime/english-accuracy/requests.mjs');
+      const fixtureHash = createHash('sha256').update(readFileSync('tests/fixtures/english-accuracy.json')).digest('hex');
+      const profiles = {};
+      for (const domain of ['word', 'grammar']) profiles[domain] = { promptHash: await accuracyPromptHash(accuracyRequest(accuracyCases.find(c => c.domain === domain)).instruction), models: accuracyModels };
+      evaluationProfiles(ledger.attempts, round, fixtureHash, profiles);
+      for (const sample of accuracyCases) for (const provider of ['google', 'groq']) {
+        stop.signal.throwIfAborted();
+        if (ledger.attempts.some(r => r.round === round && r.caseId === sample.id && r.provider === provider)) continue;
+        evaluationBudget(ledger.attempts, round);
+        const promptHash = await accuracyPromptHash(accuracyRequest(sample).instruction);
+        const attempt = { number: ledger.attempts.length + 1, round, domain: sample.domain, caseId: sample.id, provider, fixtureHash, promptHash, expectedModel: accuracyModels[provider], startedAt: new Date().toISOString(), status: 'started' };
+        // Persist BEFORE HTTP. A crash/failed request consumes its slot; never retry.
+        ledger.attempts.push(attempt); atomicJson(ledgerPath, ledger);
+        try {
+          const response = await fetch(origin.origin + '/api/english-accuracy-evaluation', { method: 'POST', redirect: 'error', signal: AbortSignal.any([AbortSignal.timeout(45_000), stop.signal]),
+            headers: { 'Content-Type': 'application/json', Origin: origin.origin, 'X-English-Accuracy-Token': config.evaluationToken,
+              ...(config.siteToken ? { 'OAI-Sites-Authorization': config.siteToken.startsWith('Bearer ') ? config.siteToken : `Bearer ${config.siteToken}` } : {}) },
+            body: JSON.stringify({ caseId: sample.id, provider, round }) });
+          const result = await response.json();
+          attempt.httpStatus = response.status;
+          if (response.ok && result.promptHash === promptHash && result.caseId === sample.id && result.provider === provider && result.feedback?.original === sample.sentence && result.feedback.model === attempt.expectedModel) {
+            attempt.status = 'response'; attempt.feedback = result.feedback; attempt.durationMs = result.durationMs;
+          } else { attempt.status = 'failure'; attempt.code = /^[a-z_]{1,60}$/.test(result.code ?? '') ? result.code : 'evaluation_invalid_response'; attempt.providerStatus = result.providerStatus; }
+        } catch { attempt.status = 'failure'; attempt.code = 'evaluation_transport'; }
+        attempt.finishedAt = new Date().toISOString(); atomicJson(ledgerPath, ledger);
+        if (ledger.attempts.length % 10 === 0) console.log(JSON.stringify({ attempts: ledger.attempts.length, responses: ledger.attempts.filter(r => r.status === 'response').length }));
+        // Conservative spacing for this one-off comparison, never an app limit.
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
     }
     // One atomic authoritative bundle keeps the blind/mapping pair together.
     // A complete-round resume reuses its order and only regenerates the view.

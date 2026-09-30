@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync, mkdtempSync, rmSync, realpathSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { join, resolve, sep } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 import { evaluationBudget, evaluationProfiles, evaluationNeedsCalls, blindAttempt, reviewBundle } from '../scripts/evaluate-english-accuracy.mjs';
 mkdirSync('work/accuracy-tests', { recursive: true });
@@ -71,4 +74,15 @@ test('complete-round recovery reuses one authoritative blind/mapping bundle with
  const bundle=reviewBundle(attempts,1);assert.equal(reviewBundle(attempts,1,bundle),bundle);
  for(const row of bundle.blinded){const mapped=bundle.mapping.find(m=>m.label===row.label);assert.equal(attempts.find(a=>a.number===mapped.number).caseId,row.caseId);assert.equal('number' in row,false);}
  assert.notEqual(reviewBundle([...attempts,{round:1,number:3,caseId:'word-02',status:'failure'}],1,bundle).ledgerHash,bundle.ledgerHash);
+});
+test('CLI restores complete baseline after prompt changes without project files or any HTTP',()=>{
+ const directory=mkdtempSync(join(tmpdir(),'haru-accuracy-test-')),store=join(directory,'.sites-runtime','english-accuracy');mkdirSync(store,{recursive:true});
+ const attempts=Array.from({length:120},(_,i)=>({number:i+1,round:1,caseId:`case-${i}`,status:'failure',fixtureHash:'old',promptHash:'old'}));
+ writeFileSync(join(store,'ledger.json'),JSON.stringify({attempts}));
+ const guard=join(directory,'no-http.mjs');writeFileSync(guard,"globalThis.fetch=()=>{throw Error('No HTTP allowed during recovery')};");
+ try{
+  const output=execFileSync(process.execPath,['--import',pathToFileURL(guard).href,resolve('scripts/evaluate-english-accuracy.mjs'),'--live','--round','1'],{cwd:directory,encoding:'utf8',input:JSON.stringify({origin:'https://wordgrain-oxford-study.hoihou-o.chatgpt.site',evaluationToken:'a'.repeat(64)})+'\n'});
+  assert.equal(JSON.parse(output).complete,true);assert.equal(JSON.parse(readFileSync(join(store,'blind-round-1.json'),'utf8')).length,120);
+  assert.deepEqual(JSON.parse(readFileSync(join(store,'ledger.json'),'utf8')).attempts,attempts);
+ }finally{assert.ok(realpathSync(directory).startsWith(realpathSync(tmpdir())+sep));rmSync(directory,{recursive:true,force:true});}
 });
