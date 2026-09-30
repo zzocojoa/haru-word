@@ -35,9 +35,17 @@
         },
         {
           "id": "8bc42a7b7e3267bb",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "97c4d20f0f2dc86c2fda69b550724b2aa04b279c6571cbfdcd84b4b10ef682ff",
-          "afterHash": "97c4d20f0f2dc86c2fda69b550724b2aa04b279c6571cbfdcd84b4b10ef682ff"
+          "afterHash": "32a5177358207c699ea9a9742d54afbf6ca8d2f52ad6a9efee4aa18355f56779",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "97c4d20f0f2dc86c2fda69b550724b2aa04b279c6571cbfdcd84b4b10ef682ff",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "df5e7abbf05d5c86",
@@ -428,9 +436,16 @@
         {
           "id": "fdd1dc4127b9710e",
           "status": "corrected",
-          "reason": "음악 밴드 뜻 직접 예시",
+          "reason": "음악 밴드 뜻 직접 예시; 2026-09-30 학습 정확도 교열",
           "beforeHash": "53613cbc6f8a2350fe837282b64f2540d3ac45f2f39b73eca925d5c80ec35613",
-          "afterHash": "f6b01f29ae16ca5d6b8385a3a2e00a05473ae9191d9e30a54a28810034c24355"
+          "afterHash": "3bd063f45b22af50d910373818ac75677ab3a2fa20981bce4c4abbc0a4f8ea96",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "f6b01f29ae16ca5d6b8385a3a2e00a05473ae9191d9e30a54a28810034c24355",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "bbaf364b8296dc31",
@@ -567,9 +582,17 @@
         },
         {
           "id": "37787ad61c3ae394",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "d366d7e4698ea3f36851b67878b955e4a8bd2415da19ed5f6ae150a7c074e805",
-          "afterHash": "d366d7e4698ea3f36851b67878b955e4a8bd2415da19ed5f6ae150a7c074e805"
+          "afterHash": "a5c4dceb86aa80846695d54322f422bfba949fa1c993137b95965be836d61b30",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "d366d7e4698ea3f36851b67878b955e4a8bd2415da19ed5f6ae150a7c074e805",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "39ab4002d6e1c13d",
@@ -783,9 +806,17 @@
         },
         {
           "id": "c3ebf9da783ee7dd",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "0eff11897c1050a3c8eb2f7a7ee83fc4e1eb9de6135cc7b8a7fcc0f7c1314958",
-          "afterHash": "0eff11897c1050a3c8eb2f7a7ee83fc4e1eb9de6135cc7b8a7fcc0f7c1314958"
+          "afterHash": "79398568389b5785d4af275b5943eacd0fd852ea7ef396e57d3258a2544d6e38",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "0eff11897c1050a3c8eb2f7a7ee83fc4e1eb9de6135cc7b8a7fcc0f7c1314958",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "630a387b481f1d08",
@@ -1093,9 +1124,17 @@
         },
         {
           "id": "ae5fbe65659ef923",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "2ad3ec76e616aaf2a8357e16e8991beb2363d6b952314499189c4eca140797fb",
-          "afterHash": "2ad3ec76e616aaf2a8357e16e8991beb2363d6b952314499189c4eca140797fb"
+          "afterHash": "454bb8c2c53ee6044567268af7b39a3fbe1df93b71acc7511392acf68850d640",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "2ad3ec76e616aaf2a8357e16e8991beb2363d6b952314499189c4eca140797fb",
+              "reason": "닫다의 본동사 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "0a5083d17153b990",
@@ -1346,9 +1385,16 @@
         {
           "id": "0fda8790e49cbef8",
           "status": "corrected",
-          "reason": "단일 학습 뜻",
+          "reason": "단일 학습 뜻; 2026-09-30 학습 정확도 교열",
           "beforeHash": "94b0ca36952cc63912f0b757554c3ab21514aa064ecc4820eebe55fda7162dd5",
-          "afterHash": "32eb9af7e62ab9852f8e8d640f18e4ca495448db6b7ceb2871ee285a86ccfaae"
+          "afterHash": "1d673984ff164730bb42ff1a71096d309a7bc35bc97313263fcd8ac6bb1efb20",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "32eb9af7e62ab9852f8e8d640f18e4ca495448db6b7ceb2871ee285a86ccfaae",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "f0a989b4e73d38bb",
@@ -2055,9 +2101,17 @@
         },
         {
           "id": "e177e03df8b08cc4",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "c4e6969eda1697c8c3587c2cfea2431df1dfa494cde5b009f27a57c1709a6d1e",
-          "afterHash": "c4e6969eda1697c8c3587c2cfea2431df1dfa494cde5b009f27a57c1709a6d1e"
+          "afterHash": "fcccf2cc0e0a1d9247eb98234828811defbb5028121e2f68421a3a51f5a0308c",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "c4e6969eda1697c8c3587c2cfea2431df1dfa494cde5b009f27a57c1709a6d1e",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "3606af23c8d22cbf",
@@ -2369,9 +2423,16 @@
         {
           "id": "3be30d70d2f30536",
           "status": "corrected",
-          "reason": "예문의 뜻 하나; 미국식 대학 표현",
+          "reason": "예문의 뜻 하나; 미국식 대학 표현; 2026-09-30 학습 정확도 교열",
           "beforeHash": "5fbacd24d482d8debaf6279e3a7e26162579dd4a487671d1070f62b58753eded",
-          "afterHash": "61404b7278e41d2ba76e8bab8a4e0cb73b2eb85d4d75e2cc148cbb0324837b75"
+          "afterHash": "16e0f0e5b0c907d03b3c7b0bdca505d4b6f26f80b78000a0a369f968134a1c64",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "61404b7278e41d2ba76e8bab8a4e0cb73b2eb85d4d75e2cc148cbb0324837b75",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "e8aa84d0a992a433",
@@ -4219,9 +4280,17 @@
         },
         {
           "id": "e46ff3f4e25c9443",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "dc9f5cbd59765c1159de9b055a0555e9ad22b91a075754c07fd17ef802638705",
-          "afterHash": "dc9f5cbd59765c1159de9b055a0555e9ad22b91a075754c07fd17ef802638705"
+          "afterHash": "1097390e71048db07fb1cc5e617f895c8c7a2fa862d85018951c86fd49eb658c",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "dc9f5cbd59765c1159de9b055a0555e9ad22b91a075754c07fd17ef802638705",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "2be0163e6345472f",
@@ -4268,9 +4337,17 @@
         },
         {
           "id": "dfc4b2104d3c3fb9",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "f94589b9fd62ee1527890fb5333624dd6efe663ec0537a300ad9e8b68ada9605",
-          "afterHash": "f94589b9fd62ee1527890fb5333624dd6efe663ec0537a300ad9e8b68ada9605"
+          "afterHash": "4d3e3daa338fb57e4bcb17e6398dcc8c1cb9d88eeec7efba1bb372d3647a455c",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "f94589b9fd62ee1527890fb5333624dd6efe663ec0537a300ad9e8b68ada9605",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "ef83d5426f791c59",
@@ -4306,9 +4383,17 @@
         },
         {
           "id": "3ca5818f4f92cfc6",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "175728a565aea6f0cae0bd509740bb0572cfdff358c8c216f6c0aa9b57464939",
-          "afterHash": "175728a565aea6f0cae0bd509740bb0572cfdff358c8c216f6c0aa9b57464939"
+          "afterHash": "fd6176d3bfb3a893d0011c0ca9855738bce1466f7d6968f3efbe4148296f4105",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "175728a565aea6f0cae0bd509740bb0572cfdff358c8c216f6c0aa9b57464939",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "8681cd99b05eebdc",
@@ -5289,9 +5374,17 @@
         },
         {
           "id": "44fd78c4075373a3",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "806e2b1f978d064d22d348cacfa484128d8a7193da0341cd03fa6bca94973dd1",
-          "afterHash": "806e2b1f978d064d22d348cacfa484128d8a7193da0341cd03fa6bca94973dd1"
+          "afterHash": "ef7bb30824d05dbeada29635300736117b2f4e621a6fd5314c0d809802e3c95b",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "806e2b1f978d064d22d348cacfa484128d8a7193da0341cd03fa6bca94973dd1",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "7de3967a358e60b6",
@@ -5308,9 +5401,17 @@
         },
         {
           "id": "f20eedc76ad65bbd",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "bdf4d3a3c5b61bde151884ed461d3ff0812c109a5a34a4a07c0a8138baebc1b4",
-          "afterHash": "bdf4d3a3c5b61bde151884ed461d3ff0812c109a5a34a4a07c0a8138baebc1b4"
+          "afterHash": "6d71e9feee2be6f0ed9474881287763850c8594a70f0a482b3d8efc795369b11",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "bdf4d3a3c5b61bde151884ed461d3ff0812c109a5a34a4a07c0a8138baebc1b4",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "64d4c5f9065111e7",
@@ -5777,9 +5878,17 @@
         },
         {
           "id": "948230a8eb37e59e",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "f900f194c18c7ab25b06d65241215d1f44b486189117af1ce6268a6523e3fbe7",
-          "afterHash": "f900f194c18c7ab25b06d65241215d1f44b486189117af1ce6268a6523e3fbe7"
+          "afterHash": "b6a26f25551b3c426cbe87b19a1e659a8419d214b8e265625d739980a4541026",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "f900f194c18c7ab25b06d65241215d1f44b486189117af1ce6268a6523e3fbe7",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "d65bcc3374291861",
@@ -6293,9 +6402,16 @@
         {
           "id": "a1c00c799cf6b45a",
           "status": "corrected",
-          "reason": "미국식 대학 표현",
+          "reason": "미국식 대학 표현; 2026-09-30 학습 정확도 교열",
           "beforeHash": "a53421c7ee245f4ab86116a5ce1afc83f54a637781583bd8747c6042bddf1548",
-          "afterHash": "5ee7852218708f498de7b21ba9ebb3750a7ccd7066ce2f670b835e9526f56531"
+          "afterHash": "1fdccc776c96760ab71a85ba0a29dc3316cba0cf3aa9c888416c96b6a5ac8fbb",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "5ee7852218708f498de7b21ba9ebb3750a7ccd7066ce2f670b835e9526f56531",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "17f31488485ea8e9",

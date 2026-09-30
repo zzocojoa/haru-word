@@ -19,7 +19,8 @@ import {
 } from "@/lib/learning";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { DictionaryLinks, Speak } from "../ui";
+import { DictionaryLinks } from "../ui";
+import { WordPronunciation } from '../word-pronunciation';
 import { HelpDetails } from "../study-ui";
 import { editedWordDraftsProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
@@ -76,7 +77,6 @@ export function WordEditor({
       <DialogHeader>
         <DialogTitle className="dialog-word">
           <span lang="en">{word.word}</span>
-          <Speak text={word.word} />
         </DialogTitle>
         <DialogDescription>
           {word.personal ? "수준 미지정" : word.level} · {POS[word.pos]} ·{" "}
@@ -84,6 +84,7 @@ export function WordEditor({
         </DialogDescription>
       </DialogHeader>
       <div className="dialog-scroll">
+      <WordPronunciation word={word} meaning={meaning}/>
       {error && <p className="error-banner" role="alert">{error}</p>}
       <fieldset className="editor-fields" disabled={submitting}>
       <section className="sense-selector">

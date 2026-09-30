@@ -838,7 +838,7 @@
   },
   "fdd1dc4127b9710e": {
     "expression": "play in a band",
-    "example": "My brother plays in a band.",
+    "example": "My younger brother plays in a band.",
     "translation": "내 남동생은 밴드에서 연주해요.",
     "source": "학습용 작성 예문"
   },
@@ -994,7 +994,9 @@
     "source": "학습용 작성 예문"
   },
   "0fda8790e49cbef8": {
-    "meaning": "무용수"
+    "meaning": "무용수",
+    "example": "My younger sister is a dancer at the music festival.",
+    "source": "학습용 작성 예문"
   },
   "f0a989b4e73d38bb": {
     "expression": "enjoy dancing"
@@ -1201,7 +1203,7 @@
   "3be30d70d2f30536": {
     "meaning": "지리학",
     "expression": "study geography",
-    "example": "My brother studies geography at a university.",
+    "example": "My younger brother studies geography at a university.",
     "translation": "내 남동생은 대학교에서 지리학을 공부해요.",
     "source": "학습용 작성 예문"
   },
@@ -1923,7 +1925,7 @@
   },
   "a1c00c799cf6b45a": {
     "expression": "at a university",
-    "example": "My brother studies geography at a university.",
+    "example": "My younger brother studies geography at a university.",
     "translation": "내 남동생은 대학교에서 지리학을 공부해요.",
     "source": "학습용 작성 예문"
   },
@@ -4465,7 +4467,9 @@
     "source": "학습용 작성 예문"
   },
   "15347df9a6d7f52f": {
-    "meaning": "드럼"
+    "meaning": "드럼",
+    "example": "My younger brother plays the drums in a band.",
+    "source": "학습용 작성 예문"
   },
   "7690e150a33cf903": {
     "meaning": "제출 기한이 된",
@@ -4981,7 +4985,7 @@
     "expression": "neither Tom nor Mary"
   },
   "a03661502bd2610e": {
-    "example": "I do not drive, nor does my brother.",
+    "example": "I do not drive, nor does my younger brother.",
     "translation": "나는 운전하지 않고 내 남동생도 운전하지 않아요.",
     "source": "학습용 작성 예문"
   },
@@ -5254,7 +5258,9 @@
     "source": "학습용 작성 예문"
   },
   "cc38a2903489d6dc": {
-    "meaning": "다시 알려주다"
+    "meaning": "다시 알려주다",
+    "example": "Please remind me to call my younger sister.",
+    "source": "학습용 작성 예문"
   },
   "59244f74d776297d": {
     "meaning": "외딴"
@@ -6750,7 +6756,7 @@
   },
   "4fc1743b385dfae5": {
     "expression": "mistake someone for someone else",
-    "example": "I mistook her for my sister in the crowd.",
+    "example": "I mistook her for my younger sister in the crowd.",
     "translation": "나는 사람들 속에서 그녀를 내 여동생으로 잘못 봤어요.",
     "source": "학습용 작성 예문"
   },
@@ -7373,5 +7379,59 @@
   },
   "1ed148e3f24534ad": {
     "meaning": "하지만"
+  },
+  "8bc42a7b7e3267bb": {
+    "example": "My older sister lives above, and my younger brother lives below.",
+    "source": "학습용 작성 예문"
+  },
+  "37787ad61c3ae394": {
+    "example": "My older sister lives above, and my younger brother lives below.",
+    "source": "학습용 작성 예문"
+  },
+  "c3ebf9da783ee7dd": {
+    "example": "My younger brother is learning to swim.",
+    "translation": "내 남동생은 수영을 배우고 있어요.",
+    "expression": "my younger brother",
+    "source": "학습용 작성 예문"
+  },
+  "e177e03df8b08cc4": {
+    "example": "My younger sister is a dancer at the music festival.",
+    "source": "학습용 작성 예문"
+  },
+  "e46ff3f4e25c9443": {
+    "example": "One bike is mine. The other is my younger sister's own.",
+    "source": "학습용 작성 예문"
+  },
+  "dfc4b2104d3c3fb9": {
+    "example": "One bike is mine. The other is my younger sister's own.",
+    "source": "학습용 작성 예문"
+  },
+  "3ca5818f4f92cfc6": {
+    "example": "I wear black pants, and my younger sister wears a long skirt.",
+    "source": "학습용 작성 예문"
+  },
+  "44fd78c4075373a3": {
+    "example": "My younger brother is a teenager. He is sixteen.",
+    "source": "학습용 작성 예문"
+  },
+  "f20eedc76ad65bbd": {
+    "example": "I wear black pants, and my younger sister wears a long skirt.",
+    "source": "학습용 작성 예문"
+  },
+  "948230a8eb37e59e": {
+    "example": "My younger brother is a teenager. He is sixteen.",
+    "source": "학습용 작성 예문"
+  },
+  "8380ffd0a911c786": {
+    "example": "My older brother works as a professor at a small university.",
+    "translation": "내 오빠는 작은 대학에서 교수로 일해요.",
+    "expression": "works as a professor",
+    "source": "학습용 작성 예문"
+  },
+  "ae5fbe65659ef923": {
+    "example": "Please close the window before you leave.",
+    "translation": "떠나기 전에 창문을 닫아 주세요.",
+    "expression": "close the window",
+    "source": "학습용 작성 예문"
   }
 }

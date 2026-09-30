@@ -1,5 +1,7 @@
 # 학습 앱 검증
 
+- `pronunciation.test.mjs`는 동형이의어 16개·35항목의 품사/뜻 일치 보호, 개인 단어 fallback, 복수 발음 및 가족 번역을 검사한다. `pronunciation-qa.cjs`는 로컬 가상 계정의 오늘 학습·문장 연습·완료 기록·편집에서 사전 우선 표시, 다른 뜻의 IPA 제거, 기록 불변성, 320/390/1440px·200%·axe·키보드를 검사하며 `QA_BROWSER=webkit`을 지원한다. 사전 링크만 확인하며 외부 음원 재생·실제 iPhone 청취는 포함하지 않는다.
+
 - `request-body.test.mjs` / `request-body-qa.cjs`: 저장·AI·전체/분할 복원 6개 경로의 스트림 조기 취소, UTF-8·문자/바이트 경계·허위 Content-Length·인증 선행·중단·원본 보존을 검사합니다. 로컬 Worker는 EOF 이전 413을 확인하고, 브라우저는 실제 거절 안내·입력 유지·정상 재시도·재접속과 320/390/1440px를 확인합니다. `QA_BROWSER=webkit`을 지원합니다. 운영 데이터나 실제 AI를 사용하지 않습니다.
 
 - `state-roundtrip.test.mjs` / `state-roundtrip-qa.cjs`: 사용자 뜻 키의 안전한 저장·조회·전체/분할 복원과 계정 누적 5,000단어·10,000회차·UTF-8 20 MB 경계, 구형 복원의 문법 보존 합산, 동시 저장 및 원본 불변성을 검사합니다. 브라우저는 단어 편집·검증된 백업·실제 복원·한도 안내와 320/390/1440px·axe를 확인하며 `QA_BROWSER=webkit`도 지원합니다.

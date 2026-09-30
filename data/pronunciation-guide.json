@@ -1,0 +1,504 @@
+{
+  "ae5fbe65659ef923": {
+    "word": "close",
+    "pos": "v.",
+    "meaning": "닫다",
+    "variants": [
+      {
+        "ipa": "/kloʊz/",
+        "usage": "v. · 닫다"
+      }
+    ],
+    "note": "동사와 끝을 뜻하는 명사는 /z/, 가까운·가까이는 /s/로 끝나요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/close",
+    "reviewedAt": "2026-09-30"
+  },
+  "56aa5d6a7f60a19f": {
+    "word": "live",
+    "pos": "v.",
+    "meaning": "살다",
+    "variants": [
+      {
+        "ipa": "/lɪv/",
+        "usage": "v. · 살다"
+      }
+    ],
+    "note": "살다는 /lɪv/, 생방송의·생방송으로는 /laɪv/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/live",
+    "reviewedAt": "2026-09-30"
+  },
+  "3f414d95f3b31d4f": {
+    "word": "object",
+    "pos": "n.",
+    "meaning": "물건",
+    "variants": [
+      {
+        "ipa": "/ˈɑːb.dʒekt/",
+        "usage": "n. · 물건"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/object",
+    "reviewedAt": "2026-09-30"
+  },
+  "1e9c30a583d9cb33": {
+    "word": "present",
+    "pos": "adj.",
+    "meaning": "참석한",
+    "variants": [
+      {
+        "ipa": "/ˈprez.ənt/",
+        "usage": "adj. · 참석한"
+      }
+    ],
+    "note": "명사·형용사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/present",
+    "reviewedAt": "2026-09-30"
+  },
+  "284fd832597cfe66": {
+    "word": "present",
+    "pos": "n.",
+    "meaning": "선물",
+    "variants": [
+      {
+        "ipa": "/ˈprez.ənt/",
+        "usage": "n. · 선물"
+      }
+    ],
+    "note": "명사·형용사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/present",
+    "reviewedAt": "2026-09-30"
+  },
+  "d66d12e47ba17536": {
+    "word": "read",
+    "pos": "v.",
+    "meaning": "읽다",
+    "variants": [
+      {
+        "ipa": "/riːd/",
+        "usage": "원형·현재형"
+      },
+      {
+        "ipa": "/red/",
+        "usage": "과거형·과거분사"
+      }
+    ],
+    "note": "원형·현재형은 /riːd/, 과거형·과거분사는 /red/예요. 문장의 시제를 확인하세요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/read",
+    "reviewedAt": "2026-09-30"
+  },
+  "bfb19cf723ef383c": {
+    "word": "close",
+    "pos": "adj.",
+    "meaning": "가까운",
+    "variants": [
+      {
+        "ipa": "/kloʊs/",
+        "usage": "adj. · 가까운"
+      }
+    ],
+    "note": "동사와 끝을 뜻하는 명사는 /z/, 가까운·가까이는 /s/로 끝나요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/close",
+    "reviewedAt": "2026-09-30"
+  },
+  "100593b7d746ce1b": {
+    "word": "desert",
+    "pos": "n.",
+    "meaning": "사막",
+    "variants": [
+      {
+        "ipa": "/ˈdez.ɚt/",
+        "usage": "n. · 사막"
+      }
+    ],
+    "note": "사막은 첫 음절, 버리고 떠나다는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/desert",
+    "reviewedAt": "2026-09-30"
+  },
+  "4cd8a08b069dee59": {
+    "word": "lead",
+    "pos": "v.",
+    "meaning": "이끌다",
+    "variants": [
+      {
+        "ipa": "/liːd/",
+        "usage": "v. · 이끌다"
+      }
+    ],
+    "note": "이끌다·선두는 /liːd/, 금속 납은 /led/예요. 이끌다의 과거형은 led /led/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/lead",
+    "reviewedAt": "2026-09-30"
+  },
+  "1080224424f392de": {
+    "word": "present",
+    "pos": "v.",
+    "meaning": "발표하다",
+    "variants": [
+      {
+        "ipa": "/prɪˈzent/",
+        "usage": "v. · 발표하다"
+      }
+    ],
+    "note": "명사·형용사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/present",
+    "reviewedAt": "2026-09-30"
+  },
+  "edc5dbe7137fd1e4": {
+    "word": "record",
+    "pos": "n.",
+    "meaning": "기록",
+    "variants": [
+      {
+        "ipa": "/ˈrek.ɚd/",
+        "usage": "n. · 기록"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/record",
+    "reviewedAt": "2026-09-30"
+  },
+  "0cfe94787a643244": {
+    "word": "record",
+    "pos": "v.",
+    "meaning": "녹음하다",
+    "variants": [
+      {
+        "ipa": "/rɪˈkɔːrd/",
+        "usage": "v. · 녹음하다"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/record",
+    "reviewedAt": "2026-09-30"
+  },
+  "910cf4240f714dc5": {
+    "word": "refuse",
+    "pos": "v.",
+    "meaning": "거절하다",
+    "variants": [
+      {
+        "ipa": "/rɪˈfjuːz/",
+        "usage": "v. · 거절하다"
+      }
+    ],
+    "note": "거절하다의 끝소리는 /z/, 쓰레기를 뜻하는 명사는 /s/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/refuse",
+    "reviewedAt": "2026-09-30"
+  },
+  "456a93db2a4b00d2": {
+    "word": "wind",
+    "pos": "n.",
+    "meaning": "바람",
+    "variants": [
+      {
+        "ipa": "/wɪnd/",
+        "usage": "n. · 바람"
+      }
+    ],
+    "note": "바람은 /wɪnd/, 감다·구불구불 이어지다는 /waɪnd/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/wind",
+    "reviewedAt": "2026-09-30"
+  },
+  "62406e2217622902": {
+    "word": "close",
+    "pos": "adv.",
+    "meaning": "가까이",
+    "variants": [
+      {
+        "ipa": "/kloʊs/",
+        "usage": "adv. · 가까이"
+      }
+    ],
+    "note": "동사와 끝을 뜻하는 명사는 /z/, 가까운·가까이는 /s/로 끝나요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/close",
+    "reviewedAt": "2026-09-30"
+  },
+  "f97737424ab7f58c": {
+    "word": "graduate",
+    "pos": "n.",
+    "meaning": "졸업생",
+    "variants": [
+      {
+        "ipa": "/ˈɡrædʒ.u.ət/",
+        "usage": "n. · 졸업생"
+      }
+    ],
+    "note": "졸업생은 /ət/, 졸업하다는 /eɪt/로 끝나요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/graduate",
+    "reviewedAt": "2026-09-30"
+  },
+  "634dd5ce703c240a": {
+    "word": "graduate",
+    "pos": "v.",
+    "meaning": "졸업하다",
+    "variants": [
+      {
+        "ipa": "/ˈɡrædʒ.u.eɪt/",
+        "usage": "v. · 졸업하다"
+      }
+    ],
+    "note": "졸업생은 /ət/, 졸업하다는 /eɪt/로 끝나요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/graduate",
+    "reviewedAt": "2026-09-30"
+  },
+  "122e8e5f24758862": {
+    "word": "lead",
+    "pos": "n.",
+    "meaning": "선두",
+    "variants": [
+      {
+        "ipa": "/liːd/",
+        "usage": "n. · 선두"
+      }
+    ],
+    "note": "이끌다·선두는 /liːd/, 금속 납은 /led/예요. 이끌다의 과거형은 led /led/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/lead",
+    "reviewedAt": "2026-09-30"
+  },
+  "da6dbc17243bd29d": {
+    "word": "live",
+    "pos": "adj.",
+    "meaning": "생방송의",
+    "variants": [
+      {
+        "ipa": "/laɪv/",
+        "usage": "adj. · 생방송의"
+      }
+    ],
+    "note": "살다는 /lɪv/, 생방송의·생방송으로는 /laɪv/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/live",
+    "reviewedAt": "2026-09-30"
+  },
+  "ccda1f684bbc10e2": {
+    "word": "live",
+    "pos": "adv.",
+    "meaning": "생방송으로",
+    "variants": [
+      {
+        "ipa": "/laɪv/",
+        "usage": "adv. · 생방송으로"
+      }
+    ],
+    "note": "살다는 /lɪv/, 생방송의·생방송으로는 /laɪv/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/live",
+    "reviewedAt": "2026-09-30"
+  },
+  "668268ea0765310e": {
+    "word": "close",
+    "pos": "n.",
+    "meaning": "끝",
+    "variants": [
+      {
+        "ipa": "/kloʊz/",
+        "usage": "n. · 끝"
+      }
+    ],
+    "note": "동사와 끝을 뜻하는 명사는 /z/, 가까운·가까이는 /s/로 끝나요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/close",
+    "reviewedAt": "2026-09-30"
+  },
+  "f6600a828a5fa83b": {
+    "word": "conduct",
+    "pos": "v.",
+    "meaning": "실시하다",
+    "variants": [
+      {
+        "ipa": "/kənˈdʌkt/",
+        "usage": "v. · 실시하다"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/conduct",
+    "reviewedAt": "2026-09-30"
+  },
+  "8c37b8d4fb8a1d56": {
+    "word": "conduct",
+    "pos": "n.",
+    "meaning": "행동",
+    "variants": [
+      {
+        "ipa": "/ˈkɑːn.dʌkt/",
+        "usage": "n. · 행동"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/conduct",
+    "reviewedAt": "2026-09-30"
+  },
+  "2a1d0beda6274311": {
+    "word": "conflict",
+    "pos": "n.",
+    "meaning": "충돌",
+    "variants": [
+      {
+        "ipa": "/ˈkɑːn.flɪkt/",
+        "usage": "n. · 충돌"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/conflict",
+    "reviewedAt": "2026-09-30"
+  },
+  "ede0cdc488d70256": {
+    "word": "conflict",
+    "pos": "v.",
+    "meaning": "충돌하다",
+    "variants": [
+      {
+        "ipa": "/kənˈflɪkt/",
+        "usage": "v. · 충돌하다"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/conflict",
+    "reviewedAt": "2026-09-30"
+  },
+  "6687a6f42616d09f": {
+    "word": "contest",
+    "pos": "n.",
+    "meaning": "대회",
+    "variants": [
+      {
+        "ipa": "/ˈkɑːn.test/",
+        "usage": "n. · 대회"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/contest",
+    "reviewedAt": "2026-09-30"
+  },
+  "351b49638e235d19": {
+    "word": "contest",
+    "pos": "v.",
+    "meaning": "이의를 제기하다",
+    "variants": [
+      {
+        "ipa": "/kənˈtest/",
+        "usage": "v. · 이의를 제기하다"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/contest",
+    "reviewedAt": "2026-09-30"
+  },
+  "26eff2f210cfbce8": {
+    "word": "desert",
+    "pos": "v.",
+    "meaning": "버리고 떠나다",
+    "variants": [
+      {
+        "ipa": "/dɪˈzɝːt/",
+        "usage": "v. · 버리고 떠나다"
+      }
+    ],
+    "note": "사막은 첫 음절, 버리고 떠나다는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/desert",
+    "reviewedAt": "2026-09-30"
+  },
+  "b8e6ec1ab51195a6": {
+    "word": "object",
+    "pos": "v.",
+    "meaning": "반대하다",
+    "variants": [
+      {
+        "ipa": "/əbˈdʒekt/",
+        "usage": "v. · 반대하다"
+      }
+    ],
+    "note": "명사는 첫 음절, 동사는 두 번째 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/object",
+    "reviewedAt": "2026-09-30"
+  },
+  "41a4bc90f6071d4f": {
+    "word": "tear",
+    "pos": "v.",
+    "meaning": "찢다",
+    "variants": [
+      {
+        "ipa": "/ter/",
+        "usage": "v. · 찢다"
+      }
+    ],
+    "note": "찢다·찢어진 곳과 눈물의 발음이 달라요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/tear",
+    "reviewedAt": "2026-09-30"
+  },
+  "648df715279cd53b": {
+    "word": "tear",
+    "pos": "n.",
+    "meaning": "찢어진 곳",
+    "variants": [
+      {
+        "ipa": "/ter/",
+        "usage": "n. · 찢어진 곳"
+      },
+      {
+        "ipa": "/tær/",
+        "usage": "n. · 찢어진 곳"
+      }
+    ],
+    "note": "찢다·찢어진 곳과 눈물의 발음이 달라요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/tear",
+    "reviewedAt": "2026-09-30"
+  },
+  "1d57180ec583b7df": {
+    "word": "tear",
+    "pos": "n.",
+    "meaning": "눈물",
+    "variants": [
+      {
+        "ipa": "/tɪr/",
+        "usage": "n. · 눈물"
+      }
+    ],
+    "note": "찢다·찢어진 곳과 눈물의 발음이 달라요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/tear",
+    "reviewedAt": "2026-09-30"
+  },
+  "eb6d924c9c921cb3": {
+    "word": "transfer",
+    "pos": "v.",
+    "meaning": "옮기다",
+    "variants": [
+      {
+        "ipa": "/ˈtræns.fɝː/",
+        "usage": "v. · 옮기다"
+      },
+      {
+        "ipa": "/trænsˈfɝː/",
+        "usage": "v. · 옮기다"
+      }
+    ],
+    "note": "미국식 동사는 첫째·둘째 음절 강세가 모두 인정돼요. 명사는 첫 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/dictionary/english/transfer",
+    "reviewedAt": "2026-09-30"
+  },
+  "294e84ac847ef62c": {
+    "word": "transfer",
+    "pos": "n.",
+    "meaning": "이체",
+    "variants": [
+      {
+        "ipa": "/ˈtræns.fɝː/",
+        "usage": "n. · 이체"
+      }
+    ],
+    "note": "미국식 동사는 첫째·둘째 음절 강세가 모두 인정돼요. 명사는 첫 음절에 강세가 있어요.",
+    "url": "https://dictionary.cambridge.org/us/dictionary/english/transfer",
+    "reviewedAt": "2026-09-30"
+  },
+  "b914b855f7eefd9b": {
+    "word": "wind",
+    "pos": "v.",
+    "meaning": "구불구불 이어지다",
+    "variants": [
+      {
+        "ipa": "/waɪnd/",
+        "usage": "v. · 구불구불 이어지다"
+      }
+    ],
+    "note": "바람은 /wɪnd/, 감다·구불구불 이어지다는 /waɪnd/예요.",
+    "url": "https://dictionary.cambridge.org/us/pronunciation/english/wind",
+    "reviewedAt": "2026-09-30"
+  }
+}

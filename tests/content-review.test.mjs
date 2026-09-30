@@ -67,7 +67,7 @@ test('A2 review ledger covers all 990 entries and hashes the shipped revision',(
  const entries=ledger.batches.flatMap(b=>b.entries),a2=words.filter(w=>w.level==='A2');
  assert.equal(entries.length,990);assert.equal(new Set(entries.map(e=>e.id)).size,990);
  assert.deepEqual(new Set(entries.map(e=>e.id)),new Set(a2.map(w=>w.id)));
- assert.equal(entries.filter(e=>e.status==='corrected').length,552);
+ assert.equal(entries.filter(e=>e.status==='corrected').length,553);
  const fields=['meaning','expression','example','translation','source','attribution','url'];
  for(const entry of entries){
   const hash=createHash('sha256').update(JSON.stringify(fields.map(k=>data[entry.id][k]??null))).digest('hex');
