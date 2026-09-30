@@ -12,6 +12,7 @@ import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { feedbackProvider } from '@/lib/sentence-feedback';
 import { json, validateJsonMutation } from '@/lib/server/http';
 import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
+import { FEEDBACK_BODY_LIMITS, logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
 
 export const dynamic = 'force-dynamic';
 export async function POST(request: Request) {
@@ -21,10 +22,12 @@ export async function POST(request: Request) {
   if (rejected) return rejected;
   let body: unknown;
   try {
-    const text = await request.text();
-    if (text.length > 12000) return json(feedbackErrorBody('invalid_request'), 413);
+    const text = await readBoundedJsonText(request, FEEDBACK_BODY_LIMITS);
     body = JSON.parse(text);
-  } catch { return json(feedbackErrorBody('invalid_request'), 400); }
+  } catch (error) {
+    logBodyRejection(error, 'grammar_feedback');
+    return json(feedbackErrorBody('invalid_request'), error instanceof RequestBodyError ? error.status : 400);
+  }
   const parsed = grammarFeedbackRequestSchema.safeParse(body);
   if (!parsed.success) return json(feedbackErrorBody('invalid_request'), 400);
   if (env.grammar_enabled !== 'true' || env.google_ai_enabled !== 'true') return json(feedbackErrorBody('disabled'), 503);

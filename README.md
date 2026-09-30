@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+저장·AI·복원 요청의 스트림 크기 제한과 취소·오류 계약은 [REQUEST_BODY_LIMITS.md](REQUEST_BODY_LIMITS.md)를 참조하세요.
+
 저장·조회·전체/분할 복원의 뜻 키·누적 한도·구형 페이지 보호는 [STATE_ROUNDTRIP.md](STATE_ROUNDTRIP.md)를 참조하세요.
 
 저장 충돌 뒤 최신 학습 입력의 백업·복원과 성적 보존은 [RECOVERY_DRAFTS.md](RECOVERY_DRAFTS.md)를 참조하세요.

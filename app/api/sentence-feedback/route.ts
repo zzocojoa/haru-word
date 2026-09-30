@@ -10,6 +10,7 @@ import { generateSentenceFeedbackWithFallback } from '@/lib/feedback-fallback';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { json, validateJsonMutation } from '@/lib/server/http';
 import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
+import { FEEDBACK_BODY_LIMITS, logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
 
 export const dynamic = 'force-dynamic';
 const enabled = () => env.google_ai_enabled === 'true';
@@ -28,11 +29,11 @@ export async function POST(request: Request) {
   if (rejected) return rejected;
   let raw: unknown;
   try {
-    const text = await request.text();
-    if (text.length > 12000) return json(feedbackErrorBody('invalid_request'), 413);
+    const text = await readBoundedJsonText(request, FEEDBACK_BODY_LIMITS);
     raw = JSON.parse(text);
-  } catch {
-    return json(feedbackErrorBody('invalid_request'), 400);
+  } catch (error) {
+    logBodyRejection(error, 'sentence_feedback');
+    return json(feedbackErrorBody('invalid_request'), error instanceof RequestBodyError ? error.status : 400);
   }
   const parsed = feedbackRequestSchema.safeParse(raw);
   if (!parsed.success) return json(feedbackErrorBody('invalid_request'), 400);

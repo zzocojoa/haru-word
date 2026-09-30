@@ -12,6 +12,7 @@ import { hasSavedStructuredFeedback } from '@/db/feedback-compatibility';
 import { StateCapacityError } from '@/db/state-capacity';
 import { hasLiteralPrototypeSense, supportsSenseKeys, SENSE_KEY_UPGRADE_MESSAGE } from '@/lib/state-data-keys';
 import { hasSavedLiteralPrototypeSense } from '@/db/sense-key-compatibility';
+import { logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,23 +32,13 @@ export async function POST(request: Request) {
     return json({ error: '현재 기록을 다시 불러와 주세요.' }, 400);
   }
   let raw = '';
-  const reader = request.body?.getReader();
-  if (!reader) return json({ error: '백업 파일이 비어 있어요.' }, 400);
+  if (!request.body) return json({ error: '백업 파일이 비어 있어요.' }, 400);
   try {
-    let length = 0;
-    const decoder = new TextDecoder('utf-8', { fatal: true });
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      length += value.byteLength;
-      if (length > MAX_BACKUP_BYTES) {
-        await reader.cancel();
-        return json({ error: '백업 파일은 8 MB까지 복원할 수 있어요.' }, 413);
-      }
-      raw += decoder.decode(value, { stream: true });
-    }
-    raw += decoder.decode();
-  } catch {
+    raw = await readBoundedJsonText(request, { bytes: MAX_BACKUP_BYTES });
+  } catch (error) {
+    logBodyRejection(error, 'restore');
+    if (error instanceof RequestBodyError && error.status === 413)
+      return json({ error: '백업 파일은 8 MB까지 복원할 수 있어요.' }, 413);
     return json({ error: '백업 파일을 읽지 못했어요.' }, 400);
   }
   let state;

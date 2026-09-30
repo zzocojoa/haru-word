@@ -13,6 +13,8 @@ import { hasSavedStructuredFeedback } from '@/db/feedback-compatibility';
 import { assertStateDataKeys, hasLiteralPrototypeSense, supportsSenseKeys, SENSE_KEY_UPGRADE_MESSAGE } from '@/lib/state-data-keys';
 import { hasSavedLiteralPrototypeSense } from '@/db/sense-key-compatibility';
 import { StateCapacityError } from '@/db/state-capacity';
+import { logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
+import { STATE_PART_BYTES } from '@/lib/state-limits';
 
 export const dynamic = 'force-dynamic';
 
@@ -47,11 +49,13 @@ export async function PUT(request: Request) {
   if (rejected) return rejected;
   let body: unknown;
   try {
-    const raw = await request.text();
-    if (new TextEncoder().encode(raw).byteLength > 1_800_000) return json({ error: '기록이 너무 큽니다. 회차를 나눠 주세요.' }, 413);
+    const raw = await readBoundedJsonText(request, { bytes: STATE_PART_BYTES });
     body = JSON.parse(raw);
     assertStateDataKeys(body);
-  } catch {
+  } catch (error) {
+    logBodyRejection(error, 'save');
+    if (error instanceof RequestBodyError && error.status === 413)
+      return json({ error: '기록이 너무 큽니다. 회차를 나눠 주세요.' }, 413);
     return json({ error: '요청 형식이 잘못되었습니다.' }, 400);
   }
   const parsed = saveSchema.safeParse(body);
