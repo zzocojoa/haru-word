@@ -7,7 +7,7 @@ import { structureJsonSchema } from './sentence-structure.ts';
 export const FEEDBACK_OUTPUT_LIMITS = { tokens: 4096, textCharacters: 30000 } as const;
 
 // Application-owned stages only: never attach provider text or Zod issue paths.
-export const FEEDBACK_VALIDATION_STAGES = ['envelope', 'model', 'content_type', 'content_limit', 'json_syntax', 'fields', 'structure'] as const;
+export const FEEDBACK_VALIDATION_STAGES = ['envelope', 'model', 'content_type', 'content_limit', 'json_syntax', 'fields', 'structure', 'judgment'] as const;
 export type FeedbackValidationStage = (typeof FEEDBACK_VALIDATION_STAGES)[number];
 export class FeedbackValidationError extends Error {
   readonly stage: FeedbackValidationStage;
@@ -41,5 +41,11 @@ export function parseProviderFeedback(
   const parsed = feedbackContentSchema.safeParse(value);
   if (!parsed.success) throw new FeedbackValidationError(parsed.error.issues.some(i => i.code !== 'custom') ? 'fields' : 'structure');
   const content = parsed.data;
+  // New provider results judge the ORIGINAL. Keep this out of persisted schemas
+  // so previously saved results and backups remain readable. Reject rather than
+  // silently relabel a contradictory answer as a valid grammar correction.
+  const correction = content.correctedSentence.trim();
+  if ((content.grammar === 'natural' && (!correction || correction !== original.trim()))
+      || (content.grammar === 'uncertain' && correction)) throw new FeedbackValidationError('judgment');
   return { ...content, original, model, createdAt: new Date().toISOString() };
 }

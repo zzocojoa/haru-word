@@ -17,7 +17,7 @@ const content={meaningUsage:'appropriate',grammar:'needs_work',correctedSentence
 const google=(c=content)=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(c)}]}}]});
 const groq=(c=content)=>Response.json({model:GROQ_FEEDBACK_MODEL,choices:[{finish_reason:'stop',message:{content:JSON.stringify(c)}}]});
 test('Google success and valid uncertainty never call Groq',async()=>{
- for(const c of [content,{...content,meaningUsage:'uncertain',grammar:'uncertain'}]){
+ for(const c of [content,{...content,meaningUsage:'uncertain',grammar:'uncertain',correctedSentence:''}]){
   let calls=0; const result=await run(config,input,async url=>{calls++;assert.match(url,/generativelanguage/);return google(c)});
   assert.equal(calls,1);assert.equal(result.model,FEEDBACK_MODEL);assert.equal(result.meaningUsage,c.meaningUsage);
  }

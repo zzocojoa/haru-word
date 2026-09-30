@@ -30,6 +30,8 @@ iPhone 스와이프·브라우저 뒤로가기의 화면 범위와 저장 보호
 
 AI 실패 사유의 구분, 안전한 오류 계약과 검증·롤백은 [AI_FEEDBACK_ERRORS.md](AI_FEEDBACK_ERRORS.md)를 참조하세요.
 
+AI 원문 판정·교정의 모순 차단과 비활성 원문 우선 요청 후보의 검증·게시·롤백은 [ORIGINAL_SENTENCE_FEEDBACK.md](ORIGINAL_SENTENCE_FEEDBACK.md)를 참조하세요.
+
 AI 출처·모바일 탭·설정 문구·린트 정리와 초기 로딩 분할 실험 결과는 [CONSISTENCY_IMPROVEMENTS.md](CONSISTENCY_IMPROVEMENTS.md)에 기록합니다.
 
 # vinext-starter

@@ -3,6 +3,7 @@ import { lessonIdSchema } from './model';
 import { generateTutorFeedback } from '../gemini-feedback';
 import { generateFeedbackWithFallback, type FeedbackProviders } from '../feedback-fallback';
 import type { GrammarLesson } from './content';
+import { originalSentenceGrammarInput, originalSentenceGrammarInstruction } from '../original-sentence-feedback';
 
 export const grammarFeedbackRequestSchema = z.object({ lessonId: lessonIdSchema, sentence: z.string().min(1).max(2000) }).strict();
 export function grammarFeedbackInput(lesson: GrammarLesson, sentence: string) {
@@ -20,6 +21,9 @@ For a correct sentence repeat it unchanged. Write explanation in Korean, at most
 Never assign vocabulary familiarity, mastery, CEFR, or pronunciation scores. Return only the requested JSON.`;
 export function generateGrammarFeedback(key: string | FeedbackProviders, lesson: GrammarLesson, sentence: string, fetcher: typeof fetch = fetch) {
   // Keep the legacy Google-only helper signature for compatibility and tests.
+  if (typeof key !== 'string' && key.feedback_original_sentence_enabled === 'true') {
+    return generateFeedbackWithFallback(key, originalSentenceGrammarInput(lesson, sentence), originalSentenceGrammarInstruction, fetcher);
+  }
   const input = grammarFeedbackInput(lesson, sentence);
   return typeof key === 'string' ? generateTutorFeedback(key, input, grammarInstruction, fetcher) : generateFeedbackWithFallback(key, input, grammarInstruction, fetcher);
 }

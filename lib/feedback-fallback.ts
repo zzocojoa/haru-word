@@ -2,8 +2,9 @@ import { generateTutorFeedback, systemInstruction } from './gemini-feedback';
 import { generateGroqFeedback } from './groq-feedback';
 import { FeedbackError } from './provider-feedback-error';
 import type { FeedbackIssueCode } from './feedback-issue';
+import { originalSentenceWordInstruction } from './original-sentence-feedback';
 
-export type FeedbackProviders = { google_api?: string; groq_api?: string; groq_ai_enabled?: string; signal?: AbortSignal };
+export type FeedbackProviders = { google_api?: string; groq_api?: string; groq_ai_enabled?: string; feedback_original_sentence_enabled?: string; signal?: AbortSignal };
 export const GOOGLE_PRIMARY_TIMEOUT_MS = 12000;
 // Valid uncertainty and explicit content/policy decisions are not availability failures.
 const fallbackCodes = new Set<FeedbackIssueCode>(['not_configured', 'provider_limit', 'provider_minute_limit', 'provider_daily_limit',
@@ -30,5 +31,5 @@ export async function generateFeedbackWithFallback(config: FeedbackProviders, in
   }
 }
 export function generateSentenceFeedbackWithFallback(config: FeedbackProviders, input: { word: string; pos: string; meaning: string; sentence: string }, fetcher: typeof fetch = fetch) {
-  return generateFeedbackWithFallback(config, input, systemInstruction, fetcher);
+  return generateFeedbackWithFallback(config, input, config.feedback_original_sentence_enabled === 'true' ? originalSentenceWordInstruction : systemInstruction, fetcher);
 }
