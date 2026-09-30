@@ -1,5 +1,6 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const { EventEmitter, once } = require('node:events');
 const { launchBrowser, closeBrowser, base, accountHeaders, axePath, waitForWorker } = require('./qa/runtime.cjs');
 const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-${engine}`;
 (async () => {
@@ -10,6 +11,8 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
   try {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('editor_save') });
     const page = await context.newPage(); currentPage = page; let mode = 'hold', held, writes = 0;
+    const heldEvents = new EventEmitter();
+    const waitForHeld = () => once(heldEvents, 'held', { signal: AbortSignal.timeout(30_000) });
     const errors = []; page.on('pageerror', e => errors.push(e.message));
     await page.route('**/api/state', route => {
       if (route.request().method() !== 'PUT') return route.continue();
@@ -17,6 +20,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
       if (mode === 'ready') return route.continue();
       if (mode === 'fail') return route.fulfill({ status: 503, json: { error: 'temporary failure' } });
       held = route;
+      heldEvents.emit('held');
     });
     await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
     await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
@@ -37,8 +41,10 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
       assert.deepEqual(await page.evaluate(async () => (await axe.run(document)).violations), []);
     };
     await open('work'); await expression().fill('work today');
+    const firstRequest = waitForHeld();
     await dialog.getByRole('button', { name: '기록 저장', exact: true }).click();
     await page.getByText('저장 중', { exact: true }).waitFor();
+    await firstRequest;
     assert.equal(await expression().isDisabled(), true);
     assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
     await page.keyboard.press('Escape'); await dialog.getByRole('button',{name:'Close',exact:true}).click();
@@ -47,7 +53,9 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     await open('want'); await expression().fill('want a new draft');
     checks.push('submitting editor locks input, sense changes and dismissal until its response; another editor opens only after completion');
     await close(); await open('work'); await expression().fill('work again');
+    const reopenedRequest = waitForHeld();
     await dialog.getByRole('button', { name: '기록 저장', exact: true }).click(); await page.getByText('저장 중', { exact: true }).waitFor();
+    await reopenedRequest;
     await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(),true);
     await held.continue(); await saved(); await dialog.waitFor({state:'hidden'});
     await open('work'); await expression().fill('reopened work draft');
@@ -77,9 +85,10 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
       await page.screenshot({ path: `${out}/retry-${width}-${size}.png` });
     }
     await page.evaluate(() => document.documentElement.style.fontSize = '100%'); await page.setViewportSize({ width: 390, height: 844 });
-    mode = 'hold'; const beforeRetry = writes;
+    mode = 'hold'; const beforeRetry = writes, retryRequest = waitForHeld();
     await retry().evaluate(button => { button.click(); button.click(); });
     await page.getByText('저장 중', { exact: true }).waitFor();
+    await retryRequest;
     assert.equal(writes, beforeRetry + 1); assert.equal(await expression().isDisabled(), true);
     assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
     await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(), true);
@@ -103,8 +112,9 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).fill('통근');
     await retry().click(); await dialog.getByText('temporary failure', { exact: true }).waitFor();
     assert.equal(await retry().isEnabled(), true); await audit();
-    mode = 'hold'; const beforeAddition = writes;
+    mode = 'hold'; const beforeAddition = writes, additionRequest = waitForHeld();
     await retry().evaluate(button => { button.click(); button.click(); }); await page.getByText('저장 중', { exact: true }).waitFor();
+    await additionRequest;
     assert.equal(writes, beforeAddition + 1);
     assert.equal(await dialog.getByLabel('영어 단어', { exact: true }).isDisabled(), true);
     assert.equal(await dialog.getByRole('combobox').isDisabled(), true);
