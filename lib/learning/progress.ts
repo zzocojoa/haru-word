@@ -5,7 +5,7 @@ export function senseProgress(
   meaning: string,
 ): SenseProgress {
   const key = meaning.trim();
-  const saved = p?.senses?.[key];
+  const saved = p?.senses && Object.hasOwn(p.senses, key) ? p.senses[key] : undefined;
   if (!p || p.meaning?.trim() !== key) return saved || { meaning: key };
   return {
     meaning: key,
@@ -26,8 +26,7 @@ export function senseProgress(
 }
 
 export function allSenses(p: Progress | undefined): SenseProgress[] {
-  const senses = { ...p?.senses };
-  if (p?.meaning) senses[p.meaning.trim()] = senseProgress(p, p.meaning);
+  const senses = { ...p?.senses, ...(p?.meaning ? { [p.meaning.trim()]: senseProgress(p, p.meaning) } : {}) };
   return Object.values(senses);
 }
 

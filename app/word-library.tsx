@@ -45,6 +45,7 @@ type Props = {
   words: Word[];
   save: (s: State) => Promise<boolean>;
   busy: boolean;
+  error?: string;
 };
 type LibraryProps = Props & { grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; persistence: GrammarPersistence };
 export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
@@ -101,6 +102,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   </Tabs>;
 });
 const WordList = memo(function WordList({
+  error,
   activityDate,
   state,
   words,
@@ -320,6 +322,7 @@ const WordList = memo(function WordList({
         <DialogContent className="word-dialog framed-dialog" onCloseAutoFocus={restoreFocus}>
           {selected && (
             <WordEditor
+              error={error}
               activityDate={activityDate}
               key={selected.instance}
               word={selected.word}
@@ -340,6 +343,7 @@ const WordList = memo(function WordList({
       <Dialog key={adding || 'closed-personal'} navigationKey="library.add" open={!!adding} onOpenChange={open => { if (!open) setAdding(null); }}>
         <DialogContent className="word-dialog framed-dialog" onCloseAutoFocus={restoreFocus}>
           {adding && <PersonalWord
+            error={error}
             key={adding}
             busy={busy}
             onSave={async (w, p) => {

@@ -9,6 +9,9 @@ import { hasSavedModernGrammar } from '@/db/grammar-compatibility';
 import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar } from '@/lib/grammar/compatibility';
 import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { hasSavedStructuredFeedback } from '@/db/feedback-compatibility';
+import { StateCapacityError } from '@/db/state-capacity';
+import { hasLiteralPrototypeSense, supportsSenseKeys, SENSE_KEY_UPGRADE_MESSAGE } from '@/lib/state-data-keys';
+import { hasSavedLiteralPrototypeSense } from '@/db/sense-key-compatibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -52,6 +55,8 @@ export async function POST(request: Request) {
   catch (e) { return json({ error: e instanceof Error ? e.message : '백업 파일을 확인해 주세요.' }, 400); }
   const started = Date.now();
   try {
+    if (!supportsSenseKeys(request) && (hasLiteralPrototypeSense(state.progress) || await hasSavedLiteralPrototypeSense(database(), user.userId)))
+      return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
     if (!supportsFeedbackStructure(request) && (hasStructuredFeedback(state) ||
       await hasSavedStructuredFeedback(database(), user.userId, null, state.grammar === undefined ? [] : null)))
       return json({ error: FEEDBACK_UPGRADE_MESSAGE }, 426);
@@ -63,7 +68,11 @@ export async function POST(request: Request) {
     }
     console.info(JSON.stringify({ event: 'learning_backup_restored', words: Object.keys(state.progress).length, sessions: Object.keys(state.sessions).length, durationMs: Date.now() - started }));
     return json({ revision: revision + 1 });
-  } catch {
+  } catch (error) {
+    if (error instanceof StateCapacityError) {
+      console.warn(JSON.stringify({ event: 'learning_restore_capacity_rejected', code: error.code, durationMs: Date.now() - started }));
+      return json({ error: error.message, code: error.code }, 413);
+    }
     console.error(JSON.stringify({ event: 'learning_backup_restore_failed', durationMs: Date.now() - started }));
     return json({ error: '복원을 완료하지 못했어요. 서버 기록을 확인한 뒤 다시 시도해 주세요.' }, 503);
   }

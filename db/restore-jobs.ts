@@ -7,6 +7,9 @@ import { grammarStateSchema } from '@/lib/grammar/model';
 import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback } from '@/lib/feedback-compatibility';
 import { hasSavedStructuredFeedback } from './feedback-compatibility';
 import type { Session } from '@/lib/learning';
+import { checkStagedRestoreCapacity, StateCapacityError } from './state-capacity';
+import { hasSavedLiteralPrototypeSense } from './sense-key-compatibility';
+import { SENSE_KEY_UPGRADE_MESSAGE } from '@/lib/state-data-keys';
 
 export class RestoreError extends Error {
   constructor(message: string, public status = 400, public code = 'invalid_restore') { super(message); }
@@ -101,11 +104,20 @@ export async function validateRestoreJob(db: D1Database, user: string, id: strin
   return getRestoreJob(db, user, id);
 }
 
-export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion = 2, structureSupported = true) {
+export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion = 2, structureSupported = true, senseKeysSupported = true) {
   const job = await row(db, user, id);
   if (job.status === 'committed') return view(db, job);
   if (job.status !== 'ready') throw new RestoreError('전체 검증이 끝난 후 복원할 수 있어요.', 409);
   const manifest = JSON.parse(job.manifest) as RestoreManifest;
+  if (!senseKeysSupported && (await hasSavedLiteralPrototypeSense(db, user) || await db.prepare(`SELECT 1 AS found FROM restore_parts p,json_each(p.document) entry,json_each(entry.value,'$.senses') sense
+      WHERE p.job_id=? AND p.kind='progress' AND sense.key='__proto__' LIMIT 1`).bind(id).first()))
+    throw new RestoreError(SENSE_KEY_UPGRADE_MESSAGE, 426, 'sense_client_outdated');
+  try {
+    if (!await checkStagedRestoreCapacity(db, user, job.base_revision, manifest.settings, id, !manifest.parts.some(p => p.kind === 'grammar'))) throw changed();
+  } catch (error) {
+    if (error instanceof StateCapacityError) throw new RestoreError(error.message, 413, error.code);
+    throw error;
+  }
     if (!structureSupported) {
       if (await hasSavedStructuredFeedback(db, user, null, manifest.parts.some(p => p.kind === 'grammar') ? null : []))
         throw new RestoreError(FEEDBACK_UPGRADE_MESSAGE, 426, 'feedback_client_outdated');

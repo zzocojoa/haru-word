@@ -24,11 +24,11 @@ export function correctDailyStudyDate(state:State,sessionId:string,date:string,c
  const hasOtherDate=(entryId:string,meaning?:string)=>Object.values(sessions).some(s=>s.kind==='daily'&&s.id!==sessionId&&Object.entries(s.records).some(([id,r])=>entryIdFor(s,id)===entryId&&(meaning===undefined||r.meaning.trim()===meaning)&&(r.learnedOn===oldDate||!r.learnedOn&&s.date===oldDate)));
  for(const [entryId,meanings]of affected){
   const p=state.progress[entryId];if(!p)continue;
-  const senses={...p.senses};
+  let senses={...p.senses};
   for(const meaning of meanings){
    const sense=senseProgress(p,meaning);
    const studyDates=[...new Set([...(sense.studyDates||[]).filter(d=>d!==oldDate||hasOtherDate(entryId,meaning)),date])].sort();
-   senses[meaning]={...sense,studyDates,lastStudied:studyDates.at(-1)};
+   senses={...senses,[meaning]:{...sense,studyDates,lastStudied:studyDates.at(-1)}};
   }
   const keepOld=hasOtherDate(entryId)||Object.values(senses).some(s=>s.studyDates?.includes(oldDate));
   const studyDates=[...new Set([...(p.studyDates||[]).filter(d=>d!==oldDate||keepOld),...Object.values(senses).flatMap(s=>s.studyDates||[])])].sort();

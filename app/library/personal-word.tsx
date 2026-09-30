@@ -16,9 +16,11 @@ import { useState } from "react";
 import { useEditorSubmission } from "./use-editor-submission";
 import { useSheetProtection } from '../sheet-dialog';
 export function PersonalWord({
+  error,
   busy,
   onSave,
 }: {
+  error?: string;
   busy: boolean;
   onSave: (w: Word, p: Progress) => Promise<boolean>;
 }) {
@@ -39,6 +41,7 @@ export function PersonalWord({
         </DialogDescription>
       </DialogHeader>
       <div className="dialog-scroll">
+      {error && <p className="error-banner" role="alert">{error}</p>}
       <fieldset className="editor-fields" disabled={submitting}>
       <label>
         영어 단어

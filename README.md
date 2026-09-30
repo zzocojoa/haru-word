@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+저장·조회·전체/분할 복원의 뜻 키·누적 한도·구형 페이지 보호는 [STATE_ROUNDTRIP.md](STATE_ROUNDTRIP.md)를 참조하세요.
+
 저장 충돌 뒤 최신 학습 입력의 백업·복원과 성적 보존은 [RECOVERY_DRAFTS.md](RECOVERY_DRAFTS.md)를 참조하세요.
 
 AI 제공자 공통 계약·읽기 전용 결과·재점검 버튼 상태의 리팩토링과 검증은 [REFACTORING_2026-09-30.md](REFACTORING_2026-09-30.md)를 참조하세요.

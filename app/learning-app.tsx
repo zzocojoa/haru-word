@@ -400,6 +400,7 @@ function LearningScreens({
           <TabsContent value="library" forceMount hidden={tab !== "library"}>
             {navigation.visited.includes("library") && (
               <WordLibrary
+                error={error}
                 grammarEnabled={grammarEnabled}
                 grammarPracticeEnabled={grammarPracticeEnabled}
                 persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, saved: signedIn && !loading && !saving && !unsaved && !conflict, registerLeave: registerGrammarLeave }}

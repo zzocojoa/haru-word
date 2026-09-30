@@ -1,6 +1,7 @@
 import { EMPTY, type State } from '@/lib/learning';
 import { restoreChunks } from '@/lib/backup';
 import type { SaveStateRequest } from '@/lib/api-contracts';
+import { checkSaveCapacity } from './state-capacity';
 
 export type StoredStateDocuments = {
   revision: number; settings: string;
@@ -49,6 +50,7 @@ export async function validSaveReferences(db: D1Database, userId: string, data: 
 }
 
 export async function saveState(db: D1Database, userId: string, data: SaveStateRequest): Promise<boolean> {
+  if (!await checkSaveCapacity(db, userId, data)) return false;
   const statements: D1PreparedStatement[] = [];
   if (data.grammar && Object.keys(data.grammar).length) {
     statements.push(db.prepare('INSERT INTO grammar_progress(user_id,lesson_id,document) SELECT ?,entry.key,entry.value FROM json_each(?) AS entry WHERE EXISTS(SELECT 1 FROM learner_states WHERE user_id=? AND revision=?) ON CONFLICT(user_id,lesson_id) DO UPDATE SET document=excluded.document')
@@ -74,6 +76,7 @@ export async function saveState(db: D1Database, userId: string, data: SaveStateR
 }
 
 export async function restoreState(db: D1Database, userId: string, revision: number, state: State): Promise<boolean> {
+  if (!await checkSaveCapacity(db, userId, { ...state, revision }, true)) return false;
   // Conflicts change no rows. A failed statement rolls back even the deletions.
   const condition = 'EXISTS(SELECT 1 FROM learner_states WHERE user_id=? AND revision=?)';
   const statements = [

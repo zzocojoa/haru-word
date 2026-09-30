@@ -26,12 +26,14 @@ import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
 import { useSheetProtection } from '../sheet-dialog';
 export function WordEditor({
+  error,
   activityDate,
   word,
   p,
   busy,
   onSave,
 }: {
+  error?: string;
   activityDate: () => string;
   word: Word;
   p?: Progress;
@@ -80,6 +82,7 @@ export function WordEditor({
         </DialogDescription>
       </DialogHeader>
       <div className="dialog-scroll">
+      {error && <p className="error-banner" role="alert">{error}</p>}
       <fieldset className="editor-fields" disabled={submitting}>
       <section className="sense-selector">
         <label>

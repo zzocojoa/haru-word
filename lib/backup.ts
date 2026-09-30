@@ -7,18 +7,20 @@ import rawWords from '@/data/words.json';
 import { resumeMonthlyWriting } from './learning/session-flow';
 import { serializeBackup } from './backup-format';
 import { assertBackupStructure } from './backup-structure';
+import { assertStateDataKeys } from './state-data-keys';
+import { STATE_COUNTS, STATE_PART_BYTES } from './state-limits';
 export { makeBackup } from './backup-format';
 
 export const MAX_BACKUP_BYTES=8_000_000;
-export const RESTORE_CHUNK_BYTES=1_800_000;
+export const RESTORE_CHUNK_BYTES=STATE_PART_BYTES;
 const catalog=new Map(rawWords.map(w=>[w.id,w]));
 const bytes=(value:string)=>new TextEncoder().encode(value).byteLength;
 
 export const backupStateSchema=z.object({
  grammar:grammarStateSchema.optional(),
  settings:settingsSchema,
- progress:z.record(z.string(),progressSchema).refine(v=>Object.keys(v).length<=5000,'단어 기록은 최대 5,000개까지 복원할 수 있어요.'),
- sessions:z.record(z.string().uuid(),sessionSchema).refine(v=>Object.keys(v).length<=10000,'학습 회차는 최대 10,000개까지 복원할 수 있어요.'),
+ progress:z.record(z.string(),progressSchema).refine(v=>Object.keys(v).length<=STATE_COUNTS.progress,'단어 기록은 최대 5,000개까지 복원할 수 있어요.'),
+ sessions:z.record(z.string().uuid(),sessionSchema).refine(v=>Object.keys(v).length<=STATE_COUNTS.sessions,'학습 회차는 최대 10,000개까지 복원할 수 있어요.'),
 }).strict().superRefine((s,c)=>{
  const issue=(message:string)=>c.addIssue({code:'custom',message});
  for(const id of Object.keys(s.progress)){
@@ -31,10 +33,11 @@ export type ParsedBackup={state:State;exportedAt?:string;legacy:boolean};
 const envelope=z.object({format:z.literal('haru-words-v1'),exportedAt:z.string().datetime(),state:backupStateSchema}).strict();
 export function parseBackup(raw:string,maxBytes=MAX_BACKUP_BYTES):ParsedBackup {
  if(bytes(raw)>maxBytes)throw new Error(`백업 파일은 ${maxBytes/1_000_000} MB까지 복원할 수 있어요. 파일을 임의로 나누거나 일부 기록을 지우지 마세요.`);
- let value:unknown;try{value=JSON.parse(raw.replace(/^\uFEFF/,''),(key,v)=>{if(['__proto__','constructor','prototype'].includes(key))throw new Error('Unsafe key');return v;});}catch{throw new Error('올바른 JSON 백업 파일을 선택해 주세요.');}
+ let value:unknown;try{value=JSON.parse(raw.replace(/^\uFEFF/,''));}catch{throw new Error('올바른 JSON 백업 파일을 선택해 주세요.');}
  const wrapped=!!value&&typeof value==='object'&&('format'in value||'state'in value);
  const candidate=wrapped?(value as {state?:unknown}).state:value;
- if(candidate&&typeof candidate==='object')for(const [key,max]of [['progress',5000],['sessions',10000]]as const){const rows=(candidate as Record<string,unknown>)[key];if(rows&&typeof rows==='object'&&Object.keys(rows).length>max)throw new Error(key==='progress'?'단어 기록은 최대 5,000개까지 복원할 수 있어요.':'학습 회차는 최대 10,000개까지 복원할 수 있어요.');}
+ try { assertStateDataKeys(candidate); } catch { throw new Error('올바른 JSON 백업 파일을 선택해 주세요.'); }
+ if(candidate&&typeof candidate==='object')for(const [key,max]of [['progress',STATE_COUNTS.progress],['sessions',STATE_COUNTS.sessions]]as const){const rows=(candidate as Record<string,unknown>)[key];if(rows&&typeof rows==='object'&&Object.keys(rows).length>max)throw new Error(key==='progress'?'단어 기록은 최대 5,000개까지 복원할 수 있어요.':'학습 회차는 최대 10,000개까지 복원할 수 있어요.');}
  // Bound collections before Zod clones them or builds a large issue list.
  assertBackupStructure(value);
  const parsed=wrapped?envelope.safeParse(value):backupStateSchema.safeParse(value);

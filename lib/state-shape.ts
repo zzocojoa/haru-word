@@ -30,8 +30,13 @@ export function createStateSchemas(entryId: z.ZodType<string>, entryLevel?: (id:
     const material = materialText.extend({
         ipa: text.optional(), source: text, attribution: text.optional(), url: z.string().url().refine(v => v.startsWith("https://")).optional()
     }).strict();
+    // Zod's record output drops __proto__. Validate entries first, then define
+    // own data properties with fromEntries so every literal learning sense survives.
+    const senses = z.preprocess(value => value && typeof value === 'object' && !Array.isArray(value)
+        ? Object.entries(value) : null,
+        z.array(z.tuple([z.string().max(2000), sense])).max(100).transform(entries => Object.fromEntries(entries)));
     const progressSchema = z.object({
-        senses: z.record(z.string().max(2000), sense).refine(v => Object.keys(v).length <= 100).optional(), familiarity: familiarity.optional(), familiarityCheck: familiarityCheck.optional(), ...optionalMaterialText, en: result.optional(), ko: result.optional(), sentenceStatus: z.enum(["written", "improve", "unmeasured"]).optional(), sentence: text.optional(), notes: text.optional(), studyDates: z.array(date).max(20000).optional(), lastStudied: date.optional(), needsReview: z.boolean().optional(), personal: personal.optional(), useful: z.boolean().optional(), lastReviewed: date.optional(), encounters: z.array(z.object({
+        senses: senses.optional(), familiarity: familiarity.optional(), familiarityCheck: familiarityCheck.optional(), ...optionalMaterialText, en: result.optional(), ko: result.optional(), sentenceStatus: z.enum(["written", "improve", "unmeasured"]).optional(), sentence: text.optional(), notes: text.optional(), studyDates: z.array(date).max(20000).optional(), lastStudied: date.optional(), needsReview: z.boolean().optional(), personal: personal.optional(), useful: z.boolean().optional(), lastReviewed: date.optional(), encounters: z.array(z.object({
             date, source: z.enum(["reading", "listening"]), text
         }).strict()).max(200).optional()
     }).strict().refine(p => Object.entries(p.senses || {}).every(([meaning, s]) => s.meaning === undefined || s.meaning === meaning), '뜻별 기록이 일치하지 않아요.');

@@ -10,6 +10,9 @@ import { hasSavedModernGrammar } from '@/db/grammar-compatibility';
 import { grammarProgressSchema } from '@/lib/grammar/model';
 import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { hasSavedStructuredFeedback } from '@/db/feedback-compatibility';
+import { assertStateDataKeys, hasLiteralPrototypeSense, supportsSenseKeys, SENSE_KEY_UPGRADE_MESSAGE } from '@/lib/state-data-keys';
+import { hasSavedLiteralPrototypeSense } from '@/db/sense-key-compatibility';
+import { StateCapacityError } from '@/db/state-capacity';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,6 +22,8 @@ export async function GET(request?: Request) {
   if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
   try {
     const grammarVersion = request?.headers.get('x-study-grammar');
+    if (!supportsSenseKeys(request) && await hasSavedLiteralPrototypeSense(database(), user.userId))
+      return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
     const snapshot = await loadStateDocuments(database(), user.userId, grammarVersion === '1' || grammarVersion === '2');
     if (grammarVersion === '1' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
       const legacy = legacyGrammarDocument(grammarProgressSchema.parse(JSON.parse(row.document)));
@@ -45,6 +50,7 @@ export async function PUT(request: Request) {
     const raw = await request.text();
     if (new TextEncoder().encode(raw).byteLength > 1_800_000) return json({ error: '기록이 너무 큽니다. 회차를 나눠 주세요.' }, 413);
     body = JSON.parse(raw);
+    assertStateDataKeys(body);
   } catch {
     return json({ error: '요청 형식이 잘못되었습니다.' }, 400);
   }
@@ -56,6 +62,8 @@ export async function PUT(request: Request) {
   }
   try {
     const db = database();
+    if (!supportsSenseKeys(request) && (hasLiteralPrototypeSense(data.progress) || await hasSavedLiteralPrototypeSense(db, user.userId, Object.keys(data.progress))))
+      return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
     if (!supportsFeedbackStructure(request) && (hasStructuredFeedback(data) ||
       await hasSavedStructuredFeedback(db, user.userId, Object.keys(data.sessions), Object.keys(data.grammar ?? {})))) {
       console.warn(JSON.stringify({ event: 'feedback_client_outdated', version: 1 }));
@@ -94,7 +102,11 @@ export async function PUT(request: Request) {
     }
     console.info(JSON.stringify({ event: 'learning_state_saved', wordCount: Object.keys(data.progress).length, sessionCount: Object.keys(data.sessions).length, grammarCount: Object.keys(data.grammar ?? {}).length, durationMs: Date.now() - started }));
     return json({ revision: data.revision + 1 });
-  } catch {
+  } catch (error) {
+    if (error instanceof StateCapacityError) {
+      console.warn(JSON.stringify({ event: 'learning_state_capacity_rejected', code: error.code, durationMs: Date.now() - started }));
+      return json({ error: error.message, code: error.code }, 413);
+    }
     console.error(JSON.stringify({ event: 'learning_state_save_failed', durationMs: Date.now() - started, wordCount: Object.keys(data.progress).length, sessionCount: Object.keys(data.sessions).length }));
     return json({ error: '저장하지 못했습니다. 입력은 화면에 남아 있습니다. 다시 저장해 주세요.' }, 503);
   }

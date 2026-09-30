@@ -1,6 +1,5 @@
 import type { State } from './learning';
-export const LARGE_BACKUP_BYTES = 20_000_000;
-export const RESTORE_PART_BYTES = 1_800_000;
+export { STATE_BACKUP_BYTES as LARGE_BACKUP_BYTES, STATE_PART_BYTES as RESTORE_PART_BYTES } from './state-limits';
 export const RESTORE_JOB_TTL = 24 * 60 * 60 * 1000;
 export const RESTORE_RECEIPT_TTL = 7 * RESTORE_JOB_TTL;
 export type RestorePart = { kind: 'progress' | 'sessions' | 'grammar'; bytes: number; hash: string; count: number };

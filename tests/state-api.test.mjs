@@ -18,7 +18,7 @@ await build({
   } }],
 });
 const sqlite = new DatabaseSync(':memory:');
-for (const file of ['drizzle/0000_worthless_doctor_faustus.sql', 'drizzle/0001_ai_daily_usage.sql']) sqlite.exec(readFileSync(file, 'utf8'));
+for (const file of ['drizzle/0000_worthless_doctor_faustus.sql', 'drizzle/0001_ai_daily_usage.sql', 'drizzle/0003_bright_zarda.sql']) sqlite.exec(readFileSync(file, 'utf8'));
 let failureAt = -1, batches = 0;
 const db = {
   prepare(sql) { return { bind(...args) { return {

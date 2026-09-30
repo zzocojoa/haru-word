@@ -11,7 +11,7 @@ const {analyzeBackup,analyzeExport}=await import('../work/restore-job-tests/back
 const {manifestSchema,parsePart}=await import('../work/restore-job-tests/restore-validation.mjs');
 const {sha256}=await import('../work/restore-job-tests/restore-protocol.mjs');
 const sqlite=new DatabaseSync(':memory:');sqlite.exec('PRAGMA foreign_keys=ON');
-for(const file of ['0000_worthless_doctor_faustus','0001_ai_daily_usage','0002_old_golden_guardian'])sqlite.exec(readFileSync(`drizzle/${file}.sql`,'utf8'));
+for(const file of ['0000_worthless_doctor_faustus','0001_ai_daily_usage','0002_old_golden_guardian','0003_bright_zarda'])sqlite.exec(readFileSync(`drizzle/${file}.sql`,'utf8'));
 let failAt=-1;
 const db={prepare(sql){return {bind(...args){return {sql,args,async first(){return sqlite.prepare(sql).get(...args)||null},async all(){return {results:sqlite.prepare(sql).all(...args)}},async run(){const r=sqlite.prepare(sql).run(...args);return {meta:{changes:Number(r.changes)}}}}}}},async batch(statements){sqlite.exec('BEGIN');try{const result=statements.map((s,i)=>{if(i===failAt)throw Error('injected');const r=sqlite.prepare(s.sql).run(...s.args);return {meta:{changes:Number(r.changes)}}});sqlite.exec('COMMIT');return result}catch(e){sqlite.exec('ROLLBACK');throw e}}};
 const raw=state=>JSON.stringify({format:'haru-words-v1',exportedAt:'2026-09-24T00:00:00.000Z',state});

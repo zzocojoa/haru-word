@@ -54,6 +54,7 @@ module.exports = [
   "startup-performance-qa.cjs",
   "startup-render-qa.cjs",
   "startup-lifecycle-qa.cjs",
+  "state-roundtrip-qa.cjs",
   "study-clock-race-qa.cjs",
   "study-controller-render-qa.cjs",
   "study-date-qa.cjs",

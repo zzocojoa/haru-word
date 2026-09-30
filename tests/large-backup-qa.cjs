@@ -61,7 +61,11 @@ const envelope=state=>JSON.stringify({format:'haru-words-v1',exportedAt:'2026-09
   for(let i=0;i<boundaryData.parts.length;i++){const r=await bc.request.put(base+'/api/state/restore/jobs/'+bj.id+'/chunks/'+i,{headers:{'Content-Type':'application/json'},data:boundaryData.parts[i]});assert.equal(r.status(),200,await r.text());}
   while(bj.status!=='ready')bj=await post('/api/state/restore/jobs/'+bj.id+'/validate');
   await post('/api/state/restore/jobs/'+bj.id+'/commit');const boundResponse=await bc.request.get(base+'/api/state');assert.equal(boundResponse.status(),200);assert.deepEqual((await boundResponse.json()).state,boundary);
-  timings.near20MbRestoreAndLoadMs=Date.now()-start;const bp=await bc.newPage();await bp.goto(base);await bp.getByText('서버에 저장됨',{exact:true}).waitFor();await bp.getByRole('tab',{name:'학습 기록',exact:true}).click();await bp.getByRole('button',{name:'기록 관리',exact:true}).waitFor();await bc.close();
+  timings.near20MbRestoreAndLoadMs=Date.now()-start;
+  const capacitySnapshot=await (await bc.request.get(base+'/api/state')).json();start=Date.now();
+  const capacitySave=await bc.request.put(base+'/api/state',{data:{revision:capacitySnapshot.revision,settings:{...capacitySnapshot.state.settings,dailyGoal:4},progress:{},sessions:{}}});
+  assert.equal(capacitySave.status(),200,await capacitySave.text());timings.near20MbSaveMs=Date.now()-start;
+  const bp=await bc.newPage();await bp.goto(base);await bp.getByText('서버에 저장됨',{exact:true}).waitFor();await bp.getByRole('tab',{name:'학습 기록',exact:true}).click();await bp.getByRole('button',{name:'기록 관리',exact:true}).waitFor();await bc.close();
   checks.push('19.9 MB of real record content commits, loads, and renders against the local Worker');
   // API authorization/limits are verified against actual handlers, not UI controls.
   const other=await browser.newContext({extraHTTPHeaders:accountHeaders('large_other')});assert.equal((await other.request.get(base+'/api/state/restore/jobs/'+pending.id)).status(),404);await other.close();
