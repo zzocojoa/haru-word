@@ -75,6 +75,7 @@ async function openWork(page) {
     assert.deepEqual(await get(limit), before);
     for (const width of [320, 390, 1440]) {
       await lp.setViewportSize({ width, height: 844 });
+      await dialog.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished.catch(() => {}))));
       assert.equal(await lp.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
       assert.equal(await dialog.locator('.dialog-scroll').evaluate(el => el.scrollWidth > el.clientWidth + 1), false);
       await lp.screenshot({ path: `${out}/capacity-${width}.png` });

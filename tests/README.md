@@ -55,6 +55,7 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - `history-performance-qa.cjs`: 365/1,825개 가상 회차를 별도 로컬 계정에 생성하고 3회씩 조회·탭·설정 저장을 측정합니다. Chromium 390px와 CPU 4배 지연이며 운영 성능/Safari 성능 검증이 아닙니다. 이 측정 중 다른 브라우저 검사는 실행하지 않는 것이 좋습니다. 결과는 `outputs/history-performance/`입니다.
 
 - `toolchain.test.mjs`: 보안 패치한 compiler를 구형 Drizzle 로더가 사용해 TypeScript CJS/ESM을 변환하고 실행하는지 검사합니다. 단순 버전 검사와 구분합니다.
+- `dependency-security.test.mjs`: percent-encoded 호스트의 대소문자 정규화와 Undici BalancedPool의 사용자 connector 함수·거절 보존을 검사합니다. 외부 네트워크·실제 인증서를 사용하지 않으며 실제 TLS 검증 전체를 대체하지 않습니다.
 - `startup-performance-qa.cjs`: 캐시 없는 390px Chromium·CPU 4배 지연의 초기 화면 3회와 자산 크기를 측정합니다. 다른 브라우저 검사를 함께 실행하지 마세요. 실기기·운영망 성능이 아닙니다. 최종 광역 결과는 `outputs/final-audit/`입니다.
 
 - `state-delta.test.mjs`: 변경하지 않은 기록은 직렬화하지 않고, 값이 같은 복제본은 전송하지 않습니다. 실제 학습·이월·실패 후 재시도의 변경분으로 다음 상태를 재구성하고 기존 상태 불변성을 확인합니다.
