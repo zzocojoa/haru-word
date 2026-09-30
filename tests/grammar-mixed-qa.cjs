@@ -33,6 +33,21 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
   await page.reload();await library();await page.locator('.grammar-group').filter({has:page.locator('h3',{hasText:'동사를 돕는 표현'})}).locator('summary').click();await page.locator('.grammar-tile').filter({has:page.locator('b',{hasText:/^기본 조동사$/})}).click();assert.equal(await sentence.inputValue(),'I am now reading a book.');
   const saved=(await snapshot()).state.grammar.auxiliary;assert.equal(saved.contentVersion,2);assert.deepEqual(saved.answers,p.answers);assert.equal(saved.schedule,undefined);
   await click('수업 목록');await page.locator('.grammar-tile').filter({has:page.locator('b',{hasText:/^명사$/})}).click();await page.getByRole('button',{name:'생각한 뒤 설명 확인',exact:true}).waitFor();assert.equal((await snapshot()).state.grammar.noun.contentVersion,undefined);
+  for(const [text,width] of [['I am reading now.',320],['Now I am reading.',390],['I am now reading.',1440]]){
+   const latest=await snapshot(),modern={...structuredClone(p),contentVersion:3,questionIds:p.questionIds.map(id=>id.replace(':2:',':3:'))};delete modern.answers.q3;
+   assert.equal((await context.request.put(base+'/api/state',{headers:{'X-Study-Grammar':'3'},data:{revision:latest.revision,progress:{},sessions:{},grammar:{auxiliary:modern}}})).status(),200);
+   await page.reload();await library();await page.locator('.grammar-group').filter({has:page.locator('h3',{hasText:'동사를 돕는 표현'})}).locator('summary').click();await page.locator('.grammar-tile').filter({has:page.locator('b',{hasText:/^기본 조동사$/})}).click();
+   await page.setViewportSize({width,height:900});
+   for(const token of text.slice(0,-1).split(' '))await page.locator('.grammar-options button').filter({hasText:new RegExp('^'+token+'$','i')}).click();
+   assert.equal(await page.locator('.grammar-order-answer').innerText(),text);
+   const large=width===320?await page.addStyleTag({content:'html{font-size:200%!important}'}):undefined;
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+   await page.getByRole('button',{name:'정답 확인',exact:true}).focus();await page.keyboard.press('Enter');
+   await page.locator('.grammar-feedback[data-tone="success"]').waitFor();await until(async()=>(await snapshot()).state.grammar.auxiliary.answers.q3?.first===text);
+   if(width===320){await page.addScriptTag({path:axePath});assert.deepEqual(await page.evaluate(async()=>(await axe.run(document,{runOnly:['wcag2a','wcag2aa']})).violations.map(v=>v.id)),[]);}
+   await large?.evaluate(el=>el.remove());
+  }
+  console.log('PASS v3 three now positions, final punctuation/casing, 320/390/1440/200%, keyboard/axe and persisted first answers');
   console.log('PASS v1/v2 pinned, legacy now explanation, 320/390/1440/200%, keyboard/axe, failed save retry and reconnect');
  }finally{await closeBrowser(browser);}
 })().catch(e=>{console.error(e);process.exitCode=1;});

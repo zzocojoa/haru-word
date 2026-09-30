@@ -174,3 +174,5 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 문법 v3의 버전 협상과 단계적 게시·롤백은 [GRAMMAR_PRACTICE_V3.md](GRAMMAR_PRACTICE_V3.md)를 따른다.
 
 실제 AI 평가 실행·판정·중단 복구는 [ENGLISH_ACCURACY_EVALUATION.md](ENGLISH_ACCURACY_EVALUATION.md)를 따른다.
+
+2026-09-30 실제 120회 평가와 프롬프트 게시 보류 판정은 [ENGLISH_ACCURACY_RESULTS.md](ENGLISH_ACCURACY_RESULTS.md)에 기록했다.
