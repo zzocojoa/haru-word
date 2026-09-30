@@ -9,16 +9,17 @@ import { structureInstruction } from './sentence-structure';
 import type { LessonId } from './grammar/model';
 import type { FeedbackProviders } from './feedback-fallback';
 import { FEEDBACK_MODEL, GROQ_FEEDBACK_MODEL } from './sentence-feedback';
+import { candidateWordInstruction, candidateGrammarInstruction } from './english-accuracy-candidate';
 
 export type AccuracyProvider = 'google' | 'groq';
 export type AccuracyCase = { id: string; sentence: string } &
   ({ domain: 'word'; word: string; pos: string; meaning: string } | { domain: 'grammar'; lessonId: LessonId });
 export const accuracyCases = fixture.cases as AccuracyCase[];
 export const accuracyModels = { google: FEEDBACK_MODEL, groq: GROQ_FEEDBACK_MODEL };
-export function accuracyRequest(sample: AccuracyCase) {
+export function accuracyRequest(sample: AccuracyCase, round: 1 | 2 = 1) {
   return sample.domain === 'word'
-    ? { input: { word: sample.word, pos: sample.pos, meaning: sample.meaning, sentence: sample.sentence }, instruction: systemInstruction }
-    : { input: grammarFeedbackInput(lessonForVersion(LESSON_MAP.get(sample.lessonId)!, 3), sample.sentence), instruction: grammarInstruction };
+    ? { input: { word: sample.word, pos: sample.pos, meaning: sample.meaning, sentence: sample.sentence }, instruction: round === 2 ? candidateWordInstruction : systemInstruction }
+    : { input: grammarFeedbackInput(lessonForVersion(LESSON_MAP.get(sample.lessonId)!, 3), sample.sentence), instruction: round === 2 ? candidateGrammarInstruction : grammarInstruction };
 }
 export async function accuracyPromptHash(instruction: string) {
   const bytes = new TextEncoder().encode(instruction + structureInstruction);
@@ -27,8 +28,8 @@ export async function accuracyPromptHash(instruction: string) {
 }
 // Direct provider transports, production input/instructions/timeouts; no fallback,
 // no retries, no learner-state writes and no application policy changes.
-export async function evaluateAccuracyCase(config: FeedbackProviders, provider: AccuracyProvider, sample: AccuracyCase, fetcher: typeof fetch = fetch) {
-  const { input, instruction } = accuracyRequest(sample);
+export async function evaluateAccuracyCase(config: FeedbackProviders, provider: AccuracyProvider, sample: AccuracyCase, fetcher: typeof fetch = fetch, round: 1 | 2 = 1) {
+  const { input, instruction } = accuracyRequest(sample, round);
   const feedback = provider === 'google'
     ? await generateTutorFeedback(config.google_api!, input, instruction, fetcher, GOOGLE_PRIMARY_TIMEOUT_MS, config.signal)
     : await generateGroqFeedback(config.groq_api!, input, instruction, fetcher, config.signal);

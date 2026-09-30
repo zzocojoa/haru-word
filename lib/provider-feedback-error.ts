@@ -1,11 +1,13 @@
 import { FEEDBACK_ISSUES, type FeedbackIssue, type FeedbackIssueCode } from './feedback-issue';
+import type { FeedbackValidationStage } from './provider-feedback-contract';
 
 export class FeedbackError extends Error {
   readonly code: FeedbackIssueCode;
   readonly status: number;
   readonly issue: FeedbackIssue;
-  constructor(code: FeedbackIssueCode, status: number, details: Omit<FeedbackIssue, 'code'> = {}) {
-    super(FEEDBACK_ISSUES[code][1]); this.code = code; this.status = status; this.issue = { code, ...details };
+  readonly validationStage?: FeedbackValidationStage;
+  constructor(code: FeedbackIssueCode, status: number, details: Omit<FeedbackIssue, 'code'> = {}, validationStage?: FeedbackValidationStage) {
+    super(FEEDBACK_ISSUES[code][1]); this.code = code; this.status = status; this.issue = { code, ...details }; this.validationStage = validationStage;
   }
 }
 const record = (value: unknown): Record<string, unknown> => value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};

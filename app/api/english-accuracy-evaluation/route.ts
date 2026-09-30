@@ -32,11 +32,12 @@ export async function POST(request: Request) {
   if (!(provider === 'google' ? env.google_api : env.groq_api)?.trim()) return json({ code: 'evaluation_key_missing' }, 503);
   const started = Date.now();
   try {
-    const result = await evaluateAccuracyCase({ google_api: env.google_api, groq_api: env.groq_api, signal: request.signal }, provider, sample);
+    const result = await evaluateAccuracyCase({ google_api: env.google_api, groq_api: env.groq_api, signal: request.signal }, provider, sample, fetch, round);
     return json({ ...result, caseId, provider, round, durationMs: Date.now() - started });
   } catch (error) {
     const known = error instanceof FeedbackError;
     return json({ caseId, provider, round, code: known ? error.code : 'evaluation_internal',
-      ...(known && error.issue.providerStatus !== undefined ? { providerStatus: error.issue.providerStatus } : {}), durationMs: Date.now() - started }, known ? error.status : 503);
+      ...(known && error.issue.providerStatus !== undefined ? { providerStatus: error.issue.providerStatus } : {}),
+      ...(known && error.code.endsWith('invalid_response') && error.validationStage ? { validationStage: error.validationStage } : {}), durationMs: Date.now() - started }, known ? error.status : 503);
   }
 }

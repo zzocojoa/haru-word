@@ -11,6 +11,7 @@ mkdirSync('work/accuracy-tests', { recursive: true });
 await build({entryPoints:['lib/english-accuracy.ts','app/api/english-accuracy-evaluation/route.ts'],outdir:'work/accuracy-tests',entryNames:'[name]',outExtension:{'.js':'.mjs'},bundle:true,platform:'node',format:'esm',logLevel:'silent',plugins:[{name:'environment',setup(b){b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'env',namespace:'stub'}));b.onLoad({filter:/.*/,namespace:'stub'},()=>({contents:'export const env=globalThis.accuracyEnv',loader:'js'}));}}]});
 const helper=await import('../work/accuracy-tests/english-accuracy.mjs');
 globalThis.accuracyEnv={};
+const accuracyEnvironment=globalThis.accuracyEnv;
 const route=await import('../work/accuracy-tests/route.mjs');
 const fixture=JSON.parse(readFileSync('tests/fixtures/english-accuracy.json','utf8'));
 test('preregistered synthetic set has exact distribution, official references and semantic criteria',()=>{
@@ -34,6 +35,20 @@ test('direct comparison uses a single selected provider even when it fails',asyn
   assert.equal(calls,1);
  }
 });
+
+test('candidate round changes only evaluation instructions; frozen baseline, inputs, models and limits stay intact',async()=>{
+ for(const sample of helper.accuracyCases){
+  const baseline=helper.accuracyRequest(sample),candidate=helper.accuracyRequest(sample,2);
+  assert.deepEqual(candidate.input,baseline.input);assert.notEqual(await helper.accuracyPromptHash(candidate.instruction),await helper.accuracyPromptHash(baseline.instruction));
+  assert.equal('expected' in candidate.input,false);
+ }
+ for(const domain of ['word','grammar'])for(const provider of ['google','groq']){
+  const sample=helper.accuracyCases.find(c=>c.domain===domain),sent=[];
+  for(const round of [1,2])await assert.rejects(helper.evaluateAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,sample,async(_url,init)=>{sent.push(JSON.parse(init.body));return new Response('{}',{status:429});},round));
+  const normalize=r=>{const copy=structuredClone(r);if(provider==='google')delete copy.systemInstruction;else copy.messages[0].content='';return copy;};
+  assert.deepEqual(normalize(sent[0]),normalize(sent[1]));assert.equal(sent.length,2);
+ }
+});
 test('budget counts failed/started attempts, allows only one full second round, never retries',()=>{
  const records=Array.from({length:120},()=>({round:1,status:'failure'}));
  assert.throws(()=>evaluationBudget(records,1));assert.doesNotThrow(()=>evaluationBudget(records,2));
@@ -51,6 +66,22 @@ test('evaluation endpoint is disabled by default, expiring, authenticated and fi
   for(const body of [{caseId:'other',provider:'google',round:1},{caseId:'word-01',provider:'unknown',round:1},{caseId:'word-01',provider:'google',round:3},{caseId:'word-01',provider:'google',round:1,sentence:'arbitrary'}])assert.equal((await route.POST(req(body))).status,400);
   assert.equal((await route.POST(req())).status,503);assert.equal(calls,0);
  }finally{globalThis.fetch=original;delete globalThis.accuracyEnv;}
+});
+
+test('authenticated POST routes each round to its exact prompt and returns safe validation stage without provider text',async()=>{
+ const previous={...accuracyEnvironment},originalFetch=globalThis.fetch,token='c'.repeat(64);
+ Object.assign(accuracyEnvironment,{english_accuracy_token:token,english_accuracy_expires:new Date(Date.now()+3600_000).toISOString(),google_api:'test-only',groq_api:'test-only'});
+ const request=(sample,provider,round)=>new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',headers:{origin:'https://study.example','content-type':'application/json','x-english-accuracy-token':token},body:JSON.stringify({caseId:sample.id,provider,round})});
+ try{
+  for(const domain of ['word','grammar'])for(const provider of ['google','groq'])for(const round of [1,2]){
+   const sample=helper.accuracyCases.find(c=>c.domain===domain);let calls=0,sent;
+   globalThis.fetch=async(_url,init)=>{calls++;sent=JSON.parse(init.body);const text='PRIVATE_INVALID_JSON';return provider==='google'?Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text}]}}]}):Response.json({model:helper.accuracyModels.groq,choices:[{finish_reason:'stop',message:{content:text}}]});};
+   const response=await route.POST(request(sample,provider,round)),body=await response.json(),expected=helper.accuracyRequest(sample,round);
+   assert.equal(response.status,502);assert.equal(body.validationStage,'json_syntax');assert.equal(calls,1);assert.doesNotMatch(JSON.stringify(body),/PRIVATE|test-only/);
+   const text=provider==='google'?sent.systemInstruction.parts[0].text:sent.messages[0].content;
+   assert.ok(text.startsWith(expected.instruction));assert.deepEqual(JSON.parse(provider==='google'?sent.contents[0].parts[0].text:sent.messages[1].content),expected.input);
+  }
+ }finally{globalThis.fetch=originalFetch;for(const key of Object.keys(accuracyEnvironment))delete accuracyEnvironment[key];Object.assign(accuracyEnvironment,previous);}
 });
 test('resume pins fixture, domain prompt and models; second round requires a real revision',()=>{
  const profiles={word:{promptHash:'word',models:{google:'g',groq:'q'}},grammar:{promptHash:'grammar',models:{google:'g',groq:'q'}}};

@@ -49,6 +49,6 @@ gh pr create --repo zzocojoa/haru-word --base main
 
 `Validate (Node 22)`·`Validate (Node 24)` 성공과 코드 검토 후 병합한다. 2026-09-30 현재 계정은 비공개 저장소의 브랜치 보호 API에서 플랜 제한(HTTP 403)을 반환했다. 따라서 필수 검사·PR 병합을 서버에서 강제하지 못하며 직접 확인해야 한다. 공개 전환이나 유료 플랜 변경은 하지 않았다.
 
-GitHub 설정 변경은 앱·DB·API·백업을 바꾸지 않고 마이그레이션이 없다. CI 실패는 병합 준비 실패이며 운영 앱은 기존 Sites 버전을 계속 사용한다. 설정은 해당 커밋을 revert하여 복구한다. 현재 앱 자체의 롤백은 `EDITOR_SAVE_RETRY.md`의 기존 v82 재게시 절차를 따른다.
+GitHub 설정 변경은 앱·DB·API·백업을 바꾸지 않고 마이그레이션이 없다. CI 실패는 병합 준비 실패이며 운영 앱은 기존 Sites 버전을 계속 사용한다. 설정은 해당 커밋을 revert하여 복구한다. 현재 앱의 롤백은 [GRAMMAR_PRACTICE_V3.md](GRAMMAR_PRACTICE_V3.md)를 따른다. v3 활성화 후에는 이전 v82/v84 재게시 대신 v3 지원을 유지하면서 신규 생성만 중단한다.
 
 검사 결과는 GitHub Actions에 기록한다. 운영 저장·충돌·AI 진단은 유지하며 학습 답안이나 API 키를 CI 로그에 추가하지 않는다.
