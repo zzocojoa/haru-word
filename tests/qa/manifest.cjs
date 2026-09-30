@@ -36,6 +36,7 @@ module.exports = [
   "monthly-carryover-repair-qa.cjs",
   "navigation-qa.cjs",
   "purpose-improvements-qa.cjs",
+  "pronunciation-qa.cjs",
   "refactor-lifecycle-qa.cjs",
   "refactor-boundaries-qa.cjs",
   "repeat-learning-qa.cjs",

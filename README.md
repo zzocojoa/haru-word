@@ -20,7 +20,7 @@ AI 교정문의 역할별 구조·해석과 저장·구형 호환·복구 지침
 
 iPhone 홈 화면 실행 시 초기 흰 화면의 원인, 폰트·시작 화면 개선과 검증·롤백은 [STARTUP_RENDERING.md](STARTUP_RENDERING.md)를 참조하세요.
 
-완성된 학습 기능, 출처, 테스트, 보안·롤백 안내는 [OPERATIONS.md](OPERATIONS.md)를 참조하세요. 화면은 한국어이며 전체 3,809개 학습 항목을 제공합니다. 아래는 기반 런타임의 유지보수 문서입니다.
+완성된 학습 기능, 출처, 테스트, 보안·롤백 안내는 [OPERATIONS.md](OPERATIONS.md)를 참조하세요. 사전 발음 우선 정책·뜻 일치 보호·번역 교열과 복구는 [ENGLISH_ACCURACY.md](ENGLISH_ACCURACY.md)를 참조하세요. 화면은 한국어이며 전체 3,809개 학습 항목을 제공합니다. 아래는 기반 런타임의 유지보수 문서입니다.
 
 단어장 내 15개 품사 수업의 읽기·135문제·문장 틀·복습 추천과 신구 진도 호환/배포 지침은 [GRAMMAR_PRACTICE_V2.md](GRAMMAR_PRACTICE_V2.md)를 참조하세요. 기존 90문제(v1)와 초기 구조는 [GRAMMAR_LEARNING.md](GRAMMAR_LEARNING.md)에 보관합니다.
 

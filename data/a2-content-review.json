@@ -4472,9 +4472,17 @@
         },
         {
           "id": "8380ffd0a911c786",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "76ff6c64822beacb31a653df1b6770d3c801012f2d807d19af813bee6594ba08",
-          "afterHash": "76ff6c64822beacb31a653df1b6770d3c801012f2d807d19af813bee6594ba08"
+          "afterHash": "5a7a57f9dd6b8b8063496967e5610030be797cf09e50810b3d37b23209cec9e0",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "76ff6c64822beacb31a653df1b6770d3c801012f2d807d19af813bee6594ba08",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ],
+          "reason": "2026-09-30 학습 정확도 교열"
         },
         {
           "id": "065ff1cf1e3b5b93",

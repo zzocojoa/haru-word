@@ -2,7 +2,8 @@
 import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
 import { Check } from "lucide-react";
 import { SentenceFeedbackPanel } from "../sentence-feedback";
-import { DictionaryLinks, Speak } from "../ui";
+import { DictionaryLinks } from "../ui";
+import { WordPronunciation } from '../word-pronunciation';
 import type { StudySessionController } from "./use-study-session-controller";
 type SentenceStageProps = Pick<
   StudySessionController,
@@ -48,12 +49,12 @@ export function SentenceStage({
       <div className="sentence-target">
         <h3 lang="en">
           {word.word}
-          <Speak text={word.word} />
         </h3>
         <span>
           <PartOfSpeechLabel pos={word.pos} /> · {s.records[id!]?.meaning || content.meaning}
         </span>
       </div>
+      <WordPronunciation word={word} meaning={s.records[id!]?.meaning || content.meaning}/>
       <GrammarTermsHelp pos={word.pos} />
       <label htmlFor="my-sentence">내 영어 문장</label>
       <textarea

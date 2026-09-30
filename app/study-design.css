@@ -1,4 +1,9 @@
 /* Shared study UI: white, charcoal and lime. */
+.word-pronunciation { margin: 8px 0 12px; font-size: .875rem; line-height: 1.6; }
+.word-pronunciation .small-note { margin: 6px 0; }
+.pronunciation-variants { display: grid; gap: 4px; overflow-wrap: anywhere; }
+.dictionary-audio { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; text-decoration: underline; }
+.device-audio { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; white-space: normal; }
 * {
   box-sizing: border-box;
 }

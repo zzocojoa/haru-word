@@ -3173,8 +3173,15 @@
           "id": "4fc1743b385dfae5",
           "status": "corrected",
           "beforeHash": "a24e3fa33ed1be8ad53767bce4849a4ace731c7f6537121efdec6fd985d87be7",
-          "afterHash": "ee8482939d335fb9fd5ecc82e0335f792f1b9502664bc28e82a5fdc4ef304d97",
-          "reason": "be mistaken 형용사 대신 타동사 mistake 용법"
+          "afterHash": "b20ae3a8b37adfbcaf90cbd3657240bb9a0cb37da3aa1d8cc4fbdb0cf454ade5",
+          "reason": "be mistaken 형용사 대신 타동사 mistake 용법; 2026-09-30 학습 정확도 교열",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "ee8482939d335fb9fd5ecc82e0335f792f1b9502664bc28e82a5fdc4ef304d97",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "96cc3e7f2275bce2",

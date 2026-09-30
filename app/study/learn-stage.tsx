@@ -1,7 +1,8 @@
 "use client";
 import { POS } from "@/lib/learning";
 import { ArrowRight, BookOpen, PencilLine } from "lucide-react";
-import { DictionaryLinks, Speak } from "../ui";
+import { DictionaryLinks } from "../ui";
+import { WordPronunciation } from '../word-pronunciation';
 import { ExpressionLine } from "../expression-line";
 import { ExpressionFields } from "../expression-fields";
 import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
@@ -52,9 +53,8 @@ export function LearnStage({
         </span>
         <h3 lang="en">
           {word.word}
-          <Speak text={word.word} />
         </h3>
-        {content.ipa && <span className="phonetic">{content.ipa}</span>}
+        <WordPronunciation word={word} meaning={meaning}/>
       </div>
       <GrammarTermsHelp pos={word.pos} />
       <div className="meaning-section">
@@ -139,9 +139,6 @@ export function LearnStage({
       >
         뜻을 확인했어요 <ArrowRight size={17} />
       </button></div>
-      <p className="small-note">
-        음성은 기기의 미국식 영어 음성입니다. 사전 발음과 함께 확인하세요.
-      </p>
     </>
   );
 }

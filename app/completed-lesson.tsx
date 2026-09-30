@@ -5,7 +5,8 @@ import { DialogHeader,DialogTitle,DialogDescription } from "@/components/ui/dial
 import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { studyContent } from "@/lib/catalog";
 import { POS,dailyReplaySources,entryIdFor,targetIdentity,type State,type Word } from "@/lib/learning";
-import { DictionaryLinks,Speak } from "./ui";
+import { DictionaryLinks } from "./ui";
+import { WordPronunciation } from './word-pronunciation';
 import { ExpressionLine } from "./expression-line";
 import { GrammarTermsHelp, PartOfSpeechLabel } from './grammar-terms';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -31,7 +32,7 @@ export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepea
   </nav>}
   <div ref={scrollBody} className="dialog-scroll">
   {item&&word&&content?<>{sessions[0]?.kind==='practice'&&<p className="small-note">원래 일일 학습일이 변경되어, 이 다시 학습 회차에 보관된 단어를 보여 드려요.</p>}
-   <div className="completed-word"><div className="word-stage compact"><span className="word-index">{word.personal?'개인 추가':`OXFORD ${word.level}`} · <PartOfSpeechLabel pos={word.pos}/></span><h3 lang="en">{word.word}<Speak text={word.word}/></h3>{content.ipa&&<span className="phonetic">{content.ipa}</span>}</div>
+   <div className="completed-word"><div className="word-stage compact"><span className="word-index">{word.personal?'개인 추가':`OXFORD ${word.level}`} · <PartOfSpeechLabel pos={word.pos}/></span><h3 lang="en">{word.word}</h3><WordPronunciation word={word} meaning={item.record.meaning}/></div>
     <GrammarTermsHelp pos={word.pos}/>
     <p className="eyebrow">그날 공부한 뜻</p><p className="review-meaning">{item.record?.meaning||'기록된 뜻이 없어요.'}</p>
     <ExpressionLine expression={content.expression} translation={content.expressionTranslation}/>

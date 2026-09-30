@@ -1580,8 +1580,15 @@
           "id": "15347df9a6d7f52f",
           "status": "corrected",
           "beforeHash": "75f8998ea95c68f07701f0cf9038a679082eacaba26fc25e86163490b7e498c5",
-          "afterHash": "7b25606f3d54b8a776d76e8c3f87453afac4046ff426a823b5f8af99a933a96d",
-          "reason": "예문의 드럼 뜻 선택"
+          "afterHash": "342ef9cb1d0724dd5b7c84aecca7216bc686c240d9e346243493118c91b49ec2",
+          "reason": "예문의 드럼 뜻 선택; 2026-09-30 학습 정확도 교열",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "7b25606f3d54b8a776d76e8c3f87453afac4046ff426a823b5f8af99a933a96d",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "6c39eb0e50cd93b1",
@@ -3429,8 +3436,15 @@
           "id": "a03661502bd2610e",
           "status": "corrected",
           "beforeHash": "468b324633470cf3b1f311918738e640aa7651266430e651f459e843dab23362",
-          "afterHash": "c214759c4c4f323955210b8e0dbbb6994346b9deaab6b0932f93dc592336879e",
-          "reason": "부정 동조를 독립적으로 예시"
+          "afterHash": "46b870d561b2d48c0742ca76e1cc3fc68e5f2fb3e9492853545fecb033fda411",
+          "reason": "부정 동조를 독립적으로 예시; 2026-09-30 학습 정확도 교열",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "c214759c4c4f323955210b8e0dbbb6994346b9deaab6b0932f93dc592336879e",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "49afaef536e232a3",
@@ -4368,8 +4382,15 @@
           "id": "cc38a2903489d6dc",
           "status": "corrected",
           "beforeHash": "08885f0cf0d391d6c251893ff7cceecda5a79d274cd32b6fcbdb14b0096e604e",
-          "afterHash": "b62b17d84ccf2c57a020f8697bde27ddc033b42c84eef714b692fa8d9624954d",
-          "reason": "예문의 다시 알려주다 뜻 선택"
+          "afterHash": "2fb137ce25878e182b8226f1398e8734dce80efc04c9b830b4823dc0a628a8ae",
+          "reason": "예문의 다시 알려주다 뜻 선택; 2026-09-30 학습 정확도 교열",
+          "revisions": [
+            {
+              "reviewedAt": "2026-09-30",
+              "previousAfterHash": "b62b17d84ccf2c57a020f8697bde27ddc033b42c84eef714b692fa8d9624954d",
+              "reason": "한국어가 특정한 나이를 영어에도 명시; 직접 작성 예문"
+            }
+          ]
         },
         {
           "id": "59244f74d776297d",
