@@ -84,7 +84,7 @@ async function main() {
           if (response.ok && result.promptHash === promptHash && result.caseId === sample.id && result.provider === provider && result.feedback?.original === sample.sentence && result.feedback.model === attempt.expectedModel) {
             attempt.status = 'response'; attempt.feedback = result.feedback; attempt.durationMs = result.durationMs;
           } else { attempt.status = 'failure'; attempt.code = /^[a-z_]{1,60}$/.test(result.code ?? '') ? result.code : 'evaluation_invalid_response'; attempt.providerStatus = result.providerStatus;
-            if (['envelope','model','content_type','content_limit','json_syntax','fields','structure'].includes(result.validationStage)) attempt.validationStage = result.validationStage; }
+            if (['envelope','model','content_type','content_limit','json_syntax','fields','structure','judgment'].includes(result.validationStage)) attempt.validationStage = result.validationStage; }
         } catch { attempt.status = 'failure'; attempt.code = 'evaluation_transport'; }
         attempt.finishedAt = new Date().toISOString(); atomicJson(ledgerPath, ledger);
         if (ledger.attempts.length % 10 === 0) console.log(JSON.stringify({ attempts: ledger.attempts.length, responses: ledger.attempts.filter(r => r.status === 'response').length }));
