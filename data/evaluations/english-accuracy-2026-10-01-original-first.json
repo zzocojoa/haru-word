@@ -1,0 +1,4684 @@
+{
+  "schemaVersion": 1,
+  "evaluatedAt": "2026-10-01",
+  "purpose": "Synthetic pilot; not general English accuracy certification",
+  "sourceCommit": "d02d7a95dbdfbd392e113ac10e10d073f6103f47",
+  "siteVersion": 89,
+  "environmentRevision": 20,
+  "comparison": "original-first",
+  "round": 3,
+  "calls": 120,
+  "previousCalls": 240,
+  "totalCalls": 360,
+  "maxCalls": 360,
+  "retries": 0,
+  "fallback": false,
+  "fixtureHash": "02a84a0c86252524e2627cbf7cd69f8d725ade70ebbf107c8aed986eabcd8e54",
+  "fixtureContentHash": "76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a",
+  "previousLedgerHash": "0e6a30364b116d5eae393c298738211a3773a78336923369546c628fd9e91aa6",
+  "ledgerHash": "63e648f649d9af4ddadbe8bd5d48e7c33cc35324ba4dce6c8ead3e8cc597253d",
+  "blindHash": "28b331cbbb5333e70bb43409fc21370e6d4fbdee09ab8d9eb8719cddc4bda1bd",
+  "promptHashes": {
+    "word": "8e0d2eaa0da8e4a16a423b7dcdd419bf48a61c2637d4d94f99b1f09f361c5b95",
+    "grammar": "a19516ee941e09c5fc3b5ed1846de18e8d8d8802a24a8d5518fb6024756674c1"
+  },
+  "requestHashes": {
+    "word-01": "9f6b6e0b7f4c0ea3d9ad7000e0081495221e9894cb9d565e2ff8cf7f3cbddb57",
+    "word-02": "0b2c7514543912d1a8aeb278bc174398bdd8e2bdce85baf7e93b718864d47108",
+    "word-03": "fda3377de276fb2ba316ea5bb7037eb6ffe9dc0aa9c90909bf754a4e03626faf",
+    "word-04": "2813fbb260d15f3a37866cb8729d63b40029fd7421ecd068044de22d25502d46",
+    "word-05": "1ef5d1e69c733fa7de7b1f5f4b5b15b17f7076cb4fc5de7d99ff760cc44360a8",
+    "word-06": "e85e444c0e7a2ee3fa4b5294e764fd0132c679dfb7acbcc65d7fad8c1bc29ba8",
+    "word-07": "6f7ce6a546e9517be05a71b5c964b2cf348f52cae348f13a1da7275302f8b2b2",
+    "word-08": "3a5b8ebfaf446d1c49acb72b20539ae5ede1883631c9d257c363c01934d53fea",
+    "word-09": "255a84b07758afb87f7468b80e694533e8ebdfdd4efe77571188a5892c4ce672",
+    "word-10": "4a8cb8b09e367531fdf62a8c2da469e80b85910c7ccef6808b05ac1c77d2de7c",
+    "word-11": "1cfb2f2c98e34517c24db3aa19e57e6fb87fc4c017fb840966e0ee15b40cd5d9",
+    "word-12": "289dc85f80783e5c3e8565d1bcd96493abb8c1fb13d37998cab2461fd1aa3959",
+    "word-13": "202272e6735aafe0c9295f262cfc61d7d36533909b1067d4f73dff03675d9532",
+    "word-14": "f288f5d266bb4f94623c14e439b864ca2ca999cd7bcdd27ffd54b29078133094",
+    "word-15": "75bfaf542091ddd3e9ab20a457a32ca45d6b385345f43dc11e15b149c4623ef7",
+    "word-16": "171c95bab6f829dbe04d77d1f752808e3a21f057cea661fa56a18ac410645cf0",
+    "word-17": "d789419d834c17c3936d78ebe6ef1b754834cf2c21ab5f7209db340f8a5ef61a",
+    "word-18": "347d2735d13c70c81197914517be82c05b6b95613f24a8084bc842042089763c",
+    "word-19": "a6af0f450e4ef57ea4f0b1d5e32316eed16bb9d1363933db1d7795d1078aae31",
+    "word-20": "150b9137c73f4b279dcae8ec316bc91e69f18b1fdfd3c73ce023dd844ec4e0dd",
+    "word-21": "2169fc23256713b7404f064f2958a80f5ac32b977beefe178d6a0e0ceb7ee066",
+    "word-22": "e1dd95cb8317cc49fbd67154d02821f66fd46d2926a38e5b471857fb6fd1f766",
+    "word-23": "26898837bf85da746565b2472e477112f817890f7558401e44e4468fc3d738a7",
+    "word-24": "0705f7162317608af1815fb6a56869050ea5c058ecc5b9253cc5d85d95677adb",
+    "word-25": "7eeddf7eedd5fe4420daf15bc8ecf0a11a6b1b77e6bfacfacf407851fdf1fedc",
+    "word-26": "78b348ebb5267ebc581fd7aa59679f68c4a7db29244879380880938563f97492",
+    "word-27": "a627d80fa56a8ba014a3b0449cac84f653f22805b05d5618b0938c59d9eb24a3",
+    "word-28": "1caf850672a7fe2481115905e3a6efaaab4c7e80440f58391126806bb94e31c5",
+    "word-29": "5a5263cf1e31b8e7b711b61cfe49f4d9a3eaa5d65fe741f0e99a6a9906d5b77b",
+    "word-30": "0c3363583acf56ad6a3c309d064a50434a7d53b1a347e698491a6d8bb2f3e2dd",
+    "word-31": "2b6f2a0baf7baeb282e59558a1b5616862197e83d732b80448f8897200009a04",
+    "word-32": "0b4e406421c2fd99732ef6acaa81f893d3f879d1c379c0bcd75a13d194df4b13",
+    "word-33": "4c8e60f7fa227585f1964eea80d2c5d6e358bc475d9eed8727835210565e18fd",
+    "word-34": "1b1b76421ae48bcee772d8cff8d8eb15853f311579c216990679311824ce81c8",
+    "word-35": "a886a8c2f6c9b030821ef6fa7ae33cc54be78c2e33f71ee350a748d58990c676",
+    "word-36": "6791ce3ab9f915d9db9a5cb81972d6754f1e1d4651a4622880e30f41e3066952",
+    "word-37": "ee3dcfc7f1077d9dc397d4c608f52a9f1b15e82b1e4a714ff718197781fea90b",
+    "word-38": "d20e21d3fb6ff7cbc09506fad75c0f2130bcb57e5c2cebb0383f29f08141bd7b",
+    "word-39": "98510ed56202cf117e98c52fc0fc8bf3e52d49bdacbcbb0fe01fe695a814ebc8",
+    "word-40": "d6acf55c635b6d11fb82d549c63368e596664a6ec354f2d49f99b690789e8614",
+    "grammar-41": "58c7a2aaca7ae38e47ac8634cb2c1a02dd6e94f53bb635e864341d7fb7116949",
+    "grammar-42": "0c415643323b7a821e3ef6a7146e1085ce6a30a312004b7a9f68db4c1216a5f1",
+    "grammar-43": "f0c2e7e61615eff7ca1846c34274d1a804af864d16dd996684014adffb49c7f2",
+    "grammar-44": "d73387d08ad017373880602afdb32e7c551001f4b11668d9d57e25a3a17e9c2a",
+    "grammar-45": "c671aef69edca1887be0e584ddf4fcaa09809b15a04b4948a0e0e0a383b23423",
+    "grammar-46": "1363a19f5ab44e69f024bd13bb34ac6ab9e8b3f899bfdb0484614ab0add4add0",
+    "grammar-47": "539c44884fcfa70629e80a47a08343ae968a491f7901d8c2763b50c5a138d108",
+    "grammar-48": "434bfd3f60b36836c756498d15b8247794740f2a19e20421c41c56242aab2e9d",
+    "grammar-49": "2ee434da66b8562c673a0ce90c27c1eb7ff1f7a8a6ca58b7ee519a4c009d2ede",
+    "grammar-50": "48d856c00a7ebd5c207f900ed2c70031886d9d55e55e6b546af6a8c6ce7ca379",
+    "grammar-51": "84131aeae6f685226a8a499ce97ab8467bdd0597400b59c1a47f21ac2c639614",
+    "grammar-52": "d2f3c2476df0262493d0c4ffc22e550123d50f15c793e31a4f7b15dc569eded1",
+    "grammar-53": "b3ae07f31342df635bc0f37148c47395ba14a158e289d82c3e27741ce3286e47",
+    "grammar-54": "5c11f81995da9e2ace50e24839092b7bc70910c83a7e40c421012e250dd65794",
+    "grammar-55": "0ed61c06876fb176ea8c566098dac2f8e33983490fbb6ae53d9a55fbd79b319a",
+    "grammar-56": "bb50b9f25836b71fc8d34b8ea31d097a5b4187b7898e41b235ae81396c72a6e9",
+    "grammar-57": "d4f01b89f784f1668afe436dd6e7d4a08d1e1bc86b5e27968f106a6da0ab60c3",
+    "grammar-58": "c9a87c65e2262e5e044b142dc2294a17d2ce177d9c326d2de3f3e8b0d2ce43bd",
+    "grammar-59": "24a0a3448163a1c4d3b7591661844c4a05aec29b9689180bb09bedf079ce840a",
+    "grammar-60": "11b3dbe289271f33f94a15d5f50a26a32c1c84526dd88f58de8b31785d767c30"
+  },
+  "validationPolicy": "original-judgment-v1",
+  "startedAt": "2026-09-30T15:11:48.397Z",
+  "finishedAt": "2026-09-30T15:26:36.851Z",
+  "review": {
+    "reviewer": "Codex agent; provider/model hidden; not a human linguistic certification",
+    "reviewedAt": "2026-09-30T23:03:53.359Z",
+    "rubric": "Same frozen fixture and baseline semantic rubric. Grammar includes misleading rule explanations; structure includes incorrect component terminology and roles. Correction and structure judged semantically, not exact example strings or noun-phrase segmentation. Qualified preposition objects and grouped prepositional verbs are accepted; unqualified O for a standalone destination preposition phrase is rejected. Insufficient lists require uncertain labels and withheld correction. Article explanations are read in context when vowel sound is explicit.",
+    "checkedReferences": [
+      "https://dictionary.cambridge.org/grammar/british-grammar/nouns-form",
+      "https://dictionary.cambridge.org/grammar/british-grammar/determiners-the-my-some-this.",
+      "https://dictionary.cambridge.org/grammar/british-grammar/subjects",
+      "https://dictionary.cambridge.org/grammar/british-grammar/usually",
+      "https://dictionary.cambridge.org/dictionary/english/go",
+      "https://dictionary.cambridge.org/grammar/british-grammar/prepositional-verbs"
+    ],
+    "providerAndModelHiddenUntilAdjudication": true
+  },
+  "temporaryEndpoint": {
+    "expiredEnvironmentRevision": 21,
+    "expiredDeploymentId": "appgdep_6abd2ae4883481919f32cdd2d4bcafbe",
+    "expiredTokenProbe": {
+      "status": 404,
+      "code": "evaluation_disabled",
+      "includedPreviousEvaluationToken": true
+    },
+    "removedEnvironmentRevision": 22,
+    "removedDeploymentId": "appgdep_6abd2c0aaa048191a88b7d8cf0fe14bd",
+    "finalProbe": {
+      "status": 404,
+      "code": "evaluation_disabled",
+      "confirmedAt": "2026-09-30T23:01:24Z",
+      "includedEvaluationToken": false
+    },
+    "finalKeys": [
+      "google_ai_enabled",
+      "google_api",
+      "grammar_enabled",
+      "grammar_practice_v2_enabled",
+      "grammar_practice_v3_enabled",
+      "groq_api",
+      "large_backup_restore_enabled"
+    ],
+    "candidateEnabled": false,
+    "v3Enabled": true,
+    "providerCallsFromCleanup": 0,
+    "probeRecovery": "The final probe's awaiting-stdin session handle was missing after a tool connection reset. Reopened the non-provider invalid-case probe only; collection was already terminal120 and was never restarted."
+  },
+  "publication": {
+    "threshold": 54,
+    "criticalErrorsAllowed": 0,
+    "promptPublished": false,
+    "gatePassed": false,
+    "decision": "hold candidate; report defects",
+    "criticalUnavailablePolicy": "Unavailable designated cases cannot confirm absence of critical errors; reported separately."
+  },
+  "summaries": {
+    "google": {
+      "model": "gemini-3.1-flash-lite",
+      "attempts": 60,
+      "validResponses": 32,
+      "unavailable": 28,
+      "overallPass": 25,
+      "languageFail": 7,
+      "baselinePass": 25,
+      "previousCandidatePass": 48,
+      "passDifference": 0,
+      "dimensions": {
+        "meaning": {
+          "pass": 27,
+          "fail": 5,
+          "unavailable": 28
+        },
+        "grammar": {
+          "pass": 25,
+          "fail": 7,
+          "unavailable": 28
+        },
+        "correction": {
+          "pass": 28,
+          "fail": 4,
+          "unavailable": 28
+        },
+        "structure": {
+          "pass": 28,
+          "fail": 4,
+          "unavailable": 28
+        }
+      },
+      "failures": {
+        "provider_invalid_response": 9,
+        "provider_unavailable": 3,
+        "provider_precondition": 16
+      },
+      "validationStages": {
+        "structure": 9,
+        "unclassified": 19
+      },
+      "critical": {
+        "designated": 32,
+        "available": 19,
+        "unavailable": 13,
+        "failedCases": 0,
+        "errors": {
+          "approveBadGrammar": 0,
+          "reverseMeaning": 0,
+          "swapRoles": 0
+        }
+      },
+      "checks": {
+        "atLeast54": false,
+        "noDesignatedCriticalErrors": true,
+        "allDesignatedCriticalAssessable": false,
+        "noDecreaseFromBaseline": true
+      },
+      "gatePassed": false
+    },
+    "groq": {
+      "model": "openai/gpt-oss-120b",
+      "attempts": 60,
+      "validResponses": 32,
+      "unavailable": 28,
+      "overallPass": 28,
+      "languageFail": 4,
+      "baselinePass": 18,
+      "previousCandidatePass": 55,
+      "passDifference": 10,
+      "dimensions": {
+        "meaning": {
+          "pass": 30,
+          "fail": 2,
+          "unavailable": 28
+        },
+        "grammar": {
+          "pass": 32,
+          "fail": 0,
+          "unavailable": 28
+        },
+        "correction": {
+          "pass": 32,
+          "fail": 0,
+          "unavailable": 28
+        },
+        "structure": {
+          "pass": 30,
+          "fail": 2,
+          "unavailable": 28
+        }
+      },
+      "failures": {
+        "groq_request": 6,
+        "groq_invalid_response": 22
+      },
+      "validationStages": {
+        "unclassified": 6,
+        "structure": 14,
+        "fields": 8
+      },
+      "critical": {
+        "designated": 32,
+        "available": 16,
+        "unavailable": 16,
+        "failedCases": 0,
+        "errors": {
+          "approveBadGrammar": 0,
+          "reverseMeaning": 0,
+          "swapRoles": 0
+        }
+      },
+      "checks": {
+        "atLeast54": false,
+        "noDesignatedCriticalErrors": true,
+        "allDesignatedCriticalAssessable": false,
+        "noDecreaseFromBaseline": true
+      },
+      "gatePassed": false
+    }
+  },
+  "rubricLimitations": {
+    "cases": [
+      "grammar-52",
+      "grammar-54",
+      "grammar-56"
+    ],
+    "issue": "The frozen fixture accepts appropriate only for target-use judgments on malformed targets; needs_work can be pedagogically justified. Such label mismatches are not necessarily English errors. Fixture and adjudication remain unchanged.",
+    "sensitivity": {
+      "allowedLabels": [
+        "appropriate",
+        "needs_work"
+      ],
+      "googleOverallPass": 25,
+      "groqOverallPass": 28,
+      "affectedLabels": [],
+      "usedForPublication": false
+    }
+  },
+  "rows": [
+    {
+      "label": "B001",
+      "caseId": "grammar-41",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I like jazz.",
+        "explanation": "문장이 문법적으로 완벽하며 의미 전달이 명확합니다. 주어와 동사, 목적어가 잘 갖추어진 기초 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "저는 재즈를 좋아합니다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주어인 '나'를 나타냅니다."
+            },
+            {
+              "text": "like",
+              "role": "V",
+              "explanation": "좋아하다라는 의미의 서술어 동사입니다."
+            },
+            {
+              "text": "jazz",
+              "role": "O",
+              "explanation": "좋아하는 대상인 목적어로서 음악 장르를 지칭합니다."
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 끝을 알리는 마침표입니다."
+            }
+          ],
+          "note": "명사는 문장에서 주어, 목적어, 보어 역할을 할 수 있습니다. 이 문장에서 'jazz'는 'like'의 목적어 자리에 위치한 명사입니다."
+        },
+        "original": "I like jazz.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:21:19.395Z"
+      }
+    },
+    {
+      "label": "B048",
+      "caseId": "grammar-41",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I like jazz.",
+        "explanation": "문장은 주어와 동사, 목적어로 이루어진 간단한 S‑V‑O 구조입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 재즈를 좋아한다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자"
+            },
+            {
+              "text": "like",
+              "role": "V",
+              "explanation": "동사, ~을 좋아한다"
+            },
+            {
+              "text": "jazz",
+              "role": "O",
+              "explanation": "목적어, 재즈(음악 장르)"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 끝 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I like jazz.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:21:25.978Z"
+      }
+    },
+    {
+      "label": "B108",
+      "caseId": "grammar-42",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B099",
+      "caseId": "grammar-42",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I walk to work.",
+        "explanation": "문법적으로 올바른 문장입니다. 현재형 동사 walk와 전치사구 to work가 자연스럽게 연결됩니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 일하러 걸어갑니다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자 자신"
+            },
+            {
+              "text": "walk",
+              "role": "V",
+              "explanation": "주동사, 현재형"
+            },
+            {
+              "text": "to work",
+              "role": "M",
+              "explanation": "목적지 전치사구, 동작 방향"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결점"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I walk to work.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:21:41.162Z"
+      }
+    },
+    {
+      "label": "B021",
+      "caseId": "grammar-43",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B015",
+      "caseId": "grammar-43",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "groq_request",
+      "designatedCritical": true
+    },
+    {
+      "label": "B095",
+      "caseId": "grammar-44",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "My uncle is kind.",
+        "explanation": "주어의 상태를 설명하는 형용사가 자연스럽게 연결되었습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나의 삼촌은 친절하시다.",
+          "parts": [
+            {
+              "text": "My uncle",
+              "role": "S",
+              "explanation": "문장의 주어로 '나의 삼촌'을 의미합니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태를 연결하는 동사입니다."
+            },
+            {
+              "text": "kind.",
+              "role": "C",
+              "explanation": "주어의 성질을 나타내는 형용사 보어입니다."
+            }
+          ],
+          "note": "상태를 설명하는 동사 be 뒤에 성질을 나타내는 형용사를 사용하여 주어를 보충 설명하는 문장입니다."
+        },
+        "original": "My uncle is kind.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:22:03.897Z"
+      }
+    },
+    {
+      "label": "B044",
+      "caseId": "grammar-44",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "groq_request",
+      "designatedCritical": true
+    },
+    {
+      "label": "B117",
+      "caseId": "grammar-45",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B022",
+      "caseId": "grammar-45",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I am now writing.",
+        "explanation": "현재 진행형으로, 주어와 be동사, 부사, 현재분사가 올바르게 연결되었습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 지금 글을 쓰고 있다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자 자신"
+            },
+            {
+              "text": "am",
+              "role": "V",
+              "explanation": "be 동사의 현재형, 진행형 조동사"
+            },
+            {
+              "text": "now",
+              "role": "M",
+              "explanation": "시간 부사, 현재를 강조"
+            },
+            {
+              "text": "writing.",
+              "role": "V",
+              "explanation": "현재분사형 동사, 진행 동작"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I am now writing.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:22:26.918Z"
+      }
+    },
+    {
+      "label": "B032",
+      "caseId": "grammar-46",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "This book is interesting.",
+        "explanation": "제시하신 문장은 주어와 동사, 그리고 보어로 이루어진 완벽한 문장입니다. 'This'는 명사 'book' 앞에서 지시 형용사로 쓰여 특정 책을 가리키는 한정사 역할을 적절히 수행하고 있습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "이 책은 재미있습니다.",
+          "parts": [
+            {
+              "text": "This",
+              "role": "M",
+              "explanation": "명사 book을 수식하는 지시 한정사입니다."
+            },
+            {
+              "text": "book",
+              "role": "S",
+              "explanation": "문장의 주어인 명사입니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태를 연결하는 동사입니다."
+            },
+            {
+              "text": "interesting.",
+              "role": "C",
+              "explanation": "주어의 성질을 설명하는 형용사 보어입니다."
+            }
+          ],
+          "note": "한정사(Determiner)는 명사의 범위를 결정합니다. 'This'는 가까이 있는 대상을 지시하는 한정사로, 명사와 함께 쓰여 문장의 주어를 구체화합니다."
+        },
+        "original": "This book is interesting.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:22:35.364Z"
+      }
+    },
+    {
+      "label": "B077",
+      "caseId": "grammar-46",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "This book is interesting.",
+        "explanation": "문법적으로 올바른 문장이며 의미도 명확합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "이 책은 흥미롭다.",
+          "parts": [
+            {
+              "text": "This book",
+              "role": "S",
+              "explanation": "주어, 책을 가리키는 명사구"
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "be 동사의 현재형, 연결동사"
+            },
+            {
+              "text": "interesting.",
+              "role": "C",
+              "explanation": "보어, 형용사로 주어의 상태를 설명"
+            }
+          ],
+          "note": ""
+        },
+        "original": "This book is interesting.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:22:42.131Z"
+      }
+    },
+    {
+      "label": "B060",
+      "caseId": "grammar-47",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I have an orange.",
+        "explanation": "셀 수 있는 단수 명사 'orange'가 모음(o)으로 시작하므로, 관사 'an'을 사용하는 것이 문법적으로 정확합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 오렌지를 하나 가지고 있습니다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어 '나'입니다."
+            },
+            {
+              "text": "have",
+              "role": "V",
+              "explanation": "동사 '~을 가지고 있다'입니다."
+            },
+            {
+              "text": "an orange.",
+              "role": "O",
+              "explanation": "목적어 '오렌지 하나'입니다. 모음으로 시작하는 단어 앞에 'an'을 씁니다."
+            }
+          ],
+          "note": "단수 명사 앞에서 'a' 또는 'an'을 쓰는 규칙을 잘 지켰습니다. 발음이 모음으로 시작하는 단어(a, e, i, o, u) 앞에는 'a' 대신 'an'을 붙입니다."
+        },
+        "original": "I have an orange.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:22:55.485Z"
+      }
+    },
+    {
+      "label": "B011",
+      "caseId": "grammar-47",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I have an orange.",
+        "explanation": "문장은 주어(I)와 동사(have) 그리고 목적어(an orange)로 구성된 기본 S‑V‑O 형태이며, 관사 an은 모음 소리 앞에 올 때 사용합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 오렌지를 가지고 있다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자 자신"
+            },
+            {
+              "text": "have",
+              "role": "V",
+              "explanation": "동사, 소유를 나타냄"
+            },
+            {
+              "text": "an orange",
+              "role": "O",
+              "explanation": "목적어, 관사 an + 가산 명사 orange"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I have an orange.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:23:02.203Z"
+      }
+    },
+    {
+      "label": "B081",
+      "caseId": "grammar-48",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "The book is under the chair.",
+        "explanation": "문장이 문법적으로 완벽합니다. 'under'는 전치사로서 뒤에 오는 명사 'the chair'와 함께 위치를 나타냅니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그 책은 의자 아래에 있습니다.",
+          "parts": [
+            {
+              "text": "The book",
+              "role": "S",
+              "explanation": "문장의 주어로, '그 책'을 의미합니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태나 위치를 나타내는 연결 동사입니다."
+            },
+            {
+              "text": "under the chair.",
+              "role": "M",
+              "explanation": "장소를 나타내는 전치사구로, 동사의 위치 정보를 수식합니다."
+            }
+          ],
+          "note": "전치사는 뒤에 오는 명사와 함께 하나의 의미 단위를 이루어 장소, 시간, 방향 등을 상세히 설명합니다."
+        },
+        "original": "The book is under the chair.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:23:11.070Z"
+      }
+    },
+    {
+      "label": "B038",
+      "caseId": "grammar-48",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "groq_request",
+      "designatedCritical": true
+    },
+    {
+      "label": "B068",
+      "caseId": "grammar-49",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Was the window broken by Tom?",
+        "explanation": "문장이 수동태 의문문으로 올바르게 구성되었습니다. be동사(Was)가 주어(the window) 앞에 위치하며, 과거분사(broken)가 뒤따르는 구조입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그 창문이 Tom에 의해 깨졌나요?",
+          "parts": [
+            {
+              "text": "Was",
+              "role": "V",
+              "explanation": "의문문을 만들기 위해 문장 맨 앞에 온 be동사의 과거형입니다."
+            },
+            {
+              "text": "the window",
+              "role": "S",
+              "explanation": "동작의 대상이 되는 주어입니다."
+            },
+            {
+              "text": "broken",
+              "role": "V",
+              "explanation": "주어의 상태를 나타내는 과거분사입니다."
+            },
+            {
+              "text": "by Tom?",
+              "role": "M",
+              "explanation": "동작을 수행한 주체를 나타내는 전치사구입니다."
+            }
+          ],
+          "note": "수동태는 'be동사 + 과거분사'의 형태로 주어가 동작을 받는 대상일 때 사용합니다."
+        },
+        "original": "Was the window broken by Tom?",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:23:34.620Z"
+      }
+    },
+    {
+      "label": "B012",
+      "caseId": "grammar-49",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Was the window broken by Tom?",
+        "explanation": "문장은 수동태 의문문으로, ‘창문이 Tom에 의해 깨졌는가?’ 라는 의미입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그 창문은 Tom에 의해 부서졌나요?",
+          "parts": [
+            {
+              "text": "Was",
+              "role": "V",
+              "explanation": "조동사 ‘be’의 과거형, 수동 의문형을 만든다."
+            },
+            {
+              "text": "the window",
+              "role": "S",
+              "explanation": "문장의 주어, ‘창문’이라는 명사구."
+            },
+            {
+              "text": "broken",
+              "role": "V",
+              "explanation": "과거분사, ‘be’와 함께 수동태 동사 역할."
+            },
+            {
+              "text": "by Tom",
+              "role": "M",
+              "explanation": "전치사구, 동작의 주체를 나타낸다."
+            },
+            {
+              "text": "?",
+              "role": "X",
+              "explanation": "문장 끝에 붙는 의문부호."
+            }
+          ],
+          "note": ""
+        },
+        "original": "Was the window broken by Tom?",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:23:41.041Z"
+      }
+    },
+    {
+      "label": "B086",
+      "caseId": "grammar-50",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Open the door, please.",
+        "explanation": "문장이 문법적으로 완벽합니다. 명령문에서 'please'를 붙여 공손하게 표현하는 적절한 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "문을 열어 주세요.",
+          "parts": [
+            {
+              "text": "Open",
+              "role": "V",
+              "explanation": "문을 여는 동작을 나타내는 동사입니다."
+            },
+            {
+              "text": "the door",
+              "role": "O",
+              "explanation": "동사 'Open'의 대상이 되는 목적어입니다."
+            },
+            {
+              "text": ",",
+              "role": "X",
+              "explanation": "문장 끝에 'please'를 연결하기 위한 쉼표입니다."
+            },
+            {
+              "text": "please",
+              "role": "M",
+              "explanation": "요청의 어조를 부드럽게 만드는 부사입니다."
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 마침표입니다."
+            }
+          ],
+          "note": "명령문에서 동사 원형으로 시작하고 뒤에 please를 붙여 정중함을 더했습니다."
+        },
+        "original": "Open the door, please.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:23:49.031Z"
+      }
+    },
+    {
+      "label": "B066",
+      "caseId": "grammar-50",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "groq_request",
+      "designatedCritical": true
+    },
+    {
+      "label": "B102",
+      "caseId": "grammar-51",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B087",
+      "caseId": "grammar-51",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B035",
+      "caseId": "grammar-52",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B031",
+      "caseId": "grammar-52",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "groq_request",
+      "designatedCritical": true
+    },
+    {
+      "label": "B054",
+      "caseId": "grammar-53",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B116",
+      "caseId": "grammar-53",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "groq_request",
+      "designatedCritical": true
+    },
+    {
+      "label": "B103",
+      "caseId": "grammar-54",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 503,
+      "code": "provider_unavailable",
+      "designatedCritical": true
+    },
+    {
+      "label": "B017",
+      "caseId": "grammar-54",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I can swim.",
+        "explanation": "원문에서는 동사 'swim'에 s가 붙어 문법 오류가 있습니다. 'can' 뒤에는 동사의 원형이 와야 하므로 'swim'으로 고칩니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 수영할 수 있다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자 자신"
+            },
+            {
+              "text": "can swim",
+              "role": "V",
+              "explanation": "조동사 can + 동사 원형 swim, 능력 의미"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 끝을 나타내는 구두점"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I can swims.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:24:59.820Z"
+      }
+    },
+    {
+      "label": "B053",
+      "caseId": "grammar-55",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I want to learn English.",
+        "explanation": "want 뒤에 동작을 나타내는 동사가 올 때는 to 부정사(to + 동사원형) 형태를 사용해야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "저는 영어를 배우고 싶어요.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주어인 '나'입니다."
+            },
+            {
+              "text": "want to learn",
+              "role": "V",
+              "explanation": "want의 목적어로 부정사구 'to learn'을 사용하여 '배우기를 원한다'는 의미를 나타냅니다."
+            },
+            {
+              "text": "English.",
+              "role": "O",
+              "explanation": "learn의 목적어인 '영어'입니다."
+            }
+          ],
+          "note": "want, hope, plan 같은 동사들은 목적어로 to 부정사를 취하여 앞으로 하려는 일을 표현합니다."
+        },
+        "original": "I want learn English.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:25:08.859Z"
+      }
+    },
+    {
+      "label": "B013",
+      "caseId": "grammar-55",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B006",
+      "caseId": "grammar-56",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "two books 교정은 맞지만 복수형을 반드시 s/es를 붙인 형태로 설명했다. children, men, sheep 등 불규칙·동형 복수를 제외하지 않은 잘못된 일반화다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I have two books.",
+        "explanation": "영어에서 숫자가 2 이상인 경우, 뒤에 오는 명사는 반드시 복수형(s/es를 붙인 형태)으로 써야 합니다. 따라서 'book'을 'books'로 수정했습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "저는 두 권의 책을 가지고 있습니다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주어인 '나'를 나타냅니다."
+            },
+            {
+              "text": "have",
+              "role": "V",
+              "explanation": "주어의 상태나 소유를 나타내는 동사입니다."
+            },
+            {
+              "text": "two books.",
+              "role": "O",
+              "explanation": "수량 형용사와 복수 명사가 결합한 목적어입니다."
+            }
+          ],
+          "note": "숫자 뒤에는 명사의 복수형이 온다는 규칙을 기억하세요. 1은 단수, 2부터는 복수입니다."
+        },
+        "original": "I have two book.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:25:27.500Z"
+      }
+    },
+    {
+      "label": "B101",
+      "caseId": "grammar-56",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I have two books.",
+        "explanation": "원문은 주어와 동사, 목적어가 모두 명확히 나타난 진술문이지만, 'book'의 복수 형태가 빠져 있어 문법 오류입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 책 두 권을 가지고 있다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자"
+            },
+            {
+              "text": "have",
+              "role": "V",
+              "explanation": "동사, 소유를 나타냄"
+            },
+            {
+              "text": "two books",
+              "role": "O",
+              "explanation": "목적어, 수량을 나타내는 명사구"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 끝을 표시"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I have two book.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:25:35.508Z"
+      }
+    },
+    {
+      "label": "B051",
+      "caseId": "grammar-57",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": false
+    },
+    {
+      "label": "B061",
+      "caseId": "grammar-57",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    },
+    {
+      "label": "B085",
+      "caseId": "grammar-58",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "eat go의 불충분함을 설명하고 빈 교정·분석 불가를 반환한 것은 맞다. 고정 허용 기준은 두 판정 모두 uncertain인데 meaningUsage와 grammar를 needs_work로 확정했다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "",
+        "explanation": "제시해주신 문장은 주어와 동사의 관계가 불분명하고 두 동사가 나열되어 있어 문장으로서의 의미가 성립하지 않습니다. 'eat'은 '먹다', 'go'는 '가다'라는 동작을 나타내는 단어이며, 이 단어들을 사용하여 구체적인 행동을 문장으로 만들어주세요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "제시된 단어들은 단순한 동사의 나열일 뿐 문장의 구조를 갖추지 못했습니다. 주어(누가)와 동사(무엇을 하는지)를 포함하여 문장을 다시 작성해 주세요."
+        },
+        "original": "eat go",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:26:02.006Z"
+      }
+    },
+    {
+      "label": "B091",
+      "caseId": "grammar-58",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "eat go의 원문 문법은 uncertain으로 보류하고 교정·분석도 보류했다. 그러나 목표 동사 용법 판단은 needs_work로 확정하여 고정 uncertain 기준과 불일치한다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "원문은 동사 두 개가 나열돼 있어 완전한 문장이 아니며, 의미가 불분명합니다.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "‘eat go’는 주어와 목적어가 없고 동사 연결도 문법적으로 맞지 않아 문장 구조를 분석할 수 없습니다."
+        },
+        "original": "eat go",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:26:08.678Z"
+      }
+    },
+    {
+      "label": "B098",
+      "caseId": "grammar-59",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "제시하신 단어들은 전치사들이지만, 문장을 이루지 못하는 단어들의 나열입니다. 완전한 문장으로 다시 질문해 주세요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "전치사는 문장 속에서 명사와 결합하여 의미를 전달합니다. 'I am at home'과 같이 문장 형태의 질문을 주시면 상세히 분석해 드릴 수 있습니다."
+        },
+        "original": "on at in",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:26:17.701Z"
+      }
+    },
+    {
+      "label": "B096",
+      "caseId": "grammar-59",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    },
+    {
+      "label": "B018",
+      "caseId": "grammar-60",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "제시해주신 'she him they'는 주어와 목적격 대명사들이 나열되어 있을 뿐, 문장의 형식을 갖추지 않아 문법적으로 분석할 수 없는 상태입니다.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "입력하신 문구는 완전한 문장이 아니며 주어와 동사의 구조를 갖추고 있지 않습니다. 예를 들어 'She likes him.'(그녀는 그를 좋아한다)와 같이 동작을 나타내는 동사를 포함해 주시기 바랍니다."
+        },
+        "original": "she him they",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:26:31.065Z"
+      }
+    },
+    {
+      "label": "B084",
+      "caseId": "grammar-60",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    },
+    {
+      "label": "B065",
+      "caseId": "word-01",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She walks to school.",
+        "explanation": "문장이 문법적으로 완벽하며 의미 전달이 명확합니다. 주어가 3인칭 단수(She)이므로 동사 뒤에 -s가 붙는 규칙이 잘 적용되었습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 학교에 걸어서 갑니다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어로서 문장의 주체인 그녀를 나타냅니다."
+            },
+            {
+              "text": "walks",
+              "role": "V",
+              "explanation": "동사로서 걷다라는 동작을 의미하며, 주어가 3인칭 단수이므로 s가 붙었습니다."
+            },
+            {
+              "text": "to school.",
+              "role": "M",
+              "explanation": "학교로라는 장소의 방향을 나타내는 부사구입니다."
+            }
+          ],
+          "note": "주어와 동사의 수 일치(Subject-Verb Agreement)가 정확하게 이루어진 좋은 예문입니다."
+        },
+        "original": "She walks to school.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:11:53.754Z"
+      }
+    },
+    {
+      "label": "B064",
+      "caseId": "word-01",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She walks to school.",
+        "explanation": "문법적으로 올바른 문장으로, 주어와 동사, 전치사구가 잘 연결되었습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 학교에 걸어갑니다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어, 행위자"
+            },
+            {
+              "text": "walks",
+              "role": "V",
+              "explanation": "동사, 현재형 3인칭 단수"
+            },
+            {
+              "text": "to school",
+              "role": "M",
+              "explanation": "전치사구, 목적지를 나타내는 부사적 용법"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "She walks to school.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:12:00.800Z"
+      }
+    },
+    {
+      "label": "B076",
+      "caseId": "word-02",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B049",
+      "caseId": "word-02",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I read books every evening.",
+        "explanation": "문법적으로 자연스러운 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 매일 저녁 책을 읽는다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자를 나타냄"
+            },
+            {
+              "text": "read",
+              "role": "V",
+              "explanation": "동사, 현재형으로 읽는다 의미"
+            },
+            {
+              "text": "books",
+              "role": "O",
+              "explanation": "목적어, 읽는 대상"
+            },
+            {
+              "text": "every evening",
+              "role": "M",
+              "explanation": "부사구, 언제 읽는지 나타냄"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 끝을 표시하는 구두점"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I read books every evening.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:12:12.964Z"
+      }
+    },
+    {
+      "label": "B037",
+      "caseId": "word-03",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Please close the window.",
+        "explanation": "문장이 문법적으로 완벽하며 'close'라는 단어를 '닫다'라는 의미로 올바르게 사용했습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "창문을 닫아 주세요.",
+          "parts": [
+            {
+              "text": "Please",
+              "role": "M",
+              "explanation": "공손한 요청을 나타내는 부사입니다."
+            },
+            {
+              "text": "close",
+              "role": "V",
+              "explanation": "동사로서 '닫다'라는 동작을 나타냅니다."
+            },
+            {
+              "text": "the window",
+              "role": "O",
+              "explanation": "동사 'close'의 대상이 되는 명사구입니다."
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 마침표입니다."
+            }
+          ],
+          "note": "상대방에게 정중하게 부탁할 때 사용하는 전형적인 명령문의 형태입니다. 'Please'는 문장 맨 앞에 위치하여 공손함을 더합니다."
+        },
+        "original": "Please close the window.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:12:22.247Z"
+      }
+    },
+    {
+      "label": "B104",
+      "caseId": "word-03",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Please close the window.",
+        "explanation": "문법적으로 자연스럽고, 동사 'close'는 '닫다'라는 뜻과 일치합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "창문을 닫아 주세요.",
+          "parts": [
+            {
+              "text": "Please",
+              "role": "M",
+              "explanation": "정중한 요청을 나타내는 부사"
+            },
+            {
+              "text": "close",
+              "role": "V",
+              "explanation": "동사, 창문을 닫는 동작"
+            },
+            {
+              "text": "the window",
+              "role": "O",
+              "explanation": "목적어, 닫을 대상"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "Please close the window.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:12:28.286Z"
+      }
+    },
+    {
+      "label": "B023",
+      "caseId": "word-04",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B097",
+      "caseId": "word-04",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "They recorded the concert.",
+        "explanation": "문법적으로 올바른 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그들은 콘서트를 녹음했다.",
+          "parts": [
+            {
+              "text": "They",
+              "role": "S",
+              "explanation": "주어, 행위자"
+            },
+            {
+              "text": "recorded",
+              "role": "V",
+              "explanation": "동사, 과거형"
+            },
+            {
+              "text": "the concert",
+              "role": "O",
+              "explanation": "목적어, 콘서트"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결"
+            }
+          ],
+          "note": ""
+        },
+        "original": "They recorded the concert.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:12:40.291Z"
+      }
+    },
+    {
+      "label": "B052",
+      "caseId": "word-05",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B115",
+      "caseId": "word-05",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": false
+    },
+    {
+      "label": "B043",
+      "caseId": "word-06",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "A tear rolled down her cheek.",
+        "explanation": "문장이 문법적으로 완벽하며 'tear'라는 단어를 '눈물'이라는 명사의 의미로 정확하게 사용했습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "눈물 한 방울이 그녀의 뺨을 타고 흘러내렸다.",
+          "parts": [
+            {
+              "text": "A tear",
+              "role": "S",
+              "explanation": "눈물 한 방울을 나타내는 주어입니다."
+            },
+            {
+              "text": "rolled",
+              "role": "V",
+              "explanation": "흘러내리다를 뜻하는 동사입니다."
+            },
+            {
+              "text": "down her cheek.",
+              "role": "M",
+              "explanation": "뺨 아래로라는 방향을 나타내는 부사구입니다."
+            }
+          ],
+          "note": "이 문장은 [주어 + 동사 + 부사구]의 구조를 가진 1형식 문장으로, 동작의 방향성을 자연스럽게 표현하고 있습니다."
+        },
+        "original": "A tear rolled down her cheek.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:12:59.944Z"
+      }
+    },
+    {
+      "label": "B005",
+      "caseId": "word-06",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": false
+    },
+    {
+      "label": "B036",
+      "caseId": "word-07",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "The wind is strong today.",
+        "explanation": "문장이 문법적으로 완벽하며 'wind'를 자연스럽게 사용했습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "오늘 바람이 강하네요.",
+          "parts": [
+            {
+              "text": "The wind",
+              "role": "S",
+              "explanation": "문장의 주어로 '바람'을 의미합니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태를 설명하는 동사입니다."
+            },
+            {
+              "text": "strong",
+              "role": "C",
+              "explanation": "주어의 상태를 보충 설명하는 형용사입니다."
+            },
+            {
+              "text": "today.",
+              "role": "M",
+              "explanation": "시간을 나타내는 부사구입니다."
+            }
+          ],
+          "note": "명사 wind는 날씨나 기상 현상을 말할 때 정관사 the와 함께 자주 쓰입니다."
+        },
+        "original": "The wind is strong today.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:13:16.961Z"
+      }
+    },
+    {
+      "label": "B080",
+      "caseId": "word-07",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "The wind is strong today.",
+        "explanation": "문장은 현재 시제로 바람이 오늘 강하다는 사실을 간단히 서술하고 있습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "바람이 오늘 강합니다.",
+          "parts": [
+            {
+              "text": "The wind",
+              "role": "S",
+              "explanation": "주어, 바람이라는 명사구"
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "현재시제 be 동사, 서술어 역할"
+            },
+            {
+              "text": "strong",
+              "role": "C",
+              "explanation": "보어, 풍량을 설명하는 형용사"
+            },
+            {
+              "text": "today",
+              "role": "M",
+              "explanation": "시간부사, 언제 강한지 나타냄"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결점"
+            }
+          ],
+          "note": ""
+        },
+        "original": "The wind is strong today.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:13:22.749Z"
+      }
+    },
+    {
+      "label": "B028",
+      "caseId": "word-08",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Her present was a book.",
+        "explanation": "제시하신 문장은 문법적으로 완벽하며, 'present'를 '선물'이라는 의미의 명사로 올바르게 사용하셨습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀의 선물은 책이었다.",
+          "parts": [
+            {
+              "text": "Her present",
+              "role": "S",
+              "explanation": "문장의 주어로, '그녀의 선물'을 의미합니다."
+            },
+            {
+              "text": "was",
+              "role": "V",
+              "explanation": "be 동사의 과거형으로 서술어 역할을 합니다."
+            },
+            {
+              "text": "a book.",
+              "role": "C",
+              "explanation": "주어의 상태를 보충 설명하는 주격 보어입니다."
+            }
+          ],
+          "note": "이 문장은 '주어 + be동사 + 보어'로 이루어진 2형식 문장 구조입니다."
+        },
+        "original": "Her present was a book.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:13:32.123Z"
+      }
+    },
+    {
+      "label": "B118",
+      "caseId": "word-08",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": false
+    },
+    {
+      "label": "B041",
+      "caseId": "word-09",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B008",
+      "caseId": "word-09",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": false
+    },
+    {
+      "label": "B040",
+      "caseId": "word-10",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B072",
+      "caseId": "word-10",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She graduated last year.",
+        "explanation": "문법적으로 올바른 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 작년에 졸업했다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어, 여성 3인칭 단수"
+            },
+            {
+              "text": "graduated",
+              "role": "V",
+              "explanation": "동사, 과거형으로 졸업했다 의미"
+            },
+            {
+              "text": "last year",
+              "role": "M",
+              "explanation": "부사구, 시점을 나타냄"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "She graduated last year.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:14:02.600Z"
+      }
+    },
+    {
+      "label": "B067",
+      "caseId": "word-11",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "The desert is hot.",
+        "explanation": "문장이 문법적으로 완벽하며 'desert'의 명사 의미인 '사막'이 자연스럽게 잘 사용되었습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그 사막은 덥습니다.",
+          "parts": [
+            {
+              "text": "The desert",
+              "role": "S",
+              "explanation": "문장의 주어로, '그 사막은'이라는 의미의 명사구입니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태를 설명하는 연결 동사입니다."
+            },
+            {
+              "text": "hot.",
+              "role": "C",
+              "explanation": "주어의 상태를 보충 설명하는 주격 보어 형용사입니다."
+            }
+          ],
+          "note": "이 문장은 '주어 + 동사 + 보어'의 2형식 구조로, 특정 사막의 상태를 설명하는 가장 기본적인 패턴입니다."
+        },
+        "original": "The desert is hot.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:14:12.296Z"
+      }
+    },
+    {
+      "label": "B082",
+      "caseId": "word-11",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "The desert is hot.",
+        "explanation": "문법적으로 올바른 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그 사막은 뜨겁다.",
+          "parts": [
+            {
+              "text": "The desert",
+              "role": "S",
+              "explanation": "주어, 명사구 전체를 의미"
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "동사, 현재형 be동사"
+            },
+            {
+              "text": "hot",
+              "role": "C",
+              "explanation": "보어, 형용사로 주어 상태 설명"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결점"
+            }
+          ],
+          "note": ""
+        },
+        "original": "The desert is hot.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:14:18.428Z"
+      }
+    },
+    {
+      "label": "B056",
+      "caseId": "word-12",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B120",
+      "caseId": "word-12",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    },
+    {
+      "label": "B105",
+      "caseId": "word-13",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B003",
+      "caseId": "word-13",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Their schedules conflict.",
+        "explanation": "문장은 올바른 어순과 동사 형태를 사용하고 있어 수정이 필요하지 않습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그들의 일정이 충돌한다.",
+          "parts": [
+            {
+              "text": "Their schedules",
+              "role": "S",
+              "explanation": "주어, 일정들을 나타내는 명사구"
+            },
+            {
+              "text": "conflict",
+              "role": "V",
+              "explanation": "동사, '충돌하다' 의미"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "Their schedules conflict.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:14:42.817Z"
+      }
+    },
+    {
+      "label": "B059",
+      "caseId": "word-14",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B089",
+      "caseId": "word-14",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She contested the result.",
+        "explanation": "문법적으로 자연스러운 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 그 결과에 이의를 제기했다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어, 행동을 하는 사람"
+            },
+            {
+              "text": "contested",
+              "role": "V",
+              "explanation": "동사, ‘이의를 제기했다’ 의미"
+            },
+            {
+              "text": "the result",
+              "role": "O",
+              "explanation": "목적어, ‘그 결과’를 가리킴"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 끝을 나타내는 구두점"
+            }
+          ],
+          "note": ""
+        },
+        "original": "She contested the result.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:14:55.087Z"
+      }
+    },
+    {
+      "label": "B024",
+      "caseId": "word-15",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B100",
+      "caseId": "word-15",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I transferred the money yesterday.",
+        "explanation": "문법적으로 올바른 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 어제 돈을 이체했다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자를 나타냄"
+            },
+            {
+              "text": "transferred",
+              "role": "V",
+              "explanation": "동사, 과거형으로 이체했다는 의미"
+            },
+            {
+              "text": "the money",
+              "role": "O",
+              "explanation": "목적어, 이체된 대상"
+            },
+            {
+              "text": "yesterday",
+              "role": "M",
+              "explanation": "시간 부사, 언제 이체했는지"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종료를 나타내는 구두점"
+            }
+          ],
+          "note": "주어‑동사‑목적어‑시간 부사의 기본 구조입니다."
+        },
+        "original": "I transferred the money yesterday.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:15:07.649Z"
+      }
+    },
+    {
+      "label": "B030",
+      "caseId": "word-16",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B025",
+      "caseId": "word-16",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She leads the team.",
+        "explanation": "문법적으로 올바른 문장입니다. 주어(S)와 동사(V) 그리고 목적어(O)로 구성된 기본 SVO 구조입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 팀을 이끕니다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어, 사람을 가리킴"
+            },
+            {
+              "text": "leads",
+              "role": "V",
+              "explanation": "동사, 현재형 3인칭 단수"
+            },
+            {
+              "text": "the team",
+              "role": "O",
+              "explanation": "목적어, 팀이라는 명사구"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 끝 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "She leads the team.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:15:19.148Z"
+      }
+    },
+    {
+      "label": "B111",
+      "caseId": "word-17",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B045",
+      "caseId": "word-17",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "He refused the offer.",
+        "explanation": "문법적으로 올바른 문장이며, 'refuse'가 동사로 쓰여 '거절하다'라는 뜻과 잘 맞습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그는 그 제안을 거절했다.",
+          "parts": [
+            {
+              "text": "He",
+              "role": "S",
+              "explanation": "주어, 남성을 가리킴"
+            },
+            {
+              "text": "refused",
+              "role": "V",
+              "explanation": "동사, '거절했다'는 의미"
+            },
+            {
+              "text": "the offer",
+              "role": "O",
+              "explanation": "목적어, 제안을 의미"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 끝을 표시하는 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "He refused the offer.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:15:30.346Z"
+      }
+    },
+    {
+      "label": "B033",
+      "caseId": "word-18",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": true
+    },
+    {
+      "label": "B078",
+      "caseId": "word-18",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B046",
+      "caseId": "word-19",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B029",
+      "caseId": "word-19",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    },
+    {
+      "label": "B020",
+      "caseId": "word-20",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I know the answer.",
+        "explanation": "문장이 문법적으로 완벽합니다. 주어(I), 동사(know), 목적어(the answer) 순서로 구성된 올바른 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 그 답을 압니다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주어인 '나'입니다."
+            },
+            {
+              "text": "know",
+              "role": "V",
+              "explanation": "주어의 상태를 나타내는 동사 '알다'입니다."
+            },
+            {
+              "text": "the answer.",
+              "role": "O",
+              "explanation": "동사 know의 대상인 목적어 '그 답'입니다."
+            }
+          ],
+          "note": "주어+동사+목적어의 기본 3형식 문장 구조입니다."
+        },
+        "original": "I know the answer.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:16:06.343Z"
+      }
+    },
+    {
+      "label": "B109",
+      "caseId": "word-20",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "I know the answer.",
+        "explanation": "문법적으로 올바른 문장입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 그 답을 안다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자"
+            },
+            {
+              "text": "know",
+              "role": "V",
+              "explanation": "동사, ‘알다’ 의미"
+            },
+            {
+              "text": "the answer",
+              "role": "O",
+              "explanation": "목적어, 정답"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종료 기호"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I know the answer.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:16:12.146Z"
+      }
+    },
+    {
+      "label": "B093",
+      "caseId": "word-21",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "He walks to school.",
+        "explanation": "주어가 3인칭 단수(He)일 때 현재 시제 동사 뒤에는 -s나 -es를 붙여야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그는 학교로 걸어갑니다.",
+          "parts": [
+            {
+              "text": "He",
+              "role": "S",
+              "explanation": "문장의 주어인 '그는'을 나타냅니다."
+            },
+            {
+              "text": "walks",
+              "role": "V",
+              "explanation": "주어가 3인칭 단수이므로 -s가 붙은 동사 '걷다'입니다."
+            },
+            {
+              "text": "to school.",
+              "role": "M",
+              "explanation": "동작의 방향을 나타내는 부사구로 '학교로'라는 의미입니다."
+            }
+          ],
+          "note": "3인칭 단수 주어(he, she, it)와 현재 시제 동사가 함께 쓰일 때 동사의 형태 변화(s/es)에 주의하세요."
+        },
+        "original": "He walk to school.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:16:20.628Z"
+      }
+    },
+    {
+      "label": "B063",
+      "caseId": "word-21",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B073",
+      "caseId": "word-22",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": true
+    },
+    {
+      "label": "B027",
+      "caseId": "word-22",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "She bought a book yesterday.",
+        "explanation": "‘buyed’는 과거형으로 잘못 쓰였으며, 올바른 형태는 ‘bought’입니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 어제 책을 샀다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어, 여성 3인칭 단수"
+            },
+            {
+              "text": "bought",
+              "role": "V",
+              "explanation": "과거 동사 ‘buy’의 불규칙 변화"
+            },
+            {
+              "text": "a book",
+              "role": "O",
+              "explanation": "목적어, 단수 일반 명사"
+            },
+            {
+              "text": "yesterday",
+              "role": "M",
+              "explanation": "시간 부사, 언제 일어났는지 표시"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "She buyed a book yesterday.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:16:40.086Z"
+      }
+    },
+    {
+      "label": "B070",
+      "caseId": "word-23",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I ate an apple.",
+        "explanation": "모음으로 시작하는 단어 'apple' 앞에는 'a' 대신 'an'을 써야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 사과를 먹었다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주어인 '나'입니다."
+            },
+            {
+              "text": "ate",
+              "role": "V",
+              "explanation": "동사 'eat'의 과거형으로 '먹었다'는 의미입니다."
+            },
+            {
+              "text": "an apple.",
+              "role": "O",
+              "explanation": "문장의 목적어인 '사과'입니다. 모음 소리로 시작하므로 'an'을 사용합니다."
+            }
+          ],
+          "note": "부정관사 a/an은 뒤에 오는 단어의 첫 소리가 모음인지 자음인지에 따라 결정됩니다."
+        },
+        "original": "I ate a apple.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:16:46.985Z"
+      }
+    },
+    {
+      "label": "B090",
+      "caseId": "word-23",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I ate an apple.",
+        "explanation": "원문은 관사 사용이 잘못되었습니다. ‘apple’ 앞에 모음 소리인 ‘a’가 오므로 ‘an’이 필요합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 사과를 하나 먹었다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자를 나타냄"
+            },
+            {
+              "text": "ate",
+              "role": "V",
+              "explanation": "동사, 과거형 ‘먹다’"
+            },
+            {
+              "text": "an",
+              "role": "M",
+              "explanation": "관사, 모음 앞에 쓰임"
+            },
+            {
+              "text": "apple",
+              "role": "O",
+              "explanation": "목적어, 사과"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결 기호"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I ate a apple.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:16:54.552Z"
+      }
+    },
+    {
+      "label": "B088",
+      "caseId": "word-24",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": true
+    },
+    {
+      "label": "B119",
+      "caseId": "word-24",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I need two pieces of information.",
+        "explanation": "‘information’은 셀 수 없는 명사라 복수형 ‘informations’는 틀렸습니다. 셀 수 없을 때는 ‘two pieces of information’처럼 양을 나타내는 명사를 사용합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 두 개의 정보를 필요로 한다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어, 화자"
+            },
+            {
+              "text": "need",
+              "role": "V",
+              "explanation": "동사, 필요하다"
+            },
+            {
+              "text": "two pieces of information",
+              "role": "O",
+              "explanation": "목적어, ‘information’을 셀 수 있게 만든 구"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결점"
+            }
+          ],
+          "note": ""
+        },
+        "original": "I need two informations.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:17:06.841Z"
+      }
+    },
+    {
+      "label": "B107",
+      "caseId": "word-25",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "She listens to music every day.",
+        "explanation": "listen은 자동사로, 목적어인 music 앞에 반드시 전치사 'to'를 써야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 매일 음악을 듣습니다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어인 '그녀는'입니다."
+            },
+            {
+              "text": "listens to",
+              "role": "V",
+              "explanation": "동사 '듣다'로, 목적어 연결을 위해 to가 필요합니다."
+            },
+            {
+              "text": "music",
+              "role": "O",
+              "explanation": "목적어인 '음악을'입니다."
+            },
+            {
+              "text": "every day.",
+              "role": "M",
+              "explanation": "시간을 나타내는 부사구 '매일'입니다."
+            }
+          ],
+          "note": "listen은 전치사 to와 함께 쓰여 '~을 듣다'라는 의미를 완성합니다."
+        },
+        "original": "She listens music every day.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:17:17.292Z"
+      }
+    },
+    {
+      "label": "B062",
+      "caseId": "word-25",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "She listens to music every day.",
+        "explanation": "원문에서는 'listen' 뒤에 전치사 'to'가 빠졌습니다. 'listen'은 일반적으로 목적어와 함께 쓸 때 'to'가 필요합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그녀는 매일 음악을 듣는다.",
+          "parts": [
+            {
+              "text": "She",
+              "role": "S",
+              "explanation": "주어, 여성 3인칭 단수"
+            },
+            {
+              "text": "listens to",
+              "role": "V",
+              "explanation": "동사구, 'listen'에 전치사 'to'가 결합"
+            },
+            {
+              "text": "music",
+              "role": "O",
+              "explanation": "목적어, 듣는 대상"
+            },
+            {
+              "text": "every day",
+              "role": "M",
+              "explanation": "부사구, 빈도"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 끝 마침표"
+            }
+          ],
+          "note": ""
+        },
+        "original": "She listens music every day.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:17:23.447Z"
+      }
+    },
+    {
+      "label": "B016",
+      "caseId": "word-26",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B058",
+      "caseId": "word-26",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B079",
+      "caseId": "word-27",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Yesterday, I went to the park.",
+        "explanation": "문장에 'Yesterday'라는 과거를 나타내는 시점 부사가 있으므로, 동사 'go'를 과거형인 'went'로 바꿔야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "어제 나는 공원에 갔다.",
+          "parts": [
+            {
+              "text": "Yesterday,",
+              "role": "M",
+              "explanation": "문장 전체의 시간적 배경을 나타내는 부사구입니다."
+            },
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주체인 '나'입니다."
+            },
+            {
+              "text": "went",
+              "role": "V",
+              "explanation": "가다의 과거형으로, 주어의 동작을 나타냅니다."
+            },
+            {
+              "text": "to the park.",
+              "role": "M",
+              "explanation": "동작의 목적지인 공원을 나타내는 전치사구입니다."
+            }
+          ],
+          "note": "영어에서는 과거의 일을 말할 때 동사의 과거형을 사용해야 합니다. go-went-gone의 불규칙 변화를 기억하세요."
+        },
+        "original": "Yesterday, I go to the park.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:17:47.929Z"
+      }
+    },
+    {
+      "label": "B002",
+      "caseId": "word-27",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "이동의 목적지인 전치사구 to the park 전체를 O로 표시했다. went의 직접 목적어나 전치사의 목적어인 명사구와 구분하지 않은 문장 성분 오류다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Yesterday, I went to the park.",
+        "explanation": "시제가 현재형(go)으로 잘못 쓰여 과거 상황(Yesterday)과 맞지 않습니다. 과거형 went로 고쳐야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "어제, 나는 공원에 갔어요.",
+          "parts": [
+            {
+              "text": "Yesterday,",
+              "role": "M",
+              "explanation": "시간을 나타내는 부사구"
+            },
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어"
+            },
+            {
+              "text": "went",
+              "role": "V",
+              "explanation": "동사, 과거형"
+            },
+            {
+              "text": "to the park.",
+              "role": "O",
+              "explanation": "전치사구, 목적지"
+            }
+          ],
+          "note": ""
+        },
+        "original": "Yesterday, I go to the park.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:17:55.589Z"
+      }
+    },
+    {
+      "label": "B009",
+      "caseId": "word-28",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I know the answer.",
+        "explanation": "영어에서 'know'와 같이 상태를 나타내는 동사(상태동사)는 일반적으로 진행형(-ing)으로 쓰지 않습니다. 따라서 'I am knowing' 대신 현재형인 'I know'를 사용해야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 그 답을 압니다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주어인 '나'입니다."
+            },
+            {
+              "text": "know",
+              "role": "V",
+              "explanation": "주어의 상태를 나타내는 동사 '알다'입니다."
+            },
+            {
+              "text": "the answer.",
+              "role": "O",
+              "explanation": "동사 know의 대상이 되는 목적어 '그 답'입니다."
+            }
+          ],
+          "note": "상태동사(know, like, believe 등)는 주어의 동작이 아닌 상태를 설명하므로 현재 진행형을 쓰지 않고 기본 현재형을 사용합니다."
+        },
+        "original": "I am knowing the answer.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:18:03.929Z"
+      }
+    },
+    {
+      "label": "B092",
+      "caseId": "word-28",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B050",
+      "caseId": "word-29",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "It depends on the weather.",
+        "explanation": "동사 depend는 '~에 달려 있다'라는 의미로 쓸 때 전치사 on과 함께 사용합니다. 'of' 대신 'on'을 써야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그것은 날씨에 달려 있습니다.",
+          "parts": [
+            {
+              "text": "It",
+              "role": "S",
+              "explanation": "문장의 주어로서 '그것'을 뜻합니다."
+            },
+            {
+              "text": "depends on",
+              "role": "V",
+              "explanation": "'~에 달려 있다'라는 의미의 구동사입니다."
+            },
+            {
+              "text": "the weather",
+              "role": "O",
+              "explanation": "전치사 on의 목적어로서 '날씨'를 의미합니다."
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장의 끝을 나타내는 마침표입니다."
+            }
+          ],
+          "note": "depend on은 하나의 세트로 기억하는 것이 좋습니다."
+        },
+        "original": "It depends of the weather.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:18:23.239Z"
+      }
+    },
+    {
+      "label": "B055",
+      "caseId": "word-29",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B014",
+      "caseId": "word-30",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I have read this book.",
+        "explanation": "read 동사의 과거분사(p.p.) 형태는 read(발음: /red/)로, -ed를 붙이지 않습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 이 책을 읽어본 적이 있다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "문장의 주어인 '나'입니다."
+            },
+            {
+              "text": "have read",
+              "role": "V",
+              "explanation": "현재완료 시제로 '읽은 적이 있다'는 경험을 나타냅니다."
+            },
+            {
+              "text": "this book.",
+              "role": "O",
+              "explanation": "동사 read의 목적어로 '이 책'을 의미합니다."
+            }
+          ],
+          "note": "read는 불규칙 변화 동사로 과거형과 과거분사형이 철자는 같지만 발음이 다릅니다(원형 [riːd] - 과거/과거분사 [red])."
+        },
+        "original": "I have readed this book.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:18:37.887Z"
+      }
+    },
+    {
+      "label": "B083",
+      "caseId": "word-30",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B074",
+      "caseId": "word-31",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "book의 명사/동사 뜻 구분과 원문 유지는 맞다. 그러나 동사로 쓰려면 주어 바로 뒤에 배치해야 한다는 설명은 I usually book처럼 부사가 사이에 오는 유효 어순 등을 배제한다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "correctedSentence": "This book is interesting.",
+        "explanation": "제시하신 문장 내의 'book'은 '책'이라는 의미의 명사로 사용되었습니다. 요청하신 '예약하다'라는 의미의 동사 'book'을 사용하여 문장을 다시 작성하시려면 'I want to book a table.'과 같이 표현할 수 있습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "이 책은 재미있습니다.",
+          "parts": [
+            {
+              "text": "This book",
+              "role": "S",
+              "explanation": "문장의 주어로서 '이 책'을 의미합니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태를 설명하는 연결 동사입니다."
+            },
+            {
+              "text": "interesting.",
+              "role": "C",
+              "explanation": "주어의 상태를 보충 설명하는 주격 보어입니다."
+            }
+          ],
+          "note": "명사 book과 동사 book은 철자는 같지만 품사가 다릅니다. 이 문장에서는 명사로 쓰였으며, 동사로 쓰려면 주어 뒤에 바로 동사를 배치해야 합니다."
+        },
+        "original": "This book is interesting.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:18:56.942Z"
+      }
+    },
+    {
+      "label": "B010",
+      "caseId": "word-31",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "This book에서 한정사 This를 주어·지시대명사, 핵심 명사 book을 수식어로 표시했다. 명사구 분리 방식의 차이가 아니라 핵심과 한정사의 역할을 잘못 설명한 것이다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "correctedSentence": "This book is interesting.",
+        "explanation": "원문은 문법적으로 올바르며, 의미 전달에 문제가 없습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "이 책은 흥미롭다.",
+          "parts": [
+            {
+              "text": "This",
+              "role": "S",
+              "explanation": "주어, 지시대명사"
+            },
+            {
+              "text": "book",
+              "role": "M",
+              "explanation": "주어의 명사 수식어, 핵심 명사"
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "be 동사, 현재형"
+            },
+            {
+              "text": "interesting",
+              "role": "C",
+              "explanation": "보어, 형용사"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결 기호"
+            }
+          ],
+          "note": ""
+        },
+        "original": "This book is interesting.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:19:03.576Z"
+      }
+    },
+    {
+      "label": "B007",
+      "caseId": "word-32",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "They arrived at the station.",
+        "explanation": "arrive는 장소 앞에 전치사 'at' 또는 'in'을 사용합니다. 'to'는 목적지 방향을 나타낼 때 쓰이지만, 'arrive'와 함께 쓰지는 않습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "그들은 역에 도착했다.",
+          "parts": [
+            {
+              "text": "They",
+              "role": "S",
+              "explanation": "문장의 주어로 '그들'을 의미합니다."
+            },
+            {
+              "text": "arrived",
+              "role": "V",
+              "explanation": "도착했다는 동작을 나타내는 동사의 과거형입니다."
+            },
+            {
+              "text": "at the station.",
+              "role": "M",
+              "explanation": "도착한 장소를 나타내는 전치사구로 부사어 역할을 합니다."
+            }
+          ],
+          "note": "장소에 도착했다고 말할 때는 arrive at 또는 arrive in을 사용하세요. 보통 큰 도시나 국가에는 in, 특정한 지점이나 건물에는 at을 씁니다."
+        },
+        "original": "They arrived to the station.",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:19:12.842Z"
+      }
+    },
+    {
+      "label": "B026",
+      "caseId": "word-32",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B019",
+      "caseId": "word-33",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 503,
+      "code": "provider_unavailable",
+      "designatedCritical": true
+    },
+    {
+      "label": "B004",
+      "caseId": "word-33",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "childs의 복수형 오류는 문법 문제이나 목표 의미인 아이는 유지된다. 고정 기준은 meaningUsage appropriate와 grammar needs_work를 따로 허용하는데 의미까지 needs_work로 표시했다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": true,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "These children are playing.",
+        "explanation": "원문에서 ‘childs’는 ‘child’의 올바른 복수형이 아니므로 ‘children’으로 바꿔야 합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "이 아이들은 놀고 있다.",
+          "parts": [
+            {
+              "text": "These",
+              "role": "M",
+              "explanation": "지시 형용사, 명사를 수식"
+            },
+            {
+              "text": "children",
+              "role": "S",
+              "explanation": "주어, 복수 명사"
+            },
+            {
+              "text": "are",
+              "role": "V",
+              "explanation": "현재 진행형을 만드는 be 동사"
+            },
+            {
+              "text": "playing",
+              "role": "V",
+              "explanation": "진행형 동사, 주어의 동작"
+            },
+            {
+              "text": ".",
+              "role": "X",
+              "explanation": "문장 종결 부호"
+            }
+          ],
+          "note": ""
+        },
+        "original": "These childs are playing.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:19:31.357Z"
+      }
+    },
+    {
+      "label": "B069",
+      "caseId": "word-34",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B094",
+      "caseId": "word-34",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "designatedCritical": true
+    },
+    {
+      "label": "B042",
+      "caseId": "word-35",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "불충분한 bank/river/money 목록의 뜻·문법을 보류하지 않고 은행 위치와 돈 보관 행위를 만들어 넣었다. 교정문과 분석은 원문에서 알 수 없는 주어·행동·장소 관계를 포함한다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "The bank is near the river where I keep my money.",
+        "explanation": "제시해주신 단어들은 관련이 있지만 완전한 문장이 아닙니다. 단어들을 활용하여 '강가에 있는 은행에 돈을 보관한다'는 의미의 완전한 문장으로 수정했습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "내가 돈을 보관하는 은행이 강 근처에 있습니다.",
+          "parts": [
+            {
+              "text": "The bank",
+              "role": "S",
+              "explanation": "문장의 주어인 '그 은행'입니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태를 나타내는 동사입니다."
+            },
+            {
+              "text": "near the river",
+              "role": "M",
+              "explanation": "위치를 나타내는 수식어구입니다."
+            },
+            {
+              "text": "where I keep my money.",
+              "role": "M",
+              "explanation": "은행을 수식하는 관계절입니다."
+            }
+          ],
+          "note": "단어들의 나열이 아닌 주어와 동사를 갖춘 문장 형식을 연습해 보세요."
+        },
+        "original": "bank / river / money",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:19:56.845Z"
+      }
+    },
+    {
+      "label": "B057",
+      "caseId": "word-35",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "제공된 문장은 단어들만 나열된 형태로, 완전한 문장이 아닙니다. 주어·동사·목적어 등의 구성이 없어 문법적 판단이 불가능합니다.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장이 아니며, 의미 파악 및 문법 분석이 불가합니다."
+        },
+        "original": "bank / river / money",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:20:02.611Z"
+      }
+    },
+    {
+      "label": "B112",
+      "caseId": "word-36",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "불충분한 lead/led/metal을 보류하지 않고 Lead is a metal.로 교정했다. 목표 이끌다와 납의 뜻을 확정하면서 입력에 없는 서술 문장과 분석을 만들어 냈다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "Lead is a metal.",
+        "explanation": "제시하신 문장은 단어들의 나열일 뿐 완전한 문장이 아닙니다. 'Lead'가 금속이라는 사실을 서술하려면 'is'와 같은 동사가 포함된 완전한 문장 구조가 필요합니다.",
+        "structure": {
+          "status": "available",
+          "translation": "납은 금속입니다.",
+          "parts": [
+            {
+              "text": "Lead",
+              "role": "S",
+              "explanation": "문장의 주어인 명사 '납'입니다."
+            },
+            {
+              "text": "is",
+              "role": "V",
+              "explanation": "주어의 상태를 나타내는 연결 동사입니다."
+            },
+            {
+              "text": "a metal.",
+              "role": "C",
+              "explanation": "주어의 정체를 보충 설명하는 명사구 보어입니다."
+            }
+          ],
+          "note": "이 문장은 '주어+동사+보어'의 2형식 구조를 갖추고 있습니다."
+        },
+        "original": "lead / led / metal",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:20:11.468Z"
+      }
+    },
+    {
+      "label": "B106",
+      "caseId": "word-36",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "제시된 입력은 동사 ‘lead’의 형태와 의미를 보여주는 단어 목록이며, 완전한 문장이 아닙니다.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장이 아니므로 문법·구조 분석이 불가능합니다."
+        },
+        "original": "lead / led / metal",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:20:16.965Z"
+      }
+    },
+    {
+      "label": "B034",
+      "caseId": "word-37",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "모호한 object or subject를 물체 또는 주제로 확정하고 natural로 승인했다. 고정 기준의 판단 보류·빈 교정·분석 불가를 따르지 않으며 동사 없는 두 명사를 각각 주어로 분석했다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "object or subject",
+        "explanation": "제시해주신 문구는 '물체 또는 주제'라는 의미로 명사구로서 자연스럽게 잘 작성되었습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "물체 또는 주제",
+          "parts": [
+            {
+              "text": "object",
+              "role": "S",
+              "explanation": "물체를 뜻하는 명사입니다."
+            },
+            {
+              "text": "or",
+              "role": "X",
+              "explanation": "두 명사를 연결하는 접속사입니다."
+            },
+            {
+              "text": "subject",
+              "role": "S",
+              "explanation": "주제를 뜻하는 명사입니다."
+            }
+          ],
+          "note": "명사 두 개를 'or'로 연결하여 병렬 구조를 형성하고 있습니다."
+        },
+        "original": "object or subject",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:20:26.736Z"
+      }
+    },
+    {
+      "label": "B113",
+      "caseId": "word-37",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    },
+    {
+      "label": "B039",
+      "caseId": "word-38",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 400,
+      "code": "provider_precondition",
+      "designatedCritical": false
+    },
+    {
+      "label": "B075",
+      "caseId": "word-38",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "고정 허용 판정, 최소 교정/원문 유지/판단 보류, 의미·인물·대상·시제·수량·질문/명령, 성분 역할·번역·설명을 제공자명을 가리고 수동 대조했다. 문장 조각 분리와 예문 문자열의 완전 일치는 요구하지 않았다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "입력된 문장이 문법적으로 완전한 문장이 아니며, 주어와 동사가 결합된 형태가 없습니다.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "주어·동사 등 기본 요소가 없어 문장으로 분석할 수 없습니다."
+        },
+        "original": "read / red / reading",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-09-30T15:20:45.111Z"
+      }
+    },
+    {
+      "label": "B114",
+      "caseId": "word-39",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "불충분한 live/lived/alive 목록을 보류하지 않고 I live in Seoul.을 만들었다. 입력에 없는 화자와 도시를 가정한 교정·번역·분석이다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "httpStatus": 200,
+      "designatedCritical": false,
+      "feedback": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "I live in Seoul.",
+        "explanation": "제시해주신 문장은 단어들의 나열일 뿐 완전한 문장이 아닙니다. '살다'라는 동사를 사용하여 '나는 서울에 산다'라는 의미의 완전한 문장으로 수정했습니다.",
+        "structure": {
+          "status": "available",
+          "translation": "나는 서울에 삽니다.",
+          "parts": [
+            {
+              "text": "I",
+              "role": "S",
+              "explanation": "주어 '나'입니다."
+            },
+            {
+              "text": "live",
+              "role": "V",
+              "explanation": "동사 '살다'입니다."
+            },
+            {
+              "text": "in Seoul.",
+              "role": "M",
+              "explanation": "장소를 나타내는 전치사구로 부사 역할을 합니다."
+            }
+          ],
+          "note": "영어나 한국어 모두 주어와 동사를 갖춘 완전한 문장 형태를 연습하는 것이 중요합니다."
+        },
+        "original": "live / lived / alive",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-09-30T15:20:53.153Z"
+      }
+    },
+    {
+      "label": "B110",
+      "caseId": "word-39",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    },
+    {
+      "label": "B071",
+      "caseId": "word-40",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "httpStatus": 503,
+      "providerStatus": 503,
+      "code": "provider_unavailable",
+      "designatedCritical": false
+    },
+    {
+      "label": "B047",
+      "caseId": "word-40",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "평가 가능한 응답이 없어 네 차원을 unavailable로 기록한다. 출력 검증 거절을 언어 통과로 계산하지 않는다.",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "designatedCritical": false
+    }
+  ]
+}

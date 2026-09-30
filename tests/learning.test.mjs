@@ -79,7 +79,12 @@ test('known and focused practice keeps familiarity and unrelated weaknesses',()=
  x=newSession(state,words,content,'practice','2026-09-21',undefined,'sentence');state=applyRecord(state,x,a.id,{sentence:'An apple.',sentenceStatus:'written'});assert.equal(state.progress[a.id].en,'help');assert.equal(state.progress[a.id].needsReview,true);
 });
 test('saving a draft never registers an unlearned word in the monthly population',()=>{
- let state=fresh();const x=newSession(state,words,content,'daily','2026-09-21');const id=x.ids[0];state=applyRecord(state,x,id,{meaning:'draft'},false);assert.deepEqual(reviewIds(state,'monthly','2026-09'),[]);state=applyRecord(state,x,id,{meaning:'confirmed'},true);assert.deepEqual(reviewIds(state,'monthly','2026-09'),[id]);
+ for(const activityDate of ['2026-09-21','2026-10-01']){
+  let state=fresh();const x=newSession(state,words,content,'daily','2026-09-21');const id=x.ids[0],month=activityDate.slice(0,7);
+  state=applyRecord(state,x,id,{meaning:'draft'},false,activityDate);assert.deepEqual(reviewIds(state,'monthly',month),[]);
+  state=applyRecord(state,x,id,{meaning:'confirmed'},true,activityDate);assert.deepEqual(reviewIds(state,'monthly',month),[id]);
+  if(month!=='2026-09')assert.deepEqual(reviewIds(state,'monthly','2026-09'),[]);
+ }
 });
 test('legacy sessions without batch or interval fields continue without losing records',()=>{
  const state=fresh();const a=find('apple');state.progress[a.id]={studyDates:['2026-09-21']};let x=newSession(state,words,content,'monthly','2026-09-30');delete x.batchSize;delete x.batchStart;x=stepSession(x);assert.equal(x.stage,'sentence');x=stepSession(x);assert.equal(x.finished,false);assert.equal(x.stage,'checkpoint');assert.equal(x.records[a.id].ko,'unmeasured');assert.equal(continueBatch(x).stage,'ko');
