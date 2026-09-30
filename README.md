@@ -172,3 +172,5 @@ The portable build runs Vinext directly without a host `timeout` command. The ma
 학습 기록은 날짜별로 묶어 10일씩 펼쳐 볼 수 있습니다. 검색·기간 선택과 작성 중 답은 탭을 바꿔도 유지하며, CSV·전체 백업에는 모든 회차가 포함됩니다. 네트워크 응답이 오래 지연되면 화면에서 다시 시도하거나 입력을 백업할 수 있습니다. AI 응답 지연 후에는 같은 문장을 자기 점검으로 이어갑니다.
 
 문법 v3의 버전 협상과 단계적 게시·롤백은 [GRAMMAR_PRACTICE_V3.md](GRAMMAR_PRACTICE_V3.md)를 따른다.
+
+실제 AI 평가 실행·판정·중단 복구는 [ENGLISH_ACCURACY_EVALUATION.md](ENGLISH_ACCURACY_EVALUATION.md)를 따른다.

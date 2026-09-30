@@ -10,5 +10,7 @@ declare namespace Cloudflare {
     grammar_enabled?: string;
     grammar_practice_v2_enabled?: string;
     grammar_practice_v3_enabled?: string;
+  english_accuracy_token?: string;
+  english_accuracy_expires?: string;
   }
 }
