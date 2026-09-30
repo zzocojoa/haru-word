@@ -1,3 +1,4 @@
+import { GRAMMAR_CLIENT_HEADERS } from './grammar/compatibility';
 import { InvalidResponseError, requestJson, REQUEST_TIMEOUT_MS } from './client-request';
 import { parseRevision, parseSnapshot } from './response-validation';
 import { parseFeedbackIssue } from './feedback-issue';
@@ -29,7 +30,7 @@ async function requestApi<T>(url: string, init: RequestInit, timeoutMs: number, 
 }
 
 export function loadLearningState() {
-  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store', headers: { 'X-Study-Grammar': '2', ...FEEDBACK_STRUCTURE_HEADERS, ...SENSE_KEY_HEADERS } }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
+  return requestApi<StateSnapshot>('/api/state', { cache: 'no-store', headers: { ...GRAMMAR_CLIENT_HEADERS, ...FEEDBACK_STRUCTURE_HEADERS, ...SENSE_KEY_HEADERS } }, REQUEST_TIMEOUT_MS.load, parseSnapshot);
 }
 
 export function saveLearningState(data: SaveStateRequest) {
@@ -39,7 +40,7 @@ export function saveLearningState(data: SaveStateRequest) {
       ...FEEDBACK_STRUCTURE_HEADERS,
       ...SENSE_KEY_HEADERS,
       'Content-Type': 'application/json',
-      'X-Study-Grammar': '2',
+      ...GRAMMAR_CLIENT_HEADERS,
       'X-Study-Review-Resume': '1',
       'X-Study-Server-Clock': '1',
       'X-Study-Monthly-Carryover': '1',
@@ -51,7 +52,7 @@ export function saveLearningState(data: SaveStateRequest) {
 export function restoreLearningState(state: State, revision: number) {
   return requestApi<StateRevision>('/api/state/restore', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Study-Revision': String(revision), 'X-Study-Grammar': '2', ...FEEDBACK_STRUCTURE_HEADERS, ...SENSE_KEY_HEADERS },
+    headers: { 'Content-Type': 'application/json', 'X-Study-Revision': String(revision), ...GRAMMAR_CLIENT_HEADERS, ...FEEDBACK_STRUCTURE_HEADERS, ...SENSE_KEY_HEADERS },
     body: JSON.stringify({ format: 'haru-words-v1', exportedAt: new Date().toISOString(), state }),
   }, REQUEST_TIMEOUT_MS.restore, value => parseRevision(value, revision));
 }

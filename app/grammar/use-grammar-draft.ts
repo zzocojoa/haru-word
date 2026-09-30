@@ -16,8 +16,8 @@ export type GrammarPersistence = {
 
 // Latest local input remains editable while each snapshot is acknowledged in order.
 // A failed save pauses the queue; retry is explicit, and navigation waits for the queue.
-export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSave, saved }: GrammarPersistence, enhanced = true) {
-  const [draft, setDraft] = useState(() => currentState.current.grammar?.[id] ?? (enhanced ? newLessonProgress(id) : newGrammarProgress()));
+export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSave, saved }: GrammarPersistence, enhanced = true, contentVersion:2|3=2) {
+  const [draft, setDraft] = useState(() => currentState.current.grammar?.[id] ?? (enhanced ? newLessonProgress(id,undefined,contentVersion) : newGrammarProgress()));
   const latest = useRef(draft), version = useRef(0), acknowledged = useRef(0);
   const task = useRef<Promise<boolean> | null>(null), alive = useRef(true), allowed = useRef(canSave);
   const [dirty, setDirty] = useState(false), [saving, setSaving] = useState(false), [error, setError] = useState('');

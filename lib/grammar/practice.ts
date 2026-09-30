@@ -1,17 +1,17 @@
 import { LESSON_MAP, answerCorrect, needsGrammarReview, type GrammarQuestion } from './content';
-import { PRACTICE_LESSONS } from './content-v2';
+import { practiceForVersion } from './content-v3';
 import { newGrammarProgress, QUESTION_KEYS, type GrammarProgress, type LessonId } from './model';
 import { today } from '../learning/dates';
 
 const ids = (questions: GrammarQuestion[]) => questions.map(q => q.id!) as [string, string, string];
-export function newLessonProgress(id: LessonId, now = new Date().toISOString()): GrammarProgress {
-  return { ...newGrammarProgress(now), contentVersion: 2, questionIds: ids(PRACTICE_LESSONS[id].questions) };
+export function newLessonProgress(id: LessonId, now = new Date().toISOString(), contentVersion:2|3=2): GrammarProgress {
+  return { ...newGrammarProgress(now), contentVersion, questionIds: ids(practiceForVersion(id,contentVersion).questions) };
 }
 export function questionsFor(id: LessonId, progress: GrammarProgress, reviewing = false): GrammarQuestion[] {
   const legacy = LESSON_MAP.get(id)!;
-  if (reviewing) return progress.review?.contentVersion === 2
-    ? PRACTICE_LESSONS[id].reviews[progress.review.setId!] : legacy.review;
-  return progress.contentVersion === 2 ? PRACTICE_LESSONS[id].questions : legacy.questions;
+  if (reviewing) return progress.review?.contentVersion
+    ? practiceForVersion(id,progress.review.contentVersion).reviews[progress.review.setId!] : legacy.review;
+  return progress.contentVersion ? practiceForVersion(id,progress.contentVersion).questions : legacy.questions;
 }
 function afterDays(date: string, days: number) {
   const d = new Date(`${date}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + days); return d.toISOString().slice(0, 10);
@@ -28,17 +28,17 @@ export function completeLesson(progress: GrammarProgress, date: string, now = ne
     nextDate: afterDays(date, 1), lastDate: date, passed: 0, nextSet: 'a', used: { a: 0, b: 0 },
   } };
 }
-export function startGrammarReview(id: LessonId, progress: GrammarProgress, date: string): GrammarProgress {
+export function startGrammarReview(id: LessonId, progress: GrammarProgress, date: string, contentVersion:2|3=2): GrammarProgress {
   if (!progress.completedAt || progress.review && !progress.review.completedAt) return progress;
-  // Old results are not retested against new answers. A new review uses v2;
+  // Old results are not retested against new answers. New reviews use the enabled version;
   // a review already in progress keeps its original content until completion.
   const schedule = reviewSchedule(progress)!;
   const scheduled = !!schedule.nextDate && date >= schedule.nextDate && date > schedule.lastDate;
-  const latestSet = progress.review?.completedAt && progress.review.contentVersion === 2 ? progress.review.setId : undefined;
+  const latestSet = progress.review?.completedAt && progress.review.contentVersion ? progress.review.setId : undefined;
   // Extras alternate too, but must not consume the set reserved for a later day.
   const setId = scheduled || !latestSet ? schedule.nextSet : latestSet === 'a' ? 'b' : 'a';
   return { ...progress, schedule, review: {
-    contentVersion: 2, questionIds: ids(PRACTICE_LESSONS[id].reviews[setId]), setId,
+    contentVersion, questionIds: ids(practiceForVersion(id,contentVersion).reviews[setId]), setId,
     mode: scheduled ? 'scheduled' : 'extra',
     startedOn: date, reused: schedule.used[setId] > 0, index: 0, answers: {},
   } };
@@ -46,7 +46,7 @@ export function startGrammarReview(id: LessonId, progress: GrammarProgress, date
 export function finishGrammarReview(id: LessonId, progress: GrammarProgress, date: string, now = new Date().toISOString()): GrammarProgress {
   if (!progress.review || progress.review.completedAt) return progress;
   const review = { ...progress.review, index: 3, order: undefined, choice: undefined, completedAt: now };
-  if (review.contentVersion !== 2 || !progress.schedule || !review.setId) return { ...progress, review };
+  if (!review.contentVersion || !progress.schedule || !review.setId) return { ...progress, review };
   const independent = questionsFor(id, progress, true).every((q, i) => {
     const key = QUESTION_KEYS[i], a = review.answers[key];
     return a && !a.helped && !review.hints?.includes(key) && !review.clues?.includes(key)
@@ -68,8 +68,8 @@ export function grammarReviewStatus(id: LessonId, progress?: GrammarProgress, da
   // rewriting the first answer. Writing self-checks remain a separate concern.
   const observation = progress.observation;
   const observationNeedsWork = !progress.review?.completedAt && !!observation &&
-    (observation.helped || !answerCorrect(PRACTICE_LESSONS[id].observation, observation.first)
-      || !answerCorrect(PRACTICE_LESSONS[id].observation, observation.latest));
+    (observation.helped || !answerCorrect(practiceForVersion(id,progress.contentVersion).observation, observation.first)
+      || !answerCorrect(practiceForVersion(id,progress.contentVersion).observation, observation.latest));
   const needsWork = needsGrammarReview(LESSON_MAP.get(id)!, progress, questions) || observationNeedsWork;
   const schedule = reviewSchedule(progress);
   const due = !!schedule?.nextDate && schedule.nextDate <= date;

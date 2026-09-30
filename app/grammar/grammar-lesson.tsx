@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, Check, Lightbulb } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { exampleFocusStart, type GrammarLesson as Lesson } from '@/lib/grammar/content';
 import { QUESTION_KEYS, combinedCheck, recordAnswer, recordObservationHelp, revealGrammarAnswer, updateGrammarSentence, type GrammarProgress } from '@/lib/grammar/model';
-import { PRACTICE_LESSONS, lessonForVersion } from '@/lib/grammar/content-v2';
+import { practiceForVersion, lessonForVersion, legacyNowNote } from '@/lib/grammar/content-v3';
 import { completeLesson, finishGrammarReview, questionsFor, startGrammarReview } from '@/lib/grammar/practice';
 import { useGrammarDraft, type GrammarPersistence } from './use-grammar-draft';
 import { useGrammarFeedback } from './use-grammar-feedback';
@@ -16,12 +16,12 @@ import { GrammarReading } from './grammar-reading';
 import { Speak } from '../ui';
 import { GrammarTermsHelp } from '../grammar-terms';
 
-type Props = { lesson: Lesson; enhanced?: boolean; persistence: GrammarPersistence; activityDate: () => string; onBack: () => void; onWords: () => void };
+type Props = { lesson: Lesson; enhanced?: boolean; contentVersion?:2|3; persistence: GrammarPersistence; activityDate: () => string; onBack: () => void; onWords: () => void };
 
-export function GrammarLesson({ lesson: originalLesson, enhanced = true, persistence, activityDate, onBack, onWords }: Props) {
+export function GrammarLesson({ lesson: originalLesson, enhanced = true, contentVersion=2, persistence, activityDate, onBack, onWords }: Props) {
   const lessonId = originalLesson.id;
-  const { draft: progress, latest, change, flush, dirty, saving, error } = useGrammarDraft(lessonId, persistence, enhanced);
-  const lesson = lessonForVersion(originalLesson, progress.contentVersion), practice = PRACTICE_LESSONS[lessonId];
+  const { draft: progress, latest, change, flush, dirty, saving, error } = useGrammarDraft(lessonId, persistence, enhanced,contentVersion);
+  const lesson = lessonForVersion(originalLesson, progress.contentVersion), practice = practiceForVersion(lessonId,progress.contentVersion);
   const { pending: aiPending, error: aiError, check: checkSentence, invalidate: invalidateAi } = useGrammarFeedback({
     lessonId: lesson.id, canSave: persistence.canSave, latest, change, flush,
   });
@@ -90,8 +90,8 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, persist
     <Progress className="grammar-progress" aria-label="수업 진행" value={step.percent} />
     {error && <div role="alert" className="grammar-message"><p>{error}</p><button className="secondary-button" disabled={saving || !persistence.canSave} onClick={() => void flush()}>다시 저장</button></div>}
     {!persistence.canSave && <p role="status" className="small-note">저장 상태를 확인한 뒤 계속할 수 있어요. 작성 중인 내용은 화면에 남아 있어요.</p>}
-    {reviewing && progress.review?.contentVersion === 2 && <p className="small-note">{progress.review.mode === 'scheduled' ? '다른 날 다시 확인' : '추가 연습 · 복습 일정 유지'} · 세트 {progress.review.setId?.toUpperCase()}{progress.review.reused ? ' · 다시 만나는 문제' : ''}</p>}
-    {!reviewing && progress.stage === 0 && (progress.contentVersion === 2 ? <GrammarReading practice={practice} progress={progress} disabled={!persistence.canSave}
+    {reviewing && !!progress.review?.contentVersion && <p className="small-note">{progress.review.mode === 'scheduled' ? '다른 날 다시 확인' : '추가 연습 · 복습 일정 유지'} · 세트 {progress.review.setId?.toUpperCase()}{progress.review.reused ? ' · 다시 만나는 문제' : ''}</p>}
+    {!reviewing && progress.stage === 0 && (!!progress.contentVersion ? <GrammarReading practice={practice} progress={progress} disabled={!persistence.canSave}
       onHelp={observationHelp} onChoice={observationChoice => change(value => ({ ...value, observationChoice }))}
       onAnswer={text => change(value => ({ ...value, observation: recordAnswer(value.observation, text, !!value.observationHelp) }))}
       onNext={() => move(1)} /> : <div className="grammar-stage">
@@ -105,8 +105,8 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, persist
     </div>)}
     {!reviewing && progress.stage === 1 && <div className="grammar-stage">
       <p className="grammar-role">{lesson.role}</p>
-      <dl className="grammar-rules"><dt>놓이는 자리</dt><dd>{lesson.pattern}</dd>{progress.contentVersion === 2 && <><dt>흔한 실수</dt><dd>{practice.commonMistake}</dd></>}</dl>
-      <details className="grammar-guide"><summary>{progress.contentVersion === 2 ? '더 비교해 보기' : '흔한 실수와 비교'}</summary><p>{lesson.mistake}</p>{progress.contentVersion === 2 && practice.extra && <p>{practice.extra}</p>}</details>
+      <dl className="grammar-rules"><dt>놓이는 자리</dt><dd>{lesson.pattern}</dd>{!!progress.contentVersion && <><dt>흔한 실수</dt><dd>{practice.commonMistake}</dd></>}</dl>
+      <details className="grammar-guide"><summary>{!!progress.contentVersion ? '더 비교해 보기' : '흔한 실수와 비교'}</summary><p>{lesson.mistake}</p>{!!progress.contentVersion && practice.extra && <p>{practice.extra}</p>}</details>
       <GrammarTermsHelp pos={lesson.pos} />
       <div className="grammar-actions">
         <button className="text-button" onClick={() => move(0)}>예문 다시 보기</button>
@@ -115,6 +115,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, persist
     </div>}
     {question && (reviewing || progress.stage >= 2 && progress.stage <= 4) && <GrammarQuestion
       key={`${question.id ?? reviewing}-${key}`} question={question} answer={answers[key]} hinted={hints.includes(key)} selection={selection}
+      legacyNote={legacyNowNote(lessonId,progress.contentVersion,reviewing,index)}
       clued={(reviewing ? progress.review : progress)?.clues?.includes(key)} onClue={clue}
       choice={(reviewing ? progress.review : progress)?.choice} onChoice={choice => change(value => reviewing ? { ...value, review: { ...value.review!, choice } } : { ...value, choice })}
       onOrder={setOrder} onAnswer={answer} onHint={reveal} onNext={nextQuestion} disabled={!persistence.canSave}
@@ -129,7 +130,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, persist
     />}
     {!reviewing && progress.stage === 6 && <GrammarSummary
       lesson={lesson} progress={progress} dirty={dirty} error={error} canSave={persistence.canSave} date={activityDate()}
-      onReview={() => change(value => enhanced ? startGrammarReview(lessonId, value, activityDate()) : { ...value, review: { index: 0, answers: {} } })}
+      onReview={() => change(value => enhanced ? startGrammarReview(lessonId, value, activityDate(),contentVersion) : { ...value, review: { index: 0, answers: {} } })}
       onWriting={() => moveFromWriting(5)} onWords={() => void leave(onWords)}
     />}
     <p className="small-note grammar-source">학습용 작성 예문 · <a href={lesson.reference} target="_blank" rel="noreferrer">설명 참고 자료</a></p>

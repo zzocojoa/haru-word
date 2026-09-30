@@ -5,8 +5,8 @@ import { stateResponse } from '@/lib/server/state-response';
 import { today } from '@/lib/learning';
 import { saveSchema } from '@/lib/validation';
 import { json, validateJsonMutation } from '@/lib/server/http';
-import { GRAMMAR_UPGRADE_MESSAGE, hasModernGrammar, legacyGrammarDocument } from '@/lib/grammar/compatibility';
-import { hasSavedModernGrammar } from '@/db/grammar-compatibility';
+import { GRAMMAR_UPGRADE_MESSAGE, grammarClientVersion, grammarUnsupported, grammarDocumentForClient } from '@/lib/grammar/compatibility';
+import { hasSavedUnsupportedGrammar } from '@/db/grammar-compatibility';
 import { grammarProgressSchema } from '@/lib/grammar/model';
 import { FEEDBACK_UPGRADE_MESSAGE, hasStructuredFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { hasSavedStructuredFeedback } from '@/db/feedback-compatibility';
@@ -26,9 +26,9 @@ export async function GET(request?: Request) {
     const grammarVersion = request?.headers.get('x-study-grammar');
     if (!supportsSenseKeys(request) && await hasSavedLiteralPrototypeSense(database(), user.userId))
       return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
-    const snapshot = await loadStateDocuments(database(), user.userId, grammarVersion === '1' || grammarVersion === '2');
-    if (grammarVersion === '1' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
-      const legacy = legacyGrammarDocument(grammarProgressSchema.parse(JSON.parse(row.document)));
+    const snapshot = await loadStateDocuments(database(), user.userId, ['1','2','3'].includes(grammarVersion??''));
+    if (grammarVersion !== '3' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
+      const legacy = grammarDocumentForClient(grammarProgressSchema.parse(JSON.parse(row.document)),grammarClientVersion(grammarVersion));
       return legacy ? [{ ...row, document: JSON.stringify(legacy) }] : [];
     });
     const wordCount = snapshot.progress.length, sessionCount = snapshot.sessions.length, grammarCount = snapshot.grammar?.length;
@@ -73,9 +73,10 @@ export async function PUT(request: Request) {
       console.warn(JSON.stringify({ event: 'feedback_client_outdated', version: 1 }));
       return json({ error: FEEDBACK_UPGRADE_MESSAGE }, 426);
     }
-    if (data.grammar && request.headers.get('x-study-grammar') !== '2' &&
-        (Object.values(data.grammar).some(hasModernGrammar) || await hasSavedModernGrammar(db, user.userId, Object.keys(data.grammar)))) {
-      console.warn(JSON.stringify({ event: 'grammar_client_outdated', version: 1 }));
+    const supportedGrammar=grammarClientVersion(request.headers.get('x-study-grammar'));
+    if (data.grammar && supportedGrammar<3 &&
+        (Object.values(data.grammar).some(p=>grammarUnsupported(p,supportedGrammar)) || await hasSavedUnsupportedGrammar(db, user.userId, supportedGrammar,Object.keys(data.grammar)))) {
+      console.warn(JSON.stringify({ event: 'grammar_client_outdated', version: supportedGrammar, code:'grammar_client_outdated' }));
       return json({ error: GRAMMAR_UPGRADE_MESSAGE }, 426);
     }
     if (!await validSaveReferences(db, user.userId, data)) {

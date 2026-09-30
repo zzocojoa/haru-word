@@ -39,17 +39,19 @@ import { useTabNavigation } from './learning/use-tab-navigation';
 import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
-export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean }) {
+export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
 function LearningScreens({
   initialServerTime,
   grammarEnabled = false,
   grammarPracticeEnabled = false,
+  grammarV3Enabled = false,
 }: {
   initialServerTime: number;
   grammarEnabled?: boolean;
   grammarPracticeEnabled?: boolean;
+  grammarV3Enabled?: boolean;
 }) {
   const {
     tab,
@@ -403,6 +405,7 @@ function LearningScreens({
                 error={error}
                 grammarEnabled={grammarEnabled}
                 grammarPracticeEnabled={grammarPracticeEnabled}
+                grammarV3Enabled={grammarV3Enabled}
                 persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, saved: signedIn && !loading && !saving && !unsaved && !conflict, registerLeave: registerGrammarLeave }}
                 activityDate={clock.currentDate}
                 state={state}
