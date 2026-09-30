@@ -1,0 +1,3832 @@
+{
+  "schemaVersion": 1,
+  "authoredAt": "2026-09-30",
+  "purpose": "Synthetic pilot; not a certification of general English accuracy",
+  "cases": [
+    {
+      "id": "word-01",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "She walks to school.",
+      "word": "walk",
+      "pos": "verb",
+      "meaning": "걷다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "She walks to school."
+          ],
+          "conditions": [
+            "3인칭 현재형 walks와 이동 방향을 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "She",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "walks",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/walk",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "3인칭 현재형 walks와 이동 방향을 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "word-02",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "I read books every evening.",
+      "word": "read",
+      "pos": "verb",
+      "meaning": "읽다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I read books every evening."
+          ],
+          "conditions": [
+            "현재의 반복 행동 read를 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "read",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "books",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/read",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "현재의 반복 행동 read를 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "word-03",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "Please close the window.",
+      "word": "close",
+      "pos": "verb",
+      "meaning": "닫다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "Please close the window."
+          ],
+          "conditions": [
+            "명령문에 드러나지 않은 you를 삽입하지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "close",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the window",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/close",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clause-types",
+          "supports": "명령문에 드러나지 않은 you를 삽입하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-04",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "They recorded the concert.",
+      "word": "record",
+      "pos": "verb",
+      "meaning": "녹음하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "They recorded the concert."
+          ],
+          "conditions": [
+            "record의 과거형으로 콘서트를 녹음한 의미를 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "They",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "recorded",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the concert",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/record",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "record의 과거형으로 콘서트를 녹음한 의미를 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-05",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "We live in Seoul.",
+      "word": "live",
+      "pos": "verb",
+      "meaning": "살다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "We live in Seoul."
+          ],
+          "conditions": [
+            "거주 의미와 장소 Seoul을 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "We",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "live",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/live",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "거주 의미와 장소 Seoul을 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-06",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "A tear rolled down her cheek.",
+      "word": "tear",
+      "pos": "noun",
+      "meaning": "눈물",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "A tear rolled down her cheek."
+          ],
+          "conditions": [
+            "tear는 찢다 동사가 아닌 눈물 명사다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "A tear",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "rolled",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/tear",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "tear는 찢다 동사가 아닌 눈물 명사다."
+        }
+      ]
+    },
+    {
+      "id": "word-07",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "The wind is strong today.",
+      "word": "wind",
+      "pos": "noun",
+      "meaning": "바람",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "The wind is strong today."
+          ],
+          "conditions": [
+            "wind는 바람 명사, strong은 주어의 성질을 나타낸다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "The wind",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "is",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "strong",
+              "roles": [
+                "C"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/wind",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "wind는 바람 명사, strong은 주어의 성질을 나타낸다."
+        }
+      ]
+    },
+    {
+      "id": "word-08",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "Her present was a book.",
+      "word": "present",
+      "pos": "noun",
+      "meaning": "선물",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "Her present was a book."
+          ],
+          "conditions": [
+            "선물 명사 present와 연결동사 보어 book을 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "Her present",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "was",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "a book",
+              "roles": [
+                "C"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/present",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "선물 명사 present와 연결동사 보어 book을 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "word-09",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "I object to this plan.",
+      "word": "object",
+      "pos": "verb",
+      "meaning": "반대하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I object to this plan."
+          ],
+          "conditions": [
+            "object to 용법이며 사물 명사로 바꾸지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "object",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/object",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions",
+          "supports": "object to 용법이며 사물 명사로 바꾸지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-10",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "She graduated last year.",
+      "word": "graduate",
+      "pos": "verb",
+      "meaning": "졸업하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "She graduated last year."
+          ],
+          "conditions": [
+            "졸업의 과거형과 작년을 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "She",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "graduated",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/graduate",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "졸업의 과거형과 작년을 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-11",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "The desert is hot.",
+      "word": "desert",
+      "pos": "noun",
+      "meaning": "사막",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "The desert is hot."
+          ],
+          "conditions": [
+            "사막 명사와 형용사 보어를 구분한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "The desert",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "is",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "hot",
+              "roles": [
+                "C"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/desert",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "사막 명사와 형용사 보어를 구분한다."
+        }
+      ]
+    },
+    {
+      "id": "word-12",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "They conduct research.",
+      "word": "conduct",
+      "pos": "verb",
+      "meaning": "수행하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "They conduct research."
+          ],
+          "conditions": [
+            "conduct research의 수행 의미를 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "They",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "conduct",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "research",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/conduct",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "conduct research의 수행 의미를 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "word-13",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "Their schedules conflict.",
+      "word": "conflict",
+      "pos": "verb",
+      "meaning": "충돌하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "Their schedules conflict."
+          ],
+          "conditions": [
+            "복수 주어와 자동사 conflict를 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "Their schedules",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "conflict",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/conflict",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "복수 주어와 자동사 conflict를 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "word-14",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "She contested the result.",
+      "word": "contest",
+      "pos": "verb",
+      "meaning": "이의를 제기하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "She contested the result."
+          ],
+          "conditions": [
+            "결과에 이의를 제기한 과거 행동을 보존한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "She",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "contested",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the result",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/contest",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "결과에 이의를 제기한 과거 행동을 보존한다."
+        }
+      ]
+    },
+    {
+      "id": "word-15",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "I transferred the money yesterday.",
+      "word": "transfer",
+      "pos": "verb",
+      "meaning": "이체하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I transferred the money yesterday."
+          ],
+          "conditions": [
+            "돈을 어제 이체한 행동과 주체를 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "transferred",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the money",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/transfer",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "돈을 어제 이체한 행동과 주체를 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-16",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "She leads the team.",
+      "word": "lead",
+      "pos": "verb",
+      "meaning": "이끌다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "She leads the team."
+          ],
+          "conditions": [
+            "이끌다의 3인칭 현재형이며 납 명사로 해석하지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "She",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "leads",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the team",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/lead",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "이끌다의 3인칭 현재형이며 납 명사로 해석하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-17",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "He refused the offer.",
+      "word": "refuse",
+      "pos": "verb",
+      "meaning": "거절하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "He refused the offer."
+          ],
+          "conditions": [
+            "제안을 거절한 과거형을 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "He",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "refused",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the offer",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/refuse",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "제안을 거절한 과거형을 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "word-18",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "My younger brother is ten.",
+      "word": "brother",
+      "pos": "noun",
+      "meaning": "남자 형제",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "My younger brother is ten."
+          ],
+          "conditions": [
+            "younger와 ten을 보존한다. brother 자체에서 추가 나이를 추정하지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "My younger brother",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "is",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "ten",
+              "roles": [
+                "C"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/brother",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "younger와 ten을 보존한다. brother 자체에서 추가 나이를 추정하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-19",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "I need some information.",
+      "word": "information",
+      "pos": "noun",
+      "meaning": "정보",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I need some information."
+          ],
+          "conditions": [
+            "information은 불가산명사로 some information이 자연스럽다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "need",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "some information",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/information",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/countable-and-uncountable-nouns",
+          "supports": "information은 불가산명사로 some information이 자연스럽다."
+        }
+      ]
+    },
+    {
+      "id": "word-20",
+      "domain": "word",
+      "category": "natural",
+      "sentence": "I know the answer.",
+      "word": "know",
+      "pos": "verb",
+      "meaning": "알다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I know the answer."
+          ],
+          "conditions": [
+            "지식 상태 know의 단순현재를 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "know",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the answer",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/know",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/verbs-state-action",
+          "supports": "지식 상태 know의 단순현재를 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "word-21",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "He walk to school.",
+      "word": "walk",
+      "pos": "verb",
+      "meaning": "걷다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "He walks to school."
+          ],
+          "conditions": [
+            "주어 He에 현재형 walks를 사용한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "He",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "walks",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/walk",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "주어 He에 현재형 walks를 사용한다."
+        }
+      ]
+    },
+    {
+      "id": "word-22",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "She buyed a book yesterday.",
+      "word": "buy",
+      "pos": "verb",
+      "meaning": "사다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "She bought a book yesterday."
+          ],
+          "conditions": [
+            "불규칙 과거 bought와 yesterday를 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "She",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "bought",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "a book",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/buy",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "불규칙 과거 bought와 yesterday를 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-23",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "I ate a apple.",
+      "word": "apple",
+      "pos": "noun",
+      "meaning": "사과",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I ate an apple."
+          ],
+          "conditions": [
+            "모음 소리 apple 앞에 an을 쓴다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "ate",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "an apple",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/apple",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/the",
+          "supports": "모음 소리 apple 앞에 an을 쓴다."
+        }
+      ]
+    },
+    {
+      "id": "word-24",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "I need two informations.",
+      "word": "information",
+      "pos": "noun",
+      "meaning": "정보",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I need two pieces of information."
+          ],
+          "conditions": [
+            "information에 복수형을 붙이지 않고 두 단위라는 수량을 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "need",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/information",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/countable-and-uncountable-nouns",
+          "supports": "information에 복수형을 붙이지 않고 두 단위라는 수량을 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-25",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "She listens music every day.",
+      "word": "listen",
+      "pos": "verb",
+      "meaning": "듣다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "She listens to music every day."
+          ],
+          "conditions": [
+            "listen to의 전치사를 보완하되 듣는 사람을 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "She",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "listens",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/listen",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions",
+          "supports": "listen to의 전치사를 보완하되 듣는 사람을 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-26",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "I am interested on science.",
+      "word": "interested",
+      "pos": "adjective",
+      "meaning": "관심 있는",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I am interested in science."
+          ],
+          "conditions": [
+            "interested in 용법을 사용한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "am",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/interested",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions",
+          "supports": "interested in 용법을 사용한다."
+        }
+      ]
+    },
+    {
+      "id": "word-27",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "Yesterday, I go to the park.",
+      "word": "go",
+      "pos": "verb",
+      "meaning": "가다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "Yesterday, I went to the park."
+          ],
+          "conditions": [
+            "yesterday의 끝난 과거를 went로 표현한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "went",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/go",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "yesterday의 끝난 과거를 went로 표현한다."
+        }
+      ]
+    },
+    {
+      "id": "word-28",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "I am knowing the answer.",
+      "word": "know",
+      "pos": "verb",
+      "meaning": "알다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I know the answer."
+          ],
+          "conditions": [
+            "이 지식 상태에서는 진행형보다 know를 사용한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "know",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the answer",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/know",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/verbs-state-action",
+          "supports": "이 지식 상태에서는 진행형보다 know를 사용한다."
+        }
+      ]
+    },
+    {
+      "id": "word-29",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "It depends of the weather.",
+      "word": "depend",
+      "pos": "verb",
+      "meaning": "달려 있다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "It depends on the weather."
+          ],
+          "conditions": [
+            "depend on의 보충어를 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "It",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "depends",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/depend",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions",
+          "supports": "depend on의 보충어를 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-30",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "I have readed this book.",
+      "word": "read",
+      "pos": "verb",
+      "meaning": "읽다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I have read this book."
+          ],
+          "conditions": [
+            "현재완료 have read의 불규칙 과거분사 read를 사용한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "have read",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "this book",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/read",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/past-simple-i-worked",
+          "supports": "현재완료 have read의 불규칙 과거분사 read를 사용한다."
+        }
+      ]
+    },
+    {
+      "id": "word-31",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "This book is interesting.",
+      "word": "book",
+      "pos": "verb",
+      "meaning": "예약하다",
+      "expected": {
+        "meaningUsage": [
+          "needs_work"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "This book is interesting."
+          ],
+          "conditions": [
+            "원문 문법은 자연스럽지만 book은 명사로 쓰였다. 예약 문장으로 의미를 강제로 바꾸지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "This book",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "is",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "interesting",
+              "roles": [
+                "C"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/book",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "원문 문법은 자연스럽지만 book은 명사로 쓰였다. 예약 문장으로 의미를 강제로 바꾸지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-32",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "They arrived to the station.",
+      "word": "arrive",
+      "pos": "verb",
+      "meaning": "도착하다",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "They arrived at the station."
+          ],
+          "conditions": [
+            "station 도착은 arrive at으로 고친다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "They",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "arrived",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/arrive",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions",
+          "supports": "station 도착은 arrive at으로 고친다."
+        }
+      ]
+    },
+    {
+      "id": "word-33",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "These childs are playing.",
+      "word": "child",
+      "pos": "noun",
+      "meaning": "아이",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "These children are playing."
+          ],
+          "conditions": [
+            "불규칙 복수 children과 복수 주어를 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "These children",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "are playing",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/child",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/countable-and-uncountable-nouns",
+          "supports": "불규칙 복수 children과 복수 주어를 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "word-34",
+      "domain": "word",
+      "category": "needs_work",
+      "sentence": "She sing well.",
+      "word": "well",
+      "pos": "adverb",
+      "meaning": "잘",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "She sings well."
+          ],
+          "conditions": [
+            "주어 She와 부사 well을 보존하고 sings를 사용한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "She",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "sings",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "well",
+              "roles": [
+                "M"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/well",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "주어 She와 부사 well을 보존하고 sings를 사용한다."
+        }
+      ]
+    },
+    {
+      "id": "word-35",
+      "domain": "word",
+      "category": "uncertain",
+      "sentence": "bank / river / money",
+      "word": "bank",
+      "pos": "noun",
+      "meaning": "은행",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말 목록·철자 후보만으로 학습자의 의도와 완성 문장을 만들지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/bank",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "단독 단어나 모호한 입력만으로 의도와 완성 문장을 만들지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-36",
+      "domain": "word",
+      "category": "uncertain",
+      "sentence": "lead / led / metal",
+      "word": "lead",
+      "pos": "verb",
+      "meaning": "이끌다",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말 목록·철자 후보만으로 학습자의 의도와 완성 문장을 만들지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/lead",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "단독 단어나 모호한 입력만으로 의도와 완성 문장을 만들지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-37",
+      "domain": "word",
+      "category": "uncertain",
+      "sentence": "object or subject",
+      "word": "object",
+      "pos": "noun",
+      "meaning": "물체",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말 목록·철자 후보만으로 학습자의 의도와 완성 문장을 만들지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/object",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "단독 단어나 모호한 입력만으로 의도와 완성 문장을 만들지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-38",
+      "domain": "word",
+      "category": "uncertain",
+      "sentence": "read / red / reading",
+      "word": "read",
+      "pos": "verb",
+      "meaning": "읽다",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말 목록·철자 후보만으로 학습자의 의도와 완성 문장을 만들지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/read",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "단독 단어나 모호한 입력만으로 의도와 완성 문장을 만들지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-39",
+      "domain": "word",
+      "category": "uncertain",
+      "sentence": "live / lived / alive",
+      "word": "live",
+      "pos": "verb",
+      "meaning": "살다",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말 목록·철자 후보만으로 학습자의 의도와 완성 문장을 만들지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/live",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "단독 단어나 모호한 입력만으로 의도와 완성 문장을 만들지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "word-40",
+      "domain": "word",
+      "category": "uncertain",
+      "sentence": "present / gift / now",
+      "word": "present",
+      "pos": "noun",
+      "meaning": "선물",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말 목록·철자 후보만으로 학습자의 의도와 완성 문장을 만들지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/present",
+          "supports": "작성한 목표 뜻·품사와 사전 용법을 대조한다."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "단독 단어나 모호한 입력만으로 의도와 완성 문장을 만들지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-41",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "I like jazz.",
+      "lessonId": "noun",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I like jazz."
+          ],
+          "conditions": [
+            "좋아하는 대상 jazz는 명사다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "like",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "jazz",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "좋아하는 대상 jazz는 명사다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-42",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "I walk to work.",
+      "lessonId": "verb",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I walk to work."
+          ],
+          "conditions": [
+            "일상 행동과 동사의 쓰임을 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "walk",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "일상 행동과 동사의 쓰임을 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-43",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "He likes her.",
+      "lessonId": "pronoun",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "He likes her."
+          ],
+          "conditions": [
+            "He는 주어, her는 목적어로 남녀 역할을 뒤집지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "He",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "likes",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "her",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-he-it-etc",
+          "supports": "He는 주어, her는 목적어로 남녀 역할을 뒤집지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-44",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "My uncle is kind.",
+      "lessonId": "adjective",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "My uncle is kind."
+          ],
+          "conditions": [
+            "kind는 주어를 설명하는 형용사 보어다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "My uncle",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "is",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "kind",
+              "roles": [
+                "C"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "kind는 주어를 설명하는 형용사 보어다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-45",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "I am now writing.",
+      "lessonId": "auxiliary",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I am now writing."
+          ],
+          "conditions": [
+            "now가 첫 조동사 뒤에 놓인 유효 어순을 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "am",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "now",
+              "roles": [
+                "M"
+              ]
+            },
+            {
+              "text": "writing",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/now",
+          "supports": "now가 첫 조동사 뒤에 놓인 유효 어순을 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-46",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "This book is interesting.",
+      "lessonId": "determiner",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "This book is interesting."
+          ],
+          "conditions": [
+            "This는 book을 한정하며 흥미롭다는 뜻을 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "This book",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "is",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "interesting",
+              "roles": [
+                "C"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/objects",
+          "supports": "This는 book을 한정하며 흥미롭다는 뜻을 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-47",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "I have an orange.",
+      "lessonId": "indefinite-article",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "I have an orange."
+          ],
+          "conditions": [
+            "단수 가산명사 orange 앞의 an을 인정한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "have",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "an orange",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/the",
+          "supports": "단수 가산명사 orange 앞의 an을 인정한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-48",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "The book is under the chair.",
+      "lessonId": "preposition",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "The book is under the chair."
+          ],
+          "conditions": [
+            "책이 의자 아래 있다는 위치 관계를 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "The book",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "is",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "under the chair",
+              "roles": [
+                "C",
+                "M"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/prepositions",
+          "supports": "책이 의자 아래 있다는 위치 관계를 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-49",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "Was the window broken by Tom?",
+      "lessonId": "verb",
+      "expected": {
+        "meaningUsage": [
+          "appropriate",
+          "needs_work"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "Was the window broken by Tom?"
+          ],
+          "conditions": [
+            "수동태 질문에서 window는 문법적 주어, Tom은 by 행위자다. 지정 과제의 평서 일상 행동과 불일치한다고 설명하는 meaningUsage는 허용하되 전체 문법과 성분은 정확해야 한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "Was",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the window",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "broken",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "by Tom",
+              "roles": [
+                "M"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/passive-voice",
+          "supports": "수동태 질문에서 window는 문법적 주어, Tom은 by 행위자다. 지정 과제의 평서 일상 행동과 불일치한다고 설명하는 meaningUsage는 허용하되 전체 문법과 성분은 정확해야 한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-50",
+      "domain": "grammar",
+      "category": "natural",
+      "sentence": "Open the door, please.",
+      "lessonId": "verb",
+      "expected": {
+        "meaningUsage": [
+          "appropriate",
+          "needs_work"
+        ],
+        "grammar": [
+          "natural"
+        ],
+        "correction": {
+          "policy": "unchanged",
+          "examples": [
+            "Open the door, please."
+          ],
+          "conditions": [
+            "명령문은 you를 추가하지 않고 door를 목적어로 분석한다. 지정 과제의 평서 일상 행동과 불일치한다고 설명하는 meaningUsage는 허용하되 전체 문법과 성분은 정확해야 한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "Open",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "the door",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/clause-types",
+          "supports": "명령문은 you를 추가하지 않고 door를 목적어로 분석한다. 지정 과제의 평서 일상 행동과 불일치한다고 설명하는 meaningUsage는 허용하되 전체 문법과 성분은 정확해야 한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-51",
+      "domain": "grammar",
+      "category": "needs_work",
+      "sentence": "Him likes she.",
+      "lessonId": "pronoun",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "He likes her."
+          ],
+          "conditions": [
+            "주격 He·목적격 her로 최소 수정하고 행위자/대상을 뒤집지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "He",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "likes",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "her",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/pronouns-personal-i-me-you-he-it-etc",
+          "supports": "주격 He·목적격 her로 최소 수정하고 행위자/대상을 뒤집지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-52",
+      "domain": "grammar",
+      "category": "needs_work",
+      "sentence": "I have an useful book.",
+      "lessonId": "indefinite-article",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I have a useful book."
+          ],
+          "conditions": [
+            "useful은 자음 /j/ 소리로 시작하므로 a를 쓴다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "have",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "a useful book",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/the",
+          "supports": "useful은 자음 /j/ 소리로 시작하므로 a를 쓴다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-53",
+      "domain": "grammar",
+      "category": "needs_work",
+      "sentence": "They is studying now.",
+      "lessonId": "auxiliary",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "They are studying now."
+          ],
+          "conditions": [
+            "복수 주어 They에 are를 쓰며 현재 진행을 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "They",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "are studying",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple-i-work",
+          "supports": "복수 주어 They에 are를 쓰며 현재 진행을 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-54",
+      "domain": "grammar",
+      "category": "needs_work",
+      "sentence": "I can swims.",
+      "lessonId": "modal",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I can swim."
+          ],
+          "conditions": [
+            "can 뒤에 동사원형 swim을 쓴다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "can swim",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/modality-",
+          "supports": "can 뒤에 동사원형 swim을 쓴다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-55",
+      "domain": "grammar",
+      "category": "needs_work",
+      "sentence": "I want learn English.",
+      "lessonId": "infinitive",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I want to learn English."
+          ],
+          "conditions": [
+            "want 뒤에 to부정사를 보완하고 배우려는 뜻을 유지한다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "want",
+              "roles": [
+                "V"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-patterns-want",
+          "supports": "want 뒤에 to부정사를 보완하고 배우려는 뜻을 유지한다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-56",
+      "domain": "grammar",
+      "category": "needs_work",
+      "sentence": "I have two book.",
+      "lessonId": "number",
+      "expected": {
+        "meaningUsage": [
+          "appropriate"
+        ],
+        "grammar": [
+          "needs_work"
+        ],
+        "correction": {
+          "policy": "minimal",
+          "examples": [
+            "I have two books."
+          ],
+          "conditions": [
+            "수량 two를 유지하고 명사를 복수 books로 고친다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "available"
+          ],
+          "facts": [
+            {
+              "text": "I",
+              "roles": [
+                "S"
+              ]
+            },
+            {
+              "text": "have",
+              "roles": [
+                "V"
+              ]
+            },
+            {
+              "text": "two books",
+              "roles": [
+                "O"
+              ]
+            }
+          ],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": true,
+          "reverseMeaning": true,
+          "swapRoles": true
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/countable-and-uncountable-nouns",
+          "supports": "수량 two를 유지하고 명사를 복수 books로 고친다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-57",
+      "domain": "grammar",
+      "category": "uncertain",
+      "sentence": "Music",
+      "lessonId": "noun",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-58",
+      "domain": "grammar",
+      "category": "uncertain",
+      "sentence": "eat go",
+      "lessonId": "verb",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-59",
+      "domain": "grammar",
+      "category": "uncertain",
+      "sentence": "on at in",
+      "lessonId": "preposition",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다."
+        }
+      ]
+    },
+    {
+      "id": "grammar-60",
+      "domain": "grammar",
+      "category": "uncertain",
+      "sentence": "she him they",
+      "lessonId": "pronoun",
+      "expected": {
+        "meaningUsage": [
+          "uncertain"
+        ],
+        "grammar": [
+          "uncertain"
+        ],
+        "correction": {
+          "policy": "withhold",
+          "examples": [],
+          "conditions": [
+            "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다.",
+            "인물·대상·시제·수량·나이·질문/명령의 의도를 보존한다. 정답 예문 문자열과의 완전 일치로 판정하지 않는다."
+          ]
+        },
+        "structure": {
+          "status": [
+            "unavailable"
+          ],
+          "facts": [],
+          "conditions": [
+            "주어와 목적어를 뒤집지 않는다. 문장에 없는 주어·나이·행위자를 추가하지 않는다.",
+            "전치사구 역할은 문맥에 맞는 보어/수식어 등 허용 분석을 검토한다."
+          ]
+        },
+        "critical": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false
+        }
+      },
+      "references": [
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/sentences-and-clauses",
+          "supports": "낱말이나 목록만으로 문장과 문법 목표 달성을 확정하지 않는다."
+        }
+      ]
+    }
+  ]
+}
