@@ -15,6 +15,7 @@ import type { LearningViewProps } from "./types";
 import { DiagnosticDownload } from "./diagnostic-download";
 import { useId } from 'react';
 import { useNavigationState } from '../navigation';
+import { useStudyRecoverySnapshot } from '../study/study-recovery';
 type SaveErrorProps = Pick<
   LearningViewProps,
   "saveError" | "error" | "conflict" | "saving" | "unsaved" | "store" | "state"
@@ -29,6 +30,7 @@ export function SaveError({
   state,
 }: SaveErrorProps) {
   const id = useId();
+  const recoverySnapshot = useStudyRecoverySnapshot();
   const [confirm, setConfirm] = useNavigationState(`reload.${id}`, false, true);
   return (
     <div ref={saveError} className="error-banner" role="alert">
@@ -49,7 +51,7 @@ export function SaveError({
             onClick={() =>
               download(
                 "haru-unsaved-backup.json",
-                JSON.stringify(state),
+                JSON.stringify(recoverySnapshot(state)),
               )
             }
           >

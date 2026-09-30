@@ -58,6 +58,7 @@ module.exports = [
   "study-controller-render-qa.cjs",
   "study-date-qa.cjs",
   "study-layout-qa.cjs",
+  "study-recovery-qa.cjs",
   "today-status-qa.cjs",
   "ui-plan-contract-qa.cjs",
   "ui-refresh-qa.cjs",

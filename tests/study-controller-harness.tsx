@@ -3,6 +3,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { useStudySessionController } from '../app/study/use-study-session-controller';
 import { EMPTY, type Session, type State, type Word } from '../lib/learning';
+import { StudyRecoveryProvider, useStudyRecoverySnapshot } from '../app/study/study-recovery';
 
 const word: Word = { id: 'harness-word', word: 'example', headword: 'example', pos: 'n.', level: 'A1', page: 1 };
 const material = { meaning: '예', expression: 'an example', expressionTranslation: '하나의 예', example: '', translation: '', source: 'test' };
@@ -22,11 +23,14 @@ type Controls = {
   refresh: () => void;
   controller: ReturnType<typeof useStudySessionController>;
   trace: Trace[];
+  recovery: () => State;
+  unmount: () => void;
 };
 declare global { interface Window { studyHarness: Controls } }
 
 function Harness() {
   const [state, setState] = useState(seed);
+  const recoverySnapshot = useStudyRecoverySnapshot();
   useLayoutEffect(() => { currentState.current = state; }, [state]);
   const c = useStudySessionController({
     date: first.date, activityDate: () => first.date, state, currentState, session: state.sessions[first.id],
@@ -36,7 +40,7 @@ function Harness() {
   });
   useLayoutEffect(() => {
     window.studyHarness = {
-      controller: c, trace,
+      controller: c, trace, recovery: () => recoverySnapshot(state), unmount: () => root.unmount(),
       patch: patch => setState(previous => ({ ...previous, sessions: { ...previous.sessions, [first.id]: { ...previous.sessions[first.id], ...patch } } })),
       refresh: () => setState(previous => structuredClone(previous)),
     };
@@ -51,4 +55,5 @@ function HarnessView({ controller: { focus, id, s, revealed, answer, setAnswer, 
     <button onClick={() => revealAnswer()}>공개</button>
   </main>;
 }
-createRoot(document.getElementById('root')!).render(<Harness />);
+const root = createRoot(document.getElementById('root')!);
+root.render(<React.StrictMode><StudyRecoveryProvider><Harness /></StudyRecoveryProvider></React.StrictMode>);

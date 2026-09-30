@@ -36,10 +36,11 @@ import { NavigationProvider, useNavigationGuard, useNavigationEpoch } from './na
 import { StartupScreen } from './startup-screen';
 import { useLearningTools } from './learning/use-learning-tools';
 import { useTabNavigation } from './learning/use-tab-navigation';
+import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean }) {
-  return <NavigationProvider><LearningScreens {...props} /></NavigationProvider>;
+  return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
 function LearningScreens({
   initialServerTime,

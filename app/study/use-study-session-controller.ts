@@ -21,6 +21,8 @@ import { applyWarmupResult, pausedStudyState } from "@/lib/learning-commands";
 import { studyMaterial, withAnswerDraft } from "@/lib/study-draft";
 import { recordAvailability } from "@/lib/client-diagnostics";
 import { studyMaterialEdit } from '@/lib/study-material-edit';
+import { studyRecoveryState } from '@/lib/study-recovery';
+import { useStudyRecoveryDraft } from './study-recovery';
 export function useStudySessionController({
   date,
   activityDate,
@@ -63,6 +65,9 @@ export function useStudySessionController({
   }, [visible, storeBusy, aiPending, answerPresent, hint, revealed, s.stage]);
   const focus = useRef<HTMLHeadingElement>(null);
   const [showSummary, setShowSummary] = useState(false);
+  useStudyRecoveryDraft(latest => showSummary ? latest : studyRecoveryState(
+    latest, s, draft, content ? studyMaterial(draft, content, !!word?.personal) : undefined,
+  ));
   useEffect(() => { focus.current?.focus(); }, [question]);
 
   const { seconds, paused, boutStart, setPaused, setBoutStart } =
