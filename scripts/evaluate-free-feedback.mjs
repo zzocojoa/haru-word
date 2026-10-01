@@ -1,6 +1,6 @@
 // A separate free-account-confirmed cohort. Never extend or rewrite old ledgers.
 import { createInterface } from 'node:readline';
-import { mkdirSync, readFileSync, writeFileSync, renameSync, openSync, closeSync, unlinkSync, existsSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync, renameSync, openSync, closeSync, unlinkSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -11,7 +11,7 @@ const comparison = 'chunked-free-v1', approvedCalls = 120, previousCalls = 360, 
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const atomicJson = (path, value) => { writeFileSync(path + '.tmp', JSON.stringify(value, null, 2) + '\n'); renameSync(path + '.tmp', path); };
 const stops = new Set(['provider_limit', 'provider_minute_limit', 'provider_daily_limit', 'groq_limit', 'groq_billing', 'provider_precondition', 'provider_key_invalid', 'provider_key_blocked', 'provider_permission', 'groq_key_invalid', 'groq_permission']);
-export function validateFreeComparison(previous, ledger, expected) {
+export function validateFreeComparison(previous, ledger, expected, parseValidationDetail = () => undefined) {
   if (previous.length !== previousCalls || hash(previous) !== ledger.previousHash || ledger.comparison !== comparison || ledger.approvedCalls !== approvedCalls
       || ledger.freeTierConfirmation !== 'human-user' || ledger.attempts.length > approvedCalls) throw Error('Invalid free cohort context.');
   for (const key of ['fixtureHash', 'fixtureContentHash', 'sourceCommit', 'profiles', 'models']) if (hash(ledger[key]) !== hash(expected[key])) throw Error('Free cohort profile changed.');
@@ -30,6 +30,8 @@ export function validateFreeComparison(previous, ledger, expected) {
         || a.domain !== p.domain || a.expectedModel !== expected.models[a.provider] || a.promptHash !== p.promptHash || a.requestHash !== p.requestHash
         || a.fixtureHash !== expected.fixtureHash || a.fixtureContentHash !== expected.fixtureContentHash || seen.has(key) || !['started','response','failure'].includes(a.status)) throw Error('Invalid free cohort attempt.');
     seen.add(key);
+    if (a.validationDetail !== undefined && (a.status !== 'failure' || !['provider_invalid_response', 'groq_invalid_response'].includes(a.code)
+        || !parseValidationDetail(a.validationDetail, { stage: a.validationStage, diagnostic: a.diagnostic }))) throw Error('Invalid safe validation detail.');
   }
   const derivedStops = {};
   for (const a of ledger.attempts) {
@@ -44,9 +46,9 @@ const endpoint = '/api/english-accuracy-evaluation';
 const init = (config, body, signal) => ({ method:'POST',redirect:'error',signal,headers:{'Content-Type':'application/json',Origin:config.origin,'X-English-Accuracy-Token':config.evaluationToken,
   ...(config.siteToken ? {'OAI-Sites-Authorization':config.siteToken.startsWith('Bearer ')?config.siteToken:`Bearer ${config.siteToken}`} : {})},body:JSON.stringify(body) });
 export async function collectFreeComparison(context, options) {
-  const {previous,ledger,cases,config,expected,safeCodes,validationStages,diagnostics,parseFeedback}=context;
+  const {previous,ledger,cases,config,expected,safeCodes,validationStages,diagnostics,parseFeedback,parseValidationDetail}=context;
   const {save,fetcher=fetch,signal,progress=()=>{},pause=ms=>new Promise(r=>setTimeout(r,ms))}=options;
-  validateFreeComparison(previous,ledger,expected);
+  validateFreeComparison(previous,ledger,expected,parseValidationDetail);
   if (ledger.completed) return;
   for(const sample of cases) for(const provider of ['google','groq']) {
     signal?.throwIfAborted();
@@ -73,6 +75,8 @@ export async function collectFreeComparison(context, options) {
         if(Number.isInteger(result?.providerStatus)&&result.providerStatus>=100&&result.providerStatus<=599)a.providerStatus=result.providerStatus;
         if(validationStages.includes(result?.validationStage))a.validationStage=result.validationStage;
         if(diagnostics.includes(result?.diagnostic))a.diagnostic=result.diagnostic;
+        const detail=['provider_invalid_response','groq_invalid_response'].includes(a.code)
+          ? parseValidationDetail?.(result?.validationDetail,{stage:a.validationStage,diagnostic:a.diagnostic}) : undefined;if(detail)a.validationDetail=detail;
         if(stops.has(a.code))ledger.providerStops[provider]=a.code;
       }
     }catch{a.status='failure';a.code='evaluation_transport';}
@@ -94,6 +98,11 @@ async function main(){
   process.once('SIGINT',interrupt);process.once('SIGTERM',interrupt);
   try{
     writeFileSync(lock,JSON.stringify({pid:process.pid,comparison,startedAt:new Date().toISOString()}));
+    // Recovery needs the same trusted safe parser even when the frozen request
+    // module predates diagnostics. Never rewrite that module or old ledgers.
+    const validatorDirectory=mkdtempSync(resolve(root,'detail-validator-')),validatorPath=resolve(validatorDirectory,'parser.mjs');
+    await build({entryPoints:[fileURLToPath(new URL('../lib/feedback-validation-detail.ts',import.meta.url))],outfile:validatorPath,bundle:true,platform:'node',format:'esm',logLevel:'silent'});
+    const {parseFeedbackValidationDetail:parseValidationDetail}=await import(pathToFileURL(validatorPath).href);
     const legacy=JSON.parse(readFileSync(resolve(root,'ledger.json'))).attempts,original=JSON.parse(readFileSync(resolve(root,'original-first/ledger.json'))).attempts;
     const published=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-original-first.json'));
     if(hash(legacy)!==published.previousLedgerHash||hash(original)!==published.ledgerHash)throw Error('Parent history changed.');
@@ -103,12 +112,12 @@ async function main(){
       const path=resolve(directory,'requests.mjs');await build({entryPoints:['lib/free-feedback-evaluation.ts'],outfile:path,bundle:true,platform:'node',format:'esm',logLevel:'silent'});
       const helper=await import(pathToFileURL(path).href),profiles={};for(const sample of helper.accuracyCases)profiles[sample.id]={domain:sample.domain,...await helper.freeAccuracyHashes(sample)};
       const expected={...originalComparisonFixture(readFileSync('tests/fixtures/english-accuracy.json','utf8'),published.fixtureHash),sourceCommit:config.sourceCommit,profiles,models:helper.accuracyModels};
-      ledger??={comparison,approvedCalls,freeTierConfirmation:'human-user',previousHash:hash(previous),...expected,providerStops:{},attempts:[]};validateFreeComparison(previous,ledger,expected);
+      ledger??={comparison,approvedCalls,freeTierConfirmation:'human-user',previousHash:hash(previous),...expected,providerStops:{},attempts:[]};validateFreeComparison(previous,ledger,expected,parseValidationDetail);
       const preflight=await fetch(config.origin+endpoint,init(config,{caseId:'preflight-invalid-case',provider:'google',comparison},AbortSignal.timeout(15000)));
       if(preflight.status!==400||(await preflight.json()).code!=='evaluation_invalid_case')throw Error('Free endpoint not ready.');
-      await collectFreeComparison({previous,ledger,cases:helper.accuracyCases,config,expected,safeCodes:[...Object.keys(helper.FEEDBACK_ISSUES),'evaluation_disabled','evaluation_unauthorized','evaluation_invalid_request','evaluation_invalid_case','evaluation_key_missing','evaluation_internal'],validationStages:helper.FEEDBACK_VALIDATION_STAGES,diagnostics:helper.FEEDBACK_DIAGNOSTICS,parseFeedback:helper.parseOriginalAccuracyFeedback},
+      await collectFreeComparison({previous,ledger,cases:helper.accuracyCases,config,expected,safeCodes:[...Object.keys(helper.FEEDBACK_ISSUES),'evaluation_disabled','evaluation_unauthorized','evaluation_invalid_request','evaluation_invalid_case','evaluation_key_missing','evaluation_internal'],validationStages:helper.FEEDBACK_VALIDATION_STAGES,diagnostics:helper.FEEDBACK_DIAGNOSTICS,parseFeedback:helper.parseOriginalAccuracyFeedback,parseValidationDetail},
         {save:v=>atomicJson(ledgerPath,v),signal:stop.signal,progress:v=>console.log(JSON.stringify(v))});
-    }else validateFreeComparison(previous,ledger,{fixtureHash:ledger.fixtureHash,fixtureContentHash:ledger.fixtureContentHash,sourceCommit:config.sourceCommit,profiles:ledger.profiles,models:ledger.models});
+    }else validateFreeComparison(previous,ledger,{fixtureHash:ledger.fixtureHash,fixtureContentHash:ledger.fixtureContentHash,sourceCommit:config.sourceCommit,profiles:ledger.profiles,models:ledger.models},parseValidationDetail);
     const reviewPath=resolve(directory,'review-bundle.json'),existing=existsSync(reviewPath)?JSON.parse(readFileSync(reviewPath)):undefined,review=reviewBundle(ledger.attempts,round,existing);
     atomicJson(reviewPath,review);atomicJson(resolve(directory,'blind.json'),review.blinded);
     console.log(JSON.stringify({complete:true,comparison,attempts:ledger.attempts.length,totalAttempts:previousCalls+ledger.attempts.length,providerStops:ledger.providerStops}));

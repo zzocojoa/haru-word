@@ -9,6 +9,7 @@ import { GOOGLE_PRIMARY_TIMEOUT_MS, type FeedbackProviders } from './feedback-fa
 import { FEEDBACK_OUTPUT_LIMITS } from './provider-feedback-contract';
 export { accuracyCases, accuracyModels, FEEDBACK_ISSUES, FEEDBACK_VALIDATION_STAGES, parseOriginalAccuracyFeedback } from './original-feedback-evaluation';
 export { FEEDBACK_DIAGNOSTICS } from './provider-feedback-contract';
+export { parseFeedbackValidationDetail } from './feedback-validation-detail';
 export const FREE_FEEDBACK_COMPARISON = 'chunked-free-v1' as const;
 export function freeAccuracyRequest(sample: AccuracyCase) {
   return sample.domain === 'word'

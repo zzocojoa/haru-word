@@ -65,5 +65,5 @@ export async function generateTutorFeedback(
   try {
     const text=candidate?.content?.parts?.filter(p=>!p.thought).map(p=>p.text||'').join('')||'';
     return contract.parse(text, input.sentence, FEEDBACK_MODEL);
-  } catch (error) { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }, error instanceof FeedbackValidationError ? error.stage : 'envelope', error instanceof FeedbackValidationError ? error.diagnostic : undefined); }
+  } catch (error) { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }, error instanceof FeedbackValidationError ? error.stage : 'envelope', error instanceof FeedbackValidationError ? error.diagnostic : undefined, error instanceof FeedbackValidationError ? error.validationDetail : undefined); }
 }

@@ -1,10 +1,16 @@
 # 하루단어 운영 안내
 
-## AI 성분 분석 후보·무료 계정 비교 (2026-10-01)
+## 반복 미달 조사·안전한 진단 보완 (2026-10-01)
+
+추가 실제 호출 없이 기존95개 응답을 재생해 모두 공통 형식 검증을 통과하고 영어 실패17개도 허용됨을 확인했다. 형식 검증의 의미 정확도 공백은 재현했지만 모델 내부 오판 원인은 미확정이며 기존 Google44/60·Groq34/60은 그대로다. 출력 거절25건의 정밀 원인은 과거 자료로 복원할 수 없다. 새 고정 합성 비교에만 제한된 필드/사유·토큰 개수 진단을 추가하고 CLI 재개·완료 복구와 동시 재생을 검증했다. [원인 조사·재생 자료·검증과 롤백](ENGLISH_ACCURACY_ROOT_CAUSE.md)을 따른다. 후보 false·평가 종료·누적480회 상한·v3 지원·기존 학습자 API/로그/저장/백업·DB/접근 범위를 유지한다.
+
+현재 운영은 기존 Sites **v91**, 소스 `0c2d46edc1e5e6023046a9f0a27ce56ce58a03b5`, 환경 revision **25**다. native 배포 `appgdep_6abdcc6c7ce88191882f9132f29bd6c9`가 **2026-10-01 11:59:10 KST succeeded**이고, 게시 후 고정 invalid-case 요청의 **12:00:18 KST 404/evaluation_disabled·제공자0회**를 확인했다. 원래7개 환경 키·v3=true·후보 false·임시 평가 키0·public/active·Site/DB 식별자는 유지한다. Windows bundled 소스 push 뒤 압축 helper 경로 문제는 bundled prepare-site-build + Node24/native tar로 처리했고 동일 clean HEAD·entrypoint·manifest·archive를 대조했다. 전체490/490·타입·린트0오류(기존13경고)·Worker 빌드와 게시 소스의 Node22/24 push [36808011023](https://github.com/zzocojoa/haru-word/actions/runs/36808011023)·PR [36808041164](https://github.com/zzocojoa/haru-word/actions/runs/36808041164) 네 검사가 통과했다. 변경은 [PR #11](https://github.com/zzocojoa/haru-word/pull/11)에 있다.
+
+## AI 성분 분석 후보·무료 계정 비교 (2026-10-01 이전 상태)
 
 사용자 확인 Google·Groq 무료 계정으로 기존360회와 분리한 추가120회·누적480회 비교를 완료했다. 유효95개·종합 통과78개·언어 실패17개·출력 거절25개, HTTP 실패0이다. **Google44/60·Groq34/60**으로 기준 미달이며 `feedback_chunked_enabled`는 누락/false로 유지한다. 성분별 단어 수 복원 후보·한도/결제/선행 조건 중단과 검사 개선을 준비했지만 모든 영어 결함을 해결한 것은 아니다. 실제 결과·가림 판정·한계는 [평가 보고서](ENGLISH_ACCURACY_CHUNKED_FREE.md), 승인 범위·중단/복구·v3 호환 롤백은 [CHUNKED_FEEDBACK.md](CHUNKED_FEEDBACK.md)에 있다.
 
-현재 운영은 기존 Sites **v90**, 소스 `718870e21b453c484387814f879ed7685bfd3048`, 환경 revision **25**다. 만료를 과거로 설정한 revision24 재게시·이전 토큰으로404 확인 후 임시 token/expiry/profile 삭제·revision25 재게시·2026-10-01 **10:46:12 KST** 이전 토큰으로404/evaluation_disabled를 확인했다. 종료 제공자 호출0·원래7키·v3 생성 true·기존 Site ID/DB/public 접근을 유지한다. 요금제/결제/키/지역 변경과 자동 재시도/fallback/CI 실제 호출은 없다. 사용자 확인을 독립 청구 검증으로 표현하지 않는다. 이번 승인 슬롯은 소진했으며 원장을 초기화하거나 추가 호출하지 않는다. 첫 답·성적·편집·백업/API 형식·DB와 기존 Google 우선/Groq 대체는 유지한다. 위험도 중간·새 마이그레이션 없음·개인 입력/실패 원문 로그 없음. 실제 iPhone·독립 인간 영어 전문가 검토는 미검증이다.
+무료 비교 종료 당시 운영은 기존 Sites **v90**, 소스 `718870e21b453c484387814f879ed7685bfd3048`, 환경 revision **25**다. 만료를 과거로 설정한 revision24 재게시·이전 토큰으로404 확인 후 임시 token/expiry/profile 삭제·revision25 재게시·2026-10-01 **10:46:12 KST** 이전 토큰으로404/evaluation_disabled를 확인했다. 종료 제공자 호출0·원래7키·v3 생성 true·기존 Site ID/DB/public 접근을 유지한다. 요금제/결제/키/지역 변경과 자동 재시도/fallback/CI 실제 호출은 없다. 사용자 확인을 독립 청구 검증으로 표현하지 않는다. 이번 승인 슬롯은 소진했으며 원장을 초기화하거나 추가 호출하지 않는다. 첫 답·성적·편집·백업/API 형식·DB와 기존 Google 우선/Groq 대체는 유지한다. 위험도 중간·새 마이그레이션 없음·개인 입력/실패 원문 로그 없음. 실제 iPhone·독립 인간 영어 전문가 검토는 미검증이다.
 
 ## 2026-10-01 원문 우선 후보 평가 종료 (이전 상태)
 
