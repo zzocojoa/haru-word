@@ -2,7 +2,7 @@ import { env } from 'cloudflare:workers';
 import { z } from 'zod';
 import { accuracyCases, evaluateAccuracyCase } from '@/lib/english-accuracy';
 import { evaluateOriginalAccuracyCase, ORIGINAL_FEEDBACK_COMPARISON } from '@/lib/original-feedback-evaluation';
-import { evaluateFreeAccuracyCase, FREE_FEEDBACK_COMPARISON, FEEDBACK_DIAGNOSTICS } from '@/lib/free-feedback-evaluation';
+import { evaluateFreeAccuracyCase, FREE_FEEDBACK_COMPARISON, FEEDBACK_DIAGNOSTICS, parseFeedbackValidationDetail } from '@/lib/free-feedback-evaluation';
 import { FeedbackError } from '@/lib/gemini-feedback';
 import { json, validateJsonMutation } from '@/lib/server/http';
 import { readBoundedJsonText } from '@/lib/server/request-body';
@@ -49,10 +49,13 @@ export async function POST(request: Request) {
     return json({ ...result, caseId, provider, ...profile, durationMs: Date.now() - started });
   } catch (error) {
     const known = error instanceof FeedbackError;
+    const validationDetail = 'comparison' in parsed.data && parsed.data.comparison === FREE_FEEDBACK_COMPARISON
+      && known && error.code.endsWith('invalid_response') ? parseFeedbackValidationDetail(error.validationDetail, { stage: error.validationStage, diagnostic: error.diagnostic }) : undefined;
     return json({ caseId, provider, ...profile, code: known ? error.code : 'evaluation_internal',
       ...(known && error.issue.providerStatus !== undefined ? { providerStatus: error.issue.providerStatus } : {}),
       ...(known && error.code.endsWith('invalid_response') && error.validationStage ? { validationStage: error.validationStage } : {}),
       ...('comparison' in parsed.data && parsed.data.comparison === FREE_FEEDBACK_COMPARISON && known && error.diagnostic && FEEDBACK_DIAGNOSTICS.includes(error.diagnostic) ? { diagnostic: error.diagnostic } : {}),
+      ...(validationDetail ? { validationDetail } : {}),
       durationMs: Date.now() - started }, known ? error.status : 503);
   }
 }

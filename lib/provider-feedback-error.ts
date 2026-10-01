@@ -1,5 +1,6 @@
 import { FEEDBACK_ISSUES, type FeedbackIssue, type FeedbackIssueCode } from './feedback-issue';
 import type { FeedbackValidationStage, FeedbackDiagnostic } from './provider-feedback-contract';
+import type { FeedbackValidationDetail } from './feedback-validation-detail';
 
 export class FeedbackError extends Error {
   readonly code: FeedbackIssueCode;
@@ -7,8 +8,9 @@ export class FeedbackError extends Error {
   readonly issue: FeedbackIssue;
   readonly validationStage?: FeedbackValidationStage;
   readonly diagnostic?: FeedbackDiagnostic;
-  constructor(code: FeedbackIssueCode, status: number, details: Omit<FeedbackIssue, 'code'> = {}, validationStage?: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic) {
-    super(FEEDBACK_ISSUES[code][1]); this.code = code; this.status = status; this.issue = { code, ...details }; this.validationStage = validationStage; this.diagnostic = diagnostic;
+  readonly validationDetail?: FeedbackValidationDetail;
+  constructor(code: FeedbackIssueCode, status: number, details: Omit<FeedbackIssue, 'code'> = {}, validationStage?: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic, validationDetail?: FeedbackValidationDetail) {
+    super(FEEDBACK_ISSUES[code][1]); this.code = code; this.status = status; this.issue = { code, ...details }; this.validationStage = validationStage; this.diagnostic = diagnostic; this.validationDetail = validationDetail;
   }
 }
 const record = (value: unknown): Record<string, unknown> => value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};

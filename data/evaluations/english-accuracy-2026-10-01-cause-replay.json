@@ -1,0 +1,1034 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Offline root-cause replay; no new generation or score",
+  "sourceArtifact": "data/evaluations/english-accuracy-2026-10-01-chunked-free.json",
+  "sourceArtifactContentHash": "2947cde93dc821ce68c0e8deff36d8cabf399893fb445db356d92398a96e2e0d",
+  "fixtureContentHash": "76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a",
+  "actualProviderCalls": 0,
+  "frozenScores": {
+    "google": 44,
+    "groq": 34
+  },
+  "validResponses": 95,
+  "parserAccepted": 95,
+  "knownSemanticFailures": 17,
+  "knownSemanticFailuresAccepted": 17,
+  "failedDimensions": {
+    "meaning": 6,
+    "grammar": 4,
+    "correction": 1,
+    "structure": 10
+  },
+  "unavailableOutputs": 25,
+  "rows": [
+    {
+      "label": "B106",
+      "caseId": "grammar-42",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B073",
+      "caseId": "grammar-42",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "grammar",
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B084",
+      "caseId": "grammar-43",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B027",
+      "caseId": "grammar-44",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B069",
+      "caseId": "grammar-44",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B061",
+      "caseId": "grammar-45",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B101",
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B011",
+      "caseId": "grammar-46",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B002",
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B010",
+      "caseId": "grammar-47",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B048",
+      "caseId": "grammar-47",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B117",
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B018",
+      "caseId": "grammar-49",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B070",
+      "caseId": "grammar-50",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B032",
+      "caseId": "grammar-50",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B068",
+      "caseId": "grammar-51",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "meaning"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B054",
+      "caseId": "grammar-51",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "meaning"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B102",
+      "caseId": "grammar-52",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B103",
+      "caseId": "grammar-52",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B030",
+      "caseId": "grammar-53",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B085",
+      "caseId": "grammar-53",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B005",
+      "caseId": "grammar-54",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B028",
+      "caseId": "grammar-54",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B022",
+      "caseId": "grammar-55",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "meaning"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B083",
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B062",
+      "caseId": "grammar-56",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "grammar"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B016",
+      "caseId": "grammar-56",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B112",
+      "caseId": "grammar-57",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B114",
+      "caseId": "grammar-57",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "meaning"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B031",
+      "caseId": "grammar-58",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B003",
+      "caseId": "grammar-59",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B071",
+      "caseId": "grammar-60",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B007",
+      "caseId": "grammar-60",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B063",
+      "caseId": "word-01",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B090",
+      "caseId": "word-01",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B076",
+      "caseId": "word-02",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B036",
+      "caseId": "word-02",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B015",
+      "caseId": "word-03",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B008",
+      "caseId": "word-03",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B045",
+      "caseId": "word-04",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B067",
+      "caseId": "word-05",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B113",
+      "caseId": "word-06",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B096",
+      "caseId": "word-06",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B039",
+      "caseId": "word-07",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B024",
+      "caseId": "word-07",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B060",
+      "caseId": "word-08",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B004",
+      "caseId": "word-08",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B038",
+      "caseId": "word-10",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B006",
+      "caseId": "word-10",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B043",
+      "caseId": "word-11",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B077",
+      "caseId": "word-12",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B020",
+      "caseId": "word-12",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B072",
+      "caseId": "word-13",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B042",
+      "caseId": "word-14",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B009",
+      "caseId": "word-14",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B056",
+      "caseId": "word-15",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B098",
+      "caseId": "word-15",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B086",
+      "caseId": "word-16",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B014",
+      "caseId": "word-16",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B074",
+      "caseId": "word-17",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B105",
+      "caseId": "word-17",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B089",
+      "caseId": "word-18",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B120",
+      "caseId": "word-18",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B051",
+      "caseId": "word-19",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B021",
+      "caseId": "word-20",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B034",
+      "caseId": "word-20",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B019",
+      "caseId": "word-21",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B023",
+      "caseId": "word-21",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B087",
+      "caseId": "word-22",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "grammar"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B037",
+      "caseId": "word-23",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B001",
+      "caseId": "word-24",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B055",
+      "caseId": "word-24",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B078",
+      "caseId": "word-25",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "meaning"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B088",
+      "caseId": "word-26",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B052",
+      "caseId": "word-26",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B017",
+      "caseId": "word-27",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B093",
+      "caseId": "word-27",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B047",
+      "caseId": "word-28",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B012",
+      "caseId": "word-28",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B108",
+      "caseId": "word-29",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B058",
+      "caseId": "word-29",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B066",
+      "caseId": "word-30",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B041",
+      "caseId": "word-30",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B050",
+      "caseId": "word-31",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B080",
+      "caseId": "word-32",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B053",
+      "caseId": "word-32",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B082",
+      "caseId": "word-33",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B059",
+      "caseId": "word-34",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B081",
+      "caseId": "word-34",
+      "provider": "groq",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B064",
+      "caseId": "word-35",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B119",
+      "caseId": "word-36",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B040",
+      "caseId": "word-37",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ],
+      "interpretation": "frozen_semantic_failure"
+    },
+    {
+      "label": "B094",
+      "caseId": "word-38",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B110",
+      "caseId": "word-39",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    },
+    {
+      "label": "B049",
+      "caseId": "word-40",
+      "provider": "google",
+      "parserAccepted": true,
+      "failedDimensions": [],
+      "interpretation": "frozen_pass"
+    }
+  ],
+  "unavailable": [
+    {
+      "label": "B013",
+      "caseId": "grammar-41",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B104",
+      "caseId": "grammar-41",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B091",
+      "caseId": "grammar-43",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B033",
+      "caseId": "grammar-48",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B046",
+      "caseId": "grammar-49",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B029",
+      "caseId": "grammar-58",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B097",
+      "caseId": "grammar-59",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B118",
+      "caseId": "word-04",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B100",
+      "caseId": "word-05",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B095",
+      "caseId": "word-09",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B044",
+      "caseId": "word-09",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B092",
+      "caseId": "word-11",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B075",
+      "caseId": "word-13",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B111",
+      "caseId": "word-19",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B026",
+      "caseId": "word-22",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B025",
+      "caseId": "word-23",
+      "provider": "groq",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B115",
+      "caseId": "word-25",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B079",
+      "caseId": "word-31",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B065",
+      "caseId": "word-33",
+      "provider": "google",
+      "validationStage": "structure",
+      "diagnostic": "chunk_count",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B057",
+      "caseId": "word-35",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B035",
+      "caseId": "word-36",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B107",
+      "caseId": "word-37",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B099",
+      "caseId": "word-38",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B109",
+      "caseId": "word-39",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    },
+    {
+      "label": "B116",
+      "caseId": "word-40",
+      "provider": "groq",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "exactCause": "not_recorded"
+    }
+  ],
+  "conclusion": "Format/ordering/judgment consistency does not validate English meaning, roles or explanations. Model-internal cause remains unknown.",
+  "parserSourceHashes": {
+    "lib/provider-feedback-contract.ts": "0274e7ee3e28edff4316e5160dc6d902d479b22b5c95cb38ba199d3b7e1adae3",
+    "lib/sentence-feedback.ts": "3fb07e35967abb396c9ad05ef891bb443ead7f9dc26b08377aefbfde529faac8",
+    "lib/sentence-structure.ts": "c587f207e84b581b5f3cd8809f64a1f1215b42085c4b20b5903d3e081b468bf4",
+    "lib/learning/feedback-identity.ts": "d116ea16ce4a5dd786c09cf88d1bbd47c3b72f2dad83f0ec11857082cbc729b7",
+    "package-lock.json": "f3001da9fb12487af8be24b088d2593f11dc6803699080f4f5f80582fb36e47c"
+  },
+  "parserBundleHash": "773bcb80a6bcc8d660865694d90d813f6a1f7a2b5f9d9bc9e7180b3d04f8fd56"
+}

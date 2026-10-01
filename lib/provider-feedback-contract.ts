@@ -2,6 +2,7 @@ import {
   feedbackContentSchema, GRAMMAR_VALUES, MEANING_USAGE_VALUES, type SentenceFeedback,
 } from './sentence-feedback.ts';
 import { structureJsonSchema, structureInstruction } from './sentence-structure.ts';
+import type { FeedbackValidationDetail } from './feedback-validation-detail';
 
 // Shared output contract, independent of either provider's HTTP protocol.
 export const FEEDBACK_OUTPUT_LIMITS = { tokens: 4096, textCharacters: 30000 } as const;
@@ -14,7 +15,8 @@ export type FeedbackDiagnostic = (typeof FEEDBACK_DIAGNOSTICS)[number];
 export class FeedbackValidationError extends Error {
   readonly stage: FeedbackValidationStage;
   readonly diagnostic?: FeedbackDiagnostic;
-  constructor(stage: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic) { super('Invalid feedback content'); this.stage = stage; this.diagnostic = diagnostic; }
+  readonly validationDetail?: FeedbackValidationDetail;
+  constructor(stage: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic, validationDetail?: FeedbackValidationDetail) { super('Invalid feedback content'); this.stage = stage; this.diagnostic = diagnostic; this.validationDetail = validationDetail; }
 }
 
 export const responseJsonSchema = {

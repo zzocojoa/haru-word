@@ -50,5 +50,5 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
     const text = candidate?.message?.content;
     if (body?.model !== GROQ_FEEDBACK_MODEL) throw new FeedbackValidationError('model');
     return contract.parse(text, input.sentence, GROQ_FEEDBACK_MODEL);
-  } catch (error) { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }, error instanceof FeedbackValidationError ? error.stage : 'envelope', error instanceof FeedbackValidationError ? error.diagnostic : undefined); }
+  } catch (error) { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }, error instanceof FeedbackValidationError ? error.stage : 'envelope', error instanceof FeedbackValidationError ? error.diagnostic : undefined, error instanceof FeedbackValidationError ? error.validationDetail : undefined); }
 }

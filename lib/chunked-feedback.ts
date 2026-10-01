@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { GRAMMAR_VALUES, MEANING_USAGE_VALUES } from './sentence-feedback';
 import { STRUCTURE_ROLE_CODES } from './sentence-structure';
 import { FeedbackValidationError, FEEDBACK_OUTPUT_LIMITS, parseProviderFeedback, responseJsonSchema, type ProviderFeedbackContract } from './provider-feedback-contract';
+import { summarizeValidationIssues } from './feedback-validation-detail';
 
 const wireSchema = z.object({
   meaningUsage: z.enum(MEANING_USAGE_VALUES), grammar: z.enum(GRAMMAR_VALUES),
@@ -20,17 +21,21 @@ export function parseChunkedFeedback(text: unknown, original: string, model: Par
   let value: unknown;
   try { value = JSON.parse(text); } catch { throw new FeedbackValidationError('json_syntax'); }
   const parsed = wireSchema.safeParse(value);
-  if (!parsed.success) throw new FeedbackValidationError('fields', 'wire_fields');
+  if (!parsed.success) throw new FeedbackValidationError('fields', 'wire_fields', summarizeValidationIssues(parsed.error.issues));
   const content = parsed.data, sentence = content.correctedSentence;
   const tokens = [...sentence.matchAll(/\S+/gu)];
   let cursor = 0;
-  const parts = content.structure.parts.map(part => {
+  const parts = content.structure.parts.map((part, partIndex) => {
     const start = tokens[cursor], end = tokens[cursor + part.wordCount - 1];
-    if (!start || !end) throw new FeedbackValidationError('structure', 'chunk_count');
+    if (!start || !end) throw new FeedbackValidationError('structure', 'chunk_count', {
+      kind: 'tokens', reason: 'part_exceeds_tokens', tokenCount: tokens.length, consumedTokens: cursor, requestedTokens: part.wordCount, partIndex,
+    });
     cursor += part.wordCount;
     return { text: sentence.slice(start.index, end.index + end[0].length), role: part.role, explanation: part.explanation };
   });
-  if (content.structure.status === 'available' && cursor !== tokens.length) throw new FeedbackValidationError('structure', 'chunk_count');
+  if (content.structure.status === 'available' && cursor !== tokens.length) throw new FeedbackValidationError('structure', 'chunk_count', {
+    kind: 'tokens', reason: 'leftover_tokens', tokenCount: tokens.length, consumedTokens: cursor,
+  });
   return parseProviderFeedback(JSON.stringify({ ...content, structure: { ...content.structure, parts } }), original, model);
 }
 
