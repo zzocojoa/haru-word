@@ -3,25 +3,25 @@ import { EVIDENCE_RULES, parseEvidenceFeedback } from './evidence-feedback.ts';
 import { FeedbackValidationError, FEEDBACK_OUTPUT_LIMITS, type ProviderFeedbackContract } from './provider-feedback-contract.ts';
 import { summarizeValidationIssues } from './feedback-validation-detail.ts';
 
-// Unconnected evaluation candidate. Keep evidence-v1 and all historical hashes intact.
+// Evaluation candidate only. Keep evidence-v1 and all historical hashes intact.
 // One judgment per decision; the compiler supplies redundant persisted fields.
 const OTHER_FUNCTIONS = ['subject', 'verb', 'direct-object', 'indirect-object', 'complement', 'modifier', 'connector'] as const;
 const RULE_IDS = Object.keys(EVIDENCE_RULES) as [keyof typeof EVIDENCE_RULES, ...(keyof typeof EVIDENCE_RULES)[]];
 const partFields = { unitCount: z.number().int().min(1).max(2000), meaning: z.string().trim().min(1).max(60) };
-const partSchema = z.union([
+const partSchema = z.discriminatedUnion('function', [
   z.object({ ...partFields, function: z.enum(OTHER_FUNCTIONS) }).strict(),
   z.object({ ...partFields, function: z.literal('preposition-object'), governor: z.string().min(1).max(24) }).strict(),
 ]);
-const targetSchema = z.union([
+const targetSchema = z.discriminatedUnion('reason', [
   z.object({ reason: z.enum(['matched', 'different-sense', 'different-function']), originalSpan: z.string().max(160), observedUse: z.string().max(120) }).strict(),
   z.object({ reason: z.literal('absent') }).strict(),
   z.object({ reason: z.literal('ambiguous'), originalSpan: z.string().max(160) }).strict(),
 ]);
-const structureSchema = z.union([
+const structureSchema = z.discriminatedUnion('status', [
   z.object({ status: z.literal('available'), translation: z.string().max(2000), parts: z.array(partSchema).max(20) }).strict(),
   z.object({ status: z.literal('unavailable'), note: z.enum(['ambiguous', 'complex']) }).strict(),
 ]);
-const wireSchema = z.object({ analysis: z.union([
+const wireSchema = z.object({ analysis: z.discriminatedUnion('grammar', [
   z.object({ grammar: z.literal('natural'), target: targetSchema, structure: structureSchema }).strict(),
   z.object({ grammar: z.literal('needs_work'), target: targetSchema, correctedSentence: z.string().max(2000),
     changes: z.array(z.object({ before: z.string().min(1).max(2000), after: z.string().max(2000), rule: z.enum(RULE_IDS) }).strict()).max(20), structure: structureSchema }).strict(),
