@@ -4,7 +4,10 @@ import { z } from 'zod';
 // property names, provider bodies or learner text in this contract.
 const fields = ['root', 'meaningUsage', 'grammar', 'correctedSentence', 'explanation', 'structure',
   'structure.status', 'structure.translation', 'structure.parts', 'structure.parts[].wordCount',
-  'structure.parts[].role', 'structure.parts[].explanation', 'structure.note', 'other'] as const;
+  'structure.parts[].role', 'structure.parts[].explanation', 'structure.note',
+  'context', 'target', 'target.reason', 'target.originalSpan', 'target.observedUse', 'changes',
+  'changes[].before', 'changes[].after', 'changes[].rule', 'structure.parts[].text',
+  'structure.parts[].function', 'structure.parts[].meaning', 'structure.parts[].governor', 'other'] as const;
 const reasons = ['missing', 'type', 'enum', 'integer', 'too_small', 'too_large', 'unexpected_keys', 'schema'] as const;
 const schemaDetail = z.object({ kind: z.literal('schema'),
   issues: z.array(z.object({ field: z.enum(fields), reason: z.enum(reasons) }).strict()).min(1).max(8),
@@ -36,8 +39,9 @@ export function summarizeValidationIssues(issues: readonly z.ZodIssue[]): Feedba
     // key containing dots/brackets must never be mistaken for a trusted path.
     const path = [...issue.path];
     const normalized = path.length === 4 && path[0] === 'structure' && path[1] === 'parts'
-      && typeof path[2] === 'number' && ['wordCount', 'role', 'explanation'].includes(String(path[3]))
-      ? `structure.parts[].${path[3]}` : path.every(p => typeof p === 'string' && !/[.\[\]]/.test(p)) ? path.join('.') : '';
+      && typeof path[2] === 'number' && ['wordCount', 'role', 'explanation', 'text', 'function', 'meaning', 'governor'].includes(String(path[3]))
+      ? `structure.parts[].${path[3]}` : path.length === 3 && path[0] === 'changes' && typeof path[1] === 'number' && ['before', 'after', 'rule'].includes(String(path[2]))
+        ? `changes[].${path[2]}` : path.every(p => typeof p === 'string' && !/[.\[\]]/.test(p)) ? path.join('.') : '';
     const field = !path.length ? 'root' : fields.find(f => f === normalized) ?? 'other';
     const reason = issue.code === 'invalid_type' ? issue.received === 'undefined' ? 'missing' : issue.expected === 'integer' ? 'integer' : 'type'
       : issue.code === 'invalid_enum_value' ? 'enum'

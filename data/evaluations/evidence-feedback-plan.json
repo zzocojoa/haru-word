@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "comparison": "evidence-v1",
+  "purpose": "Full frozen 60-case evaluation of the evidence compiler candidate; historical comparison, not a same-run causal experiment",
+  "previousCalls": 540,
+  "maximumCalls": 120,
+  "authorization": "Pending separate human approval for at most 120 additional calls including failures; CLI flags are not approval",
+  "parentLedgerHashes": [
+    "0e6a30364b116d5eae393c298738211a3773a78336923369546c628fd9e91aa6",
+    "63e648f649d9af4ddadbe8bd5d48e7c33cc35324ba4dce6c8ead3e8cc597253d",
+    "ef06b87c27d9a222a42a9fd13d7329a970abbcf8e992caac06290568072a5494",
+    "f5e5371ee56b21922b0f1775ba53a82206159a569906787785016899782b7e6d"
+  ],
+  "combinedParentHash": "9a679a81d1332e4c99a20ecf4bdfe45706c7179e84252d53cab9b06986691da7",
+  "fixtureContentHash": "76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a",
+  "references": [
+    { "path": "data/evaluations/english-accuracy-2026-10-01-chunked-free.json", "hash": "2947cde93dc821ce68c0e8deff36d8cabf399893fb445db356d92398a96e2e0d" },
+    { "path": "data/evaluations/english-accuracy-2026-10-01-root-cause.json", "hash": "d9db111e6fc15eba35d8666c55398f0697548b3ecccb64f8b4dfd3438baed812" },
+    { "path": "data/evaluations/accuracy-cause-plan.json", "hash": "3eb29a10e645b249957926ab54b1663194f4c15501c35ddf1ae9141d53dcdf1e" }
+  ],
+  "gates": {
+    "casesPerProvider": 60,
+    "minimumOverallPasses": 54,
+    "criticalFailures": 0,
+    "criticalUnavailable": 0,
+    "historicalMinimumPasses": { "google": 44, "groq": 34 },
+    "historicalFailuresToResolve": 17,
+    "newRegressions": 0,
+    "rubric": "Unchanged frozen fixture and four-dimension adjudication; generic notes do not excuse incorrect or insufficient teaching, meaning or role analysis"
+  }
+}

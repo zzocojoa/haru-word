@@ -2,8 +2,9 @@ import { z } from 'zod';
 import { MEANING_USAGE_VALUES, GRAMMAR_VALUES } from './sentence-feedback.ts';
 import { validSentenceStructure } from './sentence-structure.ts';
 import { FeedbackValidationError, FEEDBACK_OUTPUT_LIMITS, parseProviderFeedback, type ProviderFeedbackContract } from './provider-feedback-contract.ts';
+import { summarizeValidationIssues } from './feedback-validation-detail.ts';
 
-// Experimental wire/compiler only. No learner API, transport or flag imports it.
+// Experimental wire/compiler. Only the closed synthetic evaluation imports it.
 // These are general teaching notes, not answers for the evaluation fixtures.
 export const EVIDENCE_RULES = {
   'noun-number': {
@@ -82,7 +83,7 @@ export function parseEvidenceFeedback(text: unknown, original: string, model: Pa
   let value: unknown;
   try { value = JSON.parse(text); } catch { throw new FeedbackValidationError('json_syntax'); }
   const parsed = wireSchema.safeParse(value);
-  if (!parsed.success) throw new FeedbackValidationError('fields');
+  if (!parsed.success) throw new FeedbackValidationError('fields', 'wire_fields', summarizeValidationIssues(parsed.error.issues));
   const content = parsed.data, insufficient = content.context === 'insufficient';
   if (insufficient !== (content.grammar === 'uncertain') || (insufficient && (content.meaningUsage !== 'uncertain'
       || content.correctedSentence || content.changes.length || content.structure.status !== 'unavailable' || content.structure.note !== 'insufficient'))
@@ -94,7 +95,7 @@ export function parseEvidenceFeedback(text: unknown, original: string, model: Pa
       || (target.reason === 'ambiguous' && target.observedUse)) throw new FeedbackValidationError('judgment');
   if (content.grammar === 'natural' && content.correctedSentence !== original) throw new FeedbackValidationError('judgment');
   if (content.grammar === 'needs_work') {
-    if (!content.changes.length) throw new FeedbackValidationError('judgment');
+    if (!content.changes.length || !content.correctedSentence.trim()) throw new FeedbackValidationError('judgment');
     // Unique literal anchors avoid invented offsets/counts and undisclosed edits.
     // Repeated words can use a larger unique phrase as their anchor.
     let cursor = 0, rebuilt = '';
