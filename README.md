@@ -36,7 +36,7 @@ AI 원문 판정·교정의 모순 차단과 비활성 원문 우선 요청 후�
 
 성분별 단어 수로 문구를 복원하는 비활성 후보의 비교·중단·복구는 [CHUNKED_FEEDBACK.md](CHUNKED_FEEDBACK.md)를 참조하세요. 사용자 확인 무료 계정의 추가120회·누적480회 결과와 후보 게시 보류·남은 오류는 [ENGLISH_ACCURACY_CHUNKED_FREE.md](ENGLISH_ACCURACY_CHUNKED_FREE.md)에 기록합니다.
 
-반복 미달의 확인/미확정 원인, 오프라인 재생, 영어 오류17건의 네 가지 개선 후보와 별도60회 승인·비교 절차는 [ENGLISH_ACCURACY_ROOT_CAUSE.md](ENGLISH_ACCURACY_ROOT_CAUSE.md)를 참조하세요. 추가 실제 호출0·개선 효과 미검증이며 기존 점수·판정·480회 원장은 유지됩니다.
+반복 미달의 확인/미확정 원인과 영어 오류17건 개선 후보는 [원인 조사](ENGLISH_ACCURACY_ROOT_CAUSE.md)를 참조하세요. 추가60회·누적540회에서 기존 오류13건 해소 관찰·3건 반복·1건 불가·회귀1짝으로 후보 적용을 보류했습니다. [실제 짝 비교 보고서](ENGLISH_ACCURACY_CAUSE_PILOT.md)에 남은 원인과 평가 종료를 기록하며 기존 점수·판정·480회 원장은 유지됩니다.
 
 AI 출처·모바일 탭·설정 문구·린트 정리와 초기 로딩 분할 실험 결과는 [CONSISTENCY_IMPROVEMENTS.md](CONSISTENCY_IMPROVEMENTS.md)에 기록합니다.
 
