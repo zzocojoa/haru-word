@@ -22,14 +22,33 @@ const overflowDetail = z.object({ ...tokenFields, reason: z.literal('part_exceed
 }).strict().refine(v => v.consumedTokens <= v.tokenCount && v.consumedTokens + v.requestedTokens > v.tokenCount);
 const leftoverDetail = z.object({ ...tokenFields, reason: z.literal('leftover_tokens'),
 }).strict().refine(v => v.consumedTokens < v.tokenCount);
-export const feedbackValidationDetailSchema = z.union([schemaDetail, overflowDetail, leftoverDetail]);
+export const EVIDENCE_JUDGMENT_REASONS = ['context_grammar', 'context_withholding', 'context_note', 'target_judgment',
+  'target_span', 'target_absent', 'target_evidence_missing', 'target_ambiguous_use', 'natural_rewrite',
+  'edit_missing', 'correction_missing', 'edit_anchor_absent', 'edit_anchor_order', 'edit_anchor_ambiguous',
+  'edit_unchanged', 'edit_reconstruction', 'edit_no_effect', 'unexpected_edits'] as const;
+export const EVIDENCE_STRUCTURE_PART_REASONS = ['span_order', 'governor_missing', 'governor_whitespace',
+  'governor_mismatch', 'governor_object_boundary', 'governor_prefix_boundary', 'governor_inside_object', 'unexpected_governor'] as const;
+export const EVIDENCE_STRUCTURE_REASONS = ['available_note', 'available_sentence', 'available_translation',
+  'available_parts', 'unavailable_parts', 'unavailable_translation', 'unavailable_note', 'span_leftover', 'structure_contract'] as const;
+export type EvidenceJudgmentReason = (typeof EVIDENCE_JUDGMENT_REASONS)[number];
+export type EvidenceStructurePartReason = (typeof EVIDENCE_STRUCTURE_PART_REASONS)[number];
+export type EvidenceStructureReason = (typeof EVIDENCE_STRUCTURE_REASONS)[number];
+const evidenceJudgmentDetail = z.object({ kind: z.literal('evidence_judgment'), reason: z.enum(EVIDENCE_JUDGMENT_REASONS) }).strict();
+const evidenceStructurePartDetail = z.object({ kind: z.literal('evidence_structure'), reason: z.enum(EVIDENCE_STRUCTURE_PART_REASONS),
+  partIndex: z.number().int().min(0).max(19),
+}).strict();
+const evidenceStructureDetail = z.object({ kind: z.literal('evidence_structure'), reason: z.enum(EVIDENCE_STRUCTURE_REASONS) }).strict();
+export const feedbackValidationDetailSchema = z.union([schemaDetail, overflowDetail, leftoverDetail, evidenceJudgmentDetail, evidenceStructurePartDetail, evidenceStructureDetail]);
 export type FeedbackValidationDetail = z.infer<typeof feedbackValidationDetailSchema>;
 export function parseFeedbackValidationDetail(value: unknown, context?: { stage?: unknown; diagnostic?: unknown }): FeedbackValidationDetail | undefined {
   const result = feedbackValidationDetailSchema.safeParse(value);
   if (!result.success) return undefined;
-  if (context && (result.data.kind === 'schema'
-    ? context.stage !== 'fields' || context.diagnostic !== 'wire_fields'
-    : context.stage !== 'structure' || context.diagnostic !== 'chunk_count')) return undefined;
+  if (context) {
+    const expected = result.data.kind === 'schema' ? ['fields', 'wire_fields']
+      : result.data.kind === 'tokens' ? ['structure', 'chunk_count']
+        : [result.data.kind === 'evidence_judgment' ? 'judgment' : 'structure', 'evidence_contract'];
+    if (context.stage !== expected[0] || context.diagnostic !== expected[1]) return undefined;
+  }
   return result.data;
 }
 

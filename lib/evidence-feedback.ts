@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { MEANING_USAGE_VALUES, GRAMMAR_VALUES } from './sentence-feedback.ts';
 import { validSentenceStructure } from './sentence-structure.ts';
 import { FeedbackValidationError, FEEDBACK_OUTPUT_LIMITS, parseProviderFeedback, type ProviderFeedbackContract } from './provider-feedback-contract.ts';
-import { summarizeValidationIssues } from './feedback-validation-detail.ts';
+import { summarizeValidationIssues, type EvidenceJudgmentReason, type EvidenceStructurePartReason, type EvidenceStructureReason } from './feedback-validation-detail.ts';
 
 // Experimental wire/compiler. Only the closed synthetic evaluation imports it.
 // These are general teaching notes, not answers for the evaluation fixtures.
@@ -49,6 +49,15 @@ const functions = {
 } as const;
 const NOTES = { none: '', insufficient: '문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.', ambiguous: '성분 분석이 모호해 확정하지 않아요.', complex: '이 문장의 성분 분석을 제공하기 어려워요.' } as const;
 const TARGET_REASONS = ['matched', 'absent', 'different-sense', 'different-function', 'ambiguous'] as const;
+function invalidJudgment(reason: EvidenceJudgmentReason): never {
+  throw new FeedbackValidationError('judgment', 'evidence_contract', { kind: 'evidence_judgment', reason });
+}
+function invalidStructure(reason: EvidenceStructureReason): never {
+  throw new FeedbackValidationError('structure', 'evidence_contract', { kind: 'evidence_structure', reason });
+}
+function invalidPart(reason: EvidenceStructurePartReason, partIndex: number): never {
+  throw new FeedbackValidationError('structure', 'evidence_contract', { kind: 'evidence_structure', reason, partIndex });
+}
 // Keep the actual difference visible even when a unique anchor needs context.
 // Work on code points so excerpts never split a surrogate pair.
 function displayChange(before: string, after: string) {
@@ -85,49 +94,71 @@ export function parseEvidenceFeedback(text: unknown, original: string, model: Pa
   const parsed = wireSchema.safeParse(value);
   if (!parsed.success) throw new FeedbackValidationError('fields', 'wire_fields', summarizeValidationIssues(parsed.error.issues));
   const content = parsed.data, insufficient = content.context === 'insufficient';
-  if (insufficient !== (content.grammar === 'uncertain') || (insufficient && (content.meaningUsage !== 'uncertain'
-      || content.correctedSentence || content.changes.length || content.structure.status !== 'unavailable' || content.structure.note !== 'insufficient'))
-      || (!insufficient && content.structure.note === 'insufficient')) throw new FeedbackValidationError('judgment');
+  if (insufficient !== (content.grammar === 'uncertain')) invalidJudgment('context_grammar');
+  if (insufficient && (content.meaningUsage !== 'uncertain' || content.correctedSentence || content.changes.length
+      || content.structure.status !== 'unavailable' || content.structure.note !== 'insufficient')) invalidJudgment('context_withholding');
+  if (!insufficient && content.structure.note === 'insufficient') invalidJudgment('context_note');
   const target = content.target, targetJudgment = target.reason === 'matched' ? 'appropriate' : target.reason === 'ambiguous' ? 'uncertain' : 'needs_work';
-  if (targetJudgment !== content.meaningUsage || (target.originalSpan && !original.includes(target.originalSpan))
-      || (target.reason === 'absent' && (target.originalSpan || target.observedUse))
-      || (['matched', 'different-sense', 'different-function'].includes(target.reason) && (!target.originalSpan.trim() || !target.observedUse.trim()))
-      || (target.reason === 'ambiguous' && target.observedUse)) throw new FeedbackValidationError('judgment');
-  if (content.grammar === 'natural' && content.correctedSentence !== original) throw new FeedbackValidationError('judgment');
+  if (targetJudgment !== content.meaningUsage) invalidJudgment('target_judgment');
+  if (target.originalSpan && !original.includes(target.originalSpan)) invalidJudgment('target_span');
+  if (target.reason === 'absent' && (target.originalSpan || target.observedUse)) invalidJudgment('target_absent');
+  if (['matched', 'different-sense', 'different-function'].includes(target.reason) && (!target.originalSpan.trim() || !target.observedUse.trim())) invalidJudgment('target_evidence_missing');
+  if (target.reason === 'ambiguous' && target.observedUse) invalidJudgment('target_ambiguous_use');
+  if (content.grammar === 'natural' && content.correctedSentence !== original) invalidJudgment('natural_rewrite');
   if (content.grammar === 'needs_work') {
-    if (!content.changes.length || !content.correctedSentence.trim()) throw new FeedbackValidationError('judgment');
+    if (!content.changes.length) invalidJudgment('edit_missing');
+    if (!content.correctedSentence.trim()) invalidJudgment('correction_missing');
     // Unique literal anchors avoid invented offsets/counts and undisclosed edits.
     // Repeated words can use a larger unique phrase as their anchor.
     let cursor = 0, rebuilt = '';
     for (const change of content.changes) {
       const index = original.indexOf(change.before);
-      if (index < cursor || index < 0 || original.indexOf(change.before, index + 1) !== -1 || change.before === change.after) throw new FeedbackValidationError('judgment');
+      if (index < 0) invalidJudgment('edit_anchor_absent');
+      if (index < cursor) invalidJudgment('edit_anchor_order');
+      if (original.indexOf(change.before, index + 1) !== -1) invalidJudgment('edit_anchor_ambiguous');
+      if (change.before === change.after) invalidJudgment('edit_unchanged');
       rebuilt += original.slice(cursor, index) + change.after;
       cursor = index + change.before.length;
     }
     rebuilt += original.slice(cursor);
-    if (rebuilt !== content.correctedSentence || rebuilt.trim() === original.trim()) throw new FeedbackValidationError('judgment');
-  } else if (content.changes.length) throw new FeedbackValidationError('judgment');
+    if (rebuilt !== content.correctedSentence) invalidJudgment('edit_reconstruction');
+    if (rebuilt.trim() === original.trim()) invalidJudgment('edit_no_effect');
+  } else if (content.changes.length) invalidJudgment('unexpected_edits');
 
   let remaining = content.correctedSentence;
-  const parts = content.structure.parts.map(part => {
+  const parts = content.structure.parts.map((part, partIndex) => {
     remaining = remaining.trimStart();
-    if (!remaining.startsWith(part.text)) throw new FeedbackValidationError('structure');
+    if (!remaining.startsWith(part.text)) invalidPart('span_order', partIndex);
     const start = content.correctedSentence.length - remaining.length;
     if (part.function === 'preposition-object') {
       const governor = part.governor.trim(), previous = content.correctedSentence.slice(0, start).trimEnd();
       // The governor is outside its following object, including grouped V+prep.
-      if (!governor || governor !== part.governor || !previous.endsWith(governor)
-          || !/\s/u.test(content.correctedSentence[start - 1] ?? '')
-          || (previous.length > governor.length && !/\s/u.test(previous[previous.length - governor.length - 1]))
-          || part.text === governor || (part.text.startsWith(governor) && /\s/u.test(part.text[governor.length] ?? ''))) throw new FeedbackValidationError('structure');
-    } else if (part.governor) throw new FeedbackValidationError('structure');
+      if (!governor) invalidPart('governor_missing', partIndex);
+      if (governor !== part.governor) invalidPart('governor_whitespace', partIndex);
+      if (!previous.endsWith(governor)) invalidPart('governor_mismatch', partIndex);
+      if (!/\s/u.test(content.correctedSentence[start - 1] ?? '')) invalidPart('governor_object_boundary', partIndex);
+      if (previous.length > governor.length && !/\s/u.test(previous[previous.length - governor.length - 1])) invalidPart('governor_prefix_boundary', partIndex);
+      if (part.text === governor || (part.text.startsWith(governor) && /\s/u.test(part.text[governor.length] ?? ''))) invalidPart('governor_inside_object', partIndex);
+    } else if (part.governor) invalidPart('unexpected_governor', partIndex);
     remaining = remaining.slice(part.text.length);
     const [role, label] = functions[part.function];
     return { text: part.text, role, explanation: `${part.meaning} · ${part.function === 'preposition-object' ? `${part.governor}의 목적어` : label}` };
   });
   const structure = { ...content.structure, parts, note: NOTES[content.structure.note] };
-  if ((structure.status === 'available' && content.structure.note !== 'none') || !validSentenceStructure(structure, content.correctedSentence)) throw new FeedbackValidationError('structure');
+  if (structure.status === 'available' && content.structure.note !== 'none') invalidStructure('available_note');
+  if (!validSentenceStructure(structure, content.correctedSentence)) {
+    if (structure.status === 'unavailable') {
+      if (parts.length) invalidStructure('unavailable_parts');
+      if (structure.translation) invalidStructure('unavailable_translation');
+      if (!structure.note.trim()) invalidStructure('unavailable_note');
+    } else {
+      if (!content.correctedSentence.trim()) invalidStructure('available_sentence');
+      if (!structure.translation.trim()) invalidStructure('available_translation');
+      if (!parts.length) invalidStructure('available_parts');
+      if (remaining.trim()) invalidStructure('span_leftover');
+    }
+    invalidStructure('structure_contract');
+  }
   const targetText = target.reason === 'matched' ? `원문의 「${target.originalSpan}」는 「${target.observedUse}」의 용법으로 선택한 뜻·기능에 맞아요.`
     : target.reason === 'absent' ? '선택한 단어·기능이 원문에 드러나지 않아 목표 사용을 확인해야 해요.'
     : target.reason === 'different-sense' ? `원문의 「${target.originalSpan}」를 「${target.observedUse}」의 뜻으로 분석해 선택한 뜻과 다르게 판단했어요.`

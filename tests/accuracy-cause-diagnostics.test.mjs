@@ -208,7 +208,14 @@ test('parallel replay uses independent bundles and atomic output while keeping i
   assert.equal(a.actualProviderCalls, 0); assert.equal(b.actualProviderCalls, 0);
   assert.equal(a.parserBundleHash, b.parserBundleHash); assert.deepEqual(a.parserSourceHashes, b.parserSourceHashes);
   const saved = JSON.parse(readFileSync('.sites-runtime/english-accuracy/cause-replay.json', 'utf8'));
+  assert.deepEqual(saved, a);
+  for (const [path, digest] of Object.entries(saved.parserSourceHashes)) {
+    assert.equal(createHash('sha256').update(readFileSync(path, 'utf8').replace(/\r\n/g, '\n')).digest('hex'), digest);
+  }
   assert.equal(saved.knownSemanticFailuresAccepted, 17); assert.equal(saved.rows.length, 95);
   const publicReplay = JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-cause-replay.json', 'utf8'));
-  assert.deepEqual(saved, publicReplay);
+  // The historical artifact keeps the parser hashes from its original run.
+  // Current provenance must match current source, while every result stays frozen.
+  const resultOnly = value => { const result = { ...value }; delete result.parserSourceHashes; delete result.parserBundleHash; return result; };
+  assert.deepEqual(resultOnly(saved), resultOnly(publicReplay));
 });
