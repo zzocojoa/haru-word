@@ -74,3 +74,5 @@ node scripts/replay-accuracy-causes.mjs
 진단·정보 유출 방지·해시 불변·두 전송 경로·비교 API·수집·실제 CLI 복구/변이·동시 재생 검사 10개와 전체 **490/490**·타입·린트 오류0(기존13경고)·Worker 빌드를 통과했다. 합성 CLI 테스트의 임시 체크아웃이 앱 타입 검사에 섞이지 않도록 기존 Git 제외 `work`를 타입 검사에서도 제외한다. Node22/24 CI 결과는 PR 및 운영 기록에 연결한다. 보안/API·유지보수·테스트·적대적 검토는 같은 모델의 분리 문맥 코드 검토이며 인간/cross-model 영어 인증이 아니다. UI/저장 변경이 없어 브라우저 검사를 반복하지 않았고 실제 iPhone·VoiceOver·독립 인간 영어 검토는 미검증이다.
 
 운영 위험도는 중간이다. 평가 전용 메타데이터 추가이며 평가 API 종료와 후보 false를 유지한다. 기존 Sites에 진단 지원만 게시하며 환경·접근 범위·DB 바인딩은 바꾸지 않는다. 장애 시 후보 false·평가 종료를 유지하고 v3 읽기/저장/백업을 지원하는 이전 v90 소스로 복구할 수 있다. v3 기록 생성 이후 v84로 단순 복귀하지 않는다. 개인 문장·답변·키는 로그나 새 공개 재생 자료에 추가하지 않는다.
+
+기존 Sites v91/source `0c2d46edc1e5e6023046a9f0a27ce56ce58a03b5`의 native 배포 succeeded·환경25 불변·게시 후 invalid-case 404/evaluation_disabled·제공자0회를 확인했다. 게시 소스의 Node22/24 push·PR 네 검사도 통과했다. [PR #11](https://github.com/zzocojoa/haru-word/pull/11)과 [운영 기록](OPERATIONS.md)에 정확한 소스·배포·CI를 연결한다. 마지막 운영 문서 갱신은 게시 런타임을 바꾸지 않는다.
