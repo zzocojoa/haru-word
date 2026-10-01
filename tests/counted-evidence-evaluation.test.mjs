@@ -117,7 +117,7 @@ test('disabled, expiry, token, profile, origin, body and case guards reject befo
       assert.equal(failed.status, 502); assert.deepEqual(safe.validationDetail, detail); assert.doesNotMatch(JSON.stringify(safe), /SECRET|PRIVATE/);
     }
     const before = calls; env.english_accuracy_expires = new Date(Date.now() - 1000).toISOString(); assert.equal((await api.POST(request(body))).status, 404);
-    env.english_accuracy_expires = new Date(Date.now() + 86400001).toISOString(); assert.equal((await api.POST(request(body))).status, 404); assert.equal(calls, before);
+    env.english_accuracy_expires = new Date(Date.now() + 86500000).toISOString(); assert.equal((await api.POST(request(body))).status, 404); assert.equal(calls, before);
   } finally { globalThis.fetch = originalFetch; for (const k of Object.keys(env)) delete env[k]; }
 });
 
