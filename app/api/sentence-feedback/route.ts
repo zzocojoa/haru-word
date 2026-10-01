@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     if (!word || !meaning) return json(feedbackErrorBody('save_required'), 400);
     const now = Date.now();
     await recordFeedbackAttempt(db, user.userId, today(), now);
-    const feedback = await generateSentenceFeedbackWithFallback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, feedback_original_sentence_enabled: env.feedback_original_sentence_enabled, signal: request.signal }, { word: word.word, pos: word.pos, meaning, sentence });
+    const feedback = await generateSentenceFeedbackWithFallback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, feedback_original_sentence_enabled: env.feedback_original_sentence_enabled, feedback_chunked_enabled: env.feedback_chunked_enabled, signal: request.signal }, { word: word.word, pos: word.pos, meaning, sentence });
     console.info(JSON.stringify({ event: 'sentence_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), durationMs: Date.now() - started }));
     return json({ feedback: supportsFeedbackStructure(request) ? feedback : legacyFeedback(feedback) });
   } catch (error) {
