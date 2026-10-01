@@ -124,3 +124,13 @@ test('outer HTTP429 or402 stops even with non-JSON body, including recovery with
 test('CLI refuses calls without explicit free confirmation, exact120 approval, and outside-CI execution',()=>{
  for(const [args,ci] of [[[], ''],[['--live','--approved-calls','120'],''],[['--live','--confirmed-free-tier','--approved-calls','240'],''],[['--live','--confirmed-free-tier','--approved-calls','120'],'true']])assert.throws(()=>execFileSync(process.execPath,['scripts/evaluate-free-feedback.mjs',...args],{env:{...process.env,CI:ci},stdio:['ignore','pipe','pipe']}),e=>e.status===1&&e.stderr.toString().includes('Free comparison stopped'));
 });
+test('upstream402 translated to API503 still stops through the real provider evaluator and collector',async()=>{
+ const ledger=fresh();let upstreamCalls=0;
+ await collectFreeComparison(context(ledger),{save:()=>{},pause:async()=>{},fetcher:async(_url,init)=>{
+  const {provider,caseId}=JSON.parse(init.body),sample=cases.find(c=>c.id===caseId);
+  try{await helper.evaluateFreeAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,sample,async()=>{upstreamCalls++;return Response.json({error:{message:'PRIVATE_BILLING'}},{status:402});});throw Error('Expected provider rejection');}
+  catch(error){return Response.json({code:error.code,providerStatus:error.issue.providerStatus},{status:error.status});}
+ }});
+ assert.equal(upstreamCalls,2);assert.deepEqual(ledger.providerStops,{google:'provider_precondition',groq:'groq_billing'});assert.equal(ledger.completed,true);assert.doesNotMatch(JSON.stringify(ledger),/PRIVATE_BILLING/);
+ await collectFreeComparison(context(ledger),{fetcher:async()=>{throw Error('no HTTP');},save:()=>{throw Error('no save');}});
+});

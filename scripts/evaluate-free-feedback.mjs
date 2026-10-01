@@ -68,7 +68,7 @@ export async function collectFreeComparison(context, options) {
           if(q.remainingTokens<6000)delay=60000;
           if(Number.isInteger(q.resetTokensSeconds)&&q.resetTokensSeconds>0&&q.resetTokensSeconds<=86400){a.quota.resetTokensSeconds=q.resetTokensSeconds;if(q.remainingTokens<6000)delay=Math.min(60000,q.resetTokensSeconds*1000);}}
       }else{a.status='failure';a.code=response.status===429?(provider==='groq'?'groq_limit':'provider_limit')
-          :response.status===402?(provider==='groq'?'groq_billing':'provider_precondition')
+          :(response.status===402||result?.providerStatus===402)?(provider==='groq'?'groq_billing':'provider_precondition')
           :safeCodes.includes(result?.code)?result.code:'evaluation_invalid_response';
         if(Number.isInteger(result?.providerStatus)&&result.providerStatus>=100&&result.providerStatus<=599)a.providerStatus=result.providerStatus;
         if(validationStages.includes(result?.validationStage))a.validationStage=result.validationStage;
