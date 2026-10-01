@@ -34,6 +34,8 @@ AI 원문 판정·교정의 모순 차단과 비활성 원문 우선 요청 후�
 
 추가120회·누적360회 실제 평가의 결과와 후보 게시 보류·남은 결함은 [ENGLISH_ACCURACY_ORIGINAL_FIRST.md](ENGLISH_ACCURACY_ORIGINAL_FIRST.md)를 참조하세요.
 
+성분별 단어 수로 문구를 복원하는 비활성 후보의 비교·중단·복구는 [CHUNKED_FEEDBACK.md](CHUNKED_FEEDBACK.md)를 참조하세요. 사용자 확인 무료 계정의 추가120회·누적480회 결과와 후보 게시 보류·남은 오류는 [ENGLISH_ACCURACY_CHUNKED_FREE.md](ENGLISH_ACCURACY_CHUNKED_FREE.md)에 기록합니다.
+
 AI 출처·모바일 탭·설정 문구·린트 정리와 초기 로딩 분할 실험 결과는 [CONSISTENCY_IMPROVEMENTS.md](CONSISTENCY_IMPROVEMENTS.md)에 기록합니다.
 
 # vinext-starter

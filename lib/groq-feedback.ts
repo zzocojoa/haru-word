@@ -1,8 +1,7 @@
 import { GROQ_FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
-import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
+import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, defaultFeedbackContract, type ProviderFeedbackContract } from './provider-feedback-contract';
 import { FeedbackError } from './provider-feedback-error';
 import type { FeedbackIssueCode } from './feedback-issue';
-import { structureInstruction } from './sentence-structure';
 
 export const GROQ_TIMEOUT_MS = 15000;
 export function groqHttpError(status: number, retryHeader: string | null): FeedbackError {
@@ -14,7 +13,7 @@ export function groqHttpError(status: number, retryHeader: string | null): Feedb
     ...(delay > 0 && delay <= 604800 ? { retryAfterSeconds: delay } : {}) });
 }
 
-export async function generateGroqFeedback(key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch, externalSignal?: AbortSignal): Promise<SentenceFeedback> {
+export async function generateGroqFeedback(key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch, externalSignal?: AbortSignal, contract: ProviderFeedbackContract = defaultFeedbackContract): Promise<SentenceFeedback> {
   const deadline = AbortSignal.timeout(GROQ_TIMEOUT_MS);
   const signal = externalSignal ? AbortSignal.any([deadline, externalSignal]) : deadline;
   let response: Response;
@@ -23,8 +22,8 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
       method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` }, signal,
       body: JSON.stringify({ model: GROQ_FEEDBACK_MODEL, service_tier: 'on_demand', reasoning_effort: 'low', include_reasoning: false,
         max_completion_tokens: FEEDBACK_OUTPUT_LIMITS.tokens, stream: false,
-        messages: [{ role: 'system', content: instruction + structureInstruction }, { role: 'user', content: JSON.stringify(input) }],
-        response_format: { type: 'json_schema', json_schema: { name: 'sentence_feedback', strict: true, schema: responseJsonSchema } },
+        messages: [{ role: 'system', content: instruction + contract.instruction }, { role: 'user', content: JSON.stringify(input) }],
+        response_format: { type: 'json_schema', json_schema: { name: 'sentence_feedback', strict: true, schema: contract.schema } },
       }),
     });
   } catch {
@@ -50,6 +49,6 @@ export async function generateGroqFeedback(key: string, input: { sentence: strin
   try {
     const text = candidate?.message?.content;
     if (body?.model !== GROQ_FEEDBACK_MODEL) throw new FeedbackValidationError('model');
-    return parseProviderFeedback(text, input.sentence, GROQ_FEEDBACK_MODEL);
-  } catch (error) { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }, error instanceof FeedbackValidationError ? error.stage : 'envelope'); }
+    return contract.parse(text, input.sentence, GROQ_FEEDBACK_MODEL);
+  } catch (error) { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }, error instanceof FeedbackValidationError ? error.stage : 'envelope', error instanceof FeedbackValidationError ? error.diagnostic : undefined); }
 }

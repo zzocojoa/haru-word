@@ -1,7 +1,6 @@
 import { FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
 import { FeedbackError, providerHttpError, providerFinishError } from './provider-feedback-error';
-import { structureInstruction } from './sentence-structure';
-import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, parseProviderFeedback, responseJsonSchema } from './provider-feedback-contract';
+import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, defaultFeedbackContract, type ProviderFeedbackContract } from './provider-feedback-contract';
 export { FeedbackError } from './provider-feedback-error';
 export { responseJsonSchema } from './provider-feedback-contract';
 
@@ -26,7 +25,7 @@ export async function generateSentenceFeedback(
 // Both study domains share provider transport and strict response validation.
 // Instructions and the trusted target stay server-owned at their call sites.
 export async function generateTutorFeedback(
-  key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch, timeoutMs = 20000, externalSignal?: AbortSignal,
+  key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch, timeoutMs = 20000, externalSignal?: AbortSignal, contract: ProviderFeedbackContract = defaultFeedbackContract,
 ): Promise<SentenceFeedback> {
   let response:Response;
   const deadline = AbortSignal.timeout(timeoutMs);
@@ -36,9 +35,9 @@ export async function generateTutorFeedback(
       method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},
       signal,
       body:JSON.stringify({
-        systemInstruction:{parts:[{text:instruction + structureInstruction}]},
+        systemInstruction:{parts:[{text:instruction + contract.instruction}]},
         contents:[{role:'user',parts:[{text:JSON.stringify(input)}]}],
-        generationConfig:{maxOutputTokens:FEEDBACK_OUTPUT_LIMITS.tokens,responseMimeType:'application/json',responseJsonSchema},
+        generationConfig:{maxOutputTokens:FEEDBACK_OUTPUT_LIMITS.tokens,responseMimeType:'application/json',responseJsonSchema:contract.schema},
       }),
     });
   } catch {
@@ -65,6 +64,6 @@ export async function generateTutorFeedback(
   if (stopped) throw stopped;
   try {
     const text=candidate?.content?.parts?.filter(p=>!p.thought).map(p=>p.text||'').join('')||'';
-    return parseProviderFeedback(text, input.sentence, FEEDBACK_MODEL);
-  } catch (error) { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }, error instanceof FeedbackValidationError ? error.stage : 'envelope'); }
+    return contract.parse(text, input.sentence, FEEDBACK_MODEL);
+  } catch (error) { throw new FeedbackError('provider_invalid_response', 502, { providerStatus: response.status }, error instanceof FeedbackValidationError ? error.stage : 'envelope', error instanceof FeedbackValidationError ? error.diagnostic : undefined); }
 }

@@ -1,13 +1,14 @@
 import { FEEDBACK_ISSUES, type FeedbackIssue, type FeedbackIssueCode } from './feedback-issue';
-import type { FeedbackValidationStage } from './provider-feedback-contract';
+import type { FeedbackValidationStage, FeedbackDiagnostic } from './provider-feedback-contract';
 
 export class FeedbackError extends Error {
   readonly code: FeedbackIssueCode;
   readonly status: number;
   readonly issue: FeedbackIssue;
   readonly validationStage?: FeedbackValidationStage;
-  constructor(code: FeedbackIssueCode, status: number, details: Omit<FeedbackIssue, 'code'> = {}, validationStage?: FeedbackValidationStage) {
-    super(FEEDBACK_ISSUES[code][1]); this.code = code; this.status = status; this.issue = { code, ...details }; this.validationStage = validationStage;
+  readonly diagnostic?: FeedbackDiagnostic;
+  constructor(code: FeedbackIssueCode, status: number, details: Omit<FeedbackIssue, 'code'> = {}, validationStage?: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic) {
+    super(FEEDBACK_ISSUES[code][1]); this.code = code; this.status = status; this.issue = { code, ...details }; this.validationStage = validationStage; this.diagnostic = diagnostic;
   }
 }
 const record = (value: unknown): Record<string, unknown> => value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
@@ -40,7 +41,9 @@ export function providerHttpError(status: number, body: unknown, retryHeader: st
   else if (status === 400) code = 'provider_request';
   else if (status === 504) code = 'provider_timeout';
   else code = 'provider_unavailable';
-  return new FeedbackError(code, status === 429 ? 429 : 503, metadata);
+  const diagnostic = code === 'provider_precondition' && typeof error.message === 'string'
+    && error.message.includes('free tier is not available in your country') ? 'free_tier_region' : undefined;
+  return new FeedbackError(code, status === 429 ? 429 : 503, metadata, undefined, diagnostic);
 }
 export function providerFinishError(finish: unknown, block: unknown): FeedbackError | undefined {
   const blocked = ['SAFETY', 'BLOCKLIST', 'PROHIBITED_CONTENT', 'SPII', 'IMAGE_SAFETY', 'IMAGE_PROHIBITED_CONTENT', 'PUP_LIMITED_DISABLED'];

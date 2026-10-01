@@ -1,7 +1,7 @@
 import {
   feedbackContentSchema, GRAMMAR_VALUES, MEANING_USAGE_VALUES, type SentenceFeedback,
 } from './sentence-feedback.ts';
-import { structureJsonSchema } from './sentence-structure.ts';
+import { structureJsonSchema, structureInstruction } from './sentence-structure.ts';
 
 // Shared output contract, independent of either provider's HTTP protocol.
 export const FEEDBACK_OUTPUT_LIMITS = { tokens: 4096, textCharacters: 30000 } as const;
@@ -9,9 +9,12 @@ export const FEEDBACK_OUTPUT_LIMITS = { tokens: 4096, textCharacters: 30000 } as
 // Application-owned stages only: never attach provider text or Zod issue paths.
 export const FEEDBACK_VALIDATION_STAGES = ['envelope', 'model', 'content_type', 'content_limit', 'json_syntax', 'fields', 'structure', 'judgment'] as const;
 export type FeedbackValidationStage = (typeof FEEDBACK_VALIDATION_STAGES)[number];
+export const FEEDBACK_DIAGNOSTICS = ['free_tier_region', 'wire_fields', 'chunk_count'] as const;
+export type FeedbackDiagnostic = (typeof FEEDBACK_DIAGNOSTICS)[number];
 export class FeedbackValidationError extends Error {
   readonly stage: FeedbackValidationStage;
-  constructor(stage: FeedbackValidationStage) { super('Invalid feedback content'); this.stage = stage; }
+  readonly diagnostic?: FeedbackDiagnostic;
+  constructor(stage: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic) { super('Invalid feedback content'); this.stage = stage; this.diagnostic = diagnostic; }
 }
 
 export const responseJsonSchema = {
@@ -49,3 +52,12 @@ export function parseProviderFeedback(
       || (content.grammar === 'uncertain' && correction)) throw new FeedbackValidationError('judgment');
   return { ...content, original, model, createdAt: new Date().toISOString() };
 }
+
+export type ProviderFeedbackContract = {
+  schema: Record<string, unknown>;
+  instruction: string;
+  parse: typeof parseProviderFeedback;
+};
+export const defaultFeedbackContract: ProviderFeedbackContract = {
+  schema: responseJsonSchema, instruction: structureInstruction, parse: parseProviderFeedback,
+};

@@ -29,7 +29,7 @@ const progress={stage:5,answers:{q1:answer,q2:answer,q3:answer},sentence:grammar
 globalThis.originalRouteRuntime={env:{...config,google_ai_enabled:'true',grammar_enabled:'true'},user:{userId:'synthetic-user'},session,attempts:0,db:{prepare(){return {bind(){return {first:async()=>({document:JSON.stringify(progress)})};}};}}};
 const wordRoute=await import('../work/original-profile-tests/routes/word-route.mjs');
 const grammarRoute=await import('../work/original-profile-tests/routes/grammar-route.mjs');
-const routeRequest=domain=>new Request(`https://study.example/api/${domain==='word'?'sentence':'grammar'}-feedback`,{method:'POST',headers:{'content-type':'application/json',origin:'https://study.example','x-feedback-structure':'1','x-study-grammar':'3'},body:JSON.stringify(domain==='word'?{sessionId,entryId:word.id,sentence:wordSentence}:{lessonId:'noun',sentence:grammarSentence})});
+const routeRequest=domain=>new Request(`https://study.example/api/${domain==='word'?'sentence':'grammar'}-feedback`,{method:'POST',headers:{'content-type':'application/json',origin:'https://study.example','x-study-feedback-structure':'1','x-study-grammar':'3'},body:JSON.stringify(domain==='word'?{sessionId,entryId:word.id,sentence:wordSentence}:{lessonId:'noun',sentence:grammarSentence})});
 
 test('original-only context strips exercise commands and samples across all content versions',()=>{
  for(const lesson of GRAMMAR_LESSONS)for(const version of [1,2,3]){
@@ -116,5 +116,24 @@ test('both POST routes reject conflicting judgments without exposing or modifyin
   assert.equal(originalRouteRuntime.attempts,beforeAttempts+2);
   assert.doesNotMatch(JSON.stringify(logs),/judgment|I like|I arrive|test-only|synthetic-user/);
  }finally{progress.sentence=grammarSentence;globalThis.fetch=savedFetch;console.error=savedError;}
+ assert.equal(JSON.stringify({session,progress}),before);
+});
+
+test('both actual POSTs select count wire only for exact true and return existing text structure',async()=>{
+ const savedFetch=globalThis.fetch,savedInfo=console.info;console.info=()=>{};
+ const before=JSON.stringify({session,progress});
+ try{
+  for(const setting of [undefined,'false','TRUE','true'])for(const domain of ['word','grammar']){
+   originalRouteRuntime.env.feedback_chunked_enabled=setting;
+   const sentence=domain==='word'?wordSentence:grammarSentence;let sent;
+   globalThis.fetch=async(_url,init)=>{sent=JSON.parse(init.body);return google({...value,correctedSentence:sentence,
+    structure:{status:'available',translation:'합성 번역입니다.',parts:[{...(setting==='true'?{wordCount:3}:{text:sentence}),role:'X',explanation:'합성 성분입니다.'}],note:''}});};
+   const response=await (domain==='word'?wordRoute:grammarRoute).POST(routeRequest(domain)),body=await response.json();
+   assert.equal(response.status,200);
+   const props=sent.generationConfig.responseJsonSchema.properties.structure.properties.parts.items.properties;
+   assert.equal(Boolean(props.wordCount),setting==='true');assert.equal(Boolean(props.text),setting!=='true');
+   assert.equal(body.feedback.structure.parts[0].text,sentence);assert.equal('wordCount' in body.feedback.structure.parts[0],false);
+  }
+ }finally{globalThis.fetch=savedFetch;console.info=savedInfo;delete originalRouteRuntime.env.feedback_chunked_enabled;}
  assert.equal(JSON.stringify({session,progress}),before);
 });
