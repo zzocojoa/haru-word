@@ -1,0 +1,5121 @@
+{
+  "schemaVersion": 1,
+  "evaluatedAt": "2026-10-01",
+  "comparison": "evidence-v1",
+  "purpose": "Full frozen 60-case evaluation of the evidence compiler candidate; historical comparison, not a same-run causal experiment",
+  "validationPolicy": "evidence-v1+original-judgment-v1",
+  "sourceCommit": "76312e705c2d97465376478e75202087d6f6a5cc",
+  "siteVersion": 93,
+  "environmentRevision": 29,
+  "models": {
+    "google": "gemini-3.1-flash-lite",
+    "groq": "openai/gpt-oss-120b"
+  },
+  "profiles": {
+    "word-01": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cf943c950e3f9bc038325e2e066b052e491a3eda95cd5233672627acf04a7709"
+    },
+    "word-02": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c51b62c0102ee497302348720edb06b0970ffd6e733fa1c88845e8d3436b91ed"
+    },
+    "word-03": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "21124e123a5f2d84d819b727821e60765091b832a041ae168e9ec425eb630a1d"
+    },
+    "word-04": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "10cfcd57fd4b486464ba2ee41f156fd9007f04f5cf6e9f94fac9cb27711a07e9"
+    },
+    "word-05": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "07b1d7d3bc151823ce024c911d53f02c39f9eea384b88ce481bac4e02bc5b199"
+    },
+    "word-06": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "0e5cf2a5e174fcac2612cdd691e7b6c7dd0ec9d112cf9549de640d7ca7d3981d"
+    },
+    "word-07": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "f3fb142456e3ac6aeeda31d499d9daca0e673d2ce5b74b02c6ddced263ea610a"
+    },
+    "word-08": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a99e2bbdd3eee032e6e0c5a02b78088e6b0b0eb50b50e230d2bdfed56dc52cb9"
+    },
+    "word-09": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a3994d47901f668a7e0e23361d5958855b6913aa56099b4514553267d5a052d4"
+    },
+    "word-10": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "40f0c7cb434c99abf3f340d60917807fe0cbb6aef044f3609d91debc80db38c3"
+    },
+    "word-11": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "72708b1ebccedff9325b0e4bf3641768923b32af53d4bdf2d87cbf7c59ce2d28"
+    },
+    "word-12": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "eb289b83e8c7a5cd3f7d1b089ba8c0ec968e961442d2967fb3a6f0fcbe5b9781"
+    },
+    "word-13": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3e7fa96abd72f548f56a3a53bf3b9351ac7e89d0955fae4cbcd2ca9b329de5a2"
+    },
+    "word-14": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "1da59212fe1ef22def586ff9ee986e2d060fdd5c8d42ea56e7ec30fa7250f47f"
+    },
+    "word-15": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "6f406fe652b81b5ccc959cdbd556cd51c0e3f591e802876df71a5c67d822a06a"
+    },
+    "word-16": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "ca145862bdf1fb8270168e3556f057ab2c578e60549979c6a537a8bc93367730"
+    },
+    "word-17": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cc8471a97b7fcbdbcb91660204f534329c76a275e83876feb60135e022024b17"
+    },
+    "word-18": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "355f8318d8333225b7630f6c3c9a25d3893942d84ebf0a84b1f3f5b164a3c7bf"
+    },
+    "word-19": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "8652f19e9110241bd00fe68be43efa1cd3832883f7e248b65f6c99c18c09e3f1"
+    },
+    "word-20": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c3bd07fab274d42e75a0d7d101737ab211ed3d4ce91af08928a00b7f1f5c1a7e"
+    },
+    "word-21": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a7726c7c63c005555fb136c9d641fca843bc88499cfd1293f1bcafeca3f94171"
+    },
+    "word-22": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "e05040eceeea75947ffb0520484a05af3aa7168abb4006ddfa0a5a0dd39217e4"
+    },
+    "word-23": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c498a513f191036f7878846593e99332405b73c57492a1725f8c095bcd4b50da"
+    },
+    "word-24": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3a9abd7406150f87283745d8069447b6eef496920433595bc0e37e70aa2cd856"
+    },
+    "word-25": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cbbe4348339b12beb74f979591058a1fae37cdd0152105ac60a65d88c7d9a68f"
+    },
+    "word-26": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3a2725b6454421e1c66083c7bbf3eecc7c921cb9c2259600473d92f24d1a3248"
+    },
+    "word-27": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "1ad11ad7e1af26090e99517269ac595afc024ad1865e1549a75ffcef0a909cbc"
+    },
+    "word-28": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "289558f12ec684f5551f1ff0a1059b3385a5d69a114845312a06c6944d6c6617"
+    },
+    "word-29": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a8a55ea683b702c24c1ba088a3efce172426d08d93b3a779f4152d7afe1aa7f9"
+    },
+    "word-30": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "29a318d7b6326a911dec45bbb33d7dd06cc3c1b2ee54e181a29e55684ed79821"
+    },
+    "word-31": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "707f90e070d6009d04f704367de4ffe1cbc656883623c1127ba21698e9c2b1e2"
+    },
+    "word-32": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "deb7b30516e0c060b253408f9eb5205a271b8c228f3f987e6ca305257bd3b8c9"
+    },
+    "word-33": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "0a9c6922c12b804814b182314e4b018701b6ea1a5f592cfe8923c4bbef8914fb"
+    },
+    "word-34": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "52a7aca80eef1af936c53cd9b75f8202f5ec2e534f5f370191308772ca8fb848"
+    },
+    "word-35": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "218c850470739cfb3fab91f548ffdba8499cc2675809fe6b120a17429c9a81db"
+    },
+    "word-36": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "d9c1e5f5e06942d5914d12327a0a3688900302510a7a47200298fb9d4c601bb3"
+    },
+    "word-37": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "89b198a6e603a596395230be0f62539e4c390295a4bbf3bf72f9b24ed97d36d3"
+    },
+    "word-38": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "629e83f1d75638491c576ca22df422651a39fc8f49a91feaf6a79c369804cfa6"
+    },
+    "word-39": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c6a80d16a5dd47aec471b83ae2b9bc695f1f86ac6ba4a5e40d3ce622a395aac0"
+    },
+    "word-40": {
+      "domain": "word",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "8a06bbdd3a54787339bc9ce2061b2bddf4a5b9c99fc07fe10caba8824dc47244"
+    },
+    "grammar-41": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "089cf5fd9b4f137ea9ae2839b9bd465db29cae676afd11e5826a3aa91b6a44cc"
+    },
+    "grammar-42": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "584a3cd9384ad19bf97df633b2a2b655bc0871e33e29a3ba195a579f4a373853"
+    },
+    "grammar-43": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "e47a9c21bc922eff0897b4f961ea6d46c1cede546286e5db6899b30303c63cd3"
+    },
+    "grammar-44": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "654e37592f1bb5dd9dfee6baf5f94b158fe264e134cf78f3877da4432f57d6b6"
+    },
+    "grammar-45": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "512ff09163e0763c98687fd72d83ea3b14e98a3a889958bd3b6dc80402c37a42"
+    },
+    "grammar-46": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "054ed1d80a31ec53c706ab458fe283adc8999c7976a4eca33fcc9df77e6cfca3"
+    },
+    "grammar-47": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "c8cfab028b5247a0930c166e65858328bbc2e6885616f81a9832b9bdabbc6186"
+    },
+    "grammar-48": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "7810cad009b45f4e1744a085106b25a1ec3737837d2ba4dc1b905ddefe12f54c"
+    },
+    "grammar-49": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "4cf576f4d5316dc78d92cf6c3699fbc177776e8202307f59ace6d56269341e9c"
+    },
+    "grammar-50": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "1a12344426aa4d51ed8dbe64178c52e4b1b4697c8ff691fc28e1271b25eddccc"
+    },
+    "grammar-51": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "ee360cc50441bc68e2bbb094b2e9369326fcb09799b11bdd1842b8221c7c7c94"
+    },
+    "grammar-52": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "54acd61b1867b7a167e9b7bb183a44cf0c4f9481e03a5f747e51daf067ef9791"
+    },
+    "grammar-53": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "8fda80f3a01788e30b2d6ef0522ac0e9b02eede0becad23cd37b308850e449f9"
+    },
+    "grammar-54": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "68e509f2e4856d4258d79c682d2389d494fdf398b9556b562e0b452ddd15ddf5"
+    },
+    "grammar-55": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "5fc1e3ab7098bcf850bb245577e0fd15465ba0fbb2c0c2a2449a6ae8e530fc6b"
+    },
+    "grammar-56": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "dad5bfb0467b17542a6c9dcb9691acaab22f31fc12f88149a0602b0f5c36e934"
+    },
+    "grammar-57": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "55a45bad8e0b7122e0ffb88b488306d24d39d77c6ee8b67c6a70eeed58a7987d"
+    },
+    "grammar-58": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "ef1bdce9baa8c0eeb1b0d4e6daee9d17989d205a167a75f1fc9581242fcd748f"
+    },
+    "grammar-59": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "1845e71efcac69a938f27e0fea62ef727b8a3300752fb068e31fc46f180e3f39"
+    },
+    "grammar-60": {
+      "domain": "grammar",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "34d51ac35fd4c69d098d6105470fdbff0190230041696a2abc6e0aefc071c43e"
+    }
+  },
+  "fixtureHash": "02a84a0c86252524e2627cbf7cd69f8d725ade70ebbf107c8aed986eabcd8e54",
+  "fixtureContentHash": "76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a",
+  "planHash": "494f6937c98c51bb5bcfa7f23dbcaeef91caa8096731d6e6a496254d1acb3939",
+  "referenceHashes": [
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-chunked-free.json",
+      "hash": "2947cde93dc821ce68c0e8deff36d8cabf399893fb445db356d92398a96e2e0d"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-root-cause.json",
+      "hash": "d9db111e6fc15eba35d8666c55398f0697548b3ecccb64f8b4dfd3438baed812"
+    },
+    {
+      "path": "data/evaluations/accuracy-cause-plan.json",
+      "hash": "3eb29a10e645b249957926ab54b1663194f4c15501c35ddf1ae9141d53dcdf1e"
+    }
+  ],
+  "parentLedgerHashes": [
+    "0e6a30364b116d5eae393c298738211a3773a78336923369546c628fd9e91aa6",
+    "63e648f649d9af4ddadbe8bd5d48e7c33cc35324ba4dce6c8ead3e8cc597253d",
+    "ef06b87c27d9a222a42a9fd13d7329a970abbcf8e992caac06290568072a5494",
+    "f5e5371ee56b21922b0f1775ba53a82206159a569906787785016899782b7e6d"
+  ],
+  "previousLedgerHash": "9a679a81d1332e4c99a20ecf4bdfe45706c7179e84252d53cab9b06986691da7",
+  "ledgerHash": "21f45259a8446965094da6c5bb3d6466adcdd01c56c0af8d93cef2a0fc19783f",
+  "blindHash": "3ec30ca08855ac0d8ec8b35fc7a0c4f78ca4193d65e29f17640821352d874e67",
+  "adjudicationHash": "7c2562655b158ff5d53a44a76f42306112d6e54d5ac5c21517bd1bc3f45c1730",
+  "previousCalls": 540,
+  "approvedCalls": 120,
+  "calls": 115,
+  "totalCalls": 655,
+  "maximumTotalCalls": 660,
+  "freeTierConfirmation": "human-user",
+  "billingConsoleInspected": false,
+  "retries": 0,
+  "fallback": false,
+  "providerStops": {
+    "groq": "groq_limit"
+  },
+  "collectedAt": {
+    "start": "2026-10-01T08:12:44.300Z",
+    "end": "2026-10-01T08:28:07.619Z"
+  },
+  "review": {
+    "reviewer": "Codex primary; provider/model/attempt mapping hidden until this adjudication was saved; aggregate validation failures known; not independent human or cross-model certification",
+    "reviewedAt": "2026-10-01T08:32:49.278Z",
+    "rubric": "Unchanged frozen fixture and four-dimension rubric. Read meaning and grammar judgments plus explanation; correction preserves original intent and accepts valid alternatives without exact example-string matching. Read literal structure boundaries, roles, lexical glosses and translation together. Preposition objects require qualified analysis; whole PP is not a noun object. Insufficient lists require both uncertain, withheld correction and unavailable structure. General rule notes never excuse wrong rule selection, false claims or insufficient original-error teaching. A correct corrected diagram never excuses original-role reversal in prose.",
+    "providerAndModelHiddenUntilAdjudication": true,
+    "checkedReferences": [
+      "https://dictionary.cambridge.org/grammar/british-grammar/main",
+      "https://dictionary.cambridge.org/grammar/british-grammar/now",
+      "https://dictionary.cambridge.org/us/grammar/british-grammar/nouns-form",
+      "https://dictionary.cambridge.org/grammar/british-grammar/subjects",
+      "https://dictionary.cambridge.org/grammar/british-grammar/noun-phrases-uses",
+      "https://dictionary.cambridge.org/grammar/british-grammar/prepositional-phrases",
+      "https://dictionary.cambridge.org/grammar/british-grammar/word-patterns-want",
+      "https://dictionary.cambridge.org/grammar/british-grammar/infinitives"
+    ]
+  },
+  "temporaryEndpoint": {
+    "keysRemoved": true,
+    "providerCallsForCleanup": 0,
+    "expiredEnvironmentRevision": 30,
+    "expiredDeployment": {
+      "id": "appgdep_6abe19c919d081919714385141c8368f",
+      "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "title": "하루단어 · Oxford 3000",
+      "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_d7cccda688a88191960cfa68d431a313",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+      "failure_message": null,
+      "env_set_revision": 30,
+      "updated_at": "2026-10-01T08:29:15.715189+00:00"
+    },
+    "finalDeployment": {
+      "id": "appgdep_6abe1a33872c8191aaae9abcf570dc8f",
+      "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "title": "하루단어 · Oxford 3000",
+      "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_d7cccda688a88191960cfa68d431a313",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+      "failure_message": null,
+      "env_set_revision": 31,
+      "updated_at": "2026-10-01T08:31:01.386862+00:00"
+    },
+    "finalEnvironment": {
+      "revision": 31,
+      "keys": [
+        "google_ai_enabled",
+        "google_api",
+        "grammar_enabled",
+        "grammar_practice_v2_enabled",
+        "grammar_practice_v3_enabled",
+        "groq_api",
+        "large_backup_restore_enabled"
+      ],
+      "evaluationKeys": 0,
+      "grammarV3": "true",
+      "candidateEnabled": false
+    },
+    "finalSite": {
+      "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "status": "active",
+      "access_mode": "custom",
+      "policy_mode": "custom",
+      "policy_revision": 3,
+      "visitors": 0,
+      "role": "owner",
+      "latest_version": 93,
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site"
+    },
+    "sourceCommit": "76312e705c2d97465376478e75202087d6f6a5cc",
+    "expiredProbe": {
+      "status": 404,
+      "disabled": true,
+      "code": "evaluation_disabled",
+      "providerCalls": 0,
+      "checkedAt": "2026-10-01T08:30:12.084Z"
+    },
+    "finalProbe": {
+      "status": 404,
+      "disabled": true,
+      "code": "evaluation_disabled",
+      "providerCalls": 0,
+      "checkedAt": "2026-10-01T08:32:49.475Z"
+    }
+  },
+  "summaries": {
+    "google": {
+      "model": "gemini-3.1-flash-lite",
+      "planned": 60,
+      "attempts": 60,
+      "validResponses": 10,
+      "overallPass": 7,
+      "languageFail": 3,
+      "unavailable": 50,
+      "outputRejected": 49,
+      "baselinePass": 44,
+      "newRegressions": 2,
+      "priorPassNowUnavailable": 35,
+      "dimensions": {
+        "meaning": {
+          "pass": 7,
+          "fail": 3,
+          "unavailable": 50
+        },
+        "grammar": {
+          "pass": 7,
+          "fail": 3,
+          "unavailable": 50
+        },
+        "correction": {
+          "pass": 7,
+          "fail": 3,
+          "unavailable": 50
+        },
+        "structure": {
+          "pass": 7,
+          "fail": 3,
+          "unavailable": 50
+        }
+      },
+      "critical": {
+        "planned": 32,
+        "available": 0,
+        "unavailable": 32,
+        "failedCases": 0,
+        "errors": {
+          "approveBadGrammar": 0,
+          "reverseMeaning": 0,
+          "swapRoles": 0
+        }
+      },
+      "checks": {
+        "atLeast54": false,
+        "noDesignatedCriticalErrors": true,
+        "allDesignatedCriticalAssessable": false,
+        "noDecreaseFromBaseline": false,
+        "noNewRegressions": false
+      },
+      "gatePassed": false
+    },
+    "groq": {
+      "model": "openai/gpt-oss-120b",
+      "planned": 60,
+      "attempts": 55,
+      "validResponses": 5,
+      "overallPass": 4,
+      "languageFail": 1,
+      "unavailable": 55,
+      "outputRejected": 49,
+      "baselinePass": 34,
+      "newRegressions": 1,
+      "priorPassNowUnavailable": 33,
+      "dimensions": {
+        "meaning": {
+          "pass": 4,
+          "fail": 1,
+          "unavailable": 55
+        },
+        "grammar": {
+          "pass": 4,
+          "fail": 1,
+          "unavailable": 55
+        },
+        "correction": {
+          "pass": 4,
+          "fail": 1,
+          "unavailable": 55
+        },
+        "structure": {
+          "pass": 4,
+          "fail": 1,
+          "unavailable": 55
+        }
+      },
+      "critical": {
+        "planned": 32,
+        "available": 0,
+        "unavailable": 32,
+        "failedCases": 0,
+        "errors": {
+          "approveBadGrammar": 0,
+          "reverseMeaning": 0,
+          "swapRoles": 0
+        }
+      },
+      "checks": {
+        "atLeast54": false,
+        "noDesignatedCriticalErrors": true,
+        "allDesignatedCriticalAssessable": false,
+        "noDecreaseFromBaseline": false,
+        "noNewRegressions": false
+      },
+      "gatePassed": false
+    }
+  },
+  "historicalSummary": {
+    "observed_resolved": 0,
+    "still_failed": 1,
+    "unavailable": 16
+  },
+  "historical": [
+    {
+      "historicalLabel": "B060",
+      "caseId": "word-08",
+      "family": "roles",
+      "provider": "google",
+      "candidateLabel": "B068",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B088",
+      "caseId": "word-26",
+      "family": "roles",
+      "provider": "google",
+      "candidateLabel": "B085",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B052",
+      "caseId": "word-26",
+      "family": "roles",
+      "provider": "groq",
+      "candidateLabel": "B079",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B061",
+      "caseId": "grammar-45",
+      "family": "roles",
+      "provider": "google",
+      "candidateLabel": "B089",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B093",
+      "caseId": "word-27",
+      "family": "roles",
+      "provider": "groq",
+      "candidateLabel": "B070",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B053",
+      "caseId": "word-32",
+      "family": "roles",
+      "provider": "groq",
+      "candidateLabel": "B032",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B073",
+      "caseId": "grammar-42",
+      "family": "roles",
+      "provider": "groq",
+      "candidateLabel": "B055",
+      "failedDimensions": [
+        "grammar",
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "grammar",
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B117",
+      "caseId": "grammar-48",
+      "family": "roles",
+      "provider": "groq",
+      "candidateLabel": "B029",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B018",
+      "caseId": "grammar-49",
+      "family": "roles",
+      "provider": "groq",
+      "candidateLabel": "B062",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B040",
+      "caseId": "word-37",
+      "family": "insufficiency",
+      "provider": "google",
+      "candidateLabel": "B105",
+      "failedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ],
+      "candidateOverall": "fail",
+      "outcome": "still_failed"
+    },
+    {
+      "historicalLabel": "B114",
+      "caseId": "grammar-57",
+      "family": "insufficiency",
+      "provider": "groq",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B068",
+      "caseId": "grammar-51",
+      "family": "target",
+      "provider": "google",
+      "candidateLabel": "B108",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B054",
+      "caseId": "grammar-51",
+      "family": "target",
+      "provider": "groq",
+      "candidateLabel": "B020",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B022",
+      "caseId": "grammar-55",
+      "family": "target",
+      "provider": "google",
+      "candidateLabel": "B081",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B078",
+      "caseId": "word-25",
+      "family": "target",
+      "provider": "groq",
+      "candidateLabel": "B083",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B062",
+      "caseId": "grammar-56",
+      "family": "rules",
+      "provider": "google",
+      "candidateLabel": "B056",
+      "failedDimensions": [
+        "grammar"
+      ],
+      "unresolvedDimensions": [
+        "grammar"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "historicalLabel": "B087",
+      "caseId": "word-22",
+      "family": "rules",
+      "provider": "groq",
+      "candidateLabel": "B104",
+      "failedDimensions": [
+        "grammar"
+      ],
+      "unresolvedDimensions": [
+        "grammar"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    }
+  ],
+  "comparisons": [
+    {
+      "caseId": "word-01",
+      "provider": "google",
+      "baselineLabel": "B063",
+      "candidateLabel": "B091",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-01",
+      "provider": "groq",
+      "baselineLabel": "B090",
+      "candidateLabel": "B059",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-02",
+      "provider": "google",
+      "baselineLabel": "B076",
+      "candidateLabel": "B012",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-02",
+      "provider": "groq",
+      "baselineLabel": "B036",
+      "candidateLabel": "B041",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-03",
+      "provider": "google",
+      "baselineLabel": "B015",
+      "candidateLabel": "B054",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-03",
+      "provider": "groq",
+      "baselineLabel": "B008",
+      "candidateLabel": "B024",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-04",
+      "provider": "google",
+      "baselineLabel": "B045",
+      "candidateLabel": "B016",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-04",
+      "provider": "groq",
+      "baselineLabel": "B118",
+      "candidateLabel": "B028",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-05",
+      "provider": "google",
+      "baselineLabel": "B067",
+      "candidateLabel": "B063",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-05",
+      "provider": "groq",
+      "baselineLabel": "B100",
+      "candidateLabel": "B048",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-06",
+      "provider": "google",
+      "baselineLabel": "B113",
+      "candidateLabel": "B035",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-06",
+      "provider": "groq",
+      "baselineLabel": "B096",
+      "candidateLabel": "B002",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-07",
+      "provider": "google",
+      "baselineLabel": "B039",
+      "candidateLabel": "B072",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-07",
+      "provider": "groq",
+      "baselineLabel": "B024",
+      "candidateLabel": "B014",
+      "baseline": "pass",
+      "candidate": "fail",
+      "assessable": true,
+      "regressedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ]
+    },
+    {
+      "caseId": "word-08",
+      "provider": "google",
+      "baselineLabel": "B060",
+      "candidateLabel": "B068",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-08",
+      "provider": "groq",
+      "baselineLabel": "B004",
+      "candidateLabel": "B027",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-09",
+      "provider": "google",
+      "baselineLabel": "B095",
+      "candidateLabel": "B017",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-09",
+      "provider": "groq",
+      "baselineLabel": "B044",
+      "candidateLabel": "B075",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-10",
+      "provider": "google",
+      "baselineLabel": "B038",
+      "candidateLabel": "B113",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-10",
+      "provider": "groq",
+      "baselineLabel": "B006",
+      "candidateLabel": "B049",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-11",
+      "provider": "google",
+      "baselineLabel": "B092",
+      "candidateLabel": "B040",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-11",
+      "provider": "groq",
+      "baselineLabel": "B043",
+      "candidateLabel": "B088",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-12",
+      "provider": "google",
+      "baselineLabel": "B077",
+      "candidateLabel": "B095",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-12",
+      "provider": "groq",
+      "baselineLabel": "B020",
+      "candidateLabel": "B100",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-13",
+      "provider": "google",
+      "baselineLabel": "B072",
+      "candidateLabel": "B042",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-13",
+      "provider": "groq",
+      "baselineLabel": "B075",
+      "candidateLabel": "B037",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-14",
+      "provider": "google",
+      "baselineLabel": "B042",
+      "candidateLabel": "B102",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-14",
+      "provider": "groq",
+      "baselineLabel": "B009",
+      "candidateLabel": "B093",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-15",
+      "provider": "google",
+      "baselineLabel": "B056",
+      "candidateLabel": "B069",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-15",
+      "provider": "groq",
+      "baselineLabel": "B098",
+      "candidateLabel": "B115",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-16",
+      "provider": "google",
+      "baselineLabel": "B086",
+      "candidateLabel": "B078",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-16",
+      "provider": "groq",
+      "baselineLabel": "B014",
+      "candidateLabel": "B111",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-17",
+      "provider": "google",
+      "baselineLabel": "B074",
+      "candidateLabel": "B061",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-17",
+      "provider": "groq",
+      "baselineLabel": "B105",
+      "candidateLabel": "B112",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-18",
+      "provider": "google",
+      "baselineLabel": "B089",
+      "candidateLabel": "B092",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-18",
+      "provider": "groq",
+      "baselineLabel": "B120",
+      "candidateLabel": "B025",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-19",
+      "provider": "google",
+      "baselineLabel": "B051",
+      "candidateLabel": "B094",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-19",
+      "provider": "groq",
+      "baselineLabel": "B111",
+      "candidateLabel": "B010",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-20",
+      "provider": "google",
+      "baselineLabel": "B021",
+      "candidateLabel": "B058",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-20",
+      "provider": "groq",
+      "baselineLabel": "B034",
+      "candidateLabel": "B103",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-21",
+      "provider": "google",
+      "baselineLabel": "B019",
+      "candidateLabel": "B031",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-21",
+      "provider": "groq",
+      "baselineLabel": "B023",
+      "candidateLabel": "B077",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-22",
+      "provider": "google",
+      "baselineLabel": "B026",
+      "candidateLabel": "B065",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-22",
+      "provider": "groq",
+      "baselineLabel": "B087",
+      "candidateLabel": "B104",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-23",
+      "provider": "google",
+      "baselineLabel": "B037",
+      "candidateLabel": "B039",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-23",
+      "provider": "groq",
+      "baselineLabel": "B025",
+      "candidateLabel": "B007",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-24",
+      "provider": "google",
+      "baselineLabel": "B001",
+      "candidateLabel": "B043",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-24",
+      "provider": "groq",
+      "baselineLabel": "B055",
+      "candidateLabel": "B106",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-25",
+      "provider": "google",
+      "baselineLabel": "B115",
+      "candidateLabel": "B022",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-25",
+      "provider": "groq",
+      "baselineLabel": "B078",
+      "candidateLabel": "B083",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-26",
+      "provider": "google",
+      "baselineLabel": "B088",
+      "candidateLabel": "B085",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-26",
+      "provider": "groq",
+      "baselineLabel": "B052",
+      "candidateLabel": "B079",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-27",
+      "provider": "google",
+      "baselineLabel": "B017",
+      "candidateLabel": "B053",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-27",
+      "provider": "groq",
+      "baselineLabel": "B093",
+      "candidateLabel": "B070",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-28",
+      "provider": "google",
+      "baselineLabel": "B047",
+      "candidateLabel": "B003",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-28",
+      "provider": "groq",
+      "baselineLabel": "B012",
+      "candidateLabel": "B107",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-29",
+      "provider": "google",
+      "baselineLabel": "B108",
+      "candidateLabel": "B109",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-29",
+      "provider": "groq",
+      "baselineLabel": "B058",
+      "candidateLabel": "B052",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-30",
+      "provider": "google",
+      "baselineLabel": "B066",
+      "candidateLabel": "B018",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-30",
+      "provider": "groq",
+      "baselineLabel": "B041",
+      "candidateLabel": "B087",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-31",
+      "provider": "google",
+      "baselineLabel": "B079",
+      "candidateLabel": "B047",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-31",
+      "provider": "groq",
+      "baselineLabel": "B050",
+      "candidateLabel": "B050",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-32",
+      "provider": "google",
+      "baselineLabel": "B080",
+      "candidateLabel": "B021",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-32",
+      "provider": "groq",
+      "baselineLabel": "B053",
+      "candidateLabel": "B032",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-33",
+      "provider": "google",
+      "baselineLabel": "B065",
+      "candidateLabel": "B101",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-33",
+      "provider": "groq",
+      "baselineLabel": "B082",
+      "candidateLabel": "B011",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-34",
+      "provider": "google",
+      "baselineLabel": "B059",
+      "candidateLabel": "B015",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-34",
+      "provider": "groq",
+      "baselineLabel": "B081",
+      "candidateLabel": "B097",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-35",
+      "provider": "google",
+      "baselineLabel": "B064",
+      "candidateLabel": "B008",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-35",
+      "provider": "groq",
+      "baselineLabel": "B057",
+      "candidateLabel": "B076",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-36",
+      "provider": "google",
+      "baselineLabel": "B119",
+      "candidateLabel": "B004",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-36",
+      "provider": "groq",
+      "baselineLabel": "B035",
+      "candidateLabel": "B074",
+      "baseline": "unavailable",
+      "candidate": "pass",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-37",
+      "provider": "google",
+      "baselineLabel": "B040",
+      "candidateLabel": "B105",
+      "baseline": "fail",
+      "candidate": "fail",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-37",
+      "provider": "groq",
+      "baselineLabel": "B107",
+      "candidateLabel": "B046",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-38",
+      "provider": "google",
+      "baselineLabel": "B094",
+      "candidateLabel": "B114",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-38",
+      "provider": "groq",
+      "baselineLabel": "B099",
+      "candidateLabel": "B084",
+      "baseline": "unavailable",
+      "candidate": "pass",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-39",
+      "provider": "google",
+      "baselineLabel": "B110",
+      "candidateLabel": "B001",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-39",
+      "provider": "groq",
+      "baselineLabel": "B109",
+      "candidateLabel": "B057",
+      "baseline": "unavailable",
+      "candidate": "pass",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-40",
+      "provider": "google",
+      "baselineLabel": "B049",
+      "candidateLabel": "B086",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-40",
+      "provider": "groq",
+      "baselineLabel": "B116",
+      "candidateLabel": "B060",
+      "baseline": "unavailable",
+      "candidate": "pass",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "google",
+      "baselineLabel": "B013",
+      "candidateLabel": "B006",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "groq",
+      "baselineLabel": "B104",
+      "candidateLabel": "B082",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "google",
+      "baselineLabel": "B106",
+      "candidateLabel": "B110",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "groq",
+      "baselineLabel": "B073",
+      "candidateLabel": "B055",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "google",
+      "baselineLabel": "B084",
+      "candidateLabel": "B067",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "groq",
+      "baselineLabel": "B091",
+      "candidateLabel": "B030",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "google",
+      "baselineLabel": "B027",
+      "candidateLabel": "B036",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "groq",
+      "baselineLabel": "B069",
+      "candidateLabel": "B099",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "google",
+      "baselineLabel": "B061",
+      "candidateLabel": "B089",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "baselineLabel": "B101",
+      "candidateLabel": "B023",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "google",
+      "baselineLabel": "B011",
+      "candidateLabel": "B090",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "baselineLabel": "B002",
+      "candidateLabel": "B071",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "google",
+      "baselineLabel": "B010",
+      "candidateLabel": "B034",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "groq",
+      "baselineLabel": "B048",
+      "candidateLabel": "B096",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "google",
+      "baselineLabel": "B033",
+      "candidateLabel": "B073",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "baselineLabel": "B117",
+      "candidateLabel": "B029",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "google",
+      "baselineLabel": "B046",
+      "candidateLabel": "B045",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "groq",
+      "baselineLabel": "B018",
+      "candidateLabel": "B062",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "google",
+      "baselineLabel": "B070",
+      "candidateLabel": "B026",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "groq",
+      "baselineLabel": "B032",
+      "candidateLabel": "B038",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "google",
+      "baselineLabel": "B068",
+      "candidateLabel": "B108",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "groq",
+      "baselineLabel": "B054",
+      "candidateLabel": "B020",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "google",
+      "baselineLabel": "B102",
+      "candidateLabel": "B044",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "groq",
+      "baselineLabel": "B103",
+      "candidateLabel": "B013",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "google",
+      "baselineLabel": "B030",
+      "candidateLabel": "B005",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "groq",
+      "baselineLabel": "B085",
+      "candidateLabel": "B051",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "google",
+      "baselineLabel": "B005",
+      "candidateLabel": "B098",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "groq",
+      "baselineLabel": "B028",
+      "candidateLabel": "B066",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "google",
+      "baselineLabel": "B022",
+      "candidateLabel": "B081",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "baselineLabel": "B083",
+      "candidateLabel": "B080",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "google",
+      "baselineLabel": "B062",
+      "candidateLabel": "B056",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "groq",
+      "baselineLabel": "B016",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "google",
+      "baselineLabel": "B112",
+      "candidateLabel": "B009",
+      "baseline": "pass",
+      "candidate": "fail",
+      "assessable": true,
+      "regressedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ]
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "groq",
+      "baselineLabel": "B114",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "google",
+      "baselineLabel": "B031",
+      "candidateLabel": "B019",
+      "baseline": "pass",
+      "candidate": "fail",
+      "assessable": true,
+      "regressedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ]
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "groq",
+      "baselineLabel": "B029",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "google",
+      "baselineLabel": "B003",
+      "candidateLabel": "B064",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "groq",
+      "baselineLabel": "B097",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "google",
+      "baselineLabel": "B071",
+      "candidateLabel": "B033",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "groq",
+      "baselineLabel": "B007",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    }
+  ],
+  "checks": {
+    "bothProviderGates": false,
+    "all17HistoricalFailuresResolved": false,
+    "all17CandidateCasesPass": false,
+    "noObservedDimensionRegressions": false
+  },
+  "publication": {
+    "full60CaseGateTested": true,
+    "gatePassed": false,
+    "promptPublished": false
+  },
+  "rows": [
+    {
+      "caseId": "word-01",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 541,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B091",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cf943c950e3f9bc038325e2e066b052e491a3eda95cd5233672627acf04a7709",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-01",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 542,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B059",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cf943c950e3f9bc038325e2e066b052e491a3eda95cd5233672627acf04a7709",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-02",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 543,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B012",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c51b62c0102ee497302348720edb06b0970ffd6e733fa1c88845e8d3436b91ed",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-02",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 544,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B041",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c51b62c0102ee497302348720edb06b0970ffd6e733fa1c88845e8d3436b91ed",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-03",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 545,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B054",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "21124e123a5f2d84d819b727821e60765091b832a041ae168e9ec425eb630a1d",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-03",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 546,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B024",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "21124e123a5f2d84d819b727821e60765091b832a041ae168e9ec425eb630a1d",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-04",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 547,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B016",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "10cfcd57fd4b486464ba2ee41f156fd9007f04f5cf6e9f94fac9cb27711a07e9",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-04",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 548,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B028",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "10cfcd57fd4b486464ba2ee41f156fd9007f04f5cf6e9f94fac9cb27711a07e9",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-05",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 549,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B063",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "07b1d7d3bc151823ce024c911d53f02c39f9eea384b88ce481bac4e02bc5b199",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-05",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 550,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B048",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "07b1d7d3bc151823ce024c911d53f02c39f9eea384b88ce481bac4e02bc5b199",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-06",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 551,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B035",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "0e5cf2a5e174fcac2612cdd691e7b6c7dd0ec9d112cf9549de640d7ca7d3981d",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-06",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 552,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B002",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "0e5cf2a5e174fcac2612cdd691e7b6c7dd0ec9d112cf9549de640d7ca7d3981d",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-07",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 553,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B072",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "f3fb142456e3ac6aeeda31d499d9daca0e673d2ce5b74b02c6ddced263ea610a",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-07",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "number": 554,
+      "httpStatus": 200,
+      "label": "B014",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "f3fb142456e3ac6aeeda31d499d9daca0e673d2ce5b74b02c6ddced263ea610a",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "The wind is strong today.",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-10-01T08:14:19.728Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "바람 명사·연결동사·형용사 보어가 있는 완성된 정상 문장을 문맥 부족으로 보류했다. 목표 뜻·문법은 판단 가능하며 원문 유지와 실제 성분 분석이 필요하다."
+    },
+    {
+      "caseId": "word-08",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 555,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B068",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a99e2bbdd3eee032e6e0c5a02b78088e6b0b0eb50b50e230d2bdfed56dc52cb9",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-08",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 556,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B027",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a99e2bbdd3eee032e6e0c5a02b78088e6b0b0eb50b50e230d2bdfed56dc52cb9",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-09",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 557,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B017",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a3994d47901f668a7e0e23361d5958855b6913aa56099b4514553267d5a052d4",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-09",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 558,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B075",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a3994d47901f668a7e0e23361d5958855b6913aa56099b4514553267d5a052d4",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-10",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 559,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B113",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "40f0c7cb434c99abf3f340d60917807fe0cbb6aef044f3609d91debc80db38c3",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-10",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 560,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B049",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "40f0c7cb434c99abf3f340d60917807fe0cbb6aef044f3609d91debc80db38c3",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-11",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 561,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B040",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "72708b1ebccedff9325b0e4bf3641768923b32af53d4bdf2d87cbf7c59ce2d28",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-11",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 562,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B088",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "72708b1ebccedff9325b0e4bf3641768923b32af53d4bdf2d87cbf7c59ce2d28",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-12",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 563,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B095",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "eb289b83e8c7a5cd3f7d1b089ba8c0ec968e961442d2967fb3a6f0fcbe5b9781",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-12",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 564,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B100",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "eb289b83e8c7a5cd3f7d1b089ba8c0ec968e961442d2967fb3a6f0fcbe5b9781",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-13",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 565,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B042",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3e7fa96abd72f548f56a3a53bf3b9351ac7e89d0955fae4cbcd2ca9b329de5a2",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-13",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 566,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B037",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3e7fa96abd72f548f56a3a53bf3b9351ac7e89d0955fae4cbcd2ca9b329de5a2",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-14",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 567,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B102",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "1da59212fe1ef22def586ff9ee986e2d060fdd5c8d42ea56e7ec30fa7250f47f",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-14",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 568,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B093",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "1da59212fe1ef22def586ff9ee986e2d060fdd5c8d42ea56e7ec30fa7250f47f",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-15",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 569,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B069",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "6f406fe652b81b5ccc959cdbd556cd51c0e3f591e802876df71a5c67d822a06a",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-15",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 570,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B115",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "6f406fe652b81b5ccc959cdbd556cd51c0e3f591e802876df71a5c67d822a06a",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-16",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 571,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B078",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "ca145862bdf1fb8270168e3556f057ab2c578e60549979c6a537a8bc93367730",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-16",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 572,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B111",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "ca145862bdf1fb8270168e3556f057ab2c578e60549979c6a537a8bc93367730",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-17",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 573,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B061",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cc8471a97b7fcbdbcb91660204f534329c76a275e83876feb60135e022024b17",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-17",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 574,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B112",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cc8471a97b7fcbdbcb91660204f534329c76a275e83876feb60135e022024b17",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-18",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 575,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B092",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "355f8318d8333225b7630f6c3c9a25d3893942d84ebf0a84b1f3f5b164a3c7bf",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-18",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 576,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B025",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "355f8318d8333225b7630f6c3c9a25d3893942d84ebf0a84b1f3f5b164a3c7bf",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-19",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 577,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B094",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "8652f19e9110241bd00fe68be43efa1cd3832883f7e248b65f6c99c18c09e3f1",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-19",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 578,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B010",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "8652f19e9110241bd00fe68be43efa1cd3832883f7e248b65f6c99c18c09e3f1",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-20",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 579,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B058",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c3bd07fab274d42e75a0d7d101737ab211ed3d4ce91af08928a00b7f1f5c1a7e",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-20",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 580,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B103",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c3bd07fab274d42e75a0d7d101737ab211ed3d4ce91af08928a00b7f1f5c1a7e",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-21",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 581,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B031",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a7726c7c63c005555fb136c9d641fca843bc88499cfd1293f1bcafeca3f94171",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-21",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 582,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B077",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a7726c7c63c005555fb136c9d641fca843bc88499cfd1293f1bcafeca3f94171",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-22",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 583,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B065",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "e05040eceeea75947ffb0520484a05af3aa7168abb4006ddfa0a5a0dd39217e4",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-22",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 584,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B104",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "e05040eceeea75947ffb0520484a05af3aa7168abb4006ddfa0a5a0dd39217e4",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-23",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 585,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B039",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c498a513f191036f7878846593e99332405b73c57492a1725f8c095bcd4b50da",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-23",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 586,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "judgment",
+      "label": "B007",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c498a513f191036f7878846593e99332405b73c57492a1725f8c095bcd4b50da",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-24",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 587,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B043",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3a9abd7406150f87283745d8069447b6eef496920433595bc0e37e70aa2cd856",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-24",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 588,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B106",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3a9abd7406150f87283745d8069447b6eef496920433595bc0e37e70aa2cd856",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-25",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 589,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "judgment",
+      "label": "B022",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cbbe4348339b12beb74f979591058a1fae37cdd0152105ac60a65d88c7d9a68f",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-25",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 590,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B083",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "cbbe4348339b12beb74f979591058a1fae37cdd0152105ac60a65d88c7d9a68f",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-26",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 591,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B085",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3a2725b6454421e1c66083c7bbf3eecc7c921cb9c2259600473d92f24d1a3248",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-26",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 592,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B079",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "3a2725b6454421e1c66083c7bbf3eecc7c921cb9c2259600473d92f24d1a3248",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-27",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 593,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B053",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "1ad11ad7e1af26090e99517269ac595afc024ad1865e1549a75ffcef0a909cbc",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-27",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 594,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B070",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "1ad11ad7e1af26090e99517269ac595afc024ad1865e1549a75ffcef0a909cbc",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-28",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 595,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B003",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "289558f12ec684f5551f1ff0a1059b3385a5d69a114845312a06c6944d6c6617",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-28",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 596,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B107",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "289558f12ec684f5551f1ff0a1059b3385a5d69a114845312a06c6944d6c6617",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-29",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 597,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B109",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a8a55ea683b702c24c1ba088a3efce172426d08d93b3a779f4152d7afe1aa7f9",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-29",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 598,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B052",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "a8a55ea683b702c24c1ba088a3efce172426d08d93b3a779f4152d7afe1aa7f9",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-30",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 599,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B018",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "29a318d7b6326a911dec45bbb33d7dd06cc3c1b2ee54e181a29e55684ed79821",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-30",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 600,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B087",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "29a318d7b6326a911dec45bbb33d7dd06cc3c1b2ee54e181a29e55684ed79821",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-31",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 601,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B047",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "707f90e070d6009d04f704367de4ffe1cbc656883623c1127ba21698e9c2b1e2",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-31",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 602,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B050",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "707f90e070d6009d04f704367de4ffe1cbc656883623c1127ba21698e9c2b1e2",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-32",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 603,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B021",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "deb7b30516e0c060b253408f9eb5205a271b8c228f3f987e6ca305257bd3b8c9",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-32",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 604,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B032",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "deb7b30516e0c060b253408f9eb5205a271b8c228f3f987e6ca305257bd3b8c9",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-33",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 605,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B101",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "0a9c6922c12b804814b182314e4b018701b6ea1a5f592cfe8923c4bbef8914fb",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-33",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 606,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B011",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "0a9c6922c12b804814b182314e4b018701b6ea1a5f592cfe8923c4bbef8914fb",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-34",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 607,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B015",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "52a7aca80eef1af936c53cd9b75f8202f5ec2e534f5f370191308772ca8fb848",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-34",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 608,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B097",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "52a7aca80eef1af936c53cd9b75f8202f5ec2e534f5f370191308772ca8fb848",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-35",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 609,
+      "httpStatus": 200,
+      "label": "B008",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "218c850470739cfb3fab91f548ffdba8499cc2675809fe6b120a17429c9a81db",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "bank / river / money",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:21:20.689Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "의도를 확정할 수 없는 낱말 목록에서 두 판정을 보류하고 교정·번역·성분을 만들지 않았다."
+    },
+    {
+      "caseId": "word-35",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 610,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "judgment",
+      "label": "B076",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "218c850470739cfb3fab91f548ffdba8499cc2675809fe6b120a17429c9a81db",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-36",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 611,
+      "httpStatus": 200,
+      "label": "B004",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "d9c1e5f5e06942d5914d12327a0a3688900302510a7a47200298fb9d4c601bb3",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "lead / led / metal",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:21:33.397Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "lead/led/metal 목록의 뜻과 문장 의도를 확정하지 않고 교정과 구조 분석을 보류했다."
+    },
+    {
+      "caseId": "word-36",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "number": 612,
+      "httpStatus": 200,
+      "label": "B074",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "d9c1e5f5e06942d5914d12327a0a3688900302510a7a47200298fb9d4c601bb3",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "lead / led / metal",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-10-01T08:21:38.257Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "뜻·형태 후보의 목록을 완성 문장으로 만들지 않고 공동 uncertain·빈 교정·구조 보류를 유지했다."
+    },
+    {
+      "caseId": "word-37",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 613,
+      "httpStatus": 200,
+      "label": "B105",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "89b198a6e603a596395230be0f62539e4c390295a4bbf3bf72f9b24ed97d36d3",
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "object or subject",
+        "explanation": "원문의 「object」는 「물체, 대상」의 용법으로 선택한 뜻·기능에 맞아요. 원문은 문법적으로 자연스러워 그대로 유지해요.",
+        "structure": {
+          "status": "available",
+          "translation": "물체 또는 주제",
+          "parts": [
+            {
+              "text": "object",
+              "role": "S",
+              "explanation": "물체 · 주어"
+            },
+            {
+              "text": "or",
+              "role": "X",
+              "explanation": "또는 · 연결 요소"
+            },
+            {
+              "text": "subject",
+              "role": "S",
+              "explanation": "주제 · 주어"
+            }
+          ],
+          "note": ""
+        },
+        "original": "object or subject",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:22:11.696Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "object or subject만으로 물체 뜻과 정상 문법을 확정하고 object와 subject를 각각 주어로 분석했다. 완성 문장과 의도가 부족하므로 두 판단·교정·구조를 보류해야 한다."
+    },
+    {
+      "caseId": "word-37",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 614,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "judgment",
+      "label": "B046",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "89b198a6e603a596395230be0f62539e4c390295a4bbf3bf72f9b24ed97d36d3",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "word-38",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 615,
+      "httpStatus": 200,
+      "label": "B114",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "629e83f1d75638491c576ca22df422651a39fc8f49a91feaf6a79c369804cfa6",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "read / red / reading",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:22:24.270Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "서로 다른 철자·형태가 나열된 불충분 입력에 두 uncertain과 빈 교정·구조 보류를 제공했다."
+    },
+    {
+      "caseId": "word-38",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "number": 616,
+      "httpStatus": 200,
+      "label": "B084",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "629e83f1d75638491c576ca22df422651a39fc8f49a91feaf6a79c369804cfa6",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "read / red / reading",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-10-01T08:22:30.344Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "read/red/reading 후보만으로 뜻·문법·문장을 확정하지 않고 교정과 분석을 비웠다."
+    },
+    {
+      "caseId": "word-39",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 617,
+      "httpStatus": 200,
+      "label": "B001",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c6a80d16a5dd47aec471b83ae2b9bc695f1f86ac6ba4a5e40d3ce622a395aac0",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "live / lived / alive",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:22:54.569Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "live/lived/alive 목록에서 문장이나 의도·관계를 만들어 내지 않고 판단과 교정을 보류했다."
+    },
+    {
+      "caseId": "word-39",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "number": 618,
+      "httpStatus": 200,
+      "label": "B057",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "c6a80d16a5dd47aec471b83ae2b9bc695f1f86ac6ba4a5e40d3ce622a395aac0",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "live / lived / alive",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-10-01T08:22:59.064Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "형태 후보만 있는 입력의 뜻·문법을 보류하고 번역·성분·교정을 만들지 않았다."
+    },
+    {
+      "caseId": "word-40",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 619,
+      "httpStatus": 200,
+      "label": "B086",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "8a06bbdd3a54787339bc9ce2061b2bddf4a5b9c99fc07fe10caba8824dc47244",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "present / gift / now",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:23:21.748Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "낱말 목록에서 선물 의미의 완성 문장을 창작하지 않았고 두 판단·교정·성분을 보류했다."
+    },
+    {
+      "caseId": "word-40",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "response",
+      "number": 620,
+      "httpStatus": 200,
+      "label": "B060",
+      "promptHash": "58a92fa90f8d12dcaf3341b88a4f4496cc1ea902ed7ad2f052de55ce17a22499",
+      "requestHash": "8a06bbdd3a54787339bc9ce2061b2bddf4a5b9c99fc07fe10caba8824dc47244",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "present / gift / now",
+        "model": "openai/gpt-oss-120b",
+        "createdAt": "2026-10-01T08:23:27.446Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "present/gift/now 목록의 문장 의도를 추정하지 않고 공동 보류와 빈 교정·구조를 유지했다."
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 621,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B006",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "089cf5fd9b4f137ea9ae2839b9bd465db29cae676afd11e5826a3aa91b6a44cc",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 622,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B082",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "089cf5fd9b4f137ea9ae2839b9bd465db29cae676afd11e5826a3aa91b6a44cc",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 623,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B110",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "584a3cd9384ad19bf97df633b2a2b655bc0871e33e29a3ba195a579f4a373853",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 624,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B055",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "584a3cd9384ad19bf97df633b2a2b655bc0871e33e29a3ba195a579f4a373853",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 625,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B067",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "e47a9c21bc922eff0897b4f961ea6d46c1cede546286e5db6899b30303c63cd3",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 626,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B030",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "e47a9c21bc922eff0897b4f961ea6d46c1cede546286e5db6899b30303c63cd3",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 627,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B036",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "654e37592f1bb5dd9dfee6baf5f94b158fe264e134cf78f3877da4432f57d6b6",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 628,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B099",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "654e37592f1bb5dd9dfee6baf5f94b158fe264e134cf78f3877da4432f57d6b6",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 629,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B089",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "512ff09163e0763c98687fd72d83ea3b14e98a3a889958bd3b6dc80402c37a42",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 630,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B023",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "512ff09163e0763c98687fd72d83ea3b14e98a3a889958bd3b6dc80402c37a42",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 631,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B090",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "054ed1d80a31ec53c706ab458fe283adc8999c7976a4eca33fcc9df77e6cfca3",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 632,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B071",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "054ed1d80a31ec53c706ab458fe283adc8999c7976a4eca33fcc9df77e6cfca3",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 633,
+      "httpStatus": 503,
+      "providerStatus": 503,
+      "code": "provider_unavailable",
+      "label": "B034",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "c8cfab028b5247a0930c166e65858328bbc2e6885616f81a9832b9bdabbc6186",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 634,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B096",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "c8cfab028b5247a0930c166e65858328bbc2e6885616f81a9832b9bdabbc6186",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 635,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B073",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "7810cad009b45f4e1744a085106b25a1ec3737837d2ba4dc1b905ddefe12f54c",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 636,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B029",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "7810cad009b45f4e1744a085106b25a1ec3737837d2ba4dc1b905ddefe12f54c",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 637,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B045",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "4cf576f4d5316dc78d92cf6c3699fbc177776e8202307f59ace6d56269341e9c",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 638,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "judgment",
+      "label": "B062",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "4cf576f4d5316dc78d92cf6c3699fbc177776e8202307f59ace6d56269341e9c",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 639,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B026",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "1a12344426aa4d51ed8dbe64178c52e4b1b4697c8ff691fc28e1271b25eddccc",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 640,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B038",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "1a12344426aa4d51ed8dbe64178c52e4b1b4697c8ff691fc28e1271b25eddccc",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 641,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "judgment",
+      "label": "B108",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "ee360cc50441bc68e2bbb094b2e9369326fcb09799b11bdd1842b8221c7c7c94",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 642,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "judgment",
+      "label": "B020",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "ee360cc50441bc68e2bbb094b2e9369326fcb09799b11bdd1842b8221c7c7c94",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 643,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B044",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "54acd61b1867b7a167e9b7bb183a44cf0c4f9481e03a5f747e51daf067ef9791",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 644,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B013",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "54acd61b1867b7a167e9b7bb183a44cf0c4f9481e03a5f747e51daf067ef9791",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 645,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B005",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "8fda80f3a01788e30b2d6ef0522ac0e9b02eede0becad23cd37b308850e449f9",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 646,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B051",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "8fda80f3a01788e30b2d6ef0522ac0e9b02eede0becad23cd37b308850e449f9",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 647,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B098",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "68e509f2e4856d4258d79c682d2389d494fdf398b9556b562e0b452ddd15ddf5",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 648,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "label": "B066",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "68e509f2e4856d4258d79c682d2389d494fdf398b9556b562e0b452ddd15ddf5",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 649,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B081",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "5fc1e3ab7098bcf850bb245577e0fd15465ba0fbb2c0c2a2449a6ae8e530fc6b",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "failure",
+      "number": 650,
+      "httpStatus": 429,
+      "providerStatus": 429,
+      "code": "groq_limit",
+      "label": "B080",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "5fc1e3ab7098bcf850bb245577e0fd15465ba0fbb2c0c2a2449a6ae8e530fc6b",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "failure",
+      "number": 651,
+      "httpStatus": 502,
+      "providerStatus": 200,
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "label": "B056",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "dad5bfb0467b17542a6c9dcb9691acaab22f31fc12f88149a0602b0f5c36e934",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 뜻·문법·교정·성분을 판정할 수 없다. 출력/HTTP 실패 사유는 가림 판정 저장 후 별도로 대조한다."
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "not_attempted",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "dad5bfb0467b17542a6c9dcb9691acaab22f31fc12f88149a0602b0f5c36e934",
+      "designatedCritical": true,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 영어 판정은 불가능하다."
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 652,
+      "httpStatus": 200,
+      "label": "B009",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "55a45bad8e0b7122e0ffb88b488306d24d39d77c6ee8b67c6a70eeed58a7987d",
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Music",
+        "explanation": "원문의 「Music」는 「사람·장소·사물·생각에 이름을 붙이는 명사」의 용법으로 선택한 뜻·기능에 맞아요. 원문은 문법적으로 자연스러워 그대로 유지해요.",
+        "structure": {
+          "status": "available",
+          "translation": "음악",
+          "parts": [
+            {
+              "text": "Music",
+              "role": "S",
+              "explanation": "음악 · 주어"
+            }
+          ],
+          "note": ""
+        },
+        "original": "Music",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:27:41.792Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "Music이라는 단어 하나를 정상 문장·수업 목표 충족으로 확정하고 주어 S 분석을 제공했다. 고정 기준은 낱말만으로 문장 목표·문법·의도를 확정하지 않고 교정·성분을 보류한다."
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "not_attempted",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "55a45bad8e0b7122e0ffb88b488306d24d39d77c6ee8b67c6a70eeed58a7987d",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 영어 판정은 불가능하다."
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 653,
+      "httpStatus": 200,
+      "label": "B019",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "ef1bdce9baa8c0eeb1b0d4e6daee9d17989d205a167a75f1fc9581242fcd748f",
+      "feedback": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "eat and go",
+        "explanation": "원문의 「eat」는 「행위나 동작을 나타내는 동사」의 용법으로 선택한 뜻·기능에 맞아요. 원문에서 필요한 부분을 고쳤어요. 「eat go」 → 「eat and go」 어순은 문장의 형태와 강조에 따라 달라져요. 가능한 여러 어순을 인정하고 필요한 변경만 해요.",
+        "structure": {
+          "status": "available",
+          "translation": "먹고 가세요.",
+          "parts": [
+            {
+              "text": "eat",
+              "role": "V",
+              "explanation": "먹다 · 동사(구)"
+            },
+            {
+              "text": "and",
+              "role": "X",
+              "explanation": "그리고 · 연결 요소"
+            },
+            {
+              "text": "go",
+              "role": "V",
+              "explanation": "가다 · 동사(구)"
+            }
+          ],
+          "note": ""
+        },
+        "original": "eat go",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:27:49.885Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "fail",
+        "correction": "fail",
+        "structure": "fail"
+      },
+      "overall": "fail",
+      "criticalErrors": [],
+      "reason": "eat go의 의도를 확정해 and를 넣고 명령문으로 교정·번역했다. 낱말 목록은 공동 보류가 필요하며 실제 의도 없이 접속 관계와 명령을 만들거나 어순 규칙으로 그 변경을 정당화할 수 없다."
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "not_attempted",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "ef1bdce9baa8c0eeb1b0d4e6daee9d17989d205a167a75f1fc9581242fcd748f",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 영어 판정은 불가능하다."
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 654,
+      "httpStatus": 200,
+      "label": "B064",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "1845e71efcac69a938f27e0fea62ef727b8a3300752fb068e31fc46f180e3f39",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "on at in",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:27:58.456Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "on/at/in 목록만으로 문장 관계·목표 달성을 확정하지 않고 두 판단·교정·구조를 보류했다."
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "not_attempted",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "1845e71efcac69a938f27e0fea62ef727b8a3300752fb068e31fc46f180e3f39",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 영어 판정은 불가능하다."
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "google",
+      "model": "gemini-3.1-flash-lite",
+      "status": "response",
+      "number": 655,
+      "httpStatus": 200,
+      "label": "B033",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "34d51ac35fd4c69d098d6105470fdbff0190230041696a2abc6e0aefc071c43e",
+      "feedback": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요.",
+        "structure": {
+          "status": "unavailable",
+          "translation": "",
+          "parts": [],
+          "note": "문장 문맥이 부족해 뜻·문법·성분 분석을 보류해요."
+        },
+        "original": "she him they",
+        "model": "gemini-3.1-flash-lite",
+        "createdAt": "2026-10-01T08:28:05.307Z"
+      },
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "overall": "pass",
+      "criticalErrors": [],
+      "reason": "she/him/they의 역할·관계를 만들어 내지 않고 공동 uncertain·빈 교정·성분 보류를 제공했다."
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "groq",
+      "model": "openai/gpt-oss-120b",
+      "status": "not_attempted",
+      "promptHash": "3b2c055dac5267942eff0bd546c27251d7ba3e8430f69cec2a973fc8d38ffbbe",
+      "requestHash": "34d51ac35fd4c69d098d6105470fdbff0190230041696a2abc6e0aefc071c43e",
+      "designatedCritical": false,
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "overall": "unavailable",
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 영어 판정은 불가능하다."
+    }
+  ]
+}
