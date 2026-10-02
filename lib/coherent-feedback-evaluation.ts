@@ -7,6 +7,8 @@ import { GOOGLE_PRIMARY_TIMEOUT_MS, type FeedbackProviders } from './feedback-fa
 import { FeedbackError } from './provider-feedback-error';
 import { ReasoningPilotError, usageEvidence, type ReasoningEvidence } from './reasoning-pilot-evaluation';
 import { tokenEvidenceQuotaHeaders } from './token-evidence-evaluation';
+import { captureGroqHttpDiagnostic } from './groq-http-diagnostics';
+export { parseGroqHttpDiagnostic } from './groq-http-diagnostics';
 export { accuracyModels };
 export { sentenceFeedbackSchema } from './sentence-feedback';
 export { FEEDBACK_ISSUES } from './original-feedback-evaluation';
@@ -31,6 +33,7 @@ export async function evaluateCoherentFeedbackCase(config: FeedbackProviders, pr
   const measured: typeof fetch = async(url,init) => {
     evidence.requestHash = await hash({url:String(url),body:JSON.parse(String(init?.body))});
     const response = await fetcher(url,init); evidence.quota = tokenEvidenceQuotaHeaders(response.headers);
+    if (provider === 'groq' && !response.ok) evidence.httpError = await captureGroqHttpDiagnostic(response, init?.signal ?? undefined);
     if(response.ok)try{
       const raw = await response.clone().json() as {usageMetadata?:unknown;usage?:unknown;candidates?:{finishReason?:string}[];choices?:{finish_reason?:string}[]};
       evidence.usage = usageEvidence(provider==='google'?raw.usageMetadata:raw.usage,provider);

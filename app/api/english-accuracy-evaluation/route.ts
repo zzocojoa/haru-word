@@ -95,6 +95,7 @@ export async function POST(request: Request) {
       ...(known && error.issue.providerStatus !== undefined ? { providerStatus: error.issue.providerStatus } : {}),
       ...(error instanceof TokenEvidenceEvaluationError ? { quota: error.quota } : {}),
       ...(error instanceof ReasoningPilotError ? { requestHash: error.evidence.requestHash, usage: error.evidence.usage, ...(error.evidence.finish ? { finish: error.evidence.finish } : {}) } : {}),
+      ...(error instanceof ReasoningPilotError && error.evidence.httpError ? { httpError: error.evidence.httpError } : {}),
       ...(error instanceof TokenEvidenceEvaluationError && Number.isInteger(error.issue.retryAfterSeconds) && Number(error.issue.retryAfterSeconds) > 0 && Number(error.issue.retryAfterSeconds) <= 604800 ? { retryAfterSeconds: error.issue.retryAfterSeconds } : {}),
       ...(known && error.code.endsWith('invalid_response') && error.validationStage ? { validationStage: error.validationStage } : {}),
       ...(detailedComparison && known && error.diagnostic && FEEDBACK_DIAGNOSTICS.includes(error.diagnostic) ? { diagnostic: error.diagnostic } : {}),

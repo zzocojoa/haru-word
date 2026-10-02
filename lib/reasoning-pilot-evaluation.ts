@@ -2,6 +2,7 @@ import { accuracyCases, accuracyModels, accuracyRequest, accuracyPromptHash, eva
 import type { FeedbackProviders } from './feedback-fallback';
 import { FeedbackError } from './provider-feedback-error';
 import { TokenEvidenceEvaluationError, tokenEvidenceQuotaHeaders, type TokenEvidenceQuota } from './token-evidence-evaluation';
+import type { GroqHttpDiagnostic } from './groq-http-diagnostics';
 
 export const REASONING_PILOT_COMPARISON = 'reasoning-pilot-v1' as const;
 export const reasoningPilotCaseIds = ['grammar-45', 'word-32', 'grammar-55', 'grammar-46', 'grammar-48'] as const;
@@ -15,7 +16,7 @@ export function reasoningPilotSchedule() {
   return reasoningPilotCases.flatMap((sample, index) => (['google', 'groq'] as const).flatMap(provider =>
     (index % 2 ? ['high', 'current'] as const : ['current', 'high'] as const).map(variant => ({ caseId: sample.id, provider, variant }))));
 }
-export type ReasoningEvidence = { requestHash: string; quota: TokenEvidenceQuota; usage: Record<string, number>; finish?: string };
+export type ReasoningEvidence = { requestHash: string; quota: TokenEvidenceQuota; usage: Record<string, number>; finish?: string; httpError?: GroqHttpDiagnostic };
 export class ReasoningPilotError extends TokenEvidenceEvaluationError {
   readonly evidence: ReasoningEvidence;
   constructor(error: FeedbackError, evidence: ReasoningEvidence) {

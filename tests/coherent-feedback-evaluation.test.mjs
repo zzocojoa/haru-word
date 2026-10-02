@@ -43,6 +43,24 @@ test('coherent approval rejects old budgets, initialized runs, wrong origin and 
   for(const change of [{approvedCalls:20},{previousCalls:806},{maximumTotalCalls:926},{runInitialized:true},{comparison:'reasoning-pilot-v1'},{planHash:'d'.repeat(64)},{humanAuthorization:'old'}])assert.throws(()=>validateCoherentConfig(config,{...auth,...change},config.sourceCommit,auth.planHash));
   for(const change of [{origin:'https://example.com'},{extra:'private-marker'},{siteToken:'\r\nprivate-marker'},{siteToken:'a'.repeat(8193)}])assert.throws(()=>validateCoherentConfig({...config,...change},auth,config.sourceCommit,auth.planHash));
 });
+test('Groq400 evaluation exposes only bounded HTTP classification without retry or wire changes',async()=>{
+ const sample=h.coherentFeedbackCases.find(c=>c.id==='grammar-48');let calls=0,request;
+ await assert.rejects(h.evaluateCoherentFeedbackCase({groq_api:'private-marker'},'groq',sample,async(url,init)=>{
+  calls++;request={url:String(url),body:JSON.parse(init.body)};
+  return Response.json({error:{code:'json_validate_failed',type:'invalid_request_error',param:'response_format',message:'private-marker',failed_generation:'private-marker'}},{status:400});
+ }),error=>{assert.equal(error.code,'groq_request');assert.equal(error.issue.providerStatus,400);assert.deepEqual(error.evidence.httpError,{body:'parsed',code:'json_validate_failed',type:'invalid_request_error',parameter:'response_format'});assert.doesNotMatch(JSON.stringify(error.evidence),/private-marker/);return true;});
+ assert.equal(calls,1);assert.equal(hash(request),profiles['grammar-48/groq'].requestHash);
+});
+test('HTTP diagnostic is exposed only behind the existing evaluation privilege, never raw upstream text',async()=>{
+ const env=globalThis.__coherentEnv,original=globalThis.fetch;let calls=0;
+ const req=()=>new Request(config.origin+'/api/english-accuracy-evaluation',{method:'POST',headers:{Origin:config.origin,'Content-Type':'application/json','X-English-Accuracy-Token':config.token},body:JSON.stringify({comparison:plan.comparison,caseId:'grammar-48',provider:'groq'})});
+ try{
+  globalThis.fetch=async()=>{calls++;return Response.json({error:{code:'json_validate_failed',type:'invalid_request_error',message:'private-marker',failed_generation:'private-marker'}},{status:400});};
+  assert.equal((await h.POST(req())).status,404);assert.equal(calls,0);
+  Object.assign(env,{english_accuracy_token:config.token,english_accuracy_expires:new Date(Date.now()+3600000).toISOString(),english_accuracy_profile:plan.comparison,groq_api:'private-marker'});
+  const response=await h.POST(req()),value=await response.json();assert.equal(response.status,503);assert.equal(value.providerStatus,400);assert.equal(value.httpError.code,'json_validate_failed');assert.equal(calls,1);assert.doesNotMatch(JSON.stringify(value),/private-marker|message|failed_generation/);
+ }finally{globalThis.fetch=original;for(const key of Object.keys(env))delete env[key];}
+});
 test('endpoint exact profile, token, origin, expiry, bounded body and fixed input guard precede HTTP',async()=>{
   const env=globalThis.__coherentEnv,original=globalThis.fetch;let calls=0;
   const body={comparison:plan.comparison,caseId:plan.caseIds[0],provider:'google'};
