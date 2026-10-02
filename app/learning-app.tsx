@@ -12,6 +12,7 @@ import {
   Settings2,
 } from "lucide-react";
 import { Suspense, lazy, useCallback, useRef } from "react";
+import { useRouter } from 'next/navigation';
 import type { GrammarLeave } from './grammar/use-grammar-draft';
 import { CompletedLesson } from "./completed-lesson";
 import { CandidatePreparation } from "./learning/candidate-preparation";
@@ -39,7 +40,7 @@ import { useTabNavigation } from './learning/use-tab-navigation';
 import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
-export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean }) {
+export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; cardStudioEnabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
 function LearningScreens({
@@ -47,12 +48,15 @@ function LearningScreens({
   grammarEnabled = false,
   grammarPracticeEnabled = false,
   grammarV3Enabled = false,
+  cardStudioEnabled = false,
 }: {
   initialServerTime: number;
   grammarEnabled?: boolean;
   grammarPracticeEnabled?: boolean;
   grammarV3Enabled?: boolean;
+  cardStudioEnabled?: boolean;
 }) {
+  const router = useRouter();
   const {
     tab,
     showSession,
@@ -168,6 +172,10 @@ function LearningScreens({
           하루단어
         </div>
         <div className="top-actions">
+          {cardStudioEnabled && <button className="secondary-button" disabled={busy || saving || unsaved || store.restoring}
+            onClick={async () => {
+              if (await flushGrammar() && await flushStudy()) router.push('/cards');
+            }}>영어 카드</button>}
           <SaveStatus
             unsaved={unsaved}
             saving={saving}
