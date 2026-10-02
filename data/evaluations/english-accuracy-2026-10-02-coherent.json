@@ -1,0 +1,3846 @@
+{
+  "schemaVersion": 1,
+  "comparison": "coherent-feedback-v1",
+  "sourceCommit": "939f9149eb41047c5fe9d5bf578dbeae98db1e7f",
+  "siteVersion": 105,
+  "models": {
+    "google": "gemini-3.1-flash-lite",
+    "groq": "openai/gpt-oss-120b"
+  },
+  "previousCalls": 826,
+  "maximumCalls": 120,
+  "actualConsumedSlots": 24,
+  "totalCalls": 850,
+  "notAttempted": 96,
+  "freeTierConfirmation": "human-user-existing-accounts",
+  "noRetry": true,
+  "noFallback": true,
+  "fixtureContentHash": "76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a",
+  "priorReportContentHash": "8eb9ab7651063101e8b01960f955441f62a78e312ad8aff0a7b5c0100f825337",
+  "planHash": "d81b19681cc2178c62020804c72f7665f8fb3fb6b9f3ff4348f20eb55393165f",
+  "ledgerHash": "80934f8957876de99b89a6afd19f99fe0c41e6da7d926f44e2c10387cb7ae267",
+  "blindHash": "1ff4d3de26a873b073711013e1bac87b9d4d2564ef23474efe23bb114ea87915",
+  "adjudicationHash": "0c544255800cbbd560113ce230aca6f8f11a0b6e7c0d2eca88656a88858fe1bf",
+  "reviewedAt": "2026-10-02T14:56:02.287Z",
+  "reviewMethod": "same-assistant provider/model-blinded semantic comparison; not independent human or cross-model certification",
+  "closure": {
+    "sourceCommit": "939f9149eb41047c5fe9d5bf578dbeae98db1e7f",
+    "liveSourceCommit": "939f9149eb41047c5fe9d5bf578dbeae98db1e7f",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_af4ad00303848191ac067aaab22db46b",
+    "evaluationKeys": 0,
+    "sameNonEvaluationEnvironment": true,
+    "sameAccessPolicy": true,
+    "sameEvaluationSource": true,
+    "coherentLearnerFlag": "absent",
+    "sameActualToken": true,
+    "tokenFingerprint": "d88160bbd94bd8245d034456925d27b555d0bbae66a181f6da777bfd3bad3b55",
+    "openTokenProbe": {
+      "status": 400,
+      "code": "evaluation_invalid_case",
+      "at": "2026-10-02T12:58:35.326Z",
+      "providerCalls": 0,
+      "endpoint": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/api/english-accuracy-evaluation",
+      "requestHash": "0c0f2332ab75e434a69ee4f9e84d917d52d8340da8e430e07b32e06274979b4e",
+      "tokenFingerprint": "d88160bbd94bd8245d034456925d27b555d0bbae66a181f6da777bfd3bad3b55"
+    },
+    "expiredProbe": {
+      "status": 404,
+      "code": "evaluation_disabled",
+      "at": "2026-10-02T13:12:36.223Z",
+      "providerCalls": 0,
+      "endpoint": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/api/english-accuracy-evaluation",
+      "requestHash": "0c0f2332ab75e434a69ee4f9e84d917d52d8340da8e430e07b32e06274979b4e",
+      "tokenFingerprint": "d88160bbd94bd8245d034456925d27b555d0bbae66a181f6da777bfd3bad3b55"
+    },
+    "removedProbe": {
+      "status": 404,
+      "code": "evaluation_disabled",
+      "at": "2026-10-02T13:14:26.403Z",
+      "providerCalls": 0,
+      "endpoint": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/api/english-accuracy-evaluation",
+      "requestHash": "0c0f2332ab75e434a69ee4f9e84d917d52d8340da8e430e07b32e06274979b4e",
+      "tokenFingerprint": "d88160bbd94bd8245d034456925d27b555d0bbae66a181f6da777bfd3bad3b55"
+    },
+    "environmentRevision": 54,
+    "environmentEntries": 11,
+    "policyRevision": 4,
+    "expiredDeployment": {
+      "id": "appgdep_6abfad9696f8819198652daac351adb6",
+      "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_af4ad00303848191ac067aaab22db46b",
+      "status": "succeeded",
+      "failure_message": null,
+      "env_set_revision": 53,
+      "updated_at": "2026-10-02T13:12:06.902365+00:00"
+    },
+    "removedDeployment": {
+      "id": "appgdep_6abfade0a7a481918cc176a9e0f1ea9f",
+      "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_af4ad00303848191ac067aaab22db46b",
+      "status": "succeeded",
+      "failure_message": null,
+      "env_set_revision": 54,
+      "updated_at": "2026-10-02T13:13:23.017377+00:00"
+    },
+    "ledgerHash": "80934f8957876de99b89a6afd19f99fe0c41e6da7d926f44e2c10387cb7ae267",
+    "blindHash": "1ff4d3de26a873b073711013e1bac87b9d4d2564ef23474efe23bb114ea87915",
+    "mappingHash": "4009cf8bdc7cb8843a070b91b9ba65f1c3e1b8726952b7fbb7331a278d9461df"
+  },
+  "rows": [
+    {
+      "caseId": "word-02",
+      "provider": "google",
+      "scheduleIndex": 0,
+      "status": "failure",
+      "number": 1,
+      "round": 12,
+      "startedAt": "2026-10-02T12:33:44.686Z",
+      "requestHash": "da4fbb5d71647d286043305fad694aff4f043ef9776994e82917e57472f2da12",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 503,
+      "durationMs": 886,
+      "quota": {},
+      "usage": {},
+      "code": "provider_unavailable",
+      "providerStatus": 503,
+      "finishedAt": "2026-10-02T12:33:48.074Z",
+      "label": "B001",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "word-02",
+      "provider": "groq",
+      "scheduleIndex": 1,
+      "status": "response",
+      "number": 2,
+      "round": 12,
+      "startedAt": "2026-10-02T12:35:18.088Z",
+      "requestHash": "7f9971e03371e22aab5917fddcea4a59cd1076a0d3f2fcca6f59855ef8f6f8df",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 1448,
+      "quota": {
+        "remainingTokens": 3153,
+        "resetTokensSeconds": 37,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3794,
+        "outputTokens": 395,
+        "reasoningTokens": 123,
+        "totalTokens": 4189
+      },
+      "finish": "stop",
+      "finishedAt": "2026-10-02T12:35:21.519Z",
+      "label": "B008",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "습관적 현재 read와 원문을 보존했다. I=S, read=V, books=직접목적어, every evening=M 및 매일 저녁 독서 해석이 적절하다.",
+      "overall": "pass",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "word-15",
+      "provider": "google",
+      "scheduleIndex": 2,
+      "status": "response",
+      "number": 3,
+      "round": 12,
+      "startedAt": "2026-10-02T12:36:51.544Z",
+      "requestHash": "b03b4dc846f0955c88ce8910f5a500a755b8b8c34df3999ed9eff43d4a028964",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 4522,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1686,
+        "outputTokens": 303,
+        "totalTokens": 1989
+      },
+      "finish": "STOP",
+      "finishedAt": "2026-10-02T12:36:58.532Z",
+      "label": "B003",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "이체 행동·과거 시제·어제·행위자·돈을 보존했다. 정관사 the의 그 돈 해석도 허용하며 성분 관계가 적절하다.",
+      "overall": "pass",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "word-15",
+      "provider": "groq",
+      "scheduleIndex": 3,
+      "status": "response",
+      "number": 4,
+      "round": 12,
+      "startedAt": "2026-10-02T12:38:28.547Z",
+      "requestHash": "c4474489443add5ba79cd2b912b82956590d04f16de4dd8c6f8b9edfe4f328b5",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 1485,
+      "quota": {
+        "remainingTokens": 3887,
+        "resetTokensSeconds": 31,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3796,
+        "outputTokens": 477,
+        "reasoningTokens": 206,
+        "totalTokens": 4273
+      },
+      "finish": "stop",
+      "finishedAt": "2026-10-02T12:38:32.087Z",
+      "label": "B002",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "이체 행동·과거 시제·어제·행위자·돈을 보존했다. I=S, transferred=V, the money=동사의 직접목적어, yesterday=M이 적절하다.",
+      "overall": "pass",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "word-08",
+      "provider": "google",
+      "scheduleIndex": 4,
+      "status": "failure",
+      "number": 5,
+      "round": 12,
+      "startedAt": "2026-10-02T12:40:02.103Z",
+      "requestHash": "bb1abc1f72a474abd914e998e9c6bc7ae3b63239f5846c88f1e15eab13ad59b7",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 502,
+      "durationMs": 7854,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1683,
+        "outputTokens": 257,
+        "totalTokens": 1940
+      },
+      "finish": "STOP",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "diagnostic": "evidence_contract",
+      "validationDetail": {
+        "kind": "evidence_structure",
+        "reason": "structure_contract"
+      },
+      "finishedAt": "2026-10-02T12:40:12.448Z",
+      "label": "B009",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "word-08",
+      "provider": "groq",
+      "scheduleIndex": 5,
+      "status": "response",
+      "number": 6,
+      "round": 12,
+      "startedAt": "2026-10-02T12:41:42.482Z",
+      "requestHash": "a79ed9de094faaecb3dfe087527e9c65c3175a4e23b6056d1d8e4e573a3eeb9d",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 2126,
+      "quota": {
+        "remainingTokens": 3837,
+        "resetTokensSeconds": 32,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3793,
+        "outputTokens": 644,
+        "reasoningTokens": 407,
+        "totalTokens": 4437
+      },
+      "finish": "stop",
+      "finishedAt": "2026-10-02T12:41:46.838Z",
+      "label": "B016",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "fail"
+      },
+      "criticalErrors": [],
+      "reason": "present=선물, 원문 문법·교정문·S/V/C 분류는 적절하다. 그러나 전체 해석 그녀의 선물은 책이다는 was의 과거 상태를 현재로 옮겼다. 과거였다는 뜻을 보존해야 하므로 structure 차원 실패다. 개별 was 뜻의 사전형 이다만으로는 실패를 판정하지 않는다.",
+      "overall": "fail",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "word-26",
+      "provider": "google",
+      "scheduleIndex": 6,
+      "status": "response",
+      "number": 7,
+      "round": 12,
+      "startedAt": "2026-10-02T12:43:16.854Z",
+      "requestHash": "b86869ec0bd4665660f29904e3ac66bb2558d59e98e4da38e410c86a05ace255",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 6126,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1685,
+        "outputTokens": 339,
+        "totalTokens": 2024
+      },
+      "finish": "STOP",
+      "finishedAt": "2026-10-02T12:43:25.339Z",
+      "label": "B023",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "interested 형용사의 뜻은 유지하고 on을 in으로 고쳤다. I=S/am=연결동사/interested=C, in science=전치사 보충어라는 허용 분석이며 science를 동사의 직접목적어로 설명하지 않는다.",
+      "overall": "pass",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "word-26",
+      "provider": "groq",
+      "scheduleIndex": 7,
+      "status": "failure",
+      "number": 8,
+      "round": 12,
+      "startedAt": "2026-10-02T12:44:55.366Z",
+      "requestHash": "660ca443e715271fd4f6825d02e28db3f8320cf4d7967a277b370041a2c579be",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 502,
+      "durationMs": 1744,
+      "quota": {
+        "remainingTokens": 3798,
+        "resetTokensSeconds": 32,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3797,
+        "outputTokens": 539,
+        "reasoningTokens": 169,
+        "totalTokens": 4336
+      },
+      "finish": "stop",
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "diagnostic": "evidence_contract",
+      "validationDetail": {
+        "kind": "evidence_structure",
+        "reason": "structure_contract"
+      },
+      "finishedAt": "2026-10-02T12:44:59.500Z",
+      "label": "B022",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "google",
+      "scheduleIndex": 8,
+      "status": "failure",
+      "number": 9,
+      "round": 12,
+      "startedAt": "2026-10-02T12:46:29.535Z",
+      "requestHash": "de7ecc716d4bf8f2679ab7f374f4f48aaa5ca1a4dbdd563140e2f4f25880c6d0",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 502,
+      "durationMs": 3628,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1799,
+        "outputTokens": 295,
+        "totalTokens": 2094
+      },
+      "finish": "STOP",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "diagnostic": "evidence_contract",
+      "validationDetail": {
+        "kind": "evidence_structure",
+        "reason": "structure_contract"
+      },
+      "finishedAt": "2026-10-02T12:46:36.089Z",
+      "label": "B020",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "scheduleIndex": 9,
+      "status": "failure",
+      "number": 10,
+      "round": 12,
+      "startedAt": "2026-10-02T12:48:06.134Z",
+      "requestHash": "7dd4b0e80a0e813d3a9c967627d2782fef3799232994d954ed5073e1c216876d",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 502,
+      "durationMs": 1393,
+      "quota": {
+        "remainingTokens": 918,
+        "resetTokensSeconds": 54,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3913,
+        "outputTokens": 383,
+        "reasoningTokens": 123,
+        "totalTokens": 4296
+      },
+      "finish": "stop",
+      "code": "groq_invalid_response",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "validationDetail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "other",
+            "reason": "schema"
+          }
+        ],
+        "truncated": false
+      },
+      "finishedAt": "2026-10-02T12:48:09.371Z",
+      "label": "B018",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "word-27",
+      "provider": "google",
+      "scheduleIndex": 10,
+      "status": "failure",
+      "number": 11,
+      "round": 12,
+      "startedAt": "2026-10-02T12:49:39.384Z",
+      "requestHash": "10625fa3ed63c0f0639f3cda72474f4572dddf9e3cb947fc25e1c0cc1a607fd7",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 502,
+      "durationMs": 4882,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1688,
+        "outputTokens": 371,
+        "totalTokens": 2059
+      },
+      "finish": "STOP",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "diagnostic": "evidence_contract",
+      "validationDetail": {
+        "kind": "evidence_structure",
+        "reason": "structure_contract"
+      },
+      "finishedAt": "2026-10-02T12:49:46.083Z",
+      "label": "B010",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "word-27",
+      "provider": "groq",
+      "scheduleIndex": 11,
+      "status": "response",
+      "number": 12,
+      "round": 12,
+      "startedAt": "2026-10-02T12:51:16.103Z",
+      "requestHash": "21a84e5956450c61e0f111ea02a1aeda090506c4240dd551a4f1fceb3b55a1d4",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 1952,
+      "quota": {
+        "remainingTokens": 3819,
+        "resetTokensSeconds": 32,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3798,
+        "outputTokens": 643,
+        "reasoningTokens": 313,
+        "totalTokens": 4441
+      },
+      "finish": "stop",
+      "finishedAt": "2026-10-02T12:51:20.248Z",
+      "label": "B012",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "yesterday에 맞게 go를 went로 고쳤으며 go 뜻 사용은 유지했다. the park를 to의 목적어라고 한정했고 과거 행동·주체를 보존했다.",
+      "overall": "pass",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "word-32",
+      "provider": "google",
+      "scheduleIndex": 12,
+      "status": "response",
+      "number": 13,
+      "round": 12,
+      "startedAt": "2026-10-02T12:52:50.267Z",
+      "requestHash": "5289f4dab3294f1a98fed9576cb86fe21eefcba8afc068cbe2a9b4499c45c7c9",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 10724,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1685,
+        "outputTokens": 316,
+        "totalTokens": 2001
+      },
+      "finish": "STOP",
+      "finishedAt": "2026-10-02T12:53:03.138Z",
+      "label": "B005",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "arrive 뜻 사용은 적절로 유지하고 to를 at으로 고쳤다. at the station 전체는 전치사구 M이며 동사의 직접목적어로 설명하지 않았다.",
+      "overall": "pass",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "word-32",
+      "provider": "groq",
+      "scheduleIndex": 13,
+      "status": "response",
+      "number": 14,
+      "round": 12,
+      "startedAt": "2026-10-02T12:54:33.158Z",
+      "requestHash": "f9c2def90b9ed0424901e8322015cf270269014b9d4df9db69f4b95034015a14",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 1885,
+      "quota": {
+        "remainingTokens": 3721,
+        "resetTokensSeconds": 33,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3796,
+        "outputTokens": 463,
+        "reasoningTokens": 158,
+        "totalTokens": 4259
+      },
+      "finish": "stop",
+      "finishedAt": "2026-10-02T12:54:37.966Z",
+      "label": "B006",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "fail"
+      },
+      "criticalErrors": [],
+      "reason": "뜻·문법·교정은 적절하지만 the station을 arrived의 직접목적어로 설명했다. station은 at의 목적어이며 전체 at the station은 전치사구다. 주어/목적어 자체를 뒤바꾼 사례는 아니므로 지정 swapRoles는 추가하지 않는다.",
+      "overall": "fail",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "google",
+      "scheduleIndex": 14,
+      "status": "response",
+      "number": 15,
+      "round": 12,
+      "startedAt": "2026-10-02T12:56:07.993Z",
+      "requestHash": "59c0f015a0d2b4c30f1d1b48e1e9ae3bd900dfa7a61b179cd917ddacdb940d29",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 200,
+      "durationMs": 5871,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1771,
+        "outputTokens": 268,
+        "totalTokens": 2039
+      },
+      "finish": "STOP",
+      "finishedAt": "2026-10-02T12:56:16.356Z",
+      "label": "B019",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "일상적 걸어서 출근하는 행동과 원문을 보존했다. to work 전체를 전치사구 M으로 표시하며 번역 나는 걸어서 출근한다가 문맥에 맞다.",
+      "overall": "pass",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "groq",
+      "scheduleIndex": 15,
+      "status": "response",
+      "number": 16,
+      "round": 12,
+      "startedAt": "2026-10-02T12:57:46.388Z",
+      "requestHash": "d26d69e2a26ce1dd146716b7bfd007575ecd2d0defdbc827d72f56c4c4dc20e7",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 200,
+      "durationMs": 1557,
+      "quota": {
+        "remainingTokens": 3686,
+        "resetTokensSeconds": 33,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {
+        "inputTokens": 3885,
+        "outputTokens": 399,
+        "reasoningTokens": 133,
+        "totalTokens": 4284
+      },
+      "finish": "stop",
+      "finishedAt": "2026-10-02T12:57:50.077Z",
+      "label": "B017",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "일상적 걸어서 출근하는 행동과 원문을 보존했다. work는 to의 목적어라고 한정했고 walk의 직접목적어로 설명하지 않았다. 전치사구 분할 자체는 허용한다.",
+      "overall": "pass",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "google",
+      "scheduleIndex": 16,
+      "status": "failure",
+      "number": 17,
+      "round": 12,
+      "startedAt": "2026-10-02T12:59:20.109Z",
+      "requestHash": "3c64093f90da94ed0164969dc70bd66467113ea12c6969f5d6a412b30d4d08fd",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 502,
+      "durationMs": 2779,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1783,
+        "outputTokens": 277,
+        "totalTokens": 2060
+      },
+      "finish": "STOP",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "diagnostic": "evidence_contract",
+      "validationDetail": {
+        "kind": "evidence_structure",
+        "reason": "structure_contract"
+      },
+      "finishedAt": "2026-10-02T12:59:25.213Z",
+      "label": "B021",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "scheduleIndex": 17,
+      "status": "failure",
+      "number": 18,
+      "round": 12,
+      "startedAt": "2026-10-02T13:00:55.233Z",
+      "requestHash": "7dff5514d306f89722e61e43a9bbea0852cec4cbd7e54ad2e5c001a11b7ecf2d",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 503,
+      "durationMs": 2128,
+      "quota": {
+        "remainingTokens": 3250,
+        "resetTokensSeconds": 36,
+        "remainingRequests": 999,
+        "resetRequestsSeconds": 87
+      },
+      "usage": {},
+      "code": "groq_request",
+      "providerStatus": 400,
+      "finishedAt": "2026-10-02T13:00:59.945Z",
+      "label": "B004",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "google",
+      "scheduleIndex": 18,
+      "status": "failure",
+      "number": 19,
+      "round": 12,
+      "startedAt": "2026-10-02T13:02:29.976Z",
+      "requestHash": "bc93e1cbba96473042d4d125c9a753555f1911c8b9985fcfaf1f869e27fab62d",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 502,
+      "durationMs": 7874,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1777,
+        "outputTokens": 352,
+        "totalTokens": 2129
+      },
+      "finish": "STOP",
+      "code": "provider_invalid_response",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "validationDetail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "analysis.structure.parts[].meaning",
+            "reason": "schema"
+          }
+        ],
+        "truncated": false
+      },
+      "finishedAt": "2026-10-02T13:02:39.781Z",
+      "label": "B024",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "groq",
+      "scheduleIndex": 19,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-37",
+      "provider": "google",
+      "scheduleIndex": 20,
+      "status": "failure",
+      "number": 20,
+      "round": 12,
+      "startedAt": "2026-10-02T13:04:09.794Z",
+      "requestHash": "91c361117f27e572ac8a09527f61ef7c20cabc9410ae0319b225e90d40a8769a",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 502,
+      "durationMs": 4830,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1675,
+        "outputTokens": 255,
+        "totalTokens": 1930
+      },
+      "finish": "STOP",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "diagnostic": "evidence_contract",
+      "validationDetail": {
+        "kind": "evidence_structure",
+        "reason": "structure_contract"
+      },
+      "finishedAt": "2026-10-02T13:04:17.300Z",
+      "label": "B014",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "word-37",
+      "provider": "groq",
+      "scheduleIndex": 21,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "google",
+      "scheduleIndex": 22,
+      "status": "failure",
+      "number": 21,
+      "round": 12,
+      "startedAt": "2026-10-02T13:05:47.314Z",
+      "requestHash": "9582f912e6fe4e842dfa9d5e104eb72d873eb9fd843f4ca04e1d16c952b86440",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 502,
+      "durationMs": 4148,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1754,
+        "outputTokens": 171,
+        "totalTokens": 1925
+      },
+      "finish": "STOP",
+      "code": "provider_invalid_response",
+      "validationStage": "fields",
+      "diagnostic": "wire_fields",
+      "validationDetail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "other",
+            "reason": "too_small"
+          }
+        ],
+        "truncated": false
+      },
+      "finishedAt": "2026-10-02T13:05:53.525Z",
+      "label": "B013",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": false
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "groq",
+      "scheduleIndex": 23,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "google",
+      "scheduleIndex": 24,
+      "status": "failure",
+      "number": 22,
+      "round": 12,
+      "startedAt": "2026-10-02T13:07:23.554Z",
+      "requestHash": "b750c8c1e9deb7aeb5cf1b7e9f358d91c053a6d7c6f2c96ce6787c339ec4745d",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 503,
+      "durationMs": 4934,
+      "quota": {},
+      "usage": {},
+      "code": "provider_unavailable",
+      "providerStatus": 503,
+      "finishedAt": "2026-10-02T13:07:30.265Z",
+      "label": "B011",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "groq",
+      "scheduleIndex": 25,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "google",
+      "scheduleIndex": 26,
+      "status": "failure",
+      "number": 23,
+      "round": 12,
+      "startedAt": "2026-10-02T13:09:00.287Z",
+      "requestHash": "d23fb0b93961ab340b0701e0231b211e3049f4f623bd1543059dbf4a07f475bd",
+      "promptHash": "be4148199b422b0b3f5b9e95d770f3be94826985a57c7a635fdba7f0e62a8728",
+      "httpStatus": 503,
+      "durationMs": 2242,
+      "quota": {},
+      "usage": {},
+      "code": "provider_unavailable",
+      "providerStatus": 503,
+      "finishedAt": "2026-10-02T13:09:04.485Z",
+      "label": "B007",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "유효 피드백이 없어 영어 차원은 판정 불가다. 형식 거절/HTTP 실패의 제공자·세부 코드는 이 가림 판정 저장 후 원장과 별도로 대조한다.",
+      "overall": "unavailable",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "scheduleIndex": 27,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-25",
+      "provider": "google",
+      "scheduleIndex": 28,
+      "status": "response",
+      "number": 24,
+      "round": 12,
+      "startedAt": "2026-10-02T13:10:34.506Z",
+      "requestHash": "fb63db9c4866a47a641d4682694d0649f4cec30f798d3a5072274606f17e44cc",
+      "promptHash": "0485b6283951bc389cb95be58227a63fb709534115bd1d8c1b91329fdc1aa479",
+      "httpStatus": 200,
+      "durationMs": 7019,
+      "quota": {},
+      "usage": {
+        "inputTokens": 1684,
+        "outputTokens": 379,
+        "totalTokens": 2063
+      },
+      "finish": "STOP",
+      "finishedAt": "2026-10-02T13:10:43.468Z",
+      "label": "B015",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "reason": "listen 뜻은 유지하고 listens to music으로 최소 교정했다. music을 to의 목적어라고 한정했고 습관적 현재·듣는 사람·내용을 보존했다. …tens 표시는 앱의 변경 요약 가독성 결함으로 별도 기록하며 올바른 교정문 자체의 영어 오류로 세지 않는다.",
+      "overall": "pass",
+      "designatedCritical": true
+    },
+    {
+      "caseId": "word-25",
+      "provider": "groq",
+      "scheduleIndex": 29,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "google",
+      "scheduleIndex": 30,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "groq",
+      "scheduleIndex": 31,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-22",
+      "provider": "google",
+      "scheduleIndex": 32,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-22",
+      "provider": "groq",
+      "scheduleIndex": 33,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-01",
+      "provider": "google",
+      "scheduleIndex": 34,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-01",
+      "provider": "groq",
+      "scheduleIndex": 35,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-03",
+      "provider": "google",
+      "scheduleIndex": 36,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-03",
+      "provider": "groq",
+      "scheduleIndex": 37,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-04",
+      "provider": "google",
+      "scheduleIndex": 38,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-04",
+      "provider": "groq",
+      "scheduleIndex": 39,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-05",
+      "provider": "google",
+      "scheduleIndex": 40,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-05",
+      "provider": "groq",
+      "scheduleIndex": 41,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-06",
+      "provider": "google",
+      "scheduleIndex": 42,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-06",
+      "provider": "groq",
+      "scheduleIndex": 43,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-07",
+      "provider": "google",
+      "scheduleIndex": 44,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-07",
+      "provider": "groq",
+      "scheduleIndex": 45,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-09",
+      "provider": "google",
+      "scheduleIndex": 46,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-09",
+      "provider": "groq",
+      "scheduleIndex": 47,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-10",
+      "provider": "google",
+      "scheduleIndex": 48,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-10",
+      "provider": "groq",
+      "scheduleIndex": 49,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-11",
+      "provider": "google",
+      "scheduleIndex": 50,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-11",
+      "provider": "groq",
+      "scheduleIndex": 51,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-12",
+      "provider": "google",
+      "scheduleIndex": 52,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-12",
+      "provider": "groq",
+      "scheduleIndex": 53,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-13",
+      "provider": "google",
+      "scheduleIndex": 54,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-13",
+      "provider": "groq",
+      "scheduleIndex": 55,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-14",
+      "provider": "google",
+      "scheduleIndex": 56,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-14",
+      "provider": "groq",
+      "scheduleIndex": 57,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-16",
+      "provider": "google",
+      "scheduleIndex": 58,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-16",
+      "provider": "groq",
+      "scheduleIndex": 59,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-17",
+      "provider": "google",
+      "scheduleIndex": 60,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-17",
+      "provider": "groq",
+      "scheduleIndex": 61,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-18",
+      "provider": "google",
+      "scheduleIndex": 62,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-18",
+      "provider": "groq",
+      "scheduleIndex": 63,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-19",
+      "provider": "google",
+      "scheduleIndex": 64,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-19",
+      "provider": "groq",
+      "scheduleIndex": 65,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-20",
+      "provider": "google",
+      "scheduleIndex": 66,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-20",
+      "provider": "groq",
+      "scheduleIndex": 67,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-21",
+      "provider": "google",
+      "scheduleIndex": 68,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-21",
+      "provider": "groq",
+      "scheduleIndex": 69,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-23",
+      "provider": "google",
+      "scheduleIndex": 70,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-23",
+      "provider": "groq",
+      "scheduleIndex": 71,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-24",
+      "provider": "google",
+      "scheduleIndex": 72,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-24",
+      "provider": "groq",
+      "scheduleIndex": 73,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-28",
+      "provider": "google",
+      "scheduleIndex": 74,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-28",
+      "provider": "groq",
+      "scheduleIndex": 75,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-29",
+      "provider": "google",
+      "scheduleIndex": 76,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-29",
+      "provider": "groq",
+      "scheduleIndex": 77,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-30",
+      "provider": "google",
+      "scheduleIndex": 78,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-30",
+      "provider": "groq",
+      "scheduleIndex": 79,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-31",
+      "provider": "google",
+      "scheduleIndex": 80,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-31",
+      "provider": "groq",
+      "scheduleIndex": 81,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-33",
+      "provider": "google",
+      "scheduleIndex": 82,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-33",
+      "provider": "groq",
+      "scheduleIndex": 83,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-34",
+      "provider": "google",
+      "scheduleIndex": 84,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-34",
+      "provider": "groq",
+      "scheduleIndex": 85,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-35",
+      "provider": "google",
+      "scheduleIndex": 86,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-35",
+      "provider": "groq",
+      "scheduleIndex": 87,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-36",
+      "provider": "google",
+      "scheduleIndex": 88,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-36",
+      "provider": "groq",
+      "scheduleIndex": 89,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-38",
+      "provider": "google",
+      "scheduleIndex": 90,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-38",
+      "provider": "groq",
+      "scheduleIndex": 91,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-39",
+      "provider": "google",
+      "scheduleIndex": 92,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-39",
+      "provider": "groq",
+      "scheduleIndex": 93,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-40",
+      "provider": "google",
+      "scheduleIndex": 94,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "word-40",
+      "provider": "groq",
+      "scheduleIndex": 95,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "google",
+      "scheduleIndex": 96,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "groq",
+      "scheduleIndex": 97,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "google",
+      "scheduleIndex": 98,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "groq",
+      "scheduleIndex": 99,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "google",
+      "scheduleIndex": 100,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "groq",
+      "scheduleIndex": 101,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "google",
+      "scheduleIndex": 102,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "scheduleIndex": 103,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "google",
+      "scheduleIndex": 104,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "groq",
+      "scheduleIndex": 105,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "google",
+      "scheduleIndex": 106,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "groq",
+      "scheduleIndex": 107,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "google",
+      "scheduleIndex": 108,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "groq",
+      "scheduleIndex": 109,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "google",
+      "scheduleIndex": 110,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "groq",
+      "scheduleIndex": 111,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "google",
+      "scheduleIndex": 112,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "groq",
+      "scheduleIndex": 113,
+      "status": "not_attempted",
+      "designatedCritical": true,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "google",
+      "scheduleIndex": 114,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "groq",
+      "scheduleIndex": 115,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "google",
+      "scheduleIndex": 116,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "groq",
+      "scheduleIndex": 117,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "google",
+      "scheduleIndex": 118,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "groq",
+      "scheduleIndex": 119,
+      "status": "not_attempted",
+      "designatedCritical": false,
+      "overall": "unavailable",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "reason": "중단 후 미호출이며 판정 가능한 영어 응답이 없다."
+    }
+  ],
+  "historical": [
+    {
+      "caseId": "word-08",
+      "provider": "google",
+      "historicalLabel": "B060",
+      "family": "roles",
+      "candidateLabel": "B009",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "word-26",
+      "provider": "google",
+      "historicalLabel": "B088",
+      "family": "roles",
+      "candidateLabel": "B023",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [],
+      "candidateOverall": "pass",
+      "outcome": "observed_resolved"
+    },
+    {
+      "caseId": "word-26",
+      "provider": "groq",
+      "historicalLabel": "B052",
+      "family": "roles",
+      "candidateLabel": "B022",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "google",
+      "historicalLabel": "B061",
+      "family": "roles",
+      "candidateLabel": "B020",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "word-27",
+      "provider": "groq",
+      "historicalLabel": "B093",
+      "family": "roles",
+      "candidateLabel": "B012",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [],
+      "candidateOverall": "pass",
+      "outcome": "observed_resolved"
+    },
+    {
+      "caseId": "word-32",
+      "provider": "groq",
+      "historicalLabel": "B053",
+      "family": "roles",
+      "candidateLabel": "B006",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "fail",
+      "outcome": "still_failed"
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "groq",
+      "historicalLabel": "B073",
+      "family": "roles",
+      "candidateLabel": "B017",
+      "failedDimensions": [
+        "grammar",
+        "structure"
+      ],
+      "unresolvedDimensions": [],
+      "candidateOverall": "pass",
+      "outcome": "observed_resolved"
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "historicalLabel": "B117",
+      "family": "roles",
+      "candidateLabel": "B004",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "groq",
+      "historicalLabel": "B018",
+      "family": "roles",
+      "failedDimensions": [
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "word-37",
+      "provider": "google",
+      "historicalLabel": "B040",
+      "family": "insufficiency",
+      "candidateLabel": "B014",
+      "failedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ],
+      "unresolvedDimensions": [
+        "meaning",
+        "grammar",
+        "correction",
+        "structure"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "groq",
+      "historicalLabel": "B114",
+      "family": "insufficiency",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "google",
+      "historicalLabel": "B068",
+      "family": "target",
+      "candidateLabel": "B011",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "groq",
+      "historicalLabel": "B054",
+      "family": "target",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "google",
+      "historicalLabel": "B022",
+      "family": "target",
+      "candidateLabel": "B007",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "word-25",
+      "provider": "groq",
+      "historicalLabel": "B078",
+      "family": "target",
+      "failedDimensions": [
+        "meaning"
+      ],
+      "unresolvedDimensions": [
+        "meaning"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "google",
+      "historicalLabel": "B062",
+      "family": "rules",
+      "failedDimensions": [
+        "grammar"
+      ],
+      "unresolvedDimensions": [
+        "grammar"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    },
+    {
+      "caseId": "word-22",
+      "provider": "groq",
+      "historicalLabel": "B087",
+      "family": "rules",
+      "failedDimensions": [
+        "grammar"
+      ],
+      "unresolvedDimensions": [
+        "grammar"
+      ],
+      "candidateOverall": "unavailable",
+      "outcome": "unavailable"
+    }
+  ],
+  "historicalSummary": {
+    "observed_resolved": 3,
+    "still_failed": 1,
+    "unavailable": 13
+  },
+  "comparisons": [
+    {
+      "caseId": "word-02",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-02",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-15",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-15",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-08",
+      "provider": "google",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-08",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "fail",
+      "assessable": true,
+      "regressedDimensions": [
+        "structure"
+      ]
+    },
+    {
+      "caseId": "word-26",
+      "provider": "google",
+      "baseline": "fail",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-26",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "google",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-27",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-27",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-32",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-32",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "fail",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-42",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "pass",
+      "assessable": true,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-49",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-37",
+      "provider": "google",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-37",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-57",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "google",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-51",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "google",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-25",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "pass",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-25",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "google",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-56",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-22",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-22",
+      "provider": "groq",
+      "baseline": "fail",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-01",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-01",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-03",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-03",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-04",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-04",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-05",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-05",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-06",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-06",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-07",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-07",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-09",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-09",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-10",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-10",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-11",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-11",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-12",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-12",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-13",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-13",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-14",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-14",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-16",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-16",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-17",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-17",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-18",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-18",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-19",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-19",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-20",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-20",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-21",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-21",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-23",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-23",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-24",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-24",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-28",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-28",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-29",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-29",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-30",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-30",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-31",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-31",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-33",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-33",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-34",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-34",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-35",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-35",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-36",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-36",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-38",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-38",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-39",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-39",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-40",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "word-40",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "google",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-41",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-43",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-44",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-47",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-50",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-52",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-53",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-54",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-58",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-59",
+      "provider": "groq",
+      "baseline": "unavailable",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "google",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    },
+    {
+      "caseId": "grammar-60",
+      "provider": "groq",
+      "baseline": "pass",
+      "candidate": "unavailable",
+      "assessable": false,
+      "regressedDimensions": []
+    }
+  ],
+  "summaries": {
+    "google": {
+      "planned": 60,
+      "attempted": 15,
+      "notAttempted": 45,
+      "validResponses": 5,
+      "passes": 5,
+      "languageFailures": 0,
+      "unavailable": 55,
+      "outputRejected": 7,
+      "httpFailures": 3,
+      "baselinePass": 44,
+      "criticalUnavailable": 28,
+      "criticalErrors": 0,
+      "newRegressions": 0,
+      "priorPassNowUnavailable": 41,
+      "dimensions": {
+        "meaning": {
+          "pass": 5,
+          "fail": 0,
+          "unavailable": 55
+        },
+        "grammar": {
+          "pass": 5,
+          "fail": 0,
+          "unavailable": 55
+        },
+        "correction": {
+          "pass": 5,
+          "fail": 0,
+          "unavailable": 55
+        },
+        "structure": {
+          "pass": 5,
+          "fail": 0,
+          "unavailable": 55
+        }
+      },
+      "checks": {
+        "complete60": false,
+        "atLeast54": false,
+        "noCriticalErrors": true,
+        "noCriticalUnavailable": false,
+        "noPassCountDecrease": false,
+        "noNewDimensionRegressions": true
+      },
+      "gatePassed": false
+    },
+    "groq": {
+      "planned": 60,
+      "attempted": 9,
+      "notAttempted": 51,
+      "validResponses": 6,
+      "passes": 4,
+      "languageFailures": 2,
+      "unavailable": 54,
+      "outputRejected": 2,
+      "httpFailures": 1,
+      "baselinePass": 34,
+      "criticalUnavailable": 29,
+      "criticalErrors": 0,
+      "newRegressions": 1,
+      "priorPassNowUnavailable": 31,
+      "dimensions": {
+        "meaning": {
+          "pass": 6,
+          "fail": 0,
+          "unavailable": 54
+        },
+        "grammar": {
+          "pass": 6,
+          "fail": 0,
+          "unavailable": 54
+        },
+        "correction": {
+          "pass": 6,
+          "fail": 0,
+          "unavailable": 54
+        },
+        "structure": {
+          "pass": 4,
+          "fail": 2,
+          "unavailable": 54
+        }
+      },
+      "checks": {
+        "complete60": false,
+        "atLeast54": false,
+        "noCriticalErrors": true,
+        "noCriticalUnavailable": false,
+        "noPassCountDecrease": false,
+        "noNewDimensionRegressions": false
+      },
+      "gatePassed": false
+    }
+  },
+  "gatePassed": false,
+  "promotion": {
+    "enabled": false,
+    "gatePassed": false
+  },
+  "limitations": [
+    "Fixed synthetic60 corpus; one stochastic response per provider; no general English accuracy certification",
+    "HTTP/contract failures have no assessable English response; rejected raw provider output is not retained",
+    "Single graph/template consistency does not prove target/category/gloss/translation semantics",
+    "Free accounts confirmed by human; no billing changes or console pricing inference",
+    "Existing learner state and first answers/grades/backup/v3/card features are preserved; actual iPhone unverified"
+  ]
+}

@@ -20,6 +20,53 @@ test('meaning remains matched for a grammar-only preposition correction derived 
   assert.deepEqual(f.structure.parts.map(p=>p.role),['S','V','M']);assert.match(f.structure.parts[2].explanation,/전치사구 · 수식어/u);
   assert.match(f.explanation,/선택한 뜻·기능에 맞아요/u);assert.ok(sentenceFeedbackSchema.safeParse(f).success);
 });
+
+test('a noun after a separate preposition cannot be the verb direct or indirect object',()=>{
+  for(const fn of ['direct-object','indirect-object']){
+    const x=wire();x.analysis.structure.parts.splice(2,1,part(['at'],'preposition','~에'),part(['the','station.'],fn,'역',{verbPart:1}));
+    assert.throws(()=>parse(x),e=>e.stage==='structure'&&e.validationDetail.reason==='structure_contract');
+  }
+  const x=wire();x.analysis.structure.parts.splice(2,1,part(['at'],'preposition','~에'),part(['the','station.'],'preposition-object','역',{governorPart:2}));
+  const f=parse(x);assert.match(f.structure.parts[3].explanation,/at의 목적어/u);
+});
+
+test('preposition relation checks preserve stranded and verb-governed objects',()=>{
+  const x={analysis:{target:{reason:'matched',originalSpan:'Who',category:'pronoun',gloss:'누구'},grammar:{status:'natural',context:{kind:'clause',subjectSpan:'she',predicateSpan:'did'}},structure:{status:'available',translation:'그녀는 누구에게 말했나요?',parts:[part(['Who'],'preposition-object','누구',{governorPart:4}),verb(['did'],'auxiliary'),part(['she'],'subject','그녀'),verb(['speak']),part(['to?'],'preposition','~에게')]}}};
+  assert.doesNotThrow(()=>parse(x,'Who did she speak to?'));
+  x.analysis.structure.parts.push(part(['Him'],'direct-object','그를',{verbPart:7}),part(['I'],'subject','나'),verb(['admire.']));
+  x.analysis.structure.translation='그녀는 누구에게 말했나요? 그를 나는 존경한다.';
+  assert.doesNotThrow(()=>parse(x,'Who did she speak to? Him I admire.'));
+  x.analysis.target={reason:'matched',originalSpan:'gave',category:'verb',gloss:'주다'};
+  x.analysis.grammar.context={kind:'clause',subjectSpan:'She',predicateSpan:'gave'};
+  x.analysis.structure={status:'available',translation:'그녀는 그에게 책을 주었다.',parts:[part(['She'],'subject','그녀'),verb(['gave']),part(['him'],'indirect-object','그에게',{verbPart:1}),part(['a','book.'],'direct-object','책',{verbPart:1})]};
+  assert.doesNotThrow(()=>parse(x,'She gave him a book.'));
+});
+
+test('whole past copular translation preserves time while lexical gloss may use dictionary form',()=>{
+  const sentence='Her present was a book.',x={analysis:{target:{reason:'matched',originalSpan:'present',category:'noun',gloss:'선물'},grammar:{status:'natural',context:{kind:'clause',subjectSpan:'Her present',predicateSpan:'was'}},structure:{status:'available',translation:'그녀의 선물은 책이다.',parts:[part(['Her','present'],'subject','그녀의 선물'),part(['was'],'verb','이다',{kind:'linking'}),part(['a','book.'],'complement','책')]}}};
+  for(const ending of ['책이다.','책입니다.','책이에요.','책예요!']){
+    x.analysis.structure.translation='그녀의 선물은 '+ending;
+    assert.throws(()=>parse(x,sentence),e=>e.stage==='structure'&&e.validationDetail.reason==='structure_contract');
+  }
+  for(const ending of ['책이었다.','책이었습니다.','책이었어요.']){
+    x.analysis.structure.translation='그녀의 선물은 '+ending;
+    assert.doesNotThrow(()=>parse(x,sentence));
+  }
+  for(const translation of ['그녀의 선물은 책이었던 것입니다.','그녀의 선물은 책이던 것입니다.','당시 그녀의 선물은 책입니다.']){
+    x.analysis.structure.translation=translation;
+    assert.doesNotThrow(()=>parse(x,sentence));
+  }
+  x.analysis.grammar.context.subjectSpan="John's present";
+  x.analysis.structure.parts[0].units=['John',"'s",'present'];
+  x.analysis.structure.translation='존의 선물은 책이다.';
+  assert.throws(()=>parse(x,"John's present was a book."),e=>e.stage==='structure');
+  x.analysis.structure.translation='존의 선물은 책이었다.';
+  assert.doesNotThrow(()=>parse(x,"John's present was a book."));
+  x.analysis.grammar.context.subjectSpan='Her present';x.analysis.structure.parts[0].units=['Her','present'];
+  x.analysis.grammar.context.predicateSpan='is';x.analysis.structure.parts[1].units=['is'];
+  x.analysis.structure.translation='그녀의 선물은 책이다.';
+  assert.doesNotThrow(()=>parse(x,'Her present is a book.'));
+});
 test('all target judgments are independent of natural, needs_work and uncertain grammar',()=>{
   const reasons=['matched','different-sense','different-function','absent','ambiguous'];
   for(const status of ['natural','needs_work','uncertain'])for(const reason of reasons){
