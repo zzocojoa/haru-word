@@ -1,6 +1,7 @@
 // Only these application-owned descriptions and bounded metadata may reach UI/logs.
 // Provider error messages, quota IDs, credentials and learner text are never copied.
 export const FEEDBACK_ISSUES = {
+  analysis_conflict: ['AI 설명 확인 필요', 'AI의 문장 성분 설명에 모순이 있어 교정과 설명을 보류했어요.', '내 문장은 유지돼요. 교재·사전으로 확인하거나 직접 점검해 주세요.'],
   grammar_client_outdated: ['수업 업데이트 필요','현재 수업을 지원하지 않는 이전 화면이에요. 입력을 백업한 뒤 페이지를 새로고침해 주세요.','페이지를 새로고침한 뒤 저장 상태를 확인해 주세요.'],
   not_configured: ['API 키 미설정', '사이트에 Google API 키가 등록되어 있지 않아요.', '사이트의 google_api 설정을 확인해 주세요.'],
   disabled: ['AI 기능 꺼짐', '사이트 설정에서 AI 문장 점검이 비활성화되어 있어요.', 'AI 기능 설정을 확인하거나 자기 점검으로 계속해 주세요.'],

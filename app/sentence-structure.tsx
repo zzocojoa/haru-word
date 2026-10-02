@@ -5,6 +5,7 @@ export function SentenceStructureView({ structure }: { structure?: SentenceStruc
   if (structure.status === 'unavailable') return <p className="small-note">문장 구조를 설명하기 어려워요. {structure.note}</p>;
   return <figure className="sentence-structure">
     <figcaption>교정문 구조</figcaption>
+    <p className="small-note">AI가 제안한 문장 분석이에요. 교재·사전과 함께 확인하세요.</p>
     <ol className="sentence-structure-parts" aria-label="교정문을 순서대로 나눈 역할">
       {structure.parts.map((part, index) => <li key={index} data-role={part.role}>
         <b lang="en">{part.text}</b>

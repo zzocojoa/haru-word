@@ -12,6 +12,8 @@ import { frameSentence } from '@/lib/grammar/content-v2';
 import { practiceForVersion } from '@/lib/grammar/content-v3';
 import { Speak } from '../ui';
 import { SentenceStructureView } from '../sentence-structure';
+import { feedbackSafetyIssue } from '@/lib/feedback-safety';
+import { FeedbackSafetyNotice } from '../feedback-safety-notice';
 
 type Props = {
   lesson: GrammarLesson;
@@ -65,6 +67,8 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
 }
 
 function Feedback({ feedback, sentence, onSentence }: { feedback: SentenceFeedback; sentence: string; onSentence: Props['onSentence'] }) {
+  const safetyIssue = feedbackSafetyIssue(feedback);
+  if (safetyIssue) return <div className="grammar-feedback"><FeedbackSafetyNotice reason={safetyIssue} /></div>;
   const { meaningUsage, grammar, explanation, correctedSentence } = feedback;
   const meaningLabel = meaningUsage === 'appropriate' ? '목표 문법에 맞아요' : meaningUsage === 'needs_work' ? '목표 문법을 확인해요' : '목표 문법 판단이 어려워요';
   return <div className="grammar-feedback" data-tone={grammarFeedbackTone(feedback)}>
