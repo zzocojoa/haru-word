@@ -12,6 +12,7 @@ import { COUNTED_EVIDENCE_COMPARISON, evaluateCountedEvidenceCase } from '@/lib/
 import { TOKEN_EVIDENCE_COMPARISON, allowedTokenEvidenceCase, evaluateTokenEvidenceCase, TokenEvidenceEvaluationError } from '@/lib/token-evidence-evaluation';
 import { ANNOTATED_EVIDENCE_COMPARISON, allowedAnnotatedEvidenceCase, evaluateAnnotatedEvidenceCase } from '@/lib/annotated-evidence-evaluation';
 import { RELATIONAL_EVIDENCE_COMPARISON, allowedRelationalEvidenceCase, evaluateRelationalEvidenceCase } from '@/lib/relational-evidence-evaluation';
+import { REASONING_PILOT_COMPARISON, allowedReasoningPilotCase, evaluateReasoningPilotCase, ReasoningPilotError } from '@/lib/reasoning-pilot-evaluation';
 
 export const dynamic = 'force-dynamic';
 const fields = { caseId: z.string().max(40), provider: z.enum(['google', 'groq']) };
@@ -25,6 +26,7 @@ const schema = z.union([
   z.object({ ...fields, comparison: z.literal(TOKEN_EVIDENCE_COMPARISON) }).strict(),
   z.object({ ...fields, comparison: z.literal(ANNOTATED_EVIDENCE_COMPARISON) }).strict(),
   z.object({ ...fields, comparison: z.literal(RELATIONAL_EVIDENCE_COMPARISON) }).strict(),
+  z.object({ ...fields, comparison: z.literal(REASONING_PILOT_COMPARISON), variant: z.enum(['current', 'high']) }).strict(),
 ]);
 function tokenMatches(actual: string, expected: string) {
   if (actual.length !== 64 || expected.length !== 64) return false;
@@ -53,6 +55,7 @@ export async function POST(request: Request) {
   if ('comparison' in parsed.data && parsed.data.comparison === TOKEN_EVIDENCE_COMPARISON && env.english_accuracy_profile !== TOKEN_EVIDENCE_COMPARISON) return json({ code: 'evaluation_disabled' }, 404);
   if ('comparison' in parsed.data && parsed.data.comparison === ANNOTATED_EVIDENCE_COMPARISON && env.english_accuracy_profile !== ANNOTATED_EVIDENCE_COMPARISON) return json({ code: 'evaluation_disabled' }, 404);
   if ('comparison' in parsed.data && parsed.data.comparison === RELATIONAL_EVIDENCE_COMPARISON && env.english_accuracy_profile !== RELATIONAL_EVIDENCE_COMPARISON) return json({ code: 'evaluation_disabled' }, 404);
+  if ('comparison' in parsed.data && parsed.data.comparison === REASONING_PILOT_COMPARISON && env.english_accuracy_profile !== REASONING_PILOT_COMPARISON) return json({ code: 'evaluation_disabled' }, 404);
   const { caseId, provider } = parsed.data;
   const profile = 'comparison' in parsed.data ? { comparison: parsed.data.comparison, ...('variant' in parsed.data ? { variant: parsed.data.variant } : {}) } : { round: parsed.data.round };
   const sample = accuracyCases.find(c => c.id === caseId);
@@ -60,13 +63,15 @@ export async function POST(request: Request) {
   if ('comparison' in parsed.data && parsed.data.comparison === TOKEN_EVIDENCE_COMPARISON && !allowedTokenEvidenceCase(caseId)) return json({ code: 'evaluation_invalid_case' }, 400);
   if ('comparison' in parsed.data && parsed.data.comparison === ANNOTATED_EVIDENCE_COMPARISON && !allowedAnnotatedEvidenceCase(caseId)) return json({ code: 'evaluation_invalid_case' }, 400);
   if ('comparison' in parsed.data && parsed.data.comparison === RELATIONAL_EVIDENCE_COMPARISON && !allowedRelationalEvidenceCase(caseId)) return json({ code: 'evaluation_invalid_case' }, 400);
-  if ('variant' in parsed.data && !allowedCauseVariant(caseId, parsed.data.variant)) return json({ code: 'evaluation_invalid_case' }, 400);
+  if ('comparison' in parsed.data && parsed.data.comparison === REASONING_PILOT_COMPARISON && !allowedReasoningPilotCase(caseId)) return json({ code: 'evaluation_invalid_case' }, 400);
+  if ('comparison' in parsed.data && parsed.data.comparison === ROOT_CAUSE_COMPARISON && !allowedCauseVariant(caseId, parsed.data.variant)) return json({ code: 'evaluation_invalid_case' }, 400);
   if (!(provider === 'google' ? env.google_api : env.groq_api)?.trim()) return json({ code: 'evaluation_key_missing' }, 503);
   const started = Date.now();
   try {
     const config = { google_api: env.google_api, groq_api: env.groq_api, signal: request.signal };
     const result = 'comparison' in parsed.data
-      ? 'variant' in parsed.data ? await evaluateCauseAccuracyCase(config, provider, sample, parsed.data.variant)
+      ? parsed.data.comparison === REASONING_PILOT_COMPARISON ? await evaluateReasoningPilotCase(config, provider, sample, parsed.data.variant)
+        : parsed.data.comparison === ROOT_CAUSE_COMPARISON ? await evaluateCauseAccuracyCase(config, provider, sample, parsed.data.variant)
         : parsed.data.comparison === RELATIONAL_EVIDENCE_COMPARISON ? await evaluateRelationalEvidenceCase(config, provider, sample)
           : parsed.data.comparison === ANNOTATED_EVIDENCE_COMPARISON ? await evaluateAnnotatedEvidenceCase(config, provider, sample)
           : parsed.data.comparison === TOKEN_EVIDENCE_COMPARISON ? await evaluateTokenEvidenceCase(config, provider, sample)
@@ -84,6 +89,7 @@ export async function POST(request: Request) {
     return json({ caseId, provider, ...profile, code: known ? error.code : 'evaluation_internal',
       ...(known && error.issue.providerStatus !== undefined ? { providerStatus: error.issue.providerStatus } : {}),
       ...(error instanceof TokenEvidenceEvaluationError ? { quota: error.quota } : {}),
+      ...(error instanceof ReasoningPilotError ? { requestHash: error.evidence.requestHash, usage: error.evidence.usage, ...(error.evidence.finish ? { finish: error.evidence.finish } : {}) } : {}),
       ...(error instanceof TokenEvidenceEvaluationError && Number.isInteger(error.issue.retryAfterSeconds) && Number(error.issue.retryAfterSeconds) > 0 && Number(error.issue.retryAfterSeconds) <= 604800 ? { retryAfterSeconds: error.issue.retryAfterSeconds } : {}),
       ...(known && error.code.endsWith('invalid_response') && error.validationStage ? { validationStage: error.validationStage } : {}),
       ...(detailedComparison && known && error.diagnostic && FEEDBACK_DIAGNOSTICS.includes(error.diagnostic) ? { diagnostic: error.diagnostic } : {}),
