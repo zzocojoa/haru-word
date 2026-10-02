@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { EVIDENCE_RULES, parseEvidenceFeedback } from './evidence-feedback.ts';
+import { EVIDENCE_RULES, parseEvidenceFeedback, type EvidenceRuleTexts } from './evidence-feedback.ts';
 import { FeedbackValidationError, FEEDBACK_OUTPUT_LIMITS, type ProviderFeedbackContract } from './provider-feedback-contract.ts';
 import { summarizeValidationIssues } from './feedback-validation-detail.ts';
 
@@ -41,7 +41,7 @@ export function countedEvidenceUnits(sentence: string) {
   });
 }
 
-export function parseCountedEvidenceFeedback(text: unknown, original: string, model: Parameters<typeof parseEvidenceFeedback>[2]) {
+export function parseCountedEvidenceFeedback(text: unknown, original: string, model: Parameters<typeof parseEvidenceFeedback>[2], ruleTexts?: EvidenceRuleTexts) {
   if (typeof text !== 'string') throw new FeedbackValidationError('content_type');
   if (text.length > FEEDBACK_OUTPUT_LIMITS.textCharacters) throw new FeedbackValidationError('content_limit');
   let value: unknown;
@@ -53,7 +53,7 @@ export function parseCountedEvidenceFeedback(text: unknown, original: string, mo
     context: 'insufficient', meaningUsage: 'uncertain', grammar: 'uncertain', correctedSentence: '', changes: [],
     target: { reason: 'ambiguous', originalSpan: '', observedUse: '' },
     structure: { status: 'unavailable', translation: '', parts: [], note: 'insufficient' },
-  }), original, model);
+  }), original, model, ruleTexts);
   const sentence = content.grammar === 'natural' ? original : content.correctedSentence;
   const target = { ...content.target, originalSpan: 'originalSpan' in content.target ? content.target.originalSpan : '',
     observedUse: 'observedUse' in content.target ? content.target.observedUse : '' };
@@ -82,7 +82,7 @@ export function parseCountedEvidenceFeedback(text: unknown, original: string, mo
   return parseEvidenceFeedback(JSON.stringify({ context: 'sufficient', grammar: content.grammar,
     meaningUsage: target.reason === 'matched' ? 'appropriate' : target.reason === 'ambiguous' ? 'uncertain' : 'needs_work',
     correctedSentence: sentence, target, changes: content.grammar === 'needs_work' ? content.changes : [], structure,
-  }), original, model);
+  }), original, model, ruleTexts);
 }
 
 const object = (properties: Record<string, unknown>) => ({ type: 'object', properties, required: Object.keys(properties), additionalProperties: false });

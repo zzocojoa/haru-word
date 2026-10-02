@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { countedEvidenceUnits, parseCountedEvidenceFeedback, countedEvidenceWordInstruction, countedEvidenceGrammarInstruction } from './counted-evidence-feedback.ts';
-import { EVIDENCE_RULES } from './evidence-feedback.ts';
+import { EVIDENCE_RULES, type EvidenceRuleTexts } from './evidence-feedback.ts';
 import { FeedbackValidationError, FEEDBACK_OUTPUT_LIMITS, type ProviderFeedbackContract, type ProviderFeedbackInput } from './provider-feedback-contract.ts';
 import { summarizeValidationIssues } from './feedback-validation-detail.ts';
 
@@ -35,7 +35,7 @@ export function tokenEvidenceInput(input: ProviderFeedbackInput): ProviderFeedba
   return { ...input, originalUnits: countedEvidenceUnits(input.sentence).map(unit => unit.text) };
 }
 
-export function parseTokenEvidenceFeedback(text: unknown, original: string, model: Parameters<typeof parseCountedEvidenceFeedback>[2]) {
+export function parseTokenEvidenceFeedback(text: unknown, original: string, model: Parameters<typeof parseCountedEvidenceFeedback>[2], ruleTexts?: EvidenceRuleTexts) {
   if (typeof text !== 'string') throw new FeedbackValidationError('content_type');
   if (text.length > FEEDBACK_OUTPUT_LIMITS.textCharacters) throw new FeedbackValidationError('content_limit');
   let value: unknown;
@@ -44,7 +44,7 @@ export function parseTokenEvidenceFeedback(text: unknown, original: string, mode
   if (!parsed.success) throw new FeedbackValidationError('fields', 'wire_fields', summarizeValidationIssues(parsed.error.issues));
   const analysis = parsed.data.analysis;
   if (analysis.grammar === 'uncertain' || analysis.structure.status === 'unavailable') {
-    return parseCountedEvidenceFeedback(JSON.stringify({ analysis }), original, model);
+    return parseCountedEvidenceFeedback(JSON.stringify({ analysis }), original, model, ruleTexts);
   }
   const sentence = analysis.grammar === 'natural' ? original : analysis.correctedSentence;
   const units = countedEvidenceUnits(sentence);
@@ -65,7 +65,7 @@ export function parseTokenEvidenceFeedback(text: unknown, original: string, mode
   // evidence, governance, original preservation and all persisted contracts.
   return parseCountedEvidenceFeedback(JSON.stringify({ analysis: { ...analysis,
     structure: { ...analysis.structure, parts },
-  } }), original, model);
+  } }), original, model, ruleTexts);
 }
 
 const object = (properties: Record<string, unknown>) => ({ type: 'object', properties, required: Object.keys(properties), additionalProperties: false });

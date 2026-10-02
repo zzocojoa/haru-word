@@ -40,6 +40,7 @@ export const EVIDENCE_RULES = {
     reference: 'https://dictionary.cambridge.org/grammar/british-grammar/word-order-and-focus_2',
   },
 } as const;
+export type EvidenceRuleTexts = Readonly<Partial<Record<keyof typeof EVIDENCE_RULES, string>>>;
 const RULE_IDS = Object.keys(EVIDENCE_RULES) as [keyof typeof EVIDENCE_RULES, ...(keyof typeof EVIDENCE_RULES)[]];
 export const EVIDENCE_FUNCTIONS = ['subject', 'verb', 'direct-object', 'indirect-object', 'preposition-object', 'complement', 'modifier', 'connector'] as const;
 const functions = {
@@ -86,7 +87,7 @@ const wireSchema = z.object({
   }).strict(),
 }).strict();
 
-export function parseEvidenceFeedback(text: unknown, original: string, model: Parameters<typeof parseProviderFeedback>[2]) {
+export function parseEvidenceFeedback(text: unknown, original: string, model: Parameters<typeof parseProviderFeedback>[2], ruleTexts?: EvidenceRuleTexts) {
   if (typeof text !== 'string') throw new FeedbackValidationError('content_type');
   if (text.length > FEEDBACK_OUTPUT_LIMITS.textCharacters) throw new FeedbackValidationError('content_limit');
   let value: unknown;
@@ -165,7 +166,9 @@ export function parseEvidenceFeedback(text: unknown, original: string, model: Pa
     : target.reason === 'different-function' ? `원문의 「${target.originalSpan}」를 「${target.observedUse}」의 기능으로 분석해 선택한 기능과 다르게 판단했어요.`
     : '뜻·기능의 사용은 문맥만으로 확정하기 어려워요.';
   const edits = content.changes.slice(0, 4).map(c => displayChange(c.before, c.after)).join(' / ');
-  const rules = [...new Set(content.changes.map(c => c.rule))].map(rule => EVIDENCE_RULES[rule].text).join(' ');
+  // Application-owned overrides let new candidates fix a teaching note while
+  // every previously evaluated contract retains its original default text.
+  const rules = [...new Set(content.changes.map(c => c.rule))].map(rule => ruleTexts?.[rule] ?? EVIDENCE_RULES[rule].text).join(' ');
   const explanation = insufficient ? NOTES.insufficient : `${targetText} ${content.grammar === 'natural' ? '원문은 문법적으로 자연스러워 그대로 유지해요.' : `원문에서 필요한 부분을 고쳤어요. ${edits}${content.changes.length > 4 ? ' / 그 밖의 변경은 교정문에서 확인해요.' : ''} ${rules}`}`;
   // Semantic correctness of chosen labels/rules/glosses still needs real evaluation.
   // Preserve the shared parser and every persisted/API/backup feedback field.
