@@ -1,6 +1,10 @@
 declare namespace Cloudflare {
   interface Env {
     DB?: D1Database;
+    card_studio_enabled?: string;
+    card_studio_owner_id?: string;
+    card_studio_bridge_secret?: string;
+    card_studio_origin?: string;
     BUCKET?: R2Bucket;
     google_api?: string;
     groq_api?: string;
