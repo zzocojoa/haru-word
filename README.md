@@ -1,6 +1,6 @@
 # 하루단어 · Oxford 3000
 
-본인 전용 카드 제작·PNG 저장·카카오 예약의 로컬 통합안과 활성화·복구 절차는 [영어 카드 통합](CARD_STUDIO_INTEGRATION.md)을 참조하세요. 아직 운영에 반영하지 않았습니다.
+본인 전용 카드 제작·PNG 저장·카카오 예약을 [영어 카드 작업실](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards)에서 사용할 수 있습니다. 기존 ChatGPT 로그인 후 홈의 **영어 카드**로 이동하세요. 운영 v101에 반영했으며 설정·검증 범위·복구 절차는 [영어 카드 통합](CARD_STUDIO_INTEGRATION.md)을 참조하세요.
 
 GitHub 저장소·CI·PR 검토와 기존 Sites 배포 연결은 [GITHUB_WORKFLOW.md](GITHUB_WORKFLOW.md)를 참조하세요.
 
