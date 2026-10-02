@@ -1,0 +1,848 @@
+{
+  "schemaVersion": 1,
+  "comparison": "reasoning-pilot-v1",
+  "sourceCommit": "af2ca8e2f23e80e5cf231fb05d75d1b4dcf0780e",
+  "version": 103,
+  "models": {
+    "google": "gemini-3.1-flash-lite",
+    "groq": "openai/gpt-oss-120b"
+  },
+  "previousCalls": 806,
+  "maximumCalls": 20,
+  "actualConsumedSlots": 20,
+  "totalCalls": 826,
+  "notAttempted": 0,
+  "noRetry": true,
+  "noFallback": true,
+  "freeTierConfirmation": "human-user-existing-accounts",
+  "fixtureContentHash": "76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a",
+  "planHash": "5d8f85c1d0165269ebb4b34b6d267d03cfce23a45d5f380f4854a7375b822a31",
+  "ledgerHash": "b134dd5d9730d0faa0f30dba2f8dda8e2c5a701854bfc435c7b7ca4c5538cb5c",
+  "blindHash": "5a9011fd47dcb501c5a8ea8a7af2957377f2410e8c6fd4a62ed0ee3dce72e4cc",
+  "reviewedAt": "2026-10-02T08:42:59.748Z",
+  "reviewMethod": "same-assistant manual provider/variant blinded semantic review; not independent human certification",
+  "conditions": {
+    "google/current": {
+      "planned": 5,
+      "attempted": 5,
+      "notAttempted": 0,
+      "validResponses": 2,
+      "passes": 1,
+      "languageFailures": 1,
+      "nonLanguageFailures": 3,
+      "dimensionPasses": {
+        "meaning": 1,
+        "grammar": 2,
+        "correction": 2,
+        "structure": 2
+      },
+      "durationMs": {
+        "reportedRows": 5,
+        "min": 1793,
+        "max": 2205,
+        "mean": 1961
+      },
+      "usage": {
+        "inputTokens": {
+          "reportedRows": 5,
+          "totalReported": 2964
+        },
+        "outputTokens": {
+          "reportedRows": 5,
+          "totalReported": 1549
+        },
+        "reasoningTokens": {
+          "reportedRows": 0,
+          "totalReported": 0
+        },
+        "totalTokens": {
+          "reportedRows": 5,
+          "totalReported": 4513
+        }
+      }
+    },
+    "google/high": {
+      "planned": 5,
+      "attempted": 5,
+      "notAttempted": 0,
+      "validResponses": 1,
+      "passes": 1,
+      "languageFailures": 0,
+      "nonLanguageFailures": 4,
+      "dimensionPasses": {
+        "meaning": 1,
+        "grammar": 1,
+        "correction": 1,
+        "structure": 1
+      },
+      "durationMs": {
+        "reportedRows": 5,
+        "min": 7149,
+        "max": 10473,
+        "mean": 8526
+      },
+      "usage": {
+        "inputTokens": {
+          "reportedRows": 5,
+          "totalReported": 2964
+        },
+        "outputTokens": {
+          "reportedRows": 5,
+          "totalReported": 1196
+        },
+        "reasoningTokens": {
+          "reportedRows": 5,
+          "totalReported": 9842
+        },
+        "totalTokens": {
+          "reportedRows": 5,
+          "totalReported": 14002
+        }
+      }
+    },
+    "groq/current": {
+      "planned": 5,
+      "attempted": 5,
+      "notAttempted": 0,
+      "validResponses": 1,
+      "passes": 1,
+      "languageFailures": 0,
+      "nonLanguageFailures": 4,
+      "dimensionPasses": {
+        "meaning": 1,
+        "grammar": 1,
+        "correction": 1,
+        "structure": 1
+      },
+      "durationMs": {
+        "reportedRows": 5,
+        "min": 1086,
+        "max": 1340,
+        "mean": 1190
+      },
+      "usage": {
+        "inputTokens": {
+          "reportedRows": 5,
+          "totalReported": 4328
+        },
+        "outputTokens": {
+          "reportedRows": 5,
+          "totalReported": 1903
+        },
+        "reasoningTokens": {
+          "reportedRows": 5,
+          "totalReported": 739
+        },
+        "totalTokens": {
+          "reportedRows": 5,
+          "totalReported": 6231
+        }
+      }
+    },
+    "groq/high": {
+      "planned": 5,
+      "attempted": 5,
+      "notAttempted": 0,
+      "validResponses": 5,
+      "passes": 3,
+      "languageFailures": 2,
+      "nonLanguageFailures": 0,
+      "dimensionPasses": {
+        "meaning": 4,
+        "grammar": 5,
+        "correction": 5,
+        "structure": 3
+      },
+      "durationMs": {
+        "reportedRows": 5,
+        "min": 6012,
+        "max": 7465,
+        "mean": 6704
+      },
+      "usage": {
+        "inputTokens": {
+          "reportedRows": 5,
+          "totalReported": 4568
+        },
+        "outputTokens": {
+          "reportedRows": 5,
+          "totalReported": 14466
+        },
+        "reasoningTokens": {
+          "reportedRows": 5,
+          "totalReported": 13346
+        },
+        "totalTokens": {
+          "reportedRows": 5,
+          "totalReported": 19034
+        }
+      }
+    }
+  },
+  "pairs": [
+    {
+      "caseId": "grammar-45",
+      "provider": "google",
+      "current": "unavailable",
+      "high": "unavailable",
+      "outcome": "language_comparison_unavailable"
+    },
+    {
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "current": "pass",
+      "high": "pass",
+      "outcome": "same"
+    },
+    {
+      "caseId": "word-32",
+      "provider": "google",
+      "current": "language_fail",
+      "high": "pass",
+      "outcome": "high_better"
+    },
+    {
+      "caseId": "word-32",
+      "provider": "groq",
+      "current": "unavailable",
+      "high": "pass",
+      "outcome": "language_comparison_unavailable"
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "google",
+      "current": "unavailable",
+      "high": "unavailable",
+      "outcome": "language_comparison_unavailable"
+    },
+    {
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "current": "unavailable",
+      "high": "language_fail",
+      "outcome": "language_comparison_unavailable"
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "google",
+      "current": "unavailable",
+      "high": "unavailable",
+      "outcome": "language_comparison_unavailable"
+    },
+    {
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "current": "unavailable",
+      "high": "language_fail",
+      "outcome": "language_comparison_unavailable"
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "google",
+      "current": "pass",
+      "high": "unavailable",
+      "outcome": "language_comparison_unavailable"
+    },
+    {
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "current": "unavailable",
+      "high": "pass",
+      "outcome": "language_comparison_unavailable"
+    }
+  ],
+  "rows": [
+    {
+      "label": "B018",
+      "number": 1,
+      "caseId": "grammar-45",
+      "provider": "google",
+      "variant": "current",
+      "status": "failure",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 1924,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 355,
+        "totalTokens": 977
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "8e44ace7499a552e5f83c66c63a3c9dbdb1a6e6d746af4b6f47f5f7b4a455562"
+    },
+    {
+      "label": "B014",
+      "number": 2,
+      "caseId": "grammar-45",
+      "provider": "google",
+      "variant": "high",
+      "status": "failure",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 10473,
+      "usage": {
+        "inputTokens": 622,
+        "outputTokens": 274,
+        "reasoningTokens": 2818,
+        "totalTokens": 3714
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "e439131f4333ad8b2d5f73da5acd45e605d686a19eb25ebf18cb6ec596a9694e"
+    },
+    {
+      "label": "B005",
+      "number": 3,
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "variant": "current",
+      "status": "response",
+      "durationMs": 1340,
+      "usage": {
+        "inputTokens": 895,
+        "outputTokens": 375,
+        "reasoningTokens": 119,
+        "totalTokens": 1270
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "pass": true,
+      "reason": "원문 어순·현재 진행의 의미를 유지하고 am/now/writing을 V/M/V로 정확히 분석했다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "2c19a8e732b841de8b5fa85788ad34bb1958578d2baba62430388b20c0ac5087"
+    },
+    {
+      "label": "B004",
+      "number": 4,
+      "caseId": "grammar-45",
+      "provider": "groq",
+      "variant": "high",
+      "status": "response",
+      "durationMs": 6012,
+      "usage": {
+        "inputTokens": 943,
+        "outputTokens": 2644,
+        "reasoningTokens": 2412,
+        "totalTokens": 3587
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "pass": true,
+      "reason": "유효한 now 어순을 인정하고 조동사 am과 본동사 writing을 V로 구분했다. 의미와 문장을 보존했다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "8e3e9ea7b9a5d94a6cc51542db1c0e777651a7a795bfaa51b5e9e115dac9c39d"
+    },
+    {
+      "label": "B016",
+      "number": 5,
+      "caseId": "word-32",
+      "provider": "google",
+      "variant": "high",
+      "status": "response",
+      "durationMs": 9212,
+      "usage": {
+        "inputTokens": 546,
+        "outputTokens": 207,
+        "reasoningTokens": 2485,
+        "totalTokens": 3238
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "pass": true,
+      "reason": "이 역(station) 명사구 문맥의 at 교정과 도착 의미·과거형·S/V/장소구 M을 정확히 유지했다. 장소 부사 here/home까지 확장하는 일반 규칙으로 읽지 않도록 설명 범위 보완은 별도 권고한다.",
+      "promptHash": "757d1a97267889931e886cf45e5d5eb87ea880070cd7eca62910f5cf47996c18",
+      "requestHash": "d33857134c6784f79b6e3eb9d0730229269a3d1cb6d4696fc0b77f6c1d53a123"
+    },
+    {
+      "label": "B012",
+      "number": 6,
+      "caseId": "word-32",
+      "provider": "google",
+      "variant": "current",
+      "status": "response",
+      "durationMs": 2205,
+      "usage": {
+        "inputTokens": 546,
+        "outputTokens": 293,
+        "totalTokens": 839
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "arrive의 도착 의미는 적절하므로 동결 뜻 판정은 appropriate다. 응답은 전치사 문법 오류를 뜻 needs_work에도 적용했다. at station 교정·과거 의미 보존·장소구 M은 정확하다.",
+      "promptHash": "757d1a97267889931e886cf45e5d5eb87ea880070cd7eca62910f5cf47996c18",
+      "requestHash": "de401297c20ec4d39d6a3c88f5dd931f1bcbd340dc19af6d7e4fb381c773c9f1"
+    },
+    {
+      "label": "B019",
+      "number": 7,
+      "caseId": "word-32",
+      "provider": "groq",
+      "variant": "high",
+      "status": "response",
+      "durationMs": 7078,
+      "usage": {
+        "inputTokens": 865,
+        "outputTokens": 3082,
+        "reasoningTokens": 2882,
+        "totalTokens": 3947
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "pass": true,
+      "reason": "도착 의미 appropriate와 전치사 문법 오류를 구분했고 at station으로 의미를 보존했다. arrived V·장소 전치사구 M 분석이 정확하다.",
+      "promptHash": "757d1a97267889931e886cf45e5d5eb87ea880070cd7eca62910f5cf47996c18",
+      "requestHash": "ad72531b89d68c4d6b5a06e66dfb9facbbbe8debb165339216f4e3b84259e935"
+    },
+    {
+      "label": "B015",
+      "number": 8,
+      "caseId": "word-32",
+      "provider": "groq",
+      "variant": "current",
+      "status": "failure",
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 1211,
+      "usage": {
+        "inputTokens": 817,
+        "outputTokens": 400,
+        "reasoningTokens": 205,
+        "totalTokens": 1217
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "757d1a97267889931e886cf45e5d5eb87ea880070cd7eca62910f5cf47996c18",
+      "requestHash": "89ee70c8f1e9c620dcbe7837647e434dfd5849248f18bc0e2aa3b5174f5efc3d"
+    },
+    {
+      "label": "B003",
+      "number": 9,
+      "caseId": "grammar-55",
+      "provider": "google",
+      "variant": "current",
+      "status": "failure",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 1793,
+      "usage": {
+        "inputTokens": 599,
+        "outputTokens": 312,
+        "totalTokens": 911
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "9492c2f8f5751a6b208abb9dae78b6aae9ee4dea0ec62fafe5150aef31014bf2"
+    },
+    {
+      "label": "B011",
+      "number": 10,
+      "caseId": "grammar-55",
+      "provider": "google",
+      "variant": "high",
+      "status": "failure",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 8022,
+      "usage": {
+        "inputTokens": 599,
+        "outputTokens": 277,
+        "reasoningTokens": 1778,
+        "totalTokens": 2654
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "0e0e9548340f61f5a2de249ed77dae7c1f8dd72ac19207d4dd1e1fad9112ad3a"
+    },
+    {
+      "label": "B017",
+      "number": 11,
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "variant": "current",
+      "status": "failure",
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 1181,
+      "usage": {
+        "inputTokens": 872,
+        "outputTokens": 440,
+        "reasoningTokens": 183,
+        "totalTokens": 1312
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "fc6640de1bf494b35fc0f4bfd645c04a61713d39ef2625f2f0bf3e664ff8229e"
+    },
+    {
+      "label": "B009",
+      "number": 12,
+      "caseId": "grammar-55",
+      "provider": "groq",
+      "variant": "high",
+      "status": "response",
+      "durationMs": 7465,
+      "usage": {
+        "inputTokens": 920,
+        "outputTokens": 3073,
+        "reasoningTokens": 2841,
+        "totalTokens": 3993
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "fail",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "fail"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "to 보완과 교정 의미는 맞다. 동결 기준은 의미·목표 사용 appropriate인데 needs_work로 판정했다. to learn을 별도 V, English를 O로 표시하면서 want를 보완하는 전체 부정사절과 내부 learn의 목적어 관계를 구분하지 않았다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "c95ea330c8ddd7c1995ddfce615acd0de7af2973d4705a4ac8896dcdb908c8e4"
+    },
+    {
+      "label": "B013",
+      "number": 13,
+      "caseId": "grammar-46",
+      "provider": "google",
+      "variant": "high",
+      "status": "failure",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 7149,
+      "usage": {
+        "inputTokens": 595,
+        "outputTokens": 216,
+        "reasoningTokens": 1095,
+        "totalTokens": 1906
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "45148b05556cea6e8253b68e533e9f93eba36e3abff6e4c52b71faaf84dd5434"
+    },
+    {
+      "label": "B001",
+      "number": 14,
+      "caseId": "grammar-46",
+      "provider": "google",
+      "variant": "current",
+      "status": "failure",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 1897,
+      "usage": {
+        "inputTokens": 595,
+        "outputTokens": 302,
+        "totalTokens": 897
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "d575163df458ec5dad59ab901d24ed27c3426b9f3cbaf3aec8aa0993f4b3d328"
+    },
+    {
+      "label": "B007",
+      "number": 15,
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "variant": "high",
+      "status": "response",
+      "durationMs": 6013,
+      "usage": {
+        "inputTokens": 918,
+        "outputTokens": 2642,
+        "reasoningTokens": 2393,
+        "totalTokens": 3560
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "fail"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "원문 판정·한정사 목표·SVC·형용사 보어는 맞지만 구조 설명에서 this를 관사라고 부른다. 같은 응답의 한정사 설명과 모순되어 교재로 승인할 수 없다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "8ee1611c554ee0359f0207a035ad5ec656fdd02d2df0fa8950f196ba75bf1985"
+    },
+    {
+      "label": "B006",
+      "number": 16,
+      "caseId": "grammar-46",
+      "provider": "groq",
+      "variant": "current",
+      "status": "failure",
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 1086,
+      "usage": {
+        "inputTokens": 870,
+        "outputTokens": 356,
+        "reasoningTokens": 120,
+        "totalTokens": 1226
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "b23717ed12402b1725a68749afede49d87fa1eb4c5f88102f49bace9aea7e6e5"
+    },
+    {
+      "label": "B002",
+      "number": 17,
+      "caseId": "grammar-48",
+      "provider": "google",
+      "variant": "current",
+      "status": "response",
+      "durationMs": 1985,
+      "usage": {
+        "inputTokens": 602,
+        "outputTokens": 287,
+        "totalTokens": 889
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "pass": true,
+      "reason": "위치 의미·원문 유지·주어와 be 동사 분석이 정확하다. 위치 전치사구 M은 동결 기준의 C/M 허용 범위다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "54a45acffa1ff73823d742e4d7f8e307402257e235d7933e6f3fa5134fa4e8e5"
+    },
+    {
+      "label": "B010",
+      "number": 18,
+      "caseId": "grammar-48",
+      "provider": "google",
+      "variant": "high",
+      "status": "failure",
+      "code": "provider_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 7774,
+      "usage": {
+        "inputTokens": 602,
+        "outputTokens": 222,
+        "reasoningTokens": 1666,
+        "totalTokens": 2490
+      },
+      "finish": "STOP",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "3d7c6a9973380a420f387fa268f8dd1f7a6113c2ede5e1ff1f68130130254ba7"
+    },
+    {
+      "label": "B008",
+      "number": 19,
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "variant": "current",
+      "status": "failure",
+      "code": "groq_invalid_response",
+      "validationStage": "structure",
+      "durationMs": 1132,
+      "usage": {
+        "inputTokens": 874,
+        "outputTokens": 332,
+        "reasoningTokens": 112,
+        "totalTokens": 1206
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "structure": "unavailable"
+      },
+      "criticalErrors": [],
+      "pass": false,
+      "reason": "검증에 거절되거나 소비된 슬롯에는 판정 가능한 영어 응답이 없다. 언어 통과나 오답으로 계산하지 않는다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "8b9f69c911def5975d3e67e25b1552e85b68227fc6aec6e5d26e17b4fce01451"
+    },
+    {
+      "label": "B020",
+      "number": 20,
+      "caseId": "grammar-48",
+      "provider": "groq",
+      "variant": "high",
+      "status": "response",
+      "durationMs": 6950,
+      "usage": {
+        "inputTokens": 922,
+        "outputTokens": 3025,
+        "reasoningTokens": 2818,
+        "totalTokens": 3947
+      },
+      "finish": "stop",
+      "dimensions": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "structure": "pass"
+      },
+      "criticalErrors": [],
+      "pass": true,
+      "reason": "원문의 책·의자 아래 위치와 자연스러운 문장을 보존했다. be V와 위치 전치사구 C를 정확히 설명했다.",
+      "promptHash": "027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5",
+      "requestHash": "00ad715a53883accadf4e377e4e58aac064bc537321c1f3b1b629dbab1087a9d"
+    }
+  ],
+  "closure": {
+    "sourceCommit": "af2ca8e2f23e80e5cf231fb05d75d1b4dcf0780e",
+    "liveSourceCommit": "c2457b746a3a8a8fafdbf317735bbe14a6816de4",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_24ac770f2f248191a92f8e6a244e31e0",
+    "version": 104,
+    "ledgerHash": "b134dd5d9730d0faa0f30dba2f8dda8e2c5a701854bfc435c7b7ca4c5538cb5c",
+    "blindHash": "5a9011fd47dcb501c5a8ea8a7af2957377f2410e8c6fd4a62ed0ee3dce72e4cc",
+    "expiredProbe": {
+      "status": 404,
+      "code": "evaluation_disabled",
+      "at": "2026-10-02T08:33:43.558Z",
+      "providerCalls": 0
+    },
+    "removedProbe": {
+      "status": 404,
+      "code": "evaluation_disabled",
+      "at": "2026-10-02T08:36:10.997Z",
+      "providerCalls": 0
+    },
+    "sameNonEvaluationEnvironment": true,
+    "sameAccessPolicy": true,
+    "evaluationKeys": 0,
+    "sameEvaluationSource": true
+  },
+  "promotion": {
+    "enabled": false,
+    "reason": "Targeted5-case pilot does not meet full60/provider publication evidence requirements"
+  },
+  "limitations": [
+    "Five fixed synthetic cases and one stochastic response per condition; no general accuracy estimate or causal proof of free vs paid tiers",
+    "Rejected responses not retained; structure-contract failure details cannot establish a specific English error",
+    "Usage counts only returned provider numbers; missing thought counts are unavailable, not zero",
+    "Operating Google12s/Groq15s deadlines and4096 output cap retained; timeout/truncation separated from language errors",
+    "No learner state writes or actual iPhone checks"
+  ]
+}
