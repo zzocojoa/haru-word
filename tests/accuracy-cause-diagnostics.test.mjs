@@ -214,8 +214,8 @@ test('parallel replay uses independent bundles and atomic output while keeping i
   }
   assert.equal(saved.knownSemanticFailuresAccepted, 17); assert.equal(saved.rows.length, 95);
   const publicReplay = JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-cause-replay.json', 'utf8'));
-  // The historical artifact keeps the parser hashes from its original run.
-  // Current provenance must match current source, while every result stays frozen.
+  // Historical bundles can include platform or checkout-specific dependency paths.
+  // Verify current provenance above and preserve every historical result below.
   const resultOnly = value => { const result = { ...value }; delete result.parserSourceHashes; delete result.parserBundleHash; return result; };
   assert.deepEqual(resultOnly(saved), resultOnly(publicReplay));
 });
