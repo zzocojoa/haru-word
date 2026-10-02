@@ -65,6 +65,10 @@ const wireSchema = z.object({ analysis: z.discriminatedUnion('grammar', [
     changes: z.array(z.object({ before: z.string().min(1).max(2000), after: z.string().max(2000), rule: z.enum(ruleIds) }).strict()).max(20), structure: structureSchema }).strict(),
   z.object({ grammar: z.literal('uncertain') }).strict(),
 ]) }).strict();
+// Reuse the same graph rules in the independently judged contract. Historical
+// wire schemas, instructions and compilation behavior above remain unchanged.
+export const relationalAnalysisSchemas = { target: targetSchema, context: contextSchema, structure: structureSchema,
+  change: z.object({ before: z.string().min(1).max(2000), after: z.string().max(2000), rule: z.enum(ruleIds) }).strict() };
 function invalid(): never {
   throw new FeedbackValidationError('structure', 'evidence_contract', { kind: 'evidence_structure', reason: 'structure_contract' });
 }

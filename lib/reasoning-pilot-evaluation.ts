@@ -23,7 +23,7 @@ export class ReasoningPilotError extends TokenEvidenceEvaluationError {
   }
 }
 const hash = async (value: unknown) => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(value)))), b => b.toString(16).padStart(2, '0')).join('');
-function usageEvidence(value: unknown, provider: AccuracyProvider) {
+export function usageEvidence(value: unknown, provider: AccuracyProvider) {
   const result: Record<string, number> = {};
   if (!value || typeof value !== 'object') return result;
   const raw = value as Record<string, unknown>;
