@@ -2,7 +2,7 @@ import { EVIDENCE_RULES } from './evidence-feedback.ts';
 import { tokenEvidenceFeedbackContract, parseTokenEvidenceFeedback, tokenEvidenceWordInstruction, tokenEvidenceGrammarInstruction } from './token-evidence-feedback.ts';
 import { FeedbackValidationError, type ProviderFeedbackContract } from './provider-feedback-contract.ts';
 
-// Unconnected candidate. No learner/API profile selects this contract.
+// Synthetic evaluation candidate. No learner API selects this contract.
 // Historical token/count/evidence defaults and request hashes stay intact.
 export const ANNOTATED_PREPOSITION_RULE = '전치사의 선택은 함께 쓰는 동사·형용사·명사와 문맥에 따라 달라져요. 전치사의 목적어와 동사의 직접목적어를 구분해요.';
 const ruleTexts = { preposition: ANNOTATED_PREPOSITION_RULE } as const;

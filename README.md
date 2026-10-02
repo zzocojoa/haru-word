@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+한국어 설명·원문 기능·성분 분석의 후속 후보는 [전체60문장 평가 준비](ENGLISH_ACCURACY_ANNOTATED.md)를 따릅니다. 평가 API에만 연결했으며 학습 적용과 실제 효과는 미검증입니다. 누적735회 상한은 소진됐고 추가 최대120회·누적855회는 별도 승인 전 제안입니다.
+
 GitHub 저장소·CI·PR 검토와 기존 Sites 배포 연결은 [GITHUB_WORKFLOW.md](GITHUB_WORKFLOW.md)를 참조하세요.
 
 단어 편집·개인 단어 추가의 창 안 저장 재시도와 충돌 보호는 [EDITOR_SAVE_RETRY.md](EDITOR_SAVE_RETRY.md)를 참조하세요.
