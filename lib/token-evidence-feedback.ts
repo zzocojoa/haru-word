@@ -4,7 +4,7 @@ import { EVIDENCE_RULES } from './evidence-feedback.ts';
 import { FeedbackValidationError, FEEDBACK_OUTPUT_LIMITS, type ProviderFeedbackContract, type ProviderFeedbackInput } from './provider-feedback-contract.ts';
 import { summarizeValidationIssues } from './feedback-validation-detail.ts';
 
-// Unconnected evaluation candidate. Historical contracts and request hashes stay intact.
+// Evaluation candidate only. Learner prompts and historical request contracts stay intact.
 // Language presence is a format guard, not proof that a Korean gloss is correct.
 const korean = (limit: number) => z.string().trim().min(1).max(limit).refine(value => /\p{Script=Hangul}/u.test(value));
 const OTHER_FUNCTIONS = ['subject', 'verb', 'direct-object', 'indirect-object', 'complement', 'modifier', 'connector'] as const;

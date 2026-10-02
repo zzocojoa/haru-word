@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "comparison": "token-evidence-v1",
+  "purpose": "Targeted original17 defects and two observed Korean-gloss omissions; historical comparison, not a publication gate",
+  "authorization": "Pending separate human approval. Preparation, closed publication and CLI flags do not authorize provider calls.",
+  "previousCalls": 701,
+  "maximumCalls": 34,
+  "maximumTotalCalls": 735,
+  "caseIds": [
+    "word-02",
+    "word-15",
+    "word-08",
+    "word-26",
+    "grammar-45",
+    "word-27",
+    "word-32",
+    "grammar-42",
+    "grammar-48",
+    "grammar-49",
+    "word-37",
+    "grammar-57",
+    "grammar-51",
+    "grammar-55",
+    "word-25",
+    "grammar-56",
+    "word-22"
+  ],
+  "parentCounts": [
+    240,
+    120,
+    120,
+    60,
+    115,
+    20,
+    26
+  ],
+  "parentLedgerHashes": [
+    "0e6a30364b116d5eae393c298738211a3773a78336923369546c628fd9e91aa6",
+    "63e648f649d9af4ddadbe8bd5d48e7c33cc35324ba4dce6c8ead3e8cc597253d",
+    "ef06b87c27d9a222a42a9fd13d7329a970abbcf8e992caac06290568072a5494",
+    "f5e5371ee56b21922b0f1775ba53a82206159a569906787785016899782b7e6d",
+    "21f45259a8446965094da6c5bb3d6466adcdd01c56c0af8d93cef2a0fc19783f",
+    "a407fe0ae283da2b1a3f845b4c3ab675f74ba710cc50c67a33c311065226af1c",
+    "8c77b5bb5068dbbc885abaf2afbee755b7f09111d1f78482b3bf9646a6ab4120"
+  ],
+  "combinedParentHash": "91deee121b67547b09fdeaa475040ac3b7995a35b1912d3ec2619e11d6d5a79e",
+  "fixtureContentHash": "76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a",
+  "references": [
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-chunked-free.json",
+      "hash": "2947cde93dc821ce68c0e8deff36d8cabf399893fb445db356d92398a96e2e0d"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-root-cause.json",
+      "hash": "d9db111e6fc15eba35d8666c55398f0697548b3ecccb64f8b4dfd3438baed812"
+    },
+    {
+      "path": "data/evaluations/accuracy-cause-plan.json",
+      "hash": "3eb29a10e645b249957926ab54b1663194f4c15501c35ddf1ae9141d53dcdf1e"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-evidence.json",
+      "hash": "a7066e726f538aa47aa123c9e8ba1abf087d0c1e1cafb7fb525a30503d426980"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-diagnostics.json",
+      "hash": "4ded6f507af5078352ebb9dd26b5b227fc5928b7575f7d358ce7bc6f3dc835b4"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-counted.json",
+      "hash": "0e5d40f66bb50478a93828ef0392e493bfa2e28de03765ebe604899aaf129158"
+    }
+  ],
+  "gates": {
+    "casesPerProvider": 60,
+    "minimumOverallPasses": 54,
+    "criticalFailures": 0,
+    "criticalUnavailable": 0,
+    "historicalMinimumPasses": {
+      "google": 44,
+      "groq": 34
+    },
+    "historicalFailuresToResolve": 17,
+    "newRegressions": 0,
+    "rubric": "Unchanged frozen fixture and four-dimension adjudication; generic notes do not excuse incorrect or insufficient teaching, meaning or role analysis",
+    "pilotCannotPassPublication": true
+  },
+  "requestPolicy": {
+    "automaticRetries": 0,
+    "fallback": false,
+    "automaticCI": false,
+    "prespendBeforePost": true,
+    "betweenRequestsMs": 30000,
+    "lowQuotaWaitMs": 60000,
+    "stopOnLimitBillingPermission": true,
+    "preserveOldStoppedSlots": true,
+    "storeSafeQuotaOnFailure": true,
+    "storeRetryAfterSeconds": true
+  },
+  "reviewPolicy": "Save only fixed synthetic fixture feedback in Git-excluded files; validate before blinding; commit blind judgments before restoring provider mapping; keep HTTP/output/language errors separate",
+  "closurePolicy": "Expire access and redeploy; actual former token must return404 disabled on invalid case; remove the three temporary keys and redeploy; verify disabled and native original environment/access/v3"
+}

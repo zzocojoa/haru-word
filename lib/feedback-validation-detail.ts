@@ -11,7 +11,8 @@ const fields = ['root', 'meaningUsage', 'grammar', 'correctedSentence', 'explana
   'analysis', 'analysis.grammar', 'analysis.correctedSentence', 'analysis.target', 'analysis.target.reason', 'analysis.target.originalSpan', 'analysis.target.observedUse',
   'analysis.changes', 'analysis.changes[].before', 'analysis.changes[].after', 'analysis.changes[].rule', 'analysis.structure',
   'analysis.structure.status', 'analysis.structure.translation', 'analysis.structure.parts', 'analysis.structure.parts[].unitCount',
-  'analysis.structure.parts[].function', 'analysis.structure.parts[].meaning', 'analysis.structure.parts[].governor', 'analysis.structure.note'] as const;
+  'analysis.structure.parts[].function', 'analysis.structure.parts[].meaning', 'analysis.structure.parts[].governor',
+  'analysis.structure.parts[].units', 'analysis.structure.parts[].units[]', 'analysis.structure.note'] as const;
 const reasons = ['missing', 'type', 'enum', 'integer', 'too_small', 'too_large', 'unexpected_keys', 'schema'] as const;
 const schemaDetail = z.object({ kind: z.literal('schema'),
   issues: z.array(z.object({ field: z.enum(fields), reason: z.enum(reasons) }).strict()).min(1).max(8),
@@ -58,14 +59,15 @@ export function parseFeedbackValidationDetail(value: unknown, context?: { stage?
 
 export function summarizeValidationIssues(issues: readonly z.ZodIssue[]): FeedbackValidationDetail {
   const items = issues.slice(0, 8).map(issue => {
-    // Only the one known array index is normalized. An attacker-controlled
+    // Only the known parts/changes/units array indices are normalized. An attacker-controlled
     // key containing dots/brackets must never be mistaken for a trusted path.
     const originalPath = [...issue.path], counted = originalPath[0] === 'analysis';
     const path = counted ? originalPath.slice(1) : originalPath;
     const local = path.length === 4 && path[0] === 'structure' && path[1] === 'parts'
-      && typeof path[2] === 'number' && ['wordCount', 'unitCount', 'role', 'explanation', 'text', 'function', 'meaning', 'governor'].includes(String(path[3]))
+      && typeof path[2] === 'number' && ['wordCount', 'unitCount', 'role', 'explanation', 'text', 'function', 'meaning', 'governor', 'units'].includes(String(path[3]))
       ? `structure.parts[].${path[3]}` : path.length === 3 && path[0] === 'changes' && typeof path[1] === 'number' && ['before', 'after', 'rule'].includes(String(path[2]))
-        ? `changes[].${path[2]}` : path.every(p => typeof p === 'string' && !/[.\[\]]/.test(p)) ? path.join('.') : '';
+        ? `changes[].${path[2]}` : path.length === 5 && path[0] === 'structure' && path[1] === 'parts' && typeof path[2] === 'number' && path[3] === 'units' && typeof path[4] === 'number'
+          ? 'structure.parts[].units[]' : path.every(p => typeof p === 'string' && !/[.\[\]]/.test(p)) ? path.join('.') : '';
     const normalized = counted ? local ? `analysis.${local}` : 'analysis' : local;
     const field = !originalPath.length ? 'root' : fields.find(f => f === normalized) ?? 'other';
     const reason = issue.code === 'invalid_type' ? issue.received === 'undefined' ? 'missing' : issue.expected === 'integer' ? 'integer' : 'type'

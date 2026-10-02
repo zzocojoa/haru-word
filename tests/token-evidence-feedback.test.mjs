@@ -138,7 +138,7 @@ test('bounded closed schemas expose no raw rejected values and preserve semantic
   assert.equal(hash('data/evaluations/english-accuracy-2026-10-01-evidence.json'), 'a7066e726f538aa47aa123c9e8ba1abf087d0c1e1cafb7fb525a30503d426980');
 });
 
-test('current transports compile the candidate with one mock call and no learner/API integration', async () => {
+test('direct transports compile the candidate with one mock call independently of the evaluation API', async () => {
   mkdirSync(resolve('work'), {recursive:true}); const dir = mkdtempSync(resolve('work/token-evidence-')), output = resolve(dir,'transport.mjs');
   await build({stdin:{contents:"export { generateTutorFeedback } from './lib/gemini-feedback'; export { generateGroqFeedback } from './lib/groq-feedback';", resolveDir:process.cwd()}, outfile:output, bundle:true, platform:'node', format:'esm', logLevel:'silent'});
   const {generateTutorFeedback, generateGroqFeedback} = await import(pathToFileURL(output).href);
