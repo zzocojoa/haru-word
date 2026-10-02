@@ -18,6 +18,8 @@
 
 ## 빌드·검증
 
+브라우저가 JSON API의 직접 탐색을 차단하면 로그인한 `/cards`의 잠금 화면에서 **계정 연결 정보**를 펼쳐 본인의 사이트별 식별자를 확인한다. 이 정보도 현재 로그인한 본인에게만 표시한다.
+
 UI 원본은 EN_Card 저장소에 있다. 그 체크아웃에서 `node scripts/export-haru.mjs --target <이 체크아웃의 절대 경로>`로 내보낸다. `public/card-studio/source.json`은 원본·산출물 SHA256을 기록한다. `.gitattributes`는 이 생성 폴더의 Git 줄바꿈 변환을 막아 Windows에서도 해시를 유지한다. 생성된 번들을 손으로 수정하지 않는다. 이 경로만 eslint에서 제외하며 원본은 EN_Card의 타입·서식·브라우저 검사로 검증한다.
 
 ```powershell
