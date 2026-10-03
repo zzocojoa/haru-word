@@ -1,6 +1,9 @@
 import test, { after, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { createHash } from 'node:crypto';
 import { build } from 'esbuild';
@@ -23,6 +26,46 @@ const date = '2026-09-24T00:00:00.000Z', words = JSON.parse(readFileSync('data/w
 const initial = () => model.newGrammarProgress(date);
 const completed = () => ({ ...initial(), stage: 6, answers: Object.fromEntries(['q1', 'q2', 'q3'].map(k => [k, model.recordAnswer(undefined, 'answer')])), sentence: 'I like music.', check: 'appropriate', completedAt: date });
 const raw = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: date, state });
+
+// Finish every asynchronous bundle/import before registering tests or cleanup.
+await build({ entryPoints: ['app/api/state/restore/route.ts', 'app/api/grammar-feedback/route.ts', 'app/api/state/route.ts'], outdir: 'work/grammar-tests/routes', entryNames: '[dir]/[name]', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent', plugins: [{ name: 'test-boundaries', setup(b) {
+  b.onResolve({ filter: /^(cloudflare:workers|@\/app\/chatgpt-auth|@\/db\/store)$/ }, a => ({ path: a.path, namespace: 'test' }));
+  b.onLoad({ filter: /.*/, namespace: 'test' }, a => ({ loader: 'js', contents: a.path === 'cloudflare:workers' ? 'export const env=globalThis.grammarRuntime.env' : a.path.endsWith('chatgpt-auth') ? 'export const getChatGPTUser=async()=>globalThis.grammarRuntime.user' : 'export const database=()=>globalThis.grammarRuntime.db' }));
+} }] });
+globalThis.grammarRuntime = { db: null, env: { google_api: 'test-only', google_ai_enabled: 'true', grammar_enabled: 'true' }, user: { userId: 'owner' } };
+const feedbackRoute = await import('../work/grammar-tests/routes/grammar-feedback/route.mjs');
+const stateRoute = await import('../work/grammar-tests/routes/state/route.mjs');
+const fetchOriginal = globalThis.fetch;
+const v3 = await import('../work/grammar-tests/content-v3.mjs');
+await build({entryPoints:['lib/grammar/content-v4.ts'],outfile:'work/grammar-tests/content-v4.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
+const v4 = await import('../work/grammar-tests/content-v4.mjs');
+const compat = await import('../work/grammar-tests/compatibility.mjs');
+const { assembledOrder } = await import('../work/grammar-tests/content.mjs');
+const restoreRoute = await import('../work/grammar-tests/routes/state/restore/route.mjs');
+after(() => { globalThis.fetch = fetchOriginal; delete globalThis.grammarRuntime; });
+const request = (body, origin = 'https://study.example') => new Request('https://study.example/api/grammar-feedback', { method: 'POST', headers: { 'content-type': 'application/json', origin }, body: JSON.stringify(body) });
+test('slow v4 setup finishes before the grammar runtime is cleaned up', () => {
+  const loaderPath = resolve('work/grammar-tests/delayed-setup-loader.mjs');
+  writeFileSync(loaderPath, `export async function load(url, context, nextLoad) {
+    const result = await nextLoad(url, context);
+    if (!url.endsWith('/tests/grammar.test.mjs')) return result;
+    const source = result.source.toString();
+    const marker = "const v4 = await import('../work/grammar-tests/content-v4.mjs');";
+    if (!source.includes(marker)) throw Error('Missing v4 setup boundary');
+    return { ...result, source: source.replace(marker, 'await new Promise(resolve => setTimeout(resolve, 1000));\\n' + marker) };
+  }\n`);
+  const registration = `import { register } from 'node:module'; register(${JSON.stringify(pathToFileURL(loaderPath).href)});`;
+  const childEnv = { ...process.env };
+  delete childEnv.NODE_TEST_CONTEXT;
+  const result = spawnSync(process.execPath, [
+    '--experimental-strip-types', '--import', `data:text/javascript;base64,${Buffer.from(registration).toString('base64')}`,
+    '--test', '--test-name-pattern', '^client1/2/3 protect saved v4', 'tests/grammar.test.mjs',
+  ], { encoding: 'utf8', timeout: 15000, env: childEnv });
+  assert.equal(result.error, undefined);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.doesNotMatch(result.stdout + result.stderr, /Cannot read properties of undefined|asynchronous activity/);
+  assert.match(result.stdout, /client1\/2\/3 protect saved v4/);
+});
 
 test('seven stored lesson positions map to the existing five visible phases', () => {
   const labels = ['살펴보기', '이해하기', '연습 1', '연습 2', '연습 3', '써 보기', '정리하기'];
@@ -84,16 +127,6 @@ test('AI feedback is green only when both judgments confirm, and uncertainty rem
   }
 });
 
-await build({ entryPoints: ['app/api/state/restore/route.ts', 'app/api/grammar-feedback/route.ts', 'app/api/state/route.ts'], outdir: 'work/grammar-tests/routes', entryNames: '[dir]/[name]', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent', plugins: [{ name: 'test-boundaries', setup(b) {
-  b.onResolve({ filter: /^(cloudflare:workers|@\/app\/chatgpt-auth|@\/db\/store)$/ }, a => ({ path: a.path, namespace: 'test' }));
-  b.onLoad({ filter: /.*/, namespace: 'test' }, a => ({ loader: 'js', contents: a.path === 'cloudflare:workers' ? 'export const env=globalThis.grammarRuntime.env' : a.path.endsWith('chatgpt-auth') ? 'export const getChatGPTUser=async()=>globalThis.grammarRuntime.user' : 'export const database=()=>globalThis.grammarRuntime.db' }));
-} }] });
-globalThis.grammarRuntime = { db: null, env: { google_api: 'test-only', google_ai_enabled: 'true', grammar_enabled: 'true' }, user: { userId: 'owner' } };
-const feedbackRoute = await import('../work/grammar-tests/routes/grammar-feedback/route.mjs');
-const stateRoute = await import('../work/grammar-tests/routes/state/route.mjs');
-const fetchOriginal = globalThis.fetch;
-after(() => { globalThis.fetch = fetchOriginal; delete globalThis.grammarRuntime; });
-const request = (body, origin = 'https://study.example') => new Request('https://study.example/api/grammar-feedback', { method: 'POST', headers: { 'content-type': 'application/json', origin }, body: JSON.stringify(body) });
 test('all 15 catalog labels have six contextual authored exercises and a unique answer', () => {
   assert.deepEqual(new Set(GRAMMAR_LESSONS.map(l => l.pos)), new Set(words.map(w => w.pos)));
   assert.deepEqual(new Set(GRAMMAR_LESSONS.map(l => l.id)), new Set(model.LESSON_IDS));
@@ -495,12 +528,6 @@ test('old chunk restore cannot drop v2 grammar; modern restore remains atomic an
   failAt = -1; await jobs.commitRestoreJob(db, 'owner', good.id, 2); assert.deepEqual(JSON.parse(readGrammar()[0].document), v2Completed('verb'));
 });
 
-const v3 = await import('../work/grammar-tests/content-v3.mjs');
-await build({entryPoints:['lib/grammar/content-v4.ts'],outfile:'work/grammar-tests/content-v4.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
-const v4 = await import('../work/grammar-tests/content-v4.mjs');
-const compat = await import('../work/grammar-tests/compatibility.mjs');
-const { assembledOrder } = await import('../work/grammar-tests/content.mjs');
-const restoreRoute = await import('../work/grammar-tests/routes/state/restore/route.mjs');
 function v3Completed(id='noun') {
  const p=v2Completed(id);p.contentVersion=3;p.questionIds=v3.PRACTICE_LESSONS_V3[id].questions.map(q=>q.id);
  p.answers=Object.fromEntries(v3.PRACTICE_LESSONS_V3[id].questions.map((q,i)=>[`q${i+1}`,model.recordAnswer(undefined,q.answer)]));
