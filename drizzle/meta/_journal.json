@@ -29,6 +29,13 @@
       "when": 1790253007227,
       "tag": "0003_bright_zarda",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1791029207259,
+      "tag": "0004_card_automation_nonces",
+      "breakpoints": true
     }
   ]
 }

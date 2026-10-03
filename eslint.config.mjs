@@ -16,6 +16,7 @@ const eslintConfig = defineConfig([
     "dist/**",
     // Reproducible EN_Card bundle; authored source is checked in that repository.
     "public/card-studio/**",
+    "lib/server/card-automation.generated.mjs",
     "work/**",
     "outputs/**",
     "coverage/**",

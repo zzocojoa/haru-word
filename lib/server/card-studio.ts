@@ -11,6 +11,8 @@ const UUID = '[a-fA-F0-9-]{36}';
 const DELIVERY = '[A-Za-z0-9_:-]{1,200}';
 const routes: Record<string, RegExp[]> = {
   GET: [
+    /^\/automation(?:\/runs)?$/,
+    new RegExp(`^/api/cards/${UUID}$`),
     /^\/api\/(boot|state|export)$/,
     /^\/api\/page\/(cards|assets|schedules|deliveries)$/,
     new RegExp(`^/api/deliveries/${DELIVERY}/attempts$`),
@@ -18,12 +20,13 @@ const routes: Record<string, RegExp[]> = {
     /^\/(images|original)\/[a-f0-9]{64}(\.png)?$/,
   ],
   POST: [
+    /^\/automation\/(start|pause)$/,
     /^\/api\/(cards|schedules|import|dry-run|disconnect|connection\/retry|studio\/kakao)$/,
     new RegExp(`^/api/cards/${UUID}/(image|review)$`),
     new RegExp(`^/api/schedules/${UUID}/(pause|cancel|resume|recovery)$`),
     new RegExp(`^/api/deliveries/${DELIVERY}/resolve$`),
   ],
-  PUT: [new RegExp(`^/api/(cards|schedules)/${UUID}$`)],
+  PUT: [/^\/automation$/, new RegExp(`^/api/(cards|schedules)/${UUID}$`)],
   DELETE: [new RegExp(`^/api/assets/${UUID}$`)],
 };
 export function isCardStudioOwner(config: CardStudioConfig, user: StudioUser): boolean {
@@ -89,11 +92,12 @@ export async function proxyCardStudio(request: Request, config: CardStudioConfig
       return failure(415, 'CONTENT_TYPE', '요청 형식이 올바르지 않습니다.');
     headers.set('Content-Type', contentType);
     if (image) headers.set('X-Card-Revision', request.headers.get('X-Card-Revision') ?? '');
-    try { body = await boundedBody(request, 1_048_576); }
+    try { body = await boundedBody(request, path.startsWith('/automation') ? 4096 : 1_048_576); }
     catch (error) { return failure(error instanceof RangeError ? 413 : 400, 'BODY', '요청 크기나 전송 상태를 확인해 주세요.'); }
   }
   try {
-    const response = await transport(`${origin.origin}${path}${url.search}`, {
+    const upstreamPath = path.startsWith('/automation') ? `/api${path}` : path;
+    const response = await transport(`${origin.origin}${upstreamPath}${url.search}`, {
       method: request.method, headers, ...(body ? { body: body as BodyInit } : {}),
       redirect: 'manual', signal: AbortSignal.any([request.signal, AbortSignal.timeout(30_000)]),
     });

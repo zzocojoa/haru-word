@@ -1,5 +1,21 @@
 # 영어 카드 작업실 통합
 
+## AI 자동 제작 연결 — 2026-10-03 로컬 구현 완료
+
+`codex/ai-card-automation`에서 EN_Card의 AI 자동 제작 화면과 API를 연결했다. 카드 만들기에서 주제·기준 표현·난이도·종류·기간·시각을 저장하고 시작·일시정지·날짜별 검토/발송 결과·PNG 다운로드·최신 카드 편집을 이용한다. Gemini 작성과 Groq 검토는 이 Site의 기존 `google_api`·`groq_api` Secret으로 수행하고, 1080 PNG·진행 상태·예약은 EN_Card의 비공개 SQLite DO가 담당한다. 기존 학습 AI 경로와 학습 기록 스키마는 유지한다.
+
+- `lib/server/card-studio.ts`: 기존 소유자·Origin 확인 아래 automation 네 경로와 최신 카드 조회를 허용한다. 자동화 설정 본문은 4KiB로 제한한다.
+- `tests/card-studio.test.mjs`: 본인 접근, 경로/메서드, 위조 출처, 본문 제한 회귀를 추가했다. 관련 11개와 전체 테스트·타입·빌드를 통과했다.
+- `public/card-studio`: EN_Card의 내보내기 명령으로 생성한 129개 파일과 SHA256 명세다. 원본 EN_Card는 전체 Chromium38개·새 자동화 흐름 WebKit도 통과했다. 모의 AI/발송이며 실제 iPhone·실제 AI·카카오 시험은 아니다.
+
+API 키를 새 Worker에 복사하거나 다시 등록하지 않는다. `app/api/card-automation/route.ts`는 기존 bridge/owner에서 별도 용도로 파생한 키의 HMAC 서명·60초 시각·5초/64KiB 본문을 검증한다. `drizzle/0004_card_automation_nonces.sql`의 별도 테이블에서 nonce를 원자적으로 소비한 요청만 AI를 호출하며 기존 학습 테이블은 바꾸지 않는다. 상태 조회는 키·테이블 준비 확인만 하고 AI를 호출하지 않는다. 서버 생성 번들은 `lib/server/card-automation.generated.*`이며 공개 정적 자산에 포함하지 않는다.
+
+게시 순서는 EN_Card D1 백업·0014 적용 → 비공개 DO off → 발송 Worker → 주 Worker → 이 Site의0004·서버/화면 게시다. 기본 자동화는 off이며 기존 Site 환경·소유자·브리지 Secret·접근 정책을 유지한다. 사용자가 키 등록을 확인했고 Sites 환경 revision59에서 두 Secret 이름을 확인했다. 실제 키의 무료 계정 연결·제품 전체 원격 검증은 별도로 확인한다. 상세 절차는 EN_Card `docs/AI_CARD_AUTOMATION_IMPLEMENTATION.md`에 있다.
+
+후속 검증: 생성 번들·proxy15개, 타입 검사 통과. EN_Card 최종relay16개는 서명/만료/본문 지연·중단, 동시 nonce, DB 실패·마이그레이션 누락을 포함한다. 실제 제공사·카카오 호출은 없다. 중복 지적과 운영 준비 확인을 `review` 후 수정했다.
+
+아래 v104 기록은 기존 수동 제작 기능의 당시 검증이며 새 자동 제작의 운영 검증을 뜻하지 않는다.
+
 2026-10-02 / 운영 v104·GitHub 기능 병합·본인 예약 발송/수신·iPhone Safari PNG 저장 확인 완료
 
 기존 하루단어 로그인으로 본인만 `/cards`에서 카드 제작·PNG 저장·카카오 예약을 사용한다. 학습 화면에 영어 카드 버튼을 추가하며 이동 전 학습·문법 작성 보호를 따른다. 다른 ChatGPT 계정에는 카드 API와 작업실을 허용하지 않는다.
