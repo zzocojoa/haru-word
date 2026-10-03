@@ -16,6 +16,7 @@ Node.js 22.13 이상과 기존 npm lockfile을 사용한다. 새 clone에는 로
 npm run install:ci
 npm test
 npm run typecheck
+npm run check:grammar-review
 npm run lint
 npm run build
 ```

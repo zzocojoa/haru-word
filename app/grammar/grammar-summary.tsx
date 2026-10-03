@@ -4,7 +4,7 @@ import { answerCorrect, firstAnswerLabel, type GrammarLesson, type GrammarQuesti
 import { QUESTION_KEYS, type GrammarProgress } from '@/lib/grammar/model';
 import { CHECK_TEXT } from './grammar-presentation';
 import { FeedbackAttribution } from '../feedback-attribution';
-import { practiceForVersion, legacyNowNote } from '@/lib/grammar/content-v3';
+import { practiceForVersion, legacyNowNote, legacyContentNote } from '@/lib/grammar/content-v4';
 import { grammarReviewStatus, questionsFor } from '@/lib/grammar/practice';
 
 type Props = {
@@ -31,6 +31,7 @@ export function GrammarSummary({ lesson, progress, dirty, error, canSave, date, 
     {legacyNowNote(lesson.id,progress.contentVersion,false,2)&&<p className="small-note">{legacyNowNote(lesson.id,progress.contentVersion,false,2)}</p>}
     <ResultList questions={questionsFor(lesson.id, progress)} answers={progress.answers} title="처음 연습" />
     {progress.review?.completedAt && <ResultList questions={questionsFor(lesson.id, progress, true)} answers={progress.review.answers} title={progress.review.mode === 'extra' ? '최근 추가 연습' : '최근 다시 확인'} />}
+    {progress.review?.completedAt && legacyContentNote(lesson.id,progress.review.contentVersion,true,2,progress.review.setId) && <p className="small-note">{legacyContentNote(lesson.id,progress.review.contentVersion,true,2,progress.review.setId)}</p>}
     <div className="grammar-example"><small>내 문장</small><p lang="en">{progress.sentence}</p><small>자기 점검 · {progress.check && CHECK_TEXT[progress.check]}</small></div>
     {progress.feedback && <FeedbackAttribution feedback={progress.feedback} />}
     <p className="grammar-review-recommendation">{grammarReviewStatus(lesson.id, progress, date).text || '원할 때 다른 문맥으로 확인해 보세요.'}</p>

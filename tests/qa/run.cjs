@@ -31,7 +31,7 @@ if (process.argv.includes('--list')) { console.log(cases.map(args => args.join('
     await waitForWorker();
     const name = args.join('-'), started = Date.now();
     const { code, timedOut, interrupted } = await runCase([path.join('tests', args[0]), ...args.slice(1)], {
-      logPath: path.join(out, name + '.log'), timeoutMs: group === 'performance' || args[0] === 'grammar-v2-qa.cjs' ? 600_000 : 180_000,
+      logPath: path.join(out, name + '.log'), timeoutMs: group === 'performance' || /^grammar-v[234]-qa\.cjs$/.test(args[0]) ? 600_000 : 180_000,
     });
     results.push({ name, code, timedOut, ...(interrupted ? { interrupted: true } : {}), durationMs: Date.now() - started });
     console.log(`${code === 0 && !timedOut ? 'PASS' : 'FAIL'} ${name}`);

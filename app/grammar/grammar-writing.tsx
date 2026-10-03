@@ -2,18 +2,15 @@
 import { Check, Sparkles } from 'lucide-react';
 import type { GrammarLesson } from '@/lib/grammar/content';
 import type { GrammarProgress } from '@/lib/grammar/model';
-import { GRAMMAR_TEXT, type SentenceFeedback } from '@/lib/sentence-feedback';
-import { CHECK_TEXT, SELF_CHECKS, grammarFeedbackTone } from './grammar-presentation';
+import type { SentenceFeedback } from '@/lib/sentence-feedback';
+import { CHECK_TEXT, SELF_CHECKS } from './grammar-presentation';
 import type { FeedbackIssue } from '@/lib/feedback-issue';
 import { FeedbackIssueNotice } from '../feedback-issue-notice';
 import { AiUseNotice } from '../ai-use-notice';
-import { FeedbackAttribution } from '../feedback-attribution';
+import { FeedbackDetail } from '../feedback-detail';
 import { frameSentence } from '@/lib/grammar/content-v2';
-import { practiceForVersion } from '@/lib/grammar/content-v3';
+import { practiceForVersion } from '@/lib/grammar/content-v4';
 import { Speak } from '../ui';
-import { SentenceStructureView } from '../sentence-structure';
-import { feedbackSafetyIssue } from '@/lib/feedback-safety';
-import { FeedbackSafetyNotice } from '../feedback-safety-notice';
 
 type Props = {
   lesson: GrammarLesson;
@@ -47,7 +44,7 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
     </div>
     <div className="grammar-ai-action">
       <button className="secondary-button" disabled={aiPending || !sentence.trim() || !canSave} onClick={onAi}>
-        <Sparkles size={18} aria-hidden="true" />{aiPending ? '문장을 점검하고 있어요' : 'AI로 문장 점검'}
+        <Sparkles size={18} aria-hidden="true" />{aiPending ? '참고 의견을 요청하고 있어요' : 'AI 참고 의견 요청'}
       </button>
       <AiUseNotice grammar />
     </div>
@@ -67,17 +64,8 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
 }
 
 function Feedback({ feedback, sentence, onSentence }: { feedback: SentenceFeedback; sentence: string; onSentence: Props['onSentence'] }) {
-  const safetyIssue = feedbackSafetyIssue(feedback);
-  if (safetyIssue) return <div className="grammar-feedback"><FeedbackSafetyNotice reason={safetyIssue} /></div>;
-  const { meaningUsage, grammar, explanation, correctedSentence } = feedback;
-  const meaningLabel = meaningUsage === 'appropriate' ? '목표 문법에 맞아요' : meaningUsage === 'needs_work' ? '목표 문법을 확인해요' : '목표 문법 판단이 어려워요';
-  return <div className="grammar-feedback" data-tone={grammarFeedbackTone(feedback)}>
-    <h3>AI 의견</h3><p>{meaningLabel} · {GRAMMAR_TEXT[grammar]}</p><p>{explanation}</p>
-    <FeedbackAttribution feedback={feedback} />
-    {correctedSentence && <>
-      <p className="small-note">AI 교정 제안</p><p lang="en">{correctedSentence}</p>
-      {correctedSentence !== sentence && <button className="secondary-button" onClick={() => onSentence(correctedSentence)}>수정안 사용하기</button>}
-    </>}
-    {(correctedSentence || feedback.structure) && <SentenceStructureView structure={feedback.structure} />}
+  return <div className="grammar-feedback" data-tone="neutral">
+    <FeedbackDetail feedback={feedback} grammarTarget suggestionAction={feedback.correctedSentence && feedback.correctedSentence !== sentence &&
+      <button className="secondary-button" onClick={() => onSentence(feedback.correctedSentence)}>AI 제안을 내 문장에 적용</button>}/>
   </div>;
 }

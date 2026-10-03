@@ -98,7 +98,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     await targetRows.nth(0).click();
     let detail = first.locator('.record-card:visible');
     for (const text of ['처음 표시', '영어→뜻', '뜻→영어', '내 문장', '말하기', '보완점', '다음 할 일', '보존할 보완점 0']) assert.ok((await detail.innerText()).includes(text));
-    await detail.getByText('저장한 AI 교정 의견', { exact: true }).click();
+    await detail.getByText('저장한 AI 참고 의견', { exact: true }).click();
     assert.ok((await detail.innerText()).includes('저장한 교정 설명'));
     await targetRows.nth(1).click();
     assert.equal(await first.locator('.record-card:visible').count(), 1);

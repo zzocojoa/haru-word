@@ -15,22 +15,22 @@ export function legacyGrammarDocument(p: GrammarProgress): GrammarProgress | und
     ...(review ? { review: { index: review.index, answers: review.answers, hints: review.hints, order: review.order, completedAt: review.completedAt } } : {}),
   };
 }
-export type GrammarClientVersion=1|2|3;
-export const GRAMMAR_CLIENT_HEADERS={'X-Study-Grammar':'3'};
+export type GrammarClientVersion=1|2|3|4;
+export const GRAMMAR_CLIENT_HEADERS={'X-Study-Grammar':'4'};
 export function grammarClientVersion(value:string|null|undefined):GrammarClientVersion {
-  return value==='3'?3:value==='2'?2:1;
+  return value==='4'?4:value==='3'?3:value==='2'?2:1;
 }
 export function requiredGrammarVersion(p:GrammarProgress):GrammarClientVersion {
-  return p.contentVersion===3||p.review?.contentVersion===3?3:hasModernGrammar(p)?2:1;
+  return Math.max(p.contentVersion??1,p.review?.contentVersion??1,hasModernGrammar(p)?2:1) as GrammarClientVersion;
 }
 export function grammarUnsupported(p:GrammarProgress,supported:GrammarClientVersion) {
   return requiredGrammarVersion(p)>supported;
 }
 export function grammarDocumentForClient(p:GrammarProgress,supported:GrammarClientVersion):GrammarProgress|undefined {
-  if(supported===3)return p;
+  if(supported===4)return p;
   if(supported===1)return legacyGrammarDocument(p);
-  if(p.contentVersion===3)return undefined;
-  if(p.review?.contentVersion!==3)return p;
+  if((p.contentVersion??1)>supported)return undefined;
+  if((p.review?.contentVersion??1)<=supported)return p;
   // Keep original first answers and schedule; do not recalculate the result of
   // a hidden newer review against this client's older questions.
   const {review: omitted,...base}=p;

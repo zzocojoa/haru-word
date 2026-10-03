@@ -74,7 +74,7 @@ export const SessionRecords = memo(function SessionRecords({
         </dl>
         {r.aiFeedback && (
           <details className="notes-details">
-            <summary>저장한 AI 교정 의견</summary>
+            <summary>저장한 AI 참고 의견</summary>
             <FeedbackDetail feedback={r.aiFeedback} />
           </details>
         )}

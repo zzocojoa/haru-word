@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { build } from 'esbuild';
-const report=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-02-annotated.json','utf8'));
+const report=JSON.parse(readFileSync('tests/fixtures/feedback-safety-replay.json','utf8'));
 const actual=(id,provider)=>structuredClone(report.rows.find(r=>r.caseId===id&&r.provider===provider).feedback);
 const word=JSON.parse(readFileSync('data/words.json','utf8')).find(w=>w.word==='arrive'&&w.pos==='v.');
 const sid='01111111-1111-4111-8111-111111111111';

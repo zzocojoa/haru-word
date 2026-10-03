@@ -129,7 +129,7 @@ export async function commitRestoreJob(db: D1Database, user: string, id: string,
         : { sessions: {}, grammar: grammarStateSchema.parse(JSON.parse(p.document)) })))
         throw new RestoreError(FEEDBACK_UPGRADE_MESSAGE, 426, 'feedback_client_outdated');
     }
-  if (grammarVersion<3 && manifest.parts.some(p => p.kind === 'grammar')) {
+  if (grammarVersion<4 && manifest.parts.some(p => p.kind === 'grammar')) {
     const parts = await db.prepare("SELECT document FROM restore_parts WHERE job_id=? AND kind='grammar'").bind(id).all<{ document: string }>();
     if (await hasSavedUnsupportedGrammar(db, user,grammarVersion) || parts.results.some(part => Object.values(grammarStateSchema.parse(JSON.parse(part.document))).some(p=>grammarUnsupported(p,grammarVersion))))
       throw new RestoreError(GRAMMAR_UPGRADE_MESSAGE, 426, 'grammar_client_outdated');

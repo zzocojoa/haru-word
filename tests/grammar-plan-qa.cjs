@@ -72,7 +72,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         await page.locator('.grammar-group > summary').filter({ hasText: '설명을 더하는 말' }).click();
         await page.locator('.grammar-tile').filter({ hasText: /^adj\./ }).click();
         await page.route('**/api/grammar-feedback', async route => { calls++; const sentence = route.request().postDataJSON().sentence; await hold; await route.fulfill({ json: { feedback: { original: sentence, correctedSentence: sentence, explanation: '합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {}); });
-        await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).evaluate(button => { button.click(); button.click(); });
+        await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).evaluate(button => { button.click(); button.click(); });
         await until(() => calls === 1, 'AI called once');
         await page.getByRole('tab', { name: destination, exact: true }).click(); release();
         await page.waitForTimeout(1200);
@@ -92,13 +92,13 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
           await route.fulfill({ json: { feedback: calls === 1 ? { ...feedback, original: 'Another sentence.' } : calls === 2 ? {} : feedback } });
         });
         for (let attempt = 1; attempt <= 2; attempt++) {
-          await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+          await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
           await page.locator('.ai-feedback-issue[role=alert]').waitFor();
           assert.equal(await sentence.inputValue(), original);
           assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
           assert.equal(await page.getByRole('radio', { name: '뜻과 형태를 확인했어요', exact: true }).isChecked(), true);
         }
-        await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+        await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
         await page.getByRole('heading', { name: 'AI 의견', exact: true }).waitFor();
         assert.equal(calls, 3); assert.equal(await sentence.inputValue(), original, 'AI never replaces text automatically');
         await page.getByRole('button', { name: '수정안 사용하기', exact: true }).click();

@@ -1,24 +1,26 @@
 import type { ReactNode } from 'react';
-import { GRAMMAR_TEXT, MEANING_USAGE_TEXT, type SentenceFeedback } from '@/lib/sentence-feedback';
+import type { SentenceFeedback } from '@/lib/sentence-feedback';
 import { FeedbackAttribution } from './feedback-attribution';
-import { SentenceStructureView } from './sentence-structure';
 import { feedbackSafetyIssue } from '@/lib/feedback-safety';
 import { FeedbackSafetyNotice } from './feedback-safety-notice';
 
 // Read-only output: history must not depend on request hooks or write commands.
-export function FeedbackDetail({ feedback, suggestionAction }: {
+const OPINION_TEXT = { appropriate: '수정 제안 없음', natural: '수정 제안 없음', needs_work: '확인 필요', uncertain: '판단 어려움' };
+
+export function FeedbackDetail({ feedback, suggestionAction, grammarTarget = false }: {
   feedback: SentenceFeedback;
   suggestionAction?: ReactNode;
+  grammarTarget?: boolean;
 }) {
   const safetyIssue = feedbackSafetyIssue(feedback);
   if (safetyIssue) return <FeedbackSafetyNotice reason={safetyIssue} />;
   return <div className="ai-feedback-result">
-    <div className="feedback-assessments"><span>{MEANING_USAGE_TEXT[feedback.meaningUsage]}</span><span>{GRAMMAR_TEXT[feedback.grammar]}</span></div>
-    <p className="small-note">검토한 원문</p><p lang="en">{feedback.original}</p>
+    <p className="small-note"><strong>AI 참고 의견 · 정답 판정이 아닙니다</strong></p>
+    <div className="feedback-assessments"><span>{grammarTarget ? '수업 목표' : '뜻·용법'} · {OPINION_TEXT[feedback.meaningUsage]}</span><span>문법 · {OPINION_TEXT[feedback.grammar]}</span></div>
+    <p className="small-note">AI에 보낸 문장</p><p lang="en">{feedback.original}</p>
     {feedback.correctedSentence && <><p className="small-note">AI 교정 제안</p><p className="corrected-sentence" lang="en">{feedback.correctedSentence}</p></>}
     {suggestionAction}
     <p>{feedback.explanation}</p>
     <FeedbackAttribution feedback={feedback} />
-    {(feedback.correctedSentence || feedback.structure) && <SentenceStructureView structure={feedback.structure} />}
   </div>;
 }

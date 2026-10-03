@@ -4,7 +4,7 @@ import { database } from '@/db/store';
 import { recordFeedbackAttempt } from '@/db/feedback';
 import { today } from '@/lib/learning';
 import { LESSON_MAP } from '@/lib/grammar/content';
-import { lessonForVersion } from '@/lib/grammar/content-v3';
+import { lessonForVersion } from '@/lib/grammar/content-v4';
 import { grammarClientVersion, grammarUnsupported } from '@/lib/grammar/compatibility';
 import { grammarProgressSchema } from '@/lib/grammar/model';
 import { generateGrammarFeedback, grammarFeedbackRequestSchema } from '@/lib/grammar/feedback';

@@ -1,5 +1,9 @@
 # 하루단어 운영 안내
 
+AI 결과는 정답 판정과 구분해 참고 의견으로 표시하며 AI 구조도는 숨깁니다. [AI 참고 의견 정책](AI_REFERENCE_OPINIONS.md)을 참조하세요.
+
+15개 수업의 교재 v4·검토 원장·정적 예문 분석·426 보호는 [문법 교재 v4 검토 보고서](GRAMMAR_REVIEWED_V4.md)를 참조하세요. 장애 시 `grammar_practice_v4_enabled=false`로 신규 생성만 중단하고 v4 읽기·저장·백업은 유지합니다. 아래 평가·배포 기록은 당시 상태이며 새 실제 AI 호출은 없습니다.
+
 ## 뜻·문법 독립 판정 후보
 
 `feedback_coherent_enabled`의 기본은 비활성입니다. [후보 계약·검증·호환 롤백](COHERENT_FEEDBACK.md)을 참조하세요. 기존 저장/백업 형식과 Google 우선·Groq 대체를 유지하며, 새 실제 평가 승인 및 통과 전 활성화하지 않습니다.

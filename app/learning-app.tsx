@@ -40,7 +40,7 @@ import { useTabNavigation } from './learning/use-tab-navigation';
 import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
-export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; cardStudioEnabled?: boolean }) {
+export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
 function LearningScreens({
@@ -48,12 +48,14 @@ function LearningScreens({
   grammarEnabled = false,
   grammarPracticeEnabled = false,
   grammarV3Enabled = false,
+  grammarV4Enabled = false,
   cardStudioEnabled = false,
 }: {
   initialServerTime: number;
   grammarEnabled?: boolean;
   grammarPracticeEnabled?: boolean;
   grammarV3Enabled?: boolean;
+  grammarV4Enabled?: boolean;
   cardStudioEnabled?: boolean;
 }) {
   const router = useRouter();
@@ -414,6 +416,7 @@ function LearningScreens({
                 grammarEnabled={grammarEnabled}
                 grammarPracticeEnabled={grammarPracticeEnabled}
                 grammarV3Enabled={grammarV3Enabled}
+                grammarV4Enabled={grammarV4Enabled}
                 persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, saved: signedIn && !loading && !saving && !unsaved && !conflict, registerLeave: registerGrammarLeave }}
                 activityDate={clock.currentDate}
                 state={state}

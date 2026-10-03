@@ -496,6 +496,8 @@ test('old chunk restore cannot drop v2 grammar; modern restore remains atomic an
 });
 
 const v3 = await import('../work/grammar-tests/content-v3.mjs');
+await build({entryPoints:['lib/grammar/content-v4.ts'],outfile:'work/grammar-tests/content-v4.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
+const v4 = await import('../work/grammar-tests/content-v4.mjs');
 const compat = await import('../work/grammar-tests/compatibility.mjs');
 const { assembledOrder } = await import('../work/grammar-tests/content.mjs');
 const restoreRoute = await import('../work/grammar-tests/routes/state/restore/route.mjs');
@@ -584,6 +586,89 @@ test('chunk restore protects v3 from old deletion and preserves atomic revision,
  failAt=-1;const result=await jobs.commitRestoreJob(db,'owner',job.id,3);assert.deepEqual(JSON.parse(readGrammar()[0].document),v3Completed('verb'));
  assert.deepEqual(await jobs.commitRestoreJob(db,'owner',job.id,3),result);
  const next=await prepareRestore({...EMPTY,grammar:{}},1);await assert.rejects(jobs.commitRestoreJob(db,'owner',next.id,2),e=>e.status===426);
+});
+
+function v4Completed(id='noun') {
+ const p=v3Completed(id);p.contentVersion=4;p.questionIds=v4.PRACTICE_LESSONS_V4[id].questions.map(q=>q.id);
+ p.answers=Object.fromEntries(v4.PRACTICE_LESSONS_V4[id].questions.map((q,i)=>[`q${i+1}`,model.recordAnswer(undefined,q.answer)]));return p;
+}
+test('v4 questions accept authored alternatives, reject permutations and preserve all earlier banks',()=>{
+ const before=JSON.stringify(v3.PRACTICE_LESSONS_V3),seen=new Set();
+ for(const [id,l]of Object.entries(v4.PRACTICE_LESSONS_V4))for(const q of [l.observation,...l.questions,...l.reviews.a,...l.reviews.b]){
+  assert.match(q.id,new RegExp(`^${id}:4:`));assert.ok(!seen.has(q.id));seen.add(q.id);
+  assert.equal(answerCorrect(q,q.answer),true);
+  if(q.kind==='choice'){assert.equal(q.options.filter(o=>answerCorrect(q,o)).length,1);for(const option of q.options.filter(o=>o!==q.answer))assert.ok(q.wrong[option]);continue;}
+  for(const text of [q.answer,...(q.alternatives??[])]){
+   const remaining=q.options.map((t,i)=>({t,i}));
+   const order=text.replace(/[.?!]+$/,'').split(' ').map(token=>{const i=remaining.findIndex(x=>x.t.toLowerCase()===token.toLowerCase());assert.ok(i>=0,q.id);return remaining.splice(i,1)[0].i;});
+   assert.equal(assembledOrder(q,order),text,q.id);assert.equal(answerCorrect(q,text),true);
+  }
+ }
+ assert.equal(seen.size,150);assert.equal(JSON.stringify(v3.PRACTICE_LESSONS_V3),before);
+ const now=v4.PRACTICE_LESSONS_V4.auxiliary.questions[2];
+ assert.equal(answerCorrect(now,'i am now reading'),true);
+ for(const text of ['I am reading now.','Now I am reading.','I am now reading.'])assert.equal(answerCorrect(now,text),true);
+ for(const text of ['I now am reading.','Am I reading now.','Reading I am now.'])assert.equal(answerCorrect(now,text),false);
+ assert.equal(answerCorrect(v4.PRACTICE_LESSONS_V4.adverb.reviews.b[2],'He always is kind.'),true);
+ assert.equal(answerCorrect(v3.PRACTICE_LESSONS_V3.adverb.reviews.b[2],'He always is kind.'),false);
+});
+test('all v4 lessons round trip full/split backup without rewriting first answers or metadata',async()=>{
+ for(const id of model.LESSON_IDS){const p=v4Completed(id),state={...EMPTY,grammar:{[id]:p}};
+  assert.equal(model.grammarStateSchema.safeParse(state.grammar).success,true);
+  assert.equal(model.grammarStateSchema.safeParse({[id]:{...p,contentVersion:3}}).success,false);
+  const a=await analyzeBackup(raw(state));assert.deepEqual(a.parsed.state.grammar,state.grammar);assert.deepEqual(parsePart(a.parts[0],a.manifest.parts[0]),state.grammar);
+ }
+});
+test('mixed version projection and fresh review preserve earlier answers, first attempts and schedules',()=>{
+ for(const original of [completed(),v2Completed(),v3Completed(),v4Completed()]){
+  const before=structuredClone(original),modern=practice.startGrammarReview('noun',original,'2026-09-28',4);
+  assert.deepEqual(modern.answers,original.answers);assert.deepEqual(original,before);assert.equal(modern.review.contentVersion,4);
+  if(original.schedule)assert.deepEqual(modern.schedule,original.schedule);
+  for(const supported of [1,2,3,4]){
+   const projected=compat.grammarDocumentForClient(modern,supported);
+   if((original.contentVersion??1)>supported)assert.equal(projected,undefined);
+   else{assert.deepEqual(projected.answers,original.answers);if(supported<4)assert.equal(projected.review,undefined);else assert.deepEqual(projected,modern);}
+  }
+  for(const version of [2,3,4]){const ongoing=practice.startGrammarReview('noun',original,'2026-09-28',version);assert.deepEqual(practice.startGrammarReview('noun',ongoing,'2026-09-29',4),ongoing);assert.ok(practice.questionsFor('noun',ongoing,true).every(q=>q.id.includes(`:${version}:`)));}
+ }
+ assert.deepEqual(compat.GRAMMAR_CLIENT_HEADERS,{'X-Study-Grammar':'4'});
+});
+test('client1/2/3 protect saved v4 from overwrite and full deletion while unrelated word saves succeed',async()=>{
+ grammarRuntime.user={userId:'owner'};const current=v4Completed();sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(current));
+ const before=readGrammar();
+ for(const version of ['1','2','3']){
+  const state=(await(await stateRoute.GET(new Request('https://study.example/api/state',{headers:{'X-Study-Grammar':version}}))).json()).state;
+  assert.deepEqual(state.grammar,{});assert.equal((await putV({noun:v3Completed()},version)).status,426);
+  for(const grammar of [{},{noun:v3Completed()},{noun:current}])assert.equal((await restoreV({...EMPTY,grammar},version)).status,426);
+ }
+ assert.deepEqual(readGrammar(),before);assert.equal((await putV(undefined,'3')).status,200);assert.deepEqual(readGrammar(),before);
+ assert.equal((await putV({noun:current},'4',0)).status,409);
+ assert.equal((await restoreV({...EMPTY},'3',1)).status,200);assert.deepEqual(readGrammar(),before);
+ assert.equal((await putV({noun:current},'4',2)).status,200);
+});
+test('split v4 restore remains atomic across rejection/failure/retry/conflict and repeated receipt',async()=>{
+ const current=v4Completed();sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(current));
+ const job=await prepareRestore({...EMPTY,grammar:{verb:v4Completed('verb')}}),before=readGrammar();
+ for(const version of [1,2,3])await assert.rejects(jobs.commitRestoreJob(db,'owner',job.id,version),e=>e.status===426);
+ assert.deepEqual(readGrammar(),before);failAt=4;await assert.rejects(jobs.commitRestoreJob(db,'owner',job.id,4));assert.deepEqual(readGrammar(),before);
+ failAt=-1;const result=await jobs.commitRestoreJob(db,'owner',job.id,4);assert.deepEqual(JSON.parse(readGrammar()[0].document),v4Completed('verb'));assert.deepEqual(await jobs.commitRestoreJob(db,'owner',job.id,4),result);
+ const stale=await prepareRestore({...EMPTY,grammar:{}},1);await putV(undefined,'4',1);await assert.rejects(jobs.commitRestoreJob(db,'owner',stale.id,4),e=>e.status===409);
+});
+test('old grammar AI requests for v4 are rejected before accounting/provider calls',async()=>{
+ grammarRuntime.user={userId:'owner'};const p={...v4Completed(),stage:5,completedAt:undefined,schedule:undefined};sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));
+ let calls=0;globalThis.fetch=async()=>{calls++;throw Error('not called');};
+ for(const version of ['1','2','3']){const req=request({lessonId:'noun',sentence:p.sentence});req.headers.set('X-Study-Grammar',version);assert.equal((await feedbackRoute.POST(req)).status,426);}
+ assert.equal(calls,0);assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM ai_daily_usage').get().n,0);
+});
+test('incoming v4 in an empty account requires header4; header4 AI uses the ordinary mocked provider contract',async()=>{
+ grammarRuntime.user={userId:'owner'};const p={...v4Completed(),stage:5,completedAt:undefined,schedule:undefined};
+ for(const version of ['1','2','3']){assert.equal((await putV({noun:p},version)).status,426);assert.equal((await restoreV({...EMPTY,grammar:{noun:p}},version)).status,426);}
+ assert.equal(readGrammar().length,0);assert.equal((await putV({noun:p},'4')).status,200);
+ const prior=globalThis.fetch;let calls=0;
+ try{globalThis.fetch=async()=>{calls++;return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({meaningUsage:'appropriate',grammar:'natural',correctedSentence:p.sentence,explanation:'학습용 모의 응답'})}]}}]});};
+  const req=request({lessonId:'noun',sentence:p.sentence});req.headers.set('X-Study-Grammar','4');
+  assert.equal((await feedbackRoute.POST(req)).status,200);assert.equal(calls,1);assert.deepEqual(JSON.parse(readGrammar()[0].document),JSON.parse(JSON.stringify(p)));
+ }finally{globalThis.fetch=prior;}
 });
 test('v3 AI capability rejection happens before accounting or provider invocation',async()=>{
  grammarRuntime.user={userId:'owner'};const p={...v3Completed(),stage:5},body={lessonId:'noun',sentence:p.sentence};sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));

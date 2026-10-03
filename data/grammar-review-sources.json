@@ -1,0 +1,263 @@
+{
+  "sources": {
+    "classes": {
+      "title": "Cambridge · Word classes and phrase classes",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/phrase",
+      "summary": "품사와 구의 구분, 같은 철자의 여러 품사, 구 내부의 수식 관계를 대조했어요."
+    },
+    "verbs": {
+      "title": "Cambridge · Verbs: types",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/verbs-types?q=linking+verbs",
+      "summary": "행동·상태 동사, 연결 동사의 보어와 be/do/have의 본동사·조동사 쓰임을 대조했어요."
+    },
+    "forms": {
+      "title": "Cambridge · Verbs: basic forms",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/basic",
+      "summary": "동사원형·3인칭 단수 현재형·과거형·분사 형태를 구분했어요."
+    },
+    "pronouns": {
+      "title": "Cambridge · Personal pronouns",
+      "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/pronouns-personal-i-me-you-he-it-etc",
+      "summary": "주격·목적격과 전치사 뒤의 형태, 앞선 사람·사물을 받는 관계를 대조했어요."
+    },
+    "adjectives": {
+      "title": "Cambridge · Adjective phrases: position",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/adjective-phrases-position",
+      "summary": "명사 앞의 형용사와 연결 동사 뒤의 형용사구를 구분했어요."
+    },
+    "adverbs": {
+      "title": "Cambridge · Adverbs: position",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adverbs-and-adverb-phrases-position",
+      "summary": "방식·빈도·정도의 위치와 be를 강조할 때의 위치 예외를 대조했어요."
+    },
+    "demonstratives": {
+      "title": "Cambridge · This, that, these, those",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/this-that-these-those",
+      "summary": "단수·복수와 거리, 한정사·대명사 쓰임을 문맥에 맞게 구분했어요."
+    },
+    "determiners": {
+      "title": "Cambridge · Determiners: position and order",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/modifiers",
+      "summary": "명사 앞의 위치와 my/the를 겹치지 않는 제약을 대조했어요."
+    },
+    "articles": {
+      "title": "Cambridge · A/an and the",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/the",
+      "summary": "가산 단수와 첫소리, 특정 대상을 다시 가리키는 the, 일반적인 복수 명사의 무관사 쓰임을 대조했어요."
+    },
+    "numbers": {
+      "title": "Cambridge · Numbers",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/number",
+      "summary": "개수와 순서, 명사와의 결합을 구분했어요."
+    },
+    "prepositions": {
+      "title": "Cambridge · Prepositional phrases",
+      "url": "https://dictionary.cambridge.org/de/grammatik/british-grammar/prepositional-phrases",
+      "summary": "전치사와 그 뒤의 보충어를 하나의 구로 보고 동사의 직접목적어와 구분했어요."
+    },
+    "movement": {
+      "title": "Cambridge · At, in and to (movement)",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/at-in-and-to-movement",
+      "summary": "방향의 to와 arrive at/in을 대조했어요."
+    },
+    "conjunctions": {
+      "title": "Cambridge · Conjunctions",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/coordinating-conjunctions",
+      "summary": "단어·구·절의 연결과 추가·대조·이유 관계를 구분했어요."
+    },
+    "reasons": {
+      "title": "Cambridge · Causes, reasons, results and purpose",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conjunctions-causes-reasons-results-and-purpose",
+      "summary": "because 뒤의 이유와 so 뒤의 결과 방향을 대조했어요."
+    },
+    "progressive": {
+      "title": "Cambridge · Present continuous",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-continuous-",
+      "summary": "be와 -ing가 진행형 동사구를 이루는 점을 대조했어요."
+    },
+    "now": {
+      "title": "Cambridge · Now",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/now",
+      "summary": "시간 부사 now의 끝·앞·첫 조동사 뒤 위치를 대조했어요."
+    },
+    "modals": {
+      "title": "Cambridge · Modality: forms",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/modality-forms",
+      "summary": "법조동사 뒤의 원형과 일반 동사와 다른 형태를 대조했어요."
+    },
+    "infinitives": {
+      "title": "Cambridge · Infinitives with and without to",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/infinitives-and-",
+      "summary": "to와 원형, want/need 뒤의 부정사, 목적과 전치사구의 차이를 대조했어요."
+    },
+    "interjections": {
+      "title": "Cambridge · Interjections",
+      "url": "https://dictionary.cambridge.org/hi/व्याकरण/british-grammar/interjections-ouch-hooray",
+      "summary": "독립적인 감정 반응과 문장 뼈대를 구분했어요."
+    },
+    "oops": {
+      "title": "Cambridge · Oops",
+      "url": "https://dictionary.cambridge.org/us/dictionary/english/oops?topic=sounds-used-as-interjections",
+      "summary": "작은 실수에 대한 반응을 확인했어요."
+    },
+    "clauses": {
+      "title": "Cambridge · Clauses and sentences",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-and-sentences",
+      "summary": "주어·동사구·보충어, 여러 절과 문장 경계를 구분했어요."
+    },
+    "imperative": {
+      "title": "Cambridge · Imperative clauses",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/imperative",
+      "summary": "주어가 보통 생략되고 동사원형을 쓰는 명령문과 공손한 please를 대조했어요."
+    },
+    "time": {
+      "title": "Cambridge · At, on and in (time)",
+      "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/at-in-on-time",
+      "summary": "시각의 at과 요일의 on을 구분했어요."
+    }
+  },
+  "examples": {
+    "noun:4:example:1": [
+      "classes",
+      "clauses"
+    ],
+    "noun:4:example:2": [
+      "classes",
+      "clauses"
+    ],
+    "verb:4:example:1": [
+      "verbs",
+      "forms"
+    ],
+    "verb:4:example:2": [
+      "verbs",
+      "forms"
+    ],
+    "pronoun:4:example:1": [
+      "pronouns",
+      "verbs"
+    ],
+    "pronoun:4:example:2": [
+      "pronouns",
+      "verbs"
+    ],
+    "adjective:4:example:1": [
+      "adjectives",
+      "classes",
+      "verbs"
+    ],
+    "adjective:4:example:2": [
+      "adjectives",
+      "classes",
+      "verbs"
+    ],
+    "adverb:4:example:1": [
+      "adverbs",
+      "classes"
+    ],
+    "adverb:4:example:2": [
+      "adverbs",
+      "classes"
+    ],
+    "determiner:4:example:1": [
+      "determiners",
+      "demonstratives",
+      "articles"
+    ],
+    "determiner:4:example:2": [
+      "determiners",
+      "demonstratives",
+      "articles"
+    ],
+    "indefinite-article:4:example:1": [
+      "articles",
+      "forms"
+    ],
+    "indefinite-article:4:example:2": [
+      "articles",
+      "forms"
+    ],
+    "definite-article:4:example:1": [
+      "articles",
+      "verbs",
+      "clauses",
+      "imperative"
+    ],
+    "definite-article:4:example:2": [
+      "articles",
+      "verbs",
+      "clauses",
+      "imperative"
+    ],
+    "number:4:example:1": [
+      "numbers",
+      "determiners"
+    ],
+    "number:4:example:2": [
+      "numbers",
+      "determiners"
+    ],
+    "preposition:4:example:1": [
+      "prepositions",
+      "movement",
+      "verbs",
+      "pronouns",
+      "time"
+    ],
+    "preposition:4:example:2": [
+      "prepositions",
+      "movement",
+      "verbs",
+      "pronouns",
+      "time"
+    ],
+    "conjunction:4:example:1": [
+      "conjunctions",
+      "reasons"
+    ],
+    "conjunction:4:example:2": [
+      "conjunctions",
+      "reasons"
+    ],
+    "auxiliary:4:example:1": [
+      "verbs",
+      "forms",
+      "progressive",
+      "now"
+    ],
+    "auxiliary:4:example:2": [
+      "verbs",
+      "forms",
+      "progressive",
+      "now"
+    ],
+    "modal:4:example:1": [
+      "modals",
+      "verbs"
+    ],
+    "modal:4:example:2": [
+      "modals",
+      "verbs"
+    ],
+    "infinitive:4:example:1": [
+      "infinitives",
+      "movement"
+    ],
+    "infinitive:4:example:2": [
+      "infinitives",
+      "movement"
+    ],
+    "exclamation:4:example:1": [
+      "interjections",
+      "oops",
+      "classes",
+      "clauses"
+    ],
+    "exclamation:4:example:2": [
+      "interjections",
+      "oops",
+      "classes",
+      "clauses"
+    ]
+  }
+}

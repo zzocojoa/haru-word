@@ -10,7 +10,7 @@ const { renderToStaticMarkup } = await import('react-dom/server');
 const { createElement } = await import('react');
 const { FeedbackDetail } = await import('../work/feedback-safety-render/feedback-detail.mjs');
 const { GrammarWriting } = await import('../work/feedback-safety-render/grammar/grammar-writing.mjs');
-const frozen=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-02-annotated.json','utf8'));
+const frozen=JSON.parse(readFileSync('tests/fixtures/feedback-safety-replay.json','utf8'));
 const actual=(id,provider)=>frozen.rows.find(r=>r.caseId===id&&r.provider===provider).feedback;
 const make=(sentence,pairs)=>({ original:sentence,correctedSentence:sentence,meaningUsage:'appropriate',grammar:'natural',explanation:'문장별 참고 설명',model:'gemini-3.1-flash-lite',createdAt:'2026-10-02T00:00:00.000Z',structure:{status:'available',translation:'검사용 해석',parts:pairs.map(([text,role])=>({text,role,explanation:'검사용 설명'})),note:''}});
 
@@ -102,4 +102,22 @@ test('grammar writing withholds badges, free explanation, roles and apply action
   const html=renderToStaticMarkup(createElement(GrammarWriting,{lesson,progress,canSave:true,aiPending:false,aiError:null,onAi:noop,onSentence:noop,onCheck:noop,onChecks:noop,onFrame:noop,onExplain:noop,onComplete:noop}));
   assert.match(html,/AI 설명 확인 필요/);assert.ok(!html.includes(feedback.explanation));assert.ok(!html.includes('자연스러운 문장이에요'));
   assert.ok(!html.includes('sentence-structure-parts'));assert.ok(html.includes(feedback.original));
+});
+
+
+test('word/history and grammar views expose only neutral reference opinions while preserving structure',()=>{
+  const feedback=make('I like music.',[['I','S'],['like','V'],['music.','O']]);
+  const before=JSON.stringify(feedback);
+  for(const meaningUsage of ['appropriate','needs_work','uncertain'])for(const grammar of ['natural','needs_work','uncertain']){
+    const f={...feedback,meaningUsage,grammar};
+    for(const grammarTarget of [false,true]){
+      const html=renderToStaticMarkup(createElement(FeedbackDetail,{feedback:f,grammarTarget}));
+      assert.match(html,/AI 참고 의견 · 정답 판정이 아닙니다/);
+      assert.match(html,/AI에 보낸 문장/);
+      assert.ok(!html.includes('sentence-structure-parts'));assert.ok(!html.includes(f.structure.translation));
+      assert.ok(!html.includes('자연스러운 문장이에요'));assert.ok(!html.includes('data-tone="success"'));
+      assert.ok(html.includes(f.original));assert.ok(html.includes(f.explanation));
+    }
+  }
+  assert.equal(JSON.stringify(feedback),before);
 });

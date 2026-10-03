@@ -26,6 +26,8 @@ module.exports = [
   "grammar-audit-qa.cjs",
   "grammar-v2-qa.cjs",
   "grammar-v3-qa.cjs",
+  "grammar-v4-qa.cjs",
+  "grammar-v4-compat-qa.cjs",
   "grammar-mixed-qa.cjs",
   "grammar-plan-qa.cjs",
   "grammar-ui-qa.cjs",

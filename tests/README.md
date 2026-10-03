@@ -1,5 +1,7 @@
 # 학습 앱 검증
 
+- `grammar-content-review.test.mjs`와 `grammar.test.mjs`는 v4 교재342단위의 원장 무결성·출처 매핑, 정적30분석의 원문 보존, 버전별 정답·혼합 진도·구형426·전체/분할 복원·revision·실패 후 재시도를 검사한다. `grammar-v4-qa.cjs`는15수업·135기본/복습문제·정적분석·읽기·쓰기의 Chromium/WebKit 검사용이다. `grammar-v4-compat-qa.cjs`는 신규 생성 true/false 각각 별도 로컬 Worker에서 실행한다(`QA_NEW_GRAMMAR_VERSION=4` 또는3). false에서도 저장된v4를 읽고 기존3의 첫답·일정을 보존한다. 실제AI 호출은 모의 응답으로 대체한다.
+
 - `pronunciation.test.mjs`는 동형이의어 16개·35항목의 품사/뜻 일치 보호, 개인 단어 fallback, 복수 발음 및 가족 번역을 검사한다. `pronunciation-qa.cjs`는 로컬 가상 계정의 오늘 학습·문장 연습·완료 기록·편집에서 사전 우선 표시, 다른 뜻의 IPA 제거, 기록 불변성, 320/390/1440px·200%·axe·키보드를 검사하며 `QA_BROWSER=webkit`을 지원한다. 사전 링크만 확인하며 외부 음원 재생·실제 iPhone 청취는 포함하지 않는다.
 
 - `request-body.test.mjs` / `request-body-qa.cjs`: 저장·AI·전체/분할 복원 6개 경로의 스트림 조기 취소, UTF-8·문자/바이트 경계·허위 Content-Length·인증 선행·중단·원본 보존을 검사합니다. 로컬 Worker는 EOF 이전 413을 확인하고, 브라우저는 실제 거절 안내·입력 유지·정상 재시도·재접속과 320/390/1440px를 확인합니다. `QA_BROWSER=webkit`을 지원합니다. 운영 데이터나 실제 AI를 사용하지 않습니다.
@@ -102,6 +104,7 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - `learning-commands.test.mjs`: 단어장 수정·기억 깨우기·중단 초안의 불변성과 성적 보존을 검사한다. `learning-api.test.mjs`와 `state-api.test.mjs`는 잘못된 응답과 회차 내부 오류의 저장 거부를 확인한다.
 - 공통 `tests/qa/runtime.cjs`는 Playwright·axe 경로와 loopback 주소, 충돌 없는 가상 계정을 제공한다. 특정 PC 사용자 경로는 소스에 넣지 않는다. `QA_PLAYWRIGHT_PATH`에는 설치된 Playwright 모듈 디렉터리를 지정하며, 생략 시 일반 모듈 해석을 사용한다. `AXE_CORE_PATH` 기본값은 `work/axe/package/axe.min.js`, `QA_BASE_URL` 기본값은 `http://127.0.0.1:8787`이다.
 - 빌드한 로컬 Worker를 시작한 뒤 `npm run test:browser`로 기능 검사를 순서대로 실행한다. A1~B2 콘텐츠 시나리오가 모두 포함된다. `npm run test:performance`는 초기 로딩·장기 기록·문법 입력·백업 자원의 성능 네 검사를 단독 실행한다. `node tests/qa/run.cjs functional --list`로 실행 목록을 확인할 수 있다.
+- 문법 버전별 전체 흐름은 해당 생성 플래그로 시작한 별도 로컬 Worker에서 직접 실행한다. v2는 v3/v4 false, v3는 v3 true/v4 false, v4는 v3/v4 true다. v4 호환 검사에서는 `QA_NEW_GRAMMAR_VERSION=3`(v4 false)과4(v4 true)를 각각 사용한다. 등록부는 전체 검사 목록이며 서로 다른 플래그를 요구하는 문법 사례를 하나의 Worker 설정으로 전부 통과했다고 보고하지 않는다.
 - 실행 도구는 각 검사 전에 로컬 서버 응답 본문까지 확인한다. 재접속 회귀 검사는 브라우저 초점을 먼저 확보하고 이어가기 요청의 실제 저장 응답을 기다린다. 이전 저장 상태 표시나 검사 자동 재시도로 실패를 숨기지 않는다.
 - 결과와 검사별 로그는 `outputs/browser-suite/<group>-<run>/`에 모인다. 실패·시간 초과·미완료는 전체 성공으로 처리하지 않는다. 각 브라우저 스크립트의 직접 실행도 유지한다. 실제 사용자 계정이나 운영 URL을 환경변수로 넣지 않는다.
 - `manifest.cjs`는 전체 브라우저 검사 등록부다. 파일 추가·삭제를 등록부와 대조하며 누락을 거부한다. 기능/성능 실행은 공통 잠금으로 겹치지 않는다. `launchBrowser`와 `closeBrowser`가 컨텍스트·브라우저 종료를 공유하고, 시간 초과에는 IPC로 종료를 요청한 뒤 이 실행이 만든 프로세스 트리만 정리한다. 시간 초과 후 정상 종료해도 실패로 집계한다.
