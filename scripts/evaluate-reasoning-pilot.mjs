@@ -54,7 +54,7 @@ export async function collectPilot({ ledger, schedule, profiles, helper, config 
         if (!Object.hasOwn(helper.FEEDBACK_ISSUES, value.code)) throw Error('Invalid safe failure');
         attempt.status = 'failure'; attempt.code = value.code;
         if (Number.isInteger(value.providerStatus) && value.providerStatus >= 400 && value.providerStatus <= 599) attempt.providerStatus = value.providerStatus;
-        if (['envelope', 'text', 'schema', 'structure', 'judgment'].includes(value.validationStage)) attempt.validationStage = value.validationStage;
+        if (helper.FEEDBACK_VALIDATION_STAGES.includes(value.validationStage)) attempt.validationStage = value.validationStage;
         if (['provider_network', 'groq_network'].includes(value.code)) ledger.endpointStop = 'upstream_network_uncertain';
         if ([400,401,403,404,429].includes(value.providerStatus) || response.status === 429 || /key|permission|billing|precondition|limit|model/.test(value.code)) stopped.add(row.provider);
       }

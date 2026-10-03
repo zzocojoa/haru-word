@@ -11,6 +11,7 @@ export const reasoningPilotCases = reasoningPilotCaseIds.map(id => accuracyCases
 export { accuracyModels };
 export { sentenceFeedbackSchema } from './sentence-feedback';
 export { FEEDBACK_ISSUES } from './original-feedback-evaluation';
+export { FEEDBACK_VALIDATION_STAGES } from './provider-feedback-contract';
 export type ReasoningVariant = 'current' | 'high';
 export function reasoningPilotSchedule() {
   return reasoningPilotCases.flatMap((sample, index) => (['google', 'groq'] as const).flatMap(provider =>

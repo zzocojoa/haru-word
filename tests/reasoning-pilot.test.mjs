@@ -88,6 +88,19 @@ test('collector records all20 successful parsed responses, no extra HTTP, no pro
   }});
   assert.equal(calls,20);assert.equal(ledger.attempts.length,20);assert.equal(ledger.completed,true);assert.equal(ledger.attempts.filter(a=>a.status==='response').length,20);assert.doesNotMatch(JSON.stringify(ledger),/private-marker/);
 });
+test('collector preserves every API validation stage and discards unknown stages', async () => {
+  const schedule=h.reasoningPilotSchedule(),profiles=Object.fromEntries(schedule.map(row=>[`${row.caseId}/${row.provider}/${row.variant}`,{requestHash:'a'.repeat(64),promptHash:'b'.repeat(64)}]));
+  const stages=[...h.FEEDBACK_VALIDATION_STAGES,'unknown-stage'],ledger={attempts:[],completed:false};let calls=0;
+  await collectPilot({ledger,schedule,profiles,helper:h,config},{save:()=>{},wait:async()=>{},fetcher:async(_url,init)=>{
+    const row=JSON.parse(init.body),validationStage=stages[calls++%stages.length];
+    return Response.json({...row,requestHash:'a'.repeat(64),durationMs:1,usage:{},code:row.provider==='google'?'provider_invalid_response':'groq_invalid_response',validationStage},{status:502});
+  }});
+  assert.equal(calls,20);assert.equal(ledger.completed,true);
+  for(const [index,attempt] of ledger.attempts.entries()) {
+    const stage=stages[index%stages.length];
+    assert.equal(attempt.status,'failure');assert.equal(attempt.validationStage,stage==='unknown-stage'?undefined:stage);
+  }
+});
 test('upstream network uncertainty stops globally; interruption during pacing leaves terminal counted slots', async()=>{
   for (const mode of ['network','interrupted']) {
     const ledger={attempts:[],completed:false},schedule=h.reasoningPilotSchedule(),profiles=Object.fromEntries(schedule.map(row=>[`${row.caseId}/${row.provider}/${row.variant}`,{requestHash:'a'.repeat(64),promptHash:'b'.repeat(64)}]));let calls=0;const stop=new AbortController();
