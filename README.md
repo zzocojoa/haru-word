@@ -87,6 +87,8 @@ This starter does not use `wrangler.jsonc`.
 
 `install:ci` runs `npm ci` once against the shared lockfile, disables parent-workspace discovery, and includes required dev/optional dependencies despite production/omit settings. Sharp defaults to prebuilt binaries unless explicitly configured otherwise. Do not overlap installers.
 
+The installer preserves the caller's lifecycle-script policy. When install scripts are enabled, `postinstall` runs the temporary `scripts/guard-braces.mjs` mitigation; `npm run dev` and `npm run build` apply or reject the guard themselves even with `npm_config_ignore_scripts=true`. The guard authenticates the exact locked `braces@3.0.3` sources, limits nesting to 100, and rejects changed versions or sources, paths outside this checkout, and source hardlinks. This is a local mitigation, not an official patched release; the braces high-severity advisory remains in npm audit metadata. Review upstream changes before updating or removing the guard during a future dependency upgrade.
+
 - **Portable:** Preserve host HOME, npm cache, registry, proxy, temporary paths, retry/concurrency settings, and lifecycle-script policy. Use `--prefer-offline --no-audit --no-fund`.
 - **Managed Linux:** Use the existing project-local HOME/cache/tmp setup and Linux install lock, tarball preflight, and timeout. Restore the image-seeded npm cache only when its lockfile hash matches; retain network fallback. Builds keep their existing timeout. These helpers are not invoked by the portable profile.
 
