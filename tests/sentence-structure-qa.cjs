@@ -45,7 +45,7 @@ fs.mkdirSync(out, { recursive:true });
       await page.setViewportSize({width,height:900});await page.evaluate(size=>document.documentElement.style.fontSize=size+'%',size);
       assert.equal(await view.evaluate(el=>el.scrollWidth>el.clientWidth+1||document.documentElement.scrollWidth>innerWidth+1),false,`${width}/${size}`);
     }
-    
+
     await page.setViewportSize({width:1440,height:1000});await page.evaluate(()=>document.documentElement.style.fontSize='100%');
     await view.scrollIntoViewIfNeeded();await view.screenshot({path:`${out}/desktop.png`});
     await page.setViewportSize({width:390,height:844});await view.scrollIntoViewIfNeeded();await view.screenshot({path:`${out}/mobile.png`});
