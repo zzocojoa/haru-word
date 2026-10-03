@@ -1,10 +1,10 @@
 import { LESSON_MAP, answerCorrect, needsGrammarReview, type GrammarQuestion } from './content';
-import { practiceForVersion } from './content-v3';
+import { practiceForVersion } from './content-v4';
 import { newGrammarProgress, QUESTION_KEYS, type GrammarProgress, type LessonId } from './model';
 import { today } from '../learning/dates';
 
 const ids = (questions: GrammarQuestion[]) => questions.map(q => q.id!) as [string, string, string];
-export function newLessonProgress(id: LessonId, now = new Date().toISOString(), contentVersion:2|3=2): GrammarProgress {
+export function newLessonProgress(id: LessonId, now = new Date().toISOString(), contentVersion:2|3|4=2): GrammarProgress {
   return { ...newGrammarProgress(now), contentVersion, questionIds: ids(practiceForVersion(id,contentVersion).questions) };
 }
 export function questionsFor(id: LessonId, progress: GrammarProgress, reviewing = false): GrammarQuestion[] {
@@ -28,7 +28,7 @@ export function completeLesson(progress: GrammarProgress, date: string, now = ne
     nextDate: afterDays(date, 1), lastDate: date, passed: 0, nextSet: 'a', used: { a: 0, b: 0 },
   } };
 }
-export function startGrammarReview(id: LessonId, progress: GrammarProgress, date: string, contentVersion:2|3=2): GrammarProgress {
+export function startGrammarReview(id: LessonId, progress: GrammarProgress, date: string, contentVersion:2|3|4=2): GrammarProgress {
   if (!progress.completedAt || progress.review && !progress.review.completedAt) return progress;
   // Old results are not retested against new answers. New reviews use the enabled version;
   // a review already in progress keeps its original content until completion.

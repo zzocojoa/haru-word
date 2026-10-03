@@ -215,7 +215,7 @@ export function answerCorrect(question: GrammarQuestion, answer: string) {
   // Legacy answers keep their original grading contract.
   const normalize = (value: string) => {
     const text = value.trim().replace(/\s+/g, ' ');
-    return question.kind === 'order' && /:(2|3):/.test(question.id??'')
+    return question.kind === 'order' && /:(2|3|4):/.test(question.id??'')
       ? text.toLowerCase().replace(/[.,!?]/g, '') : text;
   };
   return [question.answer, ...(question.alternatives ?? [])].some(candidate => normalize(candidate) === normalize(answer));

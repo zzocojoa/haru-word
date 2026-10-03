@@ -26,8 +26,8 @@ export async function GET(request?: Request) {
     const grammarVersion = request?.headers.get('x-study-grammar');
     if (!supportsSenseKeys(request) && await hasSavedLiteralPrototypeSense(database(), user.userId))
       return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
-    const snapshot = await loadStateDocuments(database(), user.userId, ['1','2','3'].includes(grammarVersion??''));
-    if (grammarVersion !== '3' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
+    const snapshot = await loadStateDocuments(database(), user.userId, ['1','2','3','4'].includes(grammarVersion??''));
+    if (grammarVersion !== '4' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
       const legacy = grammarDocumentForClient(grammarProgressSchema.parse(JSON.parse(row.document)),grammarClientVersion(grammarVersion));
       return legacy ? [{ ...row, document: JSON.stringify(legacy) }] : [];
     });
@@ -74,7 +74,7 @@ export async function PUT(request: Request) {
       return json({ error: FEEDBACK_UPGRADE_MESSAGE }, 426);
     }
     const supportedGrammar=grammarClientVersion(request.headers.get('x-study-grammar'));
-    if (data.grammar && supportedGrammar<3 &&
+    if (data.grammar && supportedGrammar<4 &&
         (Object.values(data.grammar).some(p=>grammarUnsupported(p,supportedGrammar)) || await hasSavedUnsupportedGrammar(db, user.userId, supportedGrammar,Object.keys(data.grammar)))) {
       console.warn(JSON.stringify({ event: 'grammar_client_outdated', version: supportedGrammar, code:'grammar_client_outdated' }));
       return json({ error: GRAMMAR_UPGRADE_MESSAGE }, 426);

@@ -5,9 +5,9 @@ const { build } = require('esbuild');
 const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('./qa/runtime.cjs');
 
 (async () => {
-  const version = process.env.QA_GRAMMAR_VERSION === '3' ? 3 : 2;
-  await build({ entryPoints: ['lib/grammar/content-v3.ts', 'lib/grammar/content-v2.ts', 'lib/grammar/content.ts'], outdir: 'work/grammar-v2-qa', bundle: true, platform: 'node', format: 'cjs', outExtension: { '.js': '.cjs' }, logLevel: 'silent' });
-  const PRACTICE_LESSONS = version === 3 ? require('../work/grammar-v2-qa/content-v3.cjs').PRACTICE_LESSONS_V3 : require('../work/grammar-v2-qa/content-v2.cjs').PRACTICE_LESSONS;
+  const version = process.env.QA_GRAMMAR_VERSION === '4' ? 4 : process.env.QA_GRAMMAR_VERSION === '3' ? 3 : 2;
+  await build({ entryPoints: ['lib/grammar/content-v4.ts', 'lib/grammar/content-v3.ts', 'lib/grammar/content-v2.ts', 'lib/grammar/content.ts'], outdir: 'work/grammar-v2-qa', bundle: true, platform: 'node', format: 'cjs', outExtension: { '.js': '.cjs' }, logLevel: 'silent' });
+  const PRACTICE_LESSONS = version === 4 ? require('../work/grammar-v2-qa/content-v4.cjs').PRACTICE_LESSONS_V4 : version === 3 ? require('../work/grammar-v2-qa/content-v3.cjs').PRACTICE_LESSONS_V3 : require('../work/grammar-v2-qa/content-v2.cjs').PRACTICE_LESSONS;
   const { GRAMMAR_LESSONS } = require('../work/grammar-v2-qa/content.cjs');
   const browser = await launchBrowser({ engine: process.env.QA_ENGINE || 'chromium' });
   const context = await browser.newContext({ extraHTTPHeaders: accountHeaders('grammar_v2'), viewport: { width: 390, height: 844 }, ...(process.env.QA_ENGINE === 'webkit' ? { isMobile: true, hasTouch: true } : {}) });
@@ -101,7 +101,26 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
         assert.equal(beforeHelp.helped, false); assert.equal(beforeHelp.attempts, 1);
       }
       assert.ok(await page.locator('.grammar-inline-role').count());
-      await click('역할 알아보기'); await click('3문제 연습');
+      await click('역할 알아보기');
+      if (version === 4) {
+        assert.equal(await page.locator('.grammar-reviewed-examples figure').count(), 2);
+        assert.equal(await page.getByText('교재 예문 분석', { exact: true }).count(), 2);
+        if (lesson.id === 'preposition') assert.match(await page.locator('.grammar-reviewed-examples').innerText(), /They arrived at the station/);
+        if (lesson.id === 'noun') {
+          for (const width of [320,390,1440]) {
+            await page.setViewportSize({ width, height: 900 });
+            const zoom = await page.addStyleTag({ content: 'html{font-size:200%!important}' });
+            assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+            await page.locator('.structure-explanations summary').first().focus(); await page.keyboard.press('Enter');
+            await page.addScriptTag({ path: axePath });
+            assert.deepEqual(await page.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a','wcag2aa'] })).violations.map(v => v.id)), []);
+            await page.screenshot({path:`outputs/grammar-v2/reviewed-${process.env.QA_ENGINE || 'chromium'}-${width}.png`,fullPage:true});
+            await zoom.evaluate(el => el.remove());
+          }
+          await page.setViewportSize({ width:390,height:844 });
+        }
+      }
+      await click('3문제 연습');
       for (const q of l.questions) await solve(q);
       const writing = page.getByRole('textbox', { name: '내 문장', exact: true });
       await click('이 문장으로 시작'); assert.ok((await writing.inputValue()).length);

@@ -43,6 +43,8 @@ jobs:
         run: npm run install:ci
       - name: Run unit tests
         run: npm test
+      - name: Check reviewed grammar content
+        run: npm run check:grammar-review
       - name: Check types
         run: npm run typecheck
       - name: Lint
