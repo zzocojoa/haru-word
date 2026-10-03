@@ -50,7 +50,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       ];
       for (const sample of cases) {
         response = sample;
-        await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+        await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
         const notice = page.locator('[data-feedback-code="' + sample.code + '"]');
         await notice.waitFor(); assert.match(await notice.innerText(), new RegExp(sample.title));
         assert.doesNotMatch(await notice.innerText(), /PRIVATE_PROVIDER_MESSAGE|untrusted/);
@@ -106,7 +106,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       };
       const success = (model, sentence) => ({ status: 200, body: { feedback: { original: sentence, model, createdAt: now, meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '알맞게 사용했어요.' } } });
       response = success('openai/gpt-oss-120b', original);
-      await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+      await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
       await page.locator('[data-feedback-provider="Groq"]').waitFor();
       await page.locator('[data-feedback-provider="Groq"]').screenshot({ path: 'work/groq-attribution-' + domain + '-' + engine + '.png' });
       const stored = await waitSaved('openai/gpt-oss-120b');
@@ -118,7 +118,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       assert.equal(calls, cases.length + 1, 'reload never calls a provider');
       const next = 'I like tea.'; await input.fill(next);
       response = success('gemini-3.1-flash-lite', next);
-      await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+      await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
       await page.locator('[data-feedback-provider="Google Gemini"]').waitFor();
       await waitSaved('gemini-3.1-flash-lite');
       assert.equal(calls, cases.length + 2); assert.deepEqual(errors, []);

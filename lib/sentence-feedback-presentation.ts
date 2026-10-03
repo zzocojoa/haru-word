@@ -1,11 +1,11 @@
 import type { SentenceFeedback } from './sentence-feedback.ts';
+import { feedbackSafetyIssue } from './feedback-safety.ts';
 
 const ACTION_LABELS = {
-  ready: 'AI로 문장 점검',
+  ready: 'AI 참고 의견 요청',
   checking: '문장을 확인하고 있어요',
-  reviewed: '이 문장의 교정 결과가 있어요',
-  retryStructure: '문장 구조 다시 점검',
-  upgradeStructure: '문장 구조 포함해 다시 점검',
+  reviewed: '저장한 AI 참고 의견이 있어요',
+  retryAnalysis: 'AI 참고 의견 다시 요청',
 } as const;
 
 type Input = { sentence: string; feedback?: SentenceFeedback; busy: boolean; pending: boolean };
@@ -14,19 +14,18 @@ type Input = { sentence: string; feedback?: SentenceFeedback; busy: boolean; pen
 export function sentenceFeedbackPresentation({ sentence, feedback, busy, pending }: Input) {
   const trimmed = sentence.trim();
   const unchanged = feedback?.original === trimmed;
-  const hasStructure = feedback?.structure?.status === 'available';
+  const unsafeAnalysis = !!feedback && !!feedbackSafetyIssue(feedback);
   let action: keyof typeof ACTION_LABELS = 'ready';
   if (pending) action = 'checking';
   else if (unchanged) {
-    if (hasStructure) action = 'reviewed';
-    else if (feedback?.structure?.status === 'unavailable') action = 'retryStructure';
-    else action = 'upgradeStructure';
+    if (unsafeAnalysis) action = 'retryAnalysis';
+    else action = 'reviewed';
   }
   return {
     action,
     label: ACTION_LABELS[action],
-    disabled: busy || pending || !trimmed || (unchanged && hasStructure),
+    disabled: busy || pending || !trimmed || (unchanged && !unsafeAnalysis),
     unchanged,
-    canApply: !!feedback?.correctedSentence && feedback.correctedSentence !== trimmed,
+    canApply: !unsafeAnalysis && !!feedback?.correctedSentence && feedback.correctedSentence !== trimmed,
   };
 }

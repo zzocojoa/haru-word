@@ -11,6 +11,7 @@ import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { json, validateJsonMutation } from '@/lib/server/http';
 import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { FEEDBACK_BODY_LIMITS, logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
+import { feedbackSafetyIssue } from '@/lib/feedback-safety';
 
 export const dynamic = 'force-dynamic';
 const enabled = () => env.google_ai_enabled === 'true';
@@ -53,6 +54,11 @@ export async function POST(request: Request) {
     const now = Date.now();
     await recordFeedbackAttempt(db, user.userId, today(), now);
     const feedback = await generateSentenceFeedbackWithFallback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, feedback_original_sentence_enabled: env.feedback_original_sentence_enabled, feedback_chunked_enabled: env.feedback_chunked_enabled, signal: request.signal }, { word: word.word, pos: word.pos, meaning, sentence });
+    const safetyIssue = feedbackSafetyIssue(feedback);
+    if (safetyIssue) {
+      console.warn(JSON.stringify({ event: 'sentence_feedback_withheld', code: 'analysis_conflict', reason: safetyIssue }));
+      return json(feedbackErrorBody('analysis_conflict'), 422);
+    }
     console.info(JSON.stringify({ event: 'sentence_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), durationMs: Date.now() - started }));
     return json({ feedback: supportsFeedbackStructure(request) ? feedback : legacyFeedback(feedback) });
   } catch (error) {

@@ -72,7 +72,7 @@ fs.mkdirSync(out,{recursive:true});
     await page.setViewportSize({width:1440,height:1000});await capture(view,'daily-long-desktop');
     await page.setViewportSize({width:390,height:844});await page.getByRole('button',{name:'문장을 완성했어요',exact:true}).click();await saved();
     await page.getByRole('tab',{name:'학습 기록',exact:true}).click();await page.locator('.journal-day-trigger').first().click();await page.locator('.journal-session-trigger').first().click();
-    await page.locator('.journal-mobile .journal-word-trigger').click();await page.locator('.journal-mobile').getByText('저장한 AI 교정 의견',{exact:true}).click();
+    await page.locator('.journal-mobile .journal-word-trigger').click();await page.locator('.journal-mobile').getByText('저장한 AI 참고 의견',{exact:true}).click();
     view=page.locator('.journal-mobile .sentence-structure');const summary=view.locator('summary');
     check(await summary.evaluate(el=>getComputedStyle(el,'::before').content)==='"+"','Closed inner disclosure shows plus inside an open result');
     await summary.tap();check(await summary.evaluate(el=>getComputedStyle(el,'::before').content)==='"−"','Open inner disclosure shows minus');
@@ -84,7 +84,7 @@ fs.mkdirSync(out,{recursive:true});
       check(await view.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'History mobile details fit');
     }
     await page.evaluate(()=>document.documentElement.style.fontSize='100%');await page.setViewportSize({width:1440,height:1000});
-    await page.locator('.journal-desktop').getByText('AI 교정 의견',{exact:true}).click();
+    await page.locator('.journal-desktop').getByText('AI 참고 의견',{exact:true}).click();
     view=page.locator('.journal-desktop .sentence-structure');await view.locator('summary').focus();await page.keyboard.press('Enter');
     check(await view.evaluate(el=>el.getBoundingClientRect().width>=el.closest('table').getBoundingClientRect().width*0.9),'Desktop saved analysis uses the full table width');
     check(await view.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'Desktop history structure fits');await capture(view,'history-desktop');

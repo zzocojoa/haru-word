@@ -108,7 +108,7 @@ const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor()
       let release, requested; const hold = new Promise(r => release = r), called = new Promise(r => requested = r);
       await p.route('**/api/grammar-feedback', async route => { requested(); await hold; await route.fulfill({ json: { feedback: { original: sentence, correctedSentence: sentence, explanation: '합성 응답', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {}); });
       try {
-        await p.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click(); await called;
+        await p.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await called;
         if (mode === 'tab') await p.getByRole('tab', { name: '오늘의 학습', exact: true }).click();
         else assert.equal((await p.evaluate(() => window.auditTools.show_learning_view.execute({ view: 'today' }))).navigated, true);
         await p.getByRole('tabpanel', { name: '오늘의 학습', exact: true }).waitFor({ state: 'visible' }); release(); await p.waitForTimeout(800);

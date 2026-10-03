@@ -21,8 +21,8 @@ type Props = {
 export function SentenceFeedbackPanel({ sessionId, entryId, sentence, feedback, busy, onPending, onFeedback, onUse }: Props) {
   const { pending, error, check } = useSentenceFeedback({ sessionId, entryId, sentence, busy, onPending, onFeedback });
   const view = sentenceFeedbackPresentation({ sentence, feedback, busy, pending });
-  return <section className="ai-feedback-panel" aria-label="AI 문장 점검">
-    <div className="ai-feedback-heading"><h3><Sparkles size={17} /> AI 문장 점검</h3><span className="small-note">선택</span></div>
+  return <section className="ai-feedback-panel" aria-label="AI 참고 의견">
+    <div className="ai-feedback-heading"><h3><Sparkles size={17} /> AI 참고 의견</h3><span className="small-note">선택</span></div>
     <AiUseNotice />
     <button type="button" className="secondary-button" disabled={view.disabled} onClick={check}>
       {pending && <Loader2 size={16} className="spin" />}{view.label}
