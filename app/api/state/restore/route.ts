@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       await hasSavedStructuredFeedback(database(), user.userId, null, state.grammar === undefined ? [] : null)))
       return json({ error: FEEDBACK_UPGRADE_MESSAGE }, 426);
     const supportedGrammar=grammarClientVersion(request.headers.get('x-study-grammar'));
-    if (state.grammar !== undefined && supportedGrammar<3 &&
+    if (state.grammar !== undefined && supportedGrammar<4 &&
         (Object.values(state.grammar).some(p=>grammarUnsupported(p,supportedGrammar)) || await hasSavedUnsupportedGrammar(database(), user.userId,supportedGrammar)))
       return json({ error: GRAMMAR_UPGRADE_MESSAGE }, 426);
     if (!await restoreState(database(), user.userId, revision, state)) {

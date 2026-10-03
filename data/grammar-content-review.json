@@ -1,0 +1,4486 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 4,
+  "method": "assistant-official-source-comparison",
+  "limitations": "같은 Codex의 자료 대조이며 인간 전문가 인증이나 자유 영작 정확도 보장은 아님.",
+  "curriculumHash": "08f6bae4b655ba8f4b3ba4a4b942caf275f49360252c625d987a8678b218b09d",
+  "sources": {
+    "classes": {
+      "title": "Cambridge · Word classes and phrase classes",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/phrase",
+      "summary": "품사와 구의 구분, 같은 철자의 여러 품사, 구 내부의 수식 관계를 대조했어요."
+    },
+    "verbs": {
+      "title": "Cambridge · Verbs: types",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/verbs-types?q=linking+verbs",
+      "summary": "행동·상태 동사, 연결 동사의 보어와 be/do/have의 본동사·조동사 쓰임을 대조했어요."
+    },
+    "forms": {
+      "title": "Cambridge · Verbs: basic forms",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/basic",
+      "summary": "동사원형·3인칭 단수 현재형·과거형·분사 형태를 구분했어요."
+    },
+    "pronouns": {
+      "title": "Cambridge · Personal pronouns",
+      "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/pronouns-personal-i-me-you-he-it-etc",
+      "summary": "주격·목적격과 전치사 뒤의 형태, 앞선 사람·사물을 받는 관계를 대조했어요."
+    },
+    "adjectives": {
+      "title": "Cambridge · Adjective phrases: position",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/adjective-phrases-position",
+      "summary": "명사 앞의 형용사와 연결 동사 뒤의 형용사구를 구분했어요."
+    },
+    "adverbs": {
+      "title": "Cambridge · Adverbs: position",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adverbs-and-adverb-phrases-position",
+      "summary": "방식·빈도·정도의 위치와 be를 강조할 때의 위치 예외를 대조했어요."
+    },
+    "demonstratives": {
+      "title": "Cambridge · This, that, these, those",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/this-that-these-those",
+      "summary": "단수·복수와 거리, 한정사·대명사 쓰임을 문맥에 맞게 구분했어요."
+    },
+    "determiners": {
+      "title": "Cambridge · Determiners: position and order",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/modifiers",
+      "summary": "명사 앞의 위치와 my/the를 겹치지 않는 제약을 대조했어요."
+    },
+    "articles": {
+      "title": "Cambridge · A/an and the",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/the",
+      "summary": "가산 단수와 첫소리, 특정 대상을 다시 가리키는 the, 일반적인 복수 명사의 무관사 쓰임을 대조했어요."
+    },
+    "numbers": {
+      "title": "Cambridge · Numbers",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/number",
+      "summary": "개수와 순서, 명사와의 결합을 구분했어요."
+    },
+    "prepositions": {
+      "title": "Cambridge · Prepositional phrases",
+      "url": "https://dictionary.cambridge.org/de/grammatik/british-grammar/prepositional-phrases",
+      "summary": "전치사와 그 뒤의 보충어를 하나의 구로 보고 동사의 직접목적어와 구분했어요."
+    },
+    "movement": {
+      "title": "Cambridge · At, in and to (movement)",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/at-in-and-to-movement",
+      "summary": "방향의 to와 arrive at/in을 대조했어요."
+    },
+    "conjunctions": {
+      "title": "Cambridge · Conjunctions",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/coordinating-conjunctions",
+      "summary": "단어·구·절의 연결과 추가·대조·이유 관계를 구분했어요."
+    },
+    "reasons": {
+      "title": "Cambridge · Causes, reasons, results and purpose",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/conjunctions-causes-reasons-results-and-purpose",
+      "summary": "because 뒤의 이유와 so 뒤의 결과 방향을 대조했어요."
+    },
+    "progressive": {
+      "title": "Cambridge · Present continuous",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-continuous-",
+      "summary": "be와 -ing가 진행형 동사구를 이루는 점을 대조했어요."
+    },
+    "now": {
+      "title": "Cambridge · Now",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/now",
+      "summary": "시간 부사 now의 끝·앞·첫 조동사 뒤 위치를 대조했어요."
+    },
+    "modals": {
+      "title": "Cambridge · Modality: forms",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/modality-forms",
+      "summary": "법조동사 뒤의 원형과 일반 동사와 다른 형태를 대조했어요."
+    },
+    "infinitives": {
+      "title": "Cambridge · Infinitives with and without to",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/infinitives-and-",
+      "summary": "to와 원형, want/need 뒤의 부정사, 목적과 전치사구의 차이를 대조했어요."
+    },
+    "interjections": {
+      "title": "Cambridge · Interjections",
+      "url": "https://dictionary.cambridge.org/hi/व्याकरण/british-grammar/interjections-ouch-hooray",
+      "summary": "독립적인 감정 반응과 문장 뼈대를 구분했어요."
+    },
+    "oops": {
+      "title": "Cambridge · Oops",
+      "url": "https://dictionary.cambridge.org/us/dictionary/english/oops?topic=sounds-used-as-interjections",
+      "summary": "작은 실수에 대한 반응을 확인했어요."
+    },
+    "clauses": {
+      "title": "Cambridge · Clauses and sentences",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/clauses-and-sentences",
+      "summary": "주어·동사구·보충어, 여러 절과 문장 경계를 구분했어요."
+    },
+    "imperative": {
+      "title": "Cambridge · Imperative clauses",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/imperative",
+      "summary": "주어가 보통 생략되고 동사원형을 쓰는 명령문과 공손한 please를 대조했어요."
+    },
+    "time": {
+      "title": "Cambridge · At, on and in (time)",
+      "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/at-in-on-time",
+      "summary": "시각의 at과 요일의 on을 구분했어요."
+    }
+  },
+  "entries": [
+    {
+      "id": "noun:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "0cce083829c5c611e0894dd53d62aed712263c9845e6e604eb8a4e1e8a3bc233",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:practice",
+      "contentVersion": 4,
+      "contentHash": "2d421464f467bac1b7a9e18f9ecf1e500b2958f4c866e831940d754fb41ccb89",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:notice",
+      "contentVersion": 4,
+      "contentHash": "96397b76d4846edca0e367cc88fcb93a45426d865133a47857ea000eb83eb510",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "81146781dac18ee9efea8da913d0a484f85c84a7e7a490b6bd81b7854fbb6118",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "21fa3ee091b57c53e48a33fcfa782a8a2216e066c36cdd4308564c2550c6d669",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "131a2df1098b50c985774e0d9c8b9f2875590842800ddf6d3f121eda56905c84",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "b30b6bdb60ee0f5649f128607eaee173d90580fd464a37dcac199be79aff2428",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "0405fc75b2162660a580091219437a5d8edb8507f3ab979eaeaff7337a7aeca2",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "2ffbb659c5b04247ee036d181f8f7a8c37077b426a2629d8f16237c85f997ba2",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "2565a2279464cfe47f1144e5ca90860ca558a6932c36a46f42941e892398b44a",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "82008169c96ec5fcce1e150f610ebec256585de87c32ee65372b02644d46f53b",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "e45a7f8ce32ec2a05676396375a0df890b6e124aec945cbb417491c25e491829",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "cb349b558d3ae952db1194a9c01395476a1b19a7c73ee9c073bc2947ca7834d1",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "9d1d3afdae9d8f7067fb323fd771f566f4add80861b56a59723b17edda0ccfd6",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:gloss:1:2",
+      "contentVersion": 4,
+      "contentHash": "74dd7bb05b496cb3b9e66e20ade8e00e06810583736e72f76b892720b9f252e8",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "25bbfb4d0f320076c679e6bf89774e8a99b6572174b22b328277b6cc0c1011cc",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "7430599bd3db48765ead11a2d08c000cff6830d2ac99014df59ac97c002fd2a2",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "097003e3d1031d4f7aa109c63f4d77afd517fc9650f94e7a397dfb6db47fadc7",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "2490cf6ca1c86cbc20329acae255304e437ef85ab460743f59af27fad4ff7103",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "b2942b73ff3e6d748516fb874a0cced75bf211286c0e75db60af4bb594de2c54",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "85304d451ab0e2e229b36301d339b18b9176f063ef0681a4274ce75ee074772c",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "noun:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "ecc5c0dee6bb1466ee8c465f50087fcf529818309e548d468e854e86c0b9f37b",
+      "sources": [
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "ece492166ac421ee4d7786ab49bd91faf46ce6a496611727c8797b5cb99f2c9f",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:practice",
+      "contentVersion": 4,
+      "contentHash": "626b402f87e0c0085a7f475eb67f99dad14f19b07d526852f268af1893e47fb1",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:notice",
+      "contentVersion": 4,
+      "contentHash": "110dc147563626782415a3f617b21be9b8f4b78a9f2428f5ef1b3fd36a0cb234",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "9e90f7c4026c98c4377bd09e3ada0f3609d97feb9676aad9af6bfa2822e838ff",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "657fd309d90bbea43719802c98a9004e049e9dcbaecff7814695ec347a755c1b",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "81b252f773541595c64a108988ed579ed0669af3e423e51e415bf3d3eb81865e",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "78725cdab746c953f5f6f904c5f92ab4f58c530529f9f34b7292df5f2cd3aa65",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "8023f886f6525832d16a8591f73dee52ac3d296f86e8933aa7cd10c9579e3093",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "1835e60d8e331fe784d677014c9e6d11707d283333bc6c05b0836744dfae26f2",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "be851b3164b36071d40900c4dac6d363c6c26df95352a86dfbcf9cdf8d34718d",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "d93c7b39c6598c84d7435b78c789c4ac0a4777ccbdc00ead934ff08cda2702e3",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "b9be79f9333491f44d51fc06b456baaac1e29fc1643a0656486b10416ded1ad0",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "01a3a68350b612b971e2c7ee0b935a5f368b6afa55651d847fa7fb64eb4a9028",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "80bcc4f52e3de41fce77aaf40b3ffb4a9f2dcd6cc83f45c2ce9510b0c064279a",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "e25bf09aa74ac94c90f99f551b12ed0dea86311c341ce1e78ac06156c0fce6b3",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "8ac911c06a9780cc5b6d88704e0ff45bfc654d890f76fe3555efab54cbb30af2",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "f5c8798d0c766d29b12a28ff3bf9e562a6d6f5de071c7f43a8c85d3204e93be7",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "a34c32805d103a1612f46f36e5f6301620fb9b38ad283e62d649f30f58751fe8",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "8f60bbeba51150c78c7f74aad20f554af3f397f424485ab60f62e497c6192007",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "2f086087a106fc520fdcc2adcb88a237d1f18b4f3dd60700488cd564b4fade7b",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "791a2ac4fb62b8dacc2253389c79047263eada31c1610ba84fb4ccdab44cfa41",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "verb:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "57d7c6538f36b8add642158399fc393cf4fbe6e4ebf53850579e5a0952ca4970",
+      "sources": [
+        "verbs",
+        "forms"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "04d07d0785450f66af8c99c32c96460efadaa35cfbe62e2508825e726ad59474",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:practice",
+      "contentVersion": 4,
+      "contentHash": "3f56c6165be61f1f02f20d5b292e5ad44d4e4c9ea05680759d8edca772fddbd7",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:notice",
+      "contentVersion": 4,
+      "contentHash": "a7066f55e27f895441086f14a744af9340a04cb1862a2f44417454fa50652767",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "04c4ef32610d5a19a0bd9f1d74146e41ea5eab28a64e0f81317006dcb914182c",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "e867e80d15492f06c358b94c796432b490ee2683288d4913dd342ff37dcbbb11",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "e20c532a42510deb14a09e8aa309098cb60cb37f13f510da282274bd213e5c9d",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "423f169c113f655e6402ca5d67132ff20db15899ec9100a98274564932d2dfdf",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "8937977003d4bf91b008b2a6a4ad7ecbaf3f661b3ca7a4d59b1dae3d31cb4be7",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "ef9b57ff4b3eb542d5f58b8dc7a346ad2f673a5f52e83c55a5b9d4a1af2b2e5a",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "b7125aa2a1c64ab5a269011a37e6cbe8ba2990c0959d9cb43baabbbbd4533162",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "d3f130f03259801d86253a79954dd08a9de6807be5c8330a5fb7d9222d4b847f",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "9defa5fbeb44f568f19a248ea624f9ec4740637b1ca3ed2a5e3d978986d7f051",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "76c6968d90f4d4abcbf0120b4d0c67566d54d49369b81b1a096d74249a21d2b6",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "198f2f8054c41327ef2a3bea949a5cb65056c8c5426f2abc3017c7f36df559b5",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "2891ca1c16240be0323b244fcd375afc9cff7bb6080cdb36655d1b1db38300a7",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "982732d6ab22366c810b78ead831e27d0a0b30973ac7ac3df12207493ab840c4",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "57a92c44917f3c9e784190fe1428ba38ef7d8eaf57329a0366dbb74ff1bb8edc",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "300b6f2f874c6d1ee2e156cc98a608b7d8655b6f88cb94a815d6eee350de0374",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "62ac755d266cb97047d76d2eecedbe7a0cc7e3e178f89a87738daa890c7b93bd",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "pronoun:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "e1a075c058c47af08cf6180805a7bc8bb97d72cf95d4643f15d3e45199713440",
+      "sources": [
+        "pronouns",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "e882d418ff8bb0a9e4ff8bca8d6f6a41ce6beade06e9839ae8ede9b7680bee3e",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:practice",
+      "contentVersion": 4,
+      "contentHash": "2839e5acf535dab5d20601d279068ba22401fedacf320645f1d2aafdf02504b2",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:notice",
+      "contentVersion": 4,
+      "contentHash": "406be04a64b618aa3e8e20a26e30421b8c8701668bea85fad458c3f33e28f1c9",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "f4412003a86413ab13d5c2b24c20359327d8acb028ecacef9760796127755821",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "37c8839125b2d01f60fcf9c0db1ef39347508e757ae2619288003584cf9deb4e",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "eae6e2d4924a1964cd879abb99416bc87a21264b3b237c6b18ae517fc13d4b81",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "de8d9d26687e73f65ff512997479c00f3fa6a9c873fa718444653df0463720b2",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "2708675030c36b07179c6bbade371829d615906af06a813bab6cd6bb7de809fe",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "b14be825ed230db0212d6ec7c857af2763346560f1532fdd43f33f8b263de6a9",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "74313ed0067c124610520deabe6ee27b764c7bc28346594c3e53b01189e88ff8",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "03d211c3de2a8d6bb8b1b22a4c1b122e62861aa9eb43aa07cf90a901ba339046",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "c89c9a7750e80757bde5c769c66cd7316258e7baa4a9a17a377152ad779ee12a",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "4d3a2325603f93ea69afb321fd8b13eef19930fb4ae368d46fb15f048251d91b",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "46220707fa602511b559cc87fec94cc45f13a37009b23d51f96369e39c0f2796",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "c00766e3027f471c576b6094110e06f12c241cec84e206c00770b590d6430b87",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "f263170d22be04c15b79a4dbccae876b06717b502759af9f5642caff3b753ca4",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "e70c659caeba323c6f6d447118573c9f7caa8ba92113d086c759ed7116ad966f",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "af8df1bd0de54dd38fc5ded87614e3eb36848c870b2df8ae180f86870de59144",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "f2a22651db25936552cdf852038f8afc5a7bd554c9e74a9b0953ffc313af856e",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "4fc5c327f00e1534083ec4c65ef3174bfa952d04f6955e6979d2ad378d6fb28f",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "777d2f0d0cca189e06f857b1d12fb6b0f26ff9b27c86773e347374e7a1b3635a",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "3c1074a4dc5048d79b8f500d6918a6e01cf5f9eba8cd114017ad10289e24f035",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:4",
+      "contentVersion": 4,
+      "contentHash": "d313e25cf35a8b01e89dbd7998f1671f4d774b4f3b24f0d726f544d19c14f30a",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:5",
+      "contentVersion": 4,
+      "contentHash": "30b51b9eea1b85420bf007260823bfc67c6a5b8e157fe082362c8dff43c9c917",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:6",
+      "contentVersion": 4,
+      "contentHash": "fc24ccce5beaf6bdba3cee683286b08e75e3732e9fe85af0435231c957e726a1",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:7",
+      "contentVersion": 4,
+      "contentHash": "2dbef2b266bb92d66a0d9d688292329eeedeca754a9750361a3f1297bf49f136",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:8",
+      "contentVersion": 4,
+      "contentHash": "0a8e78071f4a2c4d1fe5de8d3307a59901f826ab2e35197b808d8010480c34c3",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adjective:4:frame:9",
+      "contentVersion": 4,
+      "contentHash": "0874caeae16df84ba095cb075ae8bfcd4cfdeabd1d4fcce539c3e18d51bd970a",
+      "sources": [
+        "adjectives",
+        "classes",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "a269ead344848db15014f428eb815b59bb7b9baf74bf1b7f9a0af691a772018f",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:practice",
+      "contentVersion": 4,
+      "contentHash": "b6b1feb13b630e249391af2505fab16f3b343e3887af89b2e55771e8f2ea668b",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:notice",
+      "contentVersion": 4,
+      "contentHash": "472cc19081f6398e25570a701ce65d8cf313afd371bbe6e239208e3f2ab40e87",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "d2ef2b28494c867701910a1403e6a1e3cadfe2d16cf28dadc6e12d567e91e465",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "058aafa2f64d39d490db15f28b58ad4de3e46042f8f286b1c46cd634998f52bc",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "91e77693005d4d5cbd751f0c1a58e3f211f6ce7953a6ec6d094879d945ccae84",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "f2bd6651873d74b816b530e0cf5de2f3eefb41519e478732ccdc3a8db92c8672",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "6f75cbffbfc6e9f2e9a0f8012be9dd64f44780b27d97966c54859420da9124a4",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "30aecd253541c38fd804a7d814b81ae3f49b82c8870792ec1c6eb6f1ac09ce0a",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "834fb160704d84ba7eef7ca7f8b0f38bc98296e0d6e41be51c3624c721b0e3f1",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "7dc0375c5a62876229abef3c3c4c4d84d2d9c8e18eb510eee56a454dda1f32e8",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "2f51297a3da30e8cbcbd164ac60eda358f12f72da582f66da898f348367ab23f",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "bf6eab73e8fb3ce6772005d60d68160e6ee01aa6c5744088b12b58811273744f",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "bd7de9f4369755c1eb04ce09f591f90367b94258ac2d8a18965ab4cb2da6fd66",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:gloss:1:2",
+      "contentVersion": 4,
+      "contentHash": "a507b1a6bbdffeadf2bbf5c503103c940176620f7475a12797873301835a8519",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "a3e9a0e3bc0d46663bf1d625013c1b4238dd481014f9b39c052b9969c132735b",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "184c5cf7b0716eb83ce2d7b3bdb692ea0f14e1ea0c0155e580769c99c8a12460",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "726f40978f5aa09a4122352b5c1ce95c7f334523378847f421b68b0f37f1da53",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "c73cdd0f753462d5455033ccff1bc157fcbb8d478a014a6e0e0d790d877e0827",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "cfe48a3b0c457bbdbc077b32877419816e5ecf9ee93c0cf260bddcd2110df216",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "5114b227930fdb8b734195c64f155f916e629d08bc9dde0414ae61b6dc37393f",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "adverb:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "907965403f73825e1af8e6b72bd3127dc92abd98f24049d57dd6425c195126e5",
+      "sources": [
+        "adverbs",
+        "classes"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "960f9e769ac82895aea9246e2380b3ec63c6cdc79a66cdab5e53bed88dd255f7",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:practice",
+      "contentVersion": 4,
+      "contentHash": "5c25922b86e29fafa11ce7eb3eda99d4b1bf8562ecea0b37061cb4787e664be2",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:notice",
+      "contentVersion": 4,
+      "contentHash": "cd1d16608eb07d2d7cb282cd0fec81bf5342a255fa4e9f9268c94d148317e4b5",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "f88c50d93a2769beb500d884924f4cad09b36f8a1e0aca45d85bea7bbd1b15b7",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "10607a926f17bc6fd41942628f694573c8c07c7b72805d39078403a755e9cdab",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "8520812bda278973547570c6e7a1e37f1406022daaa0c45c861ba682cf156822",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "39a1e31bb744a9fc0cda6ff26eb911257f5311295c06880253e12350939a7efd",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "c484cffa8e8f4d0045c5541c13a0f1e4ca26c048b2697a69157a04342cde7cae",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "44ac2c80e770e367e120905e16a6642926bf94714f7c2e560f5d8736f06011bb",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "f599d5c9bc4555913ee64d45e92e3c01c7a30fba0e05aea135c53a49baff5478",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "d005a1074de7d14543b2fb4278600402d08d06a396ccd5c707609f05413b86aa",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "9007e1779d92b6d9047b31cfb5e2f74e61539604fc252a5430ce283fe51bc47e",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "15586c1bde89f77594f6ab92d36ccb569a0bb7f0f13f56356c17eaadfd0a4462",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "d27a345c3522b7993b0081f631ff572e96dbad04b2b9776c35ddee1dd6e0b8e9",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:gloss:1:2",
+      "contentVersion": 4,
+      "contentHash": "7a05512236116144fb9602e7af3517516608e87511d3895d3dc4ef7a7b0e42db",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "2176dfda95b03a52ad69686085bb4d2bf5804b76bf82499027253e397d27b2a9",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "ec50f046af0124145c19f7f6b7421c26e679d25b7e979f2d6965b7b4ef47a0d7",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "ba74a7df67bbe1ac31418077efd184735f26928f27bb608e6cf66891d42cfa66",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "e19d48d97792e450e64d894e0c6671058260c5dac72689a6553fa96c8c4b3fa5",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "b4067ca1c9070c156a8d9ead0efff1627368461edfee5383344d5adb8c15dfac",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "3a5da87147a0ec03039343543d73ddfb240ef45d467127d12843edf799542091",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "determiner:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "fb868ea3cdc48802b6063c1ed0cd162d3479b3c5335185635134932bc2665867",
+      "sources": [
+        "determiners",
+        "demonstratives",
+        "articles"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "b74943dd07b7051d91bfd6ef24163b9f41a4d2166276175293c257dd5f57d2f5",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:practice",
+      "contentVersion": 4,
+      "contentHash": "c62054a8ec6dde3b6faefeb6ad8e11cde9bde59afbc6333601198ecc23a9c226",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:notice",
+      "contentVersion": 4,
+      "contentHash": "40e36c9d980213fbcf4674879e100ad62dfcc13a0a9dac094d45abda2ab8107f",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "2f07f6e44b2449f4f1c5776d6f966cddf12c00788ea66046c65c6b8e76ccc572",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "daa4756576421d04e6f413c76898f2a7fac95a8b2a24d3b373ceaac5767ba1d4",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "42b93e563e6157cecfe730cfd72d731d5127c4665758fe89aa3b54a8f1035272",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "ed67c2e5a508545a4ce23c369a062cbbad6925099c0231ef2e10bc8e94bc8854",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "1b724311e8f7d0ae3d48fea08bcf37a8ab8a6b94b31803a46b1f618999161eaa",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "2de1fba303035a1fd176b622f2133851858580a18b650da30b0120f4a5996e57",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "6d26cd031bf4da239f927ee8319e20aaf91d805c5aa97218efb27c76cddd2c92",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "e1e9af099bac660bbffc991720e489fc771348ba48eaf7e8f7ceae7a9c23a3e0",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "e72a56e6798daa2689612f1bd25a0a6df0666b3311e54a4bfefdf10beaaed7d1",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "dd2687e3e65d06752eeca6a454432c3245f4cf24ee65080e14247260745afc91",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "d087fb8c8451d14b7434a49019fbfbe661662f10255996883dec907f0e209d7f",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "c2ce6ccbd932b610771d969e6f695a76d39073ee7b13d6787d6951c9f7532426",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "8ae64d5d8a9aed1ee5c9d1d10743f31bf813c795f0f3b69f3eeecba9cf82b803",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "9170904203d319c9932dc9bec7289745dd3ebd0360470f7914674395961344c1",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "3f061ef4de9bb4e7e254afd52c3fe2bef424478b4ac9aa2f05ed0c0cec49d908",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "d6a1cf3c378ddbe19342106aff2ba0da883d7ad356f7eb71ed21a798ac97c26c",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "7f5bfaccd742d43b56b0baa78ece7c0f00cc309445b410136bcfc53dc7a33a91",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "781d7079597c82811abdf43cdbbfde9dac84e585754c88ed93071f4133a57c1a",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "indefinite-article:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "474db3d12b8c9e35b86c11308296930264992568c0814ceec3cb09d971cc21b9",
+      "sources": [
+        "articles",
+        "forms"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "028dff5ac82e55feac7a46f09731714f1879730c3bf73049e71063334d94d8a2",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:practice",
+      "contentVersion": 4,
+      "contentHash": "8ea759807c2a9547f2f7077cd06a5c1836c781861e30e77d3655131e5e6682a0",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:notice",
+      "contentVersion": 4,
+      "contentHash": "079c95e1aa619e73a13431c011b506202e1d93eae9bd19f7b95941c79065b0d5",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "2965c9e93908b45bd567aa053361e3d39f81fcda8cf8a76021c81ed68fdade78",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "928e20afe4df7510c025b80184e5ec3001bddf9317acfdee6ae796f18ee35fd9",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "3020c99dcdf4cf600391c293faa210ee21302ea49ef6dae9c4a4b141df157562",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "a5b01e0eeac9f9be6b7b310814112faa169d13a852cef066fa5e8549a4d9cb2e",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "a811adc08c18957c6c571ef83578c6d44dc98c42dca4a5e09e8544bd154a09af",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "4d89e67ac0ac59e13cffd4d0772b22e8d8fc7cfbc9869e6c826d9bbc61e792ef",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "6a4f38691e26180a4810a2a63c450b81be878af34b68acf57f54eb497612deec",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "f764a883de8d6b278009be8654134861c3c31e809de74b84a43d6cc70dab6cde",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "7af4c9d328a301ff9f5636e34fe46eacb9ccc5c4b0909011ea4ffb51093a81d0",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "1a4b54539508ded3e5027783b5a7f5f2e2ecc350b54aa0b1d6c20123abbb4e72",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "da6dc6c7f2dea7b95dd58c3b1a715bc3148cf82f15c7f3cef699a14f6c4fdf5b",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "ae559035d7cfb72ad33c688c2b02d749de54fb8cf90352c649818a1106bf4519",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "24f696e14befd67bcb5274e831d4ad974c9367207ab520f4af6389ca6c6316b5",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "c1008675b4276bd183d07ae9e7760fb16a763e639e340857de36d0fcb695728d",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "93753c8ac6564e3ec9617ddd940c792773db1b9b16fa6cd1a5c214554d7512ed",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "fade88d47455b4303baa12cf8dc1efbe9a7af07a38deea8b1ff12599f1bb51c5",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "76bec5261feeb3945d57b5788b2d85736d4bfa602a50346870cdb0984f437cee",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "definite-article:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "c79f2191c69fa1f5b296dc4c24d63b52bce15141738f3ffb11e4308dd2030c56",
+      "sources": [
+        "articles",
+        "verbs",
+        "clauses",
+        "imperative"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "5c8b3bd53826ac2ab50500ae35842283d79c51258f834f9a7807ba5887e27e89",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:practice",
+      "contentVersion": 4,
+      "contentHash": "b3075d9a3fffc5b68944522343eedad71ef00293530d547c23f9a439438c4e75",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:notice",
+      "contentVersion": 4,
+      "contentHash": "04c4683f023645c9a01f5e78425006a243867c74a6a37a3677dbab996934a6de",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "d70bca42a57ad2efb57f887b9a6969935fc39e299bd7b499f620911dc483d961",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "a10bd96457a90aa4c937a288939e40170d225a8d9ad39f556304a397a6e26b51",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "6245697347986208cf80185fe4d7ec6a9ef21997d086b73aa21fd5b01ef2827c",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "d0f5c604925549279624337f642d499bbaae837be2c961df8288c0df6fee68cf",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "02f6aa1ccfa861f451b1fdf28322e87133f705f5260db730bb047e7e285888cc",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "d936c973b0411a431ac0aac559567ce6f1bed564d33f0c77d79947b6332e4d44",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "7a8dd42e24381bc57b6d71fae42f26e5eb01ba9f2b0bfc9e58a4d9f46c6caf38",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "59e3b9a21aff7849cfad71389b69aef6450264bcae8f0f7b23587939663dc930",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "4463bf7e42160cca08374000efa6e658be84281ae9d4514ab247abd79ac198c5",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "ea62a79d1cf40a22a18b84cd9f6e72f713229aa1e4cd19c85d7354c1d86d04f1",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "802277f8884469b793dbf2881ecf124393e54cedbc486c17566b53675db61292",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "46bb3bcb325b83b1dd59f0c0a4feeb48c2818c18eceed89a838857501ff7cf2d",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "acd2061e3c8302a8974d0d507a06f6dcbab283cdd0e43f066944e5dbd9aba6d8",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "817f70ee32813ba5e814fcc6ab0a569469f879d5ae006db198dac8a34a1464f7",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "618911a7311eb91485dcd1b02a4b164e34b4af8a388c512ba0eff46ac0c04710",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "bcf6bc328449ba7aa686d412705d8b47a8ac92caf7bf5a4b0e1fe513e6f0b586",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "3a37680c9b2ac8781abc6d936dbf0b7a0e9d16b256206d86849f910722fc39f1",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "9000a6a7ff9b2ee03c2a72787f7c1d15473214dd63b1335fe4327a89db6810e1",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:4",
+      "contentVersion": 4,
+      "contentHash": "4119cc694a0d58aa09652168e3da44682627d562e4dfaaf01138872e3f283fd9",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:5",
+      "contentVersion": 4,
+      "contentHash": "bc6d30c0154010fd0bf33783762cef1282382baa6c9d36f1be428ec07f6596a8",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:6",
+      "contentVersion": 4,
+      "contentHash": "73674bb425df7724b87e28c8bfa7d482900cc4402ba634c073be67772f6f3a09",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:7",
+      "contentVersion": 4,
+      "contentHash": "c414945a253ebd41506ad462743e1ef1ff806c3bb9cb55706b4a966c60297ab5",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:8",
+      "contentVersion": 4,
+      "contentHash": "dfa80bfd387451af29e06899589aefec12c7a37ca00ae50cbfe0d493f6c4ff03",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "number:4:frame:9",
+      "contentVersion": 4,
+      "contentHash": "8f5b6c63dcd2a52c0b5cf7774eafe4ad0cee1f4e04372e3647fbeb7b721c3b72",
+      "sources": [
+        "numbers",
+        "determiners"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "0eb87e77a0d19b26ad483a8d67b7dec7f8a56356c175cea34cba72315080d415",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:practice",
+      "contentVersion": 4,
+      "contentHash": "68469eef9c4547e54adb03c620d854621b39e6eb26010805da17444d1c06bedf",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:notice",
+      "contentVersion": 4,
+      "contentHash": "65df08d54dee9340ff68efe8ef1275aed6f178c77c1f8736c08766227bbb7351",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "0734da543f8de6e90ef3e143880f685c41044c1142f25bef2ecf7b74509a30e5",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "7537d424079ce7b8db593c5bd2c248aa4d2c633981c47bc606734fa372622a01",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "863569c1319e392f3e44f3096023b62f9d8504d88e6be6ca462ae893be5c434e",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "20f93c1e428b9e3a3fca9b2e958ffc60a30904e16379d660dbf974a021f7894f",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "292469f356b144ead2a1e78576034c0077b39fe88cac1c9f89d61669b8009ab1",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "2a7d4d375eb87baf609c2e8047b2ced15dbba1ff768a93d0261a40ce8f6d1618",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "b2e6ff3e4779554ba738f124fd05c4f45a0be5e5960c3b54c728ff454d10776c",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "e0598c2723b1f10ff9434045728c97a1110882dbdb57d9f25beff67fc109dee4",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "a20524b4089be1dc7bbefa518e26759fbd0700ec30df2f91a7a25fd160db2a8a",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "0def8244a66a2fdea7f65bb4dcb6487d36b1414cfa56c297a4331b7b56233a05",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "2d1ba023f893b7e07c4b31a048995b1c5a63533e87b40f18e27692a923026343",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:gloss:1:2",
+      "contentVersion": 4,
+      "contentHash": "08da564688711f9a3e7e0e2651a7f071a9b090444ac880ffa5606c153f65270a",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "ba8f926c83ed295a4cc1aff15a77e9aa9c267543be26d2037877c049bf08083e",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "645623fca11ccc8855e0fda56468501c443842cae54992ff4c285faf7d228daf",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "67293118cff60d91344018fbd55b91e81ccb1eeeb15f7fd66ec185022872656f",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "f56c447402758f37f4ca6d14d88271ade738e4db1681cb042b3c8b841df1fae1",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "4e643eac0583f75c7784c2f4c834abe729344f5e1988559b1a3d56a37d78d50b",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "178f41ab5795cd3b685ed0e11c4f431354ffb83222de2beab3f11c7a20df9d1d",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "0b8900256f157a8160a0b5a8dfe75b3820f8ca6a99c2e8be21331b6af9a890ba",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:frame:4",
+      "contentVersion": 4,
+      "contentHash": "165130052e771448fc2e354e9954009d403226a0f35d1cf05731ea0027dbaeca",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:frame:5",
+      "contentVersion": 4,
+      "contentHash": "18276c95ac35a56cb593abe2740c5caee3c74c793247d291b1f0a93d1d77d202",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "preposition:4:frame:6",
+      "contentVersion": 4,
+      "contentHash": "a60744ccc8a6c5387fa4c33512b4f087d3fe82bed838adbde0e5652db079fa95",
+      "sources": [
+        "prepositions",
+        "movement",
+        "verbs",
+        "pronouns",
+        "time"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "2f5ae0fdea970c850cb40b329eb87257a0f284446a8f85b6226120e0046b0505",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:practice",
+      "contentVersion": 4,
+      "contentHash": "67737133cf6f1aca5907b530c20005443940f1f414a2617f062a43762aaec9c9",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:notice",
+      "contentVersion": 4,
+      "contentHash": "e37e58aac474819ada8c3bf15e76c57f8e316b85c60d6c1f8a44026f9b6a96b5",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "a08eaa672a5220396ca84f304afb937504e5a5971914c0c761eaf9d1a22f5e6b",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "4ea9c18a2f0ae4e67173a29cb92b4a6953f3837b6c8cb2f122bf53fb1308c876",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "1ea13fe56934c62ab9ad1bfcee7cbb73aa5d973af03b4b22c43fa2bb5fb0d431",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "30e0579ef668e04001b7c28e98000ab452891b2b32872943203106aca36c8a3d",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "d39a3cad5f0d81d1f5c6d00633750a2e872534ee7ab0eabae7e5a04d03657954",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "262e15e4842749b348204a49f4093d0d14ed7a516d97bdcf576bc8a82e390d4a",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "6360fdc21277cafdc71e62ec13771b6e5a0186e11e52c3787b2b3c7e1f8e7ce8",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "654d8886c4e89d30494f04c914517a5786f5c6296ee25e767aa69ba447ee30ff",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "b13000248b4e527fffa03c9ea2ade2d91835ea336f02820341104cc002530782",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "7242eaece3f1c89a2a5fd020d931ae5efc6f317ceb8336bbb755fffb30639fff",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "16aab266476a4bcdc6bcded83e4c2ef60969e7eb236d2bf80761b9eb61a55cb3",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "48b0dd37fb20767629148c563f27d4c06298db1d73f9c7d838e7f8bd901e21b8",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "90bc14e9d7158e47617573b831b25de8682a9c03b3086040ed8f02c734253ba9",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "340c853e28216fd8f4909c086ee1380cf0682b57d7e3dc17e5675ae32a0d2c35",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "131c5864abef707b6b7e120a67c2361f17ffae252fac90e3f5e40afc7ea6e123",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "d44009a097ea529ac39ecf9f89e7aa6d4f85f7eccd02de00ccca3f4a9cde3e1f",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "9fc4271f5c2e0ca0d468e59cdef22a83a1b5da33b45ba04ad64516052651e360",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "494d9418b3c59883c7fdcb1ec8ac5ab437a461f6db2bb54d2bd216d666e878b0",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "748e545b18ec2086629e698e927582f1c5b69f06592f28e7a2b8089a518b0c84",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "conjunction:4:frame:4",
+      "contentVersion": 4,
+      "contentHash": "902cd6e0aa96e97846c3bcfa14a6c949c97be783e05543b8901e02832eeda042",
+      "sources": [
+        "conjunctions",
+        "reasons"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "0f2ef7af9c3366cfea613261daac290a629ce17484a942a1fd9bd27523b1bda3",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:practice",
+      "contentVersion": 4,
+      "contentHash": "9c9d4cfc4f5f1d954ea16e3ddc1263676cffb2d17453af62331c749d929aa6c2",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:notice",
+      "contentVersion": 4,
+      "contentHash": "f0a2198e83a9c1df4fdd7aab044640d4a2a03a87b7320b7df05aed82da5f04aa",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "af2a02c3d4ca3e91538fb22b379e0e3b10343829f6ae9245988a3a45d4e62ba4",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "7921750955bf9af2ae345f1c06aac9b13cb81bd96c9c293ec3e99faec6aacb18",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "ade8bf52a52863288f107ba8c261c33d29e62cd94a198bc233ad5462a5b0cbc7",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "3a07853cdc9898896b471986c2f14b1972b9c02ea7577f01b49a46015cf6796a",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "750ffb62a7b23aae1ce209961d288dfab4b62137b067d1bd0784dc27ddbe4a97",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "96b136a86857aaf2dcda7b7ea7a04dc6d86610dacf3b04553b42720109bc9cb1",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "81eb865c266ee132076ca860ef92c2fef43ffc6e8f67b131a64b475d6bcd0660",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "de05db33dd1682bccb9c843fc54ba33d96bc463efd48b5f63b9bea61c5b5eb9b",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "9e5309049a0f3b0a1fabf31accc66ccac643f97a6a1af4cdcf528153cf37fc28",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "a0cd2960face70cd96f041569ae7bcef846a66c42111c01cc755697e9da8ce5b",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "d1b9302535e32b97546a13817845c6a7770a6d1b15b41bc8de1e0c4aa3a29382",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "e7e1858f9f9a82354f5be5cf4d3a9afb1dad2d53309ee76d8616901cf1f6ae35",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "5061747885b5dee60847708938b3caf2844c8edc04388ec25b02cbe65f390c77",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "4d3ed409e8741e70075f0ed6eae364aa70e7365c0f91619b7f55f7731c5c2620",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "303faa09674718c55c44d17cc316825b00a77539ec8307323f4a897984abf10e",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "09462718bfef8a4e7859fda804e6ea25460f4729d33b69f032d3b50b9bff02af",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "5a1d6fc7479492d4965d89d53fa5e66272a84f63e7cf9c5fe8a6f6af61e8e714",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "3b6dec77413fbdd761430a601d45adffad63fd517763db943e6bf6e4e7c460b7",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "auxiliary:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "41123eae372301a6eec19d5bca2fcd3031c1018b5426f223cd7672135ab08c3e",
+      "sources": [
+        "verbs",
+        "forms",
+        "progressive",
+        "now"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "33386a99101a4f89647566f05053668604402766dcdf68d090b22d21e3aea1e9",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:practice",
+      "contentVersion": 4,
+      "contentHash": "8a71544084463aebfb89a8771ba2da553fa3536881e233699effb5962cb34635",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:notice",
+      "contentVersion": 4,
+      "contentHash": "98f192e237ace50f6342c680314d619d0dbb6e5c44f644bd04198b7a7d9b74d6",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "3ae1faafa7a70f949ffbbdfe4d0e5ecd0af4082e5e76ec8550f3b0e061b431f3",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "16352d5170a81adc4c9ac82626837bea518094d332cfcb41d467bbaa71ada3b6",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "1f72390392c03f1b52351e3422b94654e48838dd6c2ba56492aa958ab0d9e248",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "6c71e7f55df54515b851dbdd16b22689b9214019fb2ce6c0baa33f78c2eb957c",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "ad85f4558db4a1f98c9afbeff4f10d7fd15e2bab8e2fe594d0289a4bdcb5cad1",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "367bcc78586d87a155241f3e402a46b956e0d739f919e35f72c25d254f342fea",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "c90f3d2e24f2cab322826502c3347f7abbbe4bff957a3b1a0423cb6dcdccc19b",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "530b5693b9e846ffdb278fd1c8372503ae015e2155b2681a0f9567e8571a4528",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "10bc6644178867e4c258ef667cba1bf1274f877cb5c67f89038ee65e1b4ec05c",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "b9997ffcb8564aac8842de0b6a7e89a7a547efca0868f83835373e0b00f7b5d4",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "9d87fa87e55e2b62bc3b4cb55ae681a5e3f270e6e7fafaff1d3e2309415a4ffd",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "41116f7878dfd0b0dd054206378b32ef686e9947ab02a5c5f007e12c05592ef5",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "862ed571c684607b8d86cd45bd8babfda61513570a3605986d7072b9f860b664",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "8052a05526de88c98c590f3b3a06f352955c48dbda4d8f238a95689a68025bb4",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "988ec7c12299dc126cbbff30c2af853a266eb7e90a2927f2596ba4a734555689",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "c35cf9d94cb7909cb583b2ab94de2e430673603713f6d2d63a5a2804f2410689",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "c46374686c78f0f0318adb52f75a59b85b1c1aac641b6b7b78c061bdc9e01042",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "cad35beffb6c845125ae4434880d259462e9389285a41f429882574557774756",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "modal:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "815db38f5c4ca57f003b569e5afa061d290ffec47800c0bcd0f5684ad8932f97",
+      "sources": [
+        "modals",
+        "verbs"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "b01835d792791ce0dbda23142e64e5a7e1ba19904096172649303254d4f1a68a",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:practice",
+      "contentVersion": 4,
+      "contentHash": "790d9b78d7752bbc5ff2123fdb045892ccd5a49fa1e8730bb7273bfca53428ab",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:notice",
+      "contentVersion": 4,
+      "contentHash": "907a779e7a2a6c7711458ebebdc5d6fd1505147eeaf9301879623a4c01ba8ac2",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "6e82d3861cf5412438dda67bfbc6a45b83b09343c2b60674f82b80382e7c9082",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "bfd4d7dc391d67c99c39e9f75d4aa107197f5ca33bf1d69011a4efef6c87186d",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "50727678dc1409f73ac13114f760000eaaeeebc2d2ab4c61e6281d4b436e958f",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "f37aae80d9e4f894a65d74f4181c7eb977e3c96ae6c84c20a978f803e2d17778",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "6984b04ed1175883dda37a261e4f4cfd164585b04428a20aa616622a8e0b1079",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "5dd9777bc4025ac3d67d5b98aa81febfe287e8bc17759a7ce4d76132928c7cc2",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "a9c01e20aaa41c8dd4062993f665da00ad3e622bbd99cc496a809471db9fd1f0",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "98ba7a156f15b2e24d7325482153f6408c126b7481999a6da9c03528f92af854",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "afbb9a1edbdc7b42c0eb7cecc72cc5690c53e6ff59115933a6f3fbb34489f5a6",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "42bbdc5c0c52841fcf81aca250bb67ca3454d6f7e7e834257adc0a19c65c4f5a",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "87018db6343b09b60ef5506f2ad0018c9a09eda972502569eed48668ad4fc48d",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:gloss:1:2",
+      "contentVersion": 4,
+      "contentHash": "345aeb75b1f340cda8e5d599730c5f22e6b3bf11d9378bdb54c0433f44c22fb4",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "21ff25cc5ec8e9d5e7b0fb1473da4463baa4e8e8d9770d7be2566119721f07d1",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "bbad183a21687beaaf646a9112df0001ec37296befca688bf6f9b88edc237e6c",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "fc6ccd416908e0eab9bd6b147ef7fe9dfe6689222226d6dafc4652cb319022b0",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "ef0477594de0efbfe15450715ffdc9bfea626ddec4cc52d15f78c5ea5e673707",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "272990f7f374779834cdf24a528070abcf8e328514064168f136bc1185a9d9df",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "e9743334575c3d4e2e3d3b050381765c31f829a45056bfe4e06b23a97d7b7551",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "infinitive:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "551e41c20a13b2a460e8a52aa546ec3c53593b87b90df895c4a09be3dc535e56",
+      "sources": [
+        "infinitives",
+        "movement"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:lesson",
+      "contentVersion": 4,
+      "contentHash": "9b919f6faf5e694c593ec2607fc00a2570c2fce66888b011aed1a810fb9eb3aa",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:practice",
+      "contentVersion": 4,
+      "contentHash": "f38e95617af12a8c0328f2e9f099fb2d98a1dac6152dbce7dd7eac0090e9cc62",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:notice",
+      "contentVersion": 4,
+      "contentHash": "8095f479d71cd9fc2bdc518cd9f2ec91bafd27cd695ac0d7b9eb73d0113e9621",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:base:q1",
+      "contentVersion": 4,
+      "contentHash": "7467a9b062029cd2b2801633db64b6a98d9e5ef2405f635f2f3f6e422db38644",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:base:q2",
+      "contentVersion": 4,
+      "contentHash": "f742623d7255bcd5e28a34172e62489d15a8787bfaf606606f0d4b17eec0db71",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:base:q3",
+      "contentVersion": 4,
+      "contentHash": "613e47cb57321f6fbb6ba1416158c3b35d710aa7b088692c245e34a4e5c5b089",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:a:q1",
+      "contentVersion": 4,
+      "contentHash": "27c177f9839877d32148f6d9e075a6bdc4420669bf43df643276d195ca530497",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:a:q2",
+      "contentVersion": 4,
+      "contentHash": "921485bca62e67e05405bb5264448559172c3345447bed19807a58cbe45c3499",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:a:q3",
+      "contentVersion": 4,
+      "contentHash": "ff5ffaa4af189d670854bae504fa8bfe2629385ad6d68e2d222f602fb6d46406",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:b:q1",
+      "contentVersion": 4,
+      "contentHash": "4d4190ab3a83ef085139e0ba1faf106f23e460be497b15384ce83cd15eeb8f4d",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:b:q2",
+      "contentVersion": 4,
+      "contentHash": "a99b7552097be199ce51e1ccabaa8212bfdf79f414628127016f14551cd97d42",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:b:q3",
+      "contentVersion": 4,
+      "contentHash": "95aab3b2c15e9d995b59de170962e9e747522e2786d464157ded1976570fec9e",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "주어진 문맥·해석에서 정답과 대안을 확인하고 오답 설명·힌트의 범위를 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:reading:1",
+      "contentVersion": 4,
+      "contentHash": "b551fe60c068bfae1ef17fc41aa325dd665e6b39758854d573e24c3c0b386d23",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:gloss:1:1",
+      "contentVersion": 4,
+      "contentHash": "7052987e2548c3aca4e80c70f18dbbc747135feac67fbaa1e25a0cfe1b733348",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:reading:2",
+      "contentVersion": 4,
+      "contentHash": "89e549a01a3e7ac03fb3058a2eb68bdea41339571ac32ab308e26bc5ae1409ea",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:gloss:2:1",
+      "contentVersion": 4,
+      "contentHash": "02647de509e445522d5e62f19f4a2f86a1185d46cb5e1d4bcf8417600c10a9ac",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:gloss:2:2",
+      "contentVersion": 4,
+      "contentHash": "947e82604a5c0e054f9a29c4e072c8ec92bed1dea69f96ae631fc71fc956bab9",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "표시되는 뜻·품사·설명·쓰기 목표를 해당 문맥에서 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:example:1",
+      "contentVersion": 4,
+      "contentHash": "295352f341c4e87e090e24539965c2282b2a8b03190d1e79d7f24961fbda0057",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:example:2",
+      "contentVersion": 4,
+      "contentHash": "d6a6948fda8f593730c9333951233417cd5e17944f8c3b6325d7f8637fa3d1d5",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "작성한 예문의 뜻·시제·지시 관계와 실제 표면 순서의 역할 구분을 대조함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:frame:1",
+      "contentVersion": 4,
+      "contentHash": "85941c01b923ecf8d7934548ad0516d77ad97120fc9418ae448085bb10771a47",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:frame:2",
+      "contentVersion": 4,
+      "contentHash": "48e55b9bd181503345524589fecb42682aa28118810a6434460dc99007a788bf",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    },
+    {
+      "id": "exclamation:4:frame:3",
+      "contentVersion": 4,
+      "contentHash": "66c48cc93d004ff5d440e0d0bae1062cbde07c1d4a375fc5e477723a42f6d78f",
+      "sources": [
+        "interjections",
+        "oops",
+        "classes",
+        "clauses"
+      ],
+      "evidenceSummary": "제공하는 이 조합의 관사·수·동사 형태와 뜻을 확인함.",
+      "reviewedOn": "2026-10-03",
+      "status": "source-compared"
+    }
+  ],
+  "sourceHash": "ee5a913df61b184d09a1ec465656ec24dad0ae8f94edcf1a09924f187aee949d"
+}

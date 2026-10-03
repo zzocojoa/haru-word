@@ -16,7 +16,7 @@ const dateSchema = z.string().refine(isCalendarDate, '올바른 한국 날짜를
 const questionIdsSchema = z.tuple([z.string().max(80), z.string().max(80), z.string().max(80)]);
 const helpSchema = z.enum(['clue', 'answer', 'gloss', 'translation']);
 const practiceFields = {
-  contentVersion: z.union([z.literal(2),z.literal(3)]).optional(), questionIds: questionIdsSchema.optional(),
+  contentVersion: z.union([z.literal(2),z.literal(3),z.literal(4)]).optional(), questionIds: questionIdsSchema.optional(),
   clues: questionHintsSchema.optional(), choice: z.string().max(200).optional(),
 };
 export const selfCheckSchema = z.enum(['appropriate', 'needs_work', 'uncertain']);

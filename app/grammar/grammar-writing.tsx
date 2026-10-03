@@ -9,7 +9,7 @@ import { FeedbackIssueNotice } from '../feedback-issue-notice';
 import { AiUseNotice } from '../ai-use-notice';
 import { FeedbackDetail } from '../feedback-detail';
 import { frameSentence } from '@/lib/grammar/content-v2';
-import { practiceForVersion } from '@/lib/grammar/content-v3';
+import { practiceForVersion } from '@/lib/grammar/content-v4';
 import { Speak } from '../ui';
 
 type Props = {

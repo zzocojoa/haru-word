@@ -44,5 +44,5 @@ export function lessonForVersion(lesson:GrammarLesson,version?:number):GrammarLe
   return version===3?{...base,examples:base.examples.map(([en,ko,focus])=>[familyText(en,ko),ko,focus])}:base;
 }
 export function legacyNowNote(id:LessonId,version?:number,reviewing=false,index=0) {
-  return id==='auxiliary'&&version!==3&&!reviewing&&index===2?LEGACY_NOW_NOTE:undefined;
+  return id==='auxiliary'&&(version??1)<3&&!reviewing&&index===2?LEGACY_NOW_NOTE:undefined;
 }
