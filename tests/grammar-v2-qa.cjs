@@ -107,7 +107,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
       await click('이 문장으로 시작'); assert.ok((await writing.inputValue()).length);
       if (lesson.id === 'noun') {
         await writing.fill('I like coffee and books.');
-        await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click(); await page.locator('[data-feedback-code]').waitFor();
+        await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await page.locator('[data-feedback-code]').waitFor();
         assert.equal(await writing.inputValue(), 'I like coffee and books.');
       }
       await page.locator('.grammar-self-checks fieldset').nth(0).getByLabel('확인했어요', { exact: true }).check();

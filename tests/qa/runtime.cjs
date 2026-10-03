@@ -32,7 +32,7 @@ async function stopBrowsers(code) {
   process.exit(code);
 }
 async function launchBrowser(options = {}) {
-  const { engine = 'chromium', ...launchOptions } = options;
+  const { engine = process.env.QA_BROWSER || 'chromium', ...launchOptions } = options;
   if (!['chromium', 'webkit'].includes(engine)) throw new Error('Unsupported QA browser engine');
   if (!cleanupInstalled) {
     cleanupInstalled = true;

@@ -139,7 +139,7 @@ const until = async (check, label) => {
     await page.locator('.grammar-tile').first().click(); await input.waitFor(); assert.equal(await input.inputValue(), 'I like coffee and books.');
     let aiRoute;
     await page.route('**/api/grammar-feedback', route => { aiRoute = route; });
-    await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click(); await until(() => !!aiRoute, 'AI request');
+    await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await until(() => !!aiRoute, 'AI request');
     await back(); await page.locator('.grammar-catalog').waitFor();
     await aiRoute.fulfill({ json: { feedback: { original: 'I like coffee and books.', correctedSentence: 'I like tea.', explanation: '합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {});
     await page.waitForTimeout(200); assert.equal((await get()).state.grammar.noun.feedback, undefined);

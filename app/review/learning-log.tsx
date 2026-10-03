@@ -326,7 +326,7 @@ const SessionLogTable = memo(function SessionLogTable({
             {r.aiFeedback && <TableRow className="journal-feedback-row">
               <TableCell colSpan={6}>
                 <details className="notes-details">
-                  <summary aria-label={`${w?.word || '단어'} AI 교정 의견`}>AI 교정 의견</summary>
+                  <summary aria-label={`${w?.word || '단어'} AI 참고 의견`}>AI 참고 의견</summary>
                   <FeedbackDetail feedback={r.aiFeedback} />
                 </details>
               </TableCell>

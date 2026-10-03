@@ -14,10 +14,10 @@ const present = (result, sentence = original, overrides = {}) => sentenceFeedbac
 
 test('daily feedback separates retryable structure from a complete or stale result', () => {
   for (const [result, action, label, disabled] of [
-    [undefined, 'ready', 'AI로 문장 점검', false],
-    [legacy, 'upgradeStructure', '문장 구조 포함해 다시 점검', false],
-    [unavailable, 'retryStructure', '문장 구조 다시 점검', false],
-    [feedback, 'reviewed', '이 문장의 교정 결과가 있어요', true],
+    [undefined, 'ready', 'AI 참고 의견 요청', false],
+    [legacy, 'reviewed', '저장한 AI 참고 의견이 있어요', true],
+    [unavailable, 'reviewed', '저장한 AI 참고 의견이 있어요', true],
+    [feedback, 'reviewed', '저장한 AI 참고 의견이 있어요', true],
   ]) {
     const view = present(result);
     assert.equal(view.action, action); assert.equal(view.label, label); assert.equal(view.disabled, disabled);
@@ -25,7 +25,7 @@ test('daily feedback separates retryable structure from a complete or stale resu
     if (result) {
       assert.equal(present(result, ' \n' + original + '  ').action, action);
       assert.deepEqual(present(result, 'A different sentence.'), {
-        action: 'ready', label: 'AI로 문장 점검', disabled: false, unchanged: false, canApply: true,
+        action: 'ready', label: 'AI 참고 의견 요청', disabled: false, unchanged: false, canApply: true,
       });
     }
   }

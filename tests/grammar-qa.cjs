@@ -75,12 +75,12 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     // A delayed reply must not replace a newer draft; no real provider is called by QA.
     let aiCalls = 0, aiRelease; const aiHold = new Promise(resolve => aiRelease = resolve);
     await page.route('**/api/grammar-feedback', async route => { aiCalls++; const sentence = route.request().postDataJSON().sentence; await aiHold; await route.fulfill({ json: { feedback: { original: sentence, model: 'gemini-3.1-flash-lite', createdAt: new Date().toISOString(), meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '명사를 알맞게 사용했어요.' } } }); });
-    await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click(); await until(() => aiCalls === 1, 'AI started');
+    await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await until(() => aiCalls === 1, 'AI started');
     await getSentence().fill('I like books.'); aiRelease(); await page.waitForTimeout(250);
     assert.equal(await getSentence().inputValue(), 'I like books.'); assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
     await page.unroute('**/api/grammar-feedback');
     await page.route('**/api/grammar-feedback', route => route.fulfill({ status: 429, json: { error: 'Google 한도에 도달했어요.' } }));
-    await page.getByRole('button', { name: 'AI로 문장 점검', exact: true }).click();
+    await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
     await page.locator('[data-feedback-code="request_limited"]').waitFor(); assert.equal(await getSentence().inputValue(), 'I like books.');
     await page.getByLabel('뜻과 형태를 확인했어요', { exact: true }).check();
     await page.getByRole('button', { name: '수업 마치기', exact: true }).click();
