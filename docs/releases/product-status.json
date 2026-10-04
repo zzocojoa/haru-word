@@ -194,5 +194,64 @@
       "navigationReferenceFixed": "EN_Card e7e6852",
       "independentCodexContext": true
     }
+  },
+  "runtimeReconciliation": {
+    "status": "local_verified",
+    "checkedAt": "2026-10-04T09:52:42.932Z",
+    "branch": "codex/runtime-diagnostic-compat",
+    "baseMain": "c0a8556f89eda5be82ca1fe714f911e71a0c966e",
+    "preservedOperatingCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+    "decisions": "2026-10-04-runtime-decisions.json",
+    "guide": "../RUNTIME_RECONCILIATION.md",
+    "sharedContractPaths": 2,
+    "safetyVerificationPaths": 2,
+    "archivedExperimentPaths": 93,
+    "diagnosticSourceFiles": 6,
+    "diagnosticStoredObjects": 77,
+    "diagnosticDistinctForms": 25,
+    "diagnosticScope": "archived evaluation metadata; not learner DB, backup or browser diagnostic journal",
+    "experimentalProfilesAdded": 0,
+    "candidateFlagsAdded": 0,
+    "deployment": false,
+    "liveProviderCalls": 0,
+    "operationalDataChanges": false,
+    "nextDeploymentRequiresCurrentFlagAndClosedEvaluationCheck": true,
+    "validation": {
+      "unitTests": 565,
+      "failed": 0,
+      "skipped": 0,
+      "typecheck": true,
+      "lintErrors": 0,
+      "existingLintWarnings": 13,
+      "build": true,
+      "browserEngines": [
+        "chromium",
+        "webkit"
+      ],
+      "browserApi": "synthetic feedback, separate loopback Worker and local D1; no production data",
+      "viewportWidths": [
+        320,
+        390,
+        1440
+      ],
+      "fontScales": [
+        1,
+        2
+      ],
+      "axeViolations": 0,
+      "browserCases": [
+        "stored unsafe feedback",
+        "explicit retry and HTTP422",
+        "reload preservation",
+        "completed history",
+        "grammar draft and first-answer preservation"
+      ],
+      "physicalIphone": false,
+      "reviewedTestGapsFixed": 2,
+      "codexCli": "not rerun: previously confirmed installed client/model incompatibility; not counted as passed",
+      "report": "2026-10-04-runtime-review.md",
+      "remainingReviewFindings": 0,
+      "axeScope": "word safety notice at 390px and 100% font"
+    }
   }
 }
