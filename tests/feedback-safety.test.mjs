@@ -105,6 +105,22 @@ test('grammar writing withholds badges, free explanation, roles and apply action
 });
 
 
+test('grammar safety blocks an otherwise available correction action while preserving the draft',()=>{
+  const feedback={...structuredClone(actual('grammar-45','google')),original:'I am now write.',grammar:'needs_work'};
+  const lesson={id:'auxiliary',writing:'진행형 문장을 써 보세요.',stem:'I am writing.',check:'내 문장 점검'};
+  const progress={stage:5,sentence:feedback.original,answers:{},feedback,updatedAt:feedback.createdAt};
+  const noop=()=>{};
+  const render=()=>renderToStaticMarkup(createElement(GrammarWriting,{lesson,progress,canSave:true,aiPending:false,aiError:null,onAi:noop,onSentence:noop,onCheck:noop,onChecks:noop,onFrame:noop,onExplain:noop,onComplete:noop}));
+  assert.notEqual(feedback.correctedSentence,progress.sentence);
+  const unsafe=render();
+  assert.match(unsafe,/AI 설명 확인 필요/);assert.ok(unsafe.includes(progress.sentence));
+  assert.ok(!unsafe.includes('AI 제안을 내 문장에 적용'));
+  const safe=structuredClone(feedback);safe.structure.parts.at(-1).role='V';progress.feedback=safe;
+  const allowed=render();
+  assert.ok(allowed.includes('AI 제안을 내 문장에 적용'));assert.ok(!allowed.includes('AI 설명 확인 필요'));
+  assert.equal(feedbackSafetyIssue(feedback),'progressive_role');
+});
+
 test('word/history and grammar views expose only neutral reference opinions while preserving structure',()=>{
   const feedback=make('I like music.',[['I','S'],['like','V'],['music.','O']]);
   const before=JSON.stringify(feedback);
