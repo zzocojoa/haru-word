@@ -1,0 +1,414 @@
+{
+  "sourceCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+  "note": "Only allowlisted diagnostic codes/counts; no learner or provider text. Occurrences count stored objects, not provider calls.",
+  "sources": [
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-diagnostics.json",
+      "sha256": "4ded6f507af5078352ebb9dd26b5b227fc5928b7575f7d358ce7bc6f3dc835b4",
+      "diagnosticRecords": 17
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-root-cause.json",
+      "sha256": "d9db111e6fc15eba35d8666c55398f0697548b3ecccb64f8b4dfd3438baed812",
+      "diagnosticRecords": 11
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+      "sha256": "bfccece15595621f0f1a0fb02b73b484873736dff173ac85d090771ac8e0cd5b",
+      "diagnosticRecords": 13
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-coherent.json",
+      "sha256": "61442484eb2795b5aafc3f91f1ce98ebc1db2acdf9225c6faf14913680ef41ba",
+      "diagnosticRecords": 9
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-counted.json",
+      "sha256": "0e5d40f66bb50478a93828ef0392e493bfa2e28de03765ebe604899aaf129158",
+      "diagnosticRecords": 10
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-token.json",
+      "sha256": "e176319f2e65a6ad4bcfe8892784dc004f6216df31f46b4ddc5975d3efbf8916",
+      "diagnosticRecords": 17
+    }
+  ],
+  "records": [
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "span_leftover"
+      },
+      "occurrences": 8,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-diagnostics.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "span_order",
+        "partIndex": 2
+      },
+      "occurrences": 10,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-diagnostics.json",
+        "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+        "data/evaluations/english-accuracy-2026-10-02-token.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "unexpected_governor",
+        "partIndex": 2
+      },
+      "occurrences": 2,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-diagnostics.json"
+      ]
+    },
+    {
+      "stage": "judgment",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_judgment",
+        "reason": "target_judgment"
+      },
+      "occurrences": 3,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-diagnostics.json"
+      ]
+    },
+    {
+      "stage": "judgment",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_judgment",
+        "reason": "target_span"
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-diagnostics.json"
+      ]
+    },
+    {
+      "stage": "judgment",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_judgment",
+        "reason": "context_withholding"
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-diagnostics.json"
+      ]
+    },
+    {
+      "stage": "fields",
+      "diagnostic": "wire_fields",
+      "detail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "explanation",
+            "reason": "too_small"
+          }
+        ],
+        "truncated": false
+      },
+      "occurrences": 5,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-root-cause.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 6,
+        "consumedTokens": 3,
+        "reason": "part_exceeds_tokens",
+        "requestedTokens": 4,
+        "partIndex": 2
+      },
+      "occurrences": 2,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-root-cause.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 6,
+        "consumedTokens": 6,
+        "reason": "part_exceeds_tokens",
+        "requestedTokens": 2,
+        "partIndex": 3
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-root-cause.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 6,
+        "consumedTokens": 5,
+        "reason": "part_exceeds_tokens",
+        "requestedTokens": 2,
+        "partIndex": 3
+      },
+      "occurrences": 2,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-root-cause.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 5,
+        "consumedTokens": 5,
+        "reason": "part_exceeds_tokens",
+        "requestedTokens": 1,
+        "partIndex": 3
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-01-root-cause.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "governor_mismatch",
+        "partIndex": 3
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-annotated.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "governor_mismatch",
+        "partIndex": 2
+      },
+      "occurrences": 3,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+        "data/evaluations/english-accuracy-2026-10-02-counted.json",
+        "data/evaluations/english-accuracy-2026-10-02-token.json"
+      ]
+    },
+    {
+      "stage": "fields",
+      "diagnostic": "wire_fields",
+      "detail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "analysis.structure.parts[].meaning",
+            "reason": "schema"
+          }
+        ],
+        "truncated": false
+      },
+      "occurrences": 3,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+        "data/evaluations/english-accuracy-2026-10-02-coherent.json",
+        "data/evaluations/english-accuracy-2026-10-02-token.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "span_order",
+        "partIndex": 0
+      },
+      "occurrences": 2,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+        "data/evaluations/english-accuracy-2026-10-02-token.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "structure_contract"
+      },
+      "occurrences": 10,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+        "data/evaluations/english-accuracy-2026-10-02-coherent.json"
+      ]
+    },
+    {
+      "stage": "fields",
+      "diagnostic": "wire_fields",
+      "detail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "other",
+            "reason": "schema"
+          }
+        ],
+        "truncated": false
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-coherent.json"
+      ]
+    },
+    {
+      "stage": "fields",
+      "diagnostic": "wire_fields",
+      "detail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "other",
+            "reason": "too_small"
+          }
+        ],
+        "truncated": false
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-coherent.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 4,
+        "consumedTokens": 3,
+        "reason": "leftover_tokens"
+      },
+      "occurrences": 5,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-counted.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 4,
+        "consumedTokens": 4,
+        "reason": "part_exceeds_tokens",
+        "requestedTokens": 1,
+        "partIndex": 3
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-counted.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 4,
+        "consumedTokens": 2,
+        "reason": "part_exceeds_tokens",
+        "requestedTokens": 3,
+        "partIndex": 2
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-counted.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 6,
+        "consumedTokens": 4,
+        "reason": "part_exceeds_tokens",
+        "requestedTokens": 3,
+        "partIndex": 3
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-counted.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "chunk_count",
+      "detail": {
+        "kind": "tokens",
+        "tokenCount": 6,
+        "consumedTokens": 5,
+        "reason": "leftover_tokens"
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-counted.json"
+      ]
+    },
+    {
+      "stage": "fields",
+      "diagnostic": "wire_fields",
+      "detail": {
+        "kind": "schema",
+        "issues": [
+          {
+            "field": "analysis.target.observedUse",
+            "reason": "schema"
+          }
+        ],
+        "truncated": false
+      },
+      "occurrences": 10,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-token.json"
+      ]
+    },
+    {
+      "stage": "structure",
+      "diagnostic": "evidence_contract",
+      "detail": {
+        "kind": "evidence_structure",
+        "reason": "span_order",
+        "partIndex": 1
+      },
+      "occurrences": 1,
+      "sources": [
+        "data/evaluations/english-accuracy-2026-10-02-token.json"
+      ]
+    }
+  ]
+}
