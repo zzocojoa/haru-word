@@ -1,24 +1,26 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-04T09:02:06.857Z",
-  "note": "배포 기록과 Git 병합 상태를 구분한다. 현재 계정 요금·예약·키 상태의 실시간 확인이 아니다.",
+  "recordedAt": "2026-10-04T09:27:14.537Z",
+  "note": "배포 기록과 Git 병합 상태를 구분한다. verifiedDefaultCommit은 제품 조정 PR 병합 후 확인한 시점의 스냅샷이며 이 기록을 저장하는 후속 문서 커밋은 포함하지 않는다. 현재 계정 요금·예약·키 상태의 실시간 확인이 아니다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
       "defaultBranch": "master",
-      "verifiedDefaultCommit": "98832dbc97719688d66eea2067fa4c8e87d12cb3",
+      "verifiedDefaultCommit": "ca6edece0169bd11b3a75dfffca643e47be1b869",
       "mergedPullRequests": [
         7,
-        8
+        8,
+        9
       ]
     },
     "haruWord": {
       "url": "https://github.com/zzocojoa/haru-word",
       "defaultBranch": "main",
-      "verifiedDefaultCommit": "76883e5e3b8799e37866a9efdc8152fb2dc6c16b",
+      "verifiedDefaultCommit": "864a302fa7908a4bd5eedb2c8dfd83f5f65b0815",
       "mergedPullRequests": [
-        22
+        22,
+        23
       ]
     }
   },
@@ -71,11 +73,11 @@
     "operatingSourceCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17"
   },
   "reconciliation": {
-    "status": "reviewed_pending_merge",
+    "status": "merged",
     "enCardBranch": "codex/product-release-management",
     "haruWordBranch": "codex/card-release-reconciliation",
-    "enCardPullRequest": null,
-    "haruWordPullRequest": null,
+    "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/9",
+    "haruWordPullRequest": "https://github.com/zzocojoa/haru-word/pull/23",
     "originalMain": "76883e5e3b8799e37866a9efdc8152fb2dc6c16b",
     "preservedOperatingBranch": "codex/ai-card-automation",
     "preservedOperatingCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
@@ -88,7 +90,19 @@
       "tests/qa/card-studio-fixtures.cjs",
       "tests/qa/manifest.cjs"
     ],
-    "adaptedBrowserRegression": "tests/card-automation-qa.cjs"
+    "adaptedBrowserRegression": "tests/card-automation-qa.cjs",
+    "mergeResults": {
+      "enCard": {
+        "head": "e7e6852357787efc9a6cd6f1bee9f736f652be31",
+        "merge": "ca6edece0169bd11b3a75dfffca643e47be1b869",
+        "mergedAt": "2026-10-04T09:25:02Z"
+      },
+      "haruWord": {
+        "head": "781a0cf344b4ae3b7511af316f697560724662c0",
+        "merge": "864a302fa7908a4bd5eedb2c8dfd83f5f65b0815",
+        "mergedAt": "2026-10-04T09:26:48Z"
+      }
+    }
   },
   "verification": {
     "localUnitTests": 559,
@@ -133,6 +147,52 @@
       "independentAdversarial": true,
       "modelCoverage": "Codex agents in separate contexts; no cross-model claim",
       "codexCli": "not_completed: installed 0.132.0 rejects the selected model with HTTP 400; model and CLI unchanged"
+    },
+    "githubCI": {
+      "branch": {
+        "runId": 37191847029,
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/37191847029",
+        "head": "781a0cf344b4ae3b7511af316f697560724662c0",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Validate (Node 24)",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate (Node 22)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "pullRequest": {
+        "runId": 37192024997,
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/37192024997",
+        "head": "781a0cf344b4ae3b7511af316f697560724662c0",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Validate (Node 24)",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate (Node 22)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "enCard": "documentation-only; no configured GitHub checks; local diff/docs checks passed"
+    },
+    "prepushScan": {
+      "high": 0,
+      "mediumFalsePositives": 18,
+      "reason": "generated bundle numeric constants, UUID validation regex and .local object properties; inspected in context",
+      "hookBypassed": false
+    },
+    "documentationAudit": {
+      "remainingFindings": 0,
+      "navigationReferenceFixed": "EN_Card e7e6852",
+      "independentCodexContext": true
     }
   }
 }
