@@ -6,16 +6,18 @@ const config = { card_studio_enabled: 'true', card_studio_owner_id: 'owner', car
 const user = { userId: 'owner' };
 test('automation routes preserve owner and origin gates and map to the private API', async () => {
   const calls=[];const transport=async(url,init)=>{calls.push({url,init});return Response.json({});};
-  for(const [path,method] of [['/automation','GET'],['/automation/runs','GET'],['/automation','PUT'],['/automation/start','POST'],['/automation/pause','POST']]){
+  for(const [path,method] of [['/automation','GET'],['/automation/runs','GET'],['/automation','PUT'],['/automation/start','POST'],['/automation/pause','POST'],['/automation/trial','POST']]){
     const req=()=>request(path,{method,headers:{Origin:origin,'Content-Type':'application/json'},...(method==='GET'?{}:{body:'{"version":1}'})});
     assert.equal((await proxyCardStudio(req(),config,{userId:'other'},transport)).status,403);
     assert.equal((await proxyCardStudio(req(),config,user,transport)).status,200);
     assert.equal(calls.at(-1).url,config.card_studio_origin+'/api'+path);
   }
   const before=calls.length;
-  for(const [path,method] of [['/automation/tick','POST'],['/automation/start','GET'],['/api/automation','GET']])
+  for(const [path,method] of [['/automation/tick','POST'],['/automation/start','GET'],['/automation/trial','GET'],['/automation/trial','PUT'],['/api/automation','GET']])
     assert.equal((await proxyCardStudio(request(path,{method}),config,user,transport)).status,404);
   assert.equal((await proxyCardStudio(request('/automation/start',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}),config,user,transport)).status,403);
+  assert.equal((await proxyCardStudio(request('/automation/trial',{method:'POST',headers:{Origin:'https://other.example.test','Content-Type':'application/json'},body:'{}'}),config,user,transport)).status,403);
+  assert.equal((await proxyCardStudio(request('/automation/trial',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:'x'.repeat(4097)}),config,user,transport)).status,413);
   assert.equal((await proxyCardStudio(request('/automation',{method:'PUT',headers:{Origin:origin,'Content-Type':'application/json'},body:'x'.repeat(4097)}),config,user,transport)).status,413);
   assert.equal(calls.length,before);
 });

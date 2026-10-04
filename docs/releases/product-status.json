@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "product": "하루단어",
+  "recordedAt": "2026-10-04T09:02:06.857Z",
+  "note": "배포 기록과 Git 병합 상태를 구분한다. 현재 계정 요금·예약·키 상태의 실시간 확인이 아니다.",
+  "repositories": {
+    "enCard": {
+      "url": "https://github.com/zzocojoa/EN_Card",
+      "defaultBranch": "master",
+      "verifiedDefaultCommit": "98832dbc97719688d66eea2067fa4c8e87d12cb3",
+      "mergedPullRequests": [
+        7,
+        8
+      ]
+    },
+    "haruWord": {
+      "url": "https://github.com/zzocojoa/haru-word",
+      "defaultBranch": "main",
+      "verifiedDefaultCommit": "76883e5e3b8799e37866a9efdc8152fb2dc6c16b",
+      "mergedPullRequests": [
+        22
+      ]
+    }
+  },
+  "production": {
+    "site": {
+      "version": 114,
+      "source": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+      "deployment": "appgdep_6ac20ba024a881918c32cddea6cb317d",
+      "envRevision": 59,
+      "publicAccessRevision": 4,
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+      "latestVersionRead": {
+        "version": 114,
+        "status": "active",
+        "accessRevision": 4,
+        "checkedAt": "2026-10-04T09:02:06.858Z",
+        "method": "Sites get_site (read-only)"
+      }
+    },
+    "workerVersions": {
+      "en-card": [
+        {
+          "version_id": "6b289f9c-84cb-4905-9684-7b9897064109",
+          "percentage": 100
+        }
+      ],
+      "en-card-delivery": [
+        {
+          "version_id": "87d3daa6-9c4e-4cb7-9be0-38d656f38994",
+          "percentage": 100
+        }
+      ],
+      "en-card-automation": [
+        {
+          "version_id": "1c4600cd-a36d-456b-90e3-ce96b3245b8b",
+          "percentage": 100
+        }
+      ]
+    },
+    "workerEvidenceCheckedAt": "2026-10-04T08:22:51.147Z",
+    "workerEvidence": "https://github.com/zzocojoa/EN_Card/blob/98832dbc97719688d66eea2067fa4c8e87d12cb3/docs/evidence/UI_RESPONSIVE_2026-10-04.json",
+    "newDeploymentInThisReconciliation": false
+  },
+  "cardArtifacts": {
+    "enCardSourceCommit": "98832dbc97719688d66eea2067fa4c8e87d12cb3",
+    "studioSourceSha256": "d54a551c43c668552d714c7fa823c0643d63be305057b0a7bfac7514e63bd269",
+    "relaySourceSha256": "3a1d974ca3ed596d31120021902e3fb3450b92b7942a67b5e8509202a3a0732e",
+    "studioManifest": "public/card-studio/source.json",
+    "relayManifest": "lib/server/card-automation.generated.json",
+    "operatingSourceCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17"
+  },
+  "reconciliation": {
+    "status": "reviewed_pending_merge",
+    "enCardBranch": "codex/product-release-management",
+    "haruWordBranch": "codex/card-release-reconciliation",
+    "enCardPullRequest": null,
+    "haruWordPullRequest": null,
+    "originalMain": "76883e5e3b8799e37866a9efdc8152fb2dc6c16b",
+    "preservedOperatingBranch": "codex/ai-card-automation",
+    "preservedOperatingCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+    "classification": "2026-10-04-reconciliation.json",
+    "wholeOperatingSourceMerged": false,
+    "nextReleaseRequiresRuntimeReconciliation": true,
+    "preservedMainRegressionFiles": [
+      "tests/braces-guard.test.mjs",
+      "tests/card-automation.test.mjs",
+      "tests/qa/card-studio-fixtures.cjs",
+      "tests/qa/manifest.cjs"
+    ],
+    "adaptedBrowserRegression": "tests/card-automation-qa.cjs"
+  },
+  "verification": {
+    "localUnitTests": 559,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": true,
+    "lintErrors": 0,
+    "existingLintWarnings": 13,
+    "build": true,
+    "cardBrowserEngines": [
+      "chromium",
+      "webkit"
+    ],
+    "viewportWidths": [
+      320,
+      390,
+      1440
+    ],
+    "fontScales": [
+      1,
+      2
+    ],
+    "axeViolations": 0,
+    "initialBrowserFailure": "첫 명도 대비 검사 실패는 상세 진단 재실행에서 재현되지 않았다. 폰트·상태·전환 완료를 기다리도록 수정한 최종 실행은 통과했으며 최초 원인은 확정하지 않는다.",
+    "actualAiOrKakaoCalls": 0,
+    "physicalIphone": false,
+    "operatingCardArtifactFilesMatched": 131,
+    "classifiedDiffPaths": 114,
+    "mainRegressionFilesUnchanged": 4,
+    "freeConfigurationCheck": "passed; account plan and remote CPU not reverified",
+    "review": {
+      "report": "2026-10-04-review.md",
+      "remainingFindings": 0,
+      "specialistDomains": [
+        "testing",
+        "maintainability",
+        "security",
+        "api-contract",
+        "performance",
+        "design"
+      ],
+      "independentAdversarial": true,
+      "modelCoverage": "Codex agents in separate contexts; no cross-model claim",
+      "codexCli": "not_completed: installed 0.132.0 rejects the selected model with HTTP 400; model and CLI unchanged"
+    }
+  }
+}

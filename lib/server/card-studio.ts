@@ -20,7 +20,7 @@ const routes: Record<string, RegExp[]> = {
     /^\/(images|original)\/[a-f0-9]{64}(\.png)?$/,
   ],
   POST: [
-    /^\/automation\/(start|pause)$/,
+    /^\/automation\/(start|pause|trial)$/,
     /^\/api\/(cards|schedules|import|dry-run|disconnect|connection\/retry|studio\/kakao)$/,
     new RegExp(`^/api/cards/${UUID}/(image|review)$`),
     new RegExp(`^/api/schedules/${UUID}/(pause|cancel|resume|recovery)$`),

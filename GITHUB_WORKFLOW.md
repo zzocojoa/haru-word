@@ -1,5 +1,7 @@
 # GitHub 개발·검토 절차
 
+두 저장소의 책임·변경 순서·병합과 배포 상태는 [제품 관리 기준](PRODUCT_MANAGEMENT.md)과 [출시 기록](docs/releases/product-status.json)을 먼저 확인한다.
+
 ## 저장소와 배포 연결
 
 - 저장소: [zzocojoa/haru-word](https://github.com/zzocojoa/haru-word), 비공개.
@@ -25,15 +27,19 @@ npm run build
 
 ## 변경과 코드 검토
 
-현재 체크아웃에서:
+현재 체크아웃에서는 변경 파일을 먼저 확인하고 최신 GitHub 기본 브랜치에서 시작한다. `git status`가 깨끗하지 않으면 진행 작업을 보존한 뒤 전환한다. Sites 운영 소스의 긴 실험 브랜치를 새 제품 작업의 기준으로 사용하지 않는다.
 
 ```sh
-git switch -c codex/작업명
+git status --short --branch
+git fetch github main
+git switch --no-track -c codex/작업명 github/main
 git push -u github HEAD
 gh pr create --repo zzocojoa/haru-word --base main
 ```
 
 새 GitHub clone에서는 push 원격을 `origin`으로 바꾼다. PR에는 문제·검증·호환성·실패 모드·롤백을 기록하고 `/review`를 실행한다. 이 체크아웃의 검토 기준은 `github/main`이다. Sites 원격의 최신 커밋을 GitHub PR 기준으로 사용하지 않는다.
+
+`git fetch`와 분기 기준도 새 clone에서는 `origin/main`을 사용한다. `origin`이라는 이름만 보고 GitHub로 판단하지 말고 `git remote -v`로 확인한다. 카드 원본 변경은 EN_Card PR과 내보낸 원본 커밋을 함께 기록한다. 최초 운영/main 차이 정리가 완료되기 전에는 main을 운영에 그대로 재게시하지 않는다.
 
 ## CI 범위
 
