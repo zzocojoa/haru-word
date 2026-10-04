@@ -1,0 +1,711 @@
+{
+  "schemaVersion": 1,
+  "comparedAt": "2026-10-04T08:58:38.537Z",
+  "repository": "zzocojoa/haru-word",
+  "main": "76883e5e3b8799e37866a9efdc8152fb2dc6c16b",
+  "operating": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+  "mainTree": "0536f689316cfd0ef3a0293bbbba476db441dc93",
+  "operatingTree": "1d9916f1d2bb22a16b1c1e73781aae6ea16034c3",
+  "preservedBranch": "codex/ai-card-automation",
+  "totalFiles": 114,
+  "counts": {
+    "card_product": 9,
+    "preserve_main_tests": 5,
+    "mixed_documentation": 3,
+    "independent_safety_verification": 2,
+    "evaluation_experiment": 95
+  },
+  "categories": {
+    "card_product": "정식 EN_Card exporter로 UI/명세 재생성, trial 프록시와 경계 테스트만 반영",
+    "preserve_main_tests": "main의 더 많은 회귀를 보존. 카드 브라우저 검사는 새 automation 경로에 맞춤",
+    "mixed_documentation": "운영/실험 설명 전체 복사 없이 최신 관리·카드 안내만 수정",
+    "independent_safety_verification": "기존 안전 검증의 문서/QA 추가 후보. 이번 카드 변경과 분리 보존",
+    "evaluation_experiment": "평가 후보·수집기·실측 자료·진단 계약. 원래 브랜치/커밋 보존, 별도 검토 전 제품 반영하지 않음"
+  },
+  "files": [
+    {
+      "path": "AI_FEEDBACK_SAFETY.md",
+      "added": 40,
+      "removed": 0,
+      "category": "independent_safety_verification"
+    },
+    {
+      "path": "CARD_STUDIO_INTEGRATION.md",
+      "added": 3,
+      "removed": 11,
+      "category": "mixed_documentation"
+    },
+    {
+      "path": "CHUNKED_FEEDBACK.md",
+      "added": 2,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "COHERENT_FEEDBACK.md",
+      "added": 56,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_ANNOTATED.md",
+      "added": 83,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_CAUSE_PILOT.md",
+      "added": 68,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_COHERENT.md",
+      "added": 50,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_COHERENT_STOP.md",
+      "added": 59,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_COUNTED.md",
+      "added": 72,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_DIAGNOSTICS.md",
+      "added": 78,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_EVIDENCE.md",
+      "added": 51,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_REASONING.md",
+      "added": 46,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_RELATIONAL.md",
+      "added": 32,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_ROOT_CAUSE.md",
+      "added": 286,
+      "removed": 9,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_TOKEN.md",
+      "added": 80,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "OPERATIONS.md",
+      "added": 81,
+      "removed": 3,
+      "category": "mixed_documentation"
+    },
+    {
+      "path": "README.md",
+      "added": 25,
+      "removed": 5,
+      "category": "mixed_documentation"
+    },
+    {
+      "path": "RELATIONAL_FEEDBACK.md",
+      "added": 43,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "app/api/english-accuracy-evaluation/route.ts",
+      "added": 48,
+      "removed": 4,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "app/api/grammar-feedback/route.ts",
+      "added": 1,
+      "removed": 1,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "app/api/sentence-feedback/route.ts",
+      "added": 1,
+      "removed": 1,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "cloudflare-env.d.ts",
+      "added": 1,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/accuracy-cause-plan.json",
+      "added": 34,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/annotated-evidence-plan.json",
+      "added": 151,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/coherent-feedback-plan.json",
+      "added": 95,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/coherent-http-diagnostic-2026-10-02.json",
+      "added": 141,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/counted-evidence-plan.json",
+      "added": 41,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-diagnostics.json",
+      "added": 485,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-evidence.json",
+      "added": 5121,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-root-cause.json",
+      "added": 4058,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+      "added": 7438,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-coherent.json",
+      "added": 3846,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-counted.json",
+      "added": 4760,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-reasoning-pilot.json",
+      "added": 848,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-token.json",
+      "added": 2679,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/evidence-diagnostic-plan.json",
+      "added": 28,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/evidence-feedback-plan.json",
+      "added": 31,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/reasoning-pilot-plan.json",
+      "added": 43,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/reasoning-pilot-source-transition.json",
+      "added": 50,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/relational-evidence-plan.json",
+      "added": 157,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "data/evaluations/token-evidence-plan.json",
+      "added": 102,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/accuracy-cause-candidate.ts",
+      "added": 21,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/accuracy-cause-evaluation.ts",
+      "added": 51,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/annotated-evidence-evaluation.ts",
+      "added": 58,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/annotated-evidence-feedback.ts",
+      "added": 61,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/coherent-feedback-evaluation.ts",
+      "added": 56,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/coherent-feedback.ts",
+      "added": 184,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/counted-evidence-evaluation.ts",
+      "added": 43,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/counted-evidence-feedback.ts",
+      "added": 122,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/evidence-feedback-evaluation.ts",
+      "added": 51,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/evidence-feedback.ts",
+      "added": 203,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/feedback-fallback.ts",
+      "added": 5,
+      "removed": 3,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/feedback-validation-detail.ts",
+      "added": 43,
+      "removed": 12,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/gemini-feedback.ts",
+      "added": 2,
+      "removed": 2,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/grammar/feedback.ts",
+      "added": 4,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/groq-feedback.ts",
+      "added": 2,
+      "removed": 2,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/groq-http-diagnostics.ts",
+      "added": 39,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/provider-feedback-contract.ts",
+      "added": 5,
+      "removed": 1,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/reasoning-pilot-evaluation.ts",
+      "added": 70,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/relational-evidence-evaluation.ts",
+      "added": 56,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/relational-evidence-feedback.ts",
+      "added": 249,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/server/card-automation.generated.json",
+      "added": 1,
+      "removed": 1,
+      "category": "card_product"
+    },
+    {
+      "path": "lib/server/card-studio.ts",
+      "added": 1,
+      "removed": 1,
+      "category": "card_product"
+    },
+    {
+      "path": "lib/token-evidence-evaluation.ts",
+      "added": 98,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "lib/token-evidence-feedback.ts",
+      "added": 105,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "public/card-studio/assets/index-BJXgw8Ca.js",
+      "added": 0,
+      "removed": 64,
+      "category": "card_product"
+    },
+    {
+      "path": "public/card-studio/assets/index-D4NL-za-.js",
+      "added": 64,
+      "removed": 0,
+      "category": "card_product"
+    },
+    {
+      "path": "public/card-studio/assets/index-DkKYDZ7l.css",
+      "added": 0,
+      "removed": 1,
+      "category": "card_product"
+    },
+    {
+      "path": "public/card-studio/assets/index-Zet1kPl4.css",
+      "added": 1,
+      "removed": 0,
+      "category": "card_product"
+    },
+    {
+      "path": "public/card-studio/index.html",
+      "added": 3,
+      "removed": 3,
+      "category": "card_product"
+    },
+    {
+      "path": "public/card-studio/source.json",
+      "added": 4,
+      "removed": 4,
+      "category": "card_product"
+    },
+    {
+      "path": "scripts/diagnose-evidence-feedback.mjs",
+      "added": 183,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-accuracy-causes.mjs",
+      "added": 163,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-annotated-evidence.mjs",
+      "added": 207,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-coherent-feedback.mjs",
+      "added": 139,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-counted-evidence.mjs",
+      "added": 200,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-evidence-feedback.mjs",
+      "added": 186,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-reasoning-pilot.mjs",
+      "added": 121,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-relational-evidence.mjs",
+      "added": 207,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "scripts/evaluate-token-evidence.mjs",
+      "added": 207,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/accuracy-cause-remedies.test.mjs",
+      "added": 211,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/accuracy-cause-results.test.mjs",
+      "added": 93,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/annotated-evidence-cli.test.mjs",
+      "added": 200,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/annotated-evidence-evaluation.test.mjs",
+      "added": 229,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/annotated-evidence-feedback.test.mjs",
+      "added": 147,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/annotated-evidence-results.test.mjs",
+      "added": 187,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/braces-guard.test.mjs",
+      "added": 2,
+      "removed": 74,
+      "category": "preserve_main_tests"
+    },
+    {
+      "path": "tests/card-automation-qa.cjs",
+      "added": 0,
+      "removed": 92,
+      "category": "preserve_main_tests"
+    },
+    {
+      "path": "tests/card-automation.test.mjs",
+      "added": 4,
+      "removed": 80,
+      "category": "preserve_main_tests"
+    },
+    {
+      "path": "tests/card-studio.test.mjs",
+      "added": 1,
+      "removed": 1,
+      "category": "card_product"
+    },
+    {
+      "path": "tests/coherent-feedback-cli.test.mjs",
+      "added": 69,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/coherent-feedback-evaluation.test.mjs",
+      "added": 105,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/coherent-feedback.test.mjs",
+      "added": 164,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/counted-evidence-evaluation.test.mjs",
+      "added": 292,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/counted-evidence-feedback.test.mjs",
+      "added": 196,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/counted-evidence-results.test.mjs",
+      "added": 118,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/evidence-accuracy-results.test.mjs",
+      "added": 92,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/evidence-diagnostic-cohort.test.mjs",
+      "added": 316,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/evidence-diagnostics.test.mjs",
+      "added": 191,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/evidence-feedback-evaluation.test.mjs",
+      "added": 216,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/evidence-feedback.test.mjs",
+      "added": 215,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/feedback-safety-qa.cjs",
+      "added": 74,
+      "removed": 0,
+      "category": "independent_safety_verification"
+    },
+    {
+      "path": "tests/groq-http-diagnostics.test.mjs",
+      "added": 46,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/qa/card-studio-fixtures.cjs",
+      "added": 0,
+      "removed": 23,
+      "category": "preserve_main_tests"
+    },
+    {
+      "path": "tests/qa/manifest.cjs",
+      "added": 1,
+      "removed": 1,
+      "category": "preserve_main_tests"
+    },
+    {
+      "path": "tests/reasoning-pilot-results.test.mjs",
+      "added": 35,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/reasoning-pilot.test.mjs",
+      "added": 99,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/relational-evidence-cli.test.mjs",
+      "added": 207,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/relational-evidence-evaluation.test.mjs",
+      "added": 259,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/relational-evidence-feedback.test.mjs",
+      "added": 244,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/token-evidence-cli.test.mjs",
+      "added": 200,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/token-evidence-evaluation.test.mjs",
+      "added": 200,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/token-evidence-feedback.test.mjs",
+      "added": 189,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    },
+    {
+      "path": "tests/token-evidence-results.test.mjs",
+      "added": 155,
+      "removed": 0,
+      "category": "evaluation_experiment"
+    }
+  ]
+}
