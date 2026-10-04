@@ -1,2 +1,3 @@
 # Preserve generated asset bytes so source.json SHA256 survives every checkout.
 public/card-studio/** -text
+lib/server/card-automation.generated.* -text

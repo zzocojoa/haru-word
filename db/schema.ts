@@ -1,5 +1,10 @@
 import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
+// Short-lived server request receipts; no card content, keys, or learning revisions.
+export const cardAutomationNonces = sqliteTable('card_automation_nonces', {
+  nonce: text('nonce').primaryKey(), expiresAt: integer('expires_at').notNull(),
+}, table => [index('card_automation_nonce_expiry').on(table.expiresAt)]);
+
 // Optimistic revisions protect edits across devices. Individual progress and
 // session rows avoid D1's per-row size limit as the learning history grows.
 export const learnerStates = sqliteTable("learner_states", {
