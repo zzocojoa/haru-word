@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T23:33:11.009Z",
+  "candidateProductCommit": "a0eda3d66e3479e5f3ad3acd30a23404ad2ef5c6",
+  "status": "technical_preflight_passed_not_deployed",
+  "deploymentScope": {
+    "siteOnly": true,
+    "workerDeployments": false,
+    "environmentChanges": false,
+    "accessChanges": false,
+    "databaseMigrations": false,
+    "liveAiEvaluation": false,
+    "kakaoSend": false
+  },
+  "site": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "version": 114,
+    "source": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_10ca7f883b9081919fc11e852d34aafa",
+    "deploymentId": "appgdep_6ac20ba024a881918c32cddea6cb317d",
+    "deploymentStatus": "succeeded",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000c7ac8206a7805c3ccb480e9e",
+      "content_hash": "sha256:f616e22e0cde322f2ae763ab8f0a4c14b449b463eb6f09d916712b379185c673",
+      "size_bytes": 15595520,
+      "file_count": 316
+    },
+    "accessMode": "public",
+    "accessRevision": 4,
+    "environmentRevision": 59
+  },
+  "environment": {
+    "settings": [
+      {
+        "key": "card_studio_enabled",
+        "value": "true"
+      },
+      {
+        "key": "card_studio_origin",
+        "value": "https://en-card.kmksla4.workers.dev"
+      },
+      {
+        "key": "google_ai_enabled",
+        "value": "true"
+      },
+      {
+        "key": "grammar_enabled",
+        "value": "true"
+      },
+      {
+        "key": "grammar_practice_v2_enabled",
+        "value": "true"
+      },
+      {
+        "key": "grammar_practice_v3_enabled",
+        "value": "true"
+      },
+      {
+        "key": "grammar_practice_v4_enabled",
+        "value": "true"
+      },
+      {
+        "key": "large_backup_restore_enabled",
+        "value": "true"
+      }
+    ],
+    "secretNames": [
+      "card_studio_bridge_secret",
+      "card_studio_owner_id",
+      "google_api",
+      "groq_api"
+    ],
+    "secretValuesRead": false,
+    "absentSettings": [
+      "feedback_coherent_enabled",
+      "feedback_original_sentence_enabled",
+      "feedback_chunked_enabled",
+      "english_accuracy_token",
+      "english_accuracy_expires",
+      "english_accuracy_profile",
+      "groq_ai_enabled"
+    ]
+  },
+  "database": {
+    "binding": "DB",
+    "tableColumns": [
+      {
+        "table": "ai_daily_usage",
+        "columns": [
+          "user_id",
+          "day",
+          "request_count",
+          "last_request_at"
+        ]
+      },
+      {
+        "table": "card_automation_nonces",
+        "columns": [
+          "nonce",
+          "expires_at"
+        ]
+      },
+      {
+        "table": "grammar_progress",
+        "columns": [
+          "user_id",
+          "lesson_id",
+          "document"
+        ]
+      },
+      {
+        "table": "learner_states",
+        "columns": [
+          "user_id",
+          "revision",
+          "settings",
+          "updated_at"
+        ]
+      },
+      {
+        "table": "restore_jobs",
+        "columns": [
+          "id",
+          "user_id",
+          "active_owner",
+          "base_revision",
+          "manifest",
+          "file_hash",
+          "status",
+          "validated",
+          "expires_at",
+          "committed_revision"
+        ]
+      },
+      {
+        "table": "restore_parts",
+        "columns": [
+          "job_id",
+          "part_index",
+          "kind",
+          "hash",
+          "document"
+        ]
+      },
+      {
+        "table": "study_sessions",
+        "columns": [
+          "user_id",
+          "session_id",
+          "document"
+        ]
+      },
+      {
+        "table": "word_progress",
+        "columns": [
+          "user_id",
+          "entry_id",
+          "document"
+        ]
+      }
+    ],
+    "scope": "Only table/column names checked; returned row values were not output or persisted. No all-row scan, backup, data checksum, SQL types or index verification.",
+    "schemaAndMigrationSourceUnchanged": true
+  },
+  "workers": {
+    "checkedAt": "2026-10-04T23:24:05.701Z",
+    "versions": {
+      "en-card": {
+        "deploymentId": "7d41a97d-63ca-4ea7-8c1d-fe22260bfa3e",
+        "createdOn": "2026-10-04T08:16:46.03184Z",
+        "versions": [
+          {
+            "version_id": "6b289f9c-84cb-4905-9684-7b9897064109",
+            "percentage": 100
+          }
+        ]
+      },
+      "en-card-delivery": {
+        "deploymentId": "d312f360-254e-474f-9709-644aec09cda9",
+        "createdOn": "2026-10-04T07:08:56.844387Z",
+        "versions": [
+          {
+            "version_id": "87d3daa6-9c4e-4cb7-9be0-38d656f38994",
+            "percentage": 100
+          }
+        ]
+      },
+      "en-card-automation": {
+        "deploymentId": "2c6ef978-b7b2-4d73-8f30-28a3352cb20c",
+        "createdOn": "2026-10-04T07:08:36.324364Z",
+        "versions": [
+          {
+            "version_id": "1c4600cd-a36d-456b-90e3-ce96b3245b8b",
+            "percentage": 100
+          }
+        ]
+      }
+    },
+    "unchangedFromPriorReleaseRecord": true,
+    "authentication": "Initial stored-token read returned 401; standard Wrangler authentication refresh succeeded without interactive login."
+  },
+  "billing": {
+    "checkedAt": "2026-10-04T23:25:24.040Z",
+    "accountPlanHttpStatus": 403,
+    "currentFreeEligibilityVerified": false,
+    "limitation": "Subscription API returned 403 after authentication refresh. Browser fallback was unavailable. Existing free configuration is unchanged; current account billing is not certified."
+  },
+  "verification": {
+    "differential": {
+      "checkedAt": "2026-10-04T23:23:26.742Z",
+      "operating": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+      "candidate": "a0eda3d66e3479e5f3ad3acd30a23404ad2ef5c6",
+      "configurationRevision": 59,
+      "differentialMatches": [
+        {
+          "domain": "word",
+          "scenario": "google_success",
+          "matchingRequestAndResult": true,
+          "mockRequests": 1
+        },
+        {
+          "domain": "word",
+          "scenario": "google_503_fallback",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "word",
+          "scenario": "google_429_fallback",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "word",
+          "scenario": "uncertain",
+          "matchingRequestAndResult": true,
+          "mockRequests": 1
+        },
+        {
+          "domain": "word",
+          "scenario": "policy_refusal",
+          "matchingRequestAndResult": true,
+          "mockRequests": 1
+        },
+        {
+          "domain": "word",
+          "scenario": "both_fail",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "word",
+          "scenario": "google_network_fallback",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "word",
+          "scenario": "pre_cancelled",
+          "matchingRequestAndResult": true,
+          "mockRequests": 0
+        },
+        {
+          "domain": "grammar",
+          "scenario": "google_success",
+          "matchingRequestAndResult": true,
+          "mockRequests": 1
+        },
+        {
+          "domain": "grammar",
+          "scenario": "google_503_fallback",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "grammar",
+          "scenario": "google_429_fallback",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "grammar",
+          "scenario": "uncertain",
+          "matchingRequestAndResult": true,
+          "mockRequests": 1
+        },
+        {
+          "domain": "grammar",
+          "scenario": "policy_refusal",
+          "matchingRequestAndResult": true,
+          "mockRequests": 1
+        },
+        {
+          "domain": "grammar",
+          "scenario": "both_fail",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "grammar",
+          "scenario": "google_network_fallback",
+          "matchingRequestAndResult": true,
+          "mockRequests": 2
+        },
+        {
+          "domain": "grammar",
+          "scenario": "pre_cancelled",
+          "matchingRequestAndResult": true,
+          "mockRequests": 0
+        }
+      ],
+      "evaluation": [
+        {
+          "source": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+          "status": 404,
+          "code": "evaluation_disabled"
+        },
+        {
+          "source": "a0eda3d66e3479e5f3ad3acd30a23404ad2ef5c6",
+          "status": 404,
+          "code": "evaluation_disabled"
+        }
+      ],
+      "remoteTableAndColumnNamesMatched": 8,
+      "protectedPaths": [
+        "db",
+        "drizzle",
+        ".openai/hosting.json",
+        "package.json",
+        "package-lock.json",
+        "components",
+        "app/globals.css",
+        "app/api/state",
+        "app/api/restore",
+        "lib/server",
+        "lib/backup.ts",
+        "lib/validation.ts",
+        "lib/learning.ts",
+        "public/card-studio"
+      ],
+      "protectedPathsUnchanged": true,
+      "liveProviderCalls": 0,
+      "productionWrites": 0,
+      "limits": [
+        "Synthetic provider responses; does not measure model quality, CPU or delivery.",
+        "Remote DB names only; no all-row backup, type/index or all-record compatibility claim."
+      ]
+    },
+    "targetedRegressionTests": 65,
+    "regressionFailed": 0,
+    "regressionSkipped": 0,
+    "publicProbes": {
+      "checkedAt": "2026-10-04T23:26:31.572Z",
+      "unauthenticated": true,
+      "learnerWrites": 0,
+      "providerCalls": 0,
+      "results": [
+        {
+          "path": "/",
+          "method": "GET",
+          "status": 200,
+          "expectedStatus": 200
+        },
+        {
+          "path": "/cards",
+          "method": "GET",
+          "status": 307,
+          "expectedStatus": 307,
+          "redirectOrigin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+          "redirectPath": "/signin-with-chatgpt"
+        },
+        {
+          "path": "/api/state",
+          "method": "GET",
+          "status": 401,
+          "expectedStatus": 401
+        },
+        {
+          "path": "/api/card-studio/automation",
+          "method": "GET",
+          "status": 401,
+          "expectedStatus": 401
+        },
+        {
+          "path": "/api/english-accuracy-evaluation",
+          "method": "POST",
+          "status": 404,
+          "expectedStatus": 404,
+          "expectedCodeMatched": true
+        }
+      ]
+    },
+    "latestProductCI": "https://github.com/zzocojoa/haru-word/actions/runs/37242896060",
+    "latestProductCITestsPerNode": 565,
+    "nodeVersions": [
+      22,
+      24
+    ]
+  },
+  "rollback": {
+    "siteVersion": 114,
+    "siteVersionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_10ca7f883b9081919fc11e852d34aafa",
+    "sourceCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+    "archiveHash": "sha256:f616e22e0cde322f2ae763ab8f0a4c14b449b463eb6f09d916712b379185c673",
+    "action": "Redeploy the existing archive-backed Site v114 with its current public audience; do not roll back D1, settings, credentials or Workers.",
+    "executed": false
+  },
+  "remaining": [
+    "Refresh Site version, environment/access revisions and candidate/evaluation closure immediately before publication.",
+    "Current Cloudflare billing eligibility is unverified (403); no new paid resources or Worker deployment are included.",
+    "After authorized publication, verify authenticated learner/card read paths, use isolated local data for save/restore checks, and record the deployment ID."
+  ],
+  "productionWrites": 0,
+  "published": false
+}

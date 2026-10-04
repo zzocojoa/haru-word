@@ -47,7 +47,8 @@ Git 명령은 [GITHUB_WORKFLOW.md](GITHUB_WORKFLOW.md), 운영 설정은 [CARD_S
 
 - [x] 95개 평가 관련 경로를 분류하고 공통 진단 계약 2개와 보존할 실험 93개를 분리했다. 진단은 평가 자료용이며 학습 DB/백업 스키마가 아니다. [결정·검증 절차](docs/RUNTIME_RECONCILIATION.md).
 - [x] `AI_FEEDBACK_SAFETY.md`, `tests/feedback-safety-qa.cjs`를 최소 재현 fixture·QA 목록과 연결했다. 이미 main에 있는 안전 보호 구현은 그대로다. 이번 검증 결과는 출시 기록의 `runtimeReconciliation`을 확인한다.
-- [ ] 다음 게시 전에 최신 후보 flag·평가 Secret 폐쇄를 확인하고 활성 제품 경로·데이터 호환·복구 버전을 검증한다. 이후 작업은 기본 브랜치 → 단기 브랜치 → PR → 배포로 진행한다.
+- [x] 2026-10-05 후보 flag·평가 Secret 폐쇄, 활성 제품 경로·데이터 호환·복구 버전을 [사전 검증](docs/DEPLOYMENT_PREFLIGHT_2026-10-05.md)했다. 실제 게시·계정 요금 재확인과 게시 직전 상태 재조회는 남아 있다.
+- [ ] 확인한 비용 조건과 최신 상태를 바탕으로 기존 Site에 게시하고 배포 ID·검증 범위를 기록한다. 이후 작업은 기본 브랜치 → 단기 브랜치 → PR → 배포로 진행한다.
 
 ## 출시 기록 갱신 예시
 
