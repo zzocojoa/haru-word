@@ -43,10 +43,12 @@ async function main(){
     if(p.endsWith('/pause'))view={...view,enabled:false,reason:'paused',version:view.version+1};
     return route.fulfill({json:view});
    });
-   const url=base+'/card-studio/index.html#/editor';await page.goto(url);
-   const summary=page.locator('.automation-panel summary');
+   const automationPath=baseline?'/editor':'/automation';
+   const url=base+'/card-studio/index.html#'+automationPath;await page.goto(url);
+   const summary=page.locator(baseline?'.automation-panel summary':'.automation-status');
    if(!baseline){await expect(summary).toContainText('상태 확인 중');await expect.poll(()=>typeof releaseLoad).toBe('function');releaseLoad();}
-   await summary.focus();await page.keyboard.press('Enter');
+   if(baseline){await summary.focus();await page.keyboard.press('Enter');}
+   else await expect(page.getByRole('heading',{name:'AI 자동 제작',exact:true})).toBeVisible();
    const topic=page.getByLabel('주제',{exact:true});await expect(topic).toHaveValue('일상 회화');
    await expect(page.getByText('AI 검토 미통과',{exact:false}).first()).toBeVisible();
    await expect(page.getByText('AI 검토 통과',{exact:false})).toHaveCount(0);
@@ -58,9 +60,9 @@ async function main(){
    if(baseline){await expect(topic).toHaveValue('여행 영어 초안');report.push({engine,baselinePauseDraftLossReproduced:true});continue;}
    await expect(topic).toHaveValue('일시정지 후에도 남길 초안');await expect(page.getByRole('button',{name:'자동 제작 시작',exact:true})).toBeDisabled();
    await page.evaluate(()=>location.hash='/library');await expect(page).toHaveURL(/#\/library$/);
-   await page.evaluate(()=>location.hash='/editor');await summary.click();await expect(topic).toHaveValue('일시정지 후에도 남길 초안');
+   await page.evaluate(p=>location.hash=p,automationPath);await expect(topic).toHaveValue('일시정지 후에도 남길 초안');
    await page.getByRole('button',{name:'설정 저장',exact:true}).click();await expect(page.getByRole('button',{name:'자동 제작 시작',exact:true})).toBeEnabled();
-   page.on('dialog',d=>d.accept());await page.reload();await summary.click();await expect(topic).toHaveValue('일시정지 후에도 남길 초안');
+   page.on('dialog',d=>d.accept());await page.reload();await expect(topic).toHaveValue('일시정지 후에도 남길 초안');
    // Simultaneous DOM clicks must produce only one edit request, and navigating
    // away while it is pending must not let a stale response reopen the editor.
    await page.getByRole('button',{name:'카드 편집',exact:true}).first().evaluate(b=>{b.click();document.querySelectorAll('.automation-runs button')[3]?.click();});
@@ -71,15 +73,18 @@ async function main(){
    assert.ok((await cancelled).failure());
    releaseEdit();await expect(page).toHaveURL(/#\/library$/);
    await expect(page.getByRole('heading',{name:'카드 보관함',exact:true})).toBeVisible();
-   await page.evaluate(()=>location.hash='/editor');await summary.click();
+   await page.evaluate(p=>location.hash=p,automationPath);
+   await expect(summary).toContainText('일시정지');
+   await expect(page.getByRole('button',{name:'설정 저장',exact:true})).toBeEnabled();
    const visuals=[];
    for(const width of [320,390,1440])for(const zoom of [1,2]){
     await page.setViewportSize({width,height:900});await page.evaluate(z=>document.documentElement.style.fontSize=`${z*100}%`,zoom);
+    await page.evaluate(async()=>{await document.fonts.ready;await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));await Promise.all(document.getAnimations().filter(a=>a.effect?.getTiming().iterations!==Infinity).map(a=>a.finished.catch(()=>{})));});
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     await page.addScriptTag({path:axePath});const violations=await page.evaluate(()=>axe.run(document.querySelector('.automation-panel')));
-    assert.deepEqual(violations.violations.map(v=>v.id),[]);visuals.push({width,zoom,axe:0});
+    assert.deepEqual(violations.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,reason:n.failureSummary}))})),[]);visuals.push({width,zoom,axe:0});
    }
-   loadFail=true;await page.reload();await expect(summary).toContainText('상태 확인 실패');await summary.click();
+   loadFail=true;await page.reload();await expect(summary).toContainText('상태 확인 실패');
    await expect(page.getByRole('alert').filter({hasText:'합성 상태 조회 실패'})).toBeVisible();
    await page.getByRole('button',{name:'기록 새로고침',exact:true}).click();await expect(summary).toContainText('일시정지');
    await expect(page.getByRole('alert').filter({hasText:'합성 상태 조회 실패'})).toHaveCount(0);
