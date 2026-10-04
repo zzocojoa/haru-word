@@ -6,7 +6,7 @@ const config = { card_studio_enabled: 'true', card_studio_owner_id: 'owner', car
 const user = { userId: 'owner' };
 test('automation routes preserve owner and origin gates and map to the private API', async () => {
   const calls=[];const transport=async(url,init)=>{calls.push({url,init});return Response.json({});};
-  for(const [path,method] of [['/automation','GET'],['/automation/runs','GET'],['/automation','PUT'],['/automation/start','POST'],['/automation/pause','POST']]){
+  for(const [path,method] of [['/automation','GET'],['/automation/runs','GET'],['/automation','PUT'],['/automation/start','POST'],['/automation/pause','POST'],['/automation/trial','POST']]){
     const req=()=>request(path,{method,headers:{Origin:origin,'Content-Type':'application/json'},...(method==='GET'?{}:{body:'{"version":1}'})});
     assert.equal((await proxyCardStudio(req(),config,{userId:'other'},transport)).status,403);
     assert.equal((await proxyCardStudio(req(),config,user,transport)).status,200);
