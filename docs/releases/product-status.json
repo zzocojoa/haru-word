@@ -71,7 +71,7 @@
     "operatingSourceCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17"
   },
   "reconciliation": {
-    "status": "reviewed_uncommitted",
+    "status": "reviewed_pending_merge",
     "enCardBranch": "codex/product-release-management",
     "haruWordBranch": "codex/card-release-reconciliation",
     "enCardPullRequest": null,
