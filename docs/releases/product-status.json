@@ -196,7 +196,9 @@
     }
   },
   "runtimeReconciliation": {
-    "status": "local_verified",
+    "localValidationStatus": "passed",
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/25",
+    "integrationStateSource": "GitHub PR; live merge state and final-head CI are recorded there",
     "checkedAt": "2026-10-04T09:52:42.932Z",
     "branch": "codex/runtime-diagnostic-compat",
     "baseMain": "c0a8556f89eda5be82ca1fe714f911e71a0c966e",

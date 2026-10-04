@@ -1,6 +1,6 @@
 # 공통 진단 계약·독립 안전 QA 검증
 
-기준 `main@c0a8556`, 작업 브랜치 `codex/runtime-diagnostic-compat`. 이 보고서는 최초 로컬 검증 기록이다. 후속 PR·CI·병합은 GitHub PR과 출시 기록을 구분해서 확인한다.
+기준 `main@c0a8556`, 작업 브랜치 `codex/runtime-diagnostic-compat`. 이 보고서는 최초 로컬 검증 기록이다. 최종 커밋의 CI와 현재 병합 상태는 [PR #25](https://github.com/zzocojoa/haru-word/pull/25)에서 확인한다. [출시 기록](product-status.json)의 `runtimeReconciliation.localValidationStatus`는 로컬 검증 결과이며 실시간 병합 상태와 구분한다.
 
 ## 결과
 
