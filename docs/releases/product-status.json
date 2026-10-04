@@ -255,5 +255,18 @@
       "remainingReviewFindings": 0,
       "axeScope": "word safety notice at 390px and 100% font"
     }
+  },
+  "deploymentPreflight": {
+    "checkedAt": "2026-10-04T23:33:11.009Z",
+    "status": "technical_preflight_passed_not_deployed",
+    "candidateProductCommit": "a0eda3d66e3479e5f3ad3acd30a23404ad2ef5c6",
+    "report": "../DEPLOYMENT_PREFLIGHT_2026-10-05.md",
+    "evidence": "2026-10-05-deployment-preflight.json",
+    "siteVersion": 114,
+    "environmentRevision": 59,
+    "accessRevision": 4,
+    "workerVersionsReverified": true,
+    "currentFreeEligibilityVerified": false,
+    "published": false
   }
 }
