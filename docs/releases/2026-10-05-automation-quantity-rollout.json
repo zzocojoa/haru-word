@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T10:01:23.163Z",
+  "status": "deployed_pending_live_verification",
+  "sources": {
+    "enCard": "b9e7d31d08dd9cf63c70530f4e26adafef3c9510",
+    "haruProduct": "85a2fbae41819f260840b6e3e7091f25cb6cb1d5",
+    "site": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5",
+    "siteTreeMatchesHaruProduct": true
+  },
+  "backup": {
+    "encrypted": true,
+    "protection": "Windows DPAPI CurrentUser with restricted ACL",
+    "proof": {
+      "sqlSha256": "726CCB5BE02956D74DF4F7A9727029C6009789DA21C77BD632C68D7E52C392E0",
+      "bytes": 121668,
+      "createdAtUtc": "2026-10-05T09:40:53.2171266Z",
+      "roundTripVerified": true,
+      "ciphertextSha256": "FAF06162F32BEBF174534F6AEE2A2375FBE2A19AF91752333425892182853898",
+      "restrictedAcl": true,
+      "encryption": "Windows DPAPI CurrentUser"
+    },
+    "plaintextRemoved": true
+  },
+  "migration": {
+    "name": "0016_automation_quantity.sql",
+    "appliedCount": 16,
+    "foreignKeyErrors": 0,
+    "oldRunsIndexAndCountOne": true,
+    "originalColumnsPreserved": true,
+    "comparedTables": 18,
+    "maintenanceUsed": true,
+    "method": "Original SQL file plus migration history INSERT; remote file import",
+    "rollback": "Pause automation and deploy only 0016-compatible code; preserve immutable history. Never restore this backup over later user data without a separate recovery decision."
+  },
+  "workers": {
+    "en-card": {
+      "versions": [
+        {
+          "version_id": "f9394596-e75d-4a18-9a23-364a574c1543",
+          "percentage": 100
+        }
+      ],
+      "crons": [
+        "* * * * *"
+      ],
+      "bindingsUnchanged": true
+    },
+    "en-card-delivery": {
+      "versions": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "bindingsUnchanged": true
+    },
+    "en-card-automation": {
+      "versions": [
+        {
+          "version_id": "3127e215-0a75-4255-8056-bd30d732ada0",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "bindingsUnchanged": true
+    }
+  },
+  "site": {
+    "version": 117,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_eff474c6486c8191b0096664895eea28",
+    "source": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5",
+    "deployment": "appgdep_6ac373714aa48191bfbf211ceb8d6bd8",
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "envRevision": 59,
+    "publicAccessRevision": 4,
+    "environmentUnchanged": true,
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000008e24820690f1c112e25e93c3",
+      "content_hash": "sha256:37158d4f8adcc4e8a3494dd04350f74cf3495ae8c534a8b8967cfbb4a809e8bf",
+      "size_bytes": 15503360,
+      "file_count": 316
+    },
+    "localTarSha256": "3801f96745fc155515b8636fa348349a45bd880c78e987bb4364ec49b1e56709",
+    "treeMatchesHaruProduct": true
+  },
+  "validation": {
+    "typecheckWebAndThreeWorkerDryRuns": true,
+    "productionConfigDryRuns": true,
+    "freeConfiguration": true,
+    "siteBuild": true,
+    "publicChecks": {
+      "at": "2026-10-05T09:55:57.637Z",
+      "publicFiles": [
+        {
+          "path": "card-studio/source.json",
+          "status": 200,
+          "bytes": 15647,
+          "sha256": "ec8e570bf26f5424692cad6caa1b20927d8f810c351d18f63ad226ccdf03ac46",
+          "candidateSha256": "ec8e570bf26f5424692cad6caa1b20927d8f810c351d18f63ad226ccdf03ac46",
+          "platformInjectionRemoved": false,
+          "matchesCandidate": true
+        },
+        {
+          "path": "card-studio/index.html",
+          "status": 200,
+          "bytes": 1527,
+          "sha256": "46ac97c24db6bb141b4481c58a248e9f523afec528afae225a910ce3c0c19a25",
+          "candidateSha256": "280bd63b09cef4f4ca4c072d767b922f14f4a79fe79428c851fb4824d304cc27",
+          "platformInjectionRemoved": true,
+          "matchesCandidate": true
+        },
+        {
+          "path": "card-studio/assets/index-BR-GVJv1.js",
+          "status": 200,
+          "bytes": 404150,
+          "sha256": "b10333169d0a86be4004c4f0859865c92e76053dca7be9ed70ae800baca5dfd4",
+          "candidateSha256": "b10333169d0a86be4004c4f0859865c92e76053dca7be9ed70ae800baca5dfd4",
+          "platformInjectionRemoved": false,
+          "matchesCandidate": true
+        }
+      ],
+      "unauthenticated": [
+        {
+          "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+          "path": "/api/card-studio/api/automation",
+          "status": 401
+        },
+        {
+          "origin": "https://en-card.kmksla4.workers.dev",
+          "path": "/api/automation",
+          "status": 401
+        }
+      ]
+    },
+    "authenticatedBrowser": false,
+    "physicalDevice": false,
+    "actualMultipleCardReceipt": false,
+    "multipleCardCpu": false,
+    "idleAnalytics": {
+      "start": "2026-10-05T09:43:00Z",
+      "end": "2026-10-05T09:53:00Z",
+      "measurement": "Cloudflare adaptive analytics; quantiles are not per-request maxima",
+      "groups": {
+        "en-card": {
+          "worker": 12,
+          "durable": 0,
+          "workerErrors": 0,
+          "durableErrors": 0
+        },
+        "en-card-delivery": {
+          "worker": 9,
+          "durable": 0,
+          "workerErrors": 0,
+          "durableErrors": 0
+        },
+        "en-card-automation": {
+          "worker": 0,
+          "durable": 10,
+          "workerErrors": 0,
+          "durableErrors": 0
+        }
+      },
+      "scope": "Paused automation only. Not a multi-card load or send verification."
+    }
+  },
+  "automation": {
+    "enabled": true,
+    "version": 16,
+    "reason": null,
+    "dailyCards": 1,
+    "storedDailyCardsMissingDefaultsToOne": true,
+    "time": "07:00",
+    "nextDueAt": 1791237600000,
+    "testScheduled": false,
+    "testPreferencePending": true,
+    "note": "Deployment-only pause ended. Original settings JSON and daily 07:00 one-card operation preserved; multi-card test remains unscheduled pending the requested preference.",
+    "existingOperationResumed": true,
+    "resumeProof": {
+      "at": "2026-10-05T10:01:23.163Z",
+      "action": "resume_existing_after_temporary_deployment_pause",
+      "mechanism": "Guarded existing D1 administration; exact application schema and next-due validation; no UI identity substitution",
+      "beforeVersion": 15,
+      "afterVersion": 16,
+      "settingsUnchanged": true,
+      "settingsSha256": "6c749ff7d253955571020dc4854f7d52ff174563d84e63e8155aa0fec4f5099c",
+      "dailyCards": 1,
+      "time": "07:00",
+      "nextDueAt": 1791237600000,
+      "nextDueKst": "2026-10-06 07:00 Asia/Seoul",
+      "multiCardTestScheduled": false
+    }
+  },
+  "free": {
+    "priorExplicitUserWorkersFreeConfirmationPreserved": true,
+    "currentSubscriptionApiStatus": 403,
+    "newPaidResources": false,
+    "newResources": false,
+    "newSecrets": false
+  },
+  "operations": {
+    "productWorkerDeployments": 3,
+    "temporaryMaintenanceDeployments": 1,
+    "sitePublications": 1,
+    "databaseMigrations": 1,
+    "newAiCalls": 0,
+    "newKakaoSends": 0
+  },
+  "outstanding": [
+    "Choose next-day multi-card test time and post-test daily quantity",
+    "Start automation with guarded current configuration",
+    "Observe actual AI/review/PNG/schedule and current-version CPU under load",
+    "Compare per-card API acceptance with user phone receipt and original links"
+  ]
+}

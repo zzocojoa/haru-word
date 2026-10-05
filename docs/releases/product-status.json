@@ -1,23 +1,24 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T03:47:22.226Z",
-  "note": "현재 게시 정보는 production/pronunciationUiPublication을 따른다. mainPublication과 reconciliation, verification, runtimeReconciliation, deploymentPreflight는 각 작업 당시 기록이다. 제품 기준 커밋은 게시 소스와 동일한 파일을 가진 GitHub 커밋이며 이후 출시 기록 문서 커밋은 포함하지 않는다.",
+  "recordedAt": "2026-10-05T10:01:23.163Z",
+  "note": "현재 게시 정보는 production과 automationQuantityCandidate.rollout을 따른다. 나머지 항목은 각 작업 당시 기록이다. 여러 장 실제 수신·부하 CPU 검증은 아직 완료되지 않았다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
       "defaultBranch": "master",
-      "verifiedDefaultCommit": "ca6edece0169bd11b3a75dfffca643e47be1b869",
+      "verifiedDefaultCommit": "b9e7d31d08dd9cf63c70530f4e26adafef3c9510",
       "mergedPullRequests": [
         7,
         8,
-        9
+        9,
+        10
       ]
     },
     "haruWord": {
       "url": "https://github.com/zzocojoa/haru-word",
       "defaultBranch": "main",
-      "verifiedDefaultCommit": "7b3bf263e6ff0fd047e6331570d28c652e36dab8",
+      "verifiedDefaultCommit": "85a2fbae41819f260840b6e3e7091f25cb6cb1d5",
       "mergedPullRequests": [
         22,
         23,
@@ -25,57 +26,59 @@
         25,
         26,
         27,
-        28
+        28,
+        30,
+        31
       ]
     }
   },
   "production": {
     "site": {
-      "version": 116,
-      "source": "e369ed8d5b1dfb4a0895820cef2d30486649f9e5",
-      "deployment": "appgdep_6ac31d1904d88191a447e522ad861e8c",
+      "version": 117,
+      "source": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5",
+      "deployment": "appgdep_6ac373714aa48191bfbf211ceb8d6bd8",
       "envRevision": 59,
       "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
       "latestVersionRead": {
-        "version": 116,
+        "version": 117,
         "status": "active",
         "accessRevision": 4,
-        "checkedAt": "2026-10-05T03:47:22.226Z",
+        "checkedAt": "2026-10-05T09:53:35.768Z",
         "method": "Sites get_site after native deployment success"
       }
     },
     "workerVersions": {
       "en-card": [
         {
-          "version_id": "6b289f9c-84cb-4905-9684-7b9897064109",
+          "version_id": "f9394596-e75d-4a18-9a23-364a574c1543",
           "percentage": 100
         }
       ],
       "en-card-delivery": [
         {
-          "version_id": "87d3daa6-9c4e-4cb7-9be0-38d656f38994",
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
           "percentage": 100
         }
       ],
       "en-card-automation": [
         {
-          "version_id": "1c4600cd-a36d-456b-90e3-ce96b3245b8b",
+          "version_id": "3127e215-0a75-4255-8056-bd30d732ada0",
           "percentage": 100
         }
       ]
     },
-    "workerEvidenceCheckedAt": "2026-10-04T23:24:05.701Z",
-    "workerEvidence": "2026-10-05-deployment-preflight.json#workers",
+    "workerEvidenceCheckedAt": "2026-10-05T09:53:35.768Z",
+    "workerEvidence": "2026-10-05-automation-quantity-rollout.json#workers",
     "newDeploymentInThisReconciliation": true
   },
   "cardArtifacts": {
-    "enCardSourceCommit": "98832dbc97719688d66eea2067fa4c8e87d12cb3",
-    "studioSourceSha256": "d54a551c43c668552d714c7fa823c0643d63be305057b0a7bfac7514e63bd269",
-    "relaySourceSha256": "3a1d974ca3ed596d31120021902e3fb3450b92b7942a67b5e8509202a3a0732e",
+    "enCardSourceCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
+    "studioSourceSha256": "bf48fd6a63ceb37584e35bee389f7dc3fdfcd4d8c54e90b8e1b316e7b4086ac4",
+    "relaySourceSha256": "94db18c929b477f8c4eea202a4e53438a74fc92644f9163de40035d857f87fa4",
     "studioManifest": "public/card-studio/source.json",
     "relayManifest": "lib/server/card-automation.generated.json",
-    "operatingSourceCommit": "e369ed8d5b1dfb4a0895820cef2d30486649f9e5"
+    "operatingSourceCommit": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5"
   },
   "reconciliation": {
     "status": "merged",
@@ -425,7 +428,7 @@
     "remainingVerification": "Actual iPhone/ChatGPT-app audio and VoiceOver remain unverified. Browser tab handoff was queued; hosted learner interaction was not tested."
   },
   "automationQuantityCandidate": {
-    "status": "merged_not_deployed",
+    "status": "deployed_pending_live_verification",
     "recordedAt": "2026-10-05T09:17:01Z",
     "integrationStateSource": "GitHub PRs are authoritative for later merge state and final-head CI; product commits below exclude release-record-only commits.",
     "enCard": {
@@ -496,13 +499,19 @@
         "url": "https://github.com/zzocojoa/haru-word/actions/runs/37288170625",
         "head": "2825a909fcb430f3c614d636e3f393cee5e11399",
         "conclusion": "success",
-        "nodeVersions": [22, 24]
+        "nodeVersions": [
+          22,
+          24
+        ]
       },
       "githubFeatureMergeCI": {
         "url": "https://github.com/zzocojoa/haru-word/actions/runs/37289013068",
         "head": "cd545cb5163c1bf83a976fd579d62c0c0e1d67fc",
         "conclusion": "success",
-        "nodeVersions": [22, 24],
+        "nodeVersions": [
+          22,
+          24
+        ],
         "testsPerNode": 565,
         "lintErrors": 0,
         "existingLintWarnings": 13
@@ -551,17 +560,29 @@
       ],
       "rollback": "Pause automation; preserve all run/attempt history and use 0016-compatible code. Do not roll back to the old strict DO after quantity settings or multi-card history exist.",
       "remoteCpuVerified": false,
-      "actualMultipleCardReceiptVerified": false
+      "actualMultipleCardReceiptVerified": false,
+      "deployedAt": "2026-10-05T09:53:14.097365+00:00",
+      "evidence": "2026-10-05-automation-quantity-rollout.json",
+      "databaseMigrationApplied": true,
+      "workerDeployments": 3,
+      "siteVersion": 117,
+      "automationEnabled": true,
+      "testScheduled": false,
+      "existingDailyCards": 1,
+      "existingTime": "07:00",
+      "settingsVersion": 16,
+      "existingSettingsUnchanged": true
     },
     "operations": {
       "mergedPullRequests": 2,
       "mergedPullRequestScope": "Feature PRs EN_Card #10 and haru-word #30; release-record-only PRs are excluded.",
-      "sitePublications": 0,
-      "workerDeployments": 0,
-      "databaseMigrations": 0,
+      "sitePublications": 1,
+      "workerDeployments": 4,
+      "databaseMigrations": 1,
       "environmentChanges": 0,
       "liveAiCalls": 0,
-      "kakaoSends": 0
+      "kakaoSends": 0,
+      "workerDeploymentScope": "Three product Workers plus one temporary maintenance version"
     }
   }
 }
