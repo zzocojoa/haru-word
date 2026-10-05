@@ -426,15 +426,15 @@
   },
   "automationQuantityCandidate": {
     "status": "pull_requests_open_not_deployed",
-    "recordedAt": "2026-10-05T07:38:31.529Z",
+    "recordedAt": "2026-10-05T09:07:27Z",
     "integrationStateSource": "GitHub PRs are authoritative for later merge state and final-head CI; product commits below exclude release-record-only commits.",
     "enCard": {
       "branch": "codex/automation-card-quantity",
       "baseCommit": "ca6edece0169bd11b3a75dfffca643e47be1b869",
-      "productCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
+      "productCommit": "7fe40c38e879719ca6b0627ccc001135e32fc4ee",
       "pullRequest": "https://github.com/zzocojoa/EN_Card/pull/10",
       "merged": false,
-      "report": "https://github.com/zzocojoa/EN_Card/blob/5f7c88e5c65a5f837f44459ce4e969286e9214e4/docs/AI_CARD_AUTOMATION_QUANTITY.md"
+      "report": "https://github.com/zzocojoa/EN_Card/blob/7fe40c38e879719ca6b0627ccc001135e32fc4ee/docs/AI_CARD_AUTOMATION_QUANTITY.md"
     },
     "haruWord": {
       "branch": "codex/card-automation-quantity",
@@ -454,9 +454,10 @@
       "enCardInitialFullTests": 605,
       "enCardAffectedFinalTests": 360,
       "enCardAffectedFinalFiles": 19,
-      "quantityRegressionTests": 24,
+      "enCardAffectedFinalCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
+      "quantityRegressionTests": 27,
       "enCardBrowserTests": 38,
-      "strategy": "Initial full suite plus affected-file final results after the send fairness fix; counts overlap and must not be added.",
+      "strategy": "Initial full suite and 360 affected-file tests belong to the send fairness implementation. The later backend refactor has 78 tests recorded separately below; counts overlap and must not be added.",
       "typecheck": true,
       "buildAndThreeWorkerDryRuns": true,
       "freeConfigurationCheck": true,
@@ -471,7 +472,7 @@
       "axeViolations": 0,
       "physicalIphone": false,
       "independentReviewRemainingFindings": 0,
-      "reviewScope": "Same-model independent contexts, including final claim fairness and historical DB fixture review; no cross-model claim.",
+      "reviewScope": "Same-model independent review at EN_Card 5f7c88e, including final claim fairness and historical DB fixtures; no cross-model claim. The later backend refactor was checked by source/SQL comparison and the separate validation below, not a repeated specialist review.",
       "documentationAudit": "current, no additional corrections",
       "githubProductCI": {
         "url": "https://github.com/zzocojoa/haru-word/actions/runs/37278324202",
@@ -492,6 +493,31 @@
         "Generated Zod r.local property classified as internal hostname",
         "Verified GitHub Actions run ID classified as phone number"
       ]
+    },
+    "backendRefactor": {
+      "commit": "7fe40c38e879719ca6b0627ccc001135e32fc4ee",
+      "baseCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
+      "scope": "Separate daily run allocation, expiration, claim and completion; name existing timing policy and remove duplicate settings parsing.",
+      "validation": {
+        "testFiles": 4,
+        "testsPassed": 78,
+        "quantityTests": 27,
+        "productTests": 43,
+        "imageRpcTests": 7,
+        "localDoPngTests": 1,
+        "preservedSqlStatements": 28,
+        "typecheck": true,
+        "formatCheck": true,
+        "webBuildAndThreeWorkerDryRuns": true,
+        "freeConfigurationCheck": true,
+        "providerMode": "mock; real PNG rendered only in local workerd"
+      },
+      "studioAndRelaySourceUnchanged": true,
+      "relayRebuildMatchesExistingArtifact": true,
+      "exportRepeated": false,
+      "apiSchemaMigrationDependencyChanges": false,
+      "remoteCpuVerified": false,
+      "actualMultipleCardReceiptVerified": false
     },
     "rollout": {
       "requiredEnCardMigration": "0016_automation_quantity.sql",
