@@ -371,5 +371,7 @@
     "Resolve the scope for the requested 2026-10-05 20:38 KST test and register its supported execution path",
     "Update follow-up verification and guarded restoration for the replacement test",
     "Verify actual multiple-card generation, PNG, API acceptance, current-version CPU and separate user phone receipt"
-  ]
+  ],
+  "supersededBy": "2026-10-05-automation-multi-trial.json",
+  "historicalScope": "Version 117 / migration 0016 rollout and the cancelled midnight test; current operation follows supersededBy."
 }

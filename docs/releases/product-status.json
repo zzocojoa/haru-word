@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T10:45:31.314Z",
-  "note": "현재 게시 정보는 production과 automationQuantityCandidate.rollout을 따른다. 나머지 항목은 각 작업 당시 기록이다. 여러 장 실제 수신·부하 CPU 검증은 아직 완료되지 않았다.",
+  "recordedAt": "2026-10-05T12:26:50.984Z",
+  "note": "사용자는 21:03 이후 새 카드 4장 수신·클릭 정상으로 확인했다. 서버는 이번 시험 3장 접수·중복 1장·마감 1장 제외로 기록해 수신 수량 차이는 미해결이다. CPU 관측은 완료했고 정규 자동 제작은 재개하지 않았다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -34,24 +34,24 @@
   },
   "production": {
     "site": {
-      "version": 117,
-      "source": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5",
-      "deployment": "appgdep_6ac373714aa48191bfbf211ceb8d6bd8",
+      "version": 118,
+      "source": "835efb82983d1cbd77339fb12356c128eeac87c8",
+      "deployment": "appgdep_6ac38935f7888191ab847a6d6e866e45",
       "envRevision": 59,
       "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
       "latestVersionRead": {
-        "version": 117,
-        "status": "active",
-        "accessRevision": 4,
-        "checkedAt": "2026-10-05T09:53:35.768Z",
-        "method": "Sites get_site after native deployment success"
+        "version": 118,
+        "status": "succeeded",
+        "checkedAt": "2026-10-05T11:26:01.111472+00:00",
+        "method": "Native deployment success and public asset/source hash verification",
+        "accessRevision": 4
       }
     },
     "workerVersions": {
       "en-card": [
         {
-          "version_id": "f9394596-e75d-4a18-9a23-364a574c1543",
+          "version_id": "2009d5af-9ea0-4bea-bc48-a32a379f84af",
           "percentage": 100
         }
       ],
@@ -63,22 +63,22 @@
       ],
       "en-card-automation": [
         {
-          "version_id": "3127e215-0a75-4255-8056-bd30d732ada0",
+          "version_id": "aaf0cf6f-e37f-4dd2-9612-5daa49424a00",
           "percentage": 100
         }
       ]
     },
-    "workerEvidenceCheckedAt": "2026-10-05T09:53:35.768Z",
-    "workerEvidence": "2026-10-05-automation-quantity-rollout.json#workers",
+    "workerEvidenceCheckedAt": "2026-10-05T11:15:34.379Z",
+    "workerEvidence": "2026-10-05-automation-multi-trial.json#workers",
     "newDeploymentInThisReconciliation": true
   },
   "cardArtifacts": {
-    "enCardSourceCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
-    "studioSourceSha256": "bf48fd6a63ceb37584e35bee389f7dc3fdfcd4d8c54e90b8e1b316e7b4086ac4",
-    "relaySourceSha256": "94db18c929b477f8c4eea202a4e53438a74fc92644f9163de40035d857f87fa4",
+    "enCardSourceCommit": "f70b1d4",
+    "studioSourceSha256": "13605194283b75a28f5f22d6e8e3da6ef2653d4a886d8f7a60e37726d356e9bc",
+    "relaySourceSha256": "79e9b5ce76c8c32a26e4c2a7241b90939e3c768f8b0055374d282283e96a1526",
     "studioManifest": "public/card-studio/source.json",
     "relayManifest": "lib/server/card-automation.generated.json",
-    "operatingSourceCommit": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5"
+    "operatingSourceCommit": "835efb82983d1cbd77339fb12356c128eeac87c8"
   },
   "reconciliation": {
     "status": "merged",
@@ -428,7 +428,7 @@
     "remainingVerification": "Actual iPhone/ChatGPT-app audio and VoiceOver remain unverified. Browser tab handoff was queued; hosted learner interaction was not tested."
   },
   "automationQuantityCandidate": {
-    "status": "deployed_test_time_change_scope_pending",
+    "status": "trial_finished_partial_success",
     "recordedAt": "2026-10-05T09:17:01Z",
     "integrationStateSource": "GitHub PRs are authoritative for later merge state and final-head CI; product commits below exclude release-record-only commits.",
     "enCard": {
@@ -570,8 +570,8 @@
       "testScheduled": false,
       "existingDailyCards": 1,
       "existingTime": "07:00",
-      "settingsVersion": 18,
-      "existingSettingsUnchanged": false,
+      "settingsVersion": 20,
+      "existingSettingsUnchanged": true,
       "existingSettingsPreservedInEncryptedBackup": true,
       "test": {
         "day": "2026-10-06",
@@ -587,11 +587,16 @@
         "followupLocalTime": "2026-10-06 00:20 Asia/Seoul",
         "active": false,
         "superseded": true,
-        "followupStatus": "PAUSED",
-        "replacementRegistered": false
+        "followupStatus": "replaced",
+        "replacementRegistered": true,
+        "note": "Historical midnight registration. Current fresh five-card trial is in automationMultiTrial."
       },
-      "testPreferencePending": true,
-      "requestedTestLocalTime": "2026-10-05 20:38 Asia/Seoul"
+      "testPreferencePending": false,
+      "requestedTestLocalTime": "2026-10-05 20:38 Asia/Seoul",
+      "replacementEvidence": "2026-10-05-automation-multi-trial.json",
+      "latestSiteVersion": 118,
+      "latestDatabaseMigration": 17,
+      "existingSettingsNote": "Original daily settings restored byte-for-byte before version 20 trial; original midnight registration remains historical."
     },
     "operations": {
       "mergedPullRequests": 2,
@@ -604,5 +609,179 @@
       "kakaoSends": 0,
       "workerDeploymentScope": "Three product Workers plus one temporary maintenance version"
     }
+  },
+  "automationMultiTrial": {
+    "status": "trial_receipt_count_discrepancy",
+    "evidence": "2026-10-05-automation-multi-trial.json",
+    "enCardCommit": "f70b1d4",
+    "haruCommit": "755b880",
+    "siteVersion": 118,
+    "databaseMigration": 17,
+    "settingsVersion": 20,
+    "test": {
+      "kind": "trial",
+      "day": "2026-10-05",
+      "cards": 5,
+      "dueAt": 1791201780000,
+      "dueKst": "2026-10-05T21:03",
+      "preparationAt": 1791199680000,
+      "serverEvidenceVerified": false,
+      "phoneReceiptVerified": false,
+      "cpuVerified": true,
+      "cpuVerificationScope": "Observed four PNG renders and three actual trial sends; not five-card successful load"
+    },
+    "followup": {
+      "id": "en-card-5",
+      "status": "PAUSED",
+      "localTime": "2026-10-05 21:23 Asia/Seoul",
+      "singleOccurrence": true,
+      "target": "current thread",
+      "previousMidnightTestSuperseded": true,
+      "scope": "Verify five live acceptances, PNG and current-version CPU; conditionally resume original daily operation; phone confirmation remains separate",
+      "inspectionCompletedAt": "2026-10-05T12:26:50.984Z",
+      "inspectionComplete": true,
+      "fiveCardGoalAchieved": false,
+      "receiptDiscrepancyResolved": false
+    },
+    "preparationCheckpoint": {
+      "at": "2026-10-05T11:37:40.078Z",
+      "readOnly": true,
+      "cards": [
+        {
+          "item_index": 1,
+          "item_count": 5,
+          "status": "scheduled",
+          "error": null,
+          "revision": 1,
+          "render_attempts": 1,
+          "updated_at": 1791200024826,
+          "ai_attempts": 2
+        },
+        {
+          "item_index": 2,
+          "item_count": 5,
+          "status": "skipped",
+          "error": "duplicate",
+          "revision": 1,
+          "render_attempts": 0,
+          "updated_at": 1791200090422,
+          "ai_attempts": 1
+        },
+        {
+          "item_index": 3,
+          "item_count": 5,
+          "status": "render",
+          "error": null,
+          "revision": 1,
+          "render_attempts": 0,
+          "updated_at": 1791200207619,
+          "ai_attempts": 2
+        },
+        {
+          "item_index": 4,
+          "item_count": 5,
+          "status": "draft",
+          "error": null,
+          "revision": 1,
+          "render_attempts": 0,
+          "updated_at": 1791199603390,
+          "ai_attempts": 0
+        },
+        {
+          "item_index": 5,
+          "item_count": 5,
+          "status": "draft",
+          "error": null,
+          "revision": 1,
+          "render_attempts": 0,
+          "updated_at": 1791199603390,
+          "ai_attempts": 0
+        }
+      ],
+      "allFiveCanCompleteWithoutRecovery": false,
+      "note": "One draft was skipped by the existing duplicate policy. Other cards continue. No attempt/history reset or replacement generation was performed. Five-card live success and normal-operation resume are not confirmed."
+    },
+    "result": {
+      "evidence": "2026-10-05-automation-multi-trial.json#result",
+      "trialAcceptedCards": 3,
+      "totalTodayAcceptedCards": 4,
+      "requestedCards": 5,
+      "userReportedReceipts": 4,
+      "cardClicksNormal": true,
+      "receiptWindowClarificationPending": false,
+      "normalAutomationResumed": false,
+      "cpuObservedUnder10Ms": true,
+      "userConfirmedFourNewAfter2103": true,
+      "receiptCountMatchesServer": false,
+      "distinctCardsClarificationPending": false,
+      "fourDistinctCardsConfirmed": true,
+      "finalCheckAt": "2026-10-05T12:26:50.984Z",
+      "activeTrialWork": 0
+    }
+  },
+  "automationDuplicateRetry": {
+    "status": "verified_candidate_deployment_in_progress",
+    "enCardSourceCommit": "ad2e125f09f669cfd5420064d819112e6cd2bf3e",
+    "recordedAt": "2026-10-05T12:53:36.896Z",
+    "branches": {
+      "enCard": "codex/automation-duplicate-retry",
+      "haruWord": "codex/card-automation-duplicate-retry"
+    },
+    "bases": {
+      "enCard": "5bd3f88",
+      "haruWord": "ae19be6"
+    },
+    "requiredEnCardMigration": "0018_automation_duplicate_retry.sql",
+    "duplicateRejectionLimit": 3,
+    "fiveCardTrialLeadMinutes": 45,
+    "uiSourceSha256": "1e51601fb82b5be8382f52dac5c86714a5e17ba3cb9f12d92c2b7264662fd070",
+    "relaySourceSha256": "93927896def35a5c522dcc78d5e4eb7e6a30b2cb0194f3b4c174132a70e681f8",
+    "checkedArtifacts": {
+      "ui": 129,
+      "relay": 2
+    },
+    "validation": {
+      "enCardTests": 130,
+      "haruTests": 19,
+      "localBrowserTests": 2,
+      "browsers": [
+        "Chromium",
+        "WebKit"
+      ],
+      "types": "passed_both_repositories",
+      "builds": "passed_both_repositories_and_three_worker_dry_runs",
+      "freeConfiguration": "passed_local_only",
+      "accountPlanRechecked": false,
+      "remoteCpu": "not_measured"
+    },
+    "review": {
+      "specialists": [
+        "testing",
+        "maintainability",
+        "security",
+        "performance",
+        "data-migration",
+        "red-team"
+      ],
+      "independentAdversarial": true,
+      "sameModelIndependentContexts": true,
+      "fixedFindings": 3,
+      "unresolvedFindings": 0,
+      "separateCli": "not_counted_previous_0.132_model_incompatibility"
+    },
+    "changes": [
+      "Retry a duplicate in its existing slot and independently review each accepted replacement",
+      "Persist at most three rejected expressions without resetting attempt or revision budgets",
+      "Allow two duplicate draft retries per slot in the trial preparation window"
+    ],
+    "remoteChanges": {
+      "deployments": 0,
+      "migrations": 0,
+      "aiCalls": 0,
+      "kakaoCalls": 0,
+      "scheduleChanges": 0
+    },
+    "next": "Approved encrypted backup and write pause, EN_Card migration0018 and compatible DO, then existing Site publication and separate live validation",
+    "note": "Prior trial and receipt evidence is unchanged. Four distinct new receipts reported by the user versus three trial server acceptances remains unresolved; normal automation and en-card-5 remain inactive/paused."
   }
 }
