@@ -9,9 +9,15 @@ const progressFile = path.join(repo, 'work/oxford-images-progress.json');
 const journalFile = path.join(repo, 'work/oxford-images-pending.json');
 const assetWorkspace = process.env.OXFORD_ASSET_WORKSPACE || 'C:/Users/user/Documents/ChatGPT/하루단어';
 const sha = value => crypto.createHash('sha256').update(value).digest('hex');
+const serializeManifest = value => {
+  const { entries, ...header } = value;
+  // One entry per line keeps large inventories compact and changed entries reviewable.
+  return JSON.stringify(header, null, 2).slice(0, -2) + ',\n  "entries": [\n' +
+    entries.map(e => '    ' + JSON.stringify(e)).join(',\n') + '\n  ]\n}\n';
+};
 const writeAtomic = (target, value) => {
   const temporary = target + '.tmp';
-  fs.writeFileSync(temporary, JSON.stringify(value, null, 2) + '\n');
+  fs.writeFileSync(temporary, target === file ? serializeManifest(value) : JSON.stringify(value, null, 2) + '\n');
   fs.renameSync(temporary, target);
 };
 fs.mkdirSync(path.join(repo, 'work'), { recursive: true });
@@ -163,7 +169,7 @@ function review(reviewFile) {
 }
 function status() {
   console.log(JSON.stringify({ counts: m.counts, generationCalls: p.generationCalls, current: p.current,
-    next: m.entries.filter(e => e.status === 'waiting').slice(0, 10).map(e => ({ id: e.entryId, word: e.headword, pos: e.pos, meaning: e.baseMeaning, prepared: Boolean(e.prompt) })) }));
+    next: m.entries.filter(e => e.status === 'waiting').slice(0, 10).map(e => ({ id: e.entryId, word: e.headword || e.word, pos: e.pos, meaning: e.baseMeaning, prepared: Boolean(e.prompt) })) }));
 }
 const [command, ...args] = process.argv.slice(2);
 if (command === 'consent') consent();

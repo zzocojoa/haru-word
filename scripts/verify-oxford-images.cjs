@@ -43,7 +43,7 @@ for (const e of selected) {
   assert.equal(a.promptSha256, sha(actualPrompt));
 }
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const html = '<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;background:#f5f5ef;font-family:system-ui}article{margin:16px;width:288px;background:white}img{display:block;width:288px;height:auto;aspect-ratio:3/4}p{margin:0;padding:10px;font-size:14px}</style>' + selected.map(e => '<article data-id="' + e.entryId + '"><img src="/' + encodeURIComponent(e.file) + '" alt="' + escape(e.baseMeaning) + '"><p>' + escape(e.headword + ' · ' + e.pos + ' · ' + e.baseMeaning) + '</p></article>').join('');
+const html = '<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;background:#f5f5ef;font-family:system-ui}article{margin:16px;width:288px;background:white}img{display:block;width:288px;height:auto;aspect-ratio:3/4}p{margin:0;padding:10px;font-size:14px}</style>' + selected.map(e => '<article data-id="' + e.entryId + '"><img src="/' + encodeURIComponent(e.file) + '" alt="' + escape(e.baseMeaning) + '"><p>' + escape((e.headword || e.word) + ' · ' + e.pos + ' · ' + e.baseMeaning) + '</p></article>').join('');
 async function main() {
   let playwright;
   try { playwright = require('playwright'); }
