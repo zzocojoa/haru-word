@@ -423,5 +423,124 @@
       "executed": false
     },
     "remainingVerification": "Actual iPhone/ChatGPT-app audio and VoiceOver remain unverified. Browser tab handoff was queued; hosted learner interaction was not tested."
+  },
+  "automationQuantityCandidate": {
+    "status": "pull_requests_open_not_deployed",
+    "recordedAt": "2026-10-05T09:07:27Z",
+    "integrationStateSource": "GitHub PRs are authoritative for later merge state and final-head CI; product commits below exclude release-record-only commits.",
+    "enCard": {
+      "branch": "codex/automation-card-quantity",
+      "baseCommit": "ca6edece0169bd11b3a75dfffca643e47be1b869",
+      "productCommit": "7fe40c38e879719ca6b0627ccc001135e32fc4ee",
+      "pullRequest": "https://github.com/zzocojoa/EN_Card/pull/10",
+      "merged": false,
+      "report": "https://github.com/zzocojoa/EN_Card/blob/7fe40c38e879719ca6b0627ccc001135e32fc4ee/docs/AI_CARD_AUTOMATION_QUANTITY.md"
+    },
+    "haruWord": {
+      "branch": "codex/card-automation-quantity",
+      "baseCommit": "42328b146de16d4ceb690170ac84be7a2f4200ae",
+      "productCommit": "f77e8eb571dc94feab8706ff358f8036c781ff92",
+      "pullRequest": "https://github.com/zzocojoa/haru-word/pull/30",
+      "merged": false
+    },
+    "artifacts": {
+      "sourceCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
+      "studioSourceSha256": "bf48fd6a63ceb37584e35bee389f7dc3fdfcd4d8c54e90b8e1b316e7b4086ac4",
+      "relaySourceSha256": "94db18c929b477f8c4eea202a4e53438a74fc92644f9163de40035d857f87fa4",
+      "matchedFiles": 131,
+      "unchangedFromLocalQa": true
+    },
+    "validation": {
+      "enCardInitialFullTests": 605,
+      "enCardAffectedFinalTests": 360,
+      "enCardAffectedFinalFiles": 19,
+      "enCardAffectedFinalCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
+      "quantityRegressionTests": 27,
+      "enCardBrowserTests": 38,
+      "strategy": "Initial full suite and 360 affected-file tests belong to the send fairness implementation. The later backend refactor has 78 tests recorded separately below; counts overlap and must not be added.",
+      "typecheck": true,
+      "buildAndThreeWorkerDryRuns": true,
+      "freeConfigurationCheck": true,
+      "currentAccountPlanRechecked": false,
+      "priorUserFreeConfirmationPreserved": true,
+      "haruServerProxyTests": 19,
+      "haruBrowserEngines": [
+        "chromium",
+        "webkit"
+      ],
+      "axeCombinations": 12,
+      "axeViolations": 0,
+      "physicalIphone": false,
+      "independentReviewRemainingFindings": 0,
+      "reviewScope": "Same-model independent review at EN_Card 5f7c88e, including final claim fairness and historical DB fixtures; no cross-model claim. The later backend refactor was checked by source/SQL comparison and the separate validation below, not a repeated specialist review.",
+      "documentationAudit": "current, no additional corrections",
+      "githubProductCI": {
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/37278324202",
+        "head": "f77e8eb571dc94feab8706ff358f8036c781ff92",
+        "conclusion": "success",
+        "nodeVersions": [
+          22,
+          24
+        ],
+        "testsPerNode": 565,
+        "lintErrors": 0,
+        "existingLintWarnings": 13
+      },
+      "enCardGithubChecks": "No configured workflow; local checks passed.",
+      "prepushHookBypassed": false,
+      "prepushScannerNote": "Haru new-branch hook used the Sites origin baseline and exceeded its input cap. The GitHub branch was initialized at the existing verified main commit; normal push then scanned the complete 170459-byte feature addition. No scanner configuration was disabled.",
+      "scannerFalsePositives": [
+        "Generated Zod r.local property classified as internal hostname",
+        "Verified GitHub Actions run ID classified as phone number"
+      ]
+    },
+    "backendRefactor": {
+      "commit": "7fe40c38e879719ca6b0627ccc001135e32fc4ee",
+      "baseCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
+      "scope": "Separate daily run allocation, expiration, claim and completion; name existing timing policy and remove duplicate settings parsing.",
+      "validation": {
+        "testFiles": 4,
+        "testsPassed": 78,
+        "quantityTests": 27,
+        "productTests": 43,
+        "imageRpcTests": 7,
+        "localDoPngTests": 1,
+        "preservedSqlStatements": 28,
+        "typecheck": true,
+        "formatCheck": true,
+        "webBuildAndThreeWorkerDryRuns": true,
+        "freeConfigurationCheck": true,
+        "providerMode": "mock; real PNG rendered only in local workerd"
+      },
+      "studioAndRelaySourceUnchanged": true,
+      "relayRebuildMatchesExistingArtifact": true,
+      "exportRepeated": false,
+      "apiSchemaMigrationDependencyChanges": false,
+      "remoteCpuVerified": false,
+      "actualMultipleCardReceiptVerified": false
+    },
+    "rollout": {
+      "requiredEnCardMigration": "0016_automation_quantity.sql",
+      "order": [
+        "quiesce writes/Cron and preserve encrypted backup",
+        "D1 through 0016 and history/FK verification",
+        "quantity-compatible DO",
+        "private delivery Worker",
+        "main Worker",
+        "existing Haru Site"
+      ],
+      "rollback": "Pause automation; preserve all run/attempt history and use 0016-compatible code. Do not roll back to the old strict DO after quantity settings or multi-card history exist.",
+      "remoteCpuVerified": false,
+      "actualMultipleCardReceiptVerified": false
+    },
+    "operations": {
+      "mergedPullRequests": 0,
+      "sitePublications": 0,
+      "workerDeployments": 0,
+      "databaseMigrations": 0,
+      "environmentChanges": 0,
+      "liveAiCalls": 0,
+      "kakaoSends": 0
+    }
   }
 }
