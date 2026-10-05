@@ -1,5 +1,5 @@
 import { GROQ_FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
-import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, defaultFeedbackContract, type ProviderFeedbackContract, type ProviderFeedbackInput } from './provider-feedback-contract';
+import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, defaultFeedbackContract, type ProviderFeedbackContract } from './provider-feedback-contract';
 import { FeedbackError } from './provider-feedback-error';
 import type { FeedbackIssueCode } from './feedback-issue';
 
@@ -13,7 +13,7 @@ export function groqHttpError(status: number, retryHeader: string | null): Feedb
     ...(delay > 0 && delay <= 604800 ? { retryAfterSeconds: delay } : {}) });
 }
 
-export async function generateGroqFeedback(key: string, input: ProviderFeedbackInput, instruction: string, fetcher: typeof fetch = fetch, externalSignal?: AbortSignal, contract: ProviderFeedbackContract = defaultFeedbackContract): Promise<SentenceFeedback> {
+export async function generateGroqFeedback(key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch, externalSignal?: AbortSignal, contract: ProviderFeedbackContract = defaultFeedbackContract): Promise<SentenceFeedback> {
   const deadline = AbortSignal.timeout(GROQ_TIMEOUT_MS);
   const signal = externalSignal ? AbortSignal.any([deadline, externalSignal]) : deadline;
   let response: Response;

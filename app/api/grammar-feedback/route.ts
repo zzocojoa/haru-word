@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     }
     if (progress.stage !== 5 || !sentence.trim() || progress.sentence !== sentence) return json(feedbackErrorBody('stale_input'), 409);
     await recordFeedbackAttempt(db, user.userId, today(), Date.now());
-    const feedback = await generateGrammarFeedback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, feedback_original_sentence_enabled: env.feedback_original_sentence_enabled, feedback_chunked_enabled: env.feedback_chunked_enabled, feedback_coherent_enabled: env.feedback_coherent_enabled, signal: request.signal }, lessonForVersion(LESSON_MAP.get(lessonId)!, progress.contentVersion), sentence);
+    const feedback = await generateGrammarFeedback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, feedback_original_sentence_enabled: env.feedback_original_sentence_enabled, feedback_chunked_enabled: env.feedback_chunked_enabled, signal: request.signal }, lessonForVersion(LESSON_MAP.get(lessonId)!, progress.contentVersion), sentence);
     const safetyIssue = feedbackSafetyIssue(feedback);
     if (safetyIssue) {
       console.warn(JSON.stringify({ event: 'grammar_feedback_withheld', code: 'analysis_conflict', reason: safetyIssue, contentVersion }));

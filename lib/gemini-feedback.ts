@@ -1,6 +1,6 @@
 import { FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
 import { FeedbackError, providerHttpError, providerFinishError } from './provider-feedback-error';
-import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, defaultFeedbackContract, type ProviderFeedbackContract, type ProviderFeedbackInput } from './provider-feedback-contract';
+import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, defaultFeedbackContract, type ProviderFeedbackContract } from './provider-feedback-contract';
 export { FeedbackError } from './provider-feedback-error';
 export { responseJsonSchema } from './provider-feedback-contract';
 
@@ -25,7 +25,7 @@ export async function generateSentenceFeedback(
 // Both study domains share provider transport and strict response validation.
 // Instructions and the trusted target stay server-owned at their call sites.
 export async function generateTutorFeedback(
-  key: string, input: ProviderFeedbackInput, instruction: string, fetcher: typeof fetch = fetch, timeoutMs = 20000, externalSignal?: AbortSignal, contract: ProviderFeedbackContract = defaultFeedbackContract,
+  key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch, timeoutMs = 20000, externalSignal?: AbortSignal, contract: ProviderFeedbackContract = defaultFeedbackContract,
 ): Promise<SentenceFeedback> {
   let response:Response;
   const deadline = AbortSignal.timeout(timeoutMs);

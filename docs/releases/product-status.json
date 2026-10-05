@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "product": "하루단어",
+  "recordedAt": "2026-10-04T09:27:14.537Z",
+  "note": "배포 기록과 Git 병합 상태를 구분한다. verifiedDefaultCommit은 제품 조정 PR 병합 후 확인한 시점의 스냅샷이며 이 기록을 저장하는 후속 문서 커밋은 포함하지 않는다. 현재 계정 요금·예약·키 상태의 실시간 확인이 아니다.",
+  "repositories": {
+    "enCard": {
+      "url": "https://github.com/zzocojoa/EN_Card",
+      "defaultBranch": "master",
+      "verifiedDefaultCommit": "ca6edece0169bd11b3a75dfffca643e47be1b869",
+      "mergedPullRequests": [
+        7,
+        8,
+        9
+      ]
+    },
+    "haruWord": {
+      "url": "https://github.com/zzocojoa/haru-word",
+      "defaultBranch": "main",
+      "verifiedDefaultCommit": "864a302fa7908a4bd5eedb2c8dfd83f5f65b0815",
+      "mergedPullRequests": [
+        22,
+        23
+      ]
+    }
+  },
+  "production": {
+    "site": {
+      "version": 114,
+      "source": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+      "deployment": "appgdep_6ac20ba024a881918c32cddea6cb317d",
+      "envRevision": 59,
+      "publicAccessRevision": 4,
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+      "latestVersionRead": {
+        "version": 114,
+        "status": "active",
+        "accessRevision": 4,
+        "checkedAt": "2026-10-04T09:02:06.858Z",
+        "method": "Sites get_site (read-only)"
+      }
+    },
+    "workerVersions": {
+      "en-card": [
+        {
+          "version_id": "6b289f9c-84cb-4905-9684-7b9897064109",
+          "percentage": 100
+        }
+      ],
+      "en-card-delivery": [
+        {
+          "version_id": "87d3daa6-9c4e-4cb7-9be0-38d656f38994",
+          "percentage": 100
+        }
+      ],
+      "en-card-automation": [
+        {
+          "version_id": "1c4600cd-a36d-456b-90e3-ce96b3245b8b",
+          "percentage": 100
+        }
+      ]
+    },
+    "workerEvidenceCheckedAt": "2026-10-04T08:22:51.147Z",
+    "workerEvidence": "https://github.com/zzocojoa/EN_Card/blob/98832dbc97719688d66eea2067fa4c8e87d12cb3/docs/evidence/UI_RESPONSIVE_2026-10-04.json",
+    "newDeploymentInThisReconciliation": false
+  },
+  "cardArtifacts": {
+    "enCardSourceCommit": "98832dbc97719688d66eea2067fa4c8e87d12cb3",
+    "studioSourceSha256": "d54a551c43c668552d714c7fa823c0643d63be305057b0a7bfac7514e63bd269",
+    "relaySourceSha256": "3a1d974ca3ed596d31120021902e3fb3450b92b7942a67b5e8509202a3a0732e",
+    "studioManifest": "public/card-studio/source.json",
+    "relayManifest": "lib/server/card-automation.generated.json",
+    "operatingSourceCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17"
+  },
+  "reconciliation": {
+    "status": "merged",
+    "enCardBranch": "codex/product-release-management",
+    "haruWordBranch": "codex/card-release-reconciliation",
+    "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/9",
+    "haruWordPullRequest": "https://github.com/zzocojoa/haru-word/pull/23",
+    "originalMain": "76883e5e3b8799e37866a9efdc8152fb2dc6c16b",
+    "preservedOperatingBranch": "codex/ai-card-automation",
+    "preservedOperatingCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+    "classification": "2026-10-04-reconciliation.json",
+    "wholeOperatingSourceMerged": false,
+    "nextReleaseRequiresRuntimeReconciliation": true,
+    "preservedMainRegressionFiles": [
+      "tests/braces-guard.test.mjs",
+      "tests/card-automation.test.mjs",
+      "tests/qa/card-studio-fixtures.cjs",
+      "tests/qa/manifest.cjs"
+    ],
+    "adaptedBrowserRegression": "tests/card-automation-qa.cjs",
+    "mergeResults": {
+      "enCard": {
+        "head": "e7e6852357787efc9a6cd6f1bee9f736f652be31",
+        "merge": "ca6edece0169bd11b3a75dfffca643e47be1b869",
+        "mergedAt": "2026-10-04T09:25:02Z"
+      },
+      "haruWord": {
+        "head": "781a0cf344b4ae3b7511af316f697560724662c0",
+        "merge": "864a302fa7908a4bd5eedb2c8dfd83f5f65b0815",
+        "mergedAt": "2026-10-04T09:26:48Z"
+      }
+    }
+  },
+  "verification": {
+    "localUnitTests": 559,
+    "failed": 0,
+    "skipped": 0,
+    "typecheck": true,
+    "lintErrors": 0,
+    "existingLintWarnings": 13,
+    "build": true,
+    "cardBrowserEngines": [
+      "chromium",
+      "webkit"
+    ],
+    "viewportWidths": [
+      320,
+      390,
+      1440
+    ],
+    "fontScales": [
+      1,
+      2
+    ],
+    "axeViolations": 0,
+    "initialBrowserFailure": "첫 명도 대비 검사 실패는 상세 진단 재실행에서 재현되지 않았다. 폰트·상태·전환 완료를 기다리도록 수정한 최종 실행은 통과했으며 최초 원인은 확정하지 않는다.",
+    "actualAiOrKakaoCalls": 0,
+    "physicalIphone": false,
+    "operatingCardArtifactFilesMatched": 131,
+    "classifiedDiffPaths": 114,
+    "mainRegressionFilesUnchanged": 4,
+    "freeConfigurationCheck": "passed; account plan and remote CPU not reverified",
+    "review": {
+      "report": "2026-10-04-review.md",
+      "remainingFindings": 0,
+      "specialistDomains": [
+        "testing",
+        "maintainability",
+        "security",
+        "api-contract",
+        "performance",
+        "design"
+      ],
+      "independentAdversarial": true,
+      "modelCoverage": "Codex agents in separate contexts; no cross-model claim",
+      "codexCli": "not_completed: installed 0.132.0 rejects the selected model with HTTP 400; model and CLI unchanged"
+    },
+    "githubCI": {
+      "branch": {
+        "runId": 37191847029,
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/37191847029",
+        "head": "781a0cf344b4ae3b7511af316f697560724662c0",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Validate (Node 24)",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate (Node 22)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "pullRequest": {
+        "runId": 37192024997,
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/37192024997",
+        "head": "781a0cf344b4ae3b7511af316f697560724662c0",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Validate (Node 24)",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate (Node 22)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "enCard": "documentation-only; no configured GitHub checks; local diff/docs checks passed"
+    },
+    "prepushScan": {
+      "high": 0,
+      "mediumFalsePositives": 18,
+      "reason": "generated bundle numeric constants, UUID validation regex and .local object properties; inspected in context",
+      "hookBypassed": false
+    },
+    "documentationAudit": {
+      "remainingFindings": 0,
+      "navigationReferenceFixed": "EN_Card e7e6852",
+      "independentCodexContext": true
+    }
+  },
+  "runtimeReconciliation": {
+    "localValidationStatus": "passed",
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/25",
+    "integrationStateSource": "GitHub PR; live merge state and final-head CI are recorded there",
+    "checkedAt": "2026-10-04T09:52:42.932Z",
+    "branch": "codex/runtime-diagnostic-compat",
+    "baseMain": "c0a8556f89eda5be82ca1fe714f911e71a0c966e",
+    "preservedOperatingCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+    "decisions": "2026-10-04-runtime-decisions.json",
+    "guide": "../RUNTIME_RECONCILIATION.md",
+    "sharedContractPaths": 2,
+    "safetyVerificationPaths": 2,
+    "archivedExperimentPaths": 93,
+    "diagnosticSourceFiles": 6,
+    "diagnosticStoredObjects": 77,
+    "diagnosticDistinctForms": 25,
+    "diagnosticScope": "archived evaluation metadata; not learner DB, backup or browser diagnostic journal",
+    "experimentalProfilesAdded": 0,
+    "candidateFlagsAdded": 0,
+    "deployment": false,
+    "liveProviderCalls": 0,
+    "operationalDataChanges": false,
+    "nextDeploymentRequiresCurrentFlagAndClosedEvaluationCheck": true,
+    "validation": {
+      "unitTests": 565,
+      "failed": 0,
+      "skipped": 0,
+      "typecheck": true,
+      "lintErrors": 0,
+      "existingLintWarnings": 13,
+      "build": true,
+      "browserEngines": [
+        "chromium",
+        "webkit"
+      ],
+      "browserApi": "synthetic feedback, separate loopback Worker and local D1; no production data",
+      "viewportWidths": [
+        320,
+        390,
+        1440
+      ],
+      "fontScales": [
+        1,
+        2
+      ],
+      "axeViolations": 0,
+      "browserCases": [
+        "stored unsafe feedback",
+        "explicit retry and HTTP422",
+        "reload preservation",
+        "completed history",
+        "grammar draft and first-answer preservation"
+      ],
+      "physicalIphone": false,
+      "reviewedTestGapsFixed": 2,
+      "codexCli": "not rerun: previously confirmed installed client/model incompatibility; not counted as passed",
+      "report": "2026-10-04-runtime-review.md",
+      "remainingReviewFindings": 0,
+      "axeScope": "word safety notice at 390px and 100% font"
+    }
+  },
+  "deploymentPreflight": {
+    "checkedAt": "2026-10-04T23:33:11.009Z",
+    "status": "technical_preflight_passed_not_deployed",
+    "candidateProductCommit": "a0eda3d66e3479e5f3ad3acd30a23404ad2ef5c6",
+    "report": "../DEPLOYMENT_PREFLIGHT_2026-10-05.md",
+    "evidence": "2026-10-05-deployment-preflight.json",
+    "siteVersion": 114,
+    "environmentRevision": 59,
+    "accessRevision": 4,
+    "workerVersionsReverified": true,
+    "currentFreeEligibilityVerified": false,
+    "published": false
+  }
+}

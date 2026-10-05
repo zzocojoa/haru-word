@@ -5,7 +5,6 @@ import { generateFeedbackWithFallback, type FeedbackProviders } from '../feedbac
 import type { GrammarLesson } from './content';
 import { originalSentenceGrammarInput, originalSentenceGrammarInstruction } from '../original-sentence-feedback';
 import { chunkedFeedbackContract, chunkedGrammarInstruction } from '../chunked-feedback';
-import { coherentFeedbackContract, coherentFeedbackInput, coherentGrammarInstruction } from '../coherent-feedback';
 
 export const grammarFeedbackRequestSchema = z.object({ lessonId: lessonIdSchema, sentence: z.string().min(1).max(2000) }).strict();
 export function grammarFeedbackInput(lesson: GrammarLesson, sentence: string) {
@@ -22,9 +21,6 @@ Give a minimal correctedSentence preserving the learner's intent; use an empty s
 For a correct sentence repeat it unchanged. Write explanation in Korean, at most three short sentences explaining the target and a specific improvement.
 Never assign vocabulary familiarity, mastery, CEFR, or pronunciation scores. Return only the requested JSON.`;
 export function generateGrammarFeedback(key: string | FeedbackProviders, lesson: GrammarLesson, sentence: string, fetcher: typeof fetch = fetch) {
-  if (typeof key !== 'string' && key.feedback_coherent_enabled === 'true') {
-    return generateFeedbackWithFallback(key, coherentFeedbackInput(grammarFeedbackInput(lesson, sentence)), coherentGrammarInstruction, fetcher, coherentFeedbackContract);
-  }
   if (typeof key !== 'string' && key.feedback_chunked_enabled === 'true') {
     return generateFeedbackWithFallback(key, originalSentenceGrammarInput(lesson, sentence), chunkedGrammarInstruction, fetcher, chunkedFeedbackContract);
   }

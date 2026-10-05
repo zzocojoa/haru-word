@@ -7,10 +7,6 @@ import type { FeedbackValidationDetail } from './feedback-validation-detail';
 // Shared output contract, independent of either provider's HTTP protocol.
 export const FEEDBACK_OUTPUT_LIMITS = { tokens: 4096, textCharacters: 30000 } as const;
 
-// Provider transports serialize study data without interpreting its fields.
-// Existing string inputs remain valid; evaluation candidates may supply units.
-export type ProviderFeedbackInput = { sentence: string; [field: string]: string | string[] };
-
 // Application-owned stages only: never attach provider text or Zod issue paths.
 export const FEEDBACK_VALIDATION_STAGES = ['envelope', 'model', 'content_type', 'content_limit', 'json_syntax', 'fields', 'structure', 'judgment'] as const;
 export type FeedbackValidationStage = (typeof FEEDBACK_VALIDATION_STAGES)[number];

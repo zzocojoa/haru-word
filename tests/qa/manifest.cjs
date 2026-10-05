@@ -8,6 +8,7 @@ module.exports = [
   "backup-workflow-qa.cjs",
   "balanced-daily-qa.cjs",
   "browser-qa.cjs",
+  "card-automation-qa.cjs",
   "clock-continuity-qa.cjs",
   "comprehensive-qa.cjs",
   "connection-integrity-qa.cjs",

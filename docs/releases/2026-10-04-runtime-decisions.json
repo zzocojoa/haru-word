@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "baseMain": "c0a8556f89eda5be82ca1fe714f911e71a0c966e",
+  "preservedOperatingCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
+  "preservedOperatingBranch": "codex/ai-card-automation",
+  "scope": "Classification of 95 previously deferred paths and two safety verification paths; this is not a security review or activation of every experiment.",
+  "counts": {
+    "retain_safety_verification": 2,
+    "preserve_experiment_documentation": 14,
+    "preserve_gated_evaluation_api": 1,
+    "preserve_inactive_candidate_wiring": 7,
+    "preserve_evaluation_evidence": 19,
+    "preserve_experimental_library": 16,
+    "retain_shared_diagnostic_contract": 2,
+    "preserve_experimental_tool": 9,
+    "preserve_experimental_test": 27
+  },
+  "rules": {
+    "sharedContract": "Keep allowlisted diagnostic metadata readable; no experimental input type or candidate generator is added.",
+    "safetyVerification": "Reuse existing small replay fixture and register browser QA; do not import the full experimental dataset.",
+    "preserved": "Keep remaining 93 paths at the immutable operating commit. Existing generation and evaluation closures remain unchanged from base main.",
+    "nextDeployment": "Not authorized by this record. Before publishing main, confirm current Site/flags and preserve closed evaluation credentials and inactive coherent candidate. Review intentional omission of experimental endpoints separately."
+  },
+  "files": [
+    {
+      "path": "AI_FEEDBACK_SAFETY.md",
+      "disposition": "retain_safety_verification",
+      "operatingBlob": "49fbe8e58a998b8d960da0c56f7e37249fca4d74"
+    },
+    {
+      "path": "CHUNKED_FEEDBACK.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "cd1a396871de1abaf3ac9dafec3987d8fa88dd12"
+    },
+    {
+      "path": "COHERENT_FEEDBACK.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "715309e63b668fd4d1067e1c99b415202b94f5b7"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_ANNOTATED.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "c0547895258ea7df934e173da6c66e8cd6f139f3"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_CAUSE_PILOT.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "4cf56c6d34cfc51dcbae8c1c72e5dc7fdaade493"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_COHERENT.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "0b82f9eaeda4d0a31b50d8c1bc0e9cb7b2a825ee"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_COHERENT_STOP.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "ae9a74ca39f5bd483e07efcca052c6f2f52c8a20"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_COUNTED.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "6adcfd0c53bbcdd34c122b5b01fdb99971a342b9"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_DIAGNOSTICS.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "b706a215bb38ca536504c9b235bc96c5e0ea31a8"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_EVIDENCE.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "834ca760708dd42cd75a4d77d82d819f7c560061"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_REASONING.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "1ef15b0adfe48e9a7407ca5ba01192f500919fb6"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_RELATIONAL.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "cec349bb661f56a3fc1796c4430b80f57332b683"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_ROOT_CAUSE.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "367ce4ed7e92febee5c154e9e3776566bcf21b4d"
+    },
+    {
+      "path": "ENGLISH_ACCURACY_TOKEN.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "72e389d7664650b749c97f0a6acc808bb8871261"
+    },
+    {
+      "path": "RELATIONAL_FEEDBACK.md",
+      "disposition": "preserve_experiment_documentation",
+      "operatingBlob": "e9ada9a231fef11677f4a5f3ec3ddc05d589fb3d"
+    },
+    {
+      "path": "app/api/english-accuracy-evaluation/route.ts",
+      "disposition": "preserve_gated_evaluation_api",
+      "operatingBlob": "27f699ccbdfd8431f7f4bbb625ddb5366f7cad1d"
+    },
+    {
+      "path": "app/api/grammar-feedback/route.ts",
+      "disposition": "preserve_inactive_candidate_wiring",
+      "operatingBlob": "063edb8b19a0843330a18d18d71af56db44d6e19"
+    },
+    {
+      "path": "app/api/sentence-feedback/route.ts",
+      "disposition": "preserve_inactive_candidate_wiring",
+      "operatingBlob": "83ca3aabd1f5a18210ba4830080694f64f7f4232"
+    },
+    {
+      "path": "cloudflare-env.d.ts",
+      "disposition": "preserve_inactive_candidate_wiring",
+      "operatingBlob": "77b7359d3398b2b3618be80a3707ad3cbe61bef3"
+    },
+    {
+      "path": "data/evaluations/accuracy-cause-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "1dbf39b35f52e9eb9dc29b7f0c3185060b952334"
+    },
+    {
+      "path": "data/evaluations/annotated-evidence-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "f1c6901bac229299818bac289c156462bc3dd32e"
+    },
+    {
+      "path": "data/evaluations/coherent-feedback-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "4c43fa3e685906082949e6244840fbd642d4d36b"
+    },
+    {
+      "path": "data/evaluations/coherent-http-diagnostic-2026-10-02.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "eb6bc2de0263d8be584e40ea08274edd891c12cf"
+    },
+    {
+      "path": "data/evaluations/counted-evidence-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "7e9866f8e1939627812238afc4fffa951ffad8e3"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-diagnostics.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "6ec50d6cd39a7bd16e91ffe01ccbe503d08cb6c9"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-evidence.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "d395707d93ee4b4b9a8288c4c9756561caaaf7b8"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-root-cause.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "575a1ed1ca18cd1682dec92604d4032ade15d07d"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-annotated.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "d2e9a546b39fa88ce63acb59a14d53dfcc35a0f5"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-coherent.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "953115ee7dc53e3801a22ee80ac0e0d1c8448699"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-counted.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "51a92617398adf762e4c7c590f4eee4903709bba"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-reasoning-pilot.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "5aaa09f550de2fae6c11cf6cef334822de22f5d9"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-02-token.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "6336534f59835e97eb3e43003761c7ed0cb7318a"
+    },
+    {
+      "path": "data/evaluations/evidence-diagnostic-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "767ef9cfa0db96e85598b4b5f5bda4022e9da965"
+    },
+    {
+      "path": "data/evaluations/evidence-feedback-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "6901f5f25903a22d9d4ccd36c41046e2deefb0ae"
+    },
+    {
+      "path": "data/evaluations/reasoning-pilot-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "2e6bcfebaa6b24c9eedcb2f454c73ed676ecbd3c"
+    },
+    {
+      "path": "data/evaluations/reasoning-pilot-source-transition.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "b5486850376c05089bcf9e7f71507c164055ff3a"
+    },
+    {
+      "path": "data/evaluations/relational-evidence-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "d94b28992e75edaec820fecce79adab5abbf5590"
+    },
+    {
+      "path": "data/evaluations/token-evidence-plan.json",
+      "disposition": "preserve_evaluation_evidence",
+      "operatingBlob": "76b0c93df8a70e8ce1cc48ef2c4f71f7b07b8122"
+    },
+    {
+      "path": "lib/accuracy-cause-candidate.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "82cf600d8ed1d2e1f91aadbf316af782855ba490"
+    },
+    {
+      "path": "lib/accuracy-cause-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "1d1a65fbdb51a87fc0e2798d8d963892fc974371"
+    },
+    {
+      "path": "lib/annotated-evidence-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "418abbea7b72e97136e6e9f840d3db9720f97eb6"
+    },
+    {
+      "path": "lib/annotated-evidence-feedback.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "9125d1ff0aba74a1851f248f7c682eda24e3170f"
+    },
+    {
+      "path": "lib/coherent-feedback-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "9d111e3370a2606e87115876908c49d04f5d8a06"
+    },
+    {
+      "path": "lib/coherent-feedback.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "ae1f2a1741447225d2d96171ed374b9c8dfbdb76"
+    },
+    {
+      "path": "lib/counted-evidence-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "39c99e9c2d4a7facc6ab13c0370fbbf4907fb88a"
+    },
+    {
+      "path": "lib/counted-evidence-feedback.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "95258765c688548e2c05f9339fae3a79aa89453b"
+    },
+    {
+      "path": "lib/evidence-feedback-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "53b554408e67a36f0876d39c3a8aac08dec96c07"
+    },
+    {
+      "path": "lib/evidence-feedback.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "24b994f110fcc591ed3d785438d7594295c63bab"
+    },
+    {
+      "path": "lib/feedback-fallback.ts",
+      "disposition": "preserve_inactive_candidate_wiring",
+      "operatingBlob": "1e341c9f9447f7b240eea73b3df7db5515c56eae"
+    },
+    {
+      "path": "lib/feedback-validation-detail.ts",
+      "disposition": "retain_shared_diagnostic_contract",
+      "operatingBlob": "f66e09b59e11666b199e454f37281b8ea0c811fe"
+    },
+    {
+      "path": "lib/gemini-feedback.ts",
+      "disposition": "preserve_inactive_candidate_wiring",
+      "operatingBlob": "4435f9af5fd723a50d6541ca4ad2049516556bf5"
+    },
+    {
+      "path": "lib/grammar/feedback.ts",
+      "disposition": "preserve_inactive_candidate_wiring",
+      "operatingBlob": "2918216486673e72a5c3b9ad4e4c08328f553c50"
+    },
+    {
+      "path": "lib/groq-feedback.ts",
+      "disposition": "preserve_inactive_candidate_wiring",
+      "operatingBlob": "4a1bb9adb21d615856bff6cd1ff47b18f941f506"
+    },
+    {
+      "path": "lib/groq-http-diagnostics.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "ce52298008164a806fe83dc27172f59701588413"
+    },
+    {
+      "path": "lib/provider-feedback-contract.ts",
+      "disposition": "retain_shared_diagnostic_contract",
+      "operatingBlob": "73ac6eeb6abc604d9167495947dbf7e1b2ae1cb3"
+    },
+    {
+      "path": "lib/reasoning-pilot-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "2c863ce0a0a9b872ebe462d794ee7a2f0303b5ad"
+    },
+    {
+      "path": "lib/relational-evidence-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "9338a11a637ff0e341a97133c3a904359d4380bd"
+    },
+    {
+      "path": "lib/relational-evidence-feedback.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "9508fd758ac50eb2432afe429c944b9cf07ac19a"
+    },
+    {
+      "path": "lib/token-evidence-evaluation.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "25821fb10ab66db121b464fb0117031e8763b855"
+    },
+    {
+      "path": "lib/token-evidence-feedback.ts",
+      "disposition": "preserve_experimental_library",
+      "operatingBlob": "4d3da41d16964b355e6fcdc0340a36eaa1cef1ee"
+    },
+    {
+      "path": "scripts/diagnose-evidence-feedback.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "8da9519c18209051f36324934fa6372139febba3"
+    },
+    {
+      "path": "scripts/evaluate-accuracy-causes.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "d4ec5519abf8535b44a7218ddb0d35df65c164a0"
+    },
+    {
+      "path": "scripts/evaluate-annotated-evidence.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "97c36d294a23d3a562d19ae02c227b7d5c73ea9d"
+    },
+    {
+      "path": "scripts/evaluate-coherent-feedback.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "c2db1413822a5a52c5b40877995a369f264a6c2c"
+    },
+    {
+      "path": "scripts/evaluate-counted-evidence.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "cd5321cd6291c99bac1736a14359d2228b48cf45"
+    },
+    {
+      "path": "scripts/evaluate-evidence-feedback.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "bc6e2fcb6dd03c9bc315efd1fbf49b4d30e2b631"
+    },
+    {
+      "path": "scripts/evaluate-reasoning-pilot.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "5eb6b5efe42ffd79d82f2d365616c5654582d8dc"
+    },
+    {
+      "path": "scripts/evaluate-relational-evidence.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "c05b7d0a1ecb611028644e984166a40093188fbe"
+    },
+    {
+      "path": "scripts/evaluate-token-evidence.mjs",
+      "disposition": "preserve_experimental_tool",
+      "operatingBlob": "b975cd1243faad40a84dc8c3d5fd1fd11a8cfecb"
+    },
+    {
+      "path": "tests/accuracy-cause-remedies.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "9fa04ec5b8825318efa532167c703c99b102d3f4"
+    },
+    {
+      "path": "tests/accuracy-cause-results.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "84b63c32ab237726d35aa8273c03ec88d9e3644b"
+    },
+    {
+      "path": "tests/annotated-evidence-cli.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "9f7a416bea66f63afbcc1527c34ef99ca426f52b"
+    },
+    {
+      "path": "tests/annotated-evidence-evaluation.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "99641ce01e65f87cbcd74bbe81cad42ef327c4f0"
+    },
+    {
+      "path": "tests/annotated-evidence-feedback.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "95d96f57a512c0cb7c60ea0d8a08e2b3cacc0d83"
+    },
+    {
+      "path": "tests/annotated-evidence-results.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "c4770b7cf54917c736ed08010a4593142d94ee76"
+    },
+    {
+      "path": "tests/coherent-feedback-cli.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "a9426a79db8935943379dbad3a01a401449a04ba"
+    },
+    {
+      "path": "tests/coherent-feedback-evaluation.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "eb4715fe3716c070787edb700d62c7e9f0113f12"
+    },
+    {
+      "path": "tests/coherent-feedback.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "8e84910b7228363e4d3398b538f090767fde19f3"
+    },
+    {
+      "path": "tests/counted-evidence-evaluation.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "53c9594d4f0edce3a6030764488cd45ad12b0c0b"
+    },
+    {
+      "path": "tests/counted-evidence-feedback.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "a00a802fda6395e6acbe68dd227a8f0d28c43713"
+    },
+    {
+      "path": "tests/counted-evidence-results.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "8381599b21a62871e0fd328c315d4476fecbcc38"
+    },
+    {
+      "path": "tests/evidence-accuracy-results.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "2e7ba3d0d6854d345d2e0e9dbb442821c0b3225d"
+    },
+    {
+      "path": "tests/evidence-diagnostic-cohort.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "9398443bd05d545f2f9eea6c68a1aaf984b77167"
+    },
+    {
+      "path": "tests/evidence-diagnostics.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "0d26f72e58f4a325afac0657384ecf0840b47227"
+    },
+    {
+      "path": "tests/evidence-feedback-evaluation.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "548bdbf1ef55912c4a52b9cac55b0ae90e1df4d0"
+    },
+    {
+      "path": "tests/evidence-feedback.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "629fea8411ed9e2a156acd94a5bf08b8e26c3ba4"
+    },
+    {
+      "path": "tests/feedback-safety-qa.cjs",
+      "disposition": "retain_safety_verification",
+      "operatingBlob": "24026a0f9fb25b7661e4153a8138beabfcec297f"
+    },
+    {
+      "path": "tests/groq-http-diagnostics.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "8ad2f203051d8f5ccccceb4b8a1d24b34e9f8ac1"
+    },
+    {
+      "path": "tests/reasoning-pilot-results.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "a6e53a86e69581cc2d69309ec28ac5d115ab9b2b"
+    },
+    {
+      "path": "tests/reasoning-pilot.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "ea7800f5298f1cf1e46e773848b4c61599e7dd83"
+    },
+    {
+      "path": "tests/relational-evidence-cli.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "143a20c71e80f3c59662f3c9aca521c811ee4d55"
+    },
+    {
+      "path": "tests/relational-evidence-evaluation.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "65b7d2423a10d9c07804362c83bf06a11c1a36b6"
+    },
+    {
+      "path": "tests/relational-evidence-feedback.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "22b28417de5c9353d3af1745e725f2ad2b71a75a"
+    },
+    {
+      "path": "tests/token-evidence-cli.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "eaca1cbba2ef9685ca14d722bc7e25d79ddb75f9"
+    },
+    {
+      "path": "tests/token-evidence-evaluation.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "63e51c4d9257dcdd58493bf0a5fd37eb425d4d10"
+    },
+    {
+      "path": "tests/token-evidence-feedback.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "471e05b4ea27cb3f0cb63cbc5ad8284e4471f3b6"
+    },
+    {
+      "path": "tests/token-evidence-results.test.mjs",
+      "disposition": "preserve_experimental_test",
+      "operatingBlob": "d6a8b8d658baca8d0a6eed7d1d341286210cec39"
+    }
+  ]
+}
