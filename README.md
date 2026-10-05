@@ -1,6 +1,6 @@
 # 하루단어 · Oxford 3000
 
-개발·병합·배포 상태는 [하루단어 제품 관리](PRODUCT_MANAGEMENT.md)에서 두 저장소를 함께 확인합니다. 카드 화면의 수정 원본은 EN_Card이며, 이 저장소의 카드 생성 파일은 정식 exporter로만 갱신합니다. 최신 확인된 운영은 [발음 UI 개선 Site v116](docs/releases/2026-10-05-pronunciation-ui.md)이고 아래 과거 버전 기록과 구별합니다.
+개발·병합·배포 상태는 [하루단어 제품 관리](PRODUCT_MANAGEMENT.md)에서 두 저장소를 함께 확인합니다. 카드 화면의 수정 원본은 EN_Card이며, 이 저장소의 카드 생성 파일은 정식 exporter로만 갱신합니다. 최신 확인된 운영은 [Site v119·수정 제공자 대체 DO 반영](docs/releases/2026-10-06-automation-revise-rollout.json)이며, 실제 5장 전체 수신 검증은 남아 있습니다. 아래 버전 표시는 과거 기록입니다.
 
 AI 카드 자동 제작의 설정·시작·일시정지·결과 화면과 본인 전용 서버 API를 연결합니다. 기존 Sites의 Google/Groq Secret을 사용하며, 서명·만료·중복 요청 보호를 적용합니다. 학습 AI 정확도 실험과 별도로 관리하며, 실제 무인 제작·카카오 수신 검증은 GitHub 통합 검사와 구분합니다. [카드 자동 제작 연결·마이그레이션·복구](CARD_STUDIO_INTEGRATION.md)를 참조하세요.
 
