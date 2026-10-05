@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T15:29:07.409Z",
-  "note": "현재 정규 설정은 version22·매일07:30·5장으로 활성화되어 있다. 이 작업은 설정을 변경하거나 추가 시험을 등록하지 않고 10월6일06:30 제작·07:30 발송을 검증 대상으로 삼았다. 07:50 읽기 후속 확인을 예약했으며 실제 제작·수신·CPU는 아직 대기다.",
+  "recordedAt": "2026-10-05T23:00:04.875Z",
+  "note": "10월6일 정규5장 중2·4·5번은07:31경 각1회 접수됐고 사용자가3장 모두 이미지·원본 링크 정상으로 확인했다. 1·3번은 Google 수정단계3회실패로 제외됐다. 중복0·진행중0이며 정규version22/매일07:30/5장은 유지, 후속en-card-5만PAUSED다. 5장전체성공·중복재생성실측·완전한CPU관측은 미완료다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -798,8 +798,8 @@
     }
   },
   "automationDuplicateValidation": {
-    "status": "waiting_for_existing_daily_reservation",
-    "recordedAt": "2026-10-05T15:29:07.409Z",
+    "status": "partial_success_three_of_five",
+    "recordedAt": "2026-10-05T23:00:04.875Z",
     "report": "2026-10-06-automation-duplicate-validation.json",
     "target": {
       "kind": "daily",
@@ -825,20 +825,260 @@
     },
     "followup": {
       "id": "en-card-5",
-      "status": "ACTIVE",
+      "status": "PAUSED",
       "atKst": "2026-10-06T07:50:00+09:00",
       "once": true,
-      "purpose": "Read existing daily five-card result, distinct expressions/replacements, public PNG, live acceptance and current-version CPU. Preserve product automation settings."
+      "purpose": "Read existing daily five-card result, distinct expressions/replacements, public PNG, live acceptance and current-version CPU. Preserve product automation settings.",
+      "completedAt": "2026-10-05T22:55:39.941Z"
     },
     "verification": {
       "initialQuerySucceeded": true,
-      "phase": "before_preparation",
+      "phase": "after_due",
       "serverEvidenceVerified": false,
       "actualPhoneReceiptVerified": false,
       "cpuVerified": false,
       "duplicateRegenerationObserved": false,
-      "note": "No run exists yet because preparation is scheduled for06:30KST. Missing cards at this pre-start check are not an execution failure."
+      "note": "Five slots finished: three live acceptances with reviewed unique1080PNG; two correction budgets exhausted. No live duplicate observed. CPU samples checked but full invocation coverage and five-card load remain unverified.",
+      "cpuObservationCompleted": true,
+      "acceptedCards": 3,
+      "acceptedCardsPhoneReceiptVerified": true,
+      "confirmedPhoneCards": 3,
+      "phoneReceiptScope": "actualPhoneReceiptVerified refers to all five target cards; acceptedCardsPhoneReceiptVerified refers to the three actually accepted cards."
     },
-    "productSettingsChanged": false
+    "productSettingsChanged": false,
+    "result": {
+      "acceptedCards": 3,
+      "acceptedItems": [
+        2,
+        4,
+        5
+      ],
+      "failedItems": [
+        {
+          "index": 1,
+          "error": "unavailable",
+          "stage": "revise",
+          "provider": "google",
+          "attempts": [
+            {
+              "atKst": "2026-10-06T06:32:16.700+09:00",
+              "outcome": "unavailable",
+              "httpStatus": 503
+            },
+            {
+              "atKst": "2026-10-06T06:34:16.706+09:00",
+              "outcome": "unavailable",
+              "httpStatus": 503
+            },
+            {
+              "atKst": "2026-10-06T06:36:16.713+09:00",
+              "outcome": "unavailable",
+              "httpStatus": 503
+            }
+          ],
+          "interpretation": "Three correction attempts failed, reaching the existing per-stage/provider budget. The current fallback applies to draft only; this correction slot terminates. No duplicate or deadline failure was recorded."
+        },
+        {
+          "index": 3,
+          "error": "unavailable",
+          "stage": "revise",
+          "provider": "google",
+          "attempts": [
+            {
+              "atKst": "2026-10-06T06:47:16.684+09:00",
+              "outcome": "unavailable",
+              "httpStatus": 503
+            },
+            {
+              "atKst": "2026-10-06T06:49:16.694+09:00",
+              "outcome": "unavailable",
+              "httpStatus": 503
+            },
+            {
+              "atKst": "2026-10-06T06:51:16.697+09:00",
+              "outcome": "unavailable",
+              "httpStatus": null
+            }
+          ],
+          "interpretation": "Three correction attempts failed, reaching the existing per-stage/provider budget. The current fallback applies to draft only; this correction slot terminates. No duplicate or deadline failure was recorded."
+        }
+      ],
+      "duplicateRegeneration": {
+        "observed": false,
+        "rejectedCandidates": 0,
+        "successfulReplacementSlots": [],
+        "liveBranchVerified": false,
+        "note": "No duplicate candidate occurred. Three accepted expressions are distinct and differ from rejected expressions; the retry branch was not exercised live."
+      },
+      "cpu": {
+        "observationCompleted": true,
+        "expectedFiveCardLoadVerified": false,
+        "fullInvocationCoverageVerified": false,
+        "start": "2026-10-05T21:29:16.921Z",
+        "end": "2026-10-05T22:33:23.624Z",
+        "rawUnit": "microseconds",
+        "reportedUnit": "milliseconds",
+        "summary": {
+          "en-card": {
+            "worker": {
+              "groups": 65,
+              "requests": 65,
+              "errors": 0,
+              "highestGroupP99Ms": 4.282,
+              "sampledGroups": 0,
+              "singleRequestGroups": 65
+            },
+            "durable": {
+              "groups": 0,
+              "requests": 0,
+              "errors": 0,
+              "highestGroupP99Ms": null,
+              "sampledGroups": 0,
+              "singleRequestGroups": 0
+            },
+            "unexpectedVersionGroups": 0,
+            "workerGroupsP99Over10Ms": 0
+          },
+          "en-card-delivery": {
+            "worker": {
+              "groups": 68,
+              "requests": 68,
+              "errors": 0,
+              "highestGroupP99Ms": 4.321,
+              "sampledGroups": 0,
+              "singleRequestGroups": 68
+            },
+            "durable": {
+              "groups": 0,
+              "requests": 0,
+              "errors": 0,
+              "highestGroupP99Ms": null,
+              "sampledGroups": 0,
+              "singleRequestGroups": 0
+            },
+            "unexpectedVersionGroups": 0,
+            "workerGroupsP99Over10Ms": 0
+          },
+          "en-card-automation": {
+            "worker": {
+              "groups": 0,
+              "requests": 0,
+              "errors": 0,
+              "highestGroupP99Ms": null,
+              "sampledGroups": 0,
+              "singleRequestGroups": 0
+            },
+            "durable": {
+              "groups": 67,
+              "requests": 67,
+              "errors": 0,
+              "highestGroupP99Ms": 573.855,
+              "sampledGroups": 0,
+              "singleRequestGroups": 67
+            },
+            "unexpectedVersionGroups": 0,
+            "workerGroupsP99Over10Ms": 0
+          }
+        },
+        "coverage": {
+          "fullMinutesExpected": 63,
+          "partialEdgeMinutesExcluded": true,
+          "en-card": {
+            "first": "2026-10-05T21:30:15Z",
+            "last": "2026-10-05T22:33:15Z",
+            "missingFullMinutes": [
+              "2026-10-05T21:43",
+              "2026-10-05T21:50"
+            ],
+            "types": [
+              "worker"
+            ]
+          },
+          "en-card-delivery": {
+            "first": "2026-10-05T21:29:16Z",
+            "last": "2026-10-05T22:33:16Z",
+            "missingFullMinutes": [
+              "2026-10-05T21:57"
+            ],
+            "types": [
+              "worker"
+            ]
+          },
+          "en-card-automation": {
+            "first": "2026-10-05T21:29:16Z",
+            "last": "2026-10-05T22:33:16Z",
+            "missingFullMinutes": [],
+            "types": [
+              "http",
+              "jsrpc"
+            ]
+          }
+        },
+        "gapRecheck": {
+          "main": [
+            {
+              "minute": "2026-10-05T21:43",
+              "returned": false
+            },
+            {
+              "minute": "2026-10-05T21:50",
+              "returned": false
+            }
+          ],
+          "delivery": [
+            {
+              "minute": "2026-10-05T21:57",
+              "returned": false
+            }
+          ],
+          "note": "Narrow repeat queries confirm these time bins have no returned worker records. This alone cannot distinguish telemetry omission from execution timing and does not establish that every invocation is captured."
+        },
+        "queryLimitReached": false,
+        "interpretation": "Observed runtime errors are zero; provider AI failures are recorded separately. Group P99 is not a global maximum. All returned groups contain one request and sampleInterval1, but repeated narrow queries retain minute-bin gaps, so full invocation coverage is unproven.",
+        "sources": [
+          "https://developers.cloudflare.com/workers/observability/metrics-and-analytics/#cpu-time-per-execution",
+          "https://developers.cloudflare.com/workers/observability/metrics-and-analytics/#invocation-statuses",
+          "https://developers.cloudflare.com/analytics/graphql-api/sampling/"
+        ]
+      },
+      "settings": {
+        "version": 22,
+        "enabled": 1,
+        "reason": null,
+        "next_due_at": 1791325800000,
+        "nextDueKst": "2026-10-07T07:30",
+        "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+        "originalSettingsUnchanged": true,
+        "cards": 5,
+        "time": "07:30",
+        "start": "2026-10-04",
+        "end": "2027-10-31"
+      },
+      "finalState": {
+        "activeRuns": 0,
+        "activeSchedules": 0,
+        "inflightOrUnresolvedUnknown": 0,
+        "foreignKeyErrors": 0,
+        "credentialStatus": "connected"
+      },
+      "actualPhoneReceiptVerified": false,
+      "productSettingsChanged": false,
+      "phoneReceipt": {
+        "recordedAt": "2026-10-05T23:00:04.875Z",
+        "source": "Direct user reply in this thread",
+        "day": "2026-10-06",
+        "scheduledTimeKst": "07:30",
+        "serverSendTimeKst": "07:31",
+        "expectedCards": 5,
+        "confirmedCards": 3,
+        "allReceivedImagesNormal": true,
+        "allReceivedOriginalLinksNormal": true,
+        "userAnswer": "3장 모두 이미지·원본 링크 정상",
+        "matchesServerAcceptedCount": true,
+        "allFiveReceived": false,
+        "scope": "All three accepted cards are user-confirmed. This does not confirm five cards or resolve the October5 discrepancy."
+      },
+      "acceptedCardsPhoneReceiptVerified": true
+    }
   }
 }
