@@ -1,6 +1,6 @@
 # Oxford 이미지 제작 진행 기록
 
-- 기준일: 2026-10-05, 브랜치 `codex/oxford-word-images`
+- 기준일: 2026-10-06, 브랜치 `codex/oxford-word-images`
 - 목표·제작 조건: [전체 계획](OXFORD_WORD_IMAGES_PLAN.md)
 - 연결 목록·실제 프롬프트·시도별 해시: [word-image-manifest.json](../data/word-image-manifest.json)
 - 사용자 지시: “지금과 같은 생성 방식을 유지하여 나머지도 진행해라.” 스타일 유지·전체 제작을 승인했으며, 항목별 의미를 일괄 승인한 것으로 해석하지 않는다.
@@ -10,13 +10,13 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 60 |
-| 제작자 품질 검수 통과 `approved` | 59 |
+| 제작된 서로 다른 항목 | 70 |
+| 제작자 품질 검수 통과 `approved` | 69 |
 | 의미 전달 보류 `held` | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 미제작 `waiting` | 3,749 |
+| 미제작 `waiting` | 3,739 |
 | 생성 중 / 실패 | 0 / 0 |
-| 실제 내장 도구 호출 | 63 |
+| 실제 내장 도구 호출 | 73 |
 | 그중 품질 수정 호출 | 3 |
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
@@ -30,6 +30,7 @@
 | 추가 002 | adult, advice, afraid, after 전치사, afternoon, again, age, ago, agree, air | 10개 검수 통과. 원본·320px 화면 확인 |
 | 추가 003 | airport, all 한정사·대명사, also, always, amazing, and, angry, animal, another 한정사 | 10개 검수 통과. 전체 집합·추가 활동·빈도·한 잔 더의 관계를 별도로 확인. 수정 호출 없음 |
 | 추가 004 | another 대명사, answer 명사·동사, any 한정사·대명사, anyone, anything, apartment, April, area | 10개 검수 통과. 질문·응답의 품사별 맥락과 개별 주거 공간·지역 경계를 확인. April은 정확히 열두 달력 중 네 번째만 강조. 수정 호출 없음 |
+| 추가 005 | arm, around 전치사·부사, arrive, art, article, artist, as, ask, at | 10개 검수 통과. 팔·탁자 둘레와 근처·도착 방향·작품과 제작자·교사 역할·장소 질문·집 위치를 구분. article은 문자 없는 칼럼 면과 악기 사진으로 지면을 연상. 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -58,7 +59,7 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 ## 다음 묶음과 재개 절차
 
-다음 미제작 항목은 `arm`, `around` 전치사·부사, `arrive`, `art`, `article`, `artist`, `as`, `ask`, `at`다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 미제작 항목은 `August`, `aunt`, `away`, `awesome`, `baby`, `back` 명사·부사, `bad`, `bag`, `ball`이다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
