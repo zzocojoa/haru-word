@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T12:21:35.034Z",
+  "recordedAt": "2026-10-05T12:26:50.984Z",
   "note": "사용자는 21:03 이후 새 카드 4장 수신·클릭 정상으로 확인했다. 서버는 이번 시험 3장 접수·중복 1장·마감 1장 제외로 기록해 수신 수량 차이는 미해결이다. CPU 관측은 완료했고 정규 자동 제작은 재개하지 않았다.",
   "repositories": {
     "enCard": {
@@ -632,12 +632,16 @@
     },
     "followup": {
       "id": "en-card-5",
-      "status": "ACTIVE",
+      "status": "PAUSED",
       "localTime": "2026-10-05 21:23 Asia/Seoul",
       "singleOccurrence": true,
       "target": "current thread",
       "previousMidnightTestSuperseded": true,
-      "scope": "Verify five live acceptances, PNG and current-version CPU; conditionally resume original daily operation; phone confirmation remains separate"
+      "scope": "Verify five live acceptances, PNG and current-version CPU; conditionally resume original daily operation; phone confirmation remains separate",
+      "inspectionCompletedAt": "2026-10-05T12:26:50.984Z",
+      "inspectionComplete": true,
+      "fiveCardGoalAchieved": false,
+      "receiptDiscrepancyResolved": false
     },
     "preparationCheckpoint": {
       "at": "2026-10-05T11:37:40.078Z",
@@ -710,7 +714,9 @@
       "userConfirmedFourNewAfter2103": true,
       "receiptCountMatchesServer": false,
       "distinctCardsClarificationPending": false,
-      "fourDistinctCardsConfirmed": true
+      "fourDistinctCardsConfirmed": true,
+      "finalCheckAt": "2026-10-05T12:26:50.984Z",
+      "activeTrialWork": 0
     }
   }
 }
