@@ -1,0 +1,480 @@
+{
+  "recordedAt": "2026-10-05T11:30:24.089Z",
+  "status": "deployed_trial_in_progress_with_duplicate_skip",
+  "scope": "Five freshly generated AI cards, cross-review, PNG and live scheduled self-delivery; not reuse of prepared cards",
+  "authorization": "User confirmed five NEW AI cards and the earliest available time today after verification",
+  "sources": {
+    "enCard": {
+      "branch": "codex/automation-multi-trial",
+      "commit": "f70b1d4"
+    },
+    "haru": {
+      "branch": "codex/card-automation-multi-trial",
+      "commit": "755b880"
+    },
+    "siteSource": "835efb82983d1cbd77339fb12356c128eeac87c8",
+    "siteSourceTree": "de331e6e3a1da7494ba8e1875064b02807c8fdb2",
+    "siteSourceMatchesHaruCandidate": true,
+    "githubPushAndPullRequest": false
+  },
+  "site": {
+    "id": "appgdep_6ac38935f7888191ab847a6d6e866e45",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "title": "하루단어 · Oxford 3000",
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_e68f855e08708191b2222afc6bf548a9",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+    "failure_message": null,
+    "env_set_revision": 59,
+    "updated_at": "2026-10-05T11:26:01.111472+00:00",
+    "versionNumber": 118,
+    "source": "835efb82983d1cbd77339fb12356c128eeac87c8",
+    "sourceTree": "de331e6e3a1da7494ba8e1875064b02807c8fdb2",
+    "haruCandidate": "755b880",
+    "sourceTreeMatchesHaruCandidate": true
+  },
+  "workers": {
+    "en-card": {
+      "versions": [
+        {
+          "version_id": "2009d5af-9ea0-4bea-bc48-a32a379f84af",
+          "percentage": 100
+        }
+      ],
+      "crons": [
+        "* * * * *"
+      ],
+      "bindings": [
+        {
+          "name": "APP_ORIGIN",
+          "text": "https://en-card.kmksla4.workers.dev",
+          "type": "plain_text"
+        },
+        {
+          "name": "ASSETS",
+          "type": "assets"
+        },
+        {
+          "class_name": "CardAutomation",
+          "name": "AUTOMATION",
+          "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+          "script_name": "en-card-automation",
+          "type": "durable_object_namespace"
+        },
+        {
+          "name": "CARD_IMAGES",
+          "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+          "type": "kv_namespace"
+        },
+        {
+          "name": "COST_MODE",
+          "text": "free_only",
+          "type": "plain_text"
+        },
+        {
+          "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+          "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+          "name": "DB",
+          "type": "d1"
+        },
+        {
+          "environment": "production",
+          "name": "DELIVERY_SERVICE",
+          "service": "en-card-delivery",
+          "type": "service"
+        },
+        {
+          "type": "secret_text",
+          "name": "KAKAO_CLIENT_SECRET"
+        },
+        {
+          "type": "secret_text",
+          "name": "KAKAO_REST_API_KEY"
+        },
+        {
+          "name": "SEND_MODE",
+          "text": "live",
+          "type": "plain_text"
+        },
+        {
+          "type": "secret_text",
+          "name": "SESSION_SECRET"
+        },
+        {
+          "type": "secret_text",
+          "name": "SETUP_TOKEN"
+        },
+        {
+          "type": "secret_text",
+          "name": "STUDIO_BRIDGE_SECRET"
+        },
+        {
+          "type": "secret_text",
+          "name": "STUDIO_ORIGIN"
+        },
+        {
+          "type": "secret_text",
+          "name": "STUDIO_OWNER_ID"
+        },
+        {
+          "type": "secret_text",
+          "name": "TOKEN_ENCRYPTION_KEY"
+        }
+      ]
+    },
+    "en-card-delivery": {
+      "versions": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "bindings": [
+        {
+          "name": "APP_ORIGIN",
+          "text": "https://en-card.kmksla4.workers.dev",
+          "type": "plain_text"
+        },
+        {
+          "name": "COST_MODE",
+          "text": "free_only",
+          "type": "plain_text"
+        },
+        {
+          "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+          "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+          "name": "DB",
+          "type": "d1"
+        },
+        {
+          "name": "SEND_MODE",
+          "text": "live",
+          "type": "plain_text"
+        }
+      ]
+    },
+    "en-card-automation": {
+      "versions": [
+        {
+          "version_id": "aaf0cf6f-e37f-4dd2-9612-5daa49424a00",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "bindings": [
+        {
+          "name": "AI_FREE_CONFIRMED",
+          "text": "google_groq_free",
+          "type": "plain_text"
+        },
+        {
+          "name": "APP_ORIGIN",
+          "text": "https://en-card.kmksla4.workers.dev",
+          "type": "plain_text"
+        },
+        {
+          "class_name": "CardAutomation",
+          "name": "AUTOMATION",
+          "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+          "type": "durable_object_namespace"
+        },
+        {
+          "name": "AUTOMATION_MODE",
+          "text": "live",
+          "type": "plain_text"
+        },
+        {
+          "name": "CARD_IMAGES",
+          "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+          "type": "kv_namespace"
+        },
+        {
+          "name": "COST_MODE",
+          "text": "free_only",
+          "type": "plain_text"
+        },
+        {
+          "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+          "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+          "name": "DB",
+          "type": "d1"
+        },
+        {
+          "name": "FONT_ASSETS",
+          "type": "assets"
+        },
+        {
+          "name": "SEND_MODE",
+          "text": "live",
+          "type": "plain_text"
+        }
+      ]
+    }
+  },
+  "database": {
+    "migration": {
+      "at": "2026-10-05T11:14:40.032Z",
+      "migration": "0017_automation_trial_quantity.sql",
+      "sha256": "6427ae894bc27bcbb4b059834ec19633feca76e6e7a03581cacb96b3b7fe3cf2",
+      "encryptedBackupVerified": true,
+      "maintenanceVerified": true,
+      "appliedAt": "2026-10-05T11:14:40.305Z",
+      "foreignKeyErrors": 0
+    },
+    "backup": {
+      "sqlSha256": "2287A5569D2775E1EBC078B15D2401680E98832FC8BDFC877B87D9814158BAE8",
+      "roundTripVerified": true,
+      "createdAtUtc": "2026-10-05T11:13:54.1309372Z",
+      "restrictedAcl": true,
+      "ciphertextSha256": "72795341313DE9E537FA008A792129592EB4BB18896C82B628060057208DF3A6",
+      "bytes": 122963,
+      "encryption": "Windows DPAPI CurrentUser"
+    },
+    "existingDataTablesPreserved": 18,
+    "existingRowsAndHashesPreserved": true,
+    "foreignKeyErrors": 0,
+    "restBatchFailureInjection": {
+      "at": "2026-10-05T11:22:26.017Z",
+      "scope": "isolated temporary table in the authorized existing D1; no application history changed",
+      "secondStatementRejected": true,
+      "committedRowsAfterFailure": 0,
+      "probeRemoved": true,
+      "rollbackVerified": true
+    }
+  },
+  "test": {
+    "at": "2026-10-05T11:26:43.277Z",
+    "authorization": "User explicitly requested five NEW AI cards, and approved the earliest available time today after verification",
+    "day": "2026-10-05",
+    "cards": 5,
+    "kind": "trial",
+    "dueAt": 1791201780000,
+    "dueKst": "2026-10-05T21:03",
+    "notBefore": 1791199680000,
+    "deadline": 1791201480000,
+    "expectedVersion": 18,
+    "settingsVersion": 20,
+    "originalSettingsSha256": "6c749ff7d253955571020dc4854f7d52ff174563d84e63e8155aa0fec4f5099c",
+    "existingOperation": {
+      "cards": 1,
+      "time": "07:00"
+    },
+    "originalSettingsPreserved": true,
+    "registeredAt": "2026-10-05T11:26:43.743Z",
+    "registrationVerified": true,
+    "historyAndUsageUnchanged": true,
+    "newAiCallsAtRegistration": 0,
+    "newKakaoSendsAtRegistration": 0,
+    "actualPhoneReceiptVerified": false,
+    "cpuVerified": false,
+    "runs": [
+      {
+        "id": "7bc58afe-8c64-4ba3-8332-41c96d489bab",
+        "kind": "trial",
+        "day": "2026-10-05",
+        "item_index": 1,
+        "item_count": 5,
+        "config_version": 20,
+        "due_at": 1791201780000,
+        "not_before": 1791199680000,
+        "deadline": 1791201480000,
+        "status": "draft"
+      },
+      {
+        "id": "141513e5-b1a6-4d77-8ff4-5eb3be926dae",
+        "kind": "trial",
+        "day": "2026-10-05",
+        "item_index": 2,
+        "item_count": 5,
+        "config_version": 20,
+        "due_at": 1791201780000,
+        "not_before": 1791199680000,
+        "deadline": 1791201480000,
+        "status": "draft"
+      },
+      {
+        "id": "8f127905-d726-450d-a06a-a7344cb825f5",
+        "kind": "trial",
+        "day": "2026-10-05",
+        "item_index": 3,
+        "item_count": 5,
+        "config_version": 20,
+        "due_at": 1791201780000,
+        "not_before": 1791199680000,
+        "deadline": 1791201480000,
+        "status": "draft"
+      },
+      {
+        "id": "3c037c13-7322-4f70-9621-32cf37271cf8",
+        "kind": "trial",
+        "day": "2026-10-05",
+        "item_index": 4,
+        "item_count": 5,
+        "config_version": 20,
+        "due_at": 1791201780000,
+        "not_before": 1791199680000,
+        "deadline": 1791201480000,
+        "status": "draft"
+      },
+      {
+        "id": "f503897d-4c2a-4e1d-a704-57339ce0dc20",
+        "kind": "trial",
+        "day": "2026-10-05",
+        "item_index": 5,
+        "item_count": 5,
+        "config_version": 20,
+        "due_at": 1791201780000,
+        "not_before": 1791199680000,
+        "deadline": 1791201480000,
+        "status": "draft"
+      }
+    ]
+  },
+  "settingsAtRegistration": {
+    "version": 20,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": null
+  },
+  "savedNormalSettings": {
+    "cards": 1,
+    "time": "07:00",
+    "unchangedFromEncryptedOriginal": true,
+    "regularGenerationDuringTrial": false
+  },
+  "followup": {
+    "id": "en-card-5",
+    "status": "ACTIVE",
+    "localTime": "2026-10-05 21:23 Asia/Seoul",
+    "singleOccurrence": true,
+    "target": "current thread",
+    "previousMidnightTestSuperseded": true,
+    "scope": "Verify five live acceptances, PNG and current-version CPU; conditionally resume original daily operation; phone confirmation remains separate"
+  },
+  "restoration": {
+    "applied": false,
+    "expectedVersion": 20,
+    "guards": "Unchanged original settings hash/version, exactly five confirmed live trial acceptances, no active/unresolved work, connected Kakao",
+    "nextNormalTimeIfVerified": "2026-10-06 07:00 Asia/Seoul",
+    "readOnlyNegativeCheckPassed": true
+  },
+  "verification": {
+    "existingProductAndQuantity": 70,
+    "finalMultiTrialAndRealLocalPng": 12,
+    "browserChromiumAndWebKit": 2,
+    "haruRelayAndProxy": 19,
+    "typecheckPassed": true,
+    "defaultBuildAndThreeWorkerDryRuns": true,
+    "liveAutomationDryRun": true,
+    "freeConfigurationPassed": true,
+    "siteBuild": true,
+    "publicAssets": {
+      "at": "2026-10-05T11:26:38.757Z",
+      "manifestMatches": true,
+      "javascriptShaMatches": true,
+      "unauthenticatedApiStatuses": [
+        401,
+        401
+      ]
+    },
+    "review": {
+      "independentSameModelPasses": 3,
+      "preparationWindowFindingFixed": true,
+      "codexCli": "failed: installed CLI does not support current gpt-6-astra model; not counted as cross-model verification"
+    },
+    "initialFailures": [
+      "New test credential fixture omitted required refresh expiry; fixed and all 11 rerun passed",
+      "Initial duplicate/parallel baseline invocation interrupted; serial 70 rerun passed",
+      "Playwright PATH and broad/implicit label locators corrected; final Chromium/WebKit 2 passed",
+      "Sites local/remote history divergence resolved in clean source checkout; dependency junction rejected by guard and replaced with local install",
+      "Windows packaging required Git Bash first on PATH and TAR_OPTIONS=--force-local",
+      "Resume helper first read used unsupported multi-statement parameter placement; split into independent parameterized reads, negative guard rechecked"
+    ]
+  },
+  "free": {
+    "priorUserWorkersFreeConfirmationPreserved": true,
+    "noPaidResourcesAdded": true,
+    "noNewResourcesOrSecrets": true,
+    "currentSubscriptionApiNotReverified": true,
+    "existingEnvironmentRevision": 59,
+    "existingAudiencePreserved": true
+  },
+  "limits": {
+    "actualPhoneReceiptVerified": false,
+    "fullTrialServerEvidenceVerified": false,
+    "currentTrialCpuVerified": false,
+    "exactTimeArrivalGuaranteed": false
+  },
+  "outstanding": [
+    "Read current-version AI/review/PNG and per-card live acceptance after the test",
+    "Measure current-version Worker and DO CPU during actual trial; do not equate quantiles with maxima",
+    "Conditionally resume original daily one-card schedule without overwriting later user changes",
+    "Obtain separate user confirmation of five phone images and original links",
+    "Investigate duplicate draft recovery separately; current trial may send fewer than five and must not be reported as five-card success"
+  ],
+  "localEvidenceDirectory": "EN_Card/backups/automation-multi-trial-20261005",
+  "updatedAt": "2026-10-05T11:40:06.424Z",
+  "preparationCheckpoint": {
+    "at": "2026-10-05T11:37:40.078Z",
+    "readOnly": true,
+    "cards": [
+      {
+        "item_index": 1,
+        "item_count": 5,
+        "status": "scheduled",
+        "error": null,
+        "revision": 1,
+        "render_attempts": 1,
+        "updated_at": 1791200024826,
+        "ai_attempts": 2
+      },
+      {
+        "item_index": 2,
+        "item_count": 5,
+        "status": "skipped",
+        "error": "duplicate",
+        "revision": 1,
+        "render_attempts": 0,
+        "updated_at": 1791200090422,
+        "ai_attempts": 1
+      },
+      {
+        "item_index": 3,
+        "item_count": 5,
+        "status": "render",
+        "error": null,
+        "revision": 1,
+        "render_attempts": 0,
+        "updated_at": 1791200207619,
+        "ai_attempts": 2
+      },
+      {
+        "item_index": 4,
+        "item_count": 5,
+        "status": "draft",
+        "error": null,
+        "revision": 1,
+        "render_attempts": 0,
+        "updated_at": 1791199603390,
+        "ai_attempts": 0
+      },
+      {
+        "item_index": 5,
+        "item_count": 5,
+        "status": "draft",
+        "error": null,
+        "revision": 1,
+        "render_attempts": 0,
+        "updated_at": 1791199603390,
+        "ai_attempts": 0
+      }
+    ],
+    "allFiveCanCompleteWithoutRecovery": false,
+    "note": "One draft was skipped by the existing duplicate policy. Other cards continue. No attempt/history reset or replacement generation was performed. Five-card live success and normal-operation resume are not confirmed."
+  }
+}
