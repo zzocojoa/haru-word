@@ -425,15 +425,17 @@
     "remainingVerification": "Actual iPhone/ChatGPT-app audio and VoiceOver remain unverified. Browser tab handoff was queued; hosted learner interaction was not tested."
   },
   "automationQuantityCandidate": {
-    "status": "pull_requests_open_not_deployed",
-    "recordedAt": "2026-10-05T09:07:27Z",
+    "status": "merged_not_deployed",
+    "recordedAt": "2026-10-05T09:17:01Z",
     "integrationStateSource": "GitHub PRs are authoritative for later merge state and final-head CI; product commits below exclude release-record-only commits.",
     "enCard": {
       "branch": "codex/automation-card-quantity",
       "baseCommit": "ca6edece0169bd11b3a75dfffca643e47be1b869",
       "productCommit": "7fe40c38e879719ca6b0627ccc001135e32fc4ee",
       "pullRequest": "https://github.com/zzocojoa/EN_Card/pull/10",
-      "merged": false,
+      "merged": true,
+      "mergeCommit": "b9e7d31d08dd9cf63c70530f4e26adafef3c9510",
+      "mergedAt": "2026-10-05T09:16:48Z",
       "report": "https://github.com/zzocojoa/EN_Card/blob/7fe40c38e879719ca6b0627ccc001135e32fc4ee/docs/AI_CARD_AUTOMATION_QUANTITY.md"
     },
     "haruWord": {
@@ -441,7 +443,10 @@
       "baseCommit": "42328b146de16d4ceb690170ac84be7a2f4200ae",
       "productCommit": "f77e8eb571dc94feab8706ff358f8036c781ff92",
       "pullRequest": "https://github.com/zzocojoa/haru-word/pull/30",
-      "merged": false
+      "merged": true,
+      "mergedHeadCommit": "2825a909fcb430f3c614d636e3f393cee5e11399",
+      "mergeCommit": "cd545cb5163c1bf83a976fd579d62c0c0e1d67fc",
+      "mergedAt": "2026-10-05T09:17:01Z"
     },
     "artifacts": {
       "sourceCommit": "5f7c88e5c65a5f837f44459ce4e969286e9214e4",
@@ -487,6 +492,21 @@
         "existingLintWarnings": 13
       },
       "enCardGithubChecks": "No configured workflow; local checks passed.",
+      "githubFinalHeadCI": {
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/37288170625",
+        "head": "2825a909fcb430f3c614d636e3f393cee5e11399",
+        "conclusion": "success",
+        "nodeVersions": [22, 24]
+      },
+      "githubFeatureMergeCI": {
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/37289013068",
+        "head": "cd545cb5163c1bf83a976fd579d62c0c0e1d67fc",
+        "conclusion": "success",
+        "nodeVersions": [22, 24],
+        "testsPerNode": 565,
+        "lintErrors": 0,
+        "existingLintWarnings": 13
+      },
       "prepushHookBypassed": false,
       "prepushScannerNote": "Haru new-branch hook used the Sites origin baseline and exceeded its input cap. The GitHub branch was initialized at the existing verified main commit; normal push then scanned the complete 170459-byte feature addition. No scanner configuration was disabled.",
       "scannerFalsePositives": [
@@ -534,7 +554,8 @@
       "actualMultipleCardReceiptVerified": false
     },
     "operations": {
-      "mergedPullRequests": 0,
+      "mergedPullRequests": 2,
+      "mergedPullRequestScope": "Feature PRs EN_Card #10 and haru-word #30; release-record-only PRs are excluded.",
       "sitePublications": 0,
       "workerDeployments": 0,
       "databaseMigrations": 0,

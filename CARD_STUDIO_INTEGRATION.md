@@ -1,6 +1,8 @@
 # 영어 카드 작업실 통합
 
-## 자동 제작 수량 선택 — 2026-10-05 로컬 후보
+## 자동 제작 수량 선택 — 2026-10-05 기능 병합 / 배포 대기
+
+[EN_Card PR #10](https://github.com/zzocojoa/EN_Card/pull/10)은 `master@b9e7d31`, [하루단어 PR #30](https://github.com/zzocojoa/haru-word/pull/30)은 `main@cd545cb`로 병합했다. 두 병합 결과는 검증한 PR 최종 커밋과 파일 트리가 같다. 이번 단계는 기능과 출시 기록의 GitHub 반영이며 운영 Site·Worker·DB는 변경하지 않았다. 아래 원격 CPU·여러 장 실제 수신 검증은 배포 후 남은 작업이다.
 
 `github/main@42328b1`에서 `codex/card-automation-quantity`를 만들고 EN_Card 확정 커밋 [`5f7c88e5c65a5f837f44459ce4e969286e9214e4`](https://github.com/zzocojoa/EN_Card/commit/5f7c88e5c65a5f837f44459ce4e969286e9214e4)에서 정식 exporter로 내보냈다. 하루 1~5장 선택, 카드별 진행 번호, 적용된 수량과 저장 전 초안의 구분을 제공한다. 구형 설정은 1장이고 추가 한 장 시험은 그대로 1장이다. 운영 Site v116에 아직 게시하지 않았다. 후속 PR·병합·배포 상태는 [공통 출시 기록](docs/releases/product-status.json)을 따른다.
 
