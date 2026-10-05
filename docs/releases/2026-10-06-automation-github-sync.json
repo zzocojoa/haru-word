@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T23:53:54.853Z",
+  "status": "pull_requests_open_not_merged",
+  "scope": "Unmerged deployed multi-card trials, duplicate regeneration, correction-provider fallback and release evidence; this step changes GitHub and documentation only.",
+  "pullRequests": [
+    {
+      "repository": "zzocojoa/EN_Card",
+      "number": 11,
+      "url": "https://github.com/zzocojoa/EN_Card/pull/11",
+      "base": "master",
+      "branch": "codex/automation-revise-fallback",
+      "reviewedContentHead": "24238d46623909549c3b584abca0e36badf0a6db"
+    },
+    {
+      "repository": "zzocojoa/haru-word",
+      "number": 32,
+      "url": "https://github.com/zzocojoa/haru-word/pull/32",
+      "base": "main",
+      "branch": "codex/card-automation-revise-fallback",
+      "reviewedContentHead": "227410a2488b74f31743d04902fac4f2d0e69021"
+    }
+  ],
+  "review": {
+    "specialists": [
+      "testing",
+      "maintainability",
+      "security",
+      "performance",
+      "data-migration",
+      "design"
+    ],
+    "redTeam": true,
+    "independentAdversarial": true,
+    "sameModelIndependentContexts": true,
+    "crossModelVerified": false,
+    "adversarialTestsCoverage": "summary/stat only",
+    "fixedFindings": [
+      "Current install/rollback migration requirements 0016 -> 0018",
+      "README current production entry v116 -> v119 and correction-provider fallback DO"
+    ],
+    "remainingFindings": 0,
+    "cliLimitation": "Codex CLI 0.132.0 previously returned model/version incompatibility; no cross-model claim"
+  },
+  "validation": {
+    "priorLocalUniqueTests": 140,
+    "priorLocalTestFiles": 8,
+    "sourceAndTestsUnchanged": true,
+    "relayTestsRerun": 19,
+    "relayRerunPassed": 19,
+    "relayTestsAlreadyIncludedIn140": true,
+    "artifacts": {
+      "at": "2026-10-05T23:50:14.479Z",
+      "studioFiles": 129,
+      "relayFiles": 2,
+      "studioSourceSha256": "1e51601fb82b5be8382f52dac5c86714a5e17ba3cb9f12d92c2b7264662fd070",
+      "relaySourceSha256": "93927896def35a5c522dcc78d5e4eb7e6a30b2cb0194f3b4c174132a70e681f8",
+      "generatedRelayMatchesCurrentSource": true,
+      "productSourceUnchangedSinceDeployed": true,
+      "sourceAndTestsUnchangedSince140LocalChecks": true,
+      "siteExportUnchangedSinceV119": true,
+      "enBase": "b9e7d31d08dd9cf63c70530f4e26adafef3c9510",
+      "haruBase": "85a2fbae41819f260840b6e3e7091f25cb6cb1d5"
+    },
+    "ciAtRecordCreation": "in_progress_on_initial_PR_head",
+    "finalHeadCiAuthority": "https://github.com/zzocojoa/haru-word/pull/32/checks",
+    "enCardGithubCi": "not_configured",
+    "finalHeadCiMustBeCheckedBeforeMerge": true
+  },
+  "pushGuard": {
+    "unchangedHook": true,
+    "highSecretFindings": 0,
+    "haruInitialPushBlocked": "input_too_large because new-branch hook used stale Sites origin/main (10,191,827 added bytes), not GitHub main",
+    "resolution": "Same commit pushed from temporary local shared clone with GitHub origin/main and byte-identical pre-push hook; 1,000,951 added bytes scanned; no hook bypass or remote replacement in working repository",
+    "mediumFindings": "Unix timestamps, generated-code constants/host strings; full production diff independently reviewed"
+  },
+  "inheritedDependencyAlert": {
+    "url": "https://github.com/zzocojoa/haru-word/security/dependabot/13",
+    "package": "braces",
+    "severity": "high",
+    "state": "open",
+    "createdAt": "2026-10-03T07:56:01Z",
+    "lockfileChangedInThisPr": false,
+    "scope": "Existing default-branch alert; dependency remediation is not included in these automation PRs"
+  },
+  "production": {
+    "reference": "2026-10-06-automation-revise-rollout.json",
+    "siteVersion": 119,
+    "automationDoVersion": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
+    "schema": 18,
+    "actionsInThisStep": {
+      "deployments": 0,
+      "aiCalls": 0,
+      "kakaoCalls": 0,
+      "dbWrites": 0,
+      "settingsChanges": 0,
+      "heartbeatChanges": 0
+    }
+  },
+  "remainingLiveVerification": {
+    "regularDailyDueKst": "2026-10-07 07:30",
+    "followupKst": "2026-10-07 07:50",
+    "actualFiveCardReceipt": false,
+    "correctionFallbackObserved": false,
+    "naturalDuplicateRegenerationObserved": false,
+    "currentVersionFiveCardLoadCpuVerified": false,
+    "notes": "Preserve daily version22 07:30 five-card settings and the existing en-card-5 follow-up; no extra trial or forced failure."
+  }
+}

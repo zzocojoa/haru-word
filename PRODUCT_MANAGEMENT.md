@@ -1,5 +1,7 @@
 # 하루단어 제품 개발·출시 관리
 
+**GitHub 동기화 — 2026-10-06:** 미병합된 다중 시험·중복 재생성·수정 제공자 대체를 [EN_Card PR11](https://github.com/zzocojoa/EN_Card/pull/11)과 [하루단어 PR32](https://github.com/zzocojoa/haru-word/pull/32)로 연결했다. 전체 범위 검토와 생성물131개 원본 대조를 완료했고 설치/복구 문서·README의 오래된 현재 상태를 수정했다. 두 PR은 아직 미병합이며 최신 커밋 CI는 PR에서 확인한다. 이번 단계의 운영 게시·DB/예약 변경·추가 AI/카카오 발송은0이다. 기존10월7일 정규5장·07:50 후속과 실제 검증 미완료는 유지한다. [리뷰·푸시·제약 기록](docs/releases/2026-10-06-automation-github-sync.json).
+
 **현재 카드 엔진 — 2026-10-06 08:26 KST:** 수정 제공자 대체 EN_Card `c503210`을 기존 DO `54882e21-0e43-4f9c-8dfb-f0fb6cce5e47`에100% 반영했다. 주/발송 Worker·Site v119·0018·D1 19개 테이블·version22 매일07:30/5장 설정을 보존했다. 하루단어 변경은 공통 문서뿐이며 게시하지 않았다. 실제 수정 대체/자연 중복·새5장 제작 CPU·휴대전화 수신은 미검증이다. 10월7일 정규5장 후07:50 읽기 점검 `en-card-5`가ACTIVE이며 새 시험·보충 발송은 없다. [배포·무료 확인 범위·복구](docs/releases/2026-10-06-automation-revise-rollout.json). 아래 미배포/PAUSED/현재 배포 표시는 각각 당시 상태다.
 
 **2026-10-06 수정 실패 대응 로컬 후보:** EN_Card `codex/automation-revise-fallback`에서 수정 제공자 대체·독립 재검토·호출/마감 보호를 구현했고 최종140개 로컬 검사·빌드·무료 구성 통과다. 실제 정규5장 실패 패턴의 모의5장 성공과 짧은 추가시험의 만료 제한을 구별한다. 제품 변경은 자동화 DO뿐이며 하루단어 `codex/card-automation-revise-fallback`에는 문서만 갱신했다. 양쪽 미커밋·미배포이며 기존 운영/수신/설정 기록은 보존한다. [후보·검증·남은 실제 확인](docs/releases/2026-10-06-automation-revise-fallback.json).

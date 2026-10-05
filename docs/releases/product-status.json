@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T23:29:41.193Z",
-  "note": "수정 제공자 대체 c503210을 기존 자동화 DO에 반영했다. D1 19개 테이블·version22 매일07:30/5장·바인딩/Cron·주/발송 Worker와 Site v119를 보존했다. 10월7일 정규5장과 새 코드의 실제 수정 대체/자연중복/제작CPU/휴대전화 수신은 미검증이며 07:50 읽기 후속을 등록했다.",
+  "recordedAt": "2026-10-05T23:53:54.853Z",
+  "note": "EN_Card PR11과 하루단어 PR32를 생성·연결했다. 다중 시험·중복 재생성·수정 제공자 대체의 기존 운영 소스와 생성물 일치를 검토했다. 병합 전 최신 PR CI 확인이 필요하며 이번 GitHub 단계의 운영/설정/AI/카카오 변경은0이다. 기존10월7일 정규5장·07:50 후속 및 실제 검증 미완료를 유지한다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -1180,5 +1180,28 @@
       "purpose": "Read the existing daily five-card run; no new trial, AI call or send",
       "productScheduleChanged": false
     }
+  },
+  "automationGithubSync": {
+    "record": "2026-10-06-automation-github-sync.json",
+    "status": "pull_requests_open_not_merged",
+    "pullRequests": [
+      {
+        "repository": "zzocojoa/EN_Card",
+        "number": 11,
+        "url": "https://github.com/zzocojoa/EN_Card/pull/11",
+        "base": "master",
+        "branch": "codex/automation-revise-fallback",
+        "reviewedContentHead": "24238d46623909549c3b584abca0e36badf0a6db"
+      },
+      {
+        "repository": "zzocojoa/haru-word",
+        "number": 32,
+        "url": "https://github.com/zzocojoa/haru-word/pull/32",
+        "base": "main",
+        "branch": "codex/card-automation-revise-fallback",
+        "reviewedContentHead": "227410a2488b74f31743d04902fac4f2d0e69021"
+      }
+    ],
+    "finalHeadCiAuthority": "https://github.com/zzocojoa/haru-word/pull/32/checks"
   }
 }
