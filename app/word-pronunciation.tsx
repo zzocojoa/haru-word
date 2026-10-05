@@ -17,7 +17,7 @@ export function WordPronunciation({word,meaning}:{word:Word;meaning:string}) {
     </> : pronunciation.kind==='dictionary' ? <>
       <p className="small-note">품사·뜻·시제에 따라 발음이 달라요. 이 뜻의 발음은 사전에서 확인해 주세요.</p>
       <a className="dictionary-audio" href={dictionaryUrl(word.word)} target="_blank" rel="noreferrer">사전에서 발음 확인 <ExternalLink size={14}/></a>
-    </> : <><Speak text={word.word}/><p className="small-note">기기 음성의 품질은 기기에 따라 달라요. 사전 발음과 함께 확인하세요.</p></>}
+    </> : <Speak text={word.word} dictionaryHref={dictionaryUrl(word.word)} showHelpInitially/>}
     {familyNote&&<p className="small-note">{familyNote}</p>}
   </div>;
 }

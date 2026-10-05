@@ -16,6 +16,7 @@ module.exports = [
   "daily-goal-qa.cjs",
   "daily-topup-qa.cjs",
   "design-qa.cjs",
+  "device-speech-ui-qa.cjs",
   "draft-interaction-qa.cjs",
   "editor-save-qa.cjs",
   "expression-translation-qa.cjs",

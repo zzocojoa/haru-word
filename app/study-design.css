@@ -473,29 +473,44 @@ footer {
   font-size: 0.9375rem;
 }
 .speak-wrap {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
+  display: inline-grid;
+  gap: var(--space-1);
   max-width: 100%;
-  font-size: 1rem;
+  font-size: .875rem;
+  text-align: left;
 }
+.audio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+}
+.speak-wrap .device-audio {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+}
+.audio-dictionary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--caption);
+}
+.audio-controls svg { flex-shrink: 0; }
 .audio-message {
-  display: block;
-  max-width: 30rem;
-  padding: var(--space-3);
-  background: #fff;
-  border: 1px solid var(--border);
-  box-shadow: none;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  color: var(--ink);
+  font-size: .875rem;
+  color: var(--caption);
   letter-spacing: 0;
   font-weight: 400;
 }
-.audio-help { max-width: 30rem; font-size: 0.875rem; font-weight: 400; line-height: 1.6; color: var(--ink); }
-.audio-help a { text-decoration: underline; }
+.audio-message:empty { width: 0; }
+.audio-message[data-state=error] { flex-basis: 100%; color: var(--danger); }
+.speak-wrap .audio-help { margin: 0; max-width: 30rem; }
+.speak-wrap .audio-help>summary { justify-content: flex-start; color: var(--caption); font-weight: 400; }
+.speak-wrap .audio-help>summary::after { margin-left: var(--space-1); }
+.audio-help .help-content { border-top: 1px solid var(--border); padding-top: var(--space-2); }
 .meaning-section label, .session-panel label, .word-dialog label, [data-slot=dialog-content] label {
   display: block;
   font-size: 0.875rem;
