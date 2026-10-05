@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T12:26:50.984Z",
-  "note": "사용자는 21:03 이후 새 카드 4장 수신·클릭 정상으로 확인했다. 서버는 이번 시험 3장 접수·중복 1장·마감 1장 제외로 기록해 수신 수량 차이는 미해결이다. CPU 관측은 완료했고 정규 자동 제작은 재개하지 않았다.",
+  "recordedAt": "2026-10-05T13:43:26.749Z",
+  "note": "중복 표현 재생성 수정과 5장 최소45분을 D1 0018·Worker/DO·Site v119에 반영했다. 기존 데이터·정규 비활성을 보존했고 새 AI/카카오 호출0이다. 이전 사용자 새4장/서버3건 차이와 5장 실제 성공 검증은 미완료다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -34,24 +34,24 @@
   },
   "production": {
     "site": {
-      "version": 118,
-      "source": "835efb82983d1cbd77339fb12356c128eeac87c8",
-      "deployment": "appgdep_6ac38935f7888191ab847a6d6e866e45",
+      "version": 119,
+      "source": "1656444de5e1a1b5cb0106577ca0e19b434decec",
+      "deployment": "appgdep_6ac3a8bea9088191a4e3a814da5a4aba",
       "envRevision": 59,
       "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
       "latestVersionRead": {
-        "version": 118,
+        "version": 119,
         "status": "succeeded",
-        "checkedAt": "2026-10-05T11:26:01.111472+00:00",
-        "method": "Native deployment success and public asset/source hash verification",
+        "checkedAt": "2026-10-05T13:41:28.939Z",
+        "method": "Native deployment success, public manifest and five static file SHA256 matches, access readback",
         "accessRevision": 4
       }
     },
     "workerVersions": {
       "en-card": [
         {
-          "version_id": "2009d5af-9ea0-4bea-bc48-a32a379f84af",
+          "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
           "percentage": 100
         }
       ],
@@ -63,22 +63,22 @@
       ],
       "en-card-automation": [
         {
-          "version_id": "aaf0cf6f-e37f-4dd2-9612-5daa49424a00",
+          "version_id": "d485cf7e-9afc-42f4-949d-e8db185e6fc0",
           "percentage": 100
         }
       ]
     },
-    "workerEvidenceCheckedAt": "2026-10-05T11:15:34.379Z",
-    "workerEvidence": "2026-10-05-automation-multi-trial.json#workers",
+    "workerEvidenceCheckedAt": "2026-10-05T13:41:23.785Z",
+    "workerEvidence": "2026-10-05-automation-duplicate-rollout.json#workers",
     "newDeploymentInThisReconciliation": true
   },
   "cardArtifacts": {
-    "enCardSourceCommit": "f70b1d4",
-    "studioSourceSha256": "13605194283b75a28f5f22d6e8e3da6ef2653d4a886d8f7a60e37726d356e9bc",
-    "relaySourceSha256": "79e9b5ce76c8c32a26e4c2a7241b90939e3c768f8b0055374d282283e96a1526",
+    "enCardSourceCommit": "ad2e125f09f669cfd5420064d819112e6cd2bf3e",
+    "studioSourceSha256": "1e51601fb82b5be8382f52dac5c86714a5e17ba3cb9f12d92c2b7264662fd070",
+    "relaySourceSha256": "93927896def35a5c522dcc78d5e4eb7e6a30b2cb0194f3b4c174132a70e681f8",
     "studioManifest": "public/card-studio/source.json",
     "relayManifest": "lib/server/card-automation.generated.json",
-    "operatingSourceCommit": "835efb82983d1cbd77339fb12356c128eeac87c8"
+    "operatingSourceCommit": "1656444de5e1a1b5cb0106577ca0e19b434decec"
   },
   "reconciliation": {
     "status": "merged",
@@ -720,9 +720,9 @@
     }
   },
   "automationDuplicateRetry": {
-    "status": "verified_candidate_deployment_in_progress",
+    "status": "deployed_live_regeneration_not_tested",
     "enCardSourceCommit": "ad2e125f09f669cfd5420064d819112e6cd2bf3e",
-    "recordedAt": "2026-10-05T12:53:36.896Z",
+    "recordedAt": "2026-10-05T13:43:26.749Z",
     "branches": {
       "enCard": "codex/automation-duplicate-retry",
       "haruWord": "codex/card-automation-duplicate-retry"
@@ -775,13 +775,26 @@
       "Allow two duplicate draft retries per slot in the trial preparation window"
     ],
     "remoteChanges": {
-      "deployments": 0,
-      "migrations": 0,
+      "deployments": 4,
+      "maintenanceDeployments": 1,
+      "productWorkerDeployments": 2,
+      "sitePublications": 1,
+      "migrations": 1,
       "aiCalls": 0,
       "kakaoCalls": 0,
       "scheduleChanges": 0
     },
-    "next": "Approved encrypted backup and write pause, EN_Card migration0018 and compatible DO, then existing Site publication and separate live validation",
-    "note": "Prior trial and receipt evidence is unchanged. Four distinct new receipts reported by the user versus three trial server acceptances remains unresolved; normal automation and en-card-5 remain inactive/paused."
+    "next": "Separate future authorized live duplicate-regeneration/five-card test and CPU/receipt verification; preserve completed trial history.",
+    "note": "Prior trial and receipt evidence is unchanged. Four distinct new receipts reported by the user versus three trial server acceptances remains unresolved; normal automation and en-card-5 remain inactive/paused.",
+    "haruWordSourceCommit": "40a4671dbcae07a4b82e03ca90fcc7322a02e1f8",
+    "siteSourceCommit": "1656444de5e1a1b5cb0106577ca0e19b434decec",
+    "release": "2026-10-05-automation-duplicate-rollout.json",
+    "deploymentVerification": {
+      "previousDataPreserved": true,
+      "foreignKeyErrors": 0,
+      "publicStaticFilesMatched": 5,
+      "manifestMatched": true,
+      "regularAutomationEnabled": false
+    }
   }
 }

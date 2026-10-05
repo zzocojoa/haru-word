@@ -1,10 +1,12 @@
 # 영어 카드 작업실 통합
 
-## 중복 재생성 수정 후보 — 로컬 검증 완료·미배포
+## 중복 재생성 — 2026-10-05 v119 운영 반영
 
-EN_Card `codex/automation-duplicate-retry`에서 정식 exporter로 가져온 화면/릴레이가 새 `codex/card-automation-duplicate-retry`에 있다. 중복이면 같은 카드 자리에서 새 후보를 작성·독립 검토하고 중복3회 및 기존 호출/마감 상한에서 멈춘다. 화면은 재생성 대기/한도 상태와 5장 최소45분을 표시한다. 서버/프록시19개·타입·제품 빌드와 원본의 관련130개·Chromium/WebKit2개·무료 구성을 검증했다. 양쪽은 미커밋이며 원본 EN_Card0018·호환 DO를 먼저 적용한 뒤 이 Site를 게시해야 한다.
+EN_Card `codex/automation-duplicate-retry@ad2e125`의 정식 exporter 산출물을 하루단어 `codex/card-automation-duplicate-retry@40a4671`에 커밋했다. 중복이면 같은 카드 자리에서 새 후보를 작성·독립 검토하고 중복3회 및 기존 호출/마감 상한에서 멈춘다. 화면은 재생성 대기/한도 상태와 5장 최소45분을 표시한다. 서버/프록시19개·타입·제품 빌드와 원본의 관련130개·Chromium/WebKit2개·무료 구성을 검증했다.
 
-운영 v118/0017과 실제 시험·수신 이력은 변경하지 않았다. 새 실제 AI/카카오 호출0이며 기존 종료 시험을 재실행하지 않는다. 생성물 해시는 두 `source.json`/`card-automation.generated.json` 및 `docs/releases/product-status.json`의 로컬 후보에서 확인한다. 아래는 기존 배포 시점의 이력이다.
+승인 범위에서 암호화 백업·쓰기 차단 → EN_Card0018 → 호환 DO/주 Worker → 기존 Site **v119** 순서로 배포했다. 게시 소스 `1656444de5e1a1b5cb0106577ca0e19b434decec`의 전체 트리는 검증한 하루단어 소스와 같다. 기존 EN_Card 열/행·FK·바인딩·Cron과 발송 Worker, Site 환경59·공개정책4를 보존했다. 공개 manifest와 JS/CSS/폰트 등5개 파일 해시 및 비인증 API401을 확인했다. GitHub push/PR/병합은 별도로 남았다.
+
+실제 새 AI/카카오 호출0·종료 시험 재실행0·정규 설정 변경0이다. 정규 자동화는 version20·enabled0·next_due_at=NULL로 유지했다. 무료 플랜은 오늘 사용자 확인을 근거로 하며 구독 API403으로 별도 계정 조회는 완료하지 못했다. 새 재생성 CPU·5장 실제 수신과 기존 사용자4장/서버3건 차이는 미완료다. [배포 근거](docs/releases/2026-10-05-automation-duplicate-rollout.json)와 [공통 상태](docs/releases/product-status.json)를 따른다. 아래는 이전 배포 시점의 이력이다.
 
 ## 새 AI 카드 1~5장 시험 — 2026-10-05 v118 반영
 
