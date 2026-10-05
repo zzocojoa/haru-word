@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T23:00:04.875Z",
-  "note": "10월6일 정규5장 중2·4·5번은07:31경 각1회 접수됐고 사용자가3장 모두 이미지·원본 링크 정상으로 확인했다. 1·3번은 Google 수정단계3회실패로 제외됐다. 중복0·진행중0이며 정규version22/매일07:30/5장은 유지, 후속en-card-5만PAUSED다. 5장전체성공·중복재생성실측·완전한CPU관측은 미완료다.",
+  "recordedAt": "2026-10-05T23:29:41.193Z",
+  "note": "수정 제공자 대체 c503210을 기존 자동화 DO에 반영했다. D1 19개 테이블·version22 매일07:30/5장·바인딩/Cron·주/발송 Worker와 Site v119를 보존했다. 10월7일 정규5장과 새 코드의 실제 수정 대체/자연중복/제작CPU/휴대전화 수신은 미검증이며 07:50 읽기 후속을 등록했다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -63,14 +63,15 @@
       ],
       "en-card-automation": [
         {
-          "version_id": "d485cf7e-9afc-42f4-949d-e8db185e6fc0",
+          "version_id": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
           "percentage": 100
         }
       ]
     },
-    "workerEvidenceCheckedAt": "2026-10-05T13:41:23.785Z",
-    "workerEvidence": "2026-10-05-automation-duplicate-rollout.json#workers",
-    "newDeploymentInThisReconciliation": true
+    "workerEvidenceCheckedAt": "2026-10-05T23:28:50.802Z",
+    "workerEvidence": "2026-10-06-automation-revise-rollout.json#deployment",
+    "newDeploymentInThisReconciliation": true,
+    "automationRuntimeSourceCommit": "c503210cdc60b4084fe5b5c1b423ae3aa0fbe11d"
   },
   "cardArtifacts": {
     "enCardSourceCommit": "ad2e125f09f669cfd5420064d819112e6cd2bf3e",
@@ -1079,6 +1080,105 @@
         "scope": "All three accepted cards are user-confirmed. This does not confirm five cards or resolve the October5 discrepancy."
       },
       "acceptedCardsPhoneReceiptVerified": true
+    }
+  },
+  "automationReviseFallback": {
+    "status": "deployed_waiting_for_regular_daily_validation",
+    "recordedAt": "2026-10-05T23:29:41.193Z",
+    "report": "docs/releases/2026-10-06-automation-revise-rollout.json",
+    "scope": {
+      "enCardBranch": "codex/automation-revise-fallback",
+      "enCardBase": "a354e86",
+      "haruBranch": "codex/card-automation-revise-fallback",
+      "haruBase": "a65c301",
+      "sourceCommitted": true,
+      "productionChanged": true,
+      "hashes": {
+        "src/automation/engine.ts": "8e9bf34121ce3741af325c1c6c3e92ae0d47d0f716e9c9b933fbb52f3f1dea8b",
+        "tests/automation-revise-fallback.test.ts": "ab02b4f79ed4b76241df9af720c0594401708cc837f85d8b9ef0255334f3fdde",
+        "docs/AI_CARD_AUTOMATION_QUANTITY.md": "83d4d8b8236e4ffb9f4aa5b2b5178387c934c8d83530d9f4cc1caee80c16b465"
+      },
+      "enCardSourceCommit": "c503210cdc60b4084fe5b5c1b423ae3aa0fbe11d"
+    },
+    "validation": {
+      "regression": {
+        "log": "backups/automation-revise-fallback-regression.log",
+        "files": 7,
+        "tests": 138
+      },
+      "additional": {
+        "log": "backups/automation-revise-fallback-final-edges.log",
+        "files": 1,
+        "tests": 5
+      },
+      "durable": {
+        "log": "backups/automation-revise-fallback-do.log",
+        "files": 1,
+        "tests": 1
+      },
+      "uniqueTests": 140,
+      "uniqueTestCountNote": "The additional run rechecks existing cases after evidence assertions and time-loop fixes; only the single-card trial deadline scenario is new.",
+      "typecheck": true,
+      "buildWeb": true,
+      "workerDryRuns": 3,
+      "freeDefaultConfig": true,
+      "freeLiveConfig": true,
+      "format": true,
+      "actualProviders": false,
+      "actualKakao": false,
+      "remoteCpu": false,
+      "initialFailure": "Before the fix the exhausted Google correction became skipped; first new suite had twelve passes and a thirty-second wall-test timeout on the five-card case. The targeted case passed after raising only its local test timeout to sixty seconds."
+    },
+    "productionChanged": true,
+    "next": [
+      "Observe real correction provider replacement and natural duplicate regeneration separately if they occur; never force these branches in production",
+      "Verify existing October7 daily five-card generation, independent reviews, PNG and live acceptance",
+      "Measure current-version generation/send CPU with sampling and missing intervals disclosed",
+      "Obtain user confirmation of all five images and original links",
+      "Existing trial preparation windows remain unchanged; October5 user4/server3 discrepancy remains unresolved"
+    ],
+    "localReport": "docs/releases/2026-10-06-automation-revise-fallback.json",
+    "deployedVersion": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
+    "preservation": {
+      "checkedAt": "2026-10-05T23:28:50.802Z",
+      "d1Tables": 19,
+      "allTableHashesMatch": true,
+      "settings": {
+        "version": 22,
+        "enabled": 1,
+        "reason": null,
+        "next_due_at": 1791325800000,
+        "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+        "cards": 5,
+        "time": "07:30",
+        "start": "2026-10-04",
+        "end": "2027-10-31"
+      },
+      "bindingsAndCronsMatch": true,
+      "mainAndDeliveryVersionsMatch": true,
+      "activeRuns": 0,
+      "activeSchedules": 0,
+      "inflightOrUnresolvedUnknown": 0,
+      "foreignKeyErrors": 0,
+      "credentialStatus": "connected",
+      "todayUsage": [
+        {
+          "day": "2026-10-06",
+          "uploads": 3,
+          "sends": 3,
+          "bytes": 0
+        }
+      ],
+      "previousReceiptEvidenceUnchanged": true,
+      "previousOctober5DiscrepancyUnresolved": true
+    },
+    "followup": {
+      "id": "en-card-5",
+      "status": "ACTIVE",
+      "atKst": "2026-10-07T07:50:00+09:00",
+      "once": true,
+      "purpose": "Read the existing daily five-card run; no new trial, AI call or send",
+      "productScheduleChanged": false
     }
   }
 }

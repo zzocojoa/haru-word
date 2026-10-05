@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T23:29:41.193Z",
+  "status": "deployed_waiting_for_regular_daily_validation",
+  "source": {
+    "enCardBranch": "codex/automation-revise-fallback",
+    "enCardCommit": "c503210cdc60b4084fe5b5c1b423ae3aa0fbe11d",
+    "haruBranch": "codex/card-automation-revise-fallback",
+    "localVerification": "2026-10-06-automation-revise-fallback.json",
+    "sourceSha256": "8e9bf34121ce3741af325c1c6c3e92ae0d47d0f716e9c9b933fbb52f3f1dea8b"
+  },
+  "deployment": {
+    "target": "en-card-automation",
+    "version": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
+    "createdAt": "2026-10-05T23:26:15.86407Z",
+    "appliedPercent": 100,
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ],
+        "bindings": [
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "name": "ASSETS",
+            "type": "assets"
+          },
+          {
+            "class_name": "CardAutomation",
+            "name": "AUTOMATION",
+            "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+            "script_name": "en-card-automation",
+            "type": "durable_object_namespace"
+          },
+          {
+            "name": "CARD_IMAGES",
+            "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+            "type": "kv_namespace"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "environment": "production",
+            "name": "DELIVERY_SERVICE",
+            "service": "en-card-delivery",
+            "type": "service"
+          },
+          {
+            "type": "secret_text",
+            "name": "KAKAO_CLIENT_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "KAKAO_REST_API_KEY"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          },
+          {
+            "type": "secret_text",
+            "name": "SESSION_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "SETUP_TOKEN"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_BRIDGE_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_ORIGIN"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_OWNER_ID"
+          },
+          {
+            "type": "secret_text",
+            "name": "TOKEN_ENCRYPTION_KEY"
+          }
+        ]
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindings": [
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          }
+        ]
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindings": [
+          {
+            "name": "AI_FREE_CONFIRMED",
+            "text": "google_groq_free",
+            "type": "plain_text"
+          },
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "class_name": "CardAutomation",
+            "name": "AUTOMATION",
+            "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+            "type": "durable_object_namespace"
+          },
+          {
+            "name": "AUTOMATION_MODE",
+            "text": "live",
+            "type": "plain_text"
+          },
+          {
+            "name": "CARD_IMAGES",
+            "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+            "type": "kv_namespace"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "name": "FONT_ASSETS",
+            "type": "assets"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          }
+        ]
+      }
+    },
+    "siteRepublished": false,
+    "siteVersionPreserved": 119,
+    "scope": "Only automation DO code; no migration, new binding, dependency, secret, model, UI, API or relay changes"
+  },
+  "preservation": {
+    "checkedAt": "2026-10-05T23:28:50.802Z",
+    "d1Tables": 19,
+    "allTableHashesMatch": true,
+    "settings": {
+      "version": 22,
+      "enabled": 1,
+      "reason": null,
+      "next_due_at": 1791325800000,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "cards": 5,
+      "time": "07:30",
+      "start": "2026-10-04",
+      "end": "2027-10-31"
+    },
+    "bindingsAndCronsMatch": true,
+    "mainAndDeliveryVersionsMatch": true,
+    "activeRuns": 0,
+    "activeSchedules": 0,
+    "inflightOrUnresolvedUnknown": 0,
+    "foreignKeyErrors": 0,
+    "credentialStatus": "connected",
+    "todayUsage": [
+      {
+        "day": "2026-10-06",
+        "uploads": 3,
+        "sends": 3,
+        "bytes": 0
+      }
+    ],
+    "previousReceiptEvidenceUnchanged": true,
+    "previousOctober5DiscrepancyUnresolved": true
+  },
+  "verification": {
+    "localUniqueTests": 140,
+    "priorLocalReportPreserved": true,
+    "exactLiveDryRun": true,
+    "exactFreeConfiguration": true,
+    "remoteVersionReadback": true,
+    "readOnlyVerifierQuery": true,
+    "verifierFinalWriterStageRevisionAware": true,
+    "cpu": {
+      "scope": "idle after deployment; not five-card generation/render/send load",
+      "start": "2026-10-05T23:26:22.000Z",
+      "end": "2026-10-05T23:28:48.931Z",
+      "summary": {
+        "en-card": {
+          "worker": {
+            "groups": 1,
+            "requests": 1,
+            "errors": 0,
+            "highestGroupP99Ms": 1.709,
+            "sampledGroups": 0,
+            "singleRequestGroups": 1
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-delivery": {
+          "worker": {
+            "groups": 1,
+            "requests": 1,
+            "errors": 0,
+            "highestGroupP99Ms": 0.888,
+            "sampledGroups": 0,
+            "singleRequestGroups": 1
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-automation": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 1,
+            "requests": 1,
+            "errors": 0,
+            "highestGroupP99Ms": 6.118,
+            "sampledGroups": 0,
+            "singleRequestGroups": 1
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        }
+      },
+      "initialQueryGroups": 0,
+      "observationLimit": "Only one returned group per active surface, each one request with sampleInterval1. Recent data may lag; no complete invocation coverage claim.",
+      "interpretation": "Highest returned group P99 in milliseconds; not whole-window invocation maximum.",
+      "loadVerified": false
+    },
+    "correctionFallbackLiveObserved": false,
+    "naturalDuplicateLiveObserved": false,
+    "fiveCardServerVerified": false,
+    "fiveCardPhoneVerified": false
+  },
+  "free": {
+    "configuration": "passed",
+    "accountApi": {
+      "status": "unavailable",
+      "detail": "Cloudflare 403 codes 10000",
+      "priorUserFreeConfirmationPreserved": true
+    },
+    "existingExplicitUserWorkersFreeConfirmationPreserved": true,
+    "existingGoogleGroqFreeConfirmationPreserved": true,
+    "accountRemainingQuotaVerified": false,
+    "paidPathsAdded": false,
+    "billingGuarantee": false
+  },
+  "productionActions": {
+    "workerDeployments": 1,
+    "sitePublications": 0,
+    "migrations": 0,
+    "newResources": 0,
+    "secretChanges": 0,
+    "newTrials": 0,
+    "extraAiCalls": 0,
+    "kakaoSends": 0,
+    "settingsWrites": 0,
+    "dbHistoryWrites": 0,
+    "heartbeatUpdates": 1
+  },
+  "nextDaily": {
+    "day": "2026-10-07",
+    "cards": 5,
+    "configVersion": 22,
+    "dueAt": 1791325800000,
+    "preparationAt": 1791322200000,
+    "deadline": 1791325500000
+  },
+  "followup": {
+    "id": "en-card-5",
+    "status": "ACTIVE",
+    "atKst": "2026-10-07T07:50:00+09:00",
+    "once": true,
+    "purpose": "Read the existing daily five-card run; no new trial, AI call or send",
+    "productScheduleChanged": false
+  },
+  "rollback": {
+    "worker": "en-card-automation",
+    "version": "d485cf7e-9afc-42f4-949d-e8db185e6fc0",
+    "schema": "0018 compatible",
+    "command": "node node_modules/wrangler/bin/wrangler.js rollback d485cf7e-9afc-42f4-949d-e8db185e6fc0 --config wrangler.automation.live.jsonc",
+    "executed": false,
+    "conditions": "Check active work first. Preserve attempts, provider roles, cards and history. Old code loses the correction fallback policy for pending work; no DB rollback or replay."
+  },
+  "evidence": {
+    "directory": "backups/automation-revise-rollout-20261006",
+    "files": [
+      "snapshot-preflight.json",
+      "snapshot-deployed.json",
+      "snapshot-final.json",
+      "deploy-automation.log",
+      "dry-run.log",
+      "free-config.log",
+      "verify-before-preparation.json",
+      "observe-after-deploy.json",
+      "metrics-idle-after-deploy.json",
+      "metrics-idle-followup.json"
+    ],
+    "verifier": "node backups/automation-revise-rollout-20261006/verify-daily.mjs 2026-10-07 5 scheduled-daily",
+    "observation": "node backups/automation-revise-rollout-20261006/observe.mjs scheduled-daily"
+  },
+  "remaining": [
+    "Observe real correction provider replacement and natural duplicate regeneration separately if they occur; never force these branches in production",
+    "Verify existing October7 daily five-card generation, independent reviews, PNG and live acceptance",
+    "Measure current-version generation/send CPU with sampling and missing intervals disclosed",
+    "Obtain user confirmation of all five images and original links",
+    "Existing trial preparation windows remain unchanged; October5 user4/server3 discrepancy remains unresolved"
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T23:18:38.562Z",
+  "status": "local_verified_not_deployed",
+  "request": "Recover exhausted correction-stage provider attempts while preserving independent review and duplicate/claim/deadline safeguards.",
+  "scope": {
+    "enCardBranch": "codex/automation-revise-fallback",
+    "enCardBase": "a354e86",
+    "haruBranch": "codex/card-automation-revise-fallback",
+    "haruBase": "a65c301",
+    "sourceCommitted": false,
+    "productionChanged": false,
+    "hashes": {
+      "src/automation/engine.ts": "8e9bf34121ce3741af325c1c6c3e92ae0d47d0f716e9c9b933fbb52f3f1dea8b",
+      "tests/automation-revise-fallback.test.ts": "ab02b4f79ed4b76241df9af720c0594401708cc837f85d8b9ef0255334f3fdde",
+      "docs/AI_CARD_AUTOMATION_QUANTITY.md": "83d4d8b8236e4ffb9f4aa5b2b5178387c934c8d83530d9f4cc1caee80c16b465"
+    }
+  },
+  "behavior": {
+    "correctionProviders": [
+      "google",
+      "groq"
+    ],
+    "attemptsPerProviderPerStageRevision": 3,
+    "maximumCorrectionCallsPerRevision": 6,
+    "oneWaySwitchAfterExhaustion": true,
+    "noBudgetReset": true,
+    "independentFinalReview": true,
+    "noReviewProviderFallback": true,
+    "duplicateLimit": 3,
+    "revisionLimit": 2,
+    "authQuotaConfigPause": true,
+    "existingClaimsSettingsDeadlinesPreserved": true
+  },
+  "compatibility": {
+    "schema": "0018 unchanged",
+    "migrationsRequired": 0,
+    "dependenciesAdded": 0,
+    "secretChanges": 0,
+    "apiChanges": 0,
+    "frontendChanged": false,
+    "exportRequired": false,
+    "deploymentTarget": "en-card-automation DO only; current production remains unchanged"
+  },
+  "validation": {
+    "regression": {
+      "log": "backups/automation-revise-fallback-regression.log",
+      "files": 7,
+      "tests": 138
+    },
+    "additional": {
+      "log": "backups/automation-revise-fallback-final-edges.log",
+      "files": 1,
+      "tests": 5
+    },
+    "durable": {
+      "log": "backups/automation-revise-fallback-do.log",
+      "files": 1,
+      "tests": 1
+    },
+    "uniqueTests": 140,
+    "uniqueTestCountNote": "The additional run rechecks existing cases after evidence assertions and time-loop fixes; only the single-card trial deadline scenario is new.",
+    "typecheck": true,
+    "buildWeb": true,
+    "workerDryRuns": 3,
+    "freeDefaultConfig": true,
+    "freeLiveConfig": true,
+    "format": true,
+    "actualProviders": false,
+    "actualKakao": false,
+    "remoteCpu": false,
+    "initialFailure": "Before the fix the exhausted Google correction became skipped; first new suite had twelve passes and a thirty-second wall-test timeout on the five-card case. The targeted case passed after raising only its local test timeout to sixty seconds."
+  },
+  "review": {
+    "skill": "C:/Users/user/.agents/skills/gstack/review/SKILL.md",
+    "scope": "incremental changes since a354e86",
+    "specialists": [
+      "testing",
+      "maintainability",
+      "security",
+      "performance"
+    ],
+    "redTeam": true,
+    "adversarial": true,
+    "sameModelIndependentContexts": true,
+    "crossModelVerified": false,
+    "cli": "Codex 0.132.0 rejected current model as requiring a newer CLI; not counted as completed review",
+    "unresolvedCodeFindings": 0,
+    "handledFindings": [
+      "Document and regress existing single/five-card trial preparation limits; do not widen stored deadlines",
+      "Final author may differ from initial draft author; provide and test stage/revision-aware read-only evidence SQL"
+    ]
+  },
+  "timing": {
+    "daily": {
+      "leadMinutes": 60,
+      "deadlineMarginMinutes": 5,
+      "observedFailurePatternPrepared": 5,
+      "mockSent": 5
+    },
+    "fiveCardTrial": {
+      "leadMinutes": 45,
+      "preparationMinutes": 40,
+      "observedFailurePatternPrepared": 3,
+      "expired": 2
+    },
+    "singleCardTrial": {
+      "startsBeforeDueMinutes": 15,
+      "preparationMinutes": 10,
+      "threeCorrectionFailuresAndFallbackCannotFinish": true
+    },
+    "trialWindowChanged": false,
+    "timingGuarantee": false
+  },
+  "free": {
+    "configurationOnly": true,
+    "accountRechecked": false,
+    "previousUserConfirmationPreserved": true,
+    "paidFallbackAdded": false,
+    "extraCorrectionCallsCanConsumeSharedFreeQuota": true,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/rate-limits",
+      "https://console.groq.com/docs/rate-limits",
+      "https://developers.cloudflare.com/workers/platform/limits/",
+      "https://developers.cloudflare.com/durable-objects/platform/pricing/"
+    ]
+  },
+  "productionActions": {
+    "deployments": 0,
+    "newTrials": 0,
+    "extraAiCalls": 0,
+    "kakaoSends": 0,
+    "settingsWrites": 0,
+    "dbHistoryWrites": 0,
+    "heartbeatChanges": 0
+  },
+  "preservedLiveEvidence": {
+    "report": "2026-10-06-automation-duplicate-validation.json",
+    "acceptedAndUserConfirmedCards": 3,
+    "expectedCards": 5,
+    "wholeTargetComplete": false,
+    "naturalDuplicateObserved": false,
+    "priorOctober5ReceiptDiscrepancyUnresolved": true,
+    "settings": "version22 enabled1 daily07:30 five cards; last observation only"
+  },
+  "next": [
+    "Review this local candidate for deployment to the existing automation DO after checking current active jobs and versions",
+    "Use stage/revision-aware writing evidence instead of the old verifier current-writer draft-success assumption",
+    "Observe actual correction fallback and natural duplicate regeneration separately; do not force duplicates or revive completed slots",
+    "Current-version CPU and five-card phone receipt remain required after deployment"
+  ]
+}
