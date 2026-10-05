@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T11:40:06.424Z",
-  "note": "현재 게시 정보는 production과 automationMultiTrial을 따른다. 다른 항목은 각 작업 당시 기록이다. 새 AI 5장 시험 중 중복 1장이 제외됐으며 5장 전체 수신·부하 CPU는 미검증이다.",
+  "recordedAt": "2026-10-05T12:21:35.034Z",
+  "note": "사용자는 21:03 이후 새 카드 4장 수신·클릭 정상으로 확인했다. 서버는 이번 시험 3장 접수·중복 1장·마감 1장 제외로 기록해 수신 수량 차이는 미해결이다. CPU 관측은 완료했고 정규 자동 제작은 재개하지 않았다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -428,7 +428,7 @@
     "remainingVerification": "Actual iPhone/ChatGPT-app audio and VoiceOver remain unverified. Browser tab handoff was queued; hosted learner interaction was not tested."
   },
   "automationQuantityCandidate": {
-    "status": "deployed_multiple_receipt_verification_in_progress",
+    "status": "trial_finished_partial_success",
     "recordedAt": "2026-10-05T09:17:01Z",
     "integrationStateSource": "GitHub PRs are authoritative for later merge state and final-head CI; product commits below exclude release-record-only commits.",
     "enCard": {
@@ -566,8 +566,8 @@
       "databaseMigrationApplied": true,
       "workerDeployments": 3,
       "siteVersion": 117,
-      "automationEnabled": true,
-      "testScheduled": true,
+      "automationEnabled": false,
+      "testScheduled": false,
       "existingDailyCards": 1,
       "existingTime": "07:00",
       "settingsVersion": 20,
@@ -611,7 +611,7 @@
     }
   },
   "automationMultiTrial": {
-    "status": "deployed_trial_in_progress_with_duplicate_skip",
+    "status": "trial_receipt_count_discrepancy",
     "evidence": "2026-10-05-automation-multi-trial.json",
     "enCardCommit": "f70b1d4",
     "haruCommit": "755b880",
@@ -627,7 +627,8 @@
       "preparationAt": 1791199680000,
       "serverEvidenceVerified": false,
       "phoneReceiptVerified": false,
-      "cpuVerified": false
+      "cpuVerified": true,
+      "cpuVerificationScope": "Observed four PNG renders and three actual trial sends; not five-card successful load"
     },
     "followup": {
       "id": "en-card-5",
@@ -695,6 +696,21 @@
       ],
       "allFiveCanCompleteWithoutRecovery": false,
       "note": "One draft was skipped by the existing duplicate policy. Other cards continue. No attempt/history reset or replacement generation was performed. Five-card live success and normal-operation resume are not confirmed."
+    },
+    "result": {
+      "evidence": "2026-10-05-automation-multi-trial.json#result",
+      "trialAcceptedCards": 3,
+      "totalTodayAcceptedCards": 4,
+      "requestedCards": 5,
+      "userReportedReceipts": 4,
+      "cardClicksNormal": true,
+      "receiptWindowClarificationPending": false,
+      "normalAutomationResumed": false,
+      "cpuObservedUnder10Ms": true,
+      "userConfirmedFourNewAfter2103": true,
+      "receiptCountMatchesServer": false,
+      "distinctCardsClarificationPending": false,
+      "fourDistinctCardsConfirmed": true
     }
   }
 }
