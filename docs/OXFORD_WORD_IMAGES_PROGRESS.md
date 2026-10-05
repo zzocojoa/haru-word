@@ -10,13 +10,13 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 50 |
-| 제작자 품질 검수 통과 `approved` | 49 |
+| 제작된 서로 다른 항목 | 60 |
+| 제작자 품질 검수 통과 `approved` | 59 |
 | 의미 전달 보류 `held` | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 미제작 `waiting` | 3,759 |
+| 미제작 `waiting` | 3,749 |
 | 생성 중 / 실패 | 0 / 0 |
-| 실제 내장 도구 호출 | 53 |
+| 실제 내장 도구 호출 | 63 |
 | 그중 품질 수정 호출 | 3 |
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
@@ -29,8 +29,11 @@
 | 추가 001 | above 전치사·부사, across 전치사·부사, action, activity, actor, actress, add, address | 10개 검수 통과. activity 운동화의 로고 같은 표식을 한 번 수정 |
 | 추가 002 | adult, advice, afraid, after 전치사, afternoon, again, age, ago, agree, air | 10개 검수 통과. 원본·320px 화면 확인 |
 | 추가 003 | airport, all 한정사·대명사, also, always, amazing, and, angry, animal, another 한정사 | 10개 검수 통과. 전체 집합·추가 활동·빈도·한 잔 더의 관계를 별도로 확인. 수정 호출 없음 |
+| 추가 004 | another 대명사, answer 명사·동사, any 한정사·대명사, anyone, anything, apartment, April, area | 10개 검수 통과. 질문·응답의 품사별 맥락과 개별 주거 공간·지역 경계를 확인. April은 정확히 열두 달력 중 네 번째만 강조. 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
+
+교재 교열 후속 후보: `another` 대명사(`b29978e7b4a058e0`)의 표현 `have another`는 ‘하나 더 먹다’로 번역되어 있으나 같은 항목 예문은 고장 난 물건을 대신할 또 하나를 말한다. 음식 문맥에서는 가능한 번역이지만 해당 예문과의 연결은 재검토해야 한다. 이번 이미지는 기본 뜻 ‘또 하나’와 물건 예문을 기준으로 제작했으며, 원본 교재·기준 해시는 변경하지 않았다.
 
 ## 저장과 검증 근거
 
@@ -55,7 +58,7 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 ## 다음 묶음과 재개 절차
 
-다음 미제작 항목은 `another` 대명사, `answer` 명사·동사, `any` 한정사·대명사, `anyone`, `anything`, `apartment`, `April`, `area`다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 미제작 항목은 `arm`, `around` 전치사·부사, `arrive`, `art`, `article`, `artist`, `as`, `ask`, `at`다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
