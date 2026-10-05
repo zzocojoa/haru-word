@@ -1,8 +1,8 @@
 {
   "format": "en-card-ai-relay-v1",
-  "sourceSha256": "79e9b5ce76c8c32a26e4c2a7241b90939e3c768f8b0055374d282283e96a1526",
+  "sourceSha256": "93927896def35a5c522dcc78d5e4eb7e6a30b2cb0194f3b4c174132a70e681f8",
   "files": {
-    "card-automation.generated.mjs": "b1ca565d9a28bb608fd23763d1af7f905028a92268c647b77ef9b7a871533912",
+    "card-automation.generated.mjs": "40d5f8d9a28b690c5f2719d36bd4158260aff2a610987b7b6203ad033aaf1389",
     "card-automation.generated.d.mts": "39161272b810abdc1edb7ec5b611c89cbc79b21bfe92e1188aa60b50636288b6"
   }
 }

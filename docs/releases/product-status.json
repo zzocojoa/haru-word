@@ -718,5 +718,70 @@
       "finalCheckAt": "2026-10-05T12:26:50.984Z",
       "activeTrialWork": 0
     }
+  },
+  "automationDuplicateRetry": {
+    "status": "verified_candidate_deployment_in_progress",
+    "enCardSourceCommit": "ad2e125f09f669cfd5420064d819112e6cd2bf3e",
+    "recordedAt": "2026-10-05T12:53:36.896Z",
+    "branches": {
+      "enCard": "codex/automation-duplicate-retry",
+      "haruWord": "codex/card-automation-duplicate-retry"
+    },
+    "bases": {
+      "enCard": "5bd3f88",
+      "haruWord": "ae19be6"
+    },
+    "requiredEnCardMigration": "0018_automation_duplicate_retry.sql",
+    "duplicateRejectionLimit": 3,
+    "fiveCardTrialLeadMinutes": 45,
+    "uiSourceSha256": "1e51601fb82b5be8382f52dac5c86714a5e17ba3cb9f12d92c2b7264662fd070",
+    "relaySourceSha256": "93927896def35a5c522dcc78d5e4eb7e6a30b2cb0194f3b4c174132a70e681f8",
+    "checkedArtifacts": {
+      "ui": 129,
+      "relay": 2
+    },
+    "validation": {
+      "enCardTests": 130,
+      "haruTests": 19,
+      "localBrowserTests": 2,
+      "browsers": [
+        "Chromium",
+        "WebKit"
+      ],
+      "types": "passed_both_repositories",
+      "builds": "passed_both_repositories_and_three_worker_dry_runs",
+      "freeConfiguration": "passed_local_only",
+      "accountPlanRechecked": false,
+      "remoteCpu": "not_measured"
+    },
+    "review": {
+      "specialists": [
+        "testing",
+        "maintainability",
+        "security",
+        "performance",
+        "data-migration",
+        "red-team"
+      ],
+      "independentAdversarial": true,
+      "sameModelIndependentContexts": true,
+      "fixedFindings": 3,
+      "unresolvedFindings": 0,
+      "separateCli": "not_counted_previous_0.132_model_incompatibility"
+    },
+    "changes": [
+      "Retry a duplicate in its existing slot and independently review each accepted replacement",
+      "Persist at most three rejected expressions without resetting attempt or revision budgets",
+      "Allow two duplicate draft retries per slot in the trial preparation window"
+    ],
+    "remoteChanges": {
+      "deployments": 0,
+      "migrations": 0,
+      "aiCalls": 0,
+      "kakaoCalls": 0,
+      "scheduleChanges": 0
+    },
+    "next": "Approved encrypted backup and write pause, EN_Card migration0018 and compatible DO, then existing Site publication and separate live validation",
+    "note": "Prior trial and receipt evidence is unchanged. Four distinct new receipts reported by the user versus three trial server acceptances remains unresolved; normal automation and en-card-5 remain inactive/paused."
   }
 }

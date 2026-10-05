@@ -1,5 +1,11 @@
 # 영어 카드 작업실 통합
 
+## 중복 재생성 수정 후보 — 로컬 검증 완료·미배포
+
+EN_Card `codex/automation-duplicate-retry`에서 정식 exporter로 가져온 화면/릴레이가 새 `codex/card-automation-duplicate-retry`에 있다. 중복이면 같은 카드 자리에서 새 후보를 작성·독립 검토하고 중복3회 및 기존 호출/마감 상한에서 멈춘다. 화면은 재생성 대기/한도 상태와 5장 최소45분을 표시한다. 서버/프록시19개·타입·제품 빌드와 원본의 관련130개·Chromium/WebKit2개·무료 구성을 검증했다. 양쪽은 미커밋이며 원본 EN_Card0018·호환 DO를 먼저 적용한 뒤 이 Site를 게시해야 한다.
+
+운영 v118/0017과 실제 시험·수신 이력은 변경하지 않았다. 새 실제 AI/카카오 호출0이며 기존 종료 시험을 재실행하지 않는다. 생성물 해시는 두 `source.json`/`card-automation.generated.json` 및 `docs/releases/product-status.json`의 로컬 후보에서 확인한다. 아래는 기존 배포 시점의 이력이다.
+
 ## 새 AI 카드 1~5장 시험 — 2026-10-05 v118 반영
 
 EN_Card `f70b1d4`에서 정식 exporter로 생성한 하루단어 `755b880`을 기존 Site v118에 게시했다. 게시 소스 `835efb82983d1cbd77339fb12356c128eeac87c8`의 전체 tree가 검증 후보와 같다. D1 0017·호환 DO/주 Worker를 먼저 반영했고 비공개 발송 Worker·기존 Site 환경·Secret·소유자 인증 경계는 유지했다. 시험의 `cards`(1~5)와 선택적 `due_at`은 기존 `/automation/trial` 경로로 전달한다.
