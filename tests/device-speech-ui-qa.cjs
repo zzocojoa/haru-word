@@ -48,6 +48,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       await route.fulfill({ json: { revision: ++revision } });
     });
     const page = await context.newPage();
+    await page.clock.install();
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base, { waitUntil: 'domcontentloaded' });
     await page.getByText('서버에 저장됨', { exact: true }).waitFor();
@@ -77,7 +78,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     checks.push('normal playback stays compact with one listening button and dictionary link');
 
     await page.addScriptTag({ path: axePath });
-    async function layout(label) {
+    async function layout(label, controlledClock = false) {
       for (const width of [320, 390, 1440]) for (const zoom of [100, 200]) {
         await page.setViewportSize({ width, height: 900 });
         await page.evaluate(value => document.documentElement.style.fontSize = value + '%', zoom);
@@ -89,7 +90,10 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       }
       await page.evaluate(() => document.documentElement.style.fontSize = '100%');
       await page.setViewportSize({ width: 390, height: 844 });
-      assert.deepEqual(await page.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations.map(v => v.id)), [], label);
+      const audit = page.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations.map(v => v.id));
+      // Drain axe's deferred work in virtual time, below the speech watchdog deadline.
+      if (controlledClock) await page.clock.runFor(1000);
+      assert.deepEqual(await audit, [], label);
       checks.push(`${label}: 320/390/1440px, 200% text, 44px targets and axe`);
     }
     await layout('playing');
@@ -105,15 +109,28 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await help.locator('summary').click();
     assert.equal(await message.getByText(/기기 음성을 재생하지 못했어요.*Safari/).isVisible(), true);
     await help.locator('summary').click();
+    // Freeze the watchdog while layout/axe scans take real wall time on slow machines.
+    await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
     await button.click();
     await message.getByText('준비 중', { exact: true }).waitFor();
-    await layout('starting');
+    await layout('starting', true);
+    await message.getByText('준비 중', { exact: true }).waitFor();
     await control('onstart');
+    await page.clock.resume();
     await message.getByText('재생 중', { exact: true }).waitFor();
     await control('onend');
     await page.waitForFunction(() => document.querySelector('.word-pronunciation .audio-message')?.textContent === '');
     assert.equal(await message.textContent(), '');
     checks.push('keyboard disclosure, visible error details and manual retry preserve playback lifecycle');
+
+    await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+    await button.click();
+    await page.clock.runFor(3999);
+    await message.getByText('준비 중', { exact: true }).waitFor();
+    await page.clock.runFor(1);
+    await message.getByText(/기기 음성을 재생하지 못했어요.*Safari/).waitFor();
+    await page.clock.resume();
+    checks.push('controlled clock preserves the 4000ms startup watchdog without wall-time races');
 
     await page.evaluate(() => Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: undefined }));
     await button.click();

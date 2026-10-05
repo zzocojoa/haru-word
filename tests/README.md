@@ -71,7 +71,7 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 
 ## 기기 음성 UI 검사
 
-- `device-speech-ui-qa.cjs`: 사진과 같은 quickly 학습 화면에서 준비·재생·오류·재시도·지원하지 않는 브라우저의 표시와 키보드 도움말을 검사합니다. Chromium/WebKit, 320/390/1440px·200% 글자·44px 터치·axe, 음성 조작 후 학습 revision/기록 불변을 확인합니다. 공유 문법 문장은 실제 컴포넌트를 빌드 CSS가 있는 메모리 fixture에 렌더링해 초기 도움말·구체적인 오류·재시도를 검사합니다. 음성 이벤트와 학습 API는 모의이며 실제 iPhone 청취나 DB 저장을 증명하지 않습니다. 비교 이미지는 `outputs/pronunciation-ui/`에 저장합니다.
+- `device-speech-ui-qa.cjs`: 사진과 같은 quickly 학습 화면에서 준비·재생·오류·재시도·지원하지 않는 브라우저의 표시와 키보드 도움말을 검사합니다. Chromium/WebKit, 320/390/1440px·200% 글자·44px 터치·axe, 음성 조작 후 학습 revision/기록 불변을 확인합니다. 준비 상태 검사는 모의 시계로 실제 처리 속도에서 격리하고, 3,999ms·4,000ms 경계를 별도로 확인합니다. 공유 문법 문장은 실제 컴포넌트를 빌드 CSS가 있는 메모리 fixture에 렌더링해 초기 도움말·구체적인 오류·재시도를 검사합니다. 음성 이벤트와 학습 API는 모의이며 실제 iPhone 청취나 DB 저장을 증명하지 않습니다. 비교 이미지는 `outputs/pronunciation-ui/`에 저장합니다.
 
 ## 학습 기록 접기·펼치기 검사
 
