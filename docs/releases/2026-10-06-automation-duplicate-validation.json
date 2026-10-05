@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T15:29:07.409Z",
+  "status": "waiting_for_existing_daily_reservation",
+  "authorization": "Continue the next incomplete five-card live verification. Preserve current user settings rather than register an additional trial.",
+  "target": {
+    "kind": "daily",
+    "day": "2026-10-06",
+    "cards": 5,
+    "configVersion": 22,
+    "dueAt": 1791239400000,
+    "preparationAt": 1791235800000,
+    "deadline": 1791239100000
+  },
+  "observedSettings": {
+    "version": 22,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": 1791239400000,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "startDate": "2026-10-04",
+    "endDate": "2027-10-31",
+    "changedSincePreviousDeployment": true,
+    "changedByThisWork": false
+  },
+  "production": {
+    "site": {
+      "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "version": 119,
+      "access": "public",
+      "revision": 4,
+      "status": "active"
+    },
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ],
+        "bindingsMatched": true
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindingsMatched": true
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "d485cf7e-9afc-42f4-949d-e8db185e6fc0",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindingsMatched": true
+      }
+    },
+    "migrations": 18,
+    "foreignKeyErrors": 0,
+    "credentialStatus": "connected"
+  },
+  "preparation": {
+    "activeRuns": 0,
+    "activeSchedules": 0,
+    "inflightOrUnresolvedUnknown": 0,
+    "automationPending": 0,
+    "historicalBlocked": 1,
+    "todayRuns": 0
+  },
+  "freeConfiguration": {
+    "passed": true,
+    "accountPlanBasis": "Prior explicit Free confirmation; existing live/free_only bindings unchanged",
+    "freshAccountPlanVerification": false,
+    "newResources": 0
+  },
+  "verification": {
+    "initialQuerySucceeded": true,
+    "phase": "before_preparation",
+    "serverEvidenceVerified": false,
+    "actualPhoneReceiptVerified": false,
+    "cpuVerified": false,
+    "duplicateRegenerationObserved": false,
+    "note": "No run exists yet because preparation is scheduled for06:30KST. Missing cards at this pre-start check are not an execution failure."
+  },
+  "operations": {
+    "newTrialRegistrations": 0,
+    "newAiCalls": 0,
+    "newKakaoSends": 0,
+    "productSettingsWrites": 0,
+    "deployments": 0,
+    "historyChanges": 0,
+    "followupUpdates": 1
+  },
+  "followup": {
+    "id": "en-card-5",
+    "status": "ACTIVE",
+    "atKst": "2026-10-06T07:50:00+09:00",
+    "once": true,
+    "purpose": "Read existing daily five-card result, distinct expressions/replacements, public PNG, live acceptance and current-version CPU. Preserve product automation settings."
+  },
+  "tools": {
+    "directory": "EN_Card/backups/automation-duplicate-trial-20261006",
+    "note": "Directory name is historical preparation naming; verifier targets daily, not trial. No registration or recovery script exists here.",
+    "verifyCommand": "node backups/automation-duplicate-trial-20261006/verify-daily.mjs 2026-10-06 5 scheduled-daily",
+    "metricsCommand": "node backups/automation-duplicate-trial-20261006/metrics.mjs <actual-start-UTC> <actual-end-UTC> scheduled-daily",
+    "credentials": "Initial read returned401; official Wrangler whoami refreshed authentication. No secret printed."
+  },
+  "remaining": [
+    "Wait for the existing daily reservation to run",
+    "Verify five independent accepted cards and actual phone images/original links",
+    "Measure current-version ordinary Worker and DO CPU separately",
+    "If no natural duplicate appears, live duplicate-regeneration branch remains unobserved",
+    "Preserve prior October5 user four new receipts versus three server trial acceptances discrepancy"
+  ]
+}

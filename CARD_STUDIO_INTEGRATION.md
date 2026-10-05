@@ -1,5 +1,9 @@
 # 영어 카드 작업실 통합
 
+## 2026-10-06 현재 예약의 실제 검증 대기
+
+00:26 KST 조회에서 설정은 이미 **version22·매일07:30·5장·enabled1·종료2027-10-31**이었다. 기존 설정을 보존하고 오늘06:30 제작·07:30 발송의 정규 daily5장을 검증한다. 추가 시험 등록·설정 쓰기·AI/카카오 호출·배포0이며 v119/0018과 현재 Worker/바인딩/Cron이 일치한다. `en-card-5` 후속 점검은 **07:50 KST 한 번 ACTIVE**다. 실제 제작·수신·CPU 및 자연 중복의 재생성은 아직 대기이며 아래 비활성/PAUSED는 이전 시점 기록이다. [관측·검증 계획 근거](docs/releases/2026-10-06-automation-duplicate-validation.json)를 따른다.
+
 ## 중복 재생성 — 2026-10-05 v119 운영 반영
 
 EN_Card `codex/automation-duplicate-retry@ad2e125`의 정식 exporter 산출물을 하루단어 `codex/card-automation-duplicate-retry@40a4671`에 커밋했다. 중복이면 같은 카드 자리에서 새 후보를 작성·독립 검토하고 중복3회 및 기존 호출/마감 상한에서 멈춘다. 화면은 재생성 대기/한도 상태와 5장 최소45분을 표시한다. 서버/프록시19개·타입·제품 빌드와 원본의 관련130개·Chromium/WebKit2개·무료 구성을 검증했다.

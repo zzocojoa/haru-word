@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T13:43:26.749Z",
-  "note": "중복 표현 재생성 수정과 5장 최소45분을 D1 0018·Worker/DO·Site v119에 반영했다. 기존 데이터·정규 비활성을 보존했고 새 AI/카카오 호출0이다. 이전 사용자 새4장/서버3건 차이와 5장 실제 성공 검증은 미완료다.",
+  "recordedAt": "2026-10-05T15:29:07.409Z",
+  "note": "현재 정규 설정은 version22·매일07:30·5장으로 활성화되어 있다. 이 작업은 설정을 변경하거나 추가 시험을 등록하지 않고 10월6일06:30 제작·07:30 발송을 검증 대상으로 삼았다. 07:50 읽기 후속 확인을 예약했으며 실제 제작·수신·CPU는 아직 대기다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -796,5 +796,49 @@
       "manifestMatched": true,
       "regularAutomationEnabled": false
     }
+  },
+  "automationDuplicateValidation": {
+    "status": "waiting_for_existing_daily_reservation",
+    "recordedAt": "2026-10-05T15:29:07.409Z",
+    "report": "2026-10-06-automation-duplicate-validation.json",
+    "target": {
+      "kind": "daily",
+      "day": "2026-10-06",
+      "cards": 5,
+      "configVersion": 22,
+      "dueAt": 1791239400000,
+      "preparationAt": 1791235800000,
+      "deadline": 1791239100000
+    },
+    "observedSettings": {
+      "version": 22,
+      "enabled": 1,
+      "reason": null,
+      "next_due_at": 1791239400000,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "cards": 5,
+      "time": "07:30",
+      "startDate": "2026-10-04",
+      "endDate": "2027-10-31",
+      "changedSincePreviousDeployment": true,
+      "changedByThisWork": false
+    },
+    "followup": {
+      "id": "en-card-5",
+      "status": "ACTIVE",
+      "atKst": "2026-10-06T07:50:00+09:00",
+      "once": true,
+      "purpose": "Read existing daily five-card result, distinct expressions/replacements, public PNG, live acceptance and current-version CPU. Preserve product automation settings."
+    },
+    "verification": {
+      "initialQuerySucceeded": true,
+      "phase": "before_preparation",
+      "serverEvidenceVerified": false,
+      "actualPhoneReceiptVerified": false,
+      "cpuVerified": false,
+      "duplicateRegenerationObserved": false,
+      "note": "No run exists yet because preparation is scheduled for06:30KST. Missing cards at this pre-start check are not an execution failure."
+    },
+    "productSettingsChanged": false
   }
 }
