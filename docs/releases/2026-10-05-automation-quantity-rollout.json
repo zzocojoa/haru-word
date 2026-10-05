@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-05T10:01:23.163Z",
+  "recordedAt": "2026-10-05T10:10:23.686Z",
   "status": "deployed_pending_live_verification",
   "sources": {
     "enCard": "b9e7d31d08dd9cf63c70530f4e26adafef3c9510",
@@ -165,6 +165,86 @@
         }
       },
       "scope": "Paused automation only. Not a multi-card load or send verification."
+    },
+    "measurementPreparation": {
+      "readOnly": true,
+      "oldOneCardDayRejectedAsFiveCardEvidence": true,
+      "negativeCheckDay": "2026-10-05",
+      "checkedFields": [
+        "frozen item count/index/config version/due time",
+        "cross-review success and matching content hash",
+        "ready AI card and matching asset revision",
+        "one live sent delivery and one accepted attempt per card",
+        "completed schedule and no unresolved work",
+        "public 1080 PNG signature/type/bytes/hash"
+      ],
+      "actualUserReceiptIsSeparate": true,
+      "cpuUnitsVerifiedByLiveGraphqlSchema": "microseconds; divide by 1000 for milliseconds",
+      "cpuWindowPolicy": "15-minute half-open windows; fail at query row cap, preserve version mismatches and sampling; missing CPU remains null",
+      "idleSummary": {
+        "en-card": {
+          "worker": {
+            "groups": 12,
+            "requests": 13,
+            "errors": 0,
+            "highestGroupP99Ms": 2.544,
+            "sampledGroups": 0,
+            "singleRequestGroups": 11
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-delivery": {
+          "worker": {
+            "groups": 9,
+            "requests": 9,
+            "errors": 0,
+            "highestGroupP99Ms": 1.799,
+            "sampledGroups": 0,
+            "singleRequestGroups": 9
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-automation": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 10,
+            "requests": 10,
+            "errors": 0,
+            "highestGroupP99Ms": 1.951,
+            "sampledGroups": 0,
+            "singleRequestGroups": 10
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        }
+      },
+      "fullMulticardVerification": false,
+      "localEvidenceDirectory": "EN_Card/backups/automation-quantity-rollout-20261005/"
     }
   },
   "automation": {
