@@ -1,5 +1,13 @@
 # 영어 카드 작업실 통합
 
+## 자동 제작 수량 선택 — 2026-10-05 로컬 후보
+
+`github/main@42328b1`에서 `codex/card-automation-quantity`를 만들고 EN_Card 확정 커밋 [`5f7c88e5c65a5f837f44459ce4e969286e9214e4`](https://github.com/zzocojoa/EN_Card/commit/5f7c88e5c65a5f837f44459ce4e969286e9214e4)에서 정식 exporter로 내보냈다. 하루 1~5장 선택, 카드별 진행 번호, 적용된 수량과 저장 전 초안의 구분을 제공한다. 구형 설정은 1장이고 추가 한 장 시험은 그대로 1장이다. 운영 Site v116에 아직 게시하지 않았다. 후속 PR·병합·배포 상태는 [공통 출시 기록](docs/releases/product-status.json)을 따른다.
+
+UI 원본 SHA256은 `bf48fd6a63ceb37584e35bee389f7dc3fdfcd4d8c54e90b8e1b316e7b4086ac4`, 릴레이 원본 SHA256은 `94db18c929b477f8c4eea202a4e53438a74fc92644f9163de40035d857f87fa4`다. 화면 129개·릴레이 2개 파일을 두 명세의 SHA256과 대조했다. 서버/프록시 19개·타입·변경 QA lint·제품 빌드, Chromium/WebKit의 수량 기본값·저장 실패/재시도·초안/새로고침·320/390/1440px·글자 100/200%·axe가 통과했다. Sites helper의 Windows npm 경로 오류 후 동일 저장소 빌드 명령을 직접 실행했다. 로컬 합성 API이며 실제 AI·카카오·iPhone 수신은 검사하지 않았다.
+
+반영 순서는 EN_Card D1 백업/0016 → 수량 지원 DO → 비공개 발송 Worker → 주 Worker → 이 화면/릴레이다. 동시 발송 결과를 기다리는 카드의 영구 차단 및 별도 일반 예약 지연 수정도 발송 Worker에 포함된다. 원본은 초기 605개 검증 후 추가 수정 관련 19파일 360개와 빌드/무료 구성·독립 재검토를 통과했다. 새 수량 설정 이후에는 옛 strict 파서 DO로 복귀하지 않고 0016 호환 수정본으로 복구한다. Site의 학습 DB·API·백업·revision·환경·Secret은 변경하지 않는다. 자세한 동작·부분 실패·검증·복구는 EN_Card `docs/AI_CARD_AUTOMATION_QUANTITY.md`를 따른다.
+
 ## 최신 카드 소스 정리 — 2026-10-04
 
 EN_Card `master@98832db`에서 화면 129개와 AI 릴레이를 정식 exporter로 재생성해 운영 v114의 카드 파일과 대조한다. **AI 자동 제작**은 독립 메뉴이며 모바일 하단에서 바로 연다. 추가 한 장 시험의 `/automation/trial` POST도 기존 소유자·Origin·4KiB 본문 검사를 거쳐 연결한다. 시험 자체의 일일 제한·버전·예약 보호는 EN_Card가 담당한다.
