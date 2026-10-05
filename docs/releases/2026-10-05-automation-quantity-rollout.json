@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-05T10:10:23.686Z",
-  "status": "deployed_pending_live_verification",
+  "recordedAt": "2026-10-05T10:37:49.594Z",
+  "status": "deployed_live_test_scheduled",
   "sources": {
     "enCard": "b9e7d31d08dd9cf63c70530f4e26adafef3c9510",
     "haruProduct": "85a2fbae41819f260840b6e3e7091f25cb6cb1d5",
@@ -249,16 +249,16 @@
   },
   "automation": {
     "enabled": true,
-    "version": 16,
+    "version": 17,
     "reason": null,
-    "dailyCards": 1,
-    "storedDailyCardsMissingDefaultsToOne": true,
-    "time": "07:00",
-    "nextDueAt": 1791237600000,
-    "testScheduled": false,
-    "testPreferencePending": true,
-    "note": "Deployment-only pause ended. Original settings JSON and daily 07:00 one-card operation preserved; multi-card test remains unscheduled pending the requested preference.",
-    "existingOperationResumed": true,
+    "dailyCards": 5,
+    "storedDailyCardsMissingDefaultsToOne": false,
+    "time": "00:00",
+    "nextDueAt": 1791212400000,
+    "testScheduled": true,
+    "testPreferencePending": false,
+    "note": "Five cards on 2026-10-06 at 00:00 KST only, generation starts 2026-10-05 at 23:00. Approved quickest test. Previous daily one-card 07:00 settings are encrypted for guarded restoration after confirmed completion. No replenishment of the consumed test day.",
+    "existingOperationResumed": false,
     "resumeProof": {
       "at": "2026-10-05T10:01:23.163Z",
       "action": "resume_existing_after_temporary_deployment_pause",
@@ -272,6 +272,63 @@
       "nextDueAt": 1791237600000,
       "nextDueKst": "2026-10-06 07:00 Asia/Seoul",
       "multiCardTestScheduled": false
+    },
+    "startDate": "2026-10-06",
+    "endDate": "2026-10-06",
+    "preparationAt": 1791208800000,
+    "registration": {
+      "at": "2026-10-05T10:35:11.936Z",
+      "authorization": "User approved the quickest multi-card test on 2026-10-05; five cards from the offered test plan, original daily operation retained for restoration",
+      "expectedOldVersion": 16,
+      "targetVersion": 17,
+      "day": "2026-10-06",
+      "time": "00:00",
+      "cardsPerDay": 5,
+      "preparationAt": 1791208800000,
+      "dueAt": 1791212400000,
+      "deadlineAt": 1791212100000,
+      "oneDayOnly": true,
+      "originalSettingsEncrypted": true,
+      "backupProof": {
+        "ciphertextSha256": "E431BAC1134BE085633242133268070F5D1362C7CA49872243E06762718998A0",
+        "roundTripVerified": true,
+        "restrictedAcl": true,
+        "bytes": 307,
+        "plaintextSha256": "3F87A68395DF02D12318BE0B8D7BBC02DC68BC7E305379A65BA1CDFCDB624175"
+      },
+      "testSettingsSha256": "f43046794061a908fbde0597e4cd1cbb5ea0b4c990b3ef7352fa32f7f2e48951",
+      "originalOperation": {
+        "cardsPerDay": 1,
+        "time": "07:00",
+        "startDate": "2026-10-04",
+        "endDate": "2027-10-04"
+      },
+      "restoration": "After the test finishes, restore original settings only if version 17/test settings remain unchanged and no active or unresolved work exists. Do not replace later user changes. The consumed test day is not replenished.",
+      "registeredAt": "2026-10-05T10:35:12.144Z",
+      "registrationVerified": true,
+      "settingsVersion": 17,
+      "enabled": true,
+      "historyAndUsageUnchanged": true,
+      "newAiCalls": 0,
+      "newKakaoSends": 0,
+      "actualReceiptVerified": false,
+      "cpuVerified": false
+    },
+    "followup": {
+      "automationId": "en-card-5",
+      "status": "ACTIVE",
+      "scheduledLocalTime": "2026-10-06 00:20 Asia/Seoul",
+      "singleOccurrence": true,
+      "target": "current thread",
+      "scope": "Read server/PNG/CPU evidence and conditionally restore the original operation; request separate user phone receipt confirmation"
+    },
+    "plannedRestoration": {
+      "applied": false,
+      "guards": "Same version and settings, all five live sends confirmed, no active or unresolved work, Kakao connected",
+      "dailyCards": 1,
+      "time": "07:00",
+      "earliestNormalDueAfterTest": "2026-10-07 07:00 Asia/Seoul",
+      "laterUserChangesPreserved": true
     }
   },
   "free": {
@@ -290,9 +347,9 @@
     "newKakaoSends": 0
   },
   "outstanding": [
-    "Choose next-day multi-card test time and post-test daily quantity",
-    "Start automation with guarded current configuration",
-    "Observe actual AI/review/PNG/schedule and current-version CPU under load",
-    "Compare per-card API acceptance with user phone receipt and original links"
+    "Wait for the registered cloud test, then verify AI/review/PNG and five per-card API acceptances",
+    "Inspect current-version CPU during actual generation and sending",
+    "Restore the encrypted original daily configuration only after guarded completion; do not replenish the test day",
+    "Obtain user phone receipt/image/original-link confirmation separately from server acceptance"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T10:01:23.163Z",
+  "recordedAt": "2026-10-05T10:37:49.594Z",
   "note": "현재 게시 정보는 production과 automationQuantityCandidate.rollout을 따른다. 나머지 항목은 각 작업 당시 기록이다. 여러 장 실제 수신·부하 CPU 검증은 아직 완료되지 않았다.",
   "repositories": {
     "enCard": {
@@ -428,7 +428,7 @@
     "remainingVerification": "Actual iPhone/ChatGPT-app audio and VoiceOver remain unverified. Browser tab handoff was queued; hosted learner interaction was not tested."
   },
   "automationQuantityCandidate": {
-    "status": "deployed_pending_live_verification",
+    "status": "deployed_live_test_scheduled",
     "recordedAt": "2026-10-05T09:17:01Z",
     "integrationStateSource": "GitHub PRs are authoritative for later merge state and final-head CI; product commits below exclude release-record-only commits.",
     "enCard": {
@@ -567,11 +567,25 @@
       "workerDeployments": 3,
       "siteVersion": 117,
       "automationEnabled": true,
-      "testScheduled": false,
+      "testScheduled": true,
       "existingDailyCards": 1,
       "existingTime": "07:00",
-      "settingsVersion": 16,
-      "existingSettingsUnchanged": true
+      "settingsVersion": 17,
+      "existingSettingsUnchanged": false,
+      "existingSettingsPreservedInEncryptedBackup": true,
+      "test": {
+        "day": "2026-10-06",
+        "time": "00:00",
+        "cards": 5,
+        "preparationAt": 1791208800000,
+        "dueAt": 1791212400000,
+        "oneDayOnly": true,
+        "registered": true,
+        "actualReceiptVerified": false,
+        "cpuVerified": false,
+        "followupAutomation": "en-card-5",
+        "followupLocalTime": "2026-10-06 00:20 Asia/Seoul"
+      }
     },
     "operations": {
       "mergedPullRequests": 2,
