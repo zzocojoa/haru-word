@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-04T09:27:14.537Z",
-  "note": "배포 기록과 Git 병합 상태를 구분한다. verifiedDefaultCommit은 제품 조정 PR 병합 후 확인한 시점의 스냅샷이며 이 기록을 저장하는 후속 문서 커밋은 포함하지 않는다. 현재 계정 요금·예약·키 상태의 실시간 확인이 아니다.",
+  "recordedAt": "2026-10-05T00:14:16.825Z",
+  "note": "현재 게시 정보는 production/mainPublication을 따른다. reconciliation, verification, runtimeReconciliation, deploymentPreflight는 각 작업 당시 기록이다. 제품 기준 커밋은 게시 소스와 동일한 파일을 가진 GitHub 커밋이며 이후 출시 기록 문서 커밋은 포함하지 않는다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -17,27 +17,30 @@
     "haruWord": {
       "url": "https://github.com/zzocojoa/haru-word",
       "defaultBranch": "main",
-      "verifiedDefaultCommit": "864a302fa7908a4bd5eedb2c8dfd83f5f65b0815",
+      "verifiedDefaultCommit": "8155a1cc5907c743eda5c21a93c97418bfe03d76",
       "mergedPullRequests": [
         22,
-        23
+        23,
+        24,
+        25,
+        26
       ]
     }
   },
   "production": {
     "site": {
-      "version": 114,
-      "source": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17",
-      "deployment": "appgdep_6ac20ba024a881918c32cddea6cb317d",
+      "version": 115,
+      "source": "72b0565ba58ca9d00843c31cd31ab5f33ef45c49",
+      "deployment": "appgdep_6ac2eab7f58481919747c93cace78343",
       "envRevision": 59,
       "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
       "latestVersionRead": {
-        "version": 114,
+        "version": 115,
         "status": "active",
         "accessRevision": 4,
-        "checkedAt": "2026-10-04T09:02:06.858Z",
-        "method": "Sites get_site (read-only)"
+        "checkedAt": "2026-10-05T00:11:09.118Z",
+        "method": "Sites get_site after native deployment success"
       }
     },
     "workerVersions": {
@@ -60,9 +63,9 @@
         }
       ]
     },
-    "workerEvidenceCheckedAt": "2026-10-04T08:22:51.147Z",
-    "workerEvidence": "https://github.com/zzocojoa/EN_Card/blob/98832dbc97719688d66eea2067fa4c8e87d12cb3/docs/evidence/UI_RESPONSIVE_2026-10-04.json",
-    "newDeploymentInThisReconciliation": false
+    "workerEvidenceCheckedAt": "2026-10-04T23:24:05.701Z",
+    "workerEvidence": "2026-10-05-deployment-preflight.json#workers",
+    "newDeploymentInThisReconciliation": true
   },
   "cardArtifacts": {
     "enCardSourceCommit": "98832dbc97719688d66eea2067fa4c8e87d12cb3",
@@ -70,7 +73,7 @@
     "relaySourceSha256": "3a1d974ca3ed596d31120021902e3fb3450b92b7942a67b5e8509202a3a0732e",
     "studioManifest": "public/card-studio/source.json",
     "relayManifest": "lib/server/card-automation.generated.json",
-    "operatingSourceCommit": "c65b66dca23f9e15b661d1b4a2dfdfd0b5a48f17"
+    "operatingSourceCommit": "72b0565ba58ca9d00843c31cd31ab5f33ef45c49"
   },
   "reconciliation": {
     "status": "merged",
@@ -268,5 +271,87 @@
     "workerVersionsReverified": true,
     "currentFreeEligibilityVerified": false,
     "published": false
+  },
+  "mainPublication": {
+    "status": "deployed",
+    "report": "2026-10-05-main-publication.md",
+    "checkedAt": "2026-10-05T00:14:16.825Z",
+    "productMainCommit": "8155a1cc5907c743eda5c21a93c97418bfe03d76",
+    "siteSourceCommit": "72b0565ba58ca9d00843c31cd31ab5f33ef45c49",
+    "identicalTree": "5b05bc3b2e0a6ee9937f2ebd09ca6f766a33c1da",
+    "siteVersion": 115,
+    "siteVersionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_dd572c028b648191977c6f609c80079b",
+    "deploymentId": "appgdep_6ac2eab7f58481919747c93cace78343",
+    "deploymentStatus": "succeeded",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000da248206a23e272bb9dabcd2",
+      "content_hash": "sha256:20a372e1e38debe6d65bb7636731feca8be2f61383b068d99c4e9a6267a2131a",
+      "size_bytes": 15503360,
+      "file_count": 316
+    },
+    "freePlan": {
+      "basis": "user-confirmed in this conversation",
+      "statement": "현재 Workers Free임을 확인했다",
+      "apiVerification": false,
+      "previousApiStatus": 403
+    },
+    "postDeploy": {
+      "publicChecks": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/cards",
+          "status": 307
+        },
+        {
+          "path": "/api/state",
+          "status": 401
+        },
+        {
+          "path": "/api/card-studio/automation",
+          "status": 401
+        },
+        {
+          "path": "/api/english-accuracy-evaluation",
+          "status": 404
+        }
+      ],
+      "staticFilesMatchingSha256": 4,
+      "cardHtmlSourceReferencesMatched": true,
+      "cardHtmlFullByteMatch": false,
+      "databaseTableNamesMatched": 8,
+      "environmentEntriesUnchanged": true,
+      "authenticatedBrowserVerified": false,
+      "physicalDeviceVerified": false
+    },
+    "reusedVerification": {
+      "differentialScenarios": 16,
+      "regressionTests": 65,
+      "ciTestsPerNode": 565,
+      "ciNodeVersions": [
+        22,
+        24
+      ],
+      "ci": "https://github.com/zzocojoa/haru-word/actions/runs/37244691660"
+    },
+    "operations": {
+      "sitePublication": 1,
+      "workerDeployments": 0,
+      "environmentChanges": 0,
+      "accessChanges": 0,
+      "manualDatabaseWrites": 0,
+      "liveAiCalls": 0,
+      "kakaoSends": 0
+    },
+    "rollback": {
+      "version": 114,
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_10ca7f883b9081919fc11e852d34aafa",
+      "archiveHash": "sha256:f616e22e0cde322f2ae763ab8f0a4c14b449b463eb6f09d916712b379185c673",
+      "executed": false
+    },
+    "remaining": "Authenticated learner/card views were not checked because no browser was connected; verify during normal sign-in. Keep save/restore QA local and isolated."
   }
 }
