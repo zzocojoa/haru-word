@@ -50,19 +50,25 @@ async function main(){
    if(baseline){await summary.focus();await page.keyboard.press('Enter');}
    else await expect(page.getByRole('heading',{name:'AI 자동 제작',exact:true})).toBeVisible();
    const topic=page.getByLabel('주제',{exact:true});await expect(topic).toHaveValue('일상 회화');
+   const quantity=page.getByRole('combobox',{name:'하루 제작 수량',exact:true});
+   if(!baseline){await expect(quantity).toHaveValue('1');await quantity.selectOption('3');}
    await expect(page.getByText('AI 검토 미통과',{exact:false}).first()).toBeVisible();
    await expect(page.getByText('AI 검토 통과',{exact:false})).toHaveCount(0);
    await topic.fill('여행 영어 초안');await page.getByRole('button',{name:'설정 저장',exact:true}).click();
    await expect(page.locator('.workspace > .notice')).toContainText('합성 저장 실패');await expect(topic).toHaveValue('여행 영어 초안');
+   if(!baseline)await expect(quantity).toHaveValue('3');
    await page.getByRole('button',{name:'설정 저장',exact:true}).click();await expect(page.getByRole('button',{name:'자동 제작 시작',exact:true})).toBeEnabled();
    await page.getByRole('button',{name:'자동 제작 시작',exact:true}).click();await expect(summary).toContainText('실행 중');
+   if(!baseline){assert.equal(view.settings.cards_per_day,3);await expect(page.getByText('현재 적용:',{exact:false})).toContainText('하루 3장');await quantity.selectOption('5');await expect(page.getByText('현재 적용:',{exact:false})).toContainText('하루 3장');}
    await topic.fill('일시정지 후에도 남길 초안');await page.getByRole('button',{name:'일시정지',exact:true}).click();await expect(summary).toContainText('일시정지');
    if(baseline){await expect(topic).toHaveValue('여행 영어 초안');report.push({engine,baselinePauseDraftLossReproduced:true});continue;}
    await expect(topic).toHaveValue('일시정지 후에도 남길 초안');await expect(page.getByRole('button',{name:'자동 제작 시작',exact:true})).toBeDisabled();
    await page.evaluate(()=>location.hash='/library');await expect(page).toHaveURL(/#\/library$/);
    await page.evaluate(p=>location.hash=p,automationPath);await expect(topic).toHaveValue('일시정지 후에도 남길 초안');
+   await expect(quantity).toHaveValue('5');
    await page.getByRole('button',{name:'설정 저장',exact:true}).click();await expect(page.getByRole('button',{name:'자동 제작 시작',exact:true})).toBeEnabled();
    page.on('dialog',d=>d.accept());await page.reload();await expect(topic).toHaveValue('일시정지 후에도 남길 초안');
+   await expect(quantity).toHaveValue('5');assert.equal(view.settings.cards_per_day,5);
    // Simultaneous DOM clicks must produce only one edit request, and navigating
    // away while it is pending must not let a stale response reopen the editor.
    await page.getByRole('button',{name:'카드 편집',exact:true}).first().evaluate(b=>{b.click();document.querySelectorAll('.automation-runs button')[3]?.click();});
@@ -89,7 +95,7 @@ async function main(){
    await page.getByRole('button',{name:'기록 새로고침',exact:true}).click();await expect(summary).toContainText('일시정지');
    await expect(page.getByRole('alert').filter({hasText:'합성 상태 조회 실패'})).toHaveCount(0);
    await page.screenshot({path:`work/card-port-${engine}.png`,fullPage:true});
-   report.push({engine,pauseDraftPreserved:true,failedSaveRetry:true,draftAcrossNavigation:true,savedReload:true,reviewFalseNotPassed:true,editSingleFlight:true,lateEditCancelled:true,stateFailureAndRecovery:true,visuals});
+   report.push({engine,quantityDefaultSaveAndDraft:true,pauseDraftPreserved:true,failedSaveRetry:true,draftAcrossNavigation:true,savedReload:true,reviewFalseNotPassed:true,editSingleFlight:true,lateEditCancelled:true,stateFailureAndRecovery:true,visuals});
   }finally{await closeBrowser(browser);}
  }}finally{await new Promise(r=>server.close(r));}
  writeFileSync(`work/card-port-browser${baseline?'-baseline':''}.json`,JSON.stringify({mockOnly:true,actualAI:0,actualKakao:0,results:report},null,2));console.log(JSON.stringify(report));
