@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T23:23:23.627Z",
+  "status": "local_verified_uncommitted_not_deployed",
+  "branch": "codex/card-date-time",
+  "bases": {
+    "en": "aea0d4c8e411823d09b7f079b927ca591a3de475",
+    "haru": "34cdf0368a6cd44d5d17ebf4f8b72d9e9475c696"
+  },
+  "scope": "New AI images only; original scheduled time, KST, seven weekday colors, immutable existing images. Manual rescheduling retains the original image date.",
+  "runtimeSourceHashes": {
+    "src/shared/card-stamp.ts": "971c4d337a9527d0bc8922b7cfd7ffc96bfef0bc4a636bd3c79b972b8bd1bea3",
+    "src/web/canvas.ts": "11d59f7376efc1bdf5208f6dd61bb4eb2e11b4aee1fa37437d091496e2cac89d",
+    "src/web/AutomationPanel.tsx": "e11d34946633214cc1f42df6620e8cfc010f2806beb0470330f45c5eff7dccd8",
+    "src/web/styles.css": "f0bdf2dcf8f2d7a963ccb73aff1d5e6656d7990889478e761a25c86dc2a857a5",
+    "src/automation/svg.ts": "17ef47137e75b368c8a2ed0a10b4344ec9310f18242e1ae09a0b04f9dafcc033",
+    "src/automation/engine.ts": "6f520af0525b8ea787a1292c5bf248d34a8e20c4c244b61a5b9a9ae9bc2f5383",
+    "src/automation/worker.ts": "deafde7183b3c23b35a755aaa94f688498abba351d1d8f116d68da795995b42f",
+    "src/shared/card-layout.ts": "b4a503bf8acb1dc6bd73d37524253a078247132aa3dd75bd40eb540411f190ca"
+  },
+  "studioSourceSha256": "3679faefe7bae23fb674220e2e5c2186459151091e6d6f3d503cfb08db6e2adc",
+  "relaySourceSha256": "6bcc1ff73a57c72540a5679d6ff7e2164a3c5628896b8148827a58b3ded73af5",
+  "validation": {
+    "vitest": 82,
+    "vitestScope": "62 layout/date/PNG/core/product-DO tests plus 20 reference/durable evidence tests; selected suites, not the entire suite",
+    "pngSamples": 16,
+    "byteIdenticalBeforeAfter": 16,
+    "browsers": [
+      "chromium",
+      "webkit"
+    ],
+    "browserTests": 6,
+    "haruIntegration": 19,
+    "typechecks": 2,
+    "builds": 2,
+    "workerDryRuns": 3,
+    "freeConfiguration": true,
+    "remoteCpu": false,
+    "actualPhoneReceipt": false
+  },
+  "deploymentPerformed": false,
+  "migrationRequired": false,
+  "productionSettingsChanged": false,
+  "actualAiCalls": 0,
+  "actualSends": 0,
+  "beforeRefactorValidation": {
+    "recordedAt": "2026-10-06T15:03:51.960Z",
+    "vitest": 86,
+    "pngSamples": 14,
+    "browsers": [
+      "chromium",
+      "webkit"
+    ],
+    "haruIntegration": 19,
+    "typechecks": 2,
+    "builds": 2,
+    "workerDryRuns": 3,
+    "freeConfiguration": true,
+    "remoteCpu": false,
+    "actualPhoneReceipt": false
+  },
+  "refactor": {
+    "layoutModule": "src/shared/card-layout.ts",
+    "browserDependencyRemovedFromAutomation": true,
+    "stampComputedOncePerRender": true,
+    "pngComparison": "EN_Card Git-ignored backups/card-date-refactor-20261007/png-comparison.json",
+    "referenceSourceManifestVersion": 2,
+    "historicalEvidenceUnchanged": true,
+    "newGstackReviewPerformed": false
+  }
+}
