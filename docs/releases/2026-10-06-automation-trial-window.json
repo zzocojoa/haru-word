@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T01:20:46.187Z",
+  "status": "locally_verified_not_deployed",
+  "source": {
+    "enCardBranch": "codex/automation-revise-fallback",
+    "enCardCommit": "37663c6a83d6713e74cd291cfec48f97f7cdb368",
+    "haruBranch": "codex/card-automation-revise-fallback",
+    "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+    "previousFullReviewHead": "24238d46623909549c3b584abca0e36badf0a6db",
+    "uiSourceSha256": "cb6fe9a99003081597fed113957f734a23a4da98917df02ba2bc9d79184ae7da",
+    "relaySourceSha256": "3cc9b08b1304855f4af93fa5a8a19f5a872debc267df85454408311bd0178207"
+  },
+  "policy": {
+    "scope": "New five-card trials only; stored runs retain their timestamps",
+    "fiveCardLeadMinutes": {
+      "previous": 45,
+      "candidate": 60
+    },
+    "fiveCardUsablePreparationMinutes": {
+      "previous": 40,
+      "candidate": 55
+    },
+    "cutoffBeforeDueMinutes": 5,
+    "imagePropagationMinutes": 2,
+    "oneToFourLeadMinutesUnchanged": [
+      25,
+      21,
+      29,
+      37
+    ],
+    "dailyLeadMinutesUnchanged": 60,
+    "nextMinuteCeiling": true,
+    "sameKstDayOnly": true,
+    "refillExpiredSlots": false
+  },
+  "validation": {
+    "localAutomationFiles": 3,
+    "localAutomationTestsPassed": 49,
+    "localRuntime": "Local D1/KV with mock AI, PNG fixtures and mock sends; not remote AI/render/receipt",
+    "retryAndCorrectionFallbackScenario": "Daily and new five-card trial both prepare/schedule/mock-send five distinct cards",
+    "expectedFailureBeforeFix": "New 60-minute expectation received the old 45-minute timestamp",
+    "browserProjects": [
+      "chromium",
+      "webkit"
+    ],
+    "browserTestsPassed": 2,
+    "initialBrowserFailure": "Direct Playwright CLI lacked wrangler on PATH; package script rerun passed",
+    "haruIntegrationTestsPassed": 19,
+    "enTypecheck": "passed",
+    "enBuild": "passed",
+    "workerDryRuns": 3,
+    "freeConfigurationCheck": "passed",
+    "prettier": "passed",
+    "haruTypecheck": "passed",
+    "haruBuild": "passed",
+    "generatedUiFilesVerified": 129,
+    "generatedRelayFilesVerified": 2,
+    "generatedSourceAndRebuiltRelayMatch": true,
+    "uiContainsCandidatePolicy": true,
+    "ci": {
+      "status": "not_run_at_record_creation",
+      "latestHeadChecks": "https://github.com/zzocojoa/haru-word/pull/32/checks"
+    }
+  },
+  "review": {
+    "scope": "Incremental changes since previous full review",
+    "specialists": [
+      "testing",
+      "maintainability",
+      "performance",
+      "design"
+    ],
+    "independentAdversarial": true,
+    "crossRepoRedTeam": true,
+    "crossRepoRedTeamFindings": 0,
+    "sameModelIndependentContexts": true,
+    "crossModelVerified": false,
+    "adversarialTestCoverage": "summary/stat only",
+    "fixedFindings": [
+      "Require DO 100% applied, then Site publication and static verification before any trial registration"
+    ],
+    "remainingCodeFindings": 0,
+    "cliLimitation": "Previously observed Codex CLI 0.132/model incompatibility; no cross-model claim"
+  },
+  "operations": {
+    "deploymentPerformed": false,
+    "newTrialRegistered": false,
+    "additionalAiCalls": 0,
+    "additionalKakaoCalls": 0,
+    "productionSettingsChanged": false,
+    "migrationsChanged": false,
+    "dependenciesChanged": false,
+    "secretsChanged": false,
+    "productionSiteVersion": 119,
+    "productionTrialLeadMinutes": 45,
+    "productionAutomationVersion": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
+    "dailySettingsVersion": 25,
+    "dailyEnabled": true,
+    "dailyTimeKst": "07:30",
+    "dailyCards": 5,
+    "dailyNextDueKst": "2026-10-07T07:30:00+09:00",
+    "followupKst": "2026-10-07T07:50:00+09:00",
+    "freeAccountCondition": "Prior user confirmation retained; no fresh billing API confirmation in this step",
+    "remoteCpuOfCandidate": "not_measured",
+    "actualFiveCardReceipt": "not_verified"
+  },
+  "release": {
+    "mergeCondition": "Record next regular five-card server/CPU results and user confirmation of five images/original links before merging both PRs",
+    "deploymentOrder": [
+      "Apply new automation DO and verify 100%",
+      "Publish matching Site export and verify static hashes",
+      "Allow subsequent authorized trial registration"
+    ],
+    "blockTrialRegistrationDuringTransition": true,
+    "rollback": "Previous 0018-compatible DO and Site source; preserve fixed run timestamps and all delivery history",
+    "remaining": [
+      "Actual five-card receipt",
+      "New 60-minute extra-trial live verification",
+      "Correction-provider switch and natural duplicate regeneration when observed",
+      "Prior main-worker CPU coverage gaps and Oct5 user4/server3 discrepancy remain separate"
+    ]
+  },
+  "evidence": {
+    "artifactProof": "EN_Card Git-ignored backups/trial-window-artifacts.json",
+    "enLogs": "EN_Card Git-ignored backups/trial-window-{before-fix,tests,e2e,build,free,export}.log",
+    "haruLogs": "Haru Git-ignored outputs/trial-window-{proxy,typecheck,build}.log",
+    "actualFastTrial": "docs/releases/2026-10-06-automation-fast-trial.json"
+  }
+}

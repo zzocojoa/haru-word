@@ -1,8 +1,8 @@
 {
   "format": "en-card-studio-v1",
-  "sourceSha256": "1e51601fb82b5be8382f52dac5c86714a5e17ba3cb9f12d92c2b7264662fd070",
+  "sourceSha256": "cb6fe9a99003081597fed113957f734a23a4da98917df02ba2bc9d79184ae7da",
   "files": {
-    "assets/index-Blo8Fg3j.js": "2324fcaa8478017a9da8dbaaf541c4984c5c20826329790504bda52dfb8e3aab",
+    "assets/index-DiJ-z2Nl.js": "9d4c94c95797a7e670d0f7fafc696dfe8018456830a35405b9324462f127fe82",
     "assets/index-Zet1kPl4.css": "f308ea23c8c9ad0245e83b7feb9882e02abb1cf6e5c2a9e58805188afdbf2ac3",
     "fonts/LICENSE.txt": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
     "fonts/files/noto-sans-kr-0-wght-normal.woff2": "3861da36d0eb54b3351f55d43c5ca91e732f0f2c6f8769ed475d3ec6fffdb4e5",
@@ -130,6 +130,6 @@
     "fonts/files/noto-sans-kr-latin-wght-normal.woff2": "2ee54080f0b0dee4fb2a9365ec8b3e3269d7720a7d7f2d62c2913088842e1326",
     "fonts/files/noto-sans-kr-vietnamese-wght-normal.woff2": "e4bedfe7c5a6162df7d2eb72df4960d49664addb0cb843ecd345e66365cf902e",
     "fonts/font.css": "cb605fb4a6924db15d5e7f1beefe17a9e3cadbbba90c79e0f1a550d98417f212",
-    "index.html": "7dcb8ddb0c1eacb73370b2f8009f8e75f2ede6cd6b1fff78459cd978e910f767"
+    "index.html": "e3ad0f44bf85c91c36cd0922e318d48b8ef2be99befd5ea2008006c795a8af04"
   }
 }

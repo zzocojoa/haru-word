@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-05T23:53:54.853Z",
-  "note": "EN_Card PR11과 하루단어 PR32를 생성·연결했다. 다중 시험·중복 재생성·수정 제공자 대체의 기존 운영 소스와 생성물 일치를 검토했다. 병합 전 최신 PR CI 확인이 필요하며 이번 GitHub 단계의 운영/설정/AI/카카오 변경은0이다. 기존10월7일 정규5장·07:50 후속 및 실제 검증 미완료를 유지한다.",
+  "recordedAt": "2026-10-06T01:20:46.187Z",
+  "note": "10월6일09:49 trial은 서버4건 접수·사용자4장 이미지/원본링크 정상 확인이다. 5번째는PNG완료후2분대기가09:44마감을넘겨expired로미발송됐다. 수정제공자교체/자연중복은발생하지않았다.10:01에설정값과18개비설정테이블이력을보존하며version25 매일07:30/5장을재개했고다음10월7일07:30,후속07:50이다. CPU관측런타임오류0이나주Worker09:29/30자료누락을보존하며5장전체목표는미완료다. 새5장 추가시험의60분 준비/55분 제작 후보를 로컬 검증하고 화면을 재생성했다. 운영에는 아직45분 정책이며 정규5장 실제 수신 확인 후 두PR 병합·DO→Site 순서로 후속 배포한다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -1203,5 +1203,68 @@
       }
     ],
     "finalHeadCiAuthority": "https://github.com/zzocojoa/haru-word/pull/32/checks"
+  },
+  "automationFastTrial": {
+    "record": "2026-10-06-automation-fast-trial.json",
+    "status": "partial_four_received_daily_resumed",
+    "trial": {
+      "day": "2026-10-06",
+      "kind": "trial",
+      "cards": 5,
+      "configVersion": 24,
+      "registeredAt": "2026-10-06T00:02:07.692Z",
+      "preparationKst": "2026-10-06 09:04",
+      "deadlineKst": "2026-10-06 09:44",
+      "dueKst": "2026-10-06 09:49",
+      "dueAt": 1791247740000,
+      "notBefore": 1791245040000,
+      "deadline": 1791247440000,
+      "preparationWindowMinutes": 40,
+      "actualPhoneReceiptVerified": false,
+      "serverFiveAcceptancesVerified": false,
+      "cpuVerified": false,
+      "correctionFallbackObserved": false,
+      "naturalDuplicateObserved": false,
+      "serverAcceptedCount": 4,
+      "actualPhoneReceivedCount": 4,
+      "acceptedCardsReceiptVerified": true
+    },
+    "regularSchedule": {
+      "state": "resumed_original_daily",
+      "currentVersion": 25,
+      "enabled": 1,
+      "next_due_at": 1791325800000,
+      "savedSettingsUnchanged": true,
+      "resumePending": false,
+      "resumePolicy": "After the trial terminates, resume preserved daily 07:30/5 only if the exact version/settings remain and no active or unresolved work or hard failure exists. Preserve skipped/failed history; do not replenish or resend.",
+      "expectedNextDueKst": "2026-10-07 07:30",
+      "resumedAt": "2026-10-06T01:01:38.980Z"
+    },
+    "followup": {
+      "automationId": "en-card-5",
+      "status": "ACTIVE",
+      "atKst": "2026-10-07 07:50",
+      "replacesPriorInspection": "2026-10-07 07:50",
+      "afterSafeResume": "Re-arm the same heartbeat for the original next-day regular inspection using resumed.json observedDaily. No duplicate automation.",
+      "inspectionKind": "daily",
+      "configVersion": 25,
+      "previousInspectionCompleted": "2026-10-06 09:59"
+    },
+    "resultSummary": {
+      "serverAccepted": 4,
+      "userReceived": 4,
+      "fifthError": "expired",
+      "correctionFallbackObserved": false,
+      "duplicateRegenerationObserved": false,
+      "fullFiveGoalComplete": false
+    }
+  },
+  "automationTrialWindow": {
+    "status": "locally_verified_not_deployed",
+    "sourceRecord": "docs/releases/2026-10-06-automation-trial-window.json",
+    "candidateFiveCardLeadMinutes": 60,
+    "productionFiveCardLeadMinutes": 45,
+    "deploymentPerformed": false,
+    "mergePendingActualFiveCardReceipt": true
   }
 }
