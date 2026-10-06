@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-06T03:47:34.639Z",
-  "note": "10월6일12:41 시험은4장 live접수,2번은수정후독립검토에서뜻/번역불합격으로11:52에review_failed종료했다. 시간부족이아니며55분확보만으로5장성공을보장하지않는다. 사용자는도착과4장으로추정한다고보고했으며영어문구대조중,정확한수량/이미지/링크확인은대기다.12:44에원래매일07:30/5장설정을version28로재개했고다음10월7일07:30,후속07:50이다. CPU그룹P99최고주6.859ms/발송3.418ms/DO324.196ms,관측런타임오류0이며주11:58/12:01자료누락을보존한다.",
+  "recordedAt": "2026-10-06T04:10:47.496Z",
+  "note": "품질 검토 재탈락 시 최대두번수정·반대제공자최종검토·카드당AI24회 후보를 구현/검증했다. 0020과 새코드는미배포이며운영0019/version28매일07:30·5장/다음10월7일을변경하지않았다. 실제5장수신·신규경로CPU·자연중복실측은미완료이며12:41시험4접수/1품질제외이력을보존한다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -1641,5 +1641,21 @@
         "Main Worker11:58/12:01 KST minute bins remain absent after narrow requery."
       ]
     }
+  },
+  "qualityRetry": {
+    "status": "locally_verified_not_deployed",
+    "evidence": "2026-10-06-automation-quality-retry.json",
+    "schemaCandidate": "0020_automation_quality_retry.sql",
+    "source": {
+      "enCardBranch": "codex/automation-revise-fallback",
+      "haruBranch": "codex/card-automation-revise-fallback",
+      "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+      "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+      "reviewBase": "a6128e27d1e8ea675d599e7dcc3d337c7672d387",
+      "enCardCommit": "1e72eb00658618a0cf8da10073918d2d68b8b403",
+      "uiSourceSha256": "223256e3276ac1dff18279c316a611c38afde5831e7bdb9979e02345bb392f48",
+      "relaySourceSha256": "8add38baa25c57aecca0b0f86e9738ac75627a6e746e145a9329a43152234455"
+    },
+    "actualReceiptVerified": false
   }
 }
