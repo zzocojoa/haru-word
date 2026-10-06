@@ -1,6 +1,6 @@
 # 하루단어 · Oxford 3000
 
-최종 품질 탈락 뒤 새 후보를 한 번 만드는 기능을0021·Site v121에 배포했습니다. [이번 시험](docs/releases/2026-10-06-automation-replacement-trial.json)은5장 모두 서버접수와 사용자 이미지·원본링크 정상 확인을 마쳤습니다. 과거 발송준비 CPU자료 공백은 남아 두PR은 미병합입니다.
+최종 품질 탈락 뒤 새 후보를 한 번 만드는 기능을0021·Site v121에 배포했습니다. [이번 시험](docs/releases/2026-10-06-automation-replacement-trial.json)은5장 모두 서버접수와 사용자 이미지·원본링크 정상 확인을 마쳤습니다. 과거 제작 준비 CPU 자료 공백은 사용자 승인에 따라 미검증으로 남기고 EN_Card PR11·하루단어 PR32를 병합했습니다.
 
 개발·병합·배포 상태는 [하루단어 제품 관리](PRODUCT_MANAGEMENT.md)에서 두 저장소를 함께 확인합니다. 카드 화면의 수정 원본은 EN_Card이며, 이 저장소의 카드 생성 파일은 정식 exporter로만 갱신합니다. 최신 운영은 [Site v121·새 후보 DO 반영](docs/releases/2026-10-06-automation-replacement-rollout.json)이며, 실제5장 수신은 확인했습니다. 아래 버전 표시는 과거 기록입니다.
 

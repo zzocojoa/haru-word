@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "recordedAt": "2026-10-06T08:35:30.367Z",
-  "status": "five_card_receipt_confirmed_cpu_coverage_pending",
+  "status": "merged_with_accepted_cpu_observation_limit",
   "latestPreparation": {
     "at": "2026-10-06T08:35:06.613Z",
     "cards": [
@@ -178,7 +178,7 @@
   "mergeGate": {
     "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
     "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
-    "merged": false,
+    "merged": true,
     "requires": [
       "Five live acceptances",
       "No unresolved deliveries",
@@ -186,12 +186,47 @@
       "User confirmation of five images and original links",
       "Latest Git checks and conflicts reviewed"
     ],
-    "blockers": [
-      "Historical delivery preparation CPU observations remain unavailable after delayed, narrow and aggregate rechecks"
+    "blockers": [],
+    "observationLimitAcceptance": "explicitly_approved_by_user",
+    "approval": {
+      "recordedAt": "2026-10-06T14:06:02.203Z",
+      "source": "user_message",
+      "confirmation": "승인 진행",
+      "scope": "Merge EN_Card PR11 and haru-word PR32 with historical preparation CPU observation gaps explicitly retained as unverified.",
+      "historicalCpuCoverageComplete": false,
+      "additionalDeploymentAuthorized": false
+    },
+    "mergedPullRequests": [
+      {
+        "repo": "zzocojoa/EN_Card",
+        "number": 11,
+        "baseRefName": "master",
+        "headRefOid": "ae58855aa26aa2782c4bcae28f6d8efd75f3bd22",
+        "mergeCommit": {
+          "oid": "10278124f0f16037f4f695f129d7d80010665b1a"
+        },
+        "mergedAt": "2026-10-06T14:06:11Z",
+        "state": "MERGED",
+        "url": "https://github.com/zzocojoa/EN_Card/pull/11"
+      },
+      {
+        "repo": "zzocojoa/haru-word",
+        "number": 32,
+        "baseRefName": "main",
+        "headRefOid": "49e947ac0a8c6581132afa6e731323a60b47f53b",
+        "mergeCommit": {
+          "oid": "9bc1d8d2e79eb318193b347b984d9e9d8a08938f"
+        },
+        "mergedAt": "2026-10-06T14:06:26Z",
+        "state": "MERGED",
+        "url": "https://github.com/zzocojoa/haru-word/pull/32"
+      }
     ],
-    "observationLimitAcceptance": "not_requested_yet"
+    "unverified": [
+      "Historical delivery preparation CPU coverage remains incomplete; accepted for merge, not relabeled as passed."
+    ]
   },
-  "wholeGoalComplete": false,
+  "wholeGoalComplete": true,
   "lastVerifiedAt": "2026-10-06T11:50:43.306Z",
   "result": {
     "checkedAt": "2026-10-06T09:46:46.256Z",
@@ -567,7 +602,8 @@
       "uploads": 21,
       "sends": 20
     },
-    "wholeGoalComplete": false
+    "wholeGoalComplete": true,
+    "completionBasis": "Five-card server and user receipt verified, latest pre-merge checks passed, both PRs merged after explicit acceptance of historical CPU observation gaps. Unobserved provider fallback remains separate."
   },
   "validation": {
     "serverAcceptanceVerified": true,
@@ -591,5 +627,8 @@
     "historyResets": 0,
     "regularResume": 1,
     "heartbeatPaused": true
-  }
+  },
+  "mergeCompletedAt": "2026-10-06T14:07:55.780Z",
+  "closeoutComplete": true,
+  "completionBasis": "Five-card server and user receipt verified, latest pre-merge checks passed, both PRs merged after explicit acceptance of historical CPU observation gaps. Unobserved provider fallback remains separate."
 }
