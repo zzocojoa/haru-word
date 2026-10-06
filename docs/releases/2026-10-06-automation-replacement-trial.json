@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T08:35:30.367Z",
+  "status": "registered_preparing",
+  "latestPreparation": {
+    "at": "2026-10-06T08:35:06.613Z",
+    "cards": [
+      {
+        "index": 1,
+        "status": "render",
+        "error": null,
+        "aiAttempts": 3,
+        "reviewPassed": true,
+        "reviewHashMatches": true,
+        "sent": 0
+      },
+      {
+        "index": 2,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "reviewPassed": false,
+        "reviewHashMatches": false,
+        "sent": 0
+      },
+      {
+        "index": 3,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "reviewPassed": false,
+        "reviewHashMatches": false,
+        "sent": 0
+      },
+      {
+        "index": 4,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "reviewPassed": false,
+        "reviewHashMatches": false,
+        "sent": 0
+      },
+      {
+        "index": 5,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "reviewPassed": false,
+        "reviewHashMatches": false,
+        "sent": 0
+      }
+    ],
+    "note": "First transient provider failure recovered via bounded retry; first card reached render after independent review. This is not final five-card success."
+  },
+  "authorization": "User approved deploying one fresh candidate after final quality failure and requested the earliest possible new five-card verification.",
+  "rolloutEvidence": "2026-10-06-automation-replacement-rollout.json",
+  "target": {
+    "day": "2026-10-06",
+    "kind": "trial",
+    "settingsVersion": 33,
+    "cards": 5,
+    "dueAt": 1791279060000,
+    "dueKst": "2026-10-06T18:31",
+    "preparationAt": 1791275460000,
+    "preparationKst": "2026-10-06T17:31",
+    "deadline": 1791278760000,
+    "deadlineKst": "2026-10-06T18:26",
+    "preparationWindowMinutes": 55
+  },
+  "followup": {
+    "id": "en-card-5",
+    "atKst": "2026-10-06 18:41",
+    "status": "ACTIVE",
+    "directory": "backups/automation-replacement-trial-20261006",
+    "scope": "Read same trial, CPU, actual phone receipt; guarded daily resume; merge only after all conditions pass"
+  },
+  "preservation": {
+    "settingsAndExistingHistoryPreserved": true,
+    "usageUnchangedAtRegistration": true,
+    "priorSameDayTrialRows": 15,
+    "sendsBefore": 15,
+    "sendAttemptLimit": 20,
+    "remainingSendAttemptsAtRegistration": 5,
+    "uploadsBefore": 16
+  },
+  "restoration": {
+    "pending": true,
+    "expectedTrialVersion": 33,
+    "expectedRestoredVersion": 34,
+    "originalVersion": 31,
+    "originalDaily": {
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "originalDueAt": 1791325800000,
+    "originalDueKst": "2026-10-07T07:30",
+    "settingsSha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "guards": "Terminal trial, unchanged version/settings hash, connected credentials, no active creation/schedule/pending/sending/unknown work, no quota/auth/config/storage failure. Do not overwrite user changes or replenish failed slots."
+  },
+  "currentSettings": {
+    "version": 33,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": null,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "earlyRead": {
+    "at": "2026-10-06T08:32:14.132Z",
+    "phase": "preparing",
+    "cards": [
+      {
+        "index": 1,
+        "status": "draft",
+        "error": "unavailable",
+        "aiAttempts": 1,
+        "sent": 0
+      },
+      {
+        "index": 2,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "sent": 0
+      },
+      {
+        "index": 3,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "sent": 0
+      },
+      {
+        "index": 4,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "sent": 0
+      },
+      {
+        "index": 5,
+        "status": "draft",
+        "error": null,
+        "aiAttempts": 0,
+        "sent": 0
+      }
+    ],
+    "serverEvidenceVerified": false,
+    "actualPhoneReceiptVerified": false,
+    "cpuVerified": false,
+    "qualityReplacement": {
+      "observed": false,
+      "slots": [],
+      "verifiedSlots": []
+    },
+    "scope": "Only initial preparation; transient unavailable response may be retried by the existing bounded product policy."
+  },
+  "mergeGate": {
+    "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+    "merged": false,
+    "requires": [
+      "Five live acceptances",
+      "No unresolved deliveries",
+      "Current-version CPU validation including observation gaps",
+      "User confirmation of five images and original links",
+      "Latest Git checks and conflicts reviewed"
+    ]
+  },
+  "wholeGoalComplete": false
+}
