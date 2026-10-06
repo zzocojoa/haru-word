@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-06T04:47:11.127Z",
-  "note": "사용자 요청으로 내일을 기다리지 않고 품질 추가 수정 코드의 새 AI5장 시험을 오늘14:47에 등록했다. 제작13:47~14:42,version30·trial5개이며 기존 매일07:30/5장 설정과 이전 기록을 보존했다.14:57 서버/CPU 점검 및 실제 휴대전화5장 확인 후 두PR 병합, 조건부 정규 재개(version31)를 진행한다. 아직 시험 성공이나 수신 완료가 아니다.",
+  "recordedAt": "2026-10-06T06:34:58.661Z",
+  "note": "최종 품질 탈락 후 한 번 새 후보를 만드는0021 후보의 로컬 검증을 완료했다. 운영은0020·DO941191a8·Site v120, version31 매일07:30/5장이다.14:47시험4장 정상 수신 기록을 보존한다.0021 배포·새 CPU·실제5장 검증 전이며 두PR은 미병합이다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -76,12 +76,22 @@
     "d1MigrationCount": 20
   },
   "cardArtifacts": {
-    "enCardSourceCommit": "1e72eb00658618a0cf8da10073918d2d68b8b403",
-    "studioSourceSha256": "223256e3276ac1dff18279c316a611c38afde5831e7bdb9979e02345bb392f48",
-    "relaySourceSha256": "8add38baa25c57aecca0b0f86e9738ac75627a6e746e145a9329a43152234455",
+    "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
+    "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+    "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
     "studioManifest": "public/card-studio/source.json",
     "relayManifest": "lib/server/card-automation.generated.json",
-    "operatingSourceCommit": "3655cba43494a0d0521757c7371ab9b667cd436d"
+    "operatingSourceCommit": "3655cba43494a0d0521757c7371ab9b667cd436d",
+    "operatingEnCardSourceCommit": "1e72eb00658618a0cf8da10073918d2d68b8b403",
+    "operatingStudioSourceSha256": "223256e3276ac1dff18279c316a611c38afde5831e7bdb9979e02345bb392f48",
+    "operatingRelaySourceSha256": "8add38baa25c57aecca0b0f86e9738ac75627a6e746e145a9329a43152234455",
+    "candidate": {
+      "evidence": "2026-10-06-automation-quality-replacement.json",
+      "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+      "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+      "deployed": false,
+      "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3"
+    }
   },
   "reconciliation": {
     "status": "merged",
@@ -1898,5 +1908,81 @@
       "time": "07:30",
       "end": "2027-10-31"
     }
+  },
+  "qualityReplacement": {
+    "status": "local_verified_not_deployed",
+    "evidence": "2026-10-06-automation-quality-replacement.json",
+    "schemaCandidate": "0021_automation_quality_replacement.sql",
+    "source": {
+      "enCardBranch": "codex/automation-revise-fallback",
+      "haruBranch": "codex/card-automation-revise-fallback",
+      "reviewBase": "79464eb5eb3e28eda8cc7741f6db6ae9895abdf4",
+      "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+      "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+      "uiSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+      "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+      "enCardCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3"
+    },
+    "validation": {
+      "vitest": {
+        "passed": 115,
+        "files": 5,
+        "mockAiAndKakao": true,
+        "realisticMixedFailureDailyAndTrialFiveCards": true,
+        "databaseFailurePoints": [
+          "before-transition",
+          "after-transition",
+          "attempt-result"
+        ],
+        "migrationOldRowsReferencesPreserved": true
+      },
+      "browsers": {
+        "passed": 2,
+        "engines": [
+          "chromium",
+          "webkit"
+        ],
+        "isolatedLocalData": true,
+        "actualDevice": false
+      },
+      "haruIntegration": {
+        "passed": 19,
+        "typecheck": true,
+        "build": true
+      },
+      "enTypecheck": true,
+      "enBuild": true,
+      "workerDryRuns": 3,
+      "defaultFreeConfig": true,
+      "exportedUiFiles": 129,
+      "exportedRelayFiles": 2,
+      "exportFileHashesVerified": true,
+      "sourceHashesAndRelayRebuildVerified": true,
+      "review": {
+        "fixedFindings": 2,
+        "remainingFindings": 0,
+        "specialists": [
+          "testing",
+          "maintainability",
+          "security",
+          "performance",
+          "data-migration",
+          "design"
+        ],
+        "adversarial": true,
+        "separateContextsSameModel": true,
+        "adversarialFixtures": "summary only",
+        "codexCli": "execution failed, no completed report; not counted as passed"
+      },
+      "newPathLiveCpu": false,
+      "fiveCardLiveAcceptance": false,
+      "fiveCardPhoneReceipt": false,
+      "supersededRuns": [
+        "Initial regression run interrupted after old final-failure expectation; not counted",
+        "Direct Node Playwright start failed due to child PATH; npm script rerun passed"
+      ]
+    },
+    "deployed": false,
+    "merged": false
   }
 }

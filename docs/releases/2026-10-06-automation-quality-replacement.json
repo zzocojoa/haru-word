@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T06:34:58.661Z",
+  "status": "local_verified_not_deployed",
+  "feature": "One fresh candidate after the second correction fails final quality review",
+  "schemaCandidate": "0021_automation_quality_replacement.sql",
+  "source": {
+    "enCardBranch": "codex/automation-revise-fallback",
+    "haruBranch": "codex/card-automation-revise-fallback",
+    "reviewBase": "79464eb5eb3e28eda8cc7741f6db6ae9895abdf4",
+    "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+    "uiSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+    "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+    "enCardCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3"
+  },
+  "policy": {
+    "maximumCorrections": 2,
+    "maximumQualityReplacements": 1,
+    "replacementRevision": 4,
+    "maximumAiCallsPerRun": 24,
+    "maximumDuplicateRejections": 3,
+    "maximumRenderAttempts": 3,
+    "deadlineRemainingMustExceedMs": 360000,
+    "imageWaitMs": 120000,
+    "originalIdsSettingsDeadlinePreserved": true,
+    "failedCandidatePrivatelyPreserved": true,
+    "historicalFailedRunsRevived": false,
+    "replacementRequiresIndependentReview": true
+  },
+  "validation": {
+    "vitest": {
+      "passed": 115,
+      "files": 5,
+      "mockAiAndKakao": true,
+      "realisticMixedFailureDailyAndTrialFiveCards": true,
+      "databaseFailurePoints": [
+        "before-transition",
+        "after-transition",
+        "attempt-result"
+      ],
+      "migrationOldRowsReferencesPreserved": true
+    },
+    "browsers": {
+      "passed": 2,
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "isolatedLocalData": true,
+      "actualDevice": false
+    },
+    "haruIntegration": {
+      "passed": 19,
+      "typecheck": true,
+      "build": true
+    },
+    "enTypecheck": true,
+    "enBuild": true,
+    "workerDryRuns": 3,
+    "defaultFreeConfig": true,
+    "exportedUiFiles": 129,
+    "exportedRelayFiles": 2,
+    "exportFileHashesVerified": true,
+    "sourceHashesAndRelayRebuildVerified": true,
+    "review": {
+      "fixedFindings": 2,
+      "remainingFindings": 0,
+      "specialists": [
+        "testing",
+        "maintainability",
+        "security",
+        "performance",
+        "data-migration",
+        "design"
+      ],
+      "adversarial": true,
+      "separateContextsSameModel": true,
+      "adversarialFixtures": "summary only",
+      "codexCli": "execution failed, no completed report; not counted as passed"
+    },
+    "newPathLiveCpu": false,
+    "fiveCardLiveAcceptance": false,
+    "fiveCardPhoneReceipt": false,
+    "supersededRuns": [
+      "Initial regression run interrupted after old final-failure expectation; not counted",
+      "Direct Node Playwright start failed due to child PATH; npm script rerun passed"
+    ]
+  },
+  "production": {
+    "evidence": "2026-10-06-automation-quality-trial.json",
+    "unchangedByThisWork": true,
+    "schema": "0020_automation_quality_retry.sql",
+    "siteVersion": 120,
+    "settingsVersion": 31,
+    "cards": 5,
+    "timeKst": "07:30",
+    "nextDueKst": "2026-10-07T07:30",
+    "followupStatus": "PAUSED",
+    "lastTrialAcceptedAndPhoneConfirmed": 4
+  },
+  "freeConfiguration": {
+    "paidDependenciesAdded": 0,
+    "basis": "Existing user Free confirmation and local configuration check; current account plan/shared quota not freshly verified"
+  },
+  "operations": {
+    "deployments": 0,
+    "productionMigrations": 0,
+    "settingsChanges": 0,
+    "newTrials": 0,
+    "directAiCalls": 0,
+    "resends": 0,
+    "historyResets": 0,
+    "followupChanges": 0
+  },
+  "next": [
+    "Idle/settings checks and encrypted backup",
+    "Atomic 0021 plus migration history; compare old rows/references",
+    "Deploy compatible DO at 100 percent then exported Site",
+    "Verify final revision4 draft, opposite-provider review/hash, unique expression, PNG, live acceptance, CPU and actual five phone images/links before merging"
+  ],
+  "rollback": "Keep 0021-compatible code, revision4 and private evidence; never shrink revision or reset history",
+  "merged": false,
+  "wholeGoalComplete": false
+}
