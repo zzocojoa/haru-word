@@ -22,6 +22,16 @@ for (const w of words) {
   const e = byId.get(w.id);
   assert(e); assert.equal(e.baseMeaning, content[w.id].meaning); assert.equal(e.pos, w.pos);
   assert.equal(e.sourceFingerprint, sha(JSON.stringify({ word: w, content: content[w.id] })));
+  if (e.policyHold) {
+    assert.equal(e.status, 'held');
+    assert.equal(e.policyHold.reason, 'text-policy-meaning-conflict');
+    assert(e.policyHold.userDecision?.trim() && e.policyHold.note?.trim());
+    assert(Number.isFinite(Date.parse(e.policyHold.recordedAt)));
+    assert.equal(e.policyHold.phase, e.attempts.length ? 'after-generation' : 'before-generation');
+    if (!e.attempts.length) {
+      for (const key of ['file', 'sha256', 'bytes', 'width', 'height', 'review']) assert.equal(e[key], undefined);
+    }
+  }
   assert(e.status in counts && e.status !== 'total'); counts[e.status]++;
 }
 assert.deepEqual(m.counts, counts);

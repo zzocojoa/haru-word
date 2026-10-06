@@ -100,6 +100,7 @@ function start(id, correctionFile) {
   assert.equal(m.generation.userApproval, 'style-approved-continue');
   assert.equal(p.current, null, 'Previous image call is unresolved; do not retry blindly');
   const e = find(id);
+  assert(!e.policyHold, 'Explicit policy hold must be resolved before generation');
   if (correctionFile) {
     assert(['generated', 'held'].includes(e.status));
     assert.equal(e.attempts.length, 1, 'Only one quality correction is allowed');
@@ -152,6 +153,7 @@ function review(reviewFile) {
   assert.equal(p.current, null);
   for (const input of JSON.parse(fs.readFileSync(reviewFile))) {
     const e = find(input.entryId);
+    assert(!e.policyHold, 'Explicit policy hold must be resolved before review');
     assert(['generated', 'approved', 'held'].includes(e.status));
     assert(['approve', 'hold'].includes(input.decision));
     assert(input.note?.trim());
@@ -167,6 +169,41 @@ function review(reviewFile) {
   }
   save(); console.log(JSON.stringify({ counts: m.counts, generationCalls: p.generationCalls }));
 }
+function holdPolicy(decisionFile) {
+  assert.equal(m.generation.userApproval, 'style-approved-continue');
+  assert.equal(p.current, null, 'Resolve the current image call before recording policy holds');
+  const decision = JSON.parse(fs.readFileSync(decisionFile));
+  assert(Array.isArray(decision.entryIds) && decision.entryIds.length > 0);
+  assert.equal(new Set(decision.entryIds).size, decision.entryIds.length);
+  assert.equal(decision.reason, 'text-policy-meaning-conflict');
+  assert(decision.userDecision?.trim() && decision.note?.trim());
+  // Validate every entry before changing any state; no image slot or file is fabricated.
+  const entries = decision.entryIds.map(find);
+  for (const e of entries) {
+    assert(['waiting', 'held'].includes(e.status), 'Policy holds cannot replace generated or approved work');
+    if (e.status === 'waiting') {
+      assert.equal(e.attempts.length, 0);
+      assert(!e.file, 'Waiting policy hold must not have an image');
+    }
+    if (e.policyHold) {
+      assert.equal(e.policyHold.reason, decision.reason);
+      assert.equal(e.policyHold.userDecision, decision.userDecision);
+      assert.equal(e.policyHold.note, decision.note);
+    }
+  }
+  const changed = entries.filter(e => !e.policyHold);
+  if (changed.length) {
+    const recordedAt = new Date().toISOString();
+    for (const e of changed) {
+      e.status = 'held';
+      e.policyHold = { reason: decision.reason, userDecision: decision.userDecision, note: decision.note,
+        phase: e.attempts.length ? 'after-generation' : 'before-generation', recordedAt };
+    }
+    p.history.push({ action: 'policy-held', entryIds: changed.map(e => e.entryId), reason: decision.reason, at: recordedAt });
+    save();
+  }
+  console.log(JSON.stringify({ counts: m.counts, generationCalls: p.generationCalls, policyHeld: entries.map(e => e.entryId), changed: changed.length }));
+}
 function status() {
   console.log(JSON.stringify({ counts: m.counts, generationCalls: p.generationCalls, current: p.current,
     next: m.entries.filter(e => e.status === 'waiting').slice(0, 10).map(e => ({ id: e.entryId, word: e.headword || e.word, pos: e.pos, meaning: e.baseMeaning, prepared: Boolean(e.prompt) })) }));
@@ -177,5 +214,6 @@ else if (command === 'prepare') prepare(args[0]);
 else if (command === 'start') start(args[0], args[1]);
 else if (command === 'capture') capture(args[0], args[1]);
 else if (command === 'review') review(args[0]);
+else if (command === 'hold-policy') holdPolicy(args[0]);
 else if (command === 'status') status();
-else throw Error('Use consent / prepare / start / capture / review / status');
+else throw Error('Use consent / prepare / start / capture / review / hold-policy / status');
