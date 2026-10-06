@@ -101,13 +101,15 @@
     "observedBeforePreparationRuns": 5,
     "serverAcceptanceVerified": false,
     "cpuVerified": false,
-    "phoneReceiptVerified": false,
+    "phoneReceiptVerified": true,
     "qualityRetryObserved": true,
     "providerFallbackObserved": false,
     "naturalDuplicateObserved": true,
     "serverAcceptedCards": 4,
     "cpuObservedWithinWorkerBudget": true,
-    "cpuCoverageComplete": false
+    "cpuCoverageComplete": false,
+    "phoneVerifiedCards": 4,
+    "fiveCardPhoneReceiptVerified": false
   },
   "followup": {
     "id": "en-card-5",
@@ -147,8 +149,8 @@
     "merged": false,
     "blockers": [
       "Only four of five cards accepted; fifth failed final comparison review",
-      "Phone images/original links pending",
-      "CPU observation has three missing delivery minute bins despite narrow requery"
+      "CPU observation has three missing delivery minute bins despite narrow requery",
+      "User confirmed four cards, not five"
     ]
   },
   "freeConfiguration": {
@@ -174,10 +176,10 @@
     "Five-card success remains unverified; two-correction cap can still exclude a card despite remaining time",
     "Natural duplicate rejection/regeneration observed, but that slot did not pass final quality; provider transport fallback not observed",
     "CPU group P99 is not a global maximum; three delivery minute bins remain absent",
-    "Phone confirmation for this four-card trial pending; earlier noon receipt and Oct5 user4/server3 discrepancy remain separate"
+    "User confirmed all four received images/original links; fifth card was not produced. Earlier noon receipt and Oct5 user4/server3 discrepancy remain separate"
   ],
   "evidenceDirectory": "EN_Card/backups/automation-quality-trial-20261006 (Git ignored)",
-  "lastVerifiedAt": "2026-10-06T06:04:02.531Z",
+  "lastVerifiedAt": "2026-10-06T06:06:38.174Z",
   "result": {
     "checkedAt": "2026-10-06T06:04:02.531Z",
     "expectedCards": 5,
@@ -317,9 +319,12 @@
       "note": "Highest returned group P99 is not the maximum of all calls. DO measured separately; empty Worker rows for DO are not a CPU-zero pass."
     },
     "phone": {
-      "status": "pending_user_confirmation",
-      "confirmedCount": null,
-      "imagesAndOriginalLinksVerified": false
+      "status": "confirmed_by_user",
+      "confirmedCount": 4,
+      "imagesAndOriginalLinksVerified": true,
+      "confirmedAt": "2026-10-06T06:06:38.174Z",
+      "confirmation": "4장 모두 이미지·원본 링크 정상",
+      "fiveCardReceiptVerified": false
     },
     "serverFiveCardSuccess": false,
     "wholeGoalComplete": false

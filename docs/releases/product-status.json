@@ -1664,7 +1664,8 @@
     "verifiedAdditionalCorrectionSlots": [
       2,
       3
-    ]
+    ],
+    "phoneConfirmedCards": 4
   },
   "qualityRollout": {
     "status": "deployed_trial_partial_daily_active",
@@ -1734,8 +1735,8 @@
       "merged": false,
       "blockers": [
         "Only four of five cards accepted; fifth failed final comparison review",
-        "Phone images/original links pending",
-        "CPU observation has three missing delivery minute bins despite narrow requery"
+        "CPU observation has three missing delivery minute bins despite narrow requery",
+        "User confirmed four cards, not five"
       ]
     },
     "result": {
@@ -1877,9 +1878,12 @@
         "note": "Highest returned group P99 is not the maximum of all calls. DO measured separately; empty Worker rows for DO are not a CPU-zero pass."
       },
       "phone": {
-        "status": "pending_user_confirmation",
-        "confirmedCount": null,
-        "imagesAndOriginalLinksVerified": false
+        "status": "confirmed_by_user",
+        "confirmedCount": 4,
+        "imagesAndOriginalLinksVerified": true,
+        "confirmedAt": "2026-10-06T06:06:38.174Z",
+        "confirmation": "4장 모두 이미지·원본 링크 정상",
+        "fiveCardReceiptVerified": false
       },
       "serverFiveCardSuccess": false,
       "wholeGoalComplete": false
