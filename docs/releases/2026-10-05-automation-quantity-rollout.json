@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T10:45:31.314Z",
+  "status": "deployed_test_time_change_scope_pending",
+  "sources": {
+    "enCard": "b9e7d31d08dd9cf63c70530f4e26adafef3c9510",
+    "haruProduct": "85a2fbae41819f260840b6e3e7091f25cb6cb1d5",
+    "site": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5",
+    "siteTreeMatchesHaruProduct": true
+  },
+  "backup": {
+    "encrypted": true,
+    "protection": "Windows DPAPI CurrentUser with restricted ACL",
+    "proof": {
+      "sqlSha256": "726CCB5BE02956D74DF4F7A9727029C6009789DA21C77BD632C68D7E52C392E0",
+      "bytes": 121668,
+      "createdAtUtc": "2026-10-05T09:40:53.2171266Z",
+      "roundTripVerified": true,
+      "ciphertextSha256": "FAF06162F32BEBF174534F6AEE2A2375FBE2A19AF91752333425892182853898",
+      "restrictedAcl": true,
+      "encryption": "Windows DPAPI CurrentUser"
+    },
+    "plaintextRemoved": true
+  },
+  "migration": {
+    "name": "0016_automation_quantity.sql",
+    "appliedCount": 16,
+    "foreignKeyErrors": 0,
+    "oldRunsIndexAndCountOne": true,
+    "originalColumnsPreserved": true,
+    "comparedTables": 18,
+    "maintenanceUsed": true,
+    "method": "Original SQL file plus migration history INSERT; remote file import",
+    "rollback": "Pause automation and deploy only 0016-compatible code; preserve immutable history. Never restore this backup over later user data without a separate recovery decision."
+  },
+  "workers": {
+    "en-card": {
+      "versions": [
+        {
+          "version_id": "f9394596-e75d-4a18-9a23-364a574c1543",
+          "percentage": 100
+        }
+      ],
+      "crons": [
+        "* * * * *"
+      ],
+      "bindingsUnchanged": true
+    },
+    "en-card-delivery": {
+      "versions": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "bindingsUnchanged": true
+    },
+    "en-card-automation": {
+      "versions": [
+        {
+          "version_id": "3127e215-0a75-4255-8056-bd30d732ada0",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "bindingsUnchanged": true
+    }
+  },
+  "site": {
+    "version": 117,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_eff474c6486c8191b0096664895eea28",
+    "source": "b718f538d1ff10ed4bc1c05effb4458f3a1e21a5",
+    "deployment": "appgdep_6ac373714aa48191bfbf211ceb8d6bd8",
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "envRevision": 59,
+    "publicAccessRevision": 4,
+    "environmentUnchanged": true,
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000008e24820690f1c112e25e93c3",
+      "content_hash": "sha256:37158d4f8adcc4e8a3494dd04350f74cf3495ae8c534a8b8967cfbb4a809e8bf",
+      "size_bytes": 15503360,
+      "file_count": 316
+    },
+    "localTarSha256": "3801f96745fc155515b8636fa348349a45bd880c78e987bb4364ec49b1e56709",
+    "treeMatchesHaruProduct": true
+  },
+  "validation": {
+    "typecheckWebAndThreeWorkerDryRuns": true,
+    "productionConfigDryRuns": true,
+    "freeConfiguration": true,
+    "siteBuild": true,
+    "publicChecks": {
+      "at": "2026-10-05T09:55:57.637Z",
+      "publicFiles": [
+        {
+          "path": "card-studio/source.json",
+          "status": 200,
+          "bytes": 15647,
+          "sha256": "ec8e570bf26f5424692cad6caa1b20927d8f810c351d18f63ad226ccdf03ac46",
+          "candidateSha256": "ec8e570bf26f5424692cad6caa1b20927d8f810c351d18f63ad226ccdf03ac46",
+          "platformInjectionRemoved": false,
+          "matchesCandidate": true
+        },
+        {
+          "path": "card-studio/index.html",
+          "status": 200,
+          "bytes": 1527,
+          "sha256": "46ac97c24db6bb141b4481c58a248e9f523afec528afae225a910ce3c0c19a25",
+          "candidateSha256": "280bd63b09cef4f4ca4c072d767b922f14f4a79fe79428c851fb4824d304cc27",
+          "platformInjectionRemoved": true,
+          "matchesCandidate": true
+        },
+        {
+          "path": "card-studio/assets/index-BR-GVJv1.js",
+          "status": 200,
+          "bytes": 404150,
+          "sha256": "b10333169d0a86be4004c4f0859865c92e76053dca7be9ed70ae800baca5dfd4",
+          "candidateSha256": "b10333169d0a86be4004c4f0859865c92e76053dca7be9ed70ae800baca5dfd4",
+          "platformInjectionRemoved": false,
+          "matchesCandidate": true
+        }
+      ],
+      "unauthenticated": [
+        {
+          "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+          "path": "/api/card-studio/api/automation",
+          "status": 401
+        },
+        {
+          "origin": "https://en-card.kmksla4.workers.dev",
+          "path": "/api/automation",
+          "status": 401
+        }
+      ]
+    },
+    "authenticatedBrowser": false,
+    "physicalDevice": false,
+    "actualMultipleCardReceipt": false,
+    "multipleCardCpu": false,
+    "idleAnalytics": {
+      "start": "2026-10-05T09:43:00Z",
+      "end": "2026-10-05T09:53:00Z",
+      "measurement": "Cloudflare adaptive analytics; quantiles are not per-request maxima",
+      "groups": {
+        "en-card": {
+          "worker": 12,
+          "durable": 0,
+          "workerErrors": 0,
+          "durableErrors": 0
+        },
+        "en-card-delivery": {
+          "worker": 9,
+          "durable": 0,
+          "workerErrors": 0,
+          "durableErrors": 0
+        },
+        "en-card-automation": {
+          "worker": 0,
+          "durable": 10,
+          "workerErrors": 0,
+          "durableErrors": 0
+        }
+      },
+      "scope": "Paused automation only. Not a multi-card load or send verification."
+    },
+    "measurementPreparation": {
+      "readOnly": true,
+      "oldOneCardDayRejectedAsFiveCardEvidence": true,
+      "negativeCheckDay": "2026-10-05",
+      "checkedFields": [
+        "frozen item count/index/config version/due time",
+        "cross-review success and matching content hash",
+        "ready AI card and matching asset revision",
+        "one live sent delivery and one accepted attempt per card",
+        "completed schedule and no unresolved work",
+        "public 1080 PNG signature/type/bytes/hash"
+      ],
+      "actualUserReceiptIsSeparate": true,
+      "cpuUnitsVerifiedByLiveGraphqlSchema": "microseconds; divide by 1000 for milliseconds",
+      "cpuWindowPolicy": "15-minute half-open windows; fail at query row cap, preserve version mismatches and sampling; missing CPU remains null",
+      "idleSummary": {
+        "en-card": {
+          "worker": {
+            "groups": 12,
+            "requests": 13,
+            "errors": 0,
+            "highestGroupP99Ms": 2.544,
+            "sampledGroups": 0,
+            "singleRequestGroups": 11
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-delivery": {
+          "worker": {
+            "groups": 9,
+            "requests": 9,
+            "errors": 0,
+            "highestGroupP99Ms": 1.799,
+            "sampledGroups": 0,
+            "singleRequestGroups": 9
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-automation": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 10,
+            "requests": 10,
+            "errors": 0,
+            "highestGroupP99Ms": 1.951,
+            "sampledGroups": 0,
+            "singleRequestGroups": 10
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        }
+      },
+      "fullMulticardVerification": false,
+      "localEvidenceDirectory": "EN_Card/backups/automation-quantity-rollout-20261005/"
+    }
+  },
+  "automation": {
+    "enabled": false,
+    "version": 18,
+    "reason": "paused",
+    "dailyCards": 5,
+    "storedDailyCardsMissingDefaultsToOne": false,
+    "time": "00:00",
+    "nextDueAt": 1791212400000,
+    "testScheduled": false,
+    "testPreferencePending": true,
+    "note": "User requested 2026-10-05 20:38 KST. Previous midnight five-card test and its follow-up are paused. Replacement scope is pending because today is frozen at one daily card and the current extra AI trial is limited to one. Original operation remains paused; history and encrypted restoration settings are preserved.",
+    "existingOperationResumed": false,
+    "resumeProof": {
+      "at": "2026-10-05T10:01:23.163Z",
+      "action": "resume_existing_after_temporary_deployment_pause",
+      "mechanism": "Guarded existing D1 administration; exact application schema and next-due validation; no UI identity substitution",
+      "beforeVersion": 15,
+      "afterVersion": 16,
+      "settingsUnchanged": true,
+      "settingsSha256": "6c749ff7d253955571020dc4854f7d52ff174563d84e63e8155aa0fec4f5099c",
+      "dailyCards": 1,
+      "time": "07:00",
+      "nextDueAt": 1791237600000,
+      "nextDueKst": "2026-10-06 07:00 Asia/Seoul",
+      "multiCardTestScheduled": false
+    },
+    "startDate": "2026-10-06",
+    "endDate": "2026-10-06",
+    "preparationAt": 1791208800000,
+    "registration": {
+      "at": "2026-10-05T10:35:11.936Z",
+      "authorization": "User approved the quickest multi-card test on 2026-10-05; five cards from the offered test plan, original daily operation retained for restoration",
+      "expectedOldVersion": 16,
+      "targetVersion": 17,
+      "day": "2026-10-06",
+      "time": "00:00",
+      "cardsPerDay": 5,
+      "preparationAt": 1791208800000,
+      "dueAt": 1791212400000,
+      "deadlineAt": 1791212100000,
+      "oneDayOnly": true,
+      "originalSettingsEncrypted": true,
+      "backupProof": {
+        "ciphertextSha256": "E431BAC1134BE085633242133268070F5D1362C7CA49872243E06762718998A0",
+        "roundTripVerified": true,
+        "restrictedAcl": true,
+        "bytes": 307,
+        "plaintextSha256": "3F87A68395DF02D12318BE0B8D7BBC02DC68BC7E305379A65BA1CDFCDB624175"
+      },
+      "testSettingsSha256": "f43046794061a908fbde0597e4cd1cbb5ea0b4c990b3ef7352fa32f7f2e48951",
+      "originalOperation": {
+        "cardsPerDay": 1,
+        "time": "07:00",
+        "startDate": "2026-10-04",
+        "endDate": "2027-10-04"
+      },
+      "restoration": "After the test finishes, restore original settings only if version 17/test settings remain unchanged and no active or unresolved work exists. Do not replace later user changes. The consumed test day is not replenished.",
+      "registeredAt": "2026-10-05T10:35:12.144Z",
+      "registrationVerified": true,
+      "settingsVersion": 17,
+      "enabled": true,
+      "historyAndUsageUnchanged": true,
+      "newAiCalls": 0,
+      "newKakaoSends": 0,
+      "actualReceiptVerified": false,
+      "cpuVerified": false
+    },
+    "followup": {
+      "automationId": "en-card-5",
+      "status": "PAUSED",
+      "scheduledLocalTime": "2026-10-06 00:20 Asia/Seoul",
+      "singleOccurrence": true,
+      "target": "current thread",
+      "scope": "Read server/PNG/CPU evidence and conditionally restore the original operation; request separate user phone receipt confirmation"
+    },
+    "plannedRestoration": {
+      "applied": false,
+      "guards": "Same version and settings, all five live sends confirmed, no active or unresolved work, Kakao connected",
+      "dailyCards": 1,
+      "time": "07:00",
+      "earliestNormalDueAfterTest": null,
+      "laterUserChangesPreserved": true,
+      "status": "superseded_pending_replacement_scope"
+    },
+    "timeChange": {
+      "at": "2026-10-05T10:45:31.314Z",
+      "authorization": "User requests replacing the midnight test with 2026-10-05 20:38 KST",
+      "previousSettingsVersion": 17,
+      "settingsVersion": 18,
+      "enabled": false,
+      "reason": "paused",
+      "supersededTest": {
+        "day": "2026-10-06",
+        "time": "00:00",
+        "cards": 5
+      },
+      "requestedTime": "2026-10-05 20:38 Asia/Seoul",
+      "replacementRegistered": false,
+      "scopeChoicePending": true,
+      "historyAndUsageUnchanged": true,
+      "newAiCalls": 0,
+      "newKakaoSends": 0,
+      "originalSettingsBackupPreserved": true
+    }
+  },
+  "free": {
+    "priorExplicitUserWorkersFreeConfirmationPreserved": true,
+    "currentSubscriptionApiStatus": 403,
+    "newPaidResources": false,
+    "newResources": false,
+    "newSecrets": false
+  },
+  "operations": {
+    "productWorkerDeployments": 3,
+    "temporaryMaintenanceDeployments": 1,
+    "sitePublications": 1,
+    "databaseMigrations": 1,
+    "newAiCalls": 0,
+    "newKakaoSends": 0
+  },
+  "outstanding": [
+    "Resolve the scope for the requested 2026-10-05 20:38 KST test and register its supported execution path",
+    "Update follow-up verification and guarded restoration for the replacement test",
+    "Verify actual multiple-card generation, PNG, API acceptance, current-version CPU and separate user phone receipt"
+  ],
+  "supersededBy": "2026-10-05-automation-multi-trial.json",
+  "historicalScope": "Version 117 / migration 0016 rollout and the cancelled midnight test; current operation follows supersededBy."
+}

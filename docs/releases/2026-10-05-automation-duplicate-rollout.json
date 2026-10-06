@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T13:43:26.749Z",
+  "status": "deployed_live_regeneration_not_tested",
+  "authorization": "User approved encrypted backup, EN_Card migration0018 and compatible Worker/DO, and existing Site publication; no new trial, send, regular resume or history reset.",
+  "source": {
+    "enCard": {
+      "branch": "codex/automation-duplicate-retry",
+      "commit": "ad2e125f09f669cfd5420064d819112e6cd2bf3e"
+    },
+    "haruWord": {
+      "branch": "codex/card-automation-duplicate-retry",
+      "commit": "40a4671dbcae07a4b82e03ca90fcc7322a02e1f8"
+    },
+    "siteCommit": "1656444de5e1a1b5cb0106577ca0e19b434decec",
+    "identicalHaruSiteTree": "187b21d6605a88f304d3d1a9cbc77f63192b1f4e",
+    "githubPushPrMergePerformed": false
+  },
+  "migration": {
+    "name": "0018_automation_duplicate_retry.sql",
+    "countAfter": 18,
+    "encryptedBackup": {
+      "createdAtUtc": "2026-10-05T13:32:23.6347927Z",
+      "roundTripVerified": true,
+      "bytes": 149436,
+      "restrictedAcl": true,
+      "encryption": "Windows DPAPI CurrentUser",
+      "sqlSha256": "39D145EA7799E566D0D5AC98957D099BF22CF796231337E7089247467C88C2F8",
+      "ciphertextSha256": "9D0A1AE3CB5693D7576118E469B8CCCD94633C7200541D96C2FA49A0270801A7",
+      "plaintextRemoved": true
+    },
+    "allPreviousColumnsAndRowsPreserved": true,
+    "foreignKeyErrors": 0,
+    "previousRejectedExpressionsDefaultEmpty": true
+  },
+  "workers": {
+    "checkedAt": "2026-10-05T13:41:23.785Z",
+    "versions": {
+      "en-card": [
+        {
+          "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+          "percentage": 100
+        }
+      ],
+      "en-card-delivery": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "en-card-automation": [
+        {
+          "version_id": "d485cf7e-9afc-42f4-949d-e8db185e6fc0",
+          "percentage": 100
+        }
+      ]
+    },
+    "bindingsAndCronsPreserved": true,
+    "deliveryVersionUnchanged": true
+  },
+  "site": {
+    "version": 119,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_2c64c9fd96648191b7b9f6b069432253",
+    "deploymentId": "appgdep_6ac3a8bea9088191a4e3a814da5a4aba",
+    "sourceCommit": "1656444de5e1a1b5cb0106577ca0e19b434decec",
+    "status": "succeeded",
+    "publishedAt": "2026-10-05T13:40:42.163284+00:00",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+    "envRevision": 59,
+    "accessRevision": 4,
+    "audience": "public",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000f79c820696dbca75321bcb0a",
+      "content_hash": "sha256:e7aa10774ddcc330fe0492e3befbf94b07ed8c0992459f77de3b502358243eb3",
+      "size_bytes": 15503360,
+      "file_count": 316
+    },
+    "learnerMigrationFilesUnchanged": true
+  },
+  "validation": {
+    "enCardTests": 130,
+    "haruTests": 19,
+    "localBrowserTests": 2,
+    "browsers": [
+      "Chromium",
+      "WebKit"
+    ],
+    "types": "passed_both_repositories",
+    "builds": "passed_both_repositories_and_three_worker_dry_runs",
+    "freeConfiguration": "passed_local_only",
+    "accountPlanRechecked": false,
+    "remoteCpu": "not_measured",
+    "public": {
+      "at": "2026-10-05T13:41:28.939Z",
+      "sourceManifestSha256": "5e8201f5cd723ae78e03f44dc5e2d630a3e3e200b291d70ff3debe2bdccdd3cd",
+      "studioSourceSha256": "1e51601fb82b5be8382f52dac5c86714a5e17ba3cb9f12d92c2b7264662fd070",
+      "files": [
+        {
+          "path": "assets/index-Blo8Fg3j.js",
+          "status": 200,
+          "sha256": "2324fcaa8478017a9da8dbaaf541c4984c5c20826329790504bda52dfb8e3aab"
+        },
+        {
+          "path": "assets/index-Zet1kPl4.css",
+          "status": 200,
+          "sha256": "f308ea23c8c9ad0245e83b7feb9882e02abb1cf6e5c2a9e58805188afdbf2ac3"
+        },
+        {
+          "path": "fonts/LICENSE.txt",
+          "status": 200,
+          "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+        },
+        {
+          "path": "fonts/files/noto-sans-kr-0-wght-normal.woff2",
+          "status": 200,
+          "sha256": "3861da36d0eb54b3351f55d43c5ca91e732f0f2c6f8769ed475d3ec6fffdb4e5"
+        },
+        {
+          "path": "fonts/font.css",
+          "status": 200,
+          "sha256": "cb605fb4a6924db15d5e7f1beefe17a9e3cadbbba90c79e0f1a550d98417f212"
+        }
+      ],
+      "access": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/cards",
+          "status": 307
+        },
+        {
+          "path": "/api/state",
+          "status": 401
+        },
+        {
+          "path": "/api/card-studio/automation",
+          "status": 401
+        }
+      ],
+      "workerUnauthenticatedAutomationStatus": 401,
+      "authenticatedBrowserVerified": false,
+      "liveAiCalls": 0,
+      "kakaoCalls": 0
+    },
+    "localArtifacts": {
+      "ui": 129,
+      "relay": 2
+    },
+    "sourceTreeMatches": true,
+    "productionChecks": "read-only HTTP and D1/Worker metadata; no authenticated browser or new live generation"
+  },
+  "review": {
+    "specialists": [
+      "testing",
+      "maintainability",
+      "security",
+      "performance",
+      "data-migration",
+      "red-team"
+    ],
+    "independentAdversarial": true,
+    "sameModelIndependentContexts": true,
+    "fixedFindings": 3,
+    "unresolvedFindings": 0,
+    "separateCli": "not_counted_previous_0.132_model_incompatibility"
+  },
+  "freeConfiguration": {
+    "result": "passed for exact live configurations",
+    "accountPlanBasis": "User confirmed Workers Free on 2026-10-05",
+    "subscriptionApiStatus": 403,
+    "apiPlanVerification": false,
+    "newPaidServices": 0,
+    "officialSources": [
+      "https://developers.cloudflare.com/workers/platform/limits/",
+      "https://developers.cloudflare.com/durable-objects/platform/pricing/",
+      "https://developers.cloudflare.com/d1/platform/pricing/",
+      "https://developers.cloudflare.com/kv/platform/pricing/"
+    ]
+  },
+  "operations": {
+    "maintenanceDeployment": 1,
+    "productWorkerDeployments": 2,
+    "sitePublications": 1,
+    "enCardMigrations": 1,
+    "siteMigrations": 0,
+    "newAiCalls": 0,
+    "newKakaoCalls": 0,
+    "regularSettingsChanges": 0,
+    "trialRestarts": 0,
+    "environmentOrAudienceChanges": 0
+  },
+  "finalSettings": {
+    "version": 20,
+    "enabled": 0,
+    "reason": "complete",
+    "next_due_at": null
+  },
+  "finalWork": {
+    "activeSchedules": 0,
+    "activeRuns": 0,
+    "inflightOrUnresolvedUnknown": 0
+  },
+  "tooling": {
+    "installAndBuildHelper": "failed due to existing Windows npm shim path; same locked dependencies and build command passed with explicit Node24/npm CLI",
+    "firstPackage": "WSL Bash path failed; Git Bash attempt exited139; explicit Node24 and Git Bash bin/usr-bin succeeded",
+    "globalToolsOrPluginChanged": false
+  },
+  "rollback": "Pause automation and use code compatible with0018; preserve rejected expressions, attempts and immutable trial history. Do not restore pre0018 data over current records.",
+  "remaining": [
+    "New live duplicate regeneration and five-card receipt/CPU validation not performed",
+    "Earlier four distinct user receipts versus three trial server acceptances remains unresolved",
+    "Regular automation remains disabled and en-card-5 follow-up remains paused; no new trial scheduled"
+  ],
+  "evidenceDirectory": "EN_Card/backups/automation-duplicate-rollout-20261005 (Git ignored; encrypted backup and sanitized verification proofs)"
+}

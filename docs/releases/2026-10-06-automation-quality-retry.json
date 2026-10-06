@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T04:10:47.496Z",
+  "status": "locally_verified_not_deployed",
+  "source": {
+    "enCardBranch": "codex/automation-revise-fallback",
+    "haruBranch": "codex/card-automation-revise-fallback",
+    "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+    "reviewBase": "a6128e27d1e8ea675d599e7dcc3d337c7672d387",
+    "enCardCommit": "1e72eb00658618a0cf8da10073918d2d68b8b403",
+    "uiSourceSha256": "223256e3276ac1dff18279c316a611c38afde5831e7bdb9979e02345bb392f48",
+    "relaySourceSha256": "8add38baa25c57aecca0b0f86e9738ac75627a6e746e145a9329a43152234455"
+  },
+  "policy": {
+    "maxCorrections": 2,
+    "maxContentRevision": 3,
+    "additionalCorrectionRequiresRemainingMsGreaterThan": 360000,
+    "additionalCorrectionMinimumRemainingCalls": 2,
+    "additionalCorrector": "Opposite provider from first corrected draft; transport failure fallback remains bounded",
+    "finalReviewer": "Always different from final writer; fresh review hash must match final content",
+    "perStageRevisionProviderAttempts": 3,
+    "totalReservedAiCallsPerRun": 24,
+    "allOutcomesCountTowardBudget": true,
+    "duplicatesLimitUnchanged": 3,
+    "existingDeadlinesAndImageWaitPreserved": true,
+    "revivesPastFailedSlots": false,
+    "createsFreshCandidatesForQualityFailure": false
+  },
+  "migration": {
+    "candidate": "0020_automation_quality_retry.sql",
+    "productionApplied": false,
+    "change": "Widen run revision constraint from1..2 to1..3; preserve IDs, old revisions and child references",
+    "order": [
+      "Check idle state and current settings",
+      "Block writes and Cron, wait for in-flight calls, create and verify encrypted backup",
+      "Apply complete0020 atomically and compare existing rows, references and FK",
+      "Apply0020-compatible automation DO and verify100%",
+      "Publish matching Site export and verify static artifacts",
+      "Restore writes and Cron with original settings preserved"
+    ],
+    "rollback": "Keep0020 schema and history; use compatible code. Do not restore revision1..2 constraint or run old fixed-revision2 correction code on pending additional corrections/revision3."
+  },
+  "validation": {
+    "localAutomation": "passed_after_fixture_clock_fix",
+    "haruIntegrationTestsPassed": 19,
+    "enTypecheck": "passed",
+    "enBuild": "passed; final error-reason fix additionally typechecked and DO dry-run passed",
+    "haruTypecheck": "passed",
+    "haruBuild": "passed",
+    "freeConfigurationDefaultAndLive": "passed",
+    "generatedUiFilesVerified": 129,
+    "generatedRelayFilesVerified": 2,
+    "generatedSourceAndRebuiltRelayMatch": true,
+    "realAiCalls": 0,
+    "realKakaoCalls": 0,
+    "realFiveCardReceipt": "not_verified",
+    "candidateRemoteCpu": "not_measured",
+    "uniqueLocalAutomationTestsPassed": 92,
+    "existingRegressionTestsPassed": 75,
+    "newQualityTestsPassed": 17,
+    "initialTestFailure": "Daily fixture incorrectly started from not_before=0 (1970); corrected to Math.max(NOW,not_before) and focused daily/trial tests passed",
+    "fiveCardFocusedTestsPassed": 2,
+    "fiveCardFocusedDurationSeconds": 53.39,
+    "browser": "not_repeated; only new reason string, no layout/interaction change"
+  },
+  "review": {
+    "scope": "Incremental code/migration/tests/docs since a6128e2",
+    "specialists": [
+      "testing",
+      "maintainability",
+      "security",
+      "data-migration"
+    ],
+    "independentAdversarialAndRedTeam": true,
+    "sameModelIndependentContexts": true,
+    "crossModelVerified": false,
+    "adversarialTestCoverage": "summary only",
+    "fixedFindings": [
+      "Give the second correction a unique fixture expression to exercise final review after render collision",
+      "Say AI budget insufficient, including the case with one call remaining",
+      "Keep final revision quality failure labeled review_failed even at the24-call boundary",
+      "Prevent synthetic daily test clock from rewinding from2026 to1970"
+    ],
+    "remainingCodeFindings": 0
+  },
+  "operations": {
+    "deployments": 0,
+    "productionMigrations": 0,
+    "newTrials": 0,
+    "resends": 0,
+    "settingsChanged": false,
+    "productionEvidence": "2026-10-06-automation-now-trial.json",
+    "lastObservedSchema": "0019",
+    "lastObservedSettingsVersion": 28,
+    "lastObservedDaily": "07:30 KST /5 cards, next2026-10-07",
+    "phoneReceiptOfLatestTrial": "User reports likely4; exact quantity and images/links pending",
+    "previousTrialResultPreserved": "4 live accepted,1 review_failed; not a time shortage",
+    "readOnlyVerifier": "EN_Card backups/automation-now-trial-20261006/verify.mjs now supports final revision3 writing evidence; historical results are unchanged",
+    "freeAccountCondition": "Prior user Free confirmation; current configuration checks do not reverify billing or remaining quotas",
+    "mergeGate": "Real five-card acceptance and user image/link confirmation remain outstanding"
+  }
+}

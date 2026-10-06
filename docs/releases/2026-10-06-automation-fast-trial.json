@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T01:04:16.323Z",
+  "status": "partial_four_received_daily_resumed",
+  "authorization": "User requested earliest five-card verification within one hour on 2026-10-06.",
+  "trial": {
+    "day": "2026-10-06",
+    "kind": "trial",
+    "cards": 5,
+    "configVersion": 24,
+    "registeredAt": "2026-10-06T00:02:07.692Z",
+    "preparationKst": "2026-10-06 09:04",
+    "deadlineKst": "2026-10-06 09:44",
+    "dueKst": "2026-10-06 09:49",
+    "dueAt": 1791247740000,
+    "notBefore": 1791245040000,
+    "deadline": 1791247440000,
+    "preparationWindowMinutes": 40,
+    "actualPhoneReceiptVerified": false,
+    "serverFiveAcceptancesVerified": false,
+    "cpuVerified": false,
+    "correctionFallbackObserved": false,
+    "naturalDuplicateObserved": false,
+    "serverAcceptedCount": 4,
+    "actualPhoneReceivedCount": 4,
+    "acceptedCardsReceiptVerified": true
+  },
+  "preserved": {
+    "savedDaily": {
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "originalSettingsSha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "originalNextDueAt": 1791325800000,
+    "originalVersion": 22,
+    "existingHistorySha256": "5ebd7fe4f9c58a4c68fde8d0eb2421738b0272470b89c497f0a3a25503a637d2",
+    "usageUnchangedAtRegistration": true,
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ]
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": []
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
+            "percentage": 100
+          }
+        ],
+        "crons": []
+      }
+    },
+    "siteVersion": 119,
+    "credentialState": "connected"
+  },
+  "regularSchedule": {
+    "state": "resumed_original_daily",
+    "currentVersion": 25,
+    "enabled": 1,
+    "next_due_at": 1791325800000,
+    "savedSettingsUnchanged": true,
+    "resumePending": false,
+    "resumePolicy": "After the trial terminates, resume preserved daily 07:30/5 only if the exact version/settings remain and no active or unresolved work or hard failure exists. Preserve skipped/failed history; do not replenish or resend.",
+    "expectedNextDueKst": "2026-10-07 07:30",
+    "resumedAt": "2026-10-06T01:01:38.980Z"
+  },
+  "verification": {
+    "registrationReadback": true,
+    "existingHistoryAndUsageAtRegistrationPreserved": true,
+    "workerVersionsBindingsAndCronsMatch": true,
+    "readOnlyResumeBeforeDueCorrectlyRejected": true,
+    "resumeGuardLocalSqlite": {
+      "at": "2026-10-06T00:04:48.290Z",
+      "type": "local_sqlite_guard_test",
+      "cases": 14,
+      "passed": 14,
+      "productionWrites": 0,
+      "coverage": [
+        "terminal_success",
+        "partial_expired",
+        "changed_version",
+        "changed_settings",
+        "user_paused",
+        "daily_already_restored",
+        "active_creation",
+        "active_schedule",
+        "sending",
+        "unknown",
+        "pending",
+        "cancelled",
+        "quota",
+        "disconnected"
+      ]
+    },
+    "fullProductionCodeTestsRerun": false,
+    "productionCodeChanged": false,
+    "forcedAiOrDuplicateErrors": false
+  },
+  "followup": {
+    "automationId": "en-card-5",
+    "status": "ACTIVE",
+    "atKst": "2026-10-07 07:50",
+    "replacesPriorInspection": "2026-10-07 07:50",
+    "afterSafeResume": "Re-arm the same heartbeat for the original next-day regular inspection using resumed.json observedDaily. No duplicate automation.",
+    "inspectionKind": "daily",
+    "configVersion": 25,
+    "previousInspectionCompleted": "2026-10-06 09:59"
+  },
+  "cost": {
+    "configuration": "free_only, existing Google/Groq free confirmation",
+    "newPaidDependency": false,
+    "newPlanVerification": false,
+    "priorSubscriptionApi403Preserved": true
+  },
+  "actions": {
+    "newTrialBatches": 1,
+    "newTrialCards": 5,
+    "settingsVersionTransitions": [
+      22,
+      23,
+      24
+    ],
+    "deployments": 0,
+    "migrations": 0,
+    "historyResets": 0,
+    "oldCardResends": 0,
+    "heartbeatUpdates": 1
+  },
+  "evidence": "EN_Card Git-ignored backups/automation-fast-trial-20261006/",
+  "commands": {
+    "observe": "node backups/automation-fast-trial-20261006/observe.mjs scheduled-trial",
+    "verify": "node backups/automation-fast-trial-20261006/verify.mjs 2026-10-06 5 scheduled-trial trial",
+    "cpu": "node backups/automation-fast-trial-20261006/metrics.mjs <UTC-start> <UTC-end> scheduled-trial",
+    "resumePreflight": "node backups/automation-fast-trial-20261006/resume.mjs",
+    "resumeApplyOnlyAfterReady": "node backups/automation-fast-trial-20261006/resume.mjs --apply"
+  },
+  "limitations": [
+    "Trial has 40 usable preparation minutes versus regular 55; all five successes are not guaranteed.",
+    "Provider fallback and duplicate regeneration are observed only if naturally triggered.",
+    "Server acceptance and actual phone images/original links require separate verification."
+  ],
+  "earlyObservation": {
+    "at": "2026-10-06T00:07:01.090Z",
+    "readOnly": true,
+    "attempts": [
+      {
+        "item_index": 1,
+        "stage": "draft",
+        "provider": "google",
+        "outcome": "unavailable",
+        "attempts": 2
+      }
+    ],
+    "runs": [
+      {
+        "item_index": 1,
+        "status": "draft",
+        "error": "unavailable",
+        "retry_at": 1791245239331
+      },
+      {
+        "item_index": 2,
+        "status": "draft",
+        "error": null,
+        "retry_at": null
+      },
+      {
+        "item_index": 3,
+        "status": "draft",
+        "error": null,
+        "retry_at": null
+      },
+      {
+        "item_index": 4,
+        "status": "draft",
+        "error": null,
+        "retry_at": null
+      },
+      {
+        "item_index": 5,
+        "status": "draft",
+        "error": null,
+        "retry_at": null
+      }
+    ]
+  },
+  "registrationSnapshot": {
+    "status": "registered_waiting_for_trial_results",
+    "regularSchedule": {
+      "state": "temporarily_replaced_by_trial_cursor",
+      "currentVersion": 24,
+      "enabled": 1,
+      "next_due_at": null,
+      "savedSettingsUnchanged": true,
+      "resumePending": true,
+      "resumePolicy": "After the trial terminates, resume preserved daily 07:30/5 only if the exact version/settings remain and no active or unresolved work or hard failure exists. Preserve skipped/failed history; do not replenish or resend.",
+      "expectedNextDueKst": "2026-10-07 07:30"
+    },
+    "followup": {
+      "automationId": "en-card-5",
+      "status": "ACTIVE",
+      "atKst": "2026-10-06 09:59",
+      "replacesPriorInspection": "2026-10-07 07:50",
+      "afterSafeResume": "Re-arm the same heartbeat for the original next-day regular inspection using resumed.json observedDaily. No duplicate automation."
+    }
+  },
+  "result": {
+    "checkedAt": "2026-10-06T01:04:16.323Z",
+    "status": "partial_four_received_daily_resumed",
+    "expectedCards": 5,
+    "serverAccepted": 4,
+    "userReceived": 4,
+    "userReceipt": {
+      "method": "User structured reply in this thread",
+      "answer": "4장 모두 이미지·원본 링크 정상",
+      "newTrialCardsOnly": true,
+      "imagesAndOriginalLinksNormal": true,
+      "confirmedCount": 4,
+      "fiveCardGoalComplete": false
+    },
+    "trialCards": [
+      {
+        "index": 1,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 62630,
+          "sha256": "03702f8758777896ab5d07c1bffd3d826a266e2945754fb2c59ef0e4c4740e44",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      },
+      {
+        "index": 2,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 60998,
+          "sha256": "eb3e837a7ba3f624b9113f79594a62942bfe0e94a7382ae7ae5e6271331b1c80",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      },
+      {
+        "index": 3,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 62925,
+          "sha256": "a324049c2d0eacf71099d38969028447c9599e6ecd54c22aba73fa630820eea5",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      },
+      {
+        "index": 4,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 50992,
+          "sha256": "879724a38634d42d55fe8af9e962354c19aa07547a87f9d41e832cd8ad7e65c6",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      },
+      {
+        "index": 5,
+        "status": "skipped",
+        "error": "expired",
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 70858,
+          "sha256": "6e5920286241e05236085e8784b72550fc47152c9682fa79c5bc50d5eaaa6b2d",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": false,
+        "unresolved": 0,
+        "problems": [
+          "card_not_ready",
+          "live_delivery_not_verified",
+          "schedule_not_completed"
+        ]
+      }
+    ],
+    "fifthCard": {
+      "index": 5,
+      "approvedContentAnd1080PngPrepared": true,
+      "assetReadyKst": "2026-10-06 09:42:17.844",
+      "imageWaitUntilKst": "2026-10-06 09:44:18.071",
+      "preparationDeadlineKst": "2026-10-06 09:44:00.000",
+      "markedExpiredKst": "2026-10-06 09:44:16.027",
+      "scheduleCreated": false,
+      "kakaoCalls": 0,
+      "reason": "The existing two-minute image propagation wait extended past the 40-minute trial preparation deadline. Expiry ran before scheduling; no late/replacement send was forced."
+    },
+    "ai": {
+      "attempts": 17,
+      "successes": 12,
+      "failures": 5,
+      "groups": {
+        "draft:google:unavailable:503": 4,
+        "draft:google:ok:": 5,
+        "review:groq:ok:": 6,
+        "revise:google:unavailable:503": 1,
+        "revise:google:ok:": 1
+      }
+    },
+    "correctionFallback": {
+      "observed": false,
+      "slotsWithReplacementCalls": [],
+      "verifiedReplacementSlots": [],
+      "attemptGroups": [
+        {
+          "item_index": 4,
+          "revision": 1,
+          "provider": "google",
+          "attempts": 2,
+          "successes": 1,
+          "first_at": 1791246496684,
+          "last_at": 1791246616690
+        }
+      ]
+    },
+    "duplicateRegeneration": {
+      "observed": false,
+      "rejectedCandidates": 0,
+      "successfulReplacementSlots": []
+    },
+    "cpu": {
+      "start": "2026-10-06T00:03:16.701Z",
+      "end": "2026-10-06T00:52:20.606Z",
+      "source": "Cloudflare adaptive analytics",
+      "rawUnit": "microseconds",
+      "summaryUnit": "milliseconds",
+      "summary": {
+        "en-card": {
+          "worker": {
+            "groups": 51,
+            "requests": 51,
+            "errors": 0,
+            "highestGroupP99Ms": 4.588,
+            "sampledGroups": 0,
+            "singleRequestGroups": 51
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-delivery": {
+          "worker": {
+            "groups": 54,
+            "requests": 54,
+            "errors": 0,
+            "highestGroupP99Ms": 3.323,
+            "sampledGroups": 0,
+            "singleRequestGroups": 54
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-automation": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 52,
+            "requests": 52,
+            "errors": 0,
+            "highestGroupP99Ms": 508.134,
+            "sampledGroups": 0,
+            "singleRequestGroups": 52
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        }
+      },
+      "missingFullMinutesUtc": [
+        "2026-10-06T00:29:00.000Z",
+        "2026-10-06T00:30:00.000Z"
+      ],
+      "gapRequery": {
+        "start": "2026-10-06T00:28:00Z",
+        "end": "2026-10-06T00:32:00Z",
+        "missingStillAbsent": true
+      },
+      "completeCallCoverageVerified": false,
+      "allFiveSuccessfulLoadVerified": false,
+      "note": "Returned group P99 values are not global per-call maxima. Provider HTTP503 errors are separate from runtime errors."
+    },
+    "resumed": {
+      "at": "2026-10-06T01:01:38.980Z",
+      "applied": true,
+      "version": 25,
+      "savedSettingsUnchanged": true,
+      "dailyCards": 5,
+      "time": "07:30",
+      "nextDueKst": "2026-10-07T07:30",
+      "nextDueAt": 1791325800000,
+      "observedDaily": {
+        "day": "2026-10-07",
+        "cards": 5,
+        "configVersion": 25,
+        "dueAt": 1791325800000,
+        "preparationAt": 1791322200000,
+        "deadline": 1791325500000
+      },
+      "scope": "Restored original daily cursor only after terminal trial and no unresolved work; partial trial remains partial, no replacement sends."
+    },
+    "settingsReadback": {
+      "version": 25,
+      "enabled": 1,
+      "reason": null,
+      "next_due_at": 1791325800000,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "d1ResumePreservation": {
+      "tablesCompared": 19,
+      "nonSettingsTablesUnchanged": 18,
+      "historyAndUsagePreserved": true,
+      "foreignKeyErrors": 0
+    },
+    "inspectionActions": {
+      "deployments": 0,
+      "newTrials": 0,
+      "extraAiCalls": 0,
+      "resends": 0,
+      "historyResets": 0,
+      "regularResume": 1,
+      "heartbeatUpdates": 1
+    },
+    "remaining": [
+      "Full five-card receipt remains unverified.",
+      "Correction-provider replacement and natural duplicate regeneration did not occur.",
+      "Primary Worker 09:29 and 09:30 KST invocation data remains absent after a narrow requery."
+    ]
+  }
+}
