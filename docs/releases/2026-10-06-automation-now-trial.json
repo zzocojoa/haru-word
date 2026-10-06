@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T02:41:03.147Z",
+  "status": "live_generation_started_validation_pending",
+  "authorization": "User requested immediate verification in this thread; one additional new five-card batch, not a replay/refill of earlier runs.",
+  "source": {
+    "enCardBranch": "codex/automation-revise-fallback",
+    "baseCommit": "37663c6a83d6713e74cd291cfec48f97f7cdb368",
+    "haruBranch": "codex/card-automation-revise-fallback",
+    "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+    "enCardCommit": "a579a1b1d679fefe6669593ec4e64a4d30f926b3"
+  },
+  "trial": {
+    "day": "2026-10-06",
+    "kind": "trial",
+    "configVersion": 27,
+    "cards": 5,
+    "registeredAt": "2026-10-06T02:39:02.438Z",
+    "preparationKst": "2026-10-06 11:41",
+    "deadlineKst": "2026-10-06 12:36",
+    "dueKst": "2026-10-06 12:41",
+    "dueAt": 1791258060000,
+    "notBefore": 1791254460000,
+    "deadline": 1791257760000,
+    "leadMinutes": 60,
+    "usablePreparationMinutes": 55,
+    "serverFiveAcceptancesVerified": false,
+    "actualPhoneReceiptVerified": false,
+    "cpuVerified": false
+  },
+  "production": {
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ]
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": []
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "54882e21-0e43-4f9c-8dfb-f0fb6cce5e47",
+            "percentage": 100
+          }
+        ],
+        "crons": []
+      }
+    },
+    "workerDeploymentPerformed": false,
+    "siteDeploymentPerformed": false,
+    "siteVersion": 119,
+    "siteEvidence": "Previous verified v119; no Site mutation in this operation",
+    "runtimeSource": "c503210cdc60b4084fe5b5c1b423ae3aa0fbe11d",
+    "migration": "0019_automation_verification_trials.sql",
+    "migrations": 19,
+    "existingDataTablesPreserved": 18,
+    "foreignKeyErrors": 0,
+    "encryptedBackupRoundTripVerified": true,
+    "normalPublicTrialLeadMinutes": 45,
+    "note": "Maintenance registration supplies immutable 60-minute timing; current runtime honors it. This does not deploy the new public registration/UI policy."
+  },
+  "preservation": {
+    "priorTrialVersion": 24,
+    "previousHistoryUnchanged": true,
+    "usageUnchangedAtRegistration": true,
+    "originalSettingsSha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "originalDaily": {
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31",
+      "nextDueAt": 1791325800000
+    },
+    "regularResumePending": true,
+    "currentVersion": 27,
+    "currentNextDueAt": null,
+    "dailySendBudget": 20,
+    "usedBeforeRegistration": 7,
+    "remainingBeforeRegistration": 13
+  },
+  "validation": {
+    "productTests": 23,
+    "typecheck": true,
+    "freeConfig": true,
+    "automationDryRun": true,
+    "resumeGuardCases": 15,
+    "registrationRecoveryCases": 14,
+    "review": "Testing, security, migration, maintainability and independent adversarial review; interrupted registration recovery corrected and 14 guards passed. Same-model isolated reviews, not cross-model certification.",
+    "actualProviderReplacementObserved": false,
+    "naturalDuplicateObserved": false,
+    "actualPhoneReceiptVerified": false,
+    "localTestsUseMocks": true
+  },
+  "followup": {
+    "id": "en-card-5",
+    "status": "ACTIVE",
+    "atKst": "2026-10-06 12:51",
+    "afterResume": "Re-arm same automation for October7 07:50 read-only daily verification, expected version28; use new directory and resumed.json."
+  },
+  "recovery": {
+    "normal": "After terminal trial and exact version/hash, no active/pending/inflight/unknown work and no quota/auth/config/storage interruption, resume original daily cursor only. Partial trial is not success.",
+    "registrationInterruption": "Inspect existing registration-intent.json and D1; recover-registration.mjs defaults to read-only. Recover an existing exact batch locally or restore original daily only after proving no new batch exists. Never replay registration blindly.",
+    "migration": "Keep0019 indexes on rollback; previous compatible runtime remains supported. Do not restore pre0019 unique index after same-day verification rows exist; never overwrite history from backup."
+  },
+  "evidenceDirectory": "EN_Card/backups/automation-now-trial-20261006/",
+  "priorEvidence": "October6 morning3 and earlier trial4 receipt confirmations preserved. October5 user4/server3 discrepancy remains unresolved.",
+  "next": [
+    "Verify scoped version27 five new AI cards, independent review, unique expression,1080 PNG and individual live acceptance",
+    "Measure actual current-version CPU with unit conversion, sampling and gaps",
+    "Safely resume preserved daily schedule",
+    "Obtain user confirmation of five images and original links before overall completion"
+  ],
+  "actualStart": {
+    "observedAt": "2026-10-06T02:42:12.025Z",
+    "firstAiAt": "2026-10-06T02:41:16.838Z",
+    "firstCardStatus": "review",
+    "firstWritingSucceeded": true,
+    "serverAccepted": 0,
+    "scope": "First real AI draft completed; remaining generation, reviews, PNG, delivery and CPU are pending."
+  }
+}

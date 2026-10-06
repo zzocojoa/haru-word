@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-06T01:20:46.187Z",
-  "note": "10월6일09:49 trial은 서버4건 접수·사용자4장 이미지/원본링크 정상 확인이다. 5번째는PNG완료후2분대기가09:44마감을넘겨expired로미발송됐다. 수정제공자교체/자연중복은발생하지않았다.10:01에설정값과18개비설정테이블이력을보존하며version25 매일07:30/5장을재개했고다음10월7일07:30,후속07:50이다. CPU관측런타임오류0이나주Worker09:29/30자료누락을보존하며5장전체목표는미완료다. 새5장 추가시험의60분 준비/55분 제작 후보를 로컬 검증하고 화면을 재생성했다. 운영에는 아직45분 정책이며 정규5장 실제 수신 확인 후 두PR 병합·DO→Site 순서로 후속 배포한다.",
+  "recordedAt": "2026-10-06T02:43:28.295Z",
+  "note": "즉시 검증 요청에 따라10월6일 별도 새5장 trial version27을 등록했다.11:41 제작·12:36 마감·12:41 순차발송·12:51 점검이며 실제55분 제작창이다. 기존 trial version24와 오늘오전3장/09:49시험4장 정상수신 기록을 보존했다.0019 인덱스만 적용하고 Worker/Site 재배포는 없다. 저장된 매일07:30/5장 설정은 보존하지만 시험중 next_due_atNULL로 정규재개 대기다. 종료/동일설정/미해결없음 확인후 원래10월7일07:30만 재개한다. 전체5장 실제수신/CPU/자연대체·중복 실측은 대기다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -71,7 +71,9 @@
     "workerEvidenceCheckedAt": "2026-10-05T23:28:50.802Z",
     "workerEvidence": "2026-10-06-automation-revise-rollout.json#deployment",
     "newDeploymentInThisReconciliation": true,
-    "automationRuntimeSourceCommit": "c503210cdc60b4084fe5b5c1b423ae3aa0fbe11d"
+    "automationRuntimeSourceCommit": "c503210cdc60b4084fe5b5c1b423ae3aa0fbe11d",
+    "d1Migration": "0019_automation_verification_trials.sql",
+    "d1MigrationCount": 19
   },
   "cardArtifacts": {
     "enCardSourceCommit": "ad2e125f09f669cfd5420064d819112e6cd2bf3e",
@@ -1265,6 +1267,61 @@
     "candidateFiveCardLeadMinutes": 60,
     "productionFiveCardLeadMinutes": 45,
     "deploymentPerformed": false,
-    "mergePendingActualFiveCardReceipt": true
+    "mergePendingActualFiveCardReceipt": true,
+    "currentVerification": "Maintenance-only version27 new batch uses stored60-minute lead/55-minute preparation; public Site policy remains45 minutes."
+  },
+  "automationNowTrial": {
+    "record": "2026-10-06-automation-now-trial.json",
+    "status": "live_generation_started_validation_pending",
+    "trial": {
+      "day": "2026-10-06",
+      "kind": "trial",
+      "configVersion": 27,
+      "cards": 5,
+      "registeredAt": "2026-10-06T02:39:02.438Z",
+      "preparationKst": "2026-10-06 11:41",
+      "deadlineKst": "2026-10-06 12:36",
+      "dueKst": "2026-10-06 12:41",
+      "dueAt": 1791258060000,
+      "notBefore": 1791254460000,
+      "deadline": 1791257760000,
+      "leadMinutes": 60,
+      "usablePreparationMinutes": 55,
+      "serverFiveAcceptancesVerified": false,
+      "actualPhoneReceiptVerified": false,
+      "cpuVerified": false
+    },
+    "preservation": {
+      "priorTrialVersion": 24,
+      "previousHistoryUnchanged": true,
+      "usageUnchangedAtRegistration": true,
+      "originalSettingsSha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "originalDaily": {
+        "cards": 5,
+        "time": "07:30",
+        "end": "2027-10-31",
+        "nextDueAt": 1791325800000
+      },
+      "regularResumePending": true,
+      "currentVersion": 27,
+      "currentNextDueAt": null,
+      "dailySendBudget": 20,
+      "usedBeforeRegistration": 7,
+      "remainingBeforeRegistration": 13
+    },
+    "followup": {
+      "id": "en-card-5",
+      "status": "ACTIVE",
+      "atKst": "2026-10-06 12:51",
+      "afterResume": "Re-arm same automation for October7 07:50 read-only daily verification, expected version28; use new directory and resumed.json."
+    },
+    "actualStart": {
+      "observedAt": "2026-10-06T02:42:12.025Z",
+      "firstAiAt": "2026-10-06T02:41:16.838Z",
+      "firstCardStatus": "review",
+      "firstWritingSucceeded": true,
+      "serverAccepted": 0,
+      "scope": "First real AI draft completed; remaining generation, reviews, PNG, delivery and CPU are pending."
+    }
   }
 }
