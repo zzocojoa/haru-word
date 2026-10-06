@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "recordedAt": "2026-10-06T08:35:30.367Z",
-  "status": "five_server_acceptances_daily_resumed_phone_and_cpu_coverage_pending",
+  "status": "five_card_receipt_confirmed_cpu_coverage_pending",
   "latestPreparation": {
     "at": "2026-10-06T08:35:06.613Z",
     "cards": [
@@ -187,12 +187,12 @@
       "Latest Git checks and conflicts reviewed"
     ],
     "blockers": [
-      "Phone confirmation of all five images and original links pending",
-      "Delivery Worker CPU observation gaps remain after narrow requery"
-    ]
+      "Historical delivery preparation CPU observations remain unavailable after delayed, narrow and aggregate rechecks"
+    ],
+    "observationLimitAcceptance": "not_requested_yet"
   },
   "wholeGoalComplete": false,
-  "lastVerifiedAt": "2026-10-06T09:46:46.256Z",
+  "lastVerifiedAt": "2026-10-06T11:50:43.306Z",
   "result": {
     "checkedAt": "2026-10-06T09:46:46.256Z",
     "expectedCards": 5,
@@ -521,13 +521,46 @@
       "observedOrdinaryWorkerGroupsWithin10Ms": true,
       "verificationComplete": false,
       "completeCallCoverageVerified": false,
-      "note": "Highest returned group P99 is not the maximum of all calls. Narrow rechecks retained four empty delivery minute bins; those bins do not equal an exact missing-call count. DO CPU measured separately."
+      "note": "Highest returned group P99 is not the maximum of all calls. Narrow rechecks retained four empty delivery minute bins; those bins do not equal an exact missing-call count. DO CPU measured separately.",
+      "followup": {
+        "checkedAt": "2026-10-06T11:50:43.306Z",
+        "actualSendCallsCorrelated": 5,
+        "actualSendCpuMs": [
+          5.028,
+          3.707,
+          3.612,
+          3.638,
+          4.445
+        ],
+        "aiAttemptsCorrelated": 22,
+        "aggregate": {
+          "en-card": {
+            "groups": 71,
+            "requests": 71,
+            "maxObservedCpuMs": 5.882,
+            "errors": 0,
+            "allSampleIntervalOne": true
+          },
+          "en-card-delivery": {
+            "groups": 68,
+            "requests": 68,
+            "maxObservedCpuMs": 5.901,
+            "errors": 0,
+            "allSampleIntervalOne": true
+          }
+        },
+        "method": "Actual send and AI timestamps matched analytics at one-second resolution; no trace IDs. Separate max.cpuTime query confirmed observed CPU maxima and request totals.",
+        "historicalCoverageComplete": false,
+        "officialSource": "https://developers.cloudflare.com/workers/observability/metrics-and-analytics/"
+      }
     },
     "phone": {
-      "status": "pending_user_confirmation",
-      "confirmedCount": null,
-      "imagesAndOriginalLinksVerified": false,
-      "fiveCardReceiptVerified": false
+      "status": "confirmed_by_user",
+      "confirmedAt": "2026-10-06T11:46:34Z",
+      "confirmation": "5장 모두 정상 도착하였고 잘 열린다. 이후 작업 진행해라",
+      "confirmedCount": 5,
+      "imagesAndOriginalLinksVerified": true,
+      "fiveCardReceiptVerified": true
     },
     "usageAfter": {
       "day": "2026-10-06",
@@ -540,7 +573,7 @@
     "serverAcceptanceVerified": true,
     "currentVersionCpuObservedWithinBudget": true,
     "cpuVerificationComplete": false,
-    "phoneReceiptVerified": false,
+    "phoneReceiptVerified": true,
     "newCandidateSuccessfulSlots": [
       2
     ],
