@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T04:47:11.127Z",
+  "status": "five_card_trial_registered_pending_real_validation",
+  "authorization": "User requests earliest new five-card verification today, including CPU and phone images/original links, then merging both PRs without waiting until tomorrow.",
+  "target": {
+    "day": "2026-10-06",
+    "kind": "trial",
+    "settingsVersion": 30,
+    "cards": 5,
+    "dueAt": 1791265620000,
+    "dueKst": "2026-10-06T14:47",
+    "preparationAt": 1791262020000,
+    "preparationKst": "2026-10-06T13:47",
+    "deadline": 1791265320000,
+    "deadlineKst": "2026-10-06T14:42",
+    "preparationWindowMinutes": 55
+  },
+  "registration": {
+    "registeredAt": "2026-10-06T04:45:25.610Z",
+    "verified": true,
+    "settingsAndPreviousHistoryPreserved": true,
+    "usageUnchangedAtRegistration": true,
+    "previousTrialVersions": [
+      24,
+      27
+    ],
+    "newRunCount": 5
+  },
+  "originalDaily": {
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31",
+    "settingsVersion": 28,
+    "nextDueAt": 1791325800000,
+    "nextDueKst": "2026-10-07T07:30",
+    "settingsSha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8"
+  },
+  "currentSettings": {
+    "version": 30,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": null,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "workers": {
+    "en-card": {
+      "versions": [
+        {
+          "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+          "percentage": 100
+        }
+      ],
+      "crons": [
+        "* * * * *"
+      ]
+    },
+    "en-card-delivery": {
+      "versions": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "crons": []
+    },
+    "en-card-automation": {
+      "versions": [
+        {
+          "version_id": "941191a8-053e-44c9-ba0f-85b5bdc0e91f",
+          "percentage": 100
+        }
+      ],
+      "crons": []
+    }
+  },
+  "production": {
+    "migration": "0020_automation_quality_retry.sql",
+    "migrationCount": 20,
+    "siteVersion": 120,
+    "existingDeploymentUnchanged": true
+  },
+  "preflight": {
+    "activeCreation": 0,
+    "activeSchedules": 0,
+    "unresolved": 0,
+    "foreignKeyErrors": 0,
+    "sendAttemptsUsed": 11,
+    "sendAttemptsRemaining": 9,
+    "uploadsUsed": 12,
+    "historyRunRows": 15
+  },
+  "validation": {
+    "localResumeGuards": 15,
+    "localInterruptedRegistrationGuards": 14,
+    "syntaxChecks": "passed",
+    "deployedVersionsBindingsCronsMatch": true,
+    "observedBeforePreparationRuns": 5,
+    "serverAcceptanceVerified": false,
+    "cpuVerified": false,
+    "phoneReceiptVerified": false,
+    "qualityRetryObserved": false,
+    "providerFallbackObserved": false,
+    "naturalDuplicateObserved": false
+  },
+  "followup": {
+    "id": "en-card-5",
+    "atKst": "2026-10-06 14:57",
+    "status": "ACTIVE",
+    "replaces": "2026-10-07 07:50 regular check",
+    "directory": "backups/automation-quality-trial-20261006",
+    "scope": "Read current trial only; confirm CPU and phone receipt, guarded daily resume, then both PR merges"
+  },
+  "restoration": {
+    "pending": true,
+    "expectedTrialVersion": 30,
+    "expectedRestoredVersion": 31,
+    "originalDueAt": 1791325800000,
+    "guards": "Terminal trial, same saved settings hash/version, no active creation/schedule/pending/sending/unresolved work, connected Kakao, no quota/auth/config/storage failure; do not overwrite user changes or replenish partial failures"
+  },
+  "mergeGate": {
+    "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+    "authorizedAfter": "Five live acceptances, no unresolved deliveries, current-version CPU validation and user confirmation of all five images/original links; latest checks and conflict review",
+    "merged": false
+  },
+  "freeConfiguration": {
+    "unchanged": true,
+    "planBasis": "Prior user Workers Free and provider Free confirmation; no new paid resource or provider"
+  },
+  "operations": {
+    "newTrialBatches": 1,
+    "newRuns": 5,
+    "settingsPauseAndTrialVersionChanges": 2,
+    "regularSettingsContentChanged": false,
+    "deployments": 0,
+    "migrations": 0,
+    "historyResets": 0,
+    "directAiCallsFromTools": 0,
+    "directKakaoCallsFromTools": 0
+  },
+  "limitations": [
+    "Five successful cards and natural error/duplicate branches are not guaranteed",
+    "Original daily cursor is temporarily NULL during trial; guarded restoration is required",
+    "Earlier12:41 trial exact receipt/image/link confirmation and Oct5 user4/server3 discrepancy remain separate"
+  ],
+  "evidenceDirectory": "EN_Card/backups/automation-quality-trial-20261006 (Git ignored)"
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-06T04:31:38.989Z",
-  "note": "품질 추가 수정(최대2회·독립검토·AI24회 상한)과 새5장 시험60분 준비창을 D1 0020·DO 941191a8·Site v120에 배포했다. 기존 데이터18개 테이블·version28 매일07:30/5장·다음10월7일 설정을 보존했다. 실제5장 수신·제작CPU·자연 추가수정/대체/중복 실측 후 두PR 병합이 남아 있다.",
+  "recordedAt": "2026-10-06T04:47:11.127Z",
+  "note": "사용자 요청으로 내일을 기다리지 않고 품질 추가 수정 코드의 새 AI5장 시험을 오늘14:47에 등록했다. 제작13:47~14:42,version30·trial5개이며 기존 매일07:30/5장 설정과 이전 기록을 보존했다.14:57 서버/CPU 점검 및 실제 휴대전화5장 확인 후 두PR 병합, 조건부 정규 재개(version31)를 진행한다. 아직 시험 성공이나 수신 완료가 아니다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -1644,7 +1644,7 @@
     }
   },
   "qualityRetry": {
-    "status": "deployed_regular_five_card_validation_pending",
+    "status": "deployed_five_card_trial_pending",
     "evidence": "2026-10-06-automation-quality-rollout.json",
     "schemaCandidate": null,
     "source": {
@@ -1666,19 +1666,50 @@
     "evidence": "2026-10-06-automation-quality-rollout.json",
     "followup": {
       "id": "en-card-5",
+      "atKst": "2026-10-06 14:57",
       "status": "ACTIVE",
-      "atKst": "2026-10-07 07:50",
-      "expectedDaily": {
-        "day": "2026-10-07",
-        "cards": 5,
-        "configVersion": 28,
-        "dueAt": 1791325800000,
-        "preparationAt": 1791322200000,
-        "deadline": 1791325500000
-      },
-      "readOnly": true,
-      "toolDirectory": "backups/automation-quality-rollout-20261006",
-      "mergeGate": "Server5 plus no unresolved work, assess current-version CPU and user5 images/original links; then update and merge PR11/PR32. Natural branch nonoccurrence remains separate."
+      "replaces": "2026-10-07 07:50 regular check",
+      "directory": "backups/automation-quality-trial-20261006",
+      "scope": "Read current trial only; confirm CPU and phone receipt, guarded daily resume, then both PR merges",
+      "previousRegularCheckSuperseded": true
+    }
+  },
+  "qualityTrial": {
+    "status": "five_card_trial_registered_pending_real_validation",
+    "evidence": "2026-10-06-automation-quality-trial.json",
+    "target": {
+      "day": "2026-10-06",
+      "kind": "trial",
+      "settingsVersion": 30,
+      "cards": 5,
+      "dueAt": 1791265620000,
+      "dueKst": "2026-10-06T14:47",
+      "preparationAt": 1791262020000,
+      "preparationKst": "2026-10-06T13:47",
+      "deadline": 1791265320000,
+      "deadlineKst": "2026-10-06T14:42",
+      "preparationWindowMinutes": 55
+    },
+    "followup": {
+      "id": "en-card-5",
+      "atKst": "2026-10-06 14:57",
+      "status": "ACTIVE",
+      "replaces": "2026-10-07 07:50 regular check",
+      "directory": "backups/automation-quality-trial-20261006",
+      "scope": "Read current trial only; confirm CPU and phone receipt, guarded daily resume, then both PR merges"
+    },
+    "restoration": {
+      "pending": true,
+      "expectedTrialVersion": 30,
+      "expectedRestoredVersion": 31,
+      "originalDueAt": 1791325800000,
+      "guards": "Terminal trial, same saved settings hash/version, no active creation/schedule/pending/sending/unresolved work, connected Kakao, no quota/auth/config/storage failure; do not overwrite user changes or replenish partial failures"
+    },
+    "mergeGate": {
+      "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+      "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+      "authorizedAfter": "Five live acceptances, no unresolved deliveries, current-version CPU validation and user confirmation of all five images/original links; latest checks and conflict review",
+      "merged": false
     }
   }
 }
