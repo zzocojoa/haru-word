@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-06T04:36:19.362Z",
+  "status": "deployed_regular_five_card_validation_pending",
+  "authorization": "User approved encrypted backup, migration0020, compatible automation DO and existing Site publication, existing Oct7 daily verification, then both PR merges after verified receipt.",
+  "source": {
+    "enCardBranch": "codex/automation-revise-fallback",
+    "haruBranch": "codex/card-automation-revise-fallback",
+    "enPullRequest": "https://github.com/zzocojoa/EN_Card/pull/11",
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/32",
+    "reviewBase": "a6128e27d1e8ea675d599e7dcc3d337c7672d387",
+    "enCardCommit": "1e72eb00658618a0cf8da10073918d2d68b8b403",
+    "uiSourceSha256": "223256e3276ac1dff18279c316a611c38afde5831e7bdb9979e02345bb392f48",
+    "relaySourceSha256": "8add38baa25c57aecca0b0f86e9738ac75627a6e746e145a9329a43152234455",
+    "enCardDeploymentHead": "536eead",
+    "haruFeatureCommit": "70a5ffcec28f315dbab5ccc29eca6b6c7916e8d0",
+    "siteCommit": "3655cba43494a0d0521757c7371ab9b667cd436d",
+    "identicalSiteFeatureTree": "010bbb6e996ced1ee6afdce7a8d02f6627d5f761",
+    "siteHistoryPreserved": true
+  },
+  "policy": {
+    "maxCorrections": 2,
+    "maxContentRevision": 3,
+    "additionalCorrectionRequiresRemainingMsGreaterThan": 360000,
+    "additionalCorrectionMinimumRemainingCalls": 2,
+    "additionalCorrector": "Opposite provider from first corrected draft; transport failure fallback remains bounded",
+    "finalReviewer": "Always different from final writer; fresh review hash must match final content",
+    "perStageRevisionProviderAttempts": 3,
+    "totalReservedAiCallsPerRun": 24,
+    "allOutcomesCountTowardBudget": true,
+    "duplicatesLimitUnchanged": 3,
+    "existingDeadlinesAndImageWaitPreserved": true,
+    "revivesPastFailedSlots": false,
+    "createsFreshCandidatesForQualityFailure": false
+  },
+  "migration": {
+    "name": "0020_automation_quality_retry.sql",
+    "count": 20,
+    "canonicalStatements": 6,
+    "historyInsert": 1,
+    "atomicBatch": true,
+    "dataTablesPreserved": 18,
+    "foreignKeyErrors": 0,
+    "encryptedBackup": {
+      "restrictedAcl": true,
+      "ciphertextSha256": "046E9171CE3C2B4087016818D650E69169D375B2D5E54B8FF30423CFB6913FFE",
+      "createdAtUtc": "2026-10-06T04:23:22.0702874Z",
+      "sqlSha256": "DB4B8A5039480B920DE611759C4621B6946A3EA4816B63C39615D97CD41D8F70",
+      "bytes": 244854,
+      "encryption": "Windows DPAPI CurrentUser",
+      "roundTripVerified": true,
+      "plaintextRemoved": true
+    }
+  },
+  "deployment": {
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ],
+        "bindings": [
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "name": "ASSETS",
+            "type": "assets"
+          },
+          {
+            "class_name": "CardAutomation",
+            "name": "AUTOMATION",
+            "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+            "script_name": "en-card-automation",
+            "type": "durable_object_namespace"
+          },
+          {
+            "name": "CARD_IMAGES",
+            "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+            "type": "kv_namespace"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "environment": "production",
+            "name": "DELIVERY_SERVICE",
+            "service": "en-card-delivery",
+            "type": "service"
+          },
+          {
+            "type": "secret_text",
+            "name": "KAKAO_CLIENT_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "KAKAO_REST_API_KEY"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          },
+          {
+            "type": "secret_text",
+            "name": "SESSION_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "SETUP_TOKEN"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_BRIDGE_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_ORIGIN"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_OWNER_ID"
+          },
+          {
+            "type": "secret_text",
+            "name": "TOKEN_ENCRYPTION_KEY"
+          }
+        ]
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindings": [
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          }
+        ]
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "941191a8-053e-44c9-ba0f-85b5bdc0e91f",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindings": [
+          {
+            "name": "AI_FREE_CONFIRMED",
+            "text": "google_groq_free",
+            "type": "plain_text"
+          },
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "class_name": "CardAutomation",
+            "name": "AUTOMATION",
+            "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+            "type": "durable_object_namespace"
+          },
+          {
+            "name": "AUTOMATION_MODE",
+            "text": "live",
+            "type": "plain_text"
+          },
+          {
+            "name": "CARD_IMAGES",
+            "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+            "type": "kv_namespace"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "name": "FONT_ASSETS",
+            "type": "assets"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          }
+        ]
+      }
+    },
+    "bindingsAndCronsPreserved": true,
+    "mainOriginalVersionRestored": true,
+    "deliveryUnchanged": true,
+    "maintenanceEnded": true,
+    "site": {
+      "version": 120,
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_4ac91d126df08191b98710f314c133c5",
+      "deploymentId": "appgdep_6ac478f9ec9881918fd64dcafa8a8e30",
+      "status": "succeeded",
+      "sourceCommit": "3655cba43494a0d0521757c7371ab9b667cd436d",
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+      "envRevision": 59,
+      "accessRevision": 4,
+      "audience": "public",
+      "archive": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_0000000064e0820692a361acfee68abb",
+        "content_hash": "sha256:55191be16fd44c9c4647988bbb0f24622a265460e68c05cdf52bc46245b2edaf",
+        "size_bytes": 15503360,
+        "file_count": 316
+      }
+    }
+  },
+  "settings": {
+    "version": 28,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": 1791325800000,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "work": {
+    "runs": 0,
+    "schedules": 0,
+    "unresolved": 0,
+    "auto_pending": 0
+  },
+  "validation": {
+    "local": {
+      "localAutomation": "passed_after_fixture_clock_fix",
+      "haruIntegrationTestsPassed": 19,
+      "enTypecheck": "passed",
+      "enBuild": "passed; final error-reason fix additionally typechecked and DO dry-run passed",
+      "haruTypecheck": "passed",
+      "haruBuild": "passed",
+      "freeConfigurationDefaultAndLive": "passed",
+      "generatedUiFilesVerified": 129,
+      "generatedRelayFilesVerified": 2,
+      "generatedSourceAndRebuiltRelayMatch": true,
+      "realAiCalls": 0,
+      "realKakaoCalls": 0,
+      "realFiveCardReceipt": "not_verified",
+      "candidateRemoteCpu": "not_measured",
+      "uniqueLocalAutomationTestsPassed": 92,
+      "existingRegressionTestsPassed": 75,
+      "newQualityTestsPassed": 17,
+      "initialTestFailure": "Daily fixture incorrectly started from not_before=0 (1970); corrected to Math.max(NOW,not_before) and focused daily/trial tests passed",
+      "fiveCardFocusedTestsPassed": 2,
+      "fiveCardFocusedDurationSeconds": 53.39,
+      "browser": "not_repeated; only new reason string, no layout/interaction change"
+    },
+    "review": {
+      "scope": "Incremental code/migration/tests/docs since a6128e2",
+      "specialists": [
+        "testing",
+        "maintainability",
+        "security",
+        "data-migration"
+      ],
+      "independentAdversarialAndRedTeam": true,
+      "sameModelIndependentContexts": true,
+      "crossModelVerified": false,
+      "adversarialTestCoverage": "summary only",
+      "fixedFindings": [
+        "Give the second correction a unique fixture expression to exercise final review after render collision",
+        "Say AI budget insufficient, including the case with one call remaining",
+        "Keep final revision quality failure labeled review_failed even at the24-call boundary",
+        "Prevent synthetic daily test clock from rewinding from2026 to1970"
+      ],
+      "remainingCodeFindings": 0
+    },
+    "operationalScriptIndependentReview": "No findings; read-only review in separate same-model context",
+    "public": {
+      "at": "2026-10-06T04:29:51.264Z",
+      "sourceManifestSha256": "83e95b4f4a87d5a804ca4bd08553e42daebd70ad4aecaf16efb64acbb9992ec6",
+      "studioSourceSha256": "223256e3276ac1dff18279c316a611c38afde5831e7bdb9979e02345bb392f48",
+      "files": [
+        {
+          "path": "assets/index-Be_nFiv3.js",
+          "status": 200,
+          "sha256": "04ae2484e13c71a31936697d38f8b090e1e96200d615b3f7b3b77ee88b651b2b"
+        },
+        {
+          "path": "assets/index-Zet1kPl4.css",
+          "status": 200,
+          "sha256": "f308ea23c8c9ad0245e83b7feb9882e02abb1cf6e5c2a9e58805188afdbf2ac3"
+        },
+        {
+          "path": "fonts/LICENSE.txt",
+          "status": 200,
+          "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+        },
+        {
+          "path": "fonts/files/noto-sans-kr-0-wght-normal.woff2",
+          "status": 200,
+          "sha256": "3861da36d0eb54b3351f55d43c5ca91e732f0f2c6f8769ed475d3ec6fffdb4e5"
+        },
+        {
+          "path": "fonts/font.css",
+          "status": 200,
+          "sha256": "cb605fb4a6924db15d5e7f1beefe17a9e3cadbbba90c79e0f1a550d98417f212"
+        }
+      ],
+      "access": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/cards",
+          "status": 307
+        },
+        {
+          "path": "/api/state",
+          "status": 401
+        },
+        {
+          "path": "/api/card-studio/automation",
+          "status": 401
+        }
+      ],
+      "workerUnauthenticatedAutomationStatus": 401,
+      "authenticatedBrowserVerified": false,
+      "liveAiCalls": 0,
+      "kakaoCalls": 0
+    },
+    "beforePreparation": {
+      "observedRuns": 0,
+      "successfulFiveCardExecution": false
+    },
+    "idleCpu": {
+      "start": "2026-10-06T04:30:00Z",
+      "end": "2026-10-06T04:32:00Z",
+      "summary": {
+        "en-card": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-delivery": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-automation": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        }
+      },
+      "status": "not_observed_yet",
+      "note": "Empty adaptive analytics is no CPU evidence; not zero runtime errors or zero CPU.",
+      "requery": {
+        "at": "2026-10-06T04:35:19.701Z",
+        "sameWindow": true,
+        "groupsStillAbsent": true
+      }
+    },
+    "liveQualityRetryObserved": false,
+    "liveProviderFallbackObserved": false,
+    "liveNaturalDuplicateObserved": false,
+    "actualFiveCardReceiptVerified": false,
+    "newVersionGenerationCpuVerified": false,
+    "operationalVerifierReview": {
+      "fixed": "Removed opposite-provider success field that could count rejected duplicate responses; final successful slots require full review/PNG/live checks",
+      "remainingFindings": 0
+    }
+  },
+  "freeConfiguration": {
+    "result": "passed for exact live configurations",
+    "accountPlanBasis": "Prior user confirmation of Workers Free; subscriptions API returned403 again",
+    "apiPlanVerification": false,
+    "newPaidServices": 0,
+    "officialSources": [
+      "https://developers.cloudflare.com/workers/platform/pricing/",
+      "https://developers.cloudflare.com/durable-objects/platform/pricing/",
+      "https://developers.cloudflare.com/d1/platform/pricing/",
+      "https://developers.cloudflare.com/kv/platform/pricing/"
+    ]
+  },
+  "operations": {
+    "maintenanceDeployment": 1,
+    "automationDoDeployment": 1,
+    "mainRollback": 1,
+    "cronRestoration": 1,
+    "sitePublication": 1,
+    "enCardMigrations": 1,
+    "siteMigrations": 0,
+    "newTrials": 0,
+    "extraAiCalls": 0,
+    "kakaoCalls": 0,
+    "settingsChanges": 0,
+    "historyResets": 0,
+    "heartbeatUpdates": 1
+  },
+  "followup": {
+    "id": "en-card-5",
+    "status": "ACTIVE",
+    "atKst": "2026-10-07 07:50",
+    "expectedDaily": {
+      "day": "2026-10-07",
+      "cards": 5,
+      "configVersion": 28,
+      "dueAt": 1791325800000,
+      "preparationAt": 1791322200000,
+      "deadline": 1791325500000
+    },
+    "readOnly": true,
+    "toolDirectory": "backups/automation-quality-rollout-20261006",
+    "mergeGate": "Server5 plus no unresolved work, assess current-version CPU and user5 images/original links; then update and merge PR11/PR32. Natural branch nonoccurrence remains separate."
+  },
+  "tooling": {
+    "sourceHistory": "Publication merge preserves Site history with exact feature tree; no force push",
+    "firstPackage": "Failed because child commands resolved system Node; official helper succeeded with bundled Node and Git Bash at front of PATH",
+    "bindingObservation": "Script settings retained latest uploaded maintenance values after rollback. Actual deployed version resources.bindings matched original live settings; verifier now reads deployed version resources.",
+    "globalToolsChanged": false
+  },
+  "rollback": "Keep0020 schema and history; use compatible code. Do not restore revision1..2 constraint or run old fixed-revision2 correction code on pending additional corrections/revision3.",
+  "remaining": [
+    "Oct7 daily5 server acceptance and user5 image/original-link confirmation",
+    "Generation CPU for new current version, with missing analytics reported separately",
+    "Natural quality additional correction, provider fallback and duplicate regeneration only if they occur",
+    "PR11 and PR32 merge after real validation; existing braces security warning remains separate",
+    "Prior12:41 likely4 receipt not fully confirmed; Oct5 user4/server3 discrepancy unresolved"
+  ],
+  "evidenceDirectory": "EN_Card/backups/automation-quality-rollout-20261006 (Git ignored)"
+}
