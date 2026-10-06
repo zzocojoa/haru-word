@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-06T02:41:03.147Z",
-  "status": "live_generation_started_validation_pending",
+  "recordedAt": "2026-10-06T03:47:34.639Z",
+  "status": "partial_four_accepted_daily_resumed_receipt_confirmation_pending",
   "authorization": "User requested immediate verification in this thread; one additional new five-card batch, not a replay/refill of earlier runs.",
   "source": {
     "enCardBranch": "codex/automation-revise-fallback",
@@ -27,7 +27,8 @@
     "usablePreparationMinutes": 55,
     "serverFiveAcceptancesVerified": false,
     "actualPhoneReceiptVerified": false,
-    "cpuVerified": false
+    "cpuVerified": false,
+    "serverAcceptedCount": 4
   },
   "production": {
     "workers": {
@@ -85,9 +86,9 @@
       "end": "2027-10-31",
       "nextDueAt": 1791325800000
     },
-    "regularResumePending": true,
-    "currentVersion": 27,
-    "currentNextDueAt": null,
+    "regularResumePending": false,
+    "currentVersion": 28,
+    "currentNextDueAt": 1791325800000,
     "dailySendBudget": 20,
     "usedBeforeRegistration": 7,
     "remainingBeforeRegistration": 13
@@ -108,8 +109,10 @@
   "followup": {
     "id": "en-card-5",
     "status": "ACTIVE",
-    "atKst": "2026-10-06 12:51",
-    "afterResume": "Re-arm same automation for October7 07:50 read-only daily verification, expected version28; use new directory and resumed.json."
+    "atKst": "2026-10-07 07:50",
+    "inspectionKind": "daily",
+    "configVersion": 28,
+    "previousInspectionCompleted": "2026-10-06 12:44"
   },
   "recovery": {
     "normal": "After terminal trial and exact version/hash, no active/pending/inflight/unknown work and no quota/auth/config/storage interruption, resume original daily cursor only. Partial trial is not success.",
@@ -131,5 +134,311 @@
     "firstWritingSucceeded": true,
     "serverAccepted": 0,
     "scope": "First real AI draft completed; remaining generation, reviews, PNG, delivery and CPU are pending."
+  },
+  "result": {
+    "checkedAt": "2026-10-06T03:47:34.639Z",
+    "status": "partial_four_accepted_daily_resumed_receipt_confirmation_pending",
+    "expectedCards": 5,
+    "serverAccepted": 4,
+    "userReceipt": {
+      "reportedArrival": true,
+      "reportedLikelyCount": 4,
+      "countConfirmed": false,
+      "imagesAndOriginalLinksConfirmed": false,
+      "answer": "4장 도착한 것 같은데 영어 문장을 알려줘. 확인해보게",
+      "method": "User in this thread; four delivered English expressions shown for comparison. No definitive quantity/image/link confirmation yet."
+    },
+    "trialCards": [
+      {
+        "index": 1,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 53877,
+          "sha256": "3ba19086a3999d1c7ec124ff2f3e73afe6049ff4425ea7c11cf4d4e0ecf8ee36",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      },
+      {
+        "index": 2,
+        "status": "skipped",
+        "error": "review_failed",
+        "reviewVerified": false,
+        "uniqueExpression": true,
+        "png": null,
+        "liveAccepted": false,
+        "unresolved": 0,
+        "problems": [
+          "card_not_ready",
+          "review_not_verified",
+          "asset_not_ready",
+          "live_delivery_not_verified",
+          "schedule_not_completed",
+          "public_png_missing"
+        ]
+      },
+      {
+        "index": 3,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 55176,
+          "sha256": "f6d06922e35907ca3b14e9ef2767baa0ede862b43d28b059c9281f182a1e02e7",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      },
+      {
+        "index": 4,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 53182,
+          "sha256": "6278283e472e34d0b6ed1d87104998a728f0cf091c37cb307a0070390f775e94",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      },
+      {
+        "index": 5,
+        "status": "scheduled",
+        "error": null,
+        "reviewVerified": true,
+        "uniqueExpression": true,
+        "png": {
+          "status": 200,
+          "type": "image/png",
+          "bytes": 55430,
+          "sha256": "f26164ade32da4e53a044ad936df9c4263f0336d89267640f0d69a040deb990e",
+          "width": 1080,
+          "height": 1080
+        },
+        "liveAccepted": true,
+        "unresolved": 0,
+        "problems": []
+      }
+    ],
+    "excluded": {
+      "index": 2,
+      "error": "review_failed",
+      "revision": 2,
+      "markedAtKst": "2026-10-06 11:52:19.374",
+      "deadlineKst": "2026-10-06 12:36",
+      "finalReview": {
+        "natural": true,
+        "meaning": false,
+        "grammar": true,
+        "translation": false,
+        "level": true,
+        "comparison": true
+      },
+      "reviewFinding": "Reviewer judged the Korean meaning and example translation semantically inaccurate after one correction.",
+      "cause": "The current quality policy permits one correction. A failed revision2 review ends the slot without another correction or replacement, even while time remains.",
+      "notDeadlineFailure": true,
+      "kakaoCalls": 0
+    },
+    "ai": {
+      "attempts": 17,
+      "providerResponsesParsed": 16,
+      "providerFailures": 1,
+      "groups": {
+        "draft:google:ok:": 5,
+        "review:groq:ok:": 8,
+        "revise:google:ok:": 3,
+        "draft:google:unavailable:503": 1
+      },
+      "note": "Parsed review responses are provider successes, not necessarily quality passes."
+    },
+    "correctionFallback": {
+      "observed": false,
+      "slotsWithReplacementCalls": [],
+      "verifiedReplacementSlots": [],
+      "attemptGroups": [
+        {
+          "item_index": 1,
+          "revision": 1,
+          "provider": "google",
+          "attempts": 1,
+          "successes": 1,
+          "first_at": 1791254596704,
+          "last_at": 1791254596704
+        },
+        {
+          "item_index": 2,
+          "revision": 1,
+          "provider": "google",
+          "attempts": 1,
+          "successes": 1,
+          "first_at": 1791255076687,
+          "last_at": 1791255076687
+        },
+        {
+          "item_index": 5,
+          "revision": 1,
+          "provider": "google",
+          "attempts": 1,
+          "successes": 1,
+          "first_at": 1791256156690,
+          "last_at": 1791256156690
+        }
+      ]
+    },
+    "duplicateRegeneration": {
+      "observed": false,
+      "rejectedCandidates": 0,
+      "successfulReplacementSlots": []
+    },
+    "cpu": {
+      "start": "2026-10-06T02:40:16.838Z",
+      "end": "2026-10-06T03:44:20.573Z",
+      "rawUnit": "microseconds",
+      "summaryUnit": "milliseconds",
+      "summary": {
+        "en-card": {
+          "worker": {
+            "groups": 70,
+            "requests": 71,
+            "errors": 0,
+            "highestGroupP99Ms": 6.859,
+            "sampledGroups": 0,
+            "singleRequestGroups": 69
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-delivery": {
+          "worker": {
+            "groups": 69,
+            "requests": 69,
+            "errors": 0,
+            "highestGroupP99Ms": 3.418,
+            "sampledGroups": 0,
+            "singleRequestGroups": 69
+          },
+          "durable": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        },
+        "en-card-automation": {
+          "worker": {
+            "groups": 0,
+            "requests": 0,
+            "errors": 0,
+            "highestGroupP99Ms": null,
+            "sampledGroups": 0,
+            "singleRequestGroups": 0
+          },
+          "durable": {
+            "groups": 67,
+            "requests": 67,
+            "errors": 0,
+            "highestGroupP99Ms": 324.196,
+            "sampledGroups": 0,
+            "singleRequestGroups": 67
+          },
+          "unexpectedVersionGroups": 0,
+          "workerGroupsP99Over10Ms": 0
+        }
+      },
+      "missingFullMinutesUtc": [
+        "2026-10-06T02:58:00.000Z",
+        "2026-10-06T03:01:00.000Z"
+      ],
+      "gapRequery": {
+        "start": "2026-10-06T02:57:00Z",
+        "end": "2026-10-06T03:03:00Z",
+        "missingStillAbsent": true
+      },
+      "completeCallCoverageVerified": false,
+      "allFiveSuccessfulLoadVerified": false,
+      "note": "Group P99 is not the maximum of all invocations. Provider503 is separate from observed runtime errors."
+    },
+    "resumed": {
+      "at": "2026-10-06T03:44:19.735Z",
+      "applied": true,
+      "version": 28,
+      "savedSettingsUnchanged": true,
+      "dailyCards": 5,
+      "time": "07:30",
+      "nextDueKst": "2026-10-07T07:30",
+      "nextDueAt": 1791325800000,
+      "observedDaily": {
+        "day": "2026-10-07",
+        "cards": 5,
+        "configVersion": 28,
+        "dueAt": 1791325800000,
+        "preparationAt": 1791322200000,
+        "deadline": 1791325500000
+      },
+      "scope": "Restored original daily cursor only after terminal trial and no unresolved work; partial trial remains partial, no replacement sends."
+    },
+    "settingsReadback": {
+      "version": 28,
+      "enabled": 1,
+      "reason": null,
+      "next_due_at": 1791325800000,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "d1ResumePreservation": {
+      "tablesCompared": 19,
+      "nonSettingsTablesUnchanged": 18,
+      "historyAndUsagePreserved": true,
+      "foreignKeyErrors": 0
+    },
+    "inspectionActions": {
+      "deployments": 0,
+      "newTrials": 0,
+      "extraAiCalls": 0,
+      "resends": 0,
+      "historyResets": 0,
+      "regularResume": 1,
+      "heartbeatUpdates": 1
+    },
+    "remaining": [
+      "Exact phone quantity, all images and original links remain unconfirmed.",
+      "Five-card success is not achieved; the quality-rejection slot received no replacement.",
+      "Correction provider switching and natural duplicate regeneration did not occur.",
+      "Main Worker11:58/12:01 KST minute bins remain absent after narrow requery."
+    ]
   }
 }
