@@ -52,7 +52,7 @@
     "userPhoneReceipt": true
   },
   "evidenceDirectory": "EN_Card Git-ignored backups/card-date-trial-20261007/",
-  "nextAction": "Commit, push, and open both GitHub PRs; no merge requested. Site publication remains separately gated.",
+  "nextAction": "Review both PRs and current CI. No merge requested. Site v122 publication awaits explicit approval; do not repeat trial or resume.",
   "server": {
     "acceptedCards": 1,
     "acceptedAttempts": 1,
@@ -206,7 +206,9 @@
   "github": {
     "enCardCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
     "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/12",
-    "haruPullRequest": "pending_creation",
-    "merged": false
+    "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/33",
+    "merged": false,
+    "haruImplementationCommit": "6e8b666663bd2b8c5105d2907ec582af7e7c878c",
+    "status": "committed_pushed_pull_requests_open"
   }
 }
