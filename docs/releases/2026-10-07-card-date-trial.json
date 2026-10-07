@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-07T00:20:39.646Z",
+  "status": "verified_regular_resumed",
+  "scope": "One new ordinary product trial for date-stamp CPU/Kakao verification; not a fresh five-card capacity test.",
+  "day": "2026-10-07",
+  "kind": "trial",
+  "cards": 1,
+  "configVersion": 36,
+  "dueAt": 1791332040000,
+  "dueKst": "2026-10-07T09:14",
+  "notBefore": 1791331140000,
+  "deadline": 1791331740000,
+  "automationVersion": "7f17ec46-e0eb-40a8-988b-4aee9e111ce3",
+  "originalSettings": {
+    "version": 34,
+    "enabled": 1,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "nextDueAt": 1791412200000,
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "historyPreservedAtRegistration": true,
+  "resume": {
+    "status": "restored",
+    "requiredSettingsVersion": 36,
+    "nextVersion": 37,
+    "guardCases": 15,
+    "at": "2026-10-07T00:15:19.684Z",
+    "applied": true,
+    "version": 37,
+    "savedSettingsUnchanged": true,
+    "dailyCards": 5,
+    "time": "07:30",
+    "nextDueKst": "2026-10-08T07:30",
+    "nextDueAt": 1791412200000,
+    "observedDaily": {
+      "day": "2026-10-08",
+      "cards": 5,
+      "configVersion": 37,
+      "dueAt": 1791412200000,
+      "preparationAt": 1791408600000,
+      "deadline": 1791411900000
+    },
+    "scope": "Restored original daily cursor only after terminal trial and no unresolved work; partial trial remains partial, no replacement sends."
+  },
+  "validation": {
+    "serverAcceptance": true,
+    "exactDateImage": true,
+    "cpu": true,
+    "userPhoneReceipt": true
+  },
+  "evidenceDirectory": "EN_Card Git-ignored backups/card-date-trial-20261007/",
+  "nextAction": "Commit, push, and open both GitHub PRs; no merge requested. Site publication remains separately gated.",
+  "server": {
+    "acceptedCards": 1,
+    "acceptedAttempts": 1,
+    "unresolved": 0,
+    "aiAttempts": 2,
+    "renderAttempts": 1,
+    "firstAiAt": 1791331183778,
+    "lastSendAt": 1791332085569
+  },
+  "image": {
+    "date": "2026년 10월 07일",
+    "weekday": "수요일",
+    "time": "09:14",
+    "color": "#067647",
+    "bytes": 93223,
+    "width": 1080,
+    "height": 1080,
+    "sha256": "f8a722d8eee61d13d99e52b2793caaf5e53de20e14fd8f4896317ecc30ed0e7d",
+    "exactRenderedBytesMatch": true,
+    "originalPageHttpStatus": 200
+  },
+  "cpu": {
+    "start": "2026-10-06T23:58:43.778Z",
+    "end": "2026-10-07T00:16:45.569Z",
+    "verified": true,
+    "scope": "One date-stamped production card. AI/render/delivery have tail plus unsampled single-call analytics; complete expected Cron cadence is observed. Tail-only auxiliary calls retain integer-ms CPU and are reported explicitly. Not all future calls, five-card load, or an analytics-completeness claim.",
+    "matching": "Event timestamp at second precision and current version. Not a trace-ID join. Lower boundary floored to the GraphQL second.",
+    "workers": {
+      "en-card": {
+        "tailCalls": 24,
+        "analyticsCalls": 23,
+        "byKind": {
+          "cron": 19,
+          "other": 5
+        },
+        "tailMaxMs": 5,
+        "ordinaryWorkerObservedMaxMs": 5.967,
+        "highestGroupP99Ms": 5.967,
+        "errors": 0,
+        "sampledGroups": 0,
+        "mismatches": [
+          {
+            "at": "2026-10-07T00:03:01.000Z",
+            "tail": 1,
+            "analytics": 0
+          }
+        ],
+        "tailOnly": [
+          {
+            "at": "2026-10-07T00:03:01.000Z",
+            "tail": 1,
+            "analytics": 0,
+            "cpuMs": [
+              2
+            ]
+          }
+        ],
+        "parserStats": [
+          {
+            "buffer_discards": 0,
+            "discarded_characters": 0,
+            "invalid_json": 0,
+            "pending_characters": 0
+          }
+        ],
+        "invalidTailEvents": 0,
+        "earlyTailExits": 0
+      },
+      "en-card-delivery": {
+        "tailCalls": 20,
+        "analyticsCalls": 20,
+        "byKind": {
+          "delivery_prepare": 19,
+          "delivery_send": 1
+        },
+        "tailMaxMs": 4,
+        "ordinaryWorkerObservedMaxMs": 4.697,
+        "highestGroupP99Ms": 4.697,
+        "errors": 0,
+        "sampledGroups": 0,
+        "mismatches": [],
+        "tailOnly": [],
+        "parserStats": [
+          {
+            "buffer_discards": 0,
+            "discarded_characters": 0,
+            "invalid_json": 0,
+            "pending_characters": 0
+          }
+        ],
+        "invalidTailEvents": 0,
+        "earlyTailExits": 0
+      },
+      "en-card-automation": {
+        "tailCalls": 20,
+        "analyticsCalls": 20,
+        "byKind": {
+          "automation_tick": 19,
+          "other": 1
+        },
+        "tailMaxMs": 590,
+        "ordinaryWorkerObservedMaxMs": null,
+        "highestGroupP99Ms": 590.185,
+        "errors": 0,
+        "sampledGroups": 0,
+        "mismatches": [],
+        "tailOnly": [],
+        "parserStats": [
+          {
+            "buffer_discards": 0,
+            "discarded_characters": 0,
+            "invalid_json": 0,
+            "pending_characters": 0
+          }
+        ],
+        "invalidTailEvents": 0,
+        "earlyTailExits": 0
+      }
+    },
+    "render": {
+      "assetCreatedAt": 1791331305207,
+      "tailMatches": [
+        {
+          "at": 1791331303089,
+          "cpuMs": 590,
+          "wallMs": 2781
+        }
+      ]
+    },
+    "problems": []
+  },
+  "naturalBranches": {
+    "replacement": false,
+    "additionalCorrection": false,
+    "correctionFallback": false,
+    "duplicate": false
+  },
+  "phoneConfirmation": {
+    "at": "2026-10-07T00:17:01.183Z",
+    "source": "User reply in this thread",
+    "confirmed": true,
+    "configVersion": 36,
+    "dueAt": 1791332040000,
+    "cards": 1,
+    "date": true,
+    "weekdayColor": true,
+    "image": true,
+    "originalLink": true,
+    "answer": "날짜·요일색·이미지·원본 링크 모두 정상"
+  },
+  "github": {
+    "enCardCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
+    "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/12",
+    "haruPullRequest": "pending_creation",
+    "merged": false
+  }
+}
