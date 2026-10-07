@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1573 |
-| 제작자 품질 검수 통과 `approved` | 1546 |
+| 제작된 서로 다른 항목 | 1583 |
+| 제작자 품질 검수 통과 `approved` | 1556 |
 | 품질·의미·조건 보류 `held` | 28 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,234 |
+| 제작 대기 `waiting` | 2,224 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1653 |
+| 실제 내장 도구 호출 | 1663 |
 | 그중 품질 수정 호출 | 79 |
 
-이미지 미생성 항목은 제작 대기 2,234개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,236개다. 제작된 1573개는 검수 통과 1546개와 이미지가 있는 보류 27개이며, 수정본 포함 PNG는 1652개다. 실제 호출 1653회에는 이미지가 반환된 1652회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,224개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,226개다. 제작된 1583개는 검수 통과 1556개와 이미지가 있는 보류 27개이며, 수정본 포함 PNG는 1662개다. 실제 호출 1663회에는 이미지가 반환된 1662회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -186,6 +186,7 @@
 | 추가 156 | invitation 명사, invite/involve 동사, item 명사, itself 대명사, jam/jazz/jewelry 명사, joke 명사/동사 | 10개 첫 시도 검수 통과·10회 호출·수정/새 보류/실패 없음. 초대장/초대 행동·업무와 이동·물건 선택·문 두 상태·딸기잼·재즈 청취·귀고리 2/목걸이·농담 반응을 원본/320px에서 확인. 펜던트 반사의 읽기 전용 확대 근거·기본 원본/실제 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 | 추가 157 | journalist 명사, jump 동사/명사, kid 명사, kill 동사, kilometer/king/knee/knife 명사, knock 동사 | 10개 최종 검수 통과·11회 호출·kilometer 의미 결함 1회 수정·새 보류/실패 없음. 취재/도약/아이·끓는 물과 세균 3개씩·먼 마을까지 경로·왕/무릎/칼/노크를 원본/320px 대조. kid 지퍼 읽기 전용 확대·거리 v1 보류/두 원본·실제 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 | 추가 158 | knowledge/lab/lady/lake/lamp 명사, land 동사, laptop 명사, last1 (final) 부사/명사, last1 (taking time) 동사 | 10개 첫 시도 검수 통과·10회 호출·수정/새 보류/실패 없음. 잎 3개/지식 적용·실험실/시험관 3개·여성/호수/램프·주 바퀴 접촉과 앞바퀴 공중·무지 노트북·위 2명/아래 3명의 입장·빈 의자 3개/유일한 출발자·모래 변화에도 공연 지속을 원본/320px 대조. 기수 타원의 읽기 전용 확대/실제 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
+| 추가 159 | later 형용사, laughter/law/lawyer 명사, lazy 형용사, lead1 동사, leader/learning 명사, least 한정사/대명사 | 10개 첫 시도 검수 통과·10회 호출·수정/새 보류/실패 없음. 이후 열차/옆방 웃음·법 체계/사건 준비·일을 시작하지 않는 아이·선두 악대/듣는 조정자·그림 카드 연습·계획/표 각 3장과 동전 6/3/1개를 원본/320px 대조. 정확한 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -2902,6 +2903,16 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 - 근거는 Cambridge knowledge·lab·lady·lake·land·last의 부사/명사/지속 동사와 FAA 착지 설명의 공식 검색으로 반환된 설명에서 읽었다. 직접 열기는 하지 않았으며 직접 전체 페이지 본문이나 항공 PDF 전체를 읽었다고 주장하지 않는다. 사전 예문에 등장한 의료 조언은 사용하지 않았다. 실제 URL·뜻·읽은 범위/한계는 `work/oxford-batch-158-source-evidence.json`에 저장했다.
 - 원본 10개/정확한 실제 프롬프트/참고 이미지 경로는 `work/oxford-batch-158-originals.json`, 최종 원본/320px 판정은 `work/oxford-batch-158-reviews.json`, 기준/최신 검증은 `work/oxford-batch-158-meta.json`에 보존했다. 수정 목록은 `work/oxford-batch-158-corrections.json`의 빈 배열이며 읽기 전용 확대 목록은 `work/oxford-batch-158-diagnostics.json`이다. 기본 생성 위치의 원본/기존 v1·v2도 유지한다.
 - `node scripts/verify-oxford-images.cjs <이번 10ID>`의 PNG 디코딩/320px/해시·교재 지문 검사, `node scripts/check-oxford-image-resume.cjs`의 19개 격리 재개 검사(`work/oxford-resume-check-T9z8Np`, 실제 이미지/API 호출 0), 관련 3개 관리 스크립트의 `node --check`가 각각 종료 코드 0으로 통과했다. `work/oxford-batch-158-invariants.cjs`로 이번 10개/기존 3799개·PNG 1652개 해시/크기·3809개 지문·기존 보류 28개/두 조건 보류/code 실패·교열 후보 12개/원장/정확한 문서 갱신/다음 순서를 최종 대조한다. 앱 코드/운영/DB/기록/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않는다. 검수 통과는 제작자 판단으로 독립 학습자의 효과 인증이 아니다.
+
+### 추가 159 · 2026-10-08
+
+- 최신 10개 검증 보고서는 `work/oxford-images-verification-1791409813078.json`이다(checkedAt 2026-10-07T21:50:13.078Z; 파일명 시각과 checkedAt 일치). 실제 내장 호출/반환 원본 10개가 모두 첫 시도 검수 통과했다. 수정/새 보류/실패·자동 재시도/별도 이미지 API 호출은 없다.
+- `later`의 이전 열차를 보내고 이후 열차에 승차하는 두 순간·`laughter`의 옆방 웃는 2명/밖 청취자 1명·`law`의 무지 책/저울 접시 2개·`lawyer`의 낮은 법정 테이블에서 사건 준비하는 2명을 원본/320px에서 확인했다. 법원 배경의 실제 기둥 5개는 프롬프트 4개와 다르지만 의미상 필수 수량은 아니다. `lazy`는 깨어 누운 아이와 성인의 정리 지시/빈 바구니·블록 3개를 통해 작은 일을 시작하지 않는 맥락이다.
+- `lead1`은 오른쪽 선두 악대 2명/북 1개·트럼펫 1개와 뒤따르는 2명의 같은 방향, `leader`는 팀 3명·중앙의 듣는 조정자/나무 조각 4개, `learning`은 성인 2명의 배/컵 그림 카드 연습과 빈 노트를 확인했다. `least` 한정사는 계획 3장에 필요한 돈, 대명사는 표 3장 중 최소 비용 대상을 집는 관계다. 두 원본/실제 320px 모두 동전을 왼쪽 6(2줄×3)·중앙 3·오른쪽 1개로 직접 세었다. 글자 금지를 유지했다.
+- 정지 삽화는 실제 소리·성격/건강/의도·지혜/직책·변호사 자격/신원·준법/공정성·군 부대/음악·언어/15분 경과·정확한 운임/화폐/실제 주택 설계·기차 운행/구문을 인증하지 않는다. `lazy`의 kid는 교재가 지정한 맥락이며 필요한 휴식 자체를 게으름으로 판단하지 않는다.
+- 의미 근거는 Cambridge [later](https://dictionary.cambridge.org/dictionary/english/later), [law](https://dictionary.cambridge.org/dictionary/english/law), [lawyer](https://dictionary.cambridge.org/dictionary/english/lawyer), [lazy](https://dictionary.cambridge.org/dictionary/english/lazy?q=laziest), [lead](https://dictionary.cambridge.org/dictionary/english/lead), [least](https://dictionary.cambridge.org/dictionary/english/least)의 검색으로 반환된 설명·품사/관련 예문을 읽었다. 직접 전체 페이지 본문이나 PDF 전체를 읽었다고 표시하지 않는다. 확인 범위/한계는 `work/oxford-batch-159-source-evidence.json`, 실제 전달 프롬프트/기본 생성 원본 경로는 `work/oxford-batch-159-originals.json`, 장면/검수 메모는 같은 접두사의 scenes/reviews JSON에 보존했다.
+- `node scripts/verify-oxford-images.cjs <이번 10ID>`의 PNG 디코딩/320px/해시·교재 지문 검사, `node scripts/check-oxford-image-resume.cjs`의 19개 격리 재개 검사(`work/oxford-resume-check-lV9YO9`, 실제 이미지/API 호출 0), 관련 3개 관리 스크립트의 `node --check`가 각각 종료 코드 0으로 통과했다. `work/oxford-batch-159-invariants.cjs`로 이번 10개/기존 3799개·PNG 1662개 해시/크기·3809개 지문·기존 보류 28개/두 조건 보류/code 실패·교열 후보 12개/원장/정확한 문서 갱신/다음 순서를 대조한다. 앱 코드/운영/DB/기록/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않는다. 검수 통과는 제작자 판단으로 독립 학습자의 효과 인증이 아니다.
+
 실제 iPhone, 독립 학습자의 뜻 추론·학습 효과, 이미지 호스팅·전송 성능은 미검증이다. 앱 코드를 변경하지 않아 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다. 관리 스크립트의 Node 구문 검사·재개 보호 검사와 이미지 검증을 수행했다. 운영 사이트·학습 기록·DB·백업·API·예약은 변경하지 않았다.
 
 ## 정적 장면 준비 092 당시 기록
@@ -2928,7 +2939,7 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 항목은 A2 `later` 형용사·`laughter`/`law`/`lawyer` 명사·`lazy` 형용사·`lead1` 동사·`leader`/`learning` 명사·`least` 한정사/대명사다. A2 총 990/검수 통과 484/보류 11/대기 494/실패 1이며, 전체 미생성 2,236개(대기 2,234+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1652개·실제 호출 1653회·수정 79회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 제작 대기 항목은 A2 `least` 부사·`lecture` 명사/동사·`lemon` 명사·`lend` 동사·`less` 한정사/대명사/부사·`level`/`lifestyle` 명사다. A2 총 990/검수 통과 494/보류 11/대기 484/실패 1이며, 전체 미생성 2,226개(대기 2,224+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1662개·실제 호출 1663회·수정 79회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
