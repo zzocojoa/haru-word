@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1593 |
-| 제작자 품질 검수 통과 `approved` | 1564 |
+| 제작된 서로 다른 항목 | 1603 |
+| 제작자 품질 검수 통과 `approved` | 1574 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,214 |
+| 제작 대기 `waiting` | 2,204 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1675 |
-| 그중 품질 수정 호출 | 81 |
+| 실제 내장 도구 호출 | 1687 |
+| 그중 품질 수정 호출 | 83 |
 
-이미지 미생성 항목은 제작 대기 2,214개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,216개다. 제작된 1593개는 검수 통과 1564개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1674개다. 실제 호출 1675회에는 이미지가 반환된 1674회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,204개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,206개다. 제작된 1603개는 검수 통과 1574개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1686개다. 실제 호출 1687회에는 이미지가 반환된 1686회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -188,6 +188,7 @@
 | 추가 158 | knowledge/lab/lady/lake/lamp 명사, land 동사, laptop 명사, last1 (final) 부사/명사, last1 (taking time) 동사 | 10개 첫 시도 검수 통과·10회 호출·수정/새 보류/실패 없음. 잎 3개/지식 적용·실험실/시험관 3개·여성/호수/램프·주 바퀴 접촉과 앞바퀴 공중·무지 노트북·위 2명/아래 3명의 입장·빈 의자 3개/유일한 출발자·모래 변화에도 공연 지속을 원본/320px 대조. 기수 타원의 읽기 전용 확대/실제 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 | 추가 159 | later 형용사, laughter/law/lawyer 명사, lazy 형용사, lead1 동사, leader/learning 명사, least 한정사/대명사 | 10개 첫 시도 검수 통과·10회 호출·수정/새 보류/실패 없음. 이후 열차/옆방 웃음·법 체계/사건 준비·일을 시작하지 않는 아이·선두 악대/듣는 조정자·그림 카드 연습·계획/표 각 3장과 동전 6/3/1개를 원본/320px 대조. 정확한 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 | 추가 160 | least 부사, lecture 명사/동사, lemon 명사, lend 동사, less 한정사/대명사/부사, level/lifestyle 명사 | 8개 검수 통과·lend/less 한정사 2개 품질 보류. 첫 생성 10회+표식 제거 수정 2회. 숙소 카드/동전 6/3/1개·강의 행사/행위·레몬/반쪽·대여/반환·설탕/커피 양/단맛 정도·초급 과제/일상 습관을 원본/320px 대조. 지폐 인장/프레임과 손잡이 문자형 흔적이 한 번 수정 후에도 남아 보류. v1/v2·읽기 전용 확대/정확한 프롬프트·원본 12개/기존 보류 28개/두 조건 보류·교열 후보 12개/글자 금지/교재 해시 유지 |
+| 추가 161 | lift/light 동사, likely 형용사, link 명사/동사, listener 명사, little 부사, lock 동사/명사, look 명사 | 10개 검수 통과·첫 생성 10회+수정 2회·새 보류/실패 없음. 상자/점화·삼각 구멍 위 사각 선택·페이지 연결/행위·청자/작은 위험 정도·잠그기/잠금장치·바라보기를 원본/320px 대조. likely의 맞는 사각 구멍과 lock 명사의 자유 모서리 추가 부품을 각각 한 번 수정. v1 보류/v2·원본 12개/정확한 프롬프트·기존 보류 30개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -2925,6 +2926,20 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 - 의미 근거는 Cambridge [least](https://dictionary.cambridge.org/dictionary/english/least), [lecture](https://dictionary.cambridge.org/dictionary/english/lecture), [lend](https://dictionary.cambridge.org/us/dictionary/english/lend), [less](https://dictionary.cambridge.org/dictionary/english/less), [level](https://dictionary.cambridge.org/dictionary/english/level), [lifestyle](https://dictionary.cambridge.org/dictionary/english/lifestyle)의 검색으로 반환된 설명·품사/관련 예문을 읽었다. 직접 전체 페이지 본문이나 PDF 전체를 읽었다고 표시하지 않는다. 확인 범위/한계는 `work/oxford-batch-160-source-evidence.json`, 실제 전달 프롬프트/기본 생성 원본 경로는 `work/oxford-batch-160-originals.json`, 장면/검수는 scenes/reviews JSON에 보존했다.
 - `node scripts/verify-oxford-images.cjs <이번 10ID>`의 PNG 디코딩/320px/해시·교재 지문 검사, `node scripts/check-oxford-image-resume.cjs`의 19개 격리 재개 검사(`work/oxford-resume-check-likXsg`, 실제 이미지/API 호출 0), 관련 3개 관리 스크립트의 `node --check`가 각각 종료 코드 0으로 통과했다. `work/oxford-batch-160-invariants.cjs`로 이번 10개/기존 3799개·PNG 1674개 해시/크기·3809개 지문·기존 보류 28개/두 조건 보류/code 실패·교열 후보 12개/원장/정확한 문서 갱신/다음 순서를 대조한다. 앱 코드/운영/DB/기록/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않는다. 검수 통과는 제작자 판단으로 독립 학습자의 효과 인증이 아니다.
 
+
+### 추가 161 · 2026-10-08
+
+- 최신 10개 검증 보고서는 `work/oxford-images-verification-1791413163837.json`이다(checkedAt 2026-10-07T22:46:03.837Z; 파일명 시각과 checkedAt 일치). 내장 도구 첫 생성 10회·수정 2회로 원본 12개를 반환했고 최신 10개가 검수 통과했다. 새 보류/실패·자동 재시도/별도 이미지 API 호출은 없다.
+- `lift`는 성인 2명의 무지 상자 1개/밑면-바닥 간격·손 연결/네 발, `light`는 성냥/양초/촛대 각 1개·심지 옆 불꽃/배경 램프를 확인했다. 불꽃은 분리 표식이 아니며 light의 점화 동사와 빛/가벼운 뜻을 구분한다. 상자 질량/안전한 자세·최초 점화 시각/화재 안전을 인증하지 않는다.
+- `likely` 첫 후보는 사각 조각이 맞는 사각 구멍 위에 있어 실수 가능성의 단서가 부족했다. 한 번 수정한 v2의 사각 구멍 제거·삼각 구멍 1개/아직 떨어진 사각 조각 1개·별도 삼각 조각 1개/성인 2명·주의 분산을 원본/320px에서 확인했다. 팔/손 자세도 자연스럽게 조정돼 픽셀상 같은 포즈라고 쓰지 않는다. 맞지 않는 선택의 임박 맥락이며 실수 완료/필연적 결과·정확한 확률/실제 예측 성능을 인증하지 않는다.
+- `link` 명사는 페이지 도식 2개/작은-큰 호수 그림·파란 연결선 1개, 동사는 두 손/카드 2개/파란 띠 1개로 연결하는 행위다. 명사 도식 아래 회색 연속 막대 왼쪽 3개/오른쪽 2개가 추가됐으나 실제 글자/URL/조작 버튼은 아니다. 동사 두 풍경은 나무 좌우가 달라 정확히 같은 이미지라고 하지 않는다. 물리 도식은 인터넷 문서 연결의 연상이며 실제 웹 구현/클릭/저장 성공·개인 데이터를 인증하지 않는다.
+- `listener`는 왼쪽 청자의 닫힌 입/상대 쪽 눈·쉬는 손과 오른쪽 성인의 대화 손짓을 확인했다. 청자는 요청한 큰 앞쪽 인물이 아니고 발화자의 입도 측면에서 가려져 실제 말을 단정하지 않는다. `little`은 평지의 같은 성인 두 순간·평평한 돌/조금 들린 모서리·가까워지는 발로 a little dangerous의 작은 정도를 연상한다. 요청한 별도 관찰자는 없고 오른쪽 본인의 균형 손짓이 보인다. 사람 크기/돌 수량/특정 Tom의 성격을 뜻한다고 전달하지 않는다.
+- `lock` 동사는 닫힌 문/자유 모서리의 레버 1개·잠금 원판/삽입 열쇠 1개·잡는 손, 명사는 손 없는 장치/별도 열쇠 1개를 대조했다. 명사 첫 후보의 같은 자유 모서리 경첩형 돌출부/긴 나사판을 한 번 제거했고 v2의 연속 나무 면/문틀 경계와 기존 레버/잠금 원판/열쇠를 원본/320px에서 확인했다. `look`는 성인 2명·가방 1개/제시자의 연결된 끈/관찰자 눈의 방향으로 take a look의 바라보기 사건을 확인했다.
+- 두 v1 보류 근거는 `work/oxford-images-verification-1791412970180.json`이다(checkedAt 2026-10-07T22:42:50.179Z; 파일명 생성 시각은 1ms 뒤). 첫 보류/수정 프롬프트·v1/v2와 각 320px은 `work/oxford-batch-161-meta.json`과 같은 접두사의 corrections JSON에 연결했다. 기본 생성 원본 경로/실제 전달 프롬프트는 `work/oxford-batch-161-originals.json`, 장면/검수는 scenes/reviews JSON에 보존했다. 추가 확대나 세 번째 호출은 하지 않았다.
+- 정지 삽화는 실제 소리/청력/주의·공감/대화 능력·개인 의도/신원·사고 위험 확률/높이·보이지 않는 빗장/보안 성능·새 열쇠/호환/제조사 규격·실제 소유/저장 성공·시선 시간/이해/가방 질량·문법 형태를 인증하지 않는다. 기능/추상 뜻은 해당 교재와 함께 읽는 연상 단서로 검토했다.
+- 의미 근거는 Cambridge [light](https://dictionary.cambridge.org/dictionary/english/light), [likely](https://dictionary.cambridge.org/dictionary/english/likely), [link](https://dictionary.cambridge.org/dictionary/english/link?q=link_3), [little](https://dictionary.cambridge.org/dictionary/english/little), [lock](https://dictionary.cambridge.org/dictionary/english/lock), [take a look](https://dictionary.cambridge.org/dictionary/english/take-a-look)의 검색으로 반환된 설명·품사/관련 예문을 읽었다. 직접 전체 페이지 본문이나 PDF 전체를 읽었다고 표시하지 않는다. 확인 범위/한계는 `work/oxford-batch-161-source-evidence.json`에 보존했다.
+- `node scripts/verify-oxford-images.cjs <이번 10ID>`의 PNG 디코딩/320px/해시·교재 지문 검사, `node scripts/check-oxford-image-resume.cjs`의 19개 격리 재개 검사(`work/oxford-resume-check-35tP6a`, 실제 이미지/API 호출 0), 관련 3개 관리 스크립트의 `node --check`가 각각 종료 코드 0으로 통과했다. `work/oxford-batch-161-invariants.cjs`로 이번 10개/기존 3799개·PNG 1686개 해시/크기·3809개 지문·기존 보류 30개/두 조건 보류/code 실패·교열 후보 12개/원장/정확한 문서 갱신/다음 순서를 대조한다. 앱 코드/운영/DB/기록/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않는다. 검수 통과는 제작자 판단으로 독립 학습자의 효과 인증이 아니다.
+
 실제 iPhone, 독립 학습자의 뜻 추론·학습 효과, 이미지 호스팅·전송 성능은 미검증이다. 앱 코드를 변경하지 않아 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다. 관리 스크립트의 Node 구문 검사·재개 보호 검사와 이미지 검증을 수행했다. 운영 사이트·학습 기록·DB·백업·API·예약은 변경하지 않았다.
 
 ## 정적 장면 준비 092 당시 기록
@@ -2951,7 +2966,7 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 항목은 A2 `lift`/`light (from the sun/a lamp)` 동사·`likely` 형용사·`link` 명사/동사·`listener` 명사·`little` 부사·`lock` 동사/명사·`look` 명사다. A2 총 990/검수 통과 502/보류 13/대기 474/실패 1이며, 전체 미생성 2,216개(대기 2,214+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1674개·실제 호출 1675회·수정 81회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 제작 대기 항목은 A2 `lost`/`loud` 형용사·`loud`/`loudly` 부사·`low` 형용사/부사·`luck` 명사·`lucky` 형용사·`mail` 명사/동사다. A2 총 990/검수 통과 512/보류 13/대기 464/실패 1이며, 전체 미생성 2,206개(대기 2,204+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1686개·실제 호출 1687회·수정 83회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
