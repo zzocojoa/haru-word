@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-06T23:23:23.627Z",
-  "status": "local_verified_uncommitted_not_deployed",
+  "recordedAt": "2026-10-07T01:16:20.196Z",
+  "status": "published_verified_pull_requests_open",
   "branch": "codex/card-date-time",
   "bases": {
     "en": "aea0d4c8e411823d09b7f079b927ca591a3de475",
@@ -35,14 +35,14 @@
     "builds": 2,
     "workerDryRuns": 3,
     "freeConfiguration": true,
-    "remoteCpu": false,
-    "actualPhoneReceipt": false
+    "remoteCpu": true,
+    "actualPhoneReceipt": true
   },
-  "deploymentPerformed": false,
+  "deploymentPerformed": true,
   "migrationRequired": false,
-  "productionSettingsChanged": false,
-  "actualAiCalls": 0,
-  "actualSends": 0,
+  "productionSettingsChanged": true,
+  "actualAiCalls": 2,
+  "actualSends": 1,
   "beforeRefactorValidation": {
     "recordedAt": "2026-10-06T15:03:51.960Z",
     "vitest": 86,
@@ -67,5 +67,10 @@
     "referenceSourceManifestVersion": 2,
     "historicalEvidenceUnchanged": true,
     "newGstackReviewPerformed": false
-  }
+  },
+  "deploymentEvidence": "2026-10-07-card-date-rollout.json",
+  "trialEvidence": "2026-10-07-card-date-trial.json",
+  "settingsChangeScope": "Temporary one-card trial lifecycle only; preserved daily 07:30/five-card settings restored as version37 for 2026-10-08.",
+  "sourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
+  "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/12"
 }
