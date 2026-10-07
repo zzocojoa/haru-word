@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1583 |
-| 제작자 품질 검수 통과 `approved` | 1556 |
-| 품질·의미·조건 보류 `held` | 28 |
+| 제작된 서로 다른 항목 | 1593 |
+| 제작자 품질 검수 통과 `approved` | 1564 |
+| 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,224 |
+| 제작 대기 `waiting` | 2,214 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1663 |
-| 그중 품질 수정 호출 | 79 |
+| 실제 내장 도구 호출 | 1675 |
+| 그중 품질 수정 호출 | 81 |
 
-이미지 미생성 항목은 제작 대기 2,224개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,226개다. 제작된 1583개는 검수 통과 1556개와 이미지가 있는 보류 27개이며, 수정본 포함 PNG는 1662개다. 실제 호출 1663회에는 이미지가 반환된 1662회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,214개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,216개다. 제작된 1593개는 검수 통과 1564개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1674개다. 실제 호출 1675회에는 이미지가 반환된 1674회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -187,6 +187,7 @@
 | 추가 157 | journalist 명사, jump 동사/명사, kid 명사, kill 동사, kilometer/king/knee/knife 명사, knock 동사 | 10개 최종 검수 통과·11회 호출·kilometer 의미 결함 1회 수정·새 보류/실패 없음. 취재/도약/아이·끓는 물과 세균 3개씩·먼 마을까지 경로·왕/무릎/칼/노크를 원본/320px 대조. kid 지퍼 읽기 전용 확대·거리 v1 보류/두 원본·실제 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 | 추가 158 | knowledge/lab/lady/lake/lamp 명사, land 동사, laptop 명사, last1 (final) 부사/명사, last1 (taking time) 동사 | 10개 첫 시도 검수 통과·10회 호출·수정/새 보류/실패 없음. 잎 3개/지식 적용·실험실/시험관 3개·여성/호수/램프·주 바퀴 접촉과 앞바퀴 공중·무지 노트북·위 2명/아래 3명의 입장·빈 의자 3개/유일한 출발자·모래 변화에도 공연 지속을 원본/320px 대조. 기수 타원의 읽기 전용 확대/실제 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
 | 추가 159 | later 형용사, laughter/law/lawyer 명사, lazy 형용사, lead1 동사, leader/learning 명사, least 한정사/대명사 | 10개 첫 시도 검수 통과·10회 호출·수정/새 보류/실패 없음. 이후 열차/옆방 웃음·법 체계/사건 준비·일을 시작하지 않는 아이·선두 악대/듣는 조정자·그림 카드 연습·계획/표 각 3장과 동전 6/3/1개를 원본/320px 대조. 정확한 프롬프트·기존 보류 28개/두 조건 보류·교열 후보 12개·글자 금지/교재 해시 유지 |
+| 추가 160 | least 부사, lecture 명사/동사, lemon 명사, lend 동사, less 한정사/대명사/부사, level/lifestyle 명사 | 8개 검수 통과·lend/less 한정사 2개 품질 보류. 첫 생성 10회+표식 제거 수정 2회. 숙소 카드/동전 6/3/1개·강의 행사/행위·레몬/반쪽·대여/반환·설탕/커피 양/단맛 정도·초급 과제/일상 습관을 원본/320px 대조. 지폐 인장/프레임과 손잡이 문자형 흔적이 한 번 수정 후에도 남아 보류. v1/v2·읽기 전용 확대/정확한 프롬프트·원본 12개/기존 보류 28개/두 조건 보류·교열 후보 12개/글자 금지/교재 해시 유지 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -2913,6 +2914,17 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 - 의미 근거는 Cambridge [later](https://dictionary.cambridge.org/dictionary/english/later), [law](https://dictionary.cambridge.org/dictionary/english/law), [lawyer](https://dictionary.cambridge.org/dictionary/english/lawyer), [lazy](https://dictionary.cambridge.org/dictionary/english/lazy?q=laziest), [lead](https://dictionary.cambridge.org/dictionary/english/lead), [least](https://dictionary.cambridge.org/dictionary/english/least)의 검색으로 반환된 설명·품사/관련 예문을 읽었다. 직접 전체 페이지 본문이나 PDF 전체를 읽었다고 표시하지 않는다. 확인 범위/한계는 `work/oxford-batch-159-source-evidence.json`, 실제 전달 프롬프트/기본 생성 원본 경로는 `work/oxford-batch-159-originals.json`, 장면/검수 메모는 같은 접두사의 scenes/reviews JSON에 보존했다.
 - `node scripts/verify-oxford-images.cjs <이번 10ID>`의 PNG 디코딩/320px/해시·교재 지문 검사, `node scripts/check-oxford-image-resume.cjs`의 19개 격리 재개 검사(`work/oxford-resume-check-lV9YO9`, 실제 이미지/API 호출 0), 관련 3개 관리 스크립트의 `node --check`가 각각 종료 코드 0으로 통과했다. `work/oxford-batch-159-invariants.cjs`로 이번 10개/기존 3799개·PNG 1662개 해시/크기·3809개 지문·기존 보류 28개/두 조건 보류/code 실패·교열 후보 12개/원장/정확한 문서 갱신/다음 순서를 대조한다. 앱 코드/운영/DB/기록/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않는다. 검수 통과는 제작자 판단으로 독립 학습자의 효과 인증이 아니다.
 
+
+### 추가 160 · 2026-10-08
+
+- 최신 10개 검증 보고서는 `work/oxford-images-verification-1791411836428.json`이다(checkedAt 2026-10-07T22:23:56.428Z; 파일명 시각과 checkedAt 일치). 내장 도구 첫 생성 10회·표식 제거 수정 2회로 원본 12개를 반환했으며 8개 검수 통과·2개 품질 보류다. 자동 재시도/별도 이미지 API 호출·새 실패는 없다.
+- `least` 부사는 숙소 카드 3장과 무지 동전 왼쪽 6(2줄×3)/중앙 3/오른쪽 1개·최소 비용 지시를 확인했다. `lecture` 명사는 강연자 1명/청중 4명의 행사, 동사는 강연자 1명/청자 2명/건물 그림을 가리키는 설명 행위다. `lemon`은 레몬 1개/절단 반쪽 1개·흰 속껍질/방사형 과육을 원본/320px 대조했다.
+- `lend`는 위 왼쪽→오른쪽 대여·아래 오른쪽→왼쪽 반환/각 지폐 2장으로 빌려주는 관계를 연상한다. 지폐의 원형 인장과 사각 프레임을 한 번 제거 요청했으나 v2 읽기 전용 확대에서 옅은 흔적이 남아 무지 면 조건 미충족으로 보류한다. `less` 한정사는 앞 숟가락의 큰 설탕 더미/반죽 위 숟가락의 적은 양을 확인했으나 손잡이의 흐린 문자형 각인이 한 번 수정 후 같은 영역 확대에 남아 글자 금지 충족을 확인할 수 없어 보류한다. 정확한 문자를 판독했다고 쓰지 않는다. 두 v1 보류 근거는 `work/oxford-images-verification-1791411320428.json`(checkedAt 2026-10-07T22:15:20.428Z), 시도별 검수/수정 프롬프트·읽기 전용 확대 3개는 `work/oxford-batch-160-meta.json`과 같은 접두사의 corrections/diagnostics JSON에 연결했다. v1/v2·각 원본/320px을 보존하고 세 번째 호출은 하지 않는다.
+- `less` 대명사는 같은 성인/컵의 커피 높은 양→낮은 양으로 문맥상 생략된 양을 연결한다. 부사는 비슷한 분량의 케이크 2개/두꺼운 코팅 대비 얇은 코팅·지시/시식으로 단맛 정도를 연상한다. 코팅이 실제 당도를 입증하지 않는다. `level`은 같은 높이의 책 3권에서 원 1개/도형 4개/바깥 꽃형 8개의 과제 복잡도와 기본 원 연습을 확인했다. `lifestyle`은 같은 성인의 공원 걷기/채소 준비·실제 당근 2개의 일상 습관이며 프롬프트의 당근 1개와 다른 수량은 뜻을 정하는 조건이 아니다.
+- 정지 삽화는 실제 호텔/마을 전체 가격·역사 지식/발화/두 시·대학 신원·신선도/식품 안전·돈 액수/만 엔/계약/거래 이력·동일 숟가락 용량/무게·실제 커피 섭취 이력/단맛/영양·초급 능력 평가·개인 건강 효과/식단 적합성·구문을 인증하지 않는다. 기능/추상 단어는 해당 교재 뜻과 함께 보는 연상 단서로 관리한다.
+- 의미 근거는 Cambridge [least](https://dictionary.cambridge.org/dictionary/english/least), [lecture](https://dictionary.cambridge.org/dictionary/english/lecture), [lend](https://dictionary.cambridge.org/us/dictionary/english/lend), [less](https://dictionary.cambridge.org/dictionary/english/less), [level](https://dictionary.cambridge.org/dictionary/english/level), [lifestyle](https://dictionary.cambridge.org/dictionary/english/lifestyle)의 검색으로 반환된 설명·품사/관련 예문을 읽었다. 직접 전체 페이지 본문이나 PDF 전체를 읽었다고 표시하지 않는다. 확인 범위/한계는 `work/oxford-batch-160-source-evidence.json`, 실제 전달 프롬프트/기본 생성 원본 경로는 `work/oxford-batch-160-originals.json`, 장면/검수는 scenes/reviews JSON에 보존했다.
+- `node scripts/verify-oxford-images.cjs <이번 10ID>`의 PNG 디코딩/320px/해시·교재 지문 검사, `node scripts/check-oxford-image-resume.cjs`의 19개 격리 재개 검사(`work/oxford-resume-check-likXsg`, 실제 이미지/API 호출 0), 관련 3개 관리 스크립트의 `node --check`가 각각 종료 코드 0으로 통과했다. `work/oxford-batch-160-invariants.cjs`로 이번 10개/기존 3799개·PNG 1674개 해시/크기·3809개 지문·기존 보류 28개/두 조건 보류/code 실패·교열 후보 12개/원장/정확한 문서 갱신/다음 순서를 대조한다. 앱 코드/운영/DB/기록/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않는다. 검수 통과는 제작자 판단으로 독립 학습자의 효과 인증이 아니다.
+
 실제 iPhone, 독립 학습자의 뜻 추론·학습 효과, 이미지 호스팅·전송 성능은 미검증이다. 앱 코드를 변경하지 않아 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다. 관리 스크립트의 Node 구문 검사·재개 보호 검사와 이미지 검증을 수행했다. 운영 사이트·학습 기록·DB·백업·API·예약은 변경하지 않았다.
 
 ## 정적 장면 준비 092 당시 기록
@@ -2939,7 +2951,7 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 항목은 A2 `least` 부사·`lecture` 명사/동사·`lemon` 명사·`lend` 동사·`less` 한정사/대명사/부사·`level`/`lifestyle` 명사다. A2 총 990/검수 통과 494/보류 11/대기 484/실패 1이며, 전체 미생성 2,226개(대기 2,224+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1662개·실제 호출 1663회·수정 79회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 제작 대기 항목은 A2 `lift`/`light (from the sun/a lamp)` 동사·`likely` 형용사·`link` 명사/동사·`listener` 명사·`little` 부사·`lock` 동사/명사·`look` 명사다. A2 총 990/검수 통과 502/보류 13/대기 474/실패 1이며, 전체 미생성 2,216개(대기 2,214+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1674개·실제 호출 1675회·수정 81회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
