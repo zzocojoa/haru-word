@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-07T00:20:39.646Z",
-  "status": "verified_regular_resumed",
+  "recordedAt": "2026-10-07T01:16:20.196Z",
+  "status": "published_verified_pull_requests_open",
   "branch": "codex/card-date-time",
   "bases": {
     "en": "aea0d4c8e411823d09b7f079b927ca591a3de475",

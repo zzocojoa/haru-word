@@ -52,7 +52,7 @@
     "userPhoneReceipt": true
   },
   "evidenceDirectory": "EN_Card Git-ignored backups/card-date-trial-20261007/",
-  "nextAction": "Review both PRs and current CI. No merge requested. Site v122 publication awaits explicit approval; do not repeat trial or resume.",
+  "nextAction": "Review EN_Card PR12 and Haru PR33. Site v122 publication is complete. No merge requested; do not repeat trial or resume.",
   "server": {
     "acceptedCards": 1,
     "acceptedAttempts": 1,

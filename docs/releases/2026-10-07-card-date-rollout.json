@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-07T00:20:39.646Z",
-  "status": "automation_deployed_site_saved_not_published",
+  "recordedAt": "2026-10-07T01:16:20.196Z",
+  "status": "automation_and_site_published_verified",
   "authorization": "User goal: fastest real new-image CPU/Kakao verification, then GitHub commit/push/PR.",
   "branch": "codex/card-date-time",
   "sourceBase": "aea0d4c8e411823d09b7f079b927ca591a3de475",
@@ -217,17 +217,102 @@
   },
   "freeConfiguration": "live configuration passed; prior explicit user Workers Free confirmation retained; current subscription API denied with 403",
   "site": {
-    "currentPublishedVersion": 121,
+    "currentPublishedVersion": 122,
     "savedVersion": 122,
     "sourceCommit": "0e88f1fc12bb61f68e0286941c91e7477283d81f",
-    "publicationStatus": "awaiting_explicit_user_approval_after_auto_review_rejection",
-    "approvalReason": "Auto-review interpreted authorization as refactoring/local verification and rejected public production publication. No bypass attempted.",
+    "publicationStatus": "succeeded",
     "envRevision": 59,
-    "accessRevision": 4
+    "accessRevision": 4,
+    "previousPublication": {
+      "version": 121,
+      "status": "awaiting_explicit_user_approval_after_auto_review_rejection",
+      "reason": "Auto-review interpreted authorization as refactoring/local verification and rejected public production publication. No bypass attempted."
+    },
+    "authorization": "Explicit user approval: 하루단어 v122 공개 운영 게시 승인",
+    "deploymentId": "appgdep_6ac59ced6c388191a3d465345b9bbbe4",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_ca54f1240a3081919fa387d6596c038d",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "publishedAt": "2026-10-07T01:14:41.950251+00:00"
   },
   "risk": "New PNG header uses the fixed original run due time. Existing images remain immutable; manual rescheduling does not restamp them.",
-  "rollback": "Restore the previous 0021-compatible automation version 0edb3eb3-52ae-4800-b7ae-9ff21530e599; do not rewrite created images or history. Site v121 remains published.",
+  "rollback": "Restore the previous 0021-compatible automation version 0edb3eb3-52ae-4800-b7ae-9ff21530e599 and Site v121 if needed; do not rewrite created images or history.",
   "evidenceDirectory": "EN_Card Git-ignored backups/card-date-rollout-20261007/",
   "trialEvidence": "2026-10-07-card-date-trial.json",
-  "runtimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf"
+  "runtimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
+  "siteVerification": {
+    "publicManifestAndFiles": {
+      "at": "2026-10-07T01:15:21.222Z",
+      "sourceManifestSha256": "280554be9a1a1871dc301f483995f31f54d0cd5dabf26ff726da7c27f864d053",
+      "studioSourceSha256": "3679faefe7bae23fb674220e2e5c2186459151091e6d6f3d503cfb08db6e2adc",
+      "files": [
+        {
+          "path": "assets/index-DFNOcx9a.js",
+          "status": 200,
+          "sha256": "384fac46fc098d40c2be4f739dcc85660bb6f8af2d3b60e911a8512fcc974f96"
+        },
+        {
+          "path": "assets/index-k5vvvb-e.css",
+          "status": 200,
+          "sha256": "bcbd4de622b139c3cb063f8a28780db948a961704f09be28f2e49fe16c1f4f76"
+        },
+        {
+          "path": "fonts/LICENSE.txt",
+          "status": 200,
+          "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+        },
+        {
+          "path": "fonts/files/noto-sans-kr-0-wght-normal.woff2",
+          "status": 200,
+          "sha256": "3861da36d0eb54b3351f55d43c5ca91e732f0f2c6f8769ed475d3ec6fffdb4e5"
+        },
+        {
+          "path": "fonts/font.css",
+          "status": 200,
+          "sha256": "cb605fb4a6924db15d5e7f1beefe17a9e3cadbbba90c79e0f1a550d98417f212"
+        }
+      ],
+      "access": [
+        {
+          "path": "/",
+          "status": 200
+        },
+        {
+          "path": "/cards",
+          "status": 307
+        },
+        {
+          "path": "/api/state",
+          "status": 401
+        },
+        {
+          "path": "/api/card-studio/automation",
+          "status": 401
+        }
+      ],
+      "workerUnauthenticatedAutomationStatus": 401,
+      "authenticatedBrowserVerified": false,
+      "liveAiCalls": 0,
+      "kakaoCalls": 0
+    },
+    "configPreserved": {
+      "envRevision": 59,
+      "entryCount": 12,
+      "environmentPreserved": true,
+      "accessMode": "public",
+      "accessRevision": 4,
+      "accessPolicyPreserved": true
+    },
+    "settingsAndTablesPreserved": {
+      "settingsVersion": 37,
+      "dailyCards": 5,
+      "time": "07:30",
+      "nextDueAt": 1791412200000,
+      "dataTables": 19,
+      "foreignKeyErrors": 0,
+      "workerBindingsAndCron": true
+    },
+    "newAiCalls": 0,
+    "newKakaoCalls": 0,
+    "authenticatedBrowserVerified": false
+  }
 }
