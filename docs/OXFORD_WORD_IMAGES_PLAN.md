@@ -3,7 +3,7 @@
 ## 문서 저장 정보
 
 - 작성일: 2026-10-05 (Asia/Seoul)
-- 상태: 사용자의 동일 방식·스타일 유지 지시에 따라 전체 순차 제작 진행 중. 현재 1143개 항목 제작, 제작 검수 통과 1126개·보류 18개(보류 중 1개는 이미지 미생성). 화면 구현·운영 배포는 후속 범위다. 최신 상태는 [진행 기록](OXFORD_WORD_IMAGES_PROGRESS.md)을 따른다.
+- 상태: 사용자의 동일 방식·스타일 유지 지시에 따라 전체 순차 제작 진행 중. 현재 1153개 항목 제작, 제작 검수 통과 1136개·보류 18개(보류 중 1개는 이미지 미생성). 화면 구현·운영 배포는 후속 범위다. 최신 상태는 [진행 기록](OXFORD_WORD_IMAGES_PROGRESS.md)을 따른다.
 - 작업 브랜치: `codex/oxford-word-images`
 - 분기 기준: GitHub `main@85a2fbae41819f260840b6e3e7091f25cb6cb1d5`
 - 작업 위치: 기존 카드 자동화 작업과 분리한 관리형 Git worktree. 기존 작업 폴더와 브랜치는 유지한다.
@@ -76,7 +76,7 @@
 
 - 사용자 지시 **“지금과 같은 생성 방식을 유지하여 나머지도 진행해라.”**에 따라 시범 스타일과 내장 도구를 유지하여 나머지 제작을 시작했다. 전체 목표는 계속 3,809개다.
 - 이 지시는 개별 이미지의 영어 의미까지 일괄 승인한 것으로 해석하지 않는다. 연결 목록의 `approved`는 원본·320px 화면을 대조한 **제작자 품질 검수 통과** 상태다. 독립 학습자 평가·사용자의 항목별 의미 승인과 구분한다.
-- 추가 1123개 항목을 제작했다. 현재 누적 1143개 항목·1197회 실제 호출이며, 54회는 `activity`·`about` 부사·`record` 명사·`boring`·`capital` 명사·`change` 동사·`close` 동사·`club`·`company`·`complete` 동사·`detail`·`DVD`·`email` 명사·`ever`·`exciting`·`fast` 부사·`few` 대명사·`friendly`·`goodbye` 감탄사·`keep` 동사·`match` 명사·`message` 명사·`million` 수사·`music` 명사·`neighborhood` 명사·`next` 형용사·`office` 명사·`OK` 형용사·`our` 한정사·`player` 명사·`probably` 부사·`quarter` 명사·`return` 동사·`road` 명사·`school` 명사·`shop` 명사·`shopping` 명사·`smart` 형용사·`song` 명사·`south` 부사·`stop` 명사·`tennis`·`thing` 명사·`thousand` 수사·`through` 부사·`too` 부사·`traffic` 명사·`uncle` 명사·`watch` 동사·`website` 명사·`yes` 감탄사·`advantage` 명사·`ankle` 명사·`anymore` 부사의 결함 수정이다. 모든 시도별 원본은 보존했다.
+- 추가 1133개 항목을 제작했다. 현재 누적 1153개 항목·1207회 실제 호출이며, 54회는 `activity`·`about` 부사·`record` 명사·`boring`·`capital` 명사·`change` 동사·`close` 동사·`club`·`company`·`complete` 동사·`detail`·`DVD`·`email` 명사·`ever`·`exciting`·`fast` 부사·`few` 대명사·`friendly`·`goodbye` 감탄사·`keep` 동사·`match` 명사·`message` 명사·`million` 수사·`music` 명사·`neighborhood` 명사·`next` 형용사·`office` 명사·`OK` 형용사·`our` 한정사·`player` 명사·`probably` 부사·`quarter` 명사·`return` 동사·`road` 명사·`school` 명사·`shop` 명사·`shopping` 명사·`smart` 형용사·`song` 명사·`south` 부사·`stop` 명사·`tennis`·`thing` 명사·`thousand` 수사·`through` 부사·`too` 부사·`traffic` 명사·`uncle` 명사·`watch` 동사·`website` 명사·`yes` 감탄사·`advantage` 명사·`ankle` 명사·`anymore` 부사의 결함 수정이다. 모든 시도별 원본은 보존했다.
 - `record` 명사는 이전 거리와 새 착지를 비교하도록 보완했다. `about` 부사는 한 번 수정 후에도 의미 전달이 약해 `held`로 남긴다. 해결된 것으로 표시하거나 추가 호출하지 않는다.
 - `company`는 모니터 하단의 상표형 표식을 한 번 제거하려 했으나 v2에도 남아 글자·로고 금지 조건 미충족으로 보류했다. 두 시도 모두 보존하고 세 번째 호출은 하지 않는다. `complete` 동사는 마지막 조각과 빈자리의 외곽선을 맞춰 v2를 검수 통과했다.
 - `exciting`의 프리즘 실험은 한 번 수정 후에도 빨강 띠가 출사면에서 위로 향하는 부분이 남아 의미 적합성을 보류했다. 원본·수정본·320px 검수 근거를 보존하고 세 번째 호출은 하지 않는다. 이 보류도 전체 완료에 필요한 미완료 범위다.
@@ -144,4 +144,5 @@
 - 추가 112는 A2 `along` 부사·`already`·`alternative`·`although`·`among`·`amount`·`analyze`·`ancient`·`ankle`·`any` 부사 10개를 총 11회 실제 내장 호출로 제작했다. 9개는 첫 시도 검수를 통과했고 ankle은 신발의 문자/제조사 표식 유사 윤곽을 한 번 제거하려 했으나 v2에도 남아 최종 품질 보류다. 기본 생성 원본 11개/실제 프롬프트·각 원본/320px와 첫 보류·두 확대 진단을 보존했고 세 번째 호출은 하지 않는다. alternative 동전 1+3개/although 실제 1+4개, among 머그 4개·amount 각 3개/총 6막대·analyze 3막대와 가슴 앞 돋보기·ancient 3기둥을 실제대로 기록한다. 기능어는 교재와 함께 확인하는 연상 단서다. 기존 보류 17개/두 조건 보류·글자 금지/교재 해시·교열 후보 12개를 유지하며 새 교열 후보는 없다.
 - 추가 113는 A2 `anybody`·`anymore`·`anyway`·`anywhere` 부사/대명사·`app`·`appear`·`appearance`·`apply`·`architect` 10개를 총 11회 실제 내장 호출로 제작해 모두 검수를 통과했다. 9개는 첫 시도이고 anymore의 윗공 옆 괄호 유사 곡선 두 개만 한 번 제거한 v2를 확인했다. v1/v2·첫 보류/수정 지시·기본 생성 원본 11개/실제 프롬프트·각 원본/320px를 보존했다. anybody 인물 셋/빈 종이 한 장·anywhere 부사 의자 셋/대명사 벤치 둘·app 그림 타일 여섯·appear 빈 창/새 하나·appearance 한 사람/반사 하나·apply 인물 둘/빈 종이 한 장·architect 도면/자/모형 각 하나와 실제 연필 셋을 확인했다. 기능어는 교재와 함께 쓰는 단서이며 실제 도움/허가/건강/내면/신원/기만/채용/전문 자격/문법을 인증하지 않는다. 기존 보류 18개/두 조건 보류·글자 금지/교재 해시·교열 후보 12개를 유지하며 새 교열 후보/새 최종 보류는 없다.
 - 추가 114는 A2 `architecture`·`argue`·`argument`·`army`·`arrange`·`arrangement`·`as` 부사/접속사·`asleep`·`assistant` 명사 10개를 총 10회 실제 내장 호출로 제작했고 모두 첫 시도 검수를 통과했다. 기본 생성 원본 10개/실제 프롬프트·각 원본/320px를 보존했다. 앞 기둥 넷/동전 셋·산/해변 논쟁/군악대 인물 셋·악기 셋·실제 6열×4행 무표기 달력·말린 천 넷/여행 자료·수평 저울/가방 둘·걷기와 대화/아기 잠든 상태·폴더 전달/정리 도움을 교재와 연결한다. 기능어는 교재와 함께 쓰는 단서이고 실제 금액/군종/날짜/합의/예약/무게값/발화/건강/신원/고용/문법을 인증하지 않는다. 기존 보류 18개/두 조건 보류·글자 금지/교재 해시·교열 후보 12개를 유지하며 새 교열 후보/수정 호출/새 최종 보류는 없다.
+- 추가 115는 A2 `assistant` 형용사·`athlete`·`attack` 명사/동사·`attend`·`attention` 명사/감탄사·`attractive`·`audience`·`author` 10개를 총 10회 실제 내장 호출로 제작했고 모두 첫 시도 검수를 통과했다. 기본 원본 10개/실제 프롬프트·각 원본/320px를 보존했다. 상점의 보조 역할/트랙 옆 운동선수·웹 공격 사건과 조작 행동/회의 합류·시연 집중과 주목 요청/호감 인상·관객 다섯 명/원고 집필을 교재와 연결한다. 실제 직급/부상 진단/사이버 침입/악의/출석/발화/이해도/지능/신원/저작권/문법을 인증하지 않는다. 기존 보류 18개/두 조건 보류·글자 금지/교재 해시·교열 후보 12개를 유지하며 새 교열 후보/수정 호출/새 최종 보류는 없다.
 - 단계별 검수·저장 위치·중단 보호·재개 명령은 [진행 기록](OXFORD_WORD_IMAGES_PROGRESS.md)에 정리한다. 이 단계에서는 앱·운영 사이트·학습 기록을 변경하지 않는다.
