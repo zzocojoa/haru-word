@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1834 |
-| 제작자 품질 검수 통과 `approved` | 1805 |
-| 품질·의미·조건 보류 `held` | 30 |
+| 제작된 서로 다른 항목 | 1844 |
+| 제작자 품질 검수 통과 `approved` | 1814 |
+| 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,972 |
+| 제작 대기 `waiting` | 1,962 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 1927 |
-| 그중 품질 수정 호출 | 91 |
+| 실제 내장 도구 호출 | 1938 |
+| 그중 품질 수정 호출 | 92 |
 
-이미지 미생성 항목은 제작 대기 1,972개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,975개다. 제작된 1834개는 검수 통과 1805개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1925개다. 실제 호출 1927회에는 이미지가 반환된 1925회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,962개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,965개다. 제작된 1844개는 검수 통과 1814개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1936개다. 실제 호출 1938회에는 이미지가 반환된 1936회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -213,6 +213,7 @@
 | 추가 183 | review 동사, ride 명사, ring 반지 명사·울리다 동사, rise 동사, rock 바위·록 음악 명사, role 명사, roof 명사, round 형용사 | 10개 검수 통과. 원본·개별 320px 각 12장 확인. rock 기타 필기 표식·role 기둥 숫자 유사 표시를 각 한 번 수정, v1/v2 보존 |
 | 추가 184 | round 부사·전치사, route 명사 호출 실패 | 이미지 2개 검수 통과·새 실패 1개. 원본/개별 320px 각 2장 확인. 총 호출 3회, route HTTP 408 무이미지 실패·재시도 없음, 미호출 7개 대기 복구 |
 | 추가 185 | rude 형용사, run/runner/running 명사, sadly 부사, safe 형용사, sail 동사, sailing/salary/sale 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 이번 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 186 | sauce, save, scared, scary, scene, schedule, score 동사/명사, screen, sea | 9개 첫 시도 검수 통과·schedule 1개 수정 후 보류. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 서비스 실패 0, v1/v2 보존·세 번째 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3438,9 +3439,27 @@ A2 `rude` 형용사, `run`/`runner`/`running` 명사, `sadly` 부사, `safe` 형
 
 근거 접두사는 `work/oxford-batch-185-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 sauce이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 186 제작·검수
+
+A2 `sauce`, `save`, `scared`, `scary`, `scene`, `schedule`, `score` 동사/명사, `screen`, `sea` 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본/수정본 11장과 개별 320px 화면 11장을 실제 열어 검토했다. 9개 첫 시도 검수 통과, schedule은 한 번 수정 후에도 보류다. 이번 호출 11회·품질 수정 1회·신규 보류 1개·신규 서비스 실패 0이며 별도 이미지 API·자동 재시도는 없다.
+
+공식 Cambridge의 [sauce 음식 소스](https://dictionary.cambridge.org/us/dictionary/english/sauce), [save 낭비 방지](https://dictionary.cambridge.org/us/dictionary/english/save), [scared 겁먹은](https://dictionary.cambridge.org/us/dictionary/english/scared), [scary 무서움을 주는](https://dictionary.cambridge.org/us/dictionary/english/scary), [scene 사건 장소](https://dictionary.cambridge.org/us/dictionary/english/scene), [schedule 계획한 일과 시간](https://dictionary.cambridge.org/us/dictionary/english/schedule), [score 득점/시험의 점수](https://dictionary.cambridge.org/us/dictionary/english/score), [screen 화면](https://dictionary.cambridge.org/dictionary/english/screen), [sea 바다](https://dictionary.cambridge.org/us/dictionary/english/sea)의 실제 반환 정의 부분을 읽고 ID/품사/기본 뜻·표현·예문을 대조했다. screen의 미국 경로 직접 열기는 HTTP 403이었으며 공식 일반 영어 페이지 검색의 American Dictionary PICTURE 부분을 추가로 읽었다. 403 페이지를 성공적으로 열었다고 표시하지 않는다. 사전 수준으로 교재 A2를 바꾸지 않으며 전체 사전/말뭉치·오디오·Oxford PDF·Tatoeba 원문을 새로 검수한 것은 아니다.
+
+음식에 붓는 토마토소스, 같은 조명 켜짐→스위치 누르기/꺼짐, 질문을 망설이는 걱정 표정, 무서운 책 그림→편안한 결말, 파손 차량/볼라드가 있는 현장, 네 업무와 시계의 종이 일정표, 공이 골대 안에 있는 득점, 그림 과제 뒤 적은 실물 점수 카운터, 태블릿의 넓은 그림 화면, 해안과 넓은 바닷물의 수영 문맥을 구분했다. score 명사의 두 줄/줄마다 다섯 홈 중 한 카운터는 깊이가 있는 실물 나무판이며 O/숫자/등급 표시로 해석하지 않는다.
+
+schedule v1 책 그림 면에는 반복 글줄 유사 선이 생겼고 위 두 시계에는 바늘 하나만 뚜렷했다. 특정 글자를 판독한 것으로 단정하지 않는다. 책 면의 선 제거와 각 시계의 두 바늘 구분을 한 차례 요청했다. v2의 책은 빈 면이고 첫 시계는 두 바늘로 바뀌었지만 둘째 시계는 여전히 하나만 보인다. 원본·수정본과 두 320px 화면에서 직접 확인해 `held`로 남기며 세 번째 호출하지 않는다. 프롬프트/참조/결함과 첫 보류 검수를 보존한다. 구도는 유지되지만 픽셀 동일성을 주장하지 않는다. 이 보류도 전체 목표의 미완료 범위다.
+
+검수 한계: 실제 조리법/맛/영양·전기 회로/절감량·마음속 감정/발화/질문 불능·실제 이야기 본문·사건 원인/권한/정확한 경찰 스무 명·실제 일정/날짜·세 골/승리 팀·정확한 시험 점수/능력/미공부라는 조건적 원인·기기 크기/사양/소유자·염분/수심/어린 시절 습관/수영 안전을 인증하지 않는다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+최종 검사 `work/oxford-images-verification-1791453050330.json`(실제 checkedAt `2026-10-08T09:50:50.330Z`)의 현재 PNG 10개 해시·크기·디코딩·320px 렌더 및 전체 3809개 메타데이터가 종료 0으로 통과했다. 이는 schedule의 품질 승인과 구분한다. schedule v1은 수정 호출 전에 실행한 `work/oxford-images-verification-1791452254954.json`(10월 8일 09:37:34.954 UTC)로 별도 검사/직접 축소 확인했고 원본을 덮어쓰지 않았다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-UqMLdP`·이미지/API 호출 0, 관리/검증/재개 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1936개 해시/크기·기본 생성 원본 11개·기존 보류 30개·정책 보류 2개·실패 2개·교열 후보 12개·원장 접두사를 대조한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1844**·검수 통과 **1814**·보류 **31**·실패 **2**·대기 **1962**, 수정본 포함 PNG **1936**·실제 호출 **1938**·누적 수정 **92**다. 실제 호출에는 PNG 반환 1936회와 무이미지 실패 2회(code HTTP 400·route HTTP 408)가 포함된다. 전체 미생성 1,965개이며 전체 목표는 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 752/보류 14/대기 222/실패 2; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 접두사는 `work/oxford-batch-186-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(시도별 실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `reviews.json`, `schedule-v1-review.json`, `schedule-correction.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 search 명사이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `sauce` 명사(소스)다. 이어 save 동사·scared/scary 형용사·scene/schedule 명사·score 동사/명사·screen/sea 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `search` 명사(검색)다. 이어 search 동사·season/seat 명사·second 부사·secret 형용사/명사·secretary 명사·seem 동사·sense 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
