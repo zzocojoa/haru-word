@@ -1,5 +1,7 @@
 declare namespace Cloudflare {
   interface Env {
+    topic_sentence_validation_key?: string;
+    topic_sentence_validation_expires?: string;
     DB?: D1Database;
     card_studio_enabled?: string;
     card_studio_owner_id?: string;
