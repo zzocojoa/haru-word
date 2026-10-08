@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1762 |
-| 제작자 품질 검수 통과 `approved` | 1733 |
+| 제작된 서로 다른 항목 | 1772 |
+| 제작자 품질 검수 통과 `approved` | 1743 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,045 |
+| 제작 대기 `waiting` | 2,035 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1852 |
+| 실제 내장 도구 호출 | 1862 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,045개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,047개다. 제작된 1762개는 검수 통과 1733개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1851개다. 실제 호출 1852회에는 이미지가 반환된 1851회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,035개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,037개다. 제작된 1772개는 검수 통과 1743개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1861개다. 실제 호출 1862회에는 이미지가 반환된 1861회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -205,6 +205,7 @@
 | 추가 175 | pop 명사·형용사, population, position, possession, possibility, poster, power, predict, present 동사 | 10개 검수 통과. 듣는 음악과 가수·같은 집의 주민 증가·중앙 위치·아끼는 소유물·가능한 여행 결과·큰 인쇄 그림·전력 공급·미래 반응 예상·발표 행동을 확인. 실제 원본·개별 320px 화면 검토, 수정 호출 없음 |
 | 추가 176 | president, prevent, print 동사, printer, prison, prize, process, produce 동사, professional 형용사, professor | 10개 검수 통과. 회사 대표 회신·진입 예방·인쇄 행동/기계·빈 감방·상 수여·두 단계 학습·기계 생산·유급 음악 활동·대학 강의를 확인. 원본·개별 320px·프린터 버튼 확대 검토, 수정 호출 없음 |
 | 추가 177 | profile, progress, promise 동사/명사, pronounce, protect, provide, public 형용사/명사, publish | 10개 검수 통과. 소개 자료·연습의 발전·약속/이행·발음 따라 하기·헬멧 보호·물품 제공·공공 공원/대중 방문객·책 공개를 확인. 원본·개별 320px 검토, 수정 호출 없음 |
+| 추가 178 | pull, purpose, push, quality, quantity, queen, question 동사, quietly, race 명사/동사 | 10개 검수 통과. 책 꺼내기·행동/활용 목적·휠체어 밀기·부츠 품질/과일 양·왕실 여성·선택 의문·조용한 문 닫기·말 경주/주자 경쟁을 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3296,9 +3297,25 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 근거 파일 접두사는 `work/oxford-batch-177-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 pull부터 race 동사까지 10개이며 아직 장면 준비·호출 전이다.
 
+## 추가 178 · pull부터 race 동사까지
+
+2026-10-08, A2 교재 순서의 10개를 내장 `image_gen`으로 한 장씩 순차 제작하고 같은 apple 스타일 참조를 적용했다. **실제 원본 10장·각각의 320px 검사 화면 10장을 열어 검수**해 모두 통과로 기록했다. 호출 10회·수정 0·신규 보류 0·신규 실패 0이다. 기본 생성 원본·시도별 복사본·개별 QA 화면을 보존한다.
+
+실제 관찰: pull은 가방 입구를 잡고 아래쪽이 가방에 남은 책을 반쯤 꺼내는 성인 한 명이다. purpose는 위의 풍경 그림 종이 네 장·제본 준비와 아래의 같은 풍경 책을 읽는 독자를 연결한 두 관계 장면이다. push는 성인이 빈 휠체어 뒤 손잡이를 잡고 열린 문을 통과하는 한 장면이며 계획의 두 손과 달리 확인되는 손잡이 손은 한 손이다. quality는 같은 형태 부츠 두 개의 고른 마감과 이음을 살피는 성인, quantity는 같은 그릇의 오렌지 세 개와 더 큰 무더기다. queen은 물리적 왕관을 쓰고 높은 등받이 의자에 앉은 성인 여성이고 반복 잎 형태는 옷의 자수 무늬다. question은 선택한 의자 등받이를 잡은 성인과 손을 들고 손상된 지지대를 가리키는 다른 성인이다. 계획의 손상된 이음보다 실제 지지대는 더 분명하게 부러졌으며 의도된 가구 손상 맥락이다. quietly는 문손잡이와 문 표면을 받치며 조심스럽게 닫는 성인·문틈 뒤 눈을 감고 누운 성인이다. race 명사는 말 네 마리·기수 네 명의 경주 전체, 동사는 성인 주자 세 명이 곡선 트랙에서 경쟁하는 동작이다. 실제 바느질·제본 실·왕관·경첩·고삐·트랙 레인 선 외에 읽을 수 있는 글자·숫자·상표·라벨·UI는 발견하지 못했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+뜻 대조는 실제 반환된 공식 사전 정의·예문 부분과 로컬 10항목으로 한정했다. [pull MOVE TOWARDS YOU](https://dictionary.cambridge.org/dictionary/english/pull), [purpose 행동의 이유·의도](https://dictionary.cambridge.org/dictionary/english/purpose), [push USE PRESSURE](https://dictionary.cambridge.org/dictionary/english/push?topic=urging-and-persuading), [quality STANDARD](https://dictionary.cambridge.org/dictionary/english/quality), [quantity 물량](https://dictionary.cambridge.org/dictionary/english/quantity), [queen WOMAN](https://dictionary.cambridge.org/dictionary/english/queen), [question Business English 동사 의문 표현](https://dictionary.cambridge.org/dictionary/english/question), [quietly WITHOUT MAKING NOISE](https://dictionary.cambridge.org/dictionary/english/quietly?topic=silence-and-quiet), [race 명사/동사 COMPETITION](https://dictionary.cambridge.org/dictionary/english/race)의 9개 공식 자료를 확인했다. question은 명사 부분 뒤의 실제 Business English 동사 정의를 추가로 읽었고 race는 검색 요약의 동사 표시와 실제 본문 COMPETITION 정의를 구별해 후자를 확인했다. 전체 사전 페이지·말뭉치·오디오·영상·PDF와 Tatoeba 원문 페이지를 새로 검수한 것은 아니다.
+
+검수 한계: 정지 책 꺼내기는 넣기와도 혼동 가능하며 운동 방향·앞선 행동을 보장하지 않는다. 책 준비와 독자 활용은 목적의 연상 단서로 실제 의도·유용성·출판권·완료 순서·인과를 증명하지 않는다. 휠체어는 실제 이동·환자의 상태·기계 인증·방 소유를 검증하지 않는다. 부츠 외관은 내부 품질·내구성·동등한 시험 기준을 증명하지 않으며 과일은 큰 무더기의 정확한 개수·무게·영양·화자의 선호와 무관하다. 왕실 여성은 실제 법적 지위·국가·출생/혼인·학교 방문을 확정하지 않는다. 걱정하는 몸짓은 질문·제지·토의도 연상하고 실제 의문 발화·결정·합리성·의자 안전 진단을 검증하지 않는다. 조심스러운 문 닫기는 실제 소음·수면을 인증하지 않는다. 경주 그림은 사건과 경쟁 행동의 단서이며 실제 참가자·속도·거리·승자·기록·결승 도달을 입증하지 않는다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다.
+
+최종 이미지 검사 `work/oxford-images-verification-1791439014106.json`(실제 checkedAt `2026-10-08T05:56:54.106Z`)의 10개 PNG 해시·크기·디코딩·320px 렌더링, 메타데이터 3809개 검사가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-4uNxst`·이미지/API 호출 0, 관리/검증/재개 스크립트 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1861개의 해시/크기·기본 생성 원본 10개·정책 보류 2개·code 실패·교열 후속 12개 보존을 대조한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1772**·검수 통과 **1743**·보류 **30**·실패 **1**·대기 **2035**, 수정본 포함 PNG **1861**·실제 호출 **1862**·누적 수정 **89**다. 전체 미생성 2,037개로 전체 목표는 아직 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 681/보류 13/대기 295/실패 1; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 파일 접두사는 `work/oxford-batch-178-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 railroad부터 recently까지 10개이며 아직 장면 준비·호출 전이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `pull` 동사(당기다)다. 이어 purpose 명사·push 동사·quality·quantity·queen 명사·question 동사·quietly 부사·race 명사/동사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
+다음 제작 대기 첫 항목은 A2 `railroad` 명사(철도)다. 이어 raise 동사·rate 명사·rather 부사·reach·react·realize·receive 동사·recent 형용사·recently 부사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
