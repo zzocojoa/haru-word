@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1742 |
-| 제작자 품질 검수 통과 `approved` | 1713 |
+| 제작된 서로 다른 항목 | 1752 |
+| 제작자 품질 검수 통과 `approved` | 1723 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,065 |
+| 제작 대기 `waiting` | 2,055 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1832 |
+| 실제 내장 도구 호출 | 1842 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,065개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,067개다. 제작된 1742개는 검수 통과 1713개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1831개다. 실제 호출 1832회에는 이미지가 반환된 1831회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,055개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,057개다. 제작된 1752개는 검수 통과 1723개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1841개다. 실제 호출 1842회에는 이미지가 반환된 1841회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -203,6 +203,7 @@
 | 추가 173 | perhaps 부사, permission/personality/pet 명사, photograph 동사, physical 형용사, physics 명사, pick 동사, pilot/planet 명사 | 10개 첫 시도 검수 통과. 불확실한 만남/허가 요청·친근한 성격/반려 토끼·촬영/신체 운동·물리 관찰/사과 따기·항공 조종사/두 행성을 구분. 원본 10개/최종 320px 10개와 실제 가림·수량·연상 한계를 기록했고 수정·새 보류·실패 없음 |
 | 추가 174 | plant 동사, plastic 명사/형용사, plate/platform 명사, please 동사, pleased 형용사, pocket 명사, polite 형용사, pollution 명사 | 10개 첫 시도 검수 통과. 심기/재료·재질/접시·승강장/기쁨 유발·만족 상태/주머니·배려 응답·대기오염 구분. 원본/최종 320px 각 10개·실제 차이/가림/수량 기록, 수정·새 보류·실패 없음 |
 | 추가 175 | pop 명사·형용사, population, position, possession, possibility, poster, power, predict, present 동사 | 10개 검수 통과. 듣는 음악과 가수·같은 집의 주민 증가·중앙 위치·아끼는 소유물·가능한 여행 결과·큰 인쇄 그림·전력 공급·미래 반응 예상·발표 행동을 확인. 실제 원본·개별 320px 화면 검토, 수정 호출 없음 |
+| 추가 176 | president, prevent, print 동사, printer, prison, prize, process, produce 동사, professional 형용사, professor | 10개 검수 통과. 회사 대표 회신·진입 예방·인쇄 행동/기계·빈 감방·상 수여·두 단계 학습·기계 생산·유급 음악 활동·대학 강의를 확인. 원본·개별 320px·프린터 버튼 확대 검토, 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3262,9 +3263,25 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 재사용 근거는 `work/oxford-batch-175-sources.json`, `source-evidence.json`, `scenes.json`(10개 실제 전체 프롬프트·참조 경로·시도별 해시), `originals.json`(기본 생성 파일 경로), `observations.json`, `reviews.json`, `check-results.json`이며 파일명 접두사는 모두 `oxford-batch-175-`이다. 이미지는 기존 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`와 `qa/`에 보존한다. 연결 목록·계획·진행 문서 세 파일만 이미지 브랜치에 커밋·푸시한다. 다음은 A2 president부터 교수까지 10개이며 아직 장면 작성·추가 호출 전이다. 기존 학습·사용자 편집·AI·백업·API·DB·Sites·EN_Card의 코드·설정·운영 데이터 변경은 없다.
 
+## 추가 176 · president부터 professor까지
+
+2026-10-08, A2 교재 순서의 10개를 내장 `image_gen`으로 한 장씩 순차 제작하고 같은 apple 스타일 참조를 적용했다. **실제 원본 10장·각각의 320px 검사 화면 10장을 열어 검수**해 모두 통과로 기록했다. 호출 10회·수정 0·신규 보류 0·신규 실패 0이다. 회사 대표 생성은 같은 도구 셀 6513의 완료를 기다렸고 재시작·중복 호출하지 않았다. 기본 생성 파일·복사본·개별 QA 화면을 보존한다.
+
+실제 관찰: president는 회의 탁자 끝 대표와 동료 2명·봉투 회신이며 국가 상징이 없다. prevent는 파손 다리 앞 온전한 길의 성인 2명과 진입을 막는 펼친 손, 추락·폭력 없는 정지 관계다. print는 물리 버튼을 누르며 컬러 그림 종이를 출력하는 행동, printer는 사람 없이 기계·빈 입력 종이·컬러 출력물을 강조한다. 프린터 버튼 안의 희미한 선을 원본 변경 없이 로컬 브라우저로 확대 확인했고 불규칙한 질감 외에 읽을 수 있는 문자·전원 기호를 발견하지 못했다. prison은 닫힌 철창 문·침대·선반·높은 창문의 빈 감방이다. prize는 성인 2명이 트로피 1개를 전달하는 장면이며 순위 숫자가 없다. process는 위 강사의 접기 안내·아래 같은 학습자의 독립 연습, 총 두 장면이다. produce는 작업자가 외함을 맞추는 펌프 1개와 옆 완성품 2개이며 추가 스패너·볼트 통은 같은 작업 소품이다. professional은 바이올린·활을 둔 음악가와 무문자 지폐 형태 3장을 건네는 다른 성인이다. professor는 강단의 강사·지구본·성인 청중 2명·대학 건물 맥락이며 책등 띠·노트 줄·악기 울림 구멍·열쇠 구멍 등은 물리적 형태로 확인했다. 읽을 수 있는 글자·숫자·상표·라벨·UI는 발견하지 못했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+뜻 대조는 실제 반환된 공식 사전 정의·예문 부분과 로컬 10항목으로 한정했다. [president ORGANIZATION](https://dictionary.cambridge.org/us/dictionary/english/president), [prevent 행동·발생을 막음](https://dictionary.cambridge.org/us/dictionary/english/prevent), [print 동사 TEXT의 이미지 인쇄](https://dictionary.cambridge.org/dictionary/english/print), [printer 기계](https://dictionary.cambridge.org/dictionary/english/printer), [prison 장소](https://dictionary.cambridge.org/dictionary/english/prison?topic=prisons-and-parts-of-prisons), [prize 보상](https://dictionary.cambridge.org/dictionary/english/prize), [process SERIES OF ACTIONS](https://dictionary.cambridge.org/dictionary/english/process), [produce MAKE](https://dictionary.cambridge.org/dictionary/english/produce?q=produce_1), [professional EARNING MONEY](https://dictionary.cambridge.org/dictionary/learner-english/professional?q=professional_1), [professor 대학 교원](https://dictionary.cambridge.org/dictionary/english/professor)을 확인했다. 최초 혼합 결과에 prison이 없어 추가 검색 1회로 관련 정의를 확인했다. print의 첫 PICTURE 표시는 검색 요약에 있어서 해당 본문을 검토한 것으로 주장하지 않고 실제 읽은 verb TEXT 정의를 사용했다. 전체 사전 페이지·말뭉치·오디오·영상·PDF와 Tatoeba 원문 페이지를 새로 검수한 것은 아니다.
+
+검수 한계: 회사 대표·교수의 실제 직함/직급, 조직·학교 규모·형제 신원은 그림만으로 증명되지 않는다. 예방 그림은 경고·멈춤과도 연결되고 실제 예방 성공이나 다리 안전 인증이 아니다. 인쇄는 실제 작동·속도·연결·제품 규격을 입증하지 않는다. 감옥은 개인의 유죄·형량·원문 요청의 정당성과 무관한 장소 연상이다. 트로피는 상의 개념이며 정확한 1등·대회 결과·부가 의문문을 인증하지 않는다. 두 단계 연습은 완전한 제작 절차·점수 향상 보장이 아니다. 기계 생산은 실제 설계·회사 정체·품질 우열 비교를 검증하지 않는다. 유급 음악 활동은 선물과 혼동 가능해 뜻·예문을 함께 확인하며 실제 계약·수입·자격·유일함을 입증하지 않는다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다.
+
+최종 이미지 검사 `work/oxford-images-verification-1791436253949.json`(실제 checkedAt `2026-10-08T05:10:53.949Z`)의 10개 PNG 해시·크기·디코딩·320px 렌더링, 메타데이터 3809개 검사가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-wEONMv`·이미지/API 호출 0, 관리/검증/재개 스크립트 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1841개의 해시/크기·기본 생성 원본 10개·정책 보류 2개·code 실패·교열 후속 12개 보존을 대조한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1752**·검수 통과 **1723**·보류 **30**·실패 **1**·대기 **2055**, 수정본 포함 PNG **1841**·실제 호출 **1842**·누적 수정 **89**다. 전체 미생성 2,057개로 전체 목표는 아직 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 661/보류 13/대기 315/실패 1; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 파일 접두사는 `work/oxford-batch-176-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 별도 버튼 확대 화면은 기존 이미지 폴더의 `qa/20d53e0965cb0444-button-detail.png`다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 profile부터 publish까지 10개이며 아직 장면 준비·호출 전이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `president` 명사(회사 대표)다. 이어 prevent 동사·print 동사·printer·prison·prize·process·produce 동사·professional 형용사·professor까지 10개를 교재 순서로 검토한다. 모두 아직 장면 작성·추가 호출 전이며 기존 승인·보류·실패 항목은 재생성하지 않는다.
+다음 제작 대기 첫 항목은 A2 `profile` 명사(프로필·간단한 소개)다. 이어 progress 명사·promise 동사/명사·pronounce·protect·provide 동사·public 형용사/명사·publish 동사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
