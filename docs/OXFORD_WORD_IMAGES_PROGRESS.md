@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1732 |
-| 제작자 품질 검수 통과 `approved` | 1703 |
+| 제작된 서로 다른 항목 | 1742 |
+| 제작자 품질 검수 통과 `approved` | 1713 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,075 |
+| 제작 대기 `waiting` | 2,065 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1822 |
+| 실제 내장 도구 호출 | 1832 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,075개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,077개다. 제작된 1732개는 검수 통과 1703개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1821개다. 실제 호출 1822회에는 이미지가 반환된 1821회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,065개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,067개다. 제작된 1742개는 검수 통과 1713개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1831개다. 실제 호출 1832회에는 이미지가 반환된 1831회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -202,6 +202,7 @@
 | 추가 172 | patient/pattern/pay/peace/penny 명사, per 전치사, percent 명사/형용사/부사, perform 동사 | 10개 검수 통과. per의 달력 6열→7열과 percent 부사의 동전 10대8→10대9를 각각 한 번 수정, v1/v2 보존. 원본12개·최종320px10개 실제 확인 |
 | 추가 173 | perhaps 부사, permission/personality/pet 명사, photograph 동사, physical 형용사, physics 명사, pick 동사, pilot/planet 명사 | 10개 첫 시도 검수 통과. 불확실한 만남/허가 요청·친근한 성격/반려 토끼·촬영/신체 운동·물리 관찰/사과 따기·항공 조종사/두 행성을 구분. 원본 10개/최종 320px 10개와 실제 가림·수량·연상 한계를 기록했고 수정·새 보류·실패 없음 |
 | 추가 174 | plant 동사, plastic 명사/형용사, plate/platform 명사, please 동사, pleased 형용사, pocket 명사, polite 형용사, pollution 명사 | 10개 첫 시도 검수 통과. 심기/재료·재질/접시·승강장/기쁨 유발·만족 상태/주머니·배려 응답·대기오염 구분. 원본/최종 320px 각 10개·실제 차이/가림/수량 기록, 수정·새 보류·실패 없음 |
+| 추가 175 | pop 명사·형용사, population, position, possession, possibility, poster, power, predict, present 동사 | 10개 검수 통과. 듣는 음악과 가수·같은 집의 주민 증가·중앙 위치·아끼는 소유물·가능한 여행 결과·큰 인쇄 그림·전력 공급·미래 반응 예상·발표 행동을 확인. 실제 원본·개별 320px 화면 검토, 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3245,9 +3246,25 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 - 로컬 10개 뜻·품사·표현·예문·번역·출처 전체와 Cambridge 검색 반환의 9개 표제어 관련 정의 구간을 실제 읽었다. [plant 동사의 심기](https://dictionary.cambridge.org/dictionary/english/plant), [plastic의 재료 명사/재질 형용사](https://dictionary.cambridge.org/dictionary/english/plastic), [platform의 철도 승강장](https://dictionary.cambridge.org/dictionary/english/platform), [please의 기쁘게 하는 동사](https://dictionary.cambridge.org/dictionary/english/please), [pleased의 만족 상태](https://dictionary.cambridge.org/us/dictionary/english/pleased), [pocket의 옷에 봉제된 수납부](https://dictionary.cambridge.org/dictionary/english/pocket), [polite의 배려하는 태도](https://dictionary.cambridge.org/dictionary/english/polite), [pollution의 유해 물질/폐기물 오염](https://dictionary.cambridge.org/dictionary/english/pollution)을 그 범위에서 대조했다. 전체 페이지/보이지 않은 뒤쪽/코퍼스/PDF/음성/영상 접근을 주장하지 않는다. 실제 반환 구간/범위는 `work/oxford-batch-174-source-evidence.json`에 보존한다.
 
 
+## 추가 175 · pop부터 present 동사까지
+
+2026-10-08, 교재 A2 순서의 10개를 같은 내장 `image_gen` 방식과 apple 스타일 참조로 한 장씩 순차 생성했다. **원본 10장·개별 320px 검사 화면 10장을 실제로 열어 확인**하고 모두 제작자 품질 검수 통과로 기록했다. 호출 10회·수정 0·신규 보류 0·신규 실패 0이며 기본 생성 파일과 복사본을 모두 보존했다. 앞선 보류 30개·명시적 조건 보류 2개·code 실패와 모든 기존 시도는 유지한다.
+
+실제 관찰: pop 명사는 헤드폰을 쓰는 앞 인물과 뒤 가수·전자 건반, 형용사는 노래하는 가수를 중심으로 한다. population은 같은 집 3채가 위·아래에 반복되고 주민이 3명에서 6명으로 늘어난다. position은 성인 5명 중 중앙 세 번째와 양쪽 각 2명을 확인했다. possession은 카메라 1대를 양손으로 받치며 아끼는 태도이다. possibility는 가방을 준비하는 앞 장면과 흐린 가장자리의 여행 예상 장면 1개이다. poster는 성인 크기에 비해 큰 무문자 컬러 풍경 인쇄물이며 출력부와 겹친 종이·흰 여백을 확인했다. power는 빈 빛나는 노트북 화면과 벽 어댑터 사이에 케이블이 연속으로 연결됐다. predict는 요청의 펼친 손 대신 턱을 짚는 생각하는 제스처이며, 닫힌 봉투의 앞 인물과 수신자가 미소 짓는 예상 장면을 구분했다. present는 정원 그림을 지시봉으로 설명하는 발표자 1명과 청중 2명이다. 문자·숫자·라벨·상표·UI 표식은 발견하지 않았고 단추·건반·창틀·카메라 홈·콘센트 구멍은 물리적 부분으로 확인했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+뜻 대조 범위: [pop MUSIC·가수 용법](https://dictionary.cambridge.org/us/dictionary/english/pop), [population 주민·주민 수](https://dictionary.cambridge.org/us/dictionary/learner-english/population), [position 장소 관계](https://dictionary.cambridge.org/dictionary/english/position), [possession 소유물](https://dictionary.cambridge.org/dictionary/english/possession), [possibility 가능성](https://dictionary.cambridge.org/dictionary/english/possibility), [poster 큰 인쇄 그림](https://dictionary.cambridge.org/dictionary/english/poster), [power ELECTRICITY](https://dictionary.cambridge.org/dictionary/english/power), [predict 미래 예상](https://dictionary.cambridge.org/dictionary/english/predict), [present 동사의 발표 용법](https://dictionary.cambridge.org/us/dictionary/english/present)의 실제 반환된 검색 정의·예문 부분과 로컬 교재 10항목을 대조했다. 검색 결과에는 절단 표시가 있었고 pop/population 직접 열기는 403이었다. 최초 혼합 결과에 없는 population은 추가 검색으로 확인했고, position PLACE·power ELECTRICITY·present GIVE/REPRESENT 부분을 별도로 확인했다. 전체 사전 페이지·PDF·오디오·영상·말뭉치를 읽거나 청취한 검증으로 기록하지 않는다.
+
+판정 한계: 음악 그림은 팝 장르·실제 곡·선호 가수·형용사 문법을 유일하게 입증하지 않는다. 주민 그림은 실제 인구 통계가 아니고 카메라를 드는 태도는 법적 소유권·실제 연식·소중함의 순위를 입증하지 않는다. 여행 가능성과 반응 예측은 희망·계획·상상과 혼동할 수 있는 연상 단서라 교재 뜻·예문을 함께 확인한다. 실제 성공·수치 확률·현재의 사적 감정·원문의 can't·Tom의 신원은 그림만으로 보장하지 않는다. 포스터는 글자 없는 장식용 큰 인쇄 그림으로 검토했고, 전력 그림은 실제 전류·소비 전력·안전 규격·배선 지침 인증이 아니다. 발표 그림은 실제 발언·자기소개 순서·명령문 문법을 입증하지 않는다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다.
+
+검증: 최종 `verify-oxford-images.cjs` 10개 ID 검사 종료 0·PNG 디코딩/해시/크기·320px 렌더링 통과(`work/oxford-images-verification-1791434916619.json`, 실제 checkedAt `2026-10-08T04:48:36.619Z`). 재개 보호 검사 19개 종료 0·격리 fixture `work/oxford-resume-check-JCQw4e`·이미지/API 호출 0, 관리/검증/재개 스크립트 3개 `node --check` 종료 0이다. 전체 3809항목 지문, 이전 3799항목 불변, 모든 PNG 1831개의 해시·크기, 정책 보류·실패·검토 후속 후보 12개 보존을 체크포인트 검사로 확인한다. 연결 목록·문서만 변경하므로 앱 전체 테스트·타입·린트·빌드는 이번 범위에서 실행하지 않았다.
+
+누적 제작 **1742**·검수 통과 **1713**·보류 **30**·실패 **1**·대기 **2065**, 수정본 포함 PNG **1831**·실제 호출 **1832**·누적 수정 **89**다. 전체 미생성 2,067개이며 전체 제작 완료가 아니다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 651/보류 13/대기 325/실패 1; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+재사용 근거는 `work/oxford-batch-175-sources.json`, `source-evidence.json`, `scenes.json`(10개 실제 전체 프롬프트·참조 경로·시도별 해시), `originals.json`(기본 생성 파일 경로), `observations.json`, `reviews.json`, `check-results.json`이며 파일명 접두사는 모두 `oxford-batch-175-`이다. 이미지는 기존 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`와 `qa/`에 보존한다. 연결 목록·계획·진행 문서 세 파일만 이미지 브랜치에 커밋·푸시한다. 다음은 A2 president부터 교수까지 10개이며 아직 장면 작성·추가 호출 전이다. 기존 학습·사용자 편집·AI·백업·API·DB·Sites·EN_Card의 코드·설정·운영 데이터 변경은 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `pop` 명사다. 이후 `pop` 형용사·`population`/`position`/`possession`/`possibility`/`poster`/`power` 명사·`predict`/`present` 동사이며 아직 장면 준비/호출을 하지 않았다. A2 총 990/검수 통과 641/보류 13/대기 335/실패 1, 전체 미생성 2,077개(대기 2,075+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1821개·실제 호출 1822회·수정 89회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 제작 대기 첫 항목은 A2 `president` 명사(회사 대표)다. 이어 prevent 동사·print 동사·printer·prison·prize·process·produce 동사·professional 형용사·professor까지 10개를 교재 순서로 검토한다. 모두 아직 장면 작성·추가 호출 전이며 기존 승인·보류·실패 항목은 재생성하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
