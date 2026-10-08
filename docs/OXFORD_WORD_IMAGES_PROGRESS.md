@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1792 |
-| 제작자 품질 검수 통과 `approved` | 1763 |
+| 제작된 서로 다른 항목 | 1802 |
+| 제작자 품질 검수 통과 `approved` | 1773 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,015 |
+| 제작 대기 `waiting` | 2,005 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1882 |
+| 실제 내장 도구 호출 | 1892 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,015개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,017개다. 제작된 1792개는 검수 통과 1763개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1881개다. 실제 호출 1882회에는 이미지가 반환된 1881회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,005개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,007개다. 제작된 1802개는 검수 통과 1773개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1891개다. 실제 호출 1892회에는 이미지가 반환된 1891회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -208,6 +208,7 @@
 | 추가 178 | pull, purpose, push, quality, quantity, queen, question 동사, quietly, race 명사/동사 | 10개 검수 통과. 책 꺼내기·행동/활용 목적·휠체어 밀기·부츠 품질/과일 양·왕실 여성·선택 의문·조용한 문 닫기·말 경주/주자 경쟁을 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 | 추가 179 | railroad, raise, rate, rather, reach, react, realize, receive, recent, recently | 10개 검수 통과. 철도·손 올리기·서비스 요금 비교·꽤 바쁜 맥락·꼭대기 도착·사건 반응·길 잃음 인식·봉투 받기·새 복사본/이사 직후를 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 | 추가 180 | reception, recipe, recognize, recommend, recording, recycle, reduce, refer, refrigerator, refuse 동사 | 10개 검수 통과. 접수처·그림 요리법·패턴 인식·대화 연습 추천·카세트 녹음물·종이 재가공·배기량 감소·그림 안내 참조·냉장고·말의 거절 상황을 확인. 원본·개별 320px 검토, 수정 호출 없음 |
+| 추가 181 | region, regular 형용사, relationship, remove, repair, replace, reply 동사·명사, report 동사, reporter | 10개 검수 통과. 산악 지역·단골 반복 방문·인간관계·덮개 제거·시계 수리·계획 교체·답장 행위/응답 봉투·사고 신고·기자 취재를 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3347,9 +3348,25 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 근거 파일 접두사는 `work/oxford-batch-180-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 region부터 reporter까지 10개이며 아직 장면 준비·호출 전이다.
 
+## 추가 181 · region부터 reporter까지
+
+2026-10-08, A2 교재 순서의 10개를 내장 `image_gen`으로 한 장씩 순차 제작하고 같은 apple 스타일 참조를 적용했다. **실제 원본 10장·각각의 320px 검사 화면 10장을 열어 검수**해 모두 통과로 기록했다. 호출 10회·수정 0·신규 보류 0·신규 실패 0이다. 기본 생성 원본·시도별 복사본·개별 QA 화면을 보존한다.
+
+실제 관찰: region은 이어진 산 능선·넓은 녹색 계곡·숲·굽이치는 강을 포함하는 한 지역이다. regular는 같은 성인 손님·카페 담당자·공간에서 손님의 옷과 가방이 달라진 두 방문 장면이다. relationship은 두 성인의 화분 옮기기 협력과 같은 녹색 옷 성인이 세 번째 성인에게 물잔을 건네며 이야기를 듣는 두 관계 장면이다. remove는 종이 더미에서 투명 덮개를 완전히 들어 분리하는 성인 한 명이다. repair는 뒤가 열린 손목시계를 핀셋으로 고치는 성인과 뒷뚜껑·부품 접시·드라이버다. replace는 많은 길·화단이 있는 기존 정원 그림 종이를 옆으로 치우고 더 단순한 새 정원 그림 종이를 놓는 성인이다. reply 동사는 열린 파란 서신 옆에서 새 아이보리 종이를 아이보리 봉투에 넣는 응답 준비 행위다. reply 명사는 같은 두 사람이 위에서 파란 봉투를 전달하고 아래에서 반대 방향의 아이보리 봉투를 전달하며 먼저 받은 열린 파란 봉투가 남은 두 관계 장면이다. report 동사는 작은 범퍼 손상이 있는 정지 차량 두 대 옆에서 목격자가 무표시 제복의 상대에게 상황을 설명하고 상대가 빈 수첩으로 듣는 한 장면이다. reporter는 마이크·빈 수첩을 든 기자와 답하는 취재 상대 한 명이다. 작은 톱니·밴드 구멍·종이 접힘·정원 그림·커피 기계 조절부·옷 단추·도로 차선·마이크 망·수첩 제본은 물리적 형태이며 읽을 수 있는 글자·숫자·상표·주소·라벨·UI는 발견하지 못했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+뜻 대조는 실제 반환된 공식 사전 정의·예문 부분과 로컬 10항목으로 한정했다. [region 특징을 공유하는 지역](https://dictionary.cambridge.org/dictionary/english/region), [regular OFTEN·단골](https://dictionary.cambridge.org/us/dictionary/english/regular), [relationship FRIENDSHIP·사람의 관계](https://dictionary.cambridge.org/dictionary/english/relationship), [remove TAKE AWAY](https://dictionary.cambridge.org/dictionary/english/remove), [repair FIX·시계 수리](https://dictionary.cambridge.org/us/dictionary/learner-english/repair), [replace CHANGE FOR](https://dictionary.cambridge.org/dictionary/english/replace), [reply 동사·명사 answer](https://dictionary.cambridge.org/dictionary/english/reply), [report American verb TELL·경찰 신고](https://dictionary.cambridge.org/us/dictionary/english/report), [reporter 뉴스 정보를 얻는 직업](https://dictionary.cambridge.org/us/dictionary/english/reporter)의 9개 공식 자료를 확인했다. 첫 검색 반환에서 빠진 region은 다시 조회해 실제 정의를 확인했다. regular는 EVEN/ORDINARY 대신 OFTEN 정의·regular customer 예문, relationship은 CONNECTION 뒤의 FRIENDSHIP, repair는 FIX, replace는 PUT BACK 대신 CHANGE FOR, reply는 첫 동사와 뒤의 명사를 각각 읽었다. report는 명사·GO SOMEWHERE 대신 실제 미국식 동사 TELL 정의와 경찰 예문을 확인했다. 사전의 수준 표시는 기존 교재 A2 항목을 덮어쓰는 기준으로 사용하지 않는다. 전체 사전 페이지·말뭉치·오디오·영상·PDF와 Tatoeba 원문 페이지를 새로 검수한 것은 아니다.
+
+검수 한계: 산악 지역은 실제 지명·경계·지리 사실을 입증하지 않는다. 반복 방문은 실제 빈도·개인 신원·할인·정확한 시간 간격을 입증하지 않는다. 협력·지지는 실제 감정·친족·신뢰·모든 관계의 복잡성을 확정하지 않는다. 덮개 제거는 실제 동작 순서·폐기 지침·재활용 가능성을 인증하지 않는다. 수리는 실제 결함·완료·시계 정확성·절차·안전을 보장하지 않는다. 계획 교체는 실제 합의·시행·우수성·완료 시점을 확정하지 않는다. 답장 동사는 텍스트/UI 금지에 따른 물리적 서신의 연상으로 실제 이메일 채널·내용·Tom/Mary 신원·이전 수신·발송을 입증하지 않는다. 답장 명사는 응답 물체를 강조하며 실제 내용·빠른 응답 시간·배송·회사 대표 지위를 확정하지 않는다. 신고는 실제 사고 원인·책임·경찰 신원·신고 기록·응급 대응 지침을 입증하지 않는다. 기자는 실제 고용·보도·정확성·권위·인터뷰 내용·추가 정보 요청을 확인하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다.
+
+최종 이미지 검사 `work/oxford-images-verification-1791443404364.json`(실제 checkedAt `2026-10-08T07:10:04.364Z`)의 10개 PNG 해시·크기·디코딩·320px 렌더링, 메타데이터 3809개 검사가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-99CzqM`·이미지/API 호출 0, 관리/검증/재개 스크립트 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1891개의 해시/크기·기본 생성 원본 10개·정책 보류 2개·code 실패·교열 후속 12개 보존을 대조한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1802**·검수 통과 **1773**·보류 **30**·실패 **1**·대기 **2005**, 수정본 포함 PNG **1891**·실제 호출 **1892**·누적 수정 **89**다. 전체 미생성 2,007개로 전체 목표는 아직 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 711/보류 13/대기 265/실패 1; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 파일 접두사는 `work/oxford-batch-181-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 request부터 review까지 10개이며 아직 장면 준비·호출 전이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `region` 명사(지역)다. 이어 regular 형용사·relationship 명사·remove·repair·replace 동사·reply 동사/명사·report 동사·reporter 명사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
+다음 제작 대기 첫 항목은 A2 `request` 명사(요청)다. 이어 research 명사/동사·researcher 명사·respond 동사·response 명사·rest 명사(나머지)/명사(휴식)/동사(쉬다)·review 명사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
