@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1954 |
-| 제작자 품질 검수 통과 `approved` | 1924 |
+| 제작된 서로 다른 항목 | 1964 |
+| 제작자 품질 검수 통과 `approved` | 1934 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,852 |
+| 제작 대기 `waiting` | 1,842 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2051 |
+| 실제 내장 도구 호출 | 2061 |
 | 그중 품질 수정 호출 | 95 |
 
-이미지 미생성 항목은 제작 대기 1,852개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,855개다. 제작된 1954개는 검수 통과 1924개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2049개다. 실제 호출 2051회에는 이미지가 반환된 2049회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,842개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,845개다. 제작된 1964개는 검수 통과 1934개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2059개다. 실제 호출 2061회에는 이미지가 반환된 2059회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -225,6 +225,7 @@
 | 추가 195 | stamp 명사, star 동사, start/state/stay 명사, steal 동사, step/stomach/stone/storm 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 주연/단계 품사 정의와 동전 네 개·주제 카드 세 장을 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 196 | storm 동사, stove 명사, straight 부사/형용사, strange 형용사, strategy 명사, stress 명사/동사, structure 명사, stupid 형용사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 카드 각 장면 세 장·스트레스/강조·채반/양동이 대비를 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 197 | subway 명사, succeed 동사, successful 형용사, such 한정사/대명사, suddenly 부사, suggest 동사, suggestion/suit 명사, support 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. such 두 맥락/품사 근거와 제안 행동·내용, 부정 착용/부양 의미를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 198 | support 명사, suppose 동사, sure 부사, surprise 명사/동사, surprised/surprising 형용사, survey 명사, sweet 형용사/명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 놀란 상태/놀라운 결과·선택 돌 다섯 개씩/사탕 세 개·sure 부사 본문을 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3747,9 +3748,53 @@ A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용
 
 근거 접두사는 `work/oxford-batch-197-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 support 명사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 198 제작·검수
+
+2026-10-09 KST 체크포인트: A2 `support` 명사, `suppose` 동사, `sure` 부사, `surprise` 명사/동사, `surprised`/`surprising` 형용사, `survey` 명사, `sweet` 형용사/명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본 10장과 개별 320px 화면 10장을 실제 열어 검토해 모두 첫 시도 통과했다. 이번 실제 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다.
+
+`support` 명사는 성인 학습자의 잎 그림 종이/연필과 옆 사람의 추가 참고 책/열린 도움 손으로 실질적인 학습 지원을 연상한다. 성인 두 명·종이/연필/참고 책 각 하나이며 부양/물리적 받침과 구분한다. `suppose`는 생각하는 두 성인·녹색 인물의 턱 손/열린 제안 손과 빈 의자 두 개로 대화가 좋겠다는 잠정 판단을 연상한다. 실제 교사 자격/관계·학습 향상/심리·정확한 발화/대화 길이·동의/확정 사실을 인증하지 않는다.
+
+`sure` 부사는 설명자의 열린 입/든 검지 한 개·다른 손바닥과 잎 참고 카드, 학습자의 연필/종이/잎 연습으로 예문의 certainly/강조 맥락을 연상한다. 공식 사전의 실제 부사 본문을 읽어 형용사 confidence와 단답 동의 뜻만으로 설명하지 않았다. 그림 자체가 부사나 영어 표현을 유일하게 식별하거나 사실/성격·자격/성과·정확한 발화 강도를 인증하지 않는다.
+
+`surprise` 명사는 열린 문턱의 방문자/가방과 실내 집주인의 편안한 반응 손·빈 의자/커피 탁자라는 뜻밖의 사건 맥락이다. 동사는 방문자 한 명과 전경에 앉아 고개를 돌리고 한 손씩 든 성인 두 명·총 세 명으로 등장/수신자 반응 관계를 구분한다. `surprised`는 성인 한 명의 넓어진 눈/올라간 눈썹·열린 입/가슴의 한 손이라는 상태 중심이며 원인 인물/행동을 추가하지 않았다. 원문의 'would ... if Mary did that' 조건·미상 행동을 사실 사건으로 바꾸거나 Tom/Mary 신원·실제 과거 방문/갑작스러움·모든 사람의 감정/관계/진단을 인증하지 않는다.
+
+`surprising`은 같은 성인/탁자와 공원/해변 그림 카드 두 장의 관련 두 장면이다. 원본/320px에서 위 공원 아래 돌 네 개·해변 한 개, 아래 공원 한 개·해변 네 개를 직접 세어 장면마다 다섯 개·전체 열 개를 확인했다. 생각하는 위 표정과 놀라는 아래 표정으로 예상/결과 대비를 연상한다. 수량은 가상의 삽화 예시이며 실제 조사 자료/모집단 선호·통계 유의성·최근 날짜/인과·실제 기대를 인증하지 않는다.
+
+`survey`는 조사자 한 명과 응답자 두 명·무문자 클립보드/연필·공원/해변 카드 두 장/선택 돌 두 개로 같은 선택지를 통한 의견 수집을 연상한다. 둘째 돌은 요청의 손에 든 모습 대신 책상에서 손끝으로 접촉/선택하는 모습으로 생성됐으나 선택 관계가 유지돼 결함으로 판정하지 않았다. 토지 측량/건물 검사가 아니며 실제 질문/자료·대표 표본/통계 정확성·최근 시점·놀라운 결과를 인증하지 않는다.
+
+`sweet` 형용사는 성인이 한 번 베어 문 빨간 사과 한 개를 입 가까이 들고 두 눈을 감아 맛을 즐기는 맥락이다. 설탕/시럽·추가 사과/사탕을 넣지 않았다. 표정이 실제 당도 측정이나 단맛의 유일 증거는 아니고 모든 빨간 사과가 달거나 건강 효과가 있다고 주장하지 않는다. 명사는 자연스러운 학령기 아이 한 명·손의 빨간 사탕 한 개/그릇의 노랑·파랑 두 개·총 세 개와 빈 식사 접시 한 개를 확인했다. UK 소형 사탕(US candy) 뜻과 US의 일반 단 음식/후식 뜻을 구분한다. 실제 점심 후 시간·영양/안전·인물 신원/행동을 인증하지 않는다.
+
+공식 근거는 세 번의 Cambridge 도메인 제한 검색에서 실제 읽은 정의 구간이다. sure의 제한적인 추가 검색은 결과 없음이었고 더 넓힌 두 공식 검색어에서 반환된 US sure 페이지의 실제 adverb/certainly 본문을 읽었다. 제목/관련 표현의 adjective/for-sure/단답 미리보기와 구분해 기록했다. 직접 페이지 열기 성공·전체 사전/발음 청취·Oxford PDF·Tatoeba 원문 재평가를 수행했다고 기록하지 않는다.
+
+| 단어·품사 | 확인한 공식 정의 구간 |
+|---|---|
+| support n. | [support noun (HELP)](https://dictionary.cambridge.org/dictionary/english/support) |
+| suppose v. | [suppose verb \[I/T\] (THINK LIKELY), American Dictionary](https://dictionary.cambridge.org/dictionary/english/suppose) |
+| sure adv. | [sure adverb (informal certainly)](https://dictionary.cambridge.org/us/dictionary/english/sure?q=surest) |
+| surprise n. | [surprise noun (EVENT)](https://dictionary.cambridge.org/dictionary/english/surprise) |
+| surprise v. | [surprise verb \[T\] (cause surprise)](https://dictionary.cambridge.org/dictionary/english/surprise) |
+| surprised adj. | [surprised adjective](https://dictionary.cambridge.org/us/dictionary/english/surprised) |
+| surprising adj. | [surprising adjective, American Dictionary](https://dictionary.cambridge.org/dictionary/english/surprising) |
+| survey n. | [survey noun \[C\] (QUESTIONS)](https://dictionary.cambridge.org/dictionary/english/survey) |
+| sweet adj. | [sweet adjective (TASTE)](https://dictionary.cambridge.org/dictionary/english/sweet) |
+| sweet n. | [sweet noun \[C\] UK (US candy)](https://dictionary.cambridge.org/dictionary/english/sweet) |
+
+글자 금지·저장 교재/예문을 유지했다. 잎맥/그림 선·문손잡이/래치·신발 끈·의복 단추·무문자 돌/클립보드 고정 부품·포장 꼬임은 실제 대상 구성으로 글자/숫자/소프트웨어 UI와 구분했다. 추상어/품사 맥락 그림은 교재 기본 뜻과 함께 보는 연상 단서이며 특정 영단어/품사를 유일하게 추론하거나 실제 사건/학습 효과를 인증하지 않는다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `work/oxford-images-verification-1791473284519.json`, checkedAt `2026-10-08T15:28:04.518Z`, 실제 종료 0. 당시 generated 10/approved 1924이며 원본과 각 개별 축소 화면을 실제 확인했다.
+- 최종 검수 등록 뒤 같은 검사: `work/oxford-images-verification-1791473451782.json`, checkedAt `2026-10-08T15:30:51.781Z`, 실제 종료 0. 10개 모두 승인 파일/해시·320px 렌더와 일치한다. 두 증거 파일명 시각은 각각 본문 checkedAt보다 1ms 늦으며 실제 값을 구분해 보존한다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `work/oxford-resume-check-ELydRo`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 1964개·검수 통과 1934개·보류 31개(이미지 있는 보류 30/생성 전 letter 1)·실패 2개·대기 1,842개다. PNG 2059장·실제 호출 2061회·품질 수정 95회이며 전체 미생성 1,845개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 872/보류 14/대기 102/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-198-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 symbol 명사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `support` 명사(지원)다. 이어 suppose 동사·sure 부사·surprise 명사/동사·surprised/surprising 형용사·survey 명사·sweet 형용사/명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `symbol` 명사(상징)다. 이어 system/tablet/talk/target/task 명사·taste 명사/동사·teaching/technology 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
