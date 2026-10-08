@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1874 |
-| 제작자 품질 검수 통과 `approved` | 1844 |
+| 제작된 서로 다른 항목 | 1884 |
+| 제작자 품질 검수 통과 `approved` | 1854 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,932 |
+| 제작 대기 `waiting` | 1,922 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 1969 |
-| 그중 품질 수정 호출 | 93 |
+| 실제 내장 도구 호출 | 1980 |
+| 그중 품질 수정 호출 | 94 |
 
-이미지 미생성 항목은 제작 대기 1,932개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,935개다. 제작된 1874개는 검수 통과 1844개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1967개다. 실제 호출 1969회에는 이미지가 반환된 1967회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,922개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,925개다. 제작된 1884개는 검수 통과 1854개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1978개다. 실제 호출 1980회에는 이미지가 반환된 1978회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -217,6 +217,7 @@
 | 추가 187 | search 명사/동사, season/seat 명사, second 부사, secret 형용사/명사, secretary 명사, seem 동사, sense 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 이번 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 188 | separate 형용사, series 명사, serious 형용사, serve 동사, service 명사, several 한정사/대명사, shake 동사, shape/sheet 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. several 대명사 총 열 권 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 189 | ship/shoulder 명사, shout 동사/명사, shut 동사/형용사, side/sign 명사, sign 동사, silver 명사 | 9개 첫 시도·shout 명사 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
+| 추가 190 | silver/simple 형용사, since 전치사/접속사, singing 명사, single 형용사/명사, sir/site/size 명사 | 9개 첫 시도·since 접속사 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3512,9 +3513,27 @@ shut 동사는 왼쪽 경첩/오른쪽 손잡이의 창을 닫는 동작, 형용
 
 근거 접두사는 `work/oxford-batch-189-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(시도별 실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `shout-correction.json`, `corrected-review.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 silver 형용사이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 190 제작·검수
+
+A2 `silver`/`simple` 형용사, `since` 전치사/접속사, `singing` 명사, `single` 형용사/명사, `sir`/`site`/`size` 명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본/수정본 11장과 개별 320px 화면 11장을 실제 열어 검토해 9개 첫 시도 통과, since 접속사는 한 번 수정한 v2가 통과했다. 이번 호출 11회·품질 수정 1회·신규 보류/신규 서비스 실패 0이며 별도 이미지 API·자동 재시도는 없다.
+
+공식 Cambridge의 [silver 은 재질 형용사](https://dictionary.cambridge.org/dictionary/english/silver), [simple 간단한](https://dictionary.cambridge.org/dictionary/english/simple), [since 시간 전치사/접속사](https://dictionary.cambridge.org/dictionary/english/since), [singing 노래 활동](https://dictionary.cambridge.org/us/dictionary/english/singing?topic=singing), [single room 1인용 객실](https://dictionary.cambridge.org/dictionary/english/single-room), [single 싱글 음반](https://dictionary.cambridge.org/dictionary/english/single), [sir 정중한 남성 호칭](https://dictionary.cambridge.org/dictionary/english/sir?topic=teachers), [site 웹사이트](https://dictionary.cambridge.org/us/dictionary/english/site), [size 크기](https://dictionary.cambridge.org/us/dictionary/english/size)의 공식 검색 반환에서 실제 해당 정의 부분을 읽고 ID/품사/기본 뜻·표현·예문과 대조했다. since의 TIME과 BECAUSE를 구분하고 site는 INTERNET, size는 미국 페이지의 AMOUNT 정의를 확인했다. 검색 반환을 직접 페이지 열기 성공으로 표현하지 않는다. 사전 수준으로 교재 A2를 바꾸지 않으며 전체 사전/말뭉치·오디오·Oxford PDF·Tatoeba 원문을 새로 검수한 것은 아니다.
+
+silver 형용사는 두 사람 사이의 각인 없는 회백색 반지 한 개, simple은 한 냄비를 젓는 성인/소수 재료·도구다. 실제 수프 속 작은 녹색 잎도 있으므로 당근/양파 두 재료뿐이라고 하지 않는다. since 전치사는 학교 시기→성인 책상 두 장면이며 아래 노트북은 열려 있고 무표기 뒤판만 보인다. 예문의 불특정 부정 행동을 새로 정하거나 실제 학제·나이를 인증하지 않는다. since 접속사는 이사 사건→걸어서 출근의 시간 관계다. 첫 원본/320px에서 위 인물이 상자를 들고 집 밖 계단으로 내려가 이사 나감으로도 읽혀 의미 적합성을 보류했다. 원본/첫 보류/각 축소를 보존한 뒤 위 인물/상자의 들어오는 방향만 한 번 수정했다. v2는 인물의 등·실내 쪽 상자·위 문턱의 앞발/아래 뒷발로 집 안으로 올라 들어가는 방향을 원본/320px에서 확인했다. 반대손은 가려져 있어 양손이 모두 보인다고 하지 않는다. 아래 가방을 들고 사무실 방향으로 걷는 동작·집/식물/창·두 장면/스타일은 유지됐다. 위 자세가 바뀌었으므로 픽셀 단위 동일성은 인증하지 않는다. 두 시도/각 실제 프롬프트·참조/해시·첫 보류 메모·각 축소 근거를 보존하며 세 번째 호출은 없다.
+
+singing은 두 성인/열린 노래 입/한 마이크의 활동이다. single 형용사는 여행객 한 명/침대 하나/베개 하나의 1인용 방이며 미혼 상태와 구분한다. single 명사는 무지 작은 음반 한 개와 종이 슬리브/마이크로 음악 발매를 연상한다. 싱글은 주곡 중심 음반으로 정확히 한 곡뿐이라는 잘못된 설명은 하지 않는다. sir는 주전자를 든 응대자와 남성 손님/유리잔의 정중한 호칭 맥락이다. site는 실물 노트북의 식물 전체/잎 확대 콘텐츠 두 그림과 옆 화분이며 건설 장소와 구분한다. 화면에 주소창·메뉴·커서·버튼·가짜 텍스트 줄·글자/로고가 없고 무표기 키보드/트랙패드는 컴퓨터 하드웨어다. size는 연결된 두 발에 신은 운동화 둘과 전경의 큰 미사용 운동화 하나, 총 세 개로 크기 대비를 표현한다. 신발은 무지이고 기능적 끈/봉제선/칼라/밑창 외 장식 상표 줄·치수 숫자·눈금·체크 표시가 없다.
+
+반지 고리·음반/슬리브 원형 구멍·귀걸이·버클/셔츠 단추·인터폰 가로 구멍·식물 잎맥·키보드/트랙패드·신발 끈/봉제선은 물리적 요소이며 글자/숫자/로고로 판독하지 않는다. 검수 한계: 실제 금속 조성/순도/가족 관계·전체 조리법/난이도/안전·시간/부정 행동/반복 빈도/품사·소리/음량/노래 중단·객실 이용 가능성/미혼 여부·음반 트랙 수/발매 시점·실제 sir 발화/신원/물 수락·URL/인터넷 연결/상호작용/정보 정확성/유용성·표준 신발 호수/편안함/의학적 적합성을 인증하지 않는다. 그림은 교재와 함께 사용하는 연상 단서다. letter/capital 형용사 정책 보류는 유지한다. 독립 학습자 평가·실제 iPhone 검사는 미실시이며 QA 하단 교재 글자는 삽화 원본 밖에 있다.
+
+첫 시도 검사 `work/oxford-images-verification-1791459385246.json`(실제 checkedAt `2026-10-08T11:36:25.245Z`)은 PNG 10개, 수정본 검사 `work/oxford-images-verification-1791459561862.json`(checkedAt `2026-10-08T11:39:21.862Z`)은 since 접속사 v2 하나를 확인했다. 최종 검사 `work/oxford-images-verification-1791459596171.json`(실제 checkedAt `2026-10-08T11:39:56.170Z`)은 현재 PNG 10개 해시·크기·디코딩·320px 렌더 및 전체 3809개 메타데이터가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-ybwZoF`·이미지/API 호출 0, 관리/검증/재개 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1978개 해시/크기·기본 생성 원본 11개·기존 보류 31개·정책 보류 2개·실패 2개·교열 후보 12개·원장 접두사를 대조한다. 이전 186/187/188/189의 기본 생성 원본/검수 근거·schedule/shout의 두 시도/첫 보류도 유지하고 세 번째 호출하지 않는다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1884**·검수 통과 **1854**·보류 **31**·실패 **2**·대기 **1922**, 수정본 포함 PNG **1978**·실제 호출 **1980**·누적 수정 **94**다. 실제 호출에는 PNG 반환 1978회와 무이미지 실패 2회(code HTTP 400·route HTTP 408)가 포함된다. 전체 미생성 1,925개이며 전체 목표는 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 792/보류 14/대기 182/실패 2; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 접두사는 `work/oxford-batch-190-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(시도별 실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `since-correction.json`, `corrected-review.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 ski 동사이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `silver` 형용사(은으로 된)다. 이어 simple 형용사·since 전치사/접속사·singing 명사·single 형용사/명사·sir/site/size 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `ski` 동사(스키를 타다)다. 이어 ski 형용사/명사·skiing/skin/sky/sleep 명사·slowly 부사·smartphone 명사·smell 동사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
