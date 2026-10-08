@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1914 |
-| 제작자 품질 검수 통과 `approved` | 1884 |
+| 제작된 서로 다른 항목 | 1924 |
+| 제작자 품질 검수 통과 `approved` | 1894 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,892 |
+| 제작 대기 `waiting` | 1,882 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2011 |
+| 실제 내장 도구 호출 | 2021 |
 | 그중 품질 수정 호출 | 95 |
 
-이미지 미생성 항목은 제작 대기 1,892개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,895개다. 제작된 1914개는 검수 통과 1884개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2009개다. 실제 호출 2011회에는 이미지가 반환된 2009회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,882개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,885개다. 제작된 1924개는 검수 통과 1894개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2019개다. 실제 호출 2021회에는 이미지가 반환된 2019회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -221,6 +221,7 @@
 | 추가 191 | ski 동사/형용사/명사, skiing/skin/sky/sleep 명사, slowly 부사, smartphone 명사, smell 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 모래 분포 대비 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 192 | smell 명사, smile 동사/명사, smoke 명사/동사, smoking/sneaker/soap/soccer 명사, social 형용사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 금연/실업 예문 전체의 인증과 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 193 | society/sock 명사, soft 형용사, soldier/solution 명사, solve 동사, somewhere 부사/대명사, sort/source 명사 | 9개 첫 시도·solve 손 조각 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
+| 추가 194 | speaker 명사, specific 형용사, speech/speed/spider/spoon 명사, square 형용사/명사, stage/stair 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 긴 다리 여덟/바늘 한 개·계단 네 칸 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3592,9 +3593,29 @@ somewhere 부사는 도시 실내/호숫가의 같은 옷 인물 두 장면으�
 
 근거 접두사는 `work/oxford-batch-193-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `reviews.json`, `solve-correction.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 speaker 명사이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 194 제작·검수
+
+A2 `speaker` 명사·`specific` 형용사·`speech`/`speed`/`spider`/`spoon` 명사·`square` 형용사/명사·`stage`/`stair` 명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본과 개별 320px 화면 각 10장을 실제 열어 검토해 모두 첫 시도 검수 통과했다. 이번 호출 10회·수정/신규 보류/신규 서비스 실패 0이며 별도 이미지 API·자동 재시도는 없다.
+
+공식 Cambridge의 [speaker 언어 사용자](https://dictionary.cambridge.org/dictionary/english/speaker), [specific 명확하고 구체적인](https://dictionary.cambridge.org/dictionary/english/specific), [speech 공식 연설](https://dictionary.cambridge.org/dictionary/english/speech), [speed 이동률](https://dictionary.cambridge.org/dictionary/english/speed), [spider 여덟 다리 동물](https://dictionary.cambridge.org/dictionary/english/spider), [spoon 오목한 볼/손잡이](https://dictionary.cambridge.org/dictionary/english/spoon), [square 모양 명사/형용사](https://dictionary.cambridge.org/dictionary/english/square?q=squarest), [stage 공연 무대](https://dictionary.cambridge.org/dictionary/english/stage), [stair 계단 한 칸](https://dictionary.cambridge.org/us/dictionary/english/stair)의 검색 반환에서 해당 정의 부분을 실제 읽고 ID/품사/기본 뜻·표현·예문과 대조했다. speaker는 LANGUAGE, speech는 American Dictionary의 FORMAL TALK, specific은 EXACT, stage는 THEATRE를 각각 대조했다. 교재 수준은 A2로 유지하며 검색 반환을 직접 페이지 열기 성공으로 표현하지 않는다. 전체 사전/말뭉치·오디오·Oxford PDF·Tatoeba 원문을 새로 검수한 것은 아니다.
+
+speaker는 초록 셔츠 인물의 열린 입/연결된 두 손 설명 동작과 적갈색 인물의 닫힌 입/시선, 성인 총 둘로 말하는 사람을 연상한다. 전기 스피커와 구분하며 실제 영어/원어민·국적/신원/발언을 인증하지 않는다. specific은 초록 의자 하나/그 의자의 그림 카드 하나와 좌석 모서리/다리 연결 위치를 가리키는 검지·같은 세부를 보는 성인 둘이다. 구체적인 예의 대상/세부를 보이지만 실제 답변 내용/정밀도·구조 안전이나 품사 확정은 아니다. speech는 연단 하나 뒤 열린 입/손의 연사 한 명과 앉은 청중 세 명으로 공식 연설 맥락을 구분하며 실제 언어/의무 질문의 답·연설 내용/성공은 인증하지 않는다.
+
+speed는 차량의 실제 아날로그 계기 하나/중심축 하나에 연결된 바늘 하나·무지 림 눈금, 운전대/앞유리와 앞의 곧은 길이다. 정지 그림은 실제 속도 수치·일정한 속도 유지/안전성을 증명하지 않는다. spider는 작은 앞몸통/큰 배의 연결과 양옆 긴 관절 다리 네 개씩, 총 여덟을 두 크기에서 직접 세었다. 앞의 짧은 입 주변 부속 구조 두 개는 긴 다리와 따로 구분했다. 종/독성/안전성·톰의 실제 공포/신원을 인증하지 않는다. spoon은 숟가락 하나의 연속 손잡이와 오목한 타원 볼을 확인했다. 저장 `There are no spoons.`의 부정/부재 전체를 그림이 증명한다고 하지 않는다.
+
+square 형용사는 위에서 보는 초록 열린 상자 하나/옆 뚜껑 하나의 정사각형 외곽과 깊이, 명사는 종이 한 장의 닫힌 정사각형 윤곽 하나/바깥 연필 하나로 구분했다. 네 변/네 직각형 모서리를 확인하며 수치 측정/픽셀 정밀도·구조 단순성/유일 품사는 인증하지 않는다. 도형을 글자나 UI 버튼으로 취급하지 않는다. stage는 객석보다 높은 무대의 상판/전면 수직 면·양옆 커튼 두 쪽·성인 배우 한 명과 빈 객석 일부다. 실제 여성 주연 예문의 신원/미래 공연/성공을 인증하지 않는다. stair는 연결된 네 칸 중 가까운 초록 한 칸과 나무색 세 칸을 두 크기에서 직접 세었다. 집합 속 한 칸을 연상하고 저장 복수 표현/접근 예문을 유지하며 실제 신원/치수·시공 안전성을 인증하지 않는다.
+
+셔츠 단추/손·얼굴/옷/신발 끈·의자 이음/그림 카드·계기 바늘/눈금/축·운전대/환기구/차선·거미줄/털/무늬/입 주변 부속 구조·금속 반사/상자 테두리/연필 고정 띠·판재 이음/커튼 주름/계단은 물리 구조고 글자/상표의 대체로 쓰지 않았다. 글자 금지 조건·저장 예문/지문을 유지한다. 모든 이미지는 교재와 함께 쓰는 연상 단서다. 독립 학습자 평가·실제 iPhone 검사는 미실시이며 QA 하단 교재 글자는 삽화 원본 밖에 있다.
+
+첫 시도 검사 `work/oxford-images-verification-1791466211237.json`(실제 checkedAt `2026-10-08T13:30:11.237Z`), 최종 검사 `work/oxford-images-verification-1791466349546.json`(checkedAt `2026-10-08T13:32:29.546Z`)은 각 10개의 PNG 해시·크기·디코딩·320px 렌더 및 전체 3809개 메타데이터가 종료 0으로 통과했다. 의미 검수는 파일 검사와 구분한다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-COgzBz`·이미지/API 호출 0, 관리/검증/재개 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 2019개 해시/크기·기본 생성 원본 10개·기존 보류 31개·정책 보류 2개·실패 2개·교열 후보 12개·원장 접두사를 대조한다. 이전 186/187/188/189/190/191/192/193 기본 생성 원본/검수 근거와 schedule/shout/since/solve의 두 시도/첫 보류도 보존한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1924**·검수 통과 **1894**·보류 **31**·실패 **2**·대기 **1882**, 수정본 포함 PNG **2019**·실제 호출 **2021**·누적 수정 **95**다. 실제 호출에는 PNG 반환 2019회와 무이미지 실패 2회(code HTTP 400·route HTTP 408)가 포함된다. 전체 미생성 1,885개이며 전체 목표는 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 832/보류 14/대기 142/실패 2; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 접두사는 `work/oxford-batch-194-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 stamp 명사이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `speaker` 명사(말하는 사람)다. 이어 specific 형용사·speech/speed/spider/spoon 명사·square 형용사/명사·stage/stair 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `stamp` 명사(우표)다. 이어 star 동사·start/state/stay 명사·steal 동사·step/stomach/stone/storm 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
