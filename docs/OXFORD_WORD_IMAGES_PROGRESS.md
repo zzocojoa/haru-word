@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1824 |
-| 제작자 품질 검수 통과 `approved` | 1795 |
+| 제작된 서로 다른 항목 | 1834 |
+| 제작자 품질 검수 통과 `approved` | 1805 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,982 |
+| 제작 대기 `waiting` | 1,972 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 1917 |
+| 실제 내장 도구 호출 | 1927 |
 | 그중 품질 수정 호출 | 91 |
 
-이미지 미생성 항목은 제작 대기 1,982개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,985개다. 제작된 1824개는 검수 통과 1795개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1915개다. 실제 호출 1917회에는 이미지가 반환된 1915회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,972개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,975개다. 제작된 1834개는 검수 통과 1805개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1925개다. 실제 호출 1927회에는 이미지가 반환된 1925회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -212,6 +212,7 @@
 | 추가 182 | request, research 명사·동사, researcher, respond, response, rest 나머지 명사·휴식 명사·동사, review 명사 | 10개 검수 통과. 정보 요청·식물 연구 과정/피펫 조사/연구원·응답 행위/답변 물체·남은 빵/음악 휴식/활동 중단·음성 서평을 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 | 추가 183 | review 동사, ride 명사, ring 반지 명사·울리다 동사, rise 동사, rock 바위·록 음악 명사, role 명사, roof 명사, round 형용사 | 10개 검수 통과. 원본·개별 320px 각 12장 확인. rock 기타 필기 표식·role 기둥 숫자 유사 표시를 각 한 번 수정, v1/v2 보존 |
 | 추가 184 | round 부사·전치사, route 명사 호출 실패 | 이미지 2개 검수 통과·새 실패 1개. 원본/개별 320px 각 2장 확인. 총 호출 3회, route HTTP 408 무이미지 실패·재시도 없음, 미호출 7개 대기 복구 |
+| 추가 185 | rude 형용사, run/runner/running 명사, sadly 부사, safe 형용사, sail 동사, sailing/salary/sale 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 이번 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3421,9 +3422,25 @@ round 부사는 위에서 오른쪽으로 지나가는 같은 성인이 아래�
 
 근거 접두사는 `work/oxford-batch-184-`다. `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제로 시작한 3개 프롬프트/참조·미호출 장면 7개 구분), `originals.json`, `observations.json`, `reviews.json`, `failure.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 이미지 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 rude이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 185 제작·검수
+
+A2 `rude` 형용사, `run`/`runner`/`running` 명사, `sadly` 부사, `safe` 형용사, `sail` 동사, `sailing`/`salary`/`sale` 명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본 10장과 개별 320px 화면 10장을 실제로 열어 검토해 모두 통과했다. 이번 호출 10회·수정 0·신규 보류/실패 0이며 별도 이미지 API·자동 재시도는 없다.
+
+뜻 근거는 공식 Cambridge의 [rude 무례한 태도](https://dictionary.cambridge.org/us/dictionary/english/rude), [run 달리기 한 차례](https://dictionary.cambridge.org/us/dictionary/english/run), [runner 달리는 사람](https://dictionary.cambridge.org/us/dictionary/english/runner), [running 달리기 활동](https://dictionary.cambridge.org/us/dictionary/english/running), [sadly 슬프게](https://dictionary.cambridge.org/us/dictionary/english/sadly), [safe 해를 입을 가능성이 낮은](https://dictionary.cambridge.org/us/dictionary/english/safe), [sail 배 운항](https://dictionary.cambridge.org/us/dictionary/english/sail), [sailing 돛단배 활동](https://dictionary.cambridge.org/us/dictionary/english/sailing), [salary 고용의 대가](https://dictionary.cambridge.org/us/dictionary/english/salary), [sale 판매/for sale](https://dictionary.cambridge.org/us/dictionary/english/sale)의 반환된 정의 부분이다. 앞 묶음에서 읽고 호출하지 않았던 7개 정의·장면은 정확한 ID/품사/뜻을 대조해 재사용했고 sailing/salary/sale 정의는 추가 확인했다. 전체 사전 페이지·말뭉치·오디오·Oxford PDF·Tatoeba 원문을 새로 검수한 것은 아니다.
+
+탁자에서 손가락을 향하는 무례한 태도, 집 밖 달리기 외출, 운동 인물, 공동 달리기 활동, 떠남의 슬픈 미소, 울타리 안 놀이, 조타하는 행동, 함께 요트 타기, 일→급여 일부 저축, 집 판매 제안 거절을 구분했다. sailing에는 주돛 외 작은 앞돛도 실제 생성됐으며 물리적 연결을 확인했다. salary 노트북의 화면은 뒤로 가려져 있어 내용 검증으로 표시하지 않는다. sale은 돈/열쇠의 교환 없이 열린 손바닥으로 거절하여 “This house is not for sale.”의 부정을 보존한다.
+
+검수 한계: 실제 발언·성격·신원 Tom·습관/아침/거리/속도/건강·감정 진단·안전 보증·항해 기술/기상·월급 주기/계약/금액·소유권/매물/법적 권리는 그림으로 인증하지 않는다. run/running은 초점이 다른 달리기 연상이며 그림만으로 특정 영단어나 품사를 유일하게 구분한다고 주장하지 않는다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+최종 검사 `work/oxford-images-verification-1791450988499.json`(실제 checkedAt `2026-10-08T09:16:28.499Z`)의 10개 PNG 해시·크기·디코딩·320px 렌더 및 전체 3809개 메타데이터가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-73zvTJ`·이미지/API 호출 0, 관리/검증/재개 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1925개 해시/크기·기본 생성 원본 10개·정책 보류 2개·기존 실패 2개·교열 후속 12개·원장 접두사를 대조한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1834**·검수 통과 **1805**·보류 **30**·실패 **2**·대기 **1972**, 수정본 포함 PNG **1925**·실제 호출 **1927**·누적 수정 **91**다. 실제 호출에는 PNG 반환 1925회와 무이미지 실패 2회(code HTTP 400·route HTTP 408)가 포함된다. 전체 미생성 1,975개이며 전체 목표는 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 743/보류 13/대기 232/실패 2; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 접두사는 `work/oxford-batch-185-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 sauce이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `rude` 형용사(무례한)다. 이어 run/runner/running 명사·sadly 부사·safe 형용사·sail 동사·sailing/salary/sale 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. route는 HTTP 408로 실패 기록을 남겼으며 자동 재시도하지 않는다. code의 안전 거절과 기존 보류·모든 시도도 보존한다. 이번 서비스 오류 후 새 호출을 중단했으며 전체 제작 목표를 완료나 paused로 표시하지 않는다.
+다음 제작 대기 첫 항목은 A2 `sauce` 명사(소스)다. 이어 save 동사·scared/scary 형용사·scene/schedule 명사·score 동사/명사·screen/sea 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
