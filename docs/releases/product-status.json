@@ -1,25 +1,29 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-07T01:16:20.196Z",
-  "note": "새 날짜·요일색 카드의 CPU·휴대전화 검증과 두 PR 생성 후 명시적 사용자 승인으로 Site v122를 게시했다. 공개 manifest·5개 파일 해시, 환경59·공개정책4, version37 매일07:30/5장·다음10월8일07:30 및19개 데이터 테이블을 보존했다. PR12/33은 미병합이며 현재 CI 상태는 GitHub를 따른다.",
+  "recordedAt": "2026-10-08T00:22:48.307Z",
+  "note": "표현 선정·리팩토링의 로컬 검증 후 사용자가 추가 실제 계정·CPU·휴대전화 검증 없이 Git 통합을 승인했다. EN_Card PR13/14와 하루단어 선행 PR33은 병합됐다. 하루단어 후속은 최신 main의 카드 관련 변경만 별도 PR로 정리하며 최종 병합 상태는 GitHub를 따른다. 아래 운영 정보는 마지막 실측 기록이며 이번 새 배포/운영 조회는 없다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
       "defaultBranch": "master",
-      "verifiedDefaultCommit": "10278124f0f16037f4f695f129d7d80010665b1a",
+      "verifiedDefaultCommit": "cc667457d8de22e0a2d2d150350786ec063707bf",
       "mergedPullRequests": [
         7,
         8,
         9,
         10,
-        11
-      ]
+        11,
+        12,
+        13,
+        14
+      ],
+      "verifiedAt": "2026-10-08T00:22:48.307Z"
     },
     "haruWord": {
       "url": "https://github.com/zzocojoa/haru-word",
       "defaultBranch": "main",
-      "verifiedDefaultCommit": "9bc1d8d2e79eb318193b347b984d9e9d8a08938f",
+      "verifiedDefaultCommit": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
       "mergedPullRequests": [
         22,
         23,
@@ -30,30 +34,32 @@
         28,
         30,
         31,
-        32
-      ]
+        32,
+        33
+      ],
+      "verifiedAt": "2026-10-08T00:22:48.307Z"
     }
   },
   "production": {
     "site": {
-      "version": 122,
-      "source": "0e88f1fc12bb61f68e0286941c91e7477283d81f",
-      "deployment": "appgdep_6ac59ced6c388191a3d465345b9bbbe4",
+      "version": 123,
+      "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
+      "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
       "envRevision": 59,
       "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
       "latestVersionRead": {
-        "version": 122,
+        "version": 123,
         "status": "succeeded",
-        "checkedAt": "2026-10-07T01:16:20.196Z",
-        "method": "Native publication success; public manifest/five static hashes and unchanged environment/access",
+        "checkedAt": "2026-10-07T16:12:51.430297+00:00",
+        "method": "Native deploy success; public source manifest hash and audience revision checked",
         "accessRevision": 4
       }
     },
     "workerVersions": {
       "en-card": [
         {
-          "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+          "version_id": "fd0d8bf0-0af7-43c3-8f81-562701f2ddce",
           "percentage": 100
         }
       ],
@@ -65,36 +71,46 @@
       ],
       "en-card-automation": [
         {
-          "version_id": "7f17ec46-e0eb-40a8-988b-4aee9e111ce3",
+          "version_id": "bf855d64-4274-465f-8c2a-f01de374a49b",
           "percentage": 100
         }
       ]
     },
-    "workerEvidenceCheckedAt": "2026-10-06T23:45:44.354Z",
-    "workerEvidence": "2026-10-07-card-date-rollout.json",
+    "workerEvidenceCheckedAt": "2026-10-07T16:15:16.459Z",
+    "workerEvidence": "2026-10-08-expression-selection-rollout.json",
     "newDeploymentInThisReconciliation": false,
-    "automationRuntimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
-    "d1Migration": "0021_automation_quality_replacement.sql",
-    "d1MigrationCount": 21,
-    "automationRuntimeSourceCandidate": "2026-10-07-card-date-time.json"
+    "automationRuntimeSourceCommit": null,
+    "d1Migration": "0023_automation_expression_selection.sql",
+    "d1MigrationCount": 23,
+    "automationRuntimeSourceCandidate": "2026-10-08-expression-selection.json",
+    "previousAutomationRuntimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
+    "automationRuntimeSourceNote": "0023 deployment used the preserved expression-selection source snapshot before its final Git commit. This Git-only refactor is not a new deployment; do not label the old date-card commit as the exact current runtime source."
   },
   "cardArtifacts": {
-    "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
-    "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
-    "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+    "enCardSourceCommit": "03b7186a7ce4c8a4c0575c3c5eaeb229ed8bfc8d",
+    "studioSourceSha256": "94a6b09d01bcecf97b52ed90bdd09f7607235051ba4ed55c8dffba0a98ebfa99",
+    "relaySourceSha256": "e99f9110986c9a61a153d619d938708f25226c7ece94240afa5ee9b100b9d965",
     "studioManifest": "public/card-studio/source.json",
     "relayManifest": "lib/server/card-automation.generated.json",
-    "operatingSourceCommit": "1e385951c7c2a20657b8a24681c94ec1a0ceae8c",
-    "operatingEnCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
-    "operatingStudioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
-    "operatingRelaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
-    "candidate": {
-      "evidence": "2026-10-06-automation-quality-replacement.json",
+    "provenance": "Current files/EN_Card source hashes and rebuilt relay bytes match this commit. Original Site export/deployment source remains 67606e021aea42ea44e429c82ec27cbf7b8f8ef1 (v123); no new export or deployment in this Git reconciliation.",
+    "previousRecord": {
+      "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
       "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
       "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
-      "deployed": true,
-      "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
-      "deploymentEvidence": "2026-10-06-automation-replacement-rollout.json"
+      "studioManifest": "public/card-studio/source.json",
+      "relayManifest": "lib/server/card-automation.generated.json",
+      "operatingSourceCommit": "1e385951c7c2a20657b8a24681c94ec1a0ceae8c",
+      "operatingEnCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
+      "operatingStudioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+      "operatingRelaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+      "candidate": {
+        "evidence": "2026-10-06-automation-quality-replacement.json",
+        "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+        "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+        "deployed": true,
+        "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
+        "deploymentEvidence": "2026-10-06-automation-replacement-rollout.json"
+      }
     }
   },
   "reconciliation": {
@@ -3345,5 +3361,63 @@
       "status": "committed_pushed_pull_requests_open"
     },
     "evidence": "2026-10-07-card-date-trial.json"
+  },
+  "expressionSelection": {
+    "status": "trial_five_received_daily_four_quality_failed",
+    "evidence": "2026-10-08-expression-selection-rollout.json",
+    "sourceEvidence": "2026-10-08-expression-selection.json",
+    "actualFiveCardVerification": false,
+    "trialEvidence": "2026-10-08-expression-selection-trial.json",
+    "configVersion": 43,
+    "checkKst": "2026-10-08 02:43",
+    "phoneVerified": false,
+    "serverAcceptanceVerified": true,
+    "serverAcceptedCards": 5,
+    "cpuVerified": false,
+    "trialConfigVersion": 42,
+    "dailyResumed": true,
+    "dailyCards": 5,
+    "nextDailyKst": "2026-10-09 07:30",
+    "followupStatus": "PAUSED",
+    "phoneReceiptCount": 5,
+    "phoneReceiptCountVerified": true,
+    "dailyEvidence": "2026-10-08-expression-selection-daily.json",
+    "latestDaily": {
+      "configVersion": 43,
+      "day": "2026-10-08",
+      "expectedCards": 5,
+      "serverAcceptedCards": 4,
+      "phoneReceivedCards": 4,
+      "missingSlot": 1,
+      "error": "review_failed",
+      "failedStage": "replacement_review",
+      "failedField": "level",
+      "imageDateWeekdayAndLinksConfirmed": false,
+      "cpuVerified": false
+    },
+    "additionalVerificationDecision": {
+      "decisionDate": "2026-10-08",
+      "status": "not_performed_by_user_choice",
+      "additionalAccountCheck": false,
+      "additionalCpuVerification": false,
+      "additionalPhoneVerification": false,
+      "historicalEvidencePreserved": true,
+      "mergeAuthorized": true
+    }
+  },
+  "githubIntegration": {
+    "evidence": "2026-10-08-expression-selection-github.json",
+    "userDecision": {
+      "decisionDate": "2026-10-08",
+      "status": "not_performed_by_user_choice",
+      "additionalAccountCheck": false,
+      "additionalCpuVerification": false,
+      "additionalPhoneVerification": false,
+      "historicalEvidencePreserved": true,
+      "mergeAuthorized": true
+    },
+    "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/14",
+    "haruWordBranch": "codex/automation-expression-pool-merge",
+    "statusSource": "GitHub PR state is authoritative; this file records pre-merge verification and authorization."
   }
 }

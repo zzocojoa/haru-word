@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-08",
+  "status": "local_candidate_not_deployed",
+  "change": "Select and reserve unused expressions before complete card drafting; reuse suggestions across cards and days.",
+  "enCardBranch": "codex/automation-expression-pool",
+  "enCardBase": "1dcfc164b8647b3562206b1b06080e0128aef03c",
+  "enCardSourceProof": "Git-ignored backups/expression-selection-local/final-source.json, 155 matching files",
+  "siteBranch": "codex/automation-expression-pool-release",
+  "siteBase": "0e88f1fc12bb61f68e0286941c91e7477283d81f",
+  "priorGitHubBranchPreserved": "codex/card-date-time",
+  "integration": "Official EN_Card exporter: UI 129 files, server relay 2 files; select stage and reserved expression request added. Old requests remain supported.",
+  "validation": {"integrationTests": 20, "mockOnly": true, "actualNewFiveCardVerification": false},
+  "rolloutOrder": ["compatible Site relay", "idle maintenance and encrypted backup", "D1 0023 with migration history", "automation DO", "main Worker and original Cron", "authorized five-card CPU and phone verification"],
+  "compatibility": "Existing jobs keep expression_selection=0. New jobs use mode 1. Preserve all prior records and current daily settings.",
+  "limits": "24 AI calls per card, at most one AI call per tick, 60-minute lead/55-minute production window, two-minute image wait; no new paid paths or raised limits.",
+  "rollback": "Do not deploy an old relay or DO with active mode-1 jobs. Stop new work and use 0023-compatible code; do not rewind DB or clear attempts, selections or rejections.",
+  "remaining": ["production rollout", "real select calls and uniqueness", "five independent reviews and 1080 PNGs", "five live receipts", "current-version CPU coverage", "phone images/date/weekday/original links"],
+  "priorTrial": "2026-10-07 trial version39: three normal phone receipts, two expired; remains a failed five-card workload."
+}
