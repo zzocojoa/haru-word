@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2004 |
-| 제작자 품질 검수 통과 `approved` | 1973 |
+| 제작된 서로 다른 항목 | 2014 |
+| 제작자 품질 검수 통과 `approved` | 1983 |
 | 품질·의미·조건 보류 `held` | 32 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,802 |
+| 제작 대기 `waiting` | 1,792 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2102 |
+| 실제 내장 도구 호출 | 2112 |
 | 그중 품질 수정 호출 | 96 |
 
-이미지 미생성 항목은 제작 대기 1,802개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,805개다. 제작된 2004개는 검수 통과 1973개와 이미지가 있는 보류 31개이며, 수정본 포함 PNG는 2100개다. 실제 호출 2102회에는 이미지가 반환된 2100회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,792개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,795개다. 제작된 2014개는 검수 통과 1983개와 이미지가 있는 보류 31개이며, 수정본 포함 PNG는 2110개다. 실제 호출 2112회에는 이미지가 반환된 2110회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -230,6 +230,7 @@
 | 추가 200 | teenage 형용사, temperature/term 명사, text 동사, themselves 대명사, thick 형용사, thief 명사, thin 형용사, thinking/third 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 학기/기간·직접 작업 강조·재료 두께·셋 중 하나의 관계를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 201 | thought 명사, throw 동사, tie 동사/명사, tip/tool 명사, top 명사/형용사, touch 동사, tour 명사 | 9개 검수 통과·top 형용사 1개 보류. 원본/개별 320px 각 10장+수정본 확인. 호출 11회·수정 1회·신규 서비스 실패 0. top 조각 수/빈자리 수정 뒤 아래 접합 결함 남아 두 시도 보존/세 번째 호출 없음 |
 | 추가 202 | tourism 명사, toward 전치사, towel/tower 명사, toy 명사/형용사, track/tradition 명사, traditional 형용사, train 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 관광 서비스/접근·놀이 물건/장난감 수식·경주로/전승·악기 훈련을 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 203 | training/transportation/trash/traveler/trouble 명사, twin 명사/형용사, typical 형용사, underground 형용사/부사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 직업 훈련/교통·폐기물/여행자·문제/쌍둥이·짝 침대/보통 하루·지하 역/통행을 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3975,9 +3976,56 @@ A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용
 
 근거 접두사는 `work/oxford-batch-202-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 training 명사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 203 제작·검수
+
+2026-10-09 KST 체크포인트: A2 `training`/`transportation`/`trash`/`traveler`/`trouble` 명사, `twin` 명사/형용사, `typical` 형용사, `underground` 형용사/부사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본/개별 320px 각 10장을 실제 확인해 모두 첫 시도 검수 통과했다. 이번 실제 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다.
+
+| 항목 | 실제 관찰과 범위 |
+|---|---|
+| training n. | 원본에서 앞치마 입은 성인 두 명·학습자 손의 금속 피처 한 개/흰 우유 줄기·다른 손으로 잡은 커피 컵 한 개·컵을 가리키는 지도자의 손을 확인했다. 컵은 카운터에 놓인 것이 아니라 실제 손으로 잡고 있다. 옆 무지 커피 머신/물리 버튼·받침 홈/기계 위 추가 컵 둘도 보인다. 글자/숫자/상표/UI가 없으며 실제 버튼/앞치마 끈/우유 무늬는 물리 요소다. 직업 기술 학습 과정의 연상이며 교육과 훈련의 배타성·실제 자격/성과/정밀 커피 기법을 인증하지 않는다. |
+| transportation n. | 원본에서 플랫폼에 선 성인 승객 두 명·각 무지 가방·열린 출입문/좌석이 있는 여객 기차 한 대·철로를 확인했다. 문과 플랫폼이 연결되는 승차 맥락이며 사람을 이동시키는 교통수단 명사에 맞는다. 실제 점자블록 돌기/차체 띠/물리 창문·문 손잡이·레일/바퀴는 글자/숫자/점수/상표가 아니다. 역명/행선판/지도/티켓 인쇄/UI 없다. 실제 승차 완료·운행표/승차권/안전 규정·철도의 중요성 측정이나 실제 장소를 인증하지 않는다. |
+| trash n. | 원본에서 연결된 손 한 개가 구겨진 무인쇄 종이 한 개를 집고, 옆 바닥의 찌그러진 무지 일회용 컵 한 개·열린 쓰레기 봉투 한 개를 확인했다. 종이/컵의 주름·컵 테두리·봉투 접힘은 물리 요소이며 글자/숫자/재활용 기호/로고/UI가 없다. 원치 않는 폐기물 명사의 맥락이고 손의 줍기는 문맥이다. 원문 명령을 실제 완료했다거나 사람을 비하하는 뜻으로 인증하지 않는다. |
+| traveler n. | 원본에서 뒷모습 성인 한 명이 배낭 한 개를 메고 연결된 손잡이로 작은 바퀴 여행가방 한 개를 끌며 돌 아치를 향해 걷는 모습을 확인했다. 배경에 추가 건물/돔·나무가 실제로 보이고 특정 도시의 신원을 확정하지 않는다. 손잡이/가방 홈/바퀴·옷 주름·돌/창문은 물리 요소이며 지도/여권/간판/문자/숫자/라벨/로고/국기/UI가 없다. 일반 여행자 명사의 연상이고 실제 정확한 나이/성별/민족/여정/관광 경제 효과나 Traveller 집단 소속을 인증하지 않는다. |
+| trouble n. | 원본에서 성인 한 명이 자전거 한 대의 납작해진 앞 타이어 옆에 쪼그려 앉아 걱정스러운 표정으로 보고, 한 손은 턱을 받치며 다른 손은 타이어 가까이에 있는 모습을 확인했다. 앞 고무 타이어는 원형 림에 붙어 있고 아래 접지 부분이 눌려 있다. 바퀴살/브레이크 줄/페달 반사판·신발끈/옷 주름은 물리 구조이며 글자/숫자/감탄부호/로고/표지/UI가 없다. 실용적인 문제/곤경 명사의 연상이며 원문의 실제 소망·범죄/과실·부상/사고/위험이나 정밀 자전거 설계를 인증하지 않는다. |
+| twin n. | 원본에서 위 관계 장면의 성인 보호자 한 명이 각각 팔/손으로 받친 영아 둘·아래 장면의 성인 둘(총 다섯 등장)을 확인했다. 아래 인물은 얼굴 특징 일부가 비슷하지만 머리/초록·붉은 옷이 다르고 왼쪽 인물이 조금 앞에 있다. 신생아 둘과 성장한 두 성인의 가상 연결로 두 자녀 중 하나를 연상한다. 두 관계 장면/무지 배경·자연스러운 비율을 유지하고 문자/숫자/출생 기록/화살표/계보/로고/UI가 없다. 실제 출생 시점/보호자의 모성/혈연/성별/일란성/동일 신원/기간을 그림만으로 인증하지 않으며 쌍둥이 모두 같은 외모/성별이어야 한다는 조건은 만들지 않는다. |
+| twin adj. | 원본에서 서로 분리된 같은 형태의 한 사람용 침대 정확히 두 개·각 베개 한 개/녹색 이불 한 개·사이 빈 간격을 확인했다. 두 침대의 독립된 매트리스 외곽/나무 프레임과 보이는 앞다리 각각 둘이 식별되며 가려진 뒷다리 모두가 보인다고 주장하지 않는다. 목재 결/이불 주름은 물리 요소이며 글자/숫자/라벨/치수표/로고/UI가 없다. 두 비슷한 사물의 짝이라는 twin 형용사와 twin beds 표현에 맞고 실제 원문 인물의 취침/정밀 크기 또는 그림만의 유일 품사를 인증하지 않는다. |
+| typical adj. | 원본에서 위/아래 두 관계 장면에 같은 옷/비슷한 얼굴의 성인이 같은 길을 걷는 모습(성인 총 두 등장)·각 벤치/덤불·추가 나무/자연 해·조금 다른 구름을 확인했다. 아침의 평범한 산책 시작을 되풀이하는 교재 연상이며 픽셀 동일성/동일 실존 인물은 확정하지 않는다. 해 원반/햇빛/구름/잎·벤치 부재/옷 주름은 자연·물리 요소이며 날짜/달력/시계/글자/숫자/체크 기호/로고/UI가 없다. typical의 보통 기대되는 특징으로 보며 정확히 이틀/실제 빈도/누구나 산책해야 하는 보편 조건/의학 효과는 인증하지 않는다. |
+| underground adj. | 원본에서 지표면의 길/입구 한 개/나무 한 개·그 아래 갈색 흙층·지표면보다 아래인 직사각 역 공간/플랫폼·성인 두 명/여객 열차 한 대를 확인했다. 위·아래 계단 두 구간과 손잡이가 보이며 천장 절개부의 숨은 연결 동선을 정밀 설계처럼 확정하지 않는다. 흙/돌·실제 조명/차선/계단·창문/열차 문/레일은 물리 요소이며 글자/숫자/역명/지도/로고/화살표/UI가 없다. 지하에 위치한 역의 형용사 맥락이며 지하철 명사/비밀 조직과 구분하고 실제 시설/규격/안전/완성된 연속 공학 동선을 인증하지 않는다. |
+| underground adv. | 원본에서 지표면의 나무 한 개/잔디·연속 갈색 흙층 아래 터널 한 개·레일 위 연결된 세 객차로 된 열차 한 대를 확인했다. 운전실/전조등은 왼쪽이고 열차 오른쪽에 빈 터널/철로가 이어져 있어 오른쪽을 진행 전방으로 단정하지 않는다. 지표 아래 기차 통행 맥락이 분명하며 역 플랫폼/지표 위 차량은 없다. 터널 이음/흙의 돌·객차 연결/창문/문/전조등/바퀴/레일은 물리 요소이고 글자/숫자/로고/노선도/속도선/UI가 없다. underground 부사의 장소 연상이며 정지 삽화로 실제 이동 방향/속도/도착/정밀 공학·유일 문법 분류를 인증하지 않는다. |
+
+교재의 ID·뜻·품사·표현·예문·출처를 먼저 읽고 공식 Cambridge 사전의 실제 정의 본문을 대조했다. traveler는 US 철자 연결만 있었으므로 traveller의 실제 일반 여행자 정의 본문을 별도로 조회했다. twin의 명사와 형용사 정의를 각각 읽고 twin bed의 한 사람용 침대 정의도 확인했다. underground의 BELOW EARTH 공통 정의를 저장 품사와 station/travel 문맥으로 구분한다.
+
+| 항목 | 읽은 공식 정의 |
+|---|---|
+| training n. | [training noun \[U\] (LEARNING)](https://dictionary.cambridge.org/dictionary/english/training) |
+| transportation n. | [transportation noun \[U\], US vehicle or system sense](https://dictionary.cambridge.org/dictionary/english/transportation) |
+| trash n. | [trash noun \[U\] (THINGS), unwanted waste sense](https://dictionary.cambridge.org/dictionary/english/trash) |
+| traveler n. | [traveller noun \[C\], general person who travels; US traveler](https://dictionary.cambridge.org/dictionary/english/traveller) |
+| trouble n. | [trouble noun (DIFFICULTIES)](https://dictionary.cambridge.org/dictionary/english/trouble?topic=inconvenience) |
+| twin n. | [twin noun \[C\], same mother and occasion](https://dictionary.cambridge.org/dictionary/english/twin?topic=similar-and-the-same) |
+| twin adj. | [twin adjective \[before noun\], similar things forming a pair](https://dictionary.cambridge.org/dictionary/english/twin?topic=similar-and-the-same) |
+| typical adj. | [typical adjective (usual expected characteristics)](https://dictionary.cambridge.org/dictionary/english/typical) |
+| underground adj. | [underground adjective, adverb (BELOW EARTH), adjective context](https://dictionary.cambridge.org/dictionary/english/underground) |
+| underground adv. | [underground adjective, adverb (BELOW EARTH), adverb context](https://dictionary.cambridge.org/dictionary/english/underground) |
+
+보완 근거: [traveler의 US 철자 연결](https://dictionary.cambridge.org/dictionary/english/traveler), [twin bed의 두 한 사람용 침대 맥락](https://dictionary.cambridge.org/dictionary/english/twin-bed?q=twin%2Bbed). 상기 실제 본문을 읽었으며 corpus 예문을 별도 사전 정의로 대신하지 않는다.
+
+글자 금지·저장 교재/예문을 유지했다. 물리 커피 머신 버튼/홈·점자블록 돌기/기차 창문·종이/컵/봉투 주름·가방 바퀴·자전거 바퀴살/브레이크 줄/반사판·보호자 손/영아 천·침대 프레임/앞다리/이불·자연 해/구름/잎·흙/돌/조명/계단/레일은 글자/숫자/로고/UI와 구분한다. training 컵은 실제 손에 있고 커피 머신 위 추가 컵 둘이 보인다. twin beds의 가려진 뒷다리를 모두 보인다고 쓰지 않는다. underground 부사의 왼쪽 운전실/오른쪽 빈 터널을 실제 진행 전방으로 단정하지 않는다. 기능·추상어/품사 맥락 그림은 기본 뜻과 함께 보는 연상 단서이며 실제 자격/기법·승차/소망/범죄·혈연/일란성/출생 시점·빈도/의학 효과·숨은 계단 연결/정밀 공학/열차 이동을 인증하지 않는다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `oxford-images-verification-1791481083943.json`, checkedAt `2026-10-08T17:38:03.943Z`, 실제 종료 0. 당시 generated 10/approved 1973이며 원본과 개별 축소 화면을 실제 확인했다.
+- 최종 검수 등록 뒤 10개 같은 검사: `oxford-images-verification-1791481217886.json`, checkedAt `2026-10-08T17:40:17.886Z`, 실제 종료 0. 첫/최종 파일명·checkedAt을 실제 값으로 보존했다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `oxford-resume-check-xbyw3K`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 2014개·검수 통과 1983개·보류 32개(이미지 있는 보류 31/생성 전 letter 1)·실패 2개·대기 1,792개다. PNG 2110장·실제 호출 2112회·품질 수정 96회이며 전체 미생성 1,795개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 921/보류 15/대기 52/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-203-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 understanding 명사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `training` 명사(훈련)다. 이어 transportation/trash/traveler/trouble 명사·twin 명사/형용사·typical/underground 형용사·underground 부사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. top 형용사/schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `understanding` 명사(이해)다. 이어 unfortunately 부사·unhappy 형용사·uniform/unit 명사·united/unusual/upstairs 형용사·use 명사·used to 조동사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. top 형용사/schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
