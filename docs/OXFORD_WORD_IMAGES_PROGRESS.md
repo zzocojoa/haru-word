@@ -1,6 +1,6 @@
 # Oxford 이미지 제작 진행 기록
 
-- 기준일: 2026-10-08, 브랜치 `codex/oxford-word-images`
+- 기준일: 2026-10-09, 브랜치 `codex/oxford-word-images`
 - 목표·제작 조건: [전체 계획](OXFORD_WORD_IMAGES_PLAN.md)
 - 연결 목록·실제 프롬프트·시도별 해시: [word-image-manifest.json](../data/word-image-manifest.json)
 - 사용자 지시: “지금과 같은 생성 방식을 유지하여 나머지도 진행해라.” 스타일 유지·전체 제작을 승인했으며, 항목별 의미를 일괄 승인한 것으로 해석하지 않는다.
@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1944 |
-| 제작자 품질 검수 통과 `approved` | 1914 |
+| 제작된 서로 다른 항목 | 1954 |
+| 제작자 품질 검수 통과 `approved` | 1924 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,862 |
+| 제작 대기 `waiting` | 1,852 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2041 |
+| 실제 내장 도구 호출 | 2051 |
 | 그중 품질 수정 호출 | 95 |
 
-이미지 미생성 항목은 제작 대기 1,862개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,865개다. 제작된 1944개는 검수 통과 1914개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2039개다. 실제 호출 2041회에는 이미지가 반환된 2039회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,852개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,855개다. 제작된 1954개는 검수 통과 1924개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2049개다. 실제 호출 2051회에는 이미지가 반환된 2049회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -224,6 +224,7 @@
 | 추가 194 | speaker 명사, specific 형용사, speech/speed/spider/spoon 명사, square 형용사/명사, stage/stair 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 긴 다리 여덟/바늘 한 개·계단 네 칸 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 195 | stamp 명사, star 동사, start/state/stay 명사, steal 동사, step/stomach/stone/storm 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 주연/단계 품사 정의와 동전 네 개·주제 카드 세 장을 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 196 | storm 동사, stove 명사, straight 부사/형용사, strange 형용사, strategy 명사, stress 명사/동사, structure 명사, stupid 형용사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 카드 각 장면 세 장·스트레스/강조·채반/양동이 대비를 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 197 | subway 명사, succeed 동사, successful 형용사, such 한정사/대명사, suddenly 부사, suggest 동사, suggestion/suit 명사, support 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. such 두 맥락/품사 근거와 제안 행동·내용, 부정 착용/부양 의미를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3704,9 +3705,51 @@ A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용
 
 근거 접두사는 `work/oxford-batch-196-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 subway 명사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 197 제작·검수
+
+2026-10-09 KST 체크포인트: A2 `subway` 명사, `succeed` 동사, `successful` 형용사, `such` 한정사/대명사, `suddenly` 부사, `suggest` 동사, `suggestion`/`suit` 명사, `support` 동사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본 10장과 개별 320px 화면 10장을 실제 열어 검토해 모두 첫 시도 통과했다. 이번 실제 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다.
+
+`subway`는 지하 아치 터널·차량 한 편성/승강장·뒤에 선 성인 승객 두 명으로 철도 의미를 보행 지하도와 구분한다. `succeed`는 같은 두 성인의 위 면접/아래 악수·폴더 보유로 취업 목표 달성의 맥락을 연상한다. 악수의 팔 연결을 두 크기에서 확인했으며 법적 고용·실제 계약/선발·미래 성공을 인증하지 않는다.
+
+`successful`은 같은 여행자의 위 산·호수 엽서와 배낭/아래 같은 주요 산·호수 모티프와 배낭을 이어 목표와 좋은 결과를 연상한다. 요청 외에 위 책상에 글자 없는 접은 지도 한 장이 추가됐다. 경로 화살표/지명/숫자가 없고 핵심 여행자·엽서를 가리지 않아 뜻/글자 조건을 해치는 결함으로 판정하지 않았다. 실제 여행 완료·가능성/미래 성공·정확한 지리를 인증하거나 원문의 가능성을 확정 사실로 바꾸지 않는다.
+
+`such` 한정사는 정원에서 미소/펼친 손으로 좋은 날을 즐기는 성인과 다른 성인이 접시를 놓는 한 장면이다. 성인 두 명·접시 두 개·바구니 한 개를 확인했다. 대명사 항목은 같은 두 성인의 위 공원 카드 제시/아래 공원·산 카드 나란히 놓기이며 각 장면 카드 두 장이 선택지로 남는다. 교재의 `as such` 지문을 따르되 Cambridge는 이 구를 phrase/idiom으로 분류하므로 교재의 pronoun 표기와 동일 분류라고 주장하지 않는다. 정확한 강조 정도/문법·인과 욕구·실제 동의/명령·therefore 의미를 인증하지 않는다.
+
+`suddenly`는 같은 녹색 성인/안락의자의 위 차분함과 아래 이마에 올린 한 손·걱정하는 눈썹/입의 두 장면이다. 원인 전화/사건·시계/동작 부호를 추가하지 않았고 실제 초/심리·원인/진단을 인증하지 않는다. `suggest`는 산 카드가 있는 수신자에게 다른 공원 카드를 열린 손으로 제시하며 말하는 행동, `suggestion`은 전경의 큰 공원 후보 카드/작은 산 대안 카드·뒤 고려하는 두 성인이라는 제안 내용 중심으로 구분한다. 각 그림 카드 두 장이며 접어 세운 뒷면은 별도 카드가 아니다. 객관적 우열·실제 발화/동의·Tom 신원·유일 품사를 인증하지 않는다.
+
+`suit`는 같은 청색 재킷/접은 바지·나무 옷걸이 한 개, 재킷 아래 두 바지 끝으로 의복 세트를 표현했다. 착용 인물을 추가하지 않아 'Tom didn't wear a suit today'의 부정 예문을 반대 사건으로 바꾸지 않는다. `support`는 위 무문자 동전/지갑과 식료품 구매·아래 같은 성인이 빵/당근 봉지를 다른 성인과 학령기 아이에게 가져오는 부양 맥락이다. 위 두 성인/아래 세 사람·총 다섯 등장을 확인했으며 응원/물리적 받침과 구분한다. 법적 가족 관계·실제 소득/노동·영양 충족/과거 사건을 인증하지 않는다.
+
+공식 근거는 준비 단계의 Cambridge 도메인 제한 검색 세 번과 successful 추가 검색 한 번에서 실제 읽은 정의 구간이다. such의 한정사 강조와 as-such의 exact-role phrase/idiom 구간을 별도로 확인했고 successful은 Intermediate desired-results 정의를 확인했다. 직접 페이지 열기 성공·전체 사전/발음 청취·Oxford PDF·Tatoeba 원문 재평가를 수행했다고 기록하지 않는다.
+
+| 단어·품사 | 확인한 공식 정의 구간 |
+|---|---|
+| subway n. | [subway noun \[C\] (RAILROAD)](https://dictionary.cambridge.org/us/dictionary/english/subway) |
+| succeed v. | [succeed verb (ACHIEVE SOMETHING)](https://dictionary.cambridge.org/dictionary/english/succeed) |
+| successful adj. | [successful adjective (desired results), Intermediate English](https://dictionary.cambridge.org/us/dictionary/english/successful) |
+| such det. | [such predeterminer, determiner (EMPHASIS)](https://dictionary.cambridge.org/us/dictionary/english/such) |
+| such pron. | [as such phrase / idiom (exact role)](https://dictionary.cambridge.org/us/dictionary/english/as-such) |
+| suddenly adv. | [suddenly adverb](https://dictionary.cambridge.org/dictionary/english/suddenly) |
+| suggest v. | [suggest verb \[T\] (MENTION)](https://dictionary.cambridge.org/dictionary/english/suggest) |
+| suggestion n. | [suggestion noun \[C or U\]](https://dictionary.cambridge.org/dictionary/english/suggestion) |
+| suit n. | [suit noun (SET OF CLOTHES)](https://dictionary.cambridge.org/dictionary/english/suit) |
+| support v. | [support verb \[T\] (PROVIDE)](https://dictionary.cambridge.org/dictionary/english/support) |
+
+글자 금지·저장 교재/예문을 유지했다. 승강장 돌기·차창/전조등·무표시 표시창/계산기기 뒷면·옷걸이 갈고리/단추·잎/벤치 그림·접은 카드 지지면·직물 무늬는 실제 대상 구성으로 글자/부호/소프트웨어 UI와 구분했다. 기능어/추상어의 그림은 교재 기본 뜻과 함께 보는 연상 단서이며 특정 영단어/품사를 유일하게 추론하거나 실제 사건/학습 효과를 인증하지 않는다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `work/oxford-images-verification-1791471604739.json`, checkedAt `2026-10-08T15:00:04.739Z`, 실제 종료 0. 당시 generated 10/approved 1914이며 원본과 각 개별 축소 화면을 실제 확인했다.
+- 최종 검수 등록 뒤 같은 검사: `work/oxford-images-verification-1791471773401.json`, checkedAt `2026-10-08T15:02:53.400Z`, 실제 종료 0. 10개 모두 승인 파일/해시·320px 렌더와 일치한다. 파일명 시각은 기록 본문 checkedAt보다 1ms 늦으며 실제 값을 구분해 보존한다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `work/oxford-resume-check-uz5doN`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 1954개·검수 통과 1924개·보류 31개(이미지 있는 보류 30/생성 전 letter 1)·실패 2개·대기 1,852개다. PNG 2049장·실제 호출 2051회·품질 수정 95회이며 전체 미생성 1,855개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 862/보류 14/대기 112/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-197-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 support 명사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `subway` 명사(지하철)다. 이어 succeed 동사·successful 형용사·such 한정사/대명사·suddenly 부사·suggest 동사·suggestion/suit 명사·support 동사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `support` 명사(지원)다. 이어 suppose 동사·sure 부사·surprise 명사/동사·surprised/surprising 형용사·survey 명사·sweet 형용사/명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
