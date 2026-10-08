@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1984 |
-| 제작자 품질 검수 통과 `approved` | 1954 |
-| 품질·의미·조건 보류 `held` | 31 |
+| 제작된 서로 다른 항목 | 1994 |
+| 제작자 품질 검수 통과 `approved` | 1963 |
+| 품질·의미·조건 보류 `held` | 32 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,822 |
+| 제작 대기 `waiting` | 1,812 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2081 |
-| 그중 품질 수정 호출 | 95 |
+| 실제 내장 도구 호출 | 2092 |
+| 그중 품질 수정 호출 | 96 |
 
-이미지 미생성 항목은 제작 대기 1,822개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,825개다. 제작된 1984개는 검수 통과 1954개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2079개다. 실제 호출 2081회에는 이미지가 반환된 2079회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,812개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,815개다. 제작된 1994개는 검수 통과 1963개와 이미지가 있는 보류 31개이며, 수정본 포함 PNG는 2090개다. 실제 호출 2092회에는 이미지가 반환된 2090회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -228,6 +228,7 @@
 | 추가 198 | support 명사, suppose 동사, sure 부사, surprise 명사/동사, surprised/surprising 형용사, survey 명사, sweet 형용사/명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 놀란 상태/놀라운 결과·선택 돌 다섯 개씩/사탕 세 개·sure 부사 본문을 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 199 | symbol/system/tablet/talk/target/task 명사, taste 명사/동사, teaching/technology 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 팔찌 두 개·과녁 세 고리·성인 교사/학습자 세 명·기계 큐브 세 개를 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 200 | teenage 형용사, temperature/term 명사, text 동사, themselves 대명사, thick 형용사, thief 명사, thin 형용사, thinking/third 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 학기/기간·직접 작업 강조·재료 두께·셋 중 하나의 관계를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 201 | thought 명사, throw 동사, tie 동사/명사, tip/tool 명사, top 명사/형용사, touch 동사, tour 명사 | 9개 검수 통과·top 형용사 1개 보류. 원본/개별 320px 각 10장+수정본 확인. 호출 11회·수정 1회·신규 서비스 실패 0. top 조각 수/빈자리 수정 뒤 아래 접합 결함 남아 두 시도 보존/세 번째 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3882,9 +3883,55 @@ A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용
 
 근거 접두사는 `work/oxford-batch-200-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 thought 명사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 201 제작·검수
+
+2026-10-09 KST 체크포인트: A2 `thought` 명사, `throw` 동사, `tie` 동사/명사, `tip`/`tool` 명사, `top` 명사/형용사, `touch` 동사, `tour` 명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본/개별 320px 각 10장을 실제 확인했다. `top` 형용사를 결함에 한정해 한 번 수정하고 수정 원본/320px도 확인했다. 이번 실제 호출 11회·품질 수정 1회·검수 통과 9개·신규 보류 1개·신규 서비스 실패 0이다.
+
+| 항목 | 실제 관찰과 범위 |
+|---|---|
+| thought n. | 턱을 받친 성인 한 명·자전거/걷기 그림 카드 두 장. 숙고 명사의 연상이며 Tom의 신원/실제 생각 내용/과거 사건이나 선택 정답을 인증하지 않는다. |
+| throw v. | 두 성인·왼쪽 열린 투구 손·공중 빨간 공 한 개·오른쪽 받는 두 손. 실제 명령 발화/포구 성공/속도를 확정하지 않는다. |
+| tie v. | 파란 신발 한 개·매듭/좌우 고리·두 고리를 잡는 두 손. 신발 끈 묶기 동사이며 매듭 안전성/실제 정지 사건은 인증하지 않는다. |
+| tie n. | 셔츠 칼라 아래 초록 넥타이 한 개·목 매듭/긴 앞면. 새것인지 묻는 원문의 답이나 동점/관계 뜻으로 해석하지 않는다. |
+| tip n. | 성인 두 명·사과/서양배 실물 두 개·각 과일 그림 카드 두 장과 연결을 설명하는 손. 조언의 연상이며 실제 영단어를 쓰지 않고 기억 효과를 측정한 것으로 표시하지 않는다. |
+| tool n. | 손 한 개·드라이버 한 개/연속 축·나사 한 개·나무 블록 한 개의 연결. 원문 this의 실제 도구 종류/유용성 또는 회전 완료를 인증하지 않는다. |
+| top n. | 둥근 언덕 한 개의 꼭대기·상단까지 흙길·아직 그 아래를 오르는 두 성인. toward의 접근 맥락이며 도착을 그린 것으로 표시하지 않는다. |
+| top adj. | 첫 시도 왼쪽 두 맞춘 조각/옆 두 조각 외에 손의 추가 조각으로 다섯 조각처럼 보이고 빈자리가 약했다. 한 번 수정하여 여분 조각 제거/빈 손·왼쪽 두 맞춘 조각+두 느슨한 조각(네 개)·갈색 빈자리는 확인했다. 그러나 아래 맞춘 조각 오른쪽과 아래 느슨한 조각 왼쪽이 모두 돌기여서 접합 외곽선이 상보적이지 않다. 두 시도 모두 의미 검수 보류, 세 번째 호출하지 않는다. 오른쪽 완성 네 조각/성인 세 명·같은 높이 책상은 보존했으나 픽셀 동일성을 주장하지 않는다. 실제 성적/지능/학교 순위/오늘 일정은 인증하지 않는다. |
+| touch v. | 검지 끝이 파란 전선 피복에 닿음·전선 한 개의 양쪽 분리된 구리 끝. 기본 접촉의 연상이며 조건문 원문의 실제 통전 여부/감전 발생/안전성 또는 행동 권고를 인증하지 않는다. |
+| tour n. | 도시 건물 둘/아치 입구·안내자 한 명/방문자 세 명. 관광 명사의 둘러보는 관계이며 장소 신원/정확한 나이/경제 효과를 인증하지 않는다. |
+
+교재의 ID·뜻·품사·표현·예문·출처를 먼저 읽고 공식 Cambridge 정의 본문을 대조했다. 여덟 표제어의 직접 페이지 열기는 HTTP 403이어서 공식 검색 결과의 실제 정의 본문을 읽었다. throw는 묶음 검색에 없어 독립 검색으로 보완했고 tie/top은 실제 US Learner 정의 본문도 확인했다. 실패한 페이지 열기를 성공한 조회로 기록하지 않는다.
+
+| 항목 | 읽은 공식 정의 |
+|---|---|
+| thought n. | [thought noun \[C/U\] (THINKING)](https://dictionary.cambridge.org/dictionary/english/thought) |
+| throw v. | [throw verb (SEND THROUGH AIR)](https://dictionary.cambridge.org/dictionary/english/throw?q=throw_1) |
+| tie v. | [tie verb (FASTEN)](https://dictionary.cambridge.org/dictionary/english/tie) |
+| tie n. | [tie noun \[C\] (CLOTHES)](https://dictionary.cambridge.org/us/dictionary/learner-english/tie) |
+| tip n. | [tip noun \[C\] (INFORMATION)](https://dictionary.cambridge.org/dictionary/english/tip) |
+| tool n. | [tool noun \[C\] (EQUIPMENT)](https://dictionary.cambridge.org/dictionary/english/tool) |
+| top n. | [top noun (HIGHEST PART)](https://dictionary.cambridge.org/us/dictionary/learner-english/top) |
+| top adj. | [top adjective \[always before noun\] (BEST)](https://dictionary.cambridge.org/us/dictionary/learner-english/top) |
+| touch v. | [touch verb (HAND)](https://dictionary.cambridge.org/dictionary/learner-english/touch) |
+| tour n. | [tour noun \[C\] (visit to a place or area)](https://dictionary.cambridge.org/us/dictionary/english/tour) |
+
+글자 금지·저장 교재/예문을 유지했다. 자전거 구조/그림 카드·손가락/의복 주름·신발 끈/매듭·셔츠 단추·과일 줄기/잎·손잡이의 길쭉한 홈/나사산/나무결·배낭·퍼즐 이음·구리 가닥·아치/문띠/창문은 실제 물리 요소로 글자/숫자/로고/UI와 구분한다. 추상어/품사 맥락 그림은 기본 뜻과 함께 보는 연상 단서이며 특정 영단어/품사를 유일하게 추론하거나 실제 사건/학습 효과를 인증하지 않는다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `oxford-images-verification-1791477832234.json`, checkedAt `2026-10-08T16:43:52.234Z`, 실제 종료 0. 당시 generated 10/approved 1954이며 원본과 개별 축소 화면을 실제 확인했다.
+- top 수정본 같은 검사: `oxford-images-verification-1791478042183.json`, checkedAt `2026-10-08T16:47:22.183Z`, 실제 종료 0. 파일 검사는 통과했으나 의미/물리적 접합 결함은 남아 보류했다.
+- 최종 검수 등록 뒤 10개 같은 검사: `oxford-images-verification-1791478118342.json`, checkedAt `2026-10-08T16:48:38.341Z`, 실제 종료 0. 첫/최종 파일명·checkedAt은 각각 실제 값을 보존하며 최종 파일명은 checkedAt보다 1ms 늦다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `oxford-resume-check-F07Dng`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 1994개·검수 통과 1963개·보류 32개(이미지 있는 보류 31/생성 전 letter 1)·실패 2개·대기 1,812개다. PNG 2090장·실제 호출 2092회·품질 수정 96회이며 전체 미생성 1,815개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 901/보류 15/대기 72/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-201-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta 및 top-correction JSON을 보존한다. 기본 생성 원본 11개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 tourism 명사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `thought` 명사(생각)다. 이어 throw 동사·tie 동사/명사·tip/tool 명사·top 명사/형용사·touch 동사·tour 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `tourism` 명사(관광업)다. 이어 toward 전치사·towel/tower 명사·toy 명사/형용사·track/tradition 명사·traditional 형용사·train 동사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. top 형용사/schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
