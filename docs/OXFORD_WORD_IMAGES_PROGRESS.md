@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1772 |
-| 제작자 품질 검수 통과 `approved` | 1743 |
+| 제작된 서로 다른 항목 | 1782 |
+| 제작자 품질 검수 통과 `approved` | 1753 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,035 |
+| 제작 대기 `waiting` | 2,025 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1862 |
+| 실제 내장 도구 호출 | 1872 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,035개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,037개다. 제작된 1772개는 검수 통과 1743개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1861개다. 실제 호출 1862회에는 이미지가 반환된 1861회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,025개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,027개다. 제작된 1782개는 검수 통과 1753개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1871개다. 실제 호출 1872회에는 이미지가 반환된 1871회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -206,6 +206,7 @@
 | 추가 176 | president, prevent, print 동사, printer, prison, prize, process, produce 동사, professional 형용사, professor | 10개 검수 통과. 회사 대표 회신·진입 예방·인쇄 행동/기계·빈 감방·상 수여·두 단계 학습·기계 생산·유급 음악 활동·대학 강의를 확인. 원본·개별 320px·프린터 버튼 확대 검토, 수정 호출 없음 |
 | 추가 177 | profile, progress, promise 동사/명사, pronounce, protect, provide, public 형용사/명사, publish | 10개 검수 통과. 소개 자료·연습의 발전·약속/이행·발음 따라 하기·헬멧 보호·물품 제공·공공 공원/대중 방문객·책 공개를 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 | 추가 178 | pull, purpose, push, quality, quantity, queen, question 동사, quietly, race 명사/동사 | 10개 검수 통과. 책 꺼내기·행동/활용 목적·휠체어 밀기·부츠 품질/과일 양·왕실 여성·선택 의문·조용한 문 닫기·말 경주/주자 경쟁을 확인. 원본·개별 320px 검토, 수정 호출 없음 |
+| 추가 179 | railroad, raise, rate, rather, reach, react, realize, receive, recent, recently | 10개 검수 통과. 철도·손 올리기·서비스 요금 비교·꽤 바쁜 맥락·꼭대기 도착·사건 반응·길 잃음 인식·봉투 받기·새 복사본/이사 직후를 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3313,9 +3314,25 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 근거 파일 접두사는 `work/oxford-batch-178-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 railroad부터 recently까지 10개이며 아직 장면 준비·호출 전이다.
 
+## 추가 179 · railroad부터 recently까지
+
+2026-10-08, A2 교재 순서의 10개를 내장 `image_gen`으로 한 장씩 순차 제작하고 같은 apple 스타일 참조를 적용했다. **실제 원본 10장·각각의 320px 검사 화면 10장을 열어 검수**해 모두 통과로 기록했다. 호출 10회·수정 0·신규 보류 0·신규 실패 0이다. 기본 생성 원본·시도별 복사본·개별 QA 화면을 보존한다.
+
+실제 관찰: railroad는 정차한 열차·앞쪽 레일과 침목·승강장의 성인 두 명이다. raise는 계단 꼭대기에 양발로 선 성인의 한 손을 머리 위로 올린 모습이고 reach는 꼭대기에 도착해 낮게 난간을 잡은 성인이다. reach의 한 발이 마지막 계단에 남는 장면을 요청했지만 실제 양발은 꼭대기에 있으며 도착 위치의 단서는 유지된다. rate는 같은 객실 열쇠 서비스에 적은 동전과 더 많은 동전을 내는 두 관계 장면이다. 위 동전 두 개를 요청했지만 실제 세 개이며 상대적인 요금 차이를 유지한다. rather는 전화 통화와 빈 문서 확인을 동시에 하는 성인 한 명으로 꽤 바쁜 맥락을 연결한다. react는 같은 성인이 위의 넘어진 컵·물에 반응하고 아래에서 컵을 세운 뒤 천으로 물을 닦는 두 장면이다. realize는 갈림길에서 관자놀이에 손을 대고 낯선 주변을 살피는 성인 한 명, receive는 전경의 성인 여성이 다른 성인에게서 무표시 봉투 한 장을 양손으로 받는 모습이다. recent는 막 뜯은 포장 옆에서 디스크를 들어 보는 성인·닫힌 노트북·다른 디스크다. 이전 복사본의 닫힌 슬리브를 뒤쪽에 요청했지만 실제 다른 디스크는 앞쪽 열린 슬리브에 보이며 새로 꺼낸 맥락은 유지된다. recently는 위의 빈 사무실에서 상자를 들고 나온 직원과 아래의 같은 직원·접수대·방문객·열린 상자·포장 의자를 연결한 두 장면이다. 닫힌 노트북 대신 접수대 뒤에 무표시 회색 화면 뒷면 또는 빈 기기가 보이지만 글자·그림·UI 조작 기호는 없다. 실제 레일·단추·동전 면·봉투 접힘·디스크 구멍·상자 테이프·문손잡이·포장 주름 외에 읽을 수 있는 글자·숫자·상표·라벨·UI는 발견하지 못했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+뜻 대조는 실제 반환된 공식 사전 정의·예문 부분과 로컬 10항목으로 한정했다. [railroad 철도 시설](https://dictionary.cambridge.org/dictionary/english/railroad), [raise 들어 올리기](https://dictionary.cambridge.org/us/dictionary/english/raise), [rate PAYMENT·서비스 요금](https://dictionary.cambridge.org/dictionary/english/rate), [rather TO SOME DEGREE](https://dictionary.cambridge.org/dictionary/english/rather), [reach 도달](https://dictionary.cambridge.org/dictionary/english/reach?q=within-reach), [react 반응·react calmly](https://dictionary.cambridge.org/dictionary/english/react), [realize BECOME AWARE](https://dictionary.cambridge.org/dictionary/english/realize), [receive 받기](https://dictionary.cambridge.org/dictionary/english/receive), [recent 짧은 시간 전에 생긴](https://dictionary.cambridge.org/dictionary/english/recent), [recently 얼마 전에](https://dictionary.cambridge.org/dictionary/english/recently)의 10개 공식 자료를 확인했다. 첫 검색 반환에서 빠진 rather·react는 각각 다시 조회해 실제 정의를 확인했다. rate는 명사 [C] 표기와 American PAYMENT·Business English 서비스 요금 정의를 확인했고 rather는 선호·정정 용법 대신 실제 TO SOME DEGREE 정의를 읽었다. 전체 사전 페이지·말뭉치·오디오·영상·PDF와 Tatoeba 원문 페이지를 새로 검수한 것은 아니다.
+
+검수 한계: 철도 그림은 실제 역·운행 일정·소유·대중교통 중요도를 인증하지 않는다. 손을 올리기와 도착 위치는 운동 방향·완료 시점·명령문 수행을 보장하지 않는다. 동전 비교는 상대적인 서비스 요금 단서이며 실제 금액·통화·단골 고객 여부와 무관하다. 통화·서류 확인은 꽤 바쁜 정도의 단서이며 시간·업무량·rather의 정확한 강도를 확정하지 않는다. 컵에 반응하고 닦는 모습은 청소로도 읽힐 수 있으며 주관적인 침착함·놀람·인과나 안전 행동을 검증하지 않는다. 갈림길의 성인은 불확실함·고민으로도 읽히고 마음속 깨달음·실제 길을 잃은 상태·신원을 입증하지 않는다. 봉투 받기는 내용물이 편지인지와 실제 송수신자·prior to 관계를 보장하지 않는다. 새 포장·받은 시점은 소프트웨어 내용·출시 순서·최신 버전·날짜를 증명하지 않는다. 이사와 현재 정리 중인 상황은 실제 경과 시간·사무실 신원·연대기나 문의 지시를 입증하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다.
+
+최종 이미지 검사 `work/oxford-images-verification-1791440645001.json`(실제 checkedAt `2026-10-08T06:24:05.000Z`)의 10개 PNG 해시·크기·디코딩·320px 렌더링, 메타데이터 3809개 검사가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-0CG6Md`·이미지/API 호출 0, 관리/검증/재개 스크립트 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1871개의 해시/크기·기본 생성 원본 10개·정책 보류 2개·code 실패·교열 후속 12개 보존을 대조한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1782**·검수 통과 **1753**·보류 **30**·실패 **1**·대기 **2025**, 수정본 포함 PNG **1871**·실제 호출 **1872**·누적 수정 **89**다. 전체 미생성 2,027개로 전체 목표는 아직 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 691/보류 13/대기 285/실패 1; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 파일 접두사는 `work/oxford-batch-179-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 reception부터 refuse까지 10개이며 아직 장면 준비·호출 전이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `railroad` 명사(철도)다. 이어 raise 동사·rate 명사·rather 부사·reach·react·realize·receive 동사·recent 형용사·recently 부사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
+다음 제작 대기 첫 항목은 A2 `reception` 명사(접수처)다. 이어 recipe 명사·recognize·recommend 동사·recording 명사·recycle·reduce·refer 동사·refrigerator 명사·refuse 동사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
