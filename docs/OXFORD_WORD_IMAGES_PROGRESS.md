@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1712 |
-| 제작자 품질 검수 통과 `approved` | 1683 |
+| 제작된 서로 다른 항목 | 1722 |
+| 제작자 품질 검수 통과 `approved` | 1693 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,095 |
+| 제작 대기 `waiting` | 2,085 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1802 |
+| 실제 내장 도구 호출 | 1812 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,095개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,097개다. 제작된 1712개는 검수 통과 1683개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1801개다. 실제 호출 1802회에는 이미지가 반환된 1801회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,085개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,087개다. 제작된 1722개는 검수 통과 1693개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1811개다. 실제 호출 1812회에는 이미지가 반환된 1811회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -200,6 +200,7 @@
 | 추가 170 | organization 명사, organize 동사, original 형용사, ourselves 대명사, outside 전치사/명사/형용사, oven 명사, overseas 부사, own 동사 | 10개 원본/320px 검수 통과·첫 내장 호출 10회·수정 0회. 단체/행사 준비·처음/교체·직접 작업·outside 세 품사·안/위·해외/반려동물 맥락 구분. 실제 수량/공구 접촉/추가 소품과 한계 기록. 기존 보류30개/두 조건 보류·code 실패/교열후보12개 보존·새 보류/실패 없음 |
 | 추가 171 | owner 명사, pack 동사, pain/painter/palace/parking 명사, particular 형용사, pass 동사, passenger 명사, past 부사 | 최종 10개 원본/320px 검수 통과·첫 내장 호출10회+owner 열쇠/배지 수정1회. 원본11개 보존·소유주/짐/무릎 불편·화가/왕궁·주차/특정 색·전달/승객/기준점 지나감 구분. 실제 수량/가림/손 접촉/공유 벤치와 한계 기록. 기존 보류30개/두 조건 보류·code 실패/교열후보12개 보존·새 최종 보류/실패 없음 |
 | 추가 172 | patient/pattern/pay/peace/penny 명사, per 전치사, percent 명사/형용사/부사, perform 동사 | 10개 검수 통과. per의 달력 6열→7열과 percent 부사의 동전 10대8→10대9를 각각 한 번 수정, v1/v2 보존. 원본12개·최종320px10개 실제 확인 |
+| 추가 173 | perhaps 부사, permission/personality/pet 명사, photograph 동사, physical 형용사, physics 명사, pick 동사, pilot/planet 명사 | 10개 첫 시도 검수 통과. 불확실한 만남/허가 요청·친근한 성격/반려 토끼·촬영/신체 운동·물리 관찰/사과 따기·항공 조종사/두 행성을 구분. 원본 10개/최종 320px 10개와 실제 가림·수량·연상 한계를 기록했고 수정·새 보류·실패 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3189,9 +3190,36 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 - 전체 불변성 대조 대상은 이전3799개 항목/모든 시도·보류30개/두 조건 보류·code 실패·교열후보12개·교재3809개 지문/PNG1801개 전체 해시·원장/정확 문서 갱신·다음 순서다. 앱 코드/운영/기록/DB/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않았다. 제작자 검수이며 독립 학습자 평가·실제 iPhone·호스팅/UI 반영·영어 정확도 인증은 수행하지 않았다.
 - 로컬 10개 뜻·품사·표현·예문·번역·출처 전체를 읽고 Cambridge 검색 반환의 여덟 표제어 관련 정의 구간과 pay 명사 후속 정의, Collins의 percent 세 품사 구간을 실제 읽었다. [patient의 진료 받는 사람](https://dictionary.cambridge.org/dictionary/english/patient), [peace의 CALM](https://dictionary.cambridge.org/dictionary/english/peace), [per의 for each 관계](https://dictionary.cambridge.org/us/dictionary/english/per), [percent의 명사/형용사/부사 용법](https://www.collinsdictionary.com/us/dictionary/english/percent)을 그 반환 범위에서 대조했다. 처음의 제한된 미리보기 이후 관련 구간을 따로 읽었으며 전체 페이지/보이지 않은 뒤쪽/코퍼스 전체/PDF/음성/영상 접근을 주장하지 않는다. 실제 반환 구간과 범위는 `work/oxford-batch-172-source-evidence.json`에 보존한다.
 
+## 추가 173: perhaps–planet 제작·검수
+
+내장 `image_gen`으로 교재 순서의 다음 10개를 각각 한 번 생성했다. 이번 묶음은 첫 생성 10회·수정 0회·최종 검수 통과 10개·새 보류 0개·이미지 실패 0회다. 원본 10개와 최종 320px 화면 10개를 개별로 실제 열었다.
+
+| 항목·품사 | 기본 뜻 | 실제 관찰한 연상 단서 |
+|---|---|---|
+| perhaps 부사 | 아마 | 망설이는 여성과 흐린 가장자리의 가능한 만남, 확정 예약/실제 내일 날짜 없음 |
+| permission 명사 | 허가 | 두 성인의 열린 손/아래로 든 카메라, 실제 허가 권한·대화 인증 아님 |
+| personality 명사 | 성격 | 같은 초록 옷 인물의 환영/경청 두 상황, 인물 특성의 연상 |
+| pet 명사 | 반려동물 | 집 안에서 토끼 한 마리와 지내는 성인, 물그릇 한 개 |
+| photograph 동사 | 사진을 찍다 | 카메라를 눈높이에 들고 건물을 향하는 사람, 카메라/손 일부 가림 |
+| physical 형용사 | 신체의 | 매트 위 한 성인의 두 팔/몸을 사용하는 가벼운 운동 |
+| physics 명사 | 물리학 | 지지대에 연결된 줄 한 개/금속 추 한 개를 관찰, 빈 공책 |
+| pick 동사 | 따다 | 가지의 사과 한 개를 잡기/바구니 두 개, 총 세 개 |
+| pilot 명사 | 조종사 | 항공 조종석의 한 성인/헤드셋/한 조종간의 두 손잡이 |
+| planet 명사 | 행성 | 떨어진 두 행성과 위의 한 노란 항성, 같은 광원 방향 |
+
+- `perhaps`의 들고 있는 물건은 요청한 달력 대신 무인쇄 노트다. 날짜/내일/미래의 실제 사건을 읽을 수 없으나 큰 인물의 망설임과 가장자리가 흐린 가능한 만남으로 불확실성을 연상한다. `permission`의 안내인 손은 건물보다 방문자를 향하며 실제 지시/고개 끄덕임·법적 권한/승낙을 인증하지 않는다. `personality`는 위/아래 각 두 사람으로 총 네 인물 복사본이며 반복 인물 하나/상대 두 사람의 역할이다. 유명인·실제 내면/평생 성격·같은 실제 사람/정확한 시간 순서를 증명하지 않는다. 문 양면 손잡이/잠금 부품·가려진 몸/세부는 원본을 다시 확인했다.
+- `pet`의 토끼는 귀 두 개/보이는 발 세 개로 가려진 발을 검증했다고 표시하지 않는다. 가족 전체·실제 소유권/동물 건강·돌봄 방법을 인증하지 않는다. `photograph`의 한 손은 카메라 몸체를 잡고 다른 손은 얼굴/카메라 근처에서 일부 가려져 요청한 렌즈 아래 지지와 정확히 같다고 표시하지 않는다. 실제 셔터 동작/초점·동의/건물 이름·국가·용도·촬영 성공을 인증하지 않는다. 카메라를 내린 permission과 올린 photograph를 원본/축소에서 구분했다.
+- `physical`은 신체 운동 맥락이며 진단·환자의 치료 필요성·자세 안전·동작 완료/효과를 인증하지 않는다. `physics`는 물체의 현상을 관찰하는 장면으로 구분하고 실제 진동/주기·에너지 전환·학위/모든 물리 분야·실험 결과를 인증하지 않는다. `pick`은 가지에 붙은 사과를 잡는 과정으로 이미 분리된 수확 완료/과거 시제를 증명하지 않는다. 실제 품종·소유/수확 허가·효율/수량 이력은 알 수 없다.
+- `pilot`은 물리 장비 패널의 무문자 면/두 손잡이/하늘·기수로 항공 조종 역할을 연상한다. 실제 기종/항공기 구조 정확성·운항/경력/면허·통신/경로 설명·안전은 인증하지 않는다. `planet`은 행성 두 개와 항성 한 개이며 세 행성으로 세지 않는다. 노란 항성은 조금 크게 그려졌으나 실제 태양계 비율이 아니고 가상의 표면 무늬/거리·공전/측정값·거리 계산을 인증하지 않는다. 잎·사과 꼭지·수면/발·물리 손잡이/장비 면·창살·나무결·단추/봉제선은 글자/숫자/UI가 아니다.
+- 최종 PNG 디코딩/해시/크기·320px 루프백 보고서 `work/oxford-images-verification-1791432383224.json`(checkedAt 2026-10-08T04:06:23.223Z)이 최종 10개와 현재 counts를 확인했다. 실제 원본/축소 관찰은 `work/oxford-batch-173-observations.json`, 검수는 `work/oxford-batch-173-reviews.json`, 시도별 정확한 전체 전달 프롬프트/참고 경로·기본 생성 원본 경로는 `work/oxford-batch-173-scenes.json`·`work/oxford-batch-173-originals.json`에 보존했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+- 중단/재개 19개 격리 검사(`work/oxford-resume-check-6g2Qfd`, 실제 이미지/API 0회), 제작/재개/검증 스크립트 세 개의 Node 구문 검사, 최종 10-ID verifier는 exit 0이다. 수량 문의 때 존재하지 않는 추정 원장 파일명을 조회해 exit 1이었으나 실제 `work/oxford-images-progress.json`을 확인했고 같은 반환된 physical 원본을 저장했다. 이는 추가 이미지 호출/이미지 실패가 아니며 최종 수량 조회와 검증은 통과했다. 결과/범위는 `work/oxford-batch-173-check-results.json`에 보존했다.
+- 전체 불변성 대조 대상은 이전 3799개 항목/모든 시도·보류 30개/두 조건 보류·code 실패·교열 후보 12개·교재 3809개 지문/PNG 1811개 전체 해시·원장/정확 문서 갱신·다음 순서다. 앱 코드/운영/학습 기록/DB/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않았다. 제작자 검수이며 독립 학습자 평가·실제 iPhone·호스팅/UI 반영·영어 정확도 인증은 수행하지 않았다.
+- 로컬 10개 뜻·품사·표현·예문·번역·출처 전체와 Cambridge 검색 반환의 10개 관련 정의 구간을 읽었다. [perhaps의 불확실성](https://dictionary.cambridge.org/us/dictionary/english/perhaps), [permission의 허용](https://dictionary.cambridge.org/dictionary/english/permission), [physical의 BODY](https://dictionary.cambridge.org/dictionary/english/physical), [physics의 물질/에너지 연구](https://dictionary.cambridge.org/dictionary/english/physics), [pick의 REMOVE](https://dictionary.cambridge.org/us/dictionary/english/pick), [pilot의 AIRCRAFT](https://dictionary.cambridge.org/dictionary/english/pilot), [planet의 항성 주위를 도는 천체](https://dictionary.cambridge.org/dictionary/english/planet)를 실제 반환 범위에서 대조했다. 전체 페이지/보이지 않은 뒤쪽/코퍼스 전체/PDF/음성/영상 접근을 주장하지 않는다. 실제 구간과 범위는 `work/oxford-batch-173-source-evidence.json`에 보존한다.
+
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `perhaps` 부사다. 이후 `permission`/`personality`/`pet` 명사·`photograph` 동사·`physical` 형용사·`physics` 명사·`pick` 동사·`pilot`/`planet` 명사이며 아직 장면 준비/호출을 하지 않았다. A2 총 990/검수 통과 621/보류 13/대기 355/실패 1, 전체 미생성 2,097개(대기 2,095+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1801개·실제 호출 1802회·수정 89회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 제작 대기 첫 항목은 A2 `plant` 동사다. 이후 `plastic` 명사/형용사·`plate`/`platform` 명사·`please` 동사·`pleased` 형용사·`pocket` 명사·`polite` 형용사·`pollution` 명사이며 아직 장면 준비/호출을 하지 않았다. A2 총 990/검수 통과 631/보류 13/대기 345/실패 1, 전체 미생성 2,087개(대기 2,085+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1811개·실제 호출 1812회·수정 89회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
