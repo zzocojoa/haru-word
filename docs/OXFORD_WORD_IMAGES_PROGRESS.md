@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1904 |
-| 제작자 품질 검수 통과 `approved` | 1874 |
+| 제작된 서로 다른 항목 | 1914 |
+| 제작자 품질 검수 통과 `approved` | 1884 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,902 |
+| 제작 대기 `waiting` | 1,892 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2000 |
-| 그중 품질 수정 호출 | 94 |
+| 실제 내장 도구 호출 | 2011 |
+| 그중 품질 수정 호출 | 95 |
 
-이미지 미생성 항목은 제작 대기 1,902개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,905개다. 제작된 1904개는 검수 통과 1874개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1998개다. 실제 호출 2000회에는 이미지가 반환된 1998회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,892개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,895개다. 제작된 1914개는 검수 통과 1884개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2009개다. 실제 호출 2011회에는 이미지가 반환된 2009회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -220,6 +220,7 @@
 | 추가 190 | silver/simple 형용사, since 전치사/접속사, singing 명사, single 형용사/명사, sir/site/size 명사 | 9개 첫 시도·since 접속사 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
 | 추가 191 | ski 동사/형용사/명사, skiing/skin/sky/sleep 명사, slowly 부사, smartphone 명사, smell 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 모래 분포 대비 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 192 | smell 명사, smile 동사/명사, smoke 명사/동사, smoking/sneaker/soap/soccer 명사, social 형용사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 금연/실업 예문 전체의 인증과 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 193 | society/sock 명사, soft 형용사, soldier/solution 명사, solve 동사, somewhere 부사/대명사, sort/source 명사 | 9개 첫 시도·solve 손 조각 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3571,9 +3572,29 @@ soccer는 공원의 성인 둘·발 가까운 축구공 하나·골대/그물 �
 
 근거 접두사는 `work/oxford-batch-192-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 society 명사이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 193 제작·검수
+
+A2 `society`/`sock` 명사·`soft` 형용사·`soldier`/`solution` 명사·`solve` 동사·`somewhere` 부사/대명사·`sort`/`source` 명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본/수정본 11장과 개별 320px 화면 11장을 실제 열어 검토해 9개 첫 시도 통과, solve 한 번 수정 후 통과했다. 이번 호출 11회·품질 수정 1회·신규 보류/신규 서비스 실패 0이다. 별도 이미지 API·자동 재시도는 없다.
+
+공식 Cambridge의 [society 공동 사회](https://dictionary.cambridge.org/dictionary/english/society), [sock 발/다리 옷](https://dictionary.cambridge.org/us/dictionary/english/sock), [soft 부드러움](https://dictionary.cambridge.org/dictionary/english/soft), [soldier 군인](https://dictionary.cambridge.org/dictionary/english/soldier), [solution 문제의 답](https://dictionary.cambridge.org/dictionary/english/solution), [solve 답 찾기](https://dictionary.cambridge.org/us/dictionary/english/solve?q=solving), [somewhere 장소](https://dictionary.cambridge.org/dictionary/english/somewhere), [sort 종류](https://dictionary.cambridge.org/dictionary/english/sort?topic=samples-and-examples), [source 정보 제공처](https://dictionary.cambridge.org/dictionary/english/source)의 검색 반환에서 해당 정의 부분을 실제 읽고 ID/품사/기본 뜻·표현·예문과 대조했다. somewhere 사전은 부사 표제이며 [별도 Cambridge 문법](https://dictionary.cambridge.org/grammar/british-grammar/someone-somebody-something-somewhere)의 부정대명사 설명도 실제 읽어 교재 대명사의 문맥 근거와 구분했다. 사전의 별도 대명사 정의를 읽었다고 하지 않고 그림으로 유일 품사를 인증하지 않는다. 검색 반환을 직접 페이지 열기 성공으로 표현하지 않으며 사전 수준으로 교재 A2를 바꾸지 않는다. 전체 사전/말뭉치·오디오·Oxford PDF·Tatoeba 원문을 새로 검수한 것은 아니다.
+
+society는 같은 이웃 거리의 책 교환 둘/판매·구매 둘/자전거 한 명(성인 총 다섯)과 공유 길/집/책장/가게다. 건네는 책/봉투 각 하나는 확인했으며 뒤 책장에는 여러 무지 책이 있다. 실제 기관/직업·국가/제도/전체 구성원·교육의 효과를 인증하지 않는다. sock은 열린 입구/발목/뒤꿈치/둥근 발끝의 같은 초록 양말 두 개이며 소유 질문의 실제 답이 아니다. soft는 한 성인의 손 아래 눌려 접히는 두꺼운 초록 담요 하나·보풀/주름이다. 실제 촉감/온도·편안함/건강·굴뚝 예문 전체를 인증하지 않는다. soldier는 성인 하나의 깨끗한 군복/헬멧/군화·벨트와 천막 하나, 계급장/국기/명찰/무기 없는 역할 연상이다. 실제 군 소속/국적/계급/정확한 나이·성격/역사는 인증하지 않는다.
+
+solution은 위 세 조각/오른쪽 위 빈자리, 아래 같은 네 조각 완성의 두 관련 장면이다. 초록 오른쪽/파랑 위 돌기를 적갈색 왼쪽/아래 홈이 받아들이는 대응을 두 크기에서 직접 확인했다. 용액 뜻과 구분하고 질문의 실제 답·유일/보편 해결책을 인증하지 않는다. solve v1은 손 조각 왼쪽 돌기와 초록 오른쪽 돌기, 손 조각 아랫홈과 파랑 윗홈이 각각 맞부딪쳐 두 크기에서 의미 보류했다. 한 번의 수정은 손에 든 조각만 왼쪽 홈/아랫돌기로 바꾸어 기존 트레이 대응을 맞췄다. v2의 맞는 홈/돌기·곧은 바깥 가장자리와 연결된 손/같은 세 트레이 조각·한 성인/탁자를 원본·320px에서 확인했다. 총 조각 네 개이며 여분 조각/새 장면은 없다. v1/v2·최초 원본/부정 검수·첫 축소 근거와 실제 수정 프롬프트/참조/각 해시를 보존하고 세 번째 호출하지 않는다. 해결 행동의 연상이며 실제 완성/희망/성공·신원 인증은 아니다.
+
+somewhere 부사는 도시 실내/호숫가의 같은 옷 인물 두 장면으로 현재 장소/다른 무명 장소 대안을 연상한다. 실제 여행이나 반사실적 소원이 성취됐다고 설명하지 않는다. 대명사는 책 한 권씩 든 두 성인(총 두 권)과 빈 책상/의자 하나의 공부 후보 공간이며 옆 복도는 비어 있다. 이름/주소/지도·물음표/화살표 없이 장소를 연상하고 실제 조용함·필요 충족·공부 성과·품사를 확정하지 않는다. sort는 위 바이올린/첼로·활 각 하나의 두 성인, 아래 일렉트릭 기타 하나/드럼 세트 하나의 두 성인, 총 네 성인/두 편성이다. 실제 장르/배타 분류·소리·개인 취향은 인증하지 않는다. source는 성인 하나가 메모 카드/열린 책 각 하나의 잎그림 두 개를 대조하는 정보 제공처 맥락이다. 책 왼쪽은 비어 있고 그림 크기/형태의 픽셀 일치를 주장하지 않으며 실제 신뢰성·식물 동정/정보 정확도·저자/인용/신원을 인증하지 않는다.
+
+책 등/페이지 적층·양말 니트·담요 질감·옷/벨트/헬멧/군화/천막 부품·퍼즐 맞물림/이음·기기 가장자리·악기 현/프렛/작은 실제 위치 점/f형 울림 구멍/노브·드럼 고정 부품/스탠드는 실물 구조고 글자/상표의 대체로 쓰지 않았다. 글자 금지 조건·저장 예문/지문을 유지한다. 모든 이미지는 교재와 함께 쓰는 연상 단서다. 독립 학습자 평가·실제 iPhone 검사는 미실시이며 QA 하단 교재 글자는 삽화 원본 밖에 있다.
+
+첫 시도 검사 `work/oxford-images-verification-1791464363681.json`(실제 checkedAt `2026-10-08T12:59:23.681Z`)은 처음 10개, 수정 검사 `work/oxford-images-verification-1791464606076.json`(checkedAt `2026-10-08T13:03:26.076Z`)은 solve v2 1개, 최종 검사 `work/oxford-images-verification-1791464705631.json`(checkedAt `2026-10-08T13:05:05.631Z`)은 최종 10개의 PNG 해시·크기·디코딩·320px 렌더 및 전체 3809개 메타데이터가 종료 0으로 통과했다. 의미 검수는 이 파일 검사와 구분하며 v1의 파일 정상 여부가 의미 적합성을 입증하지 않는다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-32H8Up`·이미지/API 호출 0, 관리/검증/재개 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 2009개 해시/크기·기본 생성 원본 11개·기존 보류 31개·정책 보류 2개·실패 2개·교열 후보 12개·원장 접두사를 대조한다. 이전 186/187/188/189/190/191/192 기본 생성 원본/검수 근거·schedule/shout/since의 두 시도/첫 보류도 보존한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1914**·검수 통과 **1884**·보류 **31**·실패 **2**·대기 **1892**, 수정본 포함 PNG **2009**·실제 호출 **2011**·누적 수정 **95**다. 실제 호출에는 PNG 반환 2009회와 무이미지 실패 2회(code HTTP 400·route HTTP 408)가 포함된다. 전체 미생성 1,895개이며 전체 목표는 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 822/보류 14/대기 152/실패 2; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 접두사는 `work/oxford-batch-193-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `reviews.json`, `solve-correction.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 speaker 명사이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `society` 명사(사회)다. 이어 sock 명사·soft 형용사·soldier/solution 명사·solve 동사·somewhere 부사/대명사·sort/source 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `speaker` 명사(말하는 사람)다. 이어 specific 형용사·speech/speed/spider/spoon 명사·square 형용사/명사·stage/stair 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
