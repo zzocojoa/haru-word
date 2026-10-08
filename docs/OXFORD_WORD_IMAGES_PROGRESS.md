@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1854 |
-| 제작자 품질 검수 통과 `approved` | 1824 |
+| 제작된 서로 다른 항목 | 1864 |
+| 제작자 품질 검수 통과 `approved` | 1834 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,952 |
+| 제작 대기 `waiting` | 1,942 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 1948 |
+| 실제 내장 도구 호출 | 1958 |
 | 그중 품질 수정 호출 | 92 |
 
-이미지 미생성 항목은 제작 대기 1,952개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,955개다. 제작된 1854개는 검수 통과 1824개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1946개다. 실제 호출 1948회에는 이미지가 반환된 1946회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,942개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,945개다. 제작된 1864개는 검수 통과 1834개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1956개다. 실제 호출 1958회에는 이미지가 반환된 1956회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -215,6 +215,7 @@
 | 추가 185 | rude 형용사, run/runner/running 명사, sadly 부사, safe 형용사, sail 동사, sailing/salary/sale 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 이번 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 186 | sauce, save, scared, scary, scene, schedule, score 동사/명사, screen, sea | 9개 첫 시도 검수 통과·schedule 1개 수정 후 보류. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 서비스 실패 0, v1/v2 보존·세 번째 호출 없음 |
 | 추가 187 | search 명사/동사, season/seat 명사, second 부사, secret 형용사/명사, secretary 명사, seem 동사, sense 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 이번 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 188 | separate 형용사, series 명사, serious 형용사, serve 동사, service 명사, several 한정사/대명사, shake 동사, shape/sheet 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. several 대명사 총 열 권 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3474,9 +3475,27 @@ search 명사는 같은 잎의 정보 탐색→대응 그림 확인 두 장면, 
 
 근거 접두사는 `work/oxford-batch-187-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(시도별 실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 separate 형용사이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 188 제작·검수
+
+A2 `separate` 형용사, `series` 명사, `serious` 형용사, `serve` 동사, `service` 명사, `several` 한정사/대명사, `shake` 동사, `shape`/`sheet` 명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본 10장과 개별 320px 화면 10장을 실제 열어 검토해 모두 첫 시도 검수 통과했다. 이번 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이며 별도 이미지 API·자동 재시도는 없다.
+
+공식 Cambridge의 [separate 형용사](https://dictionary.cambridge.org/dictionary/english/separate), [series 관련 사건](https://dictionary.cambridge.org/dictionary/english/series), [serious 심각한 문제](https://dictionary.cambridge.org/dictionary/english/serious), [serve 고객 응대](https://dictionary.cambridge.org/dictionary/english/serve), [service 운행](https://dictionary.cambridge.org/dictionary/english/service), [several 한정사/대명사](https://dictionary.cambridge.org/us/dictionary/english/several), [shake 이동](https://dictionary.cambridge.org/dictionary/english/shake), [shape 외형](https://dictionary.cambridge.org/dictionary/english/shape), [sheet 종이](https://dictionary.cambridge.org/dictionary/english/sheet)의 공식 검색 결과에서 실제 반환된 해당 정의 부분을 읽고 ID/품사/기본 뜻·표현·예문과 대조했다. 검색 반환을 직접 페이지 열기 성공으로 표현하지 않는다. 사전 수준으로 교재 A2를 바꾸지 않으며 전체 사전/말뭉치·오디오·Oxford PDF·Tatoeba 원문을 새로 검수한 것은 아니다.
+
+separate는 실물 벽으로 구분된 두 침실과 아이/침대 하나씩, series는 같은 세 연주자/악기의 두 커튼 무대 장면, serious는 큰 천장 파손과 바닥 잔해/출입구 쪽 두 성인이다. serve는 두 고객에게 컵을 제공하는 종업원, service는 공항 건물/여객기 옆 버스 문과 두 여행객이다. several 한정사는 거래 맥락의 책 세 권이며 정확한 수량 정의가 아니다. 대명사는 왼쪽 세 권과 오른쪽 일곱 권을 원본·320px에서 각각 직접 세어 전체 열 권과 일부의 관계를 확인했다. 왼쪽 책갈피는 실물 천이며 완독 증명이 아니다. shake는 닫힌 병 한 개/액체 출렁임/흐린 운동 잔상, shape는 같은 갈색 원형/네모/세모 실물 조각의 두께/그림자, sheet는 양손으로 들어 약하게 휘는 빈 종이 한 장이다.
+
+sheet의 저장된 `Number each sheet of paper before you start.` 지시문에는 숫자가 필요하지만 삽화는 `a sheet of paper`의 핵심 명사/표현만 그린다. 번호 매기기 동작 전체를 표현했다고 하지 않으며 글자 금지 조건·저장 예문/지문을 유지한다. 이는 글자 자체를 뜻하는 letter/capital 형용사 정책 보류를 해제한 것이 아니다. 책 종이 단면의 층·천 책갈피·동전/문 부품·기타 조율 부품·여객기 창·나무 외곽선은 물리적 요소이며 글자/숫자/로고로 판독하지 않는다.
+
+검수 한계: 실제 수면/아이 신원/주택 설계·공연 시간 순서/미래 일정/소리·건축 위험 진단/파손 원인/감정·주문/거래 성공/친절한 내면/음료 온도·실제 버스 운행 유무/노선/요금/안전·책 구매/어제/완독/품사·병 내용물/안전/속도/세기·물건 선호/정밀 치수/재질·번호 쓰기 명령 수행을 인증하지 않는다. 그림은 검토한 교재와 함께 사용하는 연상 단서다. 독립 학습자 평가·실제 iPhone 검사는 미실시다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+
+최종 검사 `work/oxford-images-verification-1791455804336.json`(실제 checkedAt `2026-10-08T10:36:44.336Z`)의 현재 PNG 10개 해시·크기·디코딩·320px 렌더 및 전체 3809개 메타데이터가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-dKPdPK`·이미지/API 호출 0, 관리/검증/재개 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1956개 해시/크기·기본 생성 원본 10개·기존 보류 31개·정책 보류 2개·실패 2개·교열 후보 12개·원장 접두사를 대조한다. 이전 186/187의 기본 생성 원본/검수 근거·schedule v1/v2와 첫 보류도 유지하고 세 번째 호출하지 않는다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1864**·검수 통과 **1834**·보류 **31**·실패 **2**·대기 **1942**, 수정본 포함 PNG **1956**·실제 호출 **1958**·누적 수정 **92**다. 실제 호출에는 PNG 반환 1956회와 무이미지 실패 2회(code HTTP 400·route HTTP 408)가 포함된다. 전체 미생성 1,945개이며 전체 목표는 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 772/보류 14/대기 202/실패 2; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 접두사는 `work/oxford-batch-188-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(시도별 실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 ship 명사이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `separate` 형용사(별개의)다. 이어 series 명사·serious 형용사·serve 동사·service 명사·several 한정사/대명사·shake 동사·shape/sheet 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `ship` 명사(배)다. 이어 shoulder 명사·shout 동사/명사·shut 동사/형용사·side/sign 명사·sign 동사·silver 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
