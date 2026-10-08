@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1994 |
-| 제작자 품질 검수 통과 `approved` | 1963 |
+| 제작된 서로 다른 항목 | 2004 |
+| 제작자 품질 검수 통과 `approved` | 1973 |
 | 품질·의미·조건 보류 `held` | 32 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,812 |
+| 제작 대기 `waiting` | 1,802 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2092 |
+| 실제 내장 도구 호출 | 2102 |
 | 그중 품질 수정 호출 | 96 |
 
-이미지 미생성 항목은 제작 대기 1,812개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,815개다. 제작된 1994개는 검수 통과 1963개와 이미지가 있는 보류 31개이며, 수정본 포함 PNG는 2090개다. 실제 호출 2092회에는 이미지가 반환된 2090회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,802개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,805개다. 제작된 2004개는 검수 통과 1973개와 이미지가 있는 보류 31개이며, 수정본 포함 PNG는 2100개다. 실제 호출 2102회에는 이미지가 반환된 2100회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -229,6 +229,7 @@
 | 추가 199 | symbol/system/tablet/talk/target/task 명사, taste 명사/동사, teaching/technology 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 팔찌 두 개·과녁 세 고리·성인 교사/학습자 세 명·기계 큐브 세 개를 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 200 | teenage 형용사, temperature/term 명사, text 동사, themselves 대명사, thick 형용사, thief 명사, thin 형용사, thinking/third 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 학기/기간·직접 작업 강조·재료 두께·셋 중 하나의 관계를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 201 | thought 명사, throw 동사, tie 동사/명사, tip/tool 명사, top 명사/형용사, touch 동사, tour 명사 | 9개 검수 통과·top 형용사 1개 보류. 원본/개별 320px 각 10장+수정본 확인. 호출 11회·수정 1회·신규 서비스 실패 0. top 조각 수/빈자리 수정 뒤 아래 접합 결함 남아 두 시도 보존/세 번째 호출 없음 |
+| 추가 202 | tourism 명사, toward 전치사, towel/tower 명사, toy 명사/형용사, track/tradition 명사, traditional 형용사, train 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 관광 서비스/접근·놀이 물건/장난감 수식·경주로/전승·악기 훈련을 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3929,9 +3930,54 @@ A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용
 
 근거 접두사는 `work/oxford-batch-201-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta 및 top-correction JSON을 보존한다. 기본 생성 원본 11개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 tourism 명사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 202 제작·검수
+
+2026-10-09 KST 체크포인트: A2 `tourism` 명사, `toward` 전치사, `towel`/`tower` 명사, `toy` 명사/형용사, `track`/`tradition` 명사, `traditional` 형용사, `train` 동사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본/개별 320px 각 10장을 실제 확인해 모두 첫 시도 검수 통과했다. 이번 실제 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다.
+
+| 항목 | 실제 관찰과 범위 |
+|---|---|
+| tourism n. | 원본에서 카운터 제공자 한 명·방문객 두 명(성인 셋)·방문객 손의 건물 그림 리플릿 한 개/원형 동전 한 개·배경 관광버스를 확인했다. 제공자는 리플릿 그림을 가리키며 안내하고, 리플릿은 이미 방문객이 잡고 있어 실제 전달 완료를 확정하지 않는다. 배경 건물/왼쪽 일부 아치·배낭/모자 띠/버스 유리/동전 물리 테두리는 글자/숫자/상표가 아니다. 관광 서비스를 제공하는 업의 연상이며 실제 지급 성공/도시 신원/나이/경제 효과를 인증하지 않는다. |
+| toward prep. | 원본에서 왼쪽 아래의 성인 두 명이 오른쪽 위 언덕 꼭대기를 향해 같은 흙길을 오르는 몸/발 방향과 아직 남은 경로를 확인했다. 배낭 끈/잔디/바위/흙길은 실제 물리 요소이며 화살표·표지·글자/숫자/로고가 없다. toward의 방향/접근 연상이며 정상 도착·실제 과거 여정/속도 또는 유일 품사를 인증하지 않는다. |
+| towel n. | 원본에서 연결된 두 손이 접힌 녹색 수건 한 개를 열린 파란 여행 가방 한 개에 넣는 위치를 확인했다. 수건의 흡수성 고리 질감/직조 테두리·여러 접힘과 가방 지퍼/손잡이는 물리 요소다. 접힌 층을 여러 수건으로 세지 않으며 글자/숫자/케어 라벨/상표가 없다. 수건 명사와 pack의 연상 맥락이며 실제 명령 수행 완료/위생 측정을 인증하지 않는다. |
+| tower n. | 원본에서 독립된 높고 좁은 원통형 석탑 한 개·아치 창문/흉벽·그 아래에서 바라보는 성인 한 명과 작은 잔디를 확인했다. 탑 외곽이 온전히 보이며 시계/숫자/문자/라벨/로고/국기가 없다. 석재 이음/흉벽 돌출/배낭 끈은 실제 물리 구조다. 건축 명사이며 컴퓨터 케이스/동사와 구분하고 실제 타워/관찰 장소나 정확한 치수는 인증하지 않는다. |
+| toy n. | 원본에서 아이 한 명이 바닥에 무릎 꿇고 연결된 손으로 작은 빨간 장난감 자동차 한 개를 밀며 보는 장면을 확인했다. 자동차 창/작은 바퀴·셔츠/바지 주름은 물리 구조이고 숫자/번호판/브랜드/글자/화살표가 없다. child's toy라는 교재에 따른 놀이 물건 명사의 맥락이며 아이의 실제 선호·성별/정확한 나이/신원을 인증하지 않는다. 절제된 색/종이 질감의 자연스러운 인물 비율을 유지한다. |
+| toy adj. | 원본에서 연결된 손바닥 한 개에 작은 빨간 자동차 모형 한 개가 놓인 크기 관계·성형 차체/창문/전조등·가까운 두 바퀴를 확인했다. 먼 바퀴는 차체에 가려져 네 바퀴 모두 보인다고 주장하지 않는다. 자동차 이음/손금/라이트/그릴은 물리 요소이며 글자/숫자/로고/번호판이 없다. 실제 Oxford toy 형용사 첫 뜻의 놀이용 복제품에 맞고 작은 개 품종 형용사와 구분한다. 실제 원문 소유/선호·정확한 축척 또는 그림만의 유일 품사는 인증하지 않는다. |
+| track n. | 원본에서 초록 중앙 공간을 둘러싼 연결된 타원형 붉은 경주로 한 개·네 통로/물리 흰 차선과 같은 방향으로 달리는 성인 두 명을 확인했다. 두 사람은 안쪽 경로를 따라 앞뒤로 달리며 서로 인접한 별도 차선이라고 단정하지 않는다. 차선/신발끈/잔디는 실제 요소이며 숫자/문자/로고/화살표/철도 레일/음악 파형이 없다. 경주로 명사에 적합하며 실제 경기 결과/속도·정밀 치수/차선 규정은 인증하지 않는다. |
+| tradition n. | 원본에서 위/아래 두 관계 장면, 각각 나이가 다른 두 인물(총 네 등장)이 만두 빚는 방법을 보여주고 따라 하는 구성을 확인했다. 위의 젊은 파란 옷 인물/아래의 일부 흰머리 파란 옷 인물이 이어진 관행을 연상한다. 각 도마/만두·반죽 원/속 그릇·나무 숟가락은 물리 음식 준비 도구다. 추가 속 그릇/숟가락을 없는 것으로 기록하지 않는다. 글자/숫자/계보/화살표/국기/로고 없다. 가족 음식 전통 명사의 전승 연상이며 원문 식사 전체의 실제 장면·혈연/신원/세월/국가 문화 진정성을 인증하지 않는다. |
+| traditional adj. | 원본에서 흰머리 성인/젊은 성인 두 명이 각 손의 만두를 빚으며 방법을 보여주고 따라 하는 관계·도마 한 개/만두 접시 한 개를 확인했다. 밀가루/반죽 주름/앞치마는 물리 요소이며 글자/숫자/라벨/국기/로고 없다. 공유 음식/이어온 방법으로 traditional 형용사를 연상하며 음식 자체만으로 특정 문화 진정성·혈연/실제 역사/기간/원문 실제 메뉴나 전체 식사 사건을 인증하지 않는다. |
+| train v. | 원본에서 성인 학습자 한 명이 피아노의 실제 흑백 건반 위에 두 손을 놓고 옆의 지도 성인 한 명이 건반 쪽을 손가락으로 가리키는 연습/지도 관계를 확인했다. 피아노 한 개·의자/무지 나무 몸체·빈 악보 받침/건반은 물리 구조이며 글자/상표/악보·음표/점수/뇌 도식/UI가 없다. train 기술 연습/훈련 동사로 교재 악기 맥락에 맞으며 철도 명사와 구분한다. 정밀 건반 배열/손가락 기법·실제 소리/인지 향상/성과를 인증하지 않는다. |
+
+교재의 ID·뜻·품사·표현·예문·출처를 먼저 읽고 공식 사전의 실제 정의 본문을 대조했다. 묶음 검색에 traditional의 본문이 없어 공식 topic URL을 별도로 조회했다. Cambridge toy 형용사는 작은 개 품종 뜻이므로, toy car에 맞는 실제 Oxford toy_2 형용사의 첫 정의를 따로 읽었다. 작은 개 정의를 자동차 모형 뜻의 근거로 쓰지 않는다.
+
+| 항목 | 읽은 공식 정의 |
+|---|---|
+| tourism n. | [tourism noun \[U\] (business of providing visitor services)](https://dictionary.cambridge.org/us/dictionary/english/tourism) |
+| toward prep. | [toward preposition (MOVEMENT), American Dictionary](https://dictionary.cambridge.org/dictionary/english/toward) |
+| towel n. | [towel noun \[C\], American Dictionary](https://dictionary.cambridge.org/dictionary/english/towel) |
+| tower n. | [tower noun \[C\] (tall narrow structure)](https://dictionary.cambridge.org/dictionary/english/tower) |
+| toy n. | [toy noun \[C\] (PLAY OBJECT)](https://dictionary.cambridge.org/dictionary/english/toy?q=toy_1) |
+| toy adj. | [toy adjective \[only before noun\], imitation used for play (sense 1)](https://www.oxfordlearnersdictionaries.com/definition/english/toy_2) |
+| track n. | [track noun (SPORT), built racing path](https://dictionary.cambridge.org/dictionary/english/track?topic=athletics) |
+| tradition n. | [tradition noun \[C/U\], American Dictionary](https://dictionary.cambridge.org/dictionary/english/tradition) |
+| traditional adj. | [traditional adjective (continued customs)](https://dictionary.cambridge.org/dictionary/english/traditional?topic=custom-tradition-and-conformity) |
+| train v. | [train verb (TEACH), skills or mental/physical exercise](https://dictionary.cambridge.org/dictionary/english/train) |
+
+글자 금지·저장 교재/예문을 유지했다. 수건 고리 질감/직조 테두리·자동차 이음/그릴/전조등·손금·석재 이음/흉벽·차선/잔디·반죽/만두 주름·피아노 건반/무지 몸체는 실제 물리 요소이며 글자/숫자/로고/UI와 구분한다. 관광업 그림의 제공자는 방문객이 이미 잡은 리플릿을 가리키므로 전달 완료로 기록하지 않는다. track의 두 주자는 같은 안쪽 경로를 따라 앞뒤에 있고, 인접한 별도 차선으로 기록하지 않는다. tradition의 추가 속 그릇/숟가락은 실제로 보인다. 기능·추상어/품사 맥락 그림은 기본 뜻과 함께 보는 연상 단서이며 실제 지급/경제 효과·방향의 도착·가족 관계/문화 진정성/시간 경과·정밀 건반 배열/손가락 기법/인지 향상을 인증하지 않는다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `oxford-images-verification-1791479639849.json`, checkedAt `2026-10-08T17:13:59.849Z`, 실제 종료 0. 당시 generated 10/approved 1963이며 원본과 개별 축소 화면을 실제 확인했다.
+- 최종 검수 등록 뒤 10개 같은 검사: `oxford-images-verification-1791480050483.json`, checkedAt `2026-10-08T17:20:50.483Z`, 실제 종료 0. 첫/최종 파일명·checkedAt을 실제 값으로 보존했다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `oxford-resume-check-cd9uAM`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 2004개·검수 통과 1973개·보류 32개(이미지 있는 보류 31/생성 전 letter 1)·실패 2개·대기 1,802개다. PNG 2100장·실제 호출 2102회·품질 수정 96회이며 전체 미생성 1,805개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 911/보류 15/대기 62/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-202-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 training 명사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `tourism` 명사(관광업)다. 이어 toward 전치사·towel/tower 명사·toy 명사/형용사·track/tradition 명사·traditional 형용사·train 동사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. top 형용사/schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `training` 명사(훈련)다. 이어 transportation/trash/traveler/trouble 명사·twin 명사/형용사·typical/underground 형용사·underground 부사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. top 형용사/schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
