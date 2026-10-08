@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1722 |
-| 제작자 품질 검수 통과 `approved` | 1693 |
+| 제작된 서로 다른 항목 | 1732 |
+| 제작자 품질 검수 통과 `approved` | 1703 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,085 |
+| 제작 대기 `waiting` | 2,075 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1812 |
+| 실제 내장 도구 호출 | 1822 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,085개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,087개다. 제작된 1722개는 검수 통과 1693개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1811개다. 실제 호출 1812회에는 이미지가 반환된 1811회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,075개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,077개다. 제작된 1732개는 검수 통과 1703개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1821개다. 실제 호출 1822회에는 이미지가 반환된 1821회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -201,6 +201,7 @@
 | 추가 171 | owner 명사, pack 동사, pain/painter/palace/parking 명사, particular 형용사, pass 동사, passenger 명사, past 부사 | 최종 10개 원본/320px 검수 통과·첫 내장 호출10회+owner 열쇠/배지 수정1회. 원본11개 보존·소유주/짐/무릎 불편·화가/왕궁·주차/특정 색·전달/승객/기준점 지나감 구분. 실제 수량/가림/손 접촉/공유 벤치와 한계 기록. 기존 보류30개/두 조건 보류·code 실패/교열후보12개 보존·새 최종 보류/실패 없음 |
 | 추가 172 | patient/pattern/pay/peace/penny 명사, per 전치사, percent 명사/형용사/부사, perform 동사 | 10개 검수 통과. per의 달력 6열→7열과 percent 부사의 동전 10대8→10대9를 각각 한 번 수정, v1/v2 보존. 원본12개·최종320px10개 실제 확인 |
 | 추가 173 | perhaps 부사, permission/personality/pet 명사, photograph 동사, physical 형용사, physics 명사, pick 동사, pilot/planet 명사 | 10개 첫 시도 검수 통과. 불확실한 만남/허가 요청·친근한 성격/반려 토끼·촬영/신체 운동·물리 관찰/사과 따기·항공 조종사/두 행성을 구분. 원본 10개/최종 320px 10개와 실제 가림·수량·연상 한계를 기록했고 수정·새 보류·실패 없음 |
+| 추가 174 | plant 동사, plastic 명사/형용사, plate/platform 명사, please 동사, pleased 형용사, pocket 명사, polite 형용사, pollution 명사 | 10개 첫 시도 검수 통과. 심기/재료·재질/접시·승강장/기쁨 유발·만족 상태/주머니·배려 응답·대기오염 구분. 원본/최종 320px 각 10개·실제 차이/가림/수량 기록, 수정·새 보류·실패 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3217,9 +3218,36 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 - 로컬 10개 뜻·품사·표현·예문·번역·출처 전체와 Cambridge 검색 반환의 10개 관련 정의 구간을 읽었다. [perhaps의 불확실성](https://dictionary.cambridge.org/us/dictionary/english/perhaps), [permission의 허용](https://dictionary.cambridge.org/dictionary/english/permission), [physical의 BODY](https://dictionary.cambridge.org/dictionary/english/physical), [physics의 물질/에너지 연구](https://dictionary.cambridge.org/dictionary/english/physics), [pick의 REMOVE](https://dictionary.cambridge.org/us/dictionary/english/pick), [pilot의 AIRCRAFT](https://dictionary.cambridge.org/dictionary/english/pilot), [planet의 항성 주위를 도는 천체](https://dictionary.cambridge.org/dictionary/english/planet)를 실제 반환 범위에서 대조했다. 전체 페이지/보이지 않은 뒤쪽/코퍼스 전체/PDF/음성/영상 접근을 주장하지 않는다. 실제 구간과 범위는 `work/oxford-batch-173-source-evidence.json`에 보존한다.
 
 
+## 추가 174: plant–pollution 제작·검수
+
+내장 `image_gen`으로 교재 순서의 10개 항목을 각각 한 번 생성했다. 첫 생성 10회·수정 0회·최종 검수 통과 10개·새 보류 0개·이미지 실패 0회다. 원본 10개와 최종 320px 화면 10개를 실제로 개별 열어 대조했다.
+
+| 항목·품사 | 기본 뜻 | 실제 관찰한 연상 단서 |
+|---|---|---|
+| plant 동사 | 심다 | 두 손으로 묘목의 흙/뿌리 덩어리를 구덩이에 넣는 성인 |
+| plastic 명사 | 플라스틱 | 푸른 재료 알갱이 그릇과 같은 계열 성형 병 |
+| plastic 형용사 | 플라스틱으로 만든 | 손의 접촉에 측면이 변형되는 병 한 개 |
+| plate 명사 | 접시 | 얕은 중앙/올라간 테두리, 음식 부스러기/흔적 |
+| platform 명사 | 승강장 | 열차 옆 넓은 바닥/아래 선로, 성인 한 명/가방 |
+| please 동사 | 기쁘게 하다 | 두 봉투를 받는 두 수신자와 전달자, 총 성인 세 명 |
+| pleased 형용사 | 기쁜 | 상대를 들으며 만족한 미소를 짓는 큰 수신자 |
+| pocket 명사 | 주머니 | 옷에 봉제된 주머니 윗입구/일부 걸친 열쇠 |
+| polite 형용사 | 예의 바른 | 안내대에서 작은 열린 손짓으로 응답하는 태도 |
+| pollution 명사 | 오염 | 한 굴뚝에서 이어지는 회갈색 연기/코를 가린 성인 |
+
+- `plant`는 요청한 얇은 줄기보다 실제 밑줄기가 굵고 여러 잎자루가 이어진다. 땅에 넣는 행위를 확인했으며 가려진 발/손가락 전체·특정 야자 종/실제 Tom·원예 안전/생장·심기 완료는 인증하지 않는다. `plastic` 명사는 재료와 성형 물건을 함께 보여주고 형용사는 병의 재질에 집중한다. 일부 재료 알갱이는 속이 빈 짧은 관 형태이며 정확한 수/분자 구조를 세지 않았다. 병 주름/뚜껑 홈/빛 반사는 물체 표면이다. 실제 재활용 이력·모든 플라스틱의 유연성/내용물·식품 안전/환경 효과는 인증하지 않는다.
+- `plate`의 음식 흔적은 덜 깨끗한 예문 맥락이며 접시가 항상 더럽다는 정의가 아니다. `platform`의 입구는 요청한 같은 높이 대신 플랫폼보다 조금 높다. 여전히 열차 옆의 넓은 승강장/아래 선로가 식별되며 문 손잡이·창/좌석/하부 부품은 물리 장비다. 실제 5번 승강장/역/시간표·승차 지시/차량 구조나 안전의 검증은 아니다.
+- `please`는 상대를 기쁘게 하는 전달 행동과 두 수신자의 미소이며 봉투 두 개/성인 세 명이다. 탁자에 노트북/책/머그/화분 각 하나가 추가되어 업무 맥락을 이룬다. 실제 돈·월급 인상/금액/달·팀 전체/직책·내면은 보이지 않는다. `pleased`는 수신자의 만족한 표정에 초점을 두며 실제 답변 문구·예문의 여성 대명사/시제·관계/심리 진단을 그림으로 판정하지 않는다. `polite`는 응답자의 배려하는 태도에 초점을 두고 실제 발화·권한/모든 문화의 예의 기준을 인증하지 않는다.
+- `pocket`은 주머니 물체를 보여주는 그림이다. 코트에 주머니 한 개가 보이므로 예문의 “주머니가 없다”를 그림에 충족했다고 표시하지 않는다. 그 부정문에는 교재 텍스트가 필요하다. 동작 손 외에 반대 손 일부/얼굴·전신 가림도 기록했고 열쇠 일부가 주머니 입구에 남아 있다. `pollution`은 한 굴뚝의 연기와 도시/불편 반응의 대기오염 연상이며 정확한 배출 성분/농도·질병·공장의 실제 위법·모든 연기/증기의 유해성·대중교통 저감 효과를 인증하지 않는다. 음식 얼룩·재료 관/병 홈·단추 구멍/봉제선·열쇠 머리·건물 창/연기 형태는 글자·숫자/UI가 아니다.
+- 최종 PNG 디코딩/해시/크기·320px 루프백 보고서는 `work/oxford-images-verification-1791433494395.json`(checkedAt 2026-10-08T04:24:54.395Z)이며 최종 10개와 현재 counts를 확인했다. 원본/축소 관찰과 검수는 `work/oxford-batch-174-observations.json`·`work/oxford-batch-174-reviews.json`, 시도별 정확한 전체 프롬프트/참고 경로·기본 생성 원본 경로는 `work/oxford-batch-174-scenes.json`·`work/oxford-batch-174-originals.json`에 보존했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있다.
+- 중단/재개 19개 격리 검사(`work/oxford-resume-check-ZV4KKO`, 실제 이미지/API 0회), 제작/재개/검증 스크립트 세 개의 Node 구문 검사, 최종 10-ID verifier는 exit 0이다. 첫 사전 구간 추출은 pleased의 실제 미국식 URL을 예상하지 못해 중단됐으나 완료된 같은 검색 반환의 미국식/비미국식 경로를 찾아 해결했다. 추가 검색/이미지 호출 없이 9개 정의 구간을 읽고 저장했다. 실제 명령/검증 범위는 `work/oxford-batch-174-check-results.json`에 보존했다.
+- 전체 불변성 대조 대상은 이전 3799개 항목/모든 시도·보류 30개/두 조건 보류·code 실패·교열 후보 12개·교재 3809개 지문/PNG 1821개 전체 해시·원장/정확 문서 갱신·다음 순서다. 앱 코드/운영/학습 기록/DB/백업/API/EN_Card를 변경하지 않아 전체 앱 테스트·타입·린트·빌드는 실행하지 않았다. 제작자 검수이며 독립 학습자 평가·실제 iPhone·호스팅/UI 반영·영어 정확도 인증은 수행하지 않았다.
+- 로컬 10개 뜻·품사·표현·예문·번역·출처 전체와 Cambridge 검색 반환의 9개 표제어 관련 정의 구간을 실제 읽었다. [plant 동사의 심기](https://dictionary.cambridge.org/dictionary/english/plant), [plastic의 재료 명사/재질 형용사](https://dictionary.cambridge.org/dictionary/english/plastic), [platform의 철도 승강장](https://dictionary.cambridge.org/dictionary/english/platform), [please의 기쁘게 하는 동사](https://dictionary.cambridge.org/dictionary/english/please), [pleased의 만족 상태](https://dictionary.cambridge.org/us/dictionary/english/pleased), [pocket의 옷에 봉제된 수납부](https://dictionary.cambridge.org/dictionary/english/pocket), [polite의 배려하는 태도](https://dictionary.cambridge.org/dictionary/english/polite), [pollution의 유해 물질/폐기물 오염](https://dictionary.cambridge.org/dictionary/english/pollution)을 그 범위에서 대조했다. 전체 페이지/보이지 않은 뒤쪽/코퍼스/PDF/음성/영상 접근을 주장하지 않는다. 실제 반환 구간/범위는 `work/oxford-batch-174-source-evidence.json`에 보존한다.
+
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `plant` 동사다. 이후 `plastic` 명사/형용사·`plate`/`platform` 명사·`please` 동사·`pleased` 형용사·`pocket` 명사·`polite` 형용사·`pollution` 명사이며 아직 장면 준비/호출을 하지 않았다. A2 총 990/검수 통과 631/보류 13/대기 345/실패 1, 전체 미생성 2,087개(대기 2,085+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1811개·실제 호출 1812회·수정 89회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
+다음 제작 대기 첫 항목은 A2 `pop` 명사다. 이후 `pop` 형용사·`population`/`position`/`possession`/`possibility`/`poster`/`power` 명사·`predict`/`present` 동사이며 아직 장면 준비/호출을 하지 않았다. A2 총 990/검수 통과 641/보류 13/대기 335/실패 1, 전체 미생성 2,077개(대기 2,075+letter 조건 보류 1+code 무이미지 실패 1)·PNG 1821개·실제 호출 1822회·수정 89회다. 실패한 code와 한 번 수정 후 보류한 count·fit 형용사·fly 명사·flying 형용사·have 조동사·hockey 명사·holiday 명사·human 명사·hurt 동사·lend 동사·less 한정사를 자동 재호출하지 않고 기존 승인/보류/두 조건 보류를 보존한다. 철자가 같아도 ID·품사·기본 뜻별로 장면을 구분한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
