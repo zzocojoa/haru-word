@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+표현을 먼저 예약한 뒤 AI 카드를 만드는 기능과 호환 릴레이·생성 파일의 Git 통합을 진행했습니다. [원본 커밋·로컬 검증·Git 상태 확인](docs/releases/2026-10-08-expression-selection-github.json)을 따르세요. 추가 실제 계정·CPU·휴대전화 검증은 사용자 선택으로 미실시이며 과거 관측 공백은 유지합니다. 마지막 배포 기록은 Site v123/0023이고 이번 Git 작업은 운영 게시·Worker 배포를 포함하지 않습니다. 아래 v121 등은 당시 기록입니다.
+
 최종 품질 탈락 뒤 새 후보를 한 번 만드는 기능을0021·Site v121에 배포했습니다. [이번 시험](docs/releases/2026-10-06-automation-replacement-trial.json)은5장 모두 서버접수와 사용자 이미지·원본링크 정상 확인을 마쳤습니다. 과거 제작 준비 CPU 자료 공백은 사용자 승인에 따라 미검증으로 남기고 EN_Card PR11·하루단어 PR32를 병합했습니다.
 
 개발·병합·배포 상태는 [하루단어 제품 관리](PRODUCT_MANAGEMENT.md)에서 두 저장소를 함께 확인합니다. 카드 화면의 수정 원본은 EN_Card이며, 이 저장소의 카드 생성 파일은 정식 exporter로만 갱신합니다. 최신 운영은 [Site v121·새 후보 DO 반영](docs/releases/2026-10-06-automation-replacement-rollout.json)이며, 실제5장 수신은 확인했습니다. 아래 버전 표시는 과거 기록입니다.

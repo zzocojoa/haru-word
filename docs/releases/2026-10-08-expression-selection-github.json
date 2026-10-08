@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-08T00:22:48.307Z",
+  "scope": "Git-only integration; no new deployment, account/CPU/phone check, AI call, send or settings mutation",
+  "userDecision": {
+    "decisionDate": "2026-10-08",
+    "status": "not_performed_by_user_choice",
+    "additionalAccountCheck": false,
+    "additionalCpuVerification": false,
+    "additionalPhoneVerification": false,
+    "historicalEvidencePreserved": true,
+    "mergeAuthorized": true
+  },
+  "enCard": {
+    "source": "03b7186a7ce4c8a4c0575c3c5eaeb229ed8bfc8d",
+    "pullRequest": 14,
+    "mergeCommit": "cc667457d8de22e0a2d2d150350786ec063707bf",
+    "precedingPullRequest": 13
+  },
+  "haruWord": {
+    "branch": "codex/automation-expression-pool-merge",
+    "base": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
+    "precedingPullRequest": 33,
+    "preservedSourceBranch": "codex/automation-expression-pool-release",
+    "preservedSnapshot": "5a2f2286f245687b7771683a41615648e730b51e",
+    "historyPolicy": "Only the reviewed product tree delta was restored on current main; unrelated Sites experiment ancestry was not merged.",
+    "finalMergeStatusSource": "GitHub pull request for this branch"
+  },
+  "validation": {
+    "enCardRelatedTests": 194,
+    "enCardBuildAndFreeCheck": "passed",
+    "enCardVerifiedInputs": 183,
+    "siteIntegrationTests": 20,
+    "mockOnly": true,
+    "artifacts": {
+      "passed": true,
+      "checkedArtifacts": 131,
+      "studioSourceSha256": "94a6b09d01bcecf97b52ed90bdd09f7607235051ba4ed55c8dffba0a98ebfa99",
+      "relaySourceSha256": "e99f9110986c9a61a153d619d938708f25226c7ece94240afa5ee9b100b9d965",
+      "rebuiltRelayIdentical": true,
+      "enCardSource": "03b7186a7ce4c8a4c0575c3c5eaeb229ed8bfc8d"
+    },
+    "ciPolicy": "Require successful latest-head Node22/24 checks before merging"
+  },
+  "historicalResults": {
+    "trialPhoneCount": 5,
+    "dailyPhoneCount": 4,
+    "fullPhoneDisplayAndLinksVerified": false,
+    "cpuCoverageComplete": false
+  },
+  "production": {
+    "siteVersion": 123,
+    "d1Migration": 23,
+    "newDeployment": false,
+    "refactorRuntimeDeployedInThisTask": false
+  },
+  "compatibility": "Existing relay request contracts and mode0 history remain; do not remove expression selection/attempt/rejection records or roll back to incompatible relay/DO."
+}

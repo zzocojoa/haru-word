@@ -66,6 +66,27 @@ function callBody(provider = 'google', stage = 'draft', content = null) {
     settings: { topic: '일상', base_expression: '', level: '초급', template: 'expression', start_date: '2026-10-03', end_date: null, time: '23:00' },
     content, review: null, recent: [] } };
 }
+test('expression selection and a reserved draft use the exported relay contract', async () => {
+  const card = { template: 'expression', expression: 'Keep going', meaning_ko: '계속해',
+    example_en: 'Keep going.', example_ko: '계속해.', note_ko: '', base_expression: '', base_meaning_ko: '' };
+  for (const stage of ['select', 'draft']) {
+    const body = callBody('google', stage, null);
+    if (stage === 'draft') body.input.expression = card.expression;
+    const output = stage === 'select' ? { expressions: ['Keep going', 'Take it easy'] } : card;
+    let calls = 0;
+    const result = await handleCardAutomationRelay(signed(body), config, async (_url, init) => {
+      calls++;
+      const payload = JSON.parse(init.body);
+      if (stage === 'select') assert.equal(payload.generationConfig.responseJsonSchema.properties.expressions.maxItems, 10);
+      else assert.match(payload.contents[0].parts[0].text, /Use the supplied expression exactly/);
+      return Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify(output) }] } }] });
+    });
+    assert.equal(result.status, 200);
+    assert.deepEqual(await result.json(), { result: output });
+    assert.equal(calls, 1);
+  }
+});
+
 test('missing schema and failed nonce reservation never call a provider or partially clean receipts', async () => {
   let calls = 0;
   const provider = async () => { calls++; throw new Error('Unexpected provider call'); };

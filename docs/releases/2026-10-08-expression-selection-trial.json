@@ -1,0 +1,386 @@
+{
+  "at": "2026-10-07T16:26:36.126Z",
+  "status": "server_passed_phone_count_confirmed_cpu_and_display_pending",
+  "day": "2026-10-08",
+  "kind": "trial",
+  "configVersion": 42,
+  "cards": 5,
+  "expressionSelection": 1,
+  "preparationKst": "2026-10-08 01:26",
+  "deadlineKst": "2026-10-08 02:21",
+  "dueKst": "2026-10-08T02:26",
+  "originalSettings": {
+    "version": 40,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "enabled": 1,
+    "nextDueAt": 1791412200000,
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "currentSettings": {
+    "version": 43,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": 1791412200000,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "historyAndUsagePreserved": true,
+  "migration": 23,
+  "siteVersion": 123,
+  "workers": {
+    "en-card": {
+      "versions": [
+        {
+          "version_id": "fd0d8bf0-0af7-43c3-8f81-562701f2ddce",
+          "percentage": 100
+        }
+      ],
+      "crons": [
+        "* * * * *"
+      ],
+      "versionsMatch": true,
+      "bindingsMatch": true,
+      "cronsMatch": true
+    },
+    "en-card-delivery": {
+      "versions": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "versionsMatch": true,
+      "bindingsMatch": true,
+      "cronsMatch": true
+    },
+    "en-card-automation": {
+      "versions": [
+        {
+          "version_id": "bf855d64-4274-465f-8c2a-f01de374a49b",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "versionsMatch": true,
+      "bindingsMatch": true,
+      "cronsMatch": true
+    }
+  },
+  "followup": {
+    "automationId": "en-card-5",
+    "status": "PAUSED",
+    "checkKst": "2026-10-08 02:43",
+    "captureEndsKst": "2026-10-08 02:41",
+    "pausedAt": "2026-10-07T18:00:03.986Z"
+  },
+  "verification": {
+    "registeredRows": 5,
+    "modeOneRows": 5,
+    "preparationNotStartedAtInitialRead": true,
+    "unresolved": 0,
+    "serverAcceptanceVerified": true,
+    "cpuVerified": false,
+    "phoneVerified": false,
+    "serverAcceptedCards": 5,
+    "activeRuns": 0,
+    "selectedExpressionMatchesFinal": true,
+    "independentlyReviewed": true,
+    "finalExpressionsUnique": true,
+    "png1080Verified": true,
+    "acceptedAttemptsPerCard": 1,
+    "readyByKst": "2026-10-08 02:15:17.464",
+    "serverAcceptanceKst": {
+      "first": "2026-10-08 02:27:19.093",
+      "last": "2026-10-08 02:28:20.689"
+    },
+    "phoneConfirmationRequested": true,
+    "phoneReceiptCount": 5,
+    "phoneReceiptCountVerified": true
+  },
+  "resume": {
+    "pending": false,
+    "requiredVersion": 42,
+    "resultVersion": 43,
+    "requiredSettingsHash": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "originalDueKst": "2026-10-08 07:30",
+    "conditions": "Terminal trial, no active creation/schedules/pending/inflight/unknown, no quota/auth/config/storage; preserve user changes. Partial trial does not authorize replenishment.",
+    "at": "2026-10-07T17:45:42.590Z",
+    "applied": true,
+    "version": 43,
+    "savedSettingsUnchanged": true,
+    "dailyCards": 5,
+    "time": "07:30",
+    "nextDueKst": "2026-10-08T07:30",
+    "nextDueAt": 1791412200000,
+    "observedDaily": {
+      "day": "2026-10-08",
+      "cards": 5,
+      "configVersion": 43,
+      "dueAt": 1791412200000,
+      "preparationAt": 1791408600000,
+      "deadline": 1791411900000
+    },
+    "scope": "Restored original daily cursor only after terminal trial and no unresolved work; partial trial remains partial, no replacement sends.",
+    "enabled": 1,
+    "preservedNonSettingsTables": 20,
+    "foreignKeyErrors": 0
+  },
+  "evidenceDirectory": "EN_Card Git-ignored backups/expression-selection-trial-20261008/",
+  "sourceScope": "Read-only trial/CPU verification, conditional original daily resume, local documentation and heartbeat pause only. No new trial, generation, send, deployment, history reset, limit increase or merge.",
+  "firstLiveSelection": {
+    "at": "2026-10-07T16:26:37.346Z",
+    "provider": "google",
+    "calls": 1,
+    "outcome": "ok",
+    "candidates": 10,
+    "reserved": 1,
+    "duplicateSelectedExpressions": 0
+  },
+  "checkedAt": "2026-10-07T18:00:03.986Z",
+  "registrationSettings": {
+    "version": 42,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": null,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "selection": {
+    "selectCalls": 1,
+    "initialCandidates": 10,
+    "candidateReuseSlots": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "remainingCandidates": 5,
+    "claimedCandidates": 0,
+    "duplicateSelectedExpressions": 0,
+    "rejectedSuggestions": 0,
+    "totalAiCalls": 25,
+    "unavailable": 6,
+    "callsPerSlot": [
+      {
+        "slot": 1,
+        "calls": 6
+      },
+      {
+        "slot": 2,
+        "calls": 2
+      },
+      {
+        "slot": 3,
+        "calls": 4
+      },
+      {
+        "slot": 4,
+        "calls": 9
+      },
+      {
+        "slot": 5,
+        "calls": 4
+      }
+    ],
+    "attempts": [
+      {
+        "stage": "draft",
+        "provider": "google",
+        "outcome": "ok",
+        "calls": 5
+      },
+      {
+        "stage": "draft",
+        "provider": "google",
+        "outcome": "unavailable",
+        "calls": 5
+      },
+      {
+        "stage": "review",
+        "provider": "google",
+        "outcome": "ok",
+        "calls": 1
+      },
+      {
+        "stage": "review",
+        "provider": "google",
+        "outcome": "unavailable",
+        "calls": 1
+      },
+      {
+        "stage": "review",
+        "provider": "groq",
+        "outcome": "ok",
+        "calls": 8
+      },
+      {
+        "stage": "revise",
+        "provider": "google",
+        "outcome": "ok",
+        "calls": 3
+      },
+      {
+        "stage": "revise",
+        "provider": "groq",
+        "outcome": "ok",
+        "calls": 1
+      },
+      {
+        "stage": "select",
+        "provider": "google",
+        "outcome": "ok",
+        "calls": 1
+      }
+    ],
+    "additionalQualityCorrectionSlots": [
+      4
+    ],
+    "verifiedAdditionalCorrectionSlots": [
+      4
+    ],
+    "qualityNewCandidateObserved": false,
+    "correctionFailureFallbackObserved": false,
+    "duplicateFullCardRegenerationObserved": false,
+    "naturalDuplicateRejectionObserved": false,
+    "nextDayReuseObserved": false,
+    "totalCallReductionProven": false
+  },
+  "cpu": {
+    "window": {
+      "start": "2026-10-07T16:25:21.008Z",
+      "end": "2026-10-07T17:30:20.689Z"
+    },
+    "rawUnit": "microseconds",
+    "reportedUnit": "milliseconds",
+    "divisor": 1000,
+    "main": {
+      "requests": 72,
+      "errors": 0,
+      "maxObservedMs": 8.011,
+      "sampledGroups": 0,
+      "unexpectedVersionGroups": 0
+    },
+    "delivery": {
+      "requests": 71,
+      "errors": 0,
+      "maxObservedMs": 5.756,
+      "sampledGroups": 0,
+      "unexpectedVersionGroups": 0
+    },
+    "doHighestReturnedGroupP99Ms": 627.009,
+    "doP99IsMaximum": false,
+    "actualDeliveryCpuMs": [
+      5.756,
+      4.152,
+      4.027,
+      3.476,
+      3.827
+    ],
+    "observedRuntimeErrors": 0,
+    "sampleInterval": 1,
+    "unexpectedVersionGroups": 0,
+    "aiCalls": 25,
+    "aiTailMatched": 23,
+    "aiAnalyticsOnly": 2,
+    "rendersTailMatched": 5,
+    "sendsTailMatched": 5,
+    "allCallsCovered": false,
+    "cpuVerified": false,
+    "remainingGaps": [
+      {
+        "surface": "main",
+        "kst": [
+          "01:30:16",
+          "02:12:16"
+        ],
+        "missing": "analytics",
+        "tailCpuMs": [
+          2,
+          3
+        ]
+      },
+      {
+        "surface": "DO",
+        "kst": [
+          "01:43:16",
+          "01:44:16"
+        ],
+        "missing": "tail",
+        "aiStage": [
+          "review",
+          "revise"
+        ],
+        "analyticsCpuMs": [
+          9.064,
+          10.431
+        ]
+      },
+      {
+        "surface": "DO",
+        "kst": [
+          "02:13:16"
+        ],
+        "missing": "analytics",
+        "tailCpuMs": [
+          2
+        ],
+        "workload": "auxiliary tick"
+      },
+      {
+        "surface": "delivery",
+        "tailKst": "02:26:21.999",
+        "analyticsKst": "02:26:22",
+        "analyticsCpuMs": 3.01,
+        "workload": "delivery_defer",
+        "inference": "Possible second-boundary rounding; no matching trace ID proves identity."
+      }
+    ],
+    "narrowRequeryCount": 1,
+    "gapsPersistAfterRequery": true,
+    "captureEndedAsScheduled": true,
+    "tailExitCodes": [
+      null,
+      null,
+      null
+    ],
+    "tailExitExplanation": "Collectors deliberately stopped at 02:41; null is not a normal zero exit.",
+    "parserInvalidJson": 0,
+    "parserBufferDiscards": 0,
+    "cronMinuteGaps": 0,
+    "assessmentProblems": [
+      "en-card-delivery_coverage_or_outcome",
+      "en-card-automation_coverage_or_outcome",
+      "five_card_workload_mapping_incomplete"
+    ],
+    "assessmentCaveat": "criticalWorkloadHasBothSources inspects matched entries only; two AI calls lack tail spans, so it does not establish complete workload coverage."
+  },
+  "cost": {
+    "configurationChanged": false,
+    "freeConfirmation": "User confirmed Workers Free on 2026-10-07; subscription API previously returned 403, no new plan confirmation."
+  },
+  "evidence": [
+    "verify-scheduled-trial.json",
+    "selection-scheduled-trial.json",
+    "metrics-scheduled-trial.json",
+    "cpu-maximum-scheduled-trial.json",
+    "cpu-assessment-scheduled-trial.json",
+    "coverage-recheck.json",
+    "capture.log",
+    "resumed.json",
+    "observe-resumed.json"
+  ],
+  "phoneReceipt": {
+    "dueKst": "2026-10-08 02:26",
+    "receivedCount": 5,
+    "countConfirmed": true,
+    "imageDateWeekdayAndLinksConfirmed": false,
+    "recordedAt": "2026-10-07T22:55:23.802Z"
+  }
+}
