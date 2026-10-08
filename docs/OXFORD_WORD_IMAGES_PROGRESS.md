@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1894 |
-| 제작자 품질 검수 통과 `approved` | 1864 |
+| 제작된 서로 다른 항목 | 1904 |
+| 제작자 품질 검수 통과 `approved` | 1874 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,912 |
+| 제작 대기 `waiting` | 1,902 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 1990 |
+| 실제 내장 도구 호출 | 2000 |
 | 그중 품질 수정 호출 | 94 |
 
-이미지 미생성 항목은 제작 대기 1,912개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,915개다. 제작된 1894개는 검수 통과 1864개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1988개다. 실제 호출 1990회에는 이미지가 반환된 1988회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,902개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,905개다. 제작된 1904개는 검수 통과 1874개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 1998개다. 실제 호출 2000회에는 이미지가 반환된 1998회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -219,6 +219,7 @@
 | 추가 189 | ship/shoulder 명사, shout 동사/명사, shut 동사/형용사, side/sign 명사, sign 동사, silver 명사 | 9개 첫 시도·shout 명사 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
 | 추가 190 | silver/simple 형용사, since 전치사/접속사, singing 명사, single 형용사/명사, sir/site/size 명사 | 9개 첫 시도·since 접속사 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
 | 추가 191 | ski 동사/형용사/명사, skiing/skin/sky/sleep 명사, slowly 부사, smartphone 명사, smell 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 모래 분포 대비 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 192 | smell 명사, smile 동사/명사, smoke 명사/동사, smoking/sneaker/soap/soccer 명사, social 형용사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 금연/실업 예문 전체의 인증과 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3552,9 +3553,27 @@ smartphone은 한 휴대전화의 큰 빈 유리 화면/얇은 베젤·실물 �
 
 근거 접두사는 `work/oxford-batch-191-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 smell 명사이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 192 제작·검수
+
+A2 `smell` 명사, `smile` 동사/명사, `smoke` 명사/동사, `smoking`/`sneaker`/`soap`/`soccer` 명사, `social` 형용사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본 10장과 개별 320px 화면 10장을 실제 열어 검토해 모두 첫 시도 통과했다. 이번 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다. 별도 이미지 API·자동 재시도는 없다.
+
+공식 Cambridge의 [smell 냄새 명사](https://dictionary.cambridge.org/dictionary/english/smell), [smile 얼굴 표정/짓기](https://dictionary.cambridge.org/dictionary/english/smile), [smoke 연기/담배 피우기](https://dictionary.cambridge.org/dictionary/english/smoke), [smoking 흡연 활동](https://dictionary.cambridge.org/dictionary/learner-english/smoking), [sneaker 운동화](https://dictionary.cambridge.org/dictionary/english/sneaker), [soap 씻는 물질](https://dictionary.cambridge.org/us/dictionary/english/soap), [soccer 축구](https://dictionary.cambridge.org/dictionary/english/soccer), [social SOCIETY](https://dictionary.cambridge.org/dictionary/english/social)의 검색 반환에서 해당 정의 부분을 실제 읽고 ID/품사/기본 뜻·표현·예문과 대조했다. smell/smile/smoke의 명사·동사 부분을 따로 읽었다. social은 GOING OUT/사교성이 아닌 SOCIETY 정의를 골랐고 [unemployment 고용 상태](https://dictionary.cambridge.org/dictionary/english/unemployment)의 뜻만 보조 확인했다. smoking의 실제 출처는 Learner's Dictionary다. 검색 반환을 직접 페이지 열기 성공으로 표현하지 않으며 사전 수준으로 교재 A2를 바꾸지 않는다. 전체 사전/말뭉치·오디오·Oxford PDF·Tatoeba 원문이나 실제 실업 통계를 새로 검수한 것은 아니다.
+
+smell은 회의실의 탁자 하나/의자 네 개/성인 둘, 코를 막는 얼굴과 창을 여는 손의 반응이며 냄새 원인을 임의로 만들지 않았다. 실제 냄새/성분/건강 위험·감정·신원을 인증하지 않는다. smile 동사는 두 성인이 마주 보고 한 인물이 작은 미소를 짓는 큰 얼굴 장면, 명사는 문틀의 환영 여성 한 명/방문자 두 명과 올라간 입꼬리/열린 손이다. 닫힌 입의 미소와 과장된 웃음을 구분하되 실제 희망/감정·유일한 품사를 그림만으로 확정하지 않는다. smoke 명사는 굴뚝 입구와 이어지는 짙은 회색 연기 및 창가 담요 인물이다. 실제 연료·화재/건강 위험·사건/시선 대상을 인증하지 않는다.
+
+smoke 동사는 한 성인의 손과 입 가까운 담배 한 개비/바깥 재 끝 연기다. smoking 명사는 벤치 성인 한 명·손의 담배 한 개·재떨이 끝 두 개(총 세 개)이며 두 크기에서 직접 세었다. 금연 두 항목은 기본 행동/활동의 연상으로 제한한다. 저장 예문의 quit smoking·반년 전/권고를 긍정 행동으로 바꾸거나 그림이 실제 금연/기간·습관 빈도·건강/신원을 증명한다고 하지 않는다. 담뱃갑/상표/홍보·금지 아이콘은 없다. sneaker는 천 몸체/고무 앞코·밑창/묶인 끈의 운동화 두 짝이며 인쇄 호수/패치가 없다. 실제 개인 적합성·의료 기능·소유를 인증하지 않는다. soap은 연결된 두 팔/손 두 개와 눈에 보이는 비누 한 개·거품/물줄기/세면대이며 의료 효능/살균률·Tom 신원/실제 청결을 인증하지 않는다.
+
+soccer는 공원의 성인 둘·발 가까운 축구공 하나·골대/그물 하나이며 전체 정규 인원/득점·기술/안전·일요일 주기를 인증하지 않는다. social은 공동 상담의 세 성인/상담자 한 명(총 네 명)과 도시 창문·무지 안전모/닫힌 가방 각 하나·빈 종이 한 장이다. 공동 지원의 연상으로 사교 파티와 구분하지만 그림만으로 실업/고용 상태·규모·원인·심각성·정책·상담 결과·신원/유일한 단어를 확정하지 않는다. 창틀/버클·옷 단추·운동화 끈/금속 구멍/밑창 요철·수도 레버·물/거품·축구공 패널/그물·안전모/가방 구조는 실물 요소이며 글자/상표의 대체로 쓰지 않았다. 모든 이미지는 교재와 함께 쓰는 연상 단서다. 독립 학습자 평가·실제 iPhone 검사는 미실시이며 QA 하단 교재 글자는 삽화 원본 밖에 있다.
+
+첫 시도 검사 `work/oxford-images-verification-1791462750912.json`(실제 checkedAt `2026-10-08T12:32:30.912Z`)과 최종 검사 `work/oxford-images-verification-1791462876935.json`(checkedAt `2026-10-08T12:34:36.934Z`)은 PNG 10개 해시·크기·디코딩·320px 렌더 및 전체 3809개 메타데이터가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-UvFwJ1`·이미지/API 호출 0, 관리/검증/재개 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1998개 해시/크기·기본 생성 원본 10개·기존 보류 31개·정책 보류 2개·실패 2개·교열 후보 12개·원장 접두사를 대조한다. 이전 186/187/188/189/190/191 기본 생성 원본/검수 근거·schedule/shout/since의 두 시도/첫 보류도 보존한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1904**·검수 통과 **1874**·보류 **31**·실패 **2**·대기 **1902**, 수정본 포함 PNG **1998**·실제 호출 **2000**·누적 수정 **94**다. 실제 호출에는 PNG 반환 1998회와 무이미지 실패 2회(code HTTP 400·route HTTP 408)가 포함된다. 전체 미생성 1,905개이며 전체 목표는 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 812/보류 14/대기 162/실패 2; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 접두사는 `work/oxford-batch-192-`이며 `before.json`, `sources.json`, `source-evidence.json`, `scenes.json`(실제 프롬프트/참조/각 해시), `originals.json`, `observations.json`, `first-reviews.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 다음 대기는 society 명사이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `smell` 명사(냄새)다. 이어 smile 동사/명사·smoke 명사/동사·smoking/sneaker/soap/soccer 명사·social 형용사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `society` 명사(사회)다. 이어 sock 명사·soft 형용사·soldier/solution 명사·solve 동사·somewhere 부사/대명사·sort/source 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
