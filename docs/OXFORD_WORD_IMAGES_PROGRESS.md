@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2014 |
-| 제작자 품질 검수 통과 `approved` | 1983 |
+| 제작된 서로 다른 항목 | 2024 |
+| 제작자 품질 검수 통과 `approved` | 1993 |
 | 품질·의미·조건 보류 `held` | 32 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,792 |
+| 제작 대기 `waiting` | 1,782 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2112 |
+| 실제 내장 도구 호출 | 2122 |
 | 그중 품질 수정 호출 | 96 |
 
-이미지 미생성 항목은 제작 대기 1,792개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,795개다. 제작된 2014개는 검수 통과 1983개와 이미지가 있는 보류 31개이며, 수정본 포함 PNG는 2110개다. 실제 호출 2112회에는 이미지가 반환된 2110회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,782개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,785개다. 제작된 2024개는 검수 통과 1993개와 이미지가 있는 보류 31개이며, 수정본 포함 PNG는 2120개다. 실제 호출 2122회에는 이미지가 반환된 2120회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -231,6 +231,7 @@
 | 추가 201 | thought 명사, throw 동사, tie 동사/명사, tip/tool 명사, top 명사/형용사, touch 동사, tour 명사 | 9개 검수 통과·top 형용사 1개 보류. 원본/개별 320px 각 10장+수정본 확인. 호출 11회·수정 1회·신규 서비스 실패 0. top 조각 수/빈자리 수정 뒤 아래 접합 결함 남아 두 시도 보존/세 번째 호출 없음 |
 | 추가 202 | tourism 명사, toward 전치사, towel/tower 명사, toy 명사/형용사, track/tradition 명사, traditional 형용사, train 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 관광 서비스/접근·놀이 물건/장난감 수식·경주로/전승·악기 훈련을 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 203 | training/transportation/trash/traveler/trouble 명사, twin 명사/형용사, typical 형용사, underground 형용사/부사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 직업 훈련/교통·폐기물/여행자·문제/쌍둥이·짝 침대/보통 하루·지하 역/통행을 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 204 | understanding 명사, unfortunately 부사, unhappy 형용사, uniform/unit 명사, united/unusual/upstairs 형용사, use 명사, used to 조동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 이해/실망/감정·제복/단원·단결/특이한 소리/위층 방·용도/이전 거주를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -4023,9 +4024,54 @@ A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용
 
 근거 접두사는 `work/oxford-batch-203-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 understanding 명사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 204 제작·검수
+
+2026-10-09 KST 체크포인트: A2 understanding 명사·unfortunately 부사·unhappy 형용사·uniform/unit 명사·united/unusual/upstairs 형용사·use 명사·used to 조동사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본/개별 320px 각 10장을 실제 확인해 모두 첫 시도 검수 통과했다. 이번 묶음의 실제 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다.
+
+| 항목 | 실제 관찰과 범위 |
+|---|---|
+| understanding n. | 원본에서 성인 두 명·탁자의 실제 빨간 사과 한 개와 지도자가 손으로 들고 있는 사과 그림 카드 한 개·실물 쪽을 펼쳐 보이는 손/학습자의 관찰 시선을 확인했다. 실물 사과와 카드 안 그림을 별도 물리 사과 둘로 세지 않는다. 사과 잎/줄기·카드 외곽·손금/탁자 나무결은 물리 요소이며 글자/숫자/문장/점수/뇌 도식/로고/UI가 없다. 대상과 의미 그림을 연결하는 지식/이해 명사의 학습 연상이며 실제 정신 상태/언어 향상 측정·동정/합의 또는 유일 영단어를 인증하지 않는다. |
+| unfortunately adv. | 원본에서 가게 앞 성인 한 명·무지 장바구니 한 개·완전히 내려온 출입구 금속 셔터·초록 차양과 옆 진열창의 빵 둘을 확인했다. 인물은 뒷모습으로 한 손을 이마에 대며 실망스러운 사건을 연상한다. 진열창의 추가 조명/화분이 실제로 보이며 영업 여부를 조명 밝기만으로 확정하지 않는다. 셔터 줄/차양 고정대·빵의 표면 절개/잎·가방 주름은 물리 요소이고 간판/영업시간/글자/숫자/로고/감탄부호/UI가 없다. unfortunately 부사의 사건 평가 맥락이며 실제 발화/영업시간/영구 폐점/가방 내용물/유일 품사를 인증하지 않는다. |
+| unhappy adj. | 원본에서 벤치 한 개에 홀로 앉은 성인 한 명·내려간 시선/입꼬리와 약간 굽은 어깨·무릎 근처 두 손·옆의 빈 벤치 공간/덤불을 확인했다. 벤치의 나무 부재/손금/신발끈/잎·옷 주름은 물리 요소이며 글자/숫자/말풍선/울음 기호/로고/UI가 없다. 예문의 슬프거나 만족하지 않는 사람 형용사를 연상하며 Tom의 실존 신원·정신 상태/우울증 진단이나 혼자인 사람 모두의 불행을 인증하지 않는다. |
+| uniform n. | 원본에서 성인 한 명의 전신·같은 초록 제복 재킷/바지·무표식 모자/벨트·검은 부츠와 양옆 손을 확인했다. 추가 무지 넥타이와 어깨 고정끈/단추도 실제로 보인다. 단추/벨트 고리/구멍·포켓/봉제선·부츠 끈/모자 띠는 물리 구조이며 계급장/배지/문장/훈장/국기/글자/숫자/로고/무기/UI가 없다. 조직 구성원의 제복 명사와 저장 군인 예문 맥락이며 실제 국가/계급/조직 소속/정확한 나이/신원/자격을 인증하지 않는다. |
+| unit n. | 원본에서 제본된 열린 책 한 개·바깥 페이지 가장자리의 무지 초록/갈색/회색 탭 정확히 세 개·첫 초록 탭 가까이의 연결된 손 한 개·펼친 면의 사과/바나나 그림 각 한 개를 확인했다. 초록 첫 구분을 선택한 단원 맥락이고 사과/바나나는 페이지 그림이지 실물 과일 둘이 아니다. 페이지 층/책등/탭/과일 줄기·손금은 물리 요소이며 글자/숫자/쪽 번호/기호/라벨/로고/UI가 없다. 교재의 한 부분이라는 학습 단원 명사와 첫 단원 표현의 연상이며 교재가 반드시 세 단원이라는 정의·정확한 페이지 비율/학습 완료를 인증하지 않는다. |
+| united adj. | 원본을 실제 열어 성인 세 명이 하나의 둥근 탁자 중앙에 각자의 팔에서 이어진 손을 한 겹씩 모으는 장면을 확인했다. 초록·갈색·파란 무지 옷과 세 손목/팔의 연결이 식별되며 분리된 추가 손은 보이지 않는다. 오른쪽 인물의 작은 귀걸이와 단추·옷 주름·탁자 나뭇결은 물리적 세부로 글자/상표가 아니다. 단결과 협력의 형용사 연상 단서이며 실제 합의·공동 목표 달성·팀 소속을 인증하지 않는다. 글자·숫자·로고·화살표·깃발·UI가 없고 기존 종이 질감 스타일을 유지한다. |
+| unusual adj. | 원본에서 성인 한 명이 한 손을 귀에 대고 고개를 기울여 듣는 모습, 다른 연결된 손에 든 나무 숟가락 하나, 나무 가로 지지대에 금속 고리로 걸린 냄비 뚜껑 두 개를 실제 확인했다. 각 뚜껑에 검은 손잡이가 있고 지지대 두 발은 탁자 위에 놓인다. 금속 걸이의 S와 유사한 굽음·뚜껑 원형 테두리·나뭇결은 실제 부품이며 글자/음표가 아니다. 숟가락은 왼쪽 뚜껑 가까이에 있으며 청각 파형/실제 소리는 표시되지 않는다. 흔하지 않은 재활용 소리 도구라는 연상 단서로 검토하며 실제 소리·기록된 사건·모든 문화에서의 특이함을 인증하지 않는다. 글자·숫자·로고·음표·UI 없이 스타일을 유지한다. |
+| upstairs adj. | 원본에서 두 층 집의 단면과 위층의 큰 창·햇빛·안락의자 한 개·쿠션·초록 러그, 아래층의 문 한 개·계단을 실제 확인했다. 실제 추가 소품은 위층 책장/책·식물 두 개·풍경 그림과 아래층 작은 탁자/식물·벽 그림·켜진 조명, 바깥 굴뚝이다. 책등/그림/계단 난간/창틀/문손잡이/기와/바닥 선은 글자나 층 번호가 아니다. 계단 윗끝은 오른쪽 벽 쪽에서 가려져 있으며 숨은 착지부/정밀 건축 구조를 인증하지 않는다. 밝은 방이 아래 현관보다 위에 있다는 형용사 용법을 연상할 수 있으며 이동 부사나 실제 소음 측정으로 해석하지 않는다. 글자·숫자·화살표·로고·UI 없이 스타일을 유지한다. |
+| use n. | 원본을 실제 열어 오른쪽 팔에서 이어진 한 손이 무지 천 한 장을 탁자 위 작은 물웅덩이에 누르는 모습과 왼쪽의 똑바로 선 컵 한 개를 확인했다. 컵 안 물과 천 가장자리의 젖은 부분/남은 물·작은 물방울이 보인다. 손가락 일부는 천에 가려져 있고 천의 겹과 주름은 여러 장을 뜻하지 않는다. 천 직조 무늬·물방울 테두리·컵 가장자리·손톱/주름은 물리적 세부이며 글자/숫자가 아니다. 천의 청소 용도/쓸모라는 명사 뜻의 연상으로 검토하며 실제 흡수량·유출 원인·원문 this의 지시 대상·화자의 믿음/질문의 답을 확정하지 않는다. 글자·체크표시·화살표·로고·UI가 없고 기존 스타일을 유지한다. |
+| used to modal v. | 원본의 정확히 두 관련 장면을 실제 열었다. 위에는 갈색 상의/청바지 성인이 오두막 한 채 옆 바닷가에 서 있고 파도·모래·풀·돌담·바위/절벽·구름이 보인다. 아래에는 같은 가상 인물의 회색 머리 부분을 더한 모습이 도시 창가 안락의자에 앉아 양손으로 컵 한 개를 들고, 무인쇄 닫힌 상자 한 개·식물·러그·쿠션이 함께 보인다. 두 인물 표시는 같은 인물의 두 시점이라는 연상이며 별개의 두 사람으로 확정하지 않는다. 실제 추가 컵/소품을 부재로 기록하지 않았다. 기와·벽돌/건물 창·상자 테이프·파도·옷 주름은 물리적 세부로 글자/날짜가 아니다. 이전 바닷가 거주와 이후 주거를 대비하는 used to 조동사 연상으로 검토하며 be used to의 익숙함·실제 거주/내륙 지리/나이 간격/발화 시제를 인증하지 않는다. 세 번째 장면·글자·숫자·화살표·로고·UI 없이 스타일을 유지한다. |
+
+교재 ID·뜻·품사·표현·예문·출처를 먼저 읽고 공식 Cambridge 및 Oxford 사전의 실제 정의 본문을 대조했다. unit 첫 추출은 PART라는 제목을 예상했으나 실제 제목은 SEPARATE PART였고 그 본문과 course 예문을 다시 읽었다. Oxford의 in textbook 3번 뜻도 실제 본문을 별도로 읽었다. used to는 American Dictionary의 modal verb 본문을 확인하고 be used to의 익숙함과 구분했다. upstairs는 공통 부사/형용사 정의 중 저장된 위층 방의 형용사 문맥을 유지한다.
+
+| 항목 | 읽은 공식 정의 |
+|---|---|
+| understanding n. | [understanding noun (KNOWLEDGE)](https://dictionary.cambridge.org/dictionary/english/understanding) |
+| unfortunately adv. | [unfortunately adverb (disappointing or bad event)](https://dictionary.cambridge.org/us/dictionary/english/unfortunately) |
+| unhappy adj. | [unhappy adjective (sad or not satisfied)](https://dictionary.cambridge.org/us/dictionary/english/unhappy) |
+| uniform n. | [uniform noun \[C/U\] (CLOTHES), American Dictionary](https://dictionary.cambridge.org/dictionary/english/uniform) |
+| unit n. | [unit noun, in textbook (sense 3)](https://www.oxfordlearnersdictionaries.com/definition/english/unit) |
+| united adj. | [united adjective (joined group or agreement)](https://dictionary.cambridge.org/us/dictionary/english/united) |
+| unusual adj. | [unusual adjective (different and surprising)](https://dictionary.cambridge.org/us/dictionary/english/unusual) |
+| upstairs adj. | [upstairs adverb, adjective \[before noun\], adjective room context](https://dictionary.cambridge.org/dictionary/english/upstairs) |
+| use n. | [use noun (PURPOSE)](https://dictionary.cambridge.org/dictionary/english/use) |
+| used to modal v. | [used to modal verb, American Dictionary (past state no longer true)](https://dictionary.cambridge.org/dictionary/english/used-to) |
+
+보완 근거: [Cambridge unit SEPARATE PART와 교재/강좌 예문](https://dictionary.cambridge.org/dictionary/english/unit?topic=groups-of-people). corpus 예문을 정의 본문으로 대신하지 않았다. 글자 금지·저장 교재/예문을 유지하며 추상·기능어의 장면은 교재와 함께 보는 연상 단서다. 실제 지식 향상/감정 진단/영업시간·나이/계급/조직 소속·단원 완료/공동 목표 달성·소리/문화 규범·숨은 건축 연결/소음·흡수량/화자 믿음·시점/주거/내륙 지리를 인증하지 않는다. 카드의 과일 그림과 실제 과일, 물리 단추/끈/벨트 구멍·나뭇결·금속 고리/손잡이·계단/창틀/기와/책등·천 직조/물방울·건물 창/상자 테이프를 글자/숫자/로고/UI와 구분했다. 실제 추가 조명/식물·넥타이/어깨 끈·책장/그림/굴뚝·컵/러그/쿠션을 부재로 기록하지 않았다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `oxford-images-verification-1791482911318.json`, checkedAt `2026-10-08T18:08:31.317Z`, 실제 종료 0. 당시 generated 10/approved 1983이며 원본과 개별 축소 화면을 실제 확인했다.
+- 최종 검수 등록 뒤 10개 같은 검사: `oxford-images-verification-1791483051080.json`, checkedAt `2026-10-08T18:10:51.079Z`, 실제 종료 0. 첫/최종 파일명·checkedAt의 실제 값을 보존했다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `oxford-resume-check-AVnIv0`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 2024개·검수 통과 1993개·보류 32개(이미지 있는 보류 31/생성 전 letter 1)·실패 2개·대기 1,782개다. PNG 2120장·실제 호출 2122회·품질 수정 96회이며 전체 미생성 1,785개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 931/보류 15/대기 42/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-204-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 user 명사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `understanding` 명사(이해)다. 이어 unfortunately 부사·unhappy 형용사·uniform/unit 명사·united/unusual/upstairs 형용사·use 명사·used to 조동사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. top 형용사/schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `user` 명사(사용자)다. 이어 usual 형용사·valley/variety/vehicle/view/village/virus/voice/wait 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. top 형용사/schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
