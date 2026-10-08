@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-06T14:07:55.780Z",
-  "note": "사용자가 CPU 관측 공백을 미검증으로 보존하는 조건으로 병합을 승인했고 EN_Card PR11/master, 하루단어 PR32/main 병합을 확인했다. 실제 5장 이미지·원본 링크 정상 수신 및 새 후보·자연 중복 재생성 성공. 운영은 기존 0021·Site v121, 마지막 확인 version34 매일 07:30/5장 유지이며 이번 추가 배포·발송·설정 변경은 없다.",
+  "recordedAt": "2026-10-07T01:16:20.196Z",
+  "note": "새 날짜·요일색 카드의 CPU·휴대전화 검증과 두 PR 생성 후 명시적 사용자 승인으로 Site v122를 게시했다. 공개 manifest·5개 파일 해시, 환경59·공개정책4, version37 매일07:30/5장·다음10월8일07:30 및19개 데이터 테이블을 보존했다. PR12/33은 미병합이며 현재 CI 상태는 GitHub를 따른다.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -36,17 +36,17 @@
   },
   "production": {
     "site": {
-      "version": 121,
-      "source": "1e385951c7c2a20657b8a24681c94ec1a0ceae8c",
-      "deployment": "appgdep_6ac4b121376c8191b6406bb1b41ed849",
+      "version": 122,
+      "source": "0e88f1fc12bb61f68e0286941c91e7477283d81f",
+      "deployment": "appgdep_6ac59ced6c388191a3d465345b9bbbe4",
       "envRevision": 59,
       "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
       "latestVersionRead": {
-        "version": 121,
+        "version": 122,
         "status": "succeeded",
-        "checkedAt": "2026-10-06T08:29:35.122Z",
-        "method": "Native publication and public manifest/five static hashes",
+        "checkedAt": "2026-10-07T01:16:20.196Z",
+        "method": "Native publication success; public manifest/five static hashes and unchanged environment/access",
         "accessRevision": 4
       }
     },
@@ -65,17 +65,18 @@
       ],
       "en-card-automation": [
         {
-          "version_id": "0edb3eb3-52ae-4800-b7ae-9ff21530e599",
+          "version_id": "7f17ec46-e0eb-40a8-988b-4aee9e111ce3",
           "percentage": 100
         }
       ]
     },
-    "workerEvidenceCheckedAt": "2026-10-06T09:43:29.697Z",
-    "workerEvidence": "2026-10-06-automation-replacement-trial.json#result",
+    "workerEvidenceCheckedAt": "2026-10-06T23:45:44.354Z",
+    "workerEvidence": "2026-10-07-card-date-rollout.json",
     "newDeploymentInThisReconciliation": false,
-    "automationRuntimeSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
+    "automationRuntimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
     "d1Migration": "0021_automation_quality_replacement.sql",
-    "d1MigrationCount": 21
+    "d1MigrationCount": 21,
+    "automationRuntimeSourceCandidate": "2026-10-07-card-date-time.json"
   },
   "cardArtifacts": {
     "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
@@ -2733,5 +2734,616 @@
     "actualFiveCardReceiptVerified": true,
     "deploymentsInMergeStep": 0,
     "settingsChangesInMergeStep": 0
+  },
+  "dateTimeStampCandidate": {
+    "schemaVersion": 1,
+    "recordedAt": "2026-10-07T01:16:20.196Z",
+    "status": "published_verified_pull_requests_open",
+    "branch": "codex/card-date-time",
+    "bases": {
+      "en": "aea0d4c8e411823d09b7f079b927ca591a3de475",
+      "haru": "34cdf0368a6cd44d5d17ebf4f8b72d9e9475c696"
+    },
+    "scope": "New AI images only; original scheduled time, KST, seven weekday colors, immutable existing images. Manual rescheduling retains the original image date.",
+    "runtimeSourceHashes": {
+      "src/shared/card-stamp.ts": "971c4d337a9527d0bc8922b7cfd7ffc96bfef0bc4a636bd3c79b972b8bd1bea3",
+      "src/web/canvas.ts": "11d59f7376efc1bdf5208f6dd61bb4eb2e11b4aee1fa37437d091496e2cac89d",
+      "src/web/AutomationPanel.tsx": "e11d34946633214cc1f42df6620e8cfc010f2806beb0470330f45c5eff7dccd8",
+      "src/web/styles.css": "f0bdf2dcf8f2d7a963ccb73aff1d5e6656d7990889478e761a25c86dc2a857a5",
+      "src/automation/svg.ts": "17ef47137e75b368c8a2ed0a10b4344ec9310f18242e1ae09a0b04f9dafcc033",
+      "src/automation/engine.ts": "6f520af0525b8ea787a1292c5bf248d34a8e20c4c244b61a5b9a9ae9bc2f5383",
+      "src/automation/worker.ts": "deafde7183b3c23b35a755aaa94f688498abba351d1d8f116d68da795995b42f",
+      "src/shared/card-layout.ts": "b4a503bf8acb1dc6bd73d37524253a078247132aa3dd75bd40eb540411f190ca"
+    },
+    "studioSourceSha256": "3679faefe7bae23fb674220e2e5c2186459151091e6d6f3d503cfb08db6e2adc",
+    "relaySourceSha256": "6bcc1ff73a57c72540a5679d6ff7e2164a3c5628896b8148827a58b3ded73af5",
+    "validation": {
+      "vitest": 82,
+      "vitestScope": "62 layout/date/PNG/core/product-DO tests plus 20 reference/durable evidence tests; selected suites, not the entire suite",
+      "pngSamples": 16,
+      "byteIdenticalBeforeAfter": 16,
+      "browsers": [
+        "chromium",
+        "webkit"
+      ],
+      "browserTests": 6,
+      "haruIntegration": 19,
+      "typechecks": 2,
+      "builds": 2,
+      "workerDryRuns": 3,
+      "freeConfiguration": true,
+      "remoteCpu": true,
+      "actualPhoneReceipt": true
+    },
+    "deploymentPerformed": true,
+    "migrationRequired": false,
+    "productionSettingsChanged": true,
+    "actualAiCalls": 2,
+    "actualSends": 1,
+    "beforeRefactorValidation": {
+      "recordedAt": "2026-10-06T15:03:51.960Z",
+      "vitest": 86,
+      "pngSamples": 14,
+      "browsers": [
+        "chromium",
+        "webkit"
+      ],
+      "haruIntegration": 19,
+      "typechecks": 2,
+      "builds": 2,
+      "workerDryRuns": 3,
+      "freeConfiguration": true,
+      "remoteCpu": false,
+      "actualPhoneReceipt": false
+    },
+    "refactor": {
+      "layoutModule": "src/shared/card-layout.ts",
+      "browserDependencyRemovedFromAutomation": true,
+      "stampComputedOncePerRender": true,
+      "pngComparison": "EN_Card Git-ignored backups/card-date-refactor-20261007/png-comparison.json",
+      "referenceSourceManifestVersion": 2,
+      "historicalEvidenceUnchanged": true,
+      "newGstackReviewPerformed": false
+    },
+    "deploymentEvidence": "2026-10-07-card-date-rollout.json",
+    "trialEvidence": "2026-10-07-card-date-trial.json",
+    "settingsChangeScope": "Temporary one-card trial lifecycle only; preserved daily 07:30/five-card settings restored as version37 for 2026-10-08.",
+    "sourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
+    "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/12",
+    "evidence": "2026-10-07-card-date-time.json"
+  },
+  "dateTimeStampRollout": {
+    "schemaVersion": 1,
+    "recordedAt": "2026-10-07T01:16:20.196Z",
+    "status": "automation_and_site_published_verified",
+    "authorization": "User goal: fastest real new-image CPU/Kakao verification, then GitHub commit/push/PR.",
+    "branch": "codex/card-date-time",
+    "sourceBase": "aea0d4c8e411823d09b7f079b927ca591a3de475",
+    "runtimeSourceHashes": {
+      "src/shared/card-stamp.ts": "971c4d337a9527d0bc8922b7cfd7ffc96bfef0bc4a636bd3c79b972b8bd1bea3",
+      "src/web/canvas.ts": "11d59f7376efc1bdf5208f6dd61bb4eb2e11b4aee1fa37437d091496e2cac89d",
+      "src/web/AutomationPanel.tsx": "e11d34946633214cc1f42df6620e8cfc010f2806beb0470330f45c5eff7dccd8",
+      "src/web/styles.css": "f0bdf2dcf8f2d7a963ccb73aff1d5e6656d7990889478e761a25c86dc2a857a5",
+      "src/automation/svg.ts": "17ef47137e75b368c8a2ed0a10b4344ec9310f18242e1ae09a0b04f9dafcc033",
+      "src/automation/engine.ts": "6f520af0525b8ea787a1292c5bf248d34a8e20c4c244b61a5b9a9ae9bc2f5383",
+      "src/automation/worker.ts": "deafde7183b3c23b35a755aaa94f688498abba351d1d8f116d68da795995b42f",
+      "src/shared/card-layout.ts": "b4a503bf8acb1dc6bd73d37524253a078247132aa3dd75bd40eb540411f190ca"
+    },
+    "automationVersion": "7f17ec46-e0eb-40a8-988b-4aee9e111ce3",
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "b0b40667-99de-4100-9aae-d0f345fe96bf",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ],
+        "bindings": [
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "name": "ASSETS",
+            "type": "assets"
+          },
+          {
+            "class_name": "CardAutomation",
+            "name": "AUTOMATION",
+            "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+            "script_name": "en-card-automation",
+            "type": "durable_object_namespace"
+          },
+          {
+            "name": "CARD_IMAGES",
+            "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+            "type": "kv_namespace"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "environment": "production",
+            "name": "DELIVERY_SERVICE",
+            "service": "en-card-delivery",
+            "type": "service"
+          },
+          {
+            "type": "secret_text",
+            "name": "KAKAO_CLIENT_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "KAKAO_REST_API_KEY"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          },
+          {
+            "type": "secret_text",
+            "name": "SESSION_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "SETUP_TOKEN"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_BRIDGE_SECRET"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_ORIGIN"
+          },
+          {
+            "type": "secret_text",
+            "name": "STUDIO_OWNER_ID"
+          },
+          {
+            "type": "secret_text",
+            "name": "TOKEN_ENCRYPTION_KEY"
+          }
+        ]
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindings": [
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          }
+        ]
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "7f17ec46-e0eb-40a8-988b-4aee9e111ce3",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "bindings": [
+          {
+            "name": "AI_FREE_CONFIRMED",
+            "text": "google_groq_free",
+            "type": "plain_text"
+          },
+          {
+            "name": "APP_ORIGIN",
+            "text": "https://en-card.kmksla4.workers.dev",
+            "type": "plain_text"
+          },
+          {
+            "class_name": "CardAutomation",
+            "name": "AUTOMATION",
+            "namespace_id": "db7aca8ba4c344fb8e8ea75382735cdd",
+            "type": "durable_object_namespace"
+          },
+          {
+            "name": "AUTOMATION_MODE",
+            "text": "live",
+            "type": "plain_text"
+          },
+          {
+            "name": "CARD_IMAGES",
+            "namespace_id": "0d291d97991941988d3da9f4f4cab053",
+            "type": "kv_namespace"
+          },
+          {
+            "name": "COST_MODE",
+            "text": "free_only",
+            "type": "plain_text"
+          },
+          {
+            "database_id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "id": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+            "name": "DB",
+            "type": "d1"
+          },
+          {
+            "name": "FONT_ASSETS",
+            "type": "assets"
+          },
+          {
+            "name": "SEND_MODE",
+            "text": "live",
+            "type": "plain_text"
+          }
+        ]
+      }
+    },
+    "settingsBefore": {
+      "version": 34,
+      "enabled": 1,
+      "reason": null,
+      "next_due_at": 1791412200000,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "dataTablesPreserved": 19,
+    "foreignKeyErrors": 0,
+    "migrationRequired": false,
+    "migrationCount": 21,
+    "encryptedBackup": {
+      "method": "Windows DPAPI CurrentUser",
+      "roundTripVerified": true,
+      "restrictedAcl": true,
+      "ciphertextSha256": "A4B7CA7194E5D1295F3AE9E473B4DC690BB950C244CE1E8F21B24F91E0E7FA6A"
+    },
+    "freeConfiguration": "live configuration passed; prior explicit user Workers Free confirmation retained; current subscription API denied with 403",
+    "site": {
+      "currentPublishedVersion": 122,
+      "savedVersion": 122,
+      "sourceCommit": "0e88f1fc12bb61f68e0286941c91e7477283d81f",
+      "publicationStatus": "succeeded",
+      "envRevision": 59,
+      "accessRevision": 4,
+      "previousPublication": {
+        "version": 121,
+        "status": "awaiting_explicit_user_approval_after_auto_review_rejection",
+        "reason": "Auto-review interpreted authorization as refactoring/local verification and rejected public production publication. No bypass attempted."
+      },
+      "authorization": "Explicit user approval: 하루단어 v122 공개 운영 게시 승인",
+      "deploymentId": "appgdep_6ac59ced6c388191a3d465345b9bbbe4",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_ca54f1240a3081919fa387d6596c038d",
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "publishedAt": "2026-10-07T01:14:41.950251+00:00"
+    },
+    "risk": "New PNG header uses the fixed original run due time. Existing images remain immutable; manual rescheduling does not restamp them.",
+    "rollback": "Restore the previous 0021-compatible automation version 0edb3eb3-52ae-4800-b7ae-9ff21530e599 and Site v121 if needed; do not rewrite created images or history.",
+    "evidenceDirectory": "EN_Card Git-ignored backups/card-date-rollout-20261007/",
+    "trialEvidence": "2026-10-07-card-date-trial.json",
+    "runtimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
+    "siteVerification": {
+      "publicManifestAndFiles": {
+        "at": "2026-10-07T01:15:21.222Z",
+        "sourceManifestSha256": "280554be9a1a1871dc301f483995f31f54d0cd5dabf26ff726da7c27f864d053",
+        "studioSourceSha256": "3679faefe7bae23fb674220e2e5c2186459151091e6d6f3d503cfb08db6e2adc",
+        "files": [
+          {
+            "path": "assets/index-DFNOcx9a.js",
+            "status": 200,
+            "sha256": "384fac46fc098d40c2be4f739dcc85660bb6f8af2d3b60e911a8512fcc974f96"
+          },
+          {
+            "path": "assets/index-k5vvvb-e.css",
+            "status": 200,
+            "sha256": "bcbd4de622b139c3cb063f8a28780db948a961704f09be28f2e49fe16c1f4f76"
+          },
+          {
+            "path": "fonts/LICENSE.txt",
+            "status": 200,
+            "sha256": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3"
+          },
+          {
+            "path": "fonts/files/noto-sans-kr-0-wght-normal.woff2",
+            "status": 200,
+            "sha256": "3861da36d0eb54b3351f55d43c5ca91e732f0f2c6f8769ed475d3ec6fffdb4e5"
+          },
+          {
+            "path": "fonts/font.css",
+            "status": 200,
+            "sha256": "cb605fb4a6924db15d5e7f1beefe17a9e3cadbbba90c79e0f1a550d98417f212"
+          }
+        ],
+        "access": [
+          {
+            "path": "/",
+            "status": 200
+          },
+          {
+            "path": "/cards",
+            "status": 307
+          },
+          {
+            "path": "/api/state",
+            "status": 401
+          },
+          {
+            "path": "/api/card-studio/automation",
+            "status": 401
+          }
+        ],
+        "workerUnauthenticatedAutomationStatus": 401,
+        "authenticatedBrowserVerified": false,
+        "liveAiCalls": 0,
+        "kakaoCalls": 0
+      },
+      "configPreserved": {
+        "envRevision": 59,
+        "entryCount": 12,
+        "environmentPreserved": true,
+        "accessMode": "public",
+        "accessRevision": 4,
+        "accessPolicyPreserved": true
+      },
+      "settingsAndTablesPreserved": {
+        "settingsVersion": 37,
+        "dailyCards": 5,
+        "time": "07:30",
+        "nextDueAt": 1791412200000,
+        "dataTables": 19,
+        "foreignKeyErrors": 0,
+        "workerBindingsAndCron": true
+      },
+      "newAiCalls": 0,
+      "newKakaoCalls": 0,
+      "authenticatedBrowserVerified": false
+    },
+    "evidence": "2026-10-07-card-date-rollout.json"
+  },
+  "dateTimeStampTrial": {
+    "schemaVersion": 1,
+    "recordedAt": "2026-10-07T00:20:39.646Z",
+    "status": "verified_regular_resumed",
+    "scope": "One new ordinary product trial for date-stamp CPU/Kakao verification; not a fresh five-card capacity test.",
+    "day": "2026-10-07",
+    "kind": "trial",
+    "cards": 1,
+    "configVersion": 36,
+    "dueAt": 1791332040000,
+    "dueKst": "2026-10-07T09:14",
+    "notBefore": 1791331140000,
+    "deadline": 1791331740000,
+    "automationVersion": "7f17ec46-e0eb-40a8-988b-4aee9e111ce3",
+    "originalSettings": {
+      "version": 34,
+      "enabled": 1,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "nextDueAt": 1791412200000,
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "historyPreservedAtRegistration": true,
+    "resume": {
+      "status": "restored",
+      "requiredSettingsVersion": 36,
+      "nextVersion": 37,
+      "guardCases": 15,
+      "at": "2026-10-07T00:15:19.684Z",
+      "applied": true,
+      "version": 37,
+      "savedSettingsUnchanged": true,
+      "dailyCards": 5,
+      "time": "07:30",
+      "nextDueKst": "2026-10-08T07:30",
+      "nextDueAt": 1791412200000,
+      "observedDaily": {
+        "day": "2026-10-08",
+        "cards": 5,
+        "configVersion": 37,
+        "dueAt": 1791412200000,
+        "preparationAt": 1791408600000,
+        "deadline": 1791411900000
+      },
+      "scope": "Restored original daily cursor only after terminal trial and no unresolved work; partial trial remains partial, no replacement sends."
+    },
+    "validation": {
+      "serverAcceptance": true,
+      "exactDateImage": true,
+      "cpu": true,
+      "userPhoneReceipt": true
+    },
+    "evidenceDirectory": "EN_Card Git-ignored backups/card-date-trial-20261007/",
+    "nextAction": "Review EN_Card PR12 and Haru PR33. Site v122 publication is complete. No merge requested; do not repeat trial or resume.",
+    "server": {
+      "acceptedCards": 1,
+      "acceptedAttempts": 1,
+      "unresolved": 0,
+      "aiAttempts": 2,
+      "renderAttempts": 1,
+      "firstAiAt": 1791331183778,
+      "lastSendAt": 1791332085569
+    },
+    "image": {
+      "date": "2026년 10월 07일",
+      "weekday": "수요일",
+      "time": "09:14",
+      "color": "#067647",
+      "bytes": 93223,
+      "width": 1080,
+      "height": 1080,
+      "sha256": "f8a722d8eee61d13d99e52b2793caaf5e53de20e14fd8f4896317ecc30ed0e7d",
+      "exactRenderedBytesMatch": true,
+      "originalPageHttpStatus": 200
+    },
+    "cpu": {
+      "start": "2026-10-06T23:58:43.778Z",
+      "end": "2026-10-07T00:16:45.569Z",
+      "verified": true,
+      "scope": "One date-stamped production card. AI/render/delivery have tail plus unsampled single-call analytics; complete expected Cron cadence is observed. Tail-only auxiliary calls retain integer-ms CPU and are reported explicitly. Not all future calls, five-card load, or an analytics-completeness claim.",
+      "matching": "Event timestamp at second precision and current version. Not a trace-ID join. Lower boundary floored to the GraphQL second.",
+      "workers": {
+        "en-card": {
+          "tailCalls": 24,
+          "analyticsCalls": 23,
+          "byKind": {
+            "cron": 19,
+            "other": 5
+          },
+          "tailMaxMs": 5,
+          "ordinaryWorkerObservedMaxMs": 5.967,
+          "highestGroupP99Ms": 5.967,
+          "errors": 0,
+          "sampledGroups": 0,
+          "mismatches": [
+            {
+              "at": "2026-10-07T00:03:01.000Z",
+              "tail": 1,
+              "analytics": 0
+            }
+          ],
+          "tailOnly": [
+            {
+              "at": "2026-10-07T00:03:01.000Z",
+              "tail": 1,
+              "analytics": 0,
+              "cpuMs": [
+                2
+              ]
+            }
+          ],
+          "parserStats": [
+            {
+              "buffer_discards": 0,
+              "discarded_characters": 0,
+              "invalid_json": 0,
+              "pending_characters": 0
+            }
+          ],
+          "invalidTailEvents": 0,
+          "earlyTailExits": 0
+        },
+        "en-card-delivery": {
+          "tailCalls": 20,
+          "analyticsCalls": 20,
+          "byKind": {
+            "delivery_prepare": 19,
+            "delivery_send": 1
+          },
+          "tailMaxMs": 4,
+          "ordinaryWorkerObservedMaxMs": 4.697,
+          "highestGroupP99Ms": 4.697,
+          "errors": 0,
+          "sampledGroups": 0,
+          "mismatches": [],
+          "tailOnly": [],
+          "parserStats": [
+            {
+              "buffer_discards": 0,
+              "discarded_characters": 0,
+              "invalid_json": 0,
+              "pending_characters": 0
+            }
+          ],
+          "invalidTailEvents": 0,
+          "earlyTailExits": 0
+        },
+        "en-card-automation": {
+          "tailCalls": 20,
+          "analyticsCalls": 20,
+          "byKind": {
+            "automation_tick": 19,
+            "other": 1
+          },
+          "tailMaxMs": 590,
+          "ordinaryWorkerObservedMaxMs": null,
+          "highestGroupP99Ms": 590.185,
+          "errors": 0,
+          "sampledGroups": 0,
+          "mismatches": [],
+          "tailOnly": [],
+          "parserStats": [
+            {
+              "buffer_discards": 0,
+              "discarded_characters": 0,
+              "invalid_json": 0,
+              "pending_characters": 0
+            }
+          ],
+          "invalidTailEvents": 0,
+          "earlyTailExits": 0
+        }
+      },
+      "render": {
+        "assetCreatedAt": 1791331305207,
+        "tailMatches": [
+          {
+            "at": 1791331303089,
+            "cpuMs": 590,
+            "wallMs": 2781
+          }
+        ]
+      },
+      "problems": []
+    },
+    "naturalBranches": {
+      "replacement": false,
+      "additionalCorrection": false,
+      "correctionFallback": false,
+      "duplicate": false
+    },
+    "phoneConfirmation": {
+      "at": "2026-10-07T00:17:01.183Z",
+      "source": "User reply in this thread",
+      "confirmed": true,
+      "configVersion": 36,
+      "dueAt": 1791332040000,
+      "cards": 1,
+      "date": true,
+      "weekdayColor": true,
+      "image": true,
+      "originalLink": true,
+      "answer": "날짜·요일색·이미지·원본 링크 모두 정상"
+    },
+    "github": {
+      "enCardCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
+      "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/12",
+      "haruPullRequest": "https://github.com/zzocojoa/haru-word/pull/33",
+      "merged": false,
+      "haruImplementationCommit": "6e8b666663bd2b8c5105d2907ec582af7e7c878c",
+      "status": "committed_pushed_pull_requests_open"
+    },
+    "evidence": "2026-10-07-card-date-trial.json"
   }
 }
