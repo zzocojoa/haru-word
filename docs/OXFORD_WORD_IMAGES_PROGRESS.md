@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1782 |
-| 제작자 품질 검수 통과 `approved` | 1753 |
+| 제작된 서로 다른 항목 | 1792 |
+| 제작자 품질 검수 통과 `approved` | 1763 |
 | 품질·의미·조건 보류 `held` | 30 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 2,025 |
+| 제작 대기 `waiting` | 2,015 |
 | 생성 중 / 실패 | 0 / 1 |
-| 실제 내장 도구 호출 | 1872 |
+| 실제 내장 도구 호출 | 1882 |
 | 그중 품질 수정 호출 | 89 |
 
-이미지 미생성 항목은 제작 대기 2,025개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,027개다. 제작된 1782개는 검수 통과 1753개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1871개다. 실제 호출 1872회에는 이미지가 반환된 1871회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 2,015개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 안전 거절 실패 `code` 1개를 합친 2,017개다. 제작된 1792개는 검수 통과 1763개와 이미지가 있는 보류 29개이며, 수정본 포함 PNG는 1881개다. 실제 호출 1882회에는 이미지가 반환된 1881회와 무이미지 실패 1회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -207,6 +207,7 @@
 | 추가 177 | profile, progress, promise 동사/명사, pronounce, protect, provide, public 형용사/명사, publish | 10개 검수 통과. 소개 자료·연습의 발전·약속/이행·발음 따라 하기·헬멧 보호·물품 제공·공공 공원/대중 방문객·책 공개를 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 | 추가 178 | pull, purpose, push, quality, quantity, queen, question 동사, quietly, race 명사/동사 | 10개 검수 통과. 책 꺼내기·행동/활용 목적·휠체어 밀기·부츠 품질/과일 양·왕실 여성·선택 의문·조용한 문 닫기·말 경주/주자 경쟁을 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 | 추가 179 | railroad, raise, rate, rather, reach, react, realize, receive, recent, recently | 10개 검수 통과. 철도·손 올리기·서비스 요금 비교·꽤 바쁜 맥락·꼭대기 도착·사건 반응·길 잃음 인식·봉투 받기·새 복사본/이사 직후를 확인. 원본·개별 320px 검토, 수정 호출 없음 |
+| 추가 180 | reception, recipe, recognize, recommend, recording, recycle, reduce, refer, refrigerator, refuse 동사 | 10개 검수 통과. 접수처·그림 요리법·패턴 인식·대화 연습 추천·카세트 녹음물·종이 재가공·배기량 감소·그림 안내 참조·냉장고·말의 거절 상황을 확인. 원본·개별 320px 검토, 수정 호출 없음 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3330,9 +3331,25 @@ C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/
 
 근거 파일 접두사는 `work/oxford-batch-179-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 reception부터 refuse까지 10개이며 아직 장면 준비·호출 전이다.
 
+## 추가 180 · reception부터 refuse 동사까지
+
+2026-10-08, A2 교재 순서의 10개를 내장 `image_gen`으로 한 장씩 순차 제작하고 같은 apple 스타일 참조를 적용했다. **실제 원본 10장·각각의 320px 검사 화면 10장을 열어 검수**해 모두 통과로 기록했다. 호출 10회·수정 0·신규 보류 0·신규 실패 0이다. 기본 생성 원본·시도별 복사본·개별 QA 화면을 보존한다.
+
+실제 관찰: reception은 방문객 한 명과 접수대 뒤 담당자 한 명, 출입문·대기 의자 두 개가 있는 사무실 접수 공간이다. recipe는 펼친 그림 요리책의 토마토/바질·소스 냄비와 실제 같은 재료·소스를 젓는 성인 한 명이다. 책 그림의 수증기와 천 줄무늬는 물체 형태이며 작성된 지시를 넣지 않았다. recognize는 같은 적갈색·파란색 구슬 배열 두 줄을 가리키며 별도 파란 구슬을 든 성인이고 실제 각 줄에 일곱 구슬이 보이나 정답이나 수량을 표시하지 않는다. recommend는 위의 성인 조언자가 대화하는 두 성인 그림만 있는 책을 들어 권하고, 아래에서 같은 여성이 다른 성인과 같은 책을 사이에 두고 대화를 연습하는 두 관계 장면이다. recording은 헤드폰을 쓴 성인이 손에 든 무표시 카세트·연결된 무표시 플레이어로 저장 매체를 강조한다. 플레이어 창에도 매체가 보이지만 실제 저장 내용을 확정하지 않는다. recycle은 위의 플라스틱 덮개 분리와 아래의 펄프 통에서 망 틀로 새 종이를 건져 올리는 같은 성인 두 장면이다. reduce는 각 성인이 탄 차 세 대·큰 배기 연무와 같은 옷의 성인 세 명이 보이는 버스 한 대·작은 배기 연무를 비교한다. 버스도 무배출로 그리지 않았고 세부 건물·구도까지 동등한 실험 조건으로 주장하지 않는다. refer는 그림 안내서의 같은 의자·다리 연결부를 확인하며 실제 부품을 든 성인 한 명이다. refrigerator는 열린 냉장고의 달걀 트레이·우유병·채소·추가 무표시 병·채소칸이다. refuse는 한 손바닥을 편 성인과 느슨한 줄, 네 발굽을 딛고 고개를 사람 쪽에서 돌린 말 한 장면이다. 손바닥은 실제 말 쪽을 향하고 문자나 화살표로 진행 방향을 지정하지 않았다. 실제 릴 톱니·버튼·망 틀·도로 차선·나뭇결·문 패킹·고삐·금속 고리·옷 단추 외에 읽을 수 있는 글자·숫자·상표·라벨·UI는 발견하지 못했다. QA 검사 페이지 하단 교재 글자는 삽화 원본 밖에 있으며 `refuse1`의 구별 표기도 원본 밖에 있다.
+
+뜻 대조는 실제 반환된 공식 사전 정의·예문 부분과 로컬 10항목으로 한정했다. [reception HOTEL/OFFICE](https://dictionary.cambridge.org/dictionary/learner-english/reception), [recipe 요리 지시·재료](https://dictionary.cambridge.org/dictionary/english/recipe), [recognize KNOW·지식에 따른 식별](https://dictionary.cambridge.org/dictionary/english/recognize?topic=knowing-and-learning), [recommend 행동 제안](https://dictionary.cambridge.org/dictionary/english/recommend), [recording 저장된 녹음물](https://dictionary.cambridge.org/us/dictionary/english/recording), [recycle 재사용을 위한 처리](https://dictionary.cambridge.org/dictionary/learner-english/recycle), [reduce 양·정도의 감소](https://dictionary.cambridge.org/dictionary/english/reduce), [refer to LOOK AT](https://dictionary.cambridge.org/dictionary/english/refer-to), [refrigerator 차게 보관하는 기기](https://dictionary.cambridge.org/dictionary/english/refrigerator), [refuse 동사 SAY NO](https://dictionary.cambridge.org/dictionary/english/refuse?topic=rubbish-and-waste)의 10개 공식 자료를 확인했다. 첫 검색 반환에서 빠진 recognize·recommend·refuse는 각각 다시 조회해 실제 정의를 확인했다. refer to는 MENTION·RELATE·SEND 대신 실제 LOOK AT 정의를, refuse는 페이지 주소의 topic 및 쓰레기 명사와 구별해 실제 동사 정의를 읽었다. 사전의 수준 표시는 기존 교재 A2 항목을 덮어쓰는 기준으로 사용하지 않는다. 전체 사전 페이지·말뭉치·오디오·영상·PDF와 Tatoeba 원문 페이지를 새로 검수한 것은 아니다.
+
+검수 한계: 접수 공간은 실제 사무실 신원·이전 시기·발화·서비스를 입증하지 않는다. 그림 요리 안내는 실제 실행 가능한 레시피·재료량·단계·식품 안전을 인증하지 않는다. 구슬의 같은 배열은 패턴 인식의 연상 단서로 마음속 인식·다음 구슬 정답·인지 능력을 증명하지 않는다. 대화 연습 권유는 책 추천·조언으로도 읽히며 실제 추천 발화·프랑스어·국적·수용·동기·학습 성과를 확인하지 않는다. 카세트는 실제 재생·내용·자기 목소리·품질·동의·생성 시기를 검증하지 않는다. 종이 재가공은 특정 코팅 종이의 재활용 가능성·산업 경로·수율·시간·플라스틱 처리 지침을 보장하지 않는다. 배기 비교는 실제 측정·거리·기술·동등 조건·모든 버스의 우수성·인과 결과와 무관하다. 안내서 참조는 실제 지시 정확성·이해·완성 조립·의자 안전을 검증하지 않는다. 냉장고는 실제 온도·작동·신선도·달걀 수의 정답·가정 신원을 입증하지 않는다. 가만히 서 있는 말로도 읽힐 수 있으며 실제 거절 의도·요청·정신 상태·복지 진단·이동 이력을 확정하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다. 독립 학습자 평가와 실제 iPhone 검사는 미실시다.
+
+최종 이미지 검사 `work/oxford-images-verification-1791441782629.json`(실제 checkedAt `2026-10-08T06:43:02.629Z`)의 10개 PNG 해시·크기·디코딩·320px 렌더링, 메타데이터 3809개 검사가 종료 0으로 통과했다. 재개 보호 19개 종료 0·격리 fixture `work/oxford-resume-check-pI7R57`·이미지/API 호출 0, 관리/검증/재개 스크립트 구문 검사 3개 종료 0이다. 체크포인트에서 이전 3799항목 불변·전체 지문 3809·PNG 1881개의 해시/크기·기본 생성 원본 10개·정책 보류 2개·code 실패·교열 후속 12개 보존을 대조한다. 연결 목록·문서 범위로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
+
+누적 제작 **1792**·검수 통과 **1763**·보류 **30**·실패 **1**·대기 **2015**, 수정본 포함 PNG **1881**·실제 호출 **1882**·누적 수정 **89**다. 전체 미생성 2,017개로 전체 목표는 아직 미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 701/보류 13/대기 275/실패 1; B1 총 903/검수 통과 1/대기 902; B2 총 839/검수 통과 1/대기 838.
+
+근거 파일 접두사는 `work/oxford-batch-180-`이며 `sources.json`, `source-evidence.json`, `scenes.json`(전체 실제 프롬프트/참조/시도별 해시), `originals.json`, `observations.json`, `reviews.json`, `check-results.json`, `meta.json`을 보존한다. 기본 생성 원본과 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`의 시도별 PNG를 덮어쓰지 않는다. 이미지 브랜치의 연결 목록·계획·진행 문서 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 자료 변경은 없다. 다음은 A2 region부터 reporter까지 10개이며 아직 장면 준비·호출 전이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `reception` 명사(접수처)다. 이어 recipe 명사·recognize·recommend 동사·recording 명사·recycle·reduce·refer 동사·refrigerator 명사·refuse 동사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
+다음 제작 대기 첫 항목은 A2 `region` 명사(지역)다. 이어 regular 형용사·relationship 명사·remove·repair·replace 동사·reply 동사/명사·report 동사·reporter 명사까지 10개를 교재 순서로 검토한다. 모두 장면 준비·추가 호출 전이며 이전 승인·보류·실패 항목은 재생성하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
