@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2114 |
-| 제작자 품질 검수 통과 `approved` | 2082 |
+| 제작된 서로 다른 항목 | 2115 |
+| 제작자 품질 검수 통과 `approved` | 2083 |
 | 품질·의미·조건 보류 `held` | 33 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,692 |
-| 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2214 |
+| 제작 대기 `waiting` | 1,690 |
+| 생성 중 / 실패 | 0 / 3 |
+| 실제 내장 도구 호출 | 2216 |
 | 그중 품질 수정 호출 | 98 |
 
-이미지 미생성 항목은 제작 대기 1,692개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,695개다. 제작된 2114개는 검수 통과 2082개와 이미지가 있는 보류 32개이며, 수정본 포함 PNG는 2212개다. 실제 호출 2214회에는 이미지가 반환된 2212회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,690개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 3개(`code`/`attraction` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,694개다. 제작된 2115개는 검수 통과 2083개와 이미지가 있는 보류 32개이며, 수정본 포함 PNG는 2213개다. 실제 호출 2216회에는 이미지가 반환된 2213회와 무이미지 실패 3회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -241,6 +241,7 @@
 | 추가 211 | B1 ahead 부사·aim 동사/명사·alarm/album/alcohol 명사·alcoholic/alternative/amazed 형용사·ambition 명사 | 10개 첫 검수 통과. 원본/개별 320px 각 10장 확인. 앞 위치·대상 집단/목표·알람/음반/술·음료 내용물·공통 목적지 대체 길·놀란 반응/여행 포부를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 212 | B1 analysis/announcement 명사·announce/annoy 동사·annoyed/annoying 형용사·apart 부사·apologize 동사·application/appointment 명사 | 첫 9개 통과·appointment 날짜 두 칸 표시 첫 보류 후 한 칸 수정 통과. 원본/개별 320px 각 11장 확인. 호출 11회·품질 수정 1회·신규 최종 보류/실패 0 |
 | 추가 213 | B1 appreciate 동사·approximately 부사·arrest 동사/명사·arrival/assignment 명사·assist 동사·atmosphere 명사·attach 동사·attitude 명사 | 10개 첫 검수 통과. 원본/개별 320px 각 10장 확인. 감사·비슷한 두 길이·체포 행동/사건·도착/과제/도움·행성 대기·문서 사진 첨부·두 태도 대비를 구분. 호출 10회·수정/신규 보류/실패 0 |
+| 추가 214 | B1 attract 동사·attraction 명사, authority부터 bake까지 미호출 8개 | attract 원본/개별 320px 1장 통과. attraction 출력 안전 거절(400)로 이미지 없이 실패, 이후 호출 중단/미호출 8개 대기 복구. 호출 2회·이미지 1장·수정/새 보류 0·새 실패 1 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -4513,9 +4514,49 @@ atmosphere의 기체형 빛 번짐은 구체 가장자리 전 둘레에 가까�
 
 근거 접두사는 `work/oxford-batch-213-`이며 before/sources/source-evidence/dictionary-bodies/scenes(실제 프롬프트/참조/해시)/originals/first-observations/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 기록 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인은 미완료로 active를 유지한다. 다음 대기는 B1 attract 동사이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 214 제작·검수와 안전 거절
+
+2026-10-09 KST 체크포인트: 교재 순서의 B1 attract부터 bake까지 10개를 검토·준비했다. 동일 내장 image_gen·apple 스타일로 attract 한 장을 생성해 원본과 개별 320px를 실제 확인하여 제작자 품질 검수 통과했다. 다음 attraction 명사(명소)의 박물관/관광객 장면 호출은 출력 단계 `moderation_blocked`(HTTP 400, sexual 분류)로 종료됐다. 완성 이미지/저장 경로가 반환되지 않았고 해당 호출 시작 이후 기본 생성 폴더의 새 PNG와 해당 ID 산출물이 없음을 실제 조회했다. 관광 명소를 요청했으나 왜 해당 분류가 발생했는지는 도구 응답만으로 확인할 수 없다.
+
+| 항목 | 실제 결과 |
+|---|---|
+| attract v. | 원본에서 붉은 무문자 드레스의 성인 여성 한 명과 그쪽으로 얼굴을 돌린 다른 성인 세 명을 실제 확인했다. 주변 세 명이 잔을 들고 있어 파티 맥락을 보조하며 작은 꽃병과 탁자가 추가되어 있다. 시선이 모이는 연상 단서는 있으나 모두의 관심 강도나 실제 심리를 증명하지 않는다. 글자·숫자·로고·상징 광선은 보이지 않고 자연스러운 옷과 손의 형상이다. 320px에서도 붉은 드레스의 여성 한 명과 그쪽으로 얼굴을 돌린 성인 세 명이 구분된다. 드레스와 시선의 연상은 남지만 실제 심리나 모두의 관심 강도는 확정하지 않는다. 잔·꽃병·탁자는 물리 소품이며 글자로 세지 않는다. 검수용 항목명은 이미지 바깥 하단에 있다. |
+| attraction n. | 실제 호출 1회, 무이미지 안전 거절 1개. 원본·320px가 없으므로 의미/스타일/글자 검수 통과로 기록하지 않았다. |
+| authority n. ~ bake v. 8개 | 실제 호출 0회. 준비한 장면은 work 근거에 보존하고 원장 항목은 이전 대기 상태로 정확히 복구했다. |
+
+이번 총 호출 2회·이미지 1장·새 실패 1개이며 품질 수정/신규 보류 0이다. 계획의 “한도·서비스 오류가 발생하면 호출을 중단하고 완료 파일을 보존한다” 규칙에 따라 이후 호출을 실행하지 않았다. attraction의 동일 항목 자동 재시도·문구 변경 재호출·API 대체는 없으며 실패를 품질 보류/생성 성공으로 바꾸지 않는다. 생성된 attract 원본·실제 프롬프트/참조/해시·축소 검수와 실패 호출의 실제 프롬프트/참조·종료 응답/기본 파일 조회를 함께 보존한다.
+
+준비 전 교재 ID·기본 뜻·품사·표현·예문·번역/출처와 Cambridge 실제 정의 본문 10개/고유 단어 10개를 읽었다. 초기 authority는 POWER만, automatic은 코퍼스 예문만 보여 추가 공식 검색으로 Business English의 GOVERNMENT 조직과 US English의 INDEPENDENT 장치 정의를 따로 확인했다. average는 명사 뒤의 실제 verb 본문을, award는 US English의 실제 verb 본문을 읽었다. 제목/발음 미리보기/코퍼스 예문만으로 뜻을 대신하지 않았다. 이 사전 검토와 10개 장면 준비는 10개 이미지 생성/승인을 뜻하지 않는다.
+
+| 항목 | 읽은 공식 정의 |
+|---|---|
+| attract | [attract verb (draw attention)](https://dictionary.cambridge.org/dictionary/english/attract) |
+| attraction | [attraction noun \[C or U\] (tourist place)](https://dictionary.cambridge.org/dictionary/english/attraction) |
+| authority | [authority Business English noun (GOVERNMENT organization)](https://dictionary.cambridge.org/dictionary/english/authority?topic=people-in-charge-of-or-controlling-other-people) |
+| automatic | [automatic adjective (INDEPENDENT)](https://dictionary.cambridge.org/us/dictionary/english/automatic) |
+| automatically | [automatically adverb (INDEPENDENTLY)](https://dictionary.cambridge.org/dictionary/english/automatically?q=automatically_1) |
+| average | [average verb \[T\] (reach an average amount)](https://dictionary.cambridge.org/dictionary/english/average) |
+| award | [award verb \[T\] (give a prize)](https://dictionary.cambridge.org/us/dictionary/english/award) |
+| aware | [aware adjective \[after verb\] (knowing)](https://dictionary.cambridge.org/dictionary/english/aware) |
+| backward | [backward adverb (opposite facing direction)](https://dictionary.cambridge.org/us/dictionary/english/backward) |
+| bake | [bake verb \[I or T\] (cook in oven)](https://dictionary.cambridge.org/dictionary/english/bake) |
+
+직접 열기 오류나 HTTP 상태를 관측했다고 기록하지 않는다. 준비 장면 중 automatically의 센서 수도는 기본 뜻의 별도 맥락이며 문서의 매분 저장 예문을 그대로 묘사하지 않는다. aware의 긍정 연상도 not aware 부정 예문을 그대로 재현했다고 하지 않는다. average 블록 수량과 backward 상대 위치는 아직 생성되지 않아 실제 계수/방향 검수 결과가 없다. base meaning과 기본 교재·기준 해시를 바꾸지 않았다. attract의 잔·꽃병·탁자/드레스·신발은 물리 요소이며 문자/로고로 세지 않는다. 그림은 관심 강도·실제 심리/사건·영어 단어의 유일 식별을 인증하지 않는다.
+
+검증:
+
+- 첫 1개 PNG 디코딩·해시/실제 크기·3809개 연결·320px 렌더: `oxford-images-verification-1791503621872.json`, checkedAt `2026-10-08T23:53:41.872Z`, 실제 종료 0. 당시 generated 1/approved 2082/failed 3에서 원본과 개별 축소를 확인했다.
+- 최종 동일 1개: `oxford-images-verification-1791503665498.json`, checkedAt `2026-10-08T23:54:25.498Z`, 실제 종료 0. 파일명 숫자/checkedAt의 실제 값을 그대로 기록했다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지/API 호출 0, 격리 fixture `oxford-resume-check-9nRTAL`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 목록/문서 작업으로 앱 전체 테스트·타입·린트·빌드, 실제 iPhone/독립 학습자 검수·운영 배포/DB 변경은 수행하지 않았다.
+
+누적 제작 2115개·검수 통과 2083개·보류 33개(이미지 있는 보류 32/생성 전 letter 1)·실패 3개·대기 1,690개다. PNG 2213장·실제 호출 2216회·품질 수정 98회이며 전체 미생성 1,694개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총 903/검수 통과 50/보류 0/대기 852/실패 1, B2 총 839/검수 통과 1/대기 838이다. 기존 모든 보류/시도·두 조건 보류·code 400/route 408 실패·기존 교열 후보 12개 줄과 별도 village 나이 정보 관찰을 유지한다. usual/top/schedule/lend/less 두 시도/보류의 세 번째 호출 금지와 appointment 첫 보류/한 번 수정 통과의 원본/검수도 보존했다.
+
+근거 접두사는 `work/oxford-batch-214-`이며 before/sources/source-evidence/dictionary-bodies/scenes(호출 2개 실제 프롬프트/참조/해시, 미호출 8개 준비 장면)/originals/first-observations/observations/first-reviews/reviews/check-results/meta/failure JSON을 보존한다. 기본 생성 원본 1개와 주 작업 폴더 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 기록 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인은 미완료로 active를 유지한다. 다음 대기는 B1 authority 명사이며 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `attract` 동사(끌다)이며 이어 attraction/authority 명사·automatic 형용사·automatically 부사·average/award 동사·aware 형용사·backward 부사·bake 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. usual/top 형용사·schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `authority` 명사(당국)이며 이어 automatic 형용사·automatically 부사·average/award 동사·aware 형용사·backward 부사·bake 동사·balance 명사/동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 원장의 장면 미준비·추가 호출 전이다. 직전 묶음의 미호출 8개는 교재/공식 정의/준비 장면을 work 근거에 보존하고 원장을 이전 대기로 복구했다. usual/top 형용사·schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. attraction/code의 안전 거절과 route의 HTTP 408는 자동 재시도하지 않으며 기존 보류·모든 시도를 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
