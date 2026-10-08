@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1964 |
-| 제작자 품질 검수 통과 `approved` | 1934 |
+| 제작된 서로 다른 항목 | 1974 |
+| 제작자 품질 검수 통과 `approved` | 1944 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,842 |
+| 제작 대기 `waiting` | 1,832 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2061 |
+| 실제 내장 도구 호출 | 2071 |
 | 그중 품질 수정 호출 | 95 |
 
-이미지 미생성 항목은 제작 대기 1,842개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,845개다. 제작된 1964개는 검수 통과 1934개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2059개다. 실제 호출 2061회에는 이미지가 반환된 2059회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,832개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,835개다. 제작된 1974개는 검수 통과 1944개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2069개다. 실제 호출 2071회에는 이미지가 반환된 2069회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -226,6 +226,7 @@
 | 추가 196 | storm 동사, stove 명사, straight 부사/형용사, strange 형용사, strategy 명사, stress 명사/동사, structure 명사, stupid 형용사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 카드 각 장면 세 장·스트레스/강조·채반/양동이 대비를 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 197 | subway 명사, succeed 동사, successful 형용사, such 한정사/대명사, suddenly 부사, suggest 동사, suggestion/suit 명사, support 동사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. such 두 맥락/품사 근거와 제안 행동·내용, 부정 착용/부양 의미를 구분. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 198 | support 명사, suppose 동사, sure 부사, surprise 명사/동사, surprised/surprising 형용사, survey 명사, sweet 형용사/명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 놀란 상태/놀라운 결과·선택 돌 다섯 개씩/사탕 세 개·sure 부사 본문을 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 199 | symbol/system/tablet/talk/target/task 명사, taste 명사/동사, teaching/technology 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 팔찌 두 개·과녁 세 고리·성인 교사/학습자 세 명·기계 큐브 세 개를 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3792,9 +3793,51 @@ A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용
 
 근거 접두사는 `work/oxford-batch-198-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 symbol 명사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 199 제작·검수
+
+2026-10-09 KST 체크포인트: A2 `symbol`/`system`/`tablet`/`talk`/`target`/`task` 명사, `taste` 명사/동사, `teaching`/`technology` 명사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본 10장과 개별 320px 화면 10장을 실제 열어 검토해 모두 첫 시도 통과했다. 이번 실제 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다.
+
+`symbol`은 서로 손을 맞잡은 성인 두 명의 같은 녹색 땋은 팔찌 두 개로 우정을 대표하는 물건을 연상한다. 문자 기호를 그리지 않고 물리 팔찌를 사용했으며 실제 관계나 모든 문화의 공통 상징을 인증하지 않는다. `system`은 빈 화면 모니터·본체·각인 없는 키보드·마우스 각 하나와 케이블/벽 전원 연결의 장비 집합이다. 모니터 아래/오른쪽과 본체의 케이블 일부는 겹친다. 명확한 장비 연결의 연상으로 검토했으며 정확한 포트 배선 사양·실제 작동/통전·전기 안전을 인증하지 않는다.
+
+`tablet`은 성인의 두 손으로 들고 한 검지로 화면을 터치하는 얇은 가로 태블릿 한 개다. 화면은 반사만 있는 빈 청록색이고 약/돌판·스탠드/키보드와 구분한다. `talk`는 의자 두 개에 마주 앉은 성인 두 명 중 한 사람이 열린 입/손바닥으로 말하고 다른 사람이 듣는 대화이다. 강연/청중을 추가하지 않았고 실제 구매 시점/소유·정확한 발화/대화 길이·동의나 제안한 대화의 실현을 인증하지 않는다.
+
+`target`은 나무 받침 위 둥근 과녁 한 개의 빨간 중앙 원판과 파랑/검정/크림 세 동심 고리를 확인했다. 점수·화살/명중 자국·인물 없이 겨누는 물체로 표현하여 실제 Tom의 신원/명중/과거 사건을 주장하지 않는다. `task`는 성인 한 명이 빗자루 하나/긴 손잡이 쓰레받기 하나로 한 낙엽 무더기를 쓸어 담는 구체적인 할 일이다. 일정표/체크 부호를 만들지 않았고 원문의 바쁜 일정/여러 일/중요도를 인증하지 않는다.
+
+`taste` 명사는 베어 먹은 빨간 수박 한 조각·녹색 껍질/검은 씨와 맛을 즐기는 성인의 표정으로 맛을 연상한다. 의복 취향/짧은 경험의 다른 뜻을 사용하지 않는다. 동사는 성인 여성이 우유 잔 한 개를 들고 숟가락 한 개로 소량을 입에 대는 능동 맛보기다. '맛이 나다' 연결동사와 구분한다. 표정이 실제 감각/당도·영양/개인 선호를 증명하거나 여성이 엄마라는 관계·과거 시점·우유 위생/알레르기 안전을 인증한다고 하지 않는다.
+
+`teaching`은 교사 한 명/학습자 두 명의 성인 교육으로 교직을 표현했다. 잎 그림 판 하나·종이/연필 각 두 개를 두 크기에서 확인했다. 요청의 손으로 가리키기 대신 짧은 물리 지시봉이 추가됐으나 뜻/글자 조건을 해치지 않아 결함으로 판정하지 않았다. 종교 교리/아동 교실과 구분하고 실제 복직의 실현·교사 자격/의도·학습 성과를 인증하지 않는다. `technology`는 관절 로봇 팔 하나의 집게에 든 나무 큐브 한 개·녹색 쟁반의 두 큐브·총 세 개로 과학 지식의 실용 적용을 연상한다. 일본/전쟁 이후 발전·실제 자율 AI/효율·기계 안전을 증명하지 않는다.
+
+공식 근거는 세 번의 Cambridge 도메인 제한 검색과 403 이후의 추가 검색에서 실제 읽은 정의 구간이다. symbol/system의 직접 영어 페이지 열기는 모두 403으로 실패했으며 US symbol 본문과 공식 영어–중국어 system 페이지의 실제 영어 SET 정의로 보완했다. tablet의 COMPUTER 실제 본문과 taste의 FLAVOUR 명사/FOOD·DRINK 능동 동사, teaching의 JOB를 구분했다. 직접 열기 성공·전체 사전/발음 청취·Oxford PDF·Tatoeba 원문 재평가를 수행했다고 기록하지 않는다.
+
+| 단어·품사 | 확인한 공식 정의 구간 |
+|---|---|
+| symbol n. | [symbol noun \[C\] (object representing a quality or idea)](https://dictionary.cambridge.org/us/dictionary/english/symbol) |
+| system n. | [system noun (SET), English definition on bilingual official page](https://dictionary.cambridge.org/dictionary/english-chinese-simplified/system) |
+| tablet n. | [tablet noun \[C\] (COMPUTER)](https://dictionary.cambridge.org/dictionary/english/tablet) |
+| talk n. | [talk noun \[C\] (conversation), real noun body](https://dictionary.cambridge.org/dictionary/english/talk?topic=informal-talking-and-conversation) |
+| target n. | [target noun (OBJECT SHOT AT)](https://dictionary.cambridge.org/dictionary/english/target) |
+| task n. | [task noun (WORK)](https://dictionary.cambridge.org/dictionary/english/task) |
+| taste n. | [taste noun (FLAVOUR)](https://dictionary.cambridge.org/dictionary/english/taste) |
+| taste v. | [taste verb \[T\] (FOOD/DRINK)](https://dictionary.cambridge.org/dictionary/english/taste) |
+| teaching n. | [teaching noun (JOB)](https://dictionary.cambridge.org/dictionary/english/teaching) |
+| technology n. | [technology noun \[C or U\] (practical use of scientific discoveries)](https://dictionary.cambridge.org/dictionary/english/technology) |
+
+글자 금지·저장 교재/예문을 유지했다. 팔찌 짜임·물리 키/패널/케이블·유리 반사/수위·과녁 고리/나무 고정물·빗자루 띠/잎맥·수박 씨·지시봉/단추·기계 관절/집게는 실제 대상 구성으로 글자/숫자/소프트웨어 UI와 구분했다. 추상어/품사 맥락 그림은 교재 기본 뜻과 함께 보는 연상 단서이며 특정 영단어/품사를 유일하게 추론하거나 실제 사건/학습 효과를 인증하지 않는다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `work/oxford-images-verification-1791474892607.json`, checkedAt `2026-10-08T15:54:52.606Z`, 실제 종료 0. 당시 generated 10/approved 1934이며 원본과 각 개별 축소 화면을 실제 확인했다. 파일명 시각은 checkedAt보다 1ms 늦다.
+- 최종 검수 등록 뒤 같은 검사: `work/oxford-images-verification-1791475030170.json`, checkedAt `2026-10-08T15:57:10.170Z`, 실제 종료 0. 10개 모두 승인 파일/해시·320px 렌더와 일치한다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `work/oxford-resume-check-XZ2r9y`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 1974개·검수 통과 1944개·보류 31개(이미지 있는 보류 30/생성 전 letter 1)·실패 2개·대기 1,832개다. PNG 2069장·실제 호출 2071회·품질 수정 95회이며 전체 미생성 1,835개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 882/보류 14/대기 92/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-199-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 teenage 형용사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `symbol` 명사(상징)다. 이어 system/tablet/talk/target/task 명사·taste 명사/동사·teaching/technology 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `teenage` 형용사(십 대의)다. 이어 temperature/term 명사·text 동사·themselves 대명사·thick 형용사·thief 명사·thin 형용사·thinking/third 명사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
