@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 1934 |
-| 제작자 품질 검수 통과 `approved` | 1904 |
+| 제작된 서로 다른 항목 | 1944 |
+| 제작자 품질 검수 통과 `approved` | 1914 |
 | 품질·의미·조건 보류 `held` | 31 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,872 |
+| 제작 대기 `waiting` | 1,862 |
 | 생성 중 / 실패 | 0 / 2 |
-| 실제 내장 도구 호출 | 2031 |
+| 실제 내장 도구 호출 | 2041 |
 | 그중 품질 수정 호출 | 95 |
 
-이미지 미생성 항목은 제작 대기 1,872개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,875개다. 제작된 1934개는 검수 통과 1904개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2029개다. 실제 호출 2031회에는 이미지가 반환된 2029회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,862개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 2개(`code` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,865개다. 제작된 1944개는 검수 통과 1914개와 이미지가 있는 보류 30개이며, 수정본 포함 PNG는 2039개다. 실제 호출 2041회에는 이미지가 반환된 2039회와 무이미지 실패 2회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -223,6 +223,7 @@
 | 추가 193 | society/sock 명사, soft 형용사, soldier/solution 명사, solve 동사, somewhere 부사/대명사, sort/source 명사 | 9개 첫 시도·solve 손 조각 1개 수정 후 검수 통과. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1회·신규 보류/신규 실패 0, 첫 보류·v1/v2 보존 |
 | 추가 194 | speaker 명사, specific 형용사, speech/speed/spider/spoon 명사, square 형용사/명사, stage/stair 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 긴 다리 여덟/바늘 한 개·계단 네 칸 직접 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 | 추가 195 | stamp 명사, star 동사, start/state/stay 명사, steal 동사, step/stomach/stone/storm 명사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 주연/단계 품사 정의와 동전 네 개·주제 카드 세 장을 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
+| 추가 196 | storm 동사, stove 명사, straight 부사/형용사, strange 형용사, strategy 명사, stress 명사/동사, structure 명사, stupid 형용사 | 10개 첫 시도 검수 통과. 원본/개별 320px 각 10장 확인. 카드 각 장면 세 장·스트레스/강조·채반/양동이 대비를 확인. 호출 10회·수정/신규 보류/신규 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -3661,9 +3662,51 @@ A2 `stamp` 명사, `star` 동사, `start`/`state`/`stay` 명사, `steal` 동사,
 
 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 storm 동사다. 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 196 제작·검수
+
+A2 `storm` 동사, `stove` 명사, `straight` 부사/형용사, `strange` 형용사, `strategy` 명사, `stress` 명사/동사, `structure` 명사, `stupid` 형용사 10개를 같은 내장 image_gen·시범 스타일 참조로 개별 순차 제작했다. 원본 10장과 개별 320px 화면 10장을 실제 열어 검토해 모두 첫 시도 통과했다. 이번 실제 호출 10회·품질 수정/신규 보류/신규 서비스 실패 0이다.
+
+`storm` 동사는 성인 한 명의 몸통/앞발이 문 밖을 향하는 큰 보폭·두 주먹/눈썹과 뒤 실내의 탁자/의자로 확인했다. 날씨/공격 장면과 구분한다. `stove`는 조리 레인지 한 대·버너 두 위치/노브 두 개·냄비 하나/푸른 불꽃·닫힌 오븐 안 빵 하나이며 노브의 위치 표시/금속 받침/선반은 실물 부품이다. 모든 stove가 가스 방식이거나 실제 조리 완료/설비 안전을 인증한 것으로 설명하지 않는다.
+
+`straight` 부사는 성인 한 명이 굴곡/갈림길 없는 길로 정면 열린 문을 향하는 행동, 형용사는 종이 한 장 위 선 하나와 무눈금 직선자/연필 각 하나다. 투시 각도·실제 기하 선을 문자/즉시 이동 뜻이나 정밀 측정과 구분한다. `strange`는 위 눈 감은 성인 한 명/안락의자·창/화분과 아래 물 없는 하늘의 물고기 한 마리/양쪽 수관 덩어리 두 곳이라는 관련 두 장면이다. 실제 공중 비행/인지·과거 꿈/낮잠 기간·개인 진단을 인증하지 않는다.
+
+`strategy`는 같은 성인의 두 출현과 그림 카드 위 세 장/아래 손 한 장+책상 두 장을 원본·320px에서 직접 세었다. 단풍 모양/타원형/갈라진 잎 세 카드가 유지되고 책의 잎 그림은 카드 수에 넣지 않는다. 닫힌 책/열린 책·창의 낮/저녁빛·화분으로 계획한 작은 반복 학습을 연상하며 실제 날짜/매일 실행·기억 향상/최적 방법을 인증하지 않는다.
+
+`stress` 명사는 성인 두 명·양쪽 관자놀이의 연결된 두 손/걱정 표정·빈 종이 더미 두 곳/닫힌 폴더 형태 한 개의 업무 맥락이다. 동사는 성인 두 명·설명자의 든 검지 한 개/열린 다른 손바닥·학습자의 연필/종이/잎 참고 카드 각 하나의 중요성 강조 단서다. 심리 걱정/강세 뜻·글자/밑줄/느낌표를 섞지 않았고 실제 진단/원인/관계·발화 내용/학습 효과·역할 자격/품사 유일 식별을 인증하지 않는다.
+
+`structure`는 열린 상자 하나/옆에 놓인 뚜껑 하나·바닥/벽/모서리 이음으로 부품 구성을 연상한다. `stupid`는 같은 성인의 두 출현에서 위 구멍 채반 하나/아래 새는 물줄기·작은 웅덩이와 아래 온전한 양동이 하나/누수 없음의 관련 대비다. 물체 선택의 실수/방법 변경이며 사람의 지능/영구 성격·장애/의학 상태를 평가하지 않는다. 정확한 상자 치수/구조 안전·개인 실수/학습 성과도 인증하지 않는다.
+
+공식 근거는 세 번의 Cambridge 도메인 제한 검색 반환문에서 실제로 읽은 해당 정의 구간에 한정한다. straight의 NOT CURVING 공동 형용사/부사 정의는 IMMEDIATELY 미리보기와 분리했고 stress의 실제 WORRY 명사/EMPHASIZE 동사 본문도 검색 머리말과 분리하여 읽었다. stupid의 Essential 사전 정의와 공식 유의어 자료의 실수/행동 설명을 확인했다. 직접 페이지 열기 성공·전체 사전/발음 청취·Oxford PDF·Tatoeba 원문 재평가를 수행했다고 기록하지 않는다.
+
+| 단어·품사 | 확인한 공식 정의 구간 |
+|---|---|
+| storm v. | [storm verb (SHOW STRONG FEELING), American Dictionary](https://dictionary.cambridge.org/us/dictionary/english/storm) |
+| stove n. | [stove noun \[C\] (kitchen equipment), American Dictionary](https://dictionary.cambridge.org/dictionary/english/stove) |
+| straight adv. | [straight adjective, adverb (NOT CURVING), American Dictionary](https://dictionary.cambridge.org/dictionary/english/straight) |
+| straight adj. | [straight adjective, adverb (NOT CURVING), American Dictionary](https://dictionary.cambridge.org/dictionary/english/straight) |
+| strange adj. | [strange adjective (UNUSUAL), American Dictionary](https://dictionary.cambridge.org/dictionary/english/strange) |
+| strategy n. | [strategy noun (way of doing something)](https://dictionary.cambridge.org/dictionary/english/strategy) |
+| stress n. | [stress noun (WORRY)](https://dictionary.cambridge.org/dictionary/english/stress) |
+| stress v. | [stress verb (EMPHASIZE)](https://dictionary.cambridge.org/dictionary/english/stress) |
+| structure n. | [structure noun (ARRANGEMENT)](https://dictionary.cambridge.org/dictionary/english/structure) |
+| stupid adj. | [stupid adjective, Essential English Dictionary](https://dictionary.cambridge.org/dictionary/essential-british-english/stupid) |
+
+글자 금지·저장 예문/지문을 유지했다. 문틀/실물 노브·기하 선/나무 결·잎 그림/물고기 비늘/물줄기·채반 구멍은 대상의 물리적 형태로 문자/로고/소프트웨어 UI와 구분했다. 기능어/추상어의 그림은 교재 기본 뜻과 함께 보는 연상 단서이며 특정 영단어/품사를 유일하게 추론하거나 사실/학습 효과를 인증하지 않는다.
+
+검증:
+
+- 첫 PNG 디코딩·해시/실제 크기·3809개 항목 연결·320px 렌더 검사: `work/oxford-images-verification-1791469680806.json`, checkedAt `2026-10-08T14:28:00.806Z`, 실제 종료 0. 당시 generated 10/approved 1904이며 원본과 각 개별 축소 화면을 실제 확인했다.
+- 최종 검수 등록 뒤 같은 검사: `work/oxford-images-verification-1791469863526.json`, checkedAt `2026-10-08T14:31:03.526Z`, 실제 종료 0. 10개 모두 승인 파일/해시·320px 렌더와 일치한다.
+- `node scripts/check-oxford-image-resume.cjs`: 19개 보호 검사 통과/종료 0, 이미지·API 호출 0, 격리 fixture `work/oxford-resume-check-EBWFQl`.
+- 이미지 관련 세 스크립트 `node --check` 모두 실제 종료 0. 정적 제작 목록/문서 작업이며 앱 전체 테스트·타입·린트·빌드, 운영 게시/DB 변경, 실제 iPhone·독립 학습자 검사는 수행하지 않았다.
+
+누적 제작 1944개·검수 통과 1914개·보류 31개(이미지 있는 보류 30/생성 전 letter 1)·실패 2개·대기 1,862개다. PNG 2039장·실제 호출 2041회·품질 수정 95회이며 전체 미생성 1,865개다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 852/보류 14/대기 122/실패 2, B1 총 903/검수 통과 1/대기 902, B2 총 839/검수 통과 1/대기 838이다. 기존 보류/모든 시도·두 조건 보류·code 400/route 408 실패·교열 후보 12개·교재 해시를 보존한다.
+
+근거 접두사는 `work/oxford-batch-196-`이며 before/sources/source-evidence/scenes(실제 프롬프트/참조/각 해시)/originals/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더의 기존 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 문서 세 파일만 커밋·푸시한다. 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인 목표는 미완료로 active를 유지하며 다음 대기는 subway 명사다. 현재 미해결 호출·실행 중 도구는 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 A2 `storm` 동사(성큼성큼 거칠게 움직이다)다. 이어 stove 명사·straight 부사/형용사·strange 형용사·strategy 명사·stress 명사/동사·structure 명사·stupid 형용사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 A2 `subway` 명사(지하철)다. 이어 succeed 동사·successful 형용사·such 한정사/대명사·suddenly 부사·suggest 동사·suggestion/suit 명사·support 동사까지 10개를 교재 순서로 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. schedule은 한 번 수정 후에도 보류로 세 번째 호출하지 않는다. route의 HTTP 408와 code의 안전 거절은 자동 재시도하지 않으며 기존 보류·모든 시도도 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
