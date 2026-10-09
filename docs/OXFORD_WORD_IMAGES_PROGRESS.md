@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2319 |
-| 제작자 품질 검수 통과 `approved` | 2284 |
+| 제작된 서로 다른 항목 | 2329 |
+| 제작자 품질 검수 통과 `approved` | 2294 |
 | 품질·의미·조건 보류 `held` | 36 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,485 |
+| 제작 대기 `waiting` | 1,475 |
 | 생성 중 / 실패·실행 중단 | 0 / 4 |
-| 내장 도구 호출·시작 슬롯 원장 | 2429 |
+| 내장 도구 호출·시작 슬롯 원장 | 2439 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 106 |
 
-이미지 미생성 항목은 제작 대기 1,485개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,490개다. 제작된 2319개는 검수 통과 2284개와 이미지가 있는 보류 35개이며, 수정본 포함 PNG는 2425개다. 원장 2429회는 이미지가 반환된 2425회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2428회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,475개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,480개다. 제작된 2329개는 검수 통과 2294개와 이미지가 있는 보류 35개이며, 수정본 포함 PNG는 2435개다. 원장 2439회는 이미지가 반환된 2435회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2438회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -5193,9 +5193,57 @@ PNG 디코딩·3809개 ID/중복·파일/실제 크기/해시·개별 320px 검�
 
 누적 제작 2319개·검수 통과 2284개/보류 36개(이미지 있는 보류 35개)/실패·실행 중단 4개·대기 1,485개·PNG 2425장·호출/시작 슬롯 원장 2429회·수정 106회다. 전체 미생성 1,490개·미승인 1,525개이며 전체 목표는 active다. 확인된 내장 도구 호출은 2428회이고 climb 시작 슬롯 1개는 제공자 전달 미확인이다. 수준별 A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총 903/검수 통과 251/보류 3/대기 647/실패 2, B2 총 839/검수 통과 1/보류 0/대기 838/실패 0이다. 새 최종 보류/실패는 없으며 기존 36보류/4실패·중단/2조건 보류와 모든 교열 후보를 유지했다. 다음 대기는 B1 emotion 명사다. 앱·Sites·EN_Card·DB·API·백업·의존성·학습 기록 변경이나 배포는 없다.
 
+## 추가 236 제작·검수
+
+2026-10-09 KST 체크포인트: B1 emotion 명사부터 entrance 명사까지 교재 순서 10항목의 ID/품사/기본 뜻·표현/예문/출처를 확인했다. 실제 Cambridge 정의 본문 10항목/서로 다른 10단어를 읽고 의미별 장면을 작성했다. 승인 apple 이미지를 참고해 기존 내장 image_gen으로 10장을 순차 생성하고 원본과 개별 루프백 320px 화면(그림 폭 288px)을 실제 열었다. 10개 모두 첫 검수 통과, 새 수정/보류/실패 0개다. 이미지에서 내면/실제 법적 상태/학습 효과까지 인증하지 않고 기본 뜻의 연상 단서로 검토했다.
+
+| 항목 | 실제 원본·축소에서 확인한 단서와 범위 | 판정 |
+|---|---|---|
+| emotion 명사 · `df27497a4a09579f` | 같은 녹색 상의 인물의 웃음/슬픔 두 얼굴. 원본은 양쪽 볼의 눈물이며 한 방울만 구현됐다고 기록하지 않는다. 축소에서는 표정 대비가 단서다. | 통과 |
+| employment 명사 · `41cd8b7c96ee714d` | 앞치마를 팔에 걸친 성인과 작업장 관리자의 악수·빵/오븐. 고용 역할의 연상이며 임금·실제 채용/계약/강좌 효과를 인증하지 않는다. | 통과 |
+| empty 동사 · `16a3f3f4869fac20` | 뒤집힌 가방의 아래로 열린 입구에서 책/금속 물병이 나오는 중·탁자의 필통. 형용사 빈 상태와 구분하고 완전히 빈 내부/세탁 완료를 인증하지 않는다. | 통과 |
+| encourage 동사 · `4674142d19232c64` | 화가와 어깨에 손을 얹고 엄지를 올린 친구. 긍정 기본 뜻만 연상하고 No one encouraged her 부정 예문 전체라고 표시하지 않는다. | 통과 |
+| enemy 명사 · `9fefd96c150fc755` | 청색/적갈색 무장 인물 두 명이 거리를 두고 대치·방패 둘·몸 밖 아래로 향한 칼/칼집. 실제 역사/국가/두 집단의 공동 적·스포츠 경쟁자 전체 인증은 아니다. | 통과 |
+| engaged 형용사 · `0e5af32c4ab0a7f4` | 벤치의 성인 연인·열린 반지 상자·들어 보인 반지 손. 원본은 상자에도 반지 형태가 있어 전체 반지 하나만을 인증하지 않는다. 약혼 맥락이며 실제 동의/혼인/날짜/손가락 관습을 인증하지 않는다. | 통과 |
+| engineering 명사 · `7f39e233024ee211` | 성인 한 명의 두 손과 연필·두 끝 받침/곡선 경간의 다리 모형·같은 주요 형태의 종이 그림. 도면은 물리적 소품이고 글자/치수/공식이 아니다. 실제 구조 안전/재학을 인증하지 않는다. | 통과 |
+| entertain 동사 · `5b8a7fdd3a7bd7d0` | 기타 하나를 연주하는 성인과 미소 지으며 바라보는 손님 두 명. 연주자의 행동/반응을 연상하며 초대/생각하다 의미·실제 소리/실력/내면 감정을 인증하지 않는다. | 통과 |
+| entertainment 명사 · `5c0a44fe1ed2f740` | 작은 무대의 피아니스트와 전경 관객 두 명. 공연 전체의 명사 맥락. 두 실제 램프·유리잔·물리적 건반을 글자로 판정하지 않으며 실제 호텔/매일 저녁 일정/소리를 인증하지 않는다. | 통과 |
+| entrance 명사 · `ceba6f9c7e5aeacb` | 오른쪽 경첩 세 개가 있는 열린 문 한 짝·아치/문턱/안쪽 로비·문 밖에서 기다리는 성인. 입구를 연상하며 출구 이동/출입권한/실제 지정 정문을 인증하지 않는다. | 통과 |
+
+실제 읽은 사전 섹션과 공식 출처:
+
+- [emotion 명사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/emotion): 실제 읽은 `# Meaning of emotion in English` 본문에서 a strong feeling 의미를 확인. 사랑/분노 등을 포함한 강한 감정 명사다. 같은 성인의 기쁨/슬픔 대비를 연상하며 특정 감정 진단/내면·실제 동일 신원이나 이야기 전체를 인증하지 않는다.
+- [employment 명사 · Cambridge](https://dictionary.cambridge.org/us/dictionary/english/employment): 실제 읽은 `### employment noun [U] (WORK)` 본문에서 being paid to work 의미를 확인. 임금을 받는 일/고용 상태 명사다. 새 직장의 작업복/환영 맥락으로 연상하며 실제 채용/임금/계약·강좌의 취업 효과를 인증하지 않는다. USE 의미와 구분한다.
+- [empty 동사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/empty): 실제 읽은 `empty  verb` 본문에서 to remove everything from inside something 의미를 확인. 컨테이너 안을 전부 꺼내 비우는 타동사다. 뒤집은 가방에서 물건을 꺼내는 중을 연상하며 명사 빈 병/형용사 단순 비어 있음이나 세탁 완료·남은 내용물 전무를 인증하지 않는다.
+- [encourage 동사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/encourage): 실제 읽은 `# Meaning of encourage in English` 본문에서 gives someone confidence 의미를 확인. 격려/행동으로 자신감을 주는 타동사 의미다. 그림 그리려는 상대를 다정한 접촉/엄지로 응원하는 관계를 연상하며 실제 발화/감정/실력 효과나 No one encouraged her 부정 예문 전체를 인증하지 않는다.
+- [enemy 명사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/enemy): 실제 읽은 `# Meaning of enemy in English` 본문에서 hates or opposes another person 의미를 확인. 다른 이를 미워/반대하며 해치거나 막으려는 적 명사다. 서로 대치하는 두 무장 인물의 관계를 연상하며 단순 경쟁자를 무조건 적으로 분류하지 않고 실제 역사/국가/전투/두 집단의 공동 적 전체를 인증하지 않는다.
+- [engaged 형용사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/engaged?q=engaged): 실제 읽은 `### engaged adjective (MARRIAGE)` 본문에서 having formally agreed to marry 의미를 확인. 결혼을 약속한 약혼 상태의 형용사다. 반지 상자/연인 관계의 제안 맥락을 연상하며 실제 동의/법적 상태/날짜·이미 결혼한 상태·바쁨/전화 사용중 의미를 인증하지 않는다.
+- [engineering 명사 · Cambridge](https://dictionary.cambridge.org/us/dictionary/english/engineering): 실제 읽은 `# Meaning of engineering in English` 본문에서 using scientific principles 의미를 확인. 과학 원리에 따른 기계/구조물 설계·건설 일 또는 학문 명사다. 다리 모형/그림을 비교하는 학습 맥락이며 실제 설계 규격/구조 안전·대학 재학/성적을 인증하지 않는다.
+- [entertain 동사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/entertain): 실제 읽은 `### entertain verb (AMUSE)` 본문에서 keep a person or a group of people interested or amused 의미를 확인. 사람의 흥미/즐거움을 유지하는 동사다. 음악 연주자/즐거운 손님의 관계를 연상하며 INVITE/THINK ABOUT 의미·실제 소리/연주 기술/감정을 인증하지 않는다. 실제 American Dictionary AMUSE 본문을 사용한다.
+- [entertainment 명사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/entertainment): 실제 읽은 `# Meaning of entertainment in English` 본문에서 performances or activities that entertain people 의미를 확인. 사람을 즐겁게 하는 공연/활동 명사다. 무대와 객석의 라이브 공연을 연상하며 특정 호텔/실제 공연 일정·소리/감정/품질을 인증하지 않는다.
+- [entrance 명사 · Cambridge](https://dictionary.cambridge.org/dictionary/english/entrance): 실제 읽은 `# Meaning of entrance in English` 본문에서 a door, gate 의미를 확인. 건물/장소에 들어가는 문/입구 명사다. 열린 주 출입구 옆 기다리는 성인의 위치를 연상하며 실제 주 출입구 지정/출입권한·등장 행위나 매료시키는 동사 의미를 인증하지 않는다.
+
+definition 검색 결과의 본문을 사용했다. employment와 engineering은 실제 반환된 US URL, engaged는 q=engaged URL의 MARRIAGE 섹션, entertain은 American Dictionary의 AMUSE 본문이다. search metadata를 본문으로 바꾸지 않았고 직접 페이지 열기/전체 PDF 시각 검사/HTTP 실패는 주장하지 않는다. URL당 짧은 인용 25단어 이하를 유지하고 별도 보조 출처는 없다. encourage의 Tatoeba 지문/CC-BY 2.0 France/저자·URL은 기존 교재 값 그대로이며 원격 Tatoeba 본문을 직접 확인했다고 주장하지 않는다.
+
+파일·증거:
+- 원본 PNG 경로: `C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`. 이번 버전 파일은 항목 ID/slug에 `-v1.png`를 붙인 10개이고 각 원본 생성 파일도 보존한다. 이미지 바이너리는 Git에 추가하지 않는다.
+- 실제 장면/프롬프트·시도별 해시·상태·검수는 [연결 목록](../data/word-image-manifest.json)의 위 10개 ID에 연결했다.
+- Git 제외 `work/oxford-batch-236-{sources,source-evidence,dictionary-bodies,scenes,originals,observations,first-observations,first-reviews,reviews,check-results,meta}.json`에 교재 출처/실제 읽은 정의·장면·원본 경로·실제 관찰을 남겼다. 각 `slot-0..9.json`/`native-0..9.json`은 시작 메타데이터/실제 반환 영수증으로 구분한다. 시작 슬롯만으로 살아 있는 작업이나 제공자 전달을 주장하지 않는다.
+- 첫 QA: `2026-10-09T12:56:56.147Z`, `oxford-images-verification-1791550616148.json`. 당시 generated 10/approved 2284/held 36/waiting 1475/failed 4.
+- 최종 QA: `2026-10-09T13:00:15.652Z`, `oxford-images-verification-1791550815652.json`. approved 2294/held 36/waiting 1475/failed 4, generating/generated 0. 실제 checkedAt을 사용했으며 첫 QA 파일명의 밀리초와 1ms 차이를 덮어쓰지 않았다.
+- `node scripts/verify-oxford-images.cjs <이번 10개 ID>` 첫/최종 검사 각각 exit 0. 실제 PNG 디코딩·파일/해시·루프백 320px 렌더를 확인했다. footer의 검수용 항목명은 그림 밖이다.
+- `node scripts/check-oxford-image-resume.cjs` exit 0: 19검사, image/API 0회, fixture `oxford-resume-check-aHNBgP`. 완료 항목 중복 생성 방지·명시적 정책 보류·복구/원장/교재 보호를 검사한다. 실제 fixture 이름은 check-results 원본을 따른다.
+- `node --check scripts/oxford-images.cjs`, `node --check scripts/verify-oxford-images.cjs`, `node --check scripts/check-oxford-image-resume.cjs` 각각 exit 0.
+- 최초에 존재하지 않는 tests/oxford-images-resume.test.cjs 및 scripts/oxford-image-recovery.cjs를 잘못 지정한 두 명령은 exit 1이었다. 실제 저장소 경로를 확인한 뒤 위 검사로 바로잡았으며 `work/oxford-batch-236-command-path-errors.json`에 실패를 보존했다. 이미지 생성/제공자 실패로 분류하지 않는다.
+- 커밋 전/후 전체 보호 절차: `node work/oxford-batch-236-guard.cjs` 및 `node work/oxford-batch-236-guard.cjs --final`. 모든 3,809 ID/교재 fingerprint·시도별 PNG/해시·기존 보류/실패/부정 판정·이번 10개 외 불변·정확히 3개 파일·원격 HEAD/깨끗한 체크아웃을 확인한다. 최종 실행 결과는 Git 제외 completion-checks/final-readback에 기록한다.
+
+누적 제작 2329개·검수 통과 2294개·보류 36개(이미지 없음 letter 1개)·실패/중단 4개·대기 1475개다. PNG는 수정본 포함 2435개, 원장 시작 슬롯 2439회/품질 수정 106회다. 확인된 내장 도구 호출은 2438회이며 climb 명사의 제공자 전달 미확인 중단 슬롯 1회와 구별한다. 전체 미생성 1,480개·미승인 1,515개로 목표는 아직 완료되지 않았다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 261/보류 3/대기 637/실패 2; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+기존 235 element의 v1 충돌/첫 부정 판정·320px와 수정 v2, departure/cheap/confirm/connection의 첫 부정·수정본, direct 부사의 두 미달/보류, 모든 정책 보류/실패·climb 중단을 그대로 보존했다. 운영 앱/UI·Sites/EN_Card·학습/백업/API/DB·교재 해시/기존 지문을 변경하지 않았다. 이번에는 이미지/manifest/계획/진행 기록만 갱신하므로 앱 전체 테스트/타입/린트/빌드·운영 배포는 범위 밖이며 실제 iPhone·독립 학습자 검증은 하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `emotion` 명사(감정)이며 이어 employment 명사·empty/encourage 동사·enemy 명사·engaged 형용사·engineering 명사·entertain 동사·entertainment/entrance 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 실제 정의를 다시 읽고 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 기존 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `entry` 명사(입장)이며 이어 environmental 형용사·episode 명사·equal 형용사/동사·equally 부사·escape 동사/명사·essential 형용사·eventually 부사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 실제 정의를 다시 읽고 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 기존 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
