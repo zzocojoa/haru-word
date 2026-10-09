@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2369 |
-| 제작자 품질 검수 통과 `approved` | 2333 |
+| 제작된 서로 다른 항목 | 2379 |
+| 제작자 품질 검수 통과 `approved` | 2343 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,435 |
+| 제작 대기 `waiting` | 1,425 |
 | 생성 중 / 실패·실행 중단 | 0 / 4 |
-| 내장 도구 호출·시작 슬롯 원장 | 2482 |
+| 내장 도구 호출·시작 슬롯 원장 | 2492 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 109 |
 
-이미지 미생성 항목은 제작 대기 1,435개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,440개다. 제작된 2369개는 검수 통과 2333개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2478개다. 원장 2482회는 이미지가 반환된 2478회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2481회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,425개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,430개다. 제작된 2379개는 검수 통과 2343개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2488개다. 원장 2492회는 이미지가 반환된 2488회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2491회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -5441,9 +5441,59 @@ definition 검색 결과의 본문을 사용했다. employment와 engineering은
 
 누적 제작 2369개·검수 통과 2333개·보류 37개·실패/중단 4개·제작 대기 1435개다. 수정본 포함 PNG 2478개·시작 슬롯 원장 2482회이며 확인된 내장 도구 호출은 2481회/제공자 전달 미확인 중단 1회다. 전체 미생성 1,440개, 전체 미승인 1,476개이며 전체 3809개 승인 목표는 active다. 수준별 A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총 903/검수 통과 300/보류 4/대기 597/실패 2, B2 총 839/검수 통과 1/보류 0/대기 838/실패 0이다.
 
+## 추가 241 제작·검수
+
+2026-10-10 KST 체크포인트: B1 federal 형용사부터 flood 동사까지 다음 10항목의 ID·품사·기본 뜻·표현/예문/출처를 읽고 실제 Cambridge 정의 본문 10항목/서로 다른 9단어를 대조했다. 같은 apple 스타일과 내장 image_gen으로 10장을 순차 제작하고 모든 원본·개별 루프백 320px(그림 폭 288px)을 실제 확인했다. 10개 모두 첫 시도 검수 통과이며 이번 수정·신규 보류·신규 실패는 0개다. 반환 이미지/내장 호출은 10개/10회다.
+
+| 항목 ID·품사 | 교재 뜻 / 표현 | 원본에서 실제 확인한 단서와 한계 |
+|---|---|---|
+| `7561bc303ae4a187` federal adj. | 연방의 / the federal government | 한 외곽 경계 안에 초록·황토·파랑의 세 맞닿은 지역이 있고 가운데 큰 돔 정부 건물과 주변 작은 정부 건물 세 개가 무방향 관계선 세 개로 연결된다. 건물은 총 네 개이며 분리된 네 나라가 아니라 한 지역 묶음의 중앙/지역 정부 연상 도식이다. 창문·기둥·지붕·경계/관계선은 물리적/도식적 형상으로 글자·숫자·국기·화살표가 없다. 실제 국가 지도·지역 수/헌법/권한 배분·새 프로그램 발표를 인증하지 않으며 아이보리 수채화 스타일을 유지한다. |
+| `14dd97a729465bed` fence n. | 울타리 / a wooden fence | 정원 앞의 나무 울타리가 크게 보이고 뾰족한 세로 판자·가로대 두 줄·양쪽 기둥이 구분된다. 뒤에는 잎/꽃, 앞에는 잔디가 있어 공간을 나누는 STRUCTURE 명사의 단서다. 판자 못·나뭇결·옹이는 실제 부품/재질로 읽히며 글자·집 번호·로고·칼이 없다. 정원 전체를 완전히 둘러싼 모습이나 실제 경계권·안전 규격을 확인한 것으로 기록하지 않는다. 아이보리 수채화 스타일 유지. |
+| `8876bf49772d0214` fighting n. | 싸움 / stop the fighting | 성인 남성 두 명이 서로 마주 보고 각각 상대의 옷깃을 한 손으로 잡고 다른 손을 자기 몸 앞에 주먹으로 둔다. 네 팔·네 손·네 신발이 자연스럽고 화난 표정과 대립 자세가 진행 중 몸싸움 명사의 단서다. 악수·포옹이나 이미 말린 상태가 아니며 때리는 접촉·상처·피·무기·어린이는 없다. 옷 결/단추·신발 끈은 물리적 형상이고 글자·로고가 없다. 실제 사건/군인 신분·갈등 해결/법적 정당성과 stop the fighting 예문 전체를 인증하지 않는 아이보리 수채화 장면이다. |
+| `f827fe079c5d4a44` file n. | 파일 / the file | 나무 탁자에 열린 황토색 종이 파일 한 개가 있고 앞/뒤 표지·상단 탭·정리된 빈 종이 여러 장의 가장자리가 구분된다. 물리적 문서 보관 파일 CONTAINER 명사의 단서이며 컴퓨터 UI나 금속/손톱 줄이 아니다. 종이는 인쇄 줄/문자/숫자 없이 빈 면이고 종이 가장자리·나뭇결만 보인다. 기존 Tatoeba Give me the file은 종이/컴퓨터 의도를 명시하지 않으므로 원문의 특정 의도·문서 내용·전달 완료를 인증하지 않는다. 실제 저자/출처·교재 문장을 유지하며 아이보리 수채화 스타일이다. |
+| `8efed813364d90cc` financial adj. | 재정의 / financial support | 성인 남성이 두 손으로 입구에 무문자 동전이 보이는 천 주머니를 내밀고, 배낭을 멘 성인 여성이 한 손을 내어 받으려 하며 다른 손으로 여행가방 손잡이를 잡는다. 네 손·네 신발이 자연스럽고 주머니는 아직 여성 손에 완전히 전달되지 않았다. 여행을 위한 financial support의 금전 지원 관계를 연상한다. 동전의 둥근 테두리·주머니 끈·가방/옷 부품은 물리적 형상으로 읽히고 글자·통화 기호·로고가 없다. 실제 금액/지원 자격·학생 신원·계약/여행 완료·경제 효과는 인증하지 않는다. 배낭도 원본에 실제 있어 이를 숨기지 않으며 아이보리 수채화 스타일 유지. |
+| `37be4f27ff9923f8` fitness n. | 체력 / improve fitness | 성인 여성 한 명이 완만한 오르막 길을 활기차게 걷는다. 한 팔은 앞쪽으로 굽히고 다른 팔은 뒤로 내려 두 팔/두 손·두 다리/두 운동화가 자연스럽다. 길의 경사·잔디/작은 돌과 힘차게 걷는 자세가 fitness HEALTH 명사의 연상 단서다. 운동화 끈/밑창·옷 결은 물리적 형상으로 글자·로고·점수/추적기 화면이 없다. 실제 건강 상태·매일 실천/체력 향상 효과·운동 처방·직업 적합성을 인증하지 않는 아이보리 수채화 장면이다. |
+| `7da5fe66979dc421` fixed adj. | 고정된 / a fixed price | 한 그림 안 위/아래 두 관련 거래 장면에서 위는 초록 책 한 권·동전 두 개, 아래는 파랑 책 한 권·동전 두 개다. 전체 동전 네 개를 직접 세었고 두 개씩의 배치가 같다. 책 종류가 달라도 가격 단서가 같아 fixed price를 연상하며 물리적으로 수리됐다는 뜻과 구분한다. 동전 면의 얕은 부조·동심원/측면 홈·책 페이지 가장자리·탁자 나뭇결은 물리적 형상으로 읽히며 문자·숫자·통화 기호·책 제목/로고가 없다. 특정 동전 가치/통화·실제 가격 계약·장기 가격 유지·모든 재고 가격을 인증하지 않는다. 아이보리 수채화 스타일 유지. |
+| `9b16ff52e5aa5801` flag n. | 깃발 / a national flag | 건물 지붕 위 한 깃대에 황토색/파란색 두 세로 색 면의 직사각 천 깃발 한 개가 붙어 바람에 나부낀다. 기둥 쪽 천의 부착 모서리와 접힌 천/자유 끝이 구분된다. 지붕 장식·깃대 둥근 꼭대기·천 주름은 물리적 형상이며 글자·국가 문장·숫자·상표/별/로고가 없다. 일반적인 깃발 SYMBOL 명사의 단서이며 실제 특정 나라 국기·국기 규격/정치 상징·거주/국적/역사 정보를 인증하지 않는다. 아이보리 수채화 스타일 유지. |
+| `153f67bf06d1cf61` flood n. | 홍수 / a serious flood | 집 세 채 앞의 거리 전체가 이어진 탁한 물에 덮여 있고 현관 아래/낮은 담장과 오른쪽 나무 밑동이 일부 잠겼다. 지붕/윗벽은 물 위에 남으며 강 수로나 수영장이 아니라 평소 마른 주거 공간이 잠긴 flood WATER 명사의 단서다. 물결/반사·기와/문 패널/창틀은 물리적 형상으로 글자·집 번호·로고가 없다. 사람·구조 지시·상처가 없고 실제 피해액/깊이·발생 원인/현장 안전·대피 여부는 인증하지 않는다. 아이보리 수채화 스타일 유지. |
+| `faf6cb3061f539d3` flood v. | 물에 잠기게 하다 / flood the streets | 한 이미지의 위는 마른 돌길·맑은 하늘, 아래는 회색 구름/빗줄기와 탁한 물이 길을 덮은 상태다. 양쪽 앞집·왼쪽 뒤 집, 양쪽 담장·두 앞 화분·나무 위치가 대응한다. 오른쪽 뒤에는 일부 지붕도 보여 집을 정확히 세 채만 그렸다고 인증하지 않는다. 위에서 보이는 길의 돌들이 아래 물 아래로 사라지고 계단 아래/화분 밑이 일부 잠겨 flood 동사의 물에 덮이는 변화를 연상한다. 계단 윗부분은 아직 물 위에 있어 모든 현관 전체가 잠겼다고 기록하지 않는다. 기와·셔터/창틀·문 손잡이·빗줄기/물결은 물리적 형상이며 글자·숫자·로고·화살표가 없다. 실제 사건·정확한 시간/강수량·침수 원인/안전이나 전체 예문 피해를 인증하지 않는 아이보리 수채화 장면이다. |
+
+사전은 실제 정의 제목·품사 표지의 줄 경계를 선택했다. fitness/flag와 flood 명사·동사는 실제 US URL을 사용했다. canonical flood 반환 본문은 처음에 대량 유입 뜻이어서 WATER 명사/COVER WITH WATER 동사의 정의가 있는 이미 반환된 US 본문을 선택했다. fence는 STRUCTURE, file은 CONTAINER, fixed는 NOT POSSIBLE TO CHANGE다. 직접 페이지 열기·전체 PDF 시각검사·HTTP 실패를 수행했다고 주장하지 않는다. 교재 수준·뜻·문장·번역·출처는 유지한다.
+
+- federal / # Meaning of federal in English — [federal 공식 정의](https://dictionary.cambridge.org/dictionary/english/federal): “relating to the central government”. 중앙 정부와 지역들을 함께 둔 연방 체계의 형용사 본문이다. 하나의 외곽 경계 안 중심의 큰 정부 건물과 세 작은 지역 건물을 관계선으로 연결해 연상한다. 실제 국가·헌법·행정 권한·새 프로그램 발표나 제도를 인증하지 않는다.
+- fence / ### fence noun [C] (STRUCTURE) — [fence 공식 정의](https://dictionary.cambridge.org/dictionary/english/fence): “made of wood or wire and supported with posts”. STRUCTURE의 나무/철사와 기둥으로 땅을 나누는 구조물 명사다. 정원 가장자리의 나무 울타리를 연상하고 장물 매매자/펜싱 동사와 분리한다. 실제 경계권/정원 완전한 둘러싸임·안전 규격은 인증하지 않는다.
+- fighting / # Meaning of fighting in English — [fighting 공식 정의](https://dictionary.cambridge.org/dictionary/english/fighting): “the act of people fighting”. 사람들이 싸우는 행위 명사다. 성인 두 명의 비그래픽 몸싸움으로 연상하고 전쟁만으로 의미를 제한하지 않는다. stop the fighting 부정/종료 예문 전체를 재현하거나 실제 싸움/갈등 해결·법적 정당성을 인증하지 않는다.
+- file / ### file noun (CONTAINER) — [file 공식 정의](https://dictionary.cambridge.org/dictionary/english/file): “used to store papers, letters, and other documents”. CONTAINER의 종이·문서를 보관하는 파일 명사다. 무문자 폴더/빈 종이로 해당 실제 용법을 연상한다. 기존 Tatoeba Give me the file은 종이/컴퓨터 뜻을 명시하지 않아 한 의도로 확정하지 않으며 기록·출처를 보존한다. 실제 자료 내용/문서 전달·컴퓨터 데이터는 인증하지 않는다.
+- financial / # Meaning of financial in English — [financial 공식 정의](https://dictionary.cambridge.org/dictionary/english/financial): “relating to money or how money is managed”. 돈 또는 돈 관리와 관련된 형용사다. 여행 가방을 지닌 성인에게 금전 주머니를 건네는 financial support 단서이며 실제 지원 금액·계약·지원 자격·재정/투자 효과는 인증하지 않는다.
+- fitness / ### fitness noun [U] (HEALTH) — [fitness 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/fitness): “physically strong and healthy”. HEALTH의 신체적으로 강하고 건강한 상태 명사다. 활기찬 걷기와 완만한 오르막으로 체력 단서를 연상하며 적합성/직업 자격 용법과 분리한다. 실제 건강 상태/운동 처방·체력 향상 효과/매일 실천을 인증하지 않는다.
+- fixed / ### fixed adjective (NOT POSSIBLE TO CHANGE) — [fixed 공식 정의](https://dictionary.cambridge.org/dictionary/english/fixed): “not able to be changed”. NOT POSSIBLE TO CHANGE의 미리 정해져 바뀌지 않는 형용사와 a fixed price다. 두 관련 거래에서 다른 책을 같은 동전 두 개로 구매하는 대비를 연상한다. 실제 통화·가격 계약/장기 가격 유지·수선 완료나 조작된 경기 용법은 인증하지 않는다.
+- flag / ### flag noun [C] (SYMBOL) — [flag 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/flag): “a piece of cloth”. SYMBOL의 기둥에 붙어 나부끼는 천 명사다. 단순 색 면의 깃발로 연상하고 실제 특정 국가의 국기·공식 규격/정치 상징·표지/식물/돌 뜻을 인증하지 않는다.
+- flood / ### flood noun (WATER) — [flood 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/flood): “water covering an area that is usually dry”. WATER의 평소 마른 땅을 많은 물이 덮는 상황 명사다. 길/집 아래가 잠긴 거리 전체를 연상하고 눈물/대량 유입 용법과 분리한다. 실제 피해 규모·원인/현장 안전·대피 방법은 인증하지 않는다.
+- flood / ### flood verb (COVER WITH WATER) — [flood 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/flood): “to cause to fill or become covered with water”. COVER WITH WATER의 물로 채워 덮이게 하는 동사다. 같은 거리의 마른 상태와 비가 내려 물이 덮은 상태 두 장면을 연결해 연상하고 많은 사람/물건/빛의 유입과 분리한다. 실제 기상 사건·정확한 순서/시간·과학적 침수 원인/안전을 인증하지 않는다.
+
+- file의 기존 Tatoeba 예문·저자/문장 ID·출처를 그대로 보존했다. 원문은 종이/컴퓨터 파일을 명시하지 않아 종이 보관 파일의 연상 그림을 원문 유일한 의도로 확정하지 않는다.
+- fixed는 위 초록 책+동전 두 개/아래 파랑 책+동전 두 개, 전체 동전 네 개를 원본/320px에서 직접 세었다. 동전 부조/측면 홈은 문자나 통화 기호가 아니다.
+- federal은 한 경계 안 세 색 지역과 큰 중앙 건물/작은 지역 건물 세 개, 무방향 관계선의 연상 도식이다. 실제 국가 지도를 인증하지 않는다. flag는 일반 두 색 천이며 특정 국가의 실제 국기라고 표시하지 않는다.
+- flood 동사의 주요 집/담장/화분 배치가 두 상태에 대응하고, 오른쪽 뒤의 추가로 보이는 지붕도 실제 기록했다. 집을 정확히 세 채만 그렸다고 인증하지 않는다. 길의 물 침수 변화는 구분되며 모든 현관 전체가 잠겼다고 표시하지 않는다.
+- 원본 저장: `C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`. 첫 10개와 실제 기본 생성 원본을 덮어쓰지 않고 보존했으며 바이너리는 Git 제외다.
+- 실제 프롬프트·뜻·해시는 [연결 목록](../data/word-image-manifest.json)에 기록했다. Git 제외 `work/oxford-batch-241-{sources,dictionary-search-raw,dictionary-bodies,source-evidence,scenes,originals,observations,first-observations,first-reviews,reviews,check-results,meta,command-lookup-errors}.json`과 `slot-0..9/native-0..9`을 보존한다. 슬롯만으로 살아 있는 호출/제공자 전달을 주장하지 않는다.
+
+실제로 실행한 검증:
+
+- `node work/oxford-batch-241-preparation-check.cjs`: exit 0. 기준 `7ae9262fb6f3bd219241d1ba6c6de4f4573c9afc`·원장 2482/현재 null·10 ID/교재 fingerprint·정의 본문/인용 한도 확인 후 준비했다.
+- 첫 10개 파일·렌더 검사: exit 0, `2026-10-09T16:10:09.021Z`, `oxford-images-verification-1791562209022.json`. 대기 1425/생성됨 10/승인 2333/보류 37/실패·중단 4. 렌더 통과와 수동 품질 검수를 구분한다.
+- 최종 10개 `node scripts/verify-oxford-images.cjs <10 IDs>`: exit 0, `2026-10-09T16:12:17.557Z`, `oxford-images-verification-1791562337557.json`. 승인 2343/보류 37/실패·중단 4/대기 1425/생성됨·생성 중 0.
+- `node scripts/check-oxford-image-resume.cjs`: exit 0, 19개·이미지/API 호출 0, 실제 fixture `oxford-resume-check-V8PajM`.
+- 세 기존 제작/검증/재개 스크립트 `node --check`: 각각 exit 0.
+- 첫 QA 결과의 저장 파일을 기록 전에 조회해 로컬 읽기 명령이 한 번 exit 1이었다. 실제 결과를 저장하고 보고된 근거 파일을 읽어 해결했다. 제공자 실패/추가 이미지 호출로 세지 않으며 command-lookup-errors에 보존한다.
+- 저장 전/후 `node work/oxford-batch-241-guard.cjs [--final]`에서 모든 2488 PNG·3809 교재 지문·기존 3799개 항목 불변·186~240 근거/부정 판정·호출 원장·정확히 연결 목록/계획/진행 문서 3개 변경·remote/head 동기화를 대조한다. 결과는 Git 제외 guard/completion/readback 기록을 따른다.
+- 앱 코드 변경이 없어 앱 전체 테스트·타입·린트·빌드와 실제 iPhone/독립 학습자 검사는 이번 범위에서 실행하지 않았다. 운영 사이트·학습 기록·DB/API/백업·EN_Card·의존성·배포는 변경하지 않았다.
+
+누적 제작 2379개·검수 통과 2343개·보류 37개·실패/중단 4개·제작 대기 1425개다. 수정본 포함 PNG 2488개·시작 슬롯 원장 2492회이며 확인된 내장 도구 호출은 2491회/제공자 전달 미확인 중단 1회다. 전체 미생성 1,430개, 전체 미승인 1,466개이며 전체 3809개 승인 목표는 active다. 수준별 A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총 903/검수 통과 310/보류 4/대기 587/실패 2, B2 총 839/검수 통과 1/보류 0/대기 838/실패 0이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `federal` 형용사(연방의)이며 이어 fence/fighting/file 명사·financial 형용사·fitness 명사·fixed 형용사·flag/flood 명사·flood 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element/experience/extra 부사의 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `flour` 명사(밀가루)이며 이어 flow 동사/명사·fold 동사·folk 명사/형용사·following/force 명사·force 동사·forever 부사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element/experience/extra 부사의 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
