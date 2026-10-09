@@ -1,6 +1,6 @@
 # Oxford 이미지 제작 진행 기록
 
-- 기준일: 2026-10-09, 브랜치 `codex/oxford-word-images`
+- 기준일: 2026-10-10, 브랜치 `codex/oxford-word-images`
 - 목표·제작 조건: [전체 계획](OXFORD_WORD_IMAGES_PLAN.md)
 - 연결 목록·실제 프롬프트·시도별 해시: [word-image-manifest.json](../data/word-image-manifest.json)
 - 사용자 지시: “지금과 같은 생성 방식을 유지하여 나머지도 진행해라.” 스타일 유지·전체 제작을 승인했으며, 항목별 의미를 일괄 승인한 것으로 해석하지 않는다.
@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2349 |
-| 제작자 품질 검수 통과 `approved` | 2313 |
+| 제작된 서로 다른 항목 | 2359 |
+| 제작자 품질 검수 통과 `approved` | 2323 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,455 |
+| 제작 대기 `waiting` | 1,445 |
 | 생성 중 / 실패·실행 중단 | 0 / 4 |
-| 내장 도구 호출·시작 슬롯 원장 | 2461 |
+| 내장 도구 호출·시작 슬롯 원장 | 2472 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 108 |
+| 그중 품질 수정 호출 | 109 |
 
-이미지 미생성 항목은 제작 대기 1,455개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,460개다. 제작된 2349개는 검수 통과 2313개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2457개다. 원장 2461회는 이미지가 반환된 2457회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2460회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,445개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,450개다. 제작된 2359개는 검수 통과 2323개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2468개다. 원장 2472회는 이미지가 반환된 2468회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2471회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -5342,9 +5342,61 @@ definition 검색 결과의 본문을 사용했다. employment와 engineering은
 
 앱/UI·운영 Sites·EN_Card·DB/API/백업·교재/hosting/의존성은 변경하지 않는다. 앱 전체 타입/린트/빌드와 실제 iPhone 검사는 이번 정적 이미지·문서 작업에서 실행하지 않았고, 독립 학습자 평가/전체 영어 정확도 인증/운영 배포 완료로 표시하지 않는다.
 
+## 추가 239 제작·검수
+
+2026-10-10 KST 체크포인트: B1 experienced부터 face 동사까지 교재 순서 10항목의 ID·품사·기본 뜻·표현/예문/출처와 실제 Cambridge 정의 본문 10항목/서로 다른 8단어를 대조했다. 같은 apple 스타일과 내장 image_gen으로 첫 10장을 순차 제작하고 원본·개별 루프백 320px(그림 폭 288px)을 확인했다. 첫 9개 통과/extra 부사 1개 의미 대응 미달이다. v1은 위 동전 3개, 아래 놓인 4개+손에 든 1개로 총 5개여서 첫 meaningMatch=false다. 한 번만 수정해 v2에서 위 3개/아래 놓인 3개+손에 든 1개(총 4개)를 확인했고 최종 10개 검수 통과다. 첫 부정 판정과 두 원본·각 축소를 보존하며 새 보류/실패 0개, 반환 이미지/내장 호출은 수정 포함 11개/11회다.
+
+| 항목 ID·품사 | 교재 뜻 / 표현 | 원본에서 실제 확인한 단서와 한계 |
+|---|---|---|
+| `5143c56fec2ad89a` experienced adj. | 경험이 풍부한 / an experienced teacher | 원본에서 성인 교사가 오른쪽의 매끈한 토기 그릇을 한 손으로 가리키고 다른 손을 탁자에 둔다. 왼쪽 성인 학습자는 울퉁불퉁한 그릇 옆에서 턱을 받치며 관찰한다. 두 사람 각각 두 팔·두 손의 자연스러운 배치이며 나이 차이를 숙련의 근거로 삼지 않는다. 숙련된 지도 장면을 연상하지만 실제 반복 연습 기간·직업 자격은 증명하지 않는다. 글자·숫자·로고 없이 아이보리 수채화 스타일을 유지한다. |
+| `f01b97b439023e3f` experiment v. | 실험하다 / experiment with colors | 성인 화가가 세 도자기 접시의 노란색·초록 혼합색·파란색 물감을 비교하며 가운데 혼합색을 붓으로 젓는다. 다른 손은 탁자에 놓이고 두 팔·두 손의 배치가 자연스럽다. 한 종이에 네 가지 물감 견본이 있으며 이는 실제 물감 자국이지 글자·라벨·도표가 아니다. 새로운 색을 시도하는 동사 용법의 단서이고 혼합 비율·정확한 화학 결과는 증명하지 않는다. 무문자 아이보리 수채화 스타일이다. |
+| `e5334c1033b1d65f` explode v. | 폭발하다 / a tire explodes | 한 이미지 안에서 위는 온전한 타이어·금속 휠, 아래는 고무가 크게 찢겨 열리고 파편과 옅은 먼지가 주변으로 흩어지는 두 관련 상태다. 단순히 공기가 빠진 펑크와 구별되는 터지는 동작의 단서다. 고무 홈·휠 구멍·볼트는 실제 물체 형상이며 글자·숫자·로고가 아니다. 화염·사람·상처·원인 설명 없이 정확한 압력·시간·파손 메커니즘은 증명하지 않는다. 아이보리 수채화 스타일이다. |
+| `502231cf26776603` explore v. | 둘러보다 / explore a city | 성인 여행자 한 명이 양손을 자연스럽게 내린 채 돌길을 걷고 고개를 위쪽 건물로 돌려 살펴본다. 아치·옆 계단·여러 건물이 둘러보는 장소를 제공하며 단순히 얼굴을 돌리는 의미만을 표현하지 않는다. 두 팔과 걷는 두 다리·두 신발이 보인다. 가방 버클·가로등 받침은 물리적 부품이며 글자·지도·표지판·로고가 없다. 실제 도시 위치·전체 탐방 완료·안전성은 증명하지 않는 아이보리 수채화 연상 장면이다. |
+| `c08666abbac083b3` explosion n. | 폭발 / a loud explosion | 한 장면의 작은 창고 지붕에서 화염·회색 연기와 목재·골판 지붕 파편이 바깥으로 흩어진다. 안정적으로 타는 난로나 단순한 불과 달리 갑작스러운 폭발 사건의 단서가 보인다. 골판 홈·나뭇결·연기는 물리적 형상이며 글자·효과음·로고·도식 화살표가 아니다. 사람·무기·폭발물 제작 지침이 없다. 실제 원인·무인 여부·소리·작업자 대피·사고 안전성을 증명하지 않는다. 기존 아이보리 수채화 스타일이다. |
+| `4797b387076b29a2` export n. | 수출품 / a major export | 항만의 나무 팔레트 위에 세 삼베 자루가 있고 앞의 한 자루는 열려 갈색 커피 원두가 보이며 뒤 두 자루는 묶여 있다. 화물선과 바다가 배경이고 물품이 중심이어서 export 명사 수출품의 단서다. 원두 홈·삼베 결·팔레트 못·선박 창문은 물리적 형상이다. 글자·국기·로고가 없고 실제 원산지·종·국외 판매·통관·수출 통계·선적 완료는 증명하지 않는다. 아이보리 수채화 스타일이다. |
+| `ecb6ed5f502969a8` export v. | 수출하다 / export goods | 성인 작업자가 두 닫힌 목재 상자를 실은 두 바퀴 운반대를 선박의 열린 화물 경사로 쪽으로 옮긴다. 작업자의 오른손은 손잡이를 잡고 왼쪽 팔은 몸 뒤로 일부 가려져 왼손 접촉은 확인하지 못한다. 두 다리와 두 신발의 진행 방향이 배 쪽을 향한다. 조끼 반사띠·모자 봉제·상자 나뭇결·선박 창은 글자나 로고가 아니다. 수출 행동의 연상 단서이며 실제 다른 국가·상자 내용·판매·통관·선적/도착 완료를 증명하지 않는다. 아이보리 수채화 스타일이다. |
+| `3e319c9ba45e26b0` extra n. | 추가되는 것 / optional extras | 카운터의 무문자 방 열쇠·빈 태그와 별도로 직원 한 손이 아침 식사 쟁반을 내민다. 쟁반에는 커피·주스·토스트와 계란·과일 그릇·접힌 천이 있고 열쇠 옆 동전 세 개는 추가 지불의 맥락 단서다. extra 명사는 추가되는 식사 서비스가 중심이다. 동전의 얕은 윤곽·동심원은 물리적 부조이며 읽을 수 있는 글자·숫자·로고가 없다. 실제 호텔 요금·선택 가능 계약·통화·식품 영양을 증명하지 않는다. 아이보리 수채화 스타일이다. |
+| `fe0aefe85592b445` extra adv. | 추가로 / pay extra | 첫 원본은 위 카운터에 동전 세 개·열쇠, 아래에 아침 식사·열쇠·놓인 동전 네 개와 손이 든 별도 동전 한 개로 총 다섯 개다. 추가 지불의 일반 연상은 있으나 계획한 동일한 기본 세 개와 추가 한 개(총 네 개)의 대응에 실패하여 meaningMatch=false로 판정한다. 두 관련 장면이고 카운터 직원의 이름표·열쇠 태그·동전 면은 읽을 수 있는 글자·숫자·로고가 없어 textFree=true, 아이보리 수채화 스타일은 styleConsistent=true다. 단일 수정 후 재검토하며 원본의 부정 판정을 보존한다. v2: 수정 원본은 위에 놓인 동전 세 개, 아래에 놓인 기본 동전 세 개와 손에 든 추가 동전 한 개로 총 네 개다. 오른쪽의 불필요한 놓인 동전 한 개가 제거되어 계획한 세 개+한 개 대응이 맞는다. 추가 아침 식사·동일한 카운터 직원·빈 이름표와 열쇠 태그·두 관련 장면을 유지한다. 글자·숫자·로고 없이 아이보리 수채화 스타일이고 정확한 가격·동전 가치·통화·실제 호텔 계약은 증명하지 않는다. 픽셀 단위로 동일함을 주장하지 않는다. 한 번 수정만 수행했고 첫 원본의 meaningMatch=false를 보존한다. |
+| `db37d7a8b8b83cb9` face v. | 직면하다 / face a challenge | 성인 여행자가 오른손으로 두 바퀴 여행가방 손잡이를 잡고 앞길을 가로막은 쓰러진 나무 앞에 서 있다. 왼손은 옆으로 내려 두 팔·두 손과 두 신발이 자연스럽다. 원본은 별도 운반카트가 아니라 두 바퀴 여행가방이지만 앞으로 이동할 때 해결해야 할 장애물에 직면한 단서는 유지된다. 나무는 이미 바닥에 쓰러져 있고 아직 건너거나 제거하지 않았다. 배낭 버클·가방 홈·나무껍질은 물리적 형상이며 글자·로고가 없다. 실제 통행권·안전·해결 방법·성공은 증명하지 않는 아이보리 수채화 장면이다. |
+
+사전 본문은 실제 줄 경계의 정의 제목·품사 표지로 선택했다. experienced/experiment는 실제 US URL을 사용하며 experiment는 명사 뒤 verb [ I ]와 물감 시험 예문이다. explosion은 American Dictionary의 BURST, export 명사는 Intermediate English noun [ C/U ]/동사는 첫 verb를 선택했다. extra는 실제 반환된 q=extras URL에서 SOMETHING MORE 명사와 adverb를 분리했다. face는 DEAL WITH로 단순 방향/얼굴 명사와 분리했다. 직접 페이지 열기·전체 PDF 시각검사·HTTP 실패를 수행했다고 주장하지 않는다. 교재 수준·문장/번역/출처는 변경하지 않는다.
+
+- experienced / # Meaning of experienced in English — [experienced 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/experienced): “having skill or knowledge”. 실제 US URL의 반복한 경험에서 생긴 기술/지식 형용사를 확인했다. 능숙한 도예 교사가 학습자를 돕는 단서이며 나이/직급만으로 경험·실제 경력/수업 효과를 인증하지 않는다.
+- experiment / experiment verb [ I ] — [experiment 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/experiment): “to try something”. 실제 US URL의 noun 뒤 verb [ I ] 본문과 artist experimented pigments 예문을 읽었다. 색을 섞어 시험하는 동작으로 experiment 동사를 연상하고 실제 색소 배합 비율·실험 결과/미술 수업 전체를 인증하지 않는다.
+- explode / ### explode verb (BREAK APART) — [explode 공식 정의](https://dictionary.cambridge.org/dictionary/english/explode): “break up into pieces violently”. 실제 BREAK APART와 tyre exploded 예문을 확인했다. 타이어가 갑자기 찢어지는 두 상태를 연상하며 감정/급증/거짓 폭로와 구분한다. 실제 원인/압력·큰 소리·안전을 인증하지 않는다.
+- explore / # Meaning of explore in English — [explore 공식 정의](https://dictionary.cambridge.org/dictionary/english/explore): “search a place”. 장소를 찾아보고 알아보는 동사다. 걸어서 골목을 둘러보는 성인으로 연상하며 추상적 가능성을 검토하는 뜻과 구분한다. 실제 도시/지리·여행 전체/안전/문화 지식을 인증하지 않는다.
+- explosion / ### explosion noun (BURST) — [explosion 공식 정의](https://dictionary.cambridge.org/dictionary/english/explosion): “a violent burst”. 실제 American Dictionary BURST 본문의 폭발 사건 명사다. 조각·급격한 불꽃/연기로 사건을 연상하고 감정/급증/허위 이론 반증을 분리한다. 원인/실제 사고·작업자의 청취/안전 대피를 인증하지 않는다.
+- export / export noun [ C/U ] — [export 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/export): “something sold and taken out of a country”. 실제 US URL Intermediate English의 noun [ C/U ] 물품 뜻/coffee 예문을 읽었다. 커피 자루와 선적 맥락으로 수출품을 연상하고 수출업/파일 내보내기를 분리한다. 실제 국가/수출 통계·판매/통관을 인증하지 않는다.
+- export / export verb — [export 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/export): “send goods to another country for sale”. 실제 US URL 첫 verb의 다른 나라에 판매용 상품을 보내는 뜻이다. 선박으로 물품을 싣는 동작을 연상하고 파일 내보내기를 분리한다. 다른 나라/실제 거래·통관/목적지 도착은 그림만으로 인증하지 않는다.
+- extra / ### extra noun (SOMETHING MORE) — [extra 공식 정의](https://dictionary.cambridge.org/dictionary/english/extra?q=extras): “if you pay a little more money”. 실제 q=extras URL의 선택 추가 사항 명사다. 객실 열쇠와 별도 아침 식사 쟁반을 연상하고 영화 엑스트라/크리켓 점수를 분리한다. 호텔 실제 약관·요금/특정 음식을 식별한 영양·금액을 인증하지 않는다.
+- extra / extra adverb — [extra 공식 정의](https://dictionary.cambridge.org/dictionary/english/extra?q=extras): “more:”. 실제 q=extras URL의 adjective 뒤 adverb more/pay extra 문맥이다. 기존 동전 세 개에 동전 하나를 더 내는 비교로 추가 지불을 연상하고 추가 물품 명사와 구분한다. 실제 통화/가격·선택 약관/정확한 가치 증가는 인증하지 않는다.
+- face / ### face verb (DEAL WITH) — [face 공식 정의](https://dictionary.cambridge.org/dictionary/english/face): “you have to deal with it”. 문제를 마주해 다루어야 하는 동사다. 이동 경로가 막힌 수레/쓰러진 나무 앞 사람을 연상하고 얼굴 명사·단순히 방향을 돌리는 뜻/외벽 마감을 분리한다. 실제 위험/통행법·문제 해결/반드시 특정 처리를 해야 한다는 법적 의무를 인증하지 않는다.
+
+- export 명사는 커피 자루 중심의 수출품, 동사는 상자를 배 경사로 쪽으로 옮기는 행동의 단서다. 실제 국외 판매·통관·물품 내용/도착 완료는 인증하지 않는다. 동사의 왼손이 가려져 양손 접촉을 확인했다고 기록하지 않는다.
+- extra 명사는 별도 아침 식사 서비스, 부사는 기본 동전 3개와 추가 1개의 지불 대비다. 실제 금액·동전 가치/통화·호텔 약관을 그림으로 인증하지 않는다. 빈 이름표/태그와 동전 윤곽은 글자·로고가 아니다.
+- face 원본은 별도 카트가 아니라 두 바퀴 여행가방이며, 이동을 막는 쓰러진 나무 앞에서 해결 과제에 직면한 단서를 유지한다. 실제 안전·통행권·해결 성공은 인증하지 않는다.
+- extra 부사 v1 SHA256 `1d653629730878a3628a18b308fca1b18b120f4c0db8d9d97445b56189f81f9e`, v2 `b4fa6a71004e23d3b51d0cb1483da5803693617bbeeadcf4b81edd00bb22d629`; 첫 meaningMatch=false/textFree=true/styleConsistent=true와 최종 세 항목 true, 각 원본/320px를 보존한다. 세 번째 호출은 없다.
+- 원본 저장: `C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`. v1 10개와 extra 부사 v2 1개/실제 생성 원본을 덮어쓰지 않고 보존했고 바이너리는 Git 제외다.
+- 실제 프롬프트·뜻·해시는 [연결 목록](../data/word-image-manifest.json)에 기록했다. Git 제외 `work/oxford-batch-239-{sources,dictionary-bodies,source-evidence,scenes,originals,observations,first-observations,first-reviews,reviews,correction,check-results,meta}.json`과 `slot-0..10/native-0..10`을 보존한다. 시작 슬롯과 실제 반환 영수증을 구분하며 슬롯만으로 살아 있는 호출/제공자 전달을 주장하지 않는다.
+
+실제로 실행한 검증:
+
+- `node work/oxford-batch-239-preparation-check.cjs`: exit 0. 기준 `833d47b387d941d31ac8cbdbd4ba615e7aa16421`·원장 2461/현재 null/깨끗한 상태·10 ID/교재 fingerprint·정의 본문/인용 한도를 확인한 뒤 준비했다. 추가 이미지/API 호출 0.
+- 첫 10개 `node scripts/verify-oxford-images.cjs <10 IDs>`: exit 0, `2026-10-09T15:00:05.093Z`, `oxford-images-verification-1791558005094.json`. 대기 1445/생성됨 10/승인 2313/보류 37/실패·중단 4. 렌더 통과를 동전 수 품질 통과와 혼동하지 않는다.
+- extra 부사 v2 파일·렌더 검사: exit 0, `2026-10-09T15:04:06.861Z`, `oxford-images-verification-1791558246861.json`. 대기 1445/생성됨 1/승인 2322/보류 37/실패·중단 4. 원본·축소를 실제로 보고 동전 수를 재검토했다.
+- 최종 10개 파일·렌더 검사: exit 0, `2026-10-09T15:04:44.984Z`, `oxford-images-verification-1791558284984.json`. 승인 2323/보류 37/실패·중단 4/대기 1445/생성됨·생성 중 0.
+- `node scripts/check-oxford-image-resume.cjs`: exit 0, 19개·이미지/API 호출 0, 실제 fixture `oxford-resume-check-D4IRV4`.
+- 세 기존 제작/검증/재개 스크립트 `node --check`: 각각 exit 0.
+- 최초 검수 저장에서 새 payload에 decision/note 필드가 빠져 CLI가 두 번 exit 1로 첫 항목 변경 전에 거절했다. 실제 형식·pngDecoded를 보완한 뒤 첫 검수/최종 검수 exit 0이다. 이 두 로컬 명령 오류는 제공자 실패·추가 이미지 호출로 세지 않고 command-format-errors/check-results에 보존한다.
+- 저장 전/후 `node work/oxford-batch-239-guard.cjs` / `--final`: 모든 시도별 PNG·3,809 ID/교재 fingerprint·이번 10개 외 불변·기존 보류/실패/첫 부정 판정·정확히 3개 파일과 원격 HEAD/깨끗한 상태를 검사한다. 실제 결과는 completion-checks/final-readback에 남긴다.
+
+누적 제작 2359개·검수 통과 2323개·보류 37개(이미지 없음 letter 1개)·실패/중단 4개·대기 1445개다. 수정본 포함 PNG 2468개·원장 2472회/품질 수정 109회다. 확인된 내장 도구 호출은 2471회이며 climb의 제공자 전달 미확인 중단 시작 슬롯 1회와 구분한다. 전체 미생성 1,450개·미승인 1,486개로 목표는 active/미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 290/보류 4/대기 607/실패 2; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+앱/UI·운영 Sites·EN_Card·DB/API/백업·교재/hosting/의존성을 변경하지 않는다. 앱 전체 타입/린트/빌드와 실제 iPhone 검사·독립 학습자 평가는 실행하지 않았고 전체 영어 정확도 인증/운영 배포 완료로 표현하지 않는다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `experienced` 형용사(경험이 풍부한)이며 이어 experiment/explode/explore 동사·explosion 명사·export 명사/동사·extra 명사/부사·face 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 실제 정의를 다시 읽고 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 기존 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `fairly` 부사(꽤)이며 이어 familiar/fancy/far/fascinating/fashionable 형용사·fasten 동사·favor 명사·fear/feature 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element/experience/extra 부사의 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
