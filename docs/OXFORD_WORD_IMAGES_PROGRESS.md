@@ -10,17 +10,17 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2125 |
-| 제작자 품질 검수 통과 `approved` | 2093 |
-| 품질·의미·조건 보류 `held` | 33 |
+| 제작된 서로 다른 항목 | 2135 |
+| 제작자 품질 검수 통과 `approved` | 2102 |
+| 품질·의미·조건 보류 `held` | 34 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,680 |
+| 제작 대기 `waiting` | 1,670 |
 | 생성 중 / 실패 | 0 / 3 |
-| 실제 내장 도구 호출 | 2226 |
-| 그중 품질 수정 호출 | 98 |
+| 실제 내장 도구 호출 | 2237 |
+| 그중 품질 수정 호출 | 99 |
 
-이미지 미생성 항목은 제작 대기 1,680개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 3개(`code`/`attraction` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,684개다. 제작된 2125개는 검수 통과 2093개와 이미지가 있는 보류 32개이며, 수정본 포함 PNG는 2223개다. 실제 호출 2226회에는 이미지가 반환된 2223회와 무이미지 실패 3회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
+이미지 미생성 항목은 제작 대기 1,670개·생성 전 조건 보류 `letter` 1개·이미지 반환 없는 실패 3개(`code`/`attraction` HTTP 400 안전 거절·`route` HTTP 408 시간 초과)를 합친 1,674개다. 제작된 2135개는 검수 통과 2102개와 이미지가 있는 보류 33개이며, 수정본 포함 PNG는 2234개다. 실제 호출 2237회에는 이미지가 반환된 2234회와 무이미지 실패 3회가 포함된다. 생성 전 보류에는 이미지·실제 호출이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -243,6 +243,7 @@
 | 추가 213 | B1 appreciate 동사·approximately 부사·arrest 동사/명사·arrival/assignment 명사·assist 동사·atmosphere 명사·attach 동사·attitude 명사 | 10개 첫 검수 통과. 원본/개별 320px 각 10장 확인. 감사·비슷한 두 길이·체포 행동/사건·도착/과제/도움·행성 대기·문서 사진 첨부·두 태도 대비를 구분. 호출 10회·수정/신규 보류/실패 0 |
 | 추가 214 | B1 attract 동사·attraction 명사, authority부터 bake까지 미호출 8개 | attract 원본/개별 320px 1장 통과. attraction 출력 안전 거절(400)로 이미지 없이 실패, 이후 호출 중단/미호출 8개 대기 복구. 호출 2회·이미지 1장·수정/새 보류 0·새 실패 1 |
 | 추가 215 | B1 authority 명사·automatic 형용사·automatically 부사·average/award 동사·aware 형용사·backward 부사·bake 동사·balance 명사/동사 | 10개 첫 검수 통과. 원본/개별 320px 각 10장 확인. 기관 문의·자동 장치/평균·수여/인지·뒤로/오븐·일/휴식과 자세 균형을 구분. 호출 10회·수정/새 보류/실패 0 |
+| 추가 216 | B1 ban 두 품사·base 두 품사·basic·basis/battery/battle/beauty/bee | 9개 첫 검수 통과·bee 1회 수정 후 형태 식별 부족 보류. 원본/개별 320px 각 11장 확인. 호출 11회·수정 1/새 보류 1/새 실패 0 |
 
 시범의 `record` 명사는 트로피·결승선 대신 이전 최고 거리와 더 먼 새 착지를 비교하도록 한 번 수정했다. v1/v2를 모두 보존했다. `about` 부사는 정확한 띠를 흐린 범위로 바꿨으나 여전히 물·측정이 우선 보이고 ‘대략’의 단서가 약하다. 수정 한도를 사용했으므로 추가 호출하지 않고 보류한다. 전체 완료 기준은 여전히 **3,809개 모두 검수 통과**이며, 이 보류도 미완료 범위에 포함한다.
 
@@ -4608,9 +4609,33 @@ balance 명사는 같은 성인의 작업/휴식 두 맥락이며 시각적 비�
 
 근거 접두사는 `work/oxford-batch-215-`이며 before/sources/source-evidence/dictionary-bodies/scenes(실제 프롬프트/참조/해시)/originals/first-observations/observations/first-reviews/reviews/check-results/meta JSON을 보존한다. 기본 생성 원본 10개와 주 작업 폴더 PNG를 덮어쓰지 않는다. 연결 목록·계획·진행 기록 세 파일만 커밋·푸시하며 앱·Sites·EN_Card·DB·API·백업·개인 학습 기록은 변경하지 않는다. 전체 3,809개 승인은 미완료로 active를 유지한다. 다음 대기는 B1 ban 동사이며 현재 미해결 호출·실행 중 도구는 없다.
 
+## 추가 216 제작·검수
+
+2026-10-09 KST 체크포인트: B1 ban 동사/명사·base 명사/동사·basic 형용사·basis/battery/battle/beauty/bee 명사 다음 10개를 같은 내장 image_gen과 apple 스타일 참조로 순차 제작했다. 9개는 첫 검수 통과했다. bee는 첫 다리/날개 식별 부족으로 한 번 보정했지만 확인 조건 미달이 남아 보류했다. 실제 호출 11회/이미지 11장·수정 1회/새 보류 1개·새 실패 0이다. 기존 held 33개·code/route/attraction 실패·두 policyHold와 모든 과거 시도를 그대로 유지했다.
+
+장면 결정 전 각 항목 ID/품사/기본 뜻·표현/예문/번역/출처를 실제 대조했다. Cambridge 실제 정의 본문 10개/서로 다른 단어 8개를 읽었다. ban은 공식 금지 행동과 명령 명사를 따로 읽었고 base는 MAIN PLACE가 아니라 Business English의 발전을 가능하게 하는 기초와 BOTTOM 물리 비유를 대조했다. 초기 base-on/Learner base 제목뿐인 결과를 정의로 쓰지 않았다. 두 URL 직접 열기는 HTTP 상태 없는 Internal Error였으며 추가 공식 검색에서 실제 영어 base something on something 정의를 읽었다. basic SIMPLE·basis IMPORTANT FACTS는 US English 실제 본문을, battery ELECTRICAL DEVICE·battle FIGHT·beauty BEING BEAUTIFUL·bee INSECT 본문을 읽었다. Purdue Extension PDF 실제 인쇄 29쪽의 six legs/two pairs of wings 본문은 형태 대조 자료다. PDF 픽셀이나 실제 곤충을 관찰한 것으로 보고하지 않는다. 정의/짧은 인용/접근 실패 사실은 work/oxford-batch-216-source-evidence.json 및 dictionary-bodies.json에 보존했다.
+
+공식 근거: [ban 동사/명사](https://dictionary.cambridge.org/dictionary/english/ban), [base 기초](https://dictionary.cambridge.org/dictionary/english/base), [base on 동사](https://dictionary.cambridge.org/us/dictionary/english/base-on), [basic](https://dictionary.cambridge.org/us/dictionary/english/basic), [basis](https://dictionary.cambridge.org/us/dictionary/english/basis), [battery](https://dictionary.cambridge.org/dictionary/english/battery), [battle](https://dictionary.cambridge.org/dictionary/english/battle), [beauty](https://dictionary.cambridge.org/dictionary/english/beauty), [bee](https://dictionary.cambridge.org/dictionary/english/bee), [Purdue 벌 형태 자료](https://ag.purdue.edu/department/extension/ppp/ppp-publications/ppp-116.pdf).
+
+원본/개별 320px 화면 각 11장을 실제 열어 다음을 확인했다.
+
+- ban 동사는 관리자 제지 손/입에서 떨어진 담배 한 개·두 성인이며 추가 무지 무전기는 물리 소품이다. 명사는 중앙 관리자와 담배를 각각 케이스로 넣는 두 방문객·세 성인의 공통 규칙 관계다. 오늘 시작이나 실제 조례·법적 권한을 인증하지 않는다.
+- base 명사는 넓은 받침 한 개 위 큐브 정확히 세 개의 지지 비유다. 실제 학습 성취를 그렸다고 하지 않는다. base 동사는 책 오른쪽 삽화와 영화 화면에 동일 여행자/아치 돌다리/큰 나무가 반복되는 최대 두 관련 표현이며 책 왼쪽은 빈 페이지다. 실제 소설·원작 제작·저작권을 확정하지 않는다.
+- basic은 성인 두 명이 큐브 정확히 두 개를 쌓기 전 지도하는 시작 기술 맥락이다. 지도자 다른 손은 가려져 있다. basis는 공유 보고서 종이 한 장의 무지 세로 막대 정확히 세 개·가리키는 대화 관계다. 실제 고급 강좌/데이터 값/논의 결과를 인증하지 않는다.
+- battery는 무지 원통형 배터리 한 개·열린 손전등 수납구·분리된 뚜껑 한 개다. 나사산/요철/금속 광택을 글자로 오인하지 않으며 꺼진 조명이 실제 방전 사건의 증거라고 하지 않는다.
+- battle은 액자 그림 한 점 안에서 파란 두 명/갈색 두 명의 성인 병사 대립과 중심 검 교차가 보인다. 테두리는 예상보다 장식적이지만 물리 틀 무늬이며 문자·진영 표식이 아니다. 뒤 인물의 팔다리 일부는 가려져 있고 부상/피/시신/총기/아이/두 번째 그림이 없다. 실제 유명 전투·승패·역사를 인증하지 않는다.
+- beauty는 꽃가지·호수 반사·산/햇빛의 하나의 풍경이다. 원문의 She has no sense of beauty 부정 사건을 그대로 묘사하지 않고 기본 뜻을 위한 별도 긍정적 시각 맥락으로 기록했다. 객관적 미적 등급·개인 취향을 인증하지 않는다.
+- bee v1은 끝까지 분리된 다리 네 개·뚜렷한 날개 세 외곽만 관찰되었다. 숨은 appendage 가능성을 배제해 실제 개수가 틀렸다고 단정하지 않지만 여섯 다리/두 쌍을 이 원본에서 확인할 수 없어 첫 검수를 보류했다. 수정 v2는 다리 위치/포즈가 바뀌고 다섯 개 다리 전체와 추가 한 다리 일부가 보이지만 날개는 세 외곽이 남아 두 쌍을 확인할 수 없다. 원본/320px 모두 같은 식별 한계를 확인하여 meaningMatch=false 보류를 유지했다. 글자/상표는 없으며 v1/v2와 first-reviews/first-observations의 부정 근거를 보존했다. 세 번째 호출하지 않는다.
+
+문자/숫자/라벨/상표/워터마크는 없고 나무결·옷 단추·벨트·신발 끈·나사산·잎맥·벌 날개맥/털·비눗방울 반사는 자연 또는 물리 형태다. QA 하단 항목명은 artwork 바깥에 있다. 모든 후보는 교재 뜻과 함께 확인하는 연상 단서이며 단어/품사·법률·과거 시제·개인 심리나 실제 사건을 그림만으로 확정하지 않는다.
+
+최종 검사: node scripts/verify-oxford-images.cjs <10 IDs> 종료 0/PNG·해시·교재 연결 3,809개·루프백 Chromium 320px 10개 렌더 통과. 첫 검사 oxford-images-verification-1791506144258.json (2026-10-09T00:35:44.258Z), 보정 oxford-images-verification-1791506311935.json (2026-10-09T00:38:31.935Z), 최종 oxford-images-verification-1791506349433.json (2026-10-09T00:39:09.432Z)를 보존했다. node scripts/check-oxford-image-resume.cjs 종료 0/19개 검사·image/API 호출 0/fixture oxford-resume-check-W1mXOm. oxford-images/verify-oxford-images/check-oxford-image-resume 세 스크립트 node --check 모두 종료 0. 초기 준비 재검사는 updatedAt 차이로 종료 1 후 준비에 의한 타임스탬프만 제외해 실제 원장/전체 과거 항목 불변을 확인했고, 초기 재개 명령은 없는 파일명을 호출해 종료 1이었다. 실제 저장소 명령을 확인한 최종 검사는 통과했다. 이 두 로컬 검사 오류는 이미지/API 호출·원본·기록을 바꾸지 않았다. 검사 결과와 최종 집계는 work/oxford-batch-216-check-results.json/meta.json에 있다. 앱 전체 테스트/타입/린트/빌드·실제 iPhone·독립 학습자 평가는 이미지 정적 제작 범위에서 실행하지 않았다.
+
+누적 제작 2135개·검수 통과 2102개/보류 34개(이미지 있는 보류 33개)/실패 3개·대기 1,670개·PNG 2234장·호출 2237회·수정 99회다. 전체 미생성 1,674개(대기+letter 조건 보류+무이미지 실패)이며 전체 승인 미완료다. 수준별 A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총 903/검수 통과 69/보류 1/대기 832/실패 1, B2 총 839/검수 통과 1/보류 0/대기 838/실패 0이다. 다음 대기는 B1 belief 명사다. 운영·학습 기록·EN_Card·Sites·DB·API·백업·의존성 변경은 없다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `ban` 동사(금지하다)이며 이어 ban 명사·base 명사/동사·basic 형용사·basis/battery/battle/beauty/bee 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. usual/top 형용사·schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. attraction/code의 안전 거절과 route의 HTTP 408는 자동 재시도하지 않으며 기존 보류·모든 시도를 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `belief` 명사(믿음)이며 이어 bell 명사·bend 두 품사·benefit 동사·better 명사·bite 두 품사·block/board 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. bee/usual/top·schedule/lend/less는 한 번 수정 후에도 보류이며 세 번째 호출하지 않는다. attraction/code의 안전 거절과 route의 HTTP 408는 자동 재시도하지 않으며 기존 보류·모든 시도를 보존한다. 현재 미해결 호출·실행 중 도구는 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
