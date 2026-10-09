@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2359 |
-| 제작자 품질 검수 통과 `approved` | 2323 |
+| 제작된 서로 다른 항목 | 2369 |
+| 제작자 품질 검수 통과 `approved` | 2333 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,445 |
+| 제작 대기 `waiting` | 1,435 |
 | 생성 중 / 실패·실행 중단 | 0 / 4 |
-| 내장 도구 호출·시작 슬롯 원장 | 2472 |
+| 내장 도구 호출·시작 슬롯 원장 | 2482 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 109 |
 
-이미지 미생성 항목은 제작 대기 1,445개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,450개다. 제작된 2359개는 검수 통과 2323개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2468개다. 원장 2472회는 이미지가 반환된 2468회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2471회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,435개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,440개다. 제작된 2369개는 검수 통과 2333개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2478개다. 원장 2482회는 이미지가 반환된 2478회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2481회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -5394,9 +5394,56 @@ definition 검색 결과의 본문을 사용했다. employment와 engineering은
 
 앱/UI·운영 Sites·EN_Card·DB/API/백업·교재/hosting/의존성을 변경하지 않는다. 앱 전체 타입/린트/빌드와 실제 iPhone 검사·독립 학습자 평가는 실행하지 않았고 전체 영어 정확도 인증/운영 배포 완료로 표현하지 않는다.
 
+## 추가 240 제작·검수
+
+2026-10-10 KST 체크포인트: B1 fairly 부사부터 feature 동사까지 다음 10항목의 ID·품사·기본 뜻·표현/예문/출처를 읽고 실제 Cambridge 정의 본문 10항목/서로 다른 10단어를 대조했다. 같은 apple 스타일과 내장 image_gen으로 첫 10장을 순차 제작하고 모든 원본·개별 루프백 320px(그림 폭 288px)을 실제 확인했다. 10개 모두 첫 시도 검수 통과이며 이번 수정·신규 보류·신규 실패는 0개다. 반환 이미지/내장 호출은 10개/10회다.
+
+| 항목 ID·품사 | 교재 뜻 / 표현 | 원본에서 실제 확인한 단서와 한계 |
+|---|---|---|
+| `d342a61e9448681b` fairly adv. | 꽤 / fairly easy | 성인 한 명이 차분한 표정으로 여섯 삼각 구획의 작은 육각 나무 퍼즐에서 마지막 조각을 빈 자리에 맞추려 한다. 다섯 구획의 조각과 손에 든 마지막 한 조각, 두 팔·두 손이 자연스럽게 보인다. 긴장·축하보다 약간 집중해 풀어 가는 fairly easy의 연상 단서다. 주관적 절대 난도나 more than average/less than very 정도를 그림만으로 측정하지 않는다. 나뭇결·기하 구획은 글자·숫자·채점 표시가 아니며 아이보리 수채화 스타일을 유지한다. |
+| `9f2c6db7a917074b` familiar adj. | 익숙한 / a familiar topic | 성인 한 명이 초록 문·둥근 창·삼각 지붕이 있는 벽돌집을 바라보며 조용히 웃고 같은 특징의 집을 담은 물리적 사진 한 장을 한 손에 든다. 다른 손은 옆으로 내려 두 팔이 자연스럽고 다리/발 전체는 화면에 없어 인증하지 않는다. 사진과 눈앞 집의 알아볼 만한 특징으로 familiar 형용사 단서를 제공하되 실제 기억·집 신원·소유나 교재 주제의 학습 완료는 증명하지 않는다. 사진은 화면/UI가 아니고 집 벽돌·문 패널·창 살·단추는 물리적 형상이다. 글자·주소·숫자·로고 없이 아이보리 수채화 유지. |
+| `0dddc790c1089dcd` fancy adj. | 고급의 / a fancy restaurant | 사람 없는 식당의 흰 식탁보 원탁·초록 천 의자 두 개·접시 두 개·빈 스템 잔 두 개·양쪽 수저/포크·촛불과 작은 꽃병·절제된 매달린 조명이 보인다. 실제 음식이나 와인 소비는 확인하지 않으며 격식 있는 식당 분위기가 fancy 형용사 고급의 뜻을 연상한다. 실제 가격·등급·예약·장소·음식 품질은 인증하지 않는다. 식기 테두리·탁자/의자 구조·천 주름은 물리적 형상으로 글자·로고·가격표가 없고 아이보리 수채화 스타일이다. |
+| `4d993d491d5cd6eb` far adj. | 반대쪽의 / the far side | 성인 관찰자가 전경의 가까운 호숫가에 서 있고 넓은 물 건너 맞은편 호숫가에 집 한 채가 있다. 집은 가까운 땅이나 물 가운데 섬에 있지 않아 far side의 상대적 거리 관계가 구분된다. 양손은 주머니에 가려져 전체 손을 확인했다고 기록하지 않으며 두 다리·신발은 보인다. 실제 호수 위치·주택 소유·거리 치수·방향/정치 뜻을 인증하지 않는다. 물결·집 창문·지붕·나무는 물리적 요소이며 지도/화살표/글자/숫자/로고 없이 아이보리 수채화 유지. |
+| `2b4aeb4dc699f9db` fascinating adj. | 매우 흥미로운 / a fascinating story | 나선 모양 돌 화석을 받침대에 두고 성인 안내자가 두 손을 펼쳐 말하며 성인 청자 두 명이 약간 몸을 기울이고 웃는 관심 표정으로 듣는다. 안내자 두 손·여성 청자의 모은 손은 보이고 남성의 한 손은 주머니/몸에 가려져 모든 손/발을 확인했다고 기록하지 않는다. 빈 이름표·돌의 나선은 글자/숫자/UI가 아니다. 이야기에 몰입하는 fascinating 형용사 연상이며 실제 감정·이야기 내용/사실·지질학적 종/연대·교육 효과는 인증하지 않는다. 아이보리 수채화 스타일·무문자 조건 유지. |
+| `ef38db1b174c482f` fashionable adj. | 유행하는 / fashionable shoes | 허리 아래로 보이는 성인 세 명이 각각 두 다리·두 신발로 총 여섯 신발을 신고 함께 서 있다. 올리브·파랑·갈색 바지로 사람을 구분하고 모두 비슷한 크림색 낮은 운동화 스타일이다. 끈·끈 구멍·밑창·봉제는 실제 신발 구조이며 글자나 상표 무늬가 아니다. 공통 신발 스타일을 채택한 fashionable 형용사 단서이고 실제 올해 유행·인기/판매량·상표·모든 사람의 선호를 인증하지 않는다. 한 그룹 장면이며 아이보리 수채화·무문자 조건 유지. |
+| `b8f94b0199ffa543` fasten v. | 매다 / fasten your seat belt | 좌석에 앉은 성인의 두 손이 허리 벨트 양끝을 잡고 한쪽 평평한 금속 혀를 반대쪽 수용 버클 입구에 맞춘다. 금속 혀 한 개/수용 버클 한 개·양쪽 웨빙이 구분되고 아직 두 끝 사이 작은 간격이 있어 잠금 완료는 확인하지 않는다. 빨간 부분은 실제 해제 부품이며 문자나 로고가 아니다. fasten의 연결해 고정하는 동작의 단서이고 실제 항공기 모델·규정/안전·잠금 시험·비행 출발 시점은 인증하지 않는다. 얼굴/발은 화면 밖이며 두 팔·두 손과 아이보리 수채화·무문자 조건을 확인한다. |
+| `45608383f8ac996d` favor n. | 부탁 / a little favor | 성인 남성이 닫힌 무표식 상자 두 개를 양손으로 받치고, 성인 여성이 문 손잡이를 한 손으로 잡아 도와주며 다른 손은 옆에 둔다. 두 인물의 네 손·네 신발이 구분된다. 원본의 문은 이미 열려 있어 요청 전 문이 닫힌 상태라고 기록하지 않는다. 손이 부족한 사람을 위해 문을 열어주는 작은 favor 명사 도움 상황의 단서는 유지된다. 실제 발화/부탁 내용·감사/보상 계약·이후 이동 전체 결과를 인증하지 않는다. 상자·문 패널/손잡이·단추/신발 끈은 물리적 형상이며 글자·로고 없이 아이보리 수채화 유지. |
+| `aefcd4cee3e5d06b` fear v. | 두려워하다 / fear failure | 성인 한 명이 쌓인 나무 블록 탑 위에 새 블록 한 개를 올리려다가 손을 멈춘 듯 망설이고 눈썹을 찌푸린 걱정 표정이다. 다른 손은 탁자에 놓여 두 팔·두 손이 구분되며 탑은 무너지거나 파편이 흩어지는 장면이 아니다. 실수 가능성을 두려워하는 fear 동사의 연상 단서다. 블록 층과 나뭇결은 실제 물체이고 읽을 수 있는 글자/숫자/점수가 없다. 실제 내면·질환·부정명령문 전체의 뜻/학습 성과·브랜드 게임 규격이나 탑의 정확한 블록 수는 인증하지 않는다. 아이보리 수채화 유지. |
+| `82b347536ace9ae1` feature v. | 주요하게 선보이다 / feature local artists | 중앙 받침대의 큰 도자기 화병 한 개가 가장 눈에 띄고 성인 발표자가 한 손으로 작품을 소개하며 다른 손은 내려져 있다. 배경 성인 관람객 두 명은 더 작게 표현되어 중심 작품을 바라본다. 발표자의 두 손·두 신발은 보이나 배경 관람객의 가려진 모든 손을 인증하지 않는다. 화병의 잎 그림은 물리적 장식 그림으로 글자/서명/로고가 아니고 feature 동사 주요하게 선보임의 단서다. 실제 지역 거주·저작/진품·전시 일정/관람객 전체/광고 효과/실제 크기 치수는 인증하지 않는다. 아이보리 수채화 유지. |
+
+사전은 실제 정의 제목·품사 표지의 줄 경계를 선택했다. familiar/fascinating은 실제 US URL이며 fascinating은 초기 묶음 결과에 없어 추가 단일 검색에서 확인했다. far는 American Dictionary 형용사 DISTANCE, favor는 HELPFUL ACT 명사, fear는 명사 뒤 bare verb, feature는 실제 topic=the-head-and-face URL의 American verb SHOW다. 직접 페이지 열기·전체 PDF 시각검사·HTTP 실패를 수행했다고 주장하지 않는다. 교재 수준·뜻·문장·번역·출처는 유지한다.
+
+- fairly / ### fairly adverb (QUITE) — [fairly 공식 정의](https://dictionary.cambridge.org/dictionary/english/fairly): “more than average, but less than very”. 실제 QUITE의 보통보다 높지만 very보다 낮은 정도와 fairly easy 예문이다. 약간 주의를 기울여 퍼즐을 풀어 가는 장면으로 꽤 쉬운 정도를 연상하고 공정하게 대우하는 용법과 구분한다. 절대 난도·단어를 유일하게 추론하는 정도 척도/학습 효과는 그림으로 인증하지 않는다.
+- familiar / ### familiar adjective (EASY TO RECOGNIZE) — [familiar 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/familiar): “easy to recognize”. 실제 US URL의 전에 보거나 듣고 만나 알아보기 쉬운 형용사다. 실제 사물 사진과 눈앞 대상을 알아보는 표정을 단서로 쓰며 지나치게 친근한 말투 용법과 분리한다. 실제 기억/인물 신원·교재 주제 전체의 학습 여부는 인증하지 않는다.
+- fancy / ### fancy adjective (EXPENSIVE) — [fancy 공식 정의](https://dictionary.cambridge.org/dictionary/english/fancy): “expensive:”. 실제 EXPENSIVE의 고급 식당 예문을 확인했다. 격식 있는 식당의 정돈된 테이블/절제된 고급 분위기로 연상하고 fancy 동사 좋아하다/상상하다와 분리한다. 실제 가격·등급·예약/식품 품질은 인증하지 않는다.
+- far / ### far adjective (DISTANCE) — [far 공식 정의](https://dictionary.cambridge.org/dictionary/english/far): “most distant from the center or from you”. 실제 American Dictionary 형용사 DISTANCE의 far side 예문이다. 가까운 호숫가와 맞은편 먼 호숫가 집의 공간 관계를 단서로 쓰며 far 부사/정치/규제 약자를 분리한다. 실제 호수·집 소유/치수·관찰자 없는 절대 반대편은 인증하지 않는다.
+- fascinating / # Meaning of fascinating in English — [fascinating 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/fascinating): “extremely interesting:”. 추가 단일 검색에서 실제 US URL의 매우 흥미롭다는 형용사 본문을 확인했다. 이야기에 주의를 집중한 성인 청자의 표정/자세를 단서로 쓰며 실제 내면/이야기 사실성·교육 효과를 인증하지 않는다.
+- fashionable / # Meaning of fashionable in English — [fashionable 공식 정의](https://dictionary.cambridge.org/dictionary/english/fashionable): “popular at a particular time”. 특정 시기에 유행하는 형용사다. 같은 종류의 무표식 신발을 성인 여러 명이 신고 있는 시각적 공통성으로 연상하며 현재의 실제 유행/특정 연도 인기·상표나 판매량을 인증하지 않는다.
+- fasten / # Meaning of fasten in English — [fasten 공식 정의](https://dictionary.cambridge.org/dictionary/english/fasten): “become firmly fixed together”. 고정되거나 닫히는 동사와 seat belt 예문을 확인했다. 좌석의 성인 손 두 개가 벨트 끝을 맞춰 잠그는 동작의 단서이며 실제 항공 규정/안전·기계 성능·비행 출발 시점은 인증하지 않는다.
+- favor / ### favor noun (HELPFUL ACT) — [favor 공식 정의](https://dictionary.cambridge.org/dictionary/english/favor): “something you do to help someone”. American Dictionary의 부탁 후 도와주는 행위 명사다. 손이 부족한 성인이 다른 성인에게 문 열기 도움을 청하는 상황으로 작은 부탁을 연상하고 지지/선물/선호 동사와 분리한다. Tatoeba 기존 예문·출처는 그대로 보존하며 실제 발화·감사/보상 계약·도움 완료는 인증하지 않는다.
+- fear / fear verb — [fear 공식 정의](https://dictionary.cambridge.org/dictionary/english/fear): “to be frightened”. 실제 명사 뒤 bare verb의 불쾌한 대상/상황을 두려워하는 뜻이다. 작은 퍼즐 실패를 망설이는 성인의 표정/행동으로 연상하고 실제 질환·내면 감정·부정명령문 전체의 의미나 교육 효과는 인증하지 않는다.
+- feature / ### feature verb [T] (SHOW) — [feature 공식 정의](https://dictionary.cambridge.org/dictionary/english/feature?topic=the-head-and-face): “as the most important or most obvious part”. 실제 topic=the-head-and-face URL의 American Dictionary verb SHOW를 읽었다. 중심 작품을 크게 두고 성인이 선보이는 장면으로 주요하게 소개하는 동사를 연상하며 얼굴 특징/기사 명사와 분리한다. 실제 작가 거주지·작품 진위/전시 일정·상업 광고 효과는 인증하지 않는다.
+
+- favor의 기존 Tatoeba 예문·저자/문장 ID·출처를 그대로 보존했다. 원본의 문은 이미 열려 있으며 문 열기 도움의 명사 단서다. 실제 부탁 발화를 인증하지 않는다.
+- fasten은 벨트 끝을 맞추는 동작이고 아직 작은 간격이 남아 잠금 완료는 확인하지 않는다. fashionable은 세 사람이 같은 종류의 신발을 신는 단서이며 실제 올해 유행·인기를 인증하지 않는다.
+- 원본 저장: `C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`. 첫 10개와 실제 기본 생성 원본을 덮어쓰지 않고 보존했으며 바이너리는 Git 제외다.
+- 실제 프롬프트·뜻·해시는 [연결 목록](../data/word-image-manifest.json)에 기록했다. Git 제외 `work/oxford-batch-240-{sources,dictionary-search-raw,dictionary-bodies,source-evidence,fascinating-selected-body,scenes,originals,observations,first-observations,first-reviews,reviews,check-results,meta}.json`과 `slot-0..9/native-0..9`을 보존한다. 초기 묶음 검색 원자료와 추가 fascinating의 실제 선택 본문을 구분하고 슬롯만으로 살아 있는 호출/제공자 전달을 주장하지 않는다.
+
+실제로 실행한 검증:
+
+- `node work/oxford-batch-240-preparation-check.cjs`: exit 0. 기준 `4938443f2f54c6f555688a641dc81476a31cee5d`·원장 2472/현재 null·10 ID/교재 fingerprint·정의 본문/인용 한도 확인 후 준비했다.
+- 첫 10개 파일·렌더 검사: exit 0, `2026-10-09T15:39:03.355Z`, `oxford-images-verification-1791560343356.json`. 대기 1435/생성됨 10/승인 2323/보류 37/실패·중단 4. 렌더 통과와 수동 품질 검수를 구분한다.
+- 최종 10개 `node scripts/verify-oxford-images.cjs <10 IDs>`: exit 0, `2026-10-09T15:46:17.920Z`, `oxford-images-verification-1791560777921.json`. 승인 2333/보류 37/실패·중단 4/대기 1435/생성됨·생성 중 0.
+- `node scripts/check-oxford-image-resume.cjs`: exit 0, 19개·이미지/API 호출 0, 실제 fixture `oxford-resume-check-aPu7U1`.
+- 세 기존 제작/검증/재개 스크립트 `node --check`: 각각 exit 0.
+- 저장 전/후 `node work/oxford-batch-240-guard.cjs [--final]`에서 모든 2478 PNG·3809 교재 지문·기존 3799개 항목 불변·186~239 근거/부정 판정·호출 원장·정확히 연결 목록/계획/진행 문서 3개 변경·remote/head 동기화를 대조한다. 결과는 Git 제외 guard/completion/readback 기록을 따른다.
+- 앱 코드 변경이 없어 앱 전체 테스트·타입·린트·빌드와 실제 iPhone/독립 학습자 검사는 이번 범위에서 실행하지 않았다. 운영 사이트·학습 기록·DB/API/백업·EN_Card·의존성·배포는 변경하지 않았다.
+
+누적 제작 2369개·검수 통과 2333개·보류 37개·실패/중단 4개·제작 대기 1435개다. 수정본 포함 PNG 2478개·시작 슬롯 원장 2482회이며 확인된 내장 도구 호출은 2481회/제공자 전달 미확인 중단 1회다. 전체 미생성 1,440개, 전체 미승인 1,476개이며 전체 3809개 승인 목표는 active다. 수준별 A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총 903/검수 통과 300/보류 4/대기 597/실패 2, B2 총 839/검수 통과 1/보류 0/대기 838/실패 0이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `fairly` 부사(꽤)이며 이어 familiar/fancy/far/fascinating/fashionable 형용사·fasten 동사·favor 명사·fear/feature 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element/experience/extra 부사의 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `federal` 형용사(연방의)이며 이어 fence/fighting/file 명사·financial 형용사·fitness 명사·fixed 형용사·flag/flood 명사·flood 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element/experience/extra 부사의 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
