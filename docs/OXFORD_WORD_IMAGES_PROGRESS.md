@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2339 |
-| 제작자 품질 검수 통과 `approved` | 2303 |
+| 제작된 서로 다른 항목 | 2349 |
+| 제작자 품질 검수 통과 `approved` | 2313 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,465 |
+| 제작 대기 `waiting` | 1,455 |
 | 생성 중 / 실패·실행 중단 | 0 / 4 |
-| 내장 도구 호출·시작 슬롯 원장 | 2450 |
+| 내장 도구 호출·시작 슬롯 원장 | 2461 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 107 |
+| 그중 품질 수정 호출 | 108 |
 
-이미지 미생성 항목은 제작 대기 1,465개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,470개다. 제작된 2339개는 검수 통과 2303개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2446개다. 원장 2450회는 이미지가 반환된 2446회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2449회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,455개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,460개다. 제작된 2349개는 검수 통과 2313개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2457개다. 원장 2461회는 이미지가 반환된 2457회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2460회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -5290,9 +5290,61 @@ definition 검색 결과의 본문을 사용했다. employment와 engineering은
 
 기존 236 encourage의 부정 예문/긍정 기본 뜻 구분과 반지/눈물의 정확한 수 검토·engineering 도면 구분, 235 element v1 충돌/수정과 모든 기존 부정 판정/보류/실패를 보존했다. 앱/UI·Sites/EN_Card·교재/학습/백업/API/DB·hosting 식별자를 변경하지 않았다. 이미지/manifest/문서만 갱신하므로 앱 전체 테스트/타입/린트/빌드·운영 배포는 범위 밖이며 실제 iPhone/독립 학습자 검증은 하지 않았다.
 
+## 추가 238 제작·검수
+
+2026-10-09 KST 체크포인트: B1 examine 동사부터 experience 동사까지 교재 순서 10항목의 ID/품사/기본 뜻·표현/예문/출처와 실제 Cambridge 정의 본문 10항목/서로 다른 9단어·except 접속사 문법 본문 1개를 확인했다. 승인 apple 스타일/기존 내장 image_gen으로 첫 10장을 순차 제작했다. 원본과 개별 루프백 320px(그림 폭 288px)에서 첫 9개 통과, experience의 세 팔처럼 연결된 표현 때문에 첫 보류 후 한 번만 수정했다. v2에서는 가슴을 가로지르는 추가 팔/손·소매가 제거돼 두 팔이 자연스럽게 구분되며 최종 10개 검수 통과다. 손 세 개가 노출됐다고 주장하지 않고, 첫 meaningMatch=false 판정과 v1/v2를 보존한다. 새 보류/실패는 0개, 실제 반환 이미지/내장 호출은 수정 포함 11개/11회다.
+
+| 항목 ID·품사 | 교재 뜻 / 표현 | 원본에서 실제 확인한 단서와 한계 |
+|---|---|---|
+| `d35a67bcc4af3acc` examine v. | 조사하다 / examine the cause | 성인 한 명의 두 손·확대경 한 개·금속 경첩 한 개와 분리된 나사 한 개를 확인했다. 확대경을 든 손과 경첩을 지지하는 손/대상을 바라보는 시선으로 자세히 조사하는 examine 동사 단서가 남는다. 경첩의 두 잎/연결핀·녹/구멍은 실제 기계 구조이며 글자/번호/로고가 아니다. 실제 휨/고장의 원인·수리/안전이나 시험 채점은 인증하지 않는다. 아이보리 수채화 유지. |
+| `e7cb36eee11978dc` except conj. | ~라는 점을 제외하면 / except that | 관련된 침실 두 장면의 침대/램프/작은 의자·식물 배치를 대조했다. 위 장면의 실제 창문과 아래 같은 위치의 창문 없는 빈 벽 차이가 명확하며 아래 성인 한 명의 두 손/두 신발과 벽을 보는 시선을 확인했다. except (that)의 한 조건을 빼면이라는 연상이고 집 전체 창문 부재/방의 완벽함·동일한 실제 방 신원/접속사 문법을 그림으로 인증하지 않는다. 창틀/가구 나무결/침구 주름은 물리적 구조이며 글자/라벨/화살표 없이 아이보리 수채화 유지. |
+| `53481b3703c5ece0` exchange n. | 교환 / a language exchange | 두 관련 장면에서 같은 옷/모습의 성인 두 명과 각 장면 네 손·책 두 권을 확인했다. 위는 왼쪽 빨강/오른쪽 파랑 책, 아래는 왼쪽 파랑/오른쪽 빨강 책으로 위치가 바뀌어 상호 교환 사건을 연상한다. 실제 인물/원소유권·교환 과정 전체/언어 또는 생각 내용을 인증하지 않는다. 책 표지와 책등은 무표식이며 실제 책 제본 경계/손가락·테이블 나무결은 글자가 아니다. 의자에 가려진 다리 전체를 인증하지 않았고 아이보리 수채화 유지. |
+| `fcb8fad5f1600dce` exchange v. | 교환하다 / exchange ideas | 마주 앉은 성인 두 명의 네 손/네 신발·테이블 위 빨강 책 한 권과 파랑 책 한 권을 확인했다. 각 인물이 자기 쪽 책을 테이블 중앙/상대 쪽으로 내미는 자세이며 반대 손은 자기 쪽에 따로 있다. 상호 주고받는 exchange 동사 연상이고 받기 완료/실제 이동 속도·언어 또는 생각 내용/원소유권은 인증하지 않는다. 표지/책등·제본 경계는 무표식이고 손가락/옷 주름/나무결을 글자로 오인하지 않았으며 수채화 유지. |
+| `864106dc07691aae` excitement n. | 설렘 / full of excitement | 성인 한 명이 닫힌 여행 가방/접은 옷 더미 앞에 무릎을 꿇고 두 손을 가슴 가까이 쥐며 활짝 웃는 모습을 확인했다. 한 신발은 보이고 다른 발은 가려져 전체 다리/바퀴 수를 인증하지 않는다. 여행 전 설렘의 감정 단서이며 실제 내면 감정·교재 어린이들/여행 날짜나 출발 완료를 인증하지 않는다. 가방 손잡이/지퍼/바퀴·줄무늬 옷/문 몰딩은 물리적 요소이고 로고/글자/이모티콘 없이 수채화 유지. |
+| `91b5c5b48a0aa679` exhibition n. | 전시회 / an art exhibition | 실제 액자 풍경 그림 세 점·구멍이 있는 돌 조각 한 점/받침대와 관람하는 성인 두 명·네 신발을 확인했다. 조각은 입체 돌 소품이고 구멍 모양을 숫자/문자로 판정하지 않는다. 남성의 턱/팔에 놓인 손은 보이며 여성의 가려진 손 전체를 인증하지 않는다. 전시 행사 명사 연상이고 실제 작품 저자/행사 날짜·무료 요금/공개 출입 권리·관람자 수 전체를 인증하지 않는다. 그림 내부 서명/라벨/가격표/로고 없이 아이보리 수채화 유지. |
+| `35558d3a0f6c0439` exit n. | 출구 / find the exit | 실내 바닥/문틀 안에서 열린 실제 출입문 너머 잔디·나무/낮빛으로 걸어나가는 성인 한 명의 두 손/두 신발과 뒷모습을 확인했다. 몸/발 방향은 바깥쪽이며 문이라는 출구 명사 단서가 명확하다. 오른쪽 문짝의 경첩/손잡이·신발 밑창/주머니 이음은 물리적 구조이고 표지/EXIT 글자/화살표/로고가 없다. 실제 비상구 규격/안전·휠체어 접근성/완전히 출발한 결과를 인증하지 않는다. 수채화 유지. |
+| `62726ae2b7bf8227` expand v. | 늘리다 / expand your vocabulary | 위의 좁고 접힌 빨강 주름 구조와 아래 두 성인 손이 나무 끝 손잡이를 벌려 넓힌 빨강 주름 구조를 대조했다. 실제 두 손/연속된 접힘·끝 손잡이의 둥근 금속 고정구가 보이고 키보드/라벨/글자/치수선/화살표가 없다. 크기/폭을 늘리는 expand 단서이며 주름 수 보존·동일한 실제 물체 신원/정확한 크기 배율·기체/음악 기능·어휘 증가 효과를 인증하지 않는다. 나무결/물리 주름/고정구를 문자나 로고로 오인하지 않았고 수채화 유지. |
+| `1ffdce7c6265ad52` expected adj. | 예상된 / the expected date | 위 장면은 성인이 두 손을 테이블/턱에 놓고 종이 위 갈색 소포/파랑 리본의 사물 그림을 보고, 아래는 같은 모습의 성인이 문 앞에서 그와 대응하는 리본 소포를 다른 성인에게 받는 모습이다. 상단 종이는 물리적 그림 종이이고 말풍선/UI가 아니며 하단 상자에 가려진 손 전체를 인증하지 않는다. 예상한 물건의 도착이라는 expected 형용사 연상이고 실제 믿음·소포 신원/날짜·예정보다 일찍 도착한 시점을 인증하지 않는다. 리본 매듭/포장 이음·무지 모자/문 손잡이는 물리적 요소이며 글자/운송장/로고 없이 수채화 유지. |
+| `c83c4760b5e5cd87` experience v. | 경험하다 / experience a problem | 성인 한 명의 찢어진 우산 한 개/우산 자루·두 신발·젖는 어깨와 비를 확인했다. 우산을 든 팔과 가슴을 가로질러 어깨를 만지는 팔 외에 오른쪽으로 내려와 주머니 쪽에 놓인 별도 소매/팔이 보여 세 팔처럼 연결되는 해부 표현이 불명확하다. 손 세 개가 노출됐다고 주장하지 않으며 두 팔의 자연스러운 연결을 검수 통과로 인증하지 않는다. 문제를 직접 겪는 의미 맥락/수채화/무표식은 유지되지만 팔 구조 때문에 meaningMatch=false로 첫 보류하고 한 번만 수정 대상으로 둔다. 실제 날씨/질병·교사 도움/수리 완료를 인증하지 않는다. v2: v2에서 가슴을 가로질러 어깨를 만지던 추가 손/팔과 소매가 제거됐다. 이제 우산을 든 팔 한 개와 오른쪽 주머니로 자연스럽게 내려간 팔 한 개·두 신발이 확인되며 주머니 속 손 전체는 인증하지 않는다. 찢어진 우산/비가 떨어져 젖는 어깨·불편한 표정과 문제를 겪는 단서/아이보리 수채화가 유지됐다. 옷/바닥의 세부 변화가 있어 픽셀 동일 보존을 인증하지 않는다. 실제 질병/날씨·교사의 도움/해결 완료 인증은 아니며 글자/브랜드/표식 없이 팔 구조 검수 미달이 해결됐다. |
+
+사전 대조는 실제 정의 본문을 줄 경계의 제목/품사 표지로 선택했다. examine는 LOOK AT CAREFULLY를 TEST와 분리하고, except는 American Dictionary의 with this difference/except (that) 예문과 공식 문법의 접속사 설명을 함께 확인했다. exchange 명사는 GIVING AND GETTING, 동사는 실제 bare verb [ T ] 표지를 선택해 상점 교환 뜻 앞에서 잘랐다. exit는 LEAVING의 실제 문 뜻을 leaving 행위와 분리하고, expected는 WAITED FOR의 예상 도착 정의를 출산/REQUIRED 기준 뜻과 분리했다. experience는 명사 본문 뒤 실제 verb [ T ]를 선택했다. expand는 실제 반환된 US URL 본문을 사용했다. 교재의 B1과 사전의 용법별 레벨 표지를 임의로 합치지 않으며 교재를 변경하지 않는다. 직접 페이지 열기·전체 PDF 시각검사·HTTP 실패를 수행했다고 기록하지 않는다.
+
+- examine / ### examine verb [T] (LOOK AT CAREFULLY) — [examine 공식 정의](https://dictionary.cambridge.org/dictionary/english/examine): “carefully and in detail”. 사람/물건을 자세히 살펴 정보를 알아내는 조사 동사다. 시험을 치르게 하는 TEST 뜻과 구분한다. 손상된 부품을 확대경으로 관찰하는 단서이고 원인 확정/수리·안전 인증은 아니다.
+- except / ## except | American Dictionary — [except 공식 정의](https://dictionary.cambridge.org/dictionary/english/except): “with this difference”. 실제 American Dictionary의 with this difference와 except (that) 예문을 읽고 접속사 예외 조건으로 해석한다. 방의 창문 유무 차이를 단서로 쓰되 그림으로 접속사 문법/방 전체의 완벽함을 인증하지 않는다.
+- exchange / ### exchange noun (GIVING AND GETTING) — [exchange 공식 정의](https://dictionary.cambridge.org/dictionary/english/exchange): “the act of giving something”. 상호 주고받음 사건의 명사다. 두 관련 상태에서 책의 소유 위치를 바꾸며 CONVERSATION/해외 VISIT/주식시장 뜻과 구분한다. 실제 언어 교환/생각 내용을 인증하지 않는다.
+- exchange / exchange  verb [ T ] — [exchange 공식 정의](https://dictionary.cambridge.org/dictionary/english/exchange): “give something to someone and receive something”. 상호 주고받는 동작의 동사다. 실제 주고받는 두 책과 두 사람의 움직임을 단서로 쓰고 상점 반품/환전과 구분한다. 언어/생각 내용을 글자 없는 책에서 인증하지 않는다.
+- excitement / # Meaning of excitement in English — [excitement 공식 정의](https://dictionary.cambridge.org/dictionary/english/excitement): “a feeling of being excited”. 설레는 감정의 명사로 여행 짐 앞 성인의 표정을 단서로 쓴다. 그림의 감정 표시는 실제 내면 상태를 증명하지 않으며 교재의 어린이 여러 명/여행 완료로 바꾸지 않는다.
+- exhibition / # Meaning of exhibition in English — [exhibition 공식 정의](https://dictionary.cambridge.org/dictionary/english/exhibition): “paintings are shown to the public”. 미술품을 사람들에게 보여주는 행사 명사다. 전시 그림과 관람객을 단서로 쓰고 개인적 솜씨 과시 뜻을 분리한다. 무료 입장/공개 행사의 실제 날짜·규모를 인증하지 않는다.
+- exit / ### exit noun [C] (LEAVING) — [exit 공식 정의](https://dictionary.cambridge.org/dictionary/english/exit): “the door through which you might leave”. 건물에서 나갈 수 있는 문이라는 출구 명사다. 내부에서 바깥으로 나가는 맥락을 쓰며 떠남 행위/도로 진출로/동사 뜻과 구분한다. 실제 비상구 규격·안전을 인증하지 않는다.
+- expand / # Meaning of expand in English — [expand 공식 정의](https://dictionary.cambridge.org/us/dictionary/english/expand): “increase in size, number, or importance”. 실제 반환된 US URL의 크기/수/중요성 증가 동사 본문을 읽었다. 접힌 주름을 넓히는 두 상태를 단서로 쓰며 정확한 어휘 증가·물리 치수나 음악 기구 성능을 인증하지 않는다.
+- expected / ### expected adjective [before noun] (WAITED FOR) — [expected 공식 정의](https://dictionary.cambridge.org/dictionary/english/expected): “believed to be going to happen or arrive”. 도착/발생할 것으로 여겨지는 예상된 형용사다. 먼저 그린 소포와 맞는 실제 소포의 도착을 연상하며 출산/REQUIRED 기대 기준 뜻을 분리한다. 실제 날짜/예정보다 빠른 도착을 인증하지 않는다.
+- experience / experience  verb [ T ] — [experience 공식 정의](https://dictionary.cambridge.org/dictionary/english/experience): “it happens to you, or you feel it”. 사건이 자신에게 일어나거나 느끼는 경험 동사다. 비와 우산 문제를 겪는 성인으로 연상하고 지식/숙련이라는 명사 뜻과 구분한다. 교사의 능력·실제 증상/안전/문제 해결을 인증하지 않는다.
+- [# Except or except for?](https://dictionary.cambridge.org/grammar/british-grammar/except-or-except-for): “used as a conjunction”. 실제 접속사 절의 근거. except (that) 조건의 예외를 확인하고 except for 전치사 용법과 구분한다.
+
+- exchange 명사는 위 왼쪽 빨강/오른쪽 파랑과 아래 왼쪽 파랑/오른쪽 빨강의 두 책 위치 교환, 동사는 두 책을 상대 쪽으로 내미는 동작이다. 받기 완료/실제 소유권·언어/생각 내용을 글자 없는 책에서 인증하지 않는다.
+- except는 대응하는 방 두 장면에서 창문/빈 벽의 한 차이를 연상한다. 건물 전체 창문 부재/방의 완벽함이나 접속사 문법을 그림으로 인증하지 않는다.
+- expand는 좁은 주름/두 손이 넓힌 주름의 폭 변화를 연상하고 정확한 주름 수 보존·동일 실제 물체/치수 배율·어휘 효과를 인증하지 않는다. expected는 먼저 본 종이 사물 그림과 대응하는 실제 소포의 도착을 연상하고 실제 믿음·날짜/예정보다 빠른 도착을 인증하지 않는다.
+- experience v1 SHA256 `13543a3eafada75285aa58103cb6847a08cfdf840ba5b926c5ac6176bae81934`와 v2 `aed461df7299f5bc1df056ab8ebfe89982cfd64cf1882e87827b9c73508616de`, 첫 부정 판정/각 320px 근거를 보존한다. v1은 두 노출 손 외에 별도 늘어진 소매/팔 때문에 세 팔처럼 보인다. v2는 추가 가슴 팔 제거 후 우산 팔/주머니 팔을 확인했으며 숨은 손 전체·픽셀 동일 보존/실제 질병·수리 완료를 인증하지 않는다. 세 번째 호출은 하지 않는다.
+- 원본 저장: `C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`. 항목별 v1 10개/experience v2 1개와 실제 생성 원본을 덮어쓰지 않고 보존했다. 이미지 바이너리는 Git에 추가하지 않는다.
+- 실제 장면·프롬프트·시도별 해시·기본 뜻·검수는 [연결 목록](../data/word-image-manifest.json)의 위 ID에 연결했다. Git 제외 `work/oxford-batch-238-{sources,dictionary-bodies,source-evidence,scenes,originals,observations,first-observations,first-reviews,reviews,correction,check-results,meta}.json`을 저장했다. `slot-0..9/native-0..9`와 `correction-slot/correction-native`는 시작 메타데이터와 실제 반환 영수증을 구분한다. 시작 슬롯만으로 제공자 전달/살아 있는 핸들을 주장하지 않는다.
+
+실제로 실행한 검증:
+
+- 생성 전 보호 `node work/oxford-batch-238-preparation-check.cjs`: exit 0. 기준 `2d93833df760630d9ecb61601320db3e7a860751`·원장 2450/현재 null/깨끗한 상태·10 ID/교재 fingerprint·정의 본문/인용 한도를 확인한 뒤 장면을 준비했다. 추가 이미지/API 호출 0.
+- 첫 원본/320px 파일·렌더 `node scripts/verify-oxford-images.cjs <10 IDs>`: exit 0, `2026-10-09T14:19:45.277Z`, `oxford-images-verification-1791555585277.json`. 대기 1455/생성됨 10/승인 2303/보류 37/실패·중단 4. 메타데이터/렌더 통과를 팔 구조 품질 통과와 혼동하지 않는다.
+- experience v2 파일·렌더 검사: exit 0, `2026-10-09T14:23:49.441Z`, `oxford-images-verification-1791555829441.json`. 대기 1455/생성됨 1/승인 2312/보류 37/실패·중단 4. 원본·축소를 실제로 보고 팔 구조 통과 판정을 기록했다.
+- 최종 10개 파일·렌더 검사: exit 0, `2026-10-09T14:24:44.778Z`, `oxford-images-verification-1791555884779.json`. 최종 생성됨/생성 중 0·승인 2313·보류 37·실패·중단 4/대기 1455.
+- `node scripts/check-oxford-image-resume.cjs`: exit 0, 재개 검사 19개·이미지/API 호출 0, 실제 fixture `oxford-resume-check-rihwkd`.
+- `node --check scripts/oxford-images.cjs`, `node --check scripts/verify-oxford-images.cjs`, `node --check scripts/check-oxford-image-resume.cjs`: 각각 exit 0.
+- 저장 전/후 보호 절차 `node work/oxford-batch-238-guard.cjs` / `node work/oxford-batch-238-guard.cjs --final`: 모든 시도별 PNG/해시·3,809 ID/교재 fingerprint·이번 10개 외 불변·모든 기존 보류/실패/첫 부정 판정·정확히 3개 파일과 원격 HEAD/깨끗한 상태를 확인한다. 실제 최종 실행 결과는 completion-checks/final-readback에 남긴다.
+
+누적 제작 2349개·검수 통과 2313개·보류 37개(이미지 없음 letter 1개)·실패/중단 4개·대기 1455개다. 이미지 있는 보류는 36개, 수정본 포함 PNG 2457개·원장 시작 슬롯 2461회/품질 수정 108회다. 확인된 내장 도구 호출은 2460회이며 climb의 제공자 전달 미확인 중단 시작 슬롯 1회와 구분한다. 전체 미생성 1,460개·미승인 1,496개로 목표는 active/미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 280/보류 4/대기 617/실패 2; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+앱/UI·운영 Sites·EN_Card·DB/API/백업·교재/hosting/의존성은 변경하지 않는다. 앱 전체 타입/린트/빌드와 실제 iPhone 검사는 이번 정적 이미지·문서 작업에서 실행하지 않았고, 독립 학습자 평가/전체 영어 정확도 인증/운영 배포 완료로 표시하지 않는다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `examine` 동사(조사하다)이며 이어 except 접속사·exchange 명사/동사·excitement/exhibition/exit 명사·expand 동사·expected 형용사·experience 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 실제 정의를 다시 읽고 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 기존 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `experienced` 형용사(경험이 풍부한)이며 이어 experiment/explode/explore 동사·explosion 명사·export 명사/동사·extra 명사/부사·face 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 실제 정의를 다시 읽고 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 기존 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
