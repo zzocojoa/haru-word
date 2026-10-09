@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2329 |
-| 제작자 품질 검수 통과 `approved` | 2294 |
-| 품질·의미·조건 보류 `held` | 36 |
+| 제작된 서로 다른 항목 | 2339 |
+| 제작자 품질 검수 통과 `approved` | 2303 |
+| 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,475 |
+| 제작 대기 `waiting` | 1,465 |
 | 생성 중 / 실패·실행 중단 | 0 / 4 |
-| 내장 도구 호출·시작 슬롯 원장 | 2439 |
+| 내장 도구 호출·시작 슬롯 원장 | 2450 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 106 |
+| 그중 품질 수정 호출 | 107 |
 
-이미지 미생성 항목은 제작 대기 1,475개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,480개다. 제작된 2329개는 검수 통과 2294개와 이미지가 있는 보류 35개이며, 수정본 포함 PNG는 2435개다. 원장 2439회는 이미지가 반환된 2435회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2438회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,465개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 4개를 합친 1,470개다. 제작된 2339개는 검수 통과 2303개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2446개다. 원장 2450회는 이미지가 반환된 2446회·`code`/`attraction` HTTP 400과 `route` HTTP 408 무이미지 실패 3회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2449회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -5241,9 +5241,58 @@ definition 검색 결과의 본문을 사용했다. employment와 engineering은
 
 기존 235 element의 v1 충돌/첫 부정 판정·320px와 수정 v2, departure/cheap/confirm/connection의 첫 부정·수정본, direct 부사의 두 미달/보류, 모든 정책 보류/실패·climb 중단을 그대로 보존했다. 운영 앱/UI·Sites/EN_Card·학습/백업/API/DB·교재 해시/기존 지문을 변경하지 않았다. 이번에는 이미지/manifest/계획/진행 기록만 갱신하므로 앱 전체 테스트/타입/린트/빌드·운영 배포는 범위 밖이며 실제 iPhone·독립 학습자 검증은 하지 않았다.
 
+## 추가 237 제작·검수
+
+2026-10-09 KST 체크포인트: B1 entry 명사부터 eventually 부사까지 교재 순서 10항목의 ID/품사/기본 뜻·표현/예문/출처와 실제 Cambridge 정의 본문 10항목/서로 다른 8단어를 확인했다. 승인 apple 스타일/기존 내장 image_gen으로 첫 10장을 순차 제작했다. 원본과 개별 루프백 320px(그림 폭 288px)에서 첫 9개 통과/eventually 1개 무표식 미달 후 한 번만 수정했다. v2에도 작은 회색 타원형/엠블럼 같은 패치가 남아 textFree=false로 보류한다. 실제 브랜드/읽을 수 있는 글자를 특정한 것은 아니며 의미와 스타일은 통과다. 세 번째 호출은 하지 않는다. 누적 추가 9개 승인/새 보류 1개/실패 0개, 실제 새 반환 이미지/내장 호출은 수정 포함 11개/11회다.
+
+| 항목 | 원본에서 실제 확인한 단서와 범위 | 판정 |
+|---|---|---|
+| entry n. · `ccf8fbc61eaa3941` | 성인 관람객 한 명이 열린 두 문짝 사이의 문턱을 넘어 안쪽 전시장/두 풍경 그림 방향으로 들어가고, 안쪽 안내 성인이 손바닥을 펴 환영한다. 관람객 앞뒤 두 신발의 진행 방향·한 노출 손과 안내자의 두 손을 구분했으며 가려진 관람객 손 전체를 인증하지 않는다. 안내자 명찰은 빈 면으로 글자/요금/표지/로고가 없다. entry는 입장 행위의 연상이고 무료 요금/출입권한·실제 전시 행사 인증은 아니다. 아이보리 수채화 유지. | 통과 |
+| environmental adj. · `4020a76ec6716223` | 성인 한 명의 두 손/두 신발·집게 하나·무표식 플라스틱병 하나·천 가방 하나와 강가/나무/풀을 확인했다. 병을 집게로 집는 동작으로 자연 환경 보호를 연상하며 아직 가방에 넣었다거나 실제 수질·병 재질/유해성·처분 규칙/생태 효과를 인증하지 않는다. environmental 형용사의 관련 맥락이며 학교 토론 전체가 아니다. 병 주름/집게 기구·신발 끈은 물리적 형상이고 글자/재활용 화살표/로고 없이 수채화 유지. | 통과 |
+| episode n. · `a7ae3eb70009675c` | 성인 시청자 한 명·TV 안 같은 갈색 코트 인물과 케이스 표지의 같은 인물·닫힌 두 케이스/열린 한 케이스의 디스크 하나를 확인했다. TV 안 인물은 둥근 물건 하나를 들고 있으며 세부 물건 종류/소리·내용·화면의 모든 손을 인증하지 않는다. 같은 작품 묶음 중 한 매체를 골라 보는 회차 연상이지 단일 TV 프레임이 회차 전체와 같다는 뜻/실제 디스크당 회차 수/내일 공개 인증은 아니다. 케이스/화면에 제목/자막/번호/로고/UI 조작 기호가 없고 수채화 유지. | 통과 |
+| equal adj. · `0ac39463597d50ba` | 같은 지면에 선 성인 두 명의 네 손/네 신발과 가운데 실제 양팔 저울·빈 접시 둘·나무 망치를 확인했다. 두 인물의 키는 다르고 몸이 같다는 뜻이 아니며 저울 양쪽 접시 높이/체인의 균형으로 같은 대우를 연상한다. 빔의 휜 장식은 물리적 저울 구조이고 문자/등호/법률/가문 표식/로고가 없다. equal 형용사의 DESERVING THE SAME 맥락이며 실제 관할 법/권리·완전한 기계 수평 측정 인증이 아니다. 수채화 유지. | 통과 |
+| equal v. · `55c8691c0e3e6328` | 위 트레이의 두 칸에 빨강 6개(2행×3열)/황토 4개(2행×2열), 아래 트레이의 한 칸에 위 행 빨강 5개·아래 행 빨강 1개/황토 4개(총 2행×5열)를 실제 세었다. 각 비교 트레이는 같은 빨강 6/황토 4의 총 10개이며 그림 전체에는 20개가 있다. 등호/더하기·화살표·숫자 없이 같은 수량의 equal 동사 연상이고 정확한 무게/값·모든 수학 성질 인증은 아니다. 구슬 반사/트레이 경계·나무결을 글자로 오인하지 않았고 수채화 유지. | 통과 |
+| equally adv. · `090bd0e20eeaf708` | 성인 한 명의 두 손은 접시 가장자리에 있고 각 접시에 사과 3개(뒤 둘/앞 하나)가 보여 총 6개를 실제 세었다. 손에 든 사과/예비 과일 더미가 없으며 같은 양의 분배를 연상한다. equally 부사의 균등하게 뜻이고 실제 어린이들/분배 행위의 전 과정·정확한 사과 중량/크기 인증은 아니다. 사과 꼭지/접시 음영/나무결은 물리적 요소이고 문자/숫자/등호/로고 없이 수채화 유지. | 통과 |
+| escape v. · `a90f4d013b655a15` | 한 성인의 두 손/두 신발·오른쪽으로 향한 발/시선과 왼쪽 뒤의 열린 쇠창살 문/닫힌 쇠창살 창을 확인했다. 건물 통로를 벗어나 바깥으로 이동하는 동작의 방향이 명확하다. 구속된 장소에서 벗어남의 escape 동사 단서이지 실제 구속/위법성·Tom 신원/탈출 완료·다른 사람들의 생각을 인증하지 않는다. 돌벽 이음·문 경첩/잠금구멍은 물리적 구조이며 표지/번호/문자/움직임 화살표 없이 수채화 유지. | 통과 |
+| escape n. · `95e342878d108c4a` | 성인 한 명의 두 손/두 신발이 보이고 두 발은 열린 낮은 창 밖 지면에 완전히 놓여 있다. 가슴에 손을 둔 표정과 뒤의 연기가 있는 방으로 탈출 사건의 결과를 연상한다. 창은 두 잎이 열려 있고 턱은 허리 아래이며 높은 창에서 뛰어내리는 장면이 아니다. 실제 재난/연기 농도·내면 안도감·안전/추천 대피 절차·탈출 과정 전체를 인증하지 않는다. 방의 무표식 책등·회색 연기 곡선/창틀은 물리적 소품이며 문자가 아니다. 수채화 유지. | 통과 |
+| essential adj. · `c4320b31aa882fa6` | 같은 형태의 두 화분/잎 구조를 대비해 왼쪽은 마른 갈라진 흙·처진 잎, 오른쪽은 녹색 펴진 잎·실제 물뿌리개 한 개와 성인 손 하나에서 흙으로 흐르는 물을 확인했다. 두 관련 상태가 물의 필요를 연상하지만 실제 같은 식물 신원/즉시 회복·정확한 종/급수량/인과·생존/의료 안전 또는 여행 안내서의 필수 정보 내용을 인증하지 않는다. 흙 균열/잎맥·물줄기/물뿌리개 구멍은 물리적 형태이며 문자/숫자/라벨/화살표 없이 수채화 유지. | 통과 |
+| eventually adv. · `23b39a0a0e1e9917` | 상단의 초록 재킷/주황 구명조끼 성인이 바위섬에서 홀로 기다리고 하단에 같은 옷 인물과 노젓는 배/구조 성인이 손을 잡는 두 관련 장면을 확인했다. 배는 도착했고 기다린 사람은 아직 바위 위이며 탑승 완료/실제 기다린 시간/미래 약속·모든 가려진 손/구조 안전을 인증하지 않는다. 구조 성인 구명조끼 앞에 로고처럼 보이는 작은 회색 타원형 패치가 남아 무표식 조건에 미달한다. 실제 브랜드/읽을 수 있는 문자를 특정하지 않는다. 바위/물결/노·옷 주름은 물리적 소품이고 두 장면의 아이보리 수채화가 유지된다. v2에서도 하단 구조 성인의 주황 구명조끼 가슴에 작은 회색 타원형/엠블럼 같은 자국이 남아 무표식 조건에 여전히 미달한다. 실제 브랜드나 읽을 수 있는 문자를 특정하지 않는다. 기다림/배 도착·손 잡기 두 장면의 의미/수채화는 유지됐지만 띠 각도 등 세부 차이가 있어 모든 픽셀/구성이 동일 보존됐다고 인증하지 않는다. 기다리는 인물은 아직 바위에 있고 탑승/실제 시간·미래 약속/구조 안전 인증은 아니다. 한 번 수정했으므로 세 번째 호출 없이 보류한다. | 보류 · textFree=false, meaningMatch/styleConsistent=true |
+
+모바일 축소에서 entry의 안쪽으로 들어가는 방향·environmental의 강가/수거·episode의 같은 작품 케이스 묶음/선택한 디스크·equal 형용사의 같은 대우와 동사의 두 수량·equally의 3/3사과·escape 동사/명사의 행동/결과·essential의 물 필요·eventually의 기다림/도착을 각각 검토했다. equal 동사는 각 트레이가 빨강 6/황토 4의 총 10개이고 그림 전체에는 20개가 있다. 단일 TV 프레임이 한 회 전체와 같다고 가르치지 않으며 이미지가 실제 디스크/시간/권리/자연 인과/안전을 인증하는 자료는 아니다.
+
+사전 근거:
+- [entry n. · Cambridge](https://dictionary.cambridge.org/dictionary/english/entry) · `### entry noun (WAY IN)`: the act of entering a place. 교재의 입장 행위 명사다. 미술관으로 들어가는 행동을 단서로 사용하고 같은 WAY IN의 문/통로 뜻·정보 항목/경연 응모를 분리한다. 무료 요금/권리·실제 전시 출입 허용을 인증하지 않는다.
+- [environmental adj. · Cambridge](https://dictionary.cambridge.org/dictionary/english/environmental?topic=environmental-issues) · `# Meaning of environmental in English`: relating to the environment. 자연 환경에 관련된 형용사다. 강가의 쓰레기 수거를 환경 보호의 단서로 사용하고 학교 토론 전체·실제 환경 효과/수질·유해성/처분 규칙을 인증하지 않는다.
+- [episode n. · Cambridge](https://dictionary.cambridge.org/dictionary/english/episode) · `### episode noun [C] (PART OF STORY)`: single parts. 방송 연속 이야기의 한 부분인 명사다. 같은 작품의 비디오 케이스 묶음과 그중 하나의 열린 케이스·TV를 회차 연상에 사용한다. 단일 화면/프레임이 한 회와 같다고 주장하거나 실제 매체 내용·내일 공개/번호를 인증하지 않는다.
+- [equal adj. · Cambridge](https://dictionary.cambridge.org/dictionary/english/equal) · `### equal adjective (DESERVING THE SAME)`: deserving the same treatment. 같은 중요성과 대우를 받을 자격의 형용사다. 실제 American Dictionary DESERVING THE SAME를 사용해 동등한 두 사람/균형 저울과 망치를 연상한다. 몸의 크기가 같은 뜻·실제 관할 법률/평등권을 인증하지 않는다.
+- [equal v. · Cambridge](https://dictionary.cambridge.org/dictionary/english/equal) · `### equal verb [L only + noun, T] (BE THE SAME)`: be the same in value or amount. 다른 것과 같은 값/수량이라는 동사다. 여섯 빨강·네 황토 구슬을 구분해 놓은 총 열 개와 같은 색/개수의 한데 놓은 열 개를 비교한다. 문자/더하기·등호 없이 수량의 같음을 연상하며 두 트레이 그림 전체가 열 개라고 주장하지 않는다.
+- [equally adv. · Cambridge](https://dictionary.cambridge.org/us/dictionary/english/equally) · `# Meaning of equally in English`: in equal amounts. 같은 양으로 분배하는 부사 용법이다. 사과를 두 접시에 세 개씩 나눈 결과/동작을 연상하고 실제 어린이 전원/중량·크기의 정밀 동일성을 인증하지 않는다. to the same degree/문장 접속 용법을 제외한다.
+- [escape v. · Cambridge](https://dictionary.cambridge.org/dictionary/english/escape) · `### escape verb (GET AWAY)`: get free. 자유를 제한하는 장소/상대에서 벗어나는 동사다. 열린 구속된 건물 통로 뒤로 두고 바깥으로 이동하는 성인을 연상하며 실제 Tom/다른 이의 생각·성공 완료/법적 구속을 인증하지 않는다.
+- [escape n. · Cambridge](https://dictionary.cambridge.org/dictionary/english/escape) · `### escape noun (GET FREE)`: successfully getting out. 장소/위험·좋지 않은 상황에서 성공적으로 벗어난 사건의 명사다. 낮은 열린 창 밖 지면에 완전히 나와 선 성인의 결과를 연상하며 실제 재난/안전 절차·미세 연기 농도/컴퓨터 키를 인증하지 않는다.
+- [essential adj. · Cambridge](https://dictionary.cambridge.org/dictionary/english/essential) · `### essential adjective (NECESSARY)`: necessary or needed. 필요하거나 꼭 있어야 하는 형용사다. 같은 식물의 마른/물 공급 상태 두 모습을 통해 물의 필요를 연상하며 교재의 안내서/정보 내용을 그대로 묘사하거나 식물 회복·급수량/인과·생존/의학 안전을 인증하지 않는다.
+- [eventually adv. · Cambridge](https://dictionary.cambridge.org/dictionary/english/eventually) · `# Meaning of eventually in English`: in the end. 시간/노력/문제 후 마침내의 부사다. 바위섬에서 기다리는 사람과 나중에 구조 배가 닿는 두 관련 모습을 연상하며 실제 시간·구조 완료·미래 약속/가능성/마지막 목록 항목을 인증하지 않는다.
+
+검색 결과의 실제 정의 본문을 정확한 줄 소제목에서 잘라 읽었다. equal 형용사는 American Dictionary의 DESERVING THE SAME, equal 동사는 UK BE THE SAME 섹션이다. environmental은 실제 반환된 topic=environmental-issues URL, equally는 US URL을 사용했다. entry는 같은 WAY IN의 문 뜻 전에 잘랐고 episode는 PART OF STORY, escape는 동사 GET AWAY/명사 GET FREE, essential은 NECESSARY를 구분한다. 직접 페이지 열기/전체 PDF 시각 검사/HTTP 실패나 원격 Tatoeba 본문 확인은 주장하지 않는다. 교재의 Tatoeba CC-BY 2.0 France/저자·문장 URL을 그대로 보존하며 equal 형용사의 실제 법률이나 escape 동사의 Tom에 대한 생각·eventually 미래 약속을 그림에서 판정하지 않는다. 같은 URL의 두 품사 인용을 합쳐 URL당 25단어 이하이며 보조 출처는 0개다.
+
+증거·검증·재개:
+- 원본 저장: `C:/Users/user/Documents/ChatGPT/하루단어/outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`. 항목별 v1 10개/eventually v2 1개와 실제 생성 원본을 덮어쓰지 않고 보존했다. 이미지 바이너리는 Git에 추가하지 않는다.
+- 실제 장면·프롬프트·시도별 해시·기본 뜻·검수는 [연결 목록](../data/word-image-manifest.json)의 위 ID에 연결했다. Git 제외 `work/oxford-batch-237-{sources,dictionary-bodies,source-evidence,scenes,originals,observations,first-observations,first-reviews,reviews,correction,check-results,meta}.json`을 저장했다. `slot-0..9/native-0..9`와 `correction-slot/correction-native`는 시작 메타데이터와 실제 반환 영수증을 구분한다. 시작 슬롯만으로 제공자 전달/살아 있는 핸들을 주장하지 않는다.
+- eventually v1 SHA256 `e0953cfda4a04204de19f8ea85a50acd3069057b28a6ca79ead03b2153d03452`, v2 `511a21b20ca363fe9c6324998fae44ffa31082b3961a1e899062f80d8c37abfc`. 두 원본·첫 부정 판정·v1/v2 320px를 모두 남겼으며 textFree=false/meaningMatch=true/styleConsistent=true를 조작하지 않는다. 작은 패치는 288px에서는 뚜렷하지 않지만 원본에 남아 있으므로 승인하지 않는다.
+- 첫 QA `2026-10-09T13:34:27.400Z` / `oxford-images-verification-1791552867400.json`: generated 10/approved 2294/held 36/waiting 1465/failed 4.
+- 수정 QA `2026-10-09T13:40:49.574Z` / `oxford-images-verification-1791553249574.json`: generated 1/approved 2303/held 36/waiting 1465/failed 4.
+- 최종 QA `2026-10-09T13:42:37.532Z` / `oxford-images-verification-1791553357532.json`: approved 2303/held 37/waiting 1465/failed 4, generating/generated 0.
+- `node scripts/verify-oxford-images.cjs <이번 10개 ID>` 첫/최종 exit 0, 수정 ID 단독 검사 exit 0. 파일 존재/PNG 디코딩/해시/루프백 렌더 pass와 무표식 품질 미달을 분리한다. 검수용 footer 항목명은 그림 밖이며 실제 checkedAt을 따른다.
+- `node scripts/check-oxford-image-resume.cjs` exit 0, 19검사·image/API 0회, fixture `oxford-resume-check-48Ep5l`. 완료 항목/명시적 정책 보류 중복 생성·복구/원장/교재 보호를 검사한다.
+- `node --check scripts/oxford-images.cjs`, `node --check scripts/verify-oxford-images.cjs`, `node --check scripts/check-oxford-image-resume.cjs` 각각 exit 0.
+- 저장 전/후 보호 절차 `node work/oxford-batch-237-guard.cjs` / `node work/oxford-batch-237-guard.cjs --final`: 모든 시도별 PNG/해시·3,809 ID/교재 fingerprint·이번 10개 외 불변·모든 기존 보류/실패/첫 부정 판정·정확히 3개 파일과 원격 HEAD/깨끗한 상태를 확인한다. 실제 최종 실행 결과는 completion-checks/final-readback에 남긴다.
+
+누적 제작 2339개·검수 통과 2303개·보류 37개(이미지 없음 letter 1개)·실패/중단 4개·대기 1465개다. 이미지 있는 보류는 36개, 수정본 포함 PNG 2446개·원장 시작 슬롯 2450회/품질 수정 107회다. 확인된 내장 도구 호출은 2449회이며 climb의 제공자 전달 미확인 중단 시작 슬롯 1회와 구분한다. 전체 미생성 1,470개·미승인 1,506개로 목표는 active/미완료다. A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 270/보류 4/대기 627/실패 2; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+기존 236 encourage의 부정 예문/긍정 기본 뜻 구분과 반지/눈물의 정확한 수 검토·engineering 도면 구분, 235 element v1 충돌/수정과 모든 기존 부정 판정/보류/실패를 보존했다. 앱/UI·Sites/EN_Card·교재/학습/백업/API/DB·hosting 식별자를 변경하지 않았다. 이미지/manifest/문서만 갱신하므로 앱 전체 테스트/타입/린트/빌드·운영 배포는 범위 밖이며 실제 iPhone/독립 학습자 검증은 하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `entry` 명사(입장)이며 이어 environmental 형용사·episode 명사·equal 형용사/동사·equally 부사·escape 동사/명사·essential 형용사·eventually 부사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 실제 정의를 다시 읽고 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 기존 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `examine` 동사(조사하다)이며 이어 except 접속사·exchange 명사/동사·excitement/exhibition/exit 명사·expand 동사·expected 형용사·experience 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 223에서 호출 전 복구한 close부터 coal까지 다섯 항목은 224에서 실제 정의를 다시 읽고 정상 제작/검수했다. climb 명사의 중단 슬롯은 재호출하지 않으며 결과 발견 시 기존 기록과 대조하여 복구한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 기존 code/route/attraction 자동 재시도는 하지 않는다. cheap/confirm/connection/departure/element 두 시도·첫 부정 판정·모든 기존 보류를 유지한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
