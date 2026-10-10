@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2567 |
-| 제작자 품질 검수 통과 `approved` | 2531 |
+| 제작된 서로 다른 항목 | 2577 |
+| 제작자 품질 검수 통과 `approved` | 2541 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,236 |
+| 제작 대기 `waiting` | 1,226 |
 | 생성 중 / 실패·실행 중단 | 0 / 5 |
-| 내장 도구 호출·시작 슬롯 원장 | 2691 |
+| 내장 도구 호출·시작 슬롯 원장 | 2701 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 119 |
 
-이미지 미생성 항목은 제작 대기 1,236개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 5개를 합친 1,242개다. 제작된 2567개는 검수 통과 2531개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2686개다. 원장 2691회는 이미지가 반환된 2686회·`code`/`attraction`/`highlight` 명사 HTTP 400과 `route` HTTP 408 무이미지 실패 4회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2690회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,226개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 5개를 합친 1,232개다. 제작된 2577개는 검수 통과 2541개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2696개다. 원장 2701회는 이미지가 반환된 2696회·`code`/`attraction`/`highlight` 명사 HTTP 400과 `route` HTTP 408 무이미지 실패 4회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2700회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -6180,9 +6180,39 @@ label 명사/동사의 이름표는 물리적인 빈 종이 형태/부착 행위
 
 근거(로컬 Git 제외): work/oxford-batch-260-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-raw.json·scenes.json·originals.json·observations.json·first-observations.json·first-reviews.json·reviews.json·corrections.json·correction-3.json·correction-slot-3.json·correction-native-3.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T02:36:34.808Z, 수정본 2026-10-10T02:42:28.148Z, 최종 2026-10-10T02:43:27.292Z, oxford-images-verification-1791600207293.json. 새 자산은 기존 outputs 경로에만 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
 
+## 추가 261 제작·검수
+
+2026-10-10 KST 체크포인트: B1 native 형용사부터 next 명사까지 10항목을 승인 스타일과 내장 도구로 첫 시도에 각각 제작했다. 원본 10개와 개별 320px 화면을 실제 열어 10개 모두 검수 통과했으며 품질 수정0·새 보류/새 실패/자동 재시도/별도 API 전환0이다. native는 첫 언어와 출신지를 구분하고 외모/국기로 영어·민족을 판단하지 않는다. necessarily·need·neither는 교재의 부정 용법에 맞는 연상 단서이며 그림만으로 논리 명제·조동사/도치 문법·실제 의무/허락을 증명하지 않는다. 의료용 바늘은 실신 예문 맥락의 후보로 선택했지만 그 예문이 유일하게 의료용을 지정한다고 주장하지 않는다. next는 Oxford 명사 본문과 다음 발언자 예문을 대조했다.
+
+| 항목 ID·단어·품사 | 교재 뜻 | 실제 장면의 연상 단서 | 결과 |
+|---|---|---|---|
+| `4e3fba9c223c1869` native adj. | 모국의 | 첫 언어를 배우고 사용하는 두 대화 장면 | 검수 통과 v1 |
+| `5263efdc119d6984` native n. | 그 지역 출신 사람 | 익숙한 동네 안내와 집 앞 어린 시절 회상 | 검수 통과 v1 |
+| `9bdb7c898eb487a7` naturally adv. | 자연스럽게 | 편안한 대화 표정·자연스러운 손짓 | 검수 통과 v1 |
+| `5d9783f43826e449` neat adj. | 정돈된 | 정리된 침대·가구·선반·빈 바닥 | 검수 통과 v1 |
+| `25e92443f2f96233` necessarily adv. | 반드시 | 단순한 매듭 작업과 복잡한 얽힘의 두 사례 | 검수 통과 v1 |
+| `deab38417e678d9b` need modal v. | ~할 필요가 있다 | 음식이 준비된 집에 빈손으로 오는 손님 | 검수 통과 v1 |
+| `f587674e90d02d8a` needle n. | 바늘 | 쟁반 위 무지 주사기에 연결된 가는 바늘 | 검수 통과 v1 |
+| `19811ae4de89074d` neither adv. | ~도 또한 아니다 | 같은 부정 반응으로 동의하는 두 사람 | 검수 통과 v1 |
+| `d720e1b5ae25ef11` net n. | 그물 | 망눈이 보이는 어망 수리 | 검수 통과 v1 |
+| `59587fbb2a9f8f0a` next n. | 다음 사람·것 | 말하는 사람의 손짓과 차례를 받을 사람 | 검수 통과 v1 |
+
+현재 누적 제작 2577개·검수 통과 2541개·보류 37개(이미지 있는 36/없는 letter 1)·실패/실행 중단 5개·제작 대기 1,226개다. 전체 미생성 1,232개, 미검수 통과 1,268개로 전체 목표는 active이며 완료로 바꾸지 않는다. 수정본 포함 PNG 2696개, 원장 2701회, 확인된 내장 도구 호출은 2700회다. 누적 품질 수정은 119회로 유지한다. 이번 10개 원본의 최초/최종 PNG 해시가 일치하고 추가 품질 수정은 없다.
+수준별: A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 508/보류 4/대기 388/실패 3; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+자료 확인은 Cambridge/Oxford 검색 4그룹/60개 반환 페이지 범위에서 9개 서로 다른 단어의 선택 정의/문법 본문 10개를 읽은 결과다. 처음 검색 세 그룹에서 needle 페이지가 빠져 추가 기본 검색으로 MEDICAL TOOL 본문을 확보했다. 넓은 next 검색에는 비공식 자료도 반환됐지만 근거는 Oxford의 [next noun](https://www.oxfordlearnersdictionaries.com/definition/english/next_3)만 사용했다. 한 페이지 끝에 붙은 구분선을 처음 분할식이 놓쳐 페이지 개수가 적게 집계됐으므로 저장 전에 모든 실제 구분선을 분할하도록 고쳤다. 중복 검색 요약의 제목은 정확한 독립 제목 줄 선택으로 제외했고 neat의 손글씨·net의 다른 그물 예시·necessarily의 추가 예시를 경계에서 제외했다. 경계 조정 10건은 본문 선택/추출 과정이며 요청 실패가 아니다. 보조 조사0·직접 페이지 열기0·이번 명령 조회/도구 서비스/오케스트레이션/검증 스크립트 설정 오류0이다. 전체 반환 원문·PDF·참고 사진·Tatoeba 웹페이지를 직접 읽었다고 주장하지 않는다.
+
+교재 예문 7개는 학습용 작성 예문, native 형용사·necessarily 부사·needle 명사 3개는 Tatoeba 참고 예문이다. 원래 교재·번역·URL·저작자 귀속을 변경하지 않았다. native의 [Tatoeba #1489992](https://tatoeba.org/en/sentences/show/1489992)은 CC-BY 2.0 (France) Attribution: tatoeba.org #1489992 (weihaiping) & #6831529 (nagdeng), necessarily의 [Tatoeba #59114](https://tatoeba.org/en/sentences/show/59114)은 CC-BY 2.0 (France) Attribution: tatoeba.org #59114 (CK) & #11106899 (intertime), needle의 [Tatoeba #5337245](https://tatoeba.org/en/sentences/show/5337245)은 CC-BY 2.0 (France) Attribution: tatoeba.org #5337245 (Hybrid) & #8355851 (Eunhee)다. 선택 본문·항목/뜻 경계·짧은 인용·장면 해석은 source-evidence/dictionary-bodies에 보존하며 같은 URL 합산 인용은 25단어 이하로 제한한다.
+
+추가 261 교열 후보: neither 부사 ID 19811ae4de89074d의 저장 영문은 "nor does my brother"인데 한국어에는 "내 동생"으로 나이가 특정돼 있다. brother 자체에 younger/older가 없어 해당 나이 정보는 별도 교열 검토가 필요하며 이번 이미지 작업에서는 원본 교재·번역·사용자 기록을 수정하지 않았다. 기존 12개 교열 후보는 그대로 보존한다. need의 저장 표현은 걱정/예문은 음식, next의 저장 표현은 도착/예문은 말하기로 상황이 달라 장면은 실제 예문을 기준으로 선택했고 저장 표현/예문을 같은 문장이라고 표시하지 않았다.
+
+검증: 최초 PNG/320px 검사 10개, 최종 PNG/320px 검사 10개·메타데이터 pass, 재개 보호 19개(oxford-resume-check-rwRr5e) pass, 모두 exit0다. 세 제작/검증 스크립트의 현재 바이트가 250 및 기준 커밋 260과 같음을 새 SHA256 대조로 확인하여 250의 node --check exit0 세 건을 재사용했다. 변경 없는 구문 검사는 이번에 다시 실행하지 않았다. 앱 코드 변경이 없어 앱 전체 테스트·타입·린트·빌드·Sites/Worker 배포는 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 연결/호스팅은 미검증/후속 범위다. 기존 사용자의 글자 금지·letter/capital 보류와 5개 오류·첫 부정 판정·과거 품질 수정/중단 기록을 유지한다.
+
+근거(로컬 Git 제외): work/oxford-batch-261-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-raw.json·scenes.json·originals.json·observations.json·first-observations.json·first-reviews.json·reviews.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T03:22:00.566Z, 최종 2026-10-10T03:24:39.825Z, oxford-images-verification-1791602679826.json. 새 자산은 기존 outputs 경로에만 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `native` 형용사(모국의)이며 이어 native 명사·naturally 부사·neat 형용사·necessarily 부사·need 조동사·needle 명사·neither 부사·net 명사·next 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 247의 highlight 명사 HTTP 400 오류는 재호출하지 않는다. 223의 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight 명사 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `nor` 접속사(~도 또한 아닌)이며 이어 nor 부사·normal 명사·northern 형용사·note 동사·now 접속사·nuclear 형용사·obvious 형용사·obviously 부사·occasion 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 247의 highlight 명사 HTTP 400 오류는 재호출하지 않는다. 223의 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight 명사 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
