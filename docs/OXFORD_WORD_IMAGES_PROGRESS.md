@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2587 |
-| 제작자 품질 검수 통과 `approved` | 2551 |
+| 제작된 서로 다른 항목 | 2597 |
+| 제작자 품질 검수 통과 `approved` | 2561 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,216 |
+| 제작 대기 `waiting` | 1,206 |
 | 생성 중 / 실패·실행 중단 | 0 / 5 |
-| 내장 도구 호출·시작 슬롯 원장 | 2711 |
+| 내장 도구 호출·시작 슬롯 원장 | 2721 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 119 |
 
-이미지 미생성 항목은 제작 대기 1,216개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 5개를 합친 1,222개다. 제작된 2587개는 검수 통과 2551개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2706개다. 원장 2711회는 이미지가 반환된 2706회·`code`/`attraction`/`highlight` 명사 HTTP 400과 `route` HTTP 408 무이미지 실패 4회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2710회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,206개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 5개를 합친 1,212개다. 제작된 2597개는 검수 통과 2561개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2716개다. 원장 2721회는 이미지가 반환된 2716회·`code`/`attraction`/`highlight` 명사 HTTP 400과 `route` HTTP 408 무이미지 실패 4회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2720회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -6242,9 +6242,41 @@ northern의 북쪽은 north-up 표현 관례와 무지 나침반의 위쪽 붉�
 
 근거(로컬 Git 제외): work/oxford-batch-262-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-source.json·scenes.json·originals.json·observations.json·first-observations.json·observation-enrichment.json·first-reviews.json·reviews.json·orchestration-errors.json·goal-turn-audit.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T04:03:57.172Z, 최종 2026-10-10T04:07:10.692Z, oxford-images-verification-1791605230692.json. 새 자산은 기존 outputs 경로에만 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
 
+## 추가 263 제작·검수
+
+2026-10-10 KST 체크포인트: B1 occur 동사부터 originally 부사까지 10항목을 승인 스타일과 내장 도구로 첫 시도에 각각 제작했다. 원본 10개와 개별 320px 화면을 실제 열어 10개 모두 검수 통과했으며 품질 수정0·새 보류/새 실패/자동 재시도/별도 API 전환0이다. occur to someone의 생각·odd의 홀수·once 접속사·operation의 수술 뜻을 구분했다. organized는 정돈된 행사 배치, organizer는 이를 조율하는 사람으로 초점을 나눴다.
+
+| 항목 ID·단어·품사 | 교재 뜻 | 실제 장면의 연상 단서 | 결과 |
+|---|---|---|---|
+| `1cb04b65e12cd1ae` occur v. | 떠오르다 | 빈 삼각형 자리와 맞는 조각을 알아보는 성인 | 검수 통과 v1 |
+| `05ba1ca8a776066c` odd adj. | 홀수의 | 사과 두 쌍과 남는 한 개·정확히 다섯 개 | 검수 통과 v1 |
+| `2d39daee2a8fc4ba` official adj. | 공식적인 | 무지 종이의 연단 발표자와 청중 두 명 | 검수 통과 v1 |
+| `4d0d80f240e7647d` old-fashioned adj. | 옛날식의 | 숫자 없는 목재 추시계·두 바늘·추 한 개 | 검수 통과 v1 |
+| `104a6f7fdd47b499` once conj. | 일단 ~하면 | 마지막 도형 연습을 끝낸 후 쉬는 두 장면 | 검수 통과 v1 |
+| `2612018e782cae6d` operation n. | 수술 | 빈 수술대·수술등을 환자에게 설명하는 의료인 | 검수 통과 v1 |
+| `7bbdfd45798e9d00` organized adj. | 체계적인 | 의자 정확히 여섯 개를 두 줄 세 개씩 정돈 | 검수 통과 v1 |
+| `41b5ae9b59f3f426` organizer n. | 주최자 | 무지 클립보드 조율자와 준비 도우미 두 명 | 검수 통과 v1 |
+| `c3549b977bbef252` original n. | 원본 | 컬러 꽃 원본 한 장과 회색 사본 한 장 | 검수 통과 v1 |
+| `f71e73e18cfc011d` originally adv. | 처음에 | 처음 꽃 그림 제작과 이후 회색 사본 두 장 | 검수 통과 v1 |
+
+현재 누적 제작 2597개·검수 통과 2561개·보류 37개(이미지 있는 36/없는 letter 1)·실패/실행 중단 5개·제작 대기 1,206개다. 전체 미생성 1,212개, 미검수 통과 1,248개로 전체 목표는 active이며 완료로 바꾸지 않는다. 수정본 포함 PNG 2716개, 원장 2721회, 확인된 내장 도구 호출은 2720회다. 누적 품질 수정은 119회로 유지한다. 이번 10개 원본의 최초/최종 PNG 해시가 일치하고 추가 품질 수정은 없다.
+수준별: A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 528/보류 4/대기 368/실패 3; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+자료 확인은 Cambridge 검색 4그룹/48개 반환 페이지 범위에서 10개 서로 다른 단어의 선택 정의/문법 본문 10개를 읽은 결과다. 처음 검색 세 그룹에서 official·operation 본문이 빠져 추가 기본 검색으로 [official APPROVED](https://dictionary.cambridge.org/dictionary/learner-english/official)와 [operation MEDICAL TREATMENT](https://dictionary.cambridge.org/dictionary/learner-english/operation)를 확보했다. [occur to someone](https://dictionary.cambridge.org/us/dictionary/english/occur-to)의 생각이 마음에 떠오름, [odd NUMBERS](https://dictionary.cambridge.org/us/dictionary/english/odd)의 둘로 정확히 나누어지지 않음, [once 문법](https://dictionary.cambridge.org/us/grammar/british-grammar/as-soon-as)의 행동 시점 연결을 대조했다. odd/official/organized는 다른 품사·뜻 앞에서, originally는 추가 예문 앞에서 경계를 좁혔다. original은 처음 만든 것과 사본을 구분하는 명사 본문만 사용했다. supporting 발췌0·직접 페이지 열기0이며 전체 원문·PDF·설비 도면을 검토했다고 주장하지 않는다. 경계/해석 기록 10건은 요청 실패가 아니다.
+
+직전 수량 답변의 읽기 전용 파일 검사에서 manifest의 상대 assetRoot를 관리형 worktree 기준으로 해석하여 ENOENT 1건이 발생했다(a1133f exit1). 실제 주 작업 폴더의 자산 위치로 해결하여 당시 PNG2706개·누락0을 확인했다(47430b exit0). 이 명령 조회 오류의 생성 호출 증가0이며 이미지 재호출은 없었다. 이번 이미지 서비스 오류0·오케스트레이션 오류0·검증 스크립트 설정 오류0이다. 첫 원본/축소 메모와 QA/리뷰 필드를 모두 기록한 상태로 first-observations·first-reviews를 고정했고 최종 관측/판정과 동일하다.
+
+교재 예문 8개는 학습용 작성 예문, occur 동사·odd 형용사 2개는 Tatoeba 참고 예문이다. 원래 교재·번역·URL·저작자 귀속은 변경하지 않았다. occur의 [Tatoeba #325837](https://tatoeba.org/en/sentences/show/325837)은 CC-BY 2.0 (France) Attribution: tatoeba.org #325837 (CK) & #11105132 (intertime), odd의 [Tatoeba #73502](https://tatoeba.org/en/sentences/show/73502)은 CC-BY 2.0 (France) Attribution: tatoeba.org #73502 (CK) & #3752914 (rainbow4us)다. Tatoeba 웹페이지를 직접 읽었다고 주장하지 않는다.
+
+odd는 실제 사과 다섯 개를 두 쌍·한 개로 나눈 장면이며 예문의 1·3·5를 모두 표시한 결과가 아니다. once는 글자 없는 세 도형 연습과 이후 휴식의 연상 단서다. original/originally는 글자 금지에 따라 컬러 꽃 그림의 원본/사본 및 첫 제작/이후 복사를 보여 주며 예문의 영어 집필·문서 언어를 그렸다고 주장하지 않는다. 복사기 원본이 위로 보이는 배치는 식별을 위한 삽화이며 실제 복사 절차나 픽셀 단위 복제 정확도의 인증이 아니다. operation은 빈 수술대 옆 설명 문맥으로 시술·피·치료 지침은 없다. 실제 생각·권한·발표 날짜·시계 연식/소유/시각·동일 인물·시간/인과·의료 판단·운영 효율·주최자 신원·작품 진위를 정적 그림으로 입증하지 않는다. 의복 단추·클립·목재결·통풍구·경첩은 물리 구조로 보이며 가려진 부위 전부를 검사했다고 표시하지 않는다. 선택 본문·짧은 인용·장면 해석은 source-evidence/dictionary-bodies에 보존하며 같은 URL 합산 인용은 25단어 이하로 제한한다.
+
+검증: 최초 PNG/320px 검사 10개, 최종 PNG/320px 검사 10개·메타데이터 pass, 재개 보호 19개(oxford-resume-check-n8N3hO) pass, 모두 exit0다. 세 제작/검증 스크립트의 현재 바이트가 250 및 기준 커밋 262와 같음을 새 SHA256 대조로 확인하여 250의 node --check exit0 세 건을 재사용했다. 변경 없는 구문 검사는 이번에 다시 실행하지 않았다. 앱 코드 변경이 없어 앱 전체 테스트·타입·린트·빌드·Sites/Worker 배포는 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 연결/호스팅은 미검증/후속 범위다. 기존 사용자의 글자 금지·letter/capital 보류와 5개 오류·첫 부정 판정·과거 품질 수정/중단 기록, 기존 12개 교열 후보와 추가 261의 neither 교열 후보를 유지한다.
+
+근거(로컬 Git 제외): work/oxford-batch-263-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-source.json·scenes.json·originals.json·observations.json·first-observations.json·first-reviews.json·reviews.json·lookup-errors.json·goal-turn-audit.json·goal-resume-audit.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T04:41:19.061Z, 최종 2026-10-10T04:43:16.371Z, oxford-images-verification-1791607396371.json. 새 자산은 기존 outputs 경로에만 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `occur` 동사(떠오르다)이며 이어 odd 형용사·official 형용사·old-fashioned 형용사·once 접속사·operation 명사·organized 형용사·organizer 명사·original 명사·originally 부사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 247의 highlight 명사 HTTP 400 오류는 재호출하지 않는다. 223의 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight 명사 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `ought` 조동사(해야 한다)이며 이어 ours 대명사·outdoor 형용사·outdoors 부사·overseas 형용사·pack 명사·package 명사·painful 형용사·pale 형용사·pan 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 247의 highlight 명사 HTTP 400 오류는 재호출하지 않는다. 223의 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight 명사 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
