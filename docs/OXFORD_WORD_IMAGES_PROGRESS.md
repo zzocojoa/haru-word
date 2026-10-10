@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2577 |
-| 제작자 품질 검수 통과 `approved` | 2541 |
+| 제작된 서로 다른 항목 | 2587 |
+| 제작자 품질 검수 통과 `approved` | 2551 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,226 |
+| 제작 대기 `waiting` | 1,216 |
 | 생성 중 / 실패·실행 중단 | 0 / 5 |
-| 내장 도구 호출·시작 슬롯 원장 | 2701 |
+| 내장 도구 호출·시작 슬롯 원장 | 2711 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 119 |
 
-이미지 미생성 항목은 제작 대기 1,226개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 5개를 합친 1,232개다. 제작된 2577개는 검수 통과 2541개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2696개다. 원장 2701회는 이미지가 반환된 2696회·`code`/`attraction`/`highlight` 명사 HTTP 400과 `route` HTTP 408 무이미지 실패 4회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2700회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,216개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 5개를 합친 1,222개다. 제작된 2587개는 검수 통과 2551개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2706개다. 원장 2711회는 이미지가 반환된 2706회·`code`/`attraction`/`highlight` 명사 HTTP 400과 `route` HTTP 408 무이미지 실패 4회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2710회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -6210,9 +6210,41 @@ label 명사/동사의 이름표는 물리적인 빈 종이 형태/부착 행위
 
 근거(로컬 Git 제외): work/oxford-batch-261-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-raw.json·scenes.json·originals.json·observations.json·first-observations.json·first-reviews.json·reviews.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T03:22:00.566Z, 최종 2026-10-10T03:24:39.825Z, oxford-images-verification-1791602679826.json. 새 자산은 기존 outputs 경로에만 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
 
+## 추가 262 제작·검수
+
+2026-10-10 KST 체크포인트: B1 nor 접속사부터 occasion 명사까지 10항목을 승인 스타일과 내장 도구로 첫 시도에 각각 제작했다. 원본 10개와 개별 320px 화면을 실제 열어 10개 모두 검수 통과했으며 품질 수정0·새 보류/새 실패/자동 재시도/별도 API 전환0이다. nor의 두 부정 용법·normal 불가산 명사·now 접속사를 구분했다. 글자 금지를 유지하여 note는 기록을 시작하는 동작, obvious는 눈에 띄는 잘못된 맞춤을 연상한다. 실제 시각/완성 메모와 날짜 예문 자체를 표시했다고 주장하지 않는다.
+
+| 항목 ID·단어·품사 | 교재 뜻 | 실제 장면의 연상 단서 | 결과 |
+|---|---|---|---|
+| `6884e6ff87bee4a0` nor conj. | ~도 또한 아닌 | 둘 다 온전해 보이는 성인과 옆으로 놓인 자전거 | 검수 통과 v1 |
+| `a03661502bd2610e` nor adv. | ~도 또한 아니다 | 자동차 앞 성인 두 명의 같은 부정 반응 | 검수 통과 v1 |
+| `49afaef536e232a3` normal n. | 정상 상태 | 비로 닫힌 시장과 맑은 날 되돌아온 일상 | 검수 통과 v1 |
+| `4c7e337efea9260d` northern adj. | 북쪽의 | 가상 섬 위쪽 해안의 집 세 채와 무지 나침반 | 검수 통과 v1 |
+| `7d65dbeb3d0a8f32` note v. | 기록하다 | 시계를 보며 무지 노트에 기록을 시작하는 동작 | 검수 통과 v1 |
+| `939785da276f558f` now conj. | 이제 ~이므로 | 비가 그친 젖은 길로 나가는 두 성인 | 검수 통과 v1 |
+| `f6f3e6bdf23b0a5c` nuclear adj. | 핵의 | 민수 발전소의 격납 돔·냉각탑·송전탑 | 검수 통과 v1 |
+| `8b09c688a5ed7e12` obvious adj. | 분명한 | 원형 구멍에 맞지 않는 네모 블록 | 검수 통과 v1 |
+| `428b0d51d87d9f32` obviously adv. | 분명히 | 꽃을 건네는 두 성인과 이를 알아보는 친구 | 검수 통과 v1 |
+| `c5bc8bcfd510e122` occasion n. | 특별한 때 | 특별한 식사 자리의 요리·성인 세 명·촛불 | 검수 통과 v1 |
+
+현재 누적 제작 2587개·검수 통과 2551개·보류 37개(이미지 있는 36/없는 letter 1)·실패/실행 중단 5개·제작 대기 1,216개다. 전체 미생성 1,222개, 미검수 통과 1,258개로 전체 목표는 active이며 완료로 바꾸지 않는다. 수정본 포함 PNG 2706개, 원장 2711회, 확인된 내장 도구 호출은 2710회다. 누적 품질 수정은 119회로 유지한다. 이번 10개 원본의 최초/최종 PNG 해시가 일치하고 추가 품질 수정은 없다.
+수준별: A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 518/보류 4/대기 378/실패 3; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+자료 확인은 Cambridge/Oxford 검색 4그룹/54개 반환 페이지 범위에서 9개 서로 다른 단어의 선택 정의/문법 본문 10개와 DOE 검색 반환 발췌 1개를 읽은 결과다. 처음 검색 세 그룹에는 occasion 본문이 없고 normal 명사에는 물리 수직선 뜻이 반환되어 추가 기본 검색으로 [Oxford normal noun](https://www.oxfordlearnersdictionaries.com/us/definition/english/normal_2)의 불가산 상태와 [Cambridge occasion EVENT](https://dictionary.cambridge.org/dictionary/learner-english/occasion)를 확보했다. [nor 문법](https://dictionary.cambridge.org/grammar/british-grammar/neither-neither-nor-and-not-)의 두 부정 용법, now (that)의 상황/결과 연결을 실제 선택 본문과 대조했다. normal은 countable-person 앞, nuclear는 무기 뜻 앞, occasion은 on occasion(s) 앞에서 경계를 좁혔다. [DOE 원자력 교육 자료](https://www.energy.gov/sites/prod/files/2014/06/f16/Student%20Edition_2.pdf)의 실제 검색 발췌에서 원자로·발전·냉각 맥락만 확인했다. PDF 본문/페이지/설비 도면은 열지 않았으며 실제 설비 설계·안전성/위험·전력을 검증했다고 표시하지 않는다. 경계/해석 기록 10건은 요청 실패가 아니다. 직접 페이지 열기0·이미지 서비스 오류0·명령 조회 오류0·검증 스크립트 설정 오류0이다.
+
+로컬 기록 조회 과정에서 이전 dictionary_bodies 배열을 객체의 bodies 필드처럼 읽어 TypeError 1건이 발생했다. 이미 반환된 검색 결과는 보존했고 실제 저장값의 타입을 확인하여 고쳤다. 이 오케스트레이션 오류의 생성 호출 증가0이며 검색/이미지 재호출은 없었다. 첫 원본/축소 메모·첫 리뷰는 보존한 채 observations에 이미 확인한 QA/리뷰의 명시적 필드만 추가했다. 추가 전/후 파일과 observation-enrichment의 필드 목록을 남겼고 실제 메모 문구·이미지·판정은 바꾸지 않았다.
+
+교재 예문 8개는 학습용 작성 예문, nor 접속사·obviously 부사 2개는 Tatoeba 참고 예문이다. 원래 교재·번역·URL·저작자 귀속은 변경하지 않았다. nor의 [Tatoeba #6357494](https://tatoeba.org/en/sentences/show/6357494)은 CC-BY 2.0 (France) Attribution: tatoeba.org #6357494 (CK) & #8362134 (Eunhee), obviously의 [Tatoeba #3725257](https://tatoeba.org/en/sentences/show/3725257)은 CC-BY 2.0 (France) Attribution: tatoeba.org #3725257 (CM) & #8357737 (Eunhee)다. Tatoeba 웹페이지를 직접 읽었다고 주장하지 않는다. nor 부사의 표현 nor do I와 예문 nor does my younger brother는 동일 문장으로 표시하지 않는다.
+
+northern의 북쪽은 north-up 표현 관례와 무지 나침반의 위쪽 붉은 바늘로 연상하며 위쪽이 항상 북쪽·실제 지리/기후라고 가르치지 않는다. nor의 실제 무부상/운전 능력·형제 관계, normal/now의 실제 시간/인과·복구 완료, obvious의 실제 치수/날짜, obviously의 실제 감정·관계, occasion의 실제 행사/요리·문화는 정지 그림으로 입증하지 않는다. 의복·나무결·격자·버클·기기 부품을 글자처럼 오판하지 않았고 일부 가려진 신체·설비 전부를 검사했다고 표시하지 않는다. 선택 본문·짧은 인용·장면 해석은 source-evidence/dictionary-bodies에 보존하며 같은 URL 합산 인용은 25단어 이하로 제한한다.
+
+검증: 최초 PNG/320px 검사 10개, 최종 PNG/320px 검사 10개·메타데이터 pass, 재개 보호 19개(oxford-resume-check-ufTsv3) pass, 모두 exit0다. 세 제작/검증 스크립트의 현재 바이트가 250 및 기준 커밋 261과 같음을 새 SHA256 대조로 확인하여 250의 node --check exit0 세 건을 재사용했다. 변경 없는 구문 검사는 이번에 다시 실행하지 않았다. 앱 코드 변경이 없어 앱 전체 테스트·타입·린트·빌드·Sites/Worker 배포는 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 연결/호스팅은 미검증/후속 범위다. 기존 사용자의 글자 금지·letter/capital 보류와 5개 오류·첫 부정 판정·과거 품질 수정/중단 기록, 기존 12개 교열 후보와 추가 261의 neither 교열 후보를 유지한다.
+
+근거(로컬 Git 제외): work/oxford-batch-262-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-source.json·scenes.json·originals.json·observations.json·first-observations.json·observation-enrichment.json·first-reviews.json·reviews.json·orchestration-errors.json·goal-turn-audit.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T04:03:57.172Z, 최종 2026-10-10T04:07:10.692Z, oxford-images-verification-1791605230692.json. 새 자산은 기존 outputs 경로에만 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `nor` 접속사(~도 또한 아닌)이며 이어 nor 부사·normal 명사·northern 형용사·note 동사·now 접속사·nuclear 형용사·obvious 형용사·obviously 부사·occasion 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 247의 highlight 명사 HTTP 400 오류는 재호출하지 않는다. 223의 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight 명사 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `occur` 동사(떠오르다)이며 이어 odd 형용사·official 형용사·old-fashioned 형용사·once 접속사·operation 명사·organized 형용사·organizer 명사·original 명사·originally 부사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 247의 highlight 명사 HTTP 400 오류는 재호출하지 않는다. 223의 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight 명사 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
