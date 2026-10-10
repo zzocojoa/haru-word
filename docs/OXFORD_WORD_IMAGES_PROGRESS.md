@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2604 |
-| 제작자 품질 검수 통과 `approved` | 2568 |
+| 제작된 서로 다른 항목 | 2614 |
+| 제작자 품질 검수 통과 `approved` | 2578 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,198 |
+| 제작 대기 `waiting` | 1,188 |
 | 생성 중 / 실패·실행 중단 | 0 / 6 |
-| 내장 도구 호출·시작 슬롯 원장 | 2729 |
+| 내장 도구 호출·시작 슬롯 원장 | 2739 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 119 |
 
-이미지 미생성 항목은 제작 대기 1,198개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 6개를 합친 1,205개다. 제작된 2604개는 검수 통과 2568개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2723개다. 원장 2729회는 이미지가 반환된 2723회·`code`/`attraction`/`highlight` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 5회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2728회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,188개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 6개를 합친 1,195개다. 제작된 2614개는 검수 통과 2578개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2733개다. 원장 2739회는 이미지가 반환된 2733회·`code`/`attraction`/`highlight` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 5회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2738회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -6308,9 +6308,38 @@ ought의 추가 어깨 가방·overseas의 추가 가방과 무지 책을 실제
 
 근거(로컬 Git 제외): work/oxford-batch-264-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-source.json·scenes.json·originals.json·observations.json·first-observations.json·first-reviews.json·reviews.json·failure.json·service-error.json·lookup-errors.json·goal-turn-audit.json·goal-resume-audit.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T05:18:03.403Z; 최종 2026-10-10T05:19:28.113Z (oxford-images-verification-1791609568113.json). 새 자산은 기존 outputs 경로에 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
 
+## 추가 265 제작·검수
+
+2026-10-10 KST 체크포인트: B1 pale 형용사부터 percentage 명사까지 교재 순서 10개를 내장 도구로 각각 한 번 생성했다. 반환된 원본과 개별 320px 화면을 실제로 열어 10개 모두 제작 검수를 통과했다. 추가 품질 수정·자동 재시도·API 전환0이며 기존 painful 출력 거절 등 실패6개와 보류37개를 그대로 보존했다. percentage 결과는 이전 도구 출력이 잘린 뒤 실제 반환 경로와 파일을 확인하고 원본을 열어 저장했으며 같은 호출을 다시 실행하지 않았다.
+
+| 항목 ID·단어·품사 | 교재 뜻 | 실제 장면의 연상 단서 | 결과 |
+|---|---|---|---|
+| `c33baed4972ab439` pale adj. | 창백한 | 나란한 두 얼굴의 왼쪽 붉은 뺨/입술과 오른쪽 덜 붉은 색 | 검수 통과 |
+| `97d71dc8985dbe0e` pan n. | 팬 | 얕은 금속 팬 한 개·긴 손잡이·물리 리벳 두 개 | 검수 통과 |
+| `6634b5fc649b394a` participate v. | 참여하다 | 같은 탁자의 성인 세 명·한 명의 발언 자세와 두 명의 청취 자세 | 검수 통과 |
+| `3efef2cd1709d70e` particularly adv. | 특히 | 사용 중인 드라이버와 사용하지 않는 렌치/솔의 문맥적 강조 | 검수 통과 |
+| `9da069f2ef4db879` pass n. | 통행증 | 출입구에서 방문자가 담당자에게 제시하는 무문자 사진 카드 한 개 | 검수 통과 |
+| `99d20e650307b2e1` passion n. | 열정 | 집중한 여성의 바이올린/활 연습 자세 | 검수 통과 |
+| `103feee988ddc620` path n. | 길 | 풀과 관목 사이 좁은 흙길 한 줄 | 검수 통과 |
+| `23fb0ba2b00a8108` payment n. | 지불 | 두 성인이 소포를 두고 동전 네 개를 건네는 자세 | 검수 통과 |
+| `2760d3712bcf6ed3` peaceful adj. | 조용한 | 집 세 채와 빈 호숫가 길·잔잔한 물결 | 검수 통과 |
+| `e330dcbfde9c0bd0` percentage n. | 비율 | 같은 크기 원판 열 개 중 청록색 여덟·회색 두 개 | 검수 통과 |
+
+Cambridge 공식 검색 4그룹/48개 결과 개요와 선택한 10개 서로 다른 단어의 정의 본문을 실제 읽었다. 전체 원문48개·PDF·도해·사진을 모두 읽었다고 주장하지 않으며 직접 페이지 열기와 추가 보조 본문은0이다. 이전 묶음에서 읽은 자료를 현재 ID 순서와 교재 지문을 다시 대조한 뒤 재사용했다. pale는 FACE/SKIN, pan은 미국 CONTAINER 명사, pass는 미국 DOCUMENT 명사, passion은 STRONG INTEREST, path는 TRACK, peaceful은 CALM, percentage는 Business English의 전체 대비 양 정의를 연결한다. payment는 일반 지불 행위의 연상이며 예문의 온라인 결제 화면을 그렸다고 표시하지 않는다. 공식 정의의 경계와 인용은 [사전 근거](../work/oxford-batch-265-source-evidence.json)·[실제 읽은 본문](../work/oxford-batch-265-dictionary-bodies.json)에 보존했다. URL별 인용은25단어 이내다.
+
+path의 Tatoeba 참고 예문 1개(3729429/11597113, CC-BY 2.0 France/CM·cherryband)와 나머지 학습용 작성 예문9개, 한국어 뜻·표현·예문·귀속·원본 교재 파일은 변경하지 않았다. pale 예문의 부상 원인이나 의학적 판단, pass의 신원/입장 권한, passion의 실제 소리/열정, peaceful의 실제 소음/전쟁 유무는 그림으로 인증하지 않는다. percentage의 8/10은 비율 단서이며 실제 학생 수료율의 증거가 아니다. particularly의 도구 효용은 정량 비교가 아니며 반대쪽 추가 나사 머리를 기록했다. payment는 요청한 세 개와 달리 실제 네 개의 동전이 보이므로 이를 기록하고 특정 금액·결제 완료의 교재로 사용하지 않는다. 바이올린 공명 구멍·팬 리벳·손잡이 구멍·나뭇결·의복 단추·창살·물결은 물리 형태로 검토했으며 인쇄 글자/상표로 오인하지 않았다. 가려진 팔·손가락을 전부 검사했다고 표시하지 않는다.
+
+이번 묶음 내장 호출10회·반환10개·승인10개·품질 수정0. 누적 제작2614/승인2578/보류37/실패6/대기1188, 수정본 포함 PNG 2733개, 원장2739회(확인된 내장 도구 호출은 2738회·climb 미확인 슬롯1), 전체 미생성 1,195개/미승인1,231개다. A1 총1077/승인1060/보류17/대기0/실패0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총 903/검수 통과 545/보류 4/대기 350/실패 4, B2 총839/승인1/보류0/대기838/실패0이다.
+
+첫 PNG/320px 검사 `oxford-images-verification-1791611745645.json`(2026-10-10T05:55:45.645Z)와 최종 `oxford-images-verification-1791611809362.json`(2026-10-10T05:56:49.362Z)가10개 모두 통과했다. 320px의 삽화 폭은288px이며 검수용 항목명은 이미지 바깥 하단에 있다. 첫 관측·판정은 first-observations·first-reviews로 고정해 최종 메모와 그대로 대조했다. 재개 검사19개 `oxford-resume-check-vd40nq`(이미지/API 호출0)·검사 스크립트3개 문법 검사를 새로 실행해 exit0을 확인했다. 전체3,809ID·교재 지문·기존 행/보류/실패·모든 원본/시도별 해시·시작 원장을 보존 검사한다.
+
+호출 증가 없는 조회 오류1건: 관리형 체크아웃에 PROJECT_HANDOFF.md가 없어 묶은 읽기가 exit1로 끝났고 기본 프로젝트의 실제 문서를 읽었다. 호출 조립 오류1건: 실제 배열을 wrapper로 잘못 읽어 .map TypeError가 발생했다. 미완성 사전 파일을 별도 보존한 뒤 실제 배열10개로 다시 작성했다. 이전 자료 추출의 peaceful 종료 경계 오류1건은 실제 CALM 본문/Thesaurus 경계 확인으로 교정했다. 오류를 이미지 실패·재시도로 계산하지 않는다. 기존264의 보존 검사 실패(exit1: 현재6/역사적5)와 한 줄 수정·성공 근거는 그대로 유지하며, 이번에는 그 역사적5를264-before의 고정 스냅샷에 연결한다. 현재265는 실패6개를 독립 대조한다. 원본·프롬프트/참고 이미지·별도 오류·복구 근거는 ignored work/outputs에 보존한다.
+
+앱·Sites·EN_Card·DB/API/학습 기록·호스팅·의존성 변경과 배포0이다. 앱 타입·린트·전체 테스트·빌드는 정적 제작 범위라 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 반영은 미검증이며 전체 목표는 active다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `pale` 형용사(창백한)이며 이어 pan 명사·participate 동사·particularly 부사·pass 명사·passion 명사·path 명사·payment 명사·peaceful 형용사·percentage 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 264 painful의 HTTP 400 거절은 문구 변경·재호출하지 않고 이번 묶음의 호출 중단을 보존한다. 247 highlight 명사 HTTP 400도 재호출하지 않는다. 223 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight/painful 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `perfectly` 부사(완전히)이며 이어 performance 명사·personally 부사·persuade 동사·photographer 명사·photography 명사·pin 명사/동사·pipe 명사·place 동사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 264 painful의 HTTP 400 거절은 문구 변경·재호출하지 않으며 247 highlight 명사 HTTP 400도 재호출하지 않는다. 223 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight/painful 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
