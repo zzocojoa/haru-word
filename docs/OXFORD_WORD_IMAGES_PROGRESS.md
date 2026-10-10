@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2644 |
-| 제작자 품질 검수 통과 `approved` | 2607 |
+| 제작된 서로 다른 항목 | 2654 |
+| 제작자 품질 검수 통과 `approved` | 2617 |
 | 품질·의미·조건 보류 `held` | 38 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,158 |
+| 제작 대기 `waiting` | 1,148 |
 | 생성 중 / 실패·실행 중단 | 0 / 6 |
-| 내장 도구 호출·시작 슬롯 원장 | 2770 |
+| 내장 도구 호출·시작 슬롯 원장 | 2780 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 120 |
 
-이미지 미생성 항목은 제작 대기 1,158개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 6개를 합친 1,165개다. 제작된 2644개는 검수 통과 2607개와 이미지가 있는 보류 37개이며, 수정본 포함 PNG는 2764개다. 원장 2770회는 이미지가 반환된 2764회·`code`/`attraction`/`highlight` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 5회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2769회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,148개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 6개를 합친 1,155개다. 제작된 2654개는 검수 통과 2617개와 이미지가 있는 보류 37개이며, 수정본 포함 PNG는 2774개다. 원장 2780회는 이미지가 반환된 2774회·`code`/`attraction`/`highlight` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 5회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2779회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -6426,9 +6426,48 @@ Cambridge 공식 검색3그룹/36개 결과 개요에서9개 서로 다른 단�
 
 조회 오류1건은 존재하지 않는 이전 prepare 보조 파일을 찾은 것으로 실제 prepare 계약을 읽어 새 증명 스크립트를 구성했다. 조립 오류1건은 검증 실행 JavaScript의 workdir 속성 인용부호로 전체 평가 전 문법 실패가 났으며 새 이미지 호출 없이 고쳐 미실행 검사만 실행했다. 오류별 실제 출력·복구 근거를 work에 보존하며 이미지/시작 슬롯 증가0이다. 자료 추출·서비스 실패0이며 앱·Sites·EN_Card·DB/API/학습 기록·호스팅·의존성·배포 변경0이다. 앱 타입·린트·전체 테스트·빌드는 정적 제작 범위라 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 반영은 미검증이며 전체 목표는 active다.
 
+## 추가 269 제작·검수
+
+2026-10-10 KST 체크포인트: B1 pot 명사부터 prepared 형용사까지 교재 순서10개를 같은 내장 도구·스타일 참조로 각1회 제작했다. 원본10개와 개별320px 화면10개를 실제 확인해 모두 첫 시도 검수 통과했다. 이번 호출/반환10·승인10·품질 수정/신규 보류/신규 서비스 실패/자동 재시도/API 전환0이다.
+
+| 항목 ID·단어·품사 | 교재 뜻 | 실제 장면의 연상 단서 | 결과 |
+|---|---|---|---|
+| `9857fd3ba53a726b` pot n. | 화분 | 꽃/흙·테라코타 화분과 받침 | 검수 통과 |
+| `5c421a1431afab98` pour v. | 붓다 | 손에 잡힌 물병에서 팬까지 이어진 물줄기 | 검수 통과 |
+| `0fba97b11e6f899e` poverty n. | 빈곤 | 부족한 저장 식품/빈 그릇과 기본 식품/물의 두 공간 | 검수 통과 |
+| `8c8e7b845efe7ff7` powder n. | 가루 | 마른 갈색 가루·숟가락·옅은 액체 컵 | 검수 통과 |
+| `8f6ca579fd34ec4d` powerful adj. | 강력한 | 침묵과 숙고의 비유 맥락에 있는 두 성인 | 검수 통과 |
+| `9f32b9b7d6b7711d` practical adj. | 실용적인 | 의자를 잡고 열린 문/실제 공간을 살피는 성인 | 검수 통과 |
+| `13b9131121db2255` pray v. | 기도하다 | 무릎 꿇고 손을 모은 한 성인·촛불 | 검수 통과 |
+| `646fb50fa8d2b739` prayer n. | 기도 | 눈을 감고 함께 하는 조용한 기도의 자리 | 검수 통과 |
+| `c4bacc40481b5026` prediction n. | 예측 | 물리적 종이의 구름/빗방울 그림과 창밖 날씨 | 검수 통과 |
+| `7c75df628ff9b194` prepared adj. | 준비된 | 강연대의 무문자 자료·물잔·빈 발표 보드와 준비한 사람 | 검수 통과 |
+
+교재의 뜻·표현·예문/번역·출처를 각각 대조했다. 작성 예문8개와 교재 Tatoeba2개를 유지한다. powerful의 침묵 예문은 https://tatoeba.org/en/sentences/show/8345126 / CC-BY 2.0 (France) Attribution: tatoeba.org #8345126 (CK) & #8367163 (Eunhee), practical의 관점 예문은 https://tatoeba.org/en/sentences/show/319966 / CC-BY 2.0 (France) Attribution: tatoeba.org #319966 (CM) & #8367751 (Eunhee)로 교재에 표시된 출처이며 외부 원문을 새로 열었다고 주장하지 않는다. 그림에 글자를 넣거나 교재 원본을 변경하지 않았다.
+
+Cambridge의 3개 검색 그룹에서 반환된36개 페이지 개요 중 서로 다른 단어10개의 해당 정의 본문10개를 실제 읽었다. PDF·사전 사진·도식·전체 원문 페이지를 검사했다고 주장하지 않는다. 시작 절은 실제 완전한 줄 경계로 고정했고 검색 결과 미리보기의 중복 헤더를 제외했다. pot은 CONTAINER 중 flowerpot 하위 뜻, pour는 CAUSE TO FLOW, powerful은 큰 효과의 하위 뜻, practical은 ACTUAL/REAL, pray는 종교적 행위, prayer는 첫 가산 기도 말/생각, prepared는 READY를 선택했다. 핵심 발췌는 URL별25단어 이하이며 다음 공식 정의 절을 출처 기록과 연결했다:
+- https://dictionary.cambridge.org/dictionary/english/pot — a flowerpot : / `a flowerpot`
+- https://dictionary.cambridge.org/dictionary/english/pour — ### pour verb (CAUSE TO FLOW) / `to make a substance flow`
+- https://dictionary.cambridge.org/dictionary/english/poverty — # Meaning of poverty in English / `the condition of being extremely poor`
+- https://dictionary.cambridge.org/dictionary/english/powder — # Meaning of powder in English / `a loose, dry substance`
+- https://dictionary.cambridge.org/dictionary/english/powerful — having a very great effect: / `having a very great effect`
+- https://dictionary.cambridge.org/dictionary/english/practical — ### practical adjective (ACTUAL/REAL) / `relating to actual experience`
+- https://dictionary.cambridge.org/us/dictionary/english/pray — ## pray | Intermediate English / `to speak to God or a god`
+- https://dictionary.cambridge.org/dictionary/english/prayer — # Meaning of prayer in English / `the words that someone says or thinks`
+- https://dictionary.cambridge.org/dictionary/english/prediction — # Meaning of prediction in English / `a statement about what you think will happen`
+- https://dictionary.cambridge.org/dictionary/english/prepared — ready to deal with a situation: / `ready to deal with a situation`
+
+화분의 크기·식물 건강, 실제 가계 소득·교육의 빈곤 감소 인과, 외형으로 코코아/우유 온도, 침묵이 결과를 만든 영향력, 의자의 정확한 치수/이동 완료, 실제 신앙·기도 내용·응답, 미래 시점/예보 정확성, 발표 준비 수준/성공을 그림으로 인증하지 않는다. poverty는 두 공간의 기본 자원 대비이며 사람·민족 단서가 없다. powerful은 실물 무기가 아닌 교재의 비유 맥락이다. pray의 한 사람 동작과 prayer의 공유된 자리 모두 교재와 함께 읽고 정지 그림에서 말·생각 자체를 읽었다고 설명하지 않는다. prediction의 종이 그림은 구름 하나/빗방울 세 개를 실제 세었으며 문자·숫자·앱 UI가 아니다. 나뭇결·물 반사·물리적 단추/리벳·옷 봉제선·촛불·입자·빗줄기는 글자와 구분한다. 가려진 손가락·발·가구 다리·쌓인 종이/모든 입자를 모두 검사했다고 주장하지 않는다.
+
+누적 제작2654/승인2617/보류38/실패6/대기1148, 수정본 포함 PNG2774개, 원장2780회(확인된 내장 도구 호출2779·climb 미확인 슬롯1), 누적 품질 수정120회·전체 미생성 1,155개/미승인1,192개다. A1 총1077/승인1060/보류17/대기0/실패0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총903/승인584/보류5/대기310/실패4, B2 총839/승인1/보류0/대기838/실패0이다. plenty 두 시도/최종 품질 보류·letter/capital 글자 금지 조건 보류와 기존 모든 보류/실패를 그대로 유지한다.
+
+첫 PNG/320px 검사 `oxford-images-verification-1791621521555.json`(2026-10-10T08:38:41.554Z)와 최종 `oxford-images-verification-1791621653471.json`(2026-10-10T08:40:53.470Z)는10개 모두 통과했고 해시·파일·스크린샷 목록이 일치한다. 삽화 폭288px·뷰포트320px이며 항목명은 그림 밖 하단 QA 캡션이다. first-observations·first-reviews는 실제 확인한 메모/첫 판정을 고정했고 현재 메모와 일치한다. 재개19개 `oxford-resume-check-AnF8dQ`(이미지/API 호출0)·검사 스크립트3개 문법 검사 exit0을 확인했다. 전체3,809ID·기존3799행·모든 원본/시도별 해시·시작 원장을 보존 검사한다.
+
+이번 조회·조립·서비스 오류0이며 이전 체크포인트의 오류와 실제 복구·조회 기록도 work에 보존한다. 앱·Sites·EN_Card·DB/API/학습 기록·호스팅·의존성·배포 변경0이다. 앱 타입·린트·전체 테스트·빌드는 정적 제작 범위라 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 반영은 미검증이며 전체 목표는 active다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `pot` 명사(화분)이며 이어 pour 동사·poverty 명사·powder 명사·powerful 형용사·practical 형용사·pray 동사·prayer 명사·prediction 명사·prepared 형용사까지 교재 순서의 다음10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. plenty 두 시도는 품질 보류이며 세 번째 호출은 하지 않는다. 264 painful/247 highlight 명사의 HTTP 400 거절은 문구 변경·재호출하지 않는다. 223 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight/painful 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 이미지 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `presentation` 명사(발표)이며 이어 press 명사/동사·pressure 명사·pretend 동사·previous 형용사·previously 부사·priest 명사·primary 형용사·prince 명사까지 교재 순서의 다음10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. plenty 두 시도는 품질 보류이며 세 번째 호출은 하지 않는다. 264 painful/247 highlight 명사의 HTTP 400 거절은 문구 변경·재호출하지 않는다. 223 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight/painful 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 이미지 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
