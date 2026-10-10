@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2654 |
-| 제작자 품질 검수 통과 `approved` | 2617 |
+| 제작된 서로 다른 항목 | 2664 |
+| 제작자 품질 검수 통과 `approved` | 2627 |
 | 품질·의미·조건 보류 `held` | 38 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,148 |
+| 제작 대기 `waiting` | 1,138 |
 | 생성 중 / 실패·실행 중단 | 0 / 6 |
-| 내장 도구 호출·시작 슬롯 원장 | 2780 |
+| 내장 도구 호출·시작 슬롯 원장 | 2790 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 120 |
 
-이미지 미생성 항목은 제작 대기 1,148개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 6개를 합친 1,155개다. 제작된 2654개는 검수 통과 2617개와 이미지가 있는 보류 37개이며, 수정본 포함 PNG는 2774개다. 원장 2780회는 이미지가 반환된 2774회·`code`/`attraction`/`highlight` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 5회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2779회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,138개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 6개를 합친 1,145개다. 제작된 2664개는 검수 통과 2627개와 이미지가 있는 보류 37개이며, 수정본 포함 PNG는 2784개다. 원장 2790회는 이미지가 반환된 2784회·`code`/`attraction`/`highlight` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 5회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2789회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -6465,9 +6465,61 @@ Cambridge의 3개 검색 그룹에서 반환된36개 페이지 개요 중 서로
 
 이번 조회·조립·서비스 오류0이며 이전 체크포인트의 오류와 실제 복구·조회 기록도 work에 보존한다. 앱·Sites·EN_Card·DB/API/학습 기록·호스팅·의존성·배포 변경0이다. 앱 타입·린트·전체 테스트·빌드는 정적 제작 범위라 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 반영은 미검증이며 전체 목표는 active다.
 
+## 추가 270 제작·검수
+
+2026-10-10 KST 체크포인트: B1 presentation 명사부터 prince 명사까지 교재 순서10개를 같은 내장 도구·스타일 참조로 각1회 제작했다. 원본10개와 개별320px 화면10개를 실제 확인해 모두 첫 시도 검수 통과했다. 이번 호출/반환10·승인10·품질 수정/신규 보류/신규 서비스 실패/자동 재시도/API 전환0이다.
+
+| 항목 ID·단어·품사 | 교재 뜻 | 실제 장면의 연상 단서 | 결과 |
+|---|---|---|---|
+| `5c37e4053005cfb4` presentation n. | 발표 | 발표자·보드의 원/삼각형·청중2 | 검수 통과 |
+| `ba650028bb1ea98d` press n. | 언론 | 대변인·마이크 기자·사진기자 | 검수 통과 |
+| `a11e5a5361af2dfd` press v. | 누르다 | 파란 물리적 버튼에 닿은 검지 | 검수 통과 |
+| `c89124b44746193f` pressure n. | 압력 | 팔 커프·호스·무숫자 압력계와 벌브 | 검수 통과 |
+| `f1d412aa03af4cec` pretend v. | ~인 척하다 | 무대와 의상을 벗는 두 장면의 배우 | 검수 통과 |
+| `1c7f555be3a18479` previous adj. | 이전의 | 열린 파란 책 → 닫힌 파란 책/열린 황토 책의 두 장면 | 검수 통과 |
+| `3a37eb10101aedc1` previously adv. | 이전에 | 전에 보았던 도형 책을 다시 다루는 두 장면 | 검수 통과 |
+| `97a95ce35f10a74c` priest n. | 성직자 | 흰 목깃·검은 복식·예배당/촛불 | 검수 통과 |
+| `c5255983e457b0ce` primary adj. | 초등의 | 교사·아동2·낮은 책상·보드의 도형3 | 검수 통과 |
+| `c30d852d78bf52e7` prince n. | 왕자 | 앞의 젊은 남성과 뒤의 왕관/좌석 두 인물 | 검수 통과 |
+
+교재 뜻·품사·표현·예문/번역·출처를 각각 대조했다. 작성 예문6개와 교재 Tatoeba4개를 유지한다. 아래는 교재에 표시된 원출처이며 외부 Tatoeba 원문을 새로 열었다고 주장하지 않는다.
+
+press n. — https://tatoeba.org/en/sentences/show/2720966 / CC-BY 2.0 (France) Attribution: tatoeba.org #2720966 (CM) & #3677003 (ssuss32)
+
+pressure n. — https://tatoeba.org/en/sentences/show/310004 / CC-BY 2.0 (France) Attribution: tatoeba.org #310004 (Eldad) & #8362566 (Eunhee)
+
+pretend v. — https://tatoeba.org/en/sentences/show/2929283 / CC-BY 2.0 (France) Attribution: tatoeba.org #2929283 (CK) & #4748305 (kimhkng)
+
+primary adj. — https://tatoeba.org/en/sentences/show/7541895 / CC-BY 2.0 (France) Attribution: tatoeba.org #7541895 (CK) & #8364885 (Eunhee)
+
+Cambridge 검색4그룹에서 반환된48개 페이지 개요 중 서로 다른 단어9개의 해당 정의 본문10개와 blood pressure/primary school 보조 정의2개를 실제 읽었다. 첫 검색에는 press의 PUSH 동사 정의가 없어 추가 검색1그룹으로 보완했으며 검색 횟수를3그룹으로 축소 보고하지 않는다. PDF·사전 사진·도식·전체 원문 페이지를 검사했다고 주장하지 않는다. 해당 품사와 교재 용법을 선택하고 다른 하위 뜻을 경계로 제외했다. 핵심 발췌는 같은 URL의 합계25단어 이하로 관리한다.
+
+- [Cambridge presentation: presentation noun (EVENT)](https://dictionary.cambridge.org/dictionary/english/presentation) — `a talk giving information about something`
+- [Cambridge press: press noun (NEWSPAPERS)](https://dictionary.cambridge.org/dictionary/english/press) — `reporters and photographers who work for them`
+- [Cambridge press: press verb (PUSH)](https://dictionary.cambridge.org/dictionary/english/press) — `to push something firmly`
+- [Cambridge pressure: the force that a liquid or gas produces when it presses against an area:](https://dictionary.cambridge.org/dictionary/english/pressure) — `the force that a liquid or gas produces`
+- [Cambridge pretend: pretend | American Dictionary](https://dictionary.cambridge.org/dictionary/english/pretend?topic=faking-and-pretending) — `to behave as if something is true when you know that it is not`
+- [Cambridge previous: Meaning of previous in English](https://dictionary.cambridge.org/us/dictionary/english/previous) — `happening or existing before something or someone else`
+- [Cambridge previously: Meaning of previously in English](https://dictionary.cambridge.org/us/dictionary/english/previously) — `before the present time or the time referred to`
+- [Cambridge priest: Meaning of priest in English](https://dictionary.cambridge.org/us/dictionary/english/priest) — `trained to perform religious duties in the Christian Church`
+- [Cambridge primary: primary adjective [not gradable] (IN EDUCATION)](https://dictionary.cambridge.org/dictionary/english/primary) — `relating to the first part of a child’s education`
+- [Cambridge prince: Meaning of prince in English](https://dictionary.cambridge.org/dictionary/english/prince) — `an important male member of a royal family`
+- [Cambridge pressure: Meaning of blood pressure in English](https://dictionary.cambridge.org/dictionary/english/blood-pressure) — `a measure of the pressure at which the blood flows through the body`
+- [Cambridge primary: Meaning of primary school in English](https://dictionary.cambridge.org/dictionary/english/primary-school) — `a school for children between five and eleven years old`
+
+presentation은 정보를 전하는 TALK/EVENT이며 준비 상태·시상·외형 꾸밈이 아니다. press 명사는 보도기관/기자 집단, 동사는 물리적으로 누르기이며 두 용법을 구분했다. pressure는 유체의 압력과 혈압 표현이며 진료자의 커프/호스/게이지 준비 맥락을 사용했다. 무숫자 포인터는 실제 혈압 수치·저혈압 진단·건강 상태·측정 절차의 정확성으로 해석하지 않는다. pretend는 무대 의상과 역할 연기이며 실제 형제 관계·기만·속마음을 그림에서 확정하지 않는다. previous는 이전 수업이라는 명사를 수식하고 previously는 전에 학습한 행동의 시간 관계를 수식한다. 두 장면은 연상 관례이며 실제 날짜·수업 순서·기억·성취의 증거가 아니다. priest는 교재에 맞는 기독교 성직자 맥락이며 실제 성직 자격/교파나 모든 종교의 복식을 일반화하지 않는다. primary는 초등 교육이며 가장 중요한/원초적인/예비선거 뜻이 아니다. prince는 왕실 남성 자녀의 맥락이며 군주/작은 나라 통치자 용법이나 실제 혈연·나이·계승·신원을 인증하지 않는다.
+
+실제 원본에서 pretend의 의상에 반복 금색 끈장식과 행거의 별도 의상2벌이 추가된 것을 기록했다. priest의 망토는 요청보다 길고 prince에는 작은 뾰족 왕관/브로치·긴 망토와 뒤 남성의 털무늬 옷깃이 추가됐다. 요청과 픽셀/의상 재고가 그대로 일치한다고 주장하지 않는다. 반복 의상 고리·단추/브로치·왕관 부품·벨트·마이크 망·카메라 렌즈 고리·신발 뒤꿈치 면·나뭇결·보드/책의 원형/사각형/삼각형은 물리적 요소이며 글자·숫자·로고·앱 UI와 구분한다. 가려진 손가락·발·가구 다리·의상 내부를 모두 검사했다고 표시하지 않는다.
+
+누적 제작2664/승인2627/보류38/실패6/대기1138, 수정본 포함 PNG2784개, 원장2790회(확인된 내장 도구 호출2789·climb 미확인 슬롯1), 누적 품질 수정120회·전체 미생성 1,145개/미승인1,182개다. A1 총1077/승인1060/보류17/대기0/실패0, A2 총 990/검수 통과 972/보류 16/대기 0/실패 2, B1 총903/승인594/보류5/대기300/실패4, B2 총839/승인1/보류0/대기838/실패0이다. plenty 두 시도/최종 품질 보류·letter/capital 글자 금지 조건 보류와 기존 모든 보류/실패를 유지한다.
+
+첫 PNG/320px 검사 `oxford-images-verification-1791624340479.json`(2026-10-10T09:25:40.478Z)와 최종 `oxford-images-verification-1791624502901.json`(2026-10-10T09:28:22.901Z)는10개 모두 통과했고 해시·파일·스크린샷 목록이 일치한다. 삽화 폭288px·뷰포트320px이며 항목명은 그림 밖 하단 QA 캡션이다. first-observations·first-reviews는 실제 확인한 메모/첫 판정을 고정했고 현재 메모와 일치한다. 재개19개 `oxford-resume-check-OuObvE`(이미지/API 호출0)·검사 스크립트3개 문법 검사 exit0을 확인했다. 전체3,809ID·기존3799행·모든 원본/시도별 해시·시작 원장을 보존 검사한다.
+
+이번 준비 목록의 여분 닫는 괄호로 조립 구문 오류1건이 도구 실행 전에 발생했다. 해당 호출에서는 파일/원장/이미지 변경0이며 목록을 고쳐 미실행 작업만 진행했다. 조회/정의 추출/새 서비스 오류0이다. 이전269차 푸시 뒤 다음 묶음 원문 파일 저장은 성공했지만 비직렬화 반환값 저장이 실패한 별도 조립 오류1건도 해당 closeout 기록에 보존했다. 사전 조회나 이미지를 중복 호출하지 않았고 기존 오류/복구 기록을 제거하지 않는다. 앱·Sites·EN_Card·DB/API/학습 기록·호스팅·의존성·배포 변경0이다. 앱 타입·린트·전체 테스트·빌드는 정적 제작 범위라 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 반영은 미검증이며 전체 목표는 active다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `presentation` 명사(발표)이며 이어 press 명사/동사·pressure 명사·pretend 동사·previous 형용사·previously 부사·priest 명사·primary 형용사·prince 명사까지 교재 순서의 다음10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. plenty 두 시도는 품질 보류이며 세 번째 호출은 하지 않는다. 264 painful/247 highlight 명사의 HTTP 400 거절은 문구 변경·재호출하지 않는다. 223 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight/painful 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 이미지 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `princess` 명사(왕녀)이며 이어 principal 명사·printing 명사·prisoner 명사·private 형용사·producer/production/profession/profit 명사·program 동사까지 교재 순서의 다음10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. plenty 두 시도는 품질 보류이며 세 번째 호출은 하지 않는다. 264 painful/247 highlight 명사의 HTTP 400 거절은 문구 변경·재호출하지 않는다. 223 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight/painful 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 이미지 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
