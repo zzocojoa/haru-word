@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 2597 |
-| 제작자 품질 검수 통과 `approved` | 2561 |
+| 제작된 서로 다른 항목 | 2604 |
+| 제작자 품질 검수 통과 `approved` | 2568 |
 | 품질·의미·조건 보류 `held` | 37 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 1,206 |
-| 생성 중 / 실패·실행 중단 | 0 / 5 |
-| 내장 도구 호출·시작 슬롯 원장 | 2721 |
+| 제작 대기 `waiting` | 1,198 |
+| 생성 중 / 실패·실행 중단 | 0 / 6 |
+| 내장 도구 호출·시작 슬롯 원장 | 2729 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 119 |
 
-이미지 미생성 항목은 제작 대기 1,206개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 5개를 합친 1,212개다. 제작된 2597개는 검수 통과 2561개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2716개다. 원장 2721회는 이미지가 반환된 2716회·`code`/`attraction`/`highlight` 명사 HTTP 400과 `route` HTTP 408 무이미지 실패 4회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2720회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 1,198개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 6개를 합친 1,205개다. 제작된 2604개는 검수 통과 2568개와 이미지가 있는 보류 36개이며, 수정본 포함 PNG는 2723개다. 원장 2729회는 이미지가 반환된 2723회·`code`/`attraction`/`highlight` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 5회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 2728회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -6274,9 +6274,43 @@ odd는 실제 사과 다섯 개를 두 쌍·한 개로 나눈 장면이며 예�
 
 근거(로컬 Git 제외): work/oxford-batch-263-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-source.json·scenes.json·originals.json·observations.json·first-observations.json·first-reviews.json·reviews.json·lookup-errors.json·goal-turn-audit.json·goal-resume-audit.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T04:41:19.061Z, 최종 2026-10-10T04:43:16.371Z, oxford-images-verification-1791607396371.json. 새 자산은 기존 outputs 경로에만 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
 
+## 추가 264 제작·검수 · 서비스 오류로 부분 저장
+
+2026-10-10 KST 체크포인트: B1 ought 조동사부터 pan 명사까지 다음 10항목을 준비했다. 내장 도구 호출 8회에서 이미지 7개를 받았고 원본·개별 320px 화면 검수로 7개 모두 승인했다. 여덟 번째 painful 요청은 출력 단계 HTTP 400 moderation_blocked(분류 self-harm)로 종료돼 이 묶음의 추가 호출을 중단했다. 반환된 이미지가 없어 해당 출력의 내용을 판단하지 않는다. painful 문구 변경·재호출·자동 재시도·별도 API 전환0, pale/pan 2항목은 호출하지 않았으며 준비 전 대기 행으로 정확히 복구했다.
+
+| 항목 ID·단어·품사 | 교재 뜻 | 실제 장면의 연상 단서 | 결과 |
+|---|---|---|---|
+| `8d093a2a5d58f9e5` ought modal v. | 해야 한다 | 열린 문 앞 두 성인이 출발을 권하고 준비하는 자세 | 검수 통과 v1 |
+| `3eed4b95f5d44920` ours pron. | 우리의 것 | 강 옆 집 한 채·두 성인과 열쇠 한 개 | 검수 통과 v1 |
+| `5c74df2899bca407` outdoor adj. | 야외의 | 초원 길·열린 하늘·배낭을 멘 두 성인 | 검수 통과 v1 |
+| `cf74cbaa8c461744` outdoors adv. | 야외에서 | 집 밖 잔디에서 공 한 개로 노는 두 성인 | 검수 통과 v1 |
+| `a0051d0bfcf7c747` overseas adj. | 해외의 | 여행 짐·책을 든 두 학생을 맞는 대학 담당자·지구본 | 검수 통과 v1 |
+| `6ed44411b67f5fd6` pack n. | 묶음 | 카드 더미 한 묶음과 뒷면 세 장 | 검수 통과 v1 |
+| `fe0bee7352fdf583` package n. | 소포 | 갈색 종이와 끈으로 포장한 소포 한 개 | 검수 통과 v1 |
+| `d3a4964e35b20d45` painful adj. | 고통스러운 | 실제 이미지 없음 | HTTP 400 실패·재호출 없음 |
+| `c33baed4972ab439` pale adj. | 창백한 | 호출하지 않음 | 준비 전 대기 복구 |
+| `97d71dc8985dbe0e` pan n. | 팬 | 호출하지 않음 | 준비 전 대기 복구 |
+
+현재 누적 제작 2604개·검수 통과 2568개·보류 37개(이미지 있는 36/없는 letter 1)·실패/실행 중단 6개·제작 대기 1,198개다. 전체 미생성 1,205개, 미검수 통과 1,241개로 전체 목표는 active이며 완료로 바꾸지 않는다. 수정본 포함 PNG 2723개, 원장 2729회, 확인된 내장 도구 호출은 2728회다. 품질 수정0이며 누적 품질 수정119회를 유지한다. 원본 7개의 최초/최종 PNG 해시는 일치한다.
+수준별: A1 총 1077/검수 통과 1060/보류 17/대기 0/실패 0; A2 총 990/검수 통과 972/보류 16/대기 0/실패 2; B1 총 903/검수 통과 535/보류 4/대기 360/실패 4; B2 총 839/검수 통과 1/보류 0/대기 838/실패 0.
+
+Cambridge 검색 3그룹/36개 반환 페이지 범위에서 10개 서로 다른 단어의 선택 본문 10개를 읽었다. [ought DUTY](https://dictionary.cambridge.org/dictionary/english/ought)는 권고/필요 행동, [ours](https://dictionary.cambridge.org/us/dictionary/english/ours)는 화자를 포함한 소유·관계, [outdoor](https://dictionary.cambridge.org/dictionary/english/outdoor)와 [outdoors 부사](https://dictionary.cambridge.org/us/dictionary/english/outdoors)는 야외의 환경과 행동 위치를 구분한다. [overseas Business 형용사](https://dictionary.cambridge.org/dictionary/english/overseas), [pack의 playing cards 명사 본문](https://dictionary.cambridge.org/dictionary/english/pack), [package PAPER OBJECT](https://dictionary.cambridge.org/dictionary/english/package)를 선택하고 다른 품사/뜻/사전 사진 경계를 제외했다. painful은 HURT 정의를 검토했지만 생성 출력은 받지 못했다. pale의 얼굴색·pan의 조리 용기 본문은 다음 대기 자료이며 생성 완료로 세지 않는다. supporting 발췌0·직접 페이지 열기0, 전체 원문·PDF·사진·설비 도면을 검토했다고 주장하지 않는다. 경계/해석 기록10건은 요청 실패가 아니다.
+
+준비한 10항목의 예문은 작성 예문8·Tatoeba 참고 예문2이며 실제 반환된 7항목은 작성 예문5·Tatoeba2다. 교재·번역·URL·귀속은 변경하지 않았다. ought의 [Tatoeba #248358](https://tatoeba.org/en/sentences/show/248358)은 CC-BY 2.0 (France) Attribution: tatoeba.org #248358 (CK) & #5526762 (raining211), package의 [Tatoeba #11104540](https://tatoeba.org/en/sentences/show/11104540)은 CC-BY 2.0 (France) Attribution: tatoeba.org #11104540 (CK) & #11104668 (intertime)다. Tatoeba 페이지를 직접 읽었다고 주장하지 않는다.
+
+ought의 추가 어깨 가방·overseas의 추가 가방과 무지 책을 실제 관측에 기록했다. 권고/의무·소유권·동일 인물·시간/인과·국적/입학·전체 카드 수/52장·소포 내용물/호주 목적지/배송 접수를 정적 그림으로 입증하지 않는다. 피부색으로 국적을 판정하지 않으며 가려진 얼굴/사지 전체를 검사했다고 표시하지 않는다. 카드 테두리·옷 줄무늬·단추·솔기·지퍼·창살·끈은 물리 형태이며 글자로 오인하지 않는다. 선택 본문·짧은 인용·장면 해석을 보존하고 같은 URL 합산 인용은 25단어 이하로 제한한다.
+
+실제 서비스 오류는 painful의 출력 단계 거절 1건이며 요청 ID df279c74-9201-408f-b360-d17a0d311ad9를 보존한다. 결과가 없는데 generating으로 남아 있던 행은 실제 종결 오류 근거로 failed 처리하고 current를 비웠다. 메타데이터 원자 journal로 저장하며 기존 7파일·과거 실패5건·보류37건·첫 부정 판정·품질 수정·climb 전달 미확인 중단은 보존했다. 이 거절은 자동 승인 검토의 거절이 아니다. 현재 이어받을 도구 핸들은 없다.
+
+읽기 전용 조회 오류/보정 4건을 기록했다: 일시 journal 부재(명령 전체 exit0), worktree AGENTS.md 부재, 검증기 파일명 오기(exit1), 초기 수량 검사에서 e.files.original을 사용한 스키마 오독(exit0). 실제 검증기 경로·e.file·자산 원본 위치로 대조했고 2604항목/2723 PNG·원본 누락0을 확인했다. 이 조회들의 이미지 호출 증가0이다. 오케스트레이션 오류0이다. 보존 검사의 과거 실패5건 확인이 현재 실패6건을 대상으로 하여 한 번 실패(exit1)했고, 해당 한 문장만 변경 전 snapshot의 실패5건에 고정했다. 현재 실패6건·기존5건 보존·새 painful 실패1건은 별도 검사한다. 이미지 호출 증가0이며 첫 원본/축소 메모·첫 리뷰는 first-observations·first-reviews에 고정했다.
+
+검증: 최초 PNG/320px 7개·최종 PNG/320px 7개·메타데이터 pass, 재개 보호 19개(oxford-resume-check-Yh7YeO) pass, 세 제작/검증 스크립트의 node --check를 이번에 새로 실행해 모두 exit0다. 앱 코드 변경이 없어 앱 전체 테스트·타입·린트·빌드·Sites/Worker 배포는 실행하지 않았다. 실제 iPhone·독립 학습자 평가·화면 연결/호스팅은 미검증/후속 범위다. 기존 글자 금지·letter/capital 보류와 12개 교열 후보·추가261 neither 후보를 유지한다.
+
+근거(로컬 Git 제외): work/oxford-batch-264-before.json·sources.json·dictionary-bodies.json·source-evidence.json·research-adjustments.json·web-source.json·scenes.json·originals.json·observations.json·first-observations.json·first-reviews.json·reviews.json·failure.json·service-error.json·lookup-errors.json·goal-turn-audit.json·goal-resume-audit.json·check-results.json·meta.json. 최초 검증 시각 2026-10-10T05:18:03.403Z; 최종 2026-10-10T05:19:28.113Z (oxford-images-verification-1791609568113.json). 새 자산은 기존 outputs 경로에 보존하고 연결 목록·계획·진행 기록 세 파일만 Git에 반영한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 B1 `ought` 조동사(해야 한다)이며 이어 ours 대명사·outdoor 형용사·outdoors 부사·overseas 형용사·pack 명사·package 명사·painful 형용사·pale 형용사·pan 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 247의 highlight 명사 HTTP 400 오류는 재호출하지 않는다. 223의 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight 명사 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
+다음 제작 대기 첫 항목은 B1 `pale` 형용사(창백한)이며 이어 pan 명사·participate 동사·particularly 부사·pass 명사·passion 명사·path 명사·payment 명사·peaceful 형용사·percentage 명사까지 교재 순서의 다음 10개를 검토한다. 모두 현재 장면 미준비·추가 호출 전이다. 264 painful의 HTTP 400 거절은 문구 변경·재호출하지 않고 이번 묶음의 호출 중단을 보존한다. 247 highlight 명사 HTTP 400도 재호출하지 않는다. 223 climb 명사 시작 슬롯은 제공자 전달 미확인이며 결과 발견 시 기존 기록과 대조한다. eventually/direct 부사/block/bee/usual/top·schedule/lend/less의 세 번째 호출과 code/route/attraction/highlight/painful 자동 재시도는 하지 않는다. 기존 두 시도·첫 부정 판정·모든 보류를 보존한다. 현재 이어받을 도구 핸들은 없고 전체 목표는 active다.
 
 ```powershell
 node scripts/oxford-images.cjs status
