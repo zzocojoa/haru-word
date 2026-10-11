@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3256 |
-| 제작자 품질 검수 통과 `approved` | 3217 |
+| 제작된 서로 다른 항목 | 3266 |
+| 제작자 품질 검수 통과 `approved` | 3227 |
 | 품질·의미·조건 보류 `held` | 40 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 545 |
+| 제작 대기 `waiting` | 535 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3408 |
+| 내장 도구 호출·시작 슬롯 원장 | 3418 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 145 |
 
-이미지 미생성 항목은 제작 대기 545개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 553개다. 제작된 3256개는 검수 통과 3217개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3401개다. 원장 3408회는 이미지가 반환된 3401회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3407회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 535개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 543개다. 제작된 3266개는 검수 통과 3227개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3411개다. 원장 3418회는 이미지가 반환된 3411회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3417회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -7960,9 +7960,38 @@ noun [ C ]: [someone or something that has been hurt, damaged, or killed or has 
 - 기본 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`에 복사본을 보존하며 기본 생성 원본도 유지했다. 실제 프롬프트/참조/해시는 목록 시도와 `work/oxford-batch-330-` 영수증에 있다. Git에는 목록·계획·진행 문서 3개만 반영한다.
 - UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·배포를 변경하지 않았다. 마이그레이션·관측 영향은 없으며 해당 미배포 목록/문서만 되돌릴 수 있다. 전체 3,809개 검수 통과 목표는 아직 미완료다.
 
+## 추가 331 · B2 탐사·노출·연장·정도·외부·놀라움·극단·시설·실패·신앙 — 2026-10-12
+
+- 기준 커밋: `69af26d9f90c5cc3c3d6e75171ab0fdc1ea28298`. 교재 10개 ID·품사·뜻·표현·예문·출처와 공식 Cambridge 10개 표제어의 기본 정의 10개·보조 본문 3개를 대조했다. 검색 개요 4그룹 각 12개·총 48개와 실제 읽은 본문을 보존했다.
+- 내장 `image_gen` 10회로 각 항목 1장을 제작했다. 원본 10장·개별 320px 화면 10장을 실제 확인했고 품질 수정·새 보류·서비스 오류는 없다. 첫 원본/관측/검토·프롬프트/참조·슬롯/응답 영수증 23개를 고정했다.
+
+| 항목 | 검토한 연상 단서 | 사전 근거 |
+|---|---|---|
+| exploration | 암석을 조사하는 우주복 인물과 탐사차 | [용법](https://dictionary.cambridge.org/dictionary/english/exploration) |
+| expose | 천을 걷어 그릇을 드러내는 양손 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/expose) |
+| extend | 짧은 사다리와 길게 펼친 사다리 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/extend) |
+| extent | 두 판의 작은/넓은 칠 영역 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/extent) |
+| external | 노트북 밖에 연결된 외장 드라이브 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/external) |
+| extraordinary | 바위 아치 경치를 바라보는 두 등산객 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/extraordinary) |
+| extreme | 얼음/서리와 기포/증기의 반대 상태 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/extreme) |
+| facility | 농구대·벤치·코트가 있는 실내 홀 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/facility) |
+| failure | 미완성 블록 탑과 넘어진 블록 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/failure) |
+| faith | 벤치에서 손을 모아 기도하는 자세 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/faith) |
+
+- 작성 예문 8개와 Tatoeba 참고 예문 2개는 원문/번역/출처 그대로 유지했다. failure #264973(CM)·#6623340(GanbareHigh3999), faith #269632(CM)·#4719727(kumdonghee)의 CC BY 2.0 FR과 원문 URL을 보존했다. 단어·교재 파일 해시는 변경하지 않았다.
+- extend의 물리 길이 연장과 deadline의 시간 연장, extent의 범위와 부분적 동의, facility 단수와 sports facilities 복수를 보조 본문에서 대조했다. 그림은 기본 뜻의 연상 단서이며 실제 마감일/하루·동의·학교/시설의 품질을 증명하지 않는다. 이 3개 조회 관측은 모두 해결되었으며 추가 이미지 호출은 없다.
+- 원본/320px에서 사다리 2개·성인 1명, 나무판 2개, 장치 2개·케이블 1개, 등산객 2명, 금속 그릇 2개·얼음 덩어리 1개, 농구대 1개·벤치 1개·인물 1명을 각각 직접 셌다. 가려진 전체 블록 개수나 정확한 칠 면적/비율은 단정하지 않았다.
+- exploration의 실제 임무·행성·발견, expose의 사진 손상/노출 시간, external의 백업 성공·데이터, extraordinary의 실제 희귀성/규모, extreme의 온도·상변화/안전은 인증하지 않는다. failure는 시도가 성공하지 못한 단서이며 사람을 실패자로 규정하거나 부모를 원인으로 지목하지 않는다. faith는 기도 자세의 단서이며 교재의 특정 여성·교단·신의 존재·흔들리지 않는 내적 확신을 인증하지 않는다.
+- 사다리 H형 구조·창살 Y/십자형 구조·케이블 굴곡·증기·코트 선·우주복 버클·옷/나무/금속/암석 결과 손금은 실제 사물 형태다. 그림 내부 글자·숫자·화살표·눈금·말풍선·표찰·로고·UI는 없다. 아래 표제어/품사/뜻은 로컬 QA 페이지 캡션이다.
+- 첫 검사 결과 출력이 문맥 한도로 잘려 같은 캐시/QA JSON을 분할해 읽었다. 수집·검사·이미지 호출을 반복하지 않았고 모든 종료 코드 0을 확인했다. 이 출력 복구 관측 1건을 보존했다.
+- 이미지 검사는 승인 전 `2026-10-11T21:11:57.659Z`·승인 후 `2026-10-11T21:18:49.792Z`에 10개 연결·해시·PNG 디코딩·로컬 Chromium 320px 렌더링을 통과했다. 재개 회귀 19개와 CJS 3개 구문 검사도 종료 코드 0이다. 앱 전체 테스트·타입·린트·빌드는 정적 이미지/목록/문서 범위로 실행하지 않았다. 실제 iPhone·독립 학습자 평가는 미실시다.
+- 현재 3266개 항목 제작·검수 통과 3227개·PNG 3411개·대기 535개·보류 40개·실패/실행 중단 7개다. 원장 3418회는 확인된 내장 호출 3417회와 제공자 전달 미확인 시작 슬롯 1개를 포함한다. 누적 품질 수정은 145회다. 기존 조건 보류·최초 기록·보류/실패·교열 후보를 유지한다.
+- 복사본은 기본 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`에 보존하며 생성 원본도 유지했다. 실제 프롬프트/참조/해시는 목록의 시도와 `work/oxford-batch-331-` 영수증에 있다. Git에는 목록·계획·진행 문서 3개만 반영한다.
+- UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·배포를 변경하지 않았다. 마이그레이션·관측 영향은 없으며 이 미배포 목록/문서만 되돌릴 수 있다. 전체 3,809개 검수 통과 목표는 미완료다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `exploration` n. — 탐사 (`5ac1593a58b99fc0`)다. 기존 보류/실패는 위 기록대로 유지하며 같은 재개 보호를 따른다.
+다음 제작 대기 첫 항목은 `fault` n. — 잘못 (`bb110039511d5536`)다. 기존 보류/실패는 위 기록대로 유지하며 같은 재개 보호를 따른다.
 
 ```powershell
 node scripts/oxford-images.cjs status
