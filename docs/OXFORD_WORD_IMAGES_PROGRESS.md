@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3176 |
-| 제작자 품질 검수 통과 `approved` | 3137 |
+| 제작된 서로 다른 항목 | 3186 |
+| 제작자 품질 검수 통과 `approved` | 3147 |
 | 품질·의미·조건 보류 `held` | 40 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 625 |
+| 제작 대기 `waiting` | 615 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3328 |
+| 내장 도구 호출·시작 슬롯 원장 | 3338 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 145 |
 
-이미지 미생성 항목은 제작 대기 625개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 633개다. 제작된 3176개는 검수 통과 3137개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3321개다. 원장 3328회는 이미지가 반환된 3321회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3327회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 615개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 623개다. 제작된 3186개는 검수 통과 3147개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3331개다. 원장 3338회는 이미지가 반환된 3331회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3337회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -7723,9 +7723,37 @@ noun [ C ]: [someone or something that has been hurt, damaged, or killed or has 
 
 공식 근거: [decrease](https://dictionary.cambridge.org/dictionary/english/decrease) · [deeply](https://dictionary.cambridge.org/dictionary/learner-english/deeply) · [defeat](https://dictionary.cambridge.org/us/dictionary/learner-english/defeat) · [defend](https://dictionary.cambridge.org/dictionary/learner-english/defend) · [defense](https://dictionary.cambridge.org/dictionary/english/defence) · [delay](https://dictionary.cambridge.org/dictionary/learner-english/delay?amp=true&q=delay_1) · [deliberate](https://dictionary.cambridge.org/dictionary/learner-english/deliberate) · [deliberately](https://dictionary.cambridge.org/us/dictionary/learner-english/deliberately)
 
+## 추가 323 · B2 배송·요구·상태·관계 — 2026-10-12
+
+- 기준 커밋: `7daba45906ebe0d6f5ccfc96a8ea2859bd5f267e`. 교재 원본·ID·품사·기본 뜻·표현·예문·출처를 먼저 확인했다. 이번 10개는 Cambridge Learner’s Dictionary 9개 표제어의 실제 정의 본문 10개와 36개 페이지 개요(12+12+12)를 대조했다. 보충 정의는 0개다.
+- 10개 항목을 내장 도구로 각 1회 생성했다. 10장 모두 원본과 개별 320px 축소 화면을 실제로 열어 검수 통과했다. 수정 생성·새 보류·새 실패는 없다. 첫 생성·검토·프롬프트·참조·해시·호출/시작 슬롯 영수증을 보존했다.
+
+| 항목 | 기본 뜻 | 확인한 연상 단서 | 사전 근거 |
+|---|---|---|---|
+| delivery | 배송 | 상자를 건네는 배송자와 수령자 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/delivery) |
+| demand 명사 | 수요 | 채소를 원하는 고객 다섯 명과 판매자 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/demand) |
+| demand 동사 | 요구하다 | 신선한 채소를 가리키며 요구하는 고객 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/demand) |
+| demonstrate | 시연하다 | 장치를 조작하는 사람과 지켜보는 두 사람 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/demonstrate) |
+| deny | 부인하다 | 깨진 토분을 가리키는 사람과 부인하는 사람 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/deny) |
+| depressed | 우울한 | 처진 어깨와 낮은 고개를 보이는 사람 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/depressed) |
+| depressing | 우울하게 하는 | 화자와 침울해진 청자의 관계 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/depressing) |
+| depth | 깊이 | 호수 수면부터 바닥까지 내려간 줄과 돌추 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/depth) |
+| desert 동사 | 버리고 떠나다 | 마을을 떠나는 사람들과 사람이 없는 마을 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/desert) |
+| deserve | ~할 자격이 있다 | 정원 작업 후 휴식을 취하는 같은 사람 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/deserve) |
+
+- 작성 예문 7개, Tatoeba 예문 3개를 유지했다. `demonstrate`는 #3736920(CK)/#8358603(Eunhee), `deny`는 #42118(CK)/#11105678(intertime), `depressed`는 #5916291(CK)/#8365696(Eunhee)이며 기존 CC-BY 2.0(France) 출처·교재 지문을 보존했다.
+- 배송 그림의 상자는 닫혀 있어 내용물을 확인할 수 없다. 원본 메모의 초안 ‘빈 골판지 상자’를 검토 고정 전에 ‘무표기 닫힌 골판지 상자’로 정확히 고쳤으며 수정 전 메모도 별도 보존했다. 실제 배송 상태·수요·요구 강도·시연 성능·파손 책임·임상 진단·감정 인과관계·수심·이주 원인·휴식 자격을 이미지로 인증하지 않는다.
+- `deny`의 도구 표시가 문맥 한도로 잘렸으나 같은 결과 캐시와 저장 파일·성공한 캡처를 확인하고 그 원본을 실제로 열었다. 생성·시작·캡처를 반복하지 않았다. 사용자 수량 조회의 첫 재귀 집계는 QA 축소 파일도 포함해, 실제 원본 폴더를 직접 집계한 3,326장으로 바로잡았고 두 관측을 보존했다. 최종 이번 묶음까지 원본은 3,331장이다.
+- 수집 검사의 첫 실행은 연결 목록의 상대 경로를 worktree에 적용해 ENOENT로 종료했다. 실패 스크립트·출력을 보존하고 기존 주 작업 폴더의 실제 원본 사본 경로로만 바로잡았다. 동일 파일·해시를 다시 확인했으며 추가 이미지 호출·관측/원장/연결 목록 변경·검사 생략은 없다.
+- `verify-oxford-images.cjs` 10개 항목 검사(승인 전 `1791738810365`, 승인 후 `1791738980685`)에서 디코딩·해시·연결·로컬 Chromium 320px 렌더링을 통과했다. 재개 회귀 19개와 관련 CJS 3개 구문 검사도 모두 종료 코드 0이다. 관련 이미지 검증 범위이며 앱 전체 테스트·타입·린트·빌드는 정적 이미지/메타데이터 전용 변경으로 실행하지 않았다. 실제 iPhone·독립 학습자 평가는 미실시다.
+- 보존 검증의 첫 두 실행은 검사 코드의 출처 문자열 오기와 Windows 경로 구분자 차이 때문에 실패했다. 각각의 실패 스크립트·출력·고정된 관측/원장/연결 목록 해시를 보존하고 기대 문자열·동일 경로 비교만 바로잡았다. 검사 제거·영수증 변경·이미지 추가 호출 없이 보존 검증을 통과했으며 새 10개 외 기존 3,799개 항목과 모든 원본 PNG를 확인했다.
+- 현재 누적 3186개 항목 제작·검수 통과 3147개·PNG 3331개·대기 615개·보류 40개·실패/실행 중단 7개, 원장 3338회(확인된 내장 호출 3337회·전달 미확인 시작 슬롯 1개), 누적 품질 수정 145회다. 기존 보류·실패·두 사용자 조건 보류·교재 교열 후보를 유지한다.
+- 생성 이미지는 기존 주 작업 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`와 기본 생성 위치에서 모두 보존한다. 실제 프롬프트·참조는 연결 목록의 시도와 `work/oxford-batch-323-` 기록에 있다. Git에는 연결 목록과 계획·진행 문서 3개만 반영하며 PNG·작업 로그는 제외한다.
+- 앱 UI·학습 기록·API·DB·Sites·의존성·카드 서버·배포는 변경하지 않았다. 신규 마이그레이션·관측 변경은 없고 해당 미배포 문서/목록 변경만 되돌릴 수 있다. 전체 목표 3,809개 승인 완료는 아직 미달이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `delivery` 명사(배송)다. 다음10항목도 교재 순서·품사·예문·공식 뜻을 먼저 확인하며, 현재 장면/프롬프트는 미준비다.
+다음 제작 대기 첫 항목은 `desire` 명사(욕구, `60ee07ce69612ed3`)다. 다음 10개는 desire 명사/동사·desperate·detail 동사·detailed·detect·dig·discipline 명사·discount 동사·dishonest이며 사전·교재 확인과 장면 준비 전에는 호출하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
