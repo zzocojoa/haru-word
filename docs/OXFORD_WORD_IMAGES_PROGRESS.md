@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3196 |
-| 제작자 품질 검수 통과 `approved` | 3157 |
+| 제작된 서로 다른 항목 | 3206 |
+| 제작자 품질 검수 통과 `approved` | 3167 |
 | 품질·의미·조건 보류 `held` | 40 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 605 |
+| 제작 대기 `waiting` | 595 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3348 |
+| 내장 도구 호출·시작 슬롯 원장 | 3358 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 145 |
 
-이미지 미생성 항목은 제작 대기 605개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 613개다. 제작된 3196개는 검수 통과 3147개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3341개다. 원장 3348회는 이미지가 반환된 3341회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3347회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 595개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 603개다. 제작된 3206개는 검수 통과 3167개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3351개다. 원장 3358회는 이미지가 반환된 3351회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3357회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -7780,9 +7780,38 @@ noun [ C ]: [someone or something that has been hurt, damaged, or killed or has 
 - 기존 주 작업 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`에 복사본을 보존하고 기본 생성 원본도 유지한다. 실제 프롬프트는 연결 목록의 시도와 `work/oxford-batch-324-` 영수증에 있다. Git에는 연결 목록·계획·진행 문서 3개만 반영하며 PNG·작업 로그는 제외한다.
 - UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·배포를 변경하지 않았다. 마이그레이션·관측 영향은 없고 해당 미배포 목록/문서만 되돌릴 수 있다. 전체 목표 3,809개 검수 통과는 아직 미완료다.
 
+## 추가 325 · B2 저장 매체·전시·분배·격차 — 2026-10-12
+
+- 기준 커밋: `c3fa934d4f034a617dde0cc73e83b7dcc7a922f6`. 교재 ID·품사·기본 뜻·표현·예문·출처를 먼저 읽고 대조했다. Cambridge 공식 사전 9개 표제어의 용법별 정의 본문 10개를 실제 확인했다. `divide` 명사와 `document` 동사는 English Dictionary 본문을 사용했으며, `display`는 ON SCREEN 동사와 ARRANGEMENT 명사를 구분했다.
+- 10개 항목을 내장 `image_gen`으로 한 장씩 각 1회 생성했다. 원본 10장과 개별 320px 축소 화면 10장을 실제로 열어 검수 통과했다. 수정 생성·새 보류·새 실패는 없다. 첫 관측·첫 검토·프롬프트·참조·해시와 첫 호출/시작 슬롯 영수증 23개를 고정해 보존했다.
+
+| 항목 | 기본 뜻 | 검토한 연상 단서 | 사전 근거 |
+|---|---|---|---|
+| disk 명사 | 디스크 | 컴퓨터 삽입구 옆의 플로피 디스크 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/disk) |
+| dismiss | 해고하다 | 개인 소지품 상자를 들고 떠나는 직원 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/dismiss) |
+| display 동사 | 표시하다 | 전자 화면의 그림을 가리키는 사람 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/display) |
+| display 명사 | 전시 | 벽에 배열된 풍경 액자를 보는 사람들 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/display) |
+| distribute | 분배하다 | 빵을 직접 건네고 받는 손 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/distribute) |
+| distribution | 분배 | 중앙 바구니에서 여러 바구니로 빵을 옮김 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/distribution) |
+| divide 명사 | 격차 | 두 사람에게 다른 양의 사과가 놓임 | [용법](https://dictionary.cambridge.org/dictionary/english/divide) |
+| division | 분할 | 빵 두 부분을 떨어진 접시에 놓음 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/division) |
+| document 동사 | 기록하다 | 식물 촬영과 노트에 보관한 성장 사진 | [용법](https://dictionary.cambridge.org/dictionary/english/document) |
+| domestic | 국내의 | 가상의 한 국가 경계 안 본토·섬·비행기 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/domestic) |
+
+- 작성 예문 9개·Tatoeba 예문 1개와 출처를 유지했다. `dismiss`는 #1577222(CM)/#3675014(ssuss32), CC-BY 2.0(France)다. 교재 파일·해시·영어 원문·번역·출처를 변경하지 않았다.
+- 디스크 허브/셔터·열차 창/전조등/선로·액자 몰딩·바구니 짜임·빵 칼집/기공·카메라 렌즈/다이얼·노트 테이프·비행기 창·옷 단추·신발 끈은 물리적 구조다. 실제 글자·숫자·라벨·로고·UI가 삽화 내부에 없음을 확인했다. QA 아래의 단어 표기는 삽화 밖 설명이다.
+- `display` 동사는 도착 시간의 숫자를 추가하지 않고 화면이 그림을 표시하는 모습으로 만들었다. `document`는 사전이 인정한 사진 기록으로 글자 없는 노트 기록을 표현했다. dismiss의 책상에는 별도 화분이 남아 있어 완전히 빈 책상이라고 기록하지 않는다. 실제 고용·적법성·저장 성공·시간표·자원봉사자 신분·분배 공정성·사회적 지위·음식 안전·학습 진도·국경/항로·영어 정확도를 인증하지 않는다.
+- 공식 도메인 검색 3그룹의 36개 페이지 개요와 필요한 정의를 확인했다. 첫 URL 선택기는 Cambridge의 /us/ 경로를 제외해 distribution 페이지를 찾지 못했다. 같은 원본에서 두 공식 경로를 인정해 회복했으며 새 조회·이미지 호출·검사 생략은 없다. 최초 선택 오류·전체 원문·정의/용법 판단을 보존했다.
+- `verify-oxford-images.cjs` 10개 검사가 승인 전 `1791743419567`과 승인 후 `1791743552788`에서 파일 연결·해시·디코딩·로컬 Chromium 320px 렌더링을 통과했다. 재개 회귀 19개와 관련 CJS 3개 구문 검사도 종료 코드 0이다. 첫 QA/원본 프롬프트 동시 출력이 일부 잘렸으나 QA 본문은 실제 보였고 같은 출력에서 복원했다. 새 QA나 이미지 호출은 없었으며 관측을 보존했다.
+- 이전 진행 문단은 제작 항목 3196개 옆의 검수 통과 수가 3147개로 남아 표/연결 목록의 3157개와 달랐다. 그 문단을 실제 목록에서 계산하도록 고쳐 이번 수량 3206=3167+39와 맞췄다. 기존 승인 기록·이미지·원장은 변경하지 않았다.
+- 메타데이터·초안 저장 뒤 마지막 상태 출력의 변수명 오류가 발생했다. 저장된 같은 파일을 다시 읽어 수량·다음 항목·초안이 이미 기록됐음을 확인했고 finish나 이미지 호출은 반복하지 않았다. 이어 문서 스크립트 준비 중 인용 문자 충돌은 실행 전에 발견해 바로잡았다. 두 오류·회복 관측을 보존했으며 이미지/연결 목록/원장/관측·검사를 바꾸지 않았다.
+- 현재 3206개 항목 제작·검수 통과 3167개·PNG 3351개·대기 595개·보류 40개·실패/실행 중단 7개, 원장 3358회(확인된 내장 호출 3357회·제공자 전달 미확인 시작 슬롯 1개), 누적 품질 수정 145회다. 기존 사용자 조건 보류·최초 생성/검토·교재 교열 후보·보류/실패를 해결된 것으로 바꾸지 않는다.
+- 기본 작업 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`에 복사본을 보존하고 생성 원본도 유지했다. 실제 프롬프트는 연결 목록의 시도와 `work/oxford-batch-325-` 영수증에 있다. Git에는 연결 목록·계획·진행 문서 3개만 반영한다.
+- 앱 전체 테스트·타입·린트·빌드는 정적 이미지/문서/목록 변경 범위로 실행하지 않았다. 실제 iPhone·독립 학습자 평가는 미실시다. UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·배포를 변경하지 않았다. 마이그레이션·관측 영향은 없으며 해당 미배포 목록/문서만 되돌릴 수 있다. 전체 목표 3,809개 검수 통과는 아직 미완료다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `disk` 명사(디스크, `65904480fdbfe4be`)다. 다음 10개는 disk·dismiss·display 동사/명사·distribute·distribution·divide 명사·division·document 동사·domestic이며 교재·사전 대조와 장면 준비 전에는 호출하지 않는다.
+다음 제작 대기 첫 항목은 `dominate` v. — 독점하다 (`b77b342d800a725e`)다. 기존 보류/실패는 위 기록대로 유지하며 같은 재개 보호를 따른다.
 
 ```powershell
 node scripts/oxford-images.cjs status
