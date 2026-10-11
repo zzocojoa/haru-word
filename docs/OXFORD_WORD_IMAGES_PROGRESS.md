@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3286 |
-| 제작자 품질 검수 통과 `approved` | 3246 |
+| 제작된 서로 다른 항목 | 3296 |
+| 제작자 품질 검수 통과 `approved` | 3256 |
 | 품질·의미·조건 보류 `held` | 41 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 515 |
+| 제작 대기 `waiting` | 505 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3440 |
+| 내장 도구 호출·시작 슬롯 원장 | 3451 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 147 |
+| 그중 품질 수정 호출 | 148 |
 
-이미지 미생성 항목은 제작 대기 515개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 523개다. 제작된 3286개는 검수 통과 3246개와 이미지가 있는 보류 40개이며, 수정본 포함 PNG는 3433개다. 원장 3440회는 이미지가 반환된 3433회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3439회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 505개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 513개다. 제작된 3296개는 검수 통과 3256개와 이미지가 있는 보류 40개이며, 수정본 포함 PNG는 3444개다. 원장 3451회는 이미지가 반환된 3444회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3450회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8044,9 +8044,35 @@ noun [ C ]: [someone or something that has been hurt, damaged, or killed or has 
 - 이미지 검증은 첫 10개·수정본 2개·최종 10개의 디코딩/해시/1086×1448/로컬 Chromium 320px을 통과했다. 재개 회귀 19개(이미지/API 호출 0)와 CJS 문법 3개를 통과했고 모든 원본/프롬프트/복사 해시 검사를 유지했다. 실제 iPhone·독립 학습자 검사는 **미실시**다. 정적 이미지/목록/문서 작업으로 앱 전체 테스트·타입·린트·빌드는 실행하지 않았다.
 - count 조회에서 없는 stats 하위 명령을 실행한 읽기 오류 1개는 실제 status 계약으로 확인해 해결했다. 참조 문서의 관측 잘림 1개는 같은 파일을 나누어 읽었고 native0 관측 잘림 1개는 같은 저장된 결과를 회수했다. 이미지 서비스 오류/자동 재시도/별도 API 전환은 없었다. 코드·교재·사용자 기록·API·백업·DB·사이트·의존성·카드 서버·운영 배포 변경은 없다. 다음은 B2 fold 명사부터이며 다음 묶음은 생성 전 대기 상태로 보존한다.
 
+## 추가 334 · B2 fold 명사–frequency · 2026-10-12
+
+- 전체 **3,809개 검수 통과** 목표를 유지했다. 첫 10회·former 단일 품질 수정 1회, **10개 모두 제작자 검수 통과**이며 원본/320px 각각 시도 11개를 실제로 열어 확인했다. v1/v2·첫 보류·첫 슬롯/네이티브 응답/프롬프트를 포함한 23개 첫 근거를 동결·보존했다.
+- 누적 제작 **3,296개 항목**, 검수 통과 **3,256개**, 보류 **41개**(이미지 없는 letter 1개 포함), 실패/실행 중단 **7개**, 제작 대기 **505개**다. 수정본 포함 PNG **3,444개**, 호출/시작 슬롯 **3,451회**(전달 미확인 중단 1회 포함), 품질 수정 누적 **148회**다. 지난 묶음 finance 동사의 보류와 기존 실패/사용자 조건 보류는 보존했다.
+
+| 항목 · ID | 기본 뜻 | 연상 장면 | 제작자 검수 |
+|---|---|---|---|
+| fold 명사 · `bc38f414179fdfa9` | 접힌 부분 | 종이 중앙의 실제 접힌 자국 | 통과 |
+| folding 형용사 · `1466607403ee528e` | 접을 수 있는 | 펼친/접은 의자 두 뷰 | 통과 |
+| following 전치사 · `d89045921d4646ae` | ~후에 | 회의 뒤 의자 정리 | 통과 |
+| forgive 동사 · `2a79239d3fb7ac34` | 용서하다 | 실수 뒤 사과/차분한 반응 | 긍정적 기본 뜻 통과; never 부정문 자체의 그림 아님 |
+| former 형용사 · `299067114785a65b` | 이전의 | 이전/현재 교사의 두 수업 장면 | 현재 교사 외모만 수정한 v2 통과 |
+| fortune 명사 · `474a6e055e34d1ad` | 큰돈 | 무지 동전이 가득한 열린 상자 | 큰돈 뜻 통과; 정확한 금액/운세 아님 |
+| forward 형용사 · `c30dba945d978e83` | 앞으로 향하는 | 몸/시선과 앞발이 향하는 움직임 | 통과 |
+| found 동사 · `b3ad945593d4a13f` | 설립하다 | 빈 자리 준비 뒤 모임 시작 | 설립하다 뜻 통과; find 과거형 아님 |
+| free 동사 · `88672b647f188d4f` | 풀어 주다 | 열린 새장 문·밖으로 나는 새 | 풀어 주다 뜻 통과; 무료/가격 아님 |
+| frequency 명사 · `d2594c20e128430c` | 빈도 | 같은 길이 두 기간의 방문 3/1회 | 각 4칸·3회/1회 직접 확인, 실제 방문율 아님 |
+
+- Cambridge의 기본 정의 본문 10개·보조 본문 2개와 조회 개요 48개(4그룹·각 12개)를 보존했다. [fold](https://dictionary.cambridge.org/dictionary/learner-english/fold), [folding 영어 형용사 정의](https://dictionary.cambridge.org/dictionary/polish-english/skladany), [following](https://dictionary.cambridge.org/us/dictionary/learner-english/following), [forgive](https://dictionary.cambridge.org/dictionary/learner-english/forgive), [former](https://dictionary.cambridge.org/us/dictionary/learner-english/former), [fortune](https://dictionary.cambridge.org/us/dictionary/learner-english/fortune), [forward](https://dictionary.cambridge.org/dictionary/english/forward?topic=confidence-and-self-assurance), [found](https://dictionary.cambridge.org/dictionary/learner-english/found), [free](https://dictionary.cambridge.org/dictionary/learner-english/free), [frequency](https://dictionary.cambridge.org/dictionary/learner-english/frequency). folding은 첫 조회에 형용사 정의 본문이 없어 추가 검색 1회에서 Cambridge PASSWORD Polish–English의 **영어 folding 형용사 정의**를 실제 읽고 learner fold의 가구/의자 용례와 대조했다. free는 새장/birds 용례도 함께 확인했다.
+- 정의 추출의 forward 문구 불일치 1건은 저장/생성 전에 중단하고 같은 공식 방향 형용사 본문을 다시 읽어 실제 문구를 사용했다. 검사 생략·교재 변경·이미지 재시도는 없었다. 의미 선택 관찰 2개를 남겼고 추가 조회 1회와 이미지 호출을 구분했다.
+- 작성 예문 9개·Tatoeba 1개는 원문/번역/출처 그대로 유지했다. forgive의 [Tatoeba #1670005](https://tatoeba.org/en/sentences/show/1670005) · #8361455, CC-BY 2.0 France Spamster/Eunhee를 보존한다. 긍정적 기본 뜻과 never 부정문을 구분하며 예문 그대로의 그림/영어 정확도 인증으로 표시하지 않는다.
+- former v1은 교사 둘의 얼굴/헤어 실루엣이 비슷하여 보류했다. 오른쪽 현재 교사만 짧은 머리/수염으로 한 번 수정하여 v2의 두 교사·성인 네 인물 뷰/두 학습 장면을 원본/320px에서 확인했다. 다른 subjects/장면을 보존했으나 픽셀 단위 동일성은 주장하지 않는다. 세 번째 호출을 실행하지 않았다.
+- frequency는 달력 띠 2개·각 4칸·위 방문 3회/빈칸 1개·아래 방문 1회/빈칸 3개를 원본/320px에서 각각 세었다. free는 새장 1개·손 1개·새 1마리, found는 준비 성인 1뷰/모임 성인 3뷰를 확인했다. 실제 날짜·경과 시간·방문율·법인 등록·신원/고용 이력·내면의 용서·실제 속도/안무·부력/방생 안전을 인증하지 않는다. 물리 고리/힌지/나뭇결/동전 반사/신발 띠는 인쇄 글자가 아니다.
+- 첫 10개·수정본 1개·최종 10개 이미지의 디코딩·해시·1086×1448·로컬 Chromium 320px 검증, 재개 회귀 19개(이미지/API 0), CJS 문법 3개를 통과했다. 모든 원본/프롬프트/복사 해시 검사를 유지했다. 실제 iPhone·독립 학습자 검사는 **미실시**이며 앱 전체 테스트·타입·린트·빌드는 정적 제작 작업이므로 실행하지 않았다.
+- 내장 image_gen을 순차 사용했고 서비스 오류·자동 재시도·별도 API 전환은 없었다. 파일은 기본 작업 폴더 outputs의 교재 해시 폴더에 보존하며 실제 프롬프트/참조/시도별 해시는 연결 목록과 work/oxford-batch-334- 근거에 남긴다. Git에는 목록·계획·진행 기록 3개만 반영한다. UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·운영 배포 변경은 없다. 다음 fuel 동사부터 새 묶음을 준비하며 전체 제작은 미완료다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `fold` 명사(`bc38f414179fdfa9`, B2, 접힌 부분)다. 다음 10개는 생성 전 대기 상태이며 기존 승인/보류/실패 항목을 자동으로 재호출하지 않는다.
+다음 제작 대기 첫 항목은 `fuel` 동사(`566341a9843bc2ba`, B2, 부추기다)다. 다음 10개는 생성 전 대기 상태이며 승인/보류/실패 항목을 자동으로 재호출하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
