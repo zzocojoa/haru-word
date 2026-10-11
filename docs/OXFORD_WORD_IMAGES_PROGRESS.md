@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3236 |
-| 제작자 품질 검수 통과 `approved` | 3197 |
+| 제작된 서로 다른 항목 | 3246 |
+| 제작자 품질 검수 통과 `approved` | 3207 |
 | 품질·의미·조건 보류 `held` | 40 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 565 |
+| 제작 대기 `waiting` | 555 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3388 |
+| 내장 도구 호출·시작 슬롯 원장 | 3398 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 145 |
 
-이미지 미생성 항목은 제작 대기 565개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 573개다. 제작된 3236개는 검수 통과 3197개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3381개다. 원장 3388회는 이미지가 반환된 3381회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3387회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 555개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 563개다. 제작된 3246개는 검수 통과 3207개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3391개다. 원장 3398회는 이미지가 반환된 3391회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3397회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -7898,9 +7898,40 @@ noun [ C ]: [someone or something that has been hurt, damaged, or killed or has 
 - 기본 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`에 복사본을 보존하며 기본 생성 원본도 유지했다. 실제 프롬프트/참조/해시는 목록 시도와 `work/oxford-batch-328-` 영수증에 있다. Git에는 목록·계획·진행 문서 3개만 반영한다.
 - UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·배포를 변경하지 않았다. 마이그레이션·관측 영향은 없으며 해당 미배포 목록/문서만 되돌릴 수 있다. 전체 3,809개 검수 통과 목표는 아직 미완료다.
 
+## 추가 329 · B2 확립·부동산·추정·견적·윤리·평가·짝수·악·검사 — 2026-10-12
+
+- 기준 커밋: `bf5689acd657ebaeab58a6c32d86e36f5d7f5500`. 교재 10개 ID·품사·기본 뜻·표현·예문·출처를 대조하고 공식 Cambridge 8개 표제어의 정의 10개와 보조 본문 1개를 실제 확인했다. estimate는 추정하는 동사/견적 문서 명사, even은 NUMBER, evil은 형용사/명사, examination은 LOOKING AT 용법이다.
+- 내장 `image_gen`으로 10개를 각각 1회 제작하고 원본 10장·개별 320px 화면 10장을 실제 열어 제작 검수 통과했다. 품질 수정·새 보류·서비스 오류는 없다. 첫 원본/관측/검토/프롬프트/참조/슬롯 영수증 23개를 고정해 보존했다.
+
+| 항목 | 기본 뜻 | 검토한 연상 단서 | 사전 근거 |
+|---|---|---|---|
+| establish v. | 확립하다 | 지속해 쓸 작업대를 놓고 도구를 배치하는 성인 | [용법](https://dictionary.cambridge.org/us/dictionary/english/establish) |
+| estate n. | 부동산 | 집과 정원/대지를 가리키는 성인 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/real-estate) |
+| estimate v. | 추정하다 | 바구니 사과의 양을 대략 가늠하는 동작 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/estimate) |
+| estimate n. | 견적 | 의자/목재 곁에서 수리 문서를 전달하는 장면 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/estimate) |
+| ethical adj. | 윤리적인 | 지갑을 공개적으로 건네는 정직한 반환의 단서 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/ethical) |
+| evaluate v. | 평가하다 | 컵 두 개의 제작 상태를 주의 깊게 비교 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/evaluate) |
+| even adj. | 짝수의 | 오렌지 6개를 세 쌍으로 나누고 남는 것 없음 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/even?q=even_1) |
+| evil adj. | 사악한 | 꽃을 밟으려는 해로운 행동과 이를 바라보는 성인 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/evil) |
+| evil n. | 악 | 식물 돌봄과 줄기를 꺾는 해침의 행동 대비 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/evil) |
+| examination n. | 검사 | 손목/팔을 주의 깊게 살피는 진찰 장면 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/examination) |
+
+- 작성 예문 9개와 Tatoeba 예문 1개를 원문/번역/출처 그대로 유지했다. evil 형용사의 Tatoeba 영어 #1520736(Spamster)·한국어 #8362064(Eunhee), CC BY 2.0 FR 및 [원문 링크](https://tatoeba.org/en/sentences/show/1520736)를 보존했다. 교재 파일/해시는 변경하지 않았다.
+- estate의 교재 표현은 real estate다. 더 좁은 [estate LAND](https://dictionary.cambridge.org/us/dictionary/learner-english/estate)와 건물/토지 의미의 real estate를 실제 대조했다. establish는 START/설정하다의 본문을 확인했다. even의 첫 영어 미리보기에는 표제 제목이 없어 같은 저장 검색 결과의 learner NUMBER 본문을 다시 읽고 원래 쿼리 URL을 보존했다. 공식 개요는 3그룹 각 12개·총 36개다. 추가 검색/이미지 호출·본문 추정·검사 생략은 없다.
+- establish는 기반을 마련하는 동작, estate는 건물/토지, estimate 동사는 대략 가늠하는 행동, 명사는 수리 맥락에서 전달하는 문서의 연상 단서다. 교재의 학습 일과·실제 설립/지속 시간·부동산 소유/계약/직업·가격·견적 문서 내용·비용/오차·내적 사고를 인증하지 않는다. 빈 종이 한 장은 특정 문서를 유일하게 구분하지 못한다.
+- ethical과 evil은 행동을 통해 연상하게 했다. 지갑의 실제 소유자·분실/반환 이력·내적 의도·인물의 본질·최종 발 접촉 완료·윤리/법적 판단은 인증하지 않는다. 피부/성별/외모나 옷색을 악의 기준으로 삼지 않는다. examination은 면밀하게 살피는 동작의 단서이며 실제 면허·진단·올바른 진찰법·건강/안전 인증이 아니다.
+- evaluate 원본/320px에서 손의 온전한 컵 1개·탁자에 금 간 컵 1개·총 컵 2개를 직접 셌다. even 원본/320px에서 위 왼쪽 2개·위 오른쪽 2개·아래 2개·총 오렌지 6개·세 쌍·남는 것 0개를 직접 셌다. 사물 계수만 확인했으며 실제 평가 결과·모든 짝수·영어 문법/학습 정확도를 인증하지 않는다.
+- 갈고리·공구/목재 결·앞치마/가방 끈·옷 단추·의자 균열/접합·도자기 금/점·신발 끈·오렌지 꼭지/꽃받침·물줄기·잎맥·청진기 고리는 실제 사물 형태다. 삽화 내부 글자·숫자·가격·수학 기호·라벨·로고·UI는 없다. 아래 표제어/품사/뜻은 로컬 QA 페이지 캡션이다.
+- 320px 화면 3~6을 함께 반환한 관측 출력이 잘려 같은 첫 QA의 기존 screenshot 파일을 두 장씩 다시 열어 실제 확인했다. 새 생성·capture·QA 실행 없이 회복했다. 최종 검사에서 지원하지 않는 `--ids`를 ID로 전달해 연결 검사가 실패했다. 실제 검증기의 positional ID 계약을 읽고 같은 10개 ID로 다시 검사했으며 실패 출력과 회복을 보존했다. 이 인수 오류 때 브라우저는 시작되지 않았고 추가 이미지 호출·목록/원장 변경·검사 생략은 없다.
+- `verify-oxford-images.cjs`는 승인 전 `2026-10-11T20:27:49.363Z`·승인 후 `2026-10-11T20:36:08.909Z`에 10개의 연결·해시·PNG 디코딩·로컬 Chromium 320px 렌더링을 통과했다. 재개 회귀 19개와 CJS 3개 구문 검사도 종료 코드 0이다. 앱 전체 테스트·타입·린트·빌드는 정적 이미지/목록/문서 범위로 실행하지 않았다. 실제 iPhone·독립 학습자 평가는 미실시다.
+- 최종 대조 검사의 Tatoeba 출처 문자열이 실제 교재의 'Tatoeba 참고 예문'과 달라 첫 검사가 중단됐다. 해당 항목의 정확한 출처·저작자/문장 ID·라이선스·URL을 다시 읽어 비교를 수정하고 명시적 귀속 확인도 추가했다. 실패/수정 검사 소스·실패 출력을 보존했으며 이미지·목록·원장·개별 관측을 바꾸거나 검사를 생략하지 않았다. 추가 이미지 호출은 0회다.
+- 현재 3246개 항목 제작·검수 통과 3207개·PNG 3391개·대기 555개·보류 40개·실패/실행 중단 7개다. 원장 3398회는 확인된 내장 호출 3397회와 제공자 전달 미확인 시작 슬롯 1개를 포함하고 누적 품질 수정은 145회다. 기존 조건 보류·최초 생성/검토·교열 후보·보류/실패는 미해결 상태 그대로 유지한다.
+- 기본 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`에 복사본을 보존하며 기본 생성 원본도 유지했다. 실제 프롬프트/참조/해시는 목록 시도와 `work/oxford-batch-329-` 영수증에 있다. Git에는 목록·계획·진행 문서 3개만 반영한다.
+- UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·배포를 변경하지 않았다. 마이그레이션·관측 영향은 없으며 해당 미배포 목록/문서만 되돌릴 수 있다. 전체 3,809개 검수 통과 목표는 아직 미완료다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `establish` v. — 확립하다 (`664b9985f400487a`)다. 기존 보류/실패는 위 기록대로 유지하며 같은 재개 보호를 따른다.
+다음 제작 대기 첫 항목은 `excuse` n. — 구실 (`342e78816e7a9be7`)이다. 기존 보류/실패는 위 기록대로 유지하며 같은 재개 보호를 따른다.
 
 ```powershell
 node scripts/oxford-images.cjs status
