@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3186 |
-| 제작자 품질 검수 통과 `approved` | 3147 |
+| 제작된 서로 다른 항목 | 3196 |
+| 제작자 품질 검수 통과 `approved` | 3157 |
 | 품질·의미·조건 보류 `held` | 40 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 615 |
+| 제작 대기 `waiting` | 605 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3338 |
+| 내장 도구 호출·시작 슬롯 원장 | 3348 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 145 |
 
-이미지 미생성 항목은 제작 대기 615개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 623개다. 제작된 3186개는 검수 통과 3147개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3331개다. 원장 3338회는 이미지가 반환된 3331회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3337회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 605개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 613개다. 제작된 3196개는 검수 통과 3147개와 이미지가 있는 보류 39개이며, 수정본 포함 PNG는 3341개다. 원장 3348회는 이미지가 반환된 3341회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3347회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -7751,9 +7751,38 @@ noun [ C ]: [someone or something that has been hurt, damaged, or killed or has 
 - 생성 이미지는 기존 주 작업 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`와 기본 생성 위치에서 모두 보존한다. 실제 프롬프트·참조는 연결 목록의 시도와 `work/oxford-batch-323-` 기록에 있다. Git에는 연결 목록과 계획·진행 문서 3개만 반영하며 PNG·작업 로그는 제외한다.
 - 앱 UI·학습 기록·API·DB·Sites·의존성·카드 서버·배포는 변경하지 않았다. 신규 마이그레이션·관측 변경은 없고 해당 미배포 문서/목록 변경만 되돌릴 수 있다. 전체 목표 3,809개 승인 완료는 아직 미달이다.
 
+## 추가 324 · B2 욕구·설명·발견·자제력 — 2026-10-12
+
+- 기준 커밋: `35e010e7f74428a15897eef8c593ffa4e92e540d`. 교재 ID·품사·기본 뜻·표현·예문·출처를 먼저 읽고 대조했다. Cambridge 공식 사전 9개 표제어의 용법별 정의 본문 10개와 `self-discipline` 보충 정의 1개를 실제 확인했다. `detail` 동사는 English Dictionary의 GIVE INFORMATION, `discipline`은 SELF CONTROL, `discount`는 REDUCE를 사용했다.
+- 10개 항목을 내장 `image_gen`으로 한 장씩 각 1회 생성했다. 원본 10장과 개별 320px 축소 화면 10장을 실제로 열어 검수 통과했고 수정 생성·새 보류·새 실패는 없다. 첫 관측·첫 검토·프롬프트·참조·PNG 해시·첫 호출/시작 슬롯 영수증을 고정해 보존했다.
+
+| 항목 | 기본 뜻 | 검토한 연상 단서 | 사전 근거 |
+|---|---|---|---|
+| desire 명사 | 욕구 | 바이올린을 바라보며 두 손을 모은 성인 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/desire) |
+| desire 동사 | 원하다 | 아직 서서 빈 휴식 의자를 바라보는 성인 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/desire) |
+| desperate | 절박한 | 간절하게 호소하는 성인과 듣는 상대 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/desperate) |
+| detail 동사 | 자세히 설명하다 | 부품·완성 그림을 가리키며 설명하는 사람 | [용법](https://dictionary.cambridge.org/dictionary/english/detail) |
+| detailed | 자세한 | 돌다리 전체와 개별 석재·난간을 담은 자료 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/detailed) |
+| detect | 감지하다 | 돋보기로 작은 그릇 균열을 살피는 사람 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/detect) |
+| dig | 파다 | 같은 구멍에서 흙을 옮기는 성인 두 명 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/dig) |
+| discipline 명사 | 자제력 | 옆의 휴대전화 대신 책에 집중하는 모습 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/discipline?amp=true&q=discipline_2) |
+| discount 동사 | 할인하다 | 같은 물건의 요청 동전 양이 줄어드는 두 상태 | [용법](https://dictionary.cambridge.org/us/dictionary/learner-english/discount?q=discount_1) |
+| dishonest | 정직하지 않은 | 빈 바구니와 등 뒤 숨긴 사과의 대비 | [용법](https://dictionary.cambridge.org/dictionary/learner-english/dishonest) |
+
+- 작성 예문 6개·Tatoeba 예문 4개와 CC-BY 2.0(France) 출처를 유지했다. `desire` 명사는 #2976604(CK)/#8361851(Eunhee), `desperate`는 #3166588(CK)/#3684963(rainbow4us), `dig`는 #452264(CK)/#13250342(qiwiwi), `discount`는 #1167766(soj4l)/#4963081(rainbow4us)다. 교재 파일·해시·원문·번역·출처를 변경하지 않았다.
+- 바이올린의 곡선 울림구멍·바구니 짜임·동전 테두리·옷 버클/단추·신발 끈·돌다리 석재·그릇 균열은 물리적 구조다. 실제 글자·숫자·가격·로고·UI가 이미지 내부에 없음을 확인했다. QA 화면 아래의 단어 표기는 삽화 밖 설명이다. discipline의 전화 앞/뒤 방향·실제 책 내용, 사람의 욕구·의도·희망·습관·자기 통제는 그림으로 확정하지 않는다. 실제 광학·검출 성능·보고서·가격·거래·범죄·영어 정확도를 인증하지 않는다.
+- 정확한 URL 문자열 검색 3그룹은 결과가 없었고 공식 페이지 직접 조회 9개는 HTTP 403이었다. 공식 Cambridge 도메인으로 넓힌 검색의 정의 본문을 사용했으며 모든 실패 관측을 보존했다. 일부 구분선이 앞줄에 붙어 첫 페이지 분리가 8/3/6개로 합쳐졌고, 없는 페이지를 저장하려던 오류가 발생했다. 같은 원본 응답에서 구분선을 다시 해석해 12/12/12개·총 36개 개요와 필요한 정의를 회복했다. 추가 조회의 33개 결과는 사용하지 않았으며 네 그룹 원문·최초 분리 결과·오류·범위 기록을 보존했다. 이 과정의 이미지 호출은 0회다.
+- `verify-oxford-images.cjs` 10개 검사가 승인 전 `1791741169633`과 승인 후 `1791741373293`에서 파일 연결·해시·디코딩·로컬 Chromium 320px 렌더링을 통과했다. 재개 회귀 19개와 관련 CJS 3개 구문 검사도 모두 종료 코드 0이다. 앱 전체 테스트·타입·린트·빌드는 정적 이미지/문서/목록 변경 범위로 실행하지 않았다. 실제 iPhone·독립 학습자 평가는 미실시다.
+- 문서 갱신 검사 첫 실행은 이전 계획 수량을 찾는 기대 문자열까지 새 수량으로 바뀌어 중단됐다. 문서 쓰기 전 실패임을 확인하고 실패 소스/출력을 보존한 뒤 이전 수량 조건만 바로잡았다. 이미지 호출·관측·연결 목록·원장 변경·검사 생략 없이 두 문서의 2개/9개 교체를 통과했다.
+- 이전 검증 호출의 출력 관측이 잘려 같은 캐시에서 실제 실패 결과를 회수했다. 추가 이미지 호출이나 같은 실패 명령의 재실행은 없었다. 원문 텍스트 파일을 JSON으로 읽던 검사기 오류는 실패 소스·출력을 보존한 뒤 UTF-8 문자열 읽기로 바로잡았고, 원문 동일성·33개 추가 결과 구획 검사와 나머지 검사는 유지해 통과했다.
+- 사용자 수량 확인의 첫 조회는 이미지 경로를 격리 worktree 기준으로 해석해 ENOENT였다. 기본 작업 폴더의 실제 저장 위치에서 최상위 PNG만 다시 세어 3341장·3196개 항목·누락 0을 확인했다. 썸네일은 집계에서 제외했다. 최초 실패·수정 조회를 보존했으며 이미지 호출·연결 목록·원장·관측 변경은 없었다.
+- 현재 3196개 항목 제작·검수 통과 3157개·PNG 3341개·대기 605개·보류 40개·실패/실행 중단 7개, 원장 3348회(확인된 내장 호출 3347회·제공자 전달 미확인 시작 슬롯 1개), 누적 품질 수정 145회다. 기존 사용자 조건 보류·첫 생성·검토 기록·교재 교열 후보·보류/실패를 해결된 것으로 바꾸지 않는다.
+- 기존 주 작업 폴더의 `outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/`에 복사본을 보존하고 기본 생성 원본도 유지한다. 실제 프롬프트는 연결 목록의 시도와 `work/oxford-batch-324-` 영수증에 있다. Git에는 연결 목록·계획·진행 문서 3개만 반영하며 PNG·작업 로그는 제외한다.
+- UI·학습 기록·API·백업·DB·Sites·의존성·카드 서버·배포를 변경하지 않았다. 마이그레이션·관측 영향은 없고 해당 미배포 목록/문서만 되돌릴 수 있다. 전체 목표 3,809개 검수 통과는 아직 미완료다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `desire` 명사(욕구, `60ee07ce69612ed3`)다. 다음 10개는 desire 명사/동사·desperate·detail 동사·detailed·detect·dig·discipline 명사·discount 동사·dishonest이며 사전·교재 확인과 장면 준비 전에는 호출하지 않는다.
+다음 제작 대기 첫 항목은 `disk` 명사(디스크, `65904480fdbfe4be`)다. 다음 10개는 disk·dismiss·display 동사/명사·distribute·distribution·divide 명사·division·document 동사·domestic이며 교재·사전 대조와 장면 준비 전에는 호출하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
