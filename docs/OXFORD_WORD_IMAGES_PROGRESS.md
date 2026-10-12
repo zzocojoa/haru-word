@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3466 |
-| 제작자 품질 검수 통과 `approved` | 3423 |
+| 제작된 서로 다른 항목 | 3476 |
+| 제작자 품질 검수 통과 `approved` | 3433 |
 | 품질·의미·조건 보류 `held` | 44 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 335 |
+| 제작 대기 `waiting` | 325 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3632 |
+| 내장 도구 호출·시작 슬롯 원장 | 3642 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 159 |
 
-이미지 미생성 항목은 제작 대기 335개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 343개다. 제작된 3466개는 검수 통과 3423개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3625개다. 원장 3632회는 이미지가 반환된 3625회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3631회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 325개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 333개다. 제작된 3476개는 검수 통과 3433개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3635개다. 원장 3642회는 이미지가 반환된 3635회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3641회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8500,9 +8500,40 @@ Cambridge 품사·용법 정의10개(10표제어)와 foreign national 예시/get
 
 누적 제작3,466항목·검수 통과3,423개·보류44개(이미지 없음1)·실패/실행 중단7개·대기335개, PNG3,625장·원장3,632슬롯(확인 호출3,631·기존 전달 미확인1)·수정159회다. B2 승인498/보류5/대기335/실패1이며 A1/A2/B1 집계는 유지된다. 다음 objective 형용사는 아직 준비/호출하지 않았다.
 
+## 추가 제작 352 · 2026-10-13
+
+B2 objective 형용사~official 명사 신규10개를 내장 도구 각1회로 제작하고 원본/개별320px에서 검수 통과했다. 수정 호출/새 보류/서비스 오류는 없다. 직전351은 신규10개와 한 번씩의 보정2개를 검증·저장·커밋/푸시한 progress였다. 시작 전 HEAD/추적/실제 원격 bfe4252 일치·깨끗한 상태·미해결 호출 없음·정규 대기 순서를 확인했다. 전체3,809개 승인 목표는 미완료다.
+
+| 항목 | 실제 확인한 관계·수량 |
+|---|---|
+| objective 형용사 | 두 측정 순간·성인/캘리퍼 각2묘사·빨강/파랑 나무 큐브 각1. 같은 방법으로 비교 |
+| obligation 명사 | 성인2·지팡이1·낮은 계단1. 팔을 지지해 도와주는 책임의 맥락 |
+| observation 명사 | 성인1·나비/화분/확대경/노트/연필 각1, 노트에 나비·잎 그림1. 살피고 기록하는 활동 |
+| observe 동사 | 성인1·쌍안경1쌍·가지 위 새2·배낭1. 주의 깊게 보는 동작 |
+| obtain 동사 | 두 순간·성인/노트/살아 있는 새 각2묘사, 빈 노트→새 그림1로 정보 기록. 새 전체 묘사3은 실제3마리가 아님 |
+| occasionally 부사 | 성인1·달력1/한 줄7칸(채움1·빈6)·노트북1. 가끔의 빈도 단서 |
+| offend 동사 | 성인2·컵/의자 각2·탁자1. 가벼운 무시 동작과 상한 반응의 연결 |
+| offense 명사 | 성인2·의자2. 전경의 불쾌감/상한 표정과 옆의 사과 맥락 |
+| offensive 형용사 | 성인3, 발언하는1/불편한 듣는2. 불쾌한 발언의 효과 |
+| official 명사 | 성인3(책임자 역할1·참석자2)·리본1/기둥2/가위1·출입문1. 개막 행사 참석 |
+
+Cambridge의 품사·뜻 정의10개(10표제어)와 observation의 자연 관찰 예시/observe의 짧은 WATCH 정의 보조2개를 실제 읽고 교재와 대조했다. [objective의 FAIR OR REAL](https://dictionary.cambridge.org/dictionary/english/objective), [의무](https://dictionary.cambridge.org/dictionary/english/obligation), [observation의 WATCHING](https://dictionary.cambridge.org/dictionary/english/observation?q=Observation), [observe의 WATCH](https://dictionary.cambridge.org/dictionary/english/observe?q=Observe), [obtain의 GET](https://dictionary.cambridge.org/dictionary/english/obtain), [가끔](https://dictionary.cambridge.org/dictionary/english/occasionally), [offend의 UPSET](https://dictionary.cambridge.org/us/dictionary/english/offend), [offense의 BAD FEELINGS](https://dictionary.cambridge.org/dictionary/english/offense), [offensive의 UPSETTING](https://dictionary.cambridge.org/dictionary/english/offensive), [official의 Business 명사](https://dictionary.cambridge.org/us/dictionary/english/official)를 확인했다. 관찰을 말한 의견/규칙 준수와, 기분 상함을 범죄/득점/군사 공격과, 공무원 명사를 공식적인 형용사와 구분한다.
+
+검색48개(12/12/12/12)를 보존했다. 초기 검색에 official 명사 본문이 없어 추가 공식 질의1개를 수행해 책임 있는 사람/정부 직무 예시를 확인했다. 선택한10의미/보조2절을 실제 읽었으며 검색48개 전체 본문이나12독립 페이지를 읽었다고 주장하지 않는다. 보조는 primary와 페이지를 공유할 수 있다. 교재 작성 예문8개/Tatoeba 참고 예문2개와 귀속/URL·번역은 유지했다.
+
+그림은 교재 뜻과 함께 쓰는 연상 단서다. 같은 측정 방법은 실제 치수/정밀도/교정·공정한 판단을, 도움 장면은 특정 법률 의무/자격/돌봄 안전을 인증하지 않는다. 실제 광학 정렬/배율·나비/새 종/해부·학습 성과/정보 정확도·같은 인물/새의 실제 동일성·발언 내용/의도/개인 감정·실제 공직 신분/국가/행사/리본 절단 완료를 확정하지 않는다. occasionally의7칸/강조1개는 특정 금요일/매주1회/실제 재택 일정이 아니며 노트북은 뒷면이 주로 보인다. 추상어의 유일한 단어 추론을 보장하지 않는다.
+
+도구 조/나사·옷 단추/지퍼/신발 끈·나비 날개/잎맥·확대경·책 장/노트 스프링·새 깃/가지·배낭 스트랩/버클·달력 칸/제본/고정 끈·노트북 포트·문 손잡이·기둥 구/가위는 물리/도해 요소로 인쇄 문자/숫자/문장부호와 구분했다. 무문자 새·나비 그림은 기록 단서다. QA 하단 항목명은 이미지 밖 검사 라벨이다.
+
+첫10개와 최종10개의 로컬 Chromium320px PNG 디코딩·해시·비율/전체3,809 ID·교재 지문 검증, 재개19개(이미지/API0회), CJS 구문3개가 종료0으로 통과했다. 원본10개/개별320px10개 실제 열람·동결23개·실제 첫 capture 결과10개를 보존했다. 기존3,799항목/원장 접두사/모든 시도별 파일/교재 해시·보류44/실패7·조건 보류를 대조한다. 과거 grade 첫 실제 capture 결과 공백은 미복구로 유지한다. runtime helper는 경로 접두사/캐시 키만 바꿔 base64 문자표 불변을 확인했다. 이번 준비/실행 helper/메타데이터/관측 출력 오류는 없다.
+
+실제 iPhone/독립 학습자 검사는 미실시다. 정적 삽화/목록/문서 범위라 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·학습 기록·API·백업·DB·Sites·의존성·운영 배포 변경은 없다.
+
+누적 제작3,476항목·검수 통과3,433개·보류44개(이미지 없음1)·실패/실행 중단7개·대기325개, PNG3,635장·원장3,642슬롯(확인 호출3,641·기존 전달 미확인1)·수정159회다. B2 승인508/보류5/대기325/실패1이며 A1/A2/B1 집계는 유지된다. 다음 opening 명사는 아직 준비/호출하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `objective` adj.(객관적인), ID `bf3d6060e8b833bb`이다. 이후 obligation, observation, observe, obtain, occasionally, offend, offense, offensive, official 명사 순서이며 아직 준비/호출하지 않았다.
+다음 제작 대기 첫 항목은 `opening` n.(개막), ID `2bb8a042ced4ecba`이다. 이후 operate, opponent, oppose, opposed, opposition, organ, origin, otherwise, outcome 순서이며 아직 준비/호출하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
