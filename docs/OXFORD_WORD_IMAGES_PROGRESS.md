@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3496 |
-| 제작자 품질 검수 통과 `approved` | 3453 |
+| 제작된 서로 다른 항목 | 3506 |
+| 제작자 품질 검수 통과 `approved` | 3463 |
 | 품질·의미·조건 보류 `held` | 44 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 305 |
+| 제작 대기 `waiting` | 295 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3663 |
+| 내장 도구 호출·시작 슬롯 원장 | 3674 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 160 |
+| 그중 품질 수정 호출 | 161 |
 
-이미지 미생성 항목은 제작 대기 305개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 313개다. 제작된 3496개는 검수 통과 3453개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3656개다. 원장 3663회는 이미지가 반환된 3656회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3662회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 295개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 303개다. 제작된 3506개는 검수 통과 3463개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3667개다. 원장 3674회는 이미지가 반환된 3667회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3673회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8589,9 +8589,34 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 체크포인트: 제작3496/검수 통과3453/PNG3656/대기305/보류44/실패7, 시작 슬롯3663·확인된 내장 호출3662/전달 미확인1·수정160. 이미지 미생성313개, 검수 미승인356개로 전체3809개 승인 목표는 미완료다. 재개 시 manifest/원장의 실행 중 항목·저널·완료 파일을 먼저 읽고 승인된 항목을 재생성하지 않는다.
 - 다음 제작 대기 첫 항목은 `participant` n.(참가자), ID `4dd3999713818da4`이다. 이후 partly, passage, patient 형용사, permanent, permit 동사/명사, perspective, phase, phenomenon 순서이며 아직 준비/호출하지 않았다.
 
+## 추가355 · participant~phenomenon — 10개 검수 통과
+
+- 기준 커밋: `aee5b1164dec49671258620137386293fe070b15`. B2/page12 원문10개 ID·품사·기본 뜻·표현/예문/출처를 대조했다. 표제어9개·공식 정의10개/보조2개·검색 요약48개(4×12), 작성 예문6개/Tatoeba4개다. 초기 검색에 phase 명사 원문이 없어 단일 추가 검색1회로 실제 단계 용법을 찾았다. permit의 일반 URL 결과는 corpus 예문뿐이어서 같은 캐시의 query URL에 있는 실제 미국식 동사/명사 본문을 선택했다. 원문 교재의 품사/문장/출처는 바꾸지 않는다. 참고: [participant](https://dictionary.cambridge.org/dictionary/english/participant) · [partly](https://dictionary.cambridge.org/dictionary/english/partly) · [passage](https://dictionary.cambridge.org/dictionary/english/passage) · [patient](https://dictionary.cambridge.org/dictionary/english/patient) · [permanent (employment contrast)](https://dictionary.cambridge.org/dictionary/english/permanent) · [permit](https://dictionary.cambridge.org/dictionary/english/permit?q=permit_1) · [perspective](https://dictionary.cambridge.org/dictionary/english/perspective) · [phase](https://dictionary.cambridge.org/us/dictionary/english/phase?topic=creating-and-producing) · [phenomenon](https://dictionary.cambridge.org/dictionary/english/phenomenon) · [natural phenomenon](https://dictionary.cambridge.org/dictionary/english/natural-phenomenon).
+- 첫 원본10개·개별320px10개를 실제 열어 9개 통과/참가자1개 수정 대상으로 판단했다. 운동화의 대비 곡선 장식이 로고처럼 보이는 문제를 특정 브랜드로 확정하지 않고 한 번 제거했다. 수정 원본/320px도 실제 열어 확인했고 인원4·티셔츠3·동작/탁자/길을 유지해 최종10개 통과다. 신발 끈/솔기/밑창의 물리 구조는 인쇄 표식과 구분한다. 첫10개 반환/원본/actual capture와 동결23개·수정 원본/실제 capture1개를 보존한다. 세 번째 호출/새 보류/서비스 오류0이다.
+
+| 항목 | 실제 그림에서 확인한 대상·수량 | 의미의 범위·한계 |
+|---|---|---|
+| participant | 참가자3/진행자1·티셔츠3(건네는1/탁자의2) | 수정 후 신발의 장식 제거; 실제 브랜드/행사 수신 인증 아님 |
+| partly | 문1의 칠한 부분/미도색 부분·손/붓/통 각1 | 부분 정도; 정확히 절반/예문 인과절을 인증하지 않음 |
+| passage | 펼친 책1·짧은 선택 스트립1/손가락1 | 글의 일부라는 교재 뜻을 함께 사용; 실제 인쇄 지문 없음 |
+| patient 형용사 | 침착한 기다림1/제빵사1/모래시계1 | 참을성, 환자 명사와 구분; 실제 성격/시간 인증 아님 |
+| permanent | 고용 작업의 두 시기·같은 작업대/창 배치 | 상시 고용 단서; 실제 계약/영원한 고용 인증 아님 |
+| permit 동사 | 성인2·열린 문1/입장을 허가하는 손짓 | 허가 행동, 원문 부정문을 그대로 재연하지 않음 |
+| permit 명사 | 큰 무문자 카드1·관리자/차/올라간 차단봉 | 주차 허가증 문서 맥락; 실제 법적 유효성/가격 인증 아님 |
+| perspective | 비를 반기는 정원사/불편한 여행자·관련 맥락2 | 상황을 바라보는 다른 관점; 실제 의견/미술 원근법 아님 |
+| phase | 두 성장 관찰 단계·첫 잎2/다음 잎6 | 더 긴 과정의 단계; 실제 시간/생물학의 정밀성 인증 아님 |
+| phenomenon | 자연 풍경 무지개 호1/관찰자1 | 자연 현상, 성공 인물 의미와 구분; 광학 수치 인증 아님 |
+
+- `passage`의 글자 금지는 유지했다. 선택한 짧은 읽기 영역과 전체 책의 관계를 교재 뜻과 함께 쓰는 연상 단서로 검수했다. 빈 페이지에 실제 글을 그렸거나 이미지가 구절 내용을 설명한다고 기록하지 않는다. `permanent`는 HR의 지속 고용, `permit`는 허가하는 동사/공식 문서 명사를 구분한다. 관점은 같은 비에 대한 다른 반응이고 phase는 성장 관찰 단계다. 무지개는 자연 현상의 예로 추론한 장면이며 정확한 물리학 설명/영어 정확도 인증이 아니다.
+- 준비 후 함수 캐시 연결에서 JSON의 `nativeOnce` 대신 `native_once`를 선택해 store(undefined)가 거절된1건은 실제 이미지 호출 전에 발생했다. 성공한 동일 core JSON을 읽어 올바른 키로 연결했고 준비/CLI/이미지/QA를 재실행하지 않았다. 전체 실패 호출 코드 원문은 대화에 남고 별도 파일 원문으로 보존하지 못했다는 한계를 기록한다. 선택한 본문을 출력하던 초기 검색 보고 잘림1건도 같은 검색 캐시에서 필요한 실제 본문을 다시 읽어 복구했고 추가 검색/생성/QA0이다. phase의 의미 찾기용 추가 검색1회와 출력 복구를 구분한다.
+- 문서 갱신 검사1건이 기존 묶음 설명과 재개 구간에 같은 다음 문장이 있어 유일 위치 assertion에서 멈췄다. 문서 쓰기 전 중단을 확인했고 실패 도구 원문/종료1 결과·입력/장 문서를 보존했다. 재개 구간 제목+문장의 정확한 문맥으로 한 위치만 바꾸도록 수정했으며 native/QA 재실행0이다.
+- QA는 로컬 Chromium·루프백320px이며 실제 iPhone/독립 학습자 평가를 수행하지 않았다. 연결/디코딩 검사10개, 수정 연결/디코딩1개, 재개 보호19개·도구3개 구문 검사0 종료를 확인했다. 최종 guard에서 전체3809개 ID/fingerprint·모든3667개 PNG 해시/크기·이전3799개 항목과 동결 자료/문서 대조를 확인한다. 이전 grade 첫 실제 capture 미복구1건과 전달 미확인 중단1슬롯을 복구/호출 확인으로 바꾸지 않는다.
+- 누적 제작3506/검수 통과3463/PNG3667/대기295/보류44/실패7, 시작 슬롯3674·확인된 내장 호출3673/전달 미확인1·수정161이다. 이미지 없음303개·미승인346개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이며 앱 전체 테스트/타입/린트/빌드는 정적 제작 범위라 실행하지 않는다. 재개는 실행 중 항목/저널/완료 파일을 먼저 확인하고 승인된 항목을 건너뛴다.
+- 다음 제작 대기 첫 항목은 `philosophy` n.(철학), ID `66f2cbffd89f3bfe`이다. 이후 pick 명사, picture 동사, pile 명사/동사, pitch 명사, plain, plot 동사, plus 형용사/명사 순서이며 아직 준비/호출하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `participant` n.(참가자), ID `4dd3999713818da4`이다. 이후 partly, passage, patient 형용사, permanent, permit 동사/명사, perspective, phase, phenomenon 순서이며 아직 준비/호출하지 않았다.
+다음 제작 대기 첫 항목은 `philosophy` n.(철학), ID `66f2cbffd89f3bfe`이다. 이후 pick 명사, picture 동사, pile 명사/동사, pitch 명사, plain, plot 동사, plus 형용사/명사 순서이며 아직 준비/호출하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
