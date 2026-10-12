@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3516 |
-| 제작자 품질 검수 통과 `approved` | 3473 |
+| 제작된 서로 다른 항목 | 3526 |
+| 제작자 품질 검수 통과 `approved` | 3483 |
 | 품질·의미·조건 보류 `held` | 44 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 285 |
+| 제작 대기 `waiting` | 275 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3684 |
+| 내장 도구 호출·시작 슬롯 원장 | 3694 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 161 |
 
-이미지 미생성 항목은 제작 대기 285개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 293개다. 제작된 3516개는 검수 통과 3473개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3677개다. 원장 3684회는 이미지가 반환된 3677회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3683회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 275개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 283개다. 제작된 3526개는 검수 통과 3483개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3687개다. 원장 3694회는 이미지가 반환된 3687회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3693회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8638,9 +8638,35 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 누적 제작3516/검수 통과3473/PNG3677/대기285/보류44/실패7, 시작 슬롯3684·확인된 내장 호출3683/전달 미확인1·수정161이다. B2 검수 통과548/보류5/대기285/실패1이고 A1/A2/B1 집계는 유지한다. 이미지 없음293개·미승인336개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
 - 재개는 실행 중 항목·저널·실제 완료 파일을 먼저 확인하고 승인된 항목을 재생성하지 않는다. 다음 제작 대기 첫 항목은 `plus` conj.(게다가), ID `f88284757d8da2a3`이다. 이후 pointed, popularity, pose 동사, position 동사, positive 명사, possess, potential 형용사/명사, power 동사 순서이며 아직 준비/호출하지 않았다.
 
+## 추가357 · plus 접속사~power 동사 — 10개 검수 통과
+
+- 기준 커밋: `6088b2db5ac54c9ee77a5e5610cdfb5e861e0c53`. B2/page12의 교재10개 ID·품사·기본 뜻·표현/예문/출처를 실제 대조했다. 표제어9개·공식 정의10개/보조2개·검색 요약36개(3×12), 작성 예문10개/Tatoeba0개다. 추가 조회0이다. plus는 실제 conjunction ADDITION 소제목, pose는 ASK, position은 verb, positive는 noun GOOD THING, possess는 OWN의 지닌 기술 용법, potential은 adjective와 noun ABILITY, power는 verb ENERGY 및 태양광 지원 본문을 선택했다. 참고: [plus](https://dictionary.cambridge.org/us/dictionary/english/plus) · [pointed](https://dictionary.cambridge.org/dictionary/english/pointed) · [popularity](https://dictionary.cambridge.org/dictionary/essential-british-english/popularity) · [pose](https://dictionary.cambridge.org/dictionary/english/pose) · [position](https://dictionary.cambridge.org/dictionary/english/position) · [positive](https://dictionary.cambridge.org/dictionary/english/positive) · [possess](https://dictionary.cambridge.org/us/dictionary/english/possess) · [potential](https://dictionary.cambridge.org/dictionary/english/potential) · [power](https://dictionary.cambridge.org/dictionary/english/power).
+- 내장 도구 각1회로 첫 원본10개를 제작해 원본과 각각의320px 화면을 실제 열어 확인했다. 품질 수정0/새 보류0/서비스 오류0, 기존 보류44/실패7을 유지한다. 첫 원본·프롬프트/슬롯/도구 반환/실제 capture10개·동결23개를 보존한다. 이전356 마감 도우미의 따옴표 구문 오류1건과 수정 근거도 보존한다.
+
+| 항목 | 실제 확인한 대상·수량 | 의미 범위와 한계 |
+|---|---|---|
+| plus 접속사 | 도서관 독서/책 건네주기2장면·성인3묘사·활성 책2묘사 | 추가 이점; 교재 뜻과 함께 해석하며 실제 무료 요금·동일인물 인증 아님 |
+| pointed 형용사 | 모자1·뾰족한 끝1·챙/띠 각1 | 날카롭게 좁아지는 끝; 특정 유명 캐릭터·재료 인증 아님 |
+| popularity 명사 | 공연자1·청중4 총 성인5·박수 | 많은 사람에게 호감을 받음; 실제 인기 증가·인물/브랜드 인증 아님 |
+| pose 동사 | 질문하는 성인1/듣는 성인1·탁자1·빈 의자2 | 질문 제기 용법; 실제 발화·정체성 인증 아님 |
+| position 동사 | 성인1·둥근 탁자1·의자3(기존2/이동1) | 배치하는 행동; 실제 공간 규격 인증 아님 |
+| positive 명사 | 장인1·완성 원목 의자1·다리4·작업대1 | 좋은 측면; 의료 결과/수학 기호와 구분하며 품질·안전 인증 아님 |
+| possess 동사 | 장인1·그릇/도구/작업대 각1 | 이미 지닌 기술; 실제 숙련도/교육 이력 인증 아님 |
+| potential 형용사 | 현재 마른 정원/가능한 비2장면·탁자2/의자4/화분2묘사 | 가능한 문제; 실제 예보/확률·확정 강우 인증 아님 |
+| potential 명사 | 빈 방/활용 가능 방2장면·창2묘사·소파/받침/화분/러그 각1 | 발전 가능성; 실제 공사 완료/가치/구조 안전 인증 아님 |
+| power 동사 | 태양광 패널/배터리 상자/해 각1·켜진 정원등3 | 에너지 공급; 실제 회로 연속성·전압/출력/안전 인증 아님 |
+
+- 모든 장면은 기본 뜻과 함께 제공하는 학습 연상 단서다. potential의 작은 미래 장면은 조건에 따른 가능성이며 미래를 확정하지 않는다. power는 낮빛과 케이블/등을 함께 그린 에너지 공급 맥락이고 실제 설계도나 회로 검증으로 취급하지 않는다. plus의 도서관 배경 책 일부는 가려져 있어 정확한 전체 권수를 인증하지 않는다.
+- 책등 제본선·공연자 상의 끈/버클·가구 교차 지지대/이음매·나뭇결/부스러기·빗방울·창틀/바닥 결·태양광 셀 격자/배터리 클립·등 구조를 인쇄 문자/숫자/로고와 구분했다. QA HTML 표제의 `plus1`과 품사/뜻은 PNG 밖 검사 페이지 텍스트이며 이미지 내 글자가 아니다. 실제 iPhone·독립 학습자 평가는 미실시이며 전체 영어 정확도 인증이 아니다.
+- 첫 생성 결과 보고의 관측 손실1건, 사용자 수량 조회에서 넓은 파일 목록의 출력 손실1건, 재개 시 인수인계/스킬 결합 읽기의 출력 손실1건을 같은 캐시/실제 파일의 좁은 읽기로 복구했다. index8은 기존 실제 capture `11fda2`/종료0을 재사용하며 재호출하지 않았다. 사전 손실 시점 해시가 있었다고 주장하지 않고 복구 기록 저장 직전/직후 목록·원장 해시가 같음을 기록했다. 검수 예시 조회에서 잘못 추정한 quantity-audit 파일명1건(종료1)은 실제 quantity-checks 파일/기존 캐시로 복구했다. 실패 호출 전체 출력은 대화에 있으며 별도 원본 파일 보존이 없는 한계를 기록했다. 복구로 인한 이미지/QA 추가0이며 영어/이미지 품질 수정으로 세지 않는다.
+- 직전 수량 조회 턴은 제작 변경 없는 no progress로 분류했다. 재개 시 HEAD·생성9개/진행중0·실제 완료 파일을 재확인한 뒤 기존 index8 원본을 검수하고 준비한 power의 첫 호출1회로 묶음을 이어 갔다. 이번 재개 턴은 새 이미지1개·승인10개, 묶음 전체는 첫 이미지10개다.
+- 연결/디코딩/320px 검사10개·재개 보호19개·도구3개 구문 검사를 종료0으로 확인했다. 최종 guard는 전체3809개 ID/source fingerprint·모든3687개 PNG 해시/크기·기존3799개 항목·동결 자료·문서 재생 대조를 확인한다. 이전 grade 첫 실제 capture 미복구1건과 전달 미확인 중단1슬롯은 유지한다. 정적 이미지/목록/문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다.
+- 누적 제작3526/승인3483/PNG3687/대기275/보류44/실패7, 시작 슬롯3694·확인된 내장 호출3693/전달 미확인1·수정161이다. B2 승인558/보류5/대기275/실패1이며 A1/A2/B1 집계는 유지한다. 미생성283개·미승인326개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
+- 재개는 진행 중 항목·저널·실제 완료 파일을 먼저 확인하고 승인된 항목을 재생성하지 않는다. 다음 제작 대기 첫 항목은 `praise` n.(칭찬), ID `0b9f7decb7a4d2ce`이다. 이후 praise 동사, pregnant, preparation, presence, preserve, price 동사, prime, principal, principle 순서이며 아직 준비/호출하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `plus` conj.(게다가), ID `f88284757d8da2a3`이다. 이후 pointed, popularity, pose 동사, position 동사, positive 명사, possess, potential 형용사/명사, power 동사 순서이며 아직 준비/호출하지 않았다.
+다음 제작 대기 첫 항목은 `praise` n.(칭찬), ID `0b9f7decb7a4d2ce`이다. 이후 praise 동사, pregnant, preparation, presence, preserve, price 동사, prime, principal, principle 순서이며 아직 준비/호출하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
