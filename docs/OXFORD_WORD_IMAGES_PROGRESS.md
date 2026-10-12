@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3456 |
-| 제작자 품질 검수 통과 `approved` | 3413 |
+| 제작된 서로 다른 항목 | 3466 |
+| 제작자 품질 검수 통과 `approved` | 3423 |
 | 품질·의미·조건 보류 `held` | 44 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 345 |
+| 제작 대기 `waiting` | 335 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3620 |
+| 내장 도구 호출·시작 슬롯 원장 | 3632 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 157 |
+| 그중 품질 수정 호출 | 159 |
 
-이미지 미생성 항목은 제작 대기 345개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 353개다. 제작된 3456개는 검수 통과 3413개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3613개다. 원장 3620회는 이미지가 반환된 3613회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3619회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 335개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 343개다. 제작된 3466개는 검수 통과 3423개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3625개다. 원장 3632회는 이미지가 반환된 3625회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3631회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8469,9 +8469,40 @@ Cambridge의 품사·기본 뜻 정의10개(8표제어)와 문 위 카메라 설
 
 누적 제작3,456항목·검수 통과3,413개·보류44개(이미지 없음1)·실패/실행 중단7개·대기345개, PNG3,613장·원장3,620슬롯(확인 호출3,619·기존 전달 미확인1)·수정157회다. B2 승인488/보류5/대기345/실패1이며 A1/A2/B1 집계는 유지된다. 다음 national 명사는 아직 준비/호출하지 않았다.
 
+## 추가 제작 351 · 2026-10-13
+
+B2 national 명사부터 objective 명사까지 신규10개를 제작해 모두 검수 통과했다. 내장 도구 첫 생성10회와 허용된 품질 보정2회이며, 보정 대상 nevertheless/object는 v1/v2를 모두 보존했다. 새 보류/서비스 오류는 없다. 직전 수량 안내는 읽기만 수행한 no progress였고, 이번 재개에서350의 이미 생성된10개를 검증해 커밋/푸시한 뒤351을 진행했다. 시작 기준 HEAD/추적/실제 원격 a9601eb 일치·깨끗한 상태·미해결 호출 없음과 정규 대기 순서를 확인했다. 전체3,809개 승인 목표는 미완료다.
+
+| 항목 | 실제 확인한 관계·수량 |
+|---|---|
+| national 명사 | 전경 성인2·배경 실루엣1/닫힌 여권1·전경 여행가방1·배경 짐1. 외국 입국의 국적자 맥락 |
+| negative 명사 | 성인1·천장 누수1·양동이1/떨어지는 물방울6. 거주 공간의 불리한 특징 |
+| nerve 명사 | 성인2·바이올린/활/무문자 책 각1. 음악이 신경을 거슬리게 하는 관용 표현 |
+| nevertheless 부사 | v1 왼쪽5/오른쪽7블록. v2 왼쪽5/오른쪽 쌓인3·손1·옆1=5, 두 순간 수량 보존 |
+| nightmare 명사 | 잠든 성인1·꿈속 인물1/꿈 장면1·큰 그림자1. 불안한 꿈 |
+| notion 명사 | 성인1·빈 노트/연필 각1·상상한 궤짝/열쇠 각1. 추리 이야기 아이디어 |
+| numerous 형용사 | 트레이1·명확한 머리가 보이는 열쇠20개 이상. 일부 가림/샤프트만 보이는 물체가 있어 정밀 총개수 미확정 |
+| obey 동사 | 성인2·벤치 위 보안경1쌍/착용한 보안경1쌍. 가리킨 지시를 따르는 동작 |
+| object 동사 | 성인3·탁자/계획 용지 각1·반대 손바닥 동작. v1 화살표1→v2 없음 |
+| objective 명사 | 성인1·통2묘사·오른쪽 빈 통 앞 바닥 폐기물2/재사용 가방1. 적은 폐기물을 원하는 목표 |
+
+Cambridge 품사·용법 정의10개(10표제어)와 foreign national 예시/get on someone's nerves 보조2개를 실제 읽고 교재에 대조했다. [국적자](https://dictionary.cambridge.org/dictionary/english/national), [부정적인 면](https://dictionary.cambridge.org/dictionary/english/negative?topic=not-hopeful), [nerve의 WORRY 절](https://dictionary.cambridge.org/dictionary/english/nerve)과 [신경을 거슬리게 하다](https://dictionary.cambridge.org/dictionary/english/get-on-nerves), [그럼에도 불구하고](https://dictionary.cambridge.org/dictionary/english/nevertheless), [악몽](https://dictionary.cambridge.org/dictionary/english/nightmare), [생각](https://dictionary.cambridge.org/dictionary/english/notion), [수많은](https://dictionary.cambridge.org/dictionary/english/numerous), [지시를 따르다](https://dictionary.cambridge.org/dictionary/english/obey), [object 동사의 OPPOSE](https://dictionary.cambridge.org/dictionary/english/object?topic=grammatical-terms), [목표 명사](https://dictionary.cambridge.org/dictionary/english/objective)를 사용했다. negative를 필름/음수/부정 답변/검사 결과와, object를 물체/목적/문법 목적어와, objective를 공정한 형용사와 구분했다. nerve 그림은 교재 관용 표현을 위한 단서이며 신체 신경 해부나 용기의 모든 용법을 설명하지 않는다.
+
+검색 결과60개(12/12/12/12/12)를 보존했다. 초기 검색에 negative 명사/object 동사 정의가 없어 추가3질의를 수행했고, negative의 BAD THING 절을 얻기 위해 추가2질의를 수행했다. 없는 Grammar 경계는 같은 본문의 다음 TEST RESULT 헤더로 바로잡았다. 선택한10의미/보조2절을 읽었으며 검색60개 전체 본문이나12독립 페이지를 읽었다고 주장하지 않는다. national 보조는 같은 본문을 공유한다. 교재 작성 예문9개/Tatoeba 참고 예문1개와 귀속/URL·번역을 그대로 유지했다.
+
+그림은 교재 뜻과 함께 사용하는 연상 단서다. 실제 시민권/국가/외모에 따른 국적·누수 원인/안전·실제 소리/개인 정신 상태·꿈/생각/완성 작품·블록/인물의 실제 동일성이나 최종 성공·모든 열쇠의 작동/재료·실험실 안전이나 모든 규칙 준수·실제 사업/주민 의견·측정한 쓰레기 감소/분리수거 적합성/유일한 단어 추론을 인증하지 않는다. objective의 폐기물2개는 통 안이 아니라 바닥에 있고, numerous는 정확한 수량 정답으로 쓰지 않는다.
+
+원본12개와 개별320px 화면12개를 실제 확인했다. 책의 페이지 선·악기 f홀/현/페그·나뭇결/금속 머리/구멍/이빨·보안경 렌즈/밴드·계획 속 차량/주차선·물방울/빗줄기·궤짝 열쇠 구멍/창 격자/불꽃·포장재 윤곽/뚜껑·옷 솔기/신발 끈은 물리·도해 요소와 인쇄 문자를 구분했다. object의 인쇄 화살표는 명시한 무기호 조건에 맞춰 제거했다. QA 하단의 항목명은 이미지 밖 검사 라벨이다.
+
+첫10개/보정2개/최종10개의 로컬 Chromium320px PNG 디코딩·해시·비율/전체3,809 ID/교재 지문 검증, 재개19개(이미지/API0회), CJS 구문3개가 종료0으로 통과했다. 동결23개·실제 첫 capture10개/보정 capture2개·기존3,799항목/원장 접두사/모든 시도·교재 해시·기존 보류44/실패7을 보존한다. 과거 grade 첫 실제 capture 결과 공백은 미복구다. runtime helper는 경로 접두사/캐시 키만 바꿔 base64 문자표 불변을 확인했다. 준비 builder의 치환 횟수 검사1건과 zero-correction 동결 helper/보정 collector의 계약 오류2건은 원본 소스/실패 결과/부분 동결 파일을 보존하고 고쳤다. 복구로 추가 native/QA 호출을 하지 않았다. 관측 출력 잘림/메타데이터/서비스 오류는 없다.
+
+실제 iPhone/독립 학습자 검사는 미실시다. 정적 삽화/목록/문서 범위라 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·학습 기록·API·백업·DB·Sites·의존성·운영 배포 변경은 없다.
+
+누적 제작3,466항목·검수 통과3,423개·보류44개(이미지 없음1)·실패/실행 중단7개·대기335개, PNG3,625장·원장3,632슬롯(확인 호출3,631·기존 전달 미확인1)·수정159회다. B2 승인498/보류5/대기335/실패1이며 A1/A2/B1 집계는 유지된다. 다음 objective 형용사는 아직 준비/호출하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `national` n.(국적자), ID `97a986f99824cb35`이다. 이후 negative 명사, nerve, nevertheless, nightmare, notion, numerous, obey, object 동사, objective 명사 순서이며 아직 준비/호출하지 않았다.
+다음 제작 대기 첫 항목은 `objective` adj.(객관적인), ID `bf3d6060e8b833bb`이다. 이후 obligation, observation, observe, obtain, occasionally, offend, offense, offensive, official 명사 순서이며 아직 준비/호출하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
