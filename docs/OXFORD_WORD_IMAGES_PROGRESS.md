@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3476 |
-| 제작자 품질 검수 통과 `approved` | 3433 |
+| 제작된 서로 다른 항목 | 3486 |
+| 제작자 품질 검수 통과 `approved` | 3443 |
 | 품질·의미·조건 보류 `held` | 44 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 325 |
+| 제작 대기 `waiting` | 315 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3642 |
+| 내장 도구 호출·시작 슬롯 원장 | 3653 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 159 |
+| 그중 품질 수정 호출 | 160 |
 
-이미지 미생성 항목은 제작 대기 325개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 333개다. 제작된 3476개는 검수 통과 3433개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3635개다. 원장 3642회는 이미지가 반환된 3635회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3641회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 315개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 323개다. 제작된 3486개는 검수 통과 3443개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3646개다. 원장 3653회는 이미지가 반환된 3646회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3652회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8531,9 +8531,42 @@ Cambridge의 품사·뜻 정의10개(10표제어)와 observation의 자연 관�
 
 누적 제작3,476항목·검수 통과3,433개·보류44개(이미지 없음1)·실패/실행 중단7개·대기325개, PNG3,635장·원장3,642슬롯(확인 호출3,641·기존 전달 미확인1)·수정159회다. B2 승인508/보류5/대기325/실패1이며 A1/A2/B1 집계는 유지된다. 다음 opening 명사는 아직 준비/호출하지 않았다.
 
+## 추가 제작 353 · 2026-10-13
+
+B2 opening 명사~outcome 명사 신규10개를 제작해 모두 검수 통과했다. 내장 도구 첫 생성10회/품질 보정1회다. opponent의 신발 옆 로고형 장식은 특정 브랜드로 확정하지 않고 한 번 제거했으며 v1/v2를 모두 보존한다. 새 보류/서비스 오류는 없다. 직전352는10개 첫 시도 검수·보존 검사·커밋/푸시를 마친 progress였다. 시작 전 HEAD/추적/실제 원격336c7c2 일치·깨끗한 상태·미해결 호출 없음과 정규 대기 순서를 확인했다. 전체3,809개 승인 목표는 미완료다.
+
+| 항목 | 실제 확인한 관계·수량 |
+|---|---|
+| opening 명사 | 성인5(리본 절단1·양끝 지지2·박수2)·리본/가위/출입구 각1. 개막 의식 |
+| operate 동사 | 성인3(운영자/고객/작업자)·카운터/봉투/트레이/선반 각1, 봉투 속 빵1. 일상 사업 운영 |
+| opponent 명사 | 선수2·네트1·라켓2/공1, 네트 양편의 경쟁. v1 신발 대비 장식→v2 단순 무표식 옆면 |
+| oppose 동사 | 성인2·탁자/계획 용지 각1. 열린 손바닥으로 계획에 반대하는 행동 |
+| opposed 형용사 | 성인3(설명자1·불찬성 듣는2)·탁자/계획 용지 각1. 팔짱·돌린 시선의 반대 입장 |
+| opposition 명사 | 성인4(설명자1·주민3)·열린 손바닥5·계획 용지1. 집단의 강한 반대 |
+| organ 명사 | 심장형 교육 모형1·지지봉/받침대 각1. 온전한 모형, 피/절개 없음 |
+| origin 명사 | 발원 지점1·연속 개울1. 시작/기원의 단서 |
+| otherwise 부사 | 두 관련 장면·성인/가방 각2묘사·현관/승강장/기차 각1, 후미등2. 출발 지연의 조건 결과 |
+| outcome 명사 | 두 순간·환자/진료자 각2묘사(성인4)·벤치/회전 의자 각1, 앉아 쉬기→편안한 악수. 긍정적 경과의 단서 |
+
+Cambridge 품사·용법 정의10개(10표제어)와 opening ceremony/otherwise if-not 보조2개를 실제 읽고 교재에 대조했다. [opening의 CEREMONY](https://dictionary.cambridge.org/dictionary/english/opening)와 [개막식 보조](https://dictionary.cambridge.org/dictionary/english/opening-ceremony), [operate의 Business 운영 뜻](https://dictionary.cambridge.org/dictionary/english/operate), [opponent의 COMPETITOR](https://dictionary.cambridge.org/dictionary/english/opponent), [oppose](https://dictionary.cambridge.org/dictionary/english/oppose), [opposed의 DISAGREE WITH](https://dictionary.cambridge.org/dictionary/english/opposed?topic=yes-no-and-not), [opposition의 DISAGREEMENT](https://dictionary.cambridge.org/dictionary/english/opposition), [organ의 BODY PART](https://dictionary.cambridge.org/dictionary/english/organ), [origin의 시작/원인](https://dictionary.cambridge.org/dictionary/english/origin), [otherwise의 if-not](https://dictionary.cambridge.org/dictionary/english/otherwise), [outcome의 결과](https://dictionary.cambridge.org/dictionary/english/outcome?q=outcomes)를 확인했다. 개막을 구멍/기회와, 운영을 수술/기계 조작과, 반대를 단순 공간 방향/스포츠 팀/의회 야당과, 장기를 악기/신문과 구분했다.
+
+Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 분류한다. 교재의 adv 표시는 그대로 보존하며 사전이 이 의미를 adverb로 표시한다고 주장하지 않는다. '다르게/달리 알려진/그 외에'의 다른 뜻을 그림에 오적용하지 않았다. 교재 지문/번역·작성 예문8개/Tatoeba 참고 예문2개와 귀속/URL은 유지했다.
+
+검색48개(12/12/12/12)를 보존했다. 중복 WORK 헤더와 없는 SMART Vocabulary 경계는 같은 반환 본문에서 실제 Business 운영 절/origin의 첫 시작 뜻/outcome의 결과 절로 바로잡았다. opening 보조의 검색 요약 헤더는 준비 전 실제 정의 헤더로 수정했으며 잘못 고른 본문을 파일로 저장한 것으로 꾸미지 않는다. 추가 공식 otherwise 질의1개로 if-not 의미와 품사 분류 차이를 확인했다. 선택한10의미/보조2절을 실제 읽었으며 검색48개 전체 본문/12독립 페이지를 읽었다고 주장하지 않는다. 보조는 primary와 같은 페이지를 공유할 수 있다.
+
+그림은 기본 뜻과 함께 사용하는 연상 단서다. 실제 개장/공직 신분/리본 절단 완료·사업 소유권/성과·경기 점수/강도/규격/공 궤적·발언/정책/주민 입장·임상 해부/혈류/색 범례/환자 장기 상태·실제 발원지/수문학/수질·시간표/열차 움직임/지각 인과관계·실제 치유/치료 효과/의료 자격/같은 인물의 실제 시간 경과를 인증하지 않는다. origin 그림은 시작점의 예이며 교재 물건의 unknown origin이 해결됐다는 뜻이 아니다. outcome은 희망하는 긍정적 경과의 단서이며 치료 권고·치유 보장이 아니다. 유일한 단어 추론을 보장하지 않는다.
+
+신발 끈/필요한 솔기·라켓/네트 망·코트 선·빵 칼집/직조/나뭇결·벨트 버클/안경/귀걸이 고리·계획 속 창/도로/나무·모형의 관 구멍/지지봉·바위/물결/물보라·후미등/레일/문 손잡이·의자/코트 단추는 물리/도해 요소로 인쇄 문자/숫자/문장부호와 구분했다. opponent의 대비 장식은 신발의 구조·기능에 필요한 물리 요소와 구분해 제거했다. 특정 브랜드명은 확인하지 않았다. QA 하단 항목명은 이미지 밖 검사 라벨이다.
+
+첫10개/보정1개/최종10개의 로컬 Chromium320px PNG 디코딩·해시·세로 비율/전체3,809 ID·교재 지문 검증, 재개19개(이미지/API0회), CJS 구문3개가 종료0으로 통과했다. 원본11개/개별320px11개를 실제 열람했다. 동결23개·실제 첫 capture10개/보정 capture1개·기존3,799항목/원장 접두사·모든 시도별 이미지·교재 해시·기존 보류44/실패7·조건 보류를 보존한다. 과거 grade 첫 실제 capture 결과 공백은 미복구로 유지한다. runtime helper는 경로 접두사/캐시 키만 변환해 base64 문자표 불변을 확인했다. 이번 준비/실행 helper/메타데이터/관측 출력 오류는 없다.
+
+실제 iPhone/독립 학습자 검사는 미실시다. 정적 삽화/목록/문서 범위라 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·학습 기록·API·백업·DB·Sites·의존성·운영 배포 변경은 없다.
+
+누적 제작3,486항목·검수 통과3,443개·보류44개(이미지 없음1)·실패/실행 중단7개·대기315개, PNG3,646장·원장3,653슬롯(확인 호출3,652·기존 전달 미확인1)·수정160회다. B2 승인518/보류5/대기315/실패1이며 A1/A2/B1 집계는 유지된다. 다음 outer 형용사는 아직 준비/호출하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `opening` n.(개막), ID `2bb8a042ced4ecba`이다. 이후 operate, opponent, oppose, opposed, opposition, organ, origin, otherwise, outcome 순서이며 아직 준비/호출하지 않았다.
+다음 제작 대기 첫 항목은 `outer` adj.(바깥의), ID `75f131a91e32b3a1`이다. 이후 outline 명사/동사, overall 형용사/부사, owe, pace 명사/동사, package 동사, panel 순서이며 아직 준비/호출하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
