@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3526 |
-| 제작자 품질 검수 통과 `approved` | 3483 |
+| 제작된 서로 다른 항목 | 3536 |
+| 제작자 품질 검수 통과 `approved` | 3493 |
 | 품질·의미·조건 보류 `held` | 44 |
 | 그중 생성 전 조건 보류(이미지 없음) | 1 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 275 |
+| 제작 대기 `waiting` | 265 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3694 |
+| 내장 도구 호출·시작 슬롯 원장 | 3704 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 161 |
 
-이미지 미생성 항목은 제작 대기 275개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 283개다. 제작된 3526개는 검수 통과 3483개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3687개다. 원장 3694회는 이미지가 반환된 3687회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3693회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 265개·생성 전 조건 보류 `letter` 1개·실패/실행 중단 7개를 합친 273개다. 제작된 3536개는 검수 통과 3493개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3697개다. 원장 3704회는 이미지가 반환된 3697회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3703회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8664,9 +8664,33 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 누적 제작3526/승인3483/PNG3687/대기275/보류44/실패7, 시작 슬롯3694·확인된 내장 호출3693/전달 미확인1·수정161이다. B2 승인558/보류5/대기275/실패1이며 A1/A2/B1 집계는 유지한다. 미생성283개·미승인326개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
 - 재개는 진행 중 항목·저널·실제 완료 파일을 먼저 확인하고 승인된 항목을 재생성하지 않는다. 다음 제작 대기 첫 항목은 `praise` n.(칭찬), ID `0b9f7decb7a4d2ce`이다. 이후 praise 동사, pregnant, preparation, presence, preserve, price 동사, prime, principal, principle 순서이며 아직 준비/호출하지 않았다.
 
+## 추가358 · praise~principle — 10개 검수 통과
+
+- 기준 커밋: `5726aa454f2b4a2d78b1dbfdf965167d2688ccf4`. B2/page12 교재10개 ID·품사·기본 뜻·표현/예문/출처를 실제 대조했다. 표제어9개·공식 정의10개/보조2개·검색 요약48개(4×12), 작성 예문9개/Tatoeba1개다. 초기 검색에 pregnant 본문이 없어 추가 조회1회로 FEMALE 용법을 확인했다. praise는 noun APPROVAL/verb SHOW APPROVAL을 종교 용법과 구분했고, preparation은 GETTING READY, presence는 실제 그 자리에 있는 용법, preserve는 KEEP의 건물 보존 예문, price는 verb, prime는 MAIN/BEST의 대표 사례 예문, principal은 중요도의 우선, principle은 MORAL RULE의 공정성 용법을 선택했다. 참고: [praise](https://dictionary.cambridge.org/dictionary/english/praise) · [pregnant](https://dictionary.cambridge.org/dictionary/english/pregnant) · [preparation](https://dictionary.cambridge.org/dictionary/english/preparation) · [presence](https://dictionary.cambridge.org/dictionary/english/presence) · [preserve](https://dictionary.cambridge.org/dictionary/english/preserve) · [price](https://dictionary.cambridge.org/us/dictionary/english/price) · [prime](https://dictionary.cambridge.org/us/dictionary/english/prime) · [principal](https://dictionary.cambridge.org/dictionary/english/principal) · [principle](https://dictionary.cambridge.org/dictionary/english/principle).
+- 내장 도구 각1회로 첫 원본10개를 제작하고 원본과 개별320px 화면을 실제 열어 확인했다. 품질 수정0/새 보류0/서비스·준비·실행·관측 오류0이며 기존 보류44/실패7을 유지한다. 첫 원본·실제 프롬프트/슬롯/반환/capture10개·동결23개를 보존한다. 이전357의 관측 복구3건과 조회 파일명 오류1건, 과거356 마감 구문 오류/회복 근거를 변경하지 않는다.
+
+| 항목 | 실제 확인한 대상·수량 | 의미 범위와 한계 |
+|---|---|---|
+| praise 명사 | 칭찬하는 성인1/받는2·완성 상자/작업대 각1 | 받는 칭찬; 실제 발화·품질/능력 평가 인증 아님 |
+| praise 동사 | 성인 교사/학습자 각1·다리 모형1·탁자1 | 칭찬하는 행동; 설명 명확성/실제 성과 인증 아님 |
+| pregnant | 옷 입은 성인 여성1·둥근 배·양손 | 일반 임신 연상 단서; 정확히4개월/실제 임신/태아 건강/의학 진단 인증 아님 |
+| preparation | 정돈하는 성인1·폴더2/빈 종이1/연필1·빈 의자4 | 회의 전 준비; 일정/준비 완료/효과 인증 아님 |
+| presence | 말하는 성인1/듣는2·탁자1/의자3 | 실제 자리에 함께 있음; 정체성/출석 기록/대화 인증 아님 |
+| preserve | 성인1·기존 목조 문틀/석벽·붓/통 각1 | 유지·보존; 문화재 연대/보존 방법 안전/완료 인증 아님 |
+| price 동사 | 성인1·그릇1·무표기 원판3(탁자2/손1) | 판매 전 값 배정; 액면/실제 가격·판매 완료 인증 아님 |
+| prime | 정돈된 공원1·곡선 보도1/벤치2·주된 나무1/작은 침엽수1 | 대표적인 설계 사례; 최고 순위/접근성/연대 인증 아님 |
+| principal | 성인2·집 모형1·주된 비용 원판 묶음 | 주요 이유; 원판4더미/단독2를 구분하되 정확한 전체 개수·예산·실제 인과 인증 아님 |
+| principle | 진행자1/착석 성인3·그릇3·사과3(담긴2/놓는1) | 동일한 몫의 공정성 원칙; 실제 모임 정책/장기적 공정성/식이 적합성 인증 아님 |
+
+- 이미지들은 교재의 기본 뜻과 함께 쓰는 연상 단서이며 해당 단어 하나를 유일하게 추론한다는 평가가 아니다. 임신한 외형은 실제 임신 진단·임신 개월 수·태아 건강을 판정하는 자료가 아니다. prime는 대표 사례와 좋은 설계의 교재 맥락이며 수학 소수나 최고 공원 순위와 구분한다. principal은 실제 비용 결정의 인과를 검증하는 그림이 아니며 교장/대출 원금 명사와 구분한다.
+- 상자/교량 버팀대·안경/니트·원피스/허리 이음매·폴더/연필·의자/문 손잡이·나뭇결/석벽·원판 가장자리/겹침·공원 보도/벤치·집 창틀·사과 꼭지/그릇 테두리를 인쇄 글자·숫자·로고와 구분했다. QA HTML 아래 단어/품사/뜻은 PNG 안 글자가 아니다. 실제 iPhone·독립 학습자 평가·전체 영어 정확도 인증은 미실시다.
+- 최종 연결/디코딩/320px 검사10개·재개 보호19개·도구3개 구문 검사를 종료0으로 확인했다. 처음 실제 본 썸네일의 해시10개를 최종 재검사 전 저장하고 최종 파일과 모두 일치함을 확인했다. 최종 guard는 전체3809개 ID/source fingerprint·3697개 PNG 해시/크기·기존3799개 항목·동결 자료/문서 재생을 대조한다. 이전 grade 첫 실제 capture 미복구1건과 전달 미확인 중단1슬롯은 그대로 유지한다. 앱 코드 변경이 없는 정적 작업으로 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다.
+- 누적 제작3536/검수 통과3493/PNG3697/대기265/보류44/실패7, 시작 슬롯3704·확인된 내장 호출3703/전달 미확인1·수정161이다. B2 승인568/보류5/대기265/실패1이며 A1/A2/B1 집계는 유지한다. 이미지 없음273개·미승인316개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
+- 재개는 실제 현재 상태·진행중 항목·저널·완료 파일을 먼저 확인하고 승인된 항목을 재생성하지 않는다. 다음 제작 대기 첫 항목은 `print` n.(인쇄 글자), ID `8e5aef6a2138e99b`이다. 글자 금지와 뜻의 충돌을 먼저 검토하며 아직 준비/호출하지 않았다. 이후 priority, privacy, procedure, process 동사, produce 명사, professional 명사, progress 동사, project 동사, proof 순서다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `praise` n.(칭찬), ID `0b9f7decb7a4d2ce`이다. 이후 praise 동사, pregnant, preparation, presence, preserve, price 동사, prime, principal, principle 순서이며 아직 준비/호출하지 않았다.
+다음 제작 대기 첫 항목은 `print` n.(인쇄 글자), ID `8e5aef6a2138e99b`이다. 글자 금지와 뜻의 충돌을 먼저 검토하며 아직 준비/호출하지 않았다. 이후 priority, privacy, procedure, process 동사, produce 명사, professional 명사, progress 동사, project 동사, proof 순서다.
 
 ```powershell
 node scripts/oxford-images.cjs status
