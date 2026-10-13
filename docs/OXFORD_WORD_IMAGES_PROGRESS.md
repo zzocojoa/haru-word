@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3576 |
-| 제작자 품질 검수 통과 `approved` | 3530 |
+| 제작된 서로 다른 항목 | 3586 |
+| 제작자 품질 검수 통과 `approved` | 3540 |
 | 품질·의미·조건 보류 `held` | 48 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 224 |
+| 제작 대기 `waiting` | 214 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3752 |
+| 내장 도구 호출·시작 슬롯 원장 | 3762 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 169 |
 
-이미지 미생성 항목은 제작 대기 224개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 233개다. 제작된 3576개는 검수 통과 3530개와 이미지가 있는 보류 46개이며, 수정본 포함 PNG는 3745개다. 원장 3752회는 이미지가 반환된 3745회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3751회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 214개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 223개다. 제작된 3586개는 검수 통과 3540개와 이미지가 있는 보류 46개이며, 수정본 포함 PNG는 3755개다. 원장 3762회는 이미지가 반환된 3755회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3761회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8760,9 +8760,33 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 표시 관측 손실 3건은 같은 QA 캐시 또는 표시된 스키마로 회수했고 이미지/QA 재호출 0이다. 보조 파일명 오독 1건과 결합 템플릿 추출 구문 오류 1건은 수정 후 실제 검증했다. 구문 오류의 전체 실패 명령 결과는 작업 파일에 미보존이고 대화에 남아 있으며 요약·원본 소스·실제 종료 코드 1을 기록했다. 이 오류들은 이미지 제공자 실패와 구분한다.
 - 실제 iPhone·독립 학습자 이해도는 미검사다. 정적 이미지·원장·문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·Sites/배포·DB·학습 기록/API/백업·의존성 변경은 없다. 전체 3,809항목 승인 목표는 완료되지 않았으며 제작 대기 224개·보류 48개·실패 7개가 남는다.
 
+## 363차 제작·검수 기록
+
+- regulation~reputation 10항목을 각각 내장 도구로 생성했다. 원본과 개별 320px 표시 10장을 모두 실제 확인해 10항목 승인·새 보류 0개, 수정 생성 0회로 기록했다.
+- remark 명사/동사는 발언 자체와 발언 행동의 초점을, representative 명사/형용사는 대변인과 같은 색 비율의 표본을 구분했다. 그림만으로 특정 품사나 영단어를 유일하게 맞힐 수 있다는 인증은 아니다. 상대적으로 건강하다는 비교 그림은 지팡이/외모에서 실제 질환·장애·건강을 판정하지 않는다. relevant·relief는 기본 의미의 연상 단서이며 원래 정보 발견 예문을 실제로 그렸다고 표시하지 않는다.
+
+| 항목 ID·품사 | 실제 확인한 장면 | 예문 출처 |
+|---|---|---|
+| `48e92f0fc28c71a1` regulation n. | 성인2·보호 안경2쌍, 회사 안전 규정 맥락 | Tatoeba 참고 예문 |
+| `7e8805018676f5d9` relatively adv. | 고령 성인3·지팡이2, 비슷한 연령의 비교 맥락·건강 진단 아님 | 학습용 작성 예문 |
+| `fbf760cb621effad` relevant adj. | 성인1·스툴1/빈 다리 소켓·대응 다리1·무관한 숟가락/꽃병, 관련성 | 학습용 작성 예문 |
+| `903381f2426d03a2` relief n. | 관련2장면·성인2묘사·그릇2/열쇠1, 걱정 종료의 안도 | 학습용 작성 예문 |
+| `74b9f4e96893bd3b` rely v. | 성인2·스툴 작업물1/판재1, 조언을 신뢰하며 듣는 관계 | 학습용 작성 예문 |
+| `906220547d6d6a42` remark n. | 성인2·그릇1/받침1, 도움 되는 발언을 생각하는 청자 | 학습용 작성 예문 |
+| `bdfc7b59ca9563e6` remark v. | 성인2·그릇1·말하는 화자1, 동사 발언 행동 | 학습용 작성 예문 |
+| `cce91cc4d65af550` representative n. | 성인4·대변인1/이웃2/맞은편 청자1, 집단을 대신해 말하는 사람 | 학습용 작성 예문 |
+| `2b605ea8b4271a4a` representative adj. | 쟁반2·큰 그룹6/작은 표본3, 세 색 각2와 각1로 같은 비율 | 학습용 작성 예문 |
+| `04964fece91353b9` reputation n. | 성인3·따로 선1/부정적으로 바라보는2, 손상된 평판 맥락 | Tatoeba 참고 예문 |
+
+- 고유 단어 8개/품사·용법 본문 10개와 보조 예문 본문 2개를 실제 읽었다. 4묶음·48개 페이지 개요이며 처음 합동 검색에서 rely on 용법이 빠져 공식 [rely on/upon](https://dictionary.cambridge.org/dictionary/english/rely-on-upon?topic=trusting-and-not-trusting) 본문을 추가 조회했다. 항목별 [regulation](https://dictionary.cambridge.org/dictionary/english/regulation?topic=rules-and-laws)·[relatively](https://dictionary.cambridge.org/dictionary/english/relatively)·[relevant](https://dictionary.cambridge.org/dictionary/english/relevant)·[relief](https://dictionary.cambridge.org/dictionary/english/relief?topic=helping-and-co-operating)·[remark](https://dictionary.cambridge.org/dictionary/english/remark)·[representative](https://dictionary.cambridge.org/dictionary/english/representative)·[reputation](https://dictionary.cambridge.org/dictionary/english/reputation)의 실제 품사·용법을 대조했다.
+- 처음 연구 결과를 한꺼번에 표시한 관측 손실 1건은 같은 캐시를 좁혀 회수했다. 페이지 구분용 단순 분할에서 중간 합계37로 표시된 값은 실제 헤더 대조48(각12개)로 바로잡아 별도 기록했다. 관측 회수용 추가 검색·이미지/QA 재호출은 0이며 rely 누락 확인용 추가 검색1회와 구분한다. 제공자·준비·실행 보조·메타데이터·교재 의미 수정 오류는 없다.
+- 첫 23개 증거 파일·실제 첫 캡처 출력10개를 보존했다. QA 전 실제 확인한 320px 파일10개의 해시를 저장하고 최종 QA 이후 모두 같음을 검사했다. 이전 grade 동사의 첫 캡처 명령 결과1개와 이전362 보조 스크립트의 전체 실패 결과 작업 파일 미보존 한계를 그대로 유지한다.
+- 이미지 최초/최종10개·재개 보호19검사(이미지/API 호출0)·제작 스크립트3개 구문 검사는 모두 종료 코드0이다. 3,809 ID/교재 지문·기존3,799항목·누적PNG 전량 해시/크기와 과거 증거를 보존 가드로 확인한 뒤 커밋·푸시한다.
+- 실제 iPhone/독립 학습자 이해도는 미검사다. 정적 삽화·원장·문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·학습 기록/API/백업·DB·Sites/배포·의존성 변경은 없다. 전체3,809항목 승인 목표는 미완료이며 제작 대기214·보류48·실패7을 후속 범위로 유지한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `48e92f0fc28c71a1` **regulation** 명사(규정)다. 이어서 relatively·relevant·relief·rely·remark 명사/동사·representative 명사/형용사·reputation의 사전 용법·원래 예문을 확인한 뒤 같은 방식으로 한 항목씩 생성한다. 후보 원본은 `work/oxford-batch-363-tentative-sources.json`이며 실제 생성 전 재검증한다.
+다음 제작 대기 첫 항목은 `33a49cf6e5a3bedc` **requirement** 명사(요구사항)다. 이어서 rescue 동사/명사·reserve 명사/동사·resident 명사/형용사·resist·resolve·resort의 사전 용법과 기존 예문을 확인한 뒤 같은 방식으로 한 항목씩 생성한다. 후보 원본은 `work/oxford-batch-364-tentative-sources.json`이며 실제 생성 전 현재 원장과 재검증한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
