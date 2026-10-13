@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3766 |
-| 제작자 품질 검수 통과 `approved` | 3717 |
-| 품질·의미·조건 보류 `held` | 51 |
+| 제작된 서로 다른 항목 | 3776 |
+| 제작자 품질 검수 통과 `approved` | 3726 |
+| 품질·의미·조건 보류 `held` | 52 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 34 |
+| 제작 대기 `waiting` | 24 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3960 |
+| 내장 도구 호출·시작 슬롯 원장 | 3971 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 187 |
+| 그중 품질 수정 호출 | 188 |
 
-이미지 미생성 항목은 제작 대기 34개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 43개다. 제작된 3766개는 검수 통과 3717개와 이미지가 있는 보류 49개이며, 수정본 포함 PNG는 3953개다. 원장 3960회는 이미지가 반환된 3953회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3959회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 24개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 33개다. 제작된 3776개는 검수 통과 3726개와 이미지가 있는 보류 50개이며, 수정본 포함 PNG는 3964개다. 원장 3971회는 이미지가 반환된 3964회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3970회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9196,9 +9196,49 @@ venue의의자6/2행3은한번수정후에도좌판/등받이에서무대쪽향�
 
 최종파일10/PNG·해시·320px·열람한축소12해시동일·재개19(이미지/API0)·관리구문3모두exit0. 파일검사통과와품질9승인/1보류를구별한다. 연결목록·계획·진행기록3파일만변경하며교재/앱/사용자기록/사이트는그대로다. 누적3766제작/3717승인/51보류/7실패중단/34대기·3953PNG/3960원장/187수정,전체3809승인까지92개미완료.
 
+### 382차 · violence–weakness 10항목 검수
+
+내장 image_gen 첫 이미지 10장과 `volume` 수정 1장, 총 11장/11슬롯을 저장했다. 9항목을 승인하고 `volume`은 허용된 한 번의 수정 후에도 물의 상승량·구의 부피 관계가 확실하지 않아 보류했다. 세 번째 호출·자동 재시도·별도 이미지 API·운영 게시가 없다. 기존 `letter`·`print`의 글자 금지 보류는 유지한다.
+
+| 항목 | 결과 | 실제 확인 및 한계 |
+|---|---|---|
+| violence | 승인 | 성인3·중재자 열린손2·접촉없는 분리. 폭력 예방 단서이며 실제 의도/예방 성공을 확정하지 않는다. |
+| virtual | 승인 | 학습자1·화면속 성인2·노트북1. 조작 UI/글자 없이 원격 학습 단서, 실제 접속이나 수업 내용 미인증. |
+| vision | 승인 | 새1·관찰자1·렌즈1·새의 열린 눈. 임상 시력치/진단/방사 결과 미인증. |
+| visual | 승인 | 안내서의 종이·배 그림2와 실제 종이배1이 대응. 글자 없는 시각 자료, 지침 완전성 미인증. |
+| vital | 승인 | 상판/유일한 지지대/그릇1씩. 필수 역할 비유이며 실제 역학·수업 효과 미인증. |
+| vitamin | 승인 | 오렌지1·반쪽1·잎1·접시1. 사전의 비타민C 식품 출처 연상, 성분량/효능 미인증. |
+| volume | 보류 | 처음 작은 구에 비해 수위가 크게 증가했다. 수정에서 구가 커지고 수위 차이가 줄었지만 같은 물의 변위 관계를 확신하기 어려워 보류. 글자 문제는 관찰되지 않았다. |
+| wage | 승인 | 작업대의 목수와 지급자2·동전3·모래시계1. 노동 대가 연상, 실제 인물/시급/지역 평균 미인증. |
+| way | 승인 | 같은 동전 왼쪽3·오른쪽9·총12, 같은 바닥에서 큰 정도 차이. ‘길’이 아닌 정도 부사, 실제 임금 비율 미인증. |
+| weakness | 승인 | 고리4 중 온전3·파단1. 특정 부분의 약점 비유이며 실제 가족/재산 특성 미인증. |
+
+Cambridge 실제 정의 10개·보조 근거2개를 읽고 48개 검색 결과 표제를 보존했다. 기본 검색에 빠진 `wage`/`way`를 하나의 조회에서 두 질의로 보완했다(추가 질의2). `virtual` COMPUTER, `vision` 시력, `volume` 물체 공간, `wage` 노동 대가, `way` FAR/정도 부사, `weakness` FAULT를 선택했다. [visual 그림 설명](https://dictionary.cambridge.org/dictionary/english/visual), [way 정도 부사](https://dictionary.cambridge.org/us/grammar/british-grammar/way)도 대조했다.
+
+| 단어 | 확인한 공식 사전 |
+|---|---|
+| violence | [violence 정의](https://dictionary.cambridge.org/dictionary/learner-english/violence) |
+| virtual | [virtual 정의](https://dictionary.cambridge.org/dictionary/english/virtual?topic=computer-concepts) |
+| vision | [vision 정의](https://dictionary.cambridge.org/dictionary/english/vision) |
+| visual | [visual 정의](https://dictionary.cambridge.org/dictionary/english/visual) |
+| vital | [vital 정의](https://dictionary.cambridge.org/dictionary/english/vital) |
+| vitamin | [vitamin 정의](https://dictionary.cambridge.org/us/dictionary/english/vitamin) |
+| volume | [volume 정의](https://dictionary.cambridge.org/us/dictionary/english/volume) |
+| wage | [wage 정의](https://dictionary.cambridge.org/us/dictionary/english/wage?topic=earning-money) |
+| way | [way 정의](https://dictionary.cambridge.org/us/dictionary/english/way?q=way+) |
+| weakness | [weakness 정의](https://dictionary.cambridge.org/dictionary/learner-english/weakness) |
+
+원본11개와 320px 이미지11개를 실제로 확인했고, PNG 디코딩·복사/프롬프트 해시를 검증했다. 최종 10개 QA의 스크린샷은 실제 본 이미지와 해시가 일치했다. 재개 검사19개(API/이미지 호출0)와 스크립트3개 구문 검사가 exit0이었다. 별도 상세 확대 이미지0개, 실제 iPhone·독립 학습자 평가는 미실시다. 앱 코드 변경이 없어 앱 전체 테스트/타입/린트/빌드는 이번 범위에서 실행하지 않았다.
+
+이번 준비 중 실제 자료 조립이 `virtual boundary` 오류로 한 번 중단됐다. 같은 캐시의 다음 실제 사전 절 제목으로 고쳤고 추가 웹/이미지/QA 호출은 없었다. 실패한 함수 소스/결과는 대화 실행 기록에만 있으며 로컬 원본으로 복구했다고 표시하지 않는다. 출력 과다로 보지 못한 사전 자료는 같은 캐시의 작은 부분을 다시 읽었다(출력 보정1). 실행 전 준비 초안의 캐시 키 교체 범위를 발견해 바로잡았다(메타 보정1). 최초 관찰 기록에 별도 thumbnailEvidence 속성은 없으므로 원래 스냅샷을 바꾸지 않고 실제 QA 경로·보기 메모·저장한 해시로 대조한다.
+
+이전380의 ENOSPC 메타 저장 실패 원본·유효 저널·같은 PNG 재기록·실제13개 저장 명령은 보존하고 근본 원인은 여전히 미확정이다. 이전378의 출력 축약/명령·함수 오류,375 실패 freeze 원본/검증 후보,374 CLI 오류의 실행 객체 미복구,372 상세보기 보충 근거,grade 첫 저장 결과 미복구를 그대로 유지한다. 기존 검증 실패 자료를 성공 자료로 바꾸지 않는다.
+
+현재 제작3776 = 승인3726 + 이미지 있는 보류50, 이미지 미생성33 = 대기24 + 조건 보류2 + 실패/중단7이다. 수정 포함 PNG3964·시작 슬롯3971·확인된 내장 호출3970·제공자 전달 미확인 슬롯1이며 전체3809 승인 목표는 미완료다. 사용자 기록·교재 원문/ID·앱 UI·API·DB·운영 Sites는 바꾸지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `violence` 명사(99e92fa029fe1bf7)다. 대기34개를교재순서로이어가며글자금지·보류51/실패7·한번수정한도를유지한다.
+다음 제작 대기 첫 항목은 `wealth` 명사(`4bc376a60d1ce3e4`)다. 다음 10개는 wealth, wealthy, whereas, wherever, whisper 동사/명사, whom, widely, wildlife, willing이며 아직 장면 준비·호출하지 않았다. 다음 묶음의 교재·원장 스냅샷은 `work/oxford-batch-383-tentative-sources.json`에 보존한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
