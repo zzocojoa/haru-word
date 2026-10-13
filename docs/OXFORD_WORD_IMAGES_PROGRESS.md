@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3726 |
-| 제작자 품질 검수 통과 `approved` | 3679 |
+| 제작된 서로 다른 항목 | 3736 |
+| 제작자 품질 검수 통과 `approved` | 3689 |
 | 품질·의미·조건 보류 `held` | 49 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 74 |
+| 제작 대기 `waiting` | 64 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3914 |
+| 내장 도구 호출·시작 슬롯 원장 | 3924 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 181 |
 
-이미지 미생성 항목은 제작 대기 74개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 83개다. 제작된 3726개는 검수 통과 3679개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3907개다. 원장 3914회는 이미지가 반환된 3907회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3913회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 64개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 73개다. 제작된 3736개는 검수 통과 3689개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3917개다. 원장 3924회는 이미지가 반환된 3917회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3923회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9106,9 +9106,30 @@ shall의 신발옆선은 인쇄무늬인지 구조선인지 바로 확정하지 
 - 이전375차 실패한 동결 보조 명령의 실제 결과/원본/부분 복사/검증 후보, 이전374차 보조 결과의 대화 출력 보존/런타임 미캐시 한계, 이전372차 추가 증거/문서 수정·grade 최초 capture 미복구 등 역사적 한계를 보존한다. 운영/UI/기록/API/백업/DB/의존성은 변경하지 않았다. 앱 전체 테스트·타입·린트·빌드는 정적 이미지/문서 범위상 실행하지 않았다.
 - 누적 제작3726개·검수 통과3679개·보류49개·실패7개·대기74개, 수정본 포함 PNG3907개다. 원장3914개=PNG3907개+무이미지 확정 실패6개+전달 미확인 시작 슬롯1개. 전체3809개 승인 목표는 진행 중이며 보류와 실패를 완료로 보지 않는다.
 
+## 추가378 · threat–transfer 10항목
+
+확인시각: 2026-10-13T16:17:58.897Z (UTC, 한국날짜 2026-10-14). 생성10회/10PNG/10신규 승인, 수정0회·신규보류0개. 원본10장과 로컬 Chromium320px10장을 실제 열어 뜻·품사·수량·글자 부재를 확인했다. 확대 검사 추가0이며 실제 iPhone/독립 학습자 검사는 미실시다. 각 원본/캡처·첫23증거·프롬프트/교재 해시를 보존했다.
+
+- `threat` (4f6a27dcfffe1edb): Actual original: three fully clothed adults, one diffuse cloud, three round spiked particle shapes; adults remain separated from the cloud, cautious posture. No injury, weapons or glyphs seen. Disease-risk association only; particle realism, actual exposure and diagnosis are not certified. 320px: 성인3·구름1·입자3과 조심스러운 자세를 확인했다. 건강 위험의 가능성 단서이며 실제 노출/진단/입자 형태 인증이 아니다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `threaten` (879d15a2e8b233c6): Actual original: one adult stopped on stone paving before one tilted segment and visible gap, no fall or injury. Shoe lacing/sole are physical structures, no independent logo or printed glyph seen. Possible risk to further progress, no threatening speaker or guaranteed deterioration; missing/could remain only canonical data. 320px: 성인1이 틈1·기울어진 돌1 앞에 멈춰 있다. 피해/낙하 없이 진도 위험의 가능성을 표현한다. 실제 치료 불참/악화 인증이 아니다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `thus` (4c1ed01c3e70d3f3): Actual original: one adult, one watering can with water strokes/drops, two potted plants; left droops while watered, right upright. Two related action/result states, no arrows or glyphs. Result-use association only, not evidence of elapsed time, saving time or plant causation; canonical timed activities retained. 320px: 성인1·물뿌리개1·화분/식물2의 물주기와 직립 결과 대비를 확인했다. 실제 시간 절약/식물 인과의 증명이 아니다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `time` (2cddbcc419589ac9): Actual original: two adults seated at one table on two chairs; one holds a round stopwatch and presses its top button while the other stacks three plain cubes. One physical needle with counter-tail on a blank face, no numerals/ticks/logo. Duration measuring cue, no actual duration or scheduling certification. 320px: 성인2·책상1·시계1·바늘1·블록3, 시계 버튼을 누르며 상대 동작을 보는 관계가 보인다. 실제 시간값을 증명하지 않는다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `title` (93bc4318654accc7): Actual original: two adults, one table/two chairs, one closed notebook with one fully blank title panel. Woman speaks and points precisely at the blank panel while man listens. Book-naming association retained without drawing Small Steps or any text; actual spoken title cannot be certified. 320px: 성인2·공책1·빈 제목란1을 가리키며 말한다. 글자 없는 이름 붙이기 연상이며 실제 발화 제목은 확인할 수 없다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `tone` (033746f91c27c9f5): Actual original: two standing adults, woman speaks gently with open relaxed palm and man listens. No book, phone, sound waves or printed glyphs; shirt buttons and belt buckle are physical clothing parts. Voice-expression association only; actual sound, pitch, thoughts or feelings not certified; canonical can remains. 320px: 성인2의 대화·열린 입/편안한 손바닥/청취 관계를 확인했다. 실제 음성/감정 인증이 아니며 can을 유지한다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `tough` (3e804cb4c7f4cd84): Actual original: one adult at one desk on one chair, hand supporting forehead, three blank separate sheets and one closed folder. Difficult-situation cue, no tough-material/food cue, injury or printed glyphs; actual Tom identity, cause/severity or diagnosis not certified. 320px: 성인1·빈 종이3·폴더1·이마를 짚는 고된 상황을 확인했다. 실제 Tom/진단/원인은 특정하지 않는다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `track` (5d9d47eafb727ab6): Actual original: one adult, one table, one open notebook; left drawing two stacked blocks, right drawing four blocks matching the four-block physical arch (two posts/two top pieces). Finger points at developed right state, no charts/labels/glyphs. Drawings are pictorial blocks, not written symbols. Monitoring-development association; canonical Small Steps remains data only, no measured rate certification. 320px: 열린 공책의 그림 블록2→4와 실제 블록4가 일치한다. 그림은 블록의 묘사이며 글자/숫자가 아니다. 실제 발전 속도/제목 인증이 아니다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `transfer` (eb6d924c9c921cb3): Actual original: one partial hand moves one blank golden disc between two open bowls on one table; two coins left, one right, one held, total four. Coin textures/continuous rims, no stamped currency/glyph. Account-movement metaphor, no person receiving gift or shop. Canonical past completed today retained, no real bank transaction/balance certification. 320px: 그릇2·왼쪽2/오른쪽1/손1 원판 총4, 움직이는 손1. 계좌 간 이동 비유이며 실제 계좌/잔액/이체 인증이 아니다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+- `transfer` (294e84ac847ef62c): Actual original: no people/hands; two bowls on one table, one coin left and three right, total four. Smooth blank coin faces, physical continuous rims/fluting only, no printed currency/glyph. Completed bank-movement outcome association, no literal bank storage/actual electronic transaction/today/balance certification. 320px: 그릇2·왼쪽1/오른쪽3 원판 총4, 손/동작 없음. 완료 결과의 연상이며 실제 전자이체/시간/잔액 인증이 아니다. 원본 안 글자·숫자·로고 없음. 아래 단어명은 원본 밖 QA프레임이며 실제 iPhone/독립 학습자 검사는 수행하지 않았다.
+
+교재 원문은 작성예문7·Tatoeba3이며 변경하지 않았다. [Cambridge threat](https://dictionary.cambridge.org/dictionary/english/threat)의 원치 않는 위험 가능성, [threaten](https://dictionary.cambridge.org/us/dictionary/english/threaten?q=%40word)의 잠재적 피해, [thus](https://dictionary.cambridge.org/dictionary/english/thus)의 결과 용법을 확인했다. [time의 MEASURE](https://dictionary.cambridge.org/us/dictionary/english/timed), [title 동사](https://dictionary.cambridge.org/dictionary/english/title), [tone의 VOICE EXPRESSION](https://dictionary.cambridge.org/dictionary/english/tone), [tough의 DIFFICULT](https://dictionary.cambridge.org/dictionary/english/tough?topic=complicated-and-difficult-to-do), [track의 진도 기록](https://dictionary.cambridge.org/dictionary/english/track), [transfer 금융 동사](https://dictionary.cambridge.org/us/dictionary/english/transfer), [bank transfer 명사](https://dictionary.cambridge.org/us/dictionary/english/bank-transfer) 실제 본문10과 보조2를 읽었다. 총48헤더/4조회그룹을 보존하고 소스별 짧은 인용 상한을 검사했다.
+
+초기 transfer 결과에 실제 본문이 없어서 추가조회1회로 금융 의미를 확인했다. track 카메라/금리 의미와 진도 의미, 검색헤더의 중복 제목을 실제 본문과 구분한 선택보정2건을 기록했다. 첫 정의선택 오류1(검색 미리보기 제목을 먼저 매칭)·격리폴더에 없는 인수인계 조회/진단 ReferenceError 2건·표시 잘림3건을 기록했고 같은 캐시/실제 경로·범위 읽기로 진행했다. 이 복구용 추가 이미지·QA는0이다. 원래 넓은 문서조회 전체stdout 및 초기 조회 runtime객체는 로컬에 복구된 것으로 표시하지 않는다. 이전375 실패freeze/374 준비결과 캐시 공백/372 증거·문서 보완과 grade 원래 첫 실제캡처결과 공백도 유지한다.
+
+실제 검사: 최종 이미지10·PNG 디코딩/해시/320px, 원본 열람한 축소10해시 불변, 재개19(이미지/API0), 관리스크립트 구문3 모두 exit0. 변경 범위는 연결목록·계획·진행기록3파일이며 교재/사용자 학습기록·앱/사이트는 그대로다. 전체3809승인은 아직 미완료이며 누적3736제작/3689승인/49보류/7실패·중단/64대기/3917PNG/3924원장/181수정이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `threat` 명사(위협)다. 다음10개는 threat, threaten, thus, time 동사, title 동사, tone, tough, track 동사, transfer 동사/명사이며 아직 생성하지 않았다. 글자 금지·기존 스타일·품사/용법 구분·항목별 품질 수정 최대1회와 원본/320px 검수를 유지한다.
+다음 제작 대기 첫 항목은 `transform` 동사(5a944a653f2e5e89)다. 대기64개를 교재 순서대로 이어가며 글자 금지·기존49보류/7실패·한 번 수정 한도를 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
