@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3596 |
-| 제작자 품질 검수 통과 `approved` | 3550 |
-| 품질·의미·조건 보류 `held` | 48 |
+| 제작된 서로 다른 항목 | 3606 |
+| 제작자 품질 검수 통과 `approved` | 3559 |
+| 품질·의미·조건 보류 `held` | 49 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 204 |
+| 제작 대기 `waiting` | 194 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3772 |
+| 내장 도구 호출·시작 슬롯 원장 | 3784 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 169 |
+| 그중 품질 수정 호출 | 171 |
 
-이미지 미생성 항목은 제작 대기 204개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 213개다. 제작된 3596개는 검수 통과 3550개와 이미지가 있는 보류 46개이며, 수정본 포함 PNG는 3765개다. 원장 3772회는 이미지가 반환된 3765회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3771회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 194개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 203개다. 제작된 3606개는 검수 통과 3559개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3777개다. 원장 3784회는 이미지가 반환된 3777회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3783회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8809,9 +8809,34 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 이번 서비스/준비/실행 보조/관측 손실/메타데이터 오류·추가 사전 조회는 없다. 이전363의 다음 묶음 참조 오류는 별도 수정 소스와 원본 가드/전체 실패 결과를 보존한 상태로 재검증했다. 과거 grade 첫 캡처 결과 미복구와362 실패 보조 명령의 전체 결과 작업 파일 미보존 한계는 그대로 유지한다.
 - 실제 iPhone/독립 학습자 이해도는 미검사다. 정적 삽화·원장·문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·Sites/배포·DB·사용자 기록/API/백업·의존성 변경은 없다. 전체3,809항목 승인 목표는 미완료이며 제작 대기204/보류48/실패7을 후속 범위로 유지한다.
 
+## 365차 제작·검수 기록
+
+- retain~round 10항목의 첫 이미지를 내장 도구로 각각 생성했다. reward 동사의 추가 그래픽과 root 명사의 수량/기울임 결함에 항목별 한 번씩 보정해 총12회/12PNG가 추가됐다. 원본/개별320px12장과 신발의 로컬2배 세부1장을 실제 확인했다. 최종9항목 승인·root1항목 새 보류이며 세 번째 호출은 없다.
+- reward 동사는 방향 화살표1/강조선3이 모두 제거되어 승인했다. root는3개가4개로 늘었으나 첫 블록과 뒤 블록의 기울임이 달라 요청한 원인 연쇄를 확인하지 못했다. 수량만 해결된 상태로 최종 보류하고 v1/v2·각 검수·프롬프트·실제 캡처 출력10+2를 보존한다. 해결됐다고 표시하거나 추가 호출하지 않는다.
+
+| 항목 ID·품사 | 실제 확인한 장면·판정 | 예문 출처 |
+|---|---|---|
+| `54c1d64dbc82fc1a` retain v. | 코티지2·창/아치문/지붕/화분 각2, 주요 특징 유지·창 칸 전체 동일성 아님 | 학습용 작성 예문 |
+| `da66026a05ccf3f6` reveal v. | 성인2·천1/그릇1/탁자1, 숨김을 드러내는 기본 의미·원래 부정문 유지 | Tatoeba 참고 예문 |
+| `a6be6bfd97241e1e` revolution n. | 성인2묘사·우편함/봉투/폰 각1, 의사소통 방식 변화·신발 솔기 세부 확인 | 학습용 작성 예문 |
+| `0363ff3931570541` reward n. | 성인1·스툴1/쿠키1/컵1, 노력 뒤 작은 자기 보상 | 학습용 작성 예문 |
+| `d9d00cea26ac95ea` reward v. | 성인3묘사/모자2·스툴1/선베드1, 보정 후 화살표/강조선 제거·승인 | 학습용 작성 예문 |
+| `5aba4c4b9dad16f7` rhythm n. | 손4/상체2·탁자 면2, 번갈아 두드리는 무음 연상 | 학습용 작성 예문 |
+| `f236ca988b2b0838` rid v. | 성인1·휴지통1/탁자1·빈 종이3, 불필요한 사물 제거 | 학습용 작성 예문 |
+| `e599de7400ca3fd2` rise n. | 그릇/진열대 각2·작은/큰 원판 묶음2, 금액 증가 | 학습용 작성 예문 |
+| `faac56cbecb7229e` root n. | 보정 후 블록4개이나 기울임/같은 방향 연쇄 미해결·최종 보류 | 학습용 작성 예문 |
+| `34a29a51af4443ee` round n. | 성인1·쟁반2/스툴4(각2), 연속 검사 속 한 묶음 | 학습용 작성 예문 |
+
+- 고유 단어9개/품사·용법 본문10개와 보조 본문2개를 실제 읽었다. 4조회 묶음/48개 페이지 개요이며 초기 root·round 용법 누락을 공식 추가2질의로 해결했다. [retain](https://dictionary.cambridge.org/us/dictionary/english/retain), [reveal](https://dictionary.cambridge.org/dictionary/english/reveal), [revolution 변화 용법](https://dictionary.cambridge.org/dictionary/english/revolution?topic=revolving-rotating-and-spinning%2F1000), [reward 명사](https://dictionary.cambridge.org/us/dictionary/english/reward)/[동사](https://dictionary.cambridge.org/dictionary/learner-english/reward), [rhythm](https://dictionary.cambridge.org/dictionary/english/rhythm), [rid 동사](https://dictionary.cambridge.org/dictionary/english/rid), [rise 명사](https://dictionary.cambridge.org/us/dictionary/english/rise), [root 원인 용법](https://dictionary.cambridge.org/dictionary/english/root), [round 단일 사건/묶음 용법](https://dictionary.cambridge.org/dictionary/english/round?topic=backwards-sideways-and-back-and-forth)을 대조했다. 작성 예문9/Tatoeba 참고 예문1이다.
+- reveal의 부정 예문·rid의 긴장 관련 문장을 유지하고 그림을 기본 의미의 연상으로 구분했다. 조용한 손 두드림은 실제 소리/일정한 간격/심리 효과를 인증하지 않는다. retain의 주요 특징은 유지됐으나 창 칸이4/2로 달라 모든 건축 세부가 같다고 표시하지 않았다. revolution 신발은 원본2배에서 발등·앞코·측면에 이어진 물리 솔기로 구분해 인쇄 문자/로고로 판정하지 않았다.
+- 실제 보상 권리/회사 정책/휴가 일수·역사/통신/기술·가격/물가/경제 원인·개인 감정/신분·검사 품질/안전/첫 순번을 그림으로 인증하지 않는다. 목재결/접힘/직조·카메라 렌즈/가구/신발 솔기는 인쇄 문자와 구분했다.
+- 첫23개 증거 파일·실제 첫 캡처10개·보정 캡처2개를 보존했다. 실제 확인한320px12개의 해시를 최종QA 전에 저장해 이후 모두 같음을 확인했다. 이미지 최초10/보정2/최종10·재개 보호19검사(이미지/API 호출0)·제작 스크립트3개 구문 검사는 종료 코드0이다. 모든3,809 ID/교재 지문·기존3,799항목·PNG 전량/과거 증거를 보존 가드로 확인한 뒤 커밋·푸시한다.
+- 서비스/준비/실행 보조/관측 손실/메타데이터/교열 오류는 이번에 없다. 앞선363의 별도 완료 기록 참조 수정과362 전체 실패 보조 출력 작업 파일 미보존 한계·grade 첫 캡처 명령 결과 미복구를 그대로 보존한다. 실제 iPhone·독립 학습자 이해도는 미검사다.
+- 정적 이미지/원장/문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·Sites/배포·DB·사용자 기록/API/백업·의존성 변경은 없다. 전체3,809항목 승인 목표는 미완료이며 제작 대기194/보류49/실패7을 후속 범위로 유지한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `54c1d64dbc82fc1a` **retain** 동사(유지하다)다. 이어서 reveal·revolution·reward 명사/동사·rhythm·rid·rise 명사·root·round 명사의 기존 예문/사전 용법을 확인한 뒤 같은 방식으로 생성한다. 후보 원본은 `work/oxford-batch-365-tentative-sources.json`이며 생성 전에 현재 원장과 재검증한다.
+다음 제작 대기 첫 항목은 `8e89f948d2a865aa` **routine** 형용사(일상적인)다. 이어서 rub·rubber 명사/형용사·rural·rush 동사/명사·sample 동사·satellite·satisfied의 기존 예문/사전 용법을 확인한 뒤 같은 방식으로 생성한다. 후보 원본은 `work/oxford-batch-366-tentative-sources.json`이며 생성 전에 현재 원장과 재검증한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
