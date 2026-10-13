@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3556 |
-| 제작자 품질 검수 통과 `approved` | 3512 |
-| 품질·의미·조건 보류 `held` | 46 |
+| 제작된 서로 다른 항목 | 3566 |
+| 제작자 품질 검수 통과 `approved` | 3520 |
+| 품질·의미·조건 보류 `held` | 48 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 244 |
+| 제작 대기 `waiting` | 234 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3728 |
+| 내장 도구 호출·시작 슬롯 원장 | 3741 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 165 |
+| 그중 품질 수정 호출 | 168 |
 
-이미지 미생성 항목은 제작 대기 244개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 253개다. 제작된 3556개는 검수 통과 3512개와 이미지가 있는 보류 44개이며, 수정본 포함 PNG는 3721개다. 원장 3728회는 이미지가 반환된 3721회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3727회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 234개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 243개다. 제작된 3566개는 검수 통과 3520개와 이미지가 있는 보류 46개이며, 수정본 포함 PNG는 3734개다. 원장 3741회는 이미지가 반환된 3734회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3740회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8722,9 +8722,23 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 누적 제작3556/검수 통과3512/PNG3721/대기244/보류46/실패7, 시작 슬롯3728·확인된 내장 호출3727/전달 미확인1·수정165다. B2 승인587/보류7/대기244/실패1이며 A1/A2/B1 집계를 유지한다. 이미지 없음253개·미승인297개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
 - 다음 제작 대기 첫 항목은 `range` v.(범위가 ~에 이르다), ID `9ff5889a9c5e8252`이다. 이후 rank n./v., rapid adj., rapidly adv., rate v., raw adj., reach n., realistic adj., reasonable adj. 순서다. 아직 준비/호출하지 않았다. pure의 v1/v2 보류와 letter/print의 이미지 미생성 보류를 유지한다.
 
+## 추가361 · range~reasonable — 8개 검수 통과·2개 보류
+
+- 기준 커밋: `19a7f22285f6a4a53c0932c7a457c39b28b76121`. 이전360의 첫10/보정3 이미지·검수9/보류1·3721 PNG/3809 ID·첫 동결/capture·확대 비교와 커밋/푸시/재개 근거를 대조했다. pure의 보정 후 보류·이전 준비 도우미/관측 복구·과거359 콘솔 라벨 감사 근거를 유지했다.
+- B2 교재10개 ID·품사·기본 뜻·표현/예문/출처를 실제 읽고 공식 사전 본문과 대조했다. 표제어9·정의10/보조2·검색 요약36(3×12), 작성 예문9/Tatoeba1다. range는 LIMIT 동사, rank 명사는 상대 위치/동사는 Business English의 비교 순서, rapid/rapidly는 빠른 성장 맥락, rate는 VALUE 동사, raw는 NOT COOKED, reach는 DISTANCE 명사, realistic은 사실/자원에 맞춘 목표, reasonable은 너무 비싸지 않은 가격의 뜻을 선택했다. 참고: [range](https://dictionary.cambridge.org/dictionary/english/range) · [rank](https://dictionary.cambridge.org/dictionary/english/rank) · [rapid](https://dictionary.cambridge.org/dictionary/english/rapid) · [rapidly](https://dictionary.cambridge.org/dictionary/english/rapidly) · [rate](https://dictionary.cambridge.org/us/dictionary/english/rate) · [raw](https://dictionary.cambridge.org/dictionary/english/raw) · [reach](https://dictionary.cambridge.org/dictionary/english/reach) · [realistic](https://dictionary.cambridge.org/dictionary/english/realistic) · [reasonable](https://dictionary.cambridge.org/dictionary/english/reasonable).
+- 내장 도구로 첫10장/보정3장 총13회·13 PNG를 제작했다. 첫7개 통과·3개 보류였다. rank 명사 반바지의 밝은 장식/상표 유사 표식은 한 번 제거 시도 후에도 남아 있었고, rank 동사의 낮은 의자 모형 다리도 한 번 완전 제거 시도 후 남아 있어 두 항목을 최종 보류했다. 특정 실제 상표/문자를 판독하거나 두 결함이 해결됐다고 표시하지 않는다. rapidly는 놓인 집4채를 한 번 보완해5채+손의1채, 총6채로 확인했다. 각 v1/v2를 보존하고 세 번째 호출0이다.
+- 원본13개와 개별320px13개를 실제 확인했고, rank 두 항목의 해당 면/낮은 모형을3배 브라우저 확대 전·후 스크린샷4개로 비교했다. 원본 PNG를 재편집하지 않고 해시를 유지했으며 로컬 PNG 표시 외 네트워크 요청0이었다. 첫 실제 capture10+보정3개와 첫 자료 동결23개를 보존한다.
+- 실제 수량: range 성인1/그릇3/원판 묶음3; rank 명사 선수3/받침3/최고 위치의 여성1; rank 동사 성인1/의자 모형3/받침3; rapid 앞 완성 집3·뒤 완성 집6/골조1·관련2장면; rapidly 성인/모형/탁자 각1·놓인5/손의1채; rate 성인1/당근2(손1/놓인1)/토마토1/천1; raw 접시1/당근2/토마토2/피망1, 채소5; reach 성인1/가까운 접시1/당근1/토마토1/손끝 접촉; realistic 성인1/스툴 모형1/망치1/제한된 목재; reasonable 성인2/차1/탁자1/무표기 원판 묶음.
+- 교재와 함께 쓰는 연상 단서다. 그림만으로 실제 달러 금액/정확히5~10달러/원판 전체 수·실제 경기 순위/능력/군 계급·보편적 품질/가구 안전·성장 기간/속도/동일 장소/공사 결과·식품 안전/영양/조리 이력/평가 결과·신체 측정 거리·개인 능력/작업 안전/목표 달성·차량 공정 가치/개인 구매 가능성/결제 완료를 인증하지 않는다. 도시의 확장/모형 추가는 빠른 성장의 교재 맥락이지 실측 속도 자료가 아니다.
+- 원판 테두리/겹침·도자기/받침·가구/의자/집 골조 이음매·지붕 기와/창틀/문·채소 잎맥/뿌리·손/옷 주름/단추·망치/앞치마 고정구·차량 그릴/휠/유리/구두 솔기는 물리 구조로 구분했다. rank 반바지의 독립 밝은 표식과 제거되지 않은 의자 다리는 검수 미달로 남긴다. 보정본의 전체 질감/색이 달라 픽셀 그대로 유지됐다고 주장하지 않는다. QA HTML 아래 단어/품사/뜻은 PNG 안 글자가 아니다. 실제 iPhone·독립 학습자 평가는 미실시다.
+- 최종 연결/디코딩/320px10개·재개 보호19개·기존 도구3개 구문 검사를 종료0으로 확인했다. 실제 본 썸네일13개 해시를 최종 QA 전에 저장했고 이후 모두 유지됐으며 최종10개와 일치했다. 전체3809 ID/source fingerprint·3734 PNG·기존3799 항목·첫 동결/보정/확대 자료·문서 재생을 guard로 대조한다. 앱 변경이 없는 정적 작업으로 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다.
+- 서비스/준비/실행/출력 관측/메타데이터/연구 출력 오류0이다. 이전 grade 첫 실제 capture 미복구1건·전달 미확인 시작 슬롯1개·과거 잘린 guard 실패 stderr·console-only 라벨 감사를 덮어쓰지 않는다. 이번 미해결 품질2건은 보류 이력으로 유지하고 실제 iPhone/영어 정확도 인증으로 바꾸지 않는다.
+- 누적 제작3566/검수 통과3520/PNG3734/대기234/보류48/실패7, 시작 슬롯3741·확인된 내장 호출3740/전달 미확인1·수정168이다. B2 승인595/보류9/대기234/실패1이며 A1/A2/B1 집계를 유지한다. 이미지 없음243개·미승인289개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
+- 다음 제작 대기 첫 항목은 `recall` v.(기억해 내다), ID `b16f8aa871adf674`이다. 이후 recover v., reduction n., regard v./n., regional adj., register v./n., regret v./n. 순서다. 아직 준비/호출하지 않았다. rank 두 품사의 v1/v2 보류와 기존 pure·letter/print 보류를 유지한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `range` v.(범위가 ~에 이르다), ID `9ff5889a9c5e8252`이다. 이후 rank n./v., rapid adj., rapidly adv., rate v., raw adj., reach n., realistic adj., reasonable adj. 순서다. 아직 준비/호출하지 않았다. pure의 v1/v2 보류와 letter/print의 이미지 미생성 보류를 유지한다.
+다음 제작 대기 첫 항목은 `recall` v.(기억해 내다), ID `b16f8aa871adf674`이다. 이후 recover v., reduction n., regard v./n., regional adj., register v./n., regret v./n. 순서다. 아직 준비/호출하지 않았다. rank 두 품사의 v1/v2 보류와 기존 pure·letter/print 보류를 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
