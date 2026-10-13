@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3776 |
-| 제작자 품질 검수 통과 `approved` | 3726 |
+| 제작된 서로 다른 항목 | 3786 |
+| 제작자 품질 검수 통과 `approved` | 3736 |
 | 품질·의미·조건 보류 `held` | 52 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 24 |
+| 제작 대기 `waiting` | 14 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3971 |
+| 내장 도구 호출·시작 슬롯 원장 | 3984 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 188 |
+| 그중 품질 수정 호출 | 191 |
 
-이미지 미생성 항목은 제작 대기 24개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 33개다. 제작된 3776개는 검수 통과 3726개와 이미지가 있는 보류 50개이며, 수정본 포함 PNG는 3964개다. 원장 3971회는 이미지가 반환된 3964회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3970회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 14개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 23개다. 제작된 3786개는 검수 통과 3736개와 이미지가 있는 보류 50개이며, 수정본 포함 PNG는 3977개다. 원장 3984회는 이미지가 반환된 3977회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3983회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9236,9 +9236,49 @@ Cambridge 실제 정의 10개·보조 근거2개를 읽고 48개 검색 결과 �
 
 현재 제작3776 = 승인3726 + 이미지 있는 보류50, 이미지 미생성33 = 대기24 + 조건 보류2 + 실패/중단7이다. 수정 포함 PNG3964·시작 슬롯3971·확인된 내장 호출3970·제공자 전달 미확인 슬롯1이며 전체3809 승인 목표는 미완료다. 사용자 기록·교재 원문/ID·앱 UI·API·DB·운영 Sites는 바꾸지 않았다.
 
+### 383차 · wealth–willing 10항목 검수
+
+내장 image_gen 첫 이미지10장과 항목별 한 번의 수정3장, 총13장/13슬롯을 저장하고 10항목을 승인했다. 최초7승인/3보류에서 `wealthy` 자동차 배지, `whom` 특정 상대 선택 방향, `widely` 책등의 모호한 무글자 여부를 수정했고 320px에서도 확인했다. 새 보류0, 세 번째 호출·자동 재시도·별도 이미지 API·운영 게시0이다. 기존52보류와7실패/중단은 그대로 남아 전체3809 승인 목표는 미완료다.
+
+| 항목 | 최종 결과·실제 확인 |
+|---|---|
+| wealth | 승인 — 동전9(3×3)·열린상자/집모형/팔찌1. 돈·재산 소유물 단서, 금액/소유 인증 아님. |
+| wealthy | 승인 — 성인2·집/차/큰나무1. 그릴 중앙 독립 배지1을 한 번 제거했다. 브랜드/순자산/가족 관계 미인증. |
+| whereas | 승인 — 커피와 찻주머니 있는 차 각1잔·성인2·의자2·테이블1. 선호 대비 단서, 실제 취향 미인증. |
+| wherever | 승인 — 같은 사람/책2상태·실외 벤치와 실내 의자. 보이는 표지는 비어 있고 안쪽 글은 보이지 않아 미검증. 모든 장소 습관 미인증. |
+| whisper 동사 | 승인 — 성인2·입곁에 손1·작은 열린 입. 낮게 말하는 행위 단서, 예문의 배고픔/발화 내용·음량 미인증. |
+| whisper 명사 | 승인 — 성인2·입곁에 손1. 낮은 발화 방식 단서. 듣는 사람은 일반 예시이며 질문의 실제 답으로 표시하지 않는다. |
+| whom | 승인 — 화자1·상대 후보2. 처음 오른쪽을 보는 얼굴을 뒤통수 중심 방향으로 한 번 바꿔 어느 후보도 선택하지 않는다. 질문 답/발화/문법 분석 미인증. |
+| widely | 승인 — 다른 장소·성인4·공원 모티브 액자2. 작은 책등 표식을 글자로 판정한 것은 아니며, 무글자 확인이 불확실해 책장 전체를 한 번 제거했다. 실제 보급률/지식/인기 미인증. |
+| wildlife | 승인 — 사슴/토끼/새1·나무/연못1·큰 바위4. 목줄/우리/사람 없음. 종 분포/동시 서식/보호 결과 미인증. |
+| willing | 승인 — 성인2·상자/테이블1·질문 손/고민 손1. 도움·거절·답변 없는 미확정 상태, 질문의 답과 내적 의사를 확정하지 않는다. |
+
+Cambridge 실제 정의10개(서로 다른 단어9개)·소유물/대비 보조 근거2개를 읽고 48개 검색 결과 표제를 보존했다. 기본 조회에 빠진 `whisper`는 추가 질의1회로 동사 SPEAK·명사 SPEECH을 읽었다. `wealth` MONEY, `widely` 사람/장소의 넓은 범위, `wildlife` 독립적으로 사는 동물의 미국식 정의, `whom` 전치사/동사 목적어 사용을 대조했다. `wherever`는 어디에서나라는 접속사 맥락, `willing`은 기꺼이 할 의사를 묻는 미확정 질문을 유지한다.
+
+| 공식 사전 | 확인 용법 |
+|---|---|
+| [wealth](https://dictionary.cambridge.org/dictionary/english/wealth) | wealth 해당 정의/품사 |
+| [wealthy](https://dictionary.cambridge.org/dictionary/english/wealthy?topic=wealthiness) | wealthy 해당 정의/품사 |
+| [whereas](https://dictionary.cambridge.org/dictionary/english/whereas) | whereas 해당 정의/품사 |
+| [wherever](https://dictionary.cambridge.org/dictionary/english/wherever) | wherever 해당 정의/품사 |
+| [whisper (verb)](https://dictionary.cambridge.org/dictionary/english/whisper) | whisper (verb) 해당 정의/품사 |
+| [whisper (noun)](https://dictionary.cambridge.org/dictionary/english/whisper) | whisper (noun) 해당 정의/품사 |
+| [whom](https://dictionary.cambridge.org/dictionary/english/whom) | whom 해당 정의/품사 |
+| [widely](https://dictionary.cambridge.org/dictionary/english/widely?topic=general) | widely 해당 정의/품사 |
+| [wildlife](https://dictionary.cambridge.org/dictionary/english/wildlife) | wildlife 해당 정의/품사 |
+| [willing](https://dictionary.cambridge.org/dictionary/english/willing) | willing 해당 정의/품사 |
+
+원본13개/320px13개를 실제 열어 확인했다. PNG 디코딩·원본과 사본/프롬프트 해시, 실제 본 스크린샷13개의 불변 및 최종10개 일치를 확인했다. 재개 검사19개(API/이미지 호출0), 스크립트3개 구문 검사 모두 exit0이다. 상세 확대0, 실제 iPhone/독립 학습자 검사는 미실시다. 앱 코드 변경이 없어 앱 전체 테스트/타입/린트/빌드는 이번 정적 이미지 범위에서 실행하지 않았다. 최초 보류의 보수적인 textFree 플래그를 실제 글자가 검출됐다는 증거로 해석하지 않는다. 수량/표식 관찰과 보류 이유를 별도 유지한다.
+
+장면/helper 조립 functions 호출이 실제 `SyntaxError: Unexpected token ')'`로 실행 전에 한 번 실패했다. 진단 투영의 여분 괄호를 고치고 장면 캐시와 파일 쓰기를 나눠 수정한 prepare가 exit0으로 실행됐다. 실패 시 파일·원장·이미지 상태 변경은 없었고 추가 웹/이미지/QA 호출도 없었다. 원래 실패 함수 소스/결과는 대화 실행 기록에만 남으며 로컬 원본을 복구했다고 표시하지 않는다. 이번 출력/메타/편집/후속 종료 오류0이다.
+
+직전382의 virtual 경계 조립 오류·같은 캐시 출력 회수·실행 전 초안 키 수정,380의 ENOSPC 원본 상태·유효 저널·같은 PNG 저장 복구/실제13개 명령과 근본원인 미확정,378/375/374/372의 원본 실패·보충 검수·실행 객체 공백과 grade 첫 저장 결과 미복구를 보존한다. 기존 실패 원본을 성공 원본으로 바꾸지 않는다.
+
+현재 제작3786 = 승인3736 + 이미지 있는 보류50, 이미지 미생성23 = 대기14 + 조건 보류2(letter/print) + 실패/중단7이다. PNG3977·시작 슬롯3984·확인된 내장 호출3983·제공자 전달 미확인 슬롯1이다. 앱/UI·교재 원문/ID·학습 기록·API·백업·DB·Sites 운영은 변경하지 않았다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `wealth` 명사(`4bc376a60d1ce3e4`)다. 다음 10개는 wealth, wealthy, whereas, wherever, whisper 동사/명사, whom, widely, wildlife, willing이며 아직 장면 준비·호출하지 않았다. 다음 묶음의 교재·원장 스냅샷은 `work/oxford-batch-383-tentative-sources.json`에 보존한다.
+다음 제작 대기 첫 항목은 `wind` 동사(`b914b855f7eefd9b`)다. 다음10개는 wind 동사, wire, wise, witness 명사/동사, worse 명사, worst 명사, worth 명사, wound 명사/동사이며 장면·호출은 아직 없다. 교재·원장 스냅샷은 `work/oxford-batch-384-tentative-sources.json`에 보존한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
