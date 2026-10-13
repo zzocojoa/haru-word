@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3646 |
-| 제작자 품질 검수 통과 `approved` | 3599 |
+| 제작된 서로 다른 항목 | 3656 |
+| 제작자 품질 검수 통과 `approved` | 3609 |
 | 품질·의미·조건 보류 `held` | 49 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 154 |
+| 제작 대기 `waiting` | 144 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3827 |
+| 내장 도구 호출·시작 슬롯 원장 | 3838 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 174 |
+| 그중 품질 수정 호출 | 175 |
 
-이미지 미생성 항목은 제작 대기 154개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 163개다. 제작된 3646개는 검수 통과 3599개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3820개다. 원장 3827회는 이미지가 반환된 3820회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3826회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 144개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 153개다. 제작된 3656개는 검수 통과 3609개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3831개다. 원장 3838회는 이미지가 반환된 3831회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3837회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8952,9 +8952,33 @@ shall의 신발옆선은 인쇄무늬인지 구조선인지 바로 확정하지 
 
 누적 제작3646개·제작 검수통과3599개·보류49개·실패/실행중단7개·대기154개다. 수정본 포함PNG3820개·시작슬롯3827개·확인된 내장호출3826회·제공자전달 미확인1개·품질수정174회를 구분한다. letter/print 생성전보류는 이미지/슬롯0개다. 전체3809개 모두승인 목표는 진행중이며 이번 체크포인트를 전체완료로 표시하지 않는다.
 
+## 추가 370: shape 동사부터 shot 명사까지
+
+- 제작 항목10·검수 통과10, 첫 후보9통과/1보류 후 shock 명사만 한 번 수정했다. 실제 원본11·320px11을 열어 검토했고 독립 학습자/실제 iPhone 검사는 수행하지 않았다.
+- 의미 구분: shape는 점토를 형성하는 물리 동작(공식 보조 뜻)을 연상시키고 원문의 stress/can을 유지한다. shelter는 비를 피하는 장소/행동, shift는 문 쪽으로 상자를 옮김/ship는 운송 준비, shock는 작은 정전기 반응/뜻밖의 소식이 주는 충격, shocked는 놀란 상태, shooting은 촬영 과정/shot는 하나의 촬영 구성이다. 실제 감정·인과·전압·안전·배송 완료·촬영 길이/우수함은 인증하지 않는다. shot의 부수 접시/식물/빈 액자는 실제대로 기록했다.
+- shock 명사 v1 손잡이 왼쪽의 분리된 별/광선 표시를 보류한 뒤 v2에서 제거했다. 성인1·문1·손잡이1·손을 빼는 자세/표정은 유지하며 두 시도와 첫 판정을 보존했다. 새 문자·숫자·로고·주석 없음. 추가 세 번째 호출은 하지 않았다.
+- 교재10행·표제어8·공식 정의10(Cambridge9/Oxford1)·보조 실제 본문2·실제 검색 헤더64(12/12/12/12/16)를 확인했다. 누락 본문 조회2기록/추가5쿼리이며 Oxford shooting 명사 sense3의 실제 촬영 정의를 읽었다. Cambridge shoot 동사로 품사를 바꿔 표시하지 않았다. 작성 예문9/Tatoeba1의 원문·출처를 유지했다.
+- 원본23개 첫 증거 파일·첫 생성 결과10개의 실제 캡처·수정 캡처1을 보존했다. 파일 디코딩/최종 320px10, 실제 열람한11축소 파일 해시 동일성, 재개19(이미지/API 호출0)·관리 스크립트 구문3이 통과했다. 전체3809ID/기존3799항목·이미지3831해시와 과거 증거·교재/관리 스크립트5핀·문서 교체2/9를 최종 보호 검사 대상으로 삼는다.
+- 출력 관찰 잘림2건: shooting 저장 캐시/실제 캡처를 회수해 같은 원본을 열었고, 넓은 계획 읽기는 범위를 좁혀 확인했다. 읽기 전용 검사 종료1과 inline Node 보조 검사 구문 오류1을 기록하고 저장된 CJS 검사로 복구했다. 전자의 전체 stdout 작업 파일은 미회수(실제 도구 기록의 잘린 출력/종료값 보존), 후자는 실제 전체 오류 결과를 보존한다. 이에 따른 이미지/QA 추가 호출은0이다. 과거 grade 첫 캡처 명령 결과의 영구 미회수 사실도 유지한다.
+- 누적 제작3656·검수3609·보류49·실패/중단7·대기144, PNG3831·원장3838(확인된 도구호출3837/제공자 전달 미확인1)·수정175. 생성 전 letter/print 보류2는 이미지/호출0이다. 전체 목표3809개 모두 승인까지200개가 남아 있으며 체크포인트 검증은 전체 목표 완료가 아니다.
+- 변경 범위는 연결 목록·계획·진행 문서3개이며 app/UI/학습 기록/API/백업/DB/의존성/Sites/배포를 변경하지 않았다. 위험·호환·마이그레이션 영향은 정적 이미지 자료에 한정한다. 원본과 시도별 파일을 삭제하거나 덮어쓰지 않아 롤백 시 연결 목록/문서 커밋을 되돌릴 수 있다. 앱 전체 테스트·타입·린트·빌드는 이 정적 제작 범위에서 실행하지 않았다.
+
+| 항목 ID | 표제어 | 실제 확인한 공식 정의 |
+|---|---|---|
+| 1356a2af16990c0d | shape | https://dictionary.cambridge.org/us/dictionary/english/shape |
+| 2613b2f1e4deaeee | shelter | https://dictionary.cambridge.org/dictionary/english/shelter?q=to%2Bshelter |
+| 2db7dd0ea122f5f5 | shelter | https://dictionary.cambridge.org/dictionary/english/shelter?q=to%2Bshelter |
+| 0312e3ffe6643289 | shift | https://dictionary.cambridge.org/dictionary/english/shift |
+| 789a74325e92c283 | ship | https://dictionary.cambridge.org/dictionary/english/ship |
+| 6dd1c9d13c233daf | shock | https://dictionary.cambridge.org/dictionary/english/electric-shock |
+| 618e6118d425d898 | shock | https://dictionary.cambridge.org/dictionary/english/shock?topic=electricity-and-electronics |
+| e7699f04c16151f9 | shocked | https://dictionary.cambridge.org/us/dictionary/english/shocked?topic=surprised |
+| eda79c4c86159cc9 | shooting | https://www.oxfordlearnersdictionaries.com/definition/american_english/shooting |
+| 9de6a8f42d030b86 | shot | https://dictionary.cambridge.org/dictionary/english/shot |
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `shape` 동사(`1356a2af16990c0d`, 형성하다)다. 다음10개 교재행을370번째 묶음의 미준비 후보로 저장했다. 기존 보류/실패는 전체승인목표의 미완료범위로 유지한다.
+다음 제작 대기 첫 항목은 `significant` 형용사 `33a9ff59cbab3618`이며, 후속 10개 교재 지문은 `work/oxford-batch-371-tentative-sources.json`에 읽기 자료로 보존했다. 장면·프롬프트 준비나 새 호출은 아직 하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
