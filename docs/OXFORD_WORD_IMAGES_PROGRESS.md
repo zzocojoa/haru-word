@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3546 |
-| 제작자 품질 검수 통과 `approved` | 3503 |
-| 품질·의미·조건 보류 `held` | 45 |
+| 제작된 서로 다른 항목 | 3556 |
+| 제작자 품질 검수 통과 `approved` | 3512 |
+| 품질·의미·조건 보류 `held` | 46 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 254 |
+| 제작 대기 `waiting` | 244 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3715 |
+| 내장 도구 호출·시작 슬롯 원장 | 3728 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 162 |
+| 그중 품질 수정 호출 | 165 |
 
-이미지 미생성 항목은 제작 대기 254개·생성 전 조건 보류 `letter/print` 2개·실패/실행 중단 7개를 합친 263개다. 제작된 3546개는 검수 통과 3503개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3708개다. 원장 3715회는 이미지가 반환된 3708회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3714회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 244개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 253개다. 제작된 3556개는 검수 통과 3512개와 이미지가 있는 보류 44개이며, 수정본 포함 PNG는 3721개다. 원장 3728회는 이미지가 반환된 3721회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3727회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8708,9 +8708,23 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 누적 제작3546/검수 통과3503/PNG3708/대기254/보류45/실패7, 시작 슬롯3715·확인된 내장 호출3714/전달 미확인1·수정162이다. B2 승인578/보류6/대기254/실패1이며 A1/A2/B1 집계는 유지한다. 이미지 없음263개·미승인306개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
 - 다음 제작 대기 첫 항목은 `propose` v.(제안하다), ID `5e43a0537a465faf`이다. 이후 prospect n., protection n., psychologist n., psychology n., publication n., purchase n./v., pure adj., pursue v. 순서다. 아직 준비/호출하지 않았으며 letter/print의 이미지 미생성 보류는 유지한다.
 
+## 추가360 · propose~pursue — 9개 검수 통과·1개 보류
+
+- 기준 커밋: `0793f94e4f589e36c6d98f1fc5f50b2765a613db`. 이전359의 10개 승인/1회 품질 보정·원본/320px·첫 동결/capture·별도 print 정책 연결과 복구 근거를 대조했다. 이전359 종료 화면의 batch358 표시는 콘솔 문구만의 오류이며 실제 완료 JSON은 항상359였다. 원래 도우미/guard를 변경하지 않은 후속 감사 근거와 실제359 상태를 보존했다.
+- B2/page12 교재10개 ID·품사·뜻·표현/예문/출처를 읽고 공식 본문과 대조했다. 표제어9·정의10/보조2·검색 요약36(3×12), 작성 예문8/Tatoeba2다. propose는 SUGGEST, prospect는 POSSIBILITY의 미래 가능성, protection은 보호의 행위/상태, psychologist는 사람의 역할, psychology는 인간 마음/행동 이해, publication은 가산 명사의 책/잡지, purchase는 물건 명사/사는 동사, pure는 COMPLETE의 기쁨, pursue는 Business English의 목표/꿈을 추구하는 뜻을 선택했다. 참고: [propose](https://dictionary.cambridge.org/dictionary/english/propose) · [prospect](https://dictionary.cambridge.org/dictionary/english/prospect) · [protection](https://dictionary.cambridge.org/us/dictionary/english/protection) · [psychologist](https://dictionary.cambridge.org/dictionary/english/psychologist) · [psychology](https://dictionary.cambridge.org/dictionary/english/psychology?topic=subjects-and-disciplines) · [publication](https://dictionary.cambridge.org/dictionary/english/publication) · [purchase](https://dictionary.cambridge.org/dictionary/english/purchase) · [pure](https://dictionary.cambridge.org/dictionary/english/pure) · [pursue](https://dictionary.cambridge.org/dictionary/english/pursue).
+- 내장 도구로 첫10장·보정3장 총13회/13개 PNG를 제작했다. 첫7개 통과·3개 보류였으며 purchase 동사 노트북 구도를 한 번 바꿔 외부 덮개만 표시하고 pursue 머리의 금색 필기체 유사 표식을 한 번 제거했다. pure의 옅은 각인/문자 유사 표식은 한 번 보정 후에도 제거를 확정하기 어려워 최종 보류했다. 실제 상표명/문자를 판독하거나 해결됐다고 표시하지 않는다. 각 항목 v1/v2를 유지하고 세 번째 호출0이다.
+- 원본13개와 개별320px13개를 실제 열어 확인했다. pure/pursue의 전·후 원본 표면을 브라우저에서3배 확대하여 스크린샷4개로 비교했다. 원본 PNG 해시를 유지하고 이미지를 재편집하지 않았으며 네트워크 요청 없이 로컬 PNG를 표시했다. 첫 실제 capture10개+보정3개·첫 자료 동결23개를 보존한다.
+- 실제 수량: propose 성인3/제안자1·모형1/벤치2; prospect 성인1·실제 묘목3·희망 숲 모형1; protection 성인2/묘목1/울타리1; psychologist 성인1/어린이1·블록3·탁자1/의자2/노트1; psychology 성인3·받침2/퍼즐2/무표기 판1; publication 양장2(열린1/닫힌1)/잡지형1·전시대1; purchase 명사 성인1/책상1과 벗겨 둔 포장지; purchase 동사 성인2묘사·노트북/배송 상자/책 각1; pure 성인/기타/스툴 각1; pursue 성인/기타/의자/공연 단/마이크 스탠드 각1.
+- 교재 뜻과 함께 쓰는 연상 단서다. 실제 미래 환경 보호 효과/예측·울타리 안전/규정·자격/진단/치료/연구 결과·출판일/내용/발행 이력·소유권/결제/배송/사이트/인물 동일성·행복 측정/화학 순도/도덕적 순수함·꿈 성취/진로/기간/음악 수준을 인증하지 않는다. child psychologist 표현 때문에 어린이가 등장하며 기본 성인 스타일을 임의로 어린이용으로 바꾸지 않는다. publication은 물체의 형태를 표시하며 실제 글자 예외를 허용하지 않는다. 변경된 노트북 장면의 방향/인물 크기와 보정본 표면 질감을 픽셀 그대로 유지됐다고 표시하지 않는다.
+- 원본의 물리적 나뭇결/주름·가구/기기/제본 이음매·블록/퍼즐 돌기·기타 현/프렛/조율 부품·마이크/신발 솔기를 인쇄 글자·숫자·로고와 구분했다. pure의 남은 옅은 표식은 금지 조건의 불확실성이므로 사용 승인 대상으로 보내지 않는다. QA HTML의 단어/품사/뜻은 PNG 내부 글자가 아니다. 실제 iPhone·독립 학습자 평가는 미실시다.
+- 초기 큰 자료 조회/스킬 꼬리 관측 손실2건을 같은 캐시/범위 제한 조회로 회복했다. protection 정의의 끝을 SMART로 가정한 선택 도우미 오류1건은 파일 쓰기 전에 멈췄고 실제 동일 본문의 가로 구분선을 확인해 회복했다. 이 JS 오류에는 셸 종료 코드가 없으며 원래 전체 실행 소스는 대화에만 남아 있다고 명시한다. 복구 추가 이미지/QA0·공식 추가 검색0이며 서비스/실행/메타데이터/문서 교열 오류0이다. 이전 grade 첫 실제 capture 미복구1건과 전달 미확인 시작 슬롯1개, 이전359의 잘린 guard 실패 stderr도 그대로 보존한다.
+- 최종 연결/디코딩/320px10개·재개 보호19개·기존 도구3개 구문 검사를 종료0으로 확인했다. 최종 QA 전에 실제 본 썸네일13개 해시를 저장해 이후 모두 유지됐고 최종10개와 일치함을 확인했다. 전체3809 ID/source fingerprint·3721 PNG·기존3799 항목·첫 동결/보정/확대 자료·문서 재생을 guard로 대조한다. 앱 코드 변경이 없는 정적 작업으로 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다.
+- 누적 제작3556/검수 통과3512/PNG3721/대기244/보류46/실패7, 시작 슬롯3728·확인된 내장 호출3727/전달 미확인1·수정165다. B2 승인587/보류7/대기244/실패1이며 A1/A2/B1 집계를 유지한다. 이미지 없음253개·미승인297개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
+- 다음 제작 대기 첫 항목은 `range` v.(범위가 ~에 이르다), ID `9ff5889a9c5e8252`이다. 이후 rank n./v., rapid adj., rapidly adv., rate v., raw adj., reach n., realistic adj., reasonable adj. 순서다. 아직 준비/호출하지 않았다. pure의 v1/v2 보류와 letter/print의 이미지 미생성 보류를 유지한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `propose` v.(제안하다), ID `5e43a0537a465faf`이다. 이후 prospect n., protection n., psychologist n., psychology n., publication n., purchase n./v., pure adj., pursue v. 순서다. 아직 준비/호출하지 않았으며 letter/print의 이미지 미생성 보류는 유지한다.
+다음 제작 대기 첫 항목은 `range` v.(범위가 ~에 이르다), ID `9ff5889a9c5e8252`이다. 이후 rank n./v., rapid adj., rapidly adv., rate v., raw adj., reach n., realistic adj., reasonable adj. 순서다. 아직 준비/호출하지 않았다. pure의 v1/v2 보류와 letter/print의 이미지 미생성 보류를 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
