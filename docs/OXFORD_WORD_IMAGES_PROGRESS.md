@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3786 |
-| 제작자 품질 검수 통과 `approved` | 3736 |
+| 제작된 서로 다른 항목 | 3796 |
+| 제작자 품질 검수 통과 `approved` | 3746 |
 | 품질·의미·조건 보류 `held` | 52 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 14 |
+| 제작 대기 `waiting` | 4 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3984 |
+| 내장 도구 호출·시작 슬롯 원장 | 3994 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 191 |
 
-이미지 미생성 항목은 제작 대기 14개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 23개다. 제작된 3786개는 검수 통과 3736개와 이미지가 있는 보류 50개이며, 수정본 포함 PNG는 3977개다. 원장 3984회는 이미지가 반환된 3977회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3983회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 4개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 13개다. 제작된 3796개는 검수 통과 3746개와 이미지가 있는 보류 50개이며, 수정본 포함 PNG는 3987개다. 원장 3994회는 이미지가 반환된 3987회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3993회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9276,9 +9276,47 @@ Cambridge 실제 정의10개(서로 다른 단어9개)·소유물/대비 보조 
 
 현재 제작3786 = 승인3736 + 이미지 있는 보류50, 이미지 미생성23 = 대기14 + 조건 보류2(letter/print) + 실패/중단7이다. PNG3977·시작 슬롯3984·확인된 내장 호출3983·제공자 전달 미확인 슬롯1이다. 앱/UI·교재 원문/ID·학습 기록·API·백업·DB·Sites 운영은 변경하지 않았다.
 
+### 384차 · wind–wound 10항목 검수
+
+내장 image_gen 첫10장/10슬롯을 저장하고 10항목을 승인했다. 이번 수정·새 보류·서비스 실패0이며 첫 검수와 최종 검수 상태가 같다. 실제 review 명령은 한 번 실행했고 최초/최종 결과를 그 성공 결과의 별칭으로 보존한다. 세 번째 호출·자동 재시도·별도 이미지 API·운영 게시0이다.
+
+| 항목 | 승인 근거와 실제 한계 |
+|---|---|
+| wind 동사 | 길1·뚜렷한 반복 굽이3·무지개1. 언덕은 서로 이어져 정확3개로 나눴다고 인증하지 않는다. 바람 명사/시계 감기 용법 아님. |
+| wire | 피복 전선1·노출 금속 도체 끝1. 손/전원/감전 없음. 조건문을 실제 사고로 바꾸지 않고 통전·접촉 안전·가닥 수를 인증하지 않는다. |
+| wise | 성인2·의자2·테이블1·설명 손1. 경청자는 턱 아래 맞잡은 손2로 변경됐으나 경청 관계는 유지. 실제 지도자/지혜/결과 미인증. |
+| witness 명사 | 관찰자1·공중에 기운 컵1·탁자/받침1. 관찰자 손은 떨어져 있다. 실제 원인/낙하 시점/법적 증언 미인증. |
+| witness 동사 | 성인2·무지개/길1·큰 언덕 봉우리3·부수 배낭2. 보는 사건 단서, 실제 경험/장소/색 스펙트럼 미인증. |
+| worse 명사 | 두 화분 상태: 왼쪽 긴 금1·오른쪽 조각4. 더 나쁜 것의 비교, 실제 기대/변화 순서/모든 경우의 최악 미인증. |
+| worst 명사 | 비바람과 이후 고요한 두 상태: 나무/길2·아래 물웅덩이 영역. 같은 길·나무 관계를 유지하며 배경 언덕/웅덩이 세부 수·최대 기상 강도 미인증. |
+| worth 명사 | 붕대3롤·동전4(놓인3/든1)·손1. 금액 상당의 물건 단서, 액면가/정확10달러/의학적 적합성 미인증. 탁자 가장자리가 없어 정확한 카운터 신분도 미인증. |
+| wound 명사 | 성인1·반창고1·국소 팔의 옅은 붉은 피부. 깊이/원인/진단/치료·치유 결과 미인증. |
+| wound 동사 | 성인1·의자/슬링/손목의 붕대1. 팔은 슬링 안에 있으나 정확한 임상 부위 미인증. 신체 부상의 수동적 이후 상태, 실제 할아버지/전쟁/기전/회복 미인증. |
+
+Cambridge 실제 정의10개(단어8개)·경로/가치 보조 근거2개와 검색 결과 표제48개를 읽었다. 기본 wind 자료가 바람 명사를 노출하고 worst learner 자료는 정의 본문이 없어, 하나의 도구 조회에서 두 질의로 보완했다. 실제 noun worst 정의는 Cambridge의 현지화 UI 페이지 안에 있는 영어 본문으로 확인했다. 영어 US 결과는 형용사만 반환했으므로 명사 근거로 대신 쓰지 않았다. worth의 통화 금액 상당량은 MONEY 안의 명사 하위 항목이며 기간 분량 AMOUNT와 구분한다. wound의 신체 손상은 감정 상처 및 wind의 과거형과 구분한다.
+
+| 공식 사전 | 확인한 항목 |
+|---|---|
+| [wind (verb route)](https://dictionary.cambridge.org/dictionary/english/wind?topic=bending-twisting-and-curving) | 해당 실제 정의/품사 |
+| [wire](https://dictionary.cambridge.org/dictionary/english/wire?topic=electricity-and-electronics) | 해당 실제 정의/품사 |
+| [wise](https://dictionary.cambridge.org/dictionary/english/wise?q=wise_1) | 해당 실제 정의/품사 |
+| [witness (noun)](https://dictionary.cambridge.org/dictionary/english/witness) | 해당 실제 정의/품사 |
+| [witness (verb)](https://dictionary.cambridge.org/dictionary/english/witness) | 해당 실제 정의/품사 |
+| [worse (noun)](https://dictionary.cambridge.org/dictionary/english/worse) | 해당 실제 정의/품사 |
+| [worst (noun; English definition in localized official UI)](https://dictionary.cambridge.org/uk/dictionary/english/worst) | 해당 실제 정의/품사 |
+| [worth (noun monetary amount)](https://dictionary.cambridge.org/dictionary/english/worth) | 해당 실제 정의/품사 |
+| [wound (noun)](https://dictionary.cambridge.org/dictionary/english/wound) | 해당 실제 정의/품사 |
+| [wound (verb)](https://dictionary.cambridge.org/dictionary/english/wound) | 해당 실제 정의/품사 |
+
+원본10개와 320px10개를 실제 열어 확인했다. 첫 원본/관찰/검수 및 실제 생성 반환·저장 결과의 고정23개를 보존하고 최종10개 스크린샷이 실제 본 이미지와 같은 해시인지 대조했다. PNG 디코딩·복사/프롬프트 해시, 재개19개(API/이미지 호출0), 스크립트3구문 검사 exit0이다. 상세 확대0·실제 iPhone/독립 학습자 검사는 미실시다. 앱 변경이 없어 앱 전체 테스트/타입/린트/빌드는 이번 정적 이미지 범위에서 실행하지 않았다. 기본 의미·텍스트 금지·관계 일치로 승인하며, 기록한 비핵심 지형/해부·모서리 한계를 정확한 수나 진단으로 바꾸지 않는다.
+
+이번 준비/출력/메타/편집/실행/후속 종료 오류0이다. 직전383의 실행 전 SyntaxError 원본 대화기록 공백,382의 경계/출력/초안 키 보정과 volume 보류,380 ENOSPC 원본 상태·저널·같은 PNG 저장 복구/실제13개 명령과 근본원인 미확정,378/375/374/372의 실패·보충·증거 공백 및 grade 첫 저장 결과 미복구를 보존했다. worktree 안 AGENTS 검색은 일치 없음의 정상 rg exit1이며 명령 장애로 세지 않는다; 제공된 프로젝트 지침을 적용한다.
+
+현재 제작3796 = 승인3746 + 이미지 있는 보류50, 이미지 미생성13 = 대기4 + 조건 보류2(letter/print) + 실패/중단7이다. PNG3987·시작슬롯3994·확인된 내장 호출3993·전달 미확인 슬롯1이다. 전체3809 승인 목표는 미완료이고 앱/UI·교재 원문/ID·학습 기록·API·백업·DB·Sites 운영은 바꾸지 않았다. 남은 대기4항목을 다음 체크포인트에서 진행하며 기존52보류/7실패를 완료로 줄이지 않는다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `wind` 동사(`b914b855f7eefd9b`)다. 다음10개는 wind 동사, wire, wise, witness 명사/동사, worse 명사, worst 명사, worth 명사, wound 명사/동사이며 장면·호출은 아직 없다. 교재·원장 스냅샷은 `work/oxford-batch-384-tentative-sources.json`에 보존한다.
+다음 제작 대기 첫 항목은 `wrap` 동사(`5e2bf71a4efdfd6a`)다. 대기 항목은 wrap 동사, wrong 명사, yet 접속사, zone 명사의 4개이며 아직 장면·호출하지 않았다. 다음 체크포인트 스냅샷은 `work/oxford-batch-385-tentative-sources.json`의 실제4개다. 전체3809 목표와 보류/실패를 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
