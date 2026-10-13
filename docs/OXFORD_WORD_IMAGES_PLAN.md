@@ -432,3 +432,13 @@
 현재 제작3800·승인3753·보류49(품질46+조건3)·실패7·PNG3992·시작슬롯3999다. 기존 품질보류49개 재검수는 모두 끝났고 미승인56개는 남는다. 같은 대화의 기본 생성 PNG3992개도 모두 이미 기록된 이미지여서 climb의 미연결 결과 파일은 발견되지 않았다. 결과 파일 부재로 전달 여부를 확정하지 않는다.
 
 다음은 미해결 항목별 복구안을 준비한다. 기존 두 번의 품질 시도 상한과 capital/letter/print 글자 금지 보류는 그대로 지키며, 제3회 생성이나 조건 해제·실패 재호출을 자동 실행하지 않는다. 3809개 모두 승인되기 전 전체 완료로 표시하지 않는다. [387차 진행 기록](OXFORD_WORD_IMAGES_PROGRESS.md)을 따른다.
+
+## 388차 미완료56개 복구안 준비 · 실행 승인 전
+
+2026-10-14 KST: [복구 제안](OXFORD_WORD_IMAGES_RECOVERY.md)과 [항목별 정적 제안 JSON](oxford-word-image-recovery-proposal.json)에 미승인56개 전부의 현재 상태·교재 지문·뜻/품사·새 장면·검수 조건을 정리했다. 품질보류46개와 실패7개에는 기존 내장 도구/스타일로 각각 추가 시작1회, 총 최대53회의 제안을 준비했다. 아직 승인 원장/생성 한도/이미지 상태/시작 슬롯을 바꾸거나 호출하지 않았다.
+
+capital 형용사·letter·print의 사용자 글자 금지 보류3개는 새 프롬프트/호출 없이 유지한다. 53개가 모두 통과해도 승인3806/3809로 조건보류3개는 남으며 전체 목표를 줄이지 않는다. 현재는 제작3800·승인3753·보류49·실패7·시작슬롯3999 그대로다. 기존 계획의 한 번 수정 후 보류 규칙을 넘는 실행은 명시적 승인 뒤에만 진행한다.
+
+[code 명사](https://dictionary.cambridge.org/dictionary/learner-english/code)의 비밀 메시지 용법, [NCI 유방 구조](https://www.cancer.gov/types/breast/what-is-breast-cancer), [OpenStax 변위 부피](https://openstax.org/books/university-physics-volume-1/pages/14-4-archimedes-principle-and-buoyancy)를 확인했다. 새 장면의 의미/표식/작은 화면 적합성과 도구 수락은 아직 검증 전이며, 부피 비율 계산은 설계치다. 실패 원인·이전 climb 전달 여부를 추정하지 않는다.
+
+실행 승인 범위에는 선택ID·시작 상한·기존 실패 보존·v3 파일명 호환의 로컬 검증이 필요하다. 제안 JSON은 executionAllowed=false·authorization=null이며 그 자체로 실행 동의를 만들지 않는다. 앱/API/DB/운영 사이트·사용자 학습 기록·현재 생성기/원장은 변경하지 않았다.
