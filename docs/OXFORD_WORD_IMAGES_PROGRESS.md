@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3676 |
-| 제작자 품질 검수 통과 `approved` | 3629 |
+| 제작된 서로 다른 항목 | 3686 |
+| 제작자 품질 검수 통과 `approved` | 3639 |
 | 품질·의미·조건 보류 `held` | 49 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 124 |
+| 제작 대기 `waiting` | 114 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3860 |
+| 내장 도구 호출·시작 슬롯 원장 | 3872 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 177 |
+| 그중 품질 수정 호출 | 179 |
 
-이미지 미생성 항목은 제작 대기 124개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 133개다. 제작된 3676개는 검수 통과 3629개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3853개다. 원장 3860회는 이미지가 반환된 3853회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3859회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 114개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 123개다. 제작된 3686개는 검수 통과 3639개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3865개다. 원장 3872회는 이미지가 반환된 3865회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3871회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9026,9 +9026,34 @@ shall의 신발옆선은 인쇄무늬인지 구조선인지 바로 확정하지 
 | 59911ff69de1d9d6 | spiritual adj. | https://dictionary.cambridge.org/dictionary/english/spiritual |
 | 0e65a41d30bdb38e | split v. | https://dictionary.cambridge.org/dictionary/english/split |
 
+## 추가373: split 명사부터 status 명사까지
+
+- 첫제작10/첫검수8통과·2보류, spot/status 각각 한 번 수정해 최종10통과. 실제 원본12/320px12·최초23증거/첫생성·실제캡처10/수정캡처2를 보존했다. 별도 확대렌더/세번째호출은 없다. 독립학습자/실제iPhone검사는 수행하지 않았다.
+- split 명사는 접시2/각원판3·총6/사람0의 균등 분할결과로 동사의 전달행동과 구분한다. 실제액면/공정성·합의/결제는 인증하지 않는다. sponsor 동사는 성인2·원판1을 주는/받는 손·빈플랫폼1·커튼2, 명사는 성인1/주머니1/원판1·빈플랫폼1의 지원하는 역할이다. 실제main sponsor 신원/계약·agreed/next/too 확정/미래후원을 인증하지 않는다.
+- spot v1은 트레이의 녹색3/파랑1·총4에서 위왼쪽 녹색을 가리켜 아래오른쪽 파랑 대상과 불일치했다. v2에서는 손/눈·타일위치/윤곽을 유지하고 두 유약색만 바꿔 위왼쪽파랑1/나머지녹색3·손가락대상을 맞췄다. 원본/320px에서 확인했으며 실제색이 오류임/화면실수·연결진단을 인증하지 않는다. spread는 성인3(사서1/방문객2)·무지닫힌책2/빈선반1/카운터1의 여러사람에게 도달하는 과정으로 실제지식습득/무료/대출완료는 인증하지 않는다.
+- stable은 탁자1·보이는바닥접촉다리4/물리보강대·곧은유리잔1의 고정/안정된 상태, stage는 배우2/커튼스태프1·성인3/무대1·커튼2의 공연을 준비/올리는 동작이다. 실제강도/안전·네트워크나 future will 확정/공연완료를 인증하지 않는다. stand는 점원1/판매대1·기둥2/덮개1·무지카드1/카드묶음1의 작은판매시설이며 실제표유효성/미래판매를 인증하지 않는다. 카드테두리/종이층·옷단추·직물색띠/목재칸은 물리구조와 인쇄글자를 구분한다.
+- stare는 성인1/의자1·탁자1/모니터1의 열린눈·앞으로기운몸/집중시선이다. 화면은 무지회색이며 키보드/버튼/글자/로고/UI없다. 실제지속시간·상태정보/의도를 인증하지 않는다. status v1은 연결3+분리2/총5여서 목표6에 미달했다. v2에서 아래오른쪽연결조각1을 더해 연결4+분리2/총6으로 보정하고 위홈·왼쪽탭/오른쪽탭과 이웃/분리조각의 대응을 원본/320px에서 확인했다. 바깥위왼쪽/아래왼쪽경계를 평평하게 정돈했고 미완료 조립상태를 유지했다. 실제완성/정확치수·진도율/컴퓨터현재상태는 인증하지 않는다.
+- 교재10행/표제어9·Cambridge 공식실제정의10/보조2·실제검색헤더36(12×3), 작성예문10/Tatoeba0을 확인했다. spread의 최초결과는 동사본문뿐이라 같은캐시의 American Dictionary noun MOVEMENT 절을 선택·실제열람했다. 6개넓은본문 표시잘림1은 전체raw캐시를 보존하고 stand SHOP/spread noun의 관련절만 다시읽어 복구했다. 추가조회/이미지/QA0이며 source선택보정1·표시잘림1외 실행/준비·메타데이터/교열오류0이다.
+- 최종디코딩/320px10·실제열람축소12해시동일·재개19(이미지/API0)·관리스크립트구문3 통과. 전체3809ID/기존3799항목·PNG3865해시/과거원본·복구근거·교재/관리스크립트5핀·문서교체2/9를 최종보호검사대상으로 삼는다. 이전372의 stale-cache 열람표시 오류/false원본고정기록·같은PNG 재열람/검증보완·진행문서정정1·원본실패/성공검사소스/입력과 과거grade 첫캡처 결과 미회수 등을 그대로 보존한다.
+- 누적제작3686/검수3639·보류49·실패/중단7·대기114·PNG3865·원장3872(확인된도구호출3871/전달미확인1)·수정179. 전체3809개 모두승인까지170개 미완료이며 letter/print 생성전보류2는 이미지/호출0이다.
+- 정적연결목록/계획/진행문서3개만 변경하며 app/UI/학습기록/API/백업/DB/의존성/Sites/배포 영향은 없다. 원본/시도별파일은 삭제/덮어쓰기 없이 유지한다. 연결목록/문서커밋 롤백가능·마이그레이션없음. 앱전체테스트/타입/린트/빌드는 정적제작범위에서 실행하지 않았다.
+
+| 항목 ID | 표제어/품사 | 실제 확인한 공식 정의 |
+|---|---|---|
+| 28d57eede0a91ffd | split n. | https://dictionary.cambridge.org/dictionary/english/split |
+| cadf11798f168fe7 | sponsor v. | https://dictionary.cambridge.org/dictionary/english/sponsor |
+| c9916a42278e7826 | sponsor n. | https://dictionary.cambridge.org/dictionary/english/sponsor |
+| 6f4f4ec694aa9500 | spot v. | https://dictionary.cambridge.org/dictionary/english/spot |
+| 4239a2fcc3ac16c3 | spread n. | https://dictionary.cambridge.org/dictionary/english/spread?q=spreading |
+| b3fb08e7bda818f4 | stable adj. | https://dictionary.cambridge.org/dictionary/english/stable?topic=calm-and-relaxed |
+| 9b76751d1ceec7e3 | stage v. | https://dictionary.cambridge.org/dictionary/english/stage?q=stages |
+| 7742f7399ed1cd82 | stand n. | https://dictionary.cambridge.org/dictionary/english/stand |
+| af7fe928994d9dce | stare v. | https://dictionary.cambridge.org/dictionary/english/stare |
+| 6ee91e6c6e9a293b | status n. | https://dictionary.cambridge.org/dictionary/english/status |
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `split` 명사 `28d57eede0a91ffd`이며, 후속10개 교재 지문은 `work/oxford-batch-373-tentative-sources.json`에 읽기 자료로 보존했다. 장면·프롬프트 준비나 새 호출은 아직 하지 않았다.
+다음 제작 대기 첫 항목은 `steady` 형용사 `985e9a328f35050b`이며, 후속10개 교재 지문은 `work/oxford-batch-374-tentative-sources.json`에 읽기 자료로 보존했다. 장면·프롬프트 준비나 새 호출은 아직 하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
