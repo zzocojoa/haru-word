@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3566 |
-| 제작자 품질 검수 통과 `approved` | 3520 |
+| 제작된 서로 다른 항목 | 3576 |
+| 제작자 품질 검수 통과 `approved` | 3530 |
 | 품질·의미·조건 보류 `held` | 48 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 234 |
+| 제작 대기 `waiting` | 224 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3741 |
+| 내장 도구 호출·시작 슬롯 원장 | 3752 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 168 |
+| 그중 품질 수정 호출 | 169 |
 
-이미지 미생성 항목은 제작 대기 234개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 243개다. 제작된 3566개는 검수 통과 3520개와 이미지가 있는 보류 46개이며, 수정본 포함 PNG는 3734개다. 원장 3741회는 이미지가 반환된 3734회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3740회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 224개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 233개다. 제작된 3576개는 검수 통과 3530개와 이미지가 있는 보류 46개이며, 수정본 포함 PNG는 3745개다. 원장 3752회는 이미지가 반환된 3745회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3751회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8736,9 +8736,33 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 누적 제작3566/검수 통과3520/PNG3734/대기234/보류48/실패7, 시작 슬롯3741·확인된 내장 호출3740/전달 미확인1·수정168이다. B2 승인595/보류9/대기234/실패1이며 A1/A2/B1 집계를 유지한다. 이미지 없음243개·미승인289개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
 - 다음 제작 대기 첫 항목은 `recall` v.(기억해 내다), ID `b16f8aa871adf674`이다. 이후 recover v., reduction n., regard v./n., regional adj., register v./n., regret v./n. 순서다. 아직 준비/호출하지 않았다. rank 두 품사의 v1/v2 보류와 기존 pure·letter/print 보류를 유지한다.
 
+## 362차 제작·검수 기록
+
+- 기존 방식으로 10항목을 각각 생성했고 `regret` 동사만 첫 이미지의 미완성 작업물이 불분명해 한 번 보정했다. 원본 10장과 보정본 1장, 총 11장의 원본 및 개별 320px 표시를 실제 확인했다. 최종 10항목 승인·새 보류 0개이며 세 번째 호출은 없다.
+- `recover`와 `regret` 명사는 기본 단어 뜻의 연상 이미지다. 부정문인 원래 예문·번역을 유지했고 그 문장의 실제 상황을 묘사한다고 인증하지 않았다. `register` 명사의 빈 기록책은 명부 물체의 맥락 단서이며 실제 이름 목록이나 채워진 명부가 아니다.
+
+| 항목 ID·품사 | 실제 확인한 장면·검수 | 예문 출처 |
+|---|---|---|
+| `b16f8aa871adf674` recall 동사 | 관련 2장면·성인 2묘사·스툴 1개, 과거 목표 기억의 단서 | 학습용 작성 예문 |
+| `3f01e7433ffcc314` recover 동사 | 쉬는/걷는 성인 2묘사, 회복 의미 연상·실제 예후 인증 아님 | Tatoeba 참고 예문 |
+| `2dd66a7c360f5ccf` reduction 명사 | 성인 1명·큰/작은 빈 원판 묶음 2개, 비용 감소 단서 | 학습용 작성 예문 |
+| `0e7720152643e42a` regard 동사 | 성인 2명·의자 1개, 변화를 좋게 여기는 교재 단서 | 학습용 작성 예문 |
+| `65d7ca24e27dae78` regard 명사 | 성인 2명·그릇 1개, 작업에 대한 존중 단서 | 학습용 작성 예문 |
+| `645623a50c4276d6` regional 형용사 | 사무소형 건물 1개·주택 3채·해안 골짜기, 지역 맥락 | 학습용 작성 예문 |
+| `7f954c67ff894329` register 동사 | 성인 2명·외부 덮개만 보이는 노트북 1대·닫힌 책 1권, 등록 행동 맥락 | 학습용 작성 예문 |
+| `de0161876d9e85d0` register 명사 | 성인 2명·빈 페이지의 기록책 1권, 명부 물체의 맥락 | 학습용 작성 예문 |
+| `f8635d1c71ca04c7` regret 동사 | 관련 2장면의 새집 지붕판을 각각 하나 제거한 보정본, 열린 미완성 작업물 확인 | Tatoeba 참고 예문 |
+| `b0eac86f71417cd7` regret 명사 | 성인 1명·금 간 그릇 1개, 후회의 감정 단서·원래 부정문 유지 | Tatoeba 참고 예문 |
+
+- 사전 조회 3묶음·36개 페이지 개요에서 고유 단어 7개/품사·용법 본문 10개와 보조 예문 본문 2개를 실제 읽었다. 항목별 근거·본문 경계·프롬프트·수량 검수는 `work/oxford-batch-362-{dictionary,evidence,scenes,quantity-checks}.json`에 남겼다. 품사별 [Cambridge recall](https://dictionary.cambridge.org/dictionary/english/recall), [recover](https://dictionary.cambridge.org/dictionary/english/recover), [reduction](https://dictionary.cambridge.org/dictionary/english/reduction), [regard](https://dictionary.cambridge.org/dictionary/english/regard?topic=particular-and-individual), [regional](https://dictionary.cambridge.org/us/dictionary/english/regional), [register](https://dictionary.cambridge.org/dictionary/english/register), [regret](https://dictionary.cambridge.org/dictionary/english/regret)를 대조했다.
+- 첫 23개 증거 파일과 실제 첫 캡처 출력 10개, 보정 캡처 출력 1개를 보존했다. 최종 QA 전 실제 확인한 320px 파일 11개의 해시를 저장했고 최종 QA 이후 모두 같음을 검사했다. 이전 `grade` 동사의 첫 캡처 명령 결과 1개는 여전히 미복구이며 파생 결과로 대체하지 않는다.
+- 이미지 검증 10개와 보정본 1개 및 최종 10개, 재개 보호 19검사(이미지/API 호출 0), 제작 스크립트 3개 구문 검사는 모두 종료 코드 0이다. 모든 3,809 ID/지문, 기존 3,799항목·증거와 전체 PNG 해시는 별도 보존 가드로 확인한 뒤 커밋·푸시한다.
+- 표시 관측 손실 3건은 같은 QA 캐시 또는 표시된 스키마로 회수했고 이미지/QA 재호출 0이다. 보조 파일명 오독 1건과 결합 템플릿 추출 구문 오류 1건은 수정 후 실제 검증했다. 구문 오류의 전체 실패 명령 결과는 작업 파일에 미보존이고 대화에 남아 있으며 요약·원본 소스·실제 종료 코드 1을 기록했다. 이 오류들은 이미지 제공자 실패와 구분한다.
+- 실제 iPhone·독립 학습자 이해도는 미검사다. 정적 이미지·원장·문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·Sites/배포·DB·학습 기록/API/백업·의존성 변경은 없다. 전체 3,809항목 승인 목표는 완료되지 않았으며 제작 대기 224개·보류 48개·실패 7개가 남는다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `recall` v.(기억해 내다), ID `b16f8aa871adf674`이다. 이후 recover v., reduction n., regard v./n., regional adj., register v./n., regret v./n. 순서다. 아직 준비/호출하지 않았다. rank 두 품사의 v1/v2 보류와 기존 pure·letter/print 보류를 유지한다.
+다음 제작 대기 첫 항목은 `48e92f0fc28c71a1` **regulation** 명사(규정)다. 이어서 relatively·relevant·relief·rely·remark 명사/동사·representative 명사/형용사·reputation의 사전 용법·원래 예문을 확인한 뒤 같은 방식으로 한 항목씩 생성한다. 후보 원본은 `work/oxford-batch-363-tentative-sources.json`이며 실제 생성 전 재검증한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
