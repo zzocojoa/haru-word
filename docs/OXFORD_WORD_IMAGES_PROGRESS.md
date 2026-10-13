@@ -1,6 +1,6 @@
 # Oxford 이미지 제작 진행 기록
 
-- 기준일: 2026-10-13, 브랜치 `codex/oxford-word-images`
+- 기준일: 2026-10-14, 브랜치 `codex/oxford-word-images`
 - 목표·제작 조건: [전체 계획](OXFORD_WORD_IMAGES_PLAN.md)
 - 연결 목록·실제 프롬프트·시도별 해시: [word-image-manifest.json](../data/word-image-manifest.json)
 - 사용자 지시: “지금과 같은 생성 방식을 유지하여 나머지도 진행해라.” 스타일 유지·전체 제작을 승인했으며, 항목별 의미를 일괄 승인한 것으로 해석하지 않는다.
@@ -9341,9 +9341,43 @@ Cambridge 실제 정의4개·보조2개·검색 결과 표제24개를 읽었다.
 
 직전384의첫/최종review실제1회별칭과 이전383 SyntaxError 대화 원본 공백·382 경계/출력/초안 보정·380 ENOSPC 저널/같은PNG 복구13명령과 근본원인 미확정·378/375/374/372/grade 증거 공백을 보존한다. 앱/UI·학습기록·교재 원문/ID·API·백업·DB·Sites는 바꾸지 않았다. 전체 목표를 유지하고 완료 표시하지 않는다.
 
+
+## 추가386 · 기존 품질 보류 10개 재검수
+
+2026-10-14 KST에 기존 품질 보류49개 중 교재 순서의 첫10개를 다시 검사했다. 새 생성·수정·API 호출은0이며, 원본10개·320px 실제 축소10개·3배 부분9개를 열었다. 기존 v1/v2·시도/원장·과거 검수는 바꾸지 않았다. **이번10개 모두 보류 유지, 신규 승인0**이다. 전체는 제작3800·승인3750·보류52·실패/중단7·PNG3992·시작슬롯3999를 유지하며, 전체3809개 승인 목표는 미완료다.
+
+| 항목 | 재검수에서 남은 문제 |
+|---|---|
+| about 부사 · 대략 | 물병의 수면 주위 흐린 범위만으로 대략 추정한다는 단서가 약하다. |
+| company 명사 · 회사 | 전면 왼쪽 모니터 베젤의 독립 타원형 윤곽이 3배에서도 남는다. |
+| exciting 형용사 · 신나는 | 프리즘 오른쪽 적색 띠의 상승 부분이 남아 굴절 표현의 일관성을 승인할 수 없다. |
+| fast 부사 · 빠르게 | 두 사람의 달리는 동작은 보이나 as fast as Mary의 동등한 관계 단서가 부족하다. 위치만으로 실제 속도 차이를 단정하지 않는다. |
+| probably 부사 · 아마도 | 가방 앞면 두 띠 사이의 작은 독립 곡선이 3배에서도 남는다. 도착은 확정하지 않는다. |
+| road 명사 · 도로 | 빨간 차 뒷문 중앙과 흰 차 중앙의 독립 윤곽이 남는다. |
+| school 명사 · 학교 | 두 가방 위쪽의 작은 독립 윤곽이 각각 3배에서도 남는다. |
+| song 명사 · 노래 | 기타 머리 끝의 길쭉한 독립 표식이 페그·현과 떨어져 남는다. |
+| south 부사 · 남쪽으로 | 앞 그릴 중앙의 독립 회색 윤곽이 가로 구조선과 구분되어 남는다. |
+| stop 명사 · 정류장 | 뒤 바퀴 밑면이 높은 연석의 윗면/경계와 겹쳐 차도 지지가 명확하지 않다. |
+
+작은 표식은 특정 브랜드나 문자로 판독하지 않았다. 작게 표시하거나 색이 옅어진 것을 제거 성공으로 바꾸지 않는다. 부분 캡처는 원본을 바꾸지 않은 로컬 Chromium CSS 확대이며, 과거/이번320px 파일을 각각 별도 보존했다. 회사 장면의 뒤쪽 기기를 모니터로 특정한 초안 수량 메모를 별도 원장에 남기고 일반 기기로 바로잡았다(관찰 문구 보완1·판정 변경0).
+
+Cambridge의 실제 영어 정의10개와 [as … as 동등 비교](https://dictionary.cambridge.org/grammar/british-grammar/as-as?hc_location=ufi), [OpenStax 프리즘 분산](https://openstax.org/books/college-physics/pages/25-5-dispersion-the-rainbow-and-prisms?query=first+law)을 대조했다. 프리즘 현재 구도의 밑면 방향 굴절 판단은 이 원리와 관찰을 적용한 해석이며 실제 굴절각·재질을 측정하지 않았다. 직접 열기4개는 HTTP403으로 실패했고 검색 반환 본문으로 확인했다. 검색18질의·반환70개 중 공식 정의/근거만 사용했다.
+
+[이번 재검수 관찰](/C:/Users/user/.codex/worktrees/oxford-word-images/하루단어/work/oxford-batch-386-observations-checked.json), [원본 검수 메모 보존](/C:/Users/user/.codex/worktrees/oxford-word-images/하루단어/work/oxford-batch-386-held-sources.json), [정의·근거](/C:/Users/user/.codex/worktrees/oxford-word-images/하루단어/work/oxford-batch-386-research.json), [320px 검증](/C:/Users/user/.codex/worktrees/oxford-word-images/하루단어/work/oxford-batch-386-qa.json), [부분 확대](/C:/Users/user/.codex/worktrees/oxford-word-images/하루단어/work/oxford-batch-386-detail-evidence.json), [실제 열람 기록](/C:/Users/user/.codex/worktrees/oxford-word-images/하루단어/work/oxford-batch-386-view-events.json)을 보존한다. 재개 검사19개·스크립트3개 구문 검사와 선택10개의 PNG 디코딩/교재 지문/해시/축소 검증은 exit0이다. 전체 자산 가드·Git 결과는 이번 completion.json의 실제 결과를 따른다. 실제 iPhone·독립 학습자·앱 전체 테스트/타입/린트/빌드는 미실시다.
+
+진단 출력에서 잘린 JSON을 파싱하는 오류1과 출력 잘림/복구 기록6을 분리했다. 원래의 과대한 전체 stdout은 복구된 것으로 표시하지 않는다. 저장된 동일 자료와 범위를 줄인 조회로 이어갔으며 회복용 생성/QA 호출0이다. 이전385의 첫 전체 가드 실패/별도 검사 후보,380의 ENOSPC 근본원인 미확정과 grade 최초 저장 명령 반환 공백은 이번 재검수로 해소됐다고 하지 않는다.
+
+사용자의 글자 금지 결정을 유지한다. capital 형용사·letter·print 조건보류3개는 바꾸지 않았고 print는 이미지0·시도0이다. 이번 재검수10개를 포함한 품질보류49개는 모두 두 번의 기존 시도를 사용했다. 남은39개의 기존 이미지 재검수는 가능하지만 제3회 생성·조건해제·실패의 무조건 재호출은 실행하지 않는다. 앱/UI·운영 게시·Worker·DB·학습 기록은 변경하지 않았다.
+
+
+386차 전체 가드 보충: 첫 실행은 관찰 JSON에 보존한 확대 캡처 요약에서 원래 없는 assetUnchanged 필드를 읽어 AssertionError로 종료됐다. 전체 캡처 파일에는 원본 해시·영역·3배 렌더링·원본 불변 근거가 있고 실제 열람은 별도 기록에 있다. 첫 guard.cjs/전체 실패 반환/원래 관찰 파일을 보존하고, 요약을 같은 파일·항목·영역 이름의 전체 근거에 연결하는 별도 checked 후보로 검증한다. 관찰의 원래 없는 필드를 채워 성공으로 바꾸지 않는다. 실제 guard2회·실패1회·검증 실행 오류1을 남기며 회복용 이미지·웹·QA 호출0이다. completion.json은 최초 실패와 최종 검증 결과를 모두 보존한다.
+
+
+386차 종료 진단 보충: 별도 checked 가드는 exit0으로 통과했다. 이후 실제 stdout 앞의 Git CRLF 경고를 JSON처럼 읽는 functions 파서가 SyntaxError로 실패했다. 성공 가드의 실제 반환은 이미 전체 저장되어 있었으며 같은 캐시의 JSON 시작 부분을 읽어 복구했다. 가드·PNG 검증을 다시 실행하지 않았다. 이번 후속 검증/종료 처리 오류는 합계2(첫 가드의 없는 필드 검사1·성공 반환 JSON 파싱1)이며 guard는2회 중1회 실패다. 가드 증거의 오류1은 가드 실행 시점 수치이고 이 보충과 completion.json이 이후 파서 오류를 별도 기록한다. 추가 회복용 생성·웹·QA0이다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 없다. 일반 대기0이며 `work/oxford-batch-386-tentative-sources.json`는 실제 빈 배열이다. 전체3809 승인 목표와 미승인59개를 유지한다. 다음은 기존49개 비정책 품질보류 원본/320px 재검수(API/생성0)이며, capital/letter/print 조건보류3개와 실패·중단7개는 별도 해결이 필요하다. 누락 이미지를 완료로 대체하지 않는다.
+다음 제작 대기 첫 항목은 없다. 일반 대기0이며 `work/oxford-batch-386-tentative-sources.json`는 실제 빈 배열로 보존한다. 전체3809 승인 목표와 미승인59개를 유지한다. 기존 품질보류49개 중 첫10개의 재검수를 마쳤으며 다음은 미재검수39개 중 `thousand` 수사부터10개다(API/생성0). `work/oxford-batch-387-held-sources.json`에 다음10개의 기존 상태를 보존한다. capital/letter/print 조건보류3개와 실패·중단7개는 별도 해결이 필요하다. 누락 이미지를 완료로 대체하지 않는다.
 
 ```powershell
 node scripts/oxford-images.cjs status
