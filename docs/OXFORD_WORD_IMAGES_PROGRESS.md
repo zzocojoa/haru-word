@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3736 |
-| 제작자 품질 검수 통과 `approved` | 3689 |
-| 품질·의미·조건 보류 `held` | 49 |
+| 제작된 서로 다른 항목 | 3746 |
+| 제작자 품질 검수 통과 `approved` | 3698 |
+| 품질·의미·조건 보류 `held` | 50 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 64 |
+| 제작 대기 `waiting` | 54 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3924 |
+| 내장 도구 호출·시작 슬롯 원장 | 3936 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 181 |
+| 그중 품질 수정 호출 | 183 |
 
-이미지 미생성 항목은 제작 대기 64개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 73개다. 제작된 3736개는 검수 통과 3689개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3917개다. 원장 3924회는 이미지가 반환된 3917회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3923회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 54개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 63개다. 제작된 3746개는 검수 통과 3698개와 이미지가 있는 보류 48개이며, 수정본 포함 PNG는 3929개다. 원장 3936회는 이미지가 반환된 3929회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3935회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9127,9 +9127,32 @@ shall의 신발옆선은 인쇄무늬인지 구조선인지 바로 확정하지 
 
 실제 검사: 최종 이미지10·PNG 디코딩/해시/320px, 원본 열람한 축소10해시 불변, 재개19(이미지/API0), 관리스크립트 구문3 모두 exit0. 변경 범위는 연결목록·계획·진행기록3파일이며 교재/사용자 학습기록·앱/사이트는 그대로다. 전체3809승인은 아직 미완료이며 누적3736제작/3689승인/49보류/7실패·중단/64대기/3917PNG/3924원장/181수정이다.
 
+## 추가379 · transform–try 10항목
+
+확인시각 2026-10-13T16:54:03.861Z UTC(한국날짜2026-10-14). 첫 생성10회+품질 수정2회/12PNG, 품질 승인9개·trial 명사1개 보류. 첫원본10/수정원본2와 각320px12장을 실제 열고 trial 신발 같은영역3배확대2장을 비교했다. 실제 iPhone/독립학습자는 미실시다. 첫23증거·첫 실제캡처10/수정캡처2·수량/출처/프롬프트·이전파일을 보존했다.
+
+- `transform` (5a944a653f2e5e89, approve): Actual original: two vertically arranged related room states with matching windows; upper old chair1, lower adult1 placing new chair1 beside desk1, sofa1/cushion1/rug1. Total chairs2/windows2. Orientation changed from proposed left/right to top/bottom but relation and counts remain. Physical window bars/chair braces/shoe panels, no independent glyphs. Furniture changes room use/appearance; actual renovation, remote work, ease/success not certified. 320px: 위아래 두방/창2·의자2·책상1·소파1·쿠션1·러그1·가구를 놓는 성인1을 확인했다. 실제 리모델링/재택 성과 인증 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+- `transition` (02e8afd2161261de, approve): Actual corrected original: BOTH laptop central round badges removed, covers continuous plain grey. Office/home states and adult depictions2/desks2/chairs2/laptops2/sofa1/cushion1/plant1/rug1/cupboard1/binders2/cup1/pens3 preserved. No glyph/logo seen; physical props retain structure. Canonical smooth transition/furniture remains, actual remote work/ease/completion not certified. 320px 수정본 실제 확인: 두 노트북 덮개 중앙 배지2가 제거되어 무표식 회색면이 됐다. 사무실/집 관계·성인2묘사·책상/의자/노트북2씩·소파/식물/기타 물리 소품 보존, 글자/로고 없음. 실제 근무/원활함 인증 아님.
+- `trial` (6b310438a8cebdb7, hold): Actual corrected original: visitor1/instructor1/exercise bicycle1/unlettered console1/welcome gesture preserved; dark shoe-side decoration is reduced, but actual3x crop still has pale isolated angular/leaf-like patch whose seam interpretation is unconfirmed. Actual brand/text identity unknown. Plain-unmarked constraint remains unproven; hold after one edit, no third call. Free/duration/safety and canonical gym-trial/trip retained only in data. 320px 수정본 실제 확인: 성인2·운동자전거1·빈콘솔1·안내 동작 보존. 작은 화면에서 신발 모양은 분명하지 않지만 실제3배 확대의 옅은 독립 각진 모양이 봉제선임을 확정할 수 없어 보류한다. 실제 브랜드 확인 아님, 한 번 수정 후 세 번째 호출 없음.
+- `trip` (15e614082247174e, approve): Actual original: adult1 with torso tipped forward, both arms reaching for balance and startled face; shoes2, mat1 with rolled/curled edge1. Forward shoe's forefoot/sole contacts the raised mat edge while rear foot stays on floor; exact heel-raised pose is not certified (heel is near floor), but obstacle-contact/loss-of-balance cue is clear. No injury or travel/slippery-liquid cue, shoes plain with physical laces/sole seams, no independent glyph. 320px: 성인1·신발2·매트/말린모서리1, 앞발 접촉과 앞으로 기울어진 몸/팔을 확인했다. 정확한 뒤꿈치 자세·실제 부상/회복 인증 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+- `tropical` (15d615b84eb592e6, approve): Actual original: island1 surrounded by turquoise water, palm trees3 with green foliage/rocks, people0. Tropical geography association, no signs/glyphs/map/temperature. Actual latitude/destination/climate, ecosystem or visit cost not certified; canonical only-cost worry remains. 320px: 물에 둘러싸인 섬1·야자수3을 확인했다. 실제 위도/기후/목적지/가격 인증 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+- `trouble` (0dde0b424b938eeb, approve): Actual original: adult1 at table1 holding open empty wallet1, three blank golden coin discs on table, pictorial unlettered island postcard1. Concern links travel setting to cost, no island danger/price digits/banknotes/glyphs. Physical wallet stitching and coin rims/fluting are functional. Canonical ONLY cost preserved; actual cost/affordability, other worries or diagnosis not certified. 320px: 성인1·테이블1·빈 지갑1·빈 원판3·섬 그림1과 걱정 표정을 확인했다. only 유지, 실제 가격/여타 걱정/진단 인증 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+- `truly` (0747aa45a4428a3f, approve): Actual original: adults2, speaker gently open mouth with one hand on chest, listener calmly attending. No oath/raised swearing palm/props/glyphs, physical clothing seams/button only. Sincerely/truly-believe association, no inner-truth or honesty-causes-trust certification. 320px: 성인2·가슴에 얹은 손1·성실한 발화/청취 자세를 확인했다. 실제 내면의 진실·정직/신뢰 인과 인증 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+- `trust` (1e8f8e91d8fa530e, approve): Actual original: two adults share support of one plain ceramic bowl with both sets of hands, woman gently closed eyes/calm expression and man attentive. No cash/shopping/legal document/fall/glyphs, physical clothes buttons/buckle only. Entrusting/confidence noun association; actual honesty, inward trust, cause or transfer safety not certified. 320px: 성인2·그릇1을 함께 받치며 한 명은 눈을 감아 맡기는 신뢰 연상을 확인했다. 실제 내면/정직/안전 인증 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+- `trust` (1018ff7bdf2354b8, approve): Actual original: adults3, center uncertain adult with chin-touching hand and folded other arm, candidates left/right neutral and arms down. No handshake/refusal/aggression/choice marker or glyphs. Looking right does not establish selection; don't know who remains unresolved. Actual identities/honesty/inner belief not certified; shoes/clothes have physical laces/seams/buttons. 320px: 성인3·고민하는 중앙1/중립 후보2·팔 내림, 선택/악수/거절 없음. don't know 유지, 실제 정직/신원 판단 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+- `try` (288a8582d7eaada0, approve): Actual original: adult1 at table1/chair1, three cubes with two stacked and one held above clear gap. Attempt under way, no completed placement/result/trophy/glyph. Encouragement canonical retained, success not certified. 320px: 성인1·책상/의자1·블록총3(쌓인2/손에1)·명확한 미완성 간격을 확인했다. 시도 결과 성공 인증 아님. QA하단 단어명은 원본 밖 표시이며 실제 iPhone/독립 학습자 검사는 미실시.
+
+transition 원형 배지2는 두 노트북 회색 덮개에서 제거됐다. trial 첫3배 확대의 독립 회색 각진/잎 모양은 수정본에서 옅어졌지만 봉제선만이라고 확정하지 못했다. 실제 브랜드/문자 식별은 미확정이고 최종 보류로 기록했다. 이 항목은 추가 세 번째 호출을 하지 않으며 보류 이미지를 후속 학습화면으로 넘기지 않는다. 글자 금지로 생성 전 보류한 letter/print와 기존49보류를 포함해 총50보류다.
+
+기본교재는 작성예문8/Tatoeba2로 변경하지 않았다. [transform](https://dictionary.cambridge.org/us/dictionary/english/transform)·[transition](https://dictionary.cambridge.org/dictionary/english/transition)·[free trial](https://dictionary.cambridge.org/dictionary/english/free-trial)·[trip LOSE BALANCE](https://dictionary.cambridge.org/dictionary/english/trip)·[tropical](https://dictionary.cambridge.org/dictionary/english/tropical)·[trouble WORRY](https://dictionary.cambridge.org/us/dictionary/english/trouble?topic=causing-anxiety-and-worry)·[truly SINCERELY](https://dictionary.cambridge.org/dictionary/english/truly)·[trust BELIEF/BELIEVE](https://dictionary.cambridge.org/us/dictionary/english/trust)·[try ATTEMPT](https://dictionary.cambridge.org/dictionary/english/try)의 실제 정의10과 transformation/tropics 보조2를 읽었다. 헤더36/3조회그룹·짧은 인용 상한을 검사했다. trial은 실제 free-trial 체육관 예문으로 재판/의학 실험과 구분했고 truly believe는SINCERELY, trust 동사의 don't know는미정으로 유지한 선택보정2건이다. 추가조회/준비·진단·메타·문서·표시오류0이며 복구용 추가이미지/QA0이다.
+
+그림은 연상 단서다. 실제 공간/근무·원활함·가격/기간/안전·부상·위도/기후·비용/걱정·내면/정직/신뢰 인과·누구의 신뢰성·시도 성공을 인증하지 않는다. trip의 발바닥/앞발 접촉은 확인했지만 계획의 정확한 뒤꿈치 자세를 증명했다고 기록하지 않는다. 이전378 원래 넓은stdout/초기 runtime 객체의 로컬공백,375 실패freeze/374 준비결과캐시/372 증거·문서 보완,grade 원래 첫캡처결과 공백을 보존한다.
+
+실제 검증: 최종파일10 PNG/해시/320px 검사·열람한 축소12해시 불변·재개19(이미지/API0)·관리구문3 모두 exit0. 품질9통과/1보류는 파일 검증과 구별한다. 연결목록·계획·진행기록3파일만 변경하며 사용자기록/교재·앱/운영사이트는 그대로다. 누적3746제작/3698검수통과/50보류/7실패·중단/54대기·3929PNG/3936원장/183수정, 전체3809승인까지111개 미완료.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `transform` 동사(5a944a653f2e5e89)다. 대기64개를 교재 순서대로 이어가며 글자 금지·기존49보류/7실패·한 번 수정 한도를 유지한다.
+다음 제작 대기 첫 항목은 `tune` 명사(15aeff82359e6a28)다. 대기54개를 교재 순서대로 이어가며 글자 금지·기존보류50/실패7·한 번 수정 한도를 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
