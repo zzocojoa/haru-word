@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3656 |
-| 제작자 품질 검수 통과 `approved` | 3609 |
+| 제작된 서로 다른 항목 | 3666 |
+| 제작자 품질 검수 통과 `approved` | 3619 |
 | 품질·의미·조건 보류 `held` | 49 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 144 |
+| 제작 대기 `waiting` | 134 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3838 |
+| 내장 도구 호출·시작 슬롯 원장 | 3848 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 175 |
 
-이미지 미생성 항목은 제작 대기 144개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 153개다. 제작된 3656개는 검수 통과 3609개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3831개다. 원장 3838회는 이미지가 반환된 3831회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3837회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 134개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 143개다. 제작된 3666개는 검수 통과 3619개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3841개다. 원장 3848회는 이미지가 반환된 3841회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3847회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8976,9 +8976,33 @@ shall의 신발옆선은 인쇄무늬인지 구조선인지 바로 확정하지 
 | eda79c4c86159cc9 | shooting | https://www.oxfordlearnersdictionaries.com/definition/american_english/shooting |
 | 9de6a8f42d030b86 | shot | https://dictionary.cambridge.org/dictionary/english/shot |
 
+## 추가 371: significant부터 slope 명사까지
+
+- 첫 제작10항목·첫 검수 통과10, 수정 호출/새 최종 보류0. 실제 원본10/320px10·sincere 신발 로컬2배 확대1을 확인했다. 각 항목 최초 원본23개 증거 파일/실제 첫 생성·캡처 결과10개를 보존한다.
+- significant는 위아래 성인2묘사·책3권씩/총6의 큰 배치 변화, significantly는 화분2·식물2·꽃1의 큰 향상 정도다. 실제 일과/성과 인과·생물종/경과 시간을 인증하지 않는다. silence 성인2의 닫힌 입/쉬는 손은 말하지 않는 상태이며 무기 비유를 실제 무기로 바꾸지 않는다. silk 여성1/드레스1은 부드러운 주름·광택의 관습적 단서이고 실제 소재 성분/신원은 보장하지 않는다.
+- sincere 성인2의 사과 맥락은 내면/정직성/용서 인증이 아니다. 갈색 신발 두 개의 곡선을 원본/320px/실제2배에서 확인했으며 닫힌 측면 패널·봉제·끈/구멍으로 읽었다. 별도 인쇄 글자·상표형 표식은 보이지 않고 실제 브랜드를 추정하지 않았다. 확대 전후 원본 SHA가 동일하다.
+- slide 동사는 예문에 명시된 아이1의 발부터 앉아 내려오는 동작, 명사는 빈 미끄럼틀1/사람0·디딤판5의 사물이다. slight는 의자에 앉은 성인1/관자놀이 두 손가락·작은 찡그림으로 약한 정도를 연상한다. slip는 얼음1/문1 근처 성인1의 의도치 않은 균형 상실, slope는 경사면1/길1을 오르는 성인2/배낭2다. 구조물/부츠 홈/볼트/얼음 균열은 물리 구조와 인쇄 표식을 구분한다. 실제 통증 정도/진단·운동/안전·각도/성취는 인증하지 않는다.
+- 교재10행/표제어9·Cambridge 공식 실제 정의10/보조2·실제 검색 헤더48(12×4), 작성 예문7/Tatoeba3. slight 초기 미리보기에는 본문이 없어서 추가1쿼리/조회기록1로 실제 정의를 읽었다. 페이지 선택 시 functions JS의 URL 전역 부재 오류1을 같은캐시의 문자열 처리로 복구했다. 오류문을 보존하며 이 복구의 추가웹/이미지/QA 호출은0이다. 표시 잘림/준비·서비스·교열·메타데이터 오류는0이다.
+- 최종PNG디코딩/320px10·실제 열람한 축소10해시 동일성·재개19(이미지/API0)·관리 스크립트 구문3이 통과했다. 전체3809ID/기존3799항목·PNG3841해시/과거 원본·증거·교재/관리 스크립트5핀·문서 교체2/9를 최종 보호 검사 대상으로 삼는다. 앞370의 경로 비교 실패 원본/입력/성공 후보와 실제 결과, 읽기 stdout 작업파일 미회수와 과거 grade 첫 캡처 결과 미회수도 그대로 보존한다.
+- 누적 제작3666·검수3619·보류49·실패/중단7·대기134·PNG3841·원장3848(확인된 도구 호출3847/전달 미확인1)·수정175. 전체3809개 모두 승인까지190개가 남아 있다. letter/print 생성 전 보류2는 이미지/호출0. 독립 학습자/실제iPhone 검사는 수행하지 않았다.
+- 정적 연결 목록·계획·진행 문서3개만 변경하며 app/UI/학습 기록/API/백업/DB/의존성/Sites/배포 영향은 없다. 원본·각 시도는 삭제/덮어쓰기 없이 유지한다. 롤백은 연결 목록/문서 커밋으로 가능하고 마이그레이션은 없다. 앱 전체 테스트/타입/린트/빌드는 정적 제작 범위에서 실행하지 않았다.
+
+| 항목 ID | 표제어/품사 | 실제 확인한 공식 정의 |
+|---|---|---|
+| 33a9ff59cbab3618 | significant adj. | https://dictionary.cambridge.org/dictionary/english/significant |
+| 2946818512644cc1 | significantly adv. | https://dictionary.cambridge.org/dictionary/english/significantly |
+| 5daead3e30b80277 | silence n. | https://dictionary.cambridge.org/dictionary/english/silence |
+| a3a4cc6ca9caa873 | silk n. | https://dictionary.cambridge.org/dictionary/english/silk |
+| 3361307dfa437c7b | sincere adj. | https://dictionary.cambridge.org/dictionary/english/sincere |
+| 251b5299dbd99176 | slide v. | https://dictionary.cambridge.org/dictionary/english/slide |
+| cb01d430a95d486d | slide n. | https://dictionary.cambridge.org/dictionary/english/slide |
+| 5027c928dad55191 | slight adj. | https://dictionary.cambridge.org/dictionary/english/slight |
+| 48abdc81669623a9 | slip v. | https://dictionary.cambridge.org/dictionary/english/slip |
+| 6d402dd853ec32d8 | slope n. | https://dictionary.cambridge.org/dictionary/english/slope |
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `significant` 형용사 `33a9ff59cbab3618`이며, 후속 10개 교재 지문은 `work/oxford-batch-371-tentative-sources.json`에 읽기 자료로 보존했다. 장면·프롬프트 준비나 새 호출은 아직 하지 않았다.
+다음 제작 대기 첫 항목은 `slope` 동사 `26a9d7bec0bd4700`이며, 후속10개 교재 지문은 `work/oxford-batch-372-tentative-sources.json`에 읽기 자료로 보존했다. 장면·프롬프트 준비나 새 호출은 아직 하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
