@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3606 |
-| 제작자 품질 검수 통과 `approved` | 3559 |
+| 제작된 서로 다른 항목 | 3616 |
+| 제작자 품질 검수 통과 `approved` | 3569 |
 | 품질·의미·조건 보류 `held` | 49 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 194 |
+| 제작 대기 `waiting` | 184 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3784 |
+| 내장 도구 호출·시작 슬롯 원장 | 3794 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
 | 그중 품질 수정 호출 | 171 |
 
-이미지 미생성 항목은 제작 대기 194개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 203개다. 제작된 3606개는 검수 통과 3559개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3777개다. 원장 3784회는 이미지가 반환된 3777회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3783회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 184개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 193개다. 제작된 3616개는 검수 통과 3569개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3787개다. 원장 3794회는 이미지가 반환된 3787회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3793회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8834,9 +8834,38 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 서비스/준비/실행 보조/관측 손실/메타데이터/교열 오류는 이번에 없다. 앞선363의 별도 완료 기록 참조 수정과362 전체 실패 보조 출력 작업 파일 미보존 한계·grade 첫 캡처 명령 결과 미복구를 그대로 보존한다. 실제 iPhone·독립 학습자 이해도는 미검사다.
 - 정적 이미지/원장/문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다. 앱/UI·Sites/배포·DB·사용자 기록/API/백업·의존성 변경은 없다. 전체3,809항목 승인 목표는 미완료이며 제작 대기194/보류49/실패7을 후속 범위로 유지한다.
 
+## B2 366번째 묶음: routine 형용사부터 satisfied 형용사까지
+
+기존 기준 커밋 `7ae7118727c278ce9b4aba60ae4f037a0efa8276`에서 다음 교재 항목 10개를 내장 이미지 도구로 각각 한 번 생성했다. 원본 10장과 실제 로컬 Chromium 320px 화면 10개를 모두 열어 검토했으며 10개 모두 제작 검수 통과했다. 이번 품질 수정·새 보류·서비스 실패는 0개다. 실제 iPhone·독립 학습자 검증은 수행하지 않았다.
+
+| 항목 ID | 단어·품사 | 장면·제한 | 사전 근거 |
+|---|---|---|---|
+| `8e89f948d2a865aa` | routine · adj. | 정기 점검: 성인 1·자전거 1, 일정 자체는 입증하지 않음 | [Cambridge](https://dictionary.cambridge.org/us/dictionary/english/routine) |
+| `2540889d45f0d5a4` | rub · v. | 문지르기: 손·천·얼룩 접촉, 운동 반복/제거 성공 인증 아님 | [Cambridge](https://dictionary.cambridge.org/us/dictionary/english/rub) |
+| `6e56219575d8cc7f` | rubber · n. | 고무 재료: 매트 1·말린 모서리, 화학 조성 인증 아님 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/rubber) |
+| `1fe817d7b0b80334` | rubber · adj. | 고무로 만든: 장갑 손 2·접시 1, Cambridge 명사의 수식 용법 확인 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/rubber) |
+| `c2f8387fc828f027` | rural · adj. | 시골의: 집 3·밭·좁은 길, 원문 부정 보존 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/rural) |
+| `fbb50c6ba0208b2c` | rush · v. | 서두르다: 성인 1·서류가방 1·큰 보폭, 부정 예문 그대로 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/rush) |
+| `eb8ac5daa5c7074b` | rush · n. | 혼잡: 성인 6·버스 1·밀집한 통근 상황, 실제 시각 인증 아님 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/rush) |
+| `7bfede0921e261d7` | sample · v. | 맛보다: 성인 1·그릇 1·숟가락 1, 소량 맛보기 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/sample) |
+| `a29eaf046d2dfb5f` | satellite · n. | 위성: 인공위성 1·패널 2·안테나 1·지구, 궤도 운동 인증 아님 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/satellite) |
+| `abd59b0df6941bde` | satisfied · adj. | 만족한: 성인 1·그릇 1·내린 숟가락 1·미소, 실제 믿음 인증 아님 | [Cambridge](https://dictionary.cambridge.org/dictionary/english/satisfied) |
+
+`rubber`는 Oxford의 형용사 표기를 그대로 유지했다. Cambridge는 재료 명사 정의 아래 `rubber boots/gloves` 수식 용례를 제공하며, 이를 Cambridge의 별도 형용사 표제어라고 주장하지 않는다. `rural`/`rush` 두 품사에 공통인 원문의 “do not rush … or face the morning rush”와 한국어 부정은 교재에서 보존했다. rush 두 그림은 기본 뜻의 연상 단서이며 그 부정문 자체를 묘사한다고 판단하지 않는다. `sample`의 행동과 `satisfied`의 상태를 분리하고, that절의 믿음이나 고객 만족을 그림으로 확정하지 않는다. `satellite`는 기존 Tatoeba 참고 예문·CC-BY 2.0 (France) 표기·URL을 그대로 보존했다.
+
+공식 사전 본문 10개·보조 본문 2개를 실제 읽었다. 검색 결과는 5개 그룹·그룹별 실제 페이지 표제 12개, 총 60개다. 처음 검색에서 누락된 rural/sample/satellite 자료를 2건의 보완 검색 기록(추가 쿼리 합계 4개)으로 확보했다. satisfied의 검색 요약에 반복된 제목 대신 실제 본문 이후 절을 선택하도록 초안을 정리했다. 이는 실패 호출/새 이미지 호출이 아니다.
+
+출력 관찰 손실 2건은 같은 결과 캐시/필요 범위 읽기로 회복했고 그 때문에 이미지·QA를 중복 호출하지 않았다. 수집기 템플릿 키를 `collect`로 잘못 조회해 JS TypeError 1건이 발생했으며 실제 키 `collect.cjs`로 수정했다. 그때 QA는 이미 완료됐고 그대로 재사용했다. 실행 전 런타임 키 치환 초안 1건도 정리했다. 위 기록을 서비스 실패로 합산하지 않는다.
+
+첫 원본/관찰/판정 및 10개 슬롯·응답의 23개 증거 파일, 실제 최초 capture 명령 결과 10개를 보존했다. 기존 grade 동사의 최초 capture 결과 메타데이터 1건은 여전히 미회복이며 복구했다고 표현하지 않는다. 320px 화면 10개의 해시를 최종 QA 전에 저장해 동일함을 확인했다. 이번 원본 추가 확대는 필요하지 않아 0회다.
+
+최종 10장 PNG 디코딩·해시·로컬 320px QA, 재개 보호 19개 검사(이미지/API 호출 0), 도구 스크립트 3개 구문 검사는 모두 exit 0이다. 전체 3,809개 ID와 기존 3,799개 항목·모든 시도별 PNG를 보존 검사한다. 문서는 계획 2곳·진행 9곳의 교체를 기준 커밋에서 재생해 검증한다. 앱 코드·UI·DB·API·백업·의존성·Sites 배포를 변경하지 않아 앱 전체 테스트/타입/린트/빌드는 이 정적 제작 체크포인트에서 실행하지 않았다.
+
+누적 제작 3,616개, 제작 검수 통과 3,569개, 보류 49개, 실패/실행 중단 7개, 대기 184개다. 수정본을 포함한 PNG 3,787개와 시작 슬롯 3,794개를 구분하며 확인된 내장 호출 3,793회·제공자 전달 미확인 1개다. `letter`/`print` 생성 전 보류는 이미지·슬롯 0개다. 전체 목표는 계속 3,809개 모두 검수 통과이며 이번 묶음 완료로 전체 완료라고 표시하지 않는다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `8e89f948d2a865aa` **routine** 형용사(일상적인)다. 이어서 rub·rubber 명사/형용사·rural·rush 동사/명사·sample 동사·satellite·satisfied의 기존 예문/사전 용법을 확인한 뒤 같은 방식으로 생성한다. 후보 원본은 `work/oxford-batch-366-tentative-sources.json`이며 생성 전에 현재 원장과 재검증한다.
+다음 제작 대기 첫 항목은 `satisfy` 동사(`51ea3b9be9b3c329`, 만족시키다)다. 다음 10개 교재 행은 367번째 묶음의 미준비 후보로 저장했으며 중복 생성 없이 이어간다. 보류/실패 항목도 전체 완료의 미완료 범위로 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
