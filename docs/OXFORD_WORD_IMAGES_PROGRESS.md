@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3536 |
-| 제작자 품질 검수 통과 `approved` | 3493 |
+| 제작된 서로 다른 항목 | 3546 |
+| 제작자 품질 검수 통과 `approved` | 3503 |
 | 품질·의미·조건 보류 `held` | 45 |
-| 그중 생성 전 조건 보류(이미지 없음) | 1 |
+| 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 264 |
+| 제작 대기 `waiting` | 254 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3704 |
+| 내장 도구 호출·시작 슬롯 원장 | 3715 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 161 |
+| 그중 품질 수정 호출 | 162 |
 
-이미지 미생성 항목은 제작 대기 264개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 273개다. 제작된 3536개는 검수 통과 3493개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3697개다. 원장 3704회는 이미지가 반환된 3697회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3703회와 별도로 구분한다. 생성 전 보류2개에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 254개·생성 전 조건 보류 `letter/print` 2개·실패/실행 중단 7개를 합친 263개다. 제작된 3546개는 검수 통과 3503개와 이미지가 있는 보류 43개이며, 수정본 포함 PNG는 3708개다. 원장 3715회는 이미지가 반환된 3708회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3714회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -8696,9 +8696,21 @@ Cambridge는 otherwise의 '그렇지 않으면' 연결 용법을 conjunction로 
 - 재개 목록 갱신 중 이전358 검증에 고정한359 목록이 바뀐 것을 확인해 보존 사본으로 정확히 복구했다. 보류 후 priority 목록은 별도 after-print-hold 파일에 보관한다. 메타데이터 복구1건이며 이미지/QA 추가0·영어/이미지 품질 변경0이다. 원래 목록과 실행한 문서 도우미 원본·수정 근거를 보존하며 도우미를 다시 실행하지 않았다.
 - 보류 변경은 정적 목록/문서에만 반영한다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성을 변경하지 않는다. 해당 항목과 무관한 대기 항목은 다음 순서로 계속 제작한다. 다음 제작 대기 첫 항목은 `priority` n.(우선순위), ID `50ec2688a1f911d4`이다. 이후 privacy n., procedure n., process v., produce n., professional n., progress v., project v., proof n., proposal n. 순서이며 아직 준비/호출하지 않았다. print는 사용자 승인에 따라 이미지 미생성 조건 보류다.
 
+## 추가359 · priority~proposal — 10개 검수 통과
+
+- 기준 커밋: `181bb9a29a549ee3c0979af4343ee90d2ce4b3e9`. 이전358 이미지 검수 커밋과 별도 print 조건 보류 커밋/완료 근거를 각각 보존했다. 현재 기준은 보류45·대기264이며 이전358 완료 수치44·265를 덮어쓰지 않는다. 이전에 고정한 print 첫359 목록은 역사 자료로 유지하고 별도 after-print-hold 목록으로 실제10개를 준비했다.
+- B2/page12 교재 ID·품사·뜻·표현/예문/출처를 대조했다. 표제어10·공식 정의10/보조2·검색 요약60(5×12)·작성 예문10/Tatoeba0이다. procedure/project 본문 보완 조회1건(추가 검색2개)을 했다. procedure는 WAY TO DO, process는 문서 처리 동사, produce는 FOOD 명사, professional은 숙련 직업인 명사, progress는 점차 계속되는 동사, project는 MAKE AN IMAGE, proof는 SHOWING TRUTH, proposal은 제안의 뜻을 선택했다. 참고: [priority](https://dictionary.cambridge.org/dictionary/english/priority) · [privacy](https://dictionary.cambridge.org/dictionary/english/privacy) · [procedure](https://dictionary.cambridge.org/us/dictionary/english/procedure) · [process](https://dictionary.cambridge.org/dictionary/english/process) · [produce](https://dictionary.cambridge.org/dictionary/english/produce) · [professional](https://dictionary.cambridge.org/us/dictionary/english/professional) · [progress](https://dictionary.cambridge.org/us/dictionary/english/progress) · [project](https://dictionary.cambridge.org/dictionary/english/project) · [proof](https://dictionary.cambridge.org/us/dictionary/english/proof?topic=information-and-messages) · [proposal](https://dictionary.cambridge.org/us/dictionary/english/proposal).
+- 첫 원본10개·원본/개별320px 화면을 실제 확인했다. 첫9개 승인·procedure1개 보류였다. 받침3개 요청에 실제2개가 나온 수량 결함만 중앙의 빈 받침 추가1회로 보정하여 최종10개를 승인했다. 보정 원본/320px에서 받침3·폴더2·빈 종이1·성인1을 확인했다. 첫 capture10개/보정 capture1개와 첫 자료 동결23개를 보존하며 세 번째 호출0이다.
+- 실제 수량: priority 성인/렌치/양동이/미뤄 둔 빨래 바구니 각1; privacy 성인/창/커튼/의자 각1; procedure 성인1·받침3·폴더2·종이1; process 성인1·확인 종이1·열린 폴더1·입력 받침1; produce 상자1·보이는 사과5·잎채소1(가려진 당근 총량 미확인); professional 검사자/토마토/돋보기/상자 각1; progress 수업2장면·성인4묘사·다리2묘사; project 성인/프로젝터/벽 풍경 각1; proof 잠금/해제2장면·열쇠/자물쇠 각2묘사; proposal 제안자1/검토자2·공원 모형1/벤치2·주된 나무3.
+- 이미지는 교재 뜻과 함께 쓰는 연상 단서다. 실제 수리 안전/우선순위·사생활 보장·기관 절차/서류 승인·농산물 신선도/식품 안전·직업 자격·수업 성과/시간/동일인·광학 교정·소유권/법적 권한/보안·제안 승인/구현을 인증하지 않는다. 물리적 관/솔기/받침/나뭇결/잎맥/다리 버팀대/환기구/케이블/자물쇠 쇠고리와 인쇄 문자·숫자·로고를 구분했다. QA HTML의 단어/품사/뜻은 PNG 안 글자가 아니다. 실제 iPhone·독립 학습자 평가는 미실시다.
+- 첫 동결 도우미의 조건 묶음 오류1건은 자료 복사 전 검출해 원본/실패 결과를 보존하고 수정했다. 최종 재개 검사 경로 오기1건(실행/구문 검사 실패2개)과 썸네일 도우미 조회 파일명 오류1건을 올바른 기존 경로/자체 비교로 회복했다. 출력 관측 손실3건은 동일 캐시/QA 파일과 범위 제한 조회로 회복했다. 검증 도우미의 과거 접두어 치환 오류1건도 실제 원본/실패 결과와 입력을 보존하고 바로잡았다. 실패 출력은 도구에서 잘려 전체 stderr는 미복구로 명시한다. 복구에 추가 이미지/QA 호출0이며 서비스/준비/메타데이터/연구 출력 오류0이다. 계획 헤더와 진행 표의 이미지 미생성 보류1개를 letter/print2개로 바로잡은 문서 교열1건은 생성 정책/교재/이미지를 바꾸지 않는다.
+- 연결/디코딩/최종320px10개·재개 보호19개·기존 도구3개 구문 검사를 종료0으로 확인했다. 첫 썸네일10개 해시를 최종 QA 전 저장해 그대로 유지됨을 확인했고 최종 첫 이미지9개가 일치했다. 보정본은 최종 QA 후 같은 경로에서 다시 실제 확인했다(보정본의 최종 QA 전 썸네일 해시 별도 저장은 하지 않았다). 전체3809 ID/source fingerprint·3708 PNG·기존3799 항목·첫 동결/별도 정책 자료·문서 재생을 guard로 검증한다. 과거 grade 첫 실제 capture 미복구1건과 전달 미확인 중단1슬롯을 유지한다. 정적 이미지/목록/문서만 변경하여 앱 전체 테스트/타입/린트/빌드는 실행하지 않았다.
+- 누적 제작3546/검수 통과3503/PNG3708/대기254/보류45/실패7, 시작 슬롯3715·확인된 내장 호출3714/전달 미확인1·수정162이다. B2 승인578/보류6/대기254/실패1이며 A1/A2/B1 집계는 유지한다. 이미지 없음263개·미승인306개로 전체3809개 승인 목표는 미완료다. 앱/UI/학습 기록/API/백업/DB/Sites/배포/의존성 변경0이다.
+- 다음 제작 대기 첫 항목은 `propose` v.(제안하다), ID `5e43a0537a465faf`이다. 이후 prospect n., protection n., psychologist n., psychology n., publication n., purchase n./v., pure adj., pursue v. 순서다. 아직 준비/호출하지 않았으며 letter/print의 이미지 미생성 보류는 유지한다.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `priority` n.(우선순위), ID `50ec2688a1f911d4`이다. 이후 privacy n., procedure n., process v., produce n., professional n., progress v., project v., proof n., proposal n. 순서이며 아직 준비/호출하지 않았다. print는 사용자 승인에 따라 이미지 미생성 조건 보류다.
+다음 제작 대기 첫 항목은 `propose` v.(제안하다), ID `5e43a0537a465faf`이다. 이후 prospect n., protection n., psychologist n., psychology n., publication n., purchase n./v., pure adj., pursue v. 순서다. 아직 준비/호출하지 않았으며 letter/print의 이미지 미생성 보류는 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
