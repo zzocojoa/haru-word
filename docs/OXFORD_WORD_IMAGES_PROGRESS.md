@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3756 |
-| 제작자 품질 검수 통과 `approved` | 3708 |
-| 품질·의미·조건 보류 `held` | 50 |
+| 제작된 서로 다른 항목 | 3766 |
+| 제작자 품질 검수 통과 `approved` | 3717 |
+| 품질·의미·조건 보류 `held` | 51 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 44 |
+| 제작 대기 `waiting` | 34 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3948 |
+| 내장 도구 호출·시작 슬롯 원장 | 3960 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 185 |
+| 그중 품질 수정 호출 | 187 |
 
-이미지 미생성 항목은 제작 대기 44개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 53개다. 제작된 3756개는 검수 통과 3708개와 이미지가 있는 보류 48개이며, 수정본 포함 PNG는 3941개다. 원장 3948회는 이미지가 반환된 3941회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3947회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 34개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 43개다. 제작된 3766개는 검수 통과 3717개와 이미지가 있는 보류 49개이며, 수정본 포함 PNG는 3953개다. 원장 3960회는 이미지가 반환된 3953회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3959회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9173,9 +9173,32 @@ unexpected 첫native PNG는 반환됐으나 capture의 첫result-file-found 저�
 
 최종파일10검사·열람한축소12해시불변·재개19(이미지/API0)·관리구문3 모두exit0. 연결목록·계획·진행기록3파일만변경, 앱/교재/사용자기록/사이트는유지한다. 누적3756제작/3708승인·50보류·7실패/중단·44대기·3941PNG·3948원장·185수정, 전체3809승인까지101개미완료.
 
+## 추가381 · urban–victory 10항목
+
+확인시각 2026-10-13T18:27:39.515Z UTC(한국날짜2026-10-14). 첫생성10+품질수정2/12PNG,신규승인9/venue1보류. 원본12와각로컬Chromium320px12장을실제로열었다. 확대이미지추가0/실제iPhone·독립학습자미검증. 첫23증거·첫capture10/수정capture2·소스/프롬프트/수량을보존했다.
+
+- `urban` (69796c48c7ea0eb3, approve): Actual original: closely spaced buildings5, trees2, unmarked street1, one clearly visible building-side sidewalk. A second sidewalk is outside/absent from shown view and not certified. Physical windows/doors/steps/railings, no addresses/signs/logos/glyphs. City-area adjective cue remains clear; no actual city/population/zoning or star-visibility certification. 320px: 건물5·나무2·도로1·보이는인도1을 확인했다. 다른인도는화면에없어미검증. 도시권역 단서, 실제도시/인구/별가시성 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+- `urge` (9e017fdb926bec7d, approve): Actual original: adults2, table1/chair1/hourglass1. Speaker leans with earnest open mouth and open hand toward hourglass; listener chin-touching considers. Physical glass/sand/frame, no scale/text/logo/glyph. Strong advice/urge cue without grabbing/coercion; actual words/persuasion/compliance/inner belief/duration not certified. 320px: 성인2·테이블/의자/모래시계1씩·진지한말/열린손바닥·청취고민을 확인했다. 강압 없음, 실제발화/설득성공/시간값 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+- `value` (0e8c95b90430e3b7, approve): Actual original: adult1 seated on chair1 carefully holds hourglass1 near chest, quiet caring look, physical glass/sand/frame and shoes2. No monetary appraisal/price/scale/numeral/glyph. Considering-important/value-time association, actual preference, efficient time use or exact duration not certified. 320px: 성인1·의자/모래시계1·가슴가까이조심스러운보호자세를 확인했다. 가격/금액판정 아닌소중함, 실제내면/시간관리 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+- `van` (6fdfdc189413d56d, approve): Actual original: enclosed delivery van1, plain cargo-side panel without passenger windows, rear cargo door open with boxes2; front cab windows, physical door hinges/handle/lamps/vents/wheels. Two near wheels and partial far wheels visible. No branding/license characters/labels/glyphs seen; front grille mostly not shown and not certified. Goods-vehicle association, no actual make/dimensions/delivery/region/safety certification. 320px: 배송밴1·뒤열린화물문/상자2·무표식막힌옆패널/앞운전석창을 확인했다. 앞그릴은노출적어인증하지않음, 실제모델/배송/치수 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+- `vary` (5cd9788efc2da262, approve): Actual original: two enclosed vans on same visible ground baseline, left smaller in length/height and right larger; wheels2 per van/four visible overall. Physical cab windows/side indicators/mirrors/panel seams, no readable logos/license glyphs or comparison scale. Same-type size difference cue, no single van growing; actual measurements/regions not certified. 320px: 같은바닥선 밴2·바퀴총4·왼작음/오른큼이뚜렷하다. 실제치수/지역/성장변형 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+- `vast` (2e665db11ff4a8d7, approve): Actual original: one broad open meadow dominates view, adult1 in foreground and distant small performance stage1 with two upright side fixtures/lower horizon. No dimension bars/labels/glyphs seen; top/bottom warm margins, natural wider landscape spans sides. Vast-size association from depth/scale contrast, actual area/capacity/venue/geography/safety not certified. 320px: 넓은잔디공간1·앞사람1·멀리작은무대1/양옆기둥2를 확인했다. 실제면적/인원/위치/안전 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+- `venue` (fb40abaa72e932e0, hold): Actual corrected original: stage1/curtain panels2/chairs6/two rows of three remain. Chair seat/front geometry is still visible toward viewer as in first candidate; rear-facing audience-to-stage orientation cannot be confidently established after one edit. Basic event-place cue remains, but intended chair-stage relationship unresolved; hold v2, no third call. No new glyph/logo seen, actual event/location/safety not certified. 320px수정본 실제확인: 무대1·커튼2·의자6/2행3은유지됐지만 같은좌판/등받이관계가남아무대향함을확정하기어렵다. 한 번수정후보류, 세번째호출없음. 글자/로고없음, 실제공연/위치/안전 인증 아님.
+- `very` (af4e5eda826124e9, approve): Actual original: two vertically arranged related route states, adult depictions2 (different travelers), paths2/bridges2/distinctive forked trees2; skyline has four buildings per state/eight total rather than proposed3 per state. Arrangement/bridge/tree/path curvature matches across states; matching identity cue remains despite background-count variation. No letters/map arrows/glyphs seen. Generic city not Seoul certification; original adjective label and very same adverb canonical difference retained, image does not certify phrase POS or real route equality. 320px: 두경로/다리/갈라진나무/성인2묘사와같은배치를 확인했다. 건물은계획3이아닌각4/총8이다. very same의부사용례/형용사항목차이보존, 실제품사/서울/경로동일성 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+- `via` (b260c2caa7995220, approve): Actual corrected original: one continuous main path from house1 passes directly between intermediate city principal buildings3 (two left/one right, beige building has connected side wing), then exits toward distant hill1. Adult1 is leaving city toward hill. Old side connector/bypass removed. No map arrows/labels/glyphs. Through-an-intermediate-place via cue now clear; actual Seoul, place/route identity not certified. 320px수정본 실제확인: 집1→도시주건물3사이(왼2/오른1,왼건물연결측면)→먼언덕1의단일주길과도시를나가는성인1이뚜렷하다. 옆연결길/우회길없음, 경유뜻확인. 실제서울/경로/여행 인증 아님.
+- `victory` (500743cb482426ca, approve): Actual original: adults2 jointly hold one blank cup trophy with physical handles/base, other fists raised in celebration. Arms/hands proportion coherent, no V-sign, scoreboard/medals/uniform numbers/text/logo/glyphs seen. Clothing buttons/shoe seams/laces physical. Shared winning-outcome association, actual result/team/rank/ownership/history not certified. 320px: 성인2·공동트로피1/손잡이2·축하주먹2·빈컵/받침을 확인했다. 표식/V손모양 없음, 실제팀/승리/순위 인증 아님. 아래단어명은원본밖QA프레임; 실제iPhone/독립학습자미검증.
+
+venue의의자6/2행3은한번수정후에도좌판/등받이에서무대쪽향함을확정하지못해보류했다. 뒤면방향을증명하거나회전수정을완료했다고표시하지않으며세번째호출은없다. via는집1→도시주건물3사이(왼2/오른1,베이지건물연결측면)→언덕1로주길을변경해우회/가지길을제거했다. 일반도시이며실제서울경유/경로사실의증명이아니다. urban의다른쪽인도는화면에서확인못했으며very의계획건물3/상태는실제4/상태·총8로관측했다. 두경로배치는같지만실제도시/경로동일성을인증하지않는다.
+
+교재원문9작성/1Tatoeba·단어/품사/ID/예문해시를보존했다. [urban](https://dictionary.cambridge.org/dictionary/english/urban)·[urge조언동사](https://dictionary.cambridge.org/us/dictionary/english/urge)·[value IMPORTANCE](https://dictionary.cambridge.org/dictionary/english/value)·[van VEHICLE](https://dictionary.cambridge.org/dictionary/english/van)·[vary BE DIFFERENT](https://dictionary.cambridge.org/us/dictionary/english/vary)·[vast](https://dictionary.cambridge.org/us/dictionary/english/vast)·[venue](https://dictionary.cambridge.org/dictionary/english/venue)·[very EXACT](https://dictionary.cambridge.org/us/dictionary/english/very)·[via TRAVELLING](https://dictionary.cambridge.org/dictionary/english/via)·[victory](https://dictionary.cambridge.org/dictionary/english/victory)의실제정의10/보조2·헤더48을읽었다. 최초조회에via본문이없어추가조회1을했다. very의형용사EXACT는명사강조·exact/particular이고,현재표현/예문very same은같은사전의부사강조절에설명돼있다. 원자료품사표시를임의변경하지않고차이를기록한다. 이미지의정확한동일성연상은예문품사나문법인증이아니다. 선택보정2,현재준비·저장·출력·문서오류0.
+
+현재C여유11055226880bytes를확인하고작업했으며저장실패재발0이다. 이전380의ENOSPC첫capture실패·원래manifest/ledger/유효journal/빈tmp·전체실패결과/동일PNG재개/실제capture13(성공12/실패1)을유지한다. ENOSPC근본원인/영구수정은미확정이다. 378넓은stdout/runtime객체의로컬공백과375/374/372보완·grade원래첫capture결과공백도보존한다.
+
+최종파일10/PNG·해시·320px·열람한축소12해시동일·재개19(이미지/API0)·관리구문3모두exit0. 파일검사통과와품질9승인/1보류를구별한다. 연결목록·계획·진행기록3파일만변경하며교재/앱/사용자기록/사이트는그대로다. 누적3766제작/3717승인/51보류/7실패중단/34대기·3953PNG/3960원장/187수정,전체3809승인까지92개미완료.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `urban` 형용사(69796c48c7ea0eb3)다. 대기44개를 교재순서로 이어가며 글자금지·보류50/실패7·한번수정 한도를 유지한다.
+다음 제작 대기 첫 항목은 `violence` 명사(99e92fa029fe1bf7)다. 대기34개를교재순서로이어가며글자금지·보류51/실패7·한번수정한도를유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
