@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3666 |
-| 제작자 품질 검수 통과 `approved` | 3619 |
+| 제작된 서로 다른 항목 | 3676 |
+| 제작자 품질 검수 통과 `approved` | 3629 |
 | 품질·의미·조건 보류 `held` | 49 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 134 |
+| 제작 대기 `waiting` | 124 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3848 |
+| 내장 도구 호출·시작 슬롯 원장 | 3860 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 175 |
+| 그중 품질 수정 호출 | 177 |
 
-이미지 미생성 항목은 제작 대기 134개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 143개다. 제작된 3666개는 검수 통과 3619개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3841개다. 원장 3848회는 이미지가 반환된 3841회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3847회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 124개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 133개다. 제작된 3676개는 검수 통과 3629개와 이미지가 있는 보류 47개이며, 수정본 포함 PNG는 3853개다. 원장 3860회는 이미지가 반환된 3853회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3859회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9000,9 +9000,35 @@ shall의 신발옆선은 인쇄무늬인지 구조선인지 바로 확정하지 
 | 48abdc81669623a9 | slip v. | https://dictionary.cambridge.org/dictionary/english/slip |
 | 6d402dd853ec32d8 | slope n. | https://dictionary.cambridge.org/dictionary/english/slope |
 
+## 추가372: slope 동사부터 split 동사까지
+
+- 첫 제작10·첫 검수8통과/2보류, 두 항목에 한 번씩 수정해 최종10통과. 실제 원본12/320px12·speed 그릴 로컬2배 확대2(수정전후)를 열어 봤고 첫23개 증거/첫 생성·실제 캡처10/수정 캡처2를 보존한다. 세 번째 호출은 없다.
+- slope는 강가로 아래로 경사진 길1·강1·사람0, solar는 태양1/패널1/지지대1의 태양 관련, somewhat는 위 패널1·원판3/아래 패널1·원판4(총7)의 다소의 상대 비용 차이다. 실제 경사각/안전·출력/설치·가격/통화/지역·경과/상승을 인증하지 않고 somewhat expensive를 특정 원판 수로 정의하지 않는다. 원문의 still/here를 유지한다.
+- soul은 환영하는 나이 든 성인1·방문객1의 ‘마음씨를 나타내는 사람’이며 유령 뜻이 아니다. 가방1/화분1/무문자 그림은 부수적이며 실제 가족 신원/과거 할머니의 현재 생존/누구든 환영/성품을 인증하지 않는다. specialist 명사는 성인1/쌍안경1/새1·가지1/배낭1, 형용사는 사람0·책1/새 그림1/깃털1/돋보기1의 특정분야 세부 자료다. 실제 전문가 자격/지식·희귀종 판정을 인증하지 않는다.
+- species는 여우2/오리2(녹색머리1/갈색1)·동물4, 종 그룹과 오리 그룹 내부 자연스러운 외형 차이를 함께 표현하며 겉모양만으로 DNA/종·번식/희귀·보호 상태를 인증하지 않는다. spiritual은 성인1/벤치1의 내적 평화를 찾는 맥락이며 이미 평화를 얻었음/신앙/치료·진단을 인증하지 않는다.
+- speed는 차2·운전자2/정원 벤치 성인1·인물3의 같은 방향 움직임 맥락이다. v1의 두 중앙 그릴의 독립 둥근/타원 배지 모양을 실제2배에서 확인해 no car badges 조건으로 보류하고 v2의 연속 통풍 바로 한 번 복원했다. 바깥 그릴 프레임/빈 번호판/물리 바퀴흐림·차선은 유지했으며 특정 브랜드/실제속도·안전을 추정하지 않는다. v1/v2 모두 동일부위를 확대했고 각각 원본 PNG SHA가 전후 동일하다.
+- split v1은 양쪽 탁자3+손1씩 실제8개로 목표 총6과 불일치했다. v2에서 탁자 원판/그림자1개씩을 제거해 양쪽 탁자2+손1·각3/총6으로 실제 원본/320px에서 셌다. 성인2·빈그릇1/탁자1·포즈를 유지하고 실제 액면·공정성·합의/결제완료는 인증하지 않는다. 최초 수량·보류/수정 프롬프트를 보존한다.
+- 교재10행/표제어9·Cambridge 공식 정의10/보조2·실제 검색 헤더36(12×3), 작성예문10/Tatoeba0을 확인했다. spiritual의 # Meaning 미리보기와 speed의 # Meaning 없는 American Dictionary inline verb 본문은 동일 캐시에서 실제 관련 절을 선택해 읽었다. 본문 위치 보정2기록·추가조회0이며 표시잘림/실행/준비·교열 오류0이다. 최종 보호 검사에서 최초 확대 열람 표시가 오래된 캐시의 false/null로 덮인 메타데이터 저장 오류1건을 발견했다. 같은 기존 확대 PNG를 읽기 전용으로 다시 열어 최초 보류 대상 배지2를 확인하고 별도 검증 보완 파일에 실제 열람 표시/메모를 기록했다. 원래 고정 기록·보호 검사 소스/입력·실패 전체 결과를 보존하며 이미지 재생성/추가 QA 렌더는0이다. 확대 자료는 고유2개/실제열람3회이고 진행 문서의 오류0 표시는 이 문장으로 정정한다.
+- 최종이미지10/320px·실제 열람 축소12의 해시동일·재개19(이미지/API0)·관리 스크립트 구문3 통과. 전체3809ID/기존3799항목·PNG3853해시/과거 원본·복구근거·교재/관리 스크립트5핀·문서 교체2/9를 최종 보호 검사 대상으로 삼는다. 이전371/370의 실제 실패/성공 보호 검사와 원본 고정 소스/입력, 미회수 원본 stdout/grade 첫 캡처 결과도 그대로 보존한다.
+- 누적 제작3676/검수3629·보류49·실패/중단7·대기124·PNG3853·원장3860(확인된 도구호출3859/전달 미확인1)·수정177. 전체3809개 모두 승인까지180개가 남으며 letter/print 생성전보류2는 이미지/호출0이다. 독립 학습자/실제iPhone 검사는 수행하지 않았다.
+- 정적 연결 목록·계획·진행 문서3개만 변경하며 app/UI/학습 기록/API/백업/DB/의존성/Sites/배포 영향은 없다. 원본·시도별 파일은 삭제/덮어쓰기 없이 유지한다. 연결 목록/문서 커밋 롤백은 가능하고 마이그레이션은 없다. 앱 전체 테스트/타입/린트/빌드는 정적 제작 범위에서 실행하지 않았다.
+
+| 항목 ID | 표제어/품사 | 실제 확인한 공식 정의 |
+|---|---|---|
+| 26a9d7bec0bd4700 | slope v. | https://dictionary.cambridge.org/dictionary/english/slope |
+| 3ecfd3282ea37878 | solar adj. | https://dictionary.cambridge.org/dictionary/english/solar |
+| 2d71ff786e865289 | somewhat adv. | https://dictionary.cambridge.org/us/dictionary/english/somewhat |
+| 82680f848080a44c | soul n. | https://dictionary.cambridge.org/dictionary/english/soul |
+| b90239c09bcafac6 | specialist n. | https://dictionary.cambridge.org/dictionary/english/specialist?q=specialists |
+| f97edea24466b21e | specialist adj. | https://dictionary.cambridge.org/dictionary/english/specialist?q=specialists |
+| b1f77e80499f6e97 | species n. | https://dictionary.cambridge.org/dictionary/english/species |
+| 4eb41b7267a47534 | speed v. | https://dictionary.cambridge.org/dictionary/english/speed?topic=speed-of-motion |
+| 59911ff69de1d9d6 | spiritual adj. | https://dictionary.cambridge.org/dictionary/english/spiritual |
+| 0e65a41d30bdb38e | split v. | https://dictionary.cambridge.org/dictionary/english/split |
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `slope` 동사 `26a9d7bec0bd4700`이며, 후속10개 교재 지문은 `work/oxford-batch-372-tentative-sources.json`에 읽기 자료로 보존했다. 장면·프롬프트 준비나 새 호출은 아직 하지 않았다.
+다음 제작 대기 첫 항목은 `split` 명사 `28d57eede0a91ffd`이며, 후속10개 교재 지문은 `work/oxford-batch-373-tentative-sources.json`에 읽기 자료로 보존했다. 장면·프롬프트 준비나 새 호출은 아직 하지 않았다.
 
 ```powershell
 node scripts/oxford-images.cjs status
