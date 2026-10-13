@@ -10,18 +10,18 @@
 | 구분 | 수량 |
 |---|---:|
 | 전체 교재 항목 | 3,809 |
-| 제작된 서로 다른 항목 | 3746 |
-| 제작자 품질 검수 통과 `approved` | 3698 |
+| 제작된 서로 다른 항목 | 3756 |
+| 제작자 품질 검수 통과 `approved` | 3708 |
 | 품질·의미·조건 보류 `held` | 50 |
 | 그중 생성 전 조건 보류(이미지 없음) | 2 |
 | 생성됨·검수 대기 `generated` | 0 |
-| 제작 대기 `waiting` | 54 |
+| 제작 대기 `waiting` | 44 |
 | 생성 중 / 실패·실행 중단 | 0 / 7 |
-| 내장 도구 호출·시작 슬롯 원장 | 3936 |
+| 내장 도구 호출·시작 슬롯 원장 | 3948 |
 | 그중 제공자 전달 미확인 중단 슬롯 | 1 |
-| 그중 품질 수정 호출 | 183 |
+| 그중 품질 수정 호출 | 185 |
 
-이미지 미생성 항목은 제작 대기 54개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 63개다. 제작된 3746개는 검수 통과 3698개와 이미지가 있는 보류 48개이며, 수정본 포함 PNG는 3929개다. 원장 3936회는 이미지가 반환된 3929회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3935회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
+이미지 미생성 항목은 제작 대기 44개·생성 전 조건 보류 `letter`/`print` 2개·실패/실행 중단 7개를 합친 53개다. 제작된 3756개는 검수 통과 3708개와 이미지가 있는 보류 48개이며, 수정본 포함 PNG는 3941개다. 원장 3948회는 이미지가 반환된 3941회·`code`/`attraction`/`highlight`/`breast` 명사와 `painful` 형용사 HTTP 400, `route` HTTP 408 무이미지 실패 6회·`climb` 명사의 실행 중단 시작 슬롯 1개를 합친 것이다. climb의 제공자 전달/HTTP 응답은 미확인이며 실제 도구 호출은 확인된 3947회와 별도로 구분한다. 생성 전 보류에는 이미지·시작 슬롯이 없다.
 
 `approved`는 제작자가 원본·축소 화면에서 뜻 연결·글자 부재·스타일·식별성을 검토한 상태다. 독립 학습자 평가, 영어 정확도 인증 또는 사용자의 개별 의미 승인으로 표현하지 않는다. 기능어·추상어는 교재 뜻과 함께 확인하는 연상 단서다.
 
@@ -9150,9 +9150,32 @@ transition 원형 배지2는 두 노트북 회색 덮개에서 제거됐다. tri
 
 실제 검증: 최종파일10 PNG/해시/320px 검사·열람한 축소12해시 불변·재개19(이미지/API0)·관리구문3 모두 exit0. 품질9통과/1보류는 파일 검증과 구별한다. 연결목록·계획·진행기록3파일만 변경하며 사용자기록/교재·앱/운영사이트는 그대로다. 누적3746제작/3698검수통과/50보류/7실패·중단/54대기·3929PNG/3936원장/183수정, 전체3809승인까지111개 미완료.
 
+## 추가380 · tune–upward 10항목
+
+확인시각 2026-10-13T17:37:46.806Z UTC(한국날짜2026-10-14). 첫생성10+품질수정2/12PNG·신규승인10/신규보류0. 원본12/로컬320px12·같은손목영역3배확대2장을 실제열어 검수했다. 실제iPhone/독립학습자는 미검증이다. 첫23증거·실제성공capture12·첫실패capture1·원래생성응답·동일PNG 저장재개를 각각 보존했다.
+
+- `tune` (15aeff82359e6a28): Actual original: adult1 seated on bench1 plays wooden flute1 at lips, eyes closed, fingers over physical holes; shoes2 have continuous physical instep bands/panel seams. No printed music-note/staff/text/logo glyphs. Musical melody noun association, not tuning; actual sound, pitches/familiarity, canonical humming/train action not certified by this picture. 320px: 성인1·벤치1·플루트1/실제구멍과 연주 자세를 확인했다. 음표·악보 글자 없음, 실제 곡조/음높이/익숙함 인증 아님. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `tunnel` (f4de0ce3f58f965d): Actual original: train1 seen from rear with tail door/two physical red lamps, trailing car outside and leading cars receding into tunnel1 through hill1; rails2/one pair with physical ties. No front locomotive facing viewer or numbered plates/signs/glyphs; door handle/windows/tail lamps are structural. Passage/entry association, actual movement speed/length/construction/safety not certified. 320px: 기차1·터널/언덕1·레일2·후미등2와 뒤에서 안으로 향하는 구도를 확인했다. 번호/간판 없음, 실제 길이/속도/안전 인증 아님. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `ultimately` (a55f389c16e66b15): Actual original: two left/right states with four adult depictions (patient2/caregiver2), beds2/blankets2/pillows2. Left patient eyes closed/still; right eyes open/head lifted toward caregiver. No monitor/injury/clock/labels/glyphs. Finally/eventual wake association; actual unconsciousness, duration, diagnosis, treatment benefit, prognosis and causation not certified; expression ultimately decided and patient example remain unchanged. 320px: 두상태·환자/돌봄인2묘사씩/성인4·침대/이불/베개2씩, 감은 눈→뜬 눈/머리 들어올림 확인. 실제 진단/시간/치료/회복 인과 인증 아님. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `unconscious` (628217f6ce599e10): Actual corrected original: entire red/pale wristband removed, continuous bare wrist skin under caregiver hands. Patient/caregiver2, bed/blanket/pillow/chair1 each, closed-eye still posture and wrist contact retained. No new mark/glyph or medical device seen. Unresponsive-care association only; no diagnosis/sleep distinction/prognosis/treatment/recovery certification. 320px수정본 실제 확인: 손목띠/흰패치 제거, 맨손목/자연피부·성인2/침대·이불·베개·의자1씩/감은눈·손목접촉 보존. 같은영역3배확대도무표식, 실제진단/의식/회복 인증 아님.
+- `unexpected` (e4cc39593eadc20a): Actual original: adults2, offered closed gift box1 with tied red physical ribbon/bow1, recipient open palms and surprised face. No message/tag/printed pattern/glyphs; shoes have physical laces/panels. Not-expected gift association, no actual prior expectation/identity/contents/design certification. Same native source retained after ENOSPC metadata save failed and replay/capture recovery passed; no duplicate image call. 320px: 성인2·상자/실물리본매듭1·놀란 표정/손바닥을 확인했다. 원래 기대/내용물 인증 아님. 동일PNG의 저장재개로 이미지 중복 호출 없음. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `unique` (17d72b47531c1cf0): Actual original: vases4 on shelf1, ordinary same straight rounded forms3 and asymmetric wavy structural vase1 at center-right, openings4/one each. Different colors do not supply the distinctive-design cue; sculptural shape does. No decorative pattern/glyph/logo. SPECIAL unique-design association, no world-only-one/copyright/provenance/gift-content certification. 320px: 선반1·화병4/보통동형3/물결구조1/입구4를 확인했다. 형태상 특별함이며 전세계 유일성/저작권 인증 아님. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `universe` (c1926a97966243a1): Actual original: spherical planets3, ring-bearing planet1 with one layered physical ring system, spiral galaxy1, scattered natural light points; dark blue vignette fades into warm off-white. No five-point icons, axes/orbits/labels/glyphs. Physical-space universe association, no certified planet identities/scale/distances/exhaustiveness/scientific model/exhibition location. 320px: 행성3·고리있는행성1·은하1·실제같은빛점과 여백을 확인했다. 실제 이름/크기/거리/전체우주/과학모델 인증 아님. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `unknown` (3a77322979c3ff66): Actual original: thoughtful adult1 hand at chin outside house1 with cold charred doorway, dark window/physical frame, chimney and debris; no active flames/smoke/injured people or identifiable culprit/fuel/electrical cause. No glyphs/address. Unknown-cause association; ordinary chimney presence does not identify fire cause. Actual investigation/cause/blame/safety not certified. 320px: 성인1·그을린 집/문1·원인물건/가해자/불꽃 없음, 생각하는 자세. 실제 조사/원인/누구의책임/안전 인증 아님. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `upper` (eebf79c1832be9cd): Actual original: one two-level cutaway building/floors2, one connected staircase with two flights, tables2, upper table holds spherical ringed planet model1 on stand1; adult1 on lower floor looks up. No arrows/floor numbers/labels/glyphs; rails/stairs are physical. Upper-position association, not certified exhibition/building/planet scale/accessibility/safety. 320px: 건물1/층2·연결계단1/두구간·책상2·윗층 고리행성모형1/받침1·아랫층성인1. 번호/화살표없음, 실제 시설/규모/안전 인증 아님. QA하단단어명은 원본 밖 표시, 실제iPhone/독립학습자 검사는 미실시.
+- `upward` (94a257e0d555681e): Actual corrected original: adult1 still looks upward toward natural tiny stars above one low urban skyline, within central night vignette fading into broad warm off-white margins on all four sides. Fixed paper texture/muted adult illustration/negative space restored; no icon stars/arrows/labels/glyphs. Actual place/star visibility/constellation/time not certified. 320px수정본 실제 확인: 중심밤장면·위를보는성인1/도시1/자연별빛을 보존하고 사방크림여백/부드러운경계를 복원했다. 음표/화살표/문자/숫자/로고 없음, 실제가시성/위치/시간 인증 아님.
+
+unconscious 손목띠의 흰패치/무늬는 실제 글자·신원/브랜드로 읽히지 않았지만 무표식을 확인하지 못해 띠 전체를 제거했다. 수정 후 같은영역3배확대에서 맨손목/피부 주름만 확인했다. upward 전체밤색면은 중심밤장면과 사방크림여백으로 보정해 고정스타일을 지켰다. 각1번 수정이며 세번째호출은 없다. 정지그림은 실제의식/수면구별·진단·시간·치료/회복·기대/내용·전세계유일성·저작권·천체정체/축척/전체우주·원인/책임·실제전시/안전·별가시성/위치/시간을 인증하지 않는다.
+
+교재원문은 작성9/Tatoeba1로 유지했다. 실제Cambridge 정의10/보조2·헤더36을 읽었다. [tune](https://dictionary.cambridge.org/dictionary/english/tune)는곡조, [tunnel](https://dictionary.cambridge.org/us/dictionary/english/tunnel)은통로, [ultimately](https://dictionary.cambridge.org/us/dictionary/english/ultimately)는일련의사건뒤결국, [unconscious](https://dictionary.cambridge.org/us/dictionary/english/unconscious)는깨어있지않고주변을인지하지못하는상태다. [unexpected](https://dictionary.cambridge.org/dictionary/english/unexpected)·[unique SPECIAL](https://dictionary.cambridge.org/dictionary/learner-english/unique)·[universe](https://dictionary.cambridge.org/us/dictionary/english/universe)·[unknown NOT KNOWN](https://dictionary.cambridge.org/dictionary/learner-english/unknown)·[upper](https://dictionary.cambridge.org/dictionary/english/upper)·[upward](https://dictionary.cambridge.org/us/dictionary/english/upward)의실제용법과 unconsciousness/upward방향 보조정의를 대조했다. 결국결정한 표현/환자가결국눈뜬 예문의 차이도 임의교정하지 않고 이미지설명에서 구별했다. 소스선택보정2, 추가조회0.
+
+unexpected 첫native PNG는 반환됐으나 capture의 첫result-file-found 저장 단계에서ENOSPC(-4055)가 났다. 당시PNG복사 전이었고 완료된유효저널26389506bytes/원래manifest23574630bytes/ledger538488bytes/0byte임시파일·실패전체결과를 복사/해시보존했다. 이후C여유11676299264bytes를 관측했고 동일저널 재생과 같은PNG capture를 성공했다. source/copy SHA6276b939ae0e6cf66ba0bf2c278bb6924dadfb8bbed768dbf292b5ddcd1a9f26·원장3941불변/캡처이력1회·pending/tmp없음을 확인했으며 추가native/복구QA0이다. 정확한공간부족 근본원인/영구수정은미확정이다. 실제capture명령13=성공12+실패1을 모두기록했고 같은이미지의 생성반환/메타저장실패/저장재개를 구별한다. 이전grade원래첫capture결과공백과378stdout/runtime공백/375freeze실패/374/372보완도 유지한다.
+
+최종파일10검사·열람한축소12해시불변·재개19(이미지/API0)·관리구문3 모두exit0. 연결목록·계획·진행기록3파일만변경, 앱/교재/사용자기록/사이트는유지한다. 누적3756제작/3708승인·50보류·7실패/중단·44대기·3941PNG·3948원장·185수정, 전체3809승인까지101개미완료.
+
 ## 다음 묶음과 재개 절차
 
-다음 제작 대기 첫 항목은 `tune` 명사(15aeff82359e6a28)다. 대기54개를 교재 순서대로 이어가며 글자 금지·기존보류50/실패7·한 번 수정 한도를 유지한다.
+다음 제작 대기 첫 항목은 `urban` 형용사(69796c48c7ea0eb3)다. 대기44개를 교재순서로 이어가며 글자금지·보류50/실패7·한번수정 한도를 유지한다.
 
 ```powershell
 node scripts/oxford-images.cjs status
