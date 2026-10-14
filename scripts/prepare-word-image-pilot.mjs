@@ -21,6 +21,8 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
     const entry = manifest.entries.find(entry => entry.entryId === id), word = words.get(id), material = content[id];
     if (!word || !material || entry.pos !== word.pos || entry.baseMeaning !== material.meaning ||
       entry.sourceFingerprint !== sha(JSON.stringify({ word, content: material }))) throw new Error('Entry fingerprint mismatch: ' + id);
+    if (!/^[a-f0-9]{16}$/.test(id) || typeof entry.file !== 'string' ||
+      !entry.file.startsWith(id + '-') || !/^[a-f0-9]{16}-[a-z0-9-]+-v[1-9][0-9]*\.png$/.test(entry.file)) throw new Error('Unsafe image filename: ' + id);
     const bytes = readFileSync(path.join(assetRoot, entry.file));
     if (sha(bytes) !== entry.sha256 || bytes.length !== entry.bytes || bytes.length < 24 ||
       bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' ||

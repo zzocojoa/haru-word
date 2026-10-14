@@ -58,3 +58,10 @@ test('a different existing PNG is never overwritten', () => {
   assert.equal(readFileSync(file, 'utf8'), 'keep existing bytes');
   assert.equal(existsSync(path.join(f.projectRoot, 'data/word-image-pilot.json')), false);
 });
+
+test('source filenames cannot leave the approved asset directory', () => {
+  const f = imagePilotFixture(), entry = f.manifest.entries[0];
+  writeFileSync(path.join(f.root, 'escape.png'), readFileSync(path.join(f.assetRoot, entry.file)));
+  entry.file = '../escape.png'; f.saveManifest();
+  assert.throws(() => prepareWordImagePilot(f), { message: 'Unsafe image filename: ' + entry.entryId });
+});
