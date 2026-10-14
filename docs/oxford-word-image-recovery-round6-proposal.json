@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 2,
+  "round": 6,
+  "proposalId": "6ca3b020-b269-42b8-82eb-83a9080506ba",
+  "createdAt": "2026-10-14T07:58:18.781Z",
+  "executionAllowed": false,
+  "authorization": null,
+  "status": "inert-proposal-covered-by-separate-standing-human-approval",
+  "sourceSnapshot": {
+    "dataset": {
+      "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722",
+      "sha256": "14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+      "fingerprintAlgorithm": "sha256(wordsSha256 + \":\" + contentSha256)"
+    },
+    "baseCommit": "9631ffc2fc822f35f74ba2acb3d7cd98eb730d6a",
+    "manifestSha256": "fe5a3553abf07a7e002d0b31123cc21429c45e5b27cf0756c5278b86cfd942be",
+    "ledgerSha256": "080e26c0830b202b619c6feab69fdd0890d8230da4c6c7e3dbcb35e140289157",
+    "firstApprovalSnapshotSha256": "f15afb85307bcebafba918c44c48f5d24120ce1d1c17fef5b8e9d75a2b554fa1",
+    "continuationApprovalSha256": "b57a5a0451344504972482e6f546dd19eecc353b59f34ec241e91afb023a7863"
+  },
+  "standingApprovalId": "9da7b313-691e-4625-8997-c0a3c085bd10",
+  "countsBefore": {
+    "total": 3809,
+    "waiting": 0,
+    "generating": 0,
+    "generated": 0,
+    "approved": 3804,
+    "held": 4,
+    "failed": 1
+  },
+  "currentStartSlots": 4080,
+  "proposedStartSlotLimit": 1,
+  "maximumStartSlotsAfterProposal": 4081,
+  "oneAdditionalStartPerEntry": true,
+  "automaticRetry": false,
+  "provider": "built-in-image_gen",
+  "executionOrder": [
+    "f700d1982a2723a8"
+  ],
+  "style": {
+    "stylePrefix": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.",
+    "referenceInstruction": "Input image 1 is a STYLE REFERENCE ONLY: match its clean background, restrained illustrative surface and uncluttered adult composition. Draw the requested NEW subject; do not include an apple unless the requested subject calls for it.",
+    "reference": "adb44eba7b3ceef3-apple-v1.png",
+    "assetRoot": "outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+    "oldNativeInventory": 0,
+    "referenceEntryId": "adb44eba7b3ceef3",
+    "referenceSha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+  },
+  "entries": [
+    {
+      "entryId": "f700d1982a2723a8",
+      "word": "billion",
+      "pos": "number",
+      "level": "A2",
+      "baseMeaning": "십억",
+      "sourceFingerprint": "9bee14bb6d20c4659c46bf93e0efef6d88a9f270e849fdcd82c840db34be7535",
+      "canonicalContent": {
+        "meaning": "십억",
+        "ipa": "",
+        "expression": "one billion",
+        "example": "One billion is a thousand million.",
+        "translation": "십억은 백만의 천 배예요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "10억"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 7,
+      "currentImage": "f700d1982a2723a8-billion-v7.png",
+      "currentImageSha256": "4d0296f7e7ac600377f4fdb71643121a6d0159d96d16cc8cd57428d4127a1607",
+      "entrySnapshotSha256": "71d31b787379e45233ae36cd96f9328fc13829ace7a4347bdf615a58e4cc71d5",
+      "attemptsSnapshotSha256": "e88a520cc4877d5dcf79c29f55b50f4286ac1f7b66ab805c766a07a59fe0f0ac",
+      "latestReviewBasis": "큰 구조의10×10×10 격자는 원본·320px에서 유지됐다. 분리 큐브는 작아졌으나 실제 CSS2배 비교에서 가까운 단위 셀의 수직 모서리 약55px에 비해 약63px이며 오른쪽 모서리 기울기도 달라 동일 투영 단위를 아직 명확히 대조할 수 없다. 실제 물리적 크기를 단정하지 않고 비교 단위의 검수 미달로 보류한다. 다음 수정은 기존 큰 격자를 유지하고 작은 큐브를 가장 가까운 밑단 옆으로 옮겨 경계선 높이와 면 방향을 직접 맞춘다.",
+      "mode": "edit",
+      "title": "가장 가까운 단위 셀과 비교 큐브 정렬",
+      "defect": "큰 구조의10×10×10 격자는 원본·320px에서 유지됐다. 분리 큐브는 작아졌으나 실제 CSS2배 비교에서 가까운 단위 셀의 수직 모서리 약55px에 비해 약63px이며 오른쪽 모서리 기울기도 달라 동일 투영 단위를 아직 명확히 대조할 수 없다. 실제 물리적 크기를 단정하지 않고 비교 단위의 검수 미달로 보류한다. 다음 수정은 기존 큰 격자를 유지하고 작은 큐브를 가장 가까운 밑단 옆으로 옮겨 경계선 높이와 면 방향을 직접 맞춘다.",
+      "scenePrompt": "Keep every cell of the LARGE BLUE TEN-BY-TEN-BY-TEN assembly unchanged. Only replace and reposition the separate small cube. Place it directly beside the nearest lower corner of the large assembly, separated by a small clear gap on the same ground plane, not far in the foreground. Its closest lower corner must be level with the large assembly's closest lower corner, and its closest upper vertical corner must be level with the top of the large assembly's bottom row, so the equal unit height is directly visible. The small cube's front and right faces follow exactly the same edge directions and approximate dimensions as ONE neighboring bottom-row unit cell: about55px high, front about50px wide, right about35px wide in this1086px-wide target. Make it a normal cube matching the existing small cells, with plain blue material and a subtle grounding shadow. Do not change the large cube's grid or add a gap/removed block to that assembly. No ruler, line overlay, lettering, numerals or arrows. This is a unit-size comparison for the textbook million-to-billion ratio, not additional units inside the large assembly.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Keep every cell of the LARGE BLUE TEN-BY-TEN-BY-TEN assembly unchanged. Only replace and reposition the separate small cube. Place it directly beside the nearest lower corner of the large assembly, separated by a small clear gap on the same ground plane, not far in the foreground. Its closest lower corner must be level with the large assembly's closest lower corner, and its closest upper vertical corner must be level with the top of the large assembly's bottom row, so the equal unit height is directly visible. The small cube's front and right faces follow exactly the same edge directions and approximate dimensions as ONE neighboring bottom-row unit cell: about55px high, front about50px wide, right about35px wide in this1086px-wide target. Make it a normal cube matching the existing small cells, with plain blue material and a subtle grounding shadow. Do not change the large cube's grid or add a gap/removed block to that assembly. No ruler, line overlay, lettering, numerals or arrows. This is a unit-size comparison for the textbook million-to-billion ratio, not additional units inside the large assembly.\nInput image1 is the sole EDIT TARGET. Input image2 is STYLE REFERENCE ONLY. Correct the stated defect; preserve the warm restrained illustration style and all other valid meaning relations. Do not copy the apple.",
+      "fullPromptSha256": "d933383f2aae1d257180b6c4d056e069812e63dd4587b9a87d9f5164f083d1d7",
+      "references": [
+        {
+          "role": "edit-target",
+          "file": "f700d1982a2723a8-billion-v7.png",
+          "sha256": "4d0296f7e7ac600377f4fdb71643121a6d0159d96d16cc8cd57428d4127a1607"
+        },
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 8,
+      "proposedFilename": "f700d1982a2723a8-billion-v8.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "가로/높이/깊이10 구간과 면의 연결을 원본/확대에서 확인한다. 숨은 수량은 구성에서의 추론과 구분한다.",
+        "별도 기준 큐브와 묶음 단위의 원근상 크기 일치를 확인하며, 백만 단위 설명은 교재가 제공한다는 한계를 유지한다."
+      ],
+      "candidateSuccessVerified": false
+    }
+  ],
+  "policyAdditionalStartSlotLimit": 0,
+  "serviceFailureAdditionalStartSlotLimit": 0,
+  "fullGoalComplete": false
+}
