@@ -18,7 +18,17 @@ const serializeManifest = value => {
 const writeAtomic = (target, value) => {
   const temporary = target + '.tmp';
   fs.writeFileSync(temporary, target === file ? serializeManifest(value) : JSON.stringify(value, null, 2) + '\n');
-  fs.renameSync(temporary, target);
+  // A transient EPERM must retry only this metadata replacement, never a new image slot.
+  const delays = [50, 100, 250];
+  for (let attempt = 0; ; attempt++) {
+    try {
+      fs.renameSync(temporary, target);
+      break;
+    } catch (error) {
+      if (error.code !== 'EPERM' || attempt >= delays.length) throw error;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, delays[attempt]);
+    }
+  }
 };
 fs.mkdirSync(path.join(repo, 'work'), { recursive: true });
 // Replay a recorded metadata transaction after an interrupted file write, never an image call.

@@ -122,4 +122,33 @@ assert.equal(JSON.parse(r.stdout).recovery.used, 2); assert(JSON.parse(r.stdout)
 const exhausted = read(mf); delete exhausted.generation.recoveryApproval.stoppedByFailure;
 write(mf, exhausted); write(pf, { ...progress, generationCalls: slots + 2 });
 rejected(['recovery-start', ids[1]], 'already consumed');
+// Fault injection is confined to the fixture's manifest rename; no production switches.
+const faultHook = path.join(fixture, 'work/rename-fault.cjs');
+const faultCount = path.join(fixture, 'work/rename-fault-count.json');
+function faultyStart(mode) {
+  const hook = "const fs=require('node:fs'),path=require('node:path'),rename=fs.renameSync;let calls=0;" +
+    "fs.renameSync=function(from,to){if(path.basename(to)==='word-image-manifest.json'){calls++;" +
+    "fs.writeFileSync(" + JSON.stringify(faultCount) + ",JSON.stringify({calls}));" +
+    (mode === 'temporary' ? "if(calls<=2)" : "if(true)") +
+    "{const e=new Error('fixture EPERM');e.code='EPERM';throw e;}}return rename.call(fs,from,to);};";
+  fs.writeFileSync(faultHook, hook);
+  return spawnSync(process.execPath, ['--require', faultHook, path.join(fixture, 'scripts/oxford-images.cjs'), 'recovery-start', ids[0]], {
+    cwd: fixture, encoding: 'utf8', timeout: 5000, env: { ...process.env, OXFORD_ASSET_WORKSPACE: fixture }
+  });
+}
+function authorizeFreshFixture() {
+  reset(); write(af, approval()); const value = run('recovery-authorize', af); assert.equal(value.status, 0, value.stderr);
+}
+authorizeFreshFixture(); r = faultyStart('temporary'); assert.equal(r.status, 0, r.stderr);
+assert.equal(read(pf).generationCalls, slots + 1); assert.equal(read(pf).current.entryId, ids[0]);
+assert.equal(read(mf).entries.find(e => e.entryId === ids[0]).attempts.length, 3);
+assert.equal(read(faultCount).calls, 3); assert(!fs.existsSync(jf)); checks++;
+authorizeFreshFixture(); const permanentBefore = hashes(); r = faultyStart('permanent');
+assert.notEqual(r.status, 0); assert(r.stderr.includes('fixture EPERM')); assert.equal(r.signal, null);
+assert.deepEqual(hashes(), permanentBefore); assert(fs.existsSync(jf));
+assert(read(faultCount).calls > 1 && read(faultCount).calls <= 5);
+const pendingReplacement = read(jf); assert.equal(pendingReplacement.progress.generationCalls, slots + 1); checks++;
+r = run('status'); assert.equal(r.status, 0, r.stderr);
+assert.deepEqual(read(mf), pendingReplacement.manifest); assert.deepEqual(read(pf), pendingReplacement.progress);
+assert(!fs.existsSync(jf)); rejected(['recovery-start', ids[1]], 'Previous image call is unresolved'); checks++;
 console.log(JSON.stringify({ result: 'pass', checks, imageCalls: 0, apiCalls: 0, fixture, syntheticImageOnly: true }));
