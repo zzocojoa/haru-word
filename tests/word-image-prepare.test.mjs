@@ -11,7 +11,7 @@ test('unapproved pilot images are rejected before any destination is created', (
   const f = imagePilotFixture();
   f.manifest.entries[7].status = 'held'; f.saveManifest();
   assert.throws(() => prepareWordImagePilot(f), { message: 'Unapproved image: ' + f.manifest.entries[7].entryId });
-  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+  assert.equal(existsSync(path.join(f.projectRoot, 'work/oxford-image-pilot')), false);
   assert.equal(existsSync(path.join(f.projectRoot, 'data/word-image-pilot.json')), false);
 });
 
@@ -22,21 +22,21 @@ test('a changed current textbook is rejected before any output is created', () =
   content[f.manifest.pilotEntryIds[0]].meaning = '교재 변경';
   writeFileSync(file, JSON.stringify(content));
   assert.throws(() => prepareWordImagePilot(f), { message: 'Textbook fingerprint mismatch' });
-  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+  assert.equal(existsSync(path.join(f.projectRoot, 'work/oxford-image-pilot')), false);
 });
 
 test('a pilot entry with a different source fingerprint is rejected', () => {
   const f = imagePilotFixture();
   f.manifest.entries[0].sourceFingerprint = '0'.repeat(64); f.saveManifest();
   assert.throws(() => prepareWordImagePilot(f), { message: 'Entry fingerprint mismatch: ' + f.manifest.entries[0].entryId });
-  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+  assert.equal(existsSync(path.join(f.projectRoot, 'work/oxford-image-pilot')), false);
 });
 
 test('a corrupt final PNG is rejected before any earlier PNG is copied', () => {
   const f = imagePilotFixture(), entry = f.manifest.entries.at(-1);
   writeFileSync(path.join(f.assetRoot, entry.file), 'corrupt PNG');
   assert.throws(() => prepareWordImagePilot(f), { message: 'PNG fingerprint mismatch: ' + entry.entryId });
-  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+  assert.equal(existsSync(path.join(f.projectRoot, 'work/oxford-image-pilot')), false);
   assert.equal(existsSync(path.join(f.projectRoot, 'data/word-image-pilot.json')), false);
 });
 
@@ -52,7 +52,7 @@ test('pilot IDs must contain exactly twenty unique entries', () => {
 });
 
 test('a different existing PNG is never overwritten', () => {
-  const f = imagePilotFixture(), entry = f.manifest.entries[0], out = path.join(f.projectRoot, 'public/oxford-image-pilot');
+  const f = imagePilotFixture(), entry = f.manifest.entries[0], out = path.join(f.projectRoot, 'work/oxford-image-pilot');
   mkdirSync(out, { recursive: true });
   const file = path.join(out, entry.sha256 + '.png');
   writeFileSync(file, 'keep existing bytes');
@@ -76,7 +76,7 @@ test('twenty verified images are prepared with hash-only URLs and reused on the 
   assert.deepEqual(catalog.entries.map(e => e.entryId), f.manifest.pilotEntryIds);
   for (const entry of catalog.entries) {
     assert.equal(entry.url, '/oxford-image-pilot/' + entry.sha256 + '.png');
-    assert.equal(sha(readFileSync(path.join(f.projectRoot, 'public', entry.url.slice(1)))), entry.sha256);
+    assert.equal(sha(readFileSync(path.join(f.projectRoot, 'work/oxford-image-pilot', entry.sha256 + '.png'))), entry.sha256);
     assert.equal(entry.attempts, undefined); assert.equal(entry.prompt, undefined);
   }
   const second = prepareWordImagePilot(f);
@@ -89,7 +89,7 @@ test('a different existing catalog is preserved and blocks PNG preparation', () 
   writeFileSync(file, '{"existing":"keep"}');
   assert.throws(() => prepareWordImagePilot(f), { message: 'Existing pilot catalog differs' });
   assert.equal(readFileSync(file, 'utf8'), '{"existing":"keep"}');
-  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+  assert.equal(existsSync(path.join(f.projectRoot, 'work/oxford-image-pilot')), false);
 });
 
 test('the CLI rejects a source outside the approved source revision', () => {
@@ -97,5 +97,5 @@ test('the CLI rejects a source outside the approved source revision', () => {
   const r = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/prepare-word-image-pilot.mjs', import.meta.url)), '--source', f.sourceRoot, '--assets', f.assetRoot], { cwd: f.projectRoot, encoding: 'utf8' });
   assert.equal(r.status, 1);
   assert.match(r.stderr, /Expected approved image source commit 228f8ba/);
-  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+  assert.equal(existsSync(path.join(f.projectRoot, 'work/oxford-image-pilot')), false);
 });

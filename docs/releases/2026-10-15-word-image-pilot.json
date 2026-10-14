@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "feature": "20-item ungraded image-practice pilot",
+  "recordedAt": "2026-10-14T23:35:49.022Z",
+  "branch": "codex/word-image-pilot-site",
+  "baseline": {
+    "siteVersion": 127,
+    "sourceCommit": "87ed7b3a823779eb8e0c877bdf034ea21c12a4e5",
+    "envRevision": 64,
+    "accessRevision": 4,
+    "audience": "public"
+  },
+  "assets": {
+    "originalCount": 20,
+    "originalBytes": 41080212,
+    "webCount": 20,
+    "webBytes": 649694,
+    "maxWebBytes": 57656,
+    "width": 640,
+    "height": 853,
+    "format": "webp",
+    "sharp": "0.35.4",
+    "vips": "8.18.6",
+    "quality": 82,
+    "effort": 6
+  },
+  "checks": [
+    {
+      "label": "site-final-tests",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:20:08.808Z",
+      "finished": "2026-10-14T23:20:21.886Z",
+      "evidenceSha256": "b7555f81119e31d6af1ad8d9fc71890f2b75e7a094cea0de1d17b91c6ca09ed3"
+    },
+    {
+      "label": "site-types",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:19:12.295Z",
+      "finished": "2026-10-14T23:19:39.912Z",
+      "evidenceSha256": "71b3c3a25e7436d9d33829084ab289cc6fd6234d4d9fa90a89c997bb96d6bd1d"
+    },
+    {
+      "label": "site-lint",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:19:12.332Z",
+      "finished": "2026-10-14T23:20:19.187Z",
+      "evidenceSha256": "890f7d2fa00937998d6290fb561c2507f4cdba39cc3bf97716a536a851ea7ca0"
+    },
+    {
+      "label": "site-final-build",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:20:21.979Z",
+      "finished": "2026-10-14T23:20:34.164Z",
+      "evidenceSha256": "aea2271aad27f666c71f31afa23758426c25fb2524cc7b778d25d40c099ea825"
+    },
+    {
+      "label": "site-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:21:00.655Z",
+      "finished": "2026-10-14T23:21:40.417Z",
+      "evidenceSha256": "147dc3981fdcf209bd9785a98cf4bcf99aa13aa3339f735ada02f3c96f9728d0"
+    },
+    {
+      "label": "site-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:21:40.544Z",
+      "finished": "2026-10-14T23:22:10.057Z",
+      "evidenceSha256": "856b3a5cdeeb6822a3371ef2a47f5e54353ac49d96a463c31800233a3e2b1811"
+    },
+    {
+      "label": "site-d1-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:39.254Z",
+      "finished": "2026-10-14T23:25:43.038Z",
+      "evidenceSha256": "bd76ad5ede52c74bcba6293db3e7418f2283e83323faeb665ef7c25dbe6e3a78"
+    },
+    {
+      "label": "site-d1-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:45.116Z",
+      "finished": "2026-10-14T23:25:52.734Z",
+      "evidenceSha256": "62a61da35737b7a8bfe395f6cdefe434dc98a090afe21c521624c56a360982b4"
+    },
+    {
+      "label": "site-error-final-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "error"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:37.600Z",
+      "finished": "2026-10-14T23:25:39.183Z",
+      "evidenceSha256": "17c8ab09c7a863c3f49588be9a6bd18cf478554b333dfe43b3dab390446f7ba8"
+    },
+    {
+      "label": "site-error-final-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "error"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:43.104Z",
+      "finished": "2026-10-14T23:25:45.042Z",
+      "evidenceSha256": "fd474efd79a477facb708ac2995a81ef077172b77cc5dfdf468c3b91167795ce"
+    },
+    {
+      "label": "site-editor-chromium",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/editor-save-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:53.572Z",
+      "finished": "2026-10-14T23:26:05.827Z",
+      "evidenceSha256": "7341abef5e7bc2823ea60e4034ef0c2e2564ea8b99b2806c43ebf2e40342a8a1"
+    },
+    {
+      "label": "site-editor-webkit",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/editor-save-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:26:05.945Z",
+      "finished": "2026-10-14T23:26:22.411Z",
+      "evidenceSha256": "c26518ae4e5a272eadea3140846258d087031cc8bdfbabb96c504c58776e0250"
+    },
+    {
+      "label": "site-disabled-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:34:34.559Z",
+      "finished": "2026-10-14T23:34:36.573Z",
+      "evidenceSha256": "ab695786805c6ddbcd96496e6ec1a2dde14ba05c69eb760cb3954b9eec5de15d"
+    },
+    {
+      "label": "site-disabled-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:34:36.647Z",
+      "finished": "2026-10-14T23:34:38.263Z",
+      "evidenceSha256": "9b09cedf5e2c9c8d53d140de7d440e28b992a8ae40c29f4d3ef6d5044791d401"
+    },
+    {
+      "label": "site-preservation-final",
+      "command": [
+        "node",
+        "work/pilot-audit-site.mjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:35:20.492Z",
+      "finished": "2026-10-14T23:35:21.085Z"
+    },
+    {
+      "label": "site-qa-lint",
+      "command": [
+        "node",
+        "node_modules/eslint/bin/eslint.js",
+        "tests/image-practice-qa.cjs",
+        "scripts/prepare-word-image-web.mjs",
+        "tests/word-image-web.test.mjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:34:38.337Z",
+      "finished": "2026-10-14T23:34:46.222Z"
+    }
+  ],
+  "preservation": {
+    "passed": true,
+    "primaryBranch": "codex/card-automation-topic-alignment",
+    "primaryDirtyFilesPreserved": 18,
+    "sourceImagesPreserved": 20,
+    "manifestAndLedgerPreserved": true,
+    "ignoredPilotPngs": 20,
+    "apiStateSchemaDbLockHostingUnchanged": true,
+    "originalPlanPreserved": true
+  },
+  "warnings": {
+    "lint": 15,
+    "errors": 0,
+    "build": [
+      "punycode deprecation",
+      "chunk above 500 kB"
+    ]
+  },
+  "notVerified": [
+    "actual iPhone / VoiceOver",
+    "Node 24 CI",
+    "all unrelated browser suites"
+  ],
+  "boundary": {
+    "productionLearnerWrites": 0,
+    "liveAIRequests": 0,
+    "newImageGenerations": 0,
+    "kakaoMessages": 0,
+    "dbMigrations": 0,
+    "githubMainMerged": false
+  },
+  "rollback": {
+    "flag": "word_image_pilot_enabled=false",
+    "action": "redeploy same saved version; preserve DB and originals",
+    "previousSiteVersion": 127
+  },
+  "publication": {
+    "status": "not_started"
+  }
+}

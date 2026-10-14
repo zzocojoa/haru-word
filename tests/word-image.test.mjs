@@ -13,11 +13,12 @@ test('the small pilot catalog matches the current textbook and excludes generati
   const catalog = JSON.parse(readFileSync('data/word-image-pilot.json'));
   assert.equal(catalog.dataset.wordsSha256, sha(wordsBytes)); assert.equal(catalog.dataset.contentSha256, sha(contentBytes));
   assert.equal(WORD_IMAGES.length, 20); assert.equal(new Set(WORD_IMAGES.map(e => e.entryId)).size, 20);
-  for (const e of WORD_IMAGES) {
+  for (const [index, e] of WORD_IMAGES.entries()) {
     const word = wordById.get(e.entryId);
     assert.equal(e.sourceFingerprint, sha(JSON.stringify({ word, content: content[e.entryId] })));
     assert.equal(e.pos, word.pos); assert.equal(e.baseMeaning, content[e.entryId].meaning);
-    assert.equal(e.url, '/oxford-image-pilot/' + e.sha256 + '.png');
+    assert.equal(e.sourceSha256, catalog.entries[index].sha256);
+    assert.equal(e.url, '/word-images-pilot/' + e.sha256 + '.webp');
     assert.equal(e.prompt, undefined); assert.equal(e.attempts, undefined);
   }
 });

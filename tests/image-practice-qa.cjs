@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker, axePath } = require('./qa/runtime.cjs');
 const { emptyState } = require('./fixtures/backup-history.cjs');
-const engine = process.env.QA_BROWSER || 'chromium', stage = process.argv[2] || (process.env.QA_IMAGE_PILOT_MODE === 'development' ? 'all' : 'production');
+const engine = process.env.QA_BROWSER || 'chromium', stage = process.argv[2] || (['development', 'enabled'].includes(process.env.QA_IMAGE_PILOT_MODE) ? 'all' : 'production');
 const stages = ['front', 'back', 'lifecycle', 'network', 'error', 'editor', 'eligible', 'empty', 'matrix'];
 if (stage === 'all') {
   const { spawnSync } = require('node:child_process');
@@ -14,8 +14,8 @@ if (stage === 'all') {
   process.exit(0);
 }
 if (![...stages, 'entry', 'production', 'isolation'].includes(stage)) throw Error('Unknown image-practice QA stage');
-const out = 'outputs/word-image-pilot/' + engine;
-const catalog = JSON.parse(fs.readFileSync('data/word-image-pilot.json'));
+const out = 'outputs/word-image-pilot-site/' + engine;
+const catalog = JSON.parse(fs.readFileSync('data/word-image-pilot-web.json'));
 const words = JSON.parse(fs.readFileSync('data/words.json'));
 const content = JSON.parse(fs.readFileSync('data/content.json'));
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
@@ -71,9 +71,9 @@ async function checkLayouts(page, dialog, label) {
     await context.route('**/*', async route => {
       const request = route.request(), url = new URL(request.url());
       if (url.origin !== base) { requests.external++; return route.abort(); }
-      if (url.pathname.startsWith('/oxford-image-pilot/')) imageRequests.push(url.pathname);
-      if (stage === 'front' && url.pathname.startsWith('/oxford-image-pilot/')) return;
-      if (stage === 'error' && url.pathname.startsWith('/oxford-image-pilot/')) { heldImages.set(url.pathname, route); return; }
+      if (url.pathname.startsWith('/word-images-pilot/')) imageRequests.push(url.pathname);
+      if (stage === 'front' && url.pathname.startsWith('/word-images-pilot/')) return;
+      if (stage === 'error' && url.pathname.startsWith('/word-images-pilot/')) { heldImages.set(url.pathname, route); return; }
       if (/feedback|automation|ai-eval|sentence-structure/.test(url.pathname)) {
         if (url.pathname.startsWith('/api/')) { requests.ai++; return route.abort(); }
         moduleNameMatches.push(url.pathname);
@@ -192,7 +192,7 @@ async function checkLayouts(page, dialog, label) {
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
       await page.evaluate(() => { window.qaOldImage.dispatchEvent(new Event('load')); delete window.qaOldImage; });
       assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true, 'old image event cannot enable a new card');
-      await heldImages.get(catalog.entries[1].url).fulfill({ contentType: 'image/png', body: fs.readFileSync('public' + catalog.entries[1].url) });
+      await heldImages.get(catalog.entries[1].url).fulfill({ contentType: 'image/webp', body: fs.readFileSync('public' + catalog.entries[1].url) });
       await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
       await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
       checks.push('503 skip hides answer; late detached load cannot change next loading state; current response enables reveal');
@@ -242,6 +242,7 @@ async function checkLayouts(page, dialog, label) {
         assert.equal((await dialog.innerHTML()).includes(expected), false, 'every front DOM hides its English answer');
         assert.equal((await dialog.locator('.dialog-scroll').innerHTML()).includes(catalog.entries[i].baseMeaning), false, 'every front card DOM hides its meaning');
         await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+        assert.deepEqual(await dialog.locator('img').evaluate(image => [image.naturalWidth, image.naturalHeight]), [640, 853], 'web image decoded with the catalog dimensions');
         const allowed = new Set(catalog.entries.slice(0, i + 2).map(e => e.url));
         assert.equal(imageRequests.every(url => allowed.has(url)), true, 'every step fetches at most one image ahead');
         await dialog.getByRole('button', { name: '단어 확인', exact: true }).click();

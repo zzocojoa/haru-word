@@ -3,6 +3,7 @@ declare namespace Cloudflare {
     topic_sentence_validation_key?: string;
     topic_sentence_validation_expires?: string;
     DB?: D1Database;
+    word_image_pilot_enabled?: string;
     card_studio_enabled?: string;
     card_studio_owner_id?: string;
     card_studio_bridge_secret?: string;

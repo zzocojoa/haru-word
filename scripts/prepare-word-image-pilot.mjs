@@ -32,7 +32,7 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
     if (sha(bytes) !== entry.sha256 || bytes.length !== entry.bytes || bytes.length < 24 ||
       bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' ||
       bytes.readUInt32BE(16) !== entry.width || bytes.readUInt32BE(20) !== entry.height) throw new Error('PNG fingerprint mismatch: ' + id);
-    const target = path.join(projectRoot, 'public/oxford-image-pilot', entry.sha256 + '.png');
+    const target = path.join(projectRoot, 'work/oxford-image-pilot', entry.sha256 + '.png');
     if (existsSync(target) && sha(readFileSync(target)) !== entry.sha256) throw new Error('Existing PNG differs: ' + entry.sha256);
     images.push({ entry, bytes, target });
   }
@@ -42,7 +42,7 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
       url: '/oxford-image-pilot/' + entry.sha256 + '.png' })) };
   const metadataFile = path.join(projectRoot, 'data/word-image-pilot.json');
   if (existsSync(metadataFile) && JSON.stringify(JSON.parse(readFileSync(metadataFile, 'utf8'))) !== JSON.stringify(catalog)) throw new Error('Existing pilot catalog differs');
-  mkdirSync(path.join(projectRoot, 'public/oxford-image-pilot'), { recursive: true });
+  mkdirSync(path.join(projectRoot, 'work/oxford-image-pilot'), { recursive: true });
   let copied = 0, reused = 0;
   for (const { bytes, target } of images) {
     if (existsSync(target)) reused++;
