@@ -41,13 +41,20 @@ assert(selected.length > 0 && selected.every(e => e?.file));
 assert.equal(new Set(selected.map(e => e.entryId)).size, selected.length);
 const root = path.join(assetWorkspace, m.assetRoot);
 for (const e of selected) {
-  assert.match(e.file, /^[a-f0-9]{16}-[a-z0-9-]+-v[12]\.png$/);
+  assert.match(e.file, /^[a-f0-9]{16}-[a-z0-9-]+-v[123]\.png$/);
   const b = fs.readFileSync(path.join(root, e.file));
   assert.equal(sha(b), e.sha256); assert.equal(b.length, e.bytes);
   assert.equal(b.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
   assert.equal(b.readUInt32BE(16), e.width); assert.equal(b.readUInt32BE(20), e.height);
   assert(e.width < e.height && Math.abs(e.width / e.height - 0.75) <= 0.05);
   const a = e.attempts.at(-1);
+  assert(e.file.endsWith('-v' + a.number + '.png'));
+  if (a.number === 3) {
+    const approval = m.generation.recoveryApproval;
+    assert(approval && a.recoveryApprovalId === approval.approvalId);
+    assert(approval.entryIds.includes(e.entryId));
+    assert.equal(a.recoveryProposalSha256, approval.proposalSha256);
+  }
   assert.equal(a.file, e.file); assert.equal(a.sha256, e.sha256);
   const actualPrompt = a.prompt || e.prompt + (e.slug === 'apple' ? '' : '\n' + m.generation.referenceInstruction);
   assert.equal(a.promptSha256, sha(actualPrompt));
@@ -61,7 +68,7 @@ async function main() {
   const server = http.createServer((req, res) => {
     if (req.url === '/') { res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); return res.end(html); }
     const name = decodeURIComponent(req.url.slice(1));
-    if (!/^[a-f0-9]{16}-[a-z0-9-]+-v[12]\.png$/.test(name) || !selected.some(e => e.file === name)) { res.writeHead(404); return res.end(); }
+    if (!/^[a-f0-9]{16}-[a-z0-9-]+-v[123]\.png$/.test(name) || !selected.some(e => e.file === name)) { res.writeHead(404); return res.end(); }
     res.writeHead(200, { 'Content-Type': 'image/png' }); fs.createReadStream(path.join(root, name)).pipe(res);
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));

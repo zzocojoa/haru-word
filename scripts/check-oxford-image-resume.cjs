@@ -11,6 +11,8 @@ const correctedSeed = recorded.entries.find(e => e.file && e.attempts.length ===
 assert(completedSeed && correctedSeed, 'Seed fixtures need one original and one corrected image');
 // Fixed synthetic states keep these checks usable even when production has no waiting/held items.
 const original = JSON.parse(JSON.stringify(recorded));
+// These synthetic v1/v2 fixtures exercise the legacy path, not the production recovery scope.
+delete original.generation.recoveryApproval;
 for (const e of original.entries) {
   e.status = 'waiting'; e.attempts = [];
   for (const key of ['file', 'sha256', 'bytes', 'width', 'height', 'review', 'policyHold', 'pendingCorrection']) delete e[key];

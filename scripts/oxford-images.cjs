@@ -101,6 +101,7 @@ function start(id, correctionFile) {
   assert.equal(p.current, null, 'Previous image call is unresolved; do not retry blindly');
   const e = find(id);
   assert(!e.policyHold, 'Explicit policy hold must be resolved before generation');
+  assert(!m.generation.recoveryApproval, 'Use the approved recovery-start scope; legacy starts are closed');
   if (correctionFile) {
     assert(['generated', 'held'].includes(e.status));
     assert.equal(e.attempts.length, 1, 'Only one quality correction is allowed');
@@ -206,7 +207,124 @@ function holdPolicy(decisionFile) {
 }
 function status() {
   console.log(JSON.stringify({ counts: m.counts, generationCalls: p.generationCalls, current: p.current,
+    recovery: m.generation.recoveryApproval ? {
+      approvalId: m.generation.recoveryApproval.approvalId,
+      maximumNewStartSlots: m.generation.recoveryApproval.maximumNewStartSlots,
+      used: recoveryUsage(m.generation.recoveryApproval).length,
+      stoppedByFailure: m.generation.recoveryApproval.stoppedByFailure || null
+    } : null,
     next: m.entries.filter(e => e.status === 'waiting').slice(0, 10).map(e => ({ id: e.entryId, word: e.headword || e.word, pos: e.pos, meaning: e.baseMeaning, prepared: Boolean(e.prompt) })) }));
+}
+function recoveryProposal(approval) {
+  assert.equal(approval.proposalPath, 'docs/oxford-word-image-recovery-proposal.json');
+  const bytes = fs.readFileSync(path.join(repo, approval.proposalPath));
+  assert.equal(sha(bytes), approval.proposalSha256, 'Approved proposal changed');
+  const proposal = JSON.parse(bytes);
+  assert.equal(proposal.proposalId, approval.proposalId);
+  assert.equal(proposal.executionAllowed, false); // The proposal remains an inert record.
+  assert.equal(proposal.authorization, null);
+  assert.equal(proposal.sourceSnapshot.dataset.sha256, m.dataset.sha256);
+  assert(Array.isArray(approval.entryIds) && approval.entryIds.length > 0);
+  assert.equal(new Set(approval.entryIds).size, approval.entryIds.length);
+  assert.deepEqual(approval.entryIds, proposal.executionOrder.filter(id => approval.entryIds.includes(id)));
+  return proposal;
+}
+function authorizeRecovery(approvalFile) {
+  assert.equal(p.current, null, 'Resolve the current call before recording recovery approval');
+  const approvalBytes = fs.readFileSync(approvalFile), approval = JSON.parse(approvalBytes);
+  const existing = m.generation.recoveryApproval;
+  if (existing) {
+    assert.equal(existing.approvalSourceSha256, sha(approvalBytes), 'Recovery approval cannot be replaced or refilled');
+    recoveryProposal(existing);
+    console.log(JSON.stringify({ approvalId: existing.approvalId, changed: false, generationCalls: p.generationCalls }));
+    return;
+  }
+  const proposal = recoveryProposal(approval);
+  assert(approval.approvalId?.trim() && approval.userDecision?.trim());
+  assert(Number.isFinite(Date.parse(approval.approvedAt)));
+  assert.match(approval.proposalCommit, /^[a-f0-9]{40}$/);
+  assert.equal(approval.provider, 'built-in-image_gen');
+  assert.equal(approval.automaticRetry, false);
+  assert.equal(approval.oneAdditionalStartPerEntry, true);
+  assert.equal(approval.textPolicyHoldsPreserved, true);
+  assert.equal(approval.maximumNewStartSlots, approval.entryIds.length);
+  assert(approval.maximumNewStartSlots <= 53);
+  assert.equal(approval.baseGenerationCalls, p.generationCalls);
+  assert.equal(approval.maximumTotalStartSlots, p.generationCalls + approval.maximumNewStartSlots);
+  assert.equal(approval.baseManifestSha256, sha(fs.readFileSync(file)));
+  assert.equal(approval.baseLedgerSha256, sha(fs.readFileSync(progressFile)));
+  for (const id of approval.entryIds) {
+    const e = find(id), spec = proposal.entries.find(s => s.entryId === id);
+    assert(spec && !e.policyHold && ['held', 'failed'].includes(e.status));
+    assert.equal(e.status, spec.currentStatus);
+    assert.equal(e.attempts.length, spec.currentAttempts);
+    assert.equal(e.sourceFingerprint, spec.sourceFingerprint);
+    assert.equal(spec.proposedAdditionalStartSlots, 1);
+    assert.equal(spec.proposedNextAttemptNumber, e.attempts.length + 1);
+    assert.equal(spec.fullPromptSha256, sha(spec.fullPrompt));
+  }
+  m.generation.recoveryApproval = { ...approval, approvalSourceSha256: sha(approvalBytes) };
+  p.history.push({ action: 'recovery-approved', approvalId: approval.approvalId, at: approval.approvedAt });
+  save();
+  console.log(JSON.stringify({ approvalId: approval.approvalId, changed: true, maximumNewStartSlots: approval.maximumNewStartSlots, generationCalls: p.generationCalls }));
+}
+function recoveryUsage(approval) {
+  const used = m.entries.flatMap(e => e.attempts.filter(a => a.recoveryApprovalId === approval.approvalId).map(a => ({ entryId: e.entryId, attempt: a })));
+  assert.equal(new Set(used.map(u => u.entryId)).size, used.length, 'Each recovery entry gets one start');
+  assert(used.every(u => approval.entryIds.includes(u.entryId)));
+  assert.equal(p.generationCalls, approval.baseGenerationCalls + used.length, 'Recovery slots cannot be reset or bypassed');
+  assert(used.length <= approval.maximumNewStartSlots);
+  return used;
+}
+function startRecovery(id) {
+  assert.equal(m.generation.userApproval, 'style-approved-continue');
+  assert.equal(p.current, null, 'Previous image call is unresolved; do not retry blindly');
+  const approval = m.generation.recoveryApproval;
+  assert(approval, 'Explicit recovery approval is required');
+  assert(!approval.stoppedByFailure, 'Recovery is stopped after a service failure; investigate before continuing');
+  const proposal = recoveryProposal(approval), used = recoveryUsage(approval), e = find(id);
+  assert(!e.policyHold, 'Explicit policy hold must be resolved before generation');
+  assert(approval.entryIds.includes(e.entryId), 'Entry is outside the approved recovery scope');
+  assert(!used.some(u => u.entryId === e.entryId), 'The approved additional start is already consumed');
+  assert(used.every(u => find(u.entryId).status !== 'generated'), 'Review the previous candidate first');
+  assert(used.length < approval.maximumNewStartSlots && p.generationCalls < approval.maximumTotalStartSlots, 'Recovery start limit exhausted');
+  assert.equal(e.entryId, approval.entryIds.find(entryId => !used.some(u => u.entryId === entryId)), 'Keep approved textbook order');
+  const spec = proposal.entries.find(s => s.entryId === e.entryId);
+  assert.equal(e.status, spec.currentStatus);
+  assert.equal(e.attempts.length, spec.currentAttempts);
+  assert.equal(e.sourceFingerprint, spec.sourceFingerprint);
+  assert.equal(spec.fullPromptSha256, sha(spec.fullPrompt));
+  assert.match(e.slug, /^[a-z0-9-]+$/);
+  const reference = find(m.generation.styleReferenceEntryId), referenceFile = path.join(root, reference.file);
+  assert.equal(reference.status, 'approved');
+  assert.equal(sha(fs.readFileSync(referenceFile)), reference.sha256);
+  const attempt = {
+    number: e.attempts.length + 1, startedAt: new Date().toISOString(), status: 'generating',
+    prompt: spec.fullPrompt, promptSha256: spec.fullPromptSha256, promptVersion: m.generation.promptVersion,
+    referenceEntryId: reference.entryId, recoveryApprovalId: approval.approvalId,
+    recoveryProposalSha256: approval.proposalSha256, recoveryOriginalStatus: e.status,
+    recoveryDefect: spec.latestReviewBasis || spec.previousError || spec.verificationConditions
+  };
+  e.attempts.push(attempt); e.status = 'generating'; p.generationCalls++;
+  p.current = { entryId: e.entryId, attempt: attempt.number, slug: e.slug, startedAt: attempt.startedAt, outcome: 'awaiting-tool-result', recoveryApprovalId: approval.approvalId };
+  save();
+  console.log(JSON.stringify({ entryId: e.entryId, slug: e.slug, prompt: attempt.prompt, references: [referenceFile], attempt: attempt.number }));
+}
+function failRecovery(failureFile) {
+  const failure = JSON.parse(fs.readFileSync(failureFile)), e = find(failure.entryId), a = e.attempts.at(-1), approval = m.generation.recoveryApproval;
+  assert(approval && a.recoveryApprovalId === approval.approvalId);
+  assert.equal(p.current?.entryId, e.entryId); assert.equal(e.status, 'generating');
+  assert.equal(p.current.source, undefined, 'A returned image must be captured, not marked as failed');
+  assert(failure.error?.code?.trim() && failure.error?.category?.trim() && failure.error?.stage?.trim());
+  assert(['terminal-no-image-returned', 'terminal-exec-aborted-no-image-observed'].includes(failure.error.outcome));
+  const rawPath = path.resolve(repo, failure.rawResultFile);
+  assert(rawPath.startsWith(path.join(repo, 'work') + path.sep));
+  assert.equal(sha(fs.readFileSync(rawPath)), failure.rawResultSha256);
+  Object.assign(a, { status: 'failed', finishedAt: new Date().toISOString(), error: { ...failure.error, rawResultFile: failure.rawResultFile, rawResultSha256: failure.rawResultSha256 } });
+  e.status = 'failed'; p.current = null;
+  approval.stoppedByFailure = { entryId: e.entryId, attempt: a.number, code: a.error.code, at: a.finishedAt };
+  p.history.push({ action: 'recovery-failed', entryId: e.entryId, attempt: a.number, at: a.finishedAt });
+  save(); console.log(JSON.stringify({ entryId: e.entryId, status: 'failed', generationCalls: p.generationCalls, recoveryStopped: true }));
 }
 const [command, ...args] = process.argv.slice(2);
 if (command === 'consent') consent();
@@ -216,4 +334,7 @@ else if (command === 'capture') capture(args[0], args[1]);
 else if (command === 'review') review(args[0]);
 else if (command === 'hold-policy') holdPolicy(args[0]);
 else if (command === 'status') status();
-else throw Error('Use consent / prepare / start / capture / review / hold-policy / status');
+else if (command === 'recovery-authorize') authorizeRecovery(args[0]);
+else if (command === 'recovery-start') startRecovery(args[0]);
+else if (command === 'recovery-fail') failRecovery(args[0]);
+else throw Error('Use consent / prepare / start / capture / review / hold-policy / status / recovery-authorize / recovery-start / recovery-fail');

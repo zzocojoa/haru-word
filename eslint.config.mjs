@@ -30,6 +30,11 @@ const eslintConfig = defineConfig([
     rules: { "@typescript-eslint/no-require-imports": "off" },
   },
   {
+    // Local Oxford asset bookkeeping uses CommonJS and Node built-ins.
+    files: ["scripts/oxford-images.cjs", "scripts/verify-oxford-images.cjs", "scripts/check-oxford-image-*.cjs"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
+  },
+  {
     files: ["components/ui/**/*.{ts,tsx}", "hooks/use-mobile.ts"],
     rules: {
       // These files are vendored verbatim from shadcn@4.17.0. Keep the
