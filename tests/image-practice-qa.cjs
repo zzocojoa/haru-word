@@ -27,6 +27,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       const request = route.request(), url = new URL(request.url());
       if (url.origin !== base) { requests.external++; return route.abort(); }
       if (url.pathname.startsWith('/oxford-image-pilot/')) imageRequests.push(url.pathname);
+      if (stage === 'front' && url.pathname.startsWith('/oxford-image-pilot/')) return;
       if (/feedback|automation|ai-eval|sentence-structure/.test(url.pathname)) {
         if (url.pathname.startsWith('/api/')) { requests.ai++; return route.abort(); }
         moduleNameMatches.push(url.pathname);
@@ -44,6 +45,19 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await page.getByText('서버에 저장됨', { exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), 1);
     checks.push('today overview has one independent image-practice entry');
+    if (stage === 'front') {
+      await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
+      await page.waitForTimeout(400);
+      const dialog = page.getByRole('dialog');
+      assert.equal(await dialog.count(), 1, 'practice opens one dialog');
+      assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true);
+      const markup = await dialog.innerHTML();
+      assert.equal(/apple|사과|n\.|A1/.test(markup), false, 'front DOM has no answer or word metadata');
+      assert.equal(await dialog.locator('img').count(), 1);
+      await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
+      await dialog.waitFor({ state: 'hidden' });
+      checks.push('slow image blocks reveal, front hides answers, close remains available');
+    }
     assert.deepEqual({ state: stored, revision }, before);
     assert.equal(requests.writes, 0); assert.equal(requests.ai, 0);
     const report = { passed: true, stage, engine, checks, requests, imageRequests, errors, sourceImages: 20, stateUnchanged: true, actualIphoneChecked: false };

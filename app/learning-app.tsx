@@ -347,7 +347,7 @@ function LearningScreens({
                 ) : (
                   <>
                     <TodayOverview
-                      imagePractice={imagePilotEnabled && tab === 'today' ? <ImagePracticeLauncher /> : undefined}
+                      imagePractice={imagePilotEnabled && tab === 'today' ? <ImagePracticeLauncher words={words} progress={state.progress}/> : undefined}
                       date={date}
                       state={state}
                       changeLevel={changeLevel}

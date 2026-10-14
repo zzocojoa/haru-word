@@ -4615,3 +4615,7 @@ footer {
 .structure-explanations dl > div { margin-top:12px; }
 .structure-explanations dt { font-size:.875rem; font-weight:600; }
 .structure-explanations dd { margin:4px 0 0; font-size:.875rem; line-height:1.7; }
+.image-practice-dialog { position: fixed; }
+.image-practice-close { position: absolute; top: 1.4rem; right: 1.4rem; }
+.image-practice-dialog [data-slot="dialog-header"] { padding-right: 3rem; }
+.image-practice-picture { display: block; max-width: 100%; width: auto; height: min(52dvh, 30rem); object-fit: contain; margin: 0 auto 1rem; border-radius: 1rem; }
