@@ -4619,3 +4619,4 @@ footer {
 .image-practice-close { position: absolute; top: 1.4rem; right: 1.4rem; }
 .image-practice-dialog [data-slot="dialog-header"] { padding-right: 3rem; }
 .image-practice-picture { display: block; max-width: 100%; width: auto; height: min(52dvh, 30rem); object-fit: contain; margin: 0 auto 1rem; border-radius: 1rem; }
+.image-practice-answer { font-size: clamp(2rem, 8vw, 3.8rem); text-align: center; padding: 3rem 0; overflow-wrap: anywhere; }

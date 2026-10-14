@@ -58,6 +58,20 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       await dialog.waitFor({ state: 'hidden' });
       checks.push('slow image blocks reveal, front hides answers, close remains available');
     }
+    if (stage === 'back') {
+      await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
+      const dialog = page.getByRole('dialog');
+      const reveal = dialog.getByRole('button', { name: '단어 확인', exact: true });
+      await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+      assert.equal(/apple|사과/.test(await dialog.innerHTML()), false);
+      await page.screenshot({ path: out + '/front.png', fullPage: true });
+      await reveal.click();
+      assert.equal(await dialog.locator('[lang="en"]').filter({ hasText: /^apple$/ }).count(), 1, 'reveal shows the correct English word');
+      assert.equal(await dialog.locator('details[open]').count(), 0);
+      assert.equal(await dialog.getByText('사과', { exact: true }).isVisible(), false);
+      await page.screenshot({ path: out + '/back.png', fullPage: true });
+      checks.push('reveal shows English; meaning/pronunciation help starts collapsed');
+    }
     assert.deepEqual({ state: stored, revision }, before);
     assert.equal(requests.writes, 0); assert.equal(requests.ai, 0);
     const report = { passed: true, stage, engine, checks, requests, imageRequests, errors, sourceImages: 20, stateUnchanged: true, actualIphoneChecked: false };

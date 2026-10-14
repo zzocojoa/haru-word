@@ -6,6 +6,8 @@ import type { Progress, Word } from '@/lib/learning';
 import { resolveWordImage, WORD_IMAGES, type WordImage } from '@/lib/word-image';
 import { useNavigationState } from '../navigation';
 import { SheetDialog, SheetDialogContent } from '../sheet-dialog';
+import { HelpDetails } from '../study-ui';
+import { WordPronunciation } from '../word-pronunciation';
 
 // Scene descriptions give an equivalent visual clue without naming the answer.
 const SCENES: Record<string, string> = {
@@ -60,10 +62,13 @@ function PracticeCards({ deck }: { deck: Card[] }) {
 }
 function PracticeCard({ card }: { card: Card }) {
   const [ready, setReady] = useState(false);
+  const [revealed, setRevealed] = useState(false);
   return <div className="dialog-scroll">
-    <img className="image-practice-picture" src={card.image.url} width={card.image.width} height={card.image.height}
+    {!revealed ? <><img className="image-practice-picture" src={card.image.url} width={card.image.width} height={card.image.height}
       alt={SCENES[card.image.entryId]} onLoad={() => setReady(true)}/>
     {!ready && <p role="status">이미지 불러오는 중</p>}
-    <button type="button" className="primary-button full" disabled={!ready}>단어 확인</button>
+    <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>
+      : <><p lang="en" className="image-practice-answer">{card.word.word}</p>
+        <HelpDetails title="뜻·발음"><p>{card.image.baseMeaning}</p><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails></>}
   </div>;
 }
