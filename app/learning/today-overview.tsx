@@ -2,7 +2,7 @@
 import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
 import { countDailyOrigins, dailyAllocationRule } from "@/lib/learning/daily-allocation";
 import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useVocabularyState } from './use-vocabulary-state';
 import { HelpDetails, StatusBadge } from "../study-ui";
 import { ArrowRight, BookOpen, RotateCcw, Sparkles } from "lucide-react";
@@ -36,7 +36,7 @@ type TodayOverviewProps = Pick<
   | "initialAssessment"
   | "monthlyRepair"
   | "correctMonthlyCarryover"
->;
+> & { imagePractice?: ReactNode };
 export function TodayOverview({
   date,
   state,
@@ -64,6 +64,7 @@ export function TodayOverview({
   initialAssessment,
   monthlyRepair,
   correctMonthlyCarryover,
+  imagePractice,
 }: TodayOverviewProps) {
   const vocabulary = useVocabularyState(state);
   const statuses = useMemo(() => todayWordStatuses(vocabulary, visibleIds, date, unfinished),
@@ -205,6 +206,7 @@ export function TodayOverview({
           <ArrowRight size={17} />
         </button>
       )}
+      {imagePractice}
       {(!finished || remaining > 0) && !unfinished && !initialAssessment && !suggestions.length && <div className="no-target-actions">
         <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 설정을 확인해 주세요.' : '수준을 바꾸거나 친숙도를 다시 확인해 보세요.'}</p>
         <div className="button-row"><button className="secondary-button" disabled={busy} onClick={()=>setSettings(true)}>배정 설정 확인</button><button className="text-button" disabled={busy} onClick={()=>void beginAssessment()}>친숙도 확인</button></div>

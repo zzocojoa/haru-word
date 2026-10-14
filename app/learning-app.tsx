@@ -24,6 +24,7 @@ import { LearningMessage } from './learning/learning-message';
 import { SettingsDialog } from "./learning/settings-dialog";
 import { SourceDialog } from "./learning/source-dialog";
 import { TodayOverview } from "./learning/today-overview";
+import { ImagePracticeLauncher } from './learning/image-practice';
 import type { View } from "./learning/types";
 import { useLearningController } from "./learning/use-learning-controller";
 import { PendingReviews } from "./pending-reviews";
@@ -40,7 +41,7 @@ import { useTabNavigation } from './learning/use-tab-navigation';
 import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
-export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean }) {
+export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean; imagePilotEnabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
 function LearningScreens({
@@ -50,6 +51,7 @@ function LearningScreens({
   grammarV3Enabled = false,
   grammarV4Enabled = false,
   cardStudioEnabled = false,
+  imagePilotEnabled = false,
 }: {
   initialServerTime: number;
   grammarEnabled?: boolean;
@@ -57,6 +59,7 @@ function LearningScreens({
   grammarV3Enabled?: boolean;
   grammarV4Enabled?: boolean;
   cardStudioEnabled?: boolean;
+  imagePilotEnabled?: boolean;
 }) {
   const router = useRouter();
   const {
@@ -344,6 +347,7 @@ function LearningScreens({
                 ) : (
                   <>
                     <TodayOverview
+                      imagePractice={imagePilotEnabled && tab === 'today' ? <ImagePracticeLauncher /> : undefined}
                       date={date}
                       state={state}
                       changeLevel={changeLevel}

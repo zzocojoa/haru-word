@@ -1,0 +1,61 @@
+// Local synthetic learner only; all non-loopback requests are blocked.
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker } = require('./qa/runtime.cjs');
+const { emptyState } = require('./fixtures/backup-history.cjs');
+const engine = process.env.QA_BROWSER || 'chromium', stage = process.argv[2] || 'all';
+const out = 'outputs/word-image-pilot/' + engine;
+const catalog = JSON.parse(fs.readFileSync('data/word-image-pilot.json'));
+const words = JSON.parse(fs.readFileSync('data/words.json'));
+const content = JSON.parse(fs.readFileSync('data/content.json'));
+const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+(async () => {
+  await waitForWorker();
+  const browser = await launchBrowser({ engine });
+  fs.mkdirSync(out, { recursive: true });
+  const checks = [], errors = [], imageRequests = [], moduleNameMatches = [], requests = { writes: 0, ai: 0, external: 0 };
+  let page;
+  try {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: accountHeaders('image_pilot') });
+    const ids = words.filter(w => w.level === 'A1').slice(0, 20).map(w => w.id);
+    let revision = 7, stored = { ...emptyState(), grammar: {} };
+    stored.settings.assessments.A1 = { ids, index: 20, marks: Object.fromEntries(ids.map(id => [id, 'uncertain'])), completed: true };
+    const id = catalog.entries[0].entryId;
+    stored.progress[id] = { meaning: content[id].meaning, familiarity: 'known', en: 'independent', ko: 'help', sentenceStatus: 'written', sentence: 'This is a sample.', notes: '검사 전 기록', studyDates: [date], lastStudied: date, needsReview: true, familiarityCheck: { initial: 'known', answer: '검사 전 최초 풀이', meaning: content[id].meaning, final: 'known' } };
+    const before = structuredClone({ state: stored, revision });
+    await context.route('**/*', async route => {
+      const request = route.request(), url = new URL(request.url());
+      if (url.origin !== base) { requests.external++; return route.abort(); }
+      if (url.pathname.startsWith('/oxford-image-pilot/')) imageRequests.push(url.pathname);
+      if (/feedback|automation|ai-eval|sentence-structure/.test(url.pathname)) {
+        if (url.pathname.startsWith('/api/')) { requests.ai++; return route.abort(); }
+        moduleNameMatches.push(url.pathname);
+      }
+      if (url.pathname === '/api/state') {
+        if (request.method() === 'GET') return route.fulfill({ json: { state: stored, revision } });
+        requests.writes++;
+        return route.fulfill({ status: 503, json: { error: 'Unexpected practice write' } });
+      }
+      return route.continue();
+    });
+    page = await context.newPage();
+    page.on('pageerror', e => errors.push(e.message));
+    await page.goto(base, { waitUntil: 'domcontentloaded' });
+    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), 1);
+    checks.push('today overview has one independent image-practice entry');
+    assert.deepEqual({ state: stored, revision }, before);
+    assert.equal(requests.writes, 0); assert.equal(requests.ai, 0);
+    const report = { passed: true, stage, engine, checks, requests, imageRequests, errors, sourceImages: 20, stateUnchanged: true, actualIphoneChecked: false };
+    fs.writeFileSync(out + '/' + stage + '-report.json', JSON.stringify(report, null, 2));
+    console.log(JSON.stringify(report));
+  } catch (error) {
+    if (page) {
+      await page.screenshot({ path: out + '/' + stage + '-failure.png', fullPage: true });
+      const body = await page.locator('body').innerText();
+      fs.writeFileSync(out + '/' + stage + '-failure.json', JSON.stringify({ stage, requests, moduleNameMatches, errors, body }, null, 2));
+      console.error(JSON.stringify({ setupDiagnostic: body.slice(0, 1800), requests, moduleNameMatches, errors }));
+    }
+    throw error;
+  } finally { await closeBrowser(browser); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

@@ -37,6 +37,7 @@ module.exports = [
   "grammar-input-performance-qa.cjs",
   "history-performance-qa.cjs",
   "integration-consistency-qa.cjs",
+  "image-practice-qa.cjs",
   "journal-navigation-qa.cjs",
   "learning-message-qa.cjs",
   "large-backup-qa.cjs",
