@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 
@@ -25,6 +25,8 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
     if (sha(bytes) !== entry.sha256 || bytes.length !== entry.bytes || bytes.length < 24 ||
       bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' ||
       bytes.readUInt32BE(16) !== entry.width || bytes.readUInt32BE(20) !== entry.height) throw new Error('PNG fingerprint mismatch: ' + id);
+    const target = path.join(projectRoot, 'public/oxford-image-pilot', entry.sha256 + '.png');
+    if (existsSync(target) && sha(readFileSync(target)) !== entry.sha256) throw new Error('Existing PNG differs: ' + entry.sha256);
   }
   return { prepared: 0 };
 }

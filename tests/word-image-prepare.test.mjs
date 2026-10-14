@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { prepareWordImagePilot } from '../scripts/prepare-word-image-pilot.mjs';
 import { imagePilotFixture } from './fixtures/word-image-pilot.mjs';
@@ -47,4 +47,14 @@ test('pilot IDs must contain exactly twenty unique entries', () => {
     f.saveManifest();
     assert.throws(() => prepareWordImagePilot(f), { message: 'Expected twenty unique pilot IDs' });
   }
+});
+
+test('a different existing PNG is never overwritten', () => {
+  const f = imagePilotFixture(), entry = f.manifest.entries[0], out = path.join(f.projectRoot, 'public/oxford-image-pilot');
+  mkdirSync(out, { recursive: true });
+  const file = path.join(out, entry.sha256 + '.png');
+  writeFileSync(file, 'keep existing bytes');
+  assert.throws(() => prepareWordImagePilot(f), { message: 'Existing PNG differs: ' + entry.sha256 });
+  assert.equal(readFileSync(file, 'utf8'), 'keep existing bytes');
+  assert.equal(existsSync(path.join(f.projectRoot, 'data/word-image-pilot.json')), false);
 });
