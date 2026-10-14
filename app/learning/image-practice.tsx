@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cardContent } from '@/lib/catalog';
 import type { Progress, Word } from '@/lib/learning';
@@ -59,6 +59,10 @@ export function ImagePracticeLauncher({ words, progress }: { words: Word[]; prog
 
 function PracticeCards({ deck }: { deck: Card[] }) {
   const [index, setIndex] = useState(0);
+  const nextUrl = deck[index + 1]?.image.url;
+  useEffect(() => {
+    if (nextUrl) { const next = new Image(); next.src = nextUrl; }
+  }, [nextUrl]);
   return <>
     <p className="small-note" aria-live="polite">{index + 1} / {deck.length}</p>
     <PracticeCard key={index} card={deck[index]} last={index === deck.length - 1}

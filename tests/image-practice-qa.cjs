@@ -45,6 +45,13 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await page.getByText('서버에 저장됨', { exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), 1);
     checks.push('today overview has one independent image-practice entry');
+    if (stage === 'network') {
+      assert.equal(imageRequests.length, 0, 'no image requests before practice');
+      await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
+      await page.waitForTimeout(500);
+      assert.deepEqual([...new Set(imageRequests)], catalog.entries.slice(0, 2).map(e => e.url), 'only current and next image are requested');
+      checks.push('only current image and one next image are fetched');
+    }
     if (stage === 'front') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
       await page.waitForTimeout(400);
