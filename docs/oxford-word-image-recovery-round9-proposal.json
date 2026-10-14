@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "round": 9,
+  "proposalId": "9e334677-64b9-4b4a-84ae-bd10a25b3c26",
+  "createdAt": "2026-10-14T10:21:20.827Z",
+  "executionAllowed": false,
+  "authorization": null,
+  "status": "inert-proposal-covered-by-separate-human-remaining-approval",
+  "sourceSnapshot": {
+    "dataset": {
+      "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722",
+      "sha256": "14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+      "fingerprintAlgorithm": "sha256(wordsSha256 + \":\" + contentSha256)"
+    },
+    "baseCommit": "14a531b1fbcd3557d1b04b30b48bfa4d14e11e35",
+    "manifestSha256": "d896ee0eda38b33053da5cbe4fea0c26ed25a5cbb24c4b914f5c000533c228bf",
+    "ledgerSha256": "dac531661eb2b65d01eacb605ff4b3b7c7c866938b51ca0beb95325670f71a76",
+    "firstApprovalSnapshotSha256": "f15afb85307bcebafba918c44c48f5d24120ce1d1c17fef5b8e9d75a2b554fa1",
+    "remainingApprovalSha256": "d1acaf8cdd344433e9aaeb7954d982ad405440e01ff8c5383a0259dad44e4638"
+  },
+  "countsBefore": {
+    "total": 3809,
+    "waiting": 0,
+    "generating": 0,
+    "generated": 0,
+    "approved": 3808,
+    "held": 1,
+    "failed": 0
+  },
+  "currentStartSlots": 4086,
+  "proposedStartSlotLimit": 1,
+  "maximumStartSlotsAfterProposal": 4087,
+  "provider": "built-in-image_gen",
+  "automaticRetry": false,
+  "oneAdditionalStartPerEntry": true,
+  "remainingApprovalId": "c57e8ae4-175e-49f9-be9b-cfd66bbe72c5",
+  "executionOrder": [
+    "d056f2650b116cba"
+  ],
+  "style": {
+    "stylePrefix": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.",
+    "referenceInstruction": "Input image 1 is a STYLE REFERENCE ONLY: match its clean background, restrained illustrative surface and uncluttered adult composition. Draw the requested NEW subject; do not include an apple unless the requested subject calls for it.",
+    "reference": "adb44eba7b3ceef3-apple-v1.png",
+    "assetRoot": "outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+    "oldNativeInventory": 0,
+    "referenceEntryId": "adb44eba7b3ceef3",
+    "referenceSha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+  },
+  "entries": [
+    {
+      "entryId": "d056f2650b116cba",
+      "word": "capital",
+      "pos": "adj.",
+      "level": "A1",
+      "baseMeaning": "대문자의",
+      "sourceFingerprint": "9d66f25eddd5d1bdf8e9bd29c747f746bb6b0b911dd7921fbd2a2ba06e56db4e",
+      "canonicalContent": {
+        "meaning": "대문자의",
+        "ipa": "",
+        "expression": "a capital letter",
+        "example": "Begin your name with a capital letter.",
+        "translation": "이름은 대문자로 시작하세요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "대문자"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 2,
+      "currentImage": "d056f2650b116cba-capital-adj-v2.png",
+      "currentImageSha256": "a11ca49e73a39ec48c8500c9a10ad1ef14ce101deaffabc8bafc925ef42e181c",
+      "entrySnapshotSha256": "0668692e6f8e1348eef1697f856dc6d2677c508c3889f897ca5a30abb66319a2",
+      "attemptsSnapshotSha256": "eaf484e56853d8d4832467e2e91e90ef95affe4db685dcc32dc4a156bb1c1b22",
+      "latestReviewBasis": "원본·320px에서 lowercase a와 uppercase A 형태가 분명하고 손은 A를 가리키며 추가 문자·표식은 없다. 두 타일 크기는 같으나 a 글리프의 보이는 높이가 A보다 작아 승인받은 같은 높이 비교 후보 조건을 충족하지 않는다. 단순 크기와 대문자 개념을 혼동하지 않도록 다음 수정은 소문자 a만 같은 시각적 높이로 확대하고 a 형태/공통 기준선/나머지 장면을 보존한다. 기본 case 뜻의 연결 자체는 확인됐지만 이 비교 조건의 검수는 보류한다.",
+      "mode": "edit",
+      "title": "소문자 a만 같은 글리프 높이로 수정",
+      "scenePrompt": "EDIT image 1 only. Preserve its warm off-white background, table, both identical wooden tiles, uppercase A, hand, composition and restrained illustration style. Correct only the lowercase a on the LEFT tile: enlarge the existing ordinary lowercase a glyph vertically by approximately 33 percent, keeping its bottom exactly on the existing shared glyph baseline. Its top must now reach the same visible height as the unchanged uppercase A on the right tile. Preserve the clearly recognizable lowercase double-storey a shape; do not turn it into A, do not add or replace letters, and keep it centered on its original tile. Adjust its width only as needed to keep the same ordinary serif proportions. The two visible glyph heights should match at phone size. The hand still points beside the uppercase A and neither glyph is obscured. This illustrates case SHAPE, not bigger size, as the distinguishing feature. Only subject glyphs a and A are permitted; no extra characters, arrows, marks, numbers, labels or watermarks. Image 2 is STYLE REFERENCE ONLY; preserve the existing warm paper illustration and never add the apple.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one English vocabulary mnemonic card with permitted subject letter forms for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. Only the English letter forms constituting the specified subject are permitted. No additional captions, labels, words, numbers, punctuation, logos, watermarks or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nEDIT image 1 only. Preserve its warm off-white background, table, both identical wooden tiles, uppercase A, hand, composition and restrained illustration style. Correct only the lowercase a on the LEFT tile: enlarge the existing ordinary lowercase a glyph vertically by approximately 33 percent, keeping its bottom exactly on the existing shared glyph baseline. Its top must now reach the same visible height as the unchanged uppercase A on the right tile. Preserve the clearly recognizable lowercase double-storey a shape; do not turn it into A, do not add or replace letters, and keep it centered on its original tile. Adjust its width only as needed to keep the same ordinary serif proportions. The two visible glyph heights should match at phone size. The hand still points beside the uppercase A and neither glyph is obscured. This illustrates case SHAPE, not bigger size, as the distinguishing feature. Only subject glyphs a and A are permitted; no extra characters, arrows, marks, numbers, labels or watermarks. Image 2 is STYLE REFERENCE ONLY; preserve the existing warm paper illustration and never add the apple.",
+      "fullPromptSha256": "4a554081035207fcba2e7d03fb05a17736653e26f8f18284b11f7d21ee64b131",
+      "references": [
+        {
+          "role": "edit-target",
+          "file": "d056f2650b116cba-capital-adj-v2.png",
+          "sha256": "a11ca49e73a39ec48c8500c9a10ad1ef14ce101deaffabc8bafc925ef42e181c"
+        },
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 3,
+      "proposedFilename": "d056f2650b116cba-capital-adj-v3.png",
+      "subjectLetterFormsException": true,
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "candidateSuccessVerified": false
+    }
+  ],
+  "fullGoalComplete": false
+}
