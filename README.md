@@ -1,5 +1,13 @@
 # 하루단어 · Oxford 3000
 
+이미지 회상 연습의 **20개 로컬 시범**은 `codex/word-image-pilot`에서 개발 모드로만 제공합니다. 운영 빌드는 비활성이며 기존 학습 성적과 분리됩니다. [계획](docs/OXFORD_WORD_IMAGES_PILOT_LOGIC_PLAN.md)·[검증 보고서](docs/OXFORD_WORD_IMAGES_PILOT_VERIFICATION.md)를 참조하세요.
+
+승인된 이미지 체크아웃과 원본 PNG가 있는 PC에서 `npm run images:pilot:prepare`를 실행합니다. 기본 입력은 사용자 홈의 `.codex/worktrees/oxford-word-images/하루단어`와 `Documents/ChatGPT/하루단어/outputs/oxford-images/`입니다. 다른 위치에서는 `npm run images:pilot:prepare -- --source "<승인 체크아웃>" --assets "<원본 PNG 폴더>"`를 사용하세요. 교재·승인 상태·PNG 해시가 다르면 복사를 중단하고 기존 파일을 덮어쓰지 않습니다. 준비한 PNG는 Git 제외 대상입니다.
+
+`npm run dev -- --hostname 127.0.0.1 --port 5197`로 열면 오늘 학습 개요의 **이미지 연습**과 단어 편집창의 작은 미리보기를 확인할 수 있습니다. 기본 뜻과 다른 선택 뜻·개인 단어에는 그림을 연결하지 않습니다. 연습을 닫거나 탭을 바꾸거나 새로고침하면 처음부터 시작합니다.
+
+브라우저 검사에는 설치된 Playwright·axe 경로를 `QA_PLAYWRIGHT_PATH`, `AXE_CORE_PATH`로 설정합니다. `QA_BASE_URL=http://127.0.0.1:5197`, `QA_IMAGE_PILOT_MODE=development`에서 `node tests/image-practice-qa.cjs`를 실행하고 `QA_BROWSER=webkit`으로 반복합니다. 로컬 D1 가상 계정 전후 검사는 마지막 인수로 `isolation`을 사용합니다. 기존 마이그레이션으로 준비한 이 체크아웃의 로컬 DB만 사용하며 운영 DB는 사용하지 않습니다. 운영 빌드 미리보기에서는 기본 모드 또는 `production` 인수로 진입·미리보기·이미지 요청이 없는지 검사합니다.
+
 최종 품질 탈락 뒤 새 후보를 한 번 만드는 기능을0021·Site v121에 배포했습니다. [이번 시험](docs/releases/2026-10-06-automation-replacement-trial.json)은5장 모두 서버접수와 사용자 이미지·원본링크 정상 확인을 마쳤습니다. 과거 제작 준비 CPU 자료 공백은 사용자 승인에 따라 미검증으로 남기고 EN_Card PR11·하루단어 PR32를 병합했습니다.
 
 개발·병합·배포 상태는 [하루단어 제품 관리](PRODUCT_MANAGEMENT.md)에서 두 저장소를 함께 확인합니다. 카드 화면의 수정 원본은 EN_Card이며, 이 저장소의 카드 생성 파일은 정식 exporter로만 갱신합니다. 최신 운영은 [Site v121·새 후보 DO 반영](docs/releases/2026-10-06-automation-replacement-rollout.json)이며, 실제5장 수신은 확인했습니다. 아래 버전 표시는 과거 기록입니다.

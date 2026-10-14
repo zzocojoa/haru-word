@@ -169,7 +169,10 @@ async function checkLayouts(page, dialog, label) {
       await dialog.getByRole('button', { name: 'Close', exact: true }).click();
       await page.getByRole('alertdialog').getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
       await dialog.waitFor({ state: 'hidden' });
-      await page.getByLabel('단어 또는 한국어 뜻 검색').fill('bicycle');
+      await page.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
+      const search = page.getByLabel('단어 또는 한국어 뜻 검색');
+      await search.click(); await search.fill('bicycle');
+      assert.equal(await search.inputValue(), 'bicycle');
       await page.getByRole('button', { name: 'bicycle 명사', exact: true }).click();
       assert.equal(await dialog.locator('img').count(), 1, 'longer editor word also has a preview');
       await checkLayouts(page, dialog, 'editor-long');
