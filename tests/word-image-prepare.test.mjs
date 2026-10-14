@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { prepareWordImagePilot } from '../scripts/prepare-word-image-pilot.mjs';
-import { imagePilotFixture } from './fixtures/word-image-pilot.mjs';
+import { imagePilotFixture, sha } from './fixtures/word-image-pilot.mjs';
 
 test('unapproved pilot images are rejected before any destination is created', () => {
   const f = imagePilotFixture();
@@ -64,4 +64,20 @@ test('source filenames cannot leave the approved asset directory', () => {
   writeFileSync(path.join(f.root, 'escape.png'), readFileSync(path.join(f.assetRoot, entry.file)));
   entry.file = '../escape.png'; f.saveManifest();
   assert.throws(() => prepareWordImagePilot(f), { message: 'Unsafe image filename: ' + entry.entryId });
+});
+
+test('twenty verified images are prepared with hash-only URLs and reused on the next run', () => {
+  const f = imagePilotFixture(), first = prepareWordImagePilot(f);
+  assert.equal(first.prepared, 20);
+  const metadataFile = path.join(f.projectRoot, 'data/word-image-pilot.json'), before = readFileSync(metadataFile), catalog = JSON.parse(before);
+  assert.equal(catalog.entries.length, 20);
+  assert.deepEqual(catalog.entries.map(e => e.entryId), f.manifest.pilotEntryIds);
+  for (const entry of catalog.entries) {
+    assert.equal(entry.url, '/oxford-image-pilot/' + entry.sha256 + '.png');
+    assert.equal(sha(readFileSync(path.join(f.projectRoot, 'public', entry.url.slice(1)))), entry.sha256);
+    assert.equal(entry.attempts, undefined); assert.equal(entry.prompt, undefined);
+  }
+  const second = prepareWordImagePilot(f);
+  assert.equal(second.prepared, 20); assert.equal(second.copied, 0); assert.equal(second.reused, 20);
+  assert.deepEqual(readFileSync(metadataFile), before);
 });
