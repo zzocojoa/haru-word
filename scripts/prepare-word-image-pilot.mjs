@@ -1,6 +1,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { homedir } from 'node:os';
+import { fileURLToPath } from 'node:url';
+import { parseArgs } from 'node:util';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
 
@@ -46,4 +50,19 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
   }
   if (!existsSync(metadataFile)) writeFileSync(metadataFile, JSON.stringify(catalog, null, 2) + '\n', { flag: 'wx' });
   return { prepared: images.length, copied, reused };
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
+    const { values } = parseArgs({ options: { source: { type: 'string' }, assets: { type: 'string' } } });
+    const sourceRoot = path.resolve(values.source || path.join(homedir(), '.codex/worktrees/oxford-word-images/하루단어'));
+    let sourceCommit;
+    try { sourceCommit = execFileSync('git', ['-C', sourceRoot, 'rev-parse', 'HEAD'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim(); }
+    catch { throw new Error('Expected approved image source commit 228f8ba'); }
+    if (sourceCommit !== '228f8ba9e1594cbcb6286b24559100923eb68f6f') throw new Error('Expected approved image source commit 228f8ba');
+    execFileSync('git', ['-C', sourceRoot, 'diff', '--quiet', 'HEAD', '--', 'data/words.json', 'data/content.json', 'data/word-image-manifest.json'], { stdio: ['ignore', 'pipe', 'pipe'] });
+    const manifest = JSON.parse(readFileSync(path.join(sourceRoot, 'data/word-image-manifest.json'), 'utf8'));
+    const assetRoot = path.resolve(values.assets || path.join(homedir(), 'Documents/ChatGPT/하루단어', manifest.assetRoot));
+    console.log(JSON.stringify({ sourceCommit, ...prepareWordImagePilot({ sourceRoot, assetRoot, projectRoot: process.cwd() }) }));
+  } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

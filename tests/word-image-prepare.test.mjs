@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { prepareWordImagePilot } from '../scripts/prepare-word-image-pilot.mjs';
 import { imagePilotFixture, sha } from './fixtures/word-image-pilot.mjs';
 
@@ -87,5 +89,13 @@ test('a different existing catalog is preserved and blocks PNG preparation', () 
   writeFileSync(file, '{"existing":"keep"}');
   assert.throws(() => prepareWordImagePilot(f), { message: 'Existing pilot catalog differs' });
   assert.equal(readFileSync(file, 'utf8'), '{"existing":"keep"}');
+  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+});
+
+test('the CLI rejects a source outside the approved source revision', () => {
+  const f = imagePilotFixture();
+  const r = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/prepare-word-image-pilot.mjs', import.meta.url)), '--source', f.sourceRoot, '--assets', f.assetRoot], { cwd: f.projectRoot, encoding: 'utf8' });
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /Expected approved image source commit 228f8ba/);
   assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
 });

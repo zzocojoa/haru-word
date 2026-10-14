@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "dataset": {
+    "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+    "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722"
+  },
+  "entries": [
+    {
+      "entryId": "adb44eba7b3ceef3",
+      "pos": "n.",
+      "baseMeaning": "사과",
+      "sourceFingerprint": "c09501a476eba7ebe7664f60adf507053d46f6cb421c8ed2c7fdc08128780a0f",
+      "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74.png"
+    },
+    {
+      "entryId": "5f16580c8972ee74",
+      "pos": "n.",
+      "baseMeaning": "자전거",
+      "sourceFingerprint": "36a53a12615e7828c280327f0ee141b6d029c260e67f67219df41efd6703ab44",
+      "sha256": "6d0f5d8cc920feb2607887383dc6ef291177fe7f544a508ab73b61af331c3920",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/6d0f5d8cc920feb2607887383dc6ef291177fe7f544a508ab73b61af331c3920.png"
+    },
+    {
+      "entryId": "b126d2370a9613ab",
+      "pos": "v.",
+      "baseMeaning": "오르다",
+      "sourceFingerprint": "d3f6dd25e6283bf41f6bc5e0dcda75d3adcc7ed88fe01a530962c8abdf662f61",
+      "sha256": "895cff98a163b38908094b682162b4f65ce0103904ee78e040ac31f9ff775a98",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/895cff98a163b38908094b682162b4f65ce0103904ee78e040ac31f9ff775a98.png"
+    },
+    {
+      "entryId": "f5864c8efbe7df47",
+      "pos": "n.",
+      "baseMeaning": "다리",
+      "sourceFingerprint": "8dff7239030e21b47aed4605b213ecde7a5e9243a45b37eabe2b88b6428ddc73",
+      "sha256": "d3725e631954ca417597d7743b46deeb9af96a10f634aa9c97a66a332b6850cd",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/d3725e631954ca417597d7743b46deeb9af96a10f634aa9c97a66a332b6850cd.png"
+    },
+    {
+      "entryId": "b46ad64c7a5a69ba",
+      "pos": "adj.",
+      "baseMeaning": "조심하는",
+      "sourceFingerprint": "24e6d2904c5c605b7cda1ef6ea5fe4f244d30177c1f7675d87fa8a413ca034cb",
+      "sha256": "7e17d1141678274be4be16a610964a14fdef25c39f794b166ae3de2f21e7e0a0",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/7e17d1141678274be4be16a610964a14fdef25c39f794b166ae3de2f21e7e0a0.png"
+    },
+    {
+      "entryId": "1eaf195d746c1bed",
+      "pos": "n.",
+      "baseMeaning": "그룹",
+      "sourceFingerprint": "39d3f4eed12abeeac0b95eae5c08000a90a0cef91194dab3a16baa4426967d95",
+      "sha256": "dd73abfc21f6611e6d5ec74f135464ab7b10e6fafb07ffe09a547dc31aa9629e",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/dd73abfc21f6611e6d5ec74f135464ab7b10e6fafb07ffe09a547dc31aa9629e.png"
+    },
+    {
+      "entryId": "43a095930598d1d9",
+      "pos": "prep.",
+      "baseMeaning": "~에 관하여",
+      "sourceFingerprint": "2616131d3a3f0b2e922dd6356024ce426eac009ff2ecd5b6b9182139dbf98697",
+      "sha256": "ceea69612c9cf727e26831aa68d4e16919d9de192d08d9611d16c7a54780ebd4",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/ceea69612c9cf727e26831aa68d4e16919d9de192d08d9611d16c7a54780ebd4.png"
+    },
+    {
+      "entryId": "2447b4e906f054db",
+      "pos": "adv.",
+      "baseMeaning": "대략",
+      "sourceFingerprint": "6c46f55874e736d71c9ca2746ffd18d119e3e251a3669a900e612098ba1169d4",
+      "sha256": "1b7d838ed2478d0efc0f977476cd9ac49090a1079ebc8d4a79e625da7af7de6d",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/1b7d838ed2478d0efc0f977476cd9ac49090a1079ebc8d4a79e625da7af7de6d.png"
+    },
+    {
+      "entryId": "bbaf364b8296dc31",
+      "pos": "n.",
+      "baseMeaning": "은행",
+      "sourceFingerprint": "e6d9d3a93f3e743453345dcd51c08e7ecfc4c90a0745f459e6068b8d6786fae1",
+      "sha256": "b785a8dee93c90a407bdbfc4d4513ce90d3abb32fcb5e8d6dd265537584c672e",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/b785a8dee93c90a407bdbfc4d4513ce90d3abb32fcb5e8d6dd265537584c672e.png"
+    },
+    {
+      "entryId": "7d0090e31581cfbc",
+      "pos": "n.",
+      "baseMeaning": "강둑",
+      "sourceFingerprint": "8c2f4973b157c77ac9759d88e6c6ef499cd3c49ca3d0cc64acad1db8f5aca559",
+      "sha256": "6be29d59cb3346c5085b7f5efe00cde7407a983df1dc7b78e88c043265aa13fa",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/6be29d59cb3346c5085b7f5efe00cde7407a983df1dc7b78e88c043265aa13fa.png"
+    },
+    {
+      "entryId": "ff5920d7a9cc4dc1",
+      "pos": "adj.",
+      "baseMeaning": "밝은",
+      "sourceFingerprint": "dc7dbdb72c3aeba2085312929ab0acffd7b9c120fbbc552d45f9811e26a6cbb0",
+      "sha256": "6808b6b4dd9e5b34ce7ae6863acee3633db6a2909a6764a92af26996826ffcdb",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/6808b6b4dd9e5b34ce7ae6863acee3633db6a2909a6764a92af26996826ffcdb.png"
+    },
+    {
+      "entryId": "3d61cb48c5e328b3",
+      "pos": "adj.",
+      "baseMeaning": "가벼운",
+      "sourceFingerprint": "1b84c8c731046424df47ccd6965a102b842d1e9da911c89857ac92fdd6b2ae63",
+      "sha256": "ab717fe1126ab79e887b92a084cb97475d1b5781edb6f9282c1138faf1c16918",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/ab717fe1126ab79e887b92a084cb97475d1b5781edb6f9282c1138faf1c16918.png"
+    },
+    {
+      "entryId": "edc5dbe7137fd1e4",
+      "pos": "n.",
+      "baseMeaning": "기록",
+      "sourceFingerprint": "efe510c363d0b463c14618becc2991551bcfef86515a7ef7fb52f2dcde34bd66",
+      "sha256": "c98cb50e4d627b76dc6af377eb9855792b512826d4053074e3aa23467e9accda",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/c98cb50e4d627b76dc6af377eb9855792b512826d4053074e3aa23467e9accda.png"
+    },
+    {
+      "entryId": "0cfe94787a643244",
+      "pos": "v.",
+      "baseMeaning": "녹음하다",
+      "sourceFingerprint": "dccb6a13507a64ae0d6c2689281e69ddbface4247269a8f6ab41a8440be745b5",
+      "sha256": "5deb9127f98bae81e3bedf08eb71254bcbecac20d4f82ee2326162918707225d",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/5deb9127f98bae81e3bedf08eb71254bcbecac20d4f82ee2326162918707225d.png"
+    },
+    {
+      "entryId": "24a628a66305abe3",
+      "pos": "prep.",
+      "baseMeaning": "~아래에",
+      "sourceFingerprint": "7ef993b30a1d473391072947c811f9815f232e514e2182b0345c7cff0d78a895",
+      "sha256": "18da4ca4553ac317019cc8e7b8fd4c27458dcc492cb1ad71af3d3db1293af6da",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/18da4ca4553ac317019cc8e7b8fd4c27458dcc492cb1ad71af3d3db1293af6da.png"
+    },
+    {
+      "entryId": "e4bb7a482ef799cf",
+      "pos": "conj.",
+      "baseMeaning": "~이기 때문에",
+      "sourceFingerprint": "474d7b24dfd28cd7cd579962d1d19a7cd3828f08d1a738b40162d06340ea8a5b",
+      "sha256": "eb96e67819fdb3c7f7dfed3971a105d20b9ea2d7564be2c32cfe6f3bbba31606",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/eb96e67819fdb3c7f7dfed3971a105d20b9ea2d7564be2c32cfe6f3bbba31606.png"
+    },
+    {
+      "entryId": "297bb80156b3fbbb",
+      "pos": "indefinite article",
+      "baseMeaning": "하나의 (불특정한 하나)",
+      "sourceFingerprint": "6273f0082f8eb4050d4efef1da77855c8f9cf9474accdd98d2095c0b232874b8",
+      "sha256": "e0e3441cc20da2a72ecf24f1d13a4a1eb271df6a9e7bfcaa77aedc3f2c180995",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/e0e3441cc20da2a72ecf24f1d13a4a1eb271df6a9e7bfcaa77aedc3f2c180995.png"
+    },
+    {
+      "entryId": "3252a93921452ecf",
+      "pos": "definite article",
+      "baseMeaning": "그; 특정한 대상을 나타내는 관사",
+      "sourceFingerprint": "01e05a5462a42fbbc3fe0c39071d4f6899f6d8ec546428c58ab5ec34b9d6a49c",
+      "sha256": "5885919e34fae06b03128321fdb86d33c4f23b1c56c6257a2996f4adf6a19975",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/5885919e34fae06b03128321fdb86d33c4f23b1c56c6257a2996f4adf6a19975.png"
+    },
+    {
+      "entryId": "9d7dc668641d5e80",
+      "pos": "modal v.",
+      "baseMeaning": "~하시겠어요? (정중한 권유)",
+      "sourceFingerprint": "57da6c695c5cd823fe55fba216d12a7cbe1f987920f4940dd540566fa208423d",
+      "sha256": "eb04a02c34deef9d5e9747601da9f92a66258f67b5d5efb16f7251dbee1faded",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/eb04a02c34deef9d5e9747601da9f92a66258f67b5d5efb16f7251dbee1faded.png"
+    },
+    {
+      "entryId": "a3e22f23c501f85a",
+      "pos": "n.",
+      "baseMeaning": "자유",
+      "sourceFingerprint": "6e0a5ecf13333c97766bd1a6f5e2bcd853e5533302af1560999e4d5400838a52",
+      "sha256": "65fa93022ac98ad4cf25daa591cb489d41d2755977dee759fece5298af26194b",
+      "width": 1086,
+      "height": 1448,
+      "url": "/oxford-image-pilot/65fa93022ac98ad4cf25daa591cb489d41d2755977dee759fece5298af26194b.png"
+    }
+  ]
+}
