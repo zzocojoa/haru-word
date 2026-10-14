@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 2,
+  "round": 4,
+  "proposalId": "f6b41d9e-4c2c-49eb-aa56-722b6d17051d",
+  "createdAt": "2026-10-14T07:35:50.906Z",
+  "executionAllowed": false,
+  "authorization": null,
+  "status": "inert-proposal-covered-by-separate-standing-human-approval",
+  "sourceSnapshot": {
+    "dataset": {
+      "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722",
+      "sha256": "14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+      "fingerprintAlgorithm": "sha256(wordsSha256 + \":\" + contentSha256)"
+    },
+    "baseCommit": "ecc519c65752f37db82c3fb60f8cd6ff0ae4720c",
+    "manifestSha256": "4c5710f3902525ce947f2cdcb9b6c08aa1bcb084f6f0d21a0a80d1765af990d8",
+    "ledgerSha256": "8c7098a3ad82d5f86e7a893ea9d8ae8629da1a1204d456f30830d9965ff72cf2",
+    "firstApprovalSnapshotSha256": "f15afb85307bcebafba918c44c48f5d24120ce1d1c17fef5b8e9d75a2b554fa1",
+    "continuationApprovalSha256": "b57a5a0451344504972482e6f546dd19eecc353b59f34ec241e91afb023a7863"
+  },
+  "standingApprovalId": "9da7b313-691e-4625-8997-c0a3c085bd10",
+  "countsBefore": {
+    "total": 3809,
+    "waiting": 0,
+    "generating": 0,
+    "generated": 0,
+    "approved": 3801,
+    "held": 7,
+    "failed": 1
+  },
+  "currentStartSlots": 4073,
+  "proposedStartSlotLimit": 4,
+  "maximumStartSlotsAfterProposal": 4077,
+  "oneAdditionalStartPerEntry": true,
+  "automaticRetry": false,
+  "provider": "built-in-image_gen",
+  "executionOrder": [
+    "be07fba791d085bf",
+    "0d7bac9fcb8781f0",
+    "f700d1982a2723a8",
+    "e6ef86e165ecc3be"
+  ],
+  "style": {
+    "stylePrefix": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.",
+    "referenceInstruction": "Input image 1 is a STYLE REFERENCE ONLY: match its clean background, restrained illustrative surface and uncluttered adult composition. Draw the requested NEW subject; do not include an apple unless the requested subject calls for it.",
+    "reference": "adb44eba7b3ceef3-apple-v1.png",
+    "assetRoot": "outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+    "oldNativeInventory": 0,
+    "referenceEntryId": "adb44eba7b3ceef3",
+    "referenceSha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+  },
+  "entries": [
+    {
+      "entryId": "be07fba791d085bf",
+      "word": "thousand",
+      "pos": "number",
+      "level": "A1",
+      "baseMeaning": "1,000; 천",
+      "sourceFingerprint": "9844f3ab0d6182ce9f7819ea92ad51dd7e90f860464006b5d297c903a9258e5c",
+      "canonicalContent": {
+        "meaning": "1,000; 천",
+        "ipa": "",
+        "expression": "a thousand people",
+        "example": "A thousand tourists visited the island today.",
+        "translation": "오늘 관광객 천 명이 그 섬을 방문했어요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "천 명"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 5,
+      "currentImage": "be07fba791d085bf-thousand-v5.png",
+      "currentImageSha256": "7eff1a242c2f928e08da22f319cda6ebc7c0be0e88cc0fa6eacf0cbbbd9017f3",
+      "entrySnapshotSha256": "7a3db62aa6152cbbbdb8563383031c0d8d81b3a43c45de65ec53182c5dd66f0d",
+      "attemptsSnapshotSha256": "4ec077e6be21b6e052accbaea455abc02ab616ff420080c69af9c24ae7308592",
+      "latestReviewBasis": "원본/320px에서 정면 가로10·높이10을 확인해 이전11열 문제는 해소됐다. 하지만 오른쪽 윗모서리를 Chromium CSS4배로 실제 확대해 앞 경계부터 뒤 경계까지 깊이8칸을 직접 세었다. 10×10×10 구성의 깊이10 조건이 남아 의미/수량 보류한다. 숨은 내부 수량을 관측했다고 하지 않으며 글자/독립 표식·스타일/PNG는 통과했다. v4/v5·확대 근거를 보존하고 다음 품질 수정은 앞면10×10을 유지하며 깊이 두 층 보완에 집중한다.",
+      "mode": "redraw",
+      "title": "세 면 폭을 넓힌 등각 격자",
+      "defect": "원본/320px에서 정면 가로10·높이10을 확인해 이전11열 문제는 해소됐다. 하지만 오른쪽 윗모서리를 Chromium CSS4배로 실제 확대해 앞 경계부터 뒤 경계까지 깊이8칸을 직접 세었다. 10×10×10 구성의 깊이10 조건이 남아 의미/수량 보류한다. 숨은 내부 수량을 관측했다고 하지 않으며 글자/독립 표식·스타일/PNG는 통과했다. v4/v5·확대 근거를 보존하고 다음 품질 수정은 앞면10×10을 유지하며 깊이 두 층 보완에 집중한다.",
+      "scenePrompt": "A single physical wooden cube assembled from identical small cubical blocks, viewed in TRUE ISOMETRIC projection, with the front and right visible faces equally broad and the top equally deep. Exactly TEN unit cubes span every edge: ten across, ten high, ten deep, thus a thousand units implied by the regular cubical construction. Each visible face is a ten-by-ten square lattice. Between the two outer boundaries there are NINE internal straight physical joints along each independent axis. Place a slightly darker continuous physical joint at the middle, after the fifth unit, making each edge countable as five plus five equal cells. Do not shorten the depth to seven or eight cells. All grids connect at the shared edges; all unit cubes have equal physical size. No detached cubes, text, numeric marks, counting ticks or decorative grid overlay. The visible outer dimensions permit counting; the interior is implied, not directly visible.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: A single physical wooden cube assembled from identical small cubical blocks, viewed in TRUE ISOMETRIC projection, with the front and right visible faces equally broad and the top equally deep. Exactly TEN unit cubes span every edge: ten across, ten high, ten deep, thus a thousand units implied by the regular cubical construction. Each visible face is a ten-by-ten square lattice. Between the two outer boundaries there are NINE internal straight physical joints along each independent axis. Place a slightly darker continuous physical joint at the middle, after the fifth unit, making each edge countable as five plus five equal cells. Do not shorten the depth to seven or eight cells. All grids connect at the shared edges; all unit cubes have equal physical size. No detached cubes, text, numeric marks, counting ticks or decorative grid overlay. The visible outer dimensions permit counting; the interior is implied, not directly visible.\nInput image1 is STYLE REFERENCE ONLY. Draw the new scene with the same clean warm background and restrained adult illustration style; do not copy the apple.",
+      "fullPromptSha256": "108f720f8584f40013b1868f458044c7d7979dfd880f3b0f038910871018694b",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 6,
+      "proposedFilename": "be07fba791d085bf-thousand-v6.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "정면 가로10·높이10·깊이10의 실제 구간을 독립적으로 세고 세 면의 접합 일치를 기록한다.",
+        "내부 1000개를 직접 관측했다고 표시하지 않는다. 깊이/행/열이 불명확하거나 불일치하면 보류한다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "0d7bac9fcb8781f0",
+      "word": "traffic",
+      "pos": "n.",
+      "level": "A1",
+      "baseMeaning": "교통; 차량 통행",
+      "sourceFingerprint": "aba52e9db8146b657d9e101020318e5c3d6018e27a1d7b6339bd35fb8af385bb",
+      "canonicalContent": {
+        "meaning": "교통; 차량 통행",
+        "ipa": "",
+        "expression": "heavy traffic",
+        "example": "There is heavy traffic near the station.",
+        "translation": "역 근처는 교통이 혼잡해요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "많은 교통량"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 5,
+      "currentImage": "0d7bac9fcb8781f0-traffic-v5.png",
+      "currentImageSha256": "7c9b9b7e75b01eac9fd5f1d936d9db36a71514f86365bd75aa1a3f2d72b55042",
+      "entrySnapshotSha256": "a169534e18b996a02a4d8b8bd794b377ac3dae46fb7689bba2932ec5e97977ba",
+      "attemptsSnapshotSha256": "d143aa35caf120361d3b0956414a3a8368ed67f5ec499f7703138622861e8e3b",
+      "latestReviewBasis": "원본/320px와 짙은 차량 뒤 패널의 Chromium CSS5배 확대에서 같은 위치의 희미한 원형 흔적이 다시 남은 것을 확인했다. 좌표 지정 수정으로도 독립 윤곽이 완전히 제거되지 않아 무표식 조건은 미달이다. 특정 브랜드/문자나 기능적 버튼으로 확정하지 않는다. 차량 통행/역 주변 관계·스타일/PNG는 유지되며 v4/v5/확대 근거를 보존한다. 다음 회차에는 같은 뜻을 전달하는 새 수직 위쪽 구도로 차량 표면을 단순화하되 실제로 보이는 면의 표식을 다시 검사한다.",
+      "mode": "redraw",
+      "title": "역 부근 차량 행렬의 수직 시점",
+      "defect": "원본/320px와 짙은 차량 뒤 패널의 Chromium CSS5배 확대에서 같은 위치의 희미한 원형 흔적이 다시 남은 것을 확인했다. 좌표 지정 수정으로도 독립 윤곽이 완전히 제거되지 않아 무표식 조건은 미달이다. 특정 브랜드/문자나 기능적 버튼으로 확정하지 않는다. 차량 통행/역 주변 관계·스타일/PNG는 유지되며 v4/v5/확대 근거를 보존한다. 다음 회차에는 같은 뜻을 전달하는 새 수직 위쪽 구도로 차량 표면을 단순화하되 실제로 보이는 면의 표식을 다시 검사한다.",
+      "scenePrompt": "A small road beside a railway station and train platform, shown from a truly vertical overhead viewpoint. Five plain passenger cars queue closely along the road, conveying heavy vehicle traffic near the station. Show the car roofs and ordinary front and rear window shapes from above, without exposing rear manufacturer panels. All visible vehicle surfaces are smooth and plain; use no roof ornament, emblem, badge, ring, brand, plate writing, letter or number. The train and plain platform have no printed markings. Keep simple road and rail geometry, no diagram arrows, traffic symbols, clocks or caption. Use a new composition rather than hiding or blurring the old rear badge.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: A small road beside a railway station and train platform, shown from a truly vertical overhead viewpoint. Five plain passenger cars queue closely along the road, conveying heavy vehicle traffic near the station. Show the car roofs and ordinary front and rear window shapes from above, without exposing rear manufacturer panels. All visible vehicle surfaces are smooth and plain; use no roof ornament, emblem, badge, ring, brand, plate writing, letter or number. The train and plain platform have no printed markings. Keep simple road and rail geometry, no diagram arrows, traffic symbols, clocks or caption. Use a new composition rather than hiding or blurring the old rear badge.\nInput image1 is STYLE REFERENCE ONLY. Draw the new scene with the same clean warm background and restrained adult illustration style; do not copy the apple.",
+      "fullPromptSha256": "a6dd231a0a4465b01e01d94ecf1bff60f3198345f5f1c6135b4e92dec8f952b4",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 6,
+      "proposedFilename": "0d7bac9fcb8781f0-traffic-v6.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "차량 통행/도로/역 맥락을 유지한다. 임의 차량 개수는 교재의 정답 조건으로 삼지 않는다.",
+        "모든 보이는 후면/차체의 표식 제거를 원본과 필요 확대에서 확인한다. 흐려진 윤곽은 제거 통과가 아니다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "f700d1982a2723a8",
+      "word": "billion",
+      "pos": "number",
+      "level": "A2",
+      "baseMeaning": "십억",
+      "sourceFingerprint": "9bee14bb6d20c4659c46bf93e0efef6d88a9f270e849fdcd82c840db34be7535",
+      "canonicalContent": {
+        "meaning": "십억",
+        "ipa": "",
+        "expression": "one billion",
+        "example": "One billion is a thousand million.",
+        "translation": "십억은 백만의 천 배예요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "10억"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 5,
+      "currentImage": "f700d1982a2723a8-billion-v5.png",
+      "currentImageSha256": "a703f71fbfdaaaebc411ba03509a5ffeb01788e86c77dc7184c6991ca73234c5",
+      "entrySnapshotSha256": "9c178fab8cce6200bb5b066ad6b427b3547c59ffc6c505970b011cd860e41eeb",
+      "attemptsSnapshotSha256": "5353df96b6d9a51cf96118d5c75e6a4cd31692586d5dcd3ef61d227fece0036e",
+      "latestReviewBasis": "원본과 실제 CSS 4배 확대를 대조했다. 앞면은 가로10칸·세로10칸으로 수정됐으나 오른쪽 깊이는 앞 경계에서 뒤 경계까지7칸(내부6경계)이다. 세 축10칸 계약을 충족하지 않아 billion의 수량 관계를 확인할 수 없으므로 보류한다. 작은 비교 큐브와의 단위 크기 일치도 이번 검수에서는 확정하지 않았다.",
+      "mode": "redraw",
+      "title": "십억 배율의 등각 천 단위 구조",
+      "defect": "원본과 실제 CSS 4배 확대를 대조했다. 앞면은 가로10칸·세로10칸으로 수정됐으나 오른쪽 깊이는 앞 경계에서 뒤 경계까지7칸(내부6경계)이다. 세 축10칸 계약을 충족하지 않아 billion의 수량 관계를 확인할 수 없으므로 보류한다. 작은 비교 큐브와의 단위 크기 일치도 이번 검수에서는 확정하지 않았다.",
+      "scenePrompt": "A blue physical cube assembled from exactly a ten-by-ten-by-ten regular array of identical unit cubes, in TRUE ISOMETRIC projection: front and right faces have equal projected breadth, and all three visible faces show ten rows by ten columns. Every independent edge has nine internal physical joints between its outer ends, giving ten intervals. A slightly darker continuous joint after the fifth unit divides each edge into two groups of five equal units, never seven/eight in depth. All joints meet at shared corners. Beside the large cube on the same ground plane, place one detached blue reference cube equal in physical size and projected edge length to ONE small unit on the large cube's nearest lower corner. No letters, numerals, arrows or grid annotations. The textbook convention gives each small unit a million, so the thousand-unit regular array relates to a billion; the textless image itself does not encode that unit convention or reveal the hidden interior.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: A blue physical cube assembled from exactly a ten-by-ten-by-ten regular array of identical unit cubes, in TRUE ISOMETRIC projection: front and right faces have equal projected breadth, and all three visible faces show ten rows by ten columns. Every independent edge has nine internal physical joints between its outer ends, giving ten intervals. A slightly darker continuous joint after the fifth unit divides each edge into two groups of five equal units, never seven/eight in depth. All joints meet at shared corners. Beside the large cube on the same ground plane, place one detached blue reference cube equal in physical size and projected edge length to ONE small unit on the large cube's nearest lower corner. No letters, numerals, arrows or grid annotations. The textbook convention gives each small unit a million, so the thousand-unit regular array relates to a billion; the textless image itself does not encode that unit convention or reveal the hidden interior.\nInput image1 is STYLE REFERENCE ONLY. Draw the new scene with the same clean warm background and restrained adult illustration style; do not copy the apple.",
+      "fullPromptSha256": "48f18493fad3fd17e6cc28e4ec93743df7c87468d42122259ee41bb46e22b0fb",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 6,
+      "proposedFilename": "f700d1982a2723a8-billion-v6.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "가로/높이/깊이10 구간과 면의 연결을 원본/확대에서 확인한다. 숨은 수량은 구성에서의 추론과 구분한다.",
+        "별도 기준 큐브와 묶음 단위의 원근상 크기 일치를 확인하며, 백만 단위 설명은 교재가 제공한다는 한계를 유지한다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "e6ef86e165ecc3be",
+      "word": "bee",
+      "pos": "n.",
+      "level": "B1",
+      "baseMeaning": "벌",
+      "sourceFingerprint": "11e788aed61af65596f93037b8190ae302c799cf6c69220c950c99772bd3b867",
+      "canonicalContent": {
+        "meaning": "벌",
+        "ipa": "",
+        "expression": "a honey bee",
+        "example": "A bee flew past a floating soap bubble.",
+        "translation": "벌 한 마리가 떠다니는 비눗방울 옆으로 날아갔어요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "꿀벌"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 5,
+      "currentImage": "e6ef86e165ecc3be-bee-v5.png",
+      "currentImageSha256": "5c282547636900aed6436a1ea04fa18cf2e77af46ffddcf41f6d33bbb5a9cf13",
+      "entrySnapshotSha256": "42674ce358648919eb60dbb588a59a026bae9b8b19c69958f3cb902871b502a2",
+      "attemptsSnapshotSha256": "c67a00dc376209ae07fec4ab38118bb6a0bc96aba1851ecb9eccaaa069b0658a",
+      "latestReviewBasis": "원본·320px에서 두 쌍의 날개(큰 앞날개와 작은 뒷날개 각 좌우), 두 더듬이는 구분된다. 그러나 가슴에서 끝까지 독립적으로 추적 가능한 다리는 왼쪽2개·오른쪽2개뿐이며 세 번째 양쪽 다리의 부착점과 끝은 확인할 수 없다. 가려진 다리가 없다고 단정하지 않지만 여섯 다리 구조를 검증하지 못하므로 보류한다.",
+      "mode": "edit",
+      "title": "가슴의 다리 세 쌍 분리",
+      "defect": "원본·320px에서 두 쌍의 날개(큰 앞날개와 작은 뒷날개 각 좌우), 두 더듬이는 구분된다. 그러나 가슴에서 끝까지 독립적으로 추적 가능한 다리는 왼쪽2개·오른쪽2개뿐이며 세 번째 양쪽 다리의 부착점과 끝은 확인할 수 없다. 가려진 다리가 없다고 단정하지 않지만 여섯 다리 구조를 검증하지 못하므로 보류한다.",
+      "scenePrompt": "Keep the current frontal bee, its four individually outlined wings, two antennae, striped abdomen and separate bubble. Correct the leg structure: the current bee has only FOUR independently traceable legs. Rebuild SIX jointed legs as three bilateral pairs attached to the hairy THORAX, with distinct origins and distinct clawed ends. The FRONT pair extends laterally and slightly upward into the space below the wing roots; the MIDDLE pair extends diagonally outward and downward; the HIND pair extends farther downward on either side of the abdomen while still beginning at the lower thorax, never the abdomen. Separate all six leg silhouettes so none disappears behind another leg or the abdomen. No disconnected extra limbs. Preserve the larger forewing and smaller hindwing on each side, with four wing outlines total. Do not add wings, text, labels, arrows or decorative markings.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Keep the current frontal bee, its four individually outlined wings, two antennae, striped abdomen and separate bubble. Correct the leg structure: the current bee has only FOUR independently traceable legs. Rebuild SIX jointed legs as three bilateral pairs attached to the hairy THORAX, with distinct origins and distinct clawed ends. The FRONT pair extends laterally and slightly upward into the space below the wing roots; the MIDDLE pair extends diagonally outward and downward; the HIND pair extends farther downward on either side of the abdomen while still beginning at the lower thorax, never the abdomen. Separate all six leg silhouettes so none disappears behind another leg or the abdomen. No disconnected extra limbs. Preserve the larger forewing and smaller hindwing on each side, with four wing outlines total. Do not add wings, text, labels, arrows or decorative markings.\nInput image1 is the sole EDIT TARGET. Input image2 is STYLE REFERENCE ONLY. Correct the stated defect; preserve the warm restrained illustration style and all other valid meaning relations. Do not copy the apple.",
+      "fullPromptSha256": "dd0ea519fd2063a43d3d4576ec6cf45ee99e63d0b7fa67d7342a4935c9c7a40f",
+      "references": [
+        {
+          "role": "edit-target",
+          "file": "e6ef86e165ecc3be-bee-v5.png",
+          "sha256": "5c282547636900aed6436a1ea04fa18cf2e77af46ffddcf41f6d33bbb5a9cf13"
+        },
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 6,
+      "proposedFilename": "e6ef86e165ecc3be-bee-v6.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "더듬이2·가슴 부착 다리3쌍·앞날개/뒷날개2쌍을 추적한다. 날개 엽을 독립 날개로 오인하지 않는다.",
+        "가림으로 부재를 확정하지 않지만 요구한 연결을 확인 못하면 보류한다. 특정 종·독성·안전·실제 비행은 인증하지 않는다."
+      ],
+      "candidateSuccessVerified": false
+    }
+  ],
+  "policyAdditionalStartSlotLimit": 0,
+  "serviceFailureAdditionalStartSlotLimit": 0,
+  "fullGoalComplete": false
+}
