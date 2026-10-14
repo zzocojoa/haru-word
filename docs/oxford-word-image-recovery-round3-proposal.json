@@ -1,0 +1,412 @@
+{
+  "schemaVersion": 2,
+  "round": 3,
+  "proposalId": "e6d38424-955d-431f-aa9f-677f48316c97",
+  "createdAt": "2026-10-14T06:46:23.540Z",
+  "executionAllowed": false,
+  "authorization": null,
+  "status": "inert-proposal-covered-by-separate-standing-human-approval",
+  "sourceSnapshot": {
+    "dataset": {
+      "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722",
+      "sha256": "14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+      "fingerprintAlgorithm": "sha256(wordsSha256 + \":\" + contentSha256)"
+    },
+    "baseCommit": "db112258c09787f35396bec40cf5cf03f5e8ed49",
+    "manifestSha256": "dc38167a1f4680a79e6f474b73ca66fd2fa3e3c35af2697d1f10f5a4dd902c31",
+    "ledgerSha256": "1a7f80a324952b8556fd52f2a6af77663eb204179265bde5c4ce4ebc4486eafc",
+    "firstApprovalSnapshotSha256": "f15afb85307bcebafba918c44c48f5d24120ce1d1c17fef5b8e9d75a2b554fa1",
+    "continuationApprovalSha256": "b57a5a0451344504972482e6f546dd19eecc353b59f34ec241e91afb023a7863"
+  },
+  "standingApprovalId": "9da7b313-691e-4625-8997-c0a3c085bd10",
+  "countsBefore": {
+    "total": 3809,
+    "waiting": 0,
+    "generating": 0,
+    "generated": 0,
+    "approved": 3798,
+    "held": 10,
+    "failed": 1
+  },
+  "currentStartSlots": 4066,
+  "proposedStartSlotLimit": 7,
+  "maximumStartSlotsAfterProposal": 4073,
+  "oneAdditionalStartPerEntry": true,
+  "automaticRetry": false,
+  "provider": "built-in-image_gen",
+  "executionOrder": [
+    "be07fba791d085bf",
+    "0d7bac9fcb8781f0",
+    "f700d1982a2723a8",
+    "07c93bc7b78e3417",
+    "e6ef86e165ecc3be",
+    "23b39a0a0e1e9917",
+    "35accde7772b0871"
+  ],
+  "style": {
+    "stylePrefix": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.",
+    "referenceInstruction": "Input image 1 is a STYLE REFERENCE ONLY: match its clean background, restrained illustrative surface and uncluttered adult composition. Draw the requested NEW subject; do not include an apple unless the requested subject calls for it.",
+    "reference": "adb44eba7b3ceef3-apple-v1.png",
+    "assetRoot": "outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+    "oldNativeInventory": 0,
+    "referenceEntryId": "adb44eba7b3ceef3",
+    "referenceSha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+  },
+  "entries": [
+    {
+      "entryId": "be07fba791d085bf",
+      "word": "thousand",
+      "pos": "number",
+      "level": "A1",
+      "baseMeaning": "1,000; 천",
+      "sourceFingerprint": "9844f3ab0d6182ce9f7819ea92ad51dd7e90f860464006b5d297c903a9258e5c",
+      "canonicalContent": {
+        "meaning": "1,000; 천",
+        "ipa": "",
+        "expression": "a thousand people",
+        "example": "A thousand tourists visited the island today.",
+        "translation": "오늘 관광객 천 명이 그 섬을 방문했어요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "천 명"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 4,
+      "currentImage": "be07fba791d085bf-thousand-v4.png",
+      "currentImageSha256": "0255790f112ff7e509f11296192219fb7a5f6677815c1755a304c263e78ad6a1",
+      "entrySnapshotSha256": "63553287710de4ebca98ab1b8089bf415309a07d6762908bcb4cbad47029de59",
+      "attemptsSnapshotSha256": "39cc4c2f7efe1fe204f4e9a6ac2cf9a9df56232decb57302f5da559ef5539f85",
+      "latestReviewBasis": "원본/실제320px에서 정면 높이10단과 가로11열을 직접 세었다. 높이는 고쳐졌지만 가로10 조건이 깨져 10×10×10 구성으로 검수 통과할 수 없다. 깊이10/숨은 내부 수량도 추가로 인증하지 않는다. 글자/독립 로고 없음·기준 스타일/PNG는 통과이며 수량/의미 검수는 미달이다. v3/v4와 두 검사 근거를 보존하고 사용자가 허용한 품질 반복 범위에서 다음 회차에 결함을 다시 수정한다.",
+      "mode": "edit",
+      "title": "내부 경계9개와10칸 구분",
+      "defect": "원본/실제320px에서 정면 높이10단과 가로11열을 직접 세었다. 높이는 고쳐졌지만 가로10 조건이 깨져 10×10×10 구성으로 검수 통과할 수 없다. 깊이10/숨은 내부 수량도 추가로 인증하지 않는다. 글자/독립 로고 없음·기준 스타일/PNG는 통과이며 수량/의미 검수는 미달이다. v3/v4와 두 검사 근거를 보존하고 사용자가 허용한 품질 반복 범위에서 다음 회차에 결함을 다시 수정한다.",
+      "scenePrompt": "Correct the wooden assembly's lattice in the edit target, not its color or background. The current front incorrectly contains ELEVEN columns. Redraft a regular cube with TEN unit cells in each of its three dimensions. For every independent visible edge there are TWO outer boundaries and exactly NINE internal joints, yielding TEN intervals, never ten internal cuts or eleven cells. Keep exactly ten rows high as well. Make the top and right surfaces agree with the front at every corner: ten across, ten high, ten deep, same-sized unit cubes in natural perspective. Use physical wood joints only, with no numeric labels, counted markers, arrows or artificial annotation. No added loose cubes. The front, top and right face must remain independently countable; the unobserved interior is implied by the regular construction, not directly shown.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Correct the wooden assembly's lattice in the edit target, not its color or background. The current front incorrectly contains ELEVEN columns. Redraft a regular cube with TEN unit cells in each of its three dimensions. For every independent visible edge there are TWO outer boundaries and exactly NINE internal joints, yielding TEN intervals, never ten internal cuts or eleven cells. Keep exactly ten rows high as well. Make the top and right surfaces agree with the front at every corner: ten across, ten high, ten deep, same-sized unit cubes in natural perspective. Use physical wood joints only, with no numeric labels, counted markers, arrows or artificial annotation. No added loose cubes. The front, top and right face must remain independently countable; the unobserved interior is implied by the regular construction, not directly shown.\nInput image1 is the sole EDIT TARGET. Input image2 is STYLE REFERENCE ONLY. Correct the stated defect; preserve the warm restrained illustration style and all other valid meaning relations. Do not copy the apple.",
+      "fullPromptSha256": "0d605a8902c78b3a7c8155c4375b50cbce8b0d3f384dcc748a9c3f6042b52093",
+      "references": [
+        {
+          "role": "edit-target",
+          "file": "be07fba791d085bf-thousand-v4.png",
+          "sha256": "0255790f112ff7e509f11296192219fb7a5f6677815c1755a304c263e78ad6a1"
+        },
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 5,
+      "proposedFilename": "be07fba791d085bf-thousand-v5.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "정면 가로10·높이10·깊이10의 실제 구간을 독립적으로 세고 세 면의 접합 일치를 기록한다.",
+        "내부 1000개를 직접 관측했다고 표시하지 않는다. 깊이/행/열이 불명확하거나 불일치하면 보류한다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "0d7bac9fcb8781f0",
+      "word": "traffic",
+      "pos": "n.",
+      "level": "A1",
+      "baseMeaning": "교통; 차량 통행",
+      "sourceFingerprint": "aba52e9db8146b657d9e101020318e5c3d6018e27a1d7b6339bd35fb8af385bb",
+      "canonicalContent": {
+        "meaning": "교통; 차량 통행",
+        "ipa": "",
+        "expression": "heavy traffic",
+        "example": "There is heavy traffic near the station.",
+        "translation": "역 근처는 교통이 혼잡해요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "많은 교통량"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 4,
+      "currentImage": "0d7bac9fcb8781f0-traffic-v4.png",
+      "currentImageSha256": "05b68123ae42e7e0f7494b6e2a8e9f9274be12f971d3f13cc05ecbcfbfed294e",
+      "entrySnapshotSha256": "38061b8ad671afcc025cd0be6c3452318a49e3e62f765c0969710c35026e27eb",
+      "attemptsSnapshotSha256": "0edecbbf84d6b8d31298992e49549593f2aea8c90fc896979173dcb962980434",
+      "latestReviewBasis": "원본/320px에서 차량5·역 옆 도로 행렬과 교통 의미를 확인했다. 앞 파란 차량 등 주요 배지는 없어졌지만 짙은 차량 뒤 중앙의 희미한 독립 원형 윤곽이 남았다. Chromium CSS5배로 해당 후면을 실제 확대해 원형 흔적을 확인했으며 특정 브랜드/문자나 기능 버튼으로 확정하지 않는다. 흐리게 남은 표식을 제거 성공으로 처리하지 않아 무표식 검수는 미달이다. 원본은 변경하지 않았고 기능 램프/접합선·스타일/PNG는 유지된다. 기존 v3/v4/확대 근거를 보존하며 승인된 품질 반복 범위에서 이 윤곽을 다음 회차에 다시 제거한다.",
+      "mode": "edit",
+      "title": "확인된 짙은 차량 원형 흔적 제거",
+      "defect": "원본/320px에서 차량5·역 옆 도로 행렬과 교통 의미를 확인했다. 앞 파란 차량 등 주요 배지는 없어졌지만 짙은 차량 뒤 중앙의 희미한 독립 원형 윤곽이 남았다. Chromium CSS5배로 해당 후면을 실제 확대해 원형 흔적을 확인했으며 특정 브랜드/문자나 기능 버튼으로 확정하지 않는다. 흐리게 남은 표식을 제거 성공으로 처리하지 않아 무표식 검수는 미달이다. 원본은 변경하지 않았고 기능 램프/접합선·스타일/PNG는 유지된다. 기존 v3/v4/확대 근거를 보존하며 승인된 품질 반복 범위에서 이 윤곽을 다음 회차에 다시 제거한다.",
+      "scenePrompt": "Correct the remaining circular ghost mark on the DARK GREY CAR, the second car from the far end of the queue. It is centered directly below that car's rear window, approximately pixel x276,y544 in the1086x1448 edit target. Repaint the entire small marked rear-panel region with continuous matching dark-grey body paint, eliminating the ring, center dot and embossed/ghost outline completely. It must be a smooth plain panel, not a lighter blur or a smaller emblem. Preserve the window, both red lamps, natural outer body seams and all five cars near the railway platform; keep the already-plain other rear panels. No new manufacturer details, lettering, license characters or decorative symbols. Do not crop or cover the defect.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Correct the remaining circular ghost mark on the DARK GREY CAR, the second car from the far end of the queue. It is centered directly below that car's rear window, approximately pixel x276,y544 in the1086x1448 edit target. Repaint the entire small marked rear-panel region with continuous matching dark-grey body paint, eliminating the ring, center dot and embossed/ghost outline completely. It must be a smooth plain panel, not a lighter blur or a smaller emblem. Preserve the window, both red lamps, natural outer body seams and all five cars near the railway platform; keep the already-plain other rear panels. No new manufacturer details, lettering, license characters or decorative symbols. Do not crop or cover the defect.\nInput image1 is the sole EDIT TARGET. Input image2 is STYLE REFERENCE ONLY. Correct the stated defect; preserve the warm restrained illustration style and all other valid meaning relations. Do not copy the apple.",
+      "fullPromptSha256": "45a981e0b751d87851ee7843f229c1f3ef3bc5b602e54e5dc332e1a1141e699d",
+      "references": [
+        {
+          "role": "edit-target",
+          "file": "0d7bac9fcb8781f0-traffic-v4.png",
+          "sha256": "05b68123ae42e7e0f7494b6e2a8e9f9274be12f971d3f13cc05ecbcfbfed294e"
+        },
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 5,
+      "proposedFilename": "0d7bac9fcb8781f0-traffic-v5.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "차량 통행/도로/역 맥락을 유지한다. 임의 차량 개수는 교재의 정답 조건으로 삼지 않는다.",
+        "모든 보이는 후면/차체의 표식 제거를 원본과 필요 확대에서 확인한다. 흐려진 윤곽은 제거 통과가 아니다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "f700d1982a2723a8",
+      "word": "billion",
+      "pos": "number",
+      "level": "A2",
+      "baseMeaning": "십억",
+      "sourceFingerprint": "9bee14bb6d20c4659c46bf93e0efef6d88a9f270e849fdcd82c840db34be7535",
+      "canonicalContent": {
+        "meaning": "십억",
+        "ipa": "",
+        "expression": "one billion",
+        "example": "One billion is a thousand million.",
+        "translation": "십억은 백만의 천 배예요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "10억"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 4,
+      "currentImage": "f700d1982a2723a8-billion-v4.png",
+      "currentImageSha256": "22a1c32b903e4b845a2761b2efab220a9194a8e1363a7bae6ef62039d137c0a5",
+      "entrySnapshotSha256": "4594a92604e1012f575e1cbd8f5cd9eecf427254e9bd73d4d8179088569d5057",
+      "attemptsSnapshotSha256": "5766d0e29c5954aa6da37294084dfb168671b07d607853287c3b80fbe3280d68",
+      "latestReviewBasis": "원본/실제320px에서 정면 가로11열과 높이10단을 직접 확인했다. 백만 단위의 천 배를 설명하는 10×10×10 구성에서 가로10 조건이 깨져 의미/수량 보류한다. 깊이10·숨은 내부 수량·기준 큐브의 정확한 물리 크기도 통과로 추가 인증하지 않는다. 문자/독립 로고 부재·스타일/PNG는 통과했고 v3/v4를 보존했다. 다음 품질 수정에서는 외부 경계와 내부 접합선의 개수를 분리해 명시하되 실제 결과를 다시 세어야 한다.",
+      "mode": "edit",
+      "title": "세 축의 내부 경계9개와10칸 복원",
+      "defect": "원본/실제320px에서 정면 가로11열과 높이10단을 직접 확인했다. 백만 단위의 천 배를 설명하는 10×10×10 구성에서 가로10 조건이 깨져 의미/수량 보류한다. 깊이10·숨은 내부 수량·기준 큐브의 정확한 물리 크기도 통과로 추가 인증하지 않는다. 문자/독립 로고 부재·스타일/PNG는 통과했고 v3/v4를 보존했다. 다음 품질 수정에서는 외부 경계와 내부 접합선의 개수를 분리해 명시하되 실제 결과를 다시 세어야 한다.",
+      "scenePrompt": "Correct the blue construction lattice in the edit target. Its front currently has ELEVEN columns; the required assembly has TEN unit cells across, TEN high and TEN deep. Each independent dimension must have exactly NINE INTERNAL joints between TWO OUTER boundaries, hence ten cell intervals; do not confuse ten seams with ten cells. Rebuild consistent front, top and right faces so all three edges can be counted and all corner joints agree. The detached reference cube remains equal in physical size to one assembly unit, accounting for perspective. No numbers, labels, arrows or decorative grid overlay. The unchanged textbook says each reference unit represents a million and this regular thousand-unit arrangement represents a billion; the image alone does not encode that million-unit convention or reveal hidden interiors.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Correct the blue construction lattice in the edit target. Its front currently has ELEVEN columns; the required assembly has TEN unit cells across, TEN high and TEN deep. Each independent dimension must have exactly NINE INTERNAL joints between TWO OUTER boundaries, hence ten cell intervals; do not confuse ten seams with ten cells. Rebuild consistent front, top and right faces so all three edges can be counted and all corner joints agree. The detached reference cube remains equal in physical size to one assembly unit, accounting for perspective. No numbers, labels, arrows or decorative grid overlay. The unchanged textbook says each reference unit represents a million and this regular thousand-unit arrangement represents a billion; the image alone does not encode that million-unit convention or reveal hidden interiors.\nInput image1 is the sole EDIT TARGET. Input image2 is STYLE REFERENCE ONLY. Correct the stated defect; preserve the warm restrained illustration style and all other valid meaning relations. Do not copy the apple.",
+      "fullPromptSha256": "5147b727bf2b89707e9e67bae25364a78b485a0657a1ff07bf4c29857ad819b2",
+      "references": [
+        {
+          "role": "edit-target",
+          "file": "f700d1982a2723a8-billion-v4.png",
+          "sha256": "22a1c32b903e4b845a2761b2efab220a9194a8e1363a7bae6ef62039d137c0a5"
+        },
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 5,
+      "proposedFilename": "f700d1982a2723a8-billion-v5.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "가로/높이/깊이10 구간과 면의 연결을 원본/확대에서 확인한다. 숨은 수량은 구성에서의 추론과 구분한다.",
+        "별도 기준 큐브와 묶음 단위의 원근상 크기 일치를 확인하며, 백만 단위 설명은 교재가 제공한다는 한계를 유지한다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "07c93bc7b78e3417",
+      "word": "schedule",
+      "pos": "n.",
+      "level": "A2",
+      "baseMeaning": "일정",
+      "sourceFingerprint": "cf9764a778915e53284c0507d8b3f1bbc38c19c3d533452a245971a84fd3f8e8",
+      "canonicalContent": {
+        "meaning": "일정",
+        "ipa": "",
+        "expression": "a busy schedule",
+        "example": "Our busy schedule includes several important tasks.",
+        "translation": "우리의 바쁜 일정에는 중요한 일이 여러 개 포함되어 있어요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "바쁜 일정"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 4,
+      "currentImage": "07c93bc7b78e3417-schedule-n-v4.png",
+      "currentImageSha256": "60e14adfe0341d3cc325d8a89ee4c0cbb89ed0b16c46a971cac45881b568d4fc",
+      "entrySnapshotSha256": "c93eac8bf9daa11c6901b38bcc518d4a89204af3ff273e34a6f4f863d2a5b287",
+      "attemptsSnapshotSha256": "98c313e842be07890b335b053d1698d6af398bc48677e6b300bd5660de20de65",
+      "latestReviewBasis": "원본/320px에서 계획된 회의·책상 작업·읽기와 보드/손/종이 연결은 유지됐다. 그러나 보드 중간 그림과 손에 든 그림의 노트북 외면 중앙에 흰 원형 표식이 각각 남았다. 두 영역을 Chromium CSS5배로 실제 확대해 독립 원형을 확인했으며 물리적 힌지/테두리나 특정 브랜드라고 확정하지 않는다. 기존보다 작아진 표식을 제거 성공으로 처리하지 않아 무표식 검수는 미달이다. 스타일/PNG와 기본 뜻은 맞으며 v3/v4/두 확대 근거를 보존했다. 다음 회차에 두 표식 영역의 실제 무지 면 복원을 다시 생성한다.",
+      "mode": "redraw",
+      "title": "장치 없는 심기·회의·읽기 일정",
+      "defect": "원본/320px에서 계획된 회의·책상 작업·읽기와 보드/손/종이 연결은 유지됐다. 그러나 보드 중간 그림과 손에 든 그림의 노트북 외면 중앙에 흰 원형 표식이 각각 남았다. 두 영역을 Chromium CSS5배로 실제 확대해 독립 원형을 확인했으며 물리적 힌지/테두리나 특정 브랜드라고 확정하지 않는다. 기존보다 작아진 표식을 제거 성공으로 처리하지 않아 무표식 검수는 미달이다. 스타일/PNG와 기본 뜻은 맞으며 v3/v4/두 확대 근거를 보존했다. 다음 회차에 두 표식 영역의 실제 무지 면 복원을 다시 생성한다.",
+      "scenePrompt": "One adult arranges small task pictures into ordered cells on a tangible wooden planner board. The task pictures show a meeting of adults, hands potting a small plant at a plain worktable, and an adult reading a completely unlettered book. A spare planting picture is held near its planned cell. Make planned activities readable as an organized schedule, not a finished checklist. Use real physical paper pictures and blank planner cells, not UI. There are no computers, laptops, screens, clocks, printed equipment, clothing labels, badges, times, checkmarks, captions or arrows anywhere. The three task pictures are objects within one main planning scene, not three separate vocabulary cards. Keep all small picture subjects plain and the background uncluttered.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: One adult arranges small task pictures into ordered cells on a tangible wooden planner board. The task pictures show a meeting of adults, hands potting a small plant at a plain worktable, and an adult reading a completely unlettered book. A spare planting picture is held near its planned cell. Make planned activities readable as an organized schedule, not a finished checklist. Use real physical paper pictures and blank planner cells, not UI. There are no computers, laptops, screens, clocks, printed equipment, clothing labels, badges, times, checkmarks, captions or arrows anywhere. The three task pictures are objects within one main planning scene, not three separate vocabulary cards. Keep all small picture subjects plain and the background uncluttered.\nInput image1 is STYLE REFERENCE ONLY. Draw the new scene with the same clean warm background and restrained adult illustration style; do not copy the apple.",
+      "fullPromptSha256": "87feb19a56c93327fbde2b8c7acf2d6cb47da434fd7bd2ae93c63e02f559d36b",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 5,
+      "proposedFilename": "07c93bc7b78e3417-schedule-n-v5.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "양쪽 작은 그림의 노트북 외면을 실제 확대해 독립 원형 흔적이 없는지 확인한다.",
+        "순서 있는 계획 활동/보드/손/종이 연결을 유지한다. 날짜·시각·중요도를 인증하지 않는다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "e6ef86e165ecc3be",
+      "word": "bee",
+      "pos": "n.",
+      "level": "B1",
+      "baseMeaning": "벌",
+      "sourceFingerprint": "11e788aed61af65596f93037b8190ae302c799cf6c69220c950c99772bd3b867",
+      "canonicalContent": {
+        "meaning": "벌",
+        "ipa": "",
+        "expression": "a honey bee",
+        "example": "A bee flew past a floating soap bubble.",
+        "translation": "벌 한 마리가 떠다니는 비눗방울 옆으로 날아갔어요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "꿀벌"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 4,
+      "currentImage": "e6ef86e165ecc3be-bee-v4.png",
+      "currentImageSha256": "7a5372a86406c6bd1d8c8e095e487462b758bc9223e78e6e8a3676cfc53a16b1",
+      "entrySnapshotSha256": "f5eb94dc1100c95306c77876a15d260335259782f064597aebc4d64050c8ef75",
+      "attemptsSnapshotSha256": "066214d4f1b577eb84f2b723bb9978fe68692d3e6fc37836f81c60d9b8475b99",
+      "latestReviewBasis": "원본/320px에서 벌의 머리·가슴·줄무늬 배와 더듬이2, 별도 비눗방울1을 확인했다. 그러나 옆으로 기울어진 시점에서 독립적으로 추적되는 막질 날개 윤곽은2개이고 반대쪽 앞/뒷날개2쌍을 검증하지 못했다. 다리 부착점도 세 쌍 전체를 별도로 확정하지 않는다. 겹쳐 가린 날개가 실제로 없다고 단정하지 않지만 요구한 구조 검수를 충족하지 못해 보류한다. 글자/독립 로고 부재·스타일/PNG는 통과했으며 실제 종/비행/독성/안전을 인증하지 않는다. v3/v4를 보존하고 다음 회차에 겹침을 줄이는 시점을 다시 생성한다.",
+      "mode": "redraw",
+      "title": "양쪽 부속이 보이는 배쪽 정면",
+      "defect": "원본/320px에서 벌의 머리·가슴·줄무늬 배와 더듬이2, 별도 비눗방울1을 확인했다. 그러나 옆으로 기울어진 시점에서 독립적으로 추적되는 막질 날개 윤곽은2개이고 반대쪽 앞/뒷날개2쌍을 검증하지 못했다. 다리 부착점도 세 쌍 전체를 별도로 확정하지 않는다. 겹쳐 가린 날개가 실제로 없다고 단정하지 않지만 요구한 구조 검수를 충족하지 못해 보류한다. 글자/독립 로고 부재·스타일/PNG는 통과했으며 실제 종/비행/독성/안전을 인증하지 않는다. v3/v4를 보존하고 다음 회차에 겹침을 줄이는 시점을 다시 생성한다.",
+      "scenePrompt": "One bee near a separate soap bubble, shown almost frontally from slightly below, not as a side profile. Put the head near the upper center, the hairy thorax centrally and striped abdomen below. Make both left and right sides visible together. Exactly six jointed legs arise as three bilateral pairs from the thorax, with all bases and ends traceable. Show FOUR actual membranous wings, two per side: a larger forewing above and a smaller hindwing below, attached continuously to the thorax and related naturally as a pair. Keep sufficient visible outline of each hindwing so it is not completely hidden behind the forewing. Do not detach wings, invent a fifth wing, attach a leg to the abdomen or use an exploded diagram. Two natural antennae attach to the head. No labels, arrows, writing, duplicate bee or species/safety claim.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: One bee near a separate soap bubble, shown almost frontally from slightly below, not as a side profile. Put the head near the upper center, the hairy thorax centrally and striped abdomen below. Make both left and right sides visible together. Exactly six jointed legs arise as three bilateral pairs from the thorax, with all bases and ends traceable. Show FOUR actual membranous wings, two per side: a larger forewing above and a smaller hindwing below, attached continuously to the thorax and related naturally as a pair. Keep sufficient visible outline of each hindwing so it is not completely hidden behind the forewing. Do not detach wings, invent a fifth wing, attach a leg to the abdomen or use an exploded diagram. Two natural antennae attach to the head. No labels, arrows, writing, duplicate bee or species/safety claim.\nInput image1 is STYLE REFERENCE ONLY. Draw the new scene with the same clean warm background and restrained adult illustration style; do not copy the apple.",
+      "fullPromptSha256": "63e42cc0c7f7de22d9c004a8b1fd573459ad5142171c7f65b64d1a06bfa84c2d",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 5,
+      "proposedFilename": "e6ef86e165ecc3be-bee-v5.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "더듬이2·가슴 부착 다리3쌍·앞날개/뒷날개2쌍을 추적한다. 날개 엽을 독립 날개로 오인하지 않는다.",
+        "가림으로 부재를 확정하지 않지만 요구한 연결을 확인 못하면 보류한다. 특정 종·독성·안전·실제 비행은 인증하지 않는다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "23b39a0a0e1e9917",
+      "word": "eventually",
+      "pos": "adv.",
+      "level": "B1",
+      "baseMeaning": "결국",
+      "sourceFingerprint": "0020ad59232f71b5a0ce827909ba04d554dac4fa6662aed47a18d6816616bb52",
+      "canonicalContent": {
+        "meaning": "결국",
+        "ipa": "",
+        "expression": "eventually arrive",
+        "example": "Don't worry. Someone will come and rescue us eventually.",
+        "translation": "걱정하지 마. 결국 누군가 와서 우리를 구출할 거야.",
+        "source": "Tatoeba 참고 예문",
+        "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #6572322 (Hybrid) & #11110670 (intertime)",
+        "url": "https://tatoeba.org/en/sentences/show/6572322",
+        "expressionTranslation": "결국 도착하다"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 4,
+      "currentImage": "23b39a0a0e1e9917-eventually-adv-v4.png",
+      "currentImageSha256": "72099a00dca73e4c0a274a51a4e6bbc1b1e1fcfaf10a61eb9df07fd73d92c344",
+      "entrySnapshotSha256": "b2ccad9ead09a1d119face27a7661c1ced70dee7b23abd6e1f33d20435e10b0c",
+      "attemptsSnapshotSha256": "db390f996199516638be50483b54f47f4476a863e27c7fad32087887d2ab0bba",
+      "latestReviewBasis": "원본/320px에서 기다리는 사람과 이후 배로 도착해 손을 내미는 도움 제공자의 관계는 맞다. 그러나 도움 제공자의 조끼 가슴에 밝은 독립 직사각형 패치가 남아 Chromium CSS5배로 실제 확인했다. 연결 스트랩/버클과 떨어진 표식이며 특정 글자/브랜드나 기능을 확정하지 않지만 승인한 무패치 장면 조건을 충족하지 못해 보류한다. 원본은 변경하지 않았고 스타일/PNG/기본 eventually 연상은 통과한다. 실제 구조 성공/미래 약속/장비 안전을 인증하지 않는다. v3/v4와 확대 근거를 보존하고 반복 품질 범위에서 다음 후보를 준비한다.",
+      "mode": "redraw",
+      "title": "숲의 기다림과 도움 도착",
+      "defect": "원본/320px에서 기다리는 사람과 이후 배로 도착해 손을 내미는 도움 제공자의 관계는 맞다. 그러나 도움 제공자의 조끼 가슴에 밝은 독립 직사각형 패치가 남아 Chromium CSS5배로 실제 확인했다. 연결 스트랩/버클과 떨어진 표식이며 특정 글자/브랜드나 기능을 확정하지 않지만 승인한 무패치 장면 조건을 충족하지 못해 보류한다. 원본은 변경하지 않았고 스타일/PNG/기본 eventually 연상은 통과한다. 실제 구조 성공/미래 약속/장비 안전을 인증하지 않는다. v3/v4와 확대 근거를 보존하고 반복 품질 범위에서 다음 후보를 준비한다.",
+      "scenePrompt": "Two related quiet fictional outdoor help scenes. Above, an adult in a plain olive shirt and brown trousers waits alone on a low boulder in a simple woodland clearing, looking along the path for help. Below, the same waiting adult remains on the same boulder while a second casually dressed adult arrives on that path carrying a plain coiled rope and offers a hand. The arrival after waiting is the core relation. Both adults have plain solid clothes with only connected functional seams, no chest patches, printing, badges, backpacks, uniforms or branded equipment. No sea, boat, flotation vest, clock, arrows or captions. This is a mnemonic for eventually arriving to help, not a completed rescue or a real safety instruction, elapsed duration or future guarantee.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Two related quiet fictional outdoor help scenes. Above, an adult in a plain olive shirt and brown trousers waits alone on a low boulder in a simple woodland clearing, looking along the path for help. Below, the same waiting adult remains on the same boulder while a second casually dressed adult arrives on that path carrying a plain coiled rope and offers a hand. The arrival after waiting is the core relation. Both adults have plain solid clothes with only connected functional seams, no chest patches, printing, badges, backpacks, uniforms or branded equipment. No sea, boat, flotation vest, clock, arrows or captions. This is a mnemonic for eventually arriving to help, not a completed rescue or a real safety instruction, elapsed duration or future guarantee.\nInput image1 is STYLE REFERENCE ONLY. Draw the new scene with the same clean warm background and restrained adult illustration style; do not copy the apple.",
+      "fullPromptSha256": "145602fd283e5062142f01caba6f6f542e1a0cdb21959a576293b9836ef15cef",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 5,
+      "proposedFilename": "23b39a0a0e1e9917-eventually-adv-v5.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "표식 영역의 무지 면 복원을 실제 원본/확대에서 확인하고 기능 스트랩/버클은 보존한다.",
+        "기다림 뒤 도움 도착의 두 장면과 바위에 남은 사람을 유지한다. 실제 구조 성공/안전/미래 약속은 인증하지 않는다."
+      ],
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "35accde7772b0871",
+      "word": "plenty",
+      "pos": "pron.",
+      "level": "B1",
+      "baseMeaning": "충분한 양",
+      "sourceFingerprint": "ae4aaa15869f19bc65d8d4e8278bd5eca3d1425bbd51df553fe66128c5f82ad6",
+      "canonicalContent": {
+        "meaning": "충분한 양",
+        "ipa": "",
+        "expression": "plenty of time",
+        "example": "We have plenty of time to finish.",
+        "translation": "마칠 시간이 충분히 있어요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "충분한 시간"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 4,
+      "currentImage": "35accde7772b0871-plenty-ample-time-small-task-v4.png",
+      "currentImageSha256": "59485b4070719ed54b0844c183223bcbd9f7366d7c209b0f6ee46b7e07073cdf",
+      "entrySnapshotSha256": "10ddea97582a2fdee296fb7f15d71549cd7c23df578907e6a2869cb039ec8474",
+      "attemptsSnapshotSha256": "ff6e3e14cec4e65f3f70589497490e57bc130104718e950941685bc150360049",
+      "latestReviewBasis": "원본/320px에서 판9칸 중 채워진7칸·빈자리2개와 남은 조각2개, 위에 모래가 더 많은 모래시계1을 확인했다. 이전의 긴 막대 형태는 없어졌지만 판은 정면으로 서 있고 느슨한 조각은 바닥에 기울어 놓여 투영 면 방향이 다르다. 승인안의 같은 면 방향에서 빈자리와 조각 윤곽을 대조하는 조건을 검증하지 못해 맞춤 관계를 보류한다. 실제 치수나 절대 삽입 불가능을 단정하지 않으며 남은 시간이 많다는 연상만으로 구조 검수를 대신하지 않는다. 글자/독립 표식 부재·스타일/PNG는 통과했고 v3/v4를 보존한다. 다음 회차에는 두 조각의 면을 판과 평행하게 세워 대조한다.",
+      "mode": "edit",
+      "title": "판과 평행하게 세운 조각",
+      "defect": "원본/320px에서 판9칸 중 채워진7칸·빈자리2개와 남은 조각2개, 위에 모래가 더 많은 모래시계1을 확인했다. 이전의 긴 막대 형태는 없어졌지만 판은 정면으로 서 있고 느슨한 조각은 바닥에 기울어 놓여 투영 면 방향이 다르다. 승인안의 같은 면 방향에서 빈자리와 조각 윤곽을 대조하는 조건을 검증하지 못해 맞춤 관계를 보류한다. 실제 치수나 절대 삽입 불가능을 단정하지 않으며 남은 시간이 많다는 연상만으로 구조 검수를 대신하지 않는다. 글자/독립 표식 부재·스타일/PNG는 통과했고 v3/v4를 보존한다. 다음 회차에는 두 조각의 면을 판과 평행하게 세워 대조한다.",
+      "scenePrompt": "Keep the upright wooden board, its seven fitted square tiles and two empty square recesses, and the hourglass in the edit target. The key correction is the orientation of the TWO LOOSE TILES below the board: neither may lie flat on the table. Stand both tiles upright, with their square front faces parallel to the board's front face and aimed at the viewer. Their projected outlines must match the size and near-square proportions of the empty recesses, so there is no rotation or foreshortening ambiguity. A small plain support beneath the loose tiles may hold them vertically; do not add labels or symbols. Keep two tiles and two matching gaps, straight physical boundaries, ample upper-bulb sand and the unlettered warm illustrative scene. Do not claim a measured duration or inevitable task completion.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Keep the upright wooden board, its seven fitted square tiles and two empty square recesses, and the hourglass in the edit target. The key correction is the orientation of the TWO LOOSE TILES below the board: neither may lie flat on the table. Stand both tiles upright, with their square front faces parallel to the board's front face and aimed at the viewer. Their projected outlines must match the size and near-square proportions of the empty recesses, so there is no rotation or foreshortening ambiguity. A small plain support beneath the loose tiles may hold them vertically; do not add labels or symbols. Keep two tiles and two matching gaps, straight physical boundaries, ample upper-bulb sand and the unlettered warm illustrative scene. Do not claim a measured duration or inevitable task completion.\nInput image1 is the sole EDIT TARGET. Input image2 is STYLE REFERENCE ONLY. Correct the stated defect; preserve the warm restrained illustration style and all other valid meaning relations. Do not copy the apple.",
+      "fullPromptSha256": "af237afd74763be3401a5beefd4ddd5b063e6a24541145dbe32d16c9e62e0152",
+      "references": [
+        {
+          "role": "edit-target",
+          "file": "35accde7772b0871-plenty-ample-time-small-task-v4.png",
+          "sha256": "59485b4070719ed54b0844c183223bcbd9f7366d7c209b0f6ee46b7e07073cdf"
+        },
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 5,
+      "proposedFilename": "35accde7772b0871-plenty-ample-time-small-task-v5.png",
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "verificationConditions": [
+        "원본/320px에서 동일한 면 방향의 조각/빈자리 투영 윤곽을 대조하고 대응관계/개수 일치를 확인한다.",
+        "대부분 위에 남은 모래와 적은 미완료 과제가 함께 식별되어야 한다. 정확한 치수·시간·완료 성공은 인증하지 않는다."
+      ],
+      "candidateSuccessVerified": false
+    }
+  ],
+  "policyAdditionalStartSlotLimit": 0,
+  "serviceFailureAdditionalStartSlotLimit": 0,
+  "fullGoalComplete": false
+}
