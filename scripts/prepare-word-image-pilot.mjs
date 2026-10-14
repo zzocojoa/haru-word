@@ -37,6 +37,7 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
       sourceFingerprint: entry.sourceFingerprint, sha256: entry.sha256, width: entry.width, height: entry.height,
       url: '/oxford-image-pilot/' + entry.sha256 + '.png' })) };
   const metadataFile = path.join(projectRoot, 'data/word-image-pilot.json');
+  if (existsSync(metadataFile) && JSON.stringify(JSON.parse(readFileSync(metadataFile, 'utf8'))) !== JSON.stringify(catalog)) throw new Error('Existing pilot catalog differs');
   mkdirSync(path.join(projectRoot, 'public/oxford-image-pilot'), { recursive: true });
   let copied = 0, reused = 0;
   for (const { bytes, target } of images) {

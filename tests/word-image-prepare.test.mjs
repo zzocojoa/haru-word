@@ -81,3 +81,11 @@ test('twenty verified images are prepared with hash-only URLs and reused on the 
   assert.equal(second.prepared, 20); assert.equal(second.copied, 0); assert.equal(second.reused, 20);
   assert.deepEqual(readFileSync(metadataFile), before);
 });
+
+test('a different existing catalog is preserved and blocks PNG preparation', () => {
+  const f = imagePilotFixture(), file = path.join(f.projectRoot, 'data/word-image-pilot.json');
+  writeFileSync(file, '{"existing":"keep"}');
+  assert.throws(() => prepareWordImagePilot(f), { message: 'Existing pilot catalog differs' });
+  assert.equal(readFileSync(file, 'utf8'), '{"existing":"keep"}');
+  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+});
