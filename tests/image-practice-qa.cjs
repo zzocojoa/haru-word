@@ -14,6 +14,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
   const browser = await launchBrowser({ engine });
   fs.mkdirSync(out, { recursive: true });
   const checks = [], errors = [], imageRequests = [], moduleNameMatches = [], requests = { writes: 0, ai: 0, external: 0 };
+  const heldImages = new Map();
   let page;
   try {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: accountHeaders('image_pilot') });
@@ -28,6 +29,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       if (url.origin !== base) { requests.external++; return route.abort(); }
       if (url.pathname.startsWith('/oxford-image-pilot/')) imageRequests.push(url.pathname);
       if (stage === 'front' && url.pathname.startsWith('/oxford-image-pilot/')) return;
+      if (stage === 'error' && url.pathname.startsWith('/oxford-image-pilot/')) { heldImages.set(url.pathname, route); return; }
       if (/feedback|automation|ai-eval|sentence-structure/.test(url.pathname)) {
         if (url.pathname.startsWith('/api/')) { requests.ai++; return route.abort(); }
         moduleNameMatches.push(url.pathname);
@@ -45,6 +47,25 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await page.getByText('서버에 저장됨', { exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), 1);
     checks.push('today overview has one independent image-practice entry');
+    if (stage === 'error') {
+      await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
+      const dialog = page.getByRole('dialog');
+      await dialog.locator('img').waitFor();
+      await dialog.locator('img').evaluate(image => { window.qaOldImage = image; });
+      for (let i = 0; i < 100 && !heldImages.has(catalog.entries[0].url); i++) await page.waitForTimeout(50);
+      await heldImages.get(catalog.entries[0].url).fulfill({ status: 503, body: 'Unavailable' });
+      await page.waitForTimeout(300);
+      assert.equal(await dialog.getByRole('button', { name: '건너뛰기', exact: true }).count(), 1, 'failed image can be skipped without an answer');
+      assert.equal(await dialog.locator('[lang="en"]').count(), 0);
+      await dialog.getByRole('button', { name: '건너뛰기', exact: true }).click();
+      assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
+      await page.evaluate(() => { window.qaOldImage.dispatchEvent(new Event('load')); delete window.qaOldImage; });
+      assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true, 'old image event cannot enable a new card');
+      await heldImages.get(catalog.entries[1].url).fulfill({ contentType: 'image/png', body: fs.readFileSync('public' + catalog.entries[1].url) });
+      await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+      await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
+      checks.push('503 skip hides answer; late detached load cannot change next loading state; current response enables reveal');
+    }
     if (stage === 'network') {
       assert.equal(imageRequests.length, 0, 'no image requests before practice');
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();

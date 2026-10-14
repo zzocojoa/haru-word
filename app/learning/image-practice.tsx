@@ -71,12 +71,14 @@ function PracticeCards({ deck }: { deck: Card[] }) {
 }
 function PracticeCard({ card, last, onNext }: { card: Card; last: boolean; onNext: () => void }) {
   const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [revealed, setRevealed] = useState(false);
   return <div className="dialog-scroll">
-    {!revealed ? <><img className="image-practice-picture" src={card.image.url} width={card.image.width} height={card.image.height}
-      alt={SCENES[card.image.entryId]} onLoad={() => setReady(true)}/>
-    {!ready && <p role="status">이미지 불러오는 중</p>}
-    <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>
+    {!revealed ? <>{!failed && <img className="image-practice-picture" src={card.image.url} width={card.image.width} height={card.image.height}
+      alt={SCENES[card.image.entryId]} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>}
+    {failed ? <><p role="alert">이미지를 불러오지 못했어요.</p><button type="button" className="secondary-button full" onClick={onNext}>건너뛰기</button></>
+      : <>{!ready && <p role="status">이미지 불러오는 중</p>}
+        <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>}</>
       : <><p lang="en" className="image-practice-answer">{card.word.word}</p>
         <HelpDetails title="뜻·발음"><p>{card.image.baseMeaning}</p><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>
         <button type="button" className="primary-button full" onClick={onNext}>{last ? '처음부터' : '다음'}</button></>}
