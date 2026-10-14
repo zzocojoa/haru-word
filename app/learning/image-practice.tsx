@@ -8,6 +8,7 @@ import { useNavigationState } from '../navigation';
 import { SheetDialog, SheetDialogContent } from '../sheet-dialog';
 import { HelpDetails } from '../study-ui';
 import { WordPronunciation } from '../word-pronunciation';
+import { useViewRestoration } from '../use-view-restoration';
 
 // Scene descriptions give an equivalent visual clue without naming the answer.
 const SCENES: Record<string, string> = {
@@ -37,6 +38,7 @@ type Card = { word: Word; image: WordImage };
 export function ImagePracticeLauncher({ words, progress }: { words: Word[]; progress: Record<string, Progress> }) {
   const [open, setOpen] = useNavigationState('app.imagePractice', false, true);
   const trigger = useRef<HTMLButtonElement>(null);
+  const restoration = useViewRestoration();
   const eligible = useMemo(() => WORD_IMAGES.flatMap(entry => {
     const word = words.find(word => word.id === entry.entryId);
     const image = word && resolveWordImage(word, cardContent(word.id, progress[word.id]).meaning);
@@ -48,7 +50,7 @@ export function ImagePracticeLauncher({ words, progress }: { words: Word[]; prog
       onClick={() => { setDeck(eligible); setOpen(true); }}>이미지 연습</button>
     <SheetDialog navigationKey="app.imagePractice" open={open} onOpenChange={setOpen}>
       <SheetDialogContent className="framed-dialog image-practice-dialog" showCloseButton={false}
-        onCloseAutoFocus={event => { event.preventDefault(); trigger.current?.focus({ preventScroll: true }); }}>
+        onCloseAutoFocus={event => { event.preventDefault(); restoration.schedule('destination', () => trigger.current?.focus({ preventScroll: true })); }}>
         <DialogHeader><DialogTitle>이미지 연습</DialogTitle><DialogDescription>시범 {deck.length}개 · 성적 미기록</DialogDescription></DialogHeader>
         <button type="button" className="text-button image-practice-close" aria-label="연습 닫기" onClick={() => setOpen(false)}>닫기</button>
         {open && (deck.length ? <PracticeCards deck={deck}/> : <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>)}

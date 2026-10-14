@@ -1,14 +1,37 @@
 // Local synthetic learner only; all non-loopback requests are blocked.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker } = require('./qa/runtime.cjs');
+const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker, axePath } = require('./qa/runtime.cjs');
 const { emptyState } = require('./fixtures/backup-history.cjs');
-const engine = process.env.QA_BROWSER || 'chromium', stage = process.argv[2] || 'all';
+const engine = process.env.QA_BROWSER || 'chromium', stage = process.argv[2] || (process.env.QA_IMAGE_PILOT_MODE === 'development' ? 'all' : 'production');
+const stages = ['front', 'back', 'lifecycle', 'network', 'error', 'editor', 'eligible', 'empty', 'matrix'];
+if (stage === 'all') {
+  const { spawnSync } = require('node:child_process');
+  for (const part of stages) {
+    const result = spawnSync(process.execPath, [__filename, part], { stdio: 'inherit', env: process.env });
+    if (result.status !== 0) process.exit(result.status || 1);
+  }
+  process.exit(0);
+}
+if (![...stages, 'entry', 'production', 'isolation'].includes(stage)) throw Error('Unknown image-practice QA stage');
 const out = 'outputs/word-image-pilot/' + engine;
 const catalog = JSON.parse(fs.readFileSync('data/word-image-pilot.json'));
 const words = JSON.parse(fs.readFileSync('data/words.json'));
 const content = JSON.parse(fs.readFileSync('data/content.json'));
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+async function checkLayouts(page, dialog, label) {
+  await page.addScriptTag({ path: axePath });
+  for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
+    assert.equal(await dialog.evaluate(el => el.scrollWidth > el.clientWidth || document.documentElement.scrollWidth > innerWidth), false, label + ' overflow');
+    const audit = await page.evaluate(async () => (await axe.run(document.querySelector('[role="dialog"]'), { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations);
+    assert.deepEqual(audit.map(v => v.id), [], label + ' axe');
+    await page.screenshot({ path: out + `/${label}-${width}-${size}.png`, fullPage: false });
+  }
+  await page.evaluate(() => document.documentElement.style.fontSize = '100%');
+  await page.setViewportSize({ width: 390, height: 844 });
+}
 (async () => {
   await waitForWorker();
   const browser = await launchBrowser({ engine });
@@ -24,6 +47,26 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     const id = catalog.entries[0].entryId;
     stored.progress[id] = { meaning: content[id].meaning, familiarity: 'known', en: 'independent', ko: 'help', sentenceStatus: 'written', sentence: 'This is a sample.', notes: '검사 전 기록', studyDates: [date], lastStudied: date, needsReview: true, familiarityCheck: { initial: 'known', answer: '검사 전 최초 풀이', meaning: content[id].meaning, final: 'known' } };
     if (stage === 'editor') stored.progress[id].senses = { '다른 뜻': { meaning: '다른 뜻', expression: 'another sample' } };
+    if (stage === 'eligible') stored.progress[id].meaning = '시범과 다른 뜻';
+    if (stage === 'empty') for (const entry of catalog.entries) stored.progress[entry.entryId] = { meaning: '시범과 다른 뜻' };
+    const persisted = stage === 'isolation';
+    const api = async () => {
+      const response = await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '4' } });
+      assert.equal(response.status(), 200, 'local state GET');
+      return response.json();
+    };
+    if (persisted) {
+      await context.request.get(base + '/signin-with-chatgpt?return_to=/');
+      const sessionId = require('node:crypto').randomUUID();
+      stored.sessions[sessionId] = { id: sessionId, kind: 'daily', date, period: date, ids: [id], warmupIds: [], stage: 'done', index: 0,
+        records: { [id]: { entryId: id, meaning: content[id].meaning, material: content[id], familiarity: 'known', en: 'independent', ko: 'help',
+          enAnswer: 'fruit', koAnswer: 'apple', sentenceStatus: 'written', sentence: 'This is a sample.', notes: '', learnedOn: date } },
+        retry: [], retryMode: false, elapsed: 913, finished: true, paused: true, createdAt: date + 'T12:00:00.000Z' };
+      const initial = await api();
+      const response = await context.request.put(base + '/api/state', { headers: { 'X-Study-Grammar': '4' }, data: { ...stored, revision: initial.revision } });
+      assert.equal(response.status(), 200, 'synthetic local state setup');
+      const saved = await api(); stored = saved.state; revision = saved.revision;
+    }
     const before = structuredClone({ state: stored, revision });
     await context.route('**/*', async route => {
       const request = route.request(), url = new URL(request.url());
@@ -36,7 +79,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
         moduleNameMatches.push(url.pathname);
       }
       if (url.pathname === '/api/state') {
-        if (request.method() === 'GET') return route.fulfill({ json: { state: stored, revision } });
+        if (request.method() === 'GET') return persisted ? route.continue() : route.fulfill({ json: { state: stored, revision } });
         requests.writes++;
         return route.fulfill({ status: 503, json: { error: 'Unexpected practice write' } });
       }
@@ -46,8 +89,61 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     page.on('pageerror', e => errors.push(e.message));
     await page.goto(base, { waitUntil: 'domcontentloaded' });
     await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-    assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), 1);
-    checks.push('today overview has one independent image-practice entry');
+    assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), stage === 'production' ? 0 : 1);
+    checks.push(stage === 'production' ? 'production has no practice entry' : 'today overview has one independent image-practice entry');
+    if (stage === 'production') {
+      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
+      await page.getByRole('button', { name: 'apple 명사', exact: true }).click();
+      assert.equal(await page.getByRole('dialog').locator('img').count(), 0);
+      assert.equal(imageRequests.length, 0);
+      checks.push('production editor has no image preview or image request');
+    }
+    if (stage === 'eligible' || stage === 'empty') {
+      await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
+      const dialog = page.getByRole('dialog');
+      if (stage === 'empty') {
+        await dialog.getByText('현재 선택한 뜻으로 연습할 이미지가 없어요.', { exact: true }).waitFor();
+        assert.equal(await dialog.locator('img').count(), 0);
+        assert.equal(imageRequests.length, 0);
+      } else {
+        assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
+        assert.equal(await dialog.getByText('시범 19개 · 성적 미기록', { exact: true }).count(), 1);
+        assert.equal(imageRequests.includes(catalog.entries[0].url), false);
+      }
+      checks.push('different selected meanings excluded; actual count/empty state preserved');
+    }
+    if (stage === 'matrix') {
+      const entry = page.getByRole('button', { name: '이미지 연습', exact: true });
+      await entry.focus(); await page.keyboard.press('Enter');
+      const dialog = page.getByRole('dialog');
+      await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+      await page.addScriptTag({ path: axePath });
+      for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
+        await page.setViewportSize({ width, height: 844 });
+        await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
+        assert.equal(await dialog.evaluate(el => el.scrollWidth > el.clientWidth || document.documentElement.scrollWidth > innerWidth), false, 'no horizontal overflow');
+        assert.equal(await dialog.locator('[lang="en"]').count(), 0);
+        const audit = await page.evaluate(async () => (await axe.run(document.querySelector('[role="dialog"]'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations);
+        assert.deepEqual(audit.map(v => ({ id: v.id, impact: v.impact })), [], 'practice axe');
+        await page.screenshot({ path: out + `/front-${width}-${size}.png`, fullPage: false });
+      }
+      await page.evaluate(() => document.documentElement.style.fontSize = '100%');
+      await page.setViewportSize({ width: 390, height: 844 });
+      const reveal = dialog.getByRole('button', { name: '단어 확인', exact: true });
+      await reveal.focus(); await page.keyboard.press('Space');
+      assert.equal(await dialog.locator('.image-practice-answer').innerText(), 'apple');
+      await checkLayouts(page, dialog, 'back');
+      await page.keyboard.press('Escape'); await dialog.waitFor({ state: 'hidden' });
+      await page.waitForFunction(() => document.querySelector('.image-practice-entry') === document.activeElement);
+      assert.equal(await entry.evaluate(e => e === document.activeElement), true);
+      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.getByRole('tab', { name: '오늘의 학습', exact: true }).click();
+      await entry.click();
+      assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
+      assert.equal(await dialog.locator('[lang="en"]').count(), 0);
+      checks.push('320/390/1440 at 100/200% text, keyboard Enter/Space/Escape, focus return, axe, tab reset');
+    }
     if (stage === 'editor') {
       await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
@@ -57,7 +153,8 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       assert.equal(await dialog.locator('img').count(), 1, 'matching editor meaning has one preview');
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
       await page.waitForFunction(() => [...document.querySelectorAll('[role="dialog"] img')].every(image => image.complete && image.naturalWidth > 0));
-      await page.screenshot({ path: out + '/editor.png', fullPage: true });
+      await page.screenshot({ path: out + '/editor.png', fullPage: false });
+      await checkLayouts(page, dialog, 'editor');
       await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption('다른 뜻');
       assert.equal(await dialog.locator('img').count(), 0, 'changed meaning hides preview immediately');
       await dialog.getByLabel('함께 익힐 표현', { exact: true }).fill('changed sample');
@@ -71,6 +168,11 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       await dialog.getByLabel('오늘의 뜻', { exact: true }).fill('새로운 뜻');
       await dialog.getByRole('button', { name: 'Close', exact: true }).click();
       await page.getByRole('alertdialog').getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
+      await dialog.waitFor({ state: 'hidden' });
+      await page.getByLabel('단어 또는 한국어 뜻 검색').fill('bicycle');
+      await page.getByRole('button', { name: 'bicycle 명사', exact: true }).click();
+      assert.equal(await dialog.locator('img').count(), 1, 'longer editor word also has a preview');
+      await checkLayouts(page, dialog, 'editor-long');
       checks.push('editor shows matching preview, hides changed/new meanings and preserves dismissal protection');
     }
     if (stage === 'error') {
@@ -107,6 +209,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true);
       const markup = await dialog.innerHTML();
       assert.equal(/apple|사과|n\.|A1/.test(markup), false, 'front DOM has no answer or word metadata');
+      assert.equal(/apple|사과/.test(await page.locator('body').ariaSnapshot()), false, 'modal accessibility tree hides background answers');
       assert.equal(await dialog.locator('img').count(), 1);
       await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
       await dialog.waitFor({ state: 'hidden' });
@@ -118,22 +221,26 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       const reveal = dialog.getByRole('button', { name: '단어 확인', exact: true });
       await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
       assert.equal(/apple|사과/.test(await dialog.innerHTML()), false);
-      await page.screenshot({ path: out + '/front.png', fullPage: true });
+      await page.screenshot({ path: out + '/front.png', fullPage: false });
       await reveal.click();
       assert.equal(await dialog.locator('[lang="en"]').filter({ hasText: /^apple$/ }).count(), 1, 'reveal shows the correct English word');
       assert.equal(await dialog.locator('details[open]').count(), 0);
       assert.equal(await dialog.getByText('사과', { exact: true }).isVisible(), false);
-      await page.screenshot({ path: out + '/back.png', fullPage: true });
+      await page.screenshot({ path: out + '/back.png', fullPage: false });
       checks.push('reveal shows English; meaning/pronunciation help starts collapsed');
     }
-    if (stage === 'lifecycle') {
+    if (stage === 'lifecycle' || stage === 'isolation') {
       const entry = page.getByRole('button', { name: '이미지 연습', exact: true });
       await entry.click();
       const dialog = page.getByRole('dialog');
       for (let i = 0; i < catalog.entries.length; i++) {
         const expected = words.find(w => w.id === catalog.entries[i].entryId).word;
         assert.equal(await dialog.locator('[lang="en"]').count(), 0, 'new card has no English answer');
+        assert.equal((await dialog.innerHTML()).includes(expected), false, 'every front DOM hides its English answer');
+        assert.equal((await dialog.locator('.dialog-scroll').innerHTML()).includes(catalog.entries[i].baseMeaning), false, 'every front card DOM hides its meaning');
         await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+        const allowed = new Set(catalog.entries.slice(0, i + 2).map(e => e.url));
+        assert.equal(imageRequests.every(url => allowed.has(url)), true, 'every step fetches at most one image ahead');
         await dialog.getByRole('button', { name: '단어 확인', exact: true }).click();
         assert.equal(await dialog.locator('.image-practice-answer').innerText(), expected);
         assert.equal(await dialog.locator('details[open]').count(), 0);
@@ -147,6 +254,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
       await page.keyboard.press('Escape');
       await dialog.waitFor({ state: 'hidden' });
+      await page.waitForFunction(() => document.querySelector('.image-practice-entry') === document.activeElement);
       assert.equal(await entry.evaluate(e => e === document.activeElement), true);
       await entry.click();
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
@@ -169,13 +277,15 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       checks.push('20 cards reveal correct words and reset; restart, Escape, app Back gesture, refresh, focus return');
     }
     assert.deepEqual({ state: stored, revision }, before);
+    if (persisted) assert.deepEqual(await api(), before, 'actual local D1 documents and revision unchanged after practice');
     assert.equal(requests.writes, 0); assert.equal(requests.ai, 0);
-    const report = { passed: true, stage, engine, checks, requests, imageRequests, errors, sourceImages: 20, stateUnchanged: true, actualIphoneChecked: false };
+    assert.deepEqual(errors, []);
+    const report = { passed: true, stage, engine, checks, requests, imageRequests, errors, sourceImages: 20, stateUnchanged: true, stateBoundary: persisted ? 'local-d1' : 'mock-http', actualIphoneChecked: false };
     fs.writeFileSync(out + '/' + stage + '-report.json', JSON.stringify(report, null, 2));
-    console.log(JSON.stringify(report));
+    console.log(JSON.stringify({ ...report, imageRequests: imageRequests.length }));
   } catch (error) {
     if (page) {
-      await page.screenshot({ path: out + '/' + stage + '-failure.png', fullPage: true });
+      await page.screenshot({ path: out + '/' + stage + '-failure.png', fullPage: false });
       const body = await page.locator('body').innerText();
       fs.writeFileSync(out + '/' + stage + '-failure.json', JSON.stringify({ stage, requests, moduleNameMatches, errors, body }, null, 2));
       console.error(JSON.stringify({ setupDiagnostic: body.slice(0, 1800), requests, moduleNameMatches, errors }));
