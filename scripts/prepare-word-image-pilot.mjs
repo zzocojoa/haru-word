@@ -14,5 +14,12 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot }) {
       if (sha(readFileSync(path.join(root, 'data/' + name + '.json'))) !== expected) throw new Error('Textbook fingerprint mismatch');
     }
   }
+  const words = new Map(JSON.parse(readFileSync(path.join(projectRoot, 'data/words.json'), 'utf8')).map(word => [word.id, word]));
+  const content = JSON.parse(readFileSync(path.join(projectRoot, 'data/content.json'), 'utf8'));
+  for (const id of manifest.pilotEntryIds) {
+    const entry = manifest.entries.find(entry => entry.entryId === id), word = words.get(id), material = content[id];
+    if (!word || !material || entry.pos !== word.pos || entry.baseMeaning !== material.meaning ||
+      entry.sourceFingerprint !== sha(JSON.stringify({ word, content: material }))) throw new Error('Entry fingerprint mismatch: ' + id);
+  }
   return { prepared: 0 };
 }

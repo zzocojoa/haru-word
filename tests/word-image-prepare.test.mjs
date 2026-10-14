@@ -22,3 +22,10 @@ test('a changed current textbook is rejected before any output is created', () =
   assert.throws(() => prepareWordImagePilot(f), { message: 'Textbook fingerprint mismatch' });
   assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
 });
+
+test('a pilot entry with a different source fingerprint is rejected', () => {
+  const f = imagePilotFixture();
+  f.manifest.entries[0].sourceFingerprint = '0'.repeat(64); f.saveManifest();
+  assert.throws(() => prepareWordImagePilot(f), { message: 'Entry fingerprint mismatch: ' + f.manifest.entries[0].entryId });
+  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+});
