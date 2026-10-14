@@ -6,6 +6,7 @@ const sha = value => createHash('sha256').update(value).digest('hex');
 
 export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
   const manifest = JSON.parse(readFileSync(path.join(sourceRoot, 'data/word-image-manifest.json'), 'utf8'));
+  if (!Array.isArray(manifest.pilotEntryIds) || manifest.pilotEntryIds.length !== 20 || new Set(manifest.pilotEntryIds).size !== 20) throw new Error('Expected twenty unique pilot IDs');
   for (const id of manifest.pilotEntryIds) {
     if (manifest.entries.find(entry => entry.entryId === id)?.status !== 'approved') throw new Error('Unapproved image: ' + id);
   }

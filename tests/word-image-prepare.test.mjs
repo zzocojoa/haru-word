@@ -37,3 +37,14 @@ test('a corrupt final PNG is rejected before any earlier PNG is copied', () => {
   assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
   assert.equal(existsSync(path.join(f.projectRoot, 'data/word-image-pilot.json')), false);
 });
+
+test('pilot IDs must contain exactly twenty unique entries', () => {
+  for (const mode of ['duplicate', 'missing', 'empty']) {
+    const f = imagePilotFixture();
+    if (mode === 'duplicate') f.manifest.pilotEntryIds[19] = f.manifest.pilotEntryIds[0];
+    if (mode === 'missing') f.manifest.pilotEntryIds.pop();
+    if (mode === 'empty') f.manifest.pilotEntryIds = [];
+    f.saveManifest();
+    assert.throws(() => prepareWordImagePilot(f), { message: 'Expected twenty unique pilot IDs' });
+  }
+});
