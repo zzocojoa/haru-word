@@ -72,6 +72,48 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       await page.screenshot({ path: out + '/back.png', fullPage: true });
       checks.push('reveal shows English; meaning/pronunciation help starts collapsed');
     }
+    if (stage === 'lifecycle') {
+      const entry = page.getByRole('button', { name: '이미지 연습', exact: true });
+      await entry.click();
+      const dialog = page.getByRole('dialog');
+      for (let i = 0; i < catalog.entries.length; i++) {
+        const expected = words.find(w => w.id === catalog.entries[i].entryId).word;
+        assert.equal(await dialog.locator('[lang="en"]').count(), 0, 'new card has no English answer');
+        await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+        await dialog.getByRole('button', { name: '단어 확인', exact: true }).click();
+        assert.equal(await dialog.locator('.image-practice-answer').innerText(), expected);
+        assert.equal(await dialog.locator('details[open]').count(), 0);
+        if (i < 19) {
+          assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).count(), 1, 'revealed card has a next button');
+          await dialog.getByRole('button', { name: '다음', exact: true }).click();
+        }
+      }
+      await dialog.getByRole('button', { name: '처음부터', exact: true }).click();
+      assert.equal(await dialog.locator('[lang="en"]').count(), 0);
+      assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
+      await page.keyboard.press('Escape');
+      await dialog.waitFor({ state: 'hidden' });
+      assert.equal(await entry.evaluate(e => e === document.activeElement), true);
+      await entry.click();
+      assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
+      await page.waitForTimeout(220);
+      await page.evaluate(() => {
+        const dialog = document.querySelector('[role="dialog"]'), bounds = dialog.getBoundingClientRect();
+        const x = 5, y = bounds.top + 90, target = document.elementFromPoint(x, y);
+        for (const [type, dx] of [['touchstart', 0], ['touchmove', 180], ['touchend', 180]]) {
+          const event = new Event(type, { bubbles: true, cancelable: true });
+          const point = { identifier: 1, clientX: x + dx, clientY: y };
+          Object.defineProperties(event, { touches: { value: type === 'touchend' ? [] : [point] }, changedTouches: { value: [point] } });
+          target.dispatchEvent(event);
+        }
+      });
+      await dialog.waitFor({ state: 'hidden' });
+      await entry.click();
+      await page.reload();
+      await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+      assert.equal(await dialog.count(), 0, 'refresh does not restore practice');
+      checks.push('20 cards reveal correct words and reset; restart, Escape, app Back gesture, refresh, focus return');
+    }
     assert.deepEqual({ state: stored, revision }, before);
     assert.equal(requests.writes, 0); assert.equal(requests.ai, 0);
     const report = { passed: true, stage, engine, checks, requests, imageRequests, errors, sourceImages: 20, stateUnchanged: true, actualIphoneChecked: false };

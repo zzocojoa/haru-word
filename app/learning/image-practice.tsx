@@ -58,9 +58,14 @@ export function ImagePracticeLauncher({ words, progress }: { words: Word[]; prog
 }
 
 function PracticeCards({ deck }: { deck: Card[] }) {
-  return <PracticeCard card={deck[0]}/>;
+  const [index, setIndex] = useState(0);
+  return <>
+    <p className="small-note" aria-live="polite">{index + 1} / {deck.length}</p>
+    <PracticeCard key={index} card={deck[index]} last={index === deck.length - 1}
+      onNext={() => setIndex(index === deck.length - 1 ? 0 : index + 1)}/>
+  </>;
 }
-function PracticeCard({ card }: { card: Card }) {
+function PracticeCard({ card, last, onNext }: { card: Card; last: boolean; onNext: () => void }) {
   const [ready, setReady] = useState(false);
   const [revealed, setRevealed] = useState(false);
   return <div className="dialog-scroll">
@@ -69,6 +74,7 @@ function PracticeCard({ card }: { card: Card }) {
     {!ready && <p role="status">이미지 불러오는 중</p>}
     <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>
       : <><p lang="en" className="image-practice-answer">{card.word.word}</p>
-        <HelpDetails title="뜻·발음"><p>{card.image.baseMeaning}</p><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails></>}
+        <HelpDetails title="뜻·발음"><p>{card.image.baseMeaning}</p><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>
+        <button type="button" className="primary-button full" onClick={onNext}>{last ? '처음부터' : '다음'}</button></>}
   </div>;
 }
