@@ -26,6 +26,7 @@ import { editedWordDraftsProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
 import { useSheetProtection } from '../sheet-dialog';
+import { resolveWordImage, type WordImage } from '@/lib/word-image';
 export function WordEditor({
   error,
   activityDate,
@@ -34,6 +35,7 @@ export function WordEditor({
   busy,
   retryBlocked,
   onSave,
+  imagePilotEnabled = false,
 }: {
   error?: string;
   activityDate: () => string;
@@ -42,6 +44,7 @@ export function WordEditor({
   busy: boolean;
   retryBlocked: boolean;
   onSave: (p: Progress) => Promise<boolean>;
+  imagePilotEnabled?: boolean;
 }) {
   const { submitting, failed, submit } = useEditorSubmission();
   const content = cardContent(word.id, p);
@@ -72,11 +75,13 @@ export function WordEditor({
     setDraft(previous => selectWordEditorDraft(previous, key, initial));
   }
   const issue = wordEditorDraftIssue(draft, senses.map(sense => sense.meaning || ''));
+  const image = imagePilotEnabled ? resolveWordImage(word, meaning) : undefined;
   return (
     <>
       <DialogHeader>
         <DialogTitle className="dialog-word">
           <span lang="en">{word.word}</span>
+          {image && <WordImagePreview key={image.sha256} image={image}/>}
         </DialogTitle>
         <DialogDescription>
           {word.personal ? "수준 미지정" : word.level} · {POS[word.pos]} ·{" "}
@@ -291,4 +296,10 @@ export function WordEditor({
       </div>
     </>
   );
+}
+
+function WordImagePreview({ image }: { image: WordImage }) {
+  const [failed, setFailed] = useState(false);
+  return failed ? null : <img className="word-image-preview" src={image.url} width={image.width} height={image.height}
+    alt="선택한 뜻의 연상 그림" onError={() => setFailed(true)}/>;
 }

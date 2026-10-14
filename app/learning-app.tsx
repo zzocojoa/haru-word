@@ -416,6 +416,7 @@ function LearningScreens({
           <TabsContent value="library" forceMount hidden={tab !== "library"}>
             {navigation.visited.includes("library") && (
               <WordLibrary
+                imagePilotEnabled={imagePilotEnabled}
                 error={error}
                 grammarEnabled={grammarEnabled}
                 grammarPracticeEnabled={grammarPracticeEnabled}

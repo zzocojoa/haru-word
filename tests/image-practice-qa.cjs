@@ -23,6 +23,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     stored.settings.assessments.A1 = { ids, index: 20, marks: Object.fromEntries(ids.map(id => [id, 'uncertain'])), completed: true };
     const id = catalog.entries[0].entryId;
     stored.progress[id] = { meaning: content[id].meaning, familiarity: 'known', en: 'independent', ko: 'help', sentenceStatus: 'written', sentence: 'This is a sample.', notes: '검사 전 기록', studyDates: [date], lastStudied: date, needsReview: true, familiarityCheck: { initial: 'known', answer: '검사 전 최초 풀이', meaning: content[id].meaning, final: 'known' } };
+    if (stage === 'editor') stored.progress[id].senses = { '다른 뜻': { meaning: '다른 뜻', expression: 'another sample' } };
     const before = structuredClone({ state: stored, revision });
     await context.route('**/*', async route => {
       const request = route.request(), url = new URL(request.url());
@@ -47,6 +48,31 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await page.getByText('서버에 저장됨', { exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), 1);
     checks.push('today overview has one independent image-practice entry');
+    if (stage === 'editor') {
+      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
+      await page.getByRole('button', { name: 'apple 명사', exact: true }).click();
+      const dialog = page.getByRole('dialog');
+      await dialog.waitFor();
+      assert.equal(await dialog.locator('img').count(), 1, 'matching editor meaning has one preview');
+      assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
+      await page.waitForFunction(() => [...document.querySelectorAll('[role="dialog"] img')].every(image => image.complete && image.naturalWidth > 0));
+      await page.screenshot({ path: out + '/editor.png', fullPage: true });
+      await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption('다른 뜻');
+      assert.equal(await dialog.locator('img').count(), 0, 'changed meaning hides preview immediately');
+      await dialog.getByLabel('함께 익힐 표현', { exact: true }).fill('changed sample');
+      await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+      await page.getByRole('alertdialog').getByRole('button', { name: '계속 편집', exact: true }).click();
+      assert.equal(await dialog.getByLabel('함께 익힐 표현', { exact: true }).inputValue(), 'changed sample');
+      await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption('사과');
+      assert.equal(await dialog.locator('img').count(), 1);
+      await dialog.getByRole('button', { name: '다른 뜻 추가', exact: false }).click();
+      assert.equal(await dialog.locator('img').count(), 0, 'empty new sense has no preview');
+      await dialog.getByLabel('오늘의 뜻', { exact: true }).fill('새로운 뜻');
+      await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+      await page.getByRole('alertdialog').getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
+      checks.push('editor shows matching preview, hides changed/new meanings and preserves dismissal protection');
+    }
     if (stage === 'error') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
       const dialog = page.getByRole('dialog');

@@ -4620,3 +4620,5 @@ footer {
 .image-practice-dialog [data-slot="dialog-header"] { padding-right: 3rem; }
 .image-practice-picture { display: block; max-width: 100%; width: auto; height: min(52dvh, 30rem); object-fit: contain; margin: 0 auto 1rem; border-radius: 1rem; }
 .image-practice-answer { font-size: clamp(2rem, 8vw, 3.8rem); text-align: center; padding: 3rem 0; overflow-wrap: anywhere; }
+.dialog-word:has(.word-image-preview) { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.word-image-preview { width: 3rem; height: 4rem; object-fit: contain; flex-shrink: 0; border-radius: .4rem; }
