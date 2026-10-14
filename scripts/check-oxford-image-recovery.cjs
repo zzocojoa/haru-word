@@ -122,6 +122,46 @@ assert.equal(JSON.parse(r.stdout).recovery.used, 2); assert(JSON.parse(r.stdout)
 const exhausted = read(mf); delete exhausted.generation.recoveryApproval.stoppedByFailure;
 write(mf, exhausted); write(pf, { ...progress, generationCalls: slots + 2 });
 rejected(['recovery-start', ids[1]], 'already consumed');
+// Manual resume preserves consumed failures and authorizes only still-unused entries.
+const resumeFile = path.join(fixture, 'work/resume.json');
+function stoppedFixture() {
+  reset(); write(af, approval()); let value = run('recovery-authorize', af); assert.equal(value.status, 0, value.stderr);
+  value = run('recovery-start', ids[0]); assert.equal(value.status, 0, value.stderr);
+  const failure = read(failureFile); failure.entryId = ids[0]; write(failureFile, failure);
+  value = run('recovery-fail', failureFile); assert.equal(value.status, 0, value.stderr);
+}
+function resumeDecision() {
+  const value = read(mf), stopped = value.generation.recoveryApproval.stoppedByFailure;
+  const attempt = value.entries.find(e => e.entryId === stopped.entryId).attempts.at(-1);
+  return { resumeId: 'fixture-manual-resume', userDecision: 'fixture explicit resume unused entry', approvedAt: '2026-10-14T03:00:00.000Z',
+    recoveryApprovalId: 'fixture-recovery', scope: 'unstarted-approved-entries-only', provider: 'built-in-image_gen', automaticRetry: false,
+    maximumTotalStartSlots: slots + 2, manifestSha256: sha(fs.readFileSync(mf)), ledgerSha256: sha(fs.readFileSync(pf)),
+    stoppedByFailure: stopped, failedAttemptSha256: sha(JSON.stringify(attempt)), entryIds: [ids[1]] };
+}
+stoppedFixture(); const resume = resumeDecision();
+for (const invalid of [
+  { ...resume, recoveryApprovalId: 'refill' }, { ...resume, automaticRetry: true }, { ...resume, provider: 'cli' },
+  { ...resume, maximumTotalStartSlots: slots + 3 }, { ...resume, entryIds: [ids[0]] }, { ...resume, entryIds: [] },
+  { ...resume, manifestSha256: '0'.repeat(64) }, { ...resume, ledgerSha256: '0'.repeat(64) },
+  { ...resume, failedAttemptSha256: '0'.repeat(64) }, { ...resume, stoppedByFailure: { ...resume.stoppedByFailure, code: 'other' } }
+]) { write(resumeFile, invalid); rejected(['recovery-resume', resumeFile]); }
+write(resumeFile, resume); const beforeResume = read(mf), beforeResumeProgress = read(pf);
+r = run('recovery-resume', resumeFile); assert.equal(r.status, 0, r.stderr);
+assert.deepEqual(read(mf).entries, beforeResume.entries); assert.equal(read(pf).generationCalls, slots + 1);
+assert(!read(mf).generation.recoveryApproval.stoppedByFailure);
+assert.deepEqual(read(mf).generation.recoveryApproval.resumptions[0].stoppedByFailure, resume.stoppedByFailure);
+assert.deepEqual(read(pf).history.slice(0, -1), beforeResumeProgress.history); checks++;
+const resumedHashes = hashes(); r = run('recovery-resume', resumeFile); assert.equal(r.status, 0, r.stderr);
+assert.equal(JSON.parse(r.stdout).changed, false); assert.deepEqual(hashes(), resumedHashes); checks++;
+write(resumeFile, { ...resume, userDecision: 'replaced' }); rejected(['recovery-resume', resumeFile], 'cannot be replaced'); write(resumeFile, resume);
+rejected(['recovery-start', ids[0]], 'already consumed');
+r = run('recovery-start', ids[1]); assert.equal(r.status, 0, r.stderr); assert.equal(read(pf).generationCalls, slots + 2); checks++;
+const nextFailure = read(failureFile); nextFailure.entryId = ids[1]; write(failureFile, nextFailure);
+r = run('recovery-fail', failureFile); assert.equal(r.status, 0, r.stderr);
+const subsequentStop = read(mf).generation.recoveryApproval.stoppedByFailure, subsequentHashes = hashes();
+r = run('recovery-resume', resumeFile); assert.equal(r.status, 0, r.stderr);
+assert.deepEqual(hashes(), subsequentHashes); assert.deepEqual(read(mf).generation.recoveryApproval.stoppedByFailure, subsequentStop); checks++;
+write(resumeFile, { ...resumeDecision(), resumeId: 'fixture-new-resume' }); rejected(['recovery-resume', resumeFile], 'No unused recovery starts remain');
 // Fault injection is confined to the fixture's manifest rename; no production switches.
 const faultHook = path.join(fixture, 'work/rename-fault.cjs');
 const faultCount = path.join(fixture, 'work/rename-fault-count.json');

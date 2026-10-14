@@ -320,6 +320,48 @@ function startRecovery(id) {
   save();
   console.log(JSON.stringify({ entryId: e.entryId, slug: e.slug, prompt: attempt.prompt, references: [referenceFile], attempt: attempt.number }));
 }
+function resumeRecovery(decisionFile) {
+  const bytes = fs.readFileSync(decisionFile), decision = JSON.parse(bytes), approval = m.generation.recoveryApproval;
+  assert(approval, 'Explicit recovery approval is required');
+  assert(decision.resumeId?.trim() && decision.userDecision?.trim());
+  const existing = approval.resumptions?.find(r => r.resumeId === decision.resumeId);
+  if (existing) {
+    assert.equal(existing.decisionSourceSha256, sha(bytes), 'Resume decision cannot be replaced');
+    console.log(JSON.stringify({ resumeId: existing.resumeId, changed: false, generationCalls: p.generationCalls }));
+    return; // Repeating an old decision must not clear a subsequent failure.
+  }
+  assert.equal(p.current, null, 'Resolve the current call before resuming');
+  recoveryProposal(approval);
+  const used = recoveryUsage(approval), stopped = approval.stoppedByFailure;
+  assert(stopped, 'Recovery is not stopped');
+  assert.equal(decision.recoveryApprovalId, approval.approvalId);
+  assert.equal(decision.scope, 'unstarted-approved-entries-only');
+  assert.equal(decision.provider, 'built-in-image_gen');
+  assert.equal(decision.automaticRetry, false);
+  assert(Number.isFinite(Date.parse(decision.approvedAt)));
+  assert.equal(decision.maximumTotalStartSlots, approval.maximumTotalStartSlots);
+  assert.equal(decision.manifestSha256, sha(fs.readFileSync(file)), 'Resume manifest changed');
+  assert.equal(decision.ledgerSha256, sha(fs.readFileSync(progressFile)), 'Resume ledger changed');
+  assert.deepEqual(decision.stoppedByFailure, stopped, 'Resume failure changed');
+  const failed = find(stopped.entryId), attempt = failed.attempts.at(-1);
+  assert.equal(failed.status, 'failed'); assert.equal(attempt.number, stopped.attempt);
+  assert.equal(attempt.error?.code, stopped.code);
+  assert.equal(attempt.error?.outcome, 'terminal-no-image-returned', 'Unconfirmed output cannot be resumed');
+  assert.equal(decision.failedAttemptSha256, sha(JSON.stringify(attempt)), 'Failed attempt changed');
+  const rawPath = path.resolve(repo, attempt.error.rawResultFile);
+  assert(rawPath.startsWith(path.join(repo, 'work') + path.sep));
+  assert.equal(sha(fs.readFileSync(rawPath)), attempt.error.rawResultSha256);
+  const unused = approval.entryIds.filter(id => !used.some(u => u.entryId === id));
+  assert(unused.length > 0, 'No unused recovery starts remain');
+  assert.deepEqual(decision.entryIds, unused, 'Resume only the untouched approved scope');
+  const record = { ...decision, decisionSourceSha256: sha(bytes), recordedAt: new Date().toISOString() };
+  approval.resumptions = [...(approval.resumptions || []), record];
+  delete approval.stoppedByFailure;
+  p.history.push({ action: 'recovery-resumed', resumeId: record.resumeId, approvalId: approval.approvalId,
+    entryIds: unused, stoppedByFailure: stopped, at: record.recordedAt });
+  save();
+  console.log(JSON.stringify({ resumeId: record.resumeId, changed: true, unused: unused.length, generationCalls: p.generationCalls }));
+}
 function failRecovery(failureFile) {
   const failure = JSON.parse(fs.readFileSync(failureFile)), e = find(failure.entryId), a = e.attempts.at(-1), approval = m.generation.recoveryApproval;
   assert(approval && a.recoveryApprovalId === approval.approvalId);
@@ -347,4 +389,5 @@ else if (command === 'status') status();
 else if (command === 'recovery-authorize') authorizeRecovery(args[0]);
 else if (command === 'recovery-start') startRecovery(args[0]);
 else if (command === 'recovery-fail') failRecovery(args[0]);
-else throw Error('Use consent / prepare / start / capture / review / hold-policy / status / recovery-authorize / recovery-start / recovery-fail');
+else if (command === 'recovery-resume') resumeRecovery(args[0]);
+else throw Error('Use consent / prepare / start / capture / review / hold-policy / status / recovery-authorize / recovery-start / recovery-fail / recovery-resume');
