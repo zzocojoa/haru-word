@@ -14,9 +14,10 @@ const original = JSON.parse(JSON.stringify(recorded));
 // These synthetic v1/v2 fixtures exercise the legacy path, not the production recovery scope.
 delete original.generation.recoveryApproval;
 delete original.generation.recoveryRounds;
+delete original.generation.remainingApproval;
 for (const e of original.entries) {
   e.status = 'waiting'; e.attempts = [];
-  for (const key of ['file', 'sha256', 'bytes', 'width', 'height', 'review', 'policyHold', 'pendingCorrection']) delete e[key];
+  for (const key of ['file', 'sha256', 'bytes', 'width', 'height', 'review', 'policyHold', 'pendingCorrection', 'textPolicyException', 'policyHoldHistory']) delete e[key];
 }
 Object.assign(original.entries.find(e => e.entryId === completedSeed.entryId), completedSeed, { status: 'approved' });
 Object.assign(original.entries.find(e => e.entryId === correctedSeed.entryId), correctedSeed, { status: 'held' });

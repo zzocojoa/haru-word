@@ -18,6 +18,10 @@ fs.copyFileSync(path.join(repo, proposalPath), path.join(fixture, proposalPath))
 const mf = path.join(fixture, 'data/word-image-manifest.json'), pf = path.join(fixture, 'work/oxford-images-progress.json');
 const af = path.join(fixture, 'work/approval.json'), jf = path.join(fixture, 'work/oxford-images-pending.json');
 const original = read(mf), proposal = read(path.join(fixture, proposalPath));
+if (original.generation.remainingApproval) {
+  for (const spec of original.generation.remainingApproval.entries) original.entries[original.entries.findIndex(e => e.entryId === spec.entryId)] = copy(spec.entryBefore);
+  delete original.generation.remainingApproval;
+}
 delete original.generation.recoveryApproval;
 delete original.generation.recoveryRounds;
 // Start from the approved proposal's original entry states even after real recovery has progressed.

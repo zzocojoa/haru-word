@@ -9,7 +9,12 @@ for (const d of ['data','docs','scripts','work']) fs.mkdirSync(path.join(fixture
 const mf = path.join(fixture,'data/word-image-manifest.json'), pf = path.join(fixture,'work/oxford-images-progress.json');
 const qpath = 'docs/oxford-word-image-recovery-round2-proposal.json', qf = path.join(fixture,qpath);
 const original = read(path.join(repo,'data/word-image-manifest.json')), proposal = read(path.join(repo,qpath)), ids = proposal.executionOrder;
+if (original.generation.remainingApproval) {
+  for (const spec of original.generation.remainingApproval.entries) original.entries[original.entries.findIndex(e=>e.entryId===spec.entryId)] = copy(spec.entryBefore);
+  delete original.generation.remainingApproval;
+}
 delete original.generation.recoveryRounds;
+delete original.generation.qualityContinuationApproval;
 // Reconstruct synthetic round2 seeds from the committed scope, even after real candidates have progressed.
 for (const spec of proposal.entries) {
   const e = original.entries.find(e=>e.entryId===spec.entryId);

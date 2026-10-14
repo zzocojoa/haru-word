@@ -169,7 +169,16 @@ function review(reviewFile) {
     assert(['approve', 'hold'].includes(input.decision));
     assert(input.note?.trim());
     if (input.decision === 'approve') {
-      assert(input.textFree === true && input.styleConsistent === true && input.meaningMatch === true && input.smallScreenChecked === true && input.pngDecoded === true);
+      if (e.textPolicyException) {
+        const approval = m.generation.remainingApproval;
+        assert(approval && approval.textExceptionEntryIds.includes(e.entryId));
+        assert.equal(e.textPolicyException.approvalId, approval.approvalId);
+        assert.equal(input.textFree, false, 'Allowed subject letters must not be reported as text-free');
+        assert.equal(input.textPolicyExceptionVerified, true);
+        assert.equal(input.nonAuthorizedTextAbsent, true);
+        assert.equal(input.textExceptionApprovalId, approval.approvalId);
+      } else assert.equal(input.textFree, true);
+      assert(input.styleConsistent === true && input.meaningMatch === true && input.smallScreenChecked === true && input.pngDecoded === true);
       const bytes = fs.readFileSync(path.join(root, e.file));
       assert.equal(sha(bytes), e.sha256);
       assert.equal(bytes.length, e.bytes);
@@ -179,6 +188,45 @@ function review(reviewFile) {
       userApproval: 'style-approved', caveat: 'An image is a mnemonic; it does not uniquely identify an English word or explain every use.' };
   }
   save(); console.log(JSON.stringify({ counts: m.counts, generationCalls: p.generationCalls }));
+}
+function authorizeRemaining(decisionFile) {
+  assert.equal(p.current, null, 'Resolve the current call first');
+  const bytes = fs.readFileSync(decisionFile), decision = JSON.parse(bytes), existing = m.generation.remainingApproval;
+  if (existing) {
+    assert.equal(existing.approvalSourceSha256, sha(bytes), 'Remaining approval cannot be replaced');
+    console.log(JSON.stringify({ approvalId: existing.approvalId, changed: false })); return;
+  }
+  const ids = ['d056f2650b116cba', '49717992a5fb1a1a', '53b4f95ddd122fc2', '8e5aef6a2138e99b'];
+  const letterIds = [ids[0], ids[1], ids[3]];
+  assert(decision.approvalId?.trim() && Number.isFinite(Date.parse(decision.approvedAt)));
+  assert.equal(decision.letterDecision, '세 항목의 영문 글자 형태만 허용 (추천)');
+  assert.equal(decision.breastDecision, '노출 없는 의료상담 후보로 진행');
+  assert.equal(decision.provider, 'built-in-image_gen'); assert.equal(decision.automaticServiceRetry, false);
+  assert.equal(decision.qualityIterationsUntilApproved, true);
+  assert.deepEqual(decision.entryIds, ids); assert.deepEqual(decision.textExceptionEntryIds, letterIds);
+  assert.deepEqual(m.entries.filter(e => e.status !== 'approved').map(e => e.entryId), ids);
+  assert.equal(decision.baseManifestSha256, sha(fs.readFileSync(file)));
+  assert.equal(decision.baseLedgerSha256, sha(fs.readFileSync(progressFile)));
+  const entries = ids.map(find);
+  for (const e of entries) {
+    const spec = decision.entries.find(s => s.entryId === e.entryId);
+    assert(spec); assert.equal(spec.entrySnapshotSha256, sha(JSON.stringify(e)));
+    assert.deepEqual(spec.entryBefore, e, 'Preserve the full previous policy/failure entry');
+    assert.equal(spec.sourceFingerprint, e.sourceFingerprint); assert.match(spec.slug, /^[a-z0-9-]+$/);
+    if (letterIds.includes(e.entryId)) assert(e.policyHold?.userDecision.includes('글자 금지 유지'));
+    else { assert.equal(e.status, 'failed'); assert.equal(e.attempts.at(-1).error?.code, 'moderation_blocked'); }
+  }
+  m.generation.remainingApproval = { ...decision, approvalSourceSha256: sha(bytes) };
+  for (const e of entries) {
+    e.slug = decision.entries.find(s => s.entryId === e.entryId).slug;
+    if (letterIds.includes(e.entryId)) {
+      e.policyHoldHistory = [...(e.policyHoldHistory || []), { hold: e.policyHold, releasedByApprovalId: decision.approvalId, releasedAt: decision.approvedAt }];
+      e.textPolicyException = { approvalId: decision.approvalId, scope: 'English letter forms constituting the subject only; no additional captions, numbers, labels, brands or watermarks.' };
+      delete e.policyHold;
+    }
+  }
+  p.history.push({ action: 'remaining-scope-approved', approvalId: decision.approvalId, at: decision.approvedAt });
+  save(); console.log(JSON.stringify({ approvalId: decision.approvalId, changed: true, counts: m.counts, generationCalls: p.generationCalls }));
 }
 function holdPolicy(decisionFile) {
   assert.equal(m.generation.userApproval, 'style-approved-continue');
@@ -240,9 +288,15 @@ function recoveryProposal(approval) {
     assert.equal(proposal.schemaVersion, 2); assert.equal(proposal.round, approval.round);
     assert.equal(proposal.sourceSnapshot.firstApprovalSnapshotSha256, sha(JSON.stringify(m.generation.recoveryApproval)), 'Original recovery approval changed');
     if (approval.round > 2) {
-      const standing = m.generation.qualityContinuationApproval;
-      assert(standing?.untilApproved && approval.continuationApprovalId === standing.approvalId);
-      assert.equal(proposal.sourceSnapshot.continuationApprovalSha256, sha(JSON.stringify(standing)));
+      if (approval.remainingApprovalId) {
+        const remaining = m.generation.remainingApproval;
+        assert(remaining?.qualityIterationsUntilApproved && approval.remainingApprovalId === remaining.approvalId);
+        assert.equal(proposal.sourceSnapshot.remainingApprovalSha256, sha(JSON.stringify(remaining)));
+      } else {
+        const standing = m.generation.qualityContinuationApproval;
+        assert(standing?.untilApproved && approval.continuationApprovalId === standing.approvalId);
+        assert.equal(proposal.sourceSnapshot.continuationApprovalSha256, sha(JSON.stringify(standing)));
+      }
     }
   }
   assert(Array.isArray(approval.entryIds) && approval.entryIds.length > 0);
@@ -303,11 +357,17 @@ function authorizeRecoveryRound(approvalFile) {
   assert.deepEqual(approval.entryIds, m.entries.filter(e => approval.entryIds.includes(e.entryId)).map(e => e.entryId), 'Keep textbook order');
   if (approval.round === 2) assert.equal(approval.maximumNewStartSlots, 14);
   else {
-    const standing = m.generation.qualityContinuationApproval;
-    assert(standing?.untilApproved, 'Explicit quality continuation approval is required');
-    assert.equal(approval.continuationApprovalId, standing.approvalId);
-    assert.equal(proposal.sourceSnapshot.continuationApprovalSha256, sha(JSON.stringify(standing)));
-    assert(approval.entryIds.every(id => standing.entryIds.includes(id)), 'Outside the quality continuation scope');
+    if (approval.remainingApprovalId) {
+      const remaining = m.generation.remainingApproval;
+      assert(remaining?.qualityIterationsUntilApproved && approval.remainingApprovalId === remaining.approvalId);
+      assert(approval.entryIds.every(id => remaining.entryIds.includes(id)), 'Outside the remaining resolution scope');
+    } else {
+      const standing = m.generation.qualityContinuationApproval;
+      assert(standing?.untilApproved, 'Explicit quality continuation approval is required');
+      assert.equal(approval.continuationApprovalId, standing.approvalId);
+      assert.equal(proposal.sourceSnapshot.continuationApprovalSha256, sha(JSON.stringify(standing)));
+      assert(approval.entryIds.every(id => standing.entryIds.includes(id)), 'Outside the quality continuation scope');
+    }
   }
   assert.equal(approval.maximumNewStartSlots, approval.entryIds.length);
   assert(approval.maximumNewStartSlots > 0 && approval.maximumNewStartSlots <= 14);
@@ -321,7 +381,7 @@ function authorizeRecoveryRound(approvalFile) {
   assert.equal(approval.baseLedgerSha256, proposal.sourceSnapshot.ledgerSha256);
   for (const id of approval.entryIds) {
     const e = find(id), spec = proposal.entries.find(s => s.entryId === id);
-    assert(spec && !e.policyHold && e.status === 'held', 'Additional scope contains an unsupported entry');
+    assert(spec && !e.policyHold && (e.status === 'held' || (approval.remainingApprovalId && e.status === 'failed')), 'Additional scope contains an unsupported entry');
     assert.equal(spec.currentStatus, e.status); assert.equal(spec.currentAttempts, e.attempts.length);
     assert.equal(spec.sourceFingerprint, e.sourceFingerprint); assert.equal(spec.entrySnapshotSha256, sha(JSON.stringify(e)));
     assert.equal(spec.proposedAdditionalStartSlots, 1); assert.equal(spec.proposedNextAttemptNumber, e.attempts.length + 1);
@@ -505,6 +565,7 @@ else if (command === 'start') start(args[0], args[1]);
 else if (command === 'capture') capture(args[0], args[1]);
 else if (command === 'review') review(args[0]);
 else if (command === 'hold-policy') holdPolicy(args[0]);
+else if (command === 'remaining-authorize') authorizeRemaining(args[0]);
 else if (command === 'status') status();
 else if (command === 'recovery-authorize') authorizeRecovery(args[0]);
 else if (command === 'recovery-start') startRecovery(args[0]);

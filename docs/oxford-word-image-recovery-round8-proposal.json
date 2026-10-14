@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 2,
+  "round": 8,
+  "proposalId": "83d746df-8ecd-44d9-ae9e-192544ff2cfd",
+  "createdAt": "2026-10-14T09:53:06.863Z",
+  "executionAllowed": false,
+  "authorization": null,
+  "status": "inert-proposal-covered-by-separate-human-remaining-approval",
+  "sourceSnapshot": {
+    "dataset": {
+      "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722",
+      "sha256": "14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+      "fingerprintAlgorithm": "sha256(wordsSha256 + \":\" + contentSha256)"
+    },
+    "baseCommit": "79c70690eac6a9caf354e69be3b08ef77c40b47d",
+    "manifestSha256": "d3a6a3f79fbcadafb293672ca095b32987b614e1205604d94d9191114f6f48a9",
+    "ledgerSha256": "7a9de90cdd2f08aa1efd8cd086f429d689502413cb3965723a5b5bc04c0bab59",
+    "firstApprovalSnapshotSha256": "f15afb85307bcebafba918c44c48f5d24120ce1d1c17fef5b8e9d75a2b554fa1",
+    "remainingApprovalSha256": "d1acaf8cdd344433e9aaeb7954d982ad405440e01ff8c5383a0259dad44e4638"
+  },
+  "countsBefore": {
+    "total": 3809,
+    "waiting": 0,
+    "generating": 0,
+    "generated": 0,
+    "approved": 3805,
+    "held": 3,
+    "failed": 1
+  },
+  "currentStartSlots": 4082,
+  "proposedStartSlotLimit": 4,
+  "maximumStartSlotsAfterProposal": 4086,
+  "provider": "built-in-image_gen",
+  "automaticRetry": false,
+  "oneAdditionalStartPerEntry": true,
+  "remainingApprovalId": "c57e8ae4-175e-49f9-be9b-cfd66bbe72c5",
+  "executionOrder": [
+    "d056f2650b116cba",
+    "49717992a5fb1a1a",
+    "53b4f95ddd122fc2",
+    "8e5aef6a2138e99b"
+  ],
+  "style": {
+    "stylePrefix": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.",
+    "referenceInstruction": "Input image 1 is a STYLE REFERENCE ONLY: match its clean background, restrained illustrative surface and uncluttered adult composition. Draw the requested NEW subject; do not include an apple unless the requested subject calls for it.",
+    "reference": "adb44eba7b3ceef3-apple-v1.png",
+    "assetRoot": "outputs/oxford-images/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+    "oldNativeInventory": 0,
+    "referenceEntryId": "adb44eba7b3ceef3",
+    "referenceSha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+  },
+  "entries": [
+    {
+      "entryId": "d056f2650b116cba",
+      "word": "capital",
+      "pos": "adj.",
+      "level": "A1",
+      "baseMeaning": "대문자의",
+      "sourceFingerprint": "9d66f25eddd5d1bdf8e9bd29c747f746bb6b0b911dd7921fbd2a2ba06e56db4e",
+      "canonicalContent": {
+        "meaning": "대문자의",
+        "ipa": "",
+        "expression": "a capital letter",
+        "example": "Begin your name with a capital letter.",
+        "translation": "이름은 대문자로 시작하세요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "대문자"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 1,
+      "currentImage": "d056f2650b116cba-capital-adj-v1.png",
+      "currentImageSha256": "2ba1b11c15568eb54f3f0f6d90f5b1d73e2970787d0b252a509e9e415417a33b",
+      "entrySnapshotSha256": "c215b5e965864af2594e704f9f6a614c23cb2d19cce9dd6e3a094cbecccb0926",
+      "attemptsSnapshotSha256": "967d86c9acd0df47b102f1f13ce3f3909d32d5970b7ae60e3fcd016959cec3bc",
+      "latestReviewBasis": "글자 없는 키보드의 두 키를 동시에 누르는 동작은 보이지만 대문자 형태나 대소문자 차이가 없어 일반 타이핑·단축키와 구분되지 않는다. '대문자의'라는 기본 뜻 전달이 부족해 의미 검수는 보류한다. 글자 금지를 유지한 후보이며 단순히 큰 물건이나 큰 글자가 대문자라는 잘못된 규칙을 제시하지 않았다. 원본을 보존하고 알파벳 예외 답변 전까지 수정 호출 1회를 남겨 둔다. 원본과 실제 320px 축소 화면에서 같은 의미 전달 부족을 확인했다.",
+      "mode": "redraw",
+      "title": "같은 높이의 대소문자 형태 비교",
+      "scenePrompt": "Two identical plain wooden alphabet tiles stand side by side on a simple table. The left tile bears only the ordinary lowercase letter a and the right tile bears only the ordinary uppercase letter A. Render the two glyphs in the same restrained serif style, with equal visible height and a shared baseline, so their CASE SHAPES, not large versus small size, explain the difference. One adult hand points just beside the uppercase A without covering it. The A must have two diagonal stems and a crossbar; the a must be a clearly recognizable lowercase a. No arrows, checkmarks, captions, keyboard, extra letters, words, numbers or other markings. Only the subject glyphs a and A are permitted.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one English vocabulary mnemonic card with permitted subject letter forms for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. Only the English letter forms constituting the specified subject are permitted. No additional captions, labels, words, numbers, punctuation, logos, watermarks or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: Two identical plain wooden alphabet tiles stand side by side on a simple table. The left tile bears only the ordinary lowercase letter a and the right tile bears only the ordinary uppercase letter A. Render the two glyphs in the same restrained serif style, with equal visible height and a shared baseline, so their CASE SHAPES, not large versus small size, explain the difference. One adult hand points just beside the uppercase A without covering it. The A must have two diagonal stems and a crossbar; the a must be a clearly recognizable lowercase a. No arrows, checkmarks, captions, keyboard, extra letters, words, numbers or other markings. Only the subject glyphs a and A are permitted.\nInput image1 is STYLE REFERENCE ONLY. Match its warm paper surface and adult restrained illustration style. Do not copy the apple.",
+      "fullPromptSha256": "cb890ac48f5a8b879a6cce2c29bb48f821d93765ead8e272b3fb5c10a14a1837",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 2,
+      "proposedFilename": "d056f2650b116cba-capital-adj-v2.png",
+      "subjectLetterFormsException": true,
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "49717992a5fb1a1a",
+      "word": "letter",
+      "pos": "n.",
+      "level": "A1",
+      "baseMeaning": "글자",
+      "sourceFingerprint": "0706eb937c43d4940d2aa0119d6ad5aa848f9768eb9245ebfe7b06b9c4d11282",
+      "canonicalContent": {
+        "meaning": "글자",
+        "ipa": "",
+        "expression": "a capital letter",
+        "example": "Begin your name with a capital letter.",
+        "translation": "이름은 대문자로 시작하세요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "대문자"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 0,
+      "entrySnapshotSha256": "d5e5a7fa68cd8c42dead1e8a05f5c4ff9d946d0bdcbc1bb0d2d950de3089b730",
+      "attemptsSnapshotSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "mode": "redraw",
+      "title": "한 글자 형태를 지닌 나무 타일",
+      "scenePrompt": "One plain wooden alphabet tile on a neutral table, bearing one clear ordinary uppercase A as its sole subject glyph. A has two diagonal stems and one crossbar and reads as a printed English letter on the tile, not a bridge, a logo or a word. Show a simple adult fingertip near the tile edge without obscuring the glyph. No envelope, writing a letter, captions, extra characters, numbers or labels. Only the subject letter A is permitted.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one English vocabulary mnemonic card with permitted subject letter forms for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. Only the English letter forms constituting the specified subject are permitted. No additional captions, labels, words, numbers, punctuation, logos, watermarks or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: One plain wooden alphabet tile on a neutral table, bearing one clear ordinary uppercase A as its sole subject glyph. A has two diagonal stems and one crossbar and reads as a printed English letter on the tile, not a bridge, a logo or a word. Show a simple adult fingertip near the tile edge without obscuring the glyph. No envelope, writing a letter, captions, extra characters, numbers or labels. Only the subject letter A is permitted.\nInput image1 is STYLE REFERENCE ONLY. Match its warm paper surface and adult restrained illustration style. Do not copy the apple.",
+      "fullPromptSha256": "c1b2243a743442e77fd6cea42539bbc942bacf32a4de84bcf1477e7c0f3855cf",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 1,
+      "proposedFilename": "49717992a5fb1a1a-letter-character-v1.png",
+      "subjectLetterFormsException": true,
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "53b4f95ddd122fc2",
+      "word": "breast",
+      "pos": "n.",
+      "level": "B2",
+      "baseMeaning": "유방",
+      "sourceFingerprint": "7e5dd6e4a08aebf1b21c9685d5c995f75e1533268234c57c5b27496ff75d8e92",
+      "canonicalContent": {
+        "meaning": "유방",
+        "ipa": "",
+        "expression": "breast cancer",
+        "example": "The hospital supports research into breast cancer.",
+        "translation": "그 병원은 유방암 연구를 지원해요.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "유방암"
+      },
+      "currentStatus": "failed",
+      "currentAttempts": 2,
+      "entrySnapshotSha256": "0702aeba27928fb5591366a7b9175f04d52a4264fb5d99cd71aa53c647e16a1d",
+      "attemptsSnapshotSha256": "ee4b13635b5bc073aa05c715ccb00b2d2f2510b9b4feefa4feb712a6a6cff68e",
+      "previousError": {
+        "code": "moderation_blocked",
+        "category": "sexual",
+        "stage": "output",
+        "outcome": "terminal-no-image-returned",
+        "httpStatus": 400,
+        "requestId": "95f0ce30-dc95-4bd2-8368-6178d4da84b1",
+        "rawResultFile": "work/oxford-batch-393-image-error-3.json",
+        "rawResultSha256": "6732afccd54fed2fd0f7aeb68e3050997fe4d828784d4c57ef07ea1aadf58b5c"
+      },
+      "mode": "redraw",
+      "title": "완전히 옷을 입은 성인 의료상담",
+      "scenePrompt": "A neutral adult medical-counselling scene: an adult woman wearing a plain opaque crew-neck top sits beside a clinician in a plain unmarked coat. Her clothing covers her torso completely. She calmly points with one hand to the location of one breast over the top, below the collarbone and on the natural rounded breast area, while the clinician listens. Keep adult natural proportions and an ordinary seated posture. The specific pointed location is the vocabulary subject, not a generic collarbone, neckline or shoulder gesture. No exposed anatomy, cutaway, undressing, examination, illness, diagnosis, treatment claim, ribbon, badge, writing, labels, digits or logos. The scene is an educational mnemonic for the body-part noun, not a diagnosis or medical instruction.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one textless English vocabulary mnemonic card for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. No text, letters, numbers, labels, punctuation, logos, watermarks, or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: A neutral adult medical-counselling scene: an adult woman wearing a plain opaque crew-neck top sits beside a clinician in a plain unmarked coat. Her clothing covers her torso completely. She calmly points with one hand to the location of one breast over the top, below the collarbone and on the natural rounded breast area, while the clinician listens. Keep adult natural proportions and an ordinary seated posture. The specific pointed location is the vocabulary subject, not a generic collarbone, neckline or shoulder gesture. No exposed anatomy, cutaway, undressing, examination, illness, diagnosis, treatment claim, ribbon, badge, writing, labels, digits or logos. The scene is an educational mnemonic for the body-part noun, not a diagnosis or medical instruction.\nInput image1 is STYLE REFERENCE ONLY. Match its warm paper surface and adult restrained illustration style. Do not copy the apple.",
+      "fullPromptSha256": "52953057330b2706dcb0e23555ea6065b6522c35d65892368c0b952214487925",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 3,
+      "proposedFilename": "53b4f95ddd122fc2-breast-v3.png",
+      "subjectLetterFormsException": false,
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "candidateSuccessVerified": false
+    },
+    {
+      "entryId": "8e5aef6a2138e99b",
+      "word": "print",
+      "pos": "n.",
+      "level": "B2",
+      "baseMeaning": "인쇄 글자",
+      "sourceFingerprint": "eec3554b3600e80ba32f1371c0c4328d1691618e67cf754d9df5800b3b4ba146",
+      "canonicalContent": {
+        "meaning": "인쇄 글자",
+        "ipa": "",
+        "expression": "small print",
+        "example": "Reading the small print is a high priority when protecting your privacy.",
+        "translation": "사생활을 보호하려면 작은 글씨로 된 세부 조항을 읽는 것이 매우 중요하다.",
+        "source": "학습용 작성 예문",
+        "expressionTranslation": "작은 인쇄 글자"
+      },
+      "currentStatus": "held",
+      "currentAttempts": 0,
+      "entrySnapshotSha256": "bc58a5db0049264c8caa42b0ec802b4c5286201b8eb00a5f1a4159238754cb0c",
+      "attemptsSnapshotSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "mode": "redraw",
+      "title": "종이 위 작은 인쇄 글자",
+      "scenePrompt": "An adult calmly reads a physical paper sheet containing three short rows of small clearly typeset lowercase English letters, using only repeated a b c forms. The ink forms belong to the printed paper itself. A plain handheld magnifier enlarges a small portion of those same a b c letters to make the print recognizable at phone size. Use ordinary serif printed letter shapes, not handwriting, random pseudocharacters, a printer, a word on a poster or a UI. No real contractual text, captions, headline, symbols, numbers, signature, logo or watermark. Only the printed subject letter forms a, b and c are permitted.",
+      "fullPrompt": "Use case: scientific-educational. Asset: one English vocabulary mnemonic card with permitted subject letter forms for an adult learner. Portrait canvas, approximately 3:4. Refined minimal flat illustration: crisp simplified shapes, restrained muted colors, warm off-white clean background, subtle paper texture, ample negative space, clear large silhouette readable at phone size. Adult editorial tone, natural adult proportions where humans are present. No childish faces, no classroom decoration, no photo or 3D rendering. Only the English letter forms constituting the specified subject are permitted. No additional captions, labels, words, numbers, punctuation, logos, watermarks or UI controls anywhere. Single asset, never a sheet of multiple vocabulary cards. Essential subject occupies the middle of the portrait with comfortable margins.\nSubject and meaning: An adult calmly reads a physical paper sheet containing three short rows of small clearly typeset lowercase English letters, using only repeated a b c forms. The ink forms belong to the printed paper itself. A plain handheld magnifier enlarges a small portion of those same a b c letters to make the print recognizable at phone size. Use ordinary serif printed letter shapes, not handwriting, random pseudocharacters, a printer, a word on a poster or a UI. No real contractual text, captions, headline, symbols, numbers, signature, logo or watermark. Only the printed subject letter forms a, b and c are permitted.\nInput image1 is STYLE REFERENCE ONLY. Match its warm paper surface and adult restrained illustration style. Do not copy the apple.",
+      "fullPromptSha256": "3522ed19ba944d45a68e9e07c700cb3cb2ba74d63f960aa200e4ce72e9b525a2",
+      "references": [
+        {
+          "role": "style-only",
+          "file": "adb44eba7b3ceef3-apple-v1.png",
+          "sha256": "9ee56e8e9ada244d3b09cd874bf4da5d26435c0e5d188474ddd8d616bdf5ff74"
+        }
+      ],
+      "proposedAdditionalStartSlots": 1,
+      "proposedNextAttemptNumber": 1,
+      "proposedFilename": "8e5aef6a2138e99b-print-n-v1.png",
+      "subjectLetterFormsException": true,
+      "generationAllowed": false,
+      "approvalRecorded": false,
+      "candidateSuccessVerified": false
+    }
+  ],
+  "fullGoalComplete": false
+}

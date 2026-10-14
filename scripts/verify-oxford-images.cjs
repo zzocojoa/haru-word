@@ -33,6 +33,21 @@ for (const w of words) {
       for (const key of ['file', 'sha256', 'bytes', 'width', 'height', 'review']) assert.equal(e[key], undefined);
     }
   }
+  if (e.textPolicyException) {
+    const approval = m.generation.remainingApproval;
+    assert(approval && approval.textExceptionEntryIds.includes(e.entryId));
+    assert.equal(e.textPolicyException.approvalId, approval.approvalId);
+    assert(!e.policyHold);
+    const history = e.policyHoldHistory?.at(-1);
+    assert.equal(history?.releasedByApprovalId, approval.approvalId);
+    assert.equal(history.hold.reason, 'text-policy-meaning-conflict');
+    if (e.status === 'approved') {
+      assert.equal(e.review.textFree, false);
+      assert.equal(e.review.textPolicyExceptionVerified, true);
+      assert.equal(e.review.nonAuthorizedTextAbsent, true);
+      assert.equal(e.review.textExceptionApprovalId, approval.approvalId);
+    }
+  }
   assert(e.status in counts && e.status !== 'total'); counts[e.status]++;
 }
 assert.deepEqual(m.counts, counts);
