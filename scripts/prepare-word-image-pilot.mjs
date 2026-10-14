@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
 
-export function prepareWordImagePilot({ sourceRoot, projectRoot }) {
+export function prepareWordImagePilot({ sourceRoot, projectRoot, assetRoot }) {
   const manifest = JSON.parse(readFileSync(path.join(sourceRoot, 'data/word-image-manifest.json'), 'utf8'));
   for (const id of manifest.pilotEntryIds) {
     if (manifest.entries.find(entry => entry.entryId === id)?.status !== 'approved') throw new Error('Unapproved image: ' + id);
@@ -20,6 +20,10 @@ export function prepareWordImagePilot({ sourceRoot, projectRoot }) {
     const entry = manifest.entries.find(entry => entry.entryId === id), word = words.get(id), material = content[id];
     if (!word || !material || entry.pos !== word.pos || entry.baseMeaning !== material.meaning ||
       entry.sourceFingerprint !== sha(JSON.stringify({ word, content: material }))) throw new Error('Entry fingerprint mismatch: ' + id);
+    const bytes = readFileSync(path.join(assetRoot, entry.file));
+    if (sha(bytes) !== entry.sha256 || bytes.length !== entry.bytes || bytes.length < 24 ||
+      bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' ||
+      bytes.readUInt32BE(16) !== entry.width || bytes.readUInt32BE(20) !== entry.height) throw new Error('PNG fingerprint mismatch: ' + id);
   }
   return { prepared: 0 };
 }

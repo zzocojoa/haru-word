@@ -29,3 +29,11 @@ test('a pilot entry with a different source fingerprint is rejected', () => {
   assert.throws(() => prepareWordImagePilot(f), { message: 'Entry fingerprint mismatch: ' + f.manifest.entries[0].entryId });
   assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
 });
+
+test('a corrupt final PNG is rejected before any earlier PNG is copied', () => {
+  const f = imagePilotFixture(), entry = f.manifest.entries.at(-1);
+  writeFileSync(path.join(f.assetRoot, entry.file), 'corrupt PNG');
+  assert.throws(() => prepareWordImagePilot(f), { message: 'PNG fingerprint mismatch: ' + entry.entryId });
+  assert.equal(existsSync(path.join(f.projectRoot, 'public/oxford-image-pilot')), false);
+  assert.equal(existsSync(path.join(f.projectRoot, 'data/word-image-pilot.json')), false);
+});
