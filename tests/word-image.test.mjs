@@ -34,3 +34,9 @@ test('same-spelling bank images match only their own ID part of speech and meani
   assert.equal(resolveWordImage({ ...bank, id: 'unsupported' }, '은행'), undefined);
   assert.equal(resolveWordImage(bank, ''), undefined);
 });
+
+test('personal additions never receive the default Oxford image', () => {
+  const image = WORD_IMAGES[0], word = wordById.get(image.entryId);
+  assert.equal(resolveWordImage({ ...word, personal: true }, image.baseMeaning), undefined);
+  assert.equal(resolveWordImage({ ...word, id: 'personal_sample', personal: true }, image.baseMeaning), undefined);
+});

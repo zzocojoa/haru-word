@@ -5,5 +5,6 @@ export type WordImage = Readonly<{ entryId: string; pos: string; baseMeaning: st
 export const WORD_IMAGES: readonly WordImage[] = raw.entries;
 
 export function resolveWordImage(word: Word, selectedMeaning: string): WordImage | undefined {
+  if (word.personal) return undefined;
   return WORD_IMAGES.find(image => image.entryId === word.id && image.pos === word.pos && image.baseMeaning.trim() === selectedMeaning.trim());
 }
