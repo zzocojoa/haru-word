@@ -13,6 +13,7 @@ assert(completedSeed && correctedSeed, 'Seed fixtures need one original and one 
 const original = JSON.parse(JSON.stringify(recorded));
 // These synthetic v1/v2 fixtures exercise the legacy path, not the production recovery scope.
 delete original.generation.recoveryApproval;
+delete original.generation.recoveryRounds;
 for (const e of original.entries) {
   e.status = 'waiting'; e.attempts = [];
   for (const key of ['file', 'sha256', 'bytes', 'width', 'height', 'review', 'policyHold', 'pendingCorrection']) delete e[key];

@@ -223,10 +223,12 @@ function status() {
       used: recoveryUsage(m.generation.recoveryApproval).length,
       stoppedByFailure: m.generation.recoveryApproval.stoppedByFailure || null
     } : null,
+    recoveryRounds: (m.generation.recoveryRounds || []).map(a => ({ approvalId: a.approvalId, round: a.round,
+      maximumNewStartSlots: a.maximumNewStartSlots, used: recoveryUsage(a).length, stoppedByFailure: a.stoppedByFailure || null })),
     next: m.entries.filter(e => e.status === 'waiting').slice(0, 10).map(e => ({ id: e.entryId, word: e.headword || e.word, pos: e.pos, meaning: e.baseMeaning, prepared: Boolean(e.prompt) })) }));
 }
 function recoveryProposal(approval) {
-  assert.equal(approval.proposalPath, 'docs/oxford-word-image-recovery-proposal.json');
+  assert.equal(approval.proposalPath, approval.round >= 2 ? `docs/oxford-word-image-recovery-round${approval.round}-proposal.json` : 'docs/oxford-word-image-recovery-proposal.json');
   const bytes = fs.readFileSync(path.join(repo, approval.proposalPath));
   assert.equal(sha(bytes), approval.proposalSha256, 'Approved proposal changed');
   const proposal = JSON.parse(bytes);
@@ -234,10 +236,118 @@ function recoveryProposal(approval) {
   assert.equal(proposal.executionAllowed, false); // The proposal remains an inert record.
   assert.equal(proposal.authorization, null);
   assert.equal(proposal.sourceSnapshot.dataset.sha256, m.dataset.sha256);
+  if (approval.round >= 2) {
+    assert.equal(proposal.schemaVersion, 2); assert.equal(proposal.round, approval.round);
+    assert.equal(proposal.sourceSnapshot.firstApprovalSnapshotSha256, sha(JSON.stringify(m.generation.recoveryApproval)), 'Original recovery approval changed');
+    if (approval.round > 2) {
+      const standing = m.generation.qualityContinuationApproval;
+      assert(standing?.untilApproved && approval.continuationApprovalId === standing.approvalId);
+      assert.equal(proposal.sourceSnapshot.continuationApprovalSha256, sha(JSON.stringify(standing)));
+    }
+  }
   assert(Array.isArray(approval.entryIds) && approval.entryIds.length > 0);
   assert.equal(new Set(approval.entryIds).size, approval.entryIds.length);
   assert.deepEqual(approval.entryIds, proposal.executionOrder.filter(id => approval.entryIds.includes(id)));
   return proposal;
+}
+function recoveryApprovalById(id) {
+  const approval = [m.generation.recoveryApproval, ...(m.generation.recoveryRounds || [])].find(a => a && a.approvalId === id);
+  assert(approval, 'Explicit recovery approval is required');
+  return approval;
+}
+function authorizeQualityContinuation(decisionFile) {
+  assert.equal(p.current, null, 'Resolve the current call before recording quality continuation');
+  const bytes = fs.readFileSync(decisionFile), decision = JSON.parse(bytes), existing = m.generation.qualityContinuationApproval;
+  if (existing) {
+    assert.equal(existing.approvalSourceSha256, sha(bytes), 'Quality continuation cannot be replaced');
+    console.log(JSON.stringify({ approvalId: existing.approvalId, changed: false })); return;
+  }
+  const firstRound = m.generation.recoveryRounds?.[0];
+  assert(firstRound?.round === 2, 'Record the original fourteen-entry scope first');
+  assert(decision.approvalId?.trim() && decision.userDecision?.trim()); assert(Number.isFinite(Date.parse(decision.approvedAt)));
+  assert.equal(decision.parentApprovalId, firstRound.approvalId); assert.deepEqual(decision.entryIds, firstRound.entryIds);
+  assert.equal(decision.untilApproved, true); assert.equal(decision.provider, 'built-in-image_gen');
+  assert.equal(decision.automaticServiceRetry, false); assert.equal(decision.textPolicyHoldsPreserved, true);
+  for (const id of decision.entryIds) { const e = find(id); assert(!e.policyHold && e.file, 'Quality scope must contain existing non-policy images'); }
+  m.generation.qualityContinuationApproval = { ...decision, approvalSourceSha256: sha(bytes) };
+  p.history.push({ action: 'quality-continuation-approved', approvalId: decision.approvalId, at: decision.approvedAt });
+  save(); console.log(JSON.stringify({ approvalId: decision.approvalId, changed: true, untilApproved: true, generationCalls: p.generationCalls }));
+}
+function authorizeRecoveryRound(approvalFile) {
+  assert.equal(p.current, null, 'Resolve the current call before recording recovery approval');
+  const bytes = fs.readFileSync(approvalFile), approval = JSON.parse(bytes);
+  assert(Number.isInteger(approval.round) && approval.round >= 2);
+  const existing = (m.generation.recoveryRounds || []).find(a => a.approvalId === approval.approvalId);
+  if (existing) {
+    assert.equal(existing.approvalSourceSha256, sha(bytes), 'Recovery approval cannot be replaced or refilled');
+    recoveryProposal(existing); recoveryUsage(existing);
+    console.log(JSON.stringify({ approvalId: existing.approvalId, changed: false, generationCalls: p.generationCalls }));
+    return;
+  }
+  const rounds = m.generation.recoveryRounds || [];
+  assert.equal(approval.round, rounds.length + 2, 'The additional round cannot be replaced or refilled');
+  const first = m.generation.recoveryApproval;
+  assert(first, 'Preserve the original recovery approval');
+  const previous = rounds.at(-1) || first;
+  assert.equal(recoveryUsage(previous).length, previous.maximumNewStartSlots, 'Finish the previous allowance first');
+  assert(!previous.stoppedByFailure, 'Investigate the previous recovery stop first');
+  const proposal = recoveryProposal(approval);
+  assert(approval.approvalId?.trim() && approval.userDecision?.trim());
+  assert.notEqual(approval.approvalId, first.approvalId);
+  assert(Number.isFinite(Date.parse(approval.approvedAt)));
+  assert.match(approval.proposalCommit, /^[a-f0-9]{40}$/);
+  assert.equal(approval.firstApprovalId, first.approvalId);
+  assert.equal(approval.provider, 'built-in-image_gen'); assert.equal(approval.automaticRetry, false);
+  assert.equal(approval.oneAdditionalStartPerEntry, true); assert.equal(approval.textPolicyHoldsPreserved, true);
+  assert.deepEqual(approval.entryIds, proposal.executionOrder, 'Use the exact approved additional scope');
+  assert.deepEqual(approval.entryIds, m.entries.filter(e => approval.entryIds.includes(e.entryId)).map(e => e.entryId), 'Keep textbook order');
+  if (approval.round === 2) assert.equal(approval.maximumNewStartSlots, 14);
+  else {
+    const standing = m.generation.qualityContinuationApproval;
+    assert(standing?.untilApproved, 'Explicit quality continuation approval is required');
+    assert.equal(approval.continuationApprovalId, standing.approvalId);
+    assert.equal(proposal.sourceSnapshot.continuationApprovalSha256, sha(JSON.stringify(standing)));
+    assert(approval.entryIds.every(id => standing.entryIds.includes(id)), 'Outside the quality continuation scope');
+  }
+  assert.equal(approval.maximumNewStartSlots, approval.entryIds.length);
+  assert(approval.maximumNewStartSlots > 0 && approval.maximumNewStartSlots <= 14);
+  assert.equal(approval.maximumNewStartSlots, proposal.proposedStartSlotLimit);
+  assert.equal(approval.baseGenerationCalls, p.generationCalls); assert.equal(approval.baseGenerationCalls, proposal.currentStartSlots);
+  assert.equal(approval.maximumTotalStartSlots, p.generationCalls + approval.maximumNewStartSlots);
+  assert.equal(approval.maximumTotalStartSlots, proposal.maximumStartSlotsAfterProposal);
+  assert.equal(approval.baseManifestSha256, sha(fs.readFileSync(file)));
+  assert.equal(approval.baseManifestSha256, proposal.sourceSnapshot.manifestSha256);
+  assert.equal(approval.baseLedgerSha256, sha(fs.readFileSync(progressFile)));
+  assert.equal(approval.baseLedgerSha256, proposal.sourceSnapshot.ledgerSha256);
+  for (const id of approval.entryIds) {
+    const e = find(id), spec = proposal.entries.find(s => s.entryId === id);
+    assert(spec && !e.policyHold && e.status === 'held', 'Additional scope contains an unsupported entry');
+    assert.equal(spec.currentStatus, e.status); assert.equal(spec.currentAttempts, e.attempts.length);
+    assert.equal(spec.sourceFingerprint, e.sourceFingerprint); assert.equal(spec.entrySnapshotSha256, sha(JSON.stringify(e)));
+    assert.equal(spec.proposedAdditionalStartSlots, 1); assert.equal(spec.proposedNextAttemptNumber, e.attempts.length + 1);
+    assert.equal(spec.fullPromptSha256, sha(spec.fullPrompt));
+    assert(Array.isArray(spec.references), 'Additional reference roles are required');
+    recoveryReferences(spec, e);
+  }
+  m.generation.recoveryRounds = [...rounds, { ...approval, approvalSourceSha256: sha(bytes) }];
+  p.history.push({ action: 'recovery-round-approved', approvalId: approval.approvalId, round: approval.round, at: approval.approvedAt });
+  save(); console.log(JSON.stringify({ approvalId: approval.approvalId, changed: true, maximumNewStartSlots: approval.maximumNewStartSlots, generationCalls: p.generationCalls }));
+}
+function recoveryReferences(spec, e) {
+  const reference = find(m.generation.styleReferenceEntryId);
+  assert.equal(reference.status, 'approved');
+  if (!spec.references) {
+    const file = path.join(root, reference.file); assert.equal(sha(fs.readFileSync(file)), reference.sha256);
+    return [file];
+  }
+  assert(['edit', 'redraw'].includes(spec.mode));
+  const expected = spec.mode === 'edit' ? [{ role: 'edit-target', file: e.file, sha256: e.sha256 },
+    { role: 'style-only', file: reference.file, sha256: reference.sha256 }] : [{ role: 'style-only', file: reference.file, sha256: reference.sha256 }];
+  assert.deepEqual(spec.references, expected, 'Reference roles/order changed');
+  return spec.references.map(r => {
+    assert.equal(path.basename(r.file), r.file); const file = path.join(root, r.file);
+    assert.equal(sha(fs.readFileSync(file)), r.sha256, 'Reference image changed'); return file;
+  });
 }
 function authorizeRecovery(approvalFile) {
   assert.equal(p.current, null, 'Resolve the current call before recording recovery approval');
@@ -282,15 +392,27 @@ function recoveryUsage(approval) {
   const used = m.entries.flatMap(e => e.attempts.filter(a => a.recoveryApprovalId === approval.approvalId).map(a => ({ entryId: e.entryId, attempt: a })));
   assert.equal(new Set(used.map(u => u.entryId)).size, used.length, 'Each recovery entry gets one start');
   assert(used.every(u => approval.entryIds.includes(u.entryId)));
-  assert.equal(p.generationCalls, approval.baseGenerationCalls + used.length, 'Recovery slots cannot be reset or bypassed');
+  const approvals = [m.generation.recoveryApproval, ...(m.generation.recoveryRounds || [])];
+  assert(approvals.every(Boolean)); assert.equal(new Set(approvals.map(a => a.approvalId)).size, approvals.length);
+  const allUsed = m.entries.flatMap(e => e.attempts.filter(a => a.recoveryApprovalId));
+  assert(allUsed.every(a => approvals.some(r => r.approvalId === a.recoveryApprovalId)), 'Unscoped recovery slot');
+  let ceiling = approvals[0].baseGenerationCalls;
+  for (let i = 0; i < approvals.length; i++) {
+    const round = approvals[i], entries = m.entries.flatMap(e => e.attempts.filter(a => a.recoveryApprovalId === round.approvalId).map(() => e.entryId));
+    assert.equal(round.baseGenerationCalls, ceiling); assert.equal(round.maximumTotalStartSlots, ceiling + round.maximumNewStartSlots);
+    assert.equal(new Set(entries).size, entries.length); assert(entries.every(id => round.entryIds.includes(id)));
+    assert(entries.length <= round.maximumNewStartSlots);
+    if (i < approvals.length - 1) assert.equal(entries.length, round.maximumNewStartSlots);
+    ceiling = round.maximumTotalStartSlots;
+  }
+  assert.equal(p.generationCalls, approvals[0].baseGenerationCalls + allUsed.length, 'Recovery slots cannot be reset or bypassed');
   assert(used.length <= approval.maximumNewStartSlots);
   return used;
 }
-function startRecovery(id) {
+function startRecovery(id, approvalId = m.generation.recoveryApproval?.approvalId) {
   assert.equal(m.generation.userApproval, 'style-approved-continue');
   assert.equal(p.current, null, 'Previous image call is unresolved; do not retry blindly');
-  const approval = m.generation.recoveryApproval;
-  assert(approval, 'Explicit recovery approval is required');
+  const approval = recoveryApprovalById(approvalId);
   assert(!approval.stoppedByFailure, 'Recovery is stopped after a service failure; investigate before continuing');
   const proposal = recoveryProposal(approval), used = recoveryUsage(approval), e = find(id);
   assert(!e.policyHold, 'Explicit policy hold must be resolved before generation');
@@ -305,24 +427,22 @@ function startRecovery(id) {
   assert.equal(e.sourceFingerprint, spec.sourceFingerprint);
   assert.equal(spec.fullPromptSha256, sha(spec.fullPrompt));
   assert.match(e.slug, /^[a-z0-9-]+$/);
-  const reference = find(m.generation.styleReferenceEntryId), referenceFile = path.join(root, reference.file);
-  assert.equal(reference.status, 'approved');
-  assert.equal(sha(fs.readFileSync(referenceFile)), reference.sha256);
+  const reference = find(m.generation.styleReferenceEntryId), references = recoveryReferences(spec, e);
   const attempt = {
     number: e.attempts.length + 1, startedAt: new Date().toISOString(), status: 'generating',
     prompt: spec.fullPrompt, promptSha256: spec.fullPromptSha256, promptVersion: m.generation.promptVersion,
     referenceEntryId: reference.entryId, recoveryApprovalId: approval.approvalId,
     recoveryProposalSha256: approval.proposalSha256, recoveryOriginalStatus: e.status,
-    recoveryDefect: spec.latestReviewBasis || spec.previousError || spec.verificationConditions
+    recoveryDefect: spec.latestReviewBasis || spec.previousError || spec.verificationConditions,
+    ...(approval.round >= 2 ? { recoveryRound: approval.round, imageMode: spec.mode, imageReferences: spec.references } : {})
   };
   e.attempts.push(attempt); e.status = 'generating'; p.generationCalls++;
   p.current = { entryId: e.entryId, attempt: attempt.number, slug: e.slug, startedAt: attempt.startedAt, outcome: 'awaiting-tool-result', recoveryApprovalId: approval.approvalId };
   save();
-  console.log(JSON.stringify({ entryId: e.entryId, slug: e.slug, prompt: attempt.prompt, references: [referenceFile], attempt: attempt.number }));
+  console.log(JSON.stringify({ entryId: e.entryId, slug: e.slug, prompt: attempt.prompt, references, attempt: attempt.number }));
 }
 function resumeRecovery(decisionFile) {
-  const bytes = fs.readFileSync(decisionFile), decision = JSON.parse(bytes), approval = m.generation.recoveryApproval;
-  assert(approval, 'Explicit recovery approval is required');
+  const bytes = fs.readFileSync(decisionFile), decision = JSON.parse(bytes), approval = recoveryApprovalById(decision.recoveryApprovalId);
   assert(decision.resumeId?.trim() && decision.userDecision?.trim());
   const existing = approval.resumptions?.find(r => r.resumeId === decision.resumeId);
   if (existing) {
@@ -363,7 +483,7 @@ function resumeRecovery(decisionFile) {
   console.log(JSON.stringify({ resumeId: record.resumeId, changed: true, unused: unused.length, generationCalls: p.generationCalls }));
 }
 function failRecovery(failureFile) {
-  const failure = JSON.parse(fs.readFileSync(failureFile)), e = find(failure.entryId), a = e.attempts.at(-1), approval = m.generation.recoveryApproval;
+  const failure = JSON.parse(fs.readFileSync(failureFile)), e = find(failure.entryId), a = e.attempts.at(-1), approval = recoveryApprovalById(a.recoveryApprovalId);
   assert(approval && a.recoveryApprovalId === approval.approvalId);
   assert.equal(p.current?.entryId, e.entryId); assert.equal(e.status, 'generating');
   assert.equal(p.current.source, undefined, 'A returned image must be captured, not marked as failed');
@@ -390,4 +510,7 @@ else if (command === 'recovery-authorize') authorizeRecovery(args[0]);
 else if (command === 'recovery-start') startRecovery(args[0]);
 else if (command === 'recovery-fail') failRecovery(args[0]);
 else if (command === 'recovery-resume') resumeRecovery(args[0]);
-else throw Error('Use consent / prepare / start / capture / review / hold-policy / status / recovery-authorize / recovery-start / recovery-fail / recovery-resume');
+else if (command === 'recovery-round-authorize') authorizeRecoveryRound(args[0]);
+else if (command === 'recovery-quality-authorize') authorizeQualityContinuation(args[0]);
+else if (command === 'recovery-round-start') { assert(args[1], 'Specify the additional approval ID'); startRecovery(args[0], args[1]); }
+else throw Error('Use consent / prepare / start / capture / review / hold-policy / status / recovery-authorize / recovery-start / recovery-fail / recovery-resume / recovery-round-authorize / recovery-round-start');

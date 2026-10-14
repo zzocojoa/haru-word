@@ -8,6 +8,7 @@ const repo = path.resolve(__dirname, '..');
 const assetWorkspace = process.env.OXFORD_ASSET_WORKSPACE || 'C:/Users/user/Documents/ChatGPT/하루단어';
 const m = JSON.parse(fs.readFileSync(path.join(repo, 'data/word-image-manifest.json')));
 const sha = value => crypto.createHash('sha256').update(value).digest('hex');
+const imageFilename = /^[a-f0-9]{16}-[a-z0-9-]+-v[1-9][0-9]*\.png$/;
 const wordsBytes = fs.readFileSync(path.join(repo, 'data/words.json'));
 const contentBytes = fs.readFileSync(path.join(repo, 'data/content.json'));
 assert.equal(sha(wordsBytes), m.dataset.wordsSha256);
@@ -41,7 +42,7 @@ assert(selected.length > 0 && selected.every(e => e?.file));
 assert.equal(new Set(selected.map(e => e.entryId)).size, selected.length);
 const root = path.join(assetWorkspace, m.assetRoot);
 for (const e of selected) {
-  assert.match(e.file, /^[a-f0-9]{16}-[a-z0-9-]+-v[123]\.png$/);
+  assert.match(e.file, imageFilename);
   const b = fs.readFileSync(path.join(root, e.file));
   assert.equal(sha(b), e.sha256); assert.equal(b.length, e.bytes);
   assert.equal(b.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
@@ -49,11 +50,19 @@ for (const e of selected) {
   assert(e.width < e.height && Math.abs(e.width / e.height - 0.75) <= 0.05);
   const a = e.attempts.at(-1);
   assert(e.file.endsWith('-v' + a.number + '.png'));
-  if (a.number === 3) {
-    const approval = m.generation.recoveryApproval;
-    assert(approval && a.recoveryApprovalId === approval.approvalId);
+  if (a.number >= 3 || a.recoveryApprovalId) {
+    const approval = [m.generation.recoveryApproval, ...(m.generation.recoveryRounds || [])].find(r => r && a.recoveryApprovalId === r.approvalId);
+    assert(approval);
     assert(approval.entryIds.includes(e.entryId));
     assert.equal(a.recoveryProposalSha256, approval.proposalSha256);
+    assert.equal(approval.proposalPath, approval.round >= 2 ? `docs/oxford-word-image-recovery-round${approval.round}-proposal.json` : 'docs/oxford-word-image-recovery-proposal.json');
+    const proposalBytes = fs.readFileSync(path.join(repo, approval.proposalPath));
+    assert.equal(sha(proposalBytes), approval.proposalSha256);
+    const spec = JSON.parse(proposalBytes).entries.find(s => s.entryId === e.entryId);
+    assert(spec); assert.equal(a.number, spec.proposedNextAttemptNumber); assert.equal(a.promptSha256, spec.fullPromptSha256);
+    if (approval.round >= 2) {
+      assert.equal(a.recoveryRound, approval.round); assert.equal(a.imageMode, spec.mode); assert.deepEqual(a.imageReferences, spec.references);
+    }
   }
   assert.equal(a.file, e.file); assert.equal(a.sha256, e.sha256);
   const actualPrompt = a.prompt || e.prompt + (e.slug === 'apple' ? '' : '\n' + m.generation.referenceInstruction);
@@ -68,7 +77,7 @@ async function main() {
   const server = http.createServer((req, res) => {
     if (req.url === '/') { res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); return res.end(html); }
     const name = decodeURIComponent(req.url.slice(1));
-    if (!/^[a-f0-9]{16}-[a-z0-9-]+-v[123]\.png$/.test(name) || !selected.some(e => e.file === name)) { res.writeHead(404); return res.end(); }
+    if (!imageFilename.test(name) || !selected.some(e => e.file === name)) { res.writeHead(404); return res.end(); }
     res.writeHead(200, { 'Content-Type': 'image/png' }); fs.createReadStream(path.join(root, name)).pipe(res);
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));

@@ -19,6 +19,7 @@ const mf = path.join(fixture, 'data/word-image-manifest.json'), pf = path.join(f
 const af = path.join(fixture, 'work/approval.json'), jf = path.join(fixture, 'work/oxford-images-pending.json');
 const original = read(mf), proposal = read(path.join(fixture, proposalPath));
 delete original.generation.recoveryApproval;
+delete original.generation.recoveryRounds;
 // Start from the approved proposal's original entry states even after real recovery has progressed.
 for (const spec of proposal.entries) {
   const e = original.entries.find(e => e.entryId === spec.entryId);
