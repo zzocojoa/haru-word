@@ -1,0 +1,176 @@
+{
+  "at": "2026-10-07T22:55:23.802Z",
+  "day": "2026-10-08",
+  "kind": "daily",
+  "configVersion": 43,
+  "status": "four_received_one_quality_rejected",
+  "expectedCards": 5,
+  "serverAcceptedCards": 4,
+  "phone": {
+    "dueKst": "2026-10-08 07:30",
+    "receivedCount": 4,
+    "countConfirmed": true,
+    "imageDateWeekdayAndLinksConfirmed": false
+  },
+  "verifiedSlots": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "slotOne": {
+    "status": "skipped",
+    "error": "review_failed",
+    "revision": 4,
+    "firstDraftKst": "2026-10-08 06:30:17.807 KST",
+    "originalCorrections": 2,
+    "originalFinalRejectedField": "comparison",
+    "newCandidateCount": 1,
+    "replacementKst": "2026-10-08 06:35:20.295 KST",
+    "newCandidateRejectedField": "level",
+    "terminalKst": "2026-10-08 06:37:20.534 KST",
+    "remainingBeforeDeadlineMinutes": 47.65776666666667,
+    "aiCalls": 8,
+    "aiLimit": 24,
+    "renderAttempts": 0,
+    "duplicateRegenerations": 0,
+    "cause": "New candidate at revision4 failed independent review; current code permits no further correction or replacement at revision4 even with remaining time/calls.",
+    "reviewCaveat": "Review booleans are provider judgments, not independent proof of linguistic correctness."
+  },
+  "totalAiCalls": 25,
+  "aiUnavailable": 0,
+  "candidateLookupCalls": 1,
+  "reusedPriorPoolForSlots": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "newLookupSlot": 5,
+  "remainingCandidatePool": {
+    "cached": 11,
+    "claimed": 0,
+    "oldest": 1791390396751,
+    "newest": 1791410541997
+  },
+  "qualityRetry": {
+    "observed": true,
+    "slotsWithAdditionalCorrection": [
+      1,
+      4
+    ],
+    "verifiedReplacementSlots": [
+      4
+    ]
+  },
+  "qualityReplacement": {
+    "observed": true,
+    "slots": [
+      1
+    ],
+    "verifiedSlots": []
+  },
+  "serverScope": "Each accepted slot passed selected-expression match, uniqueness, opposite-provider review/content hash, 1080 PNG and exactly one live acceptance. No count is merged with trial42.",
+  "deliveries": [
+    {
+      "item_index": 2,
+      "state": "sent",
+      "mode": "live",
+      "attempts": 1,
+      "started_at": 1791412219229,
+      "outcome": "sent",
+      "startedKst": "2026-10-08 07:30:19.229 KST"
+    },
+    {
+      "item_index": 3,
+      "state": "sent",
+      "mode": "live",
+      "attempts": 1,
+      "started_at": 1791412222272,
+      "outcome": "sent",
+      "startedKst": "2026-10-08 07:30:22.272 KST"
+    },
+    {
+      "item_index": 4,
+      "state": "sent",
+      "mode": "live",
+      "attempts": 1,
+      "started_at": 1791412279015,
+      "outcome": "sent",
+      "startedKst": "2026-10-08 07:31:19.015 KST"
+    },
+    {
+      "item_index": 5,
+      "state": "sent",
+      "mode": "live",
+      "attempts": 1,
+      "started_at": 1791412280887,
+      "outcome": "sent",
+      "startedKst": "2026-10-08 07:31:20.887 KST"
+    }
+  ],
+  "currentSettings": {
+    "version": 43,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": 1791498600000,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "nextDailyKst": "2026-10-09 07:30",
+  "activeRuns": 0,
+  "unresolved": 0,
+  "workers": {
+    "en-card": {
+      "versions": [
+        {
+          "version_id": "fd0d8bf0-0af7-43c3-8f81-562701f2ddce",
+          "percentage": 100
+        }
+      ],
+      "crons": [
+        "* * * * *"
+      ],
+      "versionsMatch": true,
+      "bindingsMatch": true,
+      "cronsMatch": true
+    },
+    "en-card-delivery": {
+      "versions": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "versionsMatch": true,
+      "bindingsMatch": true,
+      "cronsMatch": true
+    },
+    "en-card-automation": {
+      "versions": [
+        {
+          "version_id": "bf855d64-4274-465f-8c2a-f01de374a49b",
+          "percentage": 100
+        }
+      ],
+      "crons": [],
+      "versionsMatch": true,
+      "bindingsMatch": true,
+      "cronsMatch": true
+    }
+  },
+  "cpuVerified": false,
+  "cpuScope": "No new daily CPU query or live tail collected this turn; trial CPU observation gaps remain.",
+  "cost": "Free configuration unchanged; last user Workers Free confirmation 2026-10-07, no new account-plan confirmation.",
+  "operations": "Read-only diagnosis and local evidence edits. No product code, settings, AI, send, deployment, resume, heartbeat or merge changes.",
+  "evidence": [
+    "verify-daily-phone-report.json",
+    "daily-detail-phone.json",
+    "observe-daily-phone-report.json",
+    "phone-count-confirmation.json"
+  ],
+  "nextImprovement": "Evaluate bounded correction of the fresh candidate within the existing deadline and 24-call cap, preserving opposite-provider review and all candidate histories. Not implemented this turn."
+}

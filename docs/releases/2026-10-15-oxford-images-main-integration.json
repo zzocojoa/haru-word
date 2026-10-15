@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-15T12:41:24.187Z",
+  "phase": "pre-merge",
+  "pullRequest": "https://github.com/zzocojoa/haru-word/pull/35",
+  "headBranch": "codex/word-images-full-ui",
+  "baseBranch": "main",
+  "baseCommit": "c6c5ed9080e46ec644e64090828d39d47228a77d",
+  "originalFeatureHead": "0517cc0ad997d3cc00209b6569ccdb87a0e84c07",
+  "runtimeAndTestsByteIdenticalToOriginalFeature": true,
+  "cardSourceProof": {
+    "enCardHead": "66fe8a46b39a6b31815778624428713c84c6dd1d",
+    "expressionPoolAncestor": true,
+    "uiSourceHash": "9c99382f00dc1e880608384e60481ad4517570c24c80867cc80371c1a322e43b",
+    "expectedUiSource": "9c99382f00dc1e880608384e60481ad4517570c24c80867cc80371c1a322e43b",
+    "uiMatches": true,
+    "relaySourceHash": "b018594352b60ee71c64c75adbbd70c8aabf01d19fe8ef9c8db8be8376f83b69",
+    "expectedRelaySource": "b018594352b60ee71c64c75adbbd70c8aabf01d19fe8ef9c8db8be8376f83b69",
+    "relayOutputHash": "c9527120b0893451a57850685fc2083bd63e4a7ef22dd62a20fdc268992ae36a",
+    "expectedRelayOutput": "c9527120b0893451a57850685fc2083bd63e4a7ef22dd62a20fdc268992ae36a"
+  },
+  "generatedFilesVerified": 131,
+  "conflictResolution": {
+    "generatedFiles": "Retain the exact frozen Site v132 exports, verified against current EN_Card source fingerprints and no-write relay rebuild. Expression-selection ancestry and contracts are retained.",
+    "tests": "The deployed branch test file already contains all main expression-selection tests plus expanded topic tests; retain it without edits.",
+    "documentation": "Preserve main card merge and expression-selection evidence; retain Oxford documentation; update current Site and artifact hashes."
+  },
+  "verification": {
+    "node22": {
+      "tests": 615,
+      "failed": 0,
+      "typecheckExit": 0,
+      "lintExit": 0,
+      "existingLintWarnings": 15,
+      "buildExit": 0,
+      "source": "2026-10-15-word-image-editor-wrap-verification.json",
+      "reuseReason": "No runtime, test, build configuration or dependency input differs from the validated source."
+    },
+    "node24": {
+      "version": "v24.19.0",
+      "command": "node --experimental-strip-types --test tests/*.test.mjs",
+      "tests": 615,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "logSha256": "525ef3d2a9ddecc4ef0369af57e0eb35feeb4cd569312b622bbea836872ced11"
+    },
+    "browsers": {
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "widths": [
+        320,
+        390,
+        1440
+      ],
+      "textPercent": [
+        100,
+        200
+      ],
+      "source": "2026-10-15-word-image-editor-wrap-verification.json",
+      "reusedOnByteIdenticalInputs": true
+    },
+    "githubCI": {
+      "status": "not-started",
+      "reason": "GitHub account payments/spending-limit gate; not treated as passing CI.",
+      "settingsChanged": false
+    }
+  },
+  "operatingSite": {
+    "version": 132,
+    "runtimeCommit": "909df067abc176aae82895ed053feb8f7261c9e6",
+    "newDeploymentInThisIntegration": false
+  },
+  "limits": [
+    "Local Windows checks do not establish a successful Ubuntu GitHub CI run.",
+    "EN_Card input has pre-existing uncommitted changes. Source hashes, not its base commit alone, establish the preserved generated artifact identity.",
+    "Live PR state is the authority for merge completion; this is a pre-merge evidence capture."
+  ]
+}

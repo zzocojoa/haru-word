@@ -1,0 +1,90 @@
+{
+  "at": "2026-10-07T16:17:47.315Z",
+  "status": "deployed_trial_pending",
+  "migration": "0023_automation_expression_selection.sql",
+  "site": {
+    "version": 123,
+    "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
+    "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "environmentRevision": 59,
+    "accessRevision": 4
+  },
+  "workers": {
+    "en-card": [
+      {
+        "version_id": "fd0d8bf0-0af7-43c3-8f81-562701f2ddce",
+        "percentage": 100
+      }
+    ],
+    "en-card-delivery": [
+      {
+        "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+        "percentage": 100
+      }
+    ],
+    "en-card-automation": [
+      {
+        "version_id": "bf855d64-4274-465f-8c2a-f01de374a49b",
+        "percentage": 100
+      }
+    ]
+  },
+  "settingsPreserved": {
+    "version": 40,
+    "enabled": 1,
+    "reason": null,
+    "next_due_at": 1791412200000,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "existingDataTablesPreserved": 18,
+  "foreignKeyErrors": 0,
+  "legacyJobsModeZero": true,
+  "backup": {
+    "encryption": "Windows DPAPI CurrentUser",
+    "restrictedAcl": true,
+    "roundTripVerified": true,
+    "plaintextRemoved": true
+  },
+  "validation": {
+    "siteIntegrationTests": 20,
+    "typecheck": 0,
+    "lint": {
+      "exitCode": 0,
+      "existingWarnings": 13
+    },
+    "siteBuild": 0,
+    "exportHashes": 131,
+    "enCardSourceHashesUnchanged": 155,
+    "liveConfigFreeCheck": 0,
+    "dryRuns": [
+      "maintenance",
+      "main",
+      "automation"
+    ],
+    "publicManifestMatches": true,
+    "unsignedRelayRejected": 403
+  },
+  "packaging": {
+    "sourceHelperPushed": true,
+    "sourceCommit": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
+    "buildFallback": "PowerShell npm run build; standard helper npm.cmd resolution failed",
+    "archiveFallback": "Existing portable packager invokes current official prepare-site-build.cjs and native tar, using bundled Node24 after Node22 child crashed",
+    "archiveSha256": "sha256:249b4de49089546c4118c9143b3961151c7715cd3a3df2a08628fbc81909b78c"
+  },
+  "cost": {
+    "freeConfigurationMaintained": true,
+    "lastExplicitUserFreeConfirmation": "2026-10-07",
+    "freshAccountSubscriptionApi": "403",
+    "newPaidDependencies": false,
+    "limitsRaised": false
+  },
+  "actualNewFiveCardVerification": false,
+  "cpuVerified": false,
+  "phoneVerified": false,
+  "previousThreeCardFailurePreserved": true,
+  "proofDirectory": "EN_Card Git-ignored backups/expression-selection-rollout-20261008/"
+}
