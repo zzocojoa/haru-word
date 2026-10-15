@@ -247,6 +247,7 @@ export function StudySession(props: StudySessionProps) {
 
           {s.stage === "learn" && (
             <LearnStage
+              imagePilotEnabled={props.imagePilotEnabled}
               word={word}
               content={content}
               meaning={meaning}

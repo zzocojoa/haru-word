@@ -302,6 +302,7 @@ function LearningScreens({
                     active.date !== date
                   ) ? (
                   <StudySession
+                    imagePilotEnabled={imagePilotEnabled}
                     registerLeave={registerLeave}
                     key={active.id}
                     currentState={currentState}

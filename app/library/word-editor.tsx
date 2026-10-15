@@ -26,7 +26,8 @@ import { editedWordDraftsProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
 import { useSheetProtection } from '../sheet-dialog';
-import { resolveWordImage, type WordImage } from '@/lib/word-image';
+import { resolveWordImage } from '@/lib/word-image';
+import { WordImagePreview } from '../word-image-preview';
 export function WordEditor({
   error,
   activityDate,
@@ -296,10 +297,4 @@ export function WordEditor({
       </div>
     </>
   );
-}
-
-function WordImagePreview({ image }: { image: WordImage }) {
-  const [failed, setFailed] = useState(false);
-  return failed ? null : <img className="word-image-preview" src={image.url} width={image.width} height={image.height}
-    alt="선택한 뜻의 연상 그림" onError={() => setFailed(true)}/>;
 }

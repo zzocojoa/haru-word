@@ -1,6 +1,8 @@
 # 하루단어 · Oxford 3000
 
-**이미지 연습 20개**는 오늘 학습 개요의 별도 버튼과 단어 편집창의 미리보기로 제공합니다. 단어 확인 후 해당 뜻과 품사를 바로 보여 주고, 발음 도움말만 접어 둡니다. 성적을 기록하지 않으며 기본 뜻과 다른 선택 뜻·개인 단어에는 그림을 연결하지 않습니다. 닫기·탭 이동·새로고침 후 초기화합니다. [최초 로컬 계획](docs/OXFORD_WORD_IMAGES_PILOT_LOGIC_PLAN.md)·[로컬 검증](docs/OXFORD_WORD_IMAGES_PILOT_VERIFICATION.md)·[사이트 반영 및 복구](docs/OXFORD_WORD_IMAGES_PILOT_SITE.md)를 참조하세요.
+**전체 이미지 연결 후보**는 오늘 학습 개요의 이미지 연습을 3,809개로 확대하고, 단어 익히기·단어 편집창에 선택한 뜻과 품사가 일치하는 그림을 표시합니다. 기본 뜻과 다른 선택 뜻·개인 단어에는 추정한 그림을 연결하지 않습니다. 첫 답을 입력하는 진단·회상 단계에는 그림을 표시하지 않습니다. 이미지 연습은 성적을 기록하지 않고 닫기·탭 이동·새로고침 후 초기화합니다. [전체 UI 범위·검증·복구](docs/OXFORD_WORD_IMAGES_FULL_UI.md)를 참조하세요. 아래 시범·v130 기록은 전체 UI 반영 전의 호스팅 단계입니다.
+
+`npm run images:ui:prepare`는 검증된 전체 가공·원격 목록에서 351KB 클라이언트 인덱스를 만듭니다. `npm run images:ui:check`와 빌드는 교재·뜻·품사·출처 지문·원격 연결이 다른 경우 중단합니다. 원본 생성 정보는 클라이언트에 포함하지 않습니다. 원격 이미지는 기존 사이트의 `/word-images/v1/<해시>.webp`에서 현재 항목과 다음 한 장만 요청합니다.
 
 전체 승인 이미지 **3,809개**는 [로컬 웹용 가공](docs/OXFORD_WORD_IMAGES_WEB_PREPARATION.md)과 [결과 보고서](docs/oxford-word-images-web-preparation.json)에 따라 검증·WebP 변환·배포용 목록 작성을 완료했습니다(8.28GB → 128.6MB). 전체 연결 목록은 `data/word-image-web-manifest.json`, 바이너리와 업로드 목록은 Git 제외 `outputs/oxford-web/`에 있으며 실제 위치는 가공 문서에 적었습니다. 후속 호스팅도 완료했으며, 전체 학습 UI 연결은 별도 작업입니다. 운영의 시범20개는 유지합니다.
 

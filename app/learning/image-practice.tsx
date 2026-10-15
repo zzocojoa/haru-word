@@ -11,7 +11,8 @@ import { WordPronunciation } from '../word-pronunciation';
 import { PartOfSpeechLabel } from '../grammar-terms';
 import { useViewRestoration } from '../use-view-restoration';
 
-// Scene descriptions give an equivalent visual clue without naming the answer.
+// Curated pilot descriptions preserve a visual clue without naming the answer.
+// Other images identify the exercise without inventing an unreviewed description.
 const SCENES: Record<string, string> = {
   adb44eba7b3ceef3: '줄기와 초록 잎이 달린 둥근 붉은 과일 하나',
   '5f16580c8972ee74': '두 바퀴와 페달, 안장, 손잡이가 있는 초록색 탈것',
@@ -40,11 +41,14 @@ export function ImagePracticeLauncher({ words, progress }: { words: Word[]; prog
   const [open, setOpen] = useNavigationState('app.imagePractice', false, true);
   const trigger = useRef<HTMLButtonElement>(null);
   const restoration = useViewRestoration();
-  const eligible = useMemo(() => WORD_IMAGES.flatMap(entry => {
-    const word = words.find(word => word.id === entry.entryId);
-    const image = word && resolveWordImage(word, cardContent(word.id, progress[word.id]).meaning);
-    return word && image ? [{ word, image }] : [];
-  }), [words, progress]);
+  const eligible = useMemo(() => {
+    const byId = new Map(words.map(word => [word.id, word]));
+    return WORD_IMAGES.flatMap(entry => {
+      const word = byId.get(entry.entryId);
+      const image = word && resolveWordImage(word, cardContent(word.id, progress[word.id]).meaning);
+      return word && image ? [{ word, image }] : [];
+    });
+  }, [words, progress]);
   const [deck, setDeck] = useState<Card[]>([]);
   return <>
     <button ref={trigger} type="button" className="secondary-button full image-practice-entry" aria-haspopup="dialog"
@@ -52,7 +56,7 @@ export function ImagePracticeLauncher({ words, progress }: { words: Word[]; prog
     <SheetDialog navigationKey="app.imagePractice" open={open} onOpenChange={setOpen}>
       <SheetDialogContent className="framed-dialog image-practice-dialog" showCloseButton={false}
         onCloseAutoFocus={event => { event.preventDefault(); restoration.schedule('destination', () => trigger.current?.focus({ preventScroll: true })); }}>
-        <DialogHeader><DialogTitle>이미지 연습</DialogTitle><DialogDescription>시범 {deck.length}개 · 성적 미기록</DialogDescription></DialogHeader>
+        <DialogHeader><DialogTitle>이미지 연습</DialogTitle><DialogDescription>{deck.length.toLocaleString('ko-KR')}개 · 성적 미기록</DialogDescription></DialogHeader>
         <button type="button" className="text-button image-practice-close" aria-label="연습 닫기" onClick={() => setOpen(false)}>닫기</button>
         {open && (deck.length ? <PracticeCards deck={deck}/> : <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>)}
       </SheetDialogContent>
@@ -78,7 +82,7 @@ function PracticeCard({ card, last, onNext }: { card: Card; last: boolean; onNex
   const [revealed, setRevealed] = useState(false);
   return <div className="dialog-scroll">
     {!revealed ? <>{!failed && <img className="image-practice-picture" src={card.image.url} width={card.image.width} height={card.image.height}
-      alt={SCENES[card.image.entryId]} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>}
+      alt={SCENES[card.image.entryId] || '영단어를 떠올리는 그림. 단어 확인을 누르면 뜻과 품사를 볼 수 있어요.'} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>}
     {failed ? <><p role="alert">이미지를 불러오지 못했어요.</p><button type="button" className="secondary-button full" onClick={onNext}>건너뛰기</button></>
       : <>{!ready && <p role="status">이미지 불러오는 중</p>}
         <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>}</>

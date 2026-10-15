@@ -4625,3 +4625,4 @@ footer {
 .image-practice-sense .small-note { margin: 0; }
 .dialog-word:has(.word-image-preview) { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .word-image-preview { width: 3rem; height: 4rem; object-fit: contain; flex-shrink: 0; border-radius: .4rem; }
+.word-image-learn { display: block; width: auto; max-width: 100%; height: 10rem; object-fit: contain; margin: 0 auto 1rem; border-radius: .6rem; }
