@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-15T00:33:44.687Z",
+  "passed": true,
+  "scope": "local validation, WebP conversion and deployment catalog preparation for latest approved 3809 entries",
+  "implementation": {
+    "root": "C:/Users/user/.codex/worktrees/word-image-pilot/하루단어",
+    "branch": "codex/oxford-web-catalog",
+    "baseCommit": "67ad8f2f01930dd351eea5edfccdcf5d5027b757",
+    "node": "v22.22.2"
+  },
+  "source": {
+    "root": "C:/Users/user/.codex/worktrees/oxford-word-images/하루단어",
+    "commit": "228f8ba9e1594cbcb6286b24559100923eb68f6f",
+    "preservedFiles": {
+      "data/words.json": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "data/content.json": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722",
+      "data/word-image-manifest.json": "6fb25a00648949bbb776f71bd876bf11ec3fcacd2d73645d2e23677c8d13c97c",
+      "work/oxford-images-progress.json": "52a3ec72df9990e6630b146140d97e2285de9b2605378dfeac849a26706e5f23"
+    },
+    "dataset": {
+      "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722",
+      "sha256": "14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e",
+      "fingerprintAlgorithm": "sha256(wordsSha256 + \":\" + contentSha256)"
+    }
+  },
+  "totals": {
+    "entries": 3809,
+    "sourceBytes": 8278882468,
+    "webBytes": 128592754,
+    "maxWebBytes": 129580,
+    "byteReductionPercent": 98.44673777533328,
+    "levels": {
+      "A1": 1077,
+      "A2": 990,
+      "B1": 903,
+      "B2": 839
+    },
+    "dimensions": {
+      "640x853": 3808,
+      "640x852": 1
+    }
+  },
+  "artifacts": {
+    "catalog": {
+      "file": "data/word-image-web-manifest.json",
+      "sha256": "1c877bdeeca6f1c0d8a66baa79e637672529a10915c9bd42dde9a48eb197a9c9",
+      "bytes": 2916274
+    },
+    "outputRoot": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1",
+    "assets": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/assets/",
+    "receipts": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/receipts/",
+    "uploadManifest": {
+      "file": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/upload-manifest.json",
+      "sha256": "16ad35e0370162060212336db0a82666abaa201229c94cfc76db8497ee45c314"
+    },
+    "binaryAssetsGitIgnored": true,
+    "objectKeysAreLiveUrls": false
+  },
+  "conversion": {
+    "file": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/reports/93e51ac7-4b4a-4582-9659-4c26046d73de.json",
+    "sha256": "cd9d97bf383ca97f1777eb7d5f49cf76086aa506a4f423f86be511ed96f17027",
+    "result": {
+      "passed": true,
+      "started": "2026-10-15T00:24:13.545Z",
+      "finished": "2026-10-15T00:28:49.599Z",
+      "source": {
+        "commit": "228f8ba9e1594cbcb6286b24559100923eb68f6f",
+        "manifestSha256": "6fb25a00648949bbb776f71bd876bf11ec3fcacd2d73645d2e23677c8d13c97c"
+      },
+      "recipe": {
+        "version": 1,
+        "width": 640,
+        "format": "webp",
+        "quality": 82,
+        "effort": 6,
+        "withoutEnlargement": true
+      },
+      "encoder": {
+        "sharp": "0.35.4",
+        "vips": "8.18.6",
+        "platform": "win32",
+        "arch": "x64"
+      },
+      "count": 3809,
+      "converted": 3809,
+      "reused": 0,
+      "originalBytes": 8278882468,
+      "webBytes": 128592754,
+      "maxWebBytes": 129580,
+      "levels": {
+        "A1": 1077,
+        "A2": 990,
+        "B1": 903,
+        "B2": 839
+      },
+      "sourcePixelDecodes": 3809,
+      "webPixelDecodes": 3809,
+      "textExceptions": [
+        "d056f2650b116cba",
+        "49717992a5fb1a1a",
+        "8e5aef6a2138e99b"
+      ],
+      "uniqueSourceImages": 3809,
+      "uniqueWebImages": 3809,
+      "catalogSha256": "1c877bdeeca6f1c0d8a66baa79e637672529a10915c9bd42dde9a48eb197a9c9",
+      "uploadManifestSha256": "16ad35e0370162060212336db0a82666abaa201229c94cfc76db8497ee45c314",
+      "hosted": false,
+      "generatedWithAI": 0
+    }
+  },
+  "independentVerification": {
+    "file": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/reports/b34a51cf-1a58-4f52-823d-993b05273ea4.json",
+    "sha256": "a74b14a26a4914d7027d4895fc3783da3c5bf6b00b8b0ed7165c575a2b62104f",
+    "result": {
+      "passed": true,
+      "started": "2026-10-15T00:29:09.536Z",
+      "finished": "2026-10-15T00:30:27.801Z",
+      "source": {
+        "commit": "228f8ba9e1594cbcb6286b24559100923eb68f6f",
+        "manifestSha256": "6fb25a00648949bbb776f71bd876bf11ec3fcacd2d73645d2e23677c8d13c97c"
+      },
+      "recipe": {
+        "version": 1,
+        "width": 640,
+        "format": "webp",
+        "quality": 82,
+        "effort": 6,
+        "withoutEnlargement": true
+      },
+      "encoder": {
+        "sharp": "0.35.4",
+        "vips": "8.18.6",
+        "platform": "win32",
+        "arch": "x64"
+      },
+      "count": 3809,
+      "converted": 0,
+      "reused": 3809,
+      "originalBytes": 8278882468,
+      "webBytes": 128592754,
+      "maxWebBytes": 129580,
+      "levels": {
+        "A1": 1077,
+        "A2": 990,
+        "B1": 903,
+        "B2": 839
+      },
+      "sourcePixelDecodes": 3809,
+      "webPixelDecodes": 3809,
+      "textExceptions": [
+        "d056f2650b116cba",
+        "49717992a5fb1a1a",
+        "8e5aef6a2138e99b"
+      ],
+      "uniqueSourceImages": 3809,
+      "uniqueWebImages": 3809,
+      "catalogSha256": "1c877bdeeca6f1c0d8a66baa79e637672529a10915c9bd42dde9a48eb197a9c9",
+      "uploadManifestSha256": "16ad35e0370162060212336db0a82666abaa201229c94cfc76db8497ee45c314",
+      "hosted": false,
+      "generatedWithAI": 0
+    }
+  },
+  "preservation": {
+    "passed": true,
+    "primaryBranch": "codex/card-automation-topic-alignment",
+    "primaryDirtyFilesPreserved": 18,
+    "sourceImagesPreserved": 20,
+    "manifestAndLedgerPreserved": true,
+    "ignoredPilotPngs": 20,
+    "apiStateSchemaDbLockHostingUnchanged": true,
+    "originalPlanPreserved": true,
+    "sourceMetadataMatchesBaseline": true,
+    "pilotCatalogs": {
+      "data/word-image-pilot.json": "d22409cf84475b216b437dfa89c9e397e0025387c2d2e4dc49d3dedbf0dc54ab",
+      "data/word-image-pilot-web.json": "23346e4e74a47b8b27ae104f79b56a52fd6fd299560b5f1eea548117474694ef"
+    },
+    "runtimeAndPublicAssetsUnchanged": true,
+    "lockfileAndHostingUnchanged": true
+  },
+  "checks": [
+    {
+      "label": "tool-tests",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "tests/oxford-web-images.test.mjs"
+      ],
+      "started": "2026-10-15T00:23:51.137Z",
+      "finished": "2026-10-15T00:23:52.486Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-tool-tests.json",
+      "evidenceSha256": "d438a6b6736e3f36e985e966d7fb1d7c38fefc02b2295084b3b080943bf524ef",
+      "stdoutSha256": "3d08005a6bf185310a21ef421be795296a247bbb2bf7a43a5c40baaf8159c5fb",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "tool-lint",
+      "command": [
+        "node",
+        "node_modules/eslint/bin/eslint.js",
+        "scripts/prepare-oxford-web-images.mjs",
+        "tests/oxford-web-images.test.mjs"
+      ],
+      "started": "2026-10-15T00:24:23.389Z",
+      "finished": "2026-10-15T00:24:43.491Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-tool-lint.json",
+      "evidenceSha256": "46c25ec540e852f96a51415ddc7534256d2bf8eb5c0cdce684e7ce0e4d3dba74",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "catalog-tests",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "--test",
+        "tests/oxford-web-catalog.test.mjs"
+      ],
+      "started": "2026-10-15T00:29:19.345Z",
+      "finished": "2026-10-15T00:29:19.586Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-catalog-tests.json",
+      "evidenceSha256": "3be2c2581d48b034806eb44bebbb0c3985721c0af27336b4793fedc9dd7d53a1",
+      "stdoutSha256": "588d8b1179236ad8b3dba26203bcbc467884a373fa4a0bd3371b425c55f91be7",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "final-tests",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "started": "2026-10-15T00:29:20.613Z",
+      "finished": "2026-10-15T00:29:35.742Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-final-tests.json",
+      "evidenceSha256": "1b98ff72469d391c34da14d84bf0f4458d04aa12c0096cc064288e4cf1fb0ec6",
+      "stdoutSha256": "6c106747c1de8d5cd80027fd4d098c0a082888a3dbd7af7526f7dc252af51620",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "final-types",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "started": "2026-10-15T00:29:20.607Z",
+      "finished": "2026-10-15T00:29:35.372Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-final-types.json",
+      "evidenceSha256": "eb8a46df48231cde135ae447b01d2626a310349cf5959046200b3231df0857f1",
+      "stdoutSha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "final-lint",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "started": "2026-10-15T00:28:41.723Z",
+      "finished": "2026-10-15T00:29:03.863Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-final-lint.json",
+      "evidenceSha256": "2e8aca8c3aa5be315a9ef9edf29d2fdf1d9c493dcba297012af2b32155441378",
+      "stdoutSha256": "e2d24eb07f877c6a63d215fef2a706744fae0763d0ffe758330e7cf1f33dff3b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "final-build",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "started": "2026-10-15T00:29:20.617Z",
+      "finished": "2026-10-15T00:29:49.593Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-final-build.json",
+      "evidenceSha256": "4239ec4a70b1614aa79919e13bcf0d2e57e50f6fe113bdfae179a75e70a1a68d",
+      "stdoutSha256": "053a3994002e8a32b05330002b22c1da4d7faa897922444d9f474c764eea88e3",
+      "stderrSha256": "b6569539fae78ec53d27fce31973b3795222deae31d9b210b9524daa1f254dbe"
+    },
+    {
+      "label": "preservation",
+      "command": [
+        "node",
+        "work/pilot-audit-site.mjs"
+      ],
+      "started": "2026-10-15T00:29:51.393Z",
+      "finished": "2026-10-15T00:29:52.046Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/oxford-web-preservation.json",
+      "evidenceSha256": "e290d9f3b90752fd1f6792a732d10f23af90fd00c83f816b323e9f703bf86599",
+      "stdoutSha256": "202cb76af24d44099f53843ceb6fefba0fe460f15b2d2e9d20a1eada1a8ace5a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "testTotals": {
+    "tests": 600,
+    "passed": 600,
+    "failed": 0,
+    "skipped": 0
+  },
+  "warnings": {
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 15,
+      "introducedWarnings": 0
+    },
+    "build": [
+      "existing punycode deprecation",
+      "existing chunks larger than 500 kB"
+    ]
+  },
+  "visualSpotChecks": {
+    "checked": [
+      {
+        "entryId": "d056f2650b116cba",
+        "word": "capital",
+        "pos": "adj.",
+        "baseMeaning": "대문자의",
+        "file": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/assets/784c581bcd88406271408e6a72e5adee857926d87d0954f25507a4b3cd956af3.webp",
+        "width": 640,
+        "height": 853
+      },
+      {
+        "entryId": "49717992a5fb1a1a",
+        "word": "letter",
+        "pos": "n.",
+        "baseMeaning": "글자",
+        "file": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/assets/ba1c6a3b67a027750d76b67f549d4f476f925a280b7688810574cd7297d55d02.webp",
+        "width": 640,
+        "height": 853
+      },
+      {
+        "entryId": "8e5aef6a2138e99b",
+        "word": "print",
+        "pos": "n.",
+        "baseMeaning": "인쇄 글자",
+        "file": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/assets/cb41ff3e73705e7a4ab61dfceb7d11ec0c6550640b18ac205e2fa5ed087ea411.webp",
+        "width": 640,
+        "height": 853
+      },
+      {
+        "entryId": "9bfe9255a61656aa",
+        "word": "truth",
+        "pos": "n.",
+        "baseMeaning": "진실",
+        "file": "outputs/oxford-web/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/webp-640-q82-v1/assets/96d64bda9c0b6c99b708593cbff0c4fe4887f94c5e0b82362b2bee7e2f0dcc45.webp",
+        "width": 640,
+        "height": 852
+      }
+    ],
+    "scope": "four local compressed outputs; not a new semantic review of all 3809 images"
+  },
+  "codeHashes": {
+    "package.json": "631599b04786445505ad155af28e2a63ae77eb033268a70873b8c7de918783d1",
+    "scripts/prepare-oxford-web-images.mjs": "69717cf0f16ca91fb69b023526e78fd252bdf564a84a3241949e9deb2345c472",
+    "tests/oxford-web-images.test.mjs": "8046bc8641171dcbcd5d57de677b750b687442e9c94bd0bae82d8080bc9dfde1",
+    "tests/oxford-web-catalog.test.mjs": "b916d9e196e16b5e20d5e98198da9fe16caa4734236d41b5cb709016fa25c0c0"
+  },
+  "externalChanges": {
+    "uploaded": false,
+    "deployed": false,
+    "hostingChanged": false,
+    "environmentChanged": false,
+    "databaseChanged": false,
+    "generatedWithAI": 0
+  },
+  "unverified": [
+    "remote object existence and HTTP hash/MIME/cache headers",
+    "full-catalog browser integration",
+    "real iPhone",
+    "Node 24 CI",
+    "fresh visual/semantic review of all 3809 images",
+    "external backup of local binaries"
+  ],
+  "nextSteps": [
+    "choose and connect image hosting",
+    "upload exact manifest objects and verify remote bytes/MIME/cache",
+    "enable entry/meaning/part-of-speech matching in staged UI rollout with pilot rollback"
+  ]
+}

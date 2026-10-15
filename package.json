@@ -17,6 +17,8 @@
     "images:pilot:prepare": "node scripts/prepare-word-image-pilot.mjs",
     "images:pilot:web": "node scripts/prepare-word-image-web.mjs",
     "images:pilot:check": "node scripts/prepare-word-image-web.mjs --check",
+    "images:all:prepare": "node scripts/prepare-oxford-web-images.mjs",
+    "images:all:verify": "node scripts/prepare-oxford-web-images.mjs --verify",
     "check:grammar-review": "node scripts/check-grammar-review.mjs",
     "db:generate": "drizzle-kit generate",
     "test:browser": "node tests/qa/run.cjs functional",
