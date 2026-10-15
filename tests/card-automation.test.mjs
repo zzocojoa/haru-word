@@ -87,6 +87,37 @@ test('expression selection and a reserved draft use the exported relay contract'
   }
 });
 
+test('exported topic relay carries interpretation and proof and requires the expanded independent review', async () => {
+  const topic = { summary: '실제 영화 대사와 작품 확인', include: ['실제 대사'], exclude: ['관람 회화'], source_kind: 'quotation' };
+  const evidence = { url: 'https://news.disney.com/quotes', attribution: 'Fixture Film', excerpt: 'Keep going.', checked_at: Date.now(), page_hash: 'a'.repeat(64) };
+  const card = { template: 'expression', expression: 'Keep going.', meaning_ko: '계속해', example_en: 'Keep going. You can do it.', example_ko: '계속해. 넌 할 수 있어.', note_ko: 'Fixture Film · 학습용 예문', base_expression: '', base_meaning_ko: '' };
+  const basicReview = { natural: true, meaning: true, grammar: true, translation: true, level: true, comparison: true, issues: [] };
+  const review = { ...basicReview, topic: true, source: true, example_distinct: true, variety: true };
+  for (const stage of ['interpret', 'select', 'review']) {
+    const body = callBody(stage === 'review' ? 'groq' : 'google', stage, stage === 'review' ? card : null);
+    body.input.settings.topic = '영화 대사';
+    if (stage !== 'interpret') Object.assign(body.input, { topic, evidence: stage === 'review' ? evidence : null });
+    const output = stage === 'interpret' ? topic : stage === 'select' ? { candidates: [{ expression: card.expression, topic: true, level: true, template: true, source: { url: evidence.url, attribution: evidence.attribution, excerpt: evidence.excerpt } }] } : review;
+    let calls = 0;
+    const result = await handleCardAutomationRelay(signed(body), config, async (_url, init) => {
+      calls++;
+      const request = JSON.parse(init.body);
+      const prompt = stage === 'review' ? request.messages[0].content : request.contents[0].parts[0].text;
+      assert.match(prompt, /영화 대사/);
+      if (stage === 'review') { assert.match(prompt, /Fixture Film/); assert.match(prompt, /example_distinct/); }
+      return Response.json(stage === 'review' ? { choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(output) } }] } : { candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify(output) }] } }] });
+    });
+    assert.equal(result.status, 200);
+    assert.deepEqual(await result.json(), { result: output });
+    assert.equal(calls, 1);
+  }
+  const incomplete = callBody('groq', 'review', card);
+  Object.assign(incomplete.input, { topic, evidence });
+  const result = await handleCardAutomationRelay(signed(incomplete), config, async () => Response.json({ choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(basicReview) } }] }));
+  assert.equal(result.status, 502);
+  assert.deepEqual(await result.json(), { error: 'invalid', http_status: null });
+});
+
 test('missing schema and failed nonce reservation never call a provider or partially clean receipts', async () => {
   let calls = 0;
   const provider = async () => { calls++; throw new Error('Unexpected provider call'); };

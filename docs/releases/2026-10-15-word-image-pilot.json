@@ -1,0 +1,489 @@
+{
+  "schemaVersion": 1,
+  "feature": "20-item ungraded image-practice pilot",
+  "recordedAt": "2026-10-14T23:42:52.184Z",
+  "branch": "codex/word-image-pilot-site",
+  "baseline": {
+    "siteVersion": 127,
+    "sourceCommit": "87ed7b3a823779eb8e0c877bdf034ea21c12a4e5",
+    "envRevision": 64,
+    "accessRevision": 4,
+    "audience": "public"
+  },
+  "assets": {
+    "originalCount": 20,
+    "originalBytes": 41080212,
+    "webCount": 20,
+    "webBytes": 649694,
+    "maxWebBytes": 57656,
+    "width": 640,
+    "height": 853,
+    "format": "webp",
+    "sharp": "0.35.4",
+    "vips": "8.18.6",
+    "quality": 82,
+    "effort": 6
+  },
+  "checks": [
+    {
+      "label": "site-final-tests",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:20:08.808Z",
+      "finished": "2026-10-14T23:20:21.886Z",
+      "evidenceSha256": "b7555f81119e31d6af1ad8d9fc71890f2b75e7a094cea0de1d17b91c6ca09ed3"
+    },
+    {
+      "label": "site-types",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:19:12.295Z",
+      "finished": "2026-10-14T23:19:39.912Z",
+      "evidenceSha256": "71b3c3a25e7436d9d33829084ab289cc6fd6234d4d9fa90a89c997bb96d6bd1d"
+    },
+    {
+      "label": "site-lint",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:19:12.332Z",
+      "finished": "2026-10-14T23:20:19.187Z",
+      "evidenceSha256": "890f7d2fa00937998d6290fb561c2507f4cdba39cc3bf97716a536a851ea7ca0"
+    },
+    {
+      "label": "site-final-build",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:20:21.979Z",
+      "finished": "2026-10-14T23:20:34.164Z",
+      "evidenceSha256": "aea2271aad27f666c71f31afa23758426c25fb2524cc7b778d25d40c099ea825"
+    },
+    {
+      "label": "site-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:21:00.655Z",
+      "finished": "2026-10-14T23:21:40.417Z",
+      "evidenceSha256": "147dc3981fdcf209bd9785a98cf4bcf99aa13aa3339f735ada02f3c96f9728d0"
+    },
+    {
+      "label": "site-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:21:40.544Z",
+      "finished": "2026-10-14T23:22:10.057Z",
+      "evidenceSha256": "856b3a5cdeeb6822a3371ef2a47f5e54353ac49d96a463c31800233a3e2b1811"
+    },
+    {
+      "label": "site-d1-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:39.254Z",
+      "finished": "2026-10-14T23:25:43.038Z",
+      "evidenceSha256": "bd76ad5ede52c74bcba6293db3e7418f2283e83323faeb665ef7c25dbe6e3a78"
+    },
+    {
+      "label": "site-d1-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:45.116Z",
+      "finished": "2026-10-14T23:25:52.734Z",
+      "evidenceSha256": "62a61da35737b7a8bfe395f6cdefe434dc98a090afe21c521624c56a360982b4"
+    },
+    {
+      "label": "site-error-final-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "error"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:37.600Z",
+      "finished": "2026-10-14T23:25:39.183Z",
+      "evidenceSha256": "17c8ab09c7a863c3f49588be9a6bd18cf478554b333dfe43b3dab390446f7ba8"
+    },
+    {
+      "label": "site-error-final-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "error"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:43.104Z",
+      "finished": "2026-10-14T23:25:45.042Z",
+      "evidenceSha256": "fd474efd79a477facb708ac2995a81ef077172b77cc5dfdf468c3b91167795ce"
+    },
+    {
+      "label": "site-editor-chromium",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/editor-save-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:25:53.572Z",
+      "finished": "2026-10-14T23:26:05.827Z",
+      "evidenceSha256": "7341abef5e7bc2823ea60e4034ef0c2e2564ea8b99b2806c43ebf2e40342a8a1"
+    },
+    {
+      "label": "site-editor-webkit",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/editor-save-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:26:05.945Z",
+      "finished": "2026-10-14T23:26:22.411Z",
+      "evidenceSha256": "c26518ae4e5a272eadea3140846258d087031cc8bdfbabb96c504c58776e0250"
+    },
+    {
+      "label": "site-disabled-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:34:34.559Z",
+      "finished": "2026-10-14T23:34:36.573Z",
+      "evidenceSha256": "ab695786805c6ddbcd96496e6ec1a2dde14ba05c69eb760cb3954b9eec5de15d"
+    },
+    {
+      "label": "site-disabled-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:34:36.647Z",
+      "finished": "2026-10-14T23:34:38.263Z",
+      "evidenceSha256": "9b09cedf5e2c9c8d53d140de7d440e28b992a8ae40c29f4d3ef6d5044791d401"
+    },
+    {
+      "label": "site-preservation-final",
+      "command": [
+        "node",
+        "work/pilot-audit-site.mjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:35:20.492Z",
+      "finished": "2026-10-14T23:35:21.085Z"
+    },
+    {
+      "label": "site-qa-lint",
+      "command": [
+        "node",
+        "node_modules/eslint/bin/eslint.js",
+        "tests/image-practice-qa.cjs",
+        "scripts/prepare-word-image-web.mjs",
+        "tests/word-image-web.test.mjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:34:38.337Z",
+      "finished": "2026-10-14T23:34:46.222Z"
+    },
+    {
+      "label": "site-hosted-assets",
+      "command": [
+        "node",
+        "work/check-pilot-hosted.mjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:41:12.366Z",
+      "finished": "2026-10-14T23:41:17.317Z"
+    },
+    {
+      "label": "site-observed-header-browsers",
+      "command": [
+        "node",
+        "work/check-pilot-hosted-headers.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-14T23:42:01.818Z",
+      "finished": "2026-10-14T23:42:11.426Z"
+    }
+  ],
+  "preservation": {
+    "passed": true,
+    "primaryBranch": "codex/card-automation-topic-alignment",
+    "primaryDirtyFilesPreserved": 18,
+    "sourceImagesPreserved": 20,
+    "manifestAndLedgerPreserved": true,
+    "ignoredPilotPngs": 20,
+    "apiStateSchemaDbLockHostingUnchanged": true,
+    "originalPlanPreserved": true
+  },
+  "warnings": {
+    "lint": 15,
+    "errors": 0,
+    "build": [
+      "punycode deprecation",
+      "chunk above 500 kB"
+    ]
+  },
+  "notVerified": [
+    "actual iPhone / VoiceOver",
+    "Node 24 CI",
+    "all unrelated browser suites"
+  ],
+  "boundary": {
+    "productionLearnerWrites": 0,
+    "liveAIRequests": 0,
+    "newImageGenerations": 0,
+    "kakaoMessages": 0,
+    "dbMigrations": 0,
+    "githubMainMerged": false
+  },
+  "rollback": {
+    "flag": "word_image_pilot_enabled=false",
+    "action": "redeploy same saved version; preserve DB and originals",
+    "previousSiteVersion": 127
+  },
+  "publication": {
+    "status": "succeeded",
+    "version": 128,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_3732faaad8048191a1dc1b58273c8467",
+    "sourceCommit": "283ce3f21659501df6779bc566289c35607bb9ef",
+    "deploymentId": "appgdep_6ad012a839488191bcee855a6ceb89e6",
+    "envRevision": 65,
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "updatedAt": "2026-10-14T23:39:40.605284+00:00",
+    "audience": "public",
+    "accessRevision": 4,
+    "archiveStorage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000291c82069906bb49b2cc00e1",
+      "content_hash": "sha256:db0622bfb1d71f041f1ca7c5484958b88d1c6d178d0a42b4e6396959b38948df",
+      "size_bytes": 16230400,
+      "file_count": 338
+    }
+  },
+  "archiveCheck": {
+    "passed": true,
+    "sha256": "eabc45d9c5044629a25e3130bdbb535aaf599ed97a8a0f8ba524da03f8063c56",
+    "bytes": 7096032,
+    "webImages": 20,
+    "workerEntrypoint": true,
+    "hostingAndMigrationsPreserved": true,
+    "sourcePngsPackaged": 0
+  },
+  "hostedAvailability": {
+    "passed": true,
+    "checkedAt": "2026-10-14T23:41:17.305Z",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "homeStatus": 200,
+    "serverPilotFlag": true,
+    "assets": 20,
+    "totalBytes": 649694,
+    "learnerApiRequests": 0,
+    "learnerWrites": 0,
+    "expectedHeadersApplied": false,
+    "checked": [
+      {
+        "sha256": "e47ec1431198e4d5cf0bbbe4f5341757f515786a0b6a4474e75e6c1e05dadba4",
+        "bytes": 57656,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "08197b6b0f60b5f58886cca1e3c2d7d5c7fcba5d98d4199faf6d7de3ba7f721f",
+        "bytes": 37376,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "40b2a201b0918ba8a6e2cf1307595f6420c227ad72249e9bf489d96b313d4489",
+        "bytes": 33444,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "56ceface1a256dc5f8e7d71e8b6bd94c4e2f9dad1984d579039e7ab0be75fb2d",
+        "bytes": 25972,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "1a25fd2ffac58fddb81adde8ef4a528158e595b9ba8d3ad16bb74e0d69856738",
+        "bytes": 23092,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "ad6fc4fa4ff3c86538eb29900e13ab19a14b1ea1adf8d8e798b756e046bb42a3",
+        "bytes": 33444,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "fc89582bc56f4e1a670953db22cb943508b27a0b5ffc02f200b6d485d8595825",
+        "bytes": 44892,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "395bd9b709bd8efae43bda7b755b7abe361691c8360b1ac2dd94e0cb10bc91e6",
+        "bytes": 40722,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "72ea8d7322a01de15b1e87b07ff4c2263dc9a999dc200b2e283283036a952b6a",
+        "bytes": 37054,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "7e5508fadfbf24398eea3621ad9fa91bf6e338501071b5a70e1f3e7156819d2d",
+        "bytes": 22322,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "cbbc43a47039b8958fa88c92219a50a390ec9d302bf8d05da17c236a24b49ba2",
+        "bytes": 18880,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "cf0ed4d3676e230bd5a2bf9621492c31e8c669f4633c2c4588a63cce1b775dd2",
+        "bytes": 35068,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "95e94ed35a63545f8be23b6748301ec6cd3e6cae8504edd2fc4fad5442ef4ea2",
+        "bytes": 29606,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "f2edbd0b2c8b7e46f2039267cfa0ad0acea3a6f736a6521d31ef8df3c2fe9dfa",
+        "bytes": 34832,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "2cef88317688f56f9120240b9ead010a293f384f03eed496dca52357e9c97b1a",
+        "bytes": 22408,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "fddde6596104b5efb893002b7298b0c33589d17c416b87357db7a9822b939bcc",
+        "bytes": 35484,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "4200dd2f8ceabdf4e68f254bd0373bd4e5a228229acf4000cc5847ace7aaaad1",
+        "bytes": 30300,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "f4f676993bbbe4b76c564dc1244860df0fa6ba2da30b214e7dca5abdc7bc211b",
+        "bytes": 31126,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "144fb530673af5fbf69aea4fb42812324166eee6a1082009e6426158e5b247a4",
+        "bytes": 23256,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      },
+      {
+        "sha256": "097c1f9a5bfe6090d4473fc3670470556c9febe879eb964233cabce184692a57",
+        "bytes": 32760,
+        "status": 200,
+        "contentType": "application/octet-stream",
+        "cacheControl": "public, max-age=0, must-revalidate"
+      }
+    ]
+  },
+  "localObservedHeaderBrowserCheck": {
+    "passed": true,
+    "actualIphoneChecked": false,
+    "results": [
+      {
+        "engine": "chromium",
+        "decoded": 20,
+        "writes": 0,
+        "ai": 0,
+        "errors": [],
+        "boundary": "local app with observed hosted asset headers"
+      },
+      {
+        "engine": "webkit",
+        "decoded": 20,
+        "writes": 0,
+        "ai": 0,
+        "errors": [],
+        "boundary": "local app with observed hosted asset headers"
+      }
+    ]
+  },
+  "envExistingEntriesPreserved": true,
+  "packaging": {
+    "helper": "Sites site-workflow.mjs",
+    "node": "24.19.0",
+    "shell": "Git Bash",
+    "sessionTarOptions": "--force-local",
+    "sourcePushCompleted": true
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-15T00:13:41.990Z",
+  "feature": "Image practice reveals selected meaning and part of speech",
+  "branch": "codex/word-image-pilot-site",
+  "baselineSiteVersion": 128,
+  "baselineSourceCommit": "283ce3f21659501df6779bc566289c35607bb9ef",
+  "behavior": {
+    "before": "meaning hidden in collapsed help",
+    "after": "word, meaning and part of speech visible; pronunciation collapsed",
+    "frontUnchanged": true,
+    "entries": 20,
+    "uniqueSpellings": 16,
+    "duplicateSpellings": [
+      "about",
+      "bank",
+      "light",
+      "record"
+    ]
+  },
+  "regression": {
+    "redLabel": "sense-red-back",
+    "exitCode": 1,
+    "cause": "meaning remained hidden after reveal"
+  },
+  "checks": [
+    {
+      "label": "sense-tests",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:07:44.477Z",
+      "finished": "2026-10-15T00:08:02.511Z",
+      "evidenceSha256": "1f1406eb573e21e63403e071ec3b4daf4aeaba7c29e4428956541296b9257c99"
+    },
+    {
+      "label": "sense-types",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:07:44.491Z",
+      "finished": "2026-10-15T00:08:10.932Z",
+      "evidenceSha256": "886fad72541223986dd46681ce127b84dcc66d35ebd25da457d40db045c97aa4"
+    },
+    {
+      "label": "sense-lint",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:07:44.477Z",
+      "finished": "2026-10-15T00:08:47.150Z",
+      "evidenceSha256": "ee7787c51c0253bcd72f47a6532a5153f915b425b53731b247add9c634c81da2"
+    },
+    {
+      "label": "sense-build",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:07:44.464Z",
+      "finished": "2026-10-15T00:08:19.521Z",
+      "evidenceSha256": "189cb300ec665866f3415e7eb08632c9eee6ae960303cb6d5189de86092a1c56"
+    },
+    {
+      "label": "sense-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:08:42.022Z",
+      "finished": "2026-10-15T00:09:04.887Z",
+      "evidenceSha256": "9eae01bf990b1eaefb06f8a6a7f31db3a5a66563031e9b281e0ad197fe30afca"
+    },
+    {
+      "label": "sense-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:09:09.846Z",
+      "finished": "2026-10-15T00:09:40.789Z",
+      "evidenceSha256": "239f98fed48cc073a057e4f1e582e50e392e1caab2f236fce793eb049a3552a0"
+    },
+    {
+      "label": "sense-d1-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:09:04.986Z",
+      "finished": "2026-10-15T00:09:09.724Z",
+      "evidenceSha256": "460866f6e7ecbda8b64719b930d83346fab8435ff809d8484e92a0cceadfb0ee"
+    },
+    {
+      "label": "sense-d1-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:09:40.864Z",
+      "finished": "2026-10-15T00:09:48.852Z",
+      "evidenceSha256": "14c932511810feee041f8f77b77d087f4ed14fbb6224a7aa1d8244ab83be4840"
+    },
+    {
+      "label": "sense-preservation",
+      "command": [
+        "node",
+        "work/pilot-audit-site.mjs"
+      ],
+      "exitCode": 0,
+      "started": "2026-10-15T00:10:04.042Z",
+      "finished": "2026-10-15T00:10:04.834Z",
+      "evidenceSha256": "7484e26f85bfc9421e8c67079eaf3be4e8dfe9594c12e20ff196385743eadb8a"
+    }
+  ],
+  "warnings": {
+    "lint": 15,
+    "errors": 0
+  },
+  "boundaries": {
+    "learnerPracticeWrites": 0,
+    "practiceAIRequests": 0,
+    "newImages": 0,
+    "dbMigrations": 0,
+    "environmentChanges": 0,
+    "accessChanges": 0,
+    "githubMainMerged": false
+  },
+  "notVerified": [
+    "actual iPhone and VoiceOver",
+    "Node24 CI",
+    "unrelated full browser suites"
+  ],
+  "rollback": {
+    "flag": "word_image_pilot_enabled=false and redeploy",
+    "previousVersion": 128
+  },
+  "publication": {
+    "status": "succeeded",
+    "version": 129,
+    "sourceCommit": "1f6c2b5266061dc95d940da0e9176b57209c0a17",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_501f112606cc81919564affa0ae340c8",
+    "deploymentId": "appgdep_6ad01a5fb8588191b08ad414e0d3f148",
+    "envRevision": 65,
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "updatedAt": "2026-10-15T00:12:36.140695+00:00"
+  },
+  "archiveCheck": {
+    "passed": true,
+    "sha256": "22b2a2679fe2a706b73a081aa0202ee609bc39697f867f7eb2fce22f9d11334b",
+    "bytes": 7096080,
+    "imagesUnchanged": 20,
+    "revealedMeaningInClient": true,
+    "senseStylesPackaged": true,
+    "testedWorkerMatches": true,
+    "hostingAndSqlPreserved": true
+  },
+  "hostedBundles": {
+    "passed": true,
+    "checkedAt": "2026-10-15T00:13:41.870Z",
+    "learnerAPIRequests": 0,
+    "learnerWrites": 0,
+    "checked": [
+      {
+        "path": "/_next/static/chunks/learning-app-Bm0TDxHO.js",
+        "status": 200,
+        "sha256": "efb3ddf765d7323d289307dd7c5d84efc986301bd2b113b391f7fffb38e9e7f3",
+        "bytes": 379594
+      },
+      {
+        "path": "/_next/static/css/index.ByEu0zhN.css",
+        "status": 200,
+        "sha256": "3894d1adfa9b14e1c71af331d18c812de9648fc363af8944ed5127c08b285ac9",
+        "bytes": 242636
+      }
+    ]
+  },
+  "screenshots": {
+    "boundary": "local Chromium mobile viewport 390x844",
+    "bankMoney": "outputs/word-image-sense/chromium/sense-9.png",
+    "bankRiver": "outputs/word-image-sense/chromium/sense-10.png"
+  }
+}

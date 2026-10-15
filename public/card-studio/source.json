@@ -1,9 +1,9 @@
 {
   "format": "en-card-studio-v1",
-  "sourceSha256": "94a6b09d01bcecf97b52ed90bdd09f7607235051ba4ed55c8dffba0a98ebfa99",
+  "sourceSha256": "9c99382f00dc1e880608384e60481ad4517570c24c80867cc80371c1a322e43b",
   "files": {
-    "assets/index-CPW92JCN.js": "22dd819cb55c7084f34b695ac565bf777a96f9ec54da7dd3ded662929c41cd35",
-    "assets/index-k5vvvb-e.css": "bcbd4de622b139c3cb063f8a28780db948a961704f09be28f2e49fe16c1f4f76",
+    "assets/index-4KuOPce5.css": "142bc99866bd51fb353ef06b65cc40fdc528fd13e68ebcad66a62cfff47c2bda",
+    "assets/index-Bz0gc_zD.js": "4c84c281c870462940f99ffed3f2c5f1a5ce96ffdab433a1b124f0bc622dafbd",
     "fonts/LICENSE.txt": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
     "fonts/files/noto-sans-kr-0-wght-normal.woff2": "3861da36d0eb54b3351f55d43c5ca91e732f0f2c6f8769ed475d3ec6fffdb4e5",
     "fonts/files/noto-sans-kr-1-wght-normal.woff2": "71b97f259df4fdc4c9afa9564e9bb781221c2958f3d50bfbff4825024cf783bd",
@@ -130,6 +130,6 @@
     "fonts/files/noto-sans-kr-latin-wght-normal.woff2": "2ee54080f0b0dee4fb2a9365ec8b3e3269d7720a7d7f2d62c2913088842e1326",
     "fonts/files/noto-sans-kr-vietnamese-wght-normal.woff2": "e4bedfe7c5a6162df7d2eb72df4960d49664addb0cb843ecd345e66365cf902e",
     "fonts/font.css": "cb605fb4a6924db15d5e7f1beefe17a9e3cadbbba90c79e0f1a550d98417f212",
-    "index.html": "804d02a0094f499c4cdebb12119c40120ed627d7ddd775b5227b6db64d2fc92d"
+    "index.html": "acae182ecb4688ff34abfc9acf5386039964bd3d8d4f964cb5985ca2f7eb78ce"
   }
 }

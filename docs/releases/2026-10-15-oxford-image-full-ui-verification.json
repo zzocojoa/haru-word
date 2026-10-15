@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "status": "locally_verified_awaiting_publication",
+  "goalComplete": false,
+  "verifiedAt": "2026-10-15T03:59:12.367Z",
+  "baselineCommit": "b7fb763682e898fa1ae0fd35b702343a48d69b8b",
+  "branch": "codex/word-images-full-ui",
+  "objective": "Expand pilot20 to all3809 in image practice, word learning and word editor; preserve learner history and user edits.",
+  "runtimeCatalog": {
+    "file": "data/word-image-ui.json",
+    "entries": 3809,
+    "bytes": 350801,
+    "sha256": "c07d73218e82f0735c309cb8d6ca59175f12c7a8cf5968e7dbb26158f54bb25e",
+    "metadataSource": "data/word-image-web-manifest.json",
+    "hostedSource": "data/word-image-hosted-manifest.json",
+    "firstTwentyPreserved": true
+  },
+  "validation": {
+    "tests": 615,
+    "passed": 615,
+    "failed": 0,
+    "lintWarnings": 15,
+    "lintErrors": 0,
+    "typecheckExitCode": 0,
+    "buildExitCode": 0,
+    "evidence": [
+      {
+        "label": "full-ui-final-tests",
+        "file": "work/pilot-evidence/full-ui-final-tests.json",
+        "sha256": "f66a26de846050e5d01663eb302a38ed49072aa7887bcf220c97c083c3d982fb",
+        "command": [
+          "node",
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "test"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:55:46.903Z",
+        "finished": "2026-10-15T03:55:59.934Z"
+      },
+      {
+        "label": "full-ui-final-types",
+        "file": "work/pilot-evidence/full-ui-final-types.json",
+        "sha256": "c77fb162ba9ad50b7750640905c80317a6936f558f7a702bc30e7b98bd21e07f",
+        "command": [
+          "node",
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "run",
+          "typecheck"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:58:00.430Z",
+        "finished": "2026-10-15T03:58:06.290Z"
+      },
+      {
+        "label": "full-ui-final-lint",
+        "file": "work/pilot-evidence/full-ui-final-lint.json",
+        "sha256": "d5d332505abdb38298cc69aeac965db1c5654757343d6f1a6563eb196b6a9ccc",
+        "command": [
+          "node",
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "run",
+          "lint"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:56:15.337Z",
+        "finished": "2026-10-15T03:56:29.429Z"
+      },
+      {
+        "label": "full-ui-final-build",
+        "file": "work/pilot-evidence/full-ui-final-build.json",
+        "sha256": "da314642b175a82fba0c6832d3f378c801c3bfd35d5da27e987a69912f99f7f2",
+        "command": [
+          "node",
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "run",
+          "build"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:57:50.127Z",
+        "finished": "2026-10-15T03:58:03.957Z"
+      },
+      {
+        "label": "full-ui-browser-chromium",
+        "file": "work/pilot-evidence/full-ui-browser-chromium.json",
+        "sha256": "f4f8cb19a87418997d08de65936b945437453eff87aa0c29ebc4c55dbf7974c0",
+        "command": [
+          "node",
+          "tests/image-practice-qa.cjs"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:49:39.328Z",
+        "finished": "2026-10-15T03:50:07.798Z"
+      },
+      {
+        "label": "full-ui-browser-webkit",
+        "file": "work/pilot-evidence/full-ui-browser-webkit.json",
+        "sha256": "8fdd3557e81b10f43311b16c3503c8c7bde5af78aecc6105b50661b38f7c22a0",
+        "command": [
+          "node",
+          "tests/image-practice-qa.cjs"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:50:31.280Z",
+        "finished": "2026-10-15T03:51:18.144Z"
+      },
+      {
+        "label": "full-ui-study-chromium-final",
+        "file": "work/pilot-evidence/full-ui-study-chromium-final.json",
+        "sha256": "b89016282c30a849bd89e56f719728d60e7f775529ad74ecad9a0b1dad8a68eb",
+        "command": [
+          "node",
+          "tests/word-image-study-qa.cjs"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:55:07.065Z",
+        "finished": "2026-10-15T03:55:14.764Z"
+      },
+      {
+        "label": "full-ui-study-webkit-final",
+        "file": "work/pilot-evidence/full-ui-study-webkit-final.json",
+        "sha256": "22cec7e3bb803ad2776a54d4a55b6c89fd7aca18180e038e66eca3c31a4ce280",
+        "command": [
+          "node",
+          "tests/word-image-study-qa.cjs"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:55:15.695Z",
+        "finished": "2026-10-15T03:55:28.570Z"
+      },
+      {
+        "label": "full-ui-d1-isolation-chromium",
+        "file": "work/pilot-evidence/full-ui-d1-isolation-chromium.json",
+        "sha256": "ec44e6222d6b4ac83653841805f7c54ddb89e5146db7598f4c787efc7f069d3b",
+        "command": [
+          "node",
+          "tests/image-practice-qa.cjs",
+          "isolation"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:52:24.769Z",
+        "finished": "2026-10-15T03:52:29.722Z"
+      },
+      {
+        "label": "full-ui-d1-isolation-webkit",
+        "file": "work/pilot-evidence/full-ui-d1-isolation-webkit.json",
+        "sha256": "24a4bbc2d8a5fee38bcfab68f7b9a8dc5737f3058b777712a9e312c1f5796116",
+        "command": [
+          "node",
+          "tests/image-practice-qa.cjs",
+          "isolation"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:53:19.546Z",
+        "finished": "2026-10-15T03:53:28.333Z"
+      },
+      {
+        "label": "full-ui-disabled-practice-chromium",
+        "file": "work/pilot-evidence/full-ui-disabled-practice-chromium.json",
+        "sha256": "66534bf20ad4730e0e1c19eb2a77fb67d4181387395b860bab7a1addae17f40d",
+        "command": [
+          "node",
+          "tests/image-practice-qa.cjs",
+          "production"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:56:54.241Z",
+        "finished": "2026-10-15T03:56:55.752Z"
+      },
+      {
+        "label": "full-ui-disabled-practice-webkit",
+        "file": "work/pilot-evidence/full-ui-disabled-practice-webkit.json",
+        "sha256": "001ef4b60a04fb9324662d90976e6100bbadbf8a9280ab405484c6c86b246131",
+        "command": [
+          "node",
+          "tests/image-practice-qa.cjs",
+          "production"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:56:57.178Z",
+        "finished": "2026-10-15T03:56:59.292Z"
+      },
+      {
+        "label": "full-ui-disabled-study-chromium",
+        "file": "work/pilot-evidence/full-ui-disabled-study-chromium.json",
+        "sha256": "abe67676a9855e75a0a55e4b72568a8ee78071bf784e8884eb9fbd5bd4279afc",
+        "command": [
+          "node",
+          "tests/word-image-study-qa.cjs",
+          "disabled"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:56:55.841Z",
+        "finished": "2026-10-15T03:56:57.093Z"
+      },
+      {
+        "label": "full-ui-disabled-study-webkit",
+        "file": "work/pilot-evidence/full-ui-disabled-study-webkit.json",
+        "sha256": "35aa3f5a598c60b14c61182cd9655f3ac9fbf59eae69d2b766a79d784661bf72",
+        "command": [
+          "node",
+          "tests/word-image-study-qa.cjs",
+          "disabled"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T03:56:59.381Z",
+        "finished": "2026-10-15T03:57:00.909Z"
+      }
+    ],
+    "browserReports": [
+      {
+        "file": "outputs/word-image-full/chromium/full-report.json",
+        "sha256": "fdc367000a3afb89ea3ad0b73f3e71dea7a56081c25553d33aa55e5c570da374",
+        "entries": 3809,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/extended-report.json",
+        "sha256": "67c92d6d9c85f07c2338306ecf3966f5e7bda17fb549f04e16235a70ab9f590b",
+        "entries": 22,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/lifecycle-report.json",
+        "sha256": "919a857e61f5d196ab9feac603adc12db7d238c2b9123246c172d72a5a5ab9ab",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/matrix-report.json",
+        "sha256": "cf0a4eda988dfdaea08ded1883c9728d9fc352392191084be7a5edf9445b63a9",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/editor-report.json",
+        "sha256": "b4ea423127d7401c4e76eae35a862601628cdf7b2ac04aa88622a15d5fae7611",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/isolation-report.json",
+        "sha256": "9cf14c13651d85ddbe52e5bbc62e2d67253fb7f15db982b01718386d8006af71",
+        "entries": 20,
+        "stateBoundary": "local-d1"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/study-report.json",
+        "sha256": "c023688a6e37ff8d999279c408971d63eed4aa4a8bb88cbdd26032f0da1e9a6a"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/production-report.json",
+        "sha256": "467fc654c34e6b350aeff6a7eb0cf606a6a821e7bcca078bb7b3ed02b8758bc4",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/chromium/study-disabled-report.json",
+        "sha256": "027e577b95f2f8e5c8c1922afdb712aa893043a66d0e8c0030e9b5d783016287"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/full-report.json",
+        "sha256": "1fad46c2bf5145dc3b68339a1999d57c9f5cf2505f071700ff11f78b7b067ba0",
+        "entries": 3809,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/extended-report.json",
+        "sha256": "8981ec33826832db5e33830259489bf956ab65b15fe17b1f3cff9e8dcbf3f262",
+        "entries": 22,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/lifecycle-report.json",
+        "sha256": "f76a307fd26c049f3b1a249781fb739c3298ad270ba8a442780e95c60c9ba6e1",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/matrix-report.json",
+        "sha256": "babcc164646555d7bb65f157fae5c7ed5a68cee64cf5b1cc78f6fc794f29c5a3",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/editor-report.json",
+        "sha256": "b4eb568a3c1fe082741038578486199bf2ea3b9de2641deec18e63820a2c6a09",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/isolation-report.json",
+        "sha256": "dfde8b12eafdda2a11322da7d6087a0280ada87ef41a0d06d86038d6080fee69",
+        "entries": 20,
+        "stateBoundary": "local-d1"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/study-report.json",
+        "sha256": "9b239416775c187ef0c3ddb0e5047b30abfa6815515f72d2b447f232e62822e0"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/production-report.json",
+        "sha256": "10a8f762cd3cce0f406341f4fd5793b04a83af34871be7174ae02a0dbe62f58b",
+        "entries": 20,
+        "stateBoundary": "mock-http"
+      },
+      {
+        "file": "outputs/word-image-full/webkit/study-disabled-report.json",
+        "sha256": "cd67b498abc4249003c45d1775c937ea0430c23b4bb78eb162fcd53e3f4834aa"
+      }
+    ]
+  },
+  "coverage": {
+    "all3809IdentitiesChecked": true,
+    "all3809DefaultEligibleInBothBrowsers": true,
+    "pilotLifecycle": 20,
+    "additionalLifecycle": 22,
+    "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2"
+    ],
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "textSizesPercent": [
+      100,
+      200
+    ],
+    "keyboard": true,
+    "axe": true,
+    "currentAndNextRequestsOnly": true,
+    "editorFailureRetry": true,
+    "snapshotMeaningMismatchNoImage": true,
+    "preAnswerWarmupAndRecallNoImages": true,
+    "disabledAllSurfacesNoImages": true
+  },
+  "preservation": {
+    "unchangedPaths": [
+      "app/api",
+      "lib/learning",
+      "lib/learning.ts",
+      "lib/learning-api.ts",
+      "lib/state-shape.ts",
+      "lib/state-integrity.ts",
+      "lib/state-delta.ts",
+      "lib/response-validation.ts",
+      "lib/restore-validation.ts",
+      "lib/backup.ts",
+      "db",
+      "drizzle",
+      "data/words.json",
+      "data/content.json",
+      "lib/server/word-image-hosting.ts",
+      "app/word-images",
+      ".openai/hosting.json",
+      "package-lock.json",
+      "public/word-images-pilot"
+    ],
+    "primaryDirtyFiles": 18,
+    "sourceManifestLedgerTextbookUnchanged": true,
+    "pilotArtifactsUnchanged": true,
+    "localD1StateAndRevisionUnchangedByPractice": true,
+    "firstAnswersGradesNotesAndStudyDatesPreserved": true,
+    "learnerApiOrSchemaChanges": 0,
+    "migrations": 0,
+    "productionLearnerQaRequests": 0,
+    "productionLearnerQaWrites": 0,
+    "aiRequests": 0
+  },
+  "observations": {
+    "firstStudyFixtureFailure": "Missing required fields in synthetic session record; fixed the fixture without changing runtime validation.",
+    "secondStudyFixtureFailure": "Resume runs existing carryover normalization; the image-only baseline is taken after the explicit resume, and original grades/first answers are also checked."
+  },
+  "risk": "medium: learning UI and static image index; no data migration or upload permission change",
+  "rollback": "Set existing word_image_pilot_enabled=false and redeploy, or republish R2-capable v130. Keep BUCKET binding and image GET/HEAD; keep upload key/expires absent.",
+  "limits": [
+    "Local Chromium/WebKit emulation, not an actual iPhone or VoiceOver test",
+    "No Node22/24 GitHub CI run in this task",
+    "No new semantic review of all3809 images",
+    "Additional3789 pictures have generic non-answer alt text; detailed scene descriptions remain the original20",
+    "Full browser suite unrelated to this change not rerun"
+  ]
+}

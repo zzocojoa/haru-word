@@ -10,6 +10,7 @@ export type StudySessionProps = {
   busy: boolean;
   saved: boolean;
   visible: boolean;
+  imagePilotEnabled?: boolean;
   onClose: () => void;
   onReview: (date: string) => void;
   onRepeat: (date: string) => void;

@@ -47,6 +47,7 @@ type Props = {
   busy: boolean;
   retryBlocked: boolean;
   error?: string;
+  imagePilotEnabled?: boolean;
 };
 type LibraryProps = Props & { grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; persistence: GrammarPersistence };
 export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
@@ -110,6 +111,7 @@ const WordList = memo(function WordList({
   save,
   busy,
   retryBlocked,
+  imagePilotEnabled = false,
   pos, setPos, page, setPage, onHelp,
 }: Props & { pos: string; setPos: (pos: string) => void; page: number; setPage: (page: number) => void; onHelp?: (id: LessonId, button: HTMLButtonElement) => void }) {
   const [query, setQuery] = useState("");
@@ -324,6 +326,7 @@ const WordList = memo(function WordList({
         <DialogContent className="word-dialog framed-dialog" onCloseAutoFocus={restoreFocus}>
           {selected && (
             <WordEditor
+              imagePilotEnabled={imagePilotEnabled}
               error={error}
               activityDate={activityDate}
               key={selected.instance}

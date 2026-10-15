@@ -6,6 +6,8 @@ import { WordPronunciation } from '../word-pronunciation';
 import { ExpressionLine } from "../expression-line";
 import { ExpressionFields } from "../expression-fields";
 import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
+import { resolveWordImage } from '@/lib/word-image';
+import { WordImagePreview } from '../word-image-preview';
 import type { StudySessionController } from "./use-study-session-controller";
 type LearnStageProps = Pick<
   StudySessionController,
@@ -24,6 +26,7 @@ type LearnStageProps = Pick<
   | "materialConflict"
   | "useLibraryMaterial"
 > & {
+  imagePilotEnabled?: boolean;
   word: NonNullable<StudySessionController["word"]>;
   content: NonNullable<StudySessionController["content"]>;
 };
@@ -44,7 +47,9 @@ export function LearnStage({
   learn,
   materialConflict,
   useLibraryMaterial,
+  imagePilotEnabled = false,
 }: LearnStageProps) {
+  const image = imagePilotEnabled ? resolveWordImage(word, meaning) : undefined;
   return (
     <>
       <div className="word-stage compact">
@@ -54,6 +59,7 @@ export function LearnStage({
         <h3 lang="en">
           {word.word}
         </h3>
+        {image && <WordImagePreview image={image} className="word-image-learn"/>}
         <WordPronunciation word={word} meaning={meaning}/>
       </div>
       <GrammarTermsHelp pos={word.pos} />

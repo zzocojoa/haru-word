@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-15T01:01:26.376Z",
+  "status": "blocked_before_production_deployment",
+  "goalComplete": false,
+  "scope": "Upload 3809 prepared Oxford WebP images and verify remote bytes/hash/GET-HEAD headers; keep the existing 20-entry UI.",
+  "requestedImages": 3809,
+  "r2ObjectsUploaded": 0,
+  "remoteImagesVerified": 0,
+  "site": {
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "access_mode": "public",
+    "access_revision": 4,
+    "baselineLiveVersion": 129
+  },
+  "preparedSource": {
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "checkout_path": "C:\\Users\\user\\.codex\\worktrees\\word-image-pilot\\하루단어",
+    "commit_sha": "d628cb5f7af45381ae71a76dea3313d816997f21",
+    "archive": "C:/Users/user/.codex/worktrees/word-image-pilot/하루단어/outputs/oxford-hosting/site-hosting-v1.tar.gz"
+  },
+  "preparedVersion": {
+    "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_010b6a219fd08191aca83e20c34ff739",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version_number": 130,
+    "source": {
+      "commit_sha": "d628cb5f7af45381ae71a76dea3313d816997f21"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000065208206be78e571f5c974fe",
+      "content_hash": "sha256:e90bb0a91428a64ecfb389e132f78debafc4849228c8ee9cac5f9d547fb12ecc",
+      "size_bytes": 16517120,
+      "file_count": 339
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "blocker": {
+    "kind": "automatic_approval_review_rejection",
+    "action": "deploy_site_version for saved v130 to the existing public Sites project",
+    "reason": "Confirmed authorization covered image hosting upload and remote verification, but did not explicitly authorize the required production Site deployment.",
+    "deploymentStarted": false,
+    "workaroundAttemptedAfterConfirmedRejection": false
+  },
+  "temporaryAccess": {
+    "keys": [
+      "word_image_upload_key",
+      "word_image_upload_expires"
+    ],
+    "addedAtRevision": 66,
+    "removedAtRevision": 67,
+    "originalEnvironmentEntriesPreserved": true,
+    "remainingEntryCount": 13,
+    "credentialPersistedToFiles": false
+  },
+  "validation": {
+    "unitTests": 611,
+    "failed": 0,
+    "skipped": 0,
+    "typecheckExitCode": 0,
+    "lintExitCode": 0,
+    "existingLintWarnings": 15,
+    "newLintWarnings": 0,
+    "projectBuildExitCode": 0,
+    "localBuiltWorkerAndR2Passed": true,
+    "localRuntimeResult": "work/oxford-host-runtime.json",
+    "preservation": "work/oxford-host-preservation.json",
+    "realIPhone": false,
+    "node24CI": false,
+    "localArchive": {
+      "gzipBytes": 7257543,
+      "gzipSha256": "0eb00efa66f6b84188c93f4f055e2f695a1247f64046ab46de720bb45902cb17",
+      "tarBytes": 16527360,
+      "tarSha256": "1520d043ba615039cd99ab1af8b82bc24b83e11a5d2393bb191e597d47d41306",
+      "platformStoredArchiveByteIdentityVerified": false,
+      "note": "Platform-returned tar metadata is retained separately; platform archive bytes were not downloaded."
+    },
+    "evidence": {
+      "oxford-host-final-tests": {
+        "file": "work/pilot-evidence/oxford-host-final-tests.json",
+        "sha256": "7d1a7d026cc11c05fb61483786d5d00a74a34fd58afd1aea741e04e38f87049d",
+        "exitCode": 0
+      },
+      "oxford-host-types-fixed": {
+        "file": "work/pilot-evidence/oxford-host-types-fixed.json",
+        "sha256": "35a0dc77814a432699a1a5535f0fd912e96f16a85c57941202f42981db0c74bb",
+        "exitCode": 0
+      },
+      "oxford-host-final-lint": {
+        "file": "work/pilot-evidence/oxford-host-final-lint.json",
+        "sha256": "96513cf85ba288f23fcfc8bc6911859c3365770e03123fd46dc57a9872dba676",
+        "exitCode": 0
+      },
+      "oxford-host-runtime-valid-first": {
+        "file": "work/pilot-evidence/oxford-host-runtime-valid-first.json",
+        "sha256": "5792da6cf50d61df139708a1d02e2bfb21e4fd59feab36933fcd1286be84a11b",
+        "exitCode": 0
+      }
+    }
+  },
+  "platformLimits": [
+    "Windows native build helper could not locate npm; explicit installed npm CLI completed the project build.",
+    "Packaging used Git Bash, bundled Node 24.19.0 and TAR_OPTIONS=--force-local after WSL path, Node 22 copy and GNU tar drive-colon failures.",
+    "Local Miniflare returned 503 on a valid PUT immediately following an unauthenticated PUT; valid uploads followed by public GET/HEAD/304 and final authentication rejection passed. Production canary is unperformed."
+  ],
+  "compatibility": {
+    "dbBinding": "DB",
+    "r2BindingPrepared": "BUCKET",
+    "projectIdentityChanged": false,
+    "learningUiChanged": false,
+    "learnerDataWritten": false,
+    "databaseMigration": false,
+    "oldPilot20Preserved": true,
+    "rawImageSourcesAndApprovalLedgerPreserved": true,
+    "primaryDirtyFilesPreserved": 18
+  },
+  "requiredApproval": {
+    "action": "Publish the concrete saved v130 hosting change to the existing Site, temporarily enable private uploads, upload/canary/full-verify 3809 images, then remove upload credentials and redeploy the same R2-capable version.",
+    "noNewSite": true,
+    "noFullCatalogUiActivation": true,
+    "keepPublicAccessPolicyRevision": 4
+  },
+  "resume": [
+    "Obtain explicit authorization for production v130 hosting publication; do not bypass the rejected deployment.",
+    "Verify current Site/version/environment and archive/source hashes; mint a fresh temporary upload key in session memory.",
+    "Set only the two temporary Secret entries and deploy exact saved v130 after native approval.",
+    "Run --canary; if successful upload 3809 and verify public GET body hashes and GET/HEAD headers.",
+    "Remove both Secret entries, redeploy the same saved R2-capable version and re-verify all 3809 plus upload-disabled behavior.",
+    "Record actual URLs, per-file evidence, counts, versions and environment revisions; preserve originals and the existing 20-entry learning UI."
+  ]
+}

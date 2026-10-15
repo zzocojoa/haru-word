@@ -1,5 +1,23 @@
 # 하루단어 · Oxford 3000
 
+**긴 단어 편집창 확대 수정 v132**를 기존 사이트에 게시했습니다. 제목과 이미지가 공간에 맞춰 줄바꿈되며 320/390/1440px·글자 100/200%의 Chromium/WebKit 검사를 통과했습니다. 운영 CSS가 검증한 빌드와 일치합니다. [출시 결과](docs/releases/2026-10-15-word-image-editor-wrap-rollout.json)에 런타임 커밋과 GitHub CI의 계정 결제·사용 한도 차단을 구분해 기록했습니다.
+
+**전체 이미지 연결 v131**은 오늘 학습 개요의 이미지 연습을 3,809개로 확대하고, 단어 익히기·단어 편집창에 선택한 뜻과 품사가 일치하는 그림을 표시합니다. 기본 뜻과 다른 선택 뜻·개인 단어에는 추정한 그림을 연결하지 않습니다. 첫 답을 입력하는 진단·회상 단계에는 그림을 표시하지 않습니다. 이미지 연습은 성적을 기록하지 않고 닫기·탭 이동·새로고침 후 초기화합니다. [전체 UI 범위·검증·복구](docs/OXFORD_WORD_IMAGES_FULL_UI.md)와 [v131 배포 증거](docs/releases/2026-10-15-oxford-image-full-ui-rollout.json)를 참조하세요. 아래 시범·v130 기록은 전체 UI 반영 전의 호스팅 단계입니다.
+
+`npm run images:ui:prepare`는 검증된 전체 가공·원격 목록에서 351KB 클라이언트 인덱스를 만듭니다. `npm run images:ui:check`와 빌드는 교재·뜻·품사·출처 지문·원격 연결이 다른 경우 중단합니다. 원본 생성 정보는 클라이언트에 포함하지 않습니다. 원격 이미지는 기존 사이트의 `/word-images/v1/<해시>.webp`에서 현재 항목과 다음 한 장만 요청합니다.
+
+전체 승인 이미지 **3,809개**는 [로컬 웹용 가공](docs/OXFORD_WORD_IMAGES_WEB_PREPARATION.md)과 [결과 보고서](docs/oxford-word-images-web-preparation.json)에 따라 검증·WebP 변환·배포용 목록 작성을 완료했습니다(8.28GB → 128.6MB). 전체 연결 목록은 `data/word-image-web-manifest.json`, 바이너리와 업로드 목록은 Git 제외 `outputs/oxford-web/`에 있으며 실제 위치는 가공 문서에 적었습니다. 후속 호스팅도 완료했으며, 전체 학습 UI 연결은 별도 작업입니다. 운영의 시범20개는 유지합니다.
+
+[전체 이미지 호스팅](docs/OXFORD_WORD_IMAGES_HOSTING.md)은 **v130 운영 게시·3,809개 업로드·권한 폐기 후 전체 재검증**을 완료했습니다. 임시 키를 명시적으로 무효화한 뒤 삭제했고 최종 환경은 revision71·원래13개 항목입니다. 이전 키의 PUT404와 전체 파일의 SHA·MIME·캐시·GET/HEAD를 확인했습니다. 원격 연결은 `data/word-image-hosted-manifest.json`, [배포·검증 증거와 복구 절차](docs/releases/2026-10-15-oxford-image-hosting-rollout.json)를 참조하세요. 학습 화면은 기존20개를 유지합니다.
+
+배포용 WebP 20개는 `public/word-images-pilot/`에 포함되며 `npm run images:pilot:check`와 빌드가 해시·뜻·용량을 검사합니다. 원본이 있는 제작 PC에서는 `npm run images:pilot:prepare` 다음 `npm run images:pilot:web`으로 재현합니다. PNG는 Git 제외 `work/oxford-image-pilot/`에 보관합니다. 기본 입력은 사용자 홈의 `.codex/worktrees/oxford-word-images/하루단어`와 `Documents/ChatGPT/하루단어/outputs/oxford-images/`이며 다른 위치는 `--source "<승인 체크아웃>" --assets "<원본 PNG 폴더>"`를 준비 명령에 전달합니다. 교재·승인·파일 해시가 다르면 중단하고 다른 파일을 덮어쓰지 않습니다.
+
+개발 모드는 활성화되며 운영 빌드는 `word_image_pilot_enabled=true`일 때만 켭니다(기본 false). 설정 변경은 기존 Sites 저장 버전 재배포 후 적용됩니다. 전체 3,809개 이미지 호스팅과 AI 채점은 이번 시범에 포함하지 않습니다.
+
+브라우저 검사에는 설치된 Playwright·axe 경로를 `QA_PLAYWRIGHT_PATH`, `AXE_CORE_PATH`로 설정합니다. 로컬 built Worker를 플래그 true로 실행하고 `QA_BASE_URL`을 그 루프백 origin으로, `QA_IMAGE_PILOT_MODE=enabled`로 설정하여 `node tests/image-practice-qa.cjs`를 실행합니다. `QA_BROWSER=webkit`으로 반복하며 `isolation` 인수는 로컬 D1 가상 계정 전후 대조입니다. 별도 플래그 없는 built Worker의 `production` 인수는 비활성 진입·미리보기·이미지 요청 0을 확인합니다. 운영 DB는 QA에 사용하지 않습니다.
+
+아래 표현 사전 선정 설명은 2026-10-08 Git 통합 당시의 기록입니다.
+
 표현을 먼저 예약한 뒤 AI 카드를 만드는 기능과 호환 릴레이·생성 파일의 Git 통합을 진행했습니다. [원본 커밋·로컬 검증·Git 상태 확인](docs/releases/2026-10-08-expression-selection-github.json)을 따르세요. 추가 실제 계정·CPU·휴대전화 검증은 사용자 선택으로 미실시이며 과거 관측 공백은 유지합니다. 마지막 배포 기록은 Site v123/0023이고 이번 Git 작업은 운영 게시·Worker 배포를 포함하지 않습니다. 아래 v121 등은 당시 기록입니다.
 
 최종 품질 탈락 뒤 새 후보를 한 번 만드는 기능을0021·Site v121에 배포했습니다. [이번 시험](docs/releases/2026-10-06-automation-replacement-trial.json)은5장 모두 서버접수와 사용자 이미지·원본링크 정상 확인을 마쳤습니다. 과거 제작 준비 CPU 자료 공백은 사용자 승인에 따라 미검증으로 남기고 EN_Card PR11·하루단어 PR32를 병합했습니다.

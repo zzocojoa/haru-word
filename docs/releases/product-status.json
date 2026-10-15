@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-08T00:22:48.307Z",
-  "note": "표현 선정·리팩토링의 로컬 검증 후 사용자가 추가 실제 계정·CPU·휴대전화 검증 없이 Git 통합을 승인했다. EN_Card PR13/14와 하루단어 선행 PR33은 병합됐다. 하루단어 후속은 최신 main의 카드 관련 변경만 별도 PR로 정리하며 최종 병합 상태는 GitHub를 따른다. 아래 운영 정보는 마지막 실측 기록이며 이번 새 배포/운영 조회는 없다.",
+  "recordedAt": "2026-10-15T12:38:52.482Z",
+  "note": "Oxford image PR35 integration candidate; existing GitHub card merge evidence is retained. No new deployment in this integration.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -42,19 +42,13 @@
   },
   "production": {
     "site": {
-      "version": 123,
-      "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
-      "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
-      "envRevision": 59,
+      "version": 132,
+      "source": "909df067abc176aae82895ed053feb8f7261c9e6",
+      "deployment": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+      "envRevision": 71,
       "publicAccessRevision": 4,
-      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
-      "latestVersionRead": {
-        "version": 123,
-        "status": "succeeded",
-        "checkedAt": "2026-10-07T16:12:51.430297+00:00",
-        "method": "Native deploy success; public source manifest hash and audience revision checked",
-        "accessRevision": 4
-      }
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "evidence": "2026-10-15-word-image-editor-wrap-rollout.json"
     },
     "workerVersions": {
       "en-card": [
@@ -84,32 +78,56 @@
     "d1MigrationCount": 23,
     "automationRuntimeSourceCandidate": "2026-10-08-expression-selection.json",
     "previousAutomationRuntimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
-    "automationRuntimeSourceNote": "0023 deployment used the preserved expression-selection source snapshot before its final Git commit. This Git-only refactor is not a new deployment; do not label the old date-card commit as the exact current runtime source."
+    "automationRuntimeSourceNote": "0023 deployment used the preserved expression-selection source snapshot before its final Git commit. This Git-only refactor is not a new deployment; do not label the old date-card commit as the exact current runtime source.",
+    "previousSiteRecord": {
+      "version": 123,
+      "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
+      "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
+      "envRevision": 59,
+      "publicAccessRevision": 4,
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+      "latestVersionRead": {
+        "version": 123,
+        "status": "succeeded",
+        "checkedAt": "2026-10-07T16:12:51.430297+00:00",
+        "method": "Native deploy success; public source manifest hash and audience revision checked",
+        "accessRevision": 4
+      }
+    }
   },
   "cardArtifacts": {
-    "enCardSourceCommit": "03b7186a7ce4c8a4c0575c3c5eaeb229ed8bfc8d",
-    "studioSourceSha256": "94a6b09d01bcecf97b52ed90bdd09f7607235051ba4ed55c8dffba0a98ebfa99",
-    "relaySourceSha256": "e99f9110986c9a61a153d619d938708f25226c7ece94240afa5ee9b100b9d965",
+    "enCardSourceCommit": null,
+    "enCardSourceBaseCommit": "66fe8a46b39a6b31815778624428713c84c6dd1d",
+    "studioSourceSha256": "9c99382f00dc1e880608384e60481ad4517570c24c80867cc80371c1a322e43b",
+    "relaySourceSha256": "b018594352b60ee71c64c75adbbd70c8aabf01d19fe8ef9c8db8be8376f83b69",
     "studioManifest": "public/card-studio/source.json",
     "relayManifest": "lib/server/card-automation.generated.json",
-    "provenance": "Current files/EN_Card source hashes and rebuilt relay bytes match this commit. Original Site export/deployment source remains 67606e021aea42ea44e429c82ec27cbf7b8f8ef1 (v123); no new export or deployment in this Git reconciliation.",
+    "provenance": "Frozen exported files are preserved byte-for-byte from the already deployed Site v132 source. Current EN_Card source fingerprints and no-write relay bundle match. The source includes uncommitted EN_Card input, so the base commit alone is not claimed as the exact source.",
     "previousRecord": {
-      "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
-      "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
-      "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+      "enCardSourceCommit": "03b7186a7ce4c8a4c0575c3c5eaeb229ed8bfc8d",
+      "studioSourceSha256": "94a6b09d01bcecf97b52ed90bdd09f7607235051ba4ed55c8dffba0a98ebfa99",
+      "relaySourceSha256": "e99f9110986c9a61a153d619d938708f25226c7ece94240afa5ee9b100b9d965",
       "studioManifest": "public/card-studio/source.json",
       "relayManifest": "lib/server/card-automation.generated.json",
-      "operatingSourceCommit": "1e385951c7c2a20657b8a24681c94ec1a0ceae8c",
-      "operatingEnCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
-      "operatingStudioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
-      "operatingRelaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
-      "candidate": {
-        "evidence": "2026-10-06-automation-quality-replacement.json",
+      "provenance": "Current files/EN_Card source hashes and rebuilt relay bytes match this commit. Original Site export/deployment source remains 67606e021aea42ea44e429c82ec27cbf7b8f8ef1 (v123); no new export or deployment in this Git reconciliation.",
+      "previousRecord": {
+        "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
         "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
         "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
-        "deployed": true,
-        "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
-        "deploymentEvidence": "2026-10-06-automation-replacement-rollout.json"
+        "studioManifest": "public/card-studio/source.json",
+        "relayManifest": "lib/server/card-automation.generated.json",
+        "operatingSourceCommit": "1e385951c7c2a20657b8a24681c94ec1a0ceae8c",
+        "operatingEnCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
+        "operatingStudioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+        "operatingRelaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+        "candidate": {
+          "evidence": "2026-10-06-automation-quality-replacement.json",
+          "studioSourceSha256": "650b171c386b50f89e7be64f1559199b0b876f9b03689dbab31bb19a4a864b8a",
+          "relaySourceSha256": "ee0e41f3b1fb6180a64753617a7ff0602a187eff4b119a1b8b9412125ad229dd",
+          "deployed": true,
+          "enCardSourceCommit": "5aeebd94657672eccf2eaef649e54362f3731bc3",
+          "deploymentEvidence": "2026-10-06-automation-replacement-rollout.json"
+        }
       }
     }
   },
@@ -3419,5 +3437,16 @@
     "enCardPullRequest": "https://github.com/zzocojoa/EN_Card/pull/14",
     "haruWordBranch": "codex/automation-expression-pool-merge",
     "statusSource": "GitHub PR state is authoritative; this file records pre-merge verification and authorization."
+  },
+  "oxfordImageIntegration": {
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/35",
+    "status": "integration-candidate",
+    "baseMain": "c6c5ed9080e46ec644e64090828d39d47228a77d",
+    "originalHead": "0517cc0ad997d3cc00209b6569ccdb87a0e84c07",
+    "deployedVersion": 132,
+    "runtimeCommit": "909df067abc176aae82895ed053feb8f7261c9e6",
+    "cardExportFilesVerified": 131,
+    "ci": "GitHub Node22/24 jobs did not start because of account billing/spending limits; not a passing CI result",
+    "noNewDeployment": true
   }
 }

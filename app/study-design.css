@@ -827,10 +827,15 @@ label input, label textarea {
 }
 .dialog-word {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
   font-size: 32px;
   font-weight: 500;
+}
+.dialog-word > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .result-inline {
   display: flex;
@@ -4615,3 +4620,14 @@ footer {
 .structure-explanations dl > div { margin-top:12px; }
 .structure-explanations dt { font-size:.875rem; font-weight:600; }
 .structure-explanations dd { margin:4px 0 0; font-size:.875rem; line-height:1.7; }
+.image-practice-dialog { position: fixed; }
+.image-practice-close { position: absolute; top: 1.4rem; right: 1.4rem; }
+.image-practice-dialog [data-slot="dialog-header"] { padding-right: 3rem; }
+.image-practice-picture { display: block; max-width: 100%; width: auto; height: min(52dvh, 30rem); object-fit: contain; margin: 0 auto 1rem; border-radius: 1rem; }
+.image-practice-sense { text-align: center; padding: 2.5rem 0; }
+.image-practice-answer { font-size: clamp(2rem, 8vw, 3.8rem); margin: 0; overflow-wrap: anywhere; }
+.image-practice-meaning { font-size: 1.25rem; line-height: 1.5; margin: .5rem 0; overflow-wrap: anywhere; }
+.image-practice-sense .small-note { margin: 0; }
+.dialog-word:has(.word-image-preview) { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.word-image-preview { width: 3rem; height: 4rem; object-fit: contain; flex-shrink: 0; border-radius: .4rem; }
+.word-image-learn { display: block; width: auto; max-width: 100%; height: 10rem; object-fit: contain; margin: 0 auto 1rem; border-radius: .6rem; }

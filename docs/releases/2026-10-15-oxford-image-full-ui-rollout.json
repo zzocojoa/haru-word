@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "status": "completed",
+  "goalComplete": true,
+  "completedAt": "2026-10-15T04:07:10.404Z",
+  "objective": "Expand pilot20 to all3809 in image practice, word learning and word editor; preserve learner history and user edits.",
+  "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+  "version": {
+    "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_f069c92375d881918c6ce9de6e696d75",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version_number": 131,
+    "source": {
+      "commit_sha": "d164eab6578c043e3106962529f15ec04b21a3d8"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000a73882099aa8fc71899b8808",
+      "content_hash": "sha256:9eb1fa9b6c665ef5c17646ba1489e1d278151e1756cef0bc2e7db0e62112cc53",
+      "size_bytes": 17203200,
+      "file_count": 339
+    }
+  },
+  "deployment": {
+    "id": "appgdep_6ad04fd3b82c81919d14080a0cc8d301",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_f069c92375d881918c6ce9de6e696d75",
+    "status": "succeeded",
+    "env_set_revision": 71,
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "updated_at": "2026-10-15T04:00:44.405147+00:00",
+    "failure_message": null
+  },
+  "site": {
+    "latestVersion": 131,
+    "status": "active",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "accessMode": "public",
+    "accessRevision": 4
+  },
+  "environment": {
+    "revision": 71,
+    "count": 13,
+    "unchanged": true,
+    "uploadKeysAbsent": true
+  },
+  "runtimeCatalog": {
+    "file": "data/word-image-ui.json",
+    "entries": 3809,
+    "bytes": 350801,
+    "sha256": "c07d73218e82f0735c309cb8d6ca59175f12c7a8cf5968e7dbb26158f54bb25e",
+    "metadataSource": "data/word-image-web-manifest.json",
+    "hostedSource": "data/word-image-hosted-manifest.json",
+    "firstTwentyPreserved": true
+  },
+  "localVerification": {
+    "file": "docs/releases/2026-10-15-oxford-image-full-ui-verification.json",
+    "sha256": "0627222d8244fbbcd242d4b09db6a7434d81a4e39e7823c8704f2f6beeeca05b",
+    "tests": 615,
+    "passed": 615,
+    "failed": 0,
+    "checks": 14,
+    "browserReports": 18
+  },
+  "productionReadback": {
+    "passed": true,
+    "checkedAt": "2026-10-15T04:02:30.338Z",
+    "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "homeStatus": 200,
+    "serverFlagEnabled": true,
+    "homeReferencesMatchingClient": true,
+    "matchingBuiltClientChunk": "learning-app-DfIIJ6ch.js",
+    "sha256": "cc47f6fe5df04a7e37060515d7d099b18f4255595fcca5b8b1a8a9944b6bc0dc",
+    "bytes": 722217,
+    "all3809IdsAndHashesInDeliveredClient": true,
+    "entryBootstrapChecked": false,
+    "uploadPutStatus": 404,
+    "uploadError": "upload_disabled",
+    "uploadProbeBodyBytes": 0,
+    "r2Writes": 0,
+    "learnerApiRequests": 0,
+    "learnerWrites": 0
+  },
+  "fullRemoteVerification": {
+    "passed": true,
+    "started": "2026-10-15T04:01:40.437Z",
+    "finished": "2026-10-15T04:05:31.580Z",
+    "runId": "f8292c1d-dc21-49ba-98b9-81624e9cccfb",
+    "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "mode": "verify",
+    "expected": 3809,
+    "completed": 3809,
+    "uploaded": 0,
+    "reused": 3809,
+    "readRetries": 0,
+    "receiptFormat": "ndjson",
+    "receiptsFile": "outputs\\oxford-hosting\\14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e\\runs\\f8292c1d-dc21-49ba-98b9-81624e9cccfb\\receipts.jsonl",
+    "bytes": 128592754,
+    "requests": {
+      "GET": 3809,
+      "HEAD": 3809,
+      "PUT": 0
+    },
+    "reportFile": "outputs\\oxford-hosting\\14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e\\runs\\f8292c1d-dc21-49ba-98b9-81624e9cccfb\\report.json",
+    "reportSha256": "b3e27ca7158602a6160e9404f9898fa414d386e31a6fd68a58cc420e2c9a54ae",
+    "receiptsSha256": "447ead34ad4b6039f5e5e27e05553b8eb45949ae19b4cb6b6753e547a700cce8"
+  },
+  "preservation": {
+    "unchangedPaths": [
+      "app/api",
+      "lib/learning",
+      "lib/learning.ts",
+      "lib/learning-api.ts",
+      "lib/state-shape.ts",
+      "lib/state-integrity.ts",
+      "lib/state-delta.ts",
+      "lib/response-validation.ts",
+      "lib/restore-validation.ts",
+      "lib/backup.ts",
+      "db",
+      "drizzle",
+      "data/words.json",
+      "data/content.json",
+      "lib/server/word-image-hosting.ts",
+      "app/word-images",
+      ".openai/hosting.json",
+      "package-lock.json",
+      "public/word-images-pilot"
+    ],
+    "primaryDirtyFiles": 18,
+    "sourceManifestLedgerTextbookUnchanged": true,
+    "pilotArtifactsUnchanged": true,
+    "localD1StateAndRevisionUnchangedByPractice": true,
+    "firstAnswersGradesNotesAndStudyDatesPreserved": true,
+    "learnerApiOrSchemaChanges": 0,
+    "migrations": 0,
+    "productionLearnerQaRequests": 0,
+    "productionLearnerQaWrites": 0,
+    "aiRequests": 0
+  },
+  "completionAudit": [
+    {
+      "requirement": "Expand pilot20 to all3809",
+      "evidence": "All3809 runtime identities and remote bytes match; both browsers default deck3809; production HTML references exact verified client with all3809 IDs/hashes.",
+      "passed": true
+    },
+    {
+      "requirement": "Learning screen images",
+      "evidence": "Independent picture practice and learn stage are wired; Chromium/WebKit active/disabled, all levels and no pre-answer warmup/recall image requests.",
+      "passed": true
+    },
+    {
+      "requirement": "Word editor matching meaning and part of speech",
+      "evidence": "Shared resolver validates ID/spelling/POS/default meaning for all3809; personal/custom meanings rejected; editor switches and retry tested.",
+      "passed": true
+    },
+    {
+      "requirement": "Preserve learner records and user edits",
+      "evidence": "Storage/API/schema/backup paths unchanged; full615 tests pass; actual local D1 practice preserves state and revision; editor retry preserves first answers/grades/notes/dates.",
+      "passed": true
+    },
+    {
+      "requirement": "Existing Site publication and upload access stays removed",
+      "evidence": "Native v131 publish succeeded with exact pushed source; environment71 and audience4 unchanged; no upload keys; PUT404 upload_disabled; remote verify3809 GET+HEAD with PUT0.",
+      "passed": true
+    }
+  ],
+  "sourceOnlyFollowup": {
+    "changes": [
+      "README.md",
+      "PROJECT_HANDOFF.md",
+      "docs/OXFORD_WORD_IMAGES_FULL_UI.md",
+      "docs/releases/2026-10-15-oxford-image-full-ui-rollout.json",
+      ".gitattributes"
+    ],
+    "reason": "Record publication evidence and pin generated UI JSON to LF on Windows; no runtime/build bytes changed; no additional publication required."
+  },
+  "risk": "medium: learning UI and static image index; no data migration or upload permission change",
+  "rollback": "Set existing word_image_pilot_enabled=false and redeploy, or republish R2-capable v130. Keep BUCKET binding and image GET/HEAD; keep upload key/expires absent.",
+  "limits": [
+    "Local Chromium/WebKit emulation, not an actual iPhone or VoiceOver test",
+    "No Node22/24 GitHub CI run in this task",
+    "No new semantic review of all3809 images",
+    "Additional3789 pictures have generic non-answer alt text; detailed scene descriptions remain the original20",
+    "Full browser suite unrelated to this change not rerun"
+  ]
+}

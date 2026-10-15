@@ -1,11 +1,16 @@
 declare namespace Cloudflare {
   interface Env {
+    topic_sentence_validation_key?: string;
+    topic_sentence_validation_expires?: string;
     DB?: D1Database;
+    word_image_pilot_enabled?: string;
     card_studio_enabled?: string;
     card_studio_owner_id?: string;
     card_studio_bridge_secret?: string;
     card_studio_origin?: string;
     BUCKET?: R2Bucket;
+    word_image_upload_key?: string;
+    word_image_upload_expires?: string;
     google_api?: string;
     groq_api?: string;
     groq_ai_enabled?: string;

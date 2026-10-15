@@ -26,6 +26,8 @@ import { editedWordDraftsProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
 import { ExpressionFields } from "../expression-fields";
 import { useSheetProtection } from '../sheet-dialog';
+import { resolveWordImage } from '@/lib/word-image';
+import { WordImagePreview } from '../word-image-preview';
 export function WordEditor({
   error,
   activityDate,
@@ -34,6 +36,7 @@ export function WordEditor({
   busy,
   retryBlocked,
   onSave,
+  imagePilotEnabled = false,
 }: {
   error?: string;
   activityDate: () => string;
@@ -42,6 +45,7 @@ export function WordEditor({
   busy: boolean;
   retryBlocked: boolean;
   onSave: (p: Progress) => Promise<boolean>;
+  imagePilotEnabled?: boolean;
 }) {
   const { submitting, failed, submit } = useEditorSubmission();
   const content = cardContent(word.id, p);
@@ -72,11 +76,13 @@ export function WordEditor({
     setDraft(previous => selectWordEditorDraft(previous, key, initial));
   }
   const issue = wordEditorDraftIssue(draft, senses.map(sense => sense.meaning || ''));
+  const image = imagePilotEnabled ? resolveWordImage(word, meaning) : undefined;
   return (
     <>
       <DialogHeader>
         <DialogTitle className="dialog-word">
           <span lang="en">{word.word}</span>
+          {image && <WordImagePreview key={image.sha256} image={image}/>}
         </DialogTitle>
         <DialogDescription>
           {word.personal ? "수준 미지정" : word.level} · {POS[word.pos]} ·{" "}

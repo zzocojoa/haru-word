@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "scope": "20 local ungraded image recall pilot",
+  "completedAt": "2026-10-14T15:42:52.545Z",
+  "codeCommit": "1e55cd1",
+  "baseCommit": "c6c5ed9080e46ec644e64090828d39d47228a77d",
+  "sourceCommit": "228f8ba9e1594cbcb6286b24559100923eb68f6f",
+  "node": "v22.22.2",
+  "pilotImages": 20,
+  "sourcePngBytes": 41080212,
+  "unitTests": 579,
+  "unitFailures": 0,
+  "lintErrors": 0,
+  "lintWarnings": {
+    "existing": 13,
+    "localRawImages": 2
+  },
+  "practiceWrites": 0,
+  "practiceAiRequests": 0,
+  "productionImageRequests": 0,
+  "actualIphoneChecked": false,
+  "userVisualReview": "pending",
+  "ci": "not-run-local-branch",
+  "hostingChanged": false,
+  "originalAudit": {
+    "passed": true,
+    "primaryBranch": "codex/card-automation-topic-alignment",
+    "primaryDirtyFilesPreserved": 18,
+    "sourceImagesPreserved": 20,
+    "manifestAndLedgerPreserved": true,
+    "ignoredPilotPngs": 20,
+    "apiStateSchemaDbLockHostingUnchanged": true,
+    "originalPlanPreserved": true
+  },
+  "screenshots": [
+    {
+      "path": "outputs/word-image-pilot/chromium/front.png",
+      "bytes": 212672,
+      "sha256": "691d67e19d1f5dacef9e746c3e181e94358214f4f9265dea63c550044b3206af",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "outputs/word-image-pilot/chromium/back.png",
+      "bytes": 33644,
+      "sha256": "bce95dbe0d1cbdc1a7ecd6359d658a32094e4d2423c972597538dbc8adf6794d",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "outputs/word-image-pilot/chromium/editor.png",
+      "bytes": 38176,
+      "sha256": "7d134f1ff84c3c9081d9338730c252e18348925d5ce39bcc62c3504a35bd7626",
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "evidence": [
+    {
+      "label": "prepare-real",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "images:pilot:prepare"
+      ],
+      "started": "2026-10-14T12:26:49.354Z",
+      "finished": "2026-10-14T12:26:50.516Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/prepare-real.json",
+      "sha256": "efe7664ed3d1daa43106b6966b92c20a5f96c2ef93b3868bf119e21b9f844741"
+    },
+    {
+      "label": "final-prepare-reuse",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "images:pilot:prepare"
+      ],
+      "started": "2026-10-14T15:33:14.932Z",
+      "finished": "2026-10-14T15:33:15.890Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-prepare-reuse.json",
+      "sha256": "0fdf2328b9205de1e5069c2a4c4da52f7291737c2be70fc6d945cf8ebe9340f6"
+    },
+    {
+      "label": "final-tests",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "started": "2026-10-14T15:19:52.231Z",
+      "finished": "2026-10-14T15:20:08.283Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-tests.json",
+      "sha256": "bc799e88a449cf4782005b81991c1492055b483954ac53fd2b63b4c4a38bd57a"
+    },
+    {
+      "label": "final-typecheck",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "started": "2026-10-14T15:18:45.407Z",
+      "finished": "2026-10-14T15:18:52.870Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-typecheck.json",
+      "sha256": "dd9556309ae9141477276948a0ec5988d50c57e0e3cfd117e8ef4c686f07ed32"
+    },
+    {
+      "label": "final-lint",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "started": "2026-10-14T15:19:42.194Z",
+      "finished": "2026-10-14T15:20:07.072Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-lint.json",
+      "sha256": "5a3419c3f5d2930fde0080d43169f16c37cd9f18596ce6828203e41a31d7bd01"
+    },
+    {
+      "label": "final-exit-qa-lint",
+      "command": [
+        "node",
+        "node_modules/eslint/bin/eslint.js",
+        "tests/image-practice-qa.cjs",
+        "tests/qa/manifest.cjs"
+      ],
+      "started": "2026-10-14T15:41:10.491Z",
+      "finished": "2026-10-14T15:41:14.956Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-exit-qa-lint.json",
+      "sha256": "3361789f3169496f170c7f3f7f1450c16a389f3ffb8a5af1f029f5176fc8d38f"
+    },
+    {
+      "label": "final-build-unlocked",
+      "command": [
+        "node",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "started": "2026-10-14T15:23:55.027Z",
+      "finished": "2026-10-14T15:24:09.704Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-build-unlocked.json",
+      "sha256": "cf5488cf0bc20c6ed74033502faac06a22f0e4542cef302991fd37b5b3ccb109"
+    },
+    {
+      "label": "final-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "started": "2026-10-14T15:28:45.290Z",
+      "finished": "2026-10-14T15:29:10.411Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-chromium.json",
+      "sha256": "5e18a1e429639c6c293cd4842bec1735b327ac9017fe2a74498d2a6c8a5ee721"
+    },
+    {
+      "label": "final-webkit-exit-ready",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs"
+      ],
+      "started": "2026-10-14T15:26:04.768Z",
+      "finished": "2026-10-14T15:26:41.041Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-webkit-exit-ready.json",
+      "sha256": "5e917e750a02bfe2d28d0b07f8e3a8e3273688717a82200b89d43c9fd997e109"
+    },
+    {
+      "label": "final-d1-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "started": "2026-10-14T15:31:18.385Z",
+      "finished": "2026-10-14T15:31:23.885Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-d1-chromium.json",
+      "sha256": "4b587d03faf8debe77c9feb9be3a43c085c3173e3ac291bf99574e8860316516"
+    },
+    {
+      "label": "final-d1-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "started": "2026-10-14T15:30:28.250Z",
+      "finished": "2026-10-14T15:30:38.362Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-d1-webkit.json",
+      "sha256": "0f78d1e5019b53d59a34a3185efd6725c1cb7da907f2fb36382c9d15ae9cf7b0"
+    },
+    {
+      "label": "final-production-chromium",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "started": "2026-10-14T15:33:10.667Z",
+      "finished": "2026-10-14T15:33:11.988Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-production-chromium.json",
+      "sha256": "c05805515448c3f92ddf11f8312a1ae50da6f96b846c8e0e7fee6c5f4b2641c3"
+    },
+    {
+      "label": "final-production-webkit",
+      "command": [
+        "node",
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "started": "2026-10-14T15:33:12.667Z",
+      "finished": "2026-10-14T15:33:14.254Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-production-webkit.json",
+      "sha256": "6e735efc54f9e8dac78bd4e90498b8c05f6b31c778b77995d1a82c6fd4d6573e"
+    },
+    {
+      "label": "regression-editor-chromium",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/editor-save-qa.cjs"
+      ],
+      "started": "2026-10-14T14:41:38.324Z",
+      "finished": "2026-10-14T14:41:49.553Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/regression-editor-chromium.json",
+      "sha256": "5c35d9208f93ff0ce32507bfabebf277eca1ae3b96e58c85488707002b93a304"
+    },
+    {
+      "label": "regression-editor-webkit",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/editor-save-qa.cjs"
+      ],
+      "started": "2026-10-14T14:47:05.401Z",
+      "finished": "2026-10-14T14:47:23.031Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/regression-editor-webkit.json",
+      "sha256": "4c60c4b3b35ec903a9a3e23397361d91682a3219962800f35fed2fcd72a119d1"
+    },
+    {
+      "label": "regression-familiarity-chromium",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/familiarity-qa.cjs"
+      ],
+      "started": "2026-10-14T14:43:18.775Z",
+      "finished": "2026-10-14T14:43:29.855Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/regression-familiarity-chromium.json",
+      "sha256": "5925d0e1ec6c07f9ff5a36820a30999a387009b872b7f9c0c6c188c4aa56dd43"
+    },
+    {
+      "label": "regression-workflow-chromium",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/workflow-qa.cjs"
+      ],
+      "started": "2026-10-14T14:44:22.708Z",
+      "finished": "2026-10-14T14:44:35.667Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/regression-workflow-chromium.json",
+      "sha256": "bbc131355ad3cf3f55b6b8a45dc2acce6f73664f949d2a2d02dd0700121ee8d4"
+    },
+    {
+      "label": "regression-sheet-chromium-complete-flags",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/sheet-dismiss-qa.cjs"
+      ],
+      "started": "2026-10-14T15:01:04.113Z",
+      "finished": "2026-10-14T15:01:31.890Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/regression-sheet-chromium-complete-flags.json",
+      "sha256": "87b942cca8535083215e62a65f68c40d271b005984d8c6ae8fd3803d80b4c4ce"
+    },
+    {
+      "label": "regression-sheet-webkit-complete-flags",
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "tests/sheet-dismiss-qa.cjs"
+      ],
+      "started": "2026-10-14T15:03:05.619Z",
+      "finished": "2026-10-14T15:03:36.525Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/regression-sheet-webkit-complete-flags.json",
+      "sha256": "231403d5fd1895266456fa3145f1d57eabe514d56f62a74f1da186497db198fd"
+    },
+    {
+      "label": "final-preservation",
+      "command": [
+        "node",
+        "work/pilot-audit.mjs"
+      ],
+      "started": "2026-10-14T15:35:04.280Z",
+      "finished": "2026-10-14T15:35:04.907Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/final-preservation.json",
+      "sha256": "028d71cf9f2abdcda7f2bb88287cfa01a7e6a8cdfcc1a91abdee191ce5faa0a9"
+    },
+    {
+      "label": "check-scene-contact-html",
+      "command": [
+        "node",
+        "work/pilot-scenes.cjs"
+      ],
+      "started": "2026-10-14T14:54:10.259Z",
+      "finished": "2026-10-14T14:54:11.842Z",
+      "exitCode": 0,
+      "evidence": "work/pilot-evidence/check-scene-contact-html.json",
+      "sha256": "4155f63adec9e4dade95a72ac35faa2a2f0cf0033b0e3dcbad934c669b85ee96"
+    }
+  ]
+}

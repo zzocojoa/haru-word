@@ -1,3 +1,5 @@
 # Preserve generated asset bytes so source.json SHA256 survives every checkout.
 public/card-studio/** -text
 lib/server/card-automation.generated.* -text
+# The generated UI index is checked byte-for-byte during builds on every OS.
+data/word-image-ui.json text eol=lf
