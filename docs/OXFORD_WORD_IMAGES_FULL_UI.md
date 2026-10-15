@@ -46,3 +46,11 @@ $env:QA_BROWSER='webkit' # 같은 세 명령을 반복한다.
 플래그가 없는 Worker에서는 `node tests/image-practice-qa.cjs production`과 `node tests/word-image-study-qa.cjs disabled`로 진입·편집창·단어 익히기의 이미지 요청 0을 확인한다. 운영 학습 API를 QA로 호출하지 않는다.
 
 접근성은 기존 20개의 검토한 장면 설명을 유지하고, 나머지는 정답을 누설하지 않는 공통 그림 안내를 사용한다. 전체 3,809개의 개별 장면 대체 텍스트를 새로 작성·검수한 것은 아니다. 단어 확인 후 뜻·품사는 텍스트로 접근할 수 있다.
+
+## 긴 단어 편집창 확대 수정 · 로컬 검증
+
+2026-10-15 후속 검토에서 `recommendation` 편집창의 이미지가 320/390px·글자 200%에서 화면 밖으로 밀리는 문제를 확인했다. 제목 행의 줄바꿈과 단어 내부 줄바꿈을 허용하여 그림이 편집창 안에 남도록 수정했다. 저장·선택 뜻·이미지 매칭 로직은 바꾸지 않았다.
+
+`node tests/image-practice-qa.cjs editor`는 `recommendation`과 기존 `bicycle`을 열어 320/390/1440px·글자 100/200%에서 이미지 전체의 위치·가로 넘침·axe·편집 취소 보호를 검사한다. 원래 코드에서 양쪽 브라우저 모두 실패(종료 1)한 뒤, 수정한 빌드에서 통과(종료 0)했다. 전체 이미지 연습과 `node tests/word-image-study-qa.cjs`의 저장 재시도도 Chromium/WebKit에서 통과했다.
+
+[후속 검증 기록](releases/2026-10-15-word-image-editor-wrap-verification.json)에 코드·검사 지문과 결과를 남긴다. 이번 수정은 아직 커밋·푸시·운영 게시하지 않았으며 운영은 v131을 유지한다. 위험도는 낮고 CSS 배치만 변경했다. DB/API/백업 마이그레이션과 관측 변경은 없으며, 복구는 이 CSS 수정만 되돌린다. 실제 iPhone 확인은 별도다.

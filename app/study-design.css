@@ -827,10 +827,15 @@ label input, label textarea {
 }
 .dialog-word {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
   font-size: 32px;
   font-weight: 500;
+}
+.dialog-word > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .result-inline {
   display: flex;

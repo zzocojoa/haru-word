@@ -36,6 +36,20 @@ async function checkLayouts(page, dialog, label) {
   for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
     await page.setViewportSize({ width, height: 844 });
     await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
+    const preview = dialog.locator('.dialog-word .word-image-preview');
+    if (await preview.count()) {
+      const bounds = await preview.evaluate(image => {
+        const picture = image.getBoundingClientRect(), heading = image.closest('.dialog-word').getBoundingClientRect();
+        const sheet = image.closest('[role="dialog"]').getBoundingClientRect();
+        return { left: picture.left, right: picture.right, top: picture.top, bottom: picture.bottom,
+          headingLeft: heading.left, headingRight: heading.right, headingTop: heading.top, headingBottom: heading.bottom,
+          sheetLeft: sheet.left, sheetRight: sheet.right, viewportWidth: innerWidth, width: picture.width, height: picture.height };
+      });
+      assert.ok(bounds.width > 0 && bounds.height > 0 && bounds.left >= Math.max(0, bounds.sheetLeft) - 1
+        && bounds.right <= Math.min(bounds.viewportWidth, bounds.sheetRight) + 1
+        && bounds.top >= bounds.headingTop - 1 && bounds.bottom <= bounds.headingBottom + 1,
+      `${label} preview stays inside dialog at ${width}px/${size}%: ${JSON.stringify(bounds)}`);
+    }
     assert.equal(await dialog.evaluate(el => el.scrollWidth > el.clientWidth || document.documentElement.scrollWidth > innerWidth), false, label + ' overflow');
     const audit = await page.evaluate(async () => (await axe.run(document.querySelector('[role="dialog"]'), { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations);
     assert.deepEqual(audit.map(v => v.id), [], label + ' axe');
@@ -61,6 +75,7 @@ async function checkLayouts(page, dialog, label) {
     // small. The separate full stage proves that all 3809 are eligible by default.
     if (stage !== 'full') {
       const eligibleIds = new Set(catalog.entries.map(e => e.entryId));
+      if (stage === 'editor') eligibleIds.add(allEntries.find(e => e.word === 'recommendation' && e.pos === 'n.').entryId);
       for (const entry of allEntries) if (!eligibleIds.has(entry.entryId)) stored.progress[entry.entryId] = { meaning: '별도 사용자 뜻' };
     }
     stored.progress[id] = { meaning: content[id].meaning, familiarity: 'known', en: 'independent', ko: 'help', sentenceStatus: 'written', sentence: 'This is a sample.', notes: '검사 전 기록', studyDates: [date], lastStudied: date, needsReview: true, familiarityCheck: { initial: 'known', answer: '검사 전 최초 풀이', meaning: content[id].meaning, final: 'known' } };
@@ -194,12 +209,21 @@ async function checkLayouts(page, dialog, label) {
       await dialog.waitFor({ state: 'hidden' });
       await page.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
       const search = page.getByLabel('단어 또는 한국어 뜻 검색');
-      await search.click(); await search.fill('bicycle');
-      assert.equal(await search.inputValue(), 'bicycle');
-      await page.getByRole('button', { name: 'bicycle 명사', exact: true }).click();
-      assert.equal(await dialog.locator('img').count(), 1, 'longer editor word also has a preview');
-      await checkLayouts(page, dialog, 'editor-long');
+      for (const word of ['recommendation', 'bicycle']) {
+        await search.click(); await search.fill(word);
+        assert.equal(await search.inputValue(), word);
+        await page.getByRole('button', { name: `${word} 명사`, exact: true }).click();
+        assert.equal(await dialog.locator('img').count(), 1, 'longer editor word also has a preview');
+        const image = allEntries.find(e => e.word === word && e.pos === 'n.');
+        assert.equal(await dialog.locator('img').getAttribute('src'), image.url);
+        await page.waitForFunction(() => [...document.querySelectorAll('[role="dialog"] img')].every(image => image.complete && image.naturalWidth > 0));
+        await checkLayouts(page, dialog, `editor-${word}`);
+        await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+        await dialog.waitFor({ state: 'hidden' });
+        await page.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
+      }
       checks.push('editor shows matching preview, hides changed/new meanings and preserves dismissal protection');
+      checks.push('bicycle and nonpilot recommendation previews fit their headings at 320/390/1440px and 100/200% text');
     }
     if (stage === 'error') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();

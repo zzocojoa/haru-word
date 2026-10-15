@@ -1,0 +1,211 @@
+{
+  "date": "2026-10-15",
+  "timezone": "Asia/Seoul",
+  "status": "local-verified",
+  "branch": "codex/word-images-full-ui",
+  "parentCommit": "4f20453564035d1dc75d8d74e13287a3722d9b55",
+  "workingTreeChanges": [
+    {
+      "file": "app/study-design.css",
+      "sha256": "9654d8c01dee9ea1e01e2f93766efcf1a9235ed3b8641df815d60fe30b72ef10"
+    },
+    {
+      "file": "tests/image-practice-qa.cjs",
+      "sha256": "f7d423fd18aa84a71a469e9615a0c981eaf3bf15f83e77adb232422458b64173"
+    }
+  ],
+  "deployed": false,
+  "productionVersion": "v131",
+  "regression": {
+    "word": "recommendation",
+    "entryId": "dac893fa8cee1a98",
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "textPercent": [
+      100,
+      200
+    ],
+    "engines": [
+      "chromium",
+      "webkit"
+    ],
+    "originalImageBounds": {
+      "left": 479.3125,
+      "right": 575.3125,
+      "viewportWidth": 320,
+      "textPercent": 200
+    },
+    "fixtureCopiesByteIdentical": true,
+    "beforeExit": 1,
+    "afterExit": 0,
+    "assertions": [
+      "entire loaded thumbnail stays horizontally inside dialog and viewport",
+      "image stays inside heading vertically",
+      "no horizontal dialog or document overflow",
+      "no WCAG A/AA violations reported by axe",
+      "matching image hash and changed/new meaning visibility",
+      "dismissal protection and no unintended state writes"
+    ]
+  },
+  "checks": [
+    {
+      "label": "before-chromium",
+      "phase": "before",
+      "engine": "chromium",
+      "command": "node tests/image-practice-qa.cjs editor",
+      "exitCode": 1,
+      "startedAt": "2026-10-15T05:42:03.8311166Z",
+      "completedAt": "2026-10-15T05:42:09.0392964Z",
+      "log": "work/word-image-editor-wrap-20261015/before-chromium.log",
+      "logSha256": "453b1c149934bc27fce10b71e741af44945bdd529506942e3326c1d5008e1252",
+      "classification": "expected-regression-failure"
+    },
+    {
+      "label": "before-webkit",
+      "phase": "before",
+      "engine": "webkit",
+      "command": "node tests/image-practice-qa.cjs editor",
+      "exitCode": 1,
+      "startedAt": "2026-10-15T05:42:16.800263Z",
+      "completedAt": "2026-10-15T05:42:21.2596999Z",
+      "log": "work/word-image-editor-wrap-20261015/before-webkit.log",
+      "logSha256": "1acf4cafab66c26007008b7db5062fa0380585202abf79d8ae1d9a201c99fe11",
+      "classification": "expected-regression-failure"
+    },
+    {
+      "label": "after-chromium",
+      "phase": "after",
+      "engine": "chromium",
+      "command": "node tests/image-practice-qa.cjs editor",
+      "exitCode": 1,
+      "startedAt": "2026-10-15T05:43:30.9742004Z",
+      "completedAt": "2026-10-15T05:44:01.3377271Z",
+      "log": "work/word-image-editor-wrap-20261015/after-chromium.log",
+      "logSha256": "486590f5ce3ede0226ebd0bdb424bf4b19e2da860f837914217b1fc3ab5addc2",
+      "classification": "setup-not-ready"
+    },
+    {
+      "label": "after-chromium-ready",
+      "phase": "after",
+      "engine": "chromium",
+      "command": "node tests/image-practice-qa.cjs editor",
+      "exitCode": 0,
+      "startedAt": "2026-10-15T05:44:09.0739104Z",
+      "completedAt": "2026-10-15T05:44:13.6529017Z",
+      "log": "work/word-image-editor-wrap-20261015/after-chromium-ready.log",
+      "logSha256": "696ebc64500ca9139c441cddd9c0ef591d59714b91fde93e651e02c09fd1369f",
+      "classification": "pass"
+    },
+    {
+      "label": "after-webkit",
+      "phase": "after",
+      "engine": "webkit",
+      "command": "node tests/image-practice-qa.cjs editor",
+      "exitCode": 0,
+      "startedAt": "2026-10-15T05:44:18.8776052Z",
+      "completedAt": "2026-10-15T05:44:24.9450857Z",
+      "log": "work/word-image-editor-wrap-20261015/after-webkit.log",
+      "logSha256": "d1b11344c6e85ee7e5777a54e46e9d242475f9b3e4fefccd0a86620a7be22338",
+      "classification": "pass"
+    },
+    {
+      "label": "after-chromium-all",
+      "phase": "after",
+      "engine": "chromium",
+      "command": "node tests/image-practice-qa.cjs all",
+      "exitCode": 0,
+      "startedAt": "2026-10-15T05:44:43.807585Z",
+      "completedAt": "2026-10-15T05:45:13.4963942Z",
+      "log": "work/word-image-editor-wrap-20261015/after-chromium-all.log",
+      "logSha256": "f41bc9d5fdc9fa352537d7c8dd5cd4ea2556080b381eabe2c4ff35575a2b0e81",
+      "classification": "pass"
+    },
+    {
+      "label": "after-webkit-all",
+      "phase": "after",
+      "engine": "webkit",
+      "command": "node tests/image-practice-qa.cjs all",
+      "exitCode": 0,
+      "startedAt": "2026-10-15T05:44:43.8212835Z",
+      "completedAt": "2026-10-15T05:45:26.7521297Z",
+      "log": "work/word-image-editor-wrap-20261015/after-webkit-all.log",
+      "logSha256": "d673d746864aa087501a11885c0526375daec8856f7bd91937d71d8fc9023787",
+      "classification": "pass"
+    },
+    {
+      "label": "after-chromium-study",
+      "phase": "after",
+      "engine": "chromium",
+      "command": "node tests/word-image-study-qa.cjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-15T05:45:33.2970011Z",
+      "completedAt": "2026-10-15T05:45:41.7985193Z",
+      "log": "work/word-image-editor-wrap-20261015/after-chromium-study.log",
+      "logSha256": "dccf389235910fc2dac1c1b782f618d49b02388954b9646a8e34a06d22bdc569",
+      "classification": "pass"
+    },
+    {
+      "label": "after-webkit-study",
+      "phase": "after",
+      "engine": "webkit",
+      "command": "node tests/word-image-study-qa.cjs",
+      "exitCode": 0,
+      "startedAt": "2026-10-15T05:45:33.3095325Z",
+      "completedAt": "2026-10-15T05:45:46.4201582Z",
+      "log": "work/word-image-editor-wrap-20261015/after-webkit-study.log",
+      "logSha256": "0d2ca7969562f8399b13f5661e88174ca618f993fa8b8119fdf68430f0ebc034",
+      "classification": "pass"
+    }
+  ],
+  "projectChecks": [
+    {
+      "command": "npm test",
+      "pass": 615,
+      "exitCode": 0,
+      "log": "work/word-image-editor-wrap-20261015/test.log",
+      "skipped": 0,
+      "fail": 0,
+      "tests": 615
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "work/word-image-editor-wrap-20261015/typecheck.log"
+    },
+    {
+      "command": "npm run lint",
+      "log": "work/word-image-editor-wrap-20261015/lint.log",
+      "exitCode": 0,
+      "existingWarnings": 15,
+      "errors": 0
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": "work/word-image-editor-wrap-20261015/build.log"
+    }
+  ],
+  "screenshots": [
+    "work/word-image-editor-wrap-20261015/after/outputs/word-image-full/chromium/editor-recommendation-320-200.png",
+    "work/word-image-editor-wrap-20261015/after/outputs/word-image-full/webkit/editor-recommendation-320-200.png"
+  ],
+  "scope": {
+    "risk": "low",
+    "changes": "word-editor CSS and focused browser regression coverage",
+    "dataSchemaChanged": false,
+    "apiOrBackupChanged": false,
+    "observabilityChanged": false,
+    "productionDataTouched": false,
+    "rollback": "revert only the five added CSS lines; preserve full image catalogue and R2 read support"
+  },
+  "limits": [
+    "Actual iPhone and GitHub CI were not run. Local Chromium/WebKit only.",
+    "The first post-build Chromium attempt loaded the previous local port before preview.json was updated, and failed readiness before browser checks. Its log is retained; rerun after readiness passed.",
+    "Existing lint warnings and build chunk/punycode/plugin warnings remain.",
+    "No new whole-branch review, commit, push, or deployment was performed."
+  ],
+  "runtime": "v22.22.2"
+}
