@@ -14,7 +14,7 @@ if (stage === 'all') {
   process.exit(0);
 }
 if (![...stages, 'entry', 'production', 'isolation'].includes(stage)) throw Error('Unknown image-practice QA stage');
-const out = 'outputs/word-image-pilot-site/' + engine;
+const out = 'outputs/word-image-sense/' + engine;
 const catalog = JSON.parse(fs.readFileSync('data/word-image-pilot-web.json'));
 const words = JSON.parse(fs.readFileSync('data/words.json'));
 const content = JSON.parse(fs.readFileSync('data/content.json'));
@@ -228,9 +228,11 @@ async function checkLayouts(page, dialog, label) {
       await reveal.click();
       assert.equal(await dialog.locator('[lang="en"]').filter({ hasText: /^apple$/ }).count(), 1, 'reveal shows the correct English word');
       assert.equal(await dialog.locator('details[open]').count(), 0);
-      assert.equal(await dialog.getByText('사과', { exact: true }).isVisible(), false);
+      assert.equal(await dialog.getByText('사과', { exact: true }).isVisible(), true, 'meaning is visible immediately after reveal');
+      assert.equal(await dialog.locator('.image-practice-sense .pos-label').innerText(), '명사 (n.)');
+      assert.equal(await dialog.locator('summary').filter({ hasText: /^발음$/ }).count(), 1);
       await page.screenshot({ path: out + '/back.png', fullPage: false });
-      checks.push('reveal shows English; meaning/pronunciation help starts collapsed');
+      checks.push('reveal shows English, meaning and part of speech immediately; pronunciation stays collapsed');
     }
     if (stage === 'lifecycle' || stage === 'isolation') {
       const entry = page.getByRole('button', { name: '이미지 연습', exact: true });
@@ -247,7 +249,12 @@ async function checkLayouts(page, dialog, label) {
         assert.equal(imageRequests.every(url => allowed.has(url)), true, 'every step fetches at most one image ahead');
         await dialog.getByRole('button', { name: '단어 확인', exact: true }).click();
         assert.equal(await dialog.locator('.image-practice-answer').innerText(), expected);
+        assert.equal(await dialog.locator('.image-practice-meaning').innerText(), catalog.entries[i].baseMeaning);
+        assert.equal(await dialog.locator('.image-practice-meaning').isVisible(), true);
+        assert.equal(await dialog.locator('.image-practice-sense .pos-code').innerText(), '(' + catalog.entries[i].pos + ')');
         assert.equal(await dialog.locator('details[open]').count(), 0);
+        if (i >= 6 && i <= 13) await page.screenshot({ path: out + '/sense-' + (i + 1) + '.png', fullPage: false });
+        if (i === 17 && stage === 'lifecycle') await checkLayouts(page, dialog, 'long-meaning');
         if (i < 19) {
           assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).count(), 1, 'revealed card has a next button');
           await dialog.getByRole('button', { name: '다음', exact: true }).click();
@@ -278,7 +285,7 @@ async function checkLayouts(page, dialog, label) {
       await page.reload();
       await page.getByText('서버에 저장됨', { exact: true }).waitFor();
       assert.equal(await dialog.count(), 0, 'refresh does not restore practice');
-      checks.push('20 cards reveal correct words and reset; restart, Escape, app Back gesture, refresh, focus return');
+      checks.push('20 cards reveal correct words, visible meanings and parts of speech, including all four same-spelling pairs; restart, Escape, app Back gesture, refresh, focus return');
     }
     assert.deepEqual({ state: stored, revision }, before);
     if (persisted) assert.deepEqual(await api(), before, 'actual local D1 documents and revision unchanged after practice');

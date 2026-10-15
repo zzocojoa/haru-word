@@ -1,6 +1,6 @@
 # 하루단어 · Oxford 3000
 
-**이미지 연습 20개**는 오늘 학습 개요의 별도 버튼과 단어 편집창의 미리보기로 제공합니다. 성적을 기록하지 않으며 기본 뜻과 다른 선택 뜻·개인 단어에는 그림을 연결하지 않습니다. 닫기·탭 이동·새로고침 후 초기화합니다. [최초 로컬 계획](docs/OXFORD_WORD_IMAGES_PILOT_LOGIC_PLAN.md)·[로컬 검증](docs/OXFORD_WORD_IMAGES_PILOT_VERIFICATION.md)·[사이트 반영 및 복구](docs/OXFORD_WORD_IMAGES_PILOT_SITE.md)를 참조하세요.
+**이미지 연습 20개**는 오늘 학습 개요의 별도 버튼과 단어 편집창의 미리보기로 제공합니다. 단어 확인 후 해당 뜻과 품사를 바로 보여 주고, 발음 도움말만 접어 둡니다. 성적을 기록하지 않으며 기본 뜻과 다른 선택 뜻·개인 단어에는 그림을 연결하지 않습니다. 닫기·탭 이동·새로고침 후 초기화합니다. [최초 로컬 계획](docs/OXFORD_WORD_IMAGES_PILOT_LOGIC_PLAN.md)·[로컬 검증](docs/OXFORD_WORD_IMAGES_PILOT_VERIFICATION.md)·[사이트 반영 및 복구](docs/OXFORD_WORD_IMAGES_PILOT_SITE.md)를 참조하세요.
 
 배포용 WebP 20개는 `public/word-images-pilot/`에 포함되며 `npm run images:pilot:check`와 빌드가 해시·뜻·용량을 검사합니다. 원본이 있는 제작 PC에서는 `npm run images:pilot:prepare` 다음 `npm run images:pilot:web`으로 재현합니다. PNG는 Git 제외 `work/oxford-image-pilot/`에 보관합니다. 기본 입력은 사용자 홈의 `.codex/worktrees/oxford-word-images/하루단어`와 `Documents/ChatGPT/하루단어/outputs/oxford-images/`이며 다른 위치는 `--source "<승인 체크아웃>" --assets "<원본 PNG 폴더>"`를 준비 명령에 전달합니다. 교재·승인·파일 해시가 다르면 중단하고 다른 파일을 덮어쓰지 않습니다.
 

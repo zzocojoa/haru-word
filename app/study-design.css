@@ -4619,6 +4619,9 @@ footer {
 .image-practice-close { position: absolute; top: 1.4rem; right: 1.4rem; }
 .image-practice-dialog [data-slot="dialog-header"] { padding-right: 3rem; }
 .image-practice-picture { display: block; max-width: 100%; width: auto; height: min(52dvh, 30rem); object-fit: contain; margin: 0 auto 1rem; border-radius: 1rem; }
-.image-practice-answer { font-size: clamp(2rem, 8vw, 3.8rem); text-align: center; padding: 3rem 0; overflow-wrap: anywhere; }
+.image-practice-sense { text-align: center; padding: 2.5rem 0; }
+.image-practice-answer { font-size: clamp(2rem, 8vw, 3.8rem); margin: 0; overflow-wrap: anywhere; }
+.image-practice-meaning { font-size: 1.25rem; line-height: 1.5; margin: .5rem 0; overflow-wrap: anywhere; }
+.image-practice-sense .small-note { margin: 0; }
 .dialog-word:has(.word-image-preview) { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .word-image-preview { width: 3rem; height: 4rem; object-fit: contain; flex-shrink: 0; border-radius: .4rem; }

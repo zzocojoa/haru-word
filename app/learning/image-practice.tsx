@@ -8,6 +8,7 @@ import { useNavigationState } from '../navigation';
 import { SheetDialog, SheetDialogContent } from '../sheet-dialog';
 import { HelpDetails } from '../study-ui';
 import { WordPronunciation } from '../word-pronunciation';
+import { PartOfSpeechLabel } from '../grammar-terms';
 import { useViewRestoration } from '../use-view-restoration';
 
 // Scene descriptions give an equivalent visual clue without naming the answer.
@@ -81,8 +82,12 @@ function PracticeCard({ card, last, onNext }: { card: Card; last: boolean; onNex
     {failed ? <><p role="alert">이미지를 불러오지 못했어요.</p><button type="button" className="secondary-button full" onClick={onNext}>건너뛰기</button></>
       : <>{!ready && <p role="status">이미지 불러오는 중</p>}
         <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>}</>
-      : <><p lang="en" className="image-practice-answer">{card.word.word}</p>
-        <HelpDetails title="뜻·발음"><p>{card.image.baseMeaning}</p><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>
+      : <><div className="image-practice-sense">
+        <p lang="en" className="image-practice-answer">{card.word.word}</p>
+        <p className="image-practice-meaning">{card.image.baseMeaning}</p>
+        <p className="small-note"><PartOfSpeechLabel pos={card.image.pos}/></p>
+        </div>
+        <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>
         <button type="button" className="primary-button full" onClick={onNext}>{last ? '처음부터' : '다음'}</button></>}
   </div>;
 }
