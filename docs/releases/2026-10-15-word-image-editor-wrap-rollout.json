@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "timezone": "Asia/Seoul",
+  "status": "deployed",
+  "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+  "runtimeCommit": "909df067abc176aae82895ed053feb8f7261c9e6",
+  "branch": "codex/word-images-full-ui",
+  "version": {
+    "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_da80bf52946c8191acce3d59aed45c9b",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version_number": 132,
+    "source": {
+      "commit_sha": "909df067abc176aae82895ed053feb8f7261c9e6"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000049488209b86a2ac5f6c8a9f2",
+      "content_hash": "sha256:c5c4538d27302f291cbdd0a91187b53e7b2db761e2eac11eebba38ee68c72a49",
+      "size_bytes": 17203200,
+      "file_count": 339
+    }
+  },
+  "deployment": {
+    "id": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_da80bf52946c8191acce3d59aed45c9b",
+    "status": "succeeded",
+    "env_set_revision": 71,
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "updated_at": "2026-10-15T06:03:18.634479+00:00",
+    "failure_message": null
+  },
+  "site": {
+    "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "latestVersion": 132,
+    "status": "active",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "accessMode": "public",
+    "accessRevision": 4
+  },
+  "change": {
+    "runtimeFiles": [
+      "app/study-design.css"
+    ],
+    "behavior": "Word editor headings and thumbnails wrap within the dialog at large text sizes.",
+    "risk": "low",
+    "migration": false,
+    "apiOrBackupChanged": false,
+    "observabilityChanged": false,
+    "rollback": "Revert the five CSS lines or republish v131; preserve R2 reading and all 3809 hosted images."
+  },
+  "localVerification": {
+    "file": "docs/releases/2026-10-15-word-image-editor-wrap-verification.json",
+    "unitTests": 615,
+    "testsExit": 0,
+    "typecheckExit": 0,
+    "lintExit": 0,
+    "existingLintWarnings": 15,
+    "buildExit": 0,
+    "grammarReviewExit": 0,
+    "browsers": [
+      "chromium",
+      "webkit"
+    ],
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "textPercent": [
+      100,
+      200
+    ],
+    "regressionBeforeExit": 1,
+    "regressionAfterExit": 0,
+    "actualIphoneChecked": false
+  },
+  "ci": {
+    "status": "not-started",
+    "conclusion": "failure",
+    "runId": "38689777298",
+    "url": "https://github.com/zzocojoa/haru-word/actions/runs/38689777298",
+    "commit": "909df067abc176aae82895ed053feb8f7261c9e6",
+    "jobs": [
+      "Validate (Node 22)",
+      "Validate (Node 24)"
+    ],
+    "stepsStarted": 0,
+    "reportedReason": "Recent account payments have failed or the spending limit needs to be increased.",
+    "billingSettingsChanged": false
+  },
+  "productionReadback": {
+    "file": "work/word-image-editor-wrap-20261015/production-readback.json",
+    "passed": true,
+    "checkedAt": "2026-10-15T06:04:19.633Z",
+    "homeStatus": 200,
+    "cssStatus": 200,
+    "resourcePath": "/_next/static/css/index.CIblkys4.css",
+    "bytes": 242833,
+    "sha256": "b9a5631ee0426995536b2cfa600b4e102415302a7c5756738157296ba5f30500",
+    "matchesValidatedBuild": true,
+    "learnerApiRequests": 0,
+    "learnerWrites": 0
+  },
+  "preservation": {
+    "accessMode": "public",
+    "accessRevision": 4,
+    "environmentRevision": 71,
+    "hostingBindings": [
+      "DB",
+      "BUCKET"
+    ],
+    "imageReuploads": 0,
+    "learnerWrites": 0
+  },
+  "packaging": {
+    "helperVersion": "1.0.2-remix-b.1",
+    "node": "v24.19.0",
+    "notes": "Direct helper packaging succeeded after placing Node 24 first on PATH and using TAR_OPTIONS=--force-local; product source was unchanged."
+  },
+  "limits": [
+    "GitHub CI did not execute due to the account billing/spending gate; local checks do not replace Ubuntu CI.",
+    "Actual iPhone was not checked.",
+    "Post-deployment documentation is a separate commit; the deployed runtime remains 909df067abc176aae82895ed053feb8f7261c9e6."
+  ]
+}
