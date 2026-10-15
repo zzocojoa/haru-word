@@ -1,12 +1,14 @@
 # Oxford 이미지 호스팅·원격 검증
 
-## 현재 상태 — 3,809개 완료·업로드 권한 폐기
+**현재 출시 상태:** 전체 3,809개 화면 연결과 긴 단어 편집창 수정까지 GitHub PR #35 병합·기존 Site v132 게시를 완료했다. [최종 상태](releases/2026-10-16-oxford-images-release-status.json)와 [전체 UI](OXFORD_WORD_IMAGES_FULL_UI.md)를 따른다. 아래 v130·시범 20개 설명은 호스팅 단계의 기록이며 현재 화면 범위를 뜻하지 않는다.
+
+## 호스팅 단계 기록 · v130 — 3,809개 완료·업로드 권한 폐기
 
 사용자가 v130 운영 게시·전체 업로드/검증·임시 권한 제거를 명시적으로 승인했다. 기존 Site의 **v130**·소스 `d628cb5f7af45381ae71a76dea3313d816997f21`을 게시하고 **3,809개, 총128,592,754바이트(128.6MB)**를 원격 검증했다. 임시 권한 폐기 후 같은 v130을 다시 게시한 상태에서 **3,809개 전체를 다시 GET/HEAD 검사**했다. 최종 재검증의 PUT은0회이며 원격 바이트·SHA·MIME·캐시·ETag·HEAD 크기가 모두 일치했다.
 
 최종 환경은 **revision71·원래13개 항목**, 공개 정책은 **revision4**다. 이전 업로드 키의 PUT은404 `upload_disabled`, 이미지 GET은200·조건부 GET은304임을 확인했다. **학습 화면은 기존 시범20개를 유지**하며 이20개 원격 파일의 SHA와 홈의 시범 활성화도 다시 확인했다. 전체 학습 UI 연결·AI 실행·운영 학습 기록 수정은 없다.
 
-[최종 배포·권한 폐기·회차별 검증 보고서](releases/2026-10-15-oxford-image-hosting-rollout.json)와 `data/word-image-hosted-manifest.json`이 현재 인수인계 기준이다. [이전 게시 차단 기록](releases/2026-10-15-oxford-image-hosting.json)은 당시0개·승인 대기 상태의 이력으로 보존한다. 작업 브랜치는 `codex/oxford-web-catalog`다. 로컬 도구의 전송/기록 보완과 관리 문서는 별도 커밋이며, 운영 코드는 위 v130 소스를 유지한다.
+[배포·권한 폐기·회차별 검증 보고서](releases/2026-10-15-oxford-image-hosting-rollout.json)와 `data/word-image-hosted-manifest.json`은 호스팅 단계의 인수인계 근거다. [이전 게시 차단 기록](releases/2026-10-15-oxford-image-hosting.json)은 당시0개·승인 대기 상태의 이력으로 보존한다. 당시 작업 브랜치는 `codex/oxford-web-catalog`였고, 로컬 도구의 전송/기록 보완과 관리 문서는 별도 커밋이었다. v130 게시 이후의 UI·편집창 출시는 위 최종 상태를 따른다.
 
 | 확인 대상 | 최종 결과 |
 |---|---|

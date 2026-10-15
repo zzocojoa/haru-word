@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-16",
+  "timezone": "Asia/Seoul",
+  "recordedAt": "2026-10-15T16:00:08.271Z",
+  "status": "merged_and_deployed_with_verification_limits",
+  "scope": "Post-merge documentation consolidation. No new runtime release or remote image verification in this documentation task.",
+  "github": {
+    "repository": "zzocojoa/haru-word",
+    "pr": 35,
+    "state": "MERGED",
+    "mergedAt": "2026-10-15T12:42:47Z",
+    "mainCommit": "c79be6bb37611a40a890fc1a56af0e15109f76cf",
+    "containsFullImageCommit": "d164eab6578c043e3106962529f15ec04b21a3d8",
+    "containsEditorFixCommit": "909df067abc176aae82895ed053feb8f7261c9e6",
+    "runtimeComparedPaths": [
+      "app",
+      "lib",
+      "data",
+      "public",
+      "package.json",
+      "package-lock.json",
+      "vite.config.ts",
+      "tsconfig.json",
+      "cloudflare-env.d.ts",
+      ".openai/hosting.json"
+    ],
+    "runtimeComparedToPublishedSource": true,
+    "diffExit": 0,
+    "checkedAt": "2026-10-15T16:00:08.271Z"
+  },
+  "production": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version": 132,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_da80bf52946c8191acce3d59aed45c9b",
+    "sourceCommit": "909df067abc176aae82895ed053feb8f7261c9e6",
+    "deploymentId": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+    "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "active": true,
+    "environmentRevision": 71,
+    "imageUiEnabled": true,
+    "uploadKeyPresent": false,
+    "uploadExpiryPresent": false,
+    "currentMetadataCheckedAt": "2026-10-15T15:56:54.550Z",
+    "versionMetadataCheckedAt": "2026-10-15T15:57:29.265Z",
+    "accessMode": "public",
+    "accessRevision": 4
+  },
+  "finalVerification": {
+    "completedAt": "2026-10-15T13:48:37.195Z",
+    "sourceReportSha256": "5bf2fef969c65a93db9abce37beca1e96d44335e9d31556560abdb557bbb87c5",
+    "sourceReportAvailability": "Original full report, receipts and logs are Git-excluded local evidence; this file carries the portable summary.",
+    "imageIndex": {
+      "passed": true,
+      "entries": 3809,
+      "bytes": 350801,
+      "exitCode": 0
+    },
+    "productionReadback": {
+      "file": "readback.json",
+      "exitCode": 0,
+      "passed": true,
+      "checkedAt": "2026-10-15T13:44:05.733Z",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "homeStatus": 200,
+      "serverImageFlagEnabled": true,
+      "imageEntries": 3809,
+      "client": {
+        "resource": "/_next/static/chunks/learning-app-w4cOrjX6.js",
+        "status": 200,
+        "bytes": 722217,
+        "sha256": "d721183b64ce6e5b4e07ab778450d97e7eef5c98f6ba4e414c1fa430aea04cb4",
+        "matchesVerifiedBuild": true,
+        "all3809IdsAndHashesPresent": true
+      },
+      "css": {
+        "resource": "/_next/static/css/index.CIblkys4.css",
+        "status": 200,
+        "bytes": 242833,
+        "sha256": "b9a5631ee0426995536b2cfa600b4e102415302a7c5756738157296ba5f30500",
+        "matchesVerifiedV132Build": true,
+        "headingRule": ".dialog-word{align-items:center;gap:var(--space-3);flex-wrap:wrap;font-size:32px;font-weight:500;display:flex}",
+        "wordRule": ".dialog-word>span{overflow-wrap:anywhere;min-width:0}"
+      },
+      "learnerApiRequests": 0,
+      "learnerWrites": 0,
+      "aiCalls": 0,
+      "productionWrites": 0,
+      "actualIphoneChecked": false
+    },
+    "remoteImages": {
+      "passed": true,
+      "started": "2026-10-15T13:44:02.291Z",
+      "finished": "2026-10-15T13:48:12.794Z",
+      "runId": "ad23635b-5029-49c9-b0a4-2a164286d605",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "verify",
+      "expected": 3809,
+      "completed": 3809,
+      "uploaded": 0,
+      "reused": 3809,
+      "readRetries": 0,
+      "receiptFormat": "ndjson",
+      "bytes": 128592754,
+      "requests": {
+        "GET": 3809,
+        "HEAD": 3809,
+        "PUT": 0
+      },
+      "exitCode": 0,
+      "allRuntimeEntriesMatched": true,
+      "receiptsSha256": "5a21af4388304199be81260bf9fa07adcbeaa8e5f384ffba40ca9004c66fd776",
+      "reportSha256": "c27f27eb4a0880b4a979eec6b079b9cf3950364d1f2e5164bed96466bf327cd6"
+    },
+    "originalEvidenceRoot": "work/final-image-main-live-20261015",
+    "runtimeCatalogSha256": "c07d73218e82f0735c309cb8d6ca59175f12c7a8cf5968e7dbb26158f54bb25e"
+  },
+  "earlierRegression": {
+    "node22Tests": 615,
+    "node24Tests": 615,
+    "typecheckExit": 0,
+    "lintExit": 0,
+    "existingLintWarnings": 15,
+    "buildExit": 0,
+    "browsers": [
+      "chromium",
+      "webkit"
+    ],
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "textPercent": [
+      100,
+      200
+    ],
+    "rerunInThisDocumentationTask": false,
+    "evidence": [
+      "2026-10-15-word-image-editor-wrap-verification.json",
+      "2026-10-15-oxford-images-main-integration.json"
+    ]
+  },
+  "githubCI": {
+    "runId": 38736751623,
+    "conclusion": "failure",
+    "jobsStarted": false,
+    "reason": "Recent account payments have failed or the spending limit needs to be increased.",
+    "url": "https://github.com/zzocojoa/haru-word/actions/runs/38736751623"
+  },
+  "remaining": [
+    {
+      "id": "github-ci",
+      "status": "blocked_account_condition",
+      "doneWhen": "Account billing/spending gate is resolved and Node22/24 jobs execute successfully."
+    },
+    {
+      "id": "actual-iphone",
+      "status": "not_verified",
+      "doneWhen": "Record actual Safari/home-screen image practice, long-word editor, text zoom and save/reconnect checks."
+    },
+    {
+      "id": "external-image-backup",
+      "status": "not_verified",
+      "doneWhen": "Confirm an external copy of originals/WebP/approval ledger/manifests and verify a sample restore."
+    },
+    {
+      "id": "scene-alt-text",
+      "status": "optional_improvement",
+      "remainingEntries": 3789,
+      "doneWhen": "Author and review non-answer scene descriptions for additional images."
+    }
+  ],
+  "rollback": {
+    "editorOnly": "Revert the CSS fix or republish R2-capable v131.",
+    "fullImageUi": "Disable the existing image feature flag and redeploy, or republish R2-capable v130.",
+    "preserve": [
+      "BUCKET binding",
+      "DB binding",
+      "hosted image files and GET/HEAD",
+      "learner records and revision protection"
+    ],
+    "uploadCredentials": "Keep upload key and expiry absent."
+  },
+  "mutations": {
+    "runtimeChanges": 0,
+    "newDeployments": 0,
+    "productionWrites": 0,
+    "learnerWrites": 0,
+    "aiCalls": 0,
+    "accountBillingChanges": 0
+  },
+  "limits": [
+    "No new browser QA was run; prior local Chromium/WebKit viewport and 200% text regression results are retained.",
+    "Actual iPhone was not checked.",
+    "GitHub CI did not start due to the account billing/spending gate.",
+    "Full remote image verification was performed on 2026-10-15; only current GitHub/Sites metadata was refreshed for this documentation consolidation.",
+    "Historical machine-readable pilot, preparation and pre-merge evidence files remain unchanged; Markdown introductions only clarify their phase."
+  ]
+}

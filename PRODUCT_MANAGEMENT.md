@@ -1,6 +1,8 @@
 # 하루단어 제품 개발·출시 관리
 
-**2026-10-15 Oxford 이미지 통합:** PR #35에서 기존 main의 카드 표현 선정·병합 근거를 보존한다. 현재 Site v132의 카드 산출물은 EN_Card 원본 지문·릴레이 재번들 및 131개 산출물 해시와 대조했다. 생성 파일은 수동 재작성하지 않았다. 이 PR 통합에서는 운영 재배포·Worker·DB·예약·AI 호출을 하지 않는다. 아래는 각 시점의 기록이며, 최신 Oxford 배포 근거는 [v132 출시 기록](docs/releases/2026-10-15-word-image-editor-wrap-rollout.json)을 따른다.
+**2026-10-16 Oxford 출시 상태 정리:** PR #35는 GitHub `main@c79be6b`에 병합됐고 기존 Site v132는 전체 3,809개 이미지 연결과 긴 단어 편집창 수정을 제공합니다. 10월 15일 최종 원격·화면 파일 검증과 이번 GitHub/Sites 상태 조회는 [최종 상태 기록](docs/releases/2026-10-16-oxford-images-release-status.json)에 구분했습니다. CI 계정 차단·실제 iPhone·외부 이미지 백업 확인은 남아 있습니다. 이번 작업은 문서 정리이며 새 운영 배포·Worker/DB/예약 변경·AI 호출은 없습니다.
+
+**2026-10-15 Oxford 통합 당시 검증:** 기존 main의 카드 표현 선정·병합 근거를 보존했습니다. Site v132의 카드 산출물은 EN_Card 원본 지문·릴레이 재번들 및 131개 산출물 해시와 대조했고 수동 재작성하지 않았습니다. [병합 전 증거](docs/releases/2026-10-15-oxford-images-main-integration.json)는 당시 스냅샷으로 유지합니다. 실제 게시 근거는 [v132 출시 기록](docs/releases/2026-10-15-word-image-editor-wrap-rollout.json)을 따르며 아래는 각 시점의 이력입니다.
 
 **2026-10-08 Git 통합:** EN_Card PR13/14·하루단어 선행 PR33 병합을 확인했다. 표현 사전 선정의 하루단어 후속은 최신 main에서 카드 제품 변경만 분리하며, 기존 Sites 실험 이력이 있는 소스 브랜치는 보존한다. 추가 실제 계정·CPU·휴대전화 검증은 사용자 선택으로 미실시이고 기존 관측 공백을 유지한다. [원본·검증·병합 승인 기록](docs/releases/2026-10-08-expression-selection-github.json)과 GitHub PR 상태를 함께 확인한다. 마지막 운영 기록은 Site v123/0023이며 이번 Git 통합은 새 게시·Worker 배포가 아니다. 아래 내용은 각 시점의 이력이다.
 
