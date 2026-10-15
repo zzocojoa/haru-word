@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-10-15T00:10:05.188Z",
+  "recordedAt": "2026-10-15T00:13:41.990Z",
   "feature": "Image practice reveals selected meaning and part of speech",
   "branch": "codex/word-image-pilot-site",
   "baselineSiteVersion": 128,
@@ -156,6 +156,48 @@
     "previousVersion": 128
   },
   "publication": {
-    "status": "not_started"
+    "status": "succeeded",
+    "version": 129,
+    "sourceCommit": "1f6c2b5266061dc95d940da0e9176b57209c0a17",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_501f112606cc81919564affa0ae340c8",
+    "deploymentId": "appgdep_6ad01a5fb8588191b08ad414e0d3f148",
+    "envRevision": 65,
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "updatedAt": "2026-10-15T00:12:36.140695+00:00"
+  },
+  "archiveCheck": {
+    "passed": true,
+    "sha256": "22b2a2679fe2a706b73a081aa0202ee609bc39697f867f7eb2fce22f9d11334b",
+    "bytes": 7096080,
+    "imagesUnchanged": 20,
+    "revealedMeaningInClient": true,
+    "senseStylesPackaged": true,
+    "testedWorkerMatches": true,
+    "hostingAndSqlPreserved": true
+  },
+  "hostedBundles": {
+    "passed": true,
+    "checkedAt": "2026-10-15T00:13:41.870Z",
+    "learnerAPIRequests": 0,
+    "learnerWrites": 0,
+    "checked": [
+      {
+        "path": "/_next/static/chunks/learning-app-Bm0TDxHO.js",
+        "status": 200,
+        "sha256": "efb3ddf765d7323d289307dd7c5d84efc986301bd2b113b391f7fffb38e9e7f3",
+        "bytes": 379594
+      },
+      {
+        "path": "/_next/static/css/index.ByEu0zhN.css",
+        "status": 200,
+        "sha256": "3894d1adfa9b14e1c71af331d18c812de9648fc363af8944ed5127c08b285ac9",
+        "bytes": 242636
+      }
+    ]
+  },
+  "screenshots": {
+    "boundary": "local Chromium mobile viewport 390x844",
+    "bankMoney": "outputs/word-image-sense/chromium/sense-9.png",
+    "bankRiver": "outputs/word-image-sense/chromium/sense-10.png"
   }
 }
