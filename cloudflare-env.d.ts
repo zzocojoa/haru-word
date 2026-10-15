@@ -9,6 +9,8 @@ declare namespace Cloudflare {
     card_studio_bridge_secret?: string;
     card_studio_origin?: string;
     BUCKET?: R2Bucket;
+    word_image_upload_key?: string;
+    word_image_upload_expires?: string;
     google_api?: string;
     groq_api?: string;
     groq_ai_enabled?: string;
