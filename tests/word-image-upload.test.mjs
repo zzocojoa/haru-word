@@ -32,18 +32,24 @@ test('upload verifies public GET bytes and both GET/HEAD headers without forward
     assert.equal(result.passed, true); assert.equal(result.completed, 1); assert.equal(result.uploaded, 1);
     assert.deepEqual(methods, ['GET', 'PUT', 'GET', 'HEAD']); assert.equal(result.bytes, bytes.length);
     assert.equal(readFileSync(result.reportFile, 'utf8').includes(token), false);
+    assert.equal(result.receiptFormat, 'ndjson');
+    assert.deepEqual(readFileSync(result.receiptsFile, 'utf8').trim().split('\n').map(line => JSON.parse(line)), result.checked);
   } finally { cleanup(f.root); }
 });
 test('an uncertain upload is not retried; restarting verifies the stored file and performs no second PUT', async () => {
   const f = fixture(); let exists = false, writes = 0;
   const transport = async (_url, init) => {
-    if (init.method === 'PUT') { writes++; exists = true; throw Error('private transport detail'); }
+    if (init.method === 'PUT') { writes++; exists = true; throw Error('private transport detail', { cause: { code: 'UND_ERR_SOCKET' } }); }
     if (!exists) return new Response(null, { status: 404 });
     return new Response(init.method === 'HEAD' ? null : bytes, { headers });
   };
   try {
-    await assert.rejects(uploadOxfordImages({ ...f, transport }), /remote_transport_failed/);
+    await assert.rejects(uploadOxfordImages({ ...f, transport }), /remote_transport_failed_PUT_UND_ERR_SOCKET/);
     assert.equal(writes, 1);
+    const failedRun = readdirSync(path.join(f.outputRoot, 'runs'))[0];
+    const failed = readFileSync(path.join(f.outputRoot, 'runs', failedRun, 'report.json'), 'utf8');
+    assert.equal(JSON.parse(failed).failure, 'remote_transport_failed_PUT_UND_ERR_SOCKET');
+    assert.equal(failed.includes('private transport detail'), false); assert.equal(failed.includes(token), false);
     const result = await uploadOxfordImages({ ...f, transport }); assert.equal(result.reused, 1); assert.equal(writes, 1);
   } finally { cleanup(f.root); }
 });
@@ -69,5 +75,22 @@ test('streamed GET may omit Content-Length while HEAD must describe the exact st
     assert.equal(result.passed, true); assert.equal(result.bytes, bytes.length);
     await assert.rejects(uploadOxfordImages({ ...f, verifyOnly: true, transport: async (_url, init) =>
       new Response(init.method === 'HEAD' ? null : bytes, { headers: streamedHeaders }) }), /remote_header_mismatch/);
+  } finally { cleanup(f.root); }
+});
+test('reset reads retry once with a closed connection; a persistent failure stops at two attempts', async () => {
+  const f = fixture();
+  try {
+    let reads = 0;
+    const result = await uploadOxfordImages({ ...f, verifyOnly: true, transport: async (_url, init) => {
+      assert.equal(init.headers.Connection, 'close');
+      if (!init.method && reads++ === 0) throw Error('private socket message', { cause: { code: 'ECONNRESET' } });
+      return new Response(init.method === 'HEAD' ? null : bytes, { headers });
+    } });
+    assert.equal(result.readRetries, 1); assert.deepEqual(result.requests, { GET: 2, HEAD: 1, PUT: 0 });
+    let attempts = 0;
+    await assert.rejects(uploadOxfordImages({ ...f, verifyOnly: true, transport: async () => {
+      attempts++; throw Error('private socket message', { cause: { code: 'ECONNRESET' } });
+    } }), /remote_transport_failed_GET_ECONNRESET/);
+    assert.equal(attempts, 2);
   } finally { cleanup(f.root); }
 });

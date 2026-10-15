@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, openSync, closeSync, fsyncSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -22,12 +22,22 @@ export async function uploadOxfordImages({ entries, assetRoot, outputRoot, origi
   if (!verifyOnly && !/^[a-f0-9]{64}$/.test(token || '')) fail('missing_upload_credential');
   const started = new Date().toISOString(), runId = randomUUID(), runRoot = path.join(outputRoot, 'runs', runId);
   mkdirSync(runRoot, { recursive: true });
+  const receiptsFile = path.join(runRoot, 'receipts.jsonl'), receiptFd = openSync(receiptsFile, 'wx');
   const checked = new Array(entries.length), requests = { GET: 0, HEAD: 0, PUT: 0 };
-  let index = 0, completed = 0, uploaded = 0, reused = 0, stopped;
+  let index = 0, completed = 0, uploaded = 0, reused = 0, readRetries = 0, stopped;
   const call = async (url, init = {}) => {
-    requests[init.method || 'GET']++;
-    try { return await transport(url, { ...init, redirect: 'error', signal: AbortSignal.timeout(30_000) }); }
-    catch { fail('remote_transport_failed'); }
+    const method = init.method || 'GET';
+    for (let attempt = 0; ; attempt++) {
+      requests[method]++;
+      try { return await transport(url, { ...init, headers: { ...init.headers, Connection: 'close' }, redirect: 'error', signal: AbortSignal.timeout(30_000) }); }
+      catch (error) {
+        const allowed = ['UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_BODY_TIMEOUT', 'UND_ERR_SOCKET', 'ECONNRESET', 'ENOTFOUND', 'EAI_AGAIN', 'ETIMEDOUT'];
+        const code = allowed.includes(error?.cause?.code) ? error.cause.code : ['TimeoutError', 'AbortError'].includes(error?.name) ? error.name : 'unknown';
+        // Only idempotent reads get one retry for a reset/closed socket. Never retry a PUT or an HTTP failure.
+        if (method !== 'PUT' && attempt === 0 && ['ECONNRESET', 'UND_ERR_SOCKET'].includes(code)) { readRetries++; continue; }
+        fail(`remote_transport_failed_${method}_${code}`);
+      }
+    }
   };
   async function worker() {
     while (!stopped && index < entries.length) {
@@ -55,15 +65,20 @@ export async function uploadOxfordImages({ entries, assetRoot, outputRoot, origi
         const headHeaders = checkHeaders(head, entry, 'HEAD');
         if ((await head.arrayBuffer()).byteLength !== 0) fail('remote_head_has_body');
         const result = { entryId: entry.entryId, sha256: entry.sha256, bytes: entry.bytes, url, checkedAt: new Date().toISOString(), get: { status: 200, headers: getHeaders }, head: { status: 200, headers: headHeaders } };
-        writeFileSync(path.join(runRoot, entry.sha256 + '.json'), json(result), { flag: 'wx' });
-        checked[i] = result; completed++; onProgress({ completed, total: entries.length, uploaded, reused });
+        writeFileSync(receiptFd, JSON.stringify(result) + '\n');
+        checked[i] = result; completed++;
+        if (completed % 25 === 0) fsyncSync(receiptFd);
+        onProgress({ completed, total: entries.length, uploaded, reused });
       } catch (error) { stopped = error; throw error; }
     }
   }
   const results = await Promise.allSettled(Array.from({ length: 4 }, () => worker()));
-  const failed = results.find(result => result.status === 'rejected');
+  let journalError;
+  try { fsyncSync(receiptFd); } catch (error) { journalError = error; } finally { closeSync(receiptFd); }
+  const failed = results.find(result => result.status === 'rejected') || (journalError ? { reason: journalError } : undefined);
   const report = { passed: !failed, started, finished: new Date().toISOString(), runId, origin, mode: verifyOnly ? 'verify' : 'upload',
-    expected: entries.length, completed, uploaded, reused, bytes: checked.filter(Boolean).reduce((sum, entry) => sum + entry.bytes, 0), requests,
+    expected: entries.length, completed, uploaded, reused, readRetries, receiptFormat: 'ndjson', receiptsFile,
+    bytes: checked.filter(Boolean).reduce((sum, entry) => sum + entry.bytes, 0), requests,
     ...(failed ? { failure: failed.reason.message } : {}), checked: checked.filter(Boolean) };
   const reportFile = path.join(runRoot, 'report.json');
   writeFileSync(reportFile, json(report), { flag: 'wx' });

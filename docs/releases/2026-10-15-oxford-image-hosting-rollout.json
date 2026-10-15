@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "status": "completed",
+  "goalComplete": true,
+  "completedAt": "2026-10-15T01:48:09.236Z",
+  "authorization": "User explicitly approved existing v130 production publication, 3809 uploads and remote verification, followed by removal of temporary upload access; retain pilot UI20.",
+  "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+  "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+  "savedVersion": {
+    "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_010b6a219fd08191aca83e20c34ff739",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version_number": 130,
+    "source": {
+      "commit_sha": "d628cb5f7af45381ae71a76dea3313d816997f21"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000065208206be78e571f5c974fe",
+      "content_hash": "sha256:e90bb0a91428a64ecfb389e132f78debafc4849228c8ee9cac5f9d547fb12ecc",
+      "size_bytes": 16517120,
+      "file_count": 339
+    },
+    "deployment_id": "appgdep_6ad02ebc58b48191a143c16bfc644de7"
+  },
+  "initialDeployment": {
+    "id": "appgdep_6ad0268760f88191a55efbcaf48fcf81",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "title": "하루단어 · Oxford 3000",
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_010b6a219fd08191aca83e20c34ff739",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+    "failure_message": null,
+    "env_set_revision": 68,
+    "updated_at": "2026-10-15T01:04:32.964828+00:00"
+  },
+  "cleanupDeployment": {
+    "id": "appgdep_6ad02ebc58b48191a143c16bfc644de7",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "title": "하루단어 · Oxford 3000",
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_010b6a219fd08191aca83e20c34ff739",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+    "failure_message": null,
+    "env_set_revision": 71,
+    "updated_at": "2026-10-15T01:39:28.121612+00:00"
+  },
+  "requestedImages": 3809,
+  "verifiedRemoteImages": 3809,
+  "verifiedRemoteBytes": 128592754,
+  "remoteHeaders": {
+    "getAndHead": 3809,
+    "contentType": "image/webp",
+    "cacheControl": "public, max-age=31536000, immutable",
+    "etag": "quoted SHA256",
+    "nosniff": true,
+    "headContentLengthExact": true,
+    "getBodyLengthAndSha256Exact": true,
+    "streamedGetMayOmitContentLength": true
+  },
+  "hostedCatalog": {
+    "file": "data/word-image-hosted-manifest.json",
+    "sha256": "40fa4706fb89903504e991ba31407169a764b06e3e16a0fca22dc9308ca3205f",
+    "bytes": 1093382,
+    "sourceCatalogSha256": "1c877bdeeca6f1c0d8a66baa79e637672529a10915c9bd42dde9a48eb197a9c9"
+  },
+  "successfulUpload": {
+    "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/40c191ec-a471-4fb6-a61b-95093a9cdc4e/report.json",
+    "sha256": "3646c6f14c528358d02f4a4b5a0aa88d568558d81594843e50fc17ab8eed0d8e",
+    "passed": true,
+    "started": "2026-10-15T01:26:46.209Z",
+    "finished": "2026-10-15T01:33:26.872Z",
+    "runId": "40c191ec-a471-4fb6-a61b-95093a9cdc4e",
+    "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "mode": "upload",
+    "expected": 3809,
+    "completed": 3809,
+    "uploaded": 1028,
+    "reused": 2781,
+    "readRetries": 0,
+    "receiptFormat": "ndjson",
+    "receiptsFile": "outputs\\oxford-hosting\\14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e\\runs\\40c191ec-a471-4fb6-a61b-95093a9cdc4e\\receipts.jsonl",
+    "bytes": 128592754,
+    "requests": {
+      "GET": 4837,
+      "HEAD": 3809,
+      "PUT": 1028
+    },
+    "receiptsSha256": "ed31f76fdcb3c8d2d2e0a57857af94a395078724ab27e4241cb3cea5d7836671"
+  },
+  "afterCleanupFullVerification": {
+    "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/f9bce8ab-1bda-4038-966c-a9eea45bc6a5/report.json",
+    "sha256": "05840dbe7d61fff9b2986ac410406450f6b8f52664a502fcd2244e3c00a9212d",
+    "passed": true,
+    "started": "2026-10-15T01:40:39.107Z",
+    "finished": "2026-10-15T01:44:53.889Z",
+    "runId": "f9bce8ab-1bda-4038-966c-a9eea45bc6a5",
+    "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "mode": "verify",
+    "expected": 3809,
+    "completed": 3809,
+    "uploaded": 0,
+    "reused": 3809,
+    "readRetries": 0,
+    "receiptFormat": "ndjson",
+    "receiptsFile": "outputs\\oxford-hosting\\14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e\\runs\\f9bce8ab-1bda-4038-966c-a9eea45bc6a5\\receipts.jsonl",
+    "bytes": 128592754,
+    "requests": {
+      "GET": 3809,
+      "HEAD": 3809,
+      "PUT": 0
+    },
+    "receiptsSha256": "bdb397dc9c3e57ceee57ae53431da84b320ed90f0a1f1ff37d1634d43b6e0d8a"
+  },
+  "allRuns": [
+    {
+      "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/4bdaeda6-7c9d-488b-b79a-926c585d84fa/report.json",
+      "sha256": "612d87042fb1847eeef1dd82129aac5522dbef5368690b58eb9cd013f713ed38",
+      "passed": true,
+      "started": "2026-10-15T01:04:58.425Z",
+      "finished": "2026-10-15T01:05:04.015Z",
+      "runId": "4bdaeda6-7c9d-488b-b79a-926c585d84fa",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "upload",
+      "expected": 1,
+      "completed": 1,
+      "uploaded": 1,
+      "reused": 0,
+      "bytes": 30300,
+      "requests": {
+        "GET": 2,
+        "HEAD": 1,
+        "PUT": 1
+      }
+    },
+    {
+      "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/26220a7f-26aa-453a-aaa6-ba7c69856465/report.json",
+      "sha256": "e235dfecd4f79245e04b36a44f4e6eea6fe63bc02d563bdb038604b5eb17711b",
+      "passed": false,
+      "started": "2026-10-15T01:05:26.276Z",
+      "finished": "2026-10-15T01:07:52.827Z",
+      "runId": "26220a7f-26aa-453a-aaa6-ba7c69856465",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "upload",
+      "expected": 3809,
+      "completed": 719,
+      "uploaded": 718,
+      "reused": 1,
+      "bytes": 23402372,
+      "requests": {
+        "GET": 1438,
+        "HEAD": 719,
+        "PUT": 719
+      },
+      "failure": "remote_transport_failed"
+    },
+    {
+      "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/7c617a11-1b11-443c-9d1f-00e1ae0ccf73/report.json",
+      "sha256": "964bbbd70ef8046d0b22ace47701bdba97b8b07695784f9f233f1b6bede1996a",
+      "passed": false,
+      "started": "2026-10-15T01:09:33.879Z",
+      "finished": "2026-10-15T01:10:22.367Z",
+      "runId": "7c617a11-1b11-443c-9d1f-00e1ae0ccf73",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "upload",
+      "expected": 3809,
+      "completed": 742,
+      "uploaded": 23,
+      "reused": 719,
+      "bytes": 24160356,
+      "requests": {
+        "GET": 766,
+        "HEAD": 742,
+        "PUT": 23
+      },
+      "failure": "remote_transport_failed_GET_ECONNRESET"
+    },
+    {
+      "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/9f6c56f9-ddd9-473b-afc3-f9df3b4ea7c5/report.json",
+      "sha256": "74d9b2f10caa22e06bf16c3b3988d68c0080fc4b9ae2105fc0a92a6cf308b8e9",
+      "passed": false,
+      "started": "2026-10-15T01:12:02.429Z",
+      "finished": "2026-10-15T01:19:22.478Z",
+      "runId": "9f6c56f9-ddd9-473b-afc3-f9df3b4ea7c5",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "upload",
+      "expected": 3809,
+      "completed": 2492,
+      "uploaded": 1749,
+      "reused": 743,
+      "readRetries": 0,
+      "bytes": 83552450,
+      "requests": {
+        "GET": 4242,
+        "HEAD": 2492,
+        "PUT": 1750
+      },
+      "failure": "remote_transport_failed_PUT_ECONNRESET"
+    },
+    {
+      "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/52cc52c4-37f1-45de-a709-9b9a6117cf60/report.json",
+      "sha256": "634e37c6b2f5f9992ea272496df1c18f1290d58adffc58ec966455662046df1d",
+      "passed": false,
+      "started": "2026-10-15T01:20:18.293Z",
+      "finished": "2026-10-15T01:23:52.022Z",
+      "runId": "52cc52c4-37f1-45de-a709-9b9a6117cf60",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "upload",
+      "expected": 3809,
+      "completed": 2778,
+      "uploaded": 289,
+      "reused": 2492,
+      "readRetries": 0,
+      "bytes": 93984008,
+      "requests": {
+        "GET": 3070,
+        "HEAD": 2781,
+        "PUT": 289
+      },
+      "failure": "ENOSPC: no space left on device, write"
+    },
+    {
+      "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/40c191ec-a471-4fb6-a61b-95093a9cdc4e/report.json",
+      "sha256": "3646c6f14c528358d02f4a4b5a0aa88d568558d81594843e50fc17ab8eed0d8e",
+      "passed": true,
+      "started": "2026-10-15T01:26:46.209Z",
+      "finished": "2026-10-15T01:33:26.872Z",
+      "runId": "40c191ec-a471-4fb6-a61b-95093a9cdc4e",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "upload",
+      "expected": 3809,
+      "completed": 3809,
+      "uploaded": 1028,
+      "reused": 2781,
+      "readRetries": 0,
+      "receiptFormat": "ndjson",
+      "receiptsFile": "outputs\\oxford-hosting\\14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e\\runs\\40c191ec-a471-4fb6-a61b-95093a9cdc4e\\receipts.jsonl",
+      "bytes": 128592754,
+      "requests": {
+        "GET": 4837,
+        "HEAD": 3809,
+        "PUT": 1028
+      },
+      "receiptsSha256": "ed31f76fdcb3c8d2d2e0a57857af94a395078724ab27e4241cb3cea5d7836671"
+    },
+    {
+      "file": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/f9bce8ab-1bda-4038-966c-a9eea45bc6a5/report.json",
+      "sha256": "05840dbe7d61fff9b2986ac410406450f6b8f52664a502fcd2244e3c00a9212d",
+      "passed": true,
+      "started": "2026-10-15T01:40:39.107Z",
+      "finished": "2026-10-15T01:44:53.889Z",
+      "runId": "f9bce8ab-1bda-4038-966c-a9eea45bc6a5",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "mode": "verify",
+      "expected": 3809,
+      "completed": 3809,
+      "uploaded": 0,
+      "reused": 3809,
+      "readRetries": 0,
+      "receiptFormat": "ndjson",
+      "receiptsFile": "outputs\\oxford-hosting\\14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e\\runs\\f9bce8ab-1bda-4038-966c-a9eea45bc6a5\\receipts.jsonl",
+      "bytes": 128592754,
+      "requests": {
+        "GET": 3809,
+        "HEAD": 3809,
+        "PUT": 0
+      },
+      "receiptsSha256": "bdb397dc9c3e57ceee57ae53431da84b320ed90f0a1f1ff37d1634d43b6e0d8a"
+    }
+  ],
+  "temporaryAccess": {
+    "addedAtRevision": 68,
+    "removedAtRevision": 71,
+    "keysRemoved": [
+      "word_image_upload_key",
+      "word_image_upload_expires"
+    ],
+    "original13EnvironmentEntriesPreserved": true,
+    "revocationHistory": {
+      "initialRemovalRevision": 69,
+      "initialRemovalDeployment": {
+        "id": "appgdep_6ad02d8bbcac8191834f8d1601334ca5",
+        "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+        "title": "하루단어 · Oxford 3000",
+        "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_010b6a219fd08191aca83e20c34ff739",
+        "type": "publish",
+        "status": "succeeded",
+        "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+        "has_mcp": false,
+        "screenshot_asset_pointer": null,
+        "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+        "failure_message": null,
+        "env_set_revision": 69,
+        "updated_at": "2026-10-15T01:34:23.604217+00:00"
+      },
+      "explicitRevocationRevision": 70,
+      "explicitRevocationDeployment": {
+        "id": "appgdep_6ad02e5526188191b2467b4532486dfd",
+        "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+        "title": "하루단어 · Oxford 3000",
+        "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_010b6a219fd08191aca83e20c34ff739",
+        "type": "publish",
+        "status": "succeeded",
+        "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+        "has_mcp": false,
+        "screenshot_asset_pointer": null,
+        "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+        "failure_message": null,
+        "env_set_revision": 70,
+        "updated_at": "2026-10-15T01:37:45.124268+00:00"
+      },
+      "keyInvalidatedBeforeRemoval": true,
+      "expiresSetToPastBeforeRemoval": true,
+      "finalRemovalRevision": 71,
+      "initialProbe": {
+        "checkedAt": "2026-10-15T01:36:35.827Z",
+        "status": 413,
+        "code": "invalid_image_size",
+        "probeBodyBytes": 0
+      },
+      "afterRevocationProbe": {
+        "passed": true,
+        "checkedAt": "2026-10-15T01:38:23.126Z",
+        "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+        "previousCredentialRejected": true,
+        "putStatus": 404,
+        "putError": "upload_disabled",
+        "probeBodyBytes": 0,
+        "r2Writes": 0,
+        "getStatus": 200,
+        "bytes": 30300,
+        "sha256": "4200dd2f8ceabdf4e68f254bd0373bd4e5a228229acf4000cc5847ace7aaaad1",
+        "conditionalStatus": 304
+      }
+    },
+    "runtimePutDisabled": {
+      "passed": true,
+      "checkedAt": "2026-10-15T01:40:00.957Z",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "previousCredentialRejected": true,
+      "putStatus": 404,
+      "putError": "upload_disabled",
+      "probeBodyBytes": 0,
+      "r2Writes": 0,
+      "getStatus": 200,
+      "bytes": 30300,
+      "sha256": "4200dd2f8ceabdf4e68f254bd0373bd4e5a228229acf4000cc5847ace7aaaad1",
+      "conditionalStatus": 304
+    },
+    "credentialWrittenToFiles": false
+  },
+  "transferPolicy": {
+    "concurrency": 4,
+    "requestConnectionClose": true,
+    "readResetRetries": "at most one for GET/HEAD ECONNRESET or UND_ERR_SOCKET",
+    "automaticPutRetries": 0,
+    "localReceiptFormat": "one append-only NDJSON journal per run, fsynced every 25 records and at completion",
+    "localWriteInterruption": {
+      "recordedAt": "2026-10-15T01:30:20.435Z",
+      "failedReport": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/52cc52c4-37f1-45de-a709-9b9a6117cf60/report.json",
+      "error": "ENOSPC: no space left on device, write",
+      "completed": 2778,
+      "remoteReadsCompleted": 2781,
+      "emptyReceipts": [
+        "0d919f0ac38e66f5905bb4e2cac9f16a804ede70852317ef04c414e53f048a4f.json",
+        "268e5a9122cad9a50ca61ccffce72638cde67006f6c9d554bd85d1c3f648cc20.json",
+        "af68b4c5623d24b43ead3c7b9659e64f075cfe6d357bad8c0d7a2c86b9c46c5d.json"
+      ],
+      "bytesAvailableAtInspection": 19823562752,
+      "oneMillionByteWriteProbePassed": true,
+      "currentBytesAvailable": 19713294336,
+      "mitigation": "Use a single append-only NDJSON journal with fsync and bundled Node24; preserve all original images and old failure evidence.",
+      "rootCause": "Underlying local write error remains unconfirmed; available space and successful write probe do not support a simple disk-full diagnosis.",
+      "originalOrEvidenceFilesDeleted": 0
+    },
+    "interruptedRunsPreserved": 4,
+    "firstUncertainWrite": {
+      "entryId": "ab3103d2f0fc17c4",
+      "stored": true,
+      "bodyShaVerified": true,
+      "bytes": 30012
+    },
+    "laterUncertainWrite": {
+      "checkedAt": "2026-10-15T01:19:47.891Z",
+      "report": "outputs/oxford-hosting/14552b36a1653f2aed9e14b09c833c0031b1204de5e0bdfc6902543a05d4ba6e/runs/9f6c56f9-ddd9-473b-afc3-f9df3b4ea7c5/report.json",
+      "entryId": "4ff2577d2a924047",
+      "status": 404,
+      "stored": false,
+      "bodyShaVerified": false,
+      "bytes": 0
+    },
+    "serverErrorSample": {
+      "queriedAt": "2026-10-15T01:21:42.763Z",
+      "sinceMinutes": 10,
+      "errorsOnly": true,
+      "limit": 100,
+      "returnedEvents": 100,
+      "statusCounts": {
+        "404": 100
+      },
+      "outcomes": {
+        "ok": 100
+      },
+      "signals": {
+        "cpuLimit": 0,
+        "reset": 0,
+        "restart": 0,
+        "storage": 0
+      },
+      "completeCoverageProven": false
+    },
+    "rootCauseLimit": "Later resets were classified ECONNRESET on GET and PUT; the first failed PUT response had no underlying error code. Read retries/connection policy do not establish a complete network root cause. The returned server-error sample contained only expected pre-upload 404 responses with outcome ok."
+  },
+  "learningUi": {
+    "pilotEntries": 20,
+    "unchanged": true,
+    "learnerApiRequestsForQa": 0,
+    "learnerWritesForQa": 0,
+    "readback": {
+      "file": "work/oxford-host-site-after-cleanup.json",
+      "sha256": "af3bf79cfcac9642976f9c3b1cb9d41128a9f1508d290f4fda4f2e5d9c919e17",
+      "passed": true,
+      "checkedAt": "2026-10-15T01:41:07.612Z",
+      "phase": "after-cleanup",
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "homeStatus": 200,
+      "pilotEntries": 20,
+      "serverPilotFlag": true,
+      "fullCatalogUrlsInHomeHtml": false,
+      "learnerApiRequests": 0,
+      "learnerWrites": 0
+    }
+  },
+  "preservation": {
+    "primaryDirtyFiles": 18,
+    "sourceManifestLedgerAndTextbookUnchanged": true,
+    "pilotMetadataAndPublicAssetsUnchanged": true,
+    "dbMigrationsAndLearnerApiUnchanged": true,
+    "lockfileUnchanged": true,
+    "siteAccessRevision": 4
+  },
+  "validation": {
+    "tests": 612,
+    "passed": 612,
+    "failed": 0,
+    "skipped": 0,
+    "typecheckExitCode": 0,
+    "lintExitCode": 0,
+    "existingFullLintWarnings": 15,
+    "newWarnings": 0,
+    "runtimeBuildAndPackagePreviouslyPassedForExactSavedSource": true,
+    "evidence": [
+      {
+        "label": "oxford-host-journal-full-tests",
+        "file": "work/pilot-evidence/oxford-host-journal-full-tests.json",
+        "sha256": "e1ddc31ec40d08f2e788c5391152bc673df39a7857ec08d22acd1b240c8d97ce",
+        "command": [
+          "node",
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "test"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T01:26:47.940Z",
+        "finished": "2026-10-15T01:27:07.104Z"
+      },
+      {
+        "label": "oxford-host-journal-lint",
+        "file": "work/pilot-evidence/oxford-host-journal-lint.json",
+        "sha256": "1c7dd056ccf58e6731a3fe386a50cf0ad81abd1a0954cac4df15a1438369eb15",
+        "command": [
+          "node",
+          "node_modules/eslint/bin/eslint.js",
+          "scripts/upload-oxford-images.mjs",
+          "tests/word-image-upload.test.mjs"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T01:26:47.939Z",
+        "finished": "2026-10-15T01:27:35.636Z"
+      },
+      {
+        "label": "oxford-host-types-fixed",
+        "file": "work/pilot-evidence/oxford-host-types-fixed.json",
+        "sha256": "35a0dc77814a432699a1a5535f0fd912e96f16a85c57941202f42981db0c74bb",
+        "command": [
+          "node",
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "run",
+          "typecheck"
+        ],
+        "exitCode": 0,
+        "started": "2026-10-15T00:47:50.594Z",
+        "finished": "2026-10-15T00:47:55.524Z"
+      }
+    ]
+  },
+  "scopeLimits": [
+    "No full-catalog learning UI activation",
+    "No actual iPhone/VoiceOver check",
+    "No Node24 CI run",
+    "No new visual/semantic review of all 3809 images",
+    "No separate disaster-recovery backup of R2 objects"
+  ],
+  "rollback": "Keep BUCKET binding and GET/HEAD support. Leave both upload Secret entries absent. Do not restore the pre-R2 manifest or delete image keys.",
+  "nextStep": "Integrate the verified hosted catalog into the approved learning UI in a separate change; preserve exact entry/meaning/part-of-speech matching."
+}
