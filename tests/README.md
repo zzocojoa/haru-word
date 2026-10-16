@@ -1,5 +1,7 @@
 # 학습 앱 검증
 
+- `learning-dates.test.mjs`는 재사용하는 날짜 포매터의 한국 자정·연말·윤일, 기본 날짜 갱신·입력 불변·잘못된 날짜 거부를 검사한다. `pending-reviews-render.test.mjs`는 실제 컴포넌트를 렌더링해 점검 없음/전체 제외 시 라벨 계산 생략, 완료·제외 회차를 포함한 번호와 최신 표시 보존을 확인한다.
+
 - `card-automation-qa.cjs`는 로컬 합성 카드 API로 자동 제작 수량의 구형 기본값 1장, 3장 저장/실패 재시도, 5장 초안의 일시정지·화면 이동·새로고침 보존을 Chromium/WebKit에서 검사한다. 320/390/1440px·글자 100/200%·axe 검사를 포함하며 실제 AI/카카오와 운영 학습 기록은 사용하지 않는다.
 
 - `grammar-content-review.test.mjs`와 `grammar.test.mjs`는 v4 교재342단위의 원장 무결성·출처 매핑, 정적30분석의 원문 보존, 버전별 정답·혼합 진도·구형426·전체/분할 복원·revision·실패 후 재시도를 검사한다. `grammar-v4-qa.cjs`는15수업·135기본/복습문제·정적분석·읽기·쓰기의 Chromium/WebKit 검사용이다. `grammar-v4-compat-qa.cjs`는 신규 생성 true/false 각각 별도 로컬 Worker에서 실행한다(`QA_NEW_GRAMMAR_VERSION=4` 또는3). false에서도 저장된v4를 읽고 기존3의 첫답·일정을 보존한다. 실제AI 호출은 모의 응답으로 대체한다.
