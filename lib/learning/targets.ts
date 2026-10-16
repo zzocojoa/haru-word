@@ -179,7 +179,7 @@ export function practiceIds(state: State, mode: PracticeMode): string[] {
 export function practiceTargets(
   state: State,
   mode: PracticeMode,
-  content: (id: string) => Content,
+  content: (id: string) => Pick<Content, 'meaning'>,
 ): LearningTarget[] {
   return practiceIds(state, mode)
     .flatMap((entryId) => {

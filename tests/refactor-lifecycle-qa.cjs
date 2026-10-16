@@ -63,6 +63,10 @@ const timerSeconds = async page => {
     await page.goto(base, { waitUntil: 'domcontentloaded' });
     await saved(page);
     await resume(page);
+    // The save acknowledgement precedes the deferred lesson's mount/focus.
+    // Enter text only after that observable keyboard-ready state, rather than
+    // racing WebKit's synthetic fill against the initial focus effect.
+    await page.waitForFunction(() => document.activeElement?.tagName === 'H2' && !!document.activeElement.closest('.session-panel'));
     if (freezeClock) await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
     return { context, page, session };
   };
@@ -113,6 +117,7 @@ const timerSeconds = async page => {
       await context.close();
     }
 
+    if (!process.argv.includes('--drafts-only')) {
     const { context, page, session } = await fresh('en', true);
     const start = await timerSeconds(page);
     await page.clock.runFor(3000);
@@ -164,6 +169,7 @@ const timerSeconds = async page => {
     assert.equal((await read(context)).state.sessions[session.id].elapsed, elapsed);
     checks.push('next question clears only its draft, focuses the heading, and preserves prior results; summary time is not counted');
     await context.close();
+    }
     assert.deepEqual(errors, []);
     fs.writeFileSync(out + '/verification.json', JSON.stringify({ passed: true, checks, pageErrors: errors }, null, 2));
     console.log(JSON.stringify({ passed: true, checks }, null, 2));

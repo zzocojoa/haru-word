@@ -1,5 +1,13 @@
 # 학습 앱 검증
 
+- `material-line-endings.test.mjs`는 두 자료 생성기에 LF/CRLF 원문과 실제 Git `core.autocrlf=false/true` 체크아웃을 제공한다. 정규화 지문·LF 생성물·빌드 검사 통과와 원문 변경 감지/실패 시 출력 보존을 확인한다. 원문 지문은 CRLF만 LF로 정규화하며 생성 JSON은 `.gitattributes`의 LF 정책을 따른다.
+- `pr38-lazy-recovery-qa.cjs`는 완료 기록의 지연/실패/재시도 모달과 닫힌 뒤 늦은 응답을 검사한다. 오래된 문서의 실제 import 주소를 로컬에서 바꿔 404/410 복구, 이탈 취소, 지속 503의 재로딩 차단과 전체 기록/revision 불변도 확인한다. `node tests/pr38-lazy-recovery-qa.cjs all`로 실행하며 `completed` 또는 `obsolete`로 범위를 선택한다. `QA_BROWSER=webkit`을 지원하고 공통 `QA_BASE_URL`·`QA_PLAYWRIGHT_PATH`·`AXE_CORE_PATH`를 사용한다. 320/390/1440px·100/200% 글자·키보드·axe를 포함한다. `QA_FIX_DIST`는 비교 빌드, `QA_FIX_OUTPUT`은 증거 폴더를 지정할 때만 사용한다. 운영/실제 AI 호출은 없다.
+- `catalog-basics.test.mjs`는 교재 3,809개 기본 뜻과 생성 원본 지문, 사용자 수정/빈 뜻·개인 단어, 초기 의존성에서 전체 예문·이미지 목록 제외를 검사한다. `lazy-materials-qa.cjs`는 로컬 가상 계정으로 첫 화면의 자료 미요청, 모듈 실패·재시도, 편집 자료/탭 상태, 이미지 로딩 중 닫기·재접속과 전체 기록·revision 불변을 Chromium/WebKit에서 검사한다. `node scripts/prepare-catalog-basics.mjs`로 기본 뜻 목록을 만들고 빌드가 `--check`로 원본 일치를 확인한다.
+- 자료 재시도는 정적 JS 캐시만 갱신한 뒤 명시적으로 페이지를 다시 연다. 학습 API를 재전송하지 않으며, 미저장/저장 중/복원 중에는 차단한다. `lazy-materials-qa.cjs`는 편집기와 공통 교재 파일 각각의 실패, 브라우저 이탈 취소, 재시도 중 편집창 닫기 후 늦은 재로딩 차단도 검사한다. 단어 목록 진입에는 전체 예문·이미지·문법 교재를 요청하지 않는다.
+- `learning-chunks.test.mjs`는 초기 정적 의존성만 묶고 동적 교재 경계와 서버 빌드를 보존하는지 확인한다. 문법 도움말의 작은 목록은 `node --experimental-strip-types scripts/prepare-grammar-index.mjs`로 생성한다. 빌드의 `--check`가 원본 해시와 15개 품사·제목·역할·첫 예문을 대조하므로 생성 파일을 직접 수정하지 않는다.
+- 비동기 편집기 검사는 로딩 중 대화상자가 아닌 실제 표현 입력란이 준비된 뒤 이미지·저장·레이아웃을 검사한다. `grammar-ui-qa.cjs`도 문법 목록 제목이 준비된 뒤 목록을 확인한다. 대기 없이 0개임을 확인해 잘못 통과시키지 않는다.
+- `refactor-lifecycle-qa.cjs --drafts-only`는 뜻·회상 답·영작 초안의 탭 유지/목표 변경/종료 저장/재접속 및 axe만 실행한다. 새 수업의 초점 준비 후 입력한다. 타이머 구간을 생략한 결과는 전체 수명주기 검사 통과와 구분한다. WebKit 모의 시계의 초 단위 경계 오차는 변경 전 빌드에서도 재현되므로 이 모드를 사용하며, 전체 타이머 구간은 Chromium에서 확인한다.
+
 - `learning-dates.test.mjs`는 재사용하는 날짜 포매터의 한국 자정·연말·윤일, 기본 날짜 갱신·입력 불변·잘못된 날짜 거부를 검사한다. `pending-reviews-render.test.mjs`는 실제 컴포넌트를 렌더링해 점검 없음/전체 제외 시 라벨 계산 생략, 완료·제외 회차를 포함한 번호와 최신 표시 보존을 확인한다.
 
 - `card-automation-qa.cjs`는 로컬 합성 카드 API로 자동 제작 수량의 구형 기본값 1장, 3장 저장/실패 재시도, 5장 초안의 일시정지·화면 이동·새로고침 보존을 Chromium/WebKit에서 검사한다. 320/390/1440px·글자 100/200%·axe 검사를 포함하며 실제 AI/카카오와 운영 학습 기록은 사용하지 않는다.

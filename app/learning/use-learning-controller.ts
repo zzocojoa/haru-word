@@ -1,5 +1,5 @@
 "use client";
-import { WORDS, cardContent } from "@/lib/catalog";
+import { WORDS, cardMeaning } from "@/lib/catalog-basics";
 import {
   hasReviewWork,
   learningMetrics,
@@ -119,7 +119,7 @@ export function useLearningController(initialServerTime: number) {
   const pendingReviewIds = allocation.pendingReviewIds;
   const monthlyRepair = useMemo(() => {
     const { state: repaired, ...details } = repairMonthlyCarryover(
-      vocabulary, words, id => cardContent(id, vocabulary.progress[id]), date,
+      vocabulary, words, id => ({ meaning: cardMeaning(id, vocabulary.progress[id]) }), date,
     );
     return { ...details, changed: repaired !== vocabulary };
   }, [vocabulary, words, date]);
@@ -127,7 +127,7 @@ export function useLearningController(initialServerTime: number) {
   async function correctMonthlyCarryover() {
     if (busy || showSession || currentStudyDate() !== date) return;
     const latest = currentState.current;
-    const repair = repairMonthlyCarryover(latest, words, id => cardContent(id, latest.progress[id]), date);
+    const repair = repairMonthlyCarryover(latest, words, id => ({ meaning: cardMeaning(id, latest.progress[id]) }), date);
     if (repair.state === latest) return;
     if (await save(repair.state)) {
       setMessage(`복습 표시 ${repair.cleared}건을 바로잡고, 아직 입력하지 않은 오늘 단어 ${repair.replacements.length}개를 다시 배정했어요. 기존 성적과 월말 점검은 보존했어요.`);

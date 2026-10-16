@@ -1,15 +1,11 @@
 'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { cardContent } from '@/lib/catalog';
+import { useEffect, useState } from 'react';
+import { cardMeaning } from '@/lib/catalog-basics';
 import type { Progress, Word } from '@/lib/learning';
 import { resolveWordImage, WORD_IMAGES, type WordImage } from '@/lib/word-image';
-import { useNavigationState } from '../navigation';
-import { SheetDialog, SheetDialogContent } from '../sheet-dialog';
 import { HelpDetails } from '../study-ui';
 import { WordPronunciation } from '../word-pronunciation';
 import { PartOfSpeechLabel } from '../grammar-terms';
-import { useViewRestoration } from '../use-view-restoration';
 
 // Curated pilot descriptions preserve a visual clue without naming the answer.
 // Other images identify the exercise without inventing an unreviewed description.
@@ -37,30 +33,19 @@ const SCENES: Record<string, string> = {
 };
 type Card = { word: Word; image: WordImage };
 
-export function ImagePracticeLauncher({ words, progress }: { words: Word[]; progress: Record<string, Progress> }) {
-  const [open, setOpen] = useNavigationState('app.imagePractice', false, true);
-  const trigger = useRef<HTMLButtonElement>(null);
-  const restoration = useViewRestoration();
-  const eligible = useMemo(() => {
+export function ImagePracticeContent({ words, progress }: { words: Word[]; progress: Record<string, Progress> }) {
+  // Freeze this deck until the dialog closes, as before lazy loading.
+  const [deck] = useState(() => {
     const byId = new Map(words.map(word => [word.id, word]));
     return WORD_IMAGES.flatMap(entry => {
       const word = byId.get(entry.entryId);
-      const image = word && resolveWordImage(word, cardContent(word.id, progress[word.id]).meaning);
+      const image = word && resolveWordImage(word, cardMeaning(word.id, progress[word.id]));
       return word && image ? [{ word, image }] : [];
     });
-  }, [words, progress]);
-  const [deck, setDeck] = useState<Card[]>([]);
+  });
   return <>
-    <button ref={trigger} type="button" className="secondary-button full image-practice-entry" aria-haspopup="dialog"
-      onClick={() => { setDeck(eligible); setOpen(true); }}>이미지 연습</button>
-    <SheetDialog navigationKey="app.imagePractice" open={open} onOpenChange={setOpen}>
-      <SheetDialogContent className="framed-dialog image-practice-dialog" showCloseButton={false}
-        onCloseAutoFocus={event => { event.preventDefault(); restoration.schedule('destination', () => trigger.current?.focus({ preventScroll: true })); }}>
-        <DialogHeader><DialogTitle>이미지 연습</DialogTitle><DialogDescription>{deck.length.toLocaleString('ko-KR')}개 · 성적 미기록</DialogDescription></DialogHeader>
-        <button type="button" className="text-button image-practice-close" aria-label="연습 닫기" onClick={() => setOpen(false)}>닫기</button>
-        {open && (deck.length ? <PracticeCards deck={deck}/> : <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>)}
-      </SheetDialogContent>
-    </SheetDialog>
+    <p className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개 · 성적 미기록</p>
+    {deck.length ? <PracticeCards deck={deck}/> : <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>}
   </>;
 }
 

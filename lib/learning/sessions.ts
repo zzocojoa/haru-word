@@ -28,7 +28,7 @@ export function extendReviewSession(
   state: State,
   words: Word[],
   s: Session,
-  content: (id: string) => Content,
+  content: (id: string) => Pick<Content, 'meaning'>,
 ): Session {
   const missing = missingReviewTargets(state, s);
   if (!missing.length) return s;
@@ -87,7 +87,7 @@ function targetRecords(targets: LearningTarget[]): {
 export function newSession(
   state: State,
   words: Word[],
-  content: (id: string) => Content,
+  content: (id: string) => Pick<Content, 'meaning'>,
   kind: Kind,
   date = today(),
   period = periodKey(kind, date),

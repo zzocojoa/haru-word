@@ -3,3 +3,6 @@ public/card-studio/** -text
 lib/server/card-automation.generated.* -text
 # The generated UI index is checked byte-for-byte during builds on every OS.
 data/word-image-ui.json text eol=lf
+# Material gates compare generated JSON bytes, including its final LF.
+data/catalog-basics.json text eol=lf
+data/grammar-index.json text eol=lf

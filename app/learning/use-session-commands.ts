@@ -1,5 +1,5 @@
 "use client";
-import { cardContent } from '@/lib/catalog';
+import { cardMeaning } from '@/lib/catalog-basics';
 import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
 import { ensureCarryover, extendReviewSession, hasReviewWork, needsInitialAssessment, newSession, pickDaily, repeatDailySession, type Kind, type Level, type PracticeMode, type Session, type State, type Word } from '@/lib/learning';
 import type { RefObject } from 'react';
@@ -57,7 +57,7 @@ export function useSessionCommands({ words, currentState, save, clock, date, bus
     try {
       if (current)
         resumed = extendReviewSession(state, words, resumeMonthlyWriting(current), (id) =>
-          cardContent(id, state.progress[id]),
+          ({ meaning: cardMeaning(id, state.progress[id]) }),
         );
     } catch (error) {
       setMessage(
@@ -70,7 +70,7 @@ export function useSessionCommands({ words, currentState, save, clock, date, bus
       : newSession(
           state,
           words,
-          (id) => cardContent(id, state.progress[id]),
+          (id) => ({ meaning: cardMeaning(id, state.progress[id]) }),
           kind,
           clock.currentDate(),
           period,

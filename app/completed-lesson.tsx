@@ -1,8 +1,6 @@
 "use client";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, BookOpen, RotateCcw } from "lucide-react";
-import { DialogHeader,DialogTitle,DialogDescription } from "@/components/ui/dialog";
-import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { studyContent } from "@/lib/catalog";
 import { POS,dailyReplaySources,entryIdFor,targetIdentity,type State,type Word } from "@/lib/learning";
 import { DictionaryLinks } from "./ui";
@@ -11,8 +9,8 @@ import { ExpressionLine } from "./expression-line";
 import { GrammarTermsHelp, PartOfSpeechLabel } from './grammar-terms';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-type Props={state:State;words:Word[];date:string;todayDate:string;busy:boolean;onClose:()=>void;onRepeat:(date:string)=>void};
-export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepeat}:Props){
+export type CompletedLessonProps={state:State;words:Word[];date:string;todayDate:string;busy:boolean;onClose:()=>void;onRepeat:(date:string)=>void};
+export function CompletedLesson({state,words,date,busy,onRepeat}:CompletedLessonProps){
  const [index,setIndex]=useState(0);
  const scrollBody=useRef<HTMLDivElement>(null);
  const selector=useRef<HTMLButtonElement>(null);
@@ -23,7 +21,7 @@ export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepea
  const item=items[currentIndex];const word=wordById.get(item?.id);const content=word?studyContent(word.id,item?.record,state.progress[word.id]):undefined;
  useLayoutEffect(()=>{ if(scrollBody.current)scrollBody.current.scrollTop=0; },[currentIndex,date]);
  const resuming=Object.values(state.sessions).some(s=>s.practiceMode==='repeat'&&s.period===date&&!s.finished);
- return <Dialog navigationKey="app.reviewDate" open onOpenChange={open=>{if(!open)onClose()}}><DialogContent className="completed-lesson framed-dialog"><DialogHeader><DialogTitle>{date===todayDate?'오늘 단어 다시 보기':date+' 단어 다시 보기'}</DialogTitle><DialogDescription>저장된 뜻·표현을 확인해요. 성적은 바뀌지 않아요.</DialogDescription></DialogHeader>
+ return <>
   {!!items.length&&<nav className="replay-controls" aria-label="다시 볼 단어 이동">
    <button className="icon-button" aria-label="이전" disabled={currentIndex===0} onClick={()=>{setIndex(currentIndex-1);if(currentIndex===1)selector.current?.focus();}}><ArrowLeft size={18}/></button>
    <Select value={String(currentIndex)} onValueChange={value=>setIndex(Number(value))}><SelectTrigger ref={selector} aria-label="다시 볼 단어 선택"><SelectValue>{currentIndex+1} / {items.length} · {word?.word}</SelectValue></SelectTrigger><SelectContent className="replay-options" position="popper">{items.map((entry,i)=>{const candidate=wordById.get(entry.id);return <SelectItem value={String(i)} key={targetIdentity(entry.id,entry.record.meaning)}>{i+1}. {candidate?.word} · {candidate?POS[candidate.pos]:''} · {entry.record.meaning||'뜻 미기록'}</SelectItem>;})}</SelectContent></Select>
@@ -43,5 +41,5 @@ export function CompletedLesson({state,words,date,todayDate,busy,onClose,onRepea
 
   </>:<p className="muted">완료한 단어 기록이 없어요.</p>}
  </div>{item&&word&&content&&<div className="dialog-actions"><button className="primary-button full" disabled={busy} onClick={()=>onRepeat(date)}><RotateCcw size={17}/>{resuming?'다시 학습 이어서':'이 단어들 다시 학습'}</button></div>}
- </DialogContent></Dialog>;
+ </>;
 }

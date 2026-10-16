@@ -1,7 +1,7 @@
 "use client";
 import {ExternalLink} from 'lucide-react';
 import type {Word} from '@/lib/learning';
-import {dictionaryUrl} from '@/lib/catalog';
+import {dictionaryUrl} from '@/lib/catalog-basics';
 import {familyMeaningNote, pronunciationFor} from '@/lib/pronunciation';
 import {Speak} from './ui';
 

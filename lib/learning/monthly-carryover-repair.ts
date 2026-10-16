@@ -33,7 +33,7 @@ export type MonthlyCarryoverRepair = {
 // round. No record with learner input, past session, score or monthly cursor is
 // rewritten. Unknown legacy evidence is deliberately left alone.
 export function repairMonthlyCarryover(
-  state: State, words: Word[], content: (id: string) => Content, date: string,
+  state: State, words: Word[], content: (id: string) => Pick<Content, 'meaning'>, date: string,
 ): MonthlyCarryoverRepair {
   const sessions = Object.values(state.sessions);
   const monthlyWaiting = new Map<string, string>();
