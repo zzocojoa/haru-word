@@ -1,8 +1,10 @@
 # 이미지 연습 20개 — 기존 Sites 반영
 
+**시범 단계 이력:** 아래 v128/v129·20개 화면·정적 파일 MIME/캐시 한계는 당시 기록이다. 이후 원격 이미지 경로의 호스팅·전체 3,809개 UI·긴 단어 편집창 수정과 PR #35 병합을 완료했다. 현재 Site v132의 범위와 복구는 [전체 UI](OXFORD_WORD_IMAGES_FULL_UI.md)와 [최종 상태](releases/2026-10-16-oxford-images-release-status.json)를 따른다. 현재 운영을 이 문서의 이전 시범 버전으로 되돌리지 않는다.
+
 2026-10-15 KST. 사용자가 기존 사이트에서 시범을 직접 확인하도록 게시를 요청했다. 최초 계획의 로컬 전용 범위를 이 후속 작업에서 확장한다. 현재 작업은 `codex/word-image-pilot-site`이며 최초 로컬 브랜치 `codex/word-image-pilot@b1a772e`는 보존한다.
 
-**최신 v129 — 뜻·품사 즉시 표시 보완 게시 성공:** 소스 `1f6c2b5266061dc95d940da0e9176b57209c0a17`, 환경 revision65를 유지한다. [기존 사이트](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에서 입력을 저장한 뒤 새로고침한다. 아래 후속 보완과 별도 출시 기록을 참조한다.
+**시범 단계 마지막 게시 v129 — 뜻·품사 즉시 표시 보완:** 소스 `1f6c2b5266061dc95d940da0e9176b57209c0a17`, 환경 revision65였다. 아래 후속 보완과 별도 출시 기록은 당시 결과다.
 
 최초 v128 소스는 `283ce3f21659501df6779bc566289c35607bb9ef`, 환경 revision65, 공개 정책 revision4다. 사이트 저장소 동기화·게시는 완료했고 GitHub main 병합은 수행하지 않았다.
 
