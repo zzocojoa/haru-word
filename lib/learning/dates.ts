@@ -1,12 +1,14 @@
 import { type Kind } from "./model.ts";
 
+const koreanDateFormatter = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Seoul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
 export function today(now = new Date()): string {
-  return new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Seoul",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(now);
+  return koreanDateFormatter.format(now);
 }
 
 export function weekStart(date: string): string {
