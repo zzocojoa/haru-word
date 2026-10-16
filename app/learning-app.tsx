@@ -15,6 +15,7 @@ import { Suspense, lazy, useCallback, useRef } from "react";
 import { useRouter } from 'next/navigation';
 import type { GrammarLeave } from './grammar/use-grammar-draft';
 import { DeferredReloadBlocked, deferredView } from './deferred-view';
+import { CompletedLessonDialog as CompletedLesson } from './completed-lesson-dialog';
 import { CandidatePreparation } from "./learning/candidate-preparation";
 import { FamiliarityAssessment } from "./learning/familiarity-assessment";
 import { LearningAside } from "./learning/learning-aside";
@@ -41,7 +42,6 @@ import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 const StudySession = deferredView(() => import('./study-session'), feature => feature.StudySession, '학습');
-const CompletedLesson = deferredView(() => import('./completed-lesson'), feature => feature.CompletedLesson, '완료 기록');
 export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean; imagePilotEnabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }

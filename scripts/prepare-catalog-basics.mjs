@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { sourceFingerprint } from './source-fingerprint.mjs';
 
 export function catalogBasics(wordsBytes, contentBytes) {
   const words = JSON.parse(wordsBytes), content = JSON.parse(contentBytes);
@@ -11,8 +11,7 @@ export function catalogBasics(wordsBytes, contentBytes) {
     return [word.id, content[word.id].meaning];
   }));
   assert.equal(Object.keys(meanings).length, words.length, 'Duplicate catalog identity');
-  const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-  return { wordsSha256: sha(wordsBytes), contentSha256: sha(contentBytes), meanings };
+  return { wordsSha256: sourceFingerprint(wordsBytes), contentSha256: sourceFingerprint(contentBytes), meanings };
 }
 
 export function prepareCatalogBasics(check = false) {

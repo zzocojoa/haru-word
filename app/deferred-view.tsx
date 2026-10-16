@@ -19,6 +19,9 @@ function ReloadMaterial({ label, blocked }: { label: string; blocked: boolean })
       const urls = staticModuleUrls(performance.getEntriesByType('resource').map(entry => entry.name), window.location.origin);
       await Promise.all(urls.map(async url => {
         const response = await fetch(url, { cache: 'reload', signal: AbortSignal.timeout(15000) });
+        // An old document may reference hashes removed by a later deployment.
+        // The fresh document, rather than another import of that URL, repairs it.
+        if (response.status === 404 || response.status === 410) return;
         if (!response.ok) throw new Error('Static material unavailable');
         await response.arrayBuffer();
       }));
