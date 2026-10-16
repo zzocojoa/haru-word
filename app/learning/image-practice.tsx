@@ -1,11 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { cardMeaning } from '@/lib/catalog-basics';
 import type { Progress, Word } from '@/lib/learning';
 import { resolveWordImage, WORD_IMAGES, type WordImage } from '@/lib/word-image';
 import { HelpDetails } from '../study-ui';
 import { WordPronunciation } from '../word-pronunciation';
 import { PartOfSpeechLabel } from '../grammar-terms';
+import { practiceNumber, resolvePracticeEntry, type ImagePracticePositionController, type PositionView } from '@/lib/image-practice-position';
 
 // Curated pilot descriptions preserve a visual clue without naming the answer.
 // Other images identify the exercise without inventing an unreviewed description.
@@ -33,7 +34,7 @@ const SCENES: Record<string, string> = {
 };
 type Card = { word: Word; image: WordImage };
 
-export function ImagePracticeContent({ words, progress }: { words: Word[]; progress: Record<string, Progress> }) {
+export function ImagePracticeContent({ words, progress, controller }: { words: Word[]; progress: Record<string, Progress>; controller: ImagePracticePositionController }) {
   // Freeze this deck until the dialog closes, as before lazy loading.
   const [deck] = useState(() => {
     const byId = new Map(words.map(word => [word.id, word]));
@@ -43,32 +44,75 @@ export function ImagePracticeContent({ words, progress }: { words: Word[]; progr
       return word && image ? [{ word, image }] : [];
     });
   });
+  const position = useSyncExternalStore(controller.subscribe, controller.getSnapshot, controller.getSnapshot);
+  useEffect(() => { controller.open(); }, [controller]);
   return <>
     <p className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개 · 성적 미기록</p>
-    {deck.length ? <PracticeCards deck={deck}/> : <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>}
+    {!deck.length ? <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>
+      : position.available ? <PracticeCards deck={deck} position={position} controller={controller}/>
+      : <PositionStatus position={position} controller={controller}/>}
   </>;
 }
 
-function PracticeCards({ deck }: { deck: Card[] }) {
-  const [index, setIndex] = useState(0);
+function PositionStatus({ position, controller, fallback = false, displayedEntryId = position.entryId }: { position: PositionView; controller: ImagePracticePositionController; fallback?: boolean; displayedEntryId?: string | null }) {
+  const status = position.status;
+  return <div className="image-practice-status">
+    <p role="status">{status === 'idle' || status === 'loading' ? '연습 위치 확인 중' : status === 'saving' ? '위치 저장 중'
+      : status === 'conflict' ? '다른 기기에서 연습 위치가 바뀌었어요.' : status === 'auth' ? '로그인을 확인한 뒤 다시 열어 주세요.'
+      : status === 'error' ? '위치 저장 실패 · 서버 확인이 필요해요.' : fallback ? '저장 위치 확인됨' : position.entryId ? '위치 저장됨' : '이동하면 위치가 저장돼요.'}</p>
+    {status === 'error' && <button type="button" className="text-button" onClick={controller.retry}>{position.available ? '다시 저장' : '다시 불러오기'}</button>}
+    {status === 'conflict' && position.remote && <div className="image-practice-choices">
+      <button type="button" className="secondary-button" onClick={controller.useRemote}>다른 기기 위치로 이동</button>
+      <button type="button" className="secondary-button" onClick={() => controller.keepCurrent(displayedEntryId)}>현재 위치 저장</button>
+    </div>}
+    {position.storageWarning && <p className="small-note">기기 내 위치 복구를 사용할 수 없어요. 창을 나가기 전에 서버 저장을 확인해 주세요.</p>}
+  </div>;
+}
+function PracticeCards({ deck, position, controller }: { deck: Card[]; position: PositionView; controller: ImagePracticePositionController }) {
+  const resolved = resolvePracticeEntry(position.entryId, WORD_IMAGES.map(entry => entry.entryId), deck.map(card => card.word.id));
+  const index = Math.max(0, deck.findIndex(card => card.word.id === resolved.entryId));
+  const [visit, setVisit] = useState(0);
+  const [jump, setJump] = useState(false);
+  const [number, setNumber] = useState('');
+  const [numberError, setNumberError] = useState(false);
+  const move = (next: number) => {
+    controller.move(deck[next].word.id); setVisit(value => value + 1); setJump(false); setNumberError(false);
+  };
   const nextUrl = deck[index + 1]?.image.url;
   useEffect(() => {
     if (nextUrl) { const next = new Image(); next.src = nextUrl; }
   }, [nextUrl]);
   return <>
-    <p className="small-note" aria-live="polite">{index + 1} / {deck.length}</p>
-    <PracticeCard key={index} card={deck[index]} last={index === deck.length - 1}
-      onNext={() => setIndex(index === deck.length - 1 ? 0 : index + 1)}/>
+    <PracticeCard key={`${deck[index].word.id}:${visit}:${position.displayVersion}`} card={deck[index]}/>
+    <div className="image-practice-controls">
+      {resolved.fallback && <p className="small-note" role="status">저장한 카드는 현재 연습에서 제외되어 다음 유효 카드 또는 첫 카드로 이동했어요. 이동 버튼을 누르면 새 위치를 저장해요.</p>}
+      <PositionStatus position={position} controller={controller} fallback={resolved.fallback} displayedEntryId={resolved.entryId}/>
+      <nav className="image-practice-navigation" aria-label="이미지 연습 카드 이동">
+        <button type="button" className="secondary-button" disabled={index === 0 || position.status === 'auth'} onClick={() => move(index - 1)}>이전</button>
+        <button type="button" className="text-button" aria-expanded={jump} aria-label={`카드 번호 ${index + 1} / ${deck.length}`} onClick={() => { setJump(!jump); setNumber(String(index + 1)); setNumberError(false); }}>{index + 1} / {deck.length}</button>
+        <button type="button" className="secondary-button" disabled={index === deck.length - 1 || position.status === 'auth'} onClick={() => move(index + 1)}>다음</button>
+      </nav>
+      {jump && <form className="image-practice-jump" onSubmit={event => {
+        event.preventDefault(); const next = practiceNumber(number, deck.length);
+        if (next === null) setNumberError(true); else move(next);
+      }}>
+        <label htmlFor="image-practice-number">카드 번호 (1–{deck.length})</label>
+        <input id="image-practice-number" type="text" inputMode="numeric" value={number} aria-invalid={numberError}
+          aria-describedby={numberError ? 'image-practice-number-error' : undefined} onChange={event => { setNumber(event.target.value); setNumberError(false); }}/>
+        <button type="submit" className="secondary-button" disabled={position.status === 'auth'}>이동</button>
+        {numberError && <p id="image-practice-number-error" role="alert">1부터 {deck.length} 사이 정수를 입력해 주세요.</p>}
+      </form>}
+    </div>
   </>;
 }
-function PracticeCard({ card, last, onNext }: { card: Card; last: boolean; onNext: () => void }) {
+function PracticeCard({ card }: { card: Card }) {
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [revealed, setRevealed] = useState(false);
   return <div className="dialog-scroll">
     {!revealed ? <>{!failed && <img className="image-practice-picture" src={card.image.url} width={card.image.width} height={card.image.height}
       alt={SCENES[card.image.entryId] || '영단어를 떠올리는 그림. 단어 확인을 누르면 뜻과 품사를 볼 수 있어요.'} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>}
-    {failed ? <><p role="alert">이미지를 불러오지 못했어요.</p><button type="button" className="secondary-button full" onClick={onNext}>건너뛰기</button></>
+    {failed ? <p role="alert">이미지를 불러오지 못했어요. 아래 이동 버튼으로 다른 카드를 볼 수 있어요.</p>
       : <>{!ready && <p role="status">이미지 불러오는 중</p>}
         <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>}</>
       : <><div className="image-practice-sense">
@@ -76,7 +120,6 @@ function PracticeCard({ card, last, onNext }: { card: Card; last: boolean; onNex
         <p className="image-practice-meaning">{card.image.baseMeaning}</p>
         <p className="small-note"><PartOfSpeechLabel pos={card.image.pos}/></p>
         </div>
-        <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>
-        <button type="button" className="primary-button full" onClick={onNext}>{last ? '처음부터' : '다음'}</button></>}
+        <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails></>}
   </div>;
 }

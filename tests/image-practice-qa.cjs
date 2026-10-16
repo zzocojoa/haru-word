@@ -236,9 +236,9 @@ async function checkLayouts(page, dialog, label) {
       for (let i = 0; i < 100 && !heldImages.has(catalog.entries[0].url); i++) await page.waitForTimeout(50);
       await heldImages.get(catalog.entries[0].url).fulfill({ status: 503, body: 'Unavailable' });
       await page.waitForTimeout(300);
-      assert.equal(await dialog.getByRole('button', { name: '건너뛰기', exact: true }).count(), 1, 'failed image can be skipped without an answer');
+      assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).count(), 1, 'failed image can be skipped using the common navigation');
       assert.equal(await dialog.locator('[lang="en"]').count(), 0);
-      await dialog.getByRole('button', { name: '건너뛰기', exact: true }).click();
+      await dialog.getByRole('button', { name: '다음', exact: true }).click();
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
       await page.evaluate(() => { window.qaOldImage.dispatchEvent(new Event('load')); delete window.qaOldImage; });
       assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true, 'old image event cannot enable a new card');
@@ -264,9 +264,12 @@ async function checkLayouts(page, dialog, label) {
       assert.equal(/apple|사과|n\.|A1/.test(markup), false, 'front DOM has no answer or word metadata');
       assert.equal(/apple|사과/.test(await page.locator('body').ariaSnapshot()), false, 'modal accessibility tree hides background answers');
       assert.equal(await dialog.locator('img').count(), 1);
+      await dialog.getByRole('button', { name: '다음', exact: true }).click();
+      assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
+      assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true);
       await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
       await dialog.waitFor({ state: 'hidden' });
-      checks.push('slow image blocks reveal, front hides answers, close remains available');
+      checks.push('slow image blocks reveal, navigation still advances, front hides answers, close remains available');
     }
     if (stage === 'back') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
@@ -319,7 +322,11 @@ async function checkLayouts(page, dialog, label) {
           await dialog.getByRole('button', { name: '다음', exact: true }).click();
         }
       }
-      await dialog.getByRole('button', { name: '처음부터', exact: true }).click();
+      assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).isDisabled(), true);
+      await dialog.getByRole('button', { name: /카드 번호/ }).click();
+      await dialog.getByLabel(/카드 번호 \(1/).fill('1');
+      await dialog.getByRole('button', { name: '이동', exact: true }).click();
+      await dialog.getByText('위치 저장됨', { exact: true }).waitFor();
       assert.equal(await dialog.locator('[lang="en"]').count(), 0);
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
       await page.keyboard.press('Escape');
