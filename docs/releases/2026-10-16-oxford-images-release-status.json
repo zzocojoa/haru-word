@@ -146,7 +146,57 @@
     "conclusion": "failure",
     "jobsStarted": false,
     "reason": "Recent account payments have failed or the spending limit needs to be increased.",
-    "url": "https://github.com/zzocojoa/haru-word/actions/runs/38736751623"
+    "url": "https://github.com/zzocojoa/haru-word/actions/runs/38736751623",
+    "followUpInvestigation": {
+      "date": "2026-10-16",
+      "pullRequest": 36,
+      "status": "included_actions_minutes_exhausted_jobs_blocked_before_runner",
+      "accountPlan": "free",
+      "usagePeriod": "2026-10",
+      "accountIncludedMonthlyMinutes": 2000,
+      "repositoryLinuxMinutes": 2000,
+      "repositoryDiscountedLinuxMinutes": 2000,
+      "reportedAccountNetActionsAmountUsd": 0,
+      "firstReportedDateAtAllowance": "2026-10-11",
+      "source": "Authenticated read-only GitHub REST account plan, repository-filtered billing usage summary, detailed usage and Actions job/timing/annotation responses.",
+      "runs": [
+        {
+          "id": 38765564763,
+          "event": "push",
+          "jobs": 2,
+          "runnerIds": [0, 0],
+          "totalSteps": 0,
+          "billableRunnerMs": 0,
+          "runAttempt": 1
+        },
+        {
+          "id": 38765572586,
+          "event": "pull_request",
+          "jobs": 2,
+          "runnerIds": [0, 0],
+          "totalSteps": 0,
+          "billableRunnerMs": 0,
+          "runAttempt": 1
+        }
+      ],
+      "ciPassed": false,
+      "limits": [
+        "The repository alone has used the account's 2,000 included monthly minutes. Account-wide usage also includes other repositories.",
+        "The additional-usage stop condition (no valid payment method, budget restriction or separate account lock) was not distinguished. A failed payment is not asserted.",
+        "Reported net Actions amount is zero; other products, invoices and account debts were not inspected. Discounted gross amounts are not amounts charged.",
+        "The reporting date is not the exact time of the first blocked job."
+      ],
+      "documentationMergeDecision": {
+        "userApproved": true,
+        "date": "2026-10-16",
+        "scope": "PR36 documentation-only merge after final local document validation; CI remains unverified.",
+        "billingSettingsChanged": false,
+        "productionChanged": false,
+        "branchProtectionOrWorkflowChanged": false,
+        "manualCiRerunRequested": false
+      },
+      "reference": "https://docs.github.com/en/billing/concepts/product-billing/github-actions"
+    }
   },
   "remaining": [
     {
