@@ -2,10 +2,8 @@
 import { DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { GRAMMAR_LESSONS, POS_LESSON, LESSON_MAP } from '@/lib/grammar/content';
+import { GRAMMAR_INDEX, POS_INDEX, LESSON_INDEX } from '@/lib/grammar/lesson-index';
 import type { LessonId } from '@/lib/grammar/model';
-import { GrammarLesson } from './grammar/grammar-lesson';
-import { GrammarCatalog } from './grammar/grammar-catalog';
 import type { GrammarFilter } from './grammar/grammar-presentation';
 import type { GrammarPersistence, GrammarLeave } from './grammar/use-grammar-draft';
 import {
@@ -23,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { cardContent } from "@/lib/catalog";
+import { cardMeaning } from "@/lib/catalog-basics";
 import {
   allSenses,
   FAMILIARITY_TEXT,
@@ -35,10 +33,17 @@ import {
 } from "@/lib/learning";
 import { ChevronLeft, ChevronRight, Plus, Search, CircleHelp, ArrowRight } from "lucide-react";
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { PersonalWord } from "./library/personal-word";
-import { WordEditor } from "./library/word-editor";
+import { deferredView } from './deferred-view';
 import { useNavigationState } from './navigation';
 import { useViewRestoration } from './use-view-restoration';
+
+const GrammarWorkspace = deferredView(() => import('./library/grammar-workspace'), feature => feature.GrammarWorkspace, '문법');
+const WordEditor = deferredView(() => import('./library/word-editor'), feature => feature.WordEditor, '단어 편집', (props, status) => <>
+  <DialogHeader><DialogTitle>{props.word.word}</DialogTitle><DialogDescription>단어 편집 자료</DialogDescription></DialogHeader>{status}
+</>);
+const PersonalWord = deferredView(() => import('./library/personal-word'), feature => feature.PersonalWord, '개인 단어', (_props, status) => <>
+  <DialogHeader><DialogTitle>나에게 필요한 단어 추가</DialogTitle><DialogDescription>개인 단어 편집 자료</DialogDescription></DialogHeader>{status}
+</>);
 type Props = {
   activityDate: () => string;
   state: State;
@@ -53,6 +58,7 @@ type LibraryProps = Props & { grammarEnabled?: boolean; grammarPracticeEnabled?:
 export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   const [view, setView] = useNavigationState('library.view', 'words'), [lessonId, setLessonId] = useNavigationState<LessonId | null>('library.lesson', null);
   const [grammarFilter, setGrammarFilter] = useState<GrammarFilter>('all');
+  const [grammarVisited, setGrammarVisited] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState(['문장 뼈대']);
   const [help, setHelp] = useNavigationState<LessonId | null>('library.help', null), [pos, setPos] = useState('all'), [page, setPage] = useState(0);
   const leave = useRef<GrammarLeave | null>(null), listPosition = useRef(0), focusReturn = useRef<HTMLElement | null>(null);
@@ -82,24 +88,25 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
   }, [view, lessonId, restoration]);
   async function switchView(next: string) {
     if (next === view || !await flush()) return;
+    if (next === 'grammar') setGrammarVisited(true);
     if (view === 'words') listPosition.current = window.scrollY;
     pendingPosition.current = next === 'words' ? listPosition.current : 0;
     setView(next);
   }
   async function openLesson(id: LessonId) {
     if (!await flush()) return;
+    setGrammarVisited(true);
     if (view === 'words') listPosition.current = window.scrollY;
     setHelp(null); setLessonId(id); setView('grammar'); pendingPosition.current = 0;
   }
-  const lesson = lessonId ? LESSON_MAP.get(lessonId) : undefined;
-  return <Tabs value={view} onValueChange={next => void switchView(next)} className="library-modes" data-lesson={view === 'grammar' && !!lesson}>
+  return <Tabs value={view} onValueChange={next => void switchView(next)} className="library-modes" data-lesson={view === 'grammar' && !!lessonId}>
     {props.grammarEnabled && <TabsList className="library-mode-tabs" aria-label="단어장 학습 종류"><TabsTrigger value="words">단어 목록</TabsTrigger><TabsTrigger value="grammar">품사·문장 연습</TabsTrigger></TabsList>}
     <TabsContent ref={listPanel} value="words" forceMount hidden={view !== 'words'} onFocusCapture={e => { if (e.currentTarget.contains(e.target)) focusReturn.current = e.target as HTMLElement; }}><WordList {...props} pos={pos} setPos={setPos} page={page} setPage={setPage} onHelp={props.grammarEnabled ? (id, button) => { focusReturn.current = button; helpReturn.current = button; setHelp(id); } : undefined} /></TabsContent>
     {props.grammarEnabled && <TabsContent value="grammar" forceMount hidden={view !== 'grammar'}>
-      {lesson ? <GrammarLesson key={lesson.id} lesson={lesson} enhanced={props.grammarPracticeEnabled || props.grammarV3Enabled || props.grammarV4Enabled} contentVersion={props.grammarV4Enabled ? 4 : props.grammarV3Enabled ? 3 : 2} activityDate={props.activityDate} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { pendingSearchFocus.current = true; focusReturn.current = null; setPos(lesson.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} /> : <GrammarCatalog date={props.activityDate()} expandedGroups={expandedGroups} onExpandedGroups={setExpandedGroups} progress={props.state.grammar ?? {}} headingRef={heading} filter={grammarFilter} onFilter={setGrammarFilter} onOpen={id => void openLesson(id)} />}
+      {(grammarVisited || view === 'grammar') && <GrammarWorkspace visible={view === 'grammar'} lessonId={lessonId} enhanced={props.grammarPracticeEnabled || props.grammarV3Enabled || props.grammarV4Enabled} contentVersion={props.grammarV4Enabled ? 4 : props.grammarV3Enabled ? 3 : 2} activityDate={props.activityDate} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { pendingSearchFocus.current = true; focusReturn.current = null; setPos(LESSON_INDEX.get(lessonId!)!.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} date={props.activityDate()} expandedGroups={expandedGroups} onExpandedGroups={setExpandedGroups} progress={props.state.grammar ?? {}} headingRef={heading} filter={grammarFilter} onFilter={setGrammarFilter} onOpen={id => void openLesson(id)} />}
     </TabsContent>}
     <Dialog navigationKey="library.help" open={!!help} onOpenChange={open => { if (!open) setHelp(null); }}><DialogContent className="framed-dialog grammar-help" onCloseAutoFocus={event => { event.preventDefault(); if (!lessonId) restoration.schedule('destination', () => helpReturn.current?.focus({ preventScroll: true })); }}>
-      {help && (() => { const l = LESSON_MAP.get(help)!; return <><DialogHeader><DialogTitle>{l.title} · {l.pos}</DialogTitle><DialogDescription>{l.role}</DialogDescription></DialogHeader><div className="dialog-scroll"><p lang="en">{l.examples[0][0]}</p><p>{l.examples[0][1]}</p><p className="small-note">학습용 작성 예문</p></div><div className="dialog-actions"><button className="primary-button" onClick={() => void openLesson(help)}>이 품사 배우기<ArrowRight size={18} /></button></div></>; })()}
+      {help && (() => { const l = LESSON_INDEX.get(help)!; return <><DialogHeader><DialogTitle>{l.title} · {l.pos}</DialogTitle><DialogDescription>{l.role}</DialogDescription></DialogHeader><div className="dialog-scroll"><p lang="en">{l.example[0]}</p><p>{l.example[1]}</p><p className="small-note">학습용 작성 예문</p></div><div className="dialog-actions"><button className="primary-button" onClick={() => void openLesson(help)}>이 품사 배우기<ArrowRight size={18} /></button></div></>; })()}
     </DialogContent></Dialog>
   </Tabs>;
 });
@@ -144,7 +151,7 @@ const WordList = memo(function WordList({
               ? !state.progress[w.id]?.familiarity
               : state.progress[w.id]?.familiarity === familiarity)) &&
           (!query ||
-            `${w.word} ${cardContent(w.id, state.progress[w.id]).meaning} ${allSenses(
+            `${w.word} ${cardMeaning(w.id, state.progress[w.id])} ${allSenses(
               state.progress[w.id],
             )
               .map((x) => x.meaning || "")
@@ -176,7 +183,7 @@ const WordList = memo(function WordList({
       <h2 className="sr-only" ref={listHeading} tabIndex={-1}>단어 찾기</h2>
       <div className="library-controls" role="region" aria-label="단어 검색과 필터">
       <div className="filters">
-        {onHelp && <Select value={pos} onValueChange={v => { setPos(v); setPage(0); }}><SelectTrigger aria-label="품사 필터"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">모든 품사</SelectItem>{GRAMMAR_LESSONS.map(l => <SelectItem value={l.pos} key={l.pos}>{l.title}</SelectItem>)}</SelectContent></Select>}
+        {onHelp && <Select value={pos} onValueChange={v => { setPos(v); setPage(0); }}><SelectTrigger aria-label="품사 필터"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">모든 품사</SelectItem>{GRAMMAR_INDEX.map(l => <SelectItem value={l.pos} key={l.pos}>{l.title}</SelectItem>)}</SelectContent></Select>}
         <div className="search-box">
           <Search size={18} />
           <input
@@ -276,10 +283,10 @@ const WordList = memo(function WordList({
                       {w.personal ? " · 개인 추가" : ""}
                     </small>
                   </button>
-                  {onHelp && POS_LESSON.has(w.pos) && <button className="pos-help-button" aria-label={`${w.word} ${POS[w.pos]} 도움말`} onClick={e => onHelp(POS_LESSON.get(w.pos)!.id, e.currentTarget)}><CircleHelp size={16} /><span className="sr-only">품사 설명</span></button>}</div>
+                  {onHelp && POS_INDEX.has(w.pos) && <button className="pos-help-button" aria-label={`${w.word} ${POS[w.pos]} 도움말`} onClick={e => onHelp(POS_INDEX.get(w.pos)!.id, e.currentTarget)}><CircleHelp size={16} /><span className="sr-only">품사 설명</span></button>}</div>
                 </TableCell>
                 <TableCell className="meaning-cell" data-label="뜻">
-                  {cardContent(w.id, p).meaning}
+                  {cardMeaning(w.id, p)}
                 </TableCell>
                 <TableCell>
                   <span className="level-badge">

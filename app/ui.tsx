@@ -2,7 +2,7 @@
 import { Volume2, ExternalLink, Pause, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { dictionaryUrl,koreanDictionaryUrl } from "@/lib/catalog";
+import { dictionaryUrl,koreanDictionaryUrl } from "@/lib/catalog-basics";
 import { LEVELS, type Level } from "@/lib/learning";
 import { speakOnDevice, type DeviceSpeechState } from "@/lib/device-speech";
 import { HelpDetails } from './study-ui';

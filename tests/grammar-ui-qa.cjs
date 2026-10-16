@@ -20,6 +20,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     const page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
     await page.goto(base); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
     await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click();
+    await page.getByRole('heading', { name: '문장 속 역할을 익혀요', exact: true }).waitFor();
     return { context, page, get };
   }
   async function layout(page, label, widths = [320, 390, 768, 1440]) {

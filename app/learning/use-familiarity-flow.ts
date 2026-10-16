@@ -1,5 +1,5 @@
 "use client";
-import { cardContent } from '@/lib/catalog';
+import { cardMeaning } from '@/lib/catalog-basics';
 import { assessmentSample, confirmFamiliarity, needsInitialAssessment, revealFamiliarity, type Familiarity, type State, type Word } from '@/lib/learning';
 import type { LearningFlowNavigation, SaveLearningState } from './types';
 import type { RefObject } from 'react';
@@ -52,7 +52,7 @@ export function useFamiliarityFlow({ state, currentState, prepareTransition, wor
           state.progress[id],
           initial,
           answer,
-          cardContent(id, state.progress[id]).meaning,
+          cardMeaning(id, state.progress[id]),
         ),
       },
     });

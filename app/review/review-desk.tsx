@@ -1,5 +1,5 @@
 "use client";
-import { cardContent } from "@/lib/catalog";
+import { cardMeaning } from "@/lib/catalog-basics";
 import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
 import {
   entryIdFor,
@@ -110,7 +110,7 @@ export function ReviewDesk({
       (["known", "ko", "sentence"] as const).map((mode) => ({
         mode,
         ids: practiceTargets(vocabulary, mode, (id) =>
-          cardContent(id, vocabulary.progress[id]),
+          ({ meaning: cardMeaning(id, vocabulary.progress[id]) }),
         ),
         session: Object.values(vocabulary.sessions).find(
           (s) =>

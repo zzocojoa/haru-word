@@ -133,6 +133,7 @@ async function checkLayouts(page, dialog, label) {
       await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
       await page.getByRole('button', { name: 'apple 명사', exact: true }).click();
+      await page.getByRole('dialog').getByLabel('함께 익힐 표현', { exact: true }).waitFor();
       assert.equal(await page.getByRole('dialog').locator('img').count(), 0);
       assert.equal(imageRequests.length, 0);
       checks.push('production editor has no image preview or image request');
@@ -188,6 +189,7 @@ async function checkLayouts(page, dialog, label) {
       await page.getByRole('button', { name: 'apple 명사', exact: true }).click();
       const dialog = page.getByRole('dialog');
       await dialog.waitFor();
+      await dialog.getByLabel('함께 익힐 표현', { exact: true }).waitFor();
       assert.equal(await dialog.locator('img').count(), 1, 'matching editor meaning has one preview');
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
       await page.waitForFunction(() => [...document.querySelectorAll('[role="dialog"] img')].every(image => image.complete && image.naturalWidth > 0));
@@ -213,6 +215,7 @@ async function checkLayouts(page, dialog, label) {
         await search.click(); await search.fill(word);
         assert.equal(await search.inputValue(), word);
         await page.getByRole('button', { name: `${word} 명사`, exact: true }).click();
+        await dialog.getByLabel('함께 익힐 표현', { exact: true }).waitFor();
         assert.equal(await dialog.locator('img').count(), 1, 'longer editor word also has a preview');
         const image = allEntries.find(e => e.word === word && e.pos === 'n.');
         assert.equal(await dialog.locator('img').getAttribute('src'), image.url);

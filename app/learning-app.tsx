@@ -14,7 +14,7 @@ import {
 import { Suspense, lazy, useCallback, useRef } from "react";
 import { useRouter } from 'next/navigation';
 import type { GrammarLeave } from './grammar/use-grammar-draft';
-import { CompletedLesson } from "./completed-lesson";
+import { DeferredReloadBlocked, deferredView } from './deferred-view';
 import { CandidatePreparation } from "./learning/candidate-preparation";
 import { FamiliarityAssessment } from "./learning/familiarity-assessment";
 import { LearningAside } from "./learning/learning-aside";
@@ -24,14 +24,13 @@ import { LearningMessage } from './learning/learning-message';
 import { SettingsDialog } from "./learning/settings-dialog";
 import { SourceDialog } from "./learning/source-dialog";
 import { TodayOverview } from "./learning/today-overview";
-import { ImagePracticeLauncher } from './learning/image-practice';
+import { ImagePracticeLauncher } from './learning/image-practice-launcher';
 import type { View } from "./learning/types";
 import { useLearningController } from "./learning/use-learning-controller";
 import { PendingReviews } from "./pending-reviews";
 import { LearningLog, ReviewDesk } from "./review-and-log";
 import { StudyDateDialog } from "./study-date-dialog";
-import { StudySession } from "./study-session";
-import { WordLibrary } from "./word-library";
+import { WordLibrary } from './word-library';
 import { useKeyboardInset } from "./use-keyboard-inset";
 import { useTabPosition } from "./use-tab-position";
 import { NavigationProvider, useNavigationGuard, useNavigationEpoch } from './navigation';
@@ -41,6 +40,8 @@ import { useTabNavigation } from './learning/use-tab-navigation';
 import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
+const StudySession = deferredView(() => import('./study-session'), feature => feature.StudySession, '학습');
+const CompletedLesson = deferredView(() => import('./completed-lesson'), feature => feature.CompletedLesson, '완료 기록');
 export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean; imagePilotEnabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
@@ -159,6 +160,7 @@ function LearningScreens({
   );
   if (store.initializing) return <StartupScreen />;
   return (
+    <DeferredReloadBlocked.Provider value={saving || unsaved || store.restoring}>
     <main
       className="shell"
       data-keyboard={keyboardOpen ? 'open' : undefined}
@@ -533,5 +535,6 @@ function LearningScreens({
       )}
       <SourceDialog open={about} onOpenChange={setAbout} />
     </main>
+    </DeferredReloadBlocked.Provider>
   );
 }
