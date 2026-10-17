@@ -4,10 +4,12 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { createHash } = require('node:crypto');
 const { base, launchBrowser, closeBrowser, accountHeaders, waitForWorker } = require('./qa/runtime.cjs');
+const { startupDiagnostics } = require('./qa/startup-diagnostics.cjs');
 const out = 'outputs/startup-render';
 // Screenshots deliberately capture pending fonts rather than awaiting font readiness.
 process.env.PW_TEST_SCREENSHOT_NO_FONTS_READY = '1';
 fs.mkdirSync(out, { recursive: true });
+const diagnosticDir = fs.mkdtempSync(`${out}/run-`);
 
 async function visibleShell(page) {
   await page.getByRole('heading', { name: '오늘의 학습', exact: true }).waitFor({ timeout: 5000 });
@@ -116,6 +118,8 @@ async function fontInteraction(browser, engine, mode, width = 390, zoom = 100) {
         const context = await browser.newContext({ viewport: { width: 440, height: 956 },
           screen: { width: 440, height: 956 }, deviceScaleFactor: 3, isMobile: true,
           hasTouch: true, extraHTTPHeaders: accountHeaders('startup_render') });
+        const diagnostic = startupDiagnostics(context, { base, engine, mode,
+          file: `${diagnosticDir}/${engine}-${mode}.json` });
         let release;
         const gate = new Promise(resolve => { release = resolve; });
         let delayed = 0;
@@ -125,15 +129,17 @@ async function fontInteraction(browser, engine, mode, width = 390, zoom = 100) {
           return route.fulfill({ contentType: 'text/css', body: ':root { --qa-font-ready: yes; }' });
         });
         if (mode === 'javascript-pending') await context.route('**/_next/static/chunks/*.js', async route => {
-          delayed++; await gate; await route.continue();
+          delayed++; diagnostic.held(route.request()); await gate; await route.continue(); diagnostic.continued(route.request());
         });
         if (mode === 'state-pending') await context.route('**/api/state**', async route => {
-          delayed++; await gate; await route.continue();
+          delayed++; diagnostic.held(route.request()); await gate; await route.continue(); diagnostic.continued(route.request());
         });
         const page = await context.newPage(), errors = [];
         page.on('pageerror', e => errors.push(e.message));
         try {
+          diagnostic.phase('navigation');
           await page.goto(base, { waitUntil: 'commit' });
+          diagnostic.phase('pending-ui');
           if (mode === 'javascript-pending' || mode === 'state-pending') {
             await page.getByRole('heading', { name: '하루단어', exact: true }).waitFor({ timeout: 5000 });
             assert.ok(await page.locator('.app-splash').isVisible());
@@ -153,15 +159,24 @@ async function fontInteraction(browser, engine, mode, width = 390, zoom = 100) {
             await page.getByRole('button', { name: 'Close', exact: true }).click();
             await page.getByRole('dialog').waitFor({ state: 'hidden' });
           }
+          diagnostic.phase('pending-screenshot');
           await page.screenshot({ path: `${out}/${engine}-${mode}.png`, timeout: 5000 });
+          diagnostic.phase('release');
           release();
+          diagnostic.phase('saved-status');
           await page.getByText('서버에 저장됨', { exact: true }).waitFor({ timeout: 10000 });
+          diagnostic.phase('settled-ui');
           assert.equal(await page.locator('.app-splash').count(), 0);
           if (!['font-pending', 'font-failed'].includes(mode)) await page.waitForFunction(() =>
             getComputedStyle(document.documentElement).getPropertyValue('--qa-font-ready').trim() === 'yes');
           assert.equal(await page.locator('link[data-web-fonts]').count(), ['font-pending', 'font-failed'].includes(mode) ? 0 : 1);
           assert.deepEqual(errors, []);
           results.push({ engine, mode, delayed, passed: true });
+          diagnostic.finish(true, errors.length);
+        } catch (error) {
+          diagnostic.finish(false, errors.length);
+          await page.screenshot({ path: `${diagnosticDir}/${engine}-${mode}-failure.png`, timeout: 2000 }).catch(() => {});
+          throw error;
         } finally { release(); await context.close(); }
       }
       // The initial HTML must also show a useful shell before any JS executes.

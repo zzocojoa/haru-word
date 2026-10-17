@@ -1,0 +1,422 @@
+{
+  "recordedAt": "2026-10-17T04:54:12.409Z",
+  "status": "original_timeout_not_reproduced_root_cause_unconfirmed",
+  "pr": "https://github.com/zzocojoa/haru-word/pull/39",
+  "sourceHeadBeforeTestOnlyChanges": "bf961ee76bc1cf70688884e1ef332818278d976a",
+  "rootCause": null,
+  "appFixApplied": false,
+  "timeoutOrRetryPolicyChanged": false,
+  "historicalFailure": {
+    "sourceCommit": "b7d4bb1d8fa56939f7d1ae05dabddffd789af523",
+    "receipt": "work/pr39-review-20261017/.qa-evidence/007/receipt.json",
+    "error": "tests/startup-render-qa.cjs:158 saved status wait timed out after 10000ms",
+    "inferredCase": "webkit/javascript-pending; inferred from page order, not a retained browser trace",
+    "workerLog": "work/pr39-review-20261017/preview.stdout.log",
+    "workerLogSha256": "8d0e27302bf7ca65c15c5756470a3eaae04ab518a683078856562285841ca2eb",
+    "pageNumber": 29,
+    "expectedJsResponses": 16,
+    "recordedJsResponses": 15,
+    "missingChunk": "/_next/static/chunks/learning-shared~index~error-boundary~link~navigation~learning-app~app-route-prefetch-policy~hy1c5f01-ZA53pQtb.js",
+    "stateResponseLogged": false,
+    "limitations": [
+      "Worker completion logs cannot exclude a request that never completed.",
+      "No original browser request trace or per-case diagnostic was retained."
+    ]
+  },
+  "reproduction": {
+    "originalFullHarness": {
+      "label": "baseline",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "tests/startup-render-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 34502,
+      "at": "2026-10-17T04:31:14.155Z",
+      "log": "work/startup-timeout-20261017/baseline.log",
+      "sha256": "2f2403603a0304d83a50ebdfb13b2f0e50a8df34667dfb667b14174c29a3f7d2"
+    },
+    "instrumentedStartup": {
+      "label": "probe-01",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/startup-timeout-20261017/startup-probe.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 11629,
+      "at": "2026-10-17T04:31:40.765Z",
+      "log": "work/startup-timeout-20261017/probe-01.log",
+      "sha256": "5faea570cef747e9c41270c856ae946dd2cf9b0ae7b3892360ffa4b091b09c4b"
+    },
+    "startupRepeatGroups": [
+      {
+        "index": "work/startup-timeout-20261017/repeat-results.json",
+        "sha256": "bf95eac565b3d8563b4d0c5306d5f43fcece72f0f3a4b8678e65da87ec8b418a",
+        "runs": 10,
+        "casesPerRun": 12,
+        "allPassed": true
+      },
+      {
+        "index": "work/startup-timeout-20261017/untraced-results.json",
+        "sha256": "6b9c04bd62fe1b8afc3367a63bb8e84569c72d8c390d14b84164c60c0368e59b",
+        "runs": 15,
+        "casesPerRun": 12,
+        "allPassed": true
+      }
+    ],
+    "jsGateStress": [
+      {
+        "label": "js-stress",
+        "command": "node",
+        "args": [
+          "work/startup-timeout-20261017/js-stress.cjs"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 100508,
+        "at": "2026-10-17T04:41:03.176Z",
+        "log": "work/startup-timeout-20261017/js-stress.log",
+        "sha256": "7de6d325b0a8b53ef969e20b303f72dfede024c04dd47aad7128ece73c4741f4",
+        "cases": 100
+      },
+      {
+        "label": "historical-js-stress",
+        "command": "node",
+        "args": [
+          "work/startup-timeout-20261017/js-stress.cjs"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 102775,
+        "at": "2026-10-17T04:49:00.182Z",
+        "log": "work/startup-timeout-20261017/historical-js-stress.log",
+        "sha256": "0d5198d8fd36033658aea7ff8aaef6703544960511d5e1595ee3dd9c954b2aab",
+        "cases": 100
+      }
+    ],
+    "rebuiltHistoricalSource": {
+      "build": {
+        "label": "historical-build-copied",
+        "command": "node",
+        "args": [
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "--prefix",
+          "work/startup-timeout-20261017/historical-source",
+          "run",
+          "build"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 98851,
+        "at": "2026-10-17T04:46:32.637Z",
+        "log": "work/startup-timeout-20261017/historical-build-copied.log",
+        "sha256": "02c87b968580ae27160193317fb8a3c992258636ff368c30e098321ce9d8d61e"
+      },
+      "commit": "b7d4bb1d8fa56939f7d1ae05dabddffd789af523",
+      "limitation": "Rebuilt source with existing pinned dependencies; chunk fingerprints differ from the old log, so this is not replay of the original binary."
+    },
+    "isolatedModuleRequests": {
+      "label": "module-repro-controlled",
+      "command": "node",
+      "args": [
+        "work/startup-timeout-20261017/module-repro.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 62116,
+      "at": "2026-10-17T04:42:56.140Z",
+      "log": "work/startup-timeout-20261017/module-repro-controlled.log",
+      "sha256": "f773be568b897ffbe7c581529be99a4e10a607ad791d0d3a92809da2a5bc53b1",
+      "cases": 200
+    },
+    "samePrecedingImageQa": {
+      "label": "preceding-image",
+      "command": "node",
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13176,
+      "at": "2026-10-17T04:36:30.020Z",
+      "log": "work/startup-timeout-20261017/preceding-image.log",
+      "sha256": "b6e33c3331b524b624d7cc6b26c3587d58177d30c7818e03221a9fe338ec0f2e"
+    },
+    "conclusion": "No spontaneous reproduction. JS delivery/initialization is a hypothesis, not a confirmed WebKit, Worker or application defect."
+  },
+  "diagnosticChange": {
+    "confirmedGap": "The old failure output lacked engine, scenario, phase and pending resource identity.",
+    "fields": [
+      "engine",
+      "mode",
+      "phase",
+      "elapsed time",
+      "request id",
+      "static JS or state/clock API pathname",
+      "held/continued/response/finished/failed",
+      "status",
+      "page error count"
+    ],
+    "privacy": "No headers, query strings, bodies, learner text or raw page errors. Loopback synthetic accounts only.",
+    "retention": "Unique run directories; last 256 events plus dropped count; failure screenshot; null passed means interrupted/incomplete.",
+    "injectedFailure": {
+      "before": {
+        "label": "diagnostic-fault-before",
+        "command": "node",
+        "args": [
+          "work/startup-timeout-20261017/fault-before.cjs"
+        ],
+        "exitCode": 1,
+        "timedOut": false,
+        "durationMs": 11073,
+        "at": "2026-10-17T04:45:22.894Z",
+        "log": "work/startup-timeout-20261017/diagnostic-fault-before.log",
+        "sha256": "97111bddd3dd5c6fc596633faa3164c804943fc317a59bcef0dc3deea03870d7"
+      },
+      "after": {
+        "label": "diagnostic-fault-final",
+        "command": "node",
+        "args": [
+          "work/startup-timeout-20261017/fault-after.cjs"
+        ],
+        "exitCode": 1,
+        "timedOut": false,
+        "durationMs": 10966,
+        "at": "2026-10-17T04:52:44.739Z",
+        "log": "work/startup-timeout-20261017/diagnostic-fault-final.log",
+        "sha256": "d16ba249e10ebeb40cac19a5908d49441417ede78d3b542dac454869724c125b"
+      },
+      "verification": {
+        "label": "diagnostic-fault-verified",
+        "command": "node",
+        "args": [
+          "work/startup-timeout-20261017/verify-fault.mjs"
+        ],
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 89,
+        "at": "2026-10-17T04:52:44.915Z",
+        "log": "work/startup-timeout-20261017/diagnostic-fault-verified.log",
+        "sha256": "ba6a9241c46a3eb77b6fb946f3ffc04e1cb08197b864f6b1eb4939b6f25afda6"
+      },
+      "result": {
+        "diagnosticFailureRegression": true,
+        "timeoutStill10000ms": true,
+        "failedCaseRetained": true,
+        "heldChunkIdentified": true,
+        "noStateRequest": true,
+        "screenshotRetained": true,
+        "diagnostic": "work/startup-timeout-20261017/fault-after-output/run-BPArF3/webkit-javascript-pending.json",
+        "notHistoricalRootCauseProof": true
+      },
+      "interpretation": "Deliberately withholding a required JS chunk verifies diagnostic retention only; it does not prove the original root cause."
+    }
+  },
+  "finalChecks": {
+    "node22Tests": 660,
+    "node24Tests": 660,
+    "initialChecks": [
+      {
+        "command": "npm run test",
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 15062,
+        "log": "work/startup-timeout-20261017/test.log",
+        "sha256": "189b91cb9a1cc840eadd72536ee2b7e95ef7c1f27a7defd8a428519285025570"
+      },
+      {
+        "command": "npm run typecheck",
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 5661,
+        "log": "work/startup-timeout-20261017/typecheck.log",
+        "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+      },
+      {
+        "command": "npm run lint",
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 18741,
+        "log": "work/startup-timeout-20261017/lint.log",
+        "sha256": "f43a365a745deebd6e500c0de84cda6fd68aa2da938c859e41ef3d388ede881b"
+      },
+      {
+        "command": "npm run check:grammar-review",
+        "exitCode": 0,
+        "timedOut": false,
+        "durationMs": 541,
+        "log": "work/startup-timeout-20261017/check-grammar-review.log",
+        "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 1,
+        "timedOut": false,
+        "durationMs": 3430,
+        "log": "work/startup-timeout-20261017/build.log",
+        "sha256": "dc23bcf9a1be3dd2482d6e92c277ba37c1c9682583efccb9a09992b152a63ff5"
+      }
+    ],
+    "node24": {
+      "label": "test-node24",
+      "command": "C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+      "args": [
+        "--experimental-strip-types",
+        "--test",
+        "tests/*.test.mjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 12741,
+      "at": "2026-10-17T04:50:53.595Z",
+      "log": "work/startup-timeout-20261017/test-node24.log",
+      "sha256": "44597c7e608039d49a3eb267e0ac6435223272b4a62b460d83440c9bfb2ef24a"
+    },
+    "successfulBuild": {
+      "label": "build-after-preview-stop",
+      "command": "node",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 17499,
+      "at": "2026-10-17T04:50:40.773Z",
+      "log": "work/startup-timeout-20261017/build-after-preview-stop.log",
+      "sha256": "de4f8c98c301e60a3862a385516ababf7164f915f3a59961ccabcac74592fb20"
+    },
+    "startup": {
+      "label": "final-startup",
+      "command": "node",
+      "args": [
+        "tests/startup-render-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 32099,
+      "at": "2026-10-17T04:52:25.815Z",
+      "log": "work/startup-timeout-20261017/final-startup.log",
+      "sha256": "74b76ccf9897facd84e9e68b1533fd08a71e6f26b7270b45aadd29d54dfd29c2",
+      "cases": 26
+    },
+    "lifecycle": {
+      "label": "final-lifecycle",
+      "command": "node",
+      "args": [
+        "tests/startup-lifecycle-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 7678,
+      "at": "2026-10-17T04:52:33.569Z",
+      "log": "work/startup-timeout-20261017/final-lifecycle.log",
+      "sha256": "3e06af719d5c3bdb44d92c88d3468715b17848ea9024564ac31c95759e0cdd6f",
+      "cases": 9
+    },
+    "warnings": [
+      "15 existing ESLint warnings; no lint errors.",
+      "Existing large chunk and punycode deprecation build warnings."
+    ],
+    "buildRetryReason": "First build hit EBUSY on dist/client while this run owned a live preview. After stopping that preview, unchanged source built successfully."
+  },
+  "investigationSetupFailures": [
+    {
+      "record": {
+        "label": "module-repro",
+        "command": "node",
+        "args": [
+          "work/startup-timeout-20261017/module-repro.cjs"
+        ],
+        "exitCode": 1,
+        "timedOut": false,
+        "durationMs": 30714,
+        "at": "2026-10-17T04:41:38.247Z",
+        "log": "work/startup-timeout-20261017/module-repro.log",
+        "sha256": "e595a7634a1012f04a19f2840677c77fa8a2ec8ef4599c5187c03664c2b19d18"
+      },
+      "reason": "Minimal probe initially omitted the screenshot no-font-readiness setting already present in the real harness; screenshot timed out before JS release. Corrected probe passed 200 cases; unrelated to the historical saved-status timeout."
+    },
+    {
+      "record": {
+        "label": "historical-build",
+        "command": "node",
+        "args": [
+          "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+          "--prefix",
+          "work/startup-timeout-20261017/historical-source",
+          "run",
+          "build"
+        ],
+        "exitCode": 1,
+        "timedOut": false,
+        "durationMs": 1096,
+        "at": "2026-10-17T04:43:19.086Z",
+        "log": "work/startup-timeout-20261017/historical-build.log",
+        "sha256": "e110856b3aa122b292f3b4af91269671735350150ab6e2b3e500016f7424a7ee"
+      },
+      "reason": "Dependency guard rejected a shared node_modules junction; copied dependencies into the isolated source and rebuilt successfully without bypassing the guard."
+    }
+  ],
+  "files": [
+    {
+      "file": "tests/startup-render-qa.cjs",
+      "sha256": "6cf1bd3366a640e3cc9124478f0a23e40eeb3a510da2774fcbaf07f3c7acb8a8"
+    },
+    {
+      "file": "tests/qa/startup-diagnostics.cjs",
+      "sha256": "7339d96e20562f8b1f75e6e2230f4bb7ccf72ebaed3205dbfa6d4d18c320aeb9"
+    },
+    {
+      "file": "tests/startup-diagnostics.test.mjs",
+      "sha256": "76a94689fd004977d76978f589b0aeb8709ea9e649765bb3f8337bc78bdde01c"
+    },
+    {
+      "file": "STARTUP_RENDERING.md",
+      "sha256": "7b434dabd83c5c0043c2181283717740f54a3b0c92c44683726f34f36bb1f794"
+    }
+  ],
+  "review": {
+    "scope": "Current test/diagnostic/documentation diff reviewed locally for failure preservation, cleanup, bounded logs and sensitive data exclusion.",
+    "independentReviewThisIncrement": false
+  },
+  "boundaries": {
+    "productionChanges": false,
+    "merged": false,
+    "deployed": false,
+    "billingOrSettingsChanged": false,
+    "githubFreeRetained": true,
+    "dependenciesChanged": false,
+    "databaseMigrationChanged": false,
+    "actualIphoneChecked": false
+  },
+  "cleanup": {
+    "ownedPreviewProcessesRemaining": 0,
+    "records": [
+      {
+        "variant": "after",
+        "at": "2026-10-17T04:50:23.1738251Z",
+        "remaining": []
+      },
+      {
+        "variant": "before",
+        "at": "2026-10-17T04:49:39.9821837Z",
+        "remaining": []
+      },
+      {
+        "variant": "after",
+        "at": "2026-10-17T04:53:30.7599484Z",
+        "remaining": []
+      }
+    ],
+    "syntheticDatabasesAndIgnoredLogsRetained": true
+  },
+  "remaining": [
+    "Original one-off startup timeout root cause is unconfirmed; an actual recurrence with browser and Worker evidence is needed.",
+    "GitHub CI remains subject to the separately confirmed account quota; inspect the latest head run in PR39.",
+    "Physical iPhone and VoiceOver are unverified."
+  ]
+}
