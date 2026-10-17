@@ -1,0 +1,849 @@
+{
+  "dateKST": "2026-10-17",
+  "status": "review_verified_pre_commit_snapshot",
+  "branch": "codex/image-practice-resume-navigation",
+  "base": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
+  "review": {
+    "unresolvedDefects": 0,
+    "fixed": [
+      {
+        "severity": "P2",
+        "confidence": 10,
+        "problem": "Current conflict choice saved excluded original card instead of displayed fallback.",
+        "fix": "Pass displayed entryId, preserve revision recheck and subsequent navigation.",
+        "regressionBefore": {
+          "exitCode": 1,
+          "log": "work/image-practice-resume/pr-review/fallback-before.log"
+        },
+        "regressionAfter": {
+          "exitCode": 0,
+          "tests": 17,
+          "log": "work/image-practice-resume/pr-review/fallback-after.log"
+        }
+      }
+    ],
+    "sources": [
+      "parent checklist",
+      "same-host adversarial subagent"
+    ],
+    "outsideClaude": "not installed",
+    "planChecklistItems": 8
+  },
+  "checks": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 14537,
+      "log": "work/image-practice-resume/pr-review/test.log",
+      "logSha256": "e5d0b952ec524e83959ca276482a938baedb6109285fd80bdd6e024a8e82a28a"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 8961,
+      "log": "work/image-practice-resume/pr-review/typecheck.log",
+      "logSha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 49575,
+      "log": "work/image-practice-resume/pr-review/lint.log",
+      "logSha256": "151c70692cb8522f9efd015fa322c1cb252f25598f4b636a1ac4aaf38ef83c1f"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 28374,
+      "log": "work/image-practice-resume/pr-review/build.log",
+      "logSha256": "64151370ab513d24dd27ccd19e8b78bdf79e1b9ed2d16e23d044b48b9468e64c"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 549,
+      "log": "work/image-practice-resume/pr-review/check-grammar-review.log",
+      "logSha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "command": "Node 24: node --experimental-strip-types --test tests/*.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 17384,
+      "log": "work/image-practice-resume/pr-review/test-node24.log",
+      "logSha256": "1af6f199fbfdf7094ad4ea610ffaed19094213d250a6c5373e53049fbad497cc"
+    }
+  ],
+  "unitTestsPerNode": 648,
+  "browser": [
+    {
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 12424,
+      "logPath": "work/image-practice-resume/pr-review/resume-chromium-0.log",
+      "logSha256": "19603bf98f4cda95033edbc669a43d1cf8edfbe83fe984b935ff978cd3d9dfad"
+    },
+    {
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 22367,
+      "logPath": "work/image-practice-resume/pr-review/resume-webkit-0.log",
+      "logSha256": "3cef62a9c6437b665160293dd402c2556c610bf74fad139399e425afd49d7bca"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 29047,
+      "logPath": "work/image-practice-resume/pr-review/regression-chromium-0.log",
+      "logSha256": "bc71bbe2c3ed0d909b28a930f40873fb6b96869b87626703a13e0a0573d9ace7"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 4562,
+      "logPath": "work/image-practice-resume/pr-review/regression-chromium-1.log",
+      "logSha256": "ca68f7fe116984713ef3c184571a29cfbef8a19addde6d20c59af371c39d2269"
+    },
+    {
+      "args": [
+        "tests/word-image-study-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 7488,
+      "logPath": "work/image-practice-resume/pr-review/regression-chromium-2.log",
+      "logSha256": "4db9514920403a1af1d48acf18f2313015d222db065dd94cc8f4ace615c16753"
+    },
+    {
+      "args": [
+        "tests/lazy-materials-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 4501,
+      "logPath": "work/image-practice-resume/pr-review/regression-chromium-3.log",
+      "logSha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42"
+    },
+    {
+      "args": [
+        "tests/editor-save-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 10915,
+      "logPath": "work/image-practice-resume/pr-review/regression-chromium-4.log",
+      "logSha256": "31ea36752ceb8a11477827bd5ca835566100aa784b89a6faa1956db475d955fb"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 40817,
+      "logPath": "work/image-practice-resume/pr-review/regression-webkit-0.log",
+      "logSha256": "65bfdec2968b50dab73e6bf3ee2c7f6ffa2c252f98db5cda05de2dea1f0e4a22"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 8542,
+      "logPath": "work/image-practice-resume/pr-review/regression-webkit-1.log",
+      "logSha256": "34fbf029dff4ee82ce08fbd71cfe21243fce9ab25726027b869910a52c46425a"
+    },
+    {
+      "args": [
+        "tests/word-image-study-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 12386,
+      "logPath": "work/image-practice-resume/pr-review/regression-webkit-2.log",
+      "logSha256": "8822066143ede2e9a1a7410b3e327fdf21b8490cc1961c16d5f827bf95fd94cd"
+    },
+    {
+      "args": [
+        "tests/lazy-materials-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 6780,
+      "logPath": "work/image-practice-resume/pr-review/regression-webkit-3.log",
+      "logSha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42"
+    },
+    {
+      "args": [
+        "tests/editor-save-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 46768,
+      "logPath": "work/image-practice-resume/pr-review/regression-webkit-4.log",
+      "logSha256": "31ea36752ceb8a11477827bd5ca835566100aa784b89a6faa1956db475d955fb"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "front"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 1791,
+      "logPath": "work/image-practice-resume/pr-review/front-chromium-0.log",
+      "logSha256": "bbda9aa840f14cf6ea9d3bd34d6c7d0f5967bc30ba8e53fef2f1f0f4f44c018f"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "front"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 2022,
+      "logPath": "work/image-practice-resume/pr-review/front-webkit-0.log",
+      "logSha256": "946644bd096aac5ec16135bb0c3697d7ebd6fb53f7bad22f6d4b272930c73cca"
+    }
+  ],
+  "performance": {
+    "method": {
+      "repetitions": 3,
+      "histories": [
+        0,
+        365,
+        1825
+      ],
+      "viewport": "390x844",
+      "cpuSlowdown": 4,
+      "networks": {
+        "normal": {
+          "offline": false,
+          "latency": 0,
+          "downloadThroughput": -1,
+          "uploadThroughput": -1
+        },
+        "slow": {
+          "offline": false,
+          "latency": 150,
+          "downloadThroughput": 500000,
+          "uploadThroughput": 125000
+        }
+      },
+      "ready": "navigationStart to saved screen plus two animation frames",
+      "cache": "new context each sample; Worker warm",
+      "images": "same reviewed local WebP fixture, current and one next image; external fonts blocked",
+      "actualIphoneChecked": false
+    },
+    "samples": [
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 1528,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 1156,
+        "initialJsRequests": 16,
+        "initialBytes": 446979,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 1323,
+        "initialJsRequests": 16,
+        "initialBytes": 446979,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 1161,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 1175,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 1249,
+        "initialJsRequests": 16,
+        "initialBytes": 446979,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2266,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2317,
+        "initialJsRequests": 16,
+        "initialBytes": 446979,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2543,
+        "initialJsRequests": 16,
+        "initialBytes": 446979,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2259,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2280,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2342,
+        "initialJsRequests": 16,
+        "initialBytes": 446979,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 1868,
+        "initialJsRequests": 15,
+        "initialBytes": 612614,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 1617,
+        "initialJsRequests": 16,
+        "initialBytes": 614808,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 1516,
+        "initialJsRequests": 16,
+        "initialBytes": 614808,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 1530,
+        "initialJsRequests": 15,
+        "initialBytes": 612614,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 1468,
+        "initialJsRequests": 15,
+        "initialBytes": 612614,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 1450,
+        "initialJsRequests": 16,
+        "initialBytes": 614808,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2828,
+        "initialJsRequests": 15,
+        "initialBytes": 612614,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2914,
+        "initialJsRequests": 16,
+        "initialBytes": 614808,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2875,
+        "initialJsRequests": 16,
+        "initialBytes": 614808,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2868,
+        "initialJsRequests": 15,
+        "initialBytes": 612614,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2784,
+        "initialJsRequests": 15,
+        "initialBytes": 612614,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2848,
+        "initialJsRequests": 16,
+        "initialBytes": 614808,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2239,
+        "initialJsRequests": 15,
+        "initialBytes": 1255627,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2673,
+        "initialJsRequests": 16,
+        "initialBytes": 1257821,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2375,
+        "initialJsRequests": 16,
+        "initialBytes": 1257821,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2383,
+        "initialJsRequests": 15,
+        "initialBytes": 1255627,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2259,
+        "initialJsRequests": 15,
+        "initialBytes": 1255627,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2183,
+        "initialJsRequests": 16,
+        "initialBytes": 1257821,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 5149,
+        "initialJsRequests": 15,
+        "initialBytes": 1255627,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 5149,
+        "initialJsRequests": 16,
+        "initialBytes": 1257821,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 4889,
+        "initialJsRequests": 16,
+        "initialBytes": 1257821,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 4897,
+        "initialJsRequests": 15,
+        "initialBytes": 1255627,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 4936,
+        "initialJsRequests": 15,
+        "initialBytes": 1255627,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 4950,
+        "initialJsRequests": 16,
+        "initialBytes": 1257821,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      }
+    ],
+    "errors": [],
+    "passed": true,
+    "unchangedStateAndRevision": true
+  },
+  "build": {
+    "files": 387,
+    "sha256": "08ca7b22c0ce8c5fa254fc86c719c9aa6a287231c6520a9557cb9b58855d007e"
+  },
+  "sourceFingerprints": [
+    {
+      "file": "app/api/image-practice/position/route.ts",
+      "sha256": "a1e15b839149ad5fb5ba2039fd7854b90e515ae906b4660c648357bbf7d4ca84"
+    },
+    {
+      "file": "app/learning-app.tsx",
+      "sha256": "fade73996db0f10a5e0b7a51f6bd27dc46148681a8afe8b0bbd6cf42be51246e"
+    },
+    {
+      "file": "app/learning/image-practice-launcher.tsx",
+      "sha256": "a228996375d1927c3bc2114d964fb307b441b11fb04aebfeddd01c7fcff6b201"
+    },
+    {
+      "file": "app/learning/image-practice.tsx",
+      "sha256": "87d9ebf090ca63b05b71eca60961afabc0d03a777d9ae3b0f770c8e58b22b21b"
+    },
+    {
+      "file": "app/learning/use-image-practice-position.ts",
+      "sha256": "67f61dbd66e2fac37fc541104b3fa9772906fc029f7c7f40295d3570b3a02d17"
+    },
+    {
+      "file": "app/page.tsx",
+      "sha256": "11ee8f987161c5be028ec916561301544e832fde356cbdbf09bfc89ff31dabc8"
+    },
+    {
+      "file": "app/study-design.css",
+      "sha256": "291a8925dca69f0bb99504d5274997a7a5b4cb8bf0123636da09352fba949181"
+    },
+    {
+      "file": "db/image-practice-position.ts",
+      "sha256": "d51db3f2b83cce06bd0c24ea96911d30ccf8709086b86638c32905e29c3197e0"
+    },
+    {
+      "file": "db/schema.ts",
+      "sha256": "13abf3724a325aca5b93712212584a546e116c0c92a3d82e7ac2fffa1d4d7d8b"
+    },
+    {
+      "file": "drizzle/0005_flippant_enchantress.sql",
+      "sha256": "117932ce867cd8f60d97e776213bee290faecc12a816e8331032a437208b3936"
+    },
+    {
+      "file": "drizzle/meta/0005_snapshot.json",
+      "sha256": "19b8828ed65ef2fcb5c8f1d135f955f8690b7b84045284b592e297b7da60a80b"
+    },
+    {
+      "file": "drizzle/meta/_journal.json",
+      "sha256": "4f6a60f00cf1a73818373dab3d0b1d334513fae584060cd84a57bae82252fbfb"
+    },
+    {
+      "file": "lib/image-practice-position.ts",
+      "sha256": "828caf9bac86a9747ae8fbe7b784272904ce80bfa894b8dbbc64007713be2b0d"
+    },
+    {
+      "file": "tests/image-practice-performance-qa.cjs",
+      "sha256": "05cfdd9b643d1d570c5475679db4e24686cc2a25d45e878c93c8e8b64cefb3fc"
+    },
+    {
+      "file": "tests/image-practice-position-api.test.mjs",
+      "sha256": "dca24febe509d9360b0318140105192e6b74266124d6f08c251d7e611de5fce3"
+    },
+    {
+      "file": "tests/image-practice-position.test.mjs",
+      "sha256": "ab02db9417fca3e13d41b97f8833a03634d77aaf7162db66edf279cafd24d3ca"
+    },
+    {
+      "file": "tests/image-practice-qa.cjs",
+      "sha256": "fe2c8fa736aac29a50d48e808ccc66260d70863f3af9801524e53090f3c3a20b"
+    },
+    {
+      "file": "tests/image-practice-resume-qa.cjs",
+      "sha256": "c41b8c3291f3909e9c1b021b2a344fc31c59a179aeb1851a178faa9855537d35"
+    }
+  ],
+  "preservation": {
+    "primaryChanges": 20,
+    "primaryDiskHashesUnchanged": true,
+    "oldMigrationFiles": 10,
+    "oldJournalEntries": 5,
+    "siteBindingsDependenciesLearningApiAndBackupUnchanged": true
+  },
+  "operations": {
+    "phase": "pre-commit review evidence; GitHub PR carries commit/push status",
+    "risk": "medium",
+    "migration": "0005 adds image_practice_positions only; applied to fresh local synthetic DBs only",
+    "rollback": "Restore prior app while retaining position table and data",
+    "merged": false,
+    "deployed": false
+  },
+  "limitations": [
+    "Actual iPhone and VoiceOver not tested",
+    "No production account, DB or AI verification",
+    "Remote GitHub CI status must be read separately after push",
+    "Local Wrangler connection reuse after 401 remains an observed baseline issue",
+    "No cold Worker or production network performance claim",
+    "Full browser registry not run"
+  ]
+}

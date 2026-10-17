@@ -26,6 +26,7 @@ import { SettingsDialog } from "./learning/settings-dialog";
 import { SourceDialog } from "./learning/source-dialog";
 import { TodayOverview } from "./learning/today-overview";
 import { ImagePracticeLauncher } from './learning/image-practice-launcher';
+import { useImagePracticePosition } from './learning/use-image-practice-position';
 import type { View } from "./learning/types";
 import { useLearningController } from "./learning/use-learning-controller";
 import { PendingReviews } from "./pending-reviews";
@@ -42,10 +43,11 @@ import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 const StudySession = deferredView(() => import('./study-session'), feature => feature.StudySession, '학습');
-export default function LearningApp(props: { initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean; imagePilotEnabled?: boolean }) {
+export default function LearningApp(props: { userId?: string | null; initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean; imagePilotEnabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
 function LearningScreens({
+  userId = null,
   initialServerTime,
   grammarEnabled = false,
   grammarPracticeEnabled = false,
@@ -54,6 +56,7 @@ function LearningScreens({
   cardStudioEnabled = false,
   imagePilotEnabled = false,
 }: {
+  userId?: string | null;
   initialServerTime: number;
   grammarEnabled?: boolean;
   grammarPracticeEnabled?: boolean;
@@ -133,6 +136,7 @@ function LearningScreens({
     registerLeave,
     flushStudy,
   } = useLearningController(initialServerTime);
+  const imagePosition = useImagePracticePosition(signedIn ? userId : null);
   useNavigationEpoch(store.epoch);
   const keyboardOpen = useKeyboardInset();
   const visitTab = useTabPosition(tab, store.epoch, setTab);
@@ -350,7 +354,7 @@ function LearningScreens({
                 ) : (
                   <>
                     <TodayOverview
-                      imagePractice={imagePilotEnabled && tab === 'today' ? <ImagePracticeLauncher words={words} progress={state.progress}/> : undefined}
+                      imagePractice={imagePilotEnabled && tab === 'today' ? <ImagePracticeLauncher words={words} progress={state.progress} controller={imagePosition}/> : undefined}
                       date={date}
                       state={state}
                       changeLevel={changeLevel}

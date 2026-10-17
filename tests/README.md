@@ -1,5 +1,12 @@
 # 학습 앱 검증
 
+- `image-practice-position-api.test.mjs` / `image-practice-position.test.mjs`: 독립 위치 API의 무쓰기 GET·인증·계정·출처·1KB 스트림 제한·동시 revision 충돌과 클라이언트의 직렬 저장·최신 대기 위치·응답 유실·시간 초과·충돌 선택·계정 전환·손상/차단 캐시를 검사한다. 같은 중간 카드를 다른 탭/기기가 저장한 경우의 재시도·재개, 최종 위치 동일 시 GET만으로 복구, 원격 선택 전/후의 다른 탭 초안 순서와 선택 실패·취소도 포함한다.
+- `image-practice-resume-qa.cjs`: 별도 로컬 D1 가상 계정에서 닫기·탭·새로고침·별도 브라우저 이어 보기, 번호/경계/이미지 실패, 두 기기 충돌, 실패·시간 초과·응답 유실 후 조회 우선 재시도, 제외/빈 카드·계정 전환과 학습 문서/revision/백업 불변을 확인한다. Chromium/WebKit·320/390/1440px·100/200%·키보드·axe와 현재 번호 live region·이동 버튼 초점 유지·외곽선 잘림 방지를 포함한다. 실제 스크린리더 발화는 별도 확인 대상이다.
+- 같은 브라우저 두 탭에서 원격 선택 GET을 보류하고 다른 탭이 C→B→C로 이동하는 회귀도 위 두 위치 검사에 포함한다. 최신 C 미저장 캐시 유지, 새로고침 후 C에서 충돌 선택, 자동 PUT 0건을 확인한다. unit 검사는 식별자 없는 기존 version 1 캐시, 식별자 있는 캐시의 조회/영수증 유지, 손상된 식별자도 확인한다.
+- 위치 요청 동시성은 원래 연습 페이지의 `request`부터 `requestfinished`/`requestfailed`까지 추적한다. 다른 탭의 독립 요청이나 API fixture 요청은 합산하지 않는다. `route.continue()` 반환과 응답 헤더 도착은 요청 완료가 아니다. `maxConcurrentPositionRequests`와 `pendingPositionRequestsAtEnd`는 이 범위의 최대·종료 시 미완료 요청 수다.
+- `node tests/request-concurrency-qa.cjs`는 자체 루프백 서버에서 응답 본문 2개를 실제 보류해 최대 동시 요청 2를 검증한다. 응답 헤더 후 유지, 첫 완료 후 1·503 본문 완료 후 0, 취소 후 0, 다른 페이지 제외와 감시 해제도 확인한다. 앱 Worker·D1·외부 서비스는 필요 없으며 설치된 `QA_PLAYWRIGHT_PATH`를 사용한다. `QA_BROWSER=webkit`으로 반복하고 기능 QA 등록부에도 포함한다. 결과는 `outputs/request-concurrency/<engine>/report.json`이다.
+- `image-practice-performance-qa.cjs`: `QA_BASELINE_URL`/`QA_BASELINE_DIST`와 `QA_BASE_URL`의 별도 루프백 Worker를 같은 0/365/1,825회차 자료·CPU 4배·기본/느린망·3표본으로 비교한다. 첫 저장 화면까지 시간·초기 JS/바이트·위치/이미지 요청 0과 진입 후 그림 두 장을 확인한다. 다른 브라우저 검사를 동시에 실행하지 않는다.
+
 - `material-line-endings.test.mjs`는 두 자료 생성기에 LF/CRLF 원문과 실제 Git `core.autocrlf=false/true` 체크아웃을 제공한다. 정규화 지문·LF 생성물·빌드 검사 통과와 원문 변경 감지/실패 시 출력 보존을 확인한다. 원문 지문은 CRLF만 LF로 정규화하며 생성 JSON은 `.gitattributes`의 LF 정책을 따른다.
 - `pr38-lazy-recovery-qa.cjs`는 완료 기록의 지연/실패/재시도 모달과 닫힌 뒤 늦은 응답을 검사한다. 오래된 문서의 실제 import 주소를 로컬에서 바꿔 404/410 복구, 이탈 취소, 지속 503의 재로딩 차단과 전체 기록/revision 불변도 확인한다. `node tests/pr38-lazy-recovery-qa.cjs all`로 실행하며 `completed` 또는 `obsolete`로 범위를 선택한다. `QA_BROWSER=webkit`을 지원하고 공통 `QA_BASE_URL`·`QA_PLAYWRIGHT_PATH`·`AXE_CORE_PATH`를 사용한다. 320/390/1440px·100/200% 글자·키보드·axe를 포함한다. `QA_FIX_DIST`는 비교 빌드, `QA_FIX_OUTPUT`은 증거 폴더를 지정할 때만 사용한다. 운영/실제 AI 호출은 없다.
 - `catalog-basics.test.mjs`는 교재 3,809개 기본 뜻과 생성 원본 지문, 사용자 수정/빈 뜻·개인 단어, 초기 의존성에서 전체 예문·이미지 목록 제외를 검사한다. `lazy-materials-qa.cjs`는 로컬 가상 계정으로 첫 화면의 자료 미요청, 모듈 실패·재시도, 편집 자료/탭 상태, 이미지 로딩 중 닫기·재접속과 전체 기록·revision 불변을 Chromium/WebKit에서 검사한다. `node scripts/prepare-catalog-basics.mjs`로 기본 뜻 목록을 만들고 빌드가 `--check`로 원본 일치를 확인한다.
@@ -19,6 +26,8 @@
 - `request-body.test.mjs` / `request-body-qa.cjs`: 저장·AI·전체/분할 복원 6개 경로의 스트림 조기 취소, UTF-8·문자/바이트 경계·허위 Content-Length·인증 선행·중단·원본 보존을 검사합니다. 로컬 Worker는 EOF 이전 413을 확인하고, 브라우저는 실제 거절 안내·입력 유지·정상 재시도·재접속과 320/390/1440px를 확인합니다. `QA_BROWSER=webkit`을 지원합니다. 운영 데이터나 실제 AI를 사용하지 않습니다.
 
 - `state-roundtrip.test.mjs` / `state-roundtrip-qa.cjs`: 사용자 뜻 키의 안전한 저장·조회·전체/분할 복원과 계정 누적 5,000단어·10,000회차·UTF-8 20 MB 경계, 구형 복원의 문법 보존 합산, 동시 저장 및 원본 불변성을 검사합니다. 브라우저는 단어 편집·검증된 백업·실제 복원·한도 안내와 320/390/1440px·axe를 확인하며 `QA_BROWSER=webkit`도 지원합니다.
+- 상태 왕복 검사는 세 가상 계정과 새로고침 모두 외부 폰트 CSS를 빈 로컬 응답으로 고정합니다. 한글 폰트 조각이 클릭 도중 적용되어 행이 이동하는 타이밍을 저장/복원 검사에서 분리하고, 폰트 파일 요청이 생기면 실패합니다. 기존 `node tests/state-roundtrip-qa.cjs` 명령을 그대로 사용합니다. 폰트 지연/실패 중 앱 조작은 `node tests/startup-render-qa.cjs`로 양 엔진에서 별도 확인합니다. 시스템 폰트 결과를 운영 웹폰트의 배치·실기기 검사로 해석하지 않습니다.
+- `startup-render-qa.cjs --fonts-only`는 앱이 요청한 실제 Google CSS/WOFF2로 부분 폰트 로딩 중 클릭, 첫 클릭/Enter 도중 CSS 도착, 정상 로딩을 양 엔진에서 검사합니다. 320/390/1440px·200% 글자를 포함하며 일반 실행에도 포함됩니다. 최초 실행에는 Google Fonts 접근이 필요하고, 고정 Safari UA로 받은 원문을 Git 제외 `outputs/startup-render/font-assets/`에 캐시합니다. 응답·부분 폰트가 없으면 실패하며 대체 CSS로 통과시키지 않습니다. `font-assets.json`은 사용한 URL/응답 SHA를 기록합니다. 브라우저 캐시가 따뜻한 실제 iPhone 검사와는 별개입니다.
 
 - `study-recovery-qa.cjs`: 저장 중 다음 카드 입력 → 다른 기기의 실제 revision 충돌 → 현재 입력 백업 → 실제 복원 → 이어 하기·재접속을 검사합니다. 문장·보완점·학습 뜻과 명시적 빈 값, 기존 성적·진행 위치 보존을 확인하며 `QA_BROWSER=webkit`도 지원합니다. 로컬 가상 계정만 사용합니다.
 
@@ -120,7 +129,7 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - `response-contract-qa.cjs`: 서버가 저장했지만 성공 본문의 revision이 누락된 경우를 주입한다. 초안과 미저장 상태, 백업·명시적 재조회, 자동 재전송 없음을 확인한다.
 - `learning-commands.test.mjs`: 단어장 수정·기억 깨우기·중단 초안의 불변성과 성적 보존을 검사한다. `learning-api.test.mjs`와 `state-api.test.mjs`는 잘못된 응답과 회차 내부 오류의 저장 거부를 확인한다.
 - 공통 `tests/qa/runtime.cjs`는 Playwright·axe 경로와 loopback 주소, 충돌 없는 가상 계정을 제공한다. 특정 PC 사용자 경로는 소스에 넣지 않는다. `QA_PLAYWRIGHT_PATH`에는 설치된 Playwright 모듈 디렉터리를 지정하며, 생략 시 일반 모듈 해석을 사용한다. `AXE_CORE_PATH` 기본값은 `work/axe/package/axe.min.js`, `QA_BASE_URL` 기본값은 `http://127.0.0.1:8787`이다.
-- 빌드한 로컬 Worker를 시작한 뒤 `npm run test:browser`로 기능 검사를 순서대로 실행한다. A1~B2 콘텐츠 시나리오가 모두 포함된다. `npm run test:performance`는 초기 로딩·장기 기록·문법 입력·백업 자원의 성능 네 검사를 단독 실행한다. `node tests/qa/run.cjs functional --list`로 실행 목록을 확인할 수 있다.
+- 빌드한 로컬 Worker를 시작한 뒤 `npm run test:browser`로 기능 검사를 순서대로 실행한다. A1~B2 콘텐츠와 이미지 위치 재개 시나리오가 포함된다. `npm run test:performance`는 초기 로딩·장기 기록·문법 입력·백업 자원·이미지 위치 변경의 성능 다섯 검사를 단독 실행한다. 이미지 비교를 위해 `QA_BASELINE_URL`/`QA_BASELINE_DIST`에 기준 빌드의 별도 루프백 Worker와 빌드 폴더를 지정한다. 이미지 기능 검사는 플래그를 활성화하고 `QA_WORD_IMAGE_ASSET_ROOT`에 검토한 전체 WebP 폴더를 지정한다. `node tests/qa/run.cjs functional --list`와 `node tests/qa/run.cjs performance --list`로 실행 목록을 확인할 수 있다. `qa-runner.test.mjs`는 실제 두 목록 명령의 성공과 기능/성능 분류를 검사한다.
 - 문법 버전별 전체 흐름은 해당 생성 플래그로 시작한 별도 로컬 Worker에서 직접 실행한다. v2는 v3/v4 false, v3는 v3 true/v4 false, v4는 v3/v4 true다. v4 호환 검사에서는 `QA_NEW_GRAMMAR_VERSION=3`(v4 false)과4(v4 true)를 각각 사용한다. 등록부는 전체 검사 목록이며 서로 다른 플래그를 요구하는 문법 사례를 하나의 Worker 설정으로 전부 통과했다고 보고하지 않는다.
 - 실행 도구는 각 검사 전에 로컬 서버 응답 본문까지 확인한다. 재접속 회귀 검사는 브라우저 초점을 먼저 확보하고 이어가기 요청의 실제 저장 응답을 기다린다. 이전 저장 상태 표시나 검사 자동 재시도로 실패를 숨기지 않는다.
 - 결과와 검사별 로그는 `outputs/browser-suite/<group>-<run>/`에 모인다. 실패·시간 초과·미완료는 전체 성공으로 처리하지 않는다. 각 브라우저 스크립트의 직접 실행도 유지한다. 실제 사용자 계정이나 운영 URL을 환경변수로 넣지 않는다.

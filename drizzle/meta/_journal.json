@@ -36,6 +36,13 @@
       "when": 1791029207259,
       "tag": "0004_card_automation_nonces",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1792164557815,
+      "tag": "0005_flippant_enchantress",
+      "breakpoints": true
     }
   ]
 }

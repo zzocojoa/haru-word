@@ -1,0 +1,877 @@
+{
+  "dateKST": "2026-10-17",
+  "status": "local_verified_uncommitted_unpublished",
+  "branch": "codex/image-practice-resume-navigation",
+  "base": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
+  "toolchain": {
+    "node22": "22.22.2",
+    "node24": "24.19.0",
+    "operatingSystem": "Windows"
+  },
+  "checks": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "durationSeconds": 13.83,
+      "log": "work\\image-practice-resume\\final-test.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "durationSeconds": 6.69,
+      "log": "work\\image-practice-resume\\final-typecheck.log"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "durationSeconds": 16.1,
+      "log": "work\\image-practice-resume\\final-lint.log"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "durationSeconds": 18.34,
+      "log": "work\\image-practice-resume\\final-build.log"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0,
+      "durationSeconds": 0.68,
+      "log": "work\\image-practice-resume\\final-check-grammar-review.log"
+    },
+    {
+      "command": "Node 24: node --experimental-strip-types --test tests/*.test.mjs",
+      "exitCode": 0,
+      "tests": 647,
+      "log": "work/image-practice-resume/final-test-node24.log"
+    },
+    {
+      "command": "npm run lint (after final browser test update)",
+      "exitCode": 0,
+      "errors": 0,
+      "existingWarnings": 15,
+      "log": "work/image-practice-resume/final-lint-after-qa.log"
+    }
+  ],
+  "unitTestsPerNode": 647,
+  "browser": [
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 27031,
+      "logPath": "work/image-practice-resume/regression-chromium-0.log",
+      "logSha256": "90e40776d164cc1b170cf356b57fdf6eba92c1fdebeb5a7dcddff5506b671ae2"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 5932,
+      "logPath": "work/image-practice-resume/regression-chromium-1.log",
+      "logSha256": "ca68f7fe116984713ef3c184571a29cfbef8a19addde6d20c59af371c39d2269"
+    },
+    {
+      "args": [
+        "tests/word-image-study-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 10183,
+      "logPath": "work/image-practice-resume/regression-chromium-2.log",
+      "logSha256": "4db9514920403a1af1d48acf18f2313015d222db065dd94cc8f4ace615c16753"
+    },
+    {
+      "args": [
+        "tests/lazy-materials-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 5483,
+      "logPath": "work/image-practice-resume/regression-chromium-3.log",
+      "logSha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42"
+    },
+    {
+      "args": [
+        "tests/editor-save-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 11554,
+      "logPath": "work/image-practice-resume/regression-chromium-4.log",
+      "logSha256": "31ea36752ceb8a11477827bd5ca835566100aa784b89a6faa1956db475d955fb"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 40651,
+      "logPath": "work/image-practice-resume/regression-webkit-0.log",
+      "logSha256": "cf2e77692040a37c88519b1650705db60785289619977cdbb9bba4b66aa2de71"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 8644,
+      "logPath": "work/image-practice-resume/regression-webkit-1.log",
+      "logSha256": "34fbf029dff4ee82ce08fbd71cfe21243fce9ab25726027b869910a52c46425a"
+    },
+    {
+      "args": [
+        "tests/word-image-study-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 12380,
+      "logPath": "work/image-practice-resume/regression-webkit-2.log",
+      "logSha256": "8822066143ede2e9a1a7410b3e327fdf21b8490cc1961c16d5f827bf95fd94cd"
+    },
+    {
+      "args": [
+        "tests/lazy-materials-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 6780,
+      "logPath": "work/image-practice-resume/regression-webkit-3.log",
+      "logSha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42"
+    },
+    {
+      "args": [
+        "tests/editor-save-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 16077,
+      "logPath": "work/image-practice-resume/regression-webkit-4.log",
+      "logSha256": "31ea36752ceb8a11477827bd5ca835566100aa784b89a6faa1956db475d955fb"
+    },
+    {
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 9600,
+      "logPath": "work/image-practice-resume/resume-chromium-0.log",
+      "logSha256": "9f6998c6d94c134ab9bd87182829abca0cfaff481ef8f2007f19c49bc22895e6"
+    },
+    {
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 20544,
+      "logPath": "work/image-practice-resume/resume-webkit-0.log",
+      "logSha256": "4e94b882e57f9beaa365edfba04f2e32170b898a6e9bbc4718365c0d767fbede"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "front"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 1761,
+      "logPath": "work/image-practice-resume/front-chromium-0.log",
+      "logSha256": "bbda9aa840f14cf6ea9d3bd34d6c7d0f5967bc30ba8e53fef2f1f0f4f44c018f"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "front"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 2040,
+      "logPath": "work/image-practice-resume/front-webkit-0.log",
+      "logSha256": "946644bd096aac5ec16135bb0c3697d7ebd6fb53f7bad22f6d4b272930c73cca"
+    }
+  ],
+  "performanceCommand": {
+    "command": "node tests/image-practice-performance-qa.cjs",
+    "exitCode": 0
+  },
+  "performance": {
+    "method": {
+      "repetitions": 3,
+      "histories": [
+        0,
+        365,
+        1825
+      ],
+      "viewport": "390x844",
+      "cpuSlowdown": 4,
+      "networks": {
+        "normal": {
+          "offline": false,
+          "latency": 0,
+          "downloadThroughput": -1,
+          "uploadThroughput": -1
+        },
+        "slow": {
+          "offline": false,
+          "latency": 150,
+          "downloadThroughput": 500000,
+          "uploadThroughput": 125000
+        }
+      },
+      "ready": "navigationStart to saved screen plus two animation frames",
+      "cache": "new context each sample; Worker warm",
+      "images": "same reviewed local WebP fixture, current and one next image; external fonts blocked",
+      "actualIphoneChecked": false
+    },
+    "samples": [
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 1300,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 1484,
+        "initialJsRequests": 16,
+        "initialBytes": 446967,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 1242,
+        "initialJsRequests": 16,
+        "initialBytes": 446967,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 1229,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 1250,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 1209,
+        "initialJsRequests": 16,
+        "initialBytes": 446967,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2366,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2323,
+        "initialJsRequests": 16,
+        "initialBytes": 446967,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2300,
+        "initialJsRequests": 16,
+        "initialBytes": 446967,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2291,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2358,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2390,
+        "initialJsRequests": 16,
+        "initialBytes": 446967,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 1492,
+        "initialJsRequests": 15,
+        "initialBytes": 613441,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 1532,
+        "initialJsRequests": 16,
+        "initialBytes": 615623,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 1481,
+        "initialJsRequests": 16,
+        "initialBytes": 615623,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 1603,
+        "initialJsRequests": 15,
+        "initialBytes": 613441,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 1632,
+        "initialJsRequests": 15,
+        "initialBytes": 613441,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 1457,
+        "initialJsRequests": 16,
+        "initialBytes": 615623,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2913,
+        "initialJsRequests": 15,
+        "initialBytes": 613441,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2948,
+        "initialJsRequests": 16,
+        "initialBytes": 615623,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2921,
+        "initialJsRequests": 16,
+        "initialBytes": 615623,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2930,
+        "initialJsRequests": 15,
+        "initialBytes": 613441,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2976,
+        "initialJsRequests": 15,
+        "initialBytes": 613441,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2954,
+        "initialJsRequests": 16,
+        "initialBytes": 615623,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2338,
+        "initialJsRequests": 15,
+        "initialBytes": 1257928,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2356,
+        "initialJsRequests": 16,
+        "initialBytes": 1260110,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2444,
+        "initialJsRequests": 16,
+        "initialBytes": 1260110,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2373,
+        "initialJsRequests": 15,
+        "initialBytes": 1257928,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2332,
+        "initialJsRequests": 15,
+        "initialBytes": 1257928,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2370,
+        "initialJsRequests": 16,
+        "initialBytes": 1260110,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 5006,
+        "initialJsRequests": 15,
+        "initialBytes": 1257928,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 5005,
+        "initialJsRequests": 16,
+        "initialBytes": 1260110,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 5079,
+        "initialJsRequests": 16,
+        "initialBytes": 1260110,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 4993,
+        "initialJsRequests": 15,
+        "initialBytes": 1257928,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 4949,
+        "initialJsRequests": 15,
+        "initialBytes": 1257928,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 4994,
+        "initialJsRequests": 16,
+        "initialBytes": 1260110,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      }
+    ],
+    "errors": [],
+    "passed": true,
+    "unchangedStateAndRevision": true
+  },
+  "builds": {
+    "current": {
+      "fileCount": 387,
+      "sha256": "b5f4e99ea9280fdb72090df201e75aee6ce301c715e3235270213d96fdfe9f3e"
+    },
+    "testedCopy": {
+      "fileCount": 387,
+      "sha256": "b5f4e99ea9280fdb72090df201e75aee6ce301c715e3235270213d96fdfe9f3e"
+    },
+    "baseline": {
+      "fileCount": 379,
+      "sha256": "435da5395dc6445aaf20e08acf582b81bd7ceadac948d6c682593318bb8a14a0"
+    }
+  },
+  "preservation": {
+    "primaryChanges": 20,
+    "primaryDiskHashesUnchanged": true,
+    "oldMigrationFiles": 10,
+    "oldJournalEntries": 5,
+    "siteBindingsDependenciesLearningApiAndBackupUnchanged": true
+  },
+  "sourceFingerprints": [
+    {
+      "file": "app/api/image-practice/position/route.ts",
+      "sha256": "a1e15b839149ad5fb5ba2039fd7854b90e515ae906b4660c648357bbf7d4ca84"
+    },
+    {
+      "file": "app/learning-app.tsx",
+      "sha256": "fade73996db0f10a5e0b7a51f6bd27dc46148681a8afe8b0bbd6cf42be51246e"
+    },
+    {
+      "file": "app/learning/image-practice-launcher.tsx",
+      "sha256": "a228996375d1927c3bc2114d964fb307b441b11fb04aebfeddd01c7fcff6b201"
+    },
+    {
+      "file": "app/learning/image-practice.tsx",
+      "sha256": "3c7a48cfef1d2e06ef05148e35bee83a7bfe32d008cb57926ec400f2f1cf36b2"
+    },
+    {
+      "file": "app/learning/use-image-practice-position.ts",
+      "sha256": "67f61dbd66e2fac37fc541104b3fa9772906fc029f7c7f40295d3570b3a02d17"
+    },
+    {
+      "file": "app/page.tsx",
+      "sha256": "11ee8f987161c5be028ec916561301544e832fde356cbdbf09bfc89ff31dabc8"
+    },
+    {
+      "file": "app/study-design.css",
+      "sha256": "291a8925dca69f0bb99504d5274997a7a5b4cb8bf0123636da09352fba949181"
+    },
+    {
+      "file": "db/image-practice-position.ts",
+      "sha256": "d51db3f2b83cce06bd0c24ea96911d30ccf8709086b86638c32905e29c3197e0"
+    },
+    {
+      "file": "db/schema.ts",
+      "sha256": "13abf3724a325aca5b93712212584a546e116c0c92a3d82e7ac2fffa1d4d7d8b"
+    },
+    {
+      "file": "drizzle/0005_flippant_enchantress.sql",
+      "sha256": "117932ce867cd8f60d97e776213bee290faecc12a816e8331032a437208b3936"
+    },
+    {
+      "file": "drizzle/meta/0005_snapshot.json",
+      "sha256": "19b8828ed65ef2fcb5c8f1d135f955f8690b7b84045284b592e297b7da60a80b"
+    },
+    {
+      "file": "drizzle/meta/_journal.json",
+      "sha256": "4f6a60f00cf1a73818373dab3d0b1d334513fae584060cd84a57bae82252fbfb"
+    },
+    {
+      "file": "lib/image-practice-position.ts",
+      "sha256": "84ff9e362716e6801eabf0d323e667e32058e2a52d3146451edb6908bf26f11f"
+    },
+    {
+      "file": "tests/image-practice-performance-qa.cjs",
+      "sha256": "05cfdd9b643d1d570c5475679db4e24686cc2a25d45e878c93c8e8b64cefb3fc"
+    },
+    {
+      "file": "tests/image-practice-position-api.test.mjs",
+      "sha256": "dca24febe509d9360b0318140105192e6b74266124d6f08c251d7e611de5fce3"
+    },
+    {
+      "file": "tests/image-practice-position.test.mjs",
+      "sha256": "16d42a135d57a10cfb0bc45075aa1b47e50e52575bd955d7538a98ecc29d47bc"
+    },
+    {
+      "file": "tests/image-practice-qa.cjs",
+      "sha256": "fe2c8fa736aac29a50d48e808ccc66260d70863f3af9801524e53090f3c3a20b"
+    },
+    {
+      "file": "tests/image-practice-resume-qa.cjs",
+      "sha256": "36faa7930a0674f50b33edb39e33c5bfff9bffafaaef9d4090fd4ac9a5a154f7"
+    }
+  ],
+  "observedFailures": [
+    {
+      "code": "preview_build_file_lock",
+      "exitCode": 1,
+      "resolution": "Stopped owned preview, rebuilt, used a frozen build copy for QA."
+    },
+    {
+      "code": "ambiguous_pronunciation_summary",
+      "exitCode": 1,
+      "resolution": "Matched the exact pronunciation summary; final browser suites passed."
+    },
+    {
+      "code": "stale_read_after_409_retried_put",
+      "exitCode": 1,
+      "resolution": "Explicit conflict check and persisted needsChoice; focused before/after proof and full final checks passed."
+    },
+    {
+      "code": "local_401_unread_body_connection_timeout",
+      "resolved": false,
+      "baselineReproduced": true,
+      "sequence": [
+        "GET 200",
+        "PUT 401",
+        "following GET timeout"
+      ],
+      "scope": "Local Wrangler, also baseline /api/state. Account isolation and stale-owner rejection tested separately; runtime cause and hosted behavior unverified."
+    },
+    {
+      "code": "git_lf_vs_disk_crlf_audit",
+      "exitCode": 1,
+      "resolution": "Compared Git-clean-filtered blobs and prior schema objects; primary worktree retains raw disk SHA comparison."
+    }
+  ],
+  "limitations": [
+    "No actual iPhone or VoiceOver",
+    "No production account/DB or production AI",
+    "No remote CI run or current CI-block status verification",
+    "Local 401 connection reuse issue remains",
+    "Cold Worker, production HTTP/2/network and external font/image latency not measured",
+    "Full browser registry not run"
+  ],
+  "operations": {
+    "risk": "medium",
+    "migration": "0005_flippant_enchantress.sql adds image_practice_positions only",
+    "migrationAppliedTo": "fresh isolated local synthetic DBs only",
+    "rollback": "Restore previous app; retain new position table and data",
+    "accountOrCursorLogsAdded": false,
+    "committed": false,
+    "pushed": false,
+    "pullRequestCreated": false,
+    "deployed": false
+  },
+  "teardown": {
+    "ownedPreviewsStopped": true,
+    "evidenceAndSyntheticDbRetained": true
+  }
+}

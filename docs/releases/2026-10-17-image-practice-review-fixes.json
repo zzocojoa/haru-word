@@ -1,0 +1,322 @@
+{
+  "recordedAt": "2026-10-17T03:53:34.765Z",
+  "baseHead": "b7d4bb1d8fa56939f7d1ae05dabddffd789af523",
+  "scope": "User-approved four review fixes; local synthetic validation; no merge/deploy/billing/settings changes",
+  "sources": [
+    {
+      "file": "lib/image-practice-position.ts",
+      "sha256": "0001ff3a4d13bc13be51ca1f09d403f4060b81b7037a02c425dee01b654e5c1f"
+    },
+    {
+      "file": "app/learning/image-practice.tsx",
+      "sha256": "4b34142de1cbf5f996a313932d5ffb0d140cd54750fecd82632ddc15dbc79f53"
+    },
+    {
+      "file": "app/study-design.css",
+      "sha256": "5dd1a6cfcadb6177d63db19a437eb63087a315b87b232a0c78077fb520e50a94"
+    },
+    {
+      "file": "tests/image-practice-position.test.mjs",
+      "sha256": "57f733e3291fad8d028ccb115f4f1122d9293084d7fa75833d6dfd293bd10488"
+    },
+    {
+      "file": "tests/image-practice-resume-qa.cjs",
+      "sha256": "defb6f0258f82ad97d1da22573892ef645613085e50feaec6739dbc98910661f"
+    },
+    {
+      "file": "tests/startup-render-qa.cjs",
+      "sha256": "d54494f911721e30f5fdbeae92248bf56eb51ee0c1ff42f807ffb33ff895e173"
+    },
+    {
+      "file": "app/web-fonts.tsx",
+      "sha256": "f0128f1a6ed725dc7d41cb74d9a408ecc42a69c66c09fd94f2d3d8f36ff1cbc6"
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13514,
+      "log": "work/pr39-review-fixes-20261017/test.log",
+      "sha256": "3181c7836fa8193b9c06a80b81ae8057f1b79c49db49026ab90a719d952f958f"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 6195,
+      "log": "work/pr39-review-fixes-20261017/typecheck.log",
+      "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 15864,
+      "log": "work/pr39-review-fixes-20261017/lint.log",
+      "sha256": "f43a365a745deebd6e500c0de84cda6fd68aa2da938c859e41ef3d388ede881b"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 622,
+      "log": "work/pr39-review-fixes-20261017/check-grammar-review.log",
+      "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "command": "Node 24: node --experimental-strip-types --test tests/*.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13956,
+      "log": "work/pr39-review-fixes-20261017/test-node24.log",
+      "sha256": "4cd16d416b4f0a85f1e508fce86bdd05b10c6582f12ee568cdbe5f75af09a9b2"
+    },
+    {
+      "label": "build",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 18030,
+      "at": "2026-10-17T03:46:17.348Z",
+      "log": "work/pr39-review-fixes-20261017/build.log",
+      "sha256": "e78a427f009d6dff02d727a4c1f5221dfcdc1e574b970bc21aa5a97bfd3096f3"
+    }
+  ],
+  "browserCommands": [
+    {
+      "id": "001",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "chromium",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:48:15.080Z",
+      "completedAt": "2026-10-17T03:48:28.254Z",
+      "stdoutSha256": "b6e33c3331b524b624d7cc6b26c3587d58177d30c7818e03221a9fe338ec0f2e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/001"
+    },
+    {
+      "id": "002",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "webkit",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:48:41.041Z",
+      "completedAt": "2026-10-17T03:49:07.874Z",
+      "stdoutSha256": "f3c86db9947eab73da0deef31bcb5ce9f451fc47cc0989bc5c02e2a019209470",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/002"
+    },
+    {
+      "id": "003",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/startup-render-qa.cjs"
+      ],
+      "engine": "webkit+chromium",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:49:18.650Z",
+      "completedAt": "2026-10-17T03:49:51.870Z",
+      "stdoutSha256": "2f2403603a0304d83a50ebdfb13b2f0e50a8df34667dfb667b14174c29a3f7d2",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/003"
+    },
+    {
+      "id": "004",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "chromium",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:49:58.160Z",
+      "completedAt": "2026-10-17T03:50:25.614Z",
+      "stdoutSha256": "bd946a1124814a023caad5f0e8b3af7daabf29423f64dd81fe2b0e2e833c620b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/004"
+    },
+    {
+      "id": "005",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "webkit",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:50:43.722Z",
+      "completedAt": "2026-10-17T03:51:26.417Z",
+      "stdoutSha256": "3efd22d223e496ce6bec8b60c83aad9ec0241ccddded06f7dc785967aecf9fe7",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/005"
+    },
+    {
+      "id": "006",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/state-roundtrip-qa.cjs"
+      ],
+      "engine": "chromium",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:51:52.971Z",
+      "completedAt": "2026-10-17T03:52:00.421Z",
+      "stdoutSha256": "644338e8ed86c0dab030f703d55f58df8d07151166a43c450dda78ac5758eefc",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/006"
+    },
+    {
+      "id": "007",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/state-roundtrip-qa.cjs"
+      ],
+      "engine": "webkit",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:52:10.346Z",
+      "completedAt": "2026-10-17T03:52:20.978Z",
+      "stdoutSha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/007"
+    },
+    {
+      "id": "008",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "chromium",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:52:26.440Z",
+      "completedAt": "2026-10-17T03:52:31.270Z",
+      "stdoutSha256": "ca68f7fe116984713ef3c184571a29cfbef8a19addde6d20c59af371c39d2269",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/008"
+    },
+    {
+      "id": "009",
+      "command": [
+        "C:/Program Files/nodejs/node.exe",
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "webkit",
+      "exitCode": 0,
+      "startedAt": "2026-10-17T03:52:39.267Z",
+      "completedAt": "2026-10-17T03:52:48.363Z",
+      "stdoutSha256": "34fbf029dff4ee82ce08fbd71cfe21243fce9ab25726027b869910a52c46425a",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence": "work/pr39-review-fixes-20261017/qa/.qa-evidence/009"
+    }
+  ],
+  "regressions": {
+    "unitBefore": {
+      "log": "work/pr39-review-fixes-20261017/unit-before.log",
+      "sha256": "994904b9fbf6cf79e3292cf13bb25dab748430599e50b8c5e0daa391ba0f0550",
+      "exitCode": 1,
+      "passed": 21,
+      "failed": 4
+    },
+    "unitAfter": {
+      "label": "unit-after",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "--experimental-strip-types",
+        "--test",
+        "tests/image-practice-position.test.mjs",
+        "tests/image-practice-position-api.test.mjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 525,
+      "at": "2026-10-17T03:45:34.124Z",
+      "log": "work/pr39-review-fixes-20261017/unit-after.log",
+      "sha256": "9a56dfeab2f5b352ce572d248f8530f4b098ab6b8d03400e175fcc7a03b245c7",
+      "passed": 25,
+      "failed": 0
+    },
+    "uiBefore": {
+      "label": "browser-before-keyboard",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 8876,
+      "at": "2026-10-17T03:45:02.237Z",
+      "log": "work/pr39-review-fixes-20261017/browser-before-keyboard.log",
+      "sha256": "52d2b675e2a11a808e45eeff1aebd3b8a4a11c1bece8bba07b7e244cf77252db"
+    },
+    "sqliteAfter": {
+      "label": "retry-contract-after",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-review-fixes-20261017/retry-repro.mjs",
+        "--assert-contract"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 250,
+      "at": "2026-10-17T03:46:40.402Z",
+      "log": "work/pr39-review-fixes-20261017/retry-contract-after.log",
+      "sha256": "d091ba1963837101ef8bd02e61f01e38acef0a39dd22d283e06dacd22a05ed4e"
+    },
+    "remoteChoiceAfter": {
+      "label": "remote-choice-after",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-review-20261017/remote-choice-repro.mjs",
+        "--assert-contract"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 360,
+      "at": "2026-10-17T03:45:34.975Z",
+      "log": "work/pr39-review-fixes-20261017/remote-choice-after.log",
+      "sha256": "9a7ac15c2cd52a598be7baa808f5134ae4b99eed24c2008b385273ad9e967d58"
+    }
+  },
+  "outcomes": {
+    "node22Passed": 657,
+    "node24Passed": 657,
+    "lintErrors": 0,
+    "existingLintWarnings": 15,
+    "browserCommandsPassed": 9,
+    "startupCases": 26,
+    "realFontCases": 14,
+    "originalStartupCases": 12,
+    "primaryChangesPreserved": 20
+  },
+  "compatibility": "API, DB, revision, cache v1, backup and dependency contracts unchanged. Additional queued movement after a lost receipt requires explicit conflict choice. Explicit remote selection replaces earlier cache drafts, preserving changes after GET begins.",
+  "rollback": "Revert this follow-up commit; keep the existing position table and data. No new migration or production observation changes.",
+  "limits": [
+    "Physical iPhone/VoiceOver speech not tested.",
+    "Previous review startup-render line158 timeout remains historically unexplained; exact replay then and final current-build run passed.",
+    "Full performance matrix and entire browser registry not rerun; historical evidence is separate.",
+    "GitHub Actions Free quota blocker is not a local test failure; remote CI must be read after push.",
+    "Review outside provider unavailable due to selected skill/harness mismatch; native in-host review is separate."
+  ],
+  "historicalFailureArtifacts": [
+    "work/pr39-review-20261017/.qa-evidence/007",
+    "work/pr39-review-20261017/.qa-evidence/008"
+  ],
+  "helperCorrections": [
+    "Before browser regression first missed keyboard modality after pointer jump. Corrected before product fix, still failed on both actual UI defects.",
+    "Original SQLite probe always asserted buggy output before its --assert-contract. Unmodified post-fix replay demonstrated safe GET-only/conflict but exited1; equivalent same-interleaving contract probe exits0.",
+    "First evidence capture could not create absent root; no probe executed. Root created, capture001 executed successfully.",
+    "Primary preservation verifier initially tried to read an intentionally deleted pre-existing asset; corrected verifier checks its continued absence."
+  ]
+}

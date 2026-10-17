@@ -1,0 +1,985 @@
+{
+  "verifiedAt": "2026-10-17T02:15:01.773Z",
+  "baseCommit": "3e0ce91068bd8283ddfbef04d939d34e0aa050c4",
+  "scope": "Actual app font interaction fix for PR #39; no merge or deployment",
+  "environment": {
+    "node22": "22.22.2",
+    "node24": "24.19.0",
+    "platform": "Windows",
+    "engines": [
+      "Playwright WebKit",
+      "Playwright Chromium"
+    ],
+    "accounts": "synthetic local D1",
+    "physicalIphone": false
+  },
+  "reproduction": {
+    "unchangedRuntime": "b37b27a/3e0ce91 app, retained built Worker",
+    "method": "Real provider font CSS and WOFF2 replay, staged responses only; no DOM event handlers changed",
+    "runs": [
+      {
+        "i": 0,
+        "before": {
+          "x": 33,
+          "y": 541.671875,
+          "width": 244.796875,
+          "height": 44.09375
+        },
+        "after": {
+          "x": 33,
+          "y": 511.28125,
+          "width": 246.71875,
+          "height": 44.09375
+        },
+        "point": {
+          "x": 155.3984375,
+          "y": 563.71875
+        },
+        "clicks": [
+          {
+            "tag": "TR"
+          }
+        ],
+        "timeout": true,
+        "dialogCount": 0
+      },
+      {
+        "i": 1,
+        "before": {
+          "x": 33,
+          "y": 541.671875,
+          "width": 244.796875,
+          "height": 44.09375
+        },
+        "after": {
+          "x": 33,
+          "y": 511.28125,
+          "width": 246.71875,
+          "height": 44.09375
+        },
+        "point": {
+          "x": 155.3984375,
+          "y": 563.71875
+        },
+        "clicks": [
+          {
+            "tag": "TR"
+          }
+        ],
+        "timeout": true,
+        "dialogCount": 0
+      },
+      {
+        "i": 2,
+        "before": {
+          "x": 33,
+          "y": 541.671875,
+          "width": 244.796875,
+          "height": 44.09375
+        },
+        "after": {
+          "x": 33,
+          "y": 511.28125,
+          "width": 246.71875,
+          "height": 44.09375
+        },
+        "point": {
+          "x": 155.3984375,
+          "y": 563.71875
+        },
+        "clicks": [
+          {
+            "tag": "TR"
+          }
+        ],
+        "timeout": true,
+        "dialogCount": 0
+      }
+    ]
+  },
+  "hypothesisRefinement": {
+    "optionalAlone": "Original subset race passed 3/3, but CSS arriving during a pressed pointer still missed 1/3. Added first-interaction cancellation of pending CSS.",
+    "evidence": "work/app-font-interaction/probe-after-css-late.json"
+  },
+  "fix": [
+    "Keep DM Sans/Noto Sans KR and existing weights, request display=optional to prevent late font-file swaps.",
+    "If pointerdown or keydown precedes stylesheet load, remove it and retain fallback for that page; no retry or input interception.",
+    "Loaded stylesheet stops observing input; failed stylesheet and effect cleanup remove the owned link/listeners."
+  ],
+  "regression": {
+    "negative": {
+      "command": "node tests/startup-render-qa.cjs --fonts-only against previous app",
+      "exitCode": 1,
+      "expected": "Dialog fails to open while delayed font subsets finish during a real click",
+      "log": "work/app-font-interaction/negative-real-fonts.log",
+      "sha256": "d5f120e239669cb33d25a641005b19782546ca0964be1d6a860728286f2f6089"
+    },
+    "final": {
+      "realFontInteractionCases": 42,
+      "originalStartupCases": 12,
+      "engines": 2,
+      "widths": [
+        320,
+        390,
+        1440
+      ],
+      "textScalePercent": [
+        100,
+        200
+      ],
+      "modes": [
+        "partial real fonts during pointer press",
+        "CSS arriving during first pointer press",
+        "CSS arriving during Enter",
+        "normal loaded fonts"
+      ],
+      "results": [
+        {
+          "engine": "webkit",
+          "mode": "font-pending",
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "font-failed",
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "javascript-pending",
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "state-pending",
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "no-javascript",
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "startup-metadata-four-screens",
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 320,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 1440,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 200,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "stylesheet-pointer",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "stylesheet-keyboard",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "ready",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 42,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "font-pending",
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "font-failed",
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "javascript-pending",
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "state-pending",
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "no-javascript",
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "startup-metadata-four-screens",
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 320,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 1440,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 200,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "stylesheet-pointer",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "stylesheet-keyboard",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "ready",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 320,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 1440,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 200,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "stylesheet-pointer",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "stylesheet-keyboard",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "ready",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 42,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 320,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 1440,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 200,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "stylesheet-pointer",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "stylesheet-keyboard",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "ready",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 320,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 1440,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 200,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "stylesheet-pointer",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "stylesheet-keyboard",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "webkit",
+          "mode": "ready",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 42,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 320,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 1440,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "subsets",
+          "width": 390,
+          "zoom": 200,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "stylesheet-pointer",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "stylesheet-keyboard",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 0,
+          "pointerPeriodVerticalDelta": 0,
+          "passed": true
+        },
+        {
+          "engine": "chromium",
+          "mode": "ready",
+          "width": 390,
+          "zoom": 100,
+          "display": "optional",
+          "served": 47,
+          "pointerPeriodVerticalDelta": 1,
+          "passed": true
+        }
+      ]
+    },
+    "noFontMocking": "Actual Google responses cached by URL and fixed Safari UA. CSS display is checked against the URL requested by the app; body not rewritten. State-roundtrip QA keeps its previous font isolation and is a separate check."
+  },
+  "checks": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 14070,
+      "log": "work/app-font-interaction/test.log",
+      "sha256": "eb4273925999f1c8ad01082fb0291c0a076e72f08846c90f0e1bbdc6473d32f5"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 6106,
+      "log": "work/app-font-interaction/typecheck.log",
+      "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 46245,
+      "log": "work/app-font-interaction/lint.log",
+      "sha256": "c536a9f7a725c77bb44f18826b979ff9b47613dcd950b89ff6bbff350301bc45"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 526,
+      "log": "work/app-font-interaction/check-grammar-review.log",
+      "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "command": "Node 24: node --experimental-strip-types --test tests/*.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 12602,
+      "log": "work/app-font-interaction/test-node24.log",
+      "sha256": "16d02b87b21282647f2310caa71365d1e0f4cd2477640605c4b99848de9bfd8b"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/build-second-retry.log",
+      "sha256": "b9884f554ca192966dc1a50f02efe88a62448d4251844e71cd13f75800c8217a"
+    }
+  ],
+  "browserLogs": [
+    {
+      "name": "startup-full",
+      "command": "node tests/startup-render-qa.cjs",
+      "engine": "both",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/startup-full.log",
+      "sha256": "2f2403603a0304d83a50ebdfb13b2f0e50a8df34667dfb667b14174c29a3f7d2"
+    },
+    {
+      "name": "font-repeat-1",
+      "command": "node tests/startup-render-qa.cjs --fonts-only",
+      "engine": "both",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/font-repeat-1.log",
+      "sha256": "6d766dad1fd34b5a307b4f04bdf20e04cbbf1aba9bf644a1eead50f2f91082fe"
+    },
+    {
+      "name": "font-repeat-2",
+      "command": "node tests/startup-render-qa.cjs --fonts-only",
+      "engine": "both",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/font-repeat-2.log",
+      "sha256": "6d766dad1fd34b5a307b4f04bdf20e04cbbf1aba9bf644a1eead50f2f91082fe"
+    },
+    {
+      "name": "image-practice-webkit",
+      "command": "node tests/image-practice-qa.cjs",
+      "engine": "webkit",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/image-practice-webkit.log",
+      "sha256": "19fa611486fa9b807df5df3e569baa221f7897cc0d885fd0dd3f309156048266"
+    },
+    {
+      "name": "image-practice-resume-webkit",
+      "command": "node tests/image-practice-resume-qa.cjs",
+      "engine": "webkit",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/image-practice-resume-webkit.log",
+      "sha256": "f3c86db9947eab73da0deef31bcb5ce9f451fc47cc0989bc5c02e2a019209470"
+    },
+    {
+      "name": "state-roundtrip-webkit",
+      "command": "node tests/state-roundtrip-qa.cjs",
+      "engine": "webkit",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/state-roundtrip-webkit.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "image-practice-chromium",
+      "command": "node tests/image-practice-qa.cjs",
+      "engine": "chromium",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/image-practice-chromium.log",
+      "sha256": "b1456ef39ddaeef456c5b0d95924a960f73f16b8bd379d0b4a136979093f304e"
+    },
+    {
+      "name": "image-practice-resume-chromium",
+      "command": "node tests/image-practice-resume-qa.cjs",
+      "engine": "chromium",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/image-practice-resume-chromium.log",
+      "sha256": "b6e33c3331b524b624d7cc6b26c3587d58177d30c7818e03221a9fe338ec0f2e"
+    },
+    {
+      "name": "state-roundtrip-chromium",
+      "command": "node tests/state-roundtrip-qa.cjs",
+      "engine": "chromium",
+      "exitCode": 0,
+      "log": "work/app-font-interaction/state-roundtrip-chromium.log",
+      "sha256": "644338e8ed86c0dab030f703d55f58df8d07151166a43c450dda78ac5758eefc"
+    }
+  ],
+  "fontResponses": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=optional",
+      "sha256": "ce5be0204acab86281e354ed71f9b0e778d389af3765461a4574fefbbb92e0fc"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAopxRSW3w.woff",
+      "sha256": "1e2053b92c73e17610d9e08cc66393c922394bf512e4a39e95574216e72dc249"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwARZtRSW3w.woff",
+      "sha256": "d6693d6978e59248b912d6311794b3014bc69d1a4f4aded3cf1b6bc75b7cb08a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAfJtRSW3w.woff",
+      "sha256": "bd9b61a992bc2daa7679e68b59ed649805acf075afd42ace90d10cc49494896b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2tp2ywxg089UriI5-g4vlH9VoD8CmcqZG40F9JadbnoEwAkJxRSW3w.woff",
+      "sha256": "ff95960adf57c2faa6cdd3536cce49ca7e9d0cc117335843c6b6d99bb97fa3d7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzmo1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.119.woff",
+      "sha256": "c6549fe4ea1f95ce78ea36ae585ccc3a1ad6a9859f2b80609dd5dd506c22e478"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzmo1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.116.woff",
+      "sha256": "47054510bb996fd6960b66e89a80e45951b14fc2cd47bc088b712f08394972e2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzmo1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.117.woff",
+      "sha256": "2c2db7968369ed5437b25bc127b1ff5eac14dc1bc4bd9c94f9c67891ac70e235"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzmo1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.118.woff",
+      "sha256": "17a2ca3cb8db42827ea48e29320fb57c9869861a538a1d9bf2e2fd2d5d3902ca"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.118.woff",
+      "sha256": "441031d7b4df00c9095724ec68355f7674a2707a56c4676324960380a216a4d7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.117.woff",
+      "sha256": "e4347952bc525e1f5d24febac0341ab4772336f506f346225264010d8e7bac46"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.111.woff",
+      "sha256": "b8417aa8613bf4f4f1402a968dc66f5031280ca6e5c66badfd4b42066295e850"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.118.woff",
+      "sha256": "70f196688a021acc37c936d13d52effe1cbc62cdee706d2405fbf0a4efa254f5"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.116.woff",
+      "sha256": "380cee96a9ccc044261aa12c071a1e0100bd0997ea3f4b41db057ac9948cdc40"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.119.woff",
+      "sha256": "ad34344e7375dd42cb7773e470e056e78b9198628ae6d3e75f23d3a171cf695a"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.116.woff",
+      "sha256": "f5a490f45e0f11d81df131b92a080130525ae0f7d96a13dc2a789025ae04cfc7"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.115.woff",
+      "sha256": "8deeebc0b2366a685003c2ffd3ea1271ba8cdc624e780b873eb9359a1b627555"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.118.woff",
+      "sha256": "34505ee6c6f59decd8bb78d973239d1225b0cd8efa2f6005d9e7dc451023a12d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.114.woff",
+      "sha256": "510d170d9e620fedc27327d7c70bc8db6818edcc5197bb682a6b12f98bca9139"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.114.woff",
+      "sha256": "b0131e00879a0bed50a17a108f35587f8e5f4f093069fb642f96a7c9129952c0"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.117.woff",
+      "sha256": "5e1e232cd047d98901d47d5f2c25d54a6003191223f509f451be38fe35648787"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.115.woff",
+      "sha256": "e94d4130dd5209c421716f8206a897388356aa5c5936df49d74f29ac28eeb7cd"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.113.woff",
+      "sha256": "d139c5b59b7505d0bc54c969d9c036ca4800164c4c2a20f1283eba7992343af2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.119.woff",
+      "sha256": "82f87a249b7f137e156619609cd6b5bcdb7f529ecfe1c9a9ba6c345355f1a57b"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.117.woff",
+      "sha256": "2ac26ef8a43c0d7658f3b179f4fadfb6706dd45c2d82ba262a0f1123ea7aac71"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.116.woff",
+      "sha256": "edba778abfdc1e0728f8678c366eb27e8fe89c1ebcc9208bc290bfa58a614d6f"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.118.woff",
+      "sha256": "42c5ae9822ab7ea3463a40ef8852bdb678415ebd7d4b23311ce0e7f3bc8df8cf"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.119.woff",
+      "sha256": "78996e079004b7d87c2bcf750da4e7473aa508ed140190edd91f879d7c368558"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.117.woff",
+      "sha256": "a4afaa4f9f803072b007e4dc53cb2767cdc783717fad3e3925a23ab06422c070"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.116.woff",
+      "sha256": "c79c864be4679d91b3307647d0e9e62fd876cf965d9c284e546ccb9bf4382bde"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.119.woff",
+      "sha256": "b58ccc3117f6b415b860420f911f3e12c553432c57971d6bcfbb820809cb411c"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.112.woff",
+      "sha256": "0e4ea443966d9b810a1d88b6353dea4482e47faf03851ce6190c3c134ee0d4c2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.115.woff",
+      "sha256": "9dbf09d57c06de33cf70c9225bdeba046af7f01858ce2f9dc5003a4bda32cf2f"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.113.woff",
+      "sha256": "923460f54d386260f087dd42dde47f582642d44a035d93dfb60726451a694f33"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoySLPg9w.woff",
+      "sha256": "335a4b1ec2cb05dbbcabc8a2b9ead7edccd254f76209e28f8dc96d2d713da11c"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzztgySLPg9w.woff",
+      "sha256": "969ecc8fbbde0a17d27dde2ebb7da05771cfff377a95474a77eeed7216bcdbad"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1SLPg9w.woff",
+      "sha256": "09c98d97fe468bd6693138d8001cadf945062e394b0baec6f677763c0b60dcaf"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzmo1SLPg9w.woff",
+      "sha256": "0eba332fa57e93dc16b7d50c09368bba362f9dc46692236966f80992608b2291"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01SLPg9w.woff",
+      "sha256": "02b47012fc37a6921c48a8717f46c18ea11e0203d7518cef4ed7691ee9a5d7f9"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.112.woff",
+      "sha256": "f10f590a2a769ad9298966bbe5bb323b97b822e8ffc2f318b2e0396feb391b10"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.113.woff",
+      "sha256": "73c43efeb0f1bf9bf823b182402e5e6e8d776adaf3a3dd6bf8a1c6506e829a2d"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.112.woff",
+      "sha256": "40b0213a111a9fad8cfbb7d4947564fa8ce6bd09c40aefdfa756d78dd07a4001"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.111.woff",
+      "sha256": "7446c5e7f2af9f2d5669d335d15747d61e17a38b691754afe41e2c5fb30a4b95"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.111.woff",
+      "sha256": "3d4bc8c11ef71a77f963f702eca4cfeebc8b8b4e1fce74a1f1cec41cf0130cc2"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzg01eLeC5nwuDo-KBTUm6CryotyJROlrnQ.112.woff",
+      "sha256": "008b018ead863cfc87f66b8e551d96022a3d0883f9b3f7f58e3d09a205331bad"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzuoyeLeC5nwuDo-KBTUm6CryotyJROlrnQ.108.woff",
+      "sha256": "219737ea3f9bbf8e5d59a83e41728f634f9c7b7ae85be3ebdc38ef4c6d044fd6"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.115.woff",
+      "sha256": "2501c204112e5bc2e655155230f7fd17dcca99366b747cb55bfb293da67dff83"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/notosanskr/v40/PbyxFmXiEBPT4ITbgNA5Cgms3VYcOA-vvnIzzjQ1eLeC5nwuDo-KBTUm6CryotyJROlrnQ.113.woff",
+      "sha256": "2bf9f712788c1ae5c3895c240dabc8ab267b189d28338a57542722553f0b0ab8"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "file": "app/web-fonts.tsx",
+      "sha256": "f0128f1a6ed725dc7d41cb74d9a408ecc42a69c66c09fd94f2d3d8f36ff1cbc6"
+    },
+    {
+      "file": "tests/startup-render-qa.cjs",
+      "sha256": "d54494f911721e30f5fdbeae92248bf56eb51ee0c1ff42f807ffb33ff895e173"
+    },
+    {
+      "file": "tests/README.md",
+      "sha256": "28c150528d7410a9db8c1df8eb4cd8962070017b0a3b3cb3a7ff5ac319157cc6"
+    },
+    {
+      "file": "STARTUP_RENDERING.md",
+      "sha256": "3b0d69fcd149e351688f17faaaabf077ab757440eacbc249a2bda636d49e1af7"
+    },
+    {
+      "file": "docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md",
+      "sha256": "723154a53d43f724b822a3891a54b8ebb32e137e828ee3c33a4fbefb23bad8de"
+    }
+  ],
+  "failuresAndRecovery": [
+    "An intermediate build failed EBUSY because its local preview held dist/client; stopped the owned preview, rebuilt successfully and restarted.",
+    "Initial QA used a shortened UA which returned unsplit TTF, and read a background button after Enter opened a modal. Corrected the fixture UA, asserted unicode subsets, and kept an element handle. Final negative and positive tests use the same final test source.",
+    "The first image-practice command accidentally used the disabled-production default against an enabled preview. Set the documented QA_IMAGE_PILOT_MODE and full image fixture root; reran the six affected feature/save commands. The prior three font/startup commands were already passing and were not repeated for this runner-only correction."
+  ],
+  "compatibility": {
+    "onlyRuntimeFile": "app/web-fonts.tsx",
+    "unchanged": [
+      "API",
+      "learning records and revision",
+      "backup",
+      "DB and migrations",
+      "Site and bindings",
+      "dependencies",
+      "production diagnostics"
+    ],
+    "primaryChangesPreserved": 20
+  },
+  "risk": "Low to medium: slow font/CSS arrivals intentionally keep system-font line wrapping for the page; fast fonts remain available. Revert web-fonts.tsx to roll back.",
+  "limitations": [
+    "Local Playwright is not physical iPhone/VoiceOver validation.",
+    "Font response fixture uses a fixed Safari UA and cached provider bytes, not every browser/OS font combination.",
+    "Previous full performance comparison was not rerun; no performance improvement claim.",
+    "Latest remote CI must be inspected after push; previous runs were blocked before starting."
+  ],
+  "reference": "https://www.w3.org/TR/css-fonts-4/#font-display-desc"
+}

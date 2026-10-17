@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T06:04:53.098Z",
+  "status": "verified-local",
+  "parentCommit": "762312a46d85ba94b8a2392bf400c41d073040f9",
+  "branch": "codex/image-practice-resume-navigation",
+  "pr": "https://github.com/zzocojoa/haru-word/pull/39",
+  "scope": "QA concurrency instrumentation and regression only; no app/API/DB/schema/backup/dependency/billing/settings/merge/deployment changes.",
+  "finding": "P3 tests/image-practice-resume-qa.cjs route-handler completion undercounted unfinished HTTP requests.",
+  "implementation": {
+    "helper": "tests/qa/request-concurrency.cjs",
+    "lifetime": "request until requestfinished or requestfailed",
+    "scope": "original page and matching loopback position endpoint",
+    "historicalMetric": "Old values remain historical route-handler measurements; they are not reclassified as full HTTP lifetime evidence."
+  },
+  "redMethod": {
+    "description": "Before green, a temporary shared helper extracted the old active++ / await route continuation / active-- algorithm using fallback to the regression page continuation handler. The exact permanent browser regression failed on both engines. This is an equivalent old-counter adapter, not a replay of the prior whole app binary.",
+    "file": "work/pr39-concurrency-fix-20261017/legacy-request-concurrency.cjs",
+    "sha256": "6e5909f4250fddf3a86e8bb2a94f397fb031b0e2b91a26b9676b5001c95cb631"
+  },
+  "regression": [
+    {
+      "engine": "chromium",
+      "before": {
+        "engine": "chromium",
+        "actualHeldRequests": 2,
+        "activeAfterHeaders": 0,
+        "measuredActive": 0,
+        "measuredMaximum": 1
+      },
+      "after": {
+        "passed": true,
+        "engine": "chromium",
+        "actualHeldRequests": 2,
+        "activeAfterHeaders": 1,
+        "measuredActive": 2,
+        "measuredMaximum": 2,
+        "pendingAtEnd": 0,
+        "httpErrorFinished": true,
+        "abortedRequestRemoved": true,
+        "otherPageExcluded": true,
+        "listenersRemoved": true
+      },
+      "report": {
+        "file": "work/pr39-concurrency-fix-20261017/concurrency-chromium-report.json",
+        "sha256": "b879c9b737e13148aa2450b6ab5884e9786ac02d73baa84c9e35f590cd098579"
+      }
+    },
+    {
+      "engine": "webkit",
+      "before": {
+        "engine": "webkit",
+        "actualHeldRequests": 2,
+        "activeAfterHeaders": 0,
+        "measuredActive": 0,
+        "measuredMaximum": 1
+      },
+      "after": {
+        "passed": true,
+        "engine": "webkit",
+        "actualHeldRequests": 2,
+        "activeAfterHeaders": 1,
+        "measuredActive": 2,
+        "measuredMaximum": 2,
+        "pendingAtEnd": 0,
+        "httpErrorFinished": true,
+        "abortedRequestRemoved": true,
+        "otherPageExcluded": true,
+        "listenersRemoved": true
+      },
+      "report": {
+        "file": "work/pr39-concurrency-fix-20261017/concurrency-webkit-report.json",
+        "sha256": "46a6fe451e48eecde79022980f60447b7f90f78824c3f0d674a8698308ca79f7"
+      }
+    }
+  ],
+  "resume": [
+    {
+      "engine": "chromium",
+      "passed": true,
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "write failure, lost response and timeout preserve position and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ],
+      "maxConcurrentPositionRequests": 1,
+      "positionRequestScope": "original-page-until-finished-or-failed",
+      "pendingPositionRequestsAtEnd": 0,
+      "unchangedLearningStateRevisionAndBackup": true,
+      "actualIphoneChecked": false,
+      "report": {
+        "file": "work/pr39-concurrency-fix-20261017/image-resume/chromium/report.json",
+        "sha256": "5fbbb142a294cdebbb85d5dc2a2d442310c7d00eb3725e946f932dcdbd38e079"
+      }
+    },
+    {
+      "engine": "webkit",
+      "passed": true,
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "write failure, lost response and timeout preserve position and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ],
+      "maxConcurrentPositionRequests": 1,
+      "positionRequestScope": "original-page-until-finished-or-failed",
+      "pendingPositionRequestsAtEnd": 0,
+      "unchangedLearningStateRevisionAndBackup": true,
+      "actualIphoneChecked": false,
+      "report": {
+        "file": "work/pr39-concurrency-fix-20261017/image-resume/webkit/report.json",
+        "sha256": "263918cb8d6c5167dd1aeb64aa9cd82ee15902d0a6987394fa7061b64b9fc90f"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "label": "red-chromium",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "tests/request-concurrency-qa.cjs"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 808,
+      "at": "2026-10-17T05:56:12.834Z",
+      "log": "work/pr39-concurrency-fix-20261017/red-chromium.log",
+      "sha256": "3a77b9ec996f10047c17fcae3a6c741e22758899b86a1762da6cfbe117317282"
+    },
+    {
+      "label": "red-webkit",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "tests/request-concurrency-qa.cjs"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 824,
+      "at": "2026-10-17T05:56:21.968Z",
+      "log": "work/pr39-concurrency-fix-20261017/red-webkit.log",
+      "sha256": "8e7a330dbb8a033acd279ccffd1a0d17031471896bb48c4c90f0a36459af54da"
+    },
+    {
+      "label": "green-chromium",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "tests/request-concurrency-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 860,
+      "at": "2026-10-17T05:57:08.221Z",
+      "log": "work/pr39-concurrency-fix-20261017/green-chromium.log",
+      "sha256": "25fe7e3d9a4c602b8b0ce5dfb9225b19d6c93d5264602fdc5dd3370c2b639a37"
+    },
+    {
+      "label": "green-webkit",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "tests/request-concurrency-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 1945,
+      "at": "2026-10-17T05:57:23.151Z",
+      "log": "work/pr39-concurrency-fix-20261017/green-webkit.log",
+      "sha256": "275ddb8350a9c9fb7c9032391d89b53f0ea3cf15a3d5339c353eb78de908a574"
+    },
+    {
+      "label": "node22",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13821,
+      "at": "2026-10-17T05:58:02.094Z",
+      "log": "work/pr39-concurrency-fix-20261017/node22.log",
+      "sha256": "dd63d833f913bb64adaa6ea68c2a202f1cad7b63a7632fed38fc196ecf09c3f7"
+    },
+    {
+      "label": "node24",
+      "command": "C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+      "args": [
+        "--experimental-strip-types",
+        "--test",
+        "tests/*.test.mjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 12224,
+      "at": "2026-10-17T05:58:53.428Z",
+      "log": "work/pr39-concurrency-fix-20261017/node24.log",
+      "sha256": "2acb960b7ea6af319d96803acd55276495853db1ac76c42d1890b0fd6249e816"
+    },
+    {
+      "label": "typecheck",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 5713,
+      "at": "2026-10-17T05:59:14.389Z",
+      "log": "work/pr39-concurrency-fix-20261017/typecheck.log",
+      "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "label": "lint",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 38188,
+      "at": "2026-10-17T06:00:07.365Z",
+      "log": "work/pr39-concurrency-fix-20261017/lint.log",
+      "sha256": "f43a365a745deebd6e500c0de84cda6fd68aa2da938c859e41ef3d388ede881b"
+    },
+    {
+      "label": "grammar",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "check:grammar-review"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 630,
+      "at": "2026-10-17T06:00:35.631Z",
+      "log": "work/pr39-concurrency-fix-20261017/grammar.log",
+      "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "label": "build",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 15612,
+      "at": "2026-10-17T06:01:09.533Z",
+      "log": "work/pr39-concurrency-fix-20261017/build.log",
+      "sha256": "65f89705ef17dda3e41216db438e6a715bb5dbab9b56a59e9b15257642de0dff"
+    },
+    {
+      "label": "resume-webkit",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-concurrency-fix-20261017/image-practice-resume-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 28179,
+      "at": "2026-10-17T06:02:49.553Z",
+      "log": "work/pr39-concurrency-fix-20261017/resume-webkit.log",
+      "sha256": "f61ae1b5f06162d1d7c43c839ef4eea455a8e01135d08be7283374d290aa764b"
+    },
+    {
+      "label": "resume-chromium",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-concurrency-fix-20261017/image-practice-resume-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 12218,
+      "at": "2026-10-17T06:03:25.960Z",
+      "log": "work/pr39-concurrency-fix-20261017/resume-chromium.log",
+      "sha256": "3fee58d50f47181a8d8772d24c367403e5981a3aa0961c66a91d622d09bb110c"
+    }
+  ],
+  "sourceInputs": {
+    "at": "2026-10-17T06:00:16.616Z",
+    "files": [
+      {
+        "file": "tests/qa/request-concurrency.cjs",
+        "sha256": "728036a11b9be3f3c7e8bb7ce7edaa0a1215469abdb070d9fbef300233534ac7"
+      },
+      {
+        "file": "tests/request-concurrency-qa.cjs",
+        "sha256": "971fa25bd1a99b5c0c89e6228a0c984e3041eb3ec5767f89a151caa28cb0a030"
+      },
+      {
+        "file": "tests/image-practice-resume-qa.cjs",
+        "sha256": "452e3b3498dba8753f9eea450389f9c92632763888a2e550dd7dd2de752c2a33"
+      },
+      {
+        "file": "tests/qa/manifest.cjs",
+        "sha256": "45f0412474860742d9b7430e043b8c121c6a201c508eaa340afb07e44254b05c"
+      },
+      {
+        "file": "tests/qa-runner.test.mjs",
+        "sha256": "bec55c867d30a7fce38ba68e31350a6ac47397ad6b11891f882af390dcd9a1e4"
+      }
+    ],
+    "copy": {
+      "source": "tests/image-practice-resume-qa.cjs",
+      "sourceSha256": "452e3b3498dba8753f9eea450389f9c92632763888a2e550dd7dd2de752c2a33",
+      "file": "work/pr39-concurrency-fix-20261017/image-practice-resume-qa.cjs",
+      "sha256": "8c3a2ef3092952400c4f2b9d3e25bce0cb58649d2edfc5ec6928087a2ba9d814",
+      "changes": "output directory and relative imports only"
+    }
+  },
+  "verification": {
+    "node22": 660,
+    "node24": 660,
+    "lintErrors": 0,
+    "lintWarnings": 15,
+    "typecheck": "pass",
+    "grammar": "pass",
+    "build": "pass",
+    "browserCommandsPassed": 4,
+    "expectedRedCommandsFailed": 2
+  },
+  "review": {
+    "method": "Parent reviewed the focused diff, shared-helper callers and full regression source; red/green and existing browser assertions checked. No new full Review Army run claimed.",
+    "remainingKnownFindings": 0
+  },
+  "preserved": {
+    "primaryUnrelatedChanges": 20,
+    "runtimeAndStartupSourceUnchanged": true,
+    "ownedPreviewProcessesStopped": 7,
+    "localD1Retained": true
+  },
+  "rollback": "Revert this QA follow-up commit; no runtime migration or operational rollback needed.",
+  "limitations": [
+    "Historical startup timeout cause remains unknown; no startup fix claimed.",
+    "Startup/font/full performance/broad QA suites were not repeated because their source and behavior were unchanged.",
+    "Physical iPhone/VoiceOver and hosted learner data/AI not tested.",
+    "Remote CI after this publication must be reported separately; local success does not imply remote CI success."
+  ],
+  "risk": "Low; QA measurements and tests only. No runtime compatibility, data, API, migration or production observability change."
+}

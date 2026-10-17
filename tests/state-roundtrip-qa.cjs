@@ -14,11 +14,29 @@ async function openWork(page) {
 }
 (async () => {
   await waitForWorker(); const browser = await launchBrowser({ engine }), errors = [], checks = [];
+  let diagnosticPage, stage = 'initial load', fontStylesheets = 0;
+  const unexpectedFontFiles = [];
+  async function contextFor(prefix) {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders(prefix) });
+    // Font subsets arriving between pointerdown/up can move the searched row
+    // and lose the click in WebKit. Persistence QA uses stable system fonts;
+    // font loading/failure behavior is covered by startup-render-qa.cjs.
+    await context.route('https://fonts.googleapis.com/**', route => {
+      fontStylesheets++;
+      return route.fulfill({ contentType: 'text/css', body: '' });
+    });
+    await context.route('https://fonts.gstatic.com/**', route => {
+      unexpectedFontFiles.push(new URL(route.request().url()).pathname);
+      return route.abort();
+    });
+    return context;
+  }
   try {
-    const c = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('literal_senses') });
-    const page = await c.newPage(); page.on('pageerror', e => errors.push(e.message));
+    const c = await contextFor('literal_senses');
+    const page = await c.newPage(); diagnosticPage = page; page.on('pageerror', e => errors.push(e.message));
     await page.goto(base); await saved(page);
     for (const meaning of ['constructor', 'prototype', '__proto__']) {
+      stage = `edit ${meaning}`;
       await openWork(page); const dialog = page.getByRole('dialog');
       await dialog.getByRole('button', { name: '다른 뜻 추가', exact: true }).click();
       await dialog.getByLabel('오늘의 뜻', { exact: true }).fill(meaning);
@@ -27,6 +45,7 @@ async function openWork(page) {
       await page.reload(); await saved(page);
       const p = (await get(c)).state.progress[work.id]; assert.ok(Object.hasOwn(p.senses, meaning)); assert.equal(p.senses[meaning].expression, `literal ${meaning}`);
     }
+    stage = 'backup export';
     await page.getByRole('tab', { name: '학습 기록', exact: true }).click();
     await page.getByRole('button', { name: '기록 관리', exact: true }).click();
     await page.getByRole('menuitem', { name: '전체 백업', exact: true }).click();
@@ -35,14 +54,15 @@ async function openWork(page) {
     await (await event).saveAs(`${out}/literal-senses.json`);
     const raw = fs.readFileSync(`${out}/literal-senses.json`, 'utf8'), original = (await get(c)).state;
     assert.deepEqual(JSON.parse(raw).state, original); await c.close();
-    const restored = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('literal_restored') });
+    stage = 'restore and switch senses';
+    const restored = await contextFor('literal_restored');
     const initial = await get(restored);
     const oldHeaders = { ...headers, 'Content-Type': 'application/json', 'X-Study-Revision': String(initial.revision) }; delete oldHeaders['X-Study-Sense-Keys'];
     const oldRestore = await restored.request.post(base + '/api/state/restore', { headers: oldHeaders, data: raw });
     assert.equal(oldRestore.status(), 426); assert.deepEqual(await get(restored), initial);
     const response = await restored.request.post(base + '/api/state/restore', { headers: { ...headers, 'Content-Type': 'application/json', 'X-Study-Revision': String(initial.revision) }, data: raw });
     assert.equal(response.status(), 200, await response.text()); assert.deepEqual((await get(restored)).state, original);
-    const rp = await restored.newPage(); rp.on('pageerror', e => errors.push(e.message));
+    const rp = await restored.newPage(); diagnosticPage = rp; rp.on('pageerror', e => errors.push(e.message));
     await rp.goto(base); await saved(rp); await openWork(rp);
     for (const meaning of ['constructor', 'prototype', '__proto__']) {
       await rp.getByRole('dialog').getByLabel('학습할 뜻 선택').selectOption(meaning);
@@ -50,7 +70,8 @@ async function openWork(page) {
     }
     await restored.close(); checks.push('literal reserved senses: UI editing, saving, reload, validated export, actual restore and sense switching');
 
-    const limit = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('account_limit') });
+    stage = 'account capacity';
+    const limit = await contextFor('account_limit');
     let snapshot = await get(limit);
     for (let offset = 0; offset < 5000; offset += 1000) {
       const progress = Object.fromEntries(Array.from({ length: 1000 }, (_, i) => {
@@ -60,7 +81,7 @@ async function openWork(page) {
       const result = await limit.request.put(base + '/api/state', { headers, data: { revision: snapshot.revision, progress, sessions: {} } });
       assert.equal(result.status(), 200, await result.text()); snapshot.revision = (await result.json()).revision;
     }
-    const before = await get(limit), lp = await limit.newPage(); lp.on('pageerror', e => errors.push(e.message));
+    const before = await get(limit), lp = await limit.newPage(); diagnosticPage = lp; lp.on('pageerror', e => errors.push(e.message));
     await lp.goto(base); await saved(lp); await lp.getByRole('tab', { name: '전체 단어장', exact: true }).click();
     await lp.getByRole('button', { name: '개인 단어 추가', exact: true }).click();
     const dialog = lp.getByRole('dialog');
@@ -84,7 +105,18 @@ async function openWork(page) {
     const violations = await lp.evaluate(async () => (await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.failureSummary) })));
     assert.deepEqual(violations, []); await limit.close();
     checks.push('5001st entry rejected by real server; modal explains the limit and retains input; original account/revision unchanged; 320/390/1440px and axe');
-    assert.deepEqual(errors, []); const result = { passed: true, engine, checks, errors };
+    assert.ok(fontStylesheets > 0, 'the optional font stylesheet must be intercepted');
+    assert.deepEqual(unexpectedFontFiles, [], 'roundtrip QA must not depend on external font subsets');
+    checks.push('all three contexts and reloads use local empty font CSS; no external font files');
+    assert.deepEqual(errors, []); const result = { passed: true, engine, checks, errors, fontStylesheets, unexpectedFontFiles };
     fs.writeFileSync(`${out}/result.json`, JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
+  } catch (error) {
+    if (diagnosticPage && !diagnosticPage.isClosed()) {
+      await diagnosticPage.screenshot({ path: `${out}/failure.png` });
+      fs.writeFileSync(`${out}/failure.json`, JSON.stringify({ stage, errors, fontStylesheets, unexpectedFontFiles,
+        fontStatus: await diagnosticPage.evaluate(() => document.fonts.status), dialogCount: await diagnosticPage.getByRole('dialog').count(),
+        editorCount: await diagnosticPage.getByRole('button', { name: '다른 뜻 추가', exact: true }).count() }, null, 2));
+    }
+    throw error;
   } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

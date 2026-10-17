@@ -1,5 +1,13 @@
 import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
+// Independent resume cursor; deliberately excluded from learning/backup revisions.
+export const imagePracticePositions = sqliteTable('image_practice_positions', {
+  userId: text('user_id').primaryKey(),
+  entryId: text('entry_id').notNull(),
+  revision: integer('revision').notNull(),
+  updatedAt: text('updated_at').notNull(),
+});
+
 // Short-lived server request receipts; no card content, keys, or learning revisions.
 export const cardAutomationNonces = sqliteTable('card_automation_nonces', {
   nonce: text('nonce').primaryKey(), expiresAt: integer('expires_at').notNull(),

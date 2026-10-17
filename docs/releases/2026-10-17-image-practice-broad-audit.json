@@ -1,0 +1,1281 @@
+{
+  "createdAt": "2026-10-17T00:27:31.386Z",
+  "scope": "Image practice resume/navigation PR39 and connected learning/backup/navigation paths",
+  "previousGoalTurn": "progress: reviewed/fixed, committed, pushed and created PR39",
+  "branch": "codex/image-practice-resume-navigation",
+  "reviewedBase": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
+  "previousPrHead": "b17026531cf1cdc4ca53de8e83dc2b1fcd6c3df6",
+  "snapshot": "final pre-commit verification; latest GitHub head and CI are recorded in PR39",
+  "fixes": [
+    {
+      "issue": "New QA scripts missing from registry caused both suite entrypoints to exit before execution",
+      "beforeExitCode": 1,
+      "afterExitCode": 0,
+      "regression": "tests/qa-runner.test.mjs"
+    },
+    {
+      "issue": "Number jump removed the focused input and reset focus to the dialog",
+      "before": "Chromium/WebKit activeElement DIV role=dialog",
+      "after": "card number control focused after mouse/keyboard submission",
+      "regression": "tests/image-practice-resume-qa.cjs"
+    },
+    {
+      "issue": "Another tab read or older request outcome could erase a newer recovery cursor or resurrect an old draft over a newer saved choice",
+      "beforeExitCode": 1,
+      "afterExitCode": 0,
+      "regression": "shared-cache-before.log -> shared-cache-after.log; saved-cache-before.log -> saved-cache-after.log; shared-storage controller cases and same-browser resume QA",
+      "fix": "Background persistence preserves any cache changed since this controller last observed it, including pending=false; new explicit navigation may replace it. Server CAS remains unchanged.",
+      "additionalFinding": "Protecting only pending=true was insufficient: a late failure could overwrite a newer completed save and replay an old draft on reload. Both reproductions failed before their fixes."
+    }
+  ],
+  "testCorrections": [
+    "Old keyboard sequence could press Next instead of entering a number. Explicitly verifies focus on the number input before typing and on the number control after submission.",
+    "WebKit word-image-study assertion read image count before React committed the changed meaning. Wait for actual image detachment and visibility, then retain exact count assertions; both engines passed.",
+    "WebKit backup-safety harness read disabled state before its synthetic React state update committed. Use flushSync in the test harness so the existing safety assertions observe the changed snapshot; both engines passed. No backup runtime change."
+  ],
+  "verificationSetupCorrections": [
+    "sheet-dismiss requires grammar_enabled and large_backup_restore_enabled. Its initial missing-help timeout was resolved with the required flags in a separate synthetic local Worker; both engines passed. No production flag changes.",
+    "After the last rebuild, one run read the old port before fresh preview metadata existed and failed the readiness guard. Confirmed HTTP 200 from the new loopback Worker before running the same cases; failure log retained."
+  ],
+  "unresolvedQaObservation": "Existing state-roundtrip WebKit case once timed out waiting for the add-meaning button. Preserved the failure and added failure-only screenshot/error diagnostics without changing runtime or assertions. Both engines then passed. Root cause remains unconfirmed; not reported as fixed.",
+  "requirements": [
+    {
+      "id": "R01",
+      "requirement": "계정별 고유 entryId와 독립 revision·수정 시각, 계정당 한 행",
+      "evidence": "db/schema.ts; db/image-practice-position.ts; image-practice-position-api.test.mjs",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R02",
+      "requirement": "빈 계정 GET은 no-store 읽기 전용이며 학습/위치 행을 만들지 않음",
+      "evidence": "API empty-account GET test; SQLite table dumps",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R03",
+      "requirement": "첫 저장과 갱신 모두 원자 CAS, 동시 저장 중 하나만 성공·409",
+      "evidence": "API first-write/update race and stale replay tests",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R04",
+      "requirement": "서버 인증·계정 격리·늦은 이전 소유자 요청 차단",
+      "evidence": "API auth/owner tests; controller disposal; browser resume stale owner 401",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R05",
+      "requirement": "동일 출처·JSON·유효 항목·안전한 revision·UTF-8 1KB 및 조기 스트림 취소",
+      "evidence": "API request validation and stream limit tests",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R06",
+      "requirement": "안전한 DB 오류·20/25초 제한·응답 형식/저장 영수증 검증",
+      "evidence": "API safe 503; controller malformed/timeout tests; browser resume deadline",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R07",
+      "requirement": "이동 즉시 표시·한 요청씩·최신 대기 위치 하나·늦은 영수증 분리",
+      "evidence": "controller rapid navigation and exhaustive 81 sequences × 8 schedules; browser held PUT",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R08",
+      "requirement": "연습창 닫기와 탭 이동 뒤 진행 중 저장 완료",
+      "evidence": "app/learning-app.tsx controller lifetime; browser resume close during held save",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R09",
+      "requirement": "계정별 미저장 위치·기준 revision·전송 상태 캐시와 새로고침 복구·다른 탭 조회/늦은 응답으로 최신 미저장 또는 저장 완료 캐시를 덮지 않음",
+      "evidence": "controller shared-storage read/receipt/failure/reopen tests and saved-cache regression; real same-browser pages in resume QA",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R10",
+      "requirement": "최초 조회 실패 시 캐시 대체 또는 재조회·알 수 없는 첫 카드 무쓰기",
+      "evidence": "controller failed initial GET; browser resume fresh-context failure",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R11",
+      "requirement": "실패·응답 유실·시간 초과 후 GET 우선 복구·맹목적 재전송 없음",
+      "evidence": "controller HTTP and lost-response tests; browser resume GET/PUT call order",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R12",
+      "requirement": "409는 명시적 선택·오래된 GET 또는 캐시 재개에서도 자동 루프 금지",
+      "evidence": "controller HTTP conflict/stale and cached needsChoice tests",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R13",
+      "requirement": "원격 선택은 최신 조회·현재 선택은 표시 카드·재충돌과 조회 중 최신 이동 보호",
+      "evidence": "controller both choices and fallback tests; browser resume two contexts/fallback choice",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R14",
+      "requirement": "손상/차단 저장소는 경고와 메모리 대체, 이전 계정 응답/cleanup 격리",
+      "evidence": "controller storage cases, account disposal and strict lifecycle restart",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R15",
+      "requirement": "닫기·탭 복귀·새로고침·별도 브라우저 동일 계정 이어 보기",
+      "evidence": "browser resume integration checks with real local D1",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R16",
+      "requirement": "재개·카드 이동은 앞면, 정답/발음/이미지 오류 상태 초기화",
+      "evidence": "browser image all lifecycle/error; resume revealed-card move and reopen",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R17",
+      "requirement": "기존 카드 순서와 뜻/품사 필터·미존재/제외 카드의 다음 또는 첫 유효 카드",
+      "evidence": "resolvePracticeEntry unit cases; word-image tests; browser excluded/empty deck",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R18",
+      "requirement": "조회·대체 안내·빈 목록으로 서버 위치를 덮어쓰지 않음",
+      "evidence": "controller fallback GET-only; browser cursor before/after comparison",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R19",
+      "requirement": "앞뒷면·이미지 로딩/실패 중 이전·다음·번호 이동, 중복 다음/건너뛰기 제거",
+      "evidence": "browser image all/front/error; resume controls",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R20",
+      "requirement": "처음/마지막 비순환·정수 범위 입력·잘못된 값 거부·단어 목록 미노출",
+      "evidence": "practiceNumber tests; browser resume boundaries/invalid values; UI source review",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R21",
+      "requirement": "닫기·Escape·뒤로가기·초점 복귀·카드 이동은 history를 추가하지 않음",
+      "evidence": "image all lifecycle; resume history/keyboard; extended sheet dismissal",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R22",
+      "requirement": "번호 입력의 실제 키보드 접근과 제출 뒤 카드 번호 버튼 초점 유지",
+      "evidence": "browser resume explicit input focus and post-submit focus assertions on both engines",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R23",
+      "requirement": "저장/실패/충돌/캐시 제한 상태 표시, 학습 성적 상태와 분리",
+      "evidence": "PositionStatus source and browser resume all status/choice assertions",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R24",
+      "requirement": "홈 위치 GET·이미지·인덱스 요청 0, 진입 시 현재/다음 두 장만",
+      "evidence": "final 36-sample performance; image all/network/front; disabled production checks",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R25",
+      "requirement": "기존 학습 API/revision/성적/일정/백업·복원·AI 정책 보존",
+      "evidence": "protected Git hashes; SQLite dumps; browser unchanged state/backup; extended response/state/backup cases",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R26",
+      "requirement": "새 테이블 추가만·기존 migration/snapshot/journal 보존·가상 DB 한정 적용",
+      "evidence": "preservation audit and API SQLite migration application; local preview setup logs",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R27",
+      "requirement": "기존 Site·바인딩·의존성·lockfile·다른 작업20개·진단 개인정보 경계 보존",
+      "evidence": "preservation SHA audit; lib/client-diagnostics.ts no position operation; no hosted writes",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R28",
+      "requirement": "Chromium/WebKit·320/390/1440·100/200%·44px·키보드·axe",
+      "evidence": "image/resume browser reports and inspected current 320px/200% screenshot",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R29",
+      "requirement": "0/365/1825회차·기본/느린망·동일 환경 전후 성능 비교",
+      "evidence": "final 36-sample performance report with 3 repetitions and alternating order",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R30",
+      "requirement": "전체 Node22/24·타입·린트·빌드·문법 검사, 관련 브라우저 회귀",
+      "evidence": "checks.json and all 24 functional browser command logs",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R31",
+      "requirement": "새 브라우저 검사 등록과 기능/성능 분리, 재현 명령/결과 문서화",
+      "evidence": "qa-runner.test.mjs actual --list subprocesses; tests/README.md; this report",
+      "status": "verified within local authorized scope"
+    },
+    {
+      "id": "R32",
+      "requirement": "병합/운영 배포 금지, CI/실기기/운영 한계와 복구 절차 구분",
+      "evidence": "PR metadata and body; IMAGE_PRACTICE_POSITION.md; limitations below",
+      "status": "verified within local authorized scope"
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13192,
+      "log": "work/image-practice-resume/broad-audit/test.log",
+      "sha256": "dd5ab391e61d584b96ad881b9ebd71439acc1781b518cdd41fc5379d123c987a"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 4915,
+      "log": "work/image-practice-resume/broad-audit/typecheck.log",
+      "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 15668,
+      "log": "work/image-practice-resume/broad-audit/lint-final.log",
+      "sha256": "6c3bab729f4adecf3531b56db3e1be58d59ce32b68cb696329172a7e69c380d1"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 15476,
+      "log": "work/image-practice-resume/broad-audit/build.log",
+      "sha256": "b261efbe85cc90f34f25d66207c4c6568bf603a763c50b733855d9990e84e5a3"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 534,
+      "log": "work/image-practice-resume/broad-audit/check-grammar-review.log",
+      "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "command": "Node 24: node --experimental-strip-types --test tests/*.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 11660,
+      "log": "work/image-practice-resume/broad-audit/test-node24.log",
+      "sha256": "11fff50394f389c267fe3234389fd6f549868d416d109359b587c9df7d7fd000"
+    }
+  ],
+  "nodeTestCounts": {
+    "node22": 653,
+    "node24": 653
+  },
+  "exhaustiveNavigationSchedules": 648,
+  "functionalBrowserCommandCount": 24,
+  "browsers": [
+    {
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 13031,
+      "logPath": "work/image-practice-resume/broad-audit/feature-chromium-0.log",
+      "logSha256": "b6e33c3331b524b624d7cc6b26c3587d58177d30c7818e03221a9fe338ec0f2e"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 30840,
+      "logPath": "work/image-practice-resume/broad-audit/feature-chromium-1.log",
+      "logSha256": "071ffdb9e98cfad864924286bd8930594006a36e1a5c18843164237569b62348"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 4771,
+      "logPath": "work/image-practice-resume/broad-audit/feature-chromium-2.log",
+      "logSha256": "ca68f7fe116984713ef3c184571a29cfbef8a19addde6d20c59af371c39d2269"
+    },
+    {
+      "args": [
+        "tests/word-image-study-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 8186,
+      "logPath": "work/image-practice-resume/broad-audit/feature-chromium-3.log",
+      "logSha256": "2248d4df53acef9c5d98fc1d451c3e23265a16c9b8451a85c2bc173036744685"
+    },
+    {
+      "args": [
+        "tests/lazy-materials-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 4667,
+      "logPath": "work/image-practice-resume/broad-audit/feature-chromium-4.log",
+      "logSha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42"
+    },
+    {
+      "args": [
+        "tests/editor-save-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 10751,
+      "logPath": "work/image-practice-resume/broad-audit/feature-chromium-5.log",
+      "logSha256": "31ea36752ceb8a11477827bd5ca835566100aa784b89a6faa1956db475d955fb"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "front"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 1679,
+      "logPath": "work/image-practice-resume/broad-audit/feature-chromium-6.log",
+      "logSha256": "bbda9aa840f14cf6ea9d3bd34d6c7d0f5967bc30ba8e53fef2f1f0f4f44c018f"
+    },
+    {
+      "args": [
+        "tests/image-practice-resume-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 25913,
+      "logPath": "work/image-practice-resume/broad-audit/feature-webkit-0.log",
+      "logSha256": "f3c86db9947eab73da0deef31bcb5ce9f451fc47cc0989bc5c02e2a019209470"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "all"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 42032,
+      "logPath": "work/image-practice-resume/broad-audit/feature-webkit-1.log",
+      "logSha256": "3ca3da2453d8f6686b306fabac34a7bdec5f28488699ba77e9f6da5d5f0bbbb8"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "isolation"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 8575,
+      "logPath": "work/image-practice-resume/broad-audit/feature-webkit-2.log",
+      "logSha256": "34fbf029dff4ee82ce08fbd71cfe21243fce9ab25726027b869910a52c46425a"
+    },
+    {
+      "args": [
+        "tests/word-image-study-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 12339,
+      "logPath": "work/image-practice-resume/broad-audit/feature-webkit-3.log",
+      "logSha256": "8822066143ede2e9a1a7410b3e327fdf21b8490cc1961c16d5f827bf95fd94cd"
+    },
+    {
+      "args": [
+        "tests/lazy-materials-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 6677,
+      "logPath": "work/image-practice-resume/broad-audit/feature-webkit-4.log",
+      "logSha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42"
+    },
+    {
+      "args": [
+        "tests/editor-save-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 16564,
+      "logPath": "work/image-practice-resume/broad-audit/feature-webkit-5.log",
+      "logSha256": "31ea36752ceb8a11477827bd5ca835566100aa784b89a6faa1956db475d955fb"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "front"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 2033,
+      "logPath": "work/image-practice-resume/broad-audit/feature-webkit-6.log",
+      "logSha256": "946644bd096aac5ec16135bb0c3697d7ebd6fb53f7bad22f6d4b272930c73cca"
+    },
+    {
+      "args": [
+        "tests/response-contract-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 2146,
+      "logPath": "work/image-practice-resume/broad-audit/extended-chromium-0.log",
+      "logSha256": "a6494485275f3042efa75e1ff2f8071b86a8b5f55e64b60a7dfc28c13e2c28b2"
+    },
+    {
+      "args": [
+        "tests/backup-safety-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 19696,
+      "logPath": "work/image-practice-resume/broad-audit/extended-chromium-2.log",
+      "logSha256": "7d30b297cd92da4121883b48335aa2668d4bb6b1a4c306a45928d0dcddbda7c3"
+    },
+    {
+      "args": [
+        "tests/sheet-dismiss-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 26975,
+      "logPath": "work/image-practice-resume/broad-audit/extended-chromium-3.log",
+      "logSha256": "e696558fc1933a2886feae1ffc18353857dca2fd24e1381cc273543c50ff1995"
+    },
+    {
+      "args": [
+        "tests/response-contract-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 3778,
+      "logPath": "work/image-practice-resume/broad-audit/extended-webkit-0.log",
+      "logSha256": "a6494485275f3042efa75e1ff2f8071b86a8b5f55e64b60a7dfc28c13e2c28b2"
+    },
+    {
+      "args": [
+        "tests/state-roundtrip-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 7676,
+      "logPath": "work/image-practice-resume/broad-audit/extended-chromium-1.log",
+      "logSha256": "76c2ca3f775760c8952f5d55bd7e7e2166bc5245e29e75bd266d113ba27e8a18"
+    },
+    {
+      "args": [
+        "tests/state-roundtrip-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 10756,
+      "logPath": "work/image-practice-resume/broad-audit/extended-webkit-1.log",
+      "logSha256": "c00679bbe300ecd215a834079b3c7245c8ea88b3b8faf1efd981a43667838575"
+    },
+    {
+      "args": [
+        "tests/backup-safety-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 21703,
+      "logPath": "work/image-practice-resume/broad-audit/extended-webkit-2.log",
+      "logSha256": "7d30b297cd92da4121883b48335aa2668d4bb6b1a4c306a45928d0dcddbda7c3"
+    },
+    {
+      "args": [
+        "tests/sheet-dismiss-qa.cjs"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 30929,
+      "logPath": "work/image-practice-resume/broad-audit/extended-webkit-3.log",
+      "logSha256": "c1a8cfc8e5f72c7841d60142259f09bfb880483c01c39ed6da7a331ac4ee85b1"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 1487,
+      "logPath": "work/image-practice-resume/broad-audit/disabled-chromium-0.log",
+      "logSha256": "3d008cca2fdbb379c172d198c4aa31badbe8c6fa4265c8362a782db5eae20d1c"
+    },
+    {
+      "args": [
+        "tests/image-practice-qa.cjs",
+        "production"
+      ],
+      "engine": "webkit",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 1735,
+      "logPath": "work/image-practice-resume/broad-audit/disabled-webkit-0.log",
+      "logSha256": "9303d07553bcbb0581dacb367d96d6841d25767032184aa7aa6aa587f5d77d92"
+    },
+    {
+      "args": [
+        "tests/image-practice-performance-qa.cjs"
+      ],
+      "engine": "chromium",
+      "code": 0,
+      "timedOut": false,
+      "durationMs": 120575,
+      "logPath": "work/image-practice-resume/broad-audit/performance-chromium-0.log",
+      "logSha256": "b23d25a8065522e14183e08e87b0c73e773bdc4402f400e7eda1a22549b94a3c"
+    }
+  ],
+  "performance": {
+    "method": {
+      "repetitions": 3,
+      "histories": [
+        0,
+        365,
+        1825
+      ],
+      "viewport": "390x844",
+      "cpuSlowdown": 4,
+      "networks": {
+        "normal": {
+          "offline": false,
+          "latency": 0,
+          "downloadThroughput": -1,
+          "uploadThroughput": -1
+        },
+        "slow": {
+          "offline": false,
+          "latency": 150,
+          "downloadThroughput": 500000,
+          "uploadThroughput": 125000
+        }
+      },
+      "ready": "navigationStart to saved screen plus two animation frames",
+      "cache": "new context each sample; Worker warm",
+      "images": "same reviewed local WebP fixture, current and one next image; external fonts blocked",
+      "actualIphoneChecked": false
+    },
+    "samples": [
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 1231,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 1188,
+        "initialJsRequests": 16,
+        "initialBytes": 447038,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 1160,
+        "initialJsRequests": 16,
+        "initialBytes": 447038,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 1147,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 1194,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 1133,
+        "initialJsRequests": 16,
+        "initialBytes": 447038,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2290,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2305,
+        "initialJsRequests": 16,
+        "initialBytes": 447038,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2314,
+        "initialJsRequests": 16,
+        "initialBytes": 447038,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2266,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2287,
+        "initialJsRequests": 15,
+        "initialBytes": 444785,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2301,
+        "initialJsRequests": 16,
+        "initialBytes": 447038,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 1651,
+        "initialJsRequests": 15,
+        "initialBytes": 613678,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 1402,
+        "initialJsRequests": 16,
+        "initialBytes": 615931,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 1496,
+        "initialJsRequests": 16,
+        "initialBytes": 615931,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 1398,
+        "initialJsRequests": 15,
+        "initialBytes": 613678,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 1459,
+        "initialJsRequests": 15,
+        "initialBytes": 613678,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 1452,
+        "initialJsRequests": 16,
+        "initialBytes": 615931,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2878,
+        "initialJsRequests": 15,
+        "initialBytes": 613678,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2895,
+        "initialJsRequests": 16,
+        "initialBytes": 615931,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2867,
+        "initialJsRequests": 16,
+        "initialBytes": 615931,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2853,
+        "initialJsRequests": 15,
+        "initialBytes": 613678,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2817,
+        "initialJsRequests": 15,
+        "initialBytes": 613678,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2811,
+        "initialJsRequests": 16,
+        "initialBytes": 615931,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 2251,
+        "initialJsRequests": 15,
+        "initialBytes": 1258107,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 2295,
+        "initialJsRequests": 16,
+        "initialBytes": 1260360,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 2278,
+        "initialJsRequests": 16,
+        "initialBytes": 1260360,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 2295,
+        "initialJsRequests": 15,
+        "initialBytes": 1258107,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 2294,
+        "initialJsRequests": 15,
+        "initialBytes": 1258107,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 2274,
+        "initialJsRequests": 16,
+        "initialBytes": 1260360,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 0,
+        "variant": "baseline",
+        "readyMs": 4877,
+        "initialJsRequests": 15,
+        "initialBytes": 1258107,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 0,
+        "variant": "after",
+        "readyMs": 4876,
+        "initialJsRequests": 16,
+        "initialBytes": 1260360,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 1,
+        "variant": "after",
+        "readyMs": 4904,
+        "initialJsRequests": 16,
+        "initialBytes": 1260360,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 1,
+        "variant": "baseline",
+        "readyMs": 4857,
+        "initialJsRequests": 15,
+        "initialBytes": 1258107,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 2,
+        "variant": "baseline",
+        "readyMs": 4935,
+        "initialJsRequests": 15,
+        "initialBytes": 1258107,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 0
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "sample": 2,
+        "variant": "after",
+        "readyMs": 5102,
+        "initialJsRequests": 16,
+        "initialBytes": 1260360,
+        "homePositionRequests": 0,
+        "homeImageRequests": 0,
+        "practiceImageRequests": 2,
+        "practicePositionRequests": 1
+      }
+    ],
+    "errors": [],
+    "passed": true,
+    "unchangedStateAndRevision": true,
+    "summary": [
+      {
+        "count": 0,
+        "network": "normal",
+        "baseline": {
+          "min": 1147,
+          "median": 1194,
+          "max": 1231
+        },
+        "after": {
+          "min": 1133,
+          "median": 1160,
+          "max": 1188
+        }
+      },
+      {
+        "count": 0,
+        "network": "slow",
+        "baseline": {
+          "min": 2266,
+          "median": 2287,
+          "max": 2290
+        },
+        "after": {
+          "min": 2301,
+          "median": 2305,
+          "max": 2314
+        }
+      },
+      {
+        "count": 365,
+        "network": "normal",
+        "baseline": {
+          "min": 1398,
+          "median": 1459,
+          "max": 1651
+        },
+        "after": {
+          "min": 1402,
+          "median": 1452,
+          "max": 1496
+        }
+      },
+      {
+        "count": 365,
+        "network": "slow",
+        "baseline": {
+          "min": 2817,
+          "median": 2853,
+          "max": 2878
+        },
+        "after": {
+          "min": 2811,
+          "median": 2867,
+          "max": 2895
+        }
+      },
+      {
+        "count": 1825,
+        "network": "normal",
+        "baseline": {
+          "min": 2251,
+          "median": 2294,
+          "max": 2295
+        },
+        "after": {
+          "min": 2274,
+          "median": 2278,
+          "max": 2295
+        }
+      },
+      {
+        "count": 1825,
+        "network": "slow",
+        "baseline": {
+          "min": 4857,
+          "median": 4877,
+          "max": 4935
+        },
+        "after": {
+          "min": 4876,
+          "median": 4904,
+          "max": 5102
+        }
+      }
+    ]
+  },
+  "preservation": {
+    "primaryChangesPreserved": 20,
+    "oldMigrationFilesPreserved": 10,
+    "oldJournalEntriesPreserved": 5,
+    "siteBindingsDependenciesLearningApiAndBackupUnchanged": true
+  },
+  "sourceHashes": [
+    {
+      "file": "app/api/image-practice/position/route.ts",
+      "sha256": "a1e15b839149ad5fb5ba2039fd7854b90e515ae906b4660c648357bbf7d4ca84"
+    },
+    {
+      "file": "app/learning-app.tsx",
+      "sha256": "fade73996db0f10a5e0b7a51f6bd27dc46148681a8afe8b0bbd6cf42be51246e"
+    },
+    {
+      "file": "app/learning/image-practice-launcher.tsx",
+      "sha256": "a228996375d1927c3bc2114d964fb307b441b11fb04aebfeddd01c7fcff6b201"
+    },
+    {
+      "file": "app/learning/image-practice.tsx",
+      "sha256": "47beb0e3cac1c33669d402c1704cf349dc53911aab01482c0d3d80067a5326a4"
+    },
+    {
+      "file": "app/learning/use-image-practice-position.ts",
+      "sha256": "67f61dbd66e2fac37fc541104b3fa9772906fc029f7c7f40295d3570b3a02d17"
+    },
+    {
+      "file": "app/page.tsx",
+      "sha256": "11ee8f987161c5be028ec916561301544e832fde356cbdbf09bfc89ff31dabc8"
+    },
+    {
+      "file": "app/study-design.css",
+      "sha256": "291a8925dca69f0bb99504d5274997a7a5b4cb8bf0123636da09352fba949181"
+    },
+    {
+      "file": "db/image-practice-position.ts",
+      "sha256": "d51db3f2b83cce06bd0c24ea96911d30ccf8709086b86638c32905e29c3197e0"
+    },
+    {
+      "file": "db/schema.ts",
+      "sha256": "13abf3724a325aca5b93712212584a546e116c0c92a3d82e7ac2fffa1d4d7d8b"
+    },
+    {
+      "file": "drizzle/0005_flippant_enchantress.sql",
+      "sha256": "117932ce867cd8f60d97e776213bee290faecc12a816e8331032a437208b3936"
+    },
+    {
+      "file": "drizzle/meta/0005_snapshot.json",
+      "sha256": "19b8828ed65ef2fcb5c8f1d135f955f8690b7b84045284b592e297b7da60a80b"
+    },
+    {
+      "file": "drizzle/meta/_journal.json",
+      "sha256": "4f6a60f00cf1a73818373dab3d0b1d334513fae584060cd84a57bae82252fbfb"
+    },
+    {
+      "file": "lib/image-practice-position.ts",
+      "sha256": "bd551f04a4af297151b94427cd22d1359d59789738b7f2717f32a8735e6cf41f"
+    },
+    {
+      "file": "tests/README.md",
+      "sha256": "c5dd9047a7df123d9530fe340c23c402102f30095180fdd63762160d8385f91f"
+    },
+    {
+      "file": "tests/backup-safety-qa.cjs",
+      "sha256": "ca5c2ddc522049a3f3c4b31589d16eb4c15fb688e6f2b9b4ca18b699961230ef"
+    },
+    {
+      "file": "tests/image-practice-performance-qa.cjs",
+      "sha256": "05cfdd9b643d1d570c5475679db4e24686cc2a25d45e878c93c8e8b64cefb3fc"
+    },
+    {
+      "file": "tests/image-practice-position-api.test.mjs",
+      "sha256": "dca24febe509d9360b0318140105192e6b74266124d6f08c251d7e611de5fce3"
+    },
+    {
+      "file": "tests/image-practice-position.test.mjs",
+      "sha256": "6991b7b3c7c12f3a732567bc501ec29e23036440fd70ba5169c3980bfea165ec"
+    },
+    {
+      "file": "tests/image-practice-qa.cjs",
+      "sha256": "fe2c8fa736aac29a50d48e808ccc66260d70863f3af9801524e53090f3c3a20b"
+    },
+    {
+      "file": "tests/image-practice-resume-qa.cjs",
+      "sha256": "0737f0ef3c1f760fb69e8bf3c0fd410343edd5c8a5ea572158fd1e8891716e42"
+    },
+    {
+      "file": "tests/qa-runner.test.mjs",
+      "sha256": "258fd61e01777e667bf3efc7a32373d175b7eafdfd6db64fd725980931572baf"
+    },
+    {
+      "file": "tests/qa/manifest.cjs",
+      "sha256": "75ef005ac0c463d03ed74ce7c48b30cd8b52f666ab96a856b6f03b874b95c7a4"
+    },
+    {
+      "file": "tests/qa/run.cjs",
+      "sha256": "036402ff9d603e55b70301c47285573ce4e3ad279206c563a2b4be7518ba9f63"
+    },
+    {
+      "file": "tests/state-roundtrip-qa.cjs",
+      "sha256": "a156cbd41b7abcabdbd76fae57b51ce1bbc003946c9c7282781b2cc47a49190d"
+    },
+    {
+      "file": "tests/word-image-study-qa.cjs",
+      "sha256": "bac0d8574014c702e6c5928f62293a5a58d62bbaba5313cf24856a1cc42ac5d9"
+    }
+  ],
+  "frozenBuildHash": "260a5910e52a9304385c6efa4d7c66107a3863616b22d02a2adecc5d333917b0",
+  "limits": [
+    "Actual iPhone/VoiceOver not tested; browser emulation is not a physical device test.",
+    "No production account/data/AI/migration/deployment or merge.",
+    "All registered browser scenarios were inventoried, not all executed; version-specific grammar/other unrelated suites require different fixtures and flags.",
+    "GitHub CI account payment/spending restriction is separate from local verification; latest run annotations are in PR39.",
+    "Baseline local Wrangler unread-body 401 connection-reuse delay remains unresolved."
+  ]
+}
