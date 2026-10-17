@@ -24,6 +24,7 @@
 
 - `state-roundtrip.test.mjs` / `state-roundtrip-qa.cjs`: 사용자 뜻 키의 안전한 저장·조회·전체/분할 복원과 계정 누적 5,000단어·10,000회차·UTF-8 20 MB 경계, 구형 복원의 문법 보존 합산, 동시 저장 및 원본 불변성을 검사합니다. 브라우저는 단어 편집·검증된 백업·실제 복원·한도 안내와 320/390/1440px·axe를 확인하며 `QA_BROWSER=webkit`도 지원합니다.
 - 상태 왕복 검사는 세 가상 계정과 새로고침 모두 외부 폰트 CSS를 빈 로컬 응답으로 고정합니다. 한글 폰트 조각이 클릭 도중 적용되어 행이 이동하는 타이밍을 저장/복원 검사에서 분리하고, 폰트 파일 요청이 생기면 실패합니다. 기존 `node tests/state-roundtrip-qa.cjs` 명령을 그대로 사용합니다. 폰트 지연/실패 중 앱 조작은 `node tests/startup-render-qa.cjs`로 양 엔진에서 별도 확인합니다. 시스템 폰트 결과를 운영 웹폰트의 배치·실기기 검사로 해석하지 않습니다.
+- `startup-render-qa.cjs --fonts-only`는 앱이 요청한 실제 Google CSS/WOFF2로 부분 폰트 로딩 중 클릭, 첫 클릭/Enter 도중 CSS 도착, 정상 로딩을 양 엔진에서 검사합니다. 320/390/1440px·200% 글자를 포함하며 일반 실행에도 포함됩니다. 최초 실행에는 Google Fonts 접근이 필요하고, 고정 Safari UA로 받은 원문을 Git 제외 `outputs/startup-render/font-assets/`에 캐시합니다. 응답·부분 폰트가 없으면 실패하며 대체 CSS로 통과시키지 않습니다. `font-assets.json`은 사용한 URL/응답 SHA를 기록합니다. 브라우저 캐시가 따뜻한 실제 iPhone 검사와는 별개입니다.
 
 - `study-recovery-qa.cjs`: 저장 중 다음 카드 입력 → 다른 기기의 실제 revision 충돌 → 현재 입력 백업 → 실제 복원 → 이어 하기·재접속을 검사합니다. 문장·보완점·학습 뜻과 명시적 빈 값, 기존 성적·진행 위치 보존을 확인하며 `QA_BROWSER=webkit`도 지원합니다. 로컬 가상 계정만 사용합니다.
 
