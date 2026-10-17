@@ -138,14 +138,33 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await dialog.getByRole('button', { name: '다음', exact: true }).click(); await number(31).waitFor(); await saved(); blockImage = false;
     checks.push('first/last boundaries, strict integer jump and navigation through failed images');
     await jump(8); await saved(); await page.addScriptTag({ path: axePath });
+    const navigationFailures = [];
+    const nextButton = dialog.getByRole('button', { name: '다음', exact: true });
+    await nextButton.focus(); await page.keyboard.press('Enter'); await number(9).waitFor(); await saved();
+    const announcement = await dialog.locator('[aria-live="polite"][aria-atomic="true"]').allTextContents();
+    if (!announcement.includes('카드 9 / 3809')) navigationFailures.push('keyboard Next must update the live card-position announcement');
+    assert.equal(await nextButton.evaluate(el => document.activeElement === el), true, 'Next retains keyboard focus');
+    await jump(8); await saved();
+    await page.keyboard.press('Tab'); // Establish keyboard modality after the pointer-driven jump helper.
     for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
       await page.setViewportSize({ width, height: 844 }); await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
       assert.equal(await dialog.evaluate(el => el.scrollWidth > el.clientWidth || document.documentElement.scrollWidth > innerWidth), false);
       const bounds = await dialog.locator('.image-practice-navigation').evaluate(nav => [...nav.querySelectorAll('button')].map(b => { const r = b.getBoundingClientRect(); return { width: r.width, height: r.height, left: r.left, right: r.right, bottom: r.bottom }; }));
       assert.ok(bounds.every(r => r.width >= 44 && r.height >= 44 && r.left >= 0 && r.right <= width && r.bottom <= 844));
+      for (const button of await dialog.locator('.image-practice-navigation button').all()) {
+        await button.focus();
+        const ring = await button.evaluate(el => {
+          const r = el.getBoundingClientRect(), c = el.closest('.image-practice-controls').getBoundingClientRect(), s = getComputedStyle(el);
+          const extent = Math.max(0, parseFloat(s.outlineWidth) + parseFloat(s.outlineOffset));
+          return { label: el.textContent, visible: el.matches(':focus-visible'), extent,
+            inside: r.left - extent >= c.left - .5 && r.right + extent <= c.right + .5 && r.top - extent >= c.top - .5 && r.bottom + extent <= c.bottom + .5 };
+        });
+        if (!ring.visible || !ring.extent || !ring.inside) navigationFailures.push({ width, size, ...ring });
+      }
       assert.deepEqual(await page.evaluate(async () => (await axe.run(document.querySelector('[role="dialog"]'), { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations.map(v => v.id)), []);
       await page.screenshot({ path: `${out}/navigation-${width}-${size}.png` });
     }
+    assert.deepEqual(navigationFailures, [], 'card announcements and complete keyboard focus rings');
     await page.evaluate(() => document.documentElement.style.fontSize = '100%'); await page.setViewportSize({ width: 390, height: 844 });
     await dialog.getByRole('button', { name: /카드 번호/ }).focus(); await page.keyboard.press('Enter'); await page.keyboard.press('Tab');
     assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).evaluate(el => document.activeElement === el), true);

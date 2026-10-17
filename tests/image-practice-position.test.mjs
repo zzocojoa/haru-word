@@ -72,12 +72,38 @@ test('all short navigation and receipt schedules save the latest card with one r
     assert.equal(cache.entryId, last); assert.equal(cache.pending, false);
   }
 });
-test('lost write response is reconciled before retry and latest draft uses acknowledged revision', async () => {
+test('lost response with a later draft requires a choice before using the observed revision', async () => {
   const f = await opened(); f.controller.move(ids[1]); f.controller.move(ids[2]);
   f.calls[1].reject(new Error('timeout')); await tick(); assert.equal(f.calls.length, 2);
   f.controller.retry(); assert.equal(f.calls[2].method, 'GET'); f.calls[2].resolve(pos(1, 1)); await tick();
-  assert.deepEqual(f.calls[3].body, { entryId: ids[2], revision: 1 }); f.calls[3].resolve(pos(2, 2)); await tick();
+  assert.equal(f.view().status, 'conflict'); assert.equal(f.calls.length, 3);
+  f.controller.keepCurrent(); f.calls[3].resolve(pos(1, 1)); await tick();
+  assert.deepEqual(f.calls[4].body, { entryId: ids[2], revision: 1 }); f.calls[4].resolve(pos(2, 2)); await tick();
   assert.equal(f.view().status, 'saved');
+});
+test('retry and reopen cannot attribute another tab or device same-card save to a failed write', async () => {
+  for (const shared of [false, true]) for (const action of ['retry', 'open']) {
+    const storage = new Map(), a = await opened(fixture('synthetic-a', storage), pos(0, 1));
+    const b = await opened(fixture('synthetic-a', shared ? storage : new Map()), pos(0, 1));
+    a.controller.move(ids[1]); a.controller.move(ids[2]);
+    b.controller.move(ids[1]); b.calls[1].resolve(pos(1, 2)); await tick();
+    a.calls[1].reject(new Error('not delivered')); await tick();
+    const before = storage.get(positionCacheKey('synthetic-a'));
+    a.controller[action](); a.calls[2].resolve(pos(1, 2)); await tick();
+    assert.equal(a.calls.length, 3, 'GET only before an explicit choice');
+    assert.equal(a.view().status, 'conflict'); assert.equal(a.view().entryId, ids[2]);
+    if (shared) assert.equal(storage.get(positionCacheKey('synthetic-a')), before);
+    a.controller.useRemote(); a.calls[3].resolve(pos(1, 2)); await tick();
+    assert.equal(a.view().entryId, ids[1]); assert.equal(a.view().pending, false);
+    assert.equal(a.calls.length, 4); a.controller.stop(); b.controller.stop();
+  }
+});
+test('lost receipt already at the final target recovers with GET only', async () => {
+  const f = await opened(); f.controller.move(ids[1]);
+  f.calls[1].reject(new Error('lost response')); await tick();
+  f.controller.retry(); f.calls[2].resolve(pos(1, 1)); await tick();
+  assert.equal(f.calls.length, 3); assert.equal(f.view().status, 'saved');
+  assert.equal(f.view().pending, false); assert.equal(f.view().entryId, ids[1]);
 });
 test('conflict requires choice; current choice rechecks and another intervening device still conflicts', async () => {
   const f = await opened(); f.controller.move(ids[1]); f.calls[1].reject(new Error()); await tick();
@@ -120,7 +146,42 @@ test('account disposal aborts queued work and ignores late responses; a new acco
   assert.equal(a.calls[1].signal.aborted, true); assert.equal(a.calls.length, 2);
   assert.equal(b.view().entryId, null); assert.equal(b.calls.length, 1);
   const restored = fixture('synthetic-a', a.storage); restored.controller.open(); restored.calls[0].resolve(pos(1, 1)); await tick();
-  assert.deepEqual(restored.calls[1].body, { entryId: ids[2], revision: 1 }); restored.calls[1].resolve(pos(2, 2)); await tick();
+  assert.equal(restored.view().status, 'conflict'); assert.equal(restored.calls.length, 1);
+  restored.controller.keepCurrent(); restored.calls[1].resolve(pos(1, 1)); await tick();
+  assert.deepEqual(restored.calls[2].body, { entryId: ids[2], revision: 1 }); restored.calls[2].resolve(pos(2, 2)); await tick();
+});
+test('explicit remote choice replaces an earlier other-tab draft and reload never replays it', async () => {
+  const storage = new Map(), a = await opened(fixture('synthetic-a', storage), pos(0, 1));
+  const b = await opened(fixture('synthetic-a', storage), pos(0, 1));
+  a.controller.move(ids[1]); a.calls[1].reject(new Error('offline')); await tick();
+  b.controller.open(); b.calls[1].resolve(pos(3, 2)); await tick();
+  b.controller.move(ids[2]); b.calls[2].reject(new Error('offline')); await tick();
+  a.controller.retry(); a.calls[2].resolve(pos(3, 2)); await tick();
+  a.controller.useRemote(); a.calls[3].resolve(pos(3, 2)); await tick();
+  assert.equal(a.view().status, 'saved');
+  const cache = JSON.parse(storage.get(positionCacheKey('synthetic-a')));
+  assert.equal(cache.entryId, ids[3]); assert.equal(cache.pending, false);
+  a.controller.stop(); b.controller.stop();
+  const reopened = await opened(fixture('synthetic-a', storage), pos(3, 2));
+  assert.equal(reopened.calls.length, 1, 'confirmed remote choice cannot leave an auto-replayed draft');
+  assert.equal(reopened.view().entryId, ids[3]); reopened.controller.stop();
+});
+test('remote choice preserves other-tab navigation after its GET starts and failure preserves the earlier draft', async () => {
+  for (const outcome of ['later-move', 'failed-get', 'stopped']) {
+    const storage = new Map(), a = await opened(fixture('synthetic-a', storage), pos(0, 1));
+    const b = await opened(fixture('synthetic-a', storage), pos(0, 1));
+    a.controller.move(ids[1]); a.calls[1].reject(new Error('offline')); await tick();
+    a.controller.retry(); a.calls[2].resolve(pos(3, 2)); await tick();
+    b.controller.move(ids[2]); b.calls[1].reject(new Error('offline')); await tick();
+    a.controller.useRemote();
+    if (outcome === 'later-move') b.controller.move(ids[0]);
+    const draft = storage.get(positionCacheKey('synthetic-a'));
+    if (outcome === 'stopped') a.controller.stop();
+    if (outcome === 'failed-get') a.calls[3].reject(new Error('offline'));
+    else a.calls[3].resolve(pos(3, 2));
+    await tick(); assert.equal(storage.get(positionCacheKey('synthetic-a')), draft, outcome);
+    assert.equal(a.calls.length, 4); a.controller.stop(); b.controller.stop();
+  }
 });
 test('another tab reading or completing older work cannot erase the latest unsaved recovery cursor', async () => {
   for (const action of ['read', 'receipt', 'failure']) {

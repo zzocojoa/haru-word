@@ -86,6 +86,7 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
   return <>
     <PracticeCard key={`${deck[index].word.id}:${visit}:${position.displayVersion}`} card={deck[index]}/>
     <div className="image-practice-controls">
+      <p className="sr-only" aria-live="polite" aria-atomic="true">카드 {index + 1} / {deck.length}</p>
       {resolved.fallback && <p className="small-note" role="status">저장한 카드는 현재 연습에서 제외되어 다음 유효 카드 또는 첫 카드로 이동했어요. 이동 버튼을 누르면 새 위치를 저장해요.</p>}
       <PositionStatus position={position} controller={controller} fallback={resolved.fallback} displayedEntryId={resolved.entryId}/>
       <nav className="image-practice-navigation" aria-label="이미지 연습 카드 이동">

@@ -50,7 +50,8 @@ export class ImagePracticePositionController {
     try {
       const storage = this.storage(), key = positionCacheKey(this.owner), current = storage.getItem(key);
       // A different tab may have selected or saved a newer cursor. Background
-      // results must not resurrect old drafts over it; only a new move replaces it.
+      // results must not resurrect old drafts over it. Explicit remote choices
+      // compare against the cache observed when that choice started instead.
       if (!fromNavigation && current !== this.cachedValue) return;
       const value = JSON.stringify({ version: 1, entryId, revision, pending, sent, needsChoice });
       storage.setItem(key, value); this.cachedValue = value;
@@ -94,21 +95,30 @@ export class ImagePracticePositionController {
 
   private async check(choice: 'resume' | 'remote' | 'current' | 'conflict') {
     this.busy = true; const expectedRemote = this.view.remote, moves = this.moves;
+    let remoteChoiceCache = this.cachedValue;
+    if (choice === 'remote') {
+      try { remoteChoiceCache = this.storage().getItem(positionCacheKey(this.owner)); }
+      catch { this.publish({ storageWarning: true }); }
+    }
     this.publish({ status: 'loading' }); const request = new AbortController(); this.request = request;
     try {
       const remote = await this.transport('GET', this.owner, request.signal);
       if (this.stopped || this.request !== request) return;
       const { sent, pending, revision } = this.view;
-      const acknowledged = sent && remote.revision === sent.revision + 1 && remote.entryId === sent.entryId;
+      const acknowledged = sent && remote.revision === sent.revision + 1 && remote.entryId === sent.entryId && this.view.entryId === remote.entryId;
       if (choice === 'conflict' || (choice === 'resume' && this.view.needsChoice)) {
         // A definite 409 always needs a choice, even if this read is stale.
         // Never turn a stale GET into an automatic PUT/409/GET loop.
         this.publish({ remote, status: 'conflict', available: true, needsChoice: true });
       } else if ((choice === 'remote' && moves === this.moves) || !pending) {
+        // A user's choice supersedes earlier drafts, never a different tab's
+        // navigation that happened while this GET was waiting.
+        if (choice === 'remote' && moves === this.moves) this.cachedValue = remoteChoiceCache;
         this.publish({ entryId: remote.entryId, revision: remote.revision, pending: false, sent: null, remote: null, available: true, status: 'saved', needsChoice: false,
           displayVersion: this.view.displayVersion + 1 });
       } else if (choice === 'current' ? remote.revision === expectedRemote?.revision : remote.revision === revision || acknowledged) {
-        // A lost response can acknowledge only the exact sent revision and ID.
+        // Matching revision/ID cannot prove who wrote it. A lost response can
+        // finish the final target, but a later queued card still needs a choice.
         this.publish({ revision: remote.revision, sent: null, remote: null, available: true, needsChoice: false,
           pending: this.view.entryId !== remote.entryId, status: 'saved' });
       } else this.publish({ remote, status: 'conflict', available: true, needsChoice: true });
