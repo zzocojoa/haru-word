@@ -42,6 +42,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
           const method = request.method(); calls.push(method);
           if (mode === 'get-error' && method === 'GET' || mode === 'put-error' && method === 'PUT') return route.fulfill({ status: 503, json: {} });
           if ((mode === 'put-hold' || mode === 'put-timeout') && method === 'PUT') { mode = ''; held = { route }; return; }
+          if (mode === 'get-hold' && method === 'GET') { mode = ''; held = { route }; return; }
           if (mode === 'put-lost' && method === 'PUT') { mode = ''; await route.fetch(); return route.abort(); }
         }
         return route.continue();
@@ -113,6 +114,28 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor(); await open(); await number(6).waitFor(); await saved();
     assert.deepEqual(calls.slice(reloadStart), ['GET']); assert.deepEqual(await getPosition(), latestSaved); await latestTab.close();
     checks.push('late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload');
+    const abaTab = await context.newPage(); await ready(abaTab); await open(abaTab); await number(6, abaTab).waitFor(); await saved(abaTab);
+    mode = 'put-error'; await dialog.getByRole('button', { name: '다음', exact: true }).click();
+    await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
+    const abaBase = await getPosition(), remoteChoice = await writePosition(ids[8], abaBase.revision);
+    mode = ''; await page.getByRole('button', { name: '다시 저장', exact: true }).click();
+    await page.getByRole('button', { name: '다른 기기 위치로 이동', exact: true }).waitFor();
+    mode = 'put-error'; await abaTab.getByRole('dialog').getByRole('button', { name: '다음', exact: true }).click();
+    await abaTab.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
+    await abaTab.getByRole('dialog').getByRole('button', { name: '다음', exact: true }).click(); await number(8, abaTab).waitFor();
+    mode = 'get-hold'; await page.getByRole('button', { name: '다른 기기 위치로 이동', exact: true }).click(); await wait(() => held);
+    await abaTab.getByRole('dialog').getByRole('button', { name: '이전', exact: true }).click(); await number(7, abaTab).waitFor();
+    await abaTab.getByRole('dialog').getByRole('button', { name: '다음', exact: true }).click(); await number(8, abaTab).waitFor();
+    const readCache = p => p.evaluate(owner => localStorage.getItem(`haru-image-position-v1:${encodeURIComponent(owner)}`), identity['oai-authenticated-user-id']);
+    const abaDraft = await readCache(abaTab), remoteHeld = held; held = null;
+    await remoteHeld.route.continue(); await number(9).waitFor(); await saved();
+    assert.equal(await readCache(abaTab), abaDraft, 'remote selection preserves the later C-to-B-to-C draft');
+    assert.equal(JSON.parse(abaDraft).entryId, ids[7]); assert.equal(JSON.parse(abaDraft).pending, true);
+    const abaReloadStart = calls.length;
+    await ready(abaTab); await open(abaTab); await number(8, abaTab).waitFor();
+    await abaTab.getByRole('button', { name: '현재 위치 저장', exact: true }).waitFor();
+    assert.deepEqual(calls.slice(abaReloadStart), ['GET']); assert.deepEqual(await getPosition(), remoteChoice);
+    await abaTab.close(); checks.push('remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT');
     mode = 'put-error'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
     const retryStart = calls.length; mode = ''; await page.getByRole('button', { name: '다시 저장', exact: true }).click(); await saved(); assert.deepEqual(calls.slice(retryStart), ['GET', 'PUT']);
     mode = 'put-lost'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();

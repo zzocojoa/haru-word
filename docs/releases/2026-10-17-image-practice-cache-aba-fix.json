@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-17T07:57:21.454Z",
+  "status": "verified-local",
+  "parentCommit": "581f691efd3d37f2ad548739993f54d12299a2f2",
+  "branch": "codex/image-practice-resume-navigation",
+  "pr": "https://github.com/zzocojoa/haru-word/pull/39",
+  "finding": {
+    "priority": "P2",
+    "fingerprint": "lib/image-practice-position.ts:55:api-contract",
+    "status": "fixed",
+    "description": "Remote choice compared only serialized cursor state; C-to-B-to-C in another tab during its GET returned to identical state and lost the later pending cursor."
+  },
+  "implementation": {
+    "source": "lib/image-practice-position.ts",
+    "navigationId": "New UUID per explicit move; retained through reads, receipts and failures; persisted in local cache only.",
+    "compatibility": "version1 and account key retained; missing navigationId accepted; invalid identity warns and falls back safely. No API, DB, backup, dependencies or diagnostics changes.",
+    "mixedVersions": "Only tabs executing updated code generate the identity; continued old-code tabs are outside the protection guarantee."
+  },
+  "regression": {
+    "red": {
+      "log": "work/pr39-cache-aba-fix-20261017/red-unit.log",
+      "exitCode": 1,
+      "tests": 21,
+      "pass": 19,
+      "fail": 2,
+      "reason": "C pending cache replaced by D saved; new navigation-identity compatibility assertion also fails before implementation."
+    },
+    "greenFocused": {
+      "log": "work/pr39-cache-aba-fix-20261017/green-unit.log",
+      "exitCode": 0,
+      "pass": 31
+    },
+    "replay": {
+      "sameSerializedCacheAfterNewNavigation": false,
+      "otherTabNewMoves": 2,
+      "expectedPending": true,
+      "actualPending": true,
+      "expectedLatestCard": "C",
+      "actualPersistedCard": "C",
+      "reloadedCard": "C",
+      "reloadWrites": 0,
+      "draftPreserved": true,
+      "reloadStatus": "conflict"
+    },
+    "replayAdaptation": "Same original operation sequence; compare position fields without optional navigationId for the ABA precondition, cache preservation immediately after remote GET, then C/pending/conflict/no-PUT after reload. Initial green-replay retained an overly strict full-cache equality after reload, where needsChoice legitimately changes; kept as harness failure, fixed without further runtime changes.",
+    "permanentUnit": "tests/image-practice-position.test.mjs",
+    "permanentBrowser": "tests/image-practice-resume-qa.cjs"
+  },
+  "commands": [
+    {
+      "label": "red-unit",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "--experimental-strip-types",
+        "--test",
+        "tests/image-practice-position.test.mjs"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 493,
+      "at": "2026-10-17T07:50:00.054Z",
+      "log": "work/pr39-cache-aba-fix-20261017/red-unit.log",
+      "sha256": "999b5019832caf6dc320e9e22754ef03690fc1e0b9cd64103ed69abfcb578d45"
+    },
+    {
+      "label": "green-unit",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "--experimental-strip-types",
+        "--test",
+        "tests/image-practice-position.test.mjs",
+        "tests/image-practice-position-api.test.mjs",
+        "tests/qa-runner.test.mjs",
+        "tests/startup-diagnostics.test.mjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 514,
+      "at": "2026-10-17T07:50:57.667Z",
+      "log": "work/pr39-cache-aba-fix-20261017/green-unit.log",
+      "sha256": "87fa1699c1a2aa9c7dda07345c20c9932177e7049649899be3ced678101a1f15"
+    },
+    {
+      "label": "green-replay",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-cache-aba-fix-20261017/remote-choice-aba.mjs"
+      ],
+      "exitCode": 1,
+      "timedOut": false,
+      "durationMs": 80,
+      "at": "2026-10-17T07:51:26.565Z",
+      "log": "work/pr39-cache-aba-fix-20261017/green-replay.log",
+      "sha256": "36469e5329f61c4f7a707582595f0fc805f8f5d26bee2e557097d657833d8b5a"
+    },
+    {
+      "label": "green-replay-final",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-cache-aba-fix-20261017/remote-choice-aba.mjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 83,
+      "at": "2026-10-17T07:51:44.115Z",
+      "log": "work/pr39-cache-aba-fix-20261017/green-replay-final.log",
+      "sha256": "fc041e1dc33230e7698187128b4f3a928d31474e11c773a4c9e51090cf9cd7b8"
+    },
+    {
+      "label": "node22",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13051,
+      "at": "2026-10-17T07:53:09.047Z",
+      "log": "work/pr39-cache-aba-fix-20261017/node22.log",
+      "sha256": "6545ce7be043e4f69004154c25f63a4c36c2f3f493a519346a20178bf8b124ec"
+    },
+    {
+      "label": "node24",
+      "command": "C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+      "args": [
+        "--experimental-strip-types",
+        "--test",
+        "tests/*.test.mjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13919,
+      "at": "2026-10-17T07:53:23.039Z",
+      "log": "work/pr39-cache-aba-fix-20261017/node24.log",
+      "sha256": "a79af9def192cc4d9092312d8d967e7a3810fe817320426a7ee6a1582c1f4b33"
+    },
+    {
+      "label": "typecheck",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 7650,
+      "at": "2026-10-17T07:53:30.772Z",
+      "log": "work/pr39-cache-aba-fix-20261017/typecheck.log",
+      "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "label": "lint",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 46541,
+      "at": "2026-10-17T07:54:17.394Z",
+      "log": "work/pr39-cache-aba-fix-20261017/lint.log",
+      "sha256": "f43a365a745deebd6e500c0de84cda6fd68aa2da938c859e41ef3d388ede881b"
+    },
+    {
+      "label": "grammar",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "check:grammar-review"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 575,
+      "at": "2026-10-17T07:54:18.044Z",
+      "log": "work/pr39-cache-aba-fix-20261017/grammar.log",
+      "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "label": "build",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 31403,
+      "at": "2026-10-17T07:52:15.593Z",
+      "log": "work/pr39-cache-aba-fix-20261017/build.log",
+      "sha256": "239b69b55883b04e23b7cea0f8353952bea6628bfb8483029299aed44ef21a25"
+    },
+    {
+      "label": "resume-webkit",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-cache-aba-fix-20261017/image-practice-resume-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 29559,
+      "at": "2026-10-17T07:54:33.081Z",
+      "log": "work/pr39-cache-aba-fix-20261017/resume-webkit.log",
+      "sha256": "f6b77dc4000a08882159645156c9bafabdfb610ca6442b04c134a18fb2c2959a"
+    },
+    {
+      "label": "resume-chromium",
+      "command": "C:/Program Files/nodejs/node.exe",
+      "args": [
+        "work/pr39-cache-aba-fix-20261017/image-practice-resume-qa.cjs"
+      ],
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 16359,
+      "at": "2026-10-17T07:54:49.518Z",
+      "log": "work/pr39-cache-aba-fix-20261017/resume-chromium.log",
+      "sha256": "b84596386220dd93312d8f6ebe233f0b0bba4a562dec10a50494c6f1f733256c"
+    }
+  ],
+  "browsers": [
+    {
+      "engine": "webkit",
+      "passed": true,
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ],
+      "maxConcurrentPositionRequests": 1,
+      "positionRequestScope": "original-page-until-finished-or-failed",
+      "pendingPositionRequestsAtEnd": 0,
+      "unchangedLearningStateRevisionAndBackup": true,
+      "actualIphoneChecked": false,
+      "evidence": {
+        "file": "work/pr39-cache-aba-fix-20261017/image-resume/webkit/report.json",
+        "sha256": "7666b60de82de045c209d6623412107bc42157643ec098163efd0c67a43a00a4"
+      }
+    },
+    {
+      "engine": "chromium",
+      "passed": true,
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ],
+      "maxConcurrentPositionRequests": 1,
+      "positionRequestScope": "original-page-until-finished-or-failed",
+      "pendingPositionRequestsAtEnd": 0,
+      "unchangedLearningStateRevisionAndBackup": true,
+      "actualIphoneChecked": false,
+      "evidence": {
+        "file": "work/pr39-cache-aba-fix-20261017/image-resume/chromium/report.json",
+        "sha256": "3802496fb8d995de7915620cb4554a84120e12d918c1fc6acb174cfde570581a"
+      }
+    }
+  ],
+  "sourceInputs": [
+    {
+      "file": "lib/image-practice-position.ts",
+      "sha256": "b0024cf874da40b5222847a01c441af429c115b17fc5cd1c8361518455d532fd"
+    },
+    {
+      "file": "tests/image-practice-position.test.mjs",
+      "sha256": "74f56a58955797e6af1aafa0e24c320ff83624f1551f460d07a7d7fd86e454ee"
+    },
+    {
+      "file": "tests/image-practice-resume-qa.cjs",
+      "sha256": "c423bfd2f54985ca6a1842e68fce62209f26dfcc0ad5d0fccaeb9c0df3944ca7"
+    },
+    {
+      "file": "tests/README.md",
+      "sha256": "be1787cf3ea21aec450f6a812ceadaf9cfacab22f9f31af43e5e35a1667b8f8d"
+    },
+    {
+      "file": "docs/IMAGE_PRACTICE_POSITION.md",
+      "sha256": "8c578b288385ea9ebf6f14f2cdaa0e82c533b5a12e75fd255ca14863b1bdff1d"
+    },
+    {
+      "file": "docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md",
+      "sha256": "5b672e40f393a01120ea65d22bad52321e7abb3788e43dae8bc97dee378aa30e"
+    }
+  ],
+  "qaCopy": {
+    "source": "tests/image-practice-resume-qa.cjs",
+    "sourceSha256": "c423bfd2f54985ca6a1842e68fce62209f26dfcc0ad5d0fccaeb9c0df3944ca7",
+    "file": "work/pr39-cache-aba-fix-20261017/image-practice-resume-qa.cjs",
+    "sha256": "e28f8013a59f21cd7533a5e97b624d488be5dfe824ca53ac22e0caef3505f269",
+    "changes": "output directory and relative imports only"
+  },
+  "verification": {
+    "node22": 662,
+    "node24": 662,
+    "typecheck": "pass",
+    "lint": {
+      "errors": 0,
+      "preexistingWarnings": 15
+    },
+    "grammar": "pass",
+    "build": "pass",
+    "browserCommands": 2,
+    "scenarioGroupsPerEngine": 13
+  },
+  "review": {
+    "scope": "Focused approved follow-up; parent plus testing/maintainability and fresh in-host native source review. Not a new full PR Review Army or independent-model review.",
+    "confirmedRemainingFindings": 0,
+    "testing": "NO FINDINGS",
+    "maintainability": "NO FINDINGS",
+    "native": {
+      "confirmedFindings": 0,
+      "confidence": 9
+    },
+    "testFollowUp": "Parent reviewed final malformed-identity cases added to existing cache fallback test; final Node22/24 suites include them."
+  },
+  "preservation": {
+    "unchangedBaselineFiles": 897,
+    "primaryUnrelatedChanges": 20,
+    "startupSourceUnchanged": true,
+    "ownedPreviewProcessesStopped": 7,
+    "syntheticD1Retained": true
+  },
+  "risk": "Medium: async shared-cache recovery only. Optional local identity adds no server/network payload, learning data or migration.",
+  "rollback": "Revert this follow-up commit; retain position table and data. Prior reader ignores the extra field, but the old ABA defect returns. No production rollback executed.",
+  "limits": [
+    "Startup timeout cause remains UNKNOWN; no timeout, retry or startup/font source changes.",
+    "Full startup/font/performance/broad browser registry not rerun; prior outcomes are historical only.",
+    "Real iPhone/VoiceOver, hosted data/AI and remote CI not verified by local checks.",
+    "Cross-process localStorage atomicity and old/new mixed-version tab protection are not claimed."
+  ],
+  "operations": {
+    "siteSync": false,
+    "billingOrSettingsChange": false,
+    "merge": false,
+    "deployment": false,
+    "ci": "Post-push status must be queried separately; local success is not remote CI success."
+  }
+}

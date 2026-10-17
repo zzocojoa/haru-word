@@ -204,6 +204,49 @@ test('another tab reading or completing older work cannot erase the latest unsav
     reopened.controller.stop();
   }
 });
+test('remote choice preserves later other-tab C-to-B-to-C navigation across reload', async () => {
+  const storage = new Map();
+  const a = await opened(fixture('synthetic-a', storage), pos(0, 1));
+  const b = await opened(fixture('synthetic-a', storage), pos(0, 1));
+  let reloaded;
+  try {
+    a.controller.move(ids[1]); a.calls[1].reject(new Error('offline')); await tick();
+    a.controller.retry(); a.calls[2].resolve(pos(3, 2)); await tick();
+    assert.equal(a.view().status, 'conflict');
+    b.controller.move(ids[2]); b.calls[1].reject(new Error('offline')); await tick();
+    a.controller.useRemote();
+    b.controller.move(ids[1]); b.controller.move(ids[2]);
+    assert.equal(b.calls.length, 2, 'failed writer never blindly retries during navigation');
+    const draft = storage.get(positionCacheKey('synthetic-a'));
+    a.calls[3].resolve(pos(3, 2)); await tick();
+    assert.equal(a.view().entryId, ids[3]); assert.equal(a.view().status, 'saved');
+    assert.equal(storage.get(positionCacheKey('synthetic-a')), draft, 'later C draft survives the earlier remote choice');
+    const cached = JSON.parse(draft);
+    assert.equal(cached.entryId, ids[2]); assert.equal(cached.pending, true);
+    a.controller.stop(); b.controller.stop();
+    reloaded = await opened(fixture('synthetic-a', storage), pos(3, 2));
+    assert.equal(reloaded.view().entryId, ids[2]); assert.equal(reloaded.view().status, 'conflict');
+    assert.deepEqual(reloaded.calls.map(call => call.method), ['GET']);
+  } finally { a.controller.stop(); b.controller.stop(); reloaded?.controller.stop(); }
+});
+test('version1 cache with or without navigation identity survives reads and save receipts', async () => {
+  for (const navigationId of [undefined, 'a8a7b674-7539-46a5-99b6-0691196b348c']) {
+    const key = positionCacheKey('synthetic-a');
+    const storage = new Map([[key, JSON.stringify({ version: 1, entryId: ids[0], revision: 1, pending: false, sent: null, needsChoice: false, navigationId })]]);
+    const f = await opened(fixture('synthetic-a', storage), pos(0, 1));
+    try {
+      assert.equal(f.view().storageWarning, false); assert.equal(f.view().entryId, ids[0]);
+      assert.equal(JSON.parse(storage.get(key)).navigationId, navigationId);
+      f.controller.move(ids[2]);
+      const selected = JSON.parse(storage.get(key));
+      assert.equal(typeof selected.navigationId, 'string');
+      assert.notEqual(selected.navigationId, navigationId);
+      f.calls[1].resolve(pos(2, 2)); await tick();
+      const saved = JSON.parse(storage.get(key));
+      assert.equal(saved.navigationId, selected.navigationId); assert.equal(saved.pending, false);
+    } finally { f.controller.stop(); }
+  }
+});
 test('new explicit navigation may replace a previous tab draft and its own receipt clears the cache', async () => {
   const storage = new Map(), a = await opened(fixture('synthetic-a', storage)), b = await opened(fixture('synthetic-a', storage));
   a.controller.move(ids[1]); a.calls[1].reject(new Error('offline')); await tick();
@@ -235,7 +278,8 @@ test('strict lifecycle restart ignores an aborted old request', async () => {
   f.calls[1].resolve(pos(1, 1)); await tick(); assert.equal(f.view().entryId, ids[1]);
 });
 test('malformed or inaccessible browser storage falls back to memory without unverified writes', async () => {
-  for (const raw of ['{', '{}', JSON.stringify({ version: 1, entryId: ids[0], revision: -1, pending: true, sent: null })]) {
+  for (const raw of ['{', '{}', JSON.stringify({ version: 1, entryId: ids[0], revision: -1, pending: true, sent: null }),
+    ...[7, 'invalid'].map(navigationId => JSON.stringify({ version: 1, entryId: ids[0], revision: 1, pending: true, sent: null, navigationId }))]) {
     const f = await opened(fixture('synthetic-a', new Map([[positionCacheKey('synthetic-a'), raw]])));
     assert.equal(f.view().storageWarning, true); assert.equal(f.view().entryId, null); assert.equal(f.calls.length, 1);
   }

@@ -37,6 +37,7 @@ export class ImagePracticePositionController {
   private started = false;
   private moves = 0;
   private cachedValue: string | null = null;
+  private navigationId: string | undefined;
   private request: AbortController | null = null;
   constructor(readonly owner: string, private storage: () => Storage, private transport: Transport = positionTransport) {}
   getSnapshot = () => this.view;
@@ -53,7 +54,7 @@ export class ImagePracticePositionController {
       // results must not resurrect old drafts over it. Explicit remote choices
       // compare against the cache observed when that choice started instead.
       if (!fromNavigation && current !== this.cachedValue) return;
-      const value = JSON.stringify({ version: 1, entryId, revision, pending, sent, needsChoice });
+      const value = JSON.stringify({ version: 1, entryId, revision, pending, sent, needsChoice, navigationId: this.navigationId });
       storage.setItem(key, value); this.cachedValue = value;
     }
     catch { this.publish({ storageWarning: true }); }
@@ -66,8 +67,10 @@ export class ImagePracticePositionController {
       const c = JSON.parse(raw);
       if (!c || c.version !== 1 || !validRevision(c.revision) || (c.entryId !== null && !validId(c.entryId)) || typeof c.pending !== 'boolean' ||
           (c.needsChoice !== undefined && typeof c.needsChoice !== 'boolean') || (c.needsChoice && !c.pending) ||
+          (c.navigationId !== undefined && (typeof c.navigationId !== 'string' || !/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(c.navigationId))) ||
           (c.pending && !validId(c.entryId)) || (c.sent !== null && (!c.sent || !validId(c.sent.entryId) || c.sent.revision !== c.revision || !c.pending)))
         throw new Error('Invalid cached position');
+      this.navigationId = c.navigationId;
       this.publish({ entryId: c.entryId, revision: c.revision, pending: c.pending, sent: c.sent, needsChoice: c.needsChoice ?? false,
         available: c.entryId !== null });
     } catch { this.publish({ storageWarning: true }); }
@@ -79,6 +82,9 @@ export class ImagePracticePositionController {
   };
   move = (entryId: string) => {
     if (this.stopped || !validId(entryId) || !this.view.available || this.view.status === 'auth') return;
+    // Same-card round trips are still new choices; background responses retain
+    // this identity so another tab cannot mistake C -> B -> C for no navigation.
+    this.navigationId = crypto.randomUUID();
     this.moves++; this.publish({ entryId, pending: true }); this.persist(true);
     if (!this.busy && this.view.status === 'saved') void this.flush();
   };
