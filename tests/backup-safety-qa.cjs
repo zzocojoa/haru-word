@@ -12,10 +12,12 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
   await build({ entryPoints: ['lib/backup.ts'], outfile: 'work/backup-safety-parser.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
   await build({ stdin: { contents: `import React, {useState} from 'react';
     import {createRoot} from 'react-dom/client';
+    import {flushSync} from 'react-dom';
     import BackupDialog from './app/backup-dialog';
     import {EMPTY} from './lib/learning';
     function Harness(){const [state,setState]=useState(structuredClone(EMPTY));
-      window.changeBackupState=()=>setState(s=>({...s,settings:{...s.settings,dailyGoal:4}}));
+      // Commit the harness update before checking the resulting safety controls.
+      window.changeBackupState=()=>flushSync(()=>setState(s=>({...s,settings:{...s.settings,dailyGoal:4}})));
       window.restoreCalls=0;
       return <BackupDialog date="2026-09-24" now={()=>Date.parse('2026-09-24T00:00:00Z')} state={state}
         busy={false} restoring={false} error="" conflict={false} onClose={()=>{}}

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { cardMeaning } from '@/lib/catalog-basics';
 import type { Progress, Word } from '@/lib/learning';
 import { resolveWordImage, WORD_IMAGES, type WordImage } from '@/lib/word-image';
@@ -75,6 +75,7 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
   const [jump, setJump] = useState(false);
   const [number, setNumber] = useState('');
   const [numberError, setNumberError] = useState(false);
+  const numberButton = useRef<HTMLButtonElement>(null);
   const move = (next: number) => {
     controller.move(deck[next].word.id); setVisit(value => value + 1); setJump(false); setNumberError(false);
   };
@@ -89,12 +90,13 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
       <PositionStatus position={position} controller={controller} fallback={resolved.fallback} displayedEntryId={resolved.entryId}/>
       <nav className="image-practice-navigation" aria-label="이미지 연습 카드 이동">
         <button type="button" className="secondary-button" disabled={index === 0 || position.status === 'auth'} onClick={() => move(index - 1)}>이전</button>
-        <button type="button" className="text-button" aria-expanded={jump} aria-label={`카드 번호 ${index + 1} / ${deck.length}`} onClick={() => { setJump(!jump); setNumber(String(index + 1)); setNumberError(false); }}>{index + 1} / {deck.length}</button>
+        <button ref={numberButton} type="button" className="text-button" aria-expanded={jump} aria-label={`카드 번호 ${index + 1} / ${deck.length}`} onClick={() => { setJump(!jump); setNumber(String(index + 1)); setNumberError(false); }}>{index + 1} / {deck.length}</button>
         <button type="button" className="secondary-button" disabled={index === deck.length - 1 || position.status === 'auth'} onClick={() => move(index + 1)}>다음</button>
       </nav>
       {jump && <form className="image-practice-jump" onSubmit={event => {
         event.preventDefault(); const next = practiceNumber(number, deck.length);
-        if (next === null) setNumberError(true); else move(next);
+        if (next === null) setNumberError(true);
+        else { move(next); numberButton.current?.focus({ preventScroll: true }); }
       }}>
         <label htmlFor="image-practice-number">카드 번호 (1–{deck.length})</label>
         <input id="image-practice-number" type="text" inputMode="numeric" value={number} aria-invalid={numberError}

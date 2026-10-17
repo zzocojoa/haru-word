@@ -14,9 +14,10 @@ async function openWork(page) {
 }
 (async () => {
   await waitForWorker(); const browser = await launchBrowser({ engine }), errors = [], checks = [];
+  let diagnosticPage;
   try {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('literal_senses') });
-    const page = await c.newPage(); page.on('pageerror', e => errors.push(e.message));
+    const page = await c.newPage(); diagnosticPage = page; page.on('pageerror', e => errors.push(e.message));
     await page.goto(base); await saved(page);
     for (const meaning of ['constructor', 'prototype', '__proto__']) {
       await openWork(page); const dialog = page.getByRole('dialog');
@@ -42,7 +43,7 @@ async function openWork(page) {
     assert.equal(oldRestore.status(), 426); assert.deepEqual(await get(restored), initial);
     const response = await restored.request.post(base + '/api/state/restore', { headers: { ...headers, 'Content-Type': 'application/json', 'X-Study-Revision': String(initial.revision) }, data: raw });
     assert.equal(response.status(), 200, await response.text()); assert.deepEqual((await get(restored)).state, original);
-    const rp = await restored.newPage(); rp.on('pageerror', e => errors.push(e.message));
+    const rp = await restored.newPage(); diagnosticPage = rp; rp.on('pageerror', e => errors.push(e.message));
     await rp.goto(base); await saved(rp); await openWork(rp);
     for (const meaning of ['constructor', 'prototype', '__proto__']) {
       await rp.getByRole('dialog').getByLabel('학습할 뜻 선택').selectOption(meaning);
@@ -60,7 +61,7 @@ async function openWork(page) {
       const result = await limit.request.put(base + '/api/state', { headers, data: { revision: snapshot.revision, progress, sessions: {} } });
       assert.equal(result.status(), 200, await result.text()); snapshot.revision = (await result.json()).revision;
     }
-    const before = await get(limit), lp = await limit.newPage(); lp.on('pageerror', e => errors.push(e.message));
+    const before = await get(limit), lp = await limit.newPage(); diagnosticPage = lp; lp.on('pageerror', e => errors.push(e.message));
     await lp.goto(base); await saved(lp); await lp.getByRole('tab', { name: '전체 단어장', exact: true }).click();
     await lp.getByRole('button', { name: '개인 단어 추가', exact: true }).click();
     const dialog = lp.getByRole('dialog');
@@ -86,5 +87,12 @@ async function openWork(page) {
     checks.push('5001st entry rejected by real server; modal explains the limit and retains input; original account/revision unchanged; 320/390/1440px and axe');
     assert.deepEqual(errors, []); const result = { passed: true, engine, checks, errors };
     fs.writeFileSync(`${out}/result.json`, JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
+  } catch (error) {
+    if (diagnosticPage && !diagnosticPage.isClosed()) {
+      await diagnosticPage.screenshot({ path: `${out}/failure.png` });
+      fs.writeFileSync(`${out}/failure.json`, JSON.stringify({ errors, dialogCount: await diagnosticPage.getByRole('dialog').count(),
+        editorCount: await diagnosticPage.getByRole('button', { name: '다른 뜻 추가', exact: true }).count() }, null, 2));
+    }
+    throw error;
   } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

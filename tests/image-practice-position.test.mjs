@@ -45,6 +45,33 @@ test('failed initial GET cannot write; cached draft waits for server and first u
   assert.deepEqual(next.calls[2].body, { entryId: ids[2], revision: 0 });
   next.calls[2].resolve(pos(2, 1)); await tick();
 });
+test('all short navigation and receipt schedules save the latest card with one request at a time', async () => {
+  // Include repeated cards and A -> B -> A while earlier saves are unresolved.
+  for (let sequence = 0; sequence < 81; sequence++) for (let timing = 0; timing < 8; timing++) {
+    const f = await opened(); let nextReceipt = 1, remote = pos();
+    const settle = async () => {
+      while (nextReceipt < f.calls.length) {
+        assert.equal(f.calls.length - nextReceipt, 1, 'only one write may be in flight');
+        const call = f.calls[nextReceipt++];
+        assert.equal(call.method, 'PUT'); assert.equal(call.body.revision, remote.revision);
+        remote = { entryId: call.body.entryId, revision: remote.revision + 1, updatedAt: '2026-10-17T00:00:00.000Z' };
+        call.resolve(remote); await tick();
+        if (f.view().status === 'saved') assert.equal(f.view().entryId, remote.entryId);
+      }
+    };
+    let last;
+    for (let step = 0; step < 4; step++) {
+      last = ids[Math.floor(sequence / 3 ** step) % 3]; f.controller.move(last);
+      assert.equal(f.view().entryId, last, 'navigation never waits for a receipt');
+      assert.equal(f.calls.length - nextReceipt, 1);
+      if (timing & (1 << step)) await settle();
+    }
+    await settle();
+    assert.equal(remote.entryId, last); assert.equal(f.view().status, 'saved');
+    const cache = JSON.parse(f.storage.get(positionCacheKey('synthetic-a')));
+    assert.equal(cache.entryId, last); assert.equal(cache.pending, false);
+  }
+});
 test('lost write response is reconciled before retry and latest draft uses acknowledged revision', async () => {
   const f = await opened(); f.controller.move(ids[1]); f.controller.move(ids[2]);
   f.calls[1].reject(new Error('timeout')); await tick(); assert.equal(f.calls.length, 2);
@@ -94,6 +121,52 @@ test('account disposal aborts queued work and ignores late responses; a new acco
   assert.equal(b.view().entryId, null); assert.equal(b.calls.length, 1);
   const restored = fixture('synthetic-a', a.storage); restored.controller.open(); restored.calls[0].resolve(pos(1, 1)); await tick();
   assert.deepEqual(restored.calls[1].body, { entryId: ids[2], revision: 1 }); restored.calls[1].resolve(pos(2, 2)); await tick();
+});
+test('another tab reading or completing older work cannot erase the latest unsaved recovery cursor', async () => {
+  for (const action of ['read', 'receipt', 'failure']) {
+    const storage = new Map(), oldTab = await opened(fixture('synthetic-a', storage));
+    const activeTab = await opened(fixture('synthetic-a', storage));
+    if (action !== 'read') oldTab.controller.move(ids[1]);
+    activeTab.controller.move(ids[2]); activeTab.calls[1].reject(new Error('offline')); await tick();
+    const pending = storage.get(positionCacheKey('synthetic-a'));
+    if (action === 'read') { oldTab.controller.open(); oldTab.calls[1].resolve(pos()); }
+    else if (action === 'receipt') oldTab.calls[1].resolve(pos(1, 1));
+    else oldTab.calls[1].reject(new Error('late failure'));
+    await tick();
+    assert.equal(storage.get(positionCacheKey('synthetic-a')), pending, `${action} must preserve the other tab's pending recovery`);
+    activeTab.controller.stop(); oldTab.controller.stop();
+    const reopened = fixture('synthetic-a', storage); reopened.controller.open();
+    assert.equal(reopened.view().entryId, ids[2]);
+    reopened.calls[0].resolve(action === 'receipt' ? pos(1, 1) : pos()); await tick();
+    if (action === 'receipt') assert.equal(reopened.view().status, 'conflict');
+    else { assert.deepEqual(reopened.calls[1].body, { entryId: ids[2], revision: 0 }); reopened.calls[1].resolve(pos(2, 1)); await tick(); }
+    reopened.controller.stop();
+  }
+});
+test('new explicit navigation may replace a previous tab draft and its own receipt clears the cache', async () => {
+  const storage = new Map(), a = await opened(fixture('synthetic-a', storage)), b = await opened(fixture('synthetic-a', storage));
+  a.controller.move(ids[1]); a.calls[1].reject(new Error('offline')); await tick();
+  b.controller.open(); b.calls[1].resolve(pos()); await tick();
+  b.controller.move(ids[3]);
+  assert.equal(JSON.parse(storage.get(positionCacheKey('synthetic-a'))).entryId, ids[3]);
+  b.calls[2].resolve(pos(3, 1)); await tick();
+  assert.equal(JSON.parse(storage.get(positionCacheKey('synthetic-a'))).pending, false);
+});
+test('late failure cannot resurrect an older draft over another tab saved choice and replay it after reload', async () => {
+  const storage = new Map(), a = await opened(fixture('synthetic-a', storage), pos(0, 1));
+  const b = await opened(fixture('synthetic-a', storage), pos(0, 1));
+  a.controller.move(ids[1]); a.controller.move(ids[2]);
+  b.controller.move(ids[1]); b.calls[1].resolve(pos(1, 2)); await tick();
+  const saved = storage.get(positionCacheKey('synthetic-a'));
+  assert.equal(JSON.parse(saved).pending, false);
+  a.calls[1].reject(new Error('late network failure before server')); await tick();
+  assert.equal(storage.get(positionCacheKey('synthetic-a')), saved, 'newer saved choice must not become an old draft');
+  a.controller.stop(); b.controller.stop();
+  const reopened = fixture('synthetic-a', storage); reopened.controller.open();
+  reopened.calls[0].resolve(pos(1, 2)); await tick();
+  assert.equal(reopened.calls.length, 1, 'another tab save is not a receipt for the old failed write');
+  assert.equal(reopened.view().entryId, ids[1]); assert.equal(reopened.view().status, 'saved');
+  reopened.controller.stop();
 });
 test('strict lifecycle restart ignores an aborted old request', async () => {
   const f = fixture(); f.controller.open(); f.controller.stop(); f.controller.start(); f.controller.open();

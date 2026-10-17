@@ -59,7 +59,8 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     const open = async (p = page) => { await p.getByRole('button', { name: '이미지 연습', exact: true }).click(); await p.getByRole('dialog').getByRole('button', { name: /카드 번호/ }).waitFor(); return p.getByRole('dialog'); };
     const number = (n, p = page) => p.getByRole('dialog').getByRole('button', { name: `카드 번호 ${n} / 3809`, exact: true });
     const saved = async (p = page) => p.getByRole('dialog').getByText('위치 저장됨', { exact: true }).waitFor();
-    const jump = async n => { const d = page.getByRole('dialog'); await d.getByRole('button', { name: /카드 번호/ }).click(); await d.getByLabel(/카드 번호 \(1/).fill(String(n)); await d.getByRole('button', { name: '이동', exact: true }).click(); };
+    const jump = async n => { const d = page.getByRole('dialog'); await d.getByRole('button', { name: /카드 번호/ }).click(); await d.getByLabel(/카드 번호 \(1/).fill(String(n)); await d.getByRole('button', { name: '이동', exact: true }).click();
+      assert.equal(await number(n).evaluate(el => document.activeElement === el), true, 'jump returns focus to the surviving card number control'); };
     const close = async (p = page) => { await p.getByRole('button', { name: '연습 닫기', exact: true }).click(); await p.getByRole('dialog').waitFor({ state: 'hidden' }); };
     await ready(page); assert.equal(calls.length, 0); assert.equal(imageRequests.length, 0);
     let dialog = await open(); await number(1).waitFor(); assert.equal(await dialog.getByRole('button', { name: '이전', exact: true }).isDisabled(), true);
@@ -89,6 +90,32 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await page.getByRole('button', { name: '현재 위치 저장', exact: true }).waitFor();
     await page.getByRole('button', { name: '현재 위치 저장', exact: true }).click(); await number(4).waitFor(); await saved();
     assert.equal((await getPosition()).entryId, ids[3]); checks.push('two devices conflict and both explicit choices work');
+    // Pages in one browser context share localStorage, unlike the device contexts above.
+    const sibling = await context.newPage(); await ready(sibling); await open(sibling); await saved(sibling);
+    mode = 'put-error'; await dialog.getByRole('button', { name: '다음', exact: true }).click();
+    await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor(); mode = '';
+    await close(sibling);
+    const siblingRead = sibling.waitForResponse(r => new URL(r.url()).pathname === endpoint && r.request().method() === 'GET');
+    await open(sibling); await (await siblingRead).finished(); await saved(sibling);
+    const sharedDraft = await sibling.evaluate(owner => JSON.parse(localStorage.getItem(`haru-image-position-v1:${encodeURIComponent(owner)}`)), identity['oai-authenticated-user-id']);
+    assert.equal(sharedDraft.pending, true); assert.equal(sharedDraft.entryId, ids[4]);
+    await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor(); await open(); await number(5).waitFor(); await saved();
+    assert.equal((await getPosition()).entryId, ids[4]); await sibling.close();
+    checks.push('same-browser tab lookup preserves another tab failed cursor across reload and recovery');
+    const latestTab = await context.newPage(); await ready(latestTab); await open(latestTab); await saved(latestTab);
+    // This tab has its own request queue; the held-request counter tracks the original tab.
+    await latestTab.route('**/api/image-practice/position', route => route.continue());
+    mode = 'put-hold'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await wait(() => held);
+    await dialog.getByRole('button', { name: '다음', exact: true }).click(); await number(7).waitFor();
+    await latestTab.getByRole('dialog').getByRole('button', { name: '다음', exact: true }).click(); await number(6, latestTab).waitFor(); await saved(latestTab);
+    const latestSaved = await getPosition(), staleHeld = held; held = null;
+    await staleHeld.route.abort(); staleHeld.finish(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
+    const savedCache = await page.evaluate(owner => JSON.parse(localStorage.getItem(`haru-image-position-v1:${encodeURIComponent(owner)}`)), identity['oai-authenticated-user-id']);
+    assert.equal(savedCache.pending, false); assert.equal(savedCache.entryId, ids[5]);
+    const reloadStart = calls.length;
+    await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor(); await open(); await number(6).waitFor(); await saved();
+    assert.deepEqual(calls.slice(reloadStart), ['GET']); assert.deepEqual(await getPosition(), latestSaved); await latestTab.close();
+    checks.push('late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload');
     mode = 'put-error'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
     const retryStart = calls.length; mode = ''; await page.getByRole('button', { name: '다시 저장', exact: true }).click(); await saved(); assert.deepEqual(calls.slice(retryStart), ['GET', 'PUT']);
     mode = 'put-lost'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
@@ -121,7 +148,11 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     }
     await page.evaluate(() => document.documentElement.style.fontSize = '100%'); await page.setViewportSize({ width: 390, height: 844 });
     await dialog.getByRole('button', { name: /카드 번호/ }).focus(); await page.keyboard.press('Enter'); await page.keyboard.press('Tab');
+    assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).evaluate(el => document.activeElement === el), true);
+    await page.keyboard.press('Tab');
+    assert.equal(await dialog.getByLabel(/카드 번호 \(1/).evaluate(el => document.activeElement === el), true, 'keyboard entry reaches the actual number input');
     await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.type('9'); await page.keyboard.press('Enter'); await number(9).waitFor();
+    assert.equal(await number(9).evaluate(el => document.activeElement === el), true, 'keyboard jump preserves navigation focus');
     await saved(); await page.keyboard.press('Escape'); await dialog.waitFor({ state: 'hidden' });
     await page.waitForFunction(() => document.activeElement === document.querySelector('.image-practice-entry'));
     checks.push('320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe');

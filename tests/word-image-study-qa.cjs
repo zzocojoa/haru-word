@@ -121,8 +121,10 @@ async function scenario(browser, name, entry, stage = 'learn') {
         await page.waitForFunction(() => { const image = document.querySelector('.word-image-learn'); return image?.complete && image.naturalWidth > 0; });
         if (name === 'learn-A1') await layouts(page, panel);
         await panel.locator('#study-meaning').fill('그림 없는 다른 뜻');
+        await image.waitFor({ state: 'detached' });
         assert.equal(await panel.locator('img').count(), 0);
         await panel.locator('#study-meaning').fill(entry.baseMeaning);
+        await image.waitFor({ state: 'visible' });
         assert.equal(await panel.locator('img').count(), 1);
       }
       assert.deepEqual(state.progress, resumedProgress);

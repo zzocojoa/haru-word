@@ -36,6 +36,7 @@ export class ImagePracticePositionController {
   private stopped = false;
   private started = false;
   private moves = 0;
+  private cachedValue: string | null = null;
   private request: AbortController | null = null;
   constructor(readonly owner: string, private storage: () => Storage, private transport: Transport = positionTransport) {}
   getSnapshot = () => this.view;
@@ -44,14 +45,22 @@ export class ImagePracticePositionController {
     this.view = { ...this.view, ...update };
     for (const listener of this.listeners) listener();
   }
-  private persist() {
+  private persist(fromNavigation = false) {
     const { entryId, revision, pending, sent, needsChoice } = this.view;
-    try { this.storage().setItem(positionCacheKey(this.owner), JSON.stringify({ version: 1, entryId, revision, pending, sent, needsChoice })); }
+    try {
+      const storage = this.storage(), key = positionCacheKey(this.owner), current = storage.getItem(key);
+      // A different tab may have selected or saved a newer cursor. Background
+      // results must not resurrect old drafts over it; only a new move replaces it.
+      if (!fromNavigation && current !== this.cachedValue) return;
+      const value = JSON.stringify({ version: 1, entryId, revision, pending, sent, needsChoice });
+      storage.setItem(key, value); this.cachedValue = value;
+    }
     catch { this.publish({ storageWarning: true }); }
   }
   private readCache() {
     try {
       const raw = this.storage().getItem(positionCacheKey(this.owner));
+      this.cachedValue = raw;
       if (!raw) return;
       const c = JSON.parse(raw);
       if (!c || c.version !== 1 || !validRevision(c.revision) || (c.entryId !== null && !validId(c.entryId)) || typeof c.pending !== 'boolean' ||
@@ -69,7 +78,7 @@ export class ImagePracticePositionController {
   };
   move = (entryId: string) => {
     if (this.stopped || !validId(entryId) || !this.view.available || this.view.status === 'auth') return;
-    this.moves++; this.publish({ entryId, pending: true }); this.persist();
+    this.moves++; this.publish({ entryId, pending: true }); this.persist(true);
     if (!this.busy && this.view.status === 'saved') void this.flush();
   };
   retry = () => { if (!this.busy && !this.stopped && this.view.status !== 'auth') void this.check('resume'); };

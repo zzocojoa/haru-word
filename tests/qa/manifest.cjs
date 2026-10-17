@@ -38,6 +38,8 @@ module.exports = [
   "history-performance-qa.cjs",
   "integration-consistency-qa.cjs",
   "image-practice-qa.cjs",
+  "image-practice-resume-qa.cjs",
+  "image-practice-performance-qa.cjs",
   "journal-navigation-qa.cjs",
   "learning-message-qa.cjs",
   "lazy-materials-qa.cjs",
