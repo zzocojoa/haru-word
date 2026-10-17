@@ -53,6 +53,7 @@ module.exports = [
   "refactor-boundaries-qa.cjs",
   "repeat-learning-qa.cjs",
   "request-timeout-qa.cjs",
+  "request-concurrency-qa.cjs",
   "request-body-qa.cjs",
   "response-contract-qa.cjs",
   "resume-qa.cjs",

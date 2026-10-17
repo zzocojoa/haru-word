@@ -1,6 +1,7 @@
 // Real isolated local D1, synthetic accounts; never send requests to a hosted app.
 const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
 const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker, axePath } = require('./qa/runtime.cjs');
+const { trackRequestConcurrency } = require('./qa/request-concurrency.cjs');
 const { history } = require('./fixtures/backup-history.cjs');
 const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/image-practice-resume/${engine}`;
 const rows = JSON.parse(fs.readFileSync('data/word-image-ui.json')).entries;
@@ -12,7 +13,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
 (async () => {
   await waitForWorker(); fs.mkdirSync(out, { recursive: true });
   const browser = await launchBrowser({ engine }), identity = accountHeaders('image_resume'), checks = [], errors = [];
-  let page;
+  let page, positionRequests;
   try {
     const context = await browser.newContext({ extraHTTPHeaders: identity, viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     const getState = async () => { const r = await context.request.get(base + '/api/state', { headers }); assert.equal(r.status(), 200); return r.json(); };
@@ -24,7 +25,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await require('esbuild').build({ entryPoints: ['lib/backup-format.ts'], outfile: 'work/image-practice-resume/backup.cjs', bundle: true, format: 'cjs', platform: 'node', logLevel: 'silent' });
     const { makeBackup } = require('../work/image-practice-resume/backup.cjs');
     const backupBefore = makeBackup(before.state, new Date('2026-10-17T00:00:00Z'));
-    let mode = '', held = null, active = 0, maxActive = 0, blockImage = false;
+    let mode = '', held = null, blockImage = false;
     const calls = [], imageRequests = [], forbidden = [];
     async function routes(ctx, control = false) {
       await ctx.route('**/*', async route => {
@@ -39,22 +40,18 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
         if (url.pathname.startsWith('/api/') && /feedback|automation|evaluation/.test(url.pathname)) { forbidden.push('ai'); return route.abort(); }
         if (url.pathname === endpoint && control) {
           const method = request.method(); calls.push(method);
-          active++; maxActive = Math.max(maxActive, active);
-          try {
-            if (mode === 'get-error' && method === 'GET' || mode === 'put-error' && method === 'PUT') return await route.fulfill({ status: 503, json: {} });
-            if (mode === 'put-hold' && method === 'PUT') { mode = ''; held = { route, finish: () => { active--; } }; return; }
-            if (mode === 'put-lost' && method === 'PUT') { mode = ''; await route.fetch(); return await route.abort(); }
-            if (mode === 'put-timeout' && method === 'PUT') {
-              mode = ''; held = { route, finish: () => { active--; } }; return;
-            }
-            return await route.continue();
-          } finally { if (held?.route !== route) active--; }
+          if (mode === 'get-error' && method === 'GET' || mode === 'put-error' && method === 'PUT') return route.fulfill({ status: 503, json: {} });
+          if ((mode === 'put-hold' || mode === 'put-timeout') && method === 'PUT') { mode = ''; held = { route }; return; }
+          if (mode === 'put-lost' && method === 'PUT') { mode = ''; await route.fetch(); return route.abort(); }
         }
         return route.continue();
       });
     }
     await routes(context, true);
     page = await context.newPage(); page.on('pageerror', e => errors.push(e.name));
+    positionRequests = trackRequestConcurrency(page, request => {
+      const url = new URL(request.url()); return url.origin === base && url.pathname === endpoint;
+    });
     const ready = async p => { await p.goto(base, { waitUntil: 'domcontentloaded' }); await p.getByText('서버에 저장됨', { exact: true }).waitFor(); };
     const open = async (p = page) => { await p.getByRole('button', { name: '이미지 연습', exact: true }).click(); await p.getByRole('dialog').getByRole('button', { name: /카드 번호/ }).waitFor(); return p.getByRole('dialog'); };
     const number = (n, p = page) => p.getByRole('dialog').getByRole('button', { name: `카드 번호 ${n} / 3809`, exact: true });
@@ -72,7 +69,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await dialog.getByRole('button', { name: '다음', exact: true }).click(); await dialog.getByRole('button', { name: '다음', exact: true }).click();
     await number(4).waitFor(); assert.equal(await dialog.locator('.image-practice-answer').count(), 0);
     assert.equal(calls.filter(c => c === 'PUT').length, 1); await close();
-    const pending = held; held = null; await pending.route.continue(); pending.finish();
+    const pending = held; held = null; await pending.route.continue();
     await wait(async () => (await getPosition()).entryId === ids[3]);
     dialog = await open(); await number(4).waitFor(); assert.equal(await dialog.locator('.image-practice-answer').count(), 0); await saved();
     assert.equal(await page.evaluate(() => window.history.length), historyLength); checks.push('rapid navigation coalesces, closes while saving, resumes front, no history entries');
@@ -103,13 +100,13 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     assert.equal((await getPosition()).entryId, ids[4]); await sibling.close();
     checks.push('same-browser tab lookup preserves another tab failed cursor across reload and recovery');
     const latestTab = await context.newPage(); await ready(latestTab); await open(latestTab); await saved(latestTab);
-    // This tab has its own request queue; the held-request counter tracks the original tab.
+    // This tab has its own queue; bypass fault injection intended for the original tab.
     await latestTab.route('**/api/image-practice/position', route => route.continue());
     mode = 'put-hold'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await wait(() => held);
     await dialog.getByRole('button', { name: '다음', exact: true }).click(); await number(7).waitFor();
     await latestTab.getByRole('dialog').getByRole('button', { name: '다음', exact: true }).click(); await number(6, latestTab).waitFor(); await saved(latestTab);
     const latestSaved = await getPosition(), staleHeld = held; held = null;
-    await staleHeld.route.abort(); staleHeld.finish(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
+    await staleHeld.route.abort(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
     const savedCache = await page.evaluate(owner => JSON.parse(localStorage.getItem(`haru-image-position-v1:${encodeURIComponent(owner)}`)), identity['oai-authenticated-user-id']);
     assert.equal(savedCache.pending, false); assert.equal(savedCache.entryId, ids[5]);
     const reloadStart = calls.length;
@@ -123,7 +120,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     // Exercise the real 25s request deadline using the browser clock; the server receives no held write.
     await page.clock.install(); mode = 'put-timeout'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await wait(() => held);
     await page.clock.runFor(26000); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
-    const timeoutHeld = held; held = null; await timeoutHeld.route.abort(); timeoutHeld.finish();
+    const timeoutHeld = held; held = null; await timeoutHeld.route.abort();
     await page.clock.resume(); const timeoutStart = calls.length; await page.getByRole('button', { name: '다시 저장', exact: true }).click(); await saved(); assert.deepEqual(calls.slice(timeoutStart), ['GET', 'PUT']);
     checks.push('write failure, lost response and timeout preserve position and retry reads first');
     await jump(3809); await saved(); assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).isDisabled(), true);
@@ -229,12 +226,15 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     // connection after an unread PUT body is rejected with 401 in local Wrangler.
     // No-DB-write on rejection is independently covered by the real SQLite API test.
     checks.push('new account starts at its own position; stale owner receives 401 and stops navigation/writes');
-    assert.deepEqual(forbidden, []); assert.deepEqual(errors, []); assert.equal(maxActive, 1);
-    const report = { passed: true, engine, checks, maxConcurrentPositionRequests: maxActive, unchangedLearningStateRevisionAndBackup: true, actualIphoneChecked: false };
+    await wait(() => positionRequests.active === 0);
+    assert.deepEqual(forbidden, []); assert.deepEqual(errors, []); assert.equal(positionRequests.maximum, 1);
+    const report = { passed: true, engine, checks, maxConcurrentPositionRequests: positionRequests.maximum,
+      positionRequestScope: 'original-page-until-finished-or-failed', pendingPositionRequestsAtEnd: positionRequests.active,
+      unchangedLearningStateRevisionAndBackup: true, actualIphoneChecked: false };
     fs.writeFileSync(`${out}/report.json`, JSON.stringify(report, null, 2)); console.log(JSON.stringify(report));
   } catch (error) {
     if (page) await page.screenshot({ path: `${out}/failure.png` }).catch(() => {});
     throw error;
-  } finally { await closeBrowser(browser); }
+  } finally { positionRequests?.dispose(); await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
 

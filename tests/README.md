@@ -2,6 +2,8 @@
 
 - `image-practice-position-api.test.mjs` / `image-practice-position.test.mjs`: 독립 위치 API의 무쓰기 GET·인증·계정·출처·1KB 스트림 제한·동시 revision 충돌과 클라이언트의 직렬 저장·최신 대기 위치·응답 유실·시간 초과·충돌 선택·계정 전환·손상/차단 캐시를 검사한다. 같은 중간 카드를 다른 탭/기기가 저장한 경우의 재시도·재개, 최종 위치 동일 시 GET만으로 복구, 원격 선택 전/후의 다른 탭 초안 순서와 선택 실패·취소도 포함한다.
 - `image-practice-resume-qa.cjs`: 별도 로컬 D1 가상 계정에서 닫기·탭·새로고침·별도 브라우저 이어 보기, 번호/경계/이미지 실패, 두 기기 충돌, 실패·시간 초과·응답 유실 후 조회 우선 재시도, 제외/빈 카드·계정 전환과 학습 문서/revision/백업 불변을 확인한다. Chromium/WebKit·320/390/1440px·100/200%·키보드·axe와 현재 번호 live region·이동 버튼 초점 유지·외곽선 잘림 방지를 포함한다. 실제 스크린리더 발화는 별도 확인 대상이다.
+- 위치 요청 동시성은 원래 연습 페이지의 `request`부터 `requestfinished`/`requestfailed`까지 추적한다. 다른 탭의 독립 요청이나 API fixture 요청은 합산하지 않는다. `route.continue()` 반환과 응답 헤더 도착은 요청 완료가 아니다. `maxConcurrentPositionRequests`와 `pendingPositionRequestsAtEnd`는 이 범위의 최대·종료 시 미완료 요청 수다.
+- `node tests/request-concurrency-qa.cjs`는 자체 루프백 서버에서 응답 본문 2개를 실제 보류해 최대 동시 요청 2를 검증한다. 응답 헤더 후 유지, 첫 완료 후 1·503 본문 완료 후 0, 취소 후 0, 다른 페이지 제외와 감시 해제도 확인한다. 앱 Worker·D1·외부 서비스는 필요 없으며 설치된 `QA_PLAYWRIGHT_PATH`를 사용한다. `QA_BROWSER=webkit`으로 반복하고 기능 QA 등록부에도 포함한다. 결과는 `outputs/request-concurrency/<engine>/report.json`이다.
 - `image-practice-performance-qa.cjs`: `QA_BASELINE_URL`/`QA_BASELINE_DIST`와 `QA_BASE_URL`의 별도 루프백 Worker를 같은 0/365/1,825회차 자료·CPU 4배·기본/느린망·3표본으로 비교한다. 첫 저장 화면까지 시간·초기 JS/바이트·위치/이미지 요청 0과 진입 후 그림 두 장을 확인한다. 다른 브라우저 검사를 동시에 실행하지 않는다.
 
 - `material-line-endings.test.mjs`는 두 자료 생성기에 LF/CRLF 원문과 실제 Git `core.autocrlf=false/true` 체크아웃을 제공한다. 정규화 지문·LF 생성물·빌드 검사 통과와 원문 변경 감지/실패 시 출력 보존을 확인한다. 원문 지문은 CRLF만 LF로 정규화하며 생성 JSON은 `.gitattributes`의 LF 정책을 따른다.
