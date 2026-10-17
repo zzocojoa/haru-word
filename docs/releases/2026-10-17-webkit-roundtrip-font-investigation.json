@@ -1,0 +1,423 @@
+{
+  "verifiedAt": "2026-10-17T01:30:30.545Z",
+  "timezone": "Asia/Seoul",
+  "baseCommit": "b37b27a8b5118649f837438d1cc839c11128307c",
+  "scope": "PR #39 follow-up: diagnose and stabilize state-roundtrip WebKit QA. No runtime changes, merge or deployment.",
+  "environment": {
+    "browser": "Playwright 1.62.1 bundled WebKit, Windows",
+    "viewport": "390x844",
+    "accounts": "fresh synthetic local D1 only",
+    "actualIphone": false
+  },
+  "naturalReproduction": {
+    "iteration": 10,
+    "stage": "constructor",
+    "timeoutMs": 30000,
+    "events": [
+      {
+        "at": 728,
+        "type": "pointerdown",
+        "tag": "BUTTON",
+        "role": null,
+        "slot": null,
+        "text": "work동사",
+        "scroll": 0,
+        "x": 153,
+        "y": 560
+      },
+      {
+        "at": 752,
+        "type": "pointerup",
+        "tag": "TD",
+        "role": null,
+        "slot": "table-cell",
+        "scroll": 0,
+        "x": 153,
+        "y": 560
+      },
+      {
+        "at": 752,
+        "type": "click",
+        "tag": "TBODY",
+        "role": null,
+        "slot": "table-body",
+        "scroll": 0,
+        "x": 153,
+        "y": 560
+      }
+    ],
+    "firstHistoricalFailureHadNoTrace": true,
+    "note": "The same symptom was reproduced on the unchanged build. The original historical run cannot be replayed byte-for-byte because it had no event trace."
+  },
+  "rootCause": "External Google web-font subsets can finish between pointerdown and pointerup. The work row moves up about 30px, so the click lands on the table instead of the button. The editor never opens; the following add-meaning locator times out.",
+  "controlledExperiment": {
+    "source": "Unmodified Google font CSS and WOFF2 already captured in the local Playwright trace; replayed from local files without live network.",
+    "steps": [
+      "Hold font responses; open library and search work.",
+      "Release DM Sans and partial Noto Sans KR subsets until the button top is 541.67px.",
+      "Press at the button center (563.72px); release the remaining subsets before pointerup.",
+      "Confirm the button top is 511.28-512.28px, click targets TR, no dialog opens."
+    ],
+    "repetitions": [
+      {
+        "i": 0,
+        "before": {
+          "x": 33,
+          "y": 541.671875,
+          "width": 244.796875,
+          "height": 44.09375
+        },
+        "after": {
+          "x": 33,
+          "y": 511.28125,
+          "width": 246.71875,
+          "height": 44.09375
+        },
+        "point": {
+          "x": 155.3984375,
+          "y": 563.71875
+        },
+        "clicks": [
+          {
+            "tag": "TR"
+          }
+        ],
+        "timeout": true,
+        "dialogCount": 0
+      },
+      {
+        "i": 1,
+        "before": {
+          "x": 33,
+          "y": 541.671875,
+          "width": 244.796875,
+          "height": 44.09375
+        },
+        "after": {
+          "x": 33,
+          "y": 511.28125,
+          "width": 246.71875,
+          "height": 44.09375
+        },
+        "point": {
+          "x": 155.3984375,
+          "y": 563.71875
+        },
+        "clicks": [
+          {
+            "tag": "TR"
+          }
+        ],
+        "timeout": true,
+        "dialogCount": 0
+      },
+      {
+        "i": 2,
+        "before": {
+          "x": 33,
+          "y": 541.671875,
+          "width": 244.796875,
+          "height": 44.09375
+        },
+        "after": {
+          "x": 33,
+          "y": 512.28125,
+          "width": 246.71875,
+          "height": 44.09375
+        },
+        "point": {
+          "x": 155.3984375,
+          "y": 563.71875
+        },
+        "clicks": [
+          {
+            "tag": "TR"
+          }
+        ],
+        "timeout": true,
+        "dialogCount": 0
+      }
+    ],
+    "negativeHypothesis": "Delivering all fonts at once did not reproduce the miss (3 attempts). The intermediate subset layout is required in this experiment."
+  },
+  "fix": [
+    "All three state-roundtrip contexts fulfill Google font CSS with an empty local stylesheet.",
+    "A font-file backstop aborts and records unexpected font dependencies; assertions fail if isolation is removed.",
+    "Failure diagnostics include the current stage and font state. Existing 30s timeout, real pointer clicks, D1 writes, export/restore checks and assertions remain."
+  ],
+  "regression": {
+    "isolationRemoved": {
+      "expectedExitCode": 1,
+      "actualExitCode": 1,
+      "assertion": "the optional font stylesheet must be intercepted"
+    },
+    "fixedFullRoundtrip": {
+      "webkit": 20,
+      "chromium": 3,
+      "externalFontFiles": 0,
+      "errors": 0
+    },
+    "separateFontCoverage": "startup-render-qa.cjs passed both engines, including font-pending/font-failed and responsive launch checks."
+  },
+  "checks": [
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 13827,
+      "log": "work/webkit-roundtrip-investigation/test.log",
+      "sha256": "674d33c0578e3c305dd14cf6a6765b1f5a17e8f9316ebd5764201ba0574194e2"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 6557,
+      "log": "work/webkit-roundtrip-investigation/typecheck.log",
+      "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 48322,
+      "log": "work/webkit-roundtrip-investigation/lint.log",
+      "sha256": "c536a9f7a725c77bb44f18826b979ff9b47613dcd950b89ff6bbff350301bc45"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 26041,
+      "log": "work/webkit-roundtrip-investigation/build.log",
+      "sha256": "8a3f349b4d48ba5c2c41f481cb23995e8fe30df6efc0dd22eda57592b01b85d7"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 517,
+      "log": "work/webkit-roundtrip-investigation/check-grammar-review.log",
+      "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "command": "Node 24: node --experimental-strip-types --test tests/*.test.mjs",
+      "exitCode": 0,
+      "timedOut": false,
+      "durationMs": 12175,
+      "log": "work/webkit-roundtrip-investigation/test-node24.log",
+      "sha256": "83043bbd1568fee97b5770f76de521f4b224d27c91ef3b3ac15e0d21d16294ef"
+    }
+  ],
+  "browserLogs": [
+    {
+      "name": "roundtrip-webkit-1",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-1.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-2",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-2.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-3",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-3.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-4",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-4.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-5",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-5.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-6",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-6.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-7",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-7.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-8",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-8.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-9",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-9.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-10",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-10.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-11",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-11.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-12",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-12.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-13",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-13.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-14",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-14.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-15",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-15.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-16",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-16.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-17",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-17.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-18",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-18.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-19",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-19.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-webkit-20",
+      "engine": "webkit",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-webkit-20.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "name": "roundtrip-chromium-1",
+      "engine": "chromium",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-chromium-1.log",
+      "sha256": "644338e8ed86c0dab030f703d55f58df8d07151166a43c450dda78ac5758eefc"
+    },
+    {
+      "name": "roundtrip-chromium-2",
+      "engine": "chromium",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-chromium-2.log",
+      "sha256": "644338e8ed86c0dab030f703d55f58df8d07151166a43c450dda78ac5758eefc"
+    },
+    {
+      "name": "roundtrip-chromium-3",
+      "engine": "chromium",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/roundtrip-chromium-3.log",
+      "sha256": "644338e8ed86c0dab030f703d55f58df8d07151166a43c450dda78ac5758eefc"
+    },
+    {
+      "name": "startup-render-both-engines",
+      "engine": "chromium",
+      "exitCode": 0,
+      "timedOut": false,
+      "log": "work/webkit-roundtrip-investigation/startup-render-both-engines.log",
+      "sha256": "a5db731ca7f20695759d1e70d0a0d64bb6aee9b92f677e2a520adc9e7e650467"
+    }
+  ],
+  "preserved": {
+    "priorSourceHashesUnchanged": 23,
+    "applicationAndDatabaseUnchanged": true,
+    "previousPrimaryChanges": 20,
+    "dependencyAndLockfileUnchanged": true,
+    "existingSiteAndBindingsUnchanged": true
+  },
+  "testSource": {
+    "file": "tests/state-roundtrip-qa.cjs",
+    "sha256": "20fff7d7d39d8e495ae8a79ab0554e23a971a55df28f3c76d9e8a1efb6b322a2"
+  },
+  "limits": [
+    "This is a persistence-QA isolation fix. Production web-font swapping/layout behavior is unchanged and is not claimed fixed.",
+    "System-font screenshots do not establish production web-font geometry or physical iPhone/VoiceOver behavior.",
+    "Historical 24-browser/36-performance evidence remains tied to the unchanged runtime; this follow-up reran only the listed checks.",
+    "Latest GitHub CI must be checked after pushing; account billing/spending restrictions were present on the prior commit."
+  ]
+}
