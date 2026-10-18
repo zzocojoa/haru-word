@@ -113,16 +113,20 @@ function PracticeCard({ card }: { card: Card }) {
   const [failed, setFailed] = useState(false);
   const [revealed, setRevealed] = useState(false);
   return <div className="dialog-scroll">
-    {!revealed ? <>{!failed && <img className="image-practice-picture" src={card.image.url} width={card.image.width} height={card.image.height}
-      alt={SCENES[card.image.entryId] || '영단어를 떠올리는 그림. 단어 확인을 누르면 뜻과 품사를 볼 수 있어요.'} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>}
-    {failed ? <p role="alert">이미지를 불러오지 못했어요. 아래 이동 버튼으로 다른 카드를 볼 수 있어요.</p>
-      : <>{!ready && <p role="status">이미지 불러오는 중</p>}
-        <button type="button" className="primary-button full" disabled={!ready} onClick={() => setRevealed(true)}>단어 확인</button></>}</>
-      : <><div className="image-practice-sense">
-        <p lang="en" className="image-practice-answer">{card.word.word}</p>
-        <p className="image-practice-meaning">{card.image.baseMeaning}</p>
-        <p className="small-note"><PartOfSpeechLabel pos={card.image.pos}/></p>
-        </div>
-        <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails></>}
+    {failed ? <p role="alert">이미지를 불러오지 못했어요. 아래 이동 버튼으로 다른 카드를 볼 수 있어요.</p> : <>
+      <button type="button" className="image-practice-flip" disabled={!ready} onClick={() => setRevealed(value => !value)}>
+        <img className="image-practice-picture" hidden={revealed} src={card.image.url} width={card.image.width} height={card.image.height}
+          alt={SCENES[card.image.entryId] || '영단어를 떠올리는 그림'} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>
+        {revealed && <span className="image-practice-sense">
+          <span lang="en" className="image-practice-answer">{card.word.word}</span>
+          <span className="image-practice-meaning">{card.image.baseMeaning}</span>
+          <span className="small-note"><PartOfSpeechLabel pos={card.image.pos}/></span>
+        </span>}
+        <span className="sr-only">{revealed ? '이미지 보기' : '뜻 보기'}</span>
+      </button>
+      {!ready ? <p role="status">이미지 불러오는 중</p>
+        : <p className="small-note image-practice-hint">{revealed ? '카드를 누르면 이미지로 돌아가요.' : '이미지를 누르면 뜻을 볼 수 있어요.'}</p>}
+      {revealed && <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>}
+    </>}
   </div>;
 }

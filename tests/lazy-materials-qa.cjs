@@ -97,7 +97,7 @@ assert.ok(heavy.size);
     holdImages = false; await heldImageModule.continue();
     await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
     await page.getByRole('dialog').getByText('3,809개 · 성적 미기록', { exact: true }).waitFor();
-    await page.getByRole('dialog').getByRole('button', { name: '단어 확인', exact: true }).click();
+    await page.getByRole('dialog').locator('.image-practice-flip').click();
     await page.getByRole('dialog').locator('.image-practice-answer').waitFor();
     await page.getByRole('button', { name: '연습 닫기', exact: true }).click();
     checks.push('closing an in-flight image module is safe; reopening reveals approved images without saves');
