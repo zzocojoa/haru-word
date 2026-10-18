@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "feature": "image_practice_position_and_navigation",
+  "status": "deployed_and_verified_with_limits",
+  "recordedAt": "2026-10-17T15:17:49.682Z",
+  "deployedAt": "2026-10-17T14:08:56.754623+00:00",
+  "deployedAtKst": "2026-10-17T23:08:56.754623+09:00",
+  "productionVerificationCompletedAt": "2026-10-17T14:13:52.196Z",
+  "scope": "2026-10-17 deployment and production smoke evidence, documented on 2026-10-18. No new production verification, deployment or setting change in this documentation task.",
+  "pullRequest": {
+    "url": "https://github.com/zzocojoa/haru-word/pull/39",
+    "state": "MERGED",
+    "mergedAt": "2026-10-17T13:46:38Z",
+    "mergeCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
+    "sourceTreeMatchesReviewedHead": true,
+    "reviewedHead": "15584dc72f8340681bad4f029848a759b63813d2"
+  },
+  "site": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "version": 135,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_de4c91b7be0c8191add465d44e24dc0e",
+    "sourceCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
+    "deploymentId": "appgdep_6ad38162879c81919c7b59b54cb71b5b",
+    "deploymentStatus": "succeeded",
+    "accessMode": "public",
+    "environmentRevision": 71,
+    "environmentEntryCount": 13,
+    "environmentEntriesUnchanged": true,
+    "bindings": {
+      "d1": "DB",
+      "r2": "BUCKET"
+    },
+    "settingsChanged": false,
+    "newSiteCreated": false
+  },
+  "archive": {
+    "localCompressed": {
+      "sha256": "cfc6d0c85a9d65f52b82c84df787b9585cb652ceb260a66106b5209229d437d3",
+      "bytes": 8052392,
+      "entriesIncludingDirectories": 413
+    },
+    "savedNormalizedTar": {
+      "contentHash": "sha256:5846b3251f46c7b648f7d1f84bb30d9d60d435c76bdb7dbd81aca57264b92819",
+      "bytes": 18073600,
+      "fileCount": 387
+    },
+    "note": "Compressed local archive entries include directories; saved tar has a normalized byte representation. Their hashes and counts are not expected to be equal.",
+    "matchingSqlFiles": [
+      "0000_worthless_doctor_faustus.sql",
+      "0001_ai_daily_usage.sql",
+      "0002_old_golden_guardian.sql",
+      "0003_bright_zarda.sql",
+      "0004_card_automation_nonces.sql",
+      "0005_flippant_enchantress.sql"
+    ],
+    "journalMatched": true,
+    "privateWorkspaceFilesAbsent": true,
+    "sourceCleanAtPackaging": true
+  },
+  "validation": {
+    "githubMainCI": {
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297",
+      "runId": 39037959297,
+      "attempt": 1,
+      "head": "6d444190de52130b461e8a5ff3488364b096cea3",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Validate (Node 24)",
+          "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297/job/117411490428",
+          "conclusion": "success",
+          "tests": 662,
+          "pass": 662,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        },
+        {
+          "name": "Validate (Node 22)",
+          "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297/job/117411490496",
+          "conclusion": "success",
+          "tests": 662,
+          "pass": 662,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0
+        }
+      ],
+      "successfulChecks": [
+        "locked dependency install",
+        "unit tests",
+        "grammar content",
+        "typecheck",
+        "lint",
+        "Worker build"
+      ],
+      "lintErrors": 0,
+      "existingLintWarnings": 15,
+      "browserChecksIncluded": false,
+      "reRunForDocumentation": false
+    },
+    "deploymentBuild": {
+      "completed": true,
+      "runtime": "Node22.22.2 / installed npm CLI",
+      "packagingRuntime": "Node24.19.0 + Git Bash + TAR_OPTIONS=--force-local",
+      "packagingExitCode": 0
+    },
+    "packagingRecovery": {
+      "workaround": "Task-local npm shim/PATH, existing Node 24 and Git Bash, process-scoped TAR_OPTIONS=--force-local; reuse the successful unchanged Node 22 build.",
+      "applicationDependencyPluginOrGlobalConfigurationChanged": false,
+      "node22PackagingHelperExitCause": "UNKNOWN; same helper completed under Node 24",
+      "sameCauseAsWebKitStartupEstablished": false
+    },
+    "previousLocalChecks": {
+      "p2CacheRegression": "2026-10-17-image-practice-cache-aba-fix.json",
+      "p3RealRequestConcurrency": "2026-10-17-image-practice-concurrency-fix.json",
+      "startupInvestigation": "2026-10-17-startup-timeout-investigation.json",
+      "note": "Historical local checks, not new runs or production fault injection in this documentation task."
+    }
+  },
+  "migration": {
+    "file": "drizzle/0005_flippant_enchantress.sql",
+    "applied": true,
+    "newTable": "image_practice_positions",
+    "columns": [
+      "user_id",
+      "entry_id",
+      "revision",
+      "updated_at"
+    ],
+    "previousTablesPreserved": 8,
+    "currentTables": 9,
+    "initialRows": 0,
+    "rowsAfterReadOnlyOpen": 0,
+    "previousTableNames": [
+      "ai_daily_usage",
+      "card_automation_nonces",
+      "grammar_progress",
+      "learner_states",
+      "restore_jobs",
+      "restore_parts",
+      "study_sessions",
+      "word_progress"
+    ],
+    "appliedBy": "Existing Sites hosted migration/publish procedure",
+    "manuallyReexecuted": false
+  },
+  "productionUI": {
+    "browser": "Desktop Chrome / existing authenticated session",
+    "initialLoadReady": true,
+    "refreshLoadReady": true,
+    "previousInitialCard": 1,
+    "savedCard": 2,
+    "saveStatus": "위치 저장됨",
+    "closedReopenedSameCardFront": true,
+    "reloadResumedSameCardFront": true,
+    "returnedToInitialCard": 1,
+    "finalSaved": true,
+    "scoreOrLearningActionsPerformed": false,
+    "browserConsoleErrorsOrWarnings": 0
+  },
+  "productionPosition": {
+    "rows": 1,
+    "revisions": [
+      2
+    ],
+    "sameOwnerAsFirstWrite": true,
+    "entryChangedByPreviousButton": true,
+    "hasMore": false,
+    "truncated": false
+  },
+  "existingLearningState": {
+    "rows": 1,
+    "hasMore": false,
+    "truncated": false,
+    "entireLearnerRowsUnchanged": true,
+    "scope": "Entire single learner_states row compared in memory, including settings/revision/updated_at. Not a row-by-row comparison of all learning and backup tables."
+  },
+  "workerLogCheck": {
+    "sinceMinutes": 5,
+    "limit": 50,
+    "events": [
+      {
+        "time": "2026-10-17T14:09:36.324Z",
+        "path": "/api/state",
+        "status": 401,
+        "outcome": "ok",
+        "level": "info",
+        "message": "GET [url]"
+      },
+      {
+        "time": "2026-10-17T14:09:36.304Z",
+        "path": "/api/state",
+        "status": 401,
+        "outcome": "ok",
+        "level": "info",
+        "message": "GET [url]"
+      }
+    ],
+    "observed5xxOrExceptions": 0,
+    "note": "Two /api/state 401 entries were observed with outcome ok; their caller was not attributed. The authenticated UI completed successfully."
+  },
+  "compatibility": {
+    "risk": "medium",
+    "existingLearningApiRevisionAndBackupContractPreserved": true,
+    "positionIncludedInExistingLearningBackup": false,
+    "initialHomePositionOrImageRequestsAdded": false,
+    "productionTrackingAdded": false,
+    "startupDiagnosticsScope": "local QA only",
+    "limits": [
+      "Mixed old/new tabs are not guaranteed to preserve the new cache protection.",
+      "Cross-process localStorage atomicity is not guaranteed."
+    ]
+  },
+  "rollback": {
+    "performed": false,
+    "reason": "No deployment or verified flow regression observed",
+    "availableVersion": 134,
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_01b34aff3784819188118b899a40ecac",
+    "policy": "If a regression is confirmed, redeploy archived v134 and retain image_practice_positions and its data.",
+    "sourceCommit": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
+    "archiveContentHash": "sha256:da03f0cc3e99b603c7775f4fcb6ff9a7dc3b128c168edf762467359594203918",
+    "archiveAvailableAtPreflight": true,
+    "steps": [
+      "Use the saved v134 application archive if a confirmed regression requires rollback and execution is authorized.",
+      "Retain image_practice_positions and its rows; do not DROP or apply a reverse migration.",
+      "Do not restore an older learning backup; verify startup, existing learning reads and retained position rows. v134 has no new position UI."
+    ],
+    "authorizedByThisDocumentationTask": false
+  },
+  "remaining": {
+    "startupRootCause": "UNKNOWN",
+    "chromeProductionSuccessResolvesWebKitTimeout": false,
+    "actualIPhoneVerified": false,
+    "voiceOverVerified": false,
+    "productionCrossDeviceResumeVerified": false,
+    "productionConflictOrFaultInjectionPerformed": false,
+    "longTermAvailabilityEstablished": false,
+    "unrelatedPriorImageBackupOrAccessibilityLimitsReverified": false
+  },
+  "documentationTask": {
+    "newDeployments": 0,
+    "migrationsExecuted": 0,
+    "productionDataWrites": 0,
+    "settingsChanges": 0,
+    "operationalUserContentLogged": false
+  },
+  "evidence": {
+    "storage": "Original local work/ evidence is Git-ignored. This tracked record contains sanitized results and provenance; no user IDs, private answers, credentials or raw production content.",
+    "files": [
+      {
+        "file": "work/pr39-rollout-20261017/REPORT.md",
+        "sha256": "18b1649b54f502bfb911baf76fdba79e4cb34dc568f11d54a47703ec88a20027",
+        "bytes": 4762
+      },
+      {
+        "file": "work/pr39-rollout-20261017/result.json",
+        "sha256": "1ae43feae41c279da61ee2f9afe6a94ef346116f84f4a2a14482db8ce6cbfb1e",
+        "bytes": 2960
+      },
+      {
+        "file": "work/pr39-rollout-20261017/before.json",
+        "sha256": "29592a25a4ef86bffd9ed2f02de2ea7d5692a5b244f771b6f075a979ade63f3d",
+        "bytes": 1611
+      },
+      {
+        "file": "work/pr39-rollout-20261017/deployment-start.json",
+        "sha256": "30970fe323cef6251f1efe1d8e8961f6baf58c29186b0dc8f9c902a3441394c1",
+        "bytes": 601
+      },
+      {
+        "file": "work/pr39-rollout-20261017/saved-version.json",
+        "sha256": "32f06e5190678943a8e941d03de6cea48da1ec214344364ba3aa54ba64b65e1e",
+        "bytes": 553
+      },
+      {
+        "file": "work/pr39-rollout-20261017/archive-check.json",
+        "sha256": "ba0e52be93e8b849f6ae61da791f2cd8d8bf5601783e93a27c19e61d5cea97ac",
+        "bytes": 1133
+      },
+      {
+        "file": "work/pr39-rollout-20261017/package-result.json",
+        "sha256": "bfacb8f8188eabbbf4f077e66c216b73de03bad83edae8ff98db26f39230c23e",
+        "bytes": 331
+      },
+      {
+        "file": "work/pr39-rollout-20261017/packaging-recovery.json",
+        "sha256": "dec6895220c261081864eac8cef01ba8f6b29f7f81ffae220828ba92fdd648d5",
+        "bytes": 1252
+      },
+      {
+        "file": "work/pr39-rollout-20261017/final-state.json",
+        "sha256": "acf984f8ef08d0e44135cb5e6786a88fd1e1608b0cbe36341faae940f0f169fd",
+        "bytes": 662
+      },
+      {
+        "file": "work/pr39-rollout-20261017/production-position-saved.jpg",
+        "sha256": "25522cdbd7c73f015669c391351751c1173e4d535e4c001551a82c07509665e7",
+        "bytes": 69754
+      },
+      {
+        "file": "work/pr39-deployment-readiness-20261017/result.json",
+        "sha256": "af4fe163da2095e4b10336e150e5abfa72e8e6a8aee23d27313297a27c1dba2e",
+        "bytes": 1494
+      },
+      {
+        "file": "work/pr39-merge-20261017/result.json",
+        "sha256": "6c986dd9245bc762ae8e5ab1fcbb692ab4429862a58435badc24256c516194d1",
+        "bytes": 9190
+      },
+      {
+        "file": "work/pr39-merge-20261017/run-39037959297-attempt1.log",
+        "sha256": "cbb0691e35fce655cb3f835aadcd03effdeb5165fffd5fc5cf91bfe3334db95d",
+        "bytes": 656945
+      }
+    ]
+  }
+}

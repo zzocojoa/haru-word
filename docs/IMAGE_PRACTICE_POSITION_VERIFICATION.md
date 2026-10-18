@@ -1,6 +1,14 @@
-# 이미지 연습 위치 저장 · 로컬 검증
+# 이미지 연습 위치 저장 · 검증 기록
 
-2026-10-17 (한국 시간). `codex/image-practice-resume-navigation`, 기준 `github/main@cf339eed5e824393156f45c2dc3adba7e83d41c0`. **GitHub PR 검토 대상, 운영 미게시**다. 사용·API·마이그레이션·복구 계약은 [위치 저장 안내](IMAGE_PRACTICE_POSITION.md)를 따른다.
+## v135 운영 배포와 main CI · 배포 2026-10-17 / 기록 정리 10월 18일
+
+PR #39는 `main@6d444190de52130b461e8a5ff3488364b096cea3`로 병합됐고 기존 Sites **v135** 게시가 10월 17일 23:08:56 KST에 성공했다. [main CI #39037959297](https://github.com/zzocojoa/haru-word/actions/runs/39037959297)는 Node 22/24 각각 662개 통과·실패/취소/건너뜀 0개이며 문법·타입·린트·Worker 빌드도 성공했다(린트 오류 0·기존 경고 15개). 브라우저 검사는 CI 범위 밖이다.
+
+운영에서는 새 위치 테이블 추가·기존 8개 테이블 유지·조회 전후 0행을 확인했다. 기존 로그인된 Desktop Chrome에서 초기 실행 → 2번 위치 저장 → 닫기/다시 열기·새로고침 뒤 2번 앞면 재개 → 최초 1번 복귀를 확인했다. 최종 위치 1행·revision 2는 보존했고 `learner_states` 전체 1행은 게시 전후 동일했다. console 오류/경고 0개, 최근 5분 Worker 필터의 `/api/state` 401 두 건은 호출자 미귀속이며 5xx/예외는 관측되지 않았다.
+
+**startup 원인은 UNKNOWN/미확정**이다. 실제 iPhone/VoiceOver·다른 기기 운영 재개·운영 충돌/실패 주입은 이번 확인 범위 밖이다. v134 롤백은 미실행이며 새 위치 테이블·데이터를 보존하는 방식만 준비했다. [운영 절차](../OPERATIONS.md#이미지-연습-위치-저장-v135--2026-10-17)와 [출시 기록·증거 지문](releases/2026-10-17-image-practice-position-rollout.json)을 따른다. 이번 기록 정리에서 운영 확인·빌드·브라우저 검사를 새로 실행하거나 추가 배포·설정을 변경하지 않았다.
+
+아래는 `codex/image-practice-resume-navigation`에서 기준 `github/main@cf339eed5e824393156f45c2dc3adba7e83d41c0` 대비 수행한 **각 시점의 로컬 검증 이력**이다. 당시 운영 미게시·원격 CI 미검증 표현은 최신 배포 상태를 뜻하지 않는다. 사용·API·마이그레이션·복구 계약은 [위치 저장 안내](IMAGE_PRACTICE_POSITION.md)를 따른다.
 
 ## P2 같은 카드로 돌아온 새 이동 보호 · 2026-10-17
 

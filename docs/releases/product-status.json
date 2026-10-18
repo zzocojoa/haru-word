@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-15T16:00:08.271Z",
-  "note": "Oxford image PR35 is merged into GitHub main; Site v132 remains deployed. This update records the final verification and remaining limits without changing runtime or historical evidence.",
+  "recordedAt": "2026-10-17T15:17:49.682Z",
+  "note": "PR39 main 6d44419 was deployed to existing Site v135 on 2026-10-17; documentation reconciled on 2026-10-18 without another deployment or setting change. Latest image-practice status is in imagePracticePositionPublication/latestVerification. Older verification and dated feature records remain historical; they are not current CI or production status. Startup root cause remains UNKNOWN.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -23,7 +23,7 @@
     "haruWord": {
       "url": "https://github.com/zzocojoa/haru-word",
       "defaultBranch": "main",
-      "verifiedDefaultCommit": "c79be6bb37611a40a890fc1a56af0e15109f76cf",
+      "verifiedDefaultCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
       "mergedPullRequests": [
         22,
         23,
@@ -37,24 +37,34 @@
         32,
         33,
         34,
-        35
+        35,
+        39
       ],
-      "verifiedAt": "2026-10-15T16:00:08.271Z",
+      "verifiedAt": "2026-10-17T15:17:49.682Z",
       "previousVerification": {
-        "verifiedDefaultCommit": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
-        "verifiedAt": "2026-10-08T00:22:48.307Z"
+        "verifiedDefaultCommit": "c79be6bb37611a40a890fc1a56af0e15109f76cf",
+        "verifiedAt": "2026-10-15T16:00:08.271Z",
+        "previousVerification": {
+          "verifiedDefaultCommit": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
+          "verifiedAt": "2026-10-08T00:22:48.307Z"
+        }
       }
     }
   },
   "production": {
     "site": {
-      "version": 132,
-      "source": "909df067abc176aae82895ed053feb8f7261c9e6",
-      "deployment": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+      "version": 135,
+      "source": "6d444190de52130b461e8a5ff3488364b096cea3",
+      "deployment": "appgdep_6ad38162879c81919c7b59b54cb71b5b",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_de4c91b7be0c8191add465d44e24dc0e",
+      "deployedAt": "2026-10-17T14:08:56.754623+00:00",
+      "deploymentStatus": "succeeded",
       "envRevision": 71,
-      "publicAccessRevision": 4,
+      "environmentEntryCount": 13,
+      "accessMode": "public",
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-      "evidence": "2026-10-15-word-image-editor-wrap-rollout.json"
+      "evidence": "2026-10-17-image-practice-position-rollout.json",
+      "productionVerifiedAt": "2026-10-17T14:13:52.196Z"
     },
     "workerVersions": {
       "en-card": [
@@ -86,18 +96,34 @@
     "previousAutomationRuntimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
     "automationRuntimeSourceNote": "0023 deployment used the preserved expression-selection source snapshot before its final Git commit. This Git-only refactor is not a new deployment; do not label the old date-card commit as the exact current runtime source.",
     "previousSiteRecord": {
-      "version": 123,
-      "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
-      "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
-      "envRevision": 59,
-      "publicAccessRevision": 4,
-      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
-      "latestVersionRead": {
-        "version": 123,
-        "status": "succeeded",
-        "checkedAt": "2026-10-07T16:12:51.430297+00:00",
-        "method": "Native deploy success; public source manifest hash and audience revision checked",
-        "accessRevision": 4
+      "version": 134,
+      "source": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
+      "deployment": "appgdep_6ad230da52148191bcedf6176b80e70b",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_01b34aff3784819188118b899a40ecac",
+      "evidence": "2026-10-17-image-practice-position-rollout.json",
+      "previousRecordedSite": {
+        "version": 132,
+        "source": "909df067abc176aae82895ed053feb8f7261c9e6",
+        "deployment": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+        "envRevision": 71,
+        "publicAccessRevision": 4,
+        "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+        "evidence": "2026-10-15-word-image-editor-wrap-rollout.json",
+        "previousSiteRecord": {
+          "version": 123,
+          "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
+          "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
+          "envRevision": 59,
+          "publicAccessRevision": 4,
+          "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+          "latestVersionRead": {
+            "version": 123,
+            "status": "succeeded",
+            "checkedAt": "2026-10-07T16:12:51.430297+00:00",
+            "method": "Native deploy success; public source manifest hash and audience revision checked",
+            "accessRevision": 4
+          }
+        }
       }
     }
   },
@@ -3482,5 +3508,35 @@
         "doneWhen": "Author and review non-answer scene descriptions for additional images."
       }
     ]
+  },
+  "latestVerification": {
+    "scope": "PR39 image practice / existing Site v135; unrelated card Workers and older feature verification were not rechecked.",
+    "evidence": "2026-10-17-image-practice-position-rollout.json",
+    "mainCI": {
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297",
+      "conclusion": "success",
+      "testsPerNodeVersion": 662,
+      "nodeVersions": [
+        22,
+        24
+      ]
+    },
+    "productionSmoke": "Desktop Chrome startup, position save and front-side resume passed; see recorded scope and limits.",
+    "startupRootCause": "UNKNOWN"
+  },
+  "imagePracticePositionPublication": {
+    "status": "deployed_and_verified_with_limits",
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/39",
+    "mergeCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
+    "deployedVersion": 135,
+    "deployedAt": "2026-10-17T14:08:56.754623+00:00",
+    "evidence": "2026-10-17-image-practice-position-rollout.json",
+    "migration": "drizzle/0005_flippant_enchantress.sql",
+    "positionBackupIncluded": false,
+    "rollbackVersion": 134,
+    "rollbackPerformed": false,
+    "rollbackPreservesNewPositionData": true,
+    "startupRootCause": "UNKNOWN",
+    "documentationOnlyFollowUp": true
   }
 }
