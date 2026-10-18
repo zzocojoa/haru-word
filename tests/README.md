@@ -1,6 +1,7 @@
 # 학습 앱 검증
 
 - `image-practice-position-api.test.mjs` / `image-practice-position.test.mjs`: 독립 위치 API의 무쓰기 GET·인증·계정·출처·1KB 스트림 제한·동시 revision 충돌과 클라이언트의 직렬 저장·최신 대기 위치·응답 유실·시간 초과·충돌 선택·계정 전환·손상/차단 캐시를 검사한다. 같은 중간 카드를 다른 탭/기기가 저장한 경우의 재시도·재개, 최종 위치 동일 시 GET만으로 복구, 원격 선택 전/후의 다른 탭 초안 순서와 선택 실패·취소도 포함한다.
+- `image-practice-qa.cjs back`: 이미지/뜻 클릭·반복 터치·Enter/Space 양방향 뒤집기, 별도 확인 버튼 제거, 앞면의 정답 DOM/접근성 트리 숨김, 초점·발음 분리·닫기 후 앞면 재개, 위치 쓰기/추가 이미지 요청/방문 이력 없음 검증. `front`·`error`는 로딩/실패 중 이동, `matrix`는 320/390/865/1440px·100/200%·axe, `lifecycle`은 카드 이동 후 앞면을 검사한다.
 - `image-practice-resume-qa.cjs`: 별도 로컬 D1 가상 계정에서 닫기·탭·새로고침·별도 브라우저 이어 보기, 번호/경계/이미지 실패, 두 기기 충돌, 실패·시간 초과·응답 유실 후 조회 우선 재시도, 제외/빈 카드·계정 전환과 학습 문서/revision/백업 불변을 확인한다. Chromium/WebKit·320/390/1440px·100/200%·키보드·axe와 현재 번호 live region·이동 버튼 초점 유지·외곽선 잘림 방지를 포함한다. 실제 스크린리더 발화는 별도 확인 대상이다.
 - 같은 브라우저 두 탭에서 원격 선택 GET을 보류하고 다른 탭이 C→B→C로 이동하는 회귀도 위 두 위치 검사에 포함한다. 최신 C 미저장 캐시 유지, 새로고침 후 C에서 충돌 선택, 자동 PUT 0건을 확인한다. unit 검사는 식별자 없는 기존 version 1 캐시, 식별자 있는 캐시의 조회/영수증 유지, 손상된 식별자도 확인한다.
 - 위치 요청 동시성은 원래 연습 페이지의 `request`부터 `requestfinished`/`requestfailed`까지 추적한다. 다른 탭의 독립 요청이나 API fixture 요청은 합산하지 않는다. `route.continue()` 반환과 응답 헤더 도착은 요청 완료가 아니다. `maxConcurrentPositionRequests`와 `pendingPositionRequestsAtEnd`는 이 범위의 최대·종료 시 미완료 요청 수다.

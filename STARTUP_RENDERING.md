@@ -1,6 +1,6 @@
 # 홈 화면 실행의 초기 표시
 
-**v137 배포 후 기록 · 2026-10-18:** PR #42의 `main@0fc399b`를 기존 Sites에 게시하고 Desktop Chrome에서 스플래시 → 홈·서버 저장 상태·시간 확인 완료를 관측했다. 버튼 간격 CSS만 변경했으며 startup 코드·시간 제한·진단은 그대로다. **과거 QA 시간 초과 1회·현재 미재현·운영 장애 미확인·원인 UNKNOWN/미확정** 상태를 유지한다. Chrome 초기 실행 성공과 이전 WebKit 통과는 원인 해결 근거가 아니다. 실제 iPhone/VoiceOver는 미검증이며 이번 문서 정리에서 재현 검사·추가 배포·설정 변경은 하지 않았다. [v137 배포 결과·범위·v136 복구](docs/releases/2026-10-18-image-practice-spacing-rollout.json). 아래는 이전 조사·출시 당시 기록이다.
+**v138 배포 후 확인 · 2026-10-18:** PR #44의 `main@9ad8380`을 기존 Sites에 게시하고 로그인된 Desktop in-app browser에서 두 번의 초기 실행, 카드 양방향 뒤집기·위치 저장·재개를 확인했다. **기존 WebKit startup 시간 초과 원인은 UNKNOWN/미확정으로 유지한다.** 이번 미재현은 원인 해결 또는 문제 부재의 증명이 아니다. 로컬 빌드의 디스크 부족과 패키징 shell 경로 오류는 빌드 환경 문제로 구분하며 startup과 같은 원인으로 연결하지 않는다. 최근 5분 Worker 오류 필터의 `GET /api/state` 401 두 건도 호출자·원인 미확정이며, 두 건 모두 outcome `ok`이고 확인한 UI는 정상 완료됐다. 실제 iPhone/VoiceOver는 미검증이다. [v138 배포·관측 한계·v137 복구](docs/releases/2026-10-18-image-practice-card-flip-rollout.json)에 기록했다. 이번 문서 작업에서는 추가 배포·설정 변경·재현 검사를 하지 않았고 아래 조사 이력은 그대로 보존한다.
 
 **v135 배포 후 기록 · 2026-10-18:** PR #39 병합 `main@6d44419`를 10월 17일 기존 Sites에 게시하고 Desktop Chrome에서 초기 홈 표시·이미지 연습 위치 저장·재개를 확인했다. **원래 WebKit startup 시간 초과 원인은 UNKNOWN/미확정으로 유지한다.** Chrome 운영 확인이나 기존 반복 검증 통과는 원인 해결 근거가 아니다. 아래 조사·폰트 수정은 당시 기록이며 현재 앱에는 v135로 반영됐다. 진단 도우미는 로컬 QA용으로 운영에 새 사용자 추적을 추가하지 않는다. [배포 결과·한계·v134 복구](docs/releases/2026-10-17-image-practice-position-rollout.json)를 참조한다. 이번 기록 정리에서는 재배포·설정 변경·추가 재현 검사를 하지 않았다.
 

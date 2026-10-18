@@ -64,7 +64,7 @@ const report = { method: { repetitions: 3, histories: [0, 365, 1825], viewport: 
             }
             await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
             await page.waitForFunction(() => document.querySelector('.image-practice-picture')?.naturalWidth > 0);
-            await page.getByRole('dialog').getByRole('button', { name: '단어 확인', exact: true }).waitFor();
+            await page.getByRole('dialog').getByRole('button', { name: /단어 확인|뜻 보기/ }).waitFor();
             await page.waitForTimeout(100);
             assert.deepEqual([...new Set(images)], imageRows.slice(0, 2).map(row => `/word-images/v1/${row[1]}.webp`));
             assert.deepEqual(forbidden, []);
