@@ -40,7 +40,7 @@ AI 결과를 정답 판정과 구분하는 공통 표시와 구조도 비노출�
 
 15개 수업의 검토한 교재·정적 예문 분석·문법 v4 호환·신규 생성 중단 절차는 [문법 교재 v4 검토 보고서](GRAMMAR_REVIEWED_V4.md)를 참조하세요.
 
-본인 전용 카드 제작·PNG 저장·카카오 예약을 [영어 카드 작업실](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards)에서 사용할 수 있습니다. 기존 ChatGPT 로그인 후 홈의 **영어 카드**로 이동하세요. 운영 v101에 반영했으며 설정·검증 범위·복구 절차는 [영어 카드 통합](CARD_STUDIO_INTEGRATION.md)을 참조하세요.
+본인 전용 카드 제작·PNG 저장·카카오 예약을 [영어 카드 작업실](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards)에서 사용할 수 있습니다. 기존 ChatGPT 로그인 후 위 링크로 직접 이동하세요. 작업실은 운영 v101에 반영했으며 설정·검증 범위·복구 절차는 [영어 카드 통합](CARD_STUDIO_INTEGRATION.md)을 참조하세요.
 
 GitHub 저장소·CI·PR 검토와 기존 Sites 배포 연결은 [GITHUB_WORKFLOW.md](GITHUB_WORKFLOW.md)를 참조하세요.
 
