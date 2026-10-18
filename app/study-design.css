@@ -3058,6 +3058,9 @@ p {
 .home-panel>* {
   order: initial !important;
 }
+.home-panel>.image-practice-entry {
+  margin-top: var(--space-3);
+}
 .panel-top {
   margin-bottom: var(--space-4);
   gap: var(--space-3);
