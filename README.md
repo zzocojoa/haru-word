@@ -1,6 +1,6 @@
 # 하루단어 · Oxford 3000
 
-**로컬 구현 · 2026-10-17:** 이미지 연습에 계정별 위치 저장과 이전·다음·번호 이동을 추가했다. 운영 미게시 상태이며 [사용·실패 복구·마이그레이션](docs/IMAGE_PRACTICE_POSITION.md)과 [검증 결과](docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md)를 따른다.
+**v135 운영 배포 · 2026-10-17 23:08 KST / 기록 정리 10월 18일:** [PR #39](https://github.com/zzocojoa/haru-word/pull/39)가 반영된 `main@6d44419`를 기존 Sites에 게시했다. 위치 테이블 마이그레이션과 Desktop Chrome의 초기 실행·위치 저장·닫기/새로고침 후 앞면 재개를 확인했다. main CI는 Node 22/24 각 662개 통과다. **WebKit startup 시간 초과 원인은 미확정**이며 실제 iPhone/VoiceOver는 미검증이다. [운영 확인·복구 절차](OPERATIONS.md#이미지-연습-위치-저장-v135--2026-10-17), [배포 증거](docs/releases/2026-10-17-image-practice-position-rollout.json), [사용·실패 복구](docs/IMAGE_PRACTICE_POSITION.md), [검증 기록](docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md)을 따른다. 이번 정리는 문서만 갱신하며 추가 배포·설정 변경은 없다. 아래 날짜별 출시·CI 차단 설명은 당시의 이력이다.
 
 **출시 상태 확인 · 2026-10-16:** 전체 이미지 연결과 긴 단어 편집창 수정은 [PR #35](https://github.com/zzocojoa/haru-word/pull/35)로 GitHub `main@c79be6b`에 병합됐고, 기존 사이트는 **v132**를 운영합니다. 10월 15일 최종 검사에서 이미지 3,809개 전체의 GET/HEAD·해시·용량·헤더와 운영 화면 파일을 확인했습니다. [최종 상태·검증 요약](docs/releases/2026-10-16-oxford-images-release-status.json)에 당시 검증과 이번 상태 조회를 구분했습니다. GitHub CI의 계정 차단, 실제 iPhone 및 외부 이미지 백업·복구 확인은 남아 있습니다.
 
@@ -8,13 +8,13 @@
 
 **긴 단어 편집창 확대 수정 v132**를 기존 사이트에 게시했습니다. 제목과 이미지가 공간에 맞춰 줄바꿈되며 320/390/1440px·글자 100/200%의 Chromium/WebKit 검사를 통과했습니다. 운영 CSS가 검증한 빌드와 일치합니다. [출시 결과](docs/releases/2026-10-15-word-image-editor-wrap-rollout.json)에 런타임 커밋과 GitHub CI의 계정 결제·사용 한도 차단을 구분해 기록했습니다.
 
-**전체 이미지 연결 v131**은 오늘 학습 개요의 이미지 연습을 3,809개로 확대하고, 단어 익히기·단어 편집창에 선택한 뜻과 품사가 일치하는 그림을 표시합니다. 기본 뜻과 다른 선택 뜻·개인 단어에는 추정한 그림을 연결하지 않습니다. 첫 답을 입력하는 진단·회상 단계에는 그림을 표시하지 않습니다. 이미지 연습은 성적을 기록하지 않습니다. 현재 로컬 후보는 닫기·탭 이동·새로고침 뒤 저장 위치의 앞면으로 이어 봅니다. [전체 UI 범위·검증·복구](docs/OXFORD_WORD_IMAGES_FULL_UI.md)와 [v131 배포 증거](docs/releases/2026-10-15-oxford-image-full-ui-rollout.json)를 참조하세요. 아래 시범·v130 기록은 전체 UI 반영 전의 호스팅 단계입니다.
+**전체 이미지 연결 v131**은 오늘 학습 개요의 이미지 연습을 3,809개로 확대하고, 단어 익히기·단어 편집창에 선택한 뜻과 품사가 일치하는 그림을 표시합니다. 기본 뜻과 다른 선택 뜻·개인 단어에는 추정한 그림을 연결하지 않습니다. 첫 답을 입력하는 진단·회상 단계에는 그림을 표시하지 않습니다. 이미지 연습은 성적을 기록하지 않습니다. v135부터 닫기·탭 이동·새로고침 뒤 저장 위치의 앞면으로 이어 봅니다. [전체 UI 범위·검증·복구](docs/OXFORD_WORD_IMAGES_FULL_UI.md)와 [v131 배포 증거](docs/releases/2026-10-15-oxford-image-full-ui-rollout.json)를 참조하세요. 아래 시범·v130 기록은 전체 UI 반영 전의 호스팅 단계입니다.
 
 `npm run images:ui:prepare`는 검증된 전체 가공·원격 목록에서 351KB 클라이언트 인덱스를 만듭니다. `npm run images:ui:check`와 빌드는 교재·뜻·품사·출처 지문·원격 연결이 다른 경우 중단합니다. 원본 생성 정보는 클라이언트에 포함하지 않습니다. 원격 이미지는 기존 사이트의 `/word-images/v1/<해시>.webp`에서 현재 항목과 다음 한 장만 요청합니다.
 
 전체 승인 이미지 **3,809개**는 [로컬 웹용 가공](docs/OXFORD_WORD_IMAGES_WEB_PREPARATION.md)과 [결과 보고서](docs/oxford-word-images-web-preparation.json)에 따라 검증·WebP 변환·배포용 목록 작성을 완료했습니다(8.28GB → 128.6MB). 전체 연결 목록은 `data/word-image-web-manifest.json`, 바이너리와 업로드 목록은 Git 제외 `outputs/oxford-web/`에 있으며 실제 위치는 가공 문서에 적었습니다. 이후 호스팅과 전체 학습 UI 연결도 완료했습니다. 시범 20개는 전체 목록의 앞부분에 보존합니다.
 
-[전체 이미지 호스팅](docs/OXFORD_WORD_IMAGES_HOSTING.md)은 **v130 운영 게시·3,809개 업로드·권한 폐기 후 전체 재검증**을 완료했습니다. 임시 키를 명시적으로 무효화한 뒤 삭제했고 최종 환경은 revision71·원래13개 항목입니다. 이전 키의 PUT404와 전체 파일의 SHA·MIME·캐시·GET/HEAD를 확인했습니다. 원격 연결은 `data/word-image-hosted-manifest.json`, [배포·검증 증거와 복구 절차](docs/releases/2026-10-15-oxford-image-hosting-rollout.json)를 참조하세요. v130 당시 화면은 시범 20개였으며, 현재 v132는 전체 3,809개를 연결합니다.
+[전체 이미지 호스팅](docs/OXFORD_WORD_IMAGES_HOSTING.md)은 **v130 운영 게시·3,809개 업로드·권한 폐기 후 전체 재검증**을 완료했습니다. 임시 키를 명시적으로 무효화한 뒤 삭제했고 최종 환경은 revision71·원래13개 항목입니다. 이전 키의 PUT404와 전체 파일의 SHA·MIME·캐시·GET/HEAD를 확인했습니다. 원격 연결은 `data/word-image-hosted-manifest.json`, [배포·검증 증거와 복구 절차](docs/releases/2026-10-15-oxford-image-hosting-rollout.json)를 참조하세요. v130 당시 화면은 시범 20개였으며, v131 이후에는 전체 3,809개 중 현재 뜻·품사 필터에 맞는 항목을 연결합니다.
 
 배포용 WebP 20개는 `public/word-images-pilot/`에 포함되며 `npm run images:pilot:check`와 빌드가 해시·뜻·용량을 검사합니다. 원본이 있는 제작 PC에서는 `npm run images:pilot:prepare` 다음 `npm run images:pilot:web`으로 재현합니다. PNG는 Git 제외 `work/oxford-image-pilot/`에 보관합니다. 기본 입력은 사용자 홈의 `.codex/worktrees/oxford-word-images/하루단어`와 `Documents/ChatGPT/하루단어/outputs/oxford-images/`이며 다른 위치는 `--source "<승인 체크아웃>" --assets "<원본 PNG 폴더>"`를 준비 명령에 전달합니다. 교재·승인·파일 해시가 다르면 중단하고 다른 파일을 덮어쓰지 않습니다.
 

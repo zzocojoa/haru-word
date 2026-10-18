@@ -1,5 +1,7 @@
 # 하루단어 제품 개발·출시 관리
 
+**v135 출시 기록 정리 · 2026-10-18:** PR #39 병합 `main@6d44419`를 10월 17일 23:08:56 KST에 기존 Sites v135로 게시했다. main CI Node 22/24 각각 662개와 문법·타입·린트·빌드 성공, 새 위치 테이블 적용·기존 8개 테이블 유지, Desktop Chrome 초기 실행·저장·닫기/새로고침 후 앞면 재개를 확인했다. [운영 절차](OPERATIONS.md#이미지-연습-위치-저장-v135--2026-10-17)와 [출시 증거](docs/releases/2026-10-17-image-practice-position-rollout.json)를 따른다. startup 원인은 **미확정**, 실제 iPhone/VoiceOver·운영 기기 간 충돌은 미검증이다. v134 롤백은 미실행이며 필요 시 새 위치 테이블·데이터를 보존한다. 이번 기록 정리에서는 추가 배포·설정 변경이 없다. 아래 버전·CI 차단 상태는 각 시점의 이력이다.
+
 **2026-10-16 Oxford 출시 상태 정리:** PR #35는 GitHub `main@c79be6b`에 병합됐고 기존 Site v132는 전체 3,809개 이미지 연결과 긴 단어 편집창 수정을 제공합니다. 10월 15일 최종 원격·화면 파일 검증과 이번 GitHub/Sites 상태 조회는 [최종 상태 기록](docs/releases/2026-10-16-oxford-images-release-status.json)에 구분했습니다. CI 계정 차단·실제 iPhone·외부 이미지 백업 확인은 남아 있습니다. 이번 작업은 문서 정리이며 새 운영 배포·Worker/DB/예약 변경·AI 호출은 없습니다.
 
 **2026-10-15 Oxford 통합 당시 검증:** 기존 main의 카드 표현 선정·병합 근거를 보존했습니다. Site v132의 카드 산출물은 EN_Card 원본 지문·릴레이 재번들 및 131개 산출물 해시와 대조했고 수동 재작성하지 않았습니다. [병합 전 증거](docs/releases/2026-10-15-oxford-images-main-integration.json)는 당시 스냅샷으로 유지합니다. 실제 게시 근거는 [v132 출시 기록](docs/releases/2026-10-15-word-image-editor-wrap-rollout.json)을 따르며 아래는 각 시점의 이력입니다.
