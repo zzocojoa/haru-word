@@ -14,9 +14,6 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Generated build, preview, test and audit output; keep authored tests linted.
     "dist/**",
-    // Reproducible EN_Card bundle; authored source is checked in that repository.
-    "public/card-studio/**",
-    "lib/server/card-automation.generated.mjs",
     "work/**",
     "outputs/**",
     "coverage/**",

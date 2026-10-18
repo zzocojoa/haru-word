@@ -1,5 +1,7 @@
 # 학습 앱 검증
 
+- `card-retirement-qa.cjs`: 종료된 영어 카드 메뉴·정적 화면 제거, 이전 `/cards` 주소의 학습 홈 이동, 기존 카드 API 7개 메서드의 410 응답, 학습 문서/revision 불변·단어 검색·재접속을 로컬 가상 계정에서 검사한다. `QA_BROWSER=webkit`도 지원한다. 실제 AI·카카오 호출은 없다.
+
 - `image-practice-position-api.test.mjs` / `image-practice-position.test.mjs`: 독립 위치 API의 무쓰기 GET·인증·계정·출처·1KB 스트림 제한·동시 revision 충돌과 클라이언트의 직렬 저장·최신 대기 위치·응답 유실·시간 초과·충돌 선택·계정 전환·손상/차단 캐시를 검사한다. 같은 중간 카드를 다른 탭/기기가 저장한 경우의 재시도·재개, 최종 위치 동일 시 GET만으로 복구, 원격 선택 전/후의 다른 탭 초안 순서와 선택 실패·취소도 포함한다.
 - `image-practice-qa.cjs back`: 이미지/뜻 클릭·반복 터치·Enter/Space 양방향 뒤집기, 별도 확인 버튼 제거, 앞면의 정답 DOM/접근성 트리 숨김, 초점·발음 분리·닫기 후 앞면 재개, 위치 쓰기/추가 이미지 요청/방문 이력 없음 검증. `front`·`error`는 로딩/실패 중 이동, `matrix`는 320/390/865/1440px·100/200%·axe, `lifecycle`은 카드 이동 후 앞면을 검사한다.
 - `image-practice-resume-qa.cjs`: 별도 로컬 D1 가상 계정에서 닫기·탭·새로고침·별도 브라우저 이어 보기, 번호/경계/이미지 실패, 두 기기 충돌, 실패·시간 초과·응답 유실 후 조회 우선 재시도, 제외/빈 카드·계정 전환과 학습 문서/revision/백업 불변을 확인한다. Chromium/WebKit·320/390/1440px·100/200%·키보드·axe와 현재 번호 live region·이동 버튼 초점 유지·외곽선 잘림 방지를 포함한다. 실제 스크린리더 발화는 별도 확인 대상이다.
@@ -18,7 +20,6 @@
 
 - `learning-dates.test.mjs`는 재사용하는 날짜 포매터의 한국 자정·연말·윤일, 기본 날짜 갱신·입력 불변·잘못된 날짜 거부를 검사한다. `pending-reviews-render.test.mjs`는 실제 컴포넌트를 렌더링해 점검 없음/전체 제외 시 라벨 계산 생략, 완료·제외 회차를 포함한 번호와 최신 표시 보존을 확인한다.
 
-- `card-automation-qa.cjs`는 로컬 합성 카드 API로 자동 제작 수량의 구형 기본값 1장, 3장 저장/실패 재시도, 5장 초안의 일시정지·화면 이동·새로고침 보존을 Chromium/WebKit에서 검사한다. 320/390/1440px·글자 100/200%·axe 검사를 포함하며 실제 AI/카카오와 운영 학습 기록은 사용하지 않는다.
 
 - `grammar-content-review.test.mjs`와 `grammar.test.mjs`는 v4 교재342단위의 원장 무결성·출처 매핑, 정적30분석의 원문 보존, 버전별 정답·혼합 진도·구형426·전체/분할 복원·revision·실패 후 재시도를 검사한다. `grammar-v4-qa.cjs`는15수업·135기본/복습문제·정적분석·읽기·쓰기의 Chromium/WebKit 검사용이다. `grammar-v4-compat-qa.cjs`는 신규 생성 true/false 각각 별도 로컬 Worker에서 실행한다(`QA_NEW_GRAMMAR_VERSION=4` 또는3). false에서도 저장된v4를 읽고 기존3의 첫답·일정을 보존한다. 실제AI 호출은 모의 응답으로 대체한다.
 

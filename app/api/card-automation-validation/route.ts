@@ -1,6 +1,3 @@
-import { env } from 'cloudflare:workers';
-import { handleTopicSentenceValidation } from '@/lib/server/topic-sentence-validation.mjs';
+import { cardFeatureRetired } from '@/lib/server/retired-cards';
 export const dynamic = 'force-dynamic';
-export function POST(request: Request) {
-  return handleTopicSentenceValidation(request, env);
-}
+export { cardFeatureRetired as POST };
