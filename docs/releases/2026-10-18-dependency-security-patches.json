@@ -1,0 +1,324 @@
+{
+  "date": "2026-10-18",
+  "status": "local-regressions-passed-not-deployed",
+  "sourceBase": "c61755570a95529e9342179cdbf389d05a9ab22e",
+  "branch": "codex/dependency-security-patches",
+  "startupRootCause": "UNKNOWN",
+  "changes": {
+    "sharp": [
+      "0.35.4",
+      "0.35.5"
+    ],
+    "sourceMapJs": [
+      "1.2.1",
+      "1.2.2"
+    ],
+    "nextAndEslintConfigNext": [
+      "16.3.6",
+      "16.3.8"
+    ],
+    "miniflareSharpOverride": "0.35.5",
+    "sharpLibvipsPackage": "1.3.4",
+    "unrelatedDependencyUpdates": 0
+  },
+  "targetedAdvisories": [
+    {
+      "number": 15,
+      "packageName": "sharp",
+      "id": "GHSA-wq5f-xc86-pv6w",
+      "url": "https://github.com/advisories/GHSA-wq5f-xc86-pv6w",
+      "patchedVersionInstalled": true
+    },
+    {
+      "number": 14,
+      "packageName": "source-map-js",
+      "id": "GHSA-68fv-2mgg-jv7q",
+      "url": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q",
+      "patchedVersionInstalled": true
+    },
+    {
+      "number": 16,
+      "packageName": "next",
+      "id": "GHSA-cjq9-62q9-8jv4",
+      "url": "https://github.com/advisories/GHSA-cjq9-62q9-8jv4",
+      "patchedVersionInstalled": true
+    },
+    {
+      "number": 17,
+      "packageName": "next",
+      "id": "GHSA-mcj8-r9mp-w47p",
+      "url": "https://github.com/advisories/GHSA-mcj8-r9mp-w47p",
+      "patchedVersionInstalled": true
+    },
+    {
+      "number": 18,
+      "packageName": "next",
+      "id": "GHSA-f87g-xv8r-7p7x",
+      "url": "https://github.com/advisories/GHSA-f87g-xv8r-7p7x",
+      "patchedVersionInstalled": true
+    },
+    {
+      "number": 19,
+      "packageName": "next",
+      "id": "GHSA-39w2-rjm5-chcv",
+      "url": "https://github.com/advisories/GHSA-39w2-rjm5-chcv",
+      "patchedVersionInstalled": true
+    },
+    {
+      "number": 20,
+      "packageName": "next",
+      "id": "GHSA-4jqv-mc3x-m676",
+      "url": "https://github.com/advisories/GHSA-4jqv-mc3x-m676",
+      "patchedVersionInstalled": true
+    },
+    {
+      "number": 21,
+      "packageName": "next",
+      "id": "GHSA-3w37-wq28-93x7",
+      "url": "https://github.com/advisories/GHSA-3w37-wq28-93x7",
+      "patchedVersionInstalled": true
+    }
+  ],
+  "productionScope": "Existing v135 remains unchanged. Vinext/Cloudflare Worker, app source, API/DB contracts, migrations, images, bindings and operational settings are unchanged. No merge, Sites source synchronization or deployment.",
+  "localVerification": {
+    "windowsX64": {
+      "node22": "22.22.2",
+      "node24": "24.19.0",
+      "cleanLockedInstalls": 2,
+      "testsPerNode": 665,
+      "failures": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "installedSharp": "0.35.5",
+      "installedLibrsvg": "2.63.2",
+      "installedLibvips": "8.18.7"
+    },
+    "checks": [
+      "npm run install:ci",
+      "npm test (both Node versions)",
+      "npm run check:grammar-review",
+      "npm run typecheck",
+      "npm run lint",
+      "npm run build"
+    ],
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 15
+    },
+    "browser": {
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "commandCount": 14,
+      "startupAndFontCases": 26,
+      "startupLifecycleCases": 9,
+      "resumeGroupsPerEngine": 13,
+      "imagePracticeStagesPerEngine": 11,
+      "actualConcurrentRequests": 2,
+      "measuredConcurrentRequests": 2,
+      "fixtures": "Loopback built Worker, fresh local D1 and synthetic accounts; some UI suites use mock HTTP fixtures.",
+      "copiedQa": "Assertions unchanged; only relative require resolution and evidence output directories adjusted."
+    },
+    "existingWebpHashesVerified": 3809,
+    "existingWebpFilesRewritten": 0,
+    "primaryWorkspaceChangesPreserved": 20,
+    "newRegressionTests": [
+      "Unsafe indexed source-map offsets rejected before padding",
+      "Valid indexed source-map positions and code preserved",
+      "Trusted SVG decoding and lossless PNG/WebP round-trip"
+    ],
+    "originalDependencyRegressionTestsPreserved": true
+  },
+  "audit": {
+    "before": {
+      "exitCode": 1,
+      "packageFindings": 14,
+      "uniqueAdvisories": 9
+    },
+    "after": {
+      "exitCode": 1,
+      "packageFindings": 8,
+      "uniqueAdvisories": 1
+    },
+    "targetedAdvisoriesRemaining": 0,
+    "remaining": "GHSA-vfj7-8cjw-p6xm in braces: one pre-existing advisory propagated through eight package findings. Existing exact-source guard-braces postinstall/build mitigation and its regressions retained and verified. npm audit is not clean; no force-fix, downgrade or alert dismissal was performed."
+  },
+  "failuresAndRecovery": [
+    "Bounded source-map regression failed with the old 1.2.1 package and passed with 1.2.2. Normal-map fixture was corrected before recording the final red/green probe.",
+    "First full Node22 run had three git ENOENT failures because the temporary runner used a duplicate Windows PATH key. Only the ignored runner was corrected; final Node22/24 runs passed all 665 tests.",
+    "The temporary local launcher exited 1 without diagnostics under Node22 before readiness. The same launcher completed under the installed Node24. The helper cause remains undetermined and is not attributed to WebKit startup."
+  ],
+  "limitations": [
+    "Original WebKit startup timeout cause remains UNKNOWN despite passing regressions.",
+    "Actual iPhone/VoiceOver, production writes/fault injection and the entire browser/performance registry were not tested.",
+    "No malicious SVG exploit was executed; the patched native library version and benign image behavior were checked.",
+    "Linux clean installation and native library diagnostics must be verified in the PR CI; this local record does not claim remote results."
+  ],
+  "riskAndRecovery": {
+    "risk": "Low to medium: toolchain and native image-library patch compatibility.",
+    "dataMigration": "None",
+    "rollback": "For a confirmed development regression, revert the dependency commit with its matching lockfile. That restores vulnerable package versions and is not a security fix. Production v135 and all position/learning data remain untouched."
+  },
+  "inputFingerprints": [
+    {
+      "file": "package.json",
+      "sha256": "3e8922ff78f0270eb1909f6c4c2d3319716093b1b9f68b6db99bbe802f338867"
+    },
+    {
+      "file": "package-lock.json",
+      "sha256": "9b5af1b0fee0ea32e7141cfa0826339eb6b9b587ab4c6a9ba498b4e74688d86e"
+    },
+    {
+      "file": "tests/dependency-security.test.mjs",
+      "sha256": "aac0c12a41e452c701d4045b5da09a6262a57a2c11b0df4c53ac42ba546945d5"
+    }
+  ],
+  "evidence": [
+    {
+      "label": "unit-node22-final",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/unit-node22-final.log",
+      "sha256": "3ff6dbef44f6d267d1fe3e535a4718345e76c4037ac946166cf5b9108a3765aa"
+    },
+    {
+      "label": "unit-node24",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/unit-node24.log",
+      "sha256": "9574d077e0bf25de1ae62c45a2259d1ce110d3b1bb4b631bf95cee0ea498901b"
+    },
+    {
+      "label": "check-grammar-review",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/check-grammar-review.log",
+      "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f"
+    },
+    {
+      "label": "typecheck",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/typecheck.log",
+      "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36"
+    },
+    {
+      "label": "lint",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/lint.log",
+      "sha256": "f43a365a745deebd6e500c0de84cda6fd68aa2da938c859e41ef3d388ede881b"
+    },
+    {
+      "label": "build",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/build.log",
+      "sha256": "39e949d4aca1689463d9939dd4dbe46716224b94d7b7e8e753cd82a7c5dbebf1"
+    },
+    {
+      "label": "startup-render",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/startup-render.log",
+      "sha256": "2c02d0f7e2e59543ee00eedd68bd745f4e4c6074afd0efd2a171994bbe88e364"
+    },
+    {
+      "label": "startup-lifecycle",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/startup-lifecycle.log",
+      "sha256": "3e06af719d5c3bdb44d92c88d3468715b17848ea9024564ac31c95759e0cdd6f"
+    },
+    {
+      "label": "state-roundtrip-chromium",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/state-roundtrip-chromium.log",
+      "sha256": "644338e8ed86c0dab030f703d55f58df8d07151166a43c450dda78ac5758eefc"
+    },
+    {
+      "label": "backup-workflow-chromium",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/backup-workflow-chromium.log",
+      "sha256": "8c2734e0c1d74ef49e6e2d62f8ec02420cd659849e298cc3eeddede02ac3831d"
+    },
+    {
+      "label": "image-practice-resume-chromium",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/image-practice-resume-chromium.log",
+      "sha256": "b84596386220dd93312d8f6ebe233f0b0bba4a562dec10a50494c6f1f733256c"
+    },
+    {
+      "label": "image-practice-chromium",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/image-practice-chromium.log",
+      "sha256": "325d275cabe64aba5690f4d05f19a31d4e32101f1dbb7696ae483892d57a0fca"
+    },
+    {
+      "label": "word-image-study-chromium",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/word-image-study-chromium.log",
+      "sha256": "4db9514920403a1af1d48acf18f2313015d222db065dd94cc8f4ace615c16753"
+    },
+    {
+      "label": "request-concurrency-chromium",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/request-concurrency-chromium.log",
+      "sha256": "25fe7e3d9a4c602b8b0ce5dfb9225b19d6c93d5264602fdc5dd3370c2b639a37"
+    },
+    {
+      "label": "state-roundtrip-webkit",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/state-roundtrip-webkit.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34"
+    },
+    {
+      "label": "backup-workflow-webkit",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/backup-workflow-webkit.log",
+      "sha256": "8c2734e0c1d74ef49e6e2d62f8ec02420cd659849e298cc3eeddede02ac3831d"
+    },
+    {
+      "label": "image-practice-resume-webkit",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/image-practice-resume-webkit.log",
+      "sha256": "f6b77dc4000a08882159645156c9bafabdfb610ca6442b04c134a18fb2c2959a"
+    },
+    {
+      "label": "image-practice-webkit",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/image-practice-webkit.log",
+      "sha256": "eb43a25b3cc5b9a1478e3f7cde55ffb3293de0a9d754b6f5125448c67169d652"
+    },
+    {
+      "label": "word-image-study-webkit",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/word-image-study-webkit.log",
+      "sha256": "8822066143ede2e9a1a7410b3e327fdf21b8490cc1961c16d5f827bf95fd94cd"
+    },
+    {
+      "label": "request-concurrency-webkit",
+      "exitCode": 0,
+      "log": "work/dependency-security-20261018/request-concurrency-webkit.log",
+      "sha256": "275ddb8350a9c9fb7c9032391d89b53f0ea3cf15a3d5339c353eb78de908a574"
+    },
+    {
+      "file": "work/dependency-security-20261018/npm-audit-before.json",
+      "sha256": "49e7833d02ddf638e82bc6aea6d14cd0f3b495c1bde04a52870eef47abd4e312"
+    },
+    {
+      "file": "work/dependency-security-20261018/npm-audit.json",
+      "sha256": "25e3a2ad2a6a9efd3478806aa49ff8ec2333e763b088ee7d28d5b27f71ae39fb"
+    },
+    {
+      "file": "work/dependency-security-20261018/browser-inputs.json",
+      "sha256": "5b21ab674f50fd2988dbd15e310be608625ccad3209b5ba3fb6266f811444023"
+    },
+    {
+      "file": "work/dependency-security-20261018/install-windows-node22.log",
+      "sha256": "04af8b160d0197bd4106a6c88e7698990f5ca54a1e32f32d8b9a4d89eb8d7b8f"
+    },
+    {
+      "file": "work/dependency-security-20261018/install-windows-node24.log",
+      "sha256": "10b3c959b5bca0f22e418ce12fd767a2737ebcada3591d5da63efcc005c2831e"
+    },
+    {
+      "file": "work/dependency-security-20261018/red-security-bounded.log",
+      "sha256": "882126e2d189b11da912036f53093b9fa5a23fcc105766ce02221d64889d0f52"
+    }
+  ],
+  "ciRecord": "Remote results for the final pushed commit are recorded in the PR checks and PR body, separately from this local verification record."
+}
