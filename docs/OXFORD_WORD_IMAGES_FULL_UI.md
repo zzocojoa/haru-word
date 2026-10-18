@@ -1,5 +1,7 @@
 # Oxford 전체 이미지 화면 연결
 
+**v138 카드 뒤집기 운영 반영 · 2026-10-18:** [PR #44](https://github.com/zzocojoa/haru-word/pull/44)의 `main@9ad8380`을 기존 Sites에 게시했다. 별도 단어 확인 버튼 대신 이미지/뜻 카드를 눌러 양방향으로 전환한다. 운영 데스크톱에서 초기 실행·이미지 표시·양방향 전환·새 위치 저장·닫기/새로고침 후 앞면 재개를 확인했다. 원래 위치로 복귀했고 학습 문서·revision과 운영 설정은 보존했다. 카드 매칭·원격 이미지·성적·백업 계약과 SQL은 그대로다. [사용 안내](IMAGE_PRACTICE_POSITION.md), [운영 검증·v137 복구·한계](releases/2026-10-18-image-practice-card-flip-rollout.json)를 따른다. startup 원인은 미확정이고 실제 iPhone/VoiceOver는 미검증이다. 이번 기록 정리는 추가 배포·설정 변경을 포함하지 않는다. 아래 v135·v132 등은 해당 시점의 출시·검증 이력이다.
+
 **2026-10-17 v135 운영 게시 / 10월 18일 기록 정리:** PR #39 병합 `main@6d44419`에 따라 연습 위치를 독립 테이블/revision으로 저장하고 이전·다음·번호 이동을 제공한다. 닫기·탭 이동·새로고침 뒤 저장 위치의 앞면으로 이어 본다. 성적·학습 문서·백업 계약은 유지한다. [위치 저장 안내](IMAGE_PRACTICE_POSITION.md)와 [배포·마이그레이션·Desktop Chrome 운영 확인](releases/2026-10-17-image-practice-position-rollout.json)을 따른다. startup 원인은 미확정이다. 아래 배포·DB 변경 없음 설명은 이전 이미지 UI 출시 당시의 기록이다.
 
 **현재 상태 · 2026-10-16:** 전체 3,809개 연결과 긴 단어 편집창 수정은 GitHub [PR #35](https://github.com/zzocojoa/haru-word/pull/35)로 `main@c79be6b`에 병합됐다. 기존 사이트는 **v132**, 런타임 소스는 `909df06`이다. 10월 15일 최종 검증에서 전체 원격 이미지와 운영 화면 파일의 일치를 확인했고, 이번 문서 정리에서는 GitHub/Sites 메타데이터를 재조회했다. [최종 상태·검증 요약](releases/2026-10-16-oxford-images-release-status.json)은 원래 검증 시점과 남은 한계를 구분한다. 아래 v131은 최초 전체 UI 게시, v132는 후속 편집창 수정 기록이다.
