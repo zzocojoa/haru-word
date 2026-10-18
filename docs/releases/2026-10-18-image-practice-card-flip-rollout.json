@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "feature": "image_practice_card_flip",
+  "status": "deployed_and_verified_with_limits",
+  "recordedAt": "2026-10-18T11:36:17.336Z",
+  "deploymentSucceededAt": "2026-10-18T11:22:48.100307+00:00",
+  "deploymentSucceededAtKst": "2026-10-18T20:22:48.100307+09:00",
+  "timestampMeaning": "Native successful deployment response updated_at, not deployment request start time.",
+  "productionVerificationRecordedAt": "2026-10-18T11:27:22.894Z",
+  "evidenceReverifiedAt": "2026-10-18T11:33:44.093Z",
+  "scope": "Document the completed v138 deployment and existing operational evidence. This documentation task does not deploy, change settings, write production data or rerun application/browser checks.",
+  "pullRequest": {
+    "url": "https://github.com/zzocojoa/haru-word/pull/44",
+    "state": "MERGED",
+    "mergedAt": "2026-10-18T11:04:18Z",
+    "mergeCommit": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
+    "reviewedHead": "c58fa77ff8da430bf7e6c26cd2a1c9e99f2ec597",
+    "sourceTreeMatchesReviewedHead": true
+  },
+  "site": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "version": 138,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_62475ba7b1ac8191b410ba1ed8c2b292",
+    "sourceCommit": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
+    "deploymentId": "appgdep_6ad4abf311a0819192dbefd4ede53035",
+    "deploymentStatus": "succeeded",
+    "accessMode": "public",
+    "accessRevision": 4,
+    "environmentRevision": 71,
+    "environmentEntryCount": 13,
+    "environmentEntriesUnchanged": true,
+    "bindings": {
+      "d1": "DB",
+      "r2": "BUCKET"
+    },
+    "settingsChanged": false,
+    "newSiteCreated": false
+  },
+  "change": {
+    "baseVersion": 137,
+    "baseSource": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
+    "runtimeFiles": [
+      "app/learning/image-practice.tsx",
+      "app/study-design.css"
+    ],
+    "behavior": "Click the image for word/meaning/POS, click the meaning card to return to the image. Separate reveal button removed; navigation and reopen start on the front.",
+    "apiChanged": false,
+    "storageContractChanged": false,
+    "dependenciesChanged": false,
+    "observabilityCodeChanged": false
+  },
+  "archive": {
+    "localCompressed": {
+      "sha256": "27e8955ab3958ab8caef505639d63f6a9d9e9989de1f65cd7b79c197755069d0",
+      "bytes": 8052063,
+      "entriesIncludingDirectories": 413
+    },
+    "savedNormalizedTar": {
+      "contentHash": "sha256:d040172ef17881a05c6ba4d82d2df491b3409b92313df38d10df87ba01994b69",
+      "bytes": 18073600,
+      "fileCount": 387
+    },
+    "archivedFilesMatchFinalBuild": true,
+    "hostingJsonFormattingOnly": true,
+    "privateWorkspaceFilesAbsent": true,
+    "localArchiveUnchangedAfterSave": true,
+    "remoteArchiveWholeBytesIndependentlyCompared": false
+  },
+  "migration": {
+    "newMigrations": 0,
+    "matchingSqlFiles": [
+      "0000_worthless_doctor_faustus.sql",
+      "0001_ai_daily_usage.sql",
+      "0002_old_golden_guardian.sql",
+      "0003_bright_zarda.sql",
+      "0004_card_automation_nonces.sql",
+      "0005_flippant_enchantress.sql"
+    ],
+    "journalMatched": true,
+    "tableNamesUnchanged": true,
+    "tableCount": 9,
+    "manualSqlExecuted": false,
+    "databaseRowsCompared": true,
+    "rowComparisonScope": "learner_states and image_practice_positions only; not all production tables or backups"
+  },
+  "validation": {
+    "githubMainCI": {
+      "runId": 39121755494,
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39121755494",
+      "head": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
+      "attempt": 1,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Validate (Node 22)",
+          "conclusion": "success",
+          "steps": 13,
+          "tests": 665,
+          "pass": 665,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0,
+          "lintErrors": 0,
+          "existingWarnings": 15
+        },
+        {
+          "name": "Validate (Node 24)",
+          "conclusion": "success",
+          "steps": 13,
+          "tests": 665,
+          "pass": 665,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0,
+          "lintErrors": 0,
+          "existingWarnings": 15
+        }
+      ],
+      "nodeVersions": [
+        22,
+        24
+      ],
+      "testsPerNodeVersion": 665,
+      "rerunForDocumentation": false
+    },
+    "build": {
+      "node": "v24.19.0",
+      "command": "Installed npm CLI: npm run build",
+      "exitCode": 0,
+      "logSha256": "37ff983a1ee76808f6bba3b3479e21ffd91a83ec5eb70b4279ee6b902e1119ee",
+      "firstAttemptExitCode": 1,
+      "firstAttemptFailure": "C: disk space exhausted (os error 112); removed 100 old synthetic test fixture directories, 332502025 bytes, and rebuilt successfully. Original failure log preserved.",
+      "existingLargeChunkWarning": true
+    },
+    "sourceAndPackaging": {
+      "officialHelper": "site-workflow.mjs",
+      "sourceCommit": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
+      "exitCode": 0,
+      "archiveCheckExitCode": 0,
+      "shellLaunchAttemptExitCode": 127,
+      "shellLaunchRecovery": "First shell route selected system bash before helper execution; explicit installed Git Bash through PowerShell succeeded.",
+      "processLocalTarOptions": "--force-local",
+      "applicationDependenciesPluginUnchanged": true
+    },
+    "previousLocalRegression": {
+      "evidenceDirectory": "work/image-practice-flip-final-20261018",
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "distinctEngineScenarios": 16,
+      "scope": "Prior verified local regression: 8 scenarios per engine plus final Chromium back repeat; not production device testing.",
+      "rerunForDocumentation": false
+    },
+    "liveAssets": {
+      "at": "2026-10-18T11:23:01.890Z",
+      "passed": true,
+      "origin": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "rootStatus": 200,
+      "assetCount": 17,
+      "results": [
+        {
+          "path": "/_next/static/css/index.DTU5taMS.css",
+          "status": 200,
+          "bytes": 244284,
+          "sha256": "3daeffb243aa3931ed88f0ff288cfd5faa90c559fdfb05bcdcd52ded70651fb2",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/index-Czvzbx54.js",
+          "status": 200,
+          "bytes": 125302,
+          "sha256": "2eb3c2d355c971c1bf0855e7db130f94639062ec95a5cb1d79e939e247763fe5",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/rolldown-runtime-QTnfLwEv.js",
+          "status": 200,
+          "bytes": 694,
+          "sha256": "5db5ba82eef00d1dee7e86e663098c9427d01183a88d357437daff295aec3e75",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~index~app-router-scroll~error-boundary~layout-segment-context~slot~navigati~negrw3f3-TdwlaySl.js",
+          "status": 200,
+          "bytes": 7587,
+          "sha256": "0e89f70e98a61f20e4e3cec3d0e807d85495ad844e006978b1891026c138695c",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~index~web-fonts~app-router-scroll~default-global-error~error-boundary~layou~fwr0l7lm-OXhjBaOE.js",
+          "status": 200,
+          "bytes": 163044,
+          "sha256": "04e6821ab89d730da5031127c4e843de6bcca9703f5ad4bac0c3882de54cf456",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~index~error-boundary~link~navigation~learning-app~app-route-prefetch-policy~hy1c5f01-CvgGoKgs.js",
+          "status": 200,
+          "bytes": 11512,
+          "sha256": "3de933997ed8b591d5c1b9e207740eb520fe7e185b38d797662a9fff79f51970",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~index~slot~link~headers~app-rsc-render-mode~app-rsc-cache-busting~app-eleme~bt9kchn3-Q0-COenL.js",
+          "status": 200,
+          "bytes": 22082,
+          "sha256": "1cd1ec246b014bcd12e023bf0eafa99a3c8beae81cf081469eb1fb0048ecb936",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/framework-D36sBlnU.js",
+          "status": 200,
+          "bytes": 178945,
+          "sha256": "248ca9dc77f60478f03138ae3312ae5e1f676de148f59c214ff3d668851ab5d5",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~index-gsFfwoZL.js",
+          "status": 200,
+          "bytes": 60699,
+          "sha256": "c0613fccbfdfdf564fff07a77887ab60930ebd6dea8fa0934df306c907cdab8c",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/layout-segment-context-BtBniee5.js",
+          "status": 200,
+          "bytes": 709,
+          "sha256": "e317c5da4d78dc36b5c3731c08809f8b463aa87785c996166cc673021b0906ce",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/web-fonts-DReeAxNU.js",
+          "status": 200,
+          "bytes": 850,
+          "sha256": "90de09e86d0afc94e4d4f8684329fa4d34bfbaa2381140b06d3306bab870ffc6",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~learning-app~word-editor-CFuovGZR.js",
+          "status": 200,
+          "bytes": 131961,
+          "sha256": "5a84c86a2714322099dd6aa0267e5350ceb25dce1974163ae3cc4f4ce13ee04e",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~learning-app~study-session~grammar-workspace~image-practice~completed-lesson-DeJN6f1q.js",
+          "status": 200,
+          "bytes": 42667,
+          "sha256": "d6831944d70bf00e0d95fcd47be0d6791e4b8c7eeeafca1ff67bcbab55833dff",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~learning-app~study-session~backup-dialog~word-editor~grammar-workspace~back~mp3rbrcc-DJ7hnFjf.js",
+          "status": 200,
+          "bytes": 493997,
+          "sha256": "9816ade2b013680143a08b3454254781df6a9b2162bd3408d6d2ced08f11c552",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~learning-app~study-session~backup-dialog~grammar-workspace~backup-export-dialog-jB_b84iA.js",
+          "status": 200,
+          "bytes": 32518,
+          "sha256": "46afbb4e4cdfa70c538f99505d40b3a9ba90eac7b7acd37aedde242cb3c27d02",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~learning-app~study-session~backup-dialog~grammar-workspace~backup-export-di~i3810th4-QEyAvcoF.js",
+          "status": 200,
+          "bytes": 57678,
+          "sha256": "0f10dc8612ad180a1bdd3c41113f491d0d391f7f75bdff1d53b4cfc5632cec0a",
+          "localBuildMatches": true
+        },
+        {
+          "path": "/_next/static/chunks/learning-shared~learning-app~backup-dialog~personal-word~word-editor~grammar-workspace~back~jh9i8ud4-Bju0TGq6.js",
+          "status": 200,
+          "bytes": 35819,
+          "sha256": "658565159520051423b3873dec2d5ec13ca3a8f8f7221b1e41b5658b66a61280",
+          "localBuildMatches": true
+        }
+      ],
+      "scope": "Anonymous read-only document and linked JS/CSS; no API or learner data requests",
+      "verificationExitCode": 0
+    },
+    "finalEvidenceAuditExitCode": 0
+  },
+  "productionSmoke": {
+    "browser": "Desktop in-app browser (Chromium)",
+    "startupReloads": 2,
+    "initializationCompleted": true,
+    "authenticatedSavedHome": true,
+    "imageToMeaning": true,
+    "meaningToImage": true,
+    "visibleImages": true,
+    "newPositionSaved": true,
+    "closeAndFocusRestored": true,
+    "sameNewCardFrontAfterReopen": true,
+    "sameNewCardFrontAfterPageReload": true,
+    "originalPositionRestored": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  },
+  "positionVerification": {
+    "movedAndIndependentRevisionPlusOne": true,
+    "originalPositionRestored": true,
+    "revisionIncreasedByTwo": true,
+    "projection": {
+      "truncated": false,
+      "truncated_values": 0,
+      "omitted_columns": 0,
+      "omitted_rows": 0,
+      "next_offset": null
+    },
+    "rawRowsPersisted": false
+  },
+  "learningDataPreservation": {
+    "learnerStatesRowsCompared": 1,
+    "allColumnsIncludingRevisionUnchanged": true,
+    "resultTruncated": false,
+    "privateRowsPersisted": false,
+    "learningGradesOrAnswersWritten": false,
+    "aiCallsPerformed": false
+  },
+  "observability": {
+    "errorsOnly": true,
+    "sinceMinutes": 5,
+    "limit": 50,
+    "events": [
+      {
+        "at": "2026-10-18T11:23:26.666Z",
+        "afterDeployment": true,
+        "path": "/api/state",
+        "status": 401,
+        "outcome": "ok",
+        "method": "GET"
+      },
+      {
+        "at": "2026-10-18T11:23:26.663Z",
+        "afterDeployment": true,
+        "path": "/api/state",
+        "status": 401,
+        "outcome": "ok",
+        "method": "GET"
+      }
+    ],
+    "eventsReturned": 2,
+    "observed5xx": 0,
+    "failedOutcomes": 0,
+    "callerAndCause": "not established"
+  },
+  "rollback": {
+    "performed": false,
+    "targetVersion": 137,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_cf9cda995b30819192b3db099b8aa3a3",
+    "sourceCommit": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
+    "archiveConfirmedAvailable": true,
+    "includesPR41SecurityPatches": true,
+    "preserveImagePracticeTableAndNewData": true,
+    "forbidden": [
+      "DROP image_practice_positions",
+      "reverse SQL",
+      "overwrite learning records with an old backup"
+    ],
+    "steps": [
+      "Confirm the regression and deployment authorization.",
+      "Redeploy saved v137, retaining settings, position table and new data.",
+      "Verify startup, image practice and saved position resume; record the result."
+    ]
+  },
+  "priorPublications": {
+    "v137": {
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_cf9cda995b30819192b3db099b8aa3a3",
+      "source": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
+      "deployment": "appgdep_6ad48de434b081918e52b73d284d5354",
+      "archive": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_000000007828820691fb5a2bcb315523",
+        "content_hash": "sha256:3c1f1c67d4565f7ea7f99687aa4ec34b8249c2b1fd8c25de52d977d25fcc7958",
+        "size_bytes": 18073600,
+        "file_count": 387
+      },
+      "documentationPullRequest": "https://github.com/zzocojoa/haru-word/pull/43",
+      "documentationStateAtThisTask": "OPEN",
+      "scopeNote": "v137 spacing verification is historical and its documentation PR remains separate."
+    },
+    "v136": {
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_bf901375bfbc8191ab9c904a3828a214",
+      "source": "3074adca216ce6ea3cd7474171fb685105bd0776",
+      "deployment": "appgdep_6ad4615a764c81918b1cffa2cfe2bdc8",
+      "archive": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_00000000bae48206bf7db405455b185e",
+        "content_hash": "sha256:86b339c086940d42b5b0c82ff33659d0a951393772249fd6478e3acd7425bf0c",
+        "size_bytes": 18073600,
+        "file_count": 387
+      },
+      "note": "PR41 security dependency update already deployed before v137; prior read-only native evidence retained."
+    }
+  },
+  "risk": {
+    "level": "low",
+    "expectedFailureMode": "Card click/focus/layout regression; position API, revision and learning backup contracts are unchanged.",
+    "startupRootCause": "UNKNOWN",
+    "startupStatus": "One historical QA timeout; not reproduced in this rollout. No claim of root-cause resolution or proof of absence.",
+    "physicalIphone": false,
+    "voiceOver": false,
+    "crossDeviceProductionConflictTested": false,
+    "fullPerformanceSuiteRerun": false,
+    "limits": [
+      "Actual iPhone / VoiceOver not tested",
+      "Production cross-device conflicts / full performance suite not rerun",
+      "Historical WebKit startup timeout root cause remains UNKNOWN; not reproduced in this rollout",
+      "Two GET /api/state HTTP 401 records in 5-minute error-filtered logs; caller/cause unestablished, outcome ok; no observed 5xx or failed invocations"
+    ]
+  },
+  "evidence": {
+    "localOnly": true,
+    "note": "Git-ignored work/ evidence: publish summaries and digests only, not raw rows, secrets or browser screenshots.",
+    "files": [
+      {
+        "file": "work/pr44-rollout-20261018/result.json",
+        "sha256": "1e4021223a31a1ba860ee49496afbdf1395ffd308bc6564357065ff9b42f2d0a",
+        "bytes": 3445
+      },
+      {
+        "file": "work/pr44-rollout-20261018/REPORT.md",
+        "sha256": "07203fa28a78412ea163da8cc115a614d395b032075ae952405a4860fbd05fae",
+        "bytes": 7392
+      },
+      {
+        "file": "work/pr44-rollout-20261018/before.json",
+        "sha256": "b3390cd46cac6e25e8e160e753207c4bf414fbaa9e0ddd8aa29152715f6a2fa3",
+        "bytes": 148396
+      },
+      {
+        "file": "work/pr44-rollout-20261018/opening-result.json",
+        "sha256": "375c003b580c30662a42222dc1e06e214c69d67665f0c7108c874ba6d47aa669",
+        "bytes": 200
+      },
+      {
+        "file": "work/pr44-rollout-20261018/package-result.json",
+        "sha256": "9b1e97475da9fc9f15ee38f07c5d7ff9e256ff9d9048e44efbdd9c93bb3c07c6",
+        "bytes": 315
+      },
+      {
+        "file": "work/pr44-rollout-20261018/build-result.json",
+        "sha256": "4ee91a80a62c68914378982066d734915632400ee244b25c8997837c8c22f438",
+        "bytes": 487
+      },
+      {
+        "file": "work/pr44-rollout-20261018/build.log",
+        "sha256": "37ff983a1ee76808f6bba3b3479e21ffd91a83ec5eb70b4279ee6b902e1119ee",
+        "bytes": 2971
+      },
+      {
+        "file": "work/pr44-rollout-20261018/build-disk-full-result.json",
+        "sha256": "8b479806a69f14778c67455a289714d35e805525b8cb52a478b63b26e2d15356",
+        "bytes": 487
+      },
+      {
+        "file": "work/pr44-rollout-20261018/build-disk-full.log",
+        "sha256": "d0371bf2ab053174d375b4ca7836a4a92dc9a99027061089238fd93a4aed0557",
+        "bytes": 4354
+      },
+      {
+        "file": "work/pr44-rollout-20261018/generated-fixture-cleanup.json",
+        "sha256": "42da20b347a2d9847af2035a19c61912c8e7abe406f286593b0c810196470d35",
+        "bytes": 21305
+      },
+      {
+        "file": "work/pr44-rollout-20261018/archive-check.json",
+        "sha256": "a0bbd94cd739ff2f978d91af754ea98f1e0319f33e78e533dc47f52744bab325",
+        "bytes": 1269
+      },
+      {
+        "file": "work/pr44-rollout-20261018/archive-entries.txt",
+        "sha256": "f43125a64866abe108ddeff3e5a4da6a56fdd90e54ab23e4bab8b1ba25dce980",
+        "bytes": 24538
+      },
+      {
+        "file": "work/pr44-rollout-20261018/live-assets.json",
+        "sha256": "043389a133927ed4d3c3844fc64094881568cda5d79f671c655f2d6e158cd2ab",
+        "bytes": 5080
+      },
+      {
+        "file": "work/pr44-rollout-20261018/production-card-back.png",
+        "sha256": "7bf657b807657954e74cc8b60284757ad461de5c0e893eab6f9db68589fc8c3d",
+        "bytes": 42929
+      },
+      {
+        "file": "work/pr44-rollout-20261018/production-card-front.png",
+        "sha256": "8bd54ffd8bb4083ee71bd5060d44d1b47cd2a8adfac8c08242dd7014f4d65898",
+        "bytes": 53170
+      },
+      {
+        "file": "work/pr44-rollout-20261018/production-resume-before-reload.png",
+        "sha256": "33d5f7177e42a4b4cf4a492da6bcb463fc1f2275b6c1eaf61909670a15eefd46",
+        "bytes": 51675
+      },
+      {
+        "file": "work/pr44-rollout-20261018/production-resume-after-reload.png",
+        "sha256": "33d5f7177e42a4b4cf4a492da6bcb463fc1f2275b6c1eaf61909670a15eefd46",
+        "bytes": 51675
+      },
+      {
+        "file": "work/pr44-rollout-20261018/final-state.json",
+        "sha256": "217f757234443d58ea4930465e13f119298dc7953f7e038b5b536be34ca992a0",
+        "bytes": 3018
+      },
+      {
+        "file": "work/pr44-merge-20261018/ci-verification.json",
+        "sha256": "1dc1ba718d806187ceb0166eb5f15f12b68f56c4191b476f5cb6562dc5ef5691",
+        "bytes": 2086
+      },
+      {
+        "file": "work/pr44-merge-20261018/run-39121755494.log",
+        "sha256": "aa777d301d1913ffdccb74abee9e42f256d70ea12d1ca9f7c7fb7dff33722223",
+        "bytes": 659116
+      },
+      {
+        "file": "work/pr44-readiness-20261018/native-state.json",
+        "sha256": "d003a96c486e24ccab3113c95e2b7cf1ddb592bbb770bfb54443ca117ebcc1b0",
+        "bytes": 2173
+      },
+      {
+        "file": "work/pr42-readiness-20261018/native-state.json",
+        "sha256": "a3d7f269a62a941497897961d2dafe8232a904ceb74785fe600ed93eb37ada47",
+        "bytes": 1194
+      }
+    ]
+  }
+}
