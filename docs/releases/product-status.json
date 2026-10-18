@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-17T15:17:49.682Z",
-  "note": "PR39 main 6d44419 was deployed to existing Site v135 on 2026-10-17; documentation reconciled on 2026-10-18 without another deployment or setting change. Latest image-practice status is in imagePracticePositionPublication/latestVerification. Older verification and dated feature records remain historical; they are not current CI or production status. Startup root cause remains UNKNOWN.",
+  "recordedAt": "2026-10-18T09:30:54.482Z",
+  "note": "PR42 main 0fc399b was deployed to existing Site v137 on 2026-10-18. This follow-up documents existing evidence only; no additional deployment or settings change. Latest status is imagePracticeSpacingPublication/latestVerification. Prior feature, CI and card Worker records remain historical. Startup root cause remains UNKNOWN.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -23,7 +23,7 @@
     "haruWord": {
       "url": "https://github.com/zzocojoa/haru-word",
       "defaultBranch": "main",
-      "verifiedDefaultCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
+      "verifiedDefaultCommit": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
       "mergedPullRequests": [
         22,
         23,
@@ -38,33 +38,41 @@
         33,
         34,
         35,
-        39
+        39,
+        40,
+        41,
+        42
       ],
-      "verifiedAt": "2026-10-17T15:17:49.682Z",
+      "verifiedAt": "2026-10-18T09:30:54.482Z",
       "previousVerification": {
-        "verifiedDefaultCommit": "c79be6bb37611a40a890fc1a56af0e15109f76cf",
-        "verifiedAt": "2026-10-15T16:00:08.271Z",
+        "verifiedDefaultCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
+        "verifiedAt": "2026-10-17T15:17:49.682Z",
         "previousVerification": {
-          "verifiedDefaultCommit": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
-          "verifiedAt": "2026-10-08T00:22:48.307Z"
+          "verifiedDefaultCommit": "c79be6bb37611a40a890fc1a56af0e15109f76cf",
+          "verifiedAt": "2026-10-15T16:00:08.271Z",
+          "previousVerification": {
+            "verifiedDefaultCommit": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
+            "verifiedAt": "2026-10-08T00:22:48.307Z"
+          }
         }
       }
     }
   },
   "production": {
     "site": {
-      "version": 135,
-      "source": "6d444190de52130b461e8a5ff3488364b096cea3",
-      "deployment": "appgdep_6ad38162879c81919c7b59b54cb71b5b",
-      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_de4c91b7be0c8191add465d44e24dc0e",
-      "deployedAt": "2026-10-17T14:08:56.754623+00:00",
+      "version": 137,
+      "source": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
+      "deployment": "appgdep_6ad48de434b081918e52b73d284d5354",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_cf9cda995b30819192b3db099b8aa3a3",
+      "deployedAt": "2026-10-18T09:14:31.561986+00:00",
+      "timestampMeaning": "Native successful deployment response updated_at, not deployment request start time.",
       "deploymentStatus": "succeeded",
       "envRevision": 71,
       "environmentEntryCount": 13,
       "accessMode": "public",
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-      "evidence": "2026-10-17-image-practice-position-rollout.json",
-      "productionVerifiedAt": "2026-10-17T14:13:52.196Z"
+      "evidence": "2026-10-18-image-practice-spacing-rollout.json",
+      "productionVerifiedAt": "2026-10-18T09:17:43.682Z"
     },
     "workerVersions": {
       "en-card": [
@@ -96,32 +104,55 @@
     "previousAutomationRuntimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
     "automationRuntimeSourceNote": "0023 deployment used the preserved expression-selection source snapshot before its final Git commit. This Git-only refactor is not a new deployment; do not label the old date-card commit as the exact current runtime source.",
     "previousSiteRecord": {
-      "version": 134,
-      "source": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
-      "deployment": "appgdep_6ad230da52148191bcedf6176b80e70b",
-      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_01b34aff3784819188118b899a40ecac",
-      "evidence": "2026-10-17-image-practice-position-rollout.json",
+      "version": 136,
+      "source": "3074adca216ce6ea3cd7474171fb685105bd0776",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_bf901375bfbc8191ab9c904a3828a214",
+      "deployment": "appgdep_6ad4615a764c81918b1cffa2cfe2bdc8",
+      "evidence": "2026-10-18-image-practice-spacing-rollout.json",
+      "evidenceSection": "rollback",
+      "note": "v136 saved archive and successful deployment were confirmed during v137 preflight; it includes PR41 security patches.",
       "previousRecordedSite": {
-        "version": 132,
-        "source": "909df067abc176aae82895ed053feb8f7261c9e6",
-        "deployment": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+        "version": 135,
+        "source": "6d444190de52130b461e8a5ff3488364b096cea3",
+        "deployment": "appgdep_6ad38162879c81919c7b59b54cb71b5b",
+        "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_de4c91b7be0c8191add465d44e24dc0e",
+        "deployedAt": "2026-10-17T14:08:56.754623+00:00",
+        "deploymentStatus": "succeeded",
         "envRevision": 71,
-        "publicAccessRevision": 4,
+        "environmentEntryCount": 13,
+        "accessMode": "public",
         "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-        "evidence": "2026-10-15-word-image-editor-wrap-rollout.json",
+        "evidence": "2026-10-17-image-practice-position-rollout.json",
+        "productionVerifiedAt": "2026-10-17T14:13:52.196Z",
         "previousSiteRecord": {
-          "version": 123,
-          "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
-          "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
-          "envRevision": 59,
-          "publicAccessRevision": 4,
-          "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
-          "latestVersionRead": {
-            "version": 123,
-            "status": "succeeded",
-            "checkedAt": "2026-10-07T16:12:51.430297+00:00",
-            "method": "Native deploy success; public source manifest hash and audience revision checked",
-            "accessRevision": 4
+          "version": 134,
+          "source": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
+          "deployment": "appgdep_6ad230da52148191bcedf6176b80e70b",
+          "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_01b34aff3784819188118b899a40ecac",
+          "evidence": "2026-10-17-image-practice-position-rollout.json",
+          "previousRecordedSite": {
+            "version": 132,
+            "source": "909df067abc176aae82895ed053feb8f7261c9e6",
+            "deployment": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+            "envRevision": 71,
+            "publicAccessRevision": 4,
+            "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+            "evidence": "2026-10-15-word-image-editor-wrap-rollout.json",
+            "previousSiteRecord": {
+              "version": 123,
+              "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
+              "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
+              "envRevision": 59,
+              "publicAccessRevision": 4,
+              "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+              "latestVersionRead": {
+                "version": 123,
+                "status": "succeeded",
+                "checkedAt": "2026-10-07T16:12:51.430297+00:00",
+                "method": "Native deploy success; public source manifest hash and audience revision checked",
+                "accessRevision": 4
+              }
+            }
           }
         }
       }
@@ -3510,19 +3541,46 @@
     ]
   },
   "latestVerification": {
-    "scope": "PR39 image practice / existing Site v135; unrelated card Workers and older feature verification were not rechecked.",
-    "evidence": "2026-10-17-image-practice-position-rollout.json",
+    "scope": "PR42 CSS spacing and existing Site v137; no new position-write smoke, DB row comparison or unrelated card Worker checks.",
+    "evidence": "2026-10-18-image-practice-spacing-rollout.json",
     "mainCI": {
-      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297",
+      "runId": 39111251966,
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39111251966",
+      "head": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
+      "attempt": 1,
       "conclusion": "success",
-      "testsPerNodeVersion": 662,
       "nodeVersions": [
         22,
         24
-      ]
+      ],
+      "testsPerJob": 665,
+      "testsPerNodeVersion": 665,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "stepsPerJob": 13,
+      "lintErrors": 0,
+      "existingLintWarnings": 15,
+      "rerunForDocumentation": false
     },
-    "productionSmoke": "Desktop Chrome startup, position save and front-side resume passed; see recorded scope and limits.",
-    "startupRootCause": "UNKNOWN"
+    "productionSmoke": "Desktop Chrome startup, 12px gap, image load, word reveal, close/focus return and same-card front resume passed.",
+    "startupRootCause": "UNKNOWN",
+    "previousVerification": {
+      "scope": "PR39 image practice / existing Site v135; unrelated card Workers and older feature verification were not rechecked.",
+      "evidence": "2026-10-17-image-practice-position-rollout.json",
+      "mainCI": {
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297",
+        "conclusion": "success",
+        "testsPerNodeVersion": 662,
+        "nodeVersions": [
+          22,
+          24
+        ]
+      },
+      "productionSmoke": "Desktop Chrome startup, position save and front-side resume passed; see recorded scope and limits.",
+      "startupRootCause": "UNKNOWN"
+    }
   },
   "imagePracticePositionPublication": {
     "status": "deployed_and_verified_with_limits",
@@ -3534,6 +3592,20 @@
     "migration": "drizzle/0005_flippant_enchantress.sql",
     "positionBackupIncluded": false,
     "rollbackVersion": 134,
+    "rollbackPerformed": false,
+    "rollbackPreservesNewPositionData": true,
+    "startupRootCause": "UNKNOWN",
+    "documentationOnlyFollowUp": true
+  },
+  "imagePracticeSpacingPublication": {
+    "status": "deployed_and_verified_with_limits",
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/42",
+    "mergeCommit": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
+    "deployedVersion": 137,
+    "deploymentSucceededAt": "2026-10-18T09:14:31.561986+00:00",
+    "evidence": "2026-10-18-image-practice-spacing-rollout.json",
+    "newMigrations": 0,
+    "rollbackVersion": 136,
     "rollbackPerformed": false,
     "rollbackPreservesNewPositionData": true,
     "startupRootCause": "UNKNOWN",
