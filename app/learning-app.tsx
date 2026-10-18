@@ -12,7 +12,6 @@ import {
   Settings2,
 } from "lucide-react";
 import { Suspense, lazy, useCallback, useRef } from "react";
-import { useRouter } from 'next/navigation';
 import type { GrammarLeave } from './grammar/use-grammar-draft';
 import { DeferredReloadBlocked, deferredView } from './deferred-view';
 import { CompletedLessonDialog as CompletedLesson } from './completed-lesson-dialog';
@@ -43,7 +42,7 @@ import { StudyRecoveryProvider } from './study/study-recovery';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 const StudySession = deferredView(() => import('./study-session'), feature => feature.StudySession, '학습');
-export default function LearningApp(props: { userId?: string | null; initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; cardStudioEnabled?: boolean; imagePilotEnabled?: boolean }) {
+export default function LearningApp(props: { userId?: string | null; initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; imagePilotEnabled?: boolean }) {
   return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
 }
 function LearningScreens({
@@ -53,7 +52,6 @@ function LearningScreens({
   grammarPracticeEnabled = false,
   grammarV3Enabled = false,
   grammarV4Enabled = false,
-  cardStudioEnabled = false,
   imagePilotEnabled = false,
 }: {
   userId?: string | null;
@@ -62,10 +60,8 @@ function LearningScreens({
   grammarPracticeEnabled?: boolean;
   grammarV3Enabled?: boolean;
   grammarV4Enabled?: boolean;
-  cardStudioEnabled?: boolean;
   imagePilotEnabled?: boolean;
 }) {
-  const router = useRouter();
   const {
     tab,
     showSession,
@@ -183,10 +179,6 @@ function LearningScreens({
           하루단어
         </div>
         <div className="top-actions">
-          {cardStudioEnabled && <button className="secondary-button" disabled={busy || saving || unsaved || store.restoring}
-            onClick={async () => {
-              if (await flushGrammar() && await flushStudy()) router.push('/cards');
-            }}>영어 카드</button>}
           <SaveStatus
             unsaved={unsaved}
             saving={saving}
