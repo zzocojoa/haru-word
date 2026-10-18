@@ -118,6 +118,7 @@
       },
       "documentationPullRequest": "https://github.com/zzocojoa/haru-word/pull/43",
       "documentationStateAtThisTask": "OPEN",
+      "historicalVerificationEvidence": "2026-10-18-image-practice-spacing-rollout.json",
       "scopeNote": "v137 spacing verification is historical and its documentation PR remains separate.",
       "evidence": "2026-10-18-image-practice-card-flip-rollout.json",
       "evidenceSection": "rollback",

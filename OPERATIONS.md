@@ -37,6 +37,18 @@
 
 **startup 시간 초과 원인은 UNKNOWN/미확정**이다. 이번에는 재현되지 않았으나 원인 해결이나 문제 부재를 입증하지 않는다. 실제 iPhone/VoiceOver·운영 여러 기기 충돌·전체 성능 모음은 이번 배포에서 미검증이다. [기능 검증 기록](docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md)과 [startup 조사](STARTUP_RENDERING.md)를 함께 본다.
 
+## 이미지 연습 버튼 간격 v137 · 2026-10-18
+
+**과거 배포 기록이다. 최신 운영 상태와 복구 기준은 위 v138 절차를 따른다.** [PR #42](https://github.com/zzocojoa/haru-word/pull/42)의 `main@0fc399b0c123ea6794eb71c0e61101028e1bb4bf`를 기존 Sites v137로 게시했고 **18:14:31 KST**에 성공을 확인했다. [v137 출시 JSON](docs/releases/2026-10-18-image-practice-spacing-rollout.json)은 원래 검증 시각·소스·아카이브·증거 17개의 지문을 보존한 당시 기록이다.
+
+- Desktop Chrome에서 홈 이미지 연습 버튼 상단 간격 **0→12px**, 높이 **48px**를 확인했다. 초기 실행, 이미지 640×853 로드, 당시 단어 확인 버튼으로 뒷면 표시, 닫기 후 초점 복귀·같은 카드 앞면 재개가 통과했다. v138의 양방향 클릭·새 위치 저장 검증과 구분한다.
+- **새 위치 쓰기·카드 이동·새로고침 후 위치 재개·DB 행별 대조는 v137에서 미실시**다. 실제 iPhone/VoiceOver·기기 간 충돌·장애 주입도 미검증이다. 앞선 로컬 Chromium/WebKit × 320/390/865/1440px × 글자 100/200%의 16개 조합은 배포 때 반복하지 않았다.
+- 당시 [main CI #39111251966](https://github.com/zzocojoa/haru-word/actions/runs/39111251966)는 Node 22/24 각 665개·13단계 성공(린트 오류 0·기존 경고 15개). 새 Node 24 빌드·387파일 패키지 검사·운영 JS/CSS 17개 SHA 대조가 통과했다. 최초 Windows npm 경로 오류와 설치된 npm CLI로 복구한 과정, 압축 파일과 저장된 tar의 차이는 출시 JSON에 남겼다. 원격 tar 전체 바이트 독립 비교는 미실시다.
+- 콘솔 오류·경고는 0건이었다. **v137 당시** 최근 5분/최대 50건 오류 필터에 HTTP401 두 건/outcome `ok`가 있었으며 **호출자·경로·원인은 미확정**이다. v138의 `GET /api/state` 두 건과 동일한 요청 또는 원인으로 단정하지 않는다. 제한된 관측을 전체 운영 무오류로 해석하지 않는다.
+- 추가 마이그레이션은 0이며 API·저장·revision·백업 계약과 환경 revision71/13개 값·public 접근 revision4·DB9테이블/바인딩을 유지했다. **v137 당시** 복구 기준은 보안 패치가 포함된 v136이었고 롤백하지 않았다. 최신 v138의 복구 대상은 위에 명시한 **v137**이다. 두 경우 모두 위치 테이블·새 데이터를 보존하며 DROP·역방향 SQL·이전 학습 백업 덮어쓰기를 금지한다.
+
+**startup 원인은 UNKNOWN/미확정**으로 유지한다. 당시 Chrome 성공은 원인 해결의 증거가 아니다. 이번 PR #43 정리는 main에 없는 v137 이력을 보완하며 추가 앱/운영 검증·배포·설정 변경을 포함하지 않는다.
+
 ## 이미지 연습 위치 저장 v135 · 2026-10-17
 
 **배포 확인 시각은 2026-10-17 23:08:56 KST, 이 기록의 정리일은 10월 18일이다.** [PR #39](https://github.com/zzocojoa/haru-word/pull/39)의 병합 소스 `6d444190de52130b461e8a5ff3488364b096cea3`를 [기존 Sites](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 게시했다. v135 배포 `appgdep_6ad38162879c81919c7b59b54cb71b5b`는 `succeeded`다. 이번 문서 정리에서는 추가 게시·마이그레이션·운영 데이터 쓰기·설정 변경을 하지 않았다. 아래 다른 버전의 운영 상태는 각 날짜의 이력이다.
