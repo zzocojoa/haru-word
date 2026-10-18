@@ -26,7 +26,8 @@ export function learningChunks(): Plugin {
     outputOptions(options) {
       if (typeof options.codeSplitting !== 'object') throw new Error('Expected Vinext client chunk groups');
       let initial: Set<string> | undefined;
-      return { ...options, codeSplitting: { ...options.codeSplitting, groups: [...options.codeSplitting.groups ?? [], {
+      // Preserve initializer order when shared chunks form a cycle after a route is removed.
+      return { ...options, strictExecutionOrder: true, codeSplitting: { ...options.codeSplitting, groups: [...options.codeSplitting.groups ?? [], {
         name(id, context) {
           if (!initial) {
             initial = staticDependencies(entry, moduleId => context.getModuleInfo(moduleId));

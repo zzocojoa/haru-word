@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+**현재 운영 v139 · 영어 카드 연결 종료:** 기존 Sites의 v139(`effc203`)에서 EN_Card 연결을 제거했다. 상단 메뉴가 없고, 이전 `/cards` 주소는 학습 홈으로 이동하며 카드 API는 `410 CARD_FEATURE_RETIRED`를 반환한다. 이번 GitHub 통합은 PR #46이 반영된 main에 같은 종료 처리를 보존하는 작업이다. 새 배포·운영 설정 변경·DB 마이그레이션은 하지 않는다. [종료 범위와 검증·복구](docs/EN_CARD_RETIREMENT.md)를 따른다. **startup·기존 401 원인은 미확정**이다. 아래 v138 이하 설명은 당시의 배포 기록이다.
+
 **v138 운영 배포 · 2026-10-18 20:22:48 KST:** [PR #44](https://github.com/zzocojoa/haru-word/pull/44)의 `main@9ad8380`을 기존 Sites에 게시했다. 별도 단어 확인 버튼 없이 이미지와 뜻 카드를 눌러 양방향으로 전환한다. 로그인된 데스크톱 in-app browser에서 초기 실행·실제 위치 저장·닫기/새로고침 후 같은 카드 앞면 재개를 확인했고, 확인 후 원래 위치로 복귀했다. 학습 문서·revision과 운영 설정은 유지됐으며 새 마이그레이션은 없다. main CI Node 22/24 각각 665개, 새 빌드 및 운영 JS/CSS 17개 대조가 통과했다. **startup 원인은 미확정**이며 실제 iPhone/VoiceOver는 미검증이다. [운영 결과와 v137 복구 절차](OPERATIONS.md#이미지-연습-카드-뒤집기-v138--2026-10-18), [출시 증거·관측 한계](docs/releases/2026-10-18-image-practice-card-flip-rollout.json)를 참조한다. 이번 문서 정리는 추가 배포·설정 변경이 아니다. 아래 버전과 CI 상태는 당시 이력이다.
 
 **v135 운영 배포 · 2026-10-17 23:08 KST / 기록 정리 10월 18일:** [PR #39](https://github.com/zzocojoa/haru-word/pull/39)가 반영된 `main@6d44419`를 기존 Sites에 게시했다. 위치 테이블 마이그레이션과 Desktop Chrome의 초기 실행·위치 저장·닫기/새로고침 후 앞면 재개를 확인했다. main CI는 Node 22/24 각 662개 통과다. **WebKit startup 시간 초과 원인은 미확정**이며 실제 iPhone/VoiceOver는 미검증이다. [운영 확인·복구 절차](OPERATIONS.md#이미지-연습-위치-저장-v135--2026-10-17), [배포 증거](docs/releases/2026-10-17-image-practice-position-rollout.json), [사용·실패 복구](docs/IMAGE_PRACTICE_POSITION.md), [검증 기록](docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md)을 따른다. 이번 정리는 문서만 갱신하며 추가 배포·설정 변경은 없다. 아래 날짜별 출시·CI 차단 설명은 당시의 이력이다.
@@ -40,7 +42,7 @@ AI 결과를 정답 판정과 구분하는 공통 표시와 구조도 비노출�
 
 15개 수업의 검토한 교재·정적 예문 분석·문법 v4 호환·신규 생성 중단 절차는 [문법 교재 v4 검토 보고서](GRAMMAR_REVIEWED_V4.md)를 참조하세요.
 
-본인 전용 카드 제작·PNG 저장·카카오 예약을 [영어 카드 작업실](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards)에서 사용할 수 있습니다. 기존 ChatGPT 로그인 후 위 링크로 직접 이동하세요. 작업실은 운영 v101에 반영했으며 설정·검증 범위·복구 절차는 [영어 카드 통합](CARD_STUDIO_INTEGRATION.md)을 참조하세요.
+영어 카드 작업실은 종료되었습니다. 예전 `/cards` 링크는 학습 홈으로 이동합니다. v101 이후의 과거 통합 기록은 [영어 카드 통합](CARD_STUDIO_INTEGRATION.md)에 보존하며, 현재 동작과 복구 기준은 [연결 종료 안내](docs/EN_CARD_RETIREMENT.md)를 따릅니다.
 
 GitHub 저장소·CI·PR 검토와 기존 Sites 배포 연결은 [GITHUB_WORKFLOW.md](GITHUB_WORKFLOW.md)를 참조하세요.
 

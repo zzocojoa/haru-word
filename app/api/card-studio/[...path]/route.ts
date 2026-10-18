@@ -1,6 +1,3 @@
-import { env } from 'cloudflare:workers';
-import { getChatGPTUser } from '@/app/chatgpt-auth';
-import { proxyCardStudio } from '@/lib/server/card-studio';
+import { cardFeatureRetired } from '@/lib/server/retired-cards';
 export const dynamic = 'force-dynamic';
-async function proxy(request: Request) { return proxyCardStudio(request, env, await getChatGPTUser()); }
-export { proxy as GET, proxy as POST, proxy as PUT, proxy as DELETE };
+export { cardFeatureRetired as GET, cardFeatureRetired as POST, cardFeatureRetired as PUT, cardFeatureRetired as DELETE };

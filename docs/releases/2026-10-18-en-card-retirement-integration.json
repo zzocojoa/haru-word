@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "feature": "en_card_retirement_integration",
+  "recordedAt": "2026-10-18T14:22:45.965Z",
+  "scope": "Integrate already published v139 into GitHub main after PR46; no merge, new deployment or production settings change.",
+  "base": {
+    "commit": "9ba7c10df243ca1a0d2219a3d9e91cd54c3537ba",
+    "pr": 46
+  },
+  "source": {
+    "commit": "effc203cb09f9a6ed47b81f9bec19e00d21fba4c",
+    "version": 139,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000004184820686064e6fedf1eb85",
+      "content_hash": "sha256:5d825520934743302e1f5fe23812b9b8137971c18456c8c6e372241046d12a49",
+      "size_bytes": 13322240,
+      "file_count": 237
+    },
+    "deployment": {
+      "id": "appgdep_6ad4cdd881588191805458e76828ac1a",
+      "status": "succeeded",
+      "type": "publish",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+      "envRevision": 72,
+      "updatedAt": "2026-10-18T13:48:09.750977+00:00",
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site"
+    }
+  },
+  "observedProduction": {
+    "checkedAt": "2026-10-18T14:07:13.314Z",
+    "site": {
+      "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "status": "active",
+      "latestVersion": 139,
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "access": "public",
+      "accessRevision": 4
+    },
+    "environment": {
+      "revision": 72,
+      "count": 9,
+      "keys": [
+        "google_ai_enabled",
+        "google_api",
+        "grammar_enabled",
+        "grammar_practice_v2_enabled",
+        "grammar_practice_v3_enabled",
+        "grammar_practice_v4_enabled",
+        "groq_api",
+        "large_backup_restore_enabled",
+        "word_image_pilot_enabled"
+      ],
+      "imagePracticeEnabled": true,
+      "updatedAt": "2026-10-18T13:46:42.379185+00:00"
+    },
+    "database": {
+      "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "bindings": [
+        "DB"
+      ],
+      "selected_binding_name": "DB",
+      "tables": [
+        "ai_daily_usage",
+        "card_automation_nonces",
+        "grammar_progress",
+        "image_practice_positions",
+        "learner_states",
+        "restore_jobs",
+        "restore_parts",
+        "study_sessions",
+        "word_progress"
+      ],
+      "model_projection": {
+        "truncated": false,
+        "omitted_project_id": false,
+        "omitted_selected_binding": false,
+        "omitted_bindings": 0,
+        "omitted_tables": 0
+      }
+    },
+    "http": [
+      {
+        "route": "/",
+        "status": 200,
+        "location": null,
+        "cacheControl": "no-store, must-revalidate"
+      },
+      {
+        "route": "/cards",
+        "status": 307,
+        "location": "/",
+        "cacheControl": null
+      },
+      {
+        "route": "/api/card-studio/account",
+        "status": 410,
+        "location": null,
+        "cacheControl": "no-store",
+        "errorCode": "CARD_FEATURE_RETIRED"
+      },
+      {
+        "route": "/card-studio/index.html",
+        "status": 404,
+        "location": null,
+        "cacheControl": null
+      }
+    ]
+  },
+  "behavior": {
+    "oldBookmark": "307 /cards -> /",
+    "retiredApis": "410 CARD_FEATURE_RETIRED for signed-in and anonymous callers",
+    "removed": "Card proxy, AI relay, validation implementation and 130 public card files",
+    "homeChangesAlreadyInPR46": true,
+    "clientExecutionOrder": "strictExecutionOrder retained from v139; original WebKit startup root cause remains unknown"
+  },
+  "compatibility": {
+    "newMigrations": 0,
+    "migrationFilesUnchanged": true,
+    "siteBindingsUnchanged": true,
+    "dependenciesUnchanged": true,
+    "learningAndPositionContractsUnchanged": true,
+    "historicalReleaseRecordsPreserved": true
+  },
+  "verificationLimits": {
+    "productionObservation": "Native metadata and read-only GETs only; no browser writes or learner row comparisons in this task",
+    "localRegression": "Run on integrated final source; results are recorded in the pull request and ignored local evidence",
+    "actualIphoneChecked": false,
+    "startupRootCause": "UNKNOWN",
+    "response401Cause": "not established",
+    "externalEnCardDeletionCompletion": "Not reverified by this integration"
+  },
+  "rollback": {
+    "rule": "Keep card retirement behavior; do not republish pre-retirement versions or recreate card settings",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+    "preserve": "Learning DB, image_practice_positions and new position data; no DROP, reverse SQL or old backup overwrite"
+  },
+  "actionsInThisIntegration": {
+    "merged": false,
+    "deployed": false,
+    "settingsChanged": false,
+    "productionDataWritten": false
+  }
+}
