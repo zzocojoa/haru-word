@@ -33,7 +33,7 @@ const content = JSON.parse(fs.readFileSync('data/content.json'));
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 async function checkLayouts(page, dialog, label) {
   await page.addScriptTag({ path: axePath });
-  for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
+  for (const width of [320, 390, 865, 1440]) for (const size of [100, 200]) {
     await page.setViewportSize({ width, height: 844 });
     await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
     const preview = dialog.locator('.dialog-word .word-image-preview');
@@ -62,11 +62,11 @@ async function checkLayouts(page, dialog, label) {
   await waitForWorker();
   const browser = await launchBrowser({ engine });
   fs.mkdirSync(out, { recursive: true });
-  const checks = [], errors = [], imageRequests = [], moduleNameMatches = [], requests = { writes: 0, ai: 0, external: 0 };
+  const checks = [], errors = [], imageRequests = [], moduleNameMatches = [], requests = { writes: 0, positionWrites: 0, ai: 0, external: 0 };
   const heldImages = new Map();
   let page;
   try {
-    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: accountHeaders('image_pilot') });
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: stage === 'back', reducedMotion: 'reduce', extraHTTPHeaders: accountHeaders('image_pilot') });
     const ids = words.filter(w => w.level === 'A1').slice(0, 20).map(w => w.id);
     let revision = 7, stored = { ...emptyState(), grammar: {} };
     stored.settings.assessments.A1 = { ids, index: 20, marks: Object.fromEntries(ids.map(id => [id, 'uncertain'])), completed: true };
@@ -104,6 +104,7 @@ async function checkLayouts(page, dialog, label) {
     await context.route('**/*', async route => {
       const request = route.request(), url = new URL(request.url());
       if (url.origin !== base) { requests.external++; return route.abort(); }
+      if (url.pathname === '/api/image-practice/position' && request.method() === 'PUT') requests.positionWrites++;
       if (url.pathname.startsWith('/word-images/v1/')) {
         imageRequests.push(url.pathname);
         if (stage === 'front') return;
@@ -156,9 +157,9 @@ async function checkLayouts(page, dialog, label) {
       const entry = page.getByRole('button', { name: '이미지 연습', exact: true });
       await entry.focus(); await page.keyboard.press('Enter');
       const dialog = page.getByRole('dialog');
-      await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
       await page.addScriptTag({ path: axePath });
-      for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
+      for (const width of [320, 390, 865, 1440]) for (const size of [100, 200]) {
         await page.setViewportSize({ width, height: 844 });
         await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
         assert.equal(await dialog.evaluate(el => el.scrollWidth > el.clientWidth || document.documentElement.scrollWidth > innerWidth), false, 'no horizontal overflow');
@@ -169,7 +170,7 @@ async function checkLayouts(page, dialog, label) {
       }
       await page.evaluate(() => document.documentElement.style.fontSize = '100%');
       await page.setViewportSize({ width: 390, height: 844 });
-      const reveal = dialog.getByRole('button', { name: '단어 확인', exact: true });
+      const reveal = dialog.locator('.image-practice-flip');
       await reveal.focus(); await page.keyboard.press('Space');
       assert.equal(await dialog.locator('.image-practice-answer').innerText(), 'apple');
       await checkLayouts(page, dialog, 'back');
@@ -181,7 +182,7 @@ async function checkLayouts(page, dialog, label) {
       await entry.click();
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
       assert.equal(await dialog.locator('[lang="en"]').count(), 0);
-      checks.push('320/390/1440 at 100/200% text, keyboard Enter/Space/Escape, focus return, axe, tab reset');
+      checks.push('320/390/865/1440 at 100/200% text, keyboard Enter/Space/Escape, focus return, axe, tab reset');
     }
     if (stage === 'editor') {
       await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
@@ -241,9 +242,9 @@ async function checkLayouts(page, dialog, label) {
       await dialog.getByRole('button', { name: '다음', exact: true }).click();
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
       await page.evaluate(() => { window.qaOldImage.dispatchEvent(new Event('load')); delete window.qaOldImage; });
-      assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true, 'old image event cannot enable a new card');
+      assert.equal(await dialog.locator('.image-practice-flip').isDisabled(), true, 'old image event cannot enable a new card');
       await heldImages.get(catalog.entries[1].url).fulfill({ contentType: 'image/webp', body: imageBytes(catalog.entries[1]) });
-      await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
       await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
       checks.push('503 skip hides answer; late detached load cannot change next loading state; current response enables reveal');
     }
@@ -259,14 +260,14 @@ async function checkLayouts(page, dialog, label) {
       await page.waitForTimeout(400);
       const dialog = page.getByRole('dialog');
       assert.equal(await dialog.count(), 1, 'practice opens one dialog');
-      assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true);
+      assert.equal(await dialog.locator('.image-practice-flip').isDisabled(), true);
       const markup = await dialog.innerHTML();
       assert.equal(/apple|사과|n\.|A1/.test(markup), false, 'front DOM has no answer or word metadata');
       assert.equal(/apple|사과/.test(await page.locator('body').ariaSnapshot()), false, 'modal accessibility tree hides background answers');
       assert.equal(await dialog.locator('img').count(), 1);
       await dialog.getByRole('button', { name: '다음', exact: true }).click();
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
-      assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).isDisabled(), true);
+      assert.equal(await dialog.locator('.image-practice-flip').isDisabled(), true);
       await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
       await dialog.waitFor({ state: 'hidden' });
       checks.push('slow image blocks reveal, navigation still advances, front hides answers, close remains available');
@@ -274,24 +275,62 @@ async function checkLayouts(page, dialog, label) {
     if (stage === 'back') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
       const dialog = page.getByRole('dialog');
-      const reveal = dialog.getByRole('button', { name: '단어 확인', exact: true });
-      await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+      await page.waitForFunction(() => document.querySelector('.image-practice-picture')?.naturalWidth > 0);
+      const historyLength = await page.evaluate(() => history.length);
+      const flip = dialog.locator('.image-practice-flip'), picture = dialog.locator('.image-practice-picture');
+      assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).count(), 0, 'no separate reveal button');
       assert.equal(/apple|사과/.test(await dialog.innerHTML()), false);
       await page.screenshot({ path: out + '/front.png', fullPage: false });
-      await reveal.click();
+      await dialog.locator('.image-practice-picture').click();
+      await dialog.locator('.image-practice-meaning').waitFor({ state: 'visible', timeout: 2000 });
       assert.equal(await dialog.locator('[lang="en"]').filter({ hasText: /^apple$/ }).count(), 1, 'reveal shows the correct English word');
       assert.equal(await dialog.locator('details[open]').count(), 0);
       assert.equal(await dialog.getByText('사과', { exact: true }).isVisible(), true, 'meaning is visible immediately after reveal');
       assert.equal(await dialog.locator('.image-practice-sense .pos-label').innerText(), '명사 (n.)');
-      assert.equal(await dialog.locator('summary').filter({ hasText: /^발음$/ }).count(), 1);
+      assert.match(await flip.getAttribute('type'), /^button$/);
+      assert.match(await dialog.ariaSnapshot(), /apple.*사과.*이미지 보기/);
       await page.screenshot({ path: out + '/back.png', fullPage: false });
-      checks.push('reveal shows English, meaning and part of speech immediately; pronunciation stays collapsed');
+      const pronunciation = dialog.locator('summary').filter({ hasText: /^발음$/ });
+      await pronunciation.click();
+      assert.equal(await dialog.locator('details[open]').count(), 1, 'pronunciation opens without flipping the card');
+      assert.equal(await dialog.locator('.image-practice-meaning').isVisible(), true);
+      await dialog.locator('.image-practice-meaning').click();
+      await picture.waitFor({ state: 'visible' });
+      assert.equal(await dialog.locator('.image-practice-sense').count(), 0, 'returning to front removes answer DOM');
+      assert.equal(await dialog.locator('details').count(), 0);
+      assert.equal(/apple|사과/.test(await dialog.ariaSnapshot()), false, 'returned front hides answers from assistive technology');
+      await flip.focus();
+      await page.keyboard.press('Enter');
+      await dialog.locator('.image-practice-meaning').waitFor({ state: 'visible' });
+      assert.equal(await flip.evaluate(el => el === document.activeElement), true, 'keyboard flip keeps focus on the same card');
+      await page.keyboard.press('Space');
+      await picture.waitFor({ state: 'visible' });
+      assert.equal(await flip.evaluate(el => el === document.activeElement), true);
+      for (let i = 0; i < 3; i++) {
+        const imageBox = await picture.boundingBox();
+        await page.touchscreen.tap(imageBox.x + imageBox.width / 2, imageBox.y + imageBox.height / 2);
+        await dialog.locator('.image-practice-meaning').waitFor({ state: 'visible' });
+        const meaningBox = await dialog.locator('.image-practice-meaning').boundingBox();
+        await page.touchscreen.tap(meaningBox.x + meaningBox.width / 2, meaningBox.y + meaningBox.height / 2);
+        await picture.waitFor({ state: 'visible' });
+      }
+      assert.equal(await page.evaluate(() => history.length), historyLength, 'flipping creates no browser history entries');
+      assert.equal(requests.positionWrites, 0, 'flipping does not save or change the practice position');
+      assert.equal(imageRequests.filter(url => url === catalog.entries[0].url).length, 1, 'same picture stays loaded across flips');
+      await flip.click();
+      await dialog.locator('.image-practice-meaning').waitFor({ state: 'visible' });
+      await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
+      await dialog.waitFor({ state: 'hidden' });
+      await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
+      await picture.waitFor({ state: 'visible' });
+      assert.equal(await dialog.locator('.image-practice-sense').count(), 0, 'reopening always starts at the image front');
+      checks.push('image/meaning clicks, repeated touch taps and Enter/Space flip both ways; focus, pronunciation, hidden answers, no writes or extra image fetches/history, reopen front');
     }
     if (stage === 'full') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
       const dialog = page.getByRole('dialog');
       await dialog.getByText('3,809개 · 성적 미기록', { exact: true }).waitFor();
-      await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
       assert.equal(await dialog.getByText('1 / 3809', { exact: true }).count(), 1);
       assert.deepEqual([...new Set(imageRequests)], allEntries.slice(0, 2).map(e => e.url));
       checks.push('all 3809 textbook entries eligible; only current and next image requested');
@@ -305,11 +344,11 @@ async function checkLayouts(page, dialog, label) {
         assert.equal(await dialog.locator('[lang="en"]').count(), 0, 'new card has no English answer');
         assert.equal(await dialog.getByText(expected, { exact: true }).count(), 0, 'every front DOM hides its English answer');
         assert.equal((await dialog.locator('.dialog-scroll').innerHTML()).includes(catalog.entries[i].baseMeaning), false, 'every front card DOM hides its meaning');
-        await page.waitForFunction(() => [...document.querySelectorAll('button')].some(b => b.textContent === '단어 확인' && !b.disabled));
+        await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
         assert.deepEqual(await dialog.locator('img').evaluate(image => [image.naturalWidth, image.naturalHeight]), [catalog.entries[i].width, catalog.entries[i].height], 'web image decoded with the catalog dimensions');
         const allowed = new Set(catalog.entries.slice(0, i + 2).map(e => e.url));
         assert.equal(imageRequests.every(url => allowed.has(url)), true, 'every step fetches at most one image ahead');
-        await dialog.getByRole('button', { name: '단어 확인', exact: true }).click();
+        await dialog.locator('.image-practice-flip').click();
         assert.equal(await dialog.locator('.image-practice-answer').innerText(), expected);
         assert.equal(await dialog.locator('.image-practice-meaning').innerText(), catalog.entries[i].baseMeaning);
         assert.equal(await dialog.locator('.image-practice-meaning').isVisible(), true);

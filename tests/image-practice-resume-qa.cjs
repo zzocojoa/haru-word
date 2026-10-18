@@ -64,7 +64,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     let dialog = await open(); await number(1).waitFor(); assert.equal(await dialog.getByRole('button', { name: '이전', exact: true }).isDisabled(), true);
     await page.waitForFunction(() => document.querySelector('.image-practice-picture')?.naturalWidth > 0);
     assert.deepEqual([...new Set(imageRequests)], urls.slice(0, 2));
-    await dialog.getByRole('button', { name: '단어 확인', exact: true }).click(); await dialog.locator('summary').filter({ hasText: /^발음$/ }).click();
+    await dialog.locator('.image-practice-flip').click(); await dialog.locator('summary').filter({ hasText: /^발음$/ }).click();
     const historyLength = await page.evaluate(() => window.history.length);
     mode = 'put-hold'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await wait(() => held);
     await dialog.getByRole('button', { name: '다음', exact: true }).click(); await dialog.getByRole('button', { name: '다음', exact: true }).click();
