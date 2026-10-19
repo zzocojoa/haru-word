@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "title": "PR #48 UI 문구·WebKit 초점 복귀 v140 배포 기록",
+  "recordedAt": "2026-10-19T03:56:48.801Z",
+  "status": "deployed_and_verified_with_limits",
+  "site": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "version": 140,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0b533db8cddc8191a2baebff038a61fd",
+    "source": "f5925ec0b70ce5f6e12de3596e2bed927115e73c",
+    "deploymentId": "appgdep_6ad591ffe2d881918bbe14f81ab00f5c",
+    "status": "succeeded",
+    "deploymentSucceededAt": "2026-10-19T03:44:20.436858+00:00",
+    "deploymentSucceededAtKst": "2026-10-19 12:44:20 KST",
+    "timestampMeaning": "Native successful deployment response updated_at; not the deployment request start.",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000002db08206ace64a6b45516778",
+      "content_hash": "sha256:18a6d312203ecda19f8cab6822c448c84ee63c295283fb8949e707bedd3492d1",
+      "size_bytes": 13332480,
+      "file_count": 237
+    }
+  },
+  "github": {
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/48",
+    "state": "MERGED",
+    "mergedAt": "2026-10-19T03:20:36Z",
+    "main": "205db759f9a0edcfa92210280b1f86fd5261e757",
+    "reviewedHead": "6cf051fdd4acbf130944410a2dca98e47e69d8a0",
+    "sourceTreeMatchesSites": true,
+    "tree": "2d3fab67999d13147f978cb3eb001520cca1933e",
+    "mainCI": {
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39194242440",
+      "runId": 39194242440,
+      "head": "205db759f9a0edcfa92210280b1f86fd5261e757",
+      "status": "completed",
+      "conclusion": "success",
+      "nodeVersions": [
+        22,
+        24
+      ],
+      "testsPerNodeVersion": 643,
+      "stepsPerJob": 13,
+      "lintErrors": 0,
+      "existingLintWarnings": 15,
+      "recheckedForDocumentation": true,
+      "rerunForDocumentation": false,
+      "browserTestsIncluded": false
+    }
+  },
+  "changeSummary": [
+    "학습 안내·탭·버튼·평가 문구와 저장 실패 안내 개선",
+    "긴 기록 원문 보존과 짧은 기록 문단 경계 수정",
+    "WebKit 단어 편집창 종료 후 원래 단어 버튼으로 초점 복귀"
+  ],
+  "buildAndPackaging": {
+    "successfulPreflightBuildExitCode": 0,
+    "reusedUnchangedBuild": true,
+    "sourceHashesChecked": 508,
+    "archiveFiles": 237,
+    "byteIdenticalFiles": 236,
+    "semanticOnly": [
+      "dist/.openai/hosting.json: official packager normalized JSON whitespace; parsed content unchanged"
+    ],
+    "localGzipSha256": "fb506f8118c752e19d6cdd8e51683fb708d24b709c9083eb6086dc32d4c9777c",
+    "localGzipHashMeaning": "SHA256 of local compressed archive; native archive content_hash describes the backend archive and is recorded separately.",
+    "sourceTreeMatchesMain": true,
+    "changesToRuntimeDuringPublication": 0
+  },
+  "productionVerification": {
+    "recordedAt": "2026-10-19T03:51:10.202Z",
+    "anonymousEngines": [
+      {
+        "engine": "chromium",
+        "initialReadyMs": 3643,
+        "checks": [
+          "initial render and revised tab/home labels",
+          "revised settings guidance and Korean close button",
+          "three real pointer open/close editor focus return cases",
+          "anonymous image practice login gate opens and closes"
+        ],
+        "focusPassed": 3,
+        "matchingLoadedAssets": 17,
+        "uncaughtErrors": 0,
+        "anonymousStateStatus": 401
+      },
+      {
+        "engine": "webkit",
+        "initialReadyMs": 1564,
+        "checks": [
+          "initial render and revised tab/home labels",
+          "revised settings guidance and Korean close button",
+          "three real pointer open/close editor focus return cases",
+          "anonymous image practice login gate opens and closes"
+        ],
+        "focusPassed": 3,
+        "matchingLoadedAssets": 17,
+        "uncaughtErrors": 0,
+        "anonymousStateStatus": 401
+      }
+    ],
+    "authenticatedImagePractice": {
+      "engine": "Chromium",
+      "userCompletedSignIn": true,
+      "frontBackFront": true,
+      "reopenSameCardFront": true
+    },
+    "dataPreservation": {
+      "learningAndPositionResponseHashesUnchanged": true,
+      "applicationWrites": 0,
+      "scope": "Authenticated image-practice checks; anonymous editor/home checks cannot write learner state."
+    },
+    "httpProbes": [
+      {
+        "route": "/",
+        "status": 200
+      },
+      {
+        "route": "/cards",
+        "status": 307,
+        "redirect": "/"
+      },
+      {
+        "route": "/api/card-studio/account",
+        "status": 410,
+        "error": "CARD_FEATURE_RETIRED"
+      },
+      {
+        "route": "/card-studio/index.html",
+        "status": 404
+      }
+    ],
+    "scope": "Anonymous Chromium/WebKit at 390x844; user-authenticated Chromium for read-only image-practice checks. This is not the local synthetic-account regression suite.",
+    "observability": {
+      "uncaughtPageErrors": 0,
+      "anonymous401": "Each anonymous /api/state request returned 401 in the recorded passes. Authenticated baseline/after GETs for state and position returned 200. These observations do not attribute the historical 401 responses.",
+      "workerLogAuditPerformed": false,
+      "consoleErrorsZeroClaim": false,
+      "applicationWritesDuringAuthenticatedChecks": 0,
+      "dataComparison": "Response hashes before/after image-practice verification only; not full database rows before/after deployment."
+    }
+  },
+  "compatibility": {
+    "newMigrations": 0,
+    "unchangedMigrationFiles": 13,
+    "tables": 9,
+    "bindings": [
+      "DB",
+      "BUCKET"
+    ],
+    "environmentRevision": 72,
+    "environmentEntries": 9,
+    "accessRevision": 4,
+    "access": "public",
+    "environmentUnchanged": true
+  },
+  "rollback": {
+    "performed": false,
+    "reason": "No deployed application defect observed in requested checks.",
+    "version": 139,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+    "rule": "Retain card retirement; preserve learner and image position data. No reverse SQL, table deletion, old-backup overwrite or card setting restoration."
+  },
+  "unresolved": {
+    "startupRootCause": "UNKNOWN",
+    "historical401RootCause": "UNKNOWN",
+    "startupExplanation": "Current startup success does not establish the cause or absence of the historical one-off timeout."
+  },
+  "verificationLimits": [
+    "Real iPhone/VoiceOver and screen-reader user tests were not run.",
+    "WebKit checks used an anonymous desktop engine at 390x844; authenticated image flips used Chromium.",
+    "No learning writes, position moves, backup restore or real AI calls were tested in production.",
+    "Post-deploy initial-render success and anonymous /api/state 401 do not determine historical startup/401 causes.",
+    "Authenticated data hashes compare before/after smoke verification, not a database-wide before/after deploy audit."
+  ],
+  "priorRegression": {
+    "mainCI": {
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39194242440",
+      "runId": 39194242440,
+      "head": "205db759f9a0edcfa92210280b1f86fd5261e757",
+      "status": "completed",
+      "conclusion": "success",
+      "nodeVersions": [
+        22,
+        24
+      ],
+      "testsPerNodeVersion": 643,
+      "stepsPerJob": 13,
+      "lintErrors": 0,
+      "existingLintWarnings": 15,
+      "recheckedForDocumentation": true,
+      "rerunForDocumentation": false,
+      "browserTestsIncluded": false
+    },
+    "full172ConditionMatrix": "Historical run before the final four display-file paragraph fix; relevant tests were rerun after the fix. Not counted as a full final-source rerun.",
+    "physicalIphone": false,
+    "realAiCalls": false
+  },
+  "toolingNotes": [
+    "CUA kernel asset initialization failed twice; installed gstack Chromium fallback used, then user completed sign-in.",
+    "gstack skill-start helper was absent; existing browser remained usable; no setup or upgrade was run. Maintenance command: /gstack-upgrade.",
+    "Node22 fs.cpSync crashed; old dist was retained and Copy-Item copied the unchanged preverified build.",
+    "Official source helper pushed f5925ec; package failed under Node22, then GNU tar treated a Windows drive colon as remote. Existing Node24 and process-only TAR_OPTIONS=--force-local completed the same official helper. No persistent settings changed.",
+    "First read-only probe assertion counted a deliberately blocked Cloudflare platform POST as an application write. UI and asset checks passed; assertion corrected and both engines passed with all non-read requests still blocked."
+  ],
+  "evidence": {
+    "localDirectory": "work/pr48-rollout-20261019",
+    "resultSha256": "cd5c5bb638fa44ce70cd0b85c06d9b80ce6f3e77be997c384994c481df230a3b",
+    "nativeResultSha256": "46937d1d42bf42d8fe8e3bee058d63ef15a7d53cd27ab9f3458d374826204e7e",
+    "files": {
+      "native-result.json": "46937d1d42bf42d8fe8e3bee058d63ef15a7d53cd27ab9f3458d374826204e7e",
+      "preparation.json": "27c6de0b192d2889ec643800300d978551a76ac2366e62ef49d7d3b171ec5085",
+      "package-verification.json": "60344e0b5660a2d92d72a676259a34825d98ec5d2a303dc1aaddd556152728e6",
+      "chromium-first-attempt.json": "26a94fb8260908d1261649012debf731712f2d6a66a5dfbcfacc473fb4d94383",
+      "chromium-production-readonly.json": "65063adefd32526cd64141c3c86194dd48081f27bc84dbf737d712196994e8cb",
+      "webkit-production-readonly.json": "ca79f73679f0e59ffddcb622677d68e647db549b8b01d4720e872a8659b11ca5",
+      "authenticated-baseline.json": "cca61be7e20bc9d1b556ea02e112aba10e15526b897a3bdecdc9bfdac30035a1",
+      "authenticated-after.json": "3ab78f78dbd831044db4d5e0c2e8eb179797a0aca87863b9da8d5f8d21eea017",
+      "image-front.json": "b7d3871f4b6053fa089287401599a25362928d20521bd088b36f5b59d1e8fc3d",
+      "image-back.json": "fc071501b54402bfc131356ac27c0d7faf2a8c9ecf9ceff1077dfb29d9bd834b",
+      "image-front-again.json": "f51c7cabe7243a1c6c8deafd153320029d3f418f27fdcf0867aa252c1ea7a9ae",
+      "image-reopen.json": "0737c4aae0d111bfc731c5d258d7713a95f45af0d55baba5cd84ef25b66ce0d6",
+      "chromium-home.png": "3b959c2626b1d3b3bd867ebdbbb47e4196e8e22c777a056fda5097746757ca03",
+      "webkit-home.png": "329ddb0ac812b515347e54531a9aa3a6ef9d0f1a70ceae8bfb270e41fd7d9b14",
+      "chromium-editor.png": "f12325a305dc85e580bb0780d461df4e933367ca2f98ed494b31704e9a243a03",
+      "webkit-editor.png": "25ce6ac146bd63691ab3ef703cc7cf9a17402dbfbb867d36bb370f0bb83331f8",
+      "image-front.png": "6c55b9b118aa640107150c4395072040420dc3bc804d55306ab871672d3f9c99",
+      "image-back.png": "f98cd6ca3f7138addae8a01798f0cd0a8b4ebcc3258257e381f07fa3ff3bbbb5",
+      "production-readonly.cjs": "4f3e0167bf836205a3edb2d9cf0d3321b67db3b1fc683c759e65c8119d922f32",
+      "browser-baseline.js": "4c0d172bd5957428e152609859b4db809fde0d0c759ce9998e0a01896767cb79",
+      "browser-after.js": "8b67749197bf23a2ce930a2e8e4daf4eb04b48aaa9b6770eced0b4676743a627"
+    },
+    "privacy": "Raw personal learning text, account/card identifiers, credentials and cookies are not copied into this release record."
+  },
+  "documentationFollowUp": {
+    "recordedAt": "2026-10-19T03:56:48.801Z",
+    "branch": "codex/document-v140-rollout",
+    "siteReadOnlyConfirmation": {
+      "checkedAt": "2026-10-19T03:54:03.780Z",
+      "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "version": 140,
+      "status": "active",
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "access": "public",
+      "accessRevision": 4
+    },
+    "additionalDeployment": false,
+    "settingsChanged": false,
+    "productionDataWritten": false,
+    "appSourceChanged": false,
+    "testsOrBuildRerun": false,
+    "commitCreated": false,
+    "pushed": false,
+    "newPullRequestCreated": false
+  }
+}
