@@ -57,15 +57,18 @@ test('initial learning graph excludes full examples and image index while deferr
   assert.ok(inputs.has('data/catalog-basics.json'));
   assert.equal(inputs.has('data/content.json'), false);
   assert.equal(inputs.has('data/word-image-ui.json'), false);
+  assert.equal(inputs.has('data/american-ipa-ui.json'), false);
   assert.equal(inputs.has('lib/grammar/content.ts'), false);
   assert.equal(inputs.has('lib/grammar/content-v4.ts'), false);
   assert.ok(Object.values(outputs).some(output => Object.hasOwn(output.inputs, 'data/content.json')));
   assert.ok(Object.values(outputs).some(output => Object.hasOwn(output.inputs, 'data/word-image-ui.json')));
+  assert.ok(Object.values(outputs).some(output => Object.hasOwn(output.inputs, 'data/american-ipa-ui.json')));
   visited.clear();
   visit(Object.keys(outputs).find(file => outputs[file].entryPoint === 'app/word-library.tsx'));
   const libraryInputs = new Set([...visited].flatMap(file => Object.keys(outputs[file].inputs)));
   assert.equal(libraryInputs.has('data/content.json'), false);
   assert.equal(libraryInputs.has('data/word-image-ui.json'), false);
+  assert.equal(libraryInputs.has('data/american-ipa-ui.json'), false);
   assert.equal(libraryInputs.has('lib/grammar/content-v4.ts'), false);
   assert.ok(libraryInputs.has('data/grammar-index.json'));
 });

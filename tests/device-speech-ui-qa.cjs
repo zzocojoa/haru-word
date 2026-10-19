@@ -153,12 +153,22 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       await page.locator('.word-stage h3').getByText('close', { exact: true }).waitFor();
     }
     await reviewedSense(content[reviewed.id].meaning);
-    await page.locator('.word-pronunciation .phonetic').getByText('/kloʊz/', { exact: true }).waitFor();
+    await page.locator('.word-ipa .phonetic').getByText('/kloʊz/', { exact: true }).waitFor();
     await page.getByRole('link', { name: '미국식 사전 발음 듣기', exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: 'close 기기 음성 듣기', exact: true }).count(), 0);
     await page.getByLabel('학습할 뜻', { exact: false }).fill('마감하다');
-    await page.getByRole('link', { name: '사전에서 발음 확인', exact: true }).waitFor();
-    assert.equal(await page.locator('.word-pronunciation .phonetic').count(), 0);
+    try {
+      await page.getByRole('link', { name: '사전에서 발음 확인', exact: true }).waitFor();
+    } catch (error) {
+      // This runner uses synthetic fixtures only; keep diagnosis limited to UI readiness.
+      console.error(JSON.stringify({ changedSense: await page.getByLabel('학습할 뜻', { exact: false }).inputValue(),
+        ipa: await page.locator('.word-ipa .phonetic').allTextContents(),
+        focusedTag: await page.evaluate(() => document.activeElement?.tagName),
+        dialogCount: await page.getByRole('dialog').count() }));
+      await page.screenshot({ path: `${out}/changed-sense-failure.png` });
+      throw error;
+    }
+    assert.equal(await page.locator('.word-ipa .phonetic').count(), 0);
     assert.equal(await page.getByRole('button', { name: 'close 기기 음성 듣기', exact: true }).count(), 0);
     checks.push('reviewed heteronym keeps dictionary-only pronunciation; changed sense never guesses IPA');
     assert.deepEqual(errors, []);

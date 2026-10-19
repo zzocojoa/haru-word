@@ -7,7 +7,7 @@ const content = JSON.parse(fs.readFileSync('data/content.json'));
 const lastHash = JSON.parse(fs.readFileSync('data/word-image-ui.json')).entries.at(-1)[1];
 const heavy = new Set(fs.readdirSync('dist/client/_next/static/chunks').filter(name => name.endsWith('.js')).filter(name => {
   const text = fs.readFileSync('dist/client/_next/static/chunks/' + name, 'utf8');
-  return text.includes('We talked about work after lunch.') || text.includes(lastHash) || text.includes('I am now reading.') || text.includes('The teacher reads.');
+  return text.includes('We talked about work after lunch.') || text.includes(lastHash) || text.includes('원형·현재') || text.includes('I am now reading.') || text.includes('The teacher reads.');
 }));
 assert.ok(heavy.size);
 (async () => {

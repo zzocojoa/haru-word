@@ -1,0 +1,588 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-19T08:21:38.211Z",
+  "base": "0c16cc83dfe74345506eb00e018b16542e1be640",
+  "branch": "codex/american-ipa-display",
+  "scope": "local implementation verification before commit and PR; production unchanged",
+  "productionVersion": "v140",
+  "startupCause": "unconfirmed",
+  "existing401Cause": "unconfirmed",
+  "node": "v22.22.2",
+  "npm": "10.9.7",
+  "dictionary": {
+    "dictionarySha256": "25c9ec764fbff4b04e31cb579a0ce387977fb470ac24bfbbd953b062135e8fbe",
+    "wordsSha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+    "contentSha256": "f61d1a86789e4b615dcdc60f6c831fbafd678725a96d0f06c669bb7679d9b722"
+  },
+  "preservation": {
+    "originalDirtyFiles": 176,
+    "filesUnchanged": true,
+    "statusUnchanged": true,
+    "headUnchanged": true,
+    "diffUnchanged": true,
+    "indexUnchanged": true,
+    "branchesUnchanged": true
+  },
+  "commands": [
+    {
+      "command": "npm run ipa:check",
+      "exitCode": 0,
+      "entries": 3809,
+      "variants": 3837
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": 658,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 15
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "warnings": [
+        "punycode deprecation",
+        "chunk size > 500 kB"
+      ]
+    },
+    {
+      "command": "node node_modules/eslint/bin/eslint.js tests/device-speech-ui-qa.cjs tests/image-practice-qa.cjs tests/pronunciation-qa.cjs",
+      "exitCode": 0
+    }
+  ],
+  "browser": [
+    {
+      "name": "pronunciation",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/pronunciation-chromium/results.json",
+      "reportSha256": "1b3a24e90ad95fed78f7e6c54eebe63fa53fa753bded06e3b66d707d3757f637",
+      "checks": [
+        "completed snapshot uses its recorded meaning, not the current edited sense",
+        "completed snapshot pronunciation",
+        "editor reviewed pronunciation",
+        "edited sense removes guessed IPA and discard preserves records",
+        "read/article conditions, ordinary device speech, editor IPA hide/restore, 320/390/1440 and 200% text, focus return",
+        "learn pronunciation",
+        "sentence pronunciation",
+        "explicitly empty sentence sense stays empty and has no guessed IPA",
+        "both recall directions keep IPA hidden; public source data available without application writes",
+        "familiarity checks do not reveal IPA"
+      ],
+      "sessionResumeWrites": 5,
+      "familiarityStartWrites": 1
+    },
+    {
+      "name": "device-speech-ui",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/pronunciation-ui/chromium/results.json",
+      "reportSha256": "37f3f263dbd60c67d6eba14d1204e436faae626a68213e00e867d6af2cb65f20",
+      "checks": [
+        "normal playback stays compact with one listening button and dictionary link",
+        "playing: 320/390/1440px, 200% text, 44px targets and axe",
+        "expanded help: 320/390/1440px, 200% text, 44px targets and axe",
+        "error recovery: 320/390/1440px, 200% text, 44px targets and axe",
+        "starting: 320/390/1440px, 200% text, 44px targets and axe",
+        "keyboard disclosure, visible error details and manual retry preserve playback lifecycle",
+        "controlled clock preserves the 4000ms startup watchdog without wall-time races",
+        "unsupported browser help: 320/390/1440px, 200% text, 44px targets and axe",
+        "unsupported browser has recovery help; learning revision and records remain unchanged",
+        "reviewed heteronym keeps dictionary-only pronunciation; changed sense never guesses IPA",
+        "shared grammar sentence has no initial help clutter, exposes specific errors and supports retry"
+      ]
+    },
+    {
+      "name": "lazy-materials",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/lazy-materials/chromium/verification.json",
+      "reportSha256": "028bfc7b01ca14b73eb1b9495547395df308a233adecc23b45adb6c678cfdc53",
+      "checks": [
+        "initial saved screen requests neither full examples nor image index",
+        "word list and search request neither full examples, image index nor grammar lessons",
+        "editor entry and textbook failures recover without saving; accessible loading/error header, unload cancellation and late-close protection; list state retained",
+        "closing an in-flight image module is safe; reopening reveals approved images without saves"
+      ],
+      "fullStateAndRevisionUnchanged": true
+    },
+    {
+      "name": "image-practice back",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/chromium/back-report.json",
+      "reportSha256": "2c0e40effbef63650bc320c91cb7e3fc695f1ebfb7566a4fc6a2a7e2a7cf141f",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "image/meaning clicks, repeated touch taps and Enter/Space flip both ways; focus, pronunciation, hidden answers, no writes or extra image fetches/history, reopen front"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 0,
+        "ai": 0,
+        "external": 1
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice lifecycle",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/chromium/lifecycle-report.json",
+      "reportSha256": "92ccbdeae3500c1cd728922582c579aa54fcc65fd09dfc467153ca5d33f25fdb",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "20 cards reveal correct words, visible meanings and parts of speech; restart, Escape, app Back gesture, refresh, focus return"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 20,
+        "ai": 0,
+        "external": 2
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice matrix",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/chromium/matrix-report.json",
+      "reportSha256": "620223df7089c0296c01fd84a1674b607965e31cf79fac97c66a7c613d997d12",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "320/390/865/1440 at 100/200% text, keyboard Enter/Space/Escape, focus return, axe, tab reset"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 0,
+        "ai": 0,
+        "external": 1
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice editor",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/chromium/editor-report.json",
+      "reportSha256": "ae007c6bc5ac9d03dc76418473f31ccf531defe6dee8e3e8aba489c427b3e56a",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "editor shows matching preview, hides changed/new meanings and preserves dismissal protection",
+        "article variants, bicycle and nonpilot recommendation previews preserve readable editor inputs at 320/390/1440px and 100/200% text"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 0,
+        "ai": 0,
+        "external": 1
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice-resume",
+      "engine": "chromium",
+      "exitCode": 0,
+      "report": "outputs/image-practice-resume/chromium/report.json",
+      "reportSha256": "df9089f8b9f8403dd716a6acfc4c1beea198feec577b5d3104d8c6688e57901c",
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position, say save result is unknown, and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ],
+      "unchangedLearningStateRevisionAndBackup": true,
+      "maxConcurrentPositionRequests": 1,
+      "pendingPositionRequestsAtEnd": 0
+    },
+    {
+      "name": "pronunciation",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/pronunciation-webkit/results.json",
+      "reportSha256": "84e1bdaac7d3ec2a11304533d84e88e4079bcd0f8f10e2ab1bc61f18ff5bc8d1",
+      "checks": [
+        "completed snapshot uses its recorded meaning, not the current edited sense",
+        "completed snapshot pronunciation",
+        "editor reviewed pronunciation",
+        "edited sense removes guessed IPA and discard preserves records",
+        "read/article conditions, ordinary device speech, editor IPA hide/restore, 320/390/1440 and 200% text, focus return",
+        "learn pronunciation",
+        "sentence pronunciation",
+        "explicitly empty sentence sense stays empty and has no guessed IPA",
+        "both recall directions keep IPA hidden; public source data available without application writes",
+        "familiarity checks do not reveal IPA"
+      ],
+      "sessionResumeWrites": 5,
+      "familiarityStartWrites": 1
+    },
+    {
+      "name": "device-speech-ui",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/pronunciation-ui/webkit/results.json",
+      "reportSha256": "e3a5a8a2653eede36d5561fecf26c05d29ae1fd88d995036ff8b62074fee2f15",
+      "checks": [
+        "normal playback stays compact with one listening button and dictionary link",
+        "playing: 320/390/1440px, 200% text, 44px targets and axe",
+        "expanded help: 320/390/1440px, 200% text, 44px targets and axe",
+        "error recovery: 320/390/1440px, 200% text, 44px targets and axe",
+        "starting: 320/390/1440px, 200% text, 44px targets and axe",
+        "keyboard disclosure, visible error details and manual retry preserve playback lifecycle",
+        "controlled clock preserves the 4000ms startup watchdog without wall-time races",
+        "unsupported browser help: 320/390/1440px, 200% text, 44px targets and axe",
+        "unsupported browser has recovery help; learning revision and records remain unchanged",
+        "reviewed heteronym keeps dictionary-only pronunciation; changed sense never guesses IPA",
+        "shared grammar sentence has no initial help clutter, exposes specific errors and supports retry"
+      ]
+    },
+    {
+      "name": "lazy-materials",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/lazy-materials/webkit/verification.json",
+      "reportSha256": "028bfc7b01ca14b73eb1b9495547395df308a233adecc23b45adb6c678cfdc53",
+      "checks": [
+        "initial saved screen requests neither full examples nor image index",
+        "word list and search request neither full examples, image index nor grammar lessons",
+        "editor entry and textbook failures recover without saving; accessible loading/error header, unload cancellation and late-close protection; list state retained",
+        "closing an in-flight image module is safe; reopening reveals approved images without saves"
+      ],
+      "fullStateAndRevisionUnchanged": true
+    },
+    {
+      "name": "image-practice back",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/webkit/back-report.json",
+      "reportSha256": "af2a4b8ca7eb038bd2e596cdd4b1aa49775b9c33451bcdaba25b14672088ca94",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "image/meaning clicks, repeated touch taps and Enter/Space flip both ways; focus, pronunciation, hidden answers, no writes or extra image fetches/history, reopen front"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 0,
+        "ai": 0,
+        "external": 1
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice lifecycle",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/webkit/lifecycle-report.json",
+      "reportSha256": "1fd8e281f381d1da7c4e9b8be5a2e06a6499a679fc5a9c7dba19dea92a87f615",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "20 cards reveal correct words, visible meanings and parts of speech; restart, Escape, app Back gesture, refresh, focus return"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 20,
+        "ai": 0,
+        "external": 2
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice matrix",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/webkit/matrix-report.json",
+      "reportSha256": "d3b8b262b894c611427a82d98f52f1788b396e4b2be79cdcb6a52d6c4f3d3cc7",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "320/390/865/1440 at 100/200% text, keyboard Enter/Space/Escape, focus return, axe, tab reset"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 0,
+        "ai": 0,
+        "external": 1
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice editor",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/word-image-full/webkit/editor-report.json",
+      "reportSha256": "05ed125c5db99223a6f326aa49e0affc4e51c24069badb024b97af45be3cd256",
+      "checks": [
+        "today overview has one independent image-practice entry",
+        "editor shows matching preview, hides changed/new meanings and preserves dismissal protection",
+        "article variants, bicycle and nonpilot recommendation previews preserve readable editor inputs at 320/390/1440px and 100/200% text"
+      ],
+      "requests": {
+        "writes": 0,
+        "positionWrites": 0,
+        "ai": 0,
+        "external": 1
+      },
+      "stateUnchanged": true,
+      "stateBoundary": "mock-http"
+    },
+    {
+      "name": "image-practice-resume",
+      "engine": "webkit",
+      "exitCode": 0,
+      "report": "outputs/image-practice-resume/webkit/report.json",
+      "reportSha256": "b42f3509da2d5abfe361b55a0d0e6cf8e6f218bcb8e81f0903aae4e4ad5fbda1",
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position, say save result is unknown, and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ],
+      "unchangedLearningStateRevisionAndBackup": true,
+      "maxConcurrentPositionRequests": 1,
+      "pendingPositionRequestsAtEnd": 0
+    }
+  ],
+  "fileHashes": {
+    ".gitattributes": "70828199d3d98961a16fd36436c9b4960f60ef28360167971739dc5bde4bf57c",
+    "app/learning/image-practice.tsx": "36a0c4dd02c5023a380a3e4e1c76e05961d9aeaed5e58ad7c5fb908fcdda5b67",
+    "app/learning/source-dialog.tsx": "1889d7bc188b5bcce36d1fe7f46df1c9e0b3f11c288a8cd0450c74f0f8ae6042",
+    "app/library/word-editor.tsx": "aae43455cb781012a49239142e06f91457e129e33a64ac93cbdd1a6c60ada92b",
+    "app/study-design.css": "77d2f93a837ca41494a0b19edff510c9425dd65c4a62d4984995a724e5acf88a",
+    "app/study/learn-stage.tsx": "1dc01aff9b5dc0d1c52e6246832d1ecdd425a62e4fcbb1c2f56e39d5d1723365",
+    "app/study/sentence-stage.tsx": "98fee5751a78a964fc404de0e971466ab7856c444bfe3dacf745926d6fb38a6b",
+    "app/word-pronunciation.tsx": "8e4b151fc5da476f0bc2bcbfb452d9696fed42b8862a2b1a5d8afe38eae2aaf2",
+    "build/learning-chunks.ts": "8d08e55b3be88a0e735c9ed1638ca3f248d17fd91d2d32d6abbc75c55ac3048a",
+    "data/american-ipa-ui.json": "829ad3bb90cca6913077c0f6d016f619f4a48b793b62dd514439e77759a09074",
+    "data/pronunciation-guide.json": "985fc543b393f96608f758035599559ade1864b750cb1ffb643e576e46523722",
+    "lib/american-ipa.ts": "b09291fe613ee43b3d9abd61887f330141536a70facfe7fbf35f7085e59d51e9",
+    "package.json": "bf2e53e724ffb6e82625bf04c9fead10f1dc9395f7ec623c3cf1bfbf0613d6cb",
+    "public/sources/american-ipa.json": "14e9a7a91084624d38dd3c5c431b03b907af2cc5439a298728c8430739c7e38e",
+    "public/sources/content-attribution.txt": "4565f0230468d624b283ac4e564df437ab01feeca613e7015d8e5f7edbfeca48",
+    "scripts/prepare-american-ipa.mjs": "1ccfcacbb2f377a5aca21c38ccbc91e129af963e56b9c019957ac7aff91787ef",
+    "scripts/prepare-attribution.py": "3c301fad9db6063e5f9334fd0a10efa992779200bfd3e892e1d2f144068eb495",
+    "tests/american-ipa-data.test.mjs": "3ce042aa56f46a842be36719c6f2751534bfc653fc6f698da3156a915c347311",
+    "tests/american-ipa-ui.test.mjs": "f9776722e9baf4182cc36501c09eacf23365140145326d648dae2342a160d82c",
+    "tests/american-ipa.test.mjs": "74a8d46ef9a6167b13f383a847446a968ef53e0d2cd5614315b03dd7c3e44391",
+    "tests/catalog-basics.test.mjs": "2f0e898661680e3a52af1b1c8eca114e017974951966dc1c7aee7aa3e7b2429d",
+    "tests/device-speech-ui-qa.cjs": "e203678a4f260c1b7d6e0d77970ef11358b4c1e0630266e81350179fc1298f37",
+    "tests/fixtures/american-ipa-regressions.json": "fb450f212bbbf803041555fdabfc923b65729852d41a8f84d1087e44407af6a7",
+    "tests/image-practice-qa.cjs": "4fe091955ca08d5c8e9c57d3a133bdddf996f4985a20da3462468d1c526ffd17",
+    "tests/lazy-materials-qa.cjs": "e8c4c2bdbfc5c5e288aae3541f1a8f0038c3904eb4be6311699a52af7811a79f",
+    "tests/pronunciation-qa.cjs": "191d51cbbb9a13e1821ad7f52c52d106f1aed1b966cd0844cd836007b7e3cfa8"
+  },
+  "hashNormalization": "UTF-8 CRLF to LF; Markdown excluded",
+  "unverified": [
+    "remote CI",
+    "Node 24 repeat",
+    "real iPhone",
+    "VoiceOver speech",
+    "live audio listening",
+    "production webfonts",
+    "production deployment"
+  ],
+  "previousVerification": {
+    "verifiedAt": "2026-10-19T07:32:13.563Z",
+    "unitTests": 656,
+    "browserExecutions": 14,
+    "note": "Superseded by this plan-to-code review; earlier local log files retained."
+  },
+  "planReview": {
+    "reviewedAt": "2026-10-19T08:21:38.211Z",
+    "plan": "docs/OXFORD_AMERICAN_IPA_IMPLEMENTATION_PLAN.md",
+    "finalLogDirectory": "work/ipa-plan-review-20261019/",
+    "findings": [
+      {
+        "id": "explicit-empty-sentence-sense",
+        "change": "Preserve explicit empty recorded meanings with nullish fallback; do not render textbook IPA.",
+        "redLog": "work/ipa-plan-review-20261019/empty-sense-red.log",
+        "greenLog": "work/ipa-plan-review-20261019/empty-sense-green.log",
+        "browserRegression": "pronunciation, both engines: restored empty sentence sense remains empty with no guessed IPA"
+      },
+      {
+        "id": "malformed-dictionary-row",
+        "change": "Parse every data table row in the dictionary section before validating identity; reject malformed extra rows.",
+        "redLog": "work/ipa-plan-review-20261019/malformed-row-red.log",
+        "greenLog": "work/ipa-plan-review-20261019/malformed-row-green.log",
+        "generatedArtifactsUnchanged": true
+      },
+      {
+        "id": "editor-vertical-readability",
+        "change": "Keep variable-length IPA and metadata at the start of the scroll body under the title/image header.",
+        "redLog": "work/ipa-plan-review-20261019/editor-red.log",
+        "browserRegression": "image-practice editor, both engines: real images, a/an four variants, 320/390/865/1440px, 100/200% text; each condition and expression field fits after scrolling"
+      }
+    ],
+    "transientFailure": {
+      "profile": "device-speech-ui",
+      "engine": "webkit",
+      "failure": "30-second wait for dictionary link after editing the learning meaning timed out once.",
+      "cause": "unconfirmed",
+      "failureLog": "work/ipa-plan-review-20261019/device-speech-webkit-first-timeout.log",
+      "action": "Add fail-only input/IPA/focus/dialog diagnostics and screenshot; no app workaround.",
+      "subsequentWebkitPasses": 2,
+      "relationToStartupOr401": "not established"
+    },
+    "finalUnitTests": 658,
+    "finalBrowserExecutions": 16
+  },
+  "finalPrePrReview": {
+    "reviewedAt": "2026-10-19T09:25:07.291Z",
+    "baseConfirmed": "0c16cc83dfe74345506eb00e018b16542e1be640",
+    "additionalCodeFindings": 0,
+    "commands": [
+      {
+        "command": "npm run ipa:check",
+        "exitCode": 0,
+        "log": "work/ipa-pr-final-20261019/ipa-check.log",
+        "logSha256": "d614ae92d120a51055f0656e87ce34cd86df9f105fd41821c83c177a07062b42"
+      },
+      {
+        "command": "npm run test",
+        "exitCode": 0,
+        "log": "work/ipa-pr-final-20261019/test.log",
+        "logSha256": "7c1a85a9e032782be8d564a35c08077fc7b01b2c2bee5e3011ae5e5a7606977f"
+      },
+      {
+        "command": "npm run check:grammar-review",
+        "exitCode": 0,
+        "log": "work/ipa-pr-final-20261019/check-grammar-review.log",
+        "logSha256": "fd8d23311e1a50d708a0dd36db40c5f40bbd95e121142abe9f16d6e06d474a01"
+      },
+      {
+        "command": "npm run typecheck",
+        "exitCode": 0,
+        "log": "work/ipa-pr-final-20261019/typecheck.log",
+        "logSha256": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec"
+      },
+      {
+        "command": "npm run lint",
+        "exitCode": 0,
+        "log": "work/ipa-pr-final-20261019/lint.log",
+        "logSha256": "d92ed5797c39c219ff39332321fe2d02bac2c05cc9a2af1e2a141cf32f76cda8"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "log": "work/ipa-pr-final-20261019/build.log",
+        "logSha256": "9d1179e0c92e2253a19a3792ab295cb4a4963c996dbeffd9fd95c4c3914a9194"
+      }
+    ],
+    "unitTests": 658,
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 15
+    },
+    "priorBrowserEvidence": {
+      "reports": 16,
+      "sourceFileHashes": 26,
+      "currentHashesMatch": false,
+      "rerunDuringFinalPrePrReview": false,
+      "hashComparisonPoint": "Before public JSON line-format change; app code and client IPA data still unchanged afterward.",
+      "hashesMatchedBeforePublicLineFormatting": true,
+      "appCodeAndClientIpaStillMatch": true
+    },
+    "originalDirtyPathsPreserved": 176,
+    "remoteCi": "to be recorded on the pull request",
+    "publicJsonLineFormat": {
+      "reason": "Existing pre-push secret scanner rejected a 2926987-byte line against its 1048576-byte limit; no credential finding.",
+      "hookBypassed": false,
+      "settingsChanged": false,
+      "parsedDataUnchanged": true,
+      "builtPublicAssetMatches": true,
+      "bytes": 2930798,
+      "maxLineBytes": 7401,
+      "changedFileHashes": {
+        "public/sources/american-ipa.json": {
+          "before": "1d8f21e121908010c090e87ec76764935941f8b2fd503d03561c7bd3cd1b38f2",
+          "after": "14e9a7a91084624d38dd3c5c431b03b907af2cc5439a298728c8430739c7e38e"
+        },
+        "scripts/prepare-american-ipa.mjs": {
+          "before": "b4b27e3e80883ed9593490bfae768796d5d56692a511c9d32498de6f625d74ee",
+          "after": "1ccfcacbb2f377a5aca21c38ccbc91e129af963e56b9c019957ac7aff91787ef"
+        },
+        "tests/american-ipa-data.test.mjs": {
+          "before": "021953ab2d755c9ffad029a83842c6711d1d971074c79fdc040df4018211eb31",
+          "after": "3ce042aa56f46a842be36719c6f2751534bfc653fc6f698da3156a915c347311"
+        }
+      },
+      "verifiedAt": "2026-10-19T09:29:40.889Z",
+      "commands": [
+        {
+          "command": "npm run ipa:check",
+          "exitCode": 0,
+          "log": "work/ipa-pr-final-20261019/postformat/ipa-check.log",
+          "logSha256": "d614ae92d120a51055f0656e87ce34cd86df9f105fd41821c83c177a07062b42"
+        },
+        {
+          "command": "npm run test",
+          "exitCode": 0,
+          "log": "work/ipa-pr-final-20261019/postformat/test.log",
+          "logSha256": "9f909294f3474e2ecb44134053fd9f9cfb31baeb608a83d4c1836ea4dc1c1ebb"
+        },
+        {
+          "command": "npm run check:grammar-review",
+          "exitCode": 0,
+          "log": "work/ipa-pr-final-20261019/postformat/check-grammar-review.log",
+          "logSha256": "fd8d23311e1a50d708a0dd36db40c5f40bbd95e121142abe9f16d6e06d474a01"
+        },
+        {
+          "command": "npm run typecheck",
+          "exitCode": 0,
+          "log": "work/ipa-pr-final-20261019/postformat/typecheck.log",
+          "logSha256": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec"
+        },
+        {
+          "command": "npm run lint",
+          "exitCode": 0,
+          "log": "work/ipa-pr-final-20261019/postformat/lint.log",
+          "logSha256": "d92ed5797c39c219ff39332321fe2d02bac2c05cc9a2af1e2a141cf32f76cda8"
+        },
+        {
+          "command": "npm run build",
+          "exitCode": 0,
+          "log": "work/ipa-pr-final-20261019/postformat/build.log",
+          "logSha256": "4ea39dd436206f342aba21a8b899261929bbfd70a5152afa83ab43d67d83d705"
+        }
+      ]
+    }
+  }
+}

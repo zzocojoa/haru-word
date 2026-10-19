@@ -31,7 +31,7 @@ export function learningChunks(): Plugin {
         name(id, context) {
           if (!initial) {
             initial = staticDependencies(entry, moduleId => context.getModuleInfo(moduleId));
-            for (const moduleId of initial) if (/\/data\/(?:content|word-image-ui)\.json(?:\?|$)/.test(moduleId.replaceAll('\\', '/')))
+            for (const moduleId of initial) if (/\/data\/(?:content|word-image-ui|american-ipa-ui)\.json(?:\?|$)/.test(moduleId.replaceAll('\\', '/')))
               throw new Error('Deferred learning material returned to the initial build graph');
           }
           return initial.has(id) ? 'learning-shared' : null;

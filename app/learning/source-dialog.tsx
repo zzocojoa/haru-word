@@ -64,6 +64,10 @@ export function SourceDialog({
         >
           Tatoeba 문장 자료 · CC BY 2.0
         </a>
+        <h3>미국식 발음 기호</h3>
+        <p>현재 단어의 뜻·품사와 일치하는 미국식 IPA를 표시해요. Wiktionary와 CMU 자료를 교차 대조하고 일부 항목을 사전 원문으로 추가 확인한 편집본이며, Oxford 공식 발음 데이터는 아니에요.</p>
+        <p>Wiktionary contributors의 자료를 선별하고 표기를 정리했어요. 해당 파생 부분은 CC BY-SA 4.0으로 제공해요. 기기 음성은 표시된 IPA와 다를 수 있어요.</p>
+        <a className="source-link" href="/sources/american-ipa.json" target="_blank" rel="noreferrer">발음 데이터·출처·라이선스</a>
         <h3>기록과 점검</h3>
         <p>하루 목표는 새 단어를 절반 이상, 나머지는 복습으로 채워요. 목표가 1개면 학습한 날마다 번갈아 골라요. 후보가 부족하면 다른 쪽으로 채우며, ‘새 단어 쉬기’ 중에는 복습만 해요.</p>
         <p>

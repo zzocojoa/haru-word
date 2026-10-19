@@ -1,5 +1,7 @@
 # 하루단어 · Oxford 3000
 
+**미국식 IPA 표시 · 로컬 구현, 미배포:** [사전 v3](docs/OXFORD_AMERICAN_IPA_DICTIONARY.md)의 3,809항목을 학습·문장 작성·완료 기록·단어 편집창·이미지 카드 뒷면에 연결한다. 현재 뜻·품사·표제어가 일치할 때만 표시하며 개인 단어와 다른 뜻에는 추정한 발음을 넣지 않는다. 복수 발음의 조건과 기존 듣기 정책을 유지한다. 원문 갱신 후 `npm run ipa:prepare`, 재현성 확인은 `npm run ipa:check`를 사용한다. [구현 계획](docs/OXFORD_AMERICAN_IPA_IMPLEMENTATION_PLAN.md)·[검증 결과](docs/OXFORD_AMERICAN_IPA_IMPLEMENTATION_VERIFICATION.md)·[발음 정책](ENGLISH_ACCURACY.md)을 따른다. 운영 v140에는 아직 반영하지 않았다.
+
 **현재 운영 v140 · 2026-10-19 12:44:20 KST:** [PR #48](https://github.com/zzocojoa/haru-word/pull/48) 반영 `main@205db75`와 전체 Git tree가 같은 Sites 소스 `f5925ec`를 기존 사이트에 게시했다. 초기 실행·UI 문구와 Chromium/WebKit 편집창 초점 복귀 **6/6**, 로그인 Chromium 이미지→뜻→이미지·같은 카드 앞면 재개를 확인했다. 검증 전후 학습·위치 응답 지문은 같고 앱 쓰기는 0이다. 새 마이그레이션0·환경72/9개·public4 유지, 롤백 미실시. **startup·기존 401 원인은 미확정**이며 실제 iPhone/VoiceOver는 미검증이다. [운영 확인과 v139 복구](OPERATIONS.md#v140-rollout), [배포 증거](docs/releases/2026-10-19-ui-text-focus-v140-rollout.json)를 따른다. 이번 정리는 문서·PR 갱신이며 추가 배포·설정 변경은 없다.
 
 **UI 문구 개선 · v140 반영:** [감사 문서](docs/UX_TEXT_AUDIT_2026-10-19.md)의 우선순위에 따라 안내·버튼·평가 표시를 정리하고 저장 실패 보호와 긴 기록 펼치기를 보완했다. [구현·회귀 검증 기록](docs/UX_TEXT_IMPLEMENTATION_2026-10-19.md)을 참조한다. PR #48 병합 후 운영 v140에 반영됐다.

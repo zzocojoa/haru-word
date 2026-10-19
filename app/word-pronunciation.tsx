@@ -3,15 +3,28 @@ import {ExternalLink} from 'lucide-react';
 import type {Word} from '@/lib/learning';
 import {dictionaryUrl} from '@/lib/catalog-basics';
 import {familyMeaningNote, pronunciationFor} from '@/lib/pronunciation';
+import {resolveWordIpa} from '@/lib/american-ipa';
 import {Speak} from './ui';
 
-export function WordPronunciation({word,meaning}:{word:Word;meaning:string}) {
+type WordPronunciationProps = {word:Word;meaning:string};
+
+// Text only: safe inside the image card's flip button. Controls stay outside it.
+export function WordIpa({word,meaning}:WordPronunciationProps) {
+  const variants = resolveWordIpa(word,meaning);
+  if (!variants) return null;
+  return <span className="word-ipa">
+    <span className="ipa-label">미국식</span>
+    <span className="pronunciation-variants">{variants.map(([ipa,usage])=>
+      <span key={`${ipa}:${usage}`}>{variants.length>1&&<span className="ipa-usage">{usage} </span>}<span lang="en-US" className="phonetic">{ipa}</span></span>)}</span>
+  </span>;
+}
+
+export function WordPronunciation({word,meaning,showIpa=true}:WordPronunciationProps&{showIpa?:boolean}) {
   const pronunciation = pronunciationFor(word,meaning);
   const familyNote = familyMeaningNote(word.word);
   return <div className="word-pronunciation">
+    {showIpa&&<WordIpa word={word} meaning={meaning}/>}
     {pronunciation.kind==='reviewed' ? <>
-      <div className="pronunciation-variants">{pronunciation.guide.variants.map(variant=>
-        <span key={variant.ipa}><span lang="en" className="phonetic">{variant.ipa}</span> · {variant.usage}</span>)}</div>
       <p className="small-note">{pronunciation.guide.note}</p>
       <a className="dictionary-audio" href={pronunciation.guide.url} target="_blank" rel="noreferrer">미국식 사전 발음 듣기 <ExternalLink size={14}/></a>
     </> : pronunciation.kind==='dictionary' ? <>
