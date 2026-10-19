@@ -1,0 +1,143 @@
+{
+  "recordedAt": "2026-10-08T03:11:59.000Z",
+  "status": "local_verified_undeployed",
+  "feature": "사용자 주제에 맞는 자동 카드 제작·원문 근거·독립 검토",
+  "repositories": {
+    "enCard": {
+      "branch": "codex/automation-topic-alignment",
+      "localSourceCommit": "66fe8a46b39a6b31815778624428713c84c6dd1d",
+      "base": "cc667457d8de22e0a2d2d150350786ec063707bf",
+      "pushed": false,
+      "pullRequest": null,
+      "merged": false
+    },
+    "haruWord": {
+      "branch": "codex/card-automation-topic-alignment",
+      "base": "c6c5ed9080e46ec644e64090828d39d47228a77d",
+      "pushed": false,
+      "pullRequest": null,
+      "merged": false
+    }
+  },
+  "artifacts": {
+    "studioManifest": "public/card-studio/source.json",
+    "relayManifest": "lib/server/card-automation.generated.json",
+    "checkedAt": "2026-10-08T03:11:51.791Z",
+    "uiFiles": 129,
+    "relayFiles": 2,
+    "uiSourceSha256": "d24565aa76aa8bf854be4375d263559770fbd48f2d877df6dfd5ffa486868009",
+    "relaySourceSha256": "5866853ee1a963d8614b394a4dd647ace0377bf8fe3d9c6dbbaf92fa4470b816",
+    "relayRebuiltBytesMatch": true,
+    "allArtifactHashesMatch": true
+  },
+  "migration": {
+    "name": "0024_automation_topic_alignment.sql",
+    "remoteApplied": false,
+    "legacyJobPolicy": 0,
+    "newJobPolicy": 1,
+    "populatedHistoryAndForeignKeysLocallyVerified": true,
+    "oldJobsContinueUnderOldContract": true
+  },
+  "verification": {
+    "enCard": {
+      "files": 54,
+      "tests": 831,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "exitCode": 0,
+      "newTopicTestsIncluded": 24,
+      "finalSqlFormatting": {
+        "statementsUnchanged": true,
+        "legacyRecheckPassed": 1,
+        "filteredOut": 23,
+        "exitCode": 0,
+        "subsetCountNotAdded": true
+      },
+      "buildAndThreeWorkerDryRuns": 0,
+      "freeConfiguration": 0,
+      "browser": {
+        "chromium": 42,
+        "webkit": 18,
+        "iphone": 2,
+        "total": 62,
+        "exitCode": 0
+      }
+    },
+    "haruWord": {
+      "tests": 567,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "exitCode": 0,
+      "typecheck": 0,
+      "lint": {
+        "exitCode": 0,
+        "errors": 0,
+        "existingWarnings": 13
+      },
+      "build": 0,
+      "syntheticBrowsers": [
+        "chromium",
+        "webkit"
+      ],
+      "axeViewportScaleConditions": 12,
+      "axeViolations": 0
+    },
+    "finalQa": {
+      "status": "pass",
+      "open": [],
+      "sourceTests": 20,
+      "affectedBrowserTests": 7,
+      "subsetCountsNotAdded": true,
+      "historicalAggregate": "inconclusive: exact-argv supersession and invalid shell dispatch preserved"
+    },
+    "review": {
+      "native": "same-model separate-context, full non-fixture code and summary-only test/fixture coverage",
+      "outside": "Claude Code not installed; not performed",
+      "parent": "SQL/data, races, LLM/URL boundaries, enum consumers, plan and current-input validation",
+      "enReport": "EN_Card/docs/AI_TOPIC_ALIGNMENT_REVIEW.md"
+    }
+  },
+  "publicSourceCheck": {
+    "resource": "https://prdaficalmjediwestussa.blob.core.windows.net/images/2019/08/quotes100.pdf",
+    "rawBytes": 139059,
+    "textCharacters": 7020,
+    "sha256": "d2ee4db217f739542095920d23cfcb5afc5d75925c22dfb98d9c9ae3ea7f993e",
+    "exactQuoteAndFilmVerified": true,
+    "runtime": "local Node, not Worker CPU/AI/Kakao validation"
+  },
+  "cost": {
+    "configurationPassed": true,
+    "defaultAutomation": "off",
+    "defaultSend": "dry_run",
+    "aiFreeConfirmation": "unconfirmed",
+    "accountPlan": "not checked by user choice",
+    "remoteCpu": "not checked by user choice",
+    "billingGuarantee": false,
+    "newPaidDependencies": false,
+    "newResources": false
+  },
+  "operations": {
+    "siteDeployment": false,
+    "workerDeployment": false,
+    "remoteMigration": false,
+    "settingsChanged": false,
+    "historyChanged": false,
+    "newTrial": false,
+    "actualAiCalls": 0,
+    "actualKakaoCalls": 0,
+    "phoneVerification": "not performed by user choice",
+    "historicalProductionAndRollbackFieldsPreserved": true,
+    "ci": "not queried"
+  },
+  "limits": [
+    "Initial source allowlist and256KiB page limits can exclude otherwise useful sources; unsupported proof never falls back to unrelated conversation.",
+    "Source/semantic/difficulty decisions still depend on independent AI review; daily five-card success is not guaranteed.",
+    "Policy1 jobs must not be handed to an old DO or reset during rollback.",
+    "Historical CPU/sampling and phone receipt gaps are retained, not passed.",
+    "Existing Haru lint13 and development dependency/build warnings remain.",
+    "Local canonical source commit and exported files are not deployment or merged-main state."
+  ],
+  "next": "Separate authorized Git integration and operational rollout: compatible Site relay first, safety/backup checks, D1 0024, automation DO, main Worker. No new account/CPU/phone verification is claimed."
+}

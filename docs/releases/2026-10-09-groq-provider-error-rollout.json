@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T15:28:38.222Z",
+  "status": "v127_published_original_daily_resumed",
+  "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+  "savedVersion": {
+    "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_4a636b9e18348191bd0e98af61daab41",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version_number": 127,
+    "source": {
+      "commit_sha": "87ed7b3a823779eb8e0c877bdf034ea21c12a4e5"
+    },
+    "archive_storage": null,
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "source": {
+    "baseCommit": "08937dae166a2dd9b4b82c02ff90f49742f6dabb",
+    "commit": "87ed7b3a823779eb8e0c877bdf034ea21c12a4e5",
+    "changedFiles": [
+      "lib/server/card-automation.generated.mjs",
+      "lib/server/card-automation.generated.json"
+    ],
+    "sourceSha256": "b018594352b60ee71c64c75adbbd70c8aabf01d19fe8ef9c8db8be8376f83b69",
+    "relaySha256": "c9527120b0893451a57850685fc2083bd63e4a7ef22dd62a20fdc268992ae36a",
+    "uiUnchangedFiles": 129
+  },
+  "checks": {
+    "haruTests": 29,
+    "haruTestExit": 0,
+    "typecheckExit": 0,
+    "routeLintExit": 0,
+    "diffCheckExit": 0,
+    "en89TestsInputsUnchanged": true,
+    "localBuild": "complete, then packaging failed",
+    "bracesGuard": {
+      "packages": 1,
+      "filesPatched": 0
+    },
+    "generatedLint": "Ignored by existing configuration; not counted as lint verification"
+  },
+  "localPackaging": {
+    "completed": true,
+    "remoteBuildFallback": false,
+    "failures": [
+      "Windows npm shim path",
+      "Shared braces dependency safety guard; copied independent dependencies",
+      "Default WSL bash path conversion",
+      "Git Bash prepare-site-build process exit139"
+    ],
+    "sourceOnlyRemoteBuildAttemptFailed": {
+      "id": "appgdep_6ac7b332af0c8191acbbe7242f623a67",
+      "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "title": "하루단어 · Oxford 3000",
+      "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_4a636b9e18348191bd0e98af61daab41",
+      "type": "publish",
+      "status": "failed",
+      "url": null,
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": null,
+      "failure_message": "package.json and the npm lockfile are out of sync. Run `npm install`, commit the updated lockfile, and publish again.",
+      "env_set_revision": 0,
+      "updated_at": "2026-10-08T15:14:09.307640+00:00"
+    },
+    "finalHelperExit": 0,
+    "packageNodeVersion": "24.19.0",
+    "packageShell": "Git Bash",
+    "tarOptions": "--force-local",
+    "localGzipSha256": "5a858d1b1e9980243019a032a1c146e826b56f1ad080125262e57ab33d552213",
+    "storedTarContentHash": "sha256:5a280d400e36caf32dbd6b06b6b459fd7dd5e9ae25a4d3bfbc01c26190e290b3",
+    "archiveBytes": 15534080,
+    "archiveFiles": 318,
+    "archiveSourceCommit": "87ed7b3a823779eb8e0c877bdf034ea21c12a4e5",
+    "matchingSavedVersion": 127,
+    "initialCloseoutValidationExit": 1,
+    "hashRepresentationDifferencePreserved": true,
+    "localAndStoredArchiveByteEqualityClaimed": false
+  },
+  "publication": {
+    "deployed": true,
+    "siteVersion": 127,
+    "deployment": {
+      "id": "appgdep_6ac7b49133e0819199b63b8fd675eae1",
+      "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "title": "하루단어 · Oxford 3000",
+      "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_4a636b9e18348191bd0e98af61daab41",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+      "failure_message": null,
+      "env_set_revision": 64,
+      "updated_at": "2026-10-08T15:20:08.961650+00:00"
+    },
+    "environmentRevision": 64,
+    "publicAccessRevision": 4,
+    "explicitUserApproval": true,
+    "earlierAutoReviewRejectionPreserved": true
+  },
+  "regular": {
+    "resumed": true,
+    "version": 47,
+    "enabled": 1,
+    "reason": null,
+    "time": "07:30",
+    "cards": 5,
+    "nextDueKst": "2026-10-09 07:30",
+    "storedSettingsHash": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "active": 0,
+    "unresolved": 0,
+    "observedAt": "2026-10-08T15:22:32.964Z",
+    "snapshotTables": 27,
+    "foreignKeyErrors": 0,
+    "at": "2026-10-08T15:28:38.222Z",
+    "applied": true,
+    "action": "owner_ui_product_start",
+    "previousVersion": 46,
+    "savedSettingsUnchanged": true,
+    "dailyCards": 5,
+    "topic": "영화 대사",
+    "nextDueAt": 1791498600000,
+    "preparationAt": 1791495000000,
+    "deadline": 1791498300000,
+    "preservedOtherTables": 26,
+    "noTrialReplay": true,
+    "observedDaily": {
+      "day": "2026-10-09",
+      "configVersion": 47,
+      "cards": 5,
+      "dueAt": 1791498600000
+    }
+  },
+  "trial45": {
+    "prepared": 4,
+    "kakaoCalls": 0,
+    "sent": 0,
+    "exact400SubtypeVerified": false,
+    "historyPreserved": true
+  },
+  "scope": {
+    "newTrialRegistered": false,
+    "extraAiCalls": 0,
+    "extraKakaoCalls": 0,
+    "dbMigration": false,
+    "workersRedeployed": false,
+    "actualAccountCpuPhoneChecks": false
+  },
+  "next": "현재 GitHub 작업 브랜치의 review·커밋·푸시·PR 정리. 이 작업은 아직 수행하지 않음. 추가 계정/CPU/휴대전화 검증·새 시험/재발송은 요청되지 않음.",
+  "evidenceDirectory": "EN_Card Git 제외 backups/groq-provider-rollout-20261009/",
+  "backup": {
+    "sqlSha256": "551E34573903680F0EA3CCC917D9B4EC114A4B7C07AE7F40F08C99642E79F47E",
+    "encryption": "Windows DPAPI CurrentUser",
+    "ciphertextSha256": "65F14AF094269042A1B42A3CB3DADE2C2F3EB62B0A581A7A14649F537317304C",
+    "restrictedAcl": true,
+    "createdAtUtc": "2026-10-08T15:02:36.1359570Z",
+    "roundTripVerified": true,
+    "bytes": 566248
+  },
+  "freeConfiguration": {
+    "unchangedResources": true,
+    "costMode": "free_only",
+    "noNewPaidResources": true,
+    "priorUserFreeConfirmationPreserved": true,
+    "accountPlanIndependentlyRechecked": false,
+    "cpuVerified": false
+  },
+  "compatibility": {
+    "existingDoErrorParserAcceptsInvalid": true,
+    "diagnosticFieldOptional": true,
+    "newDoClientNotDeployed": true
+  },
+  "rollback": {
+    "siteVersion": 126,
+    "savedVersionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_3f429ac66a1481919594d9f7887ae9a8",
+    "onlyAfterAuthorizedAndNecessary": true,
+    "failedTrialRemainsCancelled": true
+  },
+  "previousPublicationAttempt": {
+    "deployed": false,
+    "currentSiteVersion": 126,
+    "autoReviewRejected": true,
+    "reason": "저장된 v127을 공개 운영 사이트에 배포하는 외부·가역성 제한 작업인데, 현재 변경분과 이 버전에 대한 명시적인 최신 배포 승인이 확인되지 않습니다."
+  },
+  "postResumeObservation": {
+    "status": "daily47_failed_zero_sends_paused48",
+    "evidenceFile": "2026-10-09-automation-daily-no-receipt.json",
+    "observedAt": "2026-10-08T23:21:43.862Z",
+    "currentVersion": 48,
+    "currentEnabled": false,
+    "reason": "config",
+    "liveAccepted": 0
+  }
+}

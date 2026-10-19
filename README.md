@@ -8,6 +8,8 @@
 
 **v139 영어 카드 연결 종료 이력:** 기존 Sites의 v139(`effc203`)에서 EN_Card 연결을 제거했다. 상단 메뉴가 없고, 이전 `/cards` 주소는 학습 홈으로 이동하며 카드 API는 `410 CARD_FEATURE_RETIRED`를 반환한다. PR #47 통합 후 v140에서도 같은 종료 처리를 유지한다. 아래 설명은 당시 기록이며 현재 배포·복구 기준은 위 v140 기록이다. [종료 범위와 검증·복구](docs/EN_CARD_RETIREMENT.md)를 따른다. **startup·기존 401 원인은 미확정**이다. 아래 v138 이하 설명은 당시의 배포 기록이다.
 
+**과거 증거 보존 · 2026-10-19:** [PR #47 후속 판단과 출시 기록 11개](docs/HISTORICAL_RELEASE_EVIDENCE_2026-10-19.md)를 원래 시각·실패·미검증·출처 SHA와 함께 보존했다. v139 당시 추가 배포 불필요 판단은 과거 이력이며, 현재 운영 v140과 startup·401 원인 미확정은 그대로다.
+
 **v138 운영 배포 · 2026-10-18 20:22:48 KST:** [PR #44](https://github.com/zzocojoa/haru-word/pull/44)의 `main@9ad8380`을 기존 Sites에 게시했다. 별도 단어 확인 버튼 없이 이미지와 뜻 카드를 눌러 양방향으로 전환한다. 로그인된 데스크톱 in-app browser에서 초기 실행·실제 위치 저장·닫기/새로고침 후 같은 카드 앞면 재개를 확인했고, 확인 후 원래 위치로 복귀했다. 학습 문서·revision과 운영 설정은 유지됐으며 새 마이그레이션은 없다. main CI Node 22/24 각각 665개, 새 빌드 및 운영 JS/CSS 17개 대조가 통과했다. **startup 원인은 미확정**이며 실제 iPhone/VoiceOver는 미검증이다. [운영 결과와 v137 복구 절차](OPERATIONS.md#이미지-연습-카드-뒤집기-v138--2026-10-18), [출시 증거·관측 한계](docs/releases/2026-10-18-image-practice-card-flip-rollout.json)를 참조한다. 이번 문서 정리는 추가 배포·설정 변경이 아니다. 아래 버전과 CI 상태는 당시 이력이다.
 
 **v135 운영 배포 · 2026-10-17 23:08 KST / 기록 정리 10월 18일:** [PR #39](https://github.com/zzocojoa/haru-word/pull/39)가 반영된 `main@6d44419`를 기존 Sites에 게시했다. 위치 테이블 마이그레이션과 Desktop Chrome의 초기 실행·위치 저장·닫기/새로고침 후 앞면 재개를 확인했다. main CI는 Node 22/24 각 662개 통과다. **WebKit startup 시간 초과 원인은 미확정**이며 실제 iPhone/VoiceOver는 미검증이다. [운영 확인·복구 절차](OPERATIONS.md#이미지-연습-위치-저장-v135--2026-10-17), [배포 증거](docs/releases/2026-10-17-image-practice-position-rollout.json), [사용·실패 복구](docs/IMAGE_PRACTICE_POSITION.md), [검증 기록](docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md)을 따른다. 이번 정리는 문서만 갱신하며 추가 배포·설정 변경은 없다. 아래 날짜별 출시·CI 차단 설명은 당시의 이력이다.

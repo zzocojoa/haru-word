@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T07:09:09.258Z",
+  "status": "local_verified_undeployed",
+  "scope": "문장 검토 후속 보완 코드·로컬 모의 검증·정식 생성 파일 동기화. 새 운영 게시나 실제 AI 시험은 수행하지 않음.",
+  "source": {
+    "enCardBranch": "codex/automation-topic-alignment",
+    "enCardBaseCommit": "66fe8a46b39a6b31815778624428713c84c6dd1d",
+    "haruWordBranch": "codex/card-automation-topic-alignment",
+    "haruWordBaseCommit": "429d9665a3b1c65bf3474a2be5359d0c52425bd6",
+    "uncommittedChanges": true,
+    "studioSourceSha256": "9c99382f00dc1e880608384e60481ad4517570c24c80867cc80371c1a322e43b",
+    "relaySourceSha256": "b5e15b50e96ecea913974fe642e04636061e075991386764ce673c3323eefa76",
+    "promptBundleSha256": "8a96e42af5be7d235b5278d2e093d739eb93e31989878c73d74579d3b8bb0767",
+    "manifests": [
+      {
+        "path": "public/card-studio/source.json",
+        "sourceSha256": "9c99382f00dc1e880608384e60481ad4517570c24c80867cc80371c1a322e43b",
+        "files": 129,
+        "manifestSha256": "feea4460bf7b81daae229186eb3966cdba603ae225c7d41b6c2ec453602f18a9"
+      },
+      {
+        "path": "lib/server/card-automation.generated.json",
+        "sourceSha256": "b5e15b50e96ecea913974fe642e04636061e075991386764ce673c3323eefa76",
+        "files": 2,
+        "manifestSha256": "9e70453c96cede6293c78e762899223aaad3fd06a00e52ef8fb7a3bb6ab6fd4e"
+      }
+    ],
+    "finalInputsEvidence": "EN_Card Git 제외 backups/topic-followup-20261008/final-inputs.json"
+  },
+  "changes": {
+    "canonicalSourceAndExampleNote": true,
+    "noteExample": "표현 출처: 작품명 · 학습용 예문(새로 작성·원문 인용 아님)",
+    "newAlignedNotesReservedForProvenance": true,
+    "aiUsageTipsMergedIntoNewAlignedNotes": false,
+    "existingCardsAndReviewResultsChanged": false,
+    "criteriaScopesClarified": [
+      "영어 자연스러움",
+      "표현의 한국어 뜻",
+      "영어 문법·문장부호",
+      "예문 전체 번역"
+    ],
+    "allFalseCriteriaPassedToCorrection": true,
+    "noteLabelIsNotProof": true,
+    "independentReviewAndContentHashesPreserved": true,
+    "failedFlagsAutomaticallyApproved": false,
+    "budgetsOrTimingLimitsChanged": false,
+    "extraProviderCallsAdded": false
+  },
+  "checks": {
+    "enCardUniquePassed": 113,
+    "testRuns": [
+      {
+        "file": "regression-tests.json",
+        "passed": 95,
+        "failed": 0,
+        "skipped": 0,
+        "todo": 0,
+        "sha256": "67d0c6e5cff56e3063bc8056182c838ad07fffa927499ba1e06e0c5520889545"
+      },
+      {
+        "file": "final-contract-tests.json",
+        "passed": 43,
+        "failed": 0,
+        "skipped": 0,
+        "todo": 0,
+        "sha256": "5e0fee0bf222818f2a9aa38739d18fbe3bcb411c03fb9bdcbe3e3ef97df1e34e"
+      }
+    ],
+    "enCardFailed": 0,
+    "enCardSkipped": 0,
+    "enCardTodo": 0,
+    "haruTargetedPassed": 21,
+    "haruFailed": 0,
+    "haruSkipped": 0,
+    "haruTodo": 0,
+    "enCardBuildExit": 0,
+    "enCardFreeConfigurationExit": 0,
+    "exportExit": 0,
+    "generatedFilesMatched": 131,
+    "haruTypecheckExit": 0,
+    "haruLintExit": 0,
+    "haruLintErrors": 0,
+    "haruExistingLintWarnings": 13,
+    "haruBuildExit": 0,
+    "sentenceSelfCheckExit": 0,
+    "syntheticPassed": 20,
+    "mockProviderCalls": 48,
+    "offlineReplayExit": 0,
+    "replayedPayloads": 17,
+    "changedPayloadsReviewedByActualAi": false,
+    "expressionsMeaningExamplesAndOriginalReviewsUnchanged": true,
+    "actualResultAndTestedBundleSha256Preserved": [
+      {
+        "path": "backups/topic-sentences-20261008/live-result-1791435970041.json",
+        "sha256": "41cb13c1958b70b11d8660dc51eea968e81e5c5a2ddc2c35719f52c8f8647eee"
+      },
+      {
+        "path": "backups/topic-sentences-20261008/live-result-1791441468658.json",
+        "sha256": "21efc3c8dbf9cba44b37ac0d6e7f632bc1df6281c028eb3f22eb70f6ddce56ff"
+      },
+      {
+        "path": "backups/topic-followup-20261008/tested-v125-prompt-bundle.mjs",
+        "sha256": "a6e262f8e182a9611581dfed57240b4b6991ec64194ab29c07063d00f087fe00"
+      }
+    ],
+    "priorAutomaticPassedUnchanged": 12,
+    "commands": [
+      "node node_modules/vitest/vitest.mjs run tests/automation-topic-alignment.test.ts tests/automation-product.test.ts tests/automation-relay.test.ts tests/automation-relay-runtime.test.mjs --maxWorkers=2 --reporter=default --reporter=json --outputFile=backups/topic-followup-20261008/regression-tests.json",
+      "node node_modules/vitest/vitest.mjs run tests/automation-sentence-contract.test.ts tests/automation-relay.test.ts tests/automation-relay-runtime.test.mjs --maxWorkers=2 --reporter=default --reporter=json --outputFile=backups/topic-followup-20261008/final-contract-tests.json",
+      "npm run build",
+      "npm run check:free",
+      "node scripts/export-haru.mjs --target 'C:/Users/user/Documents/ChatGPT/하루단어'",
+      "하루단어: node --experimental-strip-types --test tests/card-automation.test.mjs tests/card-studio.test.mjs",
+      "하루단어: npm run typecheck",
+      "하루단어: npm run lint",
+      "하루단어: npm run build",
+      "node backups/topic-sentences-20261008/prepare.mjs",
+      "node backups/topic-sentences-20261008/run.mjs --self-check",
+      "node backups/topic-followup-20261008/replay-notes.mjs"
+    ],
+    "full831TestsAnd62BrowserTestsRerun": false,
+    "haruFull567TestsRerun": false
+  },
+  "runtime": {
+    "deployed": false,
+    "actualAiRetested": false,
+    "actualAiCalls": 0,
+    "cards": 0,
+    "images": 0,
+    "schedules": 0,
+    "kakaoCalls": 0,
+    "productionLearnerHistoryRead": false,
+    "workerOrDoDeployment": false,
+    "remote0024Applied": false,
+    "siteDeployment": false,
+    "pushOrPullRequestOrMerge": false,
+    "lastDatedSiteObservation": {
+      "version": 125,
+      "envRevision": 64,
+      "publicAccessRevision": 4,
+      "source": "1981cf3b5bb61d4ff1d040149949fd5cd86296a2",
+      "relaySourceSha256": "b106c0ef7c5819dc7e244ea4ceee541d52bb15701e2460e49c1595cd9736355a",
+      "deploymentSucceededAt": "2026-10-08T06:39:00.261588Z",
+      "temporaryValidationDisabled": true,
+      "validationRouteHttpStatus": 404,
+      "observedThisTurn": false
+    },
+    "oldProductionRelayAndCurrentCandidateDiffer": true
+  },
+  "freeConfiguration": {
+    "staticCheckPassed": true,
+    "paidDependenciesAdded": false,
+    "modelsChanged": false,
+    "currentAccountEligibilityChecked": false,
+    "cpuChecked": false,
+    "phoneChecked": false,
+    "note": "무료 구성 검사는 요금제·무료 API 자격·CPU 적합성 증명이 아님. 사용자 선택에 따른 추가 실측 미실시를 유지함."
+  },
+  "limitations": [
+    "새 지시문이 실제 모델의 오판을 줄였는지는 아직 검증하지 않음.",
+    "서버 안내문은 예문 내용의 정확성이나 출처 구분을 증명하지 않으며 독립 검토 false는 계속 차단함.",
+    "기존 실제 시험은42회·작성17개·자동 통과12/20이며 사람의 최종 승인12개로 표시하지 않음.",
+    "기존 Groq HTTP400의 상세 원인은 미확정이며 이번 변경으로 해결했다고 주장하지 않음.",
+    "전체 새 자동화·0024·Worker/DO·화면은 아직 운영 반영하지 않음."
+  ],
+  "nextStep": "새 후보를 반영할 승인 범위를 정한 뒤 카드·이미지·예약·발송 없이 문장 생성과 독립 검토만 실제 재검증. 추가 계정·CPU·휴대전화 검증은 사용자 선택을 유지함."
+}

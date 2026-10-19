@@ -1,0 +1,638 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T12:21:07.127Z",
+  "status": "terminal_partial_generation_config_failure_no_delivery",
+  "day": "2026-10-08",
+  "kind": "trial",
+  "configVersion": 45,
+  "cards": 5,
+  "topic": "영화 대사",
+  "expressionSelection": 1,
+  "topicAlignment": 1,
+  "preparationKst": "2026-10-08 20:00",
+  "deadlineKst": "2026-10-08 20:55",
+  "dueKst": "2026-10-08 21:00",
+  "siteVersion": 126,
+  "envRevision": 64,
+  "publicAccessRevision": 4,
+  "d1Migration": "0024_automation_topic_alignment.sql",
+  "workerVersions": {
+    "en-card": [
+      {
+        "version_id": "ba989811-d725-46e5-bf86-b391b7e011dd",
+        "percentage": 100
+      }
+    ],
+    "en-card-delivery": [
+      {
+        "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+        "percentage": 100
+      }
+    ],
+    "en-card-automation": [
+      {
+        "version_id": "f410846c-3439-45d2-8968-f96668a39b16",
+        "percentage": 100
+      }
+    ]
+  },
+  "originalDaily": {
+    "version": 43,
+    "enabled": 1,
+    "time": "07:30",
+    "cards": 5,
+    "end": "2027-10-31",
+    "nextDueKst": "2026-10-09 07:30",
+    "settingsSha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "valuesAndExistingHistoryPreserved": true,
+    "resumePending": true,
+    "resumeBlocked": true,
+    "restored": false,
+    "resumeBlockReason": "automatic_config_pause_version46"
+  },
+  "trialState": {
+    "version": 46,
+    "enabled": 0,
+    "reason": "config",
+    "next_due_at": 1791498600000,
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "cards": 5,
+    "time": "07:30",
+    "end": "2027-10-31"
+  },
+  "initialObservation": {
+    "at": "2026-10-08T11:03:51.200Z",
+    "slots": [
+      {
+        "item_index": 1,
+        "status": "draft",
+        "error": null,
+        "topic_alignment": 1,
+        "expression_selection": 1,
+        "source_kind": null,
+        "source_confirmed": 0
+      },
+      {
+        "item_index": 2,
+        "status": "draft",
+        "error": null,
+        "topic_alignment": 1,
+        "expression_selection": 1,
+        "source_kind": null,
+        "source_confirmed": 0
+      },
+      {
+        "item_index": 3,
+        "status": "draft",
+        "error": null,
+        "topic_alignment": 1,
+        "expression_selection": 1,
+        "source_kind": null,
+        "source_confirmed": 0
+      },
+      {
+        "item_index": 4,
+        "status": "draft",
+        "error": null,
+        "topic_alignment": 1,
+        "expression_selection": 1,
+        "source_kind": null,
+        "source_confirmed": 0
+      },
+      {
+        "item_index": 5,
+        "status": "draft",
+        "error": null,
+        "topic_alignment": 1,
+        "expression_selection": 1,
+        "source_kind": null,
+        "source_confirmed": 0
+      }
+    ],
+    "attempts": [],
+    "aiCalls": 0,
+    "cardsCreated": 0,
+    "liveAccepted": 0,
+    "readOnly": true,
+    "cardIdReservations": 5,
+    "generationStartedObserved": false,
+    "correction": "Preallocated automation_runs.card_id is not a created cards row. Actual cards table join count0 at2026-10-08T11:04:26Z."
+  },
+  "followup": {
+    "automationId": "en-card-5",
+    "status": "PAUSED",
+    "checkAtKst": "2026-10-08 21:10",
+    "additionalCpuOrAccountOrPhoneValidationRequested": false,
+    "pausedAt": "2026-10-08T12:21:07.127Z"
+  },
+  "serverFiveCardsVerified": false,
+  "phoneReceiptVerified": false,
+  "cpuVerified": false,
+  "additionalAccountCpuPhoneVerificationUserChoice": "추가 검증 미실시 선택 유지; 서버접수와 수신 구분",
+  "forbiddenActions": [
+    "새 시험 중복등록",
+    "보충생성/재발송",
+    "한도상향/이력초기화",
+    "강제오류/중복",
+    "새 배포",
+    "병합"
+  ],
+  "resumeGuard": "시험 종료·현재 version/저장 설정 해시 일치·진행 중/대기/전송 중/결과 불명0·연결정상 후 원래 다음 정규 시각만 재개",
+  "evidenceDirectory": "EN_Card Git 제외 backups/topic-card-trial-20261008/",
+  "startObservation": {
+    "at": "2026-10-08T11:04:26.354Z",
+    "actualAiCalls": 0,
+    "actualCards": 0,
+    "claimedSlots": 0,
+    "reason": "Cron 재등록 전파 지연 가능성; 확정원인 아님",
+    "officialReference": "https://developers.cloudflare.com/workers/configuration/cron-triggers/"
+  },
+  "latestStartObservation": {
+    "at": "2026-10-08T11:08:46.050Z",
+    "readOnly": true,
+    "generationStartedObserved": true,
+    "firstAiAt": 1791457533531,
+    "aiCalls": 3,
+    "cardsCreated": 0,
+    "imagesCreated": 0,
+    "liveAccepted": 0,
+    "attempts": [
+      {
+        "stage": "interpret",
+        "provider": "google",
+        "outcome": "ok",
+        "started_at": 1791457533531,
+        "http_status": null
+      },
+      {
+        "stage": "select",
+        "provider": "google",
+        "outcome": "unavailable",
+        "started_at": 1791457593814,
+        "http_status": null
+      },
+      {
+        "stage": "select",
+        "provider": "google",
+        "outcome": "started",
+        "started_at": 1791457713798,
+        "http_status": null
+      }
+    ],
+    "runs": [
+      {
+        "item_index": 1,
+        "status": "draft",
+        "error": "unavailable",
+        "retry_at": 1791457679928,
+        "source_kind": "quotation",
+        "has_contract": 1
+      },
+      {
+        "item_index": 2,
+        "status": "draft",
+        "error": null,
+        "retry_at": null,
+        "source_kind": null,
+        "has_contract": 0
+      },
+      {
+        "item_index": 3,
+        "status": "draft",
+        "error": null,
+        "retry_at": null,
+        "source_kind": null,
+        "has_contract": 0
+      },
+      {
+        "item_index": 4,
+        "status": "draft",
+        "error": null,
+        "retry_at": null,
+        "source_kind": null,
+        "has_contract": 0
+      },
+      {
+        "item_index": 5,
+        "status": "draft",
+        "error": null,
+        "retry_at": null,
+        "source_kind": null,
+        "has_contract": 0
+      }
+    ]
+  },
+  "fastApprovalCheckpoint": {
+    "at": "2026-10-08T11:33:42.102Z",
+    "userApproval": "검증을 위해 가능한 가장 빠른 시간으로 진행 승인",
+    "scope": "기등록 trial45만 이어서 검증; 추가시험/추가발송/운영코드변경 없음",
+    "configVersion": 45,
+    "day": "2026-10-08",
+    "dueKst": "2026-10-08 21:00",
+    "followupKst": "2026-10-08 21:10",
+    "readOnly": true,
+    "textSourceAndIndependentReviewsVerified": 2,
+    "publicPngVerified": 2,
+    "serverAccepted": 0,
+    "allFiveVerified": false,
+    "phoneReceiptVerified": false,
+    "cpuVerified": false,
+    "settingsAndWorkersMatch": true,
+    "replacementOrigins": [
+      {
+        "item_index": 1,
+        "original_revision": 1,
+        "topic": 1,
+        "source": 1,
+        "variety": 1,
+        "level": 0,
+        "source_kind": "quotation"
+      },
+      {
+        "item_index": 2,
+        "original_revision": 1,
+        "topic": 1,
+        "source": 1,
+        "variety": 1,
+        "level": 0,
+        "source_kind": "quotation"
+      }
+    ],
+    "verifierCorrection": {
+      "reason": "기존 검증기는 새후보 전 원래revision3만 허용했으나 새 주제 정책은 source/topic/variety 또는 인용난이도 탈락 시revision1/2에서도 새후보를 선택한다. 읽기 증거와 실제코드로 확인하고 검증기를 맞췄다.",
+      "originalAndReplacementActualAiAttemptsRequired": true,
+      "localChecks": 7,
+      "passed": 7,
+      "productionCodeChanged": false,
+      "initialFixtureFailure": "불완전 리뷰 fixture의 SQL NULL 기대값 차이를 필수 리뷰 필드 fixture로 정정; 최초 실패 보존",
+      "verifySha256": "65ab2bd474b21c57eca14225218b91c1fd4f1afcf50e9272a726d3a3412fc0eb"
+    },
+    "sourceCheckpoint": {
+      "at": "2026-10-08T11:30:11.416Z",
+      "readOnly": true,
+      "runs": [
+        {
+          "item_index": 1,
+          "status": "scheduled",
+          "error": null,
+          "revision": 4,
+          "updated_at": 1791458432845,
+          "retry_at": null,
+          "claimed": 0,
+          "source_kind": "quotation",
+          "source_confirmed": 1,
+          "review_hash_matches": 1,
+          "render_attempts": 1
+        },
+        {
+          "item_index": 2,
+          "status": "schedule",
+          "error": null,
+          "revision": 4,
+          "updated_at": 1791458914400,
+          "retry_at": 1791459034400,
+          "claimed": 0,
+          "source_kind": "quotation",
+          "source_confirmed": 1,
+          "review_hash_matches": 1,
+          "render_attempts": 1
+        },
+        {
+          "item_index": 3,
+          "status": "draft",
+          "error": null,
+          "revision": 1,
+          "updated_at": 1791457157379,
+          "retry_at": null,
+          "claimed": 0,
+          "source_kind": null,
+          "source_confirmed": 0,
+          "review_hash_matches": 0,
+          "render_attempts": 0
+        },
+        {
+          "item_index": 4,
+          "status": "draft",
+          "error": null,
+          "revision": 1,
+          "updated_at": 1791457157379,
+          "retry_at": null,
+          "claimed": 0,
+          "source_kind": null,
+          "source_confirmed": 0,
+          "review_hash_matches": 0,
+          "render_attempts": 0
+        },
+        {
+          "item_index": 5,
+          "status": "draft",
+          "error": null,
+          "revision": 1,
+          "updated_at": 1791457157379,
+          "retry_at": null,
+          "claimed": 0,
+          "source_kind": null,
+          "source_confirmed": 0,
+          "review_hash_matches": 0,
+          "render_attempts": 0
+        }
+      ],
+      "attempts": [
+        {
+          "stage": "draft",
+          "provider": "google",
+          "outcome": "ok",
+          "calls": 4
+        },
+        {
+          "stage": "draft",
+          "provider": "google",
+          "outcome": "unavailable",
+          "calls": 3
+        },
+        {
+          "stage": "interpret",
+          "provider": "google",
+          "outcome": "ok",
+          "calls": 1
+        },
+        {
+          "stage": "review",
+          "provider": "groq",
+          "outcome": "ok",
+          "calls": 4
+        },
+        {
+          "stage": "select",
+          "provider": "google",
+          "outcome": "ok",
+          "calls": 2
+        },
+        {
+          "stage": "select",
+          "provider": "google",
+          "outcome": "unavailable",
+          "calls": 1
+        }
+      ],
+      "aiCalls": 15,
+      "cards": 2,
+      "images": 2,
+      "liveAccepted": 0,
+      "unresolved": 0,
+      "settings": {
+        "version": 45,
+        "enabled": 1,
+        "reason": null,
+        "next_due_at": null
+      }
+    },
+    "remaining": "3장 제작 대기/진행 및 예정시각live접수 대조; 종료후 안전조건 정규재개"
+  },
+  "trialStateAtRegistration": {
+    "version": 45,
+    "enabled": 1,
+    "nextDueAt": null,
+    "unresolved": 0
+  },
+  "latestCheckAt": "2026-10-08T12:17:33.280Z",
+  "finalObservation": {
+    "recordedAt": "2026-10-08T12:21:07.127Z",
+    "observedAt": "2026-10-08T12:17:33.280Z",
+    "readOnly": true,
+    "status": "terminal_partial_generation_config_failure_no_delivery",
+    "day": "2026-10-08",
+    "kind": "trial",
+    "configVersion": 45,
+    "expectedCards": 5,
+    "textVerified": 4,
+    "cardsCreated": 4,
+    "pngVerified": 4,
+    "serverAccepted": 0,
+    "deliveryCalls": 0,
+    "allFiveVerified": false,
+    "serverEvidenceVerified": false,
+    "phoneReceiptVerified": false,
+    "cpuVerified": false,
+    "aiCalls": 25,
+    "aiCallsPerCard": [
+      9,
+      6,
+      4,
+      2,
+      4
+    ],
+    "aiOutcomes": {
+      "ok": 17,
+      "unavailable": 7,
+      "config": 1
+    },
+    "failure": {
+      "slot": 5,
+      "stage": "select",
+      "provider": "groq",
+      "outcome": "config",
+      "httpStatus": 400,
+      "startedAt": 1791460413794,
+      "atKst": "2026-10-08 20:53:33",
+      "automaticPauseAt": 1791460416277,
+      "googleSelectAttempts": 3,
+      "googleSelectOk": 1,
+      "googleSelectUnavailable": 2,
+      "attempts": [
+        {
+          "item_index": 5,
+          "stage": "select",
+          "revision": 1,
+          "provider": "google",
+          "started_at": 1791460054152,
+          "outcome": "ok",
+          "http_status": null
+        },
+        {
+          "item_index": 5,
+          "stage": "select",
+          "revision": 1,
+          "provider": "google",
+          "started_at": 1791460113789,
+          "outcome": "unavailable",
+          "http_status": null
+        },
+        {
+          "item_index": 5,
+          "stage": "select",
+          "revision": 1,
+          "provider": "google",
+          "started_at": 1791460233788,
+          "outcome": "unavailable",
+          "http_status": null
+        },
+        {
+          "item_index": 5,
+          "stage": "select",
+          "revision": 1,
+          "provider": "groq",
+          "started_at": 1791460413794,
+          "outcome": "config",
+          "http_status": 400
+        }
+      ],
+      "errorBodyPreserved": false,
+      "detailedProviderCause": "unverified",
+      "propagation": "aiPhase -> pause -> changeSettings cancelled all four prepared auto schedules before their due; no trial delivery was created"
+    },
+    "topicProof": {
+      "sourceKind": "quotation",
+      "verifiedSlots": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "independentReviewItems": 10,
+      "reviewIssues": 0,
+      "selectedExpressionAndContentHashesMatch": true,
+      "sourceCacheQuoteAndAttributionMatch": true,
+      "normalizedUnique": true,
+      "canonicalNewExampleNoteMatch": true
+    },
+    "qualityReplacement": {
+      "observedSlots": [
+        1,
+        2
+      ],
+      "textAndPngVerifiedSlots": [
+        1,
+        2
+      ],
+      "liveVerifiedSlots": [],
+      "origins": [
+        {
+          "index": 1,
+          "revision": 1,
+          "levelPassed": false
+        },
+        {
+          "index": 2,
+          "revision": 1,
+          "levelPassed": false
+        }
+      ]
+    },
+    "additionalCorrectionObserved": false,
+    "correctionProviderFallbackObserved": false,
+    "selectProviderFallbackObserved": {
+      "slot": 5,
+      "succeeded": false
+    },
+    "candidateRejections": {
+      "source_invalid": 14,
+      "topic_level": 2,
+      "duplicate": 6
+    },
+    "fullCardDuplicateRegenerationObserved": false,
+    "originalDailyValuesPreserved": true,
+    "settings": {
+      "version": 46,
+      "enabled": 0,
+      "reason": "config",
+      "next_due_at": 1791498600000,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "productRegularEnabled": false,
+    "regularResumeBlocked": true,
+    "originalDailyRestored": false,
+    "resume": {
+      "recordedAt": "2026-10-08T12:21:07.127Z",
+      "command": "node backups/topic-card-trial-20261008/resume.mjs",
+      "exitCode": 0,
+      "readOnly": true,
+      "ready": false,
+      "applied": false,
+      "problems": [
+        "settings_changed",
+        "not_normal_trial_completion",
+        "trial_not_terminal_or_changed",
+        "hard_failure_requires_attention"
+      ],
+      "settingsValuesUnchanged": true,
+      "versionChangedByAutomaticPause": true,
+      "resumeIntentExists": false,
+      "resumedEvidenceExists": false
+    },
+    "work": {
+      "activeCreation": 0,
+      "activeAutoSchedules": 0,
+      "pendingAutoDeliveries": 0,
+      "inflightOrUnknown": 0,
+      "kakaoConnected": true
+    },
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "ba989811-d725-46e5-bf86-b391b7e011dd",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ],
+        "versionsMatch": true,
+        "bindingsMatch": true,
+        "cronsMatch": true
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "versionsMatch": true,
+        "bindingsMatch": true,
+        "cronsMatch": true
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "f410846c-3439-45d2-8968-f96668a39b16",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "versionsMatch": true,
+        "bindingsMatch": true,
+        "cronsMatch": true
+      }
+    },
+    "followup": {
+      "automationId": "en-card-5",
+      "status": "PAUSED"
+    },
+    "freeConfiguration": {
+      "newPaidResources": false,
+      "newPlanOrPaymentChanges": false,
+      "priorFreeConfirmation": "2026-10-07 user confirmation preserved",
+      "newAccountVerificationPerformed": false,
+      "newCpuVerificationPerformed": false
+    },
+    "userAdditionalAccountCpuPhoneValidationChoicePreserved": true,
+    "prohibitedMutationsPerformed": false,
+    "checks": {
+      "observeExit": 0,
+      "verifyExit": 0,
+      "topicEvidenceExit": 0,
+      "detailSqlExit": 0,
+      "sourceRejectionSqlExit": 0,
+      "resumeReadOnlyExit": 0,
+      "initialDetailSqlExit": 1,
+      "initialSourceCountSqlExit": 1
+    },
+    "nextStep": "Investigate Groq select HTTP400 request contract and minimal sanitized error classification before any guarded production resume; no forced retry/deployment/new trial in this inspection."
+  }
+}

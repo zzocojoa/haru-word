@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "archivedOn": "2026-10-19",
+  "baseMain": "1a3ad9b57b41b6093b583de4061653d135eac4fa",
+  "scope": "Archive 11 historical release records and PR #47 follow-up; preserve original results, not current operational instructions.",
+  "currentState": {
+    "productionVersion": 140,
+    "source": "f5925ec0b70ce5f6e12de3596e2bed927115e73c",
+    "startupRootCause": "UNKNOWN",
+    "response401Cause": "not established",
+    "evidence": "docs/releases/2026-10-19-ui-text-focus-v140-rollout.json"
+  },
+  "sourceWorkspaces": {
+    "primary": "C:/Users/user/Documents/ChatGPT/하루단어",
+    "pr47": "C:/Users/user/.codex/worktrees/word-image-pilot/하루단어"
+  },
+  "evidencePolicy": [
+    "Original record bytes, timestamps, failure statuses and limitations are preserved.",
+    "Historical current/next/rollback/approval statements apply only to their recorded time; they do not authorize actions now.",
+    "Local work/backups paths and references to retired EN_Card resources are provenance, not portable attachments or currently verified links.",
+    "External resource deletion, receipt, CPU, device and historical provider-error claims were not reverified during this archive.",
+    "No runtime code, settings, database, deployment or pre-existing worktree content is changed."
+  ],
+  "recordCount": 11,
+  "records": [
+    {
+      "path": "docs/releases/2026-10-08-automation-topic-alignment.json",
+      "title": "주제 적합성 로컬 후보",
+      "interpretation": "운영 반영 전 후보·검증 범위",
+      "originalStatus": "local_verified_undeployed",
+      "originalRecordedAt": "2026-10-08T03:11:59.000Z",
+      "source": {
+        "kind": "git-blob",
+        "branch": "codex/card-automation-topic-alignment",
+        "commit": "429d9665a3b1c65bf3474a2be5359d0c52425bd6",
+        "path": "docs/releases/2026-10-08-automation-topic-alignment.json"
+      },
+      "sourceSha256": "dcc96761d4a275e9e674e4c8e3b0af80130b1b0a28910e4381dab71fcd98651d",
+      "archivedSha256": "dcc96761d4a275e9e674e4c8e3b0af80130b1b0a28910e4381dab71fcd98651d",
+      "bytes": 4998,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-08-topic-sentence-validation.json",
+      "title": "문장 실제 시험",
+      "interpretation": "최종 0/20·실패 및 정리",
+      "originalStatus": "live_sentence_validation_failed_cleanup_complete",
+      "originalRecordedAt": "2026-10-08T05:13:05.536Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-08-topic-sentence-validation.json"
+      },
+      "sourceSha256": "09d9e0c318b9b170de6d229f8723fb49118bb4ddfc67bbe70d9fa181b38d60a3",
+      "archivedSha256": "09d9e0c318b9b170de6d229f8723fb49118bb4ddfc67bbe70d9fa181b38d60a3",
+      "bytes": 5249,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-08-topic-sentence-improvement.json",
+      "title": "문장 개선 후보",
+      "interpretation": "로컬 개선·실제 효과 미검증",
+      "originalStatus": "local_improved_verified_undeployed",
+      "originalRecordedAt": "2026-10-08T05:44:19.305Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-08-topic-sentence-improvement.json"
+      },
+      "sourceSha256": "7bbd811150ceaca0e4d350add7d4c70fbd6122e0941d69e3cc37f7e419b688f8",
+      "archivedSha256": "7bbd811150ceaca0e4d350add7d4c70fbd6122e0941d69e3cc37f7e419b688f8",
+      "bytes": 4409,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-08-topic-sentence-revalidation.json",
+      "title": "문장 재검증",
+      "interpretation": "자동 12/20·남은 결함",
+      "originalStatus": "live_sentence_revalidation_partial_cleanup_complete",
+      "originalRecordedAt": "2026-10-08T06:42:23.552Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-08-topic-sentence-revalidation.json"
+      },
+      "sourceSha256": "d5ed5f71d51dac1114e815c21c646c28dca7fa8935fe6978b30dc5f3773380a3",
+      "archivedSha256": "d5ed5f71d51dac1114e815c21c646c28dca7fa8935fe6978b30dc5f3773380a3",
+      "bytes": 10991,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-08-topic-sentence-followup.json",
+      "title": "문장 후속 보완",
+      "interpretation": "로컬 검증·미배포",
+      "originalStatus": "local_verified_undeployed",
+      "originalRecordedAt": "2026-10-08T07:09:09.258Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-08-topic-sentence-followup.json"
+      },
+      "sourceSha256": "9117983be4438b08a9e8ce6471189a7b8c418173d3d31087020691ff6a653ff0",
+      "archivedSha256": "9117983be4438b08a9e8ce6471189a7b8c418173d3d31087020691ff6a653ff0",
+      "bytes": 7511,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-08-topic-card-rollout.json",
+      "title": "v126 주제 카드 출시",
+      "interpretation": "게시·시험 실패·정규 중지",
+      "originalStatus": "production_deployed_trial_failed_regular_paused",
+      "originalRecordedAt": "2026-10-08T12:21:07.127Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-08-topic-card-rollout.json"
+      },
+      "sourceSha256": "4ae840132c9007bb09e063c45a5da11dd32d3ee4d2681b917e843ee1ae25b195",
+      "archivedSha256": "4ae840132c9007bb09e063c45a5da11dd32d3ee4d2681b917e843ee1ae25b195",
+      "bytes": 21453,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-08-topic-card-trial.json",
+      "title": "trial45 종료",
+      "interpretation": "4장 제작·발송 0·상세 원인 미확정",
+      "originalStatus": "terminal_partial_generation_config_failure_no_delivery",
+      "originalRecordedAt": "2026-10-08T12:21:07.127Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-08-topic-card-trial.json"
+      },
+      "sourceSha256": "0dc6d6bee14c87c32899a35dded899ba0cf57a511bb2bcc1d20e90403b122d24",
+      "archivedSha256": "0dc6d6bee14c87c32899a35dded899ba0cf57a511bb2bcc1d20e90403b122d24",
+      "bytes": 17497,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-08-groq-provider-error-fix.json",
+      "title": "Groq 오류 분류 후보",
+      "interpretation": "로컬 검증·당시 미배포",
+      "originalStatus": "local_candidate_verified_not_deployed",
+      "originalRecordedAt": "2026-10-08T12:42:27.211Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-08-groq-provider-error-fix.json"
+      },
+      "sourceSha256": "95828663759276ad752fed245824b481d6b79ffaa16235734bb6b841f97cb721",
+      "archivedSha256": "95828663759276ad752fed245824b481d6b79ffaa16235734bb6b841f97cb721",
+      "bytes": 6898,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-09-groq-provider-error-rollout.json",
+      "title": "v127 게시·정규 재개",
+      "interpretation": "당시 게시와 재개, 다음 실패 기록과 구분",
+      "originalStatus": "v127_published_original_daily_resumed",
+      "originalRecordedAt": "2026-10-08T15:28:38.222Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-09-groq-provider-error-rollout.json"
+      },
+      "sourceSha256": "ee2a6be69b079885bd1c876cd71d0a6b15c7733eba3c2b67411bc3646b38e47f",
+      "archivedSha256": "ee2a6be69b079885bd1c876cd71d0a6b15c7733eba3c2b67411bc3646b38e47f",
+      "bytes": 7159,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-09-automation-daily-no-receipt.json",
+      "title": "daily47 미수신 조사",
+      "interpretation": "발송 0·version48 중지·상세 원인 미확정",
+      "originalStatus": "daily47_failed_zero_sends_paused48",
+      "originalRecordedAt": "2026-10-08T23:26:04.119Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-09-automation-daily-no-receipt.json"
+      },
+      "sourceSha256": "797f1ad62058410a77a253496c11211a325826b0770af09d04be426acdc1af08",
+      "archivedSha256": "797f1ad62058410a77a253496c11211a325826b0770af09d04be426acdc1af08",
+      "bytes": 6796,
+      "byteIdentical": true
+    },
+    {
+      "path": "docs/releases/2026-10-18-en-card-retirement.json",
+      "title": "v139 카드 종료",
+      "interpretation": "당시 자원 삭제 보고·빈 폴더 잠금 잔여",
+      "originalStatus": "data_deleted_empty_directory_waiting_for_process_release",
+      "originalRecordedAt": "2026-10-18T14:11:54.074Z",
+      "source": {
+        "kind": "preserved-uncommitted-file",
+        "workspace": "primary",
+        "path": "docs/releases/2026-10-18-en-card-retirement.json"
+      },
+      "sourceSha256": "a13cc368bc7ff89b0f809a9c6530c438174119f407fc8131a6ad9555670f105c",
+      "archivedSha256": "a13cc368bc7ff89b0f809a9c6530c438174119f407fc8131a6ad9555670f105c",
+      "bytes": 5348,
+      "byteIdentical": true
+    }
+  ],
+  "pr47FollowUp": {
+    "path": "docs/releases/2026-10-18-en-card-retirement-integration.json",
+    "section": "postMergeAssessment",
+    "sourceSha256": "d34413fa4d36a41ad6a09c7936910d0bd82413b5c549748465a8ca90be8e4be3",
+    "sectionSha256": "25ab06743a3b7ab59fb3e99ebc1a0e8338f9fcf6348ace6320808550c669212c",
+    "originalComparedAt": "2026-10-18T14:47:26.183Z"
+  }
+}

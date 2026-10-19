@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T05:44:19.305Z",
+  "status": "local_improved_verified_undeployed",
+  "scope": "실제 문장 시험 실패 원인 분석 후 로컬 개선. 카드·이미지·예약·카카오·추가 실제AI/배포 없음.",
+  "causeReport": "EN_Card/docs/AI_TOPIC_SENTENCE_ROOT_CAUSE.md",
+  "originalLiveEvidence": "2026-10-08-topic-sentence-validation.json",
+  "branches": {
+    "enCard": "codex/automation-topic-alignment",
+    "haruWord": "codex/card-automation-topic-alignment"
+  },
+  "baseEnCardCommit": "66fe8a46b39a6b31815778624428713c84c6dd1d",
+  "newChangesCommitted": false,
+  "fixes": [
+    "none/quotation/fact 출처 검토 의미와 표현형/비교형 조건 명시",
+    "포함 상황은 대안 목록으로 검토",
+    "새 표현형의 불필요한 필드만 해시/독립 검토 전에 정리",
+    "시험/제품의 제한된 원문 읽기 공유·PDF signal/Content-Type/에러 분류 일치",
+    "실패 후보 출처 제안 보존과 시험 후보/실제 릴레이 해시 대조",
+    "일관된 예문·정확한 번역·근거 있는 후보 지시"
+  ],
+  "causalLimits": [
+    "모호한 지시가 모델 응답의 원인이라는 결론은 추론이며 실제 개선 효과는 재시험 필요",
+    "원래7개 invalid의 원래URL/작품/excerpt 미보존으로 개별 원인 전부 확정 불가",
+    "실제 source=false를 자동승인하지 않음"
+  ],
+  "artifacts": {
+    "studioFiles": 129,
+    "relayFiles": 2,
+    "studioSourceSha256": "1dd719a4ebf1e33774ef0a5c7a73a01c88d8d973b906446d4ec96c69a08e784a",
+    "relaySourceSha256": "b106c0ef7c5819dc7e244ea4ceee541d52bb15701e2460e49c1595cd9736355a",
+    "relayBundleSha256": "bd21ad36b78d021e280cd5840f61235ccd3cdecf1e1784d4356a9ea886d519eb",
+    "officialExporter": true,
+    "generatedHashesVerified": true
+  },
+  "checks": {
+    "enCard": {
+      "files": 7,
+      "passed": 126,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "exitCode": 0,
+      "durationSeconds": 413.48
+    },
+    "typecheckExitCode": 0,
+    "webBuildExitCode": 0,
+    "workerDryRunExitCode": 0,
+    "deliveryDryRunExitCode": 0,
+    "automationDryRunExitCode": 0,
+    "freeConfigurationExitCode": 0,
+    "haruWord": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "exitCode": 0,
+      "typecheckExitCode": 0,
+      "lintExitCode": 0,
+      "lintErrors": 0,
+      "existingLintWarnings": 13,
+      "buildExitCode": 0
+    },
+    "sentenceSelfCheck": {
+      "syntheticPassed": 20,
+      "mockAiCalls": 48,
+      "actualAiCalls": 0,
+      "exitCode": 0
+    },
+    "offline": {
+      "actualAiCalls": 0,
+      "networkReads": 0,
+      "pdfBytes": 139059,
+      "pdfCharacters": 7020,
+      "originalSentencesReplayed": 15,
+      "unusedFieldsNormalized": 9,
+      "actualContentAndReviewsUnchanged": true,
+      "originalResultAndBundlePreserved": true,
+      "oldDeploymentMismatchBlocked": true,
+      "exitCode": 0
+    }
+  },
+  "safeguards": {
+    "strictReviewFlags": true,
+    "sourceProofRequiredForQuotesAndFacts": true,
+    "quotedExpressionPreserved": true,
+    "sourcePageBudget": 10,
+    "sourceTimeoutMs": 5000,
+    "sourceBytes": 262144,
+    "sourceCacheHours": 24,
+    "aiCallsPerCard": 24,
+    "productionMinutes": 55,
+    "pngWaitMinutes": 2,
+    "historicalCardsAndHashesNotRewritten": true,
+    "migrationOrLimitsChanged": false
+  },
+  "operatingChanges": {
+    "deployment": false,
+    "remoteMigration": false,
+    "settings": false,
+    "schedules": false,
+    "kakao": false,
+    "actualAiCalls": 0,
+    "gitPush": false,
+    "pullRequest": false,
+    "merged": false
+  },
+  "runtime": {
+    "siteVersion": 124,
+    "envRevision": 62,
+    "relaySourceSha256": "5866853ee1a963d8614b394a4dd647ace0377bf8fe3d9c6dbbaf92fa4470b816",
+    "note": "Earlier observed production; not freshly re-queried in local improvement. Runtime relay differs from the new local candidate."
+  },
+  "unverified": {
+    "actualTwentySentenceSuccess": true,
+    "accountOrCpuOrPhone": true,
+    "full831AndBrowser62NotRerun": true,
+    "note": "Targeted126/21 only. Account/CPU/phone are omitted by user choice; no visual behavior change. Actual AI quality after prompt changes not tested."
+  },
+  "next": "기존 기록·설정 보존 상태에서 개선 서버만 반영하고 카드 없는 실제 문장 검증을 재실행해야 품질 효과 확인 가능"
+}
