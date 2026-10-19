@@ -25,15 +25,17 @@ const { history } = require('./fixtures/backup-history.cjs');
         }
         return route.fulfill({ json: { revision, state } });
       });
-      await page.goto(base); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-      for (const name of ['학습 기록', '주간·월말 점검', '전체 단어장']) await page.getByRole('tab', { name, exact: true }).click();
-      await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click();
+      await page.goto(base); await page.getByText('저장됨', { exact: true }).waitFor();
+      for (const name of ['학습 기록', '복습 점검', '단어장']) await page.getByRole('tab', { name, exact: true }).click();
+      await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click();
       const input = page.getByRole('textbox', { name: '내 문장', exact: true }); await input.waitFor();
       await input.press('ControlOrMeta+End'); // Measure appending at a deterministic caret position.
       const cdp = await context.newCDPSession(page); await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
       await page.evaluate(() => { window.longTasks = []; window.observer = new PerformanceObserver(list => window.longTasks.push(...list.getEntries().map(e => Math.round(e.duration)))); window.observer.observe({ type: 'longtask' }); });
       const text = ' I read every day.', started = performance.now(); await input.pressSequentially(text, { delay: 30 });
-      const typingMs = Math.round(performance.now() - started); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+      const typingMs = Math.round(performance.now() - started);
+      for (let attempt = 0; state.grammar.noun.sentence !== 'I like books.' + text && attempt < 100; attempt++) await page.waitForTimeout(100);
+      await page.locator('.save-state').getByText('저장됨', { exact: true }).waitFor();
       assert.equal(state.grammar.noun.sentence, 'I like books.' + text); assert.ok(writes);
       assert.deepEqual({ settings: state.settings, progress: state.progress, sessions: state.sessions }, original);
       results.push({ sessions: count, sample, cpuThrottle: 4, characters: text.length, typingMs, longTasksMs: await page.evaluate(() => window.longTasks) });

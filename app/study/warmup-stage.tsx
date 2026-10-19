@@ -30,7 +30,7 @@ export function WarmupStage({
   return (
     <>
       <p className="muted">
-        미완료·최근 단어의 뜻을 답을 보기 전에 적어 보세요.
+        답을 보기 전에 이 단어의 뜻을 써 보세요.
       </p>
       <div className="word-stage">
         <h3 lang="en">{word.word}</h3>

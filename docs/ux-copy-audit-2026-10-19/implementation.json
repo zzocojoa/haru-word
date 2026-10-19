@@ -1,0 +1,1670 @@
+{
+  "status": "implementation recorded; runtime verification in companion report",
+  "base": "85d95ae51e14b2466d1acbf8a39c2416d2f2e326",
+  "sourceAudit": "UX_TEXT_AUDIT_2026-10-19.md",
+  "changedDecisions": 237,
+  "protectedFiles": 126,
+  "protectedSha256": "6d8139bdbea17bbe274be3e980f6c686c1016677e5cebd5640e11a273757f260",
+  "p0WarningsPreserved": true,
+  "decisions": [
+    {
+      "id": "UI-0012",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0013",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0014",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0015",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0018",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0022",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0023",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0025",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "제거",
+      "evidence": "redundant decoration/instruction removed at documented position"
+    },
+    {
+      "id": "UI-0027",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "제거",
+      "evidence": "redundant decoration/instruction removed at documented position"
+    },
+    {
+      "id": "UI-0029",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0031",
+      "priority": "P2",
+      "file": "app/learning-app.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0042",
+      "priority": "P1",
+      "file": "app/learning/use-learning-controller.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0060",
+      "priority": "P2",
+      "file": "app/ui.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0077",
+      "priority": "P1",
+      "file": "components/ui/dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0094",
+      "priority": "P1",
+      "file": "lib/learning/model.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0096",
+      "priority": "P1",
+      "file": "lib/learning/model.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0124",
+      "priority": "P2",
+      "file": "lib/learning/outcomes.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0133",
+      "priority": "P2",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0134",
+      "priority": "P2",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0139",
+      "priority": "P2",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0142",
+      "priority": "P1",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0146",
+      "priority": "P2",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0147",
+      "priority": "P2",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0150",
+      "priority": "P2",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0151",
+      "priority": "P2",
+      "file": "app/familiarity-card.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0155",
+      "priority": "P2",
+      "file": "app/learning/candidate-preparation.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0157",
+      "priority": "P2",
+      "file": "app/learning/candidate-preparation.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0158",
+      "priority": "P2",
+      "file": "app/learning/familiarity-assessment.tsx",
+      "decision": "제거",
+      "evidence": "redundant decoration/instruction removed at documented position"
+    },
+    {
+      "id": "UI-0159",
+      "priority": "P2",
+      "file": "app/learning/familiarity-assessment.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0160",
+      "priority": "P2",
+      "file": "app/learning/familiarity-assessment.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0165",
+      "priority": "P2",
+      "file": "app/learning/familiarity-assessment.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0166",
+      "priority": "P2",
+      "file": "app/learning/familiarity-assessment.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0171",
+      "priority": "P2",
+      "file": "app/learning/familiarity-assessment.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0177",
+      "priority": "P2",
+      "file": "lib/learning/familiarity.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0178",
+      "priority": "P2",
+      "file": "lib/learning/familiarity.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0179",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0181",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0183",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0185",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0187",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0188",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0190",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0191",
+      "priority": "P1",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0192",
+      "priority": "P2",
+      "file": "app/learning/learning-aside.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0194",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0203",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0206",
+      "priority": "P1",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0209",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0210",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0213",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0218",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0222",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0225",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0226",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0231",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0234",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0250",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0253",
+      "priority": "P1",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0266",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0271",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0273",
+      "priority": "P2",
+      "file": "app/learning/today-overview.tsx",
+      "decision": "제거",
+      "evidence": "redundant decoration/instruction removed at documented position"
+    },
+    {
+      "id": "UI-0278",
+      "priority": "P1",
+      "file": "lib/today-status.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0279",
+      "priority": "P2",
+      "file": "lib/today-status.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0311",
+      "priority": "P2",
+      "file": "app/study-session.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0312",
+      "priority": "P2",
+      "file": "app/study-session.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0313",
+      "priority": "P2",
+      "file": "app/study-session.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0314",
+      "priority": "P2",
+      "file": "app/study-session.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0315",
+      "priority": "P2",
+      "file": "app/study-session.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0323",
+      "priority": "P2",
+      "file": "app/study-session.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0329",
+      "priority": "P1",
+      "file": "app/study-session.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0333",
+      "priority": "P2",
+      "file": "app/study/learn-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0336",
+      "priority": "P2",
+      "file": "app/study/learn-stage.tsx",
+      "decision": "제거",
+      "evidence": "redundant decoration/instruction removed at documented position"
+    },
+    {
+      "id": "UI-0339",
+      "priority": "P2",
+      "file": "app/study/learn-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0346",
+      "priority": "P2",
+      "file": "app/study/learn-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0347",
+      "priority": "P2",
+      "file": "app/study/recall-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0348",
+      "priority": "P2",
+      "file": "app/study/recall-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0349",
+      "priority": "P2",
+      "file": "app/study/recall-stage.tsx",
+      "decision": "제거",
+      "evidence": "redundant decoration/instruction removed at documented position"
+    },
+    {
+      "id": "UI-0356",
+      "priority": "P2",
+      "file": "app/study/recall-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0357",
+      "priority": "P2",
+      "file": "app/study/recall-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0360",
+      "priority": "P1",
+      "file": "app/study/recall-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0361",
+      "priority": "P1",
+      "file": "app/study/recall-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0364",
+      "priority": "P2",
+      "file": "app/study/sentence-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0371",
+      "priority": "P2",
+      "file": "app/study/sentence-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0373",
+      "priority": "P2",
+      "file": "app/study/sentence-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0374",
+      "priority": "P2",
+      "file": "app/study/sentence-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0377",
+      "priority": "P2",
+      "file": "app/study/sentence-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0378",
+      "priority": "P2",
+      "file": "app/study/sentence-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0383",
+      "priority": "P1",
+      "file": "app/study/session-checkpoint.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0385",
+      "priority": "P2",
+      "file": "app/study/warmup-stage.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0421",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0422",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0425",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0426",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0427",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0431",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0436",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0438",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0440",
+      "priority": "P2",
+      "file": "app/review/review-desk.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0445",
+      "priority": "P1",
+      "file": "app/ai-use-notice.tsx",
+      "decision": "간소화",
+      "evidence": "shared word/grammar transmission notice"
+    },
+    {
+      "id": "UI-0446",
+      "priority": "P1",
+      "file": "app/ai-use-notice.tsx",
+      "decision": "간소화",
+      "evidence": "shared word/grammar transmission notice"
+    },
+    {
+      "id": "UI-0447",
+      "priority": "P1",
+      "file": "app/ai-use-notice.tsx",
+      "decision": "간소화",
+      "evidence": "shared word/grammar transmission notice"
+    },
+    {
+      "id": "UI-0448",
+      "priority": "P1",
+      "file": "app/ai-use-notice.tsx",
+      "decision": "간소화",
+      "evidence": "shared word/grammar transmission notice"
+    },
+    {
+      "id": "UI-0450",
+      "priority": "P2",
+      "file": "app/feedback-attribution.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0455",
+      "priority": "P1",
+      "file": "app/feedback-detail.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0464",
+      "priority": "P2",
+      "file": "app/feedback-issue-notice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0465",
+      "priority": "P2",
+      "file": "app/feedback-issue-notice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0468",
+      "priority": "P2",
+      "file": "app/feedback-safety-notice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0472",
+      "priority": "P2",
+      "file": "app/sentence-feedback.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0473",
+      "priority": "P2",
+      "file": "app/sentence-feedback.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0474",
+      "priority": "P2",
+      "file": "lib/feedback-compatibility.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0484",
+      "priority": "P1",
+      "file": "app/learning/image-practice-launcher.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0487",
+      "priority": "P2",
+      "file": "app/learning/image-practice-launcher.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0508",
+      "priority": "P2",
+      "file": "app/learning/image-practice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0514",
+      "priority": "P2",
+      "file": "app/learning/image-practice.tsx",
+      "decision": "간소화",
+      "evidence": "C4 refinement: distinguish unread cursor and unconfirmed save; never claim lost-response failure"
+    },
+    {
+      "id": "UI-0524",
+      "priority": "P2",
+      "file": "app/learning/image-practice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0532",
+      "priority": "P2",
+      "file": "app/learning/image-practice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0534",
+      "priority": "P1",
+      "file": "app/learning/image-practice.tsx",
+      "decision": "간소화",
+      "evidence": "document-authorized fallback retained; reviewed scenes unchanged; full scene authoring is separate content work"
+    },
+    {
+      "id": "UI-0536",
+      "priority": "P1",
+      "file": "app/learning/image-practice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0539",
+      "priority": "P1",
+      "file": "app/learning/image-practice.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0543",
+      "priority": "P2",
+      "file": "app/library/personal-word.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0546",
+      "priority": "P2",
+      "file": "app/library/personal-word.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0560",
+      "priority": "P2",
+      "file": "app/library/word-editor.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0561",
+      "priority": "P2",
+      "file": "app/library/word-editor.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0566",
+      "priority": "P2",
+      "file": "app/library/word-editor.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0582",
+      "priority": "P2",
+      "file": "app/library/word-editor.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0583",
+      "priority": "P2",
+      "file": "app/library/word-editor.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0600",
+      "priority": "P2",
+      "file": "app/word-library.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0617",
+      "priority": "P2",
+      "file": "app/word-library.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0630",
+      "priority": "P2",
+      "file": "app/word-library.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0638",
+      "priority": "P2",
+      "file": "app/word-library.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0639",
+      "priority": "P2",
+      "file": "app/word-library.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0644",
+      "priority": "P2",
+      "file": "app/grammar-terms.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0689",
+      "priority": "P2",
+      "file": "app/grammar/grammar-catalog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0690",
+      "priority": "P2",
+      "file": "app/grammar/grammar-catalog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0709",
+      "priority": "P1",
+      "file": "app/grammar/grammar-lesson.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0755",
+      "priority": "P2",
+      "file": "app/grammar/grammar-question.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0756",
+      "priority": "P1",
+      "file": "app/grammar/grammar-question.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0758",
+      "priority": "P2",
+      "file": "app/grammar/grammar-question.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0762",
+      "priority": "P2",
+      "file": "app/grammar/grammar-question.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0763",
+      "priority": "P1",
+      "file": "app/grammar/grammar-question.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0773",
+      "priority": "P2",
+      "file": "app/grammar/grammar-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0775",
+      "priority": "P2",
+      "file": "app/grammar/grammar-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0788",
+      "priority": "P2",
+      "file": "app/grammar/grammar-writing.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0796",
+      "priority": "P2",
+      "file": "app/grammar/grammar-writing.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0802",
+      "priority": "P2",
+      "file": "app/grammar/grammar-writing.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0803",
+      "priority": "P2",
+      "file": "app/grammar/reviewed-examples.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0890",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0892",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0893",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0895",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0903",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0904",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0910",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0912",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0916",
+      "priority": "P2",
+      "file": "app/review/learning-log.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0920",
+      "priority": "P2",
+      "file": "app/review/record-actions.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0922",
+      "priority": "P1",
+      "file": "app/review/record-actions.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0923",
+      "priority": "P2",
+      "file": "app/review/record-actions.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0926",
+      "priority": "P2",
+      "file": "app/session-records.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0927",
+      "priority": "P2",
+      "file": "app/session-records.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0928",
+      "priority": "P2",
+      "file": "app/session-records.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0930",
+      "priority": "P2",
+      "file": "app/session-records.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0931",
+      "priority": "P2",
+      "file": "app/session-records.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0939",
+      "priority": "P1",
+      "file": "app/session-records.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0946",
+      "priority": "P1",
+      "file": "app/session-records.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0968",
+      "priority": "P2",
+      "file": "app/study/session-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0971",
+      "priority": "P2",
+      "file": "app/study/session-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0973",
+      "priority": "P2",
+      "file": "app/study/session-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0977",
+      "priority": "P1",
+      "file": "app/study/session-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0980",
+      "priority": "P1",
+      "file": "app/study/session-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0982",
+      "priority": "P2",
+      "file": "app/study/session-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0989",
+      "priority": "P2",
+      "file": "app/study/session-summary.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-0998",
+      "priority": "P2",
+      "file": "app/api/state/restore/route.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1007",
+      "priority": "P2",
+      "file": "app/backup-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1049",
+      "priority": "P2",
+      "file": "app/backup-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1057",
+      "priority": "P2",
+      "file": "app/backup-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1064",
+      "priority": "P0",
+      "file": "app/backup-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1098",
+      "priority": "P2",
+      "file": "app/use-backup-restore.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1102",
+      "priority": "P2",
+      "file": "app/use-backup-restore.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1124",
+      "priority": "P2",
+      "file": "lib/server/restore-http.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1128",
+      "priority": "P1",
+      "file": "app/learning/settings-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1134",
+      "priority": "P2",
+      "file": "app/learning/settings-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1146",
+      "priority": "P2",
+      "file": "app/learning/settings-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1148",
+      "priority": "P2",
+      "file": "app/learning/settings-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1151",
+      "priority": "P1",
+      "file": "app/learning/settings-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "proposed notice plus relocated Korean midnight boundary"
+    },
+    {
+      "id": "UI-1152",
+      "priority": "P2",
+      "file": "app/learning/settings-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1158",
+      "priority": "P2",
+      "file": "app/learning/source-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1159",
+      "priority": "P2",
+      "file": "app/learning/source-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1164",
+      "priority": "P2",
+      "file": "app/learning/source-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1167",
+      "priority": "P2",
+      "file": "app/learning/source-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1168",
+      "priority": "P2",
+      "file": "app/learning/source-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1169",
+      "priority": "P1",
+      "file": "app/learning/source-dialog.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1171",
+      "priority": "P2",
+      "file": "app/api/state/route.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1193",
+      "priority": "P2",
+      "file": "app/learning/save-status.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1194",
+      "priority": "P2",
+      "file": "app/learning/save-status.tsx",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1196",
+      "priority": "P2",
+      "file": "app/use-learning-store.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1198",
+      "priority": "P2",
+      "file": "app/use-learning-store.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1200",
+      "priority": "P2",
+      "file": "app/use-learning-store.ts",
+      "decision": "간소화",
+      "evidence": "documented replacement in the original component"
+    },
+    {
+      "id": "UI-1202",
+      "priority": "P2",
+      "file": "app/use-learning-store.ts",
+      "decision": "간소화",
+      "evidence": "combined network-exception rule takes precedence: unknown result is not claimed as failed"
+    },
+    {
+      "id": "AI-03",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-04",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-08",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-09",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-10",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-11",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-12",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-13",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-14",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-15",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-16",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-17",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-18",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-19",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-20",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-21",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-22",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-26",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-27",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-28",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-29",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-30",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-31",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-32",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-33",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-34",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-35",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-36",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-37",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-38",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-39",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-41",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-42",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-43",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-44",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-45",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-46",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    },
+    {
+      "id": "AI-47",
+      "priority": "P1",
+      "file": "lib/feedback-issue.ts",
+      "decision": "간소화",
+      "evidence": "learner guidance map; bounded diagnostics retained separately"
+    }
+  ]
+}

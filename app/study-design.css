@@ -328,15 +328,6 @@ footer {
   align-items: center;
   gap: 14px;
 }
-.assessment-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  font-size: 1rem;
-}
 .assessment-invite h3 {
   font-weight: 600;
 }
@@ -924,7 +915,7 @@ label input, label textarea {
   color: var(--ink);
   font-weight: 500;
 }
-.log-table td small {
+.log-table td small, .log-table .record-note {
   font-size: 0.75rem;
   display: block;
   margin-top: 3px;
@@ -974,7 +965,7 @@ label input, label textarea {
   .assessment-invite>div {
     gap: 10px;
   }
-  .assessment-icon, .word-table th:nth-child(5), .word-table td:nth-child(5) {
+  .word-table th:nth-child(5), .word-table td:nth-child(5) {
     display: none;
   }
   .section-heading>.button-row {
@@ -1393,7 +1384,7 @@ select {
   padding-top: 14px;
   overflow-wrap: anywhere;
 }
-.ai-feedback-result p {
+.ai-feedback-result p, .ai-feedback-result > .feedback-record {
   margin: var(--space-2) 0;
 }
 .feedback-assessments {
@@ -3447,10 +3438,6 @@ p {
 .assessment-invite p {
   font-size: .875rem;
 }
-.assessment-icon {
-  background: var(--accent);
-  color: var(--ink);
-}
 .section-heading {
   margin-bottom: var(--space-4);
   align-items: center;
@@ -4650,3 +4637,11 @@ footer {
 .dialog-word:has(.word-image-preview) { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .word-image-preview { width: 3rem; height: 4rem; object-fit: contain; flex-shrink: 0; border-radius: .4rem; }
 .word-image-learn { display: block; width: auto; max-width: 100%; height: 10rem; object-fit: contain; margin: 0 auto 1rem; border-radius: .6rem; }
+.record-text { overflow-wrap: anywhere; white-space: pre-wrap; min-width: 0; }
+.record-text > p { white-space: pre-wrap; }
+.progress-note > div { flex-wrap: wrap; gap: .5rem; min-width: 0; }
+@media (max-width: 600px) {
+  .settings-dialog .dialog-scroll > label:not(.check-label) { flex-direction: column; align-items: stretch; }
+  .settings-dialog .dialog-scroll > label:not(.check-label) [data-slot=select-trigger] { width: 100%; height: auto; min-height: 2.75rem; white-space: normal; }
+  .settings-dialog [data-slot=select-value] { white-space: normal; -webkit-line-clamp: unset; text-align: left; }
+}

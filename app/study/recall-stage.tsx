@@ -35,9 +35,8 @@ export function RecallStage({
     <>
       <p className="muted">
         {s.stage === "en"
-          ? "영어를 보고 한국어 뜻을 적어 보세요."
-          : "한국어 뜻을 보고 영어를 써 보세요."}{" "}
-        답을 보기 전에 먼저 떠올려요.
+          ? "영어를 보고 뜻을 먼저 써 보세요."
+          : "뜻을 보고 영어 단어를 먼저 써 보세요."}
       </p>
       <div
         className={
@@ -94,15 +93,14 @@ export function RecallStage({
       </form>
       {revealed && (
         <div className="answer-box" aria-live="polite">
-          <p className="eyebrow">정답과 비교해 보세요</p>
+          <p className="eyebrow">내 답과 비교해 보세요</p>
           <h3>
             {s.stage === "en"
               ? s.records[id!]?.meaning || content.meaning
               : word.word}
           </h3>
           <p className="small-note">
-            뜻·품사가 맞으면 다른 표현도 인정해요.
-            도움받은 항목은 다른 단어 두 개 뒤 재시도해요.
+            뜻과 품사가 맞으면 다른 표현도 괜찮아요. 도움받은 단어는 잠시 뒤 다시 떠올려요.
           </p>
           <div className="button-row study-actions">
             <button
@@ -122,7 +120,7 @@ export function RecallStage({
           </div>
           {hint && (
             <p className="small-note">
-              답을 먼저 확인했으므로 이번 결과는 ‘도움 필요’로 기록해요.
+              답을 먼저 봐서 ‘도움 필요’로 기록해요.
             </p>
           )}
         </div>
@@ -132,7 +130,7 @@ export function RecallStage({
         disabled={busy}
         onClick={() => recall("unmeasured")}
       >
-        미측정으로 남기고 다음에
+        이번에는 건너뛰기
       </button>
     </>
   );

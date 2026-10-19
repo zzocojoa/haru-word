@@ -5,10 +5,10 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/state-roundt
 fs.mkdirSync(out, { recursive: true });
 const headers = { 'X-Study-Grammar': '2', 'X-Study-Feedback-Structure': '1', 'X-Study-Sense-Keys': '1' };
 const get = async c => (await c.request.get(base + '/api/state', { headers })).json();
-const saved = page => page.getByText('서버에 저장됨', { exact: true }).waitFor();
+const saved = page => page.getByText('저장됨', { exact: true }).waitFor();
 const work = JSON.parse(fs.readFileSync('data/words.json')).find(w => w.word === 'work' && w.pos === 'v.');
 async function openWork(page) {
-  await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+  await page.getByRole('tab', { name: '단어장', exact: true }).click();
   await page.getByLabel('단어 또는 한국어 뜻 검색').fill('work');
   await page.getByRole('button', { name: 'work 동사', exact: true }).click();
 }
@@ -39,7 +39,7 @@ async function openWork(page) {
       stage = `edit ${meaning}`;
       await openWork(page); const dialog = page.getByRole('dialog');
       await dialog.getByRole('button', { name: '다른 뜻 추가', exact: true }).click();
-      await dialog.getByLabel('오늘의 뜻', { exact: true }).fill(meaning);
+      await dialog.getByLabel('학습할 뜻', { exact: true }).fill(meaning);
       await dialog.getByLabel('함께 익힐 표현', { exact: true }).fill(`literal ${meaning}`);
       await dialog.getByRole('button', { name: '기록 저장', exact: true }).click(); await dialog.waitFor({ state: 'hidden' }); await saved(page);
       await page.reload(); await saved(page);
@@ -82,17 +82,17 @@ async function openWork(page) {
       assert.equal(result.status(), 200, await result.text()); snapshot.revision = (await result.json()).revision;
     }
     const before = await get(limit), lp = await limit.newPage(); diagnosticPage = lp; lp.on('pageerror', e => errors.push(e.message));
-    await lp.goto(base); await saved(lp); await lp.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await lp.goto(base); await saved(lp); await lp.getByRole('tab', { name: '단어장', exact: true }).click();
     await lp.getByRole('button', { name: '개인 단어 추가', exact: true }).click();
     const dialog = lp.getByRole('dialog');
     await dialog.getByLabel('영어 단어', { exact: true }).fill('one-more-word');
-    await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).fill('보관할 초안');
+    await dialog.getByLabel('학습할 한국어 뜻', { exact: true }).fill('보관할 초안');
     const request = lp.waitForResponse(r => r.url().endsWith('/api/state') && r.request().method() === 'PUT');
     await dialog.getByRole('button', { name: '내 단어장에 추가', exact: true }).click();
     assert.equal((await request).status(), 413);
     await dialog.getByRole('alert').filter({ hasText: '5,000개' }).waitFor();
     assert.equal(await dialog.getByLabel('영어 단어', { exact: true }).inputValue(), 'one-more-word');
-    assert.equal(await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).inputValue(), '보관할 초안');
+    assert.equal(await dialog.getByLabel('학습할 한국어 뜻', { exact: true }).inputValue(), '보관할 초안');
     assert.deepEqual(await get(limit), before);
     for (const width of [320, 390, 1440]) {
       await lp.setViewportSize({ width, height: 844 });

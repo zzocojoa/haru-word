@@ -51,7 +51,7 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     assert.equal(seeded.status(), 200, await seeded.text());
     await require('./qa/restore-compat.cjs').legacyRestore(context); const page = await context.newPage(); page.on('pageerror', error => errors.push(error.message));
     page.on('request', request => { if (request.method()==='POST' && request.url().endsWith('/api/state/restore')) posts++; });
-    const saved = () => page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    const saved = () => page.getByText('저장됨', { exact: true }).waitFor();
     const menu = async name => { await page.getByRole('button', { name: '기록 관리', exact: true }).click(); await page.getByRole('menuitem', { name, exact: true }).click(); };
     const file = async raw => { await page.waitForFunction(()=>document.querySelector('input[type=file]')&&!document.querySelector('input[type=file]').disabled); await page.locator('input[type=file]').setInputFiles({ name: 'backup.json', mimeType: 'application/json', buffer: Buffer.from(raw) }); await page.getByRole('table', { name: '현재 기록과 복원할 기록' }).waitFor(); };
     const safety = () => page.getByRole('button', { name: '현재 기록 먼저 백업받기', exact: true });
@@ -61,7 +61,7 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     await page.goto(base); await saved(); await page.getByRole('tab', { name: '학습 기록', exact: true }).click();
     const whole = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); });
     assert.ok(Buffer.byteLength(whole) < MAX_BACKUP_BYTES); assert.deepEqual(parseBackup(whole).state, {...original,grammar:{}});
-    await menu('백업 가져오기'); await file(envelope(emptyState()));
+    await menu('백업으로 복원'); await file(envelope(emptyState()));
 
     // Download failure must never be counted as a saved safety copy.
     await page.evaluate(() => { const original = URL.createObjectURL; URL.createObjectURL = (...args) => { URL.createObjectURL = original; throw new Error('다운로드를 시작하지 못했어요.'); }; });
@@ -75,7 +75,7 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     assert.equal(await page.getByRole('checkbox').isChecked(), false); assert.equal(await page.getByRole('checkbox').isDisabled(), true); assert.equal(await replace().isDisabled(), true);
     const recovery = await download(() => safety().click()); await page.getByRole('checkbox').check(); await confirm();
     assert.equal(Object.keys((await get()).state.sessions).length, 0);
-    await menu('백업 가져오기'); await file(recovery); await download(() => safety().click()); await page.getByRole('checkbox').check(); await confirm();
+    await menu('백업으로 복원'); await file(recovery); await download(() => safety().click()); await page.getByRole('checkbox').check(); await confirm();
     assert.deepEqual((await get()).state, original);
     await page.reload(); await saved(); assert.deepEqual((await get()).state, original);
     checks.push('730 sessions: whole and safety exports are compact and restorable; replace then recover and reload preserves all records');
@@ -90,7 +90,7 @@ const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: 
     const protectedSnapshot = await get(); assert.ok(Buffer.byteLength(envelope(protectedSnapshot.state)) > MAX_BACKUP_BYTES);
     await page.reload(); await saved(); await page.getByRole('tab', { name: '학습 기록', exact: true }).click();
     const archive = await download(async () => { await menu('전체 백업'); await page.getByRole('button',{name:/^(백업 파일 다운로드|원본 보관용 다운로드)$/}).click(); }); assert.deepEqual(JSON.parse(archive).state, {...protectedSnapshot.state,grammar:{}});
-    await menu('백업 가져오기'); await file(envelope(emptyState()));
+    await menu('백업으로 복원'); await file(envelope(emptyState()));
     const beforePosts = posts; let downloads = 0; page.on('download', () => downloads++);
     await page.getByRole('alert').filter({ hasText: '안전 백업을 준비하지 못해' }).waitFor();
     assert.equal(await safety().isDisabled(),true);

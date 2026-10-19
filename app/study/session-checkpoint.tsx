@@ -24,7 +24,7 @@ export function SessionCheckpoint({
           disabled={busy}
           onClick={pauseAndExit}
         >
-          오늘 종료 · 저장
+          저장하고 나가기
         </button>
         <button className="secondary-button" disabled={busy} onClick={resume}>
           다음 묶음 계속

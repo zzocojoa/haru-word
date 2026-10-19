@@ -7,6 +7,7 @@ import { DictionaryLinks } from "./ui";
 import { WordPronunciation } from './word-pronunciation';
 import { ExpressionLine } from "./expression-line";
 import { GrammarTermsHelp, PartOfSpeechLabel } from './grammar-terms';
+import { RecordText } from './record-text';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export type CompletedLessonProps={state:State;words:Word[];date:string;todayDate:string;busy:boolean;onClose:()=>void;onRepeat:(date:string)=>void};
@@ -32,10 +33,10 @@ export function CompletedLesson({state,words,date,busy,onRepeat}:CompletedLesson
   {item&&word&&content?<>{sessions[0]?.kind==='practice'&&<p className="small-note">원래 일일 학습일이 변경되어, 이 다시 학습 회차에 보관된 단어를 보여 드려요.</p>}
    <div className="completed-word"><div className="word-stage compact"><span className="word-index">{word.personal?'개인 추가':`OXFORD ${word.level}`} · <PartOfSpeechLabel pos={word.pos}/></span><h3 lang="en">{word.word}</h3><WordPronunciation word={word} meaning={item.record.meaning}/></div>
     <GrammarTermsHelp pos={word.pos}/>
-    <p className="eyebrow">그날 공부한 뜻</p><p className="review-meaning">{item.record?.meaning||'기록된 뜻이 없어요.'}</p>
+    <p className="eyebrow">그날 공부한 뜻</p><div className="review-meaning"><RecordText text={item.record?.meaning||'기록된 뜻이 없어요.'} label="저장한 뜻" /></div>
     <ExpressionLine expression={content.expression} translation={content.expressionTranslation}/>
     <div className="example-box"><div className="example-label"><BookOpen size={15}/><span>{content.source}</span></div><p lang="en">{content.example}</p><p className="translation">{content.translation}</p>{content.attribution&&<a className="source-credit" href={content.url} target="_blank" rel="noreferrer">{content.attribution}</a>}</div>
-    {(item.record.sentence||item.record.notes)&&<div className="review-my-sentence">{item.record.sentence&&<><b>그날 쓴 내 문장</b><p lang="en">{item.record.sentence}</p></>}{item.record.notes&&<p className="muted">보완점 · {item.record.notes}</p>}</div>}
+    {(item.record.sentence||item.record.notes)&&<div className="review-my-sentence">{item.record.sentence&&<><b>그날 쓴 내 문장</b><div><RecordText text={item.record.sentence} label="내 문장" lang="en" /></div></>}{item.record.notes&&<div className="muted">보완점 · <RecordText text={item.record.notes} label="보완점" /></div>}</div>}
     <DictionaryLinks word={word.word}/>{!word.personal&&<a className="source-credit" href={`/sources/oxford-source.pdf#page=${word.page}`} target="_blank" rel="noreferrer">공식 목록 {word.page}쪽 · {word.level} · {POS[word.pos]}</a>}
    </div><p className="small-note">예문이 없는 이전 기록은 같은 뜻의 단어장 풀이를 참고해요.</p>
 

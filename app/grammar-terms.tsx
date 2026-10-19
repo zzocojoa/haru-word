@@ -8,7 +8,7 @@ export function PartOfSpeechLabel({ pos }: { pos: string }) {
 /** Optional reading help only: no answer, progress or persistence callbacks. */
 export function GrammarTermsHelp({ pos }: { pos?: string }) {
   return <details className="grammar-terms notes-details">
-    <summary>품사·S/V/O 뜻 보기</summary>
+    <summary>품사와 문장 기호 알아보기</summary>
     {pos && POS[pos] && <p className="grammar-current-term">이 단어의 품사: <b>{POS[pos]}</b> · <span lang="en">{POS_ENGLISH[pos]}{POS_ENGLISH[pos] !== pos && ` (${pos})`}</span></p>}
     <p>품사는 단어의 종류, S·V·O는 문장 속 역할을 나타내는 기호예요.</p>
     <dl className="grammar-term-list">

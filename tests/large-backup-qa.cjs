@@ -20,8 +20,8 @@ const envelope=state=>JSON.stringify({format:'haru-words-v1',exportedAt:'2026-09
   assert.equal((await (await c.request.get(base+'/api/state/restore')).json()).maxBytes,20_000_000);
   const page=await c.newPage();page.on('pageerror',e=>errors.push(e.message));const uploaded=[];
   page.on('request',r=>{if(r.method()==='PUT'&&r.url().includes('/chunks/'))uploaded.push(Number(r.url().split('/').at(-1)));});
-  const saved=()=>page.getByText('서버에 저장됨',{exact:true}).waitFor();
-  const open=async()=>{await page.getByRole('tab',{name:'학습 기록',exact:true}).click();await page.getByRole('button',{name:'기록 관리',exact:true}).click();await page.getByRole('menuitem',{name:'백업 가져오기',exact:true}).click().catch(async e=>{fs.writeFileSync(out+'/open-failure.json',JSON.stringify({errors,body:await page.locator('body').innerText()}));throw e;});await page.getByRole('dialog').waitFor();};
+  const saved=()=>page.getByText('저장됨',{exact:true}).waitFor();
+  const open=async()=>{await page.getByRole('tab',{name:'학습 기록',exact:true}).click();await page.getByRole('button',{name:'기록 관리',exact:true}).click();await page.getByRole('menuitem',{name:'백업으로 복원',exact:true}).click().catch(async e=>{fs.writeFileSync(out+'/open-failure.json',JSON.stringify({errors,body:await page.locator('body').innerText()}));throw e;});await page.getByRole('dialog').waitFor();};
   const select=async(text=fileRaw,name='history.json')=>{await page.waitForFunction(()=>document.querySelector('input[type=file]')&&!document.querySelector('input[type=file]').disabled);await page.locator('input[type=file]').setInputFiles({name,mimeType:'application/json',buffer:Buffer.from(text)});await page.getByRole('table',{name:'현재 기록과 복원할 기록'}).waitFor().catch(async e=>{fs.writeFileSync(out+'/failure.json',JSON.stringify({errors,body:await page.locator('body').innerText()}));throw e;});};
   const safety=async()=>{const event=page.waitForEvent('download');await page.getByRole('button',{name:'현재 기록 먼저 백업받기',exact:true}).click();const raw=fs.readFileSync(await (await event).path(),'utf8');await page.getByRole('checkbox').check();return raw;};
   const prepare=()=>page.getByRole('button',{name:'이 백업으로 복원',exact:true}).click();
@@ -45,7 +45,9 @@ const envelope=state=>JSON.stringify({format:'haru-words-v1',exportedAt:'2026-09
   await open();await select(recovery);await safety();await prepare();await page.getByRole('alertdialog').getByRole('button',{name:'취소',exact:true}).click();await page.getByRole('alertdialog').waitFor({state:'hidden'});assert.match(await page.locator('[data-backup-step]').innerText(),/5\/6/);
   for(const width of [320,390,1440]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.equal(await page.locator('.dialog-scroll').evaluate(el=>el.scrollWidth>el.clientWidth+1),false);}
   await page.setViewportSize({width:390,height:844});await page.locator('[data-slot=alert-dialog-overlay]').waitFor({state:'detached'});await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{}))));await page.addScriptTag({path:axePath});const violations=await page.evaluate(async()=>(await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({html:n.html,summary:n.failureSummary}))})));fs.writeFileSync(out+'/accessibility.json',JSON.stringify(violations,null,2));assert.deepEqual(violations,[]);await page.screenshot({path:out+'/restore-mobile.png'});
-  await page.getByRole('button',{name:'기존 복원 작업 취소'}).click();assert.equal((await (await c.request.get(base+'/api/state/restore/jobs')).json()).job,null);assert.deepEqual((await get()).state,incoming);
+  const cancelJob=page.getByRole('button',{name:'기존 복원 작업 취소'});
+  await cancelJob.click();await cancelJob.waitFor({state:'hidden'});
+  assert.equal((await (await c.request.get(base+'/api/state/restore/jobs')).json()).job,null);assert.deepEqual((await get()).state,incoming);
   checks.push('cancel removes staging only; narrow/desktop layouts and automated accessibility pass');
   // Replacing with the original safety copy restores the whole previous history.
   await prepare();await page.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click();await page.getByRole('heading',{name:'백업을 복원했어요.',exact:true}).waitFor();assert.deepEqual((await get()).state,initial);
@@ -65,7 +67,7 @@ const envelope=state=>JSON.stringify({format:'haru-words-v1',exportedAt:'2026-09
   const capacitySnapshot=await (await bc.request.get(base+'/api/state')).json();start=Date.now();
   const capacitySave=await bc.request.put(base+'/api/state',{data:{revision:capacitySnapshot.revision,settings:{...capacitySnapshot.state.settings,dailyGoal:4},progress:{},sessions:{}}});
   assert.equal(capacitySave.status(),200,await capacitySave.text());timings.near20MbSaveMs=Date.now()-start;
-  const bp=await bc.newPage();await bp.goto(base);await bp.getByText('서버에 저장됨',{exact:true}).waitFor();await bp.getByRole('tab',{name:'학습 기록',exact:true}).click();await bp.getByRole('button',{name:'기록 관리',exact:true}).waitFor();await bc.close();
+  const bp=await bc.newPage();await bp.goto(base);await bp.getByText('저장됨',{exact:true}).waitFor();await bp.getByRole('tab',{name:'학습 기록',exact:true}).click();await bp.getByRole('button',{name:'기록 관리',exact:true}).waitFor();await bc.close();
   checks.push('19.9 MB of real record content commits, loads, and renders against the local Worker');
   // API authorization/limits are verified against actual handlers, not UI controls.
   const other=await browser.newContext({extraHTTPHeaders:accountHeaders('large_other')});assert.equal((await other.request.get(base+'/api/state/restore/jobs/'+pending.id)).status(),404);await other.close();

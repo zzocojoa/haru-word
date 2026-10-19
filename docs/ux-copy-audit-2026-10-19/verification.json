@@ -1,0 +1,704 @@
+{
+  "status": "LOCAL_IMPLEMENTATION_VERIFIED",
+  "checkedAt": "2026-10-18T16:25:16.479Z",
+  "base": "85d95ae51e14b2466d1acbf8a39c2416d2f2e326",
+  "branch": "codex/ux-text-improvements",
+  "sourceInputCount": 509,
+  "sourceSha256": "2a76306894f0b1978ac25c159fa0e6b6f9711e8048b0c179ae0f34925f26d6d4",
+  "changedDecisions": 237,
+  "maintainedUiStatements": 1036,
+  "maintainedAiCodes": 9,
+  "protectedDataAndContractFiles": 126,
+  "commands": [
+    {
+      "file": "work/ux-text/unit-node22.log",
+      "sha256": "87c598c38124eeac7e0ef6ddb82c8960ca7c8e0d9d2d7518db147f474f8d9523",
+      "exitCode": 0
+    },
+    {
+      "file": "work/ux-text/unit-node24.log",
+      "sha256": "c804f60eac137ec9be003ed7f3e521b52d4051707d9332727b23c6dc65fd05a6",
+      "exitCode": 0
+    },
+    {
+      "file": "work/ux-text/typecheck-final.log",
+      "sha256": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+      "exitCode": 0
+    },
+    {
+      "file": "work/ux-text/lint-completion.log",
+      "sha256": "29e95fb7b99096ddac09e1fde9df10b167d3efd0a7c0ee6ce5806ca568886a5d",
+      "exitCode": 0
+    },
+    {
+      "file": "work/ux-text/build-complete.log",
+      "sha256": "f646a3d53c627b739828faf31cae48f102f40c541cce195bd0279b12ca3323c3",
+      "exitCode": 0
+    },
+    {
+      "file": "work/ux-text/grammar-review.log",
+      "sha256": "fd8d23311e1a50d708a0dd36db40c5f40bbd95e121142abe9f16d6e06d474a01",
+      "exitCode": 0
+    }
+  ],
+  "browserSuiteRuns": 38,
+  "browser": [
+    {
+      "name": "ux-text",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792340544730,
+      "log": "work/ux-text/chromium-ux-text-1792340544730.log",
+      "sha256": "832d350e410a39ef18238657d3ef79369eaeb0336e8107a8ccb77b7e89831845",
+      "checks": [
+        "load network failure uses Korean recovery guidance, does not claim saved, and explicit retry recovers",
+        "save-and-leave waits for acknowledgment, keeps assessment/drafts on failure, offers backup/retry, and exits only after success",
+        "320/390px at 100/200%: consistent tabs, Korean close name, truthful settings, no horizontal overflow, axe and state/revision unchanged",
+        "real saved history: mobile cards and desktop table disclose complete original long sentences/notes without modifying state or revision",
+        "completed lesson replay also discloses the original sentence and notes without a write",
+        "isolated real components: reload explains unsaved/busy guards; keyboard disclosure restores every original character safely",
+        "anonymous first visit has truthful sign-in guidance, no saved claim, and preserved source/license links"
+      ]
+    },
+    {
+      "name": "state-roundtrip",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339210800,
+      "log": "work/ux-text/chromium-state-roundtrip-1792339210800.log",
+      "sha256": "644338e8ed86c0dab030f703d55f58df8d07151166a43c450dda78ac5758eefc",
+      "checks": [
+        "literal reserved senses: UI editing, saving, reload, validated export, actual restore and sense switching",
+        "5001st entry rejected by real server; modal explains the limit and retains input; original account/revision unchanged; 320/390/1440px and axe",
+        "all three contexts and reloads use local empty font CSS; no external font files"
+      ]
+    },
+    {
+      "name": "image-practice-resume",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339217605,
+      "log": "work/ux-text/chromium-image-practice-resume-1792339217605.log",
+      "sha256": "b84596386220dd93312d8f6ebe233f0b0bba4a562dec10a50494c6f1f733256c",
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ]
+    },
+    {
+      "name": "familiarity-reveal",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339343590,
+      "log": "work/ux-text/chromium-familiarity-reveal-1792339343590.log",
+      "sha256": "955f6fe78aecc54e90ae5673839fb45b4275957e42dc91c93a8d209d1481f483",
+      "checks": [
+        "first presentation omits the meaning and dictionary links, including in the rendered card DOM",
+        "keyboard reveal compares the committed guess with the meaning without advancing or grading",
+        "another device restores the revealed meaning and the original pre-reveal guess",
+        "mismatched meaning becomes uncertain and the next word starts concealed with an empty guess",
+        "new words remain new after reading the answer and cannot become known immediately",
+        "a correct mental guess can be confirmed without making typing compulsory or fabricating recall scores",
+        "failed reveal save blocks confirmation until retry succeeds",
+        "server validation rejects promoting a previously new answer after reveal"
+      ]
+    },
+    {
+      "name": "backup",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339668522,
+      "log": "work/ux-text/chromium-backup-1792339668522.log",
+      "sha256": "c07f9c768734e73f3458d064cb4dd5efb3e52b0fd7bba74948dd6e56395c4c9b",
+      "checks": [
+        "invalid JSON, unsupported version and broken references never reach the restore endpoint",
+        "preview shows exact impact; narrow screens, 200% text, backup download, required acknowledgment and cancel preserve data",
+        "confirmed restore atomically replaces settings, personal words, material, results, notes and resumable drafts",
+        "another device resumes the exact draft; an open lesson must save and return home before importing",
+        "stale revision refuses replacement and requires a server refresh before any new save",
+        "legacy backup is supported; a lost post-commit response is reconciled by GET without repeating replacement",
+        "server failure preserves current records and exposes a recovery path",
+        "a 3 MB+ UTF-8 backup crosses D1 chunk boundaries and restores all 650 records through the real Worker",
+        "explicitly confirmed empty backup removes only this synthetic account’s study records"
+      ]
+    },
+    {
+      "name": "backup-safety",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339677875,
+      "log": "work/ux-text/chromium-backup-safety-1792339677875.log",
+      "sha256": "7d30b297cd92da4121883b48335aa2668d4bb6b1a4c306a45928d0dcddbda7c3",
+      "checks": [
+        "changing the current snapshot invalidates an approved safety copy even inside final confirmation",
+        "730 sessions: whole and safety exports are compact and restorable; replace then recover and reload preserves all records",
+        "failed download blocks replacement; retry succeeds; changing the selected file resets proof and acknowledgment",
+        "valid accumulated records exceeding 8 MB block safety approval and replacement, keep server state unchanged, and remain exportable as an archive",
+        "blocked-state mobile/desktop layout and automated accessibility pass"
+      ]
+    },
+    {
+      "name": "backup-workflow",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339696992,
+      "log": "work/ux-text/chromium-backup-workflow-1792339696992.log",
+      "sha256": "8c2734e0c1d74ef49e6e2d62f8ec02420cd659849e298cc3eeddede02ac3831d",
+      "checks": [
+        "safety size/count/restorability precede downloading; keyboard download/acknowledgment, focus trap, 200% text and 320–1440 px work",
+        "revision conflicts before and after upload lead to a fresh server snapshot and discard obsolete staging only",
+        "an uncertain commit disables cancellation/replacement; server reload confirms the saved result without another commit",
+        "post-commit saves are included in the reloaded state and success counts; sentences, scores, settings and incomplete drafts survive"
+      ]
+    },
+    {
+      "name": "grammar-ui",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339701195,
+      "log": "work/ux-text/chromium-grammar-ui-1792339701195.log",
+      "sha256": "82ae5cc75b90133053910d87414773791998a744f346e151caaa3a472c4b6ac1",
+      "checks": [
+        "catalog: 320–1440px, 200% text, axe",
+        "feedback: 320–1440px, 200% text, axe",
+        "status filters, keyboard selection, feedback and stored results remain consistent",
+        "empty filter provides a route back to all lessons",
+        "stage-0: 320–1440px, 200% text, axe",
+        "stage-1: 320–1440px, 200% text, axe",
+        "stage-3: 320–1440px, 200% text, axe",
+        "stage-4: 320–1440px, 200% text, axe",
+        "stage-5: 320–1440px, 200% text, axe",
+        "stage-6: 320–1440px, 200% text, axe"
+      ]
+    },
+    {
+      "name": "grammar-v4-compat",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339709773,
+      "log": "work/ux-text/chromium-grammar-v4-compat-1792339709773.log",
+      "sha256": "2a87dc758d1600d48419c9a4f80c34672481f9677574de1b6c46583a5330a95b",
+      "checks": [
+        "PASS flag new=4 existing4 resumes, mixed review retains first answers/schedule, reconnect, provider0"
+      ]
+    },
+    {
+      "name": "grammar-mixed",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339863693,
+      "log": "work/ux-text/chromium-grammar-mixed-1792339863693.log",
+      "sha256": "b3ec3dbbe971e1bffc7fef7ce6cd9e5d1e76ed9991b9f22b78a60f2377dc6e9a",
+      "checks": [
+        "PASS v3 three now positions, final punctuation/casing, 320/390/1440/200%, keyboard/axe and persisted first answers",
+        "PASS v1/v2 pinned, legacy now explanation, 320/390/1440/200%, keyboard/axe, failed save retry and reconnect"
+      ]
+    },
+    {
+      "name": "feedback-issue",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339850986,
+      "log": "work/ux-text/chromium-feedback-issue-1792339850986.log",
+      "sha256": "32b22ad041356d59b7cb8207c85e06e761490581c81a87881e6aba4a2b7b7aad",
+      "checks": [
+        "sentence: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "sentence: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks",
+        "grammar: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "grammar: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks"
+      ]
+    },
+    {
+      "name": "journal-navigation",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339871165,
+      "log": "work/ux-text/chromium-journal-navigation-1792339871165.log",
+      "sha256": "6318556d5be26af2748f63b5062b057347d9c89d853372e046426b962eedecbf",
+      "checks": [
+        "same-day attempts share one date heading, with accurate attempt and type counts and no double-counted word total",
+        "keyboard disclosure, one-word expansion, all outcomes, notes, saved AI feedback and warmup remain reachable",
+        "tab return preserves both disclosures; changing date closes its attempts; the correct practice and weekly resume actions remain reachable",
+        "pagination keeps dates whole; all 23 dates and 26 attempts remain reachable; filtering updates counts and preserves original attempt numbers",
+        "collapsed and unloaded records are included in exports; browsing does not write or alter the server state",
+        "320–1440 px, 200% text, reduced motion and desktop comparison table remain usable",
+        "correcting a date from the grouped journal moves only the chosen attempt; date counts update immediately and after reload while scores and other attempts remain intact"
+      ]
+    },
+    {
+      "name": "lazy-materials",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339713110,
+      "log": "work/ux-text/chromium-lazy-materials-1792339713110.log",
+      "sha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42",
+      "checks": [
+        "initial saved screen requests neither full examples nor image index",
+        "word list and search request neither full examples, image index nor grammar lessons",
+        "editor entry and textbook failures recover without saving; accessible loading/error header, unload cancellation and late-close protection; list state retained",
+        "closing an in-flight image module is safe; reopening reveals approved images without saves"
+      ]
+    },
+    {
+      "name": "response-contract",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339717268,
+      "log": "work/ux-text/chromium-response-contract-1792339717268.log",
+      "sha256": "a6494485275f3042efa75e1ff2f8071b86a8b5f55e64b60a7dfc28c13e2c28b2",
+      "checks": [
+        "invalid success keeps draft and unsaved state; no retry; explicit reconciliation restores the committed state"
+      ]
+    },
+    {
+      "name": "request-timeout",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792340550111,
+      "log": "work/ux-text/chromium-request-timeout-1792340550111.log",
+      "sha256": "d66f8a567d14dd6843d05609c9c05807f58c1f6dec42811ab12a8a528c054ded",
+      "checks": [
+        "20-second load timeout releases loading state; explicit retry fetches the account without automatic retries",
+        "25-second save timeout retains the pending goal and downloadable state; a manual retry commits exactly once",
+        "post-commit save timeout cannot duplicate or overwrite data; revision conflict and refresh reconcile the saved goal",
+        "35-second AI timeout unlocks editing and self-check, ignores late replies, preserves proficiency and never calls Google again automatically",
+        "45-second restore timeout keeps writes blocked until the existing server state is verified"
+      ]
+    },
+    {
+      "name": "settings-dialog",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792340556609,
+      "log": "work/ux-text/chromium-settings-dialog-1792340556609.log",
+      "sha256": "e0313ce371ebf45c6b5ee6d8f05f691e7ef642a37d08c89bcee60472d03d9ab6",
+      "checks": [
+        "five widths × 100/200% text: translucent overlay, separated rows, 44px controls and fixed close/header",
+        "clock wait/failure is visible inside the modal; retry unlocks settings without closing or reloading",
+        "save pending/error/retry stays in the dialog, no duplicate error banner, goal 10 persists",
+        "conflict backup/cancel/explicit reload preserve historical scores and remote settings across reconnect"
+      ]
+    },
+    {
+      "name": "sentence-feedback",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339907983,
+      "log": "work/ux-text/chromium-sentence-feedback-1792339907983.log",
+      "sha256": "ad7a9cc983392b7e085a342534caca421b0d576c309ee663b33825410ea82ee2",
+      "checks": [
+        "explicit request locks duplicate actions, stores original and correction, and preserves proficiency",
+        "mobile feedback is readable without horizontal overflow",
+        "another device restores feedback without a new AI request",
+        "applying a suggestion neither passes the word nor presents old feedback as a fresh review",
+        "quota failure retains the draft and leaves manual completion available with no automatic retry",
+        "failed feedback persistence retains the result and retries saving without another provider call",
+        "history and CSV retain AI comments while grammar remediation stays separate from familiarity and recall"
+      ]
+    },
+    {
+      "name": "draft-interaction",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339911652,
+      "log": "work/ux-text/chromium-draft-interaction-1792339911652.log",
+      "sha256": "d855744e852bd9a86f585309a6f1488be89e5924fd50360d5cbfdc935a45ea57",
+      "checks": [
+        "warmup: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "en: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "ko: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "ko retry: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "empty-answer reveal stays hinted after reload and never enables independent success",
+        "clock resynchronization independently blocks grading, then unlocks without resetting the answer"
+      ]
+    },
+    {
+      "name": "sheet-dismiss",
+      "engine": "chromium",
+      "exitCode": 0,
+      "attempt": 1792339918250,
+      "log": "work/ux-text/chromium-sheet-dismiss-1792339918250.log",
+      "sha256": "e696558fc1933a2886feae1ffc18353857dca2fd24e1381cc273543c50ff1995",
+      "checks": [
+        "settings: cancel/short/up/horizontal/multitouch/resize and upward body gestures excluded; reduced motion, fixed chrome, 5 widths and 200% text; desktop unchanged",
+        "all 9 sheets dismiss without changing learner state; focus/filter restored",
+        "downward, horizontal Back and X share discard confirmation; cancel stays usable during horizontal guard; no discarded edits saved",
+        "keyboard-open gesture does not dismiss personal draft; Escape uses the same protection",
+        "saving blocks gesture/X/Escape; failure retains input; retry preserves historical grades",
+        "date edit confirms discard and blocks dismissal until its submitted save finishes",
+        "restore confirmation excluded; server commit cannot dismiss; completed restore can close with exact data preserved"
+      ]
+    },
+    {
+      "name": "ux-text",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340497830,
+      "log": "work/ux-text/webkit-ux-text-1792340497830.log",
+      "sha256": "84796fd5f3a70e5ec6f5faeabe9910926275f67f7ce4628b308bdc85fc661b2d",
+      "checks": [
+        "load network failure uses Korean recovery guidance, does not claim saved, and explicit retry recovers",
+        "save-and-leave waits for acknowledgment, keeps assessment/drafts on failure, offers backup/retry, and exits only after success",
+        "320/390px at 100/200%: consistent tabs, Korean close name, truthful settings, no horizontal overflow, axe and state/revision unchanged",
+        "real saved history: mobile cards and desktop table disclose complete original long sentences/notes without modifying state or revision",
+        "completed lesson replay also discloses the original sentence and notes without a write",
+        "isolated real components: reload explains unsaved/busy guards; keyboard disclosure restores every original character safely",
+        "anonymous first visit has truthful sign-in guidance, no saved claim, and preserved source/license links"
+      ]
+    },
+    {
+      "name": "state-roundtrip",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340046535,
+      "log": "work/ux-text/webkit-state-roundtrip-1792340046535.log",
+      "sha256": "78d68273713e837c8550022778f8b8047928a99ddca404ea29b0e89cb3e59c34",
+      "checks": [
+        "literal reserved senses: UI editing, saving, reload, validated export, actual restore and sense switching",
+        "5001st entry rejected by real server; modal explains the limit and retains input; original account/revision unchanged; 320/390/1440px and axe",
+        "all three contexts and reloads use local empty font CSS; no external font files"
+      ]
+    },
+    {
+      "name": "image-practice-resume",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340056294,
+      "log": "work/ux-text/webkit-image-practice-resume-1792340056294.log",
+      "sha256": "f6b77dc4000a08882159645156c9bafabdfb610ca6442b04c134a18fb2c2959a",
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ]
+    },
+    {
+      "name": "familiarity-reveal",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340205254,
+      "log": "work/ux-text/webkit-familiarity-reveal-1792340205254.log",
+      "sha256": "955f6fe78aecc54e90ae5673839fb45b4275957e42dc91c93a8d209d1481f483",
+      "checks": [
+        "first presentation omits the meaning and dictionary links, including in the rendered card DOM",
+        "keyboard reveal compares the committed guess with the meaning without advancing or grading",
+        "another device restores the revealed meaning and the original pre-reveal guess",
+        "mismatched meaning becomes uncertain and the next word starts concealed with an empty guess",
+        "new words remain new after reading the answer and cannot become known immediately",
+        "a correct mental guess can be confirmed without making typing compulsory or fabricating recall scores",
+        "failed reveal save blocks confirmation until retry succeeds",
+        "server validation rejects promoting a previously new answer after reveal"
+      ]
+    },
+    {
+      "name": "backup",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340209138,
+      "log": "work/ux-text/webkit-backup-1792340209138.log",
+      "sha256": "f52919cc9b49eeee76c71cec4f249e01657317bf3f754c79063838e253ab95ce",
+      "checks": [
+        "invalid JSON, unsupported version and broken references never reach the restore endpoint",
+        "preview shows exact impact; narrow screens, 200% text, backup download, required acknowledgment and cancel preserve data",
+        "confirmed restore atomically replaces settings, personal words, material, results, notes and resumable drafts",
+        "another device resumes the exact draft; an open lesson must save and return home before importing",
+        "stale revision refuses replacement and requires a server refresh before any new save",
+        "legacy backup is supported; a lost post-commit response is reconciled by GET without repeating replacement",
+        "server failure preserves current records and exposes a recovery path",
+        "a 3 MB+ UTF-8 backup crosses D1 chunk boundaries and restores all 650 records through the real Worker",
+        "explicitly confirmed empty backup removes only this synthetic account’s study records"
+      ]
+    },
+    {
+      "name": "backup-safety",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340226805,
+      "log": "work/ux-text/webkit-backup-safety-1792340226805.log",
+      "sha256": "7d30b297cd92da4121883b48335aa2668d4bb6b1a4c306a45928d0dcddbda7c3",
+      "checks": [
+        "changing the current snapshot invalidates an approved safety copy even inside final confirmation",
+        "730 sessions: whole and safety exports are compact and restorable; replace then recover and reload preserves all records",
+        "failed download blocks replacement; retry succeeds; changing the selected file resets proof and acknowledgment",
+        "valid accumulated records exceeding 8 MB block safety approval and replacement, keep server state unchanged, and remain exportable as an archive",
+        "blocked-state mobile/desktop layout and automated accessibility pass"
+      ]
+    },
+    {
+      "name": "backup-workflow",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340247828,
+      "log": "work/ux-text/webkit-backup-workflow-1792340247828.log",
+      "sha256": "8c2734e0c1d74ef49e6e2d62f8ec02420cd659849e298cc3eeddede02ac3831d",
+      "checks": [
+        "safety size/count/restorability precede downloading; keyboard download/acknowledgment, focus trap, 200% text and 320–1440 px work",
+        "revision conflicts before and after upload lead to a fresh server snapshot and discard obsolete staging only",
+        "an uncertain commit disables cancellation/replacement; server reload confirms the saved result without another commit",
+        "post-commit saves are included in the reloaded state and success counts; sentences, scores, settings and incomplete drafts survive"
+      ]
+    },
+    {
+      "name": "grammar-ui",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340255139,
+      "log": "work/ux-text/webkit-grammar-ui-1792340255139.log",
+      "sha256": "82ae5cc75b90133053910d87414773791998a744f346e151caaa3a472c4b6ac1",
+      "checks": [
+        "catalog: 320–1440px, 200% text, axe",
+        "feedback: 320–1440px, 200% text, axe",
+        "status filters, keyboard selection, feedback and stored results remain consistent",
+        "empty filter provides a route back to all lessons",
+        "stage-0: 320–1440px, 200% text, axe",
+        "stage-1: 320–1440px, 200% text, axe",
+        "stage-3: 320–1440px, 200% text, axe",
+        "stage-4: 320–1440px, 200% text, axe",
+        "stage-5: 320–1440px, 200% text, axe",
+        "stage-6: 320–1440px, 200% text, axe"
+      ]
+    },
+    {
+      "name": "grammar-v4-compat",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340270144,
+      "log": "work/ux-text/webkit-grammar-v4-compat-1792340270144.log",
+      "sha256": "2a87dc758d1600d48419c9a4f80c34672481f9677574de1b6c46583a5330a95b",
+      "checks": [
+        "PASS flag new=4 existing4 resumes, mixed review retains first answers/schedule, reconnect, provider0"
+      ]
+    },
+    {
+      "name": "grammar-mixed",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340275280,
+      "log": "work/ux-text/webkit-grammar-mixed-1792340275280.log",
+      "sha256": "b3ec3dbbe971e1bffc7fef7ce6cd9e5d1e76ed9991b9f22b78a60f2377dc6e9a",
+      "checks": [
+        "PASS v3 three now positions, final punctuation/casing, 320/390/1440/200%, keyboard/axe and persisted first answers",
+        "PASS v1/v2 pinned, legacy now explanation, 320/390/1440/200%, keyboard/axe, failed save retry and reconnect"
+      ]
+    },
+    {
+      "name": "feedback-issue",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340288079,
+      "log": "work/ux-text/webkit-feedback-issue-1792340288079.log",
+      "sha256": "f2d587652d2c6b3fd44ead4c839bceb1e42e9261cc564c4f5e042184fc7837d8",
+      "checks": [
+        "sentence: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "sentence: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks",
+        "grammar: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "grammar: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks"
+      ]
+    },
+    {
+      "name": "journal-navigation",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340314947,
+      "log": "work/ux-text/webkit-journal-navigation-1792340314947.log",
+      "sha256": "6318556d5be26af2748f63b5062b057347d9c89d853372e046426b962eedecbf",
+      "checks": [
+        "same-day attempts share one date heading, with accurate attempt and type counts and no double-counted word total",
+        "keyboard disclosure, one-word expansion, all outcomes, notes, saved AI feedback and warmup remain reachable",
+        "tab return preserves both disclosures; changing date closes its attempts; the correct practice and weekly resume actions remain reachable",
+        "pagination keeps dates whole; all 23 dates and 26 attempts remain reachable; filtering updates counts and preserves original attempt numbers",
+        "collapsed and unloaded records are included in exports; browsing does not write or alter the server state",
+        "320–1440 px, 200% text, reduced motion and desktop comparison table remain usable",
+        "correcting a date from the grouped journal moves only the chosen attempt; date counts update immediately and after reload while scores and other attempts remain intact"
+      ]
+    },
+    {
+      "name": "lazy-materials",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340323305,
+      "log": "work/ux-text/webkit-lazy-materials-1792340323305.log",
+      "sha256": "7a34a7e6e81502a68271ac95e921816ce3056e29e60bae68dcbb0f6672bffd42",
+      "checks": [
+        "initial saved screen requests neither full examples nor image index",
+        "word list and search request neither full examples, image index nor grammar lessons",
+        "editor entry and textbook failures recover without saving; accessible loading/error header, unload cancellation and late-close protection; list state retained",
+        "closing an in-flight image module is safe; reopening reveals approved images without saves"
+      ]
+    },
+    {
+      "name": "response-contract",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340329795,
+      "log": "work/ux-text/webkit-response-contract-1792340329795.log",
+      "sha256": "a6494485275f3042efa75e1ff2f8071b86a8b5f55e64b60a7dfc28c13e2c28b2",
+      "checks": [
+        "invalid success keeps draft and unsaved state; no retry; explicit reconciliation restores the committed state"
+      ]
+    },
+    {
+      "name": "request-timeout",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340432288,
+      "log": "work/ux-text/webkit-request-timeout-1792340432288.log",
+      "sha256": "d66f8a567d14dd6843d05609c9c05807f58c1f6dec42811ab12a8a528c054ded",
+      "checks": [
+        "20-second load timeout releases loading state; explicit retry fetches the account without automatic retries",
+        "25-second save timeout retains the pending goal and downloadable state; a manual retry commits exactly once",
+        "post-commit save timeout cannot duplicate or overwrite data; revision conflict and refresh reconcile the saved goal",
+        "35-second AI timeout unlocks editing and self-check, ignores late replies, preserves proficiency and never calls Google again automatically",
+        "45-second restore timeout keeps writes blocked until the existing server state is verified"
+      ]
+    },
+    {
+      "name": "settings-dialog",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340442235,
+      "log": "work/ux-text/webkit-settings-dialog-1792340442235.log",
+      "sha256": "e0313ce371ebf45c6b5ee6d8f05f691e7ef642a37d08c89bcee60472d03d9ab6",
+      "checks": [
+        "five widths × 100/200% text: translucent overlay, separated rows, 44px controls and fixed close/header",
+        "clock wait/failure is visible inside the modal; retry unlocks settings without closing or reloading",
+        "save pending/error/retry stays in the dialog, no duplicate error banner, goal 10 persists",
+        "conflict backup/cancel/explicit reload preserve historical scores and remote settings across reconnect"
+      ]
+    },
+    {
+      "name": "sentence-feedback",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340449180,
+      "log": "work/ux-text/webkit-sentence-feedback-1792340449180.log",
+      "sha256": "ad7a9cc983392b7e085a342534caca421b0d576c309ee663b33825410ea82ee2",
+      "checks": [
+        "explicit request locks duplicate actions, stores original and correction, and preserves proficiency",
+        "mobile feedback is readable without horizontal overflow",
+        "another device restores feedback without a new AI request",
+        "applying a suggestion neither passes the word nor presents old feedback as a fresh review",
+        "quota failure retains the draft and leaves manual completion available with no automatic retry",
+        "failed feedback persistence retains the result and retries saving without another provider call",
+        "history and CSV retain AI comments while grammar remediation stays separate from familiarity and recall"
+      ]
+    },
+    {
+      "name": "draft-interaction",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340455013,
+      "log": "work/ux-text/webkit-draft-interaction-1792340455013.log",
+      "sha256": "ff97bf6d188bedbfd04105d1efe73023d0fa5db547da47e4c0915fde7cd31e77",
+      "checks": [
+        "warmup: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "en: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "ko: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "ko retry: pending/failed save blocks grading; acknowledged save unlocks, preserves ungraded draft and resumes revealed answer",
+        "empty-answer reveal stays hinted after reload and never enables independent success",
+        "clock resynchronization independently blocks grading, then unlocks without resetting the answer"
+      ]
+    },
+    {
+      "name": "sheet-dismiss",
+      "engine": "webkit",
+      "exitCode": 0,
+      "attempt": 1792340468356,
+      "log": "work/ux-text/webkit-sheet-dismiss-1792340468356.log",
+      "sha256": "c1a8cfc8e5f72c7841d60142259f09bfb880483c01c39ed6da7a331ac4ee85b1",
+      "checks": [
+        "settings: cancel/short/up/horizontal/multitouch/resize and upward body gestures excluded; reduced motion, fixed chrome, 5 widths and 200% text; desktop unchanged",
+        "all 9 sheets dismiss without changing learner state; focus/filter restored",
+        "downward, horizontal Back and X share discard confirmation; cancel stays usable during horizontal guard; no discarded edits saved",
+        "keyboard-open gesture does not dismiss personal draft; Escape uses the same protection",
+        "saving blocks gesture/X/Escape; failure retains input; retry preserves historical grades",
+        "date edit confirms discard and blocks dismissal until its submitted save finishes",
+        "restore confirmation excluded; server commit cannot dismiss; completed restore can close with exact data preserved"
+      ]
+    }
+  ],
+  "failedAttemptsPreserved": [
+    {
+      "name": "familiarity-reveal",
+      "engine": "chromium",
+      "attempt": 1792339230318,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text/chromium-familiarity-reveal-1792339230318.log"
+    },
+    {
+      "name": "backup",
+      "engine": "chromium",
+      "attempt": 1792339345964,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text/chromium-backup-1792339345964.log"
+    },
+    {
+      "name": "familiarity-reveal",
+      "engine": "webkit",
+      "attempt": 1792340083623,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text/webkit-familiarity-reveal-1792340083623.log"
+    },
+    {
+      "name": "request-timeout",
+      "engine": "webkit",
+      "attempt": 1792340333051,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text/webkit-request-timeout-1792340333051.log"
+    },
+    {
+      "name": "request-timeout",
+      "engine": "webkit",
+      "attempt": 1792340370497,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text/webkit-request-timeout-1792340370497.log"
+    },
+    {
+      "name": "request-timeout",
+      "engine": "webkit",
+      "attempt": 1792340406160,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text/webkit-request-timeout-1792340406160.log"
+    }
+  ],
+  "productionVersionUnchanged": 139,
+  "deployed": false,
+  "settingsChanged": false,
+  "committed": false,
+  "pushed": false,
+  "startupCause": "UNKNOWN",
+  "historical401Cause": "UNKNOWN",
+  "limitations": [
+    "Emulation and automated accessibility/keyboard checks, not physical iPhone/VoiceOver",
+    "No real AI, production learner records or user learning-effectiveness study",
+    "Selected relevant browser suites; not the entire browser/performance manifest",
+    "Local Wrangler exited twice after image QA; root cause unconfirmed, subsequent suite rerun after verified restart"
+  ]
+}

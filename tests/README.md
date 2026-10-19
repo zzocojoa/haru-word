@@ -1,5 +1,11 @@
 # 학습 앱 검증
 
+- `ux-text.test.mjs`: UI 표시와 저장 계약의 분리를 검사한다. 두 AI 전송 고지·이미지 위치의 조회 실패/저장 결과 미확인, AI 오류 47종의 안전한 진단·학습자 안내, 상세/단독 출처의 참고 고지, 양방향 회상 정답 은닉과 도움 사용, 긴 원문 보존, CSV 24개 열과 기존 결과 값을 확인한다.
+- `ux-text-qa.cjs`: built loopback Worker·가상 계정에서 조회 실패/재시도, 친숙도 저장 성공 전 이탈 차단, 실패 시 입력 백업·재시도, 친숙도 진행/완료·단어 준비의 복원 차단 안내, 모바일 320/390px와 100/200% 글자, 한국어 닫기, 설정 선택값 줄바꿈을 검사한다. 긴 뜻·문장·메모·과거 AI 입력/제안/설명을 모바일/데스크톱에서 펼쳐 원문·state/revision 보존을 확인한다. 실제 컴포넌트 fixture로 재로딩 차단 이유와 키보드 `더 보기`도 확인한다. `QA_BROWSER=chromium` 또는 `webkit`으로 `node tests/ux-text-qa.cjs`를 실행한다. 결과는 `outputs/ux-text/<engine>/`에 남는다. 실제 iPhone/VoiceOver 검사는 아니다.
+- 이번 문구 개선의 관련 회귀 묶음·환경·결과·한계는 [UI 구현 기록](../docs/UX_TEXT_IMPLEMENTATION_2026-10-19.md)을 따른다. 테스트 선택자는 새 UI 이름을 사용하며 쓰기 수·성적·revision·백업 보호 조건은 유지한다.
+- PR 최종 검토에서 `ux-text-qa.cjs`에 짧은 기록의 문단 경계 검사를 추가했다. 교정문이 없는 AI 원문/설명, 완료 기록 제목/문장, 데스크톱 표의 개선 상태/메모가 서로 다른 줄인지 실제 좌표로 검사하고 state/revision 무변경을 확인한다. 수정 전 WebKit 실패와 수정 후 두 엔진의 통과는 [최종 검증 기록](../docs/ux-copy-audit-2026-10-19/final-review.json)에 남긴다.
+- [계획 대조 검토](../docs/UX_TEXT_PLAN_REVIEW_2026-10-19.md)의 10개 실행과 예전 `sentence-feedback-layout-qa.cjs` 실패는 당시 이력이다. 후속 [광역 로직 검토](../docs/UX_TEXT_WIDE_REVIEW_2026-10-19.md)는 해당 검사를 현재 AI 구조 비노출·원문 보존 계약으로 보완하고, 당시 런타임의 manifest83파일을 기능156·별도 프로필10·성능6조건으로 검증했다. [광역 실행 근거](../docs/ux-copy-audit-2026-10-19/wide-review.json)는 각 검사/소스/로그 지문과 한계를 포함한다. 성능 모음은 기능 모음과 분리해 순차 실행했다. 위 문단 경계 수정 후에는 영향 범위 검사를 다시 실행했으며 광역 172조건 전체의 재실행으로 계산하지 않는다.
+
 - `card-retirement-qa.cjs`: 종료된 영어 카드 메뉴·정적 화면 제거, 이전 `/cards` 주소의 학습 홈 이동, 기존 카드 API 7개 메서드의 410 응답, 학습 문서/revision 불변·단어 검색·재접속을 로컬 가상 계정에서 검사한다. `QA_BROWSER=webkit`도 지원한다. 실제 AI·카카오 호출은 없다.
 
 - `image-practice-position-api.test.mjs` / `image-practice-position.test.mjs`: 독립 위치 API의 무쓰기 GET·인증·계정·출처·1KB 스트림 제한·동시 revision 충돌과 클라이언트의 직렬 저장·최신 대기 위치·응답 유실·시간 초과·충돌 선택·계정 전환·손상/차단 캐시를 검사한다. 같은 중간 카드를 다른 탭/기기가 저장한 경우의 재시도·재개, 최종 위치 동일 시 GET만으로 복구, 원격 선택 전/후의 다른 탭 초안 순서와 선택 실패·취소도 포함한다.

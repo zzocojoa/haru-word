@@ -40,17 +40,17 @@ export function GrammarQuestion({ question, legacyNote, answer, hinted, clued, c
         </button>;
       })}</div>}
     {question.kind === 'choice' && <button className="secondary-button" disabled={disabled || !selectedChoice || selectedChoice === answer?.latest} onClick={() => onAnswer(selectedChoice)}>답 확인</button>}
-    {question.clue && onClue && <button className="text-button grammar-hint" disabled={disabled || clued} onClick={onClue}><CircleHelp size={17} aria-hidden="true" />생각할 단서</button>}
+    {question.clue && onClue && <button className="text-button grammar-hint" disabled={disabled || clued} onClick={onClue}><CircleHelp size={17} aria-hidden="true" />힌트 보기</button>}
     {clued && !hinted && question.clue && <p className="grammar-message">{question.clue}</p>}
     <button className="text-button grammar-hint" disabled={disabled || hinted} onClick={onHint}>
-      <CircleHelp size={17} aria-hidden="true" />답을 보고 도움받기
+      <CircleHelp size={17} aria-hidden="true" />답 보기 · 도움으로 기록
     </button>
     {(answer || hinted) && <div className="grammar-feedback" data-tone={answer ? correct ? 'success' : 'review' : 'neutral'} role="status">
       <b className="grammar-feedback-title">
         {correct ? <CheckCircle2 size={19} aria-hidden="true" /> : <CircleHelp size={19} aria-hidden="true" />}{feedbackTitle}
       </b>
       {hinted && <p>답: <span>{question.answer}</span></p>}
-      {answer && <p className="small-note">처음 답: {answer.first} · {firstAnswerLabel(question, answer)}{answer.attempts > 1 ? ` · ${answer.attempts}번 시도` : ''}</p>}
+      {answer && <p className="small-note">첫 답: {answer.first} · {firstAnswerLabel(question, answer)}{answer.attempts > 1 ? ` · ${answer.attempts}번 시도` : ''}</p>}
       <p>{answer && !correct ? question.wrong?.[answer.latest] ?? question.explanation : question.explanation}</p>
       {legacyNote&&<p className="small-note">{legacyNote}</p>}
     </div>}
@@ -69,8 +69,8 @@ function OrderAnswer({ question, answer, selection, onOrder, onAnswer, disabled 
     )}</div>
     <div className="grammar-actions grammar-order-actions">
       <button className="text-button" disabled={disabled || !selected.length} onClick={() => onOrder(selected.slice(0, -1))}>마지막 조각 취소</button>
-      <button className="text-button" disabled={disabled || !selected.length} onClick={() => onOrder([])}>처음부터 놓기</button>
-      <button className="secondary-button" disabled={disabled || selected.length !== question.options.length || text === answer?.latest} onClick={() => onAnswer(text)}>정답 확인</button>
+      <button className="text-button" disabled={disabled || !selected.length} onClick={() => onOrder([])}>모두 지우고 다시 놓기</button>
+      <button className="secondary-button" disabled={disabled || selected.length !== question.options.length || text === answer?.latest} onClick={() => onAnswer(text)}>내 답 확인</button>
     </div>
   </>;
 }

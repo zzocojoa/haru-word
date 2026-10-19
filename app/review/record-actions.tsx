@@ -13,11 +13,11 @@ export function RecordActions({state,words,date,now,busy,onRestoreOpen}:{state:S
   return <><DropdownMenu modal={false}>
     <DropdownMenuTrigger asChild><button className="secondary-button" data-backup-trigger><MoreHorizontal size={18}/>기록 관리</button></DropdownMenuTrigger>
     <DropdownMenuContent align="end" className="record-menu" onCloseAutoFocus={event=>{if(openingRestore.current){event.preventDefault();openingRestore.current=false;}}}>
-      <DropdownMenuItem onSelect={()=>download('haru-words-'+date+'.csv',exportLog(state,words),'text/csv;charset=utf-8')}><Download size={16}/>CSV 받기</DropdownMenuItem>
+      <DropdownMenuItem onSelect={()=>download('haru-words-'+date+'.csv',exportLog(state,words),'text/csv;charset=utf-8')}><Download size={16}/>학습 기록 CSV 받기</DropdownMenuItem>
       <DropdownMenuItem onSelect={()=>{openingRestore.current=true;setExportOpen(true);}}>전체 백업</DropdownMenuItem>
-      <DropdownMenuItem disabled={busy} onSelect={()=>{openingRestore.current=true;onRestoreOpen();}}>백업 가져오기</DropdownMenuItem>
+      <DropdownMenuItem disabled={busy} onSelect={()=>{openingRestore.current=true;onRestoreOpen();}}>백업으로 복원</DropdownMenuItem>
       <DropdownMenuSeparator/>
-      <DropdownMenuItem onSelect={()=>download('tutor-handoff-'+date+'.txt',exportTutor(state,words),'text/plain;charset=utf-8')}>튜터 프롬프트·최근 기록 받기</DropdownMenuItem>
+      <DropdownMenuItem onSelect={()=>download('tutor-handoff-'+date+'.txt',exportTutor(state,words),'text/plain;charset=utf-8')}>AI 튜터용 안내·최근 기록 받기</DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>{exportOpen&&<Suspense fallback={<p role="status">백업 도구를 여는 중이에요.</p>}><BackupExportDialog state={state} date={date} now={now} onClose={()=>setExportOpen(false)}/></Suspense>}</>;
 }

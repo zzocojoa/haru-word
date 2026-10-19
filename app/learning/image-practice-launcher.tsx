@@ -19,9 +19,9 @@ export function ImagePracticeLauncher({ words, progress, controller }: { words: 
     <SheetDialog navigationKey="app.imagePractice" open={open} onOpenChange={setOpen}>
       <SheetDialogContent className="framed-dialog image-practice-dialog" showCloseButton={false}
         onCloseAutoFocus={event => { event.preventDefault(); restoration.schedule('destination', () => trigger.current?.focus({ preventScroll: true })); }}>
-        <DialogHeader><DialogTitle>이미지 연습</DialogTitle><DialogDescription className="sr-only">그림을 보고 단어를 떠올려요. 성적은 기록하지 않아요.</DialogDescription></DialogHeader>
+        <DialogHeader><DialogTitle>이미지 연습</DialogTitle><DialogDescription>그림을 보고 영어 단어를 떠올려 보세요. 성적은 기록하지 않아요.</DialogDescription></DialogHeader>
         <button type="button" className="text-button image-practice-close" aria-label="연습 닫기" onClick={() => setOpen(false)}>닫기</button>
-        {open && (controller ? <PracticeContent key={controller.owner} words={words} progress={progress} controller={controller} /> : <p role="status">위치를 이어 보려면 로그인해 주세요.</p>)}
+        {open && (controller ? <PracticeContent key={controller.owner} words={words} progress={progress} controller={controller} /> : <p role="status">이미지 연습을 이어 하려면 로그인해 주세요.</p>)}
       </SheetDialogContent>
     </SheetDialog>
   </>;

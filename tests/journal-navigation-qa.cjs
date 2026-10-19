@@ -52,7 +52,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     const p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
     let writes = 0;
     p.on('request', r => { if (r.url().includes('/api/') && r.method() !== 'GET') writes++; });
-    await p.goto(base); await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await p.goto(base); await p.getByText('저장됨', { exact: true }).waitFor();
     await p.getByRole('tab', { name: '학습 기록', exact: true }).click();
     const panel = p.getByRole('tabpanel', { name: '학습 기록', exact: true });
     const days = panel.locator('.journal-day'), dayTriggers = panel.locator('.journal-day-trigger');
@@ -88,21 +88,21 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.deepEqual(await sessions.locator('.journal-session-number').allTextContents(), ['4회차', '3회차', '2회차', '1회차']);
     const first = sessions.last(), rows = first.locator('.journal-word-trigger');
     const firstTrigger = first.locator('.journal-session-trigger');
-    assert.match(await firstTrigger.innerText(), /10개 · 기록 완료 8 · 독립 성공 7 · 회차 종료/);
+    assert.match(await firstTrigger.innerText(), /10개 · 학습 기록함 8 · 도움 없이 성공 7 · 회차 마침/);
     await firstTrigger.focus(); await p.keyboard.press('Enter');
     assert.equal(await firstTrigger.getAttribute('aria-expanded'), 'true');
     assert.equal(await rows.count(), 11); // ten targets plus warmup
     assert.equal(await first.locator('.record-card:visible').count(), 0);
-    for (const label of ['독립 성공', '보완 필요', '미측정', '진행 중']) assert.ok((await first.locator('.journal-mobile').innerText()).includes(label));
+    for (const label of ['도움 없이 성공', '보완 필요', '아직 확인 안 함', '진행 중']) assert.ok((await first.locator('.journal-mobile').innerText()).includes(label));
     const targetRows = first.locator('.journal-word .journal-word-trigger');
     await targetRows.nth(0).click();
     let detail = first.locator('.record-card:visible');
-    for (const text of ['처음 표시', '영어→뜻', '뜻→영어', '내 문장', '말하기', '보완점', '다음 할 일', '보존할 보완점 0']) assert.ok((await detail.innerText()).includes(text));
+    for (const text of ['처음 확인한 친숙도', '영어→뜻', '뜻→영어', '내 문장', '말하기', '보완점', '다음 할 일', '보존할 보완점 0']) assert.ok((await detail.innerText()).includes(text));
     await detail.getByText('저장한 AI 참고 의견', { exact: true }).click();
     assert.ok((await detail.innerText()).includes('저장한 교정 설명'));
     await targetRows.nth(1).click();
     assert.equal(await first.locator('.record-card:visible').count(), 1);
-    assert.match(await first.locator('.record-card:visible').innerText(), /재시도 독립 성공/);
+    assert.match(await first.locator('.record-card:visible').innerText(), /재시도 도움 없이 성공/);
     assert.equal(await targetRows.nth(0).getAttribute('aria-expanded'), 'false');
     await axe('expanded mobile record');
     await days.first().screenshot({ path: out + '/expanded-mobile.png' });
@@ -110,7 +110,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.match(await first.locator('.record-card:visible').innerText(), /기억 깨우기 기록/);
     checks.push('keyboard disclosure, one-word expansion, all outcomes, notes, saved AI feedback and warmup remain reachable');
 
-    await p.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await p.getByRole('tab', { name: '단어장', exact: true }).click();
     await p.getByRole('tab', { name: '학습 기록', exact: true }).click();
     assert.equal(await dayTriggers.first().getAttribute('aria-expanded'), 'true');
     assert.equal(await firstTrigger.getAttribute('aria-expanded'), 'true');
@@ -152,7 +152,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     };
     const backup = JSON.parse(await downloadText('전체 백업'));
     assert.deepEqual(backup.state, {...before.state,grammar:{}});
-    const csv = await downloadText('CSV 받기');
+    const csv = await downloadText('학습 기록 CSV 받기');
     assert.ok(csv.includes(Object.values(state.sessions)[22].date));
     assert.ok(csv.includes('보존할 보완점 0'));
     assert.deepEqual(await get(), before); assert.equal(writes, 0);
@@ -184,7 +184,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     await p.getByLabel('실제로 공부한 날').fill(previousDate);
     await p.getByRole('button', { name: '학습일 수정하기', exact: true }).click();
     await p.getByRole('dialog').waitFor({ state: 'hidden' });
-    await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await p.getByText('저장됨', { exact: true }).waitFor();
     await p.getByRole('tab', { name: '학습 기록', exact: true }).click();
     assert.match(await dayTriggers.first().innerText(), /3회차/);
     assert.match(await dayTriggers.nth(1).innerText(), /2회차/);
@@ -194,7 +194,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.equal(afterCorrection.state.sessions[original.id].date, previousDate);
     for (const id of original.ids) assert.deepEqual(afterCorrection.state.sessions[original.id].records[id], { ...original.records[id], learnedOn: previousDate });
     for (const s of Object.values(state.sessions)) if (s.id !== original.id) assert.deepEqual(afterCorrection.state.sessions[s.id], s);
-    await p.reload(); await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await p.reload(); await p.getByText('저장됨', { exact: true }).waitFor();
     await p.getByRole('tab', { name: '학습 기록', exact: true }).click();
     assert.match(await dayTriggers.first().innerText(), /3회차/);
     assert.match(await dayTriggers.nth(1).innerText(), /2회차/);

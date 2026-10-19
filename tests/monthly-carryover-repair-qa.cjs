@@ -10,7 +10,7 @@ const ids = ['travel', 'want', 'breakfast'].map(name => words.find(w => w.word =
 const checks = [], errors = [], aiRequests = [], audits = [];
 const get = async c => { const r = await c.request.get(base + '/api/state'); assert.equal(r.status(), 200); return r.json(); };
 const put = async (c, data) => { const r = await c.request.put(base + '/api/state', { data }); assert.equal(r.status(), 200, await r.text()); };
-const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor();
+const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
 const plain = id => ({ entryId: id, meaning: content[id].meaning, familiarity: 'known', en: 'unmeasured', ko: 'unmeasured', sentenceStatus: 'unmeasured', sentence: '', notes: '' });
 const pass = id => ({ ...plain(id), en: 'independent', ko: 'independent', sentenceStatus: 'written', sentence: 'Existing sentence.', notes: 'Existing notes.', learnedOn: yesterday, material: content[id] });
 const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, period: kind === 'monthly' ? yesterday.slice(0, 7) : day,
@@ -56,7 +56,7 @@ const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, peri
     checks.push('repair preview is read-only, fits 320–1440px/200% text, and passes axe');
     const staleContext = await browser.newContext({ extraHTTPHeaders: headers });
     const stale = await staleContext.newPage(); await stale.goto(base); await saved(stale);
-    await p.route('**/api/state', r => r.request().method() === 'PUT' ? r.fulfill({ status: 503, json: { error: '테스트 저장 실패' } }) : r.continue());
+    await p.route('**/api/state', r => r.request().method() === 'PUT' ? r.fulfill({ status: 503, json: { error: '테스트 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } }) : r.continue());
     await p.getByRole('button', { name: '오늘 배정 바로잡기', exact: true }).click(); await p.getByRole('alert').waitFor();
     assert.deepEqual(await get(c), original);
     await p.unroute('**/api/state'); await p.getByRole('button', { name: '다시 시도', exact: true }).click(); await saved(p);
@@ -79,12 +79,12 @@ const session = (kind, day) => ({ id: crypto.randomUUID(), kind, date: day, peri
     await p.reload(); await saved(p); assert.deepEqual(await get(c), repaired);
     const c2 = await browser.newContext({ extraHTTPHeaders: headers }), p2 = await c2.newPage(); await p2.goto(base); await saved(p2);
     assert.equal(await p2.getByRole('button', { name: '오늘 배정 바로잡기', exact: true }).count(), 0);
-    assert.deepEqual(await p2.locator('.today-words b').allTextContents(), round.ids.map(id => words.find(w => w.id === id).word));
+    assert.deepEqual(await p2.locator('.today-word-row b').allTextContents(), round.ids.map(id => words.find(w => w.id === id).word));
     await c2.close(); await audit('repaired today'); await p.screenshot({ path: out + '/after-mobile.png', fullPage: true });
     checks.push('reload and another browser restore the corrected targets without repeating the repair');
     await p.getByRole('region', { name: '이어서 할 점검', exact: true }).getByRole('button', { name: /월말 쓰기 이어서/ }).click(); await saved(p);
     await p.getByLabel('영어 단어 입력', { exact: true }).fill('saved monthly draft');
-    await p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(p);
+    await p.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved(p);
     await p.getByRole('button', { name: '학습 홈으로', exact: false }).click();
     const paused = await get(c);
     assert.deepEqual(paused.state.progress, repaired.state.progress);

@@ -23,11 +23,18 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       await page.goto(base);
       if (domain === 'sentence') await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
       else {
-        await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
-        await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click();
+        await page.getByRole('tab', { name: '단어장', exact: true }).click();
+        await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click();
         await page.locator('.grammar-tile').first().click();
       }
       const input = page.getByRole('textbox', { name: domain === 'sentence' ? '내 영어 문장' : '내 문장', exact: true });
+      const transmission = page.locator('.ai-use-notice');
+      await transmission.waitFor();
+      assert.equal(await transmission.count(), 1);
+      assert.equal(await transmission.isVisible(), true);
+      assert.equal(await transmission.textContent(), `AI 요청 시 문장과 ${domain === 'grammar' ? '수업 목표를' : '단어·뜻을'} Google에 보내요. 응답 실패 시 Groq에도 보내요. 개인정보는 넣지 마세요. Google 무료 API의 입력·응답은 서비스 개선에 쓰일 수 있어요.`);
+      assert.equal(await transmission.evaluate(el => el.previousElementSibling?.tagName === 'BUTTON' && el.previousElementSibling.textContent.includes('AI 참고 의견 요청') && !el.closest('details')), true, 'transmission notice directly follows the request button without a disclosure');
+      checks.push(domain + ': transmission/privacy notice is visible exactly once directly below the request button before any AI call');
       await input.fill(original);
       let response, calls = 0;
       await page.route('**/api/' + domain + '-feedback', route => { calls++; return response.abort ? route.abort('failed') : route.fulfill({ status: response.status, json: response.body }); });
@@ -52,7 +59,14 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         response = sample;
         await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
         const notice = page.locator('[data-feedback-code="' + sample.code + '"]');
-        await notice.waitFor(); assert.match(await notice.innerText(), new RegExp(sample.title));
+        await notice.waitFor();
+        // Technical titles moved into an explicit disclosure; the learner gets an action first.
+        const visibleGuidance = await notice.innerText();
+        assert.match(visibleGuidance, /직접 점검|자기 점검|다시 요청|개인정보|연결을 확인/);
+        assert.doesNotMatch(visibleGuidance, /API 키|AI Studio|Groq Console|google_api|groq_api/);
+        for (const summary of await notice.locator('summary').all()) await summary.click();
+        assert.match(await notice.innerText(), new RegExp(sample.title));
+        for (const summary of await notice.locator('summary').all()) await summary.click();
         assert.doesNotMatch(await notice.innerText(), /PRIVATE_PROVIDER_MESSAGE|untrusted/);
         assert.equal(await input.inputValue(), original);
         assert.ok(await page.getByRole('button', { name: domain === 'sentence' ? '문장을 완성했어요' : '수업 마치기', exact: false }).isEnabled());
@@ -60,7 +74,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         if (sample.body?.previous) {
           assert.match(await notice.innerText(), /Google·Groq 점검을 마치지 못했어요/);
           assert.equal(await notice.locator('.ai-feedback-failure').count(), 2);
-          await notice.getByText('Groq 확인 코드', { exact: true }).click();
+          await notice.getByText('Groq 오류 상세', { exact: true }).click();
           assert.match(await notice.innerText(), new RegExp(sample.code));
           await page.setViewportSize({ width: 320, height: 900 });
           assert.equal(await notice.evaluate(el => el.scrollWidth > el.clientWidth + 1), false);
@@ -76,7 +90,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         }
         if (sample.code === 'provider_minute_limit') {
           assert.match(await notice.innerText(), /15초/);
-          await notice.getByText('Google 확인 코드', { exact: true }).focus(); await page.keyboard.press('Enter');
+          await notice.getByText('Google 오류 상세', { exact: true }).focus(); await page.keyboard.press('Enter');
           assert.match(await notice.innerText(), /provider_minute_limit · Google HTTP 429/);
           for (const width of [320, 390, 1440]) {
             await page.setViewportSize({ width, height: 900 });
@@ -113,7 +127,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       if (domain === 'sentence') assert.equal(stored.sessions[sid].records[word.id].sentenceStatus, 'unmeasured');
       await page.reload();
       if (domain === 'sentence') await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
-      else { await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); }
+      else { await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); }
       await page.locator('[data-feedback-provider="Groq"]').waitFor();
       assert.equal(calls, cases.length + 1, 'reload never calls a provider');
       const next = 'I like tea.'; await input.fill(next);

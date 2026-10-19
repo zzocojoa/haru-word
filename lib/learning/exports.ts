@@ -10,6 +10,10 @@ import { entryIdFor } from "./targets.ts";
 import { dailyAllocationRule } from './daily-allocation.ts';
 import { feedbackProvider } from './feedback-identity.ts';
 
+// CSV is a stable interchange format; UI wording must not rewrite its labels.
+const CSV_RESULT_TEXT = { ...RESULT_TEXT, independent: '독립 성공', unmeasured: '미측정' };
+const CSV_SENTENCE_TEXT = { ...SENTENCE_TEXT, unmeasured: '미측정' };
+
 export function exportLog(state: State, words: Word[]): string {
   const map = new Map(words.map((w) => [w.id, w]));
   const rows = [
@@ -54,15 +58,15 @@ export function exportLog(state: State, words: Word[]): string {
         w?.personal ? "개인 추가" : w?.level || "",
         r.meaning,
         r.familiarity ? FAMILIARITY_TEXT[r.familiarity] : "미표시",
-        RESULT_TEXT[r.en],
-        RESULT_TEXT[r.ko],
-        SENTENCE_TEXT[r.sentenceStatus],
+        CSV_RESULT_TEXT[r.en],
+        CSV_RESULT_TEXT[r.ko],
+        CSV_SENTENCE_TEXT[r.sentenceStatus],
         r.spoken ? "말해 봄" : "미측정",
         r.sentence,
         r.notes,
-        RESULT_TEXT[r.retryEn || "unmeasured"],
-        RESULT_TEXT[r.retryKo || "unmeasured"],
-        nextAction(r, s),
+        CSV_RESULT_TEXT[r.retryEn || "unmeasured"],
+        CSV_RESULT_TEXT[r.retryKo || "unmeasured"],
+        nextAction(r, s).replace('다음에 다시 복습', '이후에도 복습'),
         r.aiFeedback?.original || "",
         r.aiFeedback?.correctedSentence || "",
         r.aiFeedback?.explanation || "",

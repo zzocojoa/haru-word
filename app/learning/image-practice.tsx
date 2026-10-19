@@ -47,7 +47,7 @@ export function ImagePracticeContent({ words, progress, controller }: { words: W
   const position = useSyncExternalStore(controller.subscribe, controller.getSnapshot, controller.getSnapshot);
   useEffect(() => { controller.open(); }, [controller]);
   return <>
-    <p className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개 · 성적 미기록</p>
+    <p className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개 · 성적은 기록하지 않아요</p>
     {!deck.length ? <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>
       : position.available ? <PracticeCards deck={deck} position={position} controller={controller}/>
       : <PositionStatus position={position} controller={controller}/>}
@@ -56,10 +56,13 @@ export function ImagePracticeContent({ words, progress, controller }: { words: W
 
 function PositionStatus({ position, controller, fallback = false, displayedEntryId = position.entryId }: { position: PositionView; controller: ImagePracticePositionController; fallback?: boolean; displayedEntryId?: string | null }) {
   const status = position.status;
+  const errorMessage = position.available
+    ? '연습 위치 저장 결과를 확인하지 못했어요. 다시 저장하면 서버 위치부터 확인해요.'
+    : '연습 위치를 불러오지 못했어요. 다시 불러와 주세요.';
   return <div className="image-practice-status">
     <p role="status">{status === 'idle' || status === 'loading' ? '연습 위치 확인 중' : status === 'saving' ? '위치 저장 중'
       : status === 'conflict' ? '다른 기기에서 연습 위치가 바뀌었어요.' : status === 'auth' ? '로그인을 확인한 뒤 다시 열어 주세요.'
-      : status === 'error' ? '위치 저장 실패 · 서버 확인이 필요해요.' : fallback ? '저장 위치 확인됨' : position.entryId ? '위치 저장됨' : '이동하면 위치가 저장돼요.'}</p>
+      : status === 'error' ? errorMessage : fallback ? '저장 위치 확인됨' : position.entryId ? '위치 저장됨' : '이동하면 위치가 저장돼요.'}</p>
     {status === 'error' && <button type="button" className="text-button" onClick={controller.retry}>{position.available ? '다시 저장' : '다시 불러오기'}</button>}
     {status === 'conflict' && position.remote && <div className="image-practice-choices">
       <button type="button" className="secondary-button" onClick={controller.useRemote}>다른 기기 위치로 이동</button>
@@ -87,7 +90,7 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
     <PracticeCard key={`${deck[index].word.id}:${visit}:${position.displayVersion}`} card={deck[index]}/>
     <div className="image-practice-controls">
       <p className="sr-only" aria-live="polite" aria-atomic="true">카드 {index + 1} / {deck.length}</p>
-      {resolved.fallback && <p className="small-note" role="status">저장한 카드는 현재 연습에서 제외되어 다음 유효 카드 또는 첫 카드로 이동했어요. 이동 버튼을 누르면 새 위치를 저장해요.</p>}
+      {resolved.fallback && <p className="small-note" role="status">이전에 보던 카드가 없어 다른 카드로 이동했어요. 이전·다음 버튼을 누르면 새 위치가 저장돼요.</p>}
       <PositionStatus position={position} controller={controller} fallback={resolved.fallback} displayedEntryId={resolved.entryId}/>
       <nav className="image-practice-navigation" aria-label="이미지 연습 카드 이동">
         <button type="button" className="secondary-button" disabled={index === 0 || position.status === 'auth'} onClick={() => move(index - 1)}>이전</button>
@@ -103,7 +106,7 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
         <input id="image-practice-number" type="text" inputMode="numeric" value={number} aria-invalid={numberError}
           aria-describedby={numberError ? 'image-practice-number-error' : undefined} onChange={event => { setNumber(event.target.value); setNumberError(false); }}/>
         <button type="submit" className="secondary-button" disabled={position.status === 'auth'}>이동</button>
-        {numberError && <p id="image-practice-number-error" role="alert">1부터 {deck.length} 사이 정수를 입력해 주세요.</p>}
+        {numberError && <p id="image-practice-number-error" role="alert">1부터 {deck.length} 사이의 카드 번호를 입력해 주세요.</p>}
       </form>}
     </div>
   </>;
@@ -122,10 +125,10 @@ function PracticeCard({ card }: { card: Card }) {
           <span className="image-practice-meaning">{card.image.baseMeaning}</span>
           <span className="small-note"><PartOfSpeechLabel pos={card.image.pos}/></span>
         </span>}
-        <span className="sr-only">{revealed ? '이미지 보기' : '뜻 보기'}</span>
+        <span className="sr-only">{revealed ? '이미지 보기' : '단어·뜻 보기'}</span>
       </button>
       {!ready ? <p role="status">이미지 불러오는 중</p>
-        : <p className="small-note image-practice-hint">{revealed ? '카드를 누르면 이미지로 돌아가요.' : '이미지를 누르면 뜻을 볼 수 있어요.'}</p>}
+        : <p className="small-note image-practice-hint">{revealed ? '카드를 누르면 이미지로 돌아가요.' : '단어를 떠올린 뒤 눌러 확인해 보세요.'}</p>}
       {revealed && <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>}
     </>}
   </div>;

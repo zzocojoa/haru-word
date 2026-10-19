@@ -33,7 +33,6 @@ export function FamiliarityAssessment({
   return (
     <section className="learning-panel">
       <div className="panel-top">
-        <span className="eyebrow">01 · 나의 출발점</span>
         <span className="level-badge">{state.settings.level}</span>
       </div>
       {assessment.completed ? (
@@ -41,7 +40,7 @@ export function FamiliarityAssessment({
           <div className="success-icon">
             <Check />
           </div>
-          <h2>나의 출발점을 찾았어요.</h2>
+          <h2>친숙도를 확인했어요</h2>
           <p className="muted">
             {assessmentAdvice(assessment, state.settings.level).text}
           </p>
@@ -59,8 +58,9 @@ export function FamiliarityAssessment({
             ))}
           </div>
           <p className="small-note">
-            정식 CEFR 시험·말하기 판정이 아니에요. 같은 표시가 14개 이상이면 수준 조정을 제안해요.
+            정식 수준 시험은 아니에요. 결과를 참고해 학습 수준을 골라 주세요.
           </p>
+          <details className="notes-details"><summary>수준 추천 기준</summary><p>같은 표시가 14개 이상이면 수준 조정을 제안해요. 정식 CEFR 시험이나 말하기 판정은 아니에요.</p></details>
           <div className="button-row">
             <button
               className="primary-button"
@@ -113,14 +113,15 @@ export function FamiliarityAssessment({
           )}
           <button
             className="text-button skip"
-            onClick={() => {
-              setAssessing(false);
-              setMessage(
-                "준비를 저장했어요. 다음 방문부터 일일 루틴을 시작하세요.",
-              );
+            disabled={busy}
+            onClick={async () => {
+              if (await save(state)) {
+                setAssessing(false);
+                setMessage("친숙도 확인을 마쳤어요. 원할 때 오늘 학습을 시작하세요.");
+              }
             }}
           >
-            오늘은 준비만 마치기
+            저장하고 나가기
           </button>
         </>
       ) : (
@@ -155,7 +156,7 @@ export function FamiliarityAssessment({
             className="text-button skip"
             onClick={() => setAssessing(false)}
           >
-            여기까지 저장 · 나중에 계속
+            나중에 이어 하기
           </button>
         </>
       )}

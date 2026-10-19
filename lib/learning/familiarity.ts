@@ -93,12 +93,12 @@ export function confirmFamiliarity(
 ): Progress {
   const check = p?.familiarityCheck;
   if (!check || check.final)
-    throw new Error("뜻을 확인한 뒤 친숙도를 확정해 주세요.");
+    throw new Error("뜻을 확인한 뒤 친숙도를 골라 주세요.");
   if (
     final !== check.initial &&
     !(check.initial === "known" && final === "uncertain")
   )
-    throw new Error("뜻을 보기 전의 판단을 기준으로 기록해 주세요.");
+    throw new Error("뜻을 보기 전에 얼마나 알고 있었는지 골라 주세요.");
   return {
     ...recordFamiliarity(p, final),
     familiarityCheck: { ...check, final },

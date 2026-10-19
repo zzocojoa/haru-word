@@ -63,7 +63,7 @@ async function scenario(browser, name, entry, stage = 'learn') {
       if (request.method() === 'GET') return route.fulfill({ json: { state, revision } });
       const data = request.postDataJSON(); writes++;
       assert.equal(data.revision, revision);
-      if (name === 'editor-retry' && writes === 1) return route.fulfill({ status: 503, json: { error: '검사 저장 실패' } });
+      if (name === 'editor-retry' && writes === 1) return route.fulfill({ status: 503, json: { error: '검사 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } });
       if (data.settings) state.settings = data.settings;
       Object.assign(state.progress, data.progress); Object.assign(state.sessions, data.sessions);
       return route.fulfill({ json: { revision: ++revision } });
@@ -72,9 +72,9 @@ async function scenario(browser, name, entry, stage = 'learn') {
   });
   try {
     await page.goto(base, { waitUntil: 'domcontentloaded' });
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     if (name === 'editor-retry') {
-      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.getByRole('tab', { name: '단어장', exact: true }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill(word.word);
       await page.getByRole('button', { name: word.word + ' 명사', exact: true }).click();
       const dialog = page.getByRole('dialog');
@@ -94,8 +94,8 @@ async function scenario(browser, name, entry, stage = 'learn') {
       assert.equal(state.progress[id].notes, initial.progress[id].notes);
       assert.equal(state.progress[id].en, initial.progress[id].en); assert.equal(state.progress[id].ko, initial.progress[id].ko);
       assert.deepEqual(state.sessions, initial.sessions);
-      await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.reload(); await page.getByText('저장됨', { exact: true }).waitFor();
+      await page.getByRole('tab', { name: '단어장', exact: true }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill(word.word);
       await page.getByRole('button', { name: word.word + ' 명사', exact: true }).click();
       assert.equal(await page.getByRole('dialog').getByLabel('함께 익힐 표현', { exact: true }).inputValue(), 'a changed expression');

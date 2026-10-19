@@ -1,0 +1,358 @@
+{
+  "status": "PLAN_REVIEW_AND_LOCAL_CORRECTIONS_VERIFIED",
+  "checkedAt": "2026-10-19T00:03:04.692Z",
+  "base": "85d95ae51e14b2466d1acbf8a39c2416d2f2e326",
+  "branch": "codex/ux-text-improvements",
+  "originalPlanRows": 1282,
+  "originalChangedRows": 237,
+  "additionalLinkedRow": "UI-0043",
+  "currentChangedRows": 238,
+  "maintainedUiRows": 1035,
+  "maintainedAiCodes": 9,
+  "sourceInputCount": 509,
+  "sourceSha256": "a27e76220cd98206e01c231635166c28273d9e4045b8c7252de4c9f96b997e72",
+  "additionalAppChanges": [
+    "app/ai-use-notice.tsx",
+    "app/learning/image-practice.tsx",
+    "app/learning/use-learning-controller.ts",
+    "app/sentence-feedback.tsx"
+  ],
+  "adjustments": [
+    {
+      "id": "UI-0043",
+      "reason": "C3: align restore guard with actual exit labels for three states",
+      "evidence": "ux-text-qa.cjs restoreGuard"
+    },
+    {
+      "id": "UI-0514",
+      "reason": "C4: distinguish initial read failure and unconfirmed save",
+      "evidence": "ux-text.test.mjs and image-practice-resume-qa.cjs lost response/timeout/read failure"
+    }
+  ],
+  "originalVerification": "verification.json",
+  "originalSourceAndLogsChecked": {
+    "checkedAt": "2026-10-18T23:49:04.044Z",
+    "sourceFiles": 509,
+    "sourceSha256": "2a76306894f0b1978ac25c159fa0e6b6f9711e8048b0c179ae0f34925f26d6d4",
+    "logHashesChecked": 44,
+    "passed": true
+  },
+  "commands": [
+    {
+      "command": "npm run test",
+      "node": "v22.22.2",
+      "exitCode": 0,
+      "log": "work/ux-text-plan-review-20261019/verified-test.log",
+      "sha256": "65fcedc13b1b59c16cc58a7354ec3bb1d64e5554fcac510171bb2876850708cc"
+    },
+    {
+      "command": "npm test",
+      "node": "v24.19.0",
+      "exitCode": 0,
+      "log": "work/ux-text-plan-review-20261019/verified-node24.log",
+      "sha256": "52233998448e034674ca977448a70f7d9ab94228d162038aa2984b759a35aefa"
+    },
+    {
+      "command": "npm run typecheck",
+      "node": "v22.22.2",
+      "exitCode": 0,
+      "log": "work/ux-text-plan-review-20261019/verified-typecheck.log",
+      "sha256": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec"
+    },
+    {
+      "command": "npm run lint",
+      "node": "v22.22.2",
+      "exitCode": 0,
+      "log": "work/ux-text-plan-review-20261019/verified-lint.log",
+      "sha256": "d92ed5797c39c219ff39332321fe2d02bac2c05cc9a2af1e2a141cf32f76cda8"
+    },
+    {
+      "command": "npm run build",
+      "node": "v22.22.2",
+      "exitCode": 0,
+      "log": "work/ux-text-plan-review-20261019/verified-build.log",
+      "sha256": "0be8a05e2b9b54b41d58793868a5bbef5e33f3764593436ce4764039d565ceb6"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "node": "v22.22.2",
+      "exitCode": 0,
+      "log": "work/ux-text-plan-review-20261019/check-grammar-review.log",
+      "sha256": "fd8d23311e1a50d708a0dd36db40c5f40bbd95e121142abe9f16d6e06d474a01"
+    },
+    {
+      "command": "eslint tests/ux-text-qa.cjs tests/feedback-issue-qa.cjs",
+      "node": "v22.22.2",
+      "exitCode": 0,
+      "log": "work/ux-text-plan-review-20261019/final-qa-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "browserSuiteRuns": 10,
+  "browser": [
+    {
+      "name": "ux-text",
+      "engine": "chromium",
+      "attempt": 1792367723914,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-ux-text-1792367723914.log",
+      "sha256": "79c25c811141a6b0178c0a6cb801491077182f92a1468c3b578c5bcd240debff",
+      "checks": [
+        "load network failure uses Korean recovery guidance, does not claim saved, and explicit retry recovers",
+        "save-and-leave waits for acknowledgment, keeps assessment/drafts on failure, offers backup/retry, and exits only after success",
+        "restore blocked during unfinished/completed familiarity and candidate preparation names the available exit action and preserves all state/revision",
+        "320/390px at 100/200%: consistent tabs, Korean close name, truthful settings, no horizontal overflow, axe and state/revision unchanged",
+        "real saved history: mobile cards and desktop table disclose complete long meanings/sentences/notes and original AI input/suggestion/explanation with one caution/provider, without modifying state or revision",
+        "completed lesson replay also discloses the original meaning, sentence and notes without a write",
+        "isolated real components: reload explains unsaved/busy guards; keyboard disclosure restores every original character safely",
+        "anonymous first visit has truthful sign-in guidance, no saved claim, and preserved source/license links"
+      ]
+    },
+    {
+      "name": "feedback-issue",
+      "engine": "chromium",
+      "attempt": 1792367740681,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-feedback-issue-1792367740681.log",
+      "sha256": "e4aaa0779f268854931182458199ac9cb7a90529ed80d0b27ba06f08f7aa2681",
+      "checks": [
+        "sentence: transmission/privacy notice is visible exactly once directly below the request button before any AI call",
+        "sentence: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "sentence: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks",
+        "grammar: transmission/privacy notice is visible exactly once directly below the request button before any AI call",
+        "grammar: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "grammar: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks"
+      ]
+    },
+    {
+      "name": "backup",
+      "engine": "chromium",
+      "attempt": 1792367805461,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-backup-1792367805461.log",
+      "sha256": "fec3f313dcc000c6877c69ca694540aba61761c99f74bb2967af29643e987fdb",
+      "checks": [
+        "invalid JSON, unsupported version and broken references never reach the restore endpoint",
+        "preview shows exact impact; narrow screens, 200% text, backup download, required acknowledgment and cancel preserve data",
+        "confirmed restore atomically replaces settings, personal words, material, results, notes and resumable drafts",
+        "another device resumes the exact draft; an open lesson must save and return home before importing",
+        "stale revision refuses replacement and requires a server refresh before any new save",
+        "legacy backup is supported; a lost post-commit response is reconciled by GET without repeating replacement",
+        "server failure preserves current records and exposes a recovery path",
+        "a 3 MB+ UTF-8 backup crosses D1 chunk boundaries and restores all 650 records through the real Worker",
+        "explicitly confirmed empty backup removes only this synthetic account’s study records"
+      ]
+    },
+    {
+      "name": "large-backup",
+      "engine": "chromium",
+      "attempt": 1792367815174,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-large-backup-1792367815174.log",
+      "sha256": "d4efa5f4326dbe568bec84e3d0626d6757c08abfa227483d2755761d57571c2c",
+      "checks": [
+        "18 MB+ file imports in a Web Worker; lost upload resumes after reload with a renamed identical file without resending part 0 or changing current records",
+        "lost commit response reconciles the durable receipt; one commit, one revision increment, and all 18,250 results survive reload",
+        "whole-export preview reports size and validates all 1,825 sessions before download",
+        "cancel removes staging only; narrow/desktop layouts and automated accessibility pass",
+        "the pre-replacement safety copy restores every original record through the same job pipeline",
+        "19.9 MB of real record content commits, loads, and renders against the local Worker",
+        "actual job routes reject other accounts, cross-origin mutations, and invalid manifests"
+      ]
+    },
+    {
+      "name": "image-practice-resume",
+      "engine": "chromium",
+      "attempt": 1792367854550,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-image-practice-resume-1792367854550.log",
+      "sha256": "3543aea09aa0c027685d4d05b064534c37c25f26a6d2b057717f6bcfde3f815c",
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position, say save result is unknown, and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ]
+    },
+    {
+      "name": "ux-text",
+      "engine": "webkit",
+      "attempt": 1792367879527,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/webkit-ux-text-1792367879527.log",
+      "sha256": "1bbaa63accae5c124d4eaf8b67d18fee3349a0f3e572a35c5644e0692a594ace",
+      "checks": [
+        "load network failure uses Korean recovery guidance, does not claim saved, and explicit retry recovers",
+        "save-and-leave waits for acknowledgment, keeps assessment/drafts on failure, offers backup/retry, and exits only after success",
+        "restore blocked during unfinished/completed familiarity and candidate preparation names the available exit action and preserves all state/revision",
+        "320/390px at 100/200%: consistent tabs, Korean close name, truthful settings, no horizontal overflow, axe and state/revision unchanged",
+        "real saved history: mobile cards and desktop table disclose complete long meanings/sentences/notes and original AI input/suggestion/explanation with one caution/provider, without modifying state or revision",
+        "completed lesson replay also discloses the original meaning, sentence and notes without a write",
+        "isolated real components: reload explains unsaved/busy guards; keyboard disclosure restores every original character safely",
+        "anonymous first visit has truthful sign-in guidance, no saved claim, and preserved source/license links"
+      ]
+    },
+    {
+      "name": "feedback-issue",
+      "engine": "webkit",
+      "attempt": 1792367891473,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/webkit-feedback-issue-1792367891473.log",
+      "sha256": "20a514d7c80d651e5e8109a76e782c5ac2beda7eaf87d4cebdcbf5e2f22ade2a",
+      "checks": [
+        "sentence: transmission/privacy notice is visible exactly once directly below the request button before any AI call",
+        "sentence: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "sentence: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks",
+        "grammar: transmission/privacy notice is visible exactly once directly below the request button before any AI call",
+        "grammar: 15 failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility",
+        "grammar: Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks"
+      ]
+    },
+    {
+      "name": "backup",
+      "engine": "webkit",
+      "attempt": 1792367919361,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/webkit-backup-1792367919361.log",
+      "sha256": "69c91b0e227bf7311f4f9de312fe29705580009ae400c865298562e4e0ee710a",
+      "checks": [
+        "invalid JSON, unsupported version and broken references never reach the restore endpoint",
+        "preview shows exact impact; narrow screens, 200% text, backup download, required acknowledgment and cancel preserve data",
+        "confirmed restore atomically replaces settings, personal words, material, results, notes and resumable drafts",
+        "another device resumes the exact draft; an open lesson must save and return home before importing",
+        "stale revision refuses replacement and requires a server refresh before any new save",
+        "legacy backup is supported; a lost post-commit response is reconciled by GET without repeating replacement",
+        "server failure preserves current records and exposes a recovery path",
+        "a 3 MB+ UTF-8 backup crosses D1 chunk boundaries and restores all 650 records through the real Worker",
+        "explicitly confirmed empty backup removes only this synthetic account’s study records"
+      ]
+    },
+    {
+      "name": "large-backup",
+      "engine": "webkit",
+      "attempt": 1792367937568,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/webkit-large-backup-1792367937568.log",
+      "sha256": "e3ed7c53aaf92ceec9e01c407c4131c869f341a784ac8224301d1dfb7663584d",
+      "checks": [
+        "18 MB+ file imports in a Web Worker; lost upload resumes after reload with a renamed identical file without resending part 0 or changing current records",
+        "lost commit response reconciles the durable receipt; one commit, one revision increment, and all 18,250 results survive reload",
+        "whole-export preview reports size and validates all 1,825 sessions before download",
+        "cancel removes staging only; narrow/desktop layouts and automated accessibility pass",
+        "the pre-replacement safety copy restores every original record through the same job pipeline",
+        "19.9 MB of real record content commits, loads, and renders against the local Worker",
+        "actual job routes reject other accounts, cross-origin mutations, and invalid manifests"
+      ]
+    },
+    {
+      "name": "image-practice-resume",
+      "engine": "webkit",
+      "attempt": 1792367982923,
+      "code": 0,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/webkit-image-practice-resume-1792367982923.log",
+      "sha256": "62e0037eba9ab6258f479bfec306b3d0331d65c3f2bae71b5fe0f536d41c9984",
+      "checks": [
+        "rapid navigation coalesces, closes while saving, resumes front, no history entries",
+        "tab return, reload and separate browser context resume same account",
+        "two devices conflict and both explicit choices work",
+        "same-browser tab lookup preserves another tab failed cursor across reload and recovery",
+        "late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload",
+        "remote choice preserves later same-browser C-to-B-to-C pending cursor and reload needs a choice without PUT",
+        "write failure, lost response and timeout preserve position, say save result is unknown, and retry reads first",
+        "first/last boundaries, strict integer jump and navigation through failed images",
+        "320/390/1440, 100/200% text, 44px targets, keyboard, focus return and axe",
+        "unknown initial server position cannot be overwritten after load failure",
+        "explicit current choice saves the displayed fallback card after conflict",
+        "excluded saved card advances in original order; empty deck and lookup never overwrite server cursor",
+        "new account starts at its own position; stale owner receives 401 and stops navigation/writes"
+      ]
+    }
+  ],
+  "failedAttempts": [
+    {
+      "name": "ux-text",
+      "engine": "chromium",
+      "attempt": 1792367703284,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-ux-text-1792367703284.log",
+      "sha256": "dea41e0007f1fca1f9394add1ace9f41048b461ce4fbbe0c78f86dd5dce04bf2"
+    },
+    {
+      "name": "feedback-issue",
+      "engine": "chromium",
+      "attempt": 1792367730706,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-feedback-issue-1792367730706.log",
+      "sha256": "b1cc35fb77a0082646d88cb8f9542a5d6fe8f481a3b56d9b8947ad6e6957b33f"
+    },
+    {
+      "name": "sentence-feedback-layout",
+      "engine": "chromium",
+      "attempt": 1792367755219,
+      "code": 1,
+      "timedOut": false,
+      "logPath": "work/ux-text-plan-review-20261019/chromium-sentence-feedback-layout-1792367755219.log",
+      "sha256": "987e639747dbedb5d8b1a6f19d51139436882a8759df45637426590f0c17788b"
+    }
+  ],
+  "knownUnrelatedFailure": {
+    "passed": true,
+    "classification": "PRE_EXISTING_SUITE_CONTRACT_MISMATCH",
+    "base": "85d95ae51e14b2466d1acbf8a39c2416d2f2e326",
+    "test": "tests/sentence-feedback-layout-qa.cjs",
+    "baselineAlreadyExpectsAbsentStructureUi": true,
+    "baselineAndCurrentDoNotRenderStructure": true,
+    "presentationSourceUnchanged": true,
+    "sameReviewedSentenceDisabledInBaseline": true,
+    "notCountedAsPass": true,
+    "scope": "No sentence-structure feature reimplementation or test contract removal in a UI-copy review"
+  },
+  "screenshots": [
+    {
+      "file": "outputs/ux-text/chromium/settings-320-200.png",
+      "sha256": "4ac28736333b03c43b10af4cd2d478a225543c7cc6d96e0a4dece0e4bce0619c",
+      "visuallyReviewed": true
+    },
+    {
+      "file": "outputs/ux-text/webkit/history-1440.png",
+      "sha256": "869a781c4cf1f3bf8b0c3be3e1bd903b9e6a59747342006ad4bb14065ccd4b34",
+      "visuallyReviewed": true
+    }
+  ],
+  "protectedDataContractsAndDeploymentInputsUnchanged": true,
+  "committed": false,
+  "pushed": false,
+  "deployed": false,
+  "settingsChanged": false,
+  "productionVersionUnchanged": 139,
+  "startupCause": "UNKNOWN",
+  "historical401Cause": "UNKNOWN",
+  "limitations": [
+    "Existing sentence-feedback-layout suite expects absent structure UI and fails on the baseline contract; not counted as passing and not rewritten in this copy review",
+    "Not the entire browser/performance manifest",
+    "Browser emulation and DOM/keyboard/axe, not physical iPhone or VoiceOver",
+    "No real AI, production learner records, external font diagnosis or learning-effectiveness study",
+    "Full 3,809 image scene descriptions are a separate content task in the plan"
+  ]
+}

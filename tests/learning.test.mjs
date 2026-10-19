@@ -62,7 +62,7 @@ test('monthly review completes real batches and keeps all untouched words unmeas
 });
 test('unmeasured monthly writing is incomplete; optional sentence is not a false failure',()=>{
  const state=fresh();const a=find('apple');state.progress[a.id]={studyDates:['2026-09-21']};const x=newSession(state,words,content,'monthly','2026-09-30');
- assert.equal(sessionRecordComplete(x,x.records[a.id]),false);const r={...x.records[a.id],ko:'independent'};assert.equal(sessionRecordComplete(x,r),true);assert.equal(nextAction(r,x),'이후에도 복습');assert.equal(sessionRecordComplete(x,{...r,sentenceStatus:'improve'}),false);
+ assert.equal(sessionRecordComplete(x,x.records[a.id]),false);const r={...x.records[a.id],ko:'independent'};assert.equal(sessionRecordComplete(x,r),true);assert.equal(nextAction(r,x),'다음에 다시 복습');assert.equal(sessionRecordComplete(x,{...r,sentenceStatus:'improve'}),false);
 });
 test('warmup prioritizes unfinished words even when assigned in today targets',()=>{
  const state=fresh();const [a,b,c,d]=words.filter(w=>w.level==='A1').slice(0,4);state.progress=Object.fromEntries([a,b,c,d].map((w,i)=>[w.id,{lastStudied:'2026-09-'+(10+i),needsReview:i===0}]));const x=newSession(state,words,content,'daily','2026-09-21');assert.equal(x.warmupIds[0],a.id);assert.ok(x.ids.includes(a.id));

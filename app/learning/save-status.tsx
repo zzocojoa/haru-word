@@ -24,9 +24,9 @@ export function SaveStatus({
           : saving
             ? "저장 중"
             : unsaved
-              ? "저장 필요"
+              ? "아직 저장되지 않음"
               : signedIn
-                ? "서버에 저장됨"
+                ? "저장됨"
                 : "로그인 전"}
       </span>
     </span>

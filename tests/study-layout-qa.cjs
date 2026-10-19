@@ -12,7 +12,7 @@ try{
   const get=async()=> (await c.request.get(base+'/api/state')).json();const initial=await get(),id=crypto.randomUUID();
   const session={id,kind:'daily',date,period:date,ids,warmupIds:stage==='warmup'?[ids[0]]:[],stage,index:0,records:Object.fromEntries(ids.map(id=>[id,{meaning:content[id].meaning,material:content[id],en:'unmeasured',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:'',notes:''}])),retry:[],retryMode:false,elapsed:0,paused:true,finished:false,createdAt:new Date().toISOString()};
   const res=await c.request.put(base+'/api/state',{data:{revision:initial.revision,settings:{...initial.state.settings,activeSessionId:id},progress:{},sessions:{[id]:session}}});assert.equal(res.status(),200,await res.text());
-  const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(base,{waitUntil:'domcontentloaded'});await p.getByText('서버에 저장됨',{exact:true}).waitFor();await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await p.getByText('서버에 저장됨',{exact:true}).waitFor();await p.locator('.session-panel').waitFor().catch(async error=>{fs.writeFileSync(out+'/failure.json',JSON.stringify({stage,body:await p.locator('body').innerText(),state:await get(),errors},null,2));throw error;});
+  const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(base,{waitUntil:'domcontentloaded'});await p.getByText('저장됨',{exact:true}).waitFor();await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await p.getByText('저장됨',{exact:true}).waitFor();await p.locator('.session-panel').waitFor().catch(async error=>{fs.writeFileSync(out+'/failure.json',JSON.stringify({stage,body:await p.locator('body').innerText(),state:await get(),errors},null,2));throw error;});
   const inspect=async name=>{
    for(const width of [320,390,430,768,1440]){
     await p.setViewportSize({width,height:844});
@@ -27,7 +27,7 @@ try{
    await p.evaluate(()=>document.documentElement.style.fontSize='100%');await p.setViewportSize({width:390,height:844});
   };
   await inspect(stage+'-initial');
-  if(['warmup','en','ko'].includes(stage)){await p.getByRole('button',{name:stage==='warmup'?/^뜻 확인/:/^내 답 확인/}).click();await p.getByText('서버에 저장됨',{exact:true}).waitFor();await inspect(stage+'-revealed');}
+  if(['warmup','en','ko'].includes(stage)){await p.getByRole('button',{name:stage==='warmup'?/^뜻 확인/:/^내 답 확인/}).click();await p.getByText('저장됨',{exact:true}).waitFor();await inspect(stage+'-revealed');}
   for(const record of Object.values((await get()).state.sessions[id].records)){assert.equal(record.en,'unmeasured');assert.equal(record.ko,'unmeasured');assert.equal(record.sentenceStatus,'unmeasured');}
   await c.close();
  }

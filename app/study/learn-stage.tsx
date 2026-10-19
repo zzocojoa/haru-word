@@ -65,7 +65,7 @@ export function LearnStage({
       <GrammarTermsHelp pos={word.pos} />
       <div className="meaning-section">
         <label htmlFor="study-meaning">
-          오늘 공부할 뜻 <span className="muted">하나만 골라요</span>
+          학습할 뜻 <span className="muted">하나만 골라요</span>
         </label>
         <input
           id="study-meaning"
@@ -74,9 +74,6 @@ export function LearnStage({
           onChange={(e) => setMeaning(e.target.value)}
           placeholder="영한사전에서 확인한 한국어 뜻"
         />
-        <p className="small-note">
-          오늘 품사에 맞는 뜻 하나를 골라요.
-        </p>
       </div>
       <ExpressionLine expression={expression} translation={expressionTranslation} />
       <div className="example-box">
@@ -105,7 +102,7 @@ export function LearnStage({
         </summary>
         <ExpressionFields expression={expression} expressionTranslation={expressionTranslation}
           onExpressionChange={setExpression} onTranslationChange={setExpressionTranslation}
-          help="표현이나 학습 뜻을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요." />
+          help="표현이나 뜻을 바꾸면 표현 해석이 지워져요. 새 해석을 입력해 주세요." />
         <label>
           영어 예문
           <textarea
@@ -143,7 +140,7 @@ export function LearnStage({
         disabled={busy || !meaning.trim()}
         onClick={learn}
       >
-        뜻을 확인했어요 <ArrowRight size={17} />
+        뜻 저장하고 계속 <ArrowRight size={17} />
       </button></div>
     </>
   );

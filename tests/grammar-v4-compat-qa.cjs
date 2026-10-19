@@ -12,7 +12,7 @@ const {base,launchBrowser,closeBrowser,accountHeaders}=require('./qa/runtime.cjs
  const snapshot=async()=>(await context.request.get(base+'/api/state',{headers:{'X-Study-Grammar':'4'}})).json();
  const until=async fn=>{for(let i=0;i<100;i++){if(await fn())return;await page.waitForTimeout(100);}throw Error('persistence timeout');};
  const click=name=>page.getByRole('button',{name,exact:true}).click();
- const library=async()=>{await page.getByRole('tab',{name:'전체 단어장',exact:true}).click();await page.getByRole('tab',{name:'품사·문장 연습',exact:true}).click();};
+ const library=async()=>{await page.getByRole('tab',{name:'단어장',exact:true}).click();await page.getByRole('tab',{name:'품사와 문장 연습',exact:true}).click();};
  const open=async title=>{const tile=page.locator('.grammar-tile').filter({has:page.locator('b',{hasText:new RegExp('^'+title+'$')})});const group=page.locator('.grammar-group').filter({has:tile});if(await group.getAttribute('open')===null)await group.locator('summary').click();await tile.click();};
  try{
   const initial=await snapshot();

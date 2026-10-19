@@ -31,7 +31,7 @@ function session(records, hour) {
     const response = await context.request.post(base + '/api/state/restore', { headers: { 'x-study-revision': String(initial.revision) }, data: { format: 'haru-words-v1', exportedAt: new Date().toISOString(), state } });
     assert.equal(response.status(), 200, await response.text());
     p = await context.newPage(); p.on('pageerror', e => errors.push(e.message));
-    await p.goto(base); await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await p.goto(base); await p.getByText('저장됨', { exact: true }).waitFor();
     const before = await get();
     const tab = name => p.getByRole('tab', { name, exact: true }).click();
     const audit = async label => {
@@ -44,7 +44,9 @@ function session(records, hour) {
     await p.getByRole('button', { name: '오늘 단어 다시 보기', exact: true }).click();
     const dialog = p.getByRole('dialog'), body = dialog.locator('.dialog-scroll');
     const selector = p.getByRole('combobox', { name: '다시 볼 단어 선택' });
-    assert.ok(await p.getByText('보완점 · 문장 없이 보완점만 남긴 기록', { exact: true }).isVisible());
+    const savedNote = dialog.locator('.review-my-sentence .muted');
+    await savedNote.waitFor();
+    assert.equal(await savedNote.innerText(), '보완점 · 문장 없이 보완점만 남긴 기록');
     await selector.click(); assert.equal(await p.getByRole('option').count(), 11);
     assert.match(await p.getByRole('option').first().innerText(), new RegExp(content[targets[0].id].meaning));
     await p.getByRole('option').last().click(); assert.equal(await dialog.locator('.review-meaning').innerText(), alternate.meaning);
@@ -79,7 +81,7 @@ function session(records, hour) {
     await body.evaluate(el => el.scrollTop = el.scrollHeight); assert.ok(await body.evaluate(el => el.scrollTop > 0));
     await dialog.getByRole('button', { name: '다음', exact: true }).click(); assert.equal(await body.evaluate(el => el.scrollTop), 0);
     await selector.click(); await p.screenshot({ path: `${out}/replay-options-mobile.png` }); await audit('word selection');
-    await p.keyboard.press('Escape'); await audit('replay'); await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+    await p.keyboard.press('Escape'); await audit('replay'); await dialog.getByRole('button', { name: '닫기', exact: true }).click();
     assert.deepEqual(await get(), before, 'replay, selectors and layout inspection never write grades');
     checks.push('11 cards with distinct same-word meanings, notes without sentence, keyboard selection, fixed controls, scroll reset, 5 widths and 200% text');
 
@@ -97,14 +99,14 @@ function session(records, hour) {
     const blank = await (await empty.request.get(base + '/api/state')).json();
     assert.equal((await empty.request.put(base + '/api/state', { data: { revision: blank.revision,
       settings: { ...blank.state.settings, newWordsPaused: true, assessments: { A1: assessment } }, progress: {}, sessions: {} } })).status(), 200);
-    p = await empty.newPage(); p.on('pageerror', e => errors.push(e.message)); await p.goto(base); await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    p = await empty.newPage(); p.on('pageerror', e => errors.push(e.message)); await p.goto(base); await p.getByText('저장됨', { exact: true }).waitFor();
     assert.ok(await p.getByRole('button', { name: '지금 배정할 단어가 없어요', exact: true }).isDisabled());
     assert.ok(await p.getByText('배정할 단어가 없어요.', { exact: true }).isVisible());
     await p.getByRole('button', { name: '배정 설정 확인', exact: true }).click(); await p.getByRole('dialog').waitFor(); await p.keyboard.press('Escape');
     assert.ok(await p.getByRole('button', { name: '친숙도 확인', exact: true }).isEnabled());
     await p.screenshot({ path: `${out}/today-empty-mobile.png`, fullPage: true }); await audit('no eligible target');
     await tab('학습 기록'); await p.getByRole('button', { name: '오늘의 학습으로', exact: true }).click();
-    assert.equal(await p.getByRole('tab', { name: '오늘의 학습', exact: true }).getAttribute('aria-selected'), 'true');
+    assert.equal(await p.getByRole('tab', { name: '오늘 학습', exact: true }).getAttribute('aria-selected'), 'true');
     assert.deepEqual((await (await empty.request.get(base + '/api/state')).json()).state.sessions, {});
     checks.push('no target leads to settings or familiarity; empty log returns home without automatically creating a session');
     await p.getByRole('button', { name: '친숙도 확인', exact: true }).click();
@@ -119,12 +121,12 @@ function session(records, hour) {
     Object.assign(pending, { stage: 'sentence', finished: false });
     assert.equal((await empty.request.put(base + '/api/state', { data: { revision: reset.revision,
       settings: { ...reset.state.settings, activeSessionId: pending.id, assessments: { A1: assessment } }, progress: {}, sessions: { [pending.id]: pending } } })).status(), 200);
-    await p.reload(); await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await p.reload(); await p.getByText('저장됨', { exact: true }).waitFor();
     await p.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
-    await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await p.getByText('저장됨', { exact: true }).waitFor();
     await p.getByLabel('내 영어 문장', { exact: true }).fill('I arrive home at six.');
     await p.route('**/api/state', route => route.request().method() === 'PUT'
-      ? route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: '검사용 저장 실패' }) }) : route.continue());
+      ? route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: '검사용 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' }) }) : route.continue());
     await p.getByRole('button', { name: '문장을 완성했어요', exact: false }).click();
     await p.getByRole('heading', { name: '기록 저장을 확인하고 있어요.', exact: true }).waitFor();
     assert.equal(await p.locator('.summary-pending-icon').count(), 1);
@@ -133,7 +135,7 @@ function session(records, hour) {
     assert.equal((await (await empty.request.get(base + '/api/state')).json()).state.sessions[pending.id].finished, false);
     await p.screenshot({ path: `${out}/summary-unsaved-mobile.png`, fullPage: true });
     await p.unroute('**/api/state'); await p.getByRole('button', { name: '다시 시도', exact: true }).click();
-    await p.getByRole('heading', { name: '오늘의 기록을 남겼어요.', exact: true }).waitFor();
+    await p.getByRole('heading', { name: '학습 기록을 저장했어요', exact: true }).waitFor();
     assert.equal(await p.locator('.session-summary .success-icon').count(), 1);
     assert.equal(await p.locator('.summary-pending-icon').count(), 0);
     checks.push('failed final save retains the sentence, shows a neutral pending icon, and only confirms success after retry');

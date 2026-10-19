@@ -62,12 +62,12 @@ function rejectBeforeEnd(path, method, identity, prefix, declaredLength) {
     assert.deepEqual(await get(), before); checks.push('built Worker: six chunked requests return 413 before EOF; oversized Content-Length returns before any body; original account unchanged');
 
     const page = await c.newPage(); page.on('pageerror', error => errors.push(error.message));
-    await page.goto(base); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-    await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await page.goto(base); await page.getByText('저장됨', { exact: true }).waitFor();
+    await page.getByRole('tab', { name: '단어장', exact: true }).click();
     await page.getByRole('button', { name: '개인 단어 추가', exact: true }).click();
     const dialog = page.getByRole('dialog');
     await dialog.getByLabel('영어 단어', { exact: true }).fill('kept-draft');
-    await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).fill('보존할 입력');
+    await dialog.getByLabel('학습할 한국어 뜻', { exact: true }).fill('보존할 입력');
     let status, amplified = false;
     await page.route('**/api/state', async route => {
       if (route.request().method() !== 'PUT' || amplified) return route.continue();
@@ -80,25 +80,24 @@ function rejectBeforeEnd(path, method, identity, prefix, declaredLength) {
     await waitForWorker();
     assert.equal(status, 413); assert.deepEqual(await get(), before);
     assert.equal(await dialog.getByLabel('영어 단어', { exact: true }).inputValue(), 'kept-draft');
-    assert.equal(await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).inputValue(), '보존할 입력');
+    assert.equal(await dialog.getByLabel('학습할 한국어 뜻', { exact: true }).inputValue(), '보존할 입력');
     for (const width of [320, 390, 1440]) {
       await page.setViewportSize({ width, height: 844 });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
       assert.equal(await dialog.locator('.dialog-scroll').evaluate(el => el.scrollWidth > el.clientWidth + 1), false);
       await page.screenshot({ path: `${out}/rejected-${width}.png` });
     }
-    // Existing write protection keeps this submit button disabled while a
-    // failed snapshot is pending. Use the product's global retry path.
-    assert.equal(await dialog.getByRole('button', { name: '내 단어장에 추가', exact: true }).isDisabled(), true);
-    await dialog.getByRole('button', { name: 'Close', exact: true }).click();
-    await page.getByRole('alertdialog').getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
+    // Retry the latest editor draft without discarding the open editor.
+    const retry = dialog.getByRole('button', { name: '다시 저장', exact: true });
+    assert.equal(await retry.isEnabled(), true);
+    await dialog.getByLabel('학습할 한국어 뜻', { exact: true }).fill('실패 후 수정한 입력');
+    await retry.click();
     await dialog.waitFor({ state: 'hidden' });
-    await page.getByRole('button', { name: '다시 시도', exact: true }).click();
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-    await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
+    await page.reload(); await page.getByText('저장됨', { exact: true }).waitFor();
     const after = await get(); assert.equal(after.revision, before.revision + 1);
-    assert.ok(Object.values(after.state.progress).some(p => p.personal?.word === 'kept-draft' && p.meaning === '보존할 입력'));
-    checks.push('real 413 shown inside editor; inputs survive; global pending-save retry saves submitted values and survives reload; 320/390/1440px');
+    assert.ok(Object.values(after.state.progress).some(p => p.personal?.word === 'kept-draft' && p.meaning === '실패 후 수정한 입력'));
+    checks.push('real 413 shown inside editor; inputs survive; in-dialog retry saves the latest edited input once and survives reload; 320/390/1440px');
     assert.deepEqual(errors, []); const result = { passed: true, engine, checks, errors };
     fs.writeFileSync(`${out}/result.json`, JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
   } finally { await closeBrowser(browser); }

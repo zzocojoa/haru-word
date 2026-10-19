@@ -17,14 +17,14 @@ import { logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/s
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  if (!await getChatGPTUser()) return json({ error: '로그인이 필요합니다.' }, 401);
+  if (!await getChatGPTUser()) return json({ error: '로그인한 뒤 다시 시도해 주세요.' }, 401);
   const enabled = largeRestoreEnabled();
   return json({ enabled, maxBytes: enabled ? LARGE_BACKUP_BYTES : MAX_BACKUP_BYTES, partBytes: RESTORE_PART_BYTES });
 }
 
 export async function POST(request: Request) {
   const user = await getChatGPTUser();
-  if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
+  if (!user) return json({ error: '로그인한 뒤 다시 시도해 주세요.' }, 401);
   const rejected = validateJsonMutation(request);
   if (rejected) return rejected;
   const revision = Number(request.headers.get('x-study-revision'));

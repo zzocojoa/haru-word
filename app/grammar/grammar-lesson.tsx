@@ -76,7 +76,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
   return <section className="grammar-lesson" aria-label={`${lesson.title} 수업`}>
     <div className="grammar-toolbar">
       <button className="text-button" onClick={() => void leave(onBack)}><ArrowLeft size={18} />수업 목록</button>
-      <span role="status" className="small-note">{error ? '저장 확인 필요' : saving ? '저장 중' : dirty ? '입력 보관 중' : '저장됨'}</span>
+      <span role="status" className="small-note">{error ? '저장 확인 필요' : saving ? '저장 중' : dirty ? '아직 저장 전' : '저장됨'}</span>
     </div>
     <div className="grammar-lesson-heading">
       <span className="level-badge">{lesson.pos}</span>

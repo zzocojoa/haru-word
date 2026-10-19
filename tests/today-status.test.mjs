@@ -23,7 +23,7 @@ test('recorded help is complete for recording, even while the session and remedi
   assert.equal(status(state).recordStatus,'recorded');
   assert.deepEqual(labels(status(state)),['재학습 필요','문장 보완 필요']);
   assert.equal(state.sessions.daily.finished,false);
-  assert.deepEqual(RECORD_STATUS_DISPLAY.recorded,{label:'기록 완료',tone:'success'});
+  assert.deepEqual(RECORD_STATUS_DISPLAY.recorded,{label:'학습 기록함',tone:'success'});
   assert.deepEqual(state,before);
 });
 

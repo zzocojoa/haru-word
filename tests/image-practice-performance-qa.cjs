@@ -48,7 +48,7 @@ const report = { method: { repetitions: 3, histories: [0, 365, 1825], viewport: 
             await page.addInitScript(() => {
               window.imagePerf = { ready: null };
               const observer = new MutationObserver(() => {
-                if (!window.imagePerf.pending && document.querySelector('.topbar .save-state')?.textContent.includes('서버에 저장됨')) {
+                if (!window.imagePerf.pending && document.querySelector('.topbar .save-state')?.textContent.includes('저장됨')) {
                   window.imagePerf.pending = true; requestAnimationFrame(() => requestAnimationFrame(() => { window.imagePerf.ready = performance.now(); observer.disconnect(); }));
                 }
               }); observer.observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-state'] });
@@ -64,7 +64,9 @@ const report = { method: { repetitions: 3, histories: [0, 365, 1825], viewport: 
             }
             await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
             await page.waitForFunction(() => document.querySelector('.image-practice-picture')?.naturalWidth > 0);
-            await page.getByRole('dialog').getByRole('button', { name: /단어 확인|뜻 보기/ }).waitFor();
+            const flip = page.getByRole('dialog').getByRole('button', { name: variant === 'baseline' ? /뜻 보기$/ : /단어·뜻 보기$/ });
+            await flip.waitFor();
+            assert.equal(await flip.isEnabled(), true, 'loaded image card is ready to flip');
             await page.waitForTimeout(100);
             assert.deepEqual([...new Set(images)], imageRows.slice(0, 2).map(row => `/word-images/v1/${row[1]}.webp`));
             assert.deepEqual(forbidden, []);

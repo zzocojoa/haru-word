@@ -21,7 +21,7 @@ export const dynamic = 'force-dynamic';
 export async function GET(request?: Request) {
   const started = Date.now();
   const user = await getChatGPTUser();
-  if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
+  if (!user) return json({ error: '로그인한 뒤 다시 시도해 주세요.' }, 401);
   try {
     const grammarVersion = request?.headers.get('x-study-grammar');
     if (!supportsSenseKeys(request) && await hasSavedLiteralPrototypeSense(database(), user.userId))
@@ -44,7 +44,7 @@ export async function GET(request?: Request) {
 export async function PUT(request: Request) {
   const started = Date.now();
   const user = await getChatGPTUser();
-  if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
+  if (!user) return json({ error: '로그인한 뒤 다시 시도해 주세요.' }, 401);
   const rejected = validateJsonMutation(request);
   if (rejected) return rejected;
   let body: unknown;

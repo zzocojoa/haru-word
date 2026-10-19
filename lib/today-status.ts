@@ -7,8 +7,8 @@ import {
 export type RecordStatus = 'in-progress' | 'recorded' | 'session-ended';
 export const RECORD_STATUS_DISPLAY = {
   'in-progress': { label: '진행 중', tone: 'neutral' },
-  recorded: { label: '기록 완료', tone: 'success' },
-  'session-ended': { label: '회차 종료', tone: 'neutral' },
+  recorded: { label: '학습 기록함', tone: 'success' },
+  'session-ended': { label: '회차 마침', tone: 'neutral' },
 } as const satisfies Record<RecordStatus, { label: string; tone: 'neutral' | 'success' }>;
 
 type Notice = { label: string; warning: boolean };

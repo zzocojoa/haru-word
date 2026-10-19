@@ -6,7 +6,7 @@ import { Speak } from '../ui';
 
 export function ReviewedExamples({ id }: { id: LessonId }) {
   return <div className="grammar-reviewed-examples">
-    <p className="small-note">공식 문법 자료와 대조한 작성 예문 · 이 예문에만 적용되는 분석이에요.</p>
+    <p className="small-note">학습용 예문 분석이에요. 이 예문에만 적용돼요.</p>
     {REVIEWED_EXAMPLES[id].map(example => <div className="grammar-example" key={example.id} data-reviewed-example={example.id}>
       <p lang="en">{example.sentence}</p><Speak text={example.sentence} />
       <SentenceStructureView structure={example.structure} origin="curriculum" />

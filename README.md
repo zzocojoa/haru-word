@@ -1,5 +1,9 @@
 # 하루단어 · Oxford 3000
 
+**UI 문구 개선 · 로컬 변경:** [감사 문서](docs/UX_TEXT_AUDIT_2026-10-19.md)의 우선순위에 따라 안내·버튼·평가 표시를 정리하고 저장 실패 보호와 긴 기록 펼치기를 보완했다. [구현·회귀 검증 기록](docs/UX_TEXT_IMPLEMENTATION_2026-10-19.md)을 참조한다. 운영 v139에 새로 게시한 변경은 아니다.
+
+**UI 문구·WebKit 초점 복귀 최종 검토 완료:** 원래 1,282행·동적9군·C1~C9·검수표를 [광역 검토 기록](docs/UX_TEXT_WIDE_REVIEW_2026-10-19.md)에 대조했다. 초점 수정 후 Chromium79/WebKit77 기능 조건·별도 프로필10개·성능6조건의 [당시 소스와 근거](docs/ux-copy-audit-2026-10-19/wide-review.json)를 보존한다. PR 최종 검토에서 짧은 기록의 문단 경계도 수정하고 Node22/24 각643개·타입/린트/교재/빌드, 두 엔진의 문구·AI 레이아웃·초점 복귀를 다시 확인했다. [수정 후 검증 지문](docs/ux-copy-audit-2026-10-19/final-review.json)은 광역 실행과 구분한다. 운영 미게시이며 실제 iPhone/VoiceOver·사용자 평가는 별도다.
+
 **현재 운영 v139 · 영어 카드 연결 종료:** 기존 Sites의 v139(`effc203`)에서 EN_Card 연결을 제거했다. 상단 메뉴가 없고, 이전 `/cards` 주소는 학습 홈으로 이동하며 카드 API는 `410 CARD_FEATURE_RETIRED`를 반환한다. 이번 GitHub 통합은 PR #46이 반영된 main에 같은 종료 처리를 보존하는 작업이다. 새 배포·운영 설정 변경·DB 마이그레이션은 하지 않는다. [종료 범위와 검증·복구](docs/EN_CARD_RETIREMENT.md)를 따른다. **startup·기존 401 원인은 미확정**이다. 아래 v138 이하 설명은 당시의 배포 기록이다.
 
 **v138 운영 배포 · 2026-10-18 20:22:48 KST:** [PR #44](https://github.com/zzocojoa/haru-word/pull/44)의 `main@9ad8380`을 기존 Sites에 게시했다. 별도 단어 확인 버튼 없이 이미지와 뜻 카드를 눌러 양방향으로 전환한다. 로그인된 데스크톱 in-app browser에서 초기 실행·실제 위치 저장·닫기/새로고침 후 같은 카드 앞면 재개를 확인했고, 확인 후 원래 위치로 복귀했다. 학습 문서·revision과 운영 설정은 유지됐으며 새 마이그레이션은 없다. main CI Node 22/24 각각 665개, 새 빌드 및 운영 JS/CSS 17개 대조가 통과했다. **startup 원인은 미확정**이며 실제 iPhone/VoiceOver는 미검증이다. [운영 결과와 v137 복구 절차](OPERATIONS.md#이미지-연습-카드-뒤집기-v138--2026-10-18), [출시 증거·관측 한계](docs/releases/2026-10-18-image-practice-card-flip-rollout.json)를 참조한다. 이번 문서 정리는 추가 배포·설정 변경이 아니다. 아래 버전과 CI 상태는 당시 이력이다.

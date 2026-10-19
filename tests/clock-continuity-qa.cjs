@@ -10,7 +10,7 @@ const checks=[],errors=[];
 (async()=>{const browser=await launchBrowser();try{
  const a=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:headers}),p=await a.newPage();
  p.on('pageerror',e=>errors.push(e.message));
- const get=async c=>(await c.request.get(base+'/api/state')).json(),saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
+ const get=async c=>(await c.request.get(base+'/api/state')).json(),saved=()=>p.getByText('저장됨',{exact:true}).waitFor();
  let data=await get(a);const w=words.find(w=>w.word==='arrive'&&w.pos==='v.'),sid=crypto.randomUUID(),meaning=content[w.id].meaning;
  const record={entryId:w.id,meaning,material:content[w.id],learnedOn:yesterday,familiarity:'known',en:'unmeasured',ko:'unmeasured',sentenceStatus:'unmeasured',sentence:'',notes:''};
  const session={id:sid,kind:'daily',date:yesterday,period:yesterday,ids:[w.id],warmupIds:[],stage:'en',index:0,records:{[w.id]:record},retry:[],retryMode:false,elapsed:0,finished:false,paused:true,createdAt:yesterday+'T14:50:00Z'};
@@ -27,25 +27,29 @@ const checks=[],errors=[];
  await p.getByRole('status').filter({hasText:'한국 시간을 확인하고 있어요'}).waitFor();assert.equal(clockCalls,initialCalls);
  await p.clock.fastForward(10_050);await p.getByRole('button',{name:'시간 다시 확인',exact:true}).waitFor();assert.equal(clockCalls,initialCalls);
  assert.equal(await field.inputValue(),answer);assert.ok(await p.getByRole('button',{name:'내 답 확인',exact:true}).isDisabled());
- for(const name of ['전체 단어장','주간·월말 점검','학습 기록']){await p.getByRole('tab',{name,exact:true}).click();await p.getByRole('button',{name:'시간 다시 확인',exact:true}).waitFor()}
+ for(const name of ['단어장','복습 점검','학습 기록']){await p.getByRole('tab',{name,exact:true}).click();await p.getByRole('button',{name:'시간 다시 확인',exact:true}).waitFor()}
  await p.screenshot({path:out+'/clock-recovery-mobile.png'});
  checks.push('clock request times out once after 10 seconds; repeated wake events share its deadline and recovery is available on every tab');
  await p.getByRole('button',{name:'학습 설정',exact:true}).click();await p.getByText('문제가 생겼을 때',{exact:true}).click();
  const download=p.waitForEvent('download');await p.getByRole('button',{name:'문제 진단 기록 받기',exact:true}).click();const diagnostic=fs.readFileSync(await(await download).path(),'utf8');const events=JSON.parse(diagnostic).events;
  assert.ok(events.some(e=>e.operation==='clock'&&e.outcome==='timeout'));assert.ok(events.some(e=>e.gates?.clockReady===false));
  for(const secret of [answer,sid,w.id,headers['oai-authenticated-user-id'],headers['oai-authenticated-user-email']])assert.ok(!diagnostic.includes(secret));
- await p.getByRole('dialog').getByRole('button',{name:'Close',exact:true}).click();
+ await p.getByRole('dialog').getByRole('button',{name:'닫기',exact:true}).click();
+ // Audit the recovery screen after the closing modal/overlay animation has left the DOM.
+ // Otherwise WebKit can sample foreground text through the fading modal overlay.
+ await p.locator('[data-slot="dialog-content"]').waitFor({state:'hidden'});
+ await p.locator('[data-slot="dialog-overlay"]').waitFor({state:'hidden'});
  await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const axe=await p.evaluate(async()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(axe.violations.length,0,JSON.stringify(axe.violations));
  checks.push('manual diagnostic export identifies the blocking clock without answers, account IDs, word IDs or session IDs; recovery screen has no axe violations');
  await held.abort().catch(()=>{});hold=false;time=date+'T00:01:00Z';await p.getByRole('button',{name:'시간 다시 확인',exact:true}).click();
- await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();assert.equal(await field.inputValue(),answer);
+ await p.getByRole('tab',{name:'오늘 학습',exact:true}).click();assert.equal(await field.inputValue(),answer);
  await p.getByText(yesterday+'에 시작한 회차를 이어가고 있어요. 오늘 입력한 결과는 '+date+' 연습으로 기록돼요.').waitFor();
  await p.getByRole('button',{name:'내 답 확인',exact:true}).click();await saved();data=await get(a);assert.equal(data.state.sessions[sid].date,yesterday);assert.equal(data.state.sessions[sid].records[w.id].draft.answer,answer);
  checks.push('midnight plus reconnect preserves the unfinished answer and original learning day; saving resumes without refresh or duplicate requests');
  const b=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:headers}),q=await b.newPage();q.on('pageerror',e=>errors.push(e.message));
- await q.route('**/api/study-clock',r=>r.fulfill({json:{serverTime:Date.parse(time)}}));await q.goto(base,{waitUntil:'domcontentloaded'});await q.getByText('서버에 저장됨',{exact:true}).waitFor();
- await q.getByRole('tab',{name:'학습 기록',exact:true}).click();await q.locator('.journal-day-trigger').click();await q.locator('.journal-session-trigger').click();await q.getByRole('button',{name:'이어서 학습',exact:true}).click();await q.getByText('서버에 저장됨',{exact:true}).waitFor();
- assert.equal(await q.getByLabel('한국어 뜻 입력').inputValue(),answer);await q.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).click();await q.getByText('서버에 저장됨',{exact:true}).waitFor();
+ await q.route('**/api/study-clock',r=>r.fulfill({json:{serverTime:Date.parse(time)}}));await q.goto(base,{waitUntil:'domcontentloaded'});await q.getByText('저장됨',{exact:true}).waitFor();
+ await q.getByRole('tab',{name:'학습 기록',exact:true}).click();await q.locator('.journal-day-trigger').click();await q.locator('.journal-session-trigger').click();await q.getByRole('button',{name:'이어서 학습',exact:true}).click();await q.getByText('저장됨',{exact:true}).waitFor();
+ assert.equal(await q.getByLabel('한국어 뜻 입력').inputValue(),answer);await q.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).click();await q.getByText('저장됨',{exact:true}).waitFor();
  const remote=await get(b);assert.equal(remote.state.sessions[sid].records[w.id].lastPracticedOn,date);assert.equal(remote.state.sessions[sid].records[w.id].learnedOn,yesterday);
  await p.getByRole('button',{name:'도움이 필요했어요',exact:true}).click();await p.getByRole('alert').filter({hasText:'다른 기기'}).waitFor();assert.deepEqual(await get(a),remote);
  const backup=p.waitForEvent('download');await p.getByRole('button',{name:'현재 입력 백업',exact:true}).click();const pending=JSON.parse(fs.readFileSync(await(await backup).path(),'utf8'));assert.equal(pending.sessions[sid].records[w.id].enAnswer,answer);

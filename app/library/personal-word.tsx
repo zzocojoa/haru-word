@@ -39,7 +39,7 @@ export function PersonalWord({
       <DialogHeader>
         <DialogTitle>나에게 필요한 단어 추가</DialogTitle>
         <DialogDescription>
-          공식 목록과 별도로 ‘개인 추가’로 저장해요.
+          Oxford 목록과 구분해 내 단어장에 저장해요.
         </DialogDescription>
       </DialogHeader>
       <div className="dialog-scroll">
@@ -66,7 +66,7 @@ export function PersonalWord({
         </SelectContent>
       </Select>
       <label>
-        오늘의 한국어 뜻
+        학습할 한국어 뜻
         <input
           value={meaning}
           onChange={(e) => setMeaning(e.target.value)}

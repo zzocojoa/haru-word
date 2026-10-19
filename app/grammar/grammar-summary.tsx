@@ -25,9 +25,9 @@ export function GrammarSummary({ lesson, progress, dirty, error, canSave, date, 
   return <div className="grammar-stage">
     <div className="grammar-summary-heading" data-pending={dirty}>
       <StatusIcon size={26} aria-hidden="true" />
-      <div><p className="grammar-role" role="status">{message}</p><p className="small-note">수업 마침은 숙달 판정이 아니에요.</p></div>
+      <div><p className="grammar-role" role="status">{message}</p><p className="small-note">수업을 마쳐도 내용을 모두 익혔다는 뜻은 아니에요.</p></div>
     </div>
-    <p className="small-note">살펴보기 · {progress.contentVersion ? firstAnswerLabel(practiceForVersion(lesson.id,progress.contentVersion).observation, progress.observation) : '미측정 · 이전 수업 기록'}</p>
+    <p className="small-note">살펴보기 · {progress.contentVersion ? firstAnswerLabel(practiceForVersion(lesson.id,progress.contentVersion).observation, progress.observation) : '아직 확인 안 함 · 이전 수업 기록'}</p>
     {legacyNowNote(lesson.id,progress.contentVersion,false,2)&&<p className="small-note">{legacyNowNote(lesson.id,progress.contentVersion,false,2)}</p>}
     <ResultList questions={questionsFor(lesson.id, progress)} answers={progress.answers} title="처음 연습" />
     {progress.review?.completedAt && <ResultList questions={questionsFor(lesson.id, progress, true)} answers={progress.review.answers} title={progress.review.mode === 'extra' ? '최근 추가 연습' : '최근 다시 확인'} />}

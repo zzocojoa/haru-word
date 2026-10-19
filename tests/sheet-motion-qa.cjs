@@ -7,7 +7,7 @@ fs.mkdirSync(out,{recursive:true});
  await waitForWorker(); const browser=await launchBrowser({engine}); let p;
  try {
   const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,extraHTTPHeaders:accountHeaders('sheet_motion')});
-  p=await c.newPage(); await p.goto(base); await p.getByText('서버에 저장됨',{exact:true}).waitFor();
+  p=await c.newPage(); await p.goto(base); await p.getByText('저장됨',{exact:true}).waitFor();
   const before=await(await c.request.get(base+'/api/state')).json(),dialog=p.getByRole('dialog');
   const open=async()=>{await p.getByRole('button',{name:'학습 설정',exact:true}).click();await dialog.evaluate(el=>Promise.all(el.getAnimations().map(a=>a.finished.catch(()=>{}))));};
   await open();const handle=p.locator('.sheet-handle'),box=await handle.boundingBox();
@@ -40,7 +40,7 @@ fs.mkdirSync(out,{recursive:true});
   assert.ok(cancelled.frames.every((f,i,a)=>Math.abs(f.x)<1&&(!i||f.y<=a[i-1].y+1)));
   assert.ok(Math.abs(cancelled.frames.at(-1).y)<1);assert.equal(cancelled.attrs,false);
   const resized=await motion(160,true);assert.ok(resized.visible);assert.equal(resized.attrs,false);
-  await dialog.getByRole('button',{name:'Close',exact:true}).focus();await p.keyboard.press('Enter');await dialog.waitFor({state:'hidden'});
+  await dialog.getByRole('button',{name:'닫기',exact:true}).focus();await p.keyboard.press('Enter');await dialog.waitFor({state:'hidden'});
   await open();await p.emulateMedia({reducedMotion:'reduce'});const reduced=await motion(160);assert.equal(reduced.release,0);assert.equal(reduced.visible,false);
   assert.deepEqual(await(await c.request.get(base+'/api/state')).json(),before);
   const result={passed:true,engine,checks:['handle mouse press/tap stay centered and open; original Close remains keyboard accessible','release frames move continuously downward, cancellation springs home, resize cancels dismissal','reduced motion and unchanged saved state'],dismissed,cancelled,resized};

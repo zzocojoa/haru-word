@@ -100,7 +100,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
     setHelp(null); setLessonId(id); setView('grammar'); pendingPosition.current = 0;
   }
   return <Tabs value={view} onValueChange={next => void switchView(next)} className="library-modes" data-lesson={view === 'grammar' && !!lessonId}>
-    {props.grammarEnabled && <TabsList className="library-mode-tabs" aria-label="단어장 학습 종류"><TabsTrigger value="words">단어 목록</TabsTrigger><TabsTrigger value="grammar">품사·문장 연습</TabsTrigger></TabsList>}
+    {props.grammarEnabled && <TabsList className="library-mode-tabs" aria-label="단어장 학습 종류"><TabsTrigger value="words">단어 목록</TabsTrigger><TabsTrigger value="grammar">품사와 문장 연습</TabsTrigger></TabsList>}
     <TabsContent ref={listPanel} value="words" forceMount hidden={view !== 'words'} onFocusCapture={e => { if (e.currentTarget.contains(e.target)) focusReturn.current = e.target as HTMLElement; }}><WordList {...props} pos={pos} setPos={setPos} page={page} setPage={setPage} onHelp={props.grammarEnabled ? (id, button) => { focusReturn.current = button; helpReturn.current = button; setHelp(id); } : undefined} /></TabsContent>
     {props.grammarEnabled && <TabsContent value="grammar" forceMount hidden={view !== 'grammar'}>
       {(grammarVisited || view === 'grammar') && <GrammarWorkspace visible={view === 'grammar'} lessonId={lessonId} enhanced={props.grammarPracticeEnabled || props.grammarV3Enabled || props.grammarV4Enabled} contentVersion={props.grammarV4Enabled ? 4 : props.grammarV3Enabled ? 3 : 2} activityDate={props.activityDate} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { pendingSearchFocus.current = true; focusReturn.current = null; setPos(LESSON_INDEX.get(lessonId!)!.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} date={props.activityDate()} expandedGroups={expandedGroups} onExpandedGroups={setExpandedGroups} progress={props.state.grammar ?? {}} headingRef={heading} filter={grammarFilter} onFilter={setGrammarFilter} onOpen={id => void openLesson(id)} />}
@@ -130,12 +130,17 @@ const WordList = memo(function WordList({
   const listHeading = useRef<HTMLHeadingElement>(null);
   const dialogTrigger = useRef<HTMLButtonElement | null>(null);
   const searchInput = useRef<HTMLInputElement | null>(null);
+  const restoration = useViewRestoration();
   function restoreFocus(event: Event) {
     event.preventDefault();
-    (dialogTrigger.current?.isConnected
-      ? dialogTrigger.current
-      : searchInput.current
-    )?.focus({ preventScroll: true });
+    // Closing also restores navigation history. The explicit dialog trigger
+    // must win over the browser's earlier pointer-focus snapshot.
+    restoration.schedule('destination', () => {
+      (dialogTrigger.current?.isConnected
+        ? dialogTrigger.current
+        : searchInput.current
+      )?.focus({ preventScroll: true });
+    });
   }
   const filtered = useMemo(
     () =>
@@ -229,7 +234,7 @@ const WordList = memo(function WordList({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">모든 친숙도</SelectItem>
-            <SelectItem value="unmarked">아직 미표시</SelectItem>
+            <SelectItem value="unmarked">친숙도 미확인</SelectItem>
             <SelectItem value="known">✓✓ 뜻을 알아요</SelectItem>
             <SelectItem value="uncertain">✓ 조금 헷갈려요</SelectItem>
             <SelectItem value="new">? 처음 봐요</SelectItem>
@@ -257,7 +262,7 @@ const WordList = memo(function WordList({
         <TableHeader>
           <TableRow>
             <TableHead>단어</TableHead>
-            <TableHead>오늘의 뜻</TableHead>
+            <TableHead>학습할 뜻</TableHead>
             <TableHead>수준</TableHead>
             <TableHead>친숙도</TableHead>
             <TableHead>학습 상태</TableHead>
@@ -297,13 +302,13 @@ const WordList = memo(function WordList({
                   <span className={"familiarity-tag " + (p?.familiarity || "")}>
                     {p?.familiarity
                       ? FAMILIARITY_TEXT[p.familiarity]
-                      : "미표시"}
+                      : "미확인"}
                   </span>
                 </TableCell>
                 <TableCell>
                   <span className={hasReviewWork(p) ? "today-review" : "muted"}>
                     {hasReviewWork(p)
-                      ? "진행·복습 남음"
+                      ? "학습·복습 남음"
                       : p?.lastStudied
                         ? "학습 기록 있음"
                         : "학습 전"}

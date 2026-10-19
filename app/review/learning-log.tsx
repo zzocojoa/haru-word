@@ -1,5 +1,6 @@
 "use client";
 import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
+import { RecordText } from '../record-text';
 import {
   Accordion,
   AccordionContent,
@@ -181,7 +182,7 @@ export function LearningLog({
         </button>
       )}
       <p className="small-note">
-        미측정은 성공률에서 제외 · 날짜는 한국 시간
+        아직 확인하지 않은 항목은 성공률에서 제외해요. 날짜는 한국 시간 기준이에요.
       </p>
     </section>
   );
@@ -209,7 +210,7 @@ function JournalSessionItem({
             <span className="level-badge">{journalSessionLabel(s)}</span>
           </span>
           <span className="journal-session-count">
-            {counts.total}개 · 기록 완료 {counts.recorded} · 독립 성공 {counts.successful} · {resumable ? "진행 중" : "회차 종료"}
+            {counts.total}개 · 학습 기록함 {counts.recorded} · 도움 없이 성공 {counts.successful} · {resumable ? "진행 중" : "회차 마침"}
           </span>
           <span className="journal-session-preview">
             <span lang="en">{preview}</span>{s.ids.length > 3 && ` 외 ${s.ids.length - 3}개`}
@@ -261,8 +262,8 @@ const SessionLogTable = memo(function SessionLogTable({
     <Table className="log-table">
       <TableHeader>
         <TableRow>
-          <TableHead>단어·오늘의 뜻</TableHead>
-          <TableHead>처음 표시</TableHead>
+          <TableHead>단어·학습한 뜻</TableHead>
+          <TableHead>처음 확인한 친숙도</TableHead>
           <TableHead>영어→뜻</TableHead>
           <TableHead>뜻→영어</TableHead>
           <TableHead>내 문장·보완점</TableHead>
@@ -278,18 +279,16 @@ const SessionLogTable = memo(function SessionLogTable({
             <Fragment key={id}><TableRow>
               <TableCell>
                 <b>{w?.word}</b>
-                <small className="block">
-                  {POS[w?.pos || ""]} · {r.meaning}
-                </small>
+                <div className="small-note">{POS[w?.pos || ""]} · <RecordText text={r.meaning} label="저장한 뜻" /></div>
                 <small>
-                  실제 학습: {r.learnedOn || "기존 기록·미확인"}
+                  실제 학습: {r.learnedOn || "이전 기록 · 날짜 미확인"}
                   {r.lastPracticedOn
                     ? ` · 최근 연습: ${r.lastPracticedOn}`
                     : ""}
                 </small>
               </TableCell>
               <TableCell>
-                {r.familiarity ? FAMILIARITY_TEXT[r.familiarity] : "미표시"}
+                {r.familiarity ? FAMILIARITY_TEXT[r.familiarity] : "미확인"}
               </TableCell>
               <TableCell>
                 {RESULT_TEXT[r.en]}
@@ -308,18 +307,15 @@ const SessionLogTable = memo(function SessionLogTable({
                 )}
               </TableCell>
               <TableCell>
-                <p>
-                  {SENTENCE_TEXT[r.sentenceStatus]} ·{" "}
-                  {r.sentence || "문장 기록 없음"}
-                </p>
+                <div>{SENTENCE_TEXT[r.sentenceStatus]} · <RecordText text={r.sentence || "문장 기록 없음"} label="내 문장" lang="en" /></div>
                 {r.sentenceStatus === "improve" && (
                   <span className="status-warn">문장 보완</span>
                 )}
-                {r.notes && <small>{r.notes}</small>}
+                {r.notes && <div className="record-note"><RecordText text={r.notes} label="보완점" /></div>}
               </TableCell>
               <TableCell>
                 {sessionRecordComplete(s, r)
-                  ? "이후에도 복습"
+                  ? "다음에 다시 복습"
                   : nextAction(r, s)}
               </TableCell>
             </TableRow>

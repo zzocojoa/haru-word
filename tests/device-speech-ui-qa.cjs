@@ -51,10 +51,10 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await page.clock.install();
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base, { waitUntil: 'domcontentloaded' });
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     await page.getByRole('button', { name: /학습 이어서/ }).click();
     await page.locator('.word-stage h3').getByText('quickly', { exact: true }).waitFor();
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     await page.evaluate(() => document.fonts.ready);
     const before = await get();
     const audio = page.locator('.word-pronunciation .speak-wrap');
@@ -112,9 +112,9 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     // Freeze the watchdog while layout/axe scans take real wall time on slow machines.
     await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
     await button.click();
-    await message.getByText('준비 중', { exact: true }).waitFor();
+    await message.getByText('음성 준비 중', { exact: true }).waitFor();
     await layout('starting', true);
-    await message.getByText('준비 중', { exact: true }).waitFor();
+    await message.getByText('음성 준비 중', { exact: true }).waitFor();
     await control('onstart');
     await page.clock.resume();
     await message.getByText('재생 중', { exact: true }).waitFor();
@@ -126,7 +126,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
     await button.click();
     await page.clock.runFor(3999);
-    await message.getByText('준비 중', { exact: true }).waitFor();
+    await message.getByText('음성 준비 중', { exact: true }).waitFor();
     await page.clock.runFor(1);
     await message.getByText(/기기 음성을 재생하지 못했어요.*Safari/).waitFor();
     await page.clock.resume();
@@ -148,7 +148,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
         records: { [reviewed.id]: { ...session.records[word.id], meaning, material: content[reviewed.id] } } } } };
       revision++;
       await page.reload();
-      await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+      await page.getByText('저장됨', { exact: true }).waitFor();
       await page.getByRole('button', { name: /학습 이어서/ }).click();
       await page.locator('.word-stage h3').getByText('close', { exact: true }).waitFor();
     }
@@ -156,7 +156,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await page.locator('.word-pronunciation .phonetic').getByText('/kloʊz/', { exact: true }).waitFor();
     await page.getByRole('link', { name: '미국식 사전 발음 듣기', exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: 'close 기기 음성 듣기', exact: true }).count(), 0);
-    await page.getByLabel('오늘 공부할 뜻', { exact: false }).fill('마감하다');
+    await page.getByLabel('학습할 뜻', { exact: false }).fill('마감하다');
     await page.getByRole('link', { name: '사전에서 발음 확인', exact: true }).waitFor();
     assert.equal(await page.locator('.word-pronunciation .phonetic').count(), 0);
     assert.equal(await page.getByRole('button', { name: 'close 기기 음성 듣기', exact: true }).count(), 0);
@@ -198,7 +198,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     await sentencePage.keyboard.press('Enter');
     await sentenceHelp.getByText('기기 음성은 사전 발음과 다를 수 있어요.', { exact: true }).waitFor();
     await sentenceButton.click();
-    await sentenceMessage.getByText('준비 중', { exact: true }).waitFor();
+    await sentenceMessage.getByText('음성 준비 중', { exact: true }).waitFor();
     await sentencePage.evaluate(() => window.__testAudio.utterance.onstart());
     await sentenceMessage.getByText('재생 중', { exact: true }).waitFor();
     await sentencePage.evaluate(() => window.__testAudio.utterance.onend());

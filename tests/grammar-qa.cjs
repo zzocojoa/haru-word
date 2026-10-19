@@ -7,16 +7,17 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
   const context = await browser.newContext({ extraHTTPHeaders: headers, viewport: { width: 390, height: 844 } });
   const page = await context.newPage(), errors = [];
   page.on('pageerror', e => errors.push(e.message));
-  const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '2' } })).json();
+  const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '4' } })).json();
   const until = async (check, label) => { for (let i = 0; i < 100; i++) { if (await check()) return; await page.waitForTimeout(100); } throw Error(label); };
-  const grammar = () => page.getByRole('tab', { name: '품사·문장 연습', exact: true });
+  const grammar = () => page.getByRole('tab', { name: '품사와 문장 연습', exact: true });
   const getSentence = () => page.getByRole('textbox', { name: '내 문장', exact: true });
   fs.mkdirSync('outputs/grammar', { recursive: true });
   try {
     const seed = await snapshot();
     assert.equal((await context.request.put(base + '/api/state', { data: { revision: seed.revision, progress: {}, sessions: {}, grammar: { noun: { stage: 0, answers: {}, sentence: '', updatedAt: new Date().toISOString() } } } })).status(), 200);
-    await page.goto(base); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
-    await grammar().click(); assert.equal(await page.locator('.grammar-tile').count(), 15);
+    await page.goto(base); await page.getByRole('tab', { name: '단어장', exact: true }).click();
+    await grammar().click(); await page.locator('.grammar-tile').first().waitFor();
+    assert.equal(await page.locator('.grammar-tile').count(), 15);
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, 'catalog overflow ' + width);
@@ -34,14 +35,14 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     await page.getByRole('button', { name: '답 확인', exact: true }).click();
     await page.getByRole('button', { name: 'teacher', exact: true }).click();
     await page.getByRole('button', { name: '답 확인', exact: true }).click();
-    assert.match(await page.locator('.grammar-feedback').innerText(), /처음 답: reads/);
+    assert.match(await page.locator('.grammar-feedback').innerText(), /첫 답: reads/);
     await page.getByRole('button', { name: '다음', exact: true }).click();
-    await page.getByRole('button', { name: '답을 보고 도움받기', exact: true }).click();
+    await page.getByRole('button', { name: '답 보기 · 도움으로 기록', exact: true }).click();
     await page.getByRole('button', { name: 'bag', exact: true }).click();
     await page.getByRole('button', { name: '답 확인', exact: true }).click();
     await page.getByRole('button', { name: '다음', exact: true }).click();
     for (const text of ['I', 'like', 'music.']) { const b = page.getByRole('button', { name: text, exact: true }); await b.focus(); await page.keyboard.press('Enter'); }
-    await page.getByRole('button', { name: '정답 확인', exact: true }).click();
+    await page.getByRole('button', { name: '내 답 확인', exact: true }).click();
     await page.getByRole('button', { name: '다음', exact: true }).click();
     await until(async () => (await snapshot()).state.grammar.noun?.stage === 5, 'stage save');
     const original = await snapshot();
@@ -52,23 +53,23 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     });
     await getSentence().fill('I like tea.'); await until(() => delayed, 'save started');
     await getSentence().fill('I like coffee.'); release();
-    await page.getByRole('tab', { name: '오늘의 학습', exact: true }).click();
+    await page.getByRole('tab', { name: '오늘 학습', exact: true }).click();
     await until(async () => (await snapshot()).state.grammar.noun.sentence === 'I like coffee.', 'late input survives navigation');
     await page.unroute('**/api/state');
-    await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
-    await page.reload(); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await grammar().click(); await page.locator('.grammar-tile').first().click();
+    await page.getByRole('tab', { name: '단어장', exact: true }).click();
+    await page.reload(); await page.getByRole('tab', { name: '단어장', exact: true }).click(); await grammar().click(); await page.locator('.grammar-tile').first().click();
     assert.equal(await getSentence().inputValue(), 'I like coffee.');
     // A second device can load the same grammar snapshot without touching vocabulary.
     const otherDevice = await browser.newContext({ extraHTTPHeaders: headers });
     assert.equal((await (await otherDevice.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1' } })).json()).state.grammar.noun.sentence, 'I like coffee.'); await otherDevice.close();
     let failures = 0;
-    await page.route('**/api/state', async route => { if (route.request().method() === 'PUT') { failures++; await route.fulfill({ status: 503, json: { error: '테스트 저장 실패' } }); } else await route.continue(); });
+    await page.route('**/api/state', async route => { if (route.request().method() === 'PUT') { failures++; await route.fulfill({ status: 503, json: { error: '테스트 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } }); } else await route.continue(); });
     await getSentence().fill('I like green tea.'); await until(() => failures > 0, 'save failure');
     await getSentence().fill('I like green tea and coffee.');
     const pendingBackup = page.waitForEvent('download'); await page.getByRole('button', { name: '현재 입력 백업', exact: true }).click();
     const emergency = JSON.parse(fs.readFileSync(await (await pendingBackup).path(), 'utf8'));
     assert.equal((emergency.state ?? emergency).grammar.noun.sentence, 'I like green tea and coffee.');
-    await page.getByRole('tab', { name: '오늘의 학습', exact: true }).click();
+    await page.getByRole('tab', { name: '오늘 학습', exact: true }).click();
     assert.equal(await getSentence().inputValue(), 'I like green tea and coffee.');
     await page.unroute('**/api/state'); await page.getByRole('button', { name: '다시 저장', exact: true }).click();
     await until(async () => (await snapshot()).state.grammar.noun.sentence === 'I like green tea and coffee.', 'retry');
@@ -77,7 +78,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     await page.route('**/api/grammar-feedback', async route => { aiCalls++; const sentence = route.request().postDataJSON().sentence; await aiHold; await route.fulfill({ json: { feedback: { original: sentence, model: 'gemini-3.1-flash-lite', createdAt: new Date().toISOString(), meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '명사를 알맞게 사용했어요.' } } }); });
     await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await until(() => aiCalls === 1, 'AI started');
     await getSentence().fill('I like books.'); aiRelease(); await page.waitForTimeout(250);
-    assert.equal(await getSentence().inputValue(), 'I like books.'); assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
+    assert.equal(await getSentence().inputValue(), 'I like books.'); assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 0);
     await page.unroute('**/api/grammar-feedback');
     await page.route('**/api/grammar-feedback', route => route.fulfill({ status: 429, json: { error: 'Google 한도에 도달했어요.' } }));
     await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
@@ -90,12 +91,16 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     await page.getByRole('button', { name: '다른 3문제로 확인', exact: true }).click();
     await page.getByRole('button', { name: '명사', exact: true }).click(); await page.getByRole('button', { name: '답 확인', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
     await page.getByRole('button', { name: 'shop', exact: true }).click(); await page.getByRole('button', { name: '답 확인', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
-    for (const text of ['My', 'friend', 'likes', 'tea.']) await page.getByRole('button', { name: text, exact: true }).click();
-    await page.getByRole('button', { name: '정답 확인', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
+    // The original lesson stays v1; a newly started review uses the enabled v4
+    // edition, whose order pieces omit capitalization and punctuation clues.
+    for (const text of ['my', 'friend', 'likes', 'tea']) await page.getByRole('button', { name: text, exact: true }).click();
+    await page.getByRole('button', { name: '내 답 확인', exact: true }).click(); await page.getByRole('button', { name: '다음', exact: true }).click();
     await page.getByRole('button', { name: '같은 품사의 단어 보기' }).click();
     assert.match(await page.getByRole('combobox', { name: '품사 필터' }).innerText(), /명사/);
     const after = await snapshot(); assert.deepEqual(after.state.progress, original.state.progress); assert.deepEqual(after.state.sessions, original.state.sessions); assert.deepEqual(after.state.settings, original.state.settings);
     assert.ok(after.state.grammar.noun.review.completedAt);
+    assert.equal(after.state.grammar.noun.contentVersion, undefined);
+    assert.equal(after.state.grammar.noun.review.contentVersion, 4);
     assert.equal(after.state.grammar.noun.answers.q1.first, 'reads'); assert.equal(after.state.grammar.noun.answers.q2.helped, true);
     await page.getByRole('button', { name: /명사 도움말/ }).first().click(); await page.getByRole('button', { name: '이 품사 배우기' }).click();
     await page.getByRole('button', { name: '내 문장 보완', exact: true }).click();

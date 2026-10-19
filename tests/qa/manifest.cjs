@@ -80,6 +80,7 @@ module.exports = [
   "ui-refresh-qa.cjs",
   "ui-density-qa.cjs",
   "ui-continuity-qa.cjs",
+  "ux-text-qa.cjs",
   "workflow-qa.cjs",
   "word-image-study-qa.cjs"
 ];
