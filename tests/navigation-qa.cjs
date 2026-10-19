@@ -67,9 +67,9 @@ const until = async (check, label) => {
   const marker = () => page.evaluate(() => history.length);
   try {
     await page.goto(base + '/favicon.svg'); await page.goto(base, { waitUntil: 'domcontentloaded' });
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     const initialHistory = await marker();
-    for (const name of ['전체 단어장', '주간·월말 점검', '학습 기록', '오늘의 학습', '전체 단어장']) {
+    for (const name of ['단어장', '복습 점검', '학습 기록', '오늘 학습', '단어장']) {
       await tab(name).click(); const rootSwipe = await back(); await at(name);
       assert.equal(rootSwipe.moved, false, 'tab root is not a Back destination');
     }
@@ -82,10 +82,10 @@ const until = async (check, label) => {
       return event.defaultPrevented && !document.documentElement.hasAttribute('data-swiping');
     }), true, 'fixed header edge must not trigger a full-page native transition');
     await page.getByRole('button', { name: '학습 설정', exact: true }).click(); await page.getByRole('dialog').waitFor();
-    await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' }); await at('전체 단어장');
+    await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' }); await at('단어장');
     await page.getByRole('button', { name: '학습 설정', exact: true }).click();
-    await page.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();
-    await page.getByRole('dialog').waitFor({ state: 'hidden' }); await back(); await at('전체 단어장');
+    await page.getByRole('dialog').getByRole('button', { name: '닫기', exact: true }).click();
+    await page.getByRole('dialog').waitFor({ state: 'hidden' }); await back(); await at('단어장');
     checks.push('all tab roots ignore Back; tab visits do not add browser history; settings swipe and Close work');
 
     const search = page.getByLabel('단어 또는 한국어 뜻 검색'); await search.fill('apple');
@@ -96,7 +96,7 @@ const until = async (check, label) => {
     await page.getByRole('button', { name: '학습 방식·출처', exact: true }).click(); await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
     checks.push('word editor, personal word, POS help and source dialog close without resetting filters');
 
-    await tab('품사·문장 연습').click(); await page.locator('.grammar-tile').first().click();
+    await tab('품사와 문장 연습').click(); await page.locator('.grammar-tile').first().click();
     const input = page.getByRole('textbox', { name: '내 문장', exact: true });
     if (engine === 'chromium') {
       const client = await context.newCDPSession(page);
@@ -125,10 +125,10 @@ const until = async (check, label) => {
     await swipe({ dx: 20, dy: 160 }); assert.equal(await input.isVisible(), true);
     await swipe({ dx: -100 }); assert.equal(await input.isVisible(), true);
     await swipe({ x: 150 }); assert.equal(await input.isVisible(), true);
-    await tab('오늘의 학습').click(); await back(); await at('오늘의 학습');
-    await tab('전체 단어장').click(); assert.equal(await input.isVisible(), true);
+    await tab('오늘 학습').click(); await back(); await at('오늘 학습');
+    await tab('단어장').click(); assert.equal(await input.isVisible(), true);
     checks.push('short/cancelled/vertical/leftward/mid-page touches do not navigate; each tab retains its own internal view');
-    await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '검사 저장 실패' } }) : route.continue());
+    await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '검사 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } }) : route.continue());
     await input.fill('I like coffee and books.'); await back();
     await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
     assert.equal(await input.isVisible(), true);
@@ -148,7 +148,7 @@ const until = async (check, label) => {
 
     await tab('학습 기록').click(); await page.getByRole('button', { name: '기록 관리', exact: true }).click(); await page.getByRole('menuitem', { name: '전체 백업', exact: true }).click();
     await page.getByRole('dialog').waitFor(); await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
-    await page.getByRole('button', { name: '기록 관리', exact: true }).click(); await page.getByRole('menuitem', { name: '백업 가져오기', exact: true }).click();
+    await page.getByRole('button', { name: '기록 관리', exact: true }).click(); await page.getByRole('menuitem', { name: '백업으로 복원', exact: true }).click();
     await page.getByRole('dialog').waitFor();
     await page.waitForFunction(() => document.querySelector('input[type=file]') && !document.querySelector('input[type=file]').disabled);
     const backup = { format: 'haru-words-v1', exportedAt: now, state: (await get()).state };
@@ -162,13 +162,13 @@ const until = async (check, label) => {
     await back(); await page.getByRole('alertdialog').waitFor({ state: 'hidden' });
     await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
     await page.getByRole('button', { name: '기록 관리', exact: true }).click();
-    await page.getByRole('menuitem', { name: '백업 가져오기', exact: true }).click(); await page.getByRole('dialog').waitFor();
+    await page.getByRole('menuitem', { name: '백업으로 복원', exact: true }).click(); await page.getByRole('dialog').waitFor();
     assert.equal(await page.getByRole('alertdialog').count(), 0);
     assert.equal((await get()).state.sessions[id].records[word.id].en, 'unmeasured');
     await page.keyboard.press('Escape'); await page.getByRole('dialog').waitFor({ state: 'hidden' });
     checks.push('backup export/import and nested confirmation navigate without applying a restore or reviving stale consent');
 
-    await tab('오늘의 학습').click(); await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
+    await tab('오늘 학습').click(); await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
     const answer = page.getByRole('textbox', { name: '한국어 뜻 입력', exact: true }); await answer.fill('사과 - 아직 채점 전');
     await back(); await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).waitFor();
     const saved = (await get()).state.sessions[id];
@@ -176,7 +176,7 @@ const until = async (check, label) => {
     assert.equal(saved.paused, true); assert.equal(saved.finished, false);
     await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
     assert.equal(await answer.inputValue(), '사과 - 아직 채점 전');
-    await page.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click();
+    await page.getByRole('button', { name: '저장하고 나가기', exact: true }).click();
     await page.getByRole('button', { name: '학습 홈으로', exact: true }).click();
     checks.push('daily Back pauses and saves ungraded input; existing exit/home buttons still work');
 
@@ -192,7 +192,7 @@ const until = async (check, label) => {
     Object.assign(done.records[word.id], { en: 'independent', ko: 'independent', sentenceStatus: 'written', sentence: 'I eat an apple.' });
     delete done.records[word.id].draft;
     assert.equal((await context.request.put(base + '/api/state', { data: { revision: current.revision, sessions: { [id]: done }, progress: {}, settings: { ...current.state.settings, dailyGoal: 1 } } })).status(), 200);
-    await page.reload({ waitUntil: 'domcontentloaded' }); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.reload({ waitUntil: 'domcontentloaded' }); await page.getByText('저장됨', { exact: true }).waitFor();
     await page.getByRole('button', { name: '오늘 단어 다시 보기', exact: true }).click(); await page.getByRole('dialog').waitFor();
     await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
     await page.getByRole('button', { name: '학습일 수정', exact: true }).click(); await page.getByRole('dialog').waitFor();
@@ -216,7 +216,7 @@ const until = async (check, label) => {
     await page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).click();
     await page.getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
     await page.getByRole('alertdialog').getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     await page.getByRole('dialog').waitFor();
     await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });
     assert.equal((await get()).state.settings.dailyGoal, 2);
@@ -230,7 +230,7 @@ const until = async (check, label) => {
     }
     // Reload creates a new in-memory navigation session, with no synthetic root trap.
     const root = await context.newPage(); await root.goto(base + '/favicon.svg'); await root.goto(base, { waitUntil: 'domcontentloaded' });
-    await root.getByText('서버에 저장됨', { exact: true }).waitFor(); await root.goBack(); assert.match(root.url(), /favicon\.svg$/);
+    await root.getByText('저장됨', { exact: true }).waitFor(); await root.goBack(); assert.match(root.url(), /favicon\.svg$/);
     checks.push('320–1440px, accessibility, original root Back leaves the site');
     assert.deepEqual(errors, []);
     fs.mkdirSync('outputs/navigation', { recursive: true });

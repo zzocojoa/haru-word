@@ -171,8 +171,12 @@ export function useLearningController(initialServerTime: number) {
       setTab("today");
       setMessage(
         showSession
-          ? "작성 중인 답을 보관하려면 ‘오늘 종료 · 저장’을 누른 뒤 ‘학습 홈으로’ 돌아와서 백업을 가져와 주세요."
-          : "친숙도 확인을 마치고 ‘여기까지 저장’으로 홈에 돌아온 뒤 백업을 가져와 주세요.",
+          ? "먼저 ‘저장하고 나가기’를 누르고 ‘학습 홈으로’ 돌아온 뒤 백업을 복원해 주세요."
+          : preparing
+            ? "‘학습 홈으로’ 돌아온 뒤 백업을 복원해 주세요."
+            : assessment?.completed
+              ? "‘저장하고 나가기’를 누른 뒤 백업을 복원해 주세요."
+              : "‘나중에 이어 하기’로 홈에 돌아온 뒤 백업을 복원해 주세요.",
       );
       return;
     }

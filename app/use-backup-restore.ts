@@ -141,10 +141,10 @@ export function useBackupRestore({ date, now, state, getRevision = () => 0, busy
   const changes = useMemo(() => backup && baseline ? replacementChanges(baseline, backup.state) : null, [backup, baseline]);
   const recent = useMemo(() => backup ? Object.values(backup.state.sessions).sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 3) : [], [backup]);
   const phase = stage.kind === 'starting' ? '전송 준비' : stage.kind === 'uploading' ? `전송 중 ${stage.current}/${stage.total}`
-    : stage.kind === 'validating' ? `전체 검증 ${stage.current}/${stage.total}` : '';
+    : stage.kind === 'validating' ? `파일 확인 ${stage.current}/${stage.total}` : '';
   const applying = restoring || stage.kind === 'applying';
   const step = success ? '6/6 · 반영 완료' : applying ? '5/6 · 서버에 반영 중' : confirm || readyToConfirm ? '5/6 · 최종 확인'
-    : stage.kind === 'validating' ? '4/6 · 전체 검증' : ['starting', 'uploading'].includes(stage.kind) ? '3/6 · 전송'
+    : stage.kind === 'validating' ? '4/6 · 전체 기록 확인' : ['starting', 'uploading'].includes(stage.kind) ? '3/6 · 전송'
       : backup ? '2/6 · 안전 백업 보관' : '1/6 · 파일 확인';
   return { backup, baseline, name: selection?.name ?? '', reading, fileError, safetyError, acknowledged, setAcknowledged,
     confirm, setConfirm, success, caps, analysis, job, working, phase, reloadRequired, safetyPreview, stale, backedUp,

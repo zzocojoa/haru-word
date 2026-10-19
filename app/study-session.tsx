@@ -160,12 +160,12 @@ export function StudySession(props: StudySessionProps) {
         }
       />
       {s.kind === "daily" && (
-        <ol className="phase-strip" aria-label="15분 학습 순서">
+        <ol className="phase-strip" aria-label="학습 순서">
           {[
-            ["warmup", "기억 3분"],
-            ["learn", "익히기 6분"],
-            ["en", "회상 3분"],
-            ["sentence", "문장 3분"],
+            ["warmup", "기억 깨우기"],
+            ["learn", "단어 익히기"],
+            ["en", "스스로 떠올리기"],
+            ["sentence", "문장 만들기"],
           ].map(([stage, label]) => (
             <li
               key={stage}
@@ -205,8 +205,7 @@ export function StudySession(props: StudySessionProps) {
       )}
       {seconds - boutStart >= 900 && (
         <p className="notice">
-          이번 활동이 15분을 넘었어요. 오늘 종료로 저장한 뒤 다음에 이어가도
-          좋아요.
+          15분 동안 학습했어요. 저장하고 나가서 다음에 이어가도 좋아요.
         </p>
       )}
 
@@ -314,7 +313,7 @@ export function StudySession(props: StudySessionProps) {
               disabled={busy}
               onClick={pauseAndExit}
             >
-              오늘 종료 · 저장
+              저장하고 나가기
             </button>
           </div>
         </>

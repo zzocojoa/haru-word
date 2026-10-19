@@ -82,7 +82,7 @@ export function TodayOverview({
     <section className="learning-panel home-panel">
       <div className="panel-top">
         <div className="today-date">
-          <span>오늘 · 한국 시간</span>
+          <span>오늘</span>
           <time dateTime={date}>{year}년 {month}월 {day}일</time>
         </div>
         <LevelSelect
@@ -103,7 +103,7 @@ export function TodayOverview({
           {finished
             ? `목표까지 ${remaining}개 더 배울 수 있어요.`
             : unfinished
-              ? `기록 완료 ${checked}/${assignedIds.length}개${remaining ? ` · 회차 후 ${remaining}개 추가 가능` : ''}`
+              ? `학습 기록함 ${checked}/${assignedIds.length}개${remaining ? ` · 회차 후 ${remaining}개 추가 가능` : ''}`
               : dailyAllocationRule(state.settings.dailyGoal, state.settings.newWordsPaused)}
         </p>}
       </div>
@@ -116,7 +116,7 @@ export function TodayOverview({
           </b>
         </div>
         <div>
-          <span>기록 완료</span>
+          <span>학습 기록함</span>
           <b>
             {checked}<small>/ {visibleIds.length}개</small>
           </b>
@@ -125,17 +125,17 @@ export function TodayOverview({
           <span>{finished && !remaining ? "다음 학습 범위" : "학습 범위"}</span>
           <b>
             {state.settings.level}
-            <small>{assessed ? "탐색 완료" : "임시 시작점"}</small>
+            <small>{assessed ? "친숙도 확인함" : "선택한 수준"}</small>
           </b>
         </div>
       </div>
       {(monthlyRepair.cleared > 0 || monthlyRepair.replacements.length > 0 || monthlyRepair.unavailable > 0) && (
         <section className="monthly-repair" aria-label="중복 배정 바로잡기">
           <h3>완료한 단어가 다시 배정되었나요?</h3>
-          <p>이전 월말 점검의 미측정 항목이 일일 복습으로 표시된 기록을 찾았어요.</p>
+          <p>이전 월말 점검에서 확인하지 않은 단어가 일일 복습에 잘못 포함됐어요.</p>
           <p>잘못된 복습 표시 {monthlyRepair.cleared}건 · 오늘 교체할 단어 {monthlyRepair.replacements.length}개</p>
           <p>과거 성적과 월말 점검은 유지하고, 오늘 답·문장·수정 내용을 저장하지 않은 단어만 교체해요.</p>
-          {monthlyRepair.unavailable > 0 && <p>대체 후보가 부족한 {monthlyRepair.unavailable}개는 유지해요. 신규 단어 쉬기 설정이나 학습 수준을 확인해 주세요.</p>}
+          {monthlyRepair.unavailable > 0 && <p>대체 후보가 부족한 {monthlyRepair.unavailable}개는 유지해요. 새 단어 쉬기 설정이나 학습 수준을 확인해 주세요.</p>}
           <button className="secondary-button full" disabled={busy || !monthlyRepair.changed} onClick={correctMonthlyCarryover}>오늘 배정 바로잡기</button>
         </section>
       )}
@@ -153,7 +153,7 @@ export function TodayOverview({
           {remaining > 0 && (
             <p className="small-note">
               {suggestions.length
-                ? `기존 기록 유지 · 추가 단어는 새 회차에 저장${suggestions.length < remaining ? " · 가능한 단어부터 배정" : ""}`
+                ? `추가 단어는 새 회차에 기록해요.${suggestions.length < remaining ? " 가능한 단어부터 배정해요." : ""}`
                 : "현재 추가할 수 있는 단어가 없어요."}
             </p>
           )}
@@ -174,7 +174,7 @@ export function TodayOverview({
             onClick={() => repeat(date)}
           >
             <RotateCcw size={17} />
-            {repeating ? "오늘 단어 다시 학습 이어서" : "오늘 단어 다시 학습"}
+            {repeating ? "다시 학습 이어서" : "오늘 단어 다시 연습"}
           </button>
           <p className="small-note">기존 성적은 유지돼요.</p>
           <button
@@ -199,7 +199,7 @@ export function TodayOverview({
           {unfinished
             ? "중단한 학습 이어서"
             : initialAssessment
-              ? "20개 친숙도부터 확인"
+              ? "단어 20개 친숙도 확인"
               : !suggestions.length
                 ? "지금 배정할 단어가 없어요"
                 : "오늘의 학습 시작"}
@@ -208,7 +208,7 @@ export function TodayOverview({
       )}
       {imagePractice}
       {(!finished || remaining > 0) && !unfinished && !initialAssessment && !suggestions.length && <div className="no-target-actions">
-        <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 설정을 확인해 주세요.' : '수준을 바꾸거나 친숙도를 다시 확인해 보세요.'}</p>
+        <p className="small-note">{state.settings.newWordsPaused ? '새 단어 쉬기 설정을 확인해 주세요.' : '수준을 바꾸거나 친숙도를 다시 확인해 보세요.'}</p>
         <div className="button-row"><button className="secondary-button" disabled={busy} onClick={()=>setSettings(true)}>배정 설정 확인</button><button className="text-button" disabled={busy} onClick={()=>void beginAssessment()}>친숙도 확인</button></div>
       </div>}
       <div className="today-words" role="region" aria-labelledby="today-targets-heading">
@@ -225,8 +225,8 @@ export function TodayOverview({
             : state.settings.newWordsPaused ? '오늘 시작하면 아래 복습 단어가 배정돼요.' : '시작하면 배정돼요. 새 단어와 보완·대기 복습을 함께 골라요.'}
           {assigned && remaining > 0 && ` 목표까지 ${remaining}개는 아직 배정 전이에요.`}
         </p>
-        <p className="small-note">{state.settings.newWordsPaused ? '신규 단어 쉬기 중에는 복습만 배정해요.' : '한쪽 후보가 부족하면 다른 쪽으로 채워요.'} 목표를 늘려도 기존 배정은 유지해요. 추가·재학습은 새 회차에 저장해요.</p>
-        <p className="small-note">기록 완료는 회상·문장 결과를 남긴 수예요. 독립 성공과는 달라요. 월말 점검이 남아 있어도 다음 날 학습할 수 있어요.</p>
+        <p className="small-note">{state.settings.newWordsPaused ? '새 단어 쉬기 중에는 복습만 배정해요.' : '한쪽 후보가 부족하면 다른 쪽으로 채워요.'} 목표를 늘려도 기존 배정은 유지해요. 추가·재학습은 새 회차에 저장해요.</p>
+        <p className="small-note">‘학습 기록함’은 답·문장 결과를 남긴 수이며 정답 수가 아니에요. 월말 점검이 남아도 다음 날 학습할 수 있어요.</p>
         </HelpDetails>
         <GrammarTermsHelp />
         <div className="target-filters" role="group" aria-label="오늘 단어 필터">
@@ -260,7 +260,7 @@ export function TodayOverview({
       {pendingReviewIds.length > 0 && (
         <details className="pending-daily-review notes-details" onToggle={e => setShowPendingReview(e.currentTarget.open)}>
           <summary>대기 중인 복습 {pendingReviewIds.length}개</summary>
-          <p className="small-note">오늘 미배정 복습 · 다음 배정에서 다시 골라요. 주간·월말 점검과 별도예요.</p>
+          <p className="small-note">오늘 배정되지 않은 복습이에요. 다음 학습에서 다시 골라요. 주간·월말 점검과는 별도예요.</p>
           {showPendingReview && <ul aria-label="대기 중인 복습 단어" tabIndex={0}>
             {pendingReviewIds.slice(0, pendingLimit).map(id => {
               const word = wordById.get(id)!;
@@ -273,7 +273,7 @@ export function TodayOverview({
       {unfinished && <p className="small-note pause-note">중단한 위치와 입력은 저장돼요.</p>}
       {state.settings.newWordsPaused && (
         <p className="notice">
-          신규 단어 쉬기 켜짐 · 남은 학습·복습만 배정해요.
+          새 단어 쉬기 중 · 남은 학습과 복습만 해요.
         </p>
       )}
       {new Date(date + "T12:00:00Z").getUTCDay() ===
@@ -282,9 +282,6 @@ export function TodayOverview({
           오늘은 정해 둔 주간 점검일이에요 →
         </button>
       )}
-      <p className="small-note centered">
-        약 15분 · 한국 시간 자정에 다음 학습일
-      </p>
     </section>
   );
 }

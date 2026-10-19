@@ -160,7 +160,7 @@ function LearningScreens({
   );
   if (store.initializing) return <StartupScreen />;
   return (
-    <DeferredReloadBlocked.Provider value={saving || unsaved || store.restoring}>
+    <DeferredReloadBlocked.Provider value={saving || store.restoring ? 'busy' : unsaved ? 'unsaved' : false}>
     <main
       className="shell"
       data-keyboard={keyboardOpen ? 'open' : undefined}
@@ -199,12 +199,12 @@ function LearningScreens({
           <div>
             <h1 tabIndex={-1}>
               {tab === "today"
-                ? "오늘의 학습"
+                ? "오늘 학습"
                 : tab === "library"
-                  ? "나의 단어장"
+                  ? "단어장"
                   : tab === "review"
-                    ? "주간·월말 점검"
-                    : "나의 학습 기록"}
+                    ? "복습 점검"
+                    : "학습 기록"}
             </h1>
           </div>
           <span className="daily-label">
@@ -224,23 +224,23 @@ function LearningScreens({
           className="main-tabs"
         >
           <TabsList className="main-nav" aria-label="학습 화면">
-            <TabsTrigger value="today" aria-label="오늘의 학습">
+            <TabsTrigger value="today" aria-label="오늘 학습">
               <BookOpen />
-              <span className="nav-label-wide">오늘의 학습</span>
+              <span className="nav-label-wide">오늘 학습</span>
               <span className="nav-label-compact" aria-hidden="true">
                 오늘 학습
               </span>
             </TabsTrigger>
-            <TabsTrigger value="library" aria-label="전체 단어장">
+            <TabsTrigger value="library" aria-label="단어장">
               <NotebookPen />
-              <span className="nav-label-wide">전체 단어장</span>
+              <span className="nav-label-wide">단어장</span>
               <span className="nav-label-compact" aria-hidden="true">
                 단어장
               </span>
             </TabsTrigger>
-            <TabsTrigger value="review" aria-label="주간·월말 점검">
+            <TabsTrigger value="review" aria-label="복습 점검">
               <RotateCcw />
-              <span className="nav-label-wide">주간·월말 점검</span>
+              <span className="nav-label-wide">복습 점검</span>
               <span className="nav-label-compact" aria-hidden="true">
                 복습 점검
               </span>
@@ -257,10 +257,9 @@ function LearningScreens({
           {!loading && !signedIn && !error && (
             <div className="notice sign-in-notice">
               <div>
-                <b>학습 기록을 안전하게 이어가세요.</b>
+                <b>로그인하고 학습을 이어가세요.</b>
                 <p>
-                  ChatGPT 계정으로 로그인하면 다른 기기에서도 같은 기록을 사용할
-                  수 있어요.
+                  ChatGPT로 로그인하면 다른 기기에서도 기록을 이어 볼 수 있어요.
                 </p>
               </div>
               <a
@@ -284,7 +283,6 @@ function LearningScreens({
                     className="learning-panel loading-surface"
                     aria-busy="true"
                   >
-                    <p className="eyebrow">나의 학습 노트</p>
                     <h2>학습 기록을 불러오고 있어요.</h2>
                     <div className="loading-lines" aria-hidden="true">
                       <span />
@@ -382,12 +380,11 @@ function LearningScreens({
                     {!assessed && (
                       <section className="assessment-invite">
                         <div>
-                          <span className="assessment-icon">Aa</span>
                           <div>
                             <h3>
                               {initialAssessment
                                 ? "어디서 시작할까요?"
-                                : "친숙도 탐색"}
+                                : "친숙도 확인"}
                             </h3>
                             <p>
                               {state.settings.level} 단어 20개 · 정식 수준 시험은 아니에요.
@@ -400,7 +397,7 @@ function LearningScreens({
                           onClick={() => beginAssessment()}
                         >
                           {assessment && !assessment.completed
-                            ? "탐색 이어서"
+                            ? "친숙도 확인 이어서"
                             : "친숙도 확인"}
                           <ChevronRight size={17} />
                         </button>

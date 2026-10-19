@@ -26,9 +26,9 @@ const oldDate = new Date(Date.parse(date + 'T12:00:00Z') - 86400000).toISOString
     assert.equal(restored.status(), 200, await restored.text());
     const p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
     let aiCalls = 0; p.on('request', r => { if (r.url().includes('/api/sentence-feedback')) aiCalls++; });
-    const saved = () => p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    const saved = () => p.getByText('저장됨', { exact: true }).waitFor();
     const openSettings = async () => { await p.getByRole('button', { name: '학습 설정', exact: true }).click(); };
-    const closeSettings = async () => { await p.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click(); await p.getByRole('dialog').waitFor({ state: 'hidden' }); };
+    const closeSettings = async () => { await p.getByRole('dialog').getByRole('button', { name: '닫기', exact: true }).click(); await p.getByRole('dialog').waitFor({ state: 'hidden' }); };
     const setGoal = async n => { await p.getByRole('combobox', { name: '하루 목표', exact: true }).click(); await p.getByRole('option', { name: n === 3 ? '3개 · 기본 목표' : n + '개', exact: true }).click(); await saved(); };
     const split = async (n, r) => assert.equal(await p.locator('.daily-allocation').innerText(), `새 학습 ${n}개 · 이전 학습·복습 ${r}개`);
     await p.goto(base, { waitUntil: 'domcontentloaded' }); await saved();
@@ -52,10 +52,10 @@ const oldDate = new Date(Date.parse(date + 'T12:00:00Z') - 86400000).toISOString
       if (width === 390) await p.screenshot({ path: out + '/balanced-mobile.png', fullPage: true });
     }
     checks.push('pending review remains inspectable; four viewport widths have no overflow or automated accessibility violations');
-    await openSettings(); await p.getByRole('checkbox', { name: '신규 단어 잠시 쉬기 · 복습만 배정' }).check(); await saved();
+    await openSettings(); await p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기' }).check(); await saved();
     assert.match(await p.locator('.goal-allocation').innerText(), /복습만 최대 10개/);
     await closeSettings(); await split(0, 10);
-    await openSettings(); await p.getByRole('checkbox', { name: '신규 단어 잠시 쉬기 · 복습만 배정' }).uncheck(); await saved(); await setGoal(3); await closeSettings(); await split(2, 1);
+    await openSettings(); await p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기' }).uncheck(); await saved(); await setGoal(3); await closeSettings(); await split(2, 1);
     checks.push('new-word pause overrides the balanced rule and unpausing restores it');
     await p.getByRole('button', { name: '오늘의 학습 시작', exact: true }).click(); await saved();
     let data = await get(); const firstId = data.state.settings.activeSessionId, first = data.state.sessions[firstId];
@@ -64,9 +64,9 @@ const oldDate = new Date(Date.parse(date + 'T12:00:00Z') - 86400000).toISOString
       await p.getByLabel('떠오르는 한국어 뜻', { exact: true }).fill('뜻'); await p.getByRole('button', { name: '뜻 확인', exact: false }).click();
       await p.getByRole('button', { name: '스스로 떠올렸어요', exact: true }).click(); await saved();
     }
-    for (let i = 0; i < first.ids.length; i++) { await p.getByRole('button', { name: '뜻을 확인했어요', exact: false }).click(); await saved(); }
+    for (let i = 0; i < first.ids.length; i++) { await p.getByRole('button', { name: '뜻 저장하고 계속', exact: false }).click(); await saved(); }
     await p.getByLabel('한국어 뜻 입력', { exact: true }).fill('보존할 임시 답');
-    await p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved();
+    await p.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved();
     await p.reload({ waitUntil: 'domcontentloaded' }); await saved(); await split(2, 1);
     await openSettings(); await setGoal(10); await closeSettings();
     assert.match(await p.locator('.planned-allocation').innerText(), /새 학습 3개 · 복습 4개/);

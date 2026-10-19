@@ -23,16 +23,16 @@ export function SentenceFeedbackPanel({ sessionId, entryId, sentence, feedback, 
   const view = sentenceFeedbackPresentation({ sentence, feedback, busy, pending });
   return <section className="ai-feedback-panel" aria-label="AI 참고 의견">
     <div className="ai-feedback-heading"><h3><Sparkles size={17} /> AI 참고 의견</h3><span className="small-note">선택</span></div>
-    <AiUseNotice />
     <button type="button" className="secondary-button" disabled={view.disabled} onClick={check}>
       {pending && <Loader2 size={16} className="spin" />}{view.label}
     </button>
+    <AiUseNotice />
     <FeedbackIssueNotice issue={error} />
     {feedback && <div aria-live="polite">
-      {!view.unchanged && <p className="notice">수정 전 문장의 교정 결과예요.</p>}
+      {!view.unchanged && <p className="notice">수정 전 문장에 대한 AI 의견이에요.</p>}
       <FeedbackDetail feedback={feedback} suggestionAction={view.canApply &&
         <button type="button" className="text-button" disabled={busy || pending} onClick={() => onUse(feedback.correctedSentence)}>
-          교정 제안을 내 문장에 적용
+          AI 제안으로 문장 바꾸기
         </button>
       } />
     </div>}

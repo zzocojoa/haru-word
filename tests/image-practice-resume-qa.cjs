@@ -53,7 +53,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     positionRequests = trackRequestConcurrency(page, request => {
       const url = new URL(request.url()); return url.origin === base && url.pathname === endpoint;
     });
-    const ready = async p => { await p.goto(base, { waitUntil: 'domcontentloaded' }); await p.getByText('서버에 저장됨', { exact: true }).waitFor(); };
+    const ready = async p => { await p.goto(base, { waitUntil: 'domcontentloaded' }); await p.getByText('저장됨', { exact: true }).waitFor(); };
     const open = async (p = page) => { await p.getByRole('button', { name: '이미지 연습', exact: true }).click(); await p.getByRole('dialog').getByRole('button', { name: /카드 번호/ }).waitFor(); return p.getByRole('dialog'); };
     const number = (n, p = page) => p.getByRole('dialog').getByRole('button', { name: `카드 번호 ${n} / 3809`, exact: true });
     const saved = async (p = page) => p.getByRole('dialog').getByText('위치 저장됨', { exact: true }).waitFor();
@@ -74,8 +74,8 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await wait(async () => (await getPosition()).entryId === ids[3]);
     dialog = await open(); await number(4).waitFor(); assert.equal(await dialog.locator('.image-practice-answer').count(), 0); await saved();
     assert.equal(await page.evaluate(() => window.history.length), historyLength); checks.push('rapid navigation coalesces, closes while saving, resumes front, no history entries');
-    await close(); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await page.getByRole('tab', { name: '오늘의 학습', exact: true }).click();
-    await open(); await number(4).waitFor(); await close(); await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor(); await open(); await number(4).waitFor();
+    await close(); await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '오늘 학습', exact: true }).click();
+    await open(); await number(4).waitFor(); await close(); await page.reload(); await page.getByText('저장됨', { exact: true }).waitFor(); await open(); await number(4).waitFor();
     const second = await browser.newContext({ extraHTTPHeaders: identity, viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' }); await routes(second);
     const other = await second.newPage(); await ready(other); await open(other); await number(4, other).waitFor();
     checks.push('tab return, reload and separate browser context resume same account');
@@ -97,7 +97,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await open(sibling); await (await siblingRead).finished(); await saved(sibling);
     const sharedDraft = await sibling.evaluate(owner => JSON.parse(localStorage.getItem(`haru-image-position-v1:${encodeURIComponent(owner)}`)), identity['oai-authenticated-user-id']);
     assert.equal(sharedDraft.pending, true); assert.equal(sharedDraft.entryId, ids[4]);
-    await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor(); await open(); await number(5).waitFor(); await saved();
+    await page.reload(); await page.getByText('저장됨', { exact: true }).waitFor(); await open(); await number(5).waitFor(); await saved();
     assert.equal((await getPosition()).entryId, ids[4]); await sibling.close();
     checks.push('same-browser tab lookup preserves another tab failed cursor across reload and recovery');
     const latestTab = await context.newPage(); await ready(latestTab); await open(latestTab); await saved(latestTab);
@@ -111,7 +111,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     const savedCache = await page.evaluate(owner => JSON.parse(localStorage.getItem(`haru-image-position-v1:${encodeURIComponent(owner)}`)), identity['oai-authenticated-user-id']);
     assert.equal(savedCache.pending, false); assert.equal(savedCache.entryId, ids[5]);
     const reloadStart = calls.length;
-    await page.reload(); await page.getByText('서버에 저장됨', { exact: true }).waitFor(); await open(); await number(6).waitFor(); await saved();
+    await page.reload(); await page.getByText('저장됨', { exact: true }).waitFor(); await open(); await number(6).waitFor(); await saved();
     assert.deepEqual(calls.slice(reloadStart), ['GET']); assert.deepEqual(await getPosition(), latestSaved); await latestTab.close();
     checks.push('late failed write cannot resurrect an older draft over another tab saved choice or auto-replay after reload');
     const abaTab = await context.newPage(); await ready(abaTab); await open(abaTab); await number(6, abaTab).waitFor(); await saved(abaTab);
@@ -139,13 +139,15 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     mode = 'put-error'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
     const retryStart = calls.length; mode = ''; await page.getByRole('button', { name: '다시 저장', exact: true }).click(); await saved(); assert.deepEqual(calls.slice(retryStart), ['GET', 'PUT']);
     mode = 'put-lost'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
+    await dialog.getByText('연습 위치 저장 결과를 확인하지 못했어요. 다시 저장하면 서버 위치부터 확인해요.', { exact: true }).waitFor();
     const lostStart = calls.length; await page.getByRole('button', { name: '다시 저장', exact: true }).click(); await saved(); assert.deepEqual(calls.slice(lostStart), ['GET']);
     // Exercise the real 25s request deadline using the browser clock; the server receives no held write.
     await page.clock.install(); mode = 'put-timeout'; await dialog.getByRole('button', { name: '다음', exact: true }).click(); await wait(() => held);
     await page.clock.runFor(26000); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
+    await dialog.getByText('연습 위치 저장 결과를 확인하지 못했어요. 다시 저장하면 서버 위치부터 확인해요.', { exact: true }).waitFor();
     const timeoutHeld = held; held = null; await timeoutHeld.route.abort();
     await page.clock.resume(); const timeoutStart = calls.length; await page.getByRole('button', { name: '다시 저장', exact: true }).click(); await saved(); assert.deepEqual(calls.slice(timeoutStart), ['GET', 'PUT']);
-    checks.push('write failure, lost response and timeout preserve position and retry reads first');
+    checks.push('write failure, lost response and timeout preserve position, say save result is unknown, and retry reads first');
     await jump(3809); await saved(); assert.equal(await dialog.getByRole('button', { name: '다음', exact: true }).isDisabled(), true);
     const lastImageCount = imageRequests.length; await page.waitForTimeout(80); assert.equal(imageRequests.length, lastImageCount);
     await dialog.getByRole('button', { name: /카드 번호/ }).click();
@@ -204,6 +206,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     });
     const fresh = await isolated.newPage(); await ready(fresh); await fresh.getByRole('button', { name: '이미지 연습', exact: true }).click();
     await fresh.getByRole('button', { name: '다시 불러오기', exact: true }).waitFor(); assert.equal(await fresh.getByRole('dialog').locator('img').count(), 0); assert.equal(isolatedWrites, 0);
+    await fresh.getByRole('dialog').getByText('연습 위치를 불러오지 못했어요. 다시 불러와 주세요.', { exact: true }).waitFor();
     readsFail = false; await fresh.getByRole('button', { name: '다시 불러오기', exact: true }).click(); await fresh.getByRole('dialog').getByRole('button', { name: /카드 번호/ }).waitFor();
     assert.equal(isolatedWrites, 0); checks.push('unknown initial server position cannot be overwritten after load failure');
     // Server position stays untouched when selected meanings exclude the saved card.
@@ -217,7 +220,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
       return route.fulfill({ json: fixture });
     });
     const fallbackPage = await filtered.newPage(); await ready(fallbackPage); await open(fallbackPage);
-    await fallbackPage.getByText(/저장한 카드는 현재 연습에서 제외/).waitFor();
+    await fallbackPage.getByText(/이전에 보던 카드가 없어 다른 카드로 이동/).waitFor();
     assert.equal(await fallbackPage.locator('.image-practice-picture').getAttribute('src'), urls[2]);
     assert.deepEqual(await getPosition(), cursorBeforeFallback);
     await fallbackPage.evaluate(({ owner, entryId, revision }) => localStorage.setItem(`haru-image-position-v1:${encodeURIComponent(owner)}`,
@@ -229,7 +232,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     await fallbackPage.getByRole('button', { name: '현재 위치 저장', exact: true }).click(); await saved(fallbackPage);
     const cursorAfterFallbackChoice = await getPosition(); assert.equal(cursorAfterFallbackChoice.entryId, ids[2]);
     checks.push('explicit current choice saves the displayed fallback card after conflict');
-    fallbackKind = 'empty'; await fallbackPage.reload(); await fallbackPage.getByText('서버에 저장됨', { exact: true }).waitFor();
+    fallbackKind = 'empty'; await fallbackPage.reload(); await fallbackPage.getByText('저장됨', { exact: true }).waitFor();
     await fallbackPage.getByRole('button', { name: '이미지 연습', exact: true }).click(); await fallbackPage.getByText('현재 선택한 뜻으로 연습할 이미지가 없어요.', { exact: true }).waitFor();
     assert.equal(await fallbackPage.getByRole('dialog').locator('img').count(), 0); assert.deepEqual(await getPosition(), cursorAfterFallbackChoice);
     checks.push('excluded saved card advances in original order; empty deck and lookup never overwrite server cursor');

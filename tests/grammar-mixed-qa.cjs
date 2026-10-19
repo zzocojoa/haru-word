@@ -14,9 +14,9 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
  const snapshot=async()=>(await context.request.get(base+'/api/state',{headers:{'X-Study-Grammar':'3'}})).json();
  const until=async fn=>{for(let i=0;i<100;i++){if(await fn())return;await page.waitForTimeout(100);}throw Error('persistence timeout');};
  const click=name=>page.getByRole('button',{name,exact:true}).click();
- const library=async()=>{await page.getByRole('tab',{name:'전체 단어장',exact:true}).click();await page.getByRole('tab',{name:'품사·문장 연습',exact:true}).click();};
+ const library=async()=>{await page.getByRole('tab',{name:'단어장',exact:true}).click();await page.getByRole('tab',{name:'품사와 문장 연습',exact:true}).click();};
  let fail=false;
- await page.route('**/api/state',async route=>{if(fail&&route.request().method()==='PUT'){fail=false;return route.fulfill({status:503,json:{error:'테스트 저장 실패'}});}return route.continue();});
+ await page.route('**/api/state',async route=>{if(fail&&route.request().method()==='PUT'){fail=false;return route.fulfill({status:503,json:{error:'테스트 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.'}});}return route.continue();});
  try{
   const s=await snapshot();assert.equal((await context.request.put(base+'/api/state',{headers:{'X-Study-Grammar':'3'},data:{revision:s.revision,progress:{},sessions:{},grammar:{auxiliary:p,noun:{stage:0,answers:{},sentence:'',updatedAt:new Date().toISOString()}}}})).status(),200);
   await page.goto(base);await library();
@@ -42,7 +42,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
    assert.equal(await page.locator('.grammar-order-answer').innerText(),text);
    const large=width===320?await page.addStyleTag({content:'html{font-size:200%!important}'}):undefined;
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
-   await page.getByRole('button',{name:'정답 확인',exact:true}).focus();await page.keyboard.press('Enter');
+   await page.getByRole('button',{name:'내 답 확인',exact:true}).focus();await page.keyboard.press('Enter');
    await page.locator('.grammar-feedback[data-tone="success"]').waitFor();await until(async()=>(await snapshot()).state.grammar.auxiliary.answers.q3?.first===text);
    if(width===320){await page.addScriptTag({path:axePath});assert.deepEqual(await page.evaluate(async()=>(await axe.run(document,{runOnly:['wcag2a','wcag2aa']})).violations.map(v=>v.id)),[]);}
    await large?.evaluate(el=>el.remove());

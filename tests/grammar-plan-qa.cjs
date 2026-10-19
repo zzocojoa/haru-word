@@ -15,8 +15,9 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
     const initial = await get();
     assert.equal((await context.request.put(base + '/api/state', { data: { revision: initial.revision, grammar, progress: {}, sessions: {} } })).status(), 200);
     const page = await context.newPage(); page.setDefaultTimeout(8000);
-    await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
-    await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click();
+    await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByRole('tab', { name: '단어장', exact: true }).click();
+    await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click();
+    await page.locator('.grammar-tile').first().waitFor();
     return { context, page, get };
   };
   const until = async (fn, label) => { for (let i = 0; i < 80; i++) { if (await fn()) return; await new Promise(r => setTimeout(r, 100)); } throw Error(label); };
@@ -37,7 +38,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         await page.locator('.grammar-tile').first().click();
         await page.getByRole('button', { name: 'teacher', exact: true }).click();
         await page.getByRole('button', { name: '답 확인', exact: true }).click();
-        await page.getByRole('button', { name: '답을 보고 도움받기', exact: true }).click();
+        await page.getByRole('button', { name: '답 보기 · 도움으로 기록', exact: true }).click();
         await page.getByRole('button', { name: '다음', exact: true }).click();
         await until(async () => (await get()).state.grammar.noun.stage === 3, 'next saved');
         const answer = (await get()).state.grammar.noun.answers.q1;
@@ -54,7 +55,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
       const { context, page, get } = await open({ verb: progress('verb') });
       try {
         await page.locator('.grammar-tile').filter({ hasText: /^v\./ }).click();
-        await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '테스트 저장 실패' } }) : route.continue());
+        await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '테스트 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } }) : route.continue());
         await page.getByRole('button', { name: '수업 마치기', exact: true }).click();
         await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
         assert.equal(await page.getByText('수업을 마쳤어요.', { exact: true }).count(), 0);
@@ -65,7 +66,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         assert.equal(await page.getByRole('button', { name: '다시 저장', exact: true }).count(), 0);
       } finally { await context.close(); }
     });
-    for (const destination of ['단어 목록', '오늘의 학습']) await check(`late AI response is discarded after leaving for ${destination}`, async () => {
+    for (const destination of ['단어 목록', '오늘 학습']) await check(`late AI response is discarded after leaving for ${destination}`, async () => {
       const { context, page, get } = await open({ adjective: progress('adjective') });
       let release; const hold = new Promise(r => release = r); let calls = 0;
       try {
@@ -93,17 +94,18 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         });
         for (let attempt = 1; attempt <= 2; attempt++) {
           await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
-          await page.locator('.ai-feedback-issue[role=alert]').waitFor();
+          await page.locator(`[data-feedback-code="${attempt === 1 ? 'stale_input' : 'invalid_response'}"]`).waitFor();
+          assert.equal(calls, attempt);
           assert.equal(await sentence.inputValue(), original);
-          assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
+          assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 0);
           assert.equal(await page.getByRole('radio', { name: '뜻과 형태를 확인했어요', exact: true }).isChecked(), true);
         }
         await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
-        await page.getByRole('heading', { name: 'AI 의견', exact: true }).waitFor();
+        await page.locator('.grammar-feedback .ai-feedback-result').waitFor();
         assert.equal(calls, 3); assert.equal(await sentence.inputValue(), original, 'AI never replaces text automatically');
-        await page.getByRole('button', { name: '수정안 사용하기', exact: true }).click();
+        await page.getByRole('button', { name: 'AI 제안으로 문장 바꾸기', exact: true }).click();
         assert.equal(await sentence.inputValue(), corrected);
-        assert.equal(await page.getByRole('heading', { name: 'AI 의견', exact: true }).count(), 0);
+        assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 0);
         assert.equal(await page.getByRole('radio', { checked: true }).count(), 0);
         assert.equal(await page.getByRole('button', { name: '수업 마치기', exact: true }).isDisabled(), true);
         await until(async () => (await get()).state.grammar.noun.sentence === corrected, 'correction saved');
@@ -119,7 +121,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         const query = page.getByRole('textbox', { name: '단어 또는 한국어 뜻 검색' });
         await query.fill('a');
         await page.getByRole('combobox', { name: '단어장 수준 필터' }).click(); await page.getByRole('option', { name: 'A1', exact: true }).click();
-        await page.getByRole('combobox', { name: '친숙도 필터' }).click(); await page.getByRole('option', { name: '아직 미표시', exact: true }).click();
+        await page.getByRole('combobox', { name: '친숙도 필터' }).click(); await page.getByRole('option', { name: '친숙도 미확인', exact: true }).click();
         await page.getByRole('navigation', { name: '단어 목록 상단 페이지 이동' }).getByRole('button', { name: '다음 페이지', exact: true }).click();
         const trigger = page.locator('.pos-help-button').nth(5), name = await trigger.getAttribute('aria-label');
         await trigger.click(); const scroll = await page.evaluate(() => scrollY);
@@ -136,7 +138,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         await query.waitFor({ state: 'visible' });
         await until(async () => await query.evaluate(el => document.activeElement === el), 'word search focus restored');
         assert.equal(await query.inputValue(), 'a'); assert.match(await page.getByRole('combobox', { name: '단어장 수준 필터' }).innerText(), /A1/);
-        assert.match(await page.getByRole('combobox', { name: '친숙도 필터' }).innerText(), /아직 미표시/);
+        assert.match(await page.getByRole('combobox', { name: '친숙도 필터' }).innerText(), /친숙도 미확인/);
         assert.equal(await page.evaluate(() => document.activeElement?.getAttribute('aria-label')), '단어 또는 한국어 뜻 검색');
       } finally { await context.close(); }
     });
@@ -155,9 +157,9 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         assert.equal((backup.state ?? backup).grammar.noun.sentence, 'I like coffee and books.');
         await page.getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
         await page.getByRole('alertdialog').getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
-        await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-        await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
-        await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click();
+        await page.getByText('저장됨', { exact: true }).waitFor();
+        await page.getByRole('tab', { name: '단어장', exact: true }).click();
+        await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click();
         assert.equal(await page.getByRole('textbox', { name: '내 문장', exact: true }).inputValue(), 'I like tea.');
       } finally { await context.close(); }
     });
@@ -167,7 +169,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
       try {
         await page.locator('.grammar-tile').first().click();
         const input = page.getByRole('textbox', { name: '내 문장', exact: true });
-        await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '테스트 저장 실패' } }) : route.continue());
+        await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '테스트 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } }) : route.continue());
         await input.fill('I like tea.'); await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
         await page.unroute('**/api/state');
         await page.route('**/api/state', async route => { if (route.request().method() === 'PUT') { retrying = true; await hold; } await route.continue(); });

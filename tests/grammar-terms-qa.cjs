@@ -17,11 +17,11 @@ fs.mkdirSync(out, { recursive: true });
         records: { [word.id]: { meaning: content[word.id].meaning, material: content[word.id], en: stage === 'done' ? 'independent' : 'unmeasured', ko: stage === 'done' ? 'independent' : 'unmeasured', sentenceStatus: stage === 'done' ? 'written' : 'unmeasured', sentence: stage === 'done' ? 'I arrive at seven.' : '', notes: '' } }, retry: [], retryMode: false, elapsed: 0, paused: true, finished: stage === 'done', createdAt: new Date().toISOString() };
       assert.equal((await c.request.put(base + '/api/state', { data: { revision: initial.revision, settings: { ...initial.state.settings, dailyGoal: 1, activeSessionId: id }, progress: {}, sessions: { [id]: session } } })).status(), 200);
       p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
-      await p.goto(base); await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+      await p.goto(base); await p.getByText('저장됨', { exact: true }).waitFor();
       if (stage !== 'done') { await p.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click(); await p.locator('.session-panel').waitFor(); }
       // Resuming legitimately restores carryover material. Compare help with the
       // settled resumed state, not the deliberately minimal fixture.
-      await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+      await p.getByText('저장됨', { exact: true }).waitFor();
       const beforeHelp = await get();
       assert.deepEqual(beforeHelp.state.sessions[id].records, session.records);
       const scope = stage === 'done' ? p.locator('.today-words') : p.locator('.session-panel');

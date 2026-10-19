@@ -12,8 +12,8 @@ const { launchBrowser, closeBrowser, base, accountHeaders } = require('./qa/runt
       const response = await route.fetch(); assert.equal(response.status(), 200);
       await route.fulfill({ response, json: {} });
     });
-    await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-    await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByText('저장됨', { exact: true }).waitFor();
+    await page.getByRole('tab', { name: '단어장', exact: true }).click();
     await page.getByLabel('단어 또는 한국어 뜻 검색').fill('work');
     await page.getByRole('button', { name: 'work 동사', exact: true }).click();
     const dialog = page.getByRole('dialog');
@@ -26,13 +26,13 @@ const { launchBrowser, closeBrowser, base, accountHeaders } = require('./qa/runt
     await page.keyboard.press('Escape');
     await page.getByRole('alertdialog').getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
     await dialog.waitFor({ state: 'hidden' });
-    await page.getByText('저장 필요', { exact: true }).waitFor();
-    assert.equal(await page.getByText('서버에 저장됨', { exact: true }).count(), 0);
+    await page.getByText('아직 저장되지 않음', { exact: true }).waitFor();
+    assert.equal(await page.getByText('저장됨', { exact: true }).count(), 0);
     assert.equal(await page.getByRole('button', { name: '현재 입력 백업', exact: true }).isVisible(), true);
     assert.equal(await page.getByRole('button', { name: '다시 시도', exact: true }).count(), 0);
     await page.getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
     await page.getByRole('alertdialog').getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     assert.equal(writes, 1);
     const saved = await (await context.request.get(base + '/api/state')).json();
     assert.ok(Object.values(saved.state.progress).some(p => p.expression === 'keep this draft'));

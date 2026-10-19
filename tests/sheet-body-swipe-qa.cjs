@@ -8,9 +8,9 @@ fs.mkdirSync(out, { recursive: true });
   try {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, extraHTTPHeaders: accountHeaders('sheet_body') });
     p = await c.newPage(); const errors = []; p.on('pageerror', e => errors.push(e.message));
-    await p.goto(base); await p.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await p.goto(base); await p.getByText('저장됨', { exact: true }).waitFor();
     const before = await (await c.request.get(base + '/api/state')).json();
-    await p.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await p.getByRole('tab', { name: '단어장', exact: true }).click();
     const dialog = p.getByRole('dialog'), body = p.locator('.sheet-dialog .dialog-scroll');
     const text = p.locator('.sheet-dialog .sense-selector > p');
     const open = async () => {

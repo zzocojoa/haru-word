@@ -44,15 +44,15 @@ export function SessionSummary({
       <h2>
         {saved
           ? s.date === date
-            ? "오늘의 기록을 남겼어요."
+            ? "학습 기록을 저장했어요"
             : s.date + "의 학습 기록이에요."
           : "기록 저장을 확인하고 있어요."}
       </h2>
       <p className="muted">
         {s.finished
-          ? "회차 종료"
+          ? "회차 마침"
           : "이 위치에서 다음에 이어갈 수 있어요."}{" "}
-        미측정은 성공·실패로 계산하지 않아요.
+        아직 확인하지 않은 항목은 성공·실패에 포함하지 않아요.
       </p>
       {s.date !== date && (
         <p className="notice">
@@ -67,7 +67,7 @@ export function SessionSummary({
         </div>
         <div>
           <b>{counts.recorded}</b>
-          <span>기록 완료</span>
+          <span>학습 기록함</span>
         </div>
         <div>
           <b>
@@ -77,7 +77,7 @@ export function SessionSummary({
           <span>누적 활동 시간</span>
         </div>
       </div>
-      <p className="small-note">독립 성공 {counts.successful} · 보완 필요 {counts.needsHelp} · 미측정 {counts.unmeasured}</p>
+      <p className="small-note">도움 없이 성공 {counts.successful} · 보완 필요 {counts.needsHelp} · 아직 확인 안 함 {counts.unmeasured}</p>
       {s.retry.length > 0 && (
         <p className="notice">
           재시도 {s.retry.length}개는 ‘도움 필요’로 남아 다음 학습에 우선 배정돼요.
@@ -123,7 +123,7 @@ export function SessionSummary({
             )
           }
         >
-          이번 기록 받기
+          이번 기록 CSV 받기
         </button>
       </div>
       <SessionRecords session={s} words={words} compact />

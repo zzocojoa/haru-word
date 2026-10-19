@@ -44,11 +44,11 @@ assert.ok(heavy.size);
     }
     page = await context.newPage(); observe(page);
     await page.goto(base, { waitUntil: 'domcontentloaded' });
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     assert.equal(requests.some(resource => heavy.has(path.posix.basename(resource))), false);
     checks.push('initial saved screen requests neither full examples nor image index');
     const search = page.getByLabel('단어 또는 한국어 뜻 검색');
-    async function library() { await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await search.waitFor(); }
+    async function library() { await page.getByRole('tab', { name: '단어장', exact: true }).click(); await search.waitFor(); }
     async function editor() { await library(); await search.fill('apple'); await page.getByRole('button', { name: 'apple 명사', exact: true }).click(); }
     await library();
     assert.equal(requests.some(resource => heavy.has(path.posix.basename(resource))), false);
@@ -77,26 +77,26 @@ assert.ok(heavy.size);
     await editor(); await failureAlert().waitFor();
     assert.deepEqual(await get(), before);
     await Promise.all([page.waitForEvent('load'), page.getByRole('button', { name: '다시 불러오기', exact: true }).click()]);
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     failure = 'dependency'; await editor(); await failureAlert().waitFor();
     await Promise.all([page.waitForEvent('load'), page.getByRole('button', { name: '다시 불러오기', exact: true }).click()]);
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     await editor();
     const dialog = page.getByRole('dialog');
     await dialog.getByLabel('함께 익힐 표현', { exact: true }).waitFor();
     assert.equal(await dialog.getByLabel('함께 익힐 표현', { exact: true }).inputValue(), content['adb44eba7b3ceef3'].expression);
     await page.keyboard.press('Escape'); await dialog.waitFor({ state: 'hidden' });
-    await page.getByRole('tab', { name: '오늘의 학습', exact: true }).click(); await library();
+    await page.getByRole('tab', { name: '오늘 학습', exact: true }).click(); await library();
     assert.equal(await search.inputValue(), 'apple');
     checks.push('editor entry and textbook failures recover without saving; accessible loading/error header, unload cancellation and late-close protection; list state retained');
-    await page.getByRole('tab', { name: '오늘의 학습', exact: true }).click();
+    await page.getByRole('tab', { name: '오늘 학습', exact: true }).click();
     await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
     await page.getByRole('status').filter({ hasText: '이미지 연습 자료를 불러오는 중이에요.' }).waitFor();
     await page.getByRole('button', { name: '연습 닫기', exact: true }).click();
     assert.ok(heldImageModule);
     holdImages = false; await heldImageModule.continue();
     await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
-    await page.getByRole('dialog').getByText('3,809개 · 성적 미기록', { exact: true }).waitFor();
+    await page.getByRole('dialog').getByText('3,809개 · 성적은 기록하지 않아요', { exact: true }).waitFor();
     await page.getByRole('dialog').locator('.image-practice-flip').click();
     await page.getByRole('dialog').locator('.image-practice-answer').waitFor();
     await page.getByRole('button', { name: '연습 닫기', exact: true }).click();

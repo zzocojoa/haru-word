@@ -53,7 +53,7 @@ export function nextAction(
   if (r.ko === "help") return "뜻→영어 추가 연습";
   if (r.en === "help") return "뜻 다시 익히기";
   if (r.sentenceStatus === "improve") return "문장 보완";
-  if (s && sessionRecordComplete(s, r as RecordItem)) return "이후에도 복습";
+  if (s && sessionRecordComplete(s, r as RecordItem)) return "다음에 다시 복습";
   return r.en === "unmeasured" || r.ko === "unmeasured"
     ? "미완료 이어서"
     : r.sentenceStatus === "unmeasured"

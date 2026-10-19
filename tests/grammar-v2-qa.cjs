@@ -21,14 +21,14 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     if (q.kind === 'choice') { await click(q.answer); await click('답 확인'); assert.equal(await page.getByRole('button', { name: '답 확인', exact: true }).isDisabled(), true); }
     else {
       for (const word of (q.orderFormat ? q.answer.replace(/[.!?]+$/, '') : q.answer).split(' ')) { const token = q.orderFormat ? q.options.find(t => t.toLowerCase() === word.toLowerCase()) : word; await page.locator('.grammar-options button:not([disabled])').filter({ hasText: new RegExp('^' + token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') }).first().click(); }
-      await click('정답 확인');
-      assert.equal(await page.getByRole('button', { name: '정답 확인', exact: true }).isDisabled(), true);
+      await click('내 답 확인');
+      assert.equal(await page.getByRole('button', { name: '내 답 확인', exact: true }).isDisabled(), true);
     }
     await click('다음');
   }
   fs.mkdirSync('outputs/grammar-v2', { recursive: true });
   try {
-    await page.goto(base); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click();
+    await page.goto(base); await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click();
     const initial = await snapshot();
     for (const lesson of GRAMMAR_LESSONS) {
       const l = PRACTICE_LESSONS[lesson.id];
@@ -157,7 +157,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     const result = await snapshot(); assert.equal(Object.keys(result.state.grammar).length, 15);
     for(const p of Object.values(result.state.grammar))assert.equal(p.contentVersion,version);
     for (const key of ['settings', 'progress', 'sessions']) assert.deepEqual(result.state[key], initial.state[key]);
-    await page.reload(); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click();
+    await page.reload(); await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click();
     assert.match(await page.locator('.grammar-catalog-count').innerText(), /15\/15/);
     assert.deepEqual(errors, []); console.log('PASS 15 lessons, 135 problems, persisted drafts, glossary, layout, accessibility and vocabulary invariance');
   } finally { await closeBrowser(browser); }

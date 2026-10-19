@@ -36,7 +36,7 @@ async function setup(browser) {
     if (extra && await extra(route, request, url)) return;
     return route.continue();
   }
-  const home = async () => { await target.goto(base, { waitUntil: 'domcontentloaded' }); await target.getByText('서버에 저장됨', { exact: true }).waitFor(); };
+  const home = async () => { await target.goto(base, { waitUntil: 'domcontentloaded' }); await target.getByText('저장됨', { exact: true }).waitFor(); };
   const open = () => target.getByRole('button', { name: '오늘 단어 다시 보기', exact: true }).click();
   const unchanged = async () => assert.deepEqual(await get(), before);
   return { context, target, before, session, guard, home, open, unchanged };
@@ -47,7 +47,7 @@ async function layout(target, dialog, label) {
     await target.setViewportSize({ width, height: 844 });
     await target.evaluate(value => document.documentElement.style.fontSize = `${value}%`, size);
     assert.equal(await dialog.evaluate(element => element.scrollWidth > element.clientWidth || document.documentElement.scrollWidth > innerWidth), false);
-    assert.equal(await dialog.getByRole('button', { name: 'Close', exact: true }).isVisible(), true);
+    assert.equal(await dialog.getByRole('button', { name: '닫기', exact: true }).isVisible(), true);
     const violations = await target.evaluate(async () => (await axe.run(document.querySelector('[role="dialog"]'), { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(row => ({ id: row.id, impact: row.impact })));
     assert.deepEqual(violations, []);
   }
@@ -72,15 +72,15 @@ async function completed(browser) {
     await layout(target, dialog, 'completed-loading');
     await target.keyboard.press('Tab');
     assert.ok(await dialog.evaluate(element => element.contains(document.activeElement)), 'keyboard focus stays inside loading dialog');
-    await dialog.getByRole('button', { name: 'Close', exact: true }).click(); await dialog.waitFor({ state: 'hidden' });
+    await dialog.getByRole('button', { name: '닫기', exact: true }).click(); await dialog.waitFor({ state: 'hidden' });
     await target.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
-    await target.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await target.getByRole('tab', { name: '단어장', exact: true }).click();
     hold = false; assert.ok(held);
     const response = target.waitForResponse(response => path.posix.basename(new URL(response.url()).pathname) === completedChunk);
     await held.continue(); await (await response).finished(); await nextPaint(target);
     assert.equal(await dialog.count(), 0, 'late content must not reopen the closed record on another tab');
-    assert.equal(await target.getByRole('tab', { name: '전체 단어장', exact: true }).getAttribute('aria-selected'), 'true');
-    await target.getByRole('tab', { name: '오늘의 학습', exact: true }).click(); await open();
+    assert.equal(await target.getByRole('tab', { name: '단어장', exact: true }).getAttribute('aria-selected'), 'true');
+    await target.getByRole('tab', { name: '오늘 학습', exact: true }).click(); await open();
     await dialog.locator('.review-meaning').waitFor();
     assert.equal(await dialog.locator('.review-meaning').innerText(), session.records[session.ids[0]].meaning);
     await layout(target, dialog, 'completed-loaded'); await unchanged();
@@ -97,11 +97,11 @@ async function completed(browser) {
     const dialog = failureFixture.target.getByRole('dialog');
     await dialog.getByRole('alert').filter({ hasText: '완료 기록 자료를 불러오지 못했어요.' }).waitFor();
     await layout(failureFixture.target, dialog, 'completed-error');
-    await dialog.getByRole('button', { name: 'Close', exact: true }).click(); await dialog.waitFor({ state: 'hidden' });
+    await dialog.getByRole('button', { name: '닫기', exact: true }).click(); await dialog.waitFor({ state: 'hidden' });
     await failureFixture.target.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
     await failureFixture.open(); await dialog.getByRole('alert').waitFor();
     await Promise.all([failureFixture.target.waitForEvent('load'), dialog.getByRole('button', { name: '다시 불러오기', exact: true }).click()]);
-    await failureFixture.target.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await failureFixture.target.getByText('저장됨', { exact: true }).waitFor();
     await failureFixture.open(); await failureFixture.target.getByRole('dialog').locator('.review-meaning').waitFor();
     await failureFixture.unchanged(); checks.push('completed failure keeps modal/title/close and explicit retry restores the original record');
   } finally { await failureFixture.context.close(); }
@@ -128,7 +128,7 @@ async function obsolete(browser, status) {
     }));
     await home();
     async function editor() {
-      await target.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await target.getByRole('tab', { name: '단어장', exact: true }).click();
       await target.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
       await target.getByRole('button', { name: 'apple 명사', exact: true }).click();
     }
@@ -151,7 +151,7 @@ async function obsolete(browser, status) {
     assert.ok(recoveryMisses > 0);
     await target.evaluate(() => removeEventListener('beforeunload', window.__unloadGuard));
     await Promise.all([target.waitForEvent('load'), target.getByRole('button', { name: '다시 불러오기', exact: true }).click()]);
-    await target.getByText('서버에 저장됨', { exact: true }).waitFor(); assert.notEqual(await target.evaluate(() => performance.timeOrigin), origin);
+    await target.getByText('저장됨', { exact: true }).waitFor(); assert.notEqual(await target.evaluate(() => performance.timeOrigin), origin);
     await editor(); await target.getByRole('dialog').getByLabel('함께 익힐 표현', { exact: true }).waitFor();
     assert.equal(navigations, 2); assert.ok(recoveryMisses >= 2); await unchanged();
     checks.push(`obsolete chunk ${status} permits a guarded fresh document; unload cancellation still works; new asset restores editor without saving`);

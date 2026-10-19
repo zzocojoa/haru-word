@@ -3,7 +3,7 @@ import type { State } from './learning';
 
 export const FEEDBACK_STRUCTURE_HEADER = 'X-Study-Feedback-Structure';
 export const FEEDBACK_STRUCTURE_HEADERS = { [FEEDBACK_STRUCTURE_HEADER]: '1' };
-export const FEEDBACK_UPGRADE_MESSAGE = 'AI 문장 구조가 추가되었어요. 현재 입력을 백업한 뒤 페이지를 새로고침해 주세요.';
+export const FEEDBACK_UPGRADE_MESSAGE = '학습 화면이 업데이트됐어요. 현재 입력을 백업한 뒤 새로고침해 주세요.';
 export const supportsFeedbackStructure = (request?: Request) => request?.headers.get(FEEDBACK_STRUCTURE_HEADER) === '1';
 
 export function legacyFeedback(feedback: SentenceFeedback): SentenceFeedback {

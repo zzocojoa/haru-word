@@ -8,7 +8,7 @@ export { readBoundedJsonText } from './request-body';
 export const largeRestoreEnabled = () => env.large_backup_restore_enabled === 'true';
 export type RestoreMetrics = BodyMetrics;
 export async function restoreEndpoint(request: Request, operation: string, action: (db: D1Database, user: string, metrics: RestoreMetrics) => Promise<unknown>) {
-  const user = await getChatGPTUser(); if (!user) return json({ error: '로그인이 필요합니다.' }, 401);
+  const user = await getChatGPTUser(); if (!user) return json({ error: '로그인한 뒤 다시 시도해 주세요.' }, 401);
   if (request.method !== 'GET') { const rejected = validateJsonMutation(request); if (rejected) return rejected; }
   if (!largeRestoreEnabled() && request.method !== 'GET' && request.method !== 'DELETE') return json({ error: '대용량 복원을 잠시 사용할 수 없어요. 현재 기록은 유지됩니다.' }, 503);
   const started = Date.now(), metrics: RestoreMetrics = { bytes: 0 };

@@ -10,7 +10,7 @@ const yesterday = prior.toISOString().slice(0, 10), ids = ['arrive', 'busy', 'br
 const label = date => { const [y, m, d] = date.split('-').map(Number); return `${y}년 ${m}월 ${d}일`; };
 const heading = date => { const [, m, d] = date.split('-').map(Number); return `${m}월 ${d}일 목표 단어`; };
 const checks = [], errors = [], aiRequests = [], audits = [];
-const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor();
+const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
 const get = async c => { const r = await c.request.get(base + '/api/state'); assert.equal(r.status(), 200); return r.json(); };
 const put = async (c, data) => { const r = await c.request.put(base + '/api/state', { data }); assert.equal(r.status(), 200, await r.text()); };
 const record = (id, learned = true) => ({ meaning: content[id].meaning, material: content[id], ...(learned ? { learnedOn: yesterday } : {}),
@@ -55,7 +55,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     assert.equal(started.date, today); assert.equal(started.ids.length, 3); assert.equal(started.ids[0], ids[0]);
     assert.equal(started.ids.filter(id => !ids.includes(id)).length, 2);
     assert.deepEqual(state.sessions[monthly.id], monthly);
-    await p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(p);
+    await p.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved(p);
     await p.getByRole('button', { name: '학습 홈으로', exact: false }).click();
     await p.locator('.home-panel').waitFor();
     checks.push('today starts while monthly review remains unfinished, assigning one carryover plus two new words within the goal');
@@ -76,7 +76,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     async function setting(action) {
       await p.getByRole('button', { name: '학습 설정', exact: true }).click();
       await action(); await saved(p);
-      await p.getByRole('dialog').getByRole('button', { name: 'Close', exact: true }).click();
+      await p.getByRole('dialog').getByRole('button', { name: '닫기', exact: true }).click();
       await p.getByRole('dialog').waitFor({ state: 'hidden' });
     }
     await setting(async () => {
@@ -86,16 +86,16 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).waitFor();
     await p.getByText('오늘 배정 기준', {exact:true}).click();
     await p.getByText(/목표까지 7개는 아직 배정 전/).waitFor();
-    await setting(() => p.getByRole('checkbox', { name: /신규 단어 잠시 쉬기/ }).check());
+    await setting(() => p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기', exact: true }).check());
     assert.equal(await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).count(), 0);
-    await setting(() => p.getByRole('checkbox', { name: /신규 단어 잠시 쉬기/ }).uncheck());
+    await setting(() => p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기', exact: true }).uncheck());
     await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).click(); await saved(p);
-    await p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(p);
+    await p.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved(p);
     await p.getByRole('button', { name: '학습 홈으로', exact: false }).click();
     await p.locator('.home-panel').waitFor();
     const rows = p.locator('.today-words > .today-word-row');
     assert.equal(await rows.count(), 10);
-    assert.equal(await rows.getByText('기록 완료', { exact: true }).count(), 3);
+    assert.equal(await rows.getByText('학습 기록함', { exact: true }).count(), 3);
     assert.equal(await rows.getByText('진행 중', { exact: true }).count(), 7);
     assert.match(await p.locator('.daily-metrics > div').nth(1).innerText(), /3\s*\/ 10개/);
     state = (await get(c)).state;
@@ -140,7 +140,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     const origins = () => practicePage.getByText('새 학습 2개 · 이전 학습·복습 1개', { exact: true }).waitFor();
     await origins();
     await practicePage.getByRole('button', { name: '오늘의 학습 시작', exact: true }).click(); await saved(practicePage);
-    await practicePage.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(practicePage);
+    await practicePage.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved(practicePage);
     await practicePage.getByRole('button', { name: '학습 홈으로', exact: false }).click(); await origins();
     await practicePage.reload(); await saved(practicePage); await origins();
     assert.deepEqual((await get(practiceContext)).state.sessions[practice.id], practice);

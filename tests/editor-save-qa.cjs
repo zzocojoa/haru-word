@@ -22,8 +22,8 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
       held = route;
       heldEvents.emit('held');
     });
-    await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByText('서버에 저장됨', { exact: true }).waitFor();
-    await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await page.goto(base, { waitUntil: 'domcontentloaded' }); await page.getByText('저장됨', { exact: true }).waitFor();
+    await page.getByRole('tab', { name: '단어장', exact: true }).click();
     const search = page.getByLabel('단어 또는 한국어 뜻 검색'), dialog = page.getByRole('dialog');
     const expression = () => dialog.getByLabel('함께 익힐 표현', { exact: true });
     async function open(word) {
@@ -33,7 +33,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
       await page.getByRole('button', { name: word + ' 동사', exact: true }).click();
     }
     async function close() { await page.keyboard.press('Escape'); if(await page.getByRole('alertdialog').count()) await page.getByRole('button',{name:'변경 버리고 닫기',exact:true}).click(); await dialog.waitFor({ state: 'hidden' }); }
-    async function saved() { await page.getByText('서버에 저장됨', { exact: true }).waitFor(); }
+    async function saved() { await page.getByText('저장됨', { exact: true }).waitFor(); }
     const get = async () => (await context.request.get(base + '/api/state')).json();
     const audit = async () => {
       await dialog.evaluate(el => Promise.all(el.getAnimations().map(a => a.finished.catch(() => {}))));
@@ -47,7 +47,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     await firstRequest;
     assert.equal(await expression().isDisabled(), true);
     assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
-    await page.keyboard.press('Escape'); await dialog.getByRole('button',{name:'Close',exact:true}).click();
+    await page.keyboard.press('Escape'); await dialog.getByRole('button',{name:'닫기',exact:true}).click();
     assert.equal(await dialog.isVisible(), true); assert.equal(await expression().inputValue(), 'work today');
     await held.continue(); await saved(); await dialog.waitFor({state:'hidden'});
     await open('want'); await expression().fill('want a new draft');
@@ -93,7 +93,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
     await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(), true);
     await held.continue(); await saved(); await dialog.waitFor({ state: 'hidden' }); mode = 'ready';
-    await page.reload({ waitUntil: 'domcontentloaded' }); await saved(); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await open('work');
+    await page.reload({ waitUntil: 'domcontentloaded' }); await saved(); await page.getByRole('tab', { name: '단어장', exact: true }).click(); await open('work');
     assert.equal(await expression().inputValue(), 'latest work draft'); await close();
     checks.push('in-editor retry survives repeated failures, blocks until the clock recovers, saves latest edits, locks duplicate clicks/input/dismissal, and persists on reconnect; 320/390/1440px at 100/200% text and axe pass');
     await open('want'); await expression().fill('want outer retry'); mode = 'fail';
@@ -105,11 +105,11 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     checks.push('an unrelated editor cannot bypass a pending failed save; existing page retry still works');
     await page.getByRole('button', { name: /개인 단어 추가/ }).click();
     await dialog.getByLabel('영어 단어', { exact: true }).fill('commute');
-    await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).fill('통근하다');
+    await dialog.getByLabel('학습할 한국어 뜻', { exact: true }).fill('통근하다');
     mode = 'fail'; await dialog.getByRole('button', { name: '내 단어장에 추가', exact: true }).click(); await retry().waitFor();
     assert.equal(await retry().isEnabled(), true); await dialog.getByLabel('영어 단어', { exact: true }).fill('');
     assert.equal(await retry().isDisabled(), true); await dialog.getByLabel('영어 단어', { exact: true }).fill('commuting');
-    await dialog.getByLabel('오늘의 한국어 뜻', { exact: true }).fill('통근');
+    await dialog.getByLabel('학습할 한국어 뜻', { exact: true }).fill('통근');
     await retry().click(); await dialog.getByText('temporary failure', { exact: true }).waitFor();
     assert.equal(await retry().isEnabled(), true); await audit();
     mode = 'hold'; const beforeAddition = writes, additionRequest = waitForHeld();
@@ -128,7 +128,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     await audit(); await close();
     await page.reload({ waitUntil: 'domcontentloaded' }); await saved();
     const reconnected = await get(); assert.deepEqual(reconnected.state, snapshot.state);
-    await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await open('work'); await expression().fill('conflicting work draft');
+    await page.getByRole('tab', { name: '단어장', exact: true }).click(); await open('work'); await expression().fill('conflicting work draft');
     const fresh = await get();
     assert.equal((await context.request.put(base + '/api/state', { data: { revision: fresh.revision, settings: { ...fresh.state.settings, dailyGoal: 2 }, progress: {}, sessions: {} } })).status(), 200);
     const serverBeforeConflict = await get();

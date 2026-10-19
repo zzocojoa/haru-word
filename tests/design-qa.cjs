@@ -13,7 +13,7 @@ const checks=[];const errors=[];
  try {
   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('design_'),'oai-authenticated-user-email':'design@example.test'}});
   const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));
-  const saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
+  const saved=()=>p.getByText('저장됨',{exact:true}).waitFor();
   const state=async()=> (await context.request.get(base+'/api/state')).json();
   const shot=async name=>p.screenshot({path:out+'/'+name+'.png',animations:'disabled'});
   const fit=async()=>assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'page must fit viewport');
@@ -31,10 +31,10 @@ const checks=[];const errors=[];
   const before=await state();
   for(const width of [320,390,600,820,1440]){
    await p.setViewportSize({width,height:844});await fit();
-   const start=await p.getByRole('button',{name:'20개 친숙도부터 확인',exact:true}).boundingBox();
+   const start=await p.getByRole('button',{name:'단어 20개 친숙도 확인',exact:true}).boundingBox();
    const nav=await p.getByRole('tablist',{name:'학습 화면'}).boundingBox();
    assert.ok(start&&start.y>=0&&start.y+start.height<=(width<=600?nav.y:844),'start action must be visible on first screen');
-   for(const tab of ['전체 단어장','주간·월말 점검','학습 기록','오늘의 학습']){
+   for(const tab of ['단어장','복습 점검','학습 기록','오늘 학습']){
     await p.getByRole('tab',{name:tab,exact:true}).click();await fit();
    }
   }
@@ -42,7 +42,7 @@ const checks=[];const errors=[];
   await p.setViewportSize({width:1440,height:1050});await shot('01-desktop-home');
   await p.setViewportSize({width:390,height:844});await shot('02-mobile-home');
 
-  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
+  await p.getByRole('tab',{name:'단어장',exact:true}).click();
   assert.ok(await p.locator('.meaning-cell').first().isVisible());
   assert.ok((await p.locator('.meaning-cell').first().innerText()).trim());
   await shot('03-mobile-library');
@@ -51,14 +51,21 @@ const checks=[];const errors=[];
   assert.ok(fixed.y>=0&&fixed.y+fixed.height<=845);
   await p.getByRole('tab',{name:'학습 기록',exact:true}).click();
   assert.equal(await p.evaluate(()=>window.scrollY),0);
-  await p.getByRole('tab',{name:'오늘의 학습',exact:true}).focus();
+  await p.getByRole('tab',{name:'오늘 학습',exact:true}).focus();
+  // Focusing an automatic tab requests a guarded asynchronous view change.
+  // Begin the arrow-navigation check only once that initial tab is selected.
+  await p.getByRole('tab',{name:'오늘 학습',exact:true,selected:true}).waitFor();
   await p.keyboard.press('ArrowRight');
-  await p.getByRole('tabpanel',{name:'전체 단어장',exact:true}).waitFor();
+  try { await p.getByRole('tabpanel',{name:'단어장',exact:true}).waitFor(); }
+  catch(error) {
+   console.error(JSON.stringify({tabs:await p.getByRole('tablist',{name:'학습 화면'}).ariaSnapshot(),active:await p.evaluate(()=>({role:document.activeElement?.getAttribute('role'),text:document.activeElement?.textContent})),errors}));
+   await shot('keyboard-tab-failure'); throw error;
+  }
   checks.push('mobile meanings remain visible, bottom navigation stays reachable after scrolling, keyboard tab navigation works');
 
   await p.getByLabel('단어 또는 한국어 뜻 검색').fill('work');
   await p.getByRole('tab',{name:'학습 기록',exact:true}).click();
-  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
+  await p.getByRole('tab',{name:'단어장',exact:true}).click();
   assert.equal(await p.getByLabel('단어 또는 한국어 뜻 검색').inputValue(),'work');
   const wordButton=p.getByRole('button',{name:'work 동사',exact:true});await wordButton.click();
   const dialog=p.getByRole('dialog');await dialog.waitFor();
@@ -73,6 +80,7 @@ const checks=[];const errors=[];
   await dialog.locator('.dialog-scroll').evaluate(el=>{el.scrollTop=0});await shot('04-mobile-editor');
   await p.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});
   await p.waitForFunction(()=>document.activeElement?.matches('.word-link'));
+  await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   assert.ok(await wordButton.evaluate(el=>document.activeElement===el));
   assert.deepEqual(await state(),before);
   checks.push('bottom sheet fits the phone, save remains reachable during scrolling, reduced motion and focus restoration work, browsing does not change records');
@@ -87,7 +95,7 @@ const checks=[];const errors=[];
   const seed=await context.request.put(base+'/api/state',{data:{revision:before.revision,settings:{...before.state.settings,activeSessionId:sid},progress,sessions:{[sid]:session}}});
   assert.equal(seed.status(),200,await seed.text());
   await p.reload();await saved();
-  for(const name of ['오늘 단어 다시 보기','오늘 단어 다시 학습']){
+  for(const name of ['오늘 단어 다시 보기','오늘 단어 다시 연습']){
    const action=await p.getByRole('button',{name,exact:true}).boundingBox();const nav=await p.getByRole('tablist').boundingBox();
    assert.ok(action.y>=0&&action.y+action.height<=nav.y,'completed study actions must be above mobile navigation');
   }
@@ -101,21 +109,24 @@ const checks=[];const errors=[];
   await journal.locator('.journal-word-trigger').first().click();
   assert.ok(!await journal.locator('.journal-desktop').isVisible());
   const card=journal.locator('.record-card').first();
-  for(const text of ['영어→뜻','뜻→영어','독립 성공','도움 필요','내 문장','보완점','전치사와 시제를 다시 확인하기'])assert.ok((await card.innerText()).includes(text));
+  for(const text of ['영어→뜻','뜻→영어','도움 없이 성공','도움 필요','내 문장','보완점','전치사와 시제를 다시 확인하기'])assert.ok((await card.innerText()).includes(text));
   await fit();await shot('06-mobile-records');
   await p.setViewportSize({width:1440,height:1050});assert.ok(await journal.locator('.journal-desktop').isVisible());assert.ok(!await journal.locator('.journal-mobile').isVisible());await fit();await shot('07-desktop-records');
   checks.push('completed-study actions stay accessible; collapsed sessions and mobile word details show both recall directions, sentences and notes, while desktop retains the comparison table');
 
-  await p.setViewportSize({width:390,height:844});await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();
-  await p.getByRole('button',{name:'오늘 단어 다시 학습',exact:true}).click();await saved();
-  await p.getByLabel('오늘 공부할 뜻',{exact:false}).waitFor();await fit();await shot('08-mobile-study');
+  await p.setViewportSize({width:390,height:844});await p.getByRole('tab',{name:'오늘 학습',exact:true}).click();
+  await p.getByRole('button',{name:'오늘 단어 다시 연습',exact:true}).click();await saved();
+  await p.getByLabel('학습할 뜻',{exact:false}).waitFor();await fit();await shot('08-mobile-study');
   assert.ok(await p.getByRole('heading',{name:'단어 익히기',exact:true}).isVisible());
-  await p.getByLabel('오늘 공부할 뜻',{exact:false}).fill('탭을 바꿔도 유지할 초안');
-  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
-  assert.ok((await p.getByRole('heading',{name:'나의 단어장',exact:true}).boundingBox()).width>100);
-  await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();
-  assert.equal(await p.getByLabel('오늘 공부할 뜻',{exact:false}).inputValue(),'탭을 바꿔도 유지할 초안');
-  await p.getByRole('button',{name:'오늘 종료 · 저장',exact:true}).click();await saved();
+  await p.getByLabel('학습할 뜻',{exact:false}).fill('탭을 바꿔도 유지할 초안');
+  await p.getByRole('tab',{name:'단어장',exact:true}).click();
+  const libraryHeading=p.getByRole('heading',{name:'단어장',exact:true});
+  assert.ok(await libraryHeading.isVisible());
+  const headingBox=await libraryHeading.boundingBox();
+  assert.ok(headingBox.width>0&&headingBox.x>=0&&headingBox.x+headingBox.width<=390,'shortened heading stays visible and fits the viewport');
+  await p.getByRole('tab',{name:'오늘 학습',exact:true}).click();
+  assert.equal(await p.getByLabel('학습할 뜻',{exact:false}).inputValue(),'탭을 바꿔도 유지할 초안');
+  await p.getByRole('button',{name:'저장하고 나가기',exact:true}).click();await saved();
   checks.push('active mobile repeat study shows the current stage and can end with a saved record');
   assert.deepEqual(errors,[]);
   const report={passed:true,checks,browserErrors:errors};fs.writeFileSync(out+'/validation.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));

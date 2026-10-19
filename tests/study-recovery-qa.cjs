@@ -11,7 +11,7 @@ const selected = ['apple', 'book'].map(name => words.find(w => w.word === name &
 const headers = { 'X-Study-Grammar': '2', 'X-Study-Feedback-Structure': '1', 'X-Study-Review-Resume': '1', 'X-Study-Monthly-Carryover': '1' };
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const get = async c => (await c.request.get(base + '/api/state', { headers })).json();
-const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor();
+const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
 async function seed(c, stage) {
   const initial = await get(c), id = crypto.randomUUID();
   const s = { id, kind: 'daily', date, period: date, ids: selected.map(w => w.id), warmupIds: [], stage, index: 0,
@@ -41,7 +41,7 @@ async function backup(p, file) {
       await field.fill(stage === 'sentence' ? 'I eat an apple.' : '처음 작성한 뜻');
       let held;
       await p.route('**/api/state', route => { if (route.request().method() === 'PUT') held = route; else return route.continue(); });
-      await p.getByRole('button', { name: stage === 'sentence' ? '문장을 완성했어요' : /^뜻을 확인했어요/ }).click();
+      await p.getByRole('button', { name: stage === 'sentence' ? '문장을 완성했어요' : /^뜻 저장하고 계속/ }).click();
       await p.getByText('저장 중', { exact: true }).waitFor(); assert.ok(held);
       const submitted = held.request().postDataJSON();
       assert.equal(await field.isEditable(), true);

@@ -200,9 +200,9 @@ export const EMPTY: State = {
 };
 
 export const RESULT_TEXT: Record<Result, string> = {
-  independent: "독립 성공",
+  independent: "도움 없이 성공",
   help: "도움 필요",
-  unmeasured: "미측정",
+  unmeasured: "아직 확인 안 함",
 };
 
 export const FAMILIARITY_TEXT: Record<Familiarity, string> = {
@@ -232,7 +232,7 @@ export const POS: Record<string, string> = {
 export const SENTENCE_TEXT: Record<SentenceResult, string> = {
   written: "작성",
   improve: "보완 필요",
-  unmeasured: "미측정",
+  unmeasured: "아직 확인 안 함",
 };
 
 export const KIND_TEXT: Record<Kind, string> = {

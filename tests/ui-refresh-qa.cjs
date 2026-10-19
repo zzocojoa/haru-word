@@ -23,30 +23,30 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
   const restore=await c.request.post(base+'/api/state/restore',{headers:{'x-study-revision':String(initial.revision)},data:{format:'haru-words-v1',exportedAt:new Date().toISOString(),state}});
   assert.equal(restore.status(),200,await restore.text());
   const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
-  await p.goto(base, { waitUntil: 'domcontentloaded' });await p.getByText('서버에 저장됨',{exact:true}).waitFor();
+  await p.goto(base, { waitUntil: 'domcontentloaded' });await p.getByText('저장됨',{exact:true}).waitFor();
   const before=await get(), rows=p.locator('.today-word-row');
   assert.equal(await rows.count(),3);
   await p.getByRole('button',{name:'남은 단어 1',exact:true}).click();
   assert.equal(await rows.count(),1);assert.match(await rows.innerText(),/busy/);
-  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
+  await p.getByRole('tab',{name:'단어장',exact:true}).click();
   await p.getByLabel('단어 또는 한국어 뜻 검색').fill('arrive');
   await p.getByRole('button',{name:'필터 초기화',exact:true}).click();
   assert.equal(await p.getByLabel('단어 또는 한국어 뜻 검색').inputValue(),'');
   assert.ok(await p.getByLabel('단어 또는 한국어 뜻 검색').evaluate(el=>document.activeElement===el));
-  await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();
+  await p.getByRole('tab',{name:'오늘 학습',exact:true}).click();
   assert.equal(await p.getByRole('button',{name:'남은 단어 1',exact:true}).getAttribute('aria-pressed'),'true');
   assert.equal(await rows.count(),1);
   await p.getByRole('button',{name:'전체 3',exact:true}).click();
   checks.push('remaining filter persists across tabs; reset clears library filters and restores search focus');
-  await p.getByRole('tab',{name:'주간·월말 점검',exact:true}).click();
-  assert.equal(await p.getByRole('tabpanel',{name:'주간·월말 점검',exact:true}).locator('.pending-reviews article').count(),1);
+  await p.getByRole('tab',{name:'복습 점검',exact:true}).click();
+  assert.equal(await p.getByRole('tabpanel',{name:'복습 점검',exact:true}).locator('.pending-reviews article').count(),1);
   assert.equal(await p.locator('[data-review-kind=monthly]').getByRole('button',{name:/이어서/}).count(),1);
   assert.deepEqual(await get(),before);
   checks.push('selected monthly session appears once; a separate older session for the same month remains reachable without writes');
   const audit=async name=>{await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const violations=await p.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));audits.push({name,violations});assert.deepEqual(violations,[],name);};
   for(const width of [320,390,430,600,601,620,640,641,768,1440]){
    await p.setViewportSize({width,height:900});
-   for(const name of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){
+   for(const name of ['오늘 학습','단어장','복습 점검','학습 기록']){
     await p.getByRole('tab',{name,exact:true}).click();
     assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,name+' '+width);
     const labels=await p.getByRole('tablist',{name:'학습 화면',exact:true}).locator('[role=tab]').evaluateAll(tabs=>tabs.map(tab=>[...tab.querySelectorAll('.nav-label-wide,.nav-label-compact')].filter(label=>label.getClientRects().length>0).map(label=>label.className)));
@@ -56,7 +56,7 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
   }
   await p.setViewportSize({width:320,height:900});
   const zoom=await p.addStyleTag({content:'html{font-size:200% !important}'});
-  for(const name of ['오늘의 학습','전체 단어장','주간·월말 점검','학습 기록']){
+  for(const name of ['오늘 학습','단어장','복습 점검','학습 기록']){
    await p.getByRole('tab',{name,exact:true}).click();
    assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,name+' 200%');
   }
@@ -65,7 +65,7 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
   await p.setViewportSize({width:390,height:844});
   await p.getByRole('button',{name:'기록 관리',exact:true}).click();await audit('record menu');
   await p.keyboard.press('Escape');assert.ok(await p.getByRole('button',{name:'기록 관리',exact:true}).evaluate(el=>document.activeElement===el));
-  await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
+  await p.getByRole('tab',{name:'단어장',exact:true}).click();
   await p.getByRole('button',{name:'개인 단어 추가',exact:true}).click();
   assert.ok((await p.getByRole('combobox',{name:'개인 단어 품사'}).boundingBox()).height>=44);
   for(const width of [320,390,430,768,1440]){
@@ -73,24 +73,30 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
    assert.equal(await p.getByRole('dialog').evaluate(el=>el.scrollWidth>el.clientWidth),false,'personal form '+width);
   }
   await p.setViewportSize({width:390,height:844});await audit('personal word dialog');
-  await p.getByRole('button',{name:'Close',exact:true}).click();
+  await p.getByRole('button',{name:'닫기',exact:true}).click();
   await p.getByRole('button',{name:'학습 방식·출처',exact:true}).click();
   await audit('source dialog');assert.equal(await p.getByRole('dialog').evaluate(el=>el.scrollWidth>el.clientWidth),false);
-  await p.getByRole('button',{name:'Close',exact:true}).click();
+  await p.getByRole('button',{name:'닫기',exact:true}).click();
   checks.push('personal form uses a 44px part-of-speech control and fits five widths; personal and source dialogs pass axe');
-  await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();
+  await p.getByRole('tab',{name:'오늘 학습',exact:true}).click();
   await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();
-  const input=p.getByLabel('오늘 공부할 뜻',{exact:false});await input.fill('키보드 입력 보존');
+  await p.waitForFunction(()=>document.activeElement?.tagName==='H2'&&!!document.activeElement.closest('.session-panel'));
+  const input=p.getByLabel('학습할 뜻',{exact:false});await input.fill('키보드 입력 보존');
+  assert.ok(await input.evaluate(el=>document.activeElement===el));
   // Emulate only the visual viewport shrink. Real iOS keyboard is a manual check.
   await p.evaluate(()=>{Object.defineProperty(visualViewport,'height',{configurable:true,get:()=>innerHeight-320});visualViewport.dispatchEvent(new Event('resize'));});
-  await p.locator('.shell[data-keyboard=open]').waitFor();
+  try { await p.locator('.shell[data-keyboard=open]').waitFor(); }
+  catch(error) {
+   console.error(JSON.stringify({keyboard:await p.evaluate(()=>({innerHeight,viewportHeight:visualViewport.height,activeTag:document.activeElement?.tagName,activeId:document.activeElement?.id,focusWithinSession:!!document.activeElement?.closest('.session-panel'),shell:document.querySelector('.shell')?.getAttribute('data-keyboard')})),errors}));
+   throw error;
+  }
   assert.equal(await p.getByRole('tablist',{name:'학습 화면',includeHidden:true}).isVisible(),false);
   assert.equal(await p.locator('.study-actions').evaluate(el=>getComputedStyle(el).position),'static');
   assert.equal(await input.inputValue(),'키보드 입력 보존');
   await p.evaluate(()=>{delete visualViewport.height;visualViewport.dispatchEvent(new Event('resize'));});
   await p.getByRole('tablist',{name:'학습 화면'}).waitFor();
-  await p.getByRole('button',{name:'오늘 종료 · 저장',exact:true}).click();
-  await p.getByRole('heading',{name:'오늘의 기록을 남겼어요.',exact:true}).waitFor();
+  await p.getByRole('button',{name:'저장하고 나가기',exact:true}).click();
+  await p.getByRole('heading',{name:'학습 기록을 저장했어요',exact:true}).waitFor();
   assert.equal(await p.locator('.session-summary .record-card').count(),0);
   assert.equal(await p.locator('.session-summary .journal-word').count(),3);
   await p.locator('.session-summary .journal-word-trigger').first().click();

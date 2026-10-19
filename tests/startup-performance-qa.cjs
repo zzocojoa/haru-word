@@ -8,7 +8,7 @@ const base=require('./qa/runtime.cjs').base,out='outputs/startup-performance';fs
   const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
   await p.addInitScript(()=>{window.__startup={longTasks:[],lcp:0};new PerformanceObserver(l=>window.__startup.longTasks.push(...l.getEntries().map(e=>Math.round(e.duration)))).observe({type:'longtask',buffered:true});new PerformanceObserver(l=>{window.__startup.lcp=l.getEntries().at(-1)?.startTime||0}).observe({type:'largest-contentful-paint',buffered:true});});
   const cdp=await c.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});
-  const start=performance.now();await p.goto(base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();const ready=Math.round(performance.now()-start);
+  const start=performance.now();await p.goto(base);await p.getByText('저장됨',{exact:true}).waitFor();const ready=Math.round(performance.now()-start);
   const settings=p.getByRole('button',{name:'학습 설정',exact:true});await settings.click();await p.getByRole('dialog').waitFor();
   samples.push({readyMs:ready,...await p.evaluate(()=>({lcpMs:Math.round(window.__startup.lcp),longTasksMs:window.__startup.longTasks,resources:performance.getEntriesByType('resource').filter(e=>e.name.includes('/_next/static/')).map(e=>({path:new URL(e.name).pathname,encodedBytes:e.encodedBodySize,decodedBytes:e.decodedBodySize,durationMs:Math.round(e.duration)}))}))});
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await c.close();

@@ -18,7 +18,7 @@ export function GrammarCatalog({ progress, headingRef, onOpen, filter, onFilter,
   const { counts, groups, visibleCount } = grammarCatalog(progress, filter, date);
   return <section className="grammar-catalog">
     <header className="grammar-catalog-heading">
-      <div><h2 ref={headingRef} tabIndex={-1}>문장 속 역할을 익혀요</h2><p className="small-note">15개 미니 수업 · 한 수업 3~5분</p></div>
+      <div><h2 ref={headingRef} tabIndex={-1}>품사와 문장 연습</h2><p className="small-note">15개 수업 · 수업당 약 3~5분</p></div>
       <span className="grammar-catalog-count"><Check size={16} aria-hidden="true" />수업 마침 <b>{counts.complete}/15</b></span>
     </header>
     <div className="grammar-filters" role="group" aria-label="수업 표시">

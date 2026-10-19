@@ -11,8 +11,10 @@ const items = ['apple', 'book'].map(name => words.find(word => word.word === nam
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const checks = [], errors = [];
 const requests = [];
+const timerSnapshots = [];
+const snapshotTimer = async (page, label) => timerSnapshots.push({ label, ...await page.evaluate(() => ({ now: Date.now(), monotonic: performance.now(), text: document.querySelector('.timer > span')?.textContent, visible: document.visibilityState })) });
 let currentPage;
-const saved = page => page.getByText('서버에 저장됨', { exact: true }).waitFor();
+const saved = page => page.getByText('저장됨', { exact: true }).waitFor();
 const resume = async page => {
   // Reconnection starts a clock sync on browser focus. Establish focus before
   // clicking, and await this action's acknowledgement, not an earlier status.
@@ -27,6 +29,15 @@ const resume = async page => {
 };
 const read = async context => (await context.request.get(base + '/api/state')).json();
 const timerSeconds = async page => {
+  // A clock jump can enqueue a React update without committing its DOM yet.
+  // Drain native message tasks (not the paused timer clock) before reading it.
+  await page.evaluate(async () => {
+    for (let i = 0; i < 2; i++) await new Promise(resolve => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = () => { channel.port1.close(); channel.port2.close(); resolve(); };
+      channel.port2.postMessage(null);
+    });
+  });
   const text = await page.locator('.timer > span').first().innerText();
   const [minutes, seconds] = text.split(':').map(Number);
   return minutes * 60 + seconds;
@@ -81,27 +92,27 @@ const timerSeconds = async page => {
         await page.getByLabel('보완할 점', { exact: false }).fill('메모도 유지');
         await page.getByLabel('내 문장을 소리 내어 말해 봤어요').check();
       }
-      await page.getByRole('tab', { name: '전체 단어장' }).click();
+      await page.getByRole('tab', { name: '단어장' }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
-      await page.getByRole('tab', { name: '오늘의 학습' }).click();
+      await page.getByRole('tab', { name: '오늘 학습' }).click();
       assert.equal(await field.inputValue(), draft);
       await page.getByRole('button', { name: '학습 설정', exact: true }).click();
       await page.getByRole('combobox', { name: '하루 목표', exact: true }).click();
       await page.getByRole('option', { name: '4개', exact: true }).click();
       await saved(page);
       // Wait for Select to release its layer, then explicitly close the settings dialog.
-      await page.getByRole('button', { name: 'Close', exact: true }).click();
+      await page.getByRole('button', { name: '닫기', exact: true }).click();
       await page.locator('.settings-dialog').waitFor({ state: 'hidden' });
       assert.equal(await field.inputValue(), draft);
       assert.equal((await read(context)).state.settings.activeSessionId, session.id);
-      await page.getByRole('tab', { name: '전체 단어장' }).click();
+      await page.getByRole('tab', { name: '단어장' }).click();
       assert.equal(await page.getByLabel('단어 또는 한국어 뜻 검색').inputValue(), 'apple');
-      await page.getByRole('tab', { name: '오늘의 학습' }).click();
+      await page.getByRole('tab', { name: '오늘 학습' }).click();
       if (stage === 'sentence') {
         assert.equal(await page.getByLabel('보완할 점', { exact: false }).inputValue(), '메모도 유지');
         assert.ok(await page.getByLabel('내 문장을 소리 내어 말해 봤어요').isChecked());
       }
-      await page.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click();
+      await page.getByRole('button', { name: '저장하고 나가기', exact: true }).click();
       await saved(page);
       const stored = (await read(context)).state.sessions[session.id].records[items[0].id];
       assert.equal(stage === 'learn' ? stored.meaning : stage === 'en' ? stored.draft.answer : stored.sentence, draft);
@@ -119,13 +130,15 @@ const timerSeconds = async page => {
 
     if (!process.argv.includes('--drafts-only')) {
     const { context, page, session } = await fresh('en', true);
+    await snapshotTimer(page, 'before first advance');
     const start = await timerSeconds(page);
     await page.clock.runFor(3000);
+    await snapshotTimer(page, 'after first advance');
     assert.equal(await timerSeconds(page), start + 3);
     await page.getByLabel('한국어 뜻 입력').fill('사과');
-    await page.getByRole('tab', { name: '전체 단어장' }).click();
+    await page.getByRole('tab', { name: '단어장' }).click();
     await page.clock.runFor(10000);
-    await page.getByRole('tab', { name: '오늘의 학습' }).click();
+    await page.getByRole('tab', { name: '오늘 학습' }).click();
     assert.equal(await timerSeconds(page), start + 3);
     await page.evaluate(() => {
       Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
@@ -160,7 +173,7 @@ const timerSeconds = async page => {
     assert.equal(stored.index, 1);
     assert.equal(stored.records[items[0].id].en, 'independent');
     assert.equal(stored.records[items[1].id].en, 'unmeasured');
-    await page.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click();
+    await page.getByRole('button', { name: '저장하고 나가기', exact: true }).click();
     await saved(page);
     const elapsed = (await read(context)).state.sessions[session.id].elapsed;
     await page.clock.runFor(10000);
@@ -174,6 +187,7 @@ const timerSeconds = async page => {
     fs.writeFileSync(out + '/verification.json', JSON.stringify({ passed: true, checks, pageErrors: errors }, null, 2));
     console.log(JSON.stringify({ passed: true, checks }, null, 2));
   } catch (error) {
+    console.error(JSON.stringify({ timerSnapshots }));
     if (currentPage && !currentPage.isClosed()) {
       await currentPage.screenshot({path: out + '/failure.png', fullPage: true});
       const dom = await currentPage.evaluate(() => ({

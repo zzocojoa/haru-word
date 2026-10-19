@@ -12,7 +12,7 @@ fs.mkdirSync(out, { recursive: true });
 const diagnosticDir = fs.mkdtempSync(`${out}/run-`);
 
 async function visibleShell(page) {
-  await page.getByRole('heading', { name: '오늘의 학습', exact: true }).waitFor({ timeout: 5000 });
+  await page.getByRole('heading', { name: '오늘 학습', exact: true }).waitFor({ timeout: 5000 });
   assert.ok(await page.locator('.brand').isVisible());
   assert.ok(await page.getByRole('tablist', { name: '학습 화면' }).isVisible());
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
@@ -58,7 +58,7 @@ async function fontInteraction(browser, engine, mode, width = 390, zoom = 100) {
   const page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
   try {
     await page.goto(base, { waitUntil: 'domcontentloaded' });
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     const until = Date.now() + 30000;
     while (!css && Date.now() < until) await page.waitForTimeout(20);
     assert.ok(css?.length, 'real stylesheet must have arrived in the test harness');
@@ -66,7 +66,7 @@ async function fontInteraction(browser, engine, mode, width = 390, zoom = 100) {
     if (mode === 'subsets' || mode === 'ready') {
       await page.waitForFunction(() => document.fonts.size > 0);
       if (mode === 'ready') await page.evaluate(() => document.fonts.ready);
-      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.getByRole('tab', { name: '단어장', exact: true }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill('work');
       if (zoom !== 100) await page.evaluate(value => { document.documentElement.style.fontSize = `${value}%`; }, zoom);
       button = page.getByRole('button', { name: 'work 동사', exact: true });
@@ -153,10 +153,10 @@ async function fontInteraction(browser, engine, mode, width = 390, zoom = 100) {
           }
           if (mode !== 'javascript-pending' && mode !== 'state-pending') {
             // Optional font failures/delays must not prevent loading the account or using controls.
-            await page.getByText('서버에 저장됨', { exact: true }).waitFor({ timeout: 5000 });
+            await page.getByText('저장됨', { exact: true }).waitFor({ timeout: 5000 });
             await page.getByRole('button', { name: '학습 설정', exact: true }).click();
             await page.getByRole('dialog').waitFor();
-            await page.getByRole('button', { name: 'Close', exact: true }).click();
+            await page.getByRole('button', { name: '닫기', exact: true }).click();
             await page.getByRole('dialog').waitFor({ state: 'hidden' });
           }
           diagnostic.phase('pending-screenshot');
@@ -164,7 +164,7 @@ async function fontInteraction(browser, engine, mode, width = 390, zoom = 100) {
           diagnostic.phase('release');
           release();
           diagnostic.phase('saved-status');
-          await page.getByText('서버에 저장됨', { exact: true }).waitFor({ timeout: 10000 });
+          await page.getByText('저장됨', { exact: true }).waitFor({ timeout: 10000 });
           diagnostic.phase('settled-ui');
           assert.equal(await page.locator('.app-splash').count(), 0);
           if (!['font-pending', 'font-failed'].includes(mode)) await page.waitForFunction(() =>

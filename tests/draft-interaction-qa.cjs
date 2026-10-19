@@ -7,7 +7,7 @@ const words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.par
 const selected = ['apple', 'book'].map(name => words.find(w => w.word === name && w.pos === 'n.'));
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const checks = [], errors = [], requests = []; let serial = 0, activePage;
-const saved = p => p.getByText('서버에 저장됨', { exact: true }).waitFor();
+const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
 const get = async c => (await c.request.get(base + '/api/state')).json();
 (async () => {
   const browser = await launchBrowser();
@@ -36,12 +36,12 @@ const get = async c => (await c.request.get(base + '/api/state')).json();
       await p.route('**/api/state', route => { if (route.request().method() === 'PUT') held = route; else return route.continue(); });
       await reveal.click(); await p.getByText('저장 중', { exact: true }).waitFor();
       assert.equal(await grade.isDisabled(), true); assert.equal(await field.inputValue(), answer);
-      assert.equal(await p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).isDisabled(), true);
+      assert.equal(await p.getByRole('button', { name: '저장하고 나가기', exact: true }).isDisabled(), true);
       assert.deepEqual((await get(c)).state.sessions[s.id].records, s.records);
       assert.ok(held);
       if (stage === 'en') {
-        await held.fulfill({ status: 503, json: { error: '검사 저장 실패' } });
-        await p.getByRole('alert').filter({ hasText: '검사 저장 실패' }).waitFor();
+        await held.fulfill({ status: 503, json: { error: '검사 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } });
+        await p.getByRole('alert').filter({ hasText: '검사 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' }).waitFor();
         assert.equal(await grade.isDisabled(), true); assert.equal(await field.inputValue(), answer);
         await p.unroute('**/api/state'); await p.getByRole('button', { name: '다시 시도', exact: true }).click();
       } else {
@@ -52,7 +52,7 @@ const get = async c => (await c.request.get(base + '/api/state')).json();
       const snapshot = stage === 'warmup' ? stored.warmupDraft : stored.records[first].draft;
       assert.equal(snapshot.answer, answer); assert.equal(snapshot.hinted, false); assert.equal(snapshot.revealed, true);
       assert.equal(stored.records[first].en, s.records[first].en); assert.equal(stored.records[first].ko, s.records[first].ko);
-      await p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(p);
+      await p.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved(p);
       await p.reload(); await saved(p); await p.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click(); await saved(p);
       assert.equal(await field.inputValue(), answer); await grade.click({ trial: true });
       assert.notEqual(await field.getAttribute('readonly'), null);
@@ -61,7 +61,7 @@ const get = async c => (await c.request.get(base + '/api/state')).json();
     }
     const hinted = await fresh('en'); await hinted.reveal.click(); await saved(hinted.p);
     assert.equal(await hinted.grade.isDisabled(), true);
-    await hinted.p.getByRole('button', { name: '오늘 종료 · 저장', exact: true }).click(); await saved(hinted.p);
+    await hinted.p.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved(hinted.p);
     await hinted.p.reload(); await saved(hinted.p); await hinted.p.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click(); await saved(hinted.p);
     assert.equal(await hinted.grade.isDisabled(), true);
     assert.equal((await get(hinted.c)).state.sessions[hinted.s.id].records[hinted.first].draft.hinted, true);

@@ -34,8 +34,9 @@ export function CandidatePreparation({
           : "오늘 단어 준비 완료"}
       </h2>
       <p className="muted">
-        이월 → 헷갈림 → 처음 순서 · 아는 단어는 후속 점검
+        복습할 단어와 익숙하지 않은 단어부터 준비해요.
       </p>
+      <details className="notes-details"><summary>단어 준비 순서</summary><p>이월한 단어, 뜻이 헷갈리는 단어, 처음 보는 단어 순서로 준비해요. 아는 단어도 나중에 다시 확인해요.</p></details>
       {candidate ? (
         <FamiliarityCard
           key={candidate.id}
@@ -75,7 +76,7 @@ export function CandidatePreparation({
         </>
       )}
       <button className="text-button skip" onClick={() => setPreparing(false)}>
-        여기까지 저장 · 홈으로
+        학습 홈으로
       </button>
     </section>
   );

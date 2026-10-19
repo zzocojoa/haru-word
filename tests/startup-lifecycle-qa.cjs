@@ -66,7 +66,7 @@ fs.mkdirSync(out, { recursive: true });
                 if (retryFails) {
                   await page.getByRole('alert').filter({ hasText: '재시도 연결 실패' }).waitFor();
                   assert.ok(await page.getByRole('button', { name: '다시 시도', exact: true }).isEnabled());
-                } else await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+                } else await page.getByText('저장됨', { exact: true }).waitFor();
                 assert.equal(await page.locator('.app-splash').count(), 0);
               } finally {
                 retryRelease();
@@ -75,7 +75,7 @@ fs.mkdirSync(out, { recursive: true });
             }
             assert.equal(retries, 2, 'one request per manual retry, even after repeated failures');
             const before = await (await context.request.get(base + '/api/state')).json();
-            for (const name of ['전체 단어장', '주간·월말 점검', '학습 기록', '오늘의 학습']) {
+            for (const name of ['단어장', '복습 점검', '학습 기록', '오늘 학습']) {
               await page.getByRole('tab', { name, exact: true }).click();
               assert.equal(await page.locator('.app-splash').count(), 0, 'tab changes must not replay startup');
             }

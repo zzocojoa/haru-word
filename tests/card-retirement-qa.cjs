@@ -15,11 +15,11 @@ const { launchBrowser, closeBrowser, accountHeaders, waitForWorker, base } = req
       if (/en-card|\/api\/card-|\/card-studio\//.test(request.url())) retiredRequests.push(request.url());
     });
     await page.goto(base);
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: '영어 카드', exact: true }).count(), 0);
     const before = await (await context.request.get(base + '/api/state')).json();
     await page.goto(base + '/cards');
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     assert.equal(new URL(page.url()).pathname, '/');
     const retiredEndpoints = [
       ['/api/card-studio/account', 'GET'], ['/api/card-studio/api/state', 'GET'],
@@ -44,11 +44,11 @@ const { launchBrowser, closeBrowser, accountHeaders, waitForWorker, base } = req
     assert.equal((await context.request.get(base + '/card-studio/index.html')).status(), 404);
     const after = await (await context.request.get(base + '/api/state')).json();
     assert.deepEqual(after, before, 'retired card access must not change learning state or revision');
-    await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+    await page.getByRole('tab', { name: '단어장', exact: true }).click();
     await page.getByLabel('단어 또는 한국어 뜻 검색').fill('book');
     assert.ok(await page.getByRole('button', { name: /^book/ }).count() >= 2);
     await page.reload();
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     assert.deepEqual(errors, []);
     assert.deepEqual(retiredRequests, [], 'learning pages must not request retired services');
     const report = { passed: true, engine: process.env.QA_BROWSER || 'chromium', checks: ['no card menu', 'authenticated and anonymous old bookmarks redirect home', 'seven retired API methods return 410 for authenticated and anonymous callers', 'card assets removed', 'learning state and revision preserved', 'word search and reload', 'no card requests or browser errors'] };

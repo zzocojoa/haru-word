@@ -114,10 +114,10 @@ test('grammar safety blocks an otherwise available correction action while prese
   assert.notEqual(feedback.correctedSentence,progress.sentence);
   const unsafe=render();
   assert.match(unsafe,/AI 설명 확인 필요/);assert.ok(unsafe.includes(progress.sentence));
-  assert.ok(!unsafe.includes('AI 제안을 내 문장에 적용'));
+  assert.ok(!unsafe.includes('AI 제안으로 문장 바꾸기'));
   const safe=structuredClone(feedback);safe.structure.parts.at(-1).role='V';progress.feedback=safe;
   const allowed=render();
-  assert.ok(allowed.includes('AI 제안을 내 문장에 적용'));assert.ok(!allowed.includes('AI 설명 확인 필요'));
+  assert.ok(allowed.includes('AI 제안으로 문장 바꾸기'));assert.ok(!allowed.includes('AI 설명 확인 필요'));
   assert.equal(feedbackSafetyIssue(feedback),'progressive_role');
 });
 
@@ -128,7 +128,7 @@ test('word/history and grammar views expose only neutral reference opinions whil
     const f={...feedback,meaningUsage,grammar};
     for(const grammarTarget of [false,true]){
       const html=renderToStaticMarkup(createElement(FeedbackDetail,{feedback:f,grammarTarget}));
-      assert.match(html,/AI 참고 의견 · 정답 판정이 아닙니다/);
+      assert.match(html,/AI 참고 의견 · 정답 판정은 아니에요/);
       assert.match(html,/AI에 보낸 문장/);
       assert.ok(!html.includes('sentence-structure-parts'));assert.ok(!html.includes(f.structure.translation));
       assert.ok(!html.includes('자연스러운 문장이에요'));assert.ok(!html.includes('data-tone="success"'));

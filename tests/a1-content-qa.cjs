@@ -14,17 +14,24 @@ const base=require('./qa/runtime.cjs').base,out='outputs/'+level.toLowerCase()+'
 const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 (async()=>{const browser=await launchBrowser({headless:true});try{
  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':level.toLowerCase()+require('./qa/runtime.cjs').account('content_'),'oai-authenticated-user-email':'a1@example.test'}});
- const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));const saved=()=>p.getByText('서버에 저장됨',{exact:true}).waitFor();
+ const p=await context.newPage();p.on('pageerror',e=>errors.push(e.message));const saved=()=>p.getByText('저장됨',{exact:true}).waitFor();
+ await p.addInitScript(()=>{window.contentFocus=[];document.addEventListener('focusin',e=>{window.contentFocus.push({tag:e.target.tagName,cls:e.target.className,label:e.target.getAttribute('aria-label'),text:e.target.textContent?.slice(0,50)});window.contentFocus=window.contentFocus.slice(-16);});});
  const get=async()=>{const r=await context.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json()};
  await p.goto(base);await saved();const initial=await get();
- await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();
+ await p.getByRole('tab',{name:'단어장',exact:true}).click();
  for(const [term,pos] of cases){
   const w=words.find(w=>w.level===level&&w.word===term&&w.pos===pos),c=content[w.id];
   await p.getByLabel('단어 또는 한국어 뜻 검색',{exact:true}).fill(term);
   const posName={'n.':'명사','v.':'동사','pron.':'대명사','exclam.':'감탄사','adj.':'형용사','adv.':'부사'}[pos];
   const cardName=term+' '+posName+(w.headword!==w.word?' · '+w.headword:'');
-  await p.getByRole('button',{name:cardName,exact:true}).click();const dialog=p.getByRole('dialog');
-  assert.equal(await dialog.getByLabel('오늘의 뜻',{exact:true}).inputValue(),c.meaning);
+  const card=p.getByRole('button',{name:cardName,exact:true});
+  try { await card.click(); }
+  catch(error) {
+   console.error(JSON.stringify({level,term,expected:cardName,search:await p.getByLabel('단어 또는 한국어 뜻 검색',{exact:true}).inputValue(),cards:await p.locator('.word-link').allTextContents(),accessible:await p.getByRole('table').ariaSnapshot(),errors}));
+   await p.screenshot({path:out+'/lookup-failure.png',fullPage:true}); throw error;
+  }
+  const dialog=p.getByRole('dialog');
+  assert.equal(await dialog.getByLabel('학습할 뜻',{exact:true}).inputValue(),c.meaning);
   assert.equal(await dialog.getByRole('textbox',{name:'영어 예문',exact:true}).inputValue(),c.example);
   assert.equal(await dialog.getByRole('textbox',{name:'예문의 한국어 해석',exact:true}).inputValue(),c.translation);
   assert.equal(await dialog.getByLabel('함께 익힐 표현',{exact:true}).inputValue(),c.expression);
@@ -32,7 +39,16 @@ const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   if(pos==='pron.')await p.screenshot({path:out+'/corrected-pronoun-mobile.png'});
   if(term==='sensible'||term==='dismiss')await p.screenshot({path:out+'/corrected-sense-mobile.png'});
-  await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'hidden'});
+  await dialog.getByRole('button',{name:'닫기',exact:true}).click();await dialog.waitFor({state:'hidden'});
+  // Dialog invisibility precedes Radix's close-focus restoration. Wait for the
+  // actual return target before starting the next synthetic keyboard edit.
+  try {
+   await p.waitForFunction(()=>document.activeElement?.matches('.word-link'));
+   await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+   assert.ok(await card.evaluate(el=>document.activeElement===el));
+  } catch(error) {
+   console.error(JSON.stringify({level,term,closeFocus:await p.evaluate(()=>({active:{tag:document.activeElement?.tagName,cls:document.activeElement?.className,label:document.activeElement?.getAttribute('aria-label')},events:window.contentFocus}))}));throw error;
+  }
  }
  assert.deepEqual(await get(),initial);checks.push('eight corrected sense/POS cards show the published fields without saving or changing learner data');
  const exported=await (await context.request.get(base+'/sources/learning-data.json')).json();
@@ -45,15 +61,15 @@ const checks=[],errors=[];const date=new Intl.DateTimeFormat('en-CA',{timeZone:'
  let data=await get();assert.equal((await context.request.put(base+'/api/state',{data:{revision:data.revision,settings:{...data.state.settings,dailyGoal:1,activeSessionId:sid},progress:{[w.id]:{meaning:old.meaning,lastStudied:date,studyDates:[date],en:'independent',ko:'help',sentenceStatus:'improve'}},sessions:{[sid]:s}}})).status(),200);
  await p.reload();await saved();const before=await get();await p.getByRole('button',{name:'오늘 단어 다시 보기',exact:true}).click();let dialog=p.getByRole('dialog');
  assert.equal(await dialog.locator('.review-meaning').innerText(),old.meaning);assert.ok((await dialog.innerText()).includes(old.example));assert.ok(!(await dialog.innerText()).includes(content[w.id].example));
- await p.screenshot({path:out+'/historical-material-preserved.png'});await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'hidden'});assert.deepEqual(await get(),before);
+ await p.screenshot({path:out+'/historical-material-preserved.png'});await dialog.getByRole('button',{name:'닫기',exact:true}).click();await dialog.waitFor({state:'hidden'});assert.deepEqual(await get(),before);
  checks.push('a completed pre-correction sense keeps its material, sentence, results and server revision');
- await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();await p.getByLabel('단어 또는 한국어 뜻 검색',{exact:true}).fill(legacyWord);await p.getByRole('button',{name:new RegExp('^'+legacyWord+'\\s명사$')}).click();dialog=p.getByRole('dialog');
- assert.equal(await dialog.getByLabel('오늘의 뜻',{exact:true}).inputValue(),old.meaning);
+ await p.getByRole('tab',{name:'단어장',exact:true}).click();await p.getByLabel('단어 또는 한국어 뜻 검색',{exact:true}).fill(legacyWord);await p.getByRole('button',{name:new RegExp('^'+legacyWord+'\\s명사$')}).click();dialog=p.getByRole('dialog');
+ assert.equal(await dialog.getByLabel('학습할 뜻',{exact:true}).inputValue(),old.meaning);
  for(const label of ['영어 예문','예문의 한국어 해석','함께 익힐 표현'])assert.equal(await dialog.getByRole('textbox',{name:label,exact:true}).inputValue(),'');
  assert.match(await dialog.innerText(),/이 뜻의 예문은 사전에서 확인/);checks.push('legacy progress without material never receives the new unrelated sense example');
- await dialog.getByRole('button',{name:'Close',exact:true}).click();await dialog.waitFor({state:'hidden'});
- await p.getByRole('tab',{name:'오늘의 학습',exact:true}).click();await p.getByRole('button',{name:'오늘 단어 다시 학습',exact:true}).click();await saved();
- assert.equal(await p.getByLabel('오늘 공부할 뜻',{exact:false}).inputValue(),old.meaning);assert.ok((await p.locator('.learning-panel').innerText()).includes(old.example));
+ await dialog.getByRole('button',{name:'닫기',exact:true}).click();await dialog.waitFor({state:'hidden'});
+ await p.getByRole('tab',{name:'오늘 학습',exact:true}).click();await p.getByRole('button',{name:'오늘 단어 다시 연습',exact:true}).click();await saved();
+ assert.equal(await p.getByLabel('학습할 뜻',{exact:false}).inputValue(),old.meaning);assert.ok((await p.locator('.learning-panel').innerText()).includes(old.example));
  assert.deepEqual((await get()).state.sessions[sid],s);checks.push('repeat learning starts from the old snapshot and does not overwrite the source session');
  assert.deepEqual(errors,[]);fs.writeFileSync(out+'/browser.json',JSON.stringify({passed:true,checks,browserErrors:errors},null,2));console.log(JSON.stringify({passed:true,checks,browserErrors:errors}));
 }finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

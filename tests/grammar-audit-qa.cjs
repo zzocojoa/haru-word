@@ -17,7 +17,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders } = require('./qa/runt
     const put = async (grammar, revision) => context.request.put(base + '/api/state', { headers, data: { grammar, revision, progress: {}, sessions: {} } });
     assert.equal((await put(grammar, (await get()).revision)).status(), 200);
     const page = await context.newPage(); page.setDefaultTimeout(10000);
-    const enter = async () => { await page.goto(base); await page.getByRole('tab', { name: '전체 단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사·문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); };
+    const enter = async () => { await page.goto(base); await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); };
     await enter(); return { context, page, get, put, enter };
   };
   const writing = () => {
@@ -30,7 +30,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders } = require('./qa/runt
       const { context, page, get, enter } = await open({ noun: newLessonProgress('noun') });
       try {
         const before = await get();
-        await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '테스트 저장 실패' } }) : route.continue());
+        await page.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '테스트 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } }) : route.continue());
         await page.getByRole('button', { name: '일이라는 대상', exact: true }).click();
         await page.getByRole('button', { name: '다시 저장', exact: true }).waitFor();
         assert.equal((await get()).revision, before.revision);
@@ -77,7 +77,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders } = require('./qa/runt
       const legacy = { ...p, stage: 6, sentence: 'I like books.', check: 'appropriate', completedAt: '2026-09-01T00:00:00.000Z' };
       const { context, page, get } = await open({ noun: legacy });
       try {
-        await page.getByText('살펴보기 · 미측정 · 이전 수업 기록', { exact: true }).waitFor();
+        await page.getByText('살펴보기 · 아직 확인 안 함 · 이전 수업 기록', { exact: true }).waitFor();
         await page.getByText('다른 날 다시 확인할 차례예요.', { exact: true }).waitFor();
         assert.deepEqual((await get()).state.grammar.noun, legacy);
         console.log('PASS legacy summary: unmeasured observation and read-only recommendation');

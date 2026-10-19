@@ -125,7 +125,7 @@ export function WordEditor({
         {senseKey ? "선택한 학습 뜻" : "새로 학습할 뜻"}
         <input
           readOnly={!!senseKey}
-          aria-label="오늘의 뜻"
+          aria-label="학습할 뜻"
           maxLength={2000}
           value={meaning}
           onChange={(e) => setDraftField('meaning', e.target.value)}
@@ -134,7 +134,7 @@ export function WordEditor({
       <ExpressionFields expression={expression} expressionTranslation={expressionTranslation}
         onExpressionChange={value => setDraftField('expression', value)}
         onTranslationChange={value => setDraftField('expressionTranslation', value)}
-        help="영어 표현을 바꾸면 기존 표현 해석은 지워져요. 새 표현에 맞게 입력해 주세요." />
+        help="표현을 바꾸면 해석이 지워져요. 새 해석을 입력해 주세요." />
       <label>
         영어 예문
         <textarea
@@ -186,7 +186,7 @@ export function WordEditor({
           checked={useful}
           onChange={(e) => setUseful(e.target.checked)}
         />{" "}
-        자주 쓸 단어 · 같은 순위에서 먼저
+        자주 쓰는 단어 · 같은 조건에서 먼저 학습
       </label>
       </HelpDetails>
       <HelpDetails title="내 성적·문장·보완점">
@@ -263,11 +263,10 @@ export function WordEditor({
             setEncounter("");
           }}
         >
-          이 행에 표현 덧붙이기
+          표현 기록에 추가
         </button>
         <p className="small-note">
-          아래 ‘기록 저장’을 누르면 표현도 함께 저장됩니다. 최대 200개를
-          보관해요.
+          ‘기록 저장’을 누르면 표현도 함께 저장돼요. 최대 200개까지 보관해요.
         </p>
       </section></HelpDetails>
       <DictionaryLinks word={word.word} />

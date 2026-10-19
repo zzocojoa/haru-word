@@ -14,7 +14,7 @@ export function Speak({text,dictionaryHref,showHelpInitially=false}:{text:string
   useEffect(() => () => { if(playback.current?.text===text) playback.current.stop(); }, [text]);
   const status = state.text===text ? state.status : 'idle';
   const dictionary = dictionaryHref ?? (/^[a-z]+(?:[' -][a-z]+)?$/i.test(text) ? dictionaryUrl(text) : undefined);
-  const message = status==='starting' ? '준비 중' : status==='speaking' ? '재생 중' : status==='error' ? state.message : '';
+  const message = status==='starting' ? '음성 준비 중' : status==='speaking' ? '재생 중' : status==='error' ? state.message : '';
   function speak() {
     setAttemptedText(text);
     playback.current = {text,stop:speakOnDevice(text,next => setState({...next,text}))};

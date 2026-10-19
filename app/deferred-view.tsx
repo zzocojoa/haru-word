@@ -2,9 +2,10 @@
 import { Component, createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ComponentType, type ReactNode } from 'react';
 import { staticModuleUrls } from '@/lib/deferred-assets';
 
-export const DeferredReloadBlocked = createContext(false);
+type ReloadBlock = false | 'unsaved' | 'busy';
+export const DeferredReloadBlocked = createContext<ReloadBlock>(false);
 
-function ReloadMaterial({ label, blocked }: { label: string; blocked: boolean }) {
+function ReloadMaterial({ label, blocked }: { label: string; blocked: ReloadBlock }) {
   const [pending, setPending] = useState(false);
   const button = useRef<HTMLButtonElement>(null), latestBlocked = useRef(blocked), inFlight = useRef(false);
   useLayoutEffect(() => { latestBlocked.current = blocked; }, [blocked]);
@@ -30,7 +31,9 @@ function ReloadMaterial({ label, blocked }: { label: string; blocked: boolean })
     } catch { /* Keep the original view and its drafts for an explicit retry. */ }
     finally { inFlight.current = false; setPending(false); }
   }
-  return <div role="alert"><p>{label} 자료를 불러오지 못했어요.</p><button ref={button} type="button" className="secondary-button" disabled={blocked || pending} onClick={() => { void reload(); }}>{pending ? '다시 불러오는 중' : '다시 불러오기'}</button></div>;
+  return <div role="alert"><p>{label} 자료를 불러오지 못했어요.</p>
+    {blocked && <p className="small-note">{blocked === 'busy' ? '저장·복원이 끝나면 다시 불러올 수 있어요.' : '작성 중인 내용을 먼저 저장해 주세요.'}</p>}
+    <button ref={button} type="button" className="secondary-button" disabled={!!blocked || pending} onClick={() => { void reload(); }}>{pending ? '다시 불러오는 중' : '다시 불러오기'}</button></div>;
 }
 
 class LoadBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { failed: boolean }> {

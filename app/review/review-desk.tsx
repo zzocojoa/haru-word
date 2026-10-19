@@ -180,19 +180,19 @@ export function ReviewDesk({
                 <HelpDetails title="점검 방식" className="review-checklist">
                   <p>
                     {kind === "weekly"
-                      ? "뜻 확인 → 영어 회상 → 문장"
-                      : "한국어 단서 → 영어 쓰기 → 선택 문장"}
+                      ? "뜻 확인 → 영어 단어 떠올리기 → 문장 쓰기"
+                      : "뜻 보고 영어 단어 쓰기 → 문장 쓰기(선택)"}
                   </p>
                   <p>{kind === 'monthly' ? '미점검은 이 회차에 남아요. 실제 도움·문장 보완은 일일 복습에 반영해요.' : '도움 필요·미완료 항목은 다음 학습에 먼저 배정해요.'}</p>
                   <p>
                     {kind === "weekly"
-                      ? "진행 순서를 저장하고 다음 회차에 계속"
-                      : "15개 안팎으로 나누어 모든 항목 완료"}
+                      ? "저장한 위치에서 다음에 이어 할 수 있어요."
+                      : "설정한 개수씩 나누어 점검해요."}
                   </p>
                 </HelpDetails>
                 {kind === "monthly" && !session && (
                   <label>
-                    새 점검의 묶음 크기
+                    한 번에 점검할 단어 수
                     <select
                       aria-label="월말 묶음 크기"
                       value={state.settings.monthlyBatchSize || 15}
@@ -218,7 +218,7 @@ export function ReviewDesk({
                 {!ids.length ? (
                   <div className="empty-note">
                     {kind === "weekly"
-                      ? "일일 학습 목표를 정하면 여기 모여요."
+                      ? "그 주에 배정한 단어가 여기에 모여요."
                       : "일일 학습에서 뜻을 확인한 단어가 여기 모여요."}
                   </div>
                 ) : (
@@ -247,8 +247,7 @@ export function ReviewDesk({
                           ),
                       ) && (
                         <p className="small-note">
-                          추가된 학습 항목은 이어서 누르면 기존 답과 순서를
-                          보존한 채 뒤에 연결해요.
+                          이어서 시작하면 추가 단어도 함께 확인해요. 기존 답과 순서는 유지돼요.
                         </p>
                       )}
                   </>
@@ -261,7 +260,7 @@ export function ReviewDesk({
       <section className="wide-panel practice-desk">
         <h2>보완 연습</h2>
         <p className="muted">
-          친숙도는 유지 · 한 회차 최대 20개
+          친숙도는 바뀌지 않아요. 한 번에 최대 20개를 연습해요.
         </p>
         {!practices.some(({ ids, session }) => ids.length || session) ? <p className="empty-practice" role="status">지금 보완할 항목이 없어요.</p> : <div className="practice-options">
           {practices.map(({ mode, ids, session }) => {
@@ -273,7 +272,7 @@ export function ReviewDesk({
                 onClick={() => start("practice", undefined, session, mode)}
               >
                 {mode === "known"
-                  ? "✓✓ 아는 단어 후속 점검"
+                  ? "아는 단어 다시 확인"
                   : mode === "ko"
                     ? "뜻→영어 추가 연습"
                     : "문장 보완 연습"}{" "}

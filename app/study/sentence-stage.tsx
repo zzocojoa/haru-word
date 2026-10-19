@@ -63,7 +63,7 @@ export function SentenceStage({
         value={sentence}
         maxLength={2000}
         onChange={(e) => setSentence(e.target.value)}
-        placeholder="오늘 배운 단어로 나의 이야기를 써 보세요."
+        placeholder="오늘 있었던 일이나 평소 하는 일을 써 보세요."
         rows={3}
       />
       <label className="check-label">
@@ -101,7 +101,7 @@ export function SentenceStage({
         <summary>스스로 점검하기</summary>
         <ul>
           <li>오늘의 뜻과 품사로 썼나요?</li>
-          <li>주어(S)와 동사(V), 시제, 전치사가 자연스러운가요?</li>
+          <li>누가 무엇을 하는지 분명한가요? 시제와 전치사도 확인해 보세요.</li>
           <li>예문에서 사람·시간·장소를 하나 바꿔 보세요.</li>
         </ul>
         <button
@@ -109,11 +109,10 @@ export function SentenceStage({
           disabled={busy}
           onClick={() => setSentence(content.example)}
         >
-          이 예문에서 한 부분 바꾸기
+          예문 불러와 바꿔 쓰기
         </button>
         <p className="small-note">
-          AI 의견도 직접 확인해 주세요. 문법만 헷갈리면 ‘문장 보완’으로
-          기록하며, 친숙도는 유지합니다.
+          문법이 헷갈리면 ‘문장 보완이 필요해요’를 골라 주세요. 단어 친숙도는 바뀌지 않아요.
         </p>
         <div className="example-box">
           <p className="small-note">{content.source}</p>
@@ -144,8 +143,8 @@ export function SentenceStage({
         onClick={() => sentenceDone("unmeasured")}
       >
         {s.kind === "monthly"
-          ? "문장은 선택 · 쓰기 점검만 기록"
-          : "아직 못 썼어요 · 다음에"}
+          ? "문장 쓰기 건너뛰기"
+          : "문장 쓰기는 다음에"}
       </button>
     </>
   );

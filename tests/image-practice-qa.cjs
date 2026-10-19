@@ -127,11 +127,11 @@ async function checkLayouts(page, dialog, label) {
     page = await context.newPage();
     page.on('pageerror', e => errors.push(e.message));
     await page.goto(base, { waitUntil: 'domcontentloaded' });
-    await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+    await page.getByText('저장됨', { exact: true }).waitFor();
     assert.equal(await page.getByRole('button', { name: '이미지 연습', exact: true }).count(), stage === 'production' ? 0 : 1);
     checks.push(stage === 'production' ? 'production has no practice entry' : 'today overview has one independent image-practice entry');
     if (stage === 'production') {
-      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.getByRole('tab', { name: '단어장', exact: true }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
       await page.getByRole('button', { name: 'apple 명사', exact: true }).click();
       await page.getByRole('dialog').getByLabel('함께 익힐 표현', { exact: true }).waitFor();
@@ -148,7 +148,7 @@ async function checkLayouts(page, dialog, label) {
         assert.equal(imageRequests.length, 0);
       } else {
         assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
-        assert.equal(await dialog.getByText('19개 · 성적 미기록', { exact: true }).count(), 1);
+        assert.equal(await dialog.getByText('19개 · 성적은 기록하지 않아요', { exact: true }).count(), 1);
         assert.equal(imageRequests.includes(catalog.entries[0].url), false);
       }
       checks.push('different selected meanings excluded; actual count/empty state preserved');
@@ -177,15 +177,15 @@ async function checkLayouts(page, dialog, label) {
       await page.keyboard.press('Escape'); await dialog.waitFor({ state: 'hidden' });
       await page.waitForFunction(() => document.querySelector('.image-practice-entry') === document.activeElement);
       assert.equal(await entry.evaluate(e => e === document.activeElement), true);
-      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
-      await page.getByRole('tab', { name: '오늘의 학습', exact: true }).click();
+      await page.getByRole('tab', { name: '단어장', exact: true }).click();
+      await page.getByRole('tab', { name: '오늘 학습', exact: true }).click();
       await entry.click();
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[0].url);
       assert.equal(await dialog.locator('[lang="en"]').count(), 0);
       checks.push('320/390/865/1440 at 100/200% text, keyboard Enter/Space/Escape, focus return, axe, tab reset');
     }
     if (stage === 'editor') {
-      await page.getByRole('tab', { name: '전체 단어장', exact: true }).click();
+      await page.getByRole('tab', { name: '단어장', exact: true }).click();
       await page.getByLabel('단어 또는 한국어 뜻 검색').fill('apple');
       await page.getByRole('button', { name: 'apple 명사', exact: true }).click();
       const dialog = page.getByRole('dialog');
@@ -199,15 +199,15 @@ async function checkLayouts(page, dialog, label) {
       await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption('다른 뜻');
       assert.equal(await dialog.locator('img').count(), 0, 'changed meaning hides preview immediately');
       await dialog.getByLabel('함께 익힐 표현', { exact: true }).fill('changed sample');
-      await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+      await dialog.getByRole('button', { name: '닫기', exact: true }).click();
       await page.getByRole('alertdialog').getByRole('button', { name: '계속 편집', exact: true }).click();
       assert.equal(await dialog.getByLabel('함께 익힐 표현', { exact: true }).inputValue(), 'changed sample');
       await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption('사과');
       assert.equal(await dialog.locator('img').count(), 1);
       await dialog.getByRole('button', { name: '다른 뜻 추가', exact: false }).click();
       assert.equal(await dialog.locator('img').count(), 0, 'empty new sense has no preview');
-      await dialog.getByLabel('오늘의 뜻', { exact: true }).fill('새로운 뜻');
-      await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+      await dialog.getByLabel('학습할 뜻', { exact: true }).fill('새로운 뜻');
+      await dialog.getByRole('button', { name: '닫기', exact: true }).click();
       await page.getByRole('alertdialog').getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
       await dialog.waitFor({ state: 'hidden' });
       await page.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
@@ -222,7 +222,7 @@ async function checkLayouts(page, dialog, label) {
         assert.equal(await dialog.locator('img').getAttribute('src'), image.url);
         await page.waitForFunction(() => [...document.querySelectorAll('[role="dialog"] img')].every(image => image.complete && image.naturalWidth > 0));
         await checkLayouts(page, dialog, `editor-${word}`);
-        await dialog.getByRole('button', { name: 'Close', exact: true }).click();
+        await dialog.getByRole('button', { name: '닫기', exact: true }).click();
         await dialog.waitFor({ state: 'hidden' });
         await page.locator('[data-slot=dialog-overlay]').waitFor({ state: 'detached' });
       }
@@ -329,7 +329,7 @@ async function checkLayouts(page, dialog, label) {
     if (stage === 'full') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
       const dialog = page.getByRole('dialog');
-      await dialog.getByText('3,809개 · 성적 미기록', { exact: true }).waitFor();
+      await dialog.getByText('3,809개 · 성적은 기록하지 않아요', { exact: true }).waitFor();
       await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
       assert.equal(await dialog.getByText('1 / 3809', { exact: true }).count(), 1);
       assert.deepEqual([...new Set(imageRequests)], allEntries.slice(0, 2).map(e => e.url));
@@ -388,7 +388,7 @@ async function checkLayouts(page, dialog, label) {
       await dialog.waitFor({ state: 'hidden' });
       await entry.click();
       await page.reload();
-      await page.getByText('서버에 저장됨', { exact: true }).waitFor();
+      await page.getByText('저장됨', { exact: true }).waitFor();
       assert.equal(await dialog.count(), 0, 'refresh does not restore practice');
       checks.push(`${catalog.entries.length} cards reveal correct words, visible meanings and parts of speech; restart, Escape, app Back gesture, refresh, focus return`);
     }

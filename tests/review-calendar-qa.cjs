@@ -11,14 +11,14 @@ const base=require('./qa/runtime.cjs').base,out='outputs/review-calendar';fs.mkd
   progress[w.id]={meaning,studyDates:[date],lastStudied:date,en:'independent',ko:'independent',sentenceStatus:'written'};
  }
  assert.equal((await c.request.put(base+'/api/state',{data:{revision:data.revision,progress,sessions}})).status(),200);
- const original=await get();await p.goto(base);await p.getByText('서버에 저장됨',{exact:true}).waitFor();await p.getByRole('tab',{name:'주간·월말 점검',exact:true}).click();
+ const original=await get();await p.goto(base);await p.getByText('저장됨',{exact:true}).waitFor();await p.getByRole('tab',{name:'복습 점검',exact:true}).click();
  const week=p.getByRole('combobox',{name:'주간 점검 기간',exact:true}),month=p.getByRole('combobox',{name:'월말 점검 기간',exact:true});
  await week.focus();await p.keyboard.press('End');await p.keyboard.press('Enter');
  assert.equal(await week.inputValue(),'2024-01-01');assert.equal(await p.locator('[data-review-kind=weekly] .review-count b').innerText(),'1');
  await week.click();await p.keyboard.press('Escape');assert.equal(await week.inputValue(),'2024-01-01');assert.ok(await week.evaluate(el=>el===document.activeElement));
  checks.push('native period selection supports keyboard End/Enter and Escape, keeps the selected oldest week and focus');
  await month.selectOption('2025-12');assert.equal(await month.inputValue(),'2025-12');assert.equal(await p.locator('[data-review-kind=monthly] .review-count b').innerText(),'1');
- await p.getByRole('tab',{name:'전체 단어장',exact:true}).click();await p.getByRole('tab',{name:'주간·월말 점검',exact:true}).click();assert.equal(await month.inputValue(),'2025-12');assert.equal(await week.inputValue(),'2024-01-01');
+ await p.getByRole('tab',{name:'단어장',exact:true}).click();await p.getByRole('tab',{name:'복습 점검',exact:true}).click();assert.equal(await month.inputValue(),'2025-12');assert.equal(await week.inputValue(),'2024-01-01');
  checks.push('historical monthly targets and explicit period selections survive tab changes without modifying saved history');
  await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});
  for(const control of [week,month]){
