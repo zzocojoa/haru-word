@@ -43,6 +43,17 @@ v139 게시 당시 기존 Sites는 **v139**, 소스 `effc203cb09f9a6ed47b81f9bec
 
 **startup·기존 401 응답 원인은 미확정**이다. v139 제거 빌드의 실행 순서 보완과 의도된 카드 API 410을 과거 startup/401의 원인 해결로 해석하지 않는다. EN_Card 외부 자원 삭제 완료 여부는 이 통합에서 별도로 검증하지 않았다. 아래 v138 운영 브라우저·데이터 대조 결과는 당시 검증이며 이번 결과가 아니다.
 
+### PR #47 병합·추가 배포 판단 이력
+
+<a id="pr47-post-merge-history"></a>
+**2026-10-18 당시 판단이며 최신 운영은 v140이다.** [PR #47](https://github.com/zzocojoa/haru-word/pull/47)은 23:41:39 KST `main@85d95ae51e14b2466d1acbf8a39c2416d2f2e326`로 병합됐다. 검토한 head `7d0a684`와 전체 Git tree가 같다. [당시 main CI](https://github.com/zzocojoa/haru-word/actions/runs/39137142158) attempt1에서 Node22/24 각각 단위636/636·13단계 성공, lint 오류0·기존15경고였다.
+
+23:47:26 KST에 해당 main과 v139 소스 `effc203`를 비교했을 때 실행 코드·정적 자산·빌드 입력·의존성·마이그레이션·바인딩은 동일했다. 전체 차이는 문서13개와 익명 호출 QA1개라 **그 시점에는 추가 배포가 필요 없었다.** 이후 PR #48의 v140 게시와 구분하며 최신 main 전체에 이 결론을 적용하지 않는다.
+
+당시 읽기 확인은 Site active/public4·v139 배포 succeeded·환경72/9개 일치와 익명 GET 홈200·카드 주소307·종료 API410·정적404다. 새 로그인 브라우저·운영 JS/CSS 전수 바이트 대조·운영 쓰기는 하지 않았고, 로컬 회귀6개는 PR 작성 당시 결과다. CI에는 브라우저 검사가 없으며 구조화 QA 집계의 기존 미완료도 완료로 바꾸지 않는다. **startup·기존 401 원인은 계속 미확정**이다.
+
+[원래 후속 객체](docs/releases/2026-10-18-en-card-retirement-integration.json)의 `postMergeAssessment`와 [출처·과거 출시 증거 11개](docs/HISTORICAL_RELEASE_EVIDENCE_2026-10-19.md)를 보존했다. 외부 자원 삭제 등 과거 주장을 이번 작업에서 재검증하지 않았다. 현재 복구는 위 [v140 절차](#v140-rollout)를 따르며, 이번 기록 반영에서 추가 배포·설정 변경·운영 데이터 쓰기는 없다.
+
 ## 이미지 연습 카드 뒤집기 v138 · 2026-10-18
 
 [PR #44](https://github.com/zzocojoa/haru-word/pull/44)의 병합 소스 `9ad8380c6ab05e8164505fe83a9d2e79428af201`을 [기존 Sites](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/)에 게시했다. **20:22:48 KST** native 배포 `appgdep_6ad4abf311a0819192dbefd4ede53035`가 `succeeded`를 반환했다. 카드의 이미지와 뜻을 클릭해 양방향으로 뒤집으며, 이동·재개는 앞면에서 시작한다. 아래 v135 등은 당시 이력이다. 이번 기록 정리에서는 추가 배포·설정 변경·운영 데이터 쓰기를 하지 않았다.

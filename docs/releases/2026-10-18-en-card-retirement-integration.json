@@ -141,5 +141,350 @@
     "deployed": false,
     "settingsChanged": false,
     "productionDataWritten": false
+  },
+  "postMergeAssessment": {
+    "documentedAt": "2026-10-18T14:55:44.717Z",
+    "comparedAt": "2026-10-18T14:47:26.183Z",
+    "decision": "NO_ADDITIONAL_DEPLOYMENT_NEEDED",
+    "reason": "main and v139 runtime/build inputs are identical; the exact compared commits differ only in 13 documentation files and one QA script. No publication is needed merely to align commit IDs.",
+    "github": {
+      "pullRequest": "https://github.com/zzocojoa/haru-word/pull/47",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T14:41:39Z",
+      "mainCommit": "85d95ae51e14b2466d1acbf8a39c2416d2f2e326",
+      "reviewedCommit": "7d0a6842770067c5109867ceb30eaa6975d27c7f",
+      "reviewedAndMergedTree": "3c0d495ddef406d8c821875c74c3ea06b50aef70",
+      "identicalReviewedTree": true,
+      "mainCI": {
+        "id": 39137142158,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/39137142158",
+        "head": "85d95ae51e14b2466d1acbf8a39c2416d2f2e326",
+        "jobs": [
+          {
+            "name": "Validate (Node 24)",
+            "steps": 13,
+            "conclusion": "success",
+            "tests": 636,
+            "pass": 636,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0,
+            "lintErrors": 0,
+            "lintWarnings": 15
+          },
+          {
+            "name": "Validate (Node 22)",
+            "steps": 13,
+            "conclusion": "success",
+            "tests": 636,
+            "pass": 636,
+            "fail": 0,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0,
+            "lintErrors": 0,
+            "lintWarnings": 15
+          }
+        ],
+        "logSha256": "d957d13606479607ce9755d19b3b154ba2cd0dc1812dedfb17892377ef84983e"
+      }
+    },
+    "productionSnapshot": {
+      "checkedAt": "2026-10-18T14:46:19.471Z",
+      "site": {
+        "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+        "status": "active",
+        "latestVersion": 139,
+        "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+        "access": "public",
+        "accessRevision": 4
+      },
+      "version": {
+        "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+        "number": 139,
+        "source": {
+          "commit_sha": "effc203cb09f9a6ed47b81f9bec19e00d21fba4c"
+        },
+        "archive": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_000000004184820686064e6fedf1eb85",
+          "content_hash": "sha256:5d825520934743302e1f5fe23812b9b8137971c18456c8c6e372241046d12a49",
+          "size_bytes": 13322240,
+          "file_count": 237
+        },
+        "deploymentId": "appgdep_6ad4cdd881588191805458e76828ac1a"
+      },
+      "deployment": {
+        "id": "appgdep_6ad4cdd881588191805458e76828ac1a",
+        "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+        "status": "succeeded",
+        "type": "publish",
+        "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+        "envRevision": 72,
+        "updatedAt": "2026-10-18T13:48:09.750977+00:00",
+        "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+        "failureMessage": null
+      },
+      "environment": {
+        "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+        "revision": 72,
+        "count": 9,
+        "keys": [
+          "google_ai_enabled",
+          "google_api",
+          "grammar_enabled",
+          "grammar_practice_v2_enabled",
+          "grammar_practice_v3_enabled",
+          "grammar_practice_v4_enabled",
+          "groq_api",
+          "large_backup_restore_enabled",
+          "word_image_pilot_enabled"
+        ],
+        "updatedAt": "2026-10-18T13:46:42.379185+00:00"
+      }
+    },
+    "sourceComparison": {
+      "main": "85d95ae51e14b2466d1acbf8a39c2416d2f2e326",
+      "productionSource": "effc203cb09f9a6ed47b81f9bec19e00d21fba4c",
+      "wholeGitTreesIdentical": false,
+      "runtimeAndBuildInputsIdentical": true,
+      "documentDifferences": 13,
+      "qaDifferences": 1,
+      "differences": [
+        {
+          "path": "CARD_STUDIO_INTEGRATION.md",
+          "before": "100644 blob dc496cbeaba18b051c65275768f4b32c3e7da325",
+          "after": "100644 blob e4765c536d9cd965b3525bc9ca30b75df2c9c0ff"
+        },
+        {
+          "path": "OPERATIONS.md",
+          "before": "100644 blob bbb36037c0676bc844c1a12e9e4c3b0368366825",
+          "after": "100644 blob 05f06f986366be37d9947b47fcc569f0872eb2e0"
+        },
+        {
+          "path": "PRODUCT_MANAGEMENT.md",
+          "before": "100644 blob bab9257b2916fb073100b771eaf24143915b7d14",
+          "after": "100644 blob 8266aa124d768530140c3583952ae47bd718ac73"
+        },
+        {
+          "path": "README.md",
+          "before": "100644 blob 93007c57d46f42745810683643cad232241985ef",
+          "after": "100644 blob edbe2e0a4e5b0ee71e6fa460070aea053f474a2f"
+        },
+        {
+          "path": "STARTUP_RENDERING.md",
+          "before": "100644 blob 91328c8889bd6e34acb725ba10c29398d79422ef",
+          "after": "100644 blob b44350da582fc34e42f9ca79fced69f6bbb4dd9f"
+        },
+        {
+          "path": "docs/EN_CARD_RETIREMENT.md",
+          "before": "100644 blob 1fd259a355aaf543cad54d78168abbfb6f979981",
+          "after": "100644 blob c18a5188dca8cb9f8dac2d394a665645cbb73931"
+        },
+        {
+          "path": "docs/IMAGE_PRACTICE_POSITION.md",
+          "before": "100644 blob bc312638699c8dc48e3b74fbc2b406ea05165f48",
+          "after": "100644 blob e8e76dbeb4f33d883a67c1d33d5fa608aaf03585"
+        },
+        {
+          "path": "docs/IMAGE_PRACTICE_POSITION_VERIFICATION.md",
+          "before": "100644 blob 234a2c8db50022ac91b41ee50b75b2ebbbc8c6d3",
+          "after": "100644 blob ae92a4934b927df0d65b5d66a6a96d99168c07a8"
+        },
+        {
+          "path": "docs/OXFORD_WORD_IMAGES_FULL_UI.md",
+          "before": "100644 blob 2171c4ba1e6e1d92a0b033ad673d8b32f1c69e14",
+          "after": "100644 blob a95046385a516ca72ebacbe15a603a272a19d68e"
+        },
+        {
+          "path": "docs/releases/2026-10-18-en-card-retirement-integration.json",
+          "before": null,
+          "after": "100644 blob 2ac8af3657875303b91f1c993094d261876663da"
+        },
+        {
+          "path": "docs/releases/2026-10-18-image-practice-card-flip-rollout.json",
+          "before": null,
+          "after": "100644 blob d85ee1878a7c33a5794c7ea3ff65800b7f6d25cc"
+        },
+        {
+          "path": "docs/releases/2026-10-18-image-practice-spacing-rollout.json",
+          "before": null,
+          "after": "100644 blob bff52d471ca9b7edaf115b5d7853225f53b71363"
+        },
+        {
+          "path": "docs/releases/product-status.json",
+          "before": "100644 blob 34b09297f1131a780a6bef36d7047313afc79f0e",
+          "after": "100644 blob 1504ecc3cbfbc3da8c5262dc7e6068949697d5ac"
+        },
+        {
+          "path": "tests/card-retirement-qa.cjs",
+          "before": "100644 blob f068f021d58db767833d4efc52b7cbea9dbb9a12",
+          "after": "100644 blob 9e66dd3b19bfa80faf906816809cf15789d373ff"
+        }
+      ],
+      "unchangedGroups": [
+        {
+          "prefix": "app/",
+          "files": 120,
+          "identical": true,
+          "digest": "20543886d7a8e753df591f96870a13d756c3cdf8a73ff973a97eb49ca5c018fe"
+        },
+        {
+          "prefix": "lib/",
+          "files": 99,
+          "identical": true,
+          "digest": "fc855c4865fb9851e45379207b3e94222cc0585b648c477ed1e05978b015ace2"
+        },
+        {
+          "prefix": "components/",
+          "files": 61,
+          "identical": true,
+          "digest": "8badcf5dfe570d24bd33dc51610ed1df56e6495703b86ed17f5313c6f62d8cc5"
+        },
+        {
+          "prefix": "hooks/",
+          "files": 1,
+          "identical": true,
+          "digest": "9617849d15974f7cd8a3741028790e308c68a14cd70c8225b5db4e7bfc39cf7e"
+        },
+        {
+          "prefix": "build/",
+          "files": 3,
+          "identical": true,
+          "digest": "1e100f4838a3823dcb7064ff719c0aadb8a2c0554d928cbfca10fde7afee8ff6"
+        },
+        {
+          "prefix": "data/",
+          "files": 40,
+          "identical": true,
+          "digest": "8c1a13197def4e955902ce7209283f00b1ddfcf841143eb7d365dcd0455c9f2c"
+        },
+        {
+          "prefix": "public/",
+          "files": 63,
+          "identical": true,
+          "digest": "d4a74405429e575c1ceb89964324bc1ebba6a7b1054c16d6a6aada27a98a0a6a"
+        },
+        {
+          "prefix": "scripts/",
+          "files": 30,
+          "identical": true,
+          "digest": "6357a990193ec3ca8a9ee2e65ee8cb6b72851c89d8481a4481eee50cc7d82af9"
+        },
+        {
+          "prefix": "drizzle/",
+          "files": 13,
+          "identical": true,
+          "digest": "b9d2825d34874abfe33c179b843986378f2a9ee7cf5cd88180cbea7ce4140d6a"
+        },
+        {
+          "prefix": ".openai/",
+          "files": 1,
+          "identical": true,
+          "digest": "d1cd5627da43b212b03807f138ce8919e96c5e284c5ce29dc25ae98d876a6a17"
+        },
+        {
+          "prefix": ".github/",
+          "files": 2,
+          "identical": true,
+          "digest": "e71f9a4afe5123af23a538a89936050046e94ce80fe3d8e48d50bb61f492019e"
+        }
+      ],
+      "dependencyInputsIdentical": true,
+      "hostingBindingsIdentical": true,
+      "newMigrations": 0,
+      "environmentRevisionMatchesDeployment": true
+    },
+    "readonlyHttp": {
+      "checkedAt": "2026-10-18T14:47:24.878Z",
+      "requests": [
+        {
+          "route": "/",
+          "method": "GET",
+          "status": 200,
+          "location": null,
+          "cacheControl": "no-store, must-revalidate"
+        },
+        {
+          "route": "/cards",
+          "method": "GET",
+          "status": 307,
+          "location": "/",
+          "cacheControl": null
+        },
+        {
+          "route": "/api/card-studio/account",
+          "method": "GET",
+          "status": 410,
+          "location": null,
+          "cacheControl": "no-store",
+          "error": "CARD_FEATURE_RETIRED"
+        },
+        {
+          "route": "/api/card-studio/api/state",
+          "method": "GET",
+          "status": 410,
+          "location": null,
+          "cacheControl": "no-store",
+          "error": "CARD_FEATURE_RETIRED"
+        },
+        {
+          "route": "/card-studio/index.html",
+          "method": "GET",
+          "status": 404,
+          "location": null,
+          "cacheControl": null
+        }
+      ]
+    },
+    "verificationLimits": [
+      "Read-only metadata, Git blob/mode comparison and anonymous GETs; no fresh authenticated production browser or user-data writes.",
+      "Production JS/CSS bytes were not downloaded and compared in this task; saved-version provenance identifies the deployed source.",
+      "Existing same-source browser regressions were not repeated; CI does not include browser tests.",
+      "Prior review tool aggregation remains inconclusive (no evidence rows); successful CI does not complete that formal review record.",
+      "This documentation update reuses the timestamped merge/comparison evidence; it does not perform a new production inspection, build, browser test or CI run."
+    ],
+    "startupRootCause": "UNKNOWN",
+    "response401Cause": "not established",
+    "reassessWhen": "Runtime code, dependencies, build inputs or intended production configuration changes; compare the new exact commits and verify affected behavior before deciding to publish.",
+    "actionsInThisDocumentation": {
+      "newMerge": false,
+      "deployed": false,
+      "settingsChanged": false,
+      "productionDataWritten": false
+    },
+    "localEvidence": [
+      {
+        "path": "work/pr47-merge-20261018/final-state.json",
+        "sha256": "45f56689907f451a083dbc262f99283d027bc5ced04b235422abd010ed3d3147"
+      },
+      {
+        "path": "work/pr47-v139-compare-20261018/comparison.json",
+        "sha256": "cdd1ff1f4945e9bec7e5fefa48491a0f8bf5a4e830c821dfd732cb6d4b343f5b"
+      },
+      {
+        "path": "work/pr47-v139-compare-20261018/native-state.json",
+        "sha256": "00eb9a28c29eb88457f3f573dab715ce9d1d24c97b5c3f0d1793f5aee9e24a4a"
+      },
+      {
+        "path": "work/pr47-v139-compare-20261018/http-readonly.json",
+        "sha256": "7484de8c2621ded3533b6dbba8fcd3e05f93dd620dd20c84c4b1507d84a36c84"
+      }
+    ]
+  },
+  "archiveContext": {
+    "archivedOn": "2026-10-19",
+    "scope": "Historical PR #47 follow-up; not a current production assessment.",
+    "source": "preserved uncommitted PR #47 documentation worktree",
+    "postMergeAssessmentSha256": "25ab06743a3b7ab59fb3e99ebc1a0e8338f9fcf6348ace6320808550c669212c",
+    "currentProductionVersion": 140,
+    "startupRootCause": "UNKNOWN",
+    "response401Cause": "not established",
+    "additionalDeployment": false,
+    "settingsChanged": false
   }
 }

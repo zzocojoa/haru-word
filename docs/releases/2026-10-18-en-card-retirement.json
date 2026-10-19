@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "product": "하루단어",
+  "recordedAt": "2026-10-18T14:11:54.074Z",
+  "status": "data_deleted_empty_directory_waiting_for_process_release",
+  "authorization": "사용자가 하루단어 카드 연결 분리·검증 후 EN_Card 삭제 대상 전체를 백업 없이 영구 삭제하도록 승인했다.",
+  "site": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version": 139,
+    "source": "effc203cb09f9a6ed47b81f9bec19e00d21fba4c",
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+    "deployment": "appgdep_6ad4cdd881588191805458e76828ac1a",
+    "deploymentStatus": "succeeded",
+    "deployedAt": "2026-10-18T13:47:24.642724Z",
+    "envRevision": 72,
+    "publicAccessRevision": 4,
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/"
+  },
+  "detached": {
+    "menuRemoved": true,
+    "cardsRedirect": "/",
+    "cardApiStatus": 410,
+    "cardApiCode": "CARD_FEATURE_RETIRED",
+    "staticCardFilesRemoved": true,
+    "removedEnvironmentVariables": [
+      "card_studio_bridge_secret",
+      "card_studio_enabled",
+      "card_studio_origin",
+      "card_studio_owner_id"
+    ],
+    "remainingEnvironmentEntries": 9,
+    "remainingEntriesUnchanged": true
+  },
+  "removed": {
+    "github": {
+      "repository": "zzocojoa/EN_Card",
+      "deleted": true,
+      "evidence": "GitHub signed-in deletion success banner and authenticated REST 404"
+    },
+    "cloudflare": {
+      "verified": true,
+      "verifiedAt": "2026-10-18T13:51:04.663Z",
+      "workers": [
+        "en-card",
+        "en-card-delivery",
+        "en-card-automation"
+      ],
+      "d1": "b66aaf55-f0fd-48cb-98f4-1ff86b361c9b",
+      "kv": "0d291d97991941988d3da9f4f4cab053",
+      "durableObjects": "db7aca8ba4c344fb8e8ea75382735cdd",
+      "cronDeleted": true,
+      "unrelatedWorkerPreserved": true
+    },
+    "automations": [
+      "en-card-5",
+      "en-card-09-00"
+    ],
+    "obsoleteChatPrAttachments": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "local": {
+      "path": "C:/Users/user/Documents/GitHub/EN_Card",
+      "contentsDeleted": true,
+      "directoryRemoved": false,
+      "backupCreated": false,
+      "junctionsUnlinked": 884,
+      "externalTargetsPreserved": 442,
+      "haruSentinelsPreserved": true
+    }
+  },
+  "preserved": {
+    "haruRepository": "zzocojoa/haru-word",
+    "siteId": true,
+    "d1Binding": true,
+    "imageBucketBinding": true,
+    "learningDataMigrationOrDeletionPerformed": false,
+    "sharedGoogleGroqKeys": true,
+    "nonCardWorkingChanges": true,
+    "haruHistoricalDocumentation": true
+  },
+  "verification": {
+    "publishedSource": {
+      "unitTests": 636,
+      "failures": 0,
+      "skips": 0,
+      "typecheckExit": 0,
+      "changedSourceLintExit": 0,
+      "buildExit": 0,
+      "cardRetirementBrowsers": [
+        "chromium",
+        "webkit"
+      ],
+      "stateRoundtripBrowser": "chromium",
+      "virtualAccountsOnly": true
+    },
+    "olderPrimaryCheckout": {
+      "unitTests": 546,
+      "failures": 0,
+      "skips": 0,
+      "typecheckExit": 0,
+      "changedSourceLintExit": 0,
+      "buildExit": 0,
+      "cardRuntimeReferences": 0,
+      "notRepublished": true
+    },
+    "productionReadOnly": [
+      {
+        "path": "/",
+        "status": 200
+      },
+      {
+        "path": "/cards",
+        "status": 307,
+        "location": "/"
+      },
+      {
+        "path": "/api/card-studio/account",
+        "status": 410
+      },
+      {
+        "path": "/api/card-studio/api/state",
+        "status": 410
+      },
+      {
+        "path": "/api/card-automation",
+        "method": "POST",
+        "status": 410
+      },
+      {
+        "path": "/api/card-automation-validation",
+        "method": "POST",
+        "status": 410
+      },
+      {
+        "path": "/card-studio/index.html",
+        "status": 404
+      },
+      {
+        "path": "/api/state",
+        "status": 401
+      }
+    ],
+    "actualAiCalls": 0,
+    "kakaoSends": 0,
+    "phoneChecks": 0,
+    "cpuChecks": 0
+  },
+  "localSource": {
+    "publishedCheckout": "work/en-card-removal-20261018",
+    "primaryBranch": "codex/card-automation-topic-alignment",
+    "primaryNote": "기존 로컬 학습 코드·작업 중 문서를 보존하며 카드 연결 제거만 반영했다. v139와 같은 전체 소스가 아니므로 이 구버전 체크아웃을 그대로 재게시하지 않는다.",
+    "haruGithubCommitPushMergePerformed": false
+  },
+  "remaining": [
+    "EN_Card에는 파일이 없는 빈 폴더만 남았다. 승인한 브라우저 보조 프로세스 2개는 종료했으나 Codex가 도구를 다시 실행하고 다른 보조 도구도 작업 디렉터리를 사용 중이다. 앱 종료로 잠금이 해제되면 동일한 빈 폴더만 삭제하는 1시간 한정 정리 작업을 준비했다."
+  ],
+  "limitations": [
+    "기존 카카오 메시지의 이미지·원본 링크는 EN_Card 삭제로 사용할 수 없다.",
+    "새 유료 자원·요금제 전환은 없으며, 계정 요금제를 이번에 재검증하지 않았다.",
+    "하루단어 Git 이력·기존 출시 기록은 보존했다. 제공사 내부 보관본의 물리적 완전 소거까지 검증한 것은 아니다."
+  ],
+  "evidenceDirectory": "outputs/en-card-removal-20261018"
+}

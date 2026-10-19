@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T12:42:27.211Z",
+  "status": "local_candidate_verified_not_deployed",
+  "problem": "Groq HTTP400을 모두 설정 오류로 분류하던 처리",
+  "note": "이전 운영 릴레이의 로컬 재현에서 명시적 생성 JSON 검증 실패도 config가 되는 것을 확인. 실제trial45의400 상세 원인은 본문 미보존으로 미확정.",
+  "changes": {
+    "files": [
+      "src/automation/providers.ts",
+      "src/automation/relay-server.ts",
+      "src/automation/relay-client.ts"
+    ],
+    "positiveOutputError": "invalid -> existing bounded retry and fresh independent review",
+    "requestOrUnknownError": "config -> existing global pause",
+    "diagnosticReadMaxBytes": 8192,
+    "diagnosticReadTimeoutMs": 1000,
+    "providerErrorRawTextRetained": false,
+    "failedGenerationRetained": false,
+    "diagnosticValues": [
+      "output_schema_mismatch",
+      "request_rejected",
+      "unclassified"
+    ],
+    "providerAdapterRetries": 0,
+    "newD1Migration": false
+  },
+  "baseline": {
+    "at": "2026-10-08T12:32:28.104Z",
+    "localOnly": true,
+    "baselineRelaySha256": "4c085ab0f02217e88b4a92fda8334f92f390764fa42c22c73d9c41c98eeb3646",
+    "sourceSha256": "b5e15b50e96ecea913974fe642e04636061e075991386764ce673c3323eefa76",
+    "actual": {
+      "error": "config",
+      "http_status": 400
+    },
+    "expectedAfterFix": {
+      "error": "invalid",
+      "http_status": 400,
+      "diagnostic": "output_schema_mismatch"
+    },
+    "reproducedUnconditionalConfigClassification": true,
+    "actualAiCalls": 0,
+    "actualDeliveryCalls": 0,
+    "trial45DetailedErrorStillUnknown": true
+  },
+  "generated": {
+    "at": "2026-10-08T12:36:54.907Z",
+    "sourceSha256": "b018594352b60ee71c64c75adbbd70c8aabf01d19fe8ef9c8db8be8376f83b69",
+    "generatedHashesMatch": true,
+    "proof": [
+      {
+        "outputError": true,
+        "actual": {
+          "error": "invalid",
+          "http_status": 400,
+          "diagnostic": "output_schema_mismatch"
+        },
+        "providerCalls": 1
+      },
+      {
+        "outputError": false,
+        "actual": {
+          "error": "config",
+          "http_status": 400,
+          "diagnostic": "request_rejected"
+        },
+        "providerCalls": 1
+      }
+    ],
+    "actualAiCalls": 0,
+    "actualDeliveryCalls": 0
+  },
+  "checks": {
+    "baselineReproducerExit": 0,
+    "providerRelay": {
+      "passed": 61,
+      "files": 4,
+      "exit": 0
+    },
+    "topicAndProvider": {
+      "passed": 44,
+      "files": 2,
+      "exit": 0,
+      "durationSeconds": 342.09
+    },
+    "uniqueEnTests": 89,
+    "haruTests": {
+      "passed": 21,
+      "exit": 0
+    },
+    "enTypecheckExit": 0,
+    "enFullBuildExit": 0,
+    "haruTypecheckExit": 0,
+    "haruBuildExit": 0,
+    "exportExit": 0,
+    "generatedProofExit": 0,
+    "checkFreeExit": 0,
+    "initialGeneratedImportExit": 1
+  },
+  "sourceAndTestHashes": {
+    "src/automation/providers.ts": "09fc7f2caafb5dff40586ce97799228d23979965c538f97b276723ce1b21833a",
+    "src/automation/relay-server.ts": "7cd5411c6dd4b668b649b134c159e134a1e3c889536f1059e54c1bc0493b40f7",
+    "src/automation/relay-client.ts": "707391d1e1e55633f4ec178447b63bd35afbebc73cd49c88c72fded507fca03b",
+    "tests/automation-provider-errors.test.ts": "751504f8194af56c075455c6cb207248388ba7b0733ec18a72c357b578c7654e",
+    "tests/automation-relay.test.ts": "e3db17b4881c5e80fabc9657915d9f21ed1d3930833eaf3d480bdc292a3953c7",
+    "tests/automation-topic-alignment.test.ts": "a136c00701dcbce25062e28be2215bec583825ca01b3c181ed24abdb85f4ff68"
+  },
+  "requestContractAudit": [
+    {
+      "stage": "interpret",
+      "strict": true,
+      "requiredClosedObjects": 1,
+      "modelPinned": true,
+      "toolsAndStreamingAbsent": true
+    },
+    {
+      "stage": "select",
+      "strict": true,
+      "requiredClosedObjects": 3,
+      "modelPinned": true,
+      "toolsAndStreamingAbsent": true
+    },
+    {
+      "stage": "draft",
+      "strict": true,
+      "requiredClosedObjects": 1,
+      "modelPinned": true,
+      "toolsAndStreamingAbsent": true
+    },
+    {
+      "stage": "review",
+      "strict": true,
+      "requiredClosedObjects": 1,
+      "modelPinned": true,
+      "toolsAndStreamingAbsent": true
+    },
+    {
+      "stage": "revise",
+      "strict": true,
+      "requiredClosedObjects": 1,
+      "modelPinned": true,
+      "toolsAndStreamingAbsent": true
+    }
+  ],
+  "operatingStateObserved": {
+    "at": "2026-10-08T12:38:06.801Z",
+    "readOnly": true,
+    "settings": {
+      "version": 46,
+      "enabled": 0,
+      "reason": "config",
+      "next_due_at": 1791498600000,
+      "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+      "cards": 5,
+      "time": "07:30",
+      "end": "2027-10-31"
+    },
+    "originalSavedSettingsPreserved": true,
+    "expectedVersionMatch": false,
+    "activeRuns": 0,
+    "unresolved": 0,
+    "credentials": [
+      {
+        "status": "connected"
+      }
+    ],
+    "workers": {
+      "en-card": {
+        "versions": [
+          {
+            "version_id": "ba989811-d725-46e5-bf86-b391b7e011dd",
+            "percentage": 100
+          }
+        ],
+        "crons": [
+          "* * * * *"
+        ],
+        "versionsMatch": true,
+        "bindingsMatch": true,
+        "cronsMatch": true
+      },
+      "en-card-delivery": {
+        "versions": [
+          {
+            "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "versionsMatch": true,
+        "bindingsMatch": true,
+        "cronsMatch": true
+      },
+      "en-card-automation": {
+        "versions": [
+          {
+            "version_id": "f410846c-3439-45d2-8968-f96668a39b16",
+            "percentage": 100
+          }
+        ],
+        "crons": [],
+        "versionsMatch": true,
+        "bindingsMatch": true,
+        "cronsMatch": true
+      }
+    }
+  },
+  "regularResumed": false,
+  "deployed": false,
+  "actualAiCalls": 0,
+  "actualCardOrImageCreation": 0,
+  "actualKakaoCalls": 0,
+  "cpuVerified": false,
+  "phoneReceiptVerified": false,
+  "newAccountPlanVerificationPerformed": false,
+  "freeConfigurationVerified": true,
+  "billingOrPaidResourcesChanged": false,
+  "additionalAccountCpuPhoneValidationUserChoicePreserved": true,
+  "previousTrial": {
+    "day": "2026-10-08",
+    "kind": "trial",
+    "configVersion": 45,
+    "textAndPngVerified": 4,
+    "accepted": 0,
+    "exactHttp400ReasonKnown": false,
+    "evidenceFile": "2026-10-08-topic-card-trial.json"
+  },
+  "nextStep": "승인 범위 내 하루단어 서버 릴레이 운영 반영과 안전 조건 정규 재개. 기존trial45 재개 도구/카드/취소예약을 강제로 재실행하지 않음.",
+  "officialSources": [
+    "https://console.groq.com/docs/structured-outputs",
+    "https://console.groq.com/docs/errors"
+  ],
+  "githubPushPrMerge": false
+}

@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T23:26:04.119Z",
+  "status": "daily47_failed_zero_sends_paused48",
+  "day": "2026-10-09",
+  "kind": "daily",
+  "configVersion": 47,
+  "itemCount": 5,
+  "scheduledKst": "2026-10-09 07:30",
+  "preparationKst": "2026-10-09 06:30",
+  "deadlineKst": "2026-10-09 07:25",
+  "userReportedReceivedCards": 0,
+  "siteVersion": 127,
+  "failure": {
+    "atKst": "2026-10-09 07:01:36",
+    "itemIndex": 4,
+    "stage": "select",
+    "provider": "groq",
+    "httpStatus": 400,
+    "diagnostic": "request_rejected",
+    "upstreamParameterCause": "unknown",
+    "explanation": "The v127 classifier did not match the two explicit output-error signatures; invalid_request_error was classified request_rejected. The response message/parameter was not retained, so the exact rejection reason and broader output failure cannot be established.",
+    "effect": "Existing config pause disabled and version-bumped global automation and cancelled the two prepared schedules before Kakao invocation."
+  },
+  "slots": [
+    {
+      "itemIndex": 1,
+      "status": "skipped",
+      "revision": 4,
+      "error": "review_failed",
+      "hasContent": true,
+      "assetReady": false,
+      "scheduleEnabled": null,
+      "independentReview": {
+        "item_index": 1,
+        "revision": 4,
+        "flags": {
+          "natural": true,
+          "meaning": false,
+          "grammar": true,
+          "translation": false,
+          "level": true,
+          "comparison": true,
+          "topic": true,
+          "source": true,
+          "example_distinct": true,
+          "variety": true
+        },
+        "issueCount": 2
+      },
+      "aiAttempts": 4
+    },
+    {
+      "itemIndex": 2,
+      "status": "scheduled",
+      "revision": 1,
+      "error": null,
+      "hasContent": true,
+      "assetReady": true,
+      "scheduleEnabled": 0,
+      "independentReview": {
+        "item_index": 2,
+        "revision": 1,
+        "flags": {
+          "natural": true,
+          "meaning": true,
+          "grammar": true,
+          "translation": true,
+          "level": true,
+          "comparison": true,
+          "topic": true,
+          "source": true,
+          "example_distinct": true,
+          "variety": true
+        },
+        "issueCount": 0
+      },
+      "aiAttempts": 4
+    },
+    {
+      "itemIndex": 3,
+      "status": "scheduled",
+      "revision": 4,
+      "error": null,
+      "hasContent": true,
+      "assetReady": true,
+      "scheduleEnabled": 0,
+      "independentReview": {
+        "item_index": 3,
+        "revision": 4,
+        "flags": {
+          "natural": true,
+          "meaning": true,
+          "grammar": true,
+          "translation": true,
+          "level": true,
+          "comparison": true,
+          "topic": true,
+          "source": true,
+          "example_distinct": true,
+          "variety": true
+        },
+        "issueCount": 0
+      },
+      "aiAttempts": 5
+    },
+    {
+      "itemIndex": 4,
+      "status": "cancelled",
+      "revision": 1,
+      "error": "config",
+      "hasContent": false,
+      "assetReady": false,
+      "scheduleEnabled": null,
+      "independentReview": null,
+      "aiAttempts": 4
+    },
+    {
+      "itemIndex": 5,
+      "status": "cancelled",
+      "revision": 1,
+      "error": "config",
+      "hasContent": false,
+      "assetReady": false,
+      "scheduleEnabled": null,
+      "independentReview": null,
+      "aiAttempts": 0
+    }
+  ],
+  "totals": {
+    "aiAttempts": 17,
+    "aiOkResponses": 14,
+    "preparedImages": 2,
+    "schedulesCancelled": 2,
+    "deliveries": 0,
+    "kakaoAttempts": 0,
+    "liveAccepted": 0,
+    "sends": 0,
+    "uploads": 2
+  },
+  "currentSettings": {
+    "version": 48,
+    "enabled": false,
+    "reason": "config",
+    "sha256": "f4ac1d27a26448fbfc313857dd829d663d6aacafa366905c8a84934712cb05a8",
+    "topic": "영화 대사",
+    "time": "07:30",
+    "cards": 5,
+    "storedNextDueKst": "2026-10-10 07:30:00",
+    "scheduledExecutionEnabled": false,
+    "activeRuns": 0,
+    "activeSchedules": 0,
+    "currentDailyPending": 0,
+    "unresolvedSending": 0,
+    "unrelatedOlderBlockedDelivery": {
+      "count": 1,
+      "automationDay": null,
+      "scheduleEnabled": false,
+      "reason": "needs_reconnect",
+      "changed": false
+    },
+    "credentials": "connected"
+  },
+  "workers": {
+    "en-card": {
+      "versions": [
+        {
+          "version_id": "ba989811-d725-46e5-bf86-b391b7e011dd",
+          "percentage": 100
+        }
+      ],
+      "crons": [
+        "* * * * *"
+      ]
+    },
+    "en-card-delivery": {
+      "versions": [
+        {
+          "version_id": "ea59a0a0-fa1c-4e9d-9501-a1c66a261fa1",
+          "percentage": 100
+        }
+      ],
+      "crons": []
+    },
+    "en-card-automation": {
+      "versions": [
+        {
+          "version_id": "f410846c-3439-45d2-8968-f96668a39b16",
+          "percentage": 100
+        }
+      ],
+      "crons": []
+    }
+  },
+  "logs": {
+    "errorEvents": 3,
+    "allEvents": 18,
+    "truncated": false,
+    "diagnosticEvent": {
+      "at": "2026-10-08T22:01:36.123Z",
+      "requestId": "2f58e61c6f9752e196178c027f4b070c",
+      "level": "warn",
+      "workerVersion": "403b9c52-486f-410d-8a51-0523d59374c0",
+      "truncated": false,
+      "event": "automation_provider_rejected",
+      "provider": "groq",
+      "stage": "select",
+      "providerHttpStatus": 400,
+      "diagnostic": "request_rejected"
+    },
+    "scope": "Latest 180 minutes, limit100; bounded observations, not an exhaustive guarantee"
+  },
+  "checks": {
+    "remoteDatabaseReads": "passed",
+    "siteLogReads": "passed",
+    "providerErrorTests": 16,
+    "providerErrorTestExit": 0,
+    "actualAiCallsByInvestigation": 0,
+    "actualKakaoCallsByInvestigation": 0,
+    "cpu": "not performed",
+    "accountPlan": "not rechecked",
+    "fullSuite": "not rerun; no product code changes"
+  },
+  "actions": {
+    "investigation": "read_only",
+    "localDocumentsUpdated": true,
+    "productCodeChanged": false,
+    "deployed": false,
+    "regularResumed": false,
+    "replayed": false,
+    "newTrial": false,
+    "databaseHistoryChanged": false,
+    "merged": false
+  },
+  "remaining": [
+    "Identify the exact rejected Groq select parameter using safe fixed diagnostics and a local contract check before another publication/restart.",
+    "Prepared cards were not sent. The daily goal failed and the regular automation is paused.",
+    "User choice not to perform additional account/CPU/phone validation remains in force."
+  ],
+  "references": [
+    "https://console.groq.com/docs/structured-outputs",
+    "https://console.groq.com/docs/errors"
+  ],
+  "evidence": [
+    "daily-no-receipt-initial.json",
+    "daily-no-receipt-detail.json",
+    "daily-no-receipt-logs.json"
+  ],
+  "earlierResumePreservedAsHistorical": true
+}

@@ -3810,5 +3810,15 @@
     "startupRootCause": "UNKNOWN",
     "response401Cause": "not established",
     "documentationOnlyFollowUp": true
+  },
+  "historicalEvidenceArchive": {
+    "evidence": "docs/releases/2026-10-19-historical-evidence-index.json",
+    "guide": "docs/HISTORICAL_RELEASE_EVIDENCE_2026-10-19.md",
+    "archivedOn": "2026-10-19",
+    "recordCount": 11,
+    "pr47PostMergeEvidence": "docs/releases/2026-10-18-en-card-retirement-integration.json",
+    "pr47PostMergeSection": "postMergeAssessment",
+    "changesCurrentProduction": false,
+    "externalClaimsReverified": false
   }
 }

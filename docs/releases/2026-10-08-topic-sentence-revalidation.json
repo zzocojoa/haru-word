@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-08T06:42:23.552Z",
+  "status": "live_sentence_revalidation_partial_cleanup_complete",
+  "scope": "개선한 서버 릴레이만 게시하고 등록 키로 네 주제 문장을 재검증. 카드·이미지·예약·카카오 없음.",
+  "historicalEvidenceFiles": [
+    "2026-10-08-topic-sentence-validation.json",
+    "2026-10-08-topic-sentence-improvement.json"
+  ],
+  "deployment": {
+    "version": 125,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_c3ec77cc228c8191a05419b78017f52a",
+    "sourceCommit": "1981cf3b5bb61d4ff1d040149949fd5cd86296a2",
+    "relaySourceSha256": "b106c0ef7c5819dc7e244ea4ceee541d52bb15701e2460e49c1595cd9736355a",
+    "relayBundleSha256": "bd21ad36b78d021e280cd5840f61235ccd3cdecf1e1784d4356a9ea886d519eb",
+    "modifiedFilesFrom124": [
+      "lib/server/card-automation.generated.json",
+      "lib/server/card-automation.generated.mjs"
+    ],
+    "allOtherTrackedSourceUnchanged": true,
+    "testDeployment": "appgdep_6ac7388944248191829f75168bf86fcd",
+    "testEnvRevision": 63,
+    "finalDeployment": "appgdep_6ac73a741a488191856e600d182f0b2c",
+    "finalEnvRevision": 64,
+    "confirmedAt": "2026-10-08T06:39:00.261588+00:00",
+    "publicAccessRevision": 4,
+    "audience": "public",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "fullTopicAutomationDeployed": false,
+    "remote0024Applied": false,
+    "localGzipSha256": "e0f095ddedd9d5af42e19bd92958577c2acec3cca06201023622e1f34daf78b2",
+    "nativeStoredArchiveSha256": "sha256:af4083022b5ae257da0d469ed89f86e99f9959a7c9f7778a4801d51dabca5411",
+    "archiveHashNote": "Local gzip and native stored tar are separately identified; no byte identity between representations is claimed."
+  },
+  "live": {
+    "resultFile": "live-result-1791441468658.json",
+    "resultSha256": "21efc3c8dbf9cba44b37ac0d6e7f632bc1df6281c028eb3f22eb70f6ddce56ff",
+    "startedAt": "2026-10-08T06:31:33.151Z",
+    "endedAt": "2026-10-08T06:37:48.658Z",
+    "models": {
+      "google": "gemini-3.1-flash-lite",
+      "groq": "openai/gpt-oss-120b"
+    },
+    "actualAiCalls": 42,
+    "requestsAttempted": 42,
+    "maxAiCalls": 48,
+    "validResponses": 41,
+    "providerRequestUnknown": 0,
+    "wanted": 20,
+    "generated": 17,
+    "finalAutomaticPassed": 12,
+    "stages": {
+      "interpret": 4,
+      "select": 4,
+      "draft": 17,
+      "review": 17
+    },
+    "sourceReads": 3,
+    "sourceReadAttemptsIncludeFailures": true,
+    "topics": [
+      {
+        "topic": "영화 대사",
+        "sourceKind": "quotation",
+        "tested": 2,
+        "generated": 2,
+        "topicPassed": 2,
+        "sourcePassed": 2,
+        "finalPassed": 0,
+        "candidateRejections": [
+          {
+            "expression": "To infinity and beyond!",
+            "source": {
+              "url": "https://news.disney.com/toy-story-quotes",
+              "attribution": "Toy Story",
+              "excerpt": "To infinity and beyond!"
+            },
+            "reason": "source_unavailable",
+            "errorType": "Error"
+          },
+          {
+            "expression": "Life is like a box of chocolates.",
+            "source": {
+              "url": "https://prdaficalmjediwestussa.blob.core.windows.net/images/2019/08/quotes100.pdf",
+              "attribution": "Forrest Gump",
+              "excerpt": "Life was like a box of chocolates. You never know what you're gonna get."
+            },
+            "reason": "source_invalid",
+            "errorType": "Error"
+          },
+          {
+            "expression": "Stay hungry, stay foolish.",
+            "source": {
+              "url": "https://news.disney.com/disney-quotes-about-life",
+              "attribution": "Steve Jobs",
+              "excerpt": "Stay hungry, stay foolish."
+            },
+            "reason": "source_unavailable",
+            "errorType": "Error"
+          }
+        ],
+        "error": null,
+        "failures": [
+          {
+            "expression": "There's no place like home.",
+            "error": "independent_review_failed",
+            "flags": [
+              "meaning",
+              "translation",
+              "example_distinct"
+            ],
+            "issues": [
+              "meaning_ko가 원문 의미를 정확히 전달하지 않음",
+              "example_ko 번역이 원문 예문과 의미가 완전히 일치하지 않음",
+              "note_ko에 출처를 언급해 example_distinct 요구사항 위배"
+            ]
+          },
+          {
+            "expression": "I'll be back.",
+            "error": "independent_review_failed",
+            "flags": [
+              "example_distinct"
+            ],
+            "issues": [
+              "예문이 학습용 예문으로 표시되었지만 출처를 명시하고 있어 example_distinct 요구를 충족하지 못함."
+            ]
+          }
+        ]
+      },
+      {
+        "topic": "영화 감상 영어",
+        "sourceKind": "none",
+        "tested": 5,
+        "generated": 5,
+        "topicPassed": 5,
+        "sourcePassed": 5,
+        "finalPassed": 4,
+        "candidateRejections": [],
+        "error": null,
+        "failures": [
+          {
+            "expression": "I really enjoyed this film.",
+            "error": "independent_review_failed",
+            "flags": [
+              "natural",
+              "meaning"
+            ],
+            "issues": [
+              "한국어 문장이 어색함(조사 누락)"
+            ]
+          }
+        ]
+      },
+      {
+        "topic": "여행 영어",
+        "sourceKind": "none",
+        "tested": 5,
+        "generated": 5,
+        "topicPassed": 5,
+        "sourcePassed": 5,
+        "finalPassed": 4,
+        "candidateRejections": [],
+        "error": null,
+        "failures": [
+          {
+            "expression": "I have a reservation under Smith.",
+            "error": "independent_review_failed",
+            "flags": [
+              "translation"
+            ],
+            "issues": [
+              "예문 번역이 정확하지 않음: 'for tonight'가 한국어에 반영되지 않음."
+            ]
+          }
+        ]
+      },
+      {
+        "topic": "면접 영어",
+        "sourceKind": "none",
+        "tested": 5,
+        "generated": 5,
+        "topicPassed": 4,
+        "sourcePassed": 4,
+        "finalPassed": 4,
+        "candidateRejections": [],
+        "error": null,
+        "failures": [
+          {
+            "expression": "I am interested in this position.",
+            "error": "config",
+            "flags": [],
+            "issues": []
+          }
+        ]
+      }
+    ],
+    "providerFailures": [
+      {
+        "number": 42,
+        "provider": "groq",
+        "stage": "review",
+        "topic": "면접 영어",
+        "startedAt": "2026-10-08T06:37:45.141Z",
+        "status": "config",
+        "httpStatus": 400,
+        "relayHttpStatus": 502,
+        "providerCallConfirmed": true,
+        "providerRequestUnknown": false,
+        "endedAt": "2026-10-08T06:37:48.658Z"
+      }
+    ],
+    "correctionsOrRegenerations": 0,
+    "existingProductionHistoryCompared": false,
+    "note": "One bounded direct-draft/independent-review experiment, not the full production correction/replacement pipeline or all user topics."
+  },
+  "observations": {
+    "sourceFreeReturnedReviews": 14,
+    "sourceFreeSourceTrue": 14,
+    "sourceFreeComparisonTrue": 14,
+    "sourcedQuotesSourceTrue": 2,
+    "sourceFreeAmbiguityNotObservedInThisSample": true,
+    "verifiedQuotesRetained": true,
+    "strictFailedFlagsNotOverridden": true,
+    "sourceFetchInvalidSignalNotObserved": true,
+    "rejectedQuoteCandidates": {
+      "sourceUnavailable": 2,
+      "sourceInvalid": 1
+    },
+    "generatedSourcedCardsExampleDistinctFalse": 2,
+    "limits": [
+      "14개 일반 검토 응답에서 개선을 관측했으며 모든 주제·미래 응답 보장은 아님",
+      "원래 실패한 URL이 없으므로 첫 시험7개 invalid의 원인을 이번 결과로 소급 확정하지 않음"
+    ]
+  },
+  "manualRead": {
+    "all17PayloadsRead": true,
+    "attributionAndExampleLabelAmbiguous": true,
+    "reviewIssuesNotAlwaysConsistentWithPayload": true,
+    "travelTonightIsPresent": true,
+    "sourceFreeKoreanParticleReasonDoesNotExplainEnglishNaturalFlag": true,
+    "commaSpliceInOneAutomaticallyPassedTravelExample": true,
+    "automatic12NotClaimedHumanApproved": true,
+    "note": "두 영화 note가 학습용 예문 뒤에 영화 대사라고 설명한다. 한 여행 번역에는 오늘 밤이 실제 존재하며, 뜻의 시점 모호함과 단순 누락은 구분한다. 쉼표로 연결된 두 독립절이 자동 검토를 통과했다."
+  },
+  "checks": {
+    "mockServerTests": 18,
+    "mockFailed": 0,
+    "mockSkipped": 0,
+    "mockTodo": 0,
+    "serverTestsExitCode": 0,
+    "typecheckExitCode": 0,
+    "sitesBuildExitCode": 0,
+    "packageExitCode": 0,
+    "liveRunExitCode": 1,
+    "assessmentExitCode": 0,
+    "disabledRouteExitCode": 0,
+    "validatedSourceInputHashesUnchanged": 11,
+    "existingWarningsPreserved": true
+  },
+  "cleanup": {
+    "confirmed": true,
+    "recordedAt": "2026-10-08T06:40:26.778Z",
+    "version": 125,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_c3ec77cc228c8191a05419b78017f52a",
+    "sourceCommit": "1981cf3b5bb61d4ff1d040149949fd5cd86296a2",
+    "deploymentId": "appgdep_6ac73a741a488191856e600d182f0b2c",
+    "envRevision": 64,
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "confirmedAt": "2026-10-08T06:39:00.261588+00:00",
+    "temporaryValidationEntriesRemoved": true,
+    "existingEnvironmentEntryMetadataPreserved": true,
+    "existingSecretPlaintextCompared": false,
+    "accessPolicyUnchanged": true,
+    "publicAccessRevision": 4,
+    "runtimeValidationDisabled": {
+      "httpStatus": 404,
+      "error": "validation_disabled",
+      "exitCode": 0,
+      "aiCalls": 0
+    },
+    "cards": 0,
+    "images": 0,
+    "schedules": 0,
+    "kakaoCalls": 0
+  },
+  "operations": {
+    "cards": 0,
+    "images": 0,
+    "schedules": 0,
+    "kakaoCalls": 0,
+    "learnerOrCardDatabaseRead": false,
+    "nonceSecurityReceiptsOnly": true,
+    "providerKeysCopied": false,
+    "workerOrDoDeployment": false,
+    "remoteMigration": false,
+    "gitHubPush": false,
+    "pullRequest": false,
+    "merged": false
+  },
+  "freeConfiguration": {
+    "unchangedModelsAndDependencies": true,
+    "paidFallbackAdded": false,
+    "accountEligibilityOrRemainingQuotaChecked": false,
+    "cpuOrPhoneChecked": false,
+    "userChoseNoAdditionalAccountCpuPhoneVerification": true
+  },
+  "remaining": [
+    "인용 표현의 출처와 새 학습 예문 표기를 구분",
+    "거절 사유와 항목의 일관성·문장부호 검토 보완",
+    "Groq HTTP400 상세 원인은 응답 원문 미보존으로 미확정",
+    "실제20문장 전체 통과 미달",
+    "Worker/DO/0024·전체 새 화면 운영 반영 미실시"
+  ]
+}
