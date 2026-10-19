@@ -56,6 +56,10 @@ CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
 변경된 자료는 override·수준별 검토 원장에 기록하며 사용자 편집과 과거 회차 자료는 유지합니다.
 
 4. 발음
+2026-10-19: 사전 v3의 3,809항목·3,837개 조건별 발음을 뜻·품사 일치 시 표시합니다.
+화면용 IPA는 넓은 미국식 표기로 정규화했으며 원문 IPA·조건·URL·검토 방법·라이선스를 별도로 보존합니다.
+Wiktionary contributors의 파생 부분은 CC BY-SA 4.0이며 개별 사전·기존 교재의 권리를 변경하지 않습니다.
+발음 데이터·출처·라이선스: /sources/american-ipa.json
 동형이의어 16개(품사별 35항목)는 Cambridge Dictionary의 미국식 발음과 대조했습니다.
 검토한 품사·뜻이 일치할 때 IPA·용법 안내와 공식 사전 듣기 링크를 제공합니다.
 data/pronunciation-guide.json의 항목별 URL·검토일을 참고하세요. 음원을 복사하거나 재배포하지 않습니다.

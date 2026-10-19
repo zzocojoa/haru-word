@@ -9,7 +9,7 @@
     "postinstall": "node scripts/guard-braces.mjs",
     "install:ci": "node scripts/install-ci.mjs",
     "dev": "node scripts/run-framework.mjs dev",
-    "build": "node scripts/prepare-catalog-basics.mjs --check && node --experimental-strip-types scripts/prepare-grammar-index.mjs --check && node scripts/prepare-word-image-web.mjs --check && node scripts/prepare-word-image-ui.mjs --check && node scripts/run-framework.mjs build",
+    "build": "node scripts/prepare-catalog-basics.mjs --check && node --experimental-strip-types scripts/prepare-grammar-index.mjs --check && node scripts/prepare-word-image-web.mjs --check && node scripts/prepare-word-image-ui.mjs --check && node scripts/prepare-american-ipa.mjs --check && node scripts/run-framework.mjs build",
     "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
@@ -25,6 +25,8 @@
     "images:host:upload": "node scripts/upload-oxford-images.mjs",
     "images:host:verify": "node scripts/upload-oxford-images.mjs --verify",
     "check:grammar-review": "node scripts/check-grammar-review.mjs",
+    "ipa:prepare": "node scripts/prepare-american-ipa.mjs",
+    "ipa:check": "node scripts/prepare-american-ipa.mjs --check",
     "db:generate": "drizzle-kit generate",
     "test:browser": "node tests/qa/run.cjs functional",
     "test:performance": "node tests/qa/run.cjs performance"

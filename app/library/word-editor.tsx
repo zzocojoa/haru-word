@@ -20,7 +20,7 @@ import {
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { DictionaryLinks } from "../ui";
-import { WordPronunciation } from '../word-pronunciation';
+import { WordIpa, WordPronunciation } from '../word-pronunciation';
 import { HelpDetails } from "../study-ui";
 import { editedWordDraftsProgress } from "@/lib/learning-commands";
 import { useEditorSubmission } from "./use-editor-submission";
@@ -84,13 +84,14 @@ export function WordEditor({
           <span lang="en">{word.word}</span>
           {image && <WordImagePreview key={image.sha256} image={image}/>}
         </DialogTitle>
-        <DialogDescription>
-          {word.personal ? "수준 미지정" : word.level} · {POS[word.pos]} ·{" "}
-          {word.personal ? "개인 추가" : `첨부 Oxford PDF ${word.page}쪽`}
-        </DialogDescription>
       </DialogHeader>
       <div className="dialog-scroll">
-      <WordPronunciation word={word} meaning={meaning}/>
+      <WordIpa word={word} meaning={meaning}/>
+      <DialogDescription>
+        {word.personal ? "수준 미지정" : word.level} · {POS[word.pos]} ·{" "}
+        {word.personal ? "개인 추가" : `첨부 Oxford PDF ${word.page}쪽`}
+      </DialogDescription>
+      <WordPronunciation word={word} meaning={meaning} showIpa={false}/>
       {error && <p className="error-banner" role="alert">{error}</p>}
       <fieldset className="editor-fields" disabled={submitting}>
       <section className="sense-selector">

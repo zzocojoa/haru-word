@@ -3,7 +3,7 @@ import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
 import { Check } from "lucide-react";
 import { SentenceFeedbackPanel } from "../sentence-feedback";
 import { DictionaryLinks } from "../ui";
-import { WordPronunciation } from '../word-pronunciation';
+import { WordIpa, WordPronunciation } from '../word-pronunciation';
 import type { StudySessionController } from "./use-study-session-controller";
 type SentenceStageProps = Pick<
   StudySessionController,
@@ -43,6 +43,7 @@ export function SentenceStage({
   busy,
   sentenceDone,
 }: SentenceStageProps) {
+  const selectedMeaning = s.records[id!]?.meaning ?? content.meaning;
   return (
     <>
       <p className="muted">내 이야기로 한 문장을 써 보세요.</p>
@@ -50,11 +51,12 @@ export function SentenceStage({
         <h3 lang="en">
           {word.word}
         </h3>
+        <WordIpa word={word} meaning={selectedMeaning}/>
         <span>
-          <PartOfSpeechLabel pos={word.pos} /> · {s.records[id!]?.meaning || content.meaning}
+          <PartOfSpeechLabel pos={word.pos} /> · {selectedMeaning}
         </span>
       </div>
-      <WordPronunciation word={word} meaning={s.records[id!]?.meaning || content.meaning}/>
+      <WordPronunciation word={word} meaning={selectedMeaning} showIpa={false}/>
       <GrammarTermsHelp pos={word.pos} />
       <label htmlFor="my-sentence">내 영어 문장</label>
       <textarea

@@ -1,0 +1,1080 @@
+{
+  "provenance": "2026-10-19 v3 independent US source expectations (71) and retained v2 regression expectations (44); copied without deriving expected IPA from the application generator.",
+  "cases": [
+    {
+      "review": "v3",
+      "id": "ae5fbe65659ef923",
+      "word": "close",
+      "pos": "v.",
+      "meaning": "닫다",
+      "ipa": [
+        "/kloʊz/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "0809f6029f5a4e60",
+      "word": "hear",
+      "pos": "v.",
+      "meaning": "듣다",
+      "ipa": [
+        "/hɪr/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "5d10061af7a7e611",
+      "word": "here",
+      "pos": "adv.",
+      "meaning": "여기",
+      "ipa": [
+        "/hɪr/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "56aa5d6a7f60a19f",
+      "word": "live",
+      "pos": "v.",
+      "meaning": "살다",
+      "ipa": [
+        "/lɪv/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "3f160da5568cb7a4",
+      "word": "long",
+      "pos": "adj.",
+      "meaning": "긴",
+      "ipa": [
+        "/lɑŋ/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "9521f256db21a7e2",
+      "word": "long",
+      "pos": "adv.",
+      "meaning": "오랫동안",
+      "ipa": [
+        "/lɑŋ/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "6030ec133decbb7b",
+      "word": "next to",
+      "pos": "prep.",
+      "meaning": "~옆에",
+      "ipa": [
+        "/ˈnɛkst ˌtu/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "3f414d95f3b31d4f",
+      "word": "object",
+      "pos": "n.",
+      "meaning": "물건",
+      "ipa": [
+        "/ˈɑbdʒɛkt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "cefaff4412c2a347",
+      "word": "online",
+      "pos": "adj.",
+      "meaning": "온라인의",
+      "ipa": [
+        "/ˈɑnlaɪn/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "2a0f23761db8d278",
+      "word": "online",
+      "pos": "adv.",
+      "meaning": "온라인으로",
+      "ipa": [
+        "/ˌɑnˈlaɪn/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "30293d16e645f56c",
+      "word": "prepare",
+      "pos": "v.",
+      "meaning": "준비하다",
+      "ipa": [
+        "/prɪˈpɛr/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "1e9c30a583d9cb33",
+      "word": "present",
+      "pos": "adj.",
+      "meaning": "참석한",
+      "ipa": [
+        "/ˈprɛzənt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "284fd832597cfe66",
+      "word": "present",
+      "pos": "n.",
+      "meaning": "선물",
+      "ipa": [
+        "/ˈprɛzənt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "d66d12e47ba17536",
+      "word": "read",
+      "pos": "v.",
+      "meaning": "읽다",
+      "ipa": [
+        "/rid/",
+        "/rɛd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "f5536143b957ed84",
+      "word": "alternative",
+      "pos": "n.",
+      "meaning": "대안",
+      "ipa": [
+        "/ɑlˈtɝnətɪv/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "bfb19cf723ef383c",
+      "word": "close",
+      "pos": "adj.",
+      "meaning": "가까운",
+      "ipa": [
+        "/kloʊs/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "100593b7d746ce1b",
+      "word": "desert",
+      "pos": "n.",
+      "meaning": "사막",
+      "ipa": [
+        "/ˈdɛzɚt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "68d92e6308292b98",
+      "word": "environment",
+      "pos": "n.",
+      "meaning": "환경",
+      "ipa": [
+        "/ɪnˈvaɪrəmənt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "ad6eb44bcc5141c4",
+      "word": "extremely",
+      "pos": "adv.",
+      "meaning": "극도로",
+      "ipa": [
+        "/ɪkˈstrimli/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "62b2163119737481",
+      "word": "individual",
+      "pos": "n.",
+      "meaning": "개인",
+      "ipa": [
+        "/ˌɪndəˈvɪdʒuəl/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "9e38d04504bae76a",
+      "word": "individual",
+      "pos": "adj.",
+      "meaning": "개별적인",
+      "ipa": [
+        "/ˌɪndəˈvɪdʒuəl/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "4cd8a08b069dee59",
+      "word": "lead",
+      "pos": "v.",
+      "meaning": "이끌다",
+      "ipa": [
+        "/lid/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "1080224424f392de",
+      "word": "present",
+      "pos": "v.",
+      "meaning": "발표하다",
+      "ipa": [
+        "/prɪˈzɛnt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "edc5dbe7137fd1e4",
+      "word": "record",
+      "pos": "n.",
+      "meaning": "기록",
+      "ipa": [
+        "/ˈrɛkɚd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "0cfe94787a643244",
+      "word": "record",
+      "pos": "v.",
+      "meaning": "녹음하다",
+      "ipa": [
+        "/rɪˈkɔrd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "910cf4240f714dc5",
+      "word": "refuse",
+      "pos": "v.",
+      "meaning": "거절하다",
+      "ipa": [
+        "/rɪˈfjuz/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "c91dae819205fa7e",
+      "word": "relationship",
+      "pos": "n.",
+      "meaning": "관계",
+      "ipa": [
+        "/rɪˈleɪʃənʃɪp/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "abac91dd7b8aef9b",
+      "word": "remove",
+      "pos": "v.",
+      "meaning": "제거하다",
+      "ipa": [
+        "/rɪˈmuv/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "156ac05a7b9ab471",
+      "word": "researcher",
+      "pos": "n.",
+      "meaning": "연구원",
+      "ipa": [
+        "/ˈrisɝtʃɚ/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "f5fe39ae347ad0dc",
+      "word": "unfortunately",
+      "pos": "adv.",
+      "meaning": "불행하게도",
+      "ipa": [
+        "/ʌnˈfɔrtʃənətli/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "456a93db2a4b00d2",
+      "word": "wind",
+      "pos": "n.",
+      "meaning": "바람",
+      "ipa": [
+        "/wɪnd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "410a19c5c0879ed1",
+      "word": "administration",
+      "pos": "n.",
+      "meaning": "행정",
+      "ipa": [
+        "/ədˌmɪnəˈstreɪʃən/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "428ebe65cd531a5e",
+      "word": "admire",
+      "pos": "v.",
+      "meaning": "존경하다",
+      "ipa": [
+        "/ədˈmaɪr/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "0bec0d12fa492b3c",
+      "word": "alternative",
+      "pos": "adj.",
+      "meaning": "대체할 수 있는",
+      "ipa": [
+        "/ɑlˈtɝnətɪv/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "62406e2217622902",
+      "word": "close",
+      "pos": "adv.",
+      "meaning": "가까이",
+      "ipa": [
+        "/kloʊs/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "4020a76ec6716223",
+      "word": "environmental",
+      "pos": "adj.",
+      "meaning": "환경의",
+      "ipa": [
+        "/ɪnˌvaɪrəˈmɛntəl/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "23b39a0a0e1e9917",
+      "word": "eventually",
+      "pos": "adv.",
+      "meaning": "결국",
+      "ipa": [
+        "/ɪˈvɛntʃuəli/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "f97737424ab7f58c",
+      "word": "graduate",
+      "pos": "n.",
+      "meaning": "졸업생",
+      "ipa": [
+        "/ˈɡrædʒuət/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "634dd5ce703c240a",
+      "word": "graduate",
+      "pos": "v.",
+      "meaning": "졸업하다",
+      "ipa": [
+        "/ˈɡrædʒueɪt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "122e8e5f24758862",
+      "word": "lead",
+      "pos": "n.",
+      "meaning": "선두",
+      "ipa": [
+        "/lid/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "da6dbc17243bd29d",
+      "word": "live",
+      "pos": "adj.",
+      "meaning": "생방송의",
+      "ipa": [
+        "/laɪv/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "ccda1f684bbc10e2",
+      "word": "live",
+      "pos": "adv.",
+      "meaning": "생방송으로",
+      "ipa": [
+        "/laɪv/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "7c75df628ff9b194",
+      "word": "prepared",
+      "pos": "adj.",
+      "meaning": "준비된",
+      "ipa": [
+        "/prɪˈpɛrd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "dc78ee6124e9d469",
+      "word": "relation",
+      "pos": "n.",
+      "meaning": "관계",
+      "ipa": [
+        "/rɪˈleɪʃən/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "b4b8feff5481e876",
+      "word": "require",
+      "pos": "v.",
+      "meaning": "필요로 하다",
+      "ipa": [
+        "/rɪˈkwaɪr/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "84b10a24d42fb855",
+      "word": "responsibility",
+      "pos": "n.",
+      "meaning": "책임",
+      "ipa": [
+        "/rɪˌspɑnsəˈbɪləti/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "11f11c8fc8cbf533",
+      "word": "responsible",
+      "pos": "adj.",
+      "meaning": "책임이 있는",
+      "ipa": [
+        "/rɪˈspɑnsəbəl/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "bf336a0fbbf3e7b0",
+      "word": "retired",
+      "pos": "adj.",
+      "meaning": "은퇴한",
+      "ipa": [
+        "/rɪˈtaɪrd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "bbb38b0b5e6e1d77",
+      "word": "uncomfortable",
+      "pos": "adj.",
+      "meaning": "불편한",
+      "ipa": [
+        "/ʌnˈkʌmfɚtəbəl/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "93d988ead07d0177",
+      "word": "unnecessary",
+      "pos": "adj.",
+      "meaning": "불필요한",
+      "ipa": [
+        "/ʌnˈnɛsəsɛri/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "33ca73752ad4469d",
+      "word": "acknowledge",
+      "pos": "v.",
+      "meaning": "인정하다",
+      "ipa": [
+        "/əkˈnɑlɪdʒ/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "a769e360ce774a62",
+      "word": "beyond",
+      "pos": "prep.",
+      "meaning": "~너머에",
+      "ipa": [
+        "/biˈjɑnd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "718f2879155abe34",
+      "word": "beyond",
+      "pos": "adv.",
+      "meaning": "그 너머에",
+      "ipa": [
+        "/biˈjɑnd/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "668268ea0765310e",
+      "word": "close",
+      "pos": "n.",
+      "meaning": "끝",
+      "ipa": [
+        "/kloʊz/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "f6600a828a5fa83b",
+      "word": "conduct",
+      "pos": "v.",
+      "meaning": "실시하다",
+      "ipa": [
+        "/kənˈdʌkt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "8c37b8d4fb8a1d56",
+      "word": "conduct",
+      "pos": "n.",
+      "meaning": "행동",
+      "ipa": [
+        "/ˈkɑndʌkt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "2a1d0beda6274311",
+      "word": "conflict",
+      "pos": "n.",
+      "meaning": "충돌",
+      "ipa": [
+        "/ˈkɑnflɪkt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "ede0cdc488d70256",
+      "word": "conflict",
+      "pos": "v.",
+      "meaning": "충돌하다",
+      "ipa": [
+        "/kənˈflɪkt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "6687a6f42616d09f",
+      "word": "contest",
+      "pos": "n.",
+      "meaning": "대회",
+      "ipa": [
+        "/ˈkɑntɛst/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "351b49638e235d19",
+      "word": "contest",
+      "pos": "v.",
+      "meaning": "이의를 제기하다",
+      "ipa": [
+        "/kənˈtɛst/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "26eff2f210cfbce8",
+      "word": "desert",
+      "pos": "v.",
+      "meaning": "버리고 떠나다",
+      "ipa": [
+        "/dɪˈzɝt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "9a71d758e0223658",
+      "word": "entirely",
+      "pos": "adv.",
+      "meaning": "완전히",
+      "ipa": [
+        "/ɪnˈtaɪrli/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "2c18a0400c6d0857",
+      "word": "hearing",
+      "pos": "n.",
+      "meaning": "청력",
+      "ipa": [
+        "/ˈhɪrɪŋ/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "5c10aa715bc58dba",
+      "word": "interpret",
+      "pos": "v.",
+      "meaning": "해석하다",
+      "ipa": [
+        "/ɪnˈtɝprət/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "b8e6ec1ab51195a6",
+      "word": "object",
+      "pos": "v.",
+      "meaning": "반대하다",
+      "ipa": [
+        "/əbˈdʒɛkt/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "1f8ec279a3b55bcd",
+      "word": "resolve",
+      "pos": "v.",
+      "meaning": "해결하다",
+      "ipa": [
+        "/rɪˈzɑlv/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "eb6d924c9c921cb3",
+      "word": "transfer",
+      "pos": "v.",
+      "meaning": "옮기다",
+      "ipa": [
+        "/ˈtrænsfɝ/",
+        "/trænsˈfɝ/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "294e84ac847ef62c",
+      "word": "transfer",
+      "pos": "n.",
+      "meaning": "이체",
+      "ipa": [
+        "/ˈtrænsfɝ/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "3a77322979c3ff66",
+      "word": "unknown",
+      "pos": "adj.",
+      "meaning": "알려지지 않은",
+      "ipa": [
+        "/ʌnˈnoʊn/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "9e4672e72e9407ed",
+      "word": "visual",
+      "pos": "adj.",
+      "meaning": "시각적인",
+      "ipa": [
+        "/ˈvɪʒuəl/"
+      ]
+    },
+    {
+      "review": "v3",
+      "id": "b914b855f7eefd9b",
+      "word": "wind",
+      "pos": "v.",
+      "meaning": "구불구불 이어지다",
+      "ipa": [
+        "/waɪnd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "above",
+      "pos": "prep.",
+      "ipa": [
+        "/əˈbʌv/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "actor",
+      "pos": "n.",
+      "ipa": [
+        "/ˈæktɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "river",
+      "pos": "n.",
+      "meaning": "강",
+      "ipa": [
+        "/ˈrɪvɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "shower",
+      "pos": "n.",
+      "ipa": [
+        "/ˈʃaʊɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "bear",
+      "pos": "n.",
+      "meaning": "곰",
+      "ipa": [
+        "/bɛr/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "tower",
+      "pos": "n.",
+      "ipa": [
+        "/ˈtaʊɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "number",
+      "pos": "n.",
+      "ipa": [
+        "/ˈnʌmbɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "prayer",
+      "pos": "n.",
+      "ipa": [
+        "/prɛr/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "process",
+      "pos": "v.",
+      "ipa": [
+        "/ˈprɑsɛs/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "recover",
+      "pos": "v.",
+      "ipa": [
+        "/rɪˈkʌvɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "remark",
+      "pos": "v.",
+      "ipa": [
+        "/rɪˈmɑrk/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "resort",
+      "pos": "n.",
+      "ipa": [
+        "/rɪˈzɔrt/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "spread",
+      "pos": "v.",
+      "ipa": [
+        "/sprɛd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "spread",
+      "pos": "n.",
+      "ipa": [
+        "/sprɛd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "used",
+      "pos": "adj.",
+      "meaning": "익숙한",
+      "ipa": [
+        "/just/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "used",
+      "pos": "adj.",
+      "meaning": "중고의",
+      "ipa": [
+        "/juzd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "inside",
+      "pos": "n.",
+      "ipa": [
+        "/ˈɪnsaɪd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "inside",
+      "pos": "adj.",
+      "ipa": [
+        "/ˈɪnsaɪd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "inside",
+      "pos": "adv.",
+      "ipa": [
+        "/ɪnˈsaɪd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "inside",
+      "pos": "prep.",
+      "ipa": [
+        "/ˌɪnˈsaɪd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "experiment",
+      "pos": "n.",
+      "ipa": [
+        "/ɪkˈspɛrəmənt/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "experiment",
+      "pos": "v.",
+      "ipa": [
+        "/ɪkˈspɛrəmɛnt/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "lower",
+      "pos": "v.",
+      "ipa": [
+        "/ˈloʊɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "barrier",
+      "pos": "n.",
+      "ipa": [
+        "/ˈbɛriɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "nuclear",
+      "pos": "adj.",
+      "ipa": [
+        "/ˈnukliɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "any",
+      "pos": "pron.",
+      "ipa": [
+        "/ˈɛni/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "hotel",
+      "pos": "n.",
+      "ipa": [
+        "/hoʊˈtɛl/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "creation",
+      "pos": "n.",
+      "ipa": [
+        "/kriˈeɪʃən/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "first",
+      "pos": "number",
+      "ipa": [
+        "/fɝst/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "third",
+      "pos": "number",
+      "ipa": [
+        "/θɝd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "eighteen",
+      "pos": "number",
+      "ipa": [
+        "/ˌeɪˈtin/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "duty",
+      "pos": "n.",
+      "ipa": [
+        "/ˈduti/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "minister",
+      "pos": "n.",
+      "ipa": [
+        "/ˈmɪnəstɚ/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "next to",
+      "pos": "prep.",
+      "ipa": [
+        "/ˈnɛkst ˌtu/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "read",
+      "pos": "v.",
+      "ipa": [
+        "/rid/",
+        "/rɛd/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "the",
+      "pos": "definite article",
+      "ipa": [
+        "/ði/",
+        "/ðə/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "a, an",
+      "pos": "indefinite article",
+      "ipa": [
+        "/ə/",
+        "/eɪ/",
+        "/ən/",
+        "/æn/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "house",
+      "pos": "n.",
+      "ipa": [
+        "/haʊs/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "house",
+      "pos": "v.",
+      "ipa": [
+        "/haʊz/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "lead",
+      "pos": "n.",
+      "meaning": "선두",
+      "ipa": [
+        "/lid/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "tear",
+      "pos": "n.",
+      "meaning": "눈물",
+      "ipa": [
+        "/tɪr/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "tear",
+      "pos": "v.",
+      "ipa": [
+        "/tɛr/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "IT",
+      "pos": "n.",
+      "ipa": [
+        "/ˌaɪˈti/"
+      ]
+    },
+    {
+      "review": "v2",
+      "word": "it",
+      "pos": "pron.",
+      "ipa": [
+        "/ɪt/"
+      ]
+    }
+  ]
+}

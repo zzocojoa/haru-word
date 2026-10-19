@@ -4,7 +4,7 @@ import { cardMeaning } from '@/lib/catalog-basics';
 import type { Progress, Word } from '@/lib/learning';
 import { resolveWordImage, WORD_IMAGES, type WordImage } from '@/lib/word-image';
 import { HelpDetails } from '../study-ui';
-import { WordPronunciation } from '../word-pronunciation';
+import { WordIpa, WordPronunciation } from '../word-pronunciation';
 import { PartOfSpeechLabel } from '../grammar-terms';
 import { practiceNumber, resolvePracticeEntry, type ImagePracticePositionController, type PositionView } from '@/lib/image-practice-position';
 
@@ -122,6 +122,7 @@ function PracticeCard({ card }: { card: Card }) {
           alt={SCENES[card.image.entryId] || '영단어를 떠올리는 그림'} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>
         {revealed && <span className="image-practice-sense">
           <span lang="en" className="image-practice-answer">{card.word.word}</span>
+          <WordIpa word={card.word} meaning={card.image.baseMeaning}/>
           <span className="image-practice-meaning">{card.image.baseMeaning}</span>
           <span className="small-note"><PartOfSpeechLabel pos={card.image.pos}/></span>
         </span>}
@@ -129,7 +130,7 @@ function PracticeCard({ card }: { card: Card }) {
       </button>
       {!ready ? <p role="status">이미지 불러오는 중</p>
         : <p className="small-note image-practice-hint">{revealed ? '카드를 누르면 이미지로 돌아가요.' : '단어를 떠올린 뒤 눌러 확인해 보세요.'}</p>}
-      {revealed && <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning}/></HelpDetails>}
+      {revealed && <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning} showIpa={false}/></HelpDetails>}
     </>}
   </div>;
 }

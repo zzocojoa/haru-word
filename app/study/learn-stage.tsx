@@ -2,7 +2,7 @@
 import { POS } from "@/lib/learning";
 import { ArrowRight, BookOpen, PencilLine } from "lucide-react";
 import { DictionaryLinks } from "../ui";
-import { WordPronunciation } from '../word-pronunciation';
+import { WordIpa, WordPronunciation } from '../word-pronunciation';
 import { ExpressionLine } from "../expression-line";
 import { ExpressionFields } from "../expression-fields";
 import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
@@ -59,8 +59,9 @@ export function LearnStage({
         <h3 lang="en">
           {word.word}
         </h3>
+        <WordIpa word={word} meaning={meaning}/>
         {image && <WordImagePreview image={image} className="word-image-learn"/>}
-        <WordPronunciation word={word} meaning={meaning}/>
+        <WordPronunciation word={word} meaning={meaning} showIpa={false}/>
       </div>
       <GrammarTermsHelp pos={word.pos} />
       <div className="meaning-section">

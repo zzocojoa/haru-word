@@ -6,3 +6,5 @@ data/word-image-ui.json text eol=lf
 # Material gates compare generated JSON bytes, including its final LF.
 data/catalog-basics.json text eol=lf
 data/grammar-index.json text eol=lf
+data/american-ipa-ui.json text eol=lf
+public/sources/american-ipa.json text eol=lf
