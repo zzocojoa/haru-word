@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "product": "하루단어",
-  "recordedAt": "2026-10-19T03:56:48.801Z",
-  "note": "Current Site is v140 with PR48 UI text and WebKit focus return improvements, preserving v139 card retirement. This follow-up updates documentation and PR48 only; no additional deployment or settings change. Startup and historical 401 causes remain unconfirmed. Earlier release/Worker records retain their original historical scope.",
+  "recordedAt": "2026-10-19T14:01:16.989Z",
+  "note": "Current Site v141 includes PR52 American IPA, preserving v140 UI/focus and v139 card retirement. Documentation/PR52 follow-up only: no additional deployment or settings change. Startup, historical401 and transient WebKit QA timeout causes remain UNKNOWN. Earlier records retain their original scope.",
   "repositories": {
     "enCard": {
       "url": "https://github.com/zzocojoa/EN_Card",
@@ -23,7 +23,7 @@
     "haruWord": {
       "url": "https://github.com/zzocojoa/haru-word",
       "defaultBranch": "main",
-      "verifiedDefaultCommit": "205db759f9a0edcfa92210280b1f86fd5261e757",
+      "verifiedDefaultCommit": "d914b2bfa2078e810dd3d7fea24aebbc22038df6",
       "mergedPullRequests": [
         22,
         23,
@@ -47,24 +47,29 @@
         45,
         46,
         47,
-        48
+        48,
+        52
       ],
-      "verifiedAt": "2026-10-19T03:56:48.801Z",
+      "verifiedAt": "2026-10-19T14:01:16.989Z",
       "previousVerification": {
-        "verifiedDefaultCommit": "9ba7c10df243ca1a0d2219a3d9e91cd54c3537ba",
-        "verifiedAt": "2026-10-18T14:07:25.701Z",
+        "verifiedDefaultCommit": "205db759f9a0edcfa92210280b1f86fd5261e757",
+        "verifiedAt": "2026-10-19T03:56:48.801Z",
         "previousVerification": {
-          "verifiedDefaultCommit": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
-          "verifiedAt": "2026-10-18T11:36:17.336Z",
+          "verifiedDefaultCommit": "9ba7c10df243ca1a0d2219a3d9e91cd54c3537ba",
+          "verifiedAt": "2026-10-18T14:07:25.701Z",
           "previousVerification": {
-            "verifiedDefaultCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
-            "verifiedAt": "2026-10-17T15:17:49.682Z",
+            "verifiedDefaultCommit": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
+            "verifiedAt": "2026-10-18T11:36:17.336Z",
             "previousVerification": {
-              "verifiedDefaultCommit": "c79be6bb37611a40a890fc1a56af0e15109f76cf",
-              "verifiedAt": "2026-10-15T16:00:08.271Z",
+              "verifiedDefaultCommit": "6d444190de52130b461e8a5ff3488364b096cea3",
+              "verifiedAt": "2026-10-17T15:17:49.682Z",
               "previousVerification": {
-                "verifiedDefaultCommit": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
-                "verifiedAt": "2026-10-08T00:22:48.307Z"
+                "verifiedDefaultCommit": "c79be6bb37611a40a890fc1a56af0e15109f76cf",
+                "verifiedAt": "2026-10-15T16:00:08.271Z",
+                "previousVerification": {
+                  "verifiedDefaultCommit": "1592c9948088f3322aa2f94b25b9749ccd44cb30",
+                  "verifiedAt": "2026-10-08T00:22:48.307Z"
+                }
               }
             }
           }
@@ -74,13 +79,13 @@
   },
   "production": {
     "site": {
-      "version": 140,
-      "source": "f5925ec0b70ce5f6e12de3596e2bed927115e73c",
-      "main": "205db759f9a0edcfa92210280b1f86fd5261e757",
+      "version": 141,
+      "source": "3fe640c50cabd12519fc7490361e84b1ad72aed8",
+      "main": "d914b2bfa2078e810dd3d7fea24aebbc22038df6",
       "sourceTreeMatchesMain": true,
-      "deployment": "appgdep_6ad591ffe2d881918bbe14f81ab00f5c",
-      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0b533db8cddc8191a2baebff038a61fd",
-      "deployedAt": "2026-10-19T03:44:20.436858+00:00",
+      "deployment": "appgdep_6ad61e32feb081918ab81e1faf3579ba",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_a5ffb073339c819196b379721eaf82cf",
+      "deployedAt": "2026-10-19T13:42:34.910126+00:00",
       "timestampMeaning": "Native successful deployment response updated_at; not the deployment request start.",
       "deploymentStatus": "succeeded",
       "envRevision": 72,
@@ -88,8 +93,8 @@
       "accessMode": "public",
       "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-      "evidence": "2026-10-19-ui-text-focus-v140-rollout.json",
-      "productionVerificationRecordedAt": "2026-10-19T03:51:10.202Z"
+      "evidence": "2026-10-19-american-ipa-v141-rollout.json",
+      "productionVerificationRecordedAt": "2026-10-19T13:47:13.737Z"
     },
     "workerVersions": {
       "en-card": [
@@ -121,106 +126,124 @@
     "previousAutomationRuntimeSourceCommit": "432683b816d992459f7f9d54d7ac5bc09103c2cf",
     "automationRuntimeSourceNote": "0023 deployment used the preserved expression-selection source snapshot before its final Git commit. This Git-only refactor is not a new deployment; do not label the old date-card commit as the exact current runtime source.",
     "previousSiteRecord": {
-      "version": 139,
-      "source": "effc203cb09f9a6ed47b81f9bec19e00d21fba4c",
-      "deployment": "appgdep_6ad4cdd881588191805458e76828ac1a",
-      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
-      "deployedAt": "2026-10-18T13:48:09.750977+00:00",
-      "timestampMeaning": "Native successful deployment response updated_at, not deployment request start time.",
+      "version": 140,
+      "source": "f5925ec0b70ce5f6e12de3596e2bed927115e73c",
+      "main": "205db759f9a0edcfa92210280b1f86fd5261e757",
+      "sourceTreeMatchesMain": true,
+      "deployment": "appgdep_6ad591ffe2d881918bbe14f81ab00f5c",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0b533db8cddc8191a2baebff038a61fd",
+      "deployedAt": "2026-10-19T03:44:20.436858+00:00",
+      "timestampMeaning": "Native successful deployment response updated_at; not the deployment request start.",
       "deploymentStatus": "succeeded",
       "envRevision": 72,
       "environmentEntryCount": 9,
       "accessMode": "public",
+      "publicAccessRevision": 4,
       "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-      "evidence": "2026-10-18-en-card-retirement-integration.json",
-      "productionVerificationRecordedAt": "2026-10-18T14:07:25.701Z",
+      "evidence": "2026-10-19-ui-text-focus-v140-rollout.json",
+      "productionVerificationRecordedAt": "2026-10-19T03:51:10.202Z",
       "previousSiteRecord": {
-        "version": 138,
-        "source": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
-        "deployment": "appgdep_6ad4abf311a0819192dbefd4ede53035",
-        "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_62475ba7b1ac8191b410ba1ed8c2b292",
-        "deployedAt": "2026-10-18T11:22:48.100307+00:00",
+        "version": 139,
+        "source": "effc203cb09f9a6ed47b81f9bec19e00d21fba4c",
+        "deployment": "appgdep_6ad4cdd881588191805458e76828ac1a",
+        "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_632b37d4e29c8191afb4d879dd5bd5c2",
+        "deployedAt": "2026-10-18T13:48:09.750977+00:00",
         "timestampMeaning": "Native successful deployment response updated_at, not deployment request start time.",
         "deploymentStatus": "succeeded",
-        "envRevision": 71,
-        "environmentEntryCount": 13,
+        "envRevision": 72,
+        "environmentEntryCount": 9,
         "accessMode": "public",
         "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-        "evidence": "2026-10-18-image-practice-card-flip-rollout.json",
-        "productionVerificationRecordedAt": "2026-10-18T11:27:22.894Z",
+        "evidence": "2026-10-18-en-card-retirement-integration.json",
+        "productionVerificationRecordedAt": "2026-10-18T14:07:25.701Z",
         "previousSiteRecord": {
-          "version": 137,
-          "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_cf9cda995b30819192b3db099b8aa3a3",
-          "source": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
-          "deployment": "appgdep_6ad48de434b081918e52b73d284d5354",
-          "archive": {
-            "archive_format": "tar",
-            "sediment_file_id": "file_000000007828820691fb5a2bcb315523",
-            "content_hash": "sha256:3c1f1c67d4565f7ea7f99687aa4ec34b8249c2b1fd8c25de52d977d25fcc7958",
-            "size_bytes": 18073600,
-            "file_count": 387
-          },
-          "documentationPullRequest": "https://github.com/zzocojoa/haru-word/pull/43",
-          "documentationStateAtThisTask": "OPEN",
-          "historicalVerificationEvidence": "2026-10-18-image-practice-spacing-rollout.json",
-          "scopeNote": "v137 spacing verification is historical and its documentation PR remains separate.",
+          "version": 138,
+          "source": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
+          "deployment": "appgdep_6ad4abf311a0819192dbefd4ede53035",
+          "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_62475ba7b1ac8191b410ba1ed8c2b292",
+          "deployedAt": "2026-10-18T11:22:48.100307+00:00",
+          "timestampMeaning": "Native successful deployment response updated_at, not deployment request start time.",
+          "deploymentStatus": "succeeded",
+          "envRevision": 71,
+          "environmentEntryCount": 13,
+          "accessMode": "public",
+          "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
           "evidence": "2026-10-18-image-practice-card-flip-rollout.json",
-          "evidenceSection": "rollback",
-          "previousRecordedSite": {
-            "version": 136,
-            "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_bf901375bfbc8191ab9c904a3828a214",
-            "source": "3074adca216ce6ea3cd7474171fb685105bd0776",
-            "deployment": "appgdep_6ad4615a764c81918b1cffa2cfe2bdc8",
+          "productionVerificationRecordedAt": "2026-10-18T11:27:22.894Z",
+          "previousSiteRecord": {
+            "version": 137,
+            "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_cf9cda995b30819192b3db099b8aa3a3",
+            "source": "0fc399b0c123ea6794eb71c0e61101028e1bb4bf",
+            "deployment": "appgdep_6ad48de434b081918e52b73d284d5354",
             "archive": {
               "archive_format": "tar",
-              "sediment_file_id": "file_00000000bae48206bf7db405455b185e",
-              "content_hash": "sha256:86b339c086940d42b5b0c82ff33659d0a951393772249fd6478e3acd7425bf0c",
+              "sediment_file_id": "file_000000007828820691fb5a2bcb315523",
+              "content_hash": "sha256:3c1f1c67d4565f7ea7f99687aa4ec34b8249c2b1fd8c25de52d977d25fcc7958",
               "size_bytes": 18073600,
               "file_count": 387
             },
-            "note": "PR41 security dependency update already deployed before v137; prior read-only native evidence retained.",
+            "documentationPullRequest": "https://github.com/zzocojoa/haru-word/pull/43",
+            "documentationStateAtThisTask": "OPEN",
+            "historicalVerificationEvidence": "2026-10-18-image-practice-spacing-rollout.json",
+            "scopeNote": "v137 spacing verification is historical and its documentation PR remains separate.",
             "evidence": "2026-10-18-image-practice-card-flip-rollout.json",
-            "evidenceSection": "priorPublications.v136",
+            "evidenceSection": "rollback",
             "previousRecordedSite": {
-              "version": 135,
-              "source": "6d444190de52130b461e8a5ff3488364b096cea3",
-              "deployment": "appgdep_6ad38162879c81919c7b59b54cb71b5b",
-              "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_de4c91b7be0c8191add465d44e24dc0e",
-              "deployedAt": "2026-10-17T14:08:56.754623+00:00",
-              "deploymentStatus": "succeeded",
-              "envRevision": 71,
-              "environmentEntryCount": 13,
-              "accessMode": "public",
-              "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-              "evidence": "2026-10-17-image-practice-position-rollout.json",
-              "productionVerifiedAt": "2026-10-17T14:13:52.196Z",
-              "previousSiteRecord": {
-                "version": 134,
-                "source": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
-                "deployment": "appgdep_6ad230da52148191bcedf6176b80e70b",
-                "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_01b34aff3784819188118b899a40ecac",
+              "version": 136,
+              "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_bf901375bfbc8191ab9c904a3828a214",
+              "source": "3074adca216ce6ea3cd7474171fb685105bd0776",
+              "deployment": "appgdep_6ad4615a764c81918b1cffa2cfe2bdc8",
+              "archive": {
+                "archive_format": "tar",
+                "sediment_file_id": "file_00000000bae48206bf7db405455b185e",
+                "content_hash": "sha256:86b339c086940d42b5b0c82ff33659d0a951393772249fd6478e3acd7425bf0c",
+                "size_bytes": 18073600,
+                "file_count": 387
+              },
+              "note": "PR41 security dependency update already deployed before v137; prior read-only native evidence retained.",
+              "evidence": "2026-10-18-image-practice-card-flip-rollout.json",
+              "evidenceSection": "priorPublications.v136",
+              "previousRecordedSite": {
+                "version": 135,
+                "source": "6d444190de52130b461e8a5ff3488364b096cea3",
+                "deployment": "appgdep_6ad38162879c81919c7b59b54cb71b5b",
+                "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_de4c91b7be0c8191add465d44e24dc0e",
+                "deployedAt": "2026-10-17T14:08:56.754623+00:00",
+                "deploymentStatus": "succeeded",
+                "envRevision": 71,
+                "environmentEntryCount": 13,
+                "accessMode": "public",
+                "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
                 "evidence": "2026-10-17-image-practice-position-rollout.json",
-                "previousRecordedSite": {
-                  "version": 132,
-                  "source": "909df067abc176aae82895ed053feb8f7261c9e6",
-                  "deployment": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
-                  "envRevision": 71,
-                  "publicAccessRevision": 4,
-                  "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
-                  "evidence": "2026-10-15-word-image-editor-wrap-rollout.json",
-                  "previousSiteRecord": {
-                    "version": 123,
-                    "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
-                    "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
-                    "envRevision": 59,
+                "productionVerifiedAt": "2026-10-17T14:13:52.196Z",
+                "previousSiteRecord": {
+                  "version": 134,
+                  "source": "cf339eed5e824393156f45c2dc3adba7e83d41c0",
+                  "deployment": "appgdep_6ad230da52148191bcedf6176b80e70b",
+                  "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_01b34aff3784819188118b899a40ecac",
+                  "evidence": "2026-10-17-image-practice-position-rollout.json",
+                  "previousRecordedSite": {
+                    "version": 132,
+                    "source": "909df067abc176aae82895ed053feb8f7261c9e6",
+                    "deployment": "appgdep_6ad06c8d36d48191a158af1f551afd5c",
+                    "envRevision": 71,
                     "publicAccessRevision": 4,
-                    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
-                    "latestVersionRead": {
+                    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+                    "evidence": "2026-10-15-word-image-editor-wrap-rollout.json",
+                    "previousSiteRecord": {
                       "version": 123,
-                      "status": "succeeded",
-                      "checkedAt": "2026-10-07T16:12:51.430297+00:00",
-                      "method": "Native deploy success; public source manifest hash and audience revision checked",
-                      "accessRevision": 4
+                      "source": "67606e021aea42ea44e429c82ec27cbf7b8f8ef1",
+                      "deployment": "appgdep_6ac66f6def0481918775ce996dda6256",
+                      "envRevision": 59,
+                      "publicAccessRevision": 4,
+                      "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site/cards",
+                      "latestVersionRead": {
+                        "version": 123,
+                        "status": "succeeded",
+                        "checkedAt": "2026-10-07T16:12:51.430297+00:00",
+                        "method": "Native deploy success; public source manifest hash and audience revision checked",
+                        "accessRevision": 4
+                      }
                     }
                   }
                 }
@@ -2810,33 +2833,33 @@
     "evidence": "2026-10-06-automation-replacement-trial.json"
   },
   "latestMerge": {
-    "recordedAt": "2026-10-19T03:56:48.801Z",
+    "recordedAt": "2026-10-19T14:01:16.989Z",
     "status": "merged_main_ci_success",
     "merged": [
       {
         "repo": "zzocojoa/haru-word",
-        "number": 48,
-        "baseRefName": "main",
-        "headRefOid": "6cf051fdd4acbf130944410a2dca98e47e69d8a0",
-        "mergeCommit": {
-          "oid": "205db759f9a0edcfa92210280b1f86fd5261e757"
-        },
-        "mergedAt": "2026-10-19T03:20:36Z",
+        "number": 52,
         "state": "MERGED",
-        "url": "https://github.com/zzocojoa/haru-word/pull/48"
+        "url": "https://github.com/zzocojoa/haru-word/pull/52",
+        "baseRefName": "main",
+        "headRefOid": "8b17625d0fe30f1c25b87b79600badf6c22af4b9",
+        "mergeCommit": {
+          "oid": "d914b2bfa2078e810dd3d7fea24aebbc22038df6"
+        },
+        "mergedAt": "2026-10-19T12:11:00Z"
       }
     ],
     "mainCI": {
-      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39194242440",
-      "runId": 39194242440,
-      "head": "205db759f9a0edcfa92210280b1f86fd5261e757",
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39250069720",
+      "runId": 39250069720,
+      "head": "d914b2bfa2078e810dd3d7fea24aebbc22038df6",
       "status": "completed",
       "conclusion": "success",
       "nodeVersions": [
         22,
         24
       ],
-      "testsPerNodeVersion": 643,
+      "testsPerNodeVersion": 658,
       "stepsPerJob": 13,
       "lintErrors": 0,
       "existingLintWarnings": 15,
@@ -2845,101 +2868,137 @@
       "browserTestsIncluded": false
     },
     "previousMerge": {
-      "recordedAt": "2026-10-06T14:07:55.780Z",
-      "status": "merged_with_accepted_cpu_observation_limit",
-      "approval": {
-        "recordedAt": "2026-10-06T14:06:02.203Z",
-        "source": "user_message",
-        "confirmation": "승인 진행",
-        "scope": "Merge EN_Card PR11 and haru-word PR32 with historical preparation CPU observation gaps explicitly retained as unverified.",
-        "historicalCpuCoverageComplete": false,
-        "additionalDeploymentAuthorized": false
-      },
+      "recordedAt": "2026-10-19T03:56:48.801Z",
+      "status": "merged_main_ci_success",
       "merged": [
         {
-          "repo": "zzocojoa/EN_Card",
-          "number": 11,
-          "baseRefName": "master",
-          "headRefOid": "ae58855aa26aa2782c4bcae28f6d8efd75f3bd22",
-          "mergeCommit": {
-            "oid": "10278124f0f16037f4f695f129d7d80010665b1a"
-          },
-          "mergedAt": "2026-10-06T14:06:11Z",
-          "state": "MERGED",
-          "url": "https://github.com/zzocojoa/EN_Card/pull/11"
-        },
-        {
           "repo": "zzocojoa/haru-word",
-          "number": 32,
+          "number": 48,
           "baseRefName": "main",
-          "headRefOid": "49e947ac0a8c6581132afa6e731323a60b47f53b",
+          "headRefOid": "6cf051fdd4acbf130944410a2dca98e47e69d8a0",
           "mergeCommit": {
-            "oid": "9bc1d8d2e79eb318193b347b984d9e9d8a08938f"
+            "oid": "205db759f9a0edcfa92210280b1f86fd5261e757"
           },
-          "mergedAt": "2026-10-06T14:06:26Z",
+          "mergedAt": "2026-10-19T03:20:36Z",
           "state": "MERGED",
-          "url": "https://github.com/zzocojoa/haru-word/pull/32"
+          "url": "https://github.com/zzocojoa/haru-word/pull/48"
         }
       ],
-      "preMergeChecks": [
-        {
-          "repo": "zzocojoa/EN_Card",
-          "head": "ae58855aa26aa2782c4bcae28f6d8efd75f3bd22",
-          "mergeable": "MERGEABLE",
-          "checks": []
+      "mainCI": {
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/39194242440",
+        "runId": 39194242440,
+        "head": "205db759f9a0edcfa92210280b1f86fd5261e757",
+        "status": "completed",
+        "conclusion": "success",
+        "nodeVersions": [
+          22,
+          24
+        ],
+        "testsPerNodeVersion": 643,
+        "stepsPerJob": 13,
+        "lintErrors": 0,
+        "existingLintWarnings": 15,
+        "recheckedForDocumentation": true,
+        "rerunForDocumentation": false,
+        "browserTestsIncluded": false
+      },
+      "previousMerge": {
+        "recordedAt": "2026-10-06T14:07:55.780Z",
+        "status": "merged_with_accepted_cpu_observation_limit",
+        "approval": {
+          "recordedAt": "2026-10-06T14:06:02.203Z",
+          "source": "user_message",
+          "confirmation": "승인 진행",
+          "scope": "Merge EN_Card PR11 and haru-word PR32 with historical preparation CPU observation gaps explicitly retained as unverified.",
+          "historicalCpuCoverageComplete": false,
+          "additionalDeploymentAuthorized": false
         },
-        {
-          "repo": "zzocojoa/haru-word",
-          "head": "49e947ac0a8c6581132afa6e731323a60b47f53b",
-          "mergeable": "MERGEABLE",
-          "checks": [
-            {
-              "__typename": "CheckRun",
-              "completedAt": "2026-10-06T11:57:28Z",
-              "conclusion": "SUCCESS",
-              "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459626777/job/112255656977",
-              "name": "Validate (Node 22)",
-              "startedAt": "2026-10-06T11:55:17Z",
-              "status": "COMPLETED",
-              "workflowName": "CI"
+        "merged": [
+          {
+            "repo": "zzocojoa/EN_Card",
+            "number": 11,
+            "baseRefName": "master",
+            "headRefOid": "ae58855aa26aa2782c4bcae28f6d8efd75f3bd22",
+            "mergeCommit": {
+              "oid": "10278124f0f16037f4f695f129d7d80010665b1a"
             },
-            {
-              "__typename": "CheckRun",
-              "completedAt": "2026-10-06T11:57:25Z",
-              "conclusion": "SUCCESS",
-              "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459619776/job/112255635440",
-              "name": "Validate (Node 22)",
-              "startedAt": "2026-10-06T11:55:15Z",
-              "status": "COMPLETED",
-              "workflowName": "CI"
+            "mergedAt": "2026-10-06T14:06:11Z",
+            "state": "MERGED",
+            "url": "https://github.com/zzocojoa/EN_Card/pull/11"
+          },
+          {
+            "repo": "zzocojoa/haru-word",
+            "number": 32,
+            "baseRefName": "main",
+            "headRefOid": "49e947ac0a8c6581132afa6e731323a60b47f53b",
+            "mergeCommit": {
+              "oid": "9bc1d8d2e79eb318193b347b984d9e9d8a08938f"
             },
-            {
-              "__typename": "CheckRun",
-              "completedAt": "2026-10-06T11:57:06Z",
-              "conclusion": "SUCCESS",
-              "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459626777/job/112255657201",
-              "name": "Validate (Node 24)",
-              "startedAt": "2026-10-06T11:55:17Z",
-              "status": "COMPLETED",
-              "workflowName": "CI"
-            },
-            {
-              "__typename": "CheckRun",
-              "completedAt": "2026-10-06T11:57:04Z",
-              "conclusion": "SUCCESS",
-              "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459619776/job/112255635126",
-              "name": "Validate (Node 24)",
-              "startedAt": "2026-10-06T11:55:13Z",
-              "status": "COMPLETED",
-              "workflowName": "CI"
-            }
-          ]
-        }
-      ],
-      "historicalCpuCoverageComplete": false,
-      "actualFiveCardReceiptVerified": true,
-      "deploymentsInMergeStep": 0,
-      "settingsChangesInMergeStep": 0
+            "mergedAt": "2026-10-06T14:06:26Z",
+            "state": "MERGED",
+            "url": "https://github.com/zzocojoa/haru-word/pull/32"
+          }
+        ],
+        "preMergeChecks": [
+          {
+            "repo": "zzocojoa/EN_Card",
+            "head": "ae58855aa26aa2782c4bcae28f6d8efd75f3bd22",
+            "mergeable": "MERGEABLE",
+            "checks": []
+          },
+          {
+            "repo": "zzocojoa/haru-word",
+            "head": "49e947ac0a8c6581132afa6e731323a60b47f53b",
+            "mergeable": "MERGEABLE",
+            "checks": [
+              {
+                "__typename": "CheckRun",
+                "completedAt": "2026-10-06T11:57:28Z",
+                "conclusion": "SUCCESS",
+                "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459626777/job/112255656977",
+                "name": "Validate (Node 22)",
+                "startedAt": "2026-10-06T11:55:17Z",
+                "status": "COMPLETED",
+                "workflowName": "CI"
+              },
+              {
+                "__typename": "CheckRun",
+                "completedAt": "2026-10-06T11:57:25Z",
+                "conclusion": "SUCCESS",
+                "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459619776/job/112255635440",
+                "name": "Validate (Node 22)",
+                "startedAt": "2026-10-06T11:55:15Z",
+                "status": "COMPLETED",
+                "workflowName": "CI"
+              },
+              {
+                "__typename": "CheckRun",
+                "completedAt": "2026-10-06T11:57:06Z",
+                "conclusion": "SUCCESS",
+                "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459626777/job/112255657201",
+                "name": "Validate (Node 24)",
+                "startedAt": "2026-10-06T11:55:17Z",
+                "status": "COMPLETED",
+                "workflowName": "CI"
+              },
+              {
+                "__typename": "CheckRun",
+                "completedAt": "2026-10-06T11:57:04Z",
+                "conclusion": "SUCCESS",
+                "detailsUrl": "https://github.com/zzocojoa/haru-word/actions/runs/37459619776/job/112255635126",
+                "name": "Validate (Node 24)",
+                "startedAt": "2026-10-06T11:55:13Z",
+                "status": "COMPLETED",
+                "workflowName": "CI"
+              }
+            ]
+          }
+        ],
+        "historicalCpuCoverageComplete": false,
+        "actualFiveCardReceiptVerified": true,
+        "deploymentsInMergeStep": 0,
+        "settingsChangesInMergeStep": 0
+      }
     }
   },
   "dateTimeStampCandidate": {
@@ -3651,19 +3710,19 @@
     ]
   },
   "latestVerification": {
-    "scope": "Anonymous Chromium/WebKit at 390x844; user-authenticated Chromium for read-only image-practice checks. This is not the local synthetic-account regression suite.",
-    "evidence": "2026-10-19-ui-text-focus-v140-rollout.json",
+    "scope": "Anonymous Chromium/WebKit 390x844; user-authenticated Chromium image/position checks authorized through UI.",
+    "evidence": "2026-10-19-american-ipa-v141-rollout.json",
     "mainCI": {
-      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39194242440",
-      "runId": 39194242440,
-      "head": "205db759f9a0edcfa92210280b1f86fd5261e757",
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39250069720",
+      "runId": 39250069720,
+      "head": "d914b2bfa2078e810dd3d7fea24aebbc22038df6",
       "status": "completed",
       "conclusion": "success",
       "nodeVersions": [
         22,
         24
       ],
-      "testsPerNodeVersion": 643,
+      "testsPerNodeVersion": 658,
       "stepsPerJob": 13,
       "lintErrors": 0,
       "existingLintWarnings": 15,
@@ -3671,89 +3730,168 @@
       "rerunForDocumentation": false,
       "browserTestsIncluded": false
     },
-    "productionSmoke": "Initial render and revised UI; anonymous Chromium/WebKit editor focus 6/6; authenticated Chromium front/back/front and same-card front reopen.",
+    "productionSmoke": {
+      "anonymousEngines": [
+        {
+          "engine": "chromium",
+          "initialReadyMs": 571,
+          "ipaEditorCases": 3,
+          "focusCases": 3,
+          "assetHashes": 17,
+          "uncaughtErrors": 0
+        },
+        {
+          "engine": "webkit",
+          "initialReadyMs": 1418,
+          "ipaEditorCases": 3,
+          "focusCases": 3,
+          "assetHashes": 17,
+          "uncaughtErrors": 0
+        }
+      ],
+      "authenticated": {
+        "engine": "Chromium",
+        "userSignedIn": true,
+        "frontBackFront": true,
+        "ipa": "/əˈkrɔs/",
+        "positionFlow": "23 → 24 → close/reopen → new tab → reload → 23",
+        "positionPut200": 2,
+        "resumesFront": true,
+        "learningHashUnchanged": true,
+        "positionRestored": true,
+        "revisionDelta": 2
+      },
+      "publicIpa": {
+        "status": 200,
+        "bytes": 2930798,
+        "sha256": "14e9a7a91084624d38dd3c5c431b03b907af2cc5439a298728c8430739c7e38e"
+      },
+      "scope": "Anonymous Chromium/WebKit 390x844; user-authenticated Chromium image/position checks authorized through UI.",
+      "observedHttp": {
+        "anonymousState": 401,
+        "authenticatedState": 200,
+        "authenticatedPosition": 200
+      },
+      "observability": "Anonymous pageerror0; no full console or Worker-log audit; no claim of production-wide zero errors."
+    },
     "dataPreservation": {
-      "learningAndPositionResponseHashesUnchanged": true,
-      "applicationWrites": 0,
-      "scope": "Authenticated image-practice checks; anonymous editor/home checks cannot write learner state."
+      "learningAndPositionResponsesEqualAcrossDeploy": true,
+      "learningResponseEqualAfterVerification": true,
+      "originalPositionEntryRestored": true,
+      "positionRevisionDelta": 2,
+      "successfulPositionPutCount": 2,
+      "scope": "One signed-in account response hashes; not a full-database audit. No learning answer writes or direct database mutation.",
+      "rawPersonalDataRecorded": false
     },
     "startupRootCause": "UNKNOWN",
-    "response401Cause": "not established",
-    "observability": {
-      "uncaughtPageErrors": 0,
-      "anonymous401": "Each anonymous /api/state request returned 401 in the recorded passes. Authenticated baseline/after GETs for state and position returned 200. These observations do not attribute the historical 401 responses.",
-      "workerLogAuditPerformed": false,
-      "consoleErrorsZeroClaim": false,
-      "applicationWritesDuringAuthenticatedChecks": 0,
-      "dataComparison": "Response hashes before/after image-practice verification only; not full database rows before/after deployment."
-    },
+    "response401Cause": "UNKNOWN",
+    "webkitQaTimeoutCause": "UNKNOWN",
+    "observability": "Anonymous pageerror0; no full console or Worker-log audit; no claim of production-wide zero errors.",
     "previousVerification": {
-      "scope": "Read-only v139 metadata and GETs; integrate its retirement behavior on PR46 main. Current integration regression and CI results belong to the new PR, not prior main CI.",
-      "evidence": "2026-10-18-en-card-retirement-integration.json",
-      "productionSmoke": "Root 200; /cards redirects home; card account API 410; retired static index 404. No authenticated browser or learning writes in this observation.",
+      "scope": "Anonymous Chromium/WebKit at 390x844; user-authenticated Chromium for read-only image-practice checks. This is not the local synthetic-account regression suite.",
+      "evidence": "2026-10-19-ui-text-focus-v140-rollout.json",
+      "mainCI": {
+        "url": "https://github.com/zzocojoa/haru-word/actions/runs/39194242440",
+        "runId": 39194242440,
+        "head": "205db759f9a0edcfa92210280b1f86fd5261e757",
+        "status": "completed",
+        "conclusion": "success",
+        "nodeVersions": [
+          22,
+          24
+        ],
+        "testsPerNodeVersion": 643,
+        "stepsPerJob": 13,
+        "lintErrors": 0,
+        "existingLintWarnings": 15,
+        "recheckedForDocumentation": true,
+        "rerunForDocumentation": false,
+        "browserTestsIncluded": false
+      },
+      "productionSmoke": "Initial render and revised UI; anonymous Chromium/WebKit editor focus 6/6; authenticated Chromium front/back/front and same-card front reopen.",
+      "dataPreservation": {
+        "learningAndPositionResponseHashesUnchanged": true,
+        "applicationWrites": 0,
+        "scope": "Authenticated image-practice checks; anonymous editor/home checks cannot write learner state."
+      },
       "startupRootCause": "UNKNOWN",
       "response401Cause": "not established",
+      "observability": {
+        "uncaughtPageErrors": 0,
+        "anonymous401": "Each anonymous /api/state request returned 401 in the recorded passes. Authenticated baseline/after GETs for state and position returned 200. These observations do not attribute the historical 401 responses.",
+        "workerLogAuditPerformed": false,
+        "consoleErrorsZeroClaim": false,
+        "applicationWritesDuringAuthenticatedChecks": 0,
+        "dataComparison": "Response hashes before/after image-practice verification only; not full database rows before/after deployment."
+      },
       "previousVerification": {
-        "scope": "PR44 card flip and existing Site v138; authenticated Desktop in-app browser startup, position save/resume, and read-only learner-state comparison. Unrelated card Workers and historical verification not rechecked.",
-        "evidence": "2026-10-18-image-practice-card-flip-rollout.json",
-        "mainCI": {
-          "runId": 39121755494,
-          "url": "https://github.com/zzocojoa/haru-word/actions/runs/39121755494",
-          "head": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
-          "attempt": 1,
-          "conclusion": "success",
-          "jobs": [
-            {
-              "name": "Validate (Node 22)",
-              "conclusion": "success",
-              "steps": 13,
-              "tests": 665,
-              "pass": 665,
-              "fail": 0,
-              "cancelled": 0,
-              "skipped": 0,
-              "todo": 0,
-              "lintErrors": 0,
-              "existingWarnings": 15
-            },
-            {
-              "name": "Validate (Node 24)",
-              "conclusion": "success",
-              "steps": 13,
-              "tests": 665,
-              "pass": 665,
-              "fail": 0,
-              "cancelled": 0,
-              "skipped": 0,
-              "todo": 0,
-              "lintErrors": 0,
-              "existingWarnings": 15
-            }
-          ],
-          "nodeVersions": [
-            22,
-            24
-          ],
-          "testsPerNodeVersion": 665,
-          "rerunForDocumentation": false
-        },
-        "productionSmoke": "Image/meaning flip, next-card save, close/reopen and page-reload front-side resume passed. Original position restored with revision advanced; learning state unchanged.",
+        "scope": "Read-only v139 metadata and GETs; integrate its retirement behavior on PR46 main. Current integration regression and CI results belong to the new PR, not prior main CI.",
+        "evidence": "2026-10-18-en-card-retirement-integration.json",
+        "productionSmoke": "Root 200; /cards redirects home; card account API 410; retired static index 404. No authenticated browser or learning writes in this observation.",
         "startupRootCause": "UNKNOWN",
-        "observability": "5-minute error-filtered logs: two GET /api/state 401, outcome ok, caller/cause unknown. No observed 5xx or failed outcome in that window.",
+        "response401Cause": "not established",
         "previousVerification": {
-          "scope": "PR39 image practice / existing Site v135; unrelated card Workers and older feature verification were not rechecked.",
-          "evidence": "2026-10-17-image-practice-position-rollout.json",
+          "scope": "PR44 card flip and existing Site v138; authenticated Desktop in-app browser startup, position save/resume, and read-only learner-state comparison. Unrelated card Workers and historical verification not rechecked.",
+          "evidence": "2026-10-18-image-practice-card-flip-rollout.json",
           "mainCI": {
-            "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297",
+            "runId": 39121755494,
+            "url": "https://github.com/zzocojoa/haru-word/actions/runs/39121755494",
+            "head": "9ad8380c6ab05e8164505fe83a9d2e79428af201",
+            "attempt": 1,
             "conclusion": "success",
-            "testsPerNodeVersion": 662,
+            "jobs": [
+              {
+                "name": "Validate (Node 22)",
+                "conclusion": "success",
+                "steps": 13,
+                "tests": 665,
+                "pass": 665,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0,
+                "todo": 0,
+                "lintErrors": 0,
+                "existingWarnings": 15
+              },
+              {
+                "name": "Validate (Node 24)",
+                "conclusion": "success",
+                "steps": 13,
+                "tests": 665,
+                "pass": 665,
+                "fail": 0,
+                "cancelled": 0,
+                "skipped": 0,
+                "todo": 0,
+                "lintErrors": 0,
+                "existingWarnings": 15
+              }
+            ],
             "nodeVersions": [
               22,
               24
-            ]
+            ],
+            "testsPerNodeVersion": 665,
+            "rerunForDocumentation": false
           },
-          "productionSmoke": "Desktop Chrome startup, position save and front-side resume passed; see recorded scope and limits.",
-          "startupRootCause": "UNKNOWN"
+          "productionSmoke": "Image/meaning flip, next-card save, close/reopen and page-reload front-side resume passed. Original position restored with revision advanced; learning state unchanged.",
+          "startupRootCause": "UNKNOWN",
+          "observability": "5-minute error-filtered logs: two GET /api/state 401, outcome ok, caller/cause unknown. No observed 5xx or failed outcome in that window.",
+          "previousVerification": {
+            "scope": "PR39 image practice / existing Site v135; unrelated card Workers and older feature verification were not rechecked.",
+            "evidence": "2026-10-17-image-practice-position-rollout.json",
+            "mainCI": {
+              "url": "https://github.com/zzocojoa/haru-word/actions/runs/39037959297",
+              "conclusion": "success",
+              "testsPerNodeVersion": 662,
+              "nodeVersions": [
+                22,
+                24
+              ]
+            },
+            "productionSmoke": "Desktop Chrome startup, position save and front-side resume passed; see recorded scope and limits.",
+            "startupRootCause": "UNKNOWN"
+          }
         }
       }
     }
@@ -3820,5 +3958,22 @@
     "pr47PostMergeSection": "postMergeAssessment",
     "changesCurrentProduction": false,
     "externalClaimsReverified": false
+  },
+  "americanIpaPublication": {
+    "status": "deployed_and_verified_with_limits",
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/52",
+    "mergeCommit": "d914b2bfa2078e810dd3d7fea24aebbc22038df6",
+    "sitesSource": "3fe640c50cabd12519fc7490361e84b1ad72aed8",
+    "deployedVersion": 141,
+    "deploymentSucceededAt": "2026-10-19T13:42:34.910126+00:00",
+    "evidence": "2026-10-19-american-ipa-v141-rollout.json",
+    "newMigrations": 0,
+    "rollbackVersion": 140,
+    "rollbackPerformed": false,
+    "rollbackPreservesLearningAndPositionData": true,
+    "startupRootCause": "UNKNOWN",
+    "response401Cause": "UNKNOWN",
+    "webkitQaTimeoutCause": "UNKNOWN",
+    "documentationOnlyFollowUp": true
   }
 }

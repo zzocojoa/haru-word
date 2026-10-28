@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "title": "PR #52 미국식 IPA v141 배포·운영 검증 기록",
+  "recordedAt": "2026-10-19T14:01:16.989Z",
+  "status": "deployed_and_verified_with_limits",
+  "site": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "version": 141,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_a5ffb073339c819196b379721eaf82cf",
+    "source": "3fe640c50cabd12519fc7490361e84b1ad72aed8",
+    "deploymentId": "appgdep_6ad61e32feb081918ab81e1faf3579ba",
+    "status": "succeeded",
+    "deploymentSucceededAt": "2026-10-19T13:42:34.910126+00:00",
+    "deploymentSucceededAtKst": "2026-10-19 22:42:34 KST",
+    "timestampMeaning": "Native successful deployment response updated_at; not request start.",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000004314820687d2ae562746c534",
+      "content_hash": "sha256:eac56b9efe1edf4736697ea991a16fd24d5e33a72db34971439675e3ca232707",
+      "size_bytes": 16701440,
+      "file_count": 238
+    }
+  },
+  "github": {
+    "pullRequest": "https://github.com/zzocojoa/haru-word/pull/52",
+    "state": "MERGED",
+    "mergedAt": "2026-10-19T12:11:00Z",
+    "main": "d914b2bfa2078e810dd3d7fea24aebbc22038df6",
+    "reviewedHead": "8b17625d0fe30f1c25b87b79600badf6c22af4b9",
+    "tree": "138158efe7e6f0aed9bb18cfca0172a9e27efc5e",
+    "sourceTreeMatchesSites": true,
+    "mainCI": {
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/39250069720",
+      "runId": 39250069720,
+      "head": "d914b2bfa2078e810dd3d7fea24aebbc22038df6",
+      "status": "completed",
+      "conclusion": "success",
+      "nodeVersions": [
+        22,
+        24
+      ],
+      "testsPerNodeVersion": 658,
+      "stepsPerJob": 13,
+      "lintErrors": 0,
+      "existingLintWarnings": 15,
+      "recheckedForDocumentation": true,
+      "rerunForDocumentation": false,
+      "browserTestsIncluded": false
+    }
+  },
+  "changeSummary": [
+    "사전 v3 3,809항목·3,837발음을 다섯 학습/상세 화면에 연결",
+    "ID·철자·표제어·품사·현재 뜻 일치 시 표시; 이미지 앞면·목록·회상에는 비노출",
+    "명시적 빈 뜻·잘못된 ID·320px/200% 편집창 보호와 기존 듣기 정책 유지"
+  ],
+  "buildAndPackaging": {
+    "successfulPreflightBuildExitCode": 0,
+    "reusedUnchangedBuild": true,
+    "sourceHashesChecked": 26,
+    "archiveFiles": 238,
+    "byteIdenticalFiles": 237,
+    "semanticOnly": [
+      "dist/.openai/hosting.json"
+    ],
+    "localCompressedArchiveSha256": "54e1c27843d4e82b61f81bc928047d27bcaf84ee824e3be5647d32340360b24e",
+    "nativeArchiveHashMeaning": "Server archive_storage is the normalized tar; local .tar.gz SHA256 is a different representation.",
+    "previousLocalBrowserEvidenceHashesChecked": 16,
+    "previousLocalBrowserRerunForDeployment": false
+  },
+  "productionVerification": {
+    "anonymousEngines": [
+      {
+        "engine": "chromium",
+        "initialReadyMs": 571,
+        "ipaEditorCases": 3,
+        "focusCases": 3,
+        "assetHashes": 17,
+        "uncaughtErrors": 0
+      },
+      {
+        "engine": "webkit",
+        "initialReadyMs": 1418,
+        "ipaEditorCases": 3,
+        "focusCases": 3,
+        "assetHashes": 17,
+        "uncaughtErrors": 0
+      }
+    ],
+    "authenticated": {
+      "engine": "Chromium",
+      "userSignedIn": true,
+      "frontBackFront": true,
+      "ipa": "/əˈkrɔs/",
+      "positionFlow": "23 → 24 → close/reopen → new tab → reload → 23",
+      "positionPut200": 2,
+      "resumesFront": true,
+      "learningHashUnchanged": true,
+      "positionRestored": true,
+      "revisionDelta": 2
+    },
+    "publicIpa": {
+      "status": 200,
+      "bytes": 2930798,
+      "sha256": "14e9a7a91084624d38dd3c5c431b03b907af2cc5439a298728c8430739c7e38e"
+    },
+    "scope": "Anonymous Chromium/WebKit 390x844; user-authenticated Chromium image/position checks authorized through UI.",
+    "observedHttp": {
+      "anonymousState": 401,
+      "authenticatedState": 200,
+      "authenticatedPosition": 200
+    },
+    "observability": "Anonymous pageerror0; no full console or Worker-log audit; no claim of production-wide zero errors."
+  },
+  "dataPreservation": {
+    "learningAndPositionResponsesEqualAcrossDeploy": true,
+    "learningResponseEqualAfterVerification": true,
+    "originalPositionEntryRestored": true,
+    "positionRevisionDelta": 2,
+    "successfulPositionPutCount": 2,
+    "scope": "One signed-in account response hashes; not a full-database audit. No learning answer writes or direct database mutation.",
+    "rawPersonalDataRecorded": false
+  },
+  "compatibility": {
+    "newMigrations": 0,
+    "unchangedMigrationFiles": 13,
+    "unchangedSqlFiles": 6,
+    "d1Tables": 9,
+    "bindings": [
+      "DB",
+      "BUCKET"
+    ],
+    "environmentRevision": 72,
+    "environmentEntries": 9,
+    "environmentUnchanged": true,
+    "accessMode": "public",
+    "accessRevision": 4,
+    "accessUnchanged": true,
+    "apiBackupAndPositionRevisionContractPreserved": true
+  },
+  "rollback": {
+    "performed": false,
+    "reason": "No application regression observed in requested production checks.",
+    "targetVersion": 140,
+    "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0b533db8cddc8191a2baebff038a61fd",
+    "retainLearningAndPositionData": true,
+    "noReverseSql": true,
+    "noOldBackupOverwrite": true,
+    "source": "f5925ec0b70ce5f6e12de3596e2bed927115e73c",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000002db08206ace64a6b45516778",
+      "content_hash": "sha256:18a6d312203ecda19f8cab6822c448c84ee63c295283fb8949e707bedd3492d1",
+      "size_bytes": 13332480,
+      "file_count": 237
+    },
+    "steps": [
+      "확정된 운영 회귀와 영향을 기록하고 복구 승인 범위를 확인한다.",
+      "저장된 v140을 기존 Sites에 재게시한다.",
+      "학습·위치 데이터를 보존하고 역방향 SQL·위치 테이블 삭제·과거 백업 덮어쓰기를 하지 않는다.",
+      "초기 실행·이미지 연습·위치 재개와 데이터 보존을 확인한다."
+    ]
+  },
+  "unknownCauses": {
+    "startup": "UNKNOWN",
+    "historical401": "UNKNOWN",
+    "webkitQaTimeout": "UNKNOWN",
+    "relationship": "Not established; successful smoke checks do not establish root causes or absence."
+  },
+  "limitations": [
+    "WebKit used an anonymous desktop engine at mobile dimensions; authenticated image/position checks used Chromium.",
+    "Real iPhone, VoiceOver and actual audio playback remain unverified.",
+    "No real learning answer, AI call, settings change or backup restore was performed.",
+    "Learning hashes compare the signed-in account state; this is not a full-database audit.",
+    "Position revision advanced by 2 for the authorized move and return; original card was restored.",
+    "Successful startup and observed anonymous 401 do not establish causes of historical startup/401/WebKit timeout."
+  ],
+  "toolingNotes": [
+    "CUA initialization failed; installed browse fallback used with direct user login. No browser/skill upgrade or settings change.",
+    "Official packaging first failed on Windows bash resolution and Node22 child runtime; retried with existing Git Bash/Node24 and process-only PATH/TAR_OPTIONS. Same source and artifacts, no app change."
+  ],
+  "preservation": {
+    "dirtyPaths": 176,
+    "statusHeadIndexDiffAndBytesUnchanged": true,
+    "allLocalBranchesUnchanged": true,
+    "reviewedWorktreeClean": true
+  },
+  "documentationFollowUp": {
+    "additionalDeployment": false,
+    "settingsChanged": false,
+    "productionWrites": false,
+    "appTestsRerun": false,
+    "nativeReadOnlyRecheck": "2026-10-19T13:58:25.346Z"
+  },
+  "evidence": {
+    "localRoot": "work/pr52-rollout-20261019",
+    "resultSha256": "200e0d3808e0a0908ac1d66ca7b41b9988165c73d3b0ada0205071307db7b7f5",
+    "files": {
+      "after.js": "fa8d074cae71050143af51f01ecf1556ba04cdcc889f025ebd735f07fa39eab5",
+      "authenticated-after.json": "8a3db1feb9decba3eb56817ba2c911b1bfd86a58087c9d23161b3bd9d2f1468c",
+      "authenticated-baseline.js": "3f9d84e98e2b8d3e17b73e90cf56dae7bdfd09d293e5b58afb51aab964bc2509",
+      "authenticated-before.json": "8a1df9c53cb2977d03deb42b3e388b21202e6ec6d369359f35ca1e2c2df85864",
+      "authenticated-postdeploy.json": "5a92624bf2f58cf5326af6976dfcb83c6aba1cd878d0c3eb59266a689ebc3a24",
+      "chromium-editor.png": "73220d8b43398f66c316559ec002149818b5325be976ef1ccdfc43a74aff0da8",
+      "chromium-home.png": "3b959c2626b1d3b3bd867ebdbbb47e4196e8e22c777a056fda5097746757ca03",
+      "chromium-production-readonly.json": "ec8a5742251ff0f71973528e2793c93465d92e5ef26604fcba87aabec02eef4e",
+      "finalize.cjs": "c6bab66bb2e40d23eb666869acc8321b81c9015da2bacfd533e4c4fb43ed3fdc",
+      "image-back.json": "e6e3f13936ca88de36d32a0e168a7ab6c9deab88042f93bc9db238fece2643af",
+      "image-back.png": "73950f7066910a0597dc3428d3510e0ca542dec7a0d83a368e92acabffe146a1",
+      "image-front.json": "b69ac4d571a95432191ff906240c992b203571cf94f2ca3d83c2ff8309bd2248",
+      "native-result.json": "d1d80d8cae64c89f18e67a9989fac2663efdf7a8bc49da58aef3c8106746114f",
+      "new-tab-resume.json": "ade433462a5a737dac59a5d4a017b95a7e8828398c7b3f4ced76d5900dcb59fd",
+      "package-verification.json": "2cf31285f6226a4481e3df7f784ff2205d6dff35dff5c78bc1bf1c46da03956f",
+      "position-moved.json": "e61283834a3dcf7fed0b403e84c7b23dd6bae6cb69a11e36c376c39973ccec09",
+      "position-restored-ui.json": "ea956778129c2263768c478cb1cc49527a326344682c5c56f4c1481b8db9c7e8",
+      "preparation.json": "3c810969a96461b8d52db6c61d4f3333c74c770dcd5560886480ea8ef8e8d282",
+      "prepare.cjs": "6f8f20bba187fe66f4135c56012a037c6da2661d4b679a8f7b545e2af689b739",
+      "production-readonly.cjs": "38689f29002e0bb83564d534cb39b8187addb6c7c6b42dfa18ff65801393b7cd",
+      "reload-resume.json": "01b408e3fc4055a0a7c533c955a1efacf6eb3fb89ee1f8a01b444a835f91aafa",
+      "reopen.json": "5d8ed725193b8a39f86b655da9bdbf3f7cb8445eaea26bdf7d1f8f5966e1b0d5",
+      "restore-before.json": "5266c63eb253f5742e9c23ab6a747b3da53fe9ca38f9bf7854ef7e0408f1b733",
+      "verify-package.cjs": "1001614a3c69e0ece71e1a8df1e43ba8d8a65104f8404ed0c9e8abd700f5fe0f",
+      "webkit-editor.png": "78ef6b1be7cfb9b069cdbef9d5d2839be5fea0d1447910719fd4025398137a66",
+      "webkit-home.png": "c321a7f0489f59de09a8609c92e566240e911966c67aa031163a7dbde3d81314",
+      "webkit-production-readonly.json": "64c5d27a2cb9cb2d0e83b13f32736146947c8158c73224d46cae4779b99a291a"
+    },
+    "preflight": {
+      "path": "work/pr52-deploy-readiness-20261019/readiness.json",
+      "sha256": "504403b612241bbd44032b5947fb58c82739530e4480aad7a6ef47f542da3b78"
+    },
+    "mainCiLog": {
+      "path": "work/pr52-merge-20261019/main-ci.log",
+      "sha256": "d45b81a9e5023fc1e21b4a7f136584cd14b5e41587ef80f93452227b5f431f9a"
+    }
+  }
+}
