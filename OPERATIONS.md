@@ -1,9 +1,49 @@
 # 하루단어 운영 안내
 
+<a id="v141-rollout"></a>
+## 미국식 IPA v141 · 2026-10-19
+
+[PR #52](https://github.com/zzocojoa/haru-word/pull/52) 병합 main `d914b2bfa2078e810dd3d7fea24aebbc22038df6`와 전체 Git tree가 같은 Sites `3fe640c50cabd12519fc7490361e84b1ad72aed8`를 [기존 Sites](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/)에 게시했다. native publish `appgdep_6ad61e32feb081918ab81e1faf3579ba`는 **22:42:34 KST**에 succeeded를 반환했다. 최신 운영은 **v141**, 복구 기준은 학습·위치 데이터를 보존하는 **v140**이다. 아래 v140 이하 기록은 당시 결과이며 현재 복구 절차를 대신하지 않는다.
+
+### 게시 근거와 호환성
+
+- [main CI](https://github.com/zzocojoa/haru-word/actions/runs/39250069720) Node22/24 각 **658/658·13단계 성공**, lint 오류0·기존15경고. CI에는 브라우저 QA가 없다. 문서 정리에서 CI 상태만 재확인했고 검사를 재실행하지 않았다.
+- 동일 입력의 성공 빌드(exit 0) **238파일**을 재사용하고 해시를 검증했다. 공식 패키지 237파일은 바이트 동일, hosting manifest1개는 JSON 공백만 달라 내용 동일하다. 운영 JS/CSS는 두 엔진 각각17개가 빌드와 일치하며 공개 IPA JSON 2,930,798바이트도 SHA256이 같다.
+- 새 마이그레이션0, 기존 SQL6개·SQL/meta13파일과 DB9테이블·DB/R2 바인딩 유지. 환경 revision72/9항목 전후 완전 일치, public 접근 revision4 유지. IPA는 학습 기록·백업에 저장하지 않으며 기존 API와 위치 revision 보호를 유지한다.
+
+### 운영 확인
+
+| 확인 | 결과와 범위 |
+| --- | --- |
+| 초기 실행·IPA | 익명 Chromium/WebKit 390×844, bar/favorite/some 편집창 IPA 각3건·초점 복귀 각3건 통과. 초기 준비 관측571ms/1418ms는 각1회이며 성능 보증이 아님 |
+| 이미지 연습 | 사용자 직접 로그인 Chromium에서 이미지→뜻·IPA→이미지, across /əˈkrɔs/ 표시, 앞면 IPA 비노출 확인 |
+| 위치 저장·재개 | UI로 23→24 이동, PUT200·저장됨. 닫기/재개·새 탭·새로고침 모두24번 앞면으로 재개 |
+| 원위치·학습 보존 | 다른 기기의 변경이 없음을 확인한 후 UI로23번 복귀·PUT200. 원래 entryId 유지, 독립 revision +2. 배포 전후 학습·위치 응답 지문 동일, 최종 학습 응답도 동일. 전체 DB 감사는 아님 |
+| 관측 | 두 익명 엔진 pageerror0, /api/state401; 인증 state/position GET200. 전체 콘솔·Worker 로그 무오류로 확대하지 않음 |
+
+운영 쓰기는 사용자가 승인한 위치 이동·복귀 두 번뿐이다. 새 학습 답안·AI 호출·설정·백업 복원은 실행하지 않았다. 원래 작업 폴더 미커밋176개와 기존 로컬 브랜치는 보존했다. [배포·검증 증거](docs/releases/2026-10-19-american-ipa-v141-rollout.json)에 소스·빌드·검증 지문을 기록했다.
+
+### 실패 기록·미검증 범위
+
+CUA 연결 실패는 설치된 browse 브라우저와 사용자 직접 로그인으로 보완했다. 게시 전 공식 패키지 도구의 Windows Bash 경로 및 하위 Node 런타임 실패는 기존 Git Bash·Node24와 해당 프로세스의 PATH/TAR_OPTIONS로 해결했다. 앱·플러그인·운영 설정을 변경한 수정이 아니다.
+
+**startup·과거401·뜻 변경 뒤 한 번 발생한 WebKit QA 30초 시간 초과의 원인은 모두 미확정**이다. 이번 정상 실행과 익명401을 과거 원인의 증거로 사용하지 않는다. 실제 iPhone·VoiceOver·오디오 청취·인증 WebKit 이미지/위치·운영 기기 간 충돌/장애 주입은 미검증이다. 다섯 IPA 화면의 전체 회귀는 기존 로컬 가상 계정 검증이며 이번 운영 검증은 편집창·이미지 뒷면 중심이다. 운영 웹폰트가 로드되는 일반 조건에서 확인했으나 지연·실패 주입은 하지 않았다.
+
+### 위험과 v140 복구
+
+위험은 뜻·품사 매칭, 발음 레이아웃과 지연 청크 로딩 회귀다. 요청한 확인 범위에서 결함이 없어 롤백하지 않았다. 과거 실패 원인 미확정은 그대로 남는다.
+
+1. 확정된 운영 회귀와 복구 승인 범위를 확인한다. 이번 문서 정리는 배포·복구 실행 요청이 아니다.
+2. 기존 저장 **v140** `appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0b533db8cddc8191a2baebff038a61fd`를 재게시한다. 소스는 `f5925ec0b70ce5f6e12de3596e2bed927115e73c`이며 UI 문구·초점 복귀와 카드 종료를 포함한다.
+3. 학습·위치 테이블과 새 데이터를 보존한다. 역방향 SQL·위치 행 삭제·과거 백업 덮어쓰기·설정 복원은 하지 않는다.
+4. 초기 실행·이미지 연습·위치 재개와 데이터 보존을 확인하고 결과를 기록한다.
+
+이번 후속은 문서와 PR 기록 갱신이며 추가 게시·설정 변경·운영 쓰기·브라우저 재실행은 없다.
+
 <a id="v140-rollout"></a>
 ## UI 문구·초점 복귀 v140 · 2026-10-19
 
-[PR #48](https://github.com/zzocojoa/haru-word/pull/48)의 병합 main `205db759f9a0edcfa92210280b1f86fd5261e757`과 전체 Git tree가 같은 Sites 소스 `f5925ec0b70ce5f6e12de3596e2bed927115e73c`를 [기존 Sites](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/)에 게시했다. native publish `appgdep_6ad591ffe2d881918bbe14f81ab00f5c`가 **12:44:20 KST**에 succeeded를 반환했다. 사용자에게 보이는 최신 버전은 **v140**이다. 아래 v139 이하 문단은 각 시점의 이력이며 현재 복구 기준은 이 절을 따른다.
+[PR #48](https://github.com/zzocojoa/haru-word/pull/48)의 병합 main `205db759f9a0edcfa92210280b1f86fd5261e757`과 전체 Git tree가 같은 Sites 소스 `f5925ec0b70ce5f6e12de3596e2bed927115e73c`를 [기존 Sites](https://wordgrain-oxford-study.hoihou-o.chatgpt.site/)에 게시했다. native publish `appgdep_6ad591ffe2d881918bbe14f81ab00f5c`가 **12:44:20 KST**에 succeeded를 반환했다. 당시 게시 버전은 **v140**이었다. 최신 운영과 복구 기준은 위 [v141 절차](#v141-rollout)를 따른다. 아래는 당시 검증 이력이다.
 
 ### 게시 근거와 운영 확인
 
@@ -46,13 +86,13 @@ v139 게시 당시 기존 Sites는 **v139**, 소스 `effc203cb09f9a6ed47b81f9bec
 ### PR #47 병합·추가 배포 판단 이력
 
 <a id="pr47-post-merge-history"></a>
-**2026-10-18 당시 판단이며 최신 운영은 v140이다.** [PR #47](https://github.com/zzocojoa/haru-word/pull/47)은 23:41:39 KST `main@85d95ae51e14b2466d1acbf8a39c2416d2f2e326`로 병합됐다. 검토한 head `7d0a684`와 전체 Git tree가 같다. [당시 main CI](https://github.com/zzocojoa/haru-word/actions/runs/39137142158) attempt1에서 Node22/24 각각 단위636/636·13단계 성공, lint 오류0·기존15경고였다.
+**2026-10-18 당시 판단이다. 최신 운영은 위 v141 절차를 따른다.** [PR #47](https://github.com/zzocojoa/haru-word/pull/47)은 23:41:39 KST `main@85d95ae51e14b2466d1acbf8a39c2416d2f2e326`로 병합됐다. 검토한 head `7d0a684`와 전체 Git tree가 같다. [당시 main CI](https://github.com/zzocojoa/haru-word/actions/runs/39137142158) attempt1에서 Node22/24 각각 단위636/636·13단계 성공, lint 오류0·기존15경고였다.
 
 23:47:26 KST에 해당 main과 v139 소스 `effc203`를 비교했을 때 실행 코드·정적 자산·빌드 입력·의존성·마이그레이션·바인딩은 동일했다. 전체 차이는 문서13개와 익명 호출 QA1개라 **그 시점에는 추가 배포가 필요 없었다.** 이후 PR #48의 v140 게시와 구분하며 최신 main 전체에 이 결론을 적용하지 않는다.
 
 당시 읽기 확인은 Site active/public4·v139 배포 succeeded·환경72/9개 일치와 익명 GET 홈200·카드 주소307·종료 API410·정적404다. 새 로그인 브라우저·운영 JS/CSS 전수 바이트 대조·운영 쓰기는 하지 않았고, 로컬 회귀6개는 PR 작성 당시 결과다. CI에는 브라우저 검사가 없으며 구조화 QA 집계의 기존 미완료도 완료로 바꾸지 않는다. **startup·기존 401 원인은 계속 미확정**이다.
 
-[원래 후속 객체](docs/releases/2026-10-18-en-card-retirement-integration.json)의 `postMergeAssessment`와 [출처·과거 출시 증거 11개](docs/HISTORICAL_RELEASE_EVIDENCE_2026-10-19.md)를 보존했다. 외부 자원 삭제 등 과거 주장을 이번 작업에서 재검증하지 않았다. 현재 복구는 위 [v140 절차](#v140-rollout)를 따르며, 이번 기록 반영에서 추가 배포·설정 변경·운영 데이터 쓰기는 없다.
+[원래 후속 객체](docs/releases/2026-10-18-en-card-retirement-integration.json)의 `postMergeAssessment`와 [출처·과거 출시 증거 11개](docs/HISTORICAL_RELEASE_EVIDENCE_2026-10-19.md)를 보존했다. 외부 자원 삭제 등 과거 주장을 이번 작업에서 재검증하지 않았다. 현재 복구는 위 [v141 절차](#v141-rollout)를 따르며, 이번 기록 반영에서 추가 배포·설정 변경·운영 데이터 쓰기는 없다.
 
 ## 이미지 연습 카드 뒤집기 v138 · 2026-10-18
 
@@ -93,7 +133,7 @@ v139 게시 당시 기존 Sites는 **v139**, 소스 `effc203cb09f9a6ed47b81f9bec
 
 ## 이미지 연습 버튼 간격 v137 · 2026-10-18
 
-**과거 배포 기록이다. 최신 운영 상태와 복구 기준은 위 v140 절차를 따른다.** [PR #42](https://github.com/zzocojoa/haru-word/pull/42)의 `main@0fc399b0c123ea6794eb71c0e61101028e1bb4bf`를 기존 Sites v137로 게시했고 **18:14:31 KST**에 성공을 확인했다. [v137 출시 JSON](docs/releases/2026-10-18-image-practice-spacing-rollout.json)은 원래 검증 시각·소스·아카이브·증거 17개의 지문을 보존한 당시 기록이다.
+**과거 배포 기록이다. 최신 운영 상태와 복구 기준은 위 v141 절차를 따른다.** [PR #42](https://github.com/zzocojoa/haru-word/pull/42)의 `main@0fc399b0c123ea6794eb71c0e61101028e1bb4bf`를 기존 Sites v137로 게시했고 **18:14:31 KST**에 성공을 확인했다. [v137 출시 JSON](docs/releases/2026-10-18-image-practice-spacing-rollout.json)은 원래 검증 시각·소스·아카이브·증거 17개의 지문을 보존한 당시 기록이다.
 
 - Desktop Chrome에서 홈 이미지 연습 버튼 상단 간격 **0→12px**, 높이 **48px**를 확인했다. 초기 실행, 이미지 640×853 로드, 당시 단어 확인 버튼으로 뒷면 표시, 닫기 후 초점 복귀·같은 카드 앞면 재개가 통과했다. v138의 양방향 클릭·새 위치 저장 검증과 구분한다.
 - **새 위치 쓰기·카드 이동·새로고침 후 위치 재개·DB 행별 대조는 v137에서 미실시**다. 실제 iPhone/VoiceOver·기기 간 충돌·장애 주입도 미검증이다. 앞선 로컬 Chromium/WebKit × 320/390/865/1440px × 글자 100/200%의 16개 조합은 배포 때 반복하지 않았다.
