@@ -39,11 +39,14 @@ import { StartupScreen } from './startup-screen';
 import { useLearningTools } from './learning/use-learning-tools';
 import { useTabNavigation } from './learning/use-tab-navigation';
 import { StudyRecoveryProvider } from './study/study-recovery';
+import { AiRequestProvider } from './ai-request-context';
+import { selectedAiModel } from '@/lib/ai-models';
+import { LocalDraftProvider } from './local-draft-context';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 const StudySession = deferredView(() => import('./study-session'), feature => feature.StudySession, '학습');
 export default function LearningApp(props: { userId?: string | null; initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; imagePilotEnabled?: boolean }) {
-  return <NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider>;
+  return <LocalDraftProvider ownerId={props.userId??null}><NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider></LocalDraftProvider>;
 }
 function LearningScreens({
   userId = null,
@@ -160,6 +163,7 @@ function LearningScreens({
   );
   if (store.initializing) return <StartupScreen />;
   return (
+    <AiRequestProvider modelId={selectedAiModel(state.settings)}>
     <DeferredReloadBlocked.Provider value={saving || store.restoring ? 'busy' : unsaved ? 'unsaved' : false}>
     <main
       className="shell"
@@ -529,5 +533,6 @@ function LearningScreens({
       <SourceDialog open={about} onOpenChange={setAbout} />
     </main>
     </DeferredReloadBlocked.Provider>
+    </AiRequestProvider>
   );
 }

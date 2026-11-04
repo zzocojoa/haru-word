@@ -1,9 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from 'react';
-import { sentenceFeedbackSchema, type SentenceFeedback } from '@/lib/sentence-feedback';
+import type { SentenceFeedback } from '@/lib/sentence-feedback';
 import { clientFeedbackIssue } from '@/lib/client-feedback-error';
-import { FeedbackIssueError, issueFromResponse, type FeedbackIssue } from '@/lib/feedback-issue';
+import { FeedbackIssueError, type FeedbackIssue } from '@/lib/feedback-issue';
 import { requestSentenceFeedback } from '@/lib/learning-api';
+import { useAiRequests } from '../ai-request-context';
+import {useFeedbackRecovery} from '../use-feedback-recovery';
+import type {FeedbackContextRequest} from '@/lib/feedback-context';
 
 type Options = {
   sessionId: string;
@@ -12,9 +15,12 @@ type Options = {
   busy: boolean;
   onPending: (value: boolean) => void;
   onFeedback: (feedback: SentenceFeedback) => Promise<boolean>;
+  context?:FeedbackContextRequest;
 };
 
-export function useSentenceFeedback({ sessionId, entryId, sentence, busy, onPending, onFeedback }: Options) {
+export function useSentenceFeedback({ sessionId, entryId, sentence, busy, onPending, onFeedback,context={} }: Options) {
+  const { modelId, beginRequest } = useAiRequests();
+  const recovery=useFeedbackRecovery('word',JSON.stringify([sessionId,entryId]),{sentence,modelId,fingerprint:context.expectedContextFingerprint});
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<FeedbackIssue | null>(null);
   const request = useRef<AbortController | null>(null);
@@ -24,25 +30,25 @@ export function useSentenceFeedback({ sessionId, entryId, sentence, busy, onPend
   async function check() {
     if (lock.current || busy || !sentence.trim()) return;
     lock.current = true;
+    const expectedModelId = modelId;
+    const releaseRequest = beginRequest();
     setPending(true);
     onPending(true);
     setError(null);
     const controller = new AbortController();
     request.current = controller;
     try {
-      const result = await requestSentenceFeedback({ sessionId, entryId, sentence: sentence.trim() }, controller.signal);
-      if (!result.ok) throw new FeedbackIssueError(issueFromResponse(result.data, result.response.status));
-      const parsed = sentenceFeedbackSchema.safeParse(result.data?.feedback);
-      if (!parsed.success) throw new FeedbackIssueError({ code: 'invalid_response' });
+      const {feedback}=await recovery.run(sentence.trim(),expectedModelId,metadata=>requestSentenceFeedback({sessionId,entryId,sentence:sentence.trim(),expectedModelId,...context,...metadata},controller.signal),controller.signal,context);
       if (controller.signal.aborted) return;
-      if (parsed.data.original !== sentence.trim()) throw new FeedbackIssueError({ code: 'stale_input' });
+      if (feedback.original !== sentence.trim()||feedback.requestedModel!==expectedModelId||context.expectedContextFingerprint&&feedback.contextFingerprint!==context.expectedContextFingerprint) throw new FeedbackIssueError({ code: 'stale_input' });
       // The shared save banner owns persistence errors and clears them after retry.
-      await onFeedback(parsed.data);
+      await onFeedback(feedback);
     } catch (e) {
       if (!controller.signal.aborted) {
         setError(clientFeedbackIssue(e));
       }
     } finally {
+      releaseRequest();
       lock.current = false;
       if (!controller.signal.aborted) {
         setPending(false);
@@ -51,5 +57,5 @@ export function useSentenceFeedback({ sessionId, entryId, sentence, busy, onPend
     }
   }
 
-  return { pending, error, check };
+  return { pending, error, check,retainedFeedback:recovery.retainedFeedback,recoveryPending:recovery.hasPending };
 }

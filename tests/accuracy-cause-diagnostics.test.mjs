@@ -27,8 +27,7 @@ const content = () => ({ meaningUsage: 'appropriate', grammar: 'natural', correc
   structure: { status: 'available', translation: '나는 책을 읽어요.', parts: [{ wordCount: 3, role: 'X', explanation: '검증용입니다.' }], note: '' } });
 const reject = value => { let error; try { wire.parseChunkedFeedback(JSON.stringify(value), 'I read books.', helper.accuracyModels.google); } catch (e) { error = e; }
   assert.ok(error); return error; };
-const bodyFor = (value, provider) => provider === 'google' ? { candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify(value) }] } }] }
-  : { model: helper.accuracyModels.groq, choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(value) } }] };
+
 
 test('wire failures report the exact fixed field and category without retaining any value', () => {
   const variants = [
@@ -77,40 +76,12 @@ test('current prompt, wire schema and all60 request hashes remain frozen', async
     assert.equal(hashes.promptHash, published.promptHashes[sample.domain]);
   }
 });
-test('both provider transports retain safe detail internally and learner error body stays unchanged', async () => {
-  for (const provider of ['google', 'groq']) {
-    const value = content(); value.structure.parts[0].wordCount = 'SECRET';
-    await assert.rejects(helper.evaluateFreeAccuracyCase({ google_api: 'test-only', groq_api: 'test-only' }, provider, helper.accuracyCases[0],
-      async () => Response.json(bodyFor(value, provider))), error => {
-      assert.equal(error.validationDetail.issues[0].field, 'structure.parts[].wordCount');
-      assert.equal(error.validationDetail.issues[0].reason, 'type');
-      const learner = issue.feedbackErrorBody(error.code, error.issue);
-      assert.equal(learner.validationDetail, undefined); assert.equal(learner.diagnostic, undefined);
-      assert.doesNotMatch(JSON.stringify(error), /SECRET/); return true;
-    });
-  }
+test('offline historical parser retains safe detail while learner error bodies exclude diagnostics',()=>{
+ for(const provider of ['google','groq']){const value=content();value.structure.parts[0].wordCount='SECRET';let error;try{wire.parseChunkedFeedback(JSON.stringify(value),'I read books.',helper.accuracyModels[provider]);}catch(e){error=e;}assert.ok(error);assert.equal(error.validationDetail.issues[0].field,'structure.parts[].wordCount');assert.equal(error.validationDetail.issues[0].reason,'type');const learner=issue.feedbackErrorBody('provider_invalid_response');assert.equal(learner.validationDetail,undefined);assert.equal(learner.diagnostic,undefined);assert.doesNotMatch(JSON.stringify(error),/SECRET/);}
 });
-test('only authenticated fixed-case comparison exposes safe detail, legacy and closed routes do not', async () => {
-  const token = 'e'.repeat(64), original = globalThis.fetch; let calls = 0;
-  const request = body => new Request('https://study.test/api/english-accuracy-evaluation', { method: 'POST', headers: {
-    Origin: 'https://study.test', 'Content-Type': 'application/json', 'X-English-Accuracy-Token': token }, body: JSON.stringify(body) });
-  try {
-    Object.assign(accuracyDiagnosticsEnv, { english_accuracy_token: token, english_accuracy_expires: new Date(Date.now() + 60000).toISOString(),
-      english_accuracy_profile: 'chunked-free-v1', google_api: 'test-only', groq_api: 'test-only' });
-    globalThis.fetch = async url => { calls++; const v = content(); v.structure.parts[0].role = 'SECRET'; return Response.json(bodyFor(v, url.includes('googleapis') ? 'google' : 'groq')); };
-    for (const provider of ['google', 'groq']) {
-      const response = await route.POST(request({ caseId: fixture.cases[0].id, provider, comparison: 'chunked-free-v1' }));
-      assert.equal(response.status, 502); const result = await response.json();
-      assert.deepEqual(result.validationDetail, { kind: 'schema', issues: [{ field: 'structure.parts[].role', reason: 'enum' }], truncated: false });
-      assert.doesNotMatch(JSON.stringify(result), /SECRET/);
-    }
-    delete accuracyDiagnosticsEnv.english_accuracy_profile;
-    const legacy = await (await route.POST(request({ caseId: fixture.cases[0].id, provider: 'google', round: 1 }))).json();
-    assert.equal(legacy.validationDetail, undefined);
-    delete accuracyDiagnosticsEnv.english_accuracy_token;
-    const closed = await route.POST(request({ caseId: fixture.cases[0].id, provider: 'google', comparison: 'chunked-free-v1' }));
-    assert.equal(closed.status, 404); assert.equal(calls, 3);
-  } finally { globalThis.fetch = original; for (const key of Object.keys(accuracyDiagnosticsEnv)) delete accuracyDiagnosticsEnv[key]; }
+test('retired diagnostic endpoint exposes no historical or private detail and makes no provider request',async t=>{
+ let calls=0;t.mock.method(globalThis,'fetch',async()=>{calls++;throw Error('Forbidden');});Object.assign(accuracyDiagnosticsEnv,{english_accuracy_token:'e'.repeat(64),english_accuracy_expires:new Date(Date.now()+60000).toISOString(),english_accuracy_profile:'chunked-free-v1',google_api:'test-only',groq_api:'test-only'});
+ for(const provider of ['google','groq']){const response=await route.POST(new Request('https://study.test/api/english-accuracy-evaluation',{method:'POST',body:JSON.stringify({caseId:fixture.cases[0].id,provider,comparison:'chunked-free-v1'})}));assert.equal(response.status,410);assert.deepEqual(await response.json(),{code:'legacy_evaluation_disabled'});}assert.equal(calls,0);
 });
 test('collector persists only bounded, matching details and completed recovery does no HTTP', async () => {
   const digest = v => createHash('sha256').update(JSON.stringify(v)).digest('hex'), cases = helper.accuracyCases, profiles = {};
@@ -181,20 +152,20 @@ process.on('exit',()=>writeFileSync(${JSON.stringify(counter)},JSON.stringify({m
   const ledger = { comparison: 'chunked-free-v1', approvedCalls: 120, freeTierConfirmation: 'human-user', previousHash: digest(previous),
     ...fixtureHashes, sourceCommit, profiles, models, providerStops: {}, attempts, completed: true };
   const config = { origin: 'https://wordgrain-oxford-study.hoihou-o.chatgpt.site', evaluationToken: 'f'.repeat(64), sourceCommit };
-  const run = () => execFileSync(process.execPath, ['--import', pathToFileURL(preload).href, resolve(directory, 'scripts/evaluate-free-feedback.mjs'), '--live', '--confirmed-free-tier', '--approved-calls', '120'],
+  const run = () => execFileSync(process.execPath, ['--import', pathToFileURL(preload).href, resolve(directory, 'scripts/evaluate-free-feedback.mjs'), '--offline', '--confirmed-free-tier', '--approved-calls', '120'],
     { cwd: directory, env: { ...process.env, CI: '' }, input: JSON.stringify(config) + '\n', encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
   for (const completed of [true, false]) {
     ledger.completed = completed; put('.sites-runtime/english-accuracy/chunked-free-v1/ledger.json', ledger);
     const output = run(); assert.ok(JSON.parse(output.trim().split(/\r?\n/).at(-1)).complete);
-    assert.deepEqual(JSON.parse(readFileSync(counter, 'utf8')), { mockedPreflightRequests: completed ? 0 : 1, actualProviderCalls: 0 });
+    assert.deepEqual(JSON.parse(readFileSync(counter, 'utf8')), { mockedPreflightRequests: 0, actualProviderCalls: 0 });
     const saved = JSON.parse(readFileSync(resolve(directory, '.sites-runtime/english-accuracy/chunked-free-v1/ledger.json'), 'utf8'));
     assert.equal(saved.completed, true); assert.equal(saved.attempts.length, 120); assert.deepEqual(saved.attempts, attempts);
   }
   // Restore only the reviewed main() omission and prove both actual CLI paths
   // fail before even the mocked preflight, with the source guard still valid.
-  const cli = readFileSync('scripts/evaluate-free-feedback.mjs', 'utf8'), mainStart = cli.indexOf('async function main(){');
-  const body = cli.slice(mainStart); assert.equal(body.split(',parseValidationDetail);').length - 1, 2);
-  put('scripts/evaluate-free-feedback.mjs', cli.slice(0, mainStart) + body.replaceAll(',parseValidationDetail);', ');'));
+  const cli = readFileSync('scripts/evaluate-free-feedback.mjs', 'utf8'), mainStart = cli.search(/async function main\(\)\s*\{/);
+  const body = cli.slice(mainStart); assert.equal([...body.matchAll(/,\s*parseValidationDetail\);/g)].length, 2);
+  put('scripts/evaluate-free-feedback.mjs', cli.slice(0, mainStart) + body.replace(/,\s*parseValidationDetail\);/g, ');'));
   git(['add', 'scripts/evaluate-free-feedback.mjs']); git(['-c', 'user.name=Synthetic test', '-c', 'user.email=test@example.invalid', 'commit', '-m', 'Restore missing validator mutation']);
   ledger.sourceCommit = config.sourceCommit = git(['rev-parse', 'HEAD']);
   for (const completed of [true, false]) {

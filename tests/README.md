@@ -1,5 +1,7 @@
 # 학습 앱 검증
 
+- 판단 v3: `remediation-judgment.test.mjs`, `judgment-api.test.mjs`, `ai-contract.test.mjs`, `recoverable-feedback.test.mjs`는 독립 판정·원문 보존·문맥 질문·가시 설명·v1~v4 입력과 신구 저장/복원을 검사한다. `openai-migration-qa.cjs`, `local-draft-qa.cjs`, `feedback-correction-qa.cjs`는 루프백 가상 계정/합성 UI에서 명시 문맥, 비교/되돌리기, 응답 유실·강제 종료·빈 값·계정 전환을 검사한다. 기존 평가 원장은 수정하지 않으며 실제 영어 품질은 별도 동결 평가로 확인한다.
+
 - `ux-text.test.mjs`: UI 표시와 저장 계약의 분리를 검사한다. 두 AI 전송 고지·이미지 위치의 조회 실패/저장 결과 미확인, AI 오류 47종의 안전한 진단·학습자 안내, 상세/단독 출처의 참고 고지, 양방향 회상 정답 은닉과 도움 사용, 긴 원문 보존, CSV 24개 열과 기존 결과 값을 확인한다.
 - `ux-text-qa.cjs`: built loopback Worker·가상 계정에서 조회 실패/재시도, 친숙도 저장 성공 전 이탈 차단, 실패 시 입력 백업·재시도, 친숙도 진행/완료·단어 준비의 복원 차단 안내, 모바일 320/390px와 100/200% 글자, 한국어 닫기, 설정 선택값 줄바꿈을 검사한다. 긴 뜻·문장·메모·과거 AI 입력/제안/설명을 모바일/데스크톱에서 펼쳐 원문·state/revision 보존을 확인한다. 실제 컴포넌트 fixture로 재로딩 차단 이유와 키보드 `더 보기`도 확인한다. `QA_BROWSER=chromium` 또는 `webkit`으로 `node tests/ux-text-qa.cjs`를 실행한다. 결과는 `outputs/ux-text/<engine>/`에 남는다. 실제 iPhone/VoiceOver 검사는 아니다.
 - 이번 문구 개선의 관련 회귀 묶음·환경·결과·한계는 [UI 구현 기록](../docs/UX_TEXT_IMPLEMENTATION_2026-10-19.md)을 따른다. 테스트 선택자는 새 UI 이름을 사용하며 쓰기 수·성적·revision·백업 보호 조건은 유지한다.

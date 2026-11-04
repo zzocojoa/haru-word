@@ -12,12 +12,12 @@ const legacy = { ...feedback }; delete legacy.structure;
 const unavailable = { ...feedback, structure: { status: 'unavailable', translation: '', parts: [], note: '문맥 확인이 필요해요.' } };
 const present = (result, sentence = original, overrides = {}) => sentenceFeedbackPresentation({ sentence, feedback: result, busy: false, pending: false, ...overrides });
 
-test('daily feedback separates retryable structure from a complete or stale result', () => {
+test('daily feedback allows explicit recheck of complete, unavailable and historical same-sentence results', () => {
   for (const [result, action, label, disabled] of [
     [undefined, 'ready', 'AI 참고 의견 요청', false],
-    [legacy, 'reviewed', '저장한 AI 참고 의견이 있어요', true],
-    [unavailable, 'reviewed', '저장한 AI 참고 의견이 있어요', true],
-    [feedback, 'reviewed', '저장한 AI 참고 의견이 있어요', true],
+    [legacy, 'retryAnalysis', 'AI 참고 의견 다시 요청', false],
+    [unavailable, 'retryAnalysis', 'AI 참고 의견 다시 요청', false],
+    [feedback, 'retryAnalysis', 'AI 참고 의견 다시 요청', false],
   ]) {
     const view = present(result);
     assert.equal(view.action, action); assert.equal(view.label, label); assert.equal(view.disabled, disabled);
@@ -78,35 +78,23 @@ test('provider text limit is inclusive and malformed, extra and mismatched struc
   ]) assert.throws(() => parseProviderFeedback(value, original, feedback.model));
 });
 
-await build({ entryPoints: ['lib/gemini-feedback.ts', 'lib/groq-feedback.ts'], outdir: 'work/feedback-refactor-tests', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent' });
+await build({ entryPoints: ['lib/gemini-feedback.ts', 'lib/groq-feedback.ts', 'lib/openai-feedback.ts'], outdir: 'work/feedback-refactor-tests', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent' });
 const { generateSentenceFeedback, responseJsonSchema: legacySchema } = await import('../work/feedback-refactor-tests/gemini-feedback.mjs');
 const { generateGroqFeedback } = await import('../work/feedback-refactor-tests/groq-feedback.mjs');
+const { generateStructuredOpenAiFeedback: generateOpenAiFeedback } = await import('../work/feedback-refactor-tests/openai-feedback.mjs');
 
-test('both adapters keep the exact output contract, token budget and provider-specific parsing failures', async () => {
-  const input = { word: 'trip', pos: 'n.', meaning: '여행', sentence: original };
-  const sent = [];
-  const mock = async (url, init) => {
-    sent.push(JSON.parse(init.body));
-    return url.includes('googleapis')
-      ? Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify(content) }] } }] })
-      : Response.json({ model: 'openai/gpt-oss-120b', choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(content) } }] });
-  };
-  assert.deepEqual((await generateSentenceFeedback('synthetic', input, mock)).structure, feedback.structure);
-  assert.deepEqual((await generateGroqFeedback('synthetic', input, 'trusted', mock)).structure, feedback.structure);
-  assert.equal(sent[0].generationConfig.maxOutputTokens, 4096);
-  assert.equal(sent[1].max_completion_tokens, 4096);
-  assert.deepEqual(sent[0].generationConfig.responseJsonSchema, sent[1].response_format.json_schema.schema);
-  assert.deepEqual(legacySchema, responseJsonSchema);
-  assert.deepEqual(responseJsonSchema.required, ['meaningUsage', 'grammar', 'correctedSentence', 'explanation', 'structure']);
-  assert.deepEqual(responseJsonSchema.properties.structure.properties.parts.items.properties.role.enum, ['S', 'V', 'O', 'C', 'M', 'X']);
-  for (const text of ['PRIVATE-invalid-json', JSON.stringify({ ...content, structure: { ...content.structure, parts: [] } }), JSON.stringify(content).padEnd(30001, ' ')]) {
-    await assert.rejects(generateSentenceFeedback('synthetic', input, async () => Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text }] } }] })), error => {
-      assert.equal(error.code, 'provider_invalid_response'); assert.doesNotMatch(error.message, /PRIVATE/); return true;
-    });
-    await assert.rejects(generateGroqFeedback('synthetic', input, 'trusted', async () => Response.json({ model: 'openai/gpt-oss-120b', choices: [{ finish_reason: 'stop', message: { content: text } }] })), error => {
-      assert.equal(error.code, 'groq_invalid_response'); assert.doesNotMatch(error.message, /PRIVATE/); return true;
-    });
-  }
+test('OpenAI retains the shared output contract while legacy adapters fail closed', async t => {
+  t.mock.method(console,'info',()=>{});
+  const input={word:'trip',pos:'n.',meaning:'여행',sentence:original}, config={apiKey:'synthetic',modelId:'gpt-6.1-sol',allowedModels:'gpt-6.1-sol'};
+  const wrap=text=>Response.json({status:'completed',model:config.modelId,output:[{type:'message',role:'assistant',status:'completed',content:[{type:'output_text',text}]}]});
+  let calls=0;
+  for(const invoke of [()=>generateSentenceFeedback('synthetic',input,async()=>{calls++;}),()=>generateGroqFeedback('synthetic',input,'trusted',async()=>{calls++;})])await assert.rejects(invoke(),e=>e.code==='disabled');
+  assert.equal(calls,0);
+  const result=await generateOpenAiFeedback(config,input,'trusted',async(_url,init)=>{calls++;const body=JSON.parse(init.body);assert.equal(body.max_output_tokens,4096);assert.deepEqual(body.text.format.schema,responseJsonSchema);return wrap(JSON.stringify(content));});
+  assert.deepEqual(result.structure,feedback.structure);assert.equal(calls,1);assert.deepEqual(legacySchema,responseJsonSchema);
+  assert.deepEqual(responseJsonSchema.required,['meaningUsage','grammar','correctedSentence','explanation','structure']);
+  assert.deepEqual(responseJsonSchema.properties.structure.properties.parts.items.properties.role.enum,['S','V','O','C','M','X']);
+  for(const text of ['PRIVATE-invalid-json',JSON.stringify({...content,structure:{...content.structure,parts:[]}}),JSON.stringify(content).padEnd(30001,' ')])await assert.rejects(generateOpenAiFeedback(config,input,'trusted',async()=>wrap(text)),e=>e.code==='provider_invalid_response'&&!e.message.includes('PRIVATE'));
 });
 
 test('read-only feedback cannot pull in request/store code, and Groq does not import Google transport', async () => {

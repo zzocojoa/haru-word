@@ -9,7 +9,7 @@ const dir = 'work/request-body-tests'; mkdirSync(dir, { recursive: true });
 await build({ entryPoints: ['lib/server/request-body.ts'], outfile: dir + '/reader.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
 const { readBoundedJsonText: read, FEEDBACK_BODY_LIMITS, logBodyRejection } = await import('../work/request-body-tests/reader.mjs');
 const encoder = new TextEncoder(), encode = text => encoder.encode(text);
-const headers = { 'content-type': 'application/json', 'X-Study-Sense-Keys': '1', 'X-Study-Grammar': '2', 'X-Study-Feedback-Structure': '1', 'X-Study-Revision': '0' };
+const headers = { 'content-type': 'application/json', 'X-Study-AI-Contract': '2', 'X-Study-Sense-Keys': '1', 'X-Study-Grammar': '2', 'X-Study-Feedback-Structure': '1', 'X-Study-Revision': '0' };
 function streamRequest(chunks, options = {}) {
   const stats = { reads: 0, cancelled: 0 };
   const body = new ReadableStream({

@@ -19,6 +19,8 @@ import { LevelSelect } from "../ui";
 import type { LearningViewProps } from "./types";
 import { HelpDetails } from "../study-ui";
 import { DiagnosticDownload } from "./diagnostic-download";
+import { AiModelSettings } from './ai-model-settings';
+import { LocalDraftSettings } from '../local-draft-settings';
 type SettingsDialogProps = Pick<
   LearningViewProps,
   | "settings"
@@ -52,6 +54,8 @@ export function SettingsDialog({
         </DialogHeader>
         <div className="dialog-scroll">
         {availability}
+        {settings && <AiModelSettings state={state} busy={busy} save={save} />}
+        {settings && <LocalDraftSettings busy={busy} />}
         <label>
           학습 수준
           <LevelSelect
@@ -134,7 +138,7 @@ export function SettingsDialog({
         >
           친숙도 다시 확인하기
         </button></section>
-        <HelpDetails title="저장·날짜·AI 안내"><p>기록은 계정별로 저장하며, 학습일은 한국 시간 기준이에요. 한국 시간 자정에 다음 학습일로 바뀌어요. AI는 요청할 때만 사용해요. Google 응답이 실패하면 Groq로 전환하며 결과에 제공사를 표시해요.</p><p>AI 제공사의 사용 한도에 따라 요청이 제한될 수 있어요.</p></HelpDetails>
+        <HelpDetails title="저장·날짜·AI 안내"><p>기록과 AI 모델 선택은 계정별로 저장하며, 학습일은 한국 시간 기준이에요. 한국 시간 자정에 다음 학습일로 바뀌어요. AI는 ‘참고 의견 요청’을 누를 때만 사용해요. 모델 변경이나 기록 조회만으로 요청하지 않아요.</p><p>OpenAI 사용 한도에 따라 요청이 제한될 수 있어요. 실패해도 다른 모델로 자동 전송하지 않아요.</p></HelpDetails>
         <HelpDetails title="문제가 생겼을 때">
           <p className="small-note">연결·대기 상태를 내려받아요. 답안·문장·계정·키는 제외해요. 자동 전송은 없으며 새로고침 시 초기화돼요.</p>
           <DiagnosticDownload />

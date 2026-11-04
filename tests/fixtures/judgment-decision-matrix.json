@@ -1,0 +1,1647 @@
+{
+  "version": "decision-development-v1",
+  "authoredAt": "2026-11-04T01:17:04.052916+00:00",
+  "scope": "105 public synthetic development cases for policy alignment only; NOT fresh holdout, model predictions, accuracy proof or a release evaluation. Inputs are deliberately exposed before implementation.",
+  "categories": [
+    "natural",
+    "target_error",
+    "unrelated_error",
+    "missing_target",
+    "default_fragment",
+    "supported_fragment",
+    "interpretation_control"
+  ],
+  "priority": [
+    "Assess whether the intended message is sufficiently specified, including explicit reply/title/command context and genuine standalone reactions.",
+    "Default incomplete messages withhold both judgments. This is a product deferral, not a claim that every visible word is grammatically wrong.",
+    "For sufficiently specified messages, assess original target use and original grammar separately; known target error can coexist with grammar uncertainty about a safe correction.",
+    "Only equivalent minimal alternatives are interchangeable; alternatives that choose a missing time/sense/participant interpretation require clarification.",
+    "Do not convert a model/network/format failure into a grammar judgment."
+  ],
+  "modelQualityMeasured": false,
+  "rows": [
+    {
+      "lessonId": "noun",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "The artist owns a bicycle.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Artist and bicycle have suitable nominal roles.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "I bought three box.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "I bought three boxes."
+            ],
+            "clarification": "none"
+          },
+          "reason": "A counted plural noun needs boxes; preserve quantity.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "These lanterns glows.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "These lanterns glow."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The noun plural is suitable; the separate verb agreement is wrong.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "She runs.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Pronoun plus verb does not supply the requested lexical noun; preserve the natural utterance.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "A green suitcase",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "An isolated noun phrase in default sentence-writing mode lacks an intended full message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "A red kite.",
+          "contextKind": "reply",
+          "contextNote": "질문 What did you see above the meadow?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The explicit question licenses this nominal reply.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "I saw her duck.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "target_meaning"
+          },
+          "reason": "Duck may be the bird noun or the action verb. Both readings are grammatical; only noun-target interpretation needs clarification.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "verb",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "Mina understands the map.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Stative understands is a valid verb; an action-only verb is not required.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "She carry a basket.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She carries a basket."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Finite verb form/agreement is part of the verb target.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "She carries two box.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She carries two boxes."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The verb is correct; the noun plural is a separate error.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Hello!",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A valid standalone greeting need not contain the requested verb.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "write leave",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "A bare verb list does not identify a recoverable message.",
+          "independentInputGuard": true
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Running.",
+          "contextKind": "reply",
+          "contextNote": "질문 What was Ben doing?에 대한 짧은 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The question supplies the omitted auxiliary/subject, licensing a nonfinite verb reply.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "time"
+          },
+          "reason": "The construction has an error, but bring versus have brought chooses a different temporal reading. Without a time cue, withhold correction and ask the intended time.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "pronoun",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "They helped us.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "They is a suitable subject and us an object.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "Her greeted we.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She greeted us."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Wrong subject/object cases affect target and grammar together.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "She deliver snacks to them.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She delivers snacks to them."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The pronouns are correct; the unrelated verb error does not fail the pronoun target.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "No pronoun is present; do not rewrite a grammatical sentence to insert one.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Him",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "A bare object form without reply context has no recoverable sentence role.",
+          "independentInputGuard": true
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Us.",
+          "contextKind": "reply",
+          "contextNote": "질문 Who did they invite?에 대한 짧은 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Us correctly supplies the invited object in this explicit reply.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "They are here.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Ordinary pronoun reference does not require the real people to be named.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "adjective",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "The corridor looks narrow.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A linking-verb adjective can describe the subject.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "The child spoke quiet.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "The child spoke quietly."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Quiet is wrongly used as a manner modifier here; correction need not force an adjective into the new sentence.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "Those baskets looks heavy.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "Those baskets look heavy."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Heavy is a suitable adjective; finite verb agreement is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A grammatical sentence without an adjective misses the target only.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Extremely narrow",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "A degree-plus-adjective fragment lacks the intended full message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Very tall.",
+          "contextKind": "reply",
+          "contextNote": "질문 How tall is your neighbor?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The question licenses an adjective phrase reply.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "They are light.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Both not-heavy and not-dark readings retain adjective use; unrelated sense ambiguity alone does not require withholding.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "adverb",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "She folded it carefully.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Carefully suitably modifies the action.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "The cyclist rode careful.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "The cyclist rode carefully."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The action requires the adverb carefully rather than adjective careful.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "He quickly opened two box.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "He quickly opened two boxes."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Quickly is correct; noun number is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "The sailor opened a box.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "No adverb is used; preserve this grammatical sentence.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Quite slowly",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "A degree-plus-adverb fragment lacks an intended full message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Carefully.",
+          "contextKind": "reply",
+          "contextNote": "질문 How did she carry the vase?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The manner question licenses an adverb reply.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "She works hard.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Hard is an adverb in this role; not every adverb ends in ly.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "determiner",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "Those boxes are empty.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Those agrees with plural boxes.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "This books are heavy.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "These books are heavy."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Determiner number is wrong; preserve the plural referent.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "Those boxes is empty.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "Those boxes are empty."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The determiner is correct; auxiliary agreement is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Bare generic plural nouns can be grammatical without a determiner.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Those drawers",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "A nominal fragment lacks the intended complete message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Those boxes.",
+          "contextKind": "reply",
+          "contextNote": "질문 Which boxes should we open?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "An explicit selection question licenses this determiner phrase.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "Her book is new.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Her is a determiner here; the real owner need not be named to assess its form.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "indefinite-article",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "An artist lives here.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "An fits the vowel sound before artist.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "She found a umbrella.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She found an umbrella."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Choose a/an by the following sound, not mere article presence.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "An artist work here.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "An artist works here."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Article choice is correct; verb agreement is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "These dogs bark.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A grammatical demonstrative phrase need not contain an indefinite article.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "An orange folder",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "An isolated nominal phrase is not a complete default writing message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "An umbrella.",
+          "contextKind": "reply",
+          "contextNote": "질문 What do you need?에 대한 짧은 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A noun answer can be natural with the supplied question.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "I saw an old seal.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Both ordinary seal noun senses retain an before old; do not demand irrelevant sense disambiguation.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "definite-article",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "I opened a bag. The bag was empty.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The second mention identifies the same bag.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "She plays the tennis.",
+          "contextKind": "sentence",
+          "contextNote": "tennis는 특정 행사나 작품 이름이 아니라 일반적인 운동 종목을 뜻합니다.",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She plays tennis."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The article is unsuitable before the general sport name in this intended sense.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "The gate near the stairs are open.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "The gate near the stairs is open."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The reference is ordinary and identifiable; auxiliary agreement is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Some dogs bark.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A grammatical sentence without the misses this target only.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "The side gate",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "A nominal fragment has no completed writing message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "The blue one.",
+          "contextKind": "reply",
+          "contextNote": "질문 Which of these two hats is yours?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The selection context identifies the blue hat.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "The door is open.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Ordinary presumed shared reference is allowed without a named real-world identifier; explicit contradictory context would be a different case.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "number",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "Three birds landed.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The numeral and plural noun form agree.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "Two cat are sleeping.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "Two cats are sleeping."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The associated counted noun needs plural form; preserve two.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "Three candles is burning.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "Three candles are burning."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Numeral/noun forms are right; auxiliary agreement is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Those dogs bark.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "No numeral is used; do not invent a number.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Nearly twelve...",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "An isolated quantity gives no counted item or recoverable message.",
+          "independentInputGuard": true
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Three.",
+          "contextKind": "reply",
+          "contextNote": "질문 How many tickets do you want?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The question supplies tickets, so do not invent a new counted object.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "I have two apples.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The real-world truth of the quantity is not checked by the grammar opinion.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "preposition",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "The keys are on the shelf.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "On and its nominal complement express a suitable location.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "They are interested on jazz.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "They are interested in jazz."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Interested takes in for this topic relation.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "The keys is on the shelf.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "The keys are on the shelf."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The preposition phrase is correct; auxiliary agreement is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "No preposition is used; the original is nevertheless grammatical.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Under the chair",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "A bare location phrase lacks a complete writing message.",
+          "independentInputGuard": true
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Under the chair.",
+          "contextKind": "reply",
+          "contextNote": "질문 Where is the bag?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The explicit location question licenses this phrase.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "She is at the bank.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The ordinary location relation works for either bank sense; word-sense ambiguity does not invalidate the preposition by itself.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "conjunction",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "I stayed home because it rained.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Because connects complete clauses in a coherent cause relation.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "Although it rained, but we walked.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "Although it rained, we walked.",
+              "It rained, but we walked."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Remove one duplicate link; both alternatives preserve the stated contrast.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "We stayed home because the roads was icy.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "We stayed home because the roads were icy."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The cause relation is coherent; agreement inside the clause is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "No conjunction is present; no target insertion into a grammatical original.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Although the broth",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "relationship"
+          },
+          "reason": "The intended linked propositions are missing. Global message withholding precedes target-use judgment.",
+          "independentInputGuard": true
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Because it rained.",
+          "contextKind": "reply",
+          "contextNote": "질문 Why did you stay home?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A complete subordinate clause can form a valid explicit reason reply.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "I stayed home, but I was happy.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A coherent contrast may rely on ordinary context; do not invent a rule that staying home must imply unhappiness.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "auxiliary",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "They are preparing lunch.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Be plus ing is a suitable progressive auxiliary construction.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "They is cooking dinner.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "They are cooking dinner."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Auxiliary agreement is part of correct target use.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "They are opening two box.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "They are opening two boxes."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The auxiliary and main verb are correct; counted noun form is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A simple lexical verb sentence need not contain an auxiliary.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "has been",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "This auxiliary cluster alone has no recoverable message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "I am.",
+          "contextKind": "reply",
+          "contextNote": "질문 Are you cooking?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The question licenses auxiliary ellipsis.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "They have a car.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Have expresses possession as a lexical verb here; presence of have alone does not prove auxiliary use.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "modal",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "She can swim well.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "Can takes a suitable base-form complement.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "She can swims well.",
+          "contextKind": "sentence",
+          "contextNote": "지금의 수영 능력을 말합니다.",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She can swim well."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The current ability meaning is explicit; the main verb needs base swim.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "She can carry two box.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "She can carry two boxes."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The modal complement is correct; counted noun form is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A grammatical sentence without a modal misses this target only.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "might have",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "An incomplete auxiliary/modal cluster lacks the intended event.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "I can.",
+          "contextKind": "reply",
+          "contextNote": "질문 Can you carry this box?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The explicit question licenses omission of the repeated main verb.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "time"
+          },
+          "reason": "The malformed construction is clear, but base bring and perfect have brought differ in temporal interpretation. Ask the intended time rather than choosing one.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "infinitive",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "We decided to repair the fence.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "To repair is a valid infinitival complement.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "They decided to repaired the gate tomorrow.",
+          "contextKind": "sentence",
+          "contextNote": "내일 수리 작업을 하기로 결정했다는 뜻입니다.",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "They decided to repair the gate tomorrow."
+            ],
+            "clarification": "none"
+          },
+          "reason": "Use base repair in the stated future decision; do not add a new completed-event reading.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "They decided to repair two gate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "They decided to repair two gates."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The infinitival form is correct; noun plurality is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "No to-infinitive is used; preserve the natural original.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "To repair",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "An infinitival fragment alone does not give the intended full message.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "To rest.",
+          "contextKind": "reply",
+          "contextNote": "질문 What do you want to do?에 대한 답변입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The explicit question licenses this infinitival reply.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "I went to school.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "To introduces a preposition phrase, not a to-infinitive.",
+          "independentInputGuard": false
+        }
+      ]
+    },
+    {
+      "lessonId": "exclamation",
+      "cases": [
+        {
+          "category": "natural",
+          "sentence": "Hooray!",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A standalone celebration can be a valid complete utterance.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "target_error",
+          "sentence": "Hooray! Our house burned down.",
+          "contextKind": "sentence",
+          "contextNote": "집이 타서 슬프고 유감스러운 반응을 나타내려는 뜻입니다.",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "The celebration is unsuitable for the stated intended reaction, while the sentence is syntactically grammatical. Preserve the original and flag the target separately.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "unrelated_error",
+          "sentence": "Wow! Those boats is huge.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "needs_work",
+            "correctionPolicy": "minimal",
+            "corrections": [
+              "Wow! Those boats are huge."
+            ],
+            "clarification": "none"
+          },
+          "reason": "The stated surprise is suitable; auxiliary agreement is separate.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "missing_target",
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "needs_work",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A declarative sentence can be grammatical without an exclamation.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "default_fragment",
+          "sentence": "Wow, the...",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "uncertain",
+            "grammar": "uncertain",
+            "correctionPolicy": "withhold",
+            "corrections": [],
+            "clarification": "message"
+          },
+          "reason": "The reaction does not complete the unfinished following message. Defer the whole default writing input.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "supported_fragment",
+          "sentence": "Wow!",
+          "contextKind": "reply",
+          "contextNote": "큰 폭포를 보고 놀란 반응입니다.",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "A supported standalone reaction does not require an invented subject or event.",
+          "independentInputGuard": false
+        },
+        {
+          "category": "interpretation_control",
+          "sentence": "Oh, I see.",
+          "contextKind": "sentence",
+          "expected": {
+            "meaningUsage": "appropriate",
+            "grammar": "natural",
+            "correctionPolicy": "unchanged",
+            "corrections": [],
+            "clarification": "none"
+          },
+          "reason": "An interjection need not always take an exclamation mark or express loud surprise.",
+          "independentInputGuard": false
+        }
+      ]
+    }
+  ]
+}

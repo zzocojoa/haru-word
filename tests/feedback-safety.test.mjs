@@ -117,7 +117,7 @@ test('grammar safety blocks an otherwise available correction action while prese
   assert.ok(!unsafe.includes('AI 제안으로 문장 바꾸기'));
   const safe=structuredClone(feedback);safe.structure.parts.at(-1).role='V';progress.feedback=safe;
   const allowed=render();
-  assert.ok(allowed.includes('AI 제안으로 문장 바꾸기'));assert.ok(!allowed.includes('AI 설명 확인 필요'));
+  assert.ok(!allowed.includes('AI 제안으로 문장 바꾸기'));assert.ok(!allowed.includes('AI 설명 확인 필요'));assert.ok(allowed.includes('이전 버전의 기록'));
   assert.equal(feedbackSafetyIssue(feedback),'progressive_role');
 });
 

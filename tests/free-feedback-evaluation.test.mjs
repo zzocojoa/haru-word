@@ -9,8 +9,8 @@ import { originalComparisonFixture } from '../scripts/evaluate-original-feedback
 
 globalThis.freeEvalEnv={};
 await build({entryPoints:{helper:'lib/free-feedback-evaluation.ts',wire:'lib/chunked-feedback.ts',route:'app/api/english-accuracy-evaluation/route.ts',production:'lib/feedback-fallback.ts',grammar:'lib/grammar/feedback.ts',content:'lib/grammar/content.ts',v3:'lib/grammar/content-v3.ts',errors:'lib/provider-feedback-error.ts'},outdir:'work/free-evaluation-tests',bundle:true,splitting:true,format:'esm',platform:'node',outExtension:{'.js':'.mjs'},logLevel:'silent',plugins:[{name:'synthetic-env',setup(b){b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'env',namespace:'synthetic'}));b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:'export const env=globalThis.freeEvalEnv',loader:'js'}));}}]});
-const helper=await import('../work/free-evaluation-tests/helper.mjs'),wire=await import('../work/free-evaluation-tests/wire.mjs'),route=await import('../work/free-evaluation-tests/route.mjs'),production=await import('../work/free-evaluation-tests/production.mjs'),grammar=await import('../work/free-evaluation-tests/grammar.mjs'),errors=await import('../work/free-evaluation-tests/errors.mjs');
-const {LESSON_MAP}=await import('../work/free-evaluation-tests/content.mjs'),{lessonForVersion}=await import('../work/free-evaluation-tests/v3.mjs');
+const helper=await import('../work/free-evaluation-tests/helper.mjs'), wire=await import('../work/free-evaluation-tests/wire.mjs'), route=await import('../work/free-evaluation-tests/route.mjs'), production=await import('../work/free-evaluation-tests/production.mjs'), errors=await import('../work/free-evaluation-tests/errors.mjs');
+
 const {accuracyCases:cases,accuracyModels:models}=helper,comparison='chunked-free-v1',digest=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 const published=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-original-first.json'));
 const profiles={};for(const sample of cases)profiles[sample.id]={domain:sample.domain,...await helper.freeAccuracyHashes(sample)};
@@ -19,7 +19,7 @@ const previous=[1,2,3].flatMap(round=>cases.flatMap(sample=>['google','groq'].ma
 const fresh=()=>({comparison,approvedCalls:120,freeTierConfirmation:'human-user',previousHash:digest(previous),...structuredClone(expected),providerStops:{},attempts:[]});
 const context=ledger=>({previous,ledger,cases,config:{origin:'https://wordgrain-oxford-study.hoihou-o.chatgpt.site',evaluationToken:'b'.repeat(64)},expected,safeCodes:Object.keys(helper.FEEDBACK_ISSUES),validationStages:helper.FEEDBACK_VALIDATION_STAGES,diagnostics:helper.FEEDBACK_DIAGNOSTICS,parseFeedback:helper.parseOriginalAccuracyFeedback});
 const content=(sentence,parts=[{wordCount:sentence.trim().split(/\s+/).length,role:'X',explanation:'합성 검증용 성분'}])=>({meaningUsage:'appropriate',grammar:'natural',correctedSentence:sentence,explanation:'합성 출력 검증 자료입니다.',structure:{status:'available',translation:'합성 번역입니다.',parts,note:''}});
-const providerResponse=(sample,provider,value=content(sample.sentence),headers={})=>Response.json(provider==='google'?{candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(value)}]}}]}:{model:models.groq,choices:[{finish_reason:'stop',message:{content:JSON.stringify(value)}}]},{headers});
+
 const result=(sample,provider)=>({comparison,caseId:sample.id,provider,...profiles[sample.id],feedback:{...wire.parseChunkedFeedback(JSON.stringify(content(sample.sentence)),sample.sentence,models[provider])}});
 
 test('word counts reconstruct exact contiguous text, including inner spaces, punctuation and question order',()=>{
@@ -40,55 +40,23 @@ test('missing, excess, fractional, zero and extra-key chunks are rejected withou
  const unavailable={...content(''),meaningUsage:'uncertain',grammar:'uncertain',structure:{status:'unavailable',translation:'',parts:[],note:'맥락이 부족합니다.'}};
  assert.equal(wire.parseChunkedFeedback(JSON.stringify(unavailable),'read book',models.google).structure.status,'unavailable');
 });
-test('all60 candidate requests match activated word/grammar production while flag-off retains text wire',async()=>{
- for(const sample of cases){let sent;
-  const fetcher=async(_url,init)=>{sent=JSON.parse(init.body);return providerResponse(sample,'google');};
-  const request=helper.freeAccuracyRequest(sample),config={google_api:'test-only',feedback_chunked_enabled:'true'};
-  if(sample.domain==='word')await production.generateSentenceFeedbackWithFallback(config,request.input,fetcher);
-  else await grammar.generateGrammarFeedback(config,lessonForVersion(LESSON_MAP.get(sample.lessonId),3),sample.sentence,fetcher);
-  assert.deepEqual(JSON.parse(sent.contents[0].parts[0].text),request.input);assert.ok(sent.systemInstruction.parts[0].text.startsWith(request.instruction));
-  assert.deepEqual(sent.generationConfig.responseJsonSchema,wire.chunkedFeedbackContract.schema);
-  assert.equal('expected' in request.input,false);if(sample.domain==='grammar')assert.deepEqual(Object.keys(request.input),['sentence','target','role']);
- }
- let sent;const sample=cases[0];
- await production.generateSentenceFeedbackWithFallback({google_api:'test-only',feedback_chunked_enabled:'false'},helper.freeAccuracyRequest(sample).input,async(_url,init)=>{sent=JSON.parse(init.body);return providerResponse(sample,'google',{meaningUsage:'appropriate',grammar:'natural',correctedSentence:sample.sentence,explanation:'합성 검증'});});
- assert.ok(sent.generationConfig.responseJsonSchema.properties.structure.properties.parts.items.properties.text);
- assert.equal(sent.generationConfig.responseJsonSchema.properties.structure.properties.parts.items.properties.wordCount,undefined);
+test('all60 frozen chunked requests retain exact recorded prompt and request hashes offline',async()=>{
+ const report=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-chunked-free.json','utf8'));
+ for(const sample of cases){const request=helper.freeAccuracyRequest(sample),hashes=await helper.freeAccuracyHashes(sample);assert.equal(request.input.sentence,sample.sentence);assert.equal(hashes.requestHash,report.requestHashes[sample.id]);assert.equal(hashes.promptHash,report.promptHashes[sample.domain]);assert.equal('expected'in request.input,false);}
 });
-test('new production contract supports Google to Groq fallback and direct comparison never retries',async()=>{
- const sample=cases[0],input=helper.freeAccuracyRequest(sample).input;let calls=0;
- const feedback=await production.generateSentenceFeedbackWithFallback({google_api:'test-only',groq_api:'test-only',feedback_chunked_enabled:'true'},input,async(url,init)=>{
-  calls++;if(url.includes('googleapis'))return new Response('PRIVATE_ERROR',{status:503});
-  const sent=JSON.parse(init.body);assert.deepEqual(sent.response_format.json_schema.schema,wire.chunkedFeedbackContract.schema);return providerResponse(sample,'groq');
- });assert.equal(feedback.model,models.groq);assert.equal(calls,2);
- for(const provider of ['google','groq']){calls=0;await assert.rejects(helper.evaluateFreeAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,sample,async()=>{calls++;return new Response('PRIVATE_ERROR',{status:503});}));assert.equal(calls,1);}
+test('retired chunked comparison cannot send to either provider or revive fallback',async()=>{
+ let calls=0;const fetcher=async()=>{calls++;};
+ for(const provider of ['google','groq'])await assert.rejects(helper.evaluateFreeAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,cases[0],fetcher),e=>e.code==='disabled');
+ await assert.rejects(production.generateSentenceFeedbackWithFallback({google_api:'test-only',groq_api:'test-only',feedback_chunked_enabled:'true'},{sentence:cases[0].sentence},fetcher),e=>e.code==='disabled');assert.equal(calls,0);
 });
-test('safe quota headers and region diagnostic never copy error text or account identifiers',async()=>{
- const sample=cases[0],value=await helper.evaluateFreeAccuracyCase({groq_api:'test-only'},'groq',sample,async()=>providerResponse(sample,'groq',content(sample.sentence),{'x-ratelimit-remaining-tokens':'42','x-ratelimit-reset-tokens':'12.4s','x-request-id':'PRIVATE_ID'}));
- assert.deepEqual(value.quota,{remainingTokens:42,resetTokensSeconds:13});assert.doesNotMatch(JSON.stringify(value),/PRIVATE_ID/);
- for(const message of ['Gemini API free tier is not available in your country. Please enable billing. PRIVATE_KEY','Other precondition PRIVATE_KEY']){
-  const error=errors.providerHttpError(400,{error:{status:'FAILED_PRECONDITION',message}},null);assert.equal(error.code,'provider_precondition');assert.equal(error.diagnostic,message.startsWith('Gemini')?'free_tier_region':undefined);assert.doesNotMatch(JSON.stringify(error),/PRIVATE_KEY|enable billing/);
- }
+test('offline quota and region diagnostics retain bounded numbers and exclude raw headers and messages',()=>{
+ const quota=helper.legacyQuotaHeaders(new Headers({'x-ratelimit-remaining-tokens':'42','x-ratelimit-reset-tokens':'12.4s','x-request-id':'PRIVATE_ID'}));assert.deepEqual(quota,{remainingTokens:42,resetTokensSeconds:13});assert.doesNotMatch(JSON.stringify(quota),/PRIVATE/);
+ assert.deepEqual(helper.legacyQuotaHeaders(new Headers({'x-ratelimit-remaining-tokens':'PRIVATE','x-ratelimit-reset-tokens':'86400.1s'})),{});
+ for(const message of ['Gemini API free tier is not available in your country. Please enable billing. PRIVATE_KEY','Other precondition PRIVATE_KEY']){const error=errors.providerHttpError(400,{error:{status:'FAILED_PRECONDITION',message}},null);assert.equal(error.code,'provider_precondition');assert.equal(error.diagnostic,message.startsWith('Gemini')?'free_tier_region':undefined);assert.doesNotMatch(JSON.stringify(error),/PRIVATE_KEY|enable billing/);}
 });
-test('candidate POST requires token expiry and isolated profile, rejects learner input and old rounds before calls',async()=>{
- const original=globalThis.fetch,token='c'.repeat(64);let calls=0;
- const request=(body,secret=token)=>new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',headers:{origin:'https://study.example','content-type':'application/json','x-english-accuracy-token':secret},body:JSON.stringify(body)});
- const body={comparison,caseId:cases[0].id,provider:'google'};
- try{
-  globalThis.fetch=async()=>{calls++;throw Error('unexpected');};assert.equal((await route.POST(request(body))).status,404);
-  Object.assign(freeEvalEnv,{english_accuracy_token:token,english_accuracy_expires:new Date(Date.now()+3600_000).toISOString()});assert.equal((await route.POST(request(body))).status,404);
-  freeEvalEnv.english_accuracy_profile=comparison;assert.equal((await route.POST(request(body,'d'.repeat(64)))).status,401);
-  for(const invalid of [{caseId:cases[0].id,provider:'google',round:2},{...body,comparison:'original-first'},{...body,sentence:'PRIVATE'},{...body,round:4}])assert.equal((await route.POST(request(invalid))).status,400);
-  assert.equal((await route.POST(request({...body,caseId:'preflight-invalid-case'}))).status,400);assert.equal(calls,0);
-  Object.assign(freeEvalEnv,{google_api:'test-only',groq_api:'test-only'});
-  for(const provider of ['google','groq']){
-   globalThis.fetch=async()=>{calls++;return providerResponse(cases[0],provider);};const response=await route.POST(request({...body,provider})),data=await response.json();
-   assert.equal(response.status,200);assert.equal(data.promptHash,profiles[cases[0].id].promptHash);assert.equal(data.requestHash,profiles[cases[0].id].requestHash);assert.equal(data.feedback.structure.parts[0].text,cases[0].sentence);
-  }
-  globalThis.fetch=async()=>Response.json({error:{status:'FAILED_PRECONDITION',message:'Gemini API free tier is not available in your country PRIVATE'}},{status:400});
-  const failure=await (await route.POST(request(body))).json();assert.equal(failure.diagnostic,'free_tier_region');assert.doesNotMatch(JSON.stringify(failure),/PRIVATE/);
-  freeEvalEnv.english_accuracy_expires=new Date(Date.now()-1).toISOString();assert.equal((await route.POST(request(body))).status,404);
- }finally{globalThis.fetch=original;for(const key of Object.keys(freeEvalEnv))delete freeEvalEnv[key];}
+test('retired chunked POST is permanently unavailable even with its isolated profile restored',async t=>{
+ let calls=0;t.mock.method(globalThis,'fetch',async()=>{calls++;throw Error('Forbidden');});Object.assign(freeEvalEnv,{english_accuracy_token:'a'.repeat(64),english_accuracy_expires:new Date(Date.now()+60000).toISOString(),english_accuracy_profile:'chunked-free-v1',google_api:'test-only',groq_api:'test-only'});
+ for(const provider of ['google','groq']){const response=await route.POST(new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',body:JSON.stringify({caseId:cases[0].id,provider,comparison})}));assert.equal(response.status,410);assert.deepEqual(await response.json(),{code:'legacy_evaluation_disabled'});}assert.equal(calls,0);
 });
 test('collector saves before each request, consumes max120, preserves360 and completed recovery makes no calls',async()=>{
  const ledger=fresh(),parent=digest(previous),saved=[];let calls=0;
@@ -124,13 +92,8 @@ test('outer HTTP429 or402 stops even with non-JSON body, including recovery with
 test('CLI refuses calls without explicit free confirmation, exact120 approval, and outside-CI execution',()=>{
  for(const [args,ci] of [[[], ''],[['--live','--approved-calls','120'],''],[['--live','--confirmed-free-tier','--approved-calls','240'],''],[['--live','--confirmed-free-tier','--approved-calls','120'],'true']])assert.throws(()=>execFileSync(process.execPath,['scripts/evaluate-free-feedback.mjs',...args],{env:{...process.env,CI:ci},stdio:['ignore','pipe','pipe']}),e=>e.status===1&&e.stderr.toString().includes('Free comparison stopped'));
 });
-test('upstream402 translated to API503 still stops through the real provider evaluator and collector',async()=>{
- const ledger=fresh();let upstreamCalls=0;
- await collectFreeComparison(context(ledger),{save:()=>{},pause:async()=>{},fetcher:async(_url,init)=>{
-  const {provider,caseId}=JSON.parse(init.body),sample=cases.find(c=>c.id===caseId);
-  try{await helper.evaluateFreeAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,sample,async()=>{upstreamCalls++;return Response.json({error:{message:'PRIVATE_BILLING'}},{status:402});});throw Error('Expected provider rejection');}
-  catch(error){return Response.json({code:error.code,providerStatus:error.issue.providerStatus},{status:error.status});}
- }});
- assert.equal(upstreamCalls,2);assert.deepEqual(ledger.providerStops,{google:'provider_precondition',groq:'groq_billing'});assert.equal(ledger.completed,true);assert.doesNotMatch(JSON.stringify(ledger),/PRIVATE_BILLING/);
- await collectFreeComparison(context(ledger),{fetcher:async()=>{throw Error('no HTTP');},save:()=>{throw Error('no save');}});
+test('archived402 provider evidence still stops the offline collector with API503 and no retries',async()=>{
+ const ledger=fresh();let calls=0;
+ await collectFreeComparison(context(ledger),{save:()=>{},pause:async()=>{},fetcher:async(_url,init)=>{calls++;const{provider}=JSON.parse(init.body);return Response.json({code:provider==='google'?'provider_precondition':'groq_billing',providerStatus:402},{status:503});}});
+ assert.equal(calls,2);assert.deepEqual(ledger.providerStops,{google:'provider_precondition',groq:'groq_billing'});assert.equal(ledger.completed,true);await collectFreeComparison(context(ledger),{fetcher:async()=>{throw Error('no HTTP');},save:()=>{throw Error('no save');}});
 });

@@ -3,17 +3,18 @@ import { useCallback, useEffect, useState, type SetStateAction } from 'react';
 import type { Content, Progress, Session } from '@/lib/learning';
 import { editExpression, expressionDraft } from '@/lib/expression';
 import { hasStudyDraftInput, restoreStudyDraft, studyQuestionKey, type StudyDraft } from '@/lib/study-draft';
+import {usePersistentInput} from '../use-persistent-input';
 
-export function useStudyDraft(session: Session, id: string | undefined, content?: Content, progress?: Progress) {
+export function useStudyDraft(session: Session, id: string | undefined, content?: Content, progress?: Progress, saved=false) {
   const question = studyQuestionKey(session, id);
   const [snapshot, setSnapshot] = useState(() => ({
-    question, generation: 0, draft: restoreStudyDraft(session, id, content), aiPending: false, materialBaseline: content, openedProgress: progress,
+    question, generation: 0, draft: restoreStudyDraft(session, id, content), edited:false, aiPending: false, materialBaseline: content, openedProgress: progress,
   }));
   let active = snapshot;
   if (snapshot.question !== question) {
     // Adjust only this component's state before children commit. An effect would
     // first publish the old answer/reveal state under the new question heading.
-    active = { question, generation: snapshot.generation + 1, draft: restoreStudyDraft(session, id, content), aiPending: false, materialBaseline: content, openedProgress: progress };
+    active = { question, generation: snapshot.generation + 1, draft: restoreStudyDraft(session, id, content), edited:false, aiPending: false, materialBaseline: content, openedProgress: progress };
     setSnapshot(active);
   }
   const generation = active.generation;
@@ -25,9 +26,11 @@ export function useStudyDraft(session: Session, id: string | undefined, content?
         && typeof next === 'string'
         ? editExpression(previous.draft, field, next)
         : { ...previous.draft, [field]: next };
-      return draft === previous.draft ? previous : { ...previous, draft };
+      return draft === previous.draft ? previous : { ...previous, draft,edited:true };
     });
   }, [question, generation]);
+  const persistent=usePersistentInput({kind:'word',question,base:restoreStudyDraft(session,id,content),values:active.draft,saved,edited:active.edited,feedback:session.records[id??'']?.aiFeedback,
+    enabled:!!id&&!['done','checkpoint'].includes(session.stage),onRestore:values=>setSnapshot(previous=>previous.question!==question||previous.generation!==generation?previous:{...previous,draft:values,edited:true})});
   const setAiPending = useCallback((value: SetStateAction<boolean>) => {
     setSnapshot(previous => previous.question === question && previous.generation === generation
       ? { ...previous, aiPending: typeof value === 'function' ? value(previous.aiPending) : value } : previous);
@@ -42,10 +45,11 @@ export function useStudyDraft(session: Session, id: string | undefined, content?
   }, [dirty]);
 
   return {
+    persistent,
     materialBaseline: active.materialBaseline, openedProgress: active.openedProgress,
     replaceMaterial: (material: Content, latest?: Progress) => setSnapshot(previous =>
       previous.question !== question || previous.generation !== generation ? previous : {
-        ...previous, materialBaseline: material, openedProgress: latest,
+        ...previous, materialBaseline: material, openedProgress: latest,edited:true,
         draft: { ...previous.draft, ...expressionDraft(material), example: material.example, translation: material.translation },
       }),
     question, draft: active.draft, aiPending: active.aiPending, setAiPending,

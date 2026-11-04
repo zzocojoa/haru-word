@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { MAX_DAILY_GOAL, POS } from './learning/model';
 import { sentenceFeedbackSchema } from './sentence-feedback';
 import { isCalendarDate } from './calendar-date';
+import { storedAiModelSchema } from './ai-contract';
 // Structure and local invariants only. Callers choose catalog validation at their boundary.
 export function createStateSchemas(entryId: z.ZodType<string>, entryLevel?: (id: string) => string | undefined) {
     const targetId = z.string().max(100).refine(id => entryId.safeParse(id).success || /^target_[a-f0-9-]{36}$/.test(id), "알 수 없는 학습 대상입니다.");
@@ -46,6 +47,7 @@ export function createStateSchemas(entryId: z.ZodType<string>, entryLevel?: (id:
         && a.completed === (a.index === a.ids.length) && Object.keys(a.marks).length === a.index
         && a.ids.slice(0, a.index).every(id => Object.hasOwn(a.marks, id)), '친숙도 확인 순서가 맞지 않아요.');
     const settingsSchema = z.object({
+        aiModelId: storedAiModelSchema.optional(),
         level, dailyGoal: z.number().int().min(1).max(MAX_DAILY_GOAL), assessments: z.object({
             A1: assessment.optional(), A2: assessment.optional(), B1: assessment.optional(), B2: assessment.optional()
         }).strict(), activeSessionId: z.string().uuid().nullable(), newWordsPaused: z.boolean().optional(), monthlyBatchSize: z.number().int().min(1).max(15).optional(), reviewDay: z.number().int().min(0).max(6).optional()

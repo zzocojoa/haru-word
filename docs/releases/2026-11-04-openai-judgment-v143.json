@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "recordedDateKst": "2026-11-04",
+  "change": "OpenAI-only feedback, aligned judgment, explicit correction and recovery, local task dashboard",
+  "github": {
+    "base": "e746e97612c060808ca689f54f243995a5121c6b",
+    "branch": "codex/openai-judgment-v143",
+    "status": "prepared-for-review",
+    "additionalClientFix": {
+      "problem": "Whitespace around grammar writing caused a valid trimmed v5 response to be rejected by raw-only response comparisons.",
+      "responseAcceptance": "Exact raw original or exact raw.trim() only; internal whitespace, case, wording and punctuation changes remain rejected.",
+      "savedOriginalAndFirstAnswersPreserved": true,
+      "modelPromptAndRequestBodiesChanged": false,
+      "deployed": false,
+      "regression": "tests/grammar-feedback-whitespace.test.mjs; tests/local-draft-qa.cjs",
+      "beforeRepair": "v5 success and lost-response recovery reproduced invalid_response; legacy raw result passed.",
+      "realPaidRequests": 0
+    },
+    "validation": {
+      "checkedAt": "2026-11-04T04:59:27.445Z",
+      "node": "v24.22.1",
+      "unitPassed": 780,
+      "grammarReviewExitCode": 0,
+      "typecheckExitCode": 0,
+      "lintExitCode": 0,
+      "existingLintWarnings": 15,
+      "buildExitCode": 0,
+      "localDraftAndWhitespaceBrowser": [
+        {
+          "engine": "chromium",
+          "checks": 19,
+          "errors": 0,
+          "externalRequests": 0
+        },
+        {
+          "engine": "webkit",
+          "checks": 19,
+          "errors": 0,
+          "externalRequests": 0
+        }
+      ],
+      "dashboardChecks": 18,
+      "regressionRedBeforeFix": true,
+      "newPaidCalls": 0,
+      "productionChanges": 0,
+      "logs": {
+        "unit": {
+          "sha256": "be056cf58eca602c64c823c0cd5b8a7b70f6fb8db80bc37f4f3be51aa2fc1393",
+          "exitCode": 0
+        },
+        "grammar-review": {
+          "sha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f",
+          "exitCode": 0
+        },
+        "typecheck": {
+          "sha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36",
+          "exitCode": 0
+        },
+        "lint": {
+          "sha256": "7866ffa8b14abe4f8ed485f1295880180be02109ed9e1629031bc81287e385ca",
+          "exitCode": 0
+        },
+        "build": {
+          "sha256": "d7c41e009c3708e736602741df340c3bf6f00144958ccb268e0b1f4317745799",
+          "exitCode": 0
+        }
+      }
+    },
+    "review": {
+      "sameModelSpecialistScopes": [
+        "security/API",
+        "data migration/performance",
+        "testing/UI/maintainability",
+        "adversarial boundaries"
+      ],
+      "fixturesReviewedInSummaryMode": true,
+      "unresolvedFindings": 0,
+      "fixes": [
+        "Portable dashboard QA without local AGENTS dependency and with temp parent creation",
+        "Current publication markers in feature guides",
+        "Exact raw-or-trim grammar response matching; raw draft and first answers preserved"
+      ],
+      "independentHumanOrCrossModelCertification": false
+    }
+  },
+  "publishedProduct": {
+    "siteVersion": 143,
+    "environmentRevision": 77,
+    "sourceCommit": "36dc66fdca52d70494cb7993a1e3ad03dbc0f8d5",
+    "sourceTree": "dc5b57b8be2d39f8144187b3a804b60a6d5005b6",
+    "deploymentId": "appgdep_6aeaacea3da481919e3ea5521ed8c7cb",
+    "aiEnabled": true,
+    "judgmentEnabled": true,
+    "existingSiteBindingsPreserved": true,
+    "audience": {
+      "observedBeforePublication": "public",
+      "revision": 6,
+      "changedByThisWork": false,
+      "actorOfEarlierChangeNotEstablished": true
+    }
+  },
+  "technical": {
+    "unitPassed": 776,
+    "browserChecksPassed": 90,
+    "browserEngines": [
+      "chromium",
+      "webkit"
+    ],
+    "archivalReaderChecksPassed": 6,
+    "typecheckExitCode": 0,
+    "lintExitCode": 0,
+    "existingLintWarnings": 15,
+    "buildExitCode": 0,
+    "finalCompletionAuditChecks": 757
+  },
+  "quality": {
+    "sourceCommit": "36dc66fdca52d70494cb7993a1e3ad03dbc0f8d5",
+    "freshSyntheticCases": 30,
+    "models": [
+      "gpt-6.1-sol",
+      "gpt-6.1-terra",
+      "gpt-6-astra"
+    ],
+    "candidatePerModel": {
+      "rawPass": 30,
+      "authorReviewedPass": 30,
+      "denominator": 30
+    },
+    "criticalErrors": 0,
+    "pairedRegressions": 0,
+    "validOutputsReviewed": 174,
+    "reviewKind": "implementation-author-partially-blinded",
+    "independentHumanExpertReview": false,
+    "generalEnglishAccuracyGuarantee": false
+  },
+  "budget": {
+    "separateApprovalUsdBeforeTax": 7,
+    "actualNetworkCalls": 354,
+    "conservativeUpperUsd": 5.625315,
+    "remainingUsdNotTransferred": 1.374685,
+    "closed": true,
+    "invoiceVerified": false,
+    "noFurtherRequestsAuthorizedByThisRecord": true
+  },
+  "productionVerification": {
+    "realAuthenticatedBackupsValidated": true,
+    "encryptedBackupRoundtripVerified": true,
+    "completeStudyStateBeforeAfterEqual": true,
+    "unauthenticatedProtectedApiChecks": 5,
+    "actualAuthenticatedModelOptionsVerified": 3,
+    "studyRecordsModifiedByQa": 0,
+    "paidProductionSmokeCalls": 0,
+    "declaredEmptyForeignKeyRelationshipsVerified": true,
+    "livePragmaExecuted": false,
+    "productionRestoreExecuted": false
+  },
+  "taskMaster": {
+    "currentParentsDone": 18,
+    "currentSubtasksDone": 49,
+    "previousParentsDone": 15,
+    "previousSubtasksDone": 35,
+    "previousMasterPreservedExactly": true
+  },
+  "localEvidence": {
+    "closed.json": {
+      "sha256": "34b9ddf52e9a41fb1ce1496089693ef7d172f76975868203da8dfc2ee2fe90ad",
+      "availability": "Retained in local ignored outputs; raw logs and actual learner backups are not published."
+    },
+    "report.json": {
+      "sha256": "1e5c558c48ddc6f0a509dc816473572d9e1c77c3a7924b319641fcc87373f1f5",
+      "availability": "Retained in local ignored outputs; raw logs and actual learner backups are not published."
+    },
+    "completion-audit.json": {
+      "sha256": "f49f727b4bafad59abc999f8dae2b983156ebb3850460c3e18df76d56464d5a9",
+      "availability": "Retained in local ignored outputs; raw logs and actual learner backups are not published."
+    },
+    "production-final-native-check.json": {
+      "sha256": "f8a4da3675c4a247b453793f2be1b027d7e97eb50f00be98c46b55da2df333e1",
+      "availability": "Retained in local ignored outputs; raw logs and actual learner backups are not published."
+    },
+    "production-record-preservation-final.json": {
+      "sha256": "b292e8f5c748c94508e3a567d91b2ebdeed855084d19a5735bce9a4dfa7c71fc",
+      "availability": "Retained in local ignored outputs; raw logs and actual learner backups are not published."
+    },
+    "production-ui-verification.json": {
+      "sha256": "2ec2323014a1a6dc2922e371a15f58761b0ea634b6906c6d634b36addc631945",
+      "availability": "Retained in local ignored outputs; raw logs and actual learner backups are not published."
+    },
+    "closure-preservation.json": {
+      "sha256": "4af26446a8d6166821bc327090887cc13d43141f60834a1448262dbd781eee6c",
+      "availability": "Retained in local ignored outputs; raw logs and actual learner backups are not published."
+    }
+  },
+  "limitations": [
+    "No new paid evaluation or deployment is part of this GitHub PR.",
+    "Chromium/WebKit emulation does not verify a physical iPhone or VoiceOver.",
+    "The bounded correction guard is not a general semantic equivalence proof.",
+    "Older paid runs remain separately closed; unused balances are not pooled.",
+    "Native archive content hash is not asserted identical to the raw local tar-stream hash."
+  ]
+}

@@ -13,6 +13,8 @@ import { StateCapacityError } from '@/db/state-capacity';
 import { hasLiteralPrototypeSense, supportsSenseKeys, SENSE_KEY_UPGRADE_MESSAGE } from '@/lib/state-data-keys';
 import { hasSavedLiteralPrototypeSense } from '@/db/sense-key-compatibility';
 import { logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
+import { AI_UPGRADE_MESSAGE, requiresAiContractState, aiContractVersion } from '@/lib/ai-contract';
+import { hasSavedAiContract } from '@/db/ai-compatibility';
 
 export const dynamic = 'force-dynamic';
 
@@ -46,6 +48,8 @@ export async function POST(request: Request) {
   catch (e) { return json({ error: e instanceof Error ? e.message : '백업 파일을 확인해 주세요.' }, 400); }
   const started = Date.now();
   try {
+    if (requiresAiContractState(state,aiContractVersion(request)) || await hasSavedAiContract(database(), user.userId,aiContractVersion(request)))
+      return json({ error: AI_UPGRADE_MESSAGE, code: 'ai_client_outdated' }, 426);
     if (!supportsSenseKeys(request) && (hasLiteralPrototypeSense(state.progress) || await hasSavedLiteralPrototypeSense(database(), user.userId)))
       return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
     if (!supportsFeedbackStructure(request) && (hasStructuredFeedback(state) ||

@@ -10,6 +10,7 @@ import type { StudySessionProps } from "./study/types";
 import { useStudySessionController } from "./study/use-study-session-controller";
 import { WarmupStage } from "./study/warmup-stage";
 import { Clock } from "./ui";
+import {DraftRecoveryNotice} from './draft-recovery-notice';
 
 const STAGES = {
   warmup: "기억 깨우기",
@@ -23,6 +24,8 @@ const STAGES = {
 export function StudySession(props: StudySessionProps) {
   const {
     s,
+    draftPersistence,
+    retainedFeedback,
     showSummary,
     saved,
     date,
@@ -139,6 +142,7 @@ export function StudySession(props: StudySessionProps) {
           연습으로 기록돼요.
         </p>
       )}
+      <DraftRecoveryNotice input={draftPersistence}/>
       <div className="session-step-row">
         <h2 ref={focus} tabIndex={-1}>
           {s.retryMode ? "다시 떠올리기" : STAGES[s.stage]}
@@ -282,6 +286,7 @@ export function StudySession(props: StudySessionProps) {
           )}
           {s.stage === "sentence" && (
             <SentenceStage
+              retainedFeedback={retainedFeedback}
               word={word}
               s={s}
               id={id}

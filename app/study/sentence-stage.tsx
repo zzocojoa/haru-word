@@ -21,6 +21,7 @@ type SentenceStageProps = Pick<
   | "storeFeedback"
   | "busy"
   | "sentenceDone"
+  | "retainedFeedback"
 > & {
   word: NonNullable<StudySessionController["word"]>;
   content: NonNullable<StudySessionController["content"]>;
@@ -42,6 +43,7 @@ export function SentenceStage({
   storeFeedback,
   busy,
   sentenceDone,
+  retainedFeedback,
 }: SentenceStageProps) {
   const selectedMeaning = s.records[id!]?.meaning ?? content.meaning;
   return (
@@ -92,8 +94,10 @@ export function SentenceStage({
         key={`${s.id}:${id}`}
         sessionId={s.id}
         entryId={id!}
+        target={{word:word.word,pos:word.pos,meaning:s.records[id!]?.meaning??content.meaning,expression:s.records[id!]?.material?.expression||word.word}}
         sentence={sentence}
         feedback={s.records[id!]?.aiFeedback}
+        draftFeedback={retainedFeedback}
         busy={storeBusy}
         onPending={setAiPending}
         onFeedback={storeFeedback}

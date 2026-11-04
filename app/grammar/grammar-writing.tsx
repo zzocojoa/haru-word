@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { Check, Sparkles } from 'lucide-react';
 import type { GrammarLesson } from '@/lib/grammar/content';
 import type { GrammarProgress } from '@/lib/grammar/model';
@@ -11,12 +12,20 @@ import { FeedbackDetail } from '../feedback-detail';
 import { frameSentence } from '@/lib/grammar/content-v2';
 import { practiceForVersion } from '@/lib/grammar/content-v4';
 import { Speak } from '../ui';
+import { FeedbackCorrection } from '../feedback-correction';
+import {currentFeedback} from '@/lib/recoverable-feedback';
+import {feedbackMatchesContext} from '@/lib/feedback-context';
 
 type Props = {
   lesson: GrammarLesson;
   progress: GrammarProgress;
+  retainedFeedback?:SentenceFeedback;
+  draftFeedback?:SentenceFeedback;
+  currentModelId?:string;
+  contextFingerprint?:string;
   canSave: boolean;
   aiPending: boolean;
+  recoveryPending?:boolean;
   aiError: FeedbackIssue | null;
   onAi: () => void;
   onSentence: (sentence: string) => void;
@@ -27,8 +36,14 @@ type Props = {
   onComplete: () => void;
 };
 
-export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, onAi, onSentence, onCheck, onChecks, onFrame, onExplain, onComplete }: Props) {
-  const { sentence, check, feedback } = progress;
+export function GrammarWriting({ lesson, progress,retainedFeedback,draftFeedback,recoveryPending,currentModelId,contextFingerprint, canSave, aiPending, aiError, onAi, onSentence, onCheck, onChecks, onFrame, onExplain, onComplete }: Props) {
+  const { sentence, check } = progress;
+  const feedback=currentFeedback([progress.feedback,draftFeedback,retainedFeedback],sentence,currentModelId??'',contextFingerprint);
+  const [proposal, setProposal] = useState({ lessonId: lesson.id, feedback });
+  let visibleFeedback = proposal.feedback;
+  if (proposal.lessonId !== lesson.id || feedback && feedback !== proposal.feedback) {
+    visibleFeedback = feedback; setProposal({ lessonId: lesson.id, feedback });
+  }
   const practice = practiceForVersion(lesson.id,progress.contentVersion), values = practice.frame.slots.map((slot, i) => progress.frame?.[i] ?? slot.options[0]);
   const frame = frameSentence(practice.frame, values);
   return <div className="grammar-stage">
@@ -44,12 +59,12 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
     </div>
     <div className="grammar-ai-action">
       <button className="secondary-button" disabled={aiPending || !sentence.trim() || !canSave} onClick={onAi}>
-        <Sparkles size={18} aria-hidden="true" />{aiPending ? '참고 의견을 요청하고 있어요' : 'AI 참고 의견 요청'}
+        <Sparkles size={18} aria-hidden="true" />{aiPending ? '참고 의견을 요청하고 있어요' : recoveryPending?'이전 AI 요청 결과 확인':'AI 참고 의견 요청'}
       </button>
       <AiUseNotice grammar />
     </div>
     <FeedbackIssueNotice issue={aiError} />
-    {feedback && <Feedback feedback={feedback} sentence={sentence} onSentence={onSentence} />}
+    {visibleFeedback && <Feedback feedback={visibleFeedback} sentence={sentence} onSentence={onSentence} busy={!canSave || aiPending} current={feedbackMatchesContext(visibleFeedback,sentence,currentModelId??'',contextFingerprint)} />}
     {!!progress.contentVersion ? <div className="grammar-self-checks"><h3>스스로 점검하기</h3>{(['meaning', 'form'] as const).map((key, i) => <fieldset className="grammar-check" key={key}><legend>{practice.checks[i]}</legend><div className="grammar-check-options">{SELF_CHECKS.map(value => <label key={value}><input type="radio" name={`grammar-${lesson.id}-${key}`} checked={progress.checks?.[key] === value} onChange={() => onChecks(key, value)} />{value === 'appropriate' ? '확인했어요' : value === 'needs_work' ? '보완 필요' : '모르겠어요'}</label>)}</div></fieldset>)}</div> : <fieldset className="grammar-check">
       <legend>스스로 점검하기</legend><p>{lesson.check}</p>
       {SELF_CHECKS.map(value => <label key={value}>
@@ -63,9 +78,10 @@ export function GrammarWriting({ lesson, progress, canSave, aiPending, aiError, 
   </div>;
 }
 
-function Feedback({ feedback, sentence, onSentence }: { feedback: SentenceFeedback; sentence: string; onSentence: Props['onSentence'] }) {
+function Feedback({ feedback, sentence, onSentence, busy,current }: { feedback: SentenceFeedback; sentence: string; onSentence: Props['onSentence']; busy: boolean;current:boolean }) {
   return <div className="grammar-feedback" data-tone="neutral">
-    <FeedbackDetail feedback={feedback} grammarTarget suggestionAction={feedback.correctedSentence && feedback.correctedSentence !== sentence &&
-      <button className="secondary-button" onClick={() => onSentence(feedback.correctedSentence)}>AI 제안으로 문장 바꾸기</button>}/>
+    {!current && <p className="notice">이전 문장·목표·모델·문맥에 대한 의견이거나 이전 버전의 기록이에요. 현재 조건으로 다시 요청해 주세요.</p>}
+    {feedback.contextNote&&<details><summary>이 의견에 전달한 문맥</summary><p>{feedback.contextNote}</p></details>}
+    <FeedbackDetail feedback={feedback} grammarTarget suggestionAction={<FeedbackCorrection feedback={feedback} sentence={sentence} contextCurrent={current} busy={busy} onApply={onSentence} />} />
   </div>;
 }

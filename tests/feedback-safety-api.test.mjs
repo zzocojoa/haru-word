@@ -10,21 +10,22 @@ const stubs={
   'cloudflare:workers':'export const env=globalThis.safetyRuntime.env;',
   '@/app/chatgpt-auth':'export const getChatGPTUser=async()=>({userId:"synthetic-safety"});',
   '@/db/store':'export const database=()=>globalThis.safetyRuntime.db;',
-  '@/db/feedback':'export const loadFeedbackSession=async()=>globalThis.safetyRuntime.session; export const loadPersonalWord=async()=>null; export const recordFeedbackAttempt=async()=>{globalThis.safetyRuntime.attempts++};',
-  '@/lib/feedback-fallback':'export const generateSentenceFeedbackWithFallback=async()=>{globalThis.safetyRuntime.calls++;return globalThis.safetyRuntime.feedback};',
-  '@/lib/grammar/feedback':'import {z} from "zod"; export const grammarFeedbackRequestSchema=z.object({lessonId:z.literal("auxiliary"),sentence:z.string()}); export const generateGrammarFeedback=async()=>{globalThis.safetyRuntime.calls++;return globalThis.safetyRuntime.feedback};',
+  '@/db/feedback':'export const loadFeedbackModel=async()=>"gpt-6.1-sol"; export const loadFeedbackContext=async(_db,_user,kind)=>({modelId:"gpt-6.1-sol",document:JSON.stringify(kind==="word"?globalThis.safetyRuntime.session:globalThis.safetyRuntime.progress)}); export const loadPersonalWord=async()=>null; export const recordFeedbackAttempt=async()=>{globalThis.safetyRuntime.attempts++};',
+  '@/lib/openai-feedback':'export const generateOpenAiFeedback=async()=>{globalThis.safetyRuntime.calls++;return globalThis.safetyRuntime.feedback};export const generateStructuredOpenAiFeedback=generateOpenAiFeedback;',
+  '@/lib/grammar/feedback':'import {z} from "zod"; export const grammarFeedbackRequestSchema=z.object({lessonId:z.literal("auxiliary"),sentence:z.string(),expectedModelId:z.string()}); export const generateGrammarFeedback=async()=>{globalThis.safetyRuntime.calls++;return globalThis.safetyRuntime.feedback};export const grammarFeedbackInput=(lesson,sentence)=>({lessonId:lesson.id,sentence});export const legacyGrammarFeedbackInput=grammarFeedbackInput;export const grammarInstruction="synthetic";export const legacyGrammarInstruction="synthetic-legacy";',
 };
-await build({ entryPoints:{word:'app/api/sentence-feedback/route.ts',grammar:'app/api/grammar-feedback/route.ts'},outdir:'work/feedback-safety-api',bundle:true,format:'esm',platform:'node',outExtension:{'.js':'.mjs'},logLevel:'silent',plugins:[{name:'synthetic-learning-only',setup(b){b.onResolve({filter:/^(cloudflare:workers|@\/app\/chatgpt-auth|@\/db\/(store|feedback)|@\/lib\/(feedback-fallback|grammar\/feedback))$/},a=>({path:a.path,namespace:'safety-stub'}));b.onLoad({filter:/.*/,namespace:'safety-stub'},a=>({loader:'js',contents:stubs[a.path],resolveDir:process.cwd()}));}}] });
-globalThis.safetyRuntime={env:{grammar_enabled:'true',google_ai_enabled:'true'},calls:0,attempts:0};
+await build({ entryPoints:{word:'app/api/sentence-feedback/route.ts',grammar:'app/api/grammar-feedback/route.ts'},outdir:'work/feedback-safety-api',bundle:true,format:'esm',platform:'node',outExtension:{'.js':'.mjs'},logLevel:'silent',plugins:[{name:'synthetic-learning-only',setup(b){b.onResolve({filter:/^(cloudflare:workers|@\/app\/chatgpt-auth|@\/db\/(store|feedback)|@\/lib\/(openai-feedback|grammar\/feedback))$/},a=>({path:a.path,namespace:'safety-stub'}));b.onLoad({filter:/.*/,namespace:'safety-stub'},a=>({loader:'js',contents:stubs[a.path],resolveDir:process.cwd()}));}}] });
+globalThis.safetyRuntime={env:{grammar_enabled:'true',ai_feedback_enabled:'true',OPENAI_API_KEY:'test-only',OPENAI_ALLOWED_MODELS:'gpt-6.1-sol'},calls:0,attempts:0};
 const routes={word:await import('../work/feedback-safety-api/word.mjs'),grammar:await import('../work/feedback-safety-api/grammar.mjs')};
 function runtime(feedback){
   const r=globalThis.safetyRuntime;r.feedback=feedback;r.calls=0;r.attempts=0;
   r.session={id:sid,stage:'sentence',index:0,ids:[word.id],retryMode:false,records:{[word.id]:{meaning:'도착하다'}}};
   const progress={stage:5,sentence:feedback.original,answers:Object.fromEntries(['q1','q2','q3'].map(k=>[k,{first:'a',latest:'a',attempts:1,helped:false}])),updatedAt:feedback.createdAt};
+  r.progress=progress;
   r.db={prepare:()=>({bind:()=>({first:async()=>({document:JSON.stringify(progress)})})})};
   return r;
 }
-const request=(domain,feedback,modern)=>new Request('https://local.test/api/'+(domain==='word'?'sentence':'grammar')+'-feedback',{method:'POST',headers:{'Content-Type':'application/json',Origin:'https://local.test',...(modern?{'X-Study-Feedback-Structure':'1','X-Study-Grammar':'3'}:{})},body:JSON.stringify(domain==='word'?{sessionId:sid,entryId:word.id,sentence:feedback.original}:{lessonId:'auxiliary',sentence:feedback.original})});
+const request=(domain,feedback,modern)=>new Request('https://local.test/api/'+(domain==='word'?'sentence':'grammar')+'-feedback',{method:'POST',headers:{'Content-Type':'application/json',Origin:'https://local.test','X-Study-AI-Contract':'2',...(modern?{'X-Study-Feedback-Structure':'1','X-Study-Grammar':'3'}:{})},body:JSON.stringify(domain==='word'?{sessionId:sid,entryId:word.id,sentence:feedback.original,expectedModelId:'gpt-6.1-sol'}:{lessonId:'auxiliary',sentence:feedback.original,expectedModelId:'gpt-6.1-sol'})});
 
 test('both learner routes reject conflicting new analyses for modern and legacy clients without another call or raw text',async()=>{
   for(const [domain,id,provider] of [['word','word-32','groq'],['grammar','grammar-45','google']])for(const modern of [false,true]){

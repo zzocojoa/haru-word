@@ -1,3 +1,4 @@
+const { model: aiModel, aiHeaders, openaiFeedback, feedbackReceipt, acknowledgePending } = require('./qa/openai-fixture.cjs');
 // Synthetic local records and mocked AI only. Never contacts Google.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -9,7 +10,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
   const engine = process.env.QA_BROWSER || 'chromium', browser = await launchBrowser({ engine }), checks = [];
   try {
     for (const domain of ['sentence', 'grammar']) {
-      const context = await browser.newContext({ extraHTTPHeaders: accountHeaders('feedback_issues'), viewport: { width: 390, height: 844 } });
+      const context = await browser.newContext({ extraHTTPHeaders: { ...accountHeaders('feedback_issues'), ...aiHeaders }, viewport: { width: 390, height: 844 } });
       const page = await context.newPage(), errors = [], original = 'I like books.';
       page.setDefaultTimeout(10000); page.on('pageerror', e => errors.push(e.message));
       const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1' } })).json();
@@ -32,19 +33,25 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       await transmission.waitFor();
       assert.equal(await transmission.count(), 1);
       assert.equal(await transmission.isVisible(), true);
-      assert.equal(await transmission.textContent(), `AI 요청 시 문장과 ${domain === 'grammar' ? '수업 목표를' : '단어·뜻을'} Google에 보내요. 응답 실패 시 Groq에도 보내요. 개인정보는 넣지 마세요. Google 무료 API의 입력·응답은 서비스 개선에 쓰일 수 있어요.`);
+      assert.equal(await transmission.textContent(), `요청하면 문장과 ${domain === 'grammar' ? '수업 목표를' : '단어·뜻을'} 선택한 OpenAI 모델에 보내요. API 데이터는 기본적으로 모델 학습에 쓰이지 않지만 보관·안전 점검 정책이 적용돼요. 개인정보는 넣지 마세요.`);
       assert.equal(await transmission.evaluate(el => el.previousElementSibling?.tagName === 'BUTTON' && el.previousElementSibling.textContent.includes('AI 참고 의견 요청') && !el.closest('details')), true, 'transmission notice directly follows the request button without a disclosure');
       checks.push(domain + ': transmission/privacy notice is visible exactly once directly below the request button before any AI call');
       await input.fill(original);
       let response, calls = 0;
-      await page.route('**/api/' + domain + '-feedback', route => { calls++; return response.abort ? route.abort('failed') : route.fulfill({ status: response.status, json: response.body }); });
+      await page.route('**/api/' + domain + '-feedback', route => { if(route.request().method()!=='POST')return route.continue(); assert.equal(route.request().postDataJSON().expectedModelId,aiModel); calls++; return response.abort ? route.abort('failed') : route.fulfill({ status: response.status, json: response.body===null?null:{...response.body,receipt:feedbackReceipt(route,response.status<400?'completed':'failed')} }); });
       const cases = [
+        {status:426,body:{code:'ai_client_outdated'},code:'ai_client_outdated',title:'학습 화면 업데이트 필요'},
+        {status:409,body:{code:'model_changed'},code:'model_changed',title:'선택 모델 변경'},
+        {status:503,body:{code:'model_unavailable'},code:'model_unavailable',title:'선택 모델 사용 불가'},
+        {status:429,body:{code:'provider_billing'},code:'provider_billing',title:'OpenAI 계정 한도'},
+        {status:429,body:{code:'provider_account_limit'},code:'provider_account_limit',title:'OpenAI 계정 사용 한도'},
+        {status:429,body:{code:'provider_limit',providerStatus:429,retryAfterSeconds:12},code:'provider_limit',title:'OpenAI 사용 한도'},
         { status: 429, body: { code: 'provider_minute_limit', providerStatus: 429, retryAfterSeconds: 15 }, code: 'provider_minute_limit', title: 'Google 분당 한도' },
         { status: 429, body: { code: 'provider_daily_limit', providerStatus: 429 }, code: 'provider_daily_limit', title: 'Google 일일 한도' },
-        { status: 503, body: { code: 'provider_key_invalid', providerStatus: 400 }, code: 'provider_key_invalid', title: 'Google 키 인증 실패' },
-        { status: 503, body: { code: 'provider_timeout' }, code: 'provider_timeout', title: 'Google 응답 시간 초과' },
-        { status: 503, body: { code: 'provider_network' }, code: 'provider_network', title: 'Google 연결 실패' },
-        { status: 502, body: { code: 'provider_blocked' }, code: 'provider_blocked', title: 'Google 정책에 따른 응답 중단' },
+        { status: 503, body: { code: 'provider_key_invalid', providerStatus: 400 }, code: 'provider_key_invalid', title: 'OpenAI 키 인증 실패' },
+        { status: 503, body: { code: 'provider_timeout' }, code: 'provider_timeout', title: 'OpenAI 응답 시간 초과' },
+        { status: 503, body: { code: 'provider_network' }, code: 'provider_network', title: 'OpenAI 연결 실패' },
+        { status: 502, body: { code: 'provider_blocked' }, code: 'provider_blocked', title: 'OpenAI 정책에 따른 응답 중단' },
         { status: 502, body: { code: 'provider_truncated' }, code: 'provider_truncated', title: 'AI 응답 길이 초과' },
         { status: 429, body: { error: 'PRIVATE_PROVIDER_MESSAGE' }, code: 'request_limited', title: '요청이 제한됐어요' },
         { status: 503, body: { code: 'untrusted', error: 'PRIVATE_PROVIDER_MESSAGE' }, code: 'site_error', title: '사이트 처리 실패' },
@@ -56,6 +63,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         { status: 502, body: { code: 'groq_invalid_response', previous: { code: 'provider_limit' } }, code: 'groq_invalid_response', title: 'Groq 교정 형식 오류' },
       ];
       for (const sample of cases) {
+        await acknowledgePending(page);
         response = sample;
         await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
         const notice = page.locator('[data-feedback-code="' + sample.code + '"]');
@@ -118,26 +126,27 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         }
         throw Error('feedback not saved');
       };
-      const success = (model, sentence) => ({ status: 200, body: { feedback: { original: sentence, model, createdAt: now, meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '알맞게 사용했어요.' } } });
-      response = success('openai/gpt-oss-120b', original);
+      const success = (sentence) => ({ status: 200, body: { feedback: openaiFeedback({ original: sentence, createdAt: now, meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '알맞게 사용했어요.' }) } });
+      await acknowledgePending(page);
+      response = success(original);
       await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
-      await page.locator('[data-feedback-provider="Groq"]').waitFor();
-      await page.locator('[data-feedback-provider="Groq"]').screenshot({ path: 'work/groq-attribution-' + domain + '-' + engine + '.png' });
-      const stored = await waitSaved('openai/gpt-oss-120b');
+      await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
+      await page.locator('[data-feedback-provider="OpenAI"]').screenshot({ path: 'work/groq-attribution-' + domain + '-' + engine + '.png' });
+      const stored = await waitSaved(aiModel);
       if (domain === 'sentence') assert.equal(stored.sessions[sid].records[word.id].sentenceStatus, 'unmeasured');
       await page.reload();
       if (domain === 'sentence') await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
       else { await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); }
-      await page.locator('[data-feedback-provider="Groq"]').waitFor();
+      await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
       assert.equal(calls, cases.length + 1, 'reload never calls a provider');
       const next = 'I like tea.'; await input.fill(next);
-      response = success('gemini-3.1-flash-lite', next);
+      response = success(next);
       await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
-      await page.locator('[data-feedback-provider="Google Gemini"]').waitFor();
-      await waitSaved('gemini-3.1-flash-lite');
+      await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
+      await waitSaved(aiModel);
       assert.equal(calls, cases.length + 2); assert.deepEqual(errors, []);
       checks.push(domain + ': ' + cases.length + ' failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility');
-      checks.push(domain + ': Google/Groq attribution survives server save and reload, with no grade changes or automatic rechecks');
+      checks.push(domain + ': OpenAI attribution survives server save and reload, with no grade changes or automatic rechecks');
       await context.close();
     }
     fs.writeFileSync('work/feedback-issue-qa-' + engine + '.json', JSON.stringify({ passed: true, checks }, null, 2));

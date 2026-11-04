@@ -1,0 +1,364 @@
+{
+  "version": "judgment-v5-calibration-candidate-1",
+  "publicDevelopmentOnly": true,
+  "freshHoldout": false,
+  "modelQualityMeasured": false,
+  "cases": [
+    {
+      "id": "cal-v5-01",
+      "name": "missing target does not make a natural original ungrammatical",
+      "mode": "wire",
+      "original": "A book lies on the desk.",
+      "target": "word book/v. 예약하다",
+      "wire": {
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "correctedSentence": "A book lies on the desk.",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "",
+        "contextNeeded": "none"
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "rationale": "Missing verb sense is target work; preserve the grammatical noun sentence."
+    },
+    {
+      "id": "cal-v5-02",
+      "name": "wrong target label with an accurate grammar correction",
+      "mode": "wire",
+      "original": "I want learn English.",
+      "target": "grammar infinitive",
+      "wire": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I want to learn English.",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "to 표지를 보완합니다.",
+        "contextNeeded": "none"
+      },
+      "expectedGrade": {
+        "meaning": "fail",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "rationale": "Infinitive use label is wrong, but original grammar and to correction are right; do not report a grammar correction failure."
+    },
+    {
+      "id": "cal-v5-03",
+      "name": "unrelated verb agreement leaves pronoun target appropriate",
+      "mode": "wire",
+      "original": "He help her.",
+      "target": "grammar pronoun",
+      "wire": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "He helps her.",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "수 일치를 보완합니다.",
+        "contextNeeded": "none"
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "rationale": "Correct subject/object pronouns coexist with an unrelated agreement error."
+    },
+    {
+      "id": "cal-v5-04",
+      "name": "case errors affect both target use and grammar",
+      "mode": "wire",
+      "original": "Him helps I.",
+      "target": "grammar pronoun",
+      "wire": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "He helps me.",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "주격과 목적격을 보완합니다.",
+        "contextNeeded": "none"
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "rationale": "The same pronoun-case error can justify target and original grammar needs_work."
+    },
+    {
+      "id": "cal-v5-05",
+      "name": "unfinished default clause asks for linked propositions",
+      "mode": "wire",
+      "original": "Although the broth",
+      "target": "grammar conjunction",
+      "wire": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "",
+        "contextNeeded": "relationship"
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "questionContains": "앞뒤 내용에서",
+      "rationale": "Incomplete message sufficiency precedes target scoring; no invented continuation."
+    },
+    {
+      "id": "cal-v5-06",
+      "name": "known modal form error with unknown time safely withholds correction",
+      "mode": "wire",
+      "original": "You might brought a torch.",
+      "target": "grammar modal",
+      "wire": {
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "",
+        "contextNeeded": "time"
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "questionContains": "이미 일어난 일을 말하나요",
+      "rationale": "Known target-form error and insufficient information for temporal correction are separate."
+    },
+    {
+      "id": "cal-v5-07",
+      "name": "a valid perfect modal need not preserve an unknown intended time",
+      "mode": "wire",
+      "original": "You might brought a torch.",
+      "target": "grammar modal",
+      "wire": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "You might have brought a torch.",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "완료상 형태를 선택했습니다.",
+        "contextNeeded": "none"
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "uncertain",
+        "explanation": "pass",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "auxiliary": {
+        "grammarLabelPolicyAgreement": false,
+        "correctedEnglishGrammatical": true,
+        "temporalEquivalenceKnown": false
+      },
+      "rationale": "Original is malformed and the perfect correction is grammatical; equivalence is unconfirmed and time was not requested. Do not call this bad corrected grammar or automatically critical invented intent."
+    },
+    {
+      "id": "cal-v5-08",
+      "name": "false visible rule fails explanation independently",
+      "mode": "visible",
+      "feedback": {
+        "original": "She goes to school.",
+        "correctedSentence": "She goes to school.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "explanation": "goes는 go의 과거형입니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "rationale": "Hypothetical visible false-rule fixture; not a reproducer of current app output and not a correction failure."
+    },
+    {
+      "id": "cal-v5-09",
+      "name": "hidden wrong model reason is replaced by reviewed visible explanation",
+      "mode": "wire",
+      "original": "She goes to school.",
+      "target": "grammar verb",
+      "wire": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She goes to school.",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "goes는 go의 과거형입니다.",
+        "correctionReason": "",
+        "contextNeeded": "none"
+      },
+      "forbiddenVisible": "goes는 go의 과거형",
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "auxiliary": {
+        "rawModelReasonAccurate": false
+      },
+      "rationale": "Visible product explanation is safe; this does not certify hidden model explanation accuracy."
+    },
+    {
+      "id": "cal-v5-10",
+      "name": "independent fragment guard blocks raw invented command",
+      "mode": "wire",
+      "original": "eat go",
+      "target": "word eat/v. 먹다",
+      "wire": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Eat and go.",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "두 명령을 연결했습니다.",
+        "contextNeeded": "none"
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "auxiliary": {
+        "applicationOverride": true,
+        "rawModelAbstention": false
+      },
+      "rationale": "Product returns both uncertain with no correction; raw model invention remains a separate diagnostic."
+    },
+    {
+      "id": "cal-v5-11",
+      "name": "visible invented speech act is critical",
+      "mode": "visible",
+      "feedback": {
+        "original": "eat go",
+        "correctedSentence": "Eat and go.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "explanation": "이 명령문으로 사용하세요."
+      },
+      "expectedGrade": {
+        "meaning": "fail",
+        "grammar": "uncertain",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "rationale": "Hypothetical unprotected visible command from ambiguous input; assess actual invented speech act, not a label mismatch."
+    },
+    {
+      "id": "cal-v5-12",
+      "name": "app rejection is unavailable, not an English grammar error",
+      "mode": "rejected-wire",
+      "original": "She sings well.",
+      "target": "grammar verb",
+      "wire": {
+        "meaningUsage": "appropriate",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "targetReason": "공개 합성 목표 의견",
+        "grammarReason": "공개 합성 문법 의견",
+        "correctionReason": "",
+        "contextNeeded": "none"
+      },
+      "expectedGrade": null,
+      "expectedRejection": "missing_context_question",
+      "rationale": "No learner-visible valid feedback; fixed denominator nonpass and no invented grammar-fail grade."
+    }
+  ]
+}

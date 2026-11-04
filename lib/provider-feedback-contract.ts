@@ -11,12 +11,15 @@ export const FEEDBACK_OUTPUT_LIMITS = { tokens: 4096, textCharacters: 30000 } as
 export const FEEDBACK_VALIDATION_STAGES = ['envelope', 'model', 'content_type', 'content_limit', 'json_syntax', 'fields', 'structure', 'judgment'] as const;
 export type FeedbackValidationStage = (typeof FEEDBACK_VALIDATION_STAGES)[number];
 export const FEEDBACK_DIAGNOSTICS = ['free_tier_region', 'wire_fields', 'chunk_count', 'evidence_contract'] as const;
+export const JUDGMENT_REJECTION_REASONS = ['natural_empty_correction','natural_changed_correction','uncertain_nonempty_correction','needs_work_missing_correction','missing_context_question','unexpected_context_question','missing_correction_reason','unexpected_correction_reason','negation','quantity','time_or_focus','participants','speech_act','content_change'] as const;
+export type JudgmentRejectionReason = typeof JUDGMENT_REJECTION_REASONS[number];
 export type FeedbackDiagnostic = (typeof FEEDBACK_DIAGNOSTICS)[number];
 export class FeedbackValidationError extends Error {
   readonly stage: FeedbackValidationStage;
   readonly diagnostic?: FeedbackDiagnostic;
   readonly validationDetail?: FeedbackValidationDetail;
-  constructor(stage: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic, validationDetail?: FeedbackValidationDetail) { super('Invalid feedback content'); this.stage = stage; this.diagnostic = diagnostic; this.validationDetail = validationDetail; }
+  readonly judgmentReason?: JudgmentRejectionReason;
+  constructor(stage: FeedbackValidationStage, diagnostic?: FeedbackDiagnostic, validationDetail?: FeedbackValidationDetail, judgmentReason?: JudgmentRejectionReason) { super('Invalid feedback content'); this.stage = stage; this.diagnostic = diagnostic; this.validationDetail = validationDetail; this.judgmentReason=judgmentReason; }
 }
 
 export const responseJsonSchema = {
@@ -58,7 +61,7 @@ export function parseProviderFeedback(
 export type ProviderFeedbackContract = {
   schema: Record<string, unknown>;
   instruction: string;
-  parse: typeof parseProviderFeedback;
+  parse: (text: unknown, original: string, model: SentenceFeedback['model'], input?: {sentence:string;[key:string]:string}) => SentenceFeedback;
 };
 export const defaultFeedbackContract: ProviderFeedbackContract = {
   schema: responseJsonSchema, instruction: structureInstruction, parse: parseProviderFeedback,

@@ -29,25 +29,13 @@ test('grammar request extraction preserves published baseline instruction exactl
  for(const c of helper.accuracyCases.filter(c=>c.domain==='grammar'))assert.equal(await helper.accuracyPromptHash(helper.accuracyRequest(c).instruction),'027d4bc9a41dcb665aafe9023c42ca8c2954dcc028e1bced1862fe73dd636dd5');
  for(const c of helper.accuracyCases){const r=helper.accuracyRequest(c);assert.equal(r.input.sentence,c.sentence);assert.equal('expected' in r.input,false);assert.equal('references' in r.input,false);}
 });
-test('direct comparison uses a single selected provider even when it fails',async()=>{
- for(const provider of ['google','groq']){let calls=0;
-  await assert.rejects(helper.evaluateAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,helper.accuracyCases[0],async(url)=>{calls++;assert.equal(url.includes('googleapis'),provider==='google');return new Response('{}',{status:429});}));
-  assert.equal(calls,1);
- }
+test('legacy direct comparisons cannot call providers after retirement',async()=>{
+ for(const provider of ['google','groq'])for(const round of [1,2]){let calls=0;await assert.rejects(helper.evaluateAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,helper.accuracyCases[0],async()=>{calls++;},round),e=>e.code==='disabled');assert.equal(calls,0);}
 });
 
-test('candidate round changes only evaluation instructions; frozen baseline, inputs, models and limits stay intact',async()=>{
- for(const sample of helper.accuracyCases){
-  const baseline=helper.accuracyRequest(sample),candidate=helper.accuracyRequest(sample,2);
-  assert.deepEqual(candidate.input,baseline.input);assert.notEqual(await helper.accuracyPromptHash(candidate.instruction),await helper.accuracyPromptHash(baseline.instruction));
-  assert.equal('expected' in candidate.input,false);
- }
- for(const domain of ['word','grammar'])for(const provider of ['google','groq']){
-  const sample=helper.accuracyCases.find(c=>c.domain===domain),sent=[];
-  for(const round of [1,2])await assert.rejects(helper.evaluateAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,sample,async(_url,init)=>{sent.push(JSON.parse(init.body));return new Response('{}',{status:429});},round));
-  const normalize=r=>{const copy=structuredClone(r);if(provider==='google')delete copy.systemInstruction;else copy.messages[0].content='';return copy;};
-  assert.deepEqual(normalize(sent[0]),normalize(sent[1]));assert.equal(sent.length,2);
- }
+test('frozen baseline and revised requests retain inputs, separate prompt hashes and historical models offline',async()=>{
+ for(const sample of helper.accuracyCases){const baseline=helper.accuracyRequest(sample),candidate=helper.accuracyRequest(sample,2);assert.deepEqual(candidate.input,baseline.input);assert.notEqual(await helper.accuracyPromptHash(candidate.instruction),await helper.accuracyPromptHash(baseline.instruction));assert.equal('expected'in candidate.input,false);}
+ assert.deepEqual(helper.accuracyModels,{google:'gemini-3.1-flash-lite',groq:'openai/gpt-oss-120b'});
 });
 test('budget counts failed/started attempts, allows only one full second round, never retries',()=>{
  const records=Array.from({length:120},()=>({round:1,status:'failure'}));
@@ -56,33 +44,15 @@ test('budget counts failed/started attempts, allows only one full second round, 
  assert.throws(()=>evaluationBudget(records.slice(0,119),2));assert.throws(()=>evaluationBudget([...records,...Array.from({length:120},()=>({round:2,status:'started'}))],2));
  assert.throws(()=>execFileSync(process.execPath,['scripts/evaluate-english-accuracy.mjs'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}),error=>error.status===1 && error.stderr.includes('Evaluation stopped'));
 });
-test('evaluation endpoint is disabled by default, expiring, authenticated and fixed-input only',async()=>{
- let calls=0;const original=globalThis.fetch;globalThis.fetch=async()=>{calls++;throw Error('must not call');};
- const token='a'.repeat(64),req=(body={caseId:'word-01',provider:'google',round:1},secret=token)=>new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',headers:{origin:'https://study.example','content-type':'application/json','x-english-accuracy-token':secret},body:JSON.stringify(body)});
- try{
-  assert.equal((await route.POST(req())).status,404);
-  for(const expires of ['invalid',new Date(Date.now()-1000).toISOString(),new Date(Date.now()+90_000_000).toISOString()]){accuracyEnv.english_accuracy_token=token;accuracyEnv.english_accuracy_expires=expires;assert.equal((await route.POST(req())).status,404);}
-  accuracyEnv.english_accuracy_expires=new Date(Date.now()+3600_000).toISOString();assert.equal((await route.POST(req(undefined,'b'.repeat(64)))).status,401);
-  for(const body of [{caseId:'other',provider:'google',round:1},{caseId:'word-01',provider:'unknown',round:1},{caseId:'word-01',provider:'google',round:3},{caseId:'word-01',provider:'google',round:1,sentence:'arbitrary'}])assert.equal((await route.POST(req(body))).status,400);
-  assert.equal((await route.POST(req())).status,503);assert.equal(calls,0);
- }finally{globalThis.fetch=original;delete globalThis.accuracyEnv;}
+test('retired evaluation endpoint stays410 with absent, expired or restored tokens and arbitrary inputs',async t=>{
+ let calls=0;t.mock.method(globalThis,'fetch',async()=>{calls++;throw Error('Forbidden');});
+ for(const token of [undefined,'a'.repeat(64)])for(const expires of ['invalid',new Date(Date.now()+3600000).toISOString()]){
+ Object.assign(accuracyEnvironment,{english_accuracy_token:token,english_accuracy_expires:expires,google_api:'test-only',groq_api:'test-only'});
+ for(const body of [{caseId:'word-01',provider:'google',round:1},{caseId:'unknown',provider:'groq',round:2,sentence:'PRIVATE'}]){const response=await route.POST(new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',headers:{'content-type':'application/json','x-english-accuracy-token':token??''},body:JSON.stringify(body)}));assert.equal(response.status,410);assert.deepEqual(await response.json(),{code:'legacy_evaluation_disabled'});}}
+ assert.equal(calls,0);
 });
 
-test('authenticated POST routes each round to its exact prompt and returns safe validation stage without provider text',async()=>{
- const previous={...accuracyEnvironment},originalFetch=globalThis.fetch,token='c'.repeat(64);
- Object.assign(accuracyEnvironment,{english_accuracy_token:token,english_accuracy_expires:new Date(Date.now()+3600_000).toISOString(),google_api:'test-only',groq_api:'test-only'});
- const request=(sample,provider,round)=>new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',headers:{origin:'https://study.example','content-type':'application/json','x-english-accuracy-token':token},body:JSON.stringify({caseId:sample.id,provider,round})});
- try{
-  for(const domain of ['word','grammar'])for(const provider of ['google','groq'])for(const round of [1,2]){
-   const sample=helper.accuracyCases.find(c=>c.domain===domain);let calls=0,sent;
-   globalThis.fetch=async(_url,init)=>{calls++;sent=JSON.parse(init.body);const text='PRIVATE_INVALID_JSON';return provider==='google'?Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text}]}}]}):Response.json({model:helper.accuracyModels.groq,choices:[{finish_reason:'stop',message:{content:text}}]});};
-   const response=await route.POST(request(sample,provider,round)),body=await response.json(),expected=helper.accuracyRequest(sample,round);
-   assert.equal(response.status,502);assert.equal(body.validationStage,'json_syntax');assert.equal(calls,1);assert.doesNotMatch(JSON.stringify(body),/PRIVATE|test-only/);
-   const text=provider==='google'?sent.systemInstruction.parts[0].text:sent.messages[0].content;
-   assert.ok(text.startsWith(expected.instruction));assert.deepEqual(JSON.parse(provider==='google'?sent.contents[0].parts[0].text:sent.messages[1].content),expected.input);
-  }
- }finally{globalThis.fetch=originalFetch;for(const key of Object.keys(accuracyEnvironment))delete accuracyEnvironment[key];Object.assign(accuracyEnvironment,previous);}
-});
+
 test('resume pins fixture, domain prompt and models; second round requires a real revision',()=>{
  const profiles={word:{promptHash:'word',models:{google:'g',groq:'q'}},grammar:{promptHash:'grammar',models:{google:'g',groq:'q'}}};
  const record={round:1,domain:'word',provider:'google',fixtureHash:'fixture',promptHash:'word',expectedModel:'g'};
@@ -112,7 +82,7 @@ test('CLI restores complete baseline after prompt changes without project files 
  writeFileSync(join(store,'ledger.json'),JSON.stringify({attempts}));
  const guard=join(directory,'no-http.mjs');writeFileSync(guard,"globalThis.fetch=()=>{throw Error('No HTTP allowed during recovery')};");
  try{
-  const output=execFileSync(process.execPath,['--import',pathToFileURL(guard).href,resolve('scripts/evaluate-english-accuracy.mjs'),'--live','--round','1'],{cwd:directory,encoding:'utf8',input:JSON.stringify({origin:'https://wordgrain-oxford-study.hoihou-o.chatgpt.site',evaluationToken:'a'.repeat(64)})+'\n'});
+  const output=execFileSync(process.execPath,['--import',pathToFileURL(guard).href,resolve('scripts/evaluate-english-accuracy.mjs'),'--offline','--round','1'],{cwd:directory,encoding:'utf8',input:JSON.stringify({origin:'https://wordgrain-oxford-study.hoihou-o.chatgpt.site',evaluationToken:'a'.repeat(64)})+'\n'});
   assert.equal(JSON.parse(output).complete,true);assert.equal(JSON.parse(readFileSync(join(store,'blind-round-1.json'),'utf8')).length,120);
   assert.deepEqual(JSON.parse(readFileSync(join(store,'ledger.json'),'utf8')).attempts,attempts);
  }finally{assert.ok(realpathSync(directory).startsWith(realpathSync(tmpdir())+sep));rmSync(directory,{recursive:true,force:true});}

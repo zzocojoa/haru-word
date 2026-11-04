@@ -1,0 +1,1584 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": "1",
+        "title": "전환 기준 소스·호출 경계·불변 조건 고정",
+        "description": "운영 v141과 최신 GitHub main을 대조하고 기존 미커밋 학습 작업을 보존한 채 OpenAI 전환의 구현 기준과 대상 경로를 확정한다.",
+        "details": "계획 기준: docs/OPENAI_API_MIGRATION_PLAN.md. 알려진 운영 v141 source 3fe640c50cabd12519fc7490361e84b1ad72aed8/tree 138158efe7e6f0aed9bb18cfca0172a9e27efc5e. 현재 기본 폴더 HEAD 429d966은 구버전·dirty이므로 그대로 구현/재게시하지 않는다. 구현 시 Sites 네이티브 상태와 GitHub main을 다시 확인하고 codex/ 브랜치에서 필요한 변경만 적용한다. 단어·문법 학습, 평가 API, CLI 평가 스크립트와 모든 Google/Groq 전송 경로를 목록화한다. 사용자 새 요구가 AGENTS.md의 Google 우선/Groq 대체 규칙을 이 작업에 한해 대체함을 문서화한다. Site ID/DB/R2/접근 범위·한국 날짜·성적 분리·revision 보호·기존 기록/백업 보존을 고정한다. 계획 작성은 완료 상태로 오인하지 않고 실제 구현 작업은 pending으로 유지한다.",
+        "testStrategy": "Sites 현재 버전/소스와 구현 checkout SHA·tree 대조, 기존 dirty 변경 보존, 호출 지점 목록과 차단/호환 체크리스트 검토. API 코드 구현·테스트·실제 호출 전에 다음 자격 증명 작업의 사용자 선택을 완료해야 한다. 값 비노출 자격 증명 존재 검사는 사용자 선택을 위한 선행 확인으로 허용한다.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "운영·GitHub 기준과 격리 브랜치 결정",
+            "description": "운영·GitHub 기준과 격리 브랜치 결정",
+            "details": "운영 v141/실제 최신 게시 상태와 GitHub main을 다시 대조한다. dirty 기본 폴더를 덮어쓰지 않고 codex/ 구현 브랜치를 올바른 기준에서 준비한다. 완료: base SHA/tree·원격 대응·보존할 기존 변경 목록을 기록한다. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 1,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:05:51.789Z"
+          },
+          {
+            "id": 2,
+            "title": "호출 지점·사용자 우선 요구 대조",
+            "description": "호출 지점·사용자 우선 요구 대조",
+            "details": "단어/문법 API·평가 API·CLI·환경 플래그·출처 표시·저장/복원/CSV를 목록화한다. 기존 Google 우선 규칙을 새 사용자 요구로 대체할 문서 변경을 식별한다. 완료: R01/R02/R04/R10/R11 누락 없음. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 1,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:05:51.796Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T04:05:51.796Z"
+      },
+      {
+        "id": "2",
+        "title": "OpenAI 자격 증명·계정 이용 조건 확인",
+        "description": "구현 시작 전 기존 키 재사용 또는 새 키 생성에 대한 사용자 선택과 안전한 보관 경로를 확정한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R12. OpenAI API Key 스킬을 구현의 선행 게이트로 적용한다. 키는 값 없이 존재만 검사하고 기존 키 재사용/신규 생성 선택을 받은 뒤 진행한다. 새 키·파일 저장·Sites Secret 등록은 승인한 목적지에서만 수행한다. 공식 문서의 모델 지원과 실제 계정 권한을 구분하고 결제·요금제·한도는 임의 변경하지 않는다. 이번 계획 작성에서는 키를 읽거나 만들지 않는다. 참조 S03/S06~S09 및 설치된 openai-platform-api-key SKILL.md.",
+        "testStrategy": "비밀 값이 stdout/저장소/Task Master/브라우저에 없음을 점검한다. 키 선택·목적지·계정에서 허용할 모델 목록을 안전한 메타데이터만으로 기록한다. 후속 구현은 이 작업의 선택이 완료되기 전 시작하지 않는다.",
+        "status": "done",
+        "dependencies": [
+          "1"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "키 재사용·신규 생성 선택 및 목적지 확인",
+            "description": "키 재사용·신규 생성 선택 및 목적지 확인",
+            "details": "구현 때만 값 비노출 존재 검사와 사용자 선택을 진행한다. 서버 전용 Secret/ignored 환경 파일을 사용하고 클라이언트 전달·키 문자열 수집·자동 과금 변경을 금지한다. 완료: 선택 근거와 비밀 없는 설정 위치 기록. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 2,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:05:55.408Z"
+          },
+          {
+            "id": 2,
+            "title": "계정별 사용 가능 모델·실호출 검증 조건 고정",
+            "description": "계정별 사용 가능 모델·실호출 검증 조건 고정",
+            "details": "문서 지원 모델을 곧바로 계정 사용 가능으로 표시하지 않는다. 모델 권한·비용 조건과 실제 호출 검증에 필요한 별도 승인 범위를 정한다. 완료: 등록할 후보 및 미검증 표시·라이브 검증 호출 수/토큰 상한 확정. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 2,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:05:55.416Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T04:05:55.416Z"
+      },
+      {
+        "id": "3",
+        "title": "허용 모델 카탈로그·선택 정책 확정",
+        "description": "학습 설정과 서버가 공유할 검증된 모델 목록·기본값·지원 매개변수·가격 기준을 만든다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R03/R05/R09/R12. 기본 후보 gpt-6.1-sol, 추가 후보 gpt-6.1-terra/gpt-6-astra. 세 모델은 문서상 Responses/structured_outputs 지원이며 계정별 검증 후 활성화한다. 초기 reasoning.effort=low, temperature/top_p 미전송; 기본 모델은 Sol 후보로 두되 허용 불가면 다른 모델을 자동 고르지 않고 명시적 선택을 요구한다. 모델별 exact ID/허용 response model ID/지원 파라미터/가격 확인일/활성 여부를 서버 카탈로그에 둔다. 자유 모델 문자열 입력과 고가 모델 자동 전환을 금지한다. S01/S06/S07/S08/S09/S10.",
+        "testStrategy": "없는 모델·미활성 모델·임의 접두어/스냅샷 변형을 거부한다. 세 모델에 허용된 reasoning 값만 전송하고 계정 불가를 속도/품질 평가와 혼동하지 않는다. UI와 서버의 모델 목록·기본값이 일치하는지 검사한다.",
+        "status": "done",
+        "dependencies": [
+          "2"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "모델 ID·기능·요청 파라미터 등록",
+            "description": "모델 ID·기능·요청 파라미터 등록",
+            "details": "S06/S07/S08/S10에서 endpoint·structured outputs·reasoning 지원을 확인한다. 새로운 모델은 카탈로그 검증 없이 API 입력으로 허용하지 않는다. 완료: 요청·응답 모델 매핑과 비지원 값 거절 검사. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 3,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:08:13.338Z"
+          },
+          {
+            "id": 2,
+            "title": "가격·기본값·선택 변경의 적용 시점 정의",
+            "description": "가격·기본값·선택 변경의 적용 시점 정의",
+            "details": "표준 단기 문맥 단가/확인일을 표시하고 실제 요금은 사용량 기준임을 알린다. 저장된 선택은 다음 명시적 요청부터 적용하고 실패 시 자동 모델 변경을 하지 않는다. 완료: 기본값/불가 모델/요청 중 변경 UI 계약. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 3,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:08:13.346Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T04:08:13.346Z"
+      },
+      {
+        "id": "4",
+        "title": "설정·AI 결과·백업의 버전 호환 계약 구현",
+        "description": "새 모델 설정과 OpenAI 결과를 저장하면서 Google/Groq 기록과 구형 백업을 보존하고 구형 클라이언트의 필드 유실을 차단한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R04/R05/R06/R07/R08/R09. settings.aiModelId는 선택 필드로 추가하고 누락은 표시/요청 해석 시 기본값을 적용한다. 새 OpenAI 결과는 provider/openai·requestedModel·실제 model·promptVersion·validationVersion·createdAt를 보존한다. 저장된 model은 현재 선택 허용 목록과 분리하여 과거/미래의 알 수 있는 제공자·유한 길이 모델 문자열을 읽되, 신규 생성은 카탈로그로 제한한다. 기존 Google/Groq 의미·구조·첫 답·성적·학습일을 변환하지 않는다. 통합 클라이언트 capability X-Study-AI-Contract: 2를 GET/PUT/AI/전체·분할 복원에 전파한다. 구형 클라이언트가 새 설정/결과를 읽거나 설정 전체를 덮어쓰는 경우 426으로 막고 필드를 제거한 성공 응답으로 위장하지 않는다. JSON envelope haru-words-v1·기존 byte/count 한도·revision/D1 batch 원자성을 유지한다. S02 및 현행 state/backup 호환 코드.",
+        "testStrategy": "Google만/Groq만/OpenAI만/혼합/구조 있음·없음/모델 설정 누락·불가·향후 모델 기록을 전체 저장→조회→내보내기→전체 복원→분할 복원으로 왕복한다. 409·426·커밋 응답 유실·실패 원자성·구형 클라이언트 목표 변경으로 aiModelId 제거 시도를 검사한다.",
+        "status": "done",
+        "dependencies": [
+          "1",
+          "3"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "모델 선택·결과 출처 스키마와 기본 해석 추가",
+            "description": "모델 선택·결과 출처 스키마와 기본 해석 추가",
+            "details": "신규 생성 허용 ID와 영속 기록을 읽는 모델 검증을 분리한다. 누락 설정을 읽기만 해도 DB/학습 기록을 다시 쓰지 않는다. 완료: legacy·OpenAI·미활성/과거 모델 스키마 검사. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 4,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:16:32.722Z"
+          },
+          {
+            "id": 2,
+            "title": "구형 클라이언트 읽기·쓰기·AI 요청 보호",
+            "description": "구형 클라이언트 읽기·쓰기·AI 요청 보호",
+            "details": "새 capability를 검사한다. 새 계정 설정을 모르는 이전 화면의 목표 변경이 aiModelId를 제거하지 못하고, 새 모델을 모르는 GET이 조용히 데이터를 누락하지 못하게 한다. 완료: 426과 기존 초안 백업/재조회 연결. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 4,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:16:32.729Z"
+          },
+          {
+            "id": 3,
+            "title": "전체·분할 복원과 revision 원자성 보존",
+            "description": "전체·분할 복원과 revision 원자성 보존",
+            "details": "단어/문법 의견 및 모델 설정을 백업에 보존하고 기존 envelope/크기/건수·DB 바인딩을 유지한다. 완료: 구형→신형·혼합·응답 유실·충돌·각 commit 단계 실패 회귀 검사. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 4,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:16:32.737Z"
+          },
+          {
+            "id": 4,
+            "title": "구형 모델 출처 표시·향후 롤백 읽기 정책",
+            "description": "구형 모델 출처 표시·향후 롤백 읽기 정책",
+            "details": "legacy model로 Google/Groq를 정확히 식별하고 새 결과는 명시적 provider를 사용한다. 현재 선택 불가인 과거 의견도 읽기/백업은 가능해야 한다. 완료: 과거 문구/모델/구조 불변과 호환 reader 유지 원칙. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 4,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:16:32.744Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T04:16:32.744Z"
+      },
+      {
+        "id": "5",
+        "title": "Workers용 OpenAI Responses 전송 어댑터 구현",
+        "description": "추가 SDK 의존성 없이 기존 fetch 패턴으로 엄격한 JSON 출력·취소·오류·시간 제한을 처리한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R01/R05/R06/R09/R12. POST https://api.openai.com/v1/responses, 서버 Secret Bearer 인증, store:false, tools 없음, strict text.format json_schema. 첫 전환은 기존 프롬프트/의미·문법 판정/필수 structure wire 계약을 고정하여 제공자 효과의 기준선을 남긴다. reasoning.low, 초기 max_output_tokens=4096, 28초 upstream 제한, 브라우저 35초/저장 25초는 별개로 유지한다. reasoning 토큰이 출력 예산을 소비할 수 있으므로 incomplete를 성공 JSON으로 취급하지 않는다. raw REST의 output 배열에서 message/output_text만 추출하고 reasoning/refusal/incomplete/오류를 먼저 구분한다; SDK 전용 output_text helper를 REST 최상위 필드라고 가정하지 않는다. 응답 스트림 256KiB·최종 텍스트 30,000자 제한, 기존 필드 제한 적용. 자동 재전송/다른 모델 fallback 없음. 응답 model은 카탈로그 매핑으로 확인하고 실제 값을 기록한다. S01/S02/S03/S04/S05/S10/S15.",
+        "testStrategy": "성공·reasoning+message·refusal·incomplete/max_output_tokens·비JSON·필드/구조/판정 모순·반환 모델 불일치·초대형 envelope·401/403/429/5xx·헤더/본문 지연·취소를 모의한다. 버튼 한 번당 upstream 최대 한 번, 원문/키 비노출, 취소 후 후속 호출 없음.",
+        "status": "done",
+        "dependencies": [
+          "2",
+          "3",
+          "4"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "엄격한 Responses 요청·응답 계약",
+            "description": "엄격한 Responses 요청·응답 계약",
+            "details": "고정 서버 프롬프트와 untrusted user JSON을 분리하고 text.format·store:false·모델별 reasoning을 정확히 전송한다. 출력 배열에서 필요한 텍스트만 추출한다. 완료: 실제 공식 형식의 envelope fixture 검사. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 5,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:22:28.257Z"
+          },
+          {
+            "id": 2,
+            "title": "본문 제한·기한·취소·재전송 없는 전송",
+            "description": "본문 제한·기한·취소·재전송 없는 전송",
+            "details": "28초 upstream/35초 client 여유를 유지하고 256KiB 응답 및 30,000자 콘텐츠 한도를 검증한다. SDK를 도입하면 maxRetries:0을 반드시 명시한다. 완료: 지연/취소/잘림/대형 envelope에서 잠금 해제와 추가 호출 0. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 5,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:22:28.265Z"
+          },
+          {
+            "id": 3,
+            "title": "안전한 오류·실제 모델 메타데이터 변환",
+            "description": "안전한 오류·실제 모델 메타데이터 변환",
+            "details": "refusal/incomplete/model mismatch 및 고정 OpenAI 오류 코드를 기존 안전 오류 계약으로 정규화한다. raw error.message/본문/계정 정보를 복사하지 않는다. 완료: HTTP 상태와 허용 코드만의 오류 응답·프라이버시 검사. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 5,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:22:28.273Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T04:22:28.273Z"
+      },
+      {
+        "id": "6",
+        "title": "단어·문법 요청 전환과 Google·Groq 실행 경로 차단",
+        "description": "새 학습 요청은 OpenAI만 호출하고 legacy 평가·CLI에서도 기존 제공자 요청을 실행하지 않게 한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R01/R02/R05/R10/R11. 단어 및 문법 POST 모두 공통 OpenAI 어댑터를 사용한다. account-scoped settings/session을 일관되게 읽고 expectedModelId를 저장된 선택/허용 목록과 비교하여 다르면 호출 전 409로 종료한다. 새 독립 ai_feedback_enabled 플래그를 도입하고 google_ai_enabled가 새 AI의 master switch로 남지 않게 한다. Google/Groq 전송 모듈을 production import graph에서 분리하며 과거 파서/fixture는 보존한다. 평가 API는 legacy 공급자에 대해 무조건 비활성 응답을 유지해 오래된 token/env 복구로 재호출되지 않게 한다. 기존 실호출 평가 CLI는 호출 전 중단 또는 OpenAI 전용 명시적 별도 평가 도구로 분리한다. 키 삭제 없이도 legacy key/flag가 있어도 upstream 호출 0을 증명한다. S01 및 코드 호출 목록.",
+        "testStrategy": "키/플래그 true·false·누락, 미설정 OpenAI 키, 구형 요청, Google/Groq 평가 토큰/명령을 주입해 두 legacy 도메인 fetch가 0인지 검증한다. 익명/타 계정/틀린 단계/변경 모델은 제공자 호출 전에 거부되고 성적/입력은 보존된다.",
+        "status": "done",
+        "dependencies": [
+          "4",
+          "5"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "학습 라우트·서버 모델 스냅샷 전환",
+            "description": "학습 라우트·서버 모델 스냅샷 전환",
+            "details": "word/grammar API의 입력·인증·현재 위치 보호를 유지하며 expectedModelId를 일관된 서버 설정과 비교한다. 요청 시작 후 설정 변경은 해당 응답의 모델을 바꾸지 않는다. 완료: 두 학습 경로 OpenAI only·mismatch 409. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 6,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T04:28:44.373Z"
+          },
+          {
+            "id": 2,
+            "title": "legacy 전송·평가·환경 경로 전수 차단",
+            "description": "legacy 전송·평가·환경 경로 전수 차단",
+            "details": "실행 가능한 Google/Groq 호출점과 production 번들을 검사한다. 평가 token/env가 되살아나도 legacy 호출을 허용하지 않고 기존 고정 결과/오프라인 재생은 보존한다. 완료: legacy 키가 남은 경우를 포함한 모든 런타임 경로 호출 0. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 6,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:05:59.530Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T05:05:59.530Z"
+      },
+      {
+        "id": "7",
+        "title": "학습 설정의 계정별 AI 모델 선택 UI 구현",
+        "description": "학습 설정에서 모델을 선택·저장하고 다음 사용자가 실행한 요청에만 반영한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R03/R05/R06/R07/R11/R12. 기존 학습 설정에 AI 모델 select를 추가하고 서버 카탈로그의 표시명·비용/속도 성격·가격 확인일을 제공한다. API 키 입력 UI는 만들지 않는다. 선택은 현재 사용자 설정에 저장하며 기존 save/retry/conflict/backup 흐름을 사용한다. 변경만으로 AI를 실행하거나 과거 의견을 재생성하지 않는다. 요청 중 모델 선택 변경은 잠그며 다른 기기 변경은 다음 요청의 expectedModelId 불일치로 안내한다. 저장된 모델이 비활성/권한 없음이면 표시하고 명시적 재선택을 요구한다; 자동으로 고가/다른 모델을 선택하지 않는다. 결과 카드·기록에는 요청 당시 실제 모델을 표시한다.",
+        "testStrategy": "계정 A/B 격리·재접속·다른 기기·새 백업/구형 백업·저장 503/409/응답 유실·요청 중 변경·불가 모델·키 미설정 상태에서 선택값과 성적이 보존되는지 검사한다. 모델 변경/설정 열기/조회에 AI fetch 0.",
+        "status": "done",
+        "dependencies": [
+          "3",
+          "4",
+          "6"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "선택·가격/속도 안내·저장/재시도 UI",
+            "description": "선택·가격/속도 안내·저장/재시도 UI",
+            "details": "표준 학습 설정 조작과 저장 배너를 재사용하고 저장 실패·충돌 시 값을 보존한다. 완료: 320~1440px/200%·44px 조작·키보드·접근성 및 선택 저장 회귀. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 7,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:50:08.956Z"
+          },
+          {
+            "id": 2,
+            "title": "다음 요청 적용·다른 기기 충돌·과거 의견 분리",
+            "description": "다음 요청 적용·다른 기기 충돌·과거 의견 분리",
+            "details": "모델 설정 변경은 다음 명시적 클릭에만 적용한다. 요청중 선택 잠금과 서버 mismatch 안내, 이전 의견 모델/원문 보존을 확인한다. 완료: 자동 AI 실행 0·과거 의견 불변. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 7,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:29:14.284Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T05:50:08.956Z"
+      },
+      {
+        "id": "8",
+        "title": "OpenAI 오류·개인정보·출처·관측 안내 정합화",
+        "description": "새 제공자와 모델 선택에 맞추어 안전 오류·학습 안내·CSV 출처·진단을 일치시킨다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R04/R09/R11/R12. lib/feedback-issue와 display/notice·AI 전송 안내·attribution·설정 안내·CSV의 제공자/모델을 OpenAI에 맞춘다. legacy 기록은 계속 Google/Groq로 정확히 표시한다. 429는 허용된 세부 code가 있을 때만 rate/credit/spend를 구분하고 임의 결제 변경은 하지 않는다. Retry-After는 안내만 하며 자동 재요청하지 않는다. store:false를 제로 보관/학습 사용 절대 금지로 과장하지 않는다. 공식 데이터 문서의 기본 비학습 사용과 남을 수 있는 abuse monitoring 보관을 구분한다. 진단은 고정 stage/provider/model/시간/비식별 request ID·토큰 수만; 원문/답변/키/raw provider 오류 제외. S03/S04/S05/S09.",
+        "testStrategy": "실제 코드에 정의된 오류 조합·legacy/OpenAI 출처·CSV 열의 기존 순서 및 수식 이스케이프·긴 모델명·모바일 안내·진단 가림을 확인한다. HTTP200이나 JSON 성공을 영어 정확도 통과 또는 저장 성공으로 표시하지 않는다.",
+        "status": "done",
+        "dependencies": [
+          "5",
+          "6",
+          "7"
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "오류·개인정보·모델/요금 안내 갱신",
+            "description": "오류·개인정보·모델/요금 안내 갱신",
+            "details": "Google 우선/Groq 전송 문구를 신규 요청 화면에서 제거하되 과거 기록 출처는 유지한다. 안전 코드 기반의 사용자 조치와 데이터 처리 안내를 제공한다. 완료: refusal/한도/권한/시간 초과/형식 오류 전파 검사. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 8,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:05:59.540Z"
+          },
+          {
+            "id": 2,
+            "title": "안전한 진단·CSV·완료/학습 기록 출처",
+            "description": "안전한 진단·CSV·완료/학습 기록 출처",
+            "details": "실제 제공자·요청 모델·반환 모델·검증 단계·소요시간을 문장 없이 남기고 읽기 전용 기록/CSV 출처를 유지한다. 완료: 원문 비노출과 기존 열 호환·기록 읽기 자동 호출 0. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 8,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:05:59.550Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T05:05:59.550Z"
+      },
+      {
+        "id": "9",
+        "title": "전환·호환성·차단 회귀 검사와 제한된 실호출 게이트",
+        "description": "최종 변경 상태에서 단위·타입·린트·빌드와 새/구형 계약을 검증하고 승인된 범위에서만 OpenAI 실연결을 확인한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R01~R12. npm/lockfile 유지. 실제 commands는 구현 checkout package.json을 먼저 확인하고 npm test, npm run typecheck, npm run lint, Sites build-site.mjs를 실행한다. 이전 658개 성공은 참고 기준이지 변경 후 증거가 아니다. 구형/혼합/신형 word+grammar opinion·settings·전체/분할 백업·409/426·알 수 없는 과거 모델·legacy env true·전송 차단·late reply·model mismatch를 검증한다. 모의 provider가 기본이며 실제 키/개인 문장 없이 반복 가능해야 한다. 라이브 검증은 task 2에서 별도 동의한 고정 합성 입력만, 활성 모델당 1회 이하·최대 3회·추가 재시도 0을 제안한다; 동의가 없으면 미실측으로 남기고 실연결 완료를 주장하지 않는다. 구조/영어 품질 평가는 이후 단계다.",
+        "testStrategy": "최종 변경 후 실행 로그·exit code·검사 이름·소스 SHA·lock 해시를 남긴다. provider request body와 outputs는 고정 합성 데이터만 사용한다. 필수 검사가 실패/미실행이면 전환 출시 게이트를 통과시키지 않는다.",
+        "status": "done",
+        "dependencies": [
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "모델 계약·오류·legacy 차단 검사",
+            "description": "모델 계약·오류·legacy 차단 검사",
+            "details": "OpenAI envelope fixture와 설정/모델/권한 오류를 실제 route로 통과시킨다. legacy 호출은 fetch spy·import graph·old evaluation command로 0을 확인한다. 완료: 최종 변경 상태 회귀 통과. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 9,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:05:59.561Z"
+          },
+          {
+            "id": 2,
+            "title": "기록·백업·구형 클라이언트 왕복 매트릭스",
+            "description": "기록·백업·구형 클라이언트 왕복 매트릭스",
+            "details": "old/new/mixed 설정·word/grammar 기록을 저장/조회/전체·분할 복원으로 검증한다. 409/426/커밋 응답 유실·알 수 없는 과거 모델 보존을 포함한다. 완료: 원자성·하위 호환 증거. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 9,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:29:14.295Z"
+          },
+          {
+            "id": 3,
+            "title": "필수 로컬 검사·승인 범위 실연결 확인",
+            "description": "필수 로컬 검사·승인 범위 실연결 확인",
+            "details": "단위/타입/린트/공식 빌드를 수행한다. 실제 계정 모델 가용성과 지연은 별도 승인된 소수 합성 호출로만 확인하며 결과/원문은 운영 학습 DB에 쓰지 않는다. 완료: 실측 또는 정확한 미검증 표기와 활성 후보 결정. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 9,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:50:08.964Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T05:50:08.964Z"
+      },
+      {
+        "id": "10",
+        "title": "로컬 Chromium·WebKit 모델 선택 전체 흐름 QA",
+        "description": "루프백 Worker와 가상 계정에서 모델 선택부터 요청·저장·재접속·복구까지 검증한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R01~R12. Sites portable 프로필과 localhost/127.0.0.1만 사용하고 production learner 기록을 QA로 수정하지 않는다. 두 브라우저에서 설정 저장·변경/미변경·새/기존 의견·한도/시간 초과/refusal·저장 실패/충돌·다른 기기·구형 client/backup·문법 v1~v4의 실제 지원 프로필을 구분한다. 관련 기존 QA: sentence-feedback, feedback-issue, feedback-safety, sentence-feedback-layout, request-timeout, refactor-boundaries, study-recovery, settings-dialog 및 backup. 320/390/768/1440px·200%·keyboard·axe 조건을 포함한다. WebKit을 실제 iPhone으로 표시하지 않는다.",
+        "testStrategy": "모델 변경/과거 기록 열기/재접속으로 AI 호출이 없고 버튼 1회에 OpenAI 요청 1회 이하·Google/Groq 0인지 확인한다. busy/timeout/retry 후 초안·학습 성적·revision/restore 보존과 브라우저 오류를 검사한다. 테스트 프로필별 범위를 남긴다.",
+        "status": "done",
+        "dependencies": [
+          "9"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "설정→요청→저장·재접속·충돌 QA",
+            "description": "설정→요청→저장·재접속·충돌 QA",
+            "details": "두 계정·두 기기에서 선택값·expectedModelId·실제 반환 모델과 저장 의견을 대조한다. 완료: 동시성/늦은 응답/503·409·426·저장 재시도에서 학습 내용 보존. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 10,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:50:08.973Z"
+          },
+          {
+            "id": 2,
+            "title": "모바일·접근성·복원·문법 프로필 QA",
+            "description": "모바일·접근성·복원·문법 프로필 QA",
+            "details": "두 엔진과 지정 폭/글자 크기로 설정 및 AI 결과를 확인한다. 실제 지원 문법 v1~v4별 호환을 분리하며 복원/출처/CSV를 대조한다. 완료: 관련 조건 통과 및 실기기 미검증 명시. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 10,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T05:50:08.980Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T05:50:08.980Z"
+      },
+      {
+        "id": "11",
+        "title": "기존 Sites 전환 게시·관측·호환 롤백 준비",
+        "description": "검증한 소스를 기존 Site에 단계적으로 반영하고 Google/Groq가 차단된 상태와 데이터 호환성을 유지한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R01/R02/R04/R06/R07/R10/R11/R12. 현행 Sites source helper의 source 동기화·검증·저장 버전·게시 절차를 따른다. 사이트 생성/ID·D1·R2·접근 범위 변경 없음. DB 테이블 마이그레이션은 현 계획상 필요 없음; 필요성이 생기면 별도 원자 적용/복구 계획부터 수정한다. 배포할 환경은 google_ai_enabled=false, groq_ai_enabled=false, 새 ai_feedback_enabled=false 및 서버 OpenAI Secret; 새 코드가 적용된 AI-off 버전부터 게시·확인한 후 같은 소스에서 OpenAI를 활성화한다. secret 실값은 로그/manifest/Task Master에 넣지 않는다. 새 결과 생성 뒤 구형 v141로 단순 rollback 금지. 장애 시 호환 reader를 유지한 채 ai_feedback_enabled=false로 차단하고 수동 학습을 유지한다. 키 삭제/회전·결제 변경은 범위 밖. 운영 UI QA는 실제 사용자 학습 자료를 바꾸지 않는다.",
+        "testStrategy": "네이티브 저장/배포 성공·소스 SHA/아카이브·환경 revision/바인딩/접근 보존을 확인한다. legacy 요청 0의 사전 모의 근거와 게시 후 안전 로그를 대조하고 새/구형 기록·백업의 read 지원을 확인한다. 위험도·compatibility·rollback·관측·migration·미검증 6항목 출시 기록을 남긴다.",
+        "status": "done",
+        "dependencies": [
+          "10"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "게시 전 백업·소스/환경·새 계약 점검",
+            "description": "게시 전 백업·소스/환경·새 계약 점검",
+            "details": "검토 가능한 source/artifact와 Secret 위치, 보존할 기존 학습 DB/사이트 자원을 대조한다. 완료: 위험/호환/롤백/관측/마이그레이션/미검증 체크리스트. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 11,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T06:01:58.406Z"
+          },
+          {
+            "id": 2,
+            "title": "기존 사이트에 AI-off→OpenAI-only 순서 적용",
+            "description": "기존 사이트에 AI-off→OpenAI-only 순서 적용",
+            "details": "Sites 네이티브 도구로 기존 site에 검증 버전만 게시한다. OpenAI-off 상태에서 legacy 차단을 먼저 확보하고 이후 승인 범위의 OpenAI 활성화/검증을 진행한다. 완료: 배포/환경/바인딩 근거와 과거 제공자 호출 차단. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 11,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T06:41:37.575Z"
+          },
+          {
+            "id": 3,
+            "title": "실패 시 호환 reader 유지·전체 AI 차단",
+            "description": "실패 시 호환 reader 유지·전체 AI 차단",
+            "details": "새 OpenAI 데이터가 존재하면 구형 enum reader를 재게시하지 않는다. 새 reader와 백업 지원을 남긴 채 새 AI master switch를 꺼 복구한다. 완료: 모의 실패·manual 학습·복원 가능 및 롤백 절차. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 11,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T06:41:37.588Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T06:41:37.588Z"
+      },
+      {
+        "id": "12",
+        "title": "전환 후 영어 판단 평가 기준선·호출 예산 확정",
+        "description": "제공자 전환 완료 후 고정 합성 자료와 평가 차원을 동결하고 판단 개선에 들어갈 승인 범위를 정한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R13/R14. 이 작업은 초기 deferred. 기존 480회 원장·기존 17개 실패·과거 점수는 동결한다. 뜻/목표·문법·교정 의미 보존·설명 정확성·판단 보류를 분리하고 유효 형식/실행 실패/언어 실패를 따로 센다. 합성 공개 사례·미사용 holdout·표현 변형을 포함하고 개인정보를 사용하지 않는다. 기본 후보 모델과 각 매개변수/프롬프트/검증 버전을 기록한다. 새 실제 평가는 모델×사례×반복의 호출 수/토큰/금액 상한을 먼저 제시하고 별도 승인을 받기 전 실행하지 않는다. 제안 품질 기준은 critical 의미 반전·비문 승인 0, 종합 90% 이상·기준 대비 악화 0이며 실행 전에 확정한다. S11.",
+        "testStrategy": "fixture/기준표/요청 프로필/허용 교정·판단 보류 기준의 해시와 고정 채점표를 검토한다. 자동 채점과 독립 인간 검토를 구분하고 JSON 통과를 언어 정확도 통과로 계산하지 않는다.",
+        "status": "done",
+        "dependencies": [
+          "11"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "영어 평가 차원·고정 사례·holdout 설계",
+            "description": "영어 평가 차원·고정 사례·holdout 설계",
+            "details": "과거 실패와 새로운 합성 변형에 의미/문법/교정/설명/보류 기준을 작성한다. 완료: 과거 원장 불변·허용 대안·비문/불충분/다의어/부정/수량 등 평가표. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 12,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T07:40:41.333Z"
+          },
+          {
+            "id": 2,
+            "title": "기준선·모델 비교·실호출 상한 승인",
+            "description": "기준선·모델 비교·실호출 상한 승인",
+            "details": "모델 수×사례 수×반복과 token 비용 상한을 확정한 후에만 신규 평가를 시작한다. 완료: 실행 전 고정 gate/예산·승인·독립성/미검증 범위 기록. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.\n2026-11-03 사용자 한도 변경: 총 세전 US$5(기존 실행분 포함). 기존 1,080회/US$165 실행 권한을 철회하고 기준선을 342슬롯에서 중단했다. 보수적 누적 US$3.335471, 잔여 US$1.664529. 현재 v142 기준 추가 생성+교차채점은 Sol13/Terra11/Astra4사례(각각26/22/8요청), 모델별 대안이다. 고정 품질 gate는 미완료이며 축소 실행 보호와 후속 후보 구현/검증이 남았다. 근거: outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/budget-5usd.json\nG3 준비 완료 범위: 고정 90사례/5차원/모델과 버전/원래 품질 gate는 유지한다. 사용자가 변경한 총 US$5와 기사용분 원장, 원래 실행 권한 철회, 미확인 과금 포함 누적 계산, 새로운 예약의 원자적 한도 차단을 고정했다(7개 검사). 실제 단어/문법 목표 입력 대조 2개 검사 통과. Task12 완료는 평가 준비/승인 범위 확정이며 전체 기준선/품질 gate 통과가 아니다. 미완료 수집/영어 품질은 Task15에서 보류 조건으로 유지한다. 후보 동결 전 새 유료 호출은 차단한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 12,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T08:20:24.907Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T08:20:24.907Z"
+      },
+      {
+        "id": "13",
+        "title": "판단 전용 응답 계약과 숨긴 구조 의존성 분리",
+        "description": "모델 전환 기준선을 확보한 뒤 화면에 필요한 판단 정보와 구형 구조 보존 계약을 분리한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R13/R14. 초기 deferred. 필수 숨긴 structure를 그대로 제거하면 기존 progressive/preposition 안전 검사가 사라지므로 대체 판단 조건·회귀를 먼저 만든다. 신규 wire 계약은 원문 판정·교정문·최소 설명·근거/불충분 사유를 분리하고 legacy structure는 읽기/백업에 보존한다. 새 모델의 판단을 임의 수정해 정답처럼 표시하지 않는다. 판단 불가의 빈 교정/최소 필요한 문맥 요구, grammar natural 원문 동일성, needs_work 의미 보존을 테스트 가능한 기준으로 설계한다. 프롬프트/검증 버전을 올리고 기존 기록을 재채점하지 않는다. S02/S10/S11.",
+        "testStrategy": "기존 17개 실패와 안전 replay·정상 대조군·부정/시제/수량/지시 대상 변형을 사용한다. 숨긴 구조 오류로 의견 전체가 실패하는 경우와 구조 제거로 안전 검사가 사라지는 경우를 함께 검사한다.",
+        "status": "done",
+        "dependencies": [
+          "12"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "새 wire·로컬 의미/판정 검증 계약 설계",
+            "description": "새 wire·로컬 의미/판정 검증 계약 설계",
+            "details": "원문/교정/뜻·용법/문법/보류 기준을 분리하고 검증 근거의 한계를 명시한다. 완료: 새 계약·모순 검사·기존 계약 비교와 회귀. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 13,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T08:46:09.130Z"
+          },
+          {
+            "id": 2,
+            "title": "구조 보호의 대체·legacy 데이터 보존",
+            "description": "구조 보호의 대체·legacy 데이터 보존",
+            "details": "기존 구조 없이도 필요한 모순을 보류하는 보호를 먼저 검증한다. legacy 구조는 원형 그대로 보존하고 화면 표시 정책과 분리한다. 완료: 구형/혼합 왕복과 안전 대조군. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 13,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T08:46:09.137Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T08:46:09.137Z"
+      },
+      {
+        "id": "14",
+        "title": "명시적 재점검·초안·교정 적용·보류 내보내기 개선",
+        "description": "검토에서 재현된 앱 정책 문제를 언어 모델 품질과 구분하여 수정한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R14. 초기 deferred. 같은 문장의 uncertain/구형 의견도 명시적으로 다시 요청할 경로를 설계하되 자동 호출은 금지한다. 초안은 AI 실패 후 프로세스 종료에서 복구할 수 있도록 계정 범위·보관 기간·삭제·로그아웃 정책을 포함해 내구화한다. 과거 제안 적용으로 새 편집을 덮어쓰는 경우 비교/명시 확인/되돌리기를 제공한다. CSV/tutor export는 보류 상태를 표시하면서 원본 백업은 변경하지 않는다. 한 요청의 멱등성/결과 복구와 운영 통계 쓰기 실패의 비차단 처리 필요성도 이 단계에서 검토하고, D1 테이블이 필요하면 별도 migration/rollback을 승인 범위에 포함한다.",
+        "testStrategy": "AI 실패→강제 종료→이어가기, 같은 문장 판단 보류→사용자 재요청, 새 편집→과거 제안→되돌리기, 보류 결과 CSV/튜터 전달·원본 백업 불변, 두 기기·revision 충돌·계정 전환·요청 중복을 검증한다.",
+        "status": "done",
+        "dependencies": [
+          "12",
+          "13"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "동일 문장 재점검·과거 제안 복구 동작",
+            "description": "동일 문장 재점검·과거 제안 복구 동작",
+            "details": "판단 보류/구형 의견 재요청과 과거 제안의 비교/복구를 제공한다. 완료: 명시 요청만 호출·새 편집 유실 방지·과거 성적/의견 보존. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 14,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T09:18:38.802Z"
+          },
+          {
+            "id": 2,
+            "title": "초안 내구화·요청 복구·보류 export 계약",
+            "description": "초안 내구화·요청 복구·보류 export 계약",
+            "details": "개인 문장을 추가 저장하는 범위와 삭제 정책을 먼저 확정한다. CSV/tutor에는 보류 상태를 보이고 백업은 raw 원형을 유지한다. 완료: 프로세스 종료/계정 전환/409/중복/복원 회귀. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 14,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T11:24:08.381Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T11:24:08.381Z"
+      },
+      {
+        "id": "15",
+        "title": "개선 후 독립 평가·회귀·출시 판정",
+        "description": "판단 개선의 효과를 고정 기준과 별도 검증 자료로 입증하고 기준 미달이면 후보를 비활성 상태로 보존한다.",
+        "details": "계획: docs/OPENAI_API_MIGRATION_PLAN.md. R13/R14. 원래 고정90사례·3모델·기준선/후보 범위를 유지하며 기존 결과·17개 과거 실패를 다시 유리하게 계산하지 않았다. 사용자가 총 한도를 기존 사용분 포함 세전 US$5로 변경해, 원래 US$165 실행기는 철회한 채 한 후보 source/body/수집 순서와 누적 보호 실행기를 동결했다.\n\n추가251요청을 수행하고 보수적 누적 US$4.879124·잔여 US$0.120876에서 종료했다. 다음 최소 묶음 최대예약액 US$0.123531에 못 미쳐 새 묶음0개다. 원점수·미측정·실패·정상형/판단 보류·모델별 비용/지연을 구분하고 가린 작성자 검토150개를 별도로 보존했다. 독립 인간 전문가 인증이나 전체90사례 실측 완료를 주장하지 않는다.\n\n최종 소스 f273886의 전체 단위742·타입·린트·공식 Sites build·관련 브라우저42회, 평가 보호37개·대시보드17개를 검증했다. 핵심 의도 창작 오류1건·기준 미충족·미측정으로 후보 전체를 비활성·미게시 보존하는 보류 판정이다. 운영 v142·환경75·접근5와 기존 데이터는 유지하며 운영DB0006 적용·환경 변경은 없다. 구현 완료와 G4 활성화 통과를 구분한다.\n\n근거: docs/OPENAI_JUDGMENT_EVALUATION_RESULT.md, outputs/openai-migration-release/judgment-release-decision.json, completion-audit.json. 같은 승인으로 새 후보를 튜닝하거나 추가 유료 평가하지 않는다.",
+        "testStrategy": "모든 품질/운영 gate의 통과·실패·미검증 증거를 requirement별로 대조한다. 승인한 호출 상한과 실제 호출 원장을 비교하고 응답 실패를 정확한 영어 결과로 계산하지 않는다. 소스/실제 모델/버전·미검증 범위를 포함해 출시/보류를 판정한다.",
+        "status": "done",
+        "dependencies": [
+          "13",
+          "14"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "고정 기준·holdout·모델별 비용/지연 비교",
+            "description": "고정 기준·holdout·모델별 비용/지연 비교",
+            "details": "사전 동결한 평가 조건과 승인 상한만 사용한다. 완료: critical/종합·정상 거절/판단 보류/호출 실패·비용·지연의 분리 집계. 기준: docs/OPENAI_API_MIGRATION_PLAN.md 및 부모 작업의 공식 출처/검사 전략.\n총 US$5 이내 수집 종료와 모델별 고정 분모·미측정·호출 실패·정상형/보류·비용/지연·가린 검토150개·사후 공통사례 비교를 기록했다. 품질 gate 실패를 보류 사유로 남겼으며, 전체90사례의 실측 완료를 주장하지 않는다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 15,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T13:05:25.288Z"
+          },
+          {
+            "id": 2,
+            "title": "최종 회귀·출시 또는 후보 보류 기록",
+            "description": "최종 회귀·출시 또는 후보 보류 기록",
+            "details": "백업·구형 클라이언트·두 브라우저·성적/한국 날짜 보존·legacy 호출0의 최종 회귀를 확인했다. 품질 기준 실패/미측정이면 후보를 비활성 상태로 보존한다는 계획에 따라 보류로 판정했다. 전체 단위742, 타입/린트/build exit0(기존경고15), 관련20스크립트42실행, 평가 보호37개·대시보드17개, 원인 재현3개와 요구사항/15개/35개 완료 대조를 확인했다. 운영 v142 유지, 새 후보·운영 migration 미게시. 독립 인간 전문가·실제 iPhone·전 범위 언어 실측은 미검증으로 보고한다. 근거: docs/OPENAI_JUDGMENT_EVALUATION_RESULT.md 및 outputs/openai-migration-release/judgment-release-decision.json.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 15,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T13:32:37.180Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T13:32:37.180Z"
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2026-11-03T13:32:37.180Z",
+      "taskCount": 15,
+      "completedCount": 15,
+      "tags": [
+        "master"
+      ]
+    }
+  },
+  "judgment-remediation": {
+    "tasks": [
+      {
+        "id": "1",
+        "title": "수정 기준·원인 증거·후보 재사용 범위 고정",
+        "description": "v142와 보류 후보를 비교해 새 구현 기준과 재사용/재설계 대상을 결정한다.",
+        "details": "C11/J01/J13/J14. 운영8f312b3와 후보f273886을 수정하지 않고 증거를 고정한다. 향후 별도 codex/ checkout에서 진행한다. 재점검·교정 적용·초안/영수증 등 후보 기능은 개별 검토 후 재사용하고 실패한 판단 프롬프트를 그대로 새 정답으로 취급하지 않는다. 완료: 소스 SHA/tree·원인 재현32개·보존 해시·재사용 표·운영 위험 6항목이 추적 가능하다.",
+        "testStrategy": "기존 master/원장/원점수 해시와 두 source HEAD/clean 상태 대조. 기존 Site·DB/R2·학습일·성적·접근 범위 불변 확인. 준비 증거와 새 검증을 구분한다.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "원인별 확인/가설·보존 기준 등록",
+            "description": "기존 조사와 32개 재현을 새 작업에 연결한다.",
+            "details": "완료: C01~C11의 직접 재현/자료 관측/미확정 인과를 구분하고 master15/35·소스2개·과거 원장/점수의 해시를 고정한다. 검증: 기존 파일 불변 대조.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 1,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T15:12:35.711Z"
+          },
+          {
+            "id": 2,
+            "title": "격리 구현 기준·후보 기능 재사용 결정",
+            "description": "운영 기준에 어떤 보류 후보 기능을 가져올지 명시한다.",
+            "details": "완료: 재사용/재설계/제외 모듈 표와 위험·호환성·롤백·관측·마이그레이션·미검증 범위. 검증: 변경 예정 파일별 근거와 되돌림 경로 검토.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 1,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T15:12:35.723Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T15:12:35.723Z"
+      },
+      {
+        "id": "2",
+        "title": "문법·목표·과제·입력 충분성 판정 계약 분리",
+        "description": "모델 지시와 평가가 같은 판정 의미를 사용하도록 상태표를 먼저 정의한다.",
+        "details": "C01/C02/C09/J02~J04. 원문 문법, 목표 뜻/품사, 과제 충족, 입력 충분성을 별도 개념으로 정의한다. 기존 enum/기록은 호환 reader로 보존한다. 정상 문법이나 다른 뜻의 단어를 목표에 끼워 넣지 않는다. 새 스키마 필드 추가 여부는 UI 의미에 필요한 최소 범위로 결정한다. 완료: 모든 상태 조합별 교정 허용/보류/질문/표시 조건과 목표 미사용 사례의 정답 정책.",
+        "testStrategy": "book/은행·명사 단편·주격/수일치/to 누락·감탄/명령·완전한 대명사·타당한 대안 표현의 결정표를 검토한다. 목표 라벨 실패를 문법 오류로 집계하는 변이 검사는 실패해야 한다.",
+        "status": "done",
+        "dependencies": [
+          "1"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "판정 축과 허용 대안 정의",
+            "description": "문법과 목표/과제의 의미를 분리한다.",
+            "details": "완료: 세 축의 독립 정의·기존 enum 대응·태스크별 표시 문구와 라벨 허용 대안. 검증: I want learn English의 정확 교정과 목표 라벨 차이를 따로 판정.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 2,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:11:45.620Z"
+          },
+          {
+            "id": 2,
+            "title": "교정·보류·질문 상태표 작성",
+            "description": "정상/보완/불확실 상태의 불변식을 고정한다.",
+            "details": "완료: 정상=원문 그대로, 확정 보완=실제 최소 교정, 불충분=교정 비움/구체 질문의 상태표. 검증: empty/same correction과 단편·정상 명령을 구분.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 2,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T15:50:02.211Z"
+          },
+          {
+            "id": 3,
+            "title": "목표 미충족과 프롬프트 우선순위 확정",
+            "description": "목표에 맞추려 원문 의미를 바꾸는 지시 충돌을 제거한다.",
+            "details": "완료: 원문 보존이 과제 예문 맞추기보다 우선하며 목표 불일치 사유만 분리 표시한다는 계약. 검증: 동사book 목표의 자연스러운 명사 문장을 강제 예약 문장으로 바꾸지 않음.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 2,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T15:50:02.221Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:11:45.620Z"
+      },
+      {
+        "id": "3",
+        "title": "새 평가 루브릭·원인 회귀·정답 허용 범위 설계",
+        "description": "과거 점수를 바꾸지 않고 새 판정 계약에 맞는 평가 기준을 마련한다.",
+        "details": "C01/C06/C11/J01/J02/J05/J12. 이미 본90사례와 294정상응답은 알려진 회귀/분석 자료로만 사용한다. 기존 25실패 중21목표라벨 전용·4문맥/해석이라는 분리를 유지한다. 새 허용 라벨/문법·교정·설명·보류와 critical 정의를 사전 등록한다. 완료: 사례별 목표/과제 해석과 허용 대안의 근거가 있고 기존 원점수와 독립 버전이다.",
+        "testStrategy": "과거 보고서/검토 원장 불변 해시, 올바른 다른 표현 허용, 실제 오류와 라벨 차이/미측정 분리, 새 루브릭 버전 고정 검사를 수행한다.",
+        "status": "done",
+        "dependencies": [
+          "2"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "확인 원인별 회귀 fixture 정리",
+            "description": "문맥/의도/설명/재사용/형식 오류를 구분한다.",
+            "details": "완료: 각 C01~C11에 대표 회귀와 기대 실패/정상 경로가 있다. 검증: 이전 점수/원문/원장을 덮어쓰지 않는다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 3,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.199Z"
+          },
+          {
+            "id": 2,
+            "title": "라벨·설명·critical 독립 루브릭 등록",
+            "description": "정확한 교정을 목표 라벨만으로 영어 오답 처리하지 않는다.",
+            "details": "완료: 5차원과 목표/과제 보조 지표·critical0의 기준 및 허용 대안을 동결할 수 있다. 검증: 정확 교정/잘못된 규칙/의도 창작/정보 부족을 각각 판별.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 3,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:11:45.630Z"
+          },
+          {
+            "id": 3,
+            "title": "새 holdout 작성·분리 절차 지정",
+            "description": "구현 동결 뒤 작성할 새30사례의 범위와 노출 정책을 정한다.",
+            "details": "완료: 단어15·문법15, 정상/실오류/문맥 부족과15수업을 포괄하는 분포·작성/검토/노출 이력 규칙. 검증: 이미 본 holdout 재사용·결과 후 점수 변경 금지; 독립 전문가 인증과 구분.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 3,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.220Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:11:45.630Z"
+      },
+      {
+        "id": "4",
+        "title": "추가 문맥·수업 문장 틀의 명시적 입력 계약",
+        "description": "AI에 보내는 정보와 사용자가 기대하는 문맥 범위를 일치시킨다.",
+        "details": "C02/C08/J03/J08/J14. 개인 '보완할 점' 메모는 자동 전송하지 않는다. 필요한 경우 전송을 명시한 선택적 의도/문맥 필드를 따로 설계하고 기본 미전송으로 둔다. 문법 과제는 실제 적용된 contentVersion의 stem/task/check를 함께 구성한다. 기존 요청은 새 필드 없이도 읽는다. 완료: 전송 필드/한도/선택/버전과 provenance 식별 규칙이 명확하다.",
+        "testStrategy": "메모 미선택 네트워크 본문 미포함, 명시한 추가 문맥만 포함, 수업v1~v4 stem 일치, 과대/삽입 지시·구형 요청·개인정보 비기록을 검사한다.",
+        "status": "done",
+        "dependencies": [
+          "2"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "추가 문맥 UI·전송 범위 확정",
+            "description": "일반 메모와 AI에게 전달할 정보를 구분한다.",
+            "details": "완료: 기본 미전송·선택 시 전송 안내·길이/빈값 규칙. 검증: 설정/조회/메모 편집만으로 요청이나 개인 메모 전송이 발생하지 않는다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 4,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.230Z"
+          },
+          {
+            "id": 2,
+            "title": "수업 버전별 stem·과제 입력 조립",
+            "description": "과제가 가리키는 문장 틀을 실제 수업 버전과 맞춘다.",
+            "details": "완료: v1~v4 lessonForVersion을 적용한 stem/task/check·목표 ID. 검증: 현재진도와 과거수업 입력의 혼합을 막고 단어 학습 입력에는 불필요한 수업 문맥을 넣지 않는다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 4,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.238Z"
+          },
+          {
+            "id": 3,
+            "title": "버전·크기·구형 요청 호환",
+            "description": "새 문맥 필드를 안전한 요청/복원 계약으로 연결한다.",
+            "details": "완료: 선택적 필드 검증·요청 크기·신뢰 경계·context fingerprint; 구형 미포함 지원. 검증: 명령 주입·초과·미지원 버전·원문 로그 유출을 차단.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 4,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.246Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T16:14:23.246Z"
+      },
+      {
+        "id": "5",
+        "title": "최소 판단 응답과 단일 스키마·프롬프트 구현",
+        "description": "새 생성 경로에서 숨긴 구조와 스키마 간 차이를 제거한다.",
+        "details": "C05/C07/C09/J04/J06. UI에 필요한 판정·최소 교정·근거·문맥 질문만 생성하며 구조 분석/번역은 새 요청에 요구하지 않는다. 로컬과 제공자 JSON Schema의 문자열/배열 제한을 가능한 공통 정의로 정렬하고 미지원 제약은 명시적 검증 단계로 남긴다. 새 prompt/validation 버전을 부여한다. 완료: 정상 문장 보존 우선 지시와 wire/저장 호환 경계, raw JSON/legacy structure 보존이 검증된다.",
+        "testStrategy": "실제 body 캡처로 필수 숨긴 구조 부재·strict·store:false·1회전송·구형 reader 확인. 경계 길이 N-1/N/N+1, unknown field, old/new 기록혼합, 정상인데 뜻다름 fixture 검사.",
+        "status": "done",
+        "dependencies": [
+          "3"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "최소 wire·저장 변환 경계",
+            "description": "표시 필드만 생성하고 과거 구조 기록은 보존한다.",
+            "details": "완료: 새 wire·저장 adapter와 버전 이름이 독립되며 구형4필드/structure 기록은 그대로 읽힌다. 검증: 숨긴 구조 필수 생성과 원문 손실 없음.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 5,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.253Z"
+          },
+          {
+            "id": 2,
+            "title": "스키마 제한·실패 단계 정렬",
+            "description": "생성 형식과 로컬 한도의 차이를 줄인다.",
+            "details": "완료: 문자열/배열/필수값의 한도표·공통 정의와 미지원 제약의 명시적 오류 코드. 검증:1500/1501 등 경계와 optional 부가 필드의 잘못된 전체결합 재현 해소.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 5,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.261Z"
+          },
+          {
+            "id": 3,
+            "title": "원문 우선·목표 분리 지시 버전",
+            "description": "충돌 없는 단어/문법 지시를 새 버전으로 만든다.",
+            "details": "완료: 정상 문장을 목표에 맞춰 바꾸지 않으며 과제/문법/문맥을 분리하는 지시. 검증: book/bank·to 누락·단편과 대안 표현의 offline body/contract 검토.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 5,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:11:45.639Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:11:45.639Z"
+      },
+      {
+        "id": "6",
+        "title": "판정·교정·보류 불변식 검증 구현",
+        "description": "형식상 정상이나 서로 모순인 판단 응답이 사용자에게 도달하지 않게 한다.",
+        "details": "C02/C05/C07/J02/J03/J04. Task2 결정표를 순수 검증 함수로 구현한다. 확정 needs_work인데 교정이 없거나 같은 경우, 정상인데 원문이 바뀐 경우, 보류인데 교정이 남은 경우를 구체 코드로 거절/보류한다. 저장 reader의 과거 기록을 새 규칙으로 파괴하지 않는다. 완료: old/new 생성 검증과 영구 저장 읽기 계약을 분리한다.",
+        "testStrategy": "모든 상태 조합과 단편/정상 명령·공백 경계를 표 기반 검사하고 검증분기 제거 변이가 실제 실패하는지 확인한다. 회귀는 기존 데이터 읽기와 독립한다.",
+        "status": "done",
+        "dependencies": [
+          "5"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "정상·실교정·보류 상태 검사",
+            "description": "교정문과 판정의 모순을 차단한다.",
+            "details": "완료: empty/same needs_work·changed natural·nonempty uncertain을 고정 사유로 구분. 검증: 추가조사 합성 응답의 잘못된 허용이 재현되지 않는다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 6,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.276Z"
+          },
+          {
+            "id": 2,
+            "title": "입력 충분성·문맥 질문 계약",
+            "description": "모델의 확신만으로 부족한 입력을 승인하지 않는다.",
+            "details": "완료: 입력 유형·문맥 필요 조건·정상 명령/감탄/대명사 예외를 결정표로 처리한다. 검증: Music/eat go/Exactly six…와 Go!/Hello!/완전한 대명사 문장 대조.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 6,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:11:45.648Z"
+          },
+          {
+            "id": 3,
+            "title": "생성 검증과 과거 reader 분리",
+            "description": "새 검증 도입으로 옛 결과/백업이 손상되지 않게 한다.",
+            "details": "완료: 생성 전용 strict validator와 bounded historical reader 분리. 검증: 옛 Google/Groq·새 OpenAI·보류 결과·혼합 백업 읽기 성공.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 6,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.292Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:11:45.648Z"
+      },
+      {
+        "id": "7",
+        "title": "의도·발화 행위 보존과 안전한 판단 보류",
+        "description": "단편을 새 명령/이야기로 만들거나 역할을 바꾸는 교정을 억제한다.",
+        "details": "C02/C03/J03/J04. 부정·수량·시간·행위자/대상과 질문/명령/진술 변화를 포함한 보존 정책을 설계한다. 일반 의미 동치 검증기를 완성했다고 주장하지 않고 확정 가능한 변환만 허용하며 애매하면 질문/보류한다. 특정 실패 문자열 정답표로 통과율을 높이지 않는다. 완료: 알려진 핵심 오류 차단 및 정상 대안의 과잉 거절 점검.",
+        "testStrategy": "역할교환·간접목적어·능수동 대안·부정 범위·수량·시제·질문/명령·짧은답변의 최소대조쌍. critical0과 정상 보존/보류의 정밀도를 분리 집계한다.",
+        "status": "done",
+        "dependencies": [
+          "4",
+          "6"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "발화 행위·참여자 보존 정책",
+            "description": "보존할 의미 요소와 허용 변환을 명시한다.",
+            "details": "완료: 명령/질문/진술·역할·부정·시간·수량의 변경 정책과 동치 대안 목록. 검증: eat go를 명령으로 임의 확정하지 않음.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 7,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.300Z"
+          },
+          {
+            "id": 2,
+            "title": "경계 검증과 보류 경로 연결",
+            "description": "확정할 수 없는 교정을 책임 있게 보류한다.",
+            "details": "완료: 교정 검증/보류 사유/부족 문맥 질문·UI 표시가 일치한다. 검증: 불확실성을 새 교정문이나 숨긴 점수로 바꾸지 않음.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 7,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:11:45.658Z"
+          },
+          {
+            "id": 3,
+            "title": "정상 대안 과잉 거절 검사",
+            "description": "안전장치 때문에 올바른 영어가 거절되는지 확인한다.",
+            "details": "완료: 정상 명령·질문·대명사·대안 어순을 별도 표로 검사한다. 검증: 주어가 명시되지 않았다는 이유만으로 모든 명령을 보류하지 않음.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 7,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.314Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:11:45.658Z"
+      },
+      {
+        "id": "8",
+        "title": "문법 설명의 근거·교정 일관성 보호",
+        "description": "맞는 교정에 틀린 문법 규칙을 붙여 가르치는 경로를 줄인다.",
+        "details": "C06/J05. 이미 검토한 문법 교재·명확한 규칙 근거를 활용해 설명의 증거 범위와 원문/교정 대응을 검증한다. 지원 가능한 범위를 명시하고 근거 없는 일반화는 생략/보류한다. 단순 키워드·금칙어 목록을 일반 영어 검증기로 포장하지 않는다. 완료: 오류 설명과 정상 부정/인용·교정 이유가 구분되며 UI/내보내기 정책이 일치한다.",
+        "testStrategy": "goes 과거형 오설명·불규칙 과거형·진행형 동사구·전치사구 직접목적어 오류와 올바른 반박/인용을 대조한다. 문법 설명 차원을 교정 성공과 별도로 채점한다.",
+        "status": "done",
+        "dependencies": [
+          "3",
+          "6"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "설명 근거 범위와 지원 규칙 정의",
+            "description": "설명할 수 있는 규칙과 미지원 영역을 명시한다.",
+            "details": "완료: 검토한 교재/규칙 참조와 설명 지원 범위·보류 문구. 검증: 현재의 두 regex 보호가 전체 규칙 검증이라는 표현을 하지 않음.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 8,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.321Z"
+          },
+          {
+            "id": 2,
+            "title": "설명·교정·판정 모순 차단",
+            "description": "교정 내용과 다른 규칙을 가르치는 응답을 보호한다.",
+            "details": "완료: 오설명·과도 일반화·교정과 모순되는 이유의 가시 보호. 검증: 합성 goes 과거형 설명은 그대로 사용자에게 노출되지 않고 정상 반박문은 통과.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 8,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.328Z"
+          },
+          {
+            "id": 3,
+            "title": "보류 설명의 UI·CSV·학습 도구 일관성",
+            "description": "숨긴 설명이 다른 출력으로 유출되지 않게 한다.",
+            "details": "완료: 보류/오류 설명은 화면·CSV·튜터 입력에서 같은 정책으로 처리하고 raw backup은 보존한다. 검증: 이전24열+상태 호환과 원문 reader 유지.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 8,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.336Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T16:14:23.336Z"
+      },
+      {
+        "id": "9",
+        "title": "OpenAI 전송·완료·실패 분류 연결",
+        "description": "새 계약을 실제 어댑터에 연결하고 연결 실패와 앱 거절을 구분한다.",
+        "details": "C07/C09/J06/J10/J14. 기존 OpenAI-only·선택 모델 고정·store:false·단일 fetch·취소/크기/시간 상한·무재시도/무대체를 유지한다. HTTP200 뒤 parser 거절과 upstream 오류를 다른 고정 코드로 보존한다. 완료: metadata/응답 모델 검증과 사용자 오류/진단 경로가 새 버전에 맞는다.",
+        "testStrategy": "모의 HTTP200 정상/거절/잘림/비JSON·401/429/timeout·응답 모델 불일치·취소/대용량과 upstream 호출수1/0을 확인한다. 실제 키/응답 본문을 로그에 남기지 않는다.",
+        "status": "done",
+        "dependencies": [
+          "5",
+          "6"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "새 계약·버전·모델 provenance 연결",
+            "description": "검증한 새 응답을 메타데이터와 함께 반환한다.",
+            "details": "완료: 새 parser/schema/prompt버전, requested/actual model 검증, fallback0와 명시적 실행만 유지. 검증: 옛 제공자 설정이 신규 호출을 되살리지 않음.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 9,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.343Z"
+          },
+          {
+            "id": 2,
+            "title": "완료 후 검증 거절과 전송 오류 구분",
+            "description": "같은 API 실패 문구로 뭉개지지 않게 한다.",
+            "details": "완료: network/timeout/billing/envelope/schema/judgment 고정 코드·사용자 안내·진단의 일관성. 검증: 구조/필드/판정 오류를 네트워크 장애로 기록하지 않음.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 9,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:11:45.666Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:11:45.666Z"
+      },
+      {
+        "id": "10",
+        "title": "문장·목표·모델·버전별 의견 식별과 과거 표시",
+        "description": "과거 의견을 현재 모델/문맥의 새 결과로 오인하지 않게 한다.",
+        "details": "C04/C08/J07/J08. owner/session/entry·원문·뜻/품사/수업버전·명시 전송 문맥·모델·prompt/validation버전을 의견 식별에 반영한다. 옛 결과는 최신이라고 추정하지 않고 출처/기준 시각과 과거 의견 표시를 유지한다. 원문/필드를 진단 로그로 보내지 않는다. 완료: 어떤 문장/목표/모델을 확인한 의견인지 UI와 저장에서 추적 가능하다.",
+        "testStrategy": "같은 문장/다른 모델·뜻·수업버전·문맥·과거Google/미지원 모델·백업복원·로그아웃의 fingerprint와 표시/수명 경계 검사.",
+        "status": "done",
+        "dependencies": [
+          "4",
+          "5"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "새 의견 fingerprint와 과거 대응",
+            "description": "같은 문장만으로 의견 동일성을 판단하지 않는다.",
+            "details": "완료: 목표/모델/문맥/버전 식별과 옛 필드 미존재 상태를 구분. 검증: 다른 뜻/모델로 바꿨는데 최신 의견으로 표시되지 않음.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 10,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.358Z"
+          },
+          {
+            "id": 2,
+            "title": "현재·과거 출처와 재점검 안내",
+            "description": "새 모델 선택과 과거 결과의 차이를 화면에 표시한다.",
+            "details": "완료: 원문/목표/모델/버전 기준의 과거 표시와 재점검 안내. 검증: Gemini기록을 새 OpenAI 결과로 오인할 표시 없음.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 10,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T23:14:35.657Z"
+          },
+          {
+            "id": 3,
+            "title": "저장·복원·다른 기기 식별 보존",
+            "description": "revision/restore 후에도 의견 출처를 추적한다.",
+            "details": "완료: 신구 metadata 보존·모델 변경/restore 후 stale 식별. 검증: 복원/다른계정의 늦은 결과가 현재 의견으로 합쳐지지 않음.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 10,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.375Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T23:14:35.657Z"
+      },
+      {
+        "id": "11",
+        "title": "동일 문장 명시적 재점검·모델 변경 흐름",
+        "description": "현재 선택 모델로 같은 문장도 사용자가 직접 다시 확인할 수 있게 한다.",
+        "details": "C04/J07/J09. 후보의 재점검 기능을 검토해 재사용하되 설정/모델변경/조회만으로 자동 비용을 만들지 않는다. 요청중 잠금·expectedModelId/revision을 호출 전에 검증하고 기존pending영수증은 새POST 대신GET조회한다. 완료: 과거 결과 유지와 새 명시적 요청이 구분되고 중복 호출이 없다.",
+        "testStrategy": "동일문장·모델변경·클릭연타·새로고침/타임아웃·pending영수증·저장실패·다른기기409의 모의 호출수와 실제 브라우저 상태를 검사한다.",
+        "status": "done",
+        "dependencies": [
+          "9",
+          "10"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "동일문장 재요청과 모델 고정",
+            "description": "수동 버튼으로만 새 검토를 시작한다.",
+            "details": "완료: 동일문장 재점검·선택 모델 표시·요청중 변경 잠금. 검증: 과거의견이 있어도 명시적 요청가능, 설정/열람/입력은 호출0.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 11,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.383Z"
+          },
+          {
+            "id": 2,
+            "title": "재점검·영수증 복구 중복 방지",
+            "description": "이미 실행 중인 요청을 새로 결제하지 않는다.",
+            "details": "완료: pending UUID/완료영수증·GET복구·다른문맥 신규요청 분기. 검증: 연타/새로고침/통신단절/receipt malformed200에서 동일요청 upstream1회 이하.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 11,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.390Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T16:14:23.390Z"
+      },
+      {
+        "id": "12",
+        "title": "교정 비교·현재 입력 보호·적용 취소",
+        "description": "과거 제안이 새 초안을 한 번에 덮어쓰는 경로를 차단한다.",
+        "details": "C03/C04/J04/J07/J09. 후보 비교/확인/취소를 재사용할지 Task1에서 결정한다. 원문/목표/현재입력/제안 ID를 비교한 뒤 명시적 확인으로만 적용하며 변경/보류/오래된 제안은 재점검으로 유도한다. 완료: 적용 전후 비교·사용자 편집 보존·조건부undo와 출력 보류 정책이 일치한다.",
+        "testStrategy": "비교 후 타이핑·모델/목표 변경·늦은 새의견·다른탭·restore·undo후추가입력에서 덮어쓰기/초안유실이 없어야 한다.",
+        "status": "done",
+        "dependencies": [
+          "10"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "원문·목표·제안 일치 후 적용",
+            "description": "확인 중 변경된 입력을 오래된 제안으로 바꾸지 않는다.",
+            "details": "완료: 비교 시점과 적용 시점의 문장/목표/제안 ID가 같을 때만 적용. 검증: 수정 전 의견 버튼을 직접 적용하는 운영 경로 차단.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 12,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.397Z"
+          },
+          {
+            "id": 2,
+            "title": "조건부 취소와 편집 초안 보존",
+            "description": "사용자가 새로 편집한 내용은 취소로도 덮어쓰지 않는다.",
+            "details": "완료: 적용직후에만 되돌릴 수 있고 후속편집/restore는 보호된다. 검증: 적용→편집→undo·저장실패·화면이동 경계의 초안 유지.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 12,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.404Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T16:14:23.404Z"
+      },
+      {
+        "id": "13",
+        "title": "초안·영수증·백업·구형 클라이언트 통합 호환",
+        "description": "새 판단/문맥/식별 기능을 기존 복구·저장·내보내기 계약에 연결한다.",
+        "details": "C04/C07/J06/J08/J09/J14. 새 판단만 넣기 위해 기존 후보의 recovery보호를 제거하지 않는다. UUID선저장·owner 원자claim·1upstream·GET복구·restore원자무효화·draft retention/한도·revision 충돌을 보존한다. 새 metadata/문맥의 backup·CSV/tutor·old/new 클라이언트 능력 협상을 설계한다. 운영 migration은 이 단계 로컬만 검증하고18에서만 승인된 배포 절차로 적용한다.",
+        "testStrategy": "혼합백업/미래모델·4필드/structure·426/409·restore atomicity·lateowner·삭제epoch·기기종료재열기·보류 CSV 미노출·DB rollback호환을 검사한다.",
+        "status": "done",
+        "dependencies": [
+          "11",
+          "12"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "초안·영수증·restore 원자성 보존",
+            "description": "신규 응답 식별 변경을 복구 경계와 맞춘다.",
+            "details": "완료: pending UUID·원자claim·GET조회·기기초안·restore/owner/epoch 경계 유지. 검증: 실패 후 재시도에서 초안유실·중복 비용0.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 13,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.411Z"
+          },
+          {
+            "id": 2,
+            "title": "신구 저장·백업·CSV·능력 협상",
+            "description": "옛 기록을 읽고 새 필드의 미지원 클라이언트를 보호한다.",
+            "details": "완료: 신구/혼합/분할복원·CSV24열 호환과 보류 필터·426 reader지원. 검증: 원문/첫성적/문법진도/한국날짜 무변경.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 13,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.418Z"
+          },
+          {
+            "id": 3,
+            "title": "DB 차이·로컬 migration·롤백 계약",
+            "description": "기존 후보0006을 운영 적용된 것으로 오인하지 않는다.",
+            "details": "완료: 필요 SQL/기존행·FK·tombstone 수명·되돌림 reader표와 로컬 적용 증거. 검증: 운영DB를 지금 수정하지 않으며 새클라이언트 뒤 단순 v142재게시를 호환 롤백으로 보지 않음.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 13,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:14:23.425Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T16:14:23.425Z"
+      },
+      {
+        "id": "14",
+        "title": "고정 진단 코드·실패 차원·운영 관측 분리",
+        "description": "연결 실패·검증 거절·목표 라벨·영어 오류가 섞이지 않게 관측한다.",
+        "details": "C06/C09/J05/J10. natural_changed/empty·uncertain_nonempty·needs_work_missing 등 고정 진단 enum을 도입한다. 원문/응답/개인메모/키는 기록하지 않는다. 목표 라벨 불일치·문법·교정·설명·보류·형식·HTTP·미측정을 서로 분리하며 비용/latency표에 model/version/role을 유지한다.",
+        "testStrategy": "진단이 고정enum/수치만 출력하는지 개인정보 trap 검사,25실패→21라벨/4맥락 재집계 불변, stage변이·미측정과오답 혼합 집계 방지.",
+        "status": "done",
+        "dependencies": [
+          "9"
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "고정 거절 사유와 비밀 비노출",
+            "description": "응답 본문 없이 판정 모순의 정확한 분기를 구분한다.",
+            "details": "완료: 안전한 enum·코드/단계 관계·길이/개수 한도. 검증: 입력값/Zod원문/제공자본문/키가 로그·TaskMaster에 없음.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 14,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:11:45.675Z"
+          },
+          {
+            "id": 2,
+            "title": "차원별 품질·전송·비용 지표",
+            "description": "문법 교정과 목표 라벨 차이를 독립 집계한다.",
+            "details": "완료: 모델/버전/role별 차원·미측정·지연·보수 비용과 청구액 구분. 검증: 과거25건을 모두 문법오류로 계산하는 변이는 실패.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 14,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:24:57.975Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:11:45.675Z"
+      },
+      {
+        "id": "15",
+        "title": "추가 US$5 평가 원장·통제 실험·동결 설계",
+        "description": "새 승인 예산 안에서 수행할 평가와 제한된 원인 대조를 사전 고정한다.",
+        "details": "C01/C08/C10/C11/J10/J11/J12. 사용자 승인한 새 US$5는 옛4.879124와 별도이며 새 원장에만 기록한다. 최대 주평가30사례×3모델×2버전×생성/채점=360회, 원인진단최대36회, 합계396회다. 출력상한 생성2048/채점768, 실제body와 최신 공식단가/지역·캐시/알수없는실패여유로 예약한다. 반복·재시도·모델대체 없음. 가능횟수는 실제body동결 후 계산하며 dollar한도가 우선이다. 완료: source/body/input/rubric/사례/order/hash를 동결하고 다음 완전대조묶음 예약액이 남은 예산을 넘으면 전송 전 중지한다.",
+        "testStrategy": "원장 초기화/이전승인재활용/동시실행/예약불명/실패미정산/role초과/모델대체를 차단하는 단위·통합 검사. 비용추정과 청구서 구분, 실제기존소스 입력대조,1변수실험body차이 검증.",
+        "status": "done",
+        "dependencies": [
+          "3",
+          "7",
+          "8",
+          "14"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "새 US$5 승인·원장·비용 예약",
+            "description": "예산을 소진한 옛 평가와 새 평가를 분리한다.",
+            "details": "완료: 새상한5/used0·옛원장불변·원자dispatch/전체불명예약·완전대조묶음 사전검사·출력/총횟수 상한. 검증: 더 큰 묶음이 예산을 넘으면 호출0으로 중지.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 15,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:24:57.984Z"
+          },
+          {
+            "id": 2,
+            "title": "주평가와 단일 변수 진단 설계",
+            "description": "프롬프트 묶음 변경을 단일 원인 효과라고 오인하지 않는다.",
+            "details": "완료: 새30사례 주평가와 별도3사례×기본Sol×최대3조건×생성/채점×2진단범위=최대36회. 문법전용/복합지시/추론설정 등 한변수만 바꾸고 목적/예산/순서를 고정. 검증: 일반 ChatGPT제품 동등실험이라고 부르지 않음.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 15,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:24:57.995Z"
+          },
+          {
+            "id": 3,
+            "title": "새 source·body·rubric·holdout·수집 순서 동결",
+            "description": "결과를 보고 유리하게 고치지 못하게 평가 경계를 닫는다.",
+            "details": "완료: 새후보커밋동결 뒤 새사례작성·노출이력·원문동일입력/교차judge·순서/최대가능량/최소통과량. 검증: 옛holdout을 새자료로 재사용하지 않고, 결과후소스/점수변경·두번째후보는 같은 평가에서 금지.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 15,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T02:22:47.224Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T02:22:47.224Z"
+      },
+      {
+        "id": "16",
+        "title": "최종 제품 회귀·두 브라우저·복구 검증",
+        "description": "평가할 최종 소스에서 데이터 보호와 새 사용자 흐름을 검증한다.",
+        "details": "C03/J09/J13/J14. 프로젝트 실제 npm test/typecheck/lint와 공식 Sites build를 최종변경상태에서 수행한다. 기존742/42는 과거후보증거로만 유지한다. Chromium/WebKit의 동일문장재점검·모델교체·과거의견·교정비교·draft복구·백업/restore·성적분리·한국날짜를 검사한다. 실제 iPhone/VoiceOver는 별도실측 없으면 미검증으로 남긴다.",
+        "testStrategy": "의미있는 실패 재현→수정후회귀·제품전체단위/타입/린트/build exitcode·기존QA manifest에 근거한 관련범위 E2E. source SHA/tree와 결과를 바인딩하며 이후수정시 영향검사 재실행.",
+        "status": "done",
+        "dependencies": [
+          "7",
+          "8",
+          "13",
+          "14"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "계약·저장·단위·타입·린트·공식 build",
+            "description": "최종 소스의 실제 검사 결과를 모은다.",
+            "details": "완료: 실제 프로젝트 명령/exitcode/경고·소스해시를 기록. 검증: 과거742개통과를 새결과처럼 재사용하지 않음.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 16,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:24:58.014Z"
+          },
+          {
+            "id": 2,
+            "title": "단어/문법·모델·과거 결과·안전 적용 E2E",
+            "description": "두 브라우저에서 새 요청과 과거 의견 흐름을 확인한다.",
+            "details": "완료: Chromium/WebKit·모바일폭·키보드/axe·동일문장·다른모델/목표·비교중편집·보류표시. 검증: 외부실제AI요청 없이 가상계정·로컬 fixture로 실행.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 16,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T23:14:35.671Z"
+          },
+          {
+            "id": 3,
+            "title": "종료재열기·receipt·충돌·복원 회귀",
+            "description": "실패/다른기기/늦은응답에도 초안과 기록을 지킨다.",
+            "details": "완료: 앱강제종료/재열기·GET복구·409/426·다른계정·삭제epoch·복원한도/원자성·구형CSV/한국날짜 검증. 실제iPhone미검증을 명시. 검증: 강제 종료/재열기·복원·충돌의 실제 브라우저 결과와 source hash를 대조한다.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 16,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-03T16:24:58.028Z"
+          }
+        ],
+        "updatedAt": "2026-11-03T23:14:35.671Z"
+      },
+      {
+        "id": "17",
+        "title": "승인한 추가 US$5 유료 평가·가린 검토·품질 판정",
+        "description": "새 고정 후보를 실제 API로 평가하고 각 모델의 배포 자격을 판단한다.",
+        "details": "C01/C06/C10/C11/J05/J11/J12/J13. 사용자 추가5달러승인에 따라15의동결프로토콜만 실행한다. 상한396회/US$5가 모두 적용되고 주평가완전묶음을 우선해 예산부족시 진단도 생략/미측정 기록한다. 3모델×새30사례 고정분모, 모델별90%이상·핵심오류0·기준선대비비악화를 요구한다. 가린원점수/작성자검토/독립전문가여부를 분리한다. 품질미달·미측정은 보류이며 같은승인으로새후보재튜닝하지 않는다.",
+        "testStrategy": "실제request/모델/source/body hash·토큰/미상예약·role/횟수·$5상한 대조,25실패유형 분리보고,paired고정사례·정상과잉거절/보류·설명/intent critical0. 원점수변경 없이 별도검토 sidecar와 보고서 생성.",
+        "status": "done",
+        "dependencies": [
+          "15",
+          "16"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "새 원장의 제한된 실제 수집",
+            "description": "승인 범위의 합성 입력만 유료 전송한다.",
+            "details": "완료: 주평가/진단의 수행·중지·실패·미측정과 비용/사용량·원장hash·전송수. 검증:5달러/396회초과·자동재시도·모델대체·개인기록 사용0.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 17,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T03:00:51.491Z"
+          },
+          {
+            "id": 2,
+            "title": "교차 채점·가린 검토·차원별 비교",
+            "description": "맞는 교정과 목표 라벨 차이를 독립 검토한다.",
+            "details": "완료: rawgrade와 별도검토·고정30분모/모델·쌍별변화·정상오거절/문맥/설명/critical 보고. 검증: 작성자검토를 인간전문가 인증으로 표현하지 않음.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 17,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T03:00:51.503Z"
+          },
+          {
+            "id": 3,
+            "title": "3모델 gate·통제 진단·배포/보류 결정",
+            "description": "측정 부족을 품질 통과로 바꾸지 않는다.",
+            "details": "완료: 모델별90%/critical0/비악화·진단별한변수인과한계·지연/보수비용·R3결정. 모든모델/필수범위미달이면 새판단활성화보류; 추가예산이나새후보를 자동실행하지 않음. 검증: 고정30분모와 모델별90%/critical0/비악화 및 미측정 보류를 원장/원점수와 대조한다.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 17,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T03:00:51.513Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T03:00:51.513Z"
+      },
+      {
+        "id": "18",
+        "title": "승인한 기존 사이트 배포·호환 롤백·운영 확인",
+        "description": "모든 gate 통과 시 기존 Site에 새 수정 사항을 게시하고 실제 상태를 확인한다.",
+        "details": "C11/J01/J13/J14. 사용자가 유료평가와배포포함을승인했다. 새Site생성/접근정책/DB·R2바인딩변경은없다. R0~R3통과한동일소스를기존Sites정규절차로소스동기화·검증·저장버전·게시한다. 필요한DB차이는백업·원자검증후적용, AI-off→배포→검증→허용모델활성화 순서와 reader호환롤백을 준비한다. 품질미달·예산부족·미측정이면 운영v142유지/후보보류를근거와함께기록하며 배포완료로 표시하지 않는다.",
+        "testStrategy": "Sites 현재버전/소스/flags/env·배포status·모델설정·metadata·safeerror·D1행/FK·rollbackreader·운영관측 대조. 개인운영학습기록을 QA로수정하지 않고 배포후비과금읽기/가상검사를 우선한다. 추가 유료smoke가 필요하면 동일새5달러 원장내 예약만 허용.",
+        "status": "done",
+        "dependencies": [
+          "17"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "출시 자격·백업·호환 롤백 최종 검토",
+            "description": "게시 전에 품질/데이터/복구 gate를 확인한다.",
+            "details": "완료: R0~R3증거·배포소스SHA/tree·위험/호환/롤백/관측/migration/미검증6항목·백업복구증거. 미달이면다음게시를실행하지않음. 검증: 체크리스트 하나라도 미충족이면 게시 단계 호출0을 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 18,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T03:42:42.028Z"
+          },
+          {
+            "id": 2,
+            "title": "기존 Site 소스 동기화·DB 절차·게시",
+            "description": "승인한 동일 사이트에 검증한 소스만 적용한다.",
+            "details": "완료: AI-off·필요DB원자적용·정규Sites검증/저장버전/게시·flags활성화 근거. 검증:Site ID/DB/R2/접근정책·한국학습기록불변과운영Secret비노출.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 18,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T04:03:28.328Z"
+          },
+          {
+            "id": 3,
+            "title": "게시 후 확인·보류/롤백·최종 기록",
+            "description": "실제 게시 상태와 새 품질의 한계를 보고한다.",
+            "details": "완료: version/deployment/status/model·관측·문서/TaskMaster/HTML 반영. 미게시/rollback/보류는완료배포로기록하지않고 정확한상태/원인/미검증범위를남긴다. 검증: 유료추가smoke도새5달러예산내한정.",
+            "status": "done",
+            "dependencies": [
+              1,
+              2
+            ],
+            "parentTaskId": 18,
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T04:20:17.830Z"
+          }
+        ],
+        "updatedAt": "2026-11-04T04:20:17.830Z"
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2026-11-04T04:20:17.830Z",
+      "taskCount": 18,
+      "completedCount": 18,
+      "tags": [
+        "judgment-remediation"
+      ]
+    }
+  }
+}

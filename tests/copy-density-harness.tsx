@@ -7,7 +7,7 @@ import type { Word } from '../lib/learning';
 
 const noop = () => {};
 export function render(surface: string) {
-  if (surface === 'word-ai') return renderToStaticMarkup(<SentenceFeedbackPanel sessionId="copy-test" entryId="copy-word" sentence="I work here." busy={false} onPending={noop} onFeedback={async () => true} onUse={noop} />);
+  if (surface === 'word-ai') return renderToStaticMarkup(<SentenceFeedbackPanel sessionId="copy-test" entryId="copy-word" target={{word:'work',pos:'v.',meaning:'일하다',expression:'work'}} sentence="I work here." busy={false} onPending={noop} onFeedback={async () => true} onUse={noop} />);
   if (surface === 'grammar-ai') return renderToStaticMarkup(<GrammarWriting lesson={LESSON_MAP.get('noun')!} progress={{ stage: 5, sentence: '', answers: {}, updatedAt: '2026-09-25T00:00:00Z' }} canSave aiPending={false} aiError={null} onAi={noop} onSentence={noop} onCheck={noop} onChecks={noop} onFrame={noop} onExplain={noop} onComplete={noop} />);
   return renderToStaticMarkup(<FamiliarityCard word={{ id: 'sample', word: 'book', pos: 'n.', level: 'A1', page: 1 } as Word} busy={false} onReveal={noop} onConfirm={noop} />);
 }

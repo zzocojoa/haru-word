@@ -1,4 +1,22 @@
+<!-- judgment-remediation-plan-current -->
+## 2026-11-04 · OpenAI 전환·판단 개선 운영 적용
+
+기존 [하루단어](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 v143·검증 소스 `36dc66f`·환경77을 적용했다. 학습 설정에서 Sol·Terra·Astra 모델을 선택할 수 있다. 신규 AI 요청은 OpenAI Responses만 사용하며 Google/Groq 자동 대체는 없다.
+
+Task Master 수정 플랜은 상위18/18·세부49/49 완료이며, 이전15/35 플랜은 별도로 보존한다. [대시보드 실행 방법](.taskmaster/README.md)과 [검증·평가·배포 요약](docs/releases/2026-11-04-openai-judgment-v143.json)을 따른다. 평가 결과는 새 합성30사례와 가림 작성자 검토 범위이며 일반영어 정확도100% 보장이 아니다. 실제 백업·비밀 값·개인 학습 기록·원시 실행 로그는 Git에 포함하지 않는다. 이 GitHub 브랜치에는 문법 입력의 앞뒤 공백 때문에 정상 응답을 거절하던 클라이언트 경계 수정도 포함된다. 이 추가 수정은 아직 운영에 배포하지 않았다. 아래 이전 버전 설명은 당시 기록이다.
+<!-- /judgment-remediation-plan-current -->
+
+판단 v4의 목표 라벨 기준은 [목표 사용 계약](JUDGMENT_V4_CONTRACT.md)을 따른다. 수업별 올바른 용법 기준을 실제 API와 평가에 연결하며 유료 품질 판정 전 후보 상태다.
+
 # 하루단어 · Oxford 3000
+
+**판단 v4 후속 수정안 · 유료 미평가/미배포:** [별도 수정 범위와 호환 정책](JUDGMENT_V4_FOLLOWUP.md)을 따른다. 현재 US$5 동결 평가 후보5c614d7의 결과를 이 소스의 성능으로 사용하지 않는다.
+
+**2026-11-04 · 판단 v3 수정 후보 / 품질 평가 전:** 문법·목표·문맥 판정, 명시적 추가 문맥과 수업 stem, 검토한 규칙 설명, 현재 목표/모델/문맥 식별과 구형 기록 보호를 구현했다. [새 계약·지원 범위·검증 기준](JUDGMENT_V3_CONTRACT.md)을 따른다. 운영은 v142이며 새 후보는 추가 US$5 평가와 출시 gate 통과 전 비활성이다. 아래 v2 표시는 재사용한 후보의 이력이다.
+
+**후속 구현 후보 · 미게시:** 같은 문장 재점검, 교정 비교/되돌리기, 기기 초안과 요청 UUID 복구, 보류 내보내기를 구현했다. [입력·복구 정책](docs/FEEDBACK_RECHECK_AND_RECOVERY.md)과 [새 D1 영수증·보관·호환 롤백](docs/FEEDBACK_REQUEST_RECEIPTS.md)을 따른다. 새 판단 v2는 `feedback_judgment_enabled` 기본 비활성이며 품질 G4 통과 전에는 켜지 않는다. 아래 전환/운영 표시는 각 기록 시점의 상태다.
+
+**2026-11-03 · OpenAI 전환 사전 검증 완료:** 새 AI 의견을 OpenAI Responses로 전환하고 학습 설정의 계정별 모델 선택을 구현했다. 과거 Google/Groq 기록과 전체·분할 백업은 보존한다. [현재 계약·운영·복구 절차](docs/OPENAI_FEEDBACK.md)와 [게시 전 검증 기록](docs/releases/2026-11-03-openai-migration-prepublish.json)을 따른다. 게시 전 기록 시점의 운영은 아래 v141이며, 검증 성공과 운영 적용을 구분한다.
 
 **미국식 IPA 표시 · v141 운영 반영:** [사전 v3](docs/OXFORD_AMERICAN_IPA_DICTIONARY.md)의 3,809항목을 학습·문장 작성·완료 기록·단어 편집창·이미지 카드 뒷면에 연결한다. 현재 뜻·품사·표제어가 일치할 때만 표시하며 개인 단어와 다른 뜻에는 추정한 발음을 넣지 않는다. 복수 발음의 조건과 기존 듣기 정책을 유지한다. 원문 갱신 후 `npm run ipa:prepare`, 재현성 확인은 `npm run ipa:check`를 사용한다. [구현 계획](docs/OXFORD_AMERICAN_IPA_IMPLEMENTATION_PLAN.md)·[검증 결과](docs/OXFORD_AMERICAN_IPA_IMPLEMENTATION_VERIFICATION.md)·[발음 정책](ENGLISH_ACCURACY.md)을 따른다. PR #52 병합 후 운영 v141에 반영했다.
 

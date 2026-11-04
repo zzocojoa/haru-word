@@ -1,8 +1,11 @@
 'use client';
 import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
 import type { State } from '@/lib/learning';
-import { newGrammarProgress, type GrammarProgress, type LessonId } from '@/lib/grammar/model';
+import { newGrammarProgress,combinedCheck, type GrammarProgress, type LessonId } from '@/lib/grammar/model';
 import { newLessonProgress } from '@/lib/grammar/practice';
+import {usePersistentInput} from '../use-persistent-input';
+import type {GrammarDraftValues} from '@/lib/local-learning-drafts';
+const writingValues=(p:GrammarProgress):GrammarDraftValues=>({sentence:p.sentence,...(p.frame?{frame:p.frame}:{}),...(p.check?{check:p.check}:{}),...(p.checks?{checks:p.checks}:{})});
 
 export type GrammarLeave = () => Promise<boolean>;
 export type GrammarPersistence = {
@@ -21,6 +24,7 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
   const latest = useRef(draft), version = useRef(0), acknowledged = useRef(0);
   const task = useRef<Promise<boolean> | null>(null), alive = useRef(true), allowed = useRef(canSave);
   const [dirty, setDirty] = useState(false), [saving, setSaving] = useState(false), [error, setError] = useState('');
+  const [edited,setEdited]=useState(false);
   useEffect(() => { allowed.current = canSave; }, [canSave]);
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
   useEffect(() => {
@@ -35,7 +39,7 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
     const updated = update(latest.current);
     if (updated === latest.current) return;
     const next = { ...updated, updatedAt: new Date().toISOString() };
-    latest.current = next; version.current++; setDraft(next); setDirty(true);
+    latest.current = next; version.current++; setDraft(next); setDirty(true);setEdited(true);
     // Global emergency/whole backups must contain the latest input, not only
     // the last snapshot that happened to reach the network.
     stage(id, next);
@@ -74,5 +78,9 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
     window.addEventListener('beforeunload', warn);
     return () => window.removeEventListener('beforeunload', warn);
   }, [dirty]);
-  return { draft, latest, change, flush, dirty, saving, error };
+  const persisted=currentState.current.grammar?.[id]??draft;
+  const persistent=usePersistentInput({kind:'grammar',question:JSON.stringify([id,draft.contentVersion??1,5]),base:writingValues(persisted),values:writingValues(draft),saved,edited,
+    enabled:draft.stage===5,feedback:persisted.feedback,onRestore:values=>change(p=>({...p,sentence:values.sentence,frame:values.frame,check:p.contentVersion?combinedCheck(values.checks):values.check,checks:values.checks,
+      feedback:p.feedback?.original===values.sentence?p.feedback:undefined}))});
+  return { draft, latest, change, flush, dirty, saving, error,persistent };
 }

@@ -9,6 +9,8 @@ import { serializeBackup } from '../lib/backup-format.ts';
 const dir = 'work/state-roundtrip-tests'; mkdirSync(dir, { recursive: true });
 await build({ entryPoints: ['lib/backup-analysis.ts', 'lib/response-validation.ts', 'lib/learning-commands.ts', 'lib/word-editor-draft.ts', 'lib/restore-validation.ts', 'db/learning-state.ts', 'db/restore-jobs.ts'], outdir: dir, entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
 await build({ entryPoints: ['app/api/state/route.ts'], outfile: dir + '/route.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent', plugins: [{ name: 'test-boundaries', setup(b) {
+  b.onResolve({ filter: /^cloudflare:workers$/ }, () => ({ path: 'env', namespace: 'model-env' }));
+  b.onLoad({ filter: /.*/, namespace: 'model-env' }, () => ({ loader: 'js', contents: 'export const env={OPENAI_ALLOWED_MODELS:"gpt-6.1-sol,gpt-6.1-terra,gpt-6-astra"}' }));
   b.onResolve({ filter: /^@\/(app\/chatgpt-auth|db\/store)$/ }, a => ({ path: a.path, namespace: 'test' }));
   b.onLoad({ filter: /.*/, namespace: 'test' }, a => ({ loader: 'js', contents: a.path.endsWith('chatgpt-auth') ? 'export const getChatGPTUser=async()=>({userId:"owner"})' : 'export const database=()=>globalThis.roundtripDb' }));
 } }] });

@@ -5,10 +5,10 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import fixture from './fixtures/sentence-structure.cjs';
 const { feedback, structure, original } = fixture;
-await build({ entryPoints: ['lib/sentence-feedback.ts', 'lib/feedback-compatibility.ts', 'lib/feedback-fallback.ts', 'lib/grammar/feedback.ts', 'lib/grammar/content.ts', 'lib/backup.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'lib/response-validation.ts', 'db/restore-jobs.ts', 'db/feedback-compatibility.ts'], outdir: 'work/structure-tests', entryNames: '[dir]/[name]', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent' });
+await build({ entryPoints: ['lib/sentence-feedback.ts', 'lib/feedback-compatibility.ts', 'lib/feedback-fallback.ts', 'lib/openai-feedback.ts', 'lib/grammar/feedback.ts', 'lib/grammar/content.ts', 'lib/backup.ts', 'lib/backup-analysis.ts', 'lib/restore-validation.ts', 'lib/response-validation.ts', 'db/restore-jobs.ts', 'db/feedback-compatibility.ts'], outdir: 'work/structure-tests', entryNames: '[dir]/[name]', bundle: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent' });
 const { sentenceFeedbackSchema } = await import('../work/structure-tests/lib/sentence-feedback.mjs');
 const { legacyFeedback, legacyFeedbackDocument } = await import('../work/structure-tests/lib/feedback-compatibility.mjs');
-const { generateSentenceFeedbackWithFallback } = await import('../work/structure-tests/lib/feedback-fallback.mjs');
+const { generateStructuredOpenAiFeedback: generateOpenAiFeedback } = await import('../work/structure-tests/lib/openai-feedback.mjs');
 const { generateGrammarFeedback } = await import('../work/structure-tests/lib/grammar/feedback.mjs');
 const { GRAMMAR_LESSONS } = await import('../work/structure-tests/lib/grammar/content.mjs');
 const { makeBackup, parseBackup, prepareSafetyBackup } = await import('../work/structure-tests/lib/backup.mjs');
@@ -42,30 +42,14 @@ test('questions, contractions, SV, SVC and imperatives are not forced into SVO',
     ['Stop!', [['Stop!','V']]],
   ]) assert.ok(sentenceFeedbackSchema.safeParse({...feedback,correctedSentence:sentence,structure:{status:'available',translation:'학습용 해석',parts:pairs.map(([text,role])=>({text,role,explanation:'문맥의 역할'})),note:''}}).success);
 });
-test('Google and Groq receive identical structure instructions and return validated structure in one request each', async () => {
-  const content={meaningUsage:feedback.meaningUsage,grammar:feedback.grammar,correctedSentence:feedback.correctedSentence,explanation:feedback.explanation,structure};
-  for (const fallback of [false,true]) {
-    const sent=[];const result=await generateSentenceFeedbackWithFallback({google_api:'synthetic',groq_api:'synthetic'}, {sentence:original,word:'trip',pos:'n.',meaning:'여행'}, async(url,init)=>{
-      const body=JSON.parse(init.body);sent.push(body);
-      if(url.includes('googleapis'))return fallback?new Response('',{status:429}):Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(content)}]}}]});
-      return Response.json({model:'openai/gpt-oss-120b',choices:[{finish_reason:'stop',message:{content:JSON.stringify(content)}}]});
-    });
-    assert.equal(sent.length,fallback?2:1);assert.deepEqual(result.structure,structure);
-    assert.match(sent[0].systemInstruction.parts[0].text,/Do not force all sentences into SVO/);
-    assert.ok(sent[0].generationConfig.responseJsonSchema.required.includes('structure'));
-    if(fallback)assert.equal(sent[1].messages[0].content,sent[0].systemInstruction.parts[0].text);
-  }
-  const result=await generateGrammarFeedback('synthetic',GRAMMAR_LESSONS[0],original,async(_url,init)=>{
-    assert.match(JSON.parse(init.body).systemInstruction.parts[0].text,/ENTIRE correctedSentence/);
-    return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(content)}]}}]});
-  });assert.deepEqual(result.structure,structure);
+test('OpenAI word and grammar requests retain mandatory structure with exact contiguous coverage',async t=>{
+ t.mock.method(console,'info',()=>{});const config={apiKey:'synthetic',modelId:'gpt-6.1-sol',allowedModels:'gpt-6.1-sol'},content={meaningUsage:feedback.meaningUsage,grammar:feedback.grammar,correctedSentence:feedback.correctedSentence,explanation:feedback.explanation,structure};
+ const fetcher=async(url,init)=>{assert.equal(url,'https://api.openai.com/v1/responses');const body=JSON.parse(init.body);assert.match(body.instructions,/ENTIRE correctedSentence/);assert.ok(body.text.format.schema.required.includes('structure'));return Response.json({status:'completed',model:config.modelId,output:[{type:'message',role:'assistant',status:'completed',content:[{type:'output_text',text:JSON.stringify(content)}]}]})};
+ assert.deepEqual((await generateOpenAiFeedback(config,{sentence:original,word:'trip',pos:'n.',meaning:'여행'},'Trusted word prompt.',fetcher)).structure,structure);assert.deepEqual((await generateGrammarFeedback(config,GRAMMAR_LESSONS[0],original,fetcher)).structure,structure);
 });
-test('mismatched provider structure triggers existing fallback without accepting fabricated words', async () => {
-  let calls=0;await assert.rejects(generateSentenceFeedbackWithFallback({google_api:'synthetic',groq_api:'synthetic'},{sentence:original,word:'trip',pos:'n.',meaning:'여행'},async url=>{
-    calls++;const content={...legacyFeedback(feedback),structure:{...structure,parts:[{text:'Not the correction.',role:'S',explanation:'오류'}]}};
-    delete content.original;delete content.model;delete content.createdAt;
-    return url.includes('googleapis')?Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(content)}]}}]}):Response.json({model:'openai/gpt-oss-120b',choices:[{finish_reason:'stop',message:{content:JSON.stringify(content)}}]});
-  }),e=>e.code==='groq_invalid_response'&&e.issue.previous.code==='provider_invalid_response');assert.equal(calls,2);
+test('mismatched OpenAI structure is rejected after one request without fallback',async()=>{
+ let calls=0;const content={meaningUsage:feedback.meaningUsage,grammar:feedback.grammar,correctedSentence:feedback.correctedSentence,explanation:feedback.explanation,structure:{...structure,parts:[{text:'Not the correction.',role:'S',explanation:'오류'}]}};
+ await assert.rejects(generateOpenAiFeedback({apiKey:'synthetic',modelId:'gpt-6.1-sol',allowedModels:'gpt-6.1-sol'},{sentence:original},'Trusted',async()=>{calls++;return Response.json({status:'completed',model:'gpt-6.1-sol',output:[{type:'message',role:'assistant',status:'completed',content:[{type:'output_text',text:JSON.stringify(content)}]}]})}),e=>e.code==='provider_invalid_response'&&e.validationStage==='structure');assert.equal(calls,1);
 });
 test('snapshot, safety backup, normal backup and staged parts preserve both feedback domains', async () => {
   assert.deepEqual(parseSnapshot({revision:1,state}).state,state);

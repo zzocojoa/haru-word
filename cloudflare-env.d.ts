@@ -5,6 +5,10 @@ declare namespace Cloudflare {
     BUCKET?: R2Bucket;
     word_image_upload_key?: string;
     word_image_upload_expires?: string;
+    OPENAI_API_KEY?: string;
+    OPENAI_ALLOWED_MODELS?: string;
+    ai_feedback_enabled?: string;
+    feedback_judgment_enabled?: string;
     google_api?: string;
     groq_api?: string;
     groq_ai_enabled?: string;

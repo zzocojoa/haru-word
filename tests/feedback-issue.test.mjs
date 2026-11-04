@@ -1,14 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { build } from 'esbuild';
-await build({ entryPoints: ['lib/provider-feedback-error.ts', 'lib/feedback-issue.ts', 'lib/client-feedback-error.ts', 'lib/client-request.ts', 'lib/gemini-feedback.ts'], outdir: 'work/feedback-issue-tests', bundle: true, splitting: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent' });
+await build({ entryPoints: ['lib/provider-feedback-error.ts', 'lib/feedback-issue.ts', 'lib/client-feedback-error.ts', 'lib/client-request.ts', 'lib/openai-feedback.ts'], outdir: 'work/feedback-issue-tests', bundle: true, splitting: true, format: 'esm', platform: 'node', outExtension: { '.js': '.mjs' }, logLevel: 'silent' });
 const { providerHttpError, providerFinishError } = await import('../work/feedback-issue-tests/provider-feedback-error.mjs');
-const { parseFeedbackIssue, feedbackErrorBody, issueFromResponse, FeedbackIssueError } = await import('../work/feedback-issue-tests/feedback-issue.mjs');
+const { parseFeedbackIssue, feedbackErrorBody, issueFromResponse, FeedbackIssueError, feedbackIssueProvider } = await import('../work/feedback-issue-tests/feedback-issue.mjs');
 const { clientFeedbackIssue } = await import('../work/feedback-issue-tests/client-feedback-error.mjs');
 const { RequestTimeoutError, InvalidResponseError } = await import('../work/feedback-issue-tests/client-request.mjs');
-const { generateSentenceFeedback } = await import('../work/feedback-issue-tests/gemini-feedback.mjs');
+const { generateStructuredOpenAiFeedback: generateOpenAiFeedback } = await import('../work/feedback-issue-tests/openai-feedback.mjs');
 const detail = (type, values) => ({ '@type': 'type.googleapis.com/google.rpc.' + type, ...values });
 const body = (...details) => ({ error: { message: 'PRIVATE_KEY_SENTENCE', details } });
+
+test('new provider details name OpenAI while explicit historical errors retain their source', () => {
+  for (const code of ['provider_limit', 'provider_timeout', 'provider_key_invalid', 'provider_billing', 'provider_account_limit', 'not_configured']) assert.equal(feedbackIssueProvider(code), 'OpenAI');
+  for (const code of ['provider_daily_limit', 'provider_minute_limit', 'provider_key_blocked', 'provider_recitation']) assert.equal(feedbackIssueProvider(code), 'Google');
+  assert.equal(feedbackIssueProvider('provider_timeout', true), 'Google');
+  assert.equal(feedbackIssueProvider('groq_limit'), 'Groq');
+  assert.equal(feedbackIssueProvider('client_network'), '');
+});
 
 test('only structured quota evidence distinguishes minute and daily limits; delay stays bounded', () => {
   for (const [quotaId, code] of [['GenerateRequestsPerMinutePerProject', 'provider_minute_limit'], ['GenerateRequestsPerDayPerProject', 'provider_daily_limit'], ['unknown', 'provider_limit']]) {
@@ -52,16 +60,14 @@ test('error metadata is allowlisted and raw messages never become UI description
 test('client failures distinguish deadline, network, parsing and unknown errors without leaking exception text', () => {
   for (const [error, code] of [[new RequestTimeoutError(),'client_timeout'], [new TypeError('PRIVATE'),'client_network'], [new SyntaxError('PRIVATE'),'invalid_response'], [new InvalidResponseError(),'invalid_response'], [new Error('PRIVATE'),'unknown'], [new FeedbackIssueError({ code:'save_required' }),'save_required']]) assert.deepEqual(clientFeedbackIssue(error), { code });
 });
-test('provider transport distinguishes aborted deadline from connection failure, including body reads', async () => {
-  const input = { word: 'arrive', pos: 'v.', meaning: '도착하다', sentence: 'I arrive home.' };
-  await assert.rejects(generateSentenceFeedback('synthetic', input, async () => { throw new TypeError('PRIVATE'); }), e => e.code === 'provider_network');
-  const originalTimeout = AbortSignal.timeout;
-  try {
-    AbortSignal.timeout = () => AbortSignal.abort(new DOMException('Synthetic deadline', 'TimeoutError'));
-    await assert.rejects(generateSentenceFeedback('synthetic', input, async (_url, init) => { throw init.signal.reason; }), e => e.code === 'provider_timeout');
-    await assert.rejects(generateSentenceFeedback('synthetic', input, async () => ({ ok: true, status: 200, json: async () => { throw new TypeError('PRIVATE'); } })), e => e.code === 'provider_timeout');
-  } finally { AbortSignal.timeout = originalTimeout; }
-  await assert.rejects(generateSentenceFeedback('synthetic', input, async () => ({ ok: true, status: 200, json: async () => { throw new TypeError('PRIVATE'); } })), e => e.code === 'provider_network');
-  await assert.rejects(generateSentenceFeedback('synthetic', input, async () => new Response('malformed')), e => e.code === 'provider_invalid_response');
-  await assert.rejects(generateSentenceFeedback('synthetic', input, async () => Response.json({ promptFeedback: { blockReason: 'SAFETY' } })), e => e.code === 'provider_blocked');
+test('OpenAI transport distinguishes deadline, connection and body failures safely',async()=>{
+ const config={apiKey:'synthetic',modelId:'gpt-6.1-sol',allowedModels:'gpt-6.1-sol'},input={sentence:'I arrive home.'};
+ const run=fetcher=>generateOpenAiFeedback(config,input,'trusted',fetcher);
+ await assert.rejects(run(async()=>{throw new TypeError('PRIVATE')}),e=>e.code==='provider_network');
+ const timeout=AbortSignal.timeout;
+ try{AbortSignal.timeout=()=>AbortSignal.abort(new DOMException('Synthetic deadline','TimeoutError'));await assert.rejects(run(async(_url,init)=>{throw init.signal.reason}),e=>e.code==='provider_timeout');}
+ finally{AbortSignal.timeout=timeout;}
+ await assert.rejects(run(async()=>new Response(new ReadableStream({pull(){throw new TypeError('PRIVATE')}}),{headers:{'content-type':'application/json'}})),e=>e.code==='provider_network');
+ await assert.rejects(run(async()=>new Response('malformed',{headers:{'content-type':'application/json'}})),e=>e.code==='provider_invalid_response');
+ await assert.rejects(run(async()=>Response.json({status:'completed',model:config.modelId,output:[{type:'message',role:'assistant',status:'completed',content:[{type:'refusal',refusal:'PRIVATE'}]}]})),e=>e.code==='provider_blocked');
 });

@@ -1,8 +1,9 @@
-import { GROQ_FEEDBACK_MODEL, type SentenceFeedback } from './sentence-feedback';
-import { FEEDBACK_OUTPUT_LIMITS, FeedbackValidationError, defaultFeedbackContract, type ProviderFeedbackContract } from './provider-feedback-contract';
+import type { SentenceFeedback } from './sentence-feedback';
+import type { ProviderFeedbackContract } from './provider-feedback-contract';
 import { FeedbackError } from './provider-feedback-error';
 import type { FeedbackIssueCode } from './feedback-issue';
 
+// Pure historical error interpretation remains available for offline ledgers.
 export const GROQ_TIMEOUT_MS = 15000;
 export function groqHttpError(status: number, retryHeader: string | null): FeedbackError {
   const delay = retryHeader && /^\d+(\.\d+)?$/.test(retryHeader.trim()) ? Math.ceil(Number(retryHeader)) : 0;
@@ -13,42 +14,5 @@ export function groqHttpError(status: number, retryHeader: string | null): Feedb
     ...(delay > 0 && delay <= 604800 ? { retryAfterSeconds: delay } : {}) });
 }
 
-export async function generateGroqFeedback(key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher: typeof fetch = fetch, externalSignal?: AbortSignal, contract: ProviderFeedbackContract = defaultFeedbackContract): Promise<SentenceFeedback> {
-  const deadline = AbortSignal.timeout(GROQ_TIMEOUT_MS);
-  const signal = externalSignal ? AbortSignal.any([deadline, externalSignal]) : deadline;
-  let response: Response;
-  try {
-    response = await fetcher('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` }, signal,
-      body: JSON.stringify({ model: GROQ_FEEDBACK_MODEL, service_tier: 'on_demand', reasoning_effort: 'low', include_reasoning: false,
-        max_completion_tokens: FEEDBACK_OUTPUT_LIMITS.tokens, stream: false,
-        messages: [{ role: 'system', content: instruction + contract.instruction }, { role: 'user', content: JSON.stringify(input) }],
-        response_format: { type: 'json_schema', json_schema: { name: 'sentence_feedback', strict: true, schema: contract.schema } },
-      }),
-    });
-  } catch {
-    if (externalSignal?.aborted) throw externalSignal.reason;
-    throw new FeedbackError(deadline.aborted ? 'groq_timeout' : 'groq_network', 503);
-  }
-  if (!response.ok) {
-    // Status and Retry-After suffice; never read or log the provider's raw error text.
-    await response.body?.cancel().catch(() => { /* Cleanup failure must not hide the received HTTP status. */ });
-    throw groqHttpError(response.status, response.headers.get('retry-after'));
-  }
-  let body: { model?: unknown; choices?: { finish_reason?: unknown; message?: { content?: unknown; refusal?: unknown } }[] } | null;
-  try { body = await response.json(); }
-  catch (error) {
-    if (externalSignal?.aborted) throw externalSignal.reason;
-    throw new FeedbackError(deadline.aborted ? 'groq_timeout' : error instanceof TypeError ? 'groq_network' : 'groq_invalid_response', 502, { providerStatus: response.status }, 'envelope');
-  }
-  if (externalSignal?.aborted) throw externalSignal.reason;
-  const candidate = Array.isArray(body?.choices) ? body.choices[0] : undefined;
-  if (candidate?.finish_reason === 'content_filter' || candidate?.message?.refusal) throw new FeedbackError('groq_blocked', 502, { providerStatus: 200 });
-  if (candidate?.finish_reason === 'length') throw new FeedbackError('groq_truncated', 502, { providerStatus: 200 });
-  if (candidate?.finish_reason !== 'stop') throw new FeedbackError('groq_incomplete', 502, { providerStatus: 200 });
-  try {
-    const text = candidate?.message?.content;
-    if (body?.model !== GROQ_FEEDBACK_MODEL) throw new FeedbackValidationError('model');
-    return contract.parse(text, input.sentence, GROQ_FEEDBACK_MODEL);
-  } catch (error) { throw new FeedbackError('groq_invalid_response', 502, { providerStatus: 200 }, error instanceof FeedbackValidationError ? error.stage : 'envelope', error instanceof FeedbackValidationError ? error.diagnostic : undefined, error instanceof FeedbackValidationError ? error.validationDetail : undefined); }
-}
+
+export const generateGroqFeedback: (key: string, input: { sentence: string; [field: string]: string }, instruction: string, fetcher?: typeof fetch, externalSignal?: AbortSignal, contract?: ProviderFeedbackContract) => Promise<SentenceFeedback> = async () => { throw new FeedbackError('disabled', 503); };

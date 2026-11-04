@@ -7,6 +7,7 @@ import { loadLearningState, restoreLearningState, saveLearningState } from '@/li
 import { commitRestore } from '@/lib/restore-client';
 import type { StateSnapshot } from '@/lib/api-contracts';
 import type { GrammarProgress, LessonId } from '@/lib/grammar/model';
+import {captureLocalRestoreNotice} from '@/lib/client-owner';
 
 type LoadPhase = 'initializing' | 'reloading' | 'idle';
 
@@ -16,6 +17,7 @@ export function useLearningStore() {
   const persisted = useRef(state);
   const revision = useRef(0);
   const lock = useRef(false);
+  const reconcileRestore=useRef(false);
   // A single phase keeps loading and splash visibility in sync. Once settled,
   // retries/reloads use the normal recovery surface, never the startup screen.
   const [loadPhase, setLoadPhase] = useState<LoadPhase>('initializing');
@@ -51,6 +53,7 @@ export function useLearningStore() {
   const load = useCallback(async () => {
     if (lock.current) return false;
     lock.current = true;
+    const restoredNotice=captureLocalRestoreNotice();
     setLoadPhase(phase => phase === 'initializing' ? phase : 'reloading');
     setError('');
     try {
@@ -63,6 +66,7 @@ export function useLearningStore() {
         setError(result.data.error || '기록을 불러오지 못했어요. 다시 시도해 주세요.');
         return false;
       }
+      if(reconcileRestore.current){restoredNotice();reconcileRestore.current=false;}
       applySnapshot(result.data);
       setSignedIn(true);
       return true;
@@ -135,6 +139,7 @@ export function useLearningStore() {
       return false;
     }
     lock.current = true;
+    const restoredNotice=captureLocalRestoreNotice();reconcileRestore.current=true;
     setSaving(true);
     setRestoring(true);
     setError('');
@@ -144,6 +149,7 @@ export function useLearningStore() {
         if (receipt.status !== 'committed' || receipt.baseRevision !== revision.current || receipt.revision !== revision.current + 1) {
           throw new InvalidResponseError();
         }
+        restoredNotice();reconcileRestore.current=false;
         const fresh = await loadLearningState();
         if (!fresh.ok || fresh.data.revision < receipt.revision) throw new InvalidResponseError();
         applySnapshot(fresh.data);
@@ -156,6 +162,7 @@ export function useLearningStore() {
         return false;
       }
       const restored = next.grammar === undefined ? { ...next, grammar: current.current.grammar } : next;
+      restoredNotice();reconcileRestore.current=false;
       applySnapshot({ state: restored, revision: result.data.revision });
       return true;
     } catch {

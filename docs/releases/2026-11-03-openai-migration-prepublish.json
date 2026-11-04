@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-03T05:51:01.708Z",
+  "status": "verified-not-published",
+  "site": {
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "baselineVersion": 141,
+    "baselineSource": "3fe640c50cabd12519fc7490361e84b1ad72aed8",
+    "baseGithubCommit": "e746e97612c060808ca689f54f243995a5121c6b",
+    "audience": "public",
+    "bindings": {
+      "d1": "DB",
+      "r2": "BUCKET"
+    },
+    "productionWrites": 0
+  },
+  "checks": {
+    "unit": {
+      "command": "npm test",
+      "tests": 683,
+      "passed": 683,
+      "exitCode": 0
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    "lint": {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "errors": 0,
+      "preexistingWarnings": 15
+    },
+    "build": {
+      "command": "node <sites-plugin>/scripts/build-site.mjs",
+      "exitCode": 0
+    },
+    "browser": {
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "cases": 40,
+      "exitCode": 0,
+      "relatedSubset": true,
+      "fullFunctionalInventoryExecuted": false,
+      "newMigrationChecksPerEngine": 11,
+      "grammarProfiles": [
+        "legacy v1 with v4 enabled",
+        "v2 only",
+        "v3 with v4 off",
+        "v4 enabled; v1-v4 mixed and compatibility"
+      ],
+      "viewports": [
+        320,
+        390,
+        768,
+        1440
+      ],
+      "textPercent": [
+        100,
+        200
+      ],
+      "minimumControlPixels": 44,
+      "keyboard": true,
+      "axeViolations": 0,
+      "realIphone": false,
+      "voiceOver": false
+    },
+    "sourceKeyLeakScan": {
+      "sourceFiles": 829,
+      "builtFiles": 235,
+      "leaks": 0
+    },
+    "diffCheck": {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  },
+  "liveConnection": {
+    "purpose": "synthetic connection only; not English accuracy certification",
+    "paidCalls": 3,
+    "approvalConsumed": true,
+    "maxOutputTokens": 4096,
+    "approvedMaxUsdBeforeTax": 0.5,
+    "conservativeUpperUsdBeforeTax": 0.37022975,
+    "actualInvoiceVerified": false,
+    "qualityCertified": false,
+    "models": [
+      {
+        "id": "gpt-6.1-sol",
+        "passed": true,
+        "durationMs": 5294,
+        "inputTokens": 683,
+        "outputTokens": 219,
+        "promptVersion": "reference-v1",
+        "validationVersion": "structured-v1"
+      },
+      {
+        "id": "gpt-6.1-terra",
+        "passed": true,
+        "durationMs": 3241,
+        "inputTokens": 683,
+        "outputTokens": 171,
+        "promptVersion": "reference-v1",
+        "validationVersion": "structured-v1"
+      },
+      {
+        "id": "gpt-6-astra",
+        "passed": true,
+        "durationMs": 4379,
+        "inputTokens": 683,
+        "outputTokens": 218,
+        "promptVersion": "reference-v1",
+        "validationVersion": "structured-v1"
+      }
+    ]
+  },
+  "protected": {
+    "packageLockSha256": "990e71a24eb00a6887e452aeebce9bea5eecc6dd006defc5dbec4853adc5181a",
+    "hostingSha256": "b652b2b9c5328afb4172b47ae1512ba64cb121891c95e982ba35eef2d0033f4b",
+    "dependenciesChanged": false,
+    "lockfileChanged": false,
+    "sqlMigrationsChanged": false,
+    "frozenEvaluationsChanged": false
+  },
+  "release": {
+    "risk": "medium: provider migration and paid per-model requests; no automatic retry or fallback",
+    "compatibility": "optional settings field; capability2;409 model intent;426 prevents old-client field loss; archival unknown models and restore receipts retained",
+    "rollback": "keep the new reader and backup support; set ai_feedback_enabled=false; do not republish v141 after OpenAI data exists; legacy transports stay disabled",
+    "observation": "bounded event/code/model/version/duration/usage/request-id only; no keys or learner text",
+    "migration": "no D1 table migration and no automatic rewriting or regrading of existing records",
+    "unverified": [
+      "production Secret registration/deployment/activation",
+      "actual iPhone and VoiceOver",
+      "independent English quality baseline and holdout evaluation",
+      "actual OpenAI invoice"
+    ]
+  },
+  "evidence": [
+    {
+      "path": "outputs/openai-migration/unit-final.log",
+      "sha256": "f3a998a1bdc0092aee3a9b321e7fa50124cea2f58b7834a1eb46e5444237fbc2"
+    },
+    {
+      "path": "outputs/openai-migration/typecheck-final.log",
+      "sha256": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec"
+    },
+    {
+      "path": "outputs/openai-migration/lint-final-qa.log",
+      "sha256": "7eb46b3ac7138d1017034672a359f9b6141c53475532c4eb8d1ec12b8aa94703"
+    },
+    {
+      "path": "outputs/openai-migration/build-final-3.log",
+      "sha256": "3955b3bc055055a0b7a4000f64354ccc44ce62993fca0303b4ccc213a1303c17"
+    },
+    {
+      "path": "outputs/openai-migration/related-final.json",
+      "sha256": "a63e29e0483dce5c2dd3a1c2fa2aafdd94d029055d305fa8b8b6d600fe5e01fa"
+    },
+    {
+      "path": "outputs/openai-migration/live-connection-ledger.json",
+      "sha256": "af4eec7573a5f33de90494b3996190171385b2a7cc01e65f31c7a06cbe3f4d47"
+    }
+  ]
+}

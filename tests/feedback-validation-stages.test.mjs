@@ -5,8 +5,8 @@ import {parseProviderFeedback, FeedbackValidationError} from '../lib/provider-fe
 import fixture from './fixtures/sentence-structure.cjs';
 const {feedback,original}=fixture;
 const content={meaningUsage:feedback.meaningUsage,grammar:feedback.grammar,correctedSentence:feedback.correctedSentence,explanation:feedback.explanation,structure:feedback.structure};
-await build({entryPoints:['lib/gemini-feedback.ts','lib/groq-feedback.ts'],outdir:'work/validation-stage-tests',bundle:true,format:'esm',platform:'node',outExtension:{'.js':'.mjs'},logLevel:'silent'});
-const google=await import('../work/validation-stage-tests/gemini-feedback.mjs'),groq=await import('../work/validation-stage-tests/groq-feedback.mjs');
+await build({entryPoints:['lib/openai-feedback.ts'],outdir:'work/validation-stage-tests',bundle:true,format:'esm',platform:'node',outExtension:{'.js':'.mjs'},logLevel:'silent'});
+const { generateStructuredOpenAiFeedback: generateOpenAiFeedback}=await import('../work/validation-stage-tests/openai-feedback.mjs');
 const cases=[
  [null,'content_type'],[JSON.stringify(content).padEnd(30001,' '),'content_limit'],['PRIVATE_NOT_JSON','json_syntax'],
  [JSON.stringify({...content,grammar:'PRIVATE_BAD_ENUM'}),'fields'],
@@ -22,11 +22,10 @@ test('unchanged strict acceptance distinguishes malformed fields and exact text 
  assert.equal(parseProviderFeedback(JSON.stringify(ambiguous),original,feedback.model).structure.status,'unavailable');
  assert.throws(()=>parseProviderFeedback(JSON.stringify({...ambiguous,structure:{...ambiguous.structure,note:''}}),original,feedback.model),e=>e.stage==='structure');
 });
-test('both transports keep their existing error contract and expose only safe diagnostic stages',async()=>{
- for(const [value,stage] of cases){
-  await assert.rejects(google.generateTutorFeedback('test-only',{sentence:original},'trusted',async()=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:value}]}}]})),e=>e.code==='provider_invalid_response'&&e.validationStage===(value===null?'json_syntax':stage)&&!JSON.stringify(e).includes('PRIVATE'));
-  await assert.rejects(groq.generateGroqFeedback('test-only',{sentence:original},'trusted',async()=>Response.json({model:feedback.model==='openai/gpt-oss-120b'?feedback.model:'openai/gpt-oss-120b',choices:[{finish_reason:'stop',message:{content:value}}]})),e=>e.code==='groq_invalid_response'&&e.validationStage===stage&&!JSON.stringify(e).includes('PRIVATE'));
- }
- await assert.rejects(groq.generateGroqFeedback('test-only',{sentence:original},'trusted',async()=>Response.json({model:'PRIVATE_WRONG_MODEL',choices:[{finish_reason:'stop',message:{content:JSON.stringify(content)}}]})),e=>e.validationStage==='model'&&!JSON.stringify(e).includes('PRIVATE'));
- await assert.rejects(google.generateTutorFeedback('test-only',{sentence:original},'trusted',async()=>new Response('PRIVATE_ENVELOPE')),e=>e.validationStage==='envelope'&&!JSON.stringify(e).includes('PRIVATE'));
+test('OpenAI transport preserves safe validation stages without raw content',async()=>{
+ const config={apiKey:'test-only',modelId:'gpt-6.1-sol',allowedModels:'gpt-6.1-sol'};
+ const wrap=(text,model=config.modelId)=>Response.json({status:'completed',model,output:[{type:'message',role:'assistant',status:'completed',content:[{type:'output_text',text}]}]});
+ for(const[value,stage]of cases)await assert.rejects(generateOpenAiFeedback(config,{sentence:original},'trusted',async()=>wrap(value)),e=>e.code==='provider_invalid_response'&&e.validationStage===stage&&!JSON.stringify(e).includes('PRIVATE'));
+ await assert.rejects(generateOpenAiFeedback(config,{sentence:original},'trusted',async()=>wrap(JSON.stringify(content),'PRIVATE_WRONG_MODEL')),e=>e.validationStage==='model'&&!JSON.stringify(e).includes('PRIVATE'));
+ await assert.rejects(generateOpenAiFeedback(config,{sentence:original},'trusted',async()=>new Response('PRIVATE_ENVELOPE',{headers:{'content-type':'application/json'}})),e=>e.validationStage==='envelope'&&!JSON.stringify(e).includes('PRIVATE'));
 });

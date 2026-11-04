@@ -9,6 +9,7 @@ import { emptyRecord, nextAction } from "./outcomes.ts";
 import { entryIdFor } from "./targets.ts";
 import { dailyAllocationRule } from './daily-allocation.ts';
 import { feedbackProvider } from './feedback-identity.ts';
+import { feedbackExportView } from './feedback-export.ts';
 
 // CSV is a stable interchange format; UI wording must not rewrite its labels.
 const CSV_RESULT_TEXT = { ...RESULT_TEXT, independent: '독립 성공', unmeasured: '미측정' };
@@ -42,6 +43,7 @@ export function exportLog(state: State, words: Word[]): string {
       "마지막 연습일",
       "AI 제공사",
       "AI 모델",
+      "AI 의견 상태",
     ],
   ];
   for (const s of Object.values(state.sessions).sort((a, b) =>
@@ -50,6 +52,7 @@ export function exportLog(state: State, words: Word[]): string {
     for (const id of s.ids) {
       const w = map.get(entryIdFor(s, id));
       const r = s.records[id] || emptyRecord();
+      const ai=feedbackExportView(r.sentence,r.aiFeedback);
       rows.push([
         r.lastPracticedOn || r.learnedOn || s.date,
         s.kind,
@@ -68,13 +71,14 @@ export function exportLog(state: State, words: Word[]): string {
         CSV_RESULT_TEXT[r.retryKo || "unmeasured"],
         nextAction(r, s).replace('다음에 다시 복습', '이후에도 복습'),
         r.aiFeedback?.original || "",
-        r.aiFeedback?.correctedSentence || "",
-        r.aiFeedback?.explanation || "",
+        ai.correction,
+        ai.explanation,
         s.date,
         r.learnedOn || "기존 기록·미확인",
         r.lastPracticedOn || "기존 기록·미확인",
         r.aiFeedback ? feedbackProvider(r.aiFeedback) : "",
         r.aiFeedback?.model || "",
+        ai.status,
       ]);
     }
   }
@@ -115,6 +119,7 @@ export function exportTutor(state: State, words: Word[]): string {
 주간은 그 주 목표 전체, 월말은 그달 학습 전체를 확인하세요. 누락을 통과로 처리하지 말고 미측정으로 남기세요.
 ‘오늘 종료’ 요청 시 학습일 | 단어·품사·뜻 | 처음 표시 | 영어→뜻 | 뜻→영어 | 내 문장·보완점 | 다음 할 일을 출력하세요. 실제 타이머 없이 경과 시간을 측정했다고 말하지 마세요.
 이 파일은 자동 저장·알림·외부 AI 연결을 설정하지 않습니다. 아래 기록만 사용하고 과거 성적을 추측하지 마세요.
+AI 의견 상태가 보류이거나 수정 전 입력의 의견이면 교정 정답으로 사용하지 마세요. 참고 의견도 확정 성적이 아니며 원문과 목표를 별도로 확인해 주세요.
 
 공식 목록 파일: 사이트의 /sources/learning-data.json (아래 해당 단어 정보와 별도로 함께 제공할 수 있습니다.)
 마지막 회차의 단어 정보:

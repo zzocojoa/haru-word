@@ -1,3 +1,4 @@
+const { model: aiModel, aiHeaders, openaiFeedback, feedbackReceipt, acknowledgePending } = require('./qa/openai-fixture.cjs');
 // Synthetic local accounts only. AI responses are controlled here, never sent to Google.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -10,7 +11,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
   const now = new Date().toISOString(), browser = await launchBrowser();
   const progress = (id, stage = 5) => ({ stage, answers: stage >= 5 ? Object.fromEntries(LESSON_MAP.get(id).questions.map((q, i) => [`q${i + 1}`, { first: q.answer, latest: q.answer, helped: false, attempts: 1 }])) : {}, sentence: stage >= 5 ? LESSON_MAP.get(id).stem : '', check: stage >= 5 ? 'appropriate' : undefined, updatedAt: now });
   const open = async grammar => {
-    const context = await browser.newContext({ extraHTTPHeaders: accountHeaders('grammar_plan'), viewport: { width: 390, height: 844 } });
+    const context = await browser.newContext({ extraHTTPHeaders: { ...accountHeaders('grammar_plan'), ...aiHeaders }, viewport: { width: 390, height: 844 } });
     const get = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1' } })).json();
     const initial = await get();
     assert.equal((await context.request.put(base + '/api/state', { data: { revision: initial.revision, grammar, progress: {}, sessions: {} } })).status(), 200);
@@ -72,7 +73,7 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
       try {
         await page.locator('.grammar-group > summary').filter({ hasText: '설명을 더하는 말' }).click();
         await page.locator('.grammar-tile').filter({ hasText: /^adj\./ }).click();
-        await page.route('**/api/grammar-feedback', async route => { calls++; const sentence = route.request().postDataJSON().sentence; await hold; await route.fulfill({ json: { feedback: { original: sentence, correctedSentence: sentence, explanation: '합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {}); });
+        await page.route('**/api/grammar-feedback', async route => { calls++; assert.equal(route.request().postDataJSON().expectedModelId, aiModel); const sentence = route.request().postDataJSON().sentence; await hold; await route.fulfill({ json: { receipt:feedbackReceipt(route),feedback: openaiFeedback({ original: sentence, correctedSentence: sentence, explanation: '합성 의견', meaningUsage: 'appropriate', grammar: 'natural', createdAt: now }) } }).catch(() => {}); });
         await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).evaluate(button => { button.click(); button.click(); });
         await until(() => calls === 1, 'AI called once');
         await page.getByRole('tab', { name: destination, exact: true }).click(); release();
@@ -89,23 +90,26 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
         let calls = 0;
         await page.route('**/api/grammar-feedback', async route => {
           calls++;
-          const feedback = { original, correctedSentence: corrected, explanation: '학습용 합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now };
-          await route.fulfill({ json: { feedback: calls === 1 ? { ...feedback, original: 'Another sentence.' } : calls === 2 ? {} : feedback } });
+          const feedback = openaiFeedback({ original, correctedSentence: corrected, explanation: '학습용 합성 의견', meaningUsage: 'appropriate', grammar: 'natural', createdAt: now });
+          await route.fulfill({ json: { receipt:feedbackReceipt(route),feedback: calls === 1 ? { ...feedback, original: 'Another sentence.' } : calls === 2 ? {} : feedback } });
         });
         for (let attempt = 1; attempt <= 2; attempt++) {
+          await acknowledgePending(page);
           await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
-          await page.locator(`[data-feedback-code="${attempt === 1 ? 'stale_input' : 'invalid_response'}"]`).waitFor();
+          await page.locator('[data-feedback-code="invalid_response"]').waitFor();
           assert.equal(calls, attempt);
           assert.equal(await sentence.inputValue(), original);
           assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 0);
           assert.equal(await page.getByRole('radio', { name: '뜻과 형태를 확인했어요', exact: true }).isChecked(), true);
         }
+        await acknowledgePending(page);
         await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
         await page.locator('.grammar-feedback .ai-feedback-result').waitFor();
         assert.equal(calls, 3); assert.equal(await sentence.inputValue(), original, 'AI never replaces text automatically');
         await page.getByRole('button', { name: 'AI 제안으로 문장 바꾸기', exact: true }).click();
         assert.equal(await sentence.inputValue(), corrected);
-        assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 0);
+        assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 1);
+        await page.locator('.grammar-feedback').getByText('수정 전 문장에 대한 AI 의견이에요.',{exact:true}).waitFor();
         assert.equal(await page.getByRole('radio', { checked: true }).count(), 0);
         assert.equal(await page.getByRole('button', { name: '수업 마치기', exact: true }).isDisabled(), true);
         await until(async () => (await get()).state.grammar.noun.sentence === corrected, 'correction saved');
