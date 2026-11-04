@@ -1,0 +1,427 @@
+{
+  "schemaVersion": 1,
+  "planId": "integration-remediation-2026-11-04",
+  "tag": "integration-remediation",
+  "title": "통합 검사 후속 수정",
+  "description": "승인한 통합 검사 후속 수정 구현. 로그인·저장 요약·QA/문서 정비를 진행하며 운영 게시와 유료평가는 별도 승인 전 보류합니다.",
+  "scope": "deployment-authorized",
+  "planFile": "docs/INTEGRATION_REMEDIATION_PLAN.md",
+  "prdFile": ".taskmaster/docs/integration-remediation-prd.md",
+  "phaseLabels": {
+    "1": "기준·수정·검사 정비",
+    "2": "통합 검증·문서·출시"
+  },
+  "executionStarted": true,
+  "baseline": {
+    "commit": "5bbd7a6d4d82e9aea86a0b0a8679242ba64e9535",
+    "inspection": "outputs/project-inspection-20261104/REPORT.md",
+    "features": "outputs/project-inspection-20261104/features.json",
+    "findings": "outputs/project-inspection-20261104/findings.json",
+    "originalBrowser": {
+      "expected": 84,
+      "passed": 67,
+      "failed": 17
+    },
+    "existingDashboardRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어",
+    "preservationRecord": "outputs/integration-remediation-plan/preservation.json"
+  },
+  "authorization": {
+    "planningApproved": true,
+    "implementationApproved": true,
+    "paidEvaluationApproved": false,
+    "newPaidEvaluationMaxUsdBeforeTax": 0,
+    "priorBudgetsClosedAndNotTransferred": true,
+    "deploymentIncludedAndApproved": true,
+    "externalPublicationApproved": true,
+    "productionQaWritesApproved": false,
+    "scope": "작업1~12·기존 Site 게시·GitHub commit/push/PR 승인. PR병합·추가 유료평가·운영 QA 쓰기는 미포함.",
+    "implementationApprovedAt": "2026-11-04T10:45:19.751Z",
+    "userApproval": "수정 착수 승인",
+    "deploymentApproval": {
+      "userText": "진행",
+      "annotationIndex": 1,
+      "approvedAt": "2026-11-04T13:14:35.593Z",
+      "scope": "검증 후보를 기존 Sites에 게시하는 작업12 승인. 유료AI/실기기/운영학습 QA 쓰기는 포함하지 않음."
+    },
+    "githubPublicationApproved": true,
+    "githubPublicationApproval": {
+      "userText": "커밋, 푸시, PR 진행",
+      "approvedAt": "2026-11-04T13:43:36.798Z",
+      "scope": "검증된 v144 제품/QA 소스와 최신 관리 문서의 GitHub commit/push/PR. 병합·재배포·추가 유료AI·운영 학습 QA 쓰기는 포함하지 않음."
+    }
+  },
+  "sources": [
+    {
+      "id": "TM-RPG",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/assets/example_prd_rpg.txt",
+      "checkedDateKst": "2026-11-04",
+      "use": "기능/구조 분리·명시 의존성·단계 진입/종료·검사·위험"
+    },
+    {
+      "id": "TM-STRUCTURE",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/docs/task-structure.md",
+      "checkedDateKst": "2026-11-04",
+      "use": "태그별 작업·세부 작업·필드·상태·의존성 검증"
+    },
+    {
+      "id": "TM-MCP",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/mcp-server/src/tools/add-task.js",
+      "checkedDateKst": "2026-11-04",
+      "use": "수동 필드의 Task Master MCP 등록·추가 외부 모델 호출0"
+    }
+  ],
+  "issues": [
+    {
+      "id": "I00",
+      "tasks": [
+        3,
+        4,
+        9
+      ]
+    },
+    {
+      "id": "I01",
+      "tasks": [
+        1,
+        2,
+        9
+      ]
+    },
+    {
+      "id": "I02",
+      "tasks": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "I03",
+      "tasks": [
+        5,
+        9
+      ]
+    },
+    {
+      "id": "I04",
+      "tasks": [
+        10,
+        11
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "IR01",
+      "text": "원본 증거·두 플랜·닫힌 평가 원장 보존",
+      "tasks": [
+        1,
+        11
+      ]
+    },
+    {
+      "id": "IR02",
+      "text": "익명 로그인과 인증 만료/계정 전환 안전성 동시 충족",
+      "tasks": [
+        3,
+        4,
+        9
+      ]
+    },
+    {
+      "id": "IR03",
+      "text": "저장된 요약은 확인 스냅샷, 최신 미저장 입력은 보존",
+      "tasks": [
+        5,
+        9
+      ]
+    },
+    {
+      "id": "IR04",
+      "text": "고정 설치·격리 QA·명확한 사전 검사",
+      "tasks": [
+        2,
+        7
+      ]
+    },
+    {
+      "id": "IR05",
+      "text": "원본84조건·현재 AI 계약·과거 의견 보호·요청 측정",
+      "tasks": [
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "id": "IR06",
+      "text": "늦은 응답·취소·반복·정리와 실제 오류 검출 유지",
+      "tasks": [
+        8,
+        9
+      ]
+    },
+    {
+      "id": "IR07",
+      "text": "학습/초안/뜻별 성적·날짜·백업 한도/원자성·revision 보존",
+      "tasks": [
+        4,
+        5,
+        9
+      ]
+    },
+    {
+      "id": "IR08",
+      "text": "최신 운영/미배포/과거 문서·안전 복구 구분",
+      "tasks": [
+        10,
+        11
+      ]
+    },
+    {
+      "id": "IR09",
+      "text": "계획·구현·검증·승인·게시 구분과 기존 Site만 사용",
+      "tasks": [
+        11,
+        12
+      ]
+    },
+    {
+      "id": "IR10",
+      "text": "신규 유료 평가·옛 승인 재활성화·운영 QA 쓰기 금지",
+      "tasks": [
+        1,
+        2,
+        6,
+        9,
+        12
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": 2,
+      "phase": 1,
+      "subtaskCount": 4
+    },
+    {
+      "id": 3,
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": 4,
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": 5,
+      "phase": 1,
+      "subtaskCount": 4
+    },
+    {
+      "id": 6,
+      "phase": 1,
+      "subtaskCount": 4
+    },
+    {
+      "id": 7,
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": 8,
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": 9,
+      "phase": 2,
+      "subtaskCount": 5
+    },
+    {
+      "id": 10,
+      "phase": 2,
+      "subtaskCount": 3
+    },
+    {
+      "id": 11,
+      "phase": 2,
+      "subtaskCount": 3
+    },
+    {
+      "id": 12,
+      "phase": 2,
+      "subtaskCount": 3
+    }
+  ],
+  "gates": [
+    {
+      "id": "IR-G1",
+      "name": "기준·환경",
+      "tasks": [
+        1,
+        2
+      ],
+      "criteria": "원본/닫힌 원장·과거 태그 해시 보존, 고정 설치·루프백·가상 계정·현재 버전 프로필 확인",
+      "result": {
+        "status": "passed",
+        "detail": "기준 SHA/637제품 파일·기존32평가/검증 및 두 태그 보존. 기본/구현 폴더 잠금 설치 exit0·직접42개 버전 일치·기본781단위 통과·환경/runner3검사 통과. 기존84조건 보존, 신규 인증/요약 회귀 추가."
+      }
+    },
+    {
+      "id": "IR-G2",
+      "name": "로그인·계정 경계",
+      "tasks": [
+        3,
+        4
+      ],
+      "criteria": "익명 로그인 복구와 인증 만료/계정 전환 개인정보·초안 보호를 두 엔진에서 검증",
+      "result": {
+        "status": "passed",
+        "detail": "익명401 회귀는 수정 전 두 엔진 실패, 수정 후 auth-boundary·local-draft·ux-text 두 엔진 및 startup-lifecycle 양쪽 모두 exit0. 인증 만료의 폼/초안 비노출·명시 로그인/새로고침·A→B→A 서버 기록 보존 확인."
+      }
+    },
+    {
+      "id": "IR-G3",
+      "name": "확인된 저장 요약",
+      "tasks": [
+        5
+      ],
+      "criteria": "저장 전/진행/503/409/성공/조회/복원에서 서버/화면/도구 정합과 조회 부작용0",
+      "result": {
+        "status": "passed",
+        "detail": "saved-summary 두 엔진 exit0. 저장 진행/503/409에는3, 성공 후6; 화면 입력6 유지. 최초 미확인 거절·조회/복원/실패 정합·읽기 사본 불변·탭 이동 쓰기0·폐기 도구 참조 거절 확인. 실제 WebMCP 플랫폼 지원은 합성 등록 검사와 구분."
+      }
+    },
+    {
+      "id": "IR-G4",
+      "name": "정식 QA 신뢰",
+      "tasks": [
+        6,
+        7,
+        8
+      ],
+      "criteria": "84조건 추적·현재/과거 AI 계약 분리·문법/그림 프로필·취소/정리·실패 검출력",
+      "result": {
+        "status": "passed",
+        "detail": "동결 fcefe7c/v144 기준: 원본84+신규3의 두 엔진 최종174조건 통과. 최초 전체실행1/4실패는 보존하고 바뀐6 QA를 양쪽 재검(14명령exit0, 반복pr38포함). 공유 의존/제품 원본 불변·전체그림3809해시·문법별실제저장·초기초점/서버시간대기·실제오류주입exit1·7준비단위 및 소유문법6포트종료 확인."
+      }
+    },
+    {
+      "id": "IR-G5",
+      "name": "최종 통합 보존",
+      "tasks": [
+        9
+      ],
+      "criteria": "최종 동일 SHA의 단위/타입/린트/자료/build·두 엔진·학습/복원·외부 AI0·정리 증거",
+      "result": {
+        "status": "passed",
+        "detail": "동결 fcefe7c/v144 기준: 최종 제품/검사 지문 고정. Node22/24 각789·자료/타입/린트/후보build exit0(기존15경고). 원본84+신규3의 두 엔진174조건은 초기실패와 변경6QA 재검을 구분해 검증. 성능5·이미지36표본/비활성4·복원20MB/한도/원자성·실제AI0·자체9포트/잠금종료 확인."
+      }
+    },
+    {
+      "id": "IR-G6",
+      "name": "운영 사실·출시 준비",
+      "tasks": [
+        10,
+        11
+      ],
+      "criteria": "현재 운영/미배포 차이·위험/호환/복구/관측/마이그레이션/미확인·검토자료 일치",
+      "result": {
+        "status": "passed",
+        "detail": "운영143/36dc66f/환경77/public6/자동화0 최종읽기 일치. 현재/미배포15파일·위험/호환/복구/관측/마이그레이션0·미확인과 근거해시를 출시자료에 연결. 새/과거 두 엔진 대시보드·기존3회귀exit0·옛태그/평가32/기본제품637 보존. 게시12·유료0 유지."
+      }
+    },
+    {
+      "id": "IR-G7",
+      "name": "명시 승인·기존 Site 게시",
+      "tasks": [
+        12
+      ],
+      "criteria": "별도 사용자 게시 승인과 선행 gate 통과 후에만 기존 Site 반영/기록보존/관측",
+      "result": {
+        "status": "passed",
+        "detail": "사용자 ‘진행’ 승인 후 기존 Site v144/d41d4e7 게시 succeeded(22:28:51 KST). 검증 fcefe7c와 tree 동일. 환경77/14·public6·자동화0·DB10테이블·DB/R2 선언 보존. 공개 JS/CSS13개+출처1개 해시 일치·익명state401·공개시계200. 새 SQL/유료AI/운영 QA 쓰기0. 사용자 행 대조·실기기는 미실시."
+      }
+    }
+  ],
+  "planning": {
+    "status": "registered",
+    "officialFormat": "RPG",
+    "registration": "Task Master MCP manual fields",
+    "parents": 12,
+    "subtasks": 41,
+    "done": 0,
+    "paidProviderGenerations": 0,
+    "validationEvidence": "outputs/integration-remediation-plan/verification.json"
+  },
+  "execution": {
+    "startedAt": "2026-11-04T10:45:19.751Z",
+    "checkout": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\integration-remediation-20261104",
+    "branch": "codex/integration-remediation-20261104",
+    "baseCommit": "5bbd7a6d4d82e9aea86a0b0a8679242ba64e9535",
+    "implementationDone": 11,
+    "implementationTotal": 11,
+    "dashboardContext": "통합 수정12/12·세부41/41 완료 · 기존 Site 게시·읽기 검증 완료 · 유료 AI/운영 QA 쓰기0.",
+    "coreEvidence": "outputs/integration-remediation-implementation-20261104/core-results.json",
+    "runtimeSourceCheckout": "work/integration-remediation-20261104",
+    "productFixesImplemented": [
+      "I00",
+      "I03"
+    ],
+    "fullRegressionCompleted": true,
+    "staticEvidence": "outputs/integration-remediation-implementation-20261104/final-static-results.json",
+    "functionalExpectedPerEngine": 87,
+    "originalFunctionalConditionsPreserved": 84,
+    "fullImageEvidence": "outputs/integration-remediation-implementation-20261104/full-image-proof.json",
+    "functionalEvidence": "outputs/integration-remediation-implementation-20261104/final-coverage.json",
+    "sourceSnapshotSha256": "b7e37162eeb5001aefd4647ffe3cbc9f7a1279577ebda0eef97dbaec49618147",
+    "productSourceSha256": "01dbb306e20ce2939d95ecc4dd286efb7d5b972fe42915a85c0e15501882d2c5",
+    "initialFullFunctionalExitCodes": [
+      1,
+      1
+    ],
+    "finalFunctionalCoveragePassed": 174,
+    "qualityUsesExplicitRechecks": true,
+    "qaSourceSha256": "9941e59a73b3ad4a5cb984dfee095a74d748ebda90c5a5cc5042c57b15a1b166",
+    "performanceCasesPassed": 5,
+    "negativeImageCasesPassed": 4,
+    "releaseEvidence": "docs/releases/2026-11-04-integration-remediation.json",
+    "finalCleanupEvidence": "outputs/integration-remediation-implementation-20261104/final-cleanup.json",
+    "completedAt": "2026-11-04T12:55:00.615Z",
+    "releaseReadiness": "published",
+    "dashboardEvidence": "outputs/integration-remediation-implementation-20261104/dashboard-verification.json",
+    "publishedSiteId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "publishedVersion": 144,
+    "publishedVersionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0e4c0307e89c81918265d94cbcb87ba5",
+    "publishedSource": "d41d4e72e9107747d10ae0a83122f0d5778a529a",
+    "publishedTree": "934bdb8c868e663ba11d6abef0365c73081bc658",
+    "publishedAt": "2026-11-04T13:28:51.654440+00:00",
+    "deploymentId": "appgdep_6aeb32fea7b0819187342115c02777dc",
+    "deploymentStatus": "succeeded",
+    "publicationCheckout": "work/integration-remediation-publish-20261104",
+    "deploymentVerificationEvidence": "outputs/integration-remediation-deploy-20261104/deployment-verification.json",
+    "publicSmokeEvidence": "outputs/integration-remediation-deploy-20261104/public-smoke.json",
+    "publicationDashboardEvidence": "outputs/integration-remediation-deploy-20261104/dashboard-verification.json",
+    "publishedRolloutEvidence": "docs/releases/2026-11-04-integration-remediation-v144-rollout.json",
+    "githubPublicationVerification": {
+      "checkout": "work/github-integration-remediation-20261104",
+      "branch": "codex/integration-remediation-v144",
+      "baseCommit": "5bbd7a6d4d82e9aea86a0b0a8679242ba64e9535",
+      "productSourceMatchesCandidate": true,
+      "qaFollowupCommit": "ee8b9a7060fa8993a1404e5deb579a3dd74696a2",
+      "finalUnitEach": 798,
+      "focusedInterruptionEach": 16,
+      "lintWarnings": 15,
+      "fullFunctionalRerun": false,
+      "evidence": "docs/releases/2026-11-04-integration-remediation-github.json"
+    }
+  }
+}

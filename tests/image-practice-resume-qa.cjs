@@ -246,8 +246,9 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
     const switchedPage = await switched.newPage(); await ready(switchedPage); await open(switchedPage);
     await switched.setExtraHTTPHeaders(otherIdentity);
     await switchedPage.getByRole('dialog').getByRole('button', { name: '다음', exact: true }).click();
-    await switchedPage.getByText('로그인을 확인한 뒤 다시 열어 주세요.', { exact: true }).waitFor();
-    assert.equal(await switchedPage.getByRole('dialog').getByRole('button', { name: '다음', exact: true }).isDisabled(), true);
+    await switchedPage.getByText('로그인 상태를 다시 확인해야 해요. 새로고침해 현재 계정의 기록을 불러와 주세요.', { exact: true }).waitFor();
+    assert.equal(await switchedPage.getByRole('dialog').count(), 0, 'invalidated owner hides all private practice content');
+    await switchedPage.getByRole('link', { name: '로그인하고 학습하기', exact: true }).waitFor();
     // End network probes here. The baseline Worker also stalls a reused
     // connection after an unread PUT body is rejected with 401 in local Wrangler.
     // No-DB-write on rejection is independently covered by the real SQLite API test.

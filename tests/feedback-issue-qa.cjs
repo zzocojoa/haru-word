@@ -1,4 +1,4 @@
-const { model: aiModel, aiHeaders, openaiFeedback, feedbackReceipt, acknowledgePending } = require('./qa/openai-fixture.cjs');
+const { model: aiModel, currentAiHeaders: aiHeaders, openaiFeedback, currentOpenaiFeedback, feedbackReceipt, acknowledgePending } = require('./qa/openai-fixture.cjs');
 // Synthetic local records and mocked AI only. Never contacts Google.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -38,7 +38,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       checks.push(domain + ': transmission/privacy notice is visible exactly once directly below the request button before any AI call');
       await input.fill(original);
       let response, calls = 0;
-      await page.route('**/api/' + domain + '-feedback', route => { if(route.request().method()!=='POST')return route.continue(); assert.equal(route.request().postDataJSON().expectedModelId,aiModel); calls++; return response.abort ? route.abort('failed') : route.fulfill({ status: response.status, json: response.body===null?null:{...response.body,receipt:feedbackReceipt(route,response.status<400?'completed':'failed')} }); });
+      await page.route('**/api/' + domain + '-feedback', route => { if(route.request().method()!=='POST')return route.continue(); assert.equal(route.request().postDataJSON().expectedModelId,aiModel); calls++; return response.abort ? route.abort('failed') : route.fulfill({ status: response.status, json: response.body===null?null:{...response.body,...(response.status === 200 && response.body.feedback ? {feedback:currentOpenaiFeedback(route,response.body.feedback)} : {}),receipt:feedbackReceipt(route,response.status<400?'completed':'failed')} }); });
       const cases = [
         {status:426,body:{code:'ai_client_outdated'},code:'ai_client_outdated',title:'학습 화면 업데이트 필요'},
         {status:409,body:{code:'model_changed'},code:'model_changed',title:'선택 모델 변경'},
@@ -117,11 +117,11 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         }
       }
       assert.equal(calls, cases.length);
-      const waitSaved = async model => {
+      const waitSaved = async (model,sentence=original) => {
         for (let i = 0; i < 100; i++) {
           const state = (await snapshot()).state;
           const feedback = domain === 'sentence' ? state.sessions[sid].records[word.id].aiFeedback : state.grammar.noun.feedback;
-          if (feedback?.model === model) return state;
+          if (feedback?.model === model && feedback.original===sentence) return state;
           await page.waitForTimeout(100);
         }
         throw Error('feedback not saved');
@@ -143,7 +143,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       response = success(next);
       await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
       await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
-      await waitSaved(aiModel);
+      await waitSaved(aiModel,next);
       assert.equal(calls, cases.length + 2); assert.deepEqual(errors, []);
       checks.push(domain + ': ' + cases.length + ' failure cases, draft preserved, manual completion available, no retries, layout/keyboard/accessibility');
       checks.push(domain + ': OpenAI attribution survives server save and reload, with no grade changes or automatic rechecks');

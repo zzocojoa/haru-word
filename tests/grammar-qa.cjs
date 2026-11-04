@@ -1,4 +1,4 @@
-const { model: aiModel, aiHeaders, openaiFeedback, feedbackReceipt,acknowledgePending } = require('./qa/openai-fixture.cjs');
+const { model: aiModel, currentAiHeaders: aiHeaders, currentOpenaiFeedback, feedbackReceipt,acknowledgePending } = require('./qa/openai-fixture.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('./qa/runtime.cjs');
@@ -76,7 +76,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     await until(async () => (await snapshot()).state.grammar.noun.sentence === 'I like green tea and coffee.', 'retry');
     // A delayed reply must not replace a newer draft; no real provider is called by QA.
     let aiCalls = 0, aiRelease; const aiHold = new Promise(resolve => aiRelease = resolve);
-    await page.route('**/api/grammar-feedback', async route => { aiCalls++; assert.equal(route.request().postDataJSON().expectedModelId, aiModel); const sentence = route.request().postDataJSON().sentence; await aiHold; await route.fulfill({ json: { receipt:feedbackReceipt(route),feedback: openaiFeedback({ original: sentence, createdAt: new Date().toISOString(), meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '명사를 알맞게 사용했어요.' }) } }); });
+    await page.route('**/api/grammar-feedback', async route => { aiCalls++; assert.equal(route.request().postDataJSON().expectedModelId, aiModel); const sentence = route.request().postDataJSON().sentence; await aiHold; await route.fulfill({ json: { receipt:feedbackReceipt(route),feedback: currentOpenaiFeedback(route, { original: sentence, createdAt: new Date().toISOString(), meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '명사를 알맞게 사용했어요.' }) } }); });
     await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await until(() => aiCalls === 1, 'AI started');
     await getSentence().fill('I like books.'); aiRelease(); await page.waitForTimeout(250);
     assert.equal(await getSentence().inputValue(), 'I like books.'); assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 0);

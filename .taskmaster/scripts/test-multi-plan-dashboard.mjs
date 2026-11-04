@@ -9,13 +9,18 @@ import { PROJECT_ROOT, buildDashboard } from './openai-dashboard-data.mjs';
 const require=createRequire(import.meta.url),pw=require(process.env.QA_PLAYWRIGHT_PATH||'playwright');
 const NEW='judgment-remediation-2026-11-03',OLD='openai-api-migration-2026-11-03';
 const out=resolve(PROJECT_ROOT,'outputs/judgment-remediation-plan/qa');await mkdir(out,{recursive:true});
-const paths=['.taskmaster/tasks/tasks.json','.taskmaster/docs/dashboard-plans.json','.taskmaster/docs/openai-migration-manifest.json','.taskmaster/docs/judgment-remediation-manifest.json'];
+const registry=JSON.parse(await readFile(resolve(PROJECT_ROOT,'.taskmaster/docs/dashboard-plans.json'),'utf8'));
+const paths=['.taskmaster/tasks/tasks.json','.taskmaster/docs/dashboard-plans.json',...registry.plans.map(p=>p.manifest)];
 const protectedPaths=[...paths,'.taskmaster/dashboard/dashboard.js','.taskmaster/dashboard/dashboard.css','.taskmaster/dashboard/index.template.html','.taskmaster/scripts/openai-dashboard-data.mjs','.taskmaster/scripts/serve-openai-dashboard.mjs'];
 const hashes=async()=>Object.fromEntries(await Promise.all(protectedPaths.map(async p=>[p,createHash('sha256').update(await readFile(resolve(PROJECT_ROOT,p))).digest('hex')])));
 const before=await hashes(),source=JSON.parse(await readFile(resolve(PROJECT_ROOT,paths[0]),'utf8'));
 await mkdir(resolve(PROJECT_ROOT,'.sites-runtime'),{recursive:true});
 const fixture=await mkdtemp(join(resolve(PROJECT_ROOT,'.sites-runtime'),'multi-plan-qa-'));
 for(const p of paths){await mkdir(dirname(resolve(fixture,p)),{recursive:true});await writeFile(resolve(fixture,p),await readFile(resolve(PROJECT_ROOT,p)));}
+// Keep this historical two-plan scenario explicit as new default plans are added.
+const fixtureRegistry=structuredClone(registry);fixtureRegistry.defaultPlanId=NEW;
+for(const entry of fixtureRegistry.plans){entry.kind=entry.id===NEW?'current':'previous';if(entry.id===NEW){entry.context='수정 계획 작성 완료 · 구현 미착수.';entry.budget='새 평가 추가 US$5 승인 · 현재 사용 US$0 · 과거 평가 예산과 별도';}}
+await writeFile(resolve(fixture,paths[1]),JSON.stringify(fixtureRegistry));
 for(const task of source['judgment-remediation'].tasks){task.status='pending';for(const child of task.subtasks)child.status='pending';}
 const fixtureManifest=JSON.parse(await readFile(resolve(fixture,paths[3]),'utf8'));fixtureManifest.executionStarted=false;delete fixtureManifest.execution.currentEvaluation;await writeFile(resolve(fixture,paths[3]),JSON.stringify(fixtureManifest));
 const tasksPath=resolve(fixture,paths[0]);
@@ -112,7 +117,7 @@ try{
     await page.close();await browser.close();
   }
   await buildDashboard();
-  for(const engine of ['chromium','webkit']){const browser=await pw[engine].launch({headless:true});browsers.push(browser);const page=await browser.newPage();await page.goto(pathToFileURL(resolve(PROJECT_ROOT,'outputs/openai-migration-dashboard/index.html')).href);await page.locator('#leaf-total').filter({hasText:'49'}).waitFor();assert.equal(await page.locator('#connection-mode').innerText(),'저장된 HTML 사본');await page.locator('[data-plan-id="'+OLD+'"]').click();assert.equal(await page.locator('#leaf-total').textContent(),'35');await page.locator('[data-plan-id="'+NEW+'"]').click();assert.equal(await page.locator('#leaf-total').textContent(),'49');await browser.close();pass(engine+': standalone existing HTML contains and switches both plans without a server');}
+  for(const engine of ['chromium','webkit']){const browser=await pw[engine].launch({headless:true});browsers.push(browser);const page=await browser.newPage();await page.goto(pathToFileURL(resolve(PROJECT_ROOT,'outputs/openai-migration-dashboard/index.html')).href+'?plan='+NEW);await page.locator('#leaf-total').filter({hasText:'49'}).waitFor();assert.equal(await page.locator('#connection-mode').innerText(),'저장된 HTML 사본');await page.locator('[data-plan-id="'+OLD+'"]').click();assert.equal(await page.locator('#leaf-total').textContent(),'35');await page.locator('[data-plan-id="'+NEW+'"]').click();assert.equal(await page.locator('#leaf-total').textContent(),'49');await browser.close();pass(engine+': standalone existing HTML contains and switches both plans without a server');}
   assert.deepEqual(await hashes(),before);pass('all original Task Master/manifest/catalog sources byte-identical after QA');
 }catch(e){checks.push({name:e.message,passed:false});console.error(e);process.exitCode=1;}
 finally{for(const b of browsers)await b.close().catch(()=>{});await new Promise(ok=>server.close(ok));const report={passed:checks.every(c=>c.passed),checks,sourceHashes:before,scope:'Local two-plan dashboard; isolated fixture; no paid or production calls.'};await writeFile(resolve(out,'results.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({passed:report.passed,checks:checks.length}));}

@@ -1,5 +1,17 @@
 # 하루단어 운영 안내
 
+<!-- integration-remediation-current -->
+## 현재 운영 v144 · 2026-11-04
+
+22:28:51 KST 기존 하루단어에 **v144**, 소스 `d41d4e72e9107747d10ae0a83122f0d5778a529a`, 배포 `appgdep_6aeb32fea7b0819187342115c02777dc`가 succeeded를 반환했다. 검증 후보fcefe7c와 Git tree `934bdb8c868e663ba11d6abef0365c73081bc658`가 같다. 환경77/14항목의 값 전체·public 접근revision6·자동화0·DB10테이블 메타데이터와 DB/R2 선언은 게시 전과 일치한다. [현재 배포 근거](docs/releases/2026-11-04-integration-remediation-v144-rollout.json)를 따른다. 아래 v143 이하 설명은 당시 이력이다.
+
+[통합 검사 후속 수정](docs/INTEGRATION_REMEDIATION_IMPLEMENTATION.md)의 익명 로그인·확인된 저장 요약·공개 출처 안내를 반영했다. 이전 기준에 포함된 PR54 공백 경계/PR55 피드백 책임 분리15런타임 파일도 함께 게시됐다. 구현 후보는 `work/integration-remediation-20261104`, 기존 Sites 이력을 잇는 게시 소스는 `work/integration-remediation-publish-20261104`에 동결했다. 현재 Task Master/대시보드 관리 원본은 기본 폴더다. 운영 점검은 익명 GET만 사용했으며 JS/CSS13개+출처1개가 게시 빌드와 해시 일치, 상태API401·공개 서버시계200을 확인했다. 운영 학습 QA 쓰기·유료 AI 호출은0이다.
+
+게시12는 사용자 “진행” 승인으로 완료됐다. 기존 API/백업 envelope·revision 보호·마이그레이션0000~0006을 유지하며 새 SQL·새 진단 이벤트는0이다. 인증·요약 경계의 운영 회귀는 계속 관측 대상이다. 복구가 필요하면 현재 배포와 오류 근거 확인 → 마지막 정상 **OpenAI 전용 v143** 저장 버전/보관 소스 검토·재게시 → 환경/바인딩·읽기 응답 확인 순서로 진행한다. v143 소스 사본은 Git 제외 `outputs/integration-remediation-deploy-20261104/rollback-v143-source.tar`다. 역SQL·사용자 기록 삭제/옛 백업 덮어쓰기·종료 카드나 Google/Groq 자동 대체 재활성화는 하지 않는다. 이번에 사용자 행 전체 대조나 새 운영 DB 전체 백업은 하지 않았으며 메타데이터 보존과 구분한다. 롤백은 실행하지 않았다.
+
+실제 iPhone·VoiceOver·기기 음성 청취·일반 영어 품질과 운영 장애 주입은 미검증이다. 합성 AI와 로컬 브라우저 통과는 실제 API 품질이나 운영 학습 검증이 아니다.
+<!-- /integration-remediation-current -->
+
 **후속 구현 후보 · 미게시:** 새 로컬 초안/요청 복구에는 [기기 보관 정책](docs/FEEDBACK_RECHECK_AND_RECOVERY.md), `0006_feedback_request_receipts`와 [영수증 배포·보관·롤백](docs/FEEDBACK_REQUEST_RECEIPTS.md)을 적용한다. 학습 envelope와 기존 migration은 유지한다. 판단 v2는 품질 G4 미실측 상태이므로 기본 비활성이다. 아래 전환 준비/운영 기록을 이 후보의 배포 완료로 해석하지 않는다.
 
 **2026-11-03 · OpenAI 전환 사전 검증 완료:** 현재 전환 계약·환경 스위치·비밀 값 처리·호환 롤백은 [OpenAI 참고 의견](docs/OPENAI_FEEDBACK.md)을 따른다. [게시 전 검증 기록](docs/releases/2026-11-03-openai-migration-prepublish.json)은 배포 완료를 뜻하지 않는다. 아래 v141과 Google/Groq 운영 절차는 이전 게시 상태의 기록이며 신규 전환 소스의 실행 지침으로 사용하지 않는다. 활성 모델과 배포 결과는 별도 기록한다.

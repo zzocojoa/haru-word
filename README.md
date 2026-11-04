@@ -1,3 +1,9 @@
+<!-- integration-remediation-plan-current -->
+## 2026-11-04 · 통합 검사 후속 수정 v144 게시 완료
+
+로그인 진입·저장 요약·검사 환경/계약·공개 출처 안내의 [수정 계획](docs/INTEGRATION_REMEDIATION_PLAN.md)을 완료했다. 사용자 “진행” 승인에 따라 기존 [하루단어](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 **v144 · 소스d41d4e7 · 환경77**을 게시했다. 검증 후보fcefe7c와 전체 Git tree가 같다. Task Master `integration-remediation`은 **상위12/12 · 세부41/41 완료**다. [배포 근거](docs/releases/2026-11-04-integration-remediation-v144-rollout.json), [구현 기록](docs/INTEGRATION_REMEDIATION_IMPLEMENTATION.md), [QA 재현](docs/INTEGRATION_REMEDIATION_QA.md), [기존 대시보드](http://127.0.0.1:4318/)에서 확인한다. 기존 Site·DB/R2·환경·접근 정책과 과거 두 플랜/평가 이력은 보존했다. 유료 AI·운영 학습 QA 쓰기는0이며 실기기·추가 AI 품질 평가는 미실시다. 아래 v143과 미배포 표기는 당시 이력이다.
+<!-- /integration-remediation-plan-current -->
+
 <!-- judgment-remediation-plan-current -->
 ## 2026-11-04 · OpenAI 전환·판단 개선 운영 적용
 

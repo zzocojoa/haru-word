@@ -11,7 +11,7 @@ for(const engine of ['chromium','webkit']){
  try{for(const width of [320,390]){
   const page=await browser.newPage({viewport:{width,height:844}}),errors=[],external=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(url+'/'))external.push(r.url());});
-  await page.goto(url+'/');await page.locator('#leaf-done').filter({hasText:String(expected.children)}).waitFor();
+  await page.goto(url+'/?plan=judgment-remediation-2026-11-03');await page.locator('#leaf-done').filter({hasText:String(expected.children)}).waitFor();
   assert.equal(await page.locator('#parent-done').textContent(),String(expected.parents));assert.equal(await page.locator('#parent-total').textContent(),'18');
   assert.equal(await page.locator('#leaf-total').textContent(),'49');
   assert.equal(await page.locator('[data-gate="R3"] [data-gate-result]').textContent(),'검증 통과');

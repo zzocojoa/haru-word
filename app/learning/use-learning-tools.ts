@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import type { View } from "./types";
 // Tools expose saved metadata only; all mutations still use the normal UI/store path.
 export function useLearningTools(
-  currentState: { current: State },
+  readSavedState: () => State,
   visitTab: (view: View) => Promise<boolean>,
   currentStudyDate: () => string,
 ) {
@@ -37,7 +37,7 @@ export function useLearningTools(
     register({
       name: "get_learning_summary",
       description:
-        "Read the saved learning counts and current level. Does not grade or complete items.",
+        "Read the last confirmed saved learning counts and level. Does not grade or complete items.",
       inputSchema: {
         type: "object",
         properties: {},
@@ -45,7 +45,8 @@ export function useLearningTools(
       },
       annotations: { readOnlyHint: true, untrustedContentHint: true },
       execute: () => {
-        const s = currentState.current;
+        if (lifecycle.signal.aborted) throw new Error("Learning tool unavailable");
+        const s = readSavedState();
         return {
           level: s.settings.level,
           dailyGoal: s.settings.dailyGoal,
@@ -80,6 +81,7 @@ export function useLearningTools(
       },
       annotations: { readOnlyHint: false, untrustedContentHint: false },
       execute: async (input) => {
+        if (lifecycle.signal.aborted) throw new Error("Learning tool unavailable");
         if (
           !input ||
           typeof input !== "object" ||
@@ -93,5 +95,5 @@ export function useLearningTools(
       },
     });
     return () => lifecycle.abort();
-  }, [currentState, visitTab, currentStudyDate]);
+  }, [readSavedState, visitTab, currentStudyDate]);
 }

@@ -51,7 +51,7 @@ const report = { method: { repetitions: 3, histories: [0, 365, 1825], viewport: 
                 if (!window.imagePerf.pending && document.querySelector('.topbar .save-state')?.textContent.includes('저장됨')) {
                   window.imagePerf.pending = true; requestAnimationFrame(() => requestAnimationFrame(() => { window.imagePerf.ready = performance.now(); observer.disconnect(); }));
                 }
-              }); observer.observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-state'] });
+              }); observer.observe(document, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['data-state'] });
             });
             await page.goto(origin, { waitUntil: 'domcontentloaded' }); await page.waitForFunction(() => window.imagePerf.ready !== null);
             const startup = await page.evaluate(() => ({ readyMs: window.imagePerf.ready, resources: performance.getEntriesByType('resource').filter(r => r.name.startsWith(location.origin)).map(r => ({ path: new URL(r.name).pathname, bytes: r.encodedBodySize, duration: r.duration })) }));

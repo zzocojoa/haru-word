@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-04T13:35:54.104Z",
+  "status": "published",
+  "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+  "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+  "version": 144,
+  "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0e4c0307e89c81918265d94cbcb87ba5",
+  "source": "d41d4e72e9107747d10ae0a83122f0d5778a529a",
+  "sourceParent": "36dc66fdca52d70494cb7993a1e3ad03dbc0f8d5",
+  "candidate": "fcefe7c98244b2913e7b5f78601d890ea26423fd",
+  "gitTree": "934bdb8c868e663ba11d6abef0365c73081bc658",
+  "exactQualifiedTree": true,
+  "deployment": {
+    "id": "appgdep_6aeb32fea7b0819187342115c02777dc",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "title": "하루단어 · Oxford 3000",
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0e4c0307e89c81918265d94cbcb87ba5",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+    "failure_message": null,
+    "env_set_revision": 77,
+    "updated_at": "2026-11-04T13:28:51.654440+00:00"
+  },
+  "archive": {
+    "localSha256": "d0f40656f6e03f8c567f7fdc148e2a6ab4b1103b1405ac3bed9b61fdc2076595",
+    "acceptedStorage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000096cc8206b9814bedefbd6f91",
+      "content_hash": "sha256:c089540f7196ee8c591f0614f9c88688544018eb4bc90072d3570b842ba6a3ad",
+      "size_bytes": 16793600,
+      "file_count": 242
+    },
+    "files": 242
+  },
+  "authorization": {
+    "userText": "진행",
+    "annotationIndex": 1,
+    "scope": "Existing Site publication task12 only; no new paid AI/production learning QA writes/GitHub push or PR."
+  },
+  "taskMaster": {
+    "tag": "integration-remediation",
+    "planId": "integration-remediation-2026-11-04",
+    "parentsDone": 12,
+    "parentsTotal": 12,
+    "childrenDone": 41,
+    "childrenTotal": 41,
+    "priorTagsPreserved": true
+  },
+  "verification": {
+    "sourceFiles": 706,
+    "directDependencies": 42,
+    "buildExit": 0,
+    "officialSourceWorkflowExit": 0,
+    "publicSmokeExit": 0,
+    "publicAssetsMatched": 14,
+    "dashboardExit": 0,
+    "dashboardChecks": 6,
+    "historicalCommands": [
+      {
+        "label": "master",
+        "code": 0,
+        "timedOut": false
+      },
+      {
+        "label": "multi",
+        "code": 0,
+        "timedOut": false
+      },
+      {
+        "label": "v143",
+        "code": 0,
+        "timedOut": false
+      }
+    ],
+    "qualifiedCandidateEvidence": "docs/releases/2026-11-04-integration-remediation.json",
+    "originalFunctionalFullExits": [
+      1,
+      1
+    ],
+    "functionalFinalMethod": "174 source-qualified cases using explicit changed-script rechecks; initial full failures retained.",
+    "finalManagementExit": 0,
+    "verifierSyntaxAndTargetedLintExit": 0
+  },
+  "invariants": {
+    "environmentUnchanged": true,
+    "accessUnchanged": true,
+    "automationsUnchanged": true,
+    "bindingsAndTablesUnchanged": true,
+    "hostingManifestUnchanged": true
+  },
+  "metadata": {
+    "latestVersion": 144,
+    "environmentRevision": 77,
+    "environmentEntryCount": 14,
+    "accessMode": "public",
+    "accessRevision": 6,
+    "automations": 0,
+    "dbBindings": [
+      "DB"
+    ],
+    "dbTableCount": 10
+  },
+  "compatibility": {
+    "newSqlMigrations": 0,
+    "existingMigrations": "0000-0006",
+    "apiAndBackupEnvelopeChanged": false,
+    "revisionProtectionPreserved": true,
+    "paidCalls": 0,
+    "productionQaWrites": 0,
+    "privateRowsRead": 0,
+    "newDiagnostics": 0,
+    "environmentChanges": 0,
+    "newSiteCreated": 0
+  },
+  "rollback": {
+    "performed": false,
+    "savedVersion": {
+      "id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_17eaca68646c81918bbcd08bb7294002",
+      "version": 143,
+      "source": "36dc66fdca52d70494cb7993a1e3ad03dbc0f8d5",
+      "deploymentId": "appgdep_6aeaacea3da481919e3ea5521ed8c7cb",
+      "archive": {
+        "hash": "sha256:3f6c2c008f0f3a235b4b40be83ab0c63ea5761223bd6e9cf6e645ba6496c0b52",
+        "fileCount": 242
+      }
+    },
+    "codeSnapshot": "outputs/integration-remediation-deploy-20261104/rollback-v143-source.tar",
+    "codeSnapshotSha256": "d2fa73cd13df32898d39ed62ff1480a12018e891129cb8b78d7b3c5c341a26ab",
+    "fullLiveDatabaseBackupTaken": false,
+    "policy": "Inspect current status/errors, republish last healthy OpenAI-only code, recheck bindings/environment/read responses; no reverse SQL, stale backup overwrite, learner deletion or retired feature reactivation."
+  },
+  "risk": {
+    "level": "moderate-client-auth-and-summary-boundaries",
+    "priorRuntimeChangesPublished": 15,
+    "observability": "Existing bounded diagnostics unchanged; no private text/key logging."
+  },
+  "notVerified": [
+    "Real iPhone",
+    "VoiceOver",
+    "Real audio listening",
+    "Fresh paid AI quality/general English correctness",
+    "Authenticated production learner QA",
+    "Whole live learner-state comparison/new whole DB backup"
+  ],
+  "preparationFailures": {
+    "precheck": "Unchanged .env.example incorrectly matched by custom exclusion; corrected without changing product.",
+    "package": "Node22 prepare-site-build process native exit3221225477; official Node24 helper succeeded with identical source.",
+    "smoke": "Checker path/clock assumptions corrected against actual source contracts; all three nonzero attempts retained, no product changes or redeployment."
+  },
+  "evidence": {
+    "before.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/before.json",
+      "sha256": "13fb1f44b473e69036b5298c3344448851983f2e45892a638097756905a20ba4"
+    },
+    "source-preservation.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/source-preservation.json",
+      "sha256": "40afd10b5ad3e680084cfbd1b27e0c042fe678d99de6c1fa11159d9a9f3bd794"
+    },
+    "source-workflow.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/source-workflow.json",
+      "sha256": "331ff59fc37bab9ecc729e32edd680e92adcb746203bb0a512c7ad315df6772d"
+    },
+    "publication-source-verification.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/publication-source-verification.json",
+      "sha256": "2d6ba7a15e644236fe7e621c66871fe2ea10cf90f4d65b7cfab82156bfa9e5a4"
+    },
+    "deployment-verification.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/deployment-verification.json",
+      "sha256": "04150e3ec8e4d7e9f459bb32c8dc4f737d92bd79523cde7f0a866e28abbfc5bf"
+    },
+    "public-smoke.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/public-smoke.json",
+      "sha256": "6510f57ea4acadc768f33af5bed1ae0d36869ba30d29fc2f531d03577dec27eb"
+    },
+    "dashboard-verification.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/dashboard-verification.json",
+      "sha256": "514bff66c75210bee685bdf0f3261829f102516b34755e4f516a81d0e7066571"
+    },
+    "preparation-attempts.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/preparation-attempts.json",
+      "sha256": "1cf1d296b8c14dc6dcfbef984570333e8b5e984f26fe0db6b464561a9ea7fb41"
+    },
+    "public-smoke-attempt1.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/public-smoke-attempt1.json",
+      "sha256": "f4a21de501dd9c1e545befea77fd0e2a17fb22a581694fe383464565fcd8de3d"
+    },
+    "public-smoke-attempt2.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/public-smoke-attempt2.json",
+      "sha256": "d8fa2878deac9a2398e532ebaa17ecaa25790c55ccafef392c15140d86c397ef"
+    },
+    "public-smoke-attempt3.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/public-smoke-attempt3.json",
+      "sha256": "977fd174e32e0b3cc127efa07e4cb1d4e388a90ea8e7ffbf5739fb35f7401819"
+    },
+    "taskmaster-final.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/taskmaster-final.json",
+      "sha256": "9cca6235bfccdc24d5d1bfd0eaad1e1206944b0598c6bb5d16351fcabebdcea7"
+    },
+    "final-management-verification.json": {
+      "path": "outputs/integration-remediation-deploy-20261104/final-management-verification.json",
+      "sha256": "fe70ab9e94a634c89e5dae1f3f0a5bbc876295a13c7b90f0b71c554d75cfac34"
+    }
+  }
+}

@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const http = require('node:http');
 const { launchBrowser, closeBrowser, accountHeaders, waitForWorker, base } = require('./qa/runtime.cjs');
 const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/request-body/${engine}`;
-const compatibility = { 'X-Study-Grammar': '2', 'X-Study-Feedback-Structure': '1', 'X-Study-Sense-Keys': '1' };
+const compatibility = { 'X-Study-AI-Contract': '4', 'X-Study-Grammar': '2', 'X-Study-Feedback-Structure': '1', 'X-Study-Sense-Keys': '1' };
 fs.mkdirSync(out, { recursive: true });
 
 // Do not send EOF or the rest of the body. A 413 must arrive while the sender

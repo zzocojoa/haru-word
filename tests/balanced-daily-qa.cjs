@@ -25,7 +25,7 @@ const oldDate = new Date(Date.parse(date + 'T12:00:00Z') - 86400000).toISOString
     const restored = await c.request.post(base + '/api/state/restore', { headers: { 'x-study-revision': String(initial.revision) }, data: { format: 'haru-words-v1', exportedAt: new Date().toISOString(), state } });
     assert.equal(restored.status(), 200, await restored.text());
     const p = await c.newPage(); p.on('pageerror', e => errors.push(e.message));
-    let aiCalls = 0; p.on('request', r => { if (r.url().includes('/api/sentence-feedback')) aiCalls++; });
+    let aiCalls = 0; p.on('request', r => { if (r.method() === 'POST' && r.url().includes('/api/sentence-feedback')) aiCalls++; });
     const saved = () => p.getByText('저장됨', { exact: true }).waitFor();
     const openSettings = async () => { await p.getByRole('button', { name: '학습 설정', exact: true }).click(); };
     const closeSettings = async () => { await p.getByRole('dialog').getByRole('button', { name: '닫기', exact: true }).click(); await p.getByRole('dialog').waitFor({ state: 'hidden' }); };

@@ -1,4 +1,4 @@
-const { model: aiModel, aiHeaders, openaiFeedback, feedbackReceipt } = require('./qa/openai-fixture.cjs');
+const { model: aiModel, currentAiHeaders: aiHeaders, currentOpenaiFeedback, feedbackReceipt } = require('./qa/openai-fixture.cjs');
 // Synthetic local learner and mocked providers only; no production data or keys.
 const assert = require('node:assert/strict'), fs = require('node:fs');
 const { base, launchBrowser, closeBrowser, accountHeaders, axePath, waitForWorker } = require('./qa/runtime.cjs');
@@ -24,7 +24,7 @@ fs.mkdirSync(out, { recursive:true });
     await page.goto(base);await saved();await page.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved();
     await page.getByText('AI 참고 의견 · 정답 판정은 아니에요',{exact:true}).waitFor();
     const before=(await state()).state; let calls=0;
-    await page.route('**/api/sentence-feedback',async route=>{calls++;assert.equal(route.request().headers()['x-study-feedback-structure'],'1');await route.fulfill({json:{feedback,receipt:feedbackReceipt(route)}})});
+    await page.route('**/api/sentence-feedback',async route=>{if(route.request().method()!=='POST')return route.continue();calls++;assert.equal(route.request().headers()['x-study-feedback-structure'],'1');await route.fulfill({json:{feedback:currentOpenaiFeedback(route,feedback),receipt:feedbackReceipt(route)}})});
     assert.ok(await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).isEnabled());
     assert.equal(await page.locator('.ai-feedback-panel .sentence-structure').count(),0);await saved();assert.equal(calls,0);
     data=await state();assert.deepEqual(data.state.sessions[sid].records[word.id].aiFeedback.structure,feedback.structure);
@@ -56,7 +56,7 @@ fs.mkdirSync(out, { recursive:true });
     await page.getByRole('tab',{name:'학습 기록',exact:true}).click();await page.locator('.journal-day-trigger').first().click();await page.locator('.journal-session-trigger').first().click();
     await page.locator('.journal-mobile .journal-word-trigger').click();await page.locator('.journal-mobile').getByText('저장한 AI 참고 의견',{exact:true}).click();assert.equal(await page.locator('.journal-mobile .sentence-structure').count(),0);await page.locator('.journal-mobile').getByText('AI 참고 의견 · 정답 판정은 아니에요',{exact:true}).waitFor();checks.push('history hides structures while the stored record retains them');
     await page.getByRole('tab',{name:'단어장',exact:true}).click();await page.getByRole('tab',{name:'품사와 문장 연습',exact:true}).click();await page.locator('.grammar-tile').first().click();
-    let grammarCalls=0;await page.route('**/api/grammar-feedback',async route=>{grammarCalls++;assert.equal(route.request().postDataJSON().expectedModelId,aiModel);assert.equal(route.request().headers()['x-study-feedback-structure'],'1');await route.fulfill({json:{feedback:openaiFeedback(feedback),receipt:feedbackReceipt(route)}})});
+    let grammarCalls=0;await page.route('**/api/grammar-feedback',async route=>{grammarCalls++;assert.equal(route.request().postDataJSON().expectedModelId,aiModel);assert.equal(route.request().headers()['x-study-feedback-structure'],'1');await route.fulfill({json:{feedback:currentOpenaiFeedback(route, feedback),receipt:feedbackReceipt(route)}})});
     await page.getByRole('button',{name:'AI 참고 의견 요청',exact:true}).click();await page.locator('.grammar-feedback .ai-feedback-result').waitFor();assert.equal(await page.locator('.grammar-feedback .sentence-structure').count(),0);await saved();
     await page.getByText('OpenAI로 점검',{exact:true}).waitFor();await saved();data=await state();assert.deepEqual(data.state.grammar.noun.feedback.structure,feedback.structure);assert.equal(grammarCalls,1);
     // A failed refresh of feedback retains the previous analysis and the draft.
