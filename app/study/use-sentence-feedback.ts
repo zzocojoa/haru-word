@@ -6,7 +6,7 @@ import { FeedbackIssueError, type FeedbackIssue } from '@/lib/feedback-issue';
 import { requestSentenceFeedback } from '@/lib/learning-api';
 import { useAiRequests } from '../ai-request-context';
 import {useFeedbackRecovery} from '../use-feedback-recovery';
-import type {FeedbackContextRequest} from '@/lib/feedback-context';
+import { feedbackMatchesRequest, type FeedbackContextRequest } from '@/lib/feedback-context';
 
 type Options = {
   sessionId: string;
@@ -40,7 +40,7 @@ export function useSentenceFeedback({ sessionId, entryId, sentence, busy, onPend
     try {
       const {feedback}=await recovery.run(sentence.trim(),expectedModelId,metadata=>requestSentenceFeedback({sessionId,entryId,sentence:sentence.trim(),expectedModelId,...context,...metadata},controller.signal),controller.signal,context);
       if (controller.signal.aborted) return;
-      if (feedback.original !== sentence.trim()||feedback.requestedModel!==expectedModelId||context.expectedContextFingerprint&&feedback.contextFingerprint!==context.expectedContextFingerprint) throw new FeedbackIssueError({ code: 'stale_input' });
+      if (!feedbackMatchesRequest(feedback, sentence.trim(), expectedModelId, context.expectedContextFingerprint)) throw new FeedbackIssueError({ code: 'stale_input' });
       // The shared save banner owns persistence errors and clears them after retry.
       await onFeedback(feedback);
     } catch (e) {

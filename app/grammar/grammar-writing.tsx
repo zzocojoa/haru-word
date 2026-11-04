@@ -13,7 +13,7 @@ import { frameSentence } from '@/lib/grammar/content-v2';
 import { practiceForVersion } from '@/lib/grammar/content-v4';
 import { Speak } from '../ui';
 import { FeedbackCorrection } from '../feedback-correction';
-import {currentFeedback} from '@/lib/recoverable-feedback';
+import {currentFeedback} from '@/lib/feedback-selection';
 import {feedbackMatchesContext} from '@/lib/feedback-context';
 
 type Props = {

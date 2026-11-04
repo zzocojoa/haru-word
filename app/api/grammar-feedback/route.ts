@@ -1,8 +1,7 @@
 import { env } from 'cloudflare:workers';
 import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { database } from '@/db/store';
-import { loadFeedbackContext, recordFeedbackAttempt } from '@/db/feedback';
-import { today } from '@/lib/learning';
+import { loadFeedbackContext } from '@/db/feedback';
 import { LESSON_MAP } from '@/lib/grammar/content';
 import { lessonForVersion } from '@/lib/grammar/content-v4';
 import { grammarClientVersion, grammarUnsupported } from '@/lib/grammar/compatibility';
@@ -11,13 +10,11 @@ import { generateGrammarFeedback, grammarFeedbackRequestSchema } from '@/lib/gra
 import { FeedbackError } from '@/lib/provider-feedback-error';
 import { isAiModelEnabled } from '@/lib/ai-models';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
-import { feedbackProvider } from '@/lib/sentence-feedback';
 import { json, validateJsonMutation } from '@/lib/server/http';
-import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
+import { supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { FEEDBACK_BODY_LIMITS, logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
-import { feedbackSafetyIssue } from '@/lib/feedback-safety';
 import { supportsAiContract } from '@/lib/ai-contract';
-import {withFeedbackRequest} from '@/db/feedback-requests';
+import { executeFeedbackRequest } from '@/lib/server/feedback-generation';
 import {grammarFeedbackInput,legacyGrammarFeedbackInput,grammarInstruction,legacyGrammarInstruction} from '@/lib/grammar/feedback';
 import {feedbackContextFingerprint} from '@/lib/feedback-context';
 
@@ -60,19 +57,11 @@ export async function POST(request: Request) {
     const input=grammarFeedbackInput(lesson,sentence,contextNote,contextKind);
     const contextFingerprint=await feedbackContextFingerprint('grammar',JSON.stringify([lessonId,contentVersion]),input,expectedModelId);
     if(expectedContextFingerprint&&expectedContextFingerprint!==contextFingerprint)return json(feedbackErrorBody('stale_input'),409);
-    return await withFeedbackRequest(db,user.userId,parsed.data,{domain:'grammar',targetId:lessonId,revision:context.revision,
-      fingerprint:[contentVersion,judgmentEnabled?input:legacyGrammarFeedbackInput(lesson,sentence),expectedModelId,judgmentEnabled?grammarInstruction:legacyGrammarInstruction,supportsFeedbackStructure(request),supportsAiContract(request,3)]},async()=>{
-    await recordFeedbackAttempt(db, user.userId, today(), Date.now());
-    const generated = await generateGrammarFeedback({ apiKey: env.OPENAI_API_KEY, modelId: context.modelId, allowedModels: env.OPENAI_ALLOWED_MODELS, signal: request.signal, judgmentEnabled,contextNote,contextKind }, lesson, sentence);
-    const feedback=supportsAiContract(request,3)?{...generated,contextFingerprint,...(contextNote?{contextNote}:{})}:generated;
-    const safetyIssue = feedbackSafetyIssue(feedback);
-    if (safetyIssue) {
-      console.warn(JSON.stringify({ event: 'grammar_feedback_withheld', code: 'analysis_conflict', reason: safetyIssue, contentVersion }));
-      return json(feedbackErrorBody('analysis_conflict'), 422);
-    }
-    console.info(JSON.stringify({ event: 'grammar_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), lessonId, contentVersion, durationMs: Date.now() - started }));
-    return json({ feedback: supportsFeedbackStructure(request) ? feedback : legacyFeedback(feedback) });
-    });
+    return await executeFeedbackRequest({ db, userId: user.userId, request, receipt: parsed.data, started, contextFingerprint, contextNote,
+      grammar: { lessonId, contentVersion },
+      scope: {domain:'grammar',targetId:lessonId,revision:context.revision,
+        fingerprint:[contentVersion,judgmentEnabled?input:legacyGrammarFeedbackInput(lesson,sentence),expectedModelId,judgmentEnabled?grammarInstruction:legacyGrammarInstruction,supportsFeedbackStructure(request),supportsAiContract(request,3)]},
+    }, () => generateGrammarFeedback({ apiKey: env.OPENAI_API_KEY, modelId: context.modelId, allowedModels: env.OPENAI_ALLOWED_MODELS, signal: request.signal, judgmentEnabled,contextNote,contextKind }, lesson, sentence));
   } catch (e) {
     const known = e instanceof FeedbackError;
     console.error(JSON.stringify({ event: 'grammar_feedback_failed', code: known ? e.code : 'storage_or_internal', ...(known && e.validationStage ? { validationStage: e.validationStage } : {}),...(known&&e.judgmentReason?{judgmentReason:e.judgmentReason}:{}), durationMs: Date.now() - started }));

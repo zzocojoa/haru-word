@@ -4,6 +4,7 @@ import {FeedbackError} from '@/lib/provider-feedback-error';
 import {json} from '@/lib/server/http';
 
 type Row={request_id:string;fingerprint:string;status:'pending'|'completed'|'failed'|'invalidated';started_at:number;expires_at:number;response_expires_at:number;response_status:number|null;response:string|null};
+export type FeedbackRequestScope = { domain: 'word' | 'grammar'; targetId: string; fingerprint: unknown; revision?: number };
 const lookup=(db:D1Database,user:string,id:string)=>db.prepare('SELECT * FROM feedback_requests WHERE user_id=? AND request_id=?').bind(user,id).first<Row>();
 const receipt=(requestId:string,state:FeedbackReceipt['state'],persisted=true):FeedbackReceipt=>({requestId,state,persisted});
 async function cleanup(db:D1Database,user:string,now:number){
@@ -31,7 +32,7 @@ export async function getFeedbackRequest(db:D1Database,user:string,id:string,now
 
 // An atomic owner+UUID claim is durable BEFORE the one provider attempt. No
 // automatic retries, leases or takeovers: an unknown attempt is never rerun.
-export async function withFeedbackRequest(db:D1Database,user:string,input:ReceiptRequest,scope:{domain:'word'|'grammar';targetId:string;fingerprint:unknown;revision?:number},run:()=>Promise<Response>,now=Date.now()):Promise<Response>{
+export async function withFeedbackRequest(db:D1Database,user:string,input:ReceiptRequest,scope:FeedbackRequestScope,run:()=>Promise<Response>,now=Date.now()):Promise<Response>{
   if(!input.requestId)return run(); // Headerless v142 clients retain their contract.
   const id=input.requestId,started=input.requestStartedAt;
   if(started===undefined||started>now+60_000)return json(feedbackErrorBody('invalid_request'),400);

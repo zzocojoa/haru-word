@@ -7,7 +7,7 @@ import { FeedbackIssueNotice } from './feedback-issue-notice';
 import { AiUseNotice } from './ai-use-notice';
 import { FeedbackDetail } from './feedback-detail';
 import { FeedbackCorrection } from './feedback-correction';
-import {currentFeedback} from '@/lib/recoverable-feedback';
+import {currentFeedback} from '@/lib/feedback-selection';
 import {wordFeedbackInput,feedbackMatchesContext} from '@/lib/feedback-context';
 import {useFeedbackContext} from './use-feedback-context';
 import {FeedbackContextInput} from './feedback-context-input';

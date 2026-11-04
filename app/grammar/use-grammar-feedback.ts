@@ -10,7 +10,7 @@ import type { useGrammarDraft } from './use-grammar-draft';
 import { AI_CONTRACT_HEADERS } from '@/lib/ai-contract';
 import { useAiRequests } from '../ai-request-context';
 import {useFeedbackRecovery} from '../use-feedback-recovery';
-import {feedbackOriginalMatches,type FeedbackContextRequest} from '@/lib/feedback-context';
+import {feedbackMatchesRequest,type FeedbackContextRequest} from '@/lib/feedback-context';
 
 type FeedbackInput = Pick<ReturnType<typeof useGrammarDraft>, 'latest' | 'change' | 'flush'> & {
   lessonId: LessonId;
@@ -59,7 +59,7 @@ export function useGrammarFeedback({ lessonId, canSave,contentVersion, latest, c
         body: JSON.stringify({ lessonId, sentence, expectedModelId,...context,...metadata }), signal: controller.signal,
       }, REQUEST_TIMEOUT_MS.feedback),controller.signal,context);
       if (!isCurrent()) return;
-      if (!feedbackOriginalMatches(feedback.original,sentence)||feedback.requestedModel!==expectedModelId||context.expectedContextFingerprint&&feedback.contextFingerprint!==context.expectedContextFingerprint) throw new FeedbackIssueError({ code: 'stale_input' });
+      if (!feedbackMatchesRequest(feedback, sentence, expectedModelId, context.expectedContextFingerprint)) throw new FeedbackIssueError({ code: 'stale_input' });
       change(progress => ({ ...progress, feedback }));
     } catch (cause) {
       if (id === generation.current && !controller.signal.aborted) {
