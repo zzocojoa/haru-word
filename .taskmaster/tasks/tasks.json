@@ -2227,9 +2227,9 @@
         "id": "12",
         "title": "명시 승인 후 기존 Site 게시·보존 확인",
         "description": "별도 배포 승인과 선행 게이트가 모두 충족될 때만 운영에 반영한다.",
-        "details": "현재 deferred: 이번 사용자 요청은 계획 작성이다. 나중에 승인되면 당시 기존 Site/배포상태/소스·비밀 비노출 백업·호환/복구를 재확인하고 공식 Sites 소스 동기화/검증/게시 절차를 수행한다. 새 Site/접근 범위/DB/R2 변경·운영 학습 QA 쓰기·유료AI smoke는 포함하지 않는다.",
+        "details": "2026-11-04 사용자 ‘진행’으로 게시12 승인. 기존 Site v144/d41d4e7이22:28:51 KST succeeded. 검증 fcefe7c와 tree 동일. 환경77/14·public6·자동화0·DB10테이블/DB·R2 선언 보존. 새 SQL/유료AI/운영 QA 쓰기0. 근거: docs/releases/2026-11-04-integration-remediation-v144-rollout.json. 실제 사용자 행 대조/새 DB 전체 백업/실기기·추가 AI 품질은 미실시.",
         "testStrategy": "사용자 승인 범위·동일 소스 체크·게시 terminal결과와 URL·읽기 관측·기록보존·실제기기미확인을 기록한다. 승인없음/필수게이트미달이면 실행0을 증명하고 보류를 유지.",
-        "status": "deferred",
+        "status": "done",
         "dependencies": [
           "11"
         ],
@@ -2239,45 +2239,48 @@
             "id": 1,
             "title": "승인 범위·현재 운영·안전 사본 재확인",
             "description": "구체적인 출시자료와 기존Site/소스를 기준으로 명시 게시승인을 확인한다.",
-            "details": "완료: 승인 전 배포/환경/운영데이터변경0. 진행중 배포가 있으면 중복게시하지 않는다.",
-            "status": "deferred",
+            "details": "사용자 진행 승인·기존 v143/36dc66f 운영/환경77/접근6 재확인·소스 복구 TAR 확보. 동결 후보 fcefe7c의706파일/42직접의존과 동일 tree를 확인. 사용자 행은 읽지 않았고 새 운영 DB 전체 백업은 미실시.",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 12,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T13:25:06.538Z"
           },
           {
             "id": 2,
             "title": "동일 소스의 기존 Site 공식 게시",
             "description": "선행게이트와 백업/복구 조건이 맞을 때만 소스동기화·게시한다.",
-            "details": "완료: 새Site/바인딩/접근정책을 바꾸지 않고 실제 버전·배포ID·terminal결과를 기록한다.",
-            "status": "deferred",
+            "details": "공식 Sites helper Node24.22.1 exit0·242파일 저장 후 v144(d41d4e72e9107747d10ae0a83122f0d5778a529a) 게시. appgdep_6aeb32fea7b0819187342115c02777dc succeeded. 기존 Site/DB·R2/접근/환경 유지. Node22 native 패키징 실패는 보존하고 같은 소스를 Node24로 패키징.",
+            "status": "done",
             "dependencies": [
               1
             ],
             "parentTaskId": 12,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T13:29:51.829Z"
           },
           {
             "id": 3,
             "title": "게시 결과·데이터 보존·복구 판단",
             "description": "승인 범위의 읽기 관측과 기록보존을 대조한다.",
-            "details": "완료: 개인정보/키 출력0·운영학습 QA쓰기0·유료호출0·롤백여부/미확인과 대시보드게시상태를 보고한다.",
-            "status": "deferred",
+            "details": "환경 값 전체/접근/자동화/DB 테이블 이름 전후 일치. 익명 홈200·JS/CSS13+출처1 해시 일치·상태401·공개시계200. 새/과거 두 엔진 대시보드6검사·기존3회귀 exit0. 유료0·운영 QA 쓰기0·롤백0. 사용자 행 전체 대조와 실기기는 미실시.",
+            "status": "done",
             "dependencies": [
               2
             ],
             "parentTaskId": 12,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-11-04T13:32:01.845Z"
           }
         ],
-        "updatedAt": "2026-11-04T10:07:17.528Z"
+        "updatedAt": "2026-11-04T13:32:01.845Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-11-04T12:55:05.090Z",
+      "lastModified": "2026-11-04T13:32:01.845Z",
       "taskCount": 12,
-      "completedCount": 11,
+      "completedCount": 12,
       "tags": [
         "integration-remediation"
       ]

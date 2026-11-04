@@ -4,7 +4,7 @@
 
 - Task Master: `integration-remediation`
 - planId: `integration-remediation-2026-11-04`
-- 등록 규모: 상위12개·세부41개. 현재 작업별 상태는 대시보드 원본을 따르며, 게시12는 별도 승인 전 보류다.
+- 등록 규모: 상위12개·세부41개. 사용자 “진행” 승인 후 기존 Site v144 게시까지 **12/12·41/41 완료**했다. 현재 상태와 [배포 근거](releases/2026-11-04-integration-remediation-v144-rollout.json)를 대시보드에 연결했다.
 - 요구사항과 기술 근거: [공식 RPG 형식 PRD](../.taskmaster/docs/integration-remediation-prd.md)
 - 발견 근거: [통합 검사 보고서](../outputs/project-inspection-20261104/REPORT.md)
 - 작업 화면: 기존 [로컬 대시보드](http://127.0.0.1:4318/)
@@ -23,7 +23,7 @@ Task Master의 각 상위/세부 작업에 선행 작업, 구체적인 완료 �
 
 기존 학습 기록·뜻별 성적·첫 답·임시 입력·문법 진도·백업·revision을 보존한다. API/백업 형식 변경과 DB 마이그레이션은 예정하지 않았다. AI 요청/프롬프트/모델을 바꾸거나 새 유료 평가를 실행하지 않는다. 검사 준비 문제 때문에 제품의 안전한 거절이나 개인정보 보호를 완화하지 않는다.
 
-현재 미승인 범위는 운영 게시·추가 유료 호출이다. 실제 iPhone·음성 청취·일반 영어 품질 등 기존 미확인 항목은 자동으로 확인 완료가 되지 않는다. [구현 진행 기록](INTEGRATION_REMEDIATION_IMPLEMENTATION.md)을 함께 확인한다.
+추가 유료 호출은 승인하지 않았고 실행0이다. 실제 iPhone·음성 청취·일반 영어 품질 등 기존 미확인 항목은 자동으로 확인 완료가 되지 않는다. [구현·배포 기록](INTEGRATION_REMEDIATION_IMPLEMENTATION.md)을 함께 확인한다.
 
 이번 계획은 [Task Master 공식 RPG 양식](https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/assets/example_prd_rpg.txt)과 [공식 작업 구조](https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/docs/task-structure.md)에 따라 작성했다. 자세한 적용 방식과 사용한 MCP 명령은 PRD와 등록 검증 기록에 남긴다.
 

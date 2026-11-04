@@ -1,4 +1,22 @@
-# 통합 검사 후속 수정 · 로컬 구현·검증 완료
+# 통합 검사 후속 수정 · v144 게시 완료
+
+사용자 “진행”을 게시12 승인으로 기록하고 기존 [하루단어](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 **2026-11-04 22:28:51 KST v144**를 게시했다. 배포 `appgdep_6aeb32fea7b0819187342115c02777dc`는 succeeded, 소스는 `d41d4e72e9107747d10ae0a83122f0d5778a529a`다. Task Master와 기본 폴더4318 대시보드는 **상위12/12·세부41/41 완료**로 갱신했다. [배포 증거](releases/2026-11-04-integration-remediation-v144-rollout.json)와 아래 게시 전 검증을 구분한다.
+
+검증 후보 `fcefe7c98244b2913e7b5f78601d890ea26423fd`와 전체 Git tree `934bdb8c868e663ba11d6abef0365c73081bc658`가 같다. 기존 Sites의36dc66f 이력에서 공식 helper로 연 `work/integration-remediation-publish-20261104`에 후보 tree를 적용하고, 706파일·직접 의존42개·기존 Site/DB/R2·SQL 불변을 확인했다. 빌드가 통과한 후 추가 검사에서 기존 `.env.example`을 실제 비밀 파일로 잘못 분류한 검사를 바로잡았다. 공식 패키저의 Node22 파일 복사 프로세스는 native code3221225477로 종료됐고, 같은 소스를 Node24.22.1 공식 helper로 패키징해 exit0·242파일을 저장/게시했다. 제품이나 플러그인 소스는 우회 수정하지 않았다. 최종 게시 checkout과 구현 후보는 동결하며 현재 관리 문서는 기본 폴더를 따른다.
+
+게시 전후 환경revision77/14항목의 값 전체·public 접근revision6·자동화0·DB 바인딩/10테이블 이름과 hosting의 DB/R2 선언이 일치한다. 익명 GET 점검에서 홈200, JS/CSS13개와 출처1개가 게시 빌드와 SHA256 일치, 상태API401, 공개 서버시계200/`serverTime`만/no-store를 확인했다. 최초 점검기의 일반 `/assets/`·출처 루트 경로·시계 인증 가정을 실제 `/_next/static/`·`/sources/content-attribution.txt`·공개 시계 계약으로 바로잡았으며 실패 기록을 보존했다. 운영 제품 오류 수정이나 추가 배포는 없었다.
+
+새 SQL·진단 이벤트·환경 변경·유료 AI·운영 학습 QA 쓰기는0이다. 이번 사용자 행 전체 대조·새 운영 DB 전체 백업은 미실시이며 메타데이터 일치를 전체 학습 상태 대조로 확대하지 않는다. v143 저장 버전과 소스 사본 `outputs/integration-remediation-deploy-20261104/rollback-v143-source.tar`를 보관했다. 복구 시 현재 운영/오류 확인 → 정상 OpenAI 전용 코드 재게시 → 환경/바인딩·읽기 검증 순서로 진행하며 역SQL·사용자 데이터 덮어쓰기·종료 기능 재활성화는 하지 않는다. 롤백은 실행하지 않았다. 실제 iPhone·VoiceOver·음성 청취·추가 유료 AI 품질·인증된 운영 학습 QA는 미실시다. 인증·요약 경계의 운영 회귀가 잔여 관측 대상이다.
+
+## GitHub 게시 준비 · QA 중단 정리 보완
+
+GitHub 브랜치는 `codex/integration-remediation-v144`, checkout은 `work/github-integration-remediation-20261104`이며 기준은 `github/main@5bbd7a6`다. 제품·공개 자산·DB·자료·SQL·hosting·package/lockfile·빌드 입력은 동결 fcefe7c/v144와 같다. 독립 검토에서 QA 준비/케이스 사이 중단 때 잠금·소유 Worker가 남는 결함을 재현해 QA helper와 회귀9파일만 별도 보완했다. 첫 INT/TERM과130/143을 유지하고 준비/상태조회 취소·중복stop을 검증했다.
+
+수정 전 재현exit1을 보존했고 Windows Node22/24 집중16개씩 exit0이다. 최종 전체 단위는 각798/798·exit0, 전체 린트는 exit0·기존15경고/새경고0이다. 최초 전체 단위의 옛 결과 shape 기대값 실패exit1도 보존하고 `signal:SIGINT` 계약을 명시해 재검했다. 앞선 자료·타입·공식 빌드 exit0은 같은 제품/빌드 입력에 대한 결과다. [별도 GitHub 검증 근거](releases/2026-11-04-integration-remediation-github.json)를 따른다.
+
+아래174조건·성능·706파일 지문·단위789는 동결 fcefe7c 및 동일 tree의 v144 당시 이력이다. 새 QA helper에서 전체 기능174조건/성능 모음을 다시 실행하지 않았다. 이 후속 QA 보완은 운영 제품 소스를 바꾸거나 새 배포·유료 호출을 실행하지 않는다. POSIX 전체 종료 보장과 실기기·추가 AI 품질은 미검증이다.
+
+## 게시 전 로컬 구현·검증 기록
 
 2026-11-04 사용자 “수정 착수 승인” 범위의 작업1~11 로컬 구현·검증을 완료했다. 전체 계획12/41 중38개 세부 작업 완료·게시12의3개는 보류다. 운영 게시·유료 평가·운영 학습 QA 쓰기는 실행하지 않았다.
 

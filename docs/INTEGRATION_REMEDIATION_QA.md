@@ -1,6 +1,8 @@
 # 통합 수정 QA 재현
 
-제품 수정 원본은 `work/integration-remediation-20261104`, Task Master·4318 대시보드 원본은 기본 폴더다. 아래 제품 명령은 구현 폴더에서 실행한다. Node 22.13 이상과 기존 npm lockfile을 사용한다. 설치가 필요하면 설치된 Sites 스킬의 `install-dependencies.mjs`를 사용한다.
+제품 검증 후보 `work/integration-remediation-20261104@fcefe7c`와 v144 게시 checkout은 동결 증거다. GitHub 후속 QA 수정은 `work/github-integration-remediation-20261104`에서 진행하며 아래 명령은 이 checkout에서 실행한다. Task Master·4318 대시보드 원본은 기본 폴더다. Node 22.13 이상과 기존 npm lockfile을 사용한다. 설치가 필요하면 설치된 Sites 스킬의 `install-dependencies.mjs`를 사용한다.
+
+새 GitHub checkout에는 Git 제외 `outputs/` 원시 검증·평가·운영 백업이 포함되지 않는다. 단위·자료·타입·린트·빌드는 잠금 설치 후 독립 실행할 수 있다. 브라우저 모음은 아래 로컬 Worker·외부 Playwright·전체 이미지 준비가 필요하며, 준비 자료가 없으면 준비 오류로 보고한다. `verify-integration-remediation.mjs --published`는 이 PC 기본 폴더에 보존된 이전 검증 근거와4318 원본을 검증하는 명령이며 새 clone에 해당 근거가 있다고 가정하지 않는다. 174조건·성능 결과는 fcefe7c 당시 기록이고, 후속 QA 실행기 변경 뒤 전체 모음을 다시 실행한 결과로 표시하지 않는다.
 
 ## 로컬 Worker와 준비 조건
 
@@ -14,9 +16,19 @@ New-Item -ItemType Directory -Force work | Out-Null
 @'
 const {grammarWorker}=require("./tests/qa/worker-profile.cjs");
 (async()=>{
-  const worker=await grammarWorker(4);
-  console.log(JSON.stringify({QA_BASE_URL:worker.base,QA_WORKER_CONFIG:worker.configPath}));
-  for(const signal of ["SIGINT","SIGTERM"])process.once(signal,async()=>{await worker.stop();process.exit(0);});
+  const controller=new AbortController();let worker,interrupted;
+  const interrupt=signal=>{if(!interrupted){interrupted=signal;controller.abort();}};
+  const onInt=()=>interrupt("SIGINT"),onTerm=()=>interrupt("SIGTERM");
+  process.on("SIGINT",onInt);process.on("SIGTERM",onTerm);
+  try{
+    worker=await grammarWorker(4,{signal:controller.signal});
+    console.log(JSON.stringify({QA_BASE_URL:worker.base,QA_WORKER_CONFIG:worker.configPath}));
+    await new Promise(resolve=>{if(controller.signal.aborted)resolve();else controller.signal.addEventListener("abort",resolve,{once:true});});
+  }catch(error){if(!controller.signal.aborted)throw error;}
+  finally{
+    await worker?.stop();process.removeListener("SIGINT",onInt);process.removeListener("SIGTERM",onTerm);
+    if(interrupted)process.exitCode=interrupted==="SIGINT"?130:143;
+  }
 })().catch(error=>{console.error(error.message);process.exitCode=1;});
 '@ | node -
 ```
@@ -55,6 +67,6 @@ runner는 실제 로컬 `/api/sentence-feedback` 상태가 `enabled:false`인지
 - 정상/실패/중단 후 `outputs/browser-suite/<그룹>-<시각>/results.json`과 원본 로그의 exit·timeout·interrupted를 확인한다. 모든 조건이 끝나고 exit0일 때만 해당 모음 통과다.
 - `work/browser-qa.lock`은 살아 있는 다른 PID의 실행을 보호한다. 임의 삭제하지 않는다. runner는 자신이 만든 문법 Worker만 종료하고 마지막에 자기 잠금을 해제한다. 별도 시작한 기본 Worker는 사용을 마친 터미널에서 Ctrl+C로 종료한다.
 - `pr38-lazy-recovery`는 `unrouteAll({behavior:'wait'})`로 실행 중인 route handler를 기다린 뒤 context를 닫는다. 오류 무시 옵션이나 포괄 catch로 실패를 숨기지 않는다. [Playwright 공식 설명](https://playwright.dev/docs/api/class-browsercontext#browser-context-unroute-all)을 따른다.
-- `node --experimental-strip-types --test tests/qa-process.test.mjs tests/qa-worker-profile.test.mjs tests/qa-preflight.test.mjs tests/qa-runner.test.mjs`는 실제 실패의 exit1·강제 시간 초과 트리 종료·중단 정리·살아 있는 잠금 보호·합성 프로필/사전 검사를 확인한다.
+- `node --experimental-strip-types --test tests/qa-interruption.test.mjs tests/qa-process.test.mjs tests/qa-runtime.test.mjs tests/qa-worker-profile.test.mjs tests/qa-preflight.test.mjs tests/qa-runner.test.mjs`는 실제 실패의 exit1·시간 초과·준비/케이스 사이/정리 중 중단·첫 신호와130/143 구분·중복stop·살아 있는 잠금 보호·합성 프로필/사전 검사를 확인한다. Windows의 소유 루프백 프로세스와 신호 이벤트로 검증하며 모든 POSIX 종료 상황을 보증하지 않는다.
 
 이 검사는 로컬 가상 계정·에뮬레이션이다. 실제 iPhone·VoiceOver·음성 청취·운영 장애 주입과 실제 API 품질을 확인한 것으로 표시하지 않는다. 원시 로그·합성 DB·환경은 Git에 추가하지 않는다.

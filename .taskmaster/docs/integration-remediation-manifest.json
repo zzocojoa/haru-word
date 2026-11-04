@@ -4,7 +4,7 @@
   "tag": "integration-remediation",
   "title": "통합 검사 후속 수정",
   "description": "승인한 통합 검사 후속 수정 구현. 로그인·저장 요약·QA/문서 정비를 진행하며 운영 게시와 유료평가는 별도 승인 전 보류합니다.",
-  "scope": "implementation-authorized",
+  "scope": "deployment-authorized",
   "planFile": "docs/INTEGRATION_REMEDIATION_PLAN.md",
   "prdFile": ".taskmaster/docs/integration-remediation-prd.md",
   "phaseLabels": {
@@ -31,12 +31,24 @@
     "paidEvaluationApproved": false,
     "newPaidEvaluationMaxUsdBeforeTax": 0,
     "priorBudgetsClosedAndNotTransferred": true,
-    "deploymentIncludedAndApproved": false,
-    "externalPublicationApproved": false,
+    "deploymentIncludedAndApproved": true,
+    "externalPublicationApproved": true,
     "productionQaWritesApproved": false,
-    "scope": "작업1~11 구현 승인. 게시12·유료평가·운영 QA 쓰기는 승인하지 않았으며 기존 Site/데이터 보호를 유지합니다.",
+    "scope": "작업1~12·기존 Site 게시·GitHub commit/push/PR 승인. PR병합·추가 유료평가·운영 QA 쓰기는 미포함.",
     "implementationApprovedAt": "2026-11-04T10:45:19.751Z",
-    "userApproval": "수정 착수 승인"
+    "userApproval": "수정 착수 승인",
+    "deploymentApproval": {
+      "userText": "진행",
+      "annotationIndex": 1,
+      "approvedAt": "2026-11-04T13:14:35.593Z",
+      "scope": "검증 후보를 기존 Sites에 게시하는 작업12 승인. 유료AI/실기기/운영학습 QA 쓰기는 포함하지 않음."
+    },
+    "githubPublicationApproved": true,
+    "githubPublicationApproval": {
+      "userText": "커밋, 푸시, PR 진행",
+      "approvedAt": "2026-11-04T13:43:36.798Z",
+      "scope": "검증된 v144 제품/QA 소스와 최신 관리 문서의 GitHub commit/push/PR. 병합·재배포·추가 유료AI·운영 학습 QA 쓰기는 포함하지 않음."
+    }
   },
   "sources": [
     {
@@ -299,7 +311,7 @@
       "criteria": "84조건 추적·현재/과거 AI 계약 분리·문법/그림 프로필·취소/정리·실패 검출력",
       "result": {
         "status": "passed",
-        "detail": "원본84+신규3의 두 엔진 최종174조건 통과. 최초 전체실행1/4실패는 보존하고 바뀐6 QA를 양쪽 재검(14명령exit0, 반복pr38포함). 공유 의존/제품 원본 불변·전체그림3809해시·문법별실제저장·초기초점/서버시간대기·실제오류주입exit1·7준비단위 및 소유문법6포트종료 확인."
+        "detail": "동결 fcefe7c/v144 기준: 원본84+신규3의 두 엔진 최종174조건 통과. 최초 전체실행1/4실패는 보존하고 바뀐6 QA를 양쪽 재검(14명령exit0, 반복pr38포함). 공유 의존/제품 원본 불변·전체그림3809해시·문법별실제저장·초기초점/서버시간대기·실제오류주입exit1·7준비단위 및 소유문법6포트종료 확인."
       }
     },
     {
@@ -311,7 +323,7 @@
       "criteria": "최종 동일 SHA의 단위/타입/린트/자료/build·두 엔진·학습/복원·외부 AI0·정리 증거",
       "result": {
         "status": "passed",
-        "detail": "최종 제품/검사 지문 고정. Node22/24 각789·자료/타입/린트/후보build exit0(기존15경고). 원본84+신규3의 두 엔진174조건은 초기실패와 변경6QA 재검을 구분해 검증. 성능5·이미지36표본/비활성4·복원20MB/한도/원자성·실제AI0·자체9포트/잠금종료 확인."
+        "detail": "동결 fcefe7c/v144 기준: 최종 제품/검사 지문 고정. Node22/24 각789·자료/타입/린트/후보build exit0(기존15경고). 원본84+신규3의 두 엔진174조건은 초기실패와 변경6QA 재검을 구분해 검증. 성능5·이미지36표본/비활성4·복원20MB/한도/원자성·실제AI0·자체9포트/잠금종료 확인."
       }
     },
     {
@@ -335,8 +347,8 @@
       ],
       "criteria": "별도 사용자 게시 승인과 선행 gate 통과 후에만 기존 Site 반영/기록보존/관측",
       "result": {
-        "status": "held",
-        "detail": "이번 요청에 게시 승인은 없습니다. 구현/검증·구체적 출시자료와 명시 승인 전 운영 변경0."
+        "status": "passed",
+        "detail": "사용자 ‘진행’ 승인 후 기존 Site v144/d41d4e7 게시 succeeded(22:28:51 KST). 검증 fcefe7c와 tree 동일. 환경77/14·public6·자동화0·DB10테이블·DB/R2 선언 보존. 공개 JS/CSS13개+출처1개 해시 일치·익명state401·공개시계200. 새 SQL/유료AI/운영 QA 쓰기0. 사용자 행 대조·실기기는 미실시."
       }
     }
   ],
@@ -357,7 +369,7 @@
     "baseCommit": "5bbd7a6d4d82e9aea86a0b0a8679242ba64e9535",
     "implementationDone": 11,
     "implementationTotal": 11,
-    "dashboardContext": "승인된 로컬 구현·검증 11/11 완료 · 전체 계획12개/세부41개 중 게시12는 별도 승인 전 보류. 유료 호출·운영 QA 쓰기0, 운영v143 유지.",
+    "dashboardContext": "통합 수정12/12·세부41/41 완료 · 기존 Site 게시·읽기 검증 완료 · 유료 AI/운영 QA 쓰기0.",
     "coreEvidence": "outputs/integration-remediation-implementation-20261104/core-results.json",
     "runtimeSourceCheckout": "work/integration-remediation-20261104",
     "productFixesImplemented": [
@@ -384,7 +396,32 @@
     "releaseEvidence": "docs/releases/2026-11-04-integration-remediation.json",
     "finalCleanupEvidence": "outputs/integration-remediation-implementation-20261104/final-cleanup.json",
     "completedAt": "2026-11-04T12:55:00.615Z",
-    "releaseReadiness": "local-verified-publication-held",
-    "dashboardEvidence": "outputs/integration-remediation-implementation-20261104/dashboard-verification.json"
+    "releaseReadiness": "published",
+    "dashboardEvidence": "outputs/integration-remediation-implementation-20261104/dashboard-verification.json",
+    "publishedSiteId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "publishedVersion": 144,
+    "publishedVersionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0e4c0307e89c81918265d94cbcb87ba5",
+    "publishedSource": "d41d4e72e9107747d10ae0a83122f0d5778a529a",
+    "publishedTree": "934bdb8c868e663ba11d6abef0365c73081bc658",
+    "publishedAt": "2026-11-04T13:28:51.654440+00:00",
+    "deploymentId": "appgdep_6aeb32fea7b0819187342115c02777dc",
+    "deploymentStatus": "succeeded",
+    "publicationCheckout": "work/integration-remediation-publish-20261104",
+    "deploymentVerificationEvidence": "outputs/integration-remediation-deploy-20261104/deployment-verification.json",
+    "publicSmokeEvidence": "outputs/integration-remediation-deploy-20261104/public-smoke.json",
+    "publicationDashboardEvidence": "outputs/integration-remediation-deploy-20261104/dashboard-verification.json",
+    "publishedRolloutEvidence": "docs/releases/2026-11-04-integration-remediation-v144-rollout.json",
+    "githubPublicationVerification": {
+      "checkout": "work/github-integration-remediation-20261104",
+      "branch": "codex/integration-remediation-v144",
+      "baseCommit": "5bbd7a6d4d82e9aea86a0b0a8679242ba64e9535",
+      "productSourceMatchesCandidate": true,
+      "qaFollowupCommit": "ee8b9a7060fa8993a1404e5deb579a3dd74696a2",
+      "finalUnitEach": 798,
+      "focusedInterruptionEach": 16,
+      "lintWarnings": 15,
+      "fullFunctionalRerun": false,
+      "evidence": "docs/releases/2026-11-04-integration-remediation-github.json"
+    }
   }
 }

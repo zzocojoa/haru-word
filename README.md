@@ -1,7 +1,7 @@
 <!-- integration-remediation-plan-current -->
-## 2026-11-04 · 통합 검사 후속 수정 로컬 검증 완료
+## 2026-11-04 · 통합 검사 후속 수정 v144 게시 완료
 
-로그인 진입·저장 요약·검사 환경/계약·운영 문서 불일치의 [수정 계획](docs/INTEGRATION_REMEDIATION_PLAN.md)을 Task Master `integration-remediation`에 등록했다. 2026-11-04 “수정 착수 승인”으로 상위12개·세부41개 중 승인된 작업1~11의 로컬 구현·검증을 완료했고, 게시12·유료 호출은 보류다. [구현 기록](docs/INTEGRATION_REMEDIATION_IMPLEMENTATION.md), [QA 재현](docs/INTEGRATION_REMEDIATION_QA.md), [RPG 형식 PRD](.taskmaster/docs/integration-remediation-prd.md), [기존 대시보드](http://127.0.0.1:4318/)에서 확인한다. 이전 `master`15/35와 `judgment-remediation`18/49의 완료·평가·예산 이력은 보존하며 이번 플랜으로 합산하지 않는다. 아래 v143은 기존 운영 기록이다.
+로그인 진입·저장 요약·검사 환경/계약·공개 출처 안내의 [수정 계획](docs/INTEGRATION_REMEDIATION_PLAN.md)을 완료했다. 사용자 “진행” 승인에 따라 기존 [하루단어](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 **v144 · 소스d41d4e7 · 환경77**을 게시했다. 검증 후보fcefe7c와 전체 Git tree가 같다. Task Master `integration-remediation`은 **상위12/12 · 세부41/41 완료**다. [배포 근거](docs/releases/2026-11-04-integration-remediation-v144-rollout.json), [구현 기록](docs/INTEGRATION_REMEDIATION_IMPLEMENTATION.md), [QA 재현](docs/INTEGRATION_REMEDIATION_QA.md), [기존 대시보드](http://127.0.0.1:4318/)에서 확인한다. 기존 Site·DB/R2·환경·접근 정책과 과거 두 플랜/평가 이력은 보존했다. 유료 AI·운영 학습 QA 쓰기는0이며 실기기·추가 AI 품질 평가는 미실시다. 아래 v143과 미배포 표기는 당시 이력이다.
 <!-- /integration-remediation-plan-current -->
 
 <!-- judgment-remediation-plan-current -->

@@ -9,10 +9,12 @@ import {PROJECT_ROOT,readDashboardSnapshot,buildDashboard} from './openai-dashbo
 import {createDashboardServer} from './serve-openai-dashboard.mjs';
 const require=createRequire(import.meta.url),pw=require(process.env.QA_PLAYWRIGHT_PATH||'playwright');
 const {runCase}=require(resolve(PROJECT_ROOT,'tests/qa/process.cjs'));
-const output=resolve(PROJECT_ROOT,'outputs/integration-remediation-implementation-20261104');
+const published=process.argv.includes('--published');
+const implementationOutput=resolve(PROJECT_ROOT,'outputs/integration-remediation-implementation-20261104');
+const output=published?resolve(PROJECT_ROOT,'outputs/integration-remediation-deploy-20261104'):implementationOutput;
 const NEW='integration-remediation-2026-11-04',MID='judgment-remediation-2026-11-03',OLD='openai-api-migration-2026-11-03',TAG='integration-remediation';
 const readJson=async file=>JSON.parse(await readFile(file,'utf8')),sha=value=>createHash('sha256').update(value).digest('hex');
-const baseline=await readJson(resolve(output,'baseline.json')),tasks=await readJson(resolve(PROJECT_ROOT,'.taskmaster/tasks/tasks.json'));
+const baseline=await readJson(resolve(implementationOutput,'baseline.json')),tasks=await readJson(resolve(PROJECT_ROOT,'.taskmaster/tasks/tasks.json'));
 const manifest=await readJson(resolve(PROJECT_ROOT,'.taskmaster/docs/integration-remediation-manifest.json'));
 const registry=await readJson(resolve(PROJECT_ROOT,'.taskmaster/docs/dashboard-plans.json'));
 const children=rows=>rows.flatMap(t=>t.subtasks),done=rows=>rows.filter(t=>t.status==='done').length;
@@ -30,16 +32,27 @@ const {server}=createDashboardServer({projectRoot:fixture});await new Promise((o
 const local='http://127.0.0.1:'+server.address().port,actual='http://127.0.0.1:4318',fixtureTasks=resolve(fixture,'.taskmaster/tasks/tasks.json');
 try{
   assert.equal(manifest.executionStarted,true);assert.equal(manifest.authorization.implementationApproved,true);
-  for(const key of ['paidEvaluationApproved','deploymentIncludedAndApproved','externalPublicationApproved','productionQaWritesApproved'])assert.equal(manifest.authorization[key],false,key);
+  for(const key of ['paidEvaluationApproved','productionQaWritesApproved'])assert.equal(manifest.authorization[key],false,key);
+  for(const key of ['deploymentIncludedAndApproved','externalPublicationApproved'])assert.equal(manifest.authorization[key],published,key);
   assert.equal(registry.defaultPlanId,NEW);assert.equal(tasks[TAG].tasks.length,12);assert.equal(children(tasks[TAG].tasks).length,41);
-  assert.equal(tasks[TAG].tasks[11].status,'deferred');assert.ok(tasks[TAG].tasks[11].subtasks.every(t=>t.status==='deferred'));
-  assert.equal(manifest.execution.implementationDone,done(tasks[TAG].tasks));
+  assert.equal(tasks[TAG].tasks[11].status,published?'done':'deferred');assert.ok(tasks[TAG].tasks[11].subtasks.every(t=>t.status===(published?'done':'deferred')));
+  assert.equal(manifest.execution.implementationDone,done(tasks[TAG].tasks.slice(0,11)));
   const visited=new Set(),visiting=new Set();
   function visit(id){assert.ok(!visiting.has(id),'dependency cycle');if(visited.has(id))return;const task=tasks[TAG].tasks.find(t=>Number(t.id)===id);assert.ok(task);visiting.add(id);for(const dep of task.dependencies)visit(Number(dep));visiting.delete(id);visited.add(id);}
   for(const task of tasks[TAG].tasks){visit(Number(task.id));if(task.status==='done'){assert.ok(task.subtasks.every(t=>t.status==='done'));for(const dep of task.dependencies)assert.equal(tasks[TAG].tasks.find(t=>Number(t.id)===Number(dep)).status,'done');}}
-  if(process.argv.includes('--final')){assert.equal(done(tasks[TAG].tasks),11);assert.ok(manifest.gates.slice(0,6).every(g=>g.result.status==='passed'));}
-  assert.equal(manifest.gates.at(-1).result.status,'held');
-  pass('12/41 dependencies and parent/child progress match; implementation approved; publication/payment/production writes remain held');
+  if(process.argv.includes('--final')||published){assert.equal(done(tasks[TAG].tasks),published?12:11);assert.ok(manifest.gates.slice(0,6).every(g=>g.result.status==='passed'));}
+  assert.equal(manifest.gates.at(-1).result.status,published?'passed':'held');
+  if(published){
+    assert.equal(done(children(tasks[TAG].tasks)),41);assert.equal(manifest.authorization.deploymentApproval.userText,'진행');
+    assert.equal(manifest.execution.releaseReadiness,'published');
+    const receipt=await readJson(resolve(output,'deployment-verification.json'));
+    assert.equal(receipt.deployment.status,'succeeded');assert.equal(receipt.version.source.commit_sha,manifest.execution.publishedSource);
+    assert.equal(receipt.siteId,manifest.execution.publishedSiteId);assert.equal(receipt.invariants.environmentUnchanged,true);
+    assert.equal(receipt.invariants.accessUnchanged,true);assert.equal(receipt.invariants.bindingsAndTablesUnchanged,true);
+    assert.equal(receipt.paidCalls,0);assert.equal(receipt.productionQaWrites,0);assert.equal(receipt.newSqlMigrations,0);
+    assert.equal((await readJson(resolve(output,'public-smoke.json'))).passed,true);
+  }
+  pass(published?'12/41 complete with explicit publication approval and succeeded receipt; payment/production QA writes remain prohibited':'12/41 dependencies and parent/child progress match; implementation approved; publication/payment/production writes remain held');
   for(const [tag,hash]of Object.entries(baseline.oldTagHashes))assert.equal(sha(JSON.stringify(tasks[tag])),hash,tag);
   for(const [file,hash]of Object.entries({...baseline.oldEvidenceHashes,...baseline.rootSourceHashes}))assert.equal(sha(await readFile(resolve(PROJECT_ROOT,file))),hash,file);
   pass('both historical tags, 32 evaluation/evidence files and 637 original root source files unchanged');

@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-04T14:01:07.248Z",
+  "status": "verified-for-github-publication",
+  "branch": "codex/integration-remediation-v144",
+  "base": "main",
+  "baseCommit": "5bbd7a6d4d82e9aea86a0b0a8679242ba64e9535",
+  "checkout": "work/github-integration-remediation-20261104",
+  "candidate": "fcefe7c98244b2913e7b5f78601d890ea26423fd",
+  "operatingVersion": 144,
+  "operatingSource": "d41d4e72e9107747d10ae0a83122f0d5778a529a",
+  "productAndBuildInputsUnchangedFromCandidate": true,
+  "wholeGithubTreeEqualsCandidate": false,
+  "qaFollowup": {
+    "commit": "ee8b9a7060fa8993a1404e5deb579a3dd74696a2",
+    "files": [
+      "tests/qa/preflight.cjs",
+      "tests/qa/process.cjs",
+      "tests/qa/run.cjs",
+      "tests/qa/runtime.cjs",
+      "tests/qa/worker-profile.cjs",
+      "tests/qa-interruption.test.mjs",
+      "tests/qa-preflight.test.mjs",
+      "tests/qa-process.test.mjs",
+      "tests/qa-runtime.test.mjs"
+    ],
+    "sourceHashes": {
+      "tests/qa/preflight.cjs": "f4e1c97dfdf25b2508a6522f6f009609cfbfbac814b434ece50af9e0834cabdc",
+      "tests/qa/process.cjs": "5a3ac73141dda4e1ac9ce941f4920b3bc48c23c75b69883ad77fccdd2ec14180",
+      "tests/qa/run.cjs": "2907c33ef66fa7d10f8ad1780dd65d9efda83f08e8becefbe95dfb0591d2568f",
+      "tests/qa/runtime.cjs": "790bc1fd261c9d4407b55b9ddd5092131300f75a388e7e16fddae23a15f670d8",
+      "tests/qa/worker-profile.cjs": "d25d0eb00900ec4d899961558bb407a515160681b8bbaf5317d80e92c0373fed",
+      "tests/qa-interruption.test.mjs": "98099bb9f1a6e2a4070307ff71a80eb1667fe32a5754a01b67d73691b7a4c5ad",
+      "tests/qa-preflight.test.mjs": "7504e4f24e318a11cb578cd5c3684d789d47a178bd568536b1db9f83a0f66c36",
+      "tests/qa-process.test.mjs": "adcfc8bc5a217b4deb89ad786191c579be769ffbcaa90f8acccc6d2a4d171b4f",
+      "tests/qa-runtime.test.mjs": "6835577e7588243bb2e3b42ce5fceb2f931545d696fcadca2cf73fbd3bf33036"
+    },
+    "before": {
+      "node": "22.22.2",
+      "exit": 1,
+      "observed": "QA suite preparation interrupt left owned lock; preserved original failing reproducer"
+    },
+    "after": {
+      "nodes": [
+        "22.22.2",
+        "24.22.1"
+      ],
+      "focusedTestsEach": 16,
+      "exitCodes": [
+        0,
+        0
+      ],
+      "observed": "Owned loopback Worker/child/lock cleanup during preparation/between cases; first INT/TERM reason retained through duplicate cleanup, 130/143 codes, shared stopPromise, readiness/status GET cancellation"
+    },
+    "platform": "Windows direct execution; no universal POSIX termination guarantee"
+  },
+  "verification": {
+    "beforeQaFollowup": [
+      {
+        "name": "unit-node22",
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "--experimental-strip-types",
+          "--test",
+          "--test-reporter=dot",
+          "tests/*.test.mjs"
+        ],
+        "code": 0,
+        "durationMs": 25716
+      },
+      {
+        "name": "unit-node24",
+        "command": [
+          "C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+          "--experimental-strip-types",
+          "--test",
+          "--test-reporter=dot",
+          "tests/*.test.mjs"
+        ],
+        "code": 0,
+        "durationMs": 23455
+      },
+      {
+        "name": "grammar-review",
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "scripts/check-grammar-review.mjs"
+        ],
+        "code": 0,
+        "durationMs": 209
+      },
+      {
+        "name": "typecheck",
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "node_modules/typescript/bin/tsc",
+          "--noEmit"
+        ],
+        "code": 0,
+        "durationMs": 12115
+      },
+      {
+        "name": "lint",
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "node_modules/eslint/bin/eslint.js",
+          ".",
+          "--ignore-pattern",
+          "dist",
+          "--ignore-pattern",
+          ".next"
+        ],
+        "code": 0,
+        "durationMs": 22015
+      },
+      {
+        "name": "build",
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "C:/Users/user/.codex/plugins/cache/openai-curated-remote/sites/1.1.3/scripts/build-site.mjs"
+        ],
+        "code": 0,
+        "durationMs": 14577
+      }
+    ],
+    "afterQaFollowup": [
+      {
+        "name": "final-unit-node22",
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "--experimental-strip-types",
+          "--test",
+          "--test-reporter=dot",
+          "tests/*.test.mjs"
+        ],
+        "code": 0,
+        "durationMs": 17577,
+        "tests": 798
+      },
+      {
+        "name": "final-unit-node24",
+        "command": [
+          "C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe",
+          "--experimental-strip-types",
+          "--test",
+          "--test-reporter=dot",
+          "tests/*.test.mjs"
+        ],
+        "code": 0,
+        "durationMs": 18772,
+        "tests": 798
+      },
+      {
+        "name": "final-lint",
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "node_modules/eslint/bin/eslint.js",
+          ".",
+          "--ignore-pattern",
+          "dist",
+          "--ignore-pattern",
+          ".next"
+        ],
+        "code": 0,
+        "durationMs": 16630
+      }
+    ],
+    "lint": {
+      "errors": 0,
+      "warnings": 15,
+      "newWarnings": 0
+    },
+    "build": {
+      "exit": 0,
+      "inputsUnchangedSinceBuild": true
+    },
+    "initialFullUnitFollowupExit": 1,
+    "initialFullUnitFailure": "Old qa-runtime exact-result assertion expected no signal field; updated to assert SIGINT metadata. Final whole unit suites pass.",
+    "fullFunctionalRerun": false,
+    "fullPerformanceRerun": false,
+    "previousFunctional": {
+      "candidate": "fcefe7c",
+      "sourceQualifiedConditions": 174,
+      "initialFullExitCodes": [
+        1,
+        1
+      ],
+      "method": "Changed6 QA scripts rerun in both engines14 commands; unchanged cases qualified by identical inputs. Original full failures preserved."
+    },
+    "dashboardCurrent": {
+      "passed": true,
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "sourceHash": "883fe579bf6ba3e6327d20b3eed38e896b06aba0a695cc34b58dfcfe8b841120"
+    }
+  },
+  "plan": {
+    "tag": "integration-remediation",
+    "parents": 12,
+    "children": 41,
+    "allDone": true,
+    "priorTagsAndBudgetsPreserved": true
+  },
+  "scope": {
+    "newPaidCalls": 0,
+    "productionQaWrites": 0,
+    "newDeployment": false,
+    "mergeIncluded": false,
+    "packageAndLockfileChanged": false
+  },
+  "notVerified": [
+    "Full functional/performance suite with new interruption helper",
+    "Real iPhone/VoiceOver/audio",
+    "New paid AI quality",
+    "Authenticated production learner QA",
+    "All POSIX termination scenarios"
+  ],
+  "evidence": {
+    "static-results.json": {
+      "path": "outputs/github-integration-remediation-20261104/static-results.json",
+      "sha256": "e7b61dd88b2ee43f89b07a25dc04c9787a7c331f837210dafcb19d1e6f091b4d"
+    },
+    "final-static-results.json": {
+      "path": "outputs/github-integration-remediation-20261104/final-static-results.json",
+      "sha256": "e93b2f6869486284042f63159cd11c568407c745bd52ef5037227cb364598fa2"
+    },
+    "final-unit-node22.log": {
+      "path": "outputs/github-integration-remediation-20261104/final-unit-node22.log",
+      "sha256": "5d7e97b1e4482516c7e7055fc156d6510694b4b11df6c651f5daf9fd9cb5a1da"
+    },
+    "final-unit-node24.log": {
+      "path": "outputs/github-integration-remediation-20261104/final-unit-node24.log",
+      "sha256": "5d7e97b1e4482516c7e7055fc156d6510694b4b11df6c651f5daf9fd9cb5a1da"
+    },
+    "final-lint.log": {
+      "path": "outputs/github-integration-remediation-20261104/final-lint.log",
+      "sha256": "9fdc74fbb392eb6317cdcb9a8170f845f71d680af77f02d1bfa63c9aa7002d0e"
+    },
+    "build.log": {
+      "path": "outputs/github-integration-remediation-20261104/build.log",
+      "sha256": "348be7612242870b6835128afbf92b995d6de007d7f34d7903f56898d49ff8fa"
+    },
+    "final-unit-node22-attempt1.log": {
+      "path": "outputs/github-integration-remediation-20261104/final-unit-node22-attempt1.log",
+      "sha256": "4cc4ddb0b9ca7f8fe99321c92def2996980334533fead05851530b4d44c87b48"
+    },
+    "before-node22.log": {
+      "path": "work/github-integration-remediation-20261104/outputs/qa-interruption-followup-20261104/before-node22.log",
+      "sha256": "56e71cdd28bb8dfdd6162207e1990eab88c58eb49fc6f536c116d923f5c244c7"
+    },
+    "after-node22.log": {
+      "path": "work/github-integration-remediation-20261104/outputs/qa-interruption-followup-20261104/after-node22.log",
+      "sha256": "fe1a3b6a59e5f25e0ae8853d4982efd7e3ee2d9e3a17797063b3f9eb5d05b92b"
+    },
+    "after-node24.log": {
+      "path": "work/github-integration-remediation-20261104/outputs/qa-interruption-followup-20261104/after-node24.log",
+      "sha256": "29b887ffc3c5aab955758b4c68af6e2f7fec6a11fb70b36a86002a794177278d"
+    },
+    "dashboard-current.json": {
+      "path": "outputs/github-integration-remediation-20261104/dashboard-current.json",
+      "sha256": "c7b69eb25d3c30dc7cc916f867647de2c999af13a6b5215b0a85ee511da70204"
+    }
+  }
+}

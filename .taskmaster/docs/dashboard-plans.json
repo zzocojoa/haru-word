@@ -23,7 +23,7 @@
       "label": "새 플랜 · 통합 검사 후속 수정",
       "kind": "current",
       "manifest": ".taskmaster/docs/integration-remediation-manifest.json",
-      "context": "승인된 로컬 구현·검증 11/11 완료 · 전체 계획12개/세부41개 중 게시12는 별도 승인 전 보류. 유료 호출·운영 QA 쓰기0, 운영v143 유지.",
+      "context": "통합 수정12/12·세부41/41 완료 · 기존 Site 게시·읽기 검증 완료 · 유료 AI/운영 QA 쓰기0.",
       "budget": "신규 유료 평가 승인 없음 · 이번 계획 사용 US$0 · 과거 평가 원장/잔액과 별도"
     }
   ]
