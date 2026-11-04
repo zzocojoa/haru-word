@@ -45,14 +45,14 @@ const checks=[];const errors=[];const evidence=[];
   await logIssue('CONTENT',{confirmed:true,corrected:['train: miss the train','would: 정중한 권유','fit: 건강한']});
   await e.p.getByRole('button',{name:'학습 설정',exact:true}).click();await e.p.getByText('저장·날짜·AI 안내',{exact:true}).click();
   const settingsCopy=await e.p.getByRole('dialog').innerText();
-  for(const text of ['AI는 요청할 때만 사용해요','Google 응답이 실패하면 Groq로 전환','결과에 제공사를 표시','사용 한도에 따라 요청이 제한될 수 있어요'])assert.ok(settingsCopy.includes(text),text);
+  for(const text of ['AI는 ‘참고 의견 요청’을 누를 때만 사용해요','모델 변경이나 기록 조회만으로 요청하지 않아요','OpenAI 사용 한도에 따라 요청이 제한될 수 있어요','실패해도 다른 모델로 자동 전송하지 않아요'])assert.ok(settingsCopy.includes(text),text);
   assert.ok(!settingsCopy.includes('두 계정은 Free 상태를 유지'),'learner settings do not assign billing tasks');
   assert.ok(!settingsCopy.includes('별도 AI API를 사용하지'));
   await e.p.getByRole('checkbox',{name:'새 단어 쉬기 · 복습만 하기',exact:true}).waitFor();
   const attribution=await e.ctx.request.get(base+'/sources/content-attribution.txt');assert.equal(attribution.status(),200);
   const sourceCopy=await attribution.text();
-  for(const text of ['Google Gemini API를 먼저 사용','같은 작성 문장과 목표 정보','Groq API로 보내 자동 전환','계정은 Free 상태를 유지'])assert.ok(sourceCopy.includes(text),text);
-  await shot(e.p,'06-settings-ai-copy');await logIssue('SETTINGS_COPY',{confirmed:true,text:'명시적 AI 요청·Google 우선/Groq 전환·제공사 표시·복습 안내; 무료 운영 조건은 출처 파일에 보존'});await e.ctx.close();
+  for(const text of ['명시적으로 요청할 때만','OpenAI Responses API','자동 전송하지 않습니다','과거 Google·Groq 의견은 원래 제공사와 함께 보존'])assert.ok(sourceCopy.includes(text),text);
+  await shot(e.p,'06-settings-ai-copy');await logIssue('SETTINGS_COPY',{confirmed:true,text:'명시적 OpenAI 요청·자동 대체 없음·과거 제공사 보존·복습 안내; 결제 변경 없음'});await e.ctx.close();
   assert.deepEqual(errors,[]);fs.writeFileSync(out+'/evidence.json',JSON.stringify({date,checks,errors,evidence},null,2));console.log(JSON.stringify({verifiedFixes:checks.length,statefulFixesCheckedTwice:4,screenshots:evidence.length,browserErrors:errors}));
  }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

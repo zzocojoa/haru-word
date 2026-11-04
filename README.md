@@ -1,3 +1,9 @@
+<!-- integration-remediation-plan-current -->
+## 2026-11-04 · 통합 검사 후속 수정 로컬 검증 완료
+
+로그인 진입·저장 요약·검사 환경/계약·운영 문서 불일치의 [수정 계획](docs/INTEGRATION_REMEDIATION_PLAN.md)을 Task Master `integration-remediation`에 등록했다. 2026-11-04 “수정 착수 승인”으로 상위12개·세부41개 중 승인된 작업1~11의 로컬 구현·검증을 완료했고, 게시12·유료 호출은 보류다. [구현 기록](docs/INTEGRATION_REMEDIATION_IMPLEMENTATION.md), [QA 재현](docs/INTEGRATION_REMEDIATION_QA.md), [RPG 형식 PRD](.taskmaster/docs/integration-remediation-prd.md), [기존 대시보드](http://127.0.0.1:4318/)에서 확인한다. 이전 `master`15/35와 `judgment-remediation`18/49의 완료·평가·예산 이력은 보존하며 이번 플랜으로 합산하지 않는다. 아래 v143은 기존 운영 기록이다.
+<!-- /integration-remediation-plan-current -->
+
 <!-- judgment-remediation-plan-current -->
 ## 2026-11-04 · OpenAI 전환·판단 개선 운영 적용
 

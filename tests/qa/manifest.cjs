@@ -1,5 +1,7 @@
 // Explicit inventory: additions and deletions require review.
 module.exports = [
+  "auth-boundary-qa.cjs",
+  "saved-summary-qa.cjs",
   "local-draft-qa.cjs",
   "a1-content-qa.cjs",
   "accessibility-qa.cjs",

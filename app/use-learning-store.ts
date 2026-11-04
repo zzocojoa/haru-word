@@ -15,6 +15,11 @@ export function useLearningStore() {
   const [state, setState] = useState<State>(() => structuredClone(EMPTY));
   const current = useRef(state);
   const persisted = useRef(state);
+  const savedAvailable = useRef(false);
+  const readSavedState = useCallback(() => {
+    if (!savedAvailable.current) throw new Error('Saved learning state unavailable');
+    return structuredClone(persisted.current);
+  }, []);
   const revision = useRef(0);
   const lock = useRef(false);
   const reconcileRestore=useRef(false);
@@ -36,6 +41,7 @@ export function useLearningStore() {
   const applySnapshot = useCallback(({ state: next, revision: nextRevision }: StateSnapshot) => {
     revision.current = nextRevision;
     persisted.current = next;
+    savedAvailable.current = true;
     current.current = next;
     setState(next);
     setUnsaved(false);
@@ -59,6 +65,7 @@ export function useLearningStore() {
     try {
       const result = await loadLearningState();
       if (result.response.status === 401) {
+        savedAvailable.current = false;
         setSignedIn(false);
         return false;
       }
@@ -177,5 +184,5 @@ export function useLearningStore() {
     }
   }, [signedIn, unsaved, conflict, applySnapshot]);
 
-  return { state, current, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
+  return { state, current, readSavedState, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
 }

@@ -1,4 +1,4 @@
-const { aiHeaders, openaiFeedback, feedbackReceipt } = require('./qa/openai-fixture.cjs');
+const { currentAiHeaders: aiHeaders, currentOpenaiFeedback, feedbackReceipt } = require('./qa/openai-fixture.cjs');
 // Real application routes and persistence; synthetic learners and fixed AI results only.
 // Structures remain stored. Rechecks require an explicit click; editing retains
 // the prior proposal as read-only comparison rather than a fresh assessment.
@@ -54,13 +54,36 @@ fs.mkdirSync(out,{recursive:true});
     await page.addScriptTag({path:axePath});check((await page.evaluate(async()=> (await axe.run('.ai-feedback-result',{runOnly:['wcag2a','wcag2aa','wcag21aa']})).violations)).length===0,`${name}: axe`);
   }
   const snapshot = async context => (await (await context.request.get(base+'/api/state',{headers:cap})).json()).state;
+  async function requestCurrent(result, domain = 'sentence') {
+    let calls = 0;
+    const url = '**/api/' + domain + '-feedback';
+    await page.route(url, route => {
+      if (route.request().method() !== 'POST') return route.continue();
+      calls++;
+      return route.fulfill({json:{feedback:currentOpenaiFeedback(route,result),receipt:feedbackReceipt(route)}});
+    });
+    await page.getByRole('button',{name:domain === 'sentence'?'AI 참고 의견 다시 요청':'AI 참고 의견 요청',exact:true}).click();
+    await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
+    const until=Date.now()+10000;
+    while(Date.now()<until){
+      const state=await snapshot(page.context());
+      const feedback=domain==='sentence'?Object.values(state.sessions)[0].records[word.id].aiFeedback:state.grammar.noun.feedback;
+      if(feedback?.validationVersion==='judgment-v5'&&feedback.original===result.original)break;
+      await page.waitForTimeout(50);
+    }
+    const state=await snapshot(page.context());
+    const stored=domain==='sentence'?Object.values(state.sessions)[0].records[word.id].aiFeedback:state.grammar.noun.feedback;
+    assert.equal(stored.validationVersion,'judgment-v5','current response is acknowledged before read-only snapshots');
+    await saved(); assert.equal(calls,1);
+    await page.unroute(url);
+  }
   async function hiddenStructure(view,result) {
     check(await view.locator('.sentence-structure').count()===0,'AI structures stay hidden');
     check(!(await view.textContent()).includes(result.structure.translation || result.structure.note),'Hidden AI structure text is absent from the result DOM');
     check(await view.getByText('AI 참고 의견 · 정답 판정은 아니에요',{exact:true}).count()===1,'Each standalone result has one caution');
   }
   async function expandExplanation(view) {
-    const details=view.locator('details.record-text').filter({has:page.getByText('AI 설명 더 보기',{exact:true})});
+    const details=view.locator('details.record-text').filter({has:page.getByText('판정·교정 참고 더 보기',{exact:true})});
     const summary=details.locator('summary');
     check(!await details.evaluate(el=>el.open),'Long explanation starts closed');
     check(await summary.evaluate(el=>getComputedStyle(el,'::before').content)==='"+"','Closed nested disclosure shows plus');
@@ -72,11 +95,12 @@ fs.mkdirSync(out,{recursive:true});
   }
   try {
     let context=await learner(unavailable);
+    await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='AI 참고 의견 다시 요청'&&!button.disabled));
     check(await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).isEnabled(),'Same-sentence recheck is enabled but never starts automatically');
     await hiddenStructure(page.locator('.ai-feedback-result'),unavailable);
     await capture(page.locator('.ai-feedback-panel'),'unavailable');
     if(!audit){let calls=0,release;const gate=new Promise(resolve=>release=resolve);
-      await page.route('**/api/sentence-feedback',async r=>{calls++;await gate;await r.fulfill({status:429,json:{code:'provider_limit',error:'현재 사용 한도',providerStatus:429}})});
+      await page.route('**/api/sentence-feedback',async r=>{if(r.request().method()!=='POST')return r.continue();calls++;await gate;await r.fulfill({status:429,json:{code:'provider_limit',error:'현재 사용 한도',providerStatus:429,receipt:feedbackReceipt(r,'failed')}})});
       const changed=unavailable.original+' Today.';
       await page.locator('#my-sentence').fill(changed);
       const retry=page.getByRole('button',{name:'AI 참고 의견 요청',exact:true});
@@ -88,8 +112,8 @@ fs.mkdirSync(out,{recursive:true});
       assert.equal(await page.locator('#my-sentence').inputValue(),changed);
       await hiddenStructure(page.locator('.ai-feedback-result'),unavailable);
       await capture(page.locator('.ai-feedback-panel'),'quota');await page.unroute('**/api/sentence-feedback');
-      const updated=openaiFeedback({...feedback,original:changed});
-      await page.route('**/api/sentence-feedback',r=>{calls++;return r.fulfill({json:{feedback:updated,receipt:feedbackReceipt(r)}})});
+      let updated;
+      await page.route('**/api/sentence-feedback',r=>{if(r.request().method()!=='POST')return r.continue();calls++;updated=currentOpenaiFeedback(r,{...feedback,original:changed});return r.fulfill({json:{feedback:updated,receipt:feedbackReceipt(r)}})});
       await retry.click();await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).waitFor();await saved();assert.equal(calls,2);
       await page.reload();await saved();await page.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved();assert.equal(calls,2);
       await hiddenStructure(page.locator('.ai-feedback-result'),updated);
@@ -97,9 +121,11 @@ fs.mkdirSync(out,{recursive:true});
       assert.deepEqual(stored,updated);check(calls===2,'Explicit retry survives reload without auto calls or structure loss');}
     await context.close();
     context=await learner(long);let view=page.locator('.ai-feedback-panel .ai-feedback-result');await view.waitFor();
+    check(await page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true}).count()===0,'Historical proposal is display-only until a current explicit request');
+    await requestCurrent(long);
     const dailyBefore=await snapshot(context);await hiddenStructure(view,long);
     const use=page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true});
-    check(await use.evaluate(el=>!!(el.compareDocumentPosition([...el.closest('.ai-feedback-panel').querySelectorAll('details.record-text')].find(node=>node.querySelector('summary').textContent==='AI 설명 더 보기'))&Node.DOCUMENT_POSITION_FOLLOWING)),'Apply action is before the long explanation');
+    check(await use.evaluate(el=>!!(el.compareDocumentPosition([...el.closest('.ai-feedback-panel').querySelectorAll('details.record-text')].find(node=>node.querySelector('summary').textContent==='판정·교정 참고 더 보기'))&Node.DOCUMENT_POSITION_FOLLOWING)),'Apply action is before the long explanation');
     await expandExplanation(view);await responsive(view,'long daily result');await capture(view,'daily-long-mobile');
     await page.setViewportSize({width:1440,height:1000});await capture(view,'daily-long-desktop');
     assert.deepEqual(await snapshot(context),dailyBefore,'Reading and expanding AI feedback must not rewrite records');
@@ -122,14 +148,17 @@ fs.mkdirSync(out,{recursive:true});
     assert.deepEqual(await snapshot(context),historyBefore,'History disclosures preserve stored structure, text and grades');
     await context.close();
     context=await learner(question,'grammar');view=page.locator('.grammar-feedback .ai-feedback-result');await view.waitFor();
+    check(await page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true}).count()===0,'Historical grammar proposal cannot overwrite the current draft');
+    await requestCurrent(question,'grammar');
     const grammarBefore=await snapshot(context);await hiddenStructure(view,question);
     await responsive(view,'Question grammar');await capture(view,'grammar-question-mobile');
     assert.deepEqual(await snapshot(context),grammarBefore,'Reading grammar feedback does not rewrite saved data');
     // Applying a proposal clears saved feedback but keeps its read-only history.
-    await page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true}).click();await saved();
+    await page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true}).click();
+    await page.getByRole('button',{name:'비교한 제안으로 바꾸기',exact:true}).click();await saved();
     check(await page.locator('.grammar-writing textarea').inputValue()===question.correctedSentence,'Grammar suggestion applies only on request');
     check(await page.locator('.grammar-feedback').count()===1,'Changing grammar draft retains a read-only previous proposal');
-    await page.locator('.grammar-feedback').getByText('수정 전 문장에 대한 AI 의견이에요.',{exact:true}).waitFor();
+    await page.locator('.grammar-feedback').getByText('이전 문장·목표·모델·문맥에 대한 의견이거나 이전 버전의 기록이에요. 현재 조건으로 다시 요청해 주세요.',{exact:true}).waitFor();
     check((await snapshot(context)).grammar.noun.feedback===undefined,'Changed grammar draft does not store a previous proposal as its current feedback');
     await context.close();
     assert.deepEqual(errors,[]);fs.writeFileSync(`${out}/report.json`,JSON.stringify({engine,audit,findings},null,2));console.log(JSON.stringify({engine,audit,failed:findings.filter(x=>!x.passed),checks:findings.length}));

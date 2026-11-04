@@ -20,6 +20,9 @@
 @media(max-width:560px){.overall-top{flex-wrap:wrap;gap:4px 12px}.overall-value{flex-wrap:wrap}.overall-fraction{flex-basis:100%;margin-left:0}}
 .gate [data-gate-detail]{overflow-wrap:anywhere}
 .overall-value{flex-wrap:wrap}
+@media(max-width:560px){.data-actions{max-width:100%;flex-wrap:wrap}}
 @media(max-width:1050px){.overall-top{flex-wrap:wrap;gap:4px 12px}.overall-fraction{flex-basis:100%;margin-left:0}}
 .plan-selector{padding-top:25px}.plan-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.plan-choice{min-width:0;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:16px 20px;color:var(--muted);line-height:1.8;overflow-wrap:anywhere}.plan-choice strong{display:block;color:var(--ink);font-size:1rem;font-weight:600}.plan-choice small{display:block;font-size:.8rem}.plan-choice[aria-pressed=true]{border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest);background:var(--forest-soft)}.plan-context{font-size:.86rem;line-height:1.9;margin-top:15px;color:var(--ink);overflow-wrap:anywhere}.plan-budget{font-size:.8rem;line-height:1.8;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}.plan-selector+.hero{padding-top:30px}
 @media(max-width:560px){.plan-buttons{grid-template-columns:1fr;gap:8px}.plan-choice{padding:12px 15px}.plan-context,.plan-budget{font-size:.8rem}.plan-selector+.hero{padding-top:24px}.hero-tags>span{overflow-wrap:anywhere;min-width:0}}
+/* Two-digit completion counts must also fit 390px at 200% text. */
+@media(max-width:560px){.metric-strip{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px}.metric-strip>div:nth-child(3){padding-left:0;border:0}}

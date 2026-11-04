@@ -151,6 +151,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
       await page.getByText('저장됨', { exact: true }).waitFor();
       await page.getByRole('button', { name: /학습 이어서/ }).click();
       await page.locator('.word-stage h3').getByText('close', { exact: true }).waitFor();
+      await page.waitForFunction(()=>document.activeElement?.tagName==='H2'&&!!document.activeElement.closest('.session-panel'));
     }
     await reviewedSense(content[reviewed.id].meaning);
     await page.locator('.word-ipa .phonetic').getByText('/kloʊz/', { exact: true }).waitFor();

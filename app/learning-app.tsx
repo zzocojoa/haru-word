@@ -143,7 +143,7 @@ function LearningScreens({
   const registerGrammarLeave = useCallback((fn: GrammarLeave) => { grammarLeave.current = fn; return () => { if (grammarLeave.current === fn) grammarLeave.current = null; }; }, []);
   async function flushGrammar() { return await grammarLeave.current?.() ?? true; }
   const requestTab = useTabNavigation(tab, store.epoch, store.restoring, flushGrammar, visitTab);
-  useLearningTools(currentState, requestTab, clock.currentDate);
+  useLearningTools(store.readSavedState, requestTab, clock.currentDate);
   useNavigationGuard(async changed => {
     if (store.restoring || (saving && [...changed].some(key => ['app.correctDate', 'app.backup', 'backup.confirm', 'library.word', 'library.add'].includes(key)))) return false;
     if ([...changed].some(key => key === 'app.tab' || key === 'library.view' || key === 'library.lesson') && !await flushGrammar()) return false;

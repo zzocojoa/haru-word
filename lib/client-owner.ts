@@ -19,6 +19,7 @@ export function clientOwnerRequest(url:string,init:RequestInit) {
   // A caller cannot override the identity of the page currently owning the request.
   headers.set(STUDY_OWNER_HEADER,captured.ownerId??'');
   return {init:{...init,headers},invalidated:()=>{
-    if(registration===captured&&typeof window!=='undefined')window.dispatchEvent(new Event(OWNER_INVALIDATED_EVENT));
+    // An anonymous 401 is the normal sign-in boundary, not an account switch.
+    if(captured.ownerId&&registration===captured&&typeof window!=='undefined')window.dispatchEvent(new Event(OWNER_INVALIDATED_EVENT));
   }};
 }

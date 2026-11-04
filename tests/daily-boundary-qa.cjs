@@ -33,7 +33,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
       assessments: { A1: require('./qa/fixtures.cjs').completedAssessment(words, 'A1') } }, sessions: { [daily.id]: daily, [monthly.id]: monthly } });
     const p = await c.newPage();
     p.on('pageerror', e => errors.push(e.message));
-    p.on('request', r => { if (/sentence-feedback|generativelanguage/.test(r.url())) aiRequests.push(r.url()); });
+    p.on('request', r => { if (r.method() === 'POST' && /sentence-feedback|grammar-feedback|api\.openai\.com|generativelanguage|api\.groq\.com/.test(r.url())) aiRequests.push(r.url()); });
     await p.clock.install({ time: new Date(yesterday + 'T14:59:55Z') });
     await p.route('**/api/study-clock', r => r.fulfill({ json: { serverTime: Date.parse(yesterday + 'T14:59:55Z') } }));
     await p.goto(base); await saved(p);
@@ -135,7 +135,7 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
       settings: { ...practiceInitial.state.settings, dailyGoal: 3, assessments: { A1: require('./qa/fixtures.cjs').completedAssessment(words, 'A1') } } });
     const practicePage = await practiceContext.newPage();
     practicePage.on('pageerror', e => errors.push(e.message));
-    practicePage.on('request', r => { if (/sentence-feedback|generativelanguage/.test(r.url())) aiRequests.push(r.url()); });
+    practicePage.on('request', r => { if (r.method() === 'POST' && /sentence-feedback|grammar-feedback|api\.openai\.com|generativelanguage|api\.groq\.com/.test(r.url())) aiRequests.push(r.url()); });
     await practicePage.goto(base); await saved(practicePage);
     const origins = () => practicePage.getByText('새 학습 2개 · 이전 학습·복습 1개', { exact: true }).waitFor();
     await origins();

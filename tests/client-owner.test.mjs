@@ -17,6 +17,27 @@ test('owner binding is limited to API requests, retains caller headers and handl
   assert.equal(clientOwnerRequest('/api/state',{}).init.headers.get('X-Study-Owner'),'');clear();
 });
 
+test('normal anonymous unauthorized reads retain the anonymous sign-in surface',async t=>{
+  const win=new EventTarget();globalThis.window=win;
+  const clear=registerClientOwner(null);t.after(()=>{clear();delete globalThis.window;});
+  let invalidations=0;win.addEventListener(OWNER_INVALIDATED_EVENT,()=>invalidations++);
+  t.mock.method(globalThis,'fetch',async(_url,init)=>{
+    assert.equal(init.headers.get('X-Study-Owner'),'');
+    return Response.json({error:'login_required'},{status:401});
+  });
+  for(let attempt=0;attempt<2;attempt++)assert.equal((await requestJson('/api/state',{},1000)).response.status,401);
+  assert.equal(invalidations,0);
+});
+
+test('authenticated unauthorized response invalidates private input even with an unreadable body',async t=>{
+  const win=new EventTarget();globalThis.window=win;
+  const clear=registerClientOwner('owner-a');t.after(()=>{clear();delete globalThis.window;});
+  let invalidations=0;win.addEventListener(OWNER_INVALIDATED_EVENT,()=>invalidations++);
+  t.mock.method(globalThis,'fetch',async()=>new Response('not JSON',{status:401}));
+  await assert.rejects(requestJson('/api/state',{},1000),SyntaxError);
+  assert.equal(invalidations,1);
+});
+
 test('late unauthorized response from a replaced owner cannot invalidate the new page',async t=>{
   const win=new EventTarget();globalThis.window=win;t.after(()=>{delete globalThis.window;});
   let invalidations=0;win.addEventListener(OWNER_INVALIDATED_EVENT,()=>invalidations++);

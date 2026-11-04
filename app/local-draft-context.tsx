@@ -35,6 +35,6 @@ export function LocalDraftProvider({ownerId,children}:{ownerId:string|null;child
     window.addEventListener('pagehide',release);
     return()=>{store.release();window.removeEventListener('storage',storage);window.removeEventListener('pageshow',refresh);window.removeEventListener('focus',refresh);window.removeEventListener('pagehide',release);document.removeEventListener('click',logout);window.removeEventListener(OWNER_INVALIDATED_EVENT,invalidated);window.removeEventListener(LOCAL_RESTORE_APPLIED_EVENT,restored);};
   },[store]);
-  if(!state.active)return <main className="page-shell"><div className="notice" role="alert"><p>로그인 상태를 다시 확인해야 해요. 새로고침해 현재 계정의 기록을 불러와 주세요.</p><button type="button" className="primary-button" onClick={()=>window.location.reload()}>새로고침</button></div></main>;
+  if(!state.active)return <main className="page-shell"><div className="notice" role="alert"><p>로그인 상태를 다시 확인해야 해요. 새로고침해 현재 계정의 기록을 불러와 주세요.</p><a className="primary-button" href="/signin-with-chatgpt?return_to=%2F" target="_top">로그인하고 학습하기</a><button type="button" className="secondary-button" onClick={()=>window.location.reload()}>새로고침</button></div></main>;
   return <Context.Provider key={ownerId??'anonymous'} value={store}>{children}</Context.Provider>;
 }

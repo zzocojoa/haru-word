@@ -12,6 +12,12 @@ const editorChunk = chunks.find(name => /^word-editor-[\w-]+\.js$/.test(name));
 assert.ok(completedChunk && editorChunk);
 const checks = [], errors = [], forbidden = [];
 let page;
+async function drainAndClose(context) {
+  // Wait for route.fetch/text/fulfill to finish before disposing its request
+  // context. Playwright's default unroute behavior can leave rejected handlers.
+  try { await context.unrouteAll({ behavior: 'wait' }); }
+  finally { await context.close(); }
+}
 async function nextPaint(target) { await target.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))); }
 async function setup(browser) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: accountHeaders('lazy_recovery') });
@@ -85,7 +91,7 @@ async function completed(browser) {
     assert.equal(await dialog.locator('.review-meaning').innerText(), session.records[session.ids[0]].meaning);
     await layout(target, dialog, 'completed-loaded'); await unchanged();
     checks.push('completed loading modal/title/close/focus/layout is immediate; closed late content cannot reopen; original records preserved');
-  } finally { await context.close(); }
+  } finally { await drainAndClose(context); }
   const failureFixture = await setup(browser);
   try {
     let fail = true;
@@ -104,7 +110,7 @@ async function completed(browser) {
     await failureFixture.target.getByText('저장됨', { exact: true }).waitFor();
     await failureFixture.open(); await failureFixture.target.getByRole('dialog').locator('.review-meaning').waitFor();
     await failureFixture.unchanged(); checks.push('completed failure keeps modal/title/close and explicit retry restores the original record');
-  } finally { await failureFixture.context.close(); }
+  } finally { await drainAndClose(failureFixture.context); }
 }
 async function obsolete(browser, status) {
   const { context, target, guard, home, unchanged } = await setup(browser);
@@ -155,7 +161,7 @@ async function obsolete(browser, status) {
     await editor(); await target.getByRole('dialog').getByLabel('함께 익힐 표현', { exact: true }).waitFor();
     assert.equal(navigations, 2); assert.ok(recoveryMisses >= 2); await unchanged();
     checks.push(`obsolete chunk ${status} permits a guarded fresh document; unload cancellation still works; new asset restores editor without saving`);
-  } finally { await context.close(); }
+  } finally { await drainAndClose(context); }
 }
 (async () => {
   await waitForWorker(); fs.mkdirSync(out, { recursive: true }); const browser = await launchBrowser();

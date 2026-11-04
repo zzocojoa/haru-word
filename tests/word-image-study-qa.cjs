@@ -102,6 +102,7 @@ async function scenario(browser, name, entry, stage = 'learn') {
     } else {
       await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
       const panel = page.locator('.session-panel'); await panel.waitFor();
+      await page.waitForFunction(()=>document.activeElement?.tagName==='H2'&&!!document.activeElement.closest('.session-panel'));
       assert.equal(writes, 1, 'only the explicit resume saves');
       // Resume has its own existing carryover normalization. Take the image-only
       // baseline after that explicit action, not before opening the lesson.

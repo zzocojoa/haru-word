@@ -12,6 +12,8 @@ test('browser suite enumerates image resume and request concurrency separately f
   }
   assert.ok(lists.functional.includes('image-practice-resume-qa.cjs'));
   assert.ok(lists.functional.includes('request-concurrency-qa.cjs'));
+  assert.ok(lists.functional.includes('grammar-v4-compat-qa.cjs new-v3'));
+  for(const version of [2,3,4])assert.ok(lists.functional.includes(`grammar-v${version}-qa.cjs`));
   assert.ok(lists.performance.includes('image-practice-performance-qa.cjs'));
   assert.ok(!lists.functional.some(name => lists.performance.includes(name)));
 });

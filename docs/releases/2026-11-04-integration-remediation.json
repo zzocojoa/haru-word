@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "dateKst": "2026-11-04",
+  "planId": "integration-remediation-2026-11-04",
+  "tag": "integration-remediation",
+  "status": "local-release-candidate-deployment-held",
+  "source": {
+    "baseCommit": "5bbd7a6d4d82e9aea86a0b0a8679242ba64e9535",
+    "branch": "codex/integration-remediation-20261104",
+    "checkout": "work/integration-remediation-20261104",
+    "snapshotSha256": "b7e37162eeb5001aefd4647ffe3cbc9f7a1279577ebda0eef97dbaec49618147",
+    "productSha256": "01dbb306e20ce2939d95ecc4dd286efb7d5b972fe42915a85c0e15501882d2c5",
+    "qaSha256": "9941e59a73b3ad4a5cb984dfee095a74d748ebda90c5a5cc5042c57b15a1b166",
+    "sourceFiles": 706,
+    "gitCommitReceipt": "outputs/integration-remediation-implementation-20261104/candidate-commit.json",
+    "priorUnpublishedRuntimeFilesSinceOperatingSource": 15
+  },
+  "changes": [
+    {
+      "issue": "I00",
+      "result": "Anonymous 401 preserves sign-in; authenticated expiry hides private inputs and offers explicit sign-in/reload."
+    },
+    {
+      "issue": "I01",
+      "result": "Fixed-lock install; direct42 versions match; owned loopback profiles, synthetic bindings and real-AI false."
+    },
+    {
+      "issue": "I02",
+      "result": "Preserve84 conditions; current/archived AI fixtures separate; generation POST counters; grammar2/3/4 and new3 compatibility; full assets; focus/clock/text-node readiness and route drain."
+    },
+    {
+      "issue": "I03",
+      "result": "Summary reads cloned last confirmed save/read/restore; optimistic input survives failures; unknown/retired tools rejected."
+    },
+    {
+      "issue": "I04",
+      "result": "Current operating143 and unpublished source differences documented; public attribution corrected to OpenAI only."
+    }
+  ],
+  "verification": {
+    "static": [
+      {
+        "name": "unit-node22",
+        "code": 0,
+        "durationMs": 17598,
+        "node": "v22.22.2",
+        "tests": 789,
+        "passed": 789,
+        "failed": 0
+      },
+      {
+        "name": "unit-node24",
+        "code": 0,
+        "durationMs": 16538,
+        "node": "v24.22.1",
+        "tests": 789,
+        "passed": 789,
+        "failed": 0
+      },
+      {
+        "name": "grammar-review",
+        "code": 0,
+        "durationMs": 174,
+        "node": "v22.22.2"
+      },
+      {
+        "name": "typecheck",
+        "code": 0,
+        "durationMs": 5330,
+        "node": "v22.22.2"
+      },
+      {
+        "name": "lint",
+        "code": 0,
+        "durationMs": 21290,
+        "node": "v22.22.2",
+        "errors": 0,
+        "warnings": 15
+      }
+    ],
+    "candidateBuild": {
+      "command": "npm run build",
+      "exit": 0,
+      "productSourceUnchangedSinceBuild": true
+    },
+    "functional": {
+      "originalConditions": 84,
+      "addedConditions": 3,
+      "finalPerEngine": 87,
+      "total": 174,
+      "initialFullExitCodes": [
+        1,
+        1
+      ],
+      "initialFullPassed": [
+        86,
+        83
+      ],
+      "method": "Preserve initial full nonzero exits; rerun every changed QA script in both engines and retain only byte-identical unaffected cases. Shared dependencies and runtime unchanged.",
+      "changedFunctionalScripts": 6,
+      "recheckCommands": 14,
+      "unmodifiedCasesUseVerifiedIdenticalInputs": true,
+      "sourceQualifiedCoverageExit": 0
+    },
+    "performance": {
+      "initialSuiteExit": 1,
+      "finalCasesPassed": 5,
+      "imageSamples": 36,
+      "imageGroups": [
+        {
+          "histories": 0,
+          "network": "normal",
+          "baselineMedianMs": 1580,
+          "candidateMedianMs": 1590,
+          "differencePercent": 0.6
+        },
+        {
+          "histories": 0,
+          "network": "slow",
+          "baselineMedianMs": 2496,
+          "candidateMedianMs": 2675,
+          "differencePercent": 7.2
+        },
+        {
+          "histories": 365,
+          "network": "normal",
+          "baselineMedianMs": 1471,
+          "candidateMedianMs": 1454,
+          "differencePercent": -1.2
+        },
+        {
+          "histories": 365,
+          "network": "slow",
+          "baselineMedianMs": 2947,
+          "candidateMedianMs": 3015,
+          "differencePercent": 2.3
+        },
+        {
+          "histories": 1825,
+          "network": "normal",
+          "baselineMedianMs": 2163,
+          "candidateMedianMs": 2200,
+          "differencePercent": 1.7
+        },
+        {
+          "histories": 1825,
+          "network": "slow",
+          "baselineMedianMs": 4991,
+          "candidateMedianMs": 4997,
+          "differencePercent": 0.1
+        }
+      ],
+      "firstValidBaselineAttempt": "19 samples then observer missed text-node-only saved readiness; preserved as failure",
+      "observerReproducer": "Original miss versus characterData observation verified; same saved-plus-two-frame condition",
+      "realHandsetGuarantee": false
+    },
+    "imagesOff": {
+      "cases": 4,
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "passed": true
+    },
+    "images": {
+      "files": 3809,
+      "allLocalHashesMatched": true
+    },
+    "negativeTests": {
+      "injectedUnexpectedAppExceptionExit": 1,
+      "detected": true,
+      "timeoutAndInterruptionCleanup": true,
+      "liveLockProtected": true
+    },
+    "cleanup": {
+      "ownedQaPortsClosed": 9,
+      "qaLocksRemoved": true,
+      "retainedDashboardPort": 4318
+    },
+    "dashboard": {
+      "passed": true,
+      "currentChecks": 6,
+      "historicalCommands": [
+        {
+          "label": "master",
+          "code": 0,
+          "timedOut": false
+        },
+        {
+          "label": "multi",
+          "code": 0,
+          "timedOut": false
+        },
+        {
+          "label": "v143",
+          "code": 0,
+          "timedOut": false
+        }
+      ],
+      "initialPreparationFailure": "Missing isolated output directory preserved; corrected without modifying original evidence.",
+      "layoutRepair": "Two-column statistics at <=560px; two-digit counts fit390px at200% text.",
+      "finalStateChecked": true,
+      "finalCheckedAt": "2026-11-04T12:55:59.432Z"
+    }
+  },
+  "productionObserved": {
+    "checkedAt": "2026-11-04T12:43:28.255Z",
+    "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "version": 143,
+    "source": "36dc66fdca52d70494cb7993a1e3ad03dbc0f8d5",
+    "deploymentId": "appgdep_6aeaacea3da481919e3ea5521ed8c7cb",
+    "deploymentStatus": "succeeded",
+    "envRevision": 77,
+    "accessMode": "public",
+    "accessRevision": 6,
+    "automations": 0,
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "unchangedFromBaseline": true
+  },
+  "compatibility": {
+    "newSqlMigrations": 0,
+    "apiAndBackupFormatChanged": false,
+    "revisionProtectionPreserved": true,
+    "priorBudgetsAndEvaluationClosed": true,
+    "paidRequests": 0,
+    "productionLearningWrites": 0,
+    "productionDbRowsRead": 0,
+    "siteCreated": 0,
+    "sourcePushOrPublication": 0,
+    "bindingsFileChanged": false,
+    "newDiagnosticEvents": 0
+  },
+  "risk": {
+    "level": "moderate-client-auth-and-summary-boundaries",
+    "priorUnpublishedChanges": "Whitespace request acceptance and feedback responsibility refactor15 runtime files are part of the full candidate versus operating36dc66f.",
+    "rollback": "After checking then-current deployment and approval, restore last healthy OpenAI-only code/version; retain data,0000-0006 and revision protection. No reverse SQL, user-record deletion, stale-backup overwrite or retired-card/Google-Groq fallback reactivation.",
+    "observability": "Existing bounded diagnostics unchanged; no new event or private answer/key logging."
+  },
+  "notVerified": [
+    "Real iPhone",
+    "VoiceOver",
+    "Real audio listening",
+    "General English correctness or fresh paid API quality",
+    "Operating failure injection or authenticated production learning QA"
+  ],
+  "authorization": {
+    "implementationTasks": "1-11 approved",
+    "deploymentTask12": "deferred until explicit approval",
+    "paidEvaluationApproved": false,
+    "externalPublicationApproved": false,
+    "productionQaWritesApproved": false
+  },
+  "evidence": {
+    "confirmed-static-results.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/confirmed-static-results.json",
+      "sha256": "cc8ee976b3548884c74f3e736436a8d2b39d422e4c94bf64f37fa59452a8388e"
+    },
+    "final-coverage.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/final-coverage.json",
+      "sha256": "fe1b352191b27fa6bd63b8b2439237ec75646c924b383a8219ed6384fee385d5"
+    },
+    "performance-final-coverage.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/performance-final-coverage.json",
+      "sha256": "36975f0271276464647234427e1b9343faaaa4a9bedab932ede44af1e1b80ec9"
+    },
+    "image-off-results.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/image-off-results.json",
+      "sha256": "1bf2cbd1578659968a23de926ace8a008d9186f5d38e920f23794420abde081d"
+    },
+    "failure-detection.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/failure-detection.json",
+      "sha256": "435a9d33e6c2824f31370c257120558b47eda2d68da3d80584896b748469b526"
+    },
+    "performance-observer-reproducer.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/performance-observer-reproducer.json",
+      "sha256": "0f8ec62a0e6cae50883e8077246a9a7e3f544ca35ce4e63f8bf6685c5254a62f"
+    },
+    "final-cleanup.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/final-cleanup.json",
+      "sha256": "8263b41a558f6778cf6c2908a115960c24058c3b44858c16bbf358a7e1975a22"
+    },
+    "full-image-proof.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/full-image-proof.json",
+      "sha256": "449aef83009b5e8ff4ae01ea7a8ef56f7eaf49546b3e3aa00b5438487c5b84c7"
+    },
+    "production-final-observation.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/production-final-observation.json",
+      "sha256": "a882c164ca9dad2b73c38223ed32006b851da2e2af7511d94b0fd9b8ebbaa257"
+    },
+    "database-observation.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/database-observation.json",
+      "sha256": "9353a04b944a92b46566fe31cc89bcd092f0458d2fc8fc7a6cbf67b7ef5790aa"
+    },
+    "confirmed-unit-node22.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/confirmed-unit-node22.log",
+      "sha256": "70b134fbaf17117cb33a58d2d541778d7065ea105eb6e4970a4316a59cf45b70"
+    },
+    "confirmed-unit-node24.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/confirmed-unit-node24.log",
+      "sha256": "2bcce27419bb5d1c17b7ac7df62259ea1cb1fb70778a4970f17ddb622f3738e2"
+    },
+    "confirmed-grammar-review.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/confirmed-grammar-review.log",
+      "sha256": "eff35acbfa771f479b20a71f8eb74f716ebc8b324a6ff43ed52c594c43489fc3"
+    },
+    "confirmed-typecheck.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/confirmed-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "confirmed-lint.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/confirmed-lint.log",
+      "sha256": "1c99ce4e9896f8bc9ae0544c2668dede861c2533d9ef180f9f719384753d6f63"
+    },
+    "qa-contract-build-retry.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/qa-contract-build-retry.log",
+      "sha256": "5b4436bbc6f4d7768de2f3b780dce94a24b7e85cb39a32f5ad3500984d4d6174"
+    },
+    "baseline-performance-build.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/baseline-performance-build.log",
+      "sha256": "b8ec754068425e59ef704c54a053ecc0540f7a5e615dade43b12ca6313867593"
+    },
+    "image-performance-confirmed.log": {
+      "path": "outputs/integration-remediation-implementation-20261104/image-performance-confirmed.log",
+      "sha256": "b23d25a8065522e14183e08e87b0c73e773bdc4402f400e7eda1a22549b94a3c"
+    },
+    "dashboard-verification.json": {
+      "path": "outputs/integration-remediation-implementation-20261104/dashboard-verification.json",
+      "sha256": "235846fef22dded49d5f8999255893166425624e77c122c989be38f9427c0d6e"
+    }
+  },
+  "taskMaster": {
+    "approvedParentsDone": 11,
+    "approvedParentsTotal": 11,
+    "allParents": 12,
+    "childrenDone": 38,
+    "allChildren": 41,
+    "deferredParent": 12
+  }
+}

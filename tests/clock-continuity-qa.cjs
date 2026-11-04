@@ -20,6 +20,8 @@ const checks=[],errors=[];
  // Seed through the real API before installing the page's deliberately incorrect device clock.
  await p.clock.install({time:new Date('2030-01-01T00:00:00Z')});
  await p.goto(base,{waitUntil:'domcontentloaded'});await saved();await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved();
+ // Match the existing lifecycle QA: deferred mount/focus must finish before synthetic typing.
+ await p.waitForFunction(()=>document.activeElement?.tagName==='H2'&&!!document.activeElement.closest('.session-panel'));
  const field=p.getByLabel('한국어 뜻 입력');const answer='나만의 비공개 답 123';await field.fill(answer);
  hold=true;const request=p.waitForRequest('**/api/study-clock');await p.evaluate(()=>window.dispatchEvent(new Event('focus')));await request;
  const initialCalls=clockCalls;
