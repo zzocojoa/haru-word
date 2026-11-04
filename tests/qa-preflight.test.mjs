@@ -27,3 +27,11 @@ test('QA runner checks real local AI status rather than trusting a declared prof
     return Response.json({enabled:false});
   });
 });
+test('AI-disabled preparation check propagates suite cancellation',async()=>{
+  const controller=new AbortController(),reason=Error('synthetic status interruption');
+  const checking=requireDisabledAiStatus('http://127.0.0.1:8798',{},async(url,{signal})=>{
+    assert.equal(new URL(url).hostname,'127.0.0.1');
+    return new Promise((ok,fail)=>signal.addEventListener('abort',()=>fail(signal.reason),{once:true}));
+  },controller.signal);
+  controller.abort(reason);await assert.rejects(checking,error=>error===reason);
+});

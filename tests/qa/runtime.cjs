@@ -46,16 +46,23 @@ async function launchBrowser(options = {}) {
   browser.once('disconnected', () => browsers.delete(browser));
   return browser;
 }
-async function waitForWorker(base = localBase(), timeout = 30_000) {
+async function waitForWorker(base = localBase(), timeout = 30_000, signal) {
   const end = Date.now() + timeout;
   while (Date.now() < end) {
+    signal?.throwIfAborted();
     try {
-      const response = await fetch(base + '/api/study-clock', { signal: AbortSignal.timeout(2000), redirect: 'error' });
+      const timeoutSignal = AbortSignal.timeout(2000);
+      const response = await fetch(base + '/api/study-clock', { signal: signal ? AbortSignal.any([signal, timeoutSignal]) : timeoutSignal, redirect: 'error' });
       await response.arrayBuffer();
       if ([200, 401].includes(response.status)) return;
-    } catch {}
-    await new Promise(resolve => setTimeout(resolve, 250));
+    } catch { signal?.throwIfAborted(); }
+    await new Promise((resolve, reject) => {
+      const abort = () => { clearTimeout(timer); reject(signal.reason); };
+      const timer = setTimeout(() => { signal?.removeEventListener('abort', abort); resolve(); }, 250);
+      signal?.addEventListener('abort', abort, { once: true });
+    });
   }
+  signal?.throwIfAborted();
   throw new Error('Local built Worker is not ready. Build and start the site before running browser QA.');
 }
 module.exports = {

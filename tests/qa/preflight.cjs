@@ -18,8 +18,10 @@ function validateEnvironment(env=process.env){
   }
   return {origin:url.origin,imageFiles,realAiGeneration:env.QA_WORKER_CONFIG?'disabled-by-profile':'not-verified'};
 }
-async function requireDisabledAiStatus(base,headers,fetcher=fetch){
-  const response=await fetcher(base+'/api/sentence-feedback',{headers:{...headers,'X-Study-AI-Contract':'4'},signal:AbortSignal.timeout(10000)});
+async function requireDisabledAiStatus(base,headers,fetcher=fetch,signal){
+  signal?.throwIfAborted();
+  const timeout=AbortSignal.timeout(10000);
+  const response=await fetcher(base+'/api/sentence-feedback',{headers:{...headers,'X-Study-AI-Contract':'4'},signal:signal?AbortSignal.any([signal,timeout]):timeout});
   if(!response.ok||(await response.json()).enabled!==false)throw Error('Local QA Worker must confirm AI generation is disabled before tests run.');
 }
 module.exports={validateEnvironment,requireDisabledAiStatus};

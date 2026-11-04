@@ -16,26 +16,38 @@ function profileConfig(built,version){
       word_image_pilot_enabled:'true',large_backup_restore_enabled:'true',ai_feedback_enabled:'false',feedback_judgment_enabled:'true',
       OPENAI_API_KEY:'synthetic-disabled',OPENAI_ALLOWED_MODELS:'gpt-6.1-sol,gpt-6.1-terra,gpt-6-astra'}};
 }
-async function grammarWorker(version){
+async function grammarWorker(version,{signal}={}){
+  signal?.throwIfAborted();
   const root=fs.mkdtempSync(path.resolve('work','grammar-profile-v'+version+'-'));
   const configPath=path.join(root,'wrangler.json'),config=profileConfig(JSON.parse(fs.readFileSync('dist/server/wrangler.json','utf8')),version);
   fs.writeFileSync(configPath,JSON.stringify(config,null,2));
   const args=['--import',pathToFileURL(path.resolve('scripts/sites-env.mjs')).href,path.resolve('node_modules/wrangler/bin/wrangler.js')];
   for(const file of fs.readdirSync('drizzle').filter(name=>name.endsWith('.sql')).sort())execFileSync(process.execPath,[...args,'d1','execute','DB','--local','--config',configPath,'--persist-to',root,'--file',path.resolve('drizzle',file)],{windowsHide:true,stdio:'pipe',timeout:30000});
   const port=await freePort(),base='http://127.0.0.1:'+port,log=fs.openSync(path.join(root,'worker.log'),'w');
+  if(signal?.aborted){fs.closeSync(log);signal.throwIfAborted();}
   const child=spawn(process.execPath,[...args,'dev','--config',configPath,'--local','--persist-to',root,'--ip','127.0.0.1','--port',String(port),'--inspector-port','0'],{windowsHide:true,detached:process.platform!=='win32',stdio:['ignore',log,log]});
-  let stopped=false;
-  async function stop(){
-    if(stopped)return;stopped=true;
-    try{if(child.exitCode===null){
-      const closed=new Promise(resolve=>child.once('close',resolve));
-      if(process.platform==='win32')execFileSync('taskkill',['/PID',String(child.pid),'/T','/F'],{windowsHide:true,stdio:'ignore'});
-      else process.kill(-child.pid,'SIGTERM');
-      await closed;
-    }}finally{fs.closeSync(log);}
+  let stopPromise,spawnError;
+  const closed=new Promise(resolve=>{child.once('close',resolve);child.once('error',error=>{spawnError=error;resolve();});});
+  function stop(){
+    return stopPromise||=(async()=>{
+      let force;
+      try{
+        if(Number.isSafeInteger(child.pid)&&child.pid>0&&child.exitCode===null&&child.signalCode===null){
+          try{
+            if(process.platform==='win32')execFileSync('taskkill',['/PID',String(child.pid),'/T','/F'],{windowsHide:true,stdio:'ignore'});
+            else{
+              process.kill(-child.pid,'SIGTERM');
+              force=setTimeout(()=>{try{process.kill(-child.pid,'SIGKILL');}catch(error){if(error.code!=='ESRCH')console.error('Owned QA Worker force cleanup failed.');}},2000);
+            }
+          }catch(error){if(error.code!=='ESRCH'&&child.exitCode===null&&child.signalCode===null)throw error;}
+        }
+        await closed;
+      }finally{clearTimeout(force);fs.closeSync(log);}
+    })();
   }
   try{
-    await waitForWorker(base);await requireDisabledAiStatus(base,accountHeaders('grammar_profile'));
+    await waitForWorker(base,30_000,signal);if(spawnError)throw spawnError;
+    await requireDisabledAiStatus(base,accountHeaders('grammar_profile'),undefined,signal);signal?.throwIfAborted();
     return {base,version,configPath,root,pid:child.pid,stop};
   }catch(error){await stop();throw error;}
 }

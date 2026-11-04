@@ -34,5 +34,5 @@ test('interrupting a QA process is reported so the runner stops without running 
  const dir=mkdtempSync(path.join(tmpdir(),'haru-qa-interrupt-'));
  const pending=runCase(['-e',"process.on('message',()=>process.exit(0))"],{logPath:path.join(dir,'result.log'),timeoutMs:3000});
  const timer=setTimeout(()=>process.emit('SIGINT'),300);
- try{assert.deepEqual(await pending,{code:130,timedOut:false,interrupted:true});}finally{clearTimeout(timer);}
+ try{assert.deepEqual(await pending,{code:130,timedOut:false,interrupted:true,signal:'SIGINT'});}finally{clearTimeout(timer);}
 });

@@ -26,11 +26,12 @@ test('QA subprocess keeps real failures nonzero and cleans only its own timed-ou
   const until=Date.now()+5000;while(live(Number(readFileSync(pidFile,'utf8')))&&Date.now()<until)await new Promise(resolve=>setTimeout(resolve,50));
   assert.equal(live(Number(readFileSync(pidFile,'utf8'))),false);assert.equal(live(process.pid),true);
 });
-test('QA graceful stop and interruption wait for child cleanup',async()=>{
+for(const [signal,delegated]of [['SIGINT',false],['SIGTERM',false],['SIGTERM',true]])test('QA '+signal+(delegated?' suite abort':'')+' interruption waits for child cleanup and preserves its exit code',async()=>{
   const dir=mkdtempSync(join(tmpdir(),'haru-qa-interrupt-')),file=join(dir,'case.cjs'),marker=join(dir,'closed');
   writeFileSync(file,`process.on('message',m=>{if(m==='qa-stop'){require('node:fs').writeFileSync(${JSON.stringify(marker)},'closed');process.exit(124);}});setInterval(()=>{},1000);`);
-  const run=runCase([file],{logPath:join(dir,'interrupt.log'),timeoutMs:10000});
-  const timer=setTimeout(()=>process.emit('SIGINT'),700);
-  try{const stopped=await run;assert.equal(stopped.code,130);assert.equal(stopped.interrupted,true);assert.equal(stopped.timedOut,false);assert.equal(readFileSync(marker,'utf8'),'closed');}
+  const controller=new AbortController();
+  const run=runCase([file],{logPath:join(dir,'interrupt.log'),timeoutMs:10000,...(delegated?{signal:controller.signal}:{})});
+  const timer=setTimeout(()=>{if(delegated)controller.abort({signal});else{process.emit(signal);process.emit(signal);}},700);
+  try{const stopped=await run;assert.equal(stopped.code,signal==='SIGINT'?130:143);assert.equal(stopped.signal,signal);assert.equal(stopped.interrupted,true);assert.equal(stopped.timedOut,false);assert.equal(readFileSync(marker,'utf8'),'closed');}
   finally{clearTimeout(timer);}
 });
