@@ -1,7 +1,7 @@
 <!-- provider-network-publication-approval -->
-## 2026-11-05 · 통신 수정 운영 반영 승인
+## 2026-11-05 · 통신 수정 v145 운영 반영 완료
 
-사용자가 검증된 통신 수정본의 기존 운영 Site 반영을 승인했다. 실기기 검사는 사용자 요청으로 후속 수행하며 이번 게시의 미완료 조건으로 두지 않는다. 기존 Site 식별자·DB/R2·Secret·접근 정책을 유지하고 추가 유료 평가 없이 게시한다. 아래 미반영·연결 정보 대기는 이 승인 전 검증 시점의 기록이다. 게시 결과는 기본 폴더의 `docs/releases/2026-11-05-provider-network-rollout.json`과 `PROJECT_HANDOFF.md`에서 확인한다.
+기존 [하루단어](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 **v145 · source a22d747 · 2026-11-05 07:42:59 KST succeeded**를 게시했다. 공개 화면·게시 자산14개·익명 상태401·공개 시계200을 확인했고 기존 Site 식별자·DB/R2·환경77·접근 정책을 유지했다. 추가 유료 호출·운영 학습 QA 쓰기는0이다. **실기기 검사는 사용자 요청으로 후속 작업에 남겼다.** [실기기 후속 실행표](docs/PROVIDER_NETWORK_INVESTIGATION_20261105.md#후속-작업-실기기-검사)와 [배포·복구 근거](docs/releases/2026-11-05-provider-network-rollout.json)를 따른다. 아래 미반영·연결 정보 대기는 배포 전 검증 시점의 기록이다.
 <!-- /provider-network-publication-approval -->
 
 <!-- provider-network-evaluation-current -->

@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-04T22:44:19.637Z",
+  "status": "published",
+  "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+  "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+  "version": 145,
+  "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_92091646a89c8191afb6ca5c5f85e3bb",
+  "source": "a22d747f1a55ad86f97283cd9a76df9b838a9082",
+  "sourceParent": "d41d4e72e9107747d10ae0a83122f0d5778a529a",
+  "candidate": "5393328972c5fcd5b8f8411063a3f7c98235336c",
+  "gitTree": "b051b313653ecf4a0d70abe866fb94d85986a928",
+  "exactQualifiedTree": true,
+  "deployment": {
+    "id": "appgdep_6aebb4e2db308191b34ddb9e36e27443",
+    "project_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "title": "하루단어 · Oxford 3000",
+    "version_id": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_92091646a89c8191afb6ca5c5f85e3bb",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ab0a3cbaaa08191a05b0bcdf62df225",
+    "failure_message": null,
+    "env_set_revision": 77,
+    "updated_at": "2026-11-04T22:42:59.839380+00:00"
+  },
+  "archive": {
+    "localSha256": "b0d725bd137e6230610eb01143816e863c51c67891bce42864930ffdedc74c4e",
+    "acceptedStorage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000cbb4820681c7c0fd3590eeea",
+      "content_hash": "sha256:6da3b993480b6b1000441a8e0059e46ff847efc525b8006f56d5bbe1c2892ad3",
+      "size_bytes": 16793600,
+      "file_count": 242
+    },
+    "localArchive": "C:/Users/user/Documents/ChatGPT/하루단어/outputs/provider-network-evaluation-20261104/site-v145.tar"
+  },
+  "authorization": {
+    "userText": "운영사이트 반영해줘. 실기기 검사는 니중에 할게",
+    "scope": "Publish the verified transport fix to the existing Site; physical-device verification deferred by user. No additional paid evaluation, secret or access changes."
+  },
+  "verification": {
+    "qualifiedEvidence": "docs/PROVIDER_NETWORK_EVALUATION_20261105.json",
+    "node22UnitTests": 800,
+    "node24UnitTests": 800,
+    "qualifiedUnitExitCodes": [
+      0,
+      0
+    ],
+    "candidateChecks": [
+      "typecheck",
+      "check:grammar-review",
+      "lint",
+      "build"
+    ],
+    "candidateCheckExitCodes": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "existingLintWarnings": 15,
+    "publicationFocusedTests": 15,
+    "publicationBuildExit": 0,
+    "officialSourceWorkflowExit": 0,
+    "sourceFilesMatched": 942,
+    "publicSmokeExit": 0,
+    "publicAssetsMatched": 14,
+    "publicHtmlStatus": 200,
+    "anonymousStateStatus": 401,
+    "publicClockStatus": 200,
+    "authenticatedProductionAi": false,
+    "fullBrowserAndPerformanceRerun": false
+  },
+  "preparationRecovery": [
+    {
+      "step": "source copy via git show",
+      "result": "stdout buffer limit; resumed owned checkout using direct file copy and verified full source hashes; no production change"
+    },
+    {
+      "step": "Node22 packaging preparation subprocess",
+      "exitCode": 3221225477,
+      "result": "Windows native process failure without stderr; same official packager and source succeeded with Node24.22.1"
+    },
+    {
+      "step": "official source workflow under Node24.22.1",
+      "exitCode": 0,
+      "result": "Reused passed tests/build, source pushed and packaged successfully"
+    }
+  ],
+  "invariants": {
+    "environmentUnchanged": true,
+    "accessUnchanged": true,
+    "automationsUnchanged": true,
+    "bindingsAndTablesUnchanged": true,
+    "hostingManifestUnchanged": true
+  },
+  "metadata": {
+    "environmentRevision": 77,
+    "environmentEntryCount": 14,
+    "accessMode": "public",
+    "accessRevision": 6,
+    "automations": 0,
+    "dbBindings": [
+      "DB"
+    ],
+    "dbTableCount": 10
+  },
+  "compatibility": {
+    "runtimeChangedFiles": [
+      "lib/openai-feedback.ts"
+    ],
+    "transportPolicy": "manual redirects and explicit300..399 rejection; no follow/no retry; existing provider_network503 preserved",
+    "requestPayloadModelTimeoutResponseBackupRevisionChanged": false,
+    "newSqlMigrations": 0,
+    "productionQaWrites": 0,
+    "privateRowsRead": 0,
+    "additionalPaidCalls": 0,
+    "environmentChanges": 0,
+    "accessChanges": 0,
+    "newSiteCreated": 0,
+    "newDiagnostics": 0
+  },
+  "budget": {
+    "newSpendingUsd": 0,
+    "previousEvaluationUpperUsd": 2.902172,
+    "totalApprovalUsd": 5,
+    "invoiceVerified": false,
+    "closedApiLedgerReopened": false
+  },
+  "physicalDevice": {
+    "tested": false,
+    "deferredByUser": true,
+    "userText": "실기기 검사는 니중에 할게",
+    "blocksThisDeployment": false
+  },
+  "rollback": {
+    "performed": false,
+    "previousVersion": {
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_0e4c0307e89c81918265d94cbcb87ba5",
+      "version": 144,
+      "source": "d41d4e72e9107747d10ae0a83122f0d5778a529a",
+      "archive": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_0000000096cc8206b9814bedefbd6f91",
+        "content_hash": "sha256:c089540f7196ee8c591f0614f9c88688544018eb4bc90072d3570b842ba6a3ad",
+        "size_bytes": 16793600,
+        "file_count": 242
+      },
+      "deploymentId": "appgdep_6aeb32fea7b0819187342115c02777dc"
+    },
+    "procedure": "If required, deploy saved v144 through the existing Site native deployment tool. It preserves prior data compatibility but also restores the unsupported redirect option. No new DB rollback or secret change is required."
+  },
+  "observability": "Existing safe logs only; no new raw transport or learner text logging.",
+  "unverified": [
+    "Post-deploy authenticated/paid OpenAI request",
+    "Physical device and VoiceOver, deferred by user",
+    "Independent human English-quality certification"
+  ],
+  "localEvidenceRoot": "outputs/provider-network-evaluation-20261104"
+}
