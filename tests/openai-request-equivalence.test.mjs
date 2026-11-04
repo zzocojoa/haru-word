@@ -20,6 +20,9 @@ const hash = value => createHash('sha256').update(JSON.stringify(value)).digest(
 
 // Frozen on the clean 7d7c368 source before refactoring. No network or API key.
 // Hash the serialized body too: key order, prompts and whitespace are contracts.
+// The sole intentional transport change is error -> manual with explicit 3xx
+// rejection for workerd. Retain the original fixture and normalize only that
+// option after independently asserting the new policy.
 test('120 synthetic word/grammar generation cases equal the pre-refactor requests and parsed results', async t => {
   t.mock.method(console, 'info', () => {});
   const actual = {};
@@ -33,7 +36,8 @@ test('120 synthetic word/grammar generation cases equal the pre-refactor request
           let calls = 0, request;
           const fetcher = async (url, init) => {
             calls++;
-            request = { url, method: init.method, redirect: init.redirect, headers: init.headers, body: init.body };
+            assert.equal(init.redirect, 'manual');
+            request = { url, method: init.method, redirect: 'error', headers: init.headers, body: init.body };
             const body = JSON.parse(init.body), input = JSON.parse(body.input[0].content);
             const wire = judgmentEnabled
               ? { meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: input.sentence, targetReason: '합성 목표', grammarReason: '합성 문법', correctionReason: '', contextNeeded: 'none' }

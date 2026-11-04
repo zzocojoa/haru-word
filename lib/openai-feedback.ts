@@ -24,7 +24,9 @@ async function generateFeedback(config: OpenAiFeedbackConfig, input: { sentence:
   try {
     let response: Response;
     try { response = await fetcher('https://api.openai.com/v1/responses', {
-      method: 'POST', redirect: 'error', signal,
+      // workerd rejects redirect:"error" before sending. Manual mode keeps
+      // credentials on this host; explicitly reject redirects below.
+      method: 'POST', redirect: 'manual', signal,
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${config.apiKey}` },
       body: JSON.stringify({ model: model.id, instructions: instruction + profile.contract.instruction,
         input: [{ role: 'user', content: JSON.stringify(input) }],
@@ -37,6 +39,10 @@ async function generateFeedback(config: OpenAiFeedbackConfig, input: { sentence:
       throw new FeedbackError(deadline.aborted ? 'provider_timeout' : 'provider_network', 503);
     }
     signal.throwIfAborted();
+    if (response.status >= 300 && response.status < 400) {
+      void response.body?.cancel().catch(() => {});
+      throw new FeedbackError('provider_network', 503);
+    }
     if (!response.ok) {
       let body: unknown;
       try { body = await readOpenAiResponse(response, signal); } catch { signal.throwIfAborted(); }

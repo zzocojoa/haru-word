@@ -1,3 +1,15 @@
+<!-- provider-network-publication-approval -->
+## 2026-11-05 · 통신 수정 운영 반영 승인
+
+사용자가 검증된 통신 수정본의 기존 운영 Site 반영을 승인했다. 실기기 검사는 사용자 요청으로 후속 수행하며 이번 게시의 미완료 조건으로 두지 않는다. 기존 Site 식별자·DB/R2·Secret·접근 정책을 유지하고 추가 유료 평가 없이 게시한다. 아래 미반영·연결 정보 대기는 이 승인 전 검증 시점의 기록이다. 게시 결과는 기본 폴더의 `docs/releases/2026-11-05-provider-network-rollout.json`과 `PROJECT_HANDOFF.md`에서 확인한다.
+<!-- /provider-network-publication-approval -->
+
+<!-- provider-network-evaluation-current -->
+## 2026-11-05 · 통신 실패 원인 재현·추가 API 평가
+
+새 브랜치에서 Cloudflare Worker가 지원하지 않는 `redirect: error`의 요청 전 실패를 재현하고, `manual`과3xx 거절로 수정했다. Node22/24 단위 각각800통과·타입/자료/린트/빌드 exit0이다. 별도 승인US$5에서 합성30문항·총180회 API 평가를 마쳤고 보수적 사용액은US$2.902172다. 원점수는Sol26/30·Terra28/30·Astra29/30이며 평가 기준의 모호성을 별도로 기록했다. **운영 미반영·실기기 연결 정보 대기** 상태다. [조사·평가 보고서](docs/PROVIDER_NETWORK_INVESTIGATION_20261105.md)와 [검증 근거](docs/PROVIDER_NETWORK_EVALUATION_20261105.json)를 따른다. 아래 미실시 표기는 해당 과거 시점의 기록이다.
+<!-- /provider-network-evaluation-current -->
+
 <!-- integration-remediation-plan-current -->
 ## 2026-11-04 · 통합 검사 후속 수정 v144 게시 완료
 

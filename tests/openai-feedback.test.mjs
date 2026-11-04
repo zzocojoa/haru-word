@@ -25,7 +25,7 @@ test('all catalog models use exact Responses strict JSON, no storage, tools, ret
   for (const id of config.allowedModels.split(',')) {
     let calls = 0;
     const result = await run(async (url, init) => {
-      calls++; assert.equal(url, 'https://api.openai.com/v1/responses'); assert.equal(init.redirect, 'error');
+      calls++; assert.equal(url, 'https://api.openai.com/v1/responses'); assert.equal(init.redirect, 'manual');
       assert.equal(init.headers.Authorization, 'Bearer ' + config.apiKey);
       const body = JSON.parse(init.body);
       assert.equal(body.model, id); assert.equal(body.store, false); assert.equal(body.stream, false);
