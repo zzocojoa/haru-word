@@ -2,6 +2,8 @@ import { activeRestoreJob, createRestoreJob, RestoreError } from '@/db/restore-j
 import { createRestoreSchema } from '@/lib/restore-validation';
 import { readBoundedJsonText, restoreEndpoint } from '@/lib/server/restore-http';
 import { RequestBodyError } from '@/lib/server/request-body';
+import { AI_UPGRADE_MESSAGE, aiContractVersion } from '@/lib/ai-contract';
+import { hasSavedAiContract } from '@/db/ai-compatibility';
 export const dynamic = 'force-dynamic';
 export function GET(request: Request) { return restoreEndpoint(request, 'status', async (db,user) => ({ job: await activeRestoreJob(db,user) })); }
 export function POST(request: Request) {
@@ -9,6 +11,8 @@ export function POST(request: Request) {
     let value: unknown; try { value=JSON.parse(await readBoundedJsonText(request,{bytes:100_000},metrics)); } catch(e) { if(e instanceof RequestBodyError) throw e; throw new RestoreError('요청 형식이 잘못되었어요.'); }
     const parsed=createRestoreSchema.safeParse(value);
     if(!parsed.success) throw new RestoreError('백업 크기와 전송 목록을 확인해 주세요.');
+    if (aiContractVersion(request)<2 && parsed.data.manifest.settings.aiModelId !== undefined || await hasSavedAiContract(db, user,aiContractVersion(request)))
+      throw new RestoreError(AI_UPGRADE_MESSAGE, 426, 'ai_client_outdated');
     return createRestoreJob(db,user,parsed.data.revision,parsed.data.manifest);
   });
 }

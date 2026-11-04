@@ -1,12 +1,11 @@
 // A separate, explicitly approved 120-call comparison. The original 240-call
 // collector and ledger are never extended, reset or overwritten. No CI calls.
 import { createInterface } from 'node:readline';
-import { mkdirSync, readFileSync, writeFileSync, renameSync, openSync, closeSync, unlinkSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, renameSync, openSync, closeSync, unlinkSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { build } from 'esbuild';
 import { reviewBundle } from './evaluate-english-accuracy.mjs';
 
 const comparison = 'original-first', additionalCalls = 120, previousCalls = 240;
@@ -100,49 +99,23 @@ export async function collectOriginalComparison(context, options) {
   }
 }
 async function main() {
-  const approved = process.argv[process.argv.indexOf('--approved-additional-calls') + 1];
-  if (!process.argv.includes('--live') || !process.argv.includes('--approved-additional-calls') || approved !== '120' || process.env.CI) throw Error('Explicit approved additional 120 calls required outside CI.');
-  if (process.stdin.isTTY) process.stdin.setRawMode(true);
-  if (process.stdin.isTTY) console.log('Ready for original comparison JSON on stdin (input is hidden).');
-  const rl = createInterface({ input: process.stdin, terminal: false });
-  let config;
-  try { config = JSON.parse(await new Promise((accept, reject) => { rl.once('line', accept); rl.once('close', () => reject(Error('Missing stdin configuration.'))); })); }
-  finally { rl.close(); if (process.stdin.isTTY) process.stdin.setRawMode(false); }
-  const origin = new URL(config.origin);
-  if (origin.origin !== 'https://wordgrain-oxford-study.hoihou-o.chatgpt.site' || !/^[a-f0-9]{64}$/.test(config.evaluationToken) || !/^[a-f0-9]{40}$/.test(config.sourceCommit)) throw Error('Invalid comparison configuration.');
-  config.origin = origin.origin;
+  if (process.argv.includes('--live') || !process.argv.includes('--offline')) throw Error('Legacy live evaluation is retired; use --offline for complete frozen ledgers.');
+  const rl = createInterface({ input: process.stdin, terminal: false }); let config;
+  try { config = JSON.parse(await new Promise((accept, reject) => { rl.once('line', accept); rl.once('close', () => reject(Error('Missing frozen source configuration.'))); })); }
+  finally { rl.close(); }
+  if (!/^[a-f0-9]{40}$/.test(config.sourceCommit)) throw Error('Invalid frozen source commit.');
   const root = resolve('.sites-runtime/english-accuracy'), directory = resolve(root, comparison);
-  mkdirSync(directory, { recursive: true });
-  // Share the original collector lock; never overlap collectors.
+  const previous = JSON.parse(readFileSync(resolve(root, 'ledger.json'), 'utf8')).attempts;
+  const ledger = JSON.parse(readFileSync(resolve(directory, 'ledger.json'), 'utf8'));
+  if (ledger?.attempts.length !== additionalCalls) throw Error('Incomplete ledger cannot generate requests offline.');
+  validateOriginalComparison(previous, ledger, { fixtureHash: ledger.fixtureHash, fixtureContentHash: ledger.fixtureContentHash, sourceCommit: config.sourceCommit, profiles: ledger.profiles, models: ledger.models });
   const lockPath = resolve(root, 'running.lock'), lock = openSync(lockPath, 'wx');
-  const stop = new AbortController(), interrupt = () => stop.abort(Error('Evaluation interrupted.'));
-  process.once('SIGINT', interrupt); process.once('SIGTERM', interrupt);
   try {
-    writeFileSync(lock, JSON.stringify({ pid: process.pid, comparison, startedAt: new Date().toISOString() }));
-    const previous = JSON.parse(readFileSync(resolve(root, 'ledger.json'), 'utf8')).attempts;
-    const ledgerPath = resolve(directory, 'ledger.json');
-    let ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : undefined;
-    if (ledger?.attempts.length === additionalCalls) {
-      validateOriginalComparison(previous, ledger, { fixtureHash: ledger.fixtureHash, fixtureContentHash: ledger.fixtureContentHash, sourceCommit: config.sourceCommit, profiles: ledger.profiles, models: ledger.models });
-    } else {
-      verifyOriginalComparisonSource(config.sourceCommit);
-      const bundlePath = resolve(directory, 'requests.mjs');
-      await build({ entryPoints: ['lib/original-feedback-evaluation.ts'], outfile: bundlePath, bundle: true, platform: 'node', format: 'esm', logLevel: 'silent' });
-      const helper = await import(pathToFileURL(bundlePath).href);
-      const fixture = originalComparisonFixture(readFileSync('tests/fixtures/english-accuracy.json', 'utf8'), previous[0]?.fixtureHash), profiles = {};
-      for (const sample of helper.accuracyCases) profiles[sample.id] = { domain: sample.domain, ...await helper.originalAccuracyHashes(sample) };
-      const expected = { ...fixture, sourceCommit: config.sourceCommit, profiles, models: helper.accuracyModels };
-      ledger ??= { comparison, approvedCalls: additionalCalls, previousHash: hash(previous), ...expected, attempts: [] };
-      validateOriginalComparison(previous, ledger, expected);
-      await originalComparisonPreflight(config, fetch, AbortSignal.any([AbortSignal.timeout(15_000), stop.signal]));
-      const safeCodes = [...Object.keys(helper.FEEDBACK_ISSUES), 'evaluation_disabled', 'evaluation_unauthorized', 'evaluation_invalid_request', 'evaluation_invalid_case', 'evaluation_key_missing', 'evaluation_internal'];
-      await collectOriginalComparison({ previous, ledger, cases: helper.accuracyCases, config, expected, safeCodes, validationStages: helper.FEEDBACK_VALIDATION_STAGES, parseFeedback: helper.parseOriginalAccuracyFeedback },
-        { save: value => atomicJson(ledgerPath, value), signal: stop.signal, progress: value => console.log(JSON.stringify(value)) });
-    }
+    writeFileSync(lock, JSON.stringify({ pid: process.pid, mode: 'offline', comparison, startedAt: new Date().toISOString() }));
     const reviewPath = resolve(directory, 'review-bundle.json'), existing = existsSync(reviewPath) ? JSON.parse(readFileSync(reviewPath, 'utf8')) : undefined;
     const review = reviewBundle(ledger.attempts, 3, existing);
     atomicJson(reviewPath, review); atomicJson(resolve(directory, 'blind.json'), review.blinded);
-    console.log(JSON.stringify({ complete: true, comparison, additionalAttempts: ledger.attempts.length, totalAttempts: previousCalls + ledger.attempts.length }));
-  } finally { process.removeListener('SIGINT', interrupt); process.removeListener('SIGTERM', interrupt); closeSync(lock); unlinkSync(lockPath); }
+    console.log(JSON.stringify({ complete: true, offline: true, comparison, additionalAttempts: ledger.attempts.length, totalAttempts: previousCalls + ledger.attempts.length }));
+  } finally { closeSync(lock); unlinkSync(lockPath); }
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch(() => { console.error('Original comparison stopped. Preserve both ledgers; never retry consumed slots.'); process.exitCode = 1; });

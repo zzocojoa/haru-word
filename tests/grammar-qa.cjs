@@ -1,10 +1,11 @@
+const { model: aiModel, aiHeaders, openaiFeedback, feedbackReceipt,acknowledgePending } = require('./qa/openai-fixture.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('./qa/runtime.cjs');
 
 (async () => {
   const browser = await launchBrowser(), headers = accountHeaders('grammar');
-  const context = await browser.newContext({ extraHTTPHeaders: headers, viewport: { width: 390, height: 844 } });
+  const context = await browser.newContext({ extraHTTPHeaders: { ...headers, ...aiHeaders }, viewport: { width: 390, height: 844 } });
   const page = await context.newPage(), errors = [];
   page.on('pageerror', e => errors.push(e.message));
   const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '4' } })).json();
@@ -75,12 +76,13 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
     await until(async () => (await snapshot()).state.grammar.noun.sentence === 'I like green tea and coffee.', 'retry');
     // A delayed reply must not replace a newer draft; no real provider is called by QA.
     let aiCalls = 0, aiRelease; const aiHold = new Promise(resolve => aiRelease = resolve);
-    await page.route('**/api/grammar-feedback', async route => { aiCalls++; const sentence = route.request().postDataJSON().sentence; await aiHold; await route.fulfill({ json: { feedback: { original: sentence, model: 'gemini-3.1-flash-lite', createdAt: new Date().toISOString(), meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '명사를 알맞게 사용했어요.' } } }); });
+    await page.route('**/api/grammar-feedback', async route => { aiCalls++; assert.equal(route.request().postDataJSON().expectedModelId, aiModel); const sentence = route.request().postDataJSON().sentence; await aiHold; await route.fulfill({ json: { receipt:feedbackReceipt(route),feedback: openaiFeedback({ original: sentence, createdAt: new Date().toISOString(), meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '명사를 알맞게 사용했어요.' }) } }); });
     await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await until(() => aiCalls === 1, 'AI started');
     await getSentence().fill('I like books.'); aiRelease(); await page.waitForTimeout(250);
     assert.equal(await getSentence().inputValue(), 'I like books.'); assert.equal(await page.locator('.grammar-feedback .ai-feedback-result').count(), 0);
     await page.unroute('**/api/grammar-feedback');
     await page.route('**/api/grammar-feedback', route => route.fulfill({ status: 429, json: { error: 'Google 한도에 도달했어요.' } }));
+    await acknowledgePending(page);
     await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
     await page.locator('[data-feedback-code="request_limited"]').waitFor(); assert.equal(await getSentence().inputValue(), 'I like books.');
     await page.getByLabel('뜻과 형태를 확인했어요', { exact: true }).check();

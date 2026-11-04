@@ -45,6 +45,15 @@ export const aiDailyUsage = sqliteTable("ai_daily_usage", {
   lastRequestAt: integer("last_request_at").notNull(),
 }, table => [primaryKey({ columns: [table.userId, table.day] })]);
 
+// Response body: 24h; minimal idempotency tombstone: 7d. Not learning history.
+export const feedbackRequests = sqliteTable('feedback_requests', {
+  userId:text('user_id').notNull().references(()=>learnerStates.userId,{onDelete:'cascade'}),
+  requestId:text('request_id').notNull(),fingerprint:text('fingerprint').notNull(),
+  domain:text('domain').notNull(),targetId:text('target_id').notNull(),status:text('status').notNull(),
+  startedAt:integer('started_at').notNull(),expiresAt:integer('expires_at').notNull(),
+  responseExpiresAt:integer('response_expires_at').notNull(),responseStatus:integer('response_status'),response:text('response'),
+},table=>[primaryKey({columns:[table.userId,table.requestId]}),index('feedback_requests_expiry').on(table.expiresAt)]);
+
 // Nullable active_owner permits receipts but only one active upload per account.
 export const restoreJobs = sqliteTable('restore_jobs', {
   id: text('id').primaryKey(), userId: text('user_id').notNull(), activeOwner: text('active_owner'),

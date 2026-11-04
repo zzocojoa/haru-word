@@ -23,6 +23,10 @@ export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
   const userId = requestHeaders.get(USER_ID_HEADER);
   const email = requestHeaders.get(USER_EMAIL_HEADER);
   if (!userId || !email) return null;
+  // A stale page may still have account A's unsaved input after the browser
+  // cookie changes to account B. Reject it before any owned data or AI access.
+  const expectedOwner=requestHeaders.get('x-study-owner');
+  if(expectedOwner!==null&&expectedOwner!==userId)return null;
 
   const encodedFullName = requestHeaders.get(USER_FULL_NAME_HEADER);
   const fullName =

@@ -74,8 +74,9 @@ export function SourceDialog({
           친숙도는 뜻이 얼마나 익숙한지 확인하는 자기평가이며 정식 수준 판정은 아니에요. 영어→뜻, 뜻→영어, 문장 사용은 따로 기록해요. 아직 확인하지 않은 항목은 성공·실패에 넣지 않아요. 주간에는 목표 단어 전체, 월말에는 배운 단어 전체를 확인해요.
         </p>
         <p>
-          AI 의견을 요청하면 문장과 학습 목표를 Google Gemini에 보내요. 한도·연결·응답 오류가 있으면 Groq에 한 번 더 보내요. Google 무료 API의 입력·응답은 서비스 개선에 사용될 수 있고, Groq의 보관은 해당 서비스 설정·정책을 따라요. AI 의견은 참고 자료이며 문장 평가 버튼은 자기평가예요. 하루단어는 Oxford University Press의 공식 제품이 아니에요.
+          AI 의견을 요청할 때만 문장과 학습 목표를 선택한 OpenAI 모델에 보내요. API 입력·응답은 기본적으로 모델 학습에 사용되지 않지만 보관·안전 점검 정책은 적용돼요. 실패해도 다른 모델로 자동 재전송하지 않아요. AI 의견은 참고 자료이며 문장 평가 버튼은 자기평가예요. 하루단어는 Oxford University Press의 공식 제품이 아니에요.
         </p>
+        <a className="source-link" href="https://developers.openai.com/api/docs/guides/your-data" target="_blank" rel="noreferrer">OpenAI API 데이터 정책</a>
         <a
           className="source-link"
           href="/sources/content-attribution.txt"

@@ -1,7 +1,7 @@
 import fixture from '../tests/fixtures/english-accuracy.json';
 import { LESSON_MAP } from './grammar/content';
 import { lessonForVersion } from './grammar/content-v3';
-import { grammarFeedbackInput, grammarInstruction } from './grammar/feedback';
+import { grammarFeedbackInput, legacyGrammarInstruction as grammarInstruction } from './grammar/feedback';
 import { systemInstruction, generateTutorFeedback } from './gemini-feedback';
 import { generateGroqFeedback } from './groq-feedback';
 import { GOOGLE_PRIMARY_TIMEOUT_MS } from './feedback-fallback';

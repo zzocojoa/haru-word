@@ -1,11 +1,10 @@
 // A separate free-account-confirmed cohort. Never extend or rewrite old ledgers.
 import { createInterface } from 'node:readline';
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync, renameSync, openSync, closeSync, unlinkSync, existsSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync, renameSync, openSync, closeSync, unlinkSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import { build } from 'esbuild';
-import { originalComparisonFixture, verifyOriginalComparisonSource } from './evaluate-original-feedback.mjs';
 import { reviewBundle } from './evaluate-english-accuracy.mjs';
 const comparison = 'chunked-free-v1', approvedCalls = 120, previousCalls = 360, round = 4;
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -86,41 +85,32 @@ export async function collectFreeComparison(context, options) {
   }
   ledger.completed=Object.keys(expected.profiles).every(id=>['google','groq'].every(provider=>ledger.providerStops[provider]||ledger.attempts.some(a=>a.caseId===id&&a.provider===provider)));save(ledger);
 }
-async function main(){
-  if(!process.argv.includes('--live')||!process.argv.includes('--confirmed-free-tier')||process.argv[process.argv.indexOf('--approved-calls')+1]!=='120'||process.env.CI)throw Error('Approved free cohort required outside CI.');
-  if(process.stdin.isTTY){process.stdin.setRawMode(true);console.log('Ready for free comparison JSON on stdin (input is hidden).');}
-  const rl=createInterface({input:process.stdin,terminal:false});let config;
-  try{config=JSON.parse(await new Promise((ok,no)=>{rl.once('line',ok);rl.once('close',()=>no(Error('Missing configuration.')));}));}finally{rl.close();if(process.stdin.isTTY)process.stdin.setRawMode(false);}
-  if(new URL(config.origin).origin!=='https://wordgrain-oxford-study.hoihou-o.chatgpt.site'||!/^[a-f0-9]{64}$/.test(config.evaluationToken)||!/^[a-f0-9]{40}$/.test(config.sourceCommit))throw Error('Invalid configuration.');
-  config.origin=new URL(config.origin).origin;
-  const root=resolve('.sites-runtime/english-accuracy'),directory=resolve(root,comparison);mkdirSync(directory,{recursive:true});
-  const lockPath=resolve(root,'running.lock'),lock=openSync(lockPath,'wx'),stop=new AbortController(),interrupt=()=>stop.abort(Error('Interrupted'));
-  process.once('SIGINT',interrupt);process.once('SIGTERM',interrupt);
-  try{
-    writeFileSync(lock,JSON.stringify({pid:process.pid,comparison,startedAt:new Date().toISOString()}));
-    // Recovery needs the same trusted safe parser even when the frozen request
-    // module predates diagnostics. Never rewrite that module or old ledgers.
-    const validatorDirectory=mkdtempSync(resolve(root,'detail-validator-')),validatorPath=resolve(validatorDirectory,'parser.mjs');
-    await build({entryPoints:[fileURLToPath(new URL('../lib/feedback-validation-detail.ts',import.meta.url))],outfile:validatorPath,bundle:true,platform:'node',format:'esm',logLevel:'silent'});
-    const {parseFeedbackValidationDetail:parseValidationDetail}=await import(pathToFileURL(validatorPath).href);
-    const legacy=JSON.parse(readFileSync(resolve(root,'ledger.json'))).attempts,original=JSON.parse(readFileSync(resolve(root,'original-first/ledger.json'))).attempts;
-    const published=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-original-first.json'));
-    if(hash(legacy)!==published.previousLedgerHash||hash(original)!==published.ledgerHash)throw Error('Parent history changed.');
-    const previous=[...legacy,...original],ledgerPath=resolve(directory,'ledger.json');let ledger=existsSync(ledgerPath)?JSON.parse(readFileSync(ledgerPath)):undefined;
-    if(!ledger?.completed){
-      verifyOriginalComparisonSource(config.sourceCommit);
-      const path=resolve(directory,'requests.mjs');await build({entryPoints:['lib/free-feedback-evaluation.ts'],outfile:path,bundle:true,platform:'node',format:'esm',logLevel:'silent'});
-      const helper=await import(pathToFileURL(path).href),profiles={};for(const sample of helper.accuracyCases)profiles[sample.id]={domain:sample.domain,...await helper.freeAccuracyHashes(sample)};
-      const expected={...originalComparisonFixture(readFileSync('tests/fixtures/english-accuracy.json','utf8'),published.fixtureHash),sourceCommit:config.sourceCommit,profiles,models:helper.accuracyModels};
-      ledger??={comparison,approvedCalls,freeTierConfirmation:'human-user',previousHash:hash(previous),...expected,providerStops:{},attempts:[]};validateFreeComparison(previous,ledger,expected,parseValidationDetail);
-      const preflight=await fetch(config.origin+endpoint,init(config,{caseId:'preflight-invalid-case',provider:'google',comparison},AbortSignal.timeout(15000)));
-      if(preflight.status!==400||(await preflight.json()).code!=='evaluation_invalid_case')throw Error('Free endpoint not ready.');
-      await collectFreeComparison({previous,ledger,cases:helper.accuracyCases,config,expected,safeCodes:[...Object.keys(helper.FEEDBACK_ISSUES),'evaluation_disabled','evaluation_unauthorized','evaluation_invalid_request','evaluation_invalid_case','evaluation_key_missing','evaluation_internal'],validationStages:helper.FEEDBACK_VALIDATION_STAGES,diagnostics:helper.FEEDBACK_DIAGNOSTICS,parseFeedback:helper.parseOriginalAccuracyFeedback,parseValidationDetail},
-        {save:v=>atomicJson(ledgerPath,v),signal:stop.signal,progress:v=>console.log(JSON.stringify(v))});
-    }else validateFreeComparison(previous,ledger,{fixtureHash:ledger.fixtureHash,fixtureContentHash:ledger.fixtureContentHash,sourceCommit:config.sourceCommit,profiles:ledger.profiles,models:ledger.models},parseValidationDetail);
-    const reviewPath=resolve(directory,'review-bundle.json'),existing=existsSync(reviewPath)?JSON.parse(readFileSync(reviewPath)):undefined,review=reviewBundle(ledger.attempts,round,existing);
-    atomicJson(reviewPath,review);atomicJson(resolve(directory,'blind.json'),review.blinded);
-    console.log(JSON.stringify({complete:true,comparison,attempts:ledger.attempts.length,totalAttempts:previousCalls+ledger.attempts.length,providerStops:ledger.providerStops}));
-  }finally{process.removeListener('SIGINT',interrupt);process.removeListener('SIGTERM',interrupt);closeSync(lock);unlinkSync(lockPath);}
+async function main() {
+  if (process.argv.includes('--live') || !process.argv.includes('--offline')) throw Error('Legacy live evaluation is retired; use --offline for complete frozen ledgers.');
+  const rl = createInterface({ input: process.stdin, terminal: false }); let config;
+  try { config = JSON.parse(await new Promise((accept, reject) => { rl.once('line', accept); rl.once('close', () => reject(Error('Missing frozen source configuration.'))); })); }
+  finally { rl.close(); }
+  if (!/^[a-f0-9]{40}$/.test(config.sourceCommit)) throw Error('Invalid frozen source commit.');
+  const root = resolve('.sites-runtime/english-accuracy'), directory = resolve(root, comparison);
+  const legacy = JSON.parse(readFileSync(resolve(root, 'ledger.json'))).attempts, original = JSON.parse(readFileSync(resolve(root, 'original-first/ledger.json'))).attempts;
+  const published = JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-original-first.json'));
+  if (hash(legacy) !== published.previousLedgerHash || hash(original) !== published.ledgerHash) throw Error('Parent history changed.');
+  const previous = [...legacy, ...original], ledgerPath = resolve(directory, 'ledger.json'), ledger = JSON.parse(readFileSync(ledgerPath));
+  const lockPath = resolve(root, 'running.lock'), lock = openSync(lockPath, 'wx');
+  try {
+    writeFileSync(lock, JSON.stringify({ pid: process.pid, mode: 'offline', comparison, startedAt: new Date().toISOString() }));
+    const validatorDirectory = mkdtempSync(resolve(root, 'detail-validator-')), validatorPath = resolve(validatorDirectory, 'parser.mjs');
+    await build({ entryPoints: [fileURLToPath(new URL('../lib/feedback-validation-detail.ts', import.meta.url))], outfile: validatorPath, bundle: true, platform: 'node', format: 'esm', logLevel: 'silent' });
+    const { parseFeedbackValidationDetail: parseValidationDetail } = await import(pathToFileURL(validatorPath).href);
+    validateFreeComparison(previous, ledger, { fixtureHash: ledger.fixtureHash, fixtureContentHash: ledger.fixtureContentHash, sourceCommit: config.sourceCommit, profiles: ledger.profiles, models: ledger.models }, parseValidationDetail);
+    const complete = Object.keys(ledger.profiles).every(id => ['google', 'groq'].every(provider => ledger.providerStops[provider] || ledger.attempts.some(a => a.caseId === id && a.provider === provider)));
+    if (!complete) throw Error('Incomplete ledger cannot generate requests offline.');
+    if (!ledger.completed) { ledger.completed = true; atomicJson(ledgerPath, ledger); }
+    validateFreeComparison(previous, ledger, { fixtureHash: ledger.fixtureHash, fixtureContentHash: ledger.fixtureContentHash, sourceCommit: config.sourceCommit, profiles: ledger.profiles, models: ledger.models }, parseValidationDetail);
+    const reviewPath = resolve(directory, 'review-bundle.json'), existing = existsSync(reviewPath) ? JSON.parse(readFileSync(reviewPath)) : undefined;
+    const review = reviewBundle(ledger.attempts, round, existing);
+    atomicJson(reviewPath, review); atomicJson(resolve(directory, 'blind.json'), review.blinded);
+    console.log(JSON.stringify({ complete: true, offline: true, comparison, attempts: ledger.attempts.length, totalAttempts: previousCalls + ledger.attempts.length, providerStops: ledger.providerStops }));
+  } finally { closeSync(lock); unlinkSync(lockPath); }
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main().catch(()=>{console.error('Free comparison stopped. Keep all ledgers; never repeat consumed slots or change billing.');process.exitCode=1;});

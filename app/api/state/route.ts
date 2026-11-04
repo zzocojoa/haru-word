@@ -1,4 +1,5 @@
 import { getChatGPTUser } from '@/app/chatgpt-auth';
+import { env } from 'cloudflare:workers';
 import { database } from '@/db/store';
 import { existingSessionIds, loadStateDocuments, saveState, validSaveReferences } from '@/db/learning-state';
 import { stateResponse } from '@/lib/server/state-response';
@@ -15,6 +16,10 @@ import { hasSavedLiteralPrototypeSense } from '@/db/sense-key-compatibility';
 import { StateCapacityError } from '@/db/state-capacity';
 import { logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
 import { STATE_PART_BYTES } from '@/lib/state-limits';
+import { AI_UPGRADE_MESSAGE, requiresAiContractDocument, requiresAiContractState, aiContractVersion } from '@/lib/ai-contract';
+import { hasSavedAiContract } from '@/db/ai-compatibility';
+import { loadFeedbackModel } from '@/db/feedback';
+import { isAiModelEnabled, selectedAiModel } from '@/lib/ai-models';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,7 +31,14 @@ export async function GET(request?: Request) {
     const grammarVersion = request?.headers.get('x-study-grammar');
     if (!supportsSenseKeys(request) && await hasSavedLiteralPrototypeSense(database(), user.userId))
       return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
-    const snapshot = await loadStateDocuments(database(), user.userId, ['1','2','3','4'].includes(grammarVersion??''));
+    // Read all domains atomically before legacy projection, including hidden grammar.
+    const snapshot = await loadStateDocuments(database(), user.userId, true);
+    const aiVersion=aiContractVersion(request);
+    if (requiresAiContractDocument(snapshot.settings, 'settings',aiVersion)
+      || snapshot.sessions.some(row => requiresAiContractDocument(row.document, 'session',aiVersion))
+      || snapshot.grammar?.some(row => requiresAiContractDocument(row.document, 'grammar',aiVersion)))
+      return json({ error: AI_UPGRADE_MESSAGE, code: 'ai_client_outdated' }, 426);
+    if (!['1','2','3','4'].includes(grammarVersion ?? '')) snapshot.grammar = undefined;
     if (grammarVersion !== '4' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
       const legacy = grammarDocumentForClient(grammarProgressSchema.parse(JSON.parse(row.document)),grammarClientVersion(grammarVersion));
       return legacy ? [{ ...row, document: JSON.stringify(legacy) }] : [];
@@ -66,6 +78,15 @@ export async function PUT(request: Request) {
   }
   try {
     const db = database();
+    if (requiresAiContractState(data,aiContractVersion(request)) || await hasSavedAiContract(db, user.userId,aiContractVersion(request)))
+      return json({ error: AI_UPGRADE_MESSAGE, code: 'ai_client_outdated' }, 426);
+    if (data.settings) {
+      const previousModel = await loadFeedbackModel(db, user.userId), nextModel = selectedAiModel(data.settings);
+      // Preserve inactive historical settings during ordinary saves. A new choice
+      // must be an explicitly enabled server model; restore remains archival.
+      if (nextModel !== previousModel && !isAiModelEnabled(nextModel, env.OPENAI_ALLOWED_MODELS))
+        return json({ error: '선택한 AI 모델을 현재 사용할 수 없어요. 학습 설정에서 사용 가능한 모델을 확인해 주세요.', code: 'model_unavailable' }, 400);
+    }
     if (!supportsSenseKeys(request) && (hasLiteralPrototypeSense(data.progress) || await hasSavedLiteralPrototypeSense(db, user.userId, Object.keys(data.progress))))
       return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
     if (!supportsFeedbackStructure(request) && (hasStructuredFeedback(data) ||

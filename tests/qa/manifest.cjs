@@ -1,5 +1,6 @@
 // Explicit inventory: additions and deletions require review.
 module.exports = [
+  "local-draft-qa.cjs",
   "a1-content-qa.cjs",
   "accessibility-qa.cjs",
   "backup-qa.cjs",
@@ -43,6 +44,7 @@ module.exports = [
   "journal-navigation-qa.cjs",
   "learning-message-qa.cjs",
   "lazy-materials-qa.cjs",
+  "openai-migration-qa.cjs",
   "pr38-lazy-recovery-qa.cjs",
   "large-backup-qa.cjs",
   "monthly-carryover-repair-qa.cjs",
@@ -59,6 +61,7 @@ module.exports = [
   "resume-qa.cjs",
   "review-calendar-qa.cjs",
   "review-extension-qa.cjs",
+  "feedback-correction-qa.cjs",
   "sentence-feedback-qa.cjs",
   "sentence-feedback-layout-qa.cjs",
   "sentence-structure-qa.cjs",

@@ -1,5 +1,9 @@
 # 하루단어 운영 안내
 
+**후속 구현 후보 · 미게시:** 새 로컬 초안/요청 복구에는 [기기 보관 정책](docs/FEEDBACK_RECHECK_AND_RECOVERY.md), `0006_feedback_request_receipts`와 [영수증 배포·보관·롤백](docs/FEEDBACK_REQUEST_RECEIPTS.md)을 적용한다. 학습 envelope와 기존 migration은 유지한다. 판단 v2는 품질 G4 미실측 상태이므로 기본 비활성이다. 아래 전환 준비/운영 기록을 이 후보의 배포 완료로 해석하지 않는다.
+
+**2026-11-03 · OpenAI 전환 사전 검증 완료:** 현재 전환 계약·환경 스위치·비밀 값 처리·호환 롤백은 [OpenAI 참고 의견](docs/OPENAI_FEEDBACK.md)을 따른다. [게시 전 검증 기록](docs/releases/2026-11-03-openai-migration-prepublish.json)은 배포 완료를 뜻하지 않는다. 아래 v141과 Google/Groq 운영 절차는 이전 게시 상태의 기록이며 신규 전환 소스의 실행 지침으로 사용하지 않는다. 활성 모델과 배포 결과는 별도 기록한다.
+
 <a id="v141-rollout"></a>
 ## 미국식 IPA v141 · 2026-10-19
 

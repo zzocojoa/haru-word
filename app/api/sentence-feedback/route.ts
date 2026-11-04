@@ -1,25 +1,35 @@
 import { env } from 'cloudflare:workers';
 import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { database } from '@/db/store';
-import { loadFeedbackSession, loadPersonalWord, recordFeedbackAttempt } from '@/db/feedback';
+import { loadFeedbackContext, loadFeedbackModel, loadPersonalWord, recordFeedbackAttempt } from '@/db/feedback';
 import { WORD_MAP } from '@/lib/catalog';
-import { currentId, entryIdFor, today } from '@/lib/learning';
-import { FEEDBACK_MODEL, feedbackRequestSchema, feedbackProvider } from '@/lib/sentence-feedback';
-import { FeedbackError } from '@/lib/gemini-feedback';
-import { generateSentenceFeedbackWithFallback } from '@/lib/feedback-fallback';
+import { currentId, entryIdFor, today, type Session } from '@/lib/learning';
+import { feedbackRequestSchema, feedbackProvider } from '@/lib/sentence-feedback';
+import { FeedbackError } from '@/lib/provider-feedback-error';
+import { generateOpenAiFeedback, generateStructuredOpenAiFeedback } from '@/lib/openai-feedback';
+import { systemInstruction, legacySystemInstruction } from '@/lib/feedback-prompts';
+import { AI_MODELS, AI_MODEL_PRICE_DATE, isAiModelEnabled } from '@/lib/ai-models';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { json, validateJsonMutation } from '@/lib/server/http';
 import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { FEEDBACK_BODY_LIMITS, logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
 import { feedbackSafetyIssue } from '@/lib/feedback-safety';
+import { supportsAiContract } from '@/lib/ai-contract';
+import {withFeedbackRequest} from '@/db/feedback-requests';
+import {wordFeedbackInput,feedbackContextFingerprint} from '@/lib/feedback-context';
 
 export const dynamic = 'force-dynamic';
-const enabled = () => env.google_ai_enabled === 'true';
+const enabled = () => env.ai_feedback_enabled === 'true';
 
-export async function GET() {
-  if (!await getChatGPTUser()) return json(feedbackErrorBody('login_required'), 401);
-  const configured = !!env.google_api?.trim() || (!!env.groq_api?.trim() && env.groq_ai_enabled !== 'false');
-  return json({ available: enabled() && configured, configured, model: FEEDBACK_MODEL });
+export async function GET(request?: Request) {
+  const user = await getChatGPTUser();
+  if (!user) return json(feedbackErrorBody('login_required'), 401);
+  if (!supportsAiContract(request)) return json(feedbackErrorBody('ai_client_outdated'), 426);
+  try {
+    const model = await loadFeedbackModel(database(), user.userId), configured = !!env.OPENAI_API_KEY?.trim();
+    return json({ available: enabled() && configured && isAiModelEnabled(model, env.OPENAI_ALLOWED_MODELS), configured, enabled: enabled(), model,
+      priceDate: AI_MODEL_PRICE_DATE, models: AI_MODELS.map(item => ({ ...item, enabled: isAiModelEnabled(item.id, env.OPENAI_ALLOWED_MODELS) })) });
+  } catch { return json(feedbackErrorBody('site_error'), 503); }
 }
 
 export async function POST(request: Request) {
@@ -28,6 +38,7 @@ export async function POST(request: Request) {
   if (!user) return json(feedbackErrorBody('login_required'), 401);
   const rejected = validateJsonMutation(request);
   if (rejected) return rejected;
+  if (!supportsAiContract(request)) return json(feedbackErrorBody('ai_client_outdated'), 426);
   let raw: unknown;
   try {
     const text = await readBoundedJsonText(request, FEEDBACK_BODY_LIMITS);
@@ -39,11 +50,15 @@ export async function POST(request: Request) {
   const parsed = feedbackRequestSchema.safeParse(raw);
   if (!parsed.success) return json(feedbackErrorBody('invalid_request'), 400);
   if (!enabled()) return json(feedbackErrorBody('disabled'), 503);
-  const { sessionId, entryId, sentence } = parsed.data;
+  const { sessionId, entryId, sentence, expectedModelId, contextNote, expectedContextFingerprint,contextKind } = parsed.data;
   try {
     const db = database();
-    const session = await loadFeedbackSession(db, user.userId, sessionId);
+    const context = await loadFeedbackContext(db, user.userId, 'word', sessionId);
+    const session = context.document ? JSON.parse(context.document) as Session : null;
     if (!session) return json(feedbackErrorBody('save_required'), 404);
+    if (context.modelId !== expectedModelId) return json(feedbackErrorBody('model_changed'), 409);
+    if (!isAiModelEnabled(context.modelId, env.OPENAI_ALLOWED_MODELS)) return json(feedbackErrorBody('model_unavailable'), 503);
+    if (!env.OPENAI_API_KEY?.trim()) return json(feedbackErrorBody('not_configured'), 503);
     if (session.finished || session.stage !== 'sentence' || currentId(session) !== entryId) {
       return json(feedbackErrorBody('stale_input'), 409);
     }
@@ -51,9 +66,18 @@ export async function POST(request: Request) {
     const word = WORD_MAP.get(wordId) ?? await loadPersonalWord(db, user.userId, wordId);
     const meaning = session.records[entryId]?.meaning;
     if (!word || !meaning) return json(feedbackErrorBody('save_required'), 400);
-    const now = Date.now();
-    await recordFeedbackAttempt(db, user.userId, today(), now);
-    const feedback = await generateSentenceFeedbackWithFallback({ google_api: env.google_api, groq_api: env.groq_api, groq_ai_enabled: env.groq_ai_enabled, feedback_original_sentence_enabled: env.feedback_original_sentence_enabled, feedback_chunked_enabled: env.feedback_chunked_enabled, signal: request.signal }, { word: word.word, pos: word.pos, meaning, sentence });
+    const judgmentEnabled = env.feedback_judgment_enabled === 'true';
+    if (judgmentEnabled && !supportsAiContract(request,4)) return json(feedbackErrorBody('ai_client_outdated'),426);
+    if(expectedContextFingerprint&&!judgmentEnabled)return json(feedbackErrorBody('disabled'),503);
+    const input=wordFeedbackInput(word,meaning,sentence,contextNote,session.records[entryId]?.material?.expression || word.word,contextKind);
+    const contextFingerprint=await feedbackContextFingerprint('word',JSON.stringify([sessionId,entryId]),input,expectedModelId);
+    if (expectedContextFingerprint && expectedContextFingerprint!==contextFingerprint) return json(feedbackErrorBody('stale_input'),409);
+    return await withFeedbackRequest(db,user.userId,parsed.data,{domain:'word',targetId:sessionId,revision:context.revision,
+      fingerprint:[entryId,wordId,input,expectedModelId,judgmentEnabled?systemInstruction:legacySystemInstruction,supportsFeedbackStructure(request),supportsAiContract(request,3)]},async()=>{
+    await recordFeedbackAttempt(db, user.userId, today(), Date.now());
+    const generate = judgmentEnabled ? generateOpenAiFeedback : generateStructuredOpenAiFeedback;
+    const generated = await generate({ apiKey: env.OPENAI_API_KEY, modelId: context.modelId, allowedModels: env.OPENAI_ALLOWED_MODELS, signal: request.signal }, judgmentEnabled?input:{word:word.word,pos:word.pos,meaning,sentence}, judgmentEnabled ? systemInstruction : legacySystemInstruction);
+    const feedback=supportsAiContract(request,3)?{...generated,contextFingerprint,...(contextNote?{contextNote}:{})}:generated;
     const safetyIssue = feedbackSafetyIssue(feedback);
     if (safetyIssue) {
       console.warn(JSON.stringify({ event: 'sentence_feedback_withheld', code: 'analysis_conflict', reason: safetyIssue }));
@@ -61,9 +85,10 @@ export async function POST(request: Request) {
     }
     console.info(JSON.stringify({ event: 'sentence_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), durationMs: Date.now() - started }));
     return json({ feedback: supportsFeedbackStructure(request) ? feedback : legacyFeedback(feedback) });
+    });
   } catch (error) {
     const known = error instanceof FeedbackError;
-    console.error(JSON.stringify({ event: 'sentence_feedback_failed', durationMs: Date.now() - started, code: known ? error.code : 'storage_or_internal', ...(known && error.issue.previous ? { primaryCode: error.issue.previous.code } : {}) }));
+    console.error(JSON.stringify({ event: 'sentence_feedback_failed', durationMs: Date.now() - started, code: known ? error.code : 'storage_or_internal', ...(known && error.validationStage ? { validationStage: error.validationStage } : {}),...(known&&error.judgmentReason?{judgmentReason:error.judgmentReason}:{}) }));
     return json(known ? feedbackErrorBody(error.code, error.issue) : feedbackErrorBody('site_error'), known ? error.status : 503);
   }
 }

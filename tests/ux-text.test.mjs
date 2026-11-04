@@ -18,13 +18,8 @@ const { RecordText } = await import('../work/ux-text-unit/record-text.mjs');
 const { RecallStage } = await import('../work/ux-text-unit/study/recall-stage.mjs');
 const html = (component, props) => render(createElement(component, props));
 
-test('both AI notices name the transmitted fields and preserve visible privacy and fallback disclosures', () => {
-  for (const grammar of [false, true]) {
-    const result = html(AiUseNotice, { grammar });
-    assert.ok(result.includes(grammar ? '문장과 수업 목표를 Google에 보내요.' : '문장과 단어·뜻을 Google에 보내요.'));
-    for (const text of ['응답 실패 시 Groq에도 보내요.', '개인정보는 넣지 마세요.', 'Google 무료 API의 입력·응답은 서비스 개선에 쓰일 수 있어요.']) assert.ok(result.includes(text));
-    assert.doesNotMatch(result, /<details|수업 목표을/);
-  }
+test('both AI notices disclose selected OpenAI transmission and qualified privacy without legacy fallback',()=>{
+ for(const grammar of [false,true]){const result=html(AiUseNotice,{grammar});assert.ok(result.includes(grammar?'문장과 수업 목표를':'문장과 단어·뜻을'));for(const text of ['선택한 OpenAI 모델에 보내요.','개인정보는 넣지 마세요.','기본적으로 모델 학습에 쓰이지 않지만','보관·안전 점검 정책'])assert.ok(result.includes(text));assert.doesNotMatch(result,/<details|수업 목표을|Google|Groq|제로 보관/);}
 });
 
 test('position errors distinguish an unread cursor from an unconfirmed save without claiming a failed write', () => {
@@ -95,7 +90,7 @@ test('UI labels do not change CSV headers, historical result labels, learner tex
   const state = structuredClone(EMPTY), id = 'synthetic', record = { meaning: '검사용 뜻', en: 'independent', ko: 'help', sentenceStatus: 'unmeasured', sentence: 'Original, "sentence"', notes: '원래 메모', familiarity: 'new' };
   state.sessions[id] = { id, kind: 'daily', date: '2026-10-19', period: '2026-10-19', ids: ['word'], records: { word: record }, warmupIds: [], stage: 'sentence', index: 0, retry: [], retryMode: false, elapsed: 0, finished: false, paused: true, createdAt: '2026-10-19T00:00:00Z' };
   const before = structuredClone(state), csv = exportLog(state, [{ id: 'word', word: 'word', pos: 'n.', level: 'A1' }]);
-  const header = ['학습일','종류','단어','품사','수준','학습 뜻','처음 표시','영어→뜻','뜻→영어','문장 상태','말하기','내 문장','보완점','재시도 영어→뜻','재시도 뜻→영어','다음 할 일','AI 검토 원문','AI 교정 제안','AI 설명','회차 시작일','실제 학습일','마지막 연습일','AI 제공사','AI 모델'];
+  const header = ['학습일','종류','단어','품사','수준','학습 뜻','처음 표시','영어→뜻','뜻→영어','문장 상태','말하기','내 문장','보완점','재시도 영어→뜻','재시도 뜻→영어','다음 할 일','AI 검토 원문','AI 교정 제안','AI 설명','회차 시작일','실제 학습일','마지막 연습일','AI 제공사','AI 모델','AI 의견 상태'];
   assert.equal(csv.split('\r\n')[0], '\ufeff' + header.map(h => '"' + h + '"').join(','));
   assert.match(csv, /"독립 성공","도움 필요","미측정"/);
   assert.ok(csv.includes('"Original, ""sentence"""'));

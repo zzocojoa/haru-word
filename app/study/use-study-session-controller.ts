@@ -54,8 +54,8 @@ export function useStudySessionController({
     question, draft, aiPending, setAiPending,
     setMeaning, setExpression, setExpressionTranslation, setExample, setTranslation, setAnswer,
     setSentence, setNotes, setSpoken, setRevealed, setHint,
-    materialBaseline, openedProgress, replaceMaterial,
-  } = useStudyDraft(s, id, content, p);
+    materialBaseline, openedProgress, replaceMaterial,persistent,
+  } = useStudyDraft(s, id, content, p,saved);
   const [materialConflict, setMaterialConflict] = useState(false);
   const { meaning, expression, expressionTranslation, example, translation, answer, sentence, notes, spoken, revealed, hint } = draft;
   const busy = storeBusy || aiPending;
@@ -260,6 +260,8 @@ export function useStudySessionController({
   ).length;
 
   return {
+    draftPersistence:persistent,
+    retainedFeedback:persistent.lastFeedback,
     materialConflict,
     useLibraryMaterial: () => {
       if (!id || !entryId) return;

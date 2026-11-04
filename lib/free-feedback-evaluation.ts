@@ -27,18 +27,22 @@ export async function freeAccuracyHashes(sample: AccuracyCase) {
     limits: FEEDBACK_OUTPUT_LIMITS, timeouts: { google: GOOGLE_PRIMARY_TIMEOUT_MS, groq: GROQ_TIMEOUT_MS } }));
   return { promptHash, requestHash };
 }
+export function legacyQuotaHeaders(headers: Headers) {
+  const quota: { remainingTokens?: number; resetTokensSeconds?: number } = {};
+  const remaining = headers.get('x-ratelimit-remaining-tokens'), reset = headers.get('x-ratelimit-reset-tokens');
+  if (remaining && /^\d{1,9}$/.test(remaining)) quota.remainingTokens = Number(remaining);
+  if (reset && /^\d+(?:\.\d+)?s$/.test(reset)) {
+    const seconds = Number(reset.slice(0, -1));
+    if (seconds > 0 && seconds <= 86400) quota.resetTokensSeconds = Math.ceil(seconds);
+  }
+  return quota;
+}
 export async function evaluateFreeAccuracyCase(config: FeedbackProviders, provider: AccuracyProvider, sample: AccuracyCase, fetcher: typeof fetch = fetch) {
   const { input, instruction } = freeAccuracyRequest(sample);
   const quota: { remainingTokens?: number; resetTokensSeconds?: number } = {};
   const measuredFetch: typeof fetch = async (...args) => {
     const response = await fetcher(...args);
-    const remaining = response.headers.get('x-ratelimit-remaining-tokens');
-    const reset = response.headers.get('x-ratelimit-reset-tokens');
-    if (remaining && /^\d{1,9}$/.test(remaining)) quota.remainingTokens = Number(remaining);
-    if (reset && /^\d+(?:\.\d+)?s$/.test(reset)) {
-      const seconds = Number(reset.slice(0, -1));
-      if (seconds > 0 && seconds <= 86400) quota.resetTokensSeconds = Math.ceil(seconds);
-    }
+    Object.assign(quota, legacyQuotaHeaders(response.headers));
     return response;
   };
   const feedback = provider === 'google'

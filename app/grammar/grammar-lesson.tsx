@@ -16,15 +16,23 @@ import { GrammarReading } from './grammar-reading';
 import { Speak } from '../ui';
 import { GrammarTermsHelp } from '../grammar-terms';
 import { ReviewedExamples } from './reviewed-examples';
+import {DraftRecoveryNotice} from '../draft-recovery-notice';
+import {useAiRequests} from '../ai-request-context';
+import {useFeedbackContext} from '../use-feedback-context';
+import {FeedbackContextInput} from '../feedback-context-input';
+import {grammarFeedbackInput} from '@/lib/grammar/feedback-input';
 
 type Props = { lesson: Lesson; enhanced?: boolean; contentVersion?:2|3|4; persistence: GrammarPersistence; activityDate: () => string; onBack: () => void; onWords: () => void };
 
 export function GrammarLesson({ lesson: originalLesson, enhanced = true, contentVersion=2, persistence, activityDate, onBack, onWords }: Props) {
   const lessonId = originalLesson.id;
-  const { draft: progress, latest, change, flush, dirty, saving, error } = useGrammarDraft(lessonId, persistence, enhanced,contentVersion);
+  const { draft: progress, latest, change, flush, dirty, saving, error,persistent } = useGrammarDraft(lessonId, persistence, enhanced,contentVersion);
   const lesson = lessonForVersion(originalLesson, progress.contentVersion), practice = practiceForVersion(lessonId,progress.contentVersion);
-  const { pending: aiPending, error: aiError, check: checkSentence, invalidate: invalidateAi } = useGrammarFeedback({
-    lessonId: lesson.id, canSave: persistence.canSave, latest, change, flush,
+  const {modelId}=useAiRequests();
+  const feedbackContext=useFeedbackContext('grammar',JSON.stringify([lessonId,progress.contentVersion??1]),grammarFeedbackInput(lesson,progress.sentence),modelId);
+  const { pending: aiPending, error: aiError, check: checkSentence, invalidate: invalidateAi,retainedFeedback,recoveryPending } = useGrammarFeedback({
+    lessonId: lesson.id, canSave: persistence.canSave&&!!feedbackContext.fingerprint,contentVersion:progress.contentVersion, latest, change, flush,
+    context:{contextNote:feedbackContext.note.trim(),contextKind:feedbackContext.kind,expectedContextFingerprint:feedbackContext.fingerprint},
   });
   const [notice, setNotice] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -122,14 +130,14 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
       choice={(reviewing ? progress.review : progress)?.choice} onChoice={choice => change(value => reviewing ? { ...value, review: { ...value.review!, choice } } : { ...value, choice })}
       onOrder={setOrder} onAnswer={answer} onHint={reveal} onNext={nextQuestion} disabled={!persistence.canSave}
     />}
-    {!reviewing && progress.stage === 5 && <GrammarWriting
-      lesson={lesson} progress={progress} canSave={persistence.canSave} aiPending={aiPending} aiError={aiError}
+    {!reviewing && progress.stage === 5 && <><DraftRecoveryNotice input={persistent}/><FeedbackContextInput context={feedbackContext} disabled={!persistence.canSave||aiPending}/><GrammarWriting
+      lesson={lesson} progress={progress} draftFeedback={persistent.lastFeedback} retainedFeedback={retainedFeedback} recoveryPending={recoveryPending} canSave={persistence.canSave} aiPending={aiPending} aiError={aiError} currentModelId={modelId} contextFingerprint={feedbackContext.fingerprint}
       onAi={() => void checkSentence()} onSentence={changeSentence}
       onCheck={check => change(value => ({ ...value, check }))}
       onChecks={(key, result) => change(value => { const checks = { ...value.checks, [key]: result }; return { ...value, checks, check: combinedCheck(checks) }; })}
       onFrame={frame => change(value => ({ ...value, frame }))}
       onExplain={() => moveFromWriting(1)} onComplete={() => void complete()}
-    />}
+    /></>}
     {!reviewing && progress.stage === 6 && <GrammarSummary
       lesson={lesson} progress={progress} dirty={dirty} error={error} canSave={persistence.canSave} date={activityDate()}
       onReview={() => change(value => enhanced ? startGrammarReview(lessonId, value, activityDate(),contentVersion) : { ...value, review: { index: 0, answers: {} } })}

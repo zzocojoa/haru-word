@@ -11,6 +11,8 @@ await build({
   entryPoints: ['app/api/state/route.ts'], outfile: 'work/state-api-tests/route.mjs',
   bundle: true, format: 'esm', platform: 'node', logLevel: 'silent',
   plugins: [{ name: 'boundaries', setup(b) {
+    b.onResolve({ filter: /^cloudflare:workers$/ }, () => ({ path: 'env', namespace: 'model-env' }));
+    b.onLoad({ filter: /.*/, namespace: 'model-env' }, () => ({ loader: 'js', contents: 'export const env={OPENAI_ALLOWED_MODELS:"gpt-6.1-sol,gpt-6.1-terra,gpt-6-astra"}' }));
     b.onResolve({ filter: /^@\/(app\/chatgpt-auth|db\/store)$/ }, a => ({ path: a.path, namespace: 'boundary' }));
     b.onLoad({ filter: /.*/, namespace: 'boundary' }, a => ({ loader: 'js', contents: a.path.endsWith('chatgpt-auth')
       ? 'export const getChatGPTUser=async()=>globalThis.stateApiRuntime.user'

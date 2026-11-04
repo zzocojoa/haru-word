@@ -108,6 +108,7 @@ export type Assessment = {
 };
 
 export type Settings = {
+  aiModelId?: string;
   level: Level;
   dailyGoal: number;
   assessments: Partial<Record<Level, Assessment>>;

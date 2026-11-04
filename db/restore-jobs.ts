@@ -10,6 +10,8 @@ import type { Session } from '@/lib/learning';
 import { checkStagedRestoreCapacity, StateCapacityError } from './state-capacity';
 import { hasSavedLiteralPrototypeSense } from './sense-key-compatibility';
 import { SENSE_KEY_UPGRADE_MESSAGE } from '@/lib/state-data-keys';
+import { AI_UPGRADE_MESSAGE, requiresAiContractState } from '@/lib/ai-contract';
+import { hasSavedAiContract } from './ai-compatibility';
 
 export class RestoreError extends Error {
   constructor(message: string, public status = 400, public code = 'invalid_restore') { super(message); }
@@ -104,11 +106,21 @@ export async function validateRestoreJob(db: D1Database, user: string, id: strin
   return getRestoreJob(db, user, id);
 }
 
-export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion:GrammarClientVersion = 2, structureSupported = true, senseKeysSupported = true) {
+export async function commitRestoreJob(db: D1Database, user: string, id: string, grammarVersion:GrammarClientVersion = 2, structureSupported = true, senseKeysSupported = true, aiContractSupported: boolean | number = true) {
   const job = await row(db, user, id);
   if (job.status === 'committed') return view(db, job);
   if (job.status !== 'ready') throw new RestoreError('전체 검증이 끝난 후 복원할 수 있어요.', 409);
   const manifest = JSON.parse(job.manifest) as RestoreManifest;
+  const aiVersion=typeof aiContractSupported==='number'?aiContractSupported:aiContractSupported?2:1;
+  if (aiVersion<4) {
+    if (aiVersion<2 && manifest.settings.aiModelId !== undefined || await hasSavedAiContract(db, user,aiVersion))
+      throw new RestoreError(AI_UPGRADE_MESSAGE, 426, 'ai_client_outdated');
+    const parts = await db.prepare("SELECT kind,document FROM restore_parts WHERE job_id=? AND kind IN ('sessions','grammar')").bind(id).all<{ kind: string; document: string }>();
+    if (parts.results.some(part => requiresAiContractState(part.kind === 'sessions'
+      ? { sessions: JSON.parse(part.document) }
+      : { sessions: {}, grammar: JSON.parse(part.document) },aiVersion)))
+      throw new RestoreError(AI_UPGRADE_MESSAGE, 426, 'ai_client_outdated');
+  }
   if (!senseKeysSupported && (await hasSavedLiteralPrototypeSense(db, user) || await db.prepare(`SELECT 1 AS found FROM restore_parts p,json_each(p.document) entry,json_each(entry.value,'$.senses') sense
       WHERE p.job_id=? AND p.kind='progress' AND sense.key='__proto__' LIMIT 1`).bind(id).first()))
     throw new RestoreError(SENSE_KEY_UPGRADE_MESSAGE, 426, 'sense_client_outdated');

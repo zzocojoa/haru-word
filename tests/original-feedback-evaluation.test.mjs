@@ -13,8 +13,8 @@ import { evaluationBudget } from '../scripts/evaluate-english-accuracy.mjs';
 globalThis.originalEvalEnv={};
 await build({entryPoints:{helper:'lib/original-feedback-evaluation.ts',route:'app/api/english-accuracy-evaluation/route.ts',production:'lib/feedback-fallback.ts',grammar:'lib/grammar/feedback.ts',content:'lib/grammar/content.ts',v3:'lib/grammar/content-v3.ts'},outdir:'work/original-evaluation-tests',bundle:true,splitting:true,format:'esm',platform:'node',outExtension:{'.js':'.mjs'},logLevel:'silent',plugins:[{name:'synthetic-env',setup(b){b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'env',namespace:'synthetic'}));b.onLoad({filter:/.*/,namespace:'synthetic'},()=>({contents:'export const env=globalThis.originalEvalEnv',loader:'js'}));}}]});
 const helper=await import('../work/original-evaluation-tests/helper.mjs'),route=await import('../work/original-evaluation-tests/route.mjs');
-const production=await import('../work/original-evaluation-tests/production.mjs'),grammar=await import('../work/original-evaluation-tests/grammar.mjs');
-const {LESSON_MAP}=await import('../work/original-evaluation-tests/content.mjs'),{lessonForVersion}=await import('../work/original-evaluation-tests/v3.mjs');
+
+
 const {accuracyCases:cases,accuracyModels:models}=helper;
 const digest=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const fixtureText=readFileSync('tests/fixtures/english-accuracy.json','utf8'),recordedHash=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-09-30.json')).fixtureHash;
@@ -27,19 +27,12 @@ const config={origin:'https://wordgrain-oxford-study.hoihou-o.chatgpt.site',eval
 const safeCodes=Object.keys(helper.FEEDBACK_ISSUES),validationStages=helper.FEEDBACK_VALIDATION_STAGES;
 const context=ledger=>({previous,ledger,cases,config,expected,safeCodes,validationStages,parseFeedback:helper.parseOriginalAccuracyFeedback});
 const content=sample=>({meaningUsage:'appropriate',grammar:'natural',correctedSentence:sample.sentence,explanation:'합성 출력 검증 자료입니다.'});
-const google=sample=>Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(content(sample))}]}}]});
-const groq=sample=>Response.json({model:models.groq,choices:[{finish_reason:'stop',message:{content:JSON.stringify(content(sample))}}]});
 
-test('new comparison requests exactly match the activated production profile on all 60 inputs',async()=>{
- for(const sample of cases){
-  let sent;const fetcher=async(_url,init)=>{sent=JSON.parse(init.body);return google(sample);};
-  const request=helper.originalAccuracyRequest(sample),providers={google_api:'test-only',feedback_original_sentence_enabled:'true'};
-  if(sample.domain==='word')await production.generateSentenceFeedbackWithFallback(providers,request.input,fetcher);
-  else await grammar.generateGrammarFeedback(providers,lessonForVersion(LESSON_MAP.get(sample.lessonId),3),sample.sentence,fetcher);
-  assert.deepEqual(JSON.parse(sent.contents[0].parts[0].text),request.input);assert.ok(sent.systemInstruction.parts[0].text.startsWith(request.instruction));
-  assert.equal('expected' in request.input,false);assert.equal('references' in request.input,false);
-  if(sample.domain==='grammar')assert.deepEqual(Object.keys(request.input),['sentence','target','role']);
- }
+
+
+test('all60 frozen original-first request hashes remain reproducible offline without current production activation',async()=>{
+ const report=JSON.parse(readFileSync('data/evaluations/english-accuracy-2026-10-01-original-first.json','utf8'));
+ for(const sample of cases){const request=helper.originalAccuracyRequest(sample),hashes=await helper.originalAccuracyHashes(sample);assert.equal(request.input.sentence,sample.sentence);assert.equal(hashes.requestHash,report.requestHashes[sample.id]);assert.equal(hashes.promptHash,report.promptHashes[sample.domain]);assert.equal('expected'in request.input,false);}
 });
 test('comparison pins changed input as well as prompt and output policy',async()=>{
  const sample=cases[0],base=await helper.originalAccuracyHashes(sample),changed=await helper.originalAccuracyHashes({...sample,sentence:sample.sentence+' '});
@@ -50,40 +43,16 @@ test('comparison pins changed input as well as prompt and output policy',async()
  assert.equal(fixtureContentHash,'76e3a339ff9562633c47c3a7b143eac5224fd108f4ee227b3ddc334401f4518a');
  assert.throws(()=>originalComparisonFixture(lf+' ',recordedHash));assert.throws(()=>originalComparisonFixture(lf,'other'));
 });
-test('direct named comparison never falls back or retries a failed selected provider',async()=>{
- for(const domain of ['word','grammar'])for(const provider of ['google','groq']){
-  const sample=cases.find(c=>c.domain===domain);let calls=0;
-  await assert.rejects(helper.evaluateOriginalAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,sample,async(url)=>{calls++;assert.equal(url.includes('googleapis'),provider==='google');return new Response('PRIVATE_BODY',{status:503});}));
-  assert.equal(calls,1);
- }
+test('named legacy comparisons reject before network even with restored provider credentials',async()=>{
+ for(const provider of ['google','groq']){let calls=0;await assert.rejects(helper.evaluateOriginalAccuracyCase({google_api:'test-only',groq_api:'test-only'},provider,cases[0],async()=>{calls++;}),e=>e.code==='disabled');assert.equal(calls,0);}
 });
-test('named POST is disabled/authenticated/fixed-input and rejects mixing or extending legacy rounds',async()=>{
- const fetcher=globalThis.fetch,token='c'.repeat(64);let calls=0;globalThis.fetch=async()=>{calls++;throw Error('must not call');};
- const request=(body,secret=token)=>new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',headers:{origin:'https://study.example','content-type':'application/json','x-english-accuracy-token':secret},body:JSON.stringify(body)});
- const body={comparison:'original-first',caseId:cases[0].id,provider:'google'};
- try{
-  assert.equal((await route.POST(request(body))).status,404);
-  Object.assign(originalEvalEnv,{english_accuracy_token:token,english_accuracy_expires:new Date(Date.now()+3600_000).toISOString()});
-  assert.equal((await route.POST(request(body,'d'.repeat(64)))).status,401);
-  for(const invalid of [{...body,sentence:'PRIVATE'},{...body,round:2},{...body,comparison:'other'},{caseId:cases[0].id,provider:'google',round:3}])assert.equal((await route.POST(request(invalid))).status,400);
-  assert.equal((await route.POST(request({...body,caseId:'preflight-invalid-case'}))).status,400);assert.equal((await route.POST(request(body))).status,503);assert.equal(calls,0);
- }finally{globalThis.fetch=fetcher;for(const key of Object.keys(originalEvalEnv))delete originalEvalEnv[key];}
+test('named original-first POST cannot revive with a restored profile or token',async t=>{
+ let calls=0;t.mock.method(globalThis,'fetch',async()=>{calls++;throw Error('Forbidden');});
+ Object.assign(originalEvalEnv,{english_accuracy_token:'a'.repeat(64),english_accuracy_expires:new Date(Date.now()+60000).toISOString(),english_accuracy_profile:'original-first',google_api:'test-only',groq_api:'test-only'});
+ for(const provider of ['google','groq']){const response=await route.POST(new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',body:JSON.stringify({caseId:cases[0].id,provider,comparison:'original-first'})}));assert.equal(response.status,410);assert.deepEqual(await response.json(),{code:'legacy_evaluation_disabled'});}
+ assert.equal(calls,0);
 });
-test('actual named POST sends the active production profile to each direct provider and returns pinned hashes',async()=>{
- const fetcher=globalThis.fetch,token='e'.repeat(64);
- Object.assign(originalEvalEnv,{english_accuracy_token:token,english_accuracy_expires:new Date(Date.now()+3600_000).toISOString(),google_api:'test-only',groq_api:'test-only',feedback_original_sentence_enabled:'false'});
- try{
-  for(const domain of ['word','grammar'])for(const provider of ['google','groq']){
-   const sample=cases.find(c=>c.domain===domain);let sent,calls=0;
-   globalThis.fetch=async(_url,init)=>{calls++;sent=JSON.parse(init.body);return provider==='google'?google(sample):groq(sample);};
-   const response=await route.POST(new Request('https://study.example/api/english-accuracy-evaluation',{method:'POST',headers:{origin:'https://study.example','content-type':'application/json','x-english-accuracy-token':token},body:JSON.stringify({comparison:'original-first',caseId:sample.id,provider})})),value=await response.json();
-   assert.equal(response.status,200);assert.equal(calls,1);assert.equal(value.comparison,'original-first');assert.equal('round' in value,false);
-   assert.equal(value.promptHash,profiles[sample.id].promptHash);assert.equal(value.requestHash,profiles[sample.id].requestHash);
-   const request=helper.originalAccuracyRequest(sample);assert.deepEqual(JSON.parse(provider==='google'?sent.contents[0].parts[0].text:sent.messages[1].content),request.input);
-   assert.ok((provider==='google'?sent.systemInstruction.parts[0].text:sent.messages[0].content).startsWith(request.instruction));
-  }
- }finally{globalThis.fetch=fetcher;for(const key of Object.keys(originalEvalEnv))delete originalEvalEnv[key];}
-});
+
 test('preserved 240-call budget cannot be extended; separate context pins all prior attempts and models',()=>{
  const ledger=fresh();assert.doesNotThrow(()=>validateOriginalComparison(previous,ledger,expected));assert.throws(()=>evaluationBudget(previous,2));assert.throws(()=>evaluationBudget(previous,3));
  for(const records of [previous.slice(1),[...previous,{...previous[0],number:241}]])assert.throws(()=>validateOriginalComparison(records,ledger,expected));
@@ -178,7 +147,7 @@ test('complete comparison recovery reuses one blind bundle, no project files/HTT
  const ledger=fresh();ledger.attempts=cases.flatMap(sample=>['google','groq'].map(provider=>({round:3,comparison:'original-first',caseId:sample.id,provider,domain:sample.domain,fixtureHash,fixtureContentHash,...profiles[sample.id],expectedModel:models[provider],status:'failure'}))).map((r,i)=>({...r,number:241+i}));
  const parent=JSON.stringify({attempts:previous});writeFileSync(join(root,'ledger.json'),parent);writeFileSync(join(store,'ledger.json'),JSON.stringify(ledger));
  const guard=join(directory,'no-http.mjs');writeFileSync(guard,"globalThis.fetch=()=>{throw Error('HTTP is prohibited during recovery')};");
- const run=()=>execFileSync(process.execPath,['--import',pathToFileURL(guard).href,resolve('scripts/evaluate-original-feedback.mjs'),'--live','--approved-additional-calls','120'],{cwd:directory,encoding:'utf8',env:{...process.env,CI:''},input:JSON.stringify(config)+'\n'});
+ const run=()=>execFileSync(process.execPath,['--import',pathToFileURL(guard).href,resolve('scripts/evaluate-original-feedback.mjs'),'--offline','--approved-additional-calls','120'],{cwd:directory,encoding:'utf8',env:{...process.env,CI:''},input:JSON.stringify(config)+'\n'});
  try{
   assert.equal(JSON.parse(run()).totalAttempts,360);const bundle=readFileSync(join(store,'review-bundle.json'),'utf8');
   assert.equal(JSON.parse(run()).complete,true);assert.equal(readFileSync(join(store,'review-bundle.json'),'utf8'),bundle);assert.equal(readFileSync(join(root,'ledger.json'),'utf8'),parent);

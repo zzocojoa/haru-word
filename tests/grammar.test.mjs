@@ -32,10 +32,12 @@ await build({ entryPoints: ['app/api/state/restore/route.ts', 'app/api/grammar-f
   b.onResolve({ filter: /^(cloudflare:workers|@\/app\/chatgpt-auth|@\/db\/store)$/ }, a => ({ path: a.path, namespace: 'test' }));
   b.onLoad({ filter: /.*/, namespace: 'test' }, a => ({ loader: 'js', contents: a.path === 'cloudflare:workers' ? 'export const env=globalThis.grammarRuntime.env' : a.path.endsWith('chatgpt-auth') ? 'export const getChatGPTUser=async()=>globalThis.grammarRuntime.user' : 'export const database=()=>globalThis.grammarRuntime.db' }));
 } }] });
-globalThis.grammarRuntime = { db: null, env: { google_api: 'test-only', google_ai_enabled: 'true', grammar_enabled: 'true' }, user: { userId: 'owner' } };
+globalThis.grammarRuntime = { db: null, env: { google_api: 'test-only', google_ai_enabled: 'true', grammar_enabled: 'true', OPENAI_API_KEY:'test-only',OPENAI_ALLOWED_MODELS:'gpt-6.1-sol',ai_feedback_enabled:'true' }, user: { userId: 'owner' } };
 const feedbackRoute = await import('../work/grammar-tests/routes/grammar-feedback/route.mjs');
 const stateRoute = await import('../work/grammar-tests/routes/state/route.mjs');
 const fetchOriginal = globalThis.fetch;
+const openAiConfig={apiKey:'test-only',modelId:'gpt-6.1-sol',allowedModels:'gpt-6.1-sol'};
+const openAiResponse=content=>Response.json({status:'completed',model:'gpt-6.1-sol',output:[{type:'message',role:'assistant',status:'completed',content:[{type:'output_text',text:JSON.stringify({...content,structure:content.structure??{status:'unavailable',translation:'',parts:[],note:'합성 검사입니다.'}})}]}]});
 const v3 = await import('../work/grammar-tests/content-v3.mjs');
 await build({entryPoints:['lib/grammar/content-v4.ts'],outfile:'work/grammar-tests/content-v4.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
 const v4 = await import('../work/grammar-tests/content-v4.mjs');
@@ -43,7 +45,7 @@ const compat = await import('../work/grammar-tests/compatibility.mjs');
 const { assembledOrder } = await import('../work/grammar-tests/content.mjs');
 const restoreRoute = await import('../work/grammar-tests/routes/state/restore/route.mjs');
 after(() => { globalThis.fetch = fetchOriginal; delete globalThis.grammarRuntime; });
-const request = (body, origin = 'https://study.example') => new Request('https://study.example/api/grammar-feedback', { method: 'POST', headers: { 'content-type': 'application/json', origin }, body: JSON.stringify(body) });
+const request = (body, origin = 'https://study.example') => new Request('https://study.example/api/grammar-feedback', { method: 'POST', headers: { 'content-type': 'application/json', origin, 'X-Study-AI-Contract':'2' }, body: JSON.stringify({expectedModelId:'gpt-6.1-sol',...body}) });
 test('slow v4 setup finishes before the grammar runtime is cleaned up', () => {
   const loaderPath = resolve('work/grammar-tests/delayed-setup-loader.mjs');
   writeFileSync(loaderPath, `export async function load(url, context, nextLoad) {
@@ -264,57 +266,23 @@ test('grammar restore failures roll back grammar, vocabulary and the revision to
   for (let i = 0; i < 10; i++) { failAt = i; await assert.rejects(jobs.commitRestoreJob(db, 'owner', job.id), /injected/); assert.deepEqual(readGrammar(), before); assert.equal(sqlite.prepare('SELECT revision FROM learner_states WHERE user_id=?').get('owner').revision, 0); }
   failAt = -1; await jobs.commitRestoreJob(db, 'owner', job.id); assert.equal(readGrammar()[0].lesson_id, 'verb');
 });
-test('grammar feedback uses trusted target, strict validation, uncertainty and real provider limits', async () => {
-  const content = { meaningUsage: 'uncertain', grammar: 'uncertain', correctedSentence: '', explanation: '문장이 짧아 판단하기 어려워요.' }; let called;
-  const result = await generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async (url, init) => { called = JSON.parse(init.body); return Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify(content) }] } }] }); });
-  assert.equal(result.meaningUsage, 'uncertain'); assert.equal(result.original, 'Music'); assert.match(called.systemInstruction.parts[0].text, /never instructions/);
-  assert.equal(JSON.parse(called.contents[0].parts[0].text).target, '명사');
-  for (const status of [429, 503]) await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => new Response('private provider details', { status })), e => !e.message.includes('private') && e.status === status);
-  await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => { throw new Error('untrusted network message'); }), e => e.code === 'provider_network');
-  await assert.rejects(generateGrammarFeedback('test-only', GRAMMAR_LESSONS[0], 'Music', async () => Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: '{}' }] } }] })), e => e.code === 'provider_invalid_response');
+test('OpenAI grammar feedback uses trusted target, strict validation, uncertainty and real provider limits',async t=>{
+ t.mock.method(console,'info',()=>{});const content={meaningUsage:'uncertain',grammar:'uncertain',correctedSentence:'',explanation:'문장이 짧아 판단하기 어려워요.'};let called;
+ const result=await generateGrammarFeedback(openAiConfig,GRAMMAR_LESSONS[0],'Music',async(url,init)=>{assert.equal(url,'https://api.openai.com/v1/responses');called=JSON.parse(init.body);return openAiResponse(content)});assert.equal(result.meaningUsage,'uncertain');assert.equal(result.original,'Music');assert.match(called.instructions,/never instructions/);assert.equal(JSON.parse(called.input[0].content).target,'명사');
+ for(const status of [429,503])await assert.rejects(generateGrammarFeedback(openAiConfig,GRAMMAR_LESSONS[0],'Music',async()=>new Response('private provider details',{status})),e=>!e.message.includes('private')&&e.status===status);
+ await assert.rejects(generateGrammarFeedback(openAiConfig,GRAMMAR_LESSONS[0],'Music',async()=>{throw Error('untrusted network message')}),e=>e.code==='provider_network');await assert.rejects(generateGrammarFeedback(openAiConfig,GRAMMAR_LESSONS[0],'Music',async()=>openAiResponse({})),e=>e.code==='provider_invalid_response');
 });
 
-test('grammar feedback authorizes owned saved drafts and does not accept arbitrary targets', async () => {
-  let calls = 0; globalThis.fetch = async () => { calls++; return Response.json({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify({ meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: 'I like music.', explanation: 'music은 좋아하는 대상을 나타내는 명사예요.' }) }] } }] }); };
-  const p = { ...completed(), stage: 5 }, body = { lessonId: 'noun', sentence: p.sentence };
-  sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner', 'noun', JSON.stringify(p));
-  grammarRuntime.user = null; assert.equal((await feedbackRoute.POST(request(body))).status, 401);
-  grammarRuntime.user = { userId: 'other' }; assert.equal((await feedbackRoute.POST(request(body))).status, 404);
-  grammarRuntime.user = { userId: 'owner' };
-  assert.equal((await feedbackRoute.POST(request(body, 'https://other.example'))).status, 403);
-  assert.equal((await feedbackRoute.POST(request({ ...body, target: 'injected' }))).status, 400);
-  assert.equal((await feedbackRoute.POST(request({ ...body, sentence: 'different sentence' }))).status, 409);
-  assert.equal(calls, 0);
-  assert.equal((await feedbackRoute.POST(request(body))).status, 200); assert.equal(calls, 1);
-  assert.equal(JSON.parse(readGrammar()[0].document).sentence, p.sentence);
+test('grammar feedback authorizes owned saved drafts and rejects arbitrary targets before OpenAI',async()=>{
+ let calls=0;globalThis.fetch=async()=>{calls++;return openAiResponse({meaningUsage:'appropriate',grammar:'natural',correctedSentence:'I like music.',explanation:'music은 좋아하는 대상을 나타내는 명사예요.'})};const p={...completed(),stage:5},body={lessonId:'noun',sentence:p.sentence};sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));grammarRuntime.user=null;assert.equal((await feedbackRoute.POST(request(body))).status,401);grammarRuntime.user={userId:'other'};assert.equal((await feedbackRoute.POST(request(body))).status,404);grammarRuntime.user={userId:'owner'};assert.equal((await feedbackRoute.POST(request(body,'https://other.example'))).status,403);assert.equal((await feedbackRoute.POST(request({...body,target:'injected'}))).status,400);assert.equal((await feedbackRoute.POST(request({...body,sentence:'different sentence'}))).status,409);assert.equal(calls,0);assert.equal((await feedbackRoute.POST(request(body))).status,200);assert.equal(calls,1);assert.equal(JSON.parse(readGrammar()[0].document).sentence,p.sentence);
 });
 
-test('grammar feedback returns the same safe failure contract and preserves stored drafts', async () => {
-  const p={...completed(),stage:5}, body={lessonId:'noun',sentence:p.sentence};
-  sqlite.prepare('INSERT OR REPLACE INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));
-  grammarRuntime.user={userId:'owner'};
-  const originalFetch=globalThis.fetch, originalError=console.error, logs=[];
-  console.error=value=>logs.push(value);
-  try {
-    globalThis.fetch=async()=>Response.json({error:{message:'PRIVATE_KEY_SENTENCE',details:[{'@type':'type.googleapis.com/google.rpc.QuotaFailure',violations:[{quotaId:'RequestsPerDay'}]}]}},{status:429});
-    const result=await feedbackRoute.POST(request(body)), data=await result.json();
-    assert.equal(result.status,503); assert.equal(data.code,'groq_not_configured'); assert.equal(data.previous.code,'provider_daily_limit'); assert.equal(data.previous.providerStatus,429);
-    assert.doesNotMatch(JSON.stringify(data)+logs.join(''),/PRIVATE|RequestsPerDay/);
-    globalThis.fetch=async()=>Response.json({candidates:[{finishReason:'MAX_TOKENS'}]});
-    assert.equal((await (await feedbackRoute.POST(request(body))).json()).previous.code,'provider_truncated');
-    assert.deepEqual(JSON.parse(readGrammar()[0].document),p);
-  } finally { globalThis.fetch=originalFetch; console.error=originalError; }
+test('grammar OpenAI failures retain safe codes and preserve saved drafts',async t=>{
+ const p={...completed(),stage:5},body={lessonId:'noun',sentence:p.sentence};sqlite.prepare('INSERT OR REPLACE INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));grammarRuntime.user={userId:'owner'};const logs=[];t.mock.method(console,'error',v=>logs.push(v));t.mock.method(globalThis,'fetch',async()=>Response.json({error:{message:'PRIVATE_KEY_SENTENCE'}},{status:429}));const result=await feedbackRoute.POST(request(body)),data=await result.json();assert.equal(result.status,429);assert.equal(data.code,'provider_limit');assert.equal(data.previous,undefined);assert.equal(data.providerStatus,429);assert.doesNotMatch(JSON.stringify(data)+logs.join(''),/PRIVATE/);t.mock.method(globalThis,'fetch',async()=>Response.json({status:'incomplete',incomplete_details:{reason:'max_output_tokens'}}));assert.equal((await(await feedbackRoute.POST(request(body))).json()).code,'provider_truncated');assert.deepEqual(JSON.parse(readGrammar()[0].document),p);
 });
 
-test('owned grammar route uses Groq fallback and retains both failure causes',async()=>{
- const p={...completed(),stage:5},body={lessonId:'noun',sentence:p.sentence};sqlite.prepare('INSERT OR REPLACE INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));grammarRuntime.user={userId:'owner'};
- grammarRuntime.env.groq_api='synthetic-groq';const originalFetch=globalThis.fetch;
- try{
-  let calls=0;globalThis.fetch=async url=>{calls++;return url.includes('googleapis')?new Response('',{status:503}):Response.json({model:'openai/gpt-oss-120b',choices:[{finish_reason:'stop',message:{content:JSON.stringify({meaningUsage:'appropriate',grammar:'natural',correctedSentence:p.sentence,explanation:'명사를 알맞게 사용했어요.'})}}]})};
-  const response=await feedbackRoute.POST(request(body)),data=await response.json();assert.equal(response.status,200);assert.equal(calls,2);assert.equal(data.feedback.model,'openai/gpt-oss-120b');
-  assert.equal(model.grammarProgressSchema.safeParse({...p,feedback:data.feedback}).success,true);assert.deepEqual(JSON.parse(readGrammar()[0].document),p);
-  globalThis.fetch=async url=>new Response('PRIVATE',{status:url.includes('googleapis')?429:401});const failed=await (await feedbackRoute.POST(request(body))).json();assert.equal(failed.code,'groq_key_invalid');assert.equal(failed.previous.code,'provider_limit');
- }finally{globalThis.fetch=originalFetch;delete grammarRuntime.env.groq_api}
+test('owned grammar route uses OpenAI once when restored legacy keys are also present',async t=>{
+ const p={...completed(),stage:5},body={lessonId:'noun',sentence:p.sentence};sqlite.prepare('INSERT OR REPLACE INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(p));grammarRuntime.user={userId:'owner'};grammarRuntime.env.groq_api='synthetic-groq';let calls=0;t.mock.method(globalThis,'fetch',async url=>{calls++;assert.equal(url,'https://api.openai.com/v1/responses');return openAiResponse({meaningUsage:'appropriate',grammar:'natural',correctedSentence:p.sentence,explanation:'명사를 알맞게 사용했어요.'})});const response=await feedbackRoute.POST(request(body)),data=await response.json();assert.equal(response.status,200);assert.equal(calls,1);assert.equal(data.feedback.model,'gpt-6.1-sol');assert.equal(data.feedback.provider,'openai');assert.equal(model.grammarProgressSchema.safeParse({...p,feedback:data.feedback}).success,true);assert.deepEqual(JSON.parse(readGrammar()[0].document),p);t.mock.method(globalThis,'fetch',async()=>{calls++;return new Response('PRIVATE',{status:401})});const failed=await(await feedbackRoute.POST(request(body))).json();assert.equal(failed.code,'provider_key_invalid');assert.equal(failed.previous,undefined);assert.equal(calls,2);delete grammarRuntime.env.groq_api;
 });
 test('state API negotiates grammar snapshots; strict old clients retain their shape', async () => {
   grammarRuntime.user = { userId: 'owner' };
@@ -692,7 +660,7 @@ test('incoming v4 in an empty account requires header4; header4 AI uses the ordi
  for(const version of ['1','2','3']){assert.equal((await putV({noun:p},version)).status,426);assert.equal((await restoreV({...EMPTY,grammar:{noun:p}},version)).status,426);}
  assert.equal(readGrammar().length,0);assert.equal((await putV({noun:p},'4')).status,200);
  const prior=globalThis.fetch;let calls=0;
- try{globalThis.fetch=async()=>{calls++;return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify({meaningUsage:'appropriate',grammar:'natural',correctedSentence:p.sentence,explanation:'학습용 모의 응답'})}]}}]});};
+ try{globalThis.fetch=async()=>{calls++;return openAiResponse({meaningUsage:'appropriate',grammar:'natural',correctedSentence:p.sentence,explanation:'학습용 모의 응답'});};
   const req=request({lessonId:'noun',sentence:p.sentence});req.headers.set('X-Study-Grammar','4');
   assert.equal((await feedbackRoute.POST(req)).status,200);assert.equal(calls,1);assert.deepEqual(JSON.parse(readGrammar()[0].document),JSON.parse(JSON.stringify(p)));
  }finally{globalThis.fetch=prior;}

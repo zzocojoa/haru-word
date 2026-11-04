@@ -94,9 +94,9 @@ test('archived diagnostics do not enable evaluation requests or new experimental
   }, body: JSON.stringify({ caseId: 'word-32', provider: 'google', comparison, ...(variant ? { variant } : {}) }) });
   try {
     globalThis.fetch = async () => { calls++; throw Error('Provider execution is forbidden in compatibility tests'); };
-    assert.equal((await POST(request('coherent-feedback-v1'))).status, 404);
+    assert.equal((await POST(request('coherent-feedback-v1'))).status, 410);
     Object.assign(globalThis.diagnosticCompatEnv, { english_accuracy_token: token, english_accuracy_expires: new Date(Date.now() - 1000).toISOString(), google_api: 'test-only' });
-    assert.equal((await POST(request('coherent-feedback-v1'))).status, 404);
+    assert.equal((await POST(request('coherent-feedback-v1'))).status, 410);
     globalThis.diagnosticCompatEnv.english_accuracy_expires = new Date(Date.now() + 60000).toISOString();
     for (const [comparison, variant] of [
       ['root-cause-v1', 'control'], ['coherent-feedback-v1'], ['evidence-v1'], ['counted-evidence-v1'],
@@ -105,8 +105,8 @@ test('archived diagnostics do not enable evaluation requests or new experimental
     ]) {
       globalThis.diagnosticCompatEnv.english_accuracy_profile = comparison;
       const response = await POST(request(comparison, variant));
-      assert.equal(response.status, 400);
-      assert.deepEqual(await response.json(), { code: 'evaluation_invalid_request' });
+      assert.equal(response.status, 410);
+      assert.deepEqual(await response.json(), { code: 'legacy_evaluation_disabled' });
     }
     assert.equal(calls, 0);
   } finally {
