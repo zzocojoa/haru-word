@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "planId": "openai-api-migration-2026-11-03",
+  "createdDateKst": "2026-11-03",
+  "scope": "implementation-authorized",
+  "execution": {
+    "approvedDateKst": "2026-11-03",
+    "recordFile": "docs/OPENAI_API_MIGRATION_IMPLEMENTATION.md",
+    "checkout": "work/openai-api-migration-20261103",
+    "branch": "codex/openai-api-migration-20261103",
+    "baseCommit": "e746e97612c060808ca689f54f243995a5121c6b",
+    "baseTree": "e0165259f1ab5bfa014bad9e45fa6295997b5d1f",
+    "productionCodeMatchesBase": true,
+    "credentialChoice": "new-key; local destination confirmed; saved; value never recorded",
+    "modelListVerified": true,
+    "generationVerified": true,
+    "verifiedModels": [
+      "gpt-6.1-sol",
+      "gpt-6.1-terra",
+      "gpt-6-astra"
+    ],
+    "liveSmokeResult": {
+      "callsConsumed": 3,
+      "passed": 3,
+      "conservativeMaxUsdBeforeTax": 0.37022975,
+      "durationsMs": [
+        5294,
+        3241,
+        4379
+      ],
+      "ledger": "work/openai-api-migration-20261103/outputs/openai-migration/live-connection-ledger.json",
+      "qualityCertified": false
+    },
+    "preparedRelease": {
+      "commit": "8f312b3a4217d0118d3971578a05dd63db7f5624",
+      "tree": "059642b8c0acd1e721634d25451291f3eea2f955",
+      "savedSiteVersion": 142,
+      "deployed": true,
+      "productionSecretDestinationConsent": "approved; user registered Secret; verified at revision73",
+      "registrationBlocker": null,
+      "environmentRevision": 75,
+      "stateFile": "outputs/openai-migration-release/release-state.json",
+      "publicationRecord": "outputs/openai-migration-release/publication.json",
+      "unitPassed": 683,
+      "browserPassed": 40
+    },
+    "liveSmokeApproval": {
+      "maxCalls": 3,
+      "maxCallsPerModel": 1,
+      "maxOutputTokensPerCall": 4096,
+      "maxUsdBeforeTax": 0.5
+    },
+    "qualityPreparation": {
+      "status": "evaluation-attempt-complete;candidate-held;full-scope-unmeasured",
+      "planHash": "f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea",
+      "record": ".taskmaster/evaluation/judgment-v1/README.md",
+      "freeze": ".taskmaster/evaluation/judgment-v1/freeze.json",
+      "cases": 90,
+      "protocolTestsPassed": 10,
+      "actualEvaluationNetworkCalls": 592,
+      "proposedMaximumCalls": 1080,
+      "proposedMaximumUsdBeforeTax": 165,
+      "paidBudgetApproved": false,
+      "approvalRecord": "outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/approval.json",
+      "collectionStatus": "outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/collection-status.json",
+      "reporterPreparation": {
+        "core": ".taskmaster/scripts/judgment-report-core.mjs",
+        "cli": ".taskmaster/scripts/report-openai-judgment.mjs",
+        "documentation": ".taskmaster/evaluation/judgment-v1/REPORTING.md",
+        "testsPassed": 13,
+        "languageQualityProved": false
+      },
+      "currentApprovedTotalUsdBeforeTax": 5,
+      "original165ApprovalRevoked": true,
+      "budgetRecord": "outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/budget-5usd.json",
+      "currentBudgetApproved": true,
+      "originalPlanExecutionAuthorized": false,
+      "knownTokensStandardPriceUsd": 2.315138,
+      "accountedUpperUsd": 4.879124,
+      "remainingConservativeUsd": 0.120876,
+      "recordedEvaluationNetworkCalls": 592,
+      "requestsWithUnknownNetworkOutcome": 1,
+      "baselineCollectionComplete": false,
+      "preparationGate": {
+        "complete": true,
+        "qualityGatePassed": false,
+        "currentApprovedTotalUsdBeforeTax": 5,
+        "oldPaidRunnerBlocked": true,
+        "accountingTestsPassed": 7,
+        "profileParityTestsPassed": 2,
+        "budgetModule": ".taskmaster/scripts/judgment-budget.mjs",
+        "newPaidExecutionEnabled": false
+      },
+      "capacityRecheckedAt": "2026-11-03T12:05:24.298Z",
+      "boundedProtocolTestsPassed": 37,
+      "boundedProtocolPrepared": true,
+      "boundedExecutionEnabled": false,
+      "capacityRecord": "outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/candidate-capacity-5usd.json",
+      "newPaidCallsAfterReduction": 251,
+      "invoiceVerified": false,
+      "sourceFrozen": true,
+      "sourceFreezeFile": "outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/bounded-freeze.json",
+      "boundedApprovalFile": "outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/approval-5usd.json",
+      "boundedReport": "outputs/judgment-evaluation/f64b5d05762dbf00cc722286af3dfd377b73cea403cf41e3fc7b360ccf0f93ea/bounded-quality-report.json",
+      "blindAuthorReviews": 150,
+      "independentHumanExpert": false,
+      "qualityGatePassed": false,
+      "candidateCollectionComplete": false
+    },
+    "judgmentCandidate": {
+      "checkout": "work/judgment-improvements-20261103",
+      "branch": "codex/judgment-improvements-20261103",
+      "baseCommit": "8f312b3a4217d0118d3971578a05dd63db7f5624",
+      "status": "implemented-and-locally-verified;release-held",
+      "unitPassed": 742,
+      "typecheckExit": 0,
+      "lintExit": 0,
+      "preexistingLintWarnings": 15,
+      "build": "complete",
+      "newPaidCalls": 251,
+      "commit": "f273886f43324d4a668ecc6550a97bb8ebcfda56",
+      "tree": "b4a5ef1d359ababf4797bea1491f5a92d8003518",
+      "buildExit": 0,
+      "record": "outputs/openai-migration-release/judgment-release-decision.json",
+      "correctionBrowserHarnessPassed": 26,
+      "previousWorkingTreeVerification": {
+        "record": "outputs/openai-migration-release/task14-working-tree-verification.json",
+        "unitPassed": 720,
+        "typecheckExit": 0,
+        "lintExit": 0,
+        "buildExit": 0,
+        "complete": false,
+        "committed": false
+      },
+      "draftBrowserHarnessPassed": 32,
+      "builtWorkerMigrationFlowsPassed": 22,
+      "builtWorkerBackupFlowsPassed": 18,
+      "builtReceiptApiChecks": 10,
+      "sourceClean": true,
+      "relatedFinalBrowserScriptsPassed": 42,
+      "task15ProgressRecord": "outputs/openai-migration-release/task15-capacity-verification.json",
+      "sourceFrozen": true,
+      "registeredForPaidEvaluation": true,
+      "published": false,
+      "judgmentDefaultEnabled": false,
+      "productionJudgmentEnabled": false,
+      "qualityGatePassed": false,
+      "finalBrowserRecord": "outputs/openai-migration-release/task15-browser-final.json",
+      "resultDocument": "docs/OPENAI_JUDGMENT_EVALUATION_RESULT.md",
+      "task14VerificationRecord": "outputs/openai-migration-release/request-recovery-verification.json",
+      "task14HarnessSourceCommit": "9fe09fd2c8b474c7809a65c4df1be158e63a6eb0"
+    },
+    "implementationWorkflowComplete": true,
+    "completedAt": "2026-11-03T13:34:44.942Z",
+    "closedTaskCount": 15,
+    "closedSubtaskCount": 35,
+    "qualityImprovementProven": false,
+    "completionAudit": "outputs/openai-migration-release/completion-audit.json",
+    "finalResultDocument": "docs/OPENAI_JUDGMENT_EVALUATION_RESULT.md"
+  },
+  "projectRoot": "C:/Users/user/Documents/ChatGPT/하루단어",
+  "tag": "master",
+  "taskMasterVersion": "0.43.1",
+  "planFile": "docs/OPENAI_API_MIGRATION_PLAN.md",
+  "baseline": {
+    "siteProjectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+    "siteVersion": 141,
+    "siteSource": "3fe640c50cabd12519fc7490361e84b1ad72aed8",
+    "siteTree": "138158efe7e6f0aed9bb18cfca0172a9e27efc5e",
+    "localHead": "429d9665a3b1c65bf3474a2be5359d0c52425bd6",
+    "localWorktree": "dirty; do not implement or publish unchanged",
+    "auditReport": "outputs/sentence-feedback-audit-2026-11-03/REPORT.md",
+    "protectedHashes": {
+      "AGENTS.md": "e1cea620ed739116378417e4a59206407eb04f93c21306ac0ddf8e7449f20392",
+      "README.md": "14f08782f0c4b9c7ed4cd738f2204e0e8777b4227c8eb09c45af1a432aac79ac",
+      "package.json": "63c7363f8b7484f7c180efcd06641efc71f96b90ba15305fd3f47a514b6ef875",
+      "package-lock.json": "28601a9e49aa363f3ec548fd213de9ed97be7495d89879351e7d174e64788013",
+      ".gitignore": "572764cb046275fa2a92f11978cba8bbe3286d668c1d70c4d57ab8e3d9a1eea5",
+      ".openai/hosting.json": "2caabb7b0c8835005b733f81a4ce9bb78049e8b454a0b2fbe3400c314ed091ba"
+    }
+  },
+  "scopeIn": [
+    "OpenAI 전환 구현 계획",
+    "학습 설정 모델 선택 구현 계획",
+    "Google/Groq 호출 중지 계획",
+    "기록·전체/분할 백업·구형 클라이언트 호환성 계획",
+    "전환 후 판단 개선 로드맵"
+  ],
+  "scopeOutNow": [
+    "승인한 3회 연결 검증을 초과한 실제 AI 평가 호출",
+    "승인 목적지 이외의 비밀 값 저장",
+    "과거 학습 기록 재채점/변환"
+  ],
+  "modelCandidates": [
+    {
+      "id": "gpt-6.1-sol",
+      "defaultCandidate": true,
+      "inputUsdPerMillion": 2,
+      "outputUsdPerMillion": 10,
+      "enabled": false,
+      "needsAccountVerification": false,
+      "reasoningEffort": "low",
+      "pricingBasis": "Standard short context; verified 2026-11-03, excludes discounts/taxes/other tiers"
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "defaultCandidate": false,
+      "inputUsdPerMillion": 1,
+      "outputUsdPerMillion": 5,
+      "enabled": false,
+      "needsAccountVerification": false,
+      "reasoningEffort": "low",
+      "pricingBasis": "Standard short context; verified 2026-11-03, excludes discounts/taxes/other tiers"
+    },
+    {
+      "id": "gpt-6-astra",
+      "defaultCandidate": false,
+      "inputUsdPerMillion": 10,
+      "outputUsdPerMillion": 50,
+      "enabled": false,
+      "needsAccountVerification": false,
+      "reasoningEffort": "low",
+      "pricingBasis": "Standard short context; verified 2026-11-03, excludes discounts/taxes/other tiers"
+    }
+  ],
+  "decisions": {
+    "clientCapability": "X-Study-AI-Contract: 2",
+    "modelSelectionField": "settings.aiModelId",
+    "requestExpectationField": "expectedModelId",
+    "apiEndpoint": "https://api.openai.com/v1/responses",
+    "store": false,
+    "tools": false,
+    "automaticRetries": 0,
+    "automaticFallback": false,
+    "transport": "raw fetch; no new SDK dependency by default",
+    "upstreamTimeoutMs": 28000,
+    "clientTimeoutMs": 35000,
+    "saveTimeoutMs": 25000,
+    "maxOutputTokens": 4096,
+    "maxResponseBytes": 262144,
+    "maxFeedbackTextCharacters": 30000,
+    "phase1PromptPolicy": "freeze current semantics and required structure wire contract; change after baseline",
+    "liveSmokeProposal": {
+      "maxTotalCalls": 3,
+      "maxCallsPerEnabledModel": 1,
+      "requiresExplicitApproval": true,
+      "syntheticOnly": true
+    },
+    "productionDbTableMigration": "not expected; replan before adding"
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "name": "구현 자격 증명 선택",
+      "tasks": [
+        1,
+        2
+      ],
+      "criteria": "올바른 base와 사용자의 키 재사용/신규 생성·저장 목적지 선택 완료 후에만 API 코드 작업",
+      "result": {
+        "status": "passed",
+        "detail": "관련 구현·검사와 근거 기록 확인"
+      }
+    },
+    {
+      "id": "G1",
+      "name": "로컬 전환 검증",
+      "tasks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "criteria": "새/구형·혼합 기록과 전체/분할 복원, 409/426, 모델 선택, legacy 호출 0, 단위/타입/린트/빌드/브라우저 통과",
+      "result": {
+        "status": "passed",
+        "detail": "관련 구현·검사와 근거 기록 확인"
+      }
+    },
+    {
+      "id": "G2",
+      "name": "OpenAI-only 활성화",
+      "tasks": [
+        11
+      ],
+      "criteria": "G1 및 활성화할 모델 최소 1개에 대해 승인된 실연결 확인, 기존 Site/데이터/환경 대조, AI-off→on 단계와 호환 rollback 증거",
+      "result": {
+        "status": "passed",
+        "detail": "운영 v142 · OpenAI-only · 환경 revision75 확인"
+      }
+    },
+    {
+      "id": "G3",
+      "name": "판단 개선 착수",
+      "tasks": [
+        12
+      ],
+      "criteria": "G2 이후 평가 기준·fixture/holdout·모델/버전/호출 예산과 승인 동결",
+      "result": {
+        "status": "passed",
+        "detail": "고정90사례·3모델·버전과 기존 사용분 포함 총 US$5 승인"
+      }
+    },
+    {
+      "id": "G4",
+      "name": "판단 개선 활성화",
+      "tasks": [
+        13,
+        14,
+        15
+      ],
+      "criteria": "고정 품질 gate와 새 자료·최종 회귀 통과 후에만 후보 활성화; 미달/미실측은 보류",
+      "result": {
+        "status": "held",
+        "detail": "고정 품질 기준 미충족·후보 핵심 오류1건. 판단 후보 비활성·미게시, 운영 v142 유지."
+      }
+    }
+  ],
+  "requirements": [
+    {
+      "id": "R01",
+      "text": "새 단어·문법 AI 요청은 OpenAI Responses만 사용",
+      "tasks": [
+        5,
+        6,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "R02",
+      "text": "Google·Groq 학습/평가/CLI 실행 차단과 호출 0 검증",
+      "tasks": [
+        1,
+        6,
+        9,
+        11
+      ]
+    },
+    {
+      "id": "R03",
+      "text": "학습 설정 모델 선택·계정별 저장·다음 요청 적용",
+      "tasks": [
+        3,
+        7,
+        10
+      ]
+    },
+    {
+      "id": "R04",
+      "text": "Google/Groq/구형/신형/혼합 기록과 출처 보존",
+      "tasks": [
+        4,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "R05",
+      "text": "서버 허용 목록·expectedModelId·요청 모델 고정·자동 대체 금지",
+      "tasks": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "id": "R06",
+      "text": "초안·성적·첫 답·한국 날짜·revision 충돌 보호 유지",
+      "tasks": [
+        4,
+        7,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "R07",
+      "text": "전체·분할 백업/복원 한도·원자성·응답 유실 보호",
+      "tasks": [
+        4,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "R08",
+      "text": "새 설정/모델을 모르는 구형 클라이언트 426 보호",
+      "tasks": [
+        4,
+        6,
+        7,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "R09",
+      "text": "출처·모델/프롬프트/검증 버전·안전 오류·관측",
+      "tasks": [
+        4,
+        5,
+        8,
+        9
+      ]
+    },
+    {
+      "id": "R10",
+      "text": "기존 Sites ID/DB/R2/공개 범위와 npm/lockfile 유지",
+      "tasks": [
+        1,
+        6,
+        9,
+        11
+      ]
+    },
+    {
+      "id": "R11",
+      "text": "명시적 요청만 실행·재시도/기록 읽기/모델 변경 자동 호출 금지",
+      "tasks": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "id": "R12",
+      "text": "서버 전용 키·사용자 자격 증명 선택·비용/개인정보 안내",
+      "tasks": [
+        2,
+        3,
+        5,
+        7,
+        8,
+        9,
+        11
+      ]
+    },
+    {
+      "id": "R13",
+      "text": "전환 완료 후 기준선·고정 평가·버전별 판단 개선",
+      "tasks": [
+        12,
+        13,
+        15
+      ]
+    },
+    {
+      "id": "R14",
+      "text": "감사에서 확인한 구조 의존성·재점검·유실·덮어쓰기·export의 후속 처리",
+      "tasks": [
+        12,
+        13,
+        14,
+        15
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Responses 전환 안내",
+      "url": "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S02",
+      "title": "Structured Outputs",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S03",
+      "title": "API 데이터 처리·보관",
+      "url": "https://developers.openai.com/api/docs/guides/your-data",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S04",
+      "title": "API 오류 코드",
+      "url": "https://developers.openai.com/api/docs/guides/error-codes",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S05",
+      "title": "Rate limits",
+      "url": "https://developers.openai.com/api/docs/guides/rate-limits",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S06",
+      "title": "GPT-6.1 Sol",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S07",
+      "title": "GPT-6.1 Terra",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S08",
+      "title": "GPT-6 Astra",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S09",
+      "title": "API 가격",
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S10",
+      "title": "GPT-6 계열 안내",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S11",
+      "title": "평가 모범 사례",
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S12",
+      "title": "Task Master 작업 구조",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/docs/task-structure.md",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S13",
+      "title": "Task Master 명령",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/docs/command-reference.md",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S14",
+      "title": "설치된 Sites 스킬",
+      "url": "C:/Users/user/.codex/plugins/cache/openai-curated-remote/sites/1.1.2/skills/sites/SKILL.md",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S15",
+      "title": "Responses 요청·재시도 예시",
+      "url": "https://developers.openai.com/cookbook/articles/per_run_spending_controller_responses_api",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S16",
+      "title": "GPT-6 migration quickstart",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra.md#migration-quickstart",
+      "checkedDateKst": "2026-11-03"
+    },
+    {
+      "id": "S17",
+      "title": "설치된 OpenAI API Key 스킬",
+      "url": "C:/Users/user/.codex/plugins/cache/openai-curated-remote/openai-developers/1.3.13/skills/openai-platform-api-key/SKILL.md",
+      "checkedDateKst": "2026-11-03"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "전환 기준 소스·호출 경계·불변 조건 고정",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [],
+      "subtaskCount": 2
+    },
+    {
+      "id": 2,
+      "title": "OpenAI 자격 증명·계정 이용 조건 확인",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        1
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 3,
+      "title": "허용 모델 카탈로그·선택 정책 확정",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        2
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 4,
+      "title": "설정·AI 결과·백업의 버전 호환 계약 구현",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        1,
+        3
+      ],
+      "subtaskCount": 4
+    },
+    {
+      "id": 5,
+      "title": "Workers용 OpenAI Responses 전송 어댑터 구현",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        2,
+        3,
+        4
+      ],
+      "subtaskCount": 3
+    },
+    {
+      "id": 6,
+      "title": "단어·문법 요청 전환과 Google·Groq 실행 경로 차단",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        4,
+        5
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 7,
+      "title": "학습 설정의 계정별 AI 모델 선택 UI 구현",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        3,
+        4,
+        6
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 8,
+      "title": "OpenAI 오류·개인정보·출처·관측 안내 정합화",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        5,
+        6,
+        7
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 9,
+      "title": "전환·호환성·차단 회귀 검사와 제한된 실호출 게이트",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "subtaskCount": 3
+    },
+    {
+      "id": 10,
+      "title": "로컬 Chromium·WebKit 모델 선택 전체 흐름 QA",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        9
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 11,
+      "title": "기존 Sites 전환 게시·관측·호환 롤백 준비",
+      "phase": 1,
+      "status": "pending",
+      "dependencies": [
+        10
+      ],
+      "subtaskCount": 3
+    },
+    {
+      "id": 12,
+      "title": "전환 후 영어 판단 평가 기준선·호출 예산 확정",
+      "phase": 2,
+      "status": "deferred",
+      "dependencies": [
+        11
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 13,
+      "title": "판단 전용 응답 계약과 숨긴 구조 의존성 분리",
+      "phase": 2,
+      "status": "deferred",
+      "dependencies": [
+        12
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 14,
+      "title": "명시적 재점검·초안·교정 적용·보류 내보내기 개선",
+      "phase": 2,
+      "status": "deferred",
+      "dependencies": [
+        12,
+        13
+      ],
+      "subtaskCount": 2
+    },
+    {
+      "id": 15,
+      "title": "개선 후 독립 평가·회귀·출시 판정",
+      "phase": 2,
+      "status": "deferred",
+      "dependencies": [
+        13,
+        14
+      ],
+      "subtaskCount": 2
+    }
+  ],
+  "tasksStatusMeaning": "Initial planning snapshot; .taskmaster/tasks/tasks.json is authoritative for current statuses."
+}

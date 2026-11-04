@@ -1,0 +1,51 @@
+{
+  "version": "judgment-v5-rubric-candidate-1",
+  "status": "public-development-calibration-only",
+  "candidateCommit": "36dc66fdca52d70494cb7993a1e3ad03dbc0f8d5",
+  "candidateTree": "dc5b57b8be2d39f8144187b3a804b60a6d5005b6",
+  "decisionTable": "work/judgment-criteria-alignment-20261104/JUDGMENT_DECISION_TABLE.md",
+  "dimensions": ["meaning", "grammar", "correction", "explanation", "abstention"],
+  "criticalFields": ["approveBadGrammar", "reverseMeaning", "swapRoles", "inventedIntent"],
+  "gradeValues": ["pass", "fail", "uncertain"],
+  "dimensionDefinitions": {
+    "meaning": "Original target use: lexical sense/POS for word study; correct feature use including relevant case/form/agreement for grammar lessons. A label-only mismatch is reported here, not as an English correction failure. A default incomplete message withholds both judgments; licensed replies/commands/reactions are different.",
+    "grammar": "Whether the original grammar assessment is justified. Do not infer a grammar error from a target-label mismatch, transport failure or unknown temporal equivalence. For a visibly malformed modal with unknown intended time, needs_work states the known form error and uncertain can responsibly withhold a safe correction; a case may expressly allow both original-grammar labels. The v5 product instruction still prefers uncertain plus no correction and a time question. Label-policy compliance is an auxiliary diagnostic.",
+    "correction": "Natural originals remain unchanged, including missing/wrong targets. A correction must be minimal and preserve meaning. Several equivalent corrections can pass. A grammatical modal-perfect alternative with unestablished intended time is uncertain for equivalence, not automatically ungrammatical or critically invented. Responsible withholding passes when correction cannot be chosen safely.",
+    "explanation": "Assess only learner-visible factual claims, reviewed application rules and actual comparisons. Hidden model reasons are diagnostic only. A false visible grammar rule fails this dimension even when the correction is right. App-authored explanations do not certify hidden model-text accuracy.",
+    "abstention": "Withhold unsafe interpretation/correction and ask for the specific missing message, time, target meaning or relationship. Do not withhold ordinary complete pronouns or valid commands merely because a named real-world referent is absent. Known target-form error can coexist with withheld correction."
+  },
+  "criticalPolicy": {
+    "approveBadGrammar": "Learner-visible approval of known incorrect original grammar; a target-only disagreement or unavailable response is not this error.",
+    "reverseMeaning": "Evidence of an actual meaning reversal, not merely an unconfirmed alternative interpretation.",
+    "swapRoles": "Evidence that a visible correction exchanges participants' semantic roles.",
+    "inventedIntent": "Evidence of an invented agent, event or speech act in the visible product output. A model's raw invention that the product independently withholds is a separate model diagnostic."
+  },
+  "auxiliaryDiagnostics": ["targetLabelAgreement", "grammarLabelPolicyAgreement", "taskSelfCheck", "rawModelReasons", "rawModelAbstention", "applicationOverride", "generationFailureStage"],
+  "threshold": {
+    "passFractionPerCandidateModel": 0.9,
+    "criticalErrors": 0,
+    "pairedRegressionAllowed": 0,
+    "missingMeasurementPasses": false,
+    "requiredPrimaryAttemptsPerVersionModel": 30,
+    "everyValidGenerationMustBeGraded": true,
+    "failedOrUnavailableGenerationPasses": false,
+    "completenessPolicy": "Every baseline/candidate model has exactly30 terminal primary attempts; every valid output is cross-graded and author-reviewed. Unavailable or uncertain outcomes remain nonpasses in fixed denominators."
+  },
+  "preservation": {
+    "closedEvaluationsRescored": false,
+    "oldGoldLabelsChanged": false,
+    "oldProtocolsChanged": false,
+    "paidRequests": 0,
+    "freshHoldoutCreated": false,
+    "newEvaluationAuthorized": false,
+    "independentHumanExpert": false,
+    "modelQualityMeasured": false
+  },
+  "freshEvaluationPrerequisites": [
+    "Freeze the selected product source, this reviewed rubric version, exact requests, collection order and financial protocol before live collection.",
+    "Author genuinely fresh30 cases after the source/policy freeze; public105 development cases and these calibration exercises are not holdout data.",
+    "Declare per-case acceptable labels and correction conditions before results. Explain genuine alternatives; do not relax expectations after seeing outputs.",
+    "Obtain a new bounded financial authorization for this candidate. Closed aef7d0a authorization and balances do not transfer.",
+    "Keep raw grades immutable; partially blind author review is not independent expert certification."
+  ]
+}

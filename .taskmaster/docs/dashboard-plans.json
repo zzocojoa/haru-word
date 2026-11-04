@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "defaultPlanId": "judgment-remediation-2026-11-03",
+  "plans": [
+    {
+      "id": "openai-api-migration-2026-11-03",
+      "label": "이전 플랜 · OpenAI 전환",
+      "kind": "previous",
+      "manifest": ".taskmaster/docs/openai-migration-manifest.json",
+      "context": "15개·35개 구현·평가·보류 판정 완료. OpenAI 전환은 운영 중이며 판단 개선 후보는 품질 미달로 미배포입니다.",
+      "budget": "과거 평가 종료 · 보수적 누적 US$4.879124 / US$5"
+    },
+    {
+      "id": "judgment-remediation-2026-11-03",
+      "label": "새 플랜 · 판단 품질 수정",
+      "kind": "current",
+      "manifest": ".taskmaster/docs/judgment-remediation-manifest.json",
+      "context": "수정 계획 작성 완료 · 구현 미착수. 새 유료 평가와 기존 사이트 배포를 포함하며 품질 미달·미측정이면 배포를 보류합니다.",
+      "budget": "새 평가 추가 US$5 승인 · 현재 사용 US$0 · 과거 평가 예산과 별도"
+    }
+  ]
+}
