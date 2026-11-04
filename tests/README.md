@@ -1,5 +1,7 @@
 # 학습 앱 검증
 
+- OpenAI 리팩토링: `openai-request-equivalence.test.mjs`는 변경 전 `7d7c368`에서 고정한 합성 120조합의 요청 본문/프롬프트와 결과 지문을 대조한다. 기대값을 새 구현에 맞춰 재생성하지 않는다. 책임 분리·전체 흐름·최종 검사와 한계는 [리팩토링 기록](../docs/OPENAI_FEEDBACK_REFACTOR.md)을 따른다.
+
 - 판단 v3: `remediation-judgment.test.mjs`, `judgment-api.test.mjs`, `ai-contract.test.mjs`, `recoverable-feedback.test.mjs`는 독립 판정·원문 보존·문맥 질문·가시 설명·v1~v4 입력과 신구 저장/복원을 검사한다. `openai-migration-qa.cjs`, `local-draft-qa.cjs`, `feedback-correction-qa.cjs`는 루프백 가상 계정/합성 UI에서 명시 문맥, 비교/되돌리기, 응답 유실·강제 종료·빈 값·계정 전환을 검사한다. 기존 평가 원장은 수정하지 않으며 실제 영어 품질은 별도 동결 평가로 확인한다.
 
 - `ux-text.test.mjs`: UI 표시와 저장 계약의 분리를 검사한다. 두 AI 전송 고지·이미지 위치의 조회 실패/저장 결과 미확인, AI 오류 47종의 안전한 진단·학습자 안내, 상세/단독 출처의 참고 고지, 양방향 회상 정답 은닉과 도움 사용, 긴 원문 보존, CSV 24개 열과 기존 결과 값을 확인한다.
