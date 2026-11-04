@@ -17,6 +17,12 @@ export type FeedbackInput = { sentence: string; [key: string]: string };
 export function feedbackOriginalMatches(original: string, sentence: string) {
   return original === sentence || original === sentence.trim();
 }
+// Request acceptance differs from display freshness: legacy raw grammar input
+// is accepted here; current-result selection still requires current versions.
+export function feedbackMatchesRequest(feedback: { original: string; requestedModel?: string; contextFingerprint?: string }, sentence: string, modelId: string, fingerprint?: string) {
+  return feedbackOriginalMatches(feedback.original, sentence) && feedback.requestedModel === modelId
+    && (!fingerprint || feedback.contextFingerprint === fingerprint);
+}
 export function wordFeedbackInput(word: { word: string; pos: string }, meaning: string, sentence: string, contextNote = '', expression = word.word,contextKind:FeedbackContextKind='sentence'): FeedbackInput {
   return { word: word.word, pos: word.pos, meaning, expression, sentence: sentence.trim(), ...(contextNote.trim() ? { contextNote: contextNote.trim() } : {}),...(contextKind!=='sentence'?{contextKind}:{}) };
 }

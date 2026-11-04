@@ -1,0 +1,485 @@
+{
+  "sourceCommit": "7d7c368fbd9c7398712600e5bfae2f1fd1c2ad05",
+  "cases": {
+    "gpt-6.1-sol/v1/sentence/word": {
+      "request": "b776e58a52c8dc7580c9050b87806b553d916ad767b3e101eb62b9e3594dadf5",
+      "result": "b217d1b3b3d6751c298ae2c8f7201be31031e344c94bebc7e38b3a4e64170da3"
+    },
+    "gpt-6.1-sol/v1/sentence/1": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/sentence/2": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/sentence/3": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/sentence/4": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/reply/word": {
+      "request": "b776e58a52c8dc7580c9050b87806b553d916ad767b3e101eb62b9e3594dadf5",
+      "result": "b217d1b3b3d6751c298ae2c8f7201be31031e344c94bebc7e38b3a4e64170da3"
+    },
+    "gpt-6.1-sol/v1/reply/1": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/reply/2": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/reply/3": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/reply/4": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/title/word": {
+      "request": "b776e58a52c8dc7580c9050b87806b553d916ad767b3e101eb62b9e3594dadf5",
+      "result": "b217d1b3b3d6751c298ae2c8f7201be31031e344c94bebc7e38b3a4e64170da3"
+    },
+    "gpt-6.1-sol/v1/title/1": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/title/2": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/title/3": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/title/4": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/command/word": {
+      "request": "b776e58a52c8dc7580c9050b87806b553d916ad767b3e101eb62b9e3594dadf5",
+      "result": "b217d1b3b3d6751c298ae2c8f7201be31031e344c94bebc7e38b3a4e64170da3"
+    },
+    "gpt-6.1-sol/v1/command/1": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/command/2": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/command/3": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v1/command/4": {
+      "request": "635b936f03170ab28125750e34235eaf3139699e3bdb03e9d5bb14f78968c1f1",
+      "result": "61d70672a3c5b1310943d29860d0b840ddcb2156936ea2347dfd9a4fec845559"
+    },
+    "gpt-6.1-sol/v5/sentence/word": {
+      "request": "d86c5ee1efc648c218dc28d7ac8bf3f497fb56f2999af6986d602bb4b276e9a8",
+      "result": "2d84cd5a5f7005140b30300ee19d733e4bc40d35dd3c7a67f87d34c0188e4a66"
+    },
+    "gpt-6.1-sol/v5/sentence/1": {
+      "request": "54c84e5a4334a317f69d13b4241fe68aeb84ebfcdd945435515b3f6fcbe29c82",
+      "result": "2d84cd5a5f7005140b30300ee19d733e4bc40d35dd3c7a67f87d34c0188e4a66"
+    },
+    "gpt-6.1-sol/v5/sentence/2": {
+      "request": "54c84e5a4334a317f69d13b4241fe68aeb84ebfcdd945435515b3f6fcbe29c82",
+      "result": "2d84cd5a5f7005140b30300ee19d733e4bc40d35dd3c7a67f87d34c0188e4a66"
+    },
+    "gpt-6.1-sol/v5/sentence/3": {
+      "request": "54c84e5a4334a317f69d13b4241fe68aeb84ebfcdd945435515b3f6fcbe29c82",
+      "result": "2d84cd5a5f7005140b30300ee19d733e4bc40d35dd3c7a67f87d34c0188e4a66"
+    },
+    "gpt-6.1-sol/v5/sentence/4": {
+      "request": "54c84e5a4334a317f69d13b4241fe68aeb84ebfcdd945435515b3f6fcbe29c82",
+      "result": "2d84cd5a5f7005140b30300ee19d733e4bc40d35dd3c7a67f87d34c0188e4a66"
+    },
+    "gpt-6.1-sol/v5/reply/word": {
+      "request": "290c5e326c5f091536f8328088654a87d6105af0d2df2a0a4704338ec1fa1c44",
+      "result": "aff08b207e5c33961fa8d5ca2491f65fc513130f98eb78d87761e9dbd1f7e549"
+    },
+    "gpt-6.1-sol/v5/reply/1": {
+      "request": "8d51b7a9e4fdb9d44e1b0a2195adfd85db6ea83e7e2edad9429efa9d79e48185",
+      "result": "aff08b207e5c33961fa8d5ca2491f65fc513130f98eb78d87761e9dbd1f7e549"
+    },
+    "gpt-6.1-sol/v5/reply/2": {
+      "request": "8d51b7a9e4fdb9d44e1b0a2195adfd85db6ea83e7e2edad9429efa9d79e48185",
+      "result": "aff08b207e5c33961fa8d5ca2491f65fc513130f98eb78d87761e9dbd1f7e549"
+    },
+    "gpt-6.1-sol/v5/reply/3": {
+      "request": "8d51b7a9e4fdb9d44e1b0a2195adfd85db6ea83e7e2edad9429efa9d79e48185",
+      "result": "aff08b207e5c33961fa8d5ca2491f65fc513130f98eb78d87761e9dbd1f7e549"
+    },
+    "gpt-6.1-sol/v5/reply/4": {
+      "request": "8d51b7a9e4fdb9d44e1b0a2195adfd85db6ea83e7e2edad9429efa9d79e48185",
+      "result": "aff08b207e5c33961fa8d5ca2491f65fc513130f98eb78d87761e9dbd1f7e549"
+    },
+    "gpt-6.1-sol/v5/title/word": {
+      "request": "fac225d048f9433eaae67da8fae1a6130fbbc290e96955289e877e973b6c6c06",
+      "result": "74cc0ae203ae1d4324c233e11a2bc8c820ec367a6018251b01a3cec6ae889511"
+    },
+    "gpt-6.1-sol/v5/title/1": {
+      "request": "2e778a811fd34748ce9e37fe308adda5f7de7cd7c1fec8f9c0b0bf7ac45d09f2",
+      "result": "74cc0ae203ae1d4324c233e11a2bc8c820ec367a6018251b01a3cec6ae889511"
+    },
+    "gpt-6.1-sol/v5/title/2": {
+      "request": "2e778a811fd34748ce9e37fe308adda5f7de7cd7c1fec8f9c0b0bf7ac45d09f2",
+      "result": "74cc0ae203ae1d4324c233e11a2bc8c820ec367a6018251b01a3cec6ae889511"
+    },
+    "gpt-6.1-sol/v5/title/3": {
+      "request": "2e778a811fd34748ce9e37fe308adda5f7de7cd7c1fec8f9c0b0bf7ac45d09f2",
+      "result": "74cc0ae203ae1d4324c233e11a2bc8c820ec367a6018251b01a3cec6ae889511"
+    },
+    "gpt-6.1-sol/v5/title/4": {
+      "request": "2e778a811fd34748ce9e37fe308adda5f7de7cd7c1fec8f9c0b0bf7ac45d09f2",
+      "result": "74cc0ae203ae1d4324c233e11a2bc8c820ec367a6018251b01a3cec6ae889511"
+    },
+    "gpt-6.1-sol/v5/command/word": {
+      "request": "9e23a3854ba4392c2ec0de3804497bc8fb9e8b71875cbc7f5316e25fc58c354a",
+      "result": "5770d3ce3e5cfedebf78593f420e492b6ec6767fb93f41d9f80f8963f0ffdfa2"
+    },
+    "gpt-6.1-sol/v5/command/1": {
+      "request": "3ed1921bdacea9cf159434f4030bc4529ee03fcdfa352f3ca7a96f52fbcdedca",
+      "result": "5770d3ce3e5cfedebf78593f420e492b6ec6767fb93f41d9f80f8963f0ffdfa2"
+    },
+    "gpt-6.1-sol/v5/command/2": {
+      "request": "3ed1921bdacea9cf159434f4030bc4529ee03fcdfa352f3ca7a96f52fbcdedca",
+      "result": "5770d3ce3e5cfedebf78593f420e492b6ec6767fb93f41d9f80f8963f0ffdfa2"
+    },
+    "gpt-6.1-sol/v5/command/3": {
+      "request": "3ed1921bdacea9cf159434f4030bc4529ee03fcdfa352f3ca7a96f52fbcdedca",
+      "result": "5770d3ce3e5cfedebf78593f420e492b6ec6767fb93f41d9f80f8963f0ffdfa2"
+    },
+    "gpt-6.1-sol/v5/command/4": {
+      "request": "3ed1921bdacea9cf159434f4030bc4529ee03fcdfa352f3ca7a96f52fbcdedca",
+      "result": "5770d3ce3e5cfedebf78593f420e492b6ec6767fb93f41d9f80f8963f0ffdfa2"
+    },
+    "gpt-6.1-terra/v1/sentence/word": {
+      "request": "d27fab6632b22c36032be1edd91e4072e88632854e35d7742b9d44545d592ce9",
+      "result": "392b7b8ae6a946be6510568b351b116268909842458da9e9d2b01a49e683dc58"
+    },
+    "gpt-6.1-terra/v1/sentence/1": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/sentence/2": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/sentence/3": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/sentence/4": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/reply/word": {
+      "request": "d27fab6632b22c36032be1edd91e4072e88632854e35d7742b9d44545d592ce9",
+      "result": "392b7b8ae6a946be6510568b351b116268909842458da9e9d2b01a49e683dc58"
+    },
+    "gpt-6.1-terra/v1/reply/1": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/reply/2": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/reply/3": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/reply/4": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/title/word": {
+      "request": "d27fab6632b22c36032be1edd91e4072e88632854e35d7742b9d44545d592ce9",
+      "result": "392b7b8ae6a946be6510568b351b116268909842458da9e9d2b01a49e683dc58"
+    },
+    "gpt-6.1-terra/v1/title/1": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/title/2": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/title/3": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/title/4": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/command/word": {
+      "request": "d27fab6632b22c36032be1edd91e4072e88632854e35d7742b9d44545d592ce9",
+      "result": "392b7b8ae6a946be6510568b351b116268909842458da9e9d2b01a49e683dc58"
+    },
+    "gpt-6.1-terra/v1/command/1": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/command/2": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/command/3": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v1/command/4": {
+      "request": "649e4a163a2c1db389a4ce89485fe8d718ac48647bfc863c4762a00ed3a1a898",
+      "result": "24f997883e2246cb45e88a68d63f36824a74abd783c858fde6f311c064f27e8e"
+    },
+    "gpt-6.1-terra/v5/sentence/word": {
+      "request": "d93995dde963059edb1db95aaf68cc984a8884919d3f5d8db8bc9212feb77a42",
+      "result": "451de6c9250560275540ca5525f60cbeabe5b09f541bfb0336fa6ca0eb14419e"
+    },
+    "gpt-6.1-terra/v5/sentence/1": {
+      "request": "bf54a42022e47f89dfb0b20fec0cf1cf8e52dda68f35427fdf6eee8f3c3b8e77",
+      "result": "451de6c9250560275540ca5525f60cbeabe5b09f541bfb0336fa6ca0eb14419e"
+    },
+    "gpt-6.1-terra/v5/sentence/2": {
+      "request": "bf54a42022e47f89dfb0b20fec0cf1cf8e52dda68f35427fdf6eee8f3c3b8e77",
+      "result": "451de6c9250560275540ca5525f60cbeabe5b09f541bfb0336fa6ca0eb14419e"
+    },
+    "gpt-6.1-terra/v5/sentence/3": {
+      "request": "bf54a42022e47f89dfb0b20fec0cf1cf8e52dda68f35427fdf6eee8f3c3b8e77",
+      "result": "451de6c9250560275540ca5525f60cbeabe5b09f541bfb0336fa6ca0eb14419e"
+    },
+    "gpt-6.1-terra/v5/sentence/4": {
+      "request": "bf54a42022e47f89dfb0b20fec0cf1cf8e52dda68f35427fdf6eee8f3c3b8e77",
+      "result": "451de6c9250560275540ca5525f60cbeabe5b09f541bfb0336fa6ca0eb14419e"
+    },
+    "gpt-6.1-terra/v5/reply/word": {
+      "request": "f86c22371c63054fdaa460ffcd5e9674ed592647ae8654c0c544328b50d7bf70",
+      "result": "e71410aaeb627186dbad4019c61f1cc99aacf564fea536993234909b84ad003d"
+    },
+    "gpt-6.1-terra/v5/reply/1": {
+      "request": "7ee160d0cc50b619ace99c40360b7bc1b95156f07942b183bd4b131a60c0cfce",
+      "result": "e71410aaeb627186dbad4019c61f1cc99aacf564fea536993234909b84ad003d"
+    },
+    "gpt-6.1-terra/v5/reply/2": {
+      "request": "7ee160d0cc50b619ace99c40360b7bc1b95156f07942b183bd4b131a60c0cfce",
+      "result": "e71410aaeb627186dbad4019c61f1cc99aacf564fea536993234909b84ad003d"
+    },
+    "gpt-6.1-terra/v5/reply/3": {
+      "request": "7ee160d0cc50b619ace99c40360b7bc1b95156f07942b183bd4b131a60c0cfce",
+      "result": "e71410aaeb627186dbad4019c61f1cc99aacf564fea536993234909b84ad003d"
+    },
+    "gpt-6.1-terra/v5/reply/4": {
+      "request": "7ee160d0cc50b619ace99c40360b7bc1b95156f07942b183bd4b131a60c0cfce",
+      "result": "e71410aaeb627186dbad4019c61f1cc99aacf564fea536993234909b84ad003d"
+    },
+    "gpt-6.1-terra/v5/title/word": {
+      "request": "456f49441486f0950ed42f5c47245ef67ceb11e9f583792cf3ad51f71cddc880",
+      "result": "bd844dabcfed3c223762394b901e03f9e9b380427e7822bfd0484b75efd9a007"
+    },
+    "gpt-6.1-terra/v5/title/1": {
+      "request": "878996f49938928a4c9f2ff0cacc238c44e496f620ee8e0bfc102473bccde32d",
+      "result": "bd844dabcfed3c223762394b901e03f9e9b380427e7822bfd0484b75efd9a007"
+    },
+    "gpt-6.1-terra/v5/title/2": {
+      "request": "878996f49938928a4c9f2ff0cacc238c44e496f620ee8e0bfc102473bccde32d",
+      "result": "bd844dabcfed3c223762394b901e03f9e9b380427e7822bfd0484b75efd9a007"
+    },
+    "gpt-6.1-terra/v5/title/3": {
+      "request": "878996f49938928a4c9f2ff0cacc238c44e496f620ee8e0bfc102473bccde32d",
+      "result": "bd844dabcfed3c223762394b901e03f9e9b380427e7822bfd0484b75efd9a007"
+    },
+    "gpt-6.1-terra/v5/title/4": {
+      "request": "878996f49938928a4c9f2ff0cacc238c44e496f620ee8e0bfc102473bccde32d",
+      "result": "bd844dabcfed3c223762394b901e03f9e9b380427e7822bfd0484b75efd9a007"
+    },
+    "gpt-6.1-terra/v5/command/word": {
+      "request": "7d6b2228ef48e5d888798db48e9c4efdd042b07e02f96f23896d27e267c79cce",
+      "result": "cde445342c26c236284faeae9b13d5b78dc6e3d317a2bed451eb94156a8cc40b"
+    },
+    "gpt-6.1-terra/v5/command/1": {
+      "request": "d554c0b304f8e3497f98e1be44bfb016d64631b17d3d55ebe1b7eb4d3db3699f",
+      "result": "cde445342c26c236284faeae9b13d5b78dc6e3d317a2bed451eb94156a8cc40b"
+    },
+    "gpt-6.1-terra/v5/command/2": {
+      "request": "d554c0b304f8e3497f98e1be44bfb016d64631b17d3d55ebe1b7eb4d3db3699f",
+      "result": "cde445342c26c236284faeae9b13d5b78dc6e3d317a2bed451eb94156a8cc40b"
+    },
+    "gpt-6.1-terra/v5/command/3": {
+      "request": "d554c0b304f8e3497f98e1be44bfb016d64631b17d3d55ebe1b7eb4d3db3699f",
+      "result": "cde445342c26c236284faeae9b13d5b78dc6e3d317a2bed451eb94156a8cc40b"
+    },
+    "gpt-6.1-terra/v5/command/4": {
+      "request": "d554c0b304f8e3497f98e1be44bfb016d64631b17d3d55ebe1b7eb4d3db3699f",
+      "result": "cde445342c26c236284faeae9b13d5b78dc6e3d317a2bed451eb94156a8cc40b"
+    },
+    "gpt-6-astra/v1/sentence/word": {
+      "request": "5951d9d1af83a6bc5a81c78b14194973590a18e41b90ff6230f2dec5f0ce8a87",
+      "result": "6abaa5f9e4b23a2daff641648ef25a6028634068de1939dccccb0d1e6d4d19e6"
+    },
+    "gpt-6-astra/v1/sentence/1": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/sentence/2": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/sentence/3": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/sentence/4": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/reply/word": {
+      "request": "5951d9d1af83a6bc5a81c78b14194973590a18e41b90ff6230f2dec5f0ce8a87",
+      "result": "6abaa5f9e4b23a2daff641648ef25a6028634068de1939dccccb0d1e6d4d19e6"
+    },
+    "gpt-6-astra/v1/reply/1": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/reply/2": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/reply/3": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/reply/4": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/title/word": {
+      "request": "5951d9d1af83a6bc5a81c78b14194973590a18e41b90ff6230f2dec5f0ce8a87",
+      "result": "6abaa5f9e4b23a2daff641648ef25a6028634068de1939dccccb0d1e6d4d19e6"
+    },
+    "gpt-6-astra/v1/title/1": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/title/2": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/title/3": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/title/4": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/command/word": {
+      "request": "5951d9d1af83a6bc5a81c78b14194973590a18e41b90ff6230f2dec5f0ce8a87",
+      "result": "6abaa5f9e4b23a2daff641648ef25a6028634068de1939dccccb0d1e6d4d19e6"
+    },
+    "gpt-6-astra/v1/command/1": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/command/2": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/command/3": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v1/command/4": {
+      "request": "5188a2958a4cf9a62410d95c2fa5da3ac17165315e2955460f9743776656188c",
+      "result": "c6acf08deb042af756c958b5a15f65af989af2045d27a082a9fbaad5cae0b38b"
+    },
+    "gpt-6-astra/v5/sentence/word": {
+      "request": "c932ebde685da66817c7d0fd62c4e18afac37dd0a32f6a8da5ef7cb422808dbc",
+      "result": "e0a0e6069b6500730d093f23bf4207f3b38ee93ecc2f8372f3c0f3eca2cd62d1"
+    },
+    "gpt-6-astra/v5/sentence/1": {
+      "request": "7c82d9183cbbc1007f2ec62e3b59bd9c137677ed9295ca2037b388710d4998ac",
+      "result": "e0a0e6069b6500730d093f23bf4207f3b38ee93ecc2f8372f3c0f3eca2cd62d1"
+    },
+    "gpt-6-astra/v5/sentence/2": {
+      "request": "7c82d9183cbbc1007f2ec62e3b59bd9c137677ed9295ca2037b388710d4998ac",
+      "result": "e0a0e6069b6500730d093f23bf4207f3b38ee93ecc2f8372f3c0f3eca2cd62d1"
+    },
+    "gpt-6-astra/v5/sentence/3": {
+      "request": "7c82d9183cbbc1007f2ec62e3b59bd9c137677ed9295ca2037b388710d4998ac",
+      "result": "e0a0e6069b6500730d093f23bf4207f3b38ee93ecc2f8372f3c0f3eca2cd62d1"
+    },
+    "gpt-6-astra/v5/sentence/4": {
+      "request": "7c82d9183cbbc1007f2ec62e3b59bd9c137677ed9295ca2037b388710d4998ac",
+      "result": "e0a0e6069b6500730d093f23bf4207f3b38ee93ecc2f8372f3c0f3eca2cd62d1"
+    },
+    "gpt-6-astra/v5/reply/word": {
+      "request": "6ea33b6aeeaba26a1effa81e8bf436602623809e07d4da6c54cdf49ba4a9564c",
+      "result": "e7b295980af70c1d93b795f0df16d0cbce02f26974da348f48ed91d2e4949c02"
+    },
+    "gpt-6-astra/v5/reply/1": {
+      "request": "795c7ea3dd958ab9164676f6a272c9e77f39de7da4f2d7c3a145157aaf1b8cea",
+      "result": "e7b295980af70c1d93b795f0df16d0cbce02f26974da348f48ed91d2e4949c02"
+    },
+    "gpt-6-astra/v5/reply/2": {
+      "request": "795c7ea3dd958ab9164676f6a272c9e77f39de7da4f2d7c3a145157aaf1b8cea",
+      "result": "e7b295980af70c1d93b795f0df16d0cbce02f26974da348f48ed91d2e4949c02"
+    },
+    "gpt-6-astra/v5/reply/3": {
+      "request": "795c7ea3dd958ab9164676f6a272c9e77f39de7da4f2d7c3a145157aaf1b8cea",
+      "result": "e7b295980af70c1d93b795f0df16d0cbce02f26974da348f48ed91d2e4949c02"
+    },
+    "gpt-6-astra/v5/reply/4": {
+      "request": "795c7ea3dd958ab9164676f6a272c9e77f39de7da4f2d7c3a145157aaf1b8cea",
+      "result": "e7b295980af70c1d93b795f0df16d0cbce02f26974da348f48ed91d2e4949c02"
+    },
+    "gpt-6-astra/v5/title/word": {
+      "request": "5e4476ab95cabd8d7776d9bc1b36c3b116202a85fd8b79af48973b664757cac8",
+      "result": "9a9b5cc83749181937b927bbfdf4f5f8f66b8e0fbff8bde50d4f772eb3a77cbd"
+    },
+    "gpt-6-astra/v5/title/1": {
+      "request": "21b9d86405db102363e6001edb46b4ca8a6f17d5f5380ce37e8d5c8f593782e0",
+      "result": "9a9b5cc83749181937b927bbfdf4f5f8f66b8e0fbff8bde50d4f772eb3a77cbd"
+    },
+    "gpt-6-astra/v5/title/2": {
+      "request": "21b9d86405db102363e6001edb46b4ca8a6f17d5f5380ce37e8d5c8f593782e0",
+      "result": "9a9b5cc83749181937b927bbfdf4f5f8f66b8e0fbff8bde50d4f772eb3a77cbd"
+    },
+    "gpt-6-astra/v5/title/3": {
+      "request": "21b9d86405db102363e6001edb46b4ca8a6f17d5f5380ce37e8d5c8f593782e0",
+      "result": "9a9b5cc83749181937b927bbfdf4f5f8f66b8e0fbff8bde50d4f772eb3a77cbd"
+    },
+    "gpt-6-astra/v5/title/4": {
+      "request": "21b9d86405db102363e6001edb46b4ca8a6f17d5f5380ce37e8d5c8f593782e0",
+      "result": "9a9b5cc83749181937b927bbfdf4f5f8f66b8e0fbff8bde50d4f772eb3a77cbd"
+    },
+    "gpt-6-astra/v5/command/word": {
+      "request": "5b941a05ff448381d25afc98583ab419a12f6b4c43c7697114a9dc7a4045f545",
+      "result": "523cfdf3fd9a0c8e78833940e333fed3f7c26afaf36134c63e9adb3623c97f6a"
+    },
+    "gpt-6-astra/v5/command/1": {
+      "request": "00841e55fa8264ff3d31137f5f1eec501696c373bd4717f265fbb0bd747097c4",
+      "result": "523cfdf3fd9a0c8e78833940e333fed3f7c26afaf36134c63e9adb3623c97f6a"
+    },
+    "gpt-6-astra/v5/command/2": {
+      "request": "00841e55fa8264ff3d31137f5f1eec501696c373bd4717f265fbb0bd747097c4",
+      "result": "523cfdf3fd9a0c8e78833940e333fed3f7c26afaf36134c63e9adb3623c97f6a"
+    },
+    "gpt-6-astra/v5/command/3": {
+      "request": "00841e55fa8264ff3d31137f5f1eec501696c373bd4717f265fbb0bd747097c4",
+      "result": "523cfdf3fd9a0c8e78833940e333fed3f7c26afaf36134c63e9adb3623c97f6a"
+    },
+    "gpt-6-astra/v5/command/4": {
+      "request": "00841e55fa8264ff3d31137f5f1eec501696c373bd4717f265fbb0bd747097c4",
+      "result": "523cfdf3fd9a0c8e78833940e333fed3f7c26afaf36134c63e9adb3623c97f6a"
+    }
+  }
+}

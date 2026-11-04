@@ -1,21 +1,20 @@
 import { env } from 'cloudflare:workers';
 import { getChatGPTUser } from '@/app/chatgpt-auth';
 import { database } from '@/db/store';
-import { loadFeedbackContext, loadFeedbackModel, loadPersonalWord, recordFeedbackAttempt } from '@/db/feedback';
+import { loadFeedbackContext, loadFeedbackModel, loadPersonalWord } from '@/db/feedback';
 import { WORD_MAP } from '@/lib/catalog';
-import { currentId, entryIdFor, today, type Session } from '@/lib/learning';
-import { feedbackRequestSchema, feedbackProvider } from '@/lib/sentence-feedback';
+import { currentId, entryIdFor, type Session } from '@/lib/learning';
+import { feedbackRequestSchema } from '@/lib/sentence-feedback';
 import { FeedbackError } from '@/lib/provider-feedback-error';
 import { generateOpenAiFeedback, generateStructuredOpenAiFeedback } from '@/lib/openai-feedback';
 import { systemInstruction, legacySystemInstruction } from '@/lib/feedback-prompts';
 import { AI_MODELS, AI_MODEL_PRICE_DATE, isAiModelEnabled } from '@/lib/ai-models';
 import { feedbackErrorBody } from '@/lib/feedback-issue';
 import { json, validateJsonMutation } from '@/lib/server/http';
-import { legacyFeedback, supportsFeedbackStructure } from '@/lib/feedback-compatibility';
+import { supportsFeedbackStructure } from '@/lib/feedback-compatibility';
 import { FEEDBACK_BODY_LIMITS, logBodyRejection, readBoundedJsonText, RequestBodyError } from '@/lib/server/request-body';
-import { feedbackSafetyIssue } from '@/lib/feedback-safety';
 import { supportsAiContract } from '@/lib/ai-contract';
-import {withFeedbackRequest} from '@/db/feedback-requests';
+import { executeFeedbackRequest } from '@/lib/server/feedback-generation';
 import {wordFeedbackInput,feedbackContextFingerprint} from '@/lib/feedback-context';
 
 export const dynamic = 'force-dynamic';
@@ -72,19 +71,12 @@ export async function POST(request: Request) {
     const input=wordFeedbackInput(word,meaning,sentence,contextNote,session.records[entryId]?.material?.expression || word.word,contextKind);
     const contextFingerprint=await feedbackContextFingerprint('word',JSON.stringify([sessionId,entryId]),input,expectedModelId);
     if (expectedContextFingerprint && expectedContextFingerprint!==contextFingerprint) return json(feedbackErrorBody('stale_input'),409);
-    return await withFeedbackRequest(db,user.userId,parsed.data,{domain:'word',targetId:sessionId,revision:context.revision,
-      fingerprint:[entryId,wordId,input,expectedModelId,judgmentEnabled?systemInstruction:legacySystemInstruction,supportsFeedbackStructure(request),supportsAiContract(request,3)]},async()=>{
-    await recordFeedbackAttempt(db, user.userId, today(), Date.now());
-    const generate = judgmentEnabled ? generateOpenAiFeedback : generateStructuredOpenAiFeedback;
-    const generated = await generate({ apiKey: env.OPENAI_API_KEY, modelId: context.modelId, allowedModels: env.OPENAI_ALLOWED_MODELS, signal: request.signal }, judgmentEnabled?input:{word:word.word,pos:word.pos,meaning,sentence}, judgmentEnabled ? systemInstruction : legacySystemInstruction);
-    const feedback=supportsAiContract(request,3)?{...generated,contextFingerprint,...(contextNote?{contextNote}:{})}:generated;
-    const safetyIssue = feedbackSafetyIssue(feedback);
-    if (safetyIssue) {
-      console.warn(JSON.stringify({ event: 'sentence_feedback_withheld', code: 'analysis_conflict', reason: safetyIssue }));
-      return json(feedbackErrorBody('analysis_conflict'), 422);
-    }
-    console.info(JSON.stringify({ event: 'sentence_feedback_succeeded', model: feedback.model, provider: feedbackProvider(feedback), durationMs: Date.now() - started }));
-    return json({ feedback: supportsFeedbackStructure(request) ? feedback : legacyFeedback(feedback) });
+    return await executeFeedbackRequest({ db, userId: user.userId, request, receipt: parsed.data, started, contextFingerprint, contextNote,
+      scope: {domain:'word',targetId:sessionId,revision:context.revision,
+        fingerprint:[entryId,wordId,input,expectedModelId,judgmentEnabled?systemInstruction:legacySystemInstruction,supportsFeedbackStructure(request),supportsAiContract(request,3)]},
+    }, () => {
+      const generate = judgmentEnabled ? generateOpenAiFeedback : generateStructuredOpenAiFeedback;
+      return generate({ apiKey: env.OPENAI_API_KEY, modelId: context.modelId, allowedModels: env.OPENAI_ALLOWED_MODELS, signal: request.signal }, judgmentEnabled?input:{word:word.word,pos:word.pos,meaning,sentence}, judgmentEnabled ? systemInstruction : legacySystemInstruction);
     });
   } catch (error) {
     const known = error instanceof FeedbackError;
