@@ -143,7 +143,7 @@ test('header and streaming body deadlines cancel once and never retry or change 
   assert.equal(calls, 2); assert.equal(cancelled, true);
 });
 
-test('external cancellation of body and network failure preserve safe outcomes without additional calls', async () => {
+test('cancellation, network failure and rejected redirects preserve safe outcomes without additional calls', async t => {
   const controller = new AbortController(); let calls = 0, cancelled = false;
   const reason = new DOMException('Stopped', 'AbortError');
   await assert.rejects(run(async () => {
@@ -153,6 +153,27 @@ test('external cancellation of body and network failure preserve safe outcomes w
   await assert.rejects(run(async () => { calls++; throw new TypeError('PRIVATE_NETWORK'); }), issue('provider_network'));
   await assert.rejects(run(async () => { calls++; throw new Error('PRIVATE_NETWORK'); }), issue('provider_network'));
   assert.equal(calls, 3);
+
+  // A redirect body may never finish. Dispose it without waiting, and preserve
+  // the public error even if the underlying stream rejects cancellation.
+  const deadline = new AbortController();
+  t.mock.method(AbortSignal, 'timeout', () => deadline.signal);
+  const timer = setTimeout(() => deadline.abort(new DOMException('Timed out', 'TimeoutError')), 200);
+  try {
+    for (const rejectCancel of [false, true]) {
+      let cancellations = 0;
+      const body = new ReadableStream({
+        start(c) { c.enqueue(new TextEncoder().encode('PRIVATE_REDIRECT_BODY')); },
+        cancel() { cancellations++; if (rejectCancel) return Promise.reject(new Error('PRIVATE_CANCEL')); },
+      });
+      await assert.rejects(run(async (_url, init) => {
+        calls++; assert.equal(init.redirect, 'manual');
+        return new Response(body, { status: 307, headers: { Location: 'https://never-follow.invalid/private' } });
+      }), issue('provider_network'));
+      assert.equal(cancellations, 1);
+    }
+    assert.equal(calls, 5);
+  } finally { clearTimeout(timer); }
 });
 
 test('observations include only bounded model/version/timing/token/request metadata', async t => {
