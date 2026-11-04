@@ -257,7 +257,7 @@
     },
     "final-coverage.json": {
       "path": "outputs/integration-remediation-implementation-20261104/final-coverage.json",
-      "sha256": "fe1b352191b27fa6bd63b8b2439237ec75646c924b383a8219ed6384fee385d5"
+      "sha256": "8522f911b74c89421c0a8e0a8263629b84c999f8fb49a42b1c215f6e56ba5fc2"
     },
     "performance-final-coverage.json": {
       "path": "outputs/integration-remediation-implementation-20261104/performance-final-coverage.json",
