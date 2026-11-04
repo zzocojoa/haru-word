@@ -1,3 +1,15 @@
+<!-- provider-network-publication-approval -->
+## 2026-11-05 · 통신 수정 v145 운영 반영 완료
+
+기존 [하루단어](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 **v145 · source a22d747 · 2026-11-05 07:42:59 KST succeeded**를 게시했다. 공개 화면·게시 자산14개·익명 상태401·공개 시계200을 확인했고 기존 Site 식별자·DB/R2·환경77·접근 정책을 유지했다. 추가 유료 호출·운영 학습 QA 쓰기는0이다. **실기기 검사는 사용자 요청으로 후속 작업에 남겼다.** [실기기 후속 실행표](docs/PROVIDER_NETWORK_INVESTIGATION_20261105.md#후속-작업-실기기-검사)와 [배포·복구 근거](docs/releases/2026-11-05-provider-network-rollout.json)를 따른다. 아래 미반영·연결 정보 대기는 배포 전 검증 시점의 기록이다.
+<!-- /provider-network-publication-approval -->
+
+<!-- provider-network-evaluation-current -->
+## 2026-11-05 · 통신 실패 원인 재현·추가 API 평가
+
+새 브랜치에서 Cloudflare Worker가 지원하지 않는 `redirect: error`의 요청 전 실패를 재현하고, `manual`과3xx 거절로 수정했다. Node22/24 단위 각각800통과·타입/자료/린트/빌드 exit0이다. 별도 승인US$5에서 합성30문항·총180회 API 평가를 마쳤고 보수적 사용액은US$2.902172다. 원점수는Sol26/30·Terra28/30·Astra29/30이며 평가 기준의 모호성을 별도로 기록했다. **운영 미반영·실기기 연결 정보 대기** 상태다. [조사·평가 보고서](docs/PROVIDER_NETWORK_INVESTIGATION_20261105.md)와 [검증 근거](docs/PROVIDER_NETWORK_EVALUATION_20261105.json)를 따른다. 아래 미실시 표기는 해당 과거 시점의 기록이다.
+<!-- /provider-network-evaluation-current -->
+
 <!-- integration-remediation-plan-current -->
 ## 2026-11-04 · 통합 검사 후속 수정 v144 게시 완료
 

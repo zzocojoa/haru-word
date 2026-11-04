@@ -1,0 +1,361 @@
+{
+  "recordedAt": "2026-11-04T15:18:18.447Z",
+  "branch": "codex/provider-network-evaluation-20261104",
+  "baseCommit": "32dc3b8cc99e239260925e901e6477e42a1fc047",
+  "evaluatedSource": {
+    "commit": "32dc3b8cc99e239260925e901e6477e42a1fc047",
+    "tree": "028ecd16b76bed822da7a87e2e912039226541a6",
+    "runtimeHash": "3cdc67387d3f6d961eba3aef2d09d585f2e466c121bbeae2782a8b1769c5709f",
+    "productUnmodifiedDuringCollection": true,
+    "runtime": "Windows Node.js direct Responses; not hosted Worker or physical device"
+  },
+  "diagnosis": {
+    "confirmedDefect": "workerd rejects redirect:error before network dispatch",
+    "officialReference": "https://developers.cloudflare.com/workers/runtime-apis/request/",
+    "originalProbe": {
+      "runtime": "workerd-local",
+      "fetchReturned": false,
+      "errorClass": "TypeError",
+      "message": "Invalid redirect value, must be one of \"follow\" or \"manual\" (\"error\" won't be implemented since it does not make sense at the edge; use \"manual\" and check the response status code).",
+      "durationMs": 1,
+      "paidGenerations": 0,
+      "syntheticCredentialOnly": true
+    },
+    "correctedProbe": {
+      "runtime": "workerd-local",
+      "redirect": "manual",
+      "fetchReturned": true,
+      "httpStatus": 401,
+      "durationMs": 647,
+      "paidGenerations": 0,
+      "syntheticCredentialOnly": true
+    },
+    "productionObservation": {
+      "failureEvent": "feedback_request_failed",
+      "code": "provider_network",
+      "route": "/api/sentence-feedback",
+      "httpStatus": 503,
+      "at": "2026-11-04T13:41:05.927Z",
+      "wallTimeMs": 234,
+      "validationStageAbsent": true,
+      "correlationToScreenshot": "same class; exact screenshot request not proved"
+    },
+    "productionAdapterGitBlob": "ceed4ac288aee05b4dc47d0667e0f6da9cda412b",
+    "exactScreenshotCorrelationProved": false,
+    "hostedSecretContentsInspected": false,
+    "hostedPostFixSuccessVerified": false
+  },
+  "correction": {
+    "redirect": "manual",
+    "rejectStatuses": "300..399",
+    "followOrRetry": false,
+    "payloadChanges": false,
+    "newDiagnosticsLogging": false,
+    "sourceFileHashes": {
+      "lib/openai-feedback.ts": "81c5c9f797a61dd46fce8603a01bffe4d0c00998522d32955666443d68c708b4",
+      "tests/openai-feedback.test.mjs": "73a214bceec53cf079cccffddb160dacdbd26eb86c9b7e67c80dbc9711a1ab5e",
+      "tests/openai-request-equivalence.test.mjs": "c364538a61c20f682bd71b4c7f7382aef9ea0e4769ad616423bf3402b3c7082e",
+      "tests/openai-worker-transport.test.mjs": "de2580fef634e05df76cd8db8c66b52998c3da8fb6476a20cbe4ea54a807746b"
+    },
+    "equivalentFrozenGenerationBodies": 90,
+    "legacyEquivalenceCases": 120,
+    "productionDeployed": false
+  },
+  "evaluation": {
+    "cases": 30,
+    "syntheticOnly": true,
+    "priorSyntheticExactOverlap": 0,
+    "priorSyntheticComparisonCount": 299,
+    "generations": 90,
+    "crossModelGrades": 90,
+    "transportFailures": 0,
+    "models": [
+      {
+        "model": "gpt-6.1-sol",
+        "denominator": 30,
+        "generationsCompleted": 30,
+        "crossGradesCompleted": 30,
+        "allDimensionsPassed": 26,
+        "criticalCases": 0,
+        "labelMismatch": 3,
+        "unmeasured": 0,
+        "generationMedianMs": 3832,
+        "generationP95Ms": 5369,
+        "dimensions": {
+          "meaning": {
+            "pass": 27,
+            "fail": 3,
+            "uncertain": 0
+          },
+          "grammar": {
+            "pass": 28,
+            "fail": 2,
+            "uncertain": 0
+          },
+          "correction": {
+            "pass": 27,
+            "fail": 3,
+            "uncertain": 0
+          },
+          "explanation": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          },
+          "abstention": {
+            "pass": 28,
+            "fail": 2,
+            "uncertain": 0
+          }
+        }
+      },
+      {
+        "model": "gpt-6.1-terra",
+        "denominator": 30,
+        "generationsCompleted": 30,
+        "crossGradesCompleted": 30,
+        "allDimensionsPassed": 28,
+        "criticalCases": 0,
+        "labelMismatch": 2,
+        "unmeasured": 0,
+        "generationMedianMs": 2662,
+        "generationP95Ms": 4611,
+        "dimensions": {
+          "meaning": {
+            "pass": 28,
+            "fail": 2,
+            "uncertain": 0
+          },
+          "grammar": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          },
+          "correction": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          },
+          "explanation": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          },
+          "abstention": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          }
+        }
+      },
+      {
+        "model": "gpt-6-astra",
+        "denominator": 30,
+        "generationsCompleted": 30,
+        "crossGradesCompleted": 30,
+        "allDimensionsPassed": 29,
+        "criticalCases": 0,
+        "labelMismatch": 1,
+        "unmeasured": 0,
+        "generationMedianMs": 4388,
+        "generationP95Ms": 9062,
+        "dimensions": {
+          "meaning": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          },
+          "grammar": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          },
+          "correction": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          },
+          "explanation": {
+            "pass": 30,
+            "fail": 0,
+            "uncertain": 0
+          },
+          "abstention": {
+            "pass": 29,
+            "fail": 1,
+            "uncertain": 0
+          }
+        }
+      }
+    ],
+    "rawAllModelGatePassed": false,
+    "authorReview": {
+      "method": "Author review of all 7 automatic nonpasses only; no independent human expert certification; frozen gold and raw scores are unchanged.",
+      "adjustedAggregateScore": null,
+      "cases": [
+        {
+          "caseId": "new-word-04",
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "classification": "abstention-policy concern",
+          "finding": "I meeting -> I am meeting supplies present progressive without establishing the intended complete message/time. The be + ing explanation is factual. This is a conservative abstention concern, not proof of an invented participant or an intrinsically ungrammatical corrected sentence."
+        },
+        {
+          "caseId": "new-grammar-06",
+          "models": [
+            "gpt-6.1-sol"
+          ],
+          "classification": "ambiguous number in gold",
+          "finding": "Those car belongs contains conflicting plural determiner and singular noun/verb evidence. That car belongs and Those cars belong are both grammatical repairs with different quantities. The one-answer gold overcommits to singular; plural correction is not independently proved to reverse an established learner quantity. Minimality/clarification remains a concern."
+        },
+        {
+          "caseId": "new-word-07",
+          "models": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "classification": "target POS label concern",
+          "finding": "Both models correctly identify bad original grammar and change careful to carefully. Appropriate target meaning/POS versus a requested adjective remains questionable; this is not a failed grammar correction. The target-use versus grammatical-form boundary needs a prospectively fixed, independently reviewed rubric."
+        },
+        {
+          "caseId": "new-word-14",
+          "models": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "classification": "overrestrictive gold",
+          "finding": "Ask permits intransitive use. I asked can be a grammatical subject plus past-tense predicate without an explicit object; lack of a named topic alone does not establish an unfinished clause. All three outputs preserve the original without inventing objects. The gold premise is not sufficient for a verified English-error claim."
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://dictionary.cambridge.org/us/dictionary/english/ask?q=ask_1",
+          "checked": "2026-11-05 KST",
+          "basis": "Official Cambridge search excerpt lists ask QUESTION as intransitive or transitive; direct page returned403."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/this-",
+          "checked": "2026-11-05 KST",
+          "basis": "Official Cambridge search excerpt: that singular, those plural; direct page returned403."
+        },
+        {
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/adverbs-forms",
+          "checked": "2026-11-05 KST",
+          "basis": "Official Cambridge search excerpt pairs adjective careful with adverb carefully."
+        }
+      ],
+      "conclusion": "Raw sample scores remain Sol26/30, Terra28/30, Astra29/30. The frozen all-model gate is false. Gold ambiguity and a single rotating AI judge prevent treating these as calibrated accuracy rates or a certified model ranking. No retrospective rescore or extra paid rerun."
+    }
+  },
+  "budget": {
+    "upperMicros": 2902172,
+    "standardMicros": 1312920,
+    "networkCalls": 180,
+    "unknownOrReserved": 0,
+    "apiRemainingMicros": 1597828,
+    "physicalReservedMicros": 500000,
+    "totalLimitMicros": 5000000,
+    "invoiceVerified": false,
+    "apiClosed": true,
+    "newApprovalOnly": true,
+    "previousBudgetsTransferred": false,
+    "approvalRemainingConservativeMicros": 2097828,
+    "physicalDeviceCalls": 0
+  },
+  "verification": {
+    "unitNode22": {
+      "version": "22.22.2",
+      "tests": 800,
+      "exitCode": 0
+    },
+    "unitNode24": {
+      "version": "24.22.1",
+      "tests": 800,
+      "exitCode": 0
+    },
+    "focused": {
+      "tests": 15,
+      "exitCode": 0
+    },
+    "regressionBefore": {
+      "tests": 2,
+      "failed": 2,
+      "exitCode": 1
+    },
+    "budget": {
+      "tests": 5,
+      "exitCode": 0
+    },
+    "checks": [
+      {
+        "command": "npm run typecheck",
+        "exitCode": 0,
+        "log": "typecheck.log"
+      },
+      {
+        "command": "npm run check:grammar-review",
+        "exitCode": 0,
+        "log": "check-grammar-review.log"
+      },
+      {
+        "command": "npm run lint",
+        "exitCode": 0,
+        "log": "lint.log"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "log": "build.log"
+      }
+    ],
+    "preservedRootProductFiles": 637,
+    "preservedOldEvidenceFiles": 32,
+    "preservedTaskMasterTags": [
+      "master",
+      "judgment-remediation",
+      "integration-remediation"
+    ],
+    "frozenCollectionAndRunnerHashesVerified": true
+  },
+  "physicalDevice": {
+    "tested": false,
+    "status": "awaiting device model/browser and PC or remote connection details; unanswered async question",
+    "presentUsbPhoneIdentified": false,
+    "emulationCountedAsPhysical": false
+  },
+  "operational": {
+    "deployments": 0,
+    "secretChanges": 0,
+    "billingChanges": 0,
+    "productionLearningWrites": 0,
+    "newSiteCreated": false,
+    "databaseMigrations": 0,
+    "compatibility": "Same request payload, model, timeout, response/error schema, receipt/deduplication and stored records. Redirects retain provider_network503 without following.",
+    "rollback": "Revert the small adapter/test change if unpublished; if later deployed, restore prior existing Site source with awareness that redirect:error remains broken. No database rollback.",
+    "observability": "No new runtime logs; existing safe error/completion logs retained.",
+    "unverified": [
+      "Physical device and VoiceOver",
+      "Hosted post-fix API success and hosted secret validity",
+      "Independent human English-quality certification",
+      "Full browser/performance suite not rerun for this server transport change"
+    ]
+  },
+  "localEvidenceRoot": "outputs/provider-network-evaluation-20261104",
+  "evidenceHashes": {
+    "freeze.json": "912d48a7619b58908b2a556b1af074db72b4bc353ff9366b0b22055de57c0106",
+    "execution-freeze.json": "1611432b0e48652c7e4801eb66f03f9c3d11caf32d471300c270d07ad09d4fd9",
+    "ledger.json": "01ca866bb8846f5dea3f5e98be73b03477554fcb57d3b0db8aaddccc10149b3c",
+    "quality-report.json": "4831eeb67c3dea34e1ef76258f3c0595ec4afa6e9b927c04cf8ad7c96f42694b",
+    "author-review.json": "b53f67317a4fa22ef1c18fd22faa88ec84f178cc90acfc023cdd2a8dc6bb84e4",
+    "transport-probe-result.json": "7eff792bbe760f9eaf4db0c24d2bb51deb558d5fe0feb04ad16aaaf88a7fdc45",
+    "transport-probe-manual-result.json": "a5324cd8858c4811594ad998a23945515a0ea099bcb3edb48c782e80ea118ef6",
+    "worker-regression-before.log": "6cd3e9f7747910b13fd7c210807ef69483a55524524ded58b137eb65630956e1",
+    "worker-regression-after.log": "48394b29ef908a26851482d17ce582abff0c074224c2b419dd1a3980b6b5a5f1",
+    "unit-node22.log": "27a07fac2c2744e3500f5cd691a07f0af2152dd25ead4eff99058956d7d17587",
+    "unit-node24.log": "e7f8e6eeb6d432138b6769f99634717b98d7aaa821e2e3668d15ebf61dffcb48",
+    "checks.json": "744bbd95dcbc1e83c5440de7f92a6165c3c89f6594218df9f83a3dba2698d2d1",
+    "test-budget.mjs": "f5b4651e183d2ca3ca933e7e6cf6181c826fb75e38997e5ab90673f91f6b5771"
+  }
+}
