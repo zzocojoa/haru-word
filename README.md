@@ -1,3 +1,11 @@
+<!-- aiq-manner-github-candidate-current -->
+## 2026-11-06 · 실제 AI 평가와 정상 부사형 교정 수정 PR 후보
+
+실제 평가의 세 모델 원점수는 각각29/30이며 [당시 평가·한계](docs/COMPREHENSIVE_AI_QUALITY_EVALUATION_20261105.md)를 보존한다. 정상 skillful/skillfully·skilful/skilfully 교정을 앱이 차단하던 문제를 후속 수정했다. [수정·재생 검증](docs/AIQ_MANNER_REMEDIATION_20261105.md): 저장90응답 모두 수용, 기존87개 피드백은 생성시각 제외 동일, 격리 Node22/24 각852/852·타입·린트(기존15경고)·문법 자료·빌드 exit0이다. 추가 유료 호출0,90/90은 오프라인 재생 결과이며 새 라이브 점수가 아니다.
+
+사용자 `진행`에 따라 기존 PR58에 코드·회귀 검사와 위 평가/수정 보고서를 반영한다. 운영v146에는 후속 제품4파일의 변경이 아직 반영되지 않았다. 이전 미커밋·평가 보류·옛 HEAD 표시는 각 기록 시점의 상태이며, 새 품질 인증이나 배포 완료로 해석하지 않는다.
+<!-- /aiq-manner-github-candidate-current -->
+
 <!-- comprehensive-remediation-github-current -->
 ## 2026-11-05 · 광역 감사 수정 GitHub 검토 후보
 

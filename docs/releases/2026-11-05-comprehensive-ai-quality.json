@@ -1,0 +1,305 @@
+{
+  "recordedAtUtc": "2026-11-05T14:30:30.153227+00:00",
+  "status": "evaluation-complete-quality-gate-held",
+  "approval": {
+    "userText": "승인하니 진행",
+    "newUsdBeforeTax": 5,
+    "existingKeyReuse": true,
+    "oldBalancesTransferred": false
+  },
+  "candidate": {
+    "commit": "5a0fe1a7046763717a1ed1725cda96a2a74f1405",
+    "branch": "codex/comprehensive-defect-audit-20261105",
+    "productChangedDuringCollection": false,
+    "runtime": "Windows Node24.22.1 direct OpenAI Responses; no hosted Worker or device"
+  },
+  "corpus": {
+    "freshSynthetic": 30,
+    "word": 15,
+    "grammar": 15,
+    "grammarContentVersion": 4,
+    "historicalUniqueSentencesCompared": 329,
+    "exactOverlap": 0,
+    "independentHoldout": false,
+    "sourceAndPolicyFrozenBeforeCaseAuthoring": true
+  },
+  "collection": {
+    "generationCalls": 90,
+    "validVisibleOutputs": 87,
+    "productRejectedOutputs": 3,
+    "crossModelGradeCalls": 87,
+    "totalCalls": 177,
+    "providerTransportFailures": 0,
+    "providerUsageUnknown": 0,
+    "requestSlotSentMoreThanOnce": false,
+    "ledgerClosed": true
+  },
+  "cost": {
+    "approvedUsdBeforeTax": 5,
+    "conservativeUsd": 2.926401,
+    "standardTokenPriceUsd": 1.305532,
+    "closedUnspentUsd": 2.073599,
+    "invoiceVerified": false,
+    "unspentAutomaticallyReusable": false
+  },
+  "models": [
+    {
+      "model": "gpt-6.1-sol",
+      "denominator": 30,
+      "generationsCompleted": 29,
+      "crossGradesCompleted": 29,
+      "allDimensionsPassed": 29,
+      "criticalCases": 0,
+      "labelMismatch": 0,
+      "unmeasured": 0,
+      "generationMedianMs": 3681,
+      "generationP95Ms": 5047,
+      "dimensions": {
+        "meaning": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "grammar": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "correction": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "explanation": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "abstention": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        }
+      }
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "denominator": 30,
+      "generationsCompleted": 29,
+      "crossGradesCompleted": 29,
+      "allDimensionsPassed": 29,
+      "criticalCases": 0,
+      "labelMismatch": 0,
+      "unmeasured": 0,
+      "generationMedianMs": 2609,
+      "generationP95Ms": 3225,
+      "dimensions": {
+        "meaning": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "grammar": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "correction": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "explanation": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "abstention": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        }
+      }
+    },
+    {
+      "model": "gpt-6-astra",
+      "denominator": 30,
+      "generationsCompleted": 29,
+      "crossGradesCompleted": 29,
+      "allDimensionsPassed": 29,
+      "criticalCases": 0,
+      "labelMismatch": 0,
+      "unmeasured": 0,
+      "generationMedianMs": 4543,
+      "generationP95Ms": 6017,
+      "dimensions": {
+        "meaning": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "grammar": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "correction": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "explanation": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        },
+        "abstention": {
+          "pass": 29,
+          "fail": 0,
+          "uncertain": 0
+        }
+      }
+    }
+  ],
+  "gates": {
+    "sample90PercentThreshold": "passed",
+    "observedCriticalErrorsIn87GradedOutputs": 0,
+    "required30VisibleOutputsPerModel": "failed",
+    "fullAuthorRecordReview90": "complete",
+    "overall": "held",
+    "reason": "All models lost the same valid manner-adverb correction at product content_change guard; no automatic new calls or adjusted score."
+  },
+  "finding": {
+    "id": "AIQ-20261105-1",
+    "priority": "P2",
+    "kind": "product-response-availability-false-positive",
+    "caseId": "fresh-grammar-05",
+    "modelsAffected": 3,
+    "original": "The drummer played the rhythm skillful.",
+    "rawCorrection": "The drummer played the rhythm skillfully.",
+    "providerHttpStatus": 200,
+    "providerResponseStatus": "completed",
+    "productError": {
+      "code": "provider_invalid_response",
+      "stage": "judgment",
+      "reason": "content_change"
+    },
+    "rootCause": {
+      "file": "lib/judgment-correction.ts",
+      "mannerPairsLine": 28,
+      "conflictLine": 67,
+      "description": "Bounded reviewed manner pair list lacks skillful/skillfully; sameContent rejects the valid derived form."
+    },
+    "offlineReproduced": true,
+    "productFixed": false,
+    "notAnAdditionalOriginalAudit29Item": true
+  },
+  "review": {
+    "validVisibleOutputsReviewed": 87,
+    "unavailableAttemptRecordsReviewed": 3,
+    "reviewer": "same-author Codex AI analyst",
+    "newVisibleCriticalErrors": 0,
+    "newVisibleDisagreements": 0,
+    "modelIdentityOmittedFromSheet": true,
+    "individualGradesOmittedFromSheet": true,
+    "aggregateScoresKnownBeforeReview": true,
+    "strictBlindOrIndependentHuman": false,
+    "rawScoresAdjusted": false,
+    "rawModelReasonsCertified": false,
+    "detailedTeachingUsefulnessMeasured": false
+  },
+  "interruption": {
+    "kind": "local Windows ledger atomic rename EPERM after18 fully completed calls",
+    "originalLedgerPreserved": true,
+    "initial18SlotsUnchanged": true,
+    "financialLedgerReset": false,
+    "newApprovalCreated": false,
+    "paidRequestRetry": false,
+    "fix": "Owned persistence helper retries identical local rename only; completed request pairs skipped. Offline budget/recovery10 tests passed."
+  },
+  "verification": {
+    "guardTests": {
+      "passed": 10,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "frozenSourceAnd90ExactRequestBodies": {
+      "passed": true,
+      "exitCode": 0
+    },
+    "falsePositiveReproducer": {
+      "reproduced": true,
+      "exitCode": 0
+    },
+    "historicalPreservation": {
+      "passed": true,
+      "rootProductFilesPreserved": 637,
+      "auditRawFilesPreserved": 2089,
+      "prepublicationEvidencePreserved": 251,
+      "oldEvaluationProtectedFiles": 63,
+      "oldTaskMasterTagsPreserved": 4,
+      "sourceCommitUnchanged": "5a0fe1a7046763717a1ed1725cda96a2a74f1405",
+      "sourceClean": true,
+      "oldLedgersReopened": false
+    }
+  },
+  "operations": {
+    "paidGenerationProvider": "OpenAI Responses only",
+    "productionLearnerRowsRead": 0,
+    "productionQaWrites": 0,
+    "newDeployment": false,
+    "productionVersion": 146,
+    "newSourceCommitPushPr": false,
+    "actualIphoneOrVoiceOverTested": false,
+    "oldScoresOrBudgetsModified": false
+  },
+  "limits": [
+    "30 cases per model and one run per case; not general English accuracy or model ranking certification.",
+    "Model cross-grading and same-author AI review are not independent human expertise.",
+    "Visible explanations are largely reviewed app templates; model raw reasons and pedagogical usefulness are not certified.",
+    "No paired old-source run, historic rescore, hosted authenticated generation, production learner QA or real device.",
+    "Finding remains unresolved; evaluation completion is separate from release readiness."
+  ],
+  "officialSources": [
+    {
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "purpose": "Standard short-context model prices; conservative2.5x input and1.1x region guard"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "purpose": "Task-specific frozen references, separate automated and author review, explicit limitations"
+    },
+    {
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "purpose": "Manner adverbs and adjective/link-verb distinction"
+    },
+    {
+      "url": "https://www.collinsdictionary.com/us/dictionary/english/skillful",
+      "purpose": "skillfully listed as an adverb/derived form"
+    }
+  ],
+  "evidenceRoot": "outputs/comprehensive-ai-quality-20261105",
+  "evidenceSha256": {
+    "plan.json": "c6b4e037d1c9db5ccbd4d97a4a88ec6c3223857fc053cff2dfd53d6a4cb42a71",
+    "policy-freeze.json": "9f3e3346cbccc97c41ed47f1c3a976bb6ff8b77474ee8ad57c884dfc063806ce",
+    "freeze.json": "f3a6219ed7208bcfbf48be2e7ef55b730377deedb1b6a586ffe571290e8f487c",
+    "execution-freeze.json": "c60781fbb2012ec6c189e8dfaa2240358d7b4da0e8bc259a62216faed7bb8e30",
+    "continuation-binding.json": "99a9997d25cf1e09a0df4ceab406d22877ddfa48000ed670373708e052489390",
+    "attempt1-ledger.json": "5e556bc991b65c8d1d0fd68813fc4cd60e4727d7ef8ed98c0d6c1a27160eb3d3",
+    "collection.log": "8a14f7a2db665ba32c319ab2427e0782b2227cce926dfe9fa500433b0e17b773",
+    "collection-continue.log": "4f768b3809921b0356c39d87f82be83223714aa6ab269e516ffe78dcf9422ded",
+    "ledger.json": "37a943b350baacd113fd1d4bcb6626654ac0e7f49a825a9d2d6a26ab3bc8872c",
+    "rubric.json": "814559ed487c04854409978e582aaa1b86f0c6d7d34a8fae637999e703b41cf8",
+    "corpus.json": "2b3b5f07a1dd62a3d4f8826f0f2c161620bc3367e89457d216f3159485e23451",
+    "requests.json": "e9d08aaf844be07bfaa1ef77ce9d6f2eb53dce304165381565403a296073ea77",
+    "quality-report.json": "96b80ad19e84b9c74e26f5408731a2fcda00f5bd7c648a3b8994609e97e9ec88",
+    "author-review.json": "f1a6fa9ec908907f91427436b4427b9beb176db29a6af980a01a65c02626853d",
+    "raw-report-seal.json": "9be4077df673bf0959990e0ab19888730b64ae9957a8e9cfd827bcb123dcb2e2",
+    "verification.json": "42abe3503b3a60a6c5e35c53f6c3ccaa074757bcea646f47b82a08005e4f4118",
+    "preservation-final.json": "b86afbaf324cb7040755281a59ab29d1d412599bb4db4c982a3a8a7f7c70e59b",
+    "guard-tests.log": "02c7f52f6a66caf9d933f91a876092acf8be14b23755c4f71fdab5daa804142c",
+    "false-positive-reproduction.json": "aec56edc21a0d75d12176283d5a89197357b8e92ea09a013850558c118a8df6d",
+    "official-pricing.md": "77c25dff1a06a5305907d1593ed62c17dd9ebce051a044045e3576679fdec0ab",
+    "official-evaluation.md": "441f0e119c1f644a2dc8b145e887d8808b2e2f64accb53b3b337f8d47a86108f"
+  }
+}
