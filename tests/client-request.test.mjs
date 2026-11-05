@@ -33,3 +33,15 @@ test('HTTP errors are returned for callers to handle without retrying',async t=>
 test('invalid JSON fails without turning into an eventual timeout',async t=>{
  let signal;t.mock.method(globalThis,'fetch',async(_url,init)=>{signal=init.signal;return new Response('not json')});await assert.rejects(requestJson('/api/state',{},10),SyntaxError);await new Promise(r=>setTimeout(r,20));assert.equal(signal.aborted,false);
 });
+
+test('an unreadable HTTP refusal still honors body deadlines',async t=>{
+ t.mock.method(globalThis,'fetch',async(_url,init)=>({ok:false,status:413,json:()=>untilAbort(init.signal)}));
+ await assert.rejects(requestJson('/api/state',{method:'PUT'},10),RequestTimeoutError);
+});
+test('an unreadable HTTP refusal still honors caller cancellation',async t=>{
+ const controller=new AbortController();let reading;
+ const started=new Promise(resolve=>{reading=resolve});
+ t.mock.method(globalThis,'fetch',async(_url,init)=>({ok:false,status:413,json:()=>{reading();return untilAbort(init.signal)}}));
+ const pending=requestJson('/api/state',{method:'PUT',signal:controller.signal},1000);
+ await started;controller.abort();await assert.rejects(pending,e=>e.name==='AbortError'&&!(e instanceof RequestTimeoutError));
+});

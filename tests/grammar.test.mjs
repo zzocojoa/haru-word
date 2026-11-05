@@ -200,7 +200,7 @@ test('no skipped stages or false completions; sentence changes invalidate previo
     const p = initial(); change(p); assert.equal(model.grammarProgressSchema.safeParse(p).success, false);
   }
   const p = completed(), changed = model.updateGrammarSentence(p, 'I like tea.');
-  assert.equal(changed.check, undefined); assert.equal(changed.completedAt, undefined); assert.equal(changed.stage, 5); assert.equal(p.sentence, 'I like music.');
+  assert.equal(changed.check, undefined); assert.equal(changed.completedAt, p.completedAt); assert.equal(changed.stage, 5); assert.equal(p.sentence, 'I like music.');
   assert.equal(model.grammarStateSchema.safeParse({ invalid: initial() }).success, false);
   assert.equal(model.grammarProgressSchema.safeParse({ ...completed(), completedAt: undefined }).success, false);
   assert.equal(model.grammarProgressSchema.safeParse({ ...completed(), review: { index: 3, answers: completed().answers } }).success, false);
@@ -212,6 +212,85 @@ test('grammar deltas preserve all vocabulary scores, quotas and next-day allocat
   assert.deepEqual(delta.grammar, after.grammar); assert.deepEqual(delta.progress, {}); assert.deepEqual(delta.sessions, {}); assert.equal(delta.settings, undefined);
   assert.deepEqual(learningMetrics(after), learningMetrics(before));
   for (let goal = 1; goal <= 10; goal++) { before.settings.dailyGoal = goal; assert.deepEqual(pickDaily(words, after, '2026-09-25'), pickDaily(words, before, '2026-09-25')); }
+});
+
+test('AI-1: grammar save accepts only the current raw or trimmed feedback original, preserving the raw draft',async()=>{
+ let revision=0;
+ for(const sentence of [' I like books. ','\tI like books.\n','\u00a0I like books.\u00a0']){
+  const p={...v4Completed(),sentence,feedback:{original:sentence.trim(),correctedSentence:sentence.trim(),meaningUsage:'appropriate',grammar:'natural',explanation:'합성 참고 의견',model:'gpt-6.1-sol',provider:'openai',requestedModel:'gpt-6.1-sol',promptVersion:'reference-v5',validationVersion:'judgment-v5',createdAt:date}};
+  assert.equal(model.grammarProgressSchema.safeParse(p).success,true);
+  const r=await stateRoute.PUT(new Request('https://study.example/api/state',{method:'PUT',headers:{origin:'https://study.example','content-type':'application/json','X-Study-Grammar':'5','X-Study-AI-Contract':'4'},body:JSON.stringify({revision:revision++,progress:{},sessions:{},grammar:{noun:p}})}));assert.equal(r.status,200,await r.text());assert.equal(JSON.parse(readGrammar()[0].document).sentence,sentence);
+  assert.equal(model.grammarProgressSchema.safeParse({...p,feedback:{...p.feedback,original:'I  like books.'}}).success,false);
+  assert.equal(model.grammarProgressSchema.safeParse({...p,feedback:{...p.feedback,original:'I like tea.'}}).success,false);
+  assert.equal(model.grammarProgressSchema.safeParse({...p,feedback:{...p.feedback,original:sentence,promptVersion:'structured-v1'}}).success,true);
+ }
+});
+
+for(const version of [1,2,3,4])test(`AI-6: v${version} sentence edits and undo preserve independent review/schedule through save and reload`,async()=>{
+ let p=version===1?completed():version===2?v2Completed():version===3?v3Completed():v4Completed();
+ if(version===1)p={...p,review:{index:3,answers:p.answers,completedAt:date}};
+ else for(let n=0;n<2;n++){
+  const day=p.schedule.nextDate;
+  p=practice.startGrammarReview('noun',p,day,version);
+  p.review.answers=Object.fromEntries(practice.questionsFor('noun',p,true).map((q,i)=>['q'+(i+1),model.recordAnswer(undefined,q.answer)]));
+  p=practice.finishGrammarReview('noun',p,day);
+ }
+ if(version!==1)assert.equal(p.schedule.passed,2);
+ const original=structuredClone(p);let revision=0;
+ for(const sentence of ['Synthetic revised sentence.',original.sentence]){
+  p=model.updateGrammarSentence(p,sentence);
+  assert.equal(p.completedAt,original.completedAt);assert.deepEqual(p.review,original.review);assert.deepEqual(p.schedule,original.schedule);
+  assert.equal(p.check,undefined);assert.equal(p.stage,5);assert.equal(model.grammarProgressSchema.safeParse(p).success,true);
+  const response=await putV({noun:p},'5',revision++);assert.equal(response.status,200,await response.text());
+  assert.deepEqual(JSON.parse(readGrammar()[0].document),JSON.parse(JSON.stringify(p)));
+  p={...p,check:'appropriate',...(version===1?{}:{checks:{meaning:'appropriate',form:'appropriate'}})};
+  p=practice.completeLesson(p,'2026-11-05');
+  assert.equal(p.completedAt,original.completedAt);assert.deepEqual(p.schedule,original.schedule);assert.deepEqual(p.review,original.review);
+ }
+ assert.deepEqual(original.review,p.review);
+});
+
+test('AI-6: older clients cannot read or overwrite a revised completion; full/split restores retain it with protocol5',async()=>{
+ const original=v4Completed(),pending=model.updateGrammarSentence(original,'Synthetic replacement.');
+ assert.equal(compat.requiredGrammarVersion(pending),5);assert.equal(compat.grammarDocumentForClient(pending,4),undefined);
+ assert.equal((await putV({noun:pending},'4')).status,426);assert.equal(readGrammar().length,0);
+ assert.equal((await putV({noun:pending},'5')).status,200);
+ for(const version of ['1','2','3','4']){
+  assert.equal((await stateRoute.GET(new Request('https://study.example/api/state',{headers:{'X-Study-Grammar':version}}))).status,426);
+  assert.equal((await putV({noun:original},version,1)).status,426);
+  assert.equal((await restoreV({...EMPTY,grammar:{}},version,1)).status,426);
+ }
+ assert.equal((await putV(undefined,'4',1)).status,200);
+ const current=await(await stateRoute.GET(new Request('https://study.example/api/state',{headers:{'X-Study-Grammar':'5'}}))).json();
+ assert.deepEqual(current.state.grammar.noun,JSON.parse(JSON.stringify(pending)));
+ const state={...EMPTY,grammar:{noun:pending}},analysis=await analyzeBackup(raw(state));
+ assert.deepEqual(analysis.parsed.state.grammar,JSON.parse(JSON.stringify(state.grammar)));
+ assert.equal((await restoreV(state,'5',2)).status,200);
+ const job=await prepareRestore(state,3);await assert.rejects(jobs.commitRestoreJob(db,'owner',job.id,4));
+ await jobs.commitRestoreJob(db,'owner',job.id,5);assert.deepEqual(JSON.parse(readGrammar()[0].document),JSON.parse(JSON.stringify(pending)));
+});
+for(const version of [1,2,3,4])test(`AI-6: v${version} revised completion can revisit explanation and practice without losing review`,async()=>{
+ const original=version===1?{...completed(),review:{index:3,answers:completed().answers,completedAt:date}}:version===2?v2Completed():version===3?v3Completed():v4Completed();
+ let p=model.updateGrammarSentence(original,'Synthetic explanation revisit.'),revision=0;
+ for(const stage of [1,0,2,3,4,5]){
+  p={...p,stage};assert.equal(model.grammarProgressSchema.safeParse(p).success,true,`stage ${stage}`);
+  assert.equal(compat.requiredGrammarVersion(p),5);assert.equal(compat.grammarDocumentForClient(p,4),undefined);
+  const response=await putV({noun:p},'5',revision++);assert.equal(response.status,200,await response.text());
+  assert.deepEqual(JSON.parse(readGrammar()[0].document),JSON.parse(JSON.stringify(p)));
+  for(const old of ['1','2','3','4']){
+   assert.equal((await stateRoute.GET(new Request('https://study.example/api/state',{headers:{'X-Study-Grammar':old}}))).status,426);
+   assert.equal((await putV({noun:original},old,revision)).status,426);
+   assert.equal((await restoreV({...EMPTY,grammar:{}},old,revision)).status,426);
+  }
+  assert.equal(p.completedAt,original.completedAt);assert.deepEqual(p.answers,original.answers);assert.deepEqual(p.review,original.review);assert.deepEqual(p.schedule,original.schedule);
+ }
+ assert.equal(model.grammarProgressSchema.safeParse({...p,stage:6}).success,false);
+ const state={...EMPTY,grammar:{noun:{...p,stage:1}}};
+ assert.equal((await restoreV(state,'5',revision++)).status,200);
+ const job=await prepareRestore(state,revision);await assert.rejects(jobs.commitRestoreJob(db,'owner',job.id,4));
+ await jobs.commitRestoreJob(db,'owner',job.id,5);assert.deepEqual(JSON.parse(readGrammar()[0].document),JSON.parse(JSON.stringify(state.grammar.noun)));
+ p=practice.completeLesson({...p,check:'appropriate',...(version===1?{}:{checks:{meaning:'appropriate',form:'appropriate'}})},'2026-11-05');
+ assert.equal(p.stage,6);assert.equal(p.completedAt,original.completedAt);assert.deepEqual(p.schedule,original.schedule);assert.deepEqual(p.review,original.review);
 });
 test('new and old backups round-trip; explicit empty grammar is distinguishable from missing', async () => {
   for (const grammar of [undefined, {}, { noun: completed() }]) {
@@ -626,7 +705,7 @@ test('mixed version projection and fresh review preserve earlier answers, first 
   }
   for(const version of [2,3,4]){const ongoing=practice.startGrammarReview('noun',original,'2026-09-28',version);assert.deepEqual(practice.startGrammarReview('noun',ongoing,'2026-09-29',4),ongoing);assert.ok(practice.questionsFor('noun',ongoing,true).every(q=>q.id.includes(`:${version}:`)));}
  }
- assert.deepEqual(compat.GRAMMAR_CLIENT_HEADERS,{'X-Study-Grammar':'4'});
+ assert.deepEqual(compat.GRAMMAR_CLIENT_HEADERS,{'X-Study-Grammar':'5'});
 });
 test('client1/2/3 protect saved v4 from overwrite and full deletion while unrelated word saves succeed',async()=>{
  grammarRuntime.user={userId:'owner'};const current=v4Completed();sqlite.prepare('INSERT INTO grammar_progress VALUES (?,?,?)').run('owner','noun',JSON.stringify(current));

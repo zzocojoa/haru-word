@@ -9,7 +9,7 @@ function openaiFeedback(feedback, selected = model) {
 function currentOpenaiFeedback(route, feedback, selected = model) {
   const input = route.request().postDataJSON();
   if (!/^[a-f0-9]{64}$/.test(input.expectedContextFingerprint || '')) throw Error('Current synthetic feedback requires the request context fingerprint');
-  return { ...openaiFeedback(feedback, selected), promptVersion: 'reference-v5', validationVersion: 'judgment-v5',
+  return { ...openaiFeedback(feedback, selected), promptVersion: 'reference-v5', validationVersion: 'judgment-v6',
     contextFingerprint: input.expectedContextFingerprint, ...(input.contextNote ? { contextNote: input.contextNote } : {}) };
 }
 function feedbackReceipt(route,state='completed'){

@@ -16,15 +16,18 @@ const checks=[],errors=[];
  const session={id:sid,kind:'daily',date:yesterday,period:yesterday,ids:[w.id],warmupIds:[],stage:'en',index:0,records:{[w.id]:record},retry:[],retryMode:false,elapsed:0,finished:false,paused:true,createdAt:yesterday+'T14:50:00Z'};
  assert.equal((await a.request.put(base+'/api/state',{data:{revision:data.revision,settings:{...data.state.settings,activeSessionId:sid},progress:{[w.id]:{familiarity:'known',meaning,studyDates:[yesterday],lastStudied:yesterday,needsReview:true}},sessions:{[sid]:session}}})).status(),200);
  let time=yesterday+'T14:59:55Z',held,clockCalls=0,hold=false;
- await p.route('**/api/study-clock',r=>{clockCalls++;if(hold){held=r;return}return r.fulfill({json:{serverTime:Date.parse(time)}})});
+ let acknowledgeHeld;const heldReady=new Promise(resolve=>{acknowledgeHeld=resolve;});
+ await p.route('**/api/study-clock',r=>{clockCalls++;if(hold){held=r;acknowledgeHeld();return}return r.fulfill({json:{serverTime:Date.parse(time)}})});
  // Seed through the real API before installing the page's deliberately incorrect device clock.
  await p.clock.install({time:new Date('2030-01-01T00:00:00Z')});
  await p.goto(base,{waitUntil:'domcontentloaded'});await saved();await p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved();
  // Match the existing lifecycle QA: deferred mount/focus must finish before synthetic typing.
  await p.waitForFunction(()=>document.activeElement?.tagName==='H2'&&!!document.activeElement.closest('.session-panel'));
  const field=p.getByLabel('한국어 뜻 입력');const answer='나만의 비공개 답 123';await field.fill(answer);
- hold=true;const request=p.waitForRequest('**/api/study-clock');await p.evaluate(()=>window.dispatchEvent(new Event('focus')));await request;
- const initialCalls=clockCalls;
+ const beforeWakeCalls=clockCalls;hold=true;const request=p.waitForRequest('**/api/study-clock');await p.evaluate(()=>window.dispatchEvent(new Event('focus')));await request;
+ const requestEventCalls=clockCalls;let readinessTimer;try{await Promise.race([heldReady,new Promise((_,reject)=>{readinessTimer=setTimeout(()=>reject(Error('Held clock route did not acknowledge readiness')),5000);})]);}finally{clearTimeout(readinessTimer);}
+ assert.equal(clockCalls,beforeWakeCalls+1,'exactly one wake request has reached the held route');
+ const initialCalls=clockCalls;fs.writeFileSync(out+'/route-readiness-'+(process.env.QA_BROWSER||'chromium')+'.json',JSON.stringify({beforeWakeCalls,requestEventCalls,initialCalls},null,2));
  await p.evaluate(()=>{window.dispatchEvent(new Event('focus'));window.dispatchEvent(new Event('pageshow'));window.dispatchEvent(new Event('online'))});
  await p.getByRole('status').filter({hasText:'한국 시간을 확인하고 있어요'}).waitFor();assert.equal(clockCalls,initialCalls);
  await p.clock.fastForward(10_050);await p.getByRole('button',{name:'시간 다시 확인',exact:true}).waitFor();assert.equal(clockCalls,initialCalls);

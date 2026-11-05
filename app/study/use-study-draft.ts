@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState, type SetStateAction } from 'react';
 import type { Content, Progress, Session } from '@/lib/learning';
 import { editExpression, expressionDraft } from '@/lib/expression';
-import { hasStudyDraftInput, restoreStudyDraft, studyQuestionKey, type StudyDraft } from '@/lib/study-draft';
+import { hasStudyDraftInput, restoreStudyDraft, studyQuestionKey,reconcileStudyDraftRestoration, type StudyDraft } from '@/lib/study-draft';
 import {usePersistentInput} from '../use-persistent-input';
 
 export function useStudyDraft(session: Session, id: string | undefined, content?: Content, progress?: Progress, saved=false) {
@@ -18,6 +18,7 @@ export function useStudyDraft(session: Session, id: string | undefined, content?
     setSnapshot(active);
   }
   const generation = active.generation;
+  const currentDraft=active.draft;
   const setField = useCallback(<K extends keyof StudyDraft>(field: K, value: SetStateAction<StudyDraft[K]>) => {
     setSnapshot(previous => {
       if (previous.question !== question || previous.generation !== generation) return previous;
@@ -30,7 +31,11 @@ export function useStudyDraft(session: Session, id: string | undefined, content?
     });
   }, [question, generation]);
   const persistent=usePersistentInput({kind:'word',question,base:restoreStudyDraft(session,id,content),values:active.draft,saved,edited:active.edited,feedback:session.records[id??'']?.aiFeedback,
-    enabled:!!id&&!['done','checkpoint'].includes(session.stage),onRestore:values=>setSnapshot(previous=>previous.question!==question||previous.generation!==generation?previous:{...previous,draft:values,edited:true})});
+    enabled:!!id&&!['done','checkpoint'].includes(session.stage),onRestore:values=>{
+      const restored=reconcileStudyDraftRestoration({...currentDraft},restoreStudyDraft(session,id,content),values);
+      setSnapshot(previous=>previous.question!==question||previous.generation!==generation?previous:{...previous,draft:restored,edited:true});
+      return restored;
+    }});
   const setAiPending = useCallback((value: SetStateAction<boolean>) => {
     setSnapshot(previous => previous.question === question && previous.generation === generation
       ? { ...previous, aiPending: typeof value === 'function' ? value(previous.aiPending) : value } : previous);

@@ -31,7 +31,7 @@ test('modal strength and explicit be-tense shifts are blocked while equivalent n
  for(const [a,b]of [['She can swims.','She must swim.'],['He is writes a note.','He wrote a note.'],['They was walking.','They are walking.']])assert.equal(correctionConflict(a,b),'time_or_focus');
  for(const [a,b]of [["They couldn't swims.",'They could not swim.'],["I'll goes.",'I will go.'],['The children was whispering.','The children were whispering.']])assert.equal(correctionConflict(a,b),undefined,a);
 });
-const feedback={original:'I need a map.',correctedSentence:'I need a map.',meaningUsage:'appropriate',grammar:'natural',explanation:'합성 새 의견',model:'gpt-6.1-sol',provider:'openai',requestedModel:'gpt-6.1-sol',promptVersion:'reference-v5',validationVersion:'judgment-v5',contextFingerprint:'a'.repeat(64),createdAt:'2026-11-04T00:00:00.000Z'};
+const feedback={original:'I need a map.',correctedSentence:'I need a map.',meaningUsage:'appropriate',grammar:'natural',explanation:'합성 새 의견',model:'gpt-6.1-sol',provider:'openai',requestedModel:'gpt-6.1-sol',promptVersion:'reference-v5',validationVersion:'judgment-v6',contextFingerprint:'a'.repeat(64),createdAt:'2026-11-04T00:00:00.000Z'};
 test('current matching feedback wins over future-dated history in every source order; history is preserved if nothing matches',()=>{
  const future={...feedback,model:'gpt-6.1-terra',promptVersion:'reference-v3',validationVersion:'judgment-v3',createdAt:'2099-01-01T00:00:00.000Z'};
  for(const values of [[future,feedback],[feedback,future]])assert.equal(currentFeedback(values,feedback.original,feedback.model,feedback.contextFingerprint),feedback);

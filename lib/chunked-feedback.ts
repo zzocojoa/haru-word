@@ -21,7 +21,7 @@ export function parseChunkedFeedback(text: unknown, original: string, model: Par
   let value: unknown;
   try { value = JSON.parse(text); } catch { throw new FeedbackValidationError('json_syntax'); }
   const parsed = wireSchema.safeParse(value);
-  if (!parsed.success) throw new FeedbackValidationError('fields', 'wire_fields', summarizeValidationIssues(parsed.error.issues));
+  if (!parsed.success) throw new FeedbackValidationError('fields', 'wire_fields', summarizeValidationIssues(parsed.error.issues,value));
   const content = parsed.data, sentence = content.correctedSentence;
   const tokens = [...sentence.matchAll(/\S+/gu)];
   let cursor = 0;

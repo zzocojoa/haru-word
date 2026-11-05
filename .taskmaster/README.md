@@ -1,3 +1,22 @@
+<!-- comprehensive-implementation-current -->
+# 광역 감사 수정 기존 Site 게시 완료 · 2026-11-05
+
+사용자 개선 착수 승인으로 `comprehensive-remediation` 상위33/33 완료, 세부81/81 완료다. 품질·출시 준비·게시를 따로 판정한다. 기존 Site 게시·Sites 소스 저장/push가 승인됐으며 실제 AI 평가·GitHub commit/push/PR은 별도 승인이다. [구현 기록](../docs/COMPREHENSIVE_REMEDIATION_IMPLEMENTATION_20261105.md)·[출시 준비](../docs/COMPREHENSIVE_REMEDIATION_RELEASE_READINESS_20261105.md)와 기존4318의 Task Master 실제 상태를 확인한다. 아래 계획의 모두 대기/미승인 표현은 등록 당시 기록이다.
+<!-- /comprehensive-implementation-current -->
+
+<!-- comprehensive-remediation-plan-current -->
+# 2026-11-05 · 광역 결함 감사 후속 수정 계획
+
+현재 기본 선택은 `comprehensive-remediation` / `comprehensive-remediation-2026-11-05`다. **상위33·세부81 모두 대기, 감사29항목 매핑 완료, 제품 구현 미착수**다. 아래 이전 플랜 기록의 현재/새 플랜 표현은 그 당시 이력으로 보존한다.
+
+- [한국어 계획서](../docs/COMPREHENSIVE_REMEDIATION_PLAN_20261105.md), [RPG PRD](docs/comprehensive-remediation-prd.md)
+- [manifest](docs/comprehensive-remediation-manifest.json), [29항목 매핑](docs/comprehensive-remediation-mapping.json), [수동 복잡도](docs/comprehensive-remediation-complexity.json), [계획 검증](docs/comprehensive-remediation-validation.json)
+- 원본 SOURCE: `work/comprehensive-defect-audit-20261105`; 기존4318은 ROOT의 자료를 읽는다. 신규 tag/계획 자료만 두 곳에 동기화하며 기존3태그와 예산·게시·실패 이력은 보존한다.
+- `node .taskmaster/scripts/verify-comprehensive-remediation-plan.mjs`로 계획/매핑/보존을, `node .taskmaster/scripts/test-comprehensive-remediation-dashboard.mjs`로 네 플랜과 새로고침을 검증한다. 브라우저 경로는 기존 `QA_PLAYWRIGHT_PATH` 설정을 사용한다.
+- `node .taskmaster/scripts/build-openai-dashboard.mjs`; 기존 http://127.0.0.1:4318/ 에서 전체 페이지 새로고침 후 새 플랜을 선택한다. 열린 페이지 catalog 갱신 결함 DASH-1~3은 이번에 수정하지 않았다.
+- 구현·실제 AI 평가·게시·commit/push/PR은 이번 범위 밖이다. 옛 닫힌 원장과 잔액을 재개하지 않는다.
+<!-- /comprehensive-remediation-plan-current -->
+
 # 하루단어 작업 현황
 
 현재 플랜은 `integration-remediation` **상위12/12·세부41/41 완료**다. 사용자 “진행” 승인으로 게시12까지 완료했고 기존 Site는 **v144·소스d41d4e7·환경77**이다. 로컬 구현11/11·품질 게이트·운영 게시 결과를 각각 기록하며 유료 호출·운영 학습 QA 쓰기는0이다. 이전 `judgment-remediation` **18개·49개 완료/v143 게시**와 `master` **15개·35개 완료/당시 품질 보류**는 별도로 보존한다. 플랜별 진행률·검증·평가 비용을 합산하지 않는다.

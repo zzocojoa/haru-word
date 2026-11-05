@@ -1,3 +1,31 @@
+<!-- comprehensive-remediation-github-current -->
+## 2026-11-05 · 광역 감사 수정 GitHub 검토 후보
+
+사용자 `커밋 푸시 PR 진행`에 따라 기존 `codex/comprehensive-defect-audit-20261105`를 GitHub `main` 대상 PR로 제출한다. [후속 검토·검증·호환 복구](docs/COMPREHENSIVE_REMEDIATION_GITHUB_20261105.md)를 따른다. 최종 Node22/24 각848/848, 타입·린트(기존15경고)·문법 자료·빌드 exit0, 추가 설명/예문 이동은 Chromium/WebKit 통과다. 최초 검사 환경 실패와 당시 v146 전체87×2 검증은 별도 보존했다.
+
+운영은 **v146 · Sites 소스cd475d7**이며 PR에는 제품3파일의 후속 보완이 더 있다. 문법 수정 후 설명 재방문 저장과 DB judgment-v6 구형 클라이언트 보호를 보완했으며 추가 게시·유료 AI·운영 학습 QA 쓰기는0이다. 이전 문서의 GitHub 미승인·미실행·옛 HEAD 표시는 당시 기록이다.
+<!-- /comprehensive-remediation-github-current -->
+
+<!-- comprehensive-remediation-publication-current -->
+## 2026-11-05 · 광역 감사 수정 v146 운영 게시 완료
+
+사용자 “다음 운영 게시 작업 승인”으로 [기존 하루단어 사이트](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 **v146**을 게시했다. native receipt `succeeded`, Sites 소스 `cd475d7a9b8bb8a4840ce54f18a3d6701b4b3dc4`다. 기존 게시 checkout을 재사용했고 실제 구현 SOURCE `work/comprehensive-defect-audit-20261105`의 브랜치/HEAD는 유지했다. [게시 기록·호환 복구](docs/COMPREHENSIVE_REMEDIATION_V146_ROLLOUT_20261105.md)와 [검증 영수증](docs/releases/2026-11-05-comprehensive-remediation-v146-rollout.json)을 따른다.
+
+홈200·익명 상태401·시계200/no-store, 공개 자산15개 해시를 확인했다. 환경14항목/revision77·공개범위/revision6·DB/R2·기존SQL7개 유지, 새SQL0이다. 유료 AI·운영 학습 행 조회/QA 쓰기·GitHub commit/push/PR·롤백은0이다. 실제 iPhone/VoiceOver·운영 인증 AI·독립 영어 품질은 후속 미검증이다. 새 문법 상태 이후에는 reader5 보호를 유지하는 호환 복구가 필요하다. 아래 미게시·미승인 문구는 당시 기록이다.
+<!-- /comprehensive-remediation-publication-current -->
+
+<!-- comprehensive-remediation-current -->
+## 2026-11-05 · 광역 감사29항목 수정·검증·출시 준비 완료, 미게시
+
+사용자 `개선 착수 승인`의 로컬 범위를 완료했다. 실제 제품 원본은 `C:\Users\user\Documents\ChatGPT\하루단어\work\comprehensive-defect-audit-20261105`, 브랜치 `codex/comprehensive-defect-audit-20261105`, HEAD `5609a8e6fa7d148ff4cf6582ae20fe0ed2669171` 그대로다. tag `comprehensive-remediation` / planId `comprehensive-remediation-2026-11-05`: 상위32/33·세부79/81 완료, #33 게시와 세부2개는 별도 승인 전 보류다. 기본 ROOT의 제품637파일과 기존 세 플랜·닫힌 평가/예산·감사5파일/원시2089파일은 보존했다.
+
+Node22.23.4/24.22.1 단위 각838/838, 최종 제품의 Chromium/WebKit 원본 기능 각87/87, 별도 P1/복구16사례·정상/보호 제거 대조, 성능5개·느린망1825회차, Linux 수명17개, 대시보드5+17+18+15검사와 보존 검증을 완료했다. 모든 해당 명령 exit0, lint 기존15경고, npm audit 알려진 권고0건이다. 후속 QA 전/후의 실행 폴더·최초 실패·중단·환경 오류는 그대로 남겼다.
+
+[출시 준비·호환성/위험/복구](docs/COMPREHENSIVE_REMEDIATION_RELEASE_READINESS_20261105.md), [명령·검증/해시 판정](docs/releases/2026-11-05-comprehensive-remediation-readiness.json), [구현 경과](docs/COMPREHENSIVE_REMEDIATION_IMPLEMENTATION_20261105.md), [기존 실시간 대시보드](http://127.0.0.1:4318/)를 따른다. 문법 reader5·콘텐츠1–4, AI 클라이언트4·judgment-v6·reference-v5, API/백업/revision 보호를 유지했다. 새 SQL·Site/DB/R2 변경0. 생성 D1 migrations_dir는 도구 정규화이므로 설정 전체 바이트 동일성은 주장하지 않는다.
+
+운영 게시·commit/push/PR·실제 유료 AI 평가·운영 학습 행 조회/QA 쓰기는 실행하지 않았다. 실제 iPhone/VoiceOver·독립 영어 품질·DATA-1 추가 OOM/운영128MB·Node22 native 실패 원인·native 초과 upload의 항상413 도착은 미검증이다. 성능 기준은 감사 HEAD와7파일이 다른 보존 ROOT dist여서 정확한 수정 전후 개선으로 표현하지 않는다. 전역 Node22.22.2는 그대로이며 격리 Node로 검사했다. 아래 미수정·계획 대기·과거 운영 버전은 당시 이력이다.
+<!-- /comprehensive-remediation-current -->
+
 <!-- provider-network-publication-approval -->
 ## 2026-11-05 · 통신 수정 v145 운영 반영 완료
 
@@ -106,7 +134,7 @@ AI 제공자 공통 계약·읽기 전용 결과·재점검 버튼 상태의 리
 
 오늘 학습의 영어 품사 코드와 S/V/O/C 도움말·회귀 검사 범위는 [GRAMMAR_TERMS.md](GRAMMAR_TERMS.md)를 참조하세요.
 
-AI 교정문의 역할별 구조·해석과 저장·구형 호환·복구 지침은 [AI_SENTENCE_STRUCTURE.md](AI_SENTENCE_STRUCTURE.md)를 참조하세요.
+현재 AI 계약·장애 차단·복구 지침은 [OpenAI 운영 절차](docs/OPENAI_FEEDBACK.md)를 참조하세요. 역할별 구조·해석과 구형 호환의 도입 이력은 [AI_SENTENCE_STRUCTURE.md](AI_SENTENCE_STRUCTURE.md)에 보존합니다.
 
 입력·화면 이동·집계·응답 검증·백업 복원의 리팩토링 경계와 회귀 검사는 [REFACTORING_2026-09-27.md](REFACTORING_2026-09-27.md)를 참조하세요.
 

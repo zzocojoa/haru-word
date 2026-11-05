@@ -18,7 +18,7 @@ export function readFeedbackRecoveryResponse(result: FeedbackRecoveryResponse, e
   if (result.response.ok && (!metadata.success || metadata.data.state !== 'completed')) return invalid();
   if (!result.response.ok || !metadata.success || metadata.data.state !== 'completed') {
     return { ok: false, issue: issueFromResponse(body, result.response.status),
-      terminal: lookup || metadata.success && metadata.data.state !== 'unknown' || result.response.status >= 400 && result.response.status < 500 };
+      terminal: metadata.success && (['failed','expired','invalidated'].includes(metadata.data.state) || lookup && metadata.data.state === 'unknown') };
   }
   const parsed = sentenceFeedbackSchema.safeParse(body.feedback);
   if (!parsed.success || parsed.data.provider !== 'openai'

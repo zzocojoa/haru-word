@@ -27,7 +27,8 @@ function taskDocument(task, child = false) {
 export function normalizeDashboard(tasksFile, manifest, source = {}) {
   if (!manifest || !Array.isArray(manifest.tasks) || !Array.isArray(manifest.gates)) throw new Error('invalid_manifest');
   const tag = text(manifest.tag, 'master');
-  const collection = Object.hasOwn(tasksFile, tag) ? tasksFile[tag]?.tasks : tasksFile.tasks;
+  const collection = Object.hasOwn(tasksFile, tag) ? tasksFile[tag]?.tasks
+    : tag === 'master' || tasksFile.planId === manifest.planId ? tasksFile.tasks : undefined;
   if (!Array.isArray(collection)) throw new Error('missing_tasks');
   const planTasks = manifest.tasks.map(t => ({ id: identifier(t.id), phase: Number(t.phase) || 0, subtaskCount: Number(t.subtaskCount) || 0 }));
   const ids = new Set(planTasks.map(t => t.id));
@@ -53,13 +54,15 @@ export function normalizeDashboard(tasksFile, manifest, source = {}) {
 export async function readDashboardSnapshot(root = PROJECT_ROOT, planId) {
   const taskPath = resolve(root, '.taskmaster/tasks/tasks.json');
   const registryPath = resolve(root, '.taskmaster/docs/dashboard-plans.json');
-  let registry;
+  let registry, rawRegistry;
   try {
     if ((await stat(registryPath)).size > 100_000) throw new Error('source_too_large');
-    registry = JSON.parse(await readFile(registryPath, 'utf8'));
+    rawRegistry = await readFile(registryPath, 'utf8');
+    registry = JSON.parse(rawRegistry);
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
     registry = { defaultPlanId: 'openai-api-migration-2026-11-03', plans: [{ id:'openai-api-migration-2026-11-03', label:'OpenAI 전환', manifest:'.taskmaster/docs/openai-migration-manifest.json' }] };
+    rawRegistry = JSON.stringify(registry);
   }
   if (!Array.isArray(registry.plans) || !registry.plans.length || registry.plans.length > 8
     || registry.plans.some(p=>!p || !/^[a-z0-9][a-z0-9-]{1,80}$/.test(p.id) || !/^\.taskmaster\/docs\/[a-z0-9-]+\.json$/.test(p.manifest))
@@ -75,7 +78,7 @@ export async function readDashboardSnapshot(root = PROJECT_ROOT, planId) {
     if ((await stat(manifestPath)).size > 1_000_000) throw new Error('source_too_large');
     const rawManifest=await readFile(manifestPath,'utf8'),manifest=JSON.parse(rawManifest);
     if (manifest.planId !== entry.id) throw new Error('plan_id_mismatch');
-    const hash=createHash('sha256').update(rawTasks).update(rawManifest).digest('hex');
+    const hash=createHash('sha256').update(rawTasks).update(rawManifest).update(rawRegistry).digest('hex');
     const snapshot=normalizeDashboard(tasks,manifest,{mode:'live',updatedAt:taskStat.mtime.toISOString(),hash});
     snapshot.plan.context=text(entry.context);snapshot.plan.budget=text(entry.budget);snapshot.plan.kind=text(entry.kind);
     if(manifest.executionStarted&&entry.kind==='current'){

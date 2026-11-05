@@ -29,13 +29,15 @@ const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric'
   checks.push('completed snapshot uses its recorded meaning, not the current edited sense');
   await restore(state);await page.goto(base);await saved();const before=await get();
   await page.getByRole('button',{name:'오늘 단어 다시 보기',exact:true}).click();await pronunciation();await layout('completed snapshot pronunciation');await page.keyboard.press('Escape');await page.getByRole('dialog').waitFor({state:'hidden'});assert.deepEqual(await get(),before);
-  await page.getByRole('tab',{name:'단어장',exact:true}).click();await page.getByLabel('단어 또는 한국어 뜻 검색').fill('close');await page.getByRole('button',{name:'close 동사 · close1',exact:true}).click();await pronunciation();await layout('editor reviewed pronunciation');
+  await page.getByRole('tab',{name:'단어장',exact:true}).click();await page.getByLabel('단어 또는 한국어 뜻 검색').fill('close');const firstEditorTrigger=page.getByRole('button',{name:'close 동사 · close1',exact:true});await firstEditorTrigger.click();await pronunciation();await layout('editor reviewed pronunciation');
   await page.getByRole('button',{name:'다른 뜻 추가',exact:true}).click();await page.getByLabel('학습할 뜻',{exact:true}).fill('마감하다');await page.getByRole('link',{name:'사전에서 발음 확인',exact:true}).waitFor();assert.equal(await page.locator('.word-ipa .phonetic').count(),0);await page.keyboard.press('Escape');await page.getByRole('button',{name:'변경 버리고 닫기',exact:true}).click();await page.getByRole('dialog').waitFor({state:'hidden'});assert.deepEqual(await get(),before);
+  // Discard closes the nested confirmation before the editor's deferred focus handoff.
+  const firstReturn=await firstEditorTrigger.elementHandle();try{await page.waitForFunction(el=>document.activeElement===el,firstReturn,{timeout:5000});}finally{await firstReturn.dispose();}
   checks.push('edited sense removes guessed IPA and discard preserves records');
   const expectedIpa=JSON.parse(fs.readFileSync('data/american-ipa-ui.json')).entries;
   for(const name of ['read','a, an','quickly']){
    const entry=words.find(w=>w.word===name),search=page.getByLabel('단어 또는 한국어 뜻 검색');
-   await search.fill(name);assert.equal(await page.locator('.word-ipa').count(),0,'library list has no IPA');
+   await search.fill(name);assert.equal(await search.inputValue(),name,'search input applied after editor focus return');assert.equal(await page.locator('.word-ipa').count(),0,'library list has no IPA');
    const trigger=page.locator('.word-link').filter({has:page.locator('b',{hasText:new RegExp('^'+name+'$')})}).first();
    await trigger.click();const dialog=page.getByRole('dialog');await dialog.locator('.word-ipa').waitFor();
    assert.deepEqual(await dialog.locator('.phonetic').allTextContents(),expectedIpa[entry.id].map(v=>v[0]));

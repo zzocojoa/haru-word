@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { build } = require('esbuild');
 const { launchBrowser, closeBrowser, base, accountHeaders, axePath } = require('./qa/runtime.cjs');
+const {currentOpenaiFeedback,feedbackReceipt}=require('./qa/openai-fixture.cjs');
 const words = JSON.parse(fs.readFileSync('data/words.json', 'utf8'));
 const material = JSON.parse(fs.readFileSync('data/content.json', 'utf8'));
 const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
@@ -15,7 +16,7 @@ const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
   const out = 'outputs/refactor-boundaries' + (engine === 'chromium' ? '' : '-' + engine); fs.mkdirSync(out, { recursive: true });
   async function setup() {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce', extraHTTPHeaders: accountHeaders('refactor_boundaries') });
-    const get = async () => (await c.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1' } })).json();
+    const get = async () => (await c.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1','X-Study-AI-Contract':'4' } })).json();
     const put = async delta => { const before = await get(); assert.equal((await c.request.put(base + '/api/state', { data: { revision: before.revision, progress: {}, sessions: {}, ...delta } })).status(), 200); };
     const p = await c.newPage(); currentPage = p; p.on('pageerror', e => errors.push(e.message));
     await p.addInitScript(() => { window.auditTools = {}; Object.defineProperty(document, 'modelContext', { configurable: true, value: { registerTool(t) { window.auditTools[t.name] = t; } } }); });
@@ -101,18 +102,26 @@ const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
     checks.push('pending Back confirmation rejects tool navigation truthfully; cancellation preserves drafts and subsequent navigation succeeds');
     await c.close();
 
-    for (const mode of ['tab', 'tool']) {
-      const { c, p, get, put } = await setup(), now = new Date().toISOString(), sentence = 'I like books.';
+    for (const mode of ['active', 'tab', 'tool']) {
+      const { c, p, get, put } = await setup(), now = new Date().toISOString(), sentence = 'I like coffee and books.';
       await put({ grammar: { noun: { stage: 5, answers: Object.fromEntries(lesson.questions.map((q, i) => ['q' + (i + 1), { first: q.answer, latest: q.answer, helped: false, attempts: 1 }])), sentence, updatedAt: now } } });
       await p.goto(base); await saved(p); await p.getByRole('tab', { name: '단어장', exact: true }).click(); await p.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await p.locator('.grammar-tile').first().click();
       let release, requested; const hold = new Promise(r => release = r), called = new Promise(r => requested = r);
-      await p.route('**/api/grammar-feedback', async route => { requested(); await hold; await route.fulfill({ json: { feedback: { original: sentence, correctedSentence: sentence, explanation: '합성 응답', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {}); });
+      let expected,delivery;
+      await p.route('**/api/grammar-feedback', async route => { expected=currentOpenaiFeedback(route,{original:sentence,correctedSentence:sentence,explanation:'합성 응답',meaningUsage:'appropriate',grammar:'natural',createdAt:now});const receipt=feedbackReceipt(route);requested();await hold;delivery=await route.fulfill({json:{feedback:expected,receipt}}).then(()=> 'fulfilled',()=> 'aborted'); });
       try {
         await p.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await called;
+        if(mode==='active'){
+          release();const end=Date.now()+10000;let stored;
+          while(Date.now()<end){stored=(await get()).state.grammar.noun.feedback;if(stored?.contextFingerprint===expected.contextFingerprint)break;await p.waitForTimeout(25);}
+          assert.deepEqual(stored,expected);await p.reload();await saved(p);assert.deepEqual((await get()).state.grammar.noun.feedback,expected);
+          checks.push('active: the same current receipt/model/context fixture is accepted, persisted and survives reload');continue;
+        }
         if (mode === 'tab') await p.getByRole('tab', { name: '오늘 학습', exact: true }).click();
         else assert.equal((await p.evaluate(() => window.auditTools.show_learning_view.execute({ view: 'today' }))).navigated, true);
         await p.getByRole('tabpanel', { name: '오늘 학습', exact: true }).waitFor({ state: 'visible' }); release(); await p.waitForTimeout(800);
         assert.equal((await get()).state.grammar.noun.feedback, undefined);
+        assert.ok(['fulfilled','aborted'].includes(delivery),'record whether the canceled transport fulfilled or aborted');
         // Both entry points must also remain on the current view after a failed draft flush.
         await p.getByRole('tab', { name: '단어장', exact: true }).click();
         await p.route('**/api/state', route => route.request().method() === 'PUT' ? route.fulfill({ status: 503, json: { error: '합성 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' } }) : route.continue());

@@ -9,7 +9,7 @@ export const DEFAULT_AI_MODEL: AiModelId = 'gpt-6.1-sol';
 export const AI_MODEL_PRICE_DATE = '2026-11-03';
 export const AI_REASONING_EFFORT = 'low' as const;
 export const AI_PROMPT_VERSION = 'reference-v5';
-export const AI_VALIDATION_VERSION = 'judgment-v5';
+export const AI_VALIDATION_VERSION = 'judgment-v6';
 
 export function aiModel(id: string) { return AI_MODELS.find(model => model.id === id); }
 export function selectedAiModel(settings: { aiModelId?: string }) { return settings.aiModelId ?? DEFAULT_AI_MODEL; }

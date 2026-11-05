@@ -59,13 +59,16 @@ export class LocalLearningDrafts {
   private attempted=new Map<string,string>();
   private suppressed=new Map<string,string>();
   private connected=false;
+  private ownerConfirmed=false;
+  private confirmationOwner:string|null|undefined;
   private epoch='initial';
   readonly owner:string|null;
   readonly instanceId:string;
   private storageFactory:()=>DraftStorage;
   private now:()=>number;
-  constructor(owner:string|null,instanceId:string,storageFactory:()=>DraftStorage,now:()=>number=Date.now) {
-    this.owner=owner;this.instanceId=instanceId;this.storageFactory=storageFactory;this.now=now;
+  private requireOwnerConfirmation:boolean;
+  constructor(owner:string|null,instanceId:string,storageFactory:()=>DraftStorage,now:()=>number=Date.now,requireOwnerConfirmation=false) {
+    this.owner=owner;this.instanceId=instanceId;this.storageFactory=storageFactory;this.now=now;this.requireOwnerConfirmation=requireOwnerConfirmation;
   }
   getSnapshot=()=>this.state;
   getServerSnapshot=()=>EMPTY_DRAFT_STORAGE_STATE;
@@ -79,6 +82,13 @@ export class LocalLearningDrafts {
     if(this.connected)return;
     this.connected=true;
     if(!this.owner){this.publish({ready:true,available:false});return;}
+    // A delayed SSR document is not proof that this is still the signed-in owner.
+    // Wait for its authenticated, validated state read before touching shared keys.
+    if(this.requireOwnerConfirmation&&!this.ownerConfirmed){
+      try{this.storage=this.storageFactory();this.confirmationOwner=this.storage.getItem(DRAFT_OWNER_KEY);}
+      catch{this.publish({ready:true,available:false,error:'unavailable'});return;}
+      this.publish({ready:true,available:false});return;
+    }
     try {
       this.storage=this.storageFactory();
       const prefix=ownerPrefix(this.owner),keys=this.keys();
@@ -88,8 +98,18 @@ export class LocalLearningDrafts {
       const available=this.refresh();this.publish({ready:true,available});
     } catch {this.publish({ready:true,available:false,error:'unavailable'});}
   }
+  confirmOwner=()=>{
+    if(!this.owner||!this.state.active)return false;
+    if(this.ownerConfirmed)return this.state.available;
+    try{
+      const currentOwner=(this.storage??this.storageFactory()).getItem(DRAFT_OWNER_KEY);
+      if(currentOwner!==this.confirmationOwner&&currentOwner!==this.owner){this.invalidate();return false;}
+    }catch{this.publish({available:false,error:'unavailable'});return false;}
+    this.ownerConfirmed=true;this.connected=false;this.connect();return this.state.available;
+  };
   private keys() { const s=this.storage!;return Array.from({length:s.length},(_,i)=>s.key(i)).filter((k):k is string=>k!==null); }
   private active() {
+    if(this.requireOwnerConfirmation&&!this.ownerConfirmed)return false;
     if(!this.owner||!this.storage||!this.state.active)return false;
     if(this.storage.getItem(DRAFT_OWNER_KEY)!==this.owner){this.entries.clear();this.publish({active:false,available:false});return false;}
     return true;
@@ -119,6 +139,7 @@ export class LocalLearningDrafts {
   release=()=>{try{if(this.storage&&this.owner&&this.storage.getItem(DRAFT_OWNER_KEY)===this.owner)this.storage.removeItem(ACTIVE_PREFIX+encodeURIComponent(this.owner)+':'+this.instanceId);}catch{}};
   isInstanceActive=(instanceId:string)=>{try{return !!this.owner&&this.storage?.getItem(ACTIVE_PREFIX+encodeURIComponent(this.owner)+':'+instanceId)==='1';}catch{return true;}};
   retry=()=>{
+    if(this.requireOwnerConfirmation&&!this.ownerConfirmed)return false;
     if(!this.state.active||!this.owner)return false;
     try {
       const storage=this.storageFactory(),owner=storage.getItem(DRAFT_OWNER_KEY);

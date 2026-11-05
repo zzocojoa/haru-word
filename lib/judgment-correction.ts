@@ -3,11 +3,22 @@ import type { JudgmentRejectionReason } from './provider-feedback-contract.ts';
 
 const simpleNumbers = new Map(['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'].map((word, n) => [word, String(n)]));
 function quantities(sentence: string) {
-  return (sentence.toLowerCase().match(/\b(?:\d+(?:\.\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\b/g) ?? [])
-    .map(value => simpleNumbers.get(value) ?? value.replace(/^0+(?=\d)/, '')).sort().join('|');
+  return (sentence.toLowerCase().match(/[-−]?\b(?:\d+(?:\.\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\b/g) ?? [])
+    .map(value => simpleNumbers.get(value) ?? value.replace('−','-').replace(/^(-?)0+(?=\d)/, '$1')).join('|');
 }
 function negations(sentence: string) {
   return (sentence.toLowerCase().replaceAll('’', "'").match(/\b(?:not|no|never|none|nothing|nobody|neither|nor|cannot)\b|\b[a-z]+n't\b/g) ?? []).length;
+}
+function negationAnchors(sentence:string) {
+  const words=sentence.toLowerCase().replaceAll('’',"'").replace(/\bcan't\b/g,'can not').replace(/\bcannot\b/g,'can not').replace(/\bwon't\b/g,'will not').replace(/\bshan't\b/g,'shall not').replace(/n't\b/g,' not').match(/[a-z]+|[.!?;,]/g)??[];
+  return words.flatMap((word,index)=>{
+    if(!['not','no','never','none','nothing','nobody','neither','nor'].includes(word))return [];
+    const previous=words.slice(0,index),next=words.slice(index+1);
+    const clause=(list:string[])=>{const i=list.findIndex(x=>['and','but','or','because','although','if','when','while','.',',',';','!','?'].includes(x));return i<0?list:list.slice(0,i);};
+    const anchors=(list:string[])=>clause(list).filter(x=>!functionWords.has(x)&&!auxiliaryWordForm(x)&&!simpleNumbers.has(x));
+    // Auxiliary agreement may change; the neighbouring content/its clause may not.
+    return [{word,before:anchors(previous.reverse()),after:anchors(next)}];
+  });
 }
 const timeAndFocus = (sentence: string) => (sentence.toLowerCase().match(/\b(?:yesterday|today|tomorrow|tonight|now|still|already|ago|later|almost|only|also|even)\b/g) ?? []).sort().join('|');
 const people: Record<string, string> = { i:'first', me:'first', you:'second', he:'male', him:'male', she:'female', her:'female', we:'plural_first', us:'plural_first', they:'plural_third', them:'plural_third' };
@@ -46,7 +57,7 @@ export function correctionConflict(original: string, correction: string): Judgme
   if (before && after && before !== after) return 'participants';
   const pronouns=(s:string)=>(s.toLowerCase().match(/\b(?:i|me|you|he|him|she|her|we|us|they|them)\b/g)??[]).map(person).join('|');
   if(pronouns(original)!==pronouns(correction))return 'participants';
-  if(original.trim().endsWith('?')&&!correction.trim().endsWith('?'))return 'speech_act';
+  if(original.trim().endsWith('?')!==correction.trim().endsWith('?'))return 'speech_act';
   const wh=(s:string)=>s.toLowerCase().match(/^(what|why|where|when|who|whom|whose|which|how)\b/)?.[1];
   if(wh(original)&&wh(original)!==wh(correction))return 'speech_act';
   if(pairedContrastRepair(original,correction))return;
@@ -54,4 +65,8 @@ export function correctionConflict(original: string, correction: string): Judgme
   // change, a new story or different content word is not a minimal correction.
   const contentBefore=contentWords(original),contentAfter=contentWords(correction);
   if(contentBefore.length!==contentAfter.length||contentBefore.some((w,i)=>!sameContent(w,contentAfter[i])))return 'content_change';
+  const originalNegations=negationAnchors(original),correctedNegations=negationAnchors(correction);
+  if(originalNegations.length!==correctedNegations.length||originalNegations.some((a,i)=>{
+    const b=correctedNegations[i];return a.word!==b.word||a.before.length!==b.before.length||a.after.length!==b.after.length||a.before.some((w,j)=>!sameContent(w,b.before[j]))||a.after.some((w,j)=>!sameContent(w,b.after[j]));
+  }))return 'negation';
 }

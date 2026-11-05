@@ -4,6 +4,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {readFileSync,mkdirSync} from 'node:fs';
 import {build} from 'esbuild';
 import {FEEDBACK_RESPONSE_TTL,FEEDBACK_RECEIPT_TTL,FEEDBACK_PENDING_WINDOW} from '../lib/feedback-receipt.ts';
+import {readFeedbackRecoveryResponse} from '../lib/feedback-recovery-response.ts';
 mkdirSync('work/feedback-request-tests',{recursive:true});
 await build({entryPoints:['db/feedback-requests.ts','db/feedback.ts','app/api/feedback-requests/[id]/route.ts','app/api/sentence-feedback/route.ts','app/api/grammar-feedback/route.ts'],outdir:'work/feedback-request-tests',outbase:'.',bundle:true,format:'esm',platform:'node',logLevel:'silent',outExtension:{'.js':'.mjs'},plugins:[{name:'boundaries',setup(b){
  b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'receipt-env'}));
@@ -26,6 +27,16 @@ const input=()=>({requestId:crypto.randomUUID(),requestStartedAt:now});
 const answer=()=>Response.json({feedback:{original:'Synthetic input.',correctedSentence:'Synthetic input.',explanation:'합성 설명'}});
 beforeEach(()=>{fail=null;sqlite.exec('DELETE FROM feedback_requests; DELETE FROM study_sessions; DELETE FROM grammar_progress; DELETE FROM learner_states; DELETE FROM ai_daily_usage;');for(const user of ['owner','other'])sqlite.prepare('INSERT INTO learner_states VALUES (?,0,?,?)').run(user,'{}','initial');Object.assign(receiptEnv,{ai_feedback_enabled:'true',grammar_enabled:'true',feedback_judgment_enabled:'true',OPENAI_ALLOWED_MODELS:'gpt-6.1-sol',OPENAI_API_KEY:'SYNTHETIC_NEVER_REAL'});globalThis.receiptRuntime={db,user:{userId:'owner'},env:receiptEnv};});
 after(()=>{sqlite.close();delete globalThis.receiptRuntime;});
+
+test('AI-2: the actual receipt GET database failure has no terminal receipt and keeps recovery pending',async()=>{
+ const id=crypto.randomUUID();fail=/SELECT/;
+ try{
+  const response=await route.GET(new Request('https://study.example/api/feedback-requests/'+id),{params:Promise.resolve({id})});
+  assert.equal(response.status,503);const data=await response.json();assert.equal(data.receipt,undefined);
+  const parsed=readFeedbackRecoveryResponse({response,data},{requestId:id,sentence:'Synthetic sentence.',expectedModelId:'gpt-6.1-sol'},true);
+  assert.equal(parsed.ok,false);assert.equal(parsed.terminal,false);
+ }finally{fail=null;}
+});
 
 test('concurrent duplicate POSTs and later status retrieval execute the provider callback exactly once',async()=>{
  const req=input();let calls=0,finish;

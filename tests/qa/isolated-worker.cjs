@@ -5,6 +5,7 @@ const path=require('node:path');
 const {randomUUID}=require('node:crypto');
 const {waitForWorker}=require('./runtime.cjs');
 const {profileConfig}=require('./worker-profile.cjs');
+const {ownWorker}=require('./owned-worker.cjs');
 const freePort=()=>new Promise((resolve,reject)=>{const s=createServer();s.on('error',reject);s.listen(0,'127.0.0.1',()=>{const port=s.address().port;s.close(()=>resolve(port));});});
 async function isolatedWorker(label){
  const root=path.resolve('work',label+'-'+randomUUID());mkdirSync(root,{recursive:true});
@@ -13,8 +14,8 @@ async function isolatedWorker(label){
  for(const file of readdirSync('drizzle').filter(name=>name.endsWith('.sql')).sort())execFileSync(process.execPath,[...args,'d1','execute','DB','--local','--config',config,'--persist-to',root,'--file',path.resolve('drizzle',file)],{windowsHide:true,stdio:'pipe',timeout:30000});
  const port=await freePort(),inspector=await freePort(),log=openSync(path.join(root,'worker.log'),'w');
  const child=spawn(process.execPath,['--require',path.resolve('tests/qa/heap-limit.cjs'),...args,'dev','--config',config,'--local','--persist-to',root,'--ip','127.0.0.1','--port',String(port),'--inspector-port',String(inspector),'--var','large_backup_restore_enabled:true'],{windowsHide:true,detached:process.platform!=='win32',stdio:['ignore',log,log]});
- const stop=()=>{if(child.exitCode===null){if(process.platform==='win32')execFileSync('taskkill',['/PID',String(child.pid),'/T','/F'],{windowsHide:true,stdio:'ignore'});else process.kill(-child.pid,'SIGTERM');}closeSync(log);};
- try{await waitForWorker('http://127.0.0.1:'+port);if(!readFileSync(path.join(root,'worker.log'),'utf8').includes('QA workerd V8 cap: old space 96 MB, semi space 4 MB'))throw Error('The resource test did not activate its V8 memory cap');return {base:'http://127.0.0.1:'+port,inspector:'http://127.0.0.1:'+inspector,root,stop};}catch(e){stop();throw e;}
+ const owned=ownWorker(child,()=>closeSync(log)),stop=owned.stop;
+ try{await waitForWorker('http://127.0.0.1:'+port);if(owned.spawnError)throw owned.spawnError;if(!readFileSync(path.join(root,'worker.log'),'utf8').includes('QA workerd V8 cap: old space 96 MB, semi space 4 MB'))throw Error('The resource test did not activate its V8 memory cap');return {base:'http://127.0.0.1:'+port,inspector:'http://127.0.0.1:'+inspector,root,stop};}catch(e){try{await stop();}catch{console.error('Owned resource Worker cleanup also failed.');}throw e;}
 }
 async function inspectorSession(origin){
  const WS=require('ws'),targets=await(await fetch(origin+'/json/list')).json();

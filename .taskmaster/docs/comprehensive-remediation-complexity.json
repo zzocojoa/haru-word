@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "planId": "comprehensive-remediation-2026-11-05",
+  "tag": "comprehensive-remediation",
+  "method": "manual-agent-review; not analyze_project_complexity output",
+  "scale": "1-3 simple local/document; 4-6 cross-module; 7-9 concurrency/state/compatibility/resource; 10 redesign (none)",
+  "aiToolExecuted": false,
+  "tasks": [
+    {
+      "taskId": 1,
+      "score": 5,
+      "reason": "모든 후속 변경의 보존 기반",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 2,
+      "score": 9,
+      "reason": "mount와 인증 세대·다중 탭 간 비동기 소유권",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 3,
+      "score": 9,
+      "reason": "v1~v4 스키마 불변식과 독립 성적·완료일 공존",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 4,
+      "score": 8,
+      "reason": "GET 대기·epoch remount·저장소 불가 경합",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 5,
+      "score": 8,
+      "reason": "두 탭 복구/되돌리기와 평가 증거 단조성",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 6,
+      "score": 8,
+      "reason": "질문 이동 뒤 승인 응답·정확한 row 식별",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 7,
+      "score": 8,
+      "reason": "AI-6 공통 상태 전이·schema/복구 경계",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 8,
+      "score": 6,
+      "reason": "응답 수락과 저장 스키마 정책의 불일치",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 9,
+      "score": 8,
+      "reason": "UUID의 모호한 실패·명시 종결·비용 안전",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 10,
+      "score": 9,
+      "reason": "열거 이전 cardinality와 Worker/복원 호환",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 11,
+      "score": 3,
+      "reason": "현행 복구 링크와 보존 역사 구분",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 12,
+      "score": 4,
+      "reason": "생성기와 공개 산출물 일치",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 13,
+      "score": 8,
+      "reason": "외부 npm·Wrangler 번들·Node 내장 3경계",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 14,
+      "score": 7,
+      "reason": "Vinext/Cloudflare 버전 조합",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 15,
+      "score": 9,
+      "reason": "major 호환과 저장/복원 경계 중복 영향",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 16,
+      "score": 5,
+      "reason": "제한 패턴과 정상 명령문의 경계",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 17,
+      "score": 5,
+      "reason": "질문 표지 대칭 비교와 정상 어순 교정",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 18,
+      "score": 7,
+      "reason": "수량 순서/부호·부정 앵커",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 19,
+      "score": 6,
+      "reason": "registry hash·catalog·표시 상태 일치",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 20,
+      "score": 6,
+      "reason": "import와 진행 중 live fetch 간 세대",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 21,
+      "score": 4,
+      "reason": "legacy master와 named tag 출처",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 22,
+      "score": 6,
+      "reason": "실제 요청 metadata와 positive/mutation control",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 23,
+      "score": 7,
+      "reason": "Linux detached process group의 종료 소유권",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 24,
+      "score": 4,
+      "reason": "미사용 OG 전이 의존성",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 25,
+      "score": 6,
+      "reason": "Vinext shim과 Next runtime·sharp 소비자",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 26,
+      "score": 4,
+      "reason": "Ajv 전이 의존성 및 URI 해석 호환",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 27,
+      "score": 4,
+      "reason": "권고 affected range와 실제 옵션 차이",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 28,
+      "score": 7,
+      "reason": "stale lease 원자적 회수·동시 contender",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 29,
+      "score": 4,
+      "reason": "fingerprint 준비·debounce 저장 완료",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 30,
+      "score": 6,
+      "reason": "marker 원자적 게시·준비/cleanup 오류 분리",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 31,
+      "score": 9,
+      "reason": "29경계·Node22/24·Chromium/WebKit 전체 교차 검증",
+      "recommendedSubtasks": 3,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 32,
+      "score": 7,
+      "reason": "제품 품질·미측정·권한을 출시 판정과 분리",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    },
+    {
+      "taskId": 33,
+      "score": 6,
+      "reason": "외부 게시 권한과 source/runtime 동일성",
+      "recommendedSubtasks": 2,
+      "decision": "명시 수동 세부화"
+    }
+  ]
+}

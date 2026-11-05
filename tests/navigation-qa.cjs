@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { build } = require('esbuild');
 const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('./qa/runtime.cjs');
+const {currentOpenaiFeedback,feedbackReceipt}=require('./qa/openai-fixture.cjs');
 const until = async (check, label) => {
   for (let i = 0; i < 100; i++) { if (await check()) return; await new Promise(resolve => setTimeout(resolve, 50)); }
   throw Error(label);
@@ -141,10 +142,12 @@ const until = async (check, label) => {
     await page.route('**/api/grammar-feedback', route => { aiRoute = route; });
     await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await until(() => !!aiRoute, 'AI request');
     await back(); await page.locator('.grammar-catalog').waitFor();
-    await aiRoute.fulfill({ json: { feedback: { original: 'I like coffee and books.', correctedSentence: 'I like tea.', explanation: '합성 의견', meaningUsage: 'appropriate', grammar: 'natural', model: 'gemini-3.1-flash-lite', createdAt: now } } }).catch(() => {});
+    const lateFeedback=currentOpenaiFeedback(aiRoute,{original:'I like coffee and books.',correctedSentence:'I like coffee and books.',explanation:'합성 의견',meaningUsage:'appropriate',grammar:'natural',createdAt:now});
+    const delivery=await aiRoute.fulfill({json:{feedback:lateFeedback,receipt:feedbackReceipt(aiRoute)}}).then(()=> 'fulfilled',()=> 'aborted');
     await page.waitForTimeout(200); assert.equal((await get()).state.grammar.noun.feedback, undefined);
     await back(); await search.waitFor(); assert.equal(await search.inputValue(), 'apple');
     checks.push('grammar Back saves drafts, failed saves block departure, reopening resumes, late AI is ignored');
+    checks.push('late Back response used current UUID/model/context; transport '+delivery);
 
     await tab('학습 기록').click(); await page.getByRole('button', { name: '기록 관리', exact: true }).click(); await page.getByRole('menuitem', { name: '전체 백업', exact: true }).click();
     await page.getByRole('dialog').waitFor(); await back(); await page.getByRole('dialog').waitFor({ state: 'hidden' });

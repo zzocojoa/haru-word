@@ -4,7 +4,7 @@
 
 ## 저장소와 배포 연결
 
-- 저장소: [zzocojoa/haru-word](https://github.com/zzocojoa/haru-word), 비공개.
+- 저장소: [zzocojoa/haru-word](https://github.com/zzocojoa/haru-word). 2026-11-05 연결 API 재확인 당시 공개 상태다. 이번 작업에서 공개 범위는 변경하지 않았다.
 - 기본 브랜치: `main`. 초기 소스는 운영 v83의 `87fb546`과 기존 Git 이력을 보존한다.
 - 이 체크아웃의 `origin`은 기존 Sites 소스 동기화 연결이다. GitHub는 `github` 원격을 사용한다. 기존 원격을 덮어쓰지 않는다.
 - GitHub에서 새로 clone한 체크아웃은 `origin`이 GitHub다. Sites 연결·실행 프로필은 설치된 Sites 스킬 절차로 확인한다.
@@ -48,7 +48,7 @@ gh pr create --repo zzocojoa/haru-word --base main
 - 첫 Node 24 실행의 기본 npm 11.19.0은 기존 lockfile의 esbuild 선택 의존성 검증에서 설치를 거절했다. Node 22와 로컬 설치에서 사용한 npm 10.9.7로 두 작업을 고정하며 의존성·lockfile을 재생성하지 않는다. npm을 올릴 때는 빈 체크아웃의 잠금 설치부터 검증한다.
 - GitHub Actions는 읽기 권한만 사용하며 외부 action을 전체 커밋 SHA로 고정한다. 체크아웃 토큰을 Git 설정에 남기지 않는다.
 - 동일 브랜치의 이전 검사는 새 실행이 시작되면 취소한다. 각 실행의 제한 시간은 20분이다.
-- 린트 오류는 실패한다. 기존 경고 13개는 별도 정리 대상이며 이번 환경 구축에서 차단 기준을 바꾸지 않는다.
+- 린트 오류는 실패한다. 2026-11-05 로컬 재검사 기준 기존 경고15개이며 차단 기준을 바꾸지 않는다.
 - 브라우저·성능 모음은 외부 Playwright/axe 런타임과 로컬 D1 준비가 필요하므로 이 CI에 포함하지 않는다. UI·저장·복원 변경에서는 `tests/README.md`에 따라 별도로 실행하고 PR에 결과를 남긴다.
 - 실제 iPhone·VoiceOver·운영 AI·운영 데이터 검사는 CI로 대체하지 않는다. Windows/macOS는 이 CI의 대상이 아니다.
 

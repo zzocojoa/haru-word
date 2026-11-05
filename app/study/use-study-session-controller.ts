@@ -13,7 +13,7 @@ import {
   type State,
 } from "@/lib/learning";
 import type { SentenceFeedback } from "@/lib/sentence-feedback";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { StudySessionProps } from "./types";
 import { useActivityTimer } from "./use-activity-timer";
 import { useStudyDraft } from "./use-study-draft";
@@ -68,7 +68,8 @@ export function useStudySessionController({
   useStudyRecoveryDraft(latest => showSummary ? latest : studyRecoveryState(
     latest, s, draft, content ? studyMaterial(draft, content, !!word?.personal) : undefined,
   ));
-  useEffect(() => { focus.current?.focus(); }, [question]);
+  // Finish the question's focus handoff before a visible input can be edited.
+  useLayoutEffect(() => { focus.current?.focus(); }, [question]);
 
   const { seconds, paused, boutStart, setPaused, setBoutStart } =
     useActivityTimer(s, showSummary, visible);
@@ -77,12 +78,14 @@ export function useStudySessionController({
     return { ...s, elapsed: seconds, paused };
   }
   async function commit(next: State) {
+    const acknowledge=persistent.captureAcknowledgement();
     const ns = next.sessions[s.id];
     if (ns?.finished) {
       next = ensureCarryover(next, ns);
       setPaused(true);
     }
-    await save(next);
+    const ok=await save(next);
+    acknowledge(ok);
   }
 
   function material() {

@@ -1,6 +1,8 @@
 // Test-only React harness. No API, account, or provider requests are made here.
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { flushSync } from 'react-dom';
+import { studyQuestionKey } from '../lib/study-draft';
 import { useStudySessionController } from '../app/study/use-study-session-controller';
 import { EMPTY, type Session, type State, type Word } from '../lib/learning';
 import { StudyRecoveryProvider, useStudyRecoverySnapshot } from '../app/study/study-recovery';
@@ -18,7 +20,11 @@ const seed: State = { ...structuredClone(EMPTY), sessions: { [first.id]: first }
 const currentState = { current: seed };
 type Trace = { id?: string; stage: string; answer: string; hint: boolean; revealed: boolean; text: string | null };
 const trace: Trace[] = [];
+const focusTransitions: boolean[] = [];
 type Controls = {
+  focusTransitions: boolean[];
+  ready: () => boolean;
+  flush: (run: () => void) => void;
   patch: (patch: Partial<Session>) => void;
   refresh: () => void;
   controller: ReturnType<typeof useStudySessionController>;
@@ -30,6 +36,8 @@ declare global { interface Window { studyHarness: Controls } }
 
 function Harness() {
   const [state, setState] = useState(seed);
+  const focusedQuestion = useRef<string | null>(null);
+  const committedQuestion = useRef<string | null>(null);
   const recoverySnapshot = useStudyRecoverySnapshot();
   useLayoutEffect(() => { currentState.current = state; }, [state]);
   const c = useStudySessionController({
@@ -38,12 +46,19 @@ function Harness() {
     save: async next => { currentState.current = next; setState(next); return true; },
     busy: false, saved: true, visible: true, onClose() {}, onReview() {}, onRepeat() {},
   });
+  const question = studyQuestionKey(c.s, c.id);
+  // Registered after the controller's focus effect; observation only.
+  useEffect(() => { focusedQuestion.current = question; }, [question]);
   useLayoutEffect(() => {
     window.studyHarness = {
-      controller: c, trace, recovery: () => recoverySnapshot(state), unmount: () => root.unmount(),
+      focusTransitions, ready: () => focusedQuestion.current === question, flush: flushSync, controller: c, trace, recovery: () => recoverySnapshot(state), unmount: () => root.unmount(),
       patch: patch => setState(previous => ({ ...previous, sessions: { ...previous.sessions, [first.id]: { ...previous.sessions[first.id], ...patch } } })),
       refresh: () => setState(previous => structuredClone(previous)),
     };
+    if (committedQuestion.current !== question) {
+      focusTransitions.push(document.activeElement === document.getElementById('visible-question'));
+      committedQuestion.current = question;
+    }
     trace.push({ id: c.id, stage: c.s.stage, answer: c.answer, hint: c.hint, revealed: c.revealed, text: document.getElementById('visible-question')?.textContent ?? null });
   });
   return <HarnessView controller={c} />;

@@ -7,6 +7,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/sentence-str
 const cap = { ...aiHeaders, 'X-Study-Feedback-Structure':'1', 'X-Study-Grammar':'2' };
 const legacy = { ...feedback }; delete legacy.structure;
 const word = JSON.parse(fs.readFileSync('data/words.json')).find(w => w.word === 'trip' && w.pos === 'n.');
+const until=async(check,label)=>{const end=Date.now()+10000;while(Date.now()<end){if(await check())return;await new Promise(ok=>setTimeout(ok,25));}throw Error(label);};
 fs.mkdirSync(out, { recursive:true });
 (async () => {
   await waitForWorker(); const browser = await launchBrowser({ engine }); let page; const errors=[],checks=[];
@@ -25,7 +26,8 @@ fs.mkdirSync(out, { recursive:true });
     await page.getByText('AI 참고 의견 · 정답 판정은 아니에요',{exact:true}).waitFor();
     const before=(await state()).state; let calls=0;
     await page.route('**/api/sentence-feedback',async route=>{if(route.request().method()!=='POST')return route.continue();calls++;assert.equal(route.request().headers()['x-study-feedback-structure'],'1');await route.fulfill({json:{feedback:currentOpenaiFeedback(route,feedback),receipt:feedbackReceipt(route)}})});
-    assert.ok(await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).isEnabled());
+    const wordRequest=page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true});
+    await until(()=>wordRequest.isEnabled(),'word AI control did not become ready');
     assert.equal(await page.locator('.ai-feedback-panel .sentence-structure').count(),0);await saved();assert.equal(calls,0);
     data=await state();assert.deepEqual(data.state.sessions[sid].records[word.id].aiFeedback.structure,feedback.structure);
     assert.deepEqual(data.state.progress,before.progress);assert.equal(data.state.sessions[sid].records[word.id].sentenceStatus,'unmeasured');assert.equal(data.state.settings.dailyGoal,before.settings.dailyGoal);
@@ -56,9 +58,11 @@ fs.mkdirSync(out, { recursive:true });
     await page.getByRole('tab',{name:'학습 기록',exact:true}).click();await page.locator('.journal-day-trigger').first().click();await page.locator('.journal-session-trigger').first().click();
     await page.locator('.journal-mobile .journal-word-trigger').click();await page.locator('.journal-mobile').getByText('저장한 AI 참고 의견',{exact:true}).click();assert.equal(await page.locator('.journal-mobile .sentence-structure').count(),0);await page.locator('.journal-mobile').getByText('AI 참고 의견 · 정답 판정은 아니에요',{exact:true}).waitFor();checks.push('history hides structures while the stored record retains them');
     await page.getByRole('tab',{name:'단어장',exact:true}).click();await page.getByRole('tab',{name:'품사와 문장 연습',exact:true}).click();await page.locator('.grammar-tile').first().click();
-    let grammarCalls=0;await page.route('**/api/grammar-feedback',async route=>{grammarCalls++;assert.equal(route.request().postDataJSON().expectedModelId,aiModel);assert.equal(route.request().headers()['x-study-feedback-structure'],'1');await route.fulfill({json:{feedback:currentOpenaiFeedback(route, feedback),receipt:feedbackReceipt(route)}})});
+    let grammarCalls=0,grammarReply;await page.route('**/api/grammar-feedback',async route=>{grammarCalls++;assert.equal(route.request().postDataJSON().expectedModelId,aiModel);assert.equal(route.request().headers()['x-study-feedback-structure'],'1');grammarReply=currentOpenaiFeedback(route,feedback);await route.fulfill({json:{feedback:grammarReply,receipt:feedbackReceipt(route)}})});
     await page.getByRole('button',{name:'AI 참고 의견 요청',exact:true}).click();await page.locator('.grammar-feedback .ai-feedback-result').waitFor();assert.equal(await page.locator('.grammar-feedback .sentence-structure').count(),0);await saved();
-    await page.getByText('OpenAI로 점검',{exact:true}).waitFor();await saved();data=await state();assert.deepEqual(data.state.grammar.noun.feedback.structure,feedback.structure);assert.equal(grammarCalls,1);
+    await page.getByText('OpenAI로 점검',{exact:true}).waitFor();
+    await until(async()=>{data=await state();return grammarReply&&data.state.grammar.noun.feedback?.contextFingerprint===grammarReply.contextFingerprint&&data.state.grammar.noun.feedback?.validationVersion===grammarReply.validationVersion;},'grammar feedback was not committed to the local database');
+    await saved();assert.deepEqual(data.state.grammar.noun.feedback,grammarReply);assert.deepEqual(data.state.grammar.noun.feedback.structure,feedback.structure);assert.equal(grammarCalls,1);
     // A failed refresh of feedback retains the previous analysis and the draft.
     await page.unroute('**/api/grammar-feedback');await page.route('**/api/grammar-feedback',route=>route.fulfill({status:429,json:{code:'provider_limit',error:'현재 사용 한도',providerStatus:429}}));
     await page.getByRole('button',{name:'AI 참고 의견 요청',exact:true}).click();await page.getByRole('alert').waitFor();

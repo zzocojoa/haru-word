@@ -24,6 +24,7 @@ type Props = {
   currentModelId?:string;
   contextFingerprint?:string;
   canSave: boolean;
+  inputLocked?:boolean;
   aiPending: boolean;
   recoveryPending?:boolean;
   aiError: FeedbackIssue | null;
@@ -36,7 +37,7 @@ type Props = {
   onComplete: () => void;
 };
 
-export function GrammarWriting({ lesson, progress,retainedFeedback,draftFeedback,recoveryPending,currentModelId,contextFingerprint, canSave, aiPending, aiError, onAi, onSentence, onCheck, onChecks, onFrame, onExplain, onComplete }: Props) {
+export function GrammarWriting({ lesson, progress,retainedFeedback,draftFeedback,recoveryPending,currentModelId,contextFingerprint, canSave,inputLocked=false, aiPending, aiError, onAi, onSentence, onCheck, onChecks, onFrame, onExplain, onComplete }: Props) {
   const { sentence, check } = progress;
   const feedback=currentFeedback([progress.feedback,draftFeedback,retainedFeedback],sentence,currentModelId??'',contextFingerprint);
   const [proposal, setProposal] = useState({ lessonId: lesson.id, feedback });
@@ -54,7 +55,7 @@ export function GrammarWriting({ lesson, progress,retainedFeedback,draftFeedback
     </details> : <div className="grammar-example"><small>문장 틀</small><p lang="en">{lesson.stem}</p><Speak text={lesson.stem} /></div>}
     <div className="grammar-writing-area">
       <label className="grammar-writing">내 문장<textarea lang="en" aria-describedby="grammar-sentence-count" maxLength={2000} rows={4}
-        value={sentence} onChange={event => onSentence(event.target.value)} placeholder="내 생활에 맞는 문장을 써 보세요." /></label>
+        value={sentence} disabled={inputLocked} onChange={event => onSentence(event.target.value)} placeholder="내 생활에 맞는 문장을 써 보세요." /></label>
       <p id="grammar-sentence-count" className="small-note grammar-character-count">{sentence.length}/2,000자</p>
     </div>
     <div className="grammar-ai-action">

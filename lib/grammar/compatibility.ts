@@ -1,5 +1,9 @@
 import type { GrammarProgress } from './model';
 
+// Protocol 5 preserves a past completion while its replacement sentence needs
+// a fresh check. This is a reader capability, not a new lesson content version.
+export const revisingCompletedGrammar=(p:GrammarProgress)=>!!p.completedAt&&p.stage<6&&(!p.sentence.trim()||!p.check||!!p.contentVersion&&(!p.checks?.meaning||!p.checks.form));
+
 export const GRAMMAR_UPGRADE_MESSAGE = '품사 수업이 업데이트되었어요. 현재 입력을 백업한 뒤 페이지를 새로고침해 주세요.';
 export function hasModernGrammar(p: GrammarProgress) {
   return !!p.contentVersion || !!p.review?.contentVersion || !!p.schedule || !!p.checks || !!p.observation || !!p.frame
@@ -8,26 +12,27 @@ export function hasModernGrammar(p: GrammarProgress) {
 // A v1 reader must never interpret v2 answer strings against its old questions.
 // New lessons are omitted; old lesson answers remain visible, without v2 review.
 export function legacyGrammarDocument(p: GrammarProgress): GrammarProgress | undefined {
-  if (p.contentVersion) return undefined;
+  if (p.contentVersion||revisingCompletedGrammar(p)) return undefined;
   const { stage, answers, sentence, check, feedback, completedAt, updatedAt, hints, order } = p;
   const review = p.review?.contentVersion ? undefined : p.review;
   return { stage, answers, sentence, check, feedback, completedAt, updatedAt, hints, order,
     ...(review ? { review: { index: review.index, answers: review.answers, hints: review.hints, order: review.order, completedAt: review.completedAt } } : {}),
   };
 }
-export type GrammarClientVersion=1|2|3|4;
-export const GRAMMAR_CLIENT_HEADERS={'X-Study-Grammar':'4'};
+export type GrammarClientVersion=1|2|3|4|5;
+export const GRAMMAR_CLIENT_HEADERS={'X-Study-Grammar':'5'};
 export function grammarClientVersion(value:string|null|undefined):GrammarClientVersion {
-  return value==='4'?4:value==='3'?3:value==='2'?2:1;
+  return value==='5'?5:value==='4'?4:value==='3'?3:value==='2'?2:1;
 }
 export function requiredGrammarVersion(p:GrammarProgress):GrammarClientVersion {
-  return Math.max(p.contentVersion??1,p.review?.contentVersion??1,hasModernGrammar(p)?2:1) as GrammarClientVersion;
+  return Math.max(p.contentVersion??1,p.review?.contentVersion??1,hasModernGrammar(p)?2:1,revisingCompletedGrammar(p)?5:1) as GrammarClientVersion;
 }
 export function grammarUnsupported(p:GrammarProgress,supported:GrammarClientVersion) {
   return requiredGrammarVersion(p)>supported;
 }
 export function grammarDocumentForClient(p:GrammarProgress,supported:GrammarClientVersion):GrammarProgress|undefined {
-  if(supported===4)return p;
+  if(revisingCompletedGrammar(p)&&supported<5)return undefined;
+  if(supported>=4)return p;
   if(supported===1)return legacyGrammarDocument(p);
   if((p.contentVersion??1)>supported)return undefined;
   if((p.review?.contentVersion??1)<=supported)return p;

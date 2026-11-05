@@ -58,6 +58,6 @@ test('all15 lessons x4versions x3models receive the same ordered policy and type
    requests++;const b=JSON.parse(init.body),input=JSON.parse(b.input[0].content);assert.ok(b.instructions.includes(r.JUDGMENT_DECISION_INSTRUCTION));assert.ok(input.targetCriterion.length>50);
    assert.equal(input.target,selected.title);assert.deepEqual(b.text.format.schema.properties.contextNeeded.enum,r.CLARIFICATION_KINDS);assert.equal(b.store,false);
    return Response.json({status:'completed',model:modelId,output:[{type:'message',role:'assistant',status:'completed',content:[{type:'output_text',text:JSON.stringify(wire(c))}]}]});
-  });assert.equal(f.promptVersion,'reference-v5');assert.equal(f.validationVersion,'judgment-v5');
+  });assert.equal(f.promptVersion,'reference-v5');assert.equal(f.validationVersion,'judgment-v6');
  }}finally{console.info=prior;}assert.equal(requests,180);
 });

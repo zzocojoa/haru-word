@@ -4,12 +4,31 @@ import { mkdirSync } from 'node:fs';
 import { build } from 'esbuild';
 import { EMPTY } from '../lib/learning.ts';
 import { history } from './fixtures/backup-history.cjs';
+import {readFeedbackRecoveryResponse} from '../lib/feedback-recovery-response.ts';
 
 mkdirSync('work/learning-api-tests', { recursive: true });
 const bundle = await build({ entryPoints: ['lib/learning-api.ts'], outfile: 'work/learning-api-tests/api.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent', metafile: true });
 const api = await import('../work/learning-api-tests/api.mjs');
 const originalFetch = globalThis.fetch;
 after(() => { globalThis.fetch = originalFetch; });
+test('a received 413 survives an unreadable refusal body without another mutation',async()=>{
+ let calls=0;
+ globalThis.fetch=async()=>{calls++;return new Response(new ReadableStream({start(controller){controller.error(new TypeError('synthetic refused-body reset'));}}),{status:413,headers:{'Content-Type':'application/json'}});};
+ const result=await api.saveLearningState({revision:1,progress:{},sessions:{}});
+ assert.equal(result.ok,false);assert.equal(result.response.status,413);assert.match(result.data.error,/기록이 너무 큽니다/);assert.equal(calls,1);
+});
+test('word transport preserves a validated failed receipt so recovery can acknowledge it; missing or invalid receipts remain pending',async()=>{
+ const requestId=crypto.randomUUID(),input={sessionId:crypto.randomUUID(),entryId:'word',sentence:'Synthetic sentence.',expectedModelId:'gpt-6.1-sol',requestId,requestStartedAt:Date.now()};
+ const receipt={requestId,state:'failed',persisted:true};
+ for(const [metadata,terminal]of [[receipt,true],[undefined,false],[{...receipt,requestId:'invalid'},false]]){
+  globalThis.fetch=async()=>Response.json({error:'synthetic limit',code:'provider_limit',providerStatus:429,receipt:metadata&&{...metadata,privateValue:'DO_NOT_FORWARD'},privateValue:'DO_NOT_FORWARD'},{status:429});
+  const result=await api.requestSentenceFeedback(input,new AbortController().signal);
+  const outcome=readFeedbackRecoveryResponse(result,input,false);
+  assert.equal(outcome.ok,false);assert.equal(outcome.terminal,terminal);
+  assert.equal(result.data.privateValue,undefined);
+  if(terminal)assert.deepEqual(result.data.receipt,receipt);else assert.equal(result.data.receipt,undefined);
+ }
+});
 test('client response validation does not include vocabulary or content datasets',()=>{
   assert.deepEqual(Object.keys(bundle.metafile.inputs).filter(file=>/data[\\/].*\.json$/.test(file)),[]);
 });

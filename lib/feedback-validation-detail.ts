@@ -59,7 +59,7 @@ export function parseFeedbackValidationDetail(value: unknown, context?: { stage?
 
 const arrayIndex = (value: unknown) => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;
 
-export function summarizeValidationIssues(issues: readonly z.ZodIssue[]): FeedbackValidationDetail {
+export function summarizeValidationIssues(issues: readonly z.ZodIssue[], input?: unknown): FeedbackValidationDetail {
   const items = issues.slice(0, 8).map(issue => {
     // Only the known parts/changes/units array indices are normalized. An attacker-controlled
     // key containing dots/brackets must never be mistaken for a trusted path.
@@ -67,16 +67,26 @@ export function summarizeValidationIssues(issues: readonly z.ZodIssue[]): Feedba
     const path = counted ? originalPath.slice(1) : originalPath;
     const local = path.length === 4 && path[0] === 'structure' && path[1] === 'parts'
       && arrayIndex(path[2]) && ['wordCount', 'unitCount', 'role', 'explanation', 'text', 'function', 'meaning', 'governor', 'units'].includes(String(path[3]))
-      ? `structure.parts[].${path[3]}` : path.length === 3 && path[0] === 'changes' && arrayIndex(path[1]) && ['before', 'after', 'rule'].includes(String(path[2]))
-        ? `changes[].${path[2]}` : path.length === 5 && path[0] === 'structure' && path[1] === 'parts' && arrayIndex(path[2]) && path[3] === 'units' && arrayIndex(path[4])
+      ? `structure.parts[].${String(path[3])}` : path.length === 3 && path[0] === 'changes' && arrayIndex(path[1]) && ['before', 'after', 'rule'].includes(String(path[2]))
+        ? `changes[].${String(path[2])}` : path.length === 5 && path[0] === 'structure' && path[1] === 'parts' && arrayIndex(path[2]) && path[3] === 'units' && arrayIndex(path[4])
           ? 'structure.parts[].units[]' : path.every(p => typeof p === 'string' && !/[.\[\]]/.test(p)) ? path.join('.') : '';
     const normalized = counted ? local ? `analysis.${local}` : path.length ? '' : 'analysis' : local;
     const field = !originalPath.length ? 'root' : fields.find(f => f === normalized) ?? 'other';
-    const reason = issue.code === 'invalid_type' ? issue.received === 'undefined' ? 'missing' : issue.expected === 'integer' ? 'integer' : 'type'
-      : issue.code === 'invalid_enum_value' || issue.code === 'invalid_union_discriminator' ? 'enum'
-      : issue.code === 'unrecognized_keys' ? 'unexpected_keys'
-      : issue.code === 'too_small' ? 'too_small'
-      : issue.code === 'too_big' ? 'too_large' : 'schema';
+    // Keep the bounded diagnostic vocabulary across Zod versions without
+    // enabling reportInput or retaining raw validation input in diagnostics.
+    const code=String(issue.code),detail=issue as {received?:string;expected?:string;message?:string;values?:unknown[]};
+    // Zod 4 no longer distinguishes a missing enum from an invalid enum in
+    // issue metadata. Inspect only the fixed field's presence transiently;
+    // neither the input nor its values/messages are included in the result.
+    let present:unknown=input;
+    if(field!=='other')for(const key of originalPath)present=present&&typeof present==='object'&&Object.hasOwn(present,key)?(present as Record<PropertyKey,unknown>)[key]:undefined;
+    const missing=field!=='other'&&input!==undefined&&present===undefined;
+    const reason = ['invalid_type','invalid_value'].includes(code)&&missing ? 'missing'
+      : code === 'invalid_type' ? detail.received === 'undefined' || /received undefined\b/.test(detail.message??'') ? 'missing' : ['integer','int'].includes(detail.expected??'') ? 'integer' : 'type'
+      : ['invalid_enum_value','invalid_union_discriminator'].includes(code) || code==='invalid_value' && detail.values ? 'enum'
+      : code === 'unrecognized_keys' ? 'unexpected_keys'
+      : code === 'too_small' ? 'too_small'
+      : code === 'too_big' ? 'too_large' : 'schema';
     return { field, reason };
   });
   return schemaDetail.parse({ kind: 'schema', issues: items, truncated: issues.length > 8 });

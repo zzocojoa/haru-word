@@ -18,7 +18,7 @@ const snapshotSchema = revisionSchema.extend({ state: z.object({
 }).strict() }).strict();
 
 export function parseSnapshot(value: unknown): StateSnapshot {
-  try { if (value && typeof value === 'object' && 'state' in value) assertStateDataKeys(value.state); }
+  try { if (value && typeof value === 'object' && 'state' in value) assertStateDataKeys(value.state, undefined, false); }
   catch { throw new InvalidResponseError(); }
   const parsed = snapshotSchema.safeParse(value);
   if (!parsed.success || stateReferenceIssues(parsed.data.state).length) throw new InvalidResponseError();

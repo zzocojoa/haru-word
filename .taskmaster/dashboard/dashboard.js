@@ -11,7 +11,7 @@
   const canConnect = location.protocol === 'http:' && ['127.0.0.1','localhost'].includes(location.hostname);
   let snapshot;
   try { snapshot = JSON.parse($('dashboard-data').textContent); } catch { $('data-warning').hidden = false; $('data-warning').textContent = '저장된 작업 데이터를 읽지 못했습니다. 대시보드를 다시 생성해 주세요.'; return; }
-  const catalog = snapshot.catalog || { plans:[{id:snapshot.plan.id,label:snapshot.plan.title}] };
+  let catalog = snapshot.catalog || { plans:[{id:snapshot.plan.id,label:snapshot.plan.title}] };
   let planSnapshots = snapshot.planSnapshots || { [snapshot.plan.id]:snapshot };
   const requestedPlan = new URL(location.href).searchParams.get('plan');
   if (catalog.plans.some(p=>p.id===requestedPlan) && Object.hasOwn(planSnapshots,requestedPlan)) snapshot=planSnapshots[requestedPlan];
@@ -19,6 +19,7 @@
   const state = { phase:'all', status:'all', query:'', expanded:new Set(), highlighted:null, mode:canConnect?'live':'snapshot', error:'', fetching:false };
   let visibleTasks = [];
   let pollTimer;
+  let requestGeneration = 0;
 
   function dateText(value) {
     if (!value || !Number.isFinite(new Date(value).getTime())) return '확인되지 않음';
@@ -60,6 +61,7 @@
   }
   function switchPlan(id) {
     if(id===snapshot.plan.id || !catalog.plans.some(p=>p.id===id) || !Object.hasOwn(planSnapshots,id))return;
+    requestGeneration++;state.fetching=false;
     planUi.set(snapshot.plan.id,{phase:state.phase,status:state.status,query:state.query,expanded:new Set(state.expanded),highlighted:state.highlighted});
     snapshot=planSnapshots[id];
     Object.assign(state,planUi.get(id)||{phase:'all',status:'all',query:'',expanded:new Set(),highlighted:null});
@@ -233,19 +235,30 @@
   async function refresh({manual=false}={}) {
     if(!canConnect){$('import-file').click();return;}
     if(state.fetching||(!manual&&state.mode==='imported'))return;
+    const generation=++requestGeneration,selectedPlan=snapshot.plan.id;
     state.fetching=true;renderSource();
     try {
-      const response=await fetch('/api/tasks?plan='+encodeURIComponent(snapshot.plan.id),{cache:'no-store',signal:AbortSignal.timeout(4500)});
+      const response=await fetch('/api/tasks?plan='+encodeURIComponent(selectedPlan),{cache:'no-store',signal:AbortSignal.timeout(4500)});
       if(!response.ok)throw new Error('source');
       const envelope=await response.json();
+      if(generation!==requestGeneration||selectedPlan!==snapshot.plan.id||(!manual&&state.mode==='imported'))return;
       const data=envelope.planSnapshots && Object.hasOwn(envelope.planSnapshots,snapshot.plan.id)?envelope.planSnapshots[snapshot.plan.id]:envelope;
       validateSnapshot(data);
       const changed=data.source.hash!==snapshot.source.hash;
+      if(envelope.catalog){
+        if(!Array.isArray(envelope.catalog.plans)||!envelope.catalog.plans.length||envelope.catalog.plans.length>8||new Set(envelope.catalog.plans.map(p=>p.id)).size!==envelope.catalog.plans.length)throw new Error('invalid_catalog');
+        for(const plan of envelope.catalog.plans){
+          if(typeof plan.id!=='string'||typeof plan.label!=='string'||!Object.hasOwn(envelope.planSnapshots||{},plan.id))throw new Error('invalid_catalog');
+          validateSnapshot(envelope.planSnapshots[plan.id],plan.id);
+        }
+        if(!envelope.catalog.plans.some(p=>p.id===data.plan.id))throw new Error('invalid_catalog');
+        catalog=envelope.catalog;
+      }
       if(envelope.planSnapshots)planSnapshots=envelope.planSnapshots;
       snapshot=data;state.mode='live';state.error='';
       if(changed){renderPlans();renderOverview();renderWork();renderGates();$('announcement').textContent='선택한 플랜의 Task Master 작업 상태를 갱신했습니다.';}
-    } catch { state.error='원본 연결을 확인하지 못했어요. 마지막으로 읽은 상태를 유지합니다. 서버와 작업 JSON을 확인한 뒤 새로고침해 주세요.'; }
-    finally {state.fetching=false;renderSource();}
+    } catch { if(generation===requestGeneration)state.error='원본 연결을 확인하지 못했어요. 마지막으로 읽은 상태를 유지합니다. 서버와 작업 JSON을 확인한 뒤 새로고침해 주세요.'; }
+    finally {if(generation===requestGeneration){state.fetching=false;renderSource();}}
   }
   $('refresh').addEventListener('click',()=>refresh({manual:true}));
   $('resume-live').addEventListener('click',()=>refresh({manual:true}));
@@ -261,7 +274,7 @@
       const tasks=collection.filter(t=>ids.has(String(t.id))).map(t=>({id:String(t.id),title:t.title,description:t.description||'',details:t.details||'',testStrategy:t.testStrategy||'',status:t.status||'unknown',priority:t.priority||'medium',dependencies:Array.isArray(t.dependencies)?t.dependencies.map(String):[],subtasks:(t.subtasks||[]).map(s=>({id:String(s.id),title:s.title,description:s.description||'',details:s.details||'',status:s.status||'unknown',dependencies:Array.isArray(s.dependencies)?s.dependencies.map(String):[]}))}));
       if(!tasks.length || tasks.length!==ids.size || tasks.some(t=>!ids.has(t.id)))throw new Error('wrong_plan');
       const data={...snapshot,tasks,source:{...snapshot.source,mode:'imported',readAt:new Date().toISOString(),updatedAt:new Date(file.lastModified).toISOString(),hash:'imported-'+Date.now()}};
-      validateSnapshot(data);snapshot=data;state.mode='imported';state.error='';renderAll();$('announcement').textContent='JSON의 작업 상태를 불러왔습니다. 원본 파일은 수정하지 않았습니다.';
+      validateSnapshot(data);requestGeneration++;state.fetching=false;snapshot=data;state.mode='imported';state.error='';renderAll();$('announcement').textContent='JSON의 작업 상태를 불러왔습니다. 원본 파일은 수정하지 않았습니다.';
     }catch{state.error='이 계획의 Task Master JSON을 읽지 못했어요. '+snapshot.source.tag+' 태그와 작업 형식을 확인해 주세요. 현재 표시는 유지합니다.';renderSource();}
     finally{$('import-file').value='';}
   });

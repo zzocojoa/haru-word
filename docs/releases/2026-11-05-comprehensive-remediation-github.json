@@ -1,0 +1,129 @@
+{
+  "recordedAtUtc": "2026-11-05T13:22:21.482907+00:00",
+  "status": "github-review-candidate",
+  "authorization": "커밋 푸시 PR 진행",
+  "branch": "codex/comprehensive-defect-audit-20261105",
+  "base": "github/main",
+  "baseCommit": "5609a8e6fa7d148ff4cf6582ae20fe0ed2669171",
+  "publishedVersion": 146,
+  "publishedSourceCommit": "cd475d7a9b8bb8a4840ce54f18a3d6701b4b3dc4",
+  "additionalPublication": false,
+  "candidateEqualsPublishedRuntime": false,
+  "runtimeDeltaFromV146": [
+    "db/ai-compatibility.ts",
+    "lib/grammar/compatibility.ts",
+    "lib/grammar/model.ts"
+  ],
+  "candidateQualifiedFiles": 737,
+  "checks": [
+    {
+      "log": "unit-node22.23.4.log",
+      "exitCode": 0,
+      "name": "unit-node22.23.4"
+    },
+    {
+      "log": "unit-node24.22.1.log",
+      "exitCode": 0,
+      "name": "unit-node24.22.1"
+    },
+    {
+      "log": "typecheck.log",
+      "exitCode": 0,
+      "name": "typecheck"
+    },
+    {
+      "log": "lint.log",
+      "exitCode": 0,
+      "name": "lint"
+    },
+    {
+      "log": "check-grammar-review.log",
+      "exitCode": 0,
+      "name": "check:grammar-review"
+    },
+    {
+      "log": "build.log",
+      "exitCode": 0,
+      "name": "build"
+    }
+  ],
+  "unitNode22": {
+    "tests": 848,
+    "passed": 848,
+    "failed": 0,
+    "skipped": 0
+  },
+  "unitNode24": {
+    "tests": 848,
+    "passed": 848,
+    "failed": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "errors": 0,
+    "existingWarnings": 15
+  },
+  "focusedBrowser": {
+    "results": [
+      {
+        "engine": "chromium",
+        "exitCode": 0,
+        "error": null
+      },
+      {
+        "engine": "webkit",
+        "exitCode": 0,
+        "error": null
+      }
+    ],
+    "ownedWorkerStopped": true,
+    "productionWrites": 0,
+    "actualAiCalls": 0
+  },
+  "qaVerdict": {
+    "status": "pass",
+    "open": []
+  },
+  "oldV146FullBrowserSuite": {
+    "chromium": 87,
+    "webkit": 87,
+    "scope": "Historical prepublication evidence; not rerun for the additional runtime3-file delta"
+  },
+  "review": {
+    "nativeFixed": 2,
+    "nativeRemaining": 0,
+    "outsideClaudeCode": "unavailable-not-installed",
+    "realDevice": false
+  },
+  "plan": {
+    "tag": "comprehensive-remediation",
+    "planId": "comprehensive-remediation-2026-11-05",
+    "parents": 33,
+    "children": 81,
+    "scope": "published v146 original work; extra GitHub candidate fixes are not deployed"
+  },
+  "evidenceRoot": "ROOT:outputs/comprehensive-remediation-github-20261105",
+  "evidenceSha256": {
+    "checks.json": "9a4361922c9159578b79d6085033231027f7a702bdb0540d99f21157ad4dd272",
+    "unit-node22.23.4.log": "919a3b1f503f1555c819a4631efa7d825f061255b3a64fe808ed2244ba2f6c60",
+    "unit-node24.22.1.log": "f860cd074a589f2fb3d1a1db3706c39cb177acbf6750f6f4c6d5bd1642764b4a",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "lint.log": "814e5c8816bd130a738c9a198f383880ed64dcf0fd2f05a5708591ae7a148b0e",
+    "check-grammar-review.log": "fd8d23311e1a50d708a0dd36db40c5f40bbd95e121142abe9f16d6e06d474a01",
+    "build.log": "e7b87ff2dfa9c1857e1454cae9bb630079d2182bc871f5290d2865fdba06b3bb",
+    "regression-red.log": "911831f1c9d486653eb4b079c4a5cdf4b8002c58abff681f3180618a012911ad",
+    "regression-green.log": "9a81f25c231922323494840833c30c8920f5b119a7b123b11c7685f16819fc4a",
+    "preservation.json": "7decd675c29defd50a671798f8c9f0bf539a76648419db815c247292515a78cb",
+    "attempt3/browser-result.json": "d3f1a8de53e5b758be385614d579c7b459097d1cfd678b2b39f09f4bd43e004d",
+    "attempt3/browser-chromium.log": "f010d9465db57b351ef63877047107023d5f22cbe92fb08ee7e55ce5ff00b328",
+    "attempt3/browser-webkit.log": "3a2893c331a41ed7cc6da79ffd84269e6c388e1ab7260ddce5cc140b81834267",
+    "qa/evidence.json": "f857be9edf133ae9d0ab249bf4c3daf26f7bba2f424bb31e949f3ef4f1421fbd",
+    "qa/exploration-002.json": "f1374d54f50260624cc10603a327e30f5a4d5dcbef5a91f78fbc06ba6443831a",
+    "qa/exploration-003.json": "e8dd9726e51184ccdb162ddda8b43cdec9261dec6d5ec0268783f303c055ab49",
+    "qualified-candidate-inputs.json": "97b9fd1702f572e464de8caa7d908e9005da03b8094bc65c6dd6b0f7c20ec4be"
+  },
+  "newSql": 0,
+  "actualAiCalls": 0,
+  "productionLearnerReads": 0,
+  "productionQaWrites": 0
+}

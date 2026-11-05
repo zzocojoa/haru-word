@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "planId": "comprehensive-remediation-2026-11-05",
+  "tag": "comprehensive-remediation",
+  "checkedDateKst": "2026-11-05",
+  "planningComplete": true,
+  "implementationStarted": false,
+  "taskCounts": {
+    "parents": 33,
+    "subtasks": 81,
+    "allPending": true,
+    "mappedAuditItems": 29,
+    "missingItems": [],
+    "product": 12,
+    "toolOperationsDocs": 10,
+    "dependencyMaintenance": 7,
+    "uniqueDependencyAdvisories": 23
+  },
+  "commands": [
+    {
+      "command": "task-master --version",
+      "result": "0.43.1",
+      "exitCode": 0
+    },
+    {
+      "command": "task-master add-task --help; tags --help; tags add comprehensive-remediation --help; validate-dependencies --help",
+      "result": "manual fields, tagged storage, tag add and dependency validator supported; inspected MCP schemas",
+      "exitCode": 0
+    },
+    {
+      "command": "task-master tags add comprehensive-remediation --description ...",
+      "cwd": "SOURCE",
+      "result": "new empty tag created; no copy/reset/init",
+      "exitCode": 0
+    },
+    {
+      "command": "MCP add_task explicit fields",
+      "cwd": "SOURCE",
+      "calls": 33,
+      "result": "all registered in requested tag; mutation wrapper tag master was inaccurate; disk and tagged reads checked"
+    },
+    {
+      "command": "manual complexity review then MCP add_subtask explicit fields",
+      "cwd": "SOURCE",
+      "calls": 81,
+      "result": "81 pending children; AI analyze/expand not run"
+    },
+    {
+      "command": "task-master validate-dependencies --tag comprehensive-remediation",
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105",
+      "parents": 33,
+      "subtasks": 81,
+      "dependencies": 138,
+      "exitCode": 0
+    },
+    {
+      "command": "MCP get_tasks withSubtasks + next_task",
+      "result": "SOURCE and ROOT33/81 all pending; next_task #1",
+      "detail": {
+        "get_tasks": [
+          {
+            "tool": "get_tasks",
+            "request": {
+              "projectRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105",
+              "tag": "comprehensive-remediation",
+              "withSubtasks": true
+            },
+            "stats": {
+              "total": 33,
+              "completed": 0,
+              "inProgress": 0,
+              "pending": 33,
+              "blocked": 0,
+              "deferred": 0,
+              "cancelled": 0,
+              "review": 0,
+              "completionPercentage": 0,
+              "subtasks": {
+                "total": 81,
+                "completed": 0,
+                "inProgress": 0,
+                "pending": 81,
+                "blocked": 0,
+                "deferred": 0,
+                "cancelled": 0,
+                "completionPercentage": 0
+              }
+            },
+            "version": {
+              "version": "0.43.1",
+              "name": "task-master-ai"
+            },
+            "returnedTag": "comprehensive-remediation"
+          },
+          {
+            "tool": "get_tasks",
+            "request": {
+              "projectRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어",
+              "tag": "comprehensive-remediation",
+              "withSubtasks": true
+            },
+            "stats": {
+              "total": 33,
+              "completed": 0,
+              "inProgress": 0,
+              "pending": 33,
+              "blocked": 0,
+              "deferred": 0,
+              "cancelled": 0,
+              "review": 0,
+              "completionPercentage": 0,
+              "subtasks": {
+                "total": 81,
+                "completed": 0,
+                "inProgress": 0,
+                "pending": 81,
+                "blocked": 0,
+                "deferred": 0,
+                "cancelled": 0,
+                "completionPercentage": 0
+              }
+            },
+            "version": {
+              "version": "0.43.1",
+              "name": "task-master-ai"
+            },
+            "returnedTag": "comprehensive-remediation"
+          }
+        ],
+        "next_task": {
+          "request": {
+            "projectRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105",
+            "tag": "comprehensive-remediation"
+          },
+          "id": 1,
+          "title": "공통 기반: 구현 착수 기준·보존·검사 fixture 동결",
+          "status": "pending",
+          "version": {
+            "version": "0.43.1",
+            "name": "task-master-ai"
+          },
+          "returnedTag": "master"
+        },
+        "dependencyValidation": {
+          "command": "task-master validate-dependencies --tag comprehensive-remediation",
+          "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105",
+          "parents": 33,
+          "subtasks": 81,
+          "dependencies": 138,
+          "exitCode": 0
+        }
+      }
+    },
+    {
+      "command": "node --check .taskmaster/scripts/verify-comprehensive-remediation-plan.mjs; node --check .taskmaster/scripts/test-comprehensive-remediation-dashboard.mjs",
+      "result": "syntax checked",
+      "exitCode": 0
+    },
+    {
+      "command": "node .taskmaster/scripts/build-openai-dashboard.mjs",
+      "cwd": "ROOT and SOURCE",
+      "result": "single HTML rebuilt with new default and4plans",
+      "exitCode": 0
+    },
+    {
+      "command": "node .taskmaster/scripts/verify-comprehensive-remediation-plan.mjs",
+      "result": "10 structural/mapping/preservation/API check groups passed on final metadata/artifacts; repeated after MCP requery and CR-P update",
+      "exitCode": 0
+    },
+    {
+      "command": "node .taskmaster/scripts/test-comprehensive-remediation-dashboard.mjs",
+      "result": "Chromium/WebKit15 groups;4plan counts/status/select/refresh/standalone,320/390/1440 at100/200%,axe; synthetic fixture only",
+      "exitCode": 0
+    },
+    {
+      "command": "node .taskmaster/scripts/test-multi-plan-dashboard.mjs",
+      "result": "existing18 regression groups passed; old costs/gates/import/search/keyboard/standalone/source preservation",
+      "exitCode": 0
+    }
+  ],
+  "preservation": {
+    "oldTagCounts": {
+      "master": [
+        15,
+        35
+      ],
+      "judgment-remediation": [
+        18,
+        49
+      ],
+      "integration-remediation": [
+        12,
+        41
+      ]
+    },
+    "oldTagObjectsExact": true,
+    "oldManifestBudgetQualityReleaseHistoryUnchanged": true,
+    "auditArtifacts": 5,
+    "auditRawEvidenceFiles": 2089,
+    "rootProductFiles": 637,
+    "oldEvaluationFiles": 32,
+    "sealedEvaluationFiles": 7,
+    "priorFailuresRetained": true,
+    "normalizationRecovery": {
+      "detectedBy": "first structural preservation check",
+      "changedHistoricalSourceTags": [
+        "master",
+        "judgment-remediation",
+        "integration-remediation"
+      ],
+      "change": "Task Master normalized original string parent IDs to numbers and supplied master metadata.created/description",
+      "recovery": "restore only preexisting source tag objects from initial snapshot; keep all newly registered tasks/subtasks; ROOT old objects never replaced",
+      "recovered": true,
+      "implementationStarted": false
+    },
+    "allowedManagementChanges": [
+      "new tag and catalog registration",
+      "new PRD/plan/manifest/mapping/manual complexity/validation/tests",
+      "task management README prepend",
+      "one CSS rule wrapping long audit filenames in task descriptions"
+    ],
+    "dashboardJavascriptAndNormalizerUnchanged": true
+  },
+  "dashboard": {
+    "url": "http://127.0.0.1:4318/",
+    "reads": "ROOT",
+    "newDefault": "comprehensive-remediation-2026-11-05",
+    "newCounts": [
+      33,
+      81
+    ],
+    "knownLimits": [
+      {
+        "id": "DASH-1",
+        "engine": "chromium",
+        "serverPlans": 4,
+        "alreadyOpenPagePlansAfterRefresh": 3,
+        "fullReloadPlans": 4,
+        "fixed": false
+      },
+      {
+        "id": "DASH-1",
+        "engine": "webkit",
+        "serverPlans": 4,
+        "alreadyOpenPagePlansAfterRefresh": 3,
+        "fullReloadPlans": 4,
+        "fixed": false
+      },
+      {
+        "id": "DASH-3",
+        "evidenceLevel": "actual normalizer in Node; not browser reproduction",
+        "bareMasterAdoptedByNamedPlan": true,
+        "registeredSourceTaggedAndUnaffected": true,
+        "fixed": false
+      },
+      {
+        "id": "DASH-2",
+        "evidenceLevel": "preserved original browser audit evidence",
+        "reexecutedThisPlanningStep": false,
+        "fixed": false
+      }
+    ],
+    "browserAutomation": "installed bundled playwright-core1.62.1; Chromium/WebKit desktop engines, not real iPhone",
+    "interfaceOpenResult": "open_in_codex queued; does not prove panel was displayed"
+  },
+  "initialFailuresAndRecovery": [
+    {
+      "report": "outputs/comprehensive-remediation-plan-20261105/structure-verification-initial.json",
+      "result": "preservation caught Task Master normalization; restored only preexisting tag objects, new registration kept"
+    },
+    {
+      "report": "outputs/comprehensive-remediation-plan-20261105/dashboard/results-initial-layout-failure.json",
+      "result": "320px/200% expanded description overflow; minimal CSS wrap rule; final two-engine regression passed"
+    },
+    {
+      "report": "outputs/comprehensive-remediation-plan-20261105/structure-verification-css-check-initial.json",
+      "result": "new verifier compared CRLF overlay before normalization; verifier corrected; final structural check passed"
+    }
+  ],
+  "notExecuted": [
+    "product defect implementation",
+    "actual learner API/DB QA reads or writes",
+    "paid learning AI quality evaluation or Task Master AI parse/analyze/expand",
+    "OOM/memory exhaustion/load reproduction",
+    "deployment/Sites source synchronization/commit/push/PR",
+    "real iPhone/VoiceOver",
+    "product unit/type/lint/build/full87-browser/performance rerun: product runtime unchanged; historical results preserved"
+  ],
+  "followUpOrder": [
+    "#1 fresh implementation approval/baseline",
+    "#2 UI-5 and #3 AI-6 P1",
+    "#4~30 following dependencies, including #3 before #7(UI-4) and #10 before #15(DEP-ZOD)",
+    "#31 integrated quality",
+    "#32 release readiness",
+    "#33 existing Site publication only after separate explicit approval"
+  ],
+  "sources": [
+    {
+      "id": "TM-RPG",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/assets/example_prd_rpg.txt",
+      "checkedDateKst": "2026-11-05",
+      "use": "기능·구조 분해, 그래프, 로드맵, 검사, 위험의 RPG 절 구성",
+      "sha256": "1dd06e744c77d0cdae879d7d952270afb526fe94270437cb892b1ee349a4b692"
+    },
+    {
+      "id": "TM-STRUCTURE",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/docs/task-structure.md",
+      "checkedDateKst": "2026-11-05",
+      "use": "태그별 tasks.json, 숫자 ID, 의존성, 상태와 세부 작업",
+      "sha256": "4f43b0bcf1c17925aacc7a84c0e78c10caf2c46614def045cb6c3a398afe1f8e"
+    },
+    {
+      "id": "TM-MANUAL",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/main/mcp-server/src/tools/add-task.js",
+      "checkedDateKst": "2026-11-05",
+      "use": "명시 title/description/details/testStrategy 수동 등록",
+      "sha256": "037e51a3086763d765d0f4ac3c9c3b7bccabb73830ed52a1cc259bb099be119b"
+    },
+    {
+      "id": "TM-MCP",
+      "url": "https://docs.task-master.dev/capabilities/mcp",
+      "checkedDateKst": "2026-11-05",
+      "use": "MCP 도구와 구성 확인",
+      "sha256": "b084c574c6a1937614fa8d96afdcd165aaf348d5482b3a3c9beed504f17e0b04"
+    },
+    {
+      "id": "TM-CLI",
+      "url": "https://docs.task-master.dev/capabilities/cli-root-commands",
+      "checkedDateKst": "2026-11-05",
+      "use": "조회·next·검증 명령 확인",
+      "sha256": "ed468788faa30495ee6ae335dd9c93cddd0ade13a582b5567ad8257a4ff55d19"
+    }
+  ],
+  "rawEvidenceRoot": "outputs/comprehensive-remediation-plan-20261105",
+  "productVerdict": "historical fail_unfixed_supported_findings remains; planning validation is not product acceptance"
+}

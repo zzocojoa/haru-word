@@ -1,8 +1,8 @@
 // Only old clients take these account-owned reads. Revision guards still own writes.
 export async function hasSavedAiContract(db: D1Database, user: string, supported = 1) {
   if(supported<4){
-    if(await db.prepare(`SELECT 1 AS found FROM study_sessions s,json_each(s.document,'$.records') r WHERE s.user_id=? AND json_extract(r.value,'$.aiFeedback.validationVersion') IN ('judgment-v4','judgment-v5') LIMIT 1`).bind(user).first())return true;
-    if(await db.prepare(`SELECT 1 AS found FROM grammar_progress WHERE user_id=? AND json_extract(document,'$.feedback.validationVersion') IN ('judgment-v4','judgment-v5') LIMIT 1`).bind(user).first())return true;
+    if(await db.prepare(`SELECT 1 AS found FROM study_sessions s,json_each(s.document,'$.records') r WHERE s.user_id=? AND json_extract(r.value,'$.aiFeedback.validationVersion') IN ('judgment-v4','judgment-v5','judgment-v6') LIMIT 1`).bind(user).first())return true;
+    if(await db.prepare(`SELECT 1 AS found FROM grammar_progress WHERE user_id=? AND json_extract(document,'$.feedback.validationVersion') IN ('judgment-v4','judgment-v5','judgment-v6') LIMIT 1`).bind(user).first())return true;
   }
   if (supported >= 3) return false;
   if (supported === 2) {

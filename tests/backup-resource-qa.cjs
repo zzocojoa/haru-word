@@ -30,5 +30,5 @@ const out='outputs/backup-resource';fs.mkdirSync(out,{recursive:true});
   const used=s=>s.usedSize+(s.embedderHeapUsedSize||0)+(s.backingStorageSize||0),peak=samples.reduce((a,b)=>used(a)>used(b)?a:b);
   const result={passed:used(peak)<128*1024*1024,fileBytes:Buffer.byteLength(exact),sessions:1825,memoryLimitBytes:128*1024*1024,v8Limits:{oldSpaceMb:96,semiSpaceMb:4},sampleCount:samples.length,peak:{...peak,observedBytes:used(peak)},requests,method:'workerd V8 Runtime.getHeapUsage sampled every 5 ms; heap + embedder + backing storage; synchronous intervals may delay samples'};
   fs.writeFileSync(out+'/result.json',JSON.stringify(result,null,2));assert.ok(samples.length>10);assert.ok(result.passed,JSON.stringify(result.peak));assert.ok(requests.every(r=>r.ms<30000));console.log(JSON.stringify(result));
- }finally{active=false;await poll?.catch(()=>{});cdp?.close();worker.stop();}
+ }finally{active=false;await poll?.catch(()=>{});cdp?.close();await worker.stop();}
 })().catch(e=>{console.error(e);process.exitCode=1});
