@@ -1,7 +1,8 @@
 'use client';
 import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
 import type { State } from '@/lib/learning';
-import { newGrammarProgress,combinedCheck, type GrammarProgress, type LessonId } from '@/lib/grammar/model';
+import { newGrammarProgress,combinedCheck,updateGrammarSentence, type GrammarProgress, type LessonId } from '@/lib/grammar/model';
+import {feedbackOriginalMatches} from '@/lib/feedback-context';
 import { newLessonProgress } from '@/lib/grammar/practice';
 import {usePersistentInput} from '../use-persistent-input';
 import type {GrammarDraftValues} from '@/lib/local-learning-drafts';
@@ -14,12 +15,13 @@ export type GrammarPersistence = {
   stage: (id: LessonId, progress: GrammarProgress) => void;
   canSave: boolean;
   saved: boolean;
+  replacing?: boolean;
   registerLeave: (leave: GrammarLeave) => () => void;
 };
 
 // Latest local input remains editable while each snapshot is acknowledged in order.
 // A failed save pauses the queue; retry is explicit, and navigation waits for the queue.
-export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSave, saved }: GrammarPersistence, enhanced = true, contentVersion:2|3|4=2) {
+export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSave, saved,replacing=false }: GrammarPersistence, enhanced = true, contentVersion:2|3|4=2) {
   const [draft, setDraft] = useState(() => currentState.current.grammar?.[id] ?? (enhanced ? newLessonProgress(id,undefined,contentVersion) : newGrammarProgress()));
   const latest = useRef(draft), version = useRef(0), acknowledged = useRef(0);
   const task = useRef<Promise<boolean> | null>(null), alive = useRef(true), allowed = useRef(canSave);
@@ -36,6 +38,7 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
     setError('');
   }, [saved, currentState, id]);
   const change = useCallback((update: (p: GrammarProgress) => GrammarProgress) => {
+    if(replacing)return;
     const updated = update(latest.current);
     if (updated === latest.current) return;
     const next = { ...updated, updatedAt: new Date().toISOString() };
@@ -43,7 +46,7 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
     // Global emergency/whole backups must contain the latest input, not only
     // the last snapshot that happened to reach the network.
     stage(id, next);
-  }, [id, stage]);
+  }, [id, stage,replacing]);
   const flush = useCallback((): Promise<boolean> => {
     if (task.current) return task.current;
     if (version.current === acknowledged.current) return Promise.resolve(true);
@@ -80,7 +83,8 @@ export function useGrammarDraft(id: LessonId, { currentState, save, stage, canSa
   }, [dirty]);
   const persisted=currentState.current.grammar?.[id]??draft;
   const persistent=usePersistentInput({kind:'grammar',question:JSON.stringify([id,draft.contentVersion??1,5]),base:writingValues(persisted),values:writingValues(draft),saved,edited,
-    enabled:draft.stage===5,feedback:persisted.feedback,onRestore:values=>change(p=>({...p,sentence:values.sentence,frame:values.frame,check:p.contentVersion?combinedCheck(values.checks):values.check,checks:values.checks,
-      feedback:p.feedback?.original===values.sentence?p.feedback:undefined}))});
+    enabled:draft.stage===5&&!replacing,feedback:persisted.feedback,onRestore:values=>change(p=>({...updateGrammarSentence(p,values.sentence),stage:5,
+      frame:p.contentVersion?values.frame:undefined,check:p.contentVersion?combinedCheck(values.checks):values.check,checks:p.contentVersion?values.checks:undefined,
+      feedback:p.feedback&&feedbackOriginalMatches(p.feedback.original,values.sentence)?p.feedback:undefined}))});
   return { draft, latest, change, flush, dirty, saving, error,persistent };
 }

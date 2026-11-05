@@ -26,3 +26,5 @@
 @media(max-width:560px){.plan-buttons{grid-template-columns:1fr;gap:8px}.plan-choice{padding:12px 15px}.plan-context,.plan-budget{font-size:.8rem}.plan-selector+.hero{padding-top:24px}.hero-tags>span{overflow-wrap:anywhere;min-width:0}}
 /* Two-digit completion counts must also fit 390px at 200% text. */
 @media(max-width:560px){.metric-strip{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px}.metric-strip>div:nth-child(3){padding-left:0;border:0}}
+/* Audit source filenames must wrap in expanded task descriptions. */
+.task-description{overflow-wrap:anywhere}

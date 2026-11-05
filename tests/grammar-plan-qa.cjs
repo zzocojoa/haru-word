@@ -126,7 +126,11 @@ const baseline = process.env.GRAMMAR_AUDIT_BASELINE === '1', checks = [];
       try {
         await page.getByRole('tab', { name: '단어 목록', exact: true }).click();
         const query = page.getByRole('textbox', { name: '단어 또는 한국어 뜻 검색' });
-        await query.fill('a');
+        await query.waitFor({state:'visible'});
+        // View restoration may legitimately return to the last visible list
+        // control, rather than search. Complete its two-frame handoff first.
+        await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+        await query.fill('a');assert.equal(await query.inputValue(),'a','filter fixture must be entered before testing lesson return');
         await page.getByRole('combobox', { name: '단어장 수준 필터' }).click(); await page.getByRole('option', { name: 'A1', exact: true }).click();
         await page.getByRole('combobox', { name: '친숙도 필터' }).click(); await page.getByRole('option', { name: '친숙도 미확인', exact: true }).click();
         await page.getByRole('navigation', { name: '단어 목록 상단 페이지 이동' }).getByRole('button', { name: '다음 페이지', exact: true }).click();

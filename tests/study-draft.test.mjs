@@ -1,12 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { restoreStudyDraft, studyQuestionKey, studyMaterial, withAnswerDraft, hasStudyDraftInput } from '../lib/study-draft.ts';
+import { restoreStudyDraft, studyQuestionKey, studyMaterial, withAnswerDraft, hasStudyDraftInput, reconcileStudyDraftRestoration } from '../lib/study-draft.ts';
 import { canGradeIndependently, independentRecallBlocks, isLearningWriteBlocked, learningWriteBlocks } from '../lib/study-availability.ts';
 
 const content = { meaning: '뜻', expression: 'my expression', example: 'Example.', translation: '예문.', source: '학습용 작성 예문', attribution: 'original', url: 'https://example.test/' };
 const record = { meaning: '뜻', en: 'independent', ko: 'help', sentenceStatus: 'unmeasured', sentence: 'My sentence.', notes: '메모', spoken: true };
 const session = (stage = 'en') => ({ id: 'session', ids: ['a', 'b'], index: 0, stage, retryMode: false, records: { a: { ...record }, b: { ...record } } });
 const freeze = value => { if (value && typeof value === 'object') { Object.freeze(value); Object.values(value).forEach(freeze); } return value; };
+
+test('UI-1: variant restore and undo cannot lower disclosure/help or replace a revealed first response',()=>{
+ const base=restoreStudyDraft(session('en'),'a',content),candidate={...base,answer:'A restored answer.'};
+ const disclosed={...base,answer:'The first response.',revealed:true,hint:true};
+ const result=reconcileStudyDraftRestoration(disclosed,base,candidate);
+ assert.equal(result.answer,disclosed.answer);assert.equal(result.revealed,true);assert.equal(result.hint,true);
+ const undone=reconcileStudyDraftRestoration(result,base,candidate);assert.equal(undone.answer,disclosed.answer);assert.equal(undone.hint,true);
+ const server=reconcileStudyDraftRestoration(base,disclosed,candidate);assert.equal(server.answer,disclosed.answer);assert.equal(server.revealed,true);
+ const editable=reconcileStudyDraftRestoration(base,base,candidate);assert.equal(editable.answer,candidate.answer);assert.equal(editable.revealed,false);
+ assert.equal(candidate.revealed,false);assert.equal(base.revealed,false);
+});
 
 test('question identity separates sessions, targets, directions and retry mode but ignores saves and timers', () => {
   const s = session(), key = studyQuestionKey(s, 'a');

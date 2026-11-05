@@ -17,7 +17,12 @@ export async function requestJson<T>(url:string,init:RequestInit,timeoutMs:numbe
  const cancel=()=>controller.abort(upstream?.reason);
  if(upstream?.aborted)cancel();else upstream?.addEventListener('abort',cancel,{once:true});
  const timer=setTimeout(()=>{timedOut=true;controller.abort()},timeoutMs);
- try{const response=await fetch(url,{...owned.init,signal:controller.signal});status=response.status;if(status===401)owned.invalidated();const raw:unknown=await response.json();const data=validate?validate(raw,response):raw as T;finish(response.ok?'success':'http_error',status);return {response,data};}
+ try{const response=await fetch(url,{...owned.init,signal:controller.signal});status=response.status;if(status===401)owned.invalidated();
+  // An early size refusal can close the upload before its body is readable.
+  // Retain the received HTTP failure, but never swallow deadlines or cancellation.
+  let raw:unknown;
+  try{raw=await response.json()}catch(error){if(response.status!==413||timedOut||controller.signal.aborted)throw error;raw=null;}
+  const data=validate?validate(raw,response):raw as T;if(response.ok&&validate)owned.confirmed();finish(response.ok?'success':'http_error',status);return {response,data};}
  catch(error){finish(timedOut?'timeout':controller.signal.aborted?'cancelled':error instanceof SyntaxError||error instanceof InvalidResponseError?'invalid_response':'network_error',status);if(timedOut)throw new RequestTimeoutError();throw error;}
  finally{clearTimeout(timer);upstream?.removeEventListener('abort',cancel);}
 }

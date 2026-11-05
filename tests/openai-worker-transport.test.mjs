@@ -20,8 +20,10 @@ const { outputFiles } = await build({ stdin: { resolveDir: process.cwd(), loader
 ` }, bundle: true, write: false, format: 'esm', platform: 'browser', logLevel: 'silent' });
 
 async function worker(t, outboundService) {
-  const instance = new Miniflare({ script: outputFiles[0].text, modules: true,
-    compatibilityDate: '2026-05-22', host: '127.0.0.1', port: 0, inspectorPort: 0, outboundService });
+  const instance = new Miniflare({host: '127.0.0.1', port: 0, inspectorPort: 0,
+    workers:[{config:{name:'transport-probe',compatibilityDate:'2026-05-22',
+      manifest:{mainModule:'worker.mjs',modules:{'worker.mjs':{type:'esm',contents:outputFiles[0].text}}}},
+      dev:{outboundService:{type:'fetcher',handler:outboundService}}}]});
   t.after(() => instance.dispose());
   return instance;
 }

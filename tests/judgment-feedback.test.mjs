@@ -108,7 +108,7 @@ test('new transport uses one strict request per model and adds exact v3 provenan
       assert.deepEqual(body.reasoning, { effort: 'low' }); assert.equal(body.service_tier, 'default'); assert.equal(body.tools, undefined);
       return Response.json({ status: 'completed', model: modelId, output: [{ type: 'message', role: 'assistant', status: 'completed', content: [{ type: 'output_text', text: JSON.stringify(wire()) }] }] });
     });
-    assert.equal(calls, 1); assert.equal(result.validationVersion, 'judgment-v5'); assert.equal(result.promptVersion, 'reference-v5');
+    assert.equal(calls, 1); assert.equal(result.validationVersion, 'judgment-v6'); assert.equal(result.promptVersion, 'reference-v5');
     assert.equal(result.requestedModel, modelId); assert.equal(result.structure, undefined); assert.equal(result.original, natural);
   }
 });

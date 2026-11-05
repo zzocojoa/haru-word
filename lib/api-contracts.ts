@@ -5,7 +5,7 @@ import type {ReceiptRequest,FeedbackReceipt} from './feedback-receipt';
 import type {FeedbackContextRequest} from './feedback-context';
 
 // Wire contracts shared by the client and server. Imports here must remain type-only.
-export type ApiError = { error: string; conflict?: boolean } & Partial<FeedbackIssue>;
+export type ApiError = { error: string; conflict?: boolean; receipt?: FeedbackReceipt } & Partial<FeedbackIssue>;
 export type StateSnapshot = { revision: number; state: State };
 export type StateRevision = { revision: number };
 export type SaveStateRequest = StateRevision & {

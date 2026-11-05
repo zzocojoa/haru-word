@@ -24,16 +24,21 @@ const session=():Session=>({id:'a1111111-1111-4111-8111-111111111111',kind:'dail
  records:{synthetic:{...emptyRecord('합성 뜻'),sentence:initial,en:'independent',enAnswer:'First synthetic answer.',ko:'help',koAnswer:'First second answer.',aiFeedback:seed}}});
 const grammar=():GrammarProgress=>({...newLessonProgress('auxiliary',createdAt,4),stage:5,sentence:initial,
  observation:{first:'First observation.',latest:'First observation.',attempts:1,helped:false},answers:Object.fromEntries(['q1','q2','q3'].map(k=>[k,{first:'First '+k,latest:'Latest '+k,attempts:2,helped:true}])),feedback:initial===seed.original?seed:undefined});
-declare global{interface Window{draftHarness:{switchOwner:(id:string)=>void;snapshot:()=>unknown;clear:()=>void;invalidate:()=>void}}}
-window.draftHarness={switchOwner:()=>{},snapshot:()=>null,clear:()=>{},invalidate:()=>{}};
+declare global{interface Window{draftHarness:{switchOwner:(id:string)=>void;snapshot:()=>unknown;clear:()=>void;invalidate:()=>void;captureAck:()=>void;pendingAck:(ok:boolean)=>void}}}
+window.draftHarness={switchOwner:()=>{},snapshot:()=>null,clear:()=>{},invalidate:()=>{},captureAck:()=>{},pendingAck:()=>{}};
 function Controls({snapshot}:{snapshot:unknown}){
  const {store,state}=useLocalDrafts();
- useLayoutEffect(()=>{window.draftHarness.snapshot=()=>({source:snapshot,storage:store?.getSnapshot()??state,ownerMarker:localStorage.getItem('haru-words:local-input-owner:v1'),rows:store?.list()});window.draftHarness.clear=()=>{store?.clear();};window.draftHarness.invalidate=()=>{store?.invalidate();};},[snapshot,store,state]);
+ // This harness has a fixed synthetic authenticated identity and no state API.
+ useLayoutEffect(()=>{store?.connect();store?.confirmOwner();},[store]);
+ // Report the committed React view, so browser readiness cannot observe a
+ // newer store revision before the form has consumed that revision.
+ useLayoutEffect(()=>{window.draftHarness.snapshot=()=>({source:snapshot,storage:state,ownerMarker:localStorage.getItem('haru-words:local-input-owner:v1'),rows:store?.list()});window.draftHarness.clear=()=>{store?.clear();};window.draftHarness.invalidate=()=>{store?.invalidate();};},[snapshot,store,state]);
  return <output aria-label="보관 항목 수">{state.count}</output>;
 }
 function Word(){
  const [server,setServer]=useState(session),[saved,setSaved]=useState(false);
  const draft=useStudyDraft(server,'synthetic',undefined,undefined,saved);
+ useLayoutEffect(()=>{window.draftHarness.captureAck=()=>{window.draftHarness.pendingAck=draft.persistent.captureAcknowledgement();};},[draft.persistent]);
  return <><label>내 문장<textarea value={draft.draft.sentence} onChange={e=>{setSaved(false);draft.setSentence(e.target.value);}}/></label>
  <label>작성 중 답<input value={draft.draft.answer} onChange={e=>draft.setAnswer(e.target.value)}/></label>
  <label><input type="checkbox" checked={draft.draft.hint} onChange={e=>draft.setHint(e.target.checked)}/>도움 사용 표시</label>

@@ -31,7 +31,7 @@ test('both actual routes activate the judgment candidate only for the exact expl
   t.mock.method(globalThis,'fetch',async(_url,init)=>{calls++;sent=JSON.parse(init.body);return response(sent,active?currentWire(sentence):oldWire(sentence));});
   const result=await routes[domain].POST(request(domain,sentence)),body=await result.json();
   assert.equal(result.status,200);assert.equal(calls,1);assert.equal(r.attempts,1);
-  assert.equal(body.feedback.validationVersion,active?'judgment-v5':'structured-v1');assert.equal(body.feedback.promptVersion,active?'reference-v5':'reference-v1');
+  assert.equal(body.feedback.validationVersion,active?'judgment-v6':'structured-v1');assert.equal(body.feedback.promptVersion,active?'reference-v5':'reference-v1');
   assert.equal(Object.hasOwn(body.feedback,'structure'),!active);
   const instruction=domain==='word'?(active?helpers.systemInstruction:helpers.legacySystemInstruction):(active?helpers.grammarInstruction:helpers.legacyGrammarInstruction);
   assert.ok(sent.instructions.startsWith(instruction));

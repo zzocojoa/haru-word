@@ -58,6 +58,15 @@ const req = (data, headers = {}) => new Request('https://study.example/api/state
 const delta = s => ({ revision: 0, settings: { ...structuredClone(EMPTY.settings), activeSessionId: s.id }, progress: { [s.ids[0]]: { meaning: '학습 뜻' } }, sessions: { [s.id]: s } });
 const dump = () => ['learner_states', 'word_progress', 'study_sessions', 'ai_daily_usage']
   .map(table => sqlite.prepare(`SELECT * FROM ${table} ORDER BY user_id`).all());
+test('DATA-1: malformed record arrays fail before database changes, preserving revision and records', async () => {
+  const before = dump();
+  for (const part of ['progress', 'sessions', 'grammar']) {
+    const data = { revision: 0, progress: {}, sessions: {}, [part]: [null] };
+    assert.equal((await route.PUT(req(data))).status, 400);
+    assert.deepEqual(dump(), before);
+  }
+  assert.equal(batches, 0);
+});
 beforeEach(() => {
   failureAt = -1; batches = 0; stateApiRuntime.user = { userId: 'owner' };
   for (const table of ['learner_states', 'word_progress', 'study_sessions', 'ai_daily_usage']) sqlite.exec(`DELETE FROM ${table}`);

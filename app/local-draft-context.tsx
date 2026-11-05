@@ -11,9 +11,9 @@ export function useLocalDrafts(){
   return {store,state};
 }
 export function LocalDraftProvider({ownerId,children}:{ownerId:string|null;children:ReactNode}){
-  const store=useMemo(()=>new LocalLearningDrafts(ownerId,crypto.randomUUID(),()=>window.localStorage),[ownerId]);
+  const store=useMemo(()=>new LocalLearningDrafts(ownerId,crypto.randomUUID(),()=>window.localStorage,Date.now,true),[ownerId]);
   const state=useSyncExternalStore(store.subscribe,store.getSnapshot,store.getServerSnapshot);
-  useLayoutEffect(()=>registerClientOwner(ownerId),[ownerId]);
+  useLayoutEffect(()=>registerClientOwner(ownerId,store.confirmOwner),[ownerId,store]);
   useEffect(()=>{
     store.activate();
     const invalidated=()=>store.invalidate();

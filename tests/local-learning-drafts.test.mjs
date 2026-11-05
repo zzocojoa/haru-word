@@ -14,6 +14,41 @@ const values=(sentence='Synthetic unsaved sentence.')=>({meaning:'합성 뜻',ex
 const payload=(sentence='Synthetic unsaved sentence.')=>({kind:'word',base:values('Saved sentence.'),values:values(sentence)});
 const scope=(storage,owner='owner-a',instance=A,now=()=>1000)=>{const s=new LocalLearningDrafts(owner,instance,()=>storage,now);s.connect();return s;};
 
+test('UI-5: a newly mounted unverified owner cannot remove or claim another account draft',()=>{
+ const storage=new MemoryStorage(),a=scope(storage);a.write('question-a',payload('A retained draft.'));
+ const before=JSON.stringify([...storage.data]);
+ const pending=new LocalLearningDrafts('owner-b',B,()=>storage,()=>1000,true);pending.connect();
+ assert.equal(JSON.stringify([...storage.data]),before);
+ assert.equal(pending.getSnapshot().available,false);assert.equal(pending.write('question-b',payload()),false);
+ assert.equal(pending.confirmOwner(),true);
+ assert.equal(storage.getItem(DRAFT_OWNER_KEY),'owner-b');assert.equal(pending.write('question-b',payload('B retained draft.')),true);
+ const after=JSON.stringify([...storage.data]);
+ const stale=new LocalLearningDrafts('owner-a',crypto.randomUUID(),()=>storage,()=>1000,true);stale.connect();
+ assert.equal(JSON.stringify([...storage.data]),after);stale.invalidate();
+ assert.equal(stale.confirmOwner(),false);assert.equal(stale.retry(),false);assert.equal(JSON.stringify([...storage.data]),after);
+});
+
+test('UI-5: successful current-account verification still permits explicit normal reverse transition and logout',()=>{
+ const storage=new MemoryStorage(),b=scope(storage,'owner-b',B);b.write('question-b',payload());
+ const a=new LocalLearningDrafts('owner-a',A,()=>storage,()=>1000,true);a.connect();
+ assert.equal(a.confirmOwner(),true);assert.equal(a.write('question-a',payload()),true);
+ assert.equal([...storage.data.keys()].some(key=>key.startsWith(DRAFT_PREFIX+'owner-b:')),false);
+ assert.equal(a.clear(true),true);assert.equal(storage.getItem(DRAFT_OWNER_KEY),null);
+});
+
+test('UI-5: a delayed successful confirmation cannot reclaim ownership changed after its read began',()=>{
+ const storage=new MemoryStorage(),a=scope(storage);a.write('question-a',payload());
+ const late=new LocalLearningDrafts('owner-a',crypto.randomUUID(),()=>storage,()=>1000,true);late.connect();
+ const b=new LocalLearningDrafts('owner-b',B,()=>storage,()=>1000,true);b.connect();b.confirmOwner();b.write('question-b',payload('New B input.'));
+ const before=JSON.stringify([...storage.data]);assert.equal(late.confirmOwner(),false);assert.equal(JSON.stringify([...storage.data]),before);
+});
+
+test('UI-5: an initially inaccessible storage factory cannot bypass the owner comparison on confirmation',()=>{
+ const storage=new MemoryStorage(),b=scope(storage,'owner-b',B);b.write('question-b',payload());let blocked=true;
+ const stale=new LocalLearningDrafts('owner-a',A,()=>{if(blocked)throw Error('synthetic blocked');return storage;},()=>1000,true);stale.connect();
+ const before=JSON.stringify([...storage.data]);blocked=false;assert.equal(stale.confirmOwner(),false);assert.equal(JSON.stringify([...storage.data]),before);
+});
+
 test('validated word drafts survive a fresh page instance, including explicit empty values and help flags',()=>{
  const storage=new MemoryStorage(),s=scope(storage),p=payload('');p.values.answer='작성 중 답';p.values.hint=true;
  assert.equal(s.write('question-a',p),true);const reopened=scope(storage,'owner-a',B);

@@ -131,7 +131,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
       onOrder={setOrder} onAnswer={answer} onHint={reveal} onNext={nextQuestion} disabled={!persistence.canSave}
     />}
     {!reviewing && progress.stage === 5 && <><DraftRecoveryNotice input={persistent}/><FeedbackContextInput context={feedbackContext} disabled={!persistence.canSave||aiPending}/><GrammarWriting
-      lesson={lesson} progress={progress} draftFeedback={persistent.lastFeedback} retainedFeedback={retainedFeedback} recoveryPending={recoveryPending} canSave={persistence.canSave} aiPending={aiPending} aiError={aiError} currentModelId={modelId} contextFingerprint={feedbackContext.fingerprint}
+      lesson={lesson} progress={progress} draftFeedback={persistent.lastFeedback} retainedFeedback={retainedFeedback} recoveryPending={recoveryPending} canSave={persistence.canSave} inputLocked={persistence.replacing} aiPending={aiPending} aiError={aiError} currentModelId={modelId} contextFingerprint={feedbackContext.fingerprint}
       onAi={() => void checkSentence()} onSentence={changeSentence}
       onCheck={check => change(value => ({ ...value, check }))}
       onChecks={(key, result) => change(value => { const checks = { ...value.checks, [key]: result }; return { ...value, checks, check: combinedCheck(checks) }; })}

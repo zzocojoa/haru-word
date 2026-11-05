@@ -422,7 +422,7 @@ function LearningScreens({
                 grammarPracticeEnabled={grammarPracticeEnabled}
                 grammarV3Enabled={grammarV3Enabled}
                 grammarV4Enabled={grammarV4Enabled}
-                persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, saved: signedIn && !loading && !saving && !unsaved && !conflict, registerLeave: registerGrammarLeave }}
+                persistence={{ currentState, save, stage: store.stageGrammar, canSave: signedIn && !loading && !conflict && !store.restoring, saved: signedIn && !loading && !saving && !unsaved && !conflict, replacing:loading||store.restoring, registerLeave: registerGrammarLeave }}
                 activityDate={clock.currentDate}
                 state={state}
                 words={words}

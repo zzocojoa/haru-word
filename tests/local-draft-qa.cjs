@@ -12,18 +12,18 @@ const {build}=require('esbuild');
  const dir=path.resolve('work/local-draft-qa',engine+'-'+randomUUID());fs.mkdirSync(dir,{recursive:true});
  await build({entryPoints:['tests/local-draft-harness.tsx'],outfile:path.join(dir,'harness.js'),bundle:true,format:'iife',platform:'browser',logLevel:'silent',define:{'process.env.NODE_ENV':'"development"'}});
  const html='<!doctype html><html lang="ko"><head><meta charset="utf-8"></head><body><div id="root"></div><script src="/harness.js"></script></body></html>';
- let posts=0,gets=0,loseNext=false;const receipts=new Map(),checks=[],errors=[],external=[];
+ let posts=0,gets=0,loseNext=false,failLookup=false;const lookupIds=[],receipts=new Map(),checks=[],errors=[],external=[];
  const server=createServer(async(req,res)=>{
   if(req.url==='/harness.js'){res.writeHead(200,{'Content-Type':'application/javascript'});res.end(fs.readFileSync(path.join(dir,'harness.js')));return;}
   if(req.method==='POST'&&['/api/sentence-feedback','/api/grammar-feedback'].includes(req.url)){
    let raw='';for await(const chunk of req)raw+=chunk;const body=JSON.parse(raw);posts++;
    assert.equal(req.headers['x-study-owner'],'synthetic-owner');assert.ok(body.requestId);assert.ok(body.requestStartedAt);
    const sentence=req.url==='/api/grammar-feedback'?body.sentence.trim():body.sentence;
-   const feedback={original:sentence,correctedSentence:sentence,meaningUsage:'appropriate',grammar:'natural',explanation:'복구한 합성 참고 의견',model:body.expectedModelId,provider:'openai',requestedModel:body.expectedModelId,promptVersion:'reference-v5',validationVersion:'judgment-v5',...(body.expectedContextFingerprint?{contextFingerprint:body.expectedContextFingerprint}:{}),...(body.contextNote?{contextNote:body.contextNote}:{}),createdAt:new Date().toISOString()};
+   const feedback={original:sentence,correctedSentence:sentence,meaningUsage:'appropriate',grammar:'natural',explanation:'복구한 합성 참고 의견',model:body.expectedModelId,provider:'openai',requestedModel:body.expectedModelId,promptVersion:'reference-v5',validationVersion:'judgment-v6',...(body.expectedContextFingerprint?{contextFingerprint:body.expectedContextFingerprint}:{}),...(body.contextNote?{contextNote:body.contextNote}:{}),createdAt:new Date().toISOString()};
    const result={feedback,receipt:{requestId:body.requestId,state:'completed',persisted:true}};receipts.set(body.requestId,result);
    if(loseNext){loseNext=false;res.writeHead(200,{'Content-Type':'application/json'});res.end('{"feedback":');return;}res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify(result));return;
   }
-  if(req.url.startsWith('/api/feedback-requests/')){gets++;const id=req.url.split('/').pop(),body=receipts.get(id);res.writeHead(body?200:404,{'Content-Type':'application/json'});res.end(JSON.stringify(body??{code:'receipt_unknown'}));return;}
+  if(req.url.startsWith('/api/feedback-requests/')){gets++;const id=req.url.split('/').pop();lookupIds.push(id);if(failLookup){failLookup=false;res.writeHead(503,{'Content-Type':'application/json'});res.end(JSON.stringify({code:'provider_unavailable'}));return;}const body=receipts.get(id);res.writeHead(body?200:404,{'Content-Type':'application/json'});res.end(JSON.stringify(body??{code:'receipt_unknown'}));return;}
   if(req.url.startsWith('/?')||req.url==='/'){res.writeHead(200,{'Content-Type':'text/html'});res.end(html);return;}res.writeHead(404);res.end();
  });
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+server.address().port;
@@ -33,7 +33,7 @@ const {build}=require('esbuild');
  let context,page;const pass=name=>{checks.push(name);console.log('PASS '+name);};
  async function start(){context=await playwright[engine].launchPersistentContext(profile,{headless:true,viewport:{width:390,height:844}});page=context.pages()[0]??await context.newPage();await wire(page);}
  async function wire(p){p.on('pageerror',e=>errors.push(e.message));await p.route('**/*',route=>{if(!route.request().url().startsWith(base+'/')){external.push(route.request().url());return route.abort();}return route.continue();});p.on('dialog',d=>void(d.type()==='beforeunload'?d.accept():d.dismiss()));}
- async function open(mode='word',extra=''){await page.goto(base+'/?mode='+mode+extra);await page.getByRole('heading',{name:'합성 초안 검사'}).waitFor();await page.waitForFunction(()=>typeof window.draftHarness?.snapshot==='function'&&window.draftHarness.snapshot()?.storage?.ready);}
+ async function open(mode='word',extra=''){await page.goto(base+'/?mode='+mode+extra);await page.getByRole('heading',{name:'합성 초안 검사'}).waitFor();await page.waitForFunction(()=>{const storage=window.draftHarness?.snapshot()?.storage;return storage?.ready&&storage.available&&storage.active;});}
  const field=()=>page.getByRole('textbox',{name:'내 문장',exact:true});
  async function value(expected){await page.waitForFunction(v=>document.querySelector('textarea')?.value===v,expected);}
  async function forceStop(){
@@ -89,12 +89,30 @@ const {build}=require('esbuild');
   await page.evaluate(()=>window.draftHarness.clear());
   for(const mode of ['word','grammar']){
    const requestSentence=mode==='grammar'?' \tSynthetic request grammar.\n ':'Synthetic request word.';
-   await open(mode,'&requests=1');await field().fill(requestSentence);const beforePosts=posts,beforeGets=gets;loseNext=true;
+   await open(mode,'&requests=1');await field().fill(requestSentence);await page.waitForFunction(sentence=>window.draftHarness.snapshot().rows.some(row=>row.record.kind!=='request'&&row.record.values.sentence===sentence),requestSentence);const beforePosts=posts,beforeGets=gets;loseNext=true;
    await page.getByRole('button',{name:'AI 참고 의견 요청',exact:true}).click();await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).waitFor();await page.waitForFunction(()=>document.querySelectorAll('[role="alert"]').length>0||document.body.textContent.includes('연결 실패'));
    assert.equal(posts,beforePosts+1);await page.reload();await value(requestSentence);assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets);
-   await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).click();await page.getByText('복구한 합성 참고 의견',{exact:true}).waitFor();assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets+1);pass(mode+' lost AI response survives reload and explicit recovery performs one GET and zero new POSTs');
+   failLookup=true;await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).click();
+   await page.waitForFunction(()=>!document.querySelector('.grammar-ai-action button:disabled')&&document.body.textContent.includes('이전 AI 요청 결과 확인'));
+   assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets+1);
+   await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).click();await page.getByText('복구한 합성 참고 의견',{exact:true}).waitFor();assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets+2);assert.equal(lookupIds.at(-1),lookupIds.at(-2));pass(mode+' lost AI response and receipt-less503 retain the same UUID; next explicit click only looks up, never posts');
    await page.evaluate(()=>window.draftHarness.clear());
   }
+  await page.evaluate(()=>window.draftHarness.clear());await open('word');
+  await field().fill('First pending save.');await page.waitForFunction(()=>window.draftHarness.snapshot().rows.some(row=>row.record.values.sentence==='First pending save.'));
+  await page.evaluate(()=>window.draftHarness.captureAck());await field().fill('Newer unsaved edit.');
+  await page.waitForFunction(()=>window.draftHarness.snapshot().rows.some(row=>row.record.values.sentence==='Newer unsaved edit.'));
+  await page.evaluate(()=>window.draftHarness.pendingAck(true));
+  assert.ok((await page.evaluate(()=>window.draftHarness.snapshot().rows)).some(row=>row.record.values.sentence==='Newer unsaved edit.'));
+  await page.evaluate(()=>{window.draftHarness.captureAck();window.draftHarness.pendingAck(false);});
+  assert.ok((await page.evaluate(()=>window.draftHarness.snapshot().rows)).some(row=>row.record.values.sentence==='Newer unsaved edit.'));
+  await page.evaluate(()=>window.draftHarness.captureAck());
+  const ackTab=await context.newPage();await wire(ackTab);await ackTab.goto(base+'/?mode=word');/* Establish recovered input before testing a new tab's distinct unsaved edit. */await ackTab.waitForFunction(()=>window.draftHarness?.snapshot()?.storage?.available&&document.querySelector('textarea')?.value==='Newer unsaved edit.');await ackTab.getByRole('textbox',{name:'내 문장',exact:true}).fill('Another tab unsaved edit.');
+  await ackTab.waitForFunction(()=>window.draftHarness.snapshot().rows.some(row=>row.record.values.sentence==='Another tab unsaved edit.'));
+  await page.evaluate(()=>window.draftHarness.pendingAck(true));
+  await page.waitForFunction(()=>!window.draftHarness.snapshot().rows.some(row=>row.record.values.sentence==='Newer unsaved edit.'));
+  assert.ok((await ackTab.evaluate(()=>window.draftHarness.snapshot().rows)).some(row=>row.record.values.sentence==='Another tab unsaved edit.'));await ackTab.close();
+  pass('UI-2 captured acknowledgement retains failed/newer edits and removes only the successful page instance');
   await open();await field().fill('Account A private synthetic input.');await page.evaluate(()=>window.draftHarness.switchOwner('synthetic-other'));await value('Saved synthetic sentence.');assert.equal(await page.evaluate(()=>JSON.stringify(window.draftHarness.snapshot().rows).includes('Account A private')),false);pass('account switch remounts forms and removes previous-account drafts');
   await field().fill('Logout synthetic input.');await page.getByRole('link',{name:'임시 입력을 지우고 로그아웃',exact:true}).click();await page.waitForURL('**/signout-with-chatgpt*');
   assert.equal(await page.evaluate(()=>Object.keys(localStorage).filter(key=>key.startsWith('haru-words:local-input:v1:')).length),0);assert.equal(await page.evaluate(()=>localStorage.getItem('haru-words:local-input-owner:v1')),null);pass('app logout clears device drafts before top-level sign-out navigation');

@@ -24,9 +24,9 @@ function reviewSchedule(progress: GrammarProgress) {
   return { nextDate: afterDays(lastDate, 1), lastDate, passed: 0, nextSet: 'a' as const, used: { a: 0, b: 0 } };
 }
 export function completeLesson(progress: GrammarProgress, date: string, now = new Date().toISOString()): GrammarProgress {
-  return { ...progress, stage: 6, completedAt: now, schedule: progress.schedule ?? {
+  return { ...progress, stage: 6, completedAt: progress.completedAt ?? now, schedule: progress.schedule ?? (progress.completedAt ? undefined : {
     nextDate: afterDays(date, 1), lastDate: date, passed: 0, nextSet: 'a', used: { a: 0, b: 0 },
-  } };
+  }) };
 }
 export function startGrammarReview(id: LessonId, progress: GrammarProgress, date: string, contentVersion:2|3|4=2): GrammarProgress {
   if (!progress.completedAt || progress.review && !progress.review.completedAt) return progress;

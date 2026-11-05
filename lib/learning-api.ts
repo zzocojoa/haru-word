@@ -5,6 +5,7 @@ import { parseFeedbackIssue } from './feedback-issue';
 import { FEEDBACK_STRUCTURE_HEADERS } from './feedback-compatibility';
 import { SENSE_KEY_HEADERS } from './state-data-keys';
 import { AI_CONTRACT_HEADERS } from './ai-contract';
+import { receiptMetadataSchema } from './feedback-receipt';
 import type { State } from './learning';
 import type {
   ApiError, FeedbackRequest, FeedbackResponse, SaveStateRequest, StateRevision, StateSnapshot,
@@ -20,7 +21,9 @@ async function requestApi<T>(url: string, init: RequestInit, timeoutMs: number, 
   const { response, data } = await requestJson<T | ApiError>(url, init, timeoutMs, (raw, response) => {
     if (response.ok) return validate ? validate(raw) : raw as T;
     const error = raw as Partial<ApiError> | null;
-    return { error: typeof error?.error === 'string' ? error.error : '요청을 처리하지 못했어요.', ...(error?.conflict === true ? { conflict: true } : {}), ...parseFeedbackIssue(raw) };
+    const receipt=receiptMetadataSchema.safeParse(error?.receipt);
+    return { error: typeof error?.error === 'string' ? error.error : response.status===413?'기록이 너무 큽니다. 회차를 나눠 주세요.':'요청을 처리하지 못했어요.', ...(error?.conflict === true ? { conflict: true } : {}), ...parseFeedbackIssue(raw),
+      ...(receipt.success?{receipt:receipt.data}:{}) };
   }).catch(error => {
     if (validate && error instanceof SyntaxError) throw new InvalidResponseError();
     throw error;

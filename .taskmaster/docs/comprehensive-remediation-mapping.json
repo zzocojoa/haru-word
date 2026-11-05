@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "planId": "comprehensive-remediation-2026-11-05",
+  "tag": "comprehensive-remediation",
+  "totalAuditItems": 29,
+  "mappings": [
+    {
+      "auditId": "UI-5",
+      "originalPriority": "P1",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 2,
+      "subtaskIds": [
+        "2.1",
+        "2.2",
+        "2.3"
+      ],
+      "coordination": "UI-2: 같은 기기 초안 소유권/정리 경계를 수정할 때 명시 로그인·로그아웃과 늦은 문서 보호를 함께 검증",
+      "complexity": 9,
+      "complexityReason": "mount와 인증 세대·다중 탭 간 비동기 소유권",
+      "existingTestGap": "기존 검사는 정상 전환/재시도만 다뤄 지연 SSR의 최초 connect 삭제 순서를 놓침",
+      "designDecision": "현재 인증 확인 이전 connect는 타 owner 정리·marker 변경을 하지 않도록 명시 인증 전환 경계와 연결. 검증된 전환의 이전 입력 정리와 stale 재시도 거부는 유지."
+    },
+    {
+      "auditId": "AI-6",
+      "originalPriority": "P1",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 3,
+      "subtaskIds": [
+        "3.1",
+        "3.2",
+        "3.3"
+      ],
+      "coordination": "UI-4: 독립 review/schedule 보존을 먼저 확립한 공통 문장 변경 경계 제공",
+      "complexity": 9,
+      "complexityReason": "v1~v4 스키마 불변식과 독립 성적·완료일 공존",
+      "existingTestGap": "문장 수정의 자기점검 초기화만 검사하고 완료 후 독립 복습 이력을 만들지 않음",
+      "designDecision": "기존 completedAt을 최초 수업 이력으로 보존하면서 stage5의 새 문장 자기점검 필요성을 별도로 판정하는 최소 변경을 우선 검토. completedAt 유무만으로 새 문장을 완료 처리하는 UI/스키마를 함께 조정. review/schedule 삭제나 새 DB 스키마로 우회하지 말고 v1~v4 reader/save roundtrip 확인."
+    },
+    {
+      "auditId": "UI-3",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 4,
+      "subtaskIds": [
+        "4.1",
+        "4.2",
+        "4.3"
+      ],
+      "coordination": "",
+      "complexity": 8,
+      "complexityReason": "GET 대기·epoch remount·저장소 불가 경합",
+      "existingTestGap": "충돌 확인 시점 뒤 허용한 입력을 GET 응답 교체까지 추적하지 않음",
+      "designDecision": "일반 저장과 구별한 snapshot replacement 진행 플래그를 기존 store에서 문법 쓰기까지 전달하여 해당 구간만 편집 잠금. 시작 전 draft 백업/보존 및 실패 후 잠금 해제 확인. 유효 합성409 주입과 실제 D1 GET 관찰을 분리."
+    },
+    {
+      "auditId": "UI-1",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 5,
+      "subtaskIds": [
+        "5.1",
+        "5.2",
+        "5.3"
+      ],
+      "coordination": "UI-4: 복구가 편집 필드와 평가 증거 필드를 구분해야 한다는 원칙 공유; 단어/문법 성적은 합치지 않음",
+      "complexity": 8,
+      "complexityReason": "두 탭 복구/되돌리기와 평가 증거 단조성",
+      "existingTestGap": "값 복구만 검사하고 공개/도움 플래그의 하강과 저장 성적을 대조하지 않음",
+      "designDecision": "같은 question의 revealed/hinted는 현재/서버/후보의 OR로 보존하고 first 답은 최초 기록을 유지. 편집 문장만 복구. undo에도 같은 규칙. 단어 친숙도/일일 목표/문법 성적과 합치지 않음."
+    },
+    {
+      "auditId": "UI-2",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 6,
+      "subtaskIds": [
+        "6.1",
+        "6.2",
+        "6.3"
+      ],
+      "coordination": "UI-5: 다른 계정/다른 탭/더 최신 변형을 성공 정리 대상으로 오인하지 않음; AI-2: UUID 기기 보관과 pending 영수증 회복의 독립 원인",
+      "complexity": 8,
+      "complexityReason": "질문 이동 뒤 승인 응답·정확한 row 식별",
+      "existingTestGap": "동일 question에 머문 성공 정리만 검사해 전환된 hook의 성공 row 누락을 놓침",
+      "designDecision": "전송 시 owner/instance/question/fingerprint를 캡처해 성공 응답 시 동일 row만 compare-and-remove. 더 최신 변형·다른 탭·실패 row는 유지. UI-5 owner 세대 경계 안에서만 정리."
+    },
+    {
+      "auditId": "UI-4",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 7,
+      "subtaskIds": [
+        "7.1",
+        "7.2",
+        "7.3"
+      ],
+      "coordination": "AI-6 수정 후 공통 문장 변경 경계 사용; completedAt/check와 독립 review/schedule은 별도 관리; AI-1: 공통 스키마의 원문 일치 정책 회귀도 함께 확인",
+      "complexity": 8,
+      "complexityReason": "AI-6 공통 상태 전이·schema/복구 경계",
+      "existingTestGap": "복구한 미완료 check와 기존 completedAt 조합의 API 저장까지 검사하지 않음",
+      "designDecision": "AI-6의 수정된 문장 변경 함수를 먼저 확립한 후 사용. 현재 updateGrammarSentence 그대로 재사용 금지. 복구 check/frame 유효성 및 같은 문장 복구의 무변경 보존을 검증."
+    },
+    {
+      "auditId": "AI-1",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 8,
+      "subtaskIds": [
+        "8.1",
+        "8.2"
+      ],
+      "coordination": "UI-4/AI-6: 문법 쓰기 스키마·복구·독립 이력 보존 회귀를 묶어 확인하되 원인은 별도",
+      "complexity": 6,
+      "complexityReason": "응답 수락과 저장 스키마 정책의 불일치",
+      "existingTestGap": "클라이언트 피드백 수락만 검사하고 grammarState/saveSchema까지 연결하지 않음",
+      "designDecision": "기존 feedback-input 원문 일치 함수를 model 저장 검증에도 적용. 앞뒤 SPACE/TAB/LF/NBSP만 허용하고 structured-v1 raw 원문·내부 공백 거절 유지."
+    },
+    {
+      "auditId": "AI-2",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 9,
+      "subtaskIds": [
+        "9.1",
+        "9.2",
+        "9.3"
+      ],
+      "coordination": "UI-2: 기기 보관 capacity와 UUID 종결 판정은 별개이며 함께 확인; TEST-1: receipt가 유효한 정상 응답 fixture로 현재성/늦은 응답 회귀 강화",
+      "complexity": 8,
+      "complexityReason": "UUID의 모호한 실패·명시 종결·비용 안전",
+      "existingTestGap": "늦은 응답 fixture는 유효 receipt가 없고 조회503 후 다음 클릭을 검사하지 않음",
+      "designDecision": "동일 requestId의 유효 종결 receipt만 acknowledge. receipt 없는 503/502/429는 pending. 401은 인증 UI 차단과 별도 검증. unknown/expired/invalidated의 기존 계약 및 명시 재시도 안내를 보존."
+    },
+    {
+      "auditId": "DATA-1",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 10,
+      "subtaskIds": [
+        "10.1",
+        "10.2",
+        "10.3"
+      ],
+      "coordination": "DEP-ZOD: 동일 저장 검증 경계의 중복 영향을 교차 참조. 제품 결함은 DATA-1 한 건, 의존성 정비는 별도 한 작업",
+      "complexity": 9,
+      "complexityReason": "열거 이전 cardinality와 Worker/복원 호환",
+      "existingTestGap": "본문 byte·schema max는 있으나 전체 Object.entries/배열 파싱 전 수량 경계가 없음",
+      "designDecision": "state-shape/backup-structure의 기존 한도를 참고해 열거 이전 shallow 길이/컬렉션 수를 제한. 작은 안전 fixture로 선행 거절 경로부터 검증. 이번 계획에서 OOM/부하 재현 금지. fatal 정확한 단계·반복성·운영128MB는 미검증 유지."
+    },
+    {
+      "auditId": "DOCS-1",
+      "originalPriority": "P2",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 11,
+      "subtaskIds": [
+        "11.1",
+        "11.2"
+      ],
+      "coordination": "OPS-1: 현재 OpenAI 전송·중단 정책을 문서와 재생성 원본 모두 일치시킴",
+      "complexity": 3,
+      "complexityReason": "현행 복구 링크와 보존 역사 구분",
+      "existingTestGap": "링크 존재만 확인해 현재 실행 스위치 의미를 검사하지 않음",
+      "designDecision": "원문 과거 구조 설명은 보존하고 현재 복구 절/문서 첫머리/README 링크를 명시적으로 정정. 추가 제공자 호출·옛 스위치 활성화 없음."
+    },
+    {
+      "auditId": "OPS-1",
+      "originalPriority": "P2",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 12,
+      "subtaskIds": [
+        "12.1",
+        "12.2"
+      ],
+      "coordination": "DOCS-1: 현재 전송/복구 정책의 단일 원본과 문서 연결 확인",
+      "complexity": 4,
+      "complexityReason": "생성기와 공개 산출물 일치",
+      "existingTestGap": "게시된 파일만 검토하고 재생성 결과를 비교하지 않음",
+      "designDecision": "기존 생성기 credits 문자열을 현재 공개 정책으로 맞추고 합성 임시 출력 대상에서 재생성 검사. 새 추상화나 제공자 실행 코드는 추가하지 않음."
+    },
+    {
+      "auditId": "DEP-UNDICI",
+      "originalPriority": "P2",
+      "kind": "dependency",
+      "advisoryCount": 8,
+      "taskId": 13,
+      "subtaskIds": [
+        "13.1",
+        "13.2",
+        "13.3"
+      ],
+      "coordination": "",
+      "complexity": 8,
+      "complexityReason": "외부 npm·Wrangler 번들·Node 내장 3경계",
+      "existingTestGap": "npm audit/override만으로 번들·내장 버전까지 수정됐다고 오인 가능",
+      "designDecision": "8개 권고 각각 fixed range와 소비자 해석을 구현 당시 공식 advisory로 재확인. 기존 npm/lockfile 유지. Wrangler 내장 copy 및 Node 내장은 별도 확인하며 필요 최소 호환 패치만 선택."
+    },
+    {
+      "auditId": "DEP-VITE",
+      "originalPriority": "P2",
+      "kind": "dependency",
+      "advisoryCount": 5,
+      "taskId": 14,
+      "subtaskIds": [
+        "14.1",
+        "14.2",
+        "14.3"
+      ],
+      "coordination": "",
+      "complexity": 7,
+      "complexityReason": "Vinext/Cloudflare 버전 조합",
+      "existingTestGap": "개발 서버 권고를 Worker 도달성으로 일반화하지 않아야 함",
+      "designDecision": "감사 당시 제안8.1.6은 후보이며 구현 당시 공식 fixed range 재확인. Vite 단독/상위 호환 여부를 확인한 최소 패치. portable 루프백·기존 플러그인 보존."
+    },
+    {
+      "auditId": "DEP-ZOD",
+      "originalPriority": "P2",
+      "kind": "dependency",
+      "advisoryCount": 1,
+      "taskId": 15,
+      "subtaskIds": [
+        "15.1",
+        "15.2",
+        "15.3"
+      ],
+      "coordination": "DATA-1: 동일 저장 검증 경계의 중복 영향. 제품 결함 추가0, 의존성 정비 별도1. 정확한 fatal 단계와 운영128MB 영향 미확정.",
+      "complexity": 9,
+      "complexityReason": "major 호환과 저장/복원 경계 중복 영향",
+      "existingTestGap": "schema maxLength가 순회/복사를 막는다고 가정하면 실패",
+      "designDecision": "DATA-1 사전 제한 완료 뒤 Zod major 필요성을 별도 검토. v3 유지의 완화책/잔여 advisory와 major 후보 호환 비교를 기록. 미충족이면 보류하고 일괄 최신화 금지. 제품 결함 추가0."
+    },
+    {
+      "auditId": "AI-3",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 16,
+      "subtaskIds": [
+        "16.1",
+        "16.2"
+      ],
+      "coordination": "",
+      "complexity": 5,
+      "complexityReason": "제한 패턴과 정상 명령문의 경계",
+      "existingTestGap": "목록에 있는 명령문만 fixture에 포함",
+      "designDecision": "일반 단일 단어를 모두 단편으로 단정하지 않고 확인 가능한 제한 패턴만 보류. 정상 명령문과 명사 단편의 대조 fixture. 모델 프롬프트/유료 호출 변경 없음."
+    },
+    {
+      "auditId": "AI-4",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 17,
+      "subtaskIds": [
+        "17.1",
+        "17.2"
+      ],
+      "coordination": "",
+      "complexity": 5,
+      "complexityReason": "질문 표지 대칭 비교와 정상 어순 교정",
+      "existingTestGap": "의문→평서 방향만 보호",
+      "designDecision": "기존 correctionConflict의 발화행위 검사를 대칭으로 보완. 모든 의미 동등성을 증명하는 새 parser를 도입하지 않음."
+    },
+    {
+      "auditId": "AI-5",
+      "originalPriority": "P2",
+      "kind": "product",
+      "advisoryCount": 0,
+      "taskId": 18,
+      "subtaskIds": [
+        "18.1",
+        "18.2",
+        "18.3"
+      ],
+      "coordination": "",
+      "complexity": 7,
+      "complexityReason": "수량 순서/부호·부정 앵커",
+      "existingTestGap": "숫자 집계/부정 수만 같으면 통과하는 사례가 없음",
+      "designDecision": "기존 내용어 순서 정책 안에서 수량 순서/부호와 부정 인접 절·내용어 앵커를 비교. 애매한 변환은 보류. 같은 절의 수일치 등 한정 예외를 positive control로 유지."
+    },
+    {
+      "auditId": "DASH-1",
+      "originalPriority": "P2",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 19,
+      "subtaskIds": [
+        "19.1",
+        "19.2"
+      ],
+      "coordination": "DASH-2/DASH-3: 기존3플랜 선택·새로고침·사본 모드·출처 격리를 함께 회귀 검증",
+      "complexity": 6,
+      "complexityReason": "registry hash·catalog·표시 상태 일치",
+      "existingTestGap": "원래 플랜 수 고정 fixture가 runtime catalog 변경을 다루지 않음",
+      "designDecision": "향후 수정에서 catalog 검증/적용과 registry 지문을 함께 보완. 이번 등록에서는 reload로 새 HTML catalog를 읽고 알려진 stale-page 한계를 기록하며 이 코드는 수정하지 않음."
+    },
+    {
+      "auditId": "DASH-2",
+      "originalPriority": "P2",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 20,
+      "subtaskIds": [
+        "20.1",
+        "20.2"
+      ],
+      "coordination": "DASH-1/DASH-3: hash/선택 세대/사본 모드와 원본 출처를 함께 검증",
+      "complexity": 6,
+      "complexityReason": "import와 진행 중 live fetch 간 세대",
+      "existingTestGap": "가져오기 완료 뒤 늦은 조회 응답이 없는 순서만 검사",
+      "designDecision": "향후 import 시 기존 요청 세대 무효화 및 완료 시 모드/세대 확인. 정상 live 수동 복귀 계약 유지. 이번 등록 중 구현하지 않음."
+    },
+    {
+      "auditId": "DASH-3",
+      "originalPriority": "P2",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 21,
+      "subtaskIds": [
+        "21.1",
+        "21.2"
+      ],
+      "coordination": "DASH-1/DASH-2: legacy master 호환을 유지하며 다른 named plan 격리",
+      "complexity": 4,
+      "complexityReason": "legacy master와 named tag 출처",
+      "existingTestGap": "태그 존재/작업 수만 검사해 bare master fallback 격리를 놓침",
+      "designDecision": "향후 master 또는 명시 일치 planId만 legacy bare 허용. named tag 누락 시 fail-closed. Node normalizer 근거이며 브라우저 반복 재현으로 부풀리지 않음."
+    },
+    {
+      "auditId": "TEST-1",
+      "originalPriority": "P2",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 22,
+      "subtaskIds": [
+        "22.1",
+        "22.2"
+      ],
+      "coordination": "AI-2: 요청 UUID와 completed receipt를 실제 요청에서 생성하는 정상 fixture 유지",
+      "complexity": 6,
+      "complexityReason": "실제 요청 metadata와 positive/mutation control",
+      "existingTestGap": "invalid fixture가 정상 활성 응답에도 거절되어 음성 단언이 무의미",
+      "designDecision": "기존 feedbackReceipt/currentOpenaiFeedback helper로 현행 receipt/provenance 사용. 동일 fixture 즉시 수락과 stale 거부를 둘 다 검사. 격리 변이로 guard 제거 시 실패 확인."
+    },
+    {
+      "auditId": "OPS-2",
+      "originalPriority": "P2",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 23,
+      "subtaskIds": [
+        "23.1",
+        "23.2",
+        "23.3"
+      ],
+      "coordination": "OPS-3: 실행 잠금과 소유 프로세스 종료의 독립 경합을 각각 검증",
+      "complexity": 7,
+      "complexityReason": "Linux detached process group의 종료 소유권",
+      "existingTestGap": "Windows 종료 검사와 checker finally만으로 Linux 별도 그룹 생존을 놓침",
+      "designDecision": "실제 Linux 환경의 합성 Worker 자식/포트로 timeout/SIGINT/SIGTERM·준비 중 중단을 확인. Windows 통과로 Linux 완료 표시 금지."
+    },
+    {
+      "auditId": "DEP-SATORI",
+      "originalPriority": "P3",
+      "kind": "dependency",
+      "advisoryCount": 1,
+      "taskId": 24,
+      "subtaskIds": [
+        "24.1",
+        "24.2"
+      ],
+      "coordination": "",
+      "complexity": 4,
+      "complexityReason": "미사용 OG 전이 의존성",
+      "existingTestGap": "미사용 경로의 advisory를 현재 운영 XSS로 확대하지 않아야 함",
+      "designDecision": "상위 Vinext/@vercel/og의 최소 호환 수정 릴리스 검토. 현재 미사용 OG/ImageResponse를 활성화하지 않음. fixed 범위와 미사용 도달성 기록."
+    },
+    {
+      "auditId": "DEP-NEXT",
+      "originalPriority": "P3",
+      "kind": "dependency",
+      "advisoryCount": 3,
+      "taskId": 25,
+      "subtaskIds": [
+        "25.1",
+        "25.2"
+      ],
+      "coordination": "",
+      "complexity": 6,
+      "complexityReason": "Vinext shim과 Next runtime·sharp 소비자",
+      "existingTestGap": "Next 서버 취약점과 실제 Vinext Worker를 혼동 가능",
+      "designDecision": "공식 권고3개 fixed range·sharp 실제 소비자 해석을 재확인하고 호환되는 최소 패치. Next 서버 runtime 새 유입 금지. 운영 RCE 입증으로 쓰지 않음."
+    },
+    {
+      "auditId": "DEP-FASTURI",
+      "originalPriority": "P3",
+      "kind": "dependency",
+      "advisoryCount": 4,
+      "taskId": 26,
+      "subtaskIds": [
+        "26.1",
+        "26.2"
+      ],
+      "coordination": "",
+      "complexity": 4,
+      "complexityReason": "Ajv 전이 의존성 및 URI 해석 호환",
+      "existingTestGap": "dev 플래그만으로 배포 포함을 단정할 수 없음",
+      "designDecision": "전이 Ajv/fast-uri 최소 패치 후 schema-utils/webpack URI 해석 검사. 현재 앱 SSRF/XSS/인가 우회 입증 없음 유지."
+    },
+    {
+      "auditId": "DEP-MINIMATCH",
+      "originalPriority": "P3",
+      "kind": "dependency",
+      "advisoryCount": 1,
+      "taskId": 27,
+      "subtaskIds": [
+        "27.1",
+        "27.2"
+      ],
+      "coordination": "",
+      "complexity": 4,
+      "complexityReason": "권고 affected range와 실제 옵션 차이",
+      "existingTestGap": "버전 범위와 optimizationLevel 조건 차이를 분리하지 않으면 과장",
+      "designDecision": "typescript-eslint 소비자의 최소 패치·lint 검사. 실제 기본값1/문제분기2와 공식 affected 범위 불일치를 기록. Worker DoS 확정 금지."
+    },
+    {
+      "auditId": "OPS-3",
+      "originalPriority": "P3",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 28,
+      "subtaskIds": [
+        "28.1",
+        "28.2",
+        "28.3"
+      ],
+      "coordination": "OPS-2: stale lease 회수와 중단 정리의 원인을 합치지 않음",
+      "complexity": 7,
+      "complexityReason": "stale lease 원자적 회수·동시 contender",
+      "existingTestGap": "live-owner/release 교체 검사만 있고 acquire 경합 없음",
+      "designDecision": "기존 lock API를 유지하며 stale recovery 소유권을 원자적으로 확보. 재확인과 unlink 사이 TOCTOU도 보호. deterministic barrier로 두 contender interleave 확인."
+    },
+    {
+      "auditId": "TEST-2",
+      "originalPriority": "P3",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 29,
+      "subtaskIds": [
+        "29.1",
+        "29.2"
+      ],
+      "coordination": "",
+      "complexity": 4,
+      "complexityReason": "fingerprint 준비·debounce 저장 완료",
+      "existingTestGap": "즉시 isEnabled/전역 저장됨이 새 요청 완료를 보장하지 않음",
+      "designDecision": "재시도 가능한 enabled 단언과 특정 PUT/새 D1 fingerprint 완료 대기. 고정 sleep/단언 삭제 금지. 원래 WebKit 실패는 이력 보존."
+    },
+    {
+      "auditId": "TEST-3",
+      "originalPriority": "P3",
+      "kind": "tool_operations_docs",
+      "advisoryCount": 0,
+      "taskId": 30,
+      "subtaskIds": [
+        "30.1",
+        "30.2"
+      ],
+      "coordination": "",
+      "complexity": 6,
+      "complexityReason": "marker 원자적 게시·준비/cleanup 오류 분리",
+      "existingTestGap": "existsSync가 JSON 게시 완료를 보장하지 않음",
+      "designDecision": "임시 파일→동일 디렉터리 rename 또는 IPC 완전 marker로 준비 알림. 알려진 소유정보로 cleanup. EOF 최초 원인은 추론으로 유지하고 초기 오류/정리 오류 별도 기록."
+    }
+  ]
+}

@@ -1,14 +1,16 @@
 // Bounded, independent evidence of an incomplete sentence-writing input.
 // This is not a POS tagger or a general grammar oracle. Context can justify a short answer.
 const imperatives = new Set('go stop wait run help look listen come sit stand leave eat drink read write sleep smile relax breathe try continue watch speak hurry stay walk remember forget enjoy imagine open close turn take give keep be do'.split(' '));
-const reactions = new Set('hello hi hey wow oops oh ouch alas yes no thanks sorry welcome goodbye bye congratulations'.split(' '));
+// Only reviewed nominal fragments are independently withheld. An unknown
+// single word can be a valid imperative; its judgment belongs to the model.
+const nominalFragments = new Set('music furniture information equipment'.split(' '));
 export function insufficientInput(original: string, contextKind = 'sentence'): 'single_fragment'|'verb_list'|'quantity_fragment'|'word_list'|'relation_fragment'|'location_fragment'|undefined {
   // Only a separate learner-selected kind licenses fragments. Free-text mentions,
   // negations and quoted instructions never change this independent decision.
   if (['reply','title','command'].includes(contextKind)) return;
   const text = original.trim(), words = text.toLowerCase().match(/[a-z]+(?:['’][a-z]+)?|\d+/g) ?? [];
   if (!words.length) return 'single_fragment';
-  if (words.length === 1 && !imperatives.has(words[0]) && !reactions.has(words[0]) && !/[!?]$/.test(text)) return 'single_fragment';
+  if (words.length === 1 && nominalFragments.has(words[0]) && !/[!?]$/.test(text)) return 'single_fragment';
   if (words.length === 2 && words.every(w => imperatives.has(w))) return 'verb_list';
   // Bounded evidence only: a relation/location head + article + one nominal
   // token cannot contain the missing main proposition in sentence-writing mode.

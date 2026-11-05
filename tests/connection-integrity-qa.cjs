@@ -35,6 +35,8 @@ function session() {
       await page.getByRole('button', { name: '중단한 학습 이어서', exact: false }).click(); await saved(page);
       await (stage === 'learn' ? page.getByLabel('학습할 뜻', { exact: false }) : page.getByLabel(
         stage === 'en' ? '한국어 뜻 입력' : stage === 'ko' ? '영어 단어 입력' : stage === 'warmup' ? '떠오르는 한국어 뜻' : '내 영어 문장', { exact: true })).waitFor();
+      // The new question's passive focus effect must finish before filling.
+      await page.waitForFunction(()=>document.activeElement===document.querySelector('.session-step-row h2'));
       } catch (error) {
         await page.screenshot({ path: `${out}/setup-${label}-failure.png`, fullPage: true });
         fs.writeFileSync(`${out}/setup-${label}-failure.json`, JSON.stringify({ label, stage, error: String(error), body: await page.locator('body').innerText(), state: await get(), pageErrors: errors }, null, 2));
@@ -150,7 +152,7 @@ function session() {
         await page.getByText('표현·예문 수정하기', { exact: true }).click();
         await page.getByLabel('함께 익힐 표현', { exact: true }).fill('work here');
         await page.getByLabel('표현의 한국어 뜻', { exact: true }).fill('여기에서 일하다');
-      } else await page.getByLabel(stage === 'en' ? '한국어 뜻 입력' : stage === 'ko' ? '영어 단어 입력' : '떠오르는 한국어 뜻', { exact: true }).fill('draft before switching');
+      } else {const input=page.getByLabel(stage === 'en' ? '한국어 뜻 입력' : stage === 'ko' ? '영어 단어 입력' : '떠오르는 한국어 뜻', { exact: true });await input.fill('draft before switching');assert.equal(await input.inputValue(),'draft before switching',stage+': entered draft before switching');}
       await page.getByRole('tab', { name: '복습 점검', exact: true }).click();
       await page.locator('[data-review-kind="monthly"]').getByRole('button', { name: '전체 점검 시작', exact: false }).click(); await saved(page);
       const snapshot = await get(), record = snapshot.state.sessions[s.id].records[word.id];
@@ -159,7 +161,7 @@ function session() {
         assert.equal(record.material.expression, 'work here');
         assert.equal(snapshot.state.progress[word.id].expression, 'work here');
         assert.equal(record.learnedOn, undefined);
-      } else assert.equal((stage === 'warmup' ? snapshot.state.sessions[s.id].warmupDraft : record.draft).answer, 'draft before switching');
+      } else assert.equal((stage === 'warmup' ? snapshot.state.sessions[s.id].warmupDraft : record.draft).answer, 'draft before switching',stage+': persisted draft after switching');
       assert.equal(record.en, s.records[word.id].en); assert.equal(record.ko, s.records[word.id].ko);
       results.push({ case: 'switch-preserves-each-draft', stage }); await context.close();
     }

@@ -62,6 +62,14 @@ test('AI reference caution appears once with detail and survives attribution-onl
   assert.match(html(FeedbackAttribution, { feedback }), /AI 참고 의견 · 최종 기록은 직접 확인해 주세요/);
 });
 
+test('judgment v6 retains reviewed-rule and lesson-target guidance with the long explanation disclosure',()=>{
+ const feedback={original:'I like music.',correctedSentence:'I like music.',meaningUsage:'appropriate',grammar:'natural',explanation:'검토한 규칙의 합성 설명입니다.\n'.repeat(30),provider:'openai',model:'gpt-6.1-sol',createdAt:'2026-11-05T00:00:00Z',validationVersion:'judgment-v6'};
+ const result=html(FeedbackDetail,{feedback,grammarTarget:true});
+ assert.match(result,/수업 목표는 해당 표현을 알맞게 사용했는지에 대한 의견이에요/);
+ assert.match(result,/교정 참고 설명은 검토한 규칙 범위에서 제공해요/);
+ assert.match(result,/<summary>판정·교정 참고 더 보기/);
+});
+
 test('recall conceals the opposite answer and preserves independent/helped/unmeasured choices', () => {
   for (const stage of ['en', 'ko']) {
     const props = { s: { stage, records: { word: { meaning: '고유한 참고 뜻' } } }, id: 'word', word: { word: 'concealedword', pos: 'n.' }, content: { meaning: '고유한 참고 뜻' }, answer: '', busy: false, hint: false, revealed: false, setAnswer() {}, recall() {}, revealAnswer() {} };

@@ -33,12 +33,15 @@ export async function GET(request?: Request) {
       return json({ error: SENSE_KEY_UPGRADE_MESSAGE }, 426);
     // Read all domains atomically before legacy projection, including hidden grammar.
     const snapshot = await loadStateDocuments(database(), user.userId, true);
+    const grammarClient=grammarClientVersion(grammarVersion);
+    if(grammarClient<5&&snapshot.grammar?.some(row=>grammarUnsupported(grammarProgressSchema.parse(JSON.parse(row.document)),4)))
+      return json({error:GRAMMAR_UPGRADE_MESSAGE,code:'grammar_client_outdated'},426);
     const aiVersion=aiContractVersion(request);
     if (requiresAiContractDocument(snapshot.settings, 'settings',aiVersion)
       || snapshot.sessions.some(row => requiresAiContractDocument(row.document, 'session',aiVersion))
       || snapshot.grammar?.some(row => requiresAiContractDocument(row.document, 'grammar',aiVersion)))
       return json({ error: AI_UPGRADE_MESSAGE, code: 'ai_client_outdated' }, 426);
-    if (!['1','2','3','4'].includes(grammarVersion ?? '')) snapshot.grammar = undefined;
+    if (!['1','2','3','4','5'].includes(grammarVersion ?? '')) snapshot.grammar = undefined;
     if (grammarVersion !== '4' && snapshot.grammar) snapshot.grammar = snapshot.grammar.flatMap(row => {
       const legacy = grammarDocumentForClient(grammarProgressSchema.parse(JSON.parse(row.document)),grammarClientVersion(grammarVersion));
       return legacy ? [{ ...row, document: JSON.stringify(legacy) }] : [];
@@ -95,7 +98,7 @@ export async function PUT(request: Request) {
       return json({ error: FEEDBACK_UPGRADE_MESSAGE }, 426);
     }
     const supportedGrammar=grammarClientVersion(request.headers.get('x-study-grammar'));
-    if (data.grammar && supportedGrammar<4 &&
+    if (data.grammar && supportedGrammar<5 &&
         (Object.values(data.grammar).some(p=>grammarUnsupported(p,supportedGrammar)) || await hasSavedUnsupportedGrammar(db, user.userId, supportedGrammar,Object.keys(data.grammar)))) {
       console.warn(JSON.stringify({ event: 'grammar_client_outdated', version: supportedGrammar, code:'grammar_client_outdated' }));
       return json({ error: GRAMMAR_UPGRADE_MESSAGE }, 426);

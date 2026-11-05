@@ -12,6 +12,16 @@ const result=(id,state='completed',status=200,feedback=seed)=>({response:Respons
 function setup(){const storage=new MemoryStorage(),store=new LocalLearningDrafts('owner',crypto.randomUUID(),()=>storage);store.connect();return {storage,store,signal:new AbortController().signal};}
 const pending=(store)=>store.list(feedbackRequestKey(input.domain,input.targetKey),'request')[0]?.record.values;
 
+test('AI-2: temporary receipt-less lookup failures retain the pending UUID across explicit clicks',async()=>{
+ for(const status of [503,502,429,401]){
+  const {store,signal}=setup();let sends=0;const lookedUp=[];
+  const io={send:async()=>{sends++;throw new TypeError('synthetic lost response');},lookup:async id=>{lookedUp.push(id);return {response:Response.json({},{status}),data:{code:'provider_unavailable'}};}};
+  await assert.rejects(runRecoverableFeedback(store,input,io,signal));const id=pending(store).requestId;
+  for(let n=0;n<2;n++){await assert.rejects(runRecoverableFeedback(store,input,io,signal));assert.equal(pending(store).requestId,id);assert.equal(pending(store).state,'pending');}
+  assert.equal(sends,1);assert.deepEqual(lookedUp,[id,id]);
+ }
+});
+
 test('UUID is persisted before a single send and a later explicit new request uses a different UUID',async()=>{
  const {store,signal}=setup();const ids=[];
  const io={send:async meta=>{assert.equal(pending(store).requestId,meta.requestId);ids.push(meta.requestId);return result(meta.requestId);},lookup:async()=>{throw Error('unexpected lookup');}};

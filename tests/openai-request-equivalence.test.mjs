@@ -51,6 +51,12 @@ test('120 synthetic word/grammar generation cases equal the pre-refactor request
               judgmentEnabled ? runtime.systemInstruction : runtime.legacySystemInstruction, fetcher)
             : await runtime.generateGrammarFeedback(config, runtime.lessonForVersion(runtime.LESSON_MAP.get('pronoun'), domain), sentence, fetcher);
           const { createdAt, ...stable } = feedback;
+          if (judgmentEnabled) {
+            assert.equal(stable.validationVersion, 'judgment-v6');
+            // The v6 local guards intentionally change provenance. Keep the
+            // frozen baseline and compare every other output/request byte.
+            stable.validationVersion = 'judgment-v5';
+          }
           assert.ok(Number.isFinite(Date.parse(createdAt)));
           assert.equal(calls, 1, key);
           actual[key] = { request: hash(request), result: hash(stable) };

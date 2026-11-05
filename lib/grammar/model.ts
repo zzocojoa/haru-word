@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { sentenceFeedbackSchema } from '../sentence-feedback';
 import { isCalendarDate } from '../calendar-date';
+import { feedbackOriginalMatches } from '../feedback-context';
 
 export const LESSON_IDS = ['noun', 'verb', 'pronoun', 'adjective', 'adverb', 'determiner', 'indefinite-article', 'definite-article', 'number', 'preposition', 'conjunction', 'auxiliary', 'modal', 'infinitive', 'exclamation'] as const;
 export type LessonId = typeof LESSON_IDS[number];
@@ -44,13 +45,16 @@ export const grammarProgressSchema = z.object({
   review: reviewSchema.optional(), updatedAt: z.string().datetime(),
 }).strict().superRefine((p, c) => {
   for (let i = 1; i <= Math.min(3, p.stage - 2); i++) if (!p.answers[`q${i}` as keyof typeof p.answers]) c.addIssue({ code: 'custom', message: '수업 답변이 빠졌어요.' });
-  if ((p.stage === 6 || p.completedAt) && (!p.answers.q1 || !p.answers.q2 || !p.answers.q3 || !p.sentence.trim() || !p.check)) c.addIssue({ code: 'custom', message: '문장과 자기 점검을 먼저 저장해 주세요.' });
+  if ((p.stage === 6 || p.completedAt) && (!p.answers.q1 || !p.answers.q2 || !p.answers.q3)) c.addIssue({ code: 'custom', message: '수업 답변이 빠졌어요.' });
+  // A past completion survives sentence revision and revisiting earlier steps.
+  // Only finishing the current sentence requires its fresh self-check.
+  if (p.stage === 6 && (!p.sentence.trim() || !p.check)) c.addIssue({ code: 'custom', message: '문장과 자기 점검을 먼저 저장해 주세요.' });
   if (p.review && !p.completedAt) c.addIssue({ code: 'custom', message: '수업을 마친 뒤 다시 점검할 수 있어요.' });
   if (p.stage === 6 && !p.completedAt) c.addIssue({ code: 'custom', message: '수업의 완료 정보가 빠졌어요.' });
-  if (p.feedback && p.feedback.original !== p.sentence) c.addIssue({ code: 'custom', message: 'AI 의견의 원문과 현재 문장이 달라요.' });
+  if (p.feedback && !feedbackOriginalMatches(p.feedback.original,p.sentence)) c.addIssue({ code: 'custom', message: 'AI 의견의 원문과 현재 문장이 달라요.' });
   if (p.contentVersion) {
     if (!p.questionIds || (p.stage > 0 && !p.observation)) c.addIssue({ code: 'custom', message: '살펴보기 답변과 문제 정보를 확인해 주세요.' });
-    if ((p.stage === 6 || p.completedAt) && (!p.checks?.meaning || !p.checks.form)) c.addIssue({ code: 'custom', message: '뜻과 형태를 각각 점검해 주세요.' });
+    if (p.stage === 6 && (!p.checks?.meaning || !p.checks.form)) c.addIssue({ code: 'custom', message: '뜻과 형태를 각각 점검해 주세요.' });
     if (p.check && p.check !== combinedCheck(p.checks)) c.addIssue({ code: 'custom', message: '자기 점검 결과가 일치하지 않아요.' });
   }
   if (!p.contentVersion && (p.questionIds || p.observation || p.observationHelp || p.observationChoice !== undefined || p.frame || p.checks)) c.addIssue({ code: 'custom', message: '수업 콘텐츠 버전이 빠졌어요.' });
@@ -58,7 +62,7 @@ export const grammarProgressSchema = z.object({
   if (p.schedule?.passed === 2 && p.schedule.nextDate) c.addIssue({ code: 'custom', message: '두 차례 점검 후에는 자유 연습이에요.' });
   if (p.schedule && p.schedule.passed < 2 && (!p.schedule.nextDate || p.schedule.nextDate <= p.schedule.lastDate)) c.addIssue({ code: 'custom', message: '다음 복습 날짜를 확인해 주세요.' });
 });
-export const grammarStateSchema = z.record(lessonIdSchema, grammarProgressSchema).superRefine((state, ctx) => {
+export const grammarStateSchema = z.partialRecord(lessonIdSchema, grammarProgressSchema).superRefine((state, ctx) => {
   for (const [id, p] of Object.entries(state)) {
     for (const [bank, entry] of [['base', p], [p.review?.setId, p.review]] as const) {
       if (entry?.contentVersion && entry.questionIds?.some((qid, i) => qid !== `${id}:${entry.contentVersion}:${bank}:q${i + 1}`))
@@ -106,5 +110,5 @@ export function revealGrammarAnswer(progress: GrammarProgress, key: QuestionKey,
 export function updateGrammarSentence(progress: GrammarProgress, sentence: string): GrammarProgress {
   if (progress.sentence === sentence) return progress;
   // Editing a checked sentence requires a fresh self-check; previous AI text is not applied to a new draft.
-  return { ...progress, sentence, check: undefined, checks: undefined, feedback: undefined, stage: 5, completedAt: undefined, review: undefined, schedule: undefined };
+  return { ...progress, sentence, check: undefined, checks: undefined, feedback: undefined, stage: 5 };
 }

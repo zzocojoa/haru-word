@@ -68,12 +68,12 @@ fs.mkdirSync(out,{recursive:true});
     while(Date.now()<until){
       const state=await snapshot(page.context());
       const feedback=domain==='sentence'?Object.values(state.sessions)[0].records[word.id].aiFeedback:state.grammar.noun.feedback;
-      if(feedback?.validationVersion==='judgment-v5'&&feedback.original===result.original)break;
+      if(feedback?.validationVersion==='judgment-v6'&&feedback.original===result.original)break;
       await page.waitForTimeout(50);
     }
     const state=await snapshot(page.context());
     const stored=domain==='sentence'?Object.values(state.sessions)[0].records[word.id].aiFeedback:state.grammar.noun.feedback;
-    assert.equal(stored.validationVersion,'judgment-v5','current response is acknowledged before read-only snapshots');
+    assert.equal(stored.validationVersion,'judgment-v6','current response is acknowledged before read-only snapshots');
     await saved(); assert.equal(calls,1);
     await page.unroute(url);
   }

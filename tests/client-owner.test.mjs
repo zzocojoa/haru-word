@@ -5,6 +5,24 @@ import {mkdirSync} from 'node:fs';
 import {registerClientOwner,clientOwnerRequest,OWNER_INVALIDATED_EVENT,LOCAL_RESTORE_APPLIED_EVENT,captureLocalRestoreNotice} from '../lib/client-owner.ts';
 import {requestJson} from '../lib/client-request.ts';
 
+test('UI-5: only the validated current owner state GET confirms draft ownership',async t=>{
+ let confirms=0;const clear=registerClientOwner('owner-a',()=>confirms++);t.after(clear);
+ t.mock.method(globalThis,'fetch',async()=>Response.json({revision:1}));
+ await requestJson('/api/study-clock',{},1000);assert.equal(confirms,0);
+ await assert.rejects(requestJson('/api/state',{},1000,()=>{throw Error('invalid snapshot');}));assert.equal(confirms,0);
+ await requestJson('/api/state',{},1000,value=>value);assert.equal(confirms,1);
+});
+
+test('UI-5: a late validated response cannot confirm a replaced owner',async t=>{
+ let a=0,b=0,finish;const old=registerClientOwner('owner-a',()=>a++);
+ t.mock.method(globalThis,'fetch',()=>new Promise(resolve=>{finish=resolve;}));
+ const pending=requestJson('/api/state',{},1000,value=>value);
+ const current=registerClientOwner('owner-b',()=>b++);old();t.after(current);
+ finish(Response.json({revision:1}));await pending;assert.equal(a,0);assert.equal(b,0);
+ t.mock.method(globalThis,'fetch',async()=>Response.json({revision:1}));
+ await requestJson('/api/state',{},1000,value=>value);assert.equal(b,1);
+});
+
 test('owner binding is limited to API requests, retains caller headers and handles anonymous pages',()=>{
   const init={headers:{'Content-Type':'application/json'}};
   assert.equal(clientOwnerRequest('/api/state',init).init,init);

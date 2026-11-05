@@ -149,3 +149,14 @@ A1/A2/B1/B2 후속 검토 결과와 수정 전후 표는 `outputs/a1-content-rev
 - 실행 도구는 각 검사 전에 로컬 서버 응답 본문까지 확인한다. 재접속 회귀 검사는 브라우저 초점을 먼저 확보하고 이어가기 요청의 실제 저장 응답을 기다린다. 이전 저장 상태 표시나 검사 자동 재시도로 실패를 숨기지 않는다.
 - 결과와 검사별 로그는 `outputs/browser-suite/<group>-<run>/`에 모인다. 실패·시간 초과·미완료는 전체 성공으로 처리하지 않는다. 각 브라우저 스크립트의 직접 실행도 유지한다. 실제 사용자 계정이나 운영 URL을 환경변수로 넣지 않는다.
 - `manifest.cjs`는 전체 브라우저 검사 등록부다. 파일 추가·삭제를 등록부와 대조하며 누락을 거부한다. 기능/성능 실행은 공통 잠금으로 겹치지 않는다. `launchBrowser`와 `closeBrowser`가 컨텍스트·브라우저 종료를 공유하고, 시간 초과에는 IPC로 종료를 요청한 뒤 이 실행이 만든 프로세스 트리만 정리한다. 시간 초과 후 정상 종료해도 실패로 집계한다.
+
+
+## 2026-11-05 QA 소유권 경계 검사
+
+`node --experimental-strip-types --test tests/qa-lock-remediation.test.mjs tests/qa-isolated-worker-lifecycle.test.mjs tests/qa-process.test.mjs tests/qa-interruption.test.mjs`는 실제 합성 프로세스·루프백 포트로 잠금 경합, 시간 초과, SIGINT/SIGTERM, 동시 정리를 검사한다. Linux에서도 같은 명령을 별도로 실행한다. 합성 자식의 V8 cap 문구는 준비 경계 fixture이며 메모리·실제 workerd 검증이 아니다.
+
+- `browser-qa.lock.recovery`는 stale 읽기→삭제→새 소유권 생성 전체를 보호하는 원자적 보조 잠금이다. 점유 중인 다른 실행은 실패하며 자동으로 이 보조 잠금을 지우지 않는다.
+- 복구 예: 검사 프로세스가 강제 종료되어 보조 잠금이 남으면, 보조 파일의 PID와 해당 QA suite/자식 종료를 먼저 확인한다. 동시 실행이 없음을 확인한 뒤 해당 보조 파일 하나만 수동 제거하고 다시 실행한다. 살아 있는 소유자나 불명확한 파일을 삭제하지 않는다.
+- 자원 Worker는 자신의 별도 프로세스 그룹만 정리한다. `await worker.stop()`은 중복 호출 시 같은 Promise를 반환하고 자식 종료·로그 닫기를 기다린다. 준비 마커는 임시 파일 작성 후 rename으로 게시하며, 독자는 완전하고 유효한 PID/포트 JSON을 확인한다. 최초 EOF 원인은 여전히 추론이며 이번 수정이 그 원인을 확정하지 않는다.
+
+리소스 검사 cap은 Miniflare5가 생성하는 `Config.v8Flags`의 디버깅 환경 입력을 사용한다. `heap-limit.cjs`는 Wrangler가 실제 해석하는 Miniflare 소비자에서 입력 경로를 확인하고, 소유한 검사 자식에만 old-space96MB/semi-space4MB를 설정한다. 설치된 의존성을 패치하지 않는다. 입력 경로가 바뀌면 fail-closed로 멈추므로 새 Miniflare 설치 시 리소스 검사를 다시 확인한다. 이는 운영128MB 전체 메모리나 추가 OOM 재현을 뜻하지 않는다. [Cloudflare 병합 근거](https://github.com/cloudflare/workers-sdk/pull/14702).

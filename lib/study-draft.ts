@@ -12,6 +12,16 @@ export type StudyDraft = ExpressionDraft & {
   hint: boolean;
 };
 
+// The hook checks question/generation before merging recovery evidence.
+export function reconcileStudyDraftRestoration(current:StudyDraft,server:StudyDraft,candidate:StudyDraft):StudyDraft {
+  return {...candidate,
+    answer:current.revealed?current.answer:server.revealed?server.answer:candidate.answer,
+    revealed:current.revealed||server.revealed||candidate.revealed,
+    hint:current.hint||server.hint||candidate.hint,
+    spoken:current.spoken||server.spoken||candidate.spoken,
+  };
+}
+
 export function studyQuestionKey(session: Session, id: string | undefined): string {
   return JSON.stringify([session.id, id ?? null, session.stage, session.retryMode]);
 }

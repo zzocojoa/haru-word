@@ -1,0 +1,187 @@
+{
+  "recordedAtUtc": "2026-11-05T14:50:06.494524+00:00",
+  "status": "local-fix-and-offline-verification-complete",
+  "issue": "AIQ-20261105-1",
+  "authorization": "착수 승인: 수정·저장된90응답 재생·회귀/타입/린트/빌드까지",
+  "sourceBase": "5a0fe1a7046763717a1ed1725cda96a2a74f1405",
+  "sourceBranch": "codex/comprehensive-defect-audit-20261105",
+  "implementation": {
+    "file": "lib/judgment-correction.ts",
+    "line": 28,
+    "change": "Add reviewed skillful/skillfully and skilful/skilfully pairs only; existing semantic guards retained.",
+    "productFilesChanged": 1,
+    "dependenciesChanged": false,
+    "promptModelVersionOrPayloadChanged": false,
+    "newSql": 0
+  },
+  "tests": {
+    "focusedRed": {
+      "tests": 14,
+      "passed": 12,
+      "failed": 2,
+      "exitCode": 1
+    },
+    "focusedGreen": {
+      "tests": 14,
+      "passed": 14,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "newRegressionTests": 4,
+    "unit": {
+      "22.23.4": {
+        "tests": 852,
+        "pass": 852,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "24.22.1": {
+        "tests": 852,
+        "pass": 852,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    "commands": [
+      {
+        "exitCode": 0,
+        "log": "unit-node22.23.4.log",
+        "name": "unit-node22.23.4"
+      },
+      {
+        "exitCode": 0,
+        "log": "unit-node24.22.1.log",
+        "name": "unit-node24.22.1"
+      },
+      {
+        "exitCode": 0,
+        "log": "typecheck.log",
+        "name": "typecheck"
+      },
+      {
+        "exitCode": 0,
+        "log": "lint.log",
+        "name": "lint"
+      },
+      {
+        "exitCode": 0,
+        "log": "check-grammar-review.log",
+        "name": "check:grammar-review"
+      },
+      {
+        "exitCode": 0,
+        "log": "build.log",
+        "name": "build"
+      }
+    ],
+    "lintExistingWarnings": 15,
+    "finalWorkerContainsReviewedPairs": [
+      "dist/server/_next/static/feedback-generation-B5x82nqO.js"
+    ]
+  },
+  "offlineReplay": {
+    "passed": true,
+    "sourceBase": "5a0fe1a7046763717a1ed1725cda96a2a74f1405",
+    "candidateRuntimeSha256": "1d66f0c90b1559e9674187f3ce6f210dd0ddf82520b2272cb5cb5e15bd68bf2d",
+    "baselineRuntimeSha256": "47a262956b9a302f1bd20590837fa55463a419dd20fb1d0160dacfa72bea4438",
+    "savedResponseBodies": 90,
+    "envelope": "Reconstructed minimal valid Responses envelope from saved wire/model/usage; not original raw HTTP bytes.",
+    "baselineAccepted": 87,
+    "baselineRejected": 3,
+    "candidateAccepted": 90,
+    "candidateRejected": 0,
+    "original87OutputsUnchangedExceptCreatedAt": true,
+    "newlyAccepted": [
+      {
+        "caseId": "fresh-grammar-05",
+        "model": "gpt-6.1-sol",
+        "correctedSentence": "The drummer played the rhythm skillfully."
+      },
+      {
+        "caseId": "fresh-grammar-05",
+        "model": "gpt-6.1-terra",
+        "correctedSentence": "The drummer played the rhythm skillfully."
+      },
+      {
+        "caseId": "fresh-grammar-05",
+        "model": "gpt-6-astra",
+        "correctedSentence": "The drummer played the rhythm skillfully."
+      }
+    ],
+    "exactGenerationBodiesMatchedPerProfile": 90,
+    "networkAttempts": 0,
+    "actualApiCalls": 0,
+    "keyRead": false,
+    "oldEvaluationFilesPreserved": 51,
+    "originalLiveScoresChanged": false,
+    "scope": "Offline replay acceptance/regression only; not new live quality score or new cross-model grading."
+  },
+  "liveEvaluation": {
+    "originalScoresPreserved": "29/30 for each model",
+    "newLiveScoreCreated": false,
+    "newCrossModelGrades": 0,
+    "newPaidCalls": 0,
+    "closedLedgerReopened": false
+  },
+  "compatibility": {
+    "responseAndBackupEnvelopeUnchanged": true,
+    "aiContract": 4,
+    "judgmentVersion": "judgment-v6",
+    "grammarReader": 5,
+    "newDiagnosticsOrPrivateDataLogging": false,
+    "rollback": "Revert the one source line; old future-generation rejection returns. Existing stored feedback/DB/backup data needs no rollback."
+  },
+  "preservation": {
+    "passed": true,
+    "closedEvaluationFilesUnchanged": 51,
+    "originalLiveScores": "29/30 per model unchanged",
+    "originalBudget": "closed; US$2.926401 conservative of separate US$5 unchanged",
+    "rootProductFiles": 637,
+    "auditRawFiles": 2089,
+    "prepublicationArtifacts": 251,
+    "allFourTaskTagsUnchanged": true,
+    "sourceBaseAndBranchUnchanged": true,
+    "rootHeadAndBranchUnchanged": true,
+    "sourceChangedFiles": [
+      "lib/judgment-correction.ts",
+      "tests/remediation-judgment.test.mjs"
+    ],
+    "stagedFiles": 0,
+    "sourceUntrackedFiles": 0,
+    "commitPushPrMergeDeploy": 0
+  },
+  "operations": {
+    "productionVersion": 146,
+    "operationalDataReadOrWritten": false,
+    "commitPushPrMergeDeploy": false
+  },
+  "limits": [
+    "Offline replay of saved structured wires in reconstructed valid envelopes; not original raw HTTP packet replay.",
+    "The original paid scores remain29/30.90/90 is local acceptance/regression, not a new live model score.",
+    "No new production authenticated API, physical iPhone/VoiceOver or full browser-suite run; no UI/transport changes.",
+    "Reviewed lexical pairs only; not general ly derivation or semantic/grammar certification."
+  ],
+  "evidenceRoot": "outputs/aiq-manner-remediation-20261105",
+  "evidenceSha256": {
+    "focused-red.log": "4ce26a2ae0e75d73585abdec0acfb9c0088e886a38fb4414c9e8c486a4becd65",
+    "focused-green.log": "1327ea5f48ccf4317c5b5b6e01c19fb5e7e1f209ba4ed59138d9a0f27ec37254",
+    "replay.json": "0e1d3cfd0aeb34848359d4e81f026ad10b7e51eae934cea6eb5fa320fafda234",
+    "replay.log": "9c2c974fdd46471acb38b1f8dd5da2c6531c2ae8cc142b037d1750570460be79",
+    "checks.json": "9243a7bebf330d28538840c0c2c8a7cee122649033a75ed406ad27813b672a00",
+    "unit-node22.23.4.log": "824c36a254e1705396a27ff5617900ab74afc6b069d402d098651821abea7ee6",
+    "unit-node24.22.1.log": "c39aa940e0752bcb9a698f1b6ba114fa1080b015dc1ee2a020406bd7bc52222c",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "lint.log": "814e5c8816bd130a738c9a198f383880ed64dcf0fd2f05a5708591ae7a148b0e",
+    "check-grammar-review.log": "fd8d23311e1a50d708a0dd36db40c5f40bbd95e121142abe9f16d6e06d474a01",
+    "build.log": "c5dd49dd0c3a49099a9f14bc7a368c4e7211c9212b96f98df971e06a20a30305",
+    "preservation.json": "0a81dc81ecd6bfcf89f53e194fe9e7e77d2e3c0dada88530bafb8c4a7b99a475"
+  },
+  "changedFileSha256": {
+    "lib/judgment-correction.ts": "89e34aca5295c470874ba00fe1a896bc2531e3b3ef54ee16b45f62083a413930",
+    "tests/remediation-judgment.test.mjs": "903a4cc1adf2bae8e2031b49504fe13da9dcb45d88b12394d39122ce9a963293"
+  }
+}
