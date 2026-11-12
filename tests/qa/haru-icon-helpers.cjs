@@ -66,7 +66,15 @@ async function createIconQa(name) {
       label + ' fits the horizontal viewport: ' + JSON.stringify(bounds));
   };
   const inspect = async (label, options = {}) => {
-    const { icons = [], readOnly = true, widths = [320, 390, 430, 768, 1440], textSizes = [100, 200] } = options;
+    const { icons = [], readOnly = true, widths = [320, 390, 430, 768, 1440], textSizes = [100, 200], diagnostics = false } = options;
+    const checkpoint = async stage => {
+      if (!diagnostics) return;
+      report.inspection = { label, stage, ...await page.evaluate(() => ({
+        readyState: document.readyState, fontsStatus: document.fonts.status,
+        width: innerWidth, textSize: document.documentElement.style.fontSize,
+      })) };
+      console.log(JSON.stringify({ inspection: report.inspection }));
+    };
     const before = readOnly ? await getState() : null;
     if (!await page.evaluate(() => typeof window.axe !== 'undefined')) await page.addScriptTag({ path: axePath });
     for (const width of widths) {
@@ -76,7 +84,9 @@ async function createIconQa(name) {
           document.documentElement.style.fontSize = size + '%';
           window.scrollTo({ top: 0, behavior: 'instant' });
         }, textSize);
+        await checkpoint('settle');
         await settle();
+        await checkpoint('layout-and-icons');
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false,
           label + ' fits ' + width + 'px at ' + textSize + '% text');
         const dialogOverflow = await page.evaluate(() => [...document.querySelectorAll('[role="dialog"], [role="alertdialog"], .dialog-scroll')]
@@ -85,19 +95,25 @@ async function createIconQa(name) {
           .map(element => ({ role: element.getAttribute('role'), className: element.className, width: element.clientWidth, scrollWidth: element.scrollWidth })));
         assert.deepEqual(dialogOverflow, [], label + ' dialog content fits at ' + width + 'px / ' + textSize + '% text');
         for (const [locator, size, iconLabel] of icons) await checkIcon(locator, size, iconLabel);
+        await checkpoint('axe');
         const violations = await page.evaluate(async () => (await window.axe.run(document, {
           runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] },
         })).violations.map(issue => ({ id: issue.id, targets: issue.nodes.map(node => node.target) })));
         report.audits.push({ label, width, textSize, violations });
         assert.deepEqual(violations, [], label + ' accessibility');
         report.layouts.push({ label, width, textSize });
-        if (textSize === 100 || width === 320) await capture(label + '-' + width + '-' + textSize + '.png');
+        if (textSize === 100 || width === 320) {
+          await checkpoint('screenshot');
+          await capture(label + '-' + width + '-' + textSize + '.png');
+        }
       }
     }
     await page.evaluate(() => document.documentElement.style.fontSize = '100%');
     await page.setViewportSize({ width: 390, height: 844 });
+    await checkpoint('reset');
     await settle();
     if (readOnly) assert.deepEqual(await getState(), before, label + ' inspection preserves server revision and records');
+    await checkpoint('complete');
   };
   const click = async (locator, label, { minSize = 44 } = {}) => {
     for (const width of [390, 320]) {

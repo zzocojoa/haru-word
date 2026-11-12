@@ -8,17 +8,16 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
 (async () => {
   const qa = await createIconQa('haru-system-icons');
   const { page, context, base, report } = qa;
-  let failure, releaseScripts, startupGateActive = false;
+  let failure, startupInterceptionActive = false;
   const startupRouteErrors = [];
-  const closeStartupGate = async () => {
-    if (!startupGateActive) return;
-    releaseScripts();
-    // Drain resumed handlers before removing interception or closing the context.
+  const closeStartupInterception = async () => {
+    if (!startupInterceptionActive) return;
+    // Drain completed stub responses before normal app loading or context cleanup.
     try {
       await page.unrouteAll({ behavior: 'wait' });
       if (startupRouteErrors.length) throw new AggregateError(startupRouteErrors, 'Startup request handling failed');
     }
-    finally { startupGateActive = false; releaseScripts = undefined; }
+    finally { startupInterceptionActive = false; }
   };
   const svg = locator => locator.locator('svg');
   const button = name => page.getByRole('button', { name, exact: true });
@@ -70,14 +69,21 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
         en: 'independent', ko: 'help', sentenceStatus: 'written', lastStudied: previous, studyDates: [previous] } },
       sessions: { [history.id]: history, [lesson.id]: lesson },
     });
-    // Observe the actual first HTML while its application scripts are pending.
-    const scriptsReady = new Promise(resolve => { releaseScripts = resolve; });
-    report.startupScriptsHeld = 0;
-    const scriptGate = async route => {
+    // Keep the real server HTML/CSS, but suppress app hydration for this phase.
+    // Pending scripts can prevent WebKit's document.fonts.ready from settling;
+    // empty JS lets load finish without bypassing font/layout/screenshot waits.
+    report.startupMode = 'server-html-with-app-scripts-suppressed';
+    report.startupPhase = 'navigation';
+    report.startupScriptsSuppressed = 0;
+    report.startupScriptPaths = [];
+    const startupScripts = async route => {
       try {
-        if (route.request().resourceType() === 'script') {
-          report.startupScriptsHeld++;
-          await scriptsReady;
+        const request = route.request(), url = new URL(request.url());
+        if (request.resourceType() === 'script' && url.origin === base) {
+          report.startupScriptsSuppressed++;
+          report.startupScriptPaths.push(url.pathname);
+          return await route.fulfill({ status: 200, contentType: 'application/javascript',
+            headers: { 'cache-control': 'no-store' }, body: '/* Startup-only QA: application scripts are suppressed. */' });
         }
         await route.continue();
       } catch (error) {
@@ -87,14 +93,21 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
         report.startupRouteErrors = startupRouteErrors.map(item => item.stack || item.message);
       }
     };
-    startupGateActive = true;
-    await page.route('**/*', scriptGate);
-    await page.goto(base, { waitUntil: 'commit' });
+    startupInterceptionActive = true;
+    await page.route('**/*', startupScripts);
+    await page.goto(base, { waitUntil: 'load' });
+    report.startupPhase = 'inspection';
     await page.locator('.app-splash').waitFor();
-    await qa.inspect('startup', { icons: [[page.locator('.app-splash-brand > svg'), 72, 'P104 startup brand']] });
-    assert.ok(report.startupScriptsHeld > 0, 'Startup is inspected while real application scripts are pending');
-    await closeStartupGate();
+    assert.ok(report.startupScriptsSuppressed > 0, 'Startup-only script suppression is exercised');
+    await qa.inspect('startup', { diagnostics: true,
+      icons: [[page.locator('.app-splash-brand > svg'), 72, 'P104 startup brand']] });
+    assert.equal(await page.locator('.app-splash').isVisible(), true, 'The server startup screen remains present throughout inspection');
+    report.startupPhase = 'normal-reload';
+    await closeStartupInterception();
+    await page.reload({ waitUntil: 'domcontentloaded' });
     await qa.saved();
+    await page.locator('.app-splash').waitFor({ state: 'hidden' });
+    report.startupPhase = 'application-ready';
     const links = await page.locator('head link[rel="icon"],head link[rel="apple-touch-icon"],head link[rel="apple-touch-startup-image"]').evaluateAll(nodes =>
       nodes.map(node => ({ rel: node.rel, href: new URL(node.href).pathname, sizes: node.getAttribute('sizes') })));
     assert.ok(links.some(link => link.href === '/favicon.svg'));
@@ -104,7 +117,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
       const response = await context.request.get(base + url); assert.equal(response.status(), 200, url);
       assert.ok((await response.body()).length > 100, url + ' has an actual asset');
     }
-    report.checks.push('P101–105: actual first HTML brand, unchanged favicon/home-screen metadata, 26 iOS declarations and local asset responses');
+    report.checks.push('P101–105: actual server startup HTML/CSS with app scripts suppressed only during inspection; normal reload restores the real app; unchanged favicon/home-screen metadata, 26 iOS declarations and local asset responses');
 
     await openSettings();
     const goal = settings.getByRole('combobox', { name: '하루 목표', exact: true });
@@ -334,7 +347,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     assert.equal(report.requests.filter(request => request.method === 'POST' && /\/api\/(sentence|grammar)-feedback$/.test(request.path)).length, 0);
   } catch (error) { failure = error; }
   finally {
-    try { await closeStartupGate(); }
+    try { await closeStartupInterception(); }
     catch (error) {
       report.startupCleanupError = error.stack || error.message;
       failure ||= error;
