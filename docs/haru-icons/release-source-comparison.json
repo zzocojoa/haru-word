@@ -3403,5 +3403,54 @@
       "actualPullRequestMergePerformed": false,
       "note": "The Actions checkout is a temporary PR merge ref; runtime results are recorded in release-readiness-2026-11-12.md."
     }
+  },
+  "qaObservationFollowup": {
+    "recordedAtUtc": "2026-11-12T11:23:46Z",
+    "productBaselineCommit": "88e453671aa8677c24052104f9f18c981f8fd97b",
+    "documentationOnlyHead": "4a0892b4ebcef8f50aee30166dd069e3dc65d1ad",
+    "documentationOnlyHeadProductAndTestsMatchBaseline": true,
+    "documentationOnlyHeadChangedPaths": [
+      "README.md",
+      "docs/haru-icons/README.md",
+      "docs/haru-icons/iphone-release-checklist.md",
+      "docs/haru-icons/release-readiness-2026-11-12.md",
+      "docs/haru-icons/release-source-comparison.json"
+    ],
+    "observedRerun": {
+      "runId": "43206879248",
+      "url": "https://github.com/zzocojoa/haru-word/actions/runs/43206879248",
+      "chromium": {
+        "passedScripts": 12,
+        "totalScripts": 13,
+        "failedScript": "tests/haru-system-icons-qa.cjs",
+        "failureLineAtRun": 395,
+        "failure": "Immediate trigger-focus assertion after Escape cancellation."
+      },
+      "webkit": {
+        "passedScripts": 13,
+        "totalScripts": 13,
+        "jobId": "131144167676"
+      }
+    },
+    "pendingQaPatch": {
+      "path": "tests/haru-system-icons-qa.cjs",
+      "commit": null,
+      "ciStatusAtRecordedTime": "pending; the follow-up patch has not yet run in CI",
+      "changes": [
+        "Observe listbox hidden and await the existing trigger-focus condition before the original goal, level and review-day Escape cancellation assertions.",
+        "Compare the entire server state and revision before and after cancellation.",
+        "Observe P099 submenu hidden and visible states before the original keyboard interaction assertions."
+      ],
+      "productFilesChanged": false,
+      "existingAssertionsAndCriteriaPreserved": true
+    },
+    "baselineAuditPreserved": true,
+    "baselineRuntimeEvidenceScope": "The 88e4536 browser run 43204774147 passed 13/13 scripts per engine with 432 layout and 432 axe checks per engine; this is evidence for that run, not a success assertion for the follow-up head.",
+    "latestReleaseStatusUrl": "https://github.com/zzocojoa/haru-word/pull/59",
+    "finalFollowupHead": null,
+    "physicalIphoneChecklistStatus": "All 15 items remain unrun.",
+    "actualPullRequestMergePerformed": false,
+    "publicationPerformed": false,
+    "note": "This records the stated time only. The release confirmation in PR #59 provides the subsequent final head, CI evidence and merge/deployment decision. The preserved releaseFollowup audit compares 88e4536 and does not include the pending QA changes."
   }
 }

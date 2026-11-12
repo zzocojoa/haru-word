@@ -13,7 +13,7 @@
 | 검사 URL / 배포 ID 또는 Site 버전 | 미기입 |
 | 최종 출시 후보 커밋 / 해당 URL과의 연결 근거 | 미기입 — 출시 담당자가 최종 연결 |
 | 최초 아이콘 검증 기준 | `74e72ef63df1c6e7afab05076eeeecf4a596999b` |
-| 현재 코드 검증 후보 | `88e453671aa8677c24052104f9f18c981f8fd97b` — 확대 화면과 설정의 네 Select·체크박스 초점 보완 포함 |
+| 제품 코드 검증 기준 | `88e453671aa8677c24052104f9f18c981f8fd97b` — 확대 화면과 설정의 네 Select·체크박스 초점 보완 포함. 후속 QA를 포함한 최종 head는 PR의 출시 확인 기록 참조 |
 | 문서 작성 시 확인된 운영 기준 | Site v147, source `04b552f`; 기존 main `7ce85ed`와 전체 tree 동일. 후보 배포를 뜻하지 않음 |
 | 시험 계정 별칭 | 미기입 — 비밀번호·토큰을 기록하지 않음 |
 | Safari 검사 환경 | 일반 탭 / 별도 시험용 프로필 등 실제 환경: 미기입 |
@@ -26,7 +26,7 @@
 
 ### 자동 검사와 이 확인표의 경계
 
-| 구분 | 현재 상태와 확인 범위 | 실기기에 남는 확인 |
+| 구분 | 검증 기준 커밋의 결과와 확인 범위 | 실기기에 남는 확인 |
 | --- | --- | --- |
 | Chromium + Playwright + axe | `88e4536`에서 13/13 스크립트 통과. 아이콘 보고서의 레이아웃·axe 각 432회, 자동 규칙 위반 0. [출시 검증 결과](./release-readiness-2026-11-12.md) 참조 | 실제 Safari UI, iOS 키보드, 홈 화면 설치·시작 이미지·캐시, VoiceOver 음성·초점은 대체하지 않음 |
 | Playwright WebKit | `88e4536`에서 13/13 스크립트 통과. 같은 레이아웃·axe 각 432회, 네 Select·체크박스 저장 후 초점, UTF-8·P096/P099 포함 | WebKit 엔진 검사는 실제 iPhone Safari, 홈 화면 앱 또는 VoiceOver 실기기 검사와 별개 |
@@ -36,8 +36,10 @@
 [두 엔진 CI](https://github.com/zzocojoa/haru-word/actions/runs/43204774147),
 [Chromium 산출물](https://github.com/zzocojoa/haru-word/actions/runs/43204774147/artifacts/13937007005),
 [WebKit 산출물](https://github.com/zzocojoa/haru-word/actions/runs/43204774147/artifacts/13938105805).
-두 엔진은 **자동 검사 통과**, 아래 실제 iPhone 항목은 **모두 미실시**입니다.
-동일 커밋에 이미 통과한 전체 검사를 이 문서 때문에 다시 실행할 필요는 없습니다.
+위 `88e4536` 실행은 두 엔진 모두 **자동 검사 통과**, 아래 실제 iPhone 항목은 **모두 미실시**입니다.
+**2026-11-12 11:23:46 UTC 기록:** 후속 문서 HEAD `4a0892b` 재실행은 WebKit 13/13·Chromium 12/13이며,
+Escape 취소 후 초점 관측을 보강하는 QA 수정은 이 문서 작성 시 CI 대기 중입니다. 제품 기준 검증과 후속 QA 결과를 구분합니다.
+후속 최종 head·최신 CI·병합 및 배포 판정은 [PR #59의 출시 확인 기록](https://github.com/zzocojoa/haru-word/pull/59)을 따릅니다.
 
 ## 2. 준비와 판정 방법
 
@@ -146,7 +148,7 @@ IP15에서 앱이 메모리의 기존 화면을 그대로 보여 준 경우는 *
 
 ## 5. 근거와 화면 문구
 
-화면 문구와 절차의 앱 기준은 위의 현재 코드 검증 후보입니다. 최초 아이콘 커밋과 후속 제품 보완을 구분합니다.
+화면 문구와 절차의 앱 기준은 위의 제품 코드 검증 기준입니다. 최초 아이콘 커밋과 후속 제품 보완을 구분합니다.
 
 - [아이콘 연결·검증 범위](./README.md), [P001–P105 연결표](./placements.json)
 - [헤더·탭·출처 진입](../../app/learning-app.tsx), [학습 설정](../../app/learning/settings-dialog.tsx), [자료 출처](../../app/learning/source-dialog.tsx)

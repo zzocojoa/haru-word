@@ -8,6 +8,10 @@
 실제 기기에서 남은 확인은 [iPhone 출시 확인표](./iphone-release-checklist.md)에 정리합니다.
 소스 동일성의 파일별 근거는 [출시 소스 비교](./release-source-comparison.json)에 보존합니다.
 
+**2026-11-12 11:23:46 UTC 기록:** 제품 코드 기준 `88e4536`의 검증은 완료했습니다.
+문서 HEAD `4a0892b` 재실행은 WebKit 13/13·Chromium 12/13이며, Escape 취소 후 초점 관측을 보강한 후속 QA는 이 문서 작성 시 CI 대기 중입니다.
+후속 최종 head·최신 CI·병합 및 배포 판정은 [PR #59의 출시 확인 기록](https://github.com/zzocojoa/haru-word/pull/59)에서 확인합니다.
+
 ## 범위
 
 | 위치 | 화면 또는 기능 | 주요 구현 |

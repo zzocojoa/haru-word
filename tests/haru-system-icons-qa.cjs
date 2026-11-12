@@ -143,30 +143,6 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     assert.equal(await pause.evaluate(element => element.tagName + ':' + element.type), 'INPUT:checkbox');
     assert.equal(await settings.getByRole('combobox', { name: 'AI 모델', exact: true }).isEnabled(), true,
       'the existing model preference stays editable while AI generation is disabled');
-    const beforeMenu = await qa.getState();
-    // Radix intentionally dismisses Select on window resize. Set each viewport
-    // before opening, so this checks the real menu without changing that policy.
-    for (const width of compactMatrix.widths) for (const textSize of compactMatrix.textSizes) {
-      await page.setViewportSize({ width, height: 844 });
-      await page.evaluate(size => document.documentElement.style.fontSize = size + '%', textSize);
-      await qa.settle(); await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
-      await qa.inspect('goal-options-' + width + '-' + textSize, { widths: [width], textSizes: [textSize],
-        icons: [[page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).locator('svg'), 16, 'P098 selected option']] });
-    }
-    await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
-    await page.keyboard.press('Escape');
-    assert.equal(await goal.evaluate(element => element === document.activeElement), true);
-    assert.deepEqual(await qa.getState(), beforeMenu, 'opening and cancelling selection is read-only');
-    const waitForOptionFocus = async (name, selected) => {
-      const option = page.getByRole('option', { name, exact: true });
-      await option.waitFor();
-      const element = await option.elementHandle();
-      assert.ok(element, name + ' exists');
-      try {
-        await page.waitForFunction(({ element, selected }) => document.activeElement === element
-          && element.getAttribute('aria-selected') === String(selected), { element, selected });
-      } finally { await element.dispose(); }
-    };
     const waitForTriggerFocus = async name => {
       const evidence = { name };
       (report.triggerFocus ??= []).push(evidence);
@@ -187,6 +163,32 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
           }, name);
         } catch (error) { evidence.snapshotError = error.message; }
       }
+    };
+    const beforeMenu = await qa.getState();
+    // Radix intentionally dismisses Select on window resize. Set each viewport
+    // before opening, so this checks the real menu without changing that policy.
+    for (const width of compactMatrix.widths) for (const textSize of compactMatrix.textSizes) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.evaluate(size => document.documentElement.style.fontSize = size + '%', textSize);
+      await qa.settle(); await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
+      await qa.inspect('goal-options-' + width + '-' + textSize, { widths: [width], textSizes: [textSize],
+        icons: [[page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).locator('svg'), 16, 'P098 selected option']] });
+    }
+    await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
+    await page.keyboard.press('Escape');
+    await page.getByRole('listbox').waitFor({ state: 'hidden' });
+    await waitForTriggerFocus('하루 목표');
+    assert.equal(await goal.evaluate(element => element === document.activeElement), true);
+    assert.deepEqual(await qa.getState(), beforeMenu, 'opening and cancelling selection is read-only');
+    const waitForOptionFocus = async (name, selected) => {
+      const option = page.getByRole('option', { name, exact: true });
+      await option.waitFor();
+      const element = await option.elementHandle();
+      assert.ok(element, name + ' exists');
+      try {
+        await page.waitForFunction(({ element, selected }) => document.activeElement === element
+          && element.getAttribute('aria-selected') === String(selected), { element, selected });
+      } finally { await element.dispose(); }
     };
     const chooseOption = async (control, currentName, nextName) => {
       await control.focus(); await control.press('Space'); await page.getByRole('listbox').waitFor();
@@ -389,11 +391,16 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     assert.equal(await settings.isVisible(), false, 'A completed save does not reopen settings');
     await openSettings();
     report.checks.push('Settings goal/review-day/level/model preference saves return focus; delayed synthetic PUTs preserve explicit focus movement and dialog dismissal; effective preference values restored and no AI generation requested');
+    const beforeSettingsCancel = await qa.getState();
     for (const name of ['학습 수준', '주간 점검 요일']) {
       const control = settings.getByRole('combobox', { name, exact: true });
       await control.focus(); await control.press('Space'); await page.getByRole('listbox').waitFor();
-      await page.keyboard.press('Escape'); assert.equal(await control.evaluate(element => element === document.activeElement), true);
+      await page.keyboard.press('Escape');
+      await page.getByRole('listbox').waitFor({ state: 'hidden' });
+      await waitForTriggerFocus(name);
+      assert.equal(await control.evaluate(element => element === document.activeElement), true);
     }
+    assert.deepEqual(await qa.getState(), beforeSettingsCancel, 'Cancelling settings selections preserves every value, record and revision');
     assert.deepEqual((await qa.getState()).state.sessions, seeded.state.sessions);
     assert.deepEqual((await qa.getState()).state.progress, seeded.state.progress);
     await closeSettings();
@@ -548,8 +555,9 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     await sub.focus(); await sub.press('ArrowRight');
     const item = page.getByRole('menuitem', { name: '합성 선택', exact: true }); await item.waitFor();
     assert.equal(await sub.getAttribute('aria-expanded'), 'true');
-    await item.press('ArrowLeft'); assert.equal(await sub.getAttribute('aria-expanded'), 'false');
-    await sub.press('ArrowRight'); await item.press('Enter');
+    await item.press('ArrowLeft'); await item.waitFor({ state: 'hidden' });
+    assert.equal(await sub.getAttribute('aria-expanded'), 'false');
+    await sub.press('ArrowRight'); await item.waitFor(); await item.press('Enter');
     await page.getByText('합성 항목을 선택했어요.', { exact: true }).waitFor();
     const menuHandle = await menu.elementHandle();
     try { await page.waitForFunction(element => document.activeElement === element, menuHandle); }
