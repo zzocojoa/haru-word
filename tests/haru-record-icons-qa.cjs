@@ -377,9 +377,11 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     const listen = audio.getByRole('button', { name: /기기 음성 듣기$/ });
     await listen.waitFor();
     const timer = page.locator('.session-panel .timer');
-    if (await timer.getAttribute('aria-label') === '타이머 일시 정지') await qa.click(timer, 'timer-pause-initial');
+    assert.equal(await timer.getAttribute('aria-label'), '타이머 일시 정지');
     await qa.saved();
-    await page.getByText('스스로 점검하기', { exact: true }).click();
+    const selfCheckSummary = page.locator('.session-panel details.notes-details > summary')
+      .filter({ hasText: /^스스로 점검하기$/ });
+    await selfCheckSummary.click();
     const dictionary = audio.getByRole('link', { name: '사전 발음', exact: true });
     const oxford = page.locator('.session-panel .dictionary-links').getByRole('link', { name: 'Oxford 발음·용례', exact: true });
     const korean = page.locator('.session-panel .dictionary-links').getByRole('link', { name: '영한사전', exact: true });
@@ -387,13 +389,27 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     await qa.inspect('pronunciation-timer-feedback', { icons: [
       [listen.locator('svg'), 18, 'P073 device speech'], [dictionary.locator('svg'), 14, 'P074 dictionary audio'],
       [oxford.locator('svg'), 13, 'P075 Oxford link'], [korean.locator('svg'), 13, 'P076 Korean dictionary'],
-      [timer.locator('svg'), 15, 'P077 timer continue'], [feedbackPanel.locator('h3 svg'), 17, 'P079 AI reference'],
+      [timer.locator('svg'), 15, 'P078 timer pause'], [feedbackPanel.locator('h3 svg'), 17, 'P079 AI reference'],
     ] });
     for (const link of [dictionary, oxford, korean]) {
       assert.match(await link.getAttribute('href'), /^https:\/\//);
       assert.equal(await link.getAttribute('target'), '_blank');
       assert.match(await link.getAttribute('rel'), /noreferrer/);
     }
+    // Pausing intentionally replaces the sentence subtree with the pause view.
+    await qa.click(timer, 'timer-pause');
+    await page.locator('.pause-overlay').waitFor();
+    assert.equal(await timer.getAttribute('aria-label'), '타이머 계속');
+    await qa.checkIcon(timer.locator('svg'), 15, 'P077 timer continue');
+    assert.equal(await page.getByLabel('내 영어 문장', { exact: true }).isVisible(), false);
+    assert.equal(await feedbackPanel.isVisible(), false);
+    await qa.saved();
+    await qa.click(timer, 'timer-continue');
+    assert.equal(await timer.getAttribute('aria-label'), '타이머 일시 정지');
+    await listen.waitFor();
+    await qa.saved();
+    await preserveGrades('Timer toggles');
+
     const beforeAudio = await qa.getState();
     await qa.click(listen, 'device-speech');
     assert.equal(await page.evaluate(() => window.__recordIconAudio.calls), 1);
@@ -401,13 +417,6 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     await audio.getByRole('status').filter({ hasText: '재생 중' }).waitFor();
     await page.evaluate(() => window.__recordIconAudio.utterance.onend?.());
     await assertUnchanged(beforeAudio, 'Listening does not save or grade a record');
-    await qa.click(timer, 'timer-continue');
-    assert.equal(await timer.getAttribute('aria-label'), '타이머 일시 정지');
-    await qa.checkIcon(timer.locator('svg'), 15, 'P078 timer pause');
-    await qa.click(timer, 'timer-pause');
-    assert.equal(await timer.getAttribute('aria-label'), '타이머 계속');
-    await qa.saved();
-    await preserveGrades('Timer toggles');
 
     const sentenceInput = page.getByLabel('내 영어 문장', { exact: true });
     const spoken = page.getByLabel('내 문장을 소리 내어 말해 봤어요', { exact: true });

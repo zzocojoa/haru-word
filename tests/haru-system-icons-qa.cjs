@@ -224,8 +224,13 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     assert.deepEqual(await qa.getState(), draftBaseline, 'undo does not grade or save recovered input');
     await field.fill('A draft kept for explicit comparison.'); await waitDraft('A draft kept for explicit comparison.');
     const latest = await qa.getState(), current = latest.state.sessions[lesson.id];
-    await qa.seed({ sessions: { ...latest.state.sessions, [lesson.id]: { ...current,
-      records: { ...current.records, [word.id]: { ...current.records[word.id], sentence: 'Changed server sentence.' } } } } });
+    const changed = { ...current,
+      records: { ...current.records, [word.id]: { ...current.records[word.id], sentence: 'Changed server sentence.' } } };
+    // PUT requires both delta maps; an empty progress map leaves saved grades intact.
+    const changedSnapshot = await qa.seed({ progress: {}, sessions: { [lesson.id]: changed } });
+    assert.equal(changedSnapshot.revision, latest.revision + 1);
+    assert.deepEqual(changedSnapshot.state, { ...latest.state,
+      sessions: { ...latest.state.sessions, [lesson.id]: changed } }, 'remote fixture changes only this sentence');
     await page.reload({ waitUntil: 'domcontentloaded' }); await openLesson();
     await waitValue(field, 'Changed server sentence.');
     const comparisonBaseline = await qa.getState();

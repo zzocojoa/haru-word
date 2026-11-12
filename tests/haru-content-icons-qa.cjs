@@ -38,17 +38,32 @@ const { completedAssessment } = require('./qa/fixtures.cjs');
     const artwork = locator => locator.evaluate(element => element.innerHTML);
     let holdPosition = false, holdState = false;
     const positionCalls = [], externalRequests = [];
-    const optionalFontStylesheet = 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=optional';
+    const optionalFontStylesheet = new URL('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=optional');
+    const queryKey = url => JSON.stringify([...url.searchParams.entries()].sort(([a, av], [b, bv]) => a.localeCompare(b) || av.localeCompare(bv)));
+    const recordRequest = (entries, request, response) => {
+      const url = request.url(), resourceType = request.resourceType(), method = request.method();
+      const previous = entries.find(entry => entry.url === url && entry.resourceType === resourceType && entry.method === method);
+      if (previous) previous.count++;
+      else entries.push({ url, resourceType, method, count: 1, response });
+    };
     report.optionalFontStylesheets = [];
+    report.externalRequests = externalRequests;
     await context.route('**/*', async route => {
       const request = route.request(), url = new URL(request.url());
       // Isolate only the optional stylesheet mounted by app/web-fonts.tsx.
-      // Empty CSS keeps the system fallback and creates no remote font requests.
-      if (request.method() === 'GET' && request.resourceType() === 'stylesheet' && url.href === optionalFontStylesheet) {
-        report.optionalFontStylesheets.push({ url: url.href, response: 'empty-css' });
-        return route.fulfill({ contentType: 'text/css', body: '' });
+      // Axe reads a cross-origin stylesheet again with XHR; allow that same CSS
+      // resource, including equivalent query escaping, without any remote fetch.
+      if (request.method() === 'GET' && ['stylesheet', 'xhr', 'fetch'].includes(request.resourceType())
+        && url.origin === optionalFontStylesheet.origin && url.pathname === optionalFontStylesheet.pathname
+        && !url.username && !url.password && !url.hash && queryKey(url) === queryKey(optionalFontStylesheet)) {
+        recordRequest(report.optionalFontStylesheets, request, 'empty-css');
+        return route.fulfill({ contentType: 'text/css', headers: { 'access-control-allow-origin': base },
+          body: '/* Optional web fonts omitted in icon layout QA. */' });
       }
-      if (url.origin !== base) { externalRequests.push(url.origin); return route.abort(); }
+      if (url.origin !== base) {
+        recordRequest(externalRequests, request, 'blocked');
+        return route.abort();
+      }
       if (url.pathname.startsWith('/word-images/v1/')) {
         const filename = path.join(imageRoot, path.basename(url.pathname));
         // The first three exercises use the repository's approved pilot files.
