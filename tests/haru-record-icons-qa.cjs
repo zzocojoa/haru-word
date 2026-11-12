@@ -254,6 +254,34 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     const confirmation = page.getByRole('alertdialog');
     await confirmation.waitFor();
     await qa.inspect('restore-confirm-cancel', { widths: [320, 1440] });
+    // Inspect the actual enlarged targets before returning to the normal-size
+    // cancellation flow. Neither target is activated by these geometry checks.
+    for (const width of [320, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      await qa.settle();
+      for (const name of ['기록 교체 · 복원', '취소']) {
+        const target = confirmation.getByRole('button', { name, exact: true });
+        await target.evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+        await qa.settle();
+        const bounds = await target.boundingBox(), frame = await confirmation.boundingBox();
+        assert.ok(bounds && frame && bounds.width >= 44 && bounds.height >= 44
+          && bounds.x >= frame.x && bounds.x + bounds.width <= frame.x + frame.width + 0.5
+          && bounds.y >= frame.y && bounds.y + bounds.height <= frame.y + frame.height + 0.5
+          && bounds.x >= 0 && bounds.x + bounds.width <= width + 0.5
+          && bounds.y >= 0 && bounds.y + bounds.height <= 844.5,
+        'Enlarged restore confirmation target is complete: ' + JSON.stringify({ name, width, bounds, frame }));
+        assert.equal(await target.evaluate(element => {
+          const bounds = element.getBoundingClientRect();
+          const hit = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+          return !!hit && (hit === element || element.contains(hit));
+        }), true, name + ' is not covered at 200% text');
+      }
+      await qa.capture('restore-confirm-targets-' + width + '-200.png', false);
+    }
+    await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await qa.settle();
     await qa.click(confirmation.getByRole('button', { name: '취소', exact: true }), 'restore-confirmation-cancel');
     await confirmation.waitFor({ state: 'hidden' });
     await assertUnchanged(preserved, 'Canceling final restore confirmation preserves every record and revision');
@@ -267,6 +295,10 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     assert.equal((await pendingJob.json()).job, null);
     await qa.click(dialog.getByRole('button', { name: '닫기', exact: true }), 'restore-close');
     await dialog.waitFor({ state: 'hidden' });
+    // Radix unmount and the app's view restoration return focus asynchronously.
+    const recordMenuTrigger = await button('기록 관리').elementHandle();
+    try { await page.waitForFunction(element => document.activeElement === element, recordMenuTrigger); }
+    finally { await recordMenuTrigger?.dispose(); }
     assert.equal(await button('기록 관리').evaluate(element => document.activeElement === element), true);
     await assertUnchanged(preserved, 'Closing restore and returning focus preserve all synthetic records');
     assert.equal(report.requests.filter(request => request.path.endsWith('/commit')).length, 0, 'No restore commit is issued');

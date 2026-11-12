@@ -2726,8 +2726,26 @@ footer {
   overflow-wrap: anywhere;
 }
 .backup-confirm {
+  width: min(32rem, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
   max-height: 90dvh;
+  padding: 24px;
+  grid-template-columns: minmax(0, 1fr);
   overflow-y: auto;
+}
+.backup-confirm > :is([data-slot=alert-dialog-header], [data-slot=alert-dialog-footer]),
+.backup-confirm [data-slot=alert-dialog-header] > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.backup-confirm [data-slot=alert-dialog-footer] > button {
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 100%;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .journal-list {
   margin-top: 22px;

@@ -135,9 +135,34 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     await page.keyboard.press('Escape');
     assert.equal(await goal.evaluate(element => element === document.activeElement), true);
     assert.deepEqual(await qa.getState(), beforeMenu, 'opening and cancelling selection is read-only');
-    await changeAndSave(async () => { await goal.press('Space'); await page.keyboard.press('Home'); await page.keyboard.press('ArrowDown'); await page.keyboard.press('Enter'); });
+    const waitForGoalOptionFocus = async (name, selected) => {
+      const option = page.getByRole('option', { name, exact: true });
+      await option.waitFor();
+      const element = await option.elementHandle();
+      assert.ok(element, name + ' exists');
+      try {
+        await page.waitForFunction(({ element, selected }) => document.activeElement === element
+          && element.getAttribute('aria-selected') === String(selected), { element, selected });
+      } finally { await element.dispose(); }
+    };
+    // Radix defers navigation focus with setTimeout. Observe each real keyboard
+    // destination before the next key so Enter cannot select the previous item.
+    await changeAndSave(async () => {
+      await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
+      await waitForGoalOptionFocus('3개 · 기본 목표', true);
+      await page.keyboard.press('Home'); await waitForGoalOptionFocus('1개', false);
+      await page.keyboard.press('ArrowDown'); await waitForGoalOptionFocus('2개', false);
+      await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
+    });
+    assert.equal((await goal.innerText()).trim(), '2개');
     assert.equal((await qa.getState()).state.settings.dailyGoal, 2);
-    await changeAndSave(async () => { await goal.focus(); await goal.press('Space'); await page.keyboard.press('ArrowDown'); await page.keyboard.press('Enter'); });
+    await changeAndSave(async () => {
+      await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
+      await waitForGoalOptionFocus('2개', true);
+      await page.keyboard.press('ArrowDown'); await waitForGoalOptionFocus('3개 · 기본 목표', false);
+      await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
+    });
+    assert.equal((await goal.innerText()).trim(), '3개 · 기본 목표');
     assert.equal((await qa.getState()).state.settings.dailyGoal, 3);
     for (const checked of [true, false]) {
       await pause.focus(); await changeAndSave(() => pause.press('Space'));

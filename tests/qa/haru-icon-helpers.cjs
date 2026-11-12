@@ -102,6 +102,10 @@ async function createIconQa(name) {
   const click = async (locator, label, { minSize = 44 } = {}) => {
     for (const width of [390, 320]) {
       await page.setViewportSize({ width, height: 844 });
+      await locator.waitFor({ state: 'visible' });
+      // ViewRestoration applies a newly entered view's scroll after two frames.
+      // Let that transition and the resize finish before testing a user scroll.
+      await settle();
       await locator.evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
       await settle();
       const bounds = await locator.boundingBox();
@@ -116,7 +120,7 @@ async function createIconQa(name) {
         return !!hit && (hit === element || element.contains(hit));
       }), true, label + ' is not covered at ' + width);
       await capture('action-' + label + '-' + width + '.png', false);
-      const result = { label, width, minSize, unobstructed: true, clicked: false };
+      const result = { label, width, minSize, bounds, scrollY: await page.evaluate(() => window.scrollY), unobstructed: true, clicked: false };
       report.clicks.push(result);
       if (width === 320) {
         await locator.click();
