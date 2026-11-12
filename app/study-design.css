@@ -3970,9 +3970,15 @@ label {
   font-size: 1rem;
   margin: 0 0 var(--space-3);
 }
+.record-menu {
+  max-width: calc(100vw - 16px);
+}
 .record-menu [data-slot=dropdown-menu-item] {
   min-height: 44px;
+  min-width: 0;
   font-size: .875rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .record-menu [data-slot=dropdown-menu-item] > svg { width: 16px; height: 16px; }
 .record-menu [data-slot=dropdown-menu-item] button {
@@ -4348,6 +4354,19 @@ footer {
   .journal-word-trigger {
     flex-wrap: wrap;
   }
+  .journal-mobile .journal-word-trigger {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto;
+  }
+  .journal-mobile .journal-word-summary {
+    grid-column: 1 / -1;
+  }
+  .journal-mobile .journal-word-trigger > .status-badge {
+    justify-self: start;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
   .journal-word-status {
     font-size: .75rem;
   }
@@ -4594,6 +4613,21 @@ footer {
 .library-tools { display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap; margin-block:var(--space-4); }
 .library-tools .list-count { margin:0; flex:1; min-width:0; flex-wrap:wrap; }
 .library-controls .filters { margin-top:0; }
+.library-panel .library-controls [data-slot=select-trigger] {
+  height:auto;
+  min-height:44px;
+  white-space:normal;
+}
+.library-panel .library-controls [data-slot=select-value] {
+  display:block;
+  flex:1;
+  min-width:0;
+  overflow:visible;
+  -webkit-line-clamp:unset;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  text-align:left;
+}
 
 /* Compact working surfaces; keep 44px controls and readable content. */
 .word-identity { display:flex; align-items:center; gap:4px; min-width:0; }
@@ -4606,6 +4640,17 @@ footer {
 .library-pagination { gap:8px; }
 .library-pagination > span { white-space:nowrap; }
 .library-panel h2 { scroll-margin-top:88px; }
+@media (max-width:430px) {
+  /* Keep the word independent of metadata when text is enlarged. */
+  .library-panel .word-table tr { grid-template-columns:auto minmax(0,1fr); }
+  .library-panel .word-table td:first-child { grid-column:1 / -1; grid-row:1; }
+  .library-panel .word-table td:nth-child(2) { grid-column:1 / -1; grid-row:2; }
+  .library-panel .word-table td:nth-child(3) { grid-column:1; grid-row:3; }
+  .library-panel .word-table td:nth-child(4) { grid-column:2; grid-row:3; }
+  .library-panel .word-table td:nth-child(5) { grid-column:1 / -1; grid-row:4; text-align:left; }
+  .library-panel .word-table :is(.level-badge,.familiarity-tag) { white-space:normal; overflow-wrap:anywhere; }
+  .library-panel .library-controls .filters { grid-template-columns:minmax(0,1fr); }
+}
 .session-panel .study-actions.learn-actions { position:static; }
 .review-grid { align-items:start; }
 .practice-options > button > span { min-width:0; overflow-wrap:anywhere; }

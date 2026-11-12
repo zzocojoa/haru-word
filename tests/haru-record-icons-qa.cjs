@@ -80,6 +80,83 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
       assert.deepEqual(backup.state, { ...snapshot.state, grammar: snapshot.state.grammar ?? {} }, label + ' preserves the complete snapshot');
     };
     const assertUnchanged = async (snapshot, label) => assert.deepEqual(await qa.getState(), snapshot, label);
+    const inspectRecordReadability = async kind => {
+      const before = await qa.getState();
+      report.recordReadability ??= [];
+      for (const width of [320, 390]) {
+        await page.setViewportSize({ width, height: 844 });
+        for (const textSize of [100, 200]) {
+          await page.evaluate(size => {
+            document.documentElement.style.fontSize = size + '%';
+            window.scrollTo({ top: 0, behavior: 'instant' });
+          }, textSize);
+          await qa.settle();
+          if (kind === 'words') {
+            await page.locator('.journal-mobile .journal-word-trigger').first()
+              .evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+            await qa.settle();
+          }
+          const geometry = await page.evaluate(mode => {
+            const bounds = rect => ({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
+            const textRects = element => {
+              const walker = document.createTreeWalker(element, window.NodeFilter.SHOW_TEXT);
+              const rects = [];
+              let node;
+              while ((node = walker.nextNode())) {
+                if (!node.textContent.trim() || node.parentElement.closest('svg')) continue;
+                const range = document.createRange();
+                range.selectNodeContents(node);
+                rects.push(...[...range.getClientRects()].filter(rect => rect.width > 0 && rect.height > 0).map(bounds));
+              }
+              return rects;
+            };
+            const menu = document.querySelector('.record-menu[role="menu"]');
+            const elements = mode === 'menu'
+              ? [...menu.querySelectorAll('[role="menuitem"]')]
+              : [...document.querySelectorAll('.journal-mobile .journal-word-summary b')]
+                .filter(element => ['cat', 'apple'].includes(element.textContent.trim()));
+            return {
+              viewport: { x: 0, y: 0, width: innerWidth, height: innerHeight },
+              frame: mode === 'menu' ? bounds(menu.getBoundingClientRect()) : null,
+              items: elements.map(element => {
+                const rects = textRects(element);
+                return {
+                  text: element.textContent.trim(),
+                  bounds: bounds(element.getBoundingClientRect()),
+                  parent: bounds((mode === 'menu' ? menu : element.closest('.journal-word-summary')).getBoundingClientRect()),
+                  textRects: rects,
+                  lineCount: new Set(rects.map(rect => Math.round(rect.y * 2) / 2)).size,
+                };
+              }),
+            };
+          }, kind);
+          const evidence = { kind, width, textSize, ...geometry };
+          report.recordReadability.push(evidence);
+          const within = (rect, frame) => rect.x >= frame.x - 0.5 && rect.y >= frame.y - 0.5
+            && rect.x + rect.width <= frame.x + frame.width + 0.5
+            && rect.y + rect.height <= frame.y + frame.height + 0.5;
+          const expected = kind === 'menu'
+            ? ['학습 기록 CSV 받기', '전체 백업', '백업으로 복원', 'AI 튜터용 안내·최근 기록 받기']
+            : ['cat', 'apple'];
+          assert.deepEqual(geometry.items.map(item => item.text), expected,
+            kind + ' readability checks the complete expected labels');
+          if (kind === 'menu') assert.ok(within(geometry.frame, geometry.viewport),
+            'The complete record menu fits the viewport: ' + JSON.stringify(evidence));
+          for (const item of geometry.items) {
+            assert.ok(item.textRects.length > 0 && item.textRects.every(rect => within(rect, item.bounds)
+              && within(rect, item.parent) && within(rect, geometry.viewport)),
+            'Every text fragment is visible in its record ' + kind + ': ' + JSON.stringify({ width, textSize, item }));
+            if (kind === 'words') assert.equal(item.lineCount, 1,
+              item.text + ' stays on one readable line at ' + width + 'px / ' + textSize + '% text');
+          }
+          await qa.capture('record-' + kind + '-readable-' + width + '-' + textSize + '.png', false);
+        }
+      }
+      await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
+      await page.setViewportSize({ width: 390, height: 844 });
+      await qa.settle();
+      await assertUnchanged(before, 'Record ' + kind + ' readability checks preserve every record and revision');
+    };
 
     const empty = await qa.getState();
     assert.equal(Object.keys(empty.state.sessions).length, 0, 'The account is a fresh synthetic owner');
@@ -130,6 +207,7 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     const badgeIcons = ['success', 'needs-help', 'unassessed', 'in-progress']
       .map((name, index) => [badges.nth(index).locator('svg'), 14, 'P062 ' + name]);
     await qa.inspect('record-statuses-mobile', { widths: [320, 390, 430], icons: badgeIcons });
+    await inspectRecordReadability('words');
     await qa.inspect('record-statuses-desktop', { widths: [768, 1440], icons: [
       [button('기록 관리').locator('svg'), 18, 'P063 record menu'],
     ] });
@@ -172,6 +250,8 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
       ['백업으로 복원', 'P066 restore-file'], ['AI 튜터용 안내·최근 기록 받기', 'P067 tutor-export'],
     ].map(([name, label]) => [menuItem(name).locator('svg'), 16, label]);
     await qa.inspect('record-actions', { icons: menuIcons });
+    await inspectRecordReadability('menu');
+    report.checks.push('At 320/390px and 100/200% text, every record-menu label fragment fits its item/menu/viewport, and cat/apple each occupy one readable line; server state/revision remain unchanged');
     const csv = await download(() => qa.click(menuItem('학습 기록 CSV 받기'), 'record-csv'), 'synthetic-records.csv');
     assert.ok(csv.includes(records[selected[0].id].sentence) && csv.includes(records[selected[1].id].notes));
     const tutor = await download(() => chooseMenu('AI 튜터용 안내·최근 기록 받기', 'record-tutor'), 'synthetic-tutor.txt');

@@ -293,6 +293,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
 
     // P099 has no current app consumer. Exercise its actual Radix component with
     // the built app stylesheet on a QA-only intercepted URL, plus transient close.
+    // Match RecordActions' existing non-modal menu configuration.
     await page.goto(base); await qa.saved();
     const styles = await page.locator('link[rel="stylesheet"]').evaluateAll(nodes => nodes.map(node => node.href));
     const bundle = await build({ stdin: { resolveDir: process.cwd(), loader: 'tsx', contents: `
@@ -300,7 +301,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
       import {DropdownMenu,DropdownMenuTrigger,DropdownMenuContent,DropdownMenuItem,DropdownMenuSub,DropdownMenuSubTrigger,DropdownMenuSubContent} from './components/ui/dropdown-menu';
       import {LearningMessage} from './app/learning/learning-message';
       function Harness(){const [selected,setSelected]=useState(false),[message,setMessage]=useState(true);return <main className="page-shell"><h1>공통 아이콘 합성 검사</h1>
-        <DropdownMenu><DropdownMenuTrigger asChild><button className="secondary-button">합성 메뉴</button></DropdownMenuTrigger><DropdownMenuContent>
+        <DropdownMenu modal={false}><DropdownMenuTrigger asChild><button className="secondary-button">합성 메뉴</button></DropdownMenuTrigger><DropdownMenuContent>
           <DropdownMenuItem>기본 항목</DropdownMenuItem><DropdownMenuSub><DropdownMenuSubTrigger>다음 항목</DropdownMenuSubTrigger><DropdownMenuSubContent><DropdownMenuItem onSelect={()=>setSelected(true)}>합성 선택</DropdownMenuItem></DropdownMenuSubContent></DropdownMenuSub>
         </DropdownMenuContent></DropdownMenu><p role="status">{selected?'합성 항목을 선택했어요.':'선택 전'}</p>
         <label>보존할 연습 입력<input defaultValue="기존 입력"/></label>

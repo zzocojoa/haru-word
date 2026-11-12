@@ -7,6 +7,25 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
 const { history } = require('./fixtures/backup-history.cjs');
 const { completedAssessment } = require('./qa/fixtures.cjs');
 
+// Measure the actual laid-out text, including glyphs hidden by a line clamp.
+const textGeometry = element => {
+  const range = document.createRange();
+  range.selectNodeContents(element);
+  const rects = [...range.getClientRects()].filter(rect => rect.width > 0 && rect.height > 0);
+  const bounds = element.getBoundingClientRect();
+  const control = element.closest('button')?.getBoundingClientRect() ?? bounds;
+  const inside = frame => rects.every(rect => rect.left >= frame.left - 1 && rect.right <= frame.right + 1
+    && rect.top >= frame.top - 1 && rect.bottom <= frame.bottom + 1);
+  return {
+    text: element.textContent.trim(),
+    lines: new Set(rects.map(rect => Math.round(rect.top * 2) / 2)).size,
+    inside: inside(bounds) && inside(control),
+    clipped: element.clientWidth > 0 && (element.scrollWidth > element.clientWidth + 1
+      || element.scrollHeight > element.clientHeight + 1),
+    width: bounds.width, controlWidth: control.width, controlHeight: control.height,
+  };
+};
+
 (async () => {
   const qa = await createIconQa('haru-content-icons');
   const { page, context, base, report } = qa;
@@ -216,6 +235,46 @@ const { completedAssessment } = require('./qa/fixtures.cjs');
       [posHelp.locator('svg'), 16, 'P041 part of speech help'],
     ];
     await qa.inspect('library-list', { icons: libraryIcons });
+    // Overflow alone misses a readable word squeezed into one glyph per line,
+    // or a SelectValue whose own clipping hides part of the selected label.
+    const beforeLibraryReadability = await qa.getState();
+    report.libraryReadability = [];
+    const shortWords = library.locator('.word-link b').filter({ hasText: /^[a-z]{2,8}$/i });
+    const selectedValues = library.locator('.library-controls [data-slot=select-value]');
+    assert.ok(await shortWords.count() > 0, 'Visible short English words exist for layout inspection');
+    assert.equal(await selectedValues.count(), 3);
+    for (const width of [320, 390, 430, 768, 1440]) for (const textSize of [100, 200]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.evaluate(size => { document.documentElement.style.fontSize = size + '%'; }, textSize);
+      await qa.settle();
+      const entry = { width, textSize, words: [], filters: [] };
+      report.libraryReadability.push(entry);
+      for (const word of await shortWords.all()) {
+        const geometry = await word.evaluate(textGeometry);
+        entry.words.push(geometry);
+        assert.ok(geometry.lines === 1 && geometry.inside && !geometry.clipped,
+          'A short English word stays whole at ' + width + '/' + textSize + ': ' + JSON.stringify(geometry));
+      }
+      for (const value of await selectedValues.all()) {
+        const geometry = await value.evaluate(textGeometry);
+        entry.filters.push(geometry);
+        assert.ok(geometry.lines > 0 && geometry.inside && !geometry.clipped,
+          'The complete selected filter label is visible at ' + width + '/' + textSize + ': ' + JSON.stringify(geometry));
+      }
+      if (width === 320 && textSize === 200) {
+        await library.locator('.library-controls').evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+        await qa.settle();
+        await qa.capture('library-filters-readable-320-200.png', false);
+        await library.locator('.word-table tbody tr').first().evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+        await qa.settle();
+        await qa.capture('library-words-readable-320-200.png', false);
+      }
+    }
+    await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await qa.settle();
+    assert.deepEqual(await qa.getState(), beforeLibraryReadability, 'Library readability inspection preserves records and revision');
+    report.checks.push('Library 320–1440px/100–200%: short English words remain on one line and every selected filter label fits without clipping');
     assert.equal(await previousPage.isDisabled(), true);
     await qa.click(nextPage, 'library-next-page');
     assert.equal(await previousPage.isDisabled(), false);
@@ -271,6 +330,29 @@ const { completedAssessment } = require('./qa/fixtures.cjs');
       [reveal.locator('svg'), 17, 'P049 reveal answer'],
       [nextStage.locator('svg'), 18, 'P047 next stage'],
     ] });
+    const beforeReadingReadability = await qa.getState();
+    report.readingAudioReadability = [];
+    const readingAudio = lesson.locator('.grammar-reading-tools .device-audio');
+    for (const width of [320, 390, 430]) for (const textSize of [100, 200]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.evaluate(size => { document.documentElement.style.fontSize = size + '%'; }, textSize);
+      await qa.settle();
+      const geometry = await readingAudio.locator('span').evaluate(textGeometry);
+      report.readingAudioReadability.push({ width, textSize, ...geometry });
+      assert.ok(geometry.lines >= 1 && geometry.lines <= 2 && geometry.inside && !geometry.clipped,
+        'The device-audio label stays readable at ' + width + '/' + textSize + ': ' + JSON.stringify(geometry));
+      assert.ok(geometry.controlWidth >= 44 && geometry.controlHeight >= 44, 'The reading audio control keeps its touch target');
+      if (width === 320 && textSize === 200) {
+        await readingAudio.evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+        await qa.settle();
+        await qa.capture('grammar-reading-audio-320-200.png', false);
+      }
+    }
+    await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await qa.settle();
+    assert.deepEqual(await qa.getState(), beforeReadingReadability, 'Reading audio layout inspection does not play audio or change records');
+    report.checks.push('Reading audio 320–430px/100–200%: the complete label uses at most two lines inside a 44px control; no audio is played');
     const wrong = practice.observation.options.find(option => option !== practice.observation.answer);
     const choices = lesson.locator('.grammar-choices');
     await choices.getByRole('button', { name: wrong, exact: true }).click();
