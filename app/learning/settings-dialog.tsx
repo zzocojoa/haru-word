@@ -49,25 +49,25 @@ export function SettingsDialog({
   const aiModelTrigger = useRef<HTMLButtonElement>(null);
   const goalTrigger = useRef<HTMLButtonElement>(null);
   const reviewDayTrigger = useRef<HTMLButtonElement>(null);
-  const pendingSelectFocus = useRef<{ trigger: HTMLButtonElement; dialog: HTMLElement } | null>(null);
+  const pendingSettingsFocus = useRef<{ control: HTMLButtonElement | HTMLInputElement; dialog: HTMLElement } | null>(null);
   const restoration = useViewRestoration();
 
   useEffect(() => {
     if (!settings) {
-      pendingSelectFocus.current = null;
+      pendingSettingsFocus.current = null;
       return;
     }
     const cancelOnFocus = (event: FocusEvent) => {
-      const pending = pendingSelectFocus.current;
-      if (pending && event.target !== pending.dialog && event.target !== pending.trigger && event.target !== document.body) {
-        pendingSelectFocus.current = null;
+      const pending = pendingSettingsFocus.current;
+      if (pending && event.target !== pending.dialog && event.target !== pending.control && event.target !== document.body) {
+        pendingSettingsFocus.current = null;
       }
     };
-    const cancelOnPointer = () => { pendingSelectFocus.current = null; };
+    const cancelOnPointer = () => { pendingSettingsFocus.current = null; };
     document.addEventListener('focusin', cancelOnFocus);
     document.addEventListener('pointerdown', cancelOnPointer, true);
     return () => {
-      pendingSelectFocus.current = null;
+      pendingSettingsFocus.current = null;
       document.removeEventListener('focusin', cancelOnFocus);
       document.removeEventListener('pointerdown', cancelOnPointer, true);
     };
@@ -75,28 +75,32 @@ export function SettingsDialog({
 
   useEffect(() => {
     if (!settings || busy) return;
-    const pending = pendingSelectFocus.current;
+    const pending = pendingSettingsFocus.current;
     if (!pending) return;
     return restoration.schedule('destination', () => {
-      if (pendingSelectFocus.current !== pending) return;
-      pendingSelectFocus.current = null;
-      if (!pending.trigger.isConnected || pending.trigger.disabled || pending.dialog.getAttribute('data-state') !== 'open') return;
+      if (pendingSettingsFocus.current !== pending) return;
+      pendingSettingsFocus.current = null;
+      if (!pending.control.isConnected || pending.control.disabled || pending.dialog.getAttribute('data-state') !== 'open') return;
       const active = document.activeElement;
       if (!active || active === document.body || active === pending.dialog) {
-        pending.trigger.focus({ preventScroll: true });
+        pending.control.focus({ preventScroll: true });
       }
     });
   }, [settings, busy, restoration]);
+
+  function rememberSettingsFocus(control: HTMLButtonElement | HTMLInputElement) {
+    const dialog = control.closest<HTMLElement>('[data-slot="dialog-content"]');
+    if (!control.isConnected || dialog?.getAttribute('data-state') !== 'open') return;
+    const active = document.activeElement;
+    if (active && active !== document.body && active !== dialog && active !== control) return;
+    pendingSettingsFocus.current = { control, dialog };
+  }
 
   function deferSelectFocus(event: Event, trigger: HTMLButtonElement | null) {
     if (!trigger?.disabled) return;
     // Saving disables the trigger before Radix can return focus to it.
     event.preventDefault();
-    const dialog = trigger.closest<HTMLElement>('[data-slot="dialog-content"]');
-    if (!trigger.isConnected || dialog?.getAttribute('data-state') !== 'open') return;
-    const active = document.activeElement;
-    if (active && active !== document.body && active !== dialog && active !== trigger) return;
-    pendingSelectFocus.current = { trigger, dialog };
+    rememberSettingsFocus(trigger);
   }
 
   return (
@@ -155,15 +159,16 @@ export function SettingsDialog({
             type="checkbox"
             checked={!!state.settings.newWordsPaused}
             disabled={busy}
-            onChange={(e) =>
-              save({
+            onChange={(e) => {
+              if (document.activeElement === e.currentTarget) rememberSettingsFocus(e.currentTarget);
+              return save({
                 ...state,
                 settings: {
                   ...state.settings,
                   newWordsPaused: e.target.checked,
                 },
-              })
-            }
+              });
+            }}
           />{" "}
           <span className="settings-label"><HaruIcon name="repeat" size={18} />새 단어 쉬기 · 복습만 하기</span>
         </label>

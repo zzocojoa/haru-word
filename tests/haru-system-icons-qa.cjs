@@ -249,7 +249,8 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
           const element = document.querySelector(selector);
           return element instanceof HTMLInputElement && !element.disabled;
         }, selector);
-        await pause.focus(); await qa.settle();
+        if (checked) await pause.focus();
+        await qa.settle();
         await page.waitForFunction(selector => {
           const element = document.querySelector(selector);
           return element instanceof HTMLInputElement && element === document.activeElement && !element.disabled;
@@ -272,6 +273,10 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
           return element instanceof HTMLInputElement && element.checked === checked && !element.disabled;
         }, { selector, checked });
         await qa.saved();
+        await page.waitForFunction(selector => {
+          const element = document.querySelector(selector);
+          return element instanceof HTMLInputElement && element === document.activeElement && !element.disabled;
+        }, selector);
         assert.equal(await pause.isChecked(), checked);
         attempt.serverChecked = !!(await qa.getState()).state.settings.newWordsPaused;
         assert.equal(attempt.serverChecked, checked);
@@ -279,6 +284,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
         try { attempt.finalState = await snapshot(); }
         catch (error) { attempt.snapshotError = error.message; }
       }
+      assert.equal(attempt.finalState?.focused, true, 'Saving returns focus to the native checkbox without another focus action');
     }
     // Exercise each settings-only focus return through the real save path.
     // Model choices come from the local status response; no generation is requested.
@@ -499,8 +505,10 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     // No provider/account session is contacted: intercept this synthetic context's
     // top-level local navigation after the production clear-before-logout handler.
     await page.route('**/signout-with-chatgpt?*', route => route.fulfill({ contentType: 'text/html; charset=utf-8',
-      body: '<!doctype html><html lang="ko"><head><title>합성 로그아웃 확인</title></head><body><main><h1>합성 로그아웃 도착</h1></main></body></html>' }));
+      body: '<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>합성 로그아웃 확인</title></head><body><main><h1>합성 로그아웃 도착</h1></main></body></html>' }));
     await qa.click(logout, 'draft-logout'); await page.getByRole('heading', { name: '합성 로그아웃 도착' }).waitFor();
+    report.syntheticCharsets = { logout: await page.evaluate(() => document.characterSet) };
+    assert.equal(report.syntheticCharsets.logout, 'UTF-8', 'The synthetic logout document uses UTF-8');
     assert.deepEqual(await draftRows(), []);
     assert.equal(await page.evaluate(() => localStorage.getItem('haru-words:local-input-owner:v1')), null);
     assert.deepEqual(await qa.getState(), deletionBaseline);
@@ -524,9 +532,12 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       createRoot(document.getElementById('root')).render(<Harness/>);` },
       bundle: true, write: false, format: 'iife', platform: 'browser', logLevel: 'silent', define: { 'process.env.NODE_ENV': '"production"' } });
     await page.route('**/__qa/haru-system-icons', route => route.fulfill({ contentType: 'text/html; charset=utf-8',
-      body: '<!doctype html><html lang="ko"><head><title>공통 아이콘 합성 검사</title>' + styles.map(href => '<link rel="stylesheet" href="' + href + '">').join('')
+      body: '<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>공통 아이콘 합성 검사</title>' + styles.map(href => '<link rel="stylesheet" href="' + href + '">').join('')
         + '</head><body><div id="root"></div></body></html>' }));
-    await page.goto(base + '/__qa/haru-system-icons'); await page.addScriptTag({ content: bundle.outputFiles[0].text });
+    await page.goto(base + '/__qa/haru-system-icons');
+    report.syntheticCharsets.components = await page.evaluate(() => document.characterSet);
+    assert.equal(report.syntheticCharsets.components, 'UTF-8', 'The synthetic component document uses UTF-8');
+    await page.addScriptTag({ content: bundle.outputFiles[0].text });
     const messageClose = button('안내 닫기'); await messageClose.waitFor(); await messageClose.focus();
     await qa.inspect('transient-message', { ...compactMatrix, icons: [[svg(messageClose), 20, 'P096 transient close']] });
     await qa.click(messageClose, 'transient-close');
