@@ -3586,6 +3586,18 @@ p {
   margin: 0 0 var(--space-4);
   background: var(--surface);
   font-size: .75rem;
+  grid-template-columns: repeat(auto-fit,minmax(min(100%,7.5rem),1fr));
+}
+.phase-strip li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: 0;
+  white-space: nowrap;
+}
+.phase-strip li > svg {
+  flex: 0 0 auto;
 }
 .phase-strip li[aria-current=step] {
   background: var(--action);
@@ -3636,6 +3648,14 @@ label {
   accent-color: var(--ink);
   width: 20px;
   height: 20px;
+}
+.session-panel .spoken-check-label > svg {
+  flex: 0 0 auto;
+}
+.session-panel .spoken-check-label > span {
+  min-width: 0;
+  margin-left: 0;
+  font-size: inherit;
 }
 .example-box {
   background: var(--surface);

@@ -1,5 +1,6 @@
 "use client";
 import { Progress as ProgressBar } from "@/components/ui/progress";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import { KIND_TEXT, reviewBatchEnd } from "@/lib/learning";
 import { LearnStage } from "./study/learn-stage";
 import { RecallStage } from "./study/recall-stage";
@@ -165,12 +166,12 @@ export function StudySession(props: StudySessionProps) {
       />
       {s.kind === "daily" && (
         <ol className="phase-strip" aria-label="학습 순서">
-          {[
-            ["warmup", "기억 깨우기"],
-            ["learn", "단어 익히기"],
-            ["en", "스스로 떠올리기"],
-            ["sentence", "문장 만들기"],
-          ].map(([stage, label]) => (
+          {([
+            ["warmup", "기억 깨우기", "memory-warmup"],
+            ["learn", "단어 익히기", "book-open"],
+            ["en", "스스로 떠올리기", "recall-card"],
+            ["sentence", "문장 만들기", "sentence-write"],
+          ] as const).map(([stage, label, icon]) => (
             <li
               key={stage}
               aria-current={
@@ -179,7 +180,8 @@ export function StudySession(props: StudySessionProps) {
                   : undefined
               }
             >
-              {label}
+              <HaruIcon name={icon} size={16} />
+              <span>{label}</span>
             </li>
           ))}
         </ol>

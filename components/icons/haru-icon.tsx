@@ -1,7 +1,7 @@
 import type { SVGProps } from "react"
 
 // The 16px and 24px artwork is copied from the delivered haru-icons-v1 SVGs.
-// Keep this subset limited to the nineteen icons used by P001–P017.
+// Keep this subset limited to the twenty-five icons used by P001–P029.
 const iconArtwork = {
   brand: {
     compact: (
@@ -235,6 +235,62 @@ const iconArtwork = {
         <path d="M12 7v6" />
         <circle cx="12" cy="17" r="1" fill="currentColor" stroke="none" />
       </>
+    ),
+  },
+  "memory-warmup": {
+    compact: (
+      <path d="M5.5 12c0-1.5-2-2.2-2-4.5a4.5 4.5 0 0 1 9 0c0 2.3-2 3-2 4.5ZM6 14.5h4" />
+    ),
+    regular: (
+      <path d="M8.5 18c0-2.2-2.5-3.3-2.5-6a6 6 0 0 1 12 0c0 2.7-2.5 3.8-2.5 6M8.5 18h7M9 21h6M12 2v1m-8.5 2.5 1 1m16-1-1 1" />
+    ),
+  },
+  "recall-card": {
+    compact: (
+      <path d="M7 6H3.5A1.5 1.5 0 0 0 2 7.5v5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V10M14 7.5A4.5 4.5 0 0 0 9.5 3h-1m1.5-1.5L8.5 3 10 4.5" />
+    ),
+    regular: (
+      <path d="M11 7H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5M21 10a6 6 0 0 0-6-6h-1m2-2-2 2 2 2" />
+    ),
+  },
+  "sentence-write": {
+    compact: (
+      <path d="M2 4h7M2 7.5h4M7 14l.8-2.8 4.9-4.9a1.4 1.4 0 0 1 2 2l-4.9 4.9L7 14Zm4.5-6.5 2 2" />
+    ),
+    regular: (
+      <path d="M3 6h9M3 11h6m1 10 1-4 8-8a2.12 2.12 0 0 1 3 3l-8 8-4 1Zm7-10 3 3m-9 3 3 3" />
+    ),
+  },
+  eye: {
+    compact: (
+      <g transform="scale(0.6666666667)" strokeWidth="2.25">
+        <path d="M2 12c2.6-4.4 5.9-6.5 10-6.5s7.4 2.1 10 6.5c-2.6 4.4-5.9 6.5-10 6.5S4.6 16.4 2 12Z" />
+        <circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none" />
+      </g>
+    ),
+    regular: (
+      <>
+        <path d="M2 12c2.6-4.4 5.9-6.5 10-6.5s7.4 2.1 10 6.5c-2.6 4.4-5.9 6.5-10 6.5S4.6 16.4 2 12Z" />
+        <circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none" />
+      </>
+    ),
+  },
+  pencil: {
+    compact: (
+      <g transform="scale(0.6666666667)" strokeWidth="2.25">
+        <path d="m4 16-1 5 5-1L21 7a2.12 2.12 0 0 0-3-3L4 16Zm11.5-9.5 3 3M4 16l4 4" />
+      </g>
+    ),
+    regular: (
+      <path d="m4 16-1 5 5-1L21 7a2.12 2.12 0 0 0-3-3L4 16Zm11.5-9.5 3 3M4 16l4 4" />
+    ),
+  },
+  "spoken-check": {
+    compact: (
+      <path d="M11 7.5c0-2.5-2.1-4-4.5-4S2 5.2 2 7.5c0 1.2.4 2.1 1.1 2.9L2 14l3.5-1.9c.3.1.7.1 1 .1 2.5 0 4.5-1.8 4.5-4.7ZM13.1 4.5l1.4-.75M13.5 7.5h1m-1.4 3 1.4.75" />
+    ),
+    regular: (
+      <path d="M17 11.5C17 7.8 13.9 5 10 5S3 7.8 3 11.5c0 1.7.6 3.1 1.7 4.3L3 21l5-3c.7.1 1.3.2 2 .2 3.9 0 7-2.8 7-6.7ZM19 6l2-1M20 11h2m-3 5 2 1" />
     ),
   },
 }

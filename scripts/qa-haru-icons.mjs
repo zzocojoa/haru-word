@@ -18,6 +18,9 @@ const cases = [
   'daily-topup-qa.cjs',
   'repeat-learning-qa.cjs',
   'haru-icons-qa.cjs',
+  'workflow-qa.cjs',
+  'study-layout-qa.cjs',
+  'haru-session-icons-qa.cjs',
 ];
 const engine = process.env.QA_BROWSER || 'chromium';
 
@@ -64,7 +67,8 @@ const engine = process.env.QA_BROWSER || 'chromium';
       await waitForWorker(worker.base, 30_000, signal);
       const started = Date.now();
       const result = await runCase([path.join('tests', name)], {
-        env, signal, timeoutMs: 180_000, logPath: path.join(logs, name + '.log'),
+        env, signal, timeoutMs: name === 'haru-session-icons-qa.cjs' ? 300_000 : 180_000,
+        logPath: path.join(logs, name + '.log'),
       });
       report.results.push({ name, ...result, durationMs: Date.now() - started });
       console.log((result.code === 0 && !result.timedOut ? 'PASS ' : 'FAIL ') + name);

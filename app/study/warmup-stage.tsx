@@ -1,7 +1,7 @@
 "use client";
 import { PartOfSpeechLabel } from '../grammar-terms';
 import { canGradeIndependently } from "@/lib/study-availability";
-import { Eye } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import type { StudySessionController } from "./use-study-session-controller";
 type WarmupStageProps = Pick<
   StudySessionController,
@@ -72,7 +72,7 @@ export function WarmupStage({
           disabled={busy}
           onClick={revealWarmup}
         >
-          뜻 확인 <Eye size={17} />
+          뜻 확인 <HaruIcon name="eye" size={17} />
         </button>
       )}
     </>
