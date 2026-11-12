@@ -8,7 +8,18 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
 (async () => {
   const qa = await createIconQa('haru-system-icons');
   const { page, context, base, report } = qa;
-  let failure, releaseScripts;
+  let failure, releaseScripts, startupGateActive = false;
+  const startupRouteErrors = [];
+  const closeStartupGate = async () => {
+    if (!startupGateActive) return;
+    releaseScripts();
+    // Drain resumed handlers before removing interception or closing the context.
+    try {
+      await page.unrouteAll({ behavior: 'wait' });
+      if (startupRouteErrors.length) throw new AggregateError(startupRouteErrors, 'Startup request handling failed');
+    }
+    finally { startupGateActive = false; releaseScripts = undefined; }
+  };
   const svg = locator => locator.locator('svg');
   const button = name => page.getByRole('button', { name, exact: true });
   const settingsTrigger = button('학습 설정');
@@ -61,16 +72,28 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     });
     // Observe the actual first HTML while its application scripts are pending.
     const scriptsReady = new Promise(resolve => { releaseScripts = resolve; });
+    report.startupScriptsHeld = 0;
     const scriptGate = async route => {
-      if (route.request().resourceType() === 'script') await scriptsReady;
-      await route.continue();
+      try {
+        if (route.request().resourceType() === 'script') {
+          report.startupScriptsHeld++;
+          await scriptsReady;
+        }
+        await route.continue();
+      } catch (error) {
+        // Route callbacks run outside the test promise. Re-throw after draining
+        // so qa.finish records the failure instead of losing the whole report.
+        startupRouteErrors.push(error);
+        report.startupRouteErrors = startupRouteErrors.map(item => item.stack || item.message);
+      }
     };
+    startupGateActive = true;
     await page.route('**/*', scriptGate);
     await page.goto(base, { waitUntil: 'commit' });
     await page.locator('.app-splash').waitFor();
     await qa.inspect('startup', { icons: [[page.locator('.app-splash-brand > svg'), 72, 'P104 startup brand']] });
-    releaseScripts(); releaseScripts = null;
-    await page.unroute('**/*', scriptGate);
+    assert.ok(report.startupScriptsHeld > 0, 'Startup is inspected while real application scripts are pending');
+    await closeStartupGate();
     await qa.saved();
     const links = await page.locator('head link[rel="icon"],head link[rel="apple-touch-icon"],head link[rel="apple-touch-startup-image"]').evaluateAll(nodes =>
       nodes.map(node => ({ rel: node.rel, href: new URL(node.href).pathname, sizes: node.getAttribute('sizes') })));
@@ -276,6 +299,12 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     assert.deepEqual((await qa.getState()).state.sessions[history.id], seeded.state.sessions[history.id]);
     assert.equal(report.requests.filter(request => request.method === 'POST' && /\/api\/(sentence|grammar)-feedback$/.test(request.path)).length, 0);
   } catch (error) { failure = error; }
-  finally { releaseScripts?.(); }
+  finally {
+    try { await closeStartupGate(); }
+    catch (error) {
+      report.startupCleanupError = error.stack || error.message;
+      failure ||= error;
+    }
+  }
   await qa.finish(failure);
 })().catch(error => { console.error(error); process.exitCode = 1; });

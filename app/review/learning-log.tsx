@@ -260,7 +260,7 @@ const SessionLogTable = memo(function SessionLogTable({
   words: Word[];
 }) {
   return (
-    <Table className="log-table">
+    <Table className="log-table" aria-label="단어별 학습 기록">
       <TableHeader>
         <TableRow>
           <TableHead>단어·학습한 뜻</TableHead>

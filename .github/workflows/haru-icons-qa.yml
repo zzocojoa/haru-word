@@ -9,6 +9,7 @@ on:
       - 'components/ui/select.tsx'
       - 'components/ui/dropdown-menu.tsx'
       - 'components/ui/checkbox.tsx'
+      - 'components/ui/table.tsx'
       - 'app/*.tsx'
       - 'app/*.css'
       - 'app/learning/**'

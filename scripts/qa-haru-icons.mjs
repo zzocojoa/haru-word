@@ -76,6 +76,9 @@ const engine = process.env.QA_BROWSER || 'chromium';
       });
       report.results.push({ name, ...result, durationMs: Date.now() - started });
       console.log((result.code === 0 && !result.timedOut ? 'PASS ' : 'FAIL ') + name);
+      if (result.code !== 0 || result.timedOut) {
+        console.error(fs.readFileSync(path.join(logs, name + '.log'), 'utf8').slice(-6000));
+      }
       writeReport();
       if (result.interrupted) break;
     }

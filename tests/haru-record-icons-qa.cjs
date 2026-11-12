@@ -133,8 +133,38 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     await qa.inspect('record-statuses-desktop', { widths: [768, 1440], icons: [
       [button('기록 관리').locator('svg'), 18, 'P063 record menu'],
     ] });
+    // Exercise the real overflowing desktop table through native keyboard input.
+    await page.setViewportSize({ width: 768, height: 844 });
+    await qa.settle();
+    const recordScroller = page.getByRole('region', { name: '단어별 학습 기록 가로 스크롤', exact: true });
+    const recordTable = recordScroller.getByRole('table', { name: '단어별 학습 기록', exact: true });
+    assert.equal(await recordTable.getByRole('columnheader').count(), 6, 'The native table keeps all six column headers');
+    assert.equal(await recordScroller.getAttribute('tabindex'), '0');
+    assert.equal(await recordScroller.evaluate(element => element.scrollWidth > element.clientWidth + 1), true,
+      'The 768px fixture exercises actual horizontal overflow');
+    await recordScroller.evaluate(element => { element.scrollLeft = 0; });
+    await page.locator('.journal-session-actions').getByRole('button', { name: '단어 다시 보기', exact: true }).focus();
+    await page.keyboard.press('Tab');
+    assert.equal(await recordScroller.evaluate(element => document.activeElement === element), true,
+      'Tab reaches the named scroll region from the preceding action');
+    assert.equal(await recordScroller.evaluate(element => element.matches(':focus-visible')), true,
+      'Keyboard focus remains visibly indicated');
+    await page.keyboard.press('ArrowRight');
+    await page.waitForFunction(() => document.querySelector('.journal-desktop [data-slot="table-container"]')?.scrollLeft > 0);
+    const rightOffset = await recordScroller.evaluate(element => element.scrollLeft);
+    await qa.capture('record-table-keyboard-768.png', false);
+    await page.keyboard.press('ArrowLeft');
+    await page.waitForFunction(offset => document.querySelector('.journal-desktop [data-slot="table-container"]')?.scrollLeft < offset, rightOffset);
+    assert.equal(await page.evaluate(() => window.scrollX), 0, 'Arrow keys scroll the table instead of the page');
+    await page.keyboard.press('Tab');
+    assert.equal(await recordScroller.evaluate(element => document.activeElement === element), false,
+      'Tab leaves the scroll region without trapping keyboard focus');
+    await recordScroller.evaluate(element => { element.scrollLeft = 0; });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await qa.settle();
     await assertUnchanged(preserved, 'Expanding records and inspecting every badge does not grade or save them');
     report.checks.push('P061/P062: empty state and all four record labels preserve the original outcome criteria; 14px mobile badges and desktop records pass layout/a11y matrices');
+    report.checks.push('The named record-table region is reachable by Tab, scrolls with native left/right arrow keys, preserves table/header semantics and saved records, and lets Tab continue normally');
 
     await openMenu();
     const menuIcons = [
