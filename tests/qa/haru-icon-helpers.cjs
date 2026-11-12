@@ -5,7 +5,7 @@ const path = require('node:path');
 const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker, axePath } = require('./runtime.cjs');
 const { validateEnvironment, requireDisabledAiStatus } = require('./preflight.cjs');
 // Match the current app reader so comparisons include modern grammar and feedback.
-const stateHeaders = { 'X-Study-Grammar': '5', 'X-Study-Feedback-Structure': '1', 'X-Study-Sense-Keys': '1' };
+const stateHeaders = { 'X-Study-Grammar': '5', 'X-Study-Feedback-Structure': '1', 'X-Study-Sense-Keys': '1', 'X-Study-AI-Contract': '4' };
 
 async function createIconQa(name) {
   validateEnvironment();

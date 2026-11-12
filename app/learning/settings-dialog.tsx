@@ -1,5 +1,5 @@
 "use client";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { HaruIcon } from "@/components/icons/haru-icon";
 import {
   DialogDescription,
@@ -22,6 +22,7 @@ import { HelpDetails } from "../study-ui";
 import { DiagnosticDownload } from "./diagnostic-download";
 import { AiModelSettings } from './ai-model-settings';
 import { LocalDraftSettings } from '../local-draft-settings';
+import { useViewRestoration } from '../use-view-restoration';
 type SettingsDialogProps = Pick<
   LearningViewProps,
   | "settings"
@@ -44,6 +45,60 @@ export function SettingsDialog({
   beginAssessment,
   availability,
 }: SettingsDialogProps) {
+  const levelTrigger = useRef<HTMLButtonElement>(null);
+  const aiModelTrigger = useRef<HTMLButtonElement>(null);
+  const goalTrigger = useRef<HTMLButtonElement>(null);
+  const reviewDayTrigger = useRef<HTMLButtonElement>(null);
+  const pendingSelectFocus = useRef<{ trigger: HTMLButtonElement; dialog: HTMLElement } | null>(null);
+  const restoration = useViewRestoration();
+
+  useEffect(() => {
+    if (!settings) {
+      pendingSelectFocus.current = null;
+      return;
+    }
+    const cancelOnFocus = (event: FocusEvent) => {
+      const pending = pendingSelectFocus.current;
+      if (pending && event.target !== pending.dialog && event.target !== pending.trigger && event.target !== document.body) {
+        pendingSelectFocus.current = null;
+      }
+    };
+    const cancelOnPointer = () => { pendingSelectFocus.current = null; };
+    document.addEventListener('focusin', cancelOnFocus);
+    document.addEventListener('pointerdown', cancelOnPointer, true);
+    return () => {
+      pendingSelectFocus.current = null;
+      document.removeEventListener('focusin', cancelOnFocus);
+      document.removeEventListener('pointerdown', cancelOnPointer, true);
+    };
+  }, [settings]);
+
+  useEffect(() => {
+    if (!settings || busy) return;
+    const pending = pendingSelectFocus.current;
+    if (!pending) return;
+    return restoration.schedule('destination', () => {
+      if (pendingSelectFocus.current !== pending) return;
+      pendingSelectFocus.current = null;
+      if (!pending.trigger.isConnected || pending.trigger.disabled || pending.dialog.getAttribute('data-state') !== 'open') return;
+      const active = document.activeElement;
+      if (!active || active === document.body || active === pending.dialog) {
+        pending.trigger.focus({ preventScroll: true });
+      }
+    });
+  }, [settings, busy, restoration]);
+
+  function deferSelectFocus(event: Event, trigger: HTMLButtonElement | null) {
+    if (!trigger?.disabled) return;
+    // Saving disables the trigger before Radix can return focus to it.
+    event.preventDefault();
+    const dialog = trigger.closest<HTMLElement>('[data-slot="dialog-content"]');
+    if (!trigger.isConnected || dialog?.getAttribute('data-state') !== 'open') return;
+    const active = document.activeElement;
+    if (active && active !== document.body && active !== dialog && active !== trigger) return;
+    pendingSelectFocus.current = { trigger, dialog };
+  }
+
   return (
     <Dialog navigationKey="app.settings" open={settings} onOpenChange={setSettings}>
       <DialogContent className="settings-dialog framed-dialog">
@@ -55,7 +110,13 @@ export function SettingsDialog({
         </DialogHeader>
         <div className="dialog-scroll">
         {availability}
-        {settings && <AiModelSettings state={state} busy={busy} save={save} />}
+        {settings && <AiModelSettings
+          state={state}
+          busy={busy}
+          save={save}
+          triggerRef={aiModelTrigger}
+          onCloseAutoFocus={(event) => deferSelectFocus(event, aiModelTrigger.current)}
+        />}
         {settings && <LocalDraftSettings busy={busy} />}
         <label>
           <span className="settings-label"><HaruIcon name="learning-level" size={18} />학습 수준</span>
@@ -63,6 +124,8 @@ export function SettingsDialog({
             value={state.settings.level}
             onChange={changeLevel}
             disabled={busy}
+            triggerRef={levelTrigger}
+            onCloseAutoFocus={(event) => deferSelectFocus(event, levelTrigger.current)}
           />
         </label>
         <label>
@@ -72,10 +135,10 @@ export function SettingsDialog({
             disabled={busy}
             onValueChange={(v) => changeGoal(Number(v))}
           >
-            <SelectTrigger aria-label="하루 목표">
+            <SelectTrigger ref={goalTrigger} aria-label="하루 목표">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent onCloseAutoFocus={(event) => deferSelectFocus(event, goalTrigger.current)}>
               {Array.from({ length: MAX_DAILY_GOAL }, (_, i) => i + 1).map(
                 (n) => (
                   <SelectItem key={n} value={String(n)}>
@@ -116,10 +179,10 @@ export function SettingsDialog({
               })
             }
           >
-            <SelectTrigger aria-label="주간 점검 요일">
+            <SelectTrigger ref={reviewDayTrigger} aria-label="주간 점검 요일">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent onCloseAutoFocus={(event) => deferSelectFocus(event, reviewDayTrigger.current)}>
               {["일", "월", "화", "수", "목", "금", "토"].map((day, i) => (
                 <SelectItem value={String(i)} key={day}>
                   {day}요일

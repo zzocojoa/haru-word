@@ -1,12 +1,12 @@
 "use client";
 import { HaruIcon } from "@/components/icons/haru-icon";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentProps, type Ref } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { dictionaryUrl,koreanDictionaryUrl } from "@/lib/catalog-basics";
 import { LEVELS, type Level } from "@/lib/learning";
 import { speakOnDevice, type DeviceSpeechState } from "@/lib/device-speech";
 import { HelpDetails } from './study-ui';
-export function LevelSelect({value,onChange,disabled=false}:{value:Level;onChange:(v:Level)=>void;disabled?:boolean}){return <Select value={value} onValueChange={v=>onChange(v as Level)} disabled={disabled}><SelectTrigger aria-label="학습 수준" className="level-select"><SelectValue/></SelectTrigger><SelectContent>{LEVELS.map(l=><SelectItem key={l} value={l}>{l} · {l==="A1"?"시작":l==="A2"?"기초":l==="B1"?"중급":"중상급"}</SelectItem>)}</SelectContent></Select>}
+export function LevelSelect({value,onChange,disabled=false,triggerRef,onCloseAutoFocus}:{value:Level;onChange:(v:Level)=>void;disabled?:boolean;triggerRef?:Ref<HTMLButtonElement>;onCloseAutoFocus?:ComponentProps<typeof SelectContent>['onCloseAutoFocus']}){return <Select value={value} onValueChange={v=>onChange(v as Level)} disabled={disabled}><SelectTrigger ref={triggerRef} aria-label="학습 수준" className="level-select"><SelectValue/></SelectTrigger><SelectContent onCloseAutoFocus={onCloseAutoFocus}>{LEVELS.map(l=><SelectItem key={l} value={l}>{l} · {l==="A1"?"시작":l==="A2"?"기초":l==="B1"?"중급":"중상급"}</SelectItem>)}</SelectContent></Select>}
 export function Speak({text,dictionaryHref,showHelpInitially=false}:{text:string;dictionaryHref?:string;showHelpInitially?:boolean}) {
   const [state,setState] = useState<DeviceSpeechState & {text:string}>({status:'idle',message:'',text});
   const [attemptedText,setAttemptedText] = useState<string | undefined>(undefined);

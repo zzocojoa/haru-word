@@ -3,8 +3,11 @@ const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base,out='outputs/daily-topup';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-const checks=[],errors=[],saveEvents=[];
+const checks=[],errors=[],saveEvents=[],lifecycleEvents=[];
+const crashedPages=new WeakSet(),pageIds=new WeakMap();let observedPages=0;
 function observe(page){
+ const pageId=++observedPages;pageIds.set(page,pageId);
+ page.on('crash',()=>{crashedPages.add(page);lifecycleEvents.push({type:'page-crash',pageId,url:page.url(),at:new Date().toISOString()})});
  const starts=new WeakMap();
  page.on('request',request=>{if(new URL(request.url()).pathname==='/api/state')starts.set(request,performance.now())});
  page.on('requestfinished',async request=>{if(!starts.has(request))return;const response=await request.response();saveEvents.push({method:request.method(),status:response?.status(),durationMs:Math.round(performance.now()-starts.get(request))})});
@@ -12,6 +15,30 @@ function observe(page){
  page.on('pageerror',error=>errors.push(error.message));
 }
 (async()=>{const browser=await launchBrowser({headless:true});let p;
+ browser.on('disconnected',()=>lifecycleEvents.push({type:'browser-disconnected',at:new Date().toISOString()}));
+ async function captureFailure(name,error,screenshot=false){
+  const report={checks,saveEvents,browserErrors:errors,lifecycleEvents,error:String(error),stack:error?.stack||null,
+   pageId:p?pageIds.get(p):null,pageUrl:p?p.url():null,pageClosed:p?p.isClosed():null,browserConnected:browser.isConnected(),
+   status:null,alerts:[],stage:[],answer:null,hint:null,diagnosticErrors:[]};
+  const write=()=>{try{fs.writeFileSync(out+'/'+name+'.json',JSON.stringify(report,null,2))}catch(writeError){console.error('Could not write failure diagnostics:',writeError)}};
+  // Preserve the original failure before consulting a possibly crashed target.
+  write();
+  const readable=()=>p&&!p.isClosed()&&!crashedPages.has(p)&&browser.isConnected();
+  const read=async(field,operation)=>{try{report[field]=await operation()}catch(readError){report.diagnosticErrors.push({field,error:String(readError)})}};
+  if(readable()){
+   // These bounds apply only to diagnostics, not to the test's actions or waits.
+   await read('status',()=>p.locator('.save-state').innerText({timeout:1000}));
+   await read('alerts',()=>p.getByRole('alert').allTextContents());
+   await read('stage',()=>p.locator('.session-step-row').allTextContents());
+   await read('answer',()=>p.locator('#recall-answer').inputValue({timeout:1000}));
+   await read('hint',()=>p.getByText('답을 먼저 봐서 ‘도움 필요’로 기록해요.').count());
+  }else report.domDiagnosticsSkipped='Page unavailable or crashed';
+  if(screenshot&&readable()){
+   try{await p.screenshot({path:out+'/'+name+'.png',timeout:2000})}
+   catch(captureError){report.diagnosticErrors.push({field:'screenshot',error:String(captureError)})}
+  }
+  report.pageClosed=p?p.isClosed():null;report.browserConnected=browser.isConnected();write();
+ }
  try{
   const headers={'oai-authenticated-user-id':require('./qa/runtime.cjs').account('topup_'),'oai-authenticated-user-email':'topup@example.test'};
   const ctx=await browser.newContext({extraHTTPHeaders:headers,viewport:{width:390,height:844}});
@@ -24,7 +51,7 @@ function observe(page){
   for(const id of ids)progress[id]={meaning:content[id].meaning,familiarity:'known',en:'independent',ko:'independent',sentenceStatus:'written',sentence:'Original sentence.',notes:'Original note.',lastStudied:date,studyDates:[date]};
   const settings={...data.state.settings,activeSessionId:sid,assessments:{A1:{ids:sample,index:20,marks:Object.fromEntries(sample.map(id=>[id,'uncertain'])),completed:true}}};
   assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:data.revision,settings,progress,sessions:{[sid]:first}}})).status(),200);
-  p=await ctx.newPage();observe(p);const saved=async()=>{try{await p.getByText('저장됨',{exact:true}).waitFor()}catch(error){fs.writeFileSync(out+'/save-wait-failure.json',JSON.stringify({saveEvents,browserErrors:errors,status:await p.locator('.save-state').innerText(),alerts:await p.getByRole('alert').allTextContents(),stage:await p.locator('.session-step-row').allTextContents()},null,2));throw error}};
+  p=await ctx.newPage();observe(p);const saved=async()=>{try{await p.getByText('저장됨',{exact:true}).waitFor()}catch(error){await captureFailure('save-wait-failure',error);throw error}};
   async function goal(value){await p.getByRole('button',{name:'학습 설정',exact:true}).click();await p.getByRole('combobox',{name:'하루 목표',exact:true}).click();await p.getByRole('option',{name:value+'개',exact:true}).click();await saved();await p.getByRole('button',{name:'닫기',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});}
   await p.goto(base);await saved();await goal(10);
   await p.getByRole('button',{name:'추가 7개 학습하기',exact:true}).waitFor();assert.equal((await p.locator('.daily-metrics b').first().innerText()).replace(/\s/g,''),'10단어');assert.equal(await p.locator('.today-words>.today-word-row').count(),3);
@@ -72,7 +99,6 @@ function observe(page){
   assert.deepEqual(errors,[]);const result={passed:true,checks,browserErrors:errors,saveEvents};fs.writeFileSync(out+'/validation.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
  }catch(error){
   // Capture failures outside saved(), including a disabled grading button.
-  fs.writeFileSync(out+'/interaction-failure.json',JSON.stringify({checks,saveEvents,browserErrors:errors,error:String(error),status:p?await p.locator('.save-state').innerText():null,alerts:p?await p.getByRole('alert').allTextContents():[],stage:p?await p.locator('.session-step-row').allTextContents():[],answer:p?await p.locator('#recall-answer').inputValue().catch(()=>null):null,hint:p?await p.getByText('답을 먼저 봐서 ‘도움 필요’로 기록해요.').count():null},null,2));
-  if(p)await p.screenshot({path:out+'/interaction-failure.png'});throw error;
+  await captureFailure('interaction-failure',error,true);throw error;
  }finally{await closeBrowser(browser)}
 })().catch(e=>{console.error(e);process.exit(1)});

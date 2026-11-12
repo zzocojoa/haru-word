@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { build } = require('esbuild');
 const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
+const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
 
 (async () => {
   const qa = await createIconQa('haru-system-icons');
@@ -69,7 +70,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     });
     const history = session(previous, true), lesson = session(date, false);
     const seeded = await qa.seed({
-      settings: { ...initial.state.settings, dailyGoal: 3, activeSessionId: lesson.id },
+      settings: { ...initial.state.settings, level: 'A1', dailyGoal: 3, activeSessionId: lesson.id },
       progress: { [word.id]: { meaning: content[word.id].meaning, familiarity: 'known',
         en: 'independent', ko: 'help', sentenceStatus: 'written', lastStudied: previous, studyDates: [previous] } },
       sessions: { [history.id]: history, [lesson.id]: lesson },
@@ -156,7 +157,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     await page.keyboard.press('Escape');
     assert.equal(await goal.evaluate(element => element === document.activeElement), true);
     assert.deepEqual(await qa.getState(), beforeMenu, 'opening and cancelling selection is read-only');
-    const waitForGoalOptionFocus = async (name, selected) => {
+    const waitForOptionFocus = async (name, selected) => {
       const option = page.getByRole('option', { name, exact: true });
       await option.waitFor();
       const element = await option.elementHandle();
@@ -166,28 +167,73 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
           && element.getAttribute('aria-selected') === String(selected), { element, selected });
       } finally { await element.dispose(); }
     };
+    const waitForTriggerFocus = async name => {
+      const evidence = { name };
+      (report.triggerFocus ??= []).push(evidence);
+      try {
+        await page.waitForFunction(name => {
+          const active = document.activeElement;
+          return active?.closest('.settings-dialog') && active.getAttribute('aria-label') === name
+            && active.getAttribute('role') === 'combobox' && !active.disabled;
+        }, name);
+        evidence.returned = true;
+      } finally {
+        try {
+          evidence.finalState = await page.evaluate(name => {
+            const target = [...document.querySelectorAll('.settings-dialog [role="combobox"]')].find(element => element.getAttribute('aria-label') === name);
+            const active = document.activeElement;
+            return { targetPresent: !!target, targetDisabled: target?.disabled, targetFocused: !!target && target === active,
+              activeTag: active?.tagName, activeRole: active?.getAttribute('role'), activeLabel: active?.getAttribute('aria-label') };
+          }, name);
+        } catch (error) { evidence.snapshotError = error.message; }
+      }
+    };
+    const chooseOption = async (control, currentName, nextName) => {
+      await control.focus(); await control.press('Space'); await page.getByRole('listbox').waitFor();
+      await waitForOptionFocus(currentName, true);
+      await page.getByRole('option', { name: nextName, exact: true }).focus();
+      await waitForOptionFocus(nextName, false);
+      await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
+    };
     // Radix defers navigation focus with setTimeout. Observe each real keyboard
     // destination before the next key so Enter cannot select the previous item.
     await changeAndSave(async () => {
       await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
-      await waitForGoalOptionFocus('3개 · 기본 목표', true);
-      await page.keyboard.press('Home'); await waitForGoalOptionFocus('1개', false);
-      await page.keyboard.press('ArrowDown'); await waitForGoalOptionFocus('2개', false);
+      await waitForOptionFocus('3개 · 기본 목표', true);
+      await page.keyboard.press('Home'); await waitForOptionFocus('1개', false);
+      await page.keyboard.press('ArrowDown'); await waitForOptionFocus('2개', false);
       await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
     });
     assert.equal((await goal.innerText()).trim(), '2개');
     assert.equal((await qa.getState()).state.settings.dailyGoal, 2);
+    await waitForTriggerFocus('하루 목표');
     await changeAndSave(async () => {
       await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
-      await waitForGoalOptionFocus('2개', true);
-      await page.keyboard.press('ArrowDown'); await waitForGoalOptionFocus('3개 · 기본 목표', false);
+      await waitForOptionFocus('2개', true);
+      await page.keyboard.press('ArrowDown'); await waitForOptionFocus('3개 · 기본 목표', false);
       await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
     });
     assert.equal((await goal.innerText()).trim(), '3개 · 기본 목표');
     assert.equal((await qa.getState()).state.settings.dailyGoal, 3);
     // Select restores focus asynchronously. Observe that return before moving
     // to the next native control, so Space cannot be stolen by closing content.
-    await page.waitForFunction(() => document.activeElement?.getAttribute('aria-label') === '하루 목표');
+    const goalFocusState = () => goal.evaluate(element => {
+      const active = document.activeElement;
+      return {
+        goal: { focused: element === active, disabled: element.disabled, expanded: element.getAttribute('aria-expanded'),
+          state: element.getAttribute('data-state'), ariaLabel: element.getAttribute('aria-label') },
+        active: { tag: active?.tagName, id: active?.id, role: active?.getAttribute('role'),
+          ariaLabel: active?.getAttribute('aria-label'), slot: active?.getAttribute('data-slot') },
+        visibleListboxes: [...document.querySelectorAll('[role="listbox"]')].filter(node => node.getClientRects().length).length,
+      };
+    });
+    report.goalFocusReturn = { before: await goalFocusState() };
+    try {
+      await page.waitForFunction(() => document.activeElement?.getAttribute('aria-label') === '하루 목표');
+    } finally {
+      try { report.goalFocusReturn.after = await goalFocusState(); }
+      catch (error) { report.goalFocusReturn.snapshotError = error.message; }
+    }
     await qa.settle();
     report.pauseCheckbox = [];
     for (const checked of [true, false]) {
@@ -234,6 +280,109 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
         catch (error) { attempt.snapshotError = error.message; }
       }
     }
+    // Exercise each settings-only focus return through the real save path.
+    // Model choices come from the local status response; no generation is requested.
+    const statusResponse = await context.request.get(base + '/api/sentence-feedback', { headers: currentAiHeaders });
+    assert.equal(statusResponse.status(), 200);
+    const modelStatus = await statusResponse.json();
+    assert.equal(modelStatus.enabled, false, 'Real AI generation remains disabled');
+    const originalModel = modelStatus.models.find(model => model.id === modelStatus.model && model.enabled);
+    const otherModel = modelStatus.models.find(model => model.enabled && model.id !== modelStatus.model);
+    assert.ok(originalModel && otherModel, 'The synthetic profile provides two enabled preference choices');
+    const originalDay = seeded.state.settings.reviewDay ?? 0;
+    const otherDay = (originalDay + 1) % 7;
+    const dayNames = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+    report.settingsFocus = [];
+    for (const { name, key, choices } of [
+      { name: '주간 점검 요일', key: 'reviewDay', choices: [{ value: otherDay, label: dayNames[otherDay] }, { value: originalDay, label: dayNames[originalDay] }] },
+      { name: '학습 수준', key: 'level', choices: [{ value: 'A2', label: 'A2 · 기초' }, { value: 'A1', label: 'A1 · 시작' }] },
+      { name: 'AI 모델', key: 'aiModelId', choices: [otherModel, originalModel].map(model => ({ value: model.id, label: model.label })) },
+    ]) {
+      const control = settings.getByRole('combobox', { name, exact: true });
+      for (const choice of choices) {
+        const currentName = (await control.innerText()).trim();
+        await changeAndSave(() => chooseOption(control, currentName, choice.label));
+        await waitForTriggerFocus(name);
+        assert.equal((await control.innerText()).trim(), choice.label);
+        assert.equal((await qa.getState()).state.settings[key], choice.value);
+        report.settingsFocus.push({ name, value: choice.value, returned: true });
+      }
+    }
+    assert.equal(report.requests.filter(request => request.method === 'POST' && /\/api\/(sentence|grammar)-feedback$/.test(request.path)).length, 0);
+
+    // Hold only the synthetic owner's intended PUT until a real focus/close
+    // action has occurred. Always release and drain the route, including failure.
+    const delayedGoalSave = async (value, label, leaveWhileSaving) => {
+      const before = await qa.getState();
+      const currentName = (await goal.innerText()).trim();
+      const nextName = value === 3 ? '3개 · 기본 목표' : value + '개';
+      const evidence = { label, value, held: 0, routeErrors: [] };
+      report.settingsFocus.push(evidence);
+      let release, markHeld, rejectHeld, heldTimer;
+      const gate = new Promise(resolve => { release = resolve; });
+      const held = new Promise((resolve, reject) => {
+        markHeld = resolve; rejectHeld = reject;
+      });
+      const matches = request => request.method() === 'PUT' && new URL(request.url()).pathname === '/api/state'
+        && request.postDataJSON()?.settings?.dailyGoal === value;
+      const intercept = async route => {
+        try {
+          if (matches(route.request())) {
+            evidence.held++;
+            evidence.requestRevision = route.request().postDataJSON().revision;
+            clearTimeout(heldTimer); markHeld();
+            await gate;
+          }
+          await route.continue();
+        } catch (error) { evidence.routeErrors.push(error.stack || error.message); }
+      };
+      try {
+        await page.route('**/api/state', intercept);
+        heldTimer = setTimeout(() => rejectHeld(new Error(label + ': intended PUT was not intercepted within 15000ms')), 15_000);
+        await Promise.all([held, chooseOption(goal, currentName, nextName)]);
+        await qa.settle();
+        assert.equal(evidence.held, 1, label + ' holds exactly one intended save');
+        assert.equal(await goal.isDisabled(), true, label + ' runs while the save disables its trigger');
+        assert.equal(await page.getByRole('listbox').isVisible(), false);
+        assert.deepEqual(await qa.getState(), before, label + ' has not reached the server before release');
+        const destination = await leaveWhileSaving();
+        assert.equal(await destination.evaluate(element => element === document.activeElement), true, label + ' explicitly moves focus');
+        evidence.movedWhileSaving = true;
+        await qa.capture('settings-' + label + '.png', false);
+        const response = page.waitForResponse(response => matches(response.request()));
+        release();
+        assert.equal((await response).status(), 200);
+        await qa.saved();
+        if (await settings.isVisible()) {
+          await page.waitForFunction(() => {
+            const element = document.querySelector('.settings-dialog [aria-label="하루 목표"]');
+            return element instanceof HTMLButtonElement && !element.disabled;
+          });
+        }
+        await qa.settle();
+        assert.equal(await destination.evaluate(element => element === document.activeElement), true, label + ' keeps user focus after the delayed save');
+        const after = await qa.getState();
+        assert.deepEqual(after.state, { ...before.state, settings: { ...before.state.settings, dailyGoal: value } }, label + ' changes only the intended preference');
+        assert.ok(after.revision > before.revision);
+        evidence.retainedAfterSave = true;
+        evidence.responseRevision = after.revision;
+      } finally {
+        clearTimeout(heldTimer); release();
+        // No other main-page route is installed at this point in the test.
+        await page.unrouteAll({ behavior: 'wait' });
+      }
+      assert.deepEqual(evidence.routeErrors, [], label + ' route handling');
+    };
+    await delayedGoalSave(2, 'save-focus-move', async () => {
+      const help = settings.locator('summary').filter({ hasText: '목표 수를 바꾸면?' });
+      await help.focus(); return help;
+    });
+    await delayedGoalSave(3, 'save-dialog-close', async () => {
+      await closeSettings(); return settingsTrigger;
+    });
+    assert.equal(await settings.isVisible(), false, 'A completed save does not reopen settings');
+    await openSettings();
+    report.checks.push('Settings goal/review-day/level/model preference saves return focus; delayed synthetic PUTs preserve explicit focus movement and dialog dismissal; effective preference values restored and no AI generation requested');
     for (const name of ['학습 수준', '주간 점검 요일']) {
       const control = settings.getByRole('combobox', { name, exact: true });
       await control.focus(); await control.press('Space'); await page.getByRole('listbox').waitFor();

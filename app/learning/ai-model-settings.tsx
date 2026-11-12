@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type ComponentProps, type Ref } from 'react';
 import { HaruIcon } from '@/components/icons/haru-icon';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AI_CONTRACT_HEADERS } from '@/lib/ai-contract';
@@ -10,7 +10,13 @@ import type { State } from '@/lib/learning';
 import { useAiRequests } from '../ai-request-context';
 import type { SaveLearningState } from './types';
 
-export function AiModelSettings({ state, busy, save }: { state: State; busy: boolean; save: SaveLearningState }) {
+export function AiModelSettings({ state, busy, save, triggerRef, onCloseAutoFocus }: {
+  state: State;
+  busy: boolean;
+  save: SaveLearningState;
+  triggerRef?: Ref<HTMLButtonElement>;
+  onCloseAutoFocus?: ComponentProps<typeof SelectContent>['onCloseAutoFocus'];
+}) {
   const { pendingCount } = useAiRequests();
   const [status, setStatus] = useState<AiModelStatus | null>(null);
   const [loading, setLoading] = useState(true);
@@ -46,8 +52,8 @@ export function AiModelSettings({ state, busy, save }: { state: State; busy: boo
             if (locked || typeof value !== 'string' || !available.some(model => model.id === value) || value === selected) return;
             void save({ ...state, settings: { ...state.settings, aiModelId: value } });
           }}>
-            <SelectTrigger aria-label="AI 모델"><SelectValue>{aiModel(selected)?.label ?? selected}</SelectValue></SelectTrigger>
-            <SelectContent>
+            <SelectTrigger ref={triggerRef} aria-label="AI 모델"><SelectValue>{aiModel(selected)?.label ?? selected}</SelectValue></SelectTrigger>
+            <SelectContent onCloseAutoFocus={onCloseAutoFocus}>
               {!status?.models.some(model => model.id === selected) && <SelectItem value={selected} disabled>{selected} · 이전 선택</SelectItem>}
               {status?.models.map(model => <SelectItem key={model.id} value={model.id} disabled={!model.enabled}>
                 {model.label}{!model.enabled ? ' · 사용 불가' : ''}
