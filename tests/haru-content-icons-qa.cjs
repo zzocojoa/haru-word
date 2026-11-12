@@ -128,6 +128,46 @@ const textGeometry = element => {
       [status.locator('svg'), 16, 'P035 cursor status'],
       [close.locator('svg'), 20, 'P036 close practice'],
     ];
+    const inspectImageNavigation = async (width, textSize, phase) => {
+      report.imageNavigationVisibility ??= [];
+      for (const navigationButton of [previous, number(), next]) {
+        const bounds = await navigationButton.boundingBox();
+        assert.ok(bounds && bounds.width >= 44 && bounds.height >= 44 && bounds.x >= 0 && bounds.y >= 0
+          && bounds.x + bounds.width <= width + 0.5 && bounds.y + bounds.height <= 844.5,
+        'Image navigation target remains complete: ' + JSON.stringify({ width, textSize, phase, bounds }));
+        const visibility = await navigationButton.evaluate(element => {
+          const target = element.getBoundingClientRect();
+          const ancestors = [];
+          for (let parent = element.parentElement; parent; parent = parent.parentElement) {
+            const style = getComputedStyle(parent);
+            const clipsX = /^(auto|scroll|hidden|clip)$/.test(style.overflowX);
+            const clipsY = /^(auto|scroll|hidden|clip)$/.test(style.overflowY);
+            if (!clipsX && !clipsY) continue;
+            const frame = parent.getBoundingClientRect();
+            // Overflow clips at the client padding box, inside borders and
+            // scrollbars; fitting the outer viewport alone does not prove visibility.
+            const left = frame.left + parent.clientLeft;
+            const top = frame.top + parent.clientTop;
+            const right = left + parent.clientWidth;
+            const bottom = top + parent.clientHeight;
+            ancestors.push({
+              tag: parent.tagName, className: parent.className,
+              controls: parent.classList.contains('image-practice-controls'),
+              clipsX, clipsY, clip: { left, top, right, bottom },
+              outsideX: clipsX && (target.left < left - 0.5 || target.right > right + 0.5),
+              outsideY: clipsY && (target.top < top - 0.5 || target.bottom > bottom + 0.5),
+            });
+          }
+          return { label: element.getAttribute('aria-label') || element.textContent.trim(), ancestors };
+        });
+        const evidence = { width, textSize, phase, bounds, ...visibility };
+        report.imageNavigationVisibility.push(evidence);
+        assert.ok(visibility.ancestors.some(ancestor => ancestor.controls),
+          'Image navigation is checked against its actual controls scroller');
+        assert.deepEqual(visibility.ancestors.filter(ancestor => ancestor.outsideX || ancestor.outsideY), [],
+          'Image navigation borders fit every ancestor clip box: ' + JSON.stringify(evidence));
+      }
+    };
     await number().waitFor();
     await page.waitForFunction(() => document.querySelector('.image-practice-picture')?.naturalWidth > 0);
     assert.equal(await previous.isDisabled(), true, 'The first card still disables Previous');
@@ -141,18 +181,15 @@ const textGeometry = element => {
       await qa.settle();
       assert.equal(await dialog.evaluate(element => element.scrollWidth > element.clientWidth + 1), false,
         'Image dialog has no horizontal clipping at ' + width + '/' + textSize);
-      for (const navigationButton of [previous, number(), next]) {
-        const bounds = await navigationButton.boundingBox();
-        assert.ok(bounds && bounds.width >= 44 && bounds.height >= 44 && bounds.x >= 0
-          && bounds.x + bounds.width <= width + 0.5 && bounds.y + bounds.height <= 844.5,
-        'Image navigation target remains complete: ' + JSON.stringify({ width, textSize, bounds }));
-      }
+      await inspectImageNavigation(width, textSize, 'initial');
       const hint = dialog.locator('.image-practice-hint');
       await hint.scrollIntoViewIfNeeded();
+      await qa.settle();
       assert.equal(await hint.evaluate(element => {
         const bounds = element.getBoundingClientRect(), body = element.closest('.dialog-scroll').getBoundingClientRect();
         return bounds.top >= body.top - 1 && bounds.bottom <= body.bottom + 1;
       }), true, 'The flip explanation can be scrolled fully into view');
+      await inspectImageNavigation(width, textSize, 'after-hint-scroll');
       if (width === 320) await qa.capture('image-controls-320-' + textSize + '.png', false);
     }
     await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
