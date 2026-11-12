@@ -13,7 +13,7 @@ const stageTitles = { warmup: '기억 깨우기', learn: '단어 익히기', en:
   if (!['chromium', 'webkit'].includes(engine)) throw Error('Unsupported QA browser engine');
   const out = path.resolve('outputs/haru-session-icons', engine);
   fs.mkdirSync(out, { recursive: true });
-  const report = { passed: false, engine, actualDevice: false, layouts: [], audits: [], screenshots: [], clicks: [], checks: [], errors: [], aiGenerationRequests: [] };
+  const report = { passed: false, engine, actualDevice: false, layouts: [], audits: [], screenshots: [], phaseViews: [], clicks: [], checks: [], errors: [], aiGenerationRequests: [] };
   let browser, page, failure;
   try {
     validateEnvironment();
@@ -117,6 +117,26 @@ const stageTitles = { warmup: '기억 깨우기', learn: '단어 익히기', en:
           assert.deepEqual(violations, [], name + ' accessibility');
           report.layouts.push({ name, stage, width, textSize, currentPhase: stage ? phaseLabels[currentPhase[stage]] : null });
           if (textSize === 100 || width === 320) await capture(name + '-' + width + '-' + textSize + '.png');
+          if (stage && width === 320 && textSize === 200) {
+            const strip = page.locator('.phase-strip'), firstPhase = strip.locator('li').first();
+            await strip.evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+            await settle();
+            const bounds = await strip.boundingBox(), header = await page.locator('.topbar').boundingBox();
+            const navigation = await page.getByRole('tablist', { name: '학습 화면', exact: true }).boundingBox();
+            assert.ok(bounds && header && navigation, name + ' phase strip and fixed chrome remain visible');
+            assert.ok(bounds.x >= -0.5 && bounds.x + bounds.width <= width + 0.5
+              && bounds.y >= header.y + header.height - 0.5
+              && bounds.y + bounds.height <= navigation.y + 0.5,
+            name + ' entire phase strip clears the header and mobile navigation: ' + JSON.stringify({ bounds, header, navigation }));
+            assert.equal(await firstPhase.isVisible(), true, name + ' first phase remains visible');
+            assert.equal(await firstPhase.evaluate(element => {
+              const bounds = element.getBoundingClientRect();
+              const hit = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+              return !!hit && (hit === element || element.contains(hit));
+            }), true, name + ' first phase is not covered');
+            await capture(name + '-phases-320-200.png', false);
+            report.phaseViews.push({ name, stage, width, textSize, bounds, header, navigation, firstPhaseVisible: true, unobstructed: true });
+          }
         }
       }
       await page.evaluate(() => document.documentElement.style.fontSize = '100%');

@@ -322,6 +322,7 @@ export function HaruIcon({
   "aria-labelledby": ariaLabelledBy,
   "aria-hidden": ariaHidden,
   role,
+  style,
   ...svgProps
 }: HaruIconProps) {
   const compact =
@@ -344,6 +345,7 @@ export function HaruIcon({
       aria-hidden={ariaHidden ?? !hasAccessibleName}
       aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : title)}
       aria-labelledby={ariaLabelledBy}
+      style={{ flexShrink: 0, ...style }}
       {...svgProps}
     >
       {title ? <title>{title}</title> : null}
