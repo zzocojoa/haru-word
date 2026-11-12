@@ -1,5 +1,6 @@
 "use client";
 import type { ReactNode } from "react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import {
   DialogDescription,
   DialogHeader,
@@ -57,7 +58,7 @@ export function SettingsDialog({
         {settings && <AiModelSettings state={state} busy={busy} save={save} />}
         {settings && <LocalDraftSettings busy={busy} />}
         <label>
-          학습 수준
+          <span className="settings-label"><HaruIcon name="learning-level" size={18} />학습 수준</span>
           <LevelSelect
             value={state.settings.level}
             onChange={changeLevel}
@@ -65,7 +66,7 @@ export function SettingsDialog({
           />
         </label>
         <label>
-          하루 목표 단어 수
+          <span className="settings-label"><HaruIcon name="target" size={18} />하루 목표 단어 수</span>
           <Select
             value={String(state.settings.dailyGoal)}
             disabled={busy}
@@ -101,10 +102,10 @@ export function SettingsDialog({
               })
             }
           />{" "}
-          새 단어 쉬기 · 복습만 하기
+          <span className="settings-label"><HaruIcon name="repeat" size={18} />새 단어 쉬기 · 복습만 하기</span>
         </label>
         <label>
-          주간 점검 요일
+          <span className="settings-label"><HaruIcon name="calendar-repeat" size={18} />주간 점검 요일</span>
           <Select
             value={String(state.settings.reviewDay ?? 0)}
             disabled={busy}
@@ -136,7 +137,7 @@ export function SettingsDialog({
             void beginAssessment();
           }}
         >
-          친숙도 다시 확인하기
+          <HaruIcon name="eye" size={18} />친숙도 다시 확인하기
         </button></section>
         <HelpDetails title="저장·날짜·AI 안내"><p>기록과 AI 모델 선택은 계정별로 저장하며, 학습일은 한국 시간 기준이에요. 한국 시간 자정에 다음 학습일로 바뀌어요. AI는 ‘참고 의견 요청’을 누를 때만 사용해요. 모델 변경이나 기록 조회만으로 요청하지 않아요.</p><p>OpenAI 사용 한도에 따라 요청이 제한될 수 있어요. 실패해도 다른 모델로 자동 전송하지 않아요.</p></HelpDetails>
         <HelpDetails title="문제가 생겼을 때">

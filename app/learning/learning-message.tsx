@@ -1,5 +1,5 @@
 "use client";
-import { X } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { useLearningMessageLifetime } from './use-learning-message';
 
 type MessageContentProps = { message: string; onDismiss: () => void };
@@ -17,7 +17,7 @@ function MessageContent({ message, onDismiss }: MessageContentProps) {
     <div className="notice learning-message" {...readingInteractions}>
       <p role="status" aria-atomic="true">{message}</p>
       <button type="button" className="learning-message-close" aria-label="안내 닫기" onClick={onDismiss}>
-        <X size={20} aria-hidden="true" />
+        <HaruIcon name="x" size={20} />
       </button>
     </div>
   );

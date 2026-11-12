@@ -1,5 +1,5 @@
 'use client';
-import { Download,Loader2,Upload } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { DialogHeader,DialogTitle,DialogDescription } from '@/components/ui/dialog';
 import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
 import { AlertDialog,AlertDialogContent,AlertDialogHeader,AlertDialogTitle,AlertDialogDescription,AlertDialogFooter,AlertDialogCancel,AlertDialogAction } from '@/components/ui/alert-dialog';
@@ -20,7 +20,7 @@ export default function BackupDialog(props: BackupRestoreProps) {
    <p className="small-note">‘전체 백업’과 이전 ‘현재 입력 백업’을 지원해요. {caps?`최대 ${caps.maxBytes/1_000_000} MB · 단어 기록 5,000개 · 회차 10,000개.`:'지원 범위 확인 중'}</p>
    {job&&job.status!=='committed'&&<div className="backup-impact"><p>이어서 할 복원 · 전송 {job.received.length}/{job.total}</p><p className="small-note">같은 파일을 다시 선택하면 이어갈 수 있어요. 작업은 시작 후 24시간 동안 유지돼요.</p><button className="text-button" disabled={working||restoring||conflict} onClick={()=>void cancel()}>기존 복원 작업 취소</button></div>}
    {phase&&<div role="status"><p>{phase}</p><Progress aria-label="복원 준비 진행률" value={job?.total?Math.round((job.received.length+job.validated)/(job.total*2)*100):0}/><button className="text-button" disabled={restoring} onClick={defer}>나중에 이어서</button></div>}
-   {reading&&<p role="status"><Loader2 size={16} className="spin"/> 파일을 확인하고 있어요.</p>}
+   {reading&&<p role="status"><HaruIcon name="loading" size={16} className="spin"/> 파일을 확인하고 있어요.</p>}
    {fileError&&<p className="backup-error" role="alert">{fileError}</p>}
    {backup&&after&&changes&&<>
     <div className="backup-file-info"><b>{name}</b><p>{backup.exportedAt?new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',dateStyle:'medium',timeStyle:'short'}).format(new Date(backup.exportedAt))+' 백업':'백업 날짜가 없는 이전 형식이에요.'}</p>{backup.legacy&&<p>이전 형식의 기록을 검증했어요. 기록 내용은 그대로 복원해요.</p>}</div>
@@ -33,7 +33,7 @@ export default function BackupDialog(props: BackupRestoreProps) {
     <p className="small-note">복원 완료 또는 복원 시도 후 서버 기록 다시 불러오기에서는 이 브라우저의 임시 입력·이전 AI 결과 확인 정보도 정리해요. 필요한 입력은 먼저 백업해 주세요.</p>
     <details className="notes-details"><summary>백업의 최근 회차 확인</summary>{recent.map(s=><p key={s.id}>{s.date} · {KIND_TEXT[s.kind]} · {s.ids.length}개 · {resumeMonthlyWriting(s).finished?'회차 마침':'진행 중'}</p>)}{!after.sessions&&<p>학습 회차가 없는 백업이에요.</p>}</details>
     <p className="small-note" data-safety-preview role="status">{safetyPreview?.raw?`안전 백업 ${(safetyPreview.bytes/1_000_000).toFixed(2)} MB · 단어 ${before.words.toLocaleString()}개 · 회차 ${before.sessions.toLocaleString()}개 · ${safetyPreview.error?'복원 불가':'복원 가능'}`:safetyPreview?.error?'안전 백업의 크기와 복원 여부를 확인하지 못했어요.':'현재 기록의 안전 백업을 확인하고 있어요.'}</p>
-    <button className="secondary-button full" disabled={busy||working||reading||stale||conflict||reloadRequired||!safetyPreview||!!safetyPreview.error} onClick={saveSafetyBackup}><Download size={16}/>현재 기록 먼저 백업받기</button>
+    <button className="secondary-button full" disabled={busy||working||reading||stale||conflict||reloadRequired||!safetyPreview||!!safetyPreview.error} onClick={saveSafetyBackup}><HaruIcon name="backup-archive" size={16}/>현재 기록 먼저 백업받기</button>
     {(safetyError||safetyPreview?.error)&&<p className="backup-error" role="alert">{safetyError||'안전 백업을 준비하지 못해 기록 교체를 막았어요. '+safetyPreview?.error}</p>}
     {backedUp&&<p className="small-note" role="status">복원할 수 있는 백업이에요. 내려받은 파일을 보관해 주세요.</p>}
     <label className="backup-ack"><Checkbox checked={acknowledged} disabled={!backedUp||busy||working||stale} onCheckedChange={v=>setAcknowledged(v===true)}/><span>현재 기록의 백업을 보관했고, 위 내용으로 교체됨을 확인했어요.</span></label>
@@ -42,7 +42,7 @@ export default function BackupDialog(props: BackupRestoreProps) {
 
    </>}
   </>}
- </div>{success?<div className="dialog-actions"><button className="primary-button full" onClick={onClose}>학습 기록 확인하기</button></div>:backup&&<div className="dialog-actions">{conflict||reloadRequired?<button className="secondary-button full" disabled={restoring||reading||working} onClick={()=>void reload()}>서버 기록 확인하기</button>:<button className="primary-button full" disabled={!allowed} onClick={()=>void prepare()}>{restoring?<Loader2 size={16} className="spin"/>:<Upload size={16}/>} {restoring?'서버에 복원 중':'이 백업으로 복원'}</button>}</div>}
+ </div>{success?<div className="dialog-actions"><button className="primary-button full" onClick={onClose}>학습 기록 확인하기</button></div>:backup&&<div className="dialog-actions">{conflict||reloadRequired?<button className="secondary-button full" disabled={restoring||reading||working} onClick={()=>void reload()}>서버 기록 확인하기</button>:<button className="primary-button full" disabled={!allowed} onClick={()=>void prepare()}>{restoring?<HaruIcon name="loading" size={16} className="spin"/>:<HaruIcon name="restore-file" size={16}/>} {restoring?'서버에 복원 중':'이 백업으로 복원'}</button>}</div>}
  </DialogContent></Dialog>
  <AlertDialog open={confirm} onOpenChange={setConfirm}><AlertDialogContent className="backup-confirm"><AlertDialogHeader><AlertDialogTitle>백업으로 현재 기록을 교체할까요?</AlertDialogTitle><AlertDialogDescription>백업의 단어 기록 {after?.words}개와 학습 회차 {after?.sessions}개로 교체합니다. 기존 기록으로 돌아가려면 방금 내려받은 백업이 필요합니다.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>취소</AlertDialogCancel><AlertDialogAction disabled={!allowed} onClick={e=>{e.preventDefault();void apply();}}>기록 교체 · 복원</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>
  </>;

@@ -1,5 +1,6 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AI_CONTRACT_HEADERS } from '@/lib/ai-contract';
 import { aiModel, selectedAiModel } from '@/lib/ai-models';
@@ -37,7 +38,7 @@ export function AiModelSettings({ state, busy, save }: { state: State; busy: boo
   const locked = busy || pendingCount > 0 || loading || !available.length;
 
   return <section className="settings-section ai-model-settings" aria-label="AI 모델 설정">
-    <h3>AI 참고 의견 모델</h3>
+    <h3 className="settings-label"><HaruIcon name="ai-model" size={20} />AI 참고 의견 모델</h3>
     {error ? <div role="alert"><p className="small-note">{error}</p><button type="button" className="text-button" disabled={loading || pendingCount > 0} onClick={() => { request.current?.abort(); const controller = new AbortController(); request.current = controller; setLoading(true); void load(controller.signal); }}>모델 목록 다시 확인</button></div>
       : <>
         <label>사용할 OpenAI 모델

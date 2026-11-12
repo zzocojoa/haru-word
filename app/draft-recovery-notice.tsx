@@ -1,5 +1,6 @@
 'use client';
 import {useState} from 'react';
+import {HaruIcon} from '@/components/icons/haru-icon';
 import {draftFingerprint,type DraftChoice} from '@/lib/local-learning-drafts';
 import type {InputRecovery} from './use-persistent-input';
 import {RecordText} from './record-text';
@@ -14,8 +15,8 @@ export function DraftRecoveryNotice({input,labels={},format}:{input:InputRecover
   if(!storage.enabled)return null;
   return <div className="local-draft-notice">
     <p className="small-note">작성 중 입력은 이 브라우저에 최대 7일간 임시 보관해요. 공용 기기에서는 학습 설정의 임시 입력 삭제·로그아웃을 이용해 주세요.</p>
-    {storage.error&&<div className="notice" role="status"><p>{storage.error==='capacity'?'이 기기의 임시 보관 공간이 가득 찼어요. 현재 입력을 백업한 뒤 임시 입력을 정리해 주세요.':'이 기기에 임시 입력을 보관하지 못했어요. 화면의 입력을 백업해 주세요.'}</p><button type="button" className="text-button" onClick={storage.retry}>기기 보관 다시 확인</button></div>}
-    {recovery.restored&&<div className="notice" role="status"><p>이 기기에 남은 입력·이전 AI 의견을 복구했어요. 복구만으로 채점하거나 AI를 요청하지 않아요.</p>{recovery.hasUndo&&<button type="button" className="text-button" disabled={!recovery.canUndo} onClick={recovery.undo}>복구한 입력 되돌리기</button>}</div>}
+    {storage.error&&<div className="notice" role="status"><p>{storage.error==='capacity'?'이 기기의 임시 보관 공간이 가득 찼어요. 현재 입력을 백업한 뒤 임시 입력을 정리해 주세요.':'이 기기에 임시 입력을 보관하지 못했어요. 화면의 입력을 백업해 주세요.'}</p><button type="button" className="text-button" onClick={storage.retry}><HaruIcon name="draft-check" size={18}/>기기 보관 다시 확인</button></div>}
+    {recovery.restored&&<div className="notice" role="status"><p>이 기기에 남은 입력·이전 AI 의견을 복구했어요. 복구만으로 채점하거나 AI를 요청하지 않아요.</p>{recovery.hasUndo&&<button type="button" className="text-button" disabled={!recovery.canUndo} onClick={recovery.undo}><HaruIcon name="undo" size={18}/>복구한 입력 되돌리기</button>}</div>}
     {recovery.choices.length>0&&<details><summary>이 기기에 남은 다른 입력 확인 ({recovery.choices.length})</summary>
       {recovery.choices.map((row,i)=><div key={row.id}><p>임시 입력 {i+1} · {new Date(row.record.updatedAt).toLocaleString('ko-KR')}</p><button type="button" className="secondary-button" onClick={()=>compare(row)}>현재 입력과 비교</button><button type="button" className="text-button" onClick={()=>recovery.discard(row)}>이 임시 입력 삭제</button></div>)}
     </details>}

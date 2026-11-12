@@ -21,6 +21,10 @@ const cases = [
   'workflow-qa.cjs',
   'study-layout-qa.cjs',
   'haru-session-icons-qa.cjs',
+  'haru-content-icons-qa.cjs',
+  'haru-record-icons-qa.cjs',
+  'haru-system-icons-qa.cjs',
+  'backup-workflow-qa.cjs',
 ];
 const engine = process.env.QA_BROWSER || 'chromium';
 
@@ -67,7 +71,7 @@ const engine = process.env.QA_BROWSER || 'chromium';
       await waitForWorker(worker.base, 30_000, signal);
       const started = Date.now();
       const result = await runCase([path.join('tests', name)], {
-        env, signal, timeoutMs: name === 'haru-session-icons-qa.cjs' ? 300_000 : 180_000,
+        env, signal, timeoutMs: name.startsWith('haru-') ? 600_000 : 180_000,
         logPath: path.join(logs, name + '.log'),
       });
       report.results.push({ name, ...result, durationMs: Date.now() - started });

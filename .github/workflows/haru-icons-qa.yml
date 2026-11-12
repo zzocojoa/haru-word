@@ -5,22 +5,31 @@ on:
     branches: [main]
     paths:
       - 'components/icons/**'
-      - 'app/learning-app.tsx'
-      - 'app/learning/save-status.tsx'
-      - 'app/learning/today-overview.tsx'
-      - 'app/study-ui.tsx'
-      - 'app/study-session.tsx'
+      - 'components/ui/dialog.tsx'
+      - 'components/ui/select.tsx'
+      - 'components/ui/dropdown-menu.tsx'
+      - 'components/ui/checkbox.tsx'
+      - 'app/*.tsx'
+      - 'app/*.css'
+      - 'app/learning/**'
+      - 'app/grammar/**'
+      - 'app/review/**'
       - 'app/study/**'
-      - 'app/study-design.css'
-      - 'tests/haru-icons-qa.cjs'
-      - 'tests/haru-session-icons-qa.cjs'
+      - 'public/brand/**'
+      - 'public/startup/**'
+      - 'public/favicon*'
+      - 'public/*icon*.png'
+      - 'tests/haru-*-qa.cjs'
+      - 'tests/qa/haru-icon-helpers.cjs'
       - 'tests/qa/manifest.cjs'
+      - 'tests/backup-workflow-qa.cjs'
       - 'tests/workflow-qa.cjs'
       - 'tests/study-layout-qa.cjs'
       - 'tests/today-status-qa.cjs'
       - 'tests/daily-topup-qa.cjs'
       - 'tests/repeat-learning-qa.cjs'
       - 'scripts/qa-haru-icons.mjs'
+      - 'scripts/generate-startup-images.mjs'
       - '.github/workflows/haru-icons-qa.yml'
   workflow_dispatch:
 
@@ -73,6 +82,10 @@ jobs:
           path: |
             outputs/haru-icons/
             outputs/haru-session-icons/
+            outputs/haru-content-icons/
+            outputs/haru-record-icons/
+            outputs/haru-system-icons/
+            outputs/backup-workflow/
             outputs/ui-plan-contract/
             outputs/editor-save-chromium/
             outputs/today-status/

@@ -1,5 +1,5 @@
 'use client';
-import { ArrowRight, Check, CheckCircle2, CircleHelp } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { useState } from 'react';
 import { answerCorrect, assembledOrder, firstAnswerLabel, type GrammarQuestion as Question } from '@/lib/grammar/content';
 import type { GrammarAnswer } from '@/lib/grammar/model';
@@ -36,25 +36,25 @@ export function GrammarQuestion({ question, legacyNote, answer, hinted, clued, c
         const selected = selectedChoice === option;
         return <button key={option} disabled={disabled} aria-pressed={selected}
           className={`secondary-button ${selected ? 'is-selected' : ''}`} onClick={() => { setLocalChoice(option); onChoice?.(option); }}>
-          <span className="grammar-choice-number" aria-hidden="true">{selected ? <Check size={16} /> : index + 1}</span>{option}
+          <span className="grammar-choice-number" aria-hidden="true">{selected ? <HaruIcon name="check" size={16} /> : index + 1}</span>{option}
         </button>;
       })}</div>}
     {question.kind === 'choice' && <button className="secondary-button" disabled={disabled || !selectedChoice || selectedChoice === answer?.latest} onClick={() => onAnswer(selectedChoice)}>답 확인</button>}
-    {question.clue && onClue && <button className="text-button grammar-hint" disabled={disabled || clued} onClick={onClue}><CircleHelp size={17} aria-hidden="true" />힌트 보기</button>}
+    {question.clue && onClue && <button className="text-button grammar-hint" disabled={disabled || clued} onClick={onClue}><HaruIcon name="help-circle" size={17} />힌트 보기</button>}
     {clued && !hinted && question.clue && <p className="grammar-message">{question.clue}</p>}
     <button className="text-button grammar-hint" disabled={disabled || hinted} onClick={onHint}>
-      <CircleHelp size={17} aria-hidden="true" />답 보기 · 도움으로 기록
+      <HaruIcon name="eye" size={17} />답 보기 · 도움으로 기록
     </button>
     {(answer || hinted) && <div className="grammar-feedback" data-tone={answer ? correct ? 'success' : 'review' : 'neutral'} role="status">
       <b className="grammar-feedback-title">
-        {correct ? <CheckCircle2 size={19} aria-hidden="true" /> : <CircleHelp size={19} aria-hidden="true" />}{feedbackTitle}
+        <HaruIcon name={correct ? 'check-circle' : answer ? 'alert-circle' : 'help-circle'} size={19} />{feedbackTitle}
       </b>
       {hinted && <p>답: <span>{question.answer}</span></p>}
       {answer && <p className="small-note">첫 답: {answer.first} · {firstAnswerLabel(question, answer)}{answer.attempts > 1 ? ` · ${answer.attempts}번 시도` : ''}</p>}
       <p>{answer && !correct ? question.wrong?.[answer.latest] ?? question.explanation : question.explanation}</p>
       {legacyNote&&<p className="small-note">{legacyNote}</p>}
     </div>}
-    <button className="primary-button" disabled={disabled || !answer} onClick={onNext}>{nextLabel}<ArrowRight size={18} /></button>
+    <button className="primary-button" disabled={disabled || !answer} onClick={onNext}>{nextLabel}<HaruIcon name="arrow-right" size={18} /></button>
   </div>;
 }
 
