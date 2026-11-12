@@ -1,3 +1,11 @@
+## 2026-11-12 · P001–P105 아이콘 출시 검증
+
+현재 운영은 **Sites v147 · 소스 `04b552f20f3504649a7ddfeca4449b0ab4f5b50b`**이며 GitHub main `7ce85ed`와 전체 파일 트리가 같습니다.
+[PR #59](https://github.com/zzocojoa/haru-word/pull/59)의 코드 검증 후보는 `88e453671aa8677c24052104f9f18c981f8fd97b`입니다.
+[운영 대비 변경·검증 결과·출시 판정](docs/haru-icons/release-readiness-2026-11-12.md)과
+[실제 iPhone 확인표](docs/haru-icons/iphone-release-checklist.md)를 함께 확인합니다.
+이 기록은 아이콘 후보의 병합·운영 배포 완료를 뜻하지 않습니다. 아래 운영 v146·이전 PR 관련 내용은 각 작성 시점의 이력입니다.
+
 <!-- aiq-manner-github-candidate-current -->
 ## 2026-11-06 · 실제 AI 평가와 정상 부사형 교정 수정 PR 후보
 

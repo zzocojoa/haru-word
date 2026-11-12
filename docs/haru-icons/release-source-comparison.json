@@ -1,0 +1,3407 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUtc": "2026-11-12T09:47:00.374392+00:00",
+  "method": {
+    "comparison": "Git commit trees, recursive tracked-file inventories and diff/object identities",
+    "uncommittedChangesExcluded": true,
+    "sourceCodeModified": false,
+    "newRuntimeTestsExecuted": false
+  },
+  "inputs": {
+    "liveSourceCommit": "04b552f20f3504649a7ddfeca4449b0ab4f5b50b",
+    "githubMainCommit": "7ce85ed49465b352e8304a741c8505124f86deb8",
+    "iconPullRequestCommit": "74e72ef63df1c6e7afab05076eeeecf4a596999b",
+    "deploymentContextSuppliedByParent": {
+      "version": 147,
+      "status": "succeeded",
+      "independentlyQueriedInThisAudit": false
+    }
+  },
+  "trees": {
+    "live": "860851e4f0df5a923d5f1b1078c77cc7661b8954",
+    "main": "860851e4f0df5a923d5f1b1078c77cc7661b8954",
+    "candidate": "c68e12b1e6d02e71df4e8b3241da98b330d8a986"
+  },
+  "liveMainIdentity": {
+    "equalRootTree": true,
+    "equalRecursiveInventory": true,
+    "changedFiles": 0,
+    "trackedFiles": 981
+  },
+  "candidateSummary": {
+    "trackedFiles": 997,
+    "changedFiles": 91,
+    "addedFiles": 16,
+    "modifiedFiles": 75,
+    "deletedFiles": 0,
+    "renamedFiles": 0,
+    "binaryFiles": 32,
+    "addedTextLines": 5941,
+    "removedTextLines": 175,
+    "categories": [
+      {
+        "category": "runtime_ui",
+        "files": 41,
+        "added": 1,
+        "modified": 40,
+        "binaryFiles": 0,
+        "addedLines": 1216,
+        "removedLines": 167
+      },
+      {
+        "category": "brand_assets",
+        "files": 38,
+        "added": 5,
+        "modified": 33,
+        "binaryFiles": 32,
+        "addedLines": 6,
+        "removedLines": 1
+      },
+      {
+        "category": "brand_generation_tool",
+        "files": 1,
+        "added": 0,
+        "modified": 1,
+        "binaryFiles": 0,
+        "addedLines": 37,
+        "removedLines": 7
+      },
+      {
+        "category": "documentation",
+        "files": 2,
+        "added": 2,
+        "modified": 0,
+        "binaryFiles": 0,
+        "addedLines": 2237,
+        "removedLines": 0
+      },
+      {
+        "category": "qa_ci",
+        "files": 9,
+        "added": 8,
+        "modified": 1,
+        "binaryFiles": 0,
+        "addedLines": 2445,
+        "removedLines": 0
+      }
+    ]
+  },
+  "unchangedSubtrees": [
+    {
+      "path": ".openai",
+      "scope": "hosting source configuration",
+      "type": "tree",
+      "liveOid": "b4e8942453afd52772f695980d1de38471d90cfe",
+      "candidateOid": "b4e8942453afd52772f695980d1de38471d90cfe",
+      "equal": true,
+      "trackedFileCount": 1
+    },
+    {
+      "path": "build",
+      "scope": "build integration",
+      "type": "tree",
+      "liveOid": "17bb731e67d4675d74428bb63ef8c2188dbb076b",
+      "candidateOid": "17bb731e67d4675d74428bb63ef8c2188dbb076b",
+      "equal": true,
+      "trackedFileCount": 3
+    },
+    {
+      "path": "lib",
+      "scope": "domain logic, data contracts and server helpers",
+      "type": "tree",
+      "liveOid": "99d27e2cc775659ffc3eb6a5e6f5dcc964098c4e",
+      "candidateOid": "99d27e2cc775659ffc3eb6a5e6f5dcc964098c4e",
+      "equal": true,
+      "trackedFileCount": 126
+    },
+    {
+      "path": "db",
+      "scope": "database schema and persistence",
+      "type": "tree",
+      "liveOid": "66edee8c1be1e54aba8605f59df65b96c2f3ef5c",
+      "candidateOid": "66edee8c1be1e54aba8605f59df65b96c2f3ef5c",
+      "equal": true,
+      "trackedFileCount": 13
+    },
+    {
+      "path": "drizzle",
+      "scope": "migration SQL and metadata",
+      "type": "tree",
+      "liveOid": "6bed76d2b34fe191e53a492d58a8d26f12de4f8f",
+      "candidateOid": "6bed76d2b34fe191e53a492d58a8d26f12de4f8f",
+      "equal": true,
+      "trackedFileCount": 15
+    },
+    {
+      "path": "data",
+      "scope": "curriculum and vocabulary data",
+      "type": "tree",
+      "liveOid": "93699222bdbd8d40c13fa5583a85424ac1461b2f",
+      "candidateOid": "93699222bdbd8d40c13fa5583a85424ac1461b2f",
+      "equal": true,
+      "trackedFileCount": 41
+    },
+    {
+      "path": "hooks",
+      "scope": "shared client hooks",
+      "type": "tree",
+      "liveOid": "cc6027e3ac916df709fe1f49005f24ad4402e692",
+      "candidateOid": "cc6027e3ac916df709fe1f49005f24ad4402e692",
+      "equal": true,
+      "trackedFileCount": 1
+    },
+    {
+      "path": "app/api",
+      "scope": "API route implementations",
+      "type": "tree",
+      "liveOid": "01db30e7a0e874010a99a9f4bc00d3c489a707ce",
+      "candidateOid": "01db30e7a0e874010a99a9f4bc00d3c489a707ce",
+      "equal": true,
+      "trackedFileCount": 17
+    }
+  ],
+  "unchangedExactFiles": [
+    {
+      "path": ".openai/hosting.json",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "4142a5108cfdae253a599aa1baddbf25883e6dbd"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "4142a5108cfdae253a599aa1baddbf25883e6dbd"
+      },
+      "equal": true
+    },
+    {
+      "path": "package.json",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1ebc1fee9f4ecae29fd31538425dc56a11472ea3"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1ebc1fee9f4ecae29fd31538425dc56a11472ea3"
+      },
+      "equal": true
+    },
+    {
+      "path": "package-lock.json",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "dfcb34fa92c3d734a30fe7e72a91b7484bc1a270"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "dfcb34fa92c3d734a30fe7e72a91b7484bc1a270"
+      },
+      "equal": true
+    },
+    {
+      "path": "drizzle.config.ts",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c2b2f34376984744343453838ce66658ad9d9b6a"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c2b2f34376984744343453838ce66658ad9d9b6a"
+      },
+      "equal": true
+    },
+    {
+      "path": "vite.config.ts",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "da0e25b0f96c41314ca7a3d2856194fd52bb5ed4"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "da0e25b0f96c41314ca7a3d2856194fd52bb5ed4"
+      },
+      "equal": true
+    },
+    {
+      "path": "next.config.ts",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e9ffa3083ad279ecf95fd8eae59cb253e9a539c4"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e9ffa3083ad279ecf95fd8eae59cb253e9a539c4"
+      },
+      "equal": true
+    },
+    {
+      "path": "cloudflare-env.d.ts",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d4346981d138b6c6ba66fc404f3c1f6919a7def7"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d4346981d138b6c6ba66fc404f3c1f6919a7def7"
+      },
+      "equal": true
+    },
+    {
+      "path": "worker-imports.d.ts",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "149dd0a5defa8b65457f260a371f051825ae1185"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "149dd0a5defa8b65457f260a371f051825ae1185"
+      },
+      "equal": true
+    },
+    {
+      "path": "scripts/run-framework.mjs",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ac3dd43c1241aa4dc24864b90ae15ac324917383"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ac3dd43c1241aa4dc24864b90ae15ac324917383"
+      },
+      "equal": true
+    },
+    {
+      "path": "scripts/sites-env.mjs",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1eeedb5e13e4b9af70d89446d981dfd4cd92a3fd"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1eeedb5e13e4b9af70d89446d981dfd4cd92a3fd"
+      },
+      "equal": true
+    },
+    {
+      "path": "scripts/sites-env.sh",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "728416424d5d2f4c9a746d53621668225645356c"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "728416424d5d2f4c9a746d53621668225645356c"
+      },
+      "equal": true
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "82a93a84c9fe4ab3154975cf8308cd1668750329"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "82a93a84c9fe4ab3154975cf8308cd1668750329"
+      },
+      "equal": true
+    },
+    {
+      "path": "app/chatgpt-auth.ts",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1c908fc71df5b53d3fb6b3a49537598edd81385a"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1c908fc71df5b53d3fb6b3a49537598edd81385a"
+      },
+      "equal": true
+    },
+    {
+      "path": "app/layout.tsx",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bd52f95a0b800915de7d7bfd016298131740d037"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bd52f95a0b800915de7d7bfd016298131740d037"
+      },
+      "equal": true
+    },
+    {
+      "path": "public/manifest.webmanifest",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8969a5893e5de788d919fee9242c71eaece256e4"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8969a5893e5de788d919fee9242c71eaece256e4"
+      },
+      "equal": true
+    },
+    {
+      "path": "lib/startup-images.ts",
+      "live": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d4b3ae94551ae14eb031a2860efab790148f9ade"
+      },
+      "candidate": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d4b3ae94551ae14eb031a2860efab790148f9ade"
+      },
+      "equal": true
+    }
+  ],
+  "unchangedClientPersistenceNavigationHooks": {
+    "fileCount": 20,
+    "allEqual": true,
+    "files": [
+      {
+        "path": "app/learning/use-familiarity-flow.ts",
+        "oid": "60f0e551dfc7d7eea9ac479b09ea1a3290c940cd",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-image-practice-position.ts",
+        "oid": "794df201ccbcb964989d0ef506d7b89bde6b0b81",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-learning-controller.ts",
+        "oid": "904134097c949e8a3e03d48aa3ca42467939282a",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-learning-message.ts",
+        "oid": "e0db08044978816bd9f7a8b2d187eb989c5629b7",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-learning-tools.ts",
+        "oid": "5503306a39e82ffffb37a5b6f31046ae4cac4810",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-session-commands.ts",
+        "oid": "71c7b53ce0640e506196198d7610f05e58c2f4fa",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-study-transition.ts",
+        "oid": "14f2fb11ddec40159682d4a21f49a7f6f2551607",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-tab-navigation.ts",
+        "oid": "000184cea30621c6dea978360a7bc3ae6d2c8799",
+        "equal": true
+      },
+      {
+        "path": "app/learning/use-vocabulary-state.ts",
+        "oid": "c90010fd5d2cbb398d46cd9c7ecb933879d29a16",
+        "equal": true
+      },
+      {
+        "path": "app/navigation.tsx",
+        "oid": "0659c59592eae8acb93c7e0ac931dc08ca504dfd",
+        "equal": true
+      },
+      {
+        "path": "app/use-backup-preview.ts",
+        "oid": "e893586815cef2230dbe8635a07b4e57d4413f54",
+        "equal": true
+      },
+      {
+        "path": "app/use-backup-restore.ts",
+        "oid": "28117a1916a0cb7f6744f65029d230db15fcbbf8",
+        "equal": true
+      },
+      {
+        "path": "app/use-feedback-context.ts",
+        "oid": "c60545d98543fcfbdfc9b874ef59346416dc425d",
+        "equal": true
+      },
+      {
+        "path": "app/use-feedback-recovery.ts",
+        "oid": "47ff91b746403a4932a020f2aca646b102f95f2e",
+        "equal": true
+      },
+      {
+        "path": "app/use-keyboard-inset.ts",
+        "oid": "e032753bea03fecb59715e652d4acfb13499caec",
+        "equal": true
+      },
+      {
+        "path": "app/use-learning-store.ts",
+        "oid": "9f0514956c1eb522474e8b5c609cf8aedf6af4ff",
+        "equal": true
+      },
+      {
+        "path": "app/use-persistent-input.ts",
+        "oid": "90f3a5aef7a4ff422f30c64de1be78dc3022c448",
+        "equal": true
+      },
+      {
+        "path": "app/use-study-date.ts",
+        "oid": "f7f4d46bece05d535d72e6e98e98b23e9a172b03",
+        "equal": true
+      },
+      {
+        "path": "app/use-tab-position.ts",
+        "oid": "6b22b747380a0be11c7a8e0925ee3fbab1e4e8c9",
+        "equal": true
+      },
+      {
+        "path": "app/use-view-restoration.tsx",
+        "oid": "872e155ebf52d8eed074c4be7d2e6dc07489f660",
+        "equal": true
+      }
+    ]
+  },
+  "brandAssetBreakdown": {
+    "sourceSvgAdded": 5,
+    "publicIconEndpointsModified": 7,
+    "startupPngsModified": 26,
+    "totalAssets": 38,
+    "startupReferenceTableUnchanged": true,
+    "manifestUnchanged": true,
+    "layoutMetadataUnchanged": true
+  },
+  "runtimeUiReviewNotes": [
+    "35 app files and 6 component files change; this includes two CSS files and one new shared icon registry.",
+    "Icon replacement/addition, decorative SVG accessibility, compact/regular artwork and state-specific icon selection are runtime UI changes.",
+    "Additional UI behavior includes scheduled destination focus after closing backup restoration and keyboard-focusable named horizontal table regions.",
+    "Responsive CSS also changes enlarged-text wrapping, image-practice dialog tracks/navigation, backup confirmation targets, record-menu width, mobile record rows and library filters/rows.",
+    "The shared Radix checkbox indicator is force-mounted and switches approved empty/checked artwork by existing control state; its visual border/background classes change.",
+    "Database, migration, API route, authorization helper, dependency manifests/lockfile, domain logic and client persistence/navigation hooks have identical Git objects.",
+    "The new icon QA workflow builds and runs a synthetic local Worker; the existing CI workflow is unchanged and the added workflow has no deployment step."
+  ],
+  "limitations": [
+    "This is a tracked-source comparison, not a verification of the deployed compiled artifact or live production behavior.",
+    "Production database contents, applied migration history, deployment secrets and hosting service state were not read or modified.",
+    "Pending workflow and physical-iPhone documentation edits are outside the candidate commit and excluded from every count and equality assertion.",
+    "No build, test suite, browser, physical-device check, commit, push or deployment was executed by this audit.",
+    "This generated comparison report is also outside the candidate commit and excluded from its file-change counts."
+  ],
+  "changes": [
+    {
+      "path": ".github/workflows/haru-icons-qa.yml",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 103,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "81885a88d5d6f4bc752a82fd698ec71f7d2da7c6"
+      }
+    },
+    {
+      "path": "app/backup-dialog.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 12,
+      "removedLines": 5,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b5d99ae200ed48b67d22d4268a07774da6b1c891"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f7b6a815e3802f46fcc02820c85bfeed9e460381"
+      }
+    },
+    {
+      "path": "app/backup-export-dialog.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 2,
+      "removedLines": 1,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "15befa2ecb49e245d28c83e10d5ba2f2e5f1f7ad"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "833da114b1d4e0dc29fcb2668b0019aa5960c1d9"
+      }
+    },
+    {
+      "path": "app/draft-recovery-notice.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9d274292492cbfded3100508940657233fbb58c1"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "3fb3e97b08ec2691b9db283648833ba02fd71a9d"
+      }
+    },
+    {
+      "path": "app/grammar.css",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 8,
+      "removedLines": 1,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "23fe3b21514aaafea5e6b4b7f27c3ebf53a14663"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7304ecda75544e4e51a64a429e8c6205e405a095"
+      }
+    },
+    {
+      "path": "app/grammar/grammar-catalog.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 5,
+      "removedLines": 5,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e2e1ce9ec4d39c9bf4d4f3ff81c4ecebf8eadd76"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c3a8f94c5413c19ab2b5039c90164a9dd978ee44"
+      }
+    },
+    {
+      "path": "app/grammar/grammar-lesson.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 6,
+      "removedLines": 5,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "fdb99968db5dcb1c944300faa98d85f30199e10b"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "4225736d2248a7eaf1839a9335c50ba827aaed05"
+      }
+    },
+    {
+      "path": "app/grammar/grammar-question.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 6,
+      "removedLines": 6,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e758825505873b742d59107a378af2e7faf6e121"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "6f71c85e91d1e14e4c33ac3eb5ffb16b8d192c73"
+      }
+    },
+    {
+      "path": "app/grammar/grammar-summary.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 6,
+      "removedLines": 6,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b700cbf4e815623ad06ee73a8b517643ef6bef36"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "480c46164e255bac13653631c56f3b22ca29d13c"
+      }
+    },
+    {
+      "path": "app/grammar/grammar-writing.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 3,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "18e5d421e6f323460fdbe1edc107a0a5ef4f055f"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "23dc3d62e5586dc5a6365952ec4d5b1ee6eca5cf"
+      }
+    },
+    {
+      "path": "app/learning-app.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 9,
+      "removedLines": 15,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8c92ae7e88ebc1045040671a649741119f9638f7"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "4a1c0831f4051dc53ccd3bdfd711aa2f8934e0eb"
+      }
+    },
+    {
+      "path": "app/learning/ai-model-settings.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 2,
+      "removedLines": 1,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c4edb26d328bde14a931a60e2fe53d5c4c785824"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d057b2da8c2f5922cc027c6999fea04b5121373a"
+      }
+    },
+    {
+      "path": "app/learning/image-practice-launcher.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7e2401b2022627c51113385427d466fe9d0400da"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9c9fd33c24db94f9d9fa648a2ed7486d36941251"
+      }
+    },
+    {
+      "path": "app/learning/image-practice.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 10,
+      "removedLines": 6,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "426d5fea1c055a031ae9978b2ae1511143e398e9"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "69b65bdd46f9e75de6ac951ce36caec9aea4f1c1"
+      }
+    },
+    {
+      "path": "app/learning/learning-message.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 2,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c5bc1017e42d1ab177119beaa6218a445d17e678"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ce9b473b6f0c81a3900fe1dbd7a08793440eefb9"
+      }
+    },
+    {
+      "path": "app/learning/save-status.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 9,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "af023c61b6cc9182862083b6681d0eff377f693f"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7324d8409a2d107ee92e22f7c27b56ff55b863c1"
+      }
+    },
+    {
+      "path": "app/learning/settings-dialog.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 6,
+      "removedLines": 5,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8d3513acfba1825128d5ef2c2971ab7e784408c5"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "fcb171d16c5d2f8dc6adbe9b0a2dec55bb4a737b"
+      }
+    },
+    {
+      "path": "app/learning/source-dialog.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 7,
+      "removedLines": 6,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9ccc90389ed2711e0889411219593bd71d9c373f"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "fdd0ad5c72e49e174842c0f8c2b50082f9c7e01a"
+      }
+    },
+    {
+      "path": "app/learning/today-overview.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 23,
+      "removedLines": 9,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "da7eb1635efd85575e862fd3c535f30d417460dd"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "fa8e9b23c0b0b67383937c2e7fb51cc361b4e028"
+      }
+    },
+    {
+      "path": "app/local-draft-settings.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "94b567410d286093c707de2ae2b6efc750c2cc48"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c5059bcaabbbba09aaaf8cf52169c5cc605d4b6d"
+      }
+    },
+    {
+      "path": "app/review/learning-log.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 4,
+      "removedLines": 3,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1cfd207c64ed898f5a172c4f7aa94a96535715b0"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9cb9d654fcb24d7c2071f7594524badaa52d7e5f"
+      }
+    },
+    {
+      "path": "app/review/record-actions.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 6,
+      "removedLines": 6,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e4ac5536c80d6a0f05f0b589725d9b9e937a6858"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c21431777f0b70dc83b3e40f09ea8f8e20956600"
+      }
+    },
+    {
+      "path": "app/review/review-desk.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 12,
+      "removedLines": 9,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e2a56b2d4b0451ae1b9dc2bc4629bfd3710fd60a"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "5597ada6401e0a580cd99197a980b95fe473fb52"
+      }
+    },
+    {
+      "path": "app/sentence-feedback.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 3,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "2ad18dfdf42d12df7b810d75a8d7016d001e7de7"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "eb9f5a5268ca619191f0c8bc5e118de426c58603"
+      }
+    },
+    {
+      "path": "app/startup-screen.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 4,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "18f042dcf3a478e311ac9071ec77aca3852f40ed"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "547575e0ba39f8d01a4c88146f55c029f1003fa8"
+      }
+    },
+    {
+      "path": "app/study-design.css",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 117,
+      "removedLines": 3,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "3d4c5269cf7963e2ed5e73bb2ca95df2e2e02805"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "6584959f7012e653f2917966e03d352fe2fde3ed"
+      }
+    },
+    {
+      "path": "app/study-session.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 9,
+      "removedLines": 7,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "259e6c32349019ba7a572e643b7b163d1d7e137c"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8cc095486a014d5973d97247aa8b0f2d06efc127"
+      }
+    },
+    {
+      "path": "app/study-ui.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 4,
+      "removedLines": 4,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1ed05d4d34fd2e7449ef36e389c5c121f1f37491"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "dbb0006b72d7f6b9abf866361eed36c1399e753e"
+      }
+    },
+    {
+      "path": "app/study/learn-stage.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 4,
+      "removedLines": 4,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b8b851875dff9a33f5016350eb8c85987b24655b"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e2d4b7b43a3a082c77263472f2b3ff4d23de8480"
+      }
+    },
+    {
+      "path": "app/study/recall-stage.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 2,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "57150c4083e9995a9435eb3542ced7d1a773eed3"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9906b9ec7f92e2ac24e9274cefbc0972b9ecaf87"
+      }
+    },
+    {
+      "path": "app/study/sentence-stage.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 6,
+      "removedLines": 5,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "25ef8972b83b78754bea312ed877959f12b6fef5"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "cdf2ee3a00551ff7f45bda6d2e756e67d57c7810"
+      }
+    },
+    {
+      "path": "app/study/session-summary.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b5977166cd04ae138d45af5f33b8fe7f42ad3573"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e2bb6798012d70584f51053d2f157ed987bcaa82"
+      }
+    },
+    {
+      "path": "app/study/warmup-stage.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 2,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7026a66f821653c2680a66288a3a9d52329d0129"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "96a806f3c4bec0bbda11b1fffdeb37b850062af6"
+      }
+    },
+    {
+      "path": "app/ui.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 5,
+      "removedLines": 5,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bcf473e015cdcfd06494a8a32d2952c5dc065892"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f77e98de4f6a28859ac99a2c60a666c5885178f7"
+      }
+    },
+    {
+      "path": "app/word-library.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 8,
+      "removedLines": 8,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "de7d9ab91b6c448950445e4d9ea14aafeaaf338d"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9e906d24b3976c2d9a7700b636b490f7ca3fc914"
+      }
+    },
+    {
+      "path": "app/word-pronunciation.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 3,
+      "removedLines": 3,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "dabab576d3297fc7ec7c2a98dabebb5a24c099d6"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bf0d17abf2c2a18c18074954f2f6e00844803efc"
+      }
+    },
+    {
+      "path": "components/icons/haru-icon.tsx",
+      "status": "A",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 880,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "5ce4166d9fbf40c1a74619ea46d3648251a1aee7"
+      }
+    },
+    {
+      "path": "components/ui/checkbox.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 5,
+      "removedLines": 3,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f5a7e433f3795b82a00c5c06a1fc6decf116a84a"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "505528d42ae9d6cd61c1e0a8567acf0d56397891"
+      }
+    },
+    {
+      "path": "components/ui/dialog.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 2,
+      "removedLines": 2,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f65e77d9d2de2590ac44d46c8aede2b114089932"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e2e3453504dde9794ba73d368ce16006a6543159"
+      }
+    },
+    {
+      "path": "components/ui/dropdown-menu.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 4,
+      "removedLines": 3,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ae1fcf62f1e3b648554789b8fe02943d92bf00fc"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c63cbadf683ecc679294c8677539d595e10bb008"
+      }
+    },
+    {
+      "path": "components/ui/select.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 5,
+      "removedLines": 5,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "c0dc7120b4f78008ae5efc6d1c8b7ec8205c35d5"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e4c13ebb15532e88546287c0c3eefdb9ef1f512b"
+      }
+    },
+    {
+      "path": "components/ui/table.tsx",
+      "status": "M",
+      "category": "runtime_ui",
+      "binary": false,
+      "addedLines": 4,
+      "removedLines": 0,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7add5f1a22db954ac6cb3446f1bf8c8a9fc5c335"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "2ad921fca1dcfa5cb185aa386d5805b77a97fbdc"
+      }
+    },
+    {
+      "path": "docs/haru-icons/README.md",
+      "status": "A",
+      "category": "documentation",
+      "binary": false,
+      "addedLines": 94,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "2c56132e6b09d298e054fb3bffb8c0d8680df5bb"
+      }
+    },
+    {
+      "path": "docs/haru-icons/placements.json",
+      "status": "A",
+      "category": "documentation",
+      "binary": false,
+      "addedLines": 2143,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "fc4828769c25b28472e50eb61d3b2d54bd911ce3"
+      }
+    },
+    {
+      "path": "public/app-icon-192.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9af78be371975eb8a660093ad22201923976e734"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "2c1eaab8fd6dc097ee21b16e50f0c78b6643b2b2"
+      }
+    },
+    {
+      "path": "public/app-icon-512.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "df4f41913d1d4899eedc16bbbc0010f1c9abd4f6"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ad301f57d2072d8f697c56a84bf58fce6632c10e"
+      }
+    },
+    {
+      "path": "public/apple-touch-icon-precomposed.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d4f81538aa755e49eaa0922cd7069d0b6c7f3c8f"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "0779e5377ab6eec9ed5852b56778d3bc6bb4e568"
+      }
+    },
+    {
+      "path": "public/apple-touch-icon.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d4f81538aa755e49eaa0922cd7069d0b6c7f3c8f"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "0779e5377ab6eec9ed5852b56778d3bc6bb4e568"
+      }
+    },
+    {
+      "path": "public/brand/brand-16.svg",
+      "status": "A",
+      "category": "brand_assets",
+      "binary": false,
+      "addedLines": 1,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b293a34eda512f366c8747beeebbf964a14ae738"
+      }
+    },
+    {
+      "path": "public/brand/brand-32.svg",
+      "status": "A",
+      "category": "brand_assets",
+      "binary": false,
+      "addedLines": 1,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "3ec43b8be110dfab194fdd8f77c01eb03f72766d"
+      }
+    },
+    {
+      "path": "public/brand/brand-48.svg",
+      "status": "A",
+      "category": "brand_assets",
+      "binary": false,
+      "addedLines": 1,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "750bc75e60be6dd5f50582ff7594ade6e2b7fc25"
+      }
+    },
+    {
+      "path": "public/brand/brand-72.svg",
+      "status": "A",
+      "category": "brand_assets",
+      "binary": false,
+      "addedLines": 1,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "dc0eec32589e1b2a5ff835e8463c125917795943"
+      }
+    },
+    {
+      "path": "public/brand/brand-app.svg",
+      "status": "A",
+      "category": "brand_assets",
+      "binary": false,
+      "addedLines": 1,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "4d2778eb49745c1a7b10fb41089d6f9e0f6c28f2"
+      }
+    },
+    {
+      "path": "public/favicon-32x32.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "cb125f5760f14dc00f97eae2c1cf350be1fa1419"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8ca9ff1b2b7c793a7714b49bfcc1d284307209a4"
+      }
+    },
+    {
+      "path": "public/favicon.ico",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "5be49b849adbc47a0bb11f7867c16ac3009da50c"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "4f0d3fe70740d895f1bd7299d3499d39c63142dc"
+      }
+    },
+    {
+      "path": "public/favicon.svg",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": false,
+      "addedLines": 1,
+      "removedLines": 1,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "de7fb76416ac54c1f29720d17d1c67fbd0076028"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b6788cb73f2468dce96d6bf82bc245b5380eff50"
+      }
+    },
+    {
+      "path": "public/startup/launch-320-568-2-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "807f4c62bcd2f83dfb88c842bbbdd8d9f9a7091a"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "6e8d8fa14b999eddfbbd782ef1e6223e40ae3ab3"
+      }
+    },
+    {
+      "path": "public/startup/launch-320-568-2-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "161f34e52a9c6444ccbe6060ff74c80c575377ac"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "31182ff9d127676e66f23f1ab3b8658b88089c9f"
+      }
+    },
+    {
+      "path": "public/startup/launch-375-667-2-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "cf8b036eeee18c480f26d47f695df1c43e015eda"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9c641c6dfea2086963ad4364d5bea7b0fcecf814"
+      }
+    },
+    {
+      "path": "public/startup/launch-375-667-2-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7650ed0d3054b25d15f109e70f50e4e7eae1dcb0"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "af101cd4738b815991b403bad5aee2905d5a6b16"
+      }
+    },
+    {
+      "path": "public/startup/launch-375-812-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7c2a10a165887ccfca05b4418e1e6817b881e91f"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "cc48db0acc84c133ee280473b050070457d5f267"
+      }
+    },
+    {
+      "path": "public/startup/launch-375-812-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "23a0790e4507fd87975a8f6d94f3df74153ea1f6"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "79adc099c91a9a65d8622502dd715202ac4e0bc1"
+      }
+    },
+    {
+      "path": "public/startup/launch-390-844-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "3de81b867184c0bb2fd55d5e742ba567a40f3972"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9ffd0cdf357e95e0107faac393d1ff9a686a2335"
+      }
+    },
+    {
+      "path": "public/startup/launch-390-844-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "7b242500d6a770054619c8adf961eece1501a9f8"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "16e5b628f9c08bba982af1ac846f0bad284d42c3"
+      }
+    },
+    {
+      "path": "public/startup/launch-393-852-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b67d4cea76c14df90fa974baaea705f68bc0b735"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "17e229b735423ca2be02697a6bd78a29bbe793da"
+      }
+    },
+    {
+      "path": "public/startup/launch-393-852-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "56c62b9eb5300295b787697cbbb9003d00f5c238"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "5fff0e0bc6bd5aa4014df99f041dff0f186335a2"
+      }
+    },
+    {
+      "path": "public/startup/launch-402-874-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b450f3f6ecf3d34300e039d73ee485e48f6a3455"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "911d7351da550e996a9863249d69582a411d0b3e"
+      }
+    },
+    {
+      "path": "public/startup/launch-402-874-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "b8f395241279382983ad447a9f26561756ac3b44"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bc0120004bb98ffeea1e92cd06200aab2ee236d4"
+      }
+    },
+    {
+      "path": "public/startup/launch-414-736-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1714e358a6cf0aa8b8561a767dafe80cfa0c2dab"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "513c426d2d3a215e3455bb6e7a1347e748374b09"
+      }
+    },
+    {
+      "path": "public/startup/launch-414-736-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d016edf745f193695592657b93c79e7edec46ffd"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "fd5993ef1c3912819a2572d08b8ae59b61c9ca0a"
+      }
+    },
+    {
+      "path": "public/startup/launch-414-896-2-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "02f4b9ca74cc6e250dbc651da3d7b0ad1ab10afc"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "878fb1aa932e5ba6a867f1a6bc18940094881df9"
+      }
+    },
+    {
+      "path": "public/startup/launch-414-896-2-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1ace3ed5ac9407bec8711db9d5bd917ef15f3cf2"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "e1c4bb31e8bd61957b0a9effecf4baf097027bd2"
+      }
+    },
+    {
+      "path": "public/startup/launch-414-896-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "37e31c3a6812639f78211de607702f7f41533fd9"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "a7e7497c00991e091a45183238c0f870012b6991"
+      }
+    },
+    {
+      "path": "public/startup/launch-414-896-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d5db880832671c772f9058bd457b570c7f985e98"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "cf023e5a1d44ffc57c8ab4fce815aeb442b7d9a7"
+      }
+    },
+    {
+      "path": "public/startup/launch-420-912-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "38bc429bca0beeb847734f75f459f904bad129f0"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "94f456ae681c7e6070553d207550cf663c92c228"
+      }
+    },
+    {
+      "path": "public/startup/launch-420-912-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f1e67739ebb59772a13164b9a641ac1cd14e803c"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "a2a728f45e725d351b66316173f1b1f851ed6907"
+      }
+    },
+    {
+      "path": "public/startup/launch-428-926-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d38a27b5155bb7b9068ee78393a84927dbe94040"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bc50be77ecd59fdb22c2ce059931cc9e52af2c10"
+      }
+    },
+    {
+      "path": "public/startup/launch-428-926-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "21391dbf53ba35707e78677c228686ee92f576c3"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8241dc4f66d84029c65b0bc52c44282c9e24ef90"
+      }
+    },
+    {
+      "path": "public/startup/launch-430-932-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "796a2fcc91c3caad1aed99b2b6d6770e8ac8b770"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "349131ef07d51ccf4926d63344876fd36d18f35a"
+      }
+    },
+    {
+      "path": "public/startup/launch-430-932-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f72cff203483612ac129378222eb2c8a8e49c2ce"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "d2729d3811e76c050cf18ffd4eb685261d759908"
+      }
+    },
+    {
+      "path": "public/startup/launch-440-956-3-landscape.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "1fa48abaf65a45c5e4546a2ca15e6c1b5ae2626a"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ba3fdbe7df9352fc29ed9108167783c378e9e26a"
+      }
+    },
+    {
+      "path": "public/startup/launch-440-956-3-portrait.png",
+      "status": "M",
+      "category": "brand_assets",
+      "binary": true,
+      "addedLines": null,
+      "removedLines": null,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ba250bb6c9d2841570a52af2afcd3e163c6976b9"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "83634751d5cb27ba6de4a14965ab4a226c5b5622"
+      }
+    },
+    {
+      "path": "scripts/generate-startup-images.mjs",
+      "status": "M",
+      "category": "brand_generation_tool",
+      "binary": false,
+      "addedLines": 37,
+      "removedLines": 7,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "ff061a61259c52aadc49d1000d92db9d6a029f05"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "78112a3a04087ef090e5807128bbbadf78cac1a3"
+      }
+    },
+    {
+      "path": "scripts/qa-haru-icons.mjs",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 114,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bdefd131a3de4c6cd7af3291d708e7c06162084d"
+      }
+    },
+    {
+      "path": "tests/haru-content-icons-qa.cjs",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 505,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "4ad7f355be98b44deb2e65a64f33998cf5a7a18c"
+      }
+    },
+    {
+      "path": "tests/haru-icons-qa.cjs",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 366,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "0606feec942b81621f1ecc52cd6f6524ccfb45c7"
+      }
+    },
+    {
+      "path": "tests/haru-record-icons-qa.cjs",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 561,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "640724b201ed9d6927613fbd1b6b88db633d5c2d"
+      }
+    },
+    {
+      "path": "tests/haru-session-icons-qa.cjs",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 295,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "0532856f356cc4f7149b79ce0f8dbc541cd23f01"
+      }
+    },
+    {
+      "path": "tests/haru-system-icons-qa.cjs",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 344,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f58aa1c5f63db5be0b1e5da2a892c80d582f15ff"
+      }
+    },
+    {
+      "path": "tests/qa/haru-icon-helpers.cjs",
+      "status": "A",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 152,
+      "removedLines": 0,
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "6ef5fd81d0614ef4982587a8a1efc51daf3ad32c"
+      }
+    },
+    {
+      "path": "tests/qa/manifest.cjs",
+      "status": "M",
+      "category": "qa_ci",
+      "binary": false,
+      "addedLines": 5,
+      "removedLines": 0,
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9a13c64bf7a6a963190fefaef7bd04e065dde088"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "12c536c8c4dac7b98e3ade73e5570b75eeae9c38"
+      }
+    }
+  ],
+  "unchangedAppRouteFiles": {
+    "fileCount": 18,
+    "allEqual": true,
+    "files": [
+      {
+        "path": "app/api/card-automation-validation/route.ts",
+        "oid": "3af0fc5e28468669721bf9d2ca31293d98b86bee",
+        "equal": true
+      },
+      {
+        "path": "app/api/card-automation/route.ts",
+        "oid": "3af0fc5e28468669721bf9d2ca31293d98b86bee",
+        "equal": true
+      },
+      {
+        "path": "app/api/card-studio/[...path]/route.ts",
+        "oid": "f984d8cb07944d1143e0ce4dbdd3dcc998c73d23",
+        "equal": true
+      },
+      {
+        "path": "app/api/card-studio/account/route.ts",
+        "oid": "26818f438a05f90ee4812a386fa355ebb322ee0c",
+        "equal": true
+      },
+      {
+        "path": "app/api/english-accuracy-evaluation/route.ts",
+        "oid": "8d04296d0a4b8da61b9eab9f737b7600a9f1669c",
+        "equal": true
+      },
+      {
+        "path": "app/api/feedback-requests/[id]/route.ts",
+        "oid": "d28f3e2b4b4f1f1b21f0cdd35cc9f9d361f4c70f",
+        "equal": true
+      },
+      {
+        "path": "app/api/grammar-feedback/route.ts",
+        "oid": "e5506fe24be3ea0fc95f7c30f434060b6768b069",
+        "equal": true
+      },
+      {
+        "path": "app/api/image-practice/position/route.ts",
+        "oid": "38d893b1f403e4f253b7abf527069b628d423a21",
+        "equal": true
+      },
+      {
+        "path": "app/api/sentence-feedback/route.ts",
+        "oid": "22eb73c3972195129a730d25aa87d9d85a1284ae",
+        "equal": true
+      },
+      {
+        "path": "app/api/state/restore/jobs/[id]/chunks/[index]/route.ts",
+        "oid": "a1bece3df5b3fc992b20b3953a450bd750824823",
+        "equal": true
+      },
+      {
+        "path": "app/api/state/restore/jobs/[id]/commit/route.ts",
+        "oid": "a0708ccdf29707627804cc9e78e3cf67e449ccec",
+        "equal": true
+      },
+      {
+        "path": "app/api/state/restore/jobs/[id]/route.ts",
+        "oid": "8c55343f5a8bf4045c2b6671e21910eb3dc95444",
+        "equal": true
+      },
+      {
+        "path": "app/api/state/restore/jobs/[id]/validate/route.ts",
+        "oid": "b34e79dae6f2ad4f45da03f9a64b5c26b4f0e0bf",
+        "equal": true
+      },
+      {
+        "path": "app/api/state/restore/jobs/route.ts",
+        "oid": "f954b08c6d6ee0ec8ebba1873f8847018ddac0c9",
+        "equal": true
+      },
+      {
+        "path": "app/api/state/restore/route.ts",
+        "oid": "c4f64d410004327b56d9ad67a5bb34427db6d20e",
+        "equal": true
+      },
+      {
+        "path": "app/api/state/route.ts",
+        "oid": "e0f928f78a08bb7422dd1f21551e0b609e30d403",
+        "equal": true
+      },
+      {
+        "path": "app/api/study-clock/route.ts",
+        "oid": "d91de1d3b95e65c7a183f9122180badbbb12078d",
+        "equal": true
+      },
+      {
+        "path": "app/word-images/v1/[image]/route.ts",
+        "oid": "3f2c9102eeefae5f36062e4577dca188a55b0820",
+        "equal": true
+      }
+    ]
+  },
+  "releaseFollowup": {
+    "verifiedAtUtc": "2026-11-12T10:57:46.705232+00:00",
+    "candidateCodeCommit": "88e453671aa8677c24052104f9f18c981f8fd97b",
+    "candidateCodeTree": "3d67661c63d49939341d7f58901af37679b99243",
+    "referenceCommit": "74e72ef63df1c6e7afab05076eeeecf4a596999b",
+    "referenceTree": "c68e12b1e6d02e71df4e8b3241da98b330d8a986",
+    "method": {
+      "comparison": "Commit trees, recursive path/mode/type/object inventories, and Git numstat/name-status diffs",
+      "uncommittedChangesExcluded": true,
+      "sourceCodeModifiedByThisAudit": false,
+      "newRuntimeTestsExecuted": false
+    },
+    "liveMainIdentity": {
+      "liveCommit": "04b552f20f3504649a7ddfeca4449b0ab4f5b50b",
+      "mainCommit": "7ce85ed49465b352e8304a741c8505124f86deb8",
+      "liveTree": "860851e4f0df5a923d5f1b1078c77cc7661b8954",
+      "mainTree": "860851e4f0df5a923d5f1b1078c77cc7661b8954",
+      "equalRootTree": true,
+      "equalRecursiveInventory": true,
+      "changedFiles": 0,
+      "trackedFiles": 981
+    },
+    "changedFilesFromReference": [
+      {
+        "path": ".github/workflows/haru-icons-qa.yml",
+        "status": "M",
+        "category": "qa_ci",
+        "binary": false,
+        "addedLines": 17,
+        "removedLines": 6,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "81885a88d5d6f4bc752a82fd698ec71f7d2da7c6"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "156d1a5a30f86df5a9b5af435912a07ab8a887b4"
+        }
+      },
+      {
+        "path": "app/learning/ai-model-settings.tsx",
+        "status": "M",
+        "category": "runtime_ui",
+        "binary": false,
+        "addedLines": 10,
+        "removedLines": 4,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "d057b2da8c2f5922cc027c6999fea04b5121373a"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "e352305d1100a9b0c4e2cd0b19952cb1637b0b20"
+        }
+      },
+      {
+        "path": "app/learning/settings-dialog.tsx",
+        "status": "M",
+        "category": "runtime_ui",
+        "binary": false,
+        "addedLines": 78,
+        "removedLines": 10,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "fcb171d16c5d2f8dc6adbe9b0a2dec55bb4a737b"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "42af9a68356d529bf36e57f35d990d00974f9aa2"
+        }
+      },
+      {
+        "path": "app/study-design.css",
+        "status": "M",
+        "category": "runtime_ui",
+        "binary": false,
+        "addedLines": 1,
+        "removedLines": 1,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "6584959f7012e653f2917966e03d352fe2fde3ed"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "a90141c03f2669b7db6892292def3684a4596da6"
+        }
+      },
+      {
+        "path": "app/ui.tsx",
+        "status": "M",
+        "category": "runtime_ui",
+        "binary": false,
+        "addedLines": 2,
+        "removedLines": 2,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "f77e98de4f6a28859ac99a2c60a666c5885178f7"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "187ad3564139439f491fb2cef4108f87d8f58737"
+        }
+      },
+      {
+        "path": "tests/daily-topup-qa.cjs",
+        "status": "M",
+        "category": "qa_ci",
+        "binary": false,
+        "addedLines": 30,
+        "removedLines": 4,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "cbf5d47d24f03f00770840e10fa87f7b004a667d"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "72052998c7c3b949360b05bf98bbc7be5534ed84"
+        }
+      },
+      {
+        "path": "tests/haru-content-icons-qa.cjs",
+        "status": "M",
+        "category": "qa_ci",
+        "binary": false,
+        "addedLines": 43,
+        "removedLines": 6,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "4ad7f355be98b44deb2e65a64f33998cf5a7a18c"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "31db2aebd5f538a7a0c2c22c37a4d4ea886812cb"
+        }
+      },
+      {
+        "path": "tests/haru-system-icons-qa.cjs",
+        "status": "M",
+        "category": "qa_ci",
+        "binary": false,
+        "addedLines": 270,
+        "removedLines": 38,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "f58aa1c5f63db5be0b1e5da2a892c80d582f15ff"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "ccf59c52512466a153b50d9dc6cc7baeb5db1387"
+        }
+      },
+      {
+        "path": "tests/qa/haru-icon-helpers.cjs",
+        "status": "M",
+        "category": "qa_ci",
+        "binary": false,
+        "addedLines": 55,
+        "removedLines": 31,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "6ef5fd81d0614ef4982587a8a1efc51daf3ad32c"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "665543516327d667e8f4f2b8679ca515a427759e"
+        }
+      },
+      {
+        "path": "tests/ui-plan-contract-qa.cjs",
+        "status": "M",
+        "category": "qa_ci",
+        "binary": false,
+        "addedLines": 42,
+        "removedLines": 8,
+        "before": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "3f908fbc80e0337577399f5a405bf2d8b170e6ed"
+        },
+        "after": {
+          "mode": "100644",
+          "type": "blob",
+          "oid": "02b082df82e670dd7db95351a260c355c9c6a652"
+        }
+      }
+    ],
+    "runtimeUiFilesChangedFromReference": [
+      "app/learning/ai-model-settings.tsx",
+      "app/learning/settings-dialog.tsx",
+      "app/study-design.css",
+      "app/ui.tsx"
+    ],
+    "qaCiFilesChangedFromReference": [
+      ".github/workflows/haru-icons-qa.yml",
+      "tests/daily-topup-qa.cjs",
+      "tests/haru-content-icons-qa.cjs",
+      "tests/haru-system-icons-qa.cjs",
+      "tests/qa/haru-icon-helpers.cjs",
+      "tests/ui-plan-contract-qa.cjs"
+    ],
+    "referenceDeltaSummary": {
+      "changedFiles": 10,
+      "statuses": {
+        "M": 10
+      },
+      "runtimeUiFiles": 4,
+      "qaCiFiles": 6,
+      "addedTextLines": 548,
+      "removedTextLines": 110
+    },
+    "runtimeUiFollowupNotes": [
+      "Image-practice dialog minimum scrolling-body track changes from min(4.5rem,24dvh) to min(4rem,24dvh); navigation controls retain room inside their scroll clip at enlarged text sizes.",
+      "SettingsDialog schedules focus return after an auto-saving Select closes while its trigger is disabled. The native newWordsPaused checkbox records return intent before saving only when that input actually has focus, preserving keyboard focus after re-enabling without forcing focus for pointer input that did not focus it. Pending return is cancelled on another control focus, pointer interaction, dialog closure or cleanup, and requires an enabled, connected control in the open dialog.",
+      "LevelSelect and AiModelSettings receive optional triggerRef/onCloseAutoFocus props; only the settings surface supplies this behavior. Shared Select, native checkbox structure, saved values, save handlers, disabled/locked conditions, history and AI request code are not changed by this follow-up.",
+      "The other six follow-up files are the icon QA workflow and QA scripts/helper. This inventory records source changes without asserting their test results."
+    ],
+    "unchangedSubtrees": [
+      {
+        "path": ".openai",
+        "scope": "hosting source configuration",
+        "type": "tree",
+        "liveOid": "b4e8942453afd52772f695980d1de38471d90cfe",
+        "candidateOid": "b4e8942453afd52772f695980d1de38471d90cfe",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 1
+      },
+      {
+        "path": "build",
+        "scope": "build integration",
+        "type": "tree",
+        "liveOid": "17bb731e67d4675d74428bb63ef8c2188dbb076b",
+        "candidateOid": "17bb731e67d4675d74428bb63ef8c2188dbb076b",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 3
+      },
+      {
+        "path": "lib",
+        "scope": "domain logic, data contracts and server helpers",
+        "type": "tree",
+        "liveOid": "99d27e2cc775659ffc3eb6a5e6f5dcc964098c4e",
+        "candidateOid": "99d27e2cc775659ffc3eb6a5e6f5dcc964098c4e",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 126
+      },
+      {
+        "path": "db",
+        "scope": "database schema and persistence",
+        "type": "tree",
+        "liveOid": "66edee8c1be1e54aba8605f59df65b96c2f3ef5c",
+        "candidateOid": "66edee8c1be1e54aba8605f59df65b96c2f3ef5c",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 13
+      },
+      {
+        "path": "drizzle",
+        "scope": "migration SQL and metadata",
+        "type": "tree",
+        "liveOid": "6bed76d2b34fe191e53a492d58a8d26f12de4f8f",
+        "candidateOid": "6bed76d2b34fe191e53a492d58a8d26f12de4f8f",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 15
+      },
+      {
+        "path": "data",
+        "scope": "curriculum and vocabulary data",
+        "type": "tree",
+        "liveOid": "93699222bdbd8d40c13fa5583a85424ac1461b2f",
+        "candidateOid": "93699222bdbd8d40c13fa5583a85424ac1461b2f",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 41
+      },
+      {
+        "path": "hooks",
+        "scope": "shared client hooks",
+        "type": "tree",
+        "liveOid": "cc6027e3ac916df709fe1f49005f24ad4402e692",
+        "candidateOid": "cc6027e3ac916df709fe1f49005f24ad4402e692",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 1
+      },
+      {
+        "path": "app/api",
+        "scope": "API route implementations",
+        "type": "tree",
+        "liveOid": "01db30e7a0e874010a99a9f4bc00d3c489a707ce",
+        "candidateOid": "01db30e7a0e874010a99a9f4bc00d3c489a707ce",
+        "equal": true,
+        "equalRecursiveInventory": true,
+        "trackedFileCount": 17
+      }
+    ],
+    "unchangedExactFiles": {
+      "fileCount": 16,
+      "allEqual": true,
+      "files": [
+        {
+          "path": ".openai/hosting.json",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "4142a5108cfdae253a599aa1baddbf25883e6dbd"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "4142a5108cfdae253a599aa1baddbf25883e6dbd"
+          },
+          "equal": true
+        },
+        {
+          "path": "package.json",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "1ebc1fee9f4ecae29fd31538425dc56a11472ea3"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "1ebc1fee9f4ecae29fd31538425dc56a11472ea3"
+          },
+          "equal": true
+        },
+        {
+          "path": "package-lock.json",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "dfcb34fa92c3d734a30fe7e72a91b7484bc1a270"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "dfcb34fa92c3d734a30fe7e72a91b7484bc1a270"
+          },
+          "equal": true
+        },
+        {
+          "path": "drizzle.config.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c2b2f34376984744343453838ce66658ad9d9b6a"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c2b2f34376984744343453838ce66658ad9d9b6a"
+          },
+          "equal": true
+        },
+        {
+          "path": "vite.config.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "da0e25b0f96c41314ca7a3d2856194fd52bb5ed4"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "da0e25b0f96c41314ca7a3d2856194fd52bb5ed4"
+          },
+          "equal": true
+        },
+        {
+          "path": "next.config.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e9ffa3083ad279ecf95fd8eae59cb253e9a539c4"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e9ffa3083ad279ecf95fd8eae59cb253e9a539c4"
+          },
+          "equal": true
+        },
+        {
+          "path": "cloudflare-env.d.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d4346981d138b6c6ba66fc404f3c1f6919a7def7"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d4346981d138b6c6ba66fc404f3c1f6919a7def7"
+          },
+          "equal": true
+        },
+        {
+          "path": "worker-imports.d.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "149dd0a5defa8b65457f260a371f051825ae1185"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "149dd0a5defa8b65457f260a371f051825ae1185"
+          },
+          "equal": true
+        },
+        {
+          "path": "scripts/run-framework.mjs",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "ac3dd43c1241aa4dc24864b90ae15ac324917383"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "ac3dd43c1241aa4dc24864b90ae15ac324917383"
+          },
+          "equal": true
+        },
+        {
+          "path": "scripts/sites-env.mjs",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "1eeedb5e13e4b9af70d89446d981dfd4cd92a3fd"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "1eeedb5e13e4b9af70d89446d981dfd4cd92a3fd"
+          },
+          "equal": true
+        },
+        {
+          "path": "scripts/sites-env.sh",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "728416424d5d2f4c9a746d53621668225645356c"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "728416424d5d2f4c9a746d53621668225645356c"
+          },
+          "equal": true
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "82a93a84c9fe4ab3154975cf8308cd1668750329"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "82a93a84c9fe4ab3154975cf8308cd1668750329"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/chatgpt-auth.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "1c908fc71df5b53d3fb6b3a49537598edd81385a"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "1c908fc71df5b53d3fb6b3a49537598edd81385a"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/layout.tsx",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "bd52f95a0b800915de7d7bfd016298131740d037"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "bd52f95a0b800915de7d7bfd016298131740d037"
+          },
+          "equal": true
+        },
+        {
+          "path": "public/manifest.webmanifest",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "8969a5893e5de788d919fee9242c71eaece256e4"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "8969a5893e5de788d919fee9242c71eaece256e4"
+          },
+          "equal": true
+        },
+        {
+          "path": "lib/startup-images.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d4b3ae94551ae14eb031a2860efab790148f9ade"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d4b3ae94551ae14eb031a2860efab790148f9ade"
+          },
+          "equal": true
+        }
+      ]
+    },
+    "unchangedClientPersistenceNavigationHooks": {
+      "fileCount": 20,
+      "allEqual": true,
+      "files": [
+        {
+          "path": "app/learning/use-familiarity-flow.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "60f0e551dfc7d7eea9ac479b09ea1a3290c940cd"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "60f0e551dfc7d7eea9ac479b09ea1a3290c940cd"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-image-practice-position.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "794df201ccbcb964989d0ef506d7b89bde6b0b81"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "794df201ccbcb964989d0ef506d7b89bde6b0b81"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-learning-controller.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "904134097c949e8a3e03d48aa3ca42467939282a"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "904134097c949e8a3e03d48aa3ca42467939282a"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-learning-message.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e0db08044978816bd9f7a8b2d187eb989c5629b7"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e0db08044978816bd9f7a8b2d187eb989c5629b7"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-learning-tools.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "5503306a39e82ffffb37a5b6f31046ae4cac4810"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "5503306a39e82ffffb37a5b6f31046ae4cac4810"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-session-commands.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "71c7b53ce0640e506196198d7610f05e58c2f4fa"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "71c7b53ce0640e506196198d7610f05e58c2f4fa"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-study-transition.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "14f2fb11ddec40159682d4a21f49a7f6f2551607"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "14f2fb11ddec40159682d4a21f49a7f6f2551607"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-tab-navigation.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "000184cea30621c6dea978360a7bc3ae6d2c8799"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "000184cea30621c6dea978360a7bc3ae6d2c8799"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/learning/use-vocabulary-state.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c90010fd5d2cbb398d46cd9c7ecb933879d29a16"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c90010fd5d2cbb398d46cd9c7ecb933879d29a16"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/navigation.tsx",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "0659c59592eae8acb93c7e0ac931dc08ca504dfd"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "0659c59592eae8acb93c7e0ac931dc08ca504dfd"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-backup-preview.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e893586815cef2230dbe8635a07b4e57d4413f54"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e893586815cef2230dbe8635a07b4e57d4413f54"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-backup-restore.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "28117a1916a0cb7f6744f65029d230db15fcbbf8"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "28117a1916a0cb7f6744f65029d230db15fcbbf8"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-feedback-context.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c60545d98543fcfbdfc9b874ef59346416dc425d"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c60545d98543fcfbdfc9b874ef59346416dc425d"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-feedback-recovery.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "47ff91b746403a4932a020f2aca646b102f95f2e"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "47ff91b746403a4932a020f2aca646b102f95f2e"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-keyboard-inset.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e032753bea03fecb59715e652d4acfb13499caec"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e032753bea03fecb59715e652d4acfb13499caec"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-learning-store.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "9f0514956c1eb522474e8b5c609cf8aedf6af4ff"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "9f0514956c1eb522474e8b5c609cf8aedf6af4ff"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-persistent-input.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "90f3a5aef7a4ff422f30c64de1be78dc3022c448"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "90f3a5aef7a4ff422f30c64de1be78dc3022c448"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-study-date.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f7f4d46bece05d535d72e6e98e98b23e9a172b03"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f7f4d46bece05d535d72e6e98e98b23e9a172b03"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-tab-position.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "6b22b747380a0be11c7a8e0925ee3fbab1e4e8c9"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "6b22b747380a0be11c7a8e0925ee3fbab1e4e8c9"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/use-view-restoration.tsx",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "872e155ebf52d8eed074c4be7d2e6dc07489f660"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "872e155ebf52d8eed074c4be7d2e6dc07489f660"
+          },
+          "equal": true
+        }
+      ]
+    },
+    "unchangedAppRouteFiles": {
+      "fileCount": 18,
+      "allEqual": true,
+      "files": [
+        {
+          "path": "app/api/card-automation-validation/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "3af0fc5e28468669721bf9d2ca31293d98b86bee"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "3af0fc5e28468669721bf9d2ca31293d98b86bee"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/card-automation/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "3af0fc5e28468669721bf9d2ca31293d98b86bee"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "3af0fc5e28468669721bf9d2ca31293d98b86bee"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/card-studio/[...path]/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f984d8cb07944d1143e0ce4dbdd3dcc998c73d23"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f984d8cb07944d1143e0ce4dbdd3dcc998c73d23"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/card-studio/account/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "26818f438a05f90ee4812a386fa355ebb322ee0c"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "26818f438a05f90ee4812a386fa355ebb322ee0c"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/english-accuracy-evaluation/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "8d04296d0a4b8da61b9eab9f737b7600a9f1669c"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "8d04296d0a4b8da61b9eab9f737b7600a9f1669c"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/feedback-requests/[id]/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d28f3e2b4b4f1f1b21f0cdd35cc9f9d361f4c70f"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d28f3e2b4b4f1f1b21f0cdd35cc9f9d361f4c70f"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/grammar-feedback/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e5506fe24be3ea0fc95f7c30f434060b6768b069"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e5506fe24be3ea0fc95f7c30f434060b6768b069"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/image-practice/position/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "38d893b1f403e4f253b7abf527069b628d423a21"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "38d893b1f403e4f253b7abf527069b628d423a21"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/sentence-feedback/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "22eb73c3972195129a730d25aa87d9d85a1284ae"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "22eb73c3972195129a730d25aa87d9d85a1284ae"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/state/restore/jobs/[id]/chunks/[index]/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "a1bece3df5b3fc992b20b3953a450bd750824823"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "a1bece3df5b3fc992b20b3953a450bd750824823"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/state/restore/jobs/[id]/commit/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "a0708ccdf29707627804cc9e78e3cf67e449ccec"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "a0708ccdf29707627804cc9e78e3cf67e449ccec"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/state/restore/jobs/[id]/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "8c55343f5a8bf4045c2b6671e21910eb3dc95444"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "8c55343f5a8bf4045c2b6671e21910eb3dc95444"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/state/restore/jobs/[id]/validate/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "b34e79dae6f2ad4f45da03f9a64b5c26b4f0e0bf"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "b34e79dae6f2ad4f45da03f9a64b5c26b4f0e0bf"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/state/restore/jobs/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f954b08c6d6ee0ec8ebba1873f8847018ddac0c9"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "f954b08c6d6ee0ec8ebba1873f8847018ddac0c9"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/state/restore/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c4f64d410004327b56d9ad67a5bb34427db6d20e"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "c4f64d410004327b56d9ad67a5bb34427db6d20e"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/state/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e0f928f78a08bb7422dd1f21551e0b609e30d403"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "e0f928f78a08bb7422dd1f21551e0b609e30d403"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/api/study-clock/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d91de1d3b95e65c7a183f9122180badbbb12078d"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "d91de1d3b95e65c7a183f9122180badbbb12078d"
+          },
+          "equal": true
+        },
+        {
+          "path": "app/word-images/v1/[image]/route.ts",
+          "live": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "3f2c9102eeefae5f36062e4577dca188a55b0820"
+          },
+          "candidate": {
+            "mode": "100644",
+            "type": "blob",
+            "oid": "3f2c9102eeefae5f36062e4577dca188a55b0820"
+          },
+          "equal": true
+        }
+      ],
+      "sameRoutePathInventory": true
+    },
+    "allListedUnchangedAreasRemainEqualToLive": true,
+    "brandAssetsUnchangedFromReference": {
+      "files": 38,
+      "allEqual": true,
+      "startupPngFiles": 26,
+      "referencePathsPreserved": true
+    },
+    "candidateCodeVsLive": {
+      "trackedFiles": 997,
+      "changedFiles": 93,
+      "statuses": {
+        "A": 16,
+        "M": 77
+      },
+      "categories": {
+        "runtime_ui": 41,
+        "brand_assets": 38,
+        "brand_generation_tool": 1,
+        "documentation": 2,
+        "qa_ci": 11
+      },
+      "categoryDetails": [
+        {
+          "category": "runtime_ui",
+          "files": 41,
+          "added": 1,
+          "modified": 40,
+          "deleted": 0,
+          "binaryFiles": 0,
+          "addedLines": 1306,
+          "removedLines": 183
+        },
+        {
+          "category": "brand_assets",
+          "files": 38,
+          "added": 5,
+          "modified": 33,
+          "deleted": 0,
+          "binaryFiles": 32,
+          "addedLines": 6,
+          "removedLines": 1
+        },
+        {
+          "category": "brand_generation_tool",
+          "files": 1,
+          "added": 0,
+          "modified": 1,
+          "deleted": 0,
+          "binaryFiles": 0,
+          "addedLines": 37,
+          "removedLines": 7
+        },
+        {
+          "category": "documentation",
+          "files": 2,
+          "added": 2,
+          "modified": 0,
+          "deleted": 0,
+          "binaryFiles": 0,
+          "addedLines": 2237,
+          "removedLines": 0
+        },
+        {
+          "category": "qa_ci",
+          "files": 11,
+          "added": 8,
+          "modified": 3,
+          "deleted": 0,
+          "binaryFiles": 0,
+          "addedLines": 2821,
+          "removedLines": 12
+        }
+      ],
+      "binaryFiles": 32,
+      "addedTextLines": 6407,
+      "removedTextLines": 203
+    },
+    "releaseEvidenceDocumentsExcludedFromThisCodeComparison": true,
+    "excludedUncommittedDocumentation": {
+      "scope": "Working-tree changes only; committed versions, if present in the selected commit, remain included in the commit comparison.",
+      "paths": [
+        "README.md",
+        "docs/haru-icons/README.md",
+        "docs/haru-icons/iphone-release-checklist.md",
+        "docs/haru-icons/release-readiness-2026-11-12.md",
+        "docs/haru-icons/release-source-comparison.json"
+      ],
+      "plannedHandling": "Separate documentation-only follow-up commit, according to the release coordinator."
+    },
+    "runtimeTestResults": {
+      "verifiedByThisAudit": false,
+      "status": "Not evaluated; no CI or browser success assertion is made by this source comparison."
+    },
+    "limitations": [
+      "The original 74e72ef baseline audit is preserved in all other top-level fields; this releaseFollowup section is the 88e45367 code comparison.",
+      "Source identity does not verify the compiled production artifact, production behavior, physical-device behavior, database contents, applied migrations, deployment secrets or hosting service state.",
+      "No source files, commits, pushes or deployments were changed by this follow-up audit. Only this comparison JSON was updated."
+    ],
+    "productionReceiptRecheck": {
+      "recordedAtUtc": "2026-11-12T11:07:37.397937+00:00",
+      "nativeReads": [
+        "Sites get_site",
+        "Sites get_site_version"
+      ],
+      "projectId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225",
+      "status": "active",
+      "latestVersionNumber": 147,
+      "liveUrl": "https://wordgrain-oxford-study.hoihou-o.chatgpt.site",
+      "versionId": "appgprj_6ab0a3cbaaa08191a05b0bcdf62df225~appgver_633854cc7d7881918c6adafb6aae06c9",
+      "sourceCommit": "04b552f20f3504649a7ddfeca4449b0ab4f5b50b",
+      "deploymentId": "appgdep_6aeca2d8b1f88191aebfec2f1d5edab2",
+      "matchesComparedProductionSource": true,
+      "productionDataReadOrWritten": false,
+      "publicationPerformed": false
+    },
+    "ciSourceIdentity": {
+      "candidateCodeCommit": "88e453671aa8677c24052104f9f18c981f8fd97b",
+      "temporaryPullRequestMergeCommit": "8928294352f5cf41240aa4b335d607f0f1c26117",
+      "tree": "3d67661c63d49939341d7f58901af37679b99243",
+      "equalRootTree": true,
+      "actualPullRequestMergePerformed": false,
+      "note": "The Actions checkout is a temporary PR merge ref; runtime results are recorded in release-readiness-2026-11-12.md."
+    }
+  }
+}

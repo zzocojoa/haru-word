@@ -4,6 +4,10 @@
 원래 연결표의 위치·심볼·크기·조건은 [placements.json](./placements.json)에 보존하고,
 리팩터링 후 실제 파일을 `implemented_in`에 기록했습니다.
 
+출시 대상과 운영 소스의 차이는 [2026-11-12 출시 검증](./release-readiness-2026-11-12.md),
+실제 기기에서 남은 확인은 [iPhone 출시 확인표](./iphone-release-checklist.md)에 정리합니다.
+소스 동일성의 파일별 근거는 [출시 소스 비교](./release-source-comparison.json)에 보존합니다.
+
 ## 범위
 
 | 위치 | 화면 또는 기능 | 주요 구현 |
@@ -44,6 +48,9 @@
   표·행·열 머리글의 native 의미와 기존 데이터는 유지합니다.
 - 임시 입력 비교·삭제 확인의 텍스트 버튼도 최소 44×44px 조작 영역과 확대 줄바꿈을 제공합니다.
 - 복원창을 닫을 때 기존 화면 복원 조정기를 통해 기록 관리 버튼으로 초점을 돌려줍니다.
+- 설정의 학습 수준·하루 목표·주간 점검 요일·AI 모델은 자동 저장 중 비활성화된 선택 버튼에
+  저장 완료 후 초점을 돌려줍니다. 키보드로 바꾼 ‘새 단어 쉬기’ 체크박스도 같은 규칙을 사용합니다.
+  사용자가 다른 컨트롤로 이동하거나 창을 닫으면 복귀를 취소합니다.
 - 작은 화면에서 단어장·학습 기록의 단어와 상태 표시는 충분한 폭을 사용하도록 줄을 나눕니다.
   확대된 단어가 한 글자씩 쌓이지 않고, 필터 선택값과 기록 관리 메뉴 문구가 잘리지 않는지 검사합니다.
 - 문법 읽기의 설명과 기기 음성 버튼은 작은 화면에서 세로로 배치해 버튼 문구를 읽을 수 있게 합니다.
@@ -65,11 +72,12 @@ node --experimental-strip-types --test tests/startup-assets.test.mjs
 
 ```sh
 npm run build
-node scripts/qa-haru-icons.mjs
+QA_BROWSER=chromium node scripts/qa-haru-icons.mjs
+QA_BROWSER=webkit node scripts/qa-haru-icons.mjs
 ```
 
 Playwright와 axe-core가 준비된 환경에서 실행합니다. GitHub Actions의
-`Haru icon UI verification` 워크플로가 동일한 실행 환경과 아티팩트를 제공합니다.
+`Haru icon UI verification` 워크플로가 Chromium·WebKit을 각각 실행하고 엔진별 보고서와 스크린샷을 제공합니다.
 모든 데이터는 격리한 로컬 Worker의 합성 계정에 생성하며 실제 AI 생성은 비활성화합니다.
 
 | 검증 파일 | 책임 |
@@ -86,9 +94,12 @@ Playwright와 axe-core가 준비된 환경에서 실행합니다. GitHub Actions
 가로 넘침·SVG 크기·장식 의미·axe 결과·실제 버튼 가림을 확인합니다.
 검사별 정확한 실행 조합, 예외적인 상태, 캡처 목록과 실패 원인은 각 JSON 보고서에 남깁니다.
 
-읽기 전후 비교는 현재 앱의 grammar protocol 5, feedback structure, sense-key 지원 헤더를 사용하여
+공통 QA helper의 읽기 전후 비교는 현재 앱의 grammar protocol 5, AI contract 4, feedback structure, sense-key 지원 헤더를 사용하여
 서버 revision과 전체 state를 비교합니다. 학습·설정처럼 쓰기가 필요한 검사에서는 의도한 변경과
 보존되어야 하는 과거 회차를 구분합니다.
 
 검증 결과는 `outputs/haru-icons/suite-<engine>.json`과 각 검증 폴더에 저장됩니다.
-실제 iPhone/iPad와 Safari의 설치·시작 화면 동작은 Chromium 뷰포트 검증에 포함되지 않습니다.
+시작 화면은 별도 브라우저 컨텍스트에서 실제 서버 HTML/CSS를 확인하며,
+정상 앱은 앱 스크립트를 가로채지 않은 새 컨텍스트에서 같은 합성 계정으로 검사합니다.
+100/200%는 CSS 루트 글자 크기 검사입니다. Linux Playwright WebKit은 실제 iPhone Safari가 아니며,
+홈 화면 설치·iOS 시작 이미지·캐시·실제 키보드·VoiceOver는 별도 실기기 확인표로 검사합니다.
