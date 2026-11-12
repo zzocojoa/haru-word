@@ -4,11 +4,11 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 process.chdir(fileURLToPath(new URL('../', import.meta.url)));
-const { grammarWorker } = await import('../tests/qa/worker-profile.cjs');
-const { runCase } = await import('../tests/qa/process.cjs');
-const { acquireLock } = await import('../tests/qa/lock.cjs');
-const { waitForWorker, accountHeaders, axePath } = await import('../tests/qa/runtime.cjs');
-const { validateEnvironment, requireDisabledAiStatus } = await import('../tests/qa/preflight.cjs');
+const { grammarWorker } = (await import('../tests/qa/worker-profile.cjs')).default;
+const { runCase } = (await import('../tests/qa/process.cjs')).default;
+const { acquireLock } = (await import('../tests/qa/lock.cjs')).default;
+const { waitForWorker, accountHeaders, axePath } = (await import('../tests/qa/runtime.cjs')).default;
+const { validateEnvironment, requireDisabledAiStatus } = (await import('../tests/qa/preflight.cjs')).default;
 const resolveModule = createRequire(import.meta.url).resolve;
 
 const cases = ['ui-plan-contract-qa.cjs', 'editor-save-qa.cjs', 'haru-icons-qa.cjs'];
@@ -68,7 +68,7 @@ const engine = process.env.QA_BROWSER || 'chromium';
       && report.results.every(result => result.code === 0 && !result.timedOut && !result.interrupted);
     process.exitCode = report.passed ? 0 : 1;
   } catch (error) {
-    report.error = error.message;
+    report.error = error.stack || error.message;
     console.error(error.stack || error.message);
     process.exitCode = signal.aborted ? signal.reason.exitCode : 1;
   } finally {
