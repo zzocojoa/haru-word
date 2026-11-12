@@ -9,6 +9,10 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
     <div
       data-slot="table-container"
       className="relative w-full overflow-x-auto"
+      role="region"
+      tabIndex={0}
+      aria-label={props["aria-label"] ? `${props["aria-label"]} 가로 스크롤` : "표 가로 스크롤"}
+      aria-labelledby={props["aria-labelledby"]}
     >
       <table
         data-slot="table"

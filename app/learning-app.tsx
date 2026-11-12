@@ -1,15 +1,9 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import {
   ArrowRight,
-  BookOpen,
-  CalendarCheck,
-  CalendarDays,
   ChevronRight,
-  Info,
-  NotebookPen,
-  RotateCcw,
-  Settings2,
 } from "lucide-react";
 import { Suspense, lazy, useCallback, useRef } from "react";
 import type { GrammarLeave } from './grammar/use-grammar-draft';
@@ -178,7 +172,7 @@ function LearningScreens({
       <header className="topbar">
         <div className="brand">
           <span className="brand-icon">
-            <BookOpen size={22} />
+            <HaruIcon name="brand" size={22} />
           </span>
           하루단어
         </div>
@@ -194,7 +188,7 @@ function LearningScreens({
             aria-label="학습 설정"
             onClick={async () => { if (await flushGrammar()) setSettings(true); }}
           >
-            <Settings2 size={19} />
+            <HaruIcon name="settings" size={19} />
           </button>
         </div>
       </header>
@@ -212,7 +206,7 @@ function LearningScreens({
             </h1>
           </div>
           <span className="daily-label">
-            <CalendarDays size={17} />
+            <HaruIcon name="calendar" size={17} />
             {new Intl.DateTimeFormat("ko-KR", {
               timeZone: "Asia/Seoul",
               month: "long",
@@ -229,28 +223,28 @@ function LearningScreens({
         >
           <TabsList className="main-nav" aria-label="학습 화면">
             <TabsTrigger value="today" aria-label="오늘 학습">
-              <BookOpen />
+              <HaruIcon name="book-open" size={18} />
               <span className="nav-label-wide">오늘 학습</span>
               <span className="nav-label-compact" aria-hidden="true">
                 오늘 학습
               </span>
             </TabsTrigger>
             <TabsTrigger value="library" aria-label="단어장">
-              <NotebookPen />
+              <HaruIcon name="notebook" size={18} />
               <span className="nav-label-wide">단어장</span>
               <span className="nav-label-compact" aria-hidden="true">
                 단어장
               </span>
             </TabsTrigger>
             <TabsTrigger value="review" aria-label="복습 점검">
-              <RotateCcw />
+              <HaruIcon name="repeat" size={18} />
               <span className="nav-label-wide">복습 점검</span>
               <span className="nav-label-compact" aria-hidden="true">
                 복습 점검
               </span>
             </TabsTrigger>
             <TabsTrigger value="log" aria-label="학습 기록">
-              <CalendarCheck />
+              <HaruIcon name="calendar-check" size={18} />
               <span className="nav-label-wide">학습 기록</span>
               <span className="nav-label-compact" aria-hidden="true">
                 학습 기록
@@ -465,7 +459,7 @@ function LearningScreens({
         <footer>
           <span>Oxford 3000</span>
           <button className="text-button" onClick={() => setAbout(true)}>
-            학습 방식·출처 <Info size={14} />
+            학습 방식·출처 <HaruIcon name="info" size={14} />
           </button>
         </footer>
       </div>

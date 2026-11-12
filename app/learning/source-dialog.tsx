@@ -1,4 +1,5 @@
 "use client";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import {
   DialogDescription,
   DialogHeader,
@@ -32,7 +33,7 @@ export function SourceDialog({
           target="_blank"
           rel="noreferrer"
         >
-          Oxford 원문 PDF 보기
+          <HaruIcon name="source-document" size={18} /><span>Oxford 원문 PDF 보기</span><HaruIcon name="external-link" size={18} />
         </a>
         <details className="notes-details"><summary>원문·데이터 안내</summary><p>American Oxford 3000 by CEFR level PDF 13쪽에서 표제어 3,000개와 원문 행 3,308개를 추출했어요. 품사와 수준을 나눈 학습 항목은 3,809개예요.</p></details>
         <h3>한국어 풀이와 예문</h3>
@@ -46,7 +47,7 @@ export function SourceDialog({
           target="_blank"
           rel="noreferrer"
         >
-          사전 출처 · CC BY-SA 4.0
+          <HaruIcon name="dictionary" size={18} /><span>사전 출처 · CC BY-SA 4.0</span><HaruIcon name="external-link" size={18} />
         </a>
         <p>
           ‘Tatoeba 참고 예문’은 문장별 기여자와 원문 링크를 표시합니다. ‘학습용
@@ -62,12 +63,12 @@ export function SourceDialog({
           target="_blank"
           rel="noreferrer"
         >
-          Tatoeba 문장 자료 · CC BY 2.0
+          <HaruIcon name="source-document" size={18} /><span>Tatoeba 문장 자료 · CC BY 2.0</span><HaruIcon name="external-link" size={18} />
         </a>
         <h3>미국식 발음 기호</h3>
         <p>현재 단어의 뜻·품사와 일치하는 미국식 IPA를 표시해요. Wiktionary와 CMU 자료를 교차 대조하고 일부 항목을 사전 원문으로 추가 확인한 편집본이며, Oxford 공식 발음 데이터는 아니에요.</p>
         <p>Wiktionary contributors의 자료를 선별하고 표기를 정리했어요. 해당 파생 부분은 CC BY-SA 4.0으로 제공해요. 기기 음성은 표시된 IPA와 다를 수 있어요.</p>
-        <a className="source-link" href="/sources/american-ipa.json" target="_blank" rel="noreferrer">발음 데이터·출처·라이선스</a>
+        <a className="source-link" href="/sources/american-ipa.json" target="_blank" rel="noreferrer"><HaruIcon name="pronunciation-document" size={20} /><span>발음 데이터·출처·라이선스</span><HaruIcon name="external-link" size={20} /></a>
         <h3>기록과 점검</h3>
         <p>하루 목표는 새 단어를 절반 이상, 나머지는 복습으로 채워요. 목표가 1개면 학습한 날마다 번갈아 골라요. 후보가 부족하면 다른 쪽으로 채우며, ‘새 단어 쉬기’ 중에는 복습만 해요.</p>
         <p>
@@ -76,14 +77,14 @@ export function SourceDialog({
         <p>
           AI 의견을 요청할 때만 문장과 학습 목표를 선택한 OpenAI 모델에 보내요. API 입력·응답은 기본적으로 모델 학습에 사용되지 않지만 보관·안전 점검 정책은 적용돼요. 실패해도 다른 모델로 자동 재전송하지 않아요. AI 의견은 참고 자료이며 문장 평가 버튼은 자기평가예요. 하루단어는 Oxford University Press의 공식 제품이 아니에요.
         </p>
-        <a className="source-link" href="https://developers.openai.com/api/docs/guides/your-data" target="_blank" rel="noreferrer">OpenAI API 데이터 정책</a>
+        <a className="source-link" href="https://developers.openai.com/api/docs/guides/your-data" target="_blank" rel="noreferrer"><span>OpenAI API 데이터 정책</span><HaruIcon name="external-link" size={18} /></a>
         <a
           className="source-link"
           href="/sources/content-attribution.txt"
           target="_blank"
           rel="noreferrer"
         >
-          데이터 변경·라이선스 안내
+          <HaruIcon name="copyright" size={18} /><span>데이터 변경·라이선스 안내</span><HaruIcon name="external-link" size={18} />
         </a>
         </div>
       </DialogContent>

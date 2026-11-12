@@ -1,0 +1,2143 @@
+[
+  {
+    "placement_id": "P001",
+    "area_no": 1,
+    "area": "공통 화면",
+    "location": "상단 헤더 → 하루단어 브랜드 심볼",
+    "icon_ids": [
+      "brand"
+    ],
+    "current_size_px": "22 / 좁은 화면 width 20",
+    "recommended_size_px": 22,
+    "condition": "해당 화면 표시 시",
+    "note": "브랜드 내부 SVG의 가로·세로를 같은 값으로 지정",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P002",
+    "area_no": 1,
+    "area": "공통 화면",
+    "location": "상단 헤더 → 저장 상태 표시",
+    "icon_ids": [
+      "loading",
+      "cloud-unsaved",
+      "cloud-saved",
+      "cloud"
+    ],
+    "current_size_px": "15 / 16",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "불러오는 중·저장 중·미저장·저장됨·로그인 전을 기존 문구 및 조건과 함께 구분",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning/save-status.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P003",
+    "area_no": 1,
+    "area": "공통 화면",
+    "location": "상단 헤더 → 학습 설정 버튼",
+    "icon_ids": [
+      "settings"
+    ],
+    "current_size_px": "19",
+    "recommended_size_px": 19,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P004",
+    "area_no": 1,
+    "area": "공통 화면",
+    "location": "페이지 상단 → 날짜 표시",
+    "icon_ids": [
+      "calendar"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "모바일에서 기존 숨김 조건 유지",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P005",
+    "area_no": 1,
+    "area": "공통 화면",
+    "location": "화면 하단 → 학습 방식·출처 버튼",
+    "icon_ids": [
+      "info"
+    ],
+    "current_size_px": "14",
+    "recommended_size_px": 14,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P006",
+    "area_no": 2,
+    "area": "메인 메뉴",
+    "location": "오늘 학습",
+    "icon_ids": [
+      "book-open"
+    ],
+    "current_size_px": "18 / 모바일 20",
+    "recommended_size_px": 20,
+    "condition": "데스크톱 18px · 모바일 20px, 기존 탭 노출 조건 유지",
+    "note": "",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P007",
+    "area_no": 2,
+    "area": "메인 메뉴",
+    "location": "단어장",
+    "icon_ids": [
+      "notebook"
+    ],
+    "current_size_px": "18 / 모바일 20",
+    "recommended_size_px": 20,
+    "condition": "데스크톱 18px · 모바일 20px, 기존 탭 노출 조건 유지",
+    "note": "",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P008",
+    "area_no": 2,
+    "area": "메인 메뉴",
+    "location": "복습 점검",
+    "icon_ids": [
+      "repeat"
+    ],
+    "current_size_px": "18 / 모바일 20",
+    "recommended_size_px": 20,
+    "condition": "데스크톱 18px · 모바일 20px, 기존 탭 노출 조건 유지",
+    "note": "",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P009",
+    "area_no": 2,
+    "area": "메인 메뉴",
+    "location": "학습 기록",
+    "icon_ids": [
+      "calendar-check"
+    ],
+    "current_size_px": "18 / 모바일 20",
+    "recommended_size_px": 20,
+    "condition": "데스크톱 18px · 모바일 20px, 기존 탭 노출 조건 유지",
+    "note": "",
+    "source": "app/learning-app.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning-app.tsx",
+    "implemented_in": [
+      "app/learning-app.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P010",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "오늘의 학습 시작·이어가기 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P011",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "추가 학습 버튼",
+    "icon_ids": [
+      "plus",
+      "arrow-right"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P012",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "오늘 단어 다시 보기 버튼",
+    "icon_ids": [
+      "book-open"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P013",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "오늘 단어 다시 연습 버튼",
+    "icon_ids": [
+      "repeat"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P014",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "오늘의 기록 보기 버튼",
+    "icon_ids": [
+      "record-file",
+      "arrow-right"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P015",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "목표 단어 목록 → 새 학습·복습 구분",
+    "icon_ids": [
+      "sparkle",
+      "repeat"
+    ],
+    "current_size_px": "12",
+    "recommended_size_px": 12,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P016",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "목표 단어 목록 → 학습 상태 배지",
+    "icon_ids": [
+      "check",
+      "unassessed"
+    ],
+    "current_size_px": "14",
+    "recommended_size_px": 14,
+    "condition": "해당 화면 표시 시",
+    "note": "기록됨을 정답·숙달로 재해석하지 않음",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P017",
+    "area_no": 3,
+    "area": "오늘 학습 화면",
+    "location": "목표 단어 목록 → 보완 필요 배지",
+    "icon_ids": [
+      "alert-circle"
+    ],
+    "current_size_px": "14",
+    "recommended_size_px": 14,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/today-overview.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/today-overview.tsx",
+    "implemented_in": [
+      "app/learning/today-overview.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P018",
+    "area_no": 4,
+    "area": "일일 학습 단계 표시",
+    "location": "기억 깨우기",
+    "icon_ids": [
+      "memory-warmup"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "일일 학습 단계 안내; 기존 단계명 병기",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study-session.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P019",
+    "area_no": 4,
+    "area": "일일 학습 단계 표시",
+    "location": "단어 익히기",
+    "icon_ids": [
+      "book-open"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "일일 학습 단계 안내; 기존 단계명 병기",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study-session.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P020",
+    "area_no": 4,
+    "area": "일일 학습 단계 표시",
+    "location": "스스로 떠올리기",
+    "icon_ids": [
+      "recall-card"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "일일 학습 단계 안내; 기존 단계명 병기",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study-session.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P021",
+    "area_no": 4,
+    "area": "일일 학습 단계 표시",
+    "location": "문장 만들기",
+    "icon_ids": [
+      "sentence-write"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "일일 학습 단계 안내; 기존 단계명 병기",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study-session.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P022",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "기억 깨우기 → 뜻 확인 버튼",
+    "icon_ids": [
+      "eye"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/warmup-stage.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P023",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "단어 익히기 → 자료 출처 표시",
+    "icon_ids": [
+      "book-open"
+    ],
+    "current_size_px": "15",
+    "recommended_size_px": 15,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/learn-stage.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P024",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "단어 익히기 → 표현·예문 수정하기 버튼",
+    "icon_ids": [
+      "pencil"
+    ],
+    "current_size_px": "15",
+    "recommended_size_px": 15,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/learn-stage.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P025",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "단어 익히기 → 뜻 저장하고 계속 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/learn-stage.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P026",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "스스로 떠올리기 → 내 답 확인 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/recall-stage.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P027",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "문장 만들기 → 문장을 완성했어요 버튼",
+    "icon_ids": [
+      "check"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/sentence-stage.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P028",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "문장 만들기 → 소리 내어 말하기 자기 확인",
+    "icon_ids": [
+      "spoken-check",
+      "checkbox-checked"
+    ],
+    "current_size_px": "현재 체크박스",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "녹음·음성 인식 기능을 나타내지 않음",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/sentence-stage.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": "The original labelled native checkbox remains; spoken-check is supplementary."
+  },
+  {
+    "placement_id": "P029",
+    "area_no": 5,
+    "area": "학습 단계 내부",
+    "location": "학습 종료 요약 → 기록 저장 상태 표시",
+    "icon_ids": [
+      "cloud-saved",
+      "unassessed"
+    ],
+    "current_size_px": "SVG 기본값 / 배경 48",
+    "recommended_size_px": 24,
+    "condition": "해당 화면 표시 시",
+    "note": "저장 확인 전 중립 표시 유지",
+    "source": "app/study-session.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/study-session.tsx",
+    "implemented_in": [
+      "app/study/session-summary.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P030",
+    "area_no": 6,
+    "area": "이미지 연습",
+    "location": "오늘 학습 화면 → 이미지 연습 진입 버튼",
+    "icon_ids": [
+      "image-card"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "word_image_pilot_enabled 기능 조건 유지",
+    "note": "",
+    "source": "app/learning/image-practice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/image-practice.tsx",
+    "implemented_in": [
+      "app/learning/image-practice-launcher.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P031",
+    "area_no": 6,
+    "area": "이미지 연습",
+    "location": "이미지 연습 창 → 카드 뒤집기 안내",
+    "icon_ids": [
+      "card-flip"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "word_image_pilot_enabled 기능 조건 유지",
+    "note": "기존 카드 전체 클릭 동작에 보조 표시; 새 중첩 버튼 추가 금지",
+    "source": "app/learning/image-practice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/image-practice.tsx",
+    "implemented_in": [
+      "app/learning/image-practice.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P032",
+    "area_no": 6,
+    "area": "이미지 연습",
+    "location": "이미지 연습 창 → 이전 카드 버튼",
+    "icon_ids": [
+      "arrow-left"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "word_image_pilot_enabled 기능 조건 유지",
+    "note": "",
+    "source": "app/learning/image-practice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/image-practice.tsx",
+    "implemented_in": [
+      "app/learning/image-practice.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P033",
+    "area_no": 6,
+    "area": "이미지 연습",
+    "location": "이미지 연습 창 → 다음 카드 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "word_image_pilot_enabled 기능 조건 유지",
+    "note": "",
+    "source": "app/learning/image-practice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/image-practice.tsx",
+    "implemented_in": [
+      "app/learning/image-practice.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P034",
+    "area_no": 6,
+    "area": "이미지 연습",
+    "location": "이미지 연습 창 → 카드 번호 이동",
+    "icon_ids": [
+      "card-grid"
+    ],
+    "current_size_px": "현재 숫자",
+    "recommended_size_px": 18,
+    "condition": "word_image_pilot_enabled 기능 조건 유지",
+    "note": "실제 카드 번호와 입력 UI 유지",
+    "source": "app/learning/image-practice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/image-practice.tsx",
+    "implemented_in": [
+      "app/learning/image-practice.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P035",
+    "area_no": 6,
+    "area": "이미지 연습",
+    "location": "이미지 연습 창 → 연습 위치 저장 상태",
+    "icon_ids": [
+      "loading",
+      "cloud-saved",
+      "cloud-unsaved",
+      "cloud"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "word_image_pilot_enabled 기능 조건 유지",
+    "note": "위치 저장을 성적 저장으로 표시하지 않음",
+    "source": "app/learning/image-practice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/image-practice.tsx",
+    "implemented_in": [
+      "app/learning/image-practice.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P036",
+    "area_no": 6,
+    "area": "이미지 연습",
+    "location": "이미지 연습 창 → 닫기 버튼",
+    "icon_ids": [
+      "x"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 20,
+    "condition": "word_image_pilot_enabled 기능 조건 유지",
+    "note": "",
+    "source": "app/learning/image-practice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/image-practice.tsx",
+    "implemented_in": [
+      "app/learning/image-practice-launcher.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P037",
+    "area_no": 7,
+    "area": "단어장",
+    "location": "검색창",
+    "icon_ids": [
+      "search"
+    ],
+    "current_size_px": "18",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/word-library.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/word-library.tsx",
+    "implemented_in": [
+      "app/word-library.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P038",
+    "area_no": 7,
+    "area": "단어장",
+    "location": "개인 단어 추가 버튼",
+    "icon_ids": [
+      "notebook-plus"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/word-library.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/word-library.tsx",
+    "implemented_in": [
+      "app/word-library.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P039",
+    "area_no": 7,
+    "area": "단어장",
+    "location": "이전 페이지 버튼",
+    "icon_ids": [
+      "chevron-left"
+    ],
+    "current_size_px": "19",
+    "recommended_size_px": 19,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/word-library.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/word-library.tsx",
+    "implemented_in": [
+      "app/word-library.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P040",
+    "area_no": 7,
+    "area": "단어장",
+    "location": "다음 페이지 버튼",
+    "icon_ids": [
+      "chevron-right"
+    ],
+    "current_size_px": "19",
+    "recommended_size_px": 19,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/word-library.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/word-library.tsx",
+    "implemented_in": [
+      "app/word-library.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P041",
+    "area_no": 7,
+    "area": "단어장",
+    "location": "단어별 품사 도움말 버튼",
+    "icon_ids": [
+      "help-circle"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/word-library.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/word-library.tsx",
+    "implemented_in": [
+      "app/word-library.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P042",
+    "area_no": 7,
+    "area": "단어장",
+    "location": "검색 결과 없음 표시",
+    "icon_ids": [
+      "search-empty"
+    ],
+    "current_size_px": "SVG 기본값",
+    "recommended_size_px": 24,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/word-library.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/word-library.tsx",
+    "implemented_in": [
+      "app/word-library.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P043",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "수업 목록 → 완료·재확인 상태",
+    "icon_ids": [
+      "check",
+      "repeat"
+    ],
+    "current_size_px": "14 / 16",
+    "recommended_size_px": 16,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-catalog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P044",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "수업 목록 → 수업 진입 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "18",
+    "recommended_size_px": 18,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-catalog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P045",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "수업 진행 표시 → 완료 단계",
+    "icon_ids": [
+      "check"
+    ],
+    "current_size_px": "14",
+    "recommended_size_px": 14,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-lesson.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": "The existing stepper stays hidden at widths <=640px; mobile uses the existing phase-count text. The 14px completion glyph is displayed at wider widths."
+  },
+  {
+    "placement_id": "P046",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "수업 화면 → 목록으로 이동 버튼",
+    "icon_ids": [
+      "list",
+      "arrow-left"
+    ],
+    "current_size_px": "18",
+    "recommended_size_px": 18,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-lesson.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P047",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "수업 화면 → 다음 단계 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "18",
+    "recommended_size_px": 18,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-lesson.tsx",
+      "app/grammar/grammar-question.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P048",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "문제 화면 → 선택한 답 표시",
+    "icon_ids": [
+      "check"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-question.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P049",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "문제 화면 → 힌트·답 보기 버튼",
+    "icon_ids": [
+      "help-circle",
+      "eye"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-question.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P050",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "문제 화면 → 답변 피드백 표시",
+    "icon_ids": [
+      "check-circle",
+      "help-circle",
+      "alert-circle"
+    ],
+    "current_size_px": "19",
+    "recommended_size_px": 19,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-question.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P051",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "문장 쓰기 → AI 참고 의견 요청",
+    "icon_ids": [
+      "ai-feedback"
+    ],
+    "current_size_px": "18",
+    "recommended_size_px": 18,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-writing.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P052",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "수업 요약 → 저장 중·저장 오류·수업 마침 표시",
+    "icon_ids": [
+      "loading",
+      "cloud-unsaved",
+      "check-circle"
+    ],
+    "current_size_px": "26",
+    "recommended_size_px": 26,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "dirty/error/saved 조건과 기존 설명 유지; 수업 마침은 숙달 판정이 아님",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-summary.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P053",
+    "area_no": 8,
+    "area": "품사와 문장 연습",
+    "location": "수업 요약 → 다른 문제로 다시 확인 버튼",
+    "icon_ids": [
+      "repeat"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "grammar_enabled 및 현행 문법 기능 조건 유지",
+    "note": "",
+    "source": "app/grammar/grammar-lesson.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/grammar/grammar-lesson.tsx",
+    "implemented_in": [
+      "app/grammar/grammar-summary.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P054",
+    "area_no": 9,
+    "area": "복습 점검",
+    "location": "주간 점검 → 시작·이어가기 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/review-desk.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/review-desk.tsx",
+    "implemented_in": [
+      "app/review/review-desk.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P055",
+    "area_no": 9,
+    "area": "복습 점검",
+    "location": "월말 쓰기 → 시작·이어가기 버튼",
+    "icon_ids": [
+      "arrow-right"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/review-desk.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/review-desk.tsx",
+    "implemented_in": [
+      "app/review/review-desk.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P056",
+    "area_no": 9,
+    "area": "복습 점검",
+    "location": "보완 연습 → 아는 단어 다시 확인 버튼",
+    "icon_ids": [
+      "repeat"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/review-desk.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/review-desk.tsx",
+    "implemented_in": [
+      "app/review/review-desk.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P057",
+    "area_no": 9,
+    "area": "복습 점검",
+    "location": "보완 연습 → 뜻→영어 추가 연습 버튼",
+    "icon_ids": [
+      "recall-card"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "뜻→영어 방향을 기존 문구로 유지",
+    "source": "app/review/review-desk.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/review-desk.tsx",
+    "implemented_in": [
+      "app/review/review-desk.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P058",
+    "area_no": 9,
+    "area": "복습 점검",
+    "location": "보완 연습 → 문장 보완 연습 버튼",
+    "icon_ids": [
+      "sentence-write"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/review-desk.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/review-desk.tsx",
+    "implemented_in": [
+      "app/review/review-desk.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P059",
+    "area_no": 9,
+    "area": "복습 점검",
+    "location": "주간 점검 카드 상단 → 아이콘 영역〔현재 숨김〕",
+    "icon_ids": [
+      "calendar-repeat"
+    ],
+    "current_size_px": "CSS display:none",
+    "recommended_size_px": 24,
+    "condition": "해당 화면 표시 시",
+    "note": "아이콘 파일만 준비; 숨김 해제는 별도 UI 변경",
+    "source": "app/review/review-desk.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/review-desk.tsx",
+    "implemented_in": [
+      "app/review/review-desk.tsx"
+    ],
+    "application_mode": "hidden",
+    "implementation_note": "Existing .review-icon display:none is preserved."
+  },
+  {
+    "placement_id": "P060",
+    "area_no": 9,
+    "area": "복습 점검",
+    "location": "월말 쓰기 카드 상단 → 아이콘 영역〔현재 숨김〕",
+    "icon_ids": [
+      "calendar-pencil"
+    ],
+    "current_size_px": "CSS display:none",
+    "recommended_size_px": 24,
+    "condition": "해당 화면 표시 시",
+    "note": "아이콘 파일만 준비; 숨김 해제는 별도 UI 변경",
+    "source": "app/review/review-desk.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/review-desk.tsx",
+    "implemented_in": [
+      "app/review/review-desk.tsx"
+    ],
+    "application_mode": "hidden",
+    "implementation_note": "Existing .review-icon display:none is preserved."
+  },
+  {
+    "placement_id": "P061",
+    "area_no": 10,
+    "area": "학습 기록",
+    "location": "기록이 없는 화면",
+    "icon_ids": [
+      "record-empty"
+    ],
+    "current_size_px": "32",
+    "recommended_size_px": 32,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/learning-log.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/learning-log.tsx",
+    "implemented_in": [
+      "app/review/learning-log.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P062",
+    "area_no": 10,
+    "area": "학습 기록",
+    "location": "단어별 기록 → 도움 없이 성공·보완 필요·미확인·진행 상태 배지",
+    "icon_ids": [
+      "check",
+      "alert-circle",
+      "unassessed"
+    ],
+    "current_size_px": "14",
+    "recommended_size_px": 14,
+    "condition": "해당 화면 표시 시",
+    "note": "공통 StatusBadge SVG 구현은 app/study-ui.tsx를 재사용",
+    "source": "app/session-records.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/session-records.tsx",
+    "implemented_in": [
+      "app/session-records.tsx",
+      "app/study-ui.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": "SessionRecords retains its existing StatusBadge calls; the shared glyph default is updated."
+  },
+  {
+    "placement_id": "P063",
+    "area_no": 10,
+    "area": "학습 기록",
+    "location": "기록 관리 메뉴 진입 버튼",
+    "icon_ids": [
+      "more-horizontal"
+    ],
+    "current_size_px": "18",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/record-actions.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/record-actions.tsx",
+    "implemented_in": [
+      "app/review/record-actions.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P064",
+    "area_no": 10,
+    "area": "학습 기록",
+    "location": "기록 관리 → 학습 기록 CSV 받기",
+    "icon_ids": [
+      "download"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/record-actions.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/record-actions.tsx",
+    "implemented_in": [
+      "app/review/record-actions.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P065",
+    "area_no": 10,
+    "area": "학습 기록",
+    "location": "기록 관리 → 전체 백업",
+    "icon_ids": [
+      "backup-archive"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/record-actions.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/record-actions.tsx",
+    "implemented_in": [
+      "app/review/record-actions.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P066",
+    "area_no": 10,
+    "area": "학습 기록",
+    "location": "기록 관리 → 백업으로 복원",
+    "icon_ids": [
+      "restore-file"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/record-actions.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/record-actions.tsx",
+    "implemented_in": [
+      "app/review/record-actions.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P067",
+    "area_no": 10,
+    "area": "학습 기록",
+    "location": "기록 관리 → AI 튜터용 안내·최근 기록 받기",
+    "icon_ids": [
+      "tutor-export"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/review/record-actions.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/review/record-actions.tsx",
+    "implemented_in": [
+      "app/review/record-actions.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P068",
+    "area_no": 11,
+    "area": "백업·복원",
+    "location": "전체 백업 창 → 백업 파일 다운로드 버튼",
+    "icon_ids": [
+      "download"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/backup-export-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/backup-export-dialog.tsx",
+    "implemented_in": [
+      "app/backup-export-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P069",
+    "area_no": 11,
+    "area": "백업·복원",
+    "location": "전체 백업 창 → 원본 보관용 다운로드 버튼",
+    "icon_ids": [
+      "download"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/backup-export-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/backup-export-dialog.tsx",
+    "implemented_in": [
+      "app/backup-export-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P070",
+    "area_no": 11,
+    "area": "백업·복원",
+    "location": "백업 복원 창 → 파일 확인 진행 표시",
+    "icon_ids": [
+      "loading"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/backup-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/backup-dialog.tsx",
+    "implemented_in": [
+      "app/backup-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P071",
+    "area_no": 11,
+    "area": "백업·복원",
+    "location": "백업 복원 창 → 현재 기록 먼저 백업받기 버튼",
+    "icon_ids": [
+      "backup-archive",
+      "download"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/backup-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/backup-dialog.tsx",
+    "implemented_in": [
+      "app/backup-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P072",
+    "area_no": 11,
+    "area": "백업·복원",
+    "location": "백업 복원 창 → 이 백업으로 복원 버튼",
+    "icon_ids": [
+      "restore-file"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/backup-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/backup-dialog.tsx",
+    "implemented_in": [
+      "app/backup-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P073",
+    "area_no": 12,
+    "area": "발음·사전·타이머",
+    "location": "기기 음성 듣기 버튼",
+    "icon_ids": [
+      "volume"
+    ],
+    "current_size_px": "18",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/ui.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/ui.tsx",
+    "implemented_in": [
+      "app/ui.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P074",
+    "area_no": 12,
+    "area": "발음·사전·타이머",
+    "location": "사전 발음 링크",
+    "icon_ids": [
+      "external-link"
+    ],
+    "current_size_px": "13 / 14",
+    "recommended_size_px": 14,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/ui.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/ui.tsx",
+    "implemented_in": [
+      "app/ui.tsx",
+      "app/word-pronunciation.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P075",
+    "area_no": 12,
+    "area": "발음·사전·타이머",
+    "location": "Oxford 발음·용례 링크",
+    "icon_ids": [
+      "external-link"
+    ],
+    "current_size_px": "13",
+    "recommended_size_px": 13,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/ui.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/ui.tsx",
+    "implemented_in": [
+      "app/ui.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P076",
+    "area_no": 12,
+    "area": "발음·사전·타이머",
+    "location": "영한사전 링크",
+    "icon_ids": [
+      "external-link"
+    ],
+    "current_size_px": "13",
+    "recommended_size_px": 13,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/ui.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/ui.tsx",
+    "implemented_in": [
+      "app/ui.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P077",
+    "area_no": 12,
+    "area": "발음·사전·타이머",
+    "location": "학습 타이머 → 계속 버튼",
+    "icon_ids": [
+      "play"
+    ],
+    "current_size_px": "15",
+    "recommended_size_px": 15,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/ui.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/ui.tsx",
+    "implemented_in": [
+      "app/ui.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P078",
+    "area_no": 12,
+    "area": "발음·사전·타이머",
+    "location": "학습 타이머 → 일시정지 버튼",
+    "icon_ids": [
+      "pause"
+    ],
+    "current_size_px": "15",
+    "recommended_size_px": 15,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/ui.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/ui.tsx",
+    "implemented_in": [
+      "app/ui.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P079",
+    "area_no": 13,
+    "area": "AI 참고 의견",
+    "location": "AI 참고 의견 제목",
+    "icon_ids": [
+      "ai-feedback"
+    ],
+    "current_size_px": "17",
+    "recommended_size_px": 17,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/sentence-feedback.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/sentence-feedback.tsx",
+    "implemented_in": [
+      "app/sentence-feedback.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P080",
+    "area_no": 13,
+    "area": "AI 참고 의견",
+    "location": "AI 요청 진행 표시",
+    "icon_ids": [
+      "loading"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/sentence-feedback.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/sentence-feedback.tsx",
+    "implemented_in": [
+      "app/sentence-feedback.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P081",
+    "area_no": 14,
+    "area": "설정",
+    "location": "학습 수준 설정",
+    "icon_ids": [
+      "learning-level"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/settings-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/settings-dialog.tsx",
+    "implemented_in": [
+      "app/learning/settings-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P082",
+    "area_no": 14,
+    "area": "설정",
+    "location": "하루 목표 설정",
+    "icon_ids": [
+      "target"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/settings-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/settings-dialog.tsx",
+    "implemented_in": [
+      "app/learning/settings-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P083",
+    "area_no": 14,
+    "area": "설정",
+    "location": "복습만 하기 설정",
+    "icon_ids": [
+      "repeat"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/settings-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/settings-dialog.tsx",
+    "implemented_in": [
+      "app/learning/settings-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P084",
+    "area_no": 14,
+    "area": "설정",
+    "location": "주간 점검 요일 설정",
+    "icon_ids": [
+      "calendar-repeat"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/settings-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/settings-dialog.tsx",
+    "implemented_in": [
+      "app/learning/settings-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P085",
+    "area_no": 14,
+    "area": "설정",
+    "location": "친숙도 재확인",
+    "icon_ids": [
+      "eye",
+      "help-circle"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/settings-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/settings-dialog.tsx",
+    "implemented_in": [
+      "app/learning/settings-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P086",
+    "area_no": 14,
+    "area": "설정",
+    "location": "AI 모델 설정",
+    "icon_ids": [
+      "ai-model"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 20,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/ai-model-settings.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/ai-model-settings.tsx",
+    "implemented_in": [
+      "app/learning/ai-model-settings.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P087",
+    "area_no": 15,
+    "area": "임시 입력 관리·복구",
+    "location": "이 기기의 임시 입력 삭제",
+    "icon_ids": [
+      "trash"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "서버 학습 기록 삭제와 구분",
+    "source": "app/local-draft-settings.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/local-draft-settings.tsx",
+    "implemented_in": [
+      "app/local-draft-settings.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P088",
+    "area_no": 15,
+    "area": "임시 입력 관리·복구",
+    "location": "임시 입력을 지우고 로그아웃",
+    "icon_ids": [
+      "log-out"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "기존 삭제·로그아웃 안내 유지",
+    "source": "app/local-draft-settings.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/local-draft-settings.tsx",
+    "implemented_in": [
+      "app/local-draft-settings.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P089",
+    "area_no": 15,
+    "area": "임시 입력 관리·복구",
+    "location": "기기 보관 다시 확인",
+    "icon_ids": [
+      "draft-check"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/draft-recovery-notice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/draft-recovery-notice.tsx",
+    "implemented_in": [
+      "app/draft-recovery-notice.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P090",
+    "area_no": 15,
+    "area": "임시 입력 관리·복구",
+    "location": "복구한 입력 되돌리기",
+    "icon_ids": [
+      "undo"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/draft-recovery-notice.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/draft-recovery-notice.tsx",
+    "implemented_in": [
+      "app/draft-recovery-notice.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P091",
+    "area_no": 16,
+    "area": "자료 출처",
+    "location": "PDF 자료 링크",
+    "icon_ids": [
+      "source-document",
+      "external-link"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/source-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/source-dialog.tsx",
+    "implemented_in": [
+      "app/learning/source-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P092",
+    "area_no": 16,
+    "area": "자료 출처",
+    "location": "사전 출처 링크",
+    "icon_ids": [
+      "dictionary",
+      "external-link"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/source-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/source-dialog.tsx",
+    "implemented_in": [
+      "app/learning/source-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P093",
+    "area_no": 16,
+    "area": "자료 출처",
+    "location": "발음 데이터 출처 링크",
+    "icon_ids": [
+      "pronunciation-document",
+      "external-link"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 20,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/source-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/source-dialog.tsx",
+    "implemented_in": [
+      "app/learning/source-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P094",
+    "area_no": 16,
+    "area": "자료 출처",
+    "location": "라이선스 안내 링크",
+    "icon_ids": [
+      "copyright",
+      "external-link"
+    ],
+    "current_size_px": "현재 텍스트",
+    "recommended_size_px": 18,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/learning/source-dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/source-dialog.tsx",
+    "implemented_in": [
+      "app/learning/source-dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P095",
+    "area_no": 17,
+    "area": "공통 대화상자·안내",
+    "location": "대화상자 닫기 버튼",
+    "icon_ids": [
+      "x"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "공통 Radix/Shadcn 동작·접근성 계약 유지",
+    "note": "",
+    "source": "components/ui/dialog.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/components/ui/dialog.tsx",
+    "implemented_in": [
+      "components/ui/dialog.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P096",
+    "area_no": 17,
+    "area": "공통 대화상자·안내",
+    "location": "일시 안내 닫기 버튼",
+    "icon_ids": [
+      "x"
+    ],
+    "current_size_px": "20",
+    "recommended_size_px": 20,
+    "condition": "공통 Radix/Shadcn 동작·접근성 계약 유지",
+    "note": "",
+    "source": "app/learning/learning-message.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/learning/learning-message.tsx",
+    "implemented_in": [
+      "app/learning/learning-message.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P097",
+    "area_no": 17,
+    "area": "공통 대화상자·안내",
+    "location": "선택 메뉴 펼치기",
+    "icon_ids": [
+      "chevron-down"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "공통 Radix/Shadcn 동작·접근성 계약 유지",
+    "note": "",
+    "source": "components/ui/select.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/components/ui/select.tsx",
+    "implemented_in": [
+      "components/ui/select.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P098",
+    "area_no": 17,
+    "area": "공통 대화상자·안내",
+    "location": "선택 메뉴의 선택 항목 표시",
+    "icon_ids": [
+      "check"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "공통 Radix/Shadcn 동작·접근성 계약 유지",
+    "note": "",
+    "source": "components/ui/select.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/components/ui/select.tsx",
+    "implemented_in": [
+      "components/ui/select.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": ""
+  },
+  {
+    "placement_id": "P099",
+    "area_no": 17,
+    "area": "공통 대화상자·안내",
+    "location": "하위 메뉴 이동 표시",
+    "icon_ids": [
+      "chevron-right"
+    ],
+    "current_size_px": "16",
+    "recommended_size_px": 16,
+    "condition": "공통 Radix/Shadcn 동작·접근성 계약 유지",
+    "note": "",
+    "source": "components/ui/dropdown-menu.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/components/ui/dropdown-menu.tsx",
+    "implemented_in": [
+      "components/ui/dropdown-menu.tsx"
+    ],
+    "application_mode": "component-only",
+    "implementation_note": "Reusable submenu component is updated; there is currently no application consumer."
+  },
+  {
+    "placement_id": "P100",
+    "area_no": 17,
+    "area": "공통 대화상자·안내",
+    "location": "체크박스 선택 표시",
+    "icon_ids": [
+      "checkbox-checked",
+      "checkbox-empty"
+    ],
+    "current_size_px": "14",
+    "recommended_size_px": 14,
+    "condition": "공통 Radix/Shadcn 동작·접근성 계약 유지",
+    "note": "",
+    "source": "components/ui/checkbox.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/components/ui/checkbox.tsx",
+    "implemented_in": [
+      "components/ui/checkbox.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": "Existing Radix checkbox semantics are preserved; approved empty/checked glyphs replace the visual frame and tick."
+  },
+  {
+    "placement_id": "P101",
+    "area_no": 18,
+    "area": "브랜드 아이콘 적용처",
+    "location": "브라우저 파비콘",
+    "icon_ids": [
+      "brand"
+    ],
+    "current_size_px": "16 / 32 / 48",
+    "recommended_size_px": 16,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/layout.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/layout.tsx",
+    "implemented_in": [
+      "app/layout.tsx",
+      "public/favicon.svg",
+      "public/favicon.ico",
+      "public/favicon-32x32.png"
+    ],
+    "application_mode": "asset",
+    "implementation_note": "Existing icon metadata URLs are retained."
+  },
+  {
+    "placement_id": "P102",
+    "area_no": 18,
+    "area": "브랜드 아이콘 적용처",
+    "location": "iPhone·iPad 홈 화면 아이콘",
+    "icon_ids": [
+      "brand-app"
+    ],
+    "current_size_px": "180",
+    "recommended_size_px": 180,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/layout.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/layout.tsx",
+    "implemented_in": [
+      "app/layout.tsx",
+      "public/apple-touch-icon.png",
+      "public/apple-touch-icon-precomposed.png"
+    ],
+    "application_mode": "asset",
+    "implementation_note": "Existing home-screen metadata URLs and 180px canvas are retained."
+  },
+  {
+    "placement_id": "P103",
+    "area_no": 18,
+    "area": "브랜드 아이콘 적용처",
+    "location": "설치형 웹앱 아이콘",
+    "icon_ids": [
+      "brand-app"
+    ],
+    "current_size_px": "192 / 512",
+    "recommended_size_px": 192,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/layout.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/layout.tsx",
+    "implemented_in": [
+      "public/manifest.webmanifest",
+      "public/app-icon-192.png",
+      "public/app-icon-512.png"
+    ],
+    "application_mode": "asset",
+    "implementation_note": "Existing manifest URLs and 192/512px canvases are retained."
+  },
+  {
+    "placement_id": "P104",
+    "area_no": 18,
+    "area": "브랜드 아이콘 적용처",
+    "location": "앱 초기 로딩 화면 심볼",
+    "icon_ids": [
+      "brand"
+    ],
+    "current_size_px": "72",
+    "recommended_size_px": 72,
+    "condition": "해당 화면 표시 시",
+    "note": "",
+    "source": "app/layout.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/layout.tsx",
+    "implemented_in": [
+      "app/startup-screen.tsx"
+    ],
+    "application_mode": "existing-visibility",
+    "implementation_note": "The existing 72px initial-HTML symbol uses the approved regular brand artwork."
+  },
+  {
+    "placement_id": "P105",
+    "area_no": 18,
+    "area": "브랜드 아이콘 적용처",
+    "location": "iOS 시작 이미지 내 브랜드 심볼",
+    "icon_ids": [
+      "brand"
+    ],
+    "current_size_px": "기기별 시작 이미지",
+    "recommended_size_px": 72,
+    "condition": "해당 화면 표시 시",
+    "note": "72px 심볼 준비; 전체 기기별 시작 배경 이미지는 이 패키지 범위에 포함하지 않음",
+    "source": "app/layout.tsx",
+    "source_url": "https://github.com/zzocojoa/haru-word/blob/7ce85ed49465b352e8304a741c8505124f86deb8/app/layout.tsx",
+    "implemented_in": [
+      "scripts/generate-startup-images.mjs",
+      "lib/startup-images.ts",
+      "public/brand/brand-72.svg",
+      "public/startup"
+    ],
+    "application_mode": "asset",
+    "implementation_note": "Only the centered 72 CSS-pixel symbol is replaced on the existing 26 device/orientation canvases."
+  }
+]

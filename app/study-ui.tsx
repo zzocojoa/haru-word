@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
-import { Check, CircleAlert, CircleDashed } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 
-export function StatusBadge({ tone = 'neutral', children }: { tone?: 'success' | 'warning' | 'neutral'; children: ReactNode }) {
-  const Icon = tone === 'success' ? Check : tone === 'warning' ? CircleAlert : CircleDashed;
+export function StatusBadge({ tone = 'neutral', icon, children }: { tone?: 'success' | 'warning' | 'neutral'; icon?: ReactNode; children: ReactNode }) {
+  const iconName = tone === 'success' ? 'check' : tone === 'warning' ? 'alert-circle' : 'unassessed';
   return <span className={`status-badge ${tone === 'success' ? 'status-good' : tone === 'warning' ? 'status-warn' : 'status-neutral'}`}>
-    <Icon size={14} aria-hidden="true" />{children}
+    {icon ?? <HaruIcon name={iconName} size={14} />}{children}
   </span>;
 }
 

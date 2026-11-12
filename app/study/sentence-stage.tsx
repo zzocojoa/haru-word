@@ -1,6 +1,6 @@
 "use client";
 import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
-import { Check } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import { SentenceFeedbackPanel } from "../sentence-feedback";
 import { DictionaryLinks } from "../ui";
 import { WordIpa, WordPronunciation } from '../word-pronunciation';
@@ -70,14 +70,15 @@ export function SentenceStage({
         placeholder="오늘 있었던 일이나 평소 하는 일을 써 보세요."
         rows={3}
       />
-      <label className="check-label">
+      <label className="check-label spoken-check-label">
         <input
           type="checkbox"
           checked={spoken}
           disabled={aiPending}
           onChange={(e) => setSpoken(e.target.checked)}
-        />{" "}
-        내 문장을 소리 내어 말해 봤어요
+        />
+        <HaruIcon name="spoken-check" size={16} />
+        <span>내 문장을 소리 내어 말해 봤어요</span>
       </label>
       <label htmlFor="sentence-note">
         보완할 점 <span className="muted">선택</span>
@@ -133,7 +134,7 @@ export function SentenceStage({
           disabled={busy || !sentence.trim()}
           onClick={() => sentenceDone("written")}
         >
-          문장을 완성했어요 <Check size={17} />
+          문장을 완성했어요 <HaruIcon name="check" size={17} />
         </button>
         <button
           className="secondary-button"

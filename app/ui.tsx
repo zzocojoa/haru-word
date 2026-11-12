@@ -1,12 +1,12 @@
 "use client";
-import { Volume2, ExternalLink, Pause, Play } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { HaruIcon } from "@/components/icons/haru-icon";
+import { useEffect, useRef, useState, type ComponentProps, type Ref } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { dictionaryUrl,koreanDictionaryUrl } from "@/lib/catalog-basics";
 import { LEVELS, type Level } from "@/lib/learning";
 import { speakOnDevice, type DeviceSpeechState } from "@/lib/device-speech";
 import { HelpDetails } from './study-ui';
-export function LevelSelect({value,onChange,disabled=false}:{value:Level;onChange:(v:Level)=>void;disabled?:boolean}){return <Select value={value} onValueChange={v=>onChange(v as Level)} disabled={disabled}><SelectTrigger aria-label="학습 수준" className="level-select"><SelectValue/></SelectTrigger><SelectContent>{LEVELS.map(l=><SelectItem key={l} value={l}>{l} · {l==="A1"?"시작":l==="A2"?"기초":l==="B1"?"중급":"중상급"}</SelectItem>)}</SelectContent></Select>}
+export function LevelSelect({value,onChange,disabled=false,triggerRef,onCloseAutoFocus}:{value:Level;onChange:(v:Level)=>void;disabled?:boolean;triggerRef?:Ref<HTMLButtonElement>;onCloseAutoFocus?:ComponentProps<typeof SelectContent>['onCloseAutoFocus']}){return <Select value={value} onValueChange={v=>onChange(v as Level)} disabled={disabled}><SelectTrigger ref={triggerRef} aria-label="학습 수준" className="level-select"><SelectValue/></SelectTrigger><SelectContent onCloseAutoFocus={onCloseAutoFocus}>{LEVELS.map(l=><SelectItem key={l} value={l}>{l} · {l==="A1"?"시작":l==="A2"?"기초":l==="B1"?"중급":"중상급"}</SelectItem>)}</SelectContent></Select>}
 export function Speak({text,dictionaryHref,showHelpInitially=false}:{text:string;dictionaryHref?:string;showHelpInitially?:boolean}) {
   const [state,setState] = useState<DeviceSpeechState & {text:string}>({status:'idle',message:'',text});
   const [attemptedText,setAttemptedText] = useState<string | undefined>(undefined);
@@ -21,8 +21,8 @@ export function Speak({text,dictionaryHref,showHelpInitially=false}:{text:string
   }
   return <div className="speak-wrap">
     <div className="audio-controls">
-      <button type="button" className="secondary-button device-audio" aria-label={`${text} 기기 음성 듣기`} onClick={speak}><Volume2 size={18} aria-hidden="true"/><span>기기 음성 듣기</span></button>
-      {dictionary&&<a className="audio-dictionary" href={dictionary} target="_blank" rel="noreferrer">사전 발음 <ExternalLink size={13} aria-hidden="true"/></a>}
+      <button type="button" className="secondary-button device-audio" aria-label={`${text} 기기 음성 듣기`} onClick={speak}><HaruIcon name="volume" size={18}/><span>기기 음성 듣기</span></button>
+      {dictionary&&<a className="audio-dictionary" href={dictionary} target="_blank" rel="noreferrer">사전 발음 <HaruIcon name="external-link" size={14}/></a>}
       <span className="audio-message" data-state={status} role="status">{message}</span>
     </div>
     {(showHelpInitially||attemptedText===text)&&<HelpDetails title="음성 도움말" className="audio-help">
@@ -32,6 +32,6 @@ export function Speak({text,dictionaryHref,showHelpInitially=false}:{text:string
     </HelpDetails>}
   </div>;
 }
-export function DictionaryLinks({word}:{word:string}){return <div className="dictionary-links"><a href={dictionaryUrl(word)} target="_blank" rel="noreferrer">Oxford 발음·용례 <ExternalLink size={13}/></a><a href={koreanDictionaryUrl(word)} target="_blank" rel="noreferrer">영한사전 <ExternalLink size={13}/></a></div>}
+export function DictionaryLinks({word}:{word:string}){return <div className="dictionary-links"><a href={dictionaryUrl(word)} target="_blank" rel="noreferrer">Oxford 발음·용례 <HaruIcon name="external-link" size={13}/></a><a href={koreanDictionaryUrl(word)} target="_blank" rel="noreferrer">영한사전 <HaruIcon name="external-link" size={13}/></a></div>}
 export function download(name:string,body:string,type='application/json'){const url=URL.createObjectURL(new Blob([body],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-export function Clock({seconds,paused,onToggle,disabled=false}:{seconds:number;paused:boolean;onToggle:()=>void;disabled?:boolean}){return <button className="timer" disabled={disabled} onClick={onToggle} aria-label={paused?'타이머 계속':'타이머 일시 정지'}>{paused?<Play size={15}/>:<Pause size={15}/>}<span>{Math.floor(seconds/60).toString().padStart(2,'0')}:{(seconds%60).toString().padStart(2,'0')}</span><span className="muted">/ 15:00</span></button>}
+export function Clock({seconds,paused,onToggle,disabled=false}:{seconds:number;paused:boolean;onToggle:()=>void;disabled?:boolean}){return <button className="timer" disabled={disabled} onClick={onToggle} aria-label={paused?'타이머 계속':'타이머 일시 정지'}>{paused?<HaruIcon name="play" size={15}/>:<HaruIcon name="pause" size={15}/>}<span>{Math.floor(seconds/60).toString().padStart(2,'0')}:{(seconds%60).toString().padStart(2,'0')}</span><span className="muted">/ 15:00</span></button>}

@@ -37,7 +37,8 @@ import {
   type Word,
 } from "@/lib/learning";
 import { groupJournalSessions, journalSessionLabel } from "@/lib/learning-journal";
-import { ArrowRight, NotebookPen } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import { Fragment, memo, useMemo, useRef, useState } from "react";
 import { FeedbackDetail } from "../feedback-detail";
 import { SessionRecords } from "../session-records";
@@ -114,7 +115,7 @@ export function LearningLog({
       </Select>
       {!list.length ? (
         <div className="empty-state">
-          <NotebookPen size={32} />
+          <HaruIcon name="record-empty" size={32} />
           <h3>{selected === "all" ? "첫 학습 기록을 기다리고 있어요." : "이 종류의 학습 기록이 아직 없어요."}</h3>
           {selected === "all" ? <button className="secondary-button" onClick={onStudyHome}>오늘의 학습으로 <ArrowRight size={16}/></button> : <button className="secondary-button" onClick={() => { changeFilter("all"); filterRef.current?.focus(); }}>전체 기록 보기</button>}
         </div>
@@ -259,7 +260,7 @@ const SessionLogTable = memo(function SessionLogTable({
   words: Word[];
 }) {
   return (
-    <Table className="log-table">
+    <Table className="log-table" aria-label="단어별 학습 기록">
       <TableHeader>
         <TableRow>
           <TableHead>단어·학습한 뜻</TableHead>

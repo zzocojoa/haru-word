@@ -1,6 +1,7 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Check, Lightbulb } from 'lucide-react';
+import { Lightbulb } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { Progress } from '@/components/ui/progress';
 import { exampleFocusStart, type GrammarLesson as Lesson } from '@/lib/grammar/content';
 import { QUESTION_KEYS, combinedCheck, recordAnswer, recordObservationHelp, revealGrammarAnswer, updateGrammarSentence, type GrammarProgress } from '@/lib/grammar/model';
@@ -83,7 +84,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
 
   return <section className="grammar-lesson" aria-label={`${lesson.title} 수업`}>
     <div className="grammar-toolbar">
-      <button className="text-button" onClick={() => void leave(onBack)}><ArrowLeft size={18} />수업 목록</button>
+      <button className="text-button" onClick={() => void leave(onBack)}><HaruIcon name="list" size={18} />수업 목록</button>
       <span role="status" className="small-note">{error ? '저장 확인 필요' : saving ? '저장 중' : dirty ? '아직 저장 전' : '저장됨'}</span>
     </div>
     <div className="grammar-lesson-heading">
@@ -93,7 +94,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
     </div>
     <ol className="grammar-stepper" aria-label={reviewing ? '다시 확인 단계' : '수업 단계'}>{step.steps.map((label, index) =>
       <li key={label} aria-current={index === step.phase ? 'step' : undefined} data-done={index < step.phase}>
-        <span aria-hidden="true">{index < step.phase ? <Check size={14} /> : index + 1}</span>{label}
+        <span aria-hidden="true">{index < step.phase ? <HaruIcon name="check" size={14} /> : index + 1}</span>{label}
       </li>
     )}</ol>
     <Progress className="grammar-progress" aria-label="수업 진행" value={step.percent} />
@@ -110,7 +111,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
         <Lightbulb size={18} aria-hidden="true" />{notice ? '설명 접기' : '생각한 뒤 설명 확인'}
       </button>
       {notice && <p className="grammar-message">{lesson.noticeAnswer}</p>}
-      <button className="primary-button" disabled={!persistence.canSave} onClick={() => move(1)}>역할 알아보기<ArrowRight size={18} /></button>
+      <button className="primary-button" disabled={!persistence.canSave} onClick={() => move(1)}>역할 알아보기<HaruIcon name="arrow-right" size={18} /></button>
     </div>)}
     {!reviewing && progress.stage === 1 && <div className="grammar-stage">
       <p className="grammar-role">{lesson.role}</p>
@@ -120,7 +121,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
       {progress.contentVersion === 4 && <ReviewedExamples id={lessonId} />}
       <div className="grammar-actions">
         <button className="text-button" onClick={() => move(0)}>예문 다시 보기</button>
-        <button className="primary-button" disabled={!persistence.canSave} onClick={() => move(2)}>3문제 연습<ArrowRight size={18} /></button>
+        <button className="primary-button" disabled={!persistence.canSave} onClick={() => move(2)}>3문제 연습<HaruIcon name="arrow-right" size={18} /></button>
       </div>
     </div>}
     {question && (reviewing || progress.stage >= 2 && progress.stage <= 4) && <GrammarQuestion

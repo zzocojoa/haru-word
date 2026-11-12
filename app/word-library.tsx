@@ -31,7 +31,7 @@ import {
   type State,
   type Word,
 } from "@/lib/learning";
-import { ChevronLeft, ChevronRight, Plus, Search, CircleHelp, ArrowRight } from "lucide-react";
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { deferredView } from './deferred-view';
 import { useNavigationState } from './navigation';
@@ -106,7 +106,7 @@ export const WordLibrary = memo(function WordLibrary(props: LibraryProps) {
       {(grammarVisited || view === 'grammar') && <GrammarWorkspace visible={view === 'grammar'} lessonId={lessonId} enhanced={props.grammarPracticeEnabled || props.grammarV3Enabled || props.grammarV4Enabled} contentVersion={props.grammarV4Enabled ? 4 : props.grammarV3Enabled ? 3 : 2} activityDate={props.activityDate} persistence={{ ...props.persistence, registerLeave }} onBack={() => { setLessonId(null); pendingPosition.current = 0; }} onWords={() => { pendingSearchFocus.current = true; focusReturn.current = null; setPos(LESSON_INDEX.get(lessonId!)!.pos); setPage(0); setView('words'); setLessonId(null); pendingPosition.current = 0; }} date={props.activityDate()} expandedGroups={expandedGroups} onExpandedGroups={setExpandedGroups} progress={props.state.grammar ?? {}} headingRef={heading} filter={grammarFilter} onFilter={setGrammarFilter} onOpen={id => void openLesson(id)} />}
     </TabsContent>}
     <Dialog navigationKey="library.help" open={!!help} onOpenChange={open => { if (!open) setHelp(null); }}><DialogContent className="framed-dialog grammar-help" onCloseAutoFocus={event => { event.preventDefault(); if (!lessonId) restoration.schedule('destination', () => helpReturn.current?.focus({ preventScroll: true })); }}>
-      {help && (() => { const l = LESSON_INDEX.get(help)!; return <><DialogHeader><DialogTitle>{l.title} · {l.pos}</DialogTitle><DialogDescription>{l.role}</DialogDescription></DialogHeader><div className="dialog-scroll"><p lang="en">{l.example[0]}</p><p>{l.example[1]}</p><p className="small-note">학습용 작성 예문</p></div><div className="dialog-actions"><button className="primary-button" onClick={() => void openLesson(help)}>이 품사 배우기<ArrowRight size={18} /></button></div></>; })()}
+      {help && (() => { const l = LESSON_INDEX.get(help)!; return <><DialogHeader><DialogTitle>{l.title} · {l.pos}</DialogTitle><DialogDescription>{l.role}</DialogDescription></DialogHeader><div className="dialog-scroll"><p lang="en">{l.example[0]}</p><p>{l.example[1]}</p><p className="small-note">학습용 작성 예문</p></div><div className="dialog-actions"><button className="primary-button" onClick={() => void openLesson(help)}>이 품사 배우기<HaruIcon name="arrow-right" size={18} /></button></div></>; })()}
     </DialogContent></Dialog>
   </Tabs>;
 });
@@ -179,8 +179,8 @@ const WordList = memo(function WordList({
   const pagination = (bottom = false) => <nav className="pagination library-pagination" aria-label={`단어 목록 ${bottom ? '하단' : '상단'} 페이지 이동`}>
     <span role="status"><span className="sr-only">페이지 </span>{currentPage + 1} / {pages}</span>
     <div>
-      <button className="icon-button" disabled={currentPage === 0} aria-label="이전 페이지" onClick={() => movePage(currentPage - 1, bottom)}><ChevronLeft size={19} /></button>
-      <button className="icon-button" disabled={currentPage + 1 === pages} aria-label="다음 페이지" onClick={() => movePage(currentPage + 1, bottom)}><ChevronRight size={19} /></button>
+      <button className="icon-button" disabled={currentPage === 0} aria-label="이전 페이지" onClick={() => movePage(currentPage - 1, bottom)}><HaruIcon name="chevron-left" size={19} /></button>
+      <button className="icon-button" disabled={currentPage + 1 === pages} aria-label="다음 페이지" onClick={() => movePage(currentPage + 1, bottom)}><HaruIcon name="chevron-right" size={19} /></button>
     </div>
   </nav>;
   return (
@@ -190,7 +190,7 @@ const WordList = memo(function WordList({
       <div className="filters">
         {onHelp && <Select value={pos} onValueChange={v => { setPos(v); setPage(0); }}><SelectTrigger aria-label="품사 필터"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">모든 품사</SelectItem>{GRAMMAR_INDEX.map(l => <SelectItem value={l.pos} key={l.pos}>{l.title}</SelectItem>)}</SelectContent></Select>}
         <div className="search-box">
-          <Search size={18} />
+          <HaruIcon name="search" size={18} />
           <input
             ref={searchInput}
             value={query}
@@ -253,7 +253,7 @@ const WordList = memo(function WordList({
           }}
           disabled={busy}
         >
-          <Plus size={17} />
+          <HaruIcon name="notebook-plus" size={17} />
           개인 단어 추가
         </button>
       </div></div>
@@ -288,7 +288,7 @@ const WordList = memo(function WordList({
                       {w.personal ? " · 개인 추가" : ""}
                     </small>
                   </button>
-                  {onHelp && POS_INDEX.has(w.pos) && <button className="pos-help-button" aria-label={`${w.word} ${POS[w.pos]} 도움말`} onClick={e => onHelp(POS_INDEX.get(w.pos)!.id, e.currentTarget)}><CircleHelp size={16} /><span className="sr-only">품사 설명</span></button>}</div>
+                  {onHelp && POS_INDEX.has(w.pos) && <button className="pos-help-button" aria-label={`${w.word} ${POS[w.pos]} 도움말`} onClick={e => onHelp(POS_INDEX.get(w.pos)!.id, e.currentTarget)}><HaruIcon name="help-circle" size={16} /><span className="sr-only">품사 설명</span></button>}</div>
                 </TableCell>
                 <TableCell className="meaning-cell" data-label="뜻">
                   {cardMeaning(w.id, p)}
@@ -321,7 +321,7 @@ const WordList = memo(function WordList({
       </Table>
       {!visible.length && (
         <div className="empty-state">
-          <Search />
+          <HaruIcon name="search-empty" size={24} />
           <h3>일치하는 단어가 없어요.</h3>
           <p>검색어나 필터를 바꿔 보세요.</p>
         </div>

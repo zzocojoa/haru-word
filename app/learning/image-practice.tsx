@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { cardMeaning } from '@/lib/catalog-basics';
 import type { Progress, Word } from '@/lib/learning';
 import { resolveWordImage, WORD_IMAGES, type WordImage } from '@/lib/word-image';
@@ -56,13 +57,16 @@ export function ImagePracticeContent({ words, progress, controller }: { words: W
 
 function PositionStatus({ position, controller, fallback = false, displayedEntryId = position.entryId }: { position: PositionView; controller: ImagePracticePositionController; fallback?: boolean; displayedEntryId?: string | null }) {
   const status = position.status;
+  const icon = status === 'idle' || status === 'loading' || status === 'saving' ? 'loading'
+    : status === 'error' || status === 'conflict' || status === 'auth' ? 'cloud-unsaved'
+    : fallback || position.entryId ? 'cloud-saved' : 'cloud';
   const errorMessage = position.available
     ? '연습 위치 저장 결과를 확인하지 못했어요. 다시 저장하면 서버 위치부터 확인해요.'
     : '연습 위치를 불러오지 못했어요. 다시 불러와 주세요.';
   return <div className="image-practice-status">
-    <p role="status">{status === 'idle' || status === 'loading' ? '연습 위치 확인 중' : status === 'saving' ? '위치 저장 중'
+    <p role="status" className="image-practice-position"><HaruIcon name={icon} size={16} /><span>{status === 'idle' || status === 'loading' ? '연습 위치 확인 중' : status === 'saving' ? '위치 저장 중'
       : status === 'conflict' ? '다른 기기에서 연습 위치가 바뀌었어요.' : status === 'auth' ? '로그인을 확인한 뒤 다시 열어 주세요.'
-      : status === 'error' ? errorMessage : fallback ? '저장 위치 확인됨' : position.entryId ? '위치 저장됨' : '이동하면 위치가 저장돼요.'}</p>
+      : status === 'error' ? errorMessage : fallback ? '저장 위치 확인됨' : position.entryId ? '위치 저장됨' : '이동하면 위치가 저장돼요.'}</span></p>
     {status === 'error' && <button type="button" className="text-button" onClick={controller.retry}>{position.available ? '다시 저장' : '다시 불러오기'}</button>}
     {status === 'conflict' && position.remote && <div className="image-practice-choices">
       <button type="button" className="secondary-button" onClick={controller.useRemote}>다른 기기 위치로 이동</button>
@@ -93,9 +97,9 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
       {resolved.fallback && <p className="small-note" role="status">이전에 보던 카드가 없어 다른 카드로 이동했어요. 이전·다음 버튼을 누르면 새 위치가 저장돼요.</p>}
       <PositionStatus position={position} controller={controller} fallback={resolved.fallback} displayedEntryId={resolved.entryId}/>
       <nav className="image-practice-navigation" aria-label="이미지 연습 카드 이동">
-        <button type="button" className="secondary-button" disabled={index === 0 || position.status === 'auth'} onClick={() => move(index - 1)}>이전</button>
-        <button ref={numberButton} type="button" className="text-button" aria-expanded={jump} aria-label={`카드 번호 ${index + 1} / ${deck.length}`} onClick={() => { setJump(!jump); setNumber(String(index + 1)); setNumberError(false); }}>{index + 1} / {deck.length}</button>
-        <button type="button" className="secondary-button" disabled={index === deck.length - 1 || position.status === 'auth'} onClick={() => move(index + 1)}>다음</button>
+        <button type="button" className="secondary-button" disabled={index === 0 || position.status === 'auth'} onClick={() => move(index - 1)}><HaruIcon name="arrow-left" size={18} />이전</button>
+        <button ref={numberButton} type="button" className="text-button" aria-expanded={jump} aria-label={`카드 번호 ${index + 1} / ${deck.length}`} onClick={() => { setJump(!jump); setNumber(String(index + 1)); setNumberError(false); }}><HaruIcon name="card-grid" size={18} /><span>{index + 1} / {deck.length}</span></button>
+        <button type="button" className="secondary-button" disabled={index === deck.length - 1 || position.status === 'auth'} onClick={() => move(index + 1)}>다음<HaruIcon name="arrow-right" size={18} /></button>
       </nav>
       {jump && <form className="image-practice-jump" onSubmit={event => {
         event.preventDefault(); const next = practiceNumber(number, deck.length);
@@ -129,7 +133,7 @@ function PracticeCard({ card }: { card: Card }) {
         <span className="sr-only">{revealed ? '이미지 보기' : '단어·뜻 보기'}</span>
       </button>
       {!ready ? <p role="status">이미지 불러오는 중</p>
-        : <p className="small-note image-practice-hint">{revealed ? '카드를 누르면 이미지로 돌아가요.' : '단어를 떠올린 뒤 눌러 확인해 보세요.'}</p>}
+        : <p className="small-note image-practice-hint"><HaruIcon name="card-flip" size={18} /><span>{revealed ? '카드를 누르면 이미지로 돌아가요.' : '단어를 떠올린 뒤 눌러 확인해 보세요.'}</span></p>}
       {revealed && <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning} showIpa={false}/></HelpDetails>}
     </>}
   </div>;
