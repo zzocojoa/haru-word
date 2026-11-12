@@ -21,7 +21,7 @@ const tabs = [
   const report = {
     passed: false, engine, syntheticAccount: true, actualDevice: false,
     layouts: [], dialogs: [], audits: [], screenshots: [], pageErrors: [], mutations: [],
-    today: { layouts: [], states: [] },
+    today: { layouts: [], states: [], recordNavigation: [] },
   };
   let browser, context, page, failure;
   try {
@@ -306,11 +306,31 @@ const tabs = [
         report.today.layouts.push({ scenario, width, actions, rowCount: await rows.count() });
       }
       if (scenario === 'ended') {
-        await home.getByRole('button', { name: '오늘의 기록 보기', exact: true }).click();
-        await page.getByRole('tabpanel', { name: '학습 기록', exact: true }).waitFor({ state: 'visible' });
-        assert.equal(await page.getByRole('tab', { name: '학습 기록', exact: true }).getAttribute('aria-selected'), 'true');
-        await page.getByRole('tab', { name: '오늘 학습', exact: true }).click();
-        await home.waitFor({ state: 'visible' });
+        for (const width of [320, 390, 1440]) {
+          await page.setViewportSize({ width, height: width <= 640 ? 844 : 900 });
+          const recordButton = home.getByRole('button', { name: '오늘의 기록 보기', exact: true });
+          // A full-page screenshot leaves fixed mobile navigation at the first
+          // viewport's bottom. Verify the real scrolled action, not that composite.
+          await recordButton.evaluate(element => element.scrollIntoView({ block: 'center', behavior: 'instant' }));
+          await settle();
+          const bounds = await box(recordButton, 'scrolled record action');
+          if (width <= 640) {
+            const navigation = await box(page.getByRole('tablist', { name: '학습 화면', exact: true }), 'fixed mobile navigation');
+            assert.ok(bounds.y >= 0 && bounds.y + bounds.height <= navigation.y, 'the scrolled record action clears fixed navigation at ' + width);
+            await screenshot('today-record-action-' + width + '.png');
+          }
+          assert.equal(await recordButton.evaluate(element => {
+            const bounds = element.getBoundingClientRect();
+            const hit = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+            return !!hit && (hit === element || element.contains(hit));
+          }), true, 'the record action is not covered at ' + width);
+          await recordButton.click();
+          await page.getByRole('tabpanel', { name: '학습 기록', exact: true }).waitFor({ state: 'visible' });
+          assert.equal(await page.getByRole('tab', { name: '학습 기록', exact: true }).getAttribute('aria-selected'), 'true');
+          report.today.recordNavigation.push({ width, unobstructed: true, clicked: true });
+          await page.getByRole('tab', { name: '오늘 학습', exact: true }).click();
+          await home.waitFor({ state: 'visible' });
+        }
       }
       const inspected = await readState();
       assert.deepEqual(inspected, snapshot, scenario + ' inspection preserves the API revision and stored scores');
