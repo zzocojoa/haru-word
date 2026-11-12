@@ -296,9 +296,28 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     await qa.click(dialog.getByRole('button', { name: '닫기', exact: true }), 'restore-close');
     await dialog.waitFor({ state: 'hidden' });
     // Radix unmount and the app's view restoration return focus asynchronously.
-    const recordMenuTrigger = await button('기록 관리').elementHandle();
-    try { await page.waitForFunction(element => document.activeElement === element, recordMenuTrigger); }
-    finally { await recordMenuTrigger?.dispose(); }
+    // Resolve the current trigger so a React replacement cannot leave a stale handle.
+    try {
+      await page.waitForFunction(() => {
+        const trigger = document.querySelector('[data-backup-trigger]');
+        return !!trigger && document.activeElement === trigger;
+      });
+    } catch (error) {
+      report.restoreCloseFocus = await page.evaluate(() => {
+        const describe = element => element ? {
+          tag: element.tagName, id: element.id, role: element.getAttribute('role'),
+          label: element.getAttribute('aria-label'), text: element.textContent?.trim().slice(0, 120),
+          connected: element.isConnected, visible: element.getClientRects().length > 0,
+        } : null;
+        return {
+          active: describe(document.activeElement),
+          trigger: describe(document.querySelector('[data-backup-trigger]')),
+          triggerCount: document.querySelectorAll('[data-backup-trigger]').length,
+          dialogs: [...document.querySelectorAll('[role=dialog], [role=alertdialog]')].map(describe),
+        };
+      });
+      throw error;
+    }
     assert.equal(await button('기록 관리').evaluate(element => document.activeElement === element), true);
     await assertUnchanged(preserved, 'Closing restore and returning focus preserve all synthetic records');
     assert.equal(report.requests.filter(request => request.path.endsWith('/commit')).length, 0, 'No restore commit is issued');

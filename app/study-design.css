@@ -4704,6 +4704,15 @@ footer {
 .record-text { overflow-wrap: anywhere; white-space: pre-wrap; min-width: 0; }
 .local-draft-notice { margin-block: 1rem; min-width: 0; overflow-wrap: anywhere; }
 .local-draft-notice summary, .local-draft-logout { min-width: 44px; min-height: 44px; padding-block: 10px; cursor: pointer; }
+.local-draft-notice .text-button,
+.settings-section[aria-label="이 기기의 임시 입력"] .text-button {
+  min-width: 44px;
+  min-height: 44px;
+  max-width: 100%;
+  padding-inline: 8px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
 .local-draft-logout { display: inline-flex; align-items: center; gap: var(--space-2); }
 .record-text > p { white-space: pre-wrap; }
 .progress-note > div { flex-wrap: wrap; gap: .5rem; min-width: 0; }
