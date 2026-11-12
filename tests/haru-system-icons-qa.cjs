@@ -283,7 +283,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     assert.equal(await logout.getAttribute('href'), '/signout-with-chatgpt?return_to=%2F');
     // No provider/account session is contacted: intercept this synthetic context's
     // top-level local navigation after the production clear-before-logout handler.
-    await page.route('**/signout-with-chatgpt?*', route => route.fulfill({ contentType: 'text/html',
+    await page.route('**/signout-with-chatgpt?*', route => route.fulfill({ contentType: 'text/html; charset=utf-8',
       body: '<!doctype html><html lang="ko"><head><title>합성 로그아웃 확인</title></head><body><main><h1>합성 로그아웃 도착</h1></main></body></html>' }));
     await qa.click(logout, 'draft-logout'); await page.getByRole('heading', { name: '합성 로그아웃 도착' }).waitFor();
     assert.deepEqual(await draftRows(), []);
@@ -307,7 +307,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
         {message&&<LearningMessage messageId={1} message="학습 안내를 읽은 뒤 닫을 수 있어요." onDismiss={()=>setMessage(false)}/>}</main>}
       createRoot(document.getElementById('root')).render(<Harness/>);` },
       bundle: true, write: false, format: 'iife', platform: 'browser', logLevel: 'silent', define: { 'process.env.NODE_ENV': '"production"' } });
-    await page.route('**/__qa/haru-system-icons', route => route.fulfill({ contentType: 'text/html',
+    await page.route('**/__qa/haru-system-icons', route => route.fulfill({ contentType: 'text/html; charset=utf-8',
       body: '<!doctype html><html lang="ko"><head><title>공통 아이콘 합성 검사</title>' + styles.map(href => '<link rel="stylesheet" href="' + href + '">').join('')
         + '</head><body><div id="root"></div></body></html>' }));
     await page.goto(base + '/__qa/haru-system-icons'); await page.addScriptTag({ content: bundle.outputFiles[0].text });
@@ -324,6 +324,9 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     await item.press('ArrowLeft'); assert.equal(await sub.getAttribute('aria-expanded'), 'false');
     await sub.press('ArrowRight'); await item.press('Enter');
     await page.getByText('합성 항목을 선택했어요.', { exact: true }).waitFor();
+    const menuHandle = await menu.elementHandle();
+    try { await page.waitForFunction(element => document.activeElement === element, menuHandle); }
+    finally { await menuHandle?.dispose(); }
     assert.equal(await menu.evaluate(element => element === document.activeElement), true);
     report.checks.push('P096/P099 QA-only real-component harness: dismiss preserves input; submenu ArrowRight/Left/Enter and returned focus preserve Radix semantics');
     assert.deepEqual((await qa.getState()).state.sessions[history.id], seeded.state.sessions[history.id]);
