@@ -2267,6 +2267,7 @@ footer {
   }
   .brand-icon svg {
     width: 20px;
+    height: 20px;
   }
   .top-actions {
     gap: 10px;

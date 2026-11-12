@@ -1,0 +1,67 @@
+name: Haru icon UI verification
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'components/icons/**'
+      - 'app/learning-app.tsx'
+      - 'app/learning/save-status.tsx'
+      - 'app/study-design.css'
+      - 'tests/haru-icons-qa.cjs'
+      - 'scripts/qa-haru-icons.mjs'
+      - '.github/workflows/haru-icons-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: haru-icons-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser:
+    name: Desktop and mobile icons (Chromium)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      WRANGLER_SEND_METRICS: 'false'
+      CLOUDFLARE_CF_FETCH_ENABLED: 'false'
+      QA_BROWSER: chromium
+      QA_PLAYWRIGHT_PATH: ${{ github.workspace }}/work/icon-qa-tools/node_modules/playwright
+      AXE_CORE_PATH: ${{ github.workspace }}/work/icon-qa-tools/node_modules/axe-core/axe.min.js
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Use the project npm version
+        run: npm install --global npm@10.9.7 --no-audit --no-fund
+      - name: Install locked application dependencies
+        run: npm run install:ci
+      - name: Build the application
+        run: npm run build
+      - name: Install isolated browser verification tools
+        run: npm install --prefix work/icon-qa-tools --workspaces=false --no-save --package-lock=false --no-audit --no-fund playwright@1.62.0 axe-core@4.14.0
+      - name: Install Chromium and its system dependencies
+        run: node work/icon-qa-tools/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Verify icons and existing UI behavior against an isolated local Worker
+        run: node scripts/qa-haru-icons.mjs
+      - name: Upload verification reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: haru-icons-desktop-mobile-${{ github.run_id }}
+          path: |
+            outputs/haru-icons/
+            outputs/ui-plan-contract/
+            outputs/editor-save-chromium/
+          if-no-files-found: warn
+          retention-days: 14

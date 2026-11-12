@@ -38,6 +38,7 @@ module.exports = [
   "grammar-ui-qa.cjs",
   "grammar-terms-qa.cjs",
   "grammar-input-performance-qa.cjs",
+  "haru-icons-qa.cjs",
   "history-performance-qa.cjs",
   "integration-consistency-qa.cjs",
   "image-practice-qa.cjs",
