@@ -1,7 +1,7 @@
 import type { SVGProps } from "react"
 
 // The 16px and 24px artwork is copied from the delivered haru-icons-v1 SVGs.
-// Keep this subset limited to the twelve icons used by P001–P009.
+// Keep this subset limited to the nineteen icons used by P001–P017.
 const iconArtwork = {
   brand: {
     compact: (
@@ -164,6 +164,76 @@ const iconArtwork = {
       <>
         <rect x="3" y="5" width="18" height="16" rx="3" />
         <path d="M8 3v4m8-4v4M3 10h18m-13 5 3 3 5-5" />
+      </>
+    ),
+  },
+  "arrow-right": {
+    compact: (
+      <g transform="scale(0.6666666667)" strokeWidth="2.25">
+        <path d="M3 12h18m-7-7 7 7-7 7" />
+      </g>
+    ),
+    regular: <path d="M3 12h18m-7-7 7 7-7 7" />,
+  },
+  plus: {
+    compact: (
+      <g transform="scale(0.6666666667)" strokeWidth="2.25">
+        <path d="M12 4v16M4 12h16" />
+      </g>
+    ),
+    regular: <path d="M12 4v16M4 12h16" />,
+  },
+  "record-file": {
+    compact: (
+      <>
+        <path d="M9 1.5H4a1.5 1.5 0 0 0-1.5 1.5v10A1.5 1.5 0 0 0 4 14.5h8a1.5 1.5 0 0 0 1.5-1.5V6Z" />
+        <path d="M9 1.5V5a1 1 0 0 0 1 1h3.5M5 7.5h6M5 10h6M5 12.5h4" />
+      </>
+    ),
+    regular: (
+      <>
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4M8 11h8M8 15h8M8 19h6" />
+      </>
+    ),
+  },
+  sparkle: {
+    compact: (
+      <path d="M8 1.5Q7 7 1.5 8Q7 9 8 14.5Q9 9 14.5 8Q9 7 8 1.5Z" />
+    ),
+    regular: (
+      <path d="M12 3Q10.5 10.5 3 12Q10.5 13.5 12 21Q13.5 13.5 21 12Q13.5 10.5 12 3Z" />
+    ),
+  },
+  check: {
+    compact: (
+      <g transform="scale(0.6666666667)" strokeWidth="2.25">
+        <path d="m4 12 5 5L20 6" />
+      </g>
+    ),
+    regular: <path d="m4 12 5 5L20 6" />,
+  },
+  unassessed: {
+    compact: (
+      <path d="M8 2A6 6 0 0 1 11 2.804M13.196 5A6 6 0 0 1 14 8M13.196 11A6 6 0 0 1 11 13.196M8 14A6 6 0 0 1 5 13.196M2.804 11A6 6 0 0 1 2 8M2.804 5A6 6 0 0 1 5 2.804" />
+    ),
+    regular: (
+      <path d="M12 3A9 9 0 0 1 15.444 3.685M18.364 5.636A9 9 0 0 1 20.315 8.556M21 12A9 9 0 0 1 20.315 15.444M18.364 18.364A9 9 0 0 1 15.444 20.315M12 21A9 9 0 0 1 8.556 20.315M5.636 18.364A9 9 0 0 1 3.685 15.444M3 12A9 9 0 0 1 3.685 8.556M5.636 5.636A9 9 0 0 1 8.556 3.685" />
+    ),
+  },
+  "alert-circle": {
+    compact: (
+      <g transform="scale(0.6666666667)" strokeWidth="2.25">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v6" />
+        <circle cx="12" cy="17" r="1" fill="currentColor" stroke="none" />
+      </g>
+    ),
+    regular: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v6" />
+        <circle cx="12" cy="17" r="1" fill="currentColor" stroke="none" />
       </>
     ),
   },

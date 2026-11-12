@@ -5,7 +5,7 @@ import { todayWordStatuses, RECORD_STATUS_DISPLAY } from "@/lib/today-status";
 import { useMemo, useState, type ReactNode } from "react";
 import { useVocabularyState } from './use-vocabulary-state';
 import { HelpDetails, StatusBadge } from "../study-ui";
-import { ArrowRight, BookOpen, RotateCcw, Sparkles } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import { LevelSelect } from "../ui";
 import type { LearningViewProps } from "./types";
 type TodayOverviewProps = Pick<
@@ -147,7 +147,7 @@ export function TodayOverview({
               disabled={busy}
               onClick={() => start("daily")}
             >
-              추가 {suggestions.length}개 학습하기 <ArrowRight size={17} />
+              추가 {suggestions.length}개 학습하기 <HaruIcon name="plus" size={17} />
             </button>
           )}
           {remaining > 0 && (
@@ -165,7 +165,7 @@ export function TodayOverview({
             }
             onClick={() => setReviewDate(date)}
           >
-            <BookOpen size={17} />
+            <HaruIcon name="book-open" size={17} />
             오늘 단어 다시 보기
           </button>
           <button
@@ -173,7 +173,7 @@ export function TodayOverview({
             disabled={busy}
             onClick={() => repeat(date)}
           >
-            <RotateCcw size={17} />
+            <HaruIcon name="repeat" size={17} />
             {repeating ? "다시 학습 이어서" : "오늘 단어 다시 연습"}
           </button>
           <p className="small-note">기존 성적은 유지돼요.</p>
@@ -185,7 +185,7 @@ export function TodayOverview({
             학습일 수정
           </button>
           <button className="text-button" onClick={() => setTab("log")}>
-            오늘의 기록 보기 <ArrowRight size={17} />
+            오늘의 기록 보기 <HaruIcon name="record-file" size={17} />
           </button>
         </div>
       ) : (
@@ -203,7 +203,7 @@ export function TodayOverview({
               : !suggestions.length
                 ? "지금 배정할 단어가 없어요"
                 : "오늘의 학습 시작"}
-          <ArrowRight size={17} />
+          <HaruIcon name="arrow-right" size={17} />
         </button>
       )}
       {imagePractice}
@@ -246,11 +246,25 @@ export function TodayOverview({
               <div>
                 <b lang="en">{w.word}</b>
                 <small><PartOfSpeechLabel pos={w.pos} /> · {w.personal ? "개인 추가" : w.level}</small>
-                <span className={`daily-origin ${origins.byId[id] === 'returning' ? 'returning' : 'new'}`}>{origins.byId[id] === 'returning' ? <RotateCcw size={12} aria-hidden="true"/> : <Sparkles size={12} aria-hidden="true"/>}{origins.byId[id] === 'returning' ? '복습' : '새 학습'}</span>
+                <span className={`daily-origin ${origins.byId[id] === 'returning' ? 'returning' : 'new'}`}>
+                  <HaruIcon name={origins.byId[id] === 'returning' ? 'repeat' : 'sparkle'} size={12} />
+                  {origins.byId[id] === 'returning' ? '복습' : '새 학습'}
+                </span>
               </div>
               <div className="today-word-status">
-                {status.recordStatus && <StatusBadge tone={RECORD_STATUS_DISPLAY[status.recordStatus].tone}>{RECORD_STATUS_DISPLAY[status.recordStatus].label}</StatusBadge>}
-                {status.notices.some(n => n.warning) && <StatusBadge tone="warning">보완 필요</StatusBadge>}
+                {status.recordStatus && (
+                  <StatusBadge
+                    tone={RECORD_STATUS_DISPLAY[status.recordStatus].tone}
+                    icon={<HaruIcon name={status.recordStatus === 'recorded' ? 'check' : 'unassessed'} size={14} />}
+                  >
+                    {RECORD_STATUS_DISPLAY[status.recordStatus].label}
+                  </StatusBadge>
+                )}
+                {status.notices.some(n => n.warning) && (
+                  <StatusBadge tone="warning" icon={<HaruIcon name="alert-circle" size={14} />}>
+                    보완 필요
+                  </StatusBadge>
+                )}
                 {<HelpDetails title="상태 상세"><p>{(origins.byId[id] === 'returning' ? '이전 학습·복습 항목' : '새 학습 항목')}</p><ul>{status.notices.map(notice => <li key={notice.label}>{notice.label}</li>)}</ul></HelpDetails>}
               </div>
             </div>

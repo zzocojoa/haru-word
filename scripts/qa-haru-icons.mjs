@@ -11,7 +11,14 @@ const { waitForWorker, accountHeaders, axePath } = (await import('../tests/qa/ru
 const { validateEnvironment, requireDisabledAiStatus } = (await import('../tests/qa/preflight.cjs')).default;
 const resolveModule = createRequire(import.meta.url).resolve;
 
-const cases = ['ui-plan-contract-qa.cjs', 'editor-save-qa.cjs', 'haru-icons-qa.cjs'];
+const cases = [
+  'ui-plan-contract-qa.cjs',
+  'editor-save-qa.cjs',
+  'today-status-qa.cjs',
+  'daily-topup-qa.cjs',
+  'repeat-learning-qa.cjs',
+  'haru-icons-qa.cjs',
+];
 const engine = process.env.QA_BROWSER || 'chromium';
 
 (async () => {

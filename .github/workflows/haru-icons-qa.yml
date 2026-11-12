@@ -7,8 +7,13 @@ on:
       - 'components/icons/**'
       - 'app/learning-app.tsx'
       - 'app/learning/save-status.tsx'
+      - 'app/learning/today-overview.tsx'
+      - 'app/study-ui.tsx'
       - 'app/study-design.css'
       - 'tests/haru-icons-qa.cjs'
+      - 'tests/today-status-qa.cjs'
+      - 'tests/daily-topup-qa.cjs'
+      - 'tests/repeat-learning-qa.cjs'
       - 'scripts/qa-haru-icons.mjs'
       - '.github/workflows/haru-icons-qa.yml'
   workflow_dispatch:
@@ -24,7 +29,7 @@ jobs:
   browser:
     name: Desktop and mobile icons (Chromium)
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       WRANGLER_SEND_METRICS: 'false'
       CLOUDFLARE_CF_FETCH_ENABLED: 'false'
@@ -63,5 +68,11 @@ jobs:
             outputs/haru-icons/
             outputs/ui-plan-contract/
             outputs/editor-save-chromium/
+            outputs/today-status/
+            outputs/daily-topup/
+            work/repeat-learning-qa.json
+            work/repeat-home-mobile.png
+            work/repeat-cards-mobile.png
+            work/repeat-cards-desktop.png
           if-no-files-found: warn
           retention-days: 14
