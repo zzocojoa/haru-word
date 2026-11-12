@@ -173,15 +173,18 @@ const stageTitles = { warmup: '기억 깨우기', learn: '단어 익히기', en:
     await edit.focus();
     await edit.press('Enter');
     const example = 'The cat stays at home.', translation = '고양이는 집에 있어요.';
-    await page.getByLabel('영어 예문', { exact: true }).fill(example);
-    await page.getByLabel('예문의 한국어 해석', { exact: true }).fill(translation);
+    // Role names exclude the nested textarea's initial text from its label.
+    const exampleInput = page.locator('.session-panel').getByRole('textbox', { name: '영어 예문', exact: true });
+    const translationInput = page.locator('.session-panel').getByRole('textbox', { name: '예문의 한국어 해석', exact: true });
+    await exampleInput.fill(example);
+    await translationInput.fill(translation);
     await inspect('learn', 'learn', [
       [page.locator('.session-panel .example-label svg'), 15, '자료 출처'],
       [edit.locator('svg'), 15, '표현·예문 수정하기'],
       [button('뜻 저장하고 계속').locator('svg'), 17, '뜻 저장하고 계속'],
     ]);
-    assert.equal(await page.getByLabel('영어 예문', { exact: true }).inputValue(), example);
-    assert.equal(await page.getByLabel('예문의 한국어 해석', { exact: true }).inputValue(), translation);
+    assert.equal(await exampleInput.inputValue(), example);
+    assert.equal(await translationInput.inputValue(), translation);
     await clickAfterScroll(button('뜻 저장하고 계속'), 'learn-continue');
     await waitStage('en');
     assert.equal((await get()).state.sessions[lesson.id].records[target.id].material.example, example);
