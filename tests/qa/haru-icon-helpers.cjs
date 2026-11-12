@@ -19,19 +19,27 @@ async function createIconQa(name) {
     layouts: [], audits: [], screenshots: [], clicks: [], checks: [], errors: [], requests: [],
   };
   const browser = await launchBrowser({ engine });
-  const context = await browser.newContext({
+  const contextOptions = {
     viewport: { width: 390, height: 844 }, deviceScaleFactor: 1,
     reducedMotion: 'reduce', colorScheme: 'light', extraHTTPHeaders: accountHeaders(name),
-  });
-  const page = await context.newPage();
-  page.setDefaultTimeout(15_000);
-  page.setDefaultNavigationTimeout(30_000);
-  page.on('pageerror', error => report.errors.push(error.message));
-  page.on('request', request => {
-    if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method())) {
-      report.requests.push({ method: request.method(), path: new URL(request.url()).pathname });
-    }
-  });
+  };
+  // Isolated pages share the synthetic owner and evidence collection, while
+  // keeping script responses, module state and storage out of the real app page.
+  const createIsolatedPage = async () => {
+    const isolatedContext = await browser.newContext(contextOptions);
+    const isolatedPage = await isolatedContext.newPage();
+    isolatedPage.setDefaultTimeout(15_000);
+    isolatedPage.setDefaultNavigationTimeout(30_000);
+    isolatedPage.on('pageerror', error => report.errors.push(error.message));
+    isolatedPage.on('request', request => {
+      if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method())) {
+        report.requests.push({ method: request.method(), path: new URL(request.url()).pathname });
+      }
+    });
+    return isolatedPage;
+  };
+  const page = await createIsolatedPage();
+  const context = page.context();
   const getState = async () => {
     const response = await context.request.get(base + '/api/state', { headers: stateHeaders });
     assert.equal(response.status(), 200, await response.text());
@@ -45,15 +53,15 @@ async function createIconQa(name) {
     return getState();
   };
   const saved = () => page.locator('.topbar').getByText('저장됨', { exact: true }).waitFor();
-  const settle = () => page.evaluate(async () => {
+  const settle = (targetPage = page) => targetPage.evaluate(async () => {
     await document.fonts.ready;
     await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   });
-  const capture = async (filename, fullPage = true) => {
-    await page.screenshot({ path: path.join(out, filename), fullPage, animations: 'disabled' });
+  const capture = async (filename, fullPage = true, targetPage = page) => {
+    await targetPage.screenshot({ path: path.join(out, filename), fullPage, animations: 'disabled' });
     report.screenshots.push(filename);
   };
-  const checkIcon = async (locator, size, label) => {
+  const checkIcon = async (locator, size, label, targetPage = page) => {
     assert.equal(await locator.count(), 1, label + ' has exactly one icon');
     assert.equal(await locator.getAttribute('aria-hidden'), 'true', label + ' is decorative');
     assert.notEqual(await locator.getAttribute('focusable'), 'true', label + ' is not focusable');
@@ -61,42 +69,42 @@ async function createIconQa(name) {
     const bounds = await locator.boundingBox();
     assert.ok(bounds && Math.abs(bounds.width - size) <= 0.5 && Math.abs(bounds.height - size) <= 0.5,
       label + ' remains ' + size + 'px: ' + JSON.stringify(bounds));
-    const width = page.viewportSize().width;
+    const width = targetPage.viewportSize().width;
     assert.ok(bounds.x >= -0.5 && bounds.x + bounds.width <= width + 0.5,
       label + ' fits the horizontal viewport: ' + JSON.stringify(bounds));
   };
   const inspect = async (label, options = {}) => {
-    const { icons = [], readOnly = true, widths = [320, 390, 430, 768, 1440], textSizes = [100, 200], diagnostics = false } = options;
+    const { icons = [], readOnly = true, widths = [320, 390, 430, 768, 1440], textSizes = [100, 200], diagnostics = false, page: targetPage = page } = options;
     const checkpoint = async stage => {
       if (!diagnostics) return;
-      report.inspection = { label, stage, ...await page.evaluate(() => ({
+      report.inspection = { label, stage, ...await targetPage.evaluate(() => ({
         readyState: document.readyState, fontsStatus: document.fonts.status,
         width: innerWidth, textSize: document.documentElement.style.fontSize,
       })) };
       console.log(JSON.stringify({ inspection: report.inspection }));
     };
     const before = readOnly ? await getState() : null;
-    if (!await page.evaluate(() => typeof window.axe !== 'undefined')) await page.addScriptTag({ path: axePath });
+    if (!await targetPage.evaluate(() => typeof window.axe !== 'undefined')) await targetPage.addScriptTag({ path: axePath });
     for (const width of widths) {
-      await page.setViewportSize({ width, height: 844 });
+      await targetPage.setViewportSize({ width, height: 844 });
       for (const textSize of textSizes) {
-        await page.evaluate(size => {
+        await targetPage.evaluate(size => {
           document.documentElement.style.fontSize = size + '%';
           window.scrollTo({ top: 0, behavior: 'instant' });
         }, textSize);
         await checkpoint('settle');
-        await settle();
+        await settle(targetPage);
         await checkpoint('layout-and-icons');
-        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false,
+        assert.equal(await targetPage.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false,
           label + ' fits ' + width + 'px at ' + textSize + '% text');
-        const dialogOverflow = await page.evaluate(() => [...document.querySelectorAll('[role="dialog"], [role="alertdialog"], .dialog-scroll')]
+        const dialogOverflow = await targetPage.evaluate(() => [...document.querySelectorAll('[role="dialog"], [role="alertdialog"], .dialog-scroll')]
           .filter(element => element.getClientRects().length && getComputedStyle(element).visibility !== 'hidden'
             && element.clientWidth > 0 && element.scrollWidth > element.clientWidth + 1)
           .map(element => ({ role: element.getAttribute('role'), className: element.className, width: element.clientWidth, scrollWidth: element.scrollWidth })));
         assert.deepEqual(dialogOverflow, [], label + ' dialog content fits at ' + width + 'px / ' + textSize + '% text');
-        for (const [locator, size, iconLabel] of icons) await checkIcon(locator, size, iconLabel);
+        for (const [locator, size, iconLabel] of icons) await checkIcon(locator, size, iconLabel, targetPage);
         await checkpoint('axe');
-        const violations = await page.evaluate(async () => (await window.axe.run(document, {
+        const violations = await targetPage.evaluate(async () => (await window.axe.run(document, {
           runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] },
         })).violations.map(issue => ({ id: issue.id, targets: issue.nodes.map(node => node.target) })));
         report.audits.push({ label, width, textSize, violations });
@@ -104,14 +112,14 @@ async function createIconQa(name) {
         report.layouts.push({ label, width, textSize });
         if (textSize === 100 || width === 320) {
           await checkpoint('screenshot');
-          await capture(label + '-' + width + '-' + textSize + '.png');
+          await capture(label + '-' + width + '-' + textSize + '.png', true, targetPage);
         }
       }
     }
-    await page.evaluate(() => document.documentElement.style.fontSize = '100%');
-    await page.setViewportSize({ width: 390, height: 844 });
+    await targetPage.evaluate(() => document.documentElement.style.fontSize = '100%');
+    await targetPage.setViewportSize({ width: 390, height: 844 });
     await checkpoint('reset');
-    await settle();
+    await settle(targetPage);
     if (readOnly) assert.deepEqual(await getState(), before, label + ' inspection preserves server revision and records');
     await checkpoint('complete');
   };
@@ -162,7 +170,7 @@ async function createIconQa(name) {
     if (failure) throw failure;
     console.log(JSON.stringify({ name, passed: true, layouts: report.layouts.length, audits: report.audits.length, screenshots: report.screenshots.length, checks: report.checks }));
   };
-  return { base, engine, page, context, browser, report, out, getState, seed, saved, settle, checkIcon, inspect, capture, click, finish };
+  return { base, engine, page, context, browser, report, out, getState, seed, saved, settle, checkIcon, inspect, capture, click, finish, createIsolatedPage };
 }
 
 module.exports = { createIconQa };

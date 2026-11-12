@@ -8,16 +8,21 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
 (async () => {
   const qa = await createIconQa('haru-system-icons');
   const { page, context, base, report } = qa;
-  let failure, startupInterceptionActive = false;
+  let failure, startupPage, startupInterceptionActive = false;
   const startupRouteErrors = [];
-  const closeStartupInterception = async () => {
-    if (!startupInterceptionActive) return;
-    // Drain completed stub responses before normal app loading or context cleanup.
-    try {
-      await page.unrouteAll({ behavior: 'wait' });
-      if (startupRouteErrors.length) throw new AggregateError(startupRouteErrors, 'Startup request handling failed');
+  const closeStartupInspection = async () => {
+    if (!startupPage) return;
+    const errors = [];
+    if (startupInterceptionActive) {
+      // Drain route callbacks before closing the startup-only context.
+      try { await startupPage.unrouteAll({ behavior: 'wait' }); }
+      catch (error) { errors.push(error); }
+      finally { startupInterceptionActive = false; }
     }
-    finally { startupInterceptionActive = false; }
+    errors.push(...startupRouteErrors);
+    try { await startupPage.context().close(); startupPage = undefined; }
+    catch (error) { errors.push(error); }
+    if (errors.length) throw new AggregateError(errors, 'Startup request handling or context cleanup failed');
   };
   const svg = locator => locator.locator('svg');
   const button = name => page.getByRole('button', { name, exact: true });
@@ -69,10 +74,12 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
         en: 'independent', ko: 'help', sentenceStatus: 'written', lastStudied: previous, studyDates: [previous] } },
       sessions: { [history.id]: history, [lesson.id]: lesson },
     });
-    // Keep the real server HTML/CSS, but suppress app hydration for this phase.
+    // Keep the real server HTML/CSS, but suppress app hydration in a context
+    // that never loads the real app. Both contexts use the same synthetic owner.
     // Pending scripts can prevent WebKit's document.fonts.ready from settling;
     // empty JS lets load finish without bypassing font/layout/screenshot waits.
-    report.startupMode = 'server-html-with-app-scripts-suppressed';
+    startupPage = await qa.createIsolatedPage();
+    report.startupMode = 'isolated-context-server-html-with-app-scripts-suppressed';
     report.startupPhase = 'navigation';
     report.startupScriptsSuppressed = 0;
     report.startupScriptPaths = [];
@@ -94,17 +101,18 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
       }
     };
     startupInterceptionActive = true;
-    await page.route('**/*', startupScripts);
-    await page.goto(base, { waitUntil: 'load' });
+    await startupPage.route('**/*', startupScripts);
+    await startupPage.goto(base, { waitUntil: 'load' });
     report.startupPhase = 'inspection';
-    await page.locator('.app-splash').waitFor();
+    await startupPage.locator('.app-splash').waitFor();
     assert.ok(report.startupScriptsSuppressed > 0, 'Startup-only script suppression is exercised');
-    await qa.inspect('startup', { diagnostics: true,
-      icons: [[page.locator('.app-splash-brand > svg'), 72, 'P104 startup brand']] });
-    assert.equal(await page.locator('.app-splash').isVisible(), true, 'The server startup screen remains present throughout inspection');
-    report.startupPhase = 'normal-reload';
-    await closeStartupInterception();
-    await page.reload({ waitUntil: 'domcontentloaded' });
+    await qa.inspect('startup', { page: startupPage, diagnostics: true,
+      icons: [[startupPage.locator('.app-splash-brand > svg'), 72, 'P104 startup brand']] });
+    assert.equal(await startupPage.locator('.app-splash').isVisible(), true, 'The server startup screen remains present throughout inspection');
+    report.startupPhase = 'startup-context-cleanup';
+    await closeStartupInspection();
+    report.startupPhase = 'application-navigation';
+    await page.goto(base, { waitUntil: 'domcontentloaded' });
     await qa.saved();
     await page.locator('.app-splash').waitFor({ state: 'hidden' });
     report.startupPhase = 'application-ready';
@@ -117,7 +125,7 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
       const response = await context.request.get(base + url); assert.equal(response.status(), 200, url);
       assert.ok((await response.body()).length > 100, url + ' has an actual asset');
     }
-    report.checks.push('P101–105: actual server startup HTML/CSS with app scripts suppressed only during inspection; normal reload restores the real app; unchanged favicon/home-screen metadata, 26 iOS declarations and local asset responses');
+    report.checks.push('P101–105: actual server startup HTML/CSS with app scripts suppressed only in an isolated context; a clean context loads the real app for the same synthetic owner; unchanged favicon/home-screen metadata, 26 iOS declarations and local asset responses');
 
     await openSettings();
     const goal = settings.getByRole('combobox', { name: '하루 목표', exact: true });
@@ -177,9 +185,54 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     });
     assert.equal((await goal.innerText()).trim(), '3개 · 기본 목표');
     assert.equal((await qa.getState()).state.settings.dailyGoal, 3);
+    // Select restores focus asynchronously. Observe that return before moving
+    // to the next native control, so Space cannot be stolen by closing content.
+    await page.waitForFunction(() => document.activeElement?.getAttribute('aria-label') === '하루 목표');
+    await qa.settle();
+    report.pauseCheckbox = [];
     for (const checked of [true, false]) {
-      await pause.focus(); await changeAndSave(() => pause.press('Space'));
-      assert.equal(await pause.isChecked(), checked); assert.equal(!!(await qa.getState()).state.settings.newWordsPaused, checked);
+      const attempt = { expectedChecked: checked, saves: [] };
+      report.pauseCheckbox.push(attempt);
+      const snapshot = () => pause.evaluate(element => ({
+        focused: element === document.activeElement, checked: element.checked, disabled: element.disabled,
+        activeTag: document.activeElement?.tagName, activeLabel: document.activeElement?.getAttribute('aria-label'),
+      }));
+      const selector = '.settings-dialog .check-label input[type="checkbox"]';
+      try {
+        await page.waitForFunction(selector => {
+          const element = document.querySelector(selector);
+          return element instanceof HTMLInputElement && !element.disabled;
+        }, selector);
+        await pause.focus(); await qa.settle();
+        await page.waitForFunction(selector => {
+          const element = document.querySelector(selector);
+          return element instanceof HTMLInputElement && element === document.activeElement && !element.disabled;
+        }, selector);
+        attempt.beforeSpace = await snapshot();
+        assert.equal(await pause.isChecked(), !checked, 'Space starts from the opposite native state');
+        const [response] = await Promise.all([
+          page.waitForResponse(response => {
+            if (new URL(response.url()).pathname !== '/api/state' || response.request().method() !== 'PUT') return false;
+            const payload = response.request().postDataJSON();
+            attempt.saves.push({ revision: payload?.revision, newWordsPaused: payload?.settings?.newWordsPaused, status: response.status() });
+            return payload?.settings?.newWordsPaused === checked;
+          }),
+          page.keyboard.press('Space'),
+        ]);
+        assert.equal(response.status(), 200, 'The intended checkbox setting is accepted');
+        attempt.responseRevision = (await response.json()).revision;
+        await page.waitForFunction(({ selector, checked }) => {
+          const element = document.querySelector(selector);
+          return element instanceof HTMLInputElement && element.checked === checked && !element.disabled;
+        }, { selector, checked });
+        await qa.saved();
+        assert.equal(await pause.isChecked(), checked);
+        attempt.serverChecked = !!(await qa.getState()).state.settings.newWordsPaused;
+        assert.equal(attempt.serverChecked, checked);
+      } finally {
+        try { attempt.finalState = await snapshot(); }
+        catch (error) { attempt.snapshotError = error.message; }
+      }
     }
     for (const name of ['학습 수준', '주간 점검 요일']) {
       const control = settings.getByRole('combobox', { name, exact: true });
@@ -345,9 +398,15 @@ const { createIconQa } = require('./qa/haru-icon-helpers.cjs');
     report.checks.push('P096/P099 QA-only real-component harness: dismiss preserves input; submenu ArrowRight/Left/Enter and returned focus preserve Radix semantics');
     assert.deepEqual((await qa.getState()).state.sessions[history.id], seeded.state.sessions[history.id]);
     assert.equal(report.requests.filter(request => request.method === 'POST' && /\/api\/(sentence|grammar)-feedback$/.test(request.path)).length, 0);
-  } catch (error) { failure = error; }
+  } catch (error) {
+    failure = error;
+    if (startupPage && !startupPage.isClosed()) {
+      try { await qa.capture('startup-failure.png', false, startupPage); }
+      catch (captureError) { report.startupFailureScreenshotError = captureError.message; }
+    }
+  }
   finally {
-    try { await closeStartupInterception(); }
+    try { await closeStartupInspection(); }
     catch (error) {
       report.startupCleanupError = error.stack || error.message;
       failure ||= error;

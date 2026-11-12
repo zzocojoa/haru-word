@@ -21,6 +21,8 @@ on:
       - 'public/favicon*'
       - 'public/*icon*.png'
       - 'tests/haru-*-qa.cjs'
+      - 'tests/ui-plan-contract-qa.cjs'
+      - 'tests/editor-save-qa.cjs'
       - 'tests/qa/haru-icon-helpers.cjs'
       - 'tests/qa/manifest.cjs'
       - 'tests/qa/runtime.cjs'

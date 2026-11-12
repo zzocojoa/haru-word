@@ -6,7 +6,8 @@ const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs
 const selected=words.filter(w=>w.level==='A1').slice(0,10),ids=selected.map(w=>w.id);
 const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 (async()=>{
- const browser=await launchBrowser(),checks=[],audits=[],errors=[],touch=[];
+ const browser=await launchBrowser(),checks=[],audits=[],errors=[],touch=[],frames=[];
+ let p;
  try{
   const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('ui_contract_'),'oai-authenticated-user-email':'qa@example.test'}});
   const get=async()=> (await c.request.get(base+'/api/state')).json();const before=await get();
@@ -16,7 +17,7 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
    state.sessions[id]={id,kind:'daily',date,period:date,ids,warmupIds:[],stage:'done',index:0,retry:[],retryMode:false,elapsed:600,paused:true,finished:true,createdAt:date+'T01:00:00Z',records:Object.fromEntries(ids.map(wordId=>[wordId,{entryId:wordId,meaning:content[wordId].meaning,material:content[wordId],en:'independent',ko:'independent',sentenceStatus:'written',sentence:'Keep this sentence.',notes:'Keep this note.',learnedOn:date}]))};
   }
   const response=await c.request.post(base+'/api/state/restore',{headers:{'x-study-revision':String(before.revision)},data:{format:'haru-words-v1',exportedAt:new Date().toISOString(),state}});assert.equal(response.status(),200,await response.text());
-  const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(base);await p.getByText('저장됨',{exact:true}).waitFor();
+  p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(base);await p.getByText('저장됨',{exact:true}).waitFor();
   const initial=await get();
   const nav=name=>p.getByRole('tab',{name,exact:true}).click();
   const fit=async label=>assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,label+' '+JSON.stringify(await p.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,x:scrollX,items:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&(r.right>innerWidth||r.left<0||el.scrollWidth>el.clientWidth+1)}).map(el=>({tag:el.tagName,class:el.className,scroll:el.scrollWidth,client:el.clientWidth,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right,text:el.textContent.slice(0,50)}))}))));
@@ -36,14 +37,39 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
   await nav('단어장');await p.getByLabel('단어 또는 한국어 뜻 검색').fill('work');await p.getByRole('button',{name:'work 동사',exact:true}).click();
   const dialog=p.getByRole('dialog'),body=dialog.locator('.dialog-scroll');await body.waitFor();
   const header=dialog.locator('[data-slot=dialog-header]'),close=dialog.getByRole('button',{name:'닫기',exact:true}),save=dialog.getByRole('button',{name:'기록 저장',exact:true});
+  const settleLayout=()=>p.evaluate(async()=>{
+   await document.fonts.ready;
+   // View restoration and resize effects can commit over two animation frames.
+   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  });
+  const measureFrame=()=>dialog.evaluate(element=>{
+   const rect=node=>{const {x,y,width,height}=node.getBoundingClientRect();return {x,y,width,height};};
+   const read=selector=>{
+    const node=element.querySelector(selector);
+    if(!node)throw new Error('Missing word-editor frame element: '+selector);
+    return rect(node);
+   };
+   // One synchronous browser evaluation cannot mix pre/post-resize rectangles.
+   return {
+    bounds:rect(element),h:read(':scope > [data-slot=dialog-header]'),
+    x:read(':scope > [data-slot=dialog-close]'),
+    b:read(':scope > .dialog-actions > .primary-button'),
+    scroller:read(':scope > .dialog-scroll'),
+    bodyScrollTop:element.querySelector(':scope > .dialog-scroll').scrollTop,
+    viewport:{width:innerWidth,height:innerHeight},fontsStatus:document.fonts.status,
+   };
+  });
+  await settleLayout();
   for(const width of [320,390,430,768,1440]){
-   await p.setViewportSize({width,height:844});await fit('detail '+width);
+   await p.setViewportSize({width,height:844});await settleLayout();await fit('detail '+width);
    for(const scroll of [0,250,5000]){
     await body.evaluate((el,y)=>el.scrollTop=y,scroll);
-    const bounds=await dialog.boundingBox(),h=await header.boundingBox(),x=await close.boundingBox(),b=await save.boundingBox(),scroller=await body.boundingBox();
-    assert.ok(h.y>=bounds.y&&h.y+h.height<=scroller.y+4,'header stays outside scrolling body');
-    assert.ok(x.y>=bounds.y&&x.y+x.height<=bounds.y+bounds.height,'close remains visible');
-    assert.ok(b.y>=scroller.y+scroller.height-4&&b.y+b.height<=bounds.y+bounds.height,'save stays outside scrolling body');
+    await settleLayout();
+    const frame={width,requestedScroll:scroll,...await measureFrame()};frames.push(frame);
+    const {bounds,h,x,b,scroller}=frame,detail=JSON.stringify(frame);
+    assert.ok(h.y>=bounds.y&&h.y+h.height<=scroller.y+4,'header stays outside scrolling body: '+detail);
+    assert.ok(x.y>=bounds.y&&x.y+x.height<=bounds.y+bounds.height,'close remains visible: '+detail);
+    assert.ok(b.y>=scroller.y+scroller.height-4&&b.y+b.height<=bounds.y+bounds.height,'save stays outside scrolling body: '+detail);
     assert.ok(b.height>=48&&x.height>=44&&x.width>=44);
     assert.equal(await dialog.evaluate(el=>el.scrollWidth>el.clientWidth),false);
    }
@@ -82,6 +108,14 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
   await p.getByRole('button',{name:'work 동사',exact:true}).click();for(const input of await body.locator('input:not([type=checkbox]),textarea').all()){assert.ok(parseFloat(await input.evaluate(el=>getComputedStyle(el).fontSize))>=16);}
   await close.click();assert.deepEqual((await get()).state.sessions,initial.state.sessions);assert.deepEqual(errors,[]);for(const t of touch)assert.deepEqual(t.small,[],t.name+' 44px touch area');
   checks.push('all tabs fit five widths/200% text; first-screen action, 16px content/inputs and icon-labelled allocation states satisfy the plan');
-  const report={passed:true,checks,audits,errors,touch};fs.writeFileSync(out+'/after.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+  const report={passed:true,checks,audits,errors,touch,frames};fs.writeFileSync(out+'/after.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+ }catch(error){
+  const report={passed:false,error:error.stack||error.message,checks,audits,errors,touch,frames};
+  if(p&&!p.isClosed()){
+   try{await p.screenshot({path:out+'/failure.png',animations:'disabled'});}
+   catch(captureError){report.captureError=captureError.message;}
+  }
+  fs.writeFileSync(out+'/failure.json',JSON.stringify(report,null,2));
+  throw error;
  }finally{await closeBrowser(browser);}
 })().catch(e=>{console.error(e);process.exitCode=1;});
