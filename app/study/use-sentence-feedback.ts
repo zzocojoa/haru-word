@@ -28,7 +28,7 @@ export function useSentenceFeedback({ sessionId, entryId, sentence, busy, onPend
   useEffect(() => () => { request.current?.abort(); }, []);
 
   async function check() {
-    if (lock.current || busy || !sentence.trim()) return;
+    if (lock.current || busy || !sentence.trim() || (!context.contextNote?.trim()&&!recovery.hasPending)) return;
     lock.current = true;
     const expectedModelId = modelId;
     const releaseRequest = beginRequest();

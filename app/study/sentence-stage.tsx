@@ -48,7 +48,7 @@ export function SentenceStage({
   const selectedMeaning = s.records[id!]?.meaning ?? content.meaning;
   return (
     <>
-      <p className="muted">내 이야기로 한 문장을 써 보세요.</p>
+      <p className="muted">말하고 싶은 내용을 한국어로 쓴 뒤, 오늘 단어를 사용해 영어 문장을 써 보세요.</p>
       <div className="sentence-target">
         <h3 lang="en">
           {word.word}
@@ -60,6 +60,19 @@ export function SentenceStage({
       </div>
       <WordPronunciation word={word} meaning={selectedMeaning} showIpa={false}/>
       <GrammarTermsHelp pos={word.pos} />
+      <SentenceFeedbackPanel
+        key={`${s.id}:${id}`}
+        sessionId={s.id}
+        entryId={id!}
+        target={{word:word.word,pos:word.pos,meaning:s.records[id!]?.meaning??content.meaning,expression:s.records[id!]?.material?.expression||word.word}}
+        sentence={sentence}
+        feedback={s.records[id!]?.aiFeedback}
+        draftFeedback={retainedFeedback}
+        busy={storeBusy}
+        onPending={setAiPending}
+        onFeedback={storeFeedback}
+        onUse={setSentence}
+      >
       <label htmlFor="my-sentence">내 영어 문장</label>
       <textarea
         id="my-sentence"
@@ -90,19 +103,7 @@ export function SentenceStage({
         onChange={(e) => setNotes(e.target.value)}
         placeholder="예: 전치사 확인하기, 과거형으로 바꾸기"
       />
-      <SentenceFeedbackPanel
-        key={`${s.id}:${id}`}
-        sessionId={s.id}
-        entryId={id!}
-        target={{word:word.word,pos:word.pos,meaning:s.records[id!]?.meaning??content.meaning,expression:s.records[id!]?.material?.expression||word.word}}
-        sentence={sentence}
-        feedback={s.records[id!]?.aiFeedback}
-        draftFeedback={retainedFeedback}
-        busy={storeBusy}
-        onPending={setAiPending}
-        onFeedback={storeFeedback}
-        onUse={setSentence}
-      />
+      </SentenceFeedbackPanel>
       <details className="notes-details">
         <summary>스스로 점검하기</summary>
         <ul>

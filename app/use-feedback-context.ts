@@ -23,7 +23,7 @@ export function useFeedbackContext(domain:'word'|'grammar',targetKey:string,inpu
   // keep/clear these records without silently rewriting an unknown intent field.
   const persistent=usePersistentInput({kind:'grammar',question:key,base:{sentence:''},values:{sentence:note,...(kind!=='sentence'?{frame:[kind]}:{})},saved:false,edited:note!==''||kind!=='sentence',onRestore:values=>update(values.sentence,FEEDBACK_CONTEXT_KINDS.includes(values.frame?.[0] as FeedbackContextKind)?values.frame![0] as FeedbackContextKind:'sentence')});
   const legacyChoices=store?.list(legacyKey,'grammar')??[];
-  const reviewedInput={...input,...(note.trim()?{contextNote:note.trim()}: {}),...(kind!=='sentence'?{contextKind:kind}: {})};
+  const reviewedInput={...input,...(note.trim()?{contextNote:note.trim()}: {}),...(kind!=='sentence'?{contextKind:kind}: {}),...(domain==='word'&&note.trim()?{contextRole:'intended_korean'}:{})};
   const identity=JSON.stringify([domain,targetKey,reviewedInput,modelId]);
   const [resolved,setResolved]=useState<{identity:string;fingerprint:string}|null>(null);
   useEffect(()=>{

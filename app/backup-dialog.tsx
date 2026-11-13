@@ -8,11 +8,13 @@ import { useBackupRestore, type BackupRestoreProps } from './use-backup-restore'
 import { Progress } from '@/components/ui/progress';
 import { KIND_TEXT } from '@/lib/learning';
 import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
+import { useViewRestoration } from './use-view-restoration';
 
 export default function BackupDialog(props: BackupRestoreProps) {
+ const restoration=useViewRestoration();
  const {state,busy,error,conflict,onClose}=props;
  const {backup,baseline,name,reading,fileError,safetyError,acknowledged,setAcknowledged,confirm,setConfirm,success,caps,analysis,job,working,phase,reloadRequired,safetyPreview,stale,backedUp,allowed,step,applying:restoring,before,after,changes,recent,select,saveSafetyBackup,prepare,cancel,reload,apply,defer}=useBackupRestore(props);
- return <><Dialog navigationKey="app.backup" blocked={restoring} open onOpenChange={open=>{if(!open&&!restoring)onClose()}}><DialogContent className="backup-dialog framed-dialog" showCloseButton={!restoring} onCloseAutoFocus={e=>{e.preventDefault();document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus()}} onEscapeKeyDown={e=>{if(restoring)e.preventDefault()}} onInteractOutside={e=>e.preventDefault()}>
+ return <><Dialog navigationKey="app.backup" blocked={restoring} open onOpenChange={open=>{if(!open&&!restoring)onClose()}}><DialogContent className="backup-dialog framed-dialog" showCloseButton={!restoring} onCloseAutoFocus={e=>{e.preventDefault();restoration.schedule('destination',()=>document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus({preventScroll:true}))}} onEscapeKeyDown={e=>{if(restoring)e.preventDefault()}} onInteractOutside={e=>e.preventDefault()}>
   <DialogHeader><DialogTitle>{success?'백업을 복원했어요.':'백업으로 기록 복원'}</DialogTitle><DialogDescription>{success?'복원 내용을 저장했어요. 다른 기기에서도 이어갈 수 있어요.':'백업 시점의 기록·설정으로 교체해요.'}</DialogDescription></DialogHeader>
   <p className="small-note" data-backup-step role="status">{conflict?'복원 결과 확인 필요':reloadRequired?'최신 기록 확인 필요':step}</p>
   <div className="dialog-scroll">{success?<><p role="status">{after?.words.toLocaleString()}개 단어 기록 · {after?.sessions.toLocaleString()}개 회차를 복원했어요.</p></>:<>

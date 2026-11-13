@@ -49,7 +49,7 @@ export async function POST(request: Request) {
   const parsed = feedbackRequestSchema.safeParse(raw);
   if (!parsed.success) return json(feedbackErrorBody('invalid_request'), 400);
   if (!enabled()) return json(feedbackErrorBody('disabled'), 503);
-  const { sessionId, entryId, sentence, expectedModelId, contextNote, expectedContextFingerprint,contextKind } = parsed.data;
+  const { sessionId, entryId, sentence, expectedModelId, contextNote, expectedContextFingerprint,contextKind,contextRole } = parsed.data;
   try {
     const db = database();
     const context = await loadFeedbackContext(db, user.userId, 'word', sessionId);
@@ -67,8 +67,8 @@ export async function POST(request: Request) {
     if (!word || !meaning) return json(feedbackErrorBody('save_required'), 400);
     const judgmentEnabled = env.feedback_judgment_enabled === 'true';
     if (judgmentEnabled && !supportsAiContract(request,4)) return json(feedbackErrorBody('ai_client_outdated'),426);
-    if(expectedContextFingerprint&&!judgmentEnabled)return json(feedbackErrorBody('disabled'),503);
-    const input=wordFeedbackInput(word,meaning,sentence,contextNote,session.records[entryId]?.material?.expression || word.word,contextKind);
+    if((expectedContextFingerprint||contextRole)&&!judgmentEnabled)return json(feedbackErrorBody('disabled'),503);
+    const input=wordFeedbackInput(word,meaning,sentence,contextNote,session.records[entryId]?.material?.expression || word.word,contextKind,contextRole);
     const contextFingerprint=await feedbackContextFingerprint('word',JSON.stringify([sessionId,entryId]),input,expectedModelId);
     if (expectedContextFingerprint && expectedContextFingerprint!==contextFingerprint) return json(feedbackErrorBody('stale_input'),409);
     return await executeFeedbackRequest({ db, userId: user.userId, request, receipt: parsed.data, started, contextFingerprint, contextNote,

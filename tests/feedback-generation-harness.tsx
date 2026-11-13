@@ -9,7 +9,7 @@ let finish:()=>void=()=>{},sent=0;
 window.fetch=async(_url,init)=>{
  const input=JSON.parse(String(init?.body));sent++;
  await new Promise<void>(ok=>{finish=ok;});
- return Response.json({feedback:{original:sentence,correctedSentence:sentence,meaningUsage:'appropriate',grammar:'natural',explanation:'합성 응답',createdAt:'2026-11-05T00:00:00.000Z',provider:'openai',model:'gpt-6.1-sol',requestedModel:'gpt-6.1-sol',promptVersion:'reference-v5',validationVersion:'judgment-v6',contextFingerprint:fingerprint},receipt:{requestId:input.requestId,state:'completed',persisted:true}});
+ return Response.json({feedback:{original:sentence,correctedSentence:sentence,meaningUsage:'appropriate',grammar:'natural',explanation:'합성 응답',createdAt:'2026-11-05T00:00:00.000Z',provider:'openai',model:'gpt-6.1-sol',requestedModel:'gpt-6.1-sol',promptVersion:'reference-v7',validationVersion:'judgment-v6',contextFingerprint:fingerprint},receipt:{requestId:input.requestId,state:'completed',persisted:true}});
 };
 declare global{interface Window{feedbackGenerationQa:{sent:()=>number;finish:()=>void;invalidate:()=>void}}}
 function Harness(){

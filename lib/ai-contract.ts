@@ -14,7 +14,7 @@ export const aiContractVersion = (request?: Request) => {
 export const supportsAiContract = (request?: Request, minimum = 2) => aiContractVersion(request) >= minimum;
 
 export function requiresAiContractFeedback(feedback?: SentenceFeedback, supported = 1) {
-  if(supported<4&&['judgment-v4','judgment-v5','judgment-v6'].includes(feedback?.validationVersion??''))return true;
+  if(supported<4&&['judgment-v4','judgment-v5','judgment-v6','judgment-v7','judgment-v8','judgment-v9','judgment-v10'].includes(feedback?.validationVersion??''))return true;
   if (supported >= 3) return false;
   if (supported === 2) return !!feedback && (feedback.contextFingerprint !== undefined || feedback.contextNote !== undefined);
   return !!feedback && (feedback.model !== FEEDBACK_MODEL && feedback.model !== GROQ_FEEDBACK_MODEL
