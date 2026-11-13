@@ -1,0 +1,30 @@
+{
+  "protocol": "ai-quality-v147-closed-day-cost-preparation-v1",
+  "phase": "phase105",
+  "taskIds": [
+    "34.3"
+  ],
+  "dayUtc": "2026-11-08",
+  "matchedCountReceipts": 245,
+  "nonoverlappingRuns": 6,
+  "currentAvailableMicros": "3039780",
+  "candidateReleaseMicros": "8575000",
+  "candidateAvailableMicros": "11614780",
+  "fixed72StandardReserveUpperMicros": "8567184",
+  "unresolvedFollowingDayUsd": "0.012527",
+  "retainedFollowingDayMicros": "2940000",
+  "heldPreexistingContingencyMicros": "1000000",
+  "ledgerSha256": "e2c77a097789856da746f75ea004cbec6642defd4f0acb4d9716248b95086fac",
+  "reconciliationApplied": false,
+  "newGrantCreated": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "sourceQualified": false,
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "basisSha256": "902ca10ef7ec035a4a49b2a09a98bca4fdd199b7346f993bba28083f2fe7150c",
+  "preflightSha256": "78c1f7b291702e92cd5382682d1ce639bef5941a2b1a83aa8c876bfa1720fb28",
+  "document": "docs/AI_QUALITY_V147_CLOSED_DAY_COST_MATCH_20261109.md",
+  "documentSha256": "67b776d4cc316e180e0e2c0028d5ecf71add3c6afd74ed94d5722d6075621408"
+}

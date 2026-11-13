@@ -1,0 +1,20 @@
+{
+  "protocol": "ai-quality-v147-public-control-collector-v1",
+  "currentUserApproved": true,
+  "scope": "public-reference-control-batch-only",
+  "campaignCapMicros": "5000000",
+  "priorDebitMicros": "843789",
+  "collectorHash": "d433f3d23cdea279254733a5c4de88e740461b377b55b5810f5292c793da8990",
+  "batchHash": "8403489779085a7ba87dca389017e9e50bb3841494bea2a1919008b5d4c1f6d3",
+  "keyReuseAlreadyApproved": true,
+  "officialRatesRechecked": true,
+  "userEvidenceFile": "phase52/user-public-control-authorization.json",
+  "userEvidenceSha256": "856086e51119c87cd53a781aea7907f7027f689cb9b21362d2b7980bdf3fc05b",
+  "priceEvidenceFile": "phase52/official-price-count-recheck.json",
+  "priceEvidenceSha256": "9446c09b684e899996b082f471a31646accebb23ef1abea83f84435eaa93e106",
+  "outputCeiling": 4096,
+  "inputCeiling": 50000,
+  "conditionalCampaignMaximumMicros": "4875245",
+  "counterTariffExplicitlyVerified": false,
+  "invoiceGuarantee": false
+}

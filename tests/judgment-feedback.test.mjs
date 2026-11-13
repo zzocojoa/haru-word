@@ -37,7 +37,7 @@ test('uncertainty asks for specific context without inventing a sentence, and or
   assert.equal(result.correctedSentence, ''); assert.match(result.explanation, /추가 문맥:/);
   bad(() => parse('A blue notebook', { grammar: 'uncertain', correctedSentence: 'I have a blue notebook.', correctionReason: '동사를 넣었어요.', contextNeeded:'message' }));
   bad(() => parse(natural, { grammar: 'uncertain', correctedSentence: '' }));
-  bad(() => parse(natural, { contextNeeded:'message' }));
+  assert.equal(parse(natural, { contextNeeded:'message' }).grammar, 'natural');
   assert.equal(parse().grammar, 'natural');
   assert.equal(parse(natural, { meaningUsage: 'uncertain', contextNeeded:'target_meaning' }).correctedSentence, natural);
 });
@@ -47,7 +47,7 @@ test('a needs-work correction must change the original and give its reason; unkn
   assert.equal(parse('She sing well.', corrected).correctedSentence, natural);
   bad(() => parse(natural, { grammar: 'needs_work', correctionReason: '' }));
   bad(() => parse('She sing well.', { ...corrected, correctionReason: '' }));
-  bad(() => parse('She sing well.', { meaningUsage: 'uncertain', grammar: 'needs_work', correctedSentence: '', contextNeeded:'target_meaning' }));
+  assert.equal(parse('She sing well.', { meaningUsage: 'uncertain', grammar: 'needs_work', correctedSentence: '', contextNeeded:'target_meaning' }).grammar, 'needs_work');
   assert.equal(parse('She sing well.', { ...corrected, meaningUsage:'uncertain', contextNeeded:'target_meaning' }).correctedSentence,natural);
 });
 
@@ -108,7 +108,7 @@ test('new transport uses one strict request per model and adds exact v3 provenan
       assert.deepEqual(body.reasoning, { effort: 'low' }); assert.equal(body.service_tier, 'default'); assert.equal(body.tools, undefined);
       return Response.json({ status: 'completed', model: modelId, output: [{ type: 'message', role: 'assistant', status: 'completed', content: [{ type: 'output_text', text: JSON.stringify(wire()) }] }] });
     });
-    assert.equal(calls, 1); assert.equal(result.validationVersion, 'judgment-v6'); assert.equal(result.promptVersion, 'reference-v5');
+    assert.equal(calls, 1); assert.equal(result.validationVersion, 'judgment-v10'); assert.equal(result.promptVersion, 'reference-v13');
     assert.equal(result.requestedModel, modelId); assert.equal(result.structure, undefined); assert.equal(result.original, natural);
   }
 });

@@ -1,0 +1,4814 @@
+{
+  "schemaVersion": 1,
+  "registryVersion": 2,
+  "inventory": {
+    "protocol": "ai-quality-v147-public-exposure-v1",
+    "scope": {
+      "kind": "public-development",
+      "description": "Six allowlisted static development collections only. Dynamic test inputs,curriculum andother archived evaluations remain unaudited."
+    },
+    "coverage": "partial",
+    "entries": [
+      {
+        "id": "exposure-735c80d10846efc914d789bb",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-f835b64c6088395b74e70856",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I asked.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-28cadcc9df3e035f0c08fac1",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-eecf13f5fc187cc0b1cc62e8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those car belongs to Mia.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-072a525909513ded91f47742",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-cf2e3bd7b3adf4f2cda5f5b5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those car belongs to Mia.",
+          "contextKind": "sentence",
+          "contextNote": "차 한 대를 말해요."
+        }
+      },
+      {
+        "id": "exposure-e396c7b84ad1522a981b2d68",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-c183b1965c53c7b421c08b30",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those car belongs to Mia.",
+          "contextKind": "sentence",
+          "contextNote": "차 여러 대를 말해요."
+        }
+      },
+      {
+        "id": "exposure-ac2879d6880267b7b3e23c78",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-cefc5f156ac64d9c240725eb",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She drives careful.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-946760a998c8aa85c6dbf665",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-08fdec89f965d81ab0329e8a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "A book lies on the desk.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-85fd81baeb8b6cbe15b61db9",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-702861b3218a6b0f5b1da655",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Him helps I.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-0eab1c5f42e8e49652dd4c5b",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-2bfe65828d015be9b30302a5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Although the broth",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9c06ddd9d5caf5092657bdc4",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-b2eb723bc2d2f4bb24f95d6f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-32c4c175517d5a0f3385aa97",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-879fa06246240cda83bdaa07",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She knows him.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3fc7c93d31bff8a894be4f2c",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-4f462419a3f606330bba4d7b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Give help.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-58976d1fdcd5f989c9977dce",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-9abcb0ada112c3d467e2f8e8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She is speaking quiet.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-992212dfb3b487275c22fd59",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-915db8b5b5a30e16f9ee97bd",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The divers check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a5ccdfded6712bed11b4845c",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-c07f139fb3847397d5c1b965",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The divers checks the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3c81a0449b3697736e062d8e",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-39e504bf32130d82502d2f29",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The divers check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-5df833f6348a1a3fdbfd6746",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-8c822b6ded915ba67e80a2d2",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The diver do not check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-065297ebef2f522e79721ee7",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-f0fc65010d293116432442d9",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The divers check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e56888e8299e633644f12b6d",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-fc879cefca1fcbf311396fc5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They did.",
+          "contextKind": "reply",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a13be8b3d66dcbed2c52dcf6",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-fc567f8e3f598c14842c434a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The artist owns a bicycle.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-7acffc44999272cb45556715",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-7d974fba3631038a72f5446d",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I bought three box.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-00a709d085279264ce556075",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-a7ed2ec60b787d8f64e031b1",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "These lanterns glows.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a16e1197b5d8a115f1c10d4f",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-daa978ef93b90eb2435ad86b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She runs.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-006e8c704af23814c71bcc01",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-c27444eefa8946265eff4003",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "A green suitcase",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b40a693196d80e911c705f4f",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-7fcb94206ebf53baee68a370",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "A red kite.",
+          "contextKind": "reply",
+          "contextNote": "질문 What did you see above the meadow?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-a857c5ff9e27842e398f085a",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-15e001d12f6e81f5c3acdfa5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I saw her duck.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-65f2f78c150bc21801be0b2d",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-a37a0609eb7c3b53e59266e1",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Mina understands the map.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-f2061ddcf05ae132a6631f3f",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-ba4a0b52e8c082d2ccced982",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She carry a basket.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-71915643939b388d8f389e23",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-969024466d6c9e1712ce6d27",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She carries two box.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b3ffb68b06addcbabd1123a2",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-7c76723b828f74c065a04567",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Hello!",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-958d1dbff401ab89c6d56432",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-ad426e213e8f6c84e32a6bfe",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "write leave",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-742225c899a3a4c9c2bfc52b",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-398dc7dd27cb19e1abc9c89a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Running.",
+          "contextKind": "reply",
+          "contextNote": "질문 What was Ben doing?에 대한 짧은 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-741d9f07ca7e4f79786234f9",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-4ac6a956c75d021e12386eed",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-d26e803220c28a57c642298f",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-de1c8561a2d4773fd524f291",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They helped us.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-873d6a76a367493c42b9b62c",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-f419c2aabb6d0711387bca3b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Her greeted we.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-6eba6a26c66b2424fe985a21",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-cde273a9a0175469cf7f5584",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She deliver snacks to them.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9e4574640849d278c98c11f7",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-843d0b0eb9191e04f039e54d",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-1035ee934c94822e2cf4d6ca",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-5a35c66012ab43b321ee241b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Him",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-49fb37e22be49ddd7bb239b6",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-8364832c97b1e649248edacb",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Us.",
+          "contextKind": "reply",
+          "contextNote": "질문 Who did they invite?에 대한 짧은 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-4489da04872cd078dbf0fae4",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-bc5a319d45dcb52c5259b8e4",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They are here.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e0457cce0ef933da5891b06c",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-67456e7c860f827c61ac3e9a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The corridor looks narrow.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-47a88dbe32570928e7133a2d",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-6e725e30952bfcf706077095",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The child spoke quiet.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-820d6820763ef93ac1f8fb9d",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-5560c0ceef7b78a9ec3eea82",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those baskets looks heavy.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-1278ba8c4d6b47812c237cf5",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-a5dc36e78aee961cf22af9c5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-34ce1851901ee8d456986038",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-ae9237ceb67e90f8d90d80df",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Extremely narrow",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-2aca06c52851910a727e5845",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-081e35b4773333b8e5aa75a8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Very tall.",
+          "contextKind": "reply",
+          "contextNote": "질문 How tall is your neighbor?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-e7038e780b7f44436227ca81",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-9ce3de47545565437b3620ed",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They are light.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-1c746328fc636b2e065e5101",
+        "domain": "grammar",
+        "targetKey": "adverb",
+        "familyId": "family-c6db481ed09453d90f2b7020",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She folded it carefully.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-f9aeeb69d03499bc5bfb39fc",
+        "domain": "grammar",
+        "targetKey": "adverb",
+        "familyId": "family-406eb4b0db8f68de1cc8cefb",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The cyclist rode careful.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ce9d14dfb734a6958f4ab251",
+        "domain": "grammar",
+        "targetKey": "adverb",
+        "familyId": "family-85fb080818bd70420bacd7c0",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "He quickly opened two box.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9ecc3956e09405bbbd9d52d0",
+        "domain": "grammar",
+        "targetKey": "adverb",
+        "familyId": "family-70f3ba1ef80fdaa544a28de9",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The sailor opened a box.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-8263aa406f7817d1972dacc6",
+        "domain": "grammar",
+        "targetKey": "adverb",
+        "familyId": "family-30750a2ec76f4e97914d8440",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Quite slowly",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-34125505c8d6c58ac2e5f72c",
+        "domain": "grammar",
+        "targetKey": "adverb",
+        "familyId": "family-181696f11f49d0b8c216c24f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Carefully.",
+          "contextKind": "reply",
+          "contextNote": "질문 How did she carry the vase?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-7e26fd71d0ca2a46f9443743",
+        "domain": "grammar",
+        "targetKey": "adverb",
+        "familyId": "family-bbd578dcd3e9c85528091965",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She works hard.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-91df96919d3b21eddcb67d5b",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-3e01e4db23f149c0e61c0ac9",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those boxes are empty.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4f6aa692a147cf228c5a9dc5",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-ff4cb902175c009bfcbc2aaf",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "This books are heavy.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-c92d3ac09ee0d8331a461078",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-f3be4000be1dc9b32c66eed8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those boxes is empty.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-2115b9c5ce8e783f5f4e12c1",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-e1e21753de1d6f3103714506",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-6e09219db24ee32218908558",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-fc2c725b17ec175237780922",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those drawers",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-c9945b226a1def554664b964",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-755b362035fd31609fa49548",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those boxes.",
+          "contextKind": "reply",
+          "contextNote": "질문 Which boxes should we open?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-f241090e3cbe990b8a87a254",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-75ce7be04636dc6c2b7dbf0e",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Her book is new.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-fa1a7948783491a819659c6d",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-a948f459ff1352bdd826d794",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "An artist lives here.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e67510a3012a726b0bacb855",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-8de56cc896c51a703498a02b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She found a umbrella.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9e707ceec389b38402692605",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-219be4757e7dc1581c69e175",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "An artist work here.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-46730b1b742008c0822a667b",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-d20143af4d872144387a255f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "These dogs bark.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-d4b86373b7cbd7c584340677",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-fc04daf4fb9a22136b6eee3d",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "An orange folder",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-c33aa287bef1aa8681f1eb0e",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-ee8321422f9007483b01f82d",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "An umbrella.",
+          "contextKind": "reply",
+          "contextNote": "질문 What do you need?에 대한 짧은 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-85f410f899bc361b899b21ff",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-ef9c4b6f257c79094d20530a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I saw an old seal.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a306b3e2968ca478850e90f1",
+        "domain": "grammar",
+        "targetKey": "definite-article",
+        "familyId": "family-d65ee3832dc28fba927ae0ba",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I opened a bag. The bag was empty.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ae7f29f7bc7f64519b1c36ab",
+        "domain": "grammar",
+        "targetKey": "definite-article",
+        "familyId": "family-6d55418f34e91d74db43b3cb",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She plays the tennis.",
+          "contextKind": "sentence",
+          "contextNote": "tennis는 특정 행사나 작품 이름이 아니라 일반적인 운동 종목을 뜻합니다."
+        }
+      },
+      {
+        "id": "exposure-d7d83b47ad6b2255ba1d5b94",
+        "domain": "grammar",
+        "targetKey": "definite-article",
+        "familyId": "family-ce46d4f24fbee9da6ea86013",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The gate near the stairs are open.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-393c9ac91b95bdbe04fb70fd",
+        "domain": "grammar",
+        "targetKey": "definite-article",
+        "familyId": "family-d26ffa0e4a0e5b2d14c80346",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Some dogs bark.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-336ac5c3e8ede3d0ad13d37d",
+        "domain": "grammar",
+        "targetKey": "definite-article",
+        "familyId": "family-d10583eff4e14ae1b8df4f70",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The side gate",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a5f098a8e520925edcb59e6a",
+        "domain": "grammar",
+        "targetKey": "definite-article",
+        "familyId": "family-9e7e038f446cfd02b291fc99",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The blue one.",
+          "contextKind": "reply",
+          "contextNote": "질문 Which of these two hats is yours?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-c135d7b537dd3849639d80d8",
+        "domain": "grammar",
+        "targetKey": "definite-article",
+        "familyId": "family-82930a20eea97c91a25fea71",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The door is open.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-82665be55699378f533212f7",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-e2181d1516d7ba05631dee50",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Three birds landed.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e516336772afc0e19898b0c9",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-2cb5c20289c299f04c74d21b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Two cat are sleeping.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-48c7593a2ce6b8450f26b7ed",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-50475d9aad8da503d7c6e068",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Three candles is burning.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-210d86a4408df9be0b552bae",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-c585b8f74a84f271e04d8331",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those dogs bark.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-08170dcdc3106c9546af6632",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-c426d14941abf160507b1573",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Nearly twelve...",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-97e45cf454cd29386a9a171a",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-776204442a573e58cd3fd046",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Three.",
+          "contextKind": "reply",
+          "contextNote": "질문 How many tickets do you want?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-39499a202a60dadd13651b36",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-cdfe5ece7a98575bc33f6d79",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I have two apples.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-847933d195e3e1819e59a592",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-06274ae37fb11f7b80c2936b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The keys are on the shelf.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-294ffea60afb4c8521876123",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-42bcb13f6556ba278258fac6",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They are interested on jazz.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-93abdb5c7f8539794870428f",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-348ddcd301d0f301c3ca5c32",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The keys is on the shelf.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-c7f9ac5678d265fc1b21c577",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-6639e26a1e0e4ed9458db965",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-03fbeef3f16671f5dca7a96c",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-f5dedfe12154679936416ae9",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Under the chair",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-fb8ada98b3b1651c413a9c5a",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-ac16a5073f485327badabd2e",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Under the chair.",
+          "contextKind": "reply",
+          "contextNote": "질문 Where is the bag?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-1d0e273435f784d6ee6f5d19",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-44eb17c65738b31196d441c0",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She is at the bank.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4795d8f26d3ef769fbac0679",
+        "domain": "grammar",
+        "targetKey": "conjunction",
+        "familyId": "family-e220e4cd7ff63e43c4774092",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I stayed home because it rained.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-115f5c3402e012f3163ee510",
+        "domain": "grammar",
+        "targetKey": "conjunction",
+        "familyId": "family-9343f2eafd2d730a9661ca51",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Although it rained, but we walked.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-6383a3717c82d5d5f33d0848",
+        "domain": "grammar",
+        "targetKey": "conjunction",
+        "familyId": "family-26f66d57a5f22061e8669d48",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "We stayed home because the roads was icy.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a9a296eedc0b537b04b22d20",
+        "domain": "grammar",
+        "targetKey": "conjunction",
+        "familyId": "family-0c095e8844448a37bba6446a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ce57eb4a201f2cd985a90184",
+        "domain": "grammar",
+        "targetKey": "conjunction",
+        "familyId": "family-bfc1a0b7025ac25932a2e6a4",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Although the broth",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-003afa93870e4151d80d1c69",
+        "domain": "grammar",
+        "targetKey": "conjunction",
+        "familyId": "family-00a23e48555550cde9f2f24f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Because it rained.",
+          "contextKind": "reply",
+          "contextNote": "질문 Why did you stay home?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-6ed67b1cfa5c343ce8cebdbe",
+        "domain": "grammar",
+        "targetKey": "conjunction",
+        "familyId": "family-2d6160d8e5051e58cd300ee2",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I stayed home, but I was happy.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-7c54180488e1d90ab48c9bcd",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-3230b3c1b57518a4781a66c8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They are preparing lunch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b50449ccdd91ba5f736f2139",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-c48bde2e578e1ea7ae5e9113",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They is cooking dinner.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9925211202fec3738d294329",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-36e9b782b7dd348020c85eab",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They are opening two box.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9e9c75d296e1c05d6bff7011",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-ddb7f19f6985e443fcdc75c6",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3c76bba3b65eb8f5d456e5d6",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-316c33e60a33ecbaf7200e91",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "has been",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b34f5bbff953778acfef936a",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-fe82bec1b721f15d58b171b5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I am.",
+          "contextKind": "reply",
+          "contextNote": "질문 Are you cooking?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-86aa0c37d30a7d74e259966d",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-c6602cad9b7959513bc5f47c",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They have a car.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-818fa46b9464ba2c64cfb50b",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-4c207e21d6c7ca5815577b15",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She can swim well.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a95c1d4ec1e1e62c544e3891",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-d81d3c3e890c92c100dc6d63",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She can swims well.",
+          "contextKind": "sentence",
+          "contextNote": "지금의 수영 능력을 말합니다."
+        }
+      },
+      {
+        "id": "exposure-4ed0b2ca8ea15af73f5670bb",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-5d30f78faf2d3dd585cfa443",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She can carry two box.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4893248eb38bcf3ae51500a2",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-b5c4cec8088e197448e8c4c5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-f07b9e455095667a0924e26c",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-9813da085ef7e27c94ca0d1e",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "might have",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-45d27a49b953ca9e25076faf",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-01bbc3c6126e4dfa4c44bacc",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I can.",
+          "contextKind": "reply",
+          "contextNote": "질문 Can you carry this box?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-f7419d70315ac78967aa8283",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-7881036d957cfd2f19e1474f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9d61ef060bc207cc06d1057a",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-6db11cac9f0a7effc9ff4ac6",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "We decided to repair the fence.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3b9516e60ad3044640242484",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-a56ebe0d47013cca4c509e24",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They decided to repaired the gate tomorrow.",
+          "contextKind": "sentence",
+          "contextNote": "내일 수리 작업을 하기로 결정했다는 뜻입니다."
+        }
+      },
+      {
+        "id": "exposure-c3905e926b5667fbafb47701",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-6fbf8f90b2e71b80d7819775",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They decided to repair two gate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-35fa02cfa1a92ecac7c7661b",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-e2f7239f31b50c60252012d5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a131c8982ed40051d94ca5a8",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-85fd6e071169e1591a603c88",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "To repair",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-bf3d367258e71e9b1acec4f8",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-40d121a66ed4ea7993f1961b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "To rest.",
+          "contextKind": "reply",
+          "contextNote": "질문 What do you want to do?에 대한 답변입니다."
+        }
+      },
+      {
+        "id": "exposure-d6a641e25037d9dd86f52d2b",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-7e3f37ff4a5f21685aaf9a65",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I went to school.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3ddb594acb558a3498227a93",
+        "domain": "grammar",
+        "targetKey": "exclamation",
+        "familyId": "family-c5e1bcdbbce20d3b871606d3",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Hooray!",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-058165231b20e8d9d771eee8",
+        "domain": "grammar",
+        "targetKey": "exclamation",
+        "familyId": "family-98c661076fdb5ee24b4b67ec",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Hooray! Our house burned down.",
+          "contextKind": "sentence",
+          "contextNote": "집이 타서 슬프고 유감스러운 반응을 나타내려는 뜻입니다."
+        }
+      },
+      {
+        "id": "exposure-f6d2f7b4bf3e2c48280fb288",
+        "domain": "grammar",
+        "targetKey": "exclamation",
+        "familyId": "family-1b805b14e6a1edb5c42f4342",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Wow! Those boats is huge.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-cf595db79bebf7aa2b25d918",
+        "domain": "grammar",
+        "targetKey": "exclamation",
+        "familyId": "family-eb2e86a56785196e3a05d636",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Birds migrate.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-5eeb89f86d35a4c69278aaca",
+        "domain": "grammar",
+        "targetKey": "exclamation",
+        "familyId": "family-726b3a6479ab3960f4aaabe1",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Wow, the...",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-d87ac287c1c275f55f6d984d",
+        "domain": "grammar",
+        "targetKey": "exclamation",
+        "familyId": "family-120dc204b2081a1aa7b7e932",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Wow!",
+          "contextKind": "reply",
+          "contextNote": "큰 폭포를 보고 놀란 반응입니다."
+        }
+      },
+      {
+        "id": "exposure-55461a2622c7d27c10789845",
+        "domain": "grammar",
+        "targetKey": "exclamation",
+        "familyId": "family-ca8a53d1eb422b550a1199a3",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Oh, I see.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b75e2c66f2a40cf698f154be",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-9d62eba907f6647445b90fe5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "A book lies on the desk.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-21f2171f76d8b2de13504287",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-7ae6d895bb23db7efecc10b3",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I want learn English.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-8327b3943ed58e65fcab375e",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-4d1ddea7e49abb4c0f465a0a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "He help her.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-d584b62347ddf1bb713b5c25",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-1df9fabc4bd85e4b17e02f5c",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Him helps I.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-02bf3bb7e34fd180b76d57d3",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-29b0140b3eb1f7aa12d1aebd",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Although the broth",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-64addd9233990651370b334c",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-149fc7db2b1e07dddef6beb7",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-481ce9b006413d282f4cade9",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-f0afd7cd284561054f5cb125",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-0f8ec03ace92fed582f8e2e6",
+        "domain": "unknown",
+        "targetKey": "public-target",
+        "familyId": "family-ee8b6acd31017701289eba2a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She goes to school.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-10b9ca8d8c5a5169fd8a7503",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-9cdf0fbcfcd195678bac6b02",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She goes to school.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-d73cae4c3aa72e1ca21ef634",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-35322fd119b814224359388e",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "eat go",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-8411e6ed9b996b0aabb1da1a",
+        "domain": "unknown",
+        "targetKey": "public-target",
+        "familyId": "family-48f25de209091ca183b288a3",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "eat go",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ac452ba9e34e0c6f7b38d8df",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-fa411048f7c275964db025f5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She sings well.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-cab1674ed6db20b379b40bc6",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-162b92e1f25f442a4be288c5",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9d4500259987393b8f807523",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-fa7e7907f7299b212614b595",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4a8b177f062bd3dd87ea3444",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-e504d096357e5c929c4377b2",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Those car belongs to Mia.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-aeb4ef6346b7989630214517",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-cf82be46f2932cb50b83cebc",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-792e6a027901eb60f70b78f9",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-d505d307d8c64d0b242137db",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She go home.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-637bf98946f17a4fe5a9f6d2",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-8f6dad0193870cb6a295eec3",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "He does not own two cats.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ba3a4b2415d9e9ef8f535885",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-2febae7c3b3f0ea226797a84",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "He saw her.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-6d667bdaafb8b0da88264ec1",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-dca569422cb5a3252cd837ef",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Music",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-8f9c932c73168941353ed877",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-3be792953b28bcd90757b415",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "A book lies on the desk.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-f59165e9d95263abf01cad61",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-1621f3f69f4068d8f71d3cfc",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Him helps I.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-1374f1d2c2c4168785c7001d",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-4be30a45233edde7e2e00d30",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Give help.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-04b79c29bf13b858c901ddeb",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-4a372fc64981ee7c51d6fa2a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She is speaking quiet.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-6396dc9a99bd92baeab521af",
+        "domain": "word",
+        "targetKey": "walk",
+        "familyId": "family-7411b045149baacc24683a91",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She walks to school.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-93dfcc650d706339ccfc5ef4",
+        "domain": "word",
+        "targetKey": "read",
+        "familyId": "family-5fadccb11fb5ee85b3da9848",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I read books every evening.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-8fcc28dca51fd3454e83ae65",
+        "domain": "word",
+        "targetKey": "close",
+        "familyId": "family-19f166d36d59448799558e36",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Please close the window.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3ef5f3903731b78a1723ad7e",
+        "domain": "word",
+        "targetKey": "record",
+        "familyId": "family-002e4619eef60c3226414355",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They recorded the concert.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4a56542b0c71db98cd78121b",
+        "domain": "word",
+        "targetKey": "live",
+        "familyId": "family-0029fe58289cd571363beb6b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "We live in Seoul.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e2e8f5e67d8b211a093e9968",
+        "domain": "word",
+        "targetKey": "tear",
+        "familyId": "family-77b65cce1d99b31e03be5b47",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "A tear rolled down her cheek.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4220a00cb3a98d5c13f3e048",
+        "domain": "word",
+        "targetKey": "wind",
+        "familyId": "family-8b701848eb7b3e2930c471b8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The wind is strong today.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4df324b686c262927ee33071",
+        "domain": "word",
+        "targetKey": "present",
+        "familyId": "family-db6bbf860d86302ea6160638",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Her present was a book.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-19636b5d3e4f31a894bb67a9",
+        "domain": "word",
+        "targetKey": "object",
+        "familyId": "family-f4efb63820a815cd14cf80ad",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I object to this plan.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-7d31448fe7edae236505a9e1",
+        "domain": "word",
+        "targetKey": "graduate",
+        "familyId": "family-f3cf9bec4a51469019dd0993",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She graduated last year.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b3407e9c06670390e30d729a",
+        "domain": "word",
+        "targetKey": "desert",
+        "familyId": "family-448409d6589122ea1f69470f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The desert is hot.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b29e9de3ba1f52ed036537d9",
+        "domain": "word",
+        "targetKey": "conduct",
+        "familyId": "family-52cb1dde026003ace57e6a77",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They conduct research.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9046cc23104818e74c53cc3c",
+        "domain": "word",
+        "targetKey": "conflict",
+        "familyId": "family-9653cd5b00fc09cd45e730bc",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Their schedules conflict.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-7e3e686f424113909038d1f3",
+        "domain": "word",
+        "targetKey": "contest",
+        "familyId": "family-480204308b359238c9fbdf69",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She contested the result.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-c00b5c5737133dd84e3936f4",
+        "domain": "word",
+        "targetKey": "transfer",
+        "familyId": "family-5a2a05923e9ab5a4e8ee6c98",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I transferred the money yesterday.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-4de5ee4e923e05856d7a86da",
+        "domain": "word",
+        "targetKey": "lead",
+        "familyId": "family-69245f9803a9e9bf97dfa687",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She leads the team.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9534f916dee0126076ce6587",
+        "domain": "word",
+        "targetKey": "refuse",
+        "familyId": "family-ad0365719d3821b5674bcd38",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "He refused the offer.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ce829b34f329536c426b24c1",
+        "domain": "word",
+        "targetKey": "brother",
+        "familyId": "family-21f761cec5bfc2b3e6bf2614",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "My younger brother is ten.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-482616eda47170e7f5e78a12",
+        "domain": "word",
+        "targetKey": "information",
+        "familyId": "family-deec085a25032b814d7ef068",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I need some information.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-59d3307eaa6e904ed227d440",
+        "domain": "word",
+        "targetKey": "know",
+        "familyId": "family-d9901179724716a334c2c781",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I know the answer.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-5a3f44985d8261961a1419a2",
+        "domain": "word",
+        "targetKey": "walk",
+        "familyId": "family-0e7399b5206596908e5f0073",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "He walk to school.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a99db5374f740ad67a44831a",
+        "domain": "word",
+        "targetKey": "buy",
+        "familyId": "family-e032ebebdac1850d0eb4ca2a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She buyed a book yesterday.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e73c32f7d125a6198718d279",
+        "domain": "word",
+        "targetKey": "apple",
+        "familyId": "family-b4a4d22acc17bc3787c6b34b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I ate a apple.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9b86fd3e70ba2d9c1e278741",
+        "domain": "word",
+        "targetKey": "information",
+        "familyId": "family-2846f18b3cce6f624c392b0f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I need two informations.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-51ef84e70bd63342567c020a",
+        "domain": "word",
+        "targetKey": "listen",
+        "familyId": "family-203536d3e0b22b62bbe39d17",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She listens music every day.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-2883dd57ba8f87ec46d62c0c",
+        "domain": "word",
+        "targetKey": "interested",
+        "familyId": "family-602dcfb4d220a922523c7287",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I am interested on science.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-c3821bcdcae3a1ae3bdb73be",
+        "domain": "word",
+        "targetKey": "go",
+        "familyId": "family-739448d7ce009c3235b28bd4",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Yesterday, I go to the park.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-5c40d9471aab4717ad4bb350",
+        "domain": "word",
+        "targetKey": "know",
+        "familyId": "family-22f2ad34403a06c4335662ee",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I am knowing the answer.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ddaaf213dc67e78f373e75dd",
+        "domain": "word",
+        "targetKey": "depend",
+        "familyId": "family-3b0d87f8b7e63fb5f5ad99b8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "It depends of the weather.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-90c261569eaf6937dc6f51d7",
+        "domain": "word",
+        "targetKey": "read",
+        "familyId": "family-e766a5681f47cde48fd1ec93",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I have readed this book.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-f4038bd88934312b666eff11",
+        "domain": "word",
+        "targetKey": "book",
+        "familyId": "family-0db7a449a7a113def0172d32",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "This book is interesting.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-21eec53e0163f925c4c66ebf",
+        "domain": "word",
+        "targetKey": "arrive",
+        "familyId": "family-ed4b5a6bdca10eea910bf8e4",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They arrived to the station.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-77dcf46ae24bd3d37bd6ec10",
+        "domain": "word",
+        "targetKey": "child",
+        "familyId": "family-02212aa18c10914b105036f8",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "These childs are playing.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e0eafb0062e948e53ae1f2d5",
+        "domain": "word",
+        "targetKey": "well",
+        "familyId": "family-94a1c42993ce92e39109eb67",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "She sing well.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b4eb7ba0af88b1a3d28b637d",
+        "domain": "word",
+        "targetKey": "bank",
+        "familyId": "family-3e145026fa76e26ce9128257",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "bank / river / money",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-c657cb5b6713791f686115c2",
+        "domain": "word",
+        "targetKey": "lead",
+        "familyId": "family-ca30e62cc01a6bcc5add1b2f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "lead / led / metal",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-db2ea9645913c833eee55d7d",
+        "domain": "word",
+        "targetKey": "object",
+        "familyId": "family-45ff1e01c14932d8318c9891",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "object or subject",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-731e100ed39f039dc7c22605",
+        "domain": "word",
+        "targetKey": "read",
+        "familyId": "family-993743c277c4bac0a6d3a70c",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "read / red / reading",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-40f713c094be0c020847c2a4",
+        "domain": "word",
+        "targetKey": "live",
+        "familyId": "family-361da9c1443314d7e3c2d7cd",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "live / lived / alive",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ce7317635b1960a7566d0f7f",
+        "domain": "word",
+        "targetKey": "present",
+        "familyId": "family-4788209a8e6c1bd1dd5ed484",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "present / gift / now",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a7af4c14aa4f63a4887f86f6",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-895d1354ffb0842b8d3fb8bf",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I like jazz.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-18443dfbacbbe78cb733f908",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-328d4ea7f463e3a161361d11",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I walk to work.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e8b9239e3365f68593057465",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-d31743efcb2728f5064ee2ab",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "He likes her.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a80e3df7f7b3f6e723fcb989",
+        "domain": "grammar",
+        "targetKey": "adjective",
+        "familyId": "family-8bf0b4944f557a35d0aad58a",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "My uncle is kind.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-babb04595307b9d1fe8a8bcb",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-8ee2dc70696917aebcae14f1",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I am now writing.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e548032c7577b279adafe4b4",
+        "domain": "grammar",
+        "targetKey": "determiner",
+        "familyId": "family-f9a47c5d558495a5a4b4d348",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "This book is interesting.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-06474592ce1ef786af4c302c",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-eb2c44df89ace2af46847bd3",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I have an orange.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-d930eefe49e21f4400607dd7",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-1a1b29a3392765577e67479f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "The book is under the chair.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-31c38a7478b79e035eaab710",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-c6c0abf156ff872b1881f32f",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Was the window broken by Tom?",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-7598940644db325d87f27760",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-cf338fcfc568d986df8fd238",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Open the door, please.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-af7345656fcdca8a85350355",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-8bfde470311304b555c07dfb",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Him likes she.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a1aa81bdd0d92b96c15e32f4",
+        "domain": "grammar",
+        "targetKey": "indefinite-article",
+        "familyId": "family-4de93c86b525726a56e2c4b2",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I have an useful book.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b54e181cdc8aec1dff497616",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-3cfee9b1304abe4bd0771c2e",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "They is studying now.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-b5db8f18516cf3123d9fe4c0",
+        "domain": "grammar",
+        "targetKey": "modal",
+        "familyId": "family-2043166b3fc35361da35e380",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I can swims.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-cbcc41b05e81d073ece055d3",
+        "domain": "grammar",
+        "targetKey": "infinitive",
+        "familyId": "family-ef4783338413f686fb22638d",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I want learn English.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-14dc40d52219e1b0cd140066",
+        "domain": "grammar",
+        "targetKey": "number",
+        "familyId": "family-7032bded062b68db1b46af58",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "I have two book.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-ca1468f099444511f734b333",
+        "domain": "grammar",
+        "targetKey": "noun",
+        "familyId": "family-5bc6b080f725a3ee49bf58fa",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "Music",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-64197ba517c9270f260fbff9",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-6755c4a314e8dcf71389567b",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "eat go",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-cf0434383823dcfefb5c8fa7",
+        "domain": "grammar",
+        "targetKey": "preposition",
+        "familyId": "family-2021cd2a2688d15184d1ba5d",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "on at in",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-38bdee85aaa32bbbed7e4db0",
+        "domain": "grammar",
+        "targetKey": "pronoun",
+        "familyId": "family-96da5bcf21189bcd277d66dd",
+        "familyBrief": "Public family relation unaudited.",
+        "input": {
+          "sentence": "she him they",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      }
+    ],
+    "provenanceHash": "a0802423f9899cec26d36e4c47cf51bca39e71b8876d377b6294a372b07dc313",
+    "hash": "a03234804bf1cb9f240587373be14049ceb696c758cdb3048b248ce15f72962c"
+  },
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": "b40aa8251bc66e98603b6af273566acdf8621bd4aaacdf40d768c1d27357e128",
+    "tests/fixtures/judgment-decision-matrix.json": "c0959fcaae5d0140f376c3e2097716bab4f6457b2284f61fec33801ae591f3d7",
+    ".taskmaster/docs/judgment-v5-calibration-cases.json": "0452f42e730babd0a8f7047837c8b1d304587365e96c034d0cc8c0c7982bedf5",
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+    "tests/fixtures/english-accuracy.json": "02a84a0c86252524e2627cbf7cd69f8d725ade70ebbf107c8aed986eabcd8e54"
+  },
+  "sourceCounts": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": 12,
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": 6,
+    "tests/fixtures/judgment-decision-matrix.json": 105,
+    ".taskmaster/docs/judgment-v5-calibration-cases.json": 12,
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": 12,
+    "tests/fixtures/english-accuracy.json": 60
+  },
+  "origins": [
+    {
+      "entryId": "exposure-735c80d10846efc914d789bb",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G01",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-28cadcc9df3e035f0c08fac1",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G02",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-072a525909513ded91f47742",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G03",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-e396c7b84ad1522a981b2d68",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G04",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-ac2879d6880267b7b3e23c78",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G05",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-946760a998c8aa85c6dbf665",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G06",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-85fd81baeb8b6cbe15b61db9",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G07",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-0eab1c5f42e8e49652dd4c5b",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G08",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-9c06ddd9d5caf5092657bdc4",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G09",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-32c4c175517d5a0f3385aa97",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G10",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-3fc7c93d31bff8a894be4f2c",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G11",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-58976d1fdcd5f989c9977dce",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G12",
+      "inputField": "input.sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-992212dfb3b487275c22fd59",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-positive-agreement",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a5ccdfded6712bed11b4845c",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-false-natural-label",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-3c81a0449b3697736e062d8e",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-target-mismatch",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-5df833f6348a1a3fdbfd6746",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-negation-loss",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-065297ebef2f522e79721ee7",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-false-source-attribution",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e56888e8299e633644f12b6d",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-missing-reply-message",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a13be8b3d66dcbed2c52dcf6",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "noun-0",
+      "inputField": "rows[0].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-7acffc44999272cb45556715",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "noun-1",
+      "inputField": "rows[0].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-00a709d085279264ce556075",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "noun-2",
+      "inputField": "rows[0].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a16e1197b5d8a115f1c10d4f",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "noun-3",
+      "inputField": "rows[0].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-006e8c704af23814c71bcc01",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "noun-4",
+      "inputField": "rows[0].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b40a693196d80e911c705f4f",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "noun-5",
+      "inputField": "rows[0].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a857c5ff9e27842e398f085a",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "noun-6",
+      "inputField": "rows[0].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-65f2f78c150bc21801be0b2d",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "verb-0",
+      "inputField": "rows[1].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-f2061ddcf05ae132a6631f3f",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "verb-1",
+      "inputField": "rows[1].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-71915643939b388d8f389e23",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "verb-2",
+      "inputField": "rows[1].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b3ffb68b06addcbabd1123a2",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "verb-3",
+      "inputField": "rows[1].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-958d1dbff401ab89c6d56432",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "verb-4",
+      "inputField": "rows[1].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-742225c899a3a4c9c2bfc52b",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "verb-5",
+      "inputField": "rows[1].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-741d9f07ca7e4f79786234f9",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "verb-6",
+      "inputField": "rows[1].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-d26e803220c28a57c642298f",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "pronoun-0",
+      "inputField": "rows[2].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-873d6a76a367493c42b9b62c",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "pronoun-1",
+      "inputField": "rows[2].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-6eba6a26c66b2424fe985a21",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "pronoun-2",
+      "inputField": "rows[2].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9e4574640849d278c98c11f7",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "pronoun-3",
+      "inputField": "rows[2].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-1035ee934c94822e2cf4d6ca",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "pronoun-4",
+      "inputField": "rows[2].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-49fb37e22be49ddd7bb239b6",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "pronoun-5",
+      "inputField": "rows[2].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4489da04872cd078dbf0fae4",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "pronoun-6",
+      "inputField": "rows[2].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e0457cce0ef933da5891b06c",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adjective-0",
+      "inputField": "rows[3].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-47a88dbe32570928e7133a2d",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adjective-1",
+      "inputField": "rows[3].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-820d6820763ef93ac1f8fb9d",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adjective-2",
+      "inputField": "rows[3].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-1278ba8c4d6b47812c237cf5",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adjective-3",
+      "inputField": "rows[3].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-34ce1851901ee8d456986038",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adjective-4",
+      "inputField": "rows[3].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-2aca06c52851910a727e5845",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adjective-5",
+      "inputField": "rows[3].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e7038e780b7f44436227ca81",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adjective-6",
+      "inputField": "rows[3].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-1c746328fc636b2e065e5101",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adverb-0",
+      "inputField": "rows[4].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-f9aeeb69d03499bc5bfb39fc",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adverb-1",
+      "inputField": "rows[4].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-ce9d14dfb734a6958f4ab251",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adverb-2",
+      "inputField": "rows[4].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9ecc3956e09405bbbd9d52d0",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adverb-3",
+      "inputField": "rows[4].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-8263aa406f7817d1972dacc6",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adverb-4",
+      "inputField": "rows[4].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-34125505c8d6c58ac2e5f72c",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adverb-5",
+      "inputField": "rows[4].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-7e26fd71d0ca2a46f9443743",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "adverb-6",
+      "inputField": "rows[4].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-91df96919d3b21eddcb67d5b",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "determiner-0",
+      "inputField": "rows[5].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4f6aa692a147cf228c5a9dc5",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "determiner-1",
+      "inputField": "rows[5].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c92d3ac09ee0d8331a461078",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "determiner-2",
+      "inputField": "rows[5].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-2115b9c5ce8e783f5f4e12c1",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "determiner-3",
+      "inputField": "rows[5].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-6e09219db24ee32218908558",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "determiner-4",
+      "inputField": "rows[5].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c9945b226a1def554664b964",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "determiner-5",
+      "inputField": "rows[5].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-f241090e3cbe990b8a87a254",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "determiner-6",
+      "inputField": "rows[5].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-fa1a7948783491a819659c6d",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "indefinite-article-0",
+      "inputField": "rows[6].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e67510a3012a726b0bacb855",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "indefinite-article-1",
+      "inputField": "rows[6].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9e707ceec389b38402692605",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "indefinite-article-2",
+      "inputField": "rows[6].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-46730b1b742008c0822a667b",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "indefinite-article-3",
+      "inputField": "rows[6].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-d4b86373b7cbd7c584340677",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "indefinite-article-4",
+      "inputField": "rows[6].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c33aa287bef1aa8681f1eb0e",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "indefinite-article-5",
+      "inputField": "rows[6].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-85f410f899bc361b899b21ff",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "indefinite-article-6",
+      "inputField": "rows[6].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a306b3e2968ca478850e90f1",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "definite-article-0",
+      "inputField": "rows[7].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-ae7f29f7bc7f64519b1c36ab",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "definite-article-1",
+      "inputField": "rows[7].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-d7d83b47ad6b2255ba1d5b94",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "definite-article-2",
+      "inputField": "rows[7].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-393c9ac91b95bdbe04fb70fd",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "definite-article-3",
+      "inputField": "rows[7].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-336ac5c3e8ede3d0ad13d37d",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "definite-article-4",
+      "inputField": "rows[7].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a5f098a8e520925edcb59e6a",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "definite-article-5",
+      "inputField": "rows[7].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c135d7b537dd3849639d80d8",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "definite-article-6",
+      "inputField": "rows[7].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-82665be55699378f533212f7",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "number-0",
+      "inputField": "rows[8].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e516336772afc0e19898b0c9",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "number-1",
+      "inputField": "rows[8].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-48c7593a2ce6b8450f26b7ed",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "number-2",
+      "inputField": "rows[8].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-210d86a4408df9be0b552bae",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "number-3",
+      "inputField": "rows[8].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-08170dcdc3106c9546af6632",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "number-4",
+      "inputField": "rows[8].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-97e45cf454cd29386a9a171a",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "number-5",
+      "inputField": "rows[8].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-39499a202a60dadd13651b36",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "number-6",
+      "inputField": "rows[8].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-847933d195e3e1819e59a592",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "preposition-0",
+      "inputField": "rows[9].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-294ffea60afb4c8521876123",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "preposition-1",
+      "inputField": "rows[9].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-93abdb5c7f8539794870428f",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "preposition-2",
+      "inputField": "rows[9].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c7f9ac5678d265fc1b21c577",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "preposition-3",
+      "inputField": "rows[9].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-03fbeef3f16671f5dca7a96c",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "preposition-4",
+      "inputField": "rows[9].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-fb8ada98b3b1651c413a9c5a",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "preposition-5",
+      "inputField": "rows[9].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-1d0e273435f784d6ee6f5d19",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "preposition-6",
+      "inputField": "rows[9].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4795d8f26d3ef769fbac0679",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "conjunction-0",
+      "inputField": "rows[10].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-115f5c3402e012f3163ee510",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "conjunction-1",
+      "inputField": "rows[10].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-6383a3717c82d5d5f33d0848",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "conjunction-2",
+      "inputField": "rows[10].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a9a296eedc0b537b04b22d20",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "conjunction-3",
+      "inputField": "rows[10].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-ce57eb4a201f2cd985a90184",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "conjunction-4",
+      "inputField": "rows[10].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-003afa93870e4151d80d1c69",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "conjunction-5",
+      "inputField": "rows[10].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-6ed67b1cfa5c343ce8cebdbe",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "conjunction-6",
+      "inputField": "rows[10].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-7c54180488e1d90ab48c9bcd",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "auxiliary-0",
+      "inputField": "rows[11].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b50449ccdd91ba5f736f2139",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "auxiliary-1",
+      "inputField": "rows[11].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9925211202fec3738d294329",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "auxiliary-2",
+      "inputField": "rows[11].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9e9c75d296e1c05d6bff7011",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "auxiliary-3",
+      "inputField": "rows[11].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-3c76bba3b65eb8f5d456e5d6",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "auxiliary-4",
+      "inputField": "rows[11].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b34f5bbff953778acfef936a",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "auxiliary-5",
+      "inputField": "rows[11].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-86aa0c37d30a7d74e259966d",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "auxiliary-6",
+      "inputField": "rows[11].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-818fa46b9464ba2c64cfb50b",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "modal-0",
+      "inputField": "rows[12].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a95c1d4ec1e1e62c544e3891",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "modal-1",
+      "inputField": "rows[12].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4ed0b2ca8ea15af73f5670bb",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "modal-2",
+      "inputField": "rows[12].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4893248eb38bcf3ae51500a2",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "modal-3",
+      "inputField": "rows[12].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-f07b9e455095667a0924e26c",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "modal-4",
+      "inputField": "rows[12].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-45d27a49b953ca9e25076faf",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "modal-5",
+      "inputField": "rows[12].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-f7419d70315ac78967aa8283",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "modal-6",
+      "inputField": "rows[12].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9d61ef060bc207cc06d1057a",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "infinitive-0",
+      "inputField": "rows[13].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-3b9516e60ad3044640242484",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "infinitive-1",
+      "inputField": "rows[13].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c3905e926b5667fbafb47701",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "infinitive-2",
+      "inputField": "rows[13].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-35fa02cfa1a92ecac7c7661b",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "infinitive-3",
+      "inputField": "rows[13].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a131c8982ed40051d94ca5a8",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "infinitive-4",
+      "inputField": "rows[13].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-bf3d367258e71e9b1acec4f8",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "infinitive-5",
+      "inputField": "rows[13].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-d6a641e25037d9dd86f52d2b",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "infinitive-6",
+      "inputField": "rows[13].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-3ddb594acb558a3498227a93",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "exclamation-0",
+      "inputField": "rows[14].cases[0].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-058165231b20e8d9d771eee8",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "exclamation-1",
+      "inputField": "rows[14].cases[1].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-f6d2f7b4bf3e2c48280fb288",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "exclamation-2",
+      "inputField": "rows[14].cases[2].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-cf595db79bebf7aa2b25d918",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "exclamation-3",
+      "inputField": "rows[14].cases[3].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-5eeb89f86d35a4c69278aaca",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "exclamation-4",
+      "inputField": "rows[14].cases[4].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-d87ac287c1c275f55f6d984d",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "exclamation-5",
+      "inputField": "rows[14].cases[5].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": false,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-55461a2622c7d27c10789845",
+      "sourceFile": "tests/fixtures/judgment-decision-matrix.json",
+      "recordId": "exclamation-6",
+      "inputField": "rows[14].cases[6].sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": false,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b75e2c66f2a40cf698f154be",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-01",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-21f2171f76d8b2de13504287",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-02",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-8327b3943ed58e65fcab375e",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-03",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-d584b62347ddf1bb713b5c25",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-04",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-02bf3bb7e34fd180b76d57d3",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-05",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-64addd9233990651370b334c",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-06",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-481ce9b006413d282f4cade9",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-07",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-0f8ec03ace92fed582f8e2e6",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-08",
+      "inputField": "feedback.original",
+      "materialKind": "hypothetical-visible-fault-original-not-product-reproduction",
+      "domainUnavailable": true,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-10b9ca8d8c5a5169fd8a7503",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-09",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-d73cae4c3aa72e1ca21ef634",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-10",
+      "inputField": "original",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-8411e6ed9b996b0aabb1da1a",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-11",
+      "inputField": "feedback.original",
+      "materialKind": "hypothetical-visible-fault-original-not-product-reproduction",
+      "domainUnavailable": true,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-ac452ba9e34e0c6f7b38d8df",
+      "sourceFile": ".taskmaster/docs/judgment-v5-calibration-cases.json",
+      "recordId": "cal-v5-12",
+      "inputField": "original",
+      "materialKind": "rejected-wire-input-not-successful-feedback",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-cab1674ed6db20b379b40bc6",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "A01",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-9d4500259987393b8f807523",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "A02",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-4a8b177f062bd3dd87ea3444",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "A03",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-aeb4ef6346b7989630214517",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "A04",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-rejection-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-792e6a027901eb60f70b78f9",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "F01",
+      "inputField": "input.sentence",
+      "materialKind": "hypothetical-visible-fault-not-product-reproduction",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-637bf98946f17a4fe5a9f6d2",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "F02",
+      "inputField": "input.sentence",
+      "materialKind": "hypothetical-visible-fault-not-product-reproduction",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-ba3a4b2415d9e9ef8f535885",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "F03",
+      "inputField": "input.sentence",
+      "materialKind": "hypothetical-visible-fault-not-product-reproduction",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-6d667bdaafb8b0da88264ec1",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "F04",
+      "inputField": "input.sentence",
+      "materialKind": "hypothetical-visible-fault-not-product-reproduction",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-8f9c932c73168941353ed877",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "N01",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-f59165e9d95263abf01cad61",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "N02",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-1374f1d2c2c4168785c7001d",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "N03",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-04b79c29bf13b858c901ddeb",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+      "recordId": "N04",
+      "inputField": "input.sentence",
+      "materialKind": "current-parser-public-development",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": true
+    },
+    {
+      "entryId": "exposure-6396dc9a99bd92baeab521af",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-01",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-93dfcc650d706339ccfc5ef4",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-02",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-8fcc28dca51fd3454e83ae65",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-03",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-3ef5f3903731b78a1723ad7e",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-04",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4a56542b0c71db98cd78121b",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-05",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e2e8f5e67d8b211a093e9968",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-06",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4220a00cb3a98d5c13f3e048",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-07",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4df324b686c262927ee33071",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-08",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-19636b5d3e4f31a894bb67a9",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-09",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-7d31448fe7edae236505a9e1",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-10",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b3407e9c06670390e30d729a",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-11",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b29e9de3ba1f52ed036537d9",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-12",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9046cc23104818e74c53cc3c",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-13",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-7e3e686f424113909038d1f3",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-14",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c00b5c5737133dd84e3936f4",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-15",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-4de5ee4e923e05856d7a86da",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-16",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9534f916dee0126076ce6587",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-17",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-ce829b34f329536c426b24c1",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-18",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-482616eda47170e7f5e78a12",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-19",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-59d3307eaa6e904ed227d440",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-20",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-5a3f44985d8261961a1419a2",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-21",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a99db5374f740ad67a44831a",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-22",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e73c32f7d125a6198718d279",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-23",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-9b86fd3e70ba2d9c1e278741",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-24",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-51ef84e70bd63342567c020a",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-25",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-2883dd57ba8f87ec46d62c0c",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-26",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c3821bcdcae3a1ae3bdb73be",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-27",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-5c40d9471aab4717ad4bb350",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-28",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-ddaaf213dc67e78f373e75dd",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-29",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-90c261569eaf6937dc6f51d7",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-30",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-f4038bd88934312b666eff11",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-31",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-21eec53e0163f925c4c66ebf",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-32",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-77dcf46ae24bd3d37bd6ec10",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-33",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e0eafb0062e948e53ae1f2d5",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-34",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b4eb7ba0af88b1a3d28b637d",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-35",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-c657cb5b6713791f686115c2",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-36",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-db2ea9645913c833eee55d7d",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-37",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-731e100ed39f039dc7c22605",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-38",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-40f713c094be0c020847c2a4",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-39",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-ce7317635b1960a7566d0f7f",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "word-40",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a7af4c14aa4f63a4887f86f6",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-41",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-18443dfbacbbe78cb733f908",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-42",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e8b9239e3365f68593057465",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-43",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a80e3df7f7b3f6e723fcb989",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-44",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-babb04595307b9d1fe8a8bcb",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-45",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-e548032c7577b279adafe4b4",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-46",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-06474592ce1ef786af4c302c",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-47",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-d930eefe49e21f4400607dd7",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-48",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-31c38a7478b79e035eaab710",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-49",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-7598940644db325d87f27760",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-50",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-af7345656fcdca8a85350355",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-51",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-a1aa81bdd0d92b96c15e32f4",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-52",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b54e181cdc8aec1dff497616",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-53",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-b5db8f18516cf3123d9fe4c0",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-54",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-cbcc41b05e81d073ece055d3",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-55",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-14dc40d52219e1b0cd140066",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-56",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-ca1468f099444511f734b333",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-57",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-64197ba517c9270f260fbff9",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-58",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-cf0434383823dcfefb5c8fa7",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-59",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    },
+    {
+      "entryId": "exposure-38bdee85aaa32bbbed7e4db0",
+      "sourceFile": "tests/fixtures/english-accuracy.json",
+      "recordId": "grammar-60",
+      "inputField": "sentence",
+      "materialKind": "declared-public-input",
+      "domainUnavailable": false,
+      "contextKindDefaulted": true,
+      "contextNoteDefaulted": true,
+      "targetCoarsened": false
+    }
+  ],
+  "extractionPolicy": "Original selected input fields only;no corrections/expected labels/grades/rationales/model identities. Visible-fault rows use feedback.original only andretain their weaker provenance outside the model inventory. Absent context defaults andunknown target domains areexplicit;unknown isnot treated asword orgrammar. Family relations unaudited;four additional static JSON collections added. Other source groups remainoutside this partial inventory.",
+  "sourceRows": 207,
+  "uniqueNormalizedSentences": 173,
+  "inventoryBytes": 56511,
+  "unknownDomainRows": 2,
+  "independentFamilyCountCertified": false,
+  "completeProjectExposureInventory": false,
+  "allSelectedOriginalInputRowsExtracted": true,
+  "remainingSourceGroups": [
+    "Original inputs embedded/generated in test programs",
+    "Curriculum examples,stems/questions andversioned lesson content",
+    "Other archived synthetic evaluations andfixture generators",
+    "Structural-family equivalence,source context/target detail audit"
+  ],
+  "actualEnglishQualityMeasured": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "liveDispatchAuthorized": false
+}

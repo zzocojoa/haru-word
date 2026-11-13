@@ -1,0 +1,142 @@
+{
+  "protocol": "ai-quality-v147-calibration-admission-v1",
+  "scope": "Current public12calibration sources;not a new grade or English certification",
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+    ".taskmaster/evaluation/ai-quality-v147/semantic-reference-audit-v1.json": "28647e0041705ab9664686b94e47e0dc71972cdbc496e017c0fc63c099d4dbd3"
+  },
+  "evidenceFile": "phase48/all-six-actual-diagnostic-analysis.json",
+  "evidenceSha256": "285db465e21a3c1a61a8bbfc888002605afc6d04197852008bf9fc9acc122e06",
+  "entries": [
+    {
+      "sourceWitnessId": "A01",
+      "goldCaseId": "G09",
+      "witnessContentHash": "246df07c5c70754bd5a6bd83f768ba750ae07d0c65205af79257323af8a6a626",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "A02",
+      "goldCaseId": "G09",
+      "witnessContentHash": "c6ba1f14fbb34ad705c8c8522fadce02e3f348bedc864dc27817662f38d45339",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "A03",
+      "goldCaseId": "G02",
+      "witnessContentHash": "b342b9e7c51d8ab8cc520c90fd3334c9f184bb7acf1142744ef15b53677ba630",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "A04",
+      "goldCaseId": "G09",
+      "witnessContentHash": "57a10e6656449d8211aee041a51ec4186f32aefd9519f32537c6ca074e4bbd69",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "F01",
+      "goldCaseId": null,
+      "witnessContentHash": "a4c1d9b52d74db738f8079fa4ea26eef807f0847bc48ff1029534280dd8d08c5",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "F02",
+      "goldCaseId": null,
+      "witnessContentHash": "9f62411e3af4880928391cf67d6f2f549716400cf50d4a0c8789a8a208c67a2b",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "F03",
+      "goldCaseId": null,
+      "witnessContentHash": "7ec84e83c3b2c83a1f833cb7d9a8fca2f7fbce5d1e21ea94936e84abfde61e92",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "F04",
+      "goldCaseId": null,
+      "witnessContentHash": "fbc6c58b052a3eb158a85e1bf80cb573fe285a524a8a5c6b0cb58cce1316c2aa",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "N01",
+      "goldCaseId": "G06",
+      "witnessContentHash": "48316aacf82c690c9a539840a64677b3d0bf1e9d7ee2c4a6e448f64ba9f48b49",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "N02",
+      "goldCaseId": "G07",
+      "witnessContentHash": "65f30f73d2dbe6cbf922376bf0b6a6e740b9151342810a6c93617b7fcdeaa6af",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "N03",
+      "goldCaseId": "G11",
+      "witnessContentHash": "ea807ba69a450b7a7ae188c8fc5f56e8da2e1a167f32f2eb8b3ee3ec7b4184ff",
+      "state": "held-unreviewed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "declared-policy-reference-review-not-complete"
+      ]
+    },
+    {
+      "sourceWitnessId": "N04",
+      "goldCaseId": "G12",
+      "witnessContentHash": "725421b317d4edb0e2d22d348531e3872b7d20952c6d95f412fffdeca1d1e75b",
+      "state": "held-disputed-reference",
+      "qualified": false,
+      "reasonCodes": [
+        "G12-usage-scope-not-declared",
+        "case-specific-reference-not-established",
+        "three-model-diagnostic-is-not-gold-qualification"
+      ]
+    }
+  ],
+  "qualifiedCount": 0,
+  "referenceGradesChanged": false,
+  "oldScoresChanged": false,
+  "humanReviewerRequired": false,
+  "reviewerPolicy": "AI-only;actual reference qualification still required,agreement alone insufficient",
+  "englishTruthCertified": false,
+  "hash": "8f70578f111eb5cab9a158f6b56eb1dc47f76343ab626e706ff49d556874e513"
+}

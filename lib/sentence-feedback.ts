@@ -35,8 +35,10 @@ export const feedbackRequestSchema = z.object({
   sentence: z.string().trim().min(1).max(2000),
   expectedModelId: storedAiModelSchema,
   ...feedbackContextFields,
+  contextRole: z.literal('intended_korean').optional(),
   ...receiptRequestFields,
-}).strict().refine(pairedReceiptFields,'요청 ID와 시작 시각을 함께 보내 주세요.');
+}).strict().refine(pairedReceiptFields,'요청 ID와 시작 시각을 함께 보내 주세요.')
+  .refine(p=>!p.contextRole||!!p.contextNote?.trim(),'의도한 한국어 문장을 함께 보내 주세요.');
 
 export const MEANING_USAGE_TEXT = {appropriate:'오늘의 뜻에 맞아요',needs_work:'뜻·용법을 확인해요',uncertain:'뜻·용법 판단이 어려워요'};
 export const GRAMMAR_TEXT = {natural:'자연스러운 문장이에요',needs_work:'문장을 다듬어 보세요',uncertain:'문법 판단이 어려워요'};

@@ -1,0 +1,70 @@
+{
+  "protocol": "ai-quality-v147-blind-reference-followup-v2",
+  "originalPlanSha256": "f18c4b3e4f65d74d758a0e353fa7e67e0633256e53461b0fac9d4ac9bf470780",
+  "terminalSha256": "aa3596ab3071edebd1072eb520e90d26a70ab6cfde36357f7991e127b22015e8",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "originalValidReviews": 10,
+  "replayValidReviews": 12,
+  "replayAgreements": 5,
+  "replayHeldSource": 1,
+  "localNegativeControls": 12,
+  "preparedReviews": 110,
+  "preparedUnseenReviews": 108,
+  "preparedSourceFollowupReviews": 2,
+  "replay": [
+    {
+      "caseId": "fresh-word-needsCorrection-01",
+      "previousStatus": "held-source",
+      "replayStatus": "held-source"
+    },
+    {
+      "caseId": "fresh-word-insufficientContext-01",
+      "previousStatus": "held-invalid",
+      "replayStatus": "agreement-needs-admission"
+    },
+    {
+      "caseId": "fresh-grammar-normal-01",
+      "previousStatus": "agreement-needs-admission",
+      "replayStatus": "agreement-needs-admission"
+    },
+    {
+      "caseId": "fresh-grammar-needsCorrection-01",
+      "previousStatus": "agreement-needs-admission",
+      "replayStatus": "agreement-needs-admission"
+    },
+    {
+      "caseId": "fresh-grammar-insufficientContext-01",
+      "previousStatus": "agreement-needs-admission",
+      "replayStatus": "agreement-needs-admission"
+    },
+    {
+      "caseId": "fresh-word-normal-01",
+      "previousStatus": "agreement-needs-admission",
+      "replayStatus": "agreement-needs-admission"
+    }
+  ],
+  "sourceHeldCase": "fresh-word-needsCorrection-01",
+  "additionalSource": {
+    "id": "suggest-direct-complement",
+    "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-patterns-suggest",
+    "fact": "When suggest directly takes a verb complement, use the -ing form rather than a to-infinitive."
+  },
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "referencesQualified": 0,
+  "mainDispatchAuthorized": false,
+  "phase": "phase127",
+  "tasks": [
+    "24.2",
+    "24.3"
+  ],
+  "document": "docs/AI_QUALITY_V147_BLIND_REFERENCE_FOLLOWUP_20261109.md",
+  "validator": ".taskmaster/scripts/ai-quality-v147-blind-reference-inspection-v2.mjs",
+  "validatorSha256": "07068d1f5059f85d7a66c1ce5b7962cc2fe5fc8f49268da908bb891871fc0b28",
+  "evidenceSha256": {
+    "verify-and-prepare.mjs": "4db969d05fe3932cbafacb8ad25ece4821661fdbe391294788f0cc0de4d24e74",
+    "replay-summary.json": "75cbc371097361c0bd7d25c8cc982f2909d15ab483c64007e99a50b159c93b24",
+    "followup-plan.json": "6a49fb56cd91b0c472acf947453bfa492d05e9e3c91575f80e4adb92f1fba160",
+    "verify.log": "cd2809a0015dac6ad41ff967d80cf4822337af7d028f050fcce8d99f87a905bf"
+  }
+}

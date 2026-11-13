@@ -9,13 +9,26 @@
 </head>
 <body>
   <a class="skip-link" href="#work">작업 목록으로 이동</a>
+  <div id="dashboard-shell" class="dashboard-shell" data-sidebar-open="true">
+  <aside id="plan-sidebar" class="plan-sidebar" aria-label="플랜 탐색">
+    <div class="sidebar-heading">
+      <a class="sidebar-brand" href="#top" aria-label="하루단어 작업 현황 처음으로"><span class="brand-mark" aria-hidden="true">하</span><span>하루단어<small>개발 현황</small></span></a>
+      <button id="sidebar-close" class="sidebar-icon-button" type="button" aria-label="플랜 메뉴 닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M9 5v14m7-9-3 2 3 2"/></svg></button>
+    </div>
+    <div class="sidebar-section-heading"><h2>플랜</h2><span id="plan-count" aria-label="등록된 플랜 수"></span></div>
+    <nav id="plan-selector" class="plan-selector" aria-label="플랜 선택"><div id="plan-buttons" class="plan-buttons" role="group" aria-label="이전 플랜과 새 수정 플랜"></div></nav>
+    <p class="sidebar-note"><span aria-hidden="true">◌</span> 조회 전용<span>플랜별 기록과 진행률을 확인하세요.</span></p>
+  </aside>
+  <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="플랜 메뉴 닫기" tabindex="-1" hidden></button>
+  <div id="dashboard-content" class="dashboard-content">
   <header class="masthead wrap">
-    <a class="brand" href="#top" aria-label="하루단어 작업 현황 처음으로"><span class="brand-mark" aria-hidden="true">하</span><span>하루단어 <span class="brand-divider">/</span> <span class="brand-note">개발 현황</span></span></a>
+    <button id="sidebar-toggle" class="sidebar-toggle" type="button" aria-controls="plan-sidebar" aria-expanded="true" aria-label="플랜 메뉴 접기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M9 5v14"/></svg><span>플랜</span></button>
+    <a class="workspace-link" href="#top">개발 현황</a>
     <nav aria-label="대시보드 탐색"><a href="#work">작업 목록</a><a href="#gates">검증 단계</a></nav>
     <span class="readonly"><span aria-hidden="true">◌</span> 조회 전용</span>
   </header>
   <main id="top" class="wrap">
-    <section id="plan-selector" class="plan-selector" aria-label="플랜 선택" hidden><div id="plan-buttons" class="plan-buttons" role="group" aria-label="이전 플랜과 새 수정 플랜"></div><p id="plan-context" class="plan-context"></p><p id="plan-budget" class="plan-budget"></p></section>
+    <section class="plan-summary" aria-label="선택한 플랜 안내"><p id="plan-context" class="plan-context"></p><p id="plan-budget" class="plan-budget"></p></section>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy"><p class="eyebrow">IMPLEMENTATION TRACKER <span id="task-range">01 — 15</span></p><h1 id="page-title">작업 현황<span class="title-dot">.</span></h1><p id="plan-description" class="hero-description">Task Master의 실제 작업 상태를 확인합니다.</p><div class="hero-tags"><span id="scope-count">상위 15개 · 세부 35개</span><span id="plan-tag">master</span><span id="summary-state">구현 상태 확인 중</span></div></div>
       <div class="overall"><div class="overall-top"><span>전체 구현 진행률</span><span class="small-label">세부 작업 기준</span></div><div class="overall-value"><strong id="overall-percent">0</strong><span>%</span><span class="overall-fraction"><b id="leaf-done">0</b> / <span id="leaf-total">35</span> 완료</span></div><div id="overall-progress" class="track" role="progressbar" aria-label="세부 작업 완료율" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><p class="progress-caption">상위 작업과 세부 작업을 중복 합산하지 않습니다.</p></div>
@@ -48,6 +61,8 @@
     <section id="gates" class="gates-section" aria-labelledby="gates-title"><div class="section-heading"><div><p class="eyebrow">RELEASE CHECKPOINTS</p><h2 id="gates-title">검증 단계</h2></div><span class="fine-print">연결된 작업의 완료 상태 기준</span></div><div id="gate-list" class="gate-grid"></div><p class="gate-note">작업 완료 표시는 실제 API 연결·품질·배포 검증의 증명을 대신하지 않습니다. 각 작업의 검증 근거를 함께 확인하세요.</p></section>
   </main>
   <footer class="footer wrap"><span><b>하루단어</b> · 수정 계획과 이전 작업</span><span>플랜별 원본 상태를 보존하는 조회 전용 대시보드</span><a href="#top">맨 위로 ↑</a></footer>
+  </div>
+  </div>
   <noscript><p class="notice wrap">작업 현황을 표시하려면 JavaScript를 켜 주세요. 작업 원본은 .taskmaster/tasks/tasks.json입니다.</p></noscript>
   <script id="dashboard-data" type="application/json"><!-- DASHBOARD_DATA --></script>
   <script><!-- DASHBOARD_SCRIPT --></script>

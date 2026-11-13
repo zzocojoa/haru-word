@@ -1,0 +1,1157 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 34,
+  "recordedAtUtc": "2026-11-06T18:01:50.585146+00:00",
+  "status": "prospective-proposal-owner-and-final-corpus-review-pending",
+  "document": "docs/AI_QUALITY_V147_AI_EVALUATION_PROPOSAL_20261107.md",
+  "humanReviewerRequired": false,
+  "ownerChoice": null,
+  "riskDesignApproved": false,
+  "sampleJustified": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "dispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "scopePreserved": {
+    "parents": 40,
+    "children": 133,
+    "cancelledParents": 1,
+    "cancelledChildren": 3,
+    "confirmationGeneralizationLearnerProxiesOperationalAndDay1Day7RemainRequired": true
+  },
+  "claimContract": {
+    "canClaim": [
+      "Fixed prospectiveAIrubric results for theactually measured synthetic families.",
+      "Separate per-model/stratum critical,quality,abstention,delivery andpaired results withallraw votes.",
+      "Conditional sampling bounds onlywhen thepreregistered family sampling assumptions hold."
+    ],
+    "cannotClaim": [
+      "Humanexpert-certified Englishtruth.",
+      "Actuallearner understanding/memory/transfer.",
+      "Servicewide English errorrate fromanunrepresentative synthetic suite.",
+      "Independentexperts fromsame-provider model agreement.",
+      "Improvement fromnoninferiority ordescriptive gains alone."
+    ],
+    "aiConsensusGroundTruth": false,
+    "sampleConfidenceMeasures": "AI-rated protocol outcomes,never unmeasured human truth."
+  },
+  "stages": [
+    {
+      "id": "reference-preparation",
+      "purpose": "After candidate/policy freeze,author proposedpilot60 fresh input/reference records,recordsource-level andexposure,revieweach withthetwo nongenerator models.",
+      "maximumCalls": 180,
+      "actualBodiesFrozen": false,
+      "approvalSeparateFromMain": true,
+      "authoringFailures": "Beforemainfreeze,invalid drafts stayin preparation audit;no repeatedAI drafting orreplacement withoutthepredeclared slot/approval plan. A failed preparation holds main."
+    },
+    {
+      "id": "pilot",
+      "purpose": "60-family diagnostic comparison only,not release orpopulationrisk certification.",
+      "families": 60,
+      "repetitions": 1,
+      "maximumCalls": 1872,
+      "calibration": 72,
+      "generation": 360,
+      "review": 1440,
+      "actualBodiesFrozen": false,
+      "approvalSeparateFromPreparation": true,
+      "generationRepeatStabilityMeasuredByThisDesign": false,
+      "twoJudgeLayoutsAreGenerationRepeats": false
+    },
+    {
+      "id": "confirmation",
+      "purpose": "T35 chooses/finalizes prospective sampling/effect/precision usingpilot onlyfor planning;new unseen confirmationfamilies undernew freeze/approval.",
+      "menu": [
+        "confirmation-risk-0.05",
+        "confirmation-risk-0.01",
+        "confirmation-risk-0.005"
+      ],
+      "selected": null,
+      "samplingValidated": false,
+      "powerValidated": false,
+      "currentDispatchAuthorized": false
+    },
+    {
+      "id": "operational",
+      "purpose": "Six appgeneration cells onan explicitly approvedsynthetic production account;storage/reload/UUID checks. Not a language samplesize.",
+      "generationCallsSeparate": 6,
+      "productionApproved": false
+    },
+    {
+      "id": "follow-up",
+      "purpose": "Day1/day7 observation andnew-issue reproduce/fix/fresh-evaluation loop;separate release gates.",
+      "authorized": false
+    }
+  ],
+  "pilotAllocation": {
+    "wordPerStratum": 10,
+    "grammarPerStratum": 10,
+    "grammarAllocation": [
+      {
+        "lesson": "noun",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "noun",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "verb",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "verb",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "pronoun",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "pronoun",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "adjective",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "adjective",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "adverb",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "adverb",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "determiner",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "determiner",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "indefinite-article",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "indefinite-article",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "definite-article",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "definite-article",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "number",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "number",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "preposition",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "preposition",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "conjunction",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "conjunction",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "auxiliary",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "auxiliary",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "modal",
+        "stratum": "normal"
+      },
+      {
+        "lesson": "modal",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "infinitive",
+        "stratum": "needsCorrection"
+      },
+      {
+        "lesson": "infinitive",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "exclamation",
+        "stratum": "insufficientContext"
+      },
+      {
+        "lesson": "exclamation",
+        "stratum": "normal"
+      }
+    ],
+    "all15LessonsRepresented": true,
+    "all3OutcomesPerLesson": false,
+    "familyIndependenceEstablished": false,
+    "sixStrata": [
+      "word.normal",
+      "word.needsCorrection",
+      "word.insufficientContext",
+      "grammar.normal",
+      "grammar.needsCorrection",
+      "grammar.insufficientContext"
+    ],
+    "withinEachStratum": {
+      "families": 10,
+      "lengthBands": {
+        "shortCompleteOrRelevantFragment": 4,
+        "ordinary": 4,
+        "nearSupportedBoundary": 2
+      },
+      "complexityBands": {
+        "simple": 5,
+        "complex": 5
+      },
+      "certifiedCefrLevels": false
+    },
+    "inputContract": "Preserve existing2000-character sentence/500-character context limits;do not shrink support tosave cost. Invalid overlimit/local schema controls are separate from Englishsamples.",
+    "lessonProbabilityGuarantee": false
+  },
+  "familyAndSampling": {
+    "unit": "Syntacticframe plusparticipant/time/quantity/contextambiguity relation;renaming/rewording/repeatedoutputs are not newfamily units.",
+    "exposure": [
+      "development-known",
+      "pilot-only",
+      "confirmation-unseen-in-this-project"
+    ],
+    "modelPretrainingNoveltyClaimed": false,
+    "authorCannotSee": "Candidate/baseline outputs,earlier grades orimplementation-specific expectedanswers.",
+    "criterionBeforeGeneration": true,
+    "samplingFrameFrozen": false,
+    "iidFamiliesVerified": false,
+    "selectionMechanismApproved": false,
+    "inferenceWhenUnverified": "Descriptive finite-suite outcomes only;confirmatoryrisk/effect gate remainsheld. Ownerapproval cannot proveiid."
+  },
+  "referenceAndJudges": {
+    "models": [
+      "gpt-6.1-sol",
+      "gpt-6.1-terra",
+      "gpt-6-astra"
+    ],
+    "generationOwnModelCannotJudge": true,
+    "judgesPerOutput": 2,
+    "layoutsPerJudge": [
+      "input-first",
+      "feedback-first"
+    ],
+    "votesPerOutput": 4,
+    "allFourMustPass": true,
+    "minorityOrUncertainty": "held;no majority override orfavorable retry.",
+    "referenceLevels": [
+      "mechanically-verified",
+      "source-supported",
+      "ai-consensus",
+      "unresolved"
+    ],
+    "sourceSupport": "Store actualURL/section/checkdate/contentfingerprint plus theexact limitedclaim it supports;presence ofaURL neverautomatically establishes thewhole reference.",
+    "unresolvedCanQualify": false,
+    "calibrationSlots": 72,
+    "calibrationWitnesses": 12,
+    "currentKernelCalibrationRule": "Eachjudge/layout matches>=11/12 knownwitnesses;criticalmiss0. Currentrule is aproposalcarry-forward,not actualAIcalibration evidence.",
+    "plannedBiasControls": [
+      "inputordering",
+      "verbosity",
+      "self-preferencebyexclusion",
+      "instructionsinsideuntrusted input/reference/output",
+      "repeatstability"
+    ],
+    "biasEffectActuallyMeasured": false,
+    "rawAndVisible": "Retain providerraw andlearner-visible projection separately. Gradevisible result;programmaticallyclassify appoverride/delivery differences. Do not attributeappforcedabstention toEnglish modelerror."
+  },
+  "proposedFailureRules": {
+    "observedCritical": 0,
+    "requiredNormalFalseRejections": 0,
+    "unmeasuredPlannedCells": 0,
+    "falseConfidentTeachingRule": 0,
+    "unresolvedVotesCanPass": false,
+    "qualityRiskSensitivity": 0.1,
+    "criticalRiskMenu": [
+      0.05,
+      0.01,
+      0.005
+    ],
+    "repeatFlipRiskSensitivity": 0.05,
+    "noninferiorityMarginSensitivity": 0.02,
+    "minimumImprovementEffect": null,
+    "targetImprovementFamilies": null,
+    "pairedPowerJustified": false,
+    "valuesApproved": false,
+    "failureTaxonomy": [
+      "AI-confirmed-critical",
+      "AI-quality-failure",
+      "unresolved/disagreement",
+      "app-guard-rejection",
+      "transport/schema/capturefailure",
+      "not-run/budgetstop"
+    ],
+    "unmeasuredAsEnglishError": false,
+    "fixedDenominator": true,
+    "unknownCost": "Retain maximumreservation;neverreset/resend."
+  },
+  "statisticalMenu": {
+    "confidence": 0.95,
+    "tailCount": 114,
+    "menuIsHistoricalConservativeMethodUpdatedForFourVotes": true,
+    "options": [
+      {
+        "id": "pilot60-r1",
+        "purpose": "Diagnosticpilot only;no confirmatory risk orimprovement verdict.",
+        "counts": {
+          "families": 60,
+          "repeats": 1,
+          "referenceDraft": 60,
+          "referenceReview": 120,
+          "generation": 360,
+          "review": 1440,
+          "calibration": 72,
+          "referencePreparationMaximum": 180,
+          "mainMaximum": 1872,
+          "combinedDesignSubtotal": 2052,
+          "perModelCalls": {
+            "gpt-6.1-sol": 684,
+            "gpt-6.1-terra": 684,
+            "gpt-6-astra": 684
+          }
+        },
+        "costSensitivity": [
+          {
+            "uniformInputTokenMax": 4096,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 684,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "42024960"
+              },
+              "gpt-6.1-terra": {
+                "calls": 684,
+                "maximumSlotMicros": "30720",
+                "exampleTotalMicros": "21012480"
+              },
+              "gpt-6-astra": {
+                "calls": 684,
+                "maximumSlotMicros": "307200",
+                "exampleTotalMicros": "210124800"
+              }
+            },
+            "exampleTotalMicros": "273162240",
+            "exampleTotalUsd": "273.162240",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 8192,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 684,
+                "maximumSlotMicros": "81920",
+                "exampleTotalMicros": "56033280"
+              },
+              "gpt-6.1-terra": {
+                "calls": 684,
+                "maximumSlotMicros": "40960",
+                "exampleTotalMicros": "28016640"
+              },
+              "gpt-6-astra": {
+                "calls": 684,
+                "maximumSlotMicros": "409600",
+                "exampleTotalMicros": "280166400"
+              }
+            },
+            "exampleTotalMicros": "364216320",
+            "exampleTotalUsd": "364.216320",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 16384,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 684,
+                "maximumSlotMicros": "122880",
+                "exampleTotalMicros": "84049920"
+              },
+              "gpt-6.1-terra": {
+                "calls": 684,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "42024960"
+              },
+              "gpt-6-astra": {
+                "calls": 684,
+                "maximumSlotMicros": "614400",
+                "exampleTotalMicros": "420249600"
+              }
+            },
+            "exampleTotalMicros": "546324480",
+            "exampleTotalUsd": "546.324480",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          }
+        ]
+      },
+      {
+        "id": "pilot60-r2-sensitivity",
+        "purpose": "Repeat-count sensitivity;not selected orcurrentpilot authorization.",
+        "counts": {
+          "families": 60,
+          "repeats": 2,
+          "referenceDraft": 60,
+          "referenceReview": 120,
+          "generation": 720,
+          "review": 2880,
+          "calibration": 72,
+          "referencePreparationMaximum": 180,
+          "mainMaximum": 3672,
+          "combinedDesignSubtotal": 3852,
+          "perModelCalls": {
+            "gpt-6.1-sol": 1284,
+            "gpt-6.1-terra": 1284,
+            "gpt-6-astra": 1284
+          }
+        },
+        "costSensitivity": [
+          {
+            "uniformInputTokenMax": 4096,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 1284,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "78888960"
+              },
+              "gpt-6.1-terra": {
+                "calls": 1284,
+                "maximumSlotMicros": "30720",
+                "exampleTotalMicros": "39444480"
+              },
+              "gpt-6-astra": {
+                "calls": 1284,
+                "maximumSlotMicros": "307200",
+                "exampleTotalMicros": "394444800"
+              }
+            },
+            "exampleTotalMicros": "512778240",
+            "exampleTotalUsd": "512.778240",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 8192,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 1284,
+                "maximumSlotMicros": "81920",
+                "exampleTotalMicros": "105185280"
+              },
+              "gpt-6.1-terra": {
+                "calls": 1284,
+                "maximumSlotMicros": "40960",
+                "exampleTotalMicros": "52592640"
+              },
+              "gpt-6-astra": {
+                "calls": 1284,
+                "maximumSlotMicros": "409600",
+                "exampleTotalMicros": "525926400"
+              }
+            },
+            "exampleTotalMicros": "683704320",
+            "exampleTotalUsd": "683.704320",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 16384,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 1284,
+                "maximumSlotMicros": "122880",
+                "exampleTotalMicros": "157777920"
+              },
+              "gpt-6.1-terra": {
+                "calls": 1284,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "78888960"
+              },
+              "gpt-6-astra": {
+                "calls": 1284,
+                "maximumSlotMicros": "614400",
+                "exampleTotalMicros": "788889600"
+              }
+            },
+            "exampleTotalMicros": "1025556480",
+            "exampleTotalUsd": "1025.556480",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          }
+        ]
+      },
+      {
+        "id": "confirmation-risk-0.05",
+        "maximumAiRatedCriticalRisk": 0.05,
+        "sample": {
+          "n": 151,
+          "confidence": 0.999561403508772,
+          "upperAtZero": 0.04991596387245942,
+          "upperAtPrevious": 0.050240234523979826,
+          "numericBoundaryGuard": false,
+          "numericTolerance": 1e-12,
+          "assumption": "iid representative families within the stratum; all planned cells measured",
+          "zeroEventDesignOnly": true,
+          "powerGuaranteed": false
+        },
+        "sixStrata": 6,
+        "counts": {
+          "families": 906,
+          "repeats": 2,
+          "referenceDraft": 906,
+          "referenceReview": 1812,
+          "generation": 10872,
+          "review": 43488,
+          "calibration": 72,
+          "referencePreparationMaximum": 2718,
+          "mainMaximum": 54432,
+          "combinedDesignSubtotal": 57150,
+          "perModelCalls": {
+            "gpt-6.1-sol": 19050,
+            "gpt-6.1-terra": 19050,
+            "gpt-6-astra": 19050
+          }
+        },
+        "assumptionsVerified": false,
+        "riskApproved": false,
+        "powerGuaranteed": false,
+        "costSensitivity": [
+          {
+            "uniformInputTokenMax": 4096,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 19050,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "1170432000"
+              },
+              "gpt-6.1-terra": {
+                "calls": 19050,
+                "maximumSlotMicros": "30720",
+                "exampleTotalMicros": "585216000"
+              },
+              "gpt-6-astra": {
+                "calls": 19050,
+                "maximumSlotMicros": "307200",
+                "exampleTotalMicros": "5852160000"
+              }
+            },
+            "exampleTotalMicros": "7607808000",
+            "exampleTotalUsd": "7607.808000",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 8192,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 19050,
+                "maximumSlotMicros": "81920",
+                "exampleTotalMicros": "1560576000"
+              },
+              "gpt-6.1-terra": {
+                "calls": 19050,
+                "maximumSlotMicros": "40960",
+                "exampleTotalMicros": "780288000"
+              },
+              "gpt-6-astra": {
+                "calls": 19050,
+                "maximumSlotMicros": "409600",
+                "exampleTotalMicros": "7802880000"
+              }
+            },
+            "exampleTotalMicros": "10143744000",
+            "exampleTotalUsd": "10143.744000",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 16384,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 19050,
+                "maximumSlotMicros": "122880",
+                "exampleTotalMicros": "2340864000"
+              },
+              "gpt-6.1-terra": {
+                "calls": 19050,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "1170432000"
+              },
+              "gpt-6-astra": {
+                "calls": 19050,
+                "maximumSlotMicros": "614400",
+                "exampleTotalMicros": "11704320000"
+              }
+            },
+            "exampleTotalMicros": "15215616000",
+            "exampleTotalUsd": "15215.616000",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          }
+        ]
+      },
+      {
+        "id": "confirmation-risk-0.01",
+        "maximumAiRatedCriticalRisk": 0.01,
+        "sample": {
+          "n": 770,
+          "confidence": 0.999561403508772,
+          "upperAtZero": 0.009991221251473864,
+          "upperAtPrevious": 0.010004148529799375,
+          "numericBoundaryGuard": false,
+          "numericTolerance": 1e-12,
+          "assumption": "iid representative families within the stratum; all planned cells measured",
+          "zeroEventDesignOnly": true,
+          "powerGuaranteed": false
+        },
+        "sixStrata": 6,
+        "counts": {
+          "families": 4620,
+          "repeats": 2,
+          "referenceDraft": 4620,
+          "referenceReview": 9240,
+          "generation": 55440,
+          "review": 221760,
+          "calibration": 72,
+          "referencePreparationMaximum": 13860,
+          "mainMaximum": 277272,
+          "combinedDesignSubtotal": 291132,
+          "perModelCalls": {
+            "gpt-6.1-sol": 97044,
+            "gpt-6.1-terra": 97044,
+            "gpt-6-astra": 97044
+          }
+        },
+        "assumptionsVerified": false,
+        "riskApproved": false,
+        "powerGuaranteed": false,
+        "costSensitivity": [
+          {
+            "uniformInputTokenMax": 4096,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 97044,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "5962383360"
+              },
+              "gpt-6.1-terra": {
+                "calls": 97044,
+                "maximumSlotMicros": "30720",
+                "exampleTotalMicros": "2981191680"
+              },
+              "gpt-6-astra": {
+                "calls": 97044,
+                "maximumSlotMicros": "307200",
+                "exampleTotalMicros": "29811916800"
+              }
+            },
+            "exampleTotalMicros": "38755491840",
+            "exampleTotalUsd": "38755.491840",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 8192,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 97044,
+                "maximumSlotMicros": "81920",
+                "exampleTotalMicros": "7949844480"
+              },
+              "gpt-6.1-terra": {
+                "calls": 97044,
+                "maximumSlotMicros": "40960",
+                "exampleTotalMicros": "3974922240"
+              },
+              "gpt-6-astra": {
+                "calls": 97044,
+                "maximumSlotMicros": "409600",
+                "exampleTotalMicros": "39749222400"
+              }
+            },
+            "exampleTotalMicros": "51673989120",
+            "exampleTotalUsd": "51673.989120",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 16384,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 97044,
+                "maximumSlotMicros": "122880",
+                "exampleTotalMicros": "11924766720"
+              },
+              "gpt-6.1-terra": {
+                "calls": 97044,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "5962383360"
+              },
+              "gpt-6-astra": {
+                "calls": 97044,
+                "maximumSlotMicros": "614400",
+                "exampleTotalMicros": "59623833600"
+              }
+            },
+            "exampleTotalMicros": "77510983680",
+            "exampleTotalUsd": "77510.983680",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          }
+        ]
+      },
+      {
+        "id": "confirmation-risk-0.005",
+        "maximumAiRatedCriticalRisk": 0.005,
+        "sample": {
+          "n": 1543,
+          "confidence": 0.999561403508772,
+          "upperAtZero": 0.004998438621444194,
+          "upperAtPrevious": 0.0050016720309512324,
+          "numericBoundaryGuard": false,
+          "numericTolerance": 1e-12,
+          "assumption": "iid representative families within the stratum; all planned cells measured",
+          "zeroEventDesignOnly": true,
+          "powerGuaranteed": false
+        },
+        "sixStrata": 6,
+        "counts": {
+          "families": 9258,
+          "repeats": 2,
+          "referenceDraft": 9258,
+          "referenceReview": 18516,
+          "generation": 111096,
+          "review": 444384,
+          "calibration": 72,
+          "referencePreparationMaximum": 27774,
+          "mainMaximum": 555552,
+          "combinedDesignSubtotal": 583326,
+          "perModelCalls": {
+            "gpt-6.1-sol": 194442,
+            "gpt-6.1-terra": 194442,
+            "gpt-6-astra": 194442
+          }
+        },
+        "assumptionsVerified": false,
+        "riskApproved": false,
+        "powerGuaranteed": false,
+        "costSensitivity": [
+          {
+            "uniformInputTokenMax": 4096,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 194442,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "11946516480"
+              },
+              "gpt-6.1-terra": {
+                "calls": 194442,
+                "maximumSlotMicros": "30720",
+                "exampleTotalMicros": "5973258240"
+              },
+              "gpt-6-astra": {
+                "calls": 194442,
+                "maximumSlotMicros": "307200",
+                "exampleTotalMicros": "59732582400"
+              }
+            },
+            "exampleTotalMicros": "77652357120",
+            "exampleTotalUsd": "77652.357120",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 8192,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 194442,
+                "maximumSlotMicros": "81920",
+                "exampleTotalMicros": "15928688640"
+              },
+              "gpt-6.1-terra": {
+                "calls": 194442,
+                "maximumSlotMicros": "40960",
+                "exampleTotalMicros": "7964344320"
+              },
+              "gpt-6-astra": {
+                "calls": 194442,
+                "maximumSlotMicros": "409600",
+                "exampleTotalMicros": "79643443200"
+              }
+            },
+            "exampleTotalMicros": "103536476160",
+            "exampleTotalUsd": "103536.476160",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          },
+          {
+            "uniformInputTokenMax": 16384,
+            "uniformOutputTokenMax": 4096,
+            "inputFactorNumerator": 5,
+            "inputFactorDenominator": 2,
+            "regionalFactorNumerator": 1,
+            "regionalFactorDenominator": 1,
+            "perModel": {
+              "gpt-6.1-sol": {
+                "calls": 194442,
+                "maximumSlotMicros": "122880",
+                "exampleTotalMicros": "23893032960"
+              },
+              "gpt-6.1-terra": {
+                "calls": 194442,
+                "maximumSlotMicros": "61440",
+                "exampleTotalMicros": "11946516480"
+              },
+              "gpt-6-astra": {
+                "calls": 194442,
+                "maximumSlotMicros": "614400",
+                "exampleTotalMicros": "119465164800"
+              }
+            },
+            "exampleTotalMicros": "155304714240",
+            "exampleTotalUsd": "155304.714240",
+            "actualBodyBoundsVerified": false,
+            "actualWorstCaseQuote": false,
+            "spendingApproved": false
+          }
+        ]
+      }
+    ],
+    "boundsConditionalOnSampling": true,
+    "criticalUnionAcrossModelsAndRepeats": true,
+    "repeatedVotesDoNotIncreaseN": true,
+    "zeroEventNIsNotPower": true,
+    "pairedExamples": [
+      {
+        "n": 60,
+        "gains": 12,
+        "losses": 1,
+        "estimate": 0.18333333333333332,
+        "lower": -0.09145721554562924,
+        "upper": 0.4115143404378878,
+        "gain": {
+          "lower": 0.06529311436808083,
+          "upper": 0.41152165195620516
+        },
+        "loss": {
+          "lower": 7.311518317343335e-06,
+          "upper": 0.15675032991371007
+        },
+        "perTailConfidence": 0.999561403508772,
+        "method": "four marginal exact binomial tails with prespecified simultaneous allocation; no independence assumed between gain and loss",
+        "samplingVerified": false,
+        "releaseEligible": false,
+        "unapprovedIllustrativeMinimumEffect": 0.05
+      },
+      {
+        "n": 151,
+        "gains": 30,
+        "losses": 3,
+        "estimate": 0.17880794701986755,
+        "lower": 0.014660014463726334,
+        "upper": 0.32298852937946676,
+        "gain": {
+          "lower": 0.10465663494054189,
+          "upper": 0.3239418919712189
+        },
+        "loss": {
+          "lower": 0.0009533625917521604,
+          "upper": 0.08999662047681556
+        },
+        "perTailConfidence": 0.999561403508772,
+        "method": "four marginal exact binomial tails with prespecified simultaneous allocation; no independence assumed between gain and loss",
+        "samplingVerified": false,
+        "releaseEligible": false,
+        "unapprovedIllustrativeMinimumEffect": 0.05
+      },
+      {
+        "n": 151,
+        "gains": 45,
+        "losses": 3,
+        "estimate": 0.2781456953642384,
+        "lower": 0.0936640581590259,
+        "upper": 0.43227788770693454,
+        "gain": {
+          "lower": 0.18366067863584146,
+          "upper": 0.4332312502986867
+        },
+        "loss": {
+          "lower": 0.0009533625917521604,
+          "upper": 0.08999662047681556
+        },
+        "perTailConfidence": 0.999561403508772,
+        "method": "four marginal exact binomial tails with prespecified simultaneous allocation; no independence assumed between gain and loss",
+        "samplingVerified": false,
+        "releaseEligible": false,
+        "unapprovedIllustrativeMinimumEffect": 0.05
+      },
+      {
+        "n": 770,
+        "gains": 154,
+        "losses": 15,
+        "estimate": 0.18051948051948052,
+        "lower": 0.11255942543119687,
+        "upper": 0.24455034468222459,
+        "gain": {
+          "lower": 0.1545790107347791,
+          "upper": 0.25151505995626044
+        },
+        "loss": {
+          "lower": 0.00696471527403586,
+          "upper": 0.04201958530358222
+        },
+        "perTailConfidence": 0.999561403508772,
+        "method": "four marginal exact binomial tails with prespecified simultaneous allocation; no independence assumed between gain and loss",
+        "samplingVerified": false,
+        "releaseEligible": false,
+        "unapprovedIllustrativeMinimumEffect": 0.05
+      }
+    ],
+    "pairedExamplesAreNotOutcomePredictions": true,
+    "futureMoreEfficientProspectiveDesignAllowed": "Mustjustify equivalent requiredclaims beforefreshconfirmation;cannot weaken thresholds afterconfirmation outcomes."
+  },
+  "costContract": {
+    "priceSourceFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase29/official-price-inputs.json",
+    "rates": {
+      "gpt-6.1-sol": {
+        "inputUsdPerMillion": "2.00",
+        "outputUsdPerMillion": "10.00",
+        "cachedInputUsdPerMillion": "0.10",
+        "cacheWrite30mUsdPerMillion": "2.50",
+        "cacheWrite12hUsdPerMillion": "5.00"
+      },
+      "gpt-6.1-terra": {
+        "inputUsdPerMillion": "1.00",
+        "outputUsdPerMillion": "5.00",
+        "cachedInputUsdPerMillion": "0.05",
+        "cacheWrite30mUsdPerMillion": "1.25",
+        "cacheWrite12hUsdPerMillion": "2.50"
+      },
+      "gpt-6-astra": {
+        "inputUsdPerMillion": "10.00",
+        "outputUsdPerMillion": "50.00",
+        "cachedInputUsdPerMillion": "1.00",
+        "cacheWrite30mUsdPerMillion": "12.50",
+        "cacheWrite12hUsdPerMillion": "25.00"
+      }
+    },
+    "unit": "pre-tax USD per1Mtokens;Standard shortcontext",
+    "cacheWriteIsAdditive": false,
+    "conservativeInputFactor": 2.5,
+    "reasoningCountedWithinOutput": true,
+    "currentProductGenerationOutputCap": 4096,
+    "exampleAllRoleOutputCap": 4096,
+    "sensitivityInputCaps": [
+      4096,
+      8192,
+      16384
+    ],
+    "sensitivityIsActualQuote": false,
+    "actualBodyInputBoundsVerified": false,
+    "actualWorstCaseUsd": null,
+    "expectedActualBillUsd": null,
+    "newApprovedUsd": 0,
+    "oldLedgerTransferAllowed": false,
+    "paymentRequestReady": false,
+    "mustRecheckPricesBeforeKeyAccess": true,
+    "unsupportedBodyOrChangedPrice": "holdbeforekey/dispatch;new frozenquote/options/approval required.",
+    "excludes": "Tax,any optionaltools/nondefault processing notscheduled;unknownactualaccount availability. Separate confirmation/productionquotes stillneeded."
+  },
+  "decisionAndChangeControl": {
+    "ownerMustChoose": "Risk/claim scope andstage plan;not implied byAI-only method permission.",
+    "oneMaximumLookPerConfirmation": true,
+    "earlyHarmStopAllowed": true,
+    "earlySuccessStopAllowed": false,
+    "postOutcomeReplacementOrResendAllowed": false,
+    "postOutcomeThresholdRelaxationAllowed": false,
+    "pilotMayPlanNewConfirmation": "Prospectively preregister beforefreshconfirmation,including targeteffect/families,N andprecision/power. Pilot nevercertifies release.",
+    "sourceOrRubricChange": "Newversion/run,freshappropriatefamilies,requirednewapproval;keepraw oldfailure/approval/score evidence."
+  },
+  "openRequirements": [
+    "Owner risk/claim/stage choice.",
+    "Actualindependent-family/exposure/source andcoverage validation.",
+    "Targetedminimum effect andplannedpairedpower/precision beforeconfirmation.",
+    "Finalreference-authoring payload/grade/source contract andactualfrozen bodies/tokenbounds.",
+    "Separate currentprice exactceiling/approval perpreparation/main/confirmation/production.",
+    "ActualAIcalibration,biascontrols,pilot/confirmation/generalization andlearningproxies,thenrelease/operational/day1/day7 stages."
+  ],
+  "sourceEvidence": {
+    "calculationFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase29/design-calculations.json",
+    "calculationSha256": "3ef01dfb080fd7d6495cc29cc2252473e98a72fcd4f34cac73f15d029c4bb6ad",
+    "independentCheckFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase29/independent-design-check.json",
+    "independentCheckSha256": "259abc596f4a702a924f280054b75f102cc59af7853124d12fe86dbceb867564",
+    "officialSources": [
+      {
+        "url": "https://developers.openai.com/api/docs/pricing",
+        "supports": "Exact three model Standard short-context input/output/read/30m-write/12h-write rates and272K threshold."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+        "supports": "Caching defaults,30m/12h totalwrite factors;cachewrites replace inputcategory rather than adding anotherordinaryinput charge."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices#llm-as-a-judge-and-model-graders",
+        "supports": "Model grading,pass/fail anddetailed rubrics,order/verbosity limitations,andhuman-label calibration recommendation;no proof oftruthfrom AIagreement."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+        "supports": "ExactmodelID/currentlisted snapshot,Responses andstructuredoutputs support,andlow reasoning availability;not thisaccount's actualaccess."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+        "supports": "ExactmodelID/currentlisted snapshot,Responses andstructuredoutputs support,andlow reasoning availability;not thisaccount's actualaccess."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "supports": "ExactmodelID/currentlisted snapshot,Responses andstructuredoutputs support,andlow reasoning availability;not thisaccount's actualaccess."
+      },
+      {
+        "url": "https://developers.openai.com/api/docs/guides/reasoning#how-reasoning-works",
+        "supports": "Hiddenreasoningtokens billedasoutput;do not addthem againon top ofoutputtotal."
+      }
+    ],
+    "sourceBindings": {
+      ".taskmaster/scripts/ai-quality-v147-risk-design.mjs": "57a161dd456684e3b4b7c743ebbcb447b61f70a99e75fd640a57fb524979d9c6",
+      ".taskmaster/scripts/ai-quality-v147-report.mjs": "dc2645e908a8b3dc2db0f01788d468ddc56b4fe959b7105e23d545160f0d0bad",
+      ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+      ".taskmaster/scripts/ai-quality-v147-budget-v3-fixture.mjs": "b5d89c99e0c663c241357a83a6acfbac0ea94fed16b54731b26af4fd98e4aae0"
+    },
+    "earlierFrozenProof": "phase28/progress-final.json",
+    "earlierFrozenProofSha256": "bd73399d22db5f7bdfa92c384ea58f1f19285034eb430bc9c2fd76fc7ed04725"
+  },
+  "modelFreeze": {
+    "requestedModelIds": [
+      "gpt-6.1-sol",
+      "gpt-6.1-terra",
+      "gpt-6-astra"
+    ],
+    "officialListedCurrentSnapshots": [
+      "gpt-6.1-sol",
+      "gpt-6.1-terra",
+      "gpt-6-astra"
+    ],
+    "lowReasoningSupportedByFetchedDocs": true,
+    "immutableDatedBackendRevisionPinned": false,
+    "accountAccessActuallyVerified": false,
+    "mustRecordActualReturnedModel": true,
+    "undetectableBackendChangeStillPossible": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "protocol": "ai-quality-v147-assessment-boundary-preparation-v1",
+  "phase": "phase96",
+  "status": "candidate-verified-offline",
+  "parentTaskId": 34,
+  "subtaskIds": [
+    "34.3",
+    "34.4"
+  ],
+  "planHash": "11a2c9d3deeb21091aab5dc17309325db104cd07b5ee452602803a7dca1ac029",
+  "rubricHashes": {
+    "7": "38c5403537248ea6373cee6ccad8c70fb7227d5bed80d7519359c56ae9b1f85c",
+    "8": "bbb3f66845b43403d7b404e7c7b3df86e119ec448c066150fdfb68fe6062d5f0"
+  },
+  "developmentFamilies": 3,
+  "cases": 6,
+  "pairedSlots": 18,
+  "preparedModelRequests": 36,
+  "preparedCountRequests": 36,
+  "countCeiling": 8000,
+  "outputCeiling": 1024,
+  "reservationPlanningUpperMicros": "4283592",
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "actualReservedMicros": "0",
+  "availableMicros": "5935753",
+  "sourceQualified": false,
+  "mainDispatchAuthorized": false,
+  "independentConfirmatoryFamilies": 0,
+  "document": "docs/AI_QUALITY_V147_ASSESSMENT_BOUNDARIES_20261109.md",
+  "documentSha256": "4c2664bd54e3ff20a40d3c52621366caea996c8ebf7bf62684cae45764807182",
+  "preparedSha256": "5b9ce2c36bebee568d93f1d794f5078161a9c5677153cd0fc6d24256a1aca349",
+  "moduleSha256": {
+    ".taskmaster/scripts/ai-quality-v147-assessment-boundaries-v1.mjs": "e0ec7158c0b5d6923be00658313c222e0c5bd2f58afdf9ad9be9958a53112b66",
+    ".taskmaster/scripts/ai-quality-v147-assessment-boundary-contrast-v1.mjs": "dcb1dd5954f3de1af05694c6e98b2926964e158451a83ff656508e40e4a07a39",
+    ".taskmaster/scripts/test-ai-quality-v147-assessment-boundaries-v1.mjs": "bbf45250c16e7185ff005737a455155b5c31a4db35c71149002ead68ee130cf9"
+  }
+}

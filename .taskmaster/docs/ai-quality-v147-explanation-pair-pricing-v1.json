@@ -1,0 +1,57 @@
+{
+  "protocol": "ai-quality-v147-explanation-pair-pricing-v1",
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "selectedModels": [
+    "gpt-6.1-sol",
+    "gpt-6.1-terra"
+  ],
+  "excludedModels": [
+    "gpt-6-astra"
+  ],
+  "allPublicCasesIncluded": true,
+  "caseCount": 9,
+  "layouts": 2,
+  "modelRequests": 36,
+  "inputCeiling": 8000,
+  "outputCeiling": 1024,
+  "inputMultiplierNumerator": "5",
+  "inputMultiplierDenominator": "4",
+  "safetyNumerator": "11",
+  "safetyDenominator": "10",
+  "generationMaximumMicros": "898128",
+  "countAllowanceMicros": "1000000",
+  "countAllowanceBasisInputOnlyMicros": "792000",
+  "countAllowanceContingencyMicros": "208000",
+  "combinedMaximumMicros": "1898128",
+  "reservationMicros": "1900000",
+  "previousAvailableMicros": "1922499",
+  "countTariffVerified": false,
+  "invoiceGuaranteed": false,
+  "pastAllowancesReleased": false,
+  "officialSources": {
+    "official-pricing": {
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "evidenceFile": "phase72/official-pricing.md",
+      "sha256": "8e641f45700ceeac6df18d7ce5d60b19b19c5531fb7bc1dc57ced06b93442a08"
+    },
+    "official-token-counting": {
+      "url": "https://developers.openai.com/api/docs/guides/token-counting",
+      "evidenceFile": "phase72/official-token-counting.md",
+      "sha256": "fec4815c00d34934954fd093f8c48bfd948b59d0e6c7b07f755887f6fb4a07d6"
+    }
+  },
+  "unusedAstraRateRetainedForSharedQuoteSchema": true
+}

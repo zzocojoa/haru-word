@@ -13,7 +13,7 @@ const json=async file=>JSON.parse(await readFile(file,'utf8'));
 const manifest=await json(resolve(PROJECT_ROOT,'.taskmaster/docs/comprehensive-remediation-manifest.json'));
 const root=resolve(manifest.baseline.existingDashboardRoot),url='http://127.0.0.1:4318';
 const evidenceRoot=manifest.execution.publicationEvidenceRoot??'outputs/comprehensive-remediation-implementation-20261105';
-const output=resolve(root,evidenceRoot,'dashboard');
+const output=resolve(process.env.QA_OUTPUT_DIR||resolve(root,evidenceRoot,'dashboard'));
 await mkdir(output,{recursive:true});await mkdir(resolve(PROJECT_ROOT,'.sites-runtime'),{recursive:true});
 const registry=await json(resolve(root,'.taskmaster/docs/dashboard-plans.json'));
 const paths=['.taskmaster/tasks/tasks.json','.taskmaster/docs/dashboard-plans.json',...registry.plans.map(p=>p.manifest),'.taskmaster/dashboard/dashboard.js','.taskmaster/scripts/openai-dashboard-data.mjs'];
@@ -30,7 +30,7 @@ const local='http://127.0.0.1:'+server.address().port,checks=[],knownLimits=[],b
 const pass=name=>{checks.push({name,passed:true});console.log('PASS '+name);};
 const write=async(file,value)=>writeFile(resolve(fixture,file),typeof value==='string'?value:JSON.stringify(value));
 try{
-  const live=await(await fetch(url+'/api/tasks')).json(),direct=await readDashboardSnapshot(root);
+  const live=await(await fetch(url+'/api/tasks?plan='+PLAN)).json(),direct=await readDashboardSnapshot(root,PLAN);
   assert.equal(live.source.hash,direct.source.hash);assert.equal(live.plan.id,PLAN);assert.equal(live.source.tag,TAG);
   assert.equal(live.catalog.plans.length,registry.plans.length);
   assert.equal(live.tasks.length,33);assert.equal(live.tasks.flatMap(t=>t.subtasks).length,81);
@@ -45,12 +45,12 @@ try{
     const page=await browser.newPage({viewport:{width:1440,height:1100},reducedMotion:'reduce'}),errors=[],external=[];
     page.on('pageerror',error=>errors.push(error.message));
     page.on('request',request=>{if(![url+'/',local+'/','file:','data:'].some(prefix=>request.url().startsWith(prefix)))external.push(request.url());});
-    await page.goto(url);await page.waitForFunction(()=>document.getElementById('leaf-total').textContent==='81');
-    assert.equal(await page.locator('[data-plan-id]').count(),4);
+    await page.goto(url+'/?plan='+PLAN);await page.waitForFunction(()=>document.getElementById('leaf-total').textContent==='81');
+    assert.equal(await page.locator('[data-plan-id]').count(),registry.plans.length);
     assert.equal(await page.locator('#overall-percent').textContent(),percent);assert.equal(await page.locator('#parent-total').textContent(),'33');
     assert.equal(await page.locator('#plan-tag').textContent(),TAG);
     assert.equal(await page.locator('#integrity-warning').isVisible(),false);
-    pass(engine+': full reload defaults to new33/81,current-percent,4plans, no integrity warning');
+    pass(engine+': explicit comprehensive query shows33/81,current-percent,catalog-count, no integrity warning');
     for(const [id,tag,p,c]of [
       ['openai-api-migration-2026-11-03','master',15,35],
       ['judgment-remediation-2026-11-03','judgment-remediation',18,49],
@@ -65,7 +65,7 @@ try{
     }
     await page.locator('#refresh').click();await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
     assert.equal(await page.locator('#leaf-total').textContent(),'81');
-    pass(engine+': all4 plan selections retain separate counts/statuses; new-plan refresh stable');
+    pass(engine+': historical plan selections retain separate counts/statuses; new-plan refresh stable');
     await page.getByRole('searchbox',{name:'작업 검색'}).fill('UI-4');
     assert.ok(await page.locator('#task-7').count());
     await page.getByRole('searchbox',{name:'작업 검색'}).fill('');
@@ -77,26 +77,26 @@ try{
     }
     await page.evaluate(()=>document.documentElement.style.fontSize='14px');await page.setViewportSize({width:1440,height:1100});
     if(process.env.AXE_CORE_PATH){await page.addScriptTag({path:process.env.AXE_CORE_PATH});assert.deepEqual(await page.evaluate(async()=>(await axe.run(document,{runOnly:['wcag2a','wcag2aa','wcag21aa']})).violations.map(x=>x.id)),[]);}
-    await page.screenshot({path:resolve(output,engine+'-4plans.png'),fullPage:false});
+    await page.screenshot({path:resolve(output,engine+'-'+registry.plans.length+'plans.png'),fullPage:false});
     assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
     pass(engine+': audit search,320/390/1440 at100/200percent,accessibility,no external requests/page errors');
     await page.goto(pathToFileURL(resolve(root,'outputs/openai-migration-dashboard/index.html')).href+'?plan='+PLAN);
     await page.waitForFunction(()=>document.getElementById('leaf-total').textContent==='81');
-    assert.equal(await page.locator('[data-plan-id]').count(),4);assert.equal(await page.locator('#connection-mode').innerText(),'저장된 HTML 사본');
+    assert.equal(await page.locator('[data-plan-id]').count(),registry.plans.length);assert.equal(await page.locator('#connection-mode').innerText(),'저장된 HTML 사본');
     await page.locator('[data-plan-id="openai-api-migration-2026-11-03"]').click();assert.equal(await page.locator('#leaf-total').textContent(),'35');
     pass(engine+': regenerated standalone HTML contains new and historical plans');
 
     // Isolated fixture: distinguish known catalog-refresh defect from a bad registration.
     const historical=structuredClone(registry);historical.plans=historical.plans.filter(p=>p.id!==PLAN);historical.defaultPlanId='integration-remediation-2026-11-04';
     await write(paths[1],historical);await write(paths[0],pending);
-    await page.goto(local);assert.equal(await page.locator('[data-plan-id]').count(),3);
+    await page.goto(local);assert.equal(await page.locator('[data-plan-id]').count(),registry.plans.length-1);
     await write(paths[1],registry);
     const response=page.waitForResponse(r=>r.url().includes('/api/tasks'));
-    await page.locator('#refresh').click();assert.equal((await(await response).json()).catalog.plans.length,4);
+    await page.locator('#refresh').click();assert.equal((await(await response).json()).catalog.plans.length,registry.plans.length);
     await page.waitForFunction(()=>!document.getElementById('refresh').disabled);
-    assert.equal(await page.locator('[data-plan-id]').count(),4);
-    await page.goto(local);assert.equal(await page.locator('[data-plan-id]').count(),4);assert.equal(await page.locator('#leaf-total').textContent(),'81');
-    knownLimits.push({id:'DASH-1',engine,serverPlans:4,alreadyOpenPagePlansAfterRefresh:4,fullReloadPlans:4,fixed:true});
+    assert.equal(await page.locator('[data-plan-id]').count(),registry.plans.length);
+    await page.goto(local+'/?plan='+PLAN);assert.equal(await page.locator('[data-plan-id]').count(),registry.plans.length);assert.equal(await page.locator('#leaf-total').textContent(),'81');
+    knownLimits.push({id:'DASH-1',engine,serverPlans:registry.plans.length,alreadyOpenPagePlansAfterRefresh:registry.plans.length,fullReloadPlans:registry.plans.length,fixed:true});
     pass(engine+': registration valid after reload; DASH-1 live catalog refresh matches source');
 
     const changed=structuredClone(pending);changed[TAG].tasks[0].subtasks[0].status='done';

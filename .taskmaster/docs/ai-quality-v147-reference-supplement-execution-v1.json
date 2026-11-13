@@ -1,0 +1,61 @@
+{
+  "protocol": "ai-quality-v147-reference-supplement-execution-v1",
+  "phase": "phase109",
+  "taskIds": [
+    "24.2",
+    "34.3"
+  ],
+  "status": "collected-reference-supplement",
+  "actualProviderCalls": 24,
+  "actualCountApiCalls": 24,
+  "actualKeyReads": 1,
+  "capturedModelUsage": 24,
+  "supportedCases": [
+    "pilot-grammar-normal-01",
+    "pilot-word-needsCorrection-02",
+    "pilot-grammar-needsCorrection-03",
+    "pilot-word-needsCorrection-05",
+    "pilot-word-needsCorrection-06",
+    "pilot-grammar-needsCorrection-07",
+    "pilot-grammar-normal-07",
+    "pilot-word-normal-10"
+  ],
+  "heldCases": [
+    "pilot-word-normal-03",
+    "pilot-grammar-normal-03",
+    "pilot-grammar-insufficientContext-05",
+    "pilot-grammar-needsCorrection-09"
+  ],
+  "originalReferenceReviewsPreserved": 120,
+  "pilotGenerationsCompleted": 0,
+  "pilotGenerationsPlanned": 360,
+  "pilotReviewsCompleted": 0,
+  "pilotReviewsPlanned": 1440,
+  "referenceQualified": false,
+  "familyIndependenceVerified": false,
+  "calibrationHeldCases": [
+    "MC12"
+  ],
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "reservationUpperMicros": "2308192",
+  "measuredReservationMicros": "1422102",
+  "modelUsedUpperMicros": "183236",
+  "countAllowanceRetainedMicros": "840000",
+  "stageUsedUpperMicros": "1023236",
+  "beforeUsedUpperMicros": "31960220",
+  "beforeAvailableMicros": "3039780",
+  "additionalUsedUpperMicros": "32983456",
+  "additionalAvailableMicros": "2016544",
+  "reservedMicros": "0",
+  "separatePhase107EarmarkUsedUpperMicros": "3488388",
+  "phase107AddedAgain": false,
+  "ledgerSha256": "3f8b24d53c2d2f2e5df7aecc87fa026fb77d4054e0f64da0a6fead27afa47b0a",
+  "auditSha256": "2de4b37a4b77d9c799bf7fcf46f67ff0988445e751a7f9d75a26938a024af922",
+  "terminalSha256": "cab11bf351059e78cadf50da0d5a5c6dc00fdb15715aee446c71cdd8ed7e1615",
+  "preparedSha256": "b94d9e90fc1c7836cf91a3144a507ab3ee77f1a3ffcbc8435820db44f7ec15b2",
+  "requestPlanHash": "18a9e57951f4e3b0e281a329445e15a6752df272c4edc36c742d0164e46408d2",
+  "document": "docs/AI_QUALITY_V147_REFERENCE_SUPPLEMENT_ACTUAL_20261109.md",
+  "documentSha256": "2d7f36138bc0fd6dacc812207f722e3c885704ffa5a19d322ceeebc137087571",
+  "scopeDocument": "docs/AI_QUALITY_V147_REFERENCE_SUPPLEMENT_SCOPE_20261109.md"
+}

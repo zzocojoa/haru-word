@@ -1,0 +1,98 @@
+{
+  "atUtc": "2026-11-06T06:23:37.805781+00:00",
+  "task": 22,
+  "stage": "pure-v2-budget-and-wire-bridge",
+  "checks": [
+    {
+      "name": "budget-and-wire-v2-node-v22.23.4-final",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-budget-v2.mjs",
+        ".taskmaster/scripts/test-ai-quality-v147-wire-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 20,
+      "failed": 0,
+      "log": "budget-and-wire-v2-node-v22.23.4-final.log",
+      "sha256": "8f2c62de7e038c768553ea8842df995365cfe2565d435cc23422f2f2339ffea3",
+      "evidenceDirectory": "budget-and-wire-v2-node-v22.23.4-final"
+    },
+    {
+      "name": "budget-and-wire-v2-node-v24.22.1-final",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-budget-v2.mjs",
+        ".taskmaster/scripts/test-ai-quality-v147-wire-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 20,
+      "failed": 0,
+      "log": "budget-and-wire-v2-node-v24.22.1-final.log",
+      "sha256": "71436d1bc17a4d796c00b72248cb57f9cb9633564ac4d202d4b98afb63476837",
+      "evidenceDirectory": "budget-and-wire-v2-node-v24.22.1-final"
+    }
+  ],
+  "lint": {
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-budget-v2.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-budget-v2.mjs",
+      ".taskmaster/scripts/ai-quality-v147-wire-v2.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-wire-v2.mjs"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "v2-explicit-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v2.mjs": "830ea9dc169010ee968282d664754488c126657b6d29c1e3e4cb1e8c074c2bb4",
+    ".taskmaster/scripts/test-ai-quality-v147-budget-v2.mjs": "55b2e887b4726be4ae53242f15b5995ced55b418895e36879d8805535684ab3a",
+    ".taskmaster/scripts/ai-quality-v147-wire-v2.mjs": "b89ec42cd66bd6ee180f9174b646f573df791959d38c227a8d2e34376dcf97e1",
+    ".taskmaster/scripts/test-ai-quality-v147-wire-v2.mjs": "97f6628523f98afdd81dcc819824d19c48309f0f0162058818f876eb684de2f6"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-freeze.mjs": "7d1ea5c8636b0f9830ab396606b41079bdf1b42ef0b46244fbb30e1d55dea42e",
+    ".taskmaster/scripts/ai-quality-v147-failures.mjs": "85e6767dd73b52904998c41ac69f9c15a33f581979ec18db03fd7e071fabaf4a"
+  },
+  "proofBindings": {
+    "budget-and-wire-v2-node-v22.23.4-final/budget-v2-observations.json": "3b6216471ef073efe51aa9e31ada9061584fc03085c35429c03fecc970718009",
+    "budget-and-wire-v2-node-v22.23.4-final/wire-v2-observations.json": "9cc1e236e4ecee2e9c06eeb28c86862265840ad9cbe38036f2641a60afb9483f",
+    "budget-and-wire-v2-node-v24.22.1-final/budget-v2-observations.json": "d36192d0c15e66167d7e408976d842d7f019ea8ecb7bf002b1787b899f0c95f3",
+    "budget-and-wire-v2-node-v24.22.1-final/wire-v2-observations.json": "9cc1e236e4ecee2e9c06eeb28c86862265840ad9cbe38036f2641a60afb9483f"
+  },
+  "protocol": "ai-quality-v147-pilot-v2",
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "task22Complete": false,
+  "durableStoreIntegrated": false,
+  "fullCollectionExecuted": false,
+  "processRecoveryMatrixExecuted": false,
+  "liveEvaluationSupported": false,
+  "actualFinalEvaluationFrozen": false,
+  "schemaVersion": 1,
+  "revision": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "T22 partial implementation; pure budget/body-binding verified,full executor pending",
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase14/executor-v2-core-checks.json",
+  "proofSha256": "6cc9ad3091de139e7e12ce0c66fbb5bb23f16528ce857921e144a1bd1252e19e",
+  "contract": "Separate v2 spec/approval/ledger/request namespace. Reserve generation+judge maxima in same batch. Derived template commitment remains fixed; actual body binding is a separate immutable reserved-slot transition referencing exact completed parent output and receipt hashes. Bind before consume.",
+  "v1Reuse": "Only private arithmetic/state-machine views reuse the existing v1 pure core. External v2 spec/approval/ledger/UUID are validated first; private projected identities never escape as a usable store/dispatch spec. No existing v1 bytes,ledger or approvals changed/reopened/migrated.",
+  "wireBridge": "T16 snapshot must exactly match v2 source seal/plan outline/quote and every schedule policy. Deterministic frozen template+specific captured visible parent bytes produce actual raw judge body and a bind operation,without mutating store or authorizing dispatch.",
+  "limitations": [
+    "No v2 durable journal,receipt store,process recovery,CLI or full Worker collection integrated yet. Existing v1 store/recovery/dispatch intentionally unchanged this phase. T22 remains in-progress.",
+    "756-slot fixture validates schema/caps and one whole-pair reservation; it does not collect756responses or prove full-run completion.",
+    "Pure state transitions cannot authenticate provider receipts,verify quoted prices or establish actual token maxima. Actual input-token bound attestation remains required before live dispatch.",
+    "All positives are synthetic-test arithmetic fixtures,not actual user approval. No keys,network,learner records or paid evaluator entry point used.",
+    "Remaining T22: fixed protocol registry for v2 journal replay preserving v1 defaults; durable payload/receipt/binding/consume order; process exits/races/EPERM and recovery/no-resend; worker/CLI full schema collection plus calibrated reporting and owned resource lifecycle."
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "protocol": "ai-quality-v147-post-joint-body-capture-v1",
+  "draftFile": "outputs/ai-quality-v147-implementation-20261106/phase191/joint-candidate-draft.json",
+  "draftSha256": "0427788b53a73b7accfce7938fcb1d25ffabc42cbe43194ad02a253c91baee7d",
+  "jointFreezeHash": "0db0095d1a0c44e2c2bff5bd6c1a6317f3e875cd0c1b635b63c21b151db4ee0f",
+  "candidateBuildFreezeFile": "outputs/ai-quality-v147-implementation-20261106/phase168/candidate-freeze.json",
+  "candidateBuildFreezeSha256": "ec6fb905d59c8a9771478520e094e794302ac147eba24a7380a911ae01a81c78",
+  "proposalCases": 60,
+  "applicationBodiesCaptured": 360,
+  "baselineBodies": 180,
+  "candidateBodies": 180,
+  "wordBodies": 180,
+  "grammarBodies": 180,
+  "candidateExplicitKoreanBodies": 90,
+  "baselineOrdinaryKoreanBodies": 90,
+  "failedReceiptReadbacks": 360,
+  "duplicateProviderResends": 0,
+  "syntheticFailureEnvelope": "incomplete/max_output_tokens",
+  "syntheticRequestPathVerified": true,
+  "actualProviderTransportVerified": false,
+  "successfulLanguageFeedbackPathMeasured": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "referencesQualified": 0,
+  "formalPilotGenerations": 0,
+  "formalPilotGrades": 0,
+  "mainDispatchAuthorized": false,
+  "languageQualityMeasured": false,
+  "scope": "Real frozen built application POST -> intercepted provider body -> fixed synthetic failure -> receipt GET/same-ID duplicate. No live Responses request, language score or new success-path certification.",
+  "lifecycle": [
+    {
+      "label": "baseline",
+      "runtime": "actual full built Vinext/workerd",
+      "modules": 148,
+      "persist": "work\\ai-quality-v147-worker-baseline-c91838f8-0a75-481e-af19-3b6e7df9a1d4",
+      "ownedProcesses": [
+        {
+          "ProcessId": 60360,
+          "ParentProcessId": 55416,
+          "CreationDate": "/Date(1794494081809)/"
+        }
+      ],
+      "loopbackOnly": true,
+      "remoteBindings": false,
+      "providerCredentials": "fixed synthetic constant",
+      "realProviderEgress": 0,
+      "compatibilityDate": "2026-05-15",
+      "compatibilityFlags": [
+        "nodejs_compat"
+      ],
+      "syntheticProviderRequests": 180,
+      "syntheticFailureReceipts": 180,
+      "actualProviderCalls": 0
+    },
+    {
+      "label": "candidate",
+      "runtime": "actual full built Vinext/workerd",
+      "modules": 147,
+      "persist": "work\\ai-quality-v147-worker-candidate-1ebd6fef-c7eb-4ae2-bc5e-a68a75ed6256",
+      "ownedProcesses": [
+        {
+          "ProcessId": 57596,
+          "ParentProcessId": 55416,
+          "CreationDate": "/Date(1794494097142)/"
+        }
+      ],
+      "loopbackOnly": true,
+      "remoteBindings": false,
+      "providerCredentials": "fixed synthetic constant",
+      "realProviderEgress": 0,
+      "compatibilityDate": "2026-05-15",
+      "compatibilityFlags": [
+        "nodejs_compat"
+      ],
+      "syntheticProviderRequests": 180,
+      "syntheticFailureReceipts": 180,
+      "actualProviderCalls": 0
+    }
+  ],
+  "phase": "phase192",
+  "status": "post-joint-application-bodies-captured-reference-review-pending",
+  "parentTaskId": 24,
+  "activeSubtaskId": "24.3",
+  "supportingSubtaskId": "24.2",
+  "parentRequestIsUnsubmitted": true,
+  "referenceAuthorsObserved": 0,
+  "referenceQualified": false,
+  "englishTruthCertified": false,
+  "newSpendUpperMicros": "0",
+  "conditionalRemainingMicros": "331099",
+  "existingAdditionalGrantCapMicros": "35000000",
+  "ledgerFile": ".taskmaster/docs/ai-quality-v147-evaluation-budget-ledger-v3.json",
+  "ledgerSha256": "a5fe335a82f16323ae1e8ac55c5c59376e66d8d5e0f6cb6fb490a3d21a5182f7",
+  "generalLedgerUnchanged": true,
+  "productCodeChanged": false,
+  "judgeSemanticsChanged": false,
+  "oldBankAndScoresPreserved": true,
+  "capturedBodiesFile": "outputs/ai-quality-v147-implementation-20261106/phase192/captured-application-bodies.json",
+  "referenceParentBindingsFile": "outputs/ai-quality-v147-implementation-20261106/phase192/reference-parent-bindings.json",
+  "evidenceSha256": {
+    "outputs/ai-quality-v147-implementation-20261106/phase192/capture-requests.mjs": "eb1679cead980bf4fe9bc0e7111c9d3fa1cd8d58b68200747c6fd7ca1fb3079c",
+    "outputs/ai-quality-v147-implementation-20261106/phase192/capture-summary.json": "402577dac3c89dffabbab6efe62a4e72f3615fc74e0b322bbdcde235420f9ece",
+    "outputs/ai-quality-v147-implementation-20261106/phase192/captured-application-bodies.json": "04572e12b75ce7ff5c4e01526148de5efbfbcfd3be6bedfbea3ae164d7d104bd",
+    "outputs/ai-quality-v147-implementation-20261106/phase192/capture-journal.jsonl": "c4e62457159176183507d298e8af2bad2304848997f76f0af0b6c1efcc25c7d0",
+    "outputs/ai-quality-v147-implementation-20261106/phase192/reference-parent-bindings.json": "b847619a51aaff4fcd081fffd00dac26a30010bb6585ade157bb0a29a59bda59"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-joint-request-bindings-v1.mjs": "05f30a24ab9cd93572ce65b3d5128db062e09d6504ffc5c1952405864f0cf0eb",
+    ".taskmaster/scripts/test-ai-quality-v147-joint-request-bindings-v1.mjs": "0c97c801aab9d2736ba532facad31c04c1c07f06c548dc8a61a0e8e72510bf80"
+  },
+  "focusedChecks": 4,
+  "focusedExitCode": 0,
+  "lintExitCode": 0,
+  "captureExitCode": 0,
+  "baselineComparison": "Word inputs differ only by the explicit Korean-intent role; grammar inputs match across profiles. Three model choices per profile.",
+  "remaining": [
+    "Independent AI language/source/family review and reference qualification for these60 drafts.",
+    "Formal pilot generation0/360 and crossgrading0/1440; confirmation and operational gates remain."
+  ],
+  "deployed": false
+}

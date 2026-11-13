@@ -1,0 +1,2507 @@
+{
+  "result": {
+    "protocol": "ai-quality-v147-local-finite-program-templates-v1",
+    "previousProgramAuditHash": "a3318303a6c1cacabcf6372f8ad736afcd77166f18da07d1610844fd3eec1c2f",
+    "existingCorpusHash": "2596acc88cade2814c249ca4ebefb4c13ca7493fd562cb77b0d23eec7342c6e8",
+    "scope": "Only15previouslyidentifiedcandidateframes:12finiteEnglish-testtemplates expanded fromliteral tables/14POS-boundstaticadjectives;1KoreanUI/2SQL excluded. Notallprograminputs,othergeneratorsorstructuralfamilies.",
+    "classifiedTemplates": [
+      {
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "templateOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 939,
+          "utf16End": 978,
+          "line": 14,
+          "columnUtf16": 18,
+          "sourceSliceSha256": "d27a4c3b27f999d03981d400f7a715e6977c70388367c5426800282e9628f0cc"
+        },
+        "templateSourceSha256": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "loopOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 868,
+          "utf16End": 1531,
+          "line": 13,
+          "columnUtf16": 2,
+          "sourceSliceSha256": "d59d51895092d31f5c6414fdc3aa97b144ecb06aedd18be3bdfa1edc1b1600dd"
+        },
+        "iterableOrigin": {
+          "sourceFile": "lib/feedback-manner-adjectives.ts",
+          "utf16Start": 215,
+          "utf16End": 374,
+          "line": 3,
+          "columnUtf16": 45,
+          "sourceSliceSha256": "86519c40f5cd806116b323c164815c2b8ab4aed27cdc48995c6f34f09b490bd2"
+        },
+        "bindings": [
+          "adjective"
+        ],
+        "rows": [
+          [
+            "awful"
+          ],
+          [
+            "beautiful"
+          ],
+          [
+            "careful"
+          ],
+          [
+            "careless"
+          ],
+          [
+            "cheerful"
+          ],
+          [
+            "grateful"
+          ],
+          [
+            "harmful"
+          ],
+          [
+            "helpful"
+          ],
+          [
+            "painful"
+          ],
+          [
+            "peaceful"
+          ],
+          [
+            "powerful"
+          ],
+          [
+            "successful"
+          ],
+          [
+            "useful"
+          ],
+          [
+            "wonderful"
+          ]
+        ],
+        "expansionCount": 14,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "templateOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 997,
+          "utf16End": 1038,
+          "line": 14,
+          "columnUtf16": 76,
+          "sourceSliceSha256": "04121baccce4fa56d209cbe2d9860675728135ca2de43384271fed2c4312f5c8"
+        },
+        "templateSourceSha256": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "loopOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 868,
+          "utf16End": 1531,
+          "line": 13,
+          "columnUtf16": 2,
+          "sourceSliceSha256": "d59d51895092d31f5c6414fdc3aa97b144ecb06aedd18be3bdfa1edc1b1600dd"
+        },
+        "iterableOrigin": {
+          "sourceFile": "lib/feedback-manner-adjectives.ts",
+          "utf16Start": 215,
+          "utf16End": 374,
+          "line": 3,
+          "columnUtf16": 45,
+          "sourceSliceSha256": "86519c40f5cd806116b323c164815c2b8ab4aed27cdc48995c6f34f09b490bd2"
+        },
+        "bindings": [
+          "adjective"
+        ],
+        "rows": [
+          [
+            "awful"
+          ],
+          [
+            "beautiful"
+          ],
+          [
+            "careful"
+          ],
+          [
+            "careless"
+          ],
+          [
+            "cheerful"
+          ],
+          [
+            "grateful"
+          ],
+          [
+            "harmful"
+          ],
+          [
+            "helpful"
+          ],
+          [
+            "painful"
+          ],
+          [
+            "peaceful"
+          ],
+          [
+            "powerful"
+          ],
+          [
+            "successful"
+          ],
+          [
+            "useful"
+          ],
+          [
+            "wonderful"
+          ]
+        ],
+        "expansionCount": 14,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "role": "preservation-source",
+        "templateOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 1922,
+          "utf16End": 1941,
+          "line": 21,
+          "columnUtf16": 253,
+          "sourceSliceSha256": "f977ebcfe9bbee5768ee959df78912eea311f4d5f763be26faf1c2a693bdfd4b"
+        },
+        "templateSourceSha256": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "loopOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 1671,
+          "utf16End": 1989,
+          "line": 21,
+          "columnUtf16": 2,
+          "sourceSliceSha256": "218e29dc080d21f71a87a254a3409da9649ec5a09ad2fcf6a7fac9e81a0830c9"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 1689,
+          "utf16End": 1889,
+          "line": 21,
+          "columnUtf16": 20,
+          "sourceSliceSha256": "fc1fdb30aba20e1fed97e443ba18c1401bba68155ab9fd327534d8631a968b49"
+        },
+        "bindings": [
+          "a",
+          "b"
+        ],
+        "rows": [
+          [
+            "hard",
+            "hardly"
+          ],
+          [
+            "late",
+            "lately"
+          ],
+          [
+            "high",
+            "highly"
+          ],
+          [
+            "near",
+            "nearly"
+          ],
+          [
+            "spoonful",
+            "spoonfully"
+          ],
+          [
+            "basketful",
+            "basketfully"
+          ],
+          [
+            "friend",
+            "friendly"
+          ],
+          [
+            "helpful",
+            "helpfullyish"
+          ],
+          [
+            "helpful",
+            "harmfully"
+          ]
+        ],
+        "expansionCount": 9,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "role": "preservation-proposed-change",
+        "templateOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 1942,
+          "utf16End": 1961,
+          "line": 21,
+          "columnUtf16": 273,
+          "sourceSliceSha256": "4e3b000dd590e01532e7d511979f5a65de7f6cc708ae1adaecd325fcb1d04f5d"
+        },
+        "templateSourceSha256": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "loopOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 1671,
+          "utf16End": 1989,
+          "line": 21,
+          "columnUtf16": 2,
+          "sourceSliceSha256": "218e29dc080d21f71a87a254a3409da9649ec5a09ad2fcf6a7fac9e81a0830c9"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/ai-quality-morphology.test.mjs",
+          "utf16Start": 1689,
+          "utf16End": 1889,
+          "line": 21,
+          "columnUtf16": 20,
+          "sourceSliceSha256": "fc1fdb30aba20e1fed97e443ba18c1401bba68155ab9fd327534d8631a968b49"
+        },
+        "bindings": [
+          "a",
+          "b"
+        ],
+        "rows": [
+          [
+            "hard",
+            "hardly"
+          ],
+          [
+            "late",
+            "lately"
+          ],
+          [
+            "high",
+            "highly"
+          ],
+          [
+            "near",
+            "nearly"
+          ],
+          [
+            "spoonful",
+            "spoonfully"
+          ],
+          [
+            "basketful",
+            "basketfully"
+          ],
+          [
+            "friend",
+            "friendly"
+          ],
+          [
+            "helpful",
+            "helpfullyish"
+          ],
+          [
+            "helpful",
+            "harmfully"
+          ]
+        ],
+        "expansionCount": 9,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-327bdb5f59f490f63ec4929c",
+        "role": "excluded-korean-ui-guidance",
+        "templateOrigin": {
+          "sourceFile": "tests/balanced-daily.test.mjs",
+          "utf16Start": 15402,
+          "utf16End": 15462,
+          "line": 254,
+          "columnUtf16": 28,
+          "sourceSliceSha256": "376d960b3bb6beeb7b83e37ed7c11edb599d69adfc85dd5666e6d5cf7ed19106"
+        },
+        "templateSourceSha256": "696c1851545d9092ee1d99b73f639beba4f04aeae219f548d46aee12c10c5bf6",
+        "classification": "not-an-English-learning-example",
+        "expansionCount": 0,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-6320f30eb3b10ed3643dc477",
+        "role": "excluded-sql-statement",
+        "templateOrigin": {
+          "sourceFile": "tests/feedback-requests.test.mjs",
+          "utf16Start": 10639,
+          "utf16End": 10677,
+          "line": 98,
+          "columnUtf16": 39,
+          "sourceSliceSha256": "a0e73d7fcdfc36fd8a7f95947a9b0ea50304cb3ffb3817989e9086aa5b90faf2"
+        },
+        "templateSourceSha256": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+        "classification": "not-an-English-learning-example",
+        "expansionCount": 0,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-5c21f292ef5b462ab035788a",
+        "role": "excluded-sql-statement",
+        "templateOrigin": {
+          "sourceFile": "tests/feedback-requests.test.mjs",
+          "utf16Start": 11044,
+          "utf16End": 11082,
+          "line": 101,
+          "columnUtf16": 109,
+          "sourceSliceSha256": "a0e73d7fcdfc36fd8a7f95947a9b0ea50304cb3ffb3817989e9086aa5b90faf2"
+        },
+        "templateSourceSha256": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+        "classification": "not-an-English-learning-example",
+        "expansionCount": 0,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-db24cab854f5e67efb329801",
+        "role": "preservation-source",
+        "templateOrigin": {
+          "sourceFile": "tests/feedback-word-forms.test.mjs",
+          "utf16Start": 828,
+          "utf16End": 853,
+          "line": 15,
+          "columnUtf16": 37,
+          "sourceSliceSha256": "0b967e03febefeb23be5e9202c4d0b55b5c20315fce910c0bae485d1ecd48283"
+        },
+        "templateSourceSha256": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "loopOrigin": {
+          "sourceFile": "tests/feedback-word-forms.test.mjs",
+          "utf16Start": 661,
+          "utf16End": 895,
+          "line": 14,
+          "columnUtf16": 3,
+          "sourceSliceSha256": "e1a5612b4fba664bc1d1934f78a710026ff2f902b70f63a433888c5630db1768"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/feedback-word-forms.test.mjs",
+          "utf16Start": 685,
+          "utf16End": 787,
+          "line": 14,
+          "columnUtf16": 27,
+          "sourceSliceSha256": "74c6351bcf1dcc860acccbd78a7a28916d34ba63d95e9b46343ae6db2ece42a3"
+        },
+        "bindings": [
+          "from",
+          "to"
+        ],
+        "rows": [
+          [
+            "lent",
+            "lend"
+          ],
+          [
+            "paid",
+            "pay"
+          ],
+          [
+            "said",
+            "say"
+          ],
+          [
+            "chose",
+            "choose"
+          ],
+          [
+            "drove",
+            "drive"
+          ],
+          [
+            "began",
+            "begin"
+          ]
+        ],
+        "expansionCount": 6,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-8c2852f1245c5257fe41fec8",
+        "role": "preservation-proposed-change",
+        "templateOrigin": {
+          "sourceFile": "tests/feedback-word-forms.test.mjs",
+          "utf16Start": 854,
+          "utf16End": 877,
+          "line": 15,
+          "columnUtf16": 63,
+          "sourceSliceSha256": "770ea5be3d41b07eb5c9cd095a36659ce24d70b04db6d2f04d2d4c5b2112d413"
+        },
+        "templateSourceSha256": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "loopOrigin": {
+          "sourceFile": "tests/feedback-word-forms.test.mjs",
+          "utf16Start": 661,
+          "utf16End": 895,
+          "line": 14,
+          "columnUtf16": 3,
+          "sourceSliceSha256": "e1a5612b4fba664bc1d1934f78a710026ff2f902b70f63a433888c5630db1768"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/feedback-word-forms.test.mjs",
+          "utf16Start": 685,
+          "utf16End": 787,
+          "line": 14,
+          "columnUtf16": 27,
+          "sourceSliceSha256": "74c6351bcf1dcc860acccbd78a7a28916d34ba63d95e9b46343ae6db2ece42a3"
+        },
+        "bindings": [
+          "from",
+          "to"
+        ],
+        "rows": [
+          [
+            "lent",
+            "lend"
+          ],
+          [
+            "paid",
+            "pay"
+          ],
+          [
+            "said",
+            "say"
+          ],
+          [
+            "chose",
+            "choose"
+          ],
+          [
+            "drove",
+            "drive"
+          ],
+          [
+            "began",
+            "begin"
+          ]
+        ],
+        "expansionCount": 6,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-940c50cbea0537b9a628c6f7",
+        "role": "parser-original-and-preservation-source",
+        "templateOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 940,
+          "utf16End": 985,
+          "line": 10,
+          "columnUtf16": 17,
+          "sourceSliceSha256": "196ec8e55d5eedf0f90ba573b64232d178ae35b4e0f4faefffafbd4db192825e"
+        },
+        "templateSourceSha256": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "loopOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 755,
+          "utf16End": 1647,
+          "line": 9,
+          "columnUtf16": 1,
+          "sourceSliceSha256": "e6a342113c7bdfbb36e3d4a55da676a5cf56b6bc3b66e866c7761c1266582b9a"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 786,
+          "utf16End": 837,
+          "line": 9,
+          "columnUtf16": 32,
+          "sourceSliceSha256": "7312252f90959e9d9c7199b24e23822cb25a325ba9fe573af2cc160c113d8cba"
+        },
+        "bindings": [
+          "adjective",
+          "adverb"
+        ],
+        "rows": [
+          [
+            "skillful",
+            "skillfully"
+          ],
+          [
+            "skilful",
+            "skilfully"
+          ]
+        ],
+        "expansionCount": 2,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-9247eeefd18b85fd7c716574",
+        "role": "parser-proposed-correction-and-preservation-proposed-change",
+        "templateOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 996,
+          "utf16End": 1038,
+          "line": 10,
+          "columnUtf16": 73,
+          "sourceSliceSha256": "bfafdb114c52b245e9e96a1c0be596afce976c179aef0316e732089b110ee6e2"
+        },
+        "templateSourceSha256": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "loopOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 755,
+          "utf16End": 1647,
+          "line": 9,
+          "columnUtf16": 1,
+          "sourceSliceSha256": "e6a342113c7bdfbb36e3d4a55da676a5cf56b6bc3b66e866c7761c1266582b9a"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 786,
+          "utf16End": 837,
+          "line": 9,
+          "columnUtf16": 32,
+          "sourceSliceSha256": "7312252f90959e9d9c7199b24e23822cb25a325ba9fe573af2cc160c113d8cba"
+        },
+        "bindings": [
+          "adjective",
+          "adverb"
+        ],
+        "rows": [
+          [
+            "skillful",
+            "skillfully"
+          ],
+          [
+            "skilful",
+            "skilfully"
+          ]
+        ],
+        "expansionCount": 2,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-927a73fca8e4fba1e88f1ecb",
+        "role": "preservation-source",
+        "templateOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 1435,
+          "utf16End": 1486,
+          "line": 14,
+          "columnUtf16": 34,
+          "sourceSliceSha256": "6815990d8affa9caa0cbeb0fc3cc0fcd9a88d78cf43f81393c0b3d0a0d657782"
+        },
+        "templateSourceSha256": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "loopOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 755,
+          "utf16End": 1647,
+          "line": 9,
+          "columnUtf16": 1,
+          "sourceSliceSha256": "e6a342113c7bdfbb36e3d4a55da676a5cf56b6bc3b66e866c7761c1266582b9a"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 786,
+          "utf16End": 837,
+          "line": 9,
+          "columnUtf16": 32,
+          "sourceSliceSha256": "7312252f90959e9d9c7199b24e23822cb25a325ba9fe573af2cc160c113d8cba"
+        },
+        "bindings": [
+          "adjective",
+          "adverb"
+        ],
+        "rows": [
+          [
+            "skillful",
+            "skillfully"
+          ],
+          [
+            "skilful",
+            "skilfully"
+          ]
+        ],
+        "expansionCount": 2,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-3ed1c885a4fb46ea606622d8",
+        "role": "preservation-proposed-change",
+        "templateOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 1487,
+          "utf16End": 1535,
+          "line": 14,
+          "columnUtf16": 86,
+          "sourceSliceSha256": "6c178a542363f867041da350dee3fa54f24aaeac80feeb89eb2201fcd615ead9"
+        },
+        "templateSourceSha256": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "loopOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 755,
+          "utf16End": 1647,
+          "line": 9,
+          "columnUtf16": 1,
+          "sourceSliceSha256": "e6a342113c7bdfbb36e3d4a55da676a5cf56b6bc3b66e866c7761c1266582b9a"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 786,
+          "utf16End": 837,
+          "line": 9,
+          "columnUtf16": 32,
+          "sourceSliceSha256": "7312252f90959e9d9c7199b24e23822cb25a325ba9fe573af2cc160c113d8cba"
+        },
+        "bindings": [
+          "adjective",
+          "adverb"
+        ],
+        "rows": [
+          [
+            "skillful",
+            "skillfully"
+          ],
+          [
+            "skilful",
+            "skilfully"
+          ]
+        ],
+        "expansionCount": 2,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-c6767dba5d8caca10752e907",
+        "role": "preservation-source",
+        "templateOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 2720,
+          "utf16End": 2739,
+          "line": 31,
+          "columnUtf16": 35,
+          "sourceSliceSha256": "f977ebcfe9bbee5768ee959df78912eea311f4d5f763be26faf1c2a693bdfd4b"
+        },
+        "templateSourceSha256": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "loopOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 2550,
+          "utf16End": 2791,
+          "line": 30,
+          "columnUtf16": 2,
+          "sourceSliceSha256": "4fbf175a8e3a2f0e1a7ad6901d50e9385474c84849ee6677ab50ff48dfcebdcc"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 2568,
+          "utf16End": 2683,
+          "line": 30,
+          "columnUtf16": 20,
+          "sourceSliceSha256": "63da7f90ab9699f76c90a42adaa2f7f1e8c7a87ec7b603897928e0bf9eb7be8d"
+        },
+        "bindings": [
+          "a",
+          "b"
+        ],
+        "rows": [
+          [
+            "hard",
+            "hardly"
+          ],
+          [
+            "late",
+            "lately"
+          ],
+          [
+            "friend",
+            "friendly"
+          ],
+          [
+            "skillful",
+            "skillfullyish"
+          ],
+          [
+            "skilful",
+            "skilfullyish"
+          ]
+        ],
+        "expansionCount": 5,
+        "sourceExecutionPerformed": false
+      },
+      {
+        "templateId": "program-template-e6b99d68904672d161b111f7",
+        "role": "preservation-proposed-change",
+        "templateOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 2740,
+          "utf16End": 2759,
+          "line": 31,
+          "columnUtf16": 55,
+          "sourceSliceSha256": "4e3b000dd590e01532e7d511979f5a65de7f6cc708ae1adaecd325fcb1d04f5d"
+        },
+        "templateSourceSha256": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+        "classification": "finite-English-test-template",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "loopOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 2550,
+          "utf16End": 2791,
+          "line": 30,
+          "columnUtf16": 2,
+          "sourceSliceSha256": "4fbf175a8e3a2f0e1a7ad6901d50e9385474c84849ee6677ab50ff48dfcebdcc"
+        },
+        "iterableOrigin": {
+          "sourceFile": "tests/remediation-judgment.test.mjs",
+          "utf16Start": 2568,
+          "utf16End": 2683,
+          "line": 30,
+          "columnUtf16": 20,
+          "sourceSliceSha256": "63da7f90ab9699f76c90a42adaa2f7f1e8c7a87ec7b603897928e0bf9eb7be8d"
+        },
+        "bindings": [
+          "a",
+          "b"
+        ],
+        "rows": [
+          [
+            "hard",
+            "hardly"
+          ],
+          [
+            "late",
+            "lately"
+          ],
+          [
+            "friend",
+            "friendly"
+          ],
+          [
+            "skillful",
+            "skillfullyish"
+          ],
+          [
+            "skilful",
+            "skilfullyish"
+          ]
+        ],
+        "expansionCount": 5,
+        "sourceExecutionPerformed": false
+      }
+    ],
+    "generated": [
+      {
+        "id": "program-expansion-aa192be4ad9969adfc81de8b",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 0,
+        "bindings": {
+          "adjective": "awful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task awful.",
+        "normalizedSha256": "28b410e996281752ccee9cb32b20dc6e3d9ba78e1ecf75a419edb4421495ecb4",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-db0ac2b1b24406a87d1e93ef",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 1,
+        "bindings": {
+          "adjective": "beautiful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task beautiful.",
+        "normalizedSha256": "ad3edfc83b32f88b73d628602afcead19e3650961eb169b8b93e6d34def48c23",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-5eddec4d9f24671317758f64",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 2,
+        "bindings": {
+          "adjective": "careful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task careful.",
+        "normalizedSha256": "cda4de10a64a1562a353195c9acde539fb6fae461315e7951d3b0e1f6542d939",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-d3c630272e9bdf9551a114eb",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 3,
+        "bindings": {
+          "adjective": "careless"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task careless.",
+        "normalizedSha256": "ce0a4a5e9d1c409f2480296925b72598e29c537d720fb54c5e176e58b036df59",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-b819f85212c6cedf6a057fa6",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 4,
+        "bindings": {
+          "adjective": "cheerful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task cheerful.",
+        "normalizedSha256": "8727e2e3a4b78642f7965170979098b07520b4d97ef27a165d3e179f899d64e6",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-efb359c5803293e03b0fc7dd",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 5,
+        "bindings": {
+          "adjective": "grateful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task grateful.",
+        "normalizedSha256": "390d71ce9f12c780796cffb19869d23932436aa08647c983004ac8fa9a6e904a",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-e8f5b7dc50c5b70deb482bb9",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 6,
+        "bindings": {
+          "adjective": "harmful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task harmful.",
+        "normalizedSha256": "a0b53b68cfdb55ca792d3a296c638eeacd1854e77420770be04ea191bbf6e5a7",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-bf0a6e63a4166938d7e05f6d",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 7,
+        "bindings": {
+          "adjective": "helpful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task helpful.",
+        "normalizedSha256": "c20b8363d4667746e4283d3b5288bb03cc56a4f1c22417d0bcddfc1322672910",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-aa9894b41d275109a8d9c3cf",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 8,
+        "bindings": {
+          "adjective": "painful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task painful.",
+        "normalizedSha256": "a9b268ccb3a064d0c8ee49d859e6bbd7c6eb336331644266725c75317c98c3ff",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-7147f9c2c197a30d4f69bd49",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 9,
+        "bindings": {
+          "adjective": "peaceful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task peaceful.",
+        "normalizedSha256": "f33a5a08a31bdaf5d683ed61e9ed3e57f00bc4baea59f819b6aad462ad5cf59a",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-e3448a941e46561dcd96a0af",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 10,
+        "bindings": {
+          "adjective": "powerful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task powerful.",
+        "normalizedSha256": "15b16a7e3ada1daf8cd115a86b64fdd14f61b824efcfff3da548a503a33e7ad4",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-596e502faec293763cb5743a",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 11,
+        "bindings": {
+          "adjective": "successful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task successful.",
+        "normalizedSha256": "7c9e5a254b286b63c0e9cebc9805aac72221a5c689a04a9065c4fbdb6fd93072",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-7d693acee7181c4651428341",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 12,
+        "bindings": {
+          "adjective": "useful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task useful.",
+        "normalizedSha256": "ba61de2a1b73cb9b3ed45b9483381cb7047a8c0391a11d7fe212c593089b5858",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-fa505fa2e2f19b25423a50df",
+        "templateId": "program-template-65dc1971eb77d024aef2abcd",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 13,
+        "bindings": {
+          "adjective": "wonderful"
+        },
+        "role": "parser-original-and-bidirectional-preservation-input",
+        "sentence": "They performed the task wonderful.",
+        "normalizedSha256": "e051afb1bb0a7feb1f8d2c68aae89c8d0b16d5586a6e2a00fc18809629289e06",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-56a7d1f3098a8351b9852647",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 0,
+        "bindings": {
+          "adjective": "awful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task awfully.",
+        "normalizedSha256": "aa0e9689ed6779baca921beb11f1a82e281b276537cf8b501274f90a8c8f025b",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-8c96da45d867e7818522e6c3",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 1,
+        "bindings": {
+          "adjective": "beautiful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task beautifully.",
+        "normalizedSha256": "6c84e545d2fe70262ef63e952781f2825d965962e5feeaa21b17ad57866c27a8",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-d37b36f502af85742d41de65",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 2,
+        "bindings": {
+          "adjective": "careful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task carefully.",
+        "normalizedSha256": "b86b9fc82f293f380d8088ba2ad5f84430fa20c63b33ee557fc9cfa17c88c48b",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-71b00cc652d9446eaf41986e",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 3,
+        "bindings": {
+          "adjective": "careless"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task carelessly.",
+        "normalizedSha256": "b646c7faaa85caf59200fd73a1a6f5799156c39bd2580e9d0182f96e7f8bd8fe",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-b4ec001029ef8401582c4c91",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 4,
+        "bindings": {
+          "adjective": "cheerful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task cheerfully.",
+        "normalizedSha256": "43dd2afdec7f1f73a7778f6f4392c632fc87418e7b1307518c630b09033bd071",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-da72a141aca711364786dc80",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 5,
+        "bindings": {
+          "adjective": "grateful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task gratefully.",
+        "normalizedSha256": "7bb3a31630b5f0972b2858783c133063a3af11313c9fc6be83dca662030ea3fd",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-21d2b70fdd2893062393a460",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 6,
+        "bindings": {
+          "adjective": "harmful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task harmfully.",
+        "normalizedSha256": "429275072d1183666f9364420454e9c10fa885a9d8da321682b5fc7a3ccf6029",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-f902b10e50fc4b4e06e044ea",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 7,
+        "bindings": {
+          "adjective": "helpful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task helpfully.",
+        "normalizedSha256": "f22c030e25d8640ab3ac673cbc636f695b0212fa668803afa3d145dfe6732fbd",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-59eb1d9446e51c77fa007bb2",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 8,
+        "bindings": {
+          "adjective": "painful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task painfully.",
+        "normalizedSha256": "2a70d77d508cc0ad5817efb4649e05e1ea37bc60fb1eefb94518f7692c2c4d5e",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-9b4d21baba53722b758e7c0e",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 9,
+        "bindings": {
+          "adjective": "peaceful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task peacefully.",
+        "normalizedSha256": "47dd943e6f94ea97b793dc4436f0fe482b9c77bc93d0a97120ab1a4cc1cc01f2",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-fbffe375162a40228602ba1b",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 10,
+        "bindings": {
+          "adjective": "powerful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task powerfully.",
+        "normalizedSha256": "4a00f3d79bc945f91447c4d98e8e3e3f84f2a14ddf8bf479b4649a805e1c15b7",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-91fa3273bbb3d0fa0aefd281",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 11,
+        "bindings": {
+          "adjective": "successful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task successfully.",
+        "normalizedSha256": "6a53b4a74fea7d97185fc04641b26daa46a40e68e8cd9a9b7af6f8a73a68426a",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-eecdd9d37e5226a26ad630b7",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 12,
+        "bindings": {
+          "adjective": "useful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task usefully.",
+        "normalizedSha256": "af4807916ef0f6402c0ee82baa9e58a6c36446434ea2b0f4c294c8800899e645",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-2f80e1f8a4fcf16e82b55cfb",
+        "templateId": "program-template-6fa4ebd3578b6938840161c1",
+        "iterationGroup": "iteration-60aa2b928e52ca9e43ce3b2e",
+        "iterationIndex": 13,
+        "bindings": {
+          "adjective": "wonderful"
+        },
+        "role": "parser-proposed-correction-and-reverse-preservation-input",
+        "sentence": "They performed the task wonderfully.",
+        "normalizedSha256": "b098753a80b98819cfdceb2aa0a69ea1f7390ffe1504bc40d3a3292a1c2e179d",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-b438ba37aa5f1c4ec9c66ab6",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 0,
+        "bindings": {
+          "a": "hard",
+          "b": "hardly"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked hard.",
+        "normalizedSha256": "a54dd89a6155926d596d2f43403b7476ed0bf260c3113cacb1f7dbaecb2bc1db",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-0431578e5213863e56914932",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 1,
+        "bindings": {
+          "a": "late",
+          "b": "lately"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked late.",
+        "normalizedSha256": "a46a067ab6a863f85df597a8ff48c030f5d8c9c194c128d2f70f0255fdd4d451",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-75c0dccae4a4307f7cab9a3b",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 2,
+        "bindings": {
+          "a": "high",
+          "b": "highly"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked high.",
+        "normalizedSha256": "e08845a611fa54cd8a5f088a5c929e1021d20e62568a792fb104795c9a96004c",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-550a16e2a535d81ce0c3579d",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 3,
+        "bindings": {
+          "a": "near",
+          "b": "nearly"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked near.",
+        "normalizedSha256": "a4561df7a2576687a898971cdfc223819755a2df09c06a2d4737a44fb6fd95be",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-09153a1dfe969f1fc37d7d95",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 4,
+        "bindings": {
+          "a": "spoonful",
+          "b": "spoonfully"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked spoonful.",
+        "normalizedSha256": "7e6e711033a56a307dd7fd73f846a4aa39861205c03992fa7112e9b0cf0c57cb",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-155a75ea4f474ca359779468",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 5,
+        "bindings": {
+          "a": "basketful",
+          "b": "basketfully"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked basketful.",
+        "normalizedSha256": "966bb0ff4631573e89519845c5ebc9494db09dc88c50e75ca87878542c0e896e",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-07947f6f82cdeb0a71bb6ed5",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 6,
+        "bindings": {
+          "a": "friend",
+          "b": "friendly"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked friend.",
+        "normalizedSha256": "1a5408d1ee1b01e121911a3d9f0c25ae0e60d4cdc5f92eaa6bdf7e3ce0f8c4d5",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-d5bafd324f90e2e929433ddd",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 7,
+        "bindings": {
+          "a": "helpful",
+          "b": "helpfullyish"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked helpful.",
+        "normalizedSha256": "1ac1396fe8a3428331b40dbb05e52458430b00a7624ed72fb745309f1ce45444",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-d7fdccd73991566539875c2f",
+        "templateId": "program-template-faa3d0365270b143747146bc",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 8,
+        "bindings": {
+          "a": "helpful",
+          "b": "harmfully"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked helpful.",
+        "normalizedSha256": "1ac1396fe8a3428331b40dbb05e52458430b00a7624ed72fb745309f1ce45444",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-d00ab9b2e2794950386519a8",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 0,
+        "bindings": {
+          "a": "hard",
+          "b": "hardly"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked hardly.",
+        "normalizedSha256": "e829ef5d92e4fe7baf2a319b9801e22d020f52ea6846e6bef7543f6b7c01e54c",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-e2e577f0742d074af57d4ae6",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 1,
+        "bindings": {
+          "a": "late",
+          "b": "lately"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked lately.",
+        "normalizedSha256": "1e036b94dca8109ec6bb3f552cd00da83dd14413b0eb0185d5845062921b2a12",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-e0edbb4422492301da707076",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 2,
+        "bindings": {
+          "a": "high",
+          "b": "highly"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked highly.",
+        "normalizedSha256": "a69e35a94fb0158c55e7255cadf9f4267000fc8dba4a0a290a102de9fa37de48",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-1004e156b9be9803c1d7c6a6",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 3,
+        "bindings": {
+          "a": "near",
+          "b": "nearly"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked nearly.",
+        "normalizedSha256": "656bfda6eaaae2e5b8e6732e6cfb10ff9d6b1af9cda698e1090be9366cd584bc",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-edf6fa07fa8eafa08651ee32",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 4,
+        "bindings": {
+          "a": "spoonful",
+          "b": "spoonfully"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked spoonfully.",
+        "normalizedSha256": "8c3c03c6ea2ffa77457e59bd5551a645a384d8836b706e5478798fa66f84a0de",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-58d0e530481cb7952e22302b",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 5,
+        "bindings": {
+          "a": "basketful",
+          "b": "basketfully"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked basketfully.",
+        "normalizedSha256": "5d53cd6702ccbc0d73caf12a31f23b32337ad868b9c9316ecd9b7f725f4b7aef",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-90703da08268693833a51272",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 6,
+        "bindings": {
+          "a": "friend",
+          "b": "friendly"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked friendly.",
+        "normalizedSha256": "59b794c9e8639fdbc673cad07151dd531bec00bd76e4de00054457b9ab43ffd1",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-ef771ba08b7393fa1a11adbc",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 7,
+        "bindings": {
+          "a": "helpful",
+          "b": "helpfullyish"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked helpfullyish.",
+        "normalizedSha256": "af640c8bc27d029baf4f1c10106b11a50fdbacfe78f414eed4bd48cdbc961007",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-c997cc6214c246ee04eab9c3",
+        "templateId": "program-template-f849a64279fd1d3d8ecd7089",
+        "iterationGroup": "iteration-5de4810ed47427ced13fa106",
+        "iterationIndex": 8,
+        "bindings": {
+          "a": "helpful",
+          "b": "harmfully"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked harmfully.",
+        "normalizedSha256": "ec7020c45bb179e94b9f3cba47c985f03be7eb0f0395c6e434fd4e2ad8335770",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-da00c1b3fddad10ace98c879",
+        "templateId": "program-template-db24cab854f5e67efb329801",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 0,
+        "bindings": {
+          "from": "lent",
+          "to": "lend"
+        },
+        "role": "preservation-source",
+        "sentence": "They didn't lent it.",
+        "normalizedSha256": "d24abad291aff0891d51b4ee0b27036ed656db996b231a7da9064769de6db450",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-9f7c776f3a367aec59ed5108",
+        "templateId": "program-template-db24cab854f5e67efb329801",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 1,
+        "bindings": {
+          "from": "paid",
+          "to": "pay"
+        },
+        "role": "preservation-source",
+        "sentence": "They didn't paid it.",
+        "normalizedSha256": "49a6e6eb10ac3f45e8336f8ab70d5ecc9961452f16b6268f2b5a2ba81dc9d6e0",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-c49b507d50b3f15cfc7dacd1",
+        "templateId": "program-template-db24cab854f5e67efb329801",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 2,
+        "bindings": {
+          "from": "said",
+          "to": "say"
+        },
+        "role": "preservation-source",
+        "sentence": "They didn't said it.",
+        "normalizedSha256": "099f47e719b9adf513041760fd23a6a099544113c53a4fe35b56b13843fb4b18",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-5ba8e142b0d038231b040b85",
+        "templateId": "program-template-db24cab854f5e67efb329801",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 3,
+        "bindings": {
+          "from": "chose",
+          "to": "choose"
+        },
+        "role": "preservation-source",
+        "sentence": "They didn't chose it.",
+        "normalizedSha256": "8175e524f8b2ba33364cbca6f16bdf28d2830e25466a40334038d996979bb931",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-9184dd39a14cd71206081db9",
+        "templateId": "program-template-db24cab854f5e67efb329801",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 4,
+        "bindings": {
+          "from": "drove",
+          "to": "drive"
+        },
+        "role": "preservation-source",
+        "sentence": "They didn't drove it.",
+        "normalizedSha256": "18fc8b126c1dc454509c55e3eea9727981b29fa5d05f9c848007af88185c1235",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-cdff58802f44f39792317020",
+        "templateId": "program-template-db24cab854f5e67efb329801",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 5,
+        "bindings": {
+          "from": "began",
+          "to": "begin"
+        },
+        "role": "preservation-source",
+        "sentence": "They didn't began it.",
+        "normalizedSha256": "e2cad3b7f899cea2abed94f3efdf2fe661c44484d43dad5e087f0a895f95183e",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-c83c3f2c9f9caf1ca4d10f03",
+        "templateId": "program-template-8c2852f1245c5257fe41fec8",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 0,
+        "bindings": {
+          "from": "lent",
+          "to": "lend"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They didn't lend it.",
+        "normalizedSha256": "c7a11261140617b9d4a59a336d1394800a97302e696a295120f5e39ba212a541",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-7e1cc6466610804b9c4a4060",
+        "templateId": "program-template-8c2852f1245c5257fe41fec8",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 1,
+        "bindings": {
+          "from": "paid",
+          "to": "pay"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They didn't pay it.",
+        "normalizedSha256": "cd71bc809effa970528e98b64dcfbe1cf1dad3c40aec6d8f8b0870c525d82cee",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-7038d7043c61b7f7e7ca7c42",
+        "templateId": "program-template-8c2852f1245c5257fe41fec8",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 2,
+        "bindings": {
+          "from": "said",
+          "to": "say"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They didn't say it.",
+        "normalizedSha256": "ebb876df4ba128ea7df30bb6f806070088ea27caa3f66e9a9133484cdf53a3aa",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-a32ebfe4782a2f706e53191f",
+        "templateId": "program-template-8c2852f1245c5257fe41fec8",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 3,
+        "bindings": {
+          "from": "chose",
+          "to": "choose"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They didn't choose it.",
+        "normalizedSha256": "2e4d6b2fa89a1c2f70ae48c863edd12db2a179417dda520fdb1a1becc6106d6c",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-b28ee53c12a6df66987d9e38",
+        "templateId": "program-template-8c2852f1245c5257fe41fec8",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 4,
+        "bindings": {
+          "from": "drove",
+          "to": "drive"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They didn't drive it.",
+        "normalizedSha256": "c1fed884413463351fc45258c4bec9ff2ba8ddd6bd041f4f662a96206b650575",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-430fec767ffbc51deda1db36",
+        "templateId": "program-template-8c2852f1245c5257fe41fec8",
+        "iterationGroup": "iteration-aae00589fb710762258e9570",
+        "iterationIndex": 5,
+        "bindings": {
+          "from": "began",
+          "to": "begin"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They didn't begin it.",
+        "normalizedSha256": "a8376bfe04d0f41261dfa2899fe1fe9880be8ca1714d5aea19e274837fc8a891",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-854540f83a4a0b7c1f9306ee",
+        "templateId": "program-template-940c50cbea0537b9a628c6f7",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 0,
+        "bindings": {
+          "adjective": "skillful",
+          "adverb": "skillfully"
+        },
+        "role": "parser-original-and-preservation-source",
+        "sentence": "The drummer played the rhythm skillful.",
+        "normalizedSha256": "dfb151f933d0254dbda7158c4b33726d59116fdd79d9a4a5d473b83ad3298e70",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-8595da2d22732e399bfa1d73",
+        "templateId": "program-template-940c50cbea0537b9a628c6f7",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 1,
+        "bindings": {
+          "adjective": "skilful",
+          "adverb": "skilfully"
+        },
+        "role": "parser-original-and-preservation-source",
+        "sentence": "The drummer played the rhythm skilful.",
+        "normalizedSha256": "8f0c4706a4c011eb4dbc4344a4d7cfd5385b750ae8985407d1844069a3a28e9d",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-f9c7c89b331d03a65cfa5d78",
+        "templateId": "program-template-9247eeefd18b85fd7c716574",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 0,
+        "bindings": {
+          "adjective": "skillful",
+          "adverb": "skillfully"
+        },
+        "role": "parser-proposed-correction-and-preservation-proposed-change",
+        "sentence": "The drummer played the rhythm skillfully.",
+        "normalizedSha256": "7e74f6defae2526065db8a58c27bff791eb2c6213a6c8e1daa3140e9abd2fd28",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-b229f4a8bbdc301efcae5fca",
+        "templateId": "program-template-9247eeefd18b85fd7c716574",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 1,
+        "bindings": {
+          "adjective": "skilful",
+          "adverb": "skilfully"
+        },
+        "role": "parser-proposed-correction-and-preservation-proposed-change",
+        "sentence": "The drummer played the rhythm skilfully.",
+        "normalizedSha256": "ba0b6d14be7a9a72bd4072450cf172819e9fe06f6017d88c22bb85c9c8ab591c",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-14fd2efdf54e8df19b52b7dc",
+        "templateId": "program-template-927a73fca8e4fba1e88f1ecb",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 0,
+        "bindings": {
+          "adjective": "skillful",
+          "adverb": "skillfully"
+        },
+        "role": "preservation-source",
+        "sentence": "He did not play two notes skillful yesterday.",
+        "normalizedSha256": "37180b81cb5e87cb9a642bf6c832debe9d39e95a64e467c293999aba559066e7",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-08f041049e0bdf58bcb81d0c",
+        "templateId": "program-template-927a73fca8e4fba1e88f1ecb",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 1,
+        "bindings": {
+          "adjective": "skilful",
+          "adverb": "skilfully"
+        },
+        "role": "preservation-source",
+        "sentence": "He did not play two notes skilful yesterday.",
+        "normalizedSha256": "ea7aab3abac271a0d84c25494a0d4fc1913c7cd74d8a6727cdd2e9d9a5b88cfe",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-7d78b079bf72eae67e26633c",
+        "templateId": "program-template-3ed1c885a4fb46ea606622d8",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 0,
+        "bindings": {
+          "adjective": "skillful",
+          "adverb": "skillfully"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "He did not play two notes skillfully yesterday.",
+        "normalizedSha256": "6548815193e88f15462dee277d828b14b715be56a7a4a78d874ceaa7d3d53454",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-afd52334cd5b97eb964469c2",
+        "templateId": "program-template-3ed1c885a4fb46ea606622d8",
+        "iterationGroup": "iteration-bb2c616745c330937ceb8116",
+        "iterationIndex": 1,
+        "bindings": {
+          "adjective": "skilful",
+          "adverb": "skilfully"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "He did not play two notes skilfully yesterday.",
+        "normalizedSha256": "57588ff94f491da0c8901648c224a3f29ecd66903930c9943a6f4c7d806379f8",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-eade13f36b66207605e3f0e7",
+        "templateId": "program-template-c6767dba5d8caca10752e907",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 0,
+        "bindings": {
+          "a": "hard",
+          "b": "hardly"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked hard.",
+        "normalizedSha256": "a54dd89a6155926d596d2f43403b7476ed0bf260c3113cacb1f7dbaecb2bc1db",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-745f503c53ab7a26b0949be8",
+        "templateId": "program-template-c6767dba5d8caca10752e907",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 1,
+        "bindings": {
+          "a": "late",
+          "b": "lately"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked late.",
+        "normalizedSha256": "a46a067ab6a863f85df597a8ff48c030f5d8c9c194c128d2f70f0255fdd4d451",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-a160745d206052314e688ad6",
+        "templateId": "program-template-c6767dba5d8caca10752e907",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 2,
+        "bindings": {
+          "a": "friend",
+          "b": "friendly"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked friend.",
+        "normalizedSha256": "1a5408d1ee1b01e121911a3d9f0c25ae0e60d4cdc5f92eaa6bdf7e3ce0f8c4d5",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-37ae30345ef041c9caa1fe18",
+        "templateId": "program-template-c6767dba5d8caca10752e907",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 3,
+        "bindings": {
+          "a": "skillful",
+          "b": "skillfullyish"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked skillful.",
+        "normalizedSha256": "d856ca994ce8d9b944aa255d2d755007b58e10598d05f17114d3e29ff6c47575",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-cdaa0158b869e75a08c51219",
+        "templateId": "program-template-c6767dba5d8caca10752e907",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 4,
+        "bindings": {
+          "a": "skilful",
+          "b": "skilfullyish"
+        },
+        "role": "preservation-source",
+        "sentence": "They worked skilful.",
+        "normalizedSha256": "0693b8610d852205f857c1bf6a2d1092f82abebc4d8e0a6ae7c2462b1c0625ed",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-669fcc21fa73e0af2452b216",
+        "templateId": "program-template-e6b99d68904672d161b111f7",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 0,
+        "bindings": {
+          "a": "hard",
+          "b": "hardly"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked hardly.",
+        "normalizedSha256": "e829ef5d92e4fe7baf2a319b9801e22d020f52ea6846e6bef7543f6b7c01e54c",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-53ed0f64e3fb2ea4bb7dd767",
+        "templateId": "program-template-e6b99d68904672d161b111f7",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 1,
+        "bindings": {
+          "a": "late",
+          "b": "lately"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked lately.",
+        "normalizedSha256": "1e036b94dca8109ec6bb3f552cd00da83dd14413b0eb0185d5845062921b2a12",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-7ade0e04a44d0a0a5e13f3b2",
+        "templateId": "program-template-e6b99d68904672d161b111f7",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 2,
+        "bindings": {
+          "a": "friend",
+          "b": "friendly"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked friendly.",
+        "normalizedSha256": "59b794c9e8639fdbc673cad07151dd531bec00bd76e4de00054457b9ab43ffd1",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-dbeb721b16d3fc63f70b09e3",
+        "templateId": "program-template-e6b99d68904672d161b111f7",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 3,
+        "bindings": {
+          "a": "skillful",
+          "b": "skillfullyish"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked skillfullyish.",
+        "normalizedSha256": "e210b9314f5f5670482af3c93d380c3d09b4039e57f9391a0dd2bb7cb869980b",
+        "correctnessOrExpectedGradeAssigned": false
+      },
+      {
+        "id": "program-expansion-1d70a93050a32375e7146e8f",
+        "templateId": "program-template-e6b99d68904672d161b111f7",
+        "iterationGroup": "iteration-c6433c2543dd5f4c5d90347e",
+        "iterationIndex": 4,
+        "bindings": {
+          "a": "skilful",
+          "b": "skilfullyish"
+        },
+        "role": "preservation-proposed-change",
+        "sentence": "They worked skilfullyish.",
+        "normalizedSha256": "08464631ff09351f42f4c4405013ff5e0b65dd09ce37fec88f7ab2229240fd75",
+        "correctnessOrExpectedGradeAssigned": false
+      }
+    ],
+    "surfaces": [
+      {
+        "normalizedSha256": "0693b8610d852205f857c1bf6a2d1092f82abebc4d8e0a6ae7c2462b1c0625ed",
+        "sentence": "They worked skilful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-cdaa0158b869e75a08c51219"
+        ]
+      },
+      {
+        "normalizedSha256": "08464631ff09351f42f4c4405013ff5e0b65dd09ce37fec88f7ab2229240fd75",
+        "sentence": "They worked skilfullyish.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-1d70a93050a32375e7146e8f"
+        ]
+      },
+      {
+        "normalizedSha256": "099f47e719b9adf513041760fd23a6a099544113c53a4fe35b56b13843fb4b18",
+        "sentence": "They didn't said it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-c49b507d50b3f15cfc7dacd1"
+        ]
+      },
+      {
+        "normalizedSha256": "15b16a7e3ada1daf8cd115a86b64fdd14f61b824efcfff3da548a503a33e7ad4",
+        "sentence": "They performed the task powerful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-e3448a941e46561dcd96a0af"
+        ]
+      },
+      {
+        "normalizedSha256": "18fc8b126c1dc454509c55e3eea9727981b29fa5d05f9c848007af88185c1235",
+        "sentence": "They didn't drove it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-9184dd39a14cd71206081db9"
+        ]
+      },
+      {
+        "normalizedSha256": "1a5408d1ee1b01e121911a3d9f0c25ae0e60d4cdc5f92eaa6bdf7e3ce0f8c4d5",
+        "sentence": "They worked friend.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-07947f6f82cdeb0a71bb6ed5",
+          "program-expansion-a160745d206052314e688ad6"
+        ]
+      },
+      {
+        "normalizedSha256": "1ac1396fe8a3428331b40dbb05e52458430b00a7624ed72fb745309f1ce45444",
+        "sentence": "They worked helpful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-d5bafd324f90e2e929433ddd",
+          "program-expansion-d7fdccd73991566539875c2f"
+        ]
+      },
+      {
+        "normalizedSha256": "1e036b94dca8109ec6bb3f552cd00da83dd14413b0eb0185d5845062921b2a12",
+        "sentence": "They worked lately.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-e2e577f0742d074af57d4ae6",
+          "program-expansion-53ed0f64e3fb2ea4bb7dd767"
+        ]
+      },
+      {
+        "normalizedSha256": "28b410e996281752ccee9cb32b20dc6e3d9ba78e1ecf75a419edb4421495ecb4",
+        "sentence": "They performed the task awful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-aa192be4ad9969adfc81de8b"
+        ]
+      },
+      {
+        "normalizedSha256": "2a70d77d508cc0ad5817efb4649e05e1ea37bc60fb1eefb94518f7692c2c4d5e",
+        "sentence": "They performed the task painfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-59eb1d9446e51c77fa007bb2"
+        ]
+      },
+      {
+        "normalizedSha256": "2e4d6b2fa89a1c2f70ae48c863edd12db2a179417dda520fdb1a1becc6106d6c",
+        "sentence": "They didn't choose it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-a32ebfe4782a2f706e53191f"
+        ]
+      },
+      {
+        "normalizedSha256": "37180b81cb5e87cb9a642bf6c832debe9d39e95a64e467c293999aba559066e7",
+        "sentence": "He did not play two notes skillful yesterday.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": true,
+        "expansionIds": [
+          "program-expansion-14fd2efdf54e8df19b52b7dc"
+        ]
+      },
+      {
+        "normalizedSha256": "390d71ce9f12c780796cffb19869d23932436aa08647c983004ac8fa9a6e904a",
+        "sentence": "They performed the task grateful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-efb359c5803293e03b0fc7dd"
+        ]
+      },
+      {
+        "normalizedSha256": "429275072d1183666f9364420454e9c10fa885a9d8da321682b5fc7a3ccf6029",
+        "sentence": "They performed the task harmfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-21d2b70fdd2893062393a460"
+        ]
+      },
+      {
+        "normalizedSha256": "43dd2afdec7f1f73a7778f6f4392c632fc87418e7b1307518c630b09033bd071",
+        "sentence": "They performed the task cheerfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-b4ec001029ef8401582c4c91"
+        ]
+      },
+      {
+        "normalizedSha256": "47dd943e6f94ea97b793dc4436f0fe482b9c77bc93d0a97120ab1a4cc1cc01f2",
+        "sentence": "They performed the task peacefully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-9b4d21baba53722b758e7c0e"
+        ]
+      },
+      {
+        "normalizedSha256": "49a6e6eb10ac3f45e8336f8ab70d5ecc9961452f16b6268f2b5a2ba81dc9d6e0",
+        "sentence": "They didn't paid it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-9f7c776f3a367aec59ed5108"
+        ]
+      },
+      {
+        "normalizedSha256": "4a00f3d79bc945f91447c4d98e8e3e3f84f2a14ddf8bf479b4649a805e1c15b7",
+        "sentence": "They performed the task powerfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-fbffe375162a40228602ba1b"
+        ]
+      },
+      {
+        "normalizedSha256": "57588ff94f491da0c8901648c224a3f29ecd66903930c9943a6f4c7d806379f8",
+        "sentence": "He did not play two notes skilfully yesterday.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-afd52334cd5b97eb964469c2"
+        ]
+      },
+      {
+        "normalizedSha256": "59b794c9e8639fdbc673cad07151dd531bec00bd76e4de00054457b9ab43ffd1",
+        "sentence": "They worked friendly.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-90703da08268693833a51272",
+          "program-expansion-7ade0e04a44d0a0a5e13f3b2"
+        ]
+      },
+      {
+        "normalizedSha256": "5d53cd6702ccbc0d73caf12a31f23b32337ad868b9c9316ecd9b7f725f4b7aef",
+        "sentence": "They worked basketfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-58d0e530481cb7952e22302b"
+        ]
+      },
+      {
+        "normalizedSha256": "6548815193e88f15462dee277d828b14b715be56a7a4a78d874ceaa7d3d53454",
+        "sentence": "He did not play two notes skillfully yesterday.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-7d78b079bf72eae67e26633c"
+        ]
+      },
+      {
+        "normalizedSha256": "656bfda6eaaae2e5b8e6732e6cfb10ff9d6b1af9cda698e1090be9366cd584bc",
+        "sentence": "They worked nearly.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-1004e156b9be9803c1d7c6a6"
+        ]
+      },
+      {
+        "normalizedSha256": "6a53b4a74fea7d97185fc04641b26daa46a40e68e8cd9a9b7af6f8a73a68426a",
+        "sentence": "They performed the task successfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-91fa3273bbb3d0fa0aefd281"
+        ]
+      },
+      {
+        "normalizedSha256": "6c84e545d2fe70262ef63e952781f2825d965962e5feeaa21b17ad57866c27a8",
+        "sentence": "They performed the task beautifully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-8c96da45d867e7818522e6c3"
+        ]
+      },
+      {
+        "normalizedSha256": "7bb3a31630b5f0972b2858783c133063a3af11313c9fc6be83dca662030ea3fd",
+        "sentence": "They performed the task gratefully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-da72a141aca711364786dc80"
+        ]
+      },
+      {
+        "normalizedSha256": "7c9e5a254b286b63c0e9cebc9805aac72221a5c689a04a9065c4fbdb6fd93072",
+        "sentence": "They performed the task successful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-596e502faec293763cb5743a"
+        ]
+      },
+      {
+        "normalizedSha256": "7e6e711033a56a307dd7fd73f846a4aa39861205c03992fa7112e9b0cf0c57cb",
+        "sentence": "They worked spoonful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-09153a1dfe969f1fc37d7d95"
+        ]
+      },
+      {
+        "normalizedSha256": "7e74f6defae2526065db8a58c27bff791eb2c6213a6c8e1daa3140e9abd2fd28",
+        "sentence": "The drummer played the rhythm skillfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-f9c7c89b331d03a65cfa5d78"
+        ]
+      },
+      {
+        "normalizedSha256": "8175e524f8b2ba33364cbca6f16bdf28d2830e25466a40334038d996979bb931",
+        "sentence": "They didn't chose it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-5ba8e142b0d038231b040b85"
+        ]
+      },
+      {
+        "normalizedSha256": "8727e2e3a4b78642f7965170979098b07520b4d97ef27a165d3e179f899d64e6",
+        "sentence": "They performed the task cheerful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-b819f85212c6cedf6a057fa6"
+        ]
+      },
+      {
+        "normalizedSha256": "8c3c03c6ea2ffa77457e59bd5551a645a384d8836b706e5478798fa66f84a0de",
+        "sentence": "They worked spoonfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-edf6fa07fa8eafa08651ee32"
+        ]
+      },
+      {
+        "normalizedSha256": "8f0c4706a4c011eb4dbc4344a4d7cfd5385b750ae8985407d1844069a3a28e9d",
+        "sentence": "The drummer played the rhythm skilful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-8595da2d22732e399bfa1d73"
+        ]
+      },
+      {
+        "normalizedSha256": "966bb0ff4631573e89519845c5ebc9494db09dc88c50e75ca87878542c0e896e",
+        "sentence": "They worked basketful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-155a75ea4f474ca359779468"
+        ]
+      },
+      {
+        "normalizedSha256": "a0b53b68cfdb55ca792d3a296c638eeacd1854e77420770be04ea191bbf6e5a7",
+        "sentence": "They performed the task harmful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-e8f5b7dc50c5b70deb482bb9"
+        ]
+      },
+      {
+        "normalizedSha256": "a4561df7a2576687a898971cdfc223819755a2df09c06a2d4737a44fb6fd95be",
+        "sentence": "They worked near.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-550a16e2a535d81ce0c3579d"
+        ]
+      },
+      {
+        "normalizedSha256": "a46a067ab6a863f85df597a8ff48c030f5d8c9c194c128d2f70f0255fdd4d451",
+        "sentence": "They worked late.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-0431578e5213863e56914932",
+          "program-expansion-745f503c53ab7a26b0949be8"
+        ]
+      },
+      {
+        "normalizedSha256": "a54dd89a6155926d596d2f43403b7476ed0bf260c3113cacb1f7dbaecb2bc1db",
+        "sentence": "They worked hard.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-b438ba37aa5f1c4ec9c66ab6",
+          "program-expansion-eade13f36b66207605e3f0e7"
+        ]
+      },
+      {
+        "normalizedSha256": "a69e35a94fb0158c55e7255cadf9f4267000fc8dba4a0a290a102de9fa37de48",
+        "sentence": "They worked highly.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-e0edbb4422492301da707076"
+        ]
+      },
+      {
+        "normalizedSha256": "a8376bfe04d0f41261dfa2899fe1fe9880be8ca1714d5aea19e274837fc8a891",
+        "sentence": "They didn't begin it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-430fec767ffbc51deda1db36"
+        ]
+      },
+      {
+        "normalizedSha256": "a9b268ccb3a064d0c8ee49d859e6bbd7c6eb336331644266725c75317c98c3ff",
+        "sentence": "They performed the task painful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-aa9894b41d275109a8d9c3cf"
+        ]
+      },
+      {
+        "normalizedSha256": "aa0e9689ed6779baca921beb11f1a82e281b276537cf8b501274f90a8c8f025b",
+        "sentence": "They performed the task awfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-56a7d1f3098a8351b9852647"
+        ]
+      },
+      {
+        "normalizedSha256": "ad3edfc83b32f88b73d628602afcead19e3650961eb169b8b93e6d34def48c23",
+        "sentence": "They performed the task beautiful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-db0ac2b1b24406a87d1e93ef"
+        ]
+      },
+      {
+        "normalizedSha256": "af4807916ef0f6402c0ee82baa9e58a6c36446434ea2b0f4c294c8800899e645",
+        "sentence": "They performed the task usefully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-eecdd9d37e5226a26ad630b7"
+        ]
+      },
+      {
+        "normalizedSha256": "af640c8bc27d029baf4f1c10106b11a50fdbacfe78f414eed4bd48cdbc961007",
+        "sentence": "They worked helpfullyish.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-ef771ba08b7393fa1a11adbc"
+        ]
+      },
+      {
+        "normalizedSha256": "b098753a80b98819cfdceb2aa0a69ea1f7390ffe1504bc40d3a3292a1c2e179d",
+        "sentence": "They performed the task wonderfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-2f80e1f8a4fcf16e82b55cfb"
+        ]
+      },
+      {
+        "normalizedSha256": "b646c7faaa85caf59200fd73a1a6f5799156c39bd2580e9d0182f96e7f8bd8fe",
+        "sentence": "They performed the task carelessly.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-71b00cc652d9446eaf41986e"
+        ]
+      },
+      {
+        "normalizedSha256": "b86b9fc82f293f380d8088ba2ad5f84430fa20c63b33ee557fc9cfa17c88c48b",
+        "sentence": "They performed the task carefully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-d37b36f502af85742d41de65"
+        ]
+      },
+      {
+        "normalizedSha256": "ba0b6d14be7a9a72bd4072450cf172819e9fe06f6017d88c22bb85c9c8ab591c",
+        "sentence": "The drummer played the rhythm skilfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-b229f4a8bbdc301efcae5fca"
+        ]
+      },
+      {
+        "normalizedSha256": "ba61de2a1b73cb9b3ed45b9483381cb7047a8c0391a11d7fe212c593089b5858",
+        "sentence": "They performed the task useful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-7d693acee7181c4651428341"
+        ]
+      },
+      {
+        "normalizedSha256": "c1fed884413463351fc45258c4bec9ff2ba8ddd6bd041f4f662a96206b650575",
+        "sentence": "They didn't drive it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-b28ee53c12a6df66987d9e38"
+        ]
+      },
+      {
+        "normalizedSha256": "c20b8363d4667746e4283d3b5288bb03cc56a4f1c22417d0bcddfc1322672910",
+        "sentence": "They performed the task helpful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-bf0a6e63a4166938d7e05f6d"
+        ]
+      },
+      {
+        "normalizedSha256": "c7a11261140617b9d4a59a336d1394800a97302e696a295120f5e39ba212a541",
+        "sentence": "They didn't lend it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-c83c3f2c9f9caf1ca4d10f03"
+        ]
+      },
+      {
+        "normalizedSha256": "cd71bc809effa970528e98b64dcfbe1cf1dad3c40aec6d8f8b0870c525d82cee",
+        "sentence": "They didn't pay it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-7e1cc6466610804b9c4a4060"
+        ]
+      },
+      {
+        "normalizedSha256": "cda4de10a64a1562a353195c9acde539fb6fae461315e7951d3b0e1f6542d939",
+        "sentence": "They performed the task careful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-5eddec4d9f24671317758f64"
+        ]
+      },
+      {
+        "normalizedSha256": "ce0a4a5e9d1c409f2480296925b72598e29c537d720fb54c5e176e58b036df59",
+        "sentence": "They performed the task careless.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-d3c630272e9bdf9551a114eb"
+        ]
+      },
+      {
+        "normalizedSha256": "d24abad291aff0891d51b4ee0b27036ed656db996b231a7da9064769de6db450",
+        "sentence": "They didn't lent it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-da00c1b3fddad10ace98c879"
+        ]
+      },
+      {
+        "normalizedSha256": "d856ca994ce8d9b944aa255d2d755007b58e10598d05f17114d3e29ff6c47575",
+        "sentence": "They worked skillful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-37ae30345ef041c9caa1fe18"
+        ]
+      },
+      {
+        "normalizedSha256": "dfb151f933d0254dbda7158c4b33726d59116fdd79d9a4a5d473b83ad3298e70",
+        "sentence": "The drummer played the rhythm skillful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-854540f83a4a0b7c1f9306ee"
+        ]
+      },
+      {
+        "normalizedSha256": "e051afb1bb0a7feb1f8d2c68aae89c8d0b16d5586a6e2a00fc18809629289e06",
+        "sentence": "They performed the task wonderful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-fa505fa2e2f19b25423a50df"
+        ]
+      },
+      {
+        "normalizedSha256": "e08845a611fa54cd8a5f088a5c929e1021d20e62568a792fb104795c9a96004c",
+        "sentence": "They worked high.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-75c0dccae4a4307f7cab9a3b"
+        ]
+      },
+      {
+        "normalizedSha256": "e210b9314f5f5670482af3c93d380c3d09b4039e57f9391a0dd2bb7cb869980b",
+        "sentence": "They worked skillfullyish.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-dbeb721b16d3fc63f70b09e3"
+        ]
+      },
+      {
+        "normalizedSha256": "e2cad3b7f899cea2abed94f3efdf2fe661c44484d43dad5e087f0a895f95183e",
+        "sentence": "They didn't began it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-cdff58802f44f39792317020"
+        ]
+      },
+      {
+        "normalizedSha256": "e829ef5d92e4fe7baf2a319b9801e22d020f52ea6846e6bef7543f6b7c01e54c",
+        "sentence": "They worked hardly.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-d00ab9b2e2794950386519a8",
+          "program-expansion-669fcc21fa73e0af2452b216"
+        ]
+      },
+      {
+        "normalizedSha256": "ea7aab3abac271a0d84c25494a0d4fc1913c7cd74d8a6727cdd2e9d9a5b88cfe",
+        "sentence": "He did not play two notes skilful yesterday.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-08f041049e0bdf58bcb81d0c"
+        ]
+      },
+      {
+        "normalizedSha256": "ebb876df4ba128ea7df30bb6f806070088ea27caa3f66e9a9133484cdf53a3aa",
+        "sentence": "They didn't say it.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-7038d7043c61b7f7e7ca7c42"
+        ]
+      },
+      {
+        "normalizedSha256": "ec7020c45bb179e94b9f3cba47c985f03be7eb0f0395c6e434fd4e2ad8335770",
+        "sentence": "They worked harmfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-c997cc6214c246ee04eab9c3"
+        ]
+      },
+      {
+        "normalizedSha256": "f22c030e25d8640ab3ac673cbc636f695b0212fa668803afa3d145dfe6732fbd",
+        "sentence": "They performed the task helpfully.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-f902b10e50fc4b4e06e044ea"
+        ]
+      },
+      {
+        "normalizedSha256": "f33a5a08a31bdaf5d683ed61e9ed3e57f00bc4baea59f819b6aad462ad5cf59a",
+        "sentence": "They performed the task peaceful.",
+        "alreadyInSelected426": false,
+        "alreadyInStatic433": false,
+        "expansionIds": [
+          "program-expansion-7147f9c2c197a30d4f69bd49"
+        ]
+      }
+    ],
+    "counts": {
+      "candidateTemplates": 15,
+      "englishTemplates": 12,
+      "excludedUiTemplates": 1,
+      "excludedSqlTemplates": 2,
+      "adjectiveValues": 14,
+      "loopGroups": 5,
+      "generatedOccurrences": 76,
+      "uniqueGeneratedSurfaces": 69,
+      "generatedSurfacesOutside426": 69,
+      "generatedSurfacesOutsideStatic433": 68
+    },
+    "sourceExecutionPerformed": false,
+    "completeForSelectedTwelveTemplateExpressions": true,
+    "allProgramGeneratedInputsEnumerated": false,
+    "allStaticLiteralRolesClassified": false,
+    "completeProjectExposure": false,
+    "structuralFamiliesCertified": false,
+    "modelEvidenceProjectionAllowed": false,
+    "liveFreshnessPolicyChanged": false,
+    "actualEnglishQualityMeasured": false,
+    "actualProviderCalls": 0,
+    "actualCountApiCalls": 0,
+    "actualKeyReads": 0,
+    "sha256": "ede62f95ef02d2c93a2e08c6eb37738356b2e152d6f250bd5446879f51eeba23"
+  },
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json": "1ab0a8f82d004cc588a1dc7b737c0d007dad58334e5e9d9a0d8be8a7fd56d8c0",
+    "tests/ai-quality-morphology.test.mjs": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+    "tests/balanced-daily.test.mjs": "696c1851545d9092ee1d99b73f639beba4f04aeae219f548d46aee12c10c5bf6",
+    "tests/feedback-requests.test.mjs": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+    "tests/feedback-word-forms.test.mjs": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+    "tests/remediation-judgment.test.mjs": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+    "lib/feedback-manner-adjectives.ts": "825f72b3dc9aad88f6c4240ea434f1e22fc67b9450bb827b8aa0743842251ab3",
+    "data/words.json": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f"
+  },
+  "existingCorpusFile": ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json",
+  "existingCorpusSha256": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+  "typescriptPackageSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6",
+  "typescriptParserSha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675"
+}

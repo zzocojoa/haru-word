@@ -1,0 +1,415 @@
+{
+  "protocol": "ai-quality-v147-source-admission-v10-v1",
+  "phase": "phase183",
+  "role": "source qualification for the declared AI-only public v10 witness set",
+  "scopeFile": ".taskmaster/docs/ai-quality-v147-source-review-v10-scope-v1.json",
+  "preparedFile": "outputs/ai-quality-v147-implementation-20261106/phase183/prepared-source-review.json",
+  "runtimeTerminalFile": "outputs/ai-quality-v147-source-review-v10-runtime-20261112/terminal.json",
+  "policyHash": "2f7c545d030b2aa510ab75ee7ce4a88106380e740f0904f3c90fcf5b0a829cb1",
+  "sourceReviewPlanHash": "81f191ffd1c1f6377f5133746e281c2bb1767f513f22fe6ef44d15e71ce20266",
+  "entries": [
+    {
+      "caseId": "MC01",
+      "contentHash": "0693bd63905d909f1d04373ce5b48f7e46b99724ae981f11acf703289ea3dbe0",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC02",
+      "contentHash": "11fa56bfbce5fec7c9a4f6e614fd06dff057d1c42d58363331c304cef0b1c0c9",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC03",
+      "contentHash": "940198ce34bb7829fcc6d770e01bbf7b6abf24ae14047df4b9d97986d48107d1",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC04",
+      "contentHash": "e390df9aeb53c7e900a8ef75dbdacf1713096ad6721d64455884be4a9235374b",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC05",
+      "contentHash": "ffe2d60484539d661e53bfc6154d188b513ef384b366d6d59f5c43e5d8736e02",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC06",
+      "contentHash": "c681908aa92a71b81d730b45734bc4027bed591e0ed238e558b5390100371692",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC07",
+      "contentHash": "848d975be872b41285c4dfff5d270590bc3ebbcc02e0bccbf38b6ffe8a017fe3",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC08",
+      "contentHash": "67e61725650ec58a2a13cb78c5e7394a4013ca167d4d3195d7ece0adef2d13e8",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC09",
+      "contentHash": "8b95895be628e1a59e15688954482cb4f7c02bcb5bcd427d3b71504a96cd7cbf",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC10",
+      "contentHash": "840494331078f576ebfb23b606c5fc228a07ab84e78c0607fe413f9ddec4d7e4",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC11",
+      "contentHash": "28ddf5d41c1aa9d534544c3884857cc31b405ea268a871d714e589302ec4483e",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    },
+    {
+      "caseId": "MC12",
+      "contentHash": "a4dd1bb3a429da483a521fe82aeda8b37a659b8cbe20775bb71062b2ecbde6b0",
+      "byJudge": [
+        {
+          "judge": "gpt-6.1-sol",
+          "reviewers": [
+            "gpt-6.1-terra",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6.1-terra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6-astra"
+          ],
+          "supported": true
+        },
+        {
+          "judge": "gpt-6-astra",
+          "reviewers": [
+            "gpt-6.1-sol",
+            "gpt-6.1-terra"
+          ],
+          "supported": true
+        }
+      ]
+    }
+  ],
+  "qualifiedWitnesses": 12,
+  "humanReviewPerformed": false,
+  "sameProviderIndependenceEstablished": false,
+  "publicDevelopmentOnly": true,
+  "freshHoldout": false,
+  "formalCalibrationQualification": false,
+  "calibrationAcceptanceAllowed": false,
+  "pilotReferencesQualified": 0,
+  "mainDispatchAuthorized": false,
+  "englishTruthCertified": false,
+  "evidenceSha256": {
+    ".taskmaster/docs/ai-quality-v147-source-review-v10-scope-v1.json": "165880185f6ee3a64a42f22449452882d8a4bfbf73cea7f6c13f04a2782a9f90",
+    "outputs/ai-quality-v147-implementation-20261106/phase183/prepared-source-review.json": "34430b75cf3fa26c0e0b1082dd2bab98829011e719b2dbc50588b0953928fa42",
+    "outputs/ai-quality-v147-implementation-20261106/phase183/audit-actual.json": "5d8f29e76933f456050b538769604670b1cf581a64262f6e31a4a821534457d6",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-0-capture.json": "a344625c2827eb93a2f6e28e05d2d47ffc25befb46743405d8d216ea39fe457e",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-0-intent.json": "c83a99b9e1e19f11b9849f7d5b83032a962c2f6dbad7255dffc4f6c0fb259919",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-0-request.json": "f62ae178d682f639c07bb0bcd5d29642fe50f36932bbf83c79365a593ca2b3e9",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-0-response.json": "824c47ff875366a91281cad9f94780c35cf749b133eaf08ba1df26a91aa87dbb",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-1-capture.json": "432a6eef3608c14a2a0efcb68a601d771b03af3c5c6be7600eb241f2d00e70d0",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-1-intent.json": "de594d1651dac1ae8af6e1bab380059df424ae8fc8da9173e2794a5e8aed33b8",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-1-request.json": "ebba1040fb015bf17fddc5dddce8928f8b9f9efdcf1aa43cc83caf5340df4773",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-1-response.json": "0b3123ab7761d6c8d4742d4e520f2edd056d5384655f3537cd1e450fc70e8e5a",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-2-capture.json": "9585bd71284b5f8fba628f7ce57e6a3fa50228aad5f0e476339cf66143ccd1c8",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-2-intent.json": "11e79be90f14a0ece24a4b9e693cf363476c17338eaf40123abd6b2a488b70fe",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-2-request.json": "aec152a8b852efd8500ad91278d74b45ccc91d68df01149ca87a15c86e7d7a8a",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/count-2-response.json": "3cfc4d4fea2501c66aeb8070f5239774b22938a032c7b315322f72a6964ae800",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/funding-settlement.json": "62c54421f31df57867cab06f61e3aa3b72d786d2fe02c5aa039425663ba42fca",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/measured-budget.json": "f5c45c71c4df1b92dccf08734c7db4d85f07e3255972a9e8aed84facc424e4f4",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-0-capture.json": "f04c59d06f90e299fa425926223660d9f0892d6ca29fee6eb73f1da225a2b754",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-0-intent.json": "6a3afd42831044e0eb681cccf48740ed7a9f8240c80cd1d1bee0b4e300bd6acb",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-0-request.json": "67046a5c00b5b6c0372b82738333caec606022de2a0f4016bb72330ec229e3cb",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-0-response.json": "3b34f2afe5a3fb5533083be626d2adf3e6a8dcdafbb054efc21c7e63522c2776",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-1-capture.json": "b4afc3894d0b5ef3121801bd76643f09dc1be58ba389c57517a5b66b0d2f7af1",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-1-intent.json": "7af344b046216089d621279b639b8e8753e4757f8bb2c2bddee380f6d54ee5ee",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-1-request.json": "74a005938fc69390c4b9a624fc481581ab3f5681f29024585acbd722f1471700",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-1-response.json": "f2bff9c048c3ee0b3103d163afc3fe97155e124d3ff3c487b42d7f90232e2f59",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-2-capture.json": "6d3449a9e0a0babda6767830682cc462c550b8fb16039c827e60f2f01091eb98",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-2-intent.json": "7dc999cdc2b251fd777f0a96acf0b897efaa1f87e628fc92d39f0787764f737d",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-2-request.json": "a3f6e8183cda2a632b7e539c98185990ab818ba99ab643b82707311123e8729d",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/model-2-response.json": "bf7f0b82150bfef82adc07244c4de19c96eeeef402bf0ec3367e834f4673949b",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/ONCE.json": "96f5b91b21d081f955a5bdcfb6ba28e23a2b46da629aef9849b73ba1a821dde1",
+    "outputs/ai-quality-v147-source-review-v10-runtime-20261112/terminal.json": "179fab6dbf013b89643d1e4d4dc391896f3d460ab12f1d68f8baf20f9daee181"
+  }
+}

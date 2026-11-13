@@ -1,0 +1,33 @@
+{
+  "protocol": "ai-quality-v147-pilot-replacement-draft-v1",
+  "phase": "phase137",
+  "tasks": [
+    "24.2",
+    "24.3"
+  ],
+  "document": "docs/AI_QUALITY_V147_PILOT_REPLACEMENT_DRAFT_20261109.md",
+  "replacementDrafts": 2,
+  "retainedCases": 58,
+  "retainedGenerationBodies": 348,
+  "newGenerationBodies": 12,
+  "receiptReadbacks": 12,
+  "newReviewBodies": 4,
+  "retainedReviewBodies": 106,
+  "originalExposedRequestsHeld": 16,
+  "replacementDraftLocalSyntheticChecks": 16,
+  "referencesQualified": 0,
+  "pilotGenerationsCompleted": 0,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "mainDispatchAuthorized": false,
+  "freshPilotAdmissionHeld": true,
+  "firstBlockAndSourceFollowupUnchanged": true,
+  "evidenceSha256": {
+    "pilot-60-replacement-draft.json": "74cee048579a4405e8099a1f3a4cca6ed5f880c8b8d08d215a6d074016832b57",
+    "pilot-60-replacement-capture.json": "6402000a664fe90425118fe5b1aa09949d78f520b2fa72a71cc9d334c38baf85",
+    "replacement-blind-reference-plan.json": "c0f56df5b9326da5f5a301c4e1d650ed5eb4c4857744f7aeaf1098ed18bb837c",
+    "prepare-replacements.mjs": "b3842d04dc29d821908932137256ce33c42350fb1f12614776526d84922d62d2",
+    "capture-replacements.mjs": "55bb0140e16d278f843d18954a77b1d385c2850d9458446bb3fb3a89aa6ce150",
+    "compile-replacement-reviews.mjs": "6f6fadf147638a70e0368b6dbcd08eea57742bad5ec761354fbca6e03a855c1e"
+  }
+}

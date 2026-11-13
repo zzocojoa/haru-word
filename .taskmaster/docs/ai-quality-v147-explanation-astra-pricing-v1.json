@@ -1,0 +1,38 @@
+{
+  "runId": "6c62241e-4aae-4d62-8b89-c9e98cc15c63",
+  "protocol": "ai-quality-v147-explanation-astra-collector-v1",
+  "selectedModels": [
+    "gpt-6-astra"
+  ],
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "inputCeiling": 5500,
+  "outputCeiling": 1024,
+  "reservationMicros": "3600000",
+  "countAllowanceMicros": "1200000",
+  "countAllowanceBasisInputOnlyMicros": "1089000",
+  "countContingencyMicros": "111000",
+  "declaredModelMaximumMicros": "2375010",
+  "declaredTotalMicros": "3575010",
+  "recoveredEnvelopeMicros": "3623057",
+  "modelProvisionReductionMicros": "3139276",
+  "unusedCapacityTransferredMicros": "483781",
+  "priorCountProvisionsReleased": false,
+  "countTariffVerified": false,
+  "priceUrl": "https://developers.openai.com/api/docs/pricing",
+  "cacheWriteQuoteFactor": "1.25 official default30m for unset retention",
+  "oldApprovalsReactivated": false,
+  "actualCallsBeforeValidation": 0
+}

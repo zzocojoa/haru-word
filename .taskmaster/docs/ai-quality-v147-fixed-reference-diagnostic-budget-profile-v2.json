@@ -1,0 +1,38 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v2",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "f644d73b-fdf5-430e-907c-4e83c3af2a9a",
+  "studyPlanHash": "e308af9ef19e3be644d4a8ed095449900b8cddcf08c5c3230992772a283be43e",
+  "collectorProtocol": "ai-quality-v147-fixed-reference-diagnostic-v2",
+  "successStatus": "collected-fixed-reference-transport-diagnostic",
+  "runtimeDirectoryName": "ai-quality-v147-fixed-reference-diagnostic-v2-runtime-20261109",
+  "expectedModelCalls": 2,
+  "expectedCountCalls": 2,
+  "reservationMicros": "200000",
+  "countAllowanceMicros": "70000",
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "pricingEvidenceFile": "phase84/official-pricing-observation.json",
+  "pricingEvidenceSha256": "a13554f6f9157c9a9ededb34ee47bf04efaad0c1d024960ebf21fcb875c03341",
+  "countTariffVerified": false,
+  "invoiceVerified": false,
+  "automaticRetry": false,
+  "automaticResume": false,
+  "originalFiveDollarClosed": true,
+  "newGrantCreated": false,
+  "sourceQualified": false,
+  "mainDispatchAuthorized": false
+}

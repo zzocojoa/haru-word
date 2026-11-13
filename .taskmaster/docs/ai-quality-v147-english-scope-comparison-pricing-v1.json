@@ -1,0 +1,47 @@
+{
+  "protocol": "ai-quality-v147-english-scope-comparison-pricing-v1",
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "inputFactorNumerator": "5",
+  "inputFactorDenominator": "4",
+  "regionalNumerator": "11",
+  "regionalDenominator": "10",
+  "defaultCacheLifetime": "30m",
+  "cacheWritesReplaceInputRate": true,
+  "inputCeiling": 10000,
+  "outputCeiling": 4096,
+  "requests": 36,
+  "countAllowanceMicros": "5659368",
+  "reservationMicros": "12000000",
+  "countTariffVerified": false,
+  "invoiceGuarantee": false,
+  "officialSources": {
+    "official-pricing.md": {
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "evidenceFile": "phase67/official-pricing.md",
+      "sha256": "8e641f45700ceeac6df18d7ce5d60b19b19c5531fb7bc1dc57ced06b93442a08"
+    },
+    "official-token-counting.md": {
+      "url": "https://developers.openai.com/api/docs/guides/token-counting",
+      "evidenceFile": "phase67/official-token-counting.md",
+      "sha256": "fec4815c00d34934954fd093f8c48bfd948b59d0e6c7b07f755887f6fb4a07d6"
+    },
+    "official-prompt-caching.md": {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching",
+      "evidenceFile": "phase67/official-prompt-caching.md",
+      "sha256": "b99033ea2dc0ffd7b31df13364bcc1e0eb39c6c1d2521b14021e28907cd858d9"
+    }
+  }
+}

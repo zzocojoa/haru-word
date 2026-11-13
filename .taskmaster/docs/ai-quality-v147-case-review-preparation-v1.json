@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "stage": "direct-G12-N04-case-review-and-combined-count-preparation-v1",
+  "recordedAtUtc": "2026-11-07T05:02:41.221381+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "groupsEachNode": 7,
+  "regressionGroupsEachNode": 24,
+  "directRequests": 6,
+  "combinedCountIntents": 42,
+  "questions": 5,
+  "sources": 4,
+  "bodyBounds": {
+    "minimum": 6326,
+    "maximum": 6328
+  },
+  "actualEnglishQualityMeasured": false,
+  "actualRoleQualificationMeasured": false,
+  "liveDispatchAuthorized": false,
+  "paymentQuoteReady": false,
+  "counterFeesVerified": false,
+  "historicGoldOrScoresModified": false,
+  "alreadyIncludedIn180Or1872": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "dataFile": ".taskmaster/evaluation/ai-quality-v147/case-review-dossier-g12-v1.json",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-case-review-v1.mjs": "53f5631abfdd5e83cffb6eb0091085e7d151a4206180cdaff474473be02d37f4",
+    ".taskmaster/scripts/test-ai-quality-v147-case-review-v1.mjs": "fba09a8a8b382ce7e132e01c4f345423cbecf16e336383260b6ed9e09fb27c30"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/case-review-dossier-g12-v1.json": "c5dd0c81a151c71a521f2c502cd8f0d9cc37843954331ba4a7f23dce5da2c034"
+  },
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+    ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+    ".taskmaster/evaluation/ai-quality-v147/semantic-reference-audit-v1.json": "28647e0041705ab9664686b94e47e0dc71972cdbc496e017c0fc63c099d4dbd3",
+    ".taskmaster/evaluation/ai-quality-v147/reference-controls-v2.json": "0ed8af4e6bc8dc78da416b3fdf1e13eb3ccffed5c0cc4231c4d01505dd8718c0",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-input-count-v1.mjs": "e07e1d5c4a6ef4f6f66b99bd4c00895d02d941db433bfb954182d1435a700c44",
+    ".taskmaster/scripts/ai-quality-v147-lexical-reference-v1.mjs": "55646f6007351affb3617c2b182fd818539e1e56b5311c840352d392c83afa4e",
+    ".taskmaster/scripts/ai-quality-v147-reference-controls-v2.mjs": "3d01666c168d135c4dec812ebf3d187490fed9a5419dddf3654fb5db6675b105",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "36c433a1bc05bdc1d3b458d79e538915ed1ae5d0e32fe62800712bb034e3dd6b"
+  },
+  "document": "docs/AI_QUALITY_V147_DIRECT_CASE_REVIEW_20261107.md",
+  "documentSha256": "51321b39070ccf4761a58a5b53964e519990d362ac298f2df077c0236f88fc98",
+  "checks": [
+    {
+      "name": "case-node22-final-clean",
+      "log": "case-node22-final-clean.log",
+      "sha256": "3221905d0999f953c32083ec94a6f5dd73bc6e2e476c544a171bd29748c48d1d",
+      "exitCode": 0
+    },
+    {
+      "name": "case-node24-final-clean",
+      "log": "case-node24-final-clean.log",
+      "sha256": "aad6a82059b62353fe3ef7a0014042e6d0e329e4433da0ff5127541cc8e17f6c",
+      "exitCode": 0
+    }
+  ],
+  "regressionChecks": [
+    {
+      "name": "controls-node22-regression",
+      "kind": "controls",
+      "groups": 7,
+      "resultFile": "control-review-results.json",
+      "log": "controls-node22-regression.log",
+      "sha256": "6ab0bcb1033b7a8430b73e75886b17d941715713754e707dd2769fced640de12",
+      "exitCode": 0
+    },
+    {
+      "name": "lexical-node22-regression",
+      "kind": "lexical",
+      "groups": 6,
+      "resultFile": "lexical-reference-results.json",
+      "log": "lexical-node22-regression.log",
+      "sha256": "5804f8d18bd00f26273c2e6de8a057b2a3ef6fc0a8093e88dab8a719e17cb840",
+      "exitCode": 0
+    },
+    {
+      "name": "count-node22-regression",
+      "kind": "count",
+      "groups": 11,
+      "resultFile": "input-count-results.json",
+      "log": "count-node22-regression.log",
+      "sha256": "75e408f380c120d415bde53f1a208f42b8f8e72718459d32a44698f5b0bd5dc0",
+      "exitCode": 0
+    },
+    {
+      "name": "controls-node24-regression",
+      "kind": "controls",
+      "groups": 7,
+      "resultFile": "control-review-results.json",
+      "log": "controls-node24-regression.log",
+      "sha256": "abb98326ff4135fb0e0b258ec35cc63e89671763d3305dcb1dd262f02eba7fed",
+      "exitCode": 0
+    },
+    {
+      "name": "lexical-node24-regression",
+      "kind": "lexical",
+      "groups": 6,
+      "resultFile": "lexical-reference-results.json",
+      "log": "lexical-node24-regression.log",
+      "sha256": "f0d98f12b09bd95e7f2ebe7d642f439de1b868634d64ad8b8005fbb0ee150931",
+      "exitCode": 0
+    },
+    {
+      "name": "count-node24-regression",
+      "kind": "count",
+      "groups": 11,
+      "resultFile": "input-count-results.json",
+      "log": "count-node24-regression.log",
+      "sha256": "706947fd39d97d1ff0cec7aa5de50b35f3ed94350a09cb3189404204d435c4bf",
+      "exitCode": 0
+    }
+  ],
+  "rawEvidenceFile": "case-raw-preservation.json",
+  "rawEvidenceSha256": "f4031eb3f60583565be57149f1c923f5b391e5c6b552ba8daf441a6e5a7d6f0f",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

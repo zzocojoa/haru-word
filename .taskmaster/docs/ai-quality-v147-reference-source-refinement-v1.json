@@ -1,0 +1,32 @@
+{
+  "protocol": "ai-quality-v147-blind-reference-source-notes-v1",
+  "draftSha256": "74cee048579a4405e8099a1f3a4cca6ed5f880c8b8d08d215a6d074016832b57",
+  "previousPlanSha256": "c0f56df5b9326da5f5a301c4e1d650ed5eb4c4857744f7aeaf1098ed18bb837c",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "sourceNotes": 14,
+  "refinedSourceCases": 16,
+  "originalSourceLinkedCases": 60,
+  "contextCasesWithRefinedSources": 2,
+  "updatedReviewBodies": 32,
+  "retainedReviewBodies": 78,
+  "syntheticControls": 7,
+  "minimumCountAllowanceMicrosForUpdatedBodies": "1120000",
+  "sourceFollowupRetained": true,
+  "referencesQualified": 0,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "mainDispatchAuthorized": false,
+  "phase": "phase146",
+  "tasks": [
+    "24.2",
+    "24.3"
+  ],
+  "document": "docs/AI_QUALITY_V147_REFERENCE_SOURCE_REFINEMENT_20261109.md",
+  "evidenceSha256": {
+    "source-notes.mjs": "90087ffde5942bff091063d62a4816f74f7a448a3b7bc68d3033b5a5b7b7c12b",
+    "prepare-source-backed-reviews.mjs": "8849da3ec1def5dfb9968720fc99e172231e7ca90e9e9238a3444be04ff07709",
+    "source-backed-reference-draft.json": "6aa30a8b763a65abee1c337e1ebb67501069b2acd4bef12cf95705cf2277bb1a",
+    "node22.log": "38c9defc9b22783677d4cd0c2e5b81b7805d14bb9a3177d180c34969141d2f3b",
+    "node24.log": "38c9defc9b22783677d4cd0c2e5b81b7805d14bb9a3177d180c34969141d2f3b"
+  }
+}

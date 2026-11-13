@@ -12,6 +12,17 @@ export const REVIEWED_IRREGULAR_FORMS = [
   'read','lend lent','lay laid',
 ] as const;
 
+// Exact noun singular/plural pairs. Keep these separate from verb roots so a
+// noun alias cannot transitively admit an unrelated verb spelling.
+export const REVIEWED_IRREGULAR_NOUN_FORMS = [
+  'child children', 'person people', 'man men', 'woman women',
+  'foot feet', 'tooth teeth', 'mouse mice', 'goose geese', 'ox oxen',
+] as const;
+const nounForms = new Map<string, string>(REVIEWED_IRREGULAR_NOUN_FORMS.flatMap(pair => {
+  const [singular, plural] = pair.split(' ');
+  return [[singular, plural] as const, [plural, singular] as const];
+}));
+
 const roots = new Map<string, Set<string>>();
 for (const group of REVIEWED_IRREGULAR_FORMS) {
   const words = group.split(' ');
@@ -25,6 +36,7 @@ function forms(word: string) {
 }
 const bases = (word: string) => new Set([word,...(roots.get(word) ?? [])]);
 export function sameInflectedWord(a: string, b: string): boolean {
+  if (nounForms.get(a) === b) return true;
   // Retain literal spellings (found/founded); do not transitively merge lay's
   // different roots, which would incorrectly make laid and lain interchangeable.
   for (const x of bases(a)) for (const y of bases(b)) {
@@ -32,6 +44,28 @@ export function sameInflectedWord(a: string, b: string): boolean {
   }
   return false;
 }
+
+export function presentThirdPerson(base: string) {
+  if (base === 'have') return 'has';
+  if (/[^aeiou]y$/.test(base)) return base.slice(0, -1) + 'ies';
+  return base + (/(?:s|sh|ch|x|z|o)$/.test(base) ? 'es' : 's');
+}
+
+function progressiveForm(base: string) {
+  if (base.endsWith('ie')) return base.slice(0, -2) + 'ying';
+  if (base.endsWith('ic')) return base + 'king';
+  if (base.endsWith('e') && !/(?:ee|ye|oe)$/.test(base)) return base.slice(0, -1) + 'ing';
+  if (/^[^aeiou]+[aeiou][bcdfgjklmnpqrstz]$/.test(base)) return base + base.at(-1) + 'ing';
+  return base + 'ing';
+}
+
+export function sameReviewedProgressive(before: string, after: string, verbs: ReadonlySet<string>) {
+  if (!after.endsWith('ing')) return false;
+  const stem = after.slice(0, -3);
+  const roots = [stem, stem + 'e', stem.replace(/(.)\1$/, '$1'), stem.replace(/y$/, 'ie'), stem.replace(/ick$/, 'ic')];
+  return roots.some(base => verbs.has(base) && presentThirdPerson(base) === before && progressiveForm(base) === after);
+}
+
 // Exact auxiliary forms only. The regular-spelling heuristic would also match
 // unrelated content words such as bed (be+d), which must never be filtered out.
 const auxiliaryForms = new Set('be am is are was were been being do does did done doing have has had having'.split(' '));

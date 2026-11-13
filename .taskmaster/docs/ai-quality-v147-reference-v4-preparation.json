@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "protocol": "ai-quality-v147-reference-v4",
+  "stage": "fresh-reference-author-review-contract-local-integration",
+  "recordedAtUtc": "2026-11-07T00:00:15.091983+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "task34Complete": false,
+  "task24Complete": false,
+  "localReferenceAdapterImplemented": true,
+  "credentialChoice": "reuse-existing",
+  "credentialChoiceUserExplicit": true,
+  "credentialWritePerformed": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "liveDispatchSupported": false,
+  "actualEnglishQualityMeasured": false,
+  "actualReferenceControlsQualified": false,
+  "actualSourceCorpusFrozen": false,
+  "actualInputTokenBoundsMeasured": false,
+  "actualCountApiBillingVerified": false,
+  "actualPaymentQuoteReady": false,
+  "releaseVerdict": "held",
+  "document": "docs/AI_QUALITY_V147_REFERENCE_IMPLEMENTATION_20261107.md",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": "2b10affaf7a505cd55d577356f742eb34017e47b00e2162211cd94e0f90c26ca",
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": "9fce5bbb8f8c8e0b7342ff676d3a4ff65f988c230fc6f07e51bf0531e0b977ac",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "a8b39d1156ee5e220b138479b43217e108cea5f5e63bd606831c5ecf72466e4a",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "3d397fdafcf71f2c5bfc932ebca69cdc1750b65a243f5c00c1ecf0e3f8479cb8",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "b9e43d484184fd38197527f74cf549d13cc417f8b78c8a08d2f6099006df5c13",
+    ".taskmaster/scripts/ai-quality-v147-reference-fixture-v4.mjs": "2eee488c7de99ccf04ad6c75722ecad2ba9c09d69e0245b393c4450bc3015ab9",
+    ".taskmaster/scripts/test-ai-quality-v147-reference-v4.mjs": "b8c56957ba4dec979a90b2a8c0cdf62a6a4f49d79d5bd3e51181963d04e10912",
+    ".taskmaster/scripts/test-ai-quality-v147-reference-full-v4.mjs": "e672694c72dcfc81cf24d63eaf65a30068d02920ad3140b7d1c461396e4b57c3"
+  },
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-reference-readiness-draft.json": "34764e89714f20ad46dd7039e5b5535be651ce08ff9e471d9b772faa9c4dbbd8",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3-fixture.mjs": "b5d89c99e0c663c241357a83a6acfbac0ea94fed16b54731b26af4fd98e4aae0",
+    ".taskmaster/scripts/ai-quality-v147-journal-v3.mjs": "78657f4fdfbd9e62b939cc4f4deb73995c9bc526a9f61af6c978f3f2bb6af880",
+    ".taskmaster/scripts/ai-quality-v147-settlement-proof-v3.mjs": "9f7e1a4486a61984e5a7cbb7b54d3a0466c6a6efa01a098380909c251b59ab33",
+    ".taskmaster/scripts/ai-quality-v147-recovery-v3.mjs": "3169cad265a286cb95d1be32000fdc0814778f53357a6ce6fd512e6cdc4e9b75",
+    ".taskmaster/scripts/ai-quality-v147-ai-panel.mjs": "08ade591043fe5ee392dd0b41fd3cba0c2a2ad2039a324a4aa982dc7facc780e",
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6",
+    ".taskmaster/scripts/ai-quality-v147-panel-fixture-v3.mjs": "9faeeb70ef702cf13064eb5768c202b9f24dcbd46613ca6aac66cd26a2a6ffd7",
+    ".taskmaster/scripts/ai-quality-v147-panel-cli-v3.mjs": "3d767258fc3351e9bb541a038ae1a16c9825432dba1778ca851e755052751aae",
+    ".taskmaster/scripts/test-ai-quality-v147-wire-capture-v3.mjs": "86b082120aad5ea0f5c7f0e7583fe123d6c86331ee8b52f4edfd9650dd441278",
+    ".taskmaster/scripts/test-ai-quality-v147-panel-executor-v3.mjs": "236a951bbe16939b9cd379c0221f635098d8ca2cb6fe0f6dc54909747d4784cd",
+    ".taskmaster/scripts/test-ai-quality-v147-worker-panel-v3.mjs": "08b5086b2efcc43f31b56734c8a3fd9fde657b12b56d3b20a060b65076aca723"
+  },
+  "historicalSources": {
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": {
+      "sha256": "5d464fd5f30fdeaa65004cceeead59eb8612af1cde3865b68e71b15bfa619594",
+      "archiveFile": "phase31/management-before/.taskmaster/scripts/ai-quality-v147-wire-v3.mjs",
+      "priorProgressFile": "phase30/progress-final.json",
+      "priorProgressSha256": "93f0c7331b93f73bc5874e0bd5cbaac7b7d4071c82b8c975972c498141514856"
+    },
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": {
+      "sha256": "5f010f902da69e40e36ec7a85838de36abe28b1387dab485e5f0937ea6b99fb5",
+      "archiveFile": "phase31/management-before/.taskmaster/scripts/ai-quality-v147-capture-v3.mjs",
+      "priorProgressFile": "phase30/progress-final.json",
+      "priorProgressSha256": "93f0c7331b93f73bc5874e0bd5cbaac7b7d4071c82b8c975972c498141514856"
+    },
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": {
+      "sha256": "1cec4f2278db03e028cc974035aefcc72f4bb1369d64f860669f02ffc123b2f6",
+      "archiveFile": "phase31/management-before/.taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs",
+      "priorProgressFile": "phase30/progress-final.json",
+      "priorProgressSha256": "93f0c7331b93f73bc5874e0bd5cbaac7b7d4071c82b8c975972c498141514856"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": {
+      "sha256": "f8c6cd176a1d7c30340b9e1ad1179bfbe019c3cceca22c9336592b5cf036caff",
+      "archiveFile": "phase31/management-before/.taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs",
+      "priorProgressFile": "phase30/progress-final.json",
+      "priorProgressSha256": "93f0c7331b93f73bc5874e0bd5cbaac7b7d4071c82b8c975972c498141514856"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": {
+      "sha256": "41a07c3e5316ac12070da44ed3023c0a221e59d386784ee285c356a7cae64681",
+      "archiveFile": "phase31/management-before/.taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs",
+      "priorProgressFile": "phase30/progress-final.json",
+      "priorProgressSha256": "93f0c7331b93f73bc5874e0bd5cbaac7b7d4071c82b8c975972c498141514856"
+    }
+  },
+  "checks": [
+    {
+      "name": "reference-node22-clean",
+      "node": "22",
+      "kind": "reference",
+      "passed": 14,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "reference-node22-clean.log",
+      "sha256": "b72cfcc211c9ad7268365fcea87f3b38dfa22d076737fe1891bd1c472a9b1d3b"
+    },
+    {
+      "name": "wire-capture-node22-qualified",
+      "node": "22",
+      "kind": "wire-capture",
+      "passed": 13,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "wire-capture-node22-qualified.log",
+      "sha256": "df2019b70e301e28dbd0e0807318d77d0b282a03a912e677b641e8aac0616595"
+    },
+    {
+      "name": "executor-node22-qualified",
+      "node": "22",
+      "kind": "legacy-executor",
+      "passed": 10,
+      "skipped": 1,
+      "exitCode": 0,
+      "log": "executor-node22-qualified.log",
+      "sha256": "e34863f80aea870870b521f37b1eaadeef37ac99cdbd0e9c0c7410f2839d79b7"
+    },
+    {
+      "name": "worker-panel-node22-qualified",
+      "node": "22",
+      "kind": "worker",
+      "passed": 12,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "worker-panel-node22-qualified.log",
+      "sha256": "c0cc4fc7edcd46c19d468be85b8d3c9c3e3ac062e3087e5851f93b5ab34df051"
+    },
+    {
+      "name": "reference-node24-clean",
+      "node": "24",
+      "kind": "reference",
+      "passed": 14,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "reference-node24-clean.log",
+      "sha256": "faf2050c8afed0b1f0c12a7bbef040466f0a104b2961a7a37552746c8b013d01"
+    },
+    {
+      "name": "wire-capture-node24-qualified",
+      "node": "24",
+      "kind": "wire-capture",
+      "passed": 13,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "wire-capture-node24-qualified.log",
+      "sha256": "f199ae0d6f8b8912f2b07c0b9174401f7ba0238d5404971f7e47386d8493e0f4"
+    },
+    {
+      "name": "executor-node24-qualified",
+      "node": "24",
+      "kind": "legacy-executor",
+      "passed": 10,
+      "skipped": 1,
+      "exitCode": 0,
+      "log": "executor-node24-qualified.log",
+      "sha256": "17d8e158c3da0e924bdebb0044dcbb870ea5421642b1ba7060b519e17835256f"
+    },
+    {
+      "name": "worker-panel-node24-qualified",
+      "node": "24",
+      "kind": "worker",
+      "passed": 12,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "worker-panel-node24-qualified.log",
+      "sha256": "83b972589808687c30d8b0bb14378555af5d1f133274ed2d9ab93cc58b83355d"
+    },
+    {
+      "name": "reference-full-node22-qualified",
+      "node": "22",
+      "kind": "reference-full",
+      "passed": 180,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "reference-full-node22-qualified.log",
+      "sha256": "6f0ffbf2f6bf80de3187a6af01feedf9129c6005ef8aba09fceebaf2f2bcd4c8"
+    }
+  ],
+  "rawEvidenceFile": "reference-v4-raw-preservation.json",
+  "proofBindings": {
+    "reference-v4-raw-preservation.json": "ec43c42cfe9da020ae435cf50097a5155c14226542992397750010f0dab5dbf1",
+    "qualified-console-review-clean.json": "b6fd280218837b947f13538d5852f4ac94749f2a72e0686e05dc059ed5df4351",
+    "qualified-source-fingerprints-clean.json": "aba34c9cd13da8cd5fb75807e5fa3f369044f557757767aeaefa19e0080e1e06"
+  },
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-links-qualified.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "officialSources": [
+    {
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs#supported-schemas",
+      "searchedAndFetched": true,
+      "actualApiCompatibilityMeasured": false
+    }
+  ],
+  "remaining": [
+    "actualsource/controlqualification/family independence andrisk/claim approval",
+    "actualtokenbounds/counterfees/exactstagequote/newpaidapproval",
+    "livequalification/pilot/confirmation/generalization/learningproxies/operational/release/day1/day7"
+  ]
+}

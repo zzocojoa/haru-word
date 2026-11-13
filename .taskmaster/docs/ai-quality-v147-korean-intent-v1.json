@@ -1,0 +1,63 @@
+{
+  "protocol": "ai-quality-v147-korean-intent-v1",
+  "phase": "phase166",
+  "status": "korean-intent-local-verified",
+  "document": "docs/AI_QUALITY_V147_KOREAN_INTENT_20261112.md",
+  "tasks": [
+    "5.2",
+    "10.2",
+    "15.2"
+  ],
+  "source": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+  "productFiles": 6,
+  "testFiles": 11,
+  "promptVersion": "reference-v9",
+  "validationVersion": "judgment-v7",
+  "publicAiContract": 4,
+  "unitTests": 906,
+  "builtBrowserChecks": 6,
+  "correctionRegressionChecks": 30,
+  "draftRegressionChecks": 40,
+  "requiredForNewWordAiRequest": true,
+  "legacyContextApiCompatible": true,
+  "storedIntentField": "contextNote",
+  "newSqlMigrations": 0,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "productionWrites": 0,
+  "mainDispatchAuthorized": false,
+  "ledgerSha256": "8278c131cdc4df1916fa4260589aa4a60b0137cc215a4dc9bb65acbf5789a99f",
+  "hostingSha256": "b652b2b9c5328afb4172b47ae1512ba64cb121891c95e982ba35eef2d0033f4b",
+  "productSha256": {
+    "app/study/sentence-stage.tsx": "d316b1b8501a2c1d768e9823c045d0137ecc2505b1bfa27215841dc9c4a22e85",
+    "app/sentence-feedback.tsx": "80ba83ad9bb55ea7cf3a4cd9d2d261af8c92957596e0988c225d29894756caf1",
+    "app/feedback-context-input.tsx": "80f0c6019cf2a740e77d42bf33fc7c626083f493a331f6bc08f66be1aa755465",
+    "app/study/use-sentence-feedback.ts": "417d050892fb3ec16fbdb730f153857ad90206273e4702192dc10b9d4a7f1f4d",
+    "lib/feedback-prompts.ts": "df9ac402e1ac60629b0961488dbe284aca55457d43ba2d21fe87554b21b01c1f",
+    "lib/ai-models.ts": "7600c40901e8d5007e959c6893bae37feaf9b54500ad57777152ed93a931c810"
+  },
+  "outputDirectory": "outputs/ai-quality-v147-implementation-20261106/phase166",
+  "checks": {
+    "unitExitCode": 0,
+    "typecheckExitCode": 0,
+    "lintExitCode": 0,
+    "existingLintWarnings": 15,
+    "buildExitCode": 0,
+    "builtBrowserExitCode": 0,
+    "correctionRegressionExitCode": 0,
+    "draftRegressionExitCode": 0
+  },
+  "evidenceSha256": {
+    "test.log": "fe353710864f8098c72339c5faa089c92527a689ed699dbff1d24fa9d5d34bb6",
+    "typecheck-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lint.log": "e6f611db392a2ee24399d39031f1baff732116118b32208f5d1ff2085f4d03f5",
+    "test-tools-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build.log": "99f9cd4e96104b643ffdbb0ac5bfaac6ad64badecf9c6fe70b8dc6b86cbb680f",
+    "browser-evidence.json": "3a382b6e6416f8c1406e5d0ef3dd167137a0a4c3c9c8fe5e0ff50faeaa81e8d8",
+    "feedback-correction-chromium.json": "3e193fde9c5d70eb9a1763dd1fd9ee4136969d116021fef34410cffbb2265dfc",
+    "feedback-correction-webkit.json": "5cc3a9af8f94cf08f7026eed10831da4686db78a8d800f7ba02eeb3259779d0d",
+    "local-draft-qa-chromium.json": "63b0b051346036ffc495f20678b9536052fc6f3ac80e637f5510b273c27a8cf9",
+    "local-draft-qa-webkit.json": "278ef5e07ce682e197a3e094f00cb8b0b3c85ab8dc57dc41dce70afe2123d7e7"
+  }
+}

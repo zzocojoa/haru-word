@@ -1,0 +1,76 @@
+{
+  "protocol": "ai-quality-v147-product-operational-rubric-v1",
+  "version": 1,
+  "status": "development-draft-not-independent-qualification",
+  "scope": "Learner-visible product feedback only. Separate from the seven-dimension reference-record review contract.",
+  "baseContractRubricHash": "7968b7fc2ddbf1649bd57cee1a260316b2db84d2abd08f12db661ef8b1ee229c",
+  "gradeMeanings": {
+    "pass": "The visible product assessment is supported for this dimension. This does not make the original sentence correct or imply another dimension passes.",
+    "fail": "An evidenced error in this dimension of the visible assessment is established. Do not fail it solely because another dimension fails.",
+    "uncertain": "Relevant evidence permits competing interpretations or the correctness of this assessment remains unresolved.",
+    "unavailable": "The visible response or required evidence for this dimension is absent. This is not a successful or failed English judgment."
+  },
+  "dimensions": {
+    "meaning": {
+      "question": "Is the product's original-target-use assessment supported for the requested word/POS/sense or grammar feature?",
+      "rule": "Grade the requested target, including relevant form/agreement for grammar study. Mere presence of a verb or word does not establish correct target use. A target-label mismatch does not itself establish a bad correction or ungrammatical original.",
+      "boundary": "Use uncertainty for unresolved target interpretation. A supported grammar correction can coexist with target-only uncertainty; do not automatically merge those judgments."
+    },
+    "grammar": {
+      "question": "Is the product's assessment of the original sentence's grammar justified?",
+      "rule": "Assess the original grammar label independently of target use, correction equivalence and transport validity. A known malformed form can coexist with uncertainty about the intended time or safe repair.",
+      "boundary": "If the reference explicitly permits needs_work or uncertain for a known form error with unresolved time, do not call one an English error solely to enforce a preferred label policy. Record policy compliance separately."
+    },
+    "correction": {
+      "question": "Is the visible repair justified, minimal and meaning-preserving, or is withholding it responsible?",
+      "rule": "Keep independently natural originals unchanged, including wrong or missing targets. Accept supported equivalent minimal repairs; examples are not exhaustive. Preserve negation, participants, time, quantity, event and speech act.",
+      "boundary": "A grammatical alternative with unresolved equivalence is uncertain rather than automatically ungrammatical or invented. Appropriate withholding and a specific context question can pass. Do not invent an unoffered repair to criticise it."
+    },
+    "explanation": {
+      "question": "Are the learner-visible factual claims, application rules and edit comparisons supported?",
+      "rule": "A correct repair does not excuse a false teaching rule or unsupported explanation. Assess app-authored text as visible product output without attributing it automatically to the model's hidden response. Sources and reference criteria are evidence claims, not oracles.",
+      "boundary": "A URL or asserted reference level alone is not proof. Unsupported visible claims can fail without proving fabricated intent. Do not grade hidden reasoning or reward verbosity, style or confidence."
+    },
+    "abstention": {
+      "question": "Does the product preserve necessary uncertainty while making independently supported judgments?",
+      "rule": "Request the specific missing message, time, quantity, target meaning or relationship when needed. Avoid unsafe invented interpretation or correction. Complete pronouns, commands and reactions do not inherently require named real-world referents.",
+      "boundary": "Known target/form problems can coexist with withheld correction. A product-imposed override is product behaviour, not evidence the underlying model chose to abstain. Unavailable responses are not responsible abstentions."
+    }
+  },
+  "criticalFlags": {
+    "approveBadGrammar": "Evidenced learner-visible approval of known bad original grammar. Target-only disagreement, an alternative allowed label and unavailable output are not enough.",
+    "reverseMeaning": "Evidenced actual meaning reversal in visible product output. Unconfirmed equivalence of an alternative alone is not enough.",
+    "swapRoles": "Evidenced exchange of participants' semantic roles in a visible correction.",
+    "inventedIntent": "Evidenced invented agent, event or speech act in visible output. Raw-model invention withheld by the app is a separate diagnostic, not visible product harm."
+  },
+  "structuralConsistency": {
+    "approveBadGrammar": [
+      "grammar"
+    ],
+    "reverseMeaning": [
+      "meaning",
+      "correction",
+      "explanation",
+      "abstention"
+    ],
+    "swapRoles": [
+      "correction"
+    ],
+    "inventedIntent": [
+      "meaning",
+      "correction",
+      "explanation",
+      "abstention"
+    ]
+  },
+  "boundaries": [
+    "Reference construction's assignment/exposure grades are not product English grades; keep its qualification gates separately.",
+    "Match both main-review and calibration requests to this version; never rescore old captured responses as if they used it.",
+    "Every evidenced critical flag requires at least one listed corresponding dimension to fail; no reverse implication is automatic.",
+    "Four nonself two-model/two-layout votes must be preserved; disagreement or uncertainty is held without majority repair or automatic retry.",
+    "Echoing the policy hash binds a declared version only. It does not establish understanding, qualified references or English truth."
+  ],
+  "independentQualification": false,
+  "englishTruthCertified": false,
+  "liveDispatchAuthorized": false
+}

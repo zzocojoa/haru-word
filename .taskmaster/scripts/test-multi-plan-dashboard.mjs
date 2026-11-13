@@ -8,7 +8,7 @@ import { createDashboardServer } from './serve-openai-dashboard.mjs';
 import { PROJECT_ROOT, buildDashboard } from './openai-dashboard-data.mjs';
 const require=createRequire(import.meta.url),pw=require(process.env.QA_PLAYWRIGHT_PATH||'playwright');
 const NEW='judgment-remediation-2026-11-03',OLD='openai-api-migration-2026-11-03';
-const out=resolve(PROJECT_ROOT,'outputs/judgment-remediation-plan/qa');await mkdir(out,{recursive:true});
+const out=resolve(process.env.QA_OUTPUT_DIR||resolve(PROJECT_ROOT,'outputs/judgment-remediation-plan/qa'));await mkdir(out,{recursive:true});
 const registry=JSON.parse(await readFile(resolve(PROJECT_ROOT,'.taskmaster/docs/dashboard-plans.json'),'utf8'));
 const paths=['.taskmaster/tasks/tasks.json','.taskmaster/docs/dashboard-plans.json',...registry.plans.map(p=>p.manifest)];
 const protectedPaths=[...paths,'.taskmaster/dashboard/dashboard.js','.taskmaster/dashboard/dashboard.css','.taskmaster/dashboard/index.template.html','.taskmaster/scripts/openai-dashboard-data.mjs','.taskmaster/scripts/serve-openai-dashboard.mjs'];

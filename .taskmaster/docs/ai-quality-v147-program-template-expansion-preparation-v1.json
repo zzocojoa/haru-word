@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "stage": "local-finite-program-template-expansion-v1",
+  "recordedAtUtc": "2026-11-07T06:17:38.551375+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "groupsEachNode": 8,
+  "regressionGroupsEachNode": 7,
+  "counts": {
+    "candidateTemplates": 15,
+    "englishTemplates": 12,
+    "excludedUiTemplates": 1,
+    "excludedSqlTemplates": 2,
+    "adjectiveValues": 14,
+    "loopGroups": 5,
+    "generatedOccurrences": 76,
+    "uniqueGeneratedSurfaces": 69,
+    "generatedSurfacesOutside426": 69,
+    "generatedSurfacesOutsideStatic433": 68
+  },
+  "completeForSelectedTwelveTemplateExpressions": true,
+  "sourceExecutionPerformed": false,
+  "allProgramGeneratedInputsEnumerated": false,
+  "allStaticLiteralRolesClassified": false,
+  "completeProjectExposure": false,
+  "structuralFamiliesCertified": false,
+  "modelEvidenceProjectionAllowed": false,
+  "liveFreshnessPolicyChanged": false,
+  "actualEnglishQualityMeasured": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/program-template-expansions-v1.json",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-program-template-expansion-v1.mjs": "5587f6856fa6c074191d657f337e9def08b7d686f1e28017723a3f69a35150f1",
+    ".taskmaster/scripts/test-ai-quality-v147-program-template-expansion-v1.mjs": "394fe761e471f9e889d149e4d45c8ae972b6fe3b8680deccdcb95ebeddf6353b"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/program-template-expansions-v1.json": "79eb3f379c207b6905162692e868650a4bb5899c1af109625ff5a31d44340234"
+  },
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json": "1ab0a8f82d004cc588a1dc7b737c0d007dad58334e5e9d9a0d8be8a7fd56d8c0",
+    "tests/ai-quality-morphology.test.mjs": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+    "tests/balanced-daily.test.mjs": "696c1851545d9092ee1d99b73f639beba4f04aeae219f548d46aee12c10c5bf6",
+    "tests/feedback-requests.test.mjs": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+    "tests/feedback-word-forms.test.mjs": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+    "tests/remediation-judgment.test.mjs": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+    "lib/feedback-manner-adjectives.ts": "825f72b3dc9aad88f6c4240ea434f1e22fc67b9450bb827b8aa0743842251ab3",
+    "data/words.json": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f"
+  },
+  "previousProgramAuditSha256": "1ab0a8f82d004cc588a1dc7b737c0d007dad58334e5e9d9a0d8be8a7fd56d8c0",
+  "existingCorpusFile": ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json",
+  "existingCorpusSha256": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+  "document": "docs/AI_QUALITY_V147_PROGRAM_TEMPLATE_EXPANSIONS_20261107.md",
+  "documentSha256": "58eb92059ecef8f065e8bea83c7639cd80600df6771602a65172c4bc3e2077c4",
+  "checks": [
+    {
+      "name": "templates-node22-first",
+      "log": "templates-node22-first.log",
+      "sha256": "397a6283f9296acd685e0dc49bc55f3db5d0a2b2b19f4890ae369da543086c42",
+      "exitCode": 0
+    },
+    {
+      "name": "templates-node24-first",
+      "log": "templates-node24-first.log",
+      "sha256": "24c24810348c61f90518ccdb475f740112217b2f39a14942c2e0f483be72ff95",
+      "exitCode": 0
+    }
+  ],
+  "regressionChecks": [
+    {
+      "name": "program-node22-regression",
+      "log": "program-node22-regression.log",
+      "sha256": "f6d9d5e8e61a4b181679ee190f133f52defe355424f7327c8d5ceb0b537bcbcf",
+      "exitCode": 0
+    },
+    {
+      "name": "program-node24-regression",
+      "log": "program-node24-regression.log",
+      "sha256": "981359ef2b6536aa1014e100d9caabc8fe359fd6ccb526225ee0f57096c8c7f7",
+      "exitCode": 0
+    }
+  ],
+  "rawEvidenceFile": "template-raw-preservation.json",
+  "rawEvidenceSha256": "2d9c5c0c66a5f92985247318d6538b28670ff86742a2345dad7d8075b47ce9f0",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "protocol": "ai-quality-v147-complete-correction-live-v1",
+  "phase": "phase117",
+  "status": "collected-complete-correction-live",
+  "actualProviderCalls": 3,
+  "actualCountApiCalls": 3,
+  "savedAndReread": 3,
+  "browserChecks": 6,
+  "newDisplayProviderCalls": 0,
+  "taskIds": [
+    "26.2",
+    "34.4"
+  ],
+  "stageUsedUpperMicros": "122753",
+  "beforeUsedUpperMicros": "33229713",
+  "beforeAvailableMicros": "1770287",
+  "additionalUsedUpperMicros": "33352466",
+  "additionalAvailableMicros": "1647534",
+  "reservedMicros": "0",
+  "pilotGenerationsCompleted": 0,
+  "pilotReviewsCompleted": 0,
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "planHash": "5dfdb2b6c76f30aeb0b528c182393927deabb015c49c91d8389b8ad35ffbdc19",
+  "terminalSha256": "45b67e729a669db892fab114401bdb1c58d11ec0026fa37c4cfc4f5112827c2c",
+  "ledgerSha256": "a85688c3b527ea516c6a7e4305a5eebf3a466021a342bef5286fc3cc857eca20",
+  "scope": "docs/AI_QUALITY_V147_COMPLETE_CORRECTION_LIVE_SCOPE_20261109.md",
+  "report": "docs/AI_QUALITY_V147_COMPLETE_CORRECTION_LIVE_RESULT_20261109.md"
+}

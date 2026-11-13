@@ -1,0 +1,39 @@
+{
+  "protocol": "ai-quality-v147-pilot-reference-admission-audit-v1",
+  "candidateFreezeSha256": "87babecf62e8920dd54861c805675dc07d1ea2681778bc8a3aa12d118b39f02e",
+  "draftSha256": "79da4613985f951c9957209c4bdc7a0bf4ec7b763273d3a52f680f83f48c1347",
+  "terminalSha256": "aa3596ab3071edebd1072eb520e90d26a70ab6cfde36357f7991e127b22015e8",
+  "cases": 60,
+  "generationBodiesReadBack": 360,
+  "knownSurfaceHashes": 953,
+  "exactSurfaceCollisions": 0,
+  "strata": {
+    "word.needsCorrection": 10,
+    "word.insufficientContext": 10,
+    "grammar.normal": 10,
+    "grammar.needsCorrection": 10,
+    "grammar.insufficientContext": 10,
+    "word.normal": 10
+  },
+  "pilotLanguageEvidenceCandidates": 3,
+  "independentConfirmatoryFamiliesQualified": 0,
+  "referencesQualified": 0,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "phase": "phase130",
+  "tasks": [
+    "24.2",
+    "34.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_PILOT_REFERENCE_ADMISSION_AUDIT_20261109.md",
+  "longScaffoldSizes": [
+    6,
+    6
+  ],
+  "evidenceSha256": {
+    "admission-audit.json": "be296c1978aa72edf5b9551e3d2bd3dcf5015b824db051c0283a1930258429c5",
+    "audit-reference-admission.mjs": "30556052610d86950892d2dd747ffc3016d166e8647d6ea387aa464564aa6361",
+    "audit.log": "3974535025477bba71df7f3ae1ac9f74be551f69e0a3b132873406846fc5e269"
+  }
+}

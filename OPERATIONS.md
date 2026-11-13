@@ -1,3 +1,17 @@
+## 2026-11-13 현재 · v148 게시·T38 운영 확인
+
+현재 운영 버전은 v148이다. 한국어 의도와 영어 답안을 함께 받아 AI가 한 번 판단하고 완성 교정문을 표시·저장한다. 단어·문법 × Sol/Terra/Astra 6/6회 정상 로그인 운영 UI와 저장 후 새로고침 재조회를 확인했다. 상세 범위·예산·한계는 [운영 확인 보고서](docs/AI_QUALITY_V148_OPERATING_VERIFICATION_20261113.md)와 [게시·복구 기록](docs/AI_QUALITY_V148_FEATURE_RELEASE_20261113.md)을 따른다.
+
+추가 US$35 내 조건부 잔액은 US$3.955111이며 최종 청구액은 미확인이다. 기존 US$5 원장은 닫힌 상태다. T39의 11월14일·20일 점검과 1% 위험·학습효과 입증은 미완료다. 아래 v147 및 이전의 ‘현재’ 표시는 각 기록 당시 상태다.
+
+<!-- pr58-v147-rollout-current -->
+## 2026-11-06 · PR58 병합·v147 운영 게시 완료
+
+사용자 `다음 단계 진행`으로 [PR58](https://github.com/zzocojoa/haru-word/pull/58)을 main **7ce85ed49465b352e8304a741c8505124f86deb8**로 병합하고, 기존 [하루단어](https://wordgrain-oxford-study.hoihou-o.chatgpt.site)에 **v147**을 00:38:22 KST 게시했다. Sites 소스 **04b552f20f3504649a7ddfeca4449b0ab4f5b50b**는 이전cd475 이력을 잇고 검증 SOURCE5dd/main과 전체 Git tree가 같다. SOURCE의 기존 브랜치·HEAD·clean 상태와 ROOT 브랜치·제품을 유지한다. [게시·복구 보고서](docs/PR58_V147_ROLLOUT_20261106.md), [출시 JSON](docs/releases/2026-11-06-pr58-v147-rollout.json)을 따른다.
+
+main CI Node22/24 각852/852, 문법자료·타입·린트(기존15경고)·빌드 성공이다. 공개 GET 홈200·JS/CSS14개+출처1개 해시 일치·익명state401/no-store·시계200/no-store를 확인했다. 환경revision77/14항목·public 접근revision6·자동화0·Site/DB/R2·기존SQL7개를 유지했다. 추가 유료API0·운영 학습 행/QA 쓰기0, 닫힌 실제평가51파일·원점수각29/30·예산과 Task Master4태그/대시보드 이력을 보존한다.90/90은 기존 저장응답 오프라인 수용 결과이며 새 라이브 점수가 아니다. 운영 인증 학습·실제 iPhone/VoiceOver·새 AI 품질은 미검증이다. v147의 수정 중 완료 수업 stage0–5/reader5와 judgment-v6 DB 보호를 유지하는 호환 복구가 필요하며 v146을 무조건 재게시하지 않는다. 아래 미병합·v146·게시 전 표시는 당시 이력이다.
+<!-- /pr58-v147-rollout-current -->
+
 # 하루단어 운영 안내
 
 <!-- integration-remediation-current -->

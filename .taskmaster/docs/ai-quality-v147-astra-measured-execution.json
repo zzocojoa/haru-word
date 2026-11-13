@@ -1,0 +1,126 @@
+{
+  "protocol": "ai-quality-v147-astra-exact-input-continuation-v1",
+  "scope": "public-g12-n04-diagnostic-only",
+  "campaignCapMicros": "5000000",
+  "priorFourDebitMicros": "59060",
+  "campaignUpperMicros": "843789",
+  "remainingMicros": "4156211",
+  "actualProviderCalls": 6,
+  "actualCountApiCalls": 2,
+  "actualKeyReads": 3,
+  "models": 3,
+  "responses": 6,
+  "actualInputTokensAstra": [
+    1391,
+    1391
+  ],
+  "astraGenerationMaximumMicros": "481162",
+  "astraUsageBasedConservativeMicros": "126247",
+  "countAllowanceRetainedMicros": "481162",
+  "firstAstraHeldMaximumMicros": "240581",
+  "lastAstraKnownUsageMicros": "62986",
+  "unsupportedGoldEligibilityClaims": 6,
+  "explanationClaimEvidenceHeld": 2,
+  "priorResponsesResent": 0,
+  "priorLedgersReopened": false,
+  "countRequestsAssumedFree": false,
+  "countTariffExplicitlyVerified": false,
+  "invoiceVerified": false,
+  "englishQualityQualified": false,
+  "releaseVerdict": "held",
+  "document": "docs/AI_QUALITY_V147_ASTRA_ACTUAL_TOKENS_20261107.md",
+  "documentSha256": "d366d1ba083e62226b4b38cbee19c3217c8c790e17ef503dbf1fd3a73dec16e7",
+  "sourceFilesSha256": {
+    ".taskmaster/scripts/ai-quality-v147-astra-measured-v1.mjs": "cda5afcdb569b1564da769f6ea768211f35c279293c3ef68246778714597e39e",
+    ".taskmaster/scripts/test-ai-quality-v147-astra-measured-v1.mjs": "a8f7c514988cca286c6c8821b72b144cd5ea7f64abc387d6c980171ef66830b8",
+    ".taskmaster/scripts/ai-quality-v147-diagnostic-evidence-v1.mjs": "b3bf4dc5d927c4fd32cf46bf74bfcf9eb2f7ed5087e4d8b07daf63770d7dded9",
+    ".taskmaster/scripts/ai-quality-v147-astra-last-slot-v1.mjs": "796fdc4caa113f356b9a7b3e4c2992f24b3abe38b837e58d46f94b53b3dcb4ab",
+    ".taskmaster/scripts/test-ai-quality-v147-astra-last-slot-v1.mjs": "bcfd5e0559d0ede084a218011bb3a92a4ce91ee9c35b093c2d16a5d46c608fec"
+  },
+  "checks": [
+    {
+      "name": "measured-node24-final",
+      "exitCode": 0,
+      "log": "measured-node24-final.log",
+      "sha256": "7c271af25937b6999c7b38793c3dd84e0de58b90de5fd7e63adc97ac8b0a3cd5",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-astra-measured-v1.mjs"
+      ]
+    },
+    {
+      "name": "measured-node22-final",
+      "exitCode": 0,
+      "log": "measured-node22-final.log",
+      "sha256": "0620dc41dacbc1690bf50ae19ed46cf0b95f9068c18e8fdbb2371eb4eb9ff025",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-astra-measured-v1.mjs"
+      ]
+    },
+    {
+      "name": "v2-node24-regression",
+      "exitCode": 0,
+      "log": "v2-node24-regression.log",
+      "sha256": "702053800ba96fc2439b4962f963af3c1484ae5ea1b225efbca7ac24ecb1f5e3",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-diagnostic-envelope-v2.mjs"
+      ]
+    },
+    {
+      "name": "v2-node22-regression",
+      "exitCode": 0,
+      "log": "v2-node22-regression.log",
+      "sha256": "ba6ca1e9d8ade09b3ca2313965b754dee5e4079febfb3afeb3f2d1ee641224cd",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-diagnostic-envelope-v2.mjs"
+      ]
+    }
+  ],
+  "lastSlotChecks": [
+    {
+      "name": "last-slot-node24-final",
+      "exitCode": 0,
+      "log": "last-slot-node24-final.log",
+      "sha256": "7957a8310d853965f51ab7e7fa27848be3a6bbc2c12e28b376a8e11a894c2ee9",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-astra-last-slot-v1.mjs"
+      ]
+    },
+    {
+      "name": "last-slot-node22-final",
+      "exitCode": 0,
+      "log": "last-slot-node22-final.log",
+      "sha256": "a2d5a06f309d3b57d7f52396df5ecfe70a5c1a2b3bfa350395c0d5f1040a0e3b",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-astra-last-slot-v1.mjs"
+      ]
+    }
+  ],
+  "firstRuntimeRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-astra-measured-runtime-20261107",
+  "lastRuntimeRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-astra-final-slot-runtime-20261107",
+  "analysisFile": "phase48/all-six-actual-diagnostic-analysis.json",
+  "analysisSha256": "285db465e21a3c1a61a8bbfc888002605afc6d04197852008bf9fc9acc122e06",
+  "independentCostFile": "phase48/independent-actual-cost-comparison.json",
+  "independentCostSha256": "68120fb1f4c31dd50af3ad2be8e4815e5fc40b4fb935004979aff5ca725911ba",
+  "firstResultFile": "phase48/actual-astra-measured-result.json",
+  "firstResultSha256": "5f91fce34008b32df0729c63bb54d644d51001d48643c6af110aa03749a01ca4",
+  "lastResultFile": "phase48/actual-last-astra-result.json",
+  "lastResultSha256": "595904556c060e80d67d401f973ad90b1c456974f1c7e2efec5db3490c38a514",
+  "authorizationFile": "phase48/user-actual-token-authorization.json",
+  "authorizationSha256": "58ab0f6633c9e2a52fd3aba11f7b7b21ee148f003b9d38842cad800315b75c10",
+  "factsFile": "phase48/official-count-and-astra-facts.json",
+  "factsSha256": "fb9a92425f007a6a124d6bfbf303abf7fe43816ba46a5db040021e782836d533",
+  "stoppedBindingFile": "phase48/stopped-astra-stage-binding.json",
+  "stoppedBindingSha256": "e4e034ca841cc4c91e542526115758f126af6470fed6e36be3b742d8ba0158af"
+}

@@ -1,0 +1,82 @@
+{
+  "protocol": "ai-quality-v147-lesson-criteria-alignment-v1",
+  "phase": "phase215",
+  "status": "legacy-lesson-instruction-conflicts-fixed-local-checks-passed-live-evaluation-held",
+  "parentTaskId": 24,
+  "activeSubtaskId": "24.1",
+  "supportingSubtaskIds": [
+    "24.3",
+    "34.4"
+  ],
+  "candidateSource": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-context-candidate-20261113",
+  "promptVersion": "reference-v12",
+  "validationVersion": "judgment-v9",
+  "candidateSourceStateFile": "outputs/ai-quality-v147-implementation-20261106/phase215/candidate-state.json",
+  "decisionContractFile": ".taskmaster/docs/ai-quality-v147-decision-contract-v9.json",
+  "languageReadbackFile": "outputs/ai-quality-v147-implementation-20261106/phase215/existing-language-readback.json",
+  "changedRuntimeCriteria": [
+    "verb",
+    "conjunction"
+  ],
+  "runtimeProblem": "Two lesson-level criteria contradicted the current independent-original-grammar policy: conjunction forced both axes uncertain; verb forced grammar uncertain when correction time was missing.",
+  "fullUnitPassed": 916,
+  "fullUnitFailed": 0,
+  "fullUnitExitCode": 0,
+  "typecheckExitCode": 0,
+  "lintExitCode": 0,
+  "lintWarnings": 15,
+  "buildExitCode": 0,
+  "adapterRegressionScenarios": 3,
+  "currentSourceModelQualityMeasured": false,
+  "historicalLiveEvidenceReusedAsCurrentQuality": false,
+  "oldScoresChanged": false,
+  "oldDataAndFeedbackReadable": true,
+  "publicAiContract": 4,
+  "databaseMigrationRequired": false,
+  "risk": "Changes judgments requested for incomplete conjunctions and visible verb defects; actual model behavior for this new source is not yet measured.",
+  "rollbackSourceStateFile": "outputs/ai-quality-v147-implementation-20261106/phase213/candidate-state.json",
+  "observation": "Prompt identity reference-v12 prevents prior-policy feedback from being selected as a current cached result; stored records remain readable. No automatic provider call is introduced.",
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "newSpendUpperMicros": "0",
+  "conditionalRemainingMicros": "3392927",
+  "currentPaidFundingFile": ".taskmaster/docs/ai-quality-v147-account-cost-reconciliation-v1.json",
+  "qualifiedReferences": 0,
+  "pilotGenerationsCompleted": 0,
+  "pilotGradesCompleted": 0,
+  "mainDispatchAuthorized": false,
+  "languageReadbackSummary": {
+    "cases": 60,
+    "rawSeats": 120,
+    "historicalAvailableSeats": 116,
+    "prospectiveAvailableSeats": 120,
+    "fullSentenceProjectionsVerified": 2,
+    "byStatus": {
+      "paired-proposal-compatible": 48,
+      "held-label-difference": 3,
+      "held-source": 9
+    }
+  },
+  "remaining": [
+    "Current candidate is not frozen; the latest 60 inputs remain development evidence, not a newly qualified fresh cohort.",
+    "Label differences, source support and structural-family/freshness qualification remain separate holds.",
+    "No new actual model evaluation or production deployment was performed."
+  ],
+  "evidenceSha256": {
+    "outputs/ai-quality-v147-implementation-20261106/phase215/inspect-existing-language.mjs": "1555dde8d83e55c0be9bfa8b8e595eda662029e44fa0c5e984cdb9cf8d0548ea",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/existing-language-readback.json": "65fb1dd08d0ae068e64fdfd4e9cf8d0b0d83dd2d4d3ae98ddae501f2d7bfa382",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/candidate-state.json": "8f11013fc01b20af7d09c0884738fdaf70e3af7c8c6e201e848230eb3640212c",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/candidate.patch": "44213b0d3f02cec06d29ce7e40fd545de8aaa8c23eb31a981f1f2895cf5d47e8",
+    ".taskmaster/docs/ai-quality-v147-decision-contract-v9.json": "f5ab505fa68d1c562d4cd5ccaee50e71f645ae29ff40111db1a4a57021613108",
+    ".taskmaster/docs/ai-quality-v147-account-cost-reconciliation-v1.json": "d4418c4d263209d63adc75575165506ae9248e5a92298be26f0a36b8efd7c995",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/full-unit.log": "c225cc184b57381d46de76d73a9e833280b458dd5ba1866ede48bf09bd87acb3",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/full-unit-result.json": "618f8bf17693531ea97e02771321b52f910b3e9caf1b0a68c4baf8fc1a8f753d",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/typecheck-result.json": "c054c11b3d8a1660cc483aa8cda1c94d16500040ea4f02ed8a36a0a2a912d750",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/lint.log": "deed6ae33529d047a24719c0d8efedf28ee06c5b7e0b3c29c44e544e292243aa",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/lint-result.json": "df3d971e45fb83d97b3c90ee7103e7ceba509da841ea33e4e0e8d56e3cacc450",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/build.log": "85a57d28674060aefd0c4757e94ef6ee52448180ad4b0f6c5ee28a975080e4c1",
+    "outputs/ai-quality-v147-implementation-20261106/phase215/build-result.json": "1f6e9f2f193297439b90075a13e9ad3871e6cb40ac62f27d2fbe1e86365c15d3"
+  }
+}

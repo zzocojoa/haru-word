@@ -1,0 +1,33 @@
+{
+  "protocol": "ai-quality-v147-frozen-grammar-protection-v1",
+  "candidateFreezeSha256": "58af6da9c104bcd4383d324c410f387695f22b022fdc5d8815e19d7801639d17",
+  "browserChecks": 4,
+  "countedExplanationChecks": 2,
+  "firstAnswerProtectionChecks": 4,
+  "interceptedProviderRequests": 2,
+  "workerStopped": true,
+  "actualProviderCalls": 0,
+  "productionWrites": 0,
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "phase": "phase149",
+  "tasks": [
+    "23.1",
+    "23.2",
+    "23.3"
+  ],
+  "document": "docs/AI_QUALITY_V147_FROZEN_GRAMMAR_PROTECTION_20261109.md",
+  "node24TestsPassed": 899,
+  "grammarContentVerified": true,
+  "lintWarnings": 15,
+  "directBrowserModeBlocked": true,
+  "browserTestSha256": "6f5540176e803555df8c21c17b0a51df16e7470e75856ae4cff734e1f8a841aa",
+  "evidenceSha256": {
+    "verify-grammar-correction.mjs": "47634a9348fee380729f23924359b28334b67fc941976d617392c51875527650",
+    "grammar-protection.json": "113838f0f2a0f95b453f9d4823323575dd6506a4318ed9462a43dd0067d701aa",
+    "node24-test.log": "e9d82ca14d212a1761cf6f0671b9e41d76e12f57eb4e5efb595ee3c4e4e2e4e5",
+    "grammar-review.log": "fd8d23311e1a50d708a0dd36db40c5f40bbd95e121142abe9f16d6e06d474a01",
+    "lint.log": "35bdb5b5e8ec9033f080396ffe6d229a4609391a38112660c989e99695530240",
+    "direct-mode-block.log": "c9814640dad07df95130f64f7624a412f967fc1bcee7d410a31753ca31471b40",
+    "browser.log": "4ea4b27dee745ea04be7478eb8d87119724bcf63e2134815a63275070824438e"
+  }
+}

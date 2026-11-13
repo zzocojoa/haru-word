@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "stage": "local-program-static-literal-candidate-audit-v1",
+  "recordedAtUtc": "2026-11-07T05:59:52.324092+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "groupsEachNode": 7,
+  "counts": {
+    "files": 123,
+    "staticStringsVisited": 12596,
+    "templateExpressionsVisited": 163,
+    "candidateLiteralOccurrences": 629,
+    "uniqueCandidateSurfaces": 433,
+    "candidateSurfacesOutsideSelected426": 399,
+    "unexpandedCandidateTemplates": 15
+  },
+  "completeProjectExposure": false,
+  "allActualInputsIdentified": false,
+  "modelEvidenceProjectionAllowed": false,
+  "liveFreshnessPolicyChanged": false,
+  "actualEnglishQualityMeasured": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-program-exposure-audit-v1.mjs": "509fc0016e7dd209d304fbae789afe8d04e8e7585af3f47947a80a1073029057",
+    ".taskmaster/scripts/test-ai-quality-v147-program-exposure-audit-v1.mjs": "44ed7e7bd7e38dae476168678c3768f794d6d1068b4dccd6dc3d7fba58a3decf"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json": "1ab0a8f82d004cc588a1dc7b737c0d007dad58334e5e9d9a0d8be8a7fd56d8c0"
+  },
+  "baselineCoverageFile": "phase36/source-coverage-audit.json",
+  "baselineCoverageSha256": "2528492a922f7fcacfc69da808768ad84b79ea789ac21444f1811631e8bd74a1",
+  "existingCorpusFile": ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json",
+  "existingCorpusSha256": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+  "typescriptParserSha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675",
+  "typescriptPackageSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6",
+  "document": "docs/AI_QUALITY_V147_PROGRAM_EXPOSURE_AUDIT_20261107.md",
+  "documentSha256": "19ee4f12ed4dfaebd798138cabcb9ae050f31291950e7be60ce2831395b3360d",
+  "checks": [
+    {
+      "name": "program-node22-first",
+      "log": "program-node22-first.log",
+      "sha256": "d8b6bc5cc638dac65cc1909601451232c04e2cf8a9525dd4c00669162e1fbf1c",
+      "exitCode": 0
+    },
+    {
+      "name": "program-node24-first",
+      "log": "program-node24-first.log",
+      "sha256": "3603b7818804b80fc99ca0346a9fdd0a3add11412dbc830babe11825bf6cb71d",
+      "exitCode": 0
+    }
+  ],
+  "rawEvidenceFile": "program-audit-raw-preservation.json",
+  "rawEvidenceSha256": "b6a7e033de8dad1d55435e35922e884a3477ab9e7f97dd0d52c62b85259bfdd0",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

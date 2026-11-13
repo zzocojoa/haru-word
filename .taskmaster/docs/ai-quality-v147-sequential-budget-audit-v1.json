@@ -1,0 +1,132 @@
+{
+  "protocol": "ai-quality-v147-sequential-budget-audit-v1",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "availableMicros": 1152100,
+  "countAllowanceMicrosPerRequest": 35000,
+  "countFeeEstablished": false,
+  "observedCalibrationCalls": 72,
+  "unchangedCalibrationCountBodies": 18,
+  "changedCalibrationCountBodies": 54,
+  "fullCalibrationCountAllowanceMicros": 2520000,
+  "changedCalibrationCountAllowanceMicros": 1890000,
+  "changedCalibrationAllowanceShortfallMicros": 737900,
+  "fullPilotCountAllowanceMicros": 63000000,
+  "fullPilotAllowanceShortfallMicros": 61847900,
+  "onePilotCaseCountAllowanceMicros": 1050000,
+  "onePilotCaseModelRoomMicros": 102100,
+  "historicalLow24ReviewProxyModelMicros": 231010,
+  "historical72SerialSimulation": {
+    "complete": 17,
+    "availableMicros": 190695,
+    "nextReserveMicros": 205225,
+    "nextShortfallMicros": 14530
+  },
+  "historical72SerialZeroAllowanceSimulation": {
+    "complete": 72,
+    "availableMicros": 183712,
+    "nextReserveMicros": null,
+    "nextShortfallMicros": 0
+  },
+  "historical72SerialMaxUniformAllowanceMicros": 649,
+  "historicalCalibrationModelUpperMicros": 968388,
+  "historicalObservedBands": {
+    "gpt-6.1-sol": {
+      "inputTokens": [
+        6138,
+        6654
+      ],
+      "outputTokens": [
+        191,
+        359
+      ],
+      "observedModelUpperMicros": [
+        3345,
+        20126
+      ],
+      "fullSlotReserveMicros": [
+        67365,
+        69139
+      ]
+    },
+    "gpt-6.1-terra": {
+      "inputTokens": [
+        6138,
+        6654
+      ],
+      "outputTokens": [
+        189,
+        304
+      ],
+      "observedModelUpperMicros": [
+        1673,
+        10019
+      ],
+      "fullSlotReserveMicros": [
+        51183,
+        52070
+      ]
+    },
+    "gpt-6-astra": {
+      "inputTokens": [
+        6236,
+        6752
+      ],
+      "outputTokens": [
+        190,
+        326
+      ],
+      "observedModelUpperMicros": [
+        20099,
+        101976
+      ],
+      "fullSlotReserveMicros": [
+        198502,
+        207370
+      ]
+    }
+  },
+  "sourceFollowupReserveMicros": 97209,
+  "availableAfterSourceFollowupMaximumMicros": 1054891,
+  "sourceFollowupApproved": false,
+  "currentChangedInputTokensMeasured": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "mainDispatchAuthorized": false,
+  "officialSources": [
+    "https://developers.openai.com/api/docs/pricing",
+    "https://developers.openai.com/api/docs/guides/token-counting"
+  ],
+  "standardRatesInputCachedWriteOutput": {
+    "gpt-6.1-sol": [
+      "2",
+      "0.10",
+      "2.50",
+      "10"
+    ],
+    "gpt-6.1-terra": [
+      "1",
+      "0.05",
+      "1.25",
+      "5"
+    ],
+    "gpt-6-astra": [
+      "10",
+      "1",
+      "12.50",
+      "50"
+    ]
+  },
+  "phase": "phase145",
+  "tasks": [
+    "34.3",
+    "25.1"
+  ],
+  "document": "docs/AI_QUALITY_V147_SEQUENTIAL_BUDGET_20261109.md",
+  "evidenceSha256": {
+    "audit-sequential-budget.py": "1f7ec41d42fc0bcc4827a1ea6716db9360bb9f0cd6595e7232a206f517757f7e",
+    "verify-sequential-budget.mjs": "e66323ffbdf31f10abbc12173bcf93526ce36186ac38184be1308c738c21c4d6",
+    "sequential-budget-audit.json": "5a9a53033ad4a3c92d88d7087410a83d62c93a484c05c9d14fe0686166cb654b",
+    "audit.log": "2caec7e044611888ab98d9d4b0a061c34abe3fda8f7b88942f9035a0ebbea3bd",
+    "independent.log": "d214cec36a9151448465ee485e1590efa87c44cd7eb4d88671578dd0f4739403"
+  }
+}

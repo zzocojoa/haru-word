@@ -1,0 +1,699 @@
+{
+  "protocol": "ai-quality-v147-selected-sample-planning-v1",
+  "recordedAtUtc": "2026-11-08T14:26:38.829295+00:00",
+  "status": "selected-risk-sensitivity-and-fixed60-staging-proposal;not-final-sample-or-dispatch",
+  "document": "docs/AI_QUALITY_V147_SELECTED_SAMPLE_STAGING_20261108.md",
+  "documentSha256": "90bc2965906c213b82b9b1e9b4f619323b21d424d73818e8186d06a99ff4c964",
+  "riskAuthorizationFile": ".taskmaster/docs/ai-quality-v147-risk-target-authorization-v1.json",
+  "ownerCriticalRiskApproved": true,
+  "selectedCriticalRisk": "0.01",
+  "minimumCriticalFamiliesPerStratum": 770,
+  "minimumCriticalTotalFamilies": 4620,
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-paired-power-v1.mjs": "d9d04e6723abc35bf3a07990c3ccace51492ce0b13c32a9f371a7fec336aeec2",
+    ".taskmaster/scripts/ai-quality-v147-risk-design.mjs": "57a161dd456684e3b4b7c743ebbcb447b61f70a99e75fd640a57fb524979d9c6",
+    ".taskmaster/scripts/ai-quality-v147-report.mjs": "dc2645e908a8b3dc2db0f01788d468ddc56b4fe959b7105e23d545160f0d0bad",
+    ".taskmaster/scripts/ai-quality-v147-family-pairs-v1.mjs": "12c58ad794746b77e166d30bd1ee471e10ab113a81a0bd11da3950c85351c6e3",
+    ".taskmaster/docs/ai-quality-v147-risk-target-authorization-v1.json": "6e6b3dc8c71564b037529dfab07832fd8e00346b02b723a2453576487c6b382e",
+    ".taskmaster/docs/ai-quality-v147-ai-only-evaluation-proposal.json": "367b64fc99ade670130a545edd039490824b05d192a833d37654368af32d5032",
+    "lib/provider-feedback-contract.ts": "8eaed13bad4a0064df451c09996d0ff649c65e07bd4e3f5800e74c6a581d2d06",
+    "lib/openai-feedback.ts": "81c5c9f797a61dd46fce8603a01bffe4d0c00998522d32955666443d68c708b4"
+  },
+  "planningInputs": {
+    "nValues": [
+      770,
+      1543,
+      3072,
+      4096
+    ],
+    "familywiseConfidence": 0.95,
+    "boundCount": 114,
+    "minimumImprovement": 0,
+    "planningAlternativeDifference": 0.05,
+    "proposedTargetPower": 0.8,
+    "scenarios": [
+      {
+        "id": "gain5_loss0",
+        "probabilities": {
+          "gain": 0.05,
+          "loss": 0,
+          "tie": 0.95,
+          "unavailable": 0
+        }
+      },
+      {
+        "id": "gain7_loss2",
+        "probabilities": {
+          "gain": 0.07,
+          "loss": 0.02,
+          "tie": 0.91,
+          "unavailable": 0
+        }
+      },
+      {
+        "id": "gain10_loss5",
+        "probabilities": {
+          "gain": 0.1,
+          "loss": 0.05,
+          "tie": 0.85,
+          "unavailable": 0
+        }
+      },
+      {
+        "id": "gain15_loss10",
+        "probabilities": {
+          "gain": 0.15,
+          "loss": 0.1,
+          "tie": 0.75,
+          "unavailable": 0
+        }
+      },
+      {
+        "id": "gain10_loss5_missing0_1",
+        "probabilities": {
+          "gain": 0.0999,
+          "loss": 0.04995,
+          "tie": 0.84915,
+          "unavailable": 0.001
+        }
+      }
+    ],
+    "probabilitiesEstimatedFromPilot": false,
+    "parametersApprovedBeyondRiskTarget": false,
+    "finalSampleSelected": false
+  },
+  "independentPowerFile": "phase81/python-power.json",
+  "independentPowerSha256": "cadb75708be972361f33bfaed074b1acb46323340b55932f99ef3d7cbbc1f6ca",
+  "nativePowerFile": "phase81/node-risk770.json",
+  "nativePowerSha256": "f9074a9e49144f970abe6e2f825bdf108ff12b4031b03a7d5d0ce8eef63e588c",
+  "maximumPowerDifference": 4.440892098500626e-16,
+  "staging": {
+    "protocol": "ai-quality-v147-selected-risk-staging-proposal-v1",
+    "riskAuthorizationFile": ".taskmaster/docs/ai-quality-v147-risk-target-authorization-v1.json",
+    "riskAuthorizationSha256": "6e6b3dc8c71564b037529dfab07832fd8e00346b02b723a2453576487c6b382e",
+    "pilotFullDenominator": 60,
+    "slots": [
+      {
+        "familyId": "pilot-word-needsCorrection-01",
+        "stratum": "word.needsCorrection",
+        "slot": 1,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-01",
+        "stratum": "word.insufficientContext",
+        "slot": 1,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-01",
+        "stratum": "grammar.normal",
+        "slot": 1,
+        "lesson": "noun",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-01",
+        "stratum": "grammar.needsCorrection",
+        "slot": 1,
+        "lesson": "noun",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-01",
+        "stratum": "grammar.insufficientContext",
+        "slot": 1,
+        "lesson": "verb",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-01",
+        "stratum": "word.normal",
+        "slot": 1,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-02",
+        "stratum": "grammar.insufficientContext",
+        "slot": 2,
+        "lesson": "pronoun",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-02",
+        "stratum": "word.insufficientContext",
+        "slot": 2,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-02",
+        "stratum": "grammar.needsCorrection",
+        "slot": 2,
+        "lesson": "verb",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-02",
+        "stratum": "word.needsCorrection",
+        "slot": 2,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-02",
+        "stratum": "word.normal",
+        "slot": 2,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-02",
+        "stratum": "grammar.normal",
+        "slot": 2,
+        "lesson": "pronoun",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-03",
+        "stratum": "word.normal",
+        "slot": 3,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-03",
+        "stratum": "grammar.normal",
+        "slot": 3,
+        "lesson": "adjective",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-03",
+        "stratum": "word.needsCorrection",
+        "slot": 3,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-03",
+        "stratum": "grammar.needsCorrection",
+        "slot": 3,
+        "lesson": "adjective",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-03",
+        "stratum": "word.insufficientContext",
+        "slot": 3,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-03",
+        "stratum": "grammar.insufficientContext",
+        "slot": 3,
+        "lesson": "adverb",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-04",
+        "stratum": "word.needsCorrection",
+        "slot": 4,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-04",
+        "stratum": "word.insufficientContext",
+        "slot": 4,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-04",
+        "stratum": "grammar.needsCorrection",
+        "slot": 4,
+        "lesson": "adverb",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-04",
+        "stratum": "grammar.insufficientContext",
+        "slot": 4,
+        "lesson": "determiner",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-04",
+        "stratum": "word.normal",
+        "slot": 4,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-04",
+        "stratum": "grammar.normal",
+        "slot": 4,
+        "lesson": "determiner",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-05",
+        "stratum": "grammar.insufficientContext",
+        "slot": 5,
+        "lesson": "definite-article",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-05",
+        "stratum": "word.needsCorrection",
+        "slot": 5,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-05",
+        "stratum": "grammar.normal",
+        "slot": 5,
+        "lesson": "indefinite-article",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-05",
+        "stratum": "grammar.needsCorrection",
+        "slot": 5,
+        "lesson": "indefinite-article",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-05",
+        "stratum": "word.normal",
+        "slot": 5,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-05",
+        "stratum": "word.insufficientContext",
+        "slot": 5,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-06",
+        "stratum": "grammar.insufficientContext",
+        "slot": 6,
+        "lesson": "number",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-06",
+        "stratum": "grammar.normal",
+        "slot": 6,
+        "lesson": "number",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-06",
+        "stratum": "word.needsCorrection",
+        "slot": 6,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-06",
+        "stratum": "grammar.needsCorrection",
+        "slot": 6,
+        "lesson": "definite-article",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-06",
+        "stratum": "word.normal",
+        "slot": 6,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-06",
+        "stratum": "word.insufficientContext",
+        "slot": 6,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-07",
+        "stratum": "word.normal",
+        "slot": 7,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-07",
+        "stratum": "grammar.insufficientContext",
+        "slot": 7,
+        "lesson": "conjunction",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-07",
+        "stratum": "grammar.needsCorrection",
+        "slot": 7,
+        "lesson": "preposition",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-07",
+        "stratum": "word.needsCorrection",
+        "slot": 7,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-07",
+        "stratum": "grammar.normal",
+        "slot": 7,
+        "lesson": "preposition",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-07",
+        "stratum": "word.insufficientContext",
+        "slot": 7,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-08",
+        "stratum": "word.insufficientContext",
+        "slot": 8,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-08",
+        "stratum": "grammar.normal",
+        "slot": 8,
+        "lesson": "auxiliary",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-08",
+        "stratum": "word.normal",
+        "slot": 8,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-08",
+        "stratum": "word.needsCorrection",
+        "slot": 8,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-08",
+        "stratum": "grammar.insufficientContext",
+        "slot": 8,
+        "lesson": "auxiliary",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-08",
+        "stratum": "grammar.needsCorrection",
+        "slot": 8,
+        "lesson": "conjunction",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-09",
+        "stratum": "word.normal",
+        "slot": 9,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-09",
+        "stratum": "grammar.needsCorrection",
+        "slot": 9,
+        "lesson": "modal",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-09",
+        "stratum": "word.needsCorrection",
+        "slot": 9,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-09",
+        "stratum": "word.insufficientContext",
+        "slot": 9,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-09",
+        "stratum": "grammar.insufficientContext",
+        "slot": 9,
+        "lesson": "infinitive",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-09",
+        "stratum": "grammar.normal",
+        "slot": 9,
+        "lesson": "modal",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-normal-10",
+        "stratum": "word.normal",
+        "slot": 10,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-insufficientContext-10",
+        "stratum": "word.insufficientContext",
+        "slot": 10,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-insufficientContext-10",
+        "stratum": "grammar.insufficientContext",
+        "slot": 10,
+        "lesson": "exclamation",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-word-needsCorrection-10",
+        "stratum": "word.needsCorrection",
+        "slot": 10,
+        "lesson": null,
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-normal-10",
+        "stratum": "grammar.normal",
+        "slot": 10,
+        "lesson": "exclamation",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      },
+      {
+        "familyId": "pilot-grammar-needsCorrection-10",
+        "stratum": "grammar.needsCorrection",
+        "slot": 10,
+        "lesson": "infinitive",
+        "actualInputFrozen": false,
+        "sourceQualified": false,
+        "independentFamilyVerified": false
+      }
+    ],
+    "order": "10 balanced6-stratum blocks;hash order within eachblock fixedfromrisk authorization before any productoutcomes",
+    "strataPerPilot": 6,
+    "familiesPerStratum": 10,
+    "grammarLessons": 15,
+    "casesPerGrammarLesson": 2,
+    "modelCount": 3,
+    "versions": 2,
+    "pilotGenerationRepeats": 1,
+    "confirmationGenerationRepeats": 2,
+    "otherJudgeModelsPerGenerator": 2,
+    "judgeLayouts": 2,
+    "pilotGeneration": 360,
+    "pilotReview": 1440,
+    "pilotCalibration": 72,
+    "pilotReference": 180,
+    "pilotTotalCalls": 2052,
+    "perFamilyPilotGenerationCalls": 6,
+    "perFamilyPilotReviewCalls": 24,
+    "budgetStopKeepsFullDenominator": true,
+    "unrunCellsRemainUnmeasured": true,
+    "budgetStopQualifies": false,
+    "normalOrHardCasesNotRemoved": true,
+    "fullGoalScopePreserved": true,
+    "independenceVerified": false,
+    "actualBodiesFrozen": false,
+    "sourceQualified": false,
+    "mainDispatchAuthorized": false,
+    "minimumCriticalFamiliesPerConfirmationStratum": 770,
+    "minimumCriticalTotalConfirmationFamilies": 4620,
+    "confirmationActualNSelected": false,
+    "powerInputFile": "phase81/planning-input.json",
+    "currentAvailableMicros": "21583226",
+    "productGenerationOutputCap": 4096,
+    "outputOnlyCeilingExposurePerFamilyMicros": "585728",
+    "outputOnlyCeilingExposureFullPilotMicros": "35143680",
+    "exposureIsActualBill": false,
+    "inputTokensAssumedForExposure": 0,
+    "actualInputTokensMeasuredForThisPilot": false,
+    "cacheAssumedForExposure": false,
+    "oldFiveDollarReopened": false,
+    "newApiCalls": 0,
+    "newKeyReads": 0,
+    "newMoneyRequested": false
+  },
+  "confirmationMinimumCallCounts": {
+    "families": 4620,
+    "generation": 55440,
+    "review": 221760,
+    "reference": 13860,
+    "calibration": 72,
+    "total": 291132
+  },
+  "minimumEffectSelected": false,
+  "targetPowerSelected": false,
+  "finalSampleSelected": false,
+  "sampleJustified": false,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "goalComplete": false,
+  "releaseVerdict": "held"
+}

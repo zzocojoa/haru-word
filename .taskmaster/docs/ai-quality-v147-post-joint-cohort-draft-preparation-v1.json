@@ -1,0 +1,121 @@
+{
+  "protocol": "ai-quality-v147-post-joint-cohort-draft-preparation-v1",
+  "phase": "phase191",
+  "status": "post-joint-freeze-sixty-drafts-authored-independent-review-pending",
+  "parentTaskId": 24,
+  "activeSubtaskId": "24.2",
+  "supportingSubtaskId": "24.3",
+  "jointFreezeFile": "outputs/ai-quality-v147-implementation-20261106/phase190/joint-evaluation-freeze.json",
+  "jointFreezeHash": "0db0095d1a0c44e2c2bff5bd6c1a6317f3e875cd0c1b635b63c21b151db4ee0f",
+  "jointFreezeSha256": "bbd067b51537b60c77246f4c03589bd07b7428c7dc5c6f97174af3fac64dd3f7",
+  "draftFile": "outputs/ai-quality-v147-implementation-20261106/phase191/joint-candidate-draft.json",
+  "draftSha256": "0427788b53a73b7accfce7938fcb1d25ffabc42cbe43194ad02a253c91baee7d",
+  "createdAt": "2026-11-12T14:14:39.676Z",
+  "wordCases": 30,
+  "grammarCases": 30,
+  "totalCases": 60,
+  "explicitKoreanIntents": 30,
+  "grammarLessons": 15,
+  "eachGrammarLessonCases": 2,
+  "lengthAllocation": {
+    "word.normal": {
+      "short": 4,
+      "ordinary": 4,
+      "near-boundary": 2,
+      "total": 10
+    },
+    "word.needsCorrection": {
+      "short": 4,
+      "ordinary": 4,
+      "near-boundary": 2,
+      "total": 10
+    },
+    "word.insufficientContext": {
+      "short": 4,
+      "ordinary": 4,
+      "near-boundary": 2,
+      "total": 10
+    },
+    "grammar.normal": {
+      "short": 4,
+      "ordinary": 4,
+      "near-boundary": 2,
+      "total": 10
+    },
+    "grammar.needsCorrection": {
+      "short": 4,
+      "ordinary": 4,
+      "near-boundary": 2,
+      "total": 10
+    },
+    "grammar.insufficientContext": {
+      "short": 4,
+      "ordinary": 4,
+      "near-boundary": 2,
+      "total": 10
+    }
+  },
+  "longCases": 12,
+  "maxSentenceCharacters": 1930,
+  "maxKoreanCharacters": 373,
+  "knownDevelopmentMatches": 0,
+  "priorBankMatches": 0,
+  "repeatedTwelveWordScaffoldGroups": 0,
+  "repeatedScaffoldCases": 0,
+  "independentReferenceReviews": 0,
+  "referencesQualified": 0,
+  "independentFamiliesAdmitted": 0,
+  "sourceAdequacyReviewed": false,
+  "applicationBodiesCaptured": 0,
+  "applicationTransportVerified": false,
+  "formalPilotGenerations": 0,
+  "formalPilotGrades": 0,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "newSpendUpperMicros": "0",
+  "conditionalRemainingMicros": "331099",
+  "existingAdditionalGrantCapMicros": "35000000",
+  "ledgerFile": ".taskmaster/docs/ai-quality-v147-evaluation-budget-ledger-v3.json",
+  "ledgerSha256": "a5fe335a82f16323ae1e8ac55c5c59376e66d8d5e0f6cb6fb490a3d21a5182f7",
+  "generalLedgerUnchanged": true,
+  "productCodeChanged": false,
+  "judgeSemanticsChanged": false,
+  "oldBankAndScoresPreserved": true,
+  "englishTruthCertified": false,
+  "referenceQualified": false,
+  "freshnessQualified": false,
+  "familyIndependenceVerified": false,
+  "mainDispatchAuthorized": false,
+  "mechanicalValidationFile": "outputs/ai-quality-v147-implementation-20261106/phase191/draft-verification.json",
+  "mechanicalValidationSha256": "544097b40c58325b11c296c6da70b5f119b3dc3c1606bdd304d405001fd6f9c9",
+  "authoringFiles": {
+    "outputs/ai-quality-v147-implementation-20261106/phase191/authoring-cases.json": "ad0562200094c8174c3f13a8cbf85c30f52b592e35ad1e7a3f50412d773b473a",
+    "outputs/ai-quality-v147-implementation-20261106/phase191/authoring-passages.json": "1eb725d4e9147bf345017d04c75c8dc4f5f4073dcf3662b168c1cb469e626be9"
+  },
+  "sourceBindings": {
+    "outputs/ai-quality-v147-implementation-20261106/phase190/joint-evaluation-freeze.json": "bbd067b51537b60c77246f4c03589bd07b7428c7dc5c6f97174af3fac64dd3f7",
+    "outputs/ai-quality-v147-implementation-20261106/phase190/development-exposure-index.json": "2551b596bf86a5bc76297823d20a9f4b82b108b2653e00fb9f6c71c3b83fdefc",
+    "outputs/ai-quality-v147-implementation-20261106/phase185/reference-candidates.json": "eef50345a92811f30c6a79ba545091341dd24c48adb05f096b564500058f6dbb",
+    "outputs/ai-quality-v147-implementation-20261106/phase188/prepared-calibration.json": "b83dd01046e635663484ca71d18c8567a8a608e81d25a30f713a3c085437a236",
+    "outputs/ai-quality-v147-implementation-20261106/phase189/current-program-exposure-index.json": "f47b812e341d059163f4062b929e550da5eeebfb493f42df8e411b2d3ab085ea"
+  },
+  "productBindings": {
+    "data/words.json": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+    "data/grammar-index.json": "5992b60d2a33c5eaae4a9c1105f17bc7ea8a17c8496de76263cdb0a2f8ea3b35"
+  },
+  "implementationFiles": [
+    ".taskmaster/scripts/ai-quality-v147-joint-cohort-draft-v1.mjs",
+    ".taskmaster/scripts/test-ai-quality-v147-joint-cohort-draft-v1.mjs"
+  ],
+  "focusedChecks": 5,
+  "focusedExitCode": 0,
+  "lintExitCode": 0,
+  "productUnitTypeBuildRerun": false,
+  "deployed": false,
+  "remaining": [
+    "Independent AI language/source and structural-family review of the60 new drafts.",
+    "Capture actual frozen-application request bodies and prepare the fixed reference-review execution scope.",
+    "Qualify references before formal pilot generation0/360 and grading0/1440; keep confirmation and operation gates."
+  ]
+}

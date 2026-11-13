@@ -1,0 +1,633 @@
+{
+  "protocol": "ai-quality-v147-critical-boundary-development-v1",
+  "status": "candidate-unqualified",
+  "rows": [
+    {
+      "id": "CB01",
+      "familyId": "development-boundary-polarity-only",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Rina did not borrow the violin.",
+        "target": "violin / n. / 바이올린"
+      },
+      "requestInput": {
+        "word": "violin",
+        "pos": "n.",
+        "meaning": "바이올린",
+        "expression": "violin",
+        "sentence": "Rina did not borrow the violin."
+      },
+      "feedback": {
+        "original": "Rina did not borrow the violin.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Rina borrowed the violin.",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "polarity-only",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB02",
+      "familyId": "development-boundary-role-exchange-only",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Mira thanked Jonas.",
+        "target": "Jonas / proper noun / 사람 이름"
+      },
+      "requestInput": {
+        "word": "Jonas",
+        "pos": "proper noun",
+        "meaning": "사람 이름",
+        "expression": "Jonas",
+        "sentence": "Mira thanked Jonas."
+      },
+      "feedback": {
+        "original": "Mira thanked Jonas.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Jonas thanked Mira.",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "role-exchange-only",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB03",
+      "familyId": "development-boundary-force-only-supported-content",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Nila will shut the window.",
+        "target": "window / n. / 창문",
+        "contextNote": "The learner explicitly means a prediction that Nila will shut this window in the near future. This is not a request or an order. Nila is the addressee too."
+      },
+      "requestInput": {
+        "word": "window",
+        "pos": "n.",
+        "meaning": "창문",
+        "expression": "window",
+        "sentence": "Nila will shut the window.",
+        "contextNote": "The learner explicitly means a prediction that Nila will shut this window in the near future. This is not a request or an order. Nila is the addressee too."
+      },
+      "feedback": {
+        "original": "Nila will shut the window.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Nila, shut the window!",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "force-only-supported-content",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB04",
+      "familyId": "development-boundary-content-and-force-both",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Botany.",
+        "target": "botany / n. / 식물학",
+        "contextKind": "reply",
+        "contextNote": "The learner is answering Which subject would you like to study? and explicitly means I would like to study botany. The learner is not requesting any performance."
+      },
+      "requestInput": {
+        "word": "botany",
+        "pos": "n.",
+        "meaning": "식물학",
+        "expression": "botany",
+        "sentence": "Botany.",
+        "contextKind": "reply",
+        "contextNote": "The learner is answering Which subject would you like to study? and explicitly means I would like to study botany. The learner is not requesting any performance."
+      },
+      "feedback": {
+        "original": "Botany.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Play the drums!",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "content-and-force-both",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB05",
+      "familyId": "development-boundary-unknown-content-invented-agent",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Sculpture",
+        "target": "sculpture / n. / 조각",
+        "contextNote": "Task: write a complete finite clause about the noun sculpture. Who, what action and intended message have not been supplied."
+      },
+      "requestInput": {
+        "word": "sculpture",
+        "pos": "n.",
+        "meaning": "조각",
+        "expression": "sculpture",
+        "sentence": "Sculpture",
+        "contextNote": "Task: write a complete finite clause about the noun sculpture. Who, what action and intended message have not been supplied."
+      },
+      "feedback": {
+        "original": "Sculpture",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "She makes sculpture.",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "unknown-content-invented-agent",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB06",
+      "familyId": "development-boundary-polarity-plus-new-promise",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "I did not lend Leo the map.",
+        "target": "map / n. / 지도"
+      },
+      "requestInput": {
+        "word": "map",
+        "pos": "n.",
+        "meaning": "지도",
+        "expression": "map",
+        "sentence": "I did not lend Leo the map."
+      },
+      "feedback": {
+        "original": "I did not lend Leo the map.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "I lent Leo the map, and I promise to buy him a compass.",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "polarity-plus-new-promise",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB07",
+      "familyId": "development-boundary-passive-active-same-roles",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Tara was greeted by Milo.",
+        "target": "Milo / proper noun / 사람 이름"
+      },
+      "requestInput": {
+        "word": "Milo",
+        "pos": "proper noun",
+        "meaning": "사람 이름",
+        "expression": "Milo",
+        "sentence": "Tara was greeted by Milo."
+      },
+      "feedback": {
+        "original": "Tara was greeted by Milo.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Milo greeted Tara.",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "passive-active-same-roles",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB08",
+      "familyId": "development-boundary-polite-command-same-force",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Close the hatch.",
+        "target": "hatch / n. / 해치",
+        "contextKind": "command",
+        "contextNote": "An instruction to the addressee to close the hatch; adding please preserves that purpose."
+      },
+      "requestInput": {
+        "word": "hatch",
+        "pos": "n.",
+        "meaning": "해치",
+        "expression": "hatch",
+        "sentence": "Close the hatch.",
+        "contextKind": "command",
+        "contextNote": "An instruction to the addressee to close the hatch; adding please preserves that purpose."
+      },
+      "feedback": {
+        "original": "Close the hatch.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Please close the hatch.",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "polite-command-same-force",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB09",
+      "familyId": "development-boundary-identity-normal",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "The lantern is bright.",
+        "target": "lantern / n. / 랜턴"
+      },
+      "requestInput": {
+        "word": "lantern",
+        "pos": "n.",
+        "meaning": "랜턴",
+        "expression": "lantern",
+        "sentence": "The lantern is bright."
+      },
+      "feedback": {
+        "original": "The lantern is bright.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "The lantern is bright.",
+        "explanation": "원문은 자연스러워 그대로 유지합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "identity-normal",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB10",
+      "familyId": "development-boundary-false-grammar-approval",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "She go home.",
+        "target": "home / adv. / 집으로"
+      },
+      "requestInput": {
+        "word": "home",
+        "pos": "adv.",
+        "meaning": "집으로",
+        "expression": "home",
+        "sentence": "She go home."
+      },
+      "feedback": {
+        "original": "She go home.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She go home.",
+        "explanation": "원문은 자연스러워 그대로 유지합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": true,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "false-grammar-approval",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB11",
+      "familyId": "development-boundary-command-polarity-no-new-force",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "Do not erase the diagram.",
+        "target": "diagram / n. / 도표",
+        "contextKind": "command",
+        "contextNote": "This is an explicit prohibition on erasing this diagram."
+      },
+      "requestInput": {
+        "word": "diagram",
+        "pos": "n.",
+        "meaning": "도표",
+        "expression": "diagram",
+        "sentence": "Do not erase the diagram.",
+        "contextKind": "command",
+        "contextNote": "This is an explicit prohibition on erasing this diagram."
+      },
+      "feedback": {
+        "original": "Do not erase the diagram.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Erase the diagram.",
+        "explanation": "이 교정이 원문의 의미와 문장 형식을 그대로 보존한다고 설명합니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "command-polarity-no-new-force",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    },
+    {
+      "id": "CB12",
+      "familyId": "development-boundary-unavailable",
+      "purpose": "public-development-not-heldout",
+      "assessmentDomain": "word",
+      "input": {
+        "sentence": "The lantern is bright.",
+        "target": "lantern / n. / 랜턴"
+      },
+      "requestInput": {
+        "word": "lantern",
+        "pos": "n.",
+        "meaning": "랜턴",
+        "expression": "lantern",
+        "sentence": "The lantern is bright."
+      },
+      "feedback": null,
+      "expectedGrade": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "explanation": "unavailable",
+        "abstention": "unavailable",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "not_applicable",
+        "learnerContext": "unavailable",
+        "abstentionNeed": "unavailable"
+      },
+      "sourceIds": [
+        "searle-force-content",
+        "recanati-force-content",
+        "clause-type-force",
+        "kroeger-speech-acts"
+      ],
+      "rationale": "unavailable",
+      "qualification": "AI-authored project-convention candidate; sources do not certify this row."
+    }
+  ],
+  "developmentExposed": true,
+  "heldout": false,
+  "independentFamiliesCertified": false,
+  "origin": "AI-authored prospective controls after phase68; not rescored old responses.",
+  "plannedModels": [
+    "gpt-6.1-sol",
+    "gpt-6.1-terra",
+    "gpt-6-astra"
+  ],
+  "layouts": [
+    "input-first",
+    "feedback-first"
+  ],
+  "expectedGradesAreHypotheses": true,
+  "automaticAdmission": false,
+  "mainDispatchAuthorized": false,
+  "holdoutRequirement": "Author genuinely different held-out families only after the candidate is frozen; run exposure/family audit and keep them separate from these twelve development examples. No held-out sample is claimed frozen here."
+}

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "revision": 2,
+  "planId": "ai-quality-v147-2026-11-06",
+  "tag": "ai-quality-v147",
+  "status": "planning-complete",
+  "recordedAtUtc": "2026-11-05T23:26:27.452151+00:00",
+  "sourceRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+  "dashboardRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어",
+  "dashboardUrl": "http://127.0.0.1:4318/",
+  "parents": 40,
+  "subtasks": 133,
+  "activeParents": 39,
+  "activeSubtasks": 130,
+  "states": {
+    "parents": 40,
+    "subtasks": 133,
+    "parentStates": {
+      "pending": 33,
+      "deferred": 6,
+      "cancelled": 1
+    },
+    "childStates": {
+      "pending": 110,
+      "deferred": 20,
+      "cancelled": 3
+    },
+    "waves": 23,
+    "manualPathCorrections": [
+      {
+        "taskId": 34,
+        "before": "관련 경계: tests/fixtures/judgment-decision-matrix.json, .taskmaster/scripts/judgment-report-core.mjs",
+        "after": "관련 경계: tests/fixtures/judgment-decision-matrix.json, ROOT:.taskmaster/scripts/judgment-report-core.mjs"
+      },
+      {
+        "taskId": 35,
+        "before": "관련 경계: .taskmaster/scripts/judgment-report-core.mjs, tests/fixtures/judgment-decision-matrix.json",
+        "after": "관련 경계: ROOT:.taskmaster/scripts/judgment-report-core.mjs, tests/fixtures/judgment-decision-matrix.json"
+      },
+      {
+        "taskId": 36,
+        "before": "관련 경계: .taskmaster/scripts/judgment-report-core.mjs, tests/qa/isolated-worker.cjs",
+        "after": "관련 경계: ROOT:.taskmaster/scripts/judgment-report-core.mjs, tests/qa/isolated-worker.cjs"
+      },
+      {
+        "taskId": 38,
+        "before": "관련 경계: app/api/feedback/route.ts, app/api/grammar/feedback/route.ts, .openai/hosting.json",
+        "after": "관련 경계: app/api/sentence-feedback/route.ts, app/api/grammar-feedback/route.ts, .openai/hosting.json"
+      },
+      {
+        "taskId": 40,
+        "before": "관련 경계: .taskmaster/scripts/judgment-report-core.mjs, .taskmaster/tasks/tasks.json",
+        "after": "관련 경계: ROOT:.taskmaster/scripts/judgment-report-core.mjs, .taskmaster/tasks/tasks.json"
+      }
+    ]
+  },
+  "implementationStarted": false,
+  "newPaidEvaluationApproved": false,
+  "newPaidCalls": 0,
+  "newPaidAuthorizedUsd": 0,
+  "deploymentStarted": false,
+  "sourceBranch": "codex/ai-quality-v147",
+  "sourceHead": "7ce85ed49465b352e8304a741c8505124f86deb8",
+  "officialDependencyEdgesValidated": 174,
+  "nextTaskId": 1,
+  "checks": {
+    "structuralNegativeControls": 11,
+    "missingEvidenceOrChecklistOnlyControls": 31,
+    "positiveEvidenceFixtures": 2,
+    "dashboardGroups": [
+      12,
+      15,
+      18
+    ],
+    "engines": [
+      "chromium",
+      "webkit"
+    ],
+    "policyTests": 2,
+    "syntaxFiles": 5,
+    "allExitCodes": 0
+  },
+  "preserved": {
+    "oldTags": 4,
+    "priorRevisionEvidenceFiles": 73,
+    "rootProductFiles": 637,
+    "auditEvidence": 2089,
+    "prepublicationEvidence": 251,
+    "historicalJson": 247,
+    "v146v147Archives": true,
+    "branchesHeadsAndIndex": true
+  },
+  "limitations": [
+    "This verifies the completeness/consistency of the plan, not that product problems are solved.",
+    "Risk tolerance, justified N/r and human participant/reviewer/operational synthetic identity remain future task inputs; release stays held.",
+    "No fresh AI, implementation, production authenticated QA, user research, deployment, commit/push/PR.",
+    "Full852 product tests/type/lint/build not repeated for planning-only changes.",
+    "axe asset absent, not run. Chromium/WebKit are emulation; actual iPhone/VoiceOver untested."
+  ],
+  "reviewCorrections": [
+    "Initial verifier compared Task Master status timestamps as body changes; fixed to exclude updatedAt only. Original failure retained.",
+    "Newly authored route/core path labels corrected from actual inventory; manual correction record retained.",
+    "Node24 policy reporter uses Unicode info prefix; parsed actual log counts without claiming a new run.",
+    "Final display predicate initially captured a Node-only variable; corrected by passing explicit argument, then both browser engines and both HTML copies passed. Failure retained."
+  ],
+  "evidenceSha256": {
+    "baseline.json": "3513796d091aa64eadc0ee4fa645e23e79fd0a50a4f454881663c2434eaea61f",
+    "registration-payload.json": "96b311cf3799c6442d9803e5531e63b21347c37a1bacc7c369edcea5d662fcb5",
+    "mcp-registration.json": "8cbb5d37d66f59a1603412ed0d6269fb74bb9bb91b400ac8624a11635d87650c",
+    "mcp-requery.json": "374f84e6ba026e7eb7f500a4b1f9548993125ac5db354cbb0d896c1d46e15098",
+    "dependency-operations.json": "63bea8f4c419044b0051e3229d195b7356c3bbbc42a7ac3cc29120309a8ab5e0",
+    "manual-path-corrections.json": "e63046c485dff81f3f00bf03c1c6dde35e1d731980d0c1ef86e56b10a47f7c4b",
+    "integration.json": "b557fb245695fd917fe50b3ebc7caeb06b24f9cac8b6c2d1ece5e9584d698f19",
+    "cli-workflow.json": "d80c025124dfc36751073da665d79ef1f8bd950b7f5da08324d4d198f509f13a",
+    "cli-validate-dependencies.log": "4828dc2c285b53b4dfafa552fdcafe8eb9e7d1291196d1e2717155e6ad91fe37",
+    "cli-generate.log": "12fda61c620355c20bc9500bb8010afe7f0e14cc600eedebe0c53b7d5d23fb8c",
+    "verification-structure-first-failure.json": "e229765470d8a8f81fbca2ceafd9634ff8ce9db49966d15f6b8ad7046596a540",
+    "verification-structure-before-final-review.json": "4fc8bb8f6b6c1ff4f2b250c4823bb902a3ad78c1b982d9b22f7a44af35812781",
+    "verification-structure.json": "2eb183dbad1c76ed7268acc2bb28a6140c4726e1c1f9d0e78d0358a1cd34a74b",
+    "verification-structure.log": "0aa95619ca7217c28c74eadde32e6e464393b173854e1f3178f971a2b0a5b630",
+    "dashboard/results.json": "958c0b4f2da6bd47c61c3515778515535e50e69cb3a01bba386db9ccb9804ecc",
+    "historical-comprehensive/results.json": "575ee5475f799961397fa25c17b778f552ee60180015161d36e9f1d058db9202",
+    "historical-multi/results.json": "d54d0cec28abaaa0c3c93f9da834bf5613eee74c0693df0ba115dca0739b9615",
+    "browser-workflow.json": "8dc6047233f6b1260b429bf83daa97f5ce57b5714255faec300c532f9a0c2de1",
+    "policy-final.log": "ffbb92922c6d50a707e409a23f9d714aa3429292a5565cac43089df06e2ffd9a",
+    "policy-final-result.json": "84d90dca23b42b959c47a49093c0744374b2bdae81fcaafea1d276e948a7d7d5",
+    "syntax-checks.json": "aaa37dd3017c169fb7d15a4ba37876fa9b59716663ecc374a5c2f7b815b87b3c",
+    "manifest-before-finalization.json": "2c1970518ba0defa3b2130730bd116d06815a2dbfbd8cb97dbf5b7a2e69e1d39",
+    "final-display.json": "77aa97ca73df782803e63d875fcb6564748f42c38a785073e4d84ddbc4362254",
+    "final-display-first-failure.json": "3ae917da1e81099aec995fe55e918cf27074c86b1d0d3e77c2c849ec8e2f3dfc",
+    "dashboard-identity.json": "13c38bb63ad95c90442f3b4586016057d39797db5135cc1a2a9103e7201f2c04",
+    "historical-doc-block-preservation.json": "4e26a7b90d701b9253552420c35fd85a14f0a3a9f25a8eabc5eb9b2278dcffe5",
+    "verify-final-display.mjs": "5f0cd236c720172fa9363b850459601449df2f680a2684a1bfd376252ed21f50"
+  },
+  "finalVerificationFile": "ROOT:outputs/ai-quality-plan-revision2-20261106/verification-final.json"
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "atUtc": "2026-11-06T07:27:02.565647+00:00",
+  "task": 22,
+  "stage": "v2-captured-payload-and-explicit-recovery",
+  "checks": [
+    {
+      "name": "recovery-v2-node-v22.23.4-observed",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-recovery-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 12,
+      "failed": 0,
+      "log": "recovery-v2-node-v22.23.4-observed.log",
+      "sha256": "a2e56d3cad7fc8feb3d460d96986e942e5a9fe051c6b4c5276760414f3f12585",
+      "evidenceDirectory": "recovery-v2-node-v22.23.4-observed"
+    },
+    {
+      "name": "recovery-v2-node-v24.22.1-observed",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-recovery-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 12,
+      "failed": 0,
+      "log": "recovery-v2-node-v24.22.1-observed.log",
+      "sha256": "6e2fad221f780c768b026031e159ce6d864ffd6f9f47dfa29e90c78e89623ade",
+      "evidenceDirectory": "recovery-v2-node-v24.22.1-observed"
+    }
+  ],
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "capture-recovery-lint-observed.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-capture-v2.mjs": "4a150bfbf29d15295eee7b0cb47282099196bd9087c4a72ded910d0549ba9cf2",
+    ".taskmaster/scripts/ai-quality-v147-recovery-v2.mjs": "8cb5a818d568c23c06defc22900c0e20f4447927c1fbea44863be9eace6295ce",
+    ".taskmaster/scripts/test-ai-quality-v147-recovery-v2.mjs": "4560a64f35c897d875a9f02ae3d23b69afc4ac8ceeae6bd29ed296866d60ccd6"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v2.mjs": "830ea9dc169010ee968282d664754488c126657b6d29c1e3e4cb1e8c074c2bb4",
+    ".taskmaster/scripts/ai-quality-v147-journal-v2.mjs": "9068d018cb2d6b24b600237d1bf2be1a88d388543449e131ac3e1615cefefafd",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8",
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6"
+  },
+  "proofBindings": {
+    "recovery-v2-node-v22.23.4-observed.log": "a2e56d3cad7fc8feb3d460d96986e942e5a9fe051c6b4c5276760414f3f12585",
+    "recovery-v2-node-v22.23.4-observed.exit.json": "4550b85dbc584feadaca779db6f644cc26781f73079328e55d5fe07696ae29f5",
+    "recovery-v2-node-v22.23.4-observed/recovery-v2-observations.json": "b5ddbb6fab85d83857dbc598cdd5bfbeeec9d1d4a9784f57eaa5098d98f3a331",
+    "recovery-v2-node-v24.22.1-observed.log": "6e2fad221f780c768b026031e159ce6d864ffd6f9f47dfa29e90c78e89623ade",
+    "recovery-v2-node-v24.22.1-observed.exit.json": "53828e0d8bf9f5c8b28489b96ea04237c0546171808cb0b944b3f8dda5c19bd8",
+    "recovery-v2-node-v24.22.1-observed/recovery-v2-observations.json": "edf8cb0248721ed134dc3c60292340446e08a98b25d289d07f5a88d2f2c39913",
+    "capture-recovery-raw-preservation.json": "9dd20ca2b850a7a0cecda31ed4e22b4f179547ea7e4edc939c38f1c5a1726bff"
+  },
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "task22Complete": false,
+  "capturedPayloadRecoveryImplemented": true,
+  "explicitJournalRecoveryImplemented": true,
+  "fullExecutorIntegrated": false,
+  "fullCollectionExecuted": false,
+  "liveEvaluationSupported": false,
+  "actualReceiptAuthenticated": false,
+  "physicalPowerLossVerified": false,
+  "writerProcessExitsEach": 17,
+  "recoveryProcessExitsEach": 3,
+  "limitations": [
+    "Full once-only dispatch,CLI/Worker756-slot collection and report integration remain T22 work.",
+    "Synthetic marker counters verify recovery adds no dispatch; this component test does not implement a full fake-provider executor.",
+    "Incomplete log or missing/corrupt payload remains held at maximum cost; never reset,truncated,refetched or resent.",
+    "Exact byte binding is not provider receipt/usage provenance. No physical power loss or hostile whole-filesystem rollback guarantee.",
+    "Current code rejects real evaluation writes; paid approval,provider calls,key reads all0."
+  ],
+  "status": "T22 partial; captured payload and explicit journal recovery verified,full executor pending",
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase16/capture-recovery-v2-checks.json",
+  "proofSha256": "36ebf9a0ebfd2bd8f394c4aa5252cf1b3c70ff92f46b52dfad946f49b72b506e",
+  "contract": "Immutable prepared metadata,payload,matching receipt; exact same consumed UUID/body/source/result binding. Explicit recoverer validates complete pending transition and capture,serializes archival by actual Windows named mutex and process-owned lease; raw copies remain in bound audit directories.",
+  "reproduce": "New QA_OUTPUT_DIR; node --test .taskmaster/scripts/test-ai-quality-v147-recovery-v2.mjs. inspectV2Recovery(context) then recoverV2Journal({context,expectedInspectionHash}); never automatically retry dispatch."
+}

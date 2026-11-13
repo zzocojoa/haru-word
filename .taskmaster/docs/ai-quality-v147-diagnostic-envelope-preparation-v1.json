@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "stage": "six-public-diagnostic-official-ceiling-approval-preparation-v1",
+  "recordedAtUtc": "2026-11-07T05:36:40.336442+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "groupsEachNode": 14,
+  "regressionGroupsEachNode": 30,
+  "requests": 6,
+  "runId": "3cc6c803-9aca-4c05-9d9b-efebddd71063",
+  "bundleHash": "40fb1cde5306630ba043c5097a7b953f0f6c828d55f6b77351b768a81cb7b036",
+  "maximumMicros": "132724592",
+  "proposedApprovalMicros": "133000000",
+  "approvedMicros": "0",
+  "liveDispatchAuthorized": false,
+  "actualEnglishQualityQualified": false,
+  "oldBudgetTransferred": false,
+  "countApiNeeded": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "dataFile": ".taskmaster/evaluation/ai-quality-v147/direct-diagnostic-envelope-v1.json",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-diagnostic-envelope-v1.mjs": "e4be86208c0c2e13e9cc86fb444481d35127234970fa2be20fb98da7a67bfdd7",
+    ".taskmaster/scripts/ai-quality-v147-diagnostic-live-v1.mjs": "4d62039269270674260b435a67ba3f2a6d9a1e2f2e8c077122358f3cc59cae3e",
+    ".taskmaster/scripts/test-ai-quality-v147-diagnostic-envelope-v1.mjs": "0be5175ab261d2a327004fd5b10b9bceb9eeb3dc935b6b639baabf5e4917d55b"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/direct-diagnostic-envelope-v1.json": "57bf3029636ba14247734caa52e23bb15cc51a59ec5cf9af0dbdd0fa2b5246a9"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-case-review-v1.mjs": "53f5631abfdd5e83cffb6eb0091085e7d151a4206180cdaff474473be02d37f4",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/evaluation/ai-quality-v147/case-review-dossier-g12-v1.json": "c5dd0c81a151c71a521f2c502cd8f0d9cc37843954331ba4a7f23dce5da2c034",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8"
+  },
+  "officialFactsFile": "phase42/official-model-envelope-facts.json",
+  "officialFactsSha256": "7bd1c67dad443fe2a68c07e31df2953ef04e6c84f2095603535ff81a6c5b97de",
+  "proposalFile": "approval-review/diagnostic-envelope.json",
+  "proposalSha256": "e63d72713af0d6e41b4f9789321fce73b763637cfa23351afcad8184298b97b4",
+  "proposalNodeVersion": "v24.22.1",
+  "document": "docs/AI_QUALITY_V147_DIAGNOSTIC_APPROVAL_20261107.md",
+  "documentSha256": "ef4494431678398f3ce9c8966ca456dad9827fa87a69a99324c8e7a6284f36ba",
+  "checks": [
+    {
+      "name": "envelope-node22-qualified",
+      "log": "envelope-node22-qualified.log",
+      "sha256": "e4ace29f93aa841ce47b801c55277eead5234b4243e0b86ab08b542b033287b3",
+      "exitCode": 0
+    },
+    {
+      "name": "envelope-node24-qualified",
+      "log": "envelope-node24-qualified.log",
+      "sha256": "dc4602a57727358118771887d5e6cb23d933a4903b40d1d5377ad7452b3762ab",
+      "exitCode": 0
+    }
+  ],
+  "regressionChecks": [
+    {
+      "name": "budget-node22-regression",
+      "kind": "budget",
+      "groups": 23,
+      "log": "budget-node22-regression.log",
+      "sha256": "c476e7f89fa0ada4701c4e79fe69c0a430beda29e5e7cb2708f43ed05911bb6a",
+      "exitCode": 0
+    },
+    {
+      "name": "case-node22-regression",
+      "kind": "case",
+      "groups": 7,
+      "log": "case-node22-regression.log",
+      "sha256": "95e7d0b2ce44841c7fdd7438954ceafdc70bb05aaa409e90ba4faf4252fc4af0",
+      "exitCode": 0
+    },
+    {
+      "name": "budget-node24-regression",
+      "kind": "budget",
+      "groups": 23,
+      "log": "budget-node24-regression.log",
+      "sha256": "0da31034d5cc978c9ea9a29d8f040f6277a6f785d46e8c087d94b6f80a396dc6",
+      "exitCode": 0
+    },
+    {
+      "name": "case-node24-regression",
+      "kind": "case",
+      "groups": 7,
+      "log": "case-node24-regression.log",
+      "sha256": "99baffcedc37a08c466c936acc5816ae081d50b2a16085139eda9c4dc06eb854",
+      "exitCode": 0
+    }
+  ],
+  "rawEvidenceFile": "diagnostic-raw-preservation.json",
+  "rawEvidenceSha256": "2a7b284b0c260fb169ce4263cae0b7cf054429ee50c82e4d61b170eddd720cde",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "protocol": "ai-quality-v147-current-screen-calibration-v1",
+  "phase": "phase135",
+  "tasks": [
+    "34.4",
+    "26.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_CURRENT_SCREEN_CALIBRATION_20261109.md",
+  "browserScreens": 44,
+  "changedCases": 9,
+  "changedDraftBodies": 54,
+  "historicalMatches": 71,
+  "historicalDenominator": 72,
+  "handoffArchivedBodyMatches": 1440,
+  "handoffRenderedTemplateBodies": 1440,
+  "handoffHeldReviews": 168,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "currentScreensRated": false,
+  "mainDispatchAuthorized": false,
+  "historicalScoresCarried": false,
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "sourceToolSha256": {
+    ".taskmaster/scripts/ai-quality-v147-pilot-review-handoff-v1.mjs": "a9e31b987527667202043cb346eb8beeeed247c02b2d6bc3a5c3f1c0d1d96872",
+    ".taskmaster/scripts/ai-quality-v147-assessment-context-v1.mjs": "24e58c02684412409b616be2cc34059b5fd2f93a3b536aedb04f417dd139187b"
+  },
+  "evidenceSha256": {
+    "screen-binding.json": "c62bef01fccece58ade31fd89d0693d257e358f219082955ba19f086566dfb11",
+    "handoff-regression.json": "ada2825fd65876a20c5e7a2a35f0d333220377e547fd09f251d92fb83d76a3da",
+    "rendered-current.json": "cb97c1054caec2f65e9f038deb5ca1675a2345340f0f8eb16dbee6567634050f",
+    "revised-review-draft.json": "bb37137fbc60a9e97395236a1200be622af24ceede8e2a0ed5896d18a8e21fbb",
+    "handoff-v1-before.mjs": "7f3de2e4f3157e56307051b004c76abe5c4bd52f6f8273f6e5e461ba9267648e",
+    "assessment-context-v1-before.mjs": "e224d7703560a41bb318b0744e6ddd719f532c57a426fb63c7a763b697d69b89"
+  }
+}

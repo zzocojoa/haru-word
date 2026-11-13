@@ -19,7 +19,7 @@ const {build}=require('esbuild');
    let raw='';for await(const chunk of req)raw+=chunk;const body=JSON.parse(raw);posts++;
    assert.equal(req.headers['x-study-owner'],'synthetic-owner');assert.ok(body.requestId);assert.ok(body.requestStartedAt);
    const sentence=req.url==='/api/grammar-feedback'?body.sentence.trim():body.sentence;
-   const feedback={original:sentence,correctedSentence:sentence,meaningUsage:'appropriate',grammar:'natural',explanation:'복구한 합성 참고 의견',model:body.expectedModelId,provider:'openai',requestedModel:body.expectedModelId,promptVersion:'reference-v5',validationVersion:'judgment-v6',...(body.expectedContextFingerprint?{contextFingerprint:body.expectedContextFingerprint}:{}),...(body.contextNote?{contextNote:body.contextNote}:{}),createdAt:new Date().toISOString()};
+   const feedback={original:sentence,correctedSentence:sentence,meaningUsage:'appropriate',grammar:'natural',explanation:'복구한 합성 참고 의견',model:body.expectedModelId,provider:'openai',requestedModel:body.expectedModelId,promptVersion:'reference-v7',validationVersion:'judgment-v6',...(body.expectedContextFingerprint?{contextFingerprint:body.expectedContextFingerprint}:{}),...(body.contextNote?{contextNote:body.contextNote}:{}),createdAt:new Date().toISOString()};
    const result={feedback,receipt:{requestId:body.requestId,state:'completed',persisted:true}};receipts.set(body.requestId,result);
    if(loseNext){loseNext=false;res.writeHead(200,{'Content-Type':'application/json'});res.end('{"feedback":');return;}res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify(result));return;
   }
@@ -50,19 +50,19 @@ const {build}=require('esbuild');
  try{
   await start();
   await open('word');
-  await page.getByText('AI에 전달할 문맥 추가 · 선택',{exact:true}).click();
-  const contextNote=()=>page.getByRole('textbox',{name:'문장 상황',exact:true});
+  await page.getByText('문장의 형식 · 선택',{exact:true}).click();
+  const contextNote=()=>page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true});
   const contextKind=()=>page.getByRole('combobox',{name:'문장의 형식',exact:true});
   await contextKind().selectOption('reply');
   await contextNote().fill('질문에 대한 짧은 답변이에요.');await page.reload();
-  await page.getByText('AI에 전달할 문맥 추가 · 선택',{exact:true}).click();
+  await page.getByText('문장의 형식 · 선택',{exact:true}).click();
   await page.waitForFunction(()=>[...document.querySelectorAll('textarea')].some(el=>el.value==='질문에 대한 짧은 답변이에요.'));
   assert.equal(await contextNote().inputValue(),'질문에 대한 짧은 답변이에요.');assert.equal(await contextKind().inputValue(),'reply');assert.equal(posts,0);
-  await contextNote().fill('');await page.reload();await page.getByText('AI에 전달할 문맥 추가 · 선택',{exact:true}).click();
+  await contextNote().fill('');await page.reload();await page.getByText('문장의 형식 · 선택',{exact:true}).click();
   assert.equal(await contextNote().inputValue(),'');assert.equal(posts,0);pass('explicit AI context and its empty clearing survive reload without an automatic AI request');
-  await contextKind().selectOption('sentence');await page.reload();await page.getByText('AI에 전달할 문맥 추가 · 선택',{exact:true}).click();assert.equal(await contextKind().inputValue(),'sentence');assert.equal(await contextNote().inputValue(),'');
+  await contextKind().selectOption('sentence');await page.reload();await page.getByText('문장의 형식 · 선택',{exact:true}).click();assert.equal(await contextKind().inputValue(),'sentence');assert.equal(await contextNote().inputValue(),'');
   const legacyKey=await page.evaluate(()=>{const owner=localStorage.getItem('haru-words:local-input-owner:v1'),instanceId=crypto.randomUUID(),question=JSON.stringify(['ai-context','word',JSON.stringify(['a1111111-1111-4111-8111-111111111111','synthetic'])]),key='haru-words:local-input:v1:'+encodeURIComponent(owner)+':'+instanceId+':'+encodeURIComponent(question);localStorage.setItem(key,JSON.stringify({version:1,kind:'grammar',question,instanceId,epoch:localStorage.getItem('haru-words:local-input-clear:v1:'+encodeURIComponent(owner))??'initial',updatedAt:Date.now(),base:{sentence:''},values:{sentence:'이전 버전의 합성 문맥'}}));return key;});
-  await page.reload();await page.getByText('AI에 전달할 문맥 추가 · 선택',{exact:true}).click();await page.getByText('이전 버전의 문맥 확인',{exact:true}).click();await page.getByRole('button',{name:'빈 문맥에 가져오기',exact:true}).click();assert.equal(await contextNote().inputValue(),'이전 버전의 합성 문맥');assert.equal(await page.evaluate(key=>localStorage.getItem(key)!==null,legacyKey),true);assert.equal(posts,0);pass('intent kind persists independently; legacy context imports explicitly without deleting the original or calling AI');
+  await page.reload();await page.getByText('문장의 형식 · 선택',{exact:true}).click();await page.getByText('이전 버전의 문맥 확인',{exact:true}).click();await page.getByRole('button',{name:'빈 문맥에 가져오기',exact:true}).click();assert.equal(await contextNote().inputValue(),'이전 버전의 합성 문맥');assert.equal(await page.evaluate(key=>localStorage.getItem(key)!==null,legacyKey),true);assert.equal(posts,0);pass('intent kind persists independently; legacy context imports explicitly without deleting the original or calling AI');
   await page.evaluate(()=>window.draftHarness.clear());
   for(const mode of ['word','grammar']){
    await open(mode);const before=await page.evaluate(()=>window.draftHarness.snapshot().source);
@@ -89,7 +89,7 @@ const {build}=require('esbuild');
   await page.evaluate(()=>window.draftHarness.clear());
   for(const mode of ['word','grammar']){
    const requestSentence=mode==='grammar'?' \tSynthetic request grammar.\n ':'Synthetic request word.';
-   await open(mode,'&requests=1');await field().fill(requestSentence);await page.waitForFunction(sentence=>window.draftHarness.snapshot().rows.some(row=>row.record.kind!=='request'&&row.record.values.sentence===sentence),requestSentence);const beforePosts=posts,beforeGets=gets;loseNext=true;
+   await open(mode,'&requests=1');if(mode==='word')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('검증용 한국어 의도예요.');await field().fill(requestSentence);await page.waitForFunction(sentence=>window.draftHarness.snapshot().rows.some(row=>row.record.kind!=='request'&&row.record.values.sentence===sentence),requestSentence);const beforePosts=posts,beforeGets=gets;loseNext=true;
    await page.getByRole('button',{name:'AI 참고 의견 요청',exact:true}).click();await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).waitFor();await page.waitForFunction(()=>document.querySelectorAll('[role="alert"]').length>0||document.body.textContent.includes('연결 실패'));
    assert.equal(posts,beforePosts+1);await page.reload();await value(requestSentence);assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets);
    failLookup=true;await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).click();

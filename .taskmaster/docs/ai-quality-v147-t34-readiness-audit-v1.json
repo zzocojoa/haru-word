@@ -1,0 +1,85 @@
+{
+  "protocol": "ai-quality-v147-t34-readiness-preparation-v1",
+  "evidenceDirectory": "phase57",
+  "task": 34,
+  "subtask": "34.4",
+  "status": "not-ready-for-live-main",
+  "auditFile": "t34-readiness-audit.json",
+  "auditFileSha256": "11e5bcb8d3f8b6184b4da95aaff8975c04eae7c4771b5c4872e9dd151f740956",
+  "independentArithmeticFile": "independent-readiness-costs.json",
+  "independentArithmeticSha256": "0535cf4158da6a9138e474c7a888c831711320d97ca4311f09a52c363975b261",
+  "officialFactsFile": "official-readiness-facts.json",
+  "officialFactsSha256": "e40364627ce2e13a2644fde334dbd698faecc888b6214f892c290d76691b1f1c",
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-ai-only-evaluation-proposal.json": "367b64fc99ade670130a545edd039490824b05d192a833d37654368af32d5032",
+    ".taskmaster/docs/ai-quality-v147-public-control-batch-execution-v1.json": "16f1a0140b6158bf50c830a3b8db4098ef6a2f938ea21af97e0e9196333ea9bc",
+    ".taskmaster/docs/ai-quality-v147-reference-rubric-preparation-v1.json": "2c28f7f7e45dd6281bf4468c42cda34f725c9d76134d69daea8702e76aeb8e15",
+    ".taskmaster/docs/ai-quality-v147-program-literal-preparation-v1.json": "4c43c6a5a20f48240e4b516a49149d14082dff52f6a716dab88ee27ebef3c342",
+    ".taskmaster/docs/ai-quality-v147-two-reviewer-followup-preparation-v1.json": "290aa78d29c3be4ec34aa3a2e9cfe058bd166badd71d8db10e35427740e1f09b",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3-fixture.mjs": "b5d89c99e0c663c241357a83a6acfbac0ea94fed16b54731b26af4fd98e4aae0"
+  },
+  "taskProjection": {
+    "id": "34",
+    "title": "위험 허용치·표본·반복·판정 기준 사전 설계",
+    "description": "대상 모집단과 피해별 허용 위험 정의 → 표본 수와 불확실성 산출 → 사전 등록 판정·중단·예산 명세 → 기준 도전 검토와 변경 통제",
+    "status": "review",
+    "subtasks": [
+      {
+        "id": 1,
+        "title": "대상 모집단과 피해별 허용 위험 정의",
+        "description": "단어/문법·15수업·수준·짧은문장/모호성·의미변경·오거절·설명오류·전달실패를 명시한다. 유해한 의미변경/잘못된 확신은 별도 차단 지표로 둔다. 위험 한도와 주장 범위는 제품 책임자(사용자)가 최종 승인하기 전 held다.",
+        "status": "review"
+      },
+      {
+        "id": 2,
+        "title": "표본 수와 불확실성 산출",
+        "description": "60문장과57/60은 예비 진단 전용이다. 확인 평가 N·층별 배분·반복 r·효과 크기/정밀도·신뢰수준·군집 단위·다중 비교/중간 확인 통제를 사전에 산출한다. 독립성 없는 단어 치환/반복 출력을 독립 표본으로 세지 않는다. 선택 표본이면 서비스 전체 오류율로 일반화하지 않는다.",
+        "status": "review"
+      },
+      {
+        "id": 3,
+        "title": "사전 등록 판정·중단·예산 명세",
+        "description": "모델별/유형별 절대 위험 상한·baseline 대비 개선/비열등 한계·중대 오류0·필수 정상 오거절0·미측정0·변동성 한계와 부족할 때 held를 정의한다. 반복/통제군/채점/재검토/운영6호출의 상한을 단계별 계산한다. 숫자와 참가자 기준은 결과 보기 전에 승인받고 후향 완화 금지.",
+        "status": "review"
+      },
+      {
+        "id": 4,
+        "title": "기준 도전 검토와 변경 통제",
+        "description": "낙관적 표본·평균의 유형 은폐·확인 자료 유출·AI 공통편향·재시도 선택편향을 반박한다. 검토 모델·역할·노출·근거 수준과 독립성 한계를 명시하고, 기준 변경은 새 버전/미공개 표본/필요한 새 승인으로 관리한다. 사람 검토자 섭외는 필수 조건이 아니다.",
+        "status": "review"
+      }
+    ]
+  },
+  "taskProjectionHash": "e3b01a8db1dbf50eca4d1687a6ea7c33fa4239cb86640b2c191e69e0e78fcdc4",
+  "historicalTaskSnapshotFile": "phase57/management-before/.taskmaster/tasks/tasks.json",
+  "historicalTaskSnapshotSha256": "7ab03a503132fe6be07792a545cf1b03b0d03c15aaf1f435f00a22569bf2e151",
+  "document": "docs/AI_QUALITY_V147_T34_DECISION_READINESS_20261107.md",
+  "documentSha256": "7e52af981639abb96615b4f3936d9f1da837ac519f8529e157038a986b20c44f",
+  "claimScope": "full40task scope retained; no completed wholeT34 orpaid-main/English-quality claim",
+  "generationOnlyFullWorstCaseOutputComponentMicros": "31948800",
+  "generationWith11Over10BufferMicros": "35143680",
+  "allRole4096ExampleOutputOnlyMicros": "182108160",
+  "actualBillEstimate": false,
+  "modelMaxContextUsed": false,
+  "allRole4096ExampleIsFinalSpec": false,
+  "guaranteedFullStageUnderCurrentCap": false,
+  "claimEveryActualBillExceedsCap": false,
+  "workingUnapprovedRiskExample": 0.05,
+  "planningPreferenceBlocksUnpaidWork": false,
+  "ownerRiskApproved": false,
+  "samplingValidated": false,
+  "independentExpectationsQualified": false,
+  "actualEnglishQualityQualified": false,
+  "liveMainAuthorized": false,
+  "newPaidScopeApproved": false,
+  "campaignCapMicros": "5000000",
+  "currentConservativeMicros": "3788335",
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "productChecksReusedBecause547InputsUnchanged": true,
+  "evaluationRuntimeChecksReusedBecauseCodeUnchanged": true,
+  "releaseVerdict": "held",
+  "goalComplete": false
+}

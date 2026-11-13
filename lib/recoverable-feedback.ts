@@ -23,7 +23,7 @@ export async function runRecoverableFeedback(store:LocalLearningDrafts|null,inpu
   const previous=store.list(question,'request').filter((row):row is DraftChoice&{record:RequestRow}=>row.record.kind==='request'&&row.record.values.state==='pending').sort((a,b)=>a.record.values.startedAt-b.record.values.startedAt)[0];
   // The fingerprint already binds kind. Keep durable rows readable by older
   // clients, which strictly parse request values and must not delete new UUIDs.
-  const {contextKind:_kind,...durableInput}=input;void _kind;
+  const {contextKind:_kind,contextRole:_role,...durableInput}=input;void _kind;void _role;
   const values:RequestRow['values']=previous?previous.record.values:{...durableInput,requestId:crypto.randomUUID(),startedAt:now,state:'pending'};
   const current=()=>!signal.aborted&&store.getSnapshot().active&&store.getSnapshot().cleared===cleared;
   const write=(next:RequestRow['values'])=>{

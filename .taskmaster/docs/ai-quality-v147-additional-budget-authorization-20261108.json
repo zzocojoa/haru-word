@@ -1,0 +1,18 @@
+{
+  "protocol": "ai-quality-v147-additional-budget-authorization-v1",
+  "currentUserApproved": true,
+  "authorizationSource": "current-user-message",
+  "observedUserMessage": "추가로 35달러 사용 가능하도록 승인도 한다.",
+  "approvedAtUtc": "2026-11-08T00:22:30.891141+00:00",
+  "scope": "후속 AI 품질 개선 평가; 기존 US5 실행안과 원장 분리",
+  "existingTrancheCapMicros": "5000000",
+  "additionalTrancheCapMicros": "35000000",
+  "totalAuthorizedMicros": "40000000",
+  "additionalUsedMicros": "0",
+  "existingTrancheLedgerReset": false,
+  "oldClosedApprovalsReactivated": false,
+  "apiKeyReuseAlreadyApproved": true,
+  "productionDeploymentApproved": false,
+  "publicationApproved": false,
+  "commitPushPrApproved": false
+}

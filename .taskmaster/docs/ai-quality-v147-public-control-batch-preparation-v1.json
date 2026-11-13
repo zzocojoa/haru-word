@@ -1,0 +1,95 @@
+{
+  "protocol": "ai-quality-v147-public-control-batch-v1",
+  "evidenceDirectory": "phase50",
+  "responseSlots": 6,
+  "countSlots": 6,
+  "controlVotes": 36,
+  "anchorGrades": 6,
+  "groupsEachNode": 12,
+  "legacyGroupsEachNode": 7,
+  "inputCeiling": 50000,
+  "outputCeiling": 4096,
+  "actualInputTokensMeasured": false,
+  "planHash": "8403489779085a7ba87dca389017e9e50bb3841494bea2a1919008b5d4c1f6d3",
+  "planFile": "batch-node24-final/batch-plan.json",
+  "planFileSha256": "b8049cc2bc92879e9a663b3252e223d5fb41458dcd420e3b089d410074300384",
+  "factsFile": "official-batch-facts.json",
+  "factsSha256": "45d94ba0008040da263395726804d12eb9a20728771865c2a6567d81d2d5fcaa",
+  "decimalFile": "independent-budget-comparison.json",
+  "decimalSha256": "3bc9ed1d7a041b121d10e28b0c8d1437c3984257a1527b6e448d31461641f8aa",
+  "document": "docs/AI_QUALITY_V147_PUBLIC_CONTROL_BATCH_20261107.md",
+  "documentSha256": "4ff00dead0c86b16380731a3cf0944aadaca28202a48bf0a5ea3af5582d4e20c",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-public-control-batch-v1.mjs": "7c2c8b621b4b39365926841eb808062c783e89f3a7001af3058c434d97a01c6a",
+    ".taskmaster/scripts/test-ai-quality-v147-public-control-batch-v1.mjs": "1f6d75d79a0eab77cdbedea4777ff396acbbbd795ff92126074bcf16dc453875"
+  },
+  "checks": [
+    {
+      "name": "batch-node24-final",
+      "kind": "batch",
+      "groups": 12,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-public-control-batch-v1.mjs"
+      ],
+      "exitCode": 0,
+      "log": "batch-node24-final.log",
+      "sha256": "77909c8f415083717d7218fbf5a3d9ae489335f15f19058381550426ed69c20d"
+    },
+    {
+      "name": "legacy-controls-node24-final",
+      "kind": "legacy-controls",
+      "groups": 7,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-reference-controls-v2.mjs"
+      ],
+      "exitCode": 0,
+      "log": "legacy-controls-node24-final.log",
+      "sha256": "94eb4e493a7ec902b78d26460ec46337941968f7b4d8367b5094e86c57b56046"
+    },
+    {
+      "name": "batch-node22-final",
+      "kind": "batch",
+      "groups": 12,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-public-control-batch-v1.mjs"
+      ],
+      "exitCode": 0,
+      "log": "batch-node22-final.log",
+      "sha256": "46f003fd26451c37289534b8a6795e05edfbf6708a2bc9ce3819f6cdd0286c83"
+    },
+    {
+      "name": "legacy-controls-node22-final",
+      "kind": "legacy-controls",
+      "groups": 7,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-reference-controls-v2.mjs"
+      ],
+      "exitCode": 0,
+      "log": "legacy-controls-node22-final.log",
+      "sha256": "e7d60a527f983a8203a9d39a344308a6c2bb939629238f386f60e7c8954b9c3b"
+    }
+  ],
+  "liveDispatchAuthorized": false,
+  "dispatchReady": false,
+  "scopeApprovalRequired": true,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "englishQualityQualified": false,
+  "referenceRoleQualified": false,
+  "pairedProtocolEquivalenceEstablished": false,
+  "priorCampaignUpperMicros": "843789",
+  "conditionalCampaignUpperMicros": "4875245",
+  "retainedCountAllowanceMicros": "2015728",
+  "counterTariffExplicitlyVerified": false,
+  "counterAllowanceIsInvoiceGuarantee": false,
+  "releaseVerdict": "held"
+}

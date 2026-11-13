@@ -1,0 +1,147 @@
+{
+  "protocol": "ai-quality-v147-reference-operational-rubric-v1",
+  "evidenceDirectory": "phase53",
+  "rubricFile": ".taskmaster/docs/ai-quality-v147-reference-operational-rubric-v1.json",
+  "rubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+  "newPlanFile": "rubric-node24-first/new-plan.json",
+  "newPlanFileSha256": "3838f306cd5433e149c84a2f1a0a7809b97f40d1a664e5b192c0a0142ff72a31",
+  "newPlanHash": "22027e8bf9ba9651ea6e2c61ea66733b9d42bc9719cc4c1412eb3f977b2bff1c",
+  "basePlanHash": "8403489779085a7ba87dca389017e9e50bb3841494bea2a1919008b5d4c1f6d3",
+  "groupsEachNode": 9,
+  "regressionGroupsEachNode": 21,
+  "dimensions": 7,
+  "criticalFlags": 5,
+  "boundaryRules": 8,
+  "policyPresentInRequests": 6,
+  "sourceRecordsPreserved": 42,
+  "expectedVectorsChanged": false,
+  "expectationsIndependentlyQualified": false,
+  "developmentExposed": true,
+  "semanticCorrectnessVerified": false,
+  "causalEffectOnActualDisagreementEstablished": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "actualInputTokensMeasured": false,
+  "newScopeApproved": false,
+  "liveExecutorIntegrated": false,
+  "humanRecruitmentRequired": false,
+  "referenceRoleQualified": false,
+  "englishQualityQualified": false,
+  "currentCampaignUpperMicros": "3788335",
+  "currentRemainingMicros": "1211665",
+  "campaignCapMicros": "5000000",
+  "counterTariffExplicitlyVerified": false,
+  "invoiceVerified": false,
+  "document": "docs/AI_QUALITY_V147_REFERENCE_OPERATIONAL_RUBRIC_20261107.md",
+  "documentSha256": "27c4b074de645fd6ac76adf11d96f89dccf8ea42f6ee20cafe6b2c9e0f7f1df8",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-reference-rubric-v1.mjs": "e723afb027971005b16073a48285b64616f0c7b54e1fbc693166883f761960f6",
+    ".taskmaster/scripts/test-ai-quality-v147-reference-rubric-v1.mjs": "4504c721a9ed27d42ee08344a9932c11cff1ef87353e47e7824fd5d695e007c7",
+    ".taskmaster/docs/ai-quality-v147-reference-operational-rubric-v1.json": "3a92edaadf4b8be90a0eea95599524a6814dcdb60698ea08ff3dd843f094a111"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-public-control-collector-v1.mjs": "56bf650788b2fe9e40516171046fdef8d87874daf98211acd8b744d94a8d8cdf",
+    ".taskmaster/scripts/ai-quality-v147-public-control-batch-v1.mjs": "7c2c8b621b4b39365926841eb808062c783e89f3a7001af3058c434d97a01c6a",
+    ".taskmaster/scripts/ai-quality-v147-reference-controls-v2.mjs": "3d01666c168d135c4dec812ebf3d187490fed9a5419dddf3654fb5db6675b105",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "36c433a1bc05bdc1d3b458d79e538915ed1ae5d0e32fe62800712bb034e3dd6b",
+    ".taskmaster/scripts/ai-quality-v147-exposure-v1.mjs": "14aa01e2a5ac1ef1d649362a40e4639a86df61506155bb6e7b73264cbd012433",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-global-exposure-v1.mjs": "7f791026b40d2ad62f278b45b5b54ebcc45453e56c69c79eee543d561813a0f9",
+    ".taskmaster/evaluation/ai-quality-v147/reference-controls-v2.json": "0ed8af4e6bc8dc78da416b3fdf1e13eb3ccffed5c0cc4231c4d01505dd8718c0",
+    ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+    ".taskmaster/docs/ai-quality-v147-reference-readiness-draft.json": "34764e89714f20ad46dd7039e5b5535be651ce08ff9e471d9b772faa9c4dbbd8"
+  },
+  "checks": [
+    {
+      "name": "rubric-node24-first",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-rubric-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "rubric-node24-first.log",
+      "sha256": "18de55d40b794422ca979cdc5c4bf25010aa42856212b1763ba41e8400d51936",
+      "kind": "rubric",
+      "groups": 9
+    },
+    {
+      "name": "rubric-node22-final",
+      "kind": "rubric",
+      "groups": 9,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-rubric-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "rubric-node22-final.log",
+      "sha256": "8c910b5d1f2b66b5c2cc85d29e4ce0f6103e9ad2d41538f2ad750bd2db8b8aa8"
+    },
+    {
+      "name": "legacy-v4-node24",
+      "kind": "reference-v4",
+      "groups": 14,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-v4.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "legacy-v4-node24.log",
+      "sha256": "767e4d92b33f4cf894e5c8eef10751d91974452eea9c38f63360e3c4371d19f7"
+    },
+    {
+      "name": "legacy-controls-node24",
+      "kind": "reference-controls",
+      "groups": 7,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-controls-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "legacy-controls-node24.log",
+      "sha256": "d39151558ff5956b82bbff0596f830ddafb921461d46f6c00e3bcb49f5e3a8bb"
+    },
+    {
+      "name": "legacy-v4-node22",
+      "kind": "reference-v4",
+      "groups": 14,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-v4.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "legacy-v4-node22.log",
+      "sha256": "202de4095ff33ad48c94409ac944a47e641cf188f766a9e138dd42e489fdb31d"
+    },
+    {
+      "name": "legacy-controls-node22",
+      "kind": "reference-controls",
+      "groups": 7,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-controls-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "legacy-controls-node22.log",
+      "sha256": "6332e6b8754a26ca0a7ced30bbad9c493527abb75a9489bb4225b0e0b55686f4"
+    }
+  ],
+  "worksheetFile": "expectation-review-worksheet.json",
+  "worksheetSha256": "4737d47c1287062b22dc65282a9882c7a41d57529b501464a009629a0d4c4ae4",
+  "releaseVerdict": "held"
+}

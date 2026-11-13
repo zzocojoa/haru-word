@@ -1,0 +1,18 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v3",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "fb27af18-74db-4eea-a808-de570242d8dc",
+  "studyPlanHash": "6ff4a9b3c61cd92f39b3a32b2fb1fad473c45d69301596b505f5d48e41ca80b2",
+  "collectorProtocol": "ai-quality-v147-bilingual-language-reference-v1",
+  "successStatus": "collected-bilingual-language-references",
+  "runtimeDirectoryName": "ai-quality-v147-bilingual-reference-runtime-20261112",
+  "expectedModelCalls": 3,
+  "expectedCountCalls": 3,
+  "reservationMicros": "364565",
+  "countAllowanceMicros": "105000",
+  "maximumCombinedMicros": "1249323",
+  "restrictedMaximumMicros": "884758",
+  "parentSettlementSha256": "00bf186d19475031d59b67fb0455ca526c63337fd89c17a1dddd5cafacd5229e",
+  "mainDispatchAuthorized": false
+}

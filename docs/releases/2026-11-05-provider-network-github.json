@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-04T23:17:51.977Z",
+  "status": "pr-created-ci-passed",
+  "repository": "zzocojoa/haru-word",
+  "branch": "codex/provider-network-evaluation-20261104",
+  "head": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+  "base": "main",
+  "baseSha": "32dc3b8cc99e239260925e901e6477e42a1fc047",
+  "gitTree": "5633ba2d3d7a1c36cf00f4f6296f89a59eaacbfa",
+  "pullRequest": {
+    "number": 57,
+    "url": "https://github.com/zzocojoa/haru-word/pull/57",
+    "state": "open",
+    "draft": false,
+    "merged": false,
+    "mergeable": true,
+    "title": "fix: Cloudflare Worker의 OpenAI 통신 실패 수정",
+    "commits": 3,
+    "changedFiles": 8,
+    "additions": 712,
+    "deletions": 4,
+    "bodyVerified": true,
+    "artifactAttached": true
+  },
+  "commits": [
+    "5393328 fix(openai): support safe redirects in Cloudflare Workers",
+    "49a9f9c test(openai): verify redirect body cleanup preserves errors",
+    "f1395c0 docs: record v145 rollout and deferred device checks"
+  ],
+  "ci": {
+    "head": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+    "run": {
+      "id": 41932032263,
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 732,
+      "jobs_url": "https://api.github.com/repos/zzocojoa/haru-word/actions/runs/41932032263/jobs",
+      "logs_url": "https://api.github.com/repos/zzocojoa/haru-word/actions/runs/41932032263/logs",
+      "workflow_id": 370823629
+    },
+    "jobs": [
+      {
+        "id": 126931056599,
+        "name": "Validate (Node 22)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 41932032263,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Use the project npm version",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run unit tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check reviewed grammar content",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check types",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Build Worker",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Post Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          }
+        ]
+      },
+      {
+        "id": 126931057059,
+        "name": "Validate (Node 24)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 41932032263,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Use the project npm version",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run unit tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check reviewed grammar content",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check types",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Build Worker",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Post Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          }
+        ]
+      }
+    ],
+    "verifiedBothEngines13SuccessfulStepsEach": true
+  },
+  "localVerification": {
+    "node22UnitTests": 800,
+    "node24UnitTests": 800,
+    "focusedTests": 15,
+    "allExitCodes": 0,
+    "lintErrors": 0,
+    "existingLintWarnings": 15,
+    "changedBehaviorsCovered": 4,
+    "changedBehaviorsTotal": 4,
+    "notInstrumentedProjectLineCoverage": true,
+    "localLinksChecked": 89
+  },
+  "reviews": {
+    "nativeInHostAdversarial": "completed; no supported findings",
+    "coverageAudit": "4/4 changed behaviors, no remaining direct assertion gap",
+    "documentationAudit": "current; second/final audit, no edits/blockers; source hashes bound before commits",
+    "outsideIndependentModel": "unavailable; same-harness CLI not launched, no outside-model credit"
+  },
+  "operational": {
+    "additionalDeployments": 0,
+    "deployedVersion": 145,
+    "deployedSource": "a22d747f1a55ad86f97283cd9a76df9b838a9082",
+    "originalDeployedCandidate": "5393328972c5fcd5b8f8411063a3f7c98235336c",
+    "runtimeMatchesDeployedCandidate": true,
+    "postDeployChanges": "documentation plus existing test strengthening only",
+    "newPaidCalls": 0,
+    "productionQaWrites": 0,
+    "secretChanges": 0,
+    "closedApiLedgerReopened": false,
+    "rootProductFilesPreserved": 637,
+    "oldEvaluationFilesPreserved": 32,
+    "taskMasterTagsPreserved": [
+      "master",
+      "judgment-remediation",
+      "integration-remediation"
+    ]
+  },
+  "physicalFollowUp": {
+    "deferredByUser": true,
+    "blocksThisPr": false,
+    "document": "docs/PROVIDER_NETWORK_INVESTIGATION_20261105.md#후속-작업-실기기-검사",
+    "checklistUnchecked": 4,
+    "tested": false
+  },
+  "unverified": [
+    "Physical device and VoiceOver",
+    "Authenticated production OpenAI success after deployment",
+    "Independent human English-quality certification",
+    "Full browser/performance rerun for this transport-only change"
+  ],
+  "pushGuard": {
+    "enabled": true,
+    "bypassed": false,
+    "highFindings": 0,
+    "mediumFindings": 2,
+    "verifiedFalsePositives": [
+      "Synthetic Bearer assertion in an intercepted offline Worker fixture",
+      "Windows native process exit integer misclassified as phone number"
+    ],
+    "allowlistOrHookPolicyChanged": false
+  },
+  "existingRemoteNotice": {
+    "source": "GitHub push response on default branch",
+    "reportedDependencyAlerts": 21,
+    "reportedCritical": 4,
+    "reportedHigh": 10,
+    "reportedModerate": 7,
+    "triagedOrFixedInThisTask": false
+  },
+  "evidenceRoot": "outputs/provider-network-evaluation-20261104"
+}

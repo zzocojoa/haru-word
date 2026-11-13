@@ -1,0 +1,82 @@
+{
+  "phase": "phase180",
+  "passed": true,
+  "policyVersion": 10,
+  "semanticChange": "Correction decision withholding is observed; absent feedback remains unavailable.",
+  "otherDimensionsUnchanged": true,
+  "criticalRulesUnchanged": true,
+  "modelsAndLayoutsUnchanged": true,
+  "perItemOutputLimit": 1024,
+  "prospectiveRequests": 18,
+  "prospectiveVotes": 72,
+  "absenceProbeVotes": 6,
+  "witnessObjectsPreserved": 12,
+  "syntheticParseChecks": 72,
+  "regressionChecks": 8,
+  "regressionExitCode": 0,
+  "lintExitCode": 0,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "actualV10Votes": 0,
+  "oldV9ScoresChanged": false,
+  "sourceQualified": false,
+  "formalCalibrationQualification": false,
+  "mainDispatchAuthorized": false,
+  "productSourceFilesUnchanged": 765,
+  "oldManagementDocsPreserved": 273,
+  "ledgerUnchanged": true,
+  "ledgerSha256": "a5fe335a82f16323ae1e8ac55c5c59376e66d8d5e0f6cb6fb490a3d21a5182f7",
+  "sourceSnapshots": [
+    {
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-bilingual-product-rubric-v2.json",
+      "snapshotFile": "outputs/ai-quality-v147-implementation-20261106/phase180/source-snapshot/.taskmaster/docs/ai-quality-v147-bilingual-product-rubric-v2.json",
+      "sha256": "b225906df6f6f983c5f3dedccb202350bc2f5028198bed5a5aa3fcf204228652"
+    },
+    {
+      "sourceFile": ".taskmaster/scripts/ai-quality-v147-bilingual-product-review-v2.mjs",
+      "snapshotFile": "outputs/ai-quality-v147-implementation-20261106/phase180/source-snapshot/.taskmaster/scripts/ai-quality-v147-bilingual-product-review-v2.mjs",
+      "sha256": "eec54fd53bbabf0849d251cadad8add80e2a83d97dca1d1ac65d79802ddd5b00"
+    },
+    {
+      "sourceFile": ".taskmaster/scripts/ai-quality-v147-grouped-product-review-v2.mjs",
+      "snapshotFile": "outputs/ai-quality-v147-implementation-20261106/phase180/source-snapshot/.taskmaster/scripts/ai-quality-v147-grouped-product-review-v2.mjs",
+      "sha256": "af344e5a9a3b230f743ac49c8c7f00447e7724a36c2fb02a6c0de5ca00e3b053"
+    },
+    {
+      "sourceFile": ".taskmaster/scripts/ai-quality-v147-grouped-review-executor-v4.mjs",
+      "snapshotFile": "outputs/ai-quality-v147-implementation-20261106/phase180/source-snapshot/.taskmaster/scripts/ai-quality-v147-grouped-review-executor-v4.mjs",
+      "sha256": "53945e53d755c0541cae51ec2a2302c01cd64e3cb8c6ef289f849d8187cc170b"
+    },
+    {
+      "sourceFile": ".taskmaster/scripts/test-ai-quality-v147-withholding-review-v1.mjs",
+      "snapshotFile": "outputs/ai-quality-v147-implementation-20261106/phase180/source-snapshot/.taskmaster/scripts/test-ai-quality-v147-withholding-review-v1.mjs",
+      "sha256": "b5f25bd871add1ecd939e022daebfebeadc0aa967d581b44c9a38d36ab695e97"
+    }
+  ],
+  "protocol": "ai-quality-v147-withholding-review-preparation-v1",
+  "status": "prospective-v10-offline-verified",
+  "policyFile": ".taskmaster/docs/ai-quality-v147-bilingual-product-rubric-v2.json",
+  "policyHash": "2f7c545d030b2aa510ab75ee7ce4a88106380e740f0904f3c90fcf5b0a829cb1",
+  "previousPolicyFile": ".taskmaster/docs/ai-quality-v147-bilingual-product-rubric-v1.json",
+  "previousPolicyHash": "8aba31b46be90534f5edf8b51275eb20b4ee5864f587383ed56b4380fcad675c",
+  "individualCompilerFile": ".taskmaster/scripts/ai-quality-v147-bilingual-product-review-v2.mjs",
+  "groupedCompilerFile": ".taskmaster/scripts/ai-quality-v147-grouped-product-review-v2.mjs",
+  "collectorFile": ".taskmaster/scripts/ai-quality-v147-grouped-review-executor-v4.mjs",
+  "planFile": ".taskmaster/evaluation/ai-quality-v147/withholding-calibration-v10-plan-v1.json",
+  "planSha256": "097a3e811bc790e06a6f3457f74305c42dfe08cdac50de26fd19871e8579d0b4",
+  "document": "docs/AI_QUALITY_V147_WITHHOLDING_REVIEW_V10_20261112.md",
+  "pricingPerformed": false,
+  "liveExecutorScopePrepared": false,
+  "oldV9NewVotesAvailable": 9,
+  "oldV9NewGradeMatches": 5,
+  "oldV9FullUnmeasured": 39,
+  "heldUpperMicrosPreserved": "2806936",
+  "priorFailureResolvedInActualAi": false,
+  "evidenceSha256": {
+    "outputs/ai-quality-v147-implementation-20261106/phase180/policy-change.json": "590236be11ba5a292e8619f2b98ae4463ab9e2f21eac02177bf081bc961819ff",
+    "outputs/ai-quality-v147-implementation-20261106/phase180/prepared-panel.json": "fe2735a88e0a08cae05d0124429d8433b04c38ce7be56c1286f0e776b52af453",
+    "outputs/ai-quality-v147-implementation-20261106/phase180/independent-protocol-audit.json": "a4b881550b678eee5057f52968db3f91d4152bee5b0d2d8f2762af0ea0b37965",
+    "outputs/ai-quality-v147-implementation-20261106/phase180/unit-final.log": "cc251f1a904b9e349b5b2f76f8c3de799b4202f3963ea232964b41fd29935e09"
+  }
+}

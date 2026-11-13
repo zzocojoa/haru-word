@@ -12,6 +12,18 @@ const result=(id,state='completed',status=200,feedback=seed)=>({response:Respons
 function setup(){const storage=new MemoryStorage(),store=new LocalLearningDrafts('owner',crypto.randomUUID(),()=>storage);store.connect();return {storage,store,signal:new AbortController().signal};}
 const pending=(store)=>store.list(feedbackRequestKey(input.domain,input.targetKey),'request')[0]?.record.values;
 
+test('the explicit Korean role stays bound by the fingerprint while legacy-readable pending rows recover without resending',async()=>{
+ const {store,signal}=setup(),context={...input,contextRole:'intended_korean',contextNote:'그녀는 노래를 잘해요.',expectedContextFingerprint:'d'.repeat(64)};
+ let sends=0;const looked=[];
+ const io={send:async()=>{sends++;throw new TypeError('synthetic response loss');},lookup:async id=>{looked.push(id);return result(id,'completed',200,{...seed,contextFingerprint:context.expectedContextFingerprint,contextNote:context.contextNote});}};
+ await assert.rejects(runRecoverableFeedback(store,context,io,signal));
+ const row=pending(store);assert.ok(row);assert.equal(Object.hasOwn(row,'contextRole'),false);
+ assert.equal(row.expectedContextFingerprint,context.expectedContextFingerprint);
+ const recovered=await runRecoverableFeedback(store,context,io,signal);
+ assert.equal(recovered.recovered,true);assert.equal(recovered.feedback.contextNote,context.contextNote);
+ assert.equal(sends,1);assert.deepEqual(looked,[row.requestId]);
+});
+
 test('AI-2: temporary receipt-less lookup failures retain the pending UUID across explicit clicks',async()=>{
  for(const status of [503,502,429,401]){
   const {store,signal}=setup();let sends=0;const lookedUp=[];

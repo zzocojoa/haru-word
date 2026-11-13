@@ -1,0 +1,62 @@
+{
+  "protocol": "ai-quality-v147-question-ui-preparation-v1",
+  "task": 34,
+  "subtask": "34.3",
+  "evidenceDirectory": "phase62",
+  "status": "specified-built-learner-ui-request-context-recheck-reload-verified-locally; liveEnglish-quality-held",
+  "document": "docs/AI_QUALITY_V147_QUESTION_UI_20261108.md",
+  "documentSha256": "2d35f7b1633c33685b9a5d570789ef8f2d8a6fa21dbe91d7603628bceb5b25a3",
+  "testFile": ".taskmaster/scripts/test-ai-quality-v147-question-ui-v1.mjs",
+  "sourceBindings": {
+    ".taskmaster/scripts/test-ai-quality-v147-question-ui-v1.mjs": "e590b31540c734879e82715083b71cdf5a92d728b42c0cc7b92ba9d48e1eaea8",
+    ".taskmaster/scripts/ai-quality-v147-worker.mjs": "f80de7be66b37941a5e09c4b1ced247b01899aa67340241eb94a1569e209351d",
+    "lib/sentence-feedback.ts": "6477f5554a0272ba87af2865f588eb75371f50be2ed5afb98e6602fd053531cc",
+    "lib/feedback-context.ts": "ebf79ada3b93d1dc7fb32e428d66d910cb2e6c3c98236cac9be67d79b9640ef0",
+    "lib/server/feedback-generation.ts": "b4a9efa76be9b601c9be59df194e2354d13143591c565caeb7d1ad81060032b8",
+    "app/feedback-context-input.tsx": "83bae2fd0e0f70e531d150e3239ad8f916f353d1eb43c98586b546fafae439b1",
+    "app/study/use-sentence-feedback.ts": "73af87667c990cbc5e2fd2d237b37a125ee7a48082e1abefa92d0b22bd681d0c",
+    "app/grammar/use-grammar-feedback.ts": "a99977a49fecbdde1f6de12907202b93d0635658a5dc21efe3fe38dc87848bdf",
+    "app/feedback-detail.tsx": "3d092ade98e270fe2a91dcfdc934e5c21f999a01d579e2e36758fe0326c4aabe"
+  },
+  "resultFiles": {
+    "ui-node24-verified/results.json": "4926fb73bbb7b1240f87d008b8eb99067bbf4ae8baa7817022ffdc275f2e373a",
+    "ui-node22-verified/results.json": "287aff586b2b693f13d10dd9c0ad52071a9a0c2f172f3aab9c302f93446d1ca3",
+    "ui-node24-verified-exit.json": "758c4ee4db377d66e822e70b88c7a955aadbf3714ea01ce7eda876b88171f643",
+    "ui-node22-verified-exit.json": "c3c7550a6c901536675bcb81850735634896da9cfdfbd9c6ba69c5609c8f0405",
+    "lint-exit.json": "4735d39f5edf326815b2c0bbcdef3d998a1660cc6ee35baf83da5788e7117fc7"
+  },
+  "uiJourneysEachNode": 12,
+  "syntheticProviderResponsesEachNode": 24,
+  "engines": [
+    "chromium",
+    "webkit"
+  ],
+  "domains": [
+    "word",
+    "grammar"
+  ],
+  "modelAliasCount": 3,
+  "actualEnglishCaseCount": 0,
+  "syntheticScenarioCount": 1,
+  "testedFullLearnerRequestContextRecheckReload": true,
+  "phase61SpecificWholeFlowGapNowVerifiedLocally": true,
+  "allLearnerUiCoverageVerified": false,
+  "actualEnglishQualityMeasured": false,
+  "referenceOrJudgeRoleQualified": false,
+  "riskDesignApproved": false,
+  "sampleJustified": false,
+  "finalEvaluationFrozen": false,
+  "newPaidScopeApproved": false,
+  "releaseEligible": false,
+  "goalComplete": false,
+  "campaignCapMicros": "5000000",
+  "currentConservativeMicros": "3788335",
+  "newActualProviderCalls": 0,
+  "newActualCountCalls": 0,
+  "newActualKeyReads": 0,
+  "failedRunsPreserved": 2,
+  "failedWorkerRootsFile": "failed-worker-persist-roots.json",
+  "failedWorkerRootsSha256": "e493bf68c5b5b94085087921dd7f753b79b4ee8a9ba356a90b608cfa164bc783",
+  "correctionFile": "test-harness-corrections.json",
+  "correctionSha256": "5e50f541eca973892146a82ab6760b08bdec2c3a737d4a60bd0ec8ff5d92d999"
+}

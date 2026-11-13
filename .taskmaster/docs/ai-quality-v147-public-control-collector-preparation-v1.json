@@ -1,0 +1,83 @@
+{
+  "protocol": "ai-quality-v147-public-control-collector-v1",
+  "evidenceDirectory": "phase51",
+  "groupsEachNode": 16,
+  "responseSlots": 6,
+  "countSlots": 6,
+  "controlVotes": 36,
+  "syntheticChecksPassed": true,
+  "liveScopeGateExercised": true,
+  "newScopeApproved": false,
+  "liveProviderTransportVerified": false,
+  "actualInputTokensMeasured": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "englishQualityQualified": false,
+  "referenceRoleQualified": false,
+  "evaluationFile": "collector-evaluation-prepared.json",
+  "evaluationHash": "d433f3d23cdea279254733a5c4de88e740461b377b55b5810f5292c793da8990",
+  "evaluationFileSha256": "888479bd3427481cf1eab590f11d3194e1ca271f1b80638a3601376d45934716",
+  "document": "docs/AI_QUALITY_V147_PUBLIC_CONTROL_COLLECTOR_20261107.md",
+  "documentSha256": "f19c1ab62b714bab1195396ab6a61aba5b40323108c49ece8f9f3e3bbf90cc99",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-public-control-collector-v1.mjs": "56bf650788b2fe9e40516171046fdef8d87874daf98211acd8b744d94a8d8cdf",
+    ".taskmaster/scripts/test-ai-quality-v147-public-control-collector-v1.mjs": "b300d751f68bb0fcc91975688821de98429057cda9ee94368c22d65ce10aa596"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-public-control-collector-v1.mjs": "56bf650788b2fe9e40516171046fdef8d87874daf98211acd8b744d94a8d8cdf",
+    ".taskmaster/scripts/ai-quality-v147-public-control-batch-v1.mjs": "7c2c8b621b4b39365926841eb808062c783e89f3a7001af3058c434d97a01c6a",
+    ".taskmaster/scripts/ai-quality-v147-reference-controls-v2.mjs": "3d01666c168d135c4dec812ebf3d187490fed9a5419dddf3654fb5db6675b105",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "36c433a1bc05bdc1d3b458d79e538915ed1ae5d0e32fe62800712bb034e3dd6b",
+    ".taskmaster/scripts/ai-quality-v147-exposure-v1.mjs": "14aa01e2a5ac1ef1d649362a40e4639a86df61506155bb6e7b73264cbd012433",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0"
+  },
+  "checks": [
+    {
+      "name": "collector-node24-first",
+      "exitCode": 0,
+      "groups": 16,
+      "log": "collector-node24-first.log",
+      "sha256": "2c4cc0468bd24979ccd047d083001d924b26a4493d8ea7d457004044cb1d3d8b",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-public-control-collector-v1.mjs"
+      ],
+      "sourceHashes": {
+        ".taskmaster/scripts/ai-quality-v147-public-control-collector-v1.mjs": "56bf650788b2fe9e40516171046fdef8d87874daf98211acd8b744d94a8d8cdf",
+        ".taskmaster/scripts/ai-quality-v147-public-control-batch-v1.mjs": "7c2c8b621b4b39365926841eb808062c783e89f3a7001af3058c434d97a01c6a",
+        ".taskmaster/scripts/ai-quality-v147-reference-controls-v2.mjs": "3d01666c168d135c4dec812ebf3d187490fed9a5419dddf3654fb5db6675b105",
+        ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "36c433a1bc05bdc1d3b458d79e538915ed1ae5d0e32fe62800712bb034e3dd6b",
+        ".taskmaster/scripts/ai-quality-v147-exposure-v1.mjs": "14aa01e2a5ac1ef1d649362a40e4639a86df61506155bb6e7b73264cbd012433",
+        ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+        ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+        ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0"
+      }
+    },
+    {
+      "name": "collector-node22-final",
+      "exitCode": 0,
+      "groups": 16,
+      "log": "collector-node22-final.log",
+      "sha256": "8137ed44757d5e4ec1f586d265a1f8fab7cde4cfded1e3fe233a85404fe706a5",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-public-control-collector-v1.mjs"
+      ]
+    }
+  ],
+  "priorCampaignUpperMicros": "843789",
+  "proposedConditionalCampaignUpperMicros": "4875245",
+  "retainedCountAllowanceMicros": "2015728",
+  "counterTariffExplicitlyVerified": false,
+  "counterAllowanceIsInvoiceGuarantee": false,
+  "outstandingApprovalQuestionFile": "phase50/pending-scope-approval.json",
+  "requiredApprovalRecordFile": ".taskmaster/docs/ai-quality-v147-public-control-batch-authorization.json",
+  "automaticRetry": false,
+  "automaticResume": false,
+  "releaseVerdict": "held"
+}

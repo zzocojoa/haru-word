@@ -1,0 +1,55 @@
+{
+  "days": [
+    {
+      "utcDay": "2026-11-08",
+      "closedAtExport": true,
+      "reportedRows": 15,
+      "reportedUsd": "11.06066300000000000000000000",
+      "previousReportedUsd": "11.06066300000000000000000000",
+      "expectedUsd": "11.06066300000000000000000000",
+      "deltaUsd": "0E-26",
+      "previousDeltaUsd": "0",
+      "newResidualUsd": "0E-26",
+      "differences": 0,
+      "capturedResponsesSinceBaseline": 245,
+      "newCapturedResponses": 0
+    },
+    {
+      "utcDay": "2026-11-09",
+      "closedAtExport": false,
+      "reportedRows": 15,
+      "reportedUsd": "3.099275450000000000000000000",
+      "previousReportedUsd": "1.965213500000000000000000000",
+      "expectedUsd": "3.08674845",
+      "deltaUsd": "0.012527000000000000000000000",
+      "previousDeltaUsd": "0.01252700000000000000000000000",
+      "newResidualUsd": "0E-29",
+      "differences": 4,
+      "capturedResponsesSinceBaseline": 201,
+      "newCapturedResponses": 117
+    }
+  ],
+  "newCapturedModelResponses": 117,
+  "newCapturedCountResponses": 117,
+  "newCapturedCountAllowanceMicros": 4095000,
+  "countFeeLineItemObserved": false,
+  "invoiceVerified": false,
+  "ledgerAdjusted": false,
+  "generalAvailableMicros": "1152100",
+  "reservedMicros": "0",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "protocol": "ai-quality-v147-current-cost-readback-v1",
+  "phase": "phase134",
+  "task": "34.3",
+  "document": "docs/AI_QUALITY_V147_CURRENT_COST_READBACK_20261109.md",
+  "oneCaseConcurrentReservationFloorMicros": "2221456",
+  "mainDispatchAuthorized": false,
+  "evidenceSha256": {
+    "reported-costs-20261108-09.csv": "8becd11df8dbb461951abc95d19a4f7c30fc81c05a1a290e107d3c85ae40ebe8",
+    "cost-readback.json": "c1de496e3b6a8d08353c5d9ceda7d2c552e4d820641847ed93210966539bde08",
+    "compare-reported-costs.py": "b324910567e67e0061722e8940cbd69ad6a14224ceb41eb00c3a32f03c59cb04"
+  }
+}
