@@ -1,0 +1,45 @@
+{
+  "historicalProviderResponses": 3,
+  "browserChecks": 6,
+  "newlyExplainedScreens": 2,
+  "countRulePreservedScreens": 2,
+  "currentBuildSha256": "bf56425f630fe91c2421f28ff163a1c97c9ec9e002867420732409fe8c8da41c",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "explanationCandidateRebound": false,
+  "learnerEfficacyMeasured": false,
+  "applyAndUndoChecks": 4,
+  "olderGrammarResponsesExcludedFromExactReplay": 6,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "productionWrites": 0,
+  "phase": "phase151",
+  "tasks": [
+    "8.2",
+    "37.2",
+    "24.1"
+  ],
+  "document": "docs/AI_QUALITY_V147_AVOID_EXPLANATION_20261109.md",
+  "previousFreezeSha256": "58af6da9c104bcd4383d324c410f387695f22b022fdc5d8815e19d7801639d17",
+  "replayedPilotCandidatePayloads": 180,
+  "changedPilotExplanations": 0,
+  "unitTestsPassed": 900,
+  "lintWarnings": 15,
+  "evidenceSha256": {
+    "actual-response-replay.json": "55ea45aefad818a31d9bf7078b8bdd42914fa41275fe3baec3533939534aeca5",
+    "pilot-explanation-audit.json": "8b0b38654face8055f1c75820722efbbe60eaeebb4e64d885475d097e4ddea2b",
+    "prepare-replay.py": "fb7f6276b9b3465566a935ea576cafe4e272980be9c129469a2faa22c44a43fd",
+    "verify-actual-replay.mjs": "893c82ada5d74017467dae01b0c8240eef35afacb68d30f055e371cd904f9847",
+    "check-pilot-explanations.mjs": "d25ac88ca135f3f9d376574964507e6d072e22804c787ee1b1fb6c2161c06459",
+    "red.log": "f95e3b9f2c1ccf2b116bf0adc34cfefb748d353e0c422dd4510ac81a8c7dcdc4",
+    "test.log": "24d269350ded3572df920f09af54624700273ff1ebb2f6e68a3dd5259880c792",
+    "typecheck-initial.log": "524ef789640a362444891b4a8accdf91570406add71b8d04c313a26d9d656917",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "build.log": "59aaf13d53bc660c73d8dba7e20e3a672cd03aa6167820b92a6797ed0d0fc5f3",
+    "lint.log": "35bdb5b5e8ec9033f080396ffe6d229a4609391a38112660c989e99695530240",
+    "worker-browser.log": "798709dd4755ce680c65f9719623aefc96af7c893d9da7cfdc69922f12060f4d"
+  },
+  "productSourceSha256": {
+    "lib/judgment-correction.ts": "bc3c1abdb3b84ddc1c27be4c9c525b573c3b3cf904c4afd2174bc16d107ce7df",
+    "lib/verified-feedback-explanation.ts": "177a0827eefc78ef8f2c3b48dcf42174a962ccee4b7d87bfb98cf32a46549d4f"
+  }
+}

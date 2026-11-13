@@ -1,0 +1,95 @@
+{
+  "atUtc": "2026-11-06T06:48:35.864331+00:00",
+  "task": 22,
+  "stage": "v2-durable-journal-and-pending-inspection",
+  "checks": [
+    {
+      "name": "journal-v2-node-v22.23.4-final",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-journal-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 12,
+      "failed": 0,
+      "log": "journal-v2-node-v22.23.4-final.log",
+      "sha256": "463cd09444688302af27981f49ee465ecf29de5948dd3049bf06b397f62fb018",
+      "evidenceDirectory": "journal-v2-node-v22.23.4-final"
+    },
+    {
+      "name": "journal-v2-node-v24.22.1-final",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-journal-v2.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 12,
+      "failed": 0,
+      "log": "journal-v2-node-v24.22.1-final.log",
+      "sha256": "1f2badc296423ce260349d4f13ed546c284886b5a5e3872c0aef347b252f37fc",
+      "evidenceDirectory": "journal-v2-node-v24.22.1-final"
+    }
+  ],
+  "lint": {
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-journal-v2.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-journal-v2.mjs"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "journal-v2-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-journal-v2.mjs": "9068d018cb2d6b24b600237d1bf2be1a88d388543449e131ac3e1615cefefafd",
+    ".taskmaster/scripts/test-ai-quality-v147-journal-v2.mjs": "b0c1112740ed806a5be6d04dcce03bee65fc28e11d69266671d87f12d99934e0"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v2.mjs": "830ea9dc169010ee968282d664754488c126657b6d29c1e3e4cb1e8c074c2bb4",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8",
+    ".taskmaster/scripts/ai-quality-v147-failures.mjs": "85e6767dd73b52904998c41ac69f9c15a33f581979ec18db03fd7e071fabaf4a"
+  },
+  "proofBindings": {
+    "journal-v2-node-v22.23.4-final/journal-v2-observations.json": "1cca9f5bfc013061a30185625f5ea4902bfba95dee6983049ed01346ea277426",
+    "journal-v2-node-v24.22.1-final/journal-v2-observations.json": "13ba8d4a7dda7f8272f40a95e75f230a91decc97b20dbff56b147b2e423cc58b",
+    "process-raw-preservation.json": "918fc2ed1246b991c2466d122be404d85a5c70415187cc89bd358fc2e15995d9"
+  },
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "task22Complete": false,
+  "durableJournalImplemented": true,
+  "pendingInspectionOnly": true,
+  "pendingRecoveryImplemented": false,
+  "fullExecutorIntegrated": false,
+  "fullCollectionExecuted": false,
+  "liveEvaluationSupported": false,
+  "actualFinalEvaluationFrozen": false,
+  "writeProcessExitsEach": 10,
+  "schemaVersion": 1,
+  "revision": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "T22 partial implementation; v2 journal/session verified,explicit recovery and full executor pending",
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase15/journal-v2-checks.json",
+  "proofSha256": "49228a78d9c055d413400bd7be7a1903915324fbbbf75cd4b7740293088a52da",
+  "contract": "Exclusive process-owned session; v2 header/spec once then append-only delta records with previous/ledger hashes. Fsynced PENDING→log append→temporary HEAD→atomic HEAD replacement→readback. Returned state only after readback; failed writes poison session.",
+  "integrity": "Every current()/append/audit hashes all committed log bytes,checks exact HEAD and owned lease; length/mtime cache cannot hide edits. Full state transitions replay at session open/audit/close. No old prefix overwritten or truncated.",
+  "v1Preservation": "Separate v2 journal implementation reuses only unchanged generic v1 path/owner helpers and process identity. The previously proposed v1 registry expansion is not used; old v1 storage/dispatch/recovery remain byte-identical.",
+  "inspection": "Read-only pending inspection binds old/new HEAD,complete raw appended record,owner/spec/operation/state and exact temporary HEAD. It never performs recovery,steals a dead lease,initializes or truncates incomplete bytes.",
+  "limitations": [
+    "Explicit pending/lock recovery,verified durable payload/receipt storage and no-resend dispatch integration still pending. No claim that an incomplete run automatically resumes.",
+    "Full756 collection,CLI/actual full Worker orchestration,source/body/price/runtime preflight across dispatch and process fault matrix remain T22 work.",
+    "No physical power-loss,directory fsync guarantee or complete hostile filesystem rollback protection proven. State/metadata integrity is not receipt provenance or English quality.",
+    "All journals are owned synthetic fixtures with synthetic-test funds; real paid approval/calls/key reads0. Current store intentionally rejects evaluation writes."
+  ]
+}

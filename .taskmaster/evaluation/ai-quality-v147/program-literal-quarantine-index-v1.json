@@ -1,0 +1,4314 @@
+{
+  "index": {
+    "protocol": "ai-quality-v147-program-literal-quarantine-v1",
+    "coverage": "selected-program-candidates-only",
+    "catalogueSha256": "60f670cb3565e73099a5203a8ae8cc56b5e45483034df69e704c904ef05655c7",
+    "classificationHash": "a9550960082eeab6bee77accbc48be5f90a1919995d2f5dd5eda9f210de2004c",
+    "knownCandidateSurfaces": 433,
+    "sourceOccurrences": 629,
+    "entries": [
+      {
+        "normalizedSha256": "00202447674468194d256ab149cc7426a5ad410cbfe7f011b4576675c7ce7f28",
+        "originIds": [
+          "program-literal-37b3b09248203e5a1945dffa"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "005db68a3ac1d12f10dc765cb69671c28b89fc05f333adea10a606b69ee08f3c",
+        "originIds": [
+          "program-literal-8a0fe22bce9afeb34d4c589f"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "00a760d6771106a5146a19079b72d3821a7a26c40926c1bab2a663361aa7ddfe",
+        "originIds": [
+          "program-literal-9b050f6bd0224f9ce772fd13",
+          "program-literal-84e7df9b9cb0f7b6f299dc83",
+          "program-literal-a64b8bba05d8fbcf0bcdfe7f",
+          "program-literal-8e9a82c5537435e04fb1a08c",
+          "program-literal-9b22fcda904e86b46ad7ceef",
+          "program-literal-f9d9c5c3cbf3342c4a3cc851",
+          "program-literal-5da831b97f24c3ab65e2bffb",
+          "program-literal-9d6cb715540800925ebd3c32"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "00c1daf5abd9b81542e3ac8d353cc7d26bc7434650a32883674fedb1c4abbf7e",
+        "originIds": [
+          "program-literal-d0fe71095206fb473ae47bf3",
+          "program-literal-ee62ef19a206eaff7cda0d60",
+          "program-literal-336227d0485dd24c8fa48b5c"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "00ffe7cdb61d7799ce462e97c912a600f88d345212741f7e163028e7644be136",
+        "originIds": [
+          "program-literal-8c1d5075bea37182fda81891"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "018648d684a57a40019e6d10082f8582db37b71182037b6e2a065ce3133802a2",
+        "originIds": [
+          "program-literal-d9d6a1a6fc04f5757d91ec29",
+          "program-literal-dc8272a23df8bcc90cca0bdd"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "02768088336346ef8349709887625af9ba7d1cc4067edf4058e4d1289e9370bd",
+        "originIds": [
+          "program-literal-1f0cbf7e21a9d038f9506fec"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "027b02d5b137dfca5679dc5b3ac2438292f05d12279a48f771a427c5712c125e",
+        "originIds": [
+          "program-literal-f23c2b5b239a9196c4d87220",
+          "program-literal-a24759295b871c90b9ecedc0",
+          "program-literal-387dd50928576177194cf6e6"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "030d1f80d0a6cfcb1ca0fe121d43a7e20b23acf776268d6756f2dae866e6acb2",
+        "originIds": [
+          "program-literal-8781c6dd81b9644d3c63c010"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "0381b57b44ccf454556944227dfa9e669bb755ceaadb77f6e880e173f0d63314",
+        "originIds": [
+          "program-literal-cce5c9a4657f0a994d7f1562"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "03fd76ff941281d4921533ee2b68b04ddb6ef6fdebc6d5ff74364a96c24fc8e7",
+        "originIds": [
+          "program-literal-dd65fdc1b18b3488719e97c8"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "0698352d3f31cf79af655c74c91adf773b61771aac586f27535a1d92a46ec9e0",
+        "originIds": [
+          "program-literal-14e8542b604f13c2311afefa",
+          "program-literal-315fa43e664126a51176aad3",
+          "program-literal-7dd15eafcf60f897f22bd257",
+          "program-literal-6e3943bb5989aea590c5e6a6"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "06bdad50487443e7b0817aa63343513c7252b3ead414586d6f00c1b93606fa21",
+        "originIds": [
+          "program-literal-90e9a610b4c3c48727cbf5e0"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "06cac9ee29ffaa1f009b4492d0351a01cb16c7f959fa6c35ed78189b27198168",
+        "originIds": [
+          "program-literal-bd63b7b8ef0b7fac878944b4"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "07d4aa4a52054741f50a255beb128a4aa280c7eb0989c424ba50368061b1f15a",
+        "originIds": [
+          "program-literal-381f349dd06f0ead45f1c7f7"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "080fc9416e11f2d072b1e1fc024e9b8a5b3b2e61087be7d61a8aec42fbbff238",
+        "originIds": [
+          "program-literal-ce01dbd962ed2ebf002d03e7",
+          "program-literal-88abb2635586ae652293cd2f"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "0827cce910e8aa60f9a3c5b4981436fa430d046f372af2991a2400d7d63cc019",
+        "originIds": [
+          "program-literal-9aa657b9bcb4827a16ff622f"
+        ],
+        "roles": [
+          "assertion-expected-or-message"
+        ]
+      },
+      {
+        "normalizedSha256": "095540213e3e3e7870ba3cc473f1ddea4fb46d6a31ad47552cafadc6b955f3bb",
+        "originIds": [
+          "program-literal-05276ab313d43398e625f2f9"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "096eb4ad3de7199470ced2cdeb4b4daa75efa009b4f5370c87fa0110e6835760",
+        "originIds": [
+          "program-literal-034280b486dad82fcbe53f33"
+        ],
+        "roles": [
+          "property-value"
+        ]
+      },
+      {
+        "normalizedSha256": "098fa2f91a6e728a3f988215fd87cc96c03375ec825108e48331e98ee8365d28",
+        "originIds": [
+          "program-literal-8d9d31c61606e12313db34bc",
+          "program-literal-afb4622b1064c848d4316015"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "declared-before"
+        ]
+      },
+      {
+        "normalizedSha256": "0ab104b789682d68875f1a991598b915f1d487ab64de17f47ef992721cf9e012",
+        "originIds": [
+          "program-literal-5a76157ee244c1f4f3dd14ee",
+          "program-literal-1f4059da23441e90d28c309a",
+          "program-literal-26231e44602b2eb84cae3b69"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "0b21789787ddde511f7f20f898adcb37307a0ea15ca227ae60ff0770c71ee0f2",
+        "originIds": [
+          "program-literal-72c50a0859799042a99664d2"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "0c6feb8047484788f590f0e65d6f3b1a705a3609924a744a5a36988e4a52f9eb",
+        "originIds": [
+          "program-literal-03bc7135d54efc6320cef514"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "0c8cf3724f5487b23838d6374ea4ace3eeb8ea71593f76db968eaa6dd81d1f06",
+        "originIds": [
+          "program-literal-d3c329434895d3ed364b813b"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "0c91566a26a2f85a6aa6194b0e3a711febd64ca08d26f99a5562d2345a1cbab2",
+        "originIds": [
+          "program-literal-549f2a762e6e14e46ca640e4",
+          "program-literal-54b4ab46b73b133197775dab"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "0ccba387c558e61fdc8fb7cb6324104ad63038531a98d636b82e5ccf1b39cae4",
+        "originIds": [
+          "program-literal-d66a879f27205bbeb956aabe"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "0d285a10d12157b54ab66c870fed9ea3d2f4b6398d550e3f1899c599dfda741d",
+        "originIds": [
+          "program-literal-7b6585ff35c4af42a50a9b75"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "0e098dbc3450c57620dc832fc6088d5c73b2125d5113aa34d9ae12136f28a84c",
+        "originIds": [
+          "program-literal-a6e562d94781f034a9c72204"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "0e63d76758425e5bf9882e54fc1b931ee7e4a4de76b9aff42f3315a40f889904",
+        "originIds": [
+          "program-literal-deed10ab1ef6209db9509eed"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "0e67d851add5eee1939fda6cd65cccea6c05aa19abf9772dcb216109c7b809f3",
+        "originIds": [
+          "program-literal-e3596c80ecc09f0ec806b859"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "0e7486ab92b9fd35f20713f284b0ff051e5b64e464295d12f25d39023c535d01",
+        "originIds": [
+          "program-literal-5c6c88c467aa4293ddad33bd"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "0f5959b1d68fd27c1696efe5d45f24900da5f30479eecde83f6ae00c89a3ed38",
+        "originIds": [
+          "program-literal-43d423e26474cac8bec35115"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "0f935faa8279ffb9300bd4c32fd160f0c0056dd91afa2724d2bb0ebe65ded415",
+        "originIds": [
+          "program-literal-d002bfe771a8e02d5335171b",
+          "program-literal-3505a289c98bf1442318e265",
+          "program-literal-d82870854b13be8b9e7d7223",
+          "program-literal-418f2feb97f71032d8843ab6",
+          "program-literal-bdc63a1deafb559c2f40a10a",
+          "program-literal-1f9fd8c37e7cdaabe38a8ac9",
+          "program-literal-4e60ca23435721ec4f727555",
+          "program-literal-a6b06af651b0a0305a9b0433",
+          "program-literal-5a6ad4476c4ff717ac0f5d0f",
+          "program-literal-ef9556e3ba6af355fd56bf8b",
+          "program-literal-2067a422ebdd8d4670d683d5"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument",
+          "declared-original",
+          "declared-sentence",
+          "loop-binding",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "1012491b37d45ad2d708ce088a62da64e12072885b74c808f1f87d3a1eb23f15",
+        "originIds": [
+          "program-literal-16ac661451cfc2ff7c8e8785"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "113b5b603733eaebc105db181111c9bfdffd47f10b71c2acb5322b9e63e043d8",
+        "originIds": [
+          "program-literal-d3af0467d13d6ff581aa5a08",
+          "program-literal-6a7c09fb87102a9244e4279b",
+          "program-literal-3134fe2dd4926f463a8b3eb7",
+          "program-literal-416fcc9178b7531c96495beb"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-original",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "117c420bafc98c9d3dd98ea946446281e1aaf34bcd1934f8aab614fad2677aa5",
+        "originIds": [
+          "program-literal-f106f727b6130fa80e25445e"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "11bd2d2237c0a9c9d54ec9760449ae8ad8c83214d6b004b686bcb750798de11c",
+        "originIds": [
+          "program-literal-f51ab8651770686d2badba9d"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "11f574aeb899b481cd948e5480a458255793ea84b2aed244b7e3a9856bf27197",
+        "originIds": [
+          "program-literal-68451598d05b1d67b7928b1f"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "12a261e1e19ca600a61fa0095eb595beb6ffd0f67d51e5da2e389fdd4abf6d42",
+        "originIds": [
+          "program-literal-6d1aeade8bfbd6861cce6c77"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "12a7cd8e51b254d2ef764f153462af6f880f821fad536fe74d2dd947baff0f2d",
+        "originIds": [
+          "program-literal-a426b1900852f2269685041e"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "133155be884ecbf197b7b9f5c86031c6eaabcbb465286de9e5d91c748b0c287d",
+        "originIds": [
+          "program-literal-f3fb4d01cafef64750cfb7af"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "1435f3d630a5d19f47ec13f5455ee160955ba4214cf98c5965ce5e2b1519d804",
+        "originIds": [
+          "program-literal-5de74dd574819df8c639094d"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "156c23b4f5647a229f83e18a945e1d4bf44e6e64ea2fa72b8c5677249a539805",
+        "originIds": [
+          "program-literal-9015cccc81c7f6d269ff7984"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "175a90d5f948ec89e4093c8e814cb1b31656928d8a064023510dbf77ac8b5dca",
+        "originIds": [
+          "program-literal-ef31afdaca989b386fdb2d34"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "17d912760c4edba261109b87d2e783c44cec46914bbfd79a5c76bd18e48df35e",
+        "originIds": [
+          "program-literal-7b20bd23e83998562f4ecdfe"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "17d94eaf143d0dd98bc097afcfa3492c2dfcb7779cac274522ec285ad9327f2e",
+        "originIds": [
+          "program-literal-af65d8a8fdc0c6c0eba87ee1"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "17dd5249080aa056013dedaba63e2eb29af67440690bdcdb916a29835f506ccb",
+        "originIds": [
+          "program-literal-b5dba3774d6198e990ea7bce"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "17e9f20b04ce006a8071a40b5e4a7f4d8cc0574eed4e2393092bdc95fc15a1b4",
+        "originIds": [
+          "program-literal-cbdae641b5643fb2f8163f8a",
+          "program-literal-d02b5a7083266497fee401fe"
+        ],
+        "roles": [
+          "loop-binding",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "1858cb306bb2d0b2d592d88104aa1464e2313b6dd16420c9d6b84612d9d55fe4",
+        "originIds": [
+          "program-literal-bee12e2c7f18193199432438",
+          "program-literal-c0640a3ededce84443e135ae"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "185bbdb0053a484fe30e4bdb289b9194279b12e6bbae036e1bf16a6d0eb3d018",
+        "originIds": [
+          "program-literal-5969ea8526a8653caa5a30a6"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "18db86700ee0c09c5685d96d8674f9a39a8d6b260fb3beae27569cb1e8d31b6d",
+        "originIds": [
+          "program-literal-fbb05a44ab611769aa20f400",
+          "program-literal-7e2716b8a696bddbedbd4066"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "19e91d9ba5372afd59e1e6e5451d0436dbaa4fe4cb9f2cdede4104b47dbcb043",
+        "originIds": [
+          "program-literal-53b15637141ae964df77a78a"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "1a1dc807502df984eaae87c2db3c78d916f8ecf351418187369ec26048af95cc",
+        "originIds": [
+          "program-literal-92bb4e8e204b56d423bcb146",
+          "program-literal-abb2f1517774aa6414e02486"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "1b56be922f25e81031c9f3baf88ff9bd71f0ab1b3eb7e933565da9ecab1c90e3",
+        "originIds": [
+          "program-literal-270280f8593fe19c29174ed1"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "1c08fa03b55319f2e2ba9e2141ffc963cbe88667aa1d09ce6c9ee46c8be8a75b",
+        "originIds": [
+          "program-literal-32adc013537beb95d52323e6"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "1caa0a16c4e7b41ea2dfcfbde2dc1a1a55b15a737859d54de7e3d2520381c010",
+        "originIds": [
+          "program-literal-640c5c19937f78f2e8d5085d"
+        ],
+        "roles": [
+          "assertion-expected-or-message"
+        ]
+      },
+      {
+        "normalizedSha256": "1cdf538c33a0218d3ba58df4f5b200348b1c1e34dce70f32b84593228217408c",
+        "originIds": [
+          "program-literal-888859dcccc13f7c0daee1c4",
+          "program-literal-e0c4b95ec2427122839e2ab7"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "1cfb3ac97871cb6d44171f6bbd6492774c647dddc118360da164a56785e3e538",
+        "originIds": [
+          "program-literal-c8e78cb38631bcafbe47103c",
+          "program-literal-0a7f0de1e06fdf27851a78e6"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "1ec104ed9fe097bc7c1c5b9a0e5e651e212d29755878e8705ac5c01750e73f43",
+        "originIds": [
+          "program-literal-9ae98515915cbb1bc1eb6fcb"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "1f0c2b581e84d357daae9a3c682ee1150b7c295387b3f683b48503bf250dc192",
+        "originIds": [
+          "program-literal-476278073e813ba68ee0e5d8"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "1f2e65ba40967d39bddc41fac61d4258863eb561000bc834df3fdbb0e12ea238",
+        "originIds": [
+          "program-literal-6bac4e01d41168b8c049625a"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "1f4944ef55ca486ce2a8bde0a7d7962b42c6806caebaa52d0f6f26bc8b66165c",
+        "originIds": [
+          "program-literal-4b2aed5b5559f119d57943c1"
+        ],
+        "roles": [
+          "message"
+        ]
+      },
+      {
+        "normalizedSha256": "1f5f576ed57c3bc5f0647eb3e3ed604bcb95340aa0a30b9f7ef0087ce9174e6c",
+        "originIds": [
+          "program-literal-3fa5b9bce83e90f44cd4573e"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "1f6640d3fd656506d41c26925fd26deca576bfb6b3af654b238524d7c3168c05",
+        "originIds": [
+          "program-literal-6149c3cf1caff80986360ffd"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "209fc6ec8cac04b45f4fe9ed77e3a9b23c471678a55dee3e0a8f9933706bab01",
+        "originIds": [
+          "program-literal-30c0695e89ddbfb6fbd60f85"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "216be0d415e806fe77fb8f542c1871ccd3dcaa4985942cece3c1375235b71bf1",
+        "originIds": [
+          "program-literal-4b698bb01a3d964020b9fe26"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "21e85627696054f233fe3ba24e2e3aa645f417e6b175c55a76d7871231faf2e3",
+        "originIds": [
+          "program-literal-2ef57ebe736851f5bab33963"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "22b9af7e30dae9b3ce01918f272d62027a62480ddc4ec7266dab7900ced25d67",
+        "originIds": [
+          "program-literal-11f659410e3bfaec44238ef2",
+          "program-literal-ca7266ea6bb89e520609a272"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "23288786cd30fa0b6e7efdbfa2c3b90b7ba2e549a8f6ed96c081b7d35d8ab848",
+        "originIds": [
+          "program-literal-cf1ff6ab08fc09a8190e0bc6"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "23881d78f5b2c032fcf4a2f42e28a8402007742528d5a0e15123ef3ae64a1fe0",
+        "originIds": [
+          "program-literal-f8c96e72fa0c484d438774a7"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "24e2fbfd793c8f9a0979d2b6e66aa827cdfaf92ae63260a73a1574670128b279",
+        "originIds": [
+          "program-literal-c94f104e9182c0d378111a9a"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "25e12aad2fad4edfbc6313042091994db1a26b738c5087f6dfb436991a21b889",
+        "originIds": [
+          "program-literal-10a2c4b28b2f3f865176e28d",
+          "program-literal-278b78bf18de94b4a6b6a498",
+          "program-literal-8dfe3bf3c00d0ca604823d4b"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "26184925a5cde743659a74215b5ef1ddbdcf28066d8c7d1af20f2774fa705293",
+        "originIds": [
+          "program-literal-169d81d448a0cb25eeebc4cc"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "264f766dcd60742502b91b6964af8f5ae024e465255e31cc533772873f3620d1",
+        "originIds": [
+          "program-literal-ce883d4db020ce0c9b825744"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "27562e12137fac8ef69d9b5c9af5e07402955adbafaf9db11974afc5a55cdfd4",
+        "originIds": [
+          "program-literal-f6bad61cf0a6eac7f134bc1b",
+          "program-literal-de1143eede0255c6bb26c1d6"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "295c5c119d71a755741365fbfacd12ca1cc210a45c57943e56d06b9ddfb460ea",
+        "originIds": [
+          "program-literal-741e373fd2a307b2df8e6f3b",
+          "program-literal-1b56d4834a10543ea8805970"
+        ],
+        "roles": [
+          "notes"
+        ]
+      },
+      {
+        "normalizedSha256": "29d2950d7fa147a0f87ee080de267794012e45f5495330444c738705d77c2b7a",
+        "originIds": [
+          "program-literal-2b600c02ce879a06146dc86a"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "2ac656f0a5b63a77c98e3b5442927c94daef93bef4299a8eaf16f39a160b80e3",
+        "originIds": [
+          "program-literal-9535e6adda0ad53640b36760"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "2bf8732df044dcbe4115bd2632305b3319c8ea0ef9c08c1d924ff475c8898cb1",
+        "originIds": [
+          "program-literal-f9b5f2873e9d539f14c72516"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "2c21731576d47607e5e85b47d74ef67860c9b18b49bdadf15c198d6cdccc8cbe",
+        "originIds": [
+          "program-literal-5e638c7f1856b50c14fde5ea",
+          "program-literal-2f3f910e7a0a716e096c8471"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "2c4af88e2cd24ce5cfaf14043295571f06d4c7bdfa454530a2b8d86f1ae1e6ac",
+        "originIds": [
+          "program-literal-14efdb3f436b263283f4d117",
+          "program-literal-1cd855f957b66f15e9eb7a3d",
+          "program-literal-6f3d24940f2e9d6143997c44",
+          "program-literal-0a0f26dad3019e77aa554e95",
+          "program-literal-76e10f05308123b90e396535",
+          "program-literal-86bd0b83c3e587bb95e230b3"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-original",
+          "declared-sentence",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "2db37f7d0f6c0bdb4964d4ec0063abb6d6de30f90d2837324a2fd00a911e292a",
+        "originIds": [
+          "program-literal-e3449f163020bff6ca19af62"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "2e3ae6474df6f5b6d3fd513909d7f1c1b24b1a165221951aa50d1f363868ffc2",
+        "originIds": [
+          "program-literal-b262eba08cf9a66acb7f19c6"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "2f1fafdea9f83100e5da5d99d12d2354381b71cd5110f563720700397f25b60d",
+        "originIds": [
+          "program-literal-844127f55fdd6be95f23d03e"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "2f58376f46f3fe4d806e6fcf8f047334b8a185fd923724f1902f4a63b35760f0",
+        "originIds": [
+          "program-literal-84e1f9d51f0fb3cee6768dec",
+          "program-literal-732b80d44fe45379a574a163"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "2fa39ab42069063acc35b8e6b9c6daa982ec572fddb060a7172a7868faea8df5",
+        "originIds": [
+          "program-literal-c16020c704098c01f588dee4"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "3110b59ad3bd320452b9f37e8cd2e492161666e1020af709d401ab6743033543",
+        "originIds": [
+          "program-literal-e9c69b433a16a7ecf7ffcdf9"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "31a71f592a8ceaf2609905715836ad71a7bc73a0f1aaf24a2c705a333c32cbcb",
+        "originIds": [
+          "program-literal-64fd5c44480fa4944b326433"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "32811b31c6184201fdf0cce76e875264614e3823c60ca84cc9ad4214025eb509",
+        "originIds": [
+          "program-literal-c0fa11fd3be41d49fa8ce817"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "3313bf8d2171ea29022380a469a158a9cbddcfee6fc0fa4470a48cba50456199",
+        "originIds": [
+          "program-literal-3be677bc710c88dc96452a28"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "33f85aca1c953db46be8388cc70f49483cf4f5ac71e8ea221571a564f3d40970",
+        "originIds": [
+          "program-literal-b9d2785b8625e8b3d0f6a56c"
+        ],
+        "roles": [
+          "assertion-expected-or-message"
+        ]
+      },
+      {
+        "normalizedSha256": "341240e84c7d9c22e6ba3602fc7c09b2deb32e88e95eefc23a0cd07ae5bebd56",
+        "originIds": [
+          "program-literal-d12f23c0742045206eca7907"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "3481e1f2d21112ca48396f5c315d3bbe9df8a68571e1e05e29d26da808b794e8",
+        "originIds": [
+          "program-literal-7e86230dcca149837bab1380"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "3531bd7684e7bf3c6faaf7240f678ff229e0363888433196b593e0acaea74d08",
+        "originIds": [
+          "program-literal-00fa841be318e266698a3512"
+        ],
+        "roles": [
+          "answer"
+        ]
+      },
+      {
+        "normalizedSha256": "365e1c5b0380b467d6c4376e06291a11af7acb7638acf1dcbbe50e52facf7ee3",
+        "originIds": [
+          "program-literal-fe406c91ea530448250b6045"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "367439454eda8e8732bbe6ff5c630bde9791102f827ab036d5b89a27dd69efc8",
+        "originIds": [
+          "program-literal-df74d1c7471a806cc75b762d"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "367d2f88e754e949ffe250c1393c6a3400f3c3589d537b372d98e1f15af14873",
+        "originIds": [
+          "program-literal-306c2b49204602e34a8cd454"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "37180b81cb5e87cb9a642bf6c832debe9d39e95a64e467c293999aba559066e7",
+        "originIds": [
+          "program-literal-afd9846e4d8dd92d0397cef9"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "3784baf2c5b27114f4c8d285a1a5811d85fc9fa580607b33a6e6eba1f6442117",
+        "originIds": [
+          "program-literal-712d1c4dfff9f150741365ad"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "38487e84c6bb255fb945ab763814601f6d18a4e5f9ac51767ec99e68f3d4fdbf",
+        "originIds": [
+          "program-literal-a56d86eef8c9405e32b90a5a"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "386430a779bd25d9f57faeb463642250dbbb29da677a809dc39156e7b3367847",
+        "originIds": [
+          "program-literal-496c1275ce53cc1e5939cc3d"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "3a48646d349933ebde4e340e5b0188be9947e76905de3c4b7edd4cce965bd76b",
+        "originIds": [
+          "program-literal-3545456c127ce176a3a658f3"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "3a935264c5450771c985805b165230ad390d217ef2386a735dc32a03e48ba186",
+        "originIds": [
+          "program-literal-411bcab902c4d9eb494d96bb",
+          "program-literal-fd960ec5bb58e65fc666be14",
+          "program-literal-791bd33e20eab15ab204caa7"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "3ab67d99ea16774934ec59e36ecfc554cfd20b5abac55cebd0cbf68629c8685a",
+        "originIds": [
+          "program-literal-4ec1388731f053dd149bfefc"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "3abd629e00ad0481ddfa473baab79d9dc1084d00be4af2cf04d2ce94b0170a61",
+        "originIds": [
+          "program-literal-f16e48c4854910bdb3e427a6"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "3ad03a219b7e231db94ca244c6f6fa3877c43e9d127b0b5040fe369425cc2bf0",
+        "originIds": [
+          "program-literal-6603d7392336f546f1a6b963"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "3b26ba718ae7ab614145d44c6b62ba28563383ca8add26a0d57cc152af245847",
+        "originIds": [
+          "program-literal-a2efec276bd78c84553f36d2"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "3b509bb740c78578bfe6ac23d042d8bafb91c3bf6c2b6dae9547b01148f64ffe",
+        "originIds": [
+          "program-literal-a112263b3fca54b181d39c6d"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "3b5af32d5f0571fed60340685a27491289c4c646cceffef3f56f56816e57f482",
+        "originIds": [
+          "program-literal-c33cf6e208db07fc83f2e38b",
+          "program-literal-1742000b9915f295738618e8"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "3b7f52321f2fe31341d193b52bcdd835ed992786bbd674d2f8428d49202e5ffe",
+        "originIds": [
+          "program-literal-c203c12f25833610b43f9fde"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "3c7a85b4120e09102ef80dc26e41c88a8feca44ec4af6c0fa1839aea1b7debd6",
+        "originIds": [
+          "program-literal-ed757546879dda92f3fc1fbe"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "3e1d5611e1d63710401ee76823b30d41c57bf99e0fde1d1db2e5ab745b98b26a",
+        "originIds": [
+          "program-literal-03e1dd6ba6989a05bcf8c910"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "3e32603a6b4e0401d05946b747976555be3b522cfb447326d93764290faced7a",
+        "originIds": [
+          "program-literal-b1cee1448b43df2a31d074df"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "41bbca391c953948fb750422711d109e8ca274e939fc586324045e99a6263d9b",
+        "originIds": [
+          "program-literal-2a2f0f6b05f6ee812a22ea46"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "421fb3dd4a7de426be8cec644f4b8895245f7c3ecc91024568488c2ef2593012",
+        "originIds": [
+          "program-literal-a5abf601d1075688b7247832"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "42f9eff639dd5d55c5d0141b9e633c4d15c946f07081ec33c03990345da24d7e",
+        "originIds": [
+          "program-literal-5f27d5ed0815e5aac75bc025"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "4355715b3dfdb5762e807c6d911f870fd010934a85833d0726ecdaa24fa8882e",
+        "originIds": [
+          "program-literal-141baccfe0862c2dc137bad3",
+          "program-literal-1b2c3df801198715455d2988"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "441409f24fafc461ba875d49c8f23408c65f86eb48103a2c77efa4a68a936783",
+        "originIds": [
+          "program-literal-0357b9fe441e65c8154e03ee"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "4543ed4392b7503636249ad8e016660d788ab9d9cb7dc2b5d38dd11ddce46f4d",
+        "originIds": [
+          "program-literal-b7dd4a39aba34c6aee5fd054"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "4546b1cec029ab9d0877213ce1d1f250c66467ccd1ab807efc2ea5c5983f05f9",
+        "originIds": [
+          "program-literal-27e99404ea114ef578154ea9"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "45aca9ee4f2459e26268531f0e02d6fb047b100efc2e0437a36a7588844f1740",
+        "originIds": [
+          "program-literal-25198e7d792401b8d0978bf0"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "468ca7da1ba6b0a3358bedc0e0fd73fb08b80ed3a0c273544232ccc3cf60591f",
+        "originIds": [
+          "program-literal-c59813151b589529e8c2d209",
+          "program-literal-f752c33380edb4c769f800e8"
+        ],
+        "roles": [
+          "call-argument",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "476415c7b0ccae4129745844f486aeb10f2604b9172b95fd9345d24c4cd54abe",
+        "originIds": [
+          "program-literal-62ffdce6380523ef1de02d1c",
+          "program-literal-87bd4e53940323c364098ad7"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "486c44eb43ccbf782b95350886f0b08547d0a2338ac592ca0b61e1d710185d3b",
+        "originIds": [
+          "program-literal-402c74b0fecc8abdb81df99f"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "48e136d188c8a4d489236429027f86fa8671c3ea65cea67de1c99c1bfecb7be1",
+        "originIds": [
+          "program-literal-37833a7746b37dbd2a8ae2db"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "4a2d7c1b07e1e851bb2903986910248ab35cbc5e80db4fb45c06a754dea270e4",
+        "originIds": [
+          "program-literal-473650149c5c595dcffa3feb",
+          "program-literal-00a987c3aa7ddf659befdc5c"
+        ],
+        "roles": [
+          "declared-original",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "4a8193ade7ddb498a9dbcfe8450597173d379f44e6d2a405cc07618c82c165a0",
+        "originIds": [
+          "program-literal-3a0dae5074c248bb85fec097"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "4a8e7d01770782a41835b379edff7b0edaa0a22c952f97b4af96afcf77af5768",
+        "originIds": [
+          "program-literal-5705aa56370702d9af036648"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "4b0d4da131d78dd22f11d22acc51150b09f5f247aac74f6e6dcae410067e4943",
+        "originIds": [
+          "program-literal-b8c4deb570a207fb8349584c",
+          "program-literal-ed7ccac892350f4b19437f0e",
+          "program-literal-ed2317348f2032a46285b1c7"
+        ],
+        "roles": [
+          "declared-original",
+          "loop-binding",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "4d96124c0c2afa159e834a22cfb58c64d420b638dafb46c0c53372d593d017c4",
+        "originIds": [
+          "program-literal-d9741996f051a0ee4ecc8fca"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      {
+        "normalizedSha256": "4dba60ef897739c34f26dc78e2681f3321516207b48575b91643a618683563e4",
+        "originIds": [
+          "program-literal-21a27f65bbbd413d91e13681"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "4ddc45f7a7029202a206c7fb2caff7e0883d0a33d80ed72a3957a86e9600314d",
+        "originIds": [
+          "program-literal-0abe388895062fe2342a3d26",
+          "program-literal-143562f47f68b15b9621f572",
+          "program-literal-89961db74b4c014487c066f7",
+          "program-literal-982f6b903fce10d4edee7e2f",
+          "program-literal-c0cbb63e2535dbacfca9e2e8",
+          "program-literal-e0c15651394c2d6356cd7603",
+          "program-literal-252837ba660c50bf6a25f47b",
+          "program-literal-fcdf2131a31103f804025664",
+          "program-literal-d8dfd959c307c15aec900345",
+          "program-literal-0995799b91ebeeee02d93683"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence",
+          "question-stem"
+        ]
+      },
+      {
+        "normalizedSha256": "4e9077632cb4a4321a807bf8b6f0170842f3057463c73d972a83526ce28fddee",
+        "originIds": [
+          "program-literal-b0473c6c8df3ae7e125a2871",
+          "program-literal-66510a2b70097698e42e3cdf",
+          "program-literal-51bc0d9b79662c71ae52ece7"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "4ea6aefe7bc1d2fcd9efa92793fa04dade4c38c0ac97d0d27657a29c110c5b07",
+        "originIds": [
+          "program-literal-07ce06056cf3f92610a4f158"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "4f6e0d6b17cb752f5050f66a4e7f8f21c237da48f47b995b01c0183f5bcf1251",
+        "originIds": [
+          "program-literal-d63b30f07969e8e7d0d8b517"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "50a839bd57c43ad045fc3c1d4d081130c1e070b300b5d43ee23d938e11126a2e",
+        "originIds": [
+          "program-literal-e2f7194915fcfe8d96c3146b"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "515f0381b984f775e01603bdefe96277f41acfcb5cb32804072bc9c7dabc7212",
+        "originIds": [
+          "program-literal-67e4cde8056fcd134322f8ca"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "51eb520d33fd4c12e6b598e71dc349a375bd833039ff858cdb98c4e3bd02748a",
+        "originIds": [
+          "program-literal-44d7b32b5809f5ff5ea98f1d"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "53374ee91536f5a877a280b410b57ec4e9567ffe00e5915551e6e9477b739a61",
+        "originIds": [
+          "program-literal-10dd18d52c42f3a48e82ddd7",
+          "program-literal-be2305cdfae0739ae598fb04"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "535ea81f1f077f789f9dd6b5789ec662fe966a8605e19965e8c6eee9632c9419",
+        "originIds": [
+          "program-literal-8906306c4a8bd4d092ca7b75"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "547cee2831bed525b5f6a464b31ec2f29b451bca7d600f392fc97bce0033f525",
+        "originIds": [
+          "program-literal-ce80a934d5f78420ba9abe70",
+          "program-literal-2351bbb1d71cecb26355f4f9"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "5553830b61c06172e0461cda0b09cf7879beb2813a63fedf1d8f6a3a7d2f27a1",
+        "originIds": [
+          "program-literal-91c86cedf019f828b6b61b90",
+          "program-literal-63a78e2b13ab376ac70e1646",
+          "program-literal-6e9b6854f6045d2baf996c9f"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "declared-sentence",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "558e8654bbc0a4876e15185bf4bb38a7922da0d971f4b5dbf6fa7458cf299a80",
+        "originIds": [
+          "program-literal-321b6b2fd4e5eef1b011042e",
+          "program-literal-4e1bcc4a095a0391cddb24d7"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "55e4d8ba13d0200e042d937413adecb14c64d478deef1cb2284f647582f2cccb",
+        "originIds": [
+          "program-literal-1ceb54b5d6d34cce94a114bb",
+          "program-literal-050193c942ce65cf24018be1",
+          "program-literal-61f6e4756621a9d9f98b9242"
+        ],
+        "roles": [
+          "declared-original",
+          "declared-sentence",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "562e30b8030ae01dd77127eb2bf97fee48367bfdcee03f3ed49bb6b97268ff35",
+        "originIds": [
+          "program-literal-93d5e4b94c89d71c47dd5830"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "56bc5ee1882eabb5de0341ce236faad4bad829bf0ff57750817e7ce64beccc87",
+        "originIds": [
+          "program-literal-04f8ebc7fcc9ad195c031d8b"
+        ],
+        "roles": [
+          "property-value"
+        ]
+      },
+      {
+        "normalizedSha256": "56eb2320d65745013ee7030962b8202fba0b30969a27e089bfd0f2067d91457c",
+        "originIds": [
+          "program-literal-e779c1d10b79dd7754f842f9"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "56ffdc64329af2ba52e6ee9e7a408ffe320ec5d99bc1253e20ed282524e971d5",
+        "originIds": [
+          "program-literal-30e2c6fad67b3470f7314a62"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "575b42a0a7b3b9732f647c809a7f3510480bf0aaec82b4d17214f6c002dce7bc",
+        "originIds": [
+          "program-literal-92fc97d2886de0c1b2daf68f"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "5840d236b577655040806a27b362b4480144161338964dd79d7bd306ec4be7ce",
+        "originIds": [
+          "program-literal-df724af061a70f2cb8b0c05e"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "5923eb6407523e253b6dfef8161f651b23fd50a99632b26bfd900f66c52213a6",
+        "originIds": [
+          "program-literal-0005e1e52ed2dcb384413b6f"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "59856f62f97a20886c8cf9cb069c7a7f7ed6b75951d88eeb8bbfea90218be218",
+        "originIds": [
+          "program-literal-e98aac185365aac770a6b98f"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      {
+        "normalizedSha256": "59c492bbb1e138c2b31ed98334f2df4058f96ec680b813b6152b987c3878b52a",
+        "originIds": [
+          "program-literal-562e440f7a196acd32cbd5ac",
+          "program-literal-291edab5ba299e288e5f05e3"
+        ],
+        "roles": [
+          "declared-sentence",
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "59c6223a50e376c431b764f3b8d8093bf6b720fadb557e9acb2fb98ceb267fa9",
+        "originIds": [
+          "program-literal-12a3240171aa35c38b72dd00",
+          "program-literal-fa1d7555e087ac2a4c53880f"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "5a8ad8b47a500ec841f3f908e124920da8a768b9c95f5aea33cfb5367dccafcf",
+        "originIds": [
+          "program-literal-042a29631fa31965b0d784bf"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "5bd3adaef459b1c3bd3fe70c94afe2c29ab970196016ef22850aa38e1788d35c",
+        "originIds": [
+          "program-literal-093cbb285141f9f233728644"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "5be42160118ecf6ab695e16a25e207d03c186cfe52a99a34ceced249f8016a0f",
+        "originIds": [
+          "program-literal-3ad052e0ed38d2cdd56f9906"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "5beae2ca7ac543f58c0841dae5725756660cfa1b788bbee3ab9881a7a3686dd3",
+        "originIds": [
+          "program-literal-25a67a5e6c2ed6f328d327fc",
+          "program-literal-54f27a7a0db9329539e3ddf2"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "5c08988da7bd783e650f42bea0905e22201b3266dde24ed0da42c53dd0dd38a1",
+        "originIds": [
+          "program-literal-b43be51e90915e999f6bdd34"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "5e40c1fe966ae065ca60b323eee714d76158cbdda5ac682a875543e99965ee39",
+        "originIds": [
+          "program-literal-0eab635ea94a4aae99a335e7"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "5fa31bc51a460b0ffaad248a4c24c02645ebf769b1576a9a914a12db77a7d3da",
+        "originIds": [
+          "program-literal-559da1cc03c1f652878c256d"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "601a4449ab0bb3d7e53c23c3d7860a4d5ce3e86e7245f66ea1f9ead03e6c4fe5",
+        "originIds": [
+          "program-literal-671fa22e94c4fb94a63d57c1",
+          "program-literal-ae5f58e9aa9620ad12c42576",
+          "program-literal-889a9916c37304143b928af2"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "declared-original",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "61a538696d9ba3653820b2fbd3c8bf879ba7b48f12ecef87c158a0e67e89a991",
+        "originIds": [
+          "program-literal-a34095f0bcd65f1ae21c0e15",
+          "program-literal-4a542e1cb7ca89abeb225662"
+        ],
+        "roles": [
+          "declared-sentence",
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "621ba7f1f4a04823fa817f9dd09638d76616663cf52468dae4a1dfdec8fe33f6",
+        "originIds": [
+          "program-literal-2f294ecb34c03b11fd6b7193"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "6277a8245f6d4fd42c168561a38b5d20998a10f42766b2ee265e05ae26c72cd5",
+        "originIds": [
+          "program-literal-b79f9e9cc5b16548473287fc",
+          "program-literal-93d5e6e97354a3ed85021e52"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "63da97d01bfc0c8099a545f5a780956cc73438d2a97df6a7480a1ad08116f96d",
+        "originIds": [
+          "program-literal-a5bd8b14eec85ca40d86bcd0"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "650b60517cba09939bb59457e0d938ca081ab5f804b2bb6598eb7d8771a5ccc2",
+        "originIds": [
+          "program-literal-901f4ec8286ed8fc28bd68c1"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "65232351716610717119bfd257827785c35e43aaa117c860f15e41ed478e10bb",
+        "originIds": [
+          "program-literal-a061df0956bcc19819b275ae"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "65a3f3e9682c6612d6defcc796dfc0bc0e0eb56c8de48f5efcf4d47e6431c6fb",
+        "originIds": [
+          "program-literal-10f78083de79e0497ebc988f"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "65f933b012d30cac2861da549270ec947bbb87b9b8da58625cfc7b22165f0fbb",
+        "originIds": [
+          "program-literal-40212f98d00a4d1f11403ebf"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "66da19a1c475278944ee589946820c2497d89847cb9afa308b32ce8c385373ed",
+        "originIds": [
+          "program-literal-ba4f0ea385955236bbdc6d39"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "66ea3609f408e922b269c8bac3d3031014914149eee64258b0b2a27534773ebb",
+        "originIds": [
+          "program-literal-c5ad345ef21e1b3402ebbca4",
+          "program-literal-438f0720a9da15d0f887f02d",
+          "program-literal-f2475ec711b8ef291536bf1d",
+          "program-literal-2277efe2352272ec5327aa45",
+          "program-literal-09a8a8f7d85ac79a00168742",
+          "program-literal-dbd46a74af29207f1c0861cc",
+          "program-literal-ecbd27780d61c9db3c0657ba",
+          "program-literal-573006e99d157eda2ef5a111",
+          "program-literal-09b99b8e2dc3455b65358d6d"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument",
+          "declared-sentence",
+          "proposed-correction",
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "6707497ddb1f884703b33e7beda4c641cb90f26245eb361669c758d7901469a1",
+        "originIds": [
+          "program-literal-767fe3f9d587795cad0c50f8"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "6767c063bff8013dfe444fee4dd21e6be355e1ff2dd34a5cfc9b6d0137f7725e",
+        "originIds": [
+          "program-literal-769b8f3b3a2ff39fa081d907"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "694bd73a48bf7e3f210841fba29cefd4d69a96b9b9fd7a31fbf19b3c94b2811b",
+        "originIds": [
+          "program-literal-08e172157763b8a20b839d8b"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "69773f992db6e6d6dc0810ff33af12f3c1ec5297665c80b7c6fedaa9b4edcd4e",
+        "originIds": [
+          "program-literal-97185bc7af534cb47047dd04",
+          "program-literal-14dfb174aaae4ddebda0cbe9"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "6a05ce33be9c3b9549fedfdce0f67259918894ea4bd8acbf80a1dc10564ca28b",
+        "originIds": [
+          "program-literal-419cfdc8f5f557ae9ed49535"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      {
+        "normalizedSha256": "6aab9d091c162161a6468ef02b1df9bab2c02016053afef18912f557196a911c",
+        "originIds": [
+          "program-literal-03d9cd85c39f4cdb8861d74b"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "6af5c1f4626dd85c8415cfde36c9574ec5abfe94b17aa95a1fab9001f6f5abfa",
+        "originIds": [
+          "program-literal-3f9cc4108259fdd66a890231"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "6bff663f755cbbf854397675fa8dde6f8fe401059226e064c13a820575ab0868",
+        "originIds": [
+          "program-literal-25acc94df66d1a9642c2af9b"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "6c1dee522ce9bf98a3237818e9d4fbb61fbc1958351f42816ffa790b9fd0c25d",
+        "originIds": [
+          "program-literal-772a83ab00258288615a0b36"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "6c284c36a4ab01963f3ee2b9e7d4aebbaf2dbaab5d0da7473fd25e19dc11729d",
+        "originIds": [
+          "program-literal-abafc3d1ea5ea17e67d925ff"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "6c3a2491a5b93bd402feedac6a81327a33e1f3706935c55f1817313087cf487e",
+        "originIds": [
+          "program-literal-dc23ba8f8f567c6a3f037548"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "6c4ddb3986743c4ed685f0d8c3f0340561c60c33e53d06df429d29f3537da09d",
+        "originIds": [
+          "program-literal-a3c63f9274d7d016473e7f85"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "6cbab1bd0b99519ac4561fe14678562f4130fece4d0314c234574d7abed78ca5",
+        "originIds": [
+          "program-literal-b93492158d26d29c111b77a6"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "6dfb6b5ae718228d9ff973aaef86ec29df5a003030cb7b773c185685bcb6f5ae",
+        "originIds": [
+          "program-literal-1f38813f5a2920166934337a",
+          "program-literal-49a0df5b5de623f4ee4f3356",
+          "program-literal-5408ed45969b1fffc99f9e92",
+          "program-literal-c18b2576d93bb15d1a834691"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "declared-sentence",
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "6e12a642d5d5f36e2170d4ddf4ddc278ce67d1c18edd800e1d0d4d4e7ee37c4b",
+        "originIds": [
+          "program-literal-7b7ebb02235869e2078e5d6e"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "6e84c411765ce56643ca306ebb80bc1c1369c97826ef972d949bc9ff113d5985",
+        "originIds": [
+          "program-literal-b5ce0f5a52d1238f249358ee"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "6f5c48f188a33e26226121cfbd05c65829669b6647e55a3aaaa45cd82cc202de",
+        "originIds": [
+          "program-literal-bee5aec2e1b17f52f8c7a896",
+          "program-literal-4f7b442677fb348d5c636924"
+        ],
+        "roles": [
+          "declared-sentence",
+          "expression"
+        ]
+      },
+      {
+        "normalizedSha256": "722d3384aa06216b31006e208686b231f60bfe5f9bb339dc9413ac95da0aa134",
+        "originIds": [
+          "program-literal-1c757a14dcb7d298c0a31a7a",
+          "program-literal-ffa03ed7cc96dec96433b831",
+          "program-literal-3dd007b00d2221ace5fc4391"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "7263226b7a2e743debba8d26cfaf5da88d9937364f82e7450205d69bf3131ca0",
+        "originIds": [
+          "program-literal-5a7f3b07c175c4e86a6ab992"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "72942d87c0bee8ddd784c889aca4fdd3d3b428c46b8ae168b2efe12fe46abff7",
+        "originIds": [
+          "program-literal-29094bc5619c308a06573892"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "741cfd81fbc9ab257fac15a9a60cce0fe36b661e1fd5223085272d8cce9c719f",
+        "originIds": [
+          "program-literal-e8a0703d4024152f12eea2ce"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "744fd1cbca3bfb367c84d5b9866b599cfcbc2232e4b21b25f4d8fba474e679ad",
+        "originIds": [
+          "program-literal-494725302b0b1f54c77daf00"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "74939acde9507ca8e11c93e80b8a6ddc0f62b7eb24342635b04600923b1c1736",
+        "originIds": [
+          "program-literal-9dd9b2fca92379a4d88afc4e"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "74b46bf986c2a63ad83eef460a0311184bc9dc31546aae81463ca1e8aa0ea4a5",
+        "originIds": [
+          "program-literal-0faf2aa0f5ef8a662160bf35"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "74e61b63ad986b6c9ba327cb8473efdbda094dc60a8e540f097f92ac86c056eb",
+        "originIds": [
+          "program-literal-7822a6036aa84419c5f80236"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "7505c15b024e890f7bb1fd5fcc7f8dd6dbe6ff4183881dc4e7f613744e358c0e",
+        "originIds": [
+          "program-literal-b508be1e1059d725b5e6716a"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "75e70ad142a7c42e55a9106647f85cc3b7b1c7dccfdc3033fdd9c31ed8cb8e23",
+        "originIds": [
+          "program-literal-411fac495d9b48e36290023e"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "7692a1c64eed0ed6060b9624e8275e1af34c72bc2b6eb9ce1782565f0d9c4a36",
+        "originIds": [
+          "program-literal-2dadf9f56e29e01f18035604"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "76f019f7a0bef51e93dc78f6aa100ab51c5132dd6837b1fe3412e9d631fae6f9",
+        "originIds": [
+          "program-literal-4d46742b47e59c7d14f17a60"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "78534f574a689b41081c6cca2643f26105365a0b748158615406508af252a6a4",
+        "originIds": [
+          "program-literal-30fc6ec2cfde860a2f1d974d"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "794c8d1e15876e3e178c54618b279a265534ec8e123595419fb85b6c1e7d3b9b",
+        "originIds": [
+          "program-literal-e4488e99f8435239bf0b96c4"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "7b7471f8521845023ed414501a266842e5601e179906bdd7b6d42f266a69363a",
+        "originIds": [
+          "program-literal-5f1f5ba67fe82b0b6ba0b9cd"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "7c7b3dca7980930c360a864e2e29cb7b0bd91792c95afdcb93552703dadefcba",
+        "originIds": [
+          "program-literal-ea2c37adebabb24ef456b2bb",
+          "program-literal-233e313a8d9c318078e2fd27"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "7d111281362f5e7fc484419ceb8161a3025ca10b3cc36e1a4aaed6337674f18a",
+        "originIds": [
+          "program-literal-f9cc0b17a005dab55878cd2f",
+          "program-literal-fbbd4f31b5e4b1df7930d3dc"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "7d3abee0ecc2ca3b64e8b3aa58f1ffe546811e16da455501fed1a1c47253afae",
+        "originIds": [
+          "program-literal-ee72e4c49f7a9ee3c52b8fe7"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "7dc31b92523b1396fde5d097b5e75c84a25ed88fc400e7493015e44eabe62e8e",
+        "originIds": [
+          "program-literal-21cfd06b7636ba04c3b448ad",
+          "program-literal-c7d4d17975511ac94e23e427",
+          "program-literal-96ce4849c6fbf54bb02aba98",
+          "program-literal-cb29287c10ea21730418be89",
+          "program-literal-466b9d002f8cb7ae04d7e490"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "7e726d9506f9242fa2cc6b873bd99048f755f3cd09514587087362d8fc82d46e",
+        "originIds": [
+          "program-literal-57a5b91a16fbceeca9cd75eb"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "7e7807386dc16133db52a8468a64f62ad2c055a46f70217519972e94bce8e573",
+        "originIds": [
+          "program-literal-a0d1c67c25769bc05c2dfe0e",
+          "program-literal-8c9548c8035c0b9068a2ad57",
+          "program-literal-fc864b7e4a7e59ccd25facd8"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "7ef9a70aee5bf2a2b289532dbd26f364bd143c3c36d8c34cc39a4f84aef63984",
+        "originIds": [
+          "program-literal-a048eb5b513340b82259f391"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "80059c18db52549cbf618f9b7b02f3a2412070182cd8d4cfc6286cd208ce3a8c",
+        "originIds": [
+          "program-literal-7fc6d88c1c8326e964d9e811",
+          "program-literal-e0ae968c8a79478f13025a7d",
+          "program-literal-a127b877eaddedd89a5dd894"
+        ],
+        "roles": [
+          "call-argument",
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "80876f81a930ab2cb9975dba2aca4c0cf9d2c6c8634f29ae68e5a439fa8f6104",
+        "originIds": [
+          "program-literal-eeef4f57248774feb69c946e"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "808b97c7c77e94647c8b158d76c1df226f83a53ac4a1b1e30192c7ddac38085e",
+        "originIds": [
+          "program-literal-81c824b29f05e079b503834e",
+          "program-literal-d00784904b7688ac309ed8ff",
+          "program-literal-e2166806beb7a72f9560de0c"
+        ],
+        "roles": [
+          "declared-original",
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "80e0af1f2d98b544c0693110a784e21ea21163b7f182d711be6ebb29fc4aa660",
+        "originIds": [
+          "program-literal-d210e95a08879e5f7fee9576",
+          "program-literal-3616a78d23f0ca796ac62164",
+          "program-literal-df7e00c9289e10432895d5f4",
+          "program-literal-fc83c4d3cb3a97277d237b17"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "81478c2c1b833f9707c6a0a7ac8e5340a070481d8ba7742d2d78982f7743fb13",
+        "originIds": [
+          "program-literal-6316d4237eaa65642dc11155"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "827c90057de30b901a892e72a4df88f9806833343403842e28c7b78850a43571",
+        "originIds": [
+          "program-literal-98db080f55ab2c6f5178fdcc"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "836346ae1cfdd9d6894c0f3090f63743703178ccc9f9d125d68580cc966f1a3e",
+        "originIds": [
+          "program-literal-e5a5341f5e3b0beb2afba0af",
+          "program-literal-42e53d263c4e4f28682dfbfe"
+        ],
+        "roles": [
+          "declared-original",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "8381b6652074b62f472ab0aa62c2c9ef96052e20b75257d095befd22080bc4c9",
+        "originIds": [
+          "program-literal-582dc656ddc93f3f629d00f4",
+          "program-literal-bb955fcb99320badef4d8599"
+        ],
+        "roles": [
+          "notes"
+        ]
+      },
+      {
+        "normalizedSha256": "83ab21a03df36430f948624e9cdc4906f2d4cbff3066dd4d6237998971883883",
+        "originIds": [
+          "program-literal-c4b4d19dfca4616cb20e73f5"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "85e05f1e04fd7971e54eb66f2c7687926ee85c43df440452e4a15adbc160c653",
+        "originIds": [
+          "program-literal-7d076a83046cc851fbb97556"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "86830cbd6670ea5aa1d4b2db8c850a5ff8cebfdaa1a3dfce92785d4b8abcdaa5",
+        "originIds": [
+          "program-literal-50e58bc9f58147b8ec85dc1f"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "86961b6d784d81c7f24743ff05fb519430d2edda7435c41ec49e7d0948bf9b9a",
+        "originIds": [
+          "program-literal-75b5aec01a664a11dfcc4f22",
+          "program-literal-2349185be695f0349c657adb",
+          "program-literal-81ccf6372d096bc1aaa2c630"
+        ],
+        "roles": [
+          "call-argument",
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "86d6b6a73e0e3c7ce2375e769dd322a97b7d187469de9023147d02cb60e1880a",
+        "originIds": [
+          "program-literal-c88294bfb23dd5b2bde245d3",
+          "program-literal-56145a6fb8f57c966295b94c"
+        ],
+        "roles": [
+          "call-argument",
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "8740122bb68e4b392668536e96bd532ad94f13f6b562efe187dc1777564b5327",
+        "originIds": [
+          "program-literal-7de23e6e256bd99f11ba077b"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "877ecfab050a072b4f2dac93e2edb47274752e694442544d1cc76f28290d2183",
+        "originIds": [
+          "program-literal-7b5c27bcef079d8f7c96ca5a",
+          "program-literal-4124dad48cb3dfc713d78849"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "8903a799514283fe890d8eea294eff1ad913385d735651515af2605223618528",
+        "originIds": [
+          "program-literal-3452ad5919a8c79d665c3bfe"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "8b1ce2de0e7d11b26185299bc76f3365a1cdc43826114f8bf9bf40c05ab29f8b",
+        "originIds": [
+          "program-literal-8dc35d3e5f8f768c8a61b6fd",
+          "program-literal-39bb3bae00bc6cc8ab377d06"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "8b5c07df2759611419a5c229f24df2b58b4f7cc6b38d48f72c617bd5677ae445",
+        "originIds": [
+          "program-literal-8db08013d0b8a6b84f2501d6",
+          "program-literal-f171cc95fc8ab7402bfff013"
+        ],
+        "roles": [
+          "declared-original",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "8bc6d0591e7513c1db6362f81033ef855d3955e9bdaa7508d7713204f9b84b99",
+        "originIds": [
+          "program-literal-1f33f97b226cf3af79f57906"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "8bdd803a397bd572ed4d617d8afbcdc3681f3a1dae4e47f5b597481ca11aefdb",
+        "originIds": [
+          "program-literal-b144988fe75f14eddd571de3",
+          "program-literal-46fd47b84f114cf9aeac050c"
+        ],
+        "roles": [
+          "notes"
+        ]
+      },
+      {
+        "normalizedSha256": "8beff10ae217caf379dcbb4901be0d3d5c1476301c7483409123435a060842b7",
+        "originIds": [
+          "program-literal-821b4e39df0590574d76e33a"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "8c46a33c6cb746e948019cae3482ad6e1e618d40b254479efb98751e640a4c3d",
+        "originIds": [
+          "program-literal-eb03d811a97d6d17c5e40827"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "8eb8af3fa8e357e6f5520a2d52265cbf055498fcf2adf66b6b86d97d2be6897d",
+        "originIds": [
+          "program-literal-57aacd63fd816b6686eacc53"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "8fa0558f00e1c8f8ed5011cf18ef78402f96d97828786b68d3a8fb5eb6aaaf9e",
+        "originIds": [
+          "program-literal-8b9e04645d8d42c3a86bc8cf",
+          "program-literal-3e16cdc77495240b08675630",
+          "program-literal-016e4c5daa3f3b8d51dd31d1",
+          "program-literal-404c90bcd43979823db53206"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "91543ecdf555061ea57959ee1c96f722280637ddd9d93e2cf42a369a0407326e",
+        "originIds": [
+          "program-literal-89a527308705ae29dbb746b4"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "9159a8d739384cf893434e0a8e67e83361da7c433e25a3976db80402cb0f0791",
+        "originIds": [
+          "program-literal-836f49a064bd9cc9f746c1b7"
+        ],
+        "roles": [
+          "assertion-expected-or-message"
+        ]
+      },
+      {
+        "normalizedSha256": "91abb66075b7beffc3f958a425b621b0cdefbe37ac52ad996c778e98b6c6453d",
+        "originIds": [
+          "program-literal-ef3ce0b7ec9e53ade2c4555b"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "928916188318c6d8b4784f657f4d6b5e0eeac55e8db5a38c2cbd888a4e7048d3",
+        "originIds": [
+          "program-literal-d4c552c6440299024122448a"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "92cea168e7716e6f7d759afa025be21087d905159021a5e2c8a750fdd20e08f1",
+        "originIds": [
+          "program-literal-3f125d3bb1e367a5f0e42cd4",
+          "program-literal-07ccb802de7c1612b5253aa9"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "934b758a7831ba4c5b2576abaedbee86bca06d2e24e1df3bc9476778acdb9b1b",
+        "originIds": [
+          "program-literal-d6a2e7cc9d1f3f951adc97e6"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "937c071da24b6c39f18c5b81d75f95a69ea4ac48c51b025d7cf83bd5579ea506",
+        "originIds": [
+          "program-literal-2df2b51a3b46e3e243d54d40",
+          "program-literal-a6de116a09d9618f4acbb32d"
+        ],
+        "roles": [
+          "declared-sentence",
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "93a2a0af37c8fa77ecef72d6caca5385d4e4edcabd63147b90e87b1d1d594031",
+        "originIds": [
+          "program-literal-41d0951668c6f0e8e1102bf2",
+          "program-literal-422fcf9bcee1430ae1bbd00c"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "93da53973a335204d5819212ffe23d8e12e198125ba59953eef193ce0a8f19b4",
+        "originIds": [
+          "program-literal-1dee2e191a052a38d38806ac"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "94a08d790765fb7dbc7b5bd850b6bcb78a4ed36a2daa4474ae22ef3559d4c5ea",
+        "originIds": [
+          "program-literal-eaddafaf64b2250f6ba97642"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "94bc49632631b6ece4c3820f516b8f29fd56171e7dd86b9c61dac6fa81cacb7f",
+        "originIds": [
+          "program-literal-ffff07ee8a8def09aa4031be"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "9555cdce837b8f3b44d4765ad92c8054f4ffefbc34a0d71e6ba74eaaf0614b8b",
+        "originIds": [
+          "program-literal-9ad209f2a6c4f0e68172b629"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "962eebdabcb0e92d872f0fe693ac9949ab5c278a302b90ff2002d732905a8f57",
+        "originIds": [
+          "program-literal-116b42d235300734af7ca25a"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "963b7d302cf041faf76ff8146ea285d489565c5a014069732eeeed260253909f",
+        "originIds": [
+          "program-literal-b5c3d8b4bdce48b45f8be9cf"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "9715059e2246dc36a6ee82400a05b82ef44be7f0d9e5dc5dbd68e8d557e8523e",
+        "originIds": [
+          "program-literal-945876b509d3192f7df05f8a"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "973e125a71d06a8f4a1dbc0964add2ecc038f58b911d9adf786f996d88e8ca25",
+        "originIds": [
+          "program-literal-f998e63bd4689bda2dc1c93d",
+          "program-literal-507ba4cac73ccee62e07e6fe"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "9754dbb5c680619c3c8803ef1c6d7d9c38c389802a52f41c6fc0dd07b0399316",
+        "originIds": [
+          "program-literal-aeb89229df9fa5b1e8ff41d5"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "97b07a58076296a5b977e7eb7bb8f82a5f7683032be200d2e9c97a8fa0be4e61",
+        "originIds": [
+          "program-literal-2c485f22a6c2c9f323056c6a"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "97d5653ae4cde5385346cea6ce3e31b1660326409d6a7a9313d4a6db402d0bf0",
+        "originIds": [
+          "program-literal-05623562428d030b54303309",
+          "program-literal-6d1db46c5ae94254ea4daedc"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "984e19387861616913e863e2f442eca62ab712ffd9373e5067913caa4e9608fa",
+        "originIds": [
+          "program-literal-20cda00a640d54116e3b123e"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "987e1256fe7099dd71a1b566d79f769e6d9adac3b8245400fbae84d66cffcf29",
+        "originIds": [
+          "program-literal-7e9ff24c8e20bab8242f1588"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "999b2ccd2b53ef91f767a568ced722cecae598d747f3a578992820bc92a8b241",
+        "originIds": [
+          "program-literal-b25cfd7a47789c541717b3e9",
+          "program-literal-e3fc2503a57f6905e7540d44",
+          "program-literal-42b3d2a5d8319a0bc9319f28"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "notes"
+        ]
+      },
+      {
+        "normalizedSha256": "9b07249c838ed366621e8639090d2e1861ba06e6981ec99c15eb2b0e2edf6bf5",
+        "originIds": [
+          "program-literal-42bc909b920e1620143b509d"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "9b58f55426509a72b4182ed472c73f38959d46bcd6befb276e663fcb8fe16a07",
+        "originIds": [
+          "program-literal-73c36a824f29eba87b60989d"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "9ba2ec556bc91746c4dd9ba37bf47047496ee54e3dc789008506a394813bb513",
+        "originIds": [
+          "program-literal-e899ecd66aeaa024a76d6adc",
+          "program-literal-2aca0b8ce5d2de2d8ff100e0"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "9d102cbba125432e38d9b82800c5e80b72c53742ffa2f0d92ce53cc71b6fbc15",
+        "originIds": [
+          "program-literal-e5a07a610637db9733bec601"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "9df80a5fb4e2f934d12bffde0ecb73c832439e52bd428cb8e77400d051a46abb",
+        "originIds": [
+          "program-literal-33f6cab7543aa69c1ad7865b"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "9e01044a1a8516b509eeba339058274523074a49328307e4d3492192f11e4b92",
+        "originIds": [
+          "program-literal-66358b9cd80cef0f4ea4f616"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "a05c2a21ec7920dffc3776159def6c2e3e8211954de988df76796c8b56eba330",
+        "originIds": [
+          "program-literal-2306f47219aa5edd97abae34"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "a0991e594175d84d6cb171049ca29b150b25f4a1148054a9212d271838c75d77",
+        "originIds": [
+          "program-literal-53c4a2dda9665ef4bfbb0594"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "a0ef6d9332d2f46903125bd5476edfc70226b263bc5d2f9f75aecb0e1e71ab68",
+        "originIds": [
+          "program-literal-778cc6059ce90004b2eb233d"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "a1a3b3fc200453ede6e82efd1b8b538afb5ba507ea48f0761c9079c4b9dc2654",
+        "originIds": [
+          "program-literal-68f984f0b0528c5e110551ea"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "a245401ee187c5b7ce7c884dbdf9c13ca75e606d242521e8d95a7483115cb471",
+        "originIds": [
+          "program-literal-9b26c35f333326536b01d32e"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "a25fa3b57d799b939f8cd480eccb9a27faffcc7b55fd167b711b30f55ca9d066",
+        "originIds": [
+          "program-literal-3cc4e3b3b2e43c954d3c5944"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "a280f699840af640aa6cfdfcaa33dac320a02eee5a9fa13bc295490ef8326434",
+        "originIds": [
+          "program-literal-484cb38ceab07cd8b33ba72d",
+          "program-literal-873f0e4f57a2a8ddf3061bf2",
+          "program-literal-1637c93e39832f2dea2c18fd",
+          "program-literal-d8708abe897d8466f13fdaca"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "a2ac8c498f4f95342be1a6e0a9e6f1ac286118e668c85131a7eb4e14e5d3d08e",
+        "originIds": [
+          "program-literal-539f7fc6a23917033575dbcb"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "a2efd61d86490a4e20ff6bdb36b44694b742601d767ba57a27f7f70ec205b380",
+        "originIds": [
+          "program-literal-02ca8a4c416b217f11682164"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "a33b22e25b9ce914159ed9a705015c22f1a208ca200cdc01cc75d7116b6e21f8",
+        "originIds": [
+          "program-literal-9fd24e0a25e89a707ab86dcb"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "a37115d95ea1d83673bda5bb741fbfbf0469e550c1acb1ce9a8ce430844177b1",
+        "originIds": [
+          "program-literal-1c4deba778c5d544fb33c880"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "a384aeecc8a5e352fc1ae68b87b7b6d988d187b5a8ffd196ca6e564f669bd747",
+        "originIds": [
+          "program-literal-ae61a618f8f23bc3cada63f5"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "a4d93917f42d5156b6356ecb5c1833d44e0cbc895ce9af16628608eca01b1519",
+        "originIds": [
+          "program-literal-38f15007de04c4e6ae5bb8a6"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "a4db18ddc1a0d94f6d0eadb8b3ded5ae058b805c99906fadc74cdb277fcdc862",
+        "originIds": [
+          "program-literal-2434d5477591df29cc554e21",
+          "program-literal-f17abeffa8c456e1aaafd137"
+        ],
+        "roles": [
+          "declared-sentence",
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "a5689e09c79cbf1f0691d5cf36ffe1bd4ecef970362a013e43810798594cf910",
+        "originIds": [
+          "program-literal-8ca1757baa0de8b56d9bb3b5"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "a634ffee29109263c88d9b949c74d1201798d08abe11d01385dd0e970b655a3f",
+        "originIds": [
+          "program-literal-f0149ee2a2b7b1002a4b8080"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "a8395cf1e5708b508d740aaa9475fcff3830ed2d957134f5c59ed1a2c43d314e",
+        "originIds": [
+          "program-literal-9371a460f909abb184bea7d8"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "a9a52cdf306942a4129524523cd415e6e9e38d12a76c8a20797e502c842dce11",
+        "originIds": [
+          "program-literal-090f34c277576cdf1b1c0632"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "a9b744af7fe54ec939528b8a06e03091e1f745d9c786bd58f29826cee1257903",
+        "originIds": [
+          "program-literal-07904ccd521835bd7513375e"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "aa01bcfb16915cadc472d4f8b78e7bdf1fd486ba1900bcfa7fd5e90d47c0923b",
+        "originIds": [
+          "program-literal-a098698fd5ee194ac0fd31be"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "aa6170bb27291f70486f73eba7db567529b7f68411af0a8a711a95f4e7656eb8",
+        "originIds": [
+          "program-literal-b89d18e274cd1aa3111e4900"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "ab02cdbe32a27a19274fba60d663ced6465cf127a97b31ea2ef0e5014113e4cc",
+        "originIds": [
+          "program-literal-f6bd1dfbe3d3cb5bd7f4f40a"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "ac68bb2bfc811335e34b06e71638c94b8136231062ead50364a53386463634bf",
+        "originIds": [
+          "program-literal-ff42e143d568c161e2b5b15d"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "ad111f23d11bb88176f45f83a0b3375d80db0f608432cf6a8ac6f9394960a10d",
+        "originIds": [
+          "program-literal-149ce13dc9739f93d0040cba"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "ae42e79280976971d397770f66c3497e1f89ff3bdb5417821897709dbc6c7fbd",
+        "originIds": [
+          "program-literal-c9bbd691a410200a8825bd12"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "ae514a4bd9a393aaef790194e051b7474f77ce8d899dcb92ee1ea0c45d76c5e1",
+        "originIds": [
+          "program-literal-b244e034111d33fd8c168abd"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "ae575b370cc44c35b8b01acd2ab037dffca8db66d97b3b82b8f0ae4a58ec0444",
+        "originIds": [
+          "program-literal-219c7092ec182c9dd5404eb9",
+          "program-literal-859960f90beeae2bd371c055",
+          "program-literal-8ccc0dfaca50234055020ff9"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "af7b418205a77cab1c1bbaf0f8245fb0b8965a0eff4c52e3ecaf2234b95943e4",
+        "originIds": [
+          "program-literal-77a476889abc5452985d4495"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "af9111073ff75ed77b37d70a04e72c3e9496d18b83ce2cc94c8b61614fdc55a2",
+        "originIds": [
+          "program-literal-dd6a09a1a0570b188d331c10"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b07eb89e7e9d3e712e0e59a42f15d75f2926118bddd90d476bcd2902863a83cb",
+        "originIds": [
+          "program-literal-6403bba1f5fe8a10faa2de61"
+        ],
+        "roles": [
+          "property-value"
+        ]
+      },
+      {
+        "normalizedSha256": "b082a07dd92b4dd0f84c381ee82ebcafef1ab53525efd8115fefbfeb035dcd6d",
+        "originIds": [
+          "program-literal-8d9572200922ff6e22e289df"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b0bae7bf1c725998d21c9ea6b3d4eeccea7cab488a98de2f231077c305322353",
+        "originIds": [
+          "program-literal-94cbb7e846646790f08fd3e1"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b0c793e39d25d0d794f688533bf7224a2a3a598fddb823e335a79e227f28623f",
+        "originIds": [
+          "program-literal-d63471b0f9375ebe76e1851b"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "b1faffb32df9e90c3a5073938c3feaa1818b18834c52727ee6534f87b454016f",
+        "originIds": [
+          "program-literal-4add1f3596345341026a5576"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b34ff287268d007cfdc3fc3cc64c49075490316365065e5fb750dd2d9a0b06ee",
+        "originIds": [
+          "program-literal-58e963ab710db9602cfd0e25"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b4f9585e0258eb95d921a36b8e01e2aa6bceecde6f70e0ec59201b154128536d",
+        "originIds": [
+          "program-literal-e8a8751ced34db505db05e04"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b60a2586733cc8f1ce14d8962cbf8c05f93ebb6a87db7bee427e37e9a6cb11f6",
+        "originIds": [
+          "program-literal-0a42142eb8d66c145f703d6e"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b64f10c2ee8db0be3165d1dd81f642e41cd9afd8b9839c1e6b07ad3bd0e27054",
+        "originIds": [
+          "program-literal-ad79f4c219faaed245d5c297"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "b65e608be921f31edc157e13c81c90807070abd30276d1d312accf49b41cb1b6",
+        "originIds": [
+          "program-literal-83bb49e4eed014452cbb099a",
+          "program-literal-275825b4383ba474d83a6c26",
+          "program-literal-ef231d1cdb8d1bacd3233a14"
+        ],
+        "roles": [
+          "call-argument",
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b663b63b23559e58ee535e0511d066dc157531f9627919e6d8b46ce33ecec816",
+        "originIds": [
+          "program-literal-277570a82bfa03b14b8097e4"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "b776358d26523abfc4daedb790640ac2c7cdcbaa295a7bcd25f581ea9b8e998b",
+        "originIds": [
+          "program-literal-59e42423d2be68336e32a7ec"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "b899bb181fcd8b08807ebbec24b0a82bfdb04a982d3a74205a2cce428ec59e02",
+        "originIds": [
+          "program-literal-fa89d6278acd9595e0b9d2fc"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "b8a1c9245dafe7232b5110bbb2261ae43921bf6c4ae17e9f932b6bda1e8d9ac2",
+        "originIds": [
+          "program-literal-d035c53bfe6e27b8f81e26be"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "b8a840849f280c03380c4bc5de1334e3fed488b68e02b9cd075f3dc9b39e0abe",
+        "originIds": [
+          "program-literal-b646d883a7e457fd2784e16f"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "ba5d3c31c1d7db0f8082f9070230cbabefe90258dbc4f2b66f03c26ec5829db6",
+        "originIds": [
+          "program-literal-855392433690d46bf785be21"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "ba6550d7599a6007027046941709012091fd93a858ae596f3f11cb2fb2c8cb9a",
+        "originIds": [
+          "program-literal-bde8e8f713c9bd36a93128df"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "badc8608f283d02597388be9de4ec3b1e511c022314a09394aba159971afc005",
+        "originIds": [
+          "program-literal-315c7962a6f491fd235a3670"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "baf008bc0f96f59e2b650eab70f8756575b1d1b38ab5e1adc0427560346943e4",
+        "originIds": [
+          "program-literal-80da43ed18b24ccd0010bd4b"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "bba46caf27af8f9b9269de61b8233127a967f642932fbeea5a27d204c045a42e",
+        "originIds": [
+          "program-literal-af1a224ab05b7ad0c4f8a0d8"
+        ],
+        "roles": [
+          "answer"
+        ]
+      },
+      {
+        "normalizedSha256": "bc038d2a3addb7ea9497a5642ff8dc7738b8c9014a56cb84e72c8f572c3dcf6a",
+        "originIds": [
+          "program-literal-1354de27db5a70531e677c3d"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "bc9f264e51719116d591f849854817a31f2db0937ba3b149a69e5c52cb5c7e94",
+        "originIds": [
+          "program-literal-0105c3d5fe3d50b1f4b1d1d3"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "bca96c2c4566cc42726bf6249ace54f4e7eaa5f5fb0a9f61c0851133e7b9478b",
+        "originIds": [
+          "program-literal-40185c119fdd8857eb551433",
+          "program-literal-3bb11b5b149ddd469c03923d"
+        ],
+        "roles": [
+          "declared-original",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "bcef8026aade1ef01fbc97448a0dae98da86cb89e0aa914a0e23cc797b2b57ed",
+        "originIds": [
+          "program-literal-b5a684433c5720650911d9f4"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "bd3661c177deb32275fdc1e0bfa2bf76f23fa723121b3d6dde9ad76d523fcab7",
+        "originIds": [
+          "program-literal-6447bcf876f81059ee89e4b1"
+        ],
+        "roles": [
+          "context"
+        ]
+      },
+      {
+        "normalizedSha256": "bd55d1f1edde72644de52d26297a9be93cfddcd017436fde9f436e2244b38afa",
+        "originIds": [
+          "program-literal-4731c9a6993ff373e1e6ceb9"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "be75b6cedd492cfdbe0bf65cb214a5591904f4c6b959638394c61f769b609141",
+        "originIds": [
+          "program-literal-35738f581559038921d6997b"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "bead2e09855d5fa4fe3478308cd8034a40bc476c694c9e1ea41bb93735a064a1",
+        "originIds": [
+          "program-literal-5775bc508b227297563d7bd6"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "bf34f6e4efa8b99b9cbc4854a8a1de9c2c939caa0336738999801b117bd078aa",
+        "originIds": [
+          "program-literal-9b803512c7511eec0b230a7f"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "bf8b5316e5b974d2f9acd606752ffa89d10db8f76e417cb29c4d2a7adbeb1dbf",
+        "originIds": [
+          "program-literal-c43fd2bf6feae3286bbedcfb"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "bf93aa3692516e6e42525a0626c2067aac37f5edfd6f308ceadad8eac2a77f27",
+        "originIds": [
+          "program-literal-f4302aa561f5397615a549fb"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "bfb9b6143fd7fcdbf5394c8e58bc9401e937bf19825a40a9559e73b10c66842f",
+        "originIds": [
+          "program-literal-c1218c3d1508589804143404"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "bfe1c46cbf7d177149b3751783024e0b9ad789696796704a6b72e154a0debbfa",
+        "originIds": [
+          "program-literal-96cab9c3f6bc380ba3766bc9",
+          "program-literal-126940de0036dab02090b975",
+          "program-literal-ac5277f2f095b6ea7d483b50"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "bff884d498dc27030850490f744ee04df216a848fc3a1d08939b824a243842c9",
+        "originIds": [
+          "program-literal-35638b32c86ef9a980db65a9",
+          "program-literal-9bdb0832cca246033b8381a8"
+        ],
+        "roles": [
+          "declared-sentence",
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "c0526f59119d02a7f47662e9dbff7a847ecf3a817b7d44462aaa5a884338facf",
+        "originIds": [
+          "program-literal-22b846ec9abbf55ec58ee9fd",
+          "program-literal-008b6a86fff706cd2c2b99db",
+          "program-literal-1111c9f25f17df8115b30289",
+          "program-literal-123a284f520f6bfeec011cdc",
+          "program-literal-d056b44e45ff0b51a4001490",
+          "program-literal-c3d2b38383998342b8a366df",
+          "program-literal-25d397cca0d71de7f1970538",
+          "program-literal-8b277b0385feef042a765d1c",
+          "program-literal-9b01c45ad37fd902959ee7bc",
+          "program-literal-64803a375ed676241075d462",
+          "program-literal-e04edd8b68bd650ccc6325df"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "c13db4f3f6cc966d16bf5ac70b0750b9bb7a16777b1b082ac0ead90fe2392c48",
+        "originIds": [
+          "program-literal-4807fbbc32602201344e4188",
+          "program-literal-6e72ef24a07a98ba0df88aca",
+          "program-literal-c16c5b98a2c4c9512f032979",
+          "program-literal-5e402322699bf52d90b5816c"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "c18dbb73f1b39a4a65e558481075a4845181948712c7d0b54c2046b75b23afd0",
+        "originIds": [
+          "program-literal-99c17916138ca18a43826619"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "c1f7e038a0c493f6c877c3f4eb988325b6336254a7dc39817fb9521754cfd08f",
+        "originIds": [
+          "program-literal-7def7453b910dcf86453a99d"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "c25ac6422fc9f93f321611278dd2bf59e182aee527ec03eabb74c48cc2c7cd2c",
+        "originIds": [
+          "program-literal-65bc77adb043fa7fa08612d3",
+          "program-literal-a86f3f1738936cf2a91c4830"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "c25f88816492cfc1322514822a8236f8f2c903645bd13bc7696ade99e36815f8",
+        "originIds": [
+          "program-literal-f1647db6c26eb224f7d81db9",
+          "program-literal-603ec2e1ec7c7fae5598e740",
+          "program-literal-12a59a1132602b27a086898a"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "c2717d871a976e72b3c01ac860fc520cdb6192248df5f833e052cd5a92a36580",
+        "originIds": [
+          "program-literal-a408a719a3c93926bff6b378"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "c2d1aea1e174250078da1031bf6e78c5dabbb46bfc14fd7c1100c3fa5630455f",
+        "originIds": [
+          "program-literal-1404ec4f69a74eb8d7ae3310"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "c34e3e8e2824af5a750493b332b793b504eef7408b7e8a19dc1f238c08d76c91",
+        "originIds": [
+          "program-literal-3aee7f625427ea16ca18e897"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "c3ed0badaf34aaaba3594b1e9c26291fc99e591568e31555ea932ac0abf887ff",
+        "originIds": [
+          "program-literal-9f197cd097e0cbde429592bf",
+          "program-literal-bff4078c825ed7f604991eff"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "c4552c1cb97a881f8c69c7f42e9d4b8f30252a3bd8d9772332fbb382a2af76f3",
+        "originIds": [
+          "program-literal-99e85b085d497988c8887f2b"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "c475d08caf04512cffc1b2aa12c599cbc490f3226f30a71d007eaf0542671a4a",
+        "originIds": [
+          "program-literal-c35167d0c8939aebb3b5a3ee",
+          "program-literal-a0bea49e3fa1a0e103774359"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "c54b1c05769a4906980dc4a5e8b2206c488fd7d0e0c210b99ab7fbfe2b29bf49",
+        "originIds": [
+          "program-literal-c5711a269e2fe8cd16de2625"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "c5c920127b87827386c660201592ce8aed748d7995edda16bebfe8686978b8c8",
+        "originIds": [
+          "program-literal-2898452196ffd76ceeb6e9f9"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "c6e63f60e1efccf43805e3f4979f974933245ce099560f12d5f115ba3e982356",
+        "originIds": [
+          "program-literal-7c4fb153ed8d8d42c05b4ab4"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "c79bec1b9ae09a333a13da7a9eb960ff5bbd7394332fb35518b841572f9e79ed",
+        "originIds": [
+          "program-literal-178544e182b97b06c4af93bf"
+        ],
+        "roles": [
+          "assertion-expected-or-message"
+        ]
+      },
+      {
+        "normalizedSha256": "c819c92e9a3c819c07d1d887b99b699543500c40ed4be0ed43721ac3baa4167a",
+        "originIds": [
+          "program-literal-fbae3e102bc33e21ca1bafd0"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "c82a80dd7eb0c3f00084c98993b4dd31a85892e0d7e9b5bad6c0a026cd5b222b",
+        "originIds": [
+          "program-literal-6484a7f3500693e58a81692b"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "c8b7dd7a8284f9e4aa2ab023f17c740226bbde6f42ae92f62bea3b94b3968cdf",
+        "originIds": [
+          "program-literal-2892e4b010ecbdddce0bbf45"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "c8ef698cf9813323cab429c9686cec5836454c690468819369178d65c822b139",
+        "originIds": [
+          "program-literal-1387d41eb14c20f27c08381f"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "ca38c9b313b57d77bb0a9a3933ce0040457caff63e5788f817c6207d32ebc1f7",
+        "originIds": [
+          "program-literal-60df5e9192de792a1d7af060",
+          "program-literal-08cddfa5633214e25509860c"
+        ],
+        "roles": [
+          "call-argument",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "cb3b46d31aa7b2a505dd0e18f59828369285899e10185600744f2de14b9b3f2c",
+        "originIds": [
+          "program-literal-d0db5ff81c29d0b17f45b473"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "cd03cc3c98fc81bf53af1143c22bc07fdef7ee08d8c27896fda7c6b0ae040cd5",
+        "originIds": [
+          "program-literal-a91dd7ab4e2df2943856779b",
+          "program-literal-841cc1e2ab1f607c500b87ec"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "cfe1b11d9db9e25e3ea0a7cccb27d3ef2d43cd23836c0148f1fd58dbe6fdda9d",
+        "originIds": [
+          "program-literal-f2cf7bb3ab7c54d0a20a37ad",
+          "program-literal-a54e1c13a979a2a18878428d",
+          "program-literal-dd8b55410d747a7bb3b57aef"
+        ],
+        "roles": [
+          "loop-binding",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "d0be2b93e5551acc0ed5028015cc5f1729857961f8c67a721b6f562de891bc66",
+        "originIds": [
+          "program-literal-3ce90204752b0924fb758b9b",
+          "program-literal-6d3b6d1a1c0aea272930b81e"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "d154401800c3ea4894e70c14c944dcf9e918806fb94f8484b5213bfafb1911c6",
+        "originIds": [
+          "program-literal-f16d7f8e5322cdf0d91c85ac"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "d28282a759f3b5e574431418d0ba7037fd091ff5c16ca5e5397f327b9b72839e",
+        "originIds": [
+          "program-literal-61f4efa3a40a8060e83a5821"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "d29b5a2304c2d76a15b9bd8db5665a0178f1ed42798c1ed7087d8819f0b64879",
+        "originIds": [
+          "program-literal-818f70b9932041c0f4e0e192",
+          "program-literal-0fc839dd08e041ee894585ea"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "d3d333a06b364ee8e537a0f1fc0b23d6b44f59817c1fe275cbda0300c618cb3d",
+        "originIds": [
+          "program-literal-83e16a832d3012ee8a82347c"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "d3d6aaacbb992101798df8c306515393b4b1b46133c9e364325151bfad77f9c0",
+        "originIds": [
+          "program-literal-44f14122a2315d0b914d0f6b"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "d55a1b5d5d8d21696cf2c93fd16b4b577980536ddc3ab669a81a5a00eedbe317",
+        "originIds": [
+          "program-literal-d85c3aba316b69a2756dc3a0"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "d58ade62df54bd43a6a1c4a091dba5817d3deeb3ae8a8e40dd9e825245b9ce33",
+        "originIds": [
+          "program-literal-0f92f0430168262ba2f32c51"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "d599fabe2b84082037012384e6da03b3613821b6921ea5d3441c708dcdccc867",
+        "originIds": [
+          "program-literal-875fc71e415c2470edcfeffa",
+          "program-literal-896d2618dc877315f9ed44c0"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "d5de3a6c9f67208024f15fb0f6fc5f2675f5b3c21c5616315bfe68999768559f",
+        "originIds": [
+          "program-literal-6d27e11bf5313f7f37ae84fc"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "d61a38c5b6cb72aab71c0a0bbeb4125893aee8f0c58f280f6ed7519eb334599e",
+        "originIds": [
+          "program-literal-480ec9042a2ee2efd6aeaaab"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "d6eb16a13af177fe7b61b32bf0db6b0b3e1a16a505f7fb3e1c496354fa244b3f",
+        "originIds": [
+          "program-literal-9de1311e92016fe685bce9d3"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "d7470f92954931ae8b63407e0b821850125b85559f04c1cf526e6cde1ae0499b",
+        "originIds": [
+          "program-literal-4b6e9a6f78f8f1754ba1d4f1"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "d7bf24a93bc0b04bfd20269199315504bb7baaf3efd44774aeaa864100ca4baa",
+        "originIds": [
+          "program-literal-ad64b706c093cac5137318c7"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "d921bca3e75f1b657c9c03c4332bb6e40366058b588f5c421e3683034545df4c",
+        "originIds": [
+          "program-literal-d9a4bb335379da5de10be64a"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "d9d3e2002442a4bf85ad84bb4d8a513b115070b530d0a1b3bc539b80db555c35",
+        "originIds": [
+          "program-literal-957370bc6c074e0fa0dfaed8"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "d9ffa951737b564835b110e2ab05ed6ae6e189e274fefe53061448e2348ab4b3",
+        "originIds": [
+          "program-literal-783e86abc90a1fefe7ca17f6",
+          "program-literal-00ae705e7df1f05005672363",
+          "program-literal-44b922e77ddb4ba394fdb2ad",
+          "program-literal-f38869aaff1f0fab3bd8000c",
+          "program-literal-3b339a3a17a6cd0435a87f6b",
+          "program-literal-a2d96665ee82b7145900843d",
+          "program-literal-dda40fcb1e8202ba88a9258d",
+          "program-literal-f3a8d46e0f97e537b4a20e69",
+          "program-literal-356765a3aba42e0e03014af6",
+          "program-literal-3ca89d40ee13691bf33774d2"
+        ],
+        "roles": [
+          "call-argument",
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "da2a969bf9dbd7d4e44d44b52ecd4eaf8e887c7354882f56cd4ff9151d4f84bf",
+        "originIds": [
+          "program-literal-675cb7de4d00efbc020619c0",
+          "program-literal-26e1c07f0929b1b19b33fb64"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "da691a631cca6fb06203f4792633a24042bb47745ac6b108cdd6c549c5d1db06",
+        "originIds": [
+          "program-literal-c256ec78a796d044267751f3"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "da6e4a5873449c941df162fa1840bbbfa8ae4edbcf3f046a6f0887970b082aca",
+        "originIds": [
+          "program-literal-9e64424f50698165845232a0"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "daf4abb1635b3090ca29c735bdcc536a9111f19c4942e7c63510b458243148c4",
+        "originIds": [
+          "program-literal-2c6db1c667aac46eae7998aa"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "daf8c2a5142c134554332f4e4b062ec095e50888c17e24c02094deb89b7d3f17",
+        "originIds": [
+          "program-literal-eff4d301d887899d11097b3a"
+        ],
+        "roles": [
+          "assertion-expected-or-message"
+        ]
+      },
+      {
+        "normalizedSha256": "dbf4663cd8f654e292b11cb8716bf819d1f1759e7d6e5052b207adc58db33496",
+        "originIds": [
+          "program-literal-c6f50fc27d4e611babfdd1f6",
+          "program-literal-ac119c315ec43abc8262d051"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "dc2da9111b0b7c4a73c2aaeba5bcb67892de381c464c0394904a74c13aff56a8",
+        "originIds": [
+          "program-literal-881f3bc7b1bb47964bdbcb77",
+          "program-literal-bd05d88b5828713ae2776bb1"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "dda173708ddb61f5ea117e34992de48c836361fcd6e91bb73c089a141bedfe54",
+        "originIds": [
+          "program-literal-11bb4537020ab624a7bf89b4"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "deaaf3330cb983a512a5ad7ac9de3e9c48dd17f3b842bab4ea4e2753f07c610e",
+        "originIds": [
+          "program-literal-4d658b0b426e57081464181e",
+          "program-literal-1e245b550083947028aaa091",
+          "program-literal-38aa7bb7a8512225c46196db",
+          "program-literal-382bdc2ff1a5c92e7a785d38"
+        ],
+        "roles": [
+          "call-argument",
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "ded40c50f2990038a45a4508ed9a5173a8e87c01ad6f19f56b594aeec49b34d2",
+        "originIds": [
+          "program-literal-e7028e4cc4d0eae69ec612c9"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "defb3d235c62222bd42c875d207f4a31ce3e8f41df5970d6318a468940acc15c",
+        "originIds": [
+          "program-literal-9f6c7b52fdb0abb774c48501"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "df3bff5cc8784ea186ab0754972e7e4ae7b26b885e35f789b16078f7798c4536",
+        "originIds": [
+          "program-literal-e0616ddf3a1722674a5ed736",
+          "program-literal-17639874af164f7215268fcf"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "e008b9d1dd91adbb59fef75fad3ce61ba8c16b7b26738b5fcd30043c2ccc8e17",
+        "originIds": [
+          "program-literal-0b09f039c222ef624bd7782e"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "e0f74f3abd99575ae4410396f2590f3c608c1fb44ac8292cbcc442e91389c68c",
+        "originIds": [
+          "program-literal-657258a0e7589b845bf1076e"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "e24a8124384269014101c0fd9c484002b3c91a94de21a081f5ac73a0f075173a",
+        "originIds": [
+          "program-literal-3e17242acbb18a01cba23192"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "e3e0494c26544e052138d402135b9fa9bc67c470e7cd83b2191144ec887c78bb",
+        "originIds": [
+          "program-literal-79a089a91d45dcf97c53d04c"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "e51fe06d194c2b9bb8359e9ff1d4e6c501ccf53f90fad55f4503e7c77246a994",
+        "originIds": [
+          "program-literal-def25b170a42ece6f7119d8b"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "e522effc98a7945ba7e44d0dc22ccbafeefb679910782e9796d6f6f7d47fa22e",
+        "originIds": [
+          "program-literal-01453ec5bf9bcdd85e1d05b0"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "e552a82dc59b6cf8ee9cc7fc035ecc567446e9e719fe2a1dd1b1e3f4f84ce7ad",
+        "originIds": [
+          "program-literal-a5eb1e2963ec54cb95a31925",
+          "program-literal-37243a59f6331074767b230e"
+        ],
+        "roles": [
+          "assertion-expected-or-message",
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "e62dde3958c135728282dc232a3b4a0a9cbdf2ad91ee7584600d8acaecf3faa7",
+        "originIds": [
+          "program-literal-59c28ece358185d72434f5ca",
+          "program-literal-eb7659fe39a0d9db7283ad6b"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "e650fff983ab56dacff7e0c856b7c19d9b23524d105568a168efb5e461852ddc",
+        "originIds": [
+          "program-literal-dd8520d77bec579553f6c4d2"
+        ],
+        "roles": [
+          "declared-original"
+        ]
+      },
+      {
+        "normalizedSha256": "e7218eaa568c904d30fe0a9699f1415eae202fb0eec7f7143eb4628c9bb72f87",
+        "originIds": [
+          "program-literal-88f831de2eef1dbd48cb51dc"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "e763f2de4c70513239636848af5b8e71eea712abd4294828f19143986df5c6bd",
+        "originIds": [
+          "program-literal-46dccbfcd4f1342f613280db"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "e7ef2c83e69eb58565f222d60e08a285e09a5433ed55f454c9b9d4e2f1ba1e70",
+        "originIds": [
+          "program-literal-bf9fec4944678293d6a35503"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "e7f40400b2f3f3d2a10d8db1de4ccbc7f563968d1e64a6cbb480333e01dcf477",
+        "originIds": [
+          "program-literal-31b8934931763ec1fe0a6721"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "e8398a867309c6b820a0d310a52b4fd3a7c356a666b338f57cc5c0f06fbe3200",
+        "originIds": [
+          "program-literal-b5d3023e8c6354052db81555"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "e8a8c550b627ab80c97af1de6ca672fd19b9bccce80a6ee4fc17888c8d570da4",
+        "originIds": [
+          "program-literal-9dcfd9d415731aed6b71e82a"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "e8dc28f6e91fa6a3865b9b29c279d5ce25fbbc18be5c7ca33e91109906ab3493",
+        "originIds": [
+          "program-literal-814330a1719b41132ae1559f"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "e96e6ed57870a3c5541b02453ab6af72dfde08dc9c08fc7de2dd5ad73d1187af",
+        "originIds": [
+          "program-literal-2efbc618487985e87ebfa797"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "e9b003011100948e9dc7b72825d02989d3859437449cfe096a0dd073a5b917f6",
+        "originIds": [
+          "program-literal-7cff5c8d5152791384fac150"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "ebaa4943af64625f11ab2b92f65712ca154c317445c5ae31528534bf65bb6027",
+        "originIds": [
+          "program-literal-63e8638b11082f1741e4dfcd"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "ebad11e07dda1f961cea75fb30edb35ed4b0bc82c34ff427e7345de0ad72b01a",
+        "originIds": [
+          "program-literal-c0a7243fcc6c8248b468c320"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "ec01e2688a0241c8f035ef9e9263ddbbdd705e578b47f09832a59190ccd8597e",
+        "originIds": [
+          "program-literal-dc59aeaa8bc3cf81ac6f7952"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "ed25fc4dceae550e758c7096b27b5d229be21f4e941d76be05f38a50abca4564",
+        "originIds": [
+          "program-literal-e7818bec826c6aba58d7fb89"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "edd95cc5e175f4bba6b596bc3c816ec8c30d5453a935342ab285f0c38ce15b90",
+        "originIds": [
+          "program-literal-a69beae76c4f8eaf70d134dd"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "edf6223bad6c289d64bee13250b2d4676678d2b668d27c3827390dc176b986eb",
+        "originIds": [
+          "program-literal-e1b085461d46fd6bd4c4881a"
+        ],
+        "roles": [
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "ee55e2acbef72961c56cf4c869e513e5f97b40ce50dbf39c35640571a27ed80b",
+        "originIds": [
+          "program-literal-ec9400d581a76a5c3ace8eae"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "ef92bc942bc9888ee988749bbc03ad32ff4bd9c94aaff4985168079779119cce",
+        "originIds": [
+          "program-literal-1ab12974ede5dda4c21a6884"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "f01062de27b469a6a184510bf8aa6e832be70f66c170c9b6235dfe167d4f01be",
+        "originIds": [
+          "program-literal-0e84332891df95fac4ef5a5e",
+          "program-literal-1449ed236e75e86af47586c8",
+          "program-literal-fed6e414904f5a3dad8d8ba0"
+        ],
+        "roles": [
+          "declared-original",
+          "loop-binding",
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "f155e0d92c43aee7872b652a73b77376b2db18a277e3d705d8d1b4e648261760",
+        "originIds": [
+          "program-literal-87c05e051b26547c92090694"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "f1d14823a807e32f89bab95d5ac738e3b95a7307a17a4f406b5227491c1e6434",
+        "originIds": [
+          "program-literal-abf71ab28324d5069d3f0633"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f2152fb3d7b457689519c65293a2f6c9d59d8b5f442f65ac17fda8547bd1440f",
+        "originIds": [
+          "program-literal-740c4d5eedb05e41f08dd85b"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "f22c8e90d0d344c2f74e4277ad49f0d927d887ad307672f22a14b6f6b3b5fc82",
+        "originIds": [
+          "program-literal-9224dfe8123fcd541818ed3f"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "f22fee041fd5663f297bb09e28270c57fd4e0ed3d93b14d15d827f18471b0473",
+        "originIds": [
+          "program-literal-e5ce5ff7c975ef423d7cf426"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f307814d382dfa739160d0cd804a8b85e710578e35efeabd4ba18f6614b78efb",
+        "originIds": [
+          "program-literal-7e6c285bd917016177b6fe36"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "f33a7b5ec23309376db520714204e5f7b7e150c52b1358fea2724cd6102ca0b5",
+        "originIds": [
+          "program-literal-bc9a480f9ca10c46704778b6"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f3bef37c62f7ffd4c43281d558bd4d23a408698250f44771a7b279b8aae53a0e",
+        "originIds": [
+          "program-literal-c7fcffc92cf2d599d82dbb97"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f3f76e9867b967fd6963cfde4b11ec86438d8b3a4c1486bf81e41cd069efeea2",
+        "originIds": [
+          "program-literal-b9728b305aaad2d3f2eda2ef"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f4204de7282d94d64aa413a6e040ba66d020d2a7000308ef4e9dca893ce61e2d",
+        "originIds": [
+          "program-literal-bf5ec80eed1163d121653771"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f434d12843933b4708c6a4aca96192074b1af160bd493dbb343b4962304dc58b",
+        "originIds": [
+          "program-literal-cbb92b4c80c8f7da2078674a"
+        ],
+        "roles": [
+          "explanation"
+        ]
+      },
+      {
+        "normalizedSha256": "f6fed5009faa64326906ddefab0767b5a67f039e25bd364d26d93fcb06547ccc",
+        "originIds": [
+          "program-literal-69f4f3ff340e2c19cef0dd5a"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "f73e84c1fe26eb8e2a574e67d9fdb832e9171c4ece50571beef2ce769340d66b",
+        "originIds": [
+          "program-literal-edb1c88bd6cfffa7a78a6b57"
+        ],
+        "roles": [
+          "proposed-correction"
+        ]
+      },
+      {
+        "normalizedSha256": "f7527acfcd7363e33fc4649b2d5cb7a759550c5ff6ddb85b852a8fa3c82f3c84",
+        "originIds": [
+          "program-literal-9c214f75bd299b8452b87270"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f784594e60109b530d48486ad6d52d2826342640f4fb80c94c6ead3027e48e6e",
+        "originIds": [
+          "program-literal-9a9da62873b0e8d173569522"
+        ],
+        "roles": [
+          "example"
+        ]
+      },
+      {
+        "normalizedSha256": "f790316826601fc0b1187d31f2db2ab999bdb4c45391a13b9b292d4231ec5202",
+        "originIds": [
+          "program-literal-2e3ea01003277ac79b0ff609",
+          "program-literal-f0e8e836496ee5af37b22cfa"
+        ],
+        "roles": [
+          "loop-binding",
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "f79159f6d26031cdfbe5c42ac49c6612a304764c5400689e19d43597a366072d",
+        "originIds": [
+          "program-literal-4517aa344e0846c2167abcb9"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "f91794328025ca132ee60f09a16640668b071069347703d3774240c3adac6d67",
+        "originIds": [
+          "program-literal-d22cf6a10f6ff272d56b19d5",
+          "program-literal-b826bb02623eb4b8b646b70a"
+        ],
+        "roles": [
+          "sql-statement"
+        ]
+      },
+      {
+        "normalizedSha256": "f941cea722e944e8d698fd2584beb32a4e47fe9c6e3707501e628c8d1e234854",
+        "originIds": [
+          "program-literal-7c89f4c4ca726f8165d72c0a"
+        ],
+        "roles": [
+          "declared-sentence"
+        ]
+      },
+      {
+        "normalizedSha256": "fa520266e55d624e71c482751157ed5f14ff343e84e685edf2f5bd20774af136",
+        "originIds": [
+          "program-literal-7d9d496dff8269f09b85bb40"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "fbb3afa75a7d9e89a55fbb54c458027a78fd4f4542e5d15dbf758f337814621d",
+        "originIds": [
+          "program-literal-9fcde3f8c533ac05d6bed575"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "fbedbaa8ef8e6528a025c22d33785adc57f53db0bd2ab2318efd1c2fffb45c63",
+        "originIds": [
+          "program-literal-b30fdf19c5e3c5db49fd7f54"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "fc8823005ccbda21ccb2ef7cb3a20b49a604deca0958704fbc6ed5240287cd6a",
+        "originIds": [
+          "program-literal-8f30db536824fc79e44bc70c"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "fcd9415908f58b07e070159d0aa85433e3886c6a118481c09857c933aaed16cb",
+        "originIds": [
+          "program-literal-684cd495d8b374b25fe09541"
+        ],
+        "roles": [
+          "call-argument"
+        ]
+      },
+      {
+        "normalizedSha256": "fdb9a20d1a5616af9db44a4c80c750840c3b2bf8fbcf77c4ce004210c645e5ef",
+        "originIds": [
+          "program-literal-7286dd48dcdea084ff960258",
+          "program-literal-82afeb036943c1df458ec9fa",
+          "program-literal-e052b242c576d67134ca51e0"
+        ],
+        "roles": [
+          "declared-sentence",
+          "variable-initializer"
+        ]
+      },
+      {
+        "normalizedSha256": "fe514de56a8926263de68c12934bcc80efadc42b6656e87ddc3d47640206cc04",
+        "originIds": [
+          "program-literal-fc57abc18311803159804997"
+        ],
+        "roles": [
+          "loop-binding"
+        ]
+      },
+      {
+        "normalizedSha256": "feb9b75a0ea8c2998932fd6bffdc55df1451dac7678ad71cab240d381cb49f42",
+        "originIds": [
+          "program-literal-30c34449c75783fcdeff40dc"
+        ],
+        "roles": [
+          "example"
+        ]
+      }
+    ],
+    "allActualInputsIdentified": false,
+    "completeProjectExposure": false,
+    "structuralFamiliesCertified": false,
+    "englishOriginalCertified": false,
+    "modelSourceTextForwarded": false,
+    "hash": "53b65fc784a4c7ef595064ddc2aaca97812083691d61ea11e8bbdca84c7e1711"
+  },
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/program-literal-roles-v1.json": "60f670cb3565e73099a5203a8ae8cc56b5e45483034df69e704c904ef05655c7",
+    ".taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json": "1ab0a8f82d004cc588a1dc7b737c0d007dad58334e5e9d9a0d8be8a7fd56d8c0",
+    "tests/accuracy-cause-diagnostics.test.mjs": "91e8f4b731a54cae6813445d37698606f184944d6a634f7406be1e5154ecd3e7",
+    "tests/ai-contract.test.mjs": "924e51bccc65c42f8caaeb7312517c2dc14d0efff67e3af7f44b2dcfcf624154",
+    "tests/ai-models.test.mjs": "160d55a6f278ac40842c674f79d8af5ec4c74221e1e029f347bf7212946ee37a",
+    "tests/ai-quality-context-questions.test.mjs": "f209ddd71267b6f06bd8a6dee40536530f37ec1e455584a3933325cb2542d266",
+    "tests/ai-quality-explanation.test.mjs": "70a050d28b6c6ff86f6b95ad0a2bda9bf86c25b5103a9a3a637540ea3fc37be1",
+    "tests/ai-quality-input-boundaries.test.mjs": "755e620d43c63d3ae002b59086c5b8d7a58c52372f025cc7815a6d553ee873e8",
+    "tests/ai-quality-morphology.test.mjs": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+    "tests/ai-quality-schema-boundaries.test.mjs": "5cc50ab56618bab16f2f96859b66e13815f24d03a59265834ac0f8934ca2fb3f",
+    "tests/ai-quality-semantic-roles.test.mjs": "85b84bd8408d0d8f0ce6202eaa21b181113a91af64b33ca2ce5afa0ddf9874cd",
+    "tests/ai-quality-target-boundaries.test.mjs": "8ce9b815fbbe369b77f11c1c3d1b428271241d1dcde6463ac2d4d3069078d8eb",
+    "tests/ai-quality-worker-equivalence.test.mjs": "8069b0eba19a4ada0e8ee14e0a3e04cfe7b606ca142bb8a64d4b9d5455aa0d59",
+    "tests/american-ipa-data.test.mjs": "d0b5f1f90cb53c2559fc16dc50cca1b06379cc636fb28c1727031624dddd89b1",
+    "tests/american-ipa-ui.test.mjs": "36b59a9a0c6e6a84a8751aeff2e4ab755a0393e74d115bc765435fa66e47f503",
+    "tests/american-ipa.test.mjs": "cd9771c7e326fb24a6910164e4b737b323b7df4652d53ae6743d44677b698492",
+    "tests/backup.test.mjs": "837e2217f0a6821f675a4fc0396d3369d8b5c669896d32ce29a13cc01360fd7d",
+    "tests/balanced-daily.test.mjs": "696c1851545d9092ee1d99b73f639beba4f04aeae219f548d46aee12c10c5bf6",
+    "tests/braces-guard.test.mjs": "d574cc190779e2594db7025d28677302d8a7469bd83db353a2c494bc85c8f888",
+    "tests/catalog-basics.test.mjs": "8e60ecca7f320d1f06bda2a375118b06ef0b77c42c2e72ce9abc39805284d42a",
+    "tests/client-diagnostics.test.mjs": "78c8f4677baa0a6eff083eb28466f3a3365b2e6ac3656f6d6264893e3a205ff6",
+    "tests/client-owner.test.mjs": "8d6250269ed74829277597f41e37a1b10dbb041feef2d8bac8adf36cb1ebee8c",
+    "tests/client-request.test.mjs": "57a74b8efbd6edc751ed0adb3c93af243123795067bcf338c077ea9b5c62d011",
+    "tests/connected-material.test.mjs": "036476eb34b8d30975ca1143ab8d0b49a6d18210b47f2a6a75b00f24b32ef09c",
+    "tests/content-review.test.mjs": "fe99af191a8a4ef3534730339dfb1a9b807219242f734d6ecce10bf512d369c0",
+    "tests/daily-topup.test.mjs": "33fbe536fe450473ad3389ad0c6ab543b7bc5cb33eed33c753be79f19673b062",
+    "tests/dependency-consumers.test.mjs": "70f0202886c63ddb8421139568bf1468dec2ff37d2e6c54301c4d8ea9ac4c6ac",
+    "tests/dependency-security.test.mjs": "4c2f7a63f713142d92acf1e6c5cb8c515235da92848870853922eebd072eeadd",
+    "tests/device-speech.test.mjs": "ea7b473da5ebde9e8c9c03a500b80075c053bb8f8a8d45b4f1f95a90140f6209",
+    "tests/english-accuracy-results.test.mjs": "a446fc21700654e03ffe7fef2c3e3cd615c0bc180fe9f6a13d95bddfa1d7b148",
+    "tests/english-accuracy.test.mjs": "a610dba5ccd7865423da7eb56cb78fa0a3477e6fb3ec41c0f46800d99d043976",
+    "tests/export-security.test.mjs": "848b356674bdfa653d5b2fda1b98371128f7aebe85197d0e1b076ee606b1ee4f",
+    "tests/expression-translation.test.mjs": "77ff05094d4df5785a53e3e9939739d4b28769628cdea3dc0d5328fdbc3165c1",
+    "tests/familiarity.test.mjs": "31af5cb2e08a1c09255ac54c0c9292ee63bc568664716b98aab5d56ccdc63516",
+    "tests/feedback-correction.test.mjs": "e3e1518216ab0ddfa2189d47e88437c2a2b0783d8279923d019281ecb92c74e7",
+    "tests/feedback-diagnostic-compat.test.mjs": "db01c461e93a00ca857ba8a6a0318cb5b4e5c1e060c2d559c56d06c446a07f84",
+    "tests/feedback-export.test.mjs": "00428d09c9dcff197bbf306fac7ae083ee025f45cce609f3b640794a66a58037",
+    "tests/feedback-issue.test.mjs": "a7ee60a062b5d8bd57702209e893bac576144bd052361abef15ec021dbb1bf30",
+    "tests/feedback-judgment.test.mjs": "d59949125a48ce6e73fc3c91ab4ca9483b3ed75044fd1d554e2fa89c882a77f9",
+    "tests/feedback-refactor.test.mjs": "20ae644347e12b7aab43aa20c8aec1728808b19f51e9781bd4e4461533cfd315",
+    "tests/feedback-requests.test.mjs": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+    "tests/feedback-safety-api.test.mjs": "54a1c70e8cef016b829d99b2494ea9eacde9e7b502d9f7d7915e9b714b2acc8b",
+    "tests/feedback-safety.test.mjs": "52b248ed189ff74aca820f0a517c3e674daf2061f417176dea10b7cdbc7da32d",
+    "tests/feedback-validation-stages.test.mjs": "48670166cdd0cad3f00a2b8f5ac7129fcc851e44a7d43dd5d7a8ff59f046ce50",
+    "tests/feedback-word-forms.test.mjs": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+    "tests/free-accuracy-results.test.mjs": "67183585a8c2e606647e10fbd7194de1fbfa12f9841aeb39ee938447e28cc3c0",
+    "tests/free-feedback-evaluation.test.mjs": "8bba6bb7973be8e347251bcc822372853e777a5c4ef5fd14bf672d10ff9606fa",
+    "tests/grammar-content-review.test.mjs": "d01c799c70501cbfaae15f75ebad3e4314d47a5e7b0ee26f86e4affef32beed3",
+    "tests/grammar-feedback-whitespace.test.mjs": "a2c6823def6b1a4b30be1a0b742a7ce41e68a7009e17c8ed656e572618613ffa",
+    "tests/grammar.test.mjs": "758d21472a2efe1d717f8cb5d055b1e1c3592918ba021d1191f4989d51e832db",
+    "tests/groq-fallback.test.mjs": "044b3a59db514a05f21284166e4deb9b08fd208817fdadc56237cbbb9d705938",
+    "tests/image-practice-position-api.test.mjs": "cf963ad28fdbf5e2030906620b2d74decf867c0957a15552538628618741d312",
+    "tests/image-practice-position.test.mjs": "c6a135849c2183fb68cf2fbf720e3635becf2adf478714314db3cdf7972cdb98",
+    "tests/integration-consistency.test.mjs": "819b4cee7438e229629d3e8cd4f2ffd337af9714b132ff4ac48b58a23f051584",
+    "tests/judgment-api.test.mjs": "130fb928b56cd579cf762ba2b542af51f25783e3b346f05c9d0985a3ca525ae6",
+    "tests/judgment-decision-table.test.mjs": "cefda55931e9366ec8afbdc15af07509d0b1ca19f5d2a328e9560b10ace64616",
+    "tests/judgment-feedback.test.mjs": "645b3a1433546b01b66530b43f9d10fefd6a635e4181ed6a6c425cb0835f0c82",
+    "tests/learning-api.test.mjs": "289a27b8068861508c20b73da0132afb33caae11b41d78754e126920717b608a",
+    "tests/learning-chunks.test.mjs": "5af0d4428b4bd0d6c76e282cb4e6805acef88a1ee368f04f9205bcd8d31e583d",
+    "tests/learning-commands.test.mjs": "886666e058b6ddf3d434f470aa6346ae0ac7cb89b93e82c529d39a27bccaa04c",
+    "tests/learning-dates.test.mjs": "e7f6c3a13baa750a484edbbb9a23c13d78c3fa92967d800ce94f322299dcffee",
+    "tests/learning-display.test.mjs": "2586bf3e443cd5eedfb0bfe11071899682774d06b8ced6895d8f5a72d7ed8d83",
+    "tests/learning-journal.test.mjs": "978e4123e9618fe92b770c2e1a79a6fdcb9c50e443b988c92281858c18c9477c",
+    "tests/learning-notices.test.mjs": "efaae9acb0dadb520f3ecb89885ef8077d582082a45344e52a0a04d0c84ea6a2",
+    "tests/learning.test.mjs": "529b40fe7043c7761c061aec538ab4cb53def7d5a442253702795e40a17b0c02",
+    "tests/local-learning-drafts.test.mjs": "65d1b14e46d8953c469f51f968e29d90d06bf9cb5bb0fe6700abb0b731c76321",
+    "tests/material-line-endings.test.mjs": "e7eb4ca785ea7235a3f08c23ff2ee10be425fc578140aac656605b25eeb22b6d",
+    "tests/monthly-carryover-repair.test.mjs": "a81f114fb8f89aa551449a61b036a76410a5b5350f9bc41040c088b10151c42c",
+    "tests/monthly-resume.test.mjs": "4566861dbcb5f496eeac9357b56dfa09aecca7375f73641898f72e7a522e4a29",
+    "tests/navigation-history.test.mjs": "8842fd0bb404646c35650797f43149e11d1e0d3028a3222b060a36bafbfd8151",
+    "tests/openai-feedback.test.mjs": "2731fc7b5861319af0f325308dbfcf1ff6f774b153c868fefb40af17ec5b3b95",
+    "tests/openai-request-equivalence.test.mjs": "4ba8b31fddc287d617ae629aed4f59d6808da6249b2bcc3dfbc58b3b9b9e92a2",
+    "tests/openai-routes.test.mjs": "b4e4dfdf17b6137f0d88c2adc867ed3c7b74d49bbbe15488062504d9fbc61510",
+    "tests/openai-worker-transport.test.mjs": "22f68e45565e637569d59c3935ff295d1eac4025b21891054703b282aab970aa",
+    "tests/original-feedback-evaluation.test.mjs": "4f8869af76727c766d05aa3da0b80cdfb7c8ba8b1106641a786aa113833d416f",
+    "tests/original-sentence-profile.test.mjs": "c3e21f45f2ce2a5136c5d0a3d18735b1e365a4b441bbfb225ed4d52de8354e40",
+    "tests/oxford-web-catalog.test.mjs": "56d2f0e0a8b5677e8d37db1bee4d2dc617c8c5e37832ed2c13c09053235ce497",
+    "tests/oxford-web-images.test.mjs": "425babc2e82f5998a72d9c5f4130bedaa629e39b7b576391569eba4780bdf9a2",
+    "tests/pending-reviews-render.test.mjs": "47c91b8808e46d864a71fc2dea5116885365e48848c155c5ab433067b1a019e5",
+    "tests/pronoun-target-contract.test.mjs": "d4a2a840304a2f1ac060b97972e07ed3e58cdb21645a62975df9e60ed1a1e849",
+    "tests/pronunciation.test.mjs": "39e1e166196f6dc2f68384761b0163d9df08020eb02f1327c723ac5119541dd8",
+    "tests/public-policy-generation.test.mjs": "2c1aec6aec8f79a7757ff7af9a46d99591a7e4575a2df18fd191fd913e242d27",
+    "tests/purpose-regressions.test.mjs": "ae27fb0cba357d8bff1f8f8b61e1a54d716ec8ebde2979eda5630d30f28faca2",
+    "tests/qa-interruption.test.mjs": "550f00e7b76292c7f7bdd5a2f8abe415a7df132e72fed96f87b4e341b2650136",
+    "tests/qa-isolated-worker-lifecycle.test.mjs": "bd13cd01617c303bd3ecc58f81663ac512e066800c3237598ba1a2ab725dc60f",
+    "tests/qa-lock-remediation.test.mjs": "55c69be68f51b8f7c419c0ef1120363ea09e1dd5989cc347a09248765d2a173a",
+    "tests/qa-preflight.test.mjs": "7504e4f24e318a11cb578cd5c3684d789d47a178bd568536b1db9f83a0f66c36",
+    "tests/qa-process.test.mjs": "adcfc8bc5a217b4deb89ad786191c579be769ffbcaa90f8acccc6d2a4d171b4f",
+    "tests/qa-runner.test.mjs": "bb76f9c710f1e254fc32ab8e812ae976d072a8db3c565f02b476ec9f38cb2cf8",
+    "tests/qa-runtime.test.mjs": "6835577e7588243bb2e3b42ce5fceb2f931545d696fcadca2cf73fbd3bf33036",
+    "tests/qa-worker-profile.test.mjs": "e0276596b70afedbb43aecbb422862bad25bd0a8149091703998697bd41a4d67",
+    "tests/recoverable-feedback.test.mjs": "facc41261302e54acfd4cfe296163bf3e881e0ebcaff0e478daced75feeb55bc",
+    "tests/refactor-contracts.test.mjs": "b7d1965157d044c05fb5d31bdd8cf0d4b93c888f4dd02422682b183b314d4162",
+    "tests/remediation-followup.test.mjs": "a1c08365a1c465c6fd30390d128dcef700c1ab5502b5d432432ad8bc1d5c0095",
+    "tests/remediation-judgment.test.mjs": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+    "tests/repeat-learning.test.mjs": "26670e19c928cad5dd0eba63582a05fa229d0055d3b8c174b940b1c5c378d851",
+    "tests/request-body.test.mjs": "a2f84fd096657b01dbf40e99ebd790f1ce885ef9e73f5aeb7759ab276c865db9",
+    "tests/restore-client.test.mjs": "8fc9454365204fd3a9a7327a6cc50c56c71bcb4f0649fc552cece8f0c5559aae",
+    "tests/restore-jobs.test.mjs": "fc65cca9d506076c42257bb2322535d9c827efc490a33092503e19dae4b939ea",
+    "tests/review-calendar.test.mjs": "aecc4a1c834bf25423c0e2d34bebfabf67c57ebad40a37cd41b3d28d0eb84311",
+    "tests/review-extension.test.mjs": "76c9eaf73eaa1aed309245b27717a61ff6e6f78301e29477ca1cfb0a5bf6dbb3",
+    "tests/sentence-feedback.test.mjs": "58c39eca752a40fd197f8fca4814f1d0e593b237fb45d8cc656a27bb5875e3f7",
+    "tests/sentence-structure.test.mjs": "2f48e64f92b2b1c6c0b1db2665a52378c8d2edf487e91c2b8a1fc2aa48ec67f1",
+    "tests/sheet-swipe.test.mjs": "a77226f371f05bc0aaa2ebe85bc390b9696a3fade48ee9b5d94c2cd218f8b43f",
+    "tests/startup-assets.test.mjs": "ba82c93909ff5a9778e64342786a42f8db1c59ba315d0a30c8f55a0207846466",
+    "tests/startup-diagnostics.test.mjs": "4944be4354c4f6d5b500113694e37b7be7bf9c8a10927c609a754f6b6e1cd22a",
+    "tests/state-api.test.mjs": "7948ba4d9d7d22a2b863ba6f0517a368b4e2288810c66cc6af57ff66fc68d46f",
+    "tests/state-collection-limits.test.mjs": "ecec79fff607445bd6bec4be9e2bd87d012ee780cacf53fd6af3154c2f0968d5",
+    "tests/state-delta.test.mjs": "4196c4eb9bbb5f424fba922ae1b597019e2489b65bc7696a4f51a6840b7dd83c",
+    "tests/state-response.test.mjs": "b6ea63839349a26d92246e43ed1bc9aa283c3bcee5b791bd705895cfc7f35e83",
+    "tests/state-roundtrip.test.mjs": "7b8e2d51c545baf06c7266b3934d1682faa9ea9ec7d76b366e15af9256ae4b2b",
+    "tests/study-date.test.mjs": "ac5b6cfac9ff70e2f79c6788a3e4a839e97a8b75f1fbd79627b107b5d5766f5d",
+    "tests/study-draft.test.mjs": "7c96e93dd2787d59a53fd534cabc98cfedd59980aead390684e34de6f8d77d16",
+    "tests/study-recovery.test.mjs": "37c06592d06887f12b86eee8f65bf21941e4aa514e705857718e5bb642c2691d",
+    "tests/today-status.test.mjs": "db5e3e11ce8d90b12e111364d0e0607bfdfbb0e4a930b2d7b417e580cad75fc2",
+    "tests/toolchain.test.mjs": "92b705ee87a45976f2a4c197d4c624ac1c1ed1b5881b0c135940f836642862ab",
+    "tests/ux-text.test.mjs": "ed836d88ce65ad4248fc641161a54864d6484780c3f6f64a779ab77a0cb60a8b",
+    "tests/view-restoration.test.mjs": "9d4c2cfcfc62b5332df51f3bea4d4489be214e31e18b705ff7cd7ae24aa833a6",
+    "tests/word-editor-draft.test.mjs": "5da7d7fbad4b88f1a2630071351cc540a9b9b7b162141ab2798ccd089aedb90b",
+    "tests/word-image-hosting.test.mjs": "88832576d5d83f7303783eb895ca77c8ac3f450a960aded0aee7753bb697bb77",
+    "tests/word-image-prepare.test.mjs": "41cfd11417c60304c1aa173c9f517b6bbc00fe173ce816aad9c7751e767497bf",
+    "tests/word-image-ui.test.mjs": "fa181dec710f14ced90c146d5b1680d9d64780efecdc0f6084dee31bf837eae5",
+    "tests/word-image-upload.test.mjs": "620c78454378af6e0d1ff2a183fd7fac3746e4d4b1f5102dace5b466d333dea7",
+    "tests/word-image-web.test.mjs": "d60a347a61751310b943c6ed63f3a09e59833acf6176c17da40f01975a0dd6c4",
+    "tests/word-image.test.mjs": "8606e2d18a3762a452c8fef6e03e18d0f3dc89f6f937e7072a696e39710809df"
+  }
+}

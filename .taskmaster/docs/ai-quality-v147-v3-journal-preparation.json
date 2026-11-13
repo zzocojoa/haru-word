@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "atUtc": "2026-11-06T11:56:10.088821+00:00",
+  "task": 22,
+  "stage": "v3-durable-journal-and-pending-inspection",
+  "task22Complete": false,
+  "checks": [
+    {
+      "name": "journal-v3-node-v22.23.4-final",
+      "passed": 15,
+      "failed": 0,
+      "exitCode": 0,
+      "log": "journal-v3-node-v22.23.4-final.exit.log",
+      "sha256": "1928cb37c35a55a6b003c2968920070001c0ca9d4bd2a1ea8b133c3098311542",
+      "evidenceDirectory": "journal-v3-node-v22.23.4-final"
+    },
+    {
+      "name": "journal-v3-node-v24.22.1-final",
+      "passed": 15,
+      "failed": 0,
+      "exitCode": 0,
+      "log": "journal-v3-node-v24.22.1-final.log",
+      "sha256": "b99aeef0d713c0767779cc82b20c615ceb0414dd483da9a27a9e0873b69a3401",
+      "evidenceDirectory": "journal-v3-node-v24.22.1-final"
+    }
+  ],
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-journal-v3.mjs": "78657f4fdfbd9e62b939cc4f4deb73995c9bc526a9f61af6c978f3f2bb6af880",
+    ".taskmaster/scripts/ai-quality-v147-journal-v3-child.mjs": "08bba27ddbf1b734ef9a24ce528eded7e9e60f324b4e0908a03bb31eaf6f989a",
+    ".taskmaster/scripts/test-ai-quality-v147-journal-v3.mjs": "e9175a735a0a5aac5a14ad0f2c5b4e2d8b2fb69ff2c431e0c6417ef21a9e108d"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3-fixture.mjs": "b5d89c99e0c663c241357a83a6acfbac0ea94fed16b54731b26af4fd98e4aae0",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8",
+    ".taskmaster/scripts/ai-quality-v147-journal-v2.mjs": "9068d018cb2d6b24b600237d1bf2be1a88d388543449e131ac3e1615cefefafd"
+  },
+  "proofBindings": {
+    "v3-journal-raw-preservation.json": "c32ac0750e5d7272d164569a1bf54beb422b6ce725ac606e608d7d3a2f5d8d54",
+    "product-regression-reuse.json": "4e4eb25c2785dd62d8cdf26d42c9f5ce4f891e5e70210efd2e4169e9383d26fa",
+    "journal-first-core.mjs": "e17cc83e8f06abaf527908c82c0867d387dadc73bed70fbf71446fcef2e86b4e",
+    "journal-first-child.mjs": "08bba27ddbf1b734ef9a24ce528eded7e9e60f324b4e0908a03bb31eaf6f989a",
+    "journal-first-test.mjs": "4d61a892fa8f56167af5f976a3e01824ea79456d1d015cf4ebcba8ad7a0556eb",
+    "journal-v3-node-v24.22.1-first.log": "31b29bdfdf925610972862be3287dbdee101ad83f7f5176fe52906d68804330c",
+    "journal-v3-node-v24.22.1-first.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "journal-v3-lint-first.log": "f4b3dd113deee04020bc811eadaafc168d53f21f327c4738a217fe4d505cf67d",
+    "journal-v3-lint-first.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "journal-v3-lint-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "journal-v3-lint-final.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "journal-v3-node-v22.23.4-final.exit.log": "1928cb37c35a55a6b003c2968920070001c0ca9d4bd2a1ea8b133c3098311542",
+    "journal-v3-node-v22.23.4-final.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "journal-v3-node-v22.23.4-final/journal-v3-observations.json": "7bc9436510c8555774b2817883422855b373885c500e47d42d3bdffcef9ba95e",
+    "journal-v3-node-v24.22.1-final.log": "b99aeef0d713c0767779cc82b20c615ceb0414dd483da9a27a9e0873b69a3401",
+    "journal-v3-node-v24.22.1-final.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "journal-v3-node-v24.22.1-final/journal-v3-observations.json": "08ca0cebd54e37ca9154b2dd9438447bd98b2a088ec220929af92ae559f35524"
+  },
+  "durableAppendReplayImplemented": true,
+  "syntheticOnly": true,
+  "finalActualChildExitsEach": 10,
+  "childExitCode": 83,
+  "actualWindowsRenameErrorEach": "EPERM",
+  "leaseRaceOwnersEach": 1,
+  "leaseRaceRefusedEach": 1,
+  "stagedSyntheticSlots": [
+    180,
+    1872
+  ],
+  "stagedStateSequences": [
+    601,
+    5989
+  ],
+  "stagedCommitIndices": [
+    10,
+    94
+  ],
+  "maximumOperationsPerCommit": 64,
+  "journalRecordLimitExceedsOld5000StateOperations": true,
+  "explicitRecoveryImplemented": false,
+  "pendingInspectionReadOnly": true,
+  "physicalCaptureImplemented": false,
+  "actualWireEqualityVerified": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "liveDispatchSupported": false,
+  "powerLossDurabilityMeasured": false,
+  "actualFinalEvaluationFrozen": false,
+  "actualModelQualityMeasured": false,
+  "releaseVerdict": "held",
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "journal-v3-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "Append/audit/clean restart andread-only pending classification only. Explicit recovery,physical captures,body freeze andthe new transport executor remain unimplemented.",
+    "Tests commit up to64 in-memory synthetic operations pertransaction;no2052 real orHTTP requests occurred. Critical consume interruption is separately tested at10 actual child exits perNode.",
+    "Process-exit/fsync/rename behavior onthis Windows host does not establish power-loss orother operating-system durability.",
+    "Reference/main role allocation andthe Task24/25 live-stage handoff remain a draft untilthe concrete corpus/token/price/approval workflow is finalized."
+  ],
+  "proofSha256": "e26e54c6d06e05e9ca9aa4c7c30c8034b99f6a2db403e74214f91032d4eb7b65"
+}

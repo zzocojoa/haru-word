@@ -1,0 +1,42 @@
+{
+  "protocol": "ai-quality-v147-target-display-product-evidence-v1",
+  "phase": "phase102",
+  "status": "local-product-verified",
+  "taskIds": [
+    "8.2",
+    "8.3",
+    "15.2",
+    "15.3",
+    "33.3",
+    "34.4"
+  ],
+  "checkout": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-target-display-20261109",
+  "priorCheckout": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-withheld-grammar-20261109",
+  "changedFiles": {
+    "app/feedback-detail.tsx": "6b8efcbd54da156d7a47bc3fe573267e9c0fb43b30798ab27cc6f1410229a22b",
+    "lib/verified-feedback-explanation.ts": "11cdefcb4dfac70404fe185ce3cee637a9569f29ac0efc708d568fe1b2228190",
+    "tests/ai-quality-explanation.test.mjs": "2ccde2d2ff81b03367445d2de5c591ecbf1d2ef0f569a37ea87a54230191fc05",
+    "tests/feedback-correction-qa.cjs": "02188ad69218f61591f5d5e190c473981346b92eaf102224af71b84c8e4b05d4"
+  },
+  "pairedRequests": 7,
+  "savedAndReread": 14,
+  "builtBrowserChecks": 16,
+  "legacyRecordsReread": 2,
+  "unitTests": 885,
+  "focusedTests": 31,
+  "interactionChecks": {
+    "chromium": 15,
+    "webkit": 15
+  },
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "productionWrites": 0,
+  "newModelQualityVerified": false,
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "patchSha256": "705da156785f4c0ae1417221a85b0ebd26f85102e8efa70f6db3b8ae81bb59e0",
+  "workerProofSha256": "1ab9a5460c80483f21f53ede5d252b8888527b7b96c226f5b1d46f40229ecbf0",
+  "visibleComparisonSha256": "57367d953e0fcec2e98a3ad92b9555a521d64356a9886bfdaf82df28bdba38bc",
+  "document": "docs/AI_QUALITY_V147_TARGET_DISPLAY_PRODUCT_20261109.md",
+  "documentSha256": "dc9dc491b34b52a5a855f44854c74aaa88a366b305d8764fe86f52f09542d0dc"
+}

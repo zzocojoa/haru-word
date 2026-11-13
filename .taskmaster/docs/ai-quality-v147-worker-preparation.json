@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 15,
+  "recordedAtUtc": "2026-11-06T02:28:43.514792+00:00",
+  "status": "full built Worker/D1/UI path verified with synthetic provider; not live quality",
+  "baselineVersion": "preserved v147 release, reference-v5",
+  "candidateVersion": "reference-v6,judgment-v6,public AI contract4",
+  "baselineQualifiedArchive": "ROOT:outputs/pr58-rollout-20261106/site-qualified.tar.gz",
+  "baselineBuildSource": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\provider-network-publish-20261105",
+  "baselineArchiveMatchedFiles": 406,
+  "hostingJsonSemanticsMatch": true,
+  "candidateBuildSource": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+  "productInputsUnchanged": 547,
+  "buildArtifactsCheckedUnchanged": 814,
+  "runtime": "actual full built Vinext in workerd via installed Miniflare5.20261023.1-beta",
+  "nodeRuntimeUsed": "24.22.1; no claim this integration ran under Node22",
+  "runtimeConfiguration": "Loopback,unique synthetic D1/R2 bindings,explicit synthetic key,outbound response interceptor,cf/telemetry off. Built asset-first default retained; user Worker binding explicitly declared for v5 compatibility converter. No .env/Sites runtime loaded.",
+  "apiCases": 12,
+  "models": [
+    "gpt-6.1-sol",
+    "gpt-6.1-terra",
+    "gpt-6-astra"
+  ],
+  "domains": [
+    "word",
+    "grammar-v4"
+  ],
+  "fullIntegrationGroups": 24,
+  "browserDisplays": 8,
+  "browserEngines": [
+    "chromium",
+    "webkit"
+  ],
+  "lostRealApiResponseRecoveries": 2,
+  "syntheticProviderDispatchesInFinalRun": 14,
+  "sameUuidAdditionalDispatches": 0,
+  "realProviderCalls": 0,
+  "actualModelQualityMeasured": false,
+  "productionLearnerReads": 0,
+  "productionLearnerWrites": 0,
+  "newSites": 0,
+  "realIphoneVoiceOver": false,
+  "firstAnswersAndIndependentGradesPreserved": true,
+  "ownedRuntimeCleanupVerified": true,
+  "localD1EvidenceRetained": true,
+  "matchedRawInputAndResponsePairs": 7,
+  "contrast": "Same synthetic natural response for Give help: baseline app withholds, candidate app keeps natural. This diagnoses an app guard on a known development input, not model improvement or generalization.",
+  "proofDirectory": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase6/built-worker-final",
+  "proofSha256": {
+    "results.json": "b651416ccf520c75bcbc5a9dcdf5edfa3c3b80abd786f2fa75729a6ded0eccfb",
+    "lifecycle.json": "d148e40dd09ed35232b5672583591c67549a2f0d3d564f8fbe5a43862905319a",
+    "observations.json": "85654365db7ded3fd790347a872d1492d5776a4204aad1a8a3d4b7d28f2215ff",
+    "browser-observations.json": "50556cf6b37c48060496753870e35f364a6f7c9939805e224c8cc8b9348f8d35",
+    "provider-requests.json": "4f0398601ecf65e8994a73a59d972132f8e5411cd1a119cc3f2959411d197f7c",
+    "runtime-events.json": "229665780343593b2cce0d4dae247c897df5a0a26da0fb5cb7ed00cc8102944d"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-worker.mjs": "f80de7be66b37941a5e09c4b1ced247b01899aa67340241eb94a1569e209351d",
+    ".taskmaster/scripts/test-ai-quality-v147-worker.mjs": "b54e45e2484fadcc0a7d2d1686ed4670d3f321e8fb26b0ddf94274e71da355ec"
+  },
+  "sourceReferences": [
+    "Installed node_modules/miniflare/README.md and dist/src/index.d.ts: v4 converter,local D1,outbound handler,asset routing",
+    "https://github.com/cloudflare/workers-sdk/blob/main/packages/miniflare/README.md"
+  ],
+  "remaining": "New frozen actual corpus/cost/protocol,approved paid evaluation,qualified review and production smoke/followup are still required."
+}

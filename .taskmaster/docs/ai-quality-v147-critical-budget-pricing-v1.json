@@ -1,0 +1,62 @@
+{
+  "protocol": "ai-quality-v147-critical-budget-pricing-v1",
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "inputFactorNumerator": "5",
+  "inputFactorDenominator": "4",
+  "safetyNumerator": "11",
+  "safetyDenominator": "10",
+  "plannedIndividualRequests": 72,
+  "maxInputTokens": 6000,
+  "maxOutputTokens": 1024,
+  "reservationMicros": "7350000",
+  "generationMaximumAtCeilingMicros": "4331184",
+  "countAllowanceMicros": "3000000",
+  "combinedConditionalMaximumMicros": "7331184",
+  "countAllowanceBasis": "Prospective unverified allowance: all72*6000 input tokens charged at each selected model’s highest default30m input rate and10% margin gives2574000micros;3000000 adds426000micros contingency. This is not a verified count endpoint tariff or billed-total guarantee.",
+  "oldAllowancesReleased": false,
+  "countTariffVerified": false,
+  "invoiceVerified": false,
+  "officialSources": {
+    "official-sol.md": {
+      "evidenceFile": "phase70/official-sol.md",
+      "sha256": "a128083565678e6a47a74a737a891a7df050309df19925db6902535fcb1f5f23"
+    },
+    "official-terra.md": {
+      "evidenceFile": "phase70/official-terra.md",
+      "sha256": "bab1c30e8d49d9be5e7ad0edf90508fb06fffb908123b97c4779f933e8b4bd2a"
+    },
+    "official-astra.md": {
+      "evidenceFile": "phase70/official-astra.md",
+      "sha256": "7f2f28cf1a8dfdf2557eb1a51f1540e41396397795fe6c39f1f419c922d896ca"
+    },
+    "official-spending-controller.md": {
+      "evidenceFile": "phase70/official-spending-controller.md",
+      "sha256": "856bc6ae09502984af5aa2fb95e762c3e14ab0a296ebab797c522477af95dc3d"
+    },
+    "official-pricing.md": {
+      "evidenceFile": "phase70/official-pricing.md",
+      "sha256": "8e641f45700ceeac6df18d7ce5d60b19b19c5531fb7bc1dc57ced06b93442a08"
+    },
+    "official-token-counting.md": {
+      "evidenceFile": "phase70/official-token-counting.md",
+      "sha256": "fec4815c00d34934954fd093f8c48bfd948b59d0e6c7b07f755887f6fb4a07d6"
+    },
+    "official-prompt-caching.md": {
+      "evidenceFile": "phase70/official-prompt-caching.md",
+      "sha256": "b99033ea2dc0ffd7b31df13364bcc1e0eb39c6c1d2521b14021e28907cd858d9"
+    }
+  }
+}

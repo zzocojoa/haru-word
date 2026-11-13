@@ -1,0 +1,1108 @@
+{
+  "protocol": "ai-quality-v147-main-witness-candidate-v1",
+  "policyHash": "d7a17cef7d134df9a3e4b74d6f7e39a9d02821534b6840c6c92cdea10043c3f8",
+  "status": "source-reviewed-candidate-not-admitted",
+  "rows": [
+    {
+      "id": "MC01",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": {
+        "original": "You might brought a torch.",
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: 책임 있게 교정할 문맥이 부족해 교정문을 보류했어요.\n추가 문맥: 이미 일어난 일을 말하나요, 앞으로 일어날 일을 말하나요? 의도한 시점을 알려 주세요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "past-modal",
+        "modal-future"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The form error is known, but choosing a safely equivalent correction requires the intended time. Do not call every modal-perfect alternative ungrammatical.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar modal: modal construction"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/modals-deductions-about-past",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "b2e4bca643e3f60b9916f7f38941dd3fa06b87a64810d7cf191fad2d6d94142d",
+            "excerpt": "Might with have and a past participle can describe a possible past event. Scope: It does not establish that an underspecified learner intended the past."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/talking-about-future",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "77c9b6b9874a6b348c19f6cf0d57a11e29798807b2bf6b919b81859fda4572be",
+            "excerpt": "The future section permits might for uncertain future possibilities, followed by a base-form predicate. Scope: This possible reading does not identify the intended time of the torch input."
+          }
+        ]
+      },
+      "originWitnessId": "A01",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "b1e401e7984149e71c47b0e2f4332d0392e4d937baa827ddf166630a3f9ead54",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "past-modal",
+          "modal-future"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC02",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": {
+        "original": "You might brought a torch.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "You might have brought a torch.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI는 원문 문법에 보완을 제안했어요. 아래의 원문과 교정문을 비교해 주세요.\n교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "uncertain",
+        "explanation": "pass",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "past-modal",
+        "modal-future"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The completed modal form can be grammatical, but unprovided intended time prevents an equivalence claim. Missing temporal clarification fails abstention; no proven meaning reversal is inferred.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar modal: modal construction"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/modals-deductions-about-past",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "b2e4bca643e3f60b9916f7f38941dd3fa06b87a64810d7cf191fad2d6d94142d",
+            "excerpt": "Might with have and a past participle can describe a possible past event. Scope: It does not establish that an underspecified learner intended the past."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/talking-about-future",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "77c9b6b9874a6b348c19f6cf0d57a11e29798807b2bf6b919b81859fda4572be",
+            "excerpt": "The future section permits might for uncertain future possibilities, followed by a base-form predicate. Scope: This possible reading does not identify the intended time of the torch input."
+          }
+        ]
+      },
+      "originWitnessId": "A02",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "86f1ebbf47a15f62436896175fdbfff44e8ee5979d726324971a9a53abf29d34",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "past-modal",
+          "modal-future"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC03",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "Those car belongs to Mia.",
+        "target": "grammar determiner: number agreement"
+      },
+      "feedback": {
+        "original": "Those car belongs to Mia.",
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: 책임 있게 교정할 문맥이 부족해 교정문을 보류했어요.\n추가 문맥: 하나를 말하나요, 여러 개를 말하나요? 의도한 수량을 알려 주세요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "demonstratives",
+        "present"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "Known singular/plural disagreement does not establish intended quantity. Ask, do not choose one car or several.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "Those car belongs to Mia.",
+        "target": "grammar determiner: number agreement",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar determiner: number agreement"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/demonstratives",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "5eba2868f48cabd541d5ce9ca5faff7beb9ef360dea06da654ad8f5232b6eaed",
+            "excerpt": "This/that mark singular reference; these/those mark plural reference and can accompany nouns. Scope: An inconsistent number-marked input does not reveal which number the learner intended."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "8ce5fe07d677dbbf58e3030df584e6783fc706c276f482197d2dc64177d77f70",
+            "excerpt": "Third-person singular present verbs take an inflected form; present negatives use do/does with not. Scope: Form and polarity evidence does not choose a learner’s unprovided intended message."
+          }
+        ]
+      },
+      "originWitnessId": "A03",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "aa65113153b19a4174508cb2a7d2192cac7685fc9f38bcfd137d6c02c1fa74a5",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "demonstratives",
+          "present"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC04",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": null,
+      "expectedGrade": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "explanation": "unavailable",
+        "abstention": "unavailable",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "No learner-visible feedback exists. App rejection is unavailable across dimensions, not an English grammar fail or an invented critical event.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "not_applicable",
+        "learnerContext": "unavailable",
+        "abstentionNeed": "unavailable"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar modal: modal construction"
+      },
+      "reference": {
+        "level": "unresolved",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": []
+      },
+      "originWitnessId": "A04",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "cc02df31b87f141e6877047061240b88a6d894dbad1a220b47db2322952b7f7e",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": true,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC05",
+      "group": "clear_error",
+      "input": {
+        "sentence": "She go home.",
+        "target": "word go/v. 가다"
+      },
+      "feedback": {
+        "original": "She go home.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She go home.",
+        "explanation": "go는 주어 she에 이미 알맞은 현재형이에요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": true,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "present"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The visible output wrongly approves the incorrect original and explicitly teaches false agreement. Recognizable lexical go use itself remains appropriate.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "go",
+        "pos": "v.",
+        "meaning": "가다",
+        "expression": "go",
+        "sentence": "She go home."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "8ce5fe07d677dbbf58e3030df584e6783fc706c276f482197d2dc64177d77f70",
+            "excerpt": "Third-person singular present verbs take an inflected form; present negatives use do/does with not. Scope: Form and polarity evidence does not choose a learner’s unprovided intended message."
+          }
+        ]
+      },
+      "originWitnessId": "F01",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "4e1fb7332cee58bdf67acbd992d8d3e0fb551130db555fc0ddb65007be345e84",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "present"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC06",
+      "group": "clear_error",
+      "input": {
+        "sentence": "He does not own two cats.",
+        "target": "word own/v. 소유하다"
+      },
+      "feedback": {
+        "original": "He does not own two cats.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "He owns two cats.",
+        "explanation": "부정을 제거해도 같은 뜻이에요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "present"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The original is grammatical. Removing negation reverses the assertion while preserving the written quantity; no ambiguity justifies it.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "own",
+        "pos": "v.",
+        "meaning": "소유하다",
+        "expression": "own",
+        "sentence": "He does not own two cats."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "8ce5fe07d677dbbf58e3030df584e6783fc706c276f482197d2dc64177d77f70",
+            "excerpt": "Third-person singular present verbs take an inflected form; present negatives use do/does with not. Scope: Form and polarity evidence does not choose a learner’s unprovided intended message."
+          }
+        ]
+      },
+      "originWitnessId": "F02",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "eceff3b6b853054ffcb4643512a024368e6348dd43ec041d2a6374ade7047afc",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "present"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC07",
+      "group": "clear_error",
+      "input": {
+        "sentence": "He saw her.",
+        "target": "grammar pronoun: participants"
+      },
+      "feedback": {
+        "original": "He saw her.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "She saw him.",
+        "explanation": "행동을 한 사람과 본 대상이 그대로예요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "pronouns"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The correction demonstrably exchanges actor and recipient and reverses the direction of the stated seeing relation. Both flags can apply; count one critical observation, not two independent events.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "He saw her.",
+        "target": "grammar pronoun: participants",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar pronoun: participants"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "c2e244a1502003d04a56a2b392e35f95fb41678b3498c140c30a10d932bc6319",
+            "excerpt": "The subject/object table distinguishes he/him, she/her and I/me; ordinary imperatives need no overt subject. Scope: Case form and directly observed role comparisons do not certify every project score."
+          }
+        ]
+      },
+      "originWitnessId": "F03",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "de8d68bfdbc436a5f6d0aee87a39f1884e83161ca44372877911a7fbc2b35fb2",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "pronouns"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC08",
+      "group": "clear_error",
+      "input": {
+        "sentence": "Music",
+        "target": "word music/n. 음악",
+        "contextKind": "sentence",
+        "contextNote": "Write an independent complete declarative clause with a finite predicate. No reply, title or command is intended; the intended complete message has not been supplied."
+      },
+      "feedback": {
+        "original": "Music",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Play music!",
+        "explanation": "새 교정문은 음악을 틀라는 명령문입니다. 원래 의도를 확인한 것은 아닙니다."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "fail",
+        "explanation": "pass",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "sourceIds": [
+        "pronouns",
+        "music",
+        "ellipsis-replies"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "new-explicit-assignment-condition",
+      "rationale": "The new prose explicitly describes only the offered command and disclaims established original intent. Under criterion4 its narrow factual explanation may pass while correction/abstention and inventedIntent remain harmful. This is a new feedback variant; the old F04 prose/grades/captures are untouched.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "version3ExpectationChange": {
+        "field": "meaning",
+        "old": "fail",
+        "new": "pass",
+        "reason": "Original word Music fits requested noun and product labels appropriate. Unsupported invented Play command is penalized separately; noun source added before this new collection. Not based on majority vote as truth. Old v2 score remains50/72."
+      },
+      "prospectiveChange": {
+        "priorFile": "product-calibration-candidate-v3.json",
+        "priorGrammar": "uncertain",
+        "newGrammar": "pass",
+        "reason": "The new explicitly selected complete declarative-clause assignment resolves grammar-label applicability, while missing intended message still makes the command repair unsafe. This is a new input condition; old83/84 is unchanged."
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "music",
+        "pos": "n.",
+        "meaning": "음악",
+        "expression": "music",
+        "sentence": "Music",
+        "contextKind": "sentence",
+        "contextNote": "Write an independent complete declarative clause with a finite predicate. No reply, title or command is intended; the intended complete message has not been supplied."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "c2e244a1502003d04a56a2b392e35f95fb41678b3498c140c30a10d932bc6319",
+            "excerpt": "The subject/object table distinguishes he/him, she/her and I/me; ordinary imperatives need no overt subject. Scope: Case form and directly observed role comparisons do not certify every project score."
+          },
+          {
+            "url": "https://www.merriam-webster.com/dictionary/music",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "502f620f23a011ada9e8bff943b4d0181172d9bfbee8ff53900453c82c18c153",
+            "excerpt": "The dictionary identifies music as a noun for musical sounds and related art. Scope: A noun’s lexical meaning does not supply a speaker’s missing complete proposition or command."
+          },
+          {
+            "url": "https://www.cambridge.org/core/books/abs/grammar-for-english-language-teachers/ellipsis-and-substitution/5C3339217F5527DE02FB806083E9FCF9",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "bd73d51d0c3a554e77a2069474864f4bfda55c6c9fc930b6ac27efe3cdb6fc01",
+            "excerpt": "The publisher’s chapter extract explains situational ellipsis, including short answers recoverable from a question. Scope: Recoverable answer context must be supplied; the extract does not license an invented command or certify this bank."
+          }
+        ]
+      },
+      "originWitnessId": "F04",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "6ba522c5b32881395be58bab575309c566bab5047e9ba29b9b128f72352ead31",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "pronouns",
+          "music",
+          "ellipsis-replies"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC09",
+      "group": "normal",
+      "input": {
+        "sentence": "A book lies on the desk.",
+        "target": "word book/v. 예약하다"
+      },
+      "feedback": {
+        "original": "A book lies on the desk.",
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "correctedSentence": "A book lies on the desk.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI의 문법 의견에는 수정 제안이 없어 원문을 그대로 두었어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "book",
+        "present"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "A correct noun sentence does not satisfy the selected verb sense, but grammar remains natural and the original is retained.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book",
+        "sentence": "A book lies on the desk."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://www.merriam-webster.com/dictionary/book",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "341014ad16a58ef0cd382ce374313e015bd3f1a8793f7d033301e69fd433d529",
+            "excerpt": "Book has a written-work noun sense and a separate verb sense involving advance reservation. Scope: A noun occurrence alone does not satisfy a requested reservation-verb target."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "8ce5fe07d677dbbf58e3030df584e6783fc706c276f482197d2dc64177d77f70",
+            "excerpt": "Third-person singular present verbs take an inflected form; present negatives use do/does with not. Scope: Form and polarity evidence does not choose a learner’s unprovided intended message."
+          }
+        ]
+      },
+      "originWitnessId": "N01",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "a27087fd6a68d246e45a32099013575ab76b540c41d1ca34285104b9744a42f6",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "book",
+          "present"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC10",
+      "group": "normal",
+      "input": {
+        "sentence": "Him helps I.",
+        "target": "grammar pronoun: subject/object case"
+      },
+      "feedback": {
+        "original": "Him helps I.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "He helps me.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI는 원문 문법에 보완을 제안했어요. 아래의 원문과 교정문을 비교해 주세요.\n교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "pronouns",
+        "present"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "Subject/object case can affect both target and original grammar; preserve the same participants and roles.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "Him helps I.",
+        "target": "grammar pronoun: subject/object case",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar pronoun: subject/object case"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "c2e244a1502003d04a56a2b392e35f95fb41678b3498c140c30a10d932bc6319",
+            "excerpt": "The subject/object table distinguishes he/him, she/her and I/me; ordinary imperatives need no overt subject. Scope: Case form and directly observed role comparisons do not certify every project score."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "8ce5fe07d677dbbf58e3030df584e6783fc706c276f482197d2dc64177d77f70",
+            "excerpt": "Third-person singular present verbs take an inflected form; present negatives use do/does with not. Scope: Form and polarity evidence does not choose a learner’s unprovided intended message."
+          }
+        ]
+      },
+      "originWitnessId": "N02",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "a1782a234c967550b6520c140a792a227d7529394c9c6e08f2855d8d840a6abf",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "pronouns",
+          "present"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC11",
+      "group": "normal",
+      "input": {
+        "sentence": "Give help.",
+        "target": "word help/n. 도움"
+      },
+      "feedback": {
+        "original": "Give help.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Give help.",
+        "explanation": "목표: AI는 목표 표현의 사용을 적절하다고 보았어요.\n문법: AI의 문법 의견에는 수정 제안이 없어 원문을 그대로 두었어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "help",
+        "pronouns"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "A short command may have a noun complement; dictionary membership of help as a verb is not proof of a verb list.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help",
+        "sentence": "Give help."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://www.merriam-webster.com/dictionary/help",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "b07be0b51652b1d4efab6db5afbb9fdd913dacf52472007836c020572d06756c",
+            "excerpt": "Help has an assistance noun sense; the dictionary includes a give-help example. Scope: Combine lexical evidence with imperative syntax; do not infer every collocation is natural."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "c2e244a1502003d04a56a2b392e35f95fb41678b3498c140c30a10d932bc6319",
+            "excerpt": "The subject/object table distinguishes he/him, she/her and I/me; ordinary imperatives need no overt subject. Scope: Case form and directly observed role comparisons do not certify every project score."
+          }
+        ]
+      },
+      "originWitnessId": "N03",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "51577720132dce06298de4324d6b4747e2daa2bb060fad03dd4764499691d48f",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "help",
+          "pronouns"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    },
+    {
+      "id": "MC12",
+      "group": "normal",
+      "input": {
+        "sentence": "They is studying.",
+        "target": "grammar: present continuous subject/be agreement"
+      },
+      "feedback": {
+        "original": "They is studying.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "They are studying.",
+        "explanation": "현재진행형에서 주어 they에는 are를 사용해요. is를 are로 바꾸고 행동과 시점은 유지했어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "progressive"
+      ],
+      "purpose": "prospective-v4-main-calibration",
+      "origin": "new-app-authored-development-control",
+      "rationale": "Specified present continuous agreement only. New candidate replaces disputed N04 in qualification denominator, while N04 remains an independently reported sentinel. This is development material, never a fresh holdout.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "They is studying.",
+        "target": "grammar: present continuous subject/be agreement",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar: present continuous subject/be agreement"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Judge the visible product feedback under the fixed English criterion and actual assignment context. These retrieved editorial paraphrases support limited linguistic facts, not certified case scores. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-continuous",
+            "checkedAt": "2026-11-08T10:18:16.402776+00:00",
+            "contentSha256": "e4faf516441450b5e13aa5c292d8b7a8058b9c44e6e5e29b84f09e9059aa4ed7",
+            "excerpt": "The progressive combines present be with an ing-form; the table pairs they with are. Scope: Agreement evidence does not invent an event, participant or time."
+          }
+        ]
+      },
+      "originWitnessId": "N05",
+      "originBankFile": ".taskmaster/evaluation/ai-quality-v147/assessment-calibration-bank-v1.json",
+      "originBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+      "originWitnessHash": "ee6a728af7b86d05ab2de5ad716dae1fa2e522c9f980eb5bb62d6228661efe89",
+      "sourceReviewKind": "same-author-AI-editorial-source-inference",
+      "englishGoldCertified": false,
+      "publicDevelopmentExposed": true,
+      "freshHeldout": false,
+      "sourceReview": {
+        "sourceIds": [
+          "progressive"
+        ],
+        "sourceEvidenceAdequateForHypothesis": true,
+        "notApplicable": false,
+        "projectScoringInference": true,
+        "independentReviewCompleted": false,
+        "actualCriterion4JudgesMeasured": false,
+        "state": "candidate-unqualified",
+        "limits": "Language references do not certify the project grade, AI independence or learner efficacy."
+      }
+    }
+  ],
+  "groups": {
+    "normal": 4,
+    "clear_error": 4,
+    "ambiguous": 4
+  },
+  "plannedModels": [
+    "gpt-6.1-sol",
+    "gpt-6.1-terra",
+    "gpt-6-astra"
+  ],
+  "layouts": [
+    "input-first",
+    "feedback-first"
+  ],
+  "sourceCatalogFile": ".taskmaster/evaluation/ai-quality-v147/explanation-main-witness-sources-v1.json",
+  "sourceCatalogHash": "797eebba89187b19577a40fff4a0e0fe080047219b83bfc4bdae64e6164814c8",
+  "priorBankSha256": "3da125478b4771f426a180de91aa25882c6dbc5b8bdfb68978c89ef67b7cc42d",
+  "priorMainWitnessBankSha256": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+  "changes": [
+    {
+      "candidateId": "MC08",
+      "originWitnessId": "F04",
+      "changedFields": [
+        "feedback.explanation",
+        "expectedGrade.explanation"
+      ],
+      "oldFeedbackHash": "6fd5f632c622ef3696823768facea6e6e614ff67fdafed08463a7226671c3905",
+      "newFeedbackHash": "db4241b49e6868dcfa6005f228ac0f94953f4e98fc02262e3557c0085f3de1e0",
+      "oldExpectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "newExpectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "fail",
+        "explanation": "pass",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "reason": "Remove ambiguous explanation scope prospectively; preserve correction fail,abstention fail,inventedIntent true;not a retrospective improvement score"
+    }
+  ],
+  "publicDevelopmentOnly": true,
+  "freshHoldout": false,
+  "independentFamiliesCertified": false,
+  "expectedGradesAreHypotheses": true,
+  "sourceQualified": false,
+  "automaticAdmission": false,
+  "englishTruthCertified": false,
+  "liveDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "sourceReadIsNotJudgeCalibration": true,
+  "qualificationRequires": "All72 actual criterion4 individual bodies, fixed expected grades/axes, authenticated capture/usage/no-resend provenance and separate main-admission version;no boolean promotion"
+}

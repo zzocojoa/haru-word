@@ -1,0 +1,964 @@
+{
+  "protocol": "ai-quality-v147-assessment-calibration-bank-v1",
+  "frozenBeforeCollection": true,
+  "primaryDenominator": 12,
+  "contextContrastDenominator": 2,
+  "priorBankFileSha256": "0917fdab01b91d7768f92a0fa8bc7d9601bd8fd6402196289021b249917970ee",
+  "decisionRule": "Retain all84 individual votes. The72 primary and12 contrast votes must match pre-frozen English grades/threeaxes; bounded policy states stay separate. No majority, retry-until-pass, retrospective grade change, independent-English truth or automatic main admission.",
+  "freshHoldout": false,
+  "sameAuthor": true,
+  "rows": [
+    {
+      "id": "A01",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": {
+        "original": "You might brought a torch.",
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: 책임 있게 교정할 문맥이 부족해 교정문을 보류했어요.\n추가 문맥: 이미 일어난 일을 말하나요, 앞으로 일어날 일을 말하나요? 의도한 시점을 알려 주세요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "past-modal",
+        "modal-future"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The form error is known, but choosing a safely equivalent correction requires the intended time. Do not call every modal-perfect alternative ungrammatical.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar modal: modal construction"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/modals-deductions-about-past",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "1e5dd2d2590b5d01bb3ab255a516a6d1566acc50e9b2000062f875476c24d8c5",
+            "excerpt": "Editorial explanation permits might have with a past participle for a possible past event. Scope: It does not establish which time an underspecified learner intended."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/talking-about-future",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "208cd27773fc8ca8789803c8aa31f133c798339674ea36bf7b39b924836b4588",
+            "excerpt": "The editorial future section permits may, might and could for uncertain future possibilities, illustrated with a base-form verb after might. Scope: Does not establish the intended time of the underspecified torch sentence."
+          }
+        ]
+      }
+    },
+    {
+      "id": "A02",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": {
+        "original": "You might brought a torch.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "You might have brought a torch.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI는 원문 문법에 보완을 제안했어요. 아래의 원문과 교정문을 비교해 주세요.\n교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "uncertain",
+        "explanation": "pass",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "past-modal",
+        "modal-future"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The completed modal form can be grammatical, but unprovided intended time prevents an equivalence claim. Missing temporal clarification fails abstention; no proven meaning reversal is inferred.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar modal: modal construction"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/modals-deductions-about-past",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "1e5dd2d2590b5d01bb3ab255a516a6d1566acc50e9b2000062f875476c24d8c5",
+            "excerpt": "Editorial explanation permits might have with a past participle for a possible past event. Scope: It does not establish which time an underspecified learner intended."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/talking-about-future",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "208cd27773fc8ca8789803c8aa31f133c798339674ea36bf7b39b924836b4588",
+            "excerpt": "The editorial future section permits may, might and could for uncertain future possibilities, illustrated with a base-form verb after might. Scope: Does not establish the intended time of the underspecified torch sentence."
+          }
+        ]
+      }
+    },
+    {
+      "id": "A03",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "Those car belongs to Mia.",
+        "target": "grammar determiner: number agreement"
+      },
+      "feedback": {
+        "original": "Those car belongs to Mia.",
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: 책임 있게 교정할 문맥이 부족해 교정문을 보류했어요.\n추가 문맥: 하나를 말하나요, 여러 개를 말하나요? 의도한 수량을 알려 주세요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "demonstratives",
+        "present"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "Known singular/plural disagreement does not establish intended quantity. Ask, do not choose one car or several.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "Those car belongs to Mia.",
+        "target": "grammar determiner: number agreement",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar determiner: number agreement"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/demonstratives",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "c854737d231f9ebb04134e8da164934241312a90d592de9ea044eb4b3813c114",
+            "excerpt": "Editorial explanation distinguishes singular this/that and plural these/those, including their use with nouns. Scope: It does not choose the intended number for an inconsistent learner sentence."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "df7ca0766bb553ee9e3eaed970e7a7ed37b76fa6ef07ace8fc3cca922577068c",
+            "excerpt": "Editorial present-simple formation: third-person singular uses an inflected verb; present-simple negatives use do/does plus not. Scope: English syntax only; not a score oracle."
+          }
+        ]
+      }
+    },
+    {
+      "id": "A04",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": null,
+      "expectedGrade": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "explanation": "unavailable",
+        "abstention": "unavailable",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "No learner-visible feedback exists. App rejection is unavailable across dimensions, not an English grammar fail or an invented critical event.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "not_applicable",
+        "learnerContext": "unavailable",
+        "abstentionNeed": "unavailable"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar modal: modal construction"
+      },
+      "reference": {
+        "level": "ai-consensus",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": []
+      }
+    },
+    {
+      "id": "F01",
+      "group": "clear_error",
+      "input": {
+        "sentence": "She go home.",
+        "target": "word go/v. 가다"
+      },
+      "feedback": {
+        "original": "She go home.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She go home.",
+        "explanation": "go는 주어 she에 이미 알맞은 현재형이에요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": true,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "present"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The visible output wrongly approves the incorrect original and explicitly teaches false agreement. Recognizable lexical go use itself remains appropriate.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "go",
+        "pos": "v.",
+        "meaning": "가다",
+        "expression": "go",
+        "sentence": "She go home."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "df7ca0766bb553ee9e3eaed970e7a7ed37b76fa6ef07ace8fc3cca922577068c",
+            "excerpt": "Editorial present-simple formation: third-person singular uses an inflected verb; present-simple negatives use do/does plus not. Scope: English syntax only; not a score oracle."
+          }
+        ]
+      }
+    },
+    {
+      "id": "F02",
+      "group": "clear_error",
+      "input": {
+        "sentence": "He does not own two cats.",
+        "target": "word own/v. 소유하다"
+      },
+      "feedback": {
+        "original": "He does not own two cats.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "He owns two cats.",
+        "explanation": "부정을 제거해도 같은 뜻이에요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "present"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The original is grammatical. Removing negation reverses the assertion while preserving the written quantity; no ambiguity justifies it.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "own",
+        "pos": "v.",
+        "meaning": "소유하다",
+        "expression": "own",
+        "sentence": "He does not own two cats."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "df7ca0766bb553ee9e3eaed970e7a7ed37b76fa6ef07ace8fc3cca922577068c",
+            "excerpt": "Editorial present-simple formation: third-person singular uses an inflected verb; present-simple negatives use do/does plus not. Scope: English syntax only; not a score oracle."
+          }
+        ]
+      }
+    },
+    {
+      "id": "F03",
+      "group": "clear_error",
+      "input": {
+        "sentence": "He saw her.",
+        "target": "grammar pronoun: participants"
+      },
+      "feedback": {
+        "original": "He saw her.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "She saw him.",
+        "explanation": "행동을 한 사람과 본 대상이 그대로예요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "pronouns"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "The correction demonstrably exchanges actor and recipient and reverses the direction of the stated seeing relation. Both flags can apply; count one critical observation, not two independent events.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "He saw her.",
+        "target": "grammar pronoun: participants",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar pronoun: participants"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "3c31b61f171f7975336810c21e9bce4664bb80ecf487469fcc47ab14d56b3b29",
+            "excerpt": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement. Scope: Pronoun form evidence does not license exchanging actor and recipient."
+          }
+        ]
+      }
+    },
+    {
+      "id": "F04",
+      "group": "clear_error",
+      "input": {
+        "sentence": "Music",
+        "target": "word music/n. 음악",
+        "contextKind": "sentence",
+        "contextNote": "Write an independent complete declarative clause with a finite predicate. No reply, title or command is intended; the intended complete message has not been supplied."
+      },
+      "feedback": {
+        "original": "Music",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Play music!",
+        "explanation": "음악을 틀라는 뜻으로 완성했어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "sourceIds": [
+        "pronouns",
+        "music",
+        "ellipsis-replies"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "new-explicit-assignment-condition",
+      "rationale": "The isolated noun provides no command intent. The hypothetical visible command invents an action/speech act. A complete source proposition is absent, so do not also infer a proven polarity reversal.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "missing",
+        "abstentionNeed": "required"
+      },
+      "version3ExpectationChange": {
+        "field": "meaning",
+        "old": "fail",
+        "new": "pass",
+        "reason": "Original word Music fits requested noun and product labels appropriate. Unsupported invented Play command is penalized separately; noun source added before this new collection. Not based on majority vote as truth. Old v2 score remains50/72."
+      },
+      "prospectiveChange": {
+        "priorFile": "product-calibration-candidate-v3.json",
+        "priorGrammar": "uncertain",
+        "newGrammar": "pass",
+        "reason": "The new explicitly selected complete declarative-clause assignment resolves grammar-label applicability, while missing intended message still makes the command repair unsafe. This is a new input condition; old83/84 is unchanged."
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "music",
+        "pos": "n.",
+        "meaning": "음악",
+        "expression": "music",
+        "sentence": "Music",
+        "contextKind": "sentence",
+        "contextNote": "Write an independent complete declarative clause with a finite predicate. No reply, title or command is intended; the intended complete message has not been supplied."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "3c31b61f171f7975336810c21e9bce4664bb80ecf487469fcc47ab14d56b3b29",
+            "excerpt": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement. Scope: Pronoun form evidence does not license exchanging actor and recipient."
+          },
+          {
+            "url": "https://www.merriam-webster.com/dictionary/music",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "d5ace40c22d210c090dc4a911227fc0543de631a19945353ec3af8638ba4c839",
+            "excerpt": "The editorial dictionary entry identifies music as a noun, including musical sounds and the art of arranging them. Scope: Lexical noun evidence only. Does not establish a command or the entire learner message."
+          },
+          {
+            "url": "https://www.cambridge.org/core/books/abs/grammar-for-english-language-teachers/ellipsis-and-substitution/5C3339217F5527DE02FB806083E9FCF9",
+            "checkedAt": "2026-11-08T03:11:59.121206+00:00",
+            "contentSha256": "e64381fdf8ca87eddb76856d750e6ebb6c496f48e9f22d905e4450278f49da01",
+            "excerpt": "The chapter identifies short answers to questions as a clear case of situational ellipsis. Recoverable context licenses omitted material; this does not license inventing a command. Scope: Supports recoverable reply fragments, not a score oracle or a universal sentence rule."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N01",
+      "group": "normal",
+      "input": {
+        "sentence": "A book lies on the desk.",
+        "target": "word book/v. 예약하다"
+      },
+      "feedback": {
+        "original": "A book lies on the desk.",
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "correctedSentence": "A book lies on the desk.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI의 문법 의견에는 수정 제안이 없어 원문을 그대로 두었어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "book",
+        "present"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "A correct noun sentence does not satisfy the selected verb sense, but grammar remains natural and the original is retained.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book",
+        "sentence": "A book lies on the desk."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://www.merriam-webster.com/dictionary/book",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "6c272c03a3bd8b6aa968cf3cfb6ed24cb4955deab183adfba235570662dd5546",
+            "excerpt": "Dictionary lists book as a noun for a bound written/printed work and as a verb for reserving in advance. Scope: Different requested sense/POS can be missed in a grammatically natural sentence."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "df7ca0766bb553ee9e3eaed970e7a7ed37b76fa6ef07ace8fc3cca922577068c",
+            "excerpt": "Editorial present-simple formation: third-person singular uses an inflected verb; present-simple negatives use do/does plus not. Scope: English syntax only; not a score oracle."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N02",
+      "group": "normal",
+      "input": {
+        "sentence": "Him helps I.",
+        "target": "grammar pronoun: subject/object case"
+      },
+      "feedback": {
+        "original": "Him helps I.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "He helps me.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI는 원문 문법에 보완을 제안했어요. 아래의 원문과 교정문을 비교해 주세요.\n교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "pronouns",
+        "present"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "Subject/object case can affect both target and original grammar; preserve the same participants and roles.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "Him helps I.",
+        "target": "grammar pronoun: subject/object case",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar pronoun: subject/object case"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "3c31b61f171f7975336810c21e9bce4664bb80ecf487469fcc47ab14d56b3b29",
+            "excerpt": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement. Scope: Pronoun form evidence does not license exchanging actor and recipient."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "df7ca0766bb553ee9e3eaed970e7a7ed37b76fa6ef07ace8fc3cca922577068c",
+            "excerpt": "Editorial present-simple formation: third-person singular uses an inflected verb; present-simple negatives use do/does plus not. Scope: English syntax only; not a score oracle."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N03",
+      "group": "normal",
+      "input": {
+        "sentence": "Give help.",
+        "target": "word help/n. 도움"
+      },
+      "feedback": {
+        "original": "Give help.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Give help.",
+        "explanation": "목표: AI는 목표 표현의 사용을 적절하다고 보았어요.\n문법: AI의 문법 의견에는 수정 제안이 없어 원문을 그대로 두었어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "help",
+        "pronouns"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "unchanged-old-witness",
+      "rationale": "A short command may have a noun complement; dictionary membership of help as a verb is not proof of a verb list.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help",
+        "sentence": "Give help."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://www.merriam-webster.com/dictionary/help",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "111be90cfdc2e6bcdf62a382356b65a7c0868d4c604276da04026b62c6b2f925",
+            "excerpt": "Dictionary includes help as both verb and a noun meaning aid or assistance. Scope: Noun availability alone does not certify every collocation; combine with imperative syntax."
+          },
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "3c31b61f171f7975336810c21e9bce4664bb80ecf487469fcc47ab14d56b3b29",
+            "excerpt": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement. Scope: Pronoun form evidence does not license exchanging actor and recipient."
+          }
+        ]
+      }
+    },
+    {
+      "id": "N05",
+      "group": "normal",
+      "input": {
+        "sentence": "They is studying.",
+        "target": "grammar: present continuous subject/be agreement"
+      },
+      "feedback": {
+        "original": "They is studying.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "They are studying.",
+        "explanation": "현재진행형에서 주어 they에는 are를 사용해요. is를 are로 바꾸고 행동과 시점은 유지했어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "progressive"
+      ],
+      "purpose": "primary-calibration",
+      "origin": "new-app-authored-development-control",
+      "rationale": "Specified present continuous agreement only. New candidate replaces disputed N04 in qualification denominator, while N04 remains an independently reported sentinel. This is development material, never a fresh holdout.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "assessmentDomain": "grammar",
+      "requestInput": {
+        "sentence": "They is studying.",
+        "target": "grammar: present continuous subject/be agreement",
+        "role": "",
+        "pattern": "",
+        "task": "",
+        "check": "",
+        "stem": "",
+        "targetCriterion": "grammar: present continuous subject/be agreement"
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-continuous",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "710b7b845a7aae6be65f5aab9b25bde3347e8ccf68b105404001594416b343bd",
+            "excerpt": "Editorial formation table uses present be plus an ing-form and associates they with are. Scope: Only form/agreement; no invented time/context."
+          }
+        ]
+      }
+    },
+    {
+      "id": "R01",
+      "group": "clear_error",
+      "input": {
+        "sentence": "Music",
+        "target": "word music/n. 음악",
+        "contextKind": "reply",
+        "contextNote": "Question: Which subject do you enjoy studying? The learner intends Music as the short answer, with the understood meaning I enjoy studying music."
+      },
+      "feedback": {
+        "original": "Music",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Play music!",
+        "explanation": "음악을 틀라는 뜻으로 완성했어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "sourceIds": [
+        "pronouns",
+        "music",
+        "ellipsis-replies"
+      ],
+      "purpose": "context-contrast",
+      "origin": "new-explicit-assignment-condition",
+      "rationale": "An explicit recoverable short answer is natural. The hypothetical command repair invents a new speech act; with intended answer known, abstention is not separately failed just for that bad repair.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "version3ExpectationChange": {
+        "field": "meaning",
+        "old": "fail",
+        "new": "pass",
+        "reason": "Original word Music fits requested noun and product labels appropriate. Unsupported invented Play command is penalized separately; noun source added before this new collection. Not based on majority vote as truth. Old v2 score remains50/72."
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "music",
+        "pos": "n.",
+        "meaning": "음악",
+        "expression": "music",
+        "sentence": "Music",
+        "contextKind": "reply",
+        "contextNote": "Question: Which subject do you enjoy studying? The learner intends Music as the short answer, with the understood meaning I enjoy studying music."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "3c31b61f171f7975336810c21e9bce4664bb80ecf487469fcc47ab14d56b3b29",
+            "excerpt": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement. Scope: Pronoun form evidence does not license exchanging actor and recipient."
+          },
+          {
+            "url": "https://www.merriam-webster.com/dictionary/music",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "d5ace40c22d210c090dc4a911227fc0543de631a19945353ec3af8638ba4c839",
+            "excerpt": "The editorial dictionary entry identifies music as a noun, including musical sounds and the art of arranging them. Scope: Lexical noun evidence only. Does not establish a command or the entire learner message."
+          },
+          {
+            "url": "https://www.cambridge.org/core/books/abs/grammar-for-english-language-teachers/ellipsis-and-substitution/5C3339217F5527DE02FB806083E9FCF9",
+            "checkedAt": "2026-11-08T03:11:59.121206+00:00",
+            "contentSha256": "e64381fdf8ca87eddb76856d750e6ebb6c496f48e9f22d905e4450278f49da01",
+            "excerpt": "The chapter identifies short answers to questions as a clear case of situational ellipsis. Recoverable context licenses omitted material; this does not license inventing a command. Scope: Supports recoverable reply fragments, not a score oracle or a universal sentence rule."
+          }
+        ]
+      }
+    },
+    {
+      "id": "R02",
+      "group": "normal",
+      "input": {
+        "sentence": "Music",
+        "target": "word music/n. 음악",
+        "contextKind": "reply",
+        "contextNote": "Question: Which subject do you enjoy studying? The learner intends Music as the short answer, with the understood meaning I enjoy studying music."
+      },
+      "feedback": {
+        "original": "Music",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Music",
+        "explanation": "질문에 대한 짧은 답변으로 자연스러워요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "pronouns",
+        "music",
+        "ellipsis-replies"
+      ],
+      "purpose": "context-contrast",
+      "origin": "new-explicit-assignment-condition",
+      "rationale": "Preserve the licensed reply unchanged; no invented message or unnecessary refusal.",
+      "expectedEvidenceAxes": {
+        "sourceAdequacy": "sufficient",
+        "learnerContext": "sufficient",
+        "abstentionNeed": "not_required"
+      },
+      "version3ExpectationChange": {
+        "field": "meaning",
+        "old": "fail",
+        "new": "pass",
+        "reason": "Original word Music fits requested noun and product labels appropriate. Unsupported invented Play command is penalized separately; noun source added before this new collection. Not based on majority vote as truth. Old v2 score remains50/72."
+      },
+      "assessmentDomain": "word",
+      "requestInput": {
+        "word": "music",
+        "pos": "n.",
+        "meaning": "음악",
+        "expression": "music",
+        "sentence": "Music",
+        "contextKind": "reply",
+        "contextNote": "Question: Which subject do you enjoy studying? The learner intends Music as the short answer, with the understood meaning I enjoy studying music."
+      },
+      "reference": {
+        "level": "source-supported",
+        "criterion": "Apply the declared English rubric to the visible feedback and original request. Source excerpts are caller-authored editorial paraphrases; their hashes bind supplied records, not full page bodies. No expected grade is supplied.",
+        "sources": [
+          {
+            "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "3c31b61f171f7975336810c21e9bce4664bb80ecf487469fcc47ab14d56b3b29",
+            "excerpt": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement. Scope: Pronoun form evidence does not license exchanging actor and recipient."
+          },
+          {
+            "url": "https://www.merriam-webster.com/dictionary/music",
+            "checkedAt": "2026-11-08T01:00:47.381092+00:00",
+            "contentSha256": "d5ace40c22d210c090dc4a911227fc0543de631a19945353ec3af8638ba4c839",
+            "excerpt": "The editorial dictionary entry identifies music as a noun, including musical sounds and the art of arranging them. Scope: Lexical noun evidence only. Does not establish a command or the entire learner message."
+          },
+          {
+            "url": "https://www.cambridge.org/core/books/abs/grammar-for-english-language-teachers/ellipsis-and-substitution/5C3339217F5527DE02FB806083E9FCF9",
+            "checkedAt": "2026-11-08T03:11:59.121206+00:00",
+            "contentSha256": "e64381fdf8ca87eddb76856d750e6ebb6c496f48e9f22d905e4450278f49da01",
+            "excerpt": "The chapter identifies short answers to questions as a clear case of situational ellipsis. Recoverable context licenses omitted material; this does not license inventing a command. Scope: Supports recoverable reply fragments, not a score oracle or a universal sentence rule."
+          }
+        ]
+      }
+    }
+  ]
+}

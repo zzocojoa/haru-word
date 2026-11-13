@@ -1,0 +1,23 @@
+{
+  "protocol": "ai-quality-v147-fresh-pilot-freeze-v1",
+  "phase": "phase119",
+  "tasks": [
+    "24.1",
+    "24.2"
+  ],
+  "oldBankDevelopmentExposedCases": 60,
+  "freshDraftCases": 6,
+  "plannedCases": 60,
+  "verifiedProductRequests": 36,
+  "referencesQualified": 0,
+  "actualProviderCalls": 0,
+  "mainDispatchAuthorized": false,
+  "document": "docs/AI_QUALITY_V147_FRESH_PILOT_FREEZE_20261109.md",
+  "evidenceSha256": {
+    "candidate-freeze.json": "87babecf62e8920dd54861c805675dc07d1ea2681778bc8a3aa12d118b39f02e",
+    "first-block-draft.json": "8fff144dc48c27156b1380d74de688b1c4c5b18237edc871e9508bb309f1fb2f",
+    "first-block-capture.json": "dad437e4d1506f27a8c6279a7f9b7fee61603040d6b69ed844582100bda9e97d",
+    "freeze.log": "d699ad75152777e20f53f8139882edc5ac9576d34bc0819957a8dfddd776ff17",
+    "capture.log": "4f4dfe1a789a1dc2dff29b2e3a0c98c74ffdfff1e0bd3b2375c769d06fd0a760"
+  }
+}

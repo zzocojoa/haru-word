@@ -1,0 +1,33 @@
+{
+  "protocol": "ai-quality-v147-suggest-source-followup-ready-v1",
+  "phase": "phase129",
+  "tasks": [
+    "24.3",
+    "25.1"
+  ],
+  "document": "docs/AI_QUALITY_V147_SUGGEST_SOURCE_FOLLOWUP_SCOPE_20261109.md",
+  "caseId": "fresh-word-needsCorrection-01",
+  "cases": 1,
+  "reviewRequests": 2,
+  "countRequests": 2,
+  "reserveMicros": 97209,
+  "countAllowanceMicros": 70000,
+  "scopeSha256": "cc7a28c879ca9b4234908180c87a0690d80586e3022567fc27e841e9279cd496",
+  "scopeFile": "outputs/ai-quality-v147-implementation-20261106/phase129/source-followup-scope.json",
+  "budgetProfileFile": ".taskmaster/docs/ai-quality-v147-suggest-source-followup-budget-profile-v1.json",
+  "budgetProfileSha256": "1fd7337056816cdac5f3d3c10430ab24873b057473101fa8c318de2362f61aba",
+  "beforeLedgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "liveScopeApproved": false,
+  "syntheticChecks": 11,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "mainDispatchAuthorized": false,
+  "evidenceSha256": {
+    "collect-source-followup.mjs": "52b492b20e373fad151f6651564e46ccb0be50a35ef5e1fe2c84996bd227cc2a",
+    "run-source-followup.mjs": "c725c6ba20e685771358ae37de4a17fc6dc19041f12ac7f271df13b430cb5b69",
+    "test-source-followup.mjs": "3e5ac5360b6578b06ca8774857e8e5f9764b0db954836d0fa207b5b160d5bcfa",
+    "source-followup-scope.json": "cc7a28c879ca9b4234908180c87a0690d80586e3022567fc27e841e9279cd496",
+    "test.log": "f5b6079e04e831095543d30e9739e5a60fb897739d60170fa2b0e966477d57ea"
+  }
+}

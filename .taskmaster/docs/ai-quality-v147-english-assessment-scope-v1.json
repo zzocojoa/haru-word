@@ -1,0 +1,15 @@
+{
+  "protocol": "ai-quality-v147-english-assessment-scope-v1",
+  "version": 1,
+  "assessmentContextHash": "f07385afb526b63a19c69997189bad4739057866b7005a7b0205e643128d9374",
+  "englishRubricHash": "5fc5d484eb55752e55558d4083639820c77c22262f04f0946f0e8832645c80da",
+  "legacyBaseRubricHash": "7968b7fc2ddbf1649bd57cee1a260316b2db84d2abd08f12db661ef8b1ee229c",
+  "scope": "Retain the English criteria and critical definitions. Remove app-specific workflow clauses from the base definitions and exclude app behavior commands/bounded-check names from the model. The caller preserves a separate product-policy check.",
+  "inputAndOutputSchemaUnchanged": true,
+  "onlyInstructionsMayChangeOnWire": true,
+  "profileKind": "synthetic-only",
+  "independentQualification": false,
+  "englishTruthCertified": false,
+  "mainDispatchAuthorized": false,
+  "unchangedNonAppBaseClausesRetained": true
+}

@@ -1,0 +1,111 @@
+{
+  "protocol": "ai-quality-v147-main-source-v8-execution-v1",
+  "phase": "phase99",
+  "status": "collected-main-source-review",
+  "failureCode": null,
+  "atUtc": "2026-11-09T01:56:49.784Z",
+  "parentTaskId": 34,
+  "activeSubtaskId": "34.4",
+  "supportingSubtaskId": "34.3",
+  "runtimeRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-main-source-v8-runtime-20261109",
+  "actualProviderCalls": 3,
+  "actualCountApiCalls": 3,
+  "actualKeyReads": 1,
+  "cumulativeProviderCalls": 819,
+  "cumulativeCountCalls": 815,
+  "cumulativeKeyReads": 30,
+  "caseDenominator": 12,
+  "supportedCases": [
+    "MC02",
+    "MC04",
+    "MC05",
+    "MC06",
+    "MC07",
+    "MC08",
+    "MC09",
+    "MC10",
+    "MC11",
+    "MC12"
+  ],
+  "heldCases": [
+    "MC01",
+    "MC03"
+  ],
+  "controlDenominator": 9,
+  "controlsPassed": 9,
+  "disagreements": [
+    {
+      "caseId": "MC01",
+      "model": "gpt-6.1-sol",
+      "dimensions": [
+        "grammar"
+      ],
+      "critical": [],
+      "axes": []
+    },
+    {
+      "caseId": "MC01",
+      "model": "gpt-6.1-terra",
+      "dimensions": [
+        "grammar"
+      ],
+      "critical": [],
+      "axes": []
+    },
+    {
+      "caseId": "MC01",
+      "model": "gpt-6-astra",
+      "dimensions": [
+        "grammar"
+      ],
+      "critical": [],
+      "axes": []
+    },
+    {
+      "caseId": "MC03",
+      "model": "gpt-6.1-sol",
+      "dimensions": [
+        "grammar"
+      ],
+      "critical": [],
+      "axes": []
+    },
+    {
+      "caseId": "MC03",
+      "model": "gpt-6.1-terra",
+      "dimensions": [
+        "grammar"
+      ],
+      "critical": [],
+      "axes": []
+    },
+    {
+      "caseId": "MC03",
+      "model": "gpt-6-astra",
+      "dimensions": [
+        "grammar"
+      ],
+      "critical": [],
+      "axes": []
+    }
+  ],
+  "malformed": [],
+  "referenceEvidenceComplete": false,
+  "additionalUsedUpperMicros": "31279588",
+  "additionalAvailableMicros": "3720412",
+  "reservedMicros": "0",
+  "measuredStageUpperMicros": "565877",
+  "stageUsedUpperMicros": "395089",
+  "countAllowanceMicros": "105000",
+  "sourceQualified": false,
+  "mainDispatchAuthorized": false,
+  "englishTruthCertified": false,
+  "goalComplete": false,
+  "releaseVerdict": "held",
+  "terminalSha256": "6beb6011b23218e9184b1d2aa9df845a2f8d86f97f2521b4bdd37b02deaf8635",
+  "auditSha256": "af21ad31d02f3f3513ef3d099fdb781b9dd2e14c46c1ff32f096969850b46807",
+  "document": "docs/AI_QUALITY_V147_MAIN_SOURCE_ACTUAL_V8_20261109.md",
+  "documentSha256": "5e2410ea6e9de1dfca00b57da51b810d491f541d79d0b5bb45a13dc235aaead0",
+  "scope": "docs/AI_QUALITY_V147_MAIN_SOURCE_SCOPE_V8_20261109.md",
+  "scopeSha256": "912e1367b958603b39844fc57de65e0bc7159a0f5e2670b059a758eaaa79637b"
+}

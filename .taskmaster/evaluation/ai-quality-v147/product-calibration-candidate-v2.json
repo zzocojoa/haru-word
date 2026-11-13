@@ -1,0 +1,457 @@
+{
+  "protocol": "ai-quality-v147-product-calibration-candidate-v2",
+  "frozenBeforeCollection": true,
+  "oldWitnessFileSha256": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+  "sourceCatalogSha256": "02694fcf521c050a3cbc5f8d186e16b4aa948880ed9ab63ee0496e8ea393b9f5",
+  "productRubricFileSha256": "1d20648b2242fb24bf42b19d7895c5428309a77c30b564ef410f6162cbd29ee7",
+  "candidateDenominator": 12,
+  "sentinelDenominator": 1,
+  "decisionRule": "All six complete votes per candidate must equal the pre-frozen expected grade and cite supplied sources with sourceStatus supported (unavailable item A04: not_applicable). No majority or post-result expectation change. Any dissent holds the bank. Sentinel reported separately; cannot qualify or be discarded. Even success is limited development operational evidence, not English truth, independence, live pilot admission or release.",
+  "selectionReason": "Old N04 register and scope unspecified; retain as disputed sentinel instead of forcing an answer. Add one explicitly scoped normal agreement control; old eleven candidate rows/expected scores unchanged. Do not silently promote old registry.",
+  "freshHoldout": false,
+  "sameAuthor": true,
+  "sameProviderModelsIndependent": false,
+  "autoAdmission": false,
+  "rows": [
+    {
+      "id": "A01",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": {
+        "original": "You might brought a torch.",
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: 책임 있게 교정할 문맥이 부족해 교정문을 보류했어요.\n추가 문맥: 이미 일어난 일을 말하나요, 앞으로 일어날 일을 말하나요? 의도한 시점을 알려 주세요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "past-modal"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "The form error is known, but choosing a safely equivalent correction requires the intended time. Do not call every modal-perfect alternative ungrammatical."
+    },
+    {
+      "id": "A02",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": {
+        "original": "You might brought a torch.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "You might have brought a torch.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI는 원문 문법에 보완을 제안했어요. 아래의 원문과 교정문을 비교해 주세요.\n교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "uncertain",
+        "explanation": "pass",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "past-modal"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "The completed modal form can be grammatical, but unprovided intended time prevents an equivalence claim. Missing temporal clarification fails abstention; no proven meaning reversal is inferred."
+    },
+    {
+      "id": "A03",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "Those car belongs to Mia.",
+        "target": "grammar determiner: number agreement"
+      },
+      "feedback": {
+        "original": "Those car belongs to Mia.",
+        "meaningUsage": "needs_work",
+        "grammar": "uncertain",
+        "correctedSentence": "",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: 책임 있게 교정할 문맥이 부족해 교정문을 보류했어요.\n추가 문맥: 하나를 말하나요, 여러 개를 말하나요? 의도한 수량을 알려 주세요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "demonstratives",
+        "present"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "Known singular/plural disagreement does not establish intended quantity. Ask, do not choose one car or several."
+    },
+    {
+      "id": "A04",
+      "group": "ambiguous",
+      "input": {
+        "sentence": "You might brought a torch.",
+        "target": "grammar modal: modal construction"
+      },
+      "feedback": null,
+      "expectedGrade": {
+        "meaning": "unavailable",
+        "grammar": "unavailable",
+        "correction": "unavailable",
+        "explanation": "unavailable",
+        "abstention": "unavailable",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "No learner-visible feedback exists. App rejection is unavailable across dimensions, not an English grammar fail or an invented critical event."
+    },
+    {
+      "id": "F01",
+      "group": "clear_error",
+      "input": {
+        "sentence": "She go home.",
+        "target": "word go/v. 가다"
+      },
+      "feedback": {
+        "original": "She go home.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "She go home.",
+        "explanation": "go는 주어 she에 이미 알맞은 현재형이에요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": true,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "present"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "The visible output wrongly approves the incorrect original and explicitly teaches false agreement. Recognizable lexical go use itself remains appropriate."
+    },
+    {
+      "id": "F02",
+      "group": "clear_error",
+      "input": {
+        "sentence": "He does not own two cats.",
+        "target": "word own/v. 소유하다"
+      },
+      "feedback": {
+        "original": "He does not own two cats.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "He owns two cats.",
+        "explanation": "부정을 제거해도 같은 뜻이에요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "present"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "The original is grammatical. Removing negation reverses the assertion while preserving the written quantity; no ambiguity justifies it."
+    },
+    {
+      "id": "F03",
+      "group": "clear_error",
+      "input": {
+        "sentence": "He saw her.",
+        "target": "grammar pronoun: participants"
+      },
+      "feedback": {
+        "original": "He saw her.",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "She saw him.",
+        "explanation": "행동을 한 사람과 본 대상이 그대로예요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "fail",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": true,
+          "swapRoles": true,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "pronouns"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "The correction demonstrably exchanges actor and recipient and reverses the direction of the stated seeing relation. Both flags can apply; count one critical observation, not two independent events."
+    },
+    {
+      "id": "F04",
+      "group": "clear_error",
+      "input": {
+        "sentence": "Music",
+        "target": "word music/n. 음악"
+      },
+      "feedback": {
+        "original": "Music",
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "correctedSentence": "Play music!",
+        "explanation": "음악을 틀라는 뜻으로 완성했어요."
+      },
+      "expectedGrade": {
+        "meaning": "fail",
+        "grammar": "uncertain",
+        "correction": "fail",
+        "explanation": "fail",
+        "abstention": "fail",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": true
+        }
+      },
+      "sourceIds": [
+        "pronouns"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "The isolated noun provides no command intent. The hypothetical visible command invents an action/speech act. A complete source proposition is absent, so do not also infer a proven polarity reversal."
+    },
+    {
+      "id": "N01",
+      "group": "normal",
+      "input": {
+        "sentence": "A book lies on the desk.",
+        "target": "word book/v. 예약하다"
+      },
+      "feedback": {
+        "original": "A book lies on the desk.",
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "correctedSentence": "A book lies on the desk.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI의 문법 의견에는 수정 제안이 없어 원문을 그대로 두었어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "book",
+        "present"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "A correct noun sentence does not satisfy the selected verb sense, but grammar remains natural and the original is retained."
+    },
+    {
+      "id": "N02",
+      "group": "normal",
+      "input": {
+        "sentence": "Him helps I.",
+        "target": "grammar pronoun: subject/object case"
+      },
+      "feedback": {
+        "original": "Him helps I.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "He helps me.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI는 원문 문법에 보완을 제안했어요. 아래의 원문과 교정문을 비교해 주세요.\n교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "pronouns",
+        "present"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "Subject/object case can affect both target and original grammar; preserve the same participants and roles."
+    },
+    {
+      "id": "N03",
+      "group": "normal",
+      "input": {
+        "sentence": "Give help.",
+        "target": "word help/n. 도움"
+      },
+      "feedback": {
+        "original": "Give help.",
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "correctedSentence": "Give help.",
+        "explanation": "목표: AI는 목표 표현의 사용을 적절하다고 보았어요.\n문법: AI의 문법 의견에는 수정 제안이 없어 원문을 그대로 두었어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "help",
+        "pronouns"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "unchanged-old-witness",
+      "rationale": "A short command may have a noun complement; dictionary membership of help as a verb is not proof of a verb list."
+    },
+    {
+      "id": "N04",
+      "group": "normal",
+      "input": {
+        "sentence": "She is speaking quiet.",
+        "target": "grammar adverb: manner form"
+      },
+      "feedback": {
+        "original": "She is speaking quiet.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "She is speaking quietly.",
+        "explanation": "목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.\n문법: AI는 원문 문법에 보완을 제안했어요. 아래의 원문과 교정문을 비교해 주세요.\n교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "quiet",
+        "manner",
+        "progressive"
+      ],
+      "purpose": "disputed-sentinel",
+      "origin": "unchanged-old-witness",
+      "rationale": "Compare the actual manner edit. Unchanged is speaking must not supply a false explanation of that edit."
+    },
+    {
+      "id": "N05",
+      "group": "normal",
+      "input": {
+        "sentence": "They is studying.",
+        "target": "grammar: present continuous subject/be agreement"
+      },
+      "feedback": {
+        "original": "They is studying.",
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "They are studying.",
+        "explanation": "현재진행형에서 주어 they에는 are를 사용해요. is를 are로 바꾸고 행동과 시점은 유지했어요."
+      },
+      "expectedGrade": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "pass",
+        "explanation": "pass",
+        "abstention": "pass",
+        "criticalErrors": {
+          "approveBadGrammar": false,
+          "reverseMeaning": false,
+          "swapRoles": false,
+          "inventedIntent": false
+        }
+      },
+      "sourceIds": [
+        "progressive"
+      ],
+      "purpose": "candidate-qualification",
+      "origin": "new-app-authored-development-control",
+      "rationale": "Specified present continuous agreement only. New candidate replaces disputed N04 in qualification denominator, while N04 remains an independently reported sentinel. This is development material, never a fresh holdout."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "protocol": "ai-quality-v147-two-reviewer-collector-v1",
+  "currentUserApproved": true,
+  "authorizationSource": "current-user-message",
+  "scope": "public-two-reviewer-followup-only",
+  "campaignCapMicros": "5000000",
+  "priorDebitMicros": "3788335",
+  "collectorHash": "a816d7ab87e3520691c26210c179d9bc77f140509fa18afd3cd520c513bb93ec",
+  "batchHash": "2c122768f40774fd3cf1ac35a05442cd67742d5cddd556736464157c5c78d4e2",
+  "keyReuseAlreadyApproved": true,
+  "observedUserMessage": "기존 사용분 포함 5달러 한도를 유지하고, Sol·Terra 후속 진단 4응답·4토큰계산 승인하니 진행해라.",
+  "approvedAtUtc": "2026-11-08T00:22:30.891141+00:00",
+  "maximumModelResponses": 4,
+  "maximumInputCountCalls": 4,
+  "controlVotes": 24,
+  "models": [
+    "gpt-6.1-sol",
+    "gpt-6.1-terra"
+  ],
+  "inputCeilingEach": 50000,
+  "outputCeilingEach": 4096,
+  "countTariffExplicitlyVerified": false,
+  "invoiceVerified": false,
+  "automaticRetry": false,
+  "oldLedgersReopened": false,
+  "additional35UsedByThisRun": false,
+  "releaseApproved": false
+}

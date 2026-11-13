@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 19,
+  "recordedAtUtc": "2026-11-06T04:07:19.093379+00:00",
+  "status": "offline Windows atomic-journal and owned-lock recovery verified",
+  "actualProviderCalls": 0,
+  "actualPaidApprovalUsd": 0,
+  "liveEvaluationSupported": false,
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-recovery.mjs": "25dea4e7108a3647707c887e40b6972cf82b44c56bed937e6d136658ff0abe35",
+    ".taskmaster/scripts/test-ai-quality-v147-recovery.mjs": "d4c6946b9e1eabfc449e70a0bb87daac9211091eef259157b04397f25eaf11aa",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8"
+  },
+  "dependencySha256": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-dispatch.mjs": "ae295d08a14c60dec86fbe46ab9e582c6fa1ba8c6a21389d68e177a0b5f1b31b"
+  },
+  "checks": [
+    {
+      "name": "recovery",
+      "version": "node-v22.23.4",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-recovery.mjs"
+      ],
+      "exitCode": 0,
+      "passed": 14,
+      "failed": 0,
+      "log": "recovery-node-v22.23.4-final2.log",
+      "sha256": "541a2d90d5208cf309669d631238b16db117a0903a5c0a09cf8d4a5891db206e",
+      "evidenceDirectory": "recovery-node-v22.23.4-final2"
+    },
+    {
+      "name": "recovery",
+      "version": "node-v24.22.1",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-recovery.mjs"
+      ],
+      "exitCode": 0,
+      "passed": 14,
+      "failed": 0,
+      "log": "recovery-node-v24.22.1-final2.log",
+      "sha256": "c18ceaded8639b67df1d42de89a2fcd5887bd836ebafaa46deb622331e0069e0",
+      "evidenceDirectory": "recovery-node-v24.22.1-final2"
+    }
+  ],
+  "lint": {
+    "command": [
+      "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-process.mjs",
+      ".taskmaster/scripts/ai-quality-v147-budget.mjs",
+      ".taskmaster/scripts/ai-quality-v147-budget-store.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-budget.mjs",
+      ".taskmaster/scripts/ai-quality-v147-dispatch.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-dispatch.mjs",
+      ".taskmaster/scripts/ai-quality-v147-recovery.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-recovery.mjs"
+    ],
+    "exitCode": 0,
+    "warnings": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "log": "new-tools-explicit-lint.log"
+  },
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase9/recovery-checks.json",
+  "proofSha256": "e0bc6237ea5236fd5d05e20c559a08abc6385bd3a5c4f93550eb1afa4ea8d6d5",
+  "proofBindings": {
+    "recovery-node-v22.23.4-final2\\write-process-boundaries.json": "06597cd87d1475737814b4a49ea51e1e41d2c86bb805e3624f8e487734bd9177",
+    "recovery-node-v22.23.4-final2\\actual-windows-rename-error.json": "5899021d338163db9b40299591ff5ecada59917161fc3ab5ff722fc1ad15cdd0",
+    "recovery-node-v22.23.4-final2\\negative-controls.json": "a5cfe7516e15095e1c64f43f4a5932198a90b08bfbbb2b1f7f85a7b2afd238cc",
+    "recovery-node-v22.23.4-final2\\recovery-process-boundaries.json": "7fa655164645bf523544a3a4b535b7ce021ecd4fb5c6c1cca81c3aa5cce0e0e1",
+    "recovery-node-v22.23.4-final2\\recovery-process-race.json": "633d5683af1a33529f6d3874112c20699327f40036775558e21792380544d94f",
+    "recovery-node-v22.23.4-final2\\mutex-helper-death.json": "2881175c0ce4a691235f13de7eb5563e1419998b4565a7824b47bebe421d0e18",
+    "recovery-node-v24.22.1-final2\\write-process-boundaries.json": "40cbe1662e013785d85f5e62f3fad9068c780c6ea162d3487888d8430bcc6734",
+    "recovery-node-v24.22.1-final2\\actual-windows-rename-error.json": "168bedb6447be14b2556803fbad64ae10a25735711df2962c3409f827ae61496",
+    "recovery-node-v24.22.1-final2\\negative-controls.json": "a5cfe7516e15095e1c64f43f4a5932198a90b08bfbbb2b1f7f85a7b2afd238cc",
+    "recovery-node-v24.22.1-final2\\recovery-process-boundaries.json": "88c9df4ba3a60431ad415707b1f5b48b6f66da9f9c47edab1c93d0c93ede91fe",
+    "recovery-node-v24.22.1-final2\\recovery-process-race.json": "633d5683af1a33529f6d3874112c20699327f40036775558e21792380544d94f",
+    "recovery-node-v24.22.1-final2\\mutex-helper-death.json": "8fbb4371fb8ddd6b1e84af03629de88c6c2ac3ac9c25488acc6cfe5517c3b710",
+    "encoding-control-results.json": "92d646410275aabc7a9fe12018f30ba00906a0b166caaf70d885baf2c7378a92",
+    "encoding-control-source.json": "badfc6ae50ae2edd6eaa0853ada2eb001f514c6a8a7e797634070da0bd94ecf5",
+    "official-windows-sources.json": "766275c6e30c94a000d33bbcd90d344832c81c7006bbd561ad88bc143981bf5a",
+    "new-tools-explicit-lint.json": "490df9234bf9904009c58a70ec62b2919b3748f1dcf8d175184d4dd116419690",
+    "recovery-interruption-red.log": "5ebb0d5d8e5bea43ac1f63d9b0ec65a6f113cd7b44ece68ee8b43bd575671c4a",
+    "recovery-interruption-green.log": "0efe0317e4e54f78a362d3c171c20a85a56c4317c75df21f37dcdb1b5b801d93",
+    "mutex-owner-archive-first.log": "043933a6dd588ccf5ab67ac2c5277b14581353f906236bc1b2180c183ee184c7",
+    "mutex-owner-archive-second.log": "4640b69a9084ec5d031b7d582911c6fe36651a9544911e1093d309c65967161f",
+    "recovery-first-source-hashes.json": "2c89b564b54fd984545e978bbe50264ab0e94008023ceec58c2c62add70dca8f",
+    "recovery-second-source-hashes.json": "be3a70eb2b1ba66a1ac85ec75cf63959b99a95a8482d2a6cdd99014422607837",
+    "recovery-audit-preservation.json": "7f945da6d799f041c181e82993b534cbb57c12c41a4ed88f6a8c1c078aa848d6",
+    "process-without-explicit-utf8.mjs": "c0a7cf8a9fc9a0939b369045f36e95ae3ba88ad993cdcbe930947380a0c6deb2",
+    "encoding-control.mjs": "d10618a17352e8f8446d69083130049a05174b033dd3e56e304fcb3161e73518"
+  },
+  "writeProcessBoundariesEach": 9,
+  "recoveryProcessBoundariesEach": 3,
+  "actualWindowsRenameCodes": [
+    "EPERM",
+    "EPERM"
+  ],
+  "duplicateRecoveryArchiveCountEach": 1,
+  "helperDeathVerifiedEach": true,
+  "mutexNamespace": "Global Windows named mutex; observed same-session process races only",
+  "lockRecovery": "Verify protocol/run/spec/directory,PID/creation/command/executable and confirmed absence; preserve exact stale lock in unique audit; owning kernel-mutex thread rechecks hash/scope and moves the exact file; atomically acquire a new normal lock before journal changes. Live/unknown/foreign/legacy locks are held.",
+  "writeRecovery": "Replay previous immutable prefix and exactly one prepared snapshot/commit/head; compare completed rows and bound captured request/usage/evidence; re-fsync exact verified bytes before HEAD rename; archive previous HEAD/lock/preparation; never initialize or resend.",
+  "recoveryInterruption": "New recovery owner binds durable original inspection/archive/commit hashes so interrupted recovery itself is audited and resumable. Helper stdin EOF exit and helper death before archive preserve old lock/head.",
+  "negativeControls": "Replay alone accepts two deliberately weak cases; full checker rejects missing commit and altered captured usage. Explicit UTF8 passes same Korean-path move while encoding guard removal fails FIELDS.",
+  "limitations": [
+    "Synthetic fixed-wire Windows tooling only; real authenticated receipt/paid runner and actual model quality are unmeasured.",
+    "Global naming is based on Microsoft primary documentation; separate client-session/RDP execution was not tested.",
+    "Process exits and actual EPERM are tested; hardware power loss,storage-controller failure and directory fsync durability are not proved.",
+    "Closed original ledgers and balances were not imported or executed; unrecognized or incomplete preparation stays held with maximum prior reservation."
+  ],
+  "officialSourcesFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase9/official-windows-sources.json",
+  "cleanup": "No branch artifact cleanup. Only exact newly owned lock is released; confirmed stale locks are archived with bytes/hash/source context. No recursive deletion or worktree removal."
+}

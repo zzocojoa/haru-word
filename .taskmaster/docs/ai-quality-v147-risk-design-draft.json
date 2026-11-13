@@ -1,0 +1,2423 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 34,
+  "status": "draft-incomplete-review-required",
+  "recordedAtUtc": "2026-11-06T05:39:00.515586+00:00",
+  "ownerApproval": null,
+  "riskDesignApproved": false,
+  "sampleJustified": false,
+  "confirmatoryFrozen": false,
+  "actualProviderCalls": 0,
+  "newPaidApprovalUsd": 0,
+  "releaseStatus": "held",
+  "operationalStatus": "held",
+  "selectedOption": null,
+  "selectedN": null,
+  "selectedRiskLimit": null,
+  "population": {
+    "productScope": "Current word sense/POS and all15 grammar lessons; separate original target/grammar judgments and visible correction/explanation/question plus delivery/storage availability.",
+    "grammarLessonIds": [
+      "noun",
+      "verb",
+      "pronoun",
+      "adjective",
+      "adverb",
+      "determiner",
+      "indefinite-article",
+      "definite-article",
+      "number",
+      "preposition",
+      "conjunction",
+      "auxiliary",
+      "modal",
+      "infinitive",
+      "exclamation"
+    ],
+    "inputBoundary": "All eligible English inputs accepted by existing max2000-character request schemas; unsupported/empty/overlong inputs are separately local contract controls,not silently excluded successful cases. Context note max500.",
+    "lengthAndLevel": "Include very short complete commands,fragments,ordinary/long inputs near supported boundary; beginner/intermediate and more complex relations. Reviewer labels actual difficulty and length coverage before results; no CEFR certification inferred.",
+    "sixStrata": [
+      "word.normal",
+      "word.needsCorrection",
+      "word.insufficientContext",
+      "grammar.normal",
+      "grammar.needsCorrection",
+      "grammar.insufficientContext"
+    ],
+    "withinGrammarStrata": "All15 lessons covered; lesson and difficulty minima must be frozen before authoring,not chosen after scores. No lesson-specific probabilistic guarantee from the pooled grammar strata.",
+    "samplingTarget": "Only a preregistered synthetic challenge-family distribution. No access to actual learner inputs and no claim of service-wide/user-weighted error rate.",
+    "samplingStillUnverified": true,
+    "families": "High-level error categories may repeat. A family is the syntactic frame, participant/temporal/quantity relation and contextual ambiguity operation. Mere changes of names, lemmas, number spelling, word order paraphrase or surface synonyms do not create a new family. Reviewer records the specific structural distinction.",
+    "familyApprovalCannotBeReplacedByReskinning": true,
+    "ownerApprovalCannotEstablishStatisticalIndependence": true
+  },
+  "harmDefinitions": {
+    "criticalVisible": [
+      "approveBadGrammar",
+      "reverseMeaning",
+      "swapRoles",
+      "inventedIntent"
+    ],
+    "falseTeachingRule": "Qualified review confirms a factual false universal rule or unsupported confident teaching claim; observed count must0 as a separate content gate,not retrospectively added to historical critical flags.",
+    "anyDimensionFailure": "Family/model fails when any planned visible output/repetition fails at least one of the five dimensions. Missing/rejected/uncertain is separately unmeasured or unavailable and prevents qualification,not a fabricated English mistake.",
+    "falseRejection": "Required normal originals refused/rewritten without cause,visible over-abstention,and app rejection remain separate counts. Required normal false rejections0.",
+    "repeatFlip": "Within same family/model at least one full pass and one full fail across preregistered repetitions. r2 defines a two-repeat event,not a lifetime repeat guarantee.",
+    "paired": "For each family/model compare robust pass(all planned variants/repeats pass) baseline/candidate. Gain=baseline fail/candidate pass; loss=baseline pass/candidate fail; unknown either side is unmeasured,never gain/loss."
+  },
+  "statisticalDesign": {
+    "fixedFamilywiseConfidence": 0.95,
+    "oneSidedTailStatements": 114,
+    "allocation": "Equal Bonferroni alpha/114:6strata × (critical union1 +3models × (quality upper1 +flip upper1 +gain/loss four tails)). Correlation across models/endpoints is allowed for union bound; iid families within a stratum is still required for each binomial tail.",
+    "scopeOfCriticalUnion": "Any of3models/variants/repetitions/4critical flags within each independent family. No3models×repetitions multiplier in sample units.",
+    "pairedEffect": "[L(gain)-U(loss), U(gain)-L(loss)] from four prespecified exact binomial marginal tails per model/stratum. Conservative; gain/loss are paired mutually exclusive categories,not independent samples.",
+    "zeroEventPrecision": "Sensitivity N assumes zero observed critical errors and complete iid families; it is not a power calculation or evidence that so many independent families are feasible.",
+    "mandatoryOtherMetrics": {
+      "maximumAnyDimensionFailure": 0.1,
+      "noninferiorityMargin": 0.02,
+      "maximumRepeatFlip": 0.05,
+      "zeroObservedCritical": true,
+      "zeroRequiredNormalFalseRejections": true,
+      "zeroUnmeasured": true,
+      "minimumPairedImprovement": null,
+      "improvementScope": "must preregister targeted family set and effect size separately; no improvement claim from noninferiority alone"
+    },
+    "limitsInSensitivityExamplesNotApproved": true,
+    "pairedImprovementTargetAndScope": null,
+    "plannedEffectPowerOrPrecisionJustification": null,
+    "maxLooks": 1,
+    "alphaRecycling": false,
+    "sampleExtensionAfterScores": false,
+    "earlySuccessStop": false,
+    "earlyHarmStop": "Stop and retain denominator/unknown costs,hold outcome. No reset/replacement/retry until new protocol and explicit approval."
+  },
+  "sensitivityOptions": [
+    {
+      "status": "draft-not-approved",
+      "maximumCriticalRisk": 0.05,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "bounds": [
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        }
+      ],
+      "sample": {
+        "n": 151,
+        "confidence": 0.999561403508772,
+        "upperAtZero": 0.04991596387245942,
+        "upperAtPrevious": 0.050240234523979826,
+        "numericBoundaryGuard": false,
+        "numericTolerance": 1e-12,
+        "assumption": "iid representative families within the stratum; all planned cells measured",
+        "zeroEventDesignOnly": true,
+        "powerGuaranteed": false
+      },
+      "familiesPerStratum": {
+        "word.normal": 151,
+        "word.needsCorrection": 151,
+        "word.insufficientContext": 151,
+        "grammar.normal": 151,
+        "grammar.needsCorrection": 151,
+        "grammar.insufficientContext": 151
+      },
+      "costs": {
+        "independentFamilyUnits": 906,
+        "caseTexts": 906,
+        "variantsPerFamily": 1,
+        "repetitions": 2,
+        "phases": 2,
+        "models": 3,
+        "generation": 10872,
+        "mainJudge": 10872,
+        "calibration": 36,
+        "confirmationMaximum": 21780,
+        "priorPilotMaximumSeparate": 756,
+        "productionGenerationSeparate": 6,
+        "productionJudgeNotScheduled": true,
+        "maximumAcrossListedStages": 22542,
+        "dispatchAuthorized": false,
+        "monetaryBudgetApproved": false
+      },
+      "fixedMaximumLooks": 1,
+      "stopEarlyForHarmAllowed": true,
+      "extendSampleAfterOutcomesAllowed": false,
+      "proposedOtherCriteria": {
+        "maximumAnyDimensionFailure": 0.1,
+        "noninferiorityMargin": 0.02,
+        "maximumRepeatFlip": 0.05,
+        "zeroObservedCritical": true,
+        "zeroRequiredNormalFalseRejections": true,
+        "zeroUnmeasured": true,
+        "minimumPairedImprovement": null,
+        "improvementScope": "must preregister targeted family set and effect size separately; no improvement claim from noninferiority alone"
+      },
+      "designApproved": false,
+      "sampleJustifiedForRealCorpus": false,
+      "iidFamiliesVerified": false,
+      "actualModelQualityMeasured": false,
+      "note": "The n calculation addresses only zero-event critical precision. It does not prove feasible independent families,effect power,review capacity or affordable monetary cost. These are mandatory approval holds."
+    },
+    {
+      "status": "draft-not-approved",
+      "maximumCriticalRisk": 0.01,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "bounds": [
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        }
+      ],
+      "sample": {
+        "n": 770,
+        "confidence": 0.999561403508772,
+        "upperAtZero": 0.009991221251473864,
+        "upperAtPrevious": 0.010004148529799375,
+        "numericBoundaryGuard": false,
+        "numericTolerance": 1e-12,
+        "assumption": "iid representative families within the stratum; all planned cells measured",
+        "zeroEventDesignOnly": true,
+        "powerGuaranteed": false
+      },
+      "familiesPerStratum": {
+        "word.normal": 770,
+        "word.needsCorrection": 770,
+        "word.insufficientContext": 770,
+        "grammar.normal": 770,
+        "grammar.needsCorrection": 770,
+        "grammar.insufficientContext": 770
+      },
+      "costs": {
+        "independentFamilyUnits": 4620,
+        "caseTexts": 4620,
+        "variantsPerFamily": 1,
+        "repetitions": 2,
+        "phases": 2,
+        "models": 3,
+        "generation": 55440,
+        "mainJudge": 55440,
+        "calibration": 36,
+        "confirmationMaximum": 110916,
+        "priorPilotMaximumSeparate": 756,
+        "productionGenerationSeparate": 6,
+        "productionJudgeNotScheduled": true,
+        "maximumAcrossListedStages": 111678,
+        "dispatchAuthorized": false,
+        "monetaryBudgetApproved": false
+      },
+      "fixedMaximumLooks": 1,
+      "stopEarlyForHarmAllowed": true,
+      "extendSampleAfterOutcomesAllowed": false,
+      "proposedOtherCriteria": {
+        "maximumAnyDimensionFailure": 0.1,
+        "noninferiorityMargin": 0.02,
+        "maximumRepeatFlip": 0.05,
+        "zeroObservedCritical": true,
+        "zeroRequiredNormalFalseRejections": true,
+        "zeroUnmeasured": true,
+        "minimumPairedImprovement": null,
+        "improvementScope": "must preregister targeted family set and effect size separately; no improvement claim from noninferiority alone"
+      },
+      "designApproved": false,
+      "sampleJustifiedForRealCorpus": false,
+      "iidFamiliesVerified": false,
+      "actualModelQualityMeasured": false,
+      "note": "The n calculation addresses only zero-event critical precision. It does not prove feasible independent families,effect power,review capacity or affordable monetary cost. These are mandatory approval holds."
+    },
+    {
+      "status": "draft-not-approved",
+      "maximumCriticalRisk": 0.005,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "bounds": [
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "word.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.normal",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.needsCorrection",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-model-critical",
+          "model": "all-three",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-sol",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6.1-terra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "any-dimension-failure",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "repeat-flip",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "gain",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "lower"
+        },
+        {
+          "stratum": "grammar.insufficientContext",
+          "endpoint": "loss",
+          "model": "gpt-6-astra",
+          "tail": "upper"
+        }
+      ],
+      "sample": {
+        "n": 1543,
+        "confidence": 0.999561403508772,
+        "upperAtZero": 0.004998438621444194,
+        "upperAtPrevious": 0.0050016720309512324,
+        "numericBoundaryGuard": false,
+        "numericTolerance": 1e-12,
+        "assumption": "iid representative families within the stratum; all planned cells measured",
+        "zeroEventDesignOnly": true,
+        "powerGuaranteed": false
+      },
+      "familiesPerStratum": {
+        "word.normal": 1543,
+        "word.needsCorrection": 1543,
+        "word.insufficientContext": 1543,
+        "grammar.normal": 1543,
+        "grammar.needsCorrection": 1543,
+        "grammar.insufficientContext": 1543
+      },
+      "costs": {
+        "independentFamilyUnits": 9258,
+        "caseTexts": 9258,
+        "variantsPerFamily": 1,
+        "repetitions": 2,
+        "phases": 2,
+        "models": 3,
+        "generation": 111096,
+        "mainJudge": 111096,
+        "calibration": 36,
+        "confirmationMaximum": 222228,
+        "priorPilotMaximumSeparate": 756,
+        "productionGenerationSeparate": 6,
+        "productionJudgeNotScheduled": true,
+        "maximumAcrossListedStages": 222990,
+        "dispatchAuthorized": false,
+        "monetaryBudgetApproved": false
+      },
+      "fixedMaximumLooks": 1,
+      "stopEarlyForHarmAllowed": true,
+      "extendSampleAfterOutcomesAllowed": false,
+      "proposedOtherCriteria": {
+        "maximumAnyDimensionFailure": 0.1,
+        "noninferiorityMargin": 0.02,
+        "maximumRepeatFlip": 0.05,
+        "zeroObservedCritical": true,
+        "zeroRequiredNormalFalseRejections": true,
+        "zeroUnmeasured": true,
+        "minimumPairedImprovement": null,
+        "improvementScope": "must preregister targeted family set and effect size separately; no improvement claim from noninferiority alone"
+      },
+      "designApproved": false,
+      "sampleJustifiedForRealCorpus": false,
+      "iidFamiliesVerified": false,
+      "actualModelQualityMeasured": false,
+      "note": "The n calculation addresses only zero-event critical precision. It does not prove feasible independent families,effect power,review capacity or affordable monetary cost. These are mandatory approval holds."
+    }
+  ],
+  "executionDesign": {
+    "freshness": "Development/calibration/pilot/confirmation families separate as T12/T13. Confirmation authored after candidate/policy freeze and pilot decisions,with author/reviewer exposure inventory and sealed alternatives. No actual new cases authored.",
+    "order": "Before dispatch freeze deterministic seed and blocked randomized baseline/candidate/model order per family and repetition. Collect every planned cell; time/model alias changes remain diagnostics,not excuses to discard failures.",
+    "source": "Use paired published-v147 baseline and current candidate full Worker fingerprints as prepared in T15; T16/T24 must seal actual bodies,build,input/rubric/environment/model/options/price/order hashes before any key access.",
+    "review": "All valid visible outputs require review and resolution. Independent qualified English reviewer role/credential/exposure/conflict declaration required; current Codex is same-author engineer,no English-review credential claimed. Max valid outputs/reviews equals generation ceiling,adjudication decisions same ceiling.",
+    "production": "Separate6generation calls,approved synthetic account/writes/budget,save/reload same UUID; never count as confirmatory language sample. No production call authorized."
+  },
+  "monetaryBudget": {
+    "quotedPrices": null,
+    "maxInputOutputTokensPerSlot": null,
+    "worstCaseUsd": null,
+    "ceilingUsdApproved": 0,
+    "noOldLedgerTransfer": true,
+    "formula": "Sum per-slot ceiling(inputMax*inputPrice +outputMax*outputPrice) in integer microUSD with existing exact reservation rules,including failed/unknown and calibration; sum role maxima separately for pilot/confirmation/production. Human review costs separate. No price estimate or paid run is authorized by call counts."
+  },
+  "challengeReview": [
+    {
+      "risk": "Literal or frame-reskinned examples inflate iid N",
+      "requiredResponse": "Family structural review and preregistered sampling mechanism; if unavailable no numeric probabilistic claim."
+    },
+    {
+      "risk": "Averaging hides a weak lesson/model or rare harmful edit",
+      "requiredResponse": "All6strata/3models,critical union and lesson coverage; no model averaging. No lesson risk claim without lesson-specific bounds/N."
+    },
+    {
+      "risk": "Shared judge/author bias and false gold",
+      "requiredResponse": "Blind model/phase where feasible,calibration,new independent qualified English review; raw/review/adjudicated separate."
+    },
+    {
+      "risk": "Many endpoints,optional peeking or retries",
+      "requiredResponse": "Predeclare114tails,one maximum look; no success peeking,alpha recycling,replacement or resend."
+    },
+    {
+      "risk": "Pair looks unchanged or precision inadequate",
+      "requiredResponse": "Do not call noninferiority improvement. Prespecify targeted effect and power/precision; inconclusive stays held."
+    },
+    {
+      "risk": "Infeasible N or review budget",
+      "requiredResponse": "Do not fake independent families or reduce risk after scores. Prepare a new prospective design/method/claim scope with approval before collecting fresh data."
+    }
+  ],
+  "approvalChecklist": [
+    {
+      "id": "owner-accepts-risk-and-claim-scope",
+      "status": "pending"
+    },
+    {
+      "id": "independent-sampling-family-feasibility",
+      "status": "pending"
+    },
+    {
+      "id": "per-lesson-level-length-coverage",
+      "status": "pending"
+    },
+    {
+      "id": "paired-improvement-scope-effect-and-precision",
+      "status": "pending"
+    },
+    {
+      "id": "qualified-reviewer-credentials-conflicts-capacity",
+      "status": "pending"
+    },
+    {
+      "id": "quoted-model-token-prices-and-human-review-budget",
+      "status": "pending"
+    },
+    {
+      "id": "fixed-N-r-order-and-sealed-protocol",
+      "status": "pending"
+    }
+  ],
+  "changeControl": "After seeing outcomes,never weaken thresholds or edit original gold/scores. Retain failed/unknown evidence. New source/rubric/sample/alternative/criterion => new version,new runId,fresh unseen families and required new approval.",
+  "primarySources": [
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/prc/section4/prc473.htm",
+      "scope": "General probability inequality and fixed finite simultaneous interval alpha allocation."
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+      "scope": "Binomial-tail inversion for exact small-count intervals."
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats._result_classes.BinomTestResult.proportion_ci.html",
+      "scope": "Exact method documentation; independent numeric fixtures actually generated by installed SciPy1.16.3."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "approved": true,
+  "approvedOn": "2026-11-12",
+  "userMessage": "기존 예산에서 합계 최대 US$0.811141 한도로 Noor 출처 재검토와 MC12 채점 재검토를 승인한다. AI 응답 8회와 입력 토큰 계산 8회 범위에서 Noor를 먼저 실행하고, 정산 확인 후 MC12까지 진행해라.",
+  "combinedApprovalMaxMicros": 811141,
+  "combinedExpectedModelCalls": 8,
+  "combinedExpectedCountCalls": 8,
+  "existingBudgetOnly": true,
+  "automaticRetry": false,
+  "mainDispatchAuthorized": false,
+  "executionOrder": [
+    "Noor",
+    "MC12"
+  ],
+  "mc12RequiresSettledNoor": true,
+  "protocol": "ai-quality-v147-suggest-source-followup-approval-v1",
+  "scopeSha256": "cc7a28c879ca9b4234908180c87a0690d80586e3022567fc27e841e9279cd496",
+  "caseId": "fresh-word-needsCorrection-01",
+  "expectedModelCalls": 2,
+  "expectedCountCalls": 2,
+  "maxMicros": 97209
+}

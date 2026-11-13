@@ -1,0 +1,14 @@
+{
+  "protocol": "ai-quality-v147-critical-budget-profile-v1",
+  "version": 1,
+  "englishPolicyHash": "d4c0864cff23d92400411cf32d91d9ccba1819db06ea4ad00f891de8f8b406ae",
+  "onlyRequestOutputCapChanged": true,
+  "instructionsInputSchemaAndCriteriaUnchanged": true,
+  "maxOutputTokens": 1024,
+  "inputTokenCeiling": 6000,
+  "kind": "development-diagnostic-only",
+  "mainIntegrated": false,
+  "original4096ProfileQualified": false,
+  "independentQualification": false,
+  "englishTruthCertified": false
+}

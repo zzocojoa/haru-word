@@ -1,0 +1,42 @@
+{
+  "candidateFreezeSha256": "14f2356880a8cd0cffdc0f211a4c541f4fe1e9acd9bff562afcfc5fc521432a8",
+  "costCsvSha256": "8becd11df8dbb461951abc95d19a4f7c30fc81c05a1a290e107d3c85ae40ebe8",
+  "reportIdenticalToPhase134": true,
+  "countFeeEstablished": false,
+  "perCallAllowanceMicros": 35000,
+  "caseId": "MC12",
+  "reviewRequests": 6,
+  "countRequests": 6,
+  "scopeSha256": "7e60ba8d44b741e36a39e5fa5f9eab6da21630399c5f0b50309fb3d9369456e6",
+  "reserveMicros": "713932",
+  "sourceFollowupReserveMicros": "97209",
+  "combinedReserveMicros": "811141",
+  "availableMicros": "1152100",
+  "availableAfterCombinedReserveMicros": "340959",
+  "full54ConservativeMicros": "6425388",
+  "full54ShortfallMicros": "5273288",
+  "calculationIncludesCurrentMeasuredTokens": false,
+  "noorScopeApproved": false,
+  "mc12ScopeApproved": false,
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "mainDispatchAuthorized": false,
+  "phase": "phase153",
+  "tasks": [
+    "25.1",
+    "34.3",
+    "34.4"
+  ],
+  "document": "docs/AI_QUALITY_V147_MC12_DIAGNOSTIC_SCOPE_20261109.md",
+  "mc12CollectorReady": false,
+  "scopeFile": "outputs/ai-quality-v147-implementation-20261106/phase153/mc12-diagnostic-scope.json",
+  "evidenceSha256": {
+    "prepare-mc12-scope.mjs": "5c1163407e14929e9f57004a21c1b2a2d64015559223c3abad91dbbdaf727df0",
+    "verify-quote.py": "e07d122d770579df06ec0fa4ca009c05afdac1019fbf4d504ead7930ec0e9587",
+    "scope-summary.json": "7a32a214c7a1c52f99218aaf9d0dc335533ac9124e3d14b23019ba62c1431d59",
+    "independent.log": "aa4cb0055044089c098005d52e0fb8f40f844507fda82551c07782a74ad44e13",
+    "independent-initial.log": "c0155cc2df840c23ef1d778188b4e9281e90e031c8154b49808e62ecacbe2b74",
+    "reported-costs-20261108-09.csv": "8becd11df8dbb461951abc95d19a4f7c30fc81c05a1a290e107d3c85ae40ebe8"
+  }
+}

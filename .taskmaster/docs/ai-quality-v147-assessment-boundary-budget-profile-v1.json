@@ -1,0 +1,16 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v3",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "85f95b75-a68e-4658-bec5-d2852a31786c",
+  "studyPlanHash": "11a2c9d3deeb21091aab5dc17309325db104cd07b5ee452602803a7dca1ac029",
+  "collectorProtocol": "ai-quality-v147-assessment-boundary-collector-v1",
+  "successStatus": "collected-assessment-boundary-comparison",
+  "runtimeDirectoryName": "ai-quality-v147-assessment-boundary-runtime-20261109",
+  "expectedModelCalls": 36,
+  "expectedCountCalls": 36,
+  "reservationMicros": "4283592",
+  "countAllowanceMicros": "1260000",
+  "defaultCacheTtl": "30m",
+  "mainDispatchAuthorized": false
+}

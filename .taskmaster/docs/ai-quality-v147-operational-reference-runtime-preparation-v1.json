@@ -1,0 +1,412 @@
+{
+  "protocol": "ai-quality-v147-operational-reference-runtime-v1",
+  "evidenceDirectory": "phase54",
+  "syntheticExecutorIntegrated": true,
+  "requiredSyntheticCounts": true,
+  "newGroupsEachNode": 9,
+  "regressionPassedGroupsEachNode": 103,
+  "regressionSkippedGroupsEachNode": 1,
+  "workerCellsEachNode": 12,
+  "workerFaultsEachNode": 2,
+  "reviewExitBoundariesEachNode": 4,
+  "rubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "actualProviderTransportIntegrated": false,
+  "actualRoleQualificationMeasured": false,
+  "englishQualityQualified": false,
+  "causalEffectOfRubricEstablished": false,
+  "invoiceVerified": false,
+  "campaignUpperMicros": "3788335",
+  "remainingMicros": "1211665",
+  "campaignCapMicros": "5000000",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-reference-rubric-v1.mjs": "fe0cf52f2c856d82b6e73db269a6185d2fa6bf404a5e9fef6a86ad472583ffab",
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": "ef481b84562c240f494be4f74535e3d3c9e1d6593c95c63da192aa2c18a8886c",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "e0e584ab0e29ebe2fb2a2396b8f058f6dbffc77b1cd4ae9c0cdeb5b23776f059",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "fff0f5275e70c276a05b52f7b83f9e952f08c286ad0b4c0d5c0d1eee752b1d28",
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": "e21e103f4c5e208ecc7fffc4164f6621d4c1dd9d3803aad4526c52c4a8300786",
+    ".taskmaster/scripts/ai-quality-v147-operational-reference-v1.mjs": "8b458477a0d7fca6e687feb59aceaf112fe7107223adfb2168698f5668b1b0f8",
+    ".taskmaster/scripts/ai-quality-v147-operational-reference-fixture-v1.mjs": "9ed9f261b57e17e06e019a61840d263f1bb2bd01433fffdf2352423af72e1b46",
+    ".taskmaster/scripts/test-ai-quality-v147-operational-reference-v1.mjs": "e4988e028a6b929286a0223d8dc8fbdfc31e8329c204cc226fb235fadd70c59b"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-public-control-collector-v1.mjs": "56bf650788b2fe9e40516171046fdef8d87874daf98211acd8b744d94a8d8cdf",
+    ".taskmaster/scripts/ai-quality-v147-public-control-batch-v1.mjs": "7c2c8b621b4b39365926841eb808062c783e89f3a7001af3058c434d97a01c6a",
+    ".taskmaster/scripts/ai-quality-v147-reference-controls-v2.mjs": "3d01666c168d135c4dec812ebf3d187490fed9a5419dddf3654fb5db6675b105",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "36c433a1bc05bdc1d3b458d79e538915ed1ae5d0e32fe62800712bb034e3dd6b",
+    ".taskmaster/scripts/ai-quality-v147-exposure-v1.mjs": "14aa01e2a5ac1ef1d649362a40e4639a86df61506155bb6e7b73264cbd012433",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-global-exposure-v1.mjs": "7f791026b40d2ad62f278b45b5b54ebcc45453e56c69c79eee543d561813a0f9",
+    ".taskmaster/evaluation/ai-quality-v147/reference-controls-v2.json": "0ed8af4e6bc8dc78da416b3fdf1e13eb3ccffed5c0cc4231c4d01505dd8718c0",
+    ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+    ".taskmaster/docs/ai-quality-v147-reference-readiness-draft.json": "34764e89714f20ad46dd7039e5b5535be651ce08ff9e471d9b772faa9c4dbbd8",
+    ".taskmaster/docs/ai-quality-v147-reference-operational-rubric-v1.json": "3a92edaadf4b8be90a0eea95599524a6814dcdb60698ea08ff3dd843f094a111"
+  },
+  "historicalSources": {
+    ".taskmaster/scripts/ai-quality-v147-reference-rubric-v1.mjs": {
+      "sha256": "e723afb027971005b16073a48285b64616f0c7b54e1fbc693166883f761960f6",
+      "archiveFile": "phase54/management-before/.taskmaster/scripts/ai-quality-v147-reference-rubric-v1.mjs",
+      "priorProgressFile": "phase53/progress-final.json",
+      "priorProgressSha256": "76e90c0b1ca1cdaa1c27bc0d478e242dd63edeae75574768042e43c72f58a763"
+    },
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": {
+      "sha256": "2b10affaf7a505cd55d577356f742eb34017e47b00e2162211cd94e0f90c26ca",
+      "archiveFile": "phase54/management-before/.taskmaster/scripts/ai-quality-v147-capture-v3.mjs",
+      "priorProgressFile": "phase53/progress-final.json",
+      "priorProgressSha256": "76e90c0b1ca1cdaa1c27bc0d478e242dd63edeae75574768042e43c72f58a763"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": {
+      "sha256": "6c44b6026ad2e66ab0c7f1fd634dfafcaa3242ecf035f475cbd73a89677172c2",
+      "archiveFile": "phase54/management-before/.taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs",
+      "priorProgressFile": "phase53/progress-final.json",
+      "priorProgressSha256": "76e90c0b1ca1cdaa1c27bc0d478e242dd63edeae75574768042e43c72f58a763"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": {
+      "sha256": "b18e0a034fdc4ecbb4a5c6ed9b330394bd73680f067d03a4ba001b18f9af43d0",
+      "archiveFile": "phase54/management-before/.taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs",
+      "priorProgressFile": "phase53/progress-final.json",
+      "priorProgressSha256": "76e90c0b1ca1cdaa1c27bc0d478e242dd63edeae75574768042e43c72f58a763"
+    },
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": {
+      "sha256": "9fce5bbb8f8c8e0b7342ff676d3a4ff65f988c230fc6f07e51bf0531e0b977ac",
+      "archiveFile": "phase54/management-before/.taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs",
+      "priorProgressFile": "phase53/progress-final.json",
+      "priorProgressSha256": "76e90c0b1ca1cdaa1c27bc0d478e242dd63edeae75574768042e43c72f58a763"
+    }
+  },
+  "checks": [
+    {
+      "name": "operational-node24-bookends",
+      "kind": "operational",
+      "groups": 9,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-operational-reference-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "operational-node24-bookends.log",
+      "sha256": "e0fba7e0d9628e1f9d1b5c9ffc36b0cdc046adf953d4f8b4998f35511ad4ed7e",
+      "passedGroups": 9,
+      "skippedGroups": 0
+    },
+    {
+      "name": "rubric-node24-final",
+      "kind": "rubric",
+      "groups": 9,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-rubric-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "rubric-node24-final.log",
+      "sha256": "6b2597845dd75f0e4fb717051fe0c1f908c6739884e9f5cb6bcdc0b41d49c9f5",
+      "passedGroups": 9,
+      "skippedGroups": 0
+    },
+    {
+      "name": "reference-node24-final",
+      "kind": "reference",
+      "groups": 14,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-v4.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "reference-node24-final.log",
+      "sha256": "b5ec102457e1503ad0bc112b16294b0211a6531c1fb1e36bf0bddc20243c8c8d",
+      "passedGroups": 14,
+      "skippedGroups": 0
+    },
+    {
+      "name": "capture-node24-final",
+      "kind": "capture",
+      "groups": 13,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-wire-capture-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "capture-node24-final.log",
+      "sha256": "f07f881b22a646fdedcd782863dbc8cc5b26ac1d77e70b14c5748db843399f94",
+      "passedGroups": 13,
+      "skippedGroups": 0
+    },
+    {
+      "name": "settlement-node24-final",
+      "kind": "settlement",
+      "groups": 12,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-settlement-recovery-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "settlement-node24-final.log",
+      "sha256": "c8147aa4aff40e95c52279e30c5f63513d7968fe221b48e6f62083783ab2af17",
+      "passedGroups": 12,
+      "skippedGroups": 0
+    },
+    {
+      "name": "recovery-node24-final",
+      "kind": "recovery",
+      "groups": 20,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-recovery-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "recovery-node24-final.log",
+      "sha256": "e9aa578daeef25f17b1b648fe8b94d1804659103313345d6096bff396328c43d",
+      "passedGroups": 20,
+      "skippedGroups": 0
+    },
+    {
+      "name": "counter-node24-final",
+      "kind": "counter",
+      "groups": 14,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-input-count-executor-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "counter-node24-final.log",
+      "sha256": "0602888b37350acd70cd4a63d7e128577e533740db35353272c029046856c34d",
+      "passedGroups": 14,
+      "skippedGroups": 0
+    },
+    {
+      "name": "executor-node24-final",
+      "kind": "executor",
+      "groups": 11,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-panel-executor-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "executor-node24-final.log",
+      "sha256": "98eec20537a87ea502ba6fa33c6d69f8e53766c17f3225a2f1006eea828f7001",
+      "passedGroups": 10,
+      "skippedGroups": 1
+    },
+    {
+      "name": "program-node24-final",
+      "kind": "program",
+      "groups": 11,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-program-exclusion-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "program-node24-final.log",
+      "sha256": "b864628957db9c932cd3617599ea83ac23f6b8c7b34d56b581b24a3df47be214",
+      "passedGroups": 11,
+      "skippedGroups": 0
+    },
+    {
+      "name": "worker-node24-final",
+      "kind": "worker",
+      "groups": 12,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        ".taskmaster/scripts/test-ai-quality-v147-worker-panel-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "worker-node24-final.log",
+      "sha256": "e2104c7740c64433facbf03051bb2fed2df4a54433ea3ff4abf616675d895f7e",
+      "passedGroups": 12,
+      "skippedGroups": 0
+    },
+    {
+      "name": "operational-node22-bookends",
+      "kind": "operational",
+      "groups": 9,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-operational-reference-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "operational-node22-bookends.log",
+      "sha256": "352ef024a22323aef45ff46182227afaa0cd8cde66e5e5d175ca188b7e78f1d4",
+      "passedGroups": 9,
+      "skippedGroups": 0
+    },
+    {
+      "name": "rubric-node22-final",
+      "kind": "rubric",
+      "groups": 9,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-rubric-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "rubric-node22-final.log",
+      "sha256": "8f25730139428ef044977653f4da04471fa627d3fd1c601eee9b88d36b48acba",
+      "passedGroups": 9,
+      "skippedGroups": 0
+    },
+    {
+      "name": "reference-node22-final",
+      "kind": "reference",
+      "groups": 14,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-reference-v4.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "reference-node22-final.log",
+      "sha256": "e10694851cea273374bdfa6b192a6dbcc33d0396f6baf4171ff06797375359cb",
+      "passedGroups": 14,
+      "skippedGroups": 0
+    },
+    {
+      "name": "capture-node22-final",
+      "kind": "capture",
+      "groups": 13,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-wire-capture-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "capture-node22-final.log",
+      "sha256": "fe28d63168a560138185e5699d451f0cc56fc6f8a834e05fa989f14899b89a0d",
+      "passedGroups": 13,
+      "skippedGroups": 0
+    },
+    {
+      "name": "settlement-node22-final",
+      "kind": "settlement",
+      "groups": 12,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-settlement-recovery-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "settlement-node22-final.log",
+      "sha256": "6856af6d8f3321e6bac125637946a8dcddb1c7a534bb060f975d26be7e88277d",
+      "passedGroups": 12,
+      "skippedGroups": 0
+    },
+    {
+      "name": "recovery-node22-final",
+      "kind": "recovery",
+      "groups": 20,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-recovery-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "recovery-node22-final.log",
+      "sha256": "9639fa08109583587b01c475660da2536354287f481122eb761337ab3c36a667",
+      "passedGroups": 20,
+      "skippedGroups": 0
+    },
+    {
+      "name": "counter-node22-final",
+      "kind": "counter",
+      "groups": 14,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-input-count-executor-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "counter-node22-final.log",
+      "sha256": "49684a9b0a8a8b08d155fb6937dec3f2b134741ca582a79e1b13586560562583",
+      "passedGroups": 14,
+      "skippedGroups": 0
+    },
+    {
+      "name": "executor-node22-final",
+      "kind": "executor",
+      "groups": 11,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-panel-executor-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "executor-node22-final.log",
+      "sha256": "550d62179fc6cef48445394972b34249ce3eef84d82c89589d48ed46b09daa79",
+      "passedGroups": 10,
+      "skippedGroups": 1
+    },
+    {
+      "name": "program-node22-final",
+      "kind": "program",
+      "groups": 11,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-program-exclusion-v1.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "program-node22-final.log",
+      "sha256": "53b29d49e4a5c7108291a9dbffaf500e3b55670164bddd49ce22a7ac85eef3a3",
+      "passedGroups": 11,
+      "skippedGroups": 0
+    },
+    {
+      "name": "worker-node22-final",
+      "kind": "worker",
+      "groups": 12,
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        ".taskmaster/scripts/test-ai-quality-v147-worker-panel-v3.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "log": "worker-node22-final.log",
+      "sha256": "d4c4de466604a4b8cd5f4de38eeb2f71cd458f138f6ded774bd3eac9e8557888",
+      "passedGroups": 12,
+      "skippedGroups": 0
+    }
+  ],
+  "fullStageResultFile": "full-operational-node24/full-operational-results.json",
+  "fullStageResultSha256": "a7a555dc464ffa788d68ed86fcd3c89912642f20fe965d9bb8dd154cf8a46ca8",
+  "fullStageNode": "24.22.1",
+  "fullStageCases": 60,
+  "fullStageRequests": 180,
+  "fullStageCounts": 180,
+  "fullStageActualProviderCalls": 0,
+  "document": "docs/AI_QUALITY_V147_OPERATIONAL_REFERENCE_RUNTIME_20261107.md",
+  "documentSha256": "e34820b02dbcd8bfcc34928041368c30d240eede4d2fb4fbeda7880c2b4ceb8f",
+  "releaseVerdict": "held"
+}

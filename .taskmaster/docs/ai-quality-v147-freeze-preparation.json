@@ -1,0 +1,124 @@
+{
+  "atUtc": "2026-11-06T06:02:33.499816+00:00",
+  "task": 16,
+  "checks": [
+    {
+      "name": "freeze-node-v22.23.4-source-final3",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-freeze.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 16,
+      "failed": 0,
+      "log": "freeze-node-v22.23.4-source-final3.log",
+      "sha256": "c00aa1f6464ab4c87fb248c658b63f5fe1610b494c101fbd4e570d4288dfc88c",
+      "evidenceDirectory": "freeze-node-v22.23.4-source-final3"
+    },
+    {
+      "name": "freeze-node-v24.22.1-source-final3",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-freeze.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 16,
+      "failed": 0,
+      "log": "freeze-node-v24.22.1-source-final3.log",
+      "sha256": "83b4af28c2c55866c0bc26f95dd73031244bd9d256b5d69c50093cb1233beca0",
+      "evidenceDirectory": "freeze-node-v24.22.1-source-final3"
+    },
+    {
+      "name": "freeze-node-v24.22.1-root-final3",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-freeze.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어",
+      "exitCode": 0,
+      "passed": 16,
+      "failed": 0,
+      "log": "freeze-node-v24.22.1-root-final3.log",
+      "sha256": "b71c34585f6e1101d9d3e7b723bb124bc9c6709cbd38ee869194ff16028bcfee",
+      "evidenceDirectory": "freeze-node-v24.22.1-root-final3"
+    }
+  ],
+  "lint": {
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-freeze.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-freeze.mjs"
+    ],
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "freeze-lint-final3.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-freeze.mjs": "7d1ea5c8636b0f9830ab396606b41079bdf1b42ef0b46244fbb30e1d55dea42e",
+    ".taskmaster/scripts/test-ai-quality-v147-freeze.mjs": "11d36eaf8c34a0e26d993016aa4c7d200f2f944cf642f733ffab624da510a09a"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-dispatch.mjs": "ae295d08a14c60dec86fbe46ab9e582c6fa1ba8c6a21389d68e177a0b5f1b31b",
+    ".taskmaster/docs/ai-quality-v147-decision-contract-v4.json": "823b5c5a14c39ff8cfa423bb83ec3b22b8bebf839ce7e19e0143453f7ba15d79",
+    ".taskmaster/docs/ai-quality-v147-worker-preparation.json": "46a45bb52f81a9e0c2cdcd9635e67bfe71112a642e7061f02b0a3ff35b194ca0"
+  },
+  "proofBindings": {
+    "freeze-node-v22.23.4-source-final3/freeze-observations.json": "5785c7b4f7240f81bc8eaa7b4a53d67e4adc78a8191d7fc1d33f10d2cc95c375",
+    "freeze-node-v22.23.4-source-final3/actual-app-input-hashes.json": "409b99e724fa67251b8192eef97e0f1b6e49e59661a28ec0bf6b8ced962c8d6c",
+    "freeze-node-v22.23.4-source-final3/actual-app-body.mjs": "472ce7b98259107e23e1bd945bd74e5b09331d9d6a89f28fd5e39382756e1d17",
+    "freeze-node-v24.22.1-source-final3/freeze-observations.json": "5785c7b4f7240f81bc8eaa7b4a53d67e4adc78a8191d7fc1d33f10d2cc95c375",
+    "freeze-node-v24.22.1-source-final3/actual-app-input-hashes.json": "409b99e724fa67251b8192eef97e0f1b6e49e59661a28ec0bf6b8ced962c8d6c",
+    "freeze-node-v24.22.1-source-final3/actual-app-body.mjs": "472ce7b98259107e23e1bd945bd74e5b09331d9d6a89f28fd5e39382756e1d17",
+    "freeze-node-v24.22.1-root-final3/freeze-observations.json": "5785c7b4f7240f81bc8eaa7b4a53d67e4adc78a8191d7fc1d33f10d2cc95c375",
+    "freeze-node-v24.22.1-root-final3/actual-app-input-hashes.json": "409b99e724fa67251b8192eef97e0f1b6e49e59661a28ec0bf6b8ced962c8d6c",
+    "freeze-node-v24.22.1-root-final3/actual-app-body.mjs": "472ce7b98259107e23e1bd945bd74e5b09331d9d6a89f28fd5e39382756e1d17"
+  },
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "actualFinalEvaluationFrozen": false,
+  "liveEvaluationSupported": false,
+  "conditionalComponents": 13,
+  "actualAppSyntheticBodiesEach": 6,
+  "recordedWorkerBodiesReplayedEach": 14,
+  "derivedJudgeWireSupported": true,
+  "actualReceiptAuthenticated": false,
+  "integratedPaidExecutor": false,
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "local freeze protocol and synthetic pre-credential/dispatch guards verified",
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase13/freeze-checks.json",
+  "proofSha256": "5ca3275bb74fbd36ca5528b07ac1a0c4cdf4e00e2be69c6d652458440deaa84d",
+  "contract": "Thirteen component hashes plus strict nonsecret runtime metadata,schedule and order form a runId-bound seal. Static bodies bind exact UTF8 bytes and semantic digest. Source/build/runtime/corpus/rubric/model/price/limits/order changes hold before credential/dispatch.",
+  "files": "Caller supplies complete closed input trees and explicit files. New/removed paths and byte/format changes alter inventory. No traversal/ADS/alias/link/hardlink or secret/local-DB/config roots. Hashes alone do not prove input-set completeness; T24 must compare actual build dependency manifests.",
+  "budget": "Spec sourceSeal equals freeze hash; limits binds the spec outline excluding sourceSeal to avoid self-reference,quote is separately bound. Approval remains spec/run-bound and no new real approval is created.",
+  "derivedWire": "Judge recipe(template) and bounds are fixed before generation. Actual visible parent bytes bind to captured parent request/receipt hashes,then deterministic insertion creates a separate exact-byte binding before judge dispatch. Future output is not falsely claimed prefrozen. Receipt authenticity is not certified.",
+  "limitations": [
+    "Synthetic dispatcher integrates fixed-known-body budget/store/dispatch only. Durable v1 budget descriptors require exact bodyCommitment before approval; dynamic judge reservation/binding must be integrated safely in T22. No weakening of v1,old ledger migration or approval reuse.",
+    "The frozen caller observation must freshly recompute complete actual inputs/environment,not return cached old hashes. Final candidate/body/protocol freeze is T24,not this tooling preparation.",
+    "SHA equality is integrity evidence,not English correctness,representativeness,price validity or credential/receipt provenance. No actual new corpus/approval/final evaluation seal exists.",
+    "Exclusive file creation/fsync was exercised on current Windows; this does not certify physical power-loss or hostile concurrent filesystem mutation protection.",
+    "Actual app adapter bodies were synthetically intercepted in Node. Fourteen old full-Worker synthetic request bodies were replayed; no new full-Worker runtime or actual provider evaluation executed."
+  ],
+  "primarySources": [
+    {
+      "url": "https://nodejs.org/api/fs.html",
+      "scope": "Exclusive wx open and file fsync; current public docs26,actual execution Node22.23.4/24.22.1."
+    },
+    {
+      "url": "https://nodejs.org/api/crypto.html",
+      "scope": "SHA256 byte hashing; actual API usage verified on both installed Node runtimes."
+    }
+  ]
+}

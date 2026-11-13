@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "atUtc": "2026-11-06T10:03:32.424868+00:00",
+  "task": 23,
+  "stage": "final-local-product-qualification",
+  "task23LocalCompletionEvidenceReady": true,
+  "productChangedSincePhase5": [
+    "app/backup-dialog.tsx",
+    "app/backup-export-dialog.tsx"
+  ],
+  "productSha256": {
+    "app/backup-dialog.tsx": "378eefdbfd73cb851030e2559b13f82fb47b1ed9e002a23c198e1edd5abceeb5",
+    "app/backup-export-dialog.tsx": "23a26103447ca35c90f4d87f047ca9932e1a43b13ea84f7ac9336174866b68bb"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/test-ai-quality-v147-product-qualification.mjs": "c34b473492205aeee3b20bf319dddd6573f2ffdf309464e060df3476e6d9c4a0"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-worker.mjs": "f80de7be66b37941a5e09c4b1ced247b01899aa67340241eb94a1569e209351d",
+    ".taskmaster/scripts/test-ai-quality-v147-worker.mjs": "b54e45e2484fadcc0a7d2d1686ed4670d3f321e8fb26b0ddf94274e71da355ec",
+    "tests/backup-qa.cjs": "8e2704871dd17dca531d1a754a973c04f6acec2bce89ec7fc83623710493c3c6"
+  },
+  "proofBindings": {
+    "product-raw-preservation.json": "6940a5fe81d4efa272ae0a8cf6bc2263b134513e25673685134e9828da7083cf",
+    "product-qualification-job-final/product-qualification.json": "ad6dd1059ba56cfbe863ee042d756cb0f41eff21df5d44050e1196e28f911a12",
+    "product-qualification-job-final.log": "b9bcfb1672b06ee3daa423bfb960ae11add18870bcd8b21985541a36614b7e0e",
+    "product-qualification-job-final.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "built-worker-fixed-short-runtime/results.json": "e7b181c184c814b7aabde1f21dad99b92f23e85e4d77e2360e374cfe40621366",
+    "built-worker-fixed-short-runtime/lifecycle.json": "182cd3a561f2e53af315a34895305a3ad8da8ad564d0482b29d874856e571dfb",
+    "built-worker-fixed-short-runtime/provider-requests.json": "4f0398601ecf65e8994a73a59d972132f8e5411cd1a119cc3f2959411d197f7c",
+    "built-worker-fixed-short-runtime.log": "3ced611153ae9fed8c5733cb7bc50cf44b00ab34da388b5a03535a3ceed0eac9",
+    "built-worker-fixed-short-runtime.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "worker-runtime-path-adapter.json": "a483bb2d1ddb412229c5ae8163520513f30c3c73cdf64265be46e26b5ecfbdec",
+    "test-worker-fixed-short-runtime.mjs": "94564ac5d7c7e5bee9defd2585c4f3ac700ac356c000f0e3f6658ec8866dfeb1",
+    "product-qualification-job-final/chromium/browser.json": "d52cd09ad092c880422a9a70f0253dbd70c9604c6f5750c027977dae315b07b9",
+    "product-qualification-job-final/chromium/backup-qa.log": "415fd921644003f4b15041d7b02fcd57a40904dd36a48dd59be58263328790ce",
+    "product-qualification-job-final/chromium/backup-qa-owned.cjs": "6601d0dd35768887379713494a55d390c9167e258f2d4775ee6887db08248bf7",
+    "product-qualification-job-final/webkit/browser.json": "f58cec2b6d5d0e2bdfb577ba7606bc22e64b294bde0da73d06ba46e92d85805d",
+    "product-qualification-job-final/webkit/backup-qa.log": "038e9722e7a1400df5af8be5ea3275cbfca0f91b0b9835bd18a7cfbc4e56a0b2",
+    "product-qualification-job-final/webkit/backup-qa-owned.cjs": "8c18dbd24c13888c69571dc9442e2a62f7d79a20d22d33d9506b5bfc79e504b7"
+  },
+  "productEvidenceDirectory": "phase18e",
+  "productProofBindings": {
+    "checks.json": "162c594380d7ecccf138cf825414256a34308a0534c6bec84459d5b41f7d7df5",
+    "source-before.json": "56de7f3c2309a45842f8ed164e72489353905ea75eb4126b8391f143fbaa8654",
+    "scope-check.json": "fa10a4696a8265a838c9660311d2d4d2d7583a541063cfd565981d762e052ec4",
+    "candidate-build-files.json": "fb2258e194f5838a0a01f68b23ba4ed3cc4a9c0c6df8d2978e7517118b0fc629",
+    "copy-input-correction.json": "921e206f4fc6a02a94d77ce4cec17f21ae43e92cc007e9225bda632f7dd15585"
+  },
+  "priorCompatProofBindings": {
+    "phase4/compat-browser/checks.json": "d42768d88e19413d769628acfbfc594eb97887af98ef09dd6f4a333b983e9134",
+    "phase4/compat-browser/draft-chromium.json": "63b0b051346036ffc495f20678b9536052fc6f3ac80e637f5510b273c27a8cf9",
+    "phase4/compat-browser/draft-webkit.json": "278ef5e07ce682e197a3e094f00cb8b0b3c85ab8dc57dc41dce70afe2123d7e7",
+    "phase4/compat-browser/correction-chromium.json": "3e193fde9c5d70eb9a1763dd1fd9ee4136969d116021fef34410cffbb2265dfc",
+    "phase4/compat-browser/correction-webkit.json": "5cc3a9af8f94cf08f7026eed10831da4686db78a8d800f7ba02eeb3259779d0d"
+  },
+  "candidateBuildRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-product-build-20261106-phase18-final",
+  "candidateBuildFiles": 407,
+  "authoredInputs": 547,
+  "checks": [
+    {
+      "name": "unit-node-v22.23.4",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "durationMs": 28173,
+      "log": "unit-node-v22.23.4.log",
+      "logSha256": "dab734e688c9681943d19f118749528905c250da2bfc1018c5f0a7dd4533ab02",
+      "summary": [
+        "# tests 879",
+        "# pass 879",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0"
+      ]
+    },
+    {
+      "name": "unit-node-v24.22.1",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "test"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "durationMs": 25283,
+      "log": "unit-node-v24.22.1.log",
+      "logSha256": "3c1fd0246db380ba4b7190753ff37f90213afdb93fbb8b147f08bbcb8b4618a2",
+      "summary": [
+        "ℹ tests 879",
+        "ℹ pass 879",
+        "ℹ fail 0",
+        "ℹ cancelled 0",
+        "ℹ skipped 0"
+      ]
+    },
+    {
+      "name": "manner-index-check",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "scripts/prepare-feedback-manner-forms.mjs",
+        "--check"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "durationMs": 92,
+      "log": "manner-index-check.log",
+      "logSha256": "b146ca214bd36b3832ab2abb0741c1036fd1023e2196fd2905d1db582a58c7fa",
+      "summary": []
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "durationMs": 23152,
+      "log": "typecheck.log",
+      "logSha256": "c35f2424235ba232f059514b72746d95f8a42286c454677ef748954aed7c5f36",
+      "summary": []
+    },
+    {
+      "name": "lint",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "lint"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "durationMs": 17356,
+      "log": "lint.log",
+      "logSha256": "4cb0464c048402bef1405fb034a4d31d82f63d666927a0fef0b9ca93448c3321",
+      "summary": [
+        "  121:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+        "  11:26  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+        "  67:97  warning  'args' is defined but never used  @typescript-eslint/no-unused-vars",
+        "  68:30  warning  'get' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+        "  68:35  warning  's' is assigned a value but never used    @typescript-eslint/no-unused-vars",
+        "  82:35  warning  's' is assigned a value but never used    @typescript-eslint/no-unused-vars",
+        "  12:36  warning  'expressionTranslation' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+        "  19:32  warning  'expressionTranslation' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+        "  3:51  warning  'words' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+        "  4:15  warning  'emptyRecord' is defined but never used  @typescript-eslint/no-unused-vars",
+        "  5:16  warning  'emptyState' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+        "  23:169  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions",
+        "  5:46  warning  'i' is defined but never used  @typescript-eslint/no-unused-vars",
+        "  5:127  warning  'reviewTargets' is defined but never used  @typescript-eslint/no-unused-vars",
+        "  17:425  warning  'resources' is defined but never used  @typescript-eslint/no-unused-vars",
+        "✖ 15 problems (0 errors, 15 warnings)"
+      ]
+    },
+    {
+      "name": "check-grammar-review",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "check:grammar-review"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "durationMs": 432,
+      "log": "check-grammar-review.log",
+      "logSha256": "a45310704bb5fda0603317c26176b13a7c2388ea2960c8b79cac57eff4af1b5f",
+      "summary": []
+    },
+    {
+      "name": "build",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js",
+        "run",
+        "build"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-product-build-20261106-phase18-final",
+      "exitCode": 0,
+      "durationMs": 15600,
+      "log": "build.log",
+      "logSha256": "7f79e1b820474093ef3613e14f93a1fcab5afbc04cdb8c9f7c462d69deca2afe",
+      "summary": [
+        "dist/server/_next/static/navigation-errors-DatD354w.js                                                                                       0.56 kB │ gzip:   0.37 kB │ map:   5.36 kB",
+        "dist/client/_next/static/chunks/learning-shared~index~app-router-scroll~default-global-error~error-boundary~layout-segment-~gqxr6tf1-BROLnM1X.js    232.62 kB │ gzip:  75.56 kB",
+        "dist/server/ssr/_next/static/navigation-errors-BRIEcp79.js             0.81 kB │ gzip:   0.53 kB │ map:     6.71 kB",
+        "dist/server/ssr/_next/static/default-global-error-CfbngBo7.js          4.28 kB │ gzip:   1.68 kB │ map:     8.63 kB",
+        "dist/server/ssr/_next/static/error-boundary-Cc9xyG9J.js                5.67 kB │ gzip:   1.75 kB │ map:    23.92 kB",
+        "  Build complete."
+      ]
+    }
+  ],
+  "nodeUnitTestsEach": 879,
+  "existingLintWarnings": 15,
+  "functionalBrowserChecks": 24,
+  "axeGroups": 12,
+  "axeVersion": "4.13.0",
+  "builtWorkerGroups": 24,
+  "syntheticWorkerIntercepts": 14,
+  "priorUnaffectedCompatGroups": 70,
+  "priorCompatScope": "Same React hook/interaction harness inputs unchanged; draft40 and correction30 checks retained, not misrepresented as full Worker QA. Fresh actual full Worker24 and backup UI24 qualify the new build.",
+  "focusCause": "Backup dialogs directly focused the retained trigger while history restoration could later focus main H1 after the menu item unmounted. Route restoration and dialog focus shared no priority arbitration.",
+  "focusFix": "Use existing useViewRestoration destination priority in restore and export dialog close handlers.",
+  "beforeFocusFailureEvidence": [
+    "product-qualification-first/webkit/backup-qa.log",
+    "product-qualification-final-control/webkit/focus-timeout.json"
+  ],
+  "originalFocusTimeoutMs": 3000,
+  "focusListenerUsedInFinal": false,
+  "initialFailuresPreserved": [
+    "Original WebKit focus failure twice; diagnostic focus observer pass retained as observer variant.",
+    "Isolated build copied-input omissions and shared braces guard failures preserved in phases18b–18d. Final private braces identical to source; guard not bypassed.",
+    "Initial local D1 startup failed before provider calls. Existing workspaceRoot parameter shortened private runtime base; identical Worker assertions then passed. Original native startup cause remains unconfirmed."
+  ],
+  "oldBuildFilesPreserved": 814,
+  "sourceDistIsHistorical": true,
+  "freshCandidateDist": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-product-build-20261106-phase18-final\\dist",
+  "newSql": 0,
+  "apiBackupSchemaChanged": false,
+  "rootProductChanged": false,
+  "siteAndBindingsChanged": false,
+  "rollback": {
+    "scope": [
+      "app/backup-dialog.tsx",
+      "app/backup-export-dialog.tsx"
+    ],
+    "originalFilesDirectory": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-implementation-20261106\\phase18\\product-before",
+    "method": "Review and restore only these two prior component files, rebuild and rerun affected UI checks; preserve learning state, SQL, reader5 and judgment-v6."
+  },
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "productionLearnerReads": 0,
+  "productionLearnerWrites": 0,
+  "deployment": false,
+  "commitPushPr": false,
+  "physicalIphoneVoiceOver": false,
+  "actualModelQualityMeasured": false,
+  "actualFinalEvaluationFrozen": false,
+  "releaseVerdict": "held",
+  "branchArtifactCleanupDeletions": 0,
+  "ownedRuntimeCleanup": "Stop only owned test processes/listeners and release owned runtime lease files; preserve raw evidence and unmerged branch artifacts.",
+  "proofSha256": "db260aa957068378ea091f6b0d2bb9bc701e67046faa439e4db87f9e20baf232"
+}

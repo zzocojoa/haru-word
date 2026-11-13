@@ -1,0 +1,69 @@
+{
+  "protocol": "ai-quality-v147-risk-decision-proposal-v1",
+  "recordedAtUtc": "2026-11-08T13:40:01.525608+00:00",
+  "task": 34,
+  "scopePreserved": true,
+  "document": "docs/AI_QUALITY_V147_RISK_DECISION_20261108.md",
+  "documentSha256": "e6eea40954534b5aab99c1d6000c90bdb36cde17561a8aab71e961e15ea4e9d4",
+  "ownerChoice": null,
+  "ownerApproval": null,
+  "riskDesignApproved": false,
+  "proposedCriticalRisk": "0.01",
+  "choices": [
+    {
+      "maximumConditionalAiCriticalRisk": "0.05",
+      "familiesPerStratum": 151,
+      "totalFamilies": 906,
+      "upperAtZero": "0.04991596387245864267858044304992165060182000678619221285941500740",
+      "upperAtPrevious": "0.05024023452397905132210453945960306316876472702036990272244742418",
+      "zeroEventPrecisionOnly": true,
+      "independenceUnverified": true,
+      "powerJustified": false
+    },
+    {
+      "maximumConditionalAiCriticalRisk": "0.01",
+      "familiesPerStratum": 770,
+      "totalFamilies": 4620,
+      "upperAtZero": "0.00999122125147370583201097595442913764553043580435393158681018465",
+      "upperAtPrevious": "0.01000414852979921788226983144829484600353340018869094536093885431",
+      "zeroEventPrecisionOnly": true,
+      "independenceUnverified": true,
+      "powerJustified": false
+    },
+    {
+      "maximumConditionalAiCriticalRisk": "0.005",
+      "familiesPerStratum": 1543,
+      "totalFamilies": 9258,
+      "upperAtZero": "0.00499843862144411491533900464495762371654858384337786057978558847",
+      "upperAtPrevious": "0.00500167203095115337384338416895028133219298224771482854345038613",
+      "zeroEventPrecisionOnly": true,
+      "independenceUnverified": true,
+      "powerJustified": false
+    }
+  ],
+  "existingOverallConfidence": "0.95",
+  "existingOneSidedBounds": 114,
+  "observedCriticalAllowance": 0,
+  "majorityMayPass": false,
+  "unresolvedMayPass": false,
+  "sourceQualified": false,
+  "mainDispatchAuthorized": false,
+  "additionalBudgetCapMicros": "35000000",
+  "currentAvailableMicros": "21583226",
+  "newPaidApprovalRequested": false,
+  "newApiCalls": 0,
+  "newCountCalls": 0,
+  "newKeyReads": 0,
+  "goalComplete": false,
+  "priorProofSha256": "52ecb2d1b61e3d9c99d700fefd512bd98ba27ff8c0f609486fa9a353c22b362c",
+  "calculationsFile": "phase79/risk-and-feasibility.json",
+  "calculationsSha256": "1cb7ad0668306aeb14a0b98b009a7db5c283e3aaeaa078c389e2f8778ecfb3b7",
+  "unresolved": [
+    "one conservative target-meaning vote",
+    "owner risk and claim choice",
+    "fresh case/source/exposure qualification",
+    "paired effect and power",
+    "actual frozen request token quote"
+  ],
+  "releaseVerdict": "held"
+}

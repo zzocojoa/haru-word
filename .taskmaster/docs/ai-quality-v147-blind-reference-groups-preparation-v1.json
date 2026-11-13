@@ -1,0 +1,85 @@
+{
+  "protocol": "ai-quality-v147-blind-reference-groups-preparation-v1",
+  "phase": "phase161",
+  "candidateFreezeSha256": "14f2356880a8cd0cffdc0f211a4c541f4fe1e9acd9bff562afcfc5fc521432a8",
+  "ledgerSha256": "3876964fb986b6f903df11a76cc2c11c5ff9238d45018859bca5a268713ff363",
+  "generalAvailableMicros": "576241",
+  "restrictedUnusedMicros": "1322513",
+  "conditionalRemainingMicros": "1898754",
+  "remainingCases": 54,
+  "judgmentSlots": 108,
+  "completedLanguageReviewCasesExcluded": 6,
+  "individualProposedModelCalls": 108,
+  "proposedModelCalls": 3,
+  "proposedCountCalls": 3,
+  "individualCountAllowanceMicros": "3780000",
+  "groupedCountAllowanceMicros": "105000",
+  "requestBytes": [
+    {
+      "model": "gpt-6.1-sol",
+      "bytes": 51407,
+      "itemCount": 36,
+      "outputCeiling": 8192
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "bytes": 49123,
+      "itemCount": 36,
+      "outputCeiling": 8192
+    },
+    {
+      "model": "gpt-6-astra",
+      "bytes": 54077,
+      "itemCount": 36,
+      "outputCeiling": 8192
+    }
+  ],
+  "inputTokensMeasured": false,
+  "totalPriceMeasured": false,
+  "englishTruthCertified": false,
+  "groupedEquivalenceEstablished": false,
+  "referenceRoleQualified": false,
+  "referencesQualified": 0,
+  "collectorImplemented": false,
+  "scopeApproved": false,
+  "newFundingClaimed": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "mainDispatchAuthorized": false,
+  "planHash": "531f7f2da9cc243b07593f5819441badb4f55e6ff960f0780ac2118ff0640eee",
+  "groupedBodiesFile": "grouped-reference-plan.json",
+  "groupedBodiesSha256": "0f11dfa1a509b5466e9282d7f35d32878fcfc2257ab6d15eb23c34d264a0c4fb",
+  "evidenceSha256": {
+    "../phase137/pilot-60-replacement-draft.json": "74cee048579a4405e8099a1f3a4cca6ed5f880c8b8d08d215a6d074016832b57",
+    "../phase137/pilot-60-replacement-capture.json": "6402000a664fe90425118fe5b1aa09949d78f520b2fa72a71cc9d334c38baf85",
+    "../phase146/source-backed-reference-draft.json": "6aa30a8b763a65abee1c337e1ebb67501069b2acd4bef12cf95705cf2277bb1a",
+    "../phase157/noor-admission-audit.json": "81a8b7f2c3b0c31e88ee5d6aa2e4a42aa7c49d9d92a09af641ad7b9bf88e5bb1",
+    "../../../.taskmaster/docs/ai-quality-v147-current-continuation-execution-v1.json": "3ea3b410d5d5045aa9e55b02f191a25fa8bbb60a53d5b8fe9d1b4c8001891b2a",
+    "../phase152/candidate-freeze.json": "14f2356880a8cd0cffdc0f211a4c541f4fe1e9acd9bff562afcfc5fc521432a8",
+    "../../../.taskmaster/docs/ai-quality-v147-evaluation-budget-ledger-v3.json": "3876964fb986b6f903df11a76cc2c11c5ff9238d45018859bca5a268713ff363",
+    "../../../work/ai-quality-v147-20261106/.taskmaster/docs/ai-quality-v147-evaluation-budget-ledger-v3.json": "3876964fb986b6f903df11a76cc2c11c5ff9238d45018859bca5a268713ff363"
+  },
+  "moduleSha256": {
+    "ai-quality-v147-blind-reference-groups-v1.mjs": "d9b1ac97f506bee944e6d76c07376628cc4c1257528241835c5ca91cbfe7df8c",
+    "test-ai-quality-v147-blind-reference-groups-v1.mjs": "5f0cb24fd15435bb21c22b1877e2c0d265fef23505c891b83c002bd6741121ee"
+  },
+  "blockers": [
+    "exact-grouped-scope-approval-required",
+    "funding-reassignment-not-authorized-for-this-scope",
+    "current-input-token-counts-unmeasured",
+    "grouped-collector-not-implemented",
+    "reference-role-controls-unqualified",
+    "exposure-and-family-admission-incomplete"
+  ],
+  "document": "docs/AI_QUALITY_V147_GROUPED_REFERENCE_PREPARATION_20261112.md",
+  "planFile": "outputs/ai-quality-v147-implementation-20261106/phase161/grouped-reference-plan.json",
+  "preparationEvidenceFile": "outputs/ai-quality-v147-implementation-20261106/phase161/preparation-evidence.json",
+  "tasks": [
+    "24.2",
+    "24.3"
+  ],
+  "node22Checks": 8,
+  "node24Checks": 8,
+  "lintExitCode": 0
+}

@@ -1,0 +1,119 @@
+{
+  "atUtc": "2026-11-06T05:22:30.591347+00:00",
+  "task": 21,
+  "checks": [
+    {
+      "name": "report-node-v22.23.4-final",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-report.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 20,
+      "failed": 0,
+      "log": "report-node-v22.23.4-final.log",
+      "sha256": "56a0c1093b0726513dc31603bbec6257ec2b646a989aca1b68c51c50f9f13cab",
+      "evidenceDirectory": "report-node-v22.23.4-final",
+      "numericalComparison": {
+        "referencePoints": 245,
+        "scipyVersion": "1.16.3",
+        "largestAbsoluteError": 4.854172619417341e-13,
+        "actualProviderCalls": 0
+      }
+    },
+    {
+      "name": "report-node-v24.22.1-final",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-report.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 20,
+      "failed": 0,
+      "log": "report-node-v24.22.1-final.log",
+      "sha256": "568448c4185f3c5d439c780188fef183b4f5cc43fad4aaa37b6ca6531aa67cfc",
+      "evidenceDirectory": "report-node-v24.22.1-final",
+      "numericalComparison": {
+        "referencePoints": 245,
+        "scipyVersion": "1.16.3",
+        "largestAbsoluteError": 4.854172619417341e-13,
+        "actualProviderCalls": 0
+      }
+    }
+  ],
+  "lint": {
+    "command": [
+      "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-report.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-report.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+    "exitCode": 0,
+    "warnings": 0,
+    "errors": 0,
+    "log": "report-eslint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-report.mjs": "dc2645e908a8b3dc2db0f01788d468ddc56b4fe959b7105e23d545160f0d0bad",
+    ".taskmaster/scripts/test-ai-quality-v147-report.mjs": "8f806aaf5dc7923a0b18f0ba0575c8adcb4c0395171c22db60c805a0e5a9c777",
+    ".taskmaster/evaluation/ai-quality-v147/risk-reference.json": "aff4dc682563bb833eb5c23f2d2ed06bc8d239bae4307536016ab220ca5c19d7"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6",
+    ".taskmaster/docs/ai-quality-v147-evaluation-design.json": "8f1946ff213b363024311dd6d2b57988c8afc3357640009243b9680ebdd47d9d",
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/docs/ai-quality-v147-decision-contract-v4.json": "823b5c5a14c39ff8cfa423bb83ec3b22b8bebf839ce7e19e0143453f7ba15d79"
+  },
+  "proofBindings": {
+    "report-node-v22.23.4-final/independent-statistics-comparison.json": "9f3d7d79601784d3de775316aabbf7657c928ecf32ee1638f55e5b177079f52b",
+    "report-node-v22.23.4-final/complete-synthetic-pilot-report.json": "4b58bac1caea3890405ac298bc75fac18f292dd6ad64c5853f814cbbdac853ac",
+    "report-node-v22.23.4-final/report-examples.json": "3325fe899ab49578cfb4d1503b964b39d7893c27eb0f36fad845b317ae89c412",
+    "report-node-v24.22.1-final/independent-statistics-comparison.json": "9f3d7d79601784d3de775316aabbf7657c928ecf32ee1638f55e5b177079f52b",
+    "report-node-v24.22.1-final/complete-synthetic-pilot-report.json": "7c1e5d0adfd3ef72ca6a9729677d60c2397046cf52ad4ddae7ca9bb339cef371",
+    "report-node-v24.22.1-final/report-examples.json": "3325fe899ab49578cfb4d1503b964b39d7893c27eb0f36fad845b317ae89c412"
+  },
+  "independentReferencePoints": 245,
+  "referenceScipyVersion": "1.16.3",
+  "referenceFunctionFile": "scipy-installed-exact-ci.py",
+  "referenceFunctionSha256": "61fd7bb403aaa5ffea0e58a3511280c6a0f60cb3aab3e5d919ce806cfea45aa7",
+  "actualProviderCalls": 0,
+  "actualPaidApprovalUsd": 0,
+  "actualModelQualityMeasured": false,
+  "riskDesignApproved": false,
+  "liveRunnerIntegrated": false,
+  "releaseVerdict": "held",
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "offline fixed-denominator aggregation and conditional risk calculation verified",
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase11/report-checks.json",
+  "proofSha256": "a0ffbd7cc3989790629105b270ee85b6b48f37f3c6778e5ef26f064ff8ae0a65",
+  "collection": "Model60 and strata20/25/15 remain planned denominators. Missing/unknown/not-run/app rejection/judge unavailable are retained separately,never reclassified as English errors. Per-domain/stratum/family/repetition collection counts are separate.",
+  "review": "Raw,review and adjudicated remain separate and hash-bound. Every valid visible output requires review/resolution. Missing raw cannot be manufactured by review; unresolved decisions remain unmeasured. Credential independence remains unverified.",
+  "paired": "Same planned case/model/repetition baseline/candidate. English regression and availability loss are separate; unknown availability is unmeasured,not known loss or gain.",
+  "risk": "Conditional one-sided Clopper-Pearson upper endpoint for a family-union event only under a declared iid family sampling model and fully measured families. Related cases,repeats,models and critical types are not independent sample increments. Unverified sampling or missing evidence => null upper. Hash declarations are not approval or sampling certification.",
+  "pilot": "57/60 and18/20,23/25,14/15 are pilot screening only; critical0/paired regression0 are explicit. Actual language quality/release/production qualification remain held.",
+  "limitations": [
+    "All test grades are fabricated arithmetic fixtures; no new evaluation corpus or provider responses collected.",
+    "No confidence level,maximum critical risk,sample size or family independence approval is inferred from numeric fixtures. T34/T35/T36/T40 remain required.",
+    "Current report consumes sealed metadata and proof hashes,not raw answers. T22 integrated executor still pending.",
+    "Independent qualified English review and learner comprehension/transfer require T37 evidence; identifiers do not certify credentials."
+  ],
+  "primarySources": [
+    {
+      "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/binom.test.html",
+      "purpose": "Exact binomial interval and its assumptions; one-sided upper calculation uses SciPy alternative less."
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats._result_classes.BinomTestResult.proportion_ci.html",
+      "purpose": "Exact Clopper-Pearson method; independent numeric fixture generated by installed SciPy1.16.3,not currently published docs version."
+    }
+  ]
+}

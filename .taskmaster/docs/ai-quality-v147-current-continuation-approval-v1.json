@@ -1,0 +1,21 @@
+{
+  "protocol": "ai-quality-v147-current-continuation-approval-v1",
+  "approved": true,
+  "approvedOn": "2026-11-12",
+  "userMessage": "기존 한도 유지·재배정 및 48회 승인",
+  "userQuestionScope": "기존 추가 US$35 한도 유지. 보정 전용 미사용 US$5.078796 재배정과 일반 가용액 최대 US$0.611241을 합해 최대 US$5.690037으로 AI 응답 48회·입력 토큰 계산 48회. 입력을 모두 먼저 계산하고 측정 견적이 한도를 넘으면 모델 전송 0회에서 중단.",
+  "scopeSha256": "6cf67ef8c2cc54f26b73c314bbe9de7b5e4747ab6c39ebe9118e0e75c6b5a8ae",
+  "collectorSha256": "67b1383be5c7a95ab05a728d247ca798bb1de626c70235dc5e6edc4c1f407304",
+  "runnerSha256": "181f0414e18bd59077d7cf35b986e5e985c6ae11ea735deaf66d85cdf2246ceb",
+  "profileSha256": "f469201331ddfc76f7474741c3c280b985d81dba597d9720e51cb1c7433a0311",
+  "maximumCombinedMicros": "5690037",
+  "restrictedMaximumMicros": "5078796",
+  "generalMaximumMicros": "611241",
+  "expectedModelCalls": 48,
+  "expectedCountCalls": 48,
+  "reassignUnusedEarmark": true,
+  "existingBudgetOnly": true,
+  "actualInputsFirst": true,
+  "automaticRetry": false,
+  "mainDispatchAuthorized": false
+}

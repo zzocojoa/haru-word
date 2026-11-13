@@ -1,0 +1,48 @@
+{
+  "protocol": "ai-quality-v147-revised-pilot-dispatch-preflight-v1",
+  "evidenceHash": "5e003e5d48e128186d7e9b1f7826b656668828379430dbf11712c0a4166e1026",
+  "status": "held",
+  "plannedGenerations": 360,
+  "plannedReviews": 1440,
+  "syntheticReviewBodies": 1428,
+  "unavailableReviewBodies": 12,
+  "availableMicros": "1152100",
+  "oneCaseGenerationFloorMicros": "795728",
+  "oneCaseReviewFloorMicros": "1425728",
+  "oneCaseConcurrentFloorMicros": "2221456",
+  "reviewShortfallMicros": "273628",
+  "blockers": [
+    "exact-pilot-execution-approval-required",
+    "actual-app-review-bodies-unavailable",
+    "references-incomplete",
+    "current-screen-calibration-pending",
+    "one-case-review-reservation-exceeds-balance"
+  ],
+  "referencesQualified": 0,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "phase": "phase139",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "negativeSourceCollectorChecks": 2,
+  "sourceFollowupScopeSha256": "cc7a28c879ca9b4234908180c87a0690d80586e3022567fc27e841e9279cd496",
+  "sourceFollowupReserveMicros": 97209,
+  "sourceFollowupAuthorized": false,
+  "noRuntimeCreated": true,
+  "tasks": [
+    "24.4",
+    "34.3"
+  ],
+  "document": "docs/AI_QUALITY_V147_REVISED_PILOT_DISPATCH_PREFLIGHT_20261109.md",
+  "sourceToolSha256": {
+    ".taskmaster/scripts/ai-quality-v147-revised-pilot-dispatch-preflight-v1.mjs": "3a8d03a98b5f52f23a22e460fb03cfb95b72637cbbc7b5bbeab83a0d8bb25d8b",
+    ".taskmaster/scripts/test-ai-quality-v147-revised-pilot-dispatch-preflight-v1.mjs": "cb2e18c16d2c2b5974dd41c2dade6faebeab3098d1ef25af0a6a2905d5470903"
+  },
+  "evidenceSha256": {
+    "dispatch-preflight.json": "92aa8d243f5bbfeaaf9c050399672747761dd7d2c61525fe54b4ddf3a8450f5e",
+    "verify-dispatch-preflight.mjs": "ce64431edda3807280e9b9c42ad4c8c2240b6fc8ecd294c986cb44f1160f9228",
+    "node22.log": "28985ec228a3c8b6c73357207483f2fe73d3a2983fb0506c2a0a1d75eeecb061",
+    "node24.log": "f95360acc6decdc1c06dd4b45e1d8aee9674ed1ba2f321dd789a26d65a2f4fa7"
+  }
+}

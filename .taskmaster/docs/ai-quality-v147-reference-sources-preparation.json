@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "stage": "primary-sources-and-public-qualification-candidates",
+  "recordedAtUtc": "2026-11-07T01:26:17.937767+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "sourceCount": 18,
+  "lessonBindings": 15,
+  "publicControlCandidates": 6,
+  "anonymousExposureInventoryAvailable": false,
+  "exposureGapObserved": true,
+  "allLessonRulesGrounded": false,
+  "wordDomainSourcesPrepared": false,
+  "actualReferenceControlsQualified": false,
+  "fullSevenDimensionGradesFrozen": false,
+  "actualEnglishQualityMeasured": false,
+  "actualFinalCorpusFrozen": false,
+  "actualInputTokensMeasured": false,
+  "liveDispatchAuthorized": false,
+  "credentialChoice": "reuse-existing",
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "releaseVerdict": "held",
+  "sourceCatalogFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+  "controlCandidatesFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+  "document": "docs/AI_QUALITY_V147_REFERENCE_SOURCES_20261107.md",
+  "documentSha256": "2c183ffce8f98f04fd40b6802fd5ab22824e30d0efe2bda14df4045c66aa55df",
+  "implementationSha256": {
+    ".taskmaster/scripts/check-ai-quality-v147-reference-sources.mjs": "007e4081e29967f06ddf4818949ad6c9e8b05d4547a9626180c6d8a8bfc9c281"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": "b40aa8251bc66e98603b6af273566acdf8621bd4aaacdf40d768c1d27357e128"
+  },
+  "sourceBindings": {
+    "data/grammar-index.json": "5992b60d2a33c5eaae4a9c1105f17bc7ea8a17c8496de76263cdb0a2f8ea3b35",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "b9e43d484184fd38197527f74cf549d13cc417f8b78c8a08d2f6099006df5c13",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a"
+  },
+  "checks": [
+    {
+      "name": "source-node22",
+      "exitCode": 0,
+      "log": "source-node22.log",
+      "sha256": "e0a6ae8c5f8a8f60017bac71e853b723ae7147ad39422dae0c545ab5c232d1ab"
+    },
+    {
+      "name": "source-node24",
+      "exitCode": 0,
+      "log": "source-node24.log",
+      "sha256": "e0a6ae8c5f8a8f60017bac71e853b723ae7147ad39422dae0c545ab5c232d1ab"
+    }
+  ],
+  "evidenceSha256": {
+    "source-node22/reference-source-results.json": "ac1aadb472cb82b017799a916dfda8c8795b4f26e3855de4fc1bfbca1c4ec022",
+    "source-node24/reference-source-results.json": "75a881f5b63b370530387eda9b5aebcfb9b44d7919d57344cc3964e36581bec1",
+    "primary-source-fetch-first.json": "a23bdbfb75e0a8f6ae343a05f17e1ee7f8a838183594ed33804ecf9f3a0ec92a",
+    "primary-source-fetch-retry.json": "8014aaf7e1617070612785ea18ba6d8a24ac0ec7d666d847a0a4565d8d8f5065",
+    "catalog-build.json": "1c0593b07bbde0fa353615553617e2e80a479d744836cad0b0f5549991cc430a"
+  },
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

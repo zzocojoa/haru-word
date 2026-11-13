@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "atUtc": "2026-11-06T11:21:09.802263+00:00",
+  "task": 22,
+  "stage": "v3-staged-budget-state-kernel",
+  "task22Complete": false,
+  "checks": [
+    {
+      "name": "budget-v3-node-v22.23.4-final",
+      "passed": 19,
+      "failed": 0,
+      "exitCode": 0,
+      "log": "budget-v3-node-v22.23.4-final.log",
+      "sha256": "76b088c936158497dbde62ed2788e2bb780c4020ca1d6934f83b917197a0484a",
+      "evidenceDirectory": "budget-v3-node-v22.23.4-final"
+    },
+    {
+      "name": "budget-v3-node-v24.22.1-first",
+      "passed": 19,
+      "failed": 0,
+      "exitCode": 0,
+      "log": "budget-v3-node-v24.22.1-first.log",
+      "sha256": "a3499a99b2217ee340c727df0c2484c6f685db9315e7c05549fcbeb2eb41aa78",
+      "evidenceDirectory": "budget-v3-node-v24.22.1-first"
+    }
+  ],
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3-fixture.mjs": "b5d89c99e0c663c241357a83a6acfbac0ea94fed16b54731b26af4fd98e4aae0",
+    ".taskmaster/scripts/test-ai-quality-v147-budget-v3.mjs": "6b082940e7e77090c3ed140d0cd8720654f964a87148c32853aa95f8f06af4b9",
+    ".taskmaster/evaluation/ai-quality-v147/v3-cost-reference-vectors.json": "d228c956a4836ca51301a45e8dad73eee7aab63c91785821ff251325cfffd76f"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6",
+    ".taskmaster/scripts/ai-quality-v147-budget-v2.mjs": "830ea9dc169010ee968282d664754488c126657b6d29c1e3e4cb1e8c074c2bb4",
+    ".taskmaster/scripts/ai-quality-v147-journal-v2.mjs": "9068d018cb2d6b24b600237d1bf2be1a88d388543449e131ac3e1615cefefafd",
+    ".taskmaster/scripts/ai-quality-v147-ai-panel.mjs": "08ade591043fe5ee392dd0b41fd3cba0c2a2ad2039a324a4aa982dc7facc780e",
+    ".taskmaster/docs/ai-quality-v147-ai-review-policy.json": "91c18fcbb954f1df8fe5ad1fc551534ed6573c22e33f13c27a2e23d3884cdcd3"
+  },
+  "proofBindings": {
+    "v3-budget-raw-preservation.json": "33a76322b1c63acccb9d3dd61de1d4515165e3f128395d04a60114b9bf76b4fb",
+    "product-regression-reuse.json": "5f9948ef7026d7c1e26752372203a99adb5d076ab2201d6200f51c2801e329c4",
+    "generate-cost-references.py": "14d604df153e322781b128cfbe08824308d5851bb3683aca89a3c42e7a83fc1d",
+    "budget-v3-lint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "budget-v3-lint.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "budget-v3-node-v22.23.4-final.log": "76b088c936158497dbde62ed2788e2bb780c4020ca1d6934f83b917197a0484a",
+    "budget-v3-node-v22.23.4-final.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "budget-v3-node-v22.23.4-final/budget-v3-observations.json": "debeed53fae8e9e3a4c3b17d4de318d47e1cb71b35922fd6c545611ececf54aa",
+    "budget-v3-node-v24.22.1-first.log": "a3499a99b2217ee340c727df0c2484c6f685db9315e7c05549fcbeb2eb41aa78",
+    "budget-v3-node-v24.22.1-first.exit.json": "ea61d7736f0b7ecb9b35158f03de77013db6b100cf1d36c957e78e6c8817c5b6",
+    "budget-v3-node-v24.22.1-first/budget-v3-observations.json": "4da5cbe862b798f7b9e4288919b5a8784c55440755ce59a27d14685dc86bdc87"
+  },
+  "independentFractionReferences": 120,
+  "newProtocol": "ai-quality-v147-panel-v3",
+  "stages": {
+    "reference-preparation": {
+      "referenceDraft": 60,
+      "referenceReview": 120,
+      "total": 180
+    },
+    "pilot-panel": {
+      "generation": 360,
+      "review": 1440,
+      "calibration": 72,
+      "total": 1872
+    }
+  },
+  "combinedDraftSlots": 2052,
+  "separateStageApprovalRequired": true,
+  "oldBalanceTransferAllowed": false,
+  "wholeDraftGroup": 3,
+  "wholeGenerationGroup": 5,
+  "singleCurrentInMemoryHead": true,
+  "overflowExposureUsesGreaterObservedOrReserved": true,
+  "realProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "actualTokenBoundVerified": false,
+  "actualWireEqualityVerified": false,
+  "durableStoreImplemented": false,
+  "providerReceiptAuthenticated": false,
+  "approvalEvidenceAuthenticated": false,
+  "actualModelQualityMeasured": false,
+  "calibrationGradeGateImplemented": false,
+  "actualFinalEvaluationFrozen": false,
+  "liveDispatchSupported": false,
+  "currentRealApprovalCap": null,
+  "releaseVerdict": "held",
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "budget-v3-lint.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "Only in-memory budget/state qualification andmetadata binding;exact derived body,physical capture and durable recovery still require new integration.",
+    "Calibration collection completion is enforced;calibration grade thresholds are not yet connected to the new runtime.",
+    "Numeric quotes/approvals/usages in tests are synthetic,not real financial authority or receipt provenance.",
+    "180prep and1872main are a pilot draft;fresh corpus,stage-specific freeze/quote/token bound andrisk/sample owner decisions remain unapproved."
+  ],
+  "proofSha256": "6ef1be853d63120dacf392093044d70c433189c4ebf2c71623071f79c46a6f3a"
+}

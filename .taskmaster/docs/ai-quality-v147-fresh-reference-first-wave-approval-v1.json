@@ -1,0 +1,14 @@
+{
+  "protocol": "ai-quality-v147-fresh-reference-first-wave-approval-v1",
+  "approved": true,
+  "scopeSha256": "8b99aa00dce5717f3d550ae68261c6b87d549c469c3a18338fa490b9f333f266",
+  "expectedModelCalls": 12,
+  "expectedCountCalls": 12,
+  "maxMicros": 1249116,
+  "userMessage": "승인한다. 기존 예산에서 US$1.249116 한도로 첫 6문항의 AI 검토 12회와 입력 토큰 계산 12회를 진행해라.",
+  "authorizedAtUtc": "2026-11-09T06:09:59.060777+00:00",
+  "existingBudgetOnly": true,
+  "caseCount": 6,
+  "automaticRetry": false,
+  "mainDispatchAuthorized": false
+}

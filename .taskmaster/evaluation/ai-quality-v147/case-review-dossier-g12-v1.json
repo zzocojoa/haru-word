@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "protocol": "ai-quality-v147-case-review-dossier-v1",
+  "stage": "direct-public-case-diagnostic-preparation-not-regrading",
+  "recordedAtUtc": "2026-11-07T04:53:04.696793+00:00",
+  "goldCaseId": "G12",
+  "witnessId": "N04",
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+    ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+    ".taskmaster/evaluation/ai-quality-v147/semantic-reference-audit-v1.json": "28647e0041705ab9664686b94e47e0dc71972cdbc496e017c0fc63c099d4dbd3",
+    ".taskmaster/evaluation/ai-quality-v147/reference-controls-v2.json": "0ed8af4e6bc8dc78da416b3fdf1e13eb3ccffed5c0cc4231c4d01505dd8718c0"
+  },
+  "oldGoldRowSha256": "d7ac554cbb947a2cc05a8b94fa2c80d4e6c6897effec55557e00ae65ed605265",
+  "oldWitnessRowSha256": "efe41a69d8ad042d00f5167e5c285afbb3ae0254b5fb239504b6e5445809db2c",
+  "existingSourceIds": [
+    "quiet-cambridge",
+    "quiet-mw",
+    "manner"
+  ],
+  "additionalSource": {
+    "id": "quietly-oxford",
+    "url": "https://www.oxfordlearnersdictionaries.com/definition/english/quietly",
+    "checkedAt": "2026-11-07T04:53:04.696793+00:00",
+    "status": null,
+    "rawPageSha256": null,
+    "method": "Official Oxford dictionary search extraction;direct web open HTTP403;not a full-page capture.",
+    "excerpts": [
+      "to ask/speak/talk quietly"
+    ],
+    "excerptWords": 3,
+    "contentSha256": "21f4c9b332e967bbde76d1e1dbce2c7d83c978a532dd1f69213399077a947e4b",
+    "contentHashScope": "Checked selected editorial collocation excerpt only;not full page.",
+    "fullCopyrightedPagePersisted": false,
+    "actualEnglishTruthCertified": false,
+    "captureFile": "phase41/case-source-oxford-excerpt.json",
+    "captureSha256": "ad8b7377912186f73a6b6786c7b1b2344e2e2e713188f3f36fdb1ae71dcc7511"
+  },
+  "questions": [
+    {
+      "id": "quiet-adverb-attestation",
+      "prompt": "Does the supplied evidence attest quiet as an adverb? Do not equate lexical attestation with exact-construction acceptability."
+    },
+    {
+      "id": "speak-quietly-collocation",
+      "prompt": "Does the supplied evidence support speak quietly as a manner collocation? This does not alone prove the original is an error."
+    },
+    {
+      "id": "exact-original-register",
+      "prompt": "Do the supplied sources establish the exact original construction as natural or erroneous for a declared variety/register? State what is not established."
+    },
+    {
+      "id": "categorical-original-error",
+      "prompt": "Is the categorical target/grammar-error reference justified with the currently undeclared variety/register? Do not turn a common teaching form into a universal ban."
+    },
+    {
+      "id": "visible-is-speaking-edit-claim",
+      "prompt": "Does the actual N04 visible explanation claim that the unchanged is speaking was edited or explain such an edit? Inspect the exact feedback words rather than an older rationale."
+    }
+  ],
+  "registerPolicyChosen": false,
+  "newGradeOrOldScoreAssigned": false,
+  "newDiagnosticReviewRequestsProposed": 6,
+  "publicControlReviewRequestsProposed": 36,
+  "combinedDiagnosticRequestsProposed": 42,
+  "combinedDiagnosticInputCountIntents": 42,
+  "includedIn180Or1872": false,
+  "countFeesVerified": false,
+  "paymentQuoteReady": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "actualRoleQualificationMeasured": false,
+  "actualEnglishQualityMeasured": false,
+  "humanReviewed": false,
+  "liveDispatchAuthorized": false,
+  "newPaidApprovalUsd": 0,
+  "officialCountPricingEvidenceFile": "phase41/official-count-pricing-evidence.json",
+  "officialCountPricingEvidenceSha256": "e6b34c18a3b9216032b6137059a684f5cd7f9226854b916bace1b7958ccc9073",
+  "scope": "DirectlyreviewG12claimsandactualN04visiblefeedback,notanewexamplewritingtask;alloldrows/scoresretained. ExactoriginalregisterandactualAIjudgmentsremainunresolved."
+}

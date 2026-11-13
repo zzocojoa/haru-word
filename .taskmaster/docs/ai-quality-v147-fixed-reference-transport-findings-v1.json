@@ -1,0 +1,30 @@
+{
+  "protocol": "ai-quality-v147-fixed-reference-transport-findings-v1",
+  "priorIncomplete": 3,
+  "patternFreeCompleted": 2,
+  "priorPatternedCalls": 3,
+  "observedAssociationOnly": true,
+  "generalCausalProof": false,
+  "outputCapIncreaseAloneFailed": true,
+  "booleanEnumRemovalAloneFailed": true,
+  "patternsRemovedCompletedWithBooleanEnumRetained": true,
+  "patternsAndBooleanEnumRemovedCompleted": true,
+  "sameFixedInputAndInstructions": true,
+  "noAutomaticRetryOrResume": true,
+  "referenceVotes": 0,
+  "englishTruthCertified": false,
+  "runtimeTerminals": [
+    {
+      "file": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-fixed-reference-stage-1-v1-runtime-20261109\\terminal.json",
+      "sha256": "27f574ddeefc18ff82320f25333ea965f552458f53cf094aa66224b980047188"
+    },
+    {
+      "file": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-fixed-reference-diagnostic-v1-runtime-20261109\\terminal.json",
+      "sha256": "a8608c74782f132ded489270439160df0d770f73f3f33033139fb64b2383504f"
+    },
+    {
+      "file": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-fixed-reference-diagnostic-v2-runtime-20261109\\terminal.json",
+      "sha256": "176e1e4c489fc20a5f34ff12859141cf3ef169d2b077bb19157a6ac76a0240e2"
+    }
+  ]
+}

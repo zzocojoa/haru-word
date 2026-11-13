@@ -1,0 +1,20 @@
+{
+  "protocol": "ai-quality-v147-guard-browser-submit-v1",
+  "phase": "phase125",
+  "tasks": [
+    "8.2",
+    "26.1"
+  ],
+  "browserSubmissions": 4,
+  "syntheticProviderRequests": 4,
+  "actualProviderCalls": 0,
+  "productionWrites": 0,
+  "mainDispatchAuthorized": false,
+  "document": "docs/AI_QUALITY_V147_GUARD_BROWSER_SUBMIT_20261109.md",
+  "evidenceSha256": {
+    "submit.json": "f21724176bd6306f422c00af9c23bd890a441ebedce37708c3f5aeb5e5a2db9e",
+    "submit.log": "884ce026f56f644964548500cc051df36b936e6e35d14233f4088b5737269b7e",
+    "submit-final.log": "4836435d67e964551ed4ea55b866008a9fd39c2c50d5046634da4eb28943d751",
+    "verify-submit.mjs": "110130b8d12f8fbda21dae89040d164442990ad9ccf6568a7b757347b1ba6424"
+  }
+}

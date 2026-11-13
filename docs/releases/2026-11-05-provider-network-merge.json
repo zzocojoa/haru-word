@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-04T23:34:15.703Z",
+  "status": "merged-main-ci-passed",
+  "repository": "zzocojoa/haru-word",
+  "pullRequest": {
+    "number": 57,
+    "url": "https://github.com/zzocojoa/haru-word/pull/57",
+    "state": "closed",
+    "merged": true,
+    "mergedAt": "2026-11-04T23:30:55Z",
+    "head": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+    "base": "32dc3b8cc99e239260925e901e6477e42a1fc047"
+  },
+  "merge": {
+    "sha": "5609a8e6fa7d148ff4cf6582ae20fe0ed2669171",
+    "method": "merge",
+    "expectedHead": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+    "message": "Pull Request successfully merged",
+    "parents": [
+      "32dc3b8cc99e239260925e901e6477e42a1fc047",
+      "f1395c045b5a1dda193bce343d9d59bbba3785b4"
+    ],
+    "tree": "5633ba2d3d7a1c36cf00f4f6296f89a59eaacbfa",
+    "exactPrTree": true,
+    "remoteMainFetchedAndMatches": true
+  },
+  "authorization": {
+    "userText": "병합이 가능한지 확인한 후 진행 해라",
+    "scope": "Check current PR57 mergeability then merge if eligible; no new Site deployment or paid evaluation."
+  },
+  "preMerge": {
+    "draft": false,
+    "mergeable": true,
+    "mergeStateStatus": "CLEAN",
+    "headUnchanged": true,
+    "baseUnchanged": true,
+    "reviews": [],
+    "threads": [],
+    "comments": [],
+    "checks": [
+      {
+        "id": 126931057059,
+        "name": "Validate (Node 24)",
+        "head_sha": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/zzocojoa/haru-word/actions/runs/41932032263/job/126931057059",
+        "output": {
+          "title": null,
+          "summary": null,
+          "text": null,
+          "annotations_count": 10
+        }
+      },
+      {
+        "id": 126931056599,
+        "name": "Validate (Node 22)",
+        "head_sha": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/zzocojoa/haru-word/actions/runs/41932032263/job/126931056599",
+        "output": {
+          "title": null,
+          "summary": null,
+          "text": null,
+          "annotations_count": 10
+        }
+      },
+      {
+        "id": 126930500589,
+        "name": "Validate (Node 22)",
+        "head_sha": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/zzocojoa/haru-word/actions/runs/41931868679/job/126930500589",
+        "output": {
+          "title": null,
+          "summary": null,
+          "text": null,
+          "annotations_count": 10
+        }
+      },
+      {
+        "id": 126930500205,
+        "name": "Validate (Node 24)",
+        "head_sha": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/zzocojoa/haru-word/actions/runs/41931868679/job/126930500205",
+        "output": {
+          "title": null,
+          "summary": null,
+          "text": null,
+          "annotations_count": 10
+        }
+      }
+    ],
+    "adminBypass": false,
+    "reviewsDismissed": 0
+  },
+  "mainCi": {
+    "runId": 41934313518,
+    "url": "https://github.com/zzocojoa/haru-word/actions/runs/41934313518",
+    "event": "push",
+    "head": "5609a8e6fa7d148ff4cf6582ae20fe0ed2669171",
+    "allJobsSucceeded": true,
+    "jobs": [
+      {
+        "id": 126938814533,
+        "name": "Validate (Node 22)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 41934313518,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Use the project npm version",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run unit tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check reviewed grammar content",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check types",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Build Worker",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Post Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          }
+        ]
+      },
+      {
+        "id": 126938815114,
+        "name": "Validate (Node 24)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 41934313518,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Use the project npm version",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run unit tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check reviewed grammar content",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check types",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Lint",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Build Worker",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Set up Node.js",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Post Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "gitDiffPrHeadToMergeExit": 0,
+    "sourceCheckoutClean": true,
+    "sourceBranchPreserved": "codex/provider-network-evaluation-20261104",
+    "localBranchHeadPreserved": "f1395c045b5a1dda193bce343d9d59bbba3785b4",
+    "rootProductFilesPreserved": 637,
+    "oldEvaluationFilesPreserved": 32,
+    "taskMasterTagsPreserved": [
+      "master",
+      "judgment-remediation",
+      "integration-remediation"
+    ],
+    "frozenEvaluationFilesPreserved": 5,
+    "closedBudgetPreserved": true,
+    "localVerification": "outputs/provider-network-evaluation-20261104/github-merge-local-verification.json"
+  },
+  "operational": {
+    "additionalDeployments": 0,
+    "newPaidCalls": 0,
+    "productionQaWrites": 0,
+    "secretOrAccessChanges": 0,
+    "branchDeletes": 0,
+    "checkoutSwitches": 0,
+    "lastVerifiedSiteVersion": 145,
+    "physicalDeviceDeferredByUser": true,
+    "physicalDeviceTested": false
+  },
+  "unverified": [
+    "User-deferred physical device and VoiceOver",
+    "Authenticated production OpenAI request after deployment",
+    "Independent human English-quality certification"
+  ],
+  "evidenceRoot": "outputs/provider-network-evaluation-20261104"
+}

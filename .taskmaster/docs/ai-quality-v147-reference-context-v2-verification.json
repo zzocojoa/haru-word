@@ -1,0 +1,67 @@
+{
+  "protocol": "ai-quality-v147-reference-context-v2-verification",
+  "phase": "phase211",
+  "status": "prospective-reference-encoding-aligned-original-quality-holds-preserved",
+  "parentTaskId": 24,
+  "activeSubtaskId": "24.2",
+  "supportingSubtaskIds": [
+    "24.1",
+    "24.3"
+  ],
+  "decisionContractFile": ".taskmaster/docs/ai-quality-v147-decision-contract-v8.json",
+  "wordEncodingFile": ".taskmaster/scripts/ai-quality-v147-bilingual-reference-v2.mjs",
+  "grammarEncodingFile": ".taskmaster/scripts/ai-quality-v147-blind-reference-inspection-v3.mjs",
+  "prospectiveDecodedProposalsFile": "outputs/ai-quality-v147-implementation-20261106/phase211/prospective-proposals-decoded.json",
+  "previouslySupportedProposals": 7,
+  "previousEncodingAcceptedProposals": 5,
+  "prospectiveEncodingAcceptedProposals": 7,
+  "additionalEnglishJudgments": 0,
+  "actualProductResponseEncodingChecks": 2,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "newSpendUpperMicros": "0",
+  "conditionalRemainingMicros": "68542",
+  "currentPaidFundingFile": ".taskmaster/docs/ai-quality-v147-context-candidate-actual-v1.json",
+  "qualifiedReferences": 0,
+  "referencesQualified": 0,
+  "pilotGenerationsCompleted": 0,
+  "pilotGradesCompleted": 0,
+  "mainDispatchAuthorized": false,
+  "oldScoresChanged": false,
+  "frozenReferenceCodeChanged": false,
+  "wordRequestCompilerAligned": true,
+  "grammarEncodingInstructionAligned": true,
+  "newGroupedGrammarRequestsPrepared": false,
+  "checks": {
+    "focused": {
+      "command": "node --test --test-reporter=spec work/ai-quality-v147-20261106/.taskmaster/scripts/test-ai-quality-v147-reference-context-v2.mjs",
+      "passed": 6,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js <two new encodings and focused test>",
+      "exitCode": 0
+    },
+    "productBuildRepeated": false
+  },
+  "evidenceSha256": {
+    ".taskmaster/docs/ai-quality-v147-decision-contract-v8.json": "da05d424a82685591d811467e024f8250884c9bfe51ba896d5ce6aa180c1fadd",
+    ".taskmaster/scripts/ai-quality-v147-bilingual-reference-v2.mjs": "929f91e3b939f4b450a4c7b0b8da3cfede716b51d49b3ab64174d371f2315756",
+    ".taskmaster/scripts/ai-quality-v147-blind-reference-inspection-v3.mjs": "a09cc2bb6b8e22e33a297cdff5c2d84a8a7a366bcc007baefaef718481444136",
+    ".taskmaster/scripts/test-ai-quality-v147-reference-context-v2.mjs": "4f300c4f23ec3d7afcf6aa011c8628ad5d9cb738535c5dd6784993eea4c7d80b",
+    "outputs/ai-quality-v147-implementation-20261106/phase211/prospective-proposals-decoded.json": "7cb89876f79e52091835f6b756f2464d43b5efe648bc72bcb07c7dfec84e525d",
+    ".taskmaster/docs/ai-quality-v147-context-candidate-actual-v1.json": "5dda3569e38c1a8db521e14c9d1dfe3d194a002bd3fd28ce73ebd5a5c8f11e1c",
+    ".taskmaster/docs/ai-quality-v147-grammar-context-candidate-v1.json": "bd261e102da62a54b44117c6126ede56ad29360cc257e3252909cc82605e8fee",
+    "outputs/ai-quality-v147-implementation-20261106/phase211/billing-observation.json": "9d0d30b3501925a0309c4e77c215561f306a142aca9361b4737fe19df49b3ae6",
+    "outputs/ai-quality-v147-implementation-20261106/phase211/billing-observation.png": "144ce70466a19be02a620e6fdf932426a2fe171343e6bcf1031efe2d0cd6a356"
+  },
+  "remaining": [
+    "Seven decoded proposals remain unqualified: language support is one additional same-provider review, and family/exposure/source holds remain.",
+    "The two disputed language cases and prior nine pair holds were not converted into formal passes.",
+    "Prospective grammar request packing and whole-candidate evaluation still require alignment before any new frozen dispatch."
+  ],
+  "billingObservationFile": "outputs/ai-quality-v147-implementation-20261106/phase211/billing-observation.json",
+  "billingObservationFundsReleased": false
+}

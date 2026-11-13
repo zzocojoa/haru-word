@@ -1,0 +1,106 @@
+{
+  "pilotCases": 60,
+  "knownSurfaceHashes": 1082,
+  "newlyQuarantinedSurfaces": 129,
+  "changedProgramFiles": 10,
+  "knownScaffoldCases": 12,
+  "awaitingIndependenceReview": 46,
+  "excludedPilotReuseCases": 60,
+  "excludedScaffoldAliases": 12,
+  "admittedIndependentFamilies": 0,
+  "minimumFamiliesPerStratum": 770,
+  "illustrativeVariantCount": 1,
+  "illustrativeRepeatCount": 2,
+  "volume": {
+    "familyUnits": 4620,
+    "generation": 55440,
+    "reviewsPerGeneration": 4,
+    "individualReviews": 221760,
+    "generationAndReviewSlots": 277200,
+    "excludesReferenceReviewCalibrationAndInputCounts": true,
+    "dispatchAuthorized": false
+  },
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "independenceVerified": false,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "protocol": "ai-quality-v147-confirmation-preflight-v1",
+  "phase": "phase136",
+  "tasks": [
+    "34.2",
+    "34.3",
+    "24.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_CONFIRMATION_PREFLIGHT_20261109.md",
+  "exposedPilotCases": 2,
+  "heldGenerationBodies": 12,
+  "heldReviewBodies": 4,
+  "freshPilotReplacementsAdmitted": 0,
+  "freshPilotAdmissionHeld": true,
+  "quarantinedCases": [
+    {
+      "caseId": "fresh-grammar-needsCorrection-04",
+      "allocationSlot": 4,
+      "origin": "current-regression-test",
+      "origins": [
+        {
+          "file": "tests/ai-quality-morphology.test.mjs",
+          "line": 28,
+          "sourceSha256": "cad3b0c59aa9a9a985be4ec113d1fa50b49cff39f3e87007fba7249420f1abef"
+        }
+      ],
+      "evaluationRole": "development-regression-only",
+      "freshReferenceEligible": false,
+      "generationBodySha256": [
+        "5502195036959e66b85c7080f6418cf409c36ea553264681452c6107714d2993",
+        "38987f44e7917944baa0f316b26cdce5c1d9fa057389b457817cd6cdbad91018",
+        "b298e3bcb14b3d6014d23653df7ccf6988947ce5ad0095a2f223c16fca4f2e21",
+        "a15c1f521e401ec7b8620949f851a8ac106a92eb238d8a084269397368377964",
+        "b54e44eab55550ef503258dbd4438e3e8f4ceee8a2a938892facae40fa9909a7",
+        "a541f218887c176c3f720ba53a07d046c9fa66d73c7bd1a68b3a85c3afd26cc0"
+      ],
+      "reviewBodySha256": [
+        "051962e8736c6dacba9776c6386bcb4f2e070d8fcdb5b95393a7eb8362b0b5dc",
+        "2f8a8bc8bec22ae961082c4773d0e1f9f3a010903c83e971cebf221cfe0fae8b"
+      ]
+    },
+    {
+      "caseId": "fresh-word-needsCorrection-06",
+      "allocationSlot": 6,
+      "origin": "current-regression-test",
+      "origins": [
+        {
+          "file": "tests/ai-quality-morphology.test.mjs",
+          "line": 30,
+          "sourceSha256": "cad3b0c59aa9a9a985be4ec113d1fa50b49cff39f3e87007fba7249420f1abef"
+        }
+      ],
+      "evaluationRole": "development-regression-only",
+      "freshReferenceEligible": false,
+      "generationBodySha256": [
+        "2558fd85e824a1bb82f66cca3b7fc79b63dda0dd893ded7d04616b9c97b61145",
+        "812d0a1241487a9813093f7c90f656ad1c7084b81a95d064a0fb2b87bac7d796",
+        "d828db7572127a022b20b3024703b3e1d4b56060fd2e2e60a33b3f958f356315",
+        "e120df70b75d71028d8b7c011a53f66e6c14c230799bdc65c478c64432e5eabb",
+        "d14cfafbccd8696d91615b751e4e01792c5336564646eea6b7b595a3239ee946",
+        "046ea8ea739e7b16b5954f9db3c40838069bf0d5bfd4baa3531db09a70fbcec1"
+      ],
+      "reviewBodySha256": [
+        "c5105b2f4b446d32bc74c329154f088b6c6f94cf3925b7d39460136f27c94657",
+        "707f577334703a8a3ee7795a775f3352645e6b2104cbb3a75b9e367cf3051e8c"
+      ]
+    }
+  ],
+  "toolSourceSha256": {
+    ".taskmaster/scripts/ai-quality-v147-confirmation-preflight-v1.mjs": "f314fec51c7520614ca32cc92d280a6e69f02ebbc33c459cce0a438ec5deabd5",
+    ".taskmaster/scripts/test-ai-quality-v147-confirmation-preflight-v1.mjs": "4c1b698742bb812d86fa1ad5c72f02ec1fd81fe4bfdcb7f95c3963fc32141873"
+  },
+  "evidenceSha256": {
+    "confirmation-preflight.json": "844d5eb64f90acf560286b274f1c588cb7cfae7884fb28d6d19f8a42097ad754",
+    "pilot-exposure-quarantine.json": "0fdaf2a5e471aefd67c80be7af12cd778c7a58ba82ea10eacd7e36ff82e2aea1",
+    "audit-confirmation-preflight.mjs": "eead055cea476107e0f008234a0e31b19bdf149784bf2fc8c9bc3902d5e8580b",
+    "verify-pilot-exposure-quarantine.mjs": "7227a815d70fcb14745d01900834eeddf7725028db0df51ea33b772f143aec56"
+  }
+}

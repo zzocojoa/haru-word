@@ -1,0 +1,2280 @@
+{
+  "protocol": "ai-quality-v147-pilot-reference-ai-reviewed-v1",
+  "recordedAtUtc": "2026-11-08T17:13:09.918Z",
+  "fixedCaseDenominator": 60,
+  "authorDenominator": 60,
+  "reviewDenominator": 120,
+  "referenceDenominator": 180,
+  "actualAuthorRecords": 18,
+  "actualPeerReviews": 36,
+  "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+  "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+  "priorReferenceFile": ".taskmaster/evaluation/ai-quality-v147/pilot-reference-drafts-v2.json",
+  "priorReferenceSha256": "1bde48b089bfa29d4f5ac4071d0de1a5cac227fa515b13c4fdd2dc13a0786cc0",
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+    ".taskmaster/evaluation/ai-quality-v147/pilot-reference-drafts-v2.json": "1bde48b089bfa29d4f5ac4071d0de1a5cac227fa515b13c4fdd2dc13a0786cc0",
+    ".taskmaster/evaluation/ai-quality-v147/pilot-reference-source-claims-v1.json": "b28ad93744e91af9bd3225d040368680a187b01a848b052e7bf2d5c03a890562",
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/grammar/target-criteria.ts": "146483f42c9fb01162b2015c12e23a232b1264bbdde90fa570f25d53724dd096",
+    ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    ".taskmaster/evaluation/ai-quality-v147/pilot-reference-drafts-v1.json": "9ce084fb122ac7a98e6921d33baa88637cb39554f4335db04690706e8e75996b",
+    ".taskmaster/docs/ai-quality-v147-reference-operational-rubric-v1.json": "3a92edaadf4b8be90a0eea95599524a6814dcdb60698ea08ff3dd843f094a111",
+    ".taskmaster/docs/ai-quality-v147-reference-readiness-draft.json": "34764e89714f20ad46dd7039e5b5535be651ce08ff9e471d9b772faa9c4dbbd8",
+    ".taskmaster/scripts/ai-quality-v147-fixed-reference-v1.mjs": "e920793468e5f97085a4225c76e29ee305d05add828a299b0df2a40a0b05768f",
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "36c433a1bc05bdc1d3b458d79e538915ed1ae5d0e32fe62800712bb034e3dd6b",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-exposure-v1.mjs": "14aa01e2a5ac1ef1d649362a40e4639a86df61506155bb6e7b73264cbd012433",
+    ".taskmaster/scripts/ai-quality-v147-global-exposure-v1.mjs": "7f791026b40d2ad62f278b45b5b54ebcc45453e56c69c79eee543d561813a0f9",
+    ".taskmaster/scripts/ai-quality-v147-reference-rubric-v1.mjs": "e2028f1b2d3b938b47cf18f882c9501cf763b4b82c4e1e959b683ae4424c9aeb",
+    ".taskmaster/scripts/ai-quality-v147-public-control-batch-v1.mjs": "7c2c8b621b4b39365926841eb808062c783e89f3a7001af3058c434d97a01c6a",
+    ".taskmaster/scripts/ai-quality-v147-reference-controls-v2.mjs": "3d01666c168d135c4dec812ebf3d187490fed9a5419dddf3654fb5db6675b105",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-fixed-reference-v2.mjs": "d7c7bf5bb71b12142676e1cf311b85202bb6655ea9628539b042b54b973511b0",
+    ".taskmaster/docs/ai-quality-v147-fixed-reference-transport-findings-v1.json": "f04da33ed35363475b875f01282e86613b76c6d9be465e72d63243e1049b749b",
+    ".taskmaster/scripts/ai-quality-v147-fixed-reference-collector-v2.mjs": "669c038647fb18a14d76858dcdbc657141675497045e65ec3c2303fddad2031f",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8",
+    ".taskmaster/scripts/ai-quality-v147-evaluation-budget-v2.mjs": "5bedae274a7f4f96d33d6b3414c7d11d74b15010f1b7c6477b9c3ac891682200",
+    ".taskmaster/scripts/ai-quality-v147-cache-reconciliation-v1.mjs": "f54992bc244d26042790e4b7646d1073e015a10b696e46013b31b219e7e85635",
+    ".taskmaster/docs/ai-quality-v147-additional-budget-authorization-20261108.json": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+    ".taskmaster/docs/ai-quality-v147-fixed-reference-stage-1-budget-profile-v2.json": "95fa3b86fe13dfbb14abfb56551b668b7aa08ab4db414700d73f60fa7896241e",
+    ".taskmaster/docs/ai-quality-v147-fixed-reference-stage-2-budget-profile-v2.json": "556dbc88ea48fa68ef0f77969f83cf3e0aaac16818227bc498aa8ac7407aec8c",
+    ".taskmaster/docs/ai-quality-v147-fixed-reference-stage-3-budget-profile-v2.json": "078f92e96bd8cd67d12229ee668b409810567e8770abe22c3603af4e4e5d2bb9",
+    ".taskmaster/docs/ai-quality-v147-fixed-reference-stage-4-budget-profile-v2.json": "10b0d36c788aa13de6d155a006369e5111c02e8b0985bcbe0ec7d6a9bf3a810f",
+    ".taskmaster/docs/ai-quality-v147-fixed-reference-stage-5-budget-profile-v2.json": "e27a0971f516a27d30c11ff6ce56620e98fa0693ff7d0e42a244db1743523dca"
+  },
+  "records": [
+    {
+      "caseId": "pilot-word-needsCorrection-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-01",
+        "canonicalInputSha256": "f96e7dc6307876af40ed3f4c29e916caccfd42cbd48293313b81487634263aa6",
+        "candidateRequestSha256": "f35ccf6a740b9642e59523708808f95905e880cd654de50c22016abd0cf56cf5",
+        "baselineRequestSha256": "5b3d2ed1f1756fe5bf4db8fd5b0c7bd72c62274a89ed3b7b8cca213317e5a028"
+      },
+      "author": "gpt-6.1-terra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-be53fbd11b8e0575da1cb161",
+        "assignmentHash": "7f66cc528bb5f3204bb2f05a4055b54d679496641910a1af2cda9875639ce838",
+        "domain": "word",
+        "targetKey": "target-f59d23b8c4b6e3b0a2caf4b2",
+        "familyId": "family-08eb8895052fa33a16640ccb",
+        "familyRationale": "The structural family is identified, but partial exposure coverage does not establish family independence.",
+        "expectedOriginal": {
+          "meaningUsage": "appropriate",
+          "grammar": "needs_work",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "Why did the curator ask twice?"
+        ],
+        "criterion": "The message is complete and ask is used in the intended questioning sense. After did, use the base form ask; did already marks past time.",
+        "sourceIds": [
+          "lex.ask",
+          "new.do",
+          "new.verb-phrase"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-01",
+        "canonicalInputSha256": "94d864dbfa31537a412b8575982736ee449c77caa8f01af9018f013e0f780148",
+        "candidateRequestSha256": "b765c49d7f8db10578371885cfe5c5759a1afd7aba4e702be5cd15b78c933e90",
+        "baselineRequestSha256": "482ff60965731899d1c22eaf93a129d0d8a9760be46f81dc2d567506a51a5ba8"
+      },
+      "author": "gpt-6-astra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6.1-terra"
+      ],
+      "authorRecord": {
+        "caseId": "case-242f8bc884ab6cc463b6cfc1",
+        "assignmentHash": "898f22ba815a55230aa0b41ac191bce444ac117efd9bcc8700ecad545f71d74f",
+        "domain": "word",
+        "targetKey": "target-f59d23b8c4b6e3b0a2caf4b2",
+        "familyId": "family-3621822a5d63a547761e449d",
+        "familyRationale": "Fixed input containing an unfinished concessive conditional clause. Exposure coverage is partial and family independence is unverified; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "uncertain",
+          "grammar": "uncertain",
+          "contextNeeded": "relationship"
+        },
+        "acceptedCorrectionExamples": [],
+        "criterion": "In sentence-writing mode, 'Even if they ask again' leaves the linked main proposition unspecified. Message sufficiency therefore fails before assessing whether 'ask' conveys 질문하다 or judging the original grammar. Both judgments remain uncertain. Request the proposition this condition qualifies; do not invent it or force a correction. Such a fragment could be licensed by conversational context, but none is supplied. The fragment evidence supports the general completeness distinction, not a direct lexical judgment about 'ask'.",
+        "sourceIds": [
+          "new.fragments"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "ambiguous",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-e8a72cb98c935a5d8dcb2122",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "Identifiers match, and the unfinished clause is a valid insufficient-context test. Both uncertain labels and the relationship request are supported. No correction can be assessed without the missing proposition; exposure coverage is partial."
+          },
+          "control": {
+            "itemId": "item-bb72b4114af40c359de8dbcb",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft target key conflicts with the assigned target. The unfinished clause appropriately requires the missing relationship, but its label tuple cannot be certified against the wrong target. No correction is offered; exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6.1-terra",
+          "dimension": "minimalCorrectionMeaning",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-normal-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-01",
+        "canonicalInputSha256": "bf5cdc790290c40c635bcb863063329ce711fb582a3ec7a6144df898a2ed5cb2",
+        "candidateRequestSha256": "546923f0bf0b3637bd920608182b7006d1c130f6cbf669cec7b8b47e02f822c8",
+        "baselineRequestSha256": "7ad5b54dde0dfd335a19def45ed69fb4111231f29f74017aead498c4e6639310"
+      },
+      "author": "gpt-6.1-sol",
+      "reviewers": [
+        "gpt-6.1-terra",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-3ea1ddc554f53d49127130aa",
+        "assignmentHash": "f71e0e26441dc4fb74c8d678521609f25da56f1e7fe1a4c6d6732ef4e818951b",
+        "domain": "grammar",
+        "targetKey": "target-4cdc46acea803dccf3e5c734",
+        "familyId": "family-234187f6ceda1579cdb45f7a",
+        "familyRationale": "The fixed input uses an abstract noun as a sentence subject. Exposure coverage is partial and structural family independence is unverified; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "Honesty matters."
+        ],
+        "criterion": "The original expresses a complete message. “Honesty” names an abstract idea and is suitably used as the subject; “matters” agrees with it. Preserve the natural original. The separate substitution task does not require rewriting it. The supplied luggage excerpt does not directly establish this abstract-noun analysis; no material language variation requires clarification here.",
+        "sourceIds": [
+          "new.uncount"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "ai-consensus-only",
+          "insufficient-source",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-62d062b9c99d6a81bac9bf76",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "Identifiers match. The complete, natural sentence uses an abstract noun appropriately; retaining it preserves meaning. The criterion accurately limits the source excerpt. Exposure coverage is partial and family independence is unverified."
+          },
+          "control": {
+            "itemId": "item-909d14dc0d32c8f9fa8313cd",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "The draft target key conflicts with the assigned target, so the joint original-label assessment is unavailable. Independently, the sentence is natural and retaining it preserves meaning. Exposure coverage is partial and family independence is unverified."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-01",
+        "canonicalInputSha256": "8c4647046b1b6bfba16ae330665064960f751632c4a7f7df508769910a2c416d",
+        "candidateRequestSha256": "63b0676b0250e64d1e34b5e19fdbe6249db68ec9952145dd7d854e06f9ab5bfd",
+        "baselineRequestSha256": "5804d62ac74c5a89ad09372fcf29cfe4ae7bf77ab7739b2f1add5e8f1b375a80"
+      },
+      "author": "gpt-6.1-terra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-c7215f9a2ae580a746de909c",
+        "assignmentHash": "6364cb8aeaa895714e2cd0af2a44d5d44b9736b1f9d73159fe7472c9b9aba4dc",
+        "domain": "grammar",
+        "targetKey": "target-4cdc46acea803dccf3e5c734",
+        "familyId": "family-2eb82f196e307e1eaaf8048e",
+        "familyRationale": "The fixed input tests noun form with an uncount noun; structural family independence has not been verified.",
+        "expectedOriginal": {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "Two items of luggage blocked the aisle.",
+          "Two pieces of luggage blocked the aisle."
+        ],
+        "criterion": "The message is complete, but uncountable 'luggage' cannot normally follow 'two' directly. Use a countable measure noun; equivalent measures are possible. The separate sample task does not require replacing this sentence.",
+        "sourceIds": [
+          "new.uncount"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": true,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-01",
+        "canonicalInputSha256": "30b8c9b4f67a18f077a48bf23cc22a787ff3a706782267a6fa346fbe4b671871",
+        "candidateRequestSha256": "c25dfb6cc54bb2f62139019410e081474e96608e0ea4fae4d15f5ea50b6036a7",
+        "baselineRequestSha256": "f6587d84adcd451c89dc64135bba79d029ebf2b389538bd288e6bf8803c29d52"
+      },
+      "author": "gpt-6-astra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6.1-terra"
+      ],
+      "authorRecord": {
+        "caseId": "case-860d9ed97d4b62d27e467dc4",
+        "assignmentHash": "9eab8ac78d03cc01fabfa83faf43100b19c63e8a2ee80b65bebbf2a7962df18b",
+        "domain": "grammar",
+        "targetKey": "target-3a9d3527d47598fc2f3ec35c",
+        "familyId": "family-a97c68780b67e4fb819e13d1",
+        "familyRationale": "Fixed diagnostic input containing an unfinished conditional subordinate clause. Exposure coverage is partial and structural family independence is unverified; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "uncertain",
+          "grammar": "uncertain",
+          "contextNeeded": "relationship"
+        },
+        "acceptedCorrectionExamples": [],
+        "criterion": "Apply message sufficiency first: this conditional clause does not supply its linked main proposition in sentence-writing mode. Although 'had arrived' is a recognizable past-perfect verb phrase, its presence alone does not establish appropriate target use in a complete intended message. Both judgments remain uncertain. Ask what consequence or main proposition is intended; do not invent one or remove 'If' to force a correction. Conversational ellipsis may license such wording elsewhere, but no such context is supplied. The fragment source supports the incompleteness distinction without independently settling every contextual use.",
+        "sourceIds": [
+          "new.fragments"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "ambiguous",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-a5abe0029ddfeee7827510af",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "ambiguity",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "Identifiers match, and the incomplete conditional is a valid uncertainty test. Both uncertain labels and the relationship request are supported. The missing proposition prevents correction assessment; partial exposure coverage does not establish independence."
+          },
+          "control": {
+            "itemId": "item-f71e0cef08f381e3045fc96d",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft target identifier differs from the assigned target. The unfinished conditional appropriately calls for its linked proposition, but the wrong target prevents joint label assessment and the missing message prevents correction assessment. Exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6.1-terra",
+          "dimension": "minimalCorrectionMeaning",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-normal-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-01",
+        "canonicalInputSha256": "b07179f65c2f69aa7c68df146d4a3e6b5c6532304e61b7f6fdee93dcc4faf425",
+        "candidateRequestSha256": "a93b4479a9b4ca7bcde94b0ab10cf40304af26da0732b87958973592e8937793",
+        "baselineRequestSha256": "010d40819d84b720f6629751f7f8b0758560d44bb56daff88bc13a639bca0366"
+      },
+      "author": "gpt-6.1-sol",
+      "reviewers": [
+        "gpt-6.1-terra",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-17e34b707863867123b99a7d",
+        "assignmentHash": "9fd28dd66a4c22933c8d792be8c21139707cd028c6666fefbe5863ac95a62983",
+        "domain": "word",
+        "targetKey": "target-f59d23b8c4b6e3b0a2caf4b2",
+        "familyId": "family-60b16e5cd86859d5d53b9b5a",
+        "familyRationale": "Fixed diagnostic input with partial exposure coverage and unverified structural-family independence; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "May I ask why?"
+        ],
+        "criterion": "The original is a complete, natural permission question. The verb 'ask' means to put a question or request an answer, matching 질문하다 and the supplied source definition. Its base form after 'may' is correct, and 'why' naturally identifies the requested explanation without requiring an explicit addressee or expanded clause. Preserve the sentence unchanged. No material language variation requires resolution here; exposure and family independence remain unresolved.",
+        "sourceIds": [
+          "lex.ask"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-f6dbbaa5ac45b47056b66163",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "Identifiers match, and the natural question uses ask in the assigned sense; retaining it is appropriate. Exposure coverage is partial and family independence is unverified."
+          },
+          "control": {
+            "itemId": "item-8b99bd7a11d1dd48602cfdfb",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "The draft target key conflicts with the assigned key, so the joint label assessment is unavailable. The sentence is natural and the unchanged correction is supported. Exposure coverage is partial and family independence is unverified."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-02",
+        "canonicalInputSha256": "39e6b89b854751b8dc38d4d756161ccc780f03f798898528acb1700f03de2289",
+        "candidateRequestSha256": "249aea1be3e730e75ff3162d82d39785ddabf221b6efd415d5ef2e072da3d70c",
+        "baselineRequestSha256": "a71385ccff490d7ab079accb29eb6a05ccca60d2b0bb140fc8dd2e28fa760ad2"
+      },
+      "author": "gpt-6.1-sol",
+      "reviewers": [
+        "gpt-6.1-terra",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-674fd6ddf84d7b60d24170c3",
+        "assignmentHash": "a36fd47d9186965f609c5b084aacac9a7fd526d672cdb4a5765d423e60d6ab0b",
+        "domain": "grammar",
+        "targetKey": "target-a8e075a0cfa3d0ce4c0c2314",
+        "familyId": "family-5bf018bfa0be88bc2ba07d03",
+        "familyRationale": "Fixed noun-phrase fragment in sentence mode. Exposure coverage is partial and family independence is unverified; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "uncertain",
+          "grammar": "uncertain",
+          "contextNeeded": "message"
+        },
+        "acceptedCorrectionExamples": [],
+        "criterion": "Check message sufficiency first. This isolated noun phrase does not specify a complete intended message in sentence mode, so both judgments remain uncertain and no correction is supplied. Although 'her' has the suitable object form after 'beside', that local form does not resolve message insufficiency. Ask for the intended complete message, not a named referent. Such a phrase can function as a short answer in an appropriate reply context, but none is supplied. The source supports the general description of fragments as incomplete sentences, not these exact labels.",
+        "sourceIds": [
+          "new.fragments"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "ambiguous",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-dcd845fcc65ef88ca2d647f8",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "Identifiers match. The sentence-mode noun phrase lacks a complete message, supporting both uncertain labels and the request for message context. No correction can be assessed without that context. Exposure coverage is partial."
+          },
+          "control": {
+            "itemId": "item-527d3b6ac70f6ad50ed433f8",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft target key differs from the assigned target key, so the joint label tuple cannot be certified. The fragment analysis is otherwise appropriately bounded; no correction can be assessed without the intended message. Exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-terra",
+          "dimension": "minimalCorrectionMeaning",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-02",
+        "canonicalInputSha256": "c5c6ad6845bf08f7cfce465c2c39817eb1c509355781be330f1d5ea3fea68c5b",
+        "candidateRequestSha256": "875597c7358e411edad8e3b79e2d96a86429305e243ecc7dba10c10d44d46470",
+        "baselineRequestSha256": "3e54f4f0916288c145a1183e857fbcb11dcadb9c701381da1bcb3b81fb7c130f"
+      },
+      "author": "gpt-6.1-sol",
+      "reviewers": [
+        "gpt-6.1-terra",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-cf495b76f3bd757721cd7d6d",
+        "assignmentHash": "c39cac138b426eec5710d60c588a41f4c8e9ab47d8b96501a21eff3a37764177",
+        "domain": "word",
+        "targetKey": "target-8b724e9369fb09f35e066ff0",
+        "familyId": "family-09e7ecc5c40e511159f93f68",
+        "familyRationale": "Fixed diagnostic input consisting of a noun phrase with a relative clause. Exposure coverage is partial, and structural family independence has not been verified.",
+        "expectedOriginal": {
+          "meaningUsage": "uncertain",
+          "grammar": "uncertain",
+          "contextNeeded": "message"
+        },
+        "acceptedCorrectionExamples": [],
+        "criterion": "Apply message sufficiency first: this noun phrase identifies a table but supplies no complete main-clause message in sentence mode. Both original judgments therefore remain uncertain, even though 'booked' locally suggests the reservation sense of the verb. Withhold correction rather than inventing a predicate; the intended complete message is needed. Such a fragment could be licensed in a reply or title, but neither context is selected here. The supplied source supports only the general characterization of fragments as incomplete sentences, not independent validation of the lexical judgment.",
+        "sourceIds": [
+          "new.fragments"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "ambiguous",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-2b0c8946d90c6583dc4aa0ec",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "correction",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "Identifiers match, and the incomplete noun phrase is valid for testing message uncertainty. Withholding a correction is appropriate, but its meaning preservation is unavailable without the intended message. Exposure coverage is partial."
+          },
+          "control": {
+            "itemId": "item-ecda0a996f604f42f837ad93",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "unavailable",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "correction",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "The draft targetKey conflicts with the assigned target. The fragment appropriately calls for the missing message, but the joint labels cannot be certified against the wrong target and no correction is assessable. Exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-terra",
+          "dimension": "minimalCorrectionMeaning",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-02",
+        "canonicalInputSha256": "cfc0125305bb39ce02ac29faba69467e39f261ed2ff8abc4fb0adaa5832134b2",
+        "candidateRequestSha256": "62ff1c9d55f8d042ee4be46aeca62ead9ec7c7ae07bb476d35cee778b516bae0",
+        "baselineRequestSha256": "ce66bd63340ec109b9ab5f589da7c55bcc239f4072f4688b1d47874cb0e320da"
+      },
+      "author": "gpt-6-astra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6.1-terra"
+      ],
+      "authorRecord": {
+        "caseId": "case-aa5e7db3dd957eaabf45416e",
+        "assignmentHash": "432e61767749f384c3f3d705f79557d63b9550f10fbc0cdd6678e780cdf18833",
+        "domain": "grammar",
+        "targetKey": "target-3a9d3527d47598fc2f3ec35c",
+        "familyId": "family-ed0e1db252179a2bb8309b7c",
+        "familyRationale": "Fixed diagnostic input testing present-tense verb agreement with singular 'neither route'. Exposure coverage is partial and structural family independence is unverified; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "Neither route leads to the quay."
+        ],
+        "criterion": "The message is complete, and the context specifies a current state. The target requires suitable subject–verb agreement, not merely the presence of a verb. Singular 'neither route' requires present-tense 'leads', so the original fails both target use and grammar. Changing only 'lead' to 'leads' preserves the intended meaning. Variation associated with 'neither of' constructions does not create a material ambiguity here.",
+        "sourceIds": [
+          "new.agreement"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-370123a4f068762d9295ec9a",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "The identifiers match; singular agreement supports both labels and the minimal correction. Exposure coverage is partial and family independence unverified."
+          },
+          "control": {
+            "itemId": "item-075e33c9a70138fb16fc6512",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft target key differs from the assigned target, preventing assessment of the joint label tuple. The agreement correction independently preserves the message. Exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-02",
+        "canonicalInputSha256": "62d09adf31a5140f58b3a0d874de8c9580c5e6bb0f52377f6ae6af0bda067493",
+        "candidateRequestSha256": "c400859bd844e44e75cef966f2b0bbabf064878b882ff96e5773ca608a030f5f",
+        "baselineRequestSha256": "93c8aab14affc9f627e16604734d624a2750b5e2c84c33761cd3cb538a39aa8a"
+      },
+      "author": "gpt-6-astra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6.1-terra"
+      ],
+      "authorRecord": {
+        "caseId": "case-26084e6f835341c55845cf97",
+        "assignmentHash": "3eab6371e02b6252e6fdd4883627d5d1cd0bc5775c66361a6a32ea9f3df96f61",
+        "domain": "word",
+        "targetKey": "target-9662c04edd29e58ae81cdc97",
+        "familyId": "family-d6122ba2dc08935ae0af69fb",
+        "familyRationale": "Fixed diagnostic input assessing noun use and subject–verb agreement. Exposure coverage is partial and family independence is unverified; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "appropriate",
+          "grammar": "needs_work",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "Her help was valuable."
+        ],
+        "criterion": "The message is sufficiently specified. 'Help' functions as a noun meaning assistance (도움), so the lexical target use is appropriate independently of the agreement error. In this sense, 'her help' takes singular agreement; replacing 'were' with 'was' preserves the intended message and past tense. No material language variation requires clarification here. The lexical excerpt supports the meaning, but the supplied luggage and singular-pronoun excerpts do not directly establish agreement for 'help'; the grammar assessment therefore lacks direct excerpt support.",
+        "sourceIds": [
+          "lex.help"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "insufficient-source",
+          "ai-consensus-only",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-d3c733af88f9b97bb58bef25",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "Identifiers match. The noun use is appropriate, and the correction minimally repairs agreement. The criterion acknowledges the limits of the supplied excerpts. Exposure coverage is partial and independence unverified."
+          },
+          "control": {
+            "itemId": "item-b9577176310e916f5b100b29",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "The draft targetKey conflicts with the assigned targetKey, preventing a joint label assessment. Independently, the correction minimally repairs agreement, and the criterion acknowledges the source limits. Exposure coverage is partial and independence unverified."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-normal-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-02",
+        "canonicalInputSha256": "3210a7ec1a638f6b442638af70d313350361eef601dcb9582168e2431917e155",
+        "candidateRequestSha256": "29d6f9461b006b2e46aea445dc5f80f5f7d05db2311b23169defb7cbcd546344",
+        "baselineRequestSha256": "fef29fddebaaa8e0974331a0fea00847f75b22869952b571fe8810e89364712f"
+      },
+      "author": "gpt-6.1-terra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-db592693431e698b815db37b",
+        "assignmentHash": "0aa22e0f05fbecf0c3e75b55b46578b2ec8c4cd9a50488c58a6e446353fcabde",
+        "domain": "word",
+        "targetKey": "target-8b724e9369fb09f35e066ff0",
+        "familyId": "family-c00d7e21c6ee9afb04b95d83",
+        "familyRationale": "The fixed diagnostic family has only partial exposure coverage; independence is not verified.",
+        "expectedOriginal": {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "We booked ahead."
+        ],
+        "criterion": "The reply supplies a complete message. Booked is the past-tense verb in the reservation sense, and the dinner reservation is recoverable from the question. No correction is needed.",
+        "sourceIds": [
+          "lex.book"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-288b79298a09b858a6f0ae3d",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "Assignment identifiers match. The explicitly selected reply context supplies the preceding dinner-reservation question, supporting appropriate reservation-sense use of 'booked,' natural grammar, and no further context requirement. The unchanged correction and criterion are supported. Partial required exposure/family coverage cannot establish independence; no known leak is supplied."
+          },
+          "control": {
+            "itemId": "item-afff349734b186b1dc7a9ddc",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft targetKey differs from the assigned targetKey, so alignment and target validity fail and the joint original-label assessment is unavailable. Independently, the supplied preceding question supports the reservation sense and a complete, natural reply; retaining the original preserves meaning. Required exposure/family coverage is partial, without an established leak."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-normal-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-02",
+        "canonicalInputSha256": "8c7bae910f952a3d4ed10bd0653a8dee5a3ad87b1cda37e149ef66fd99cc9fdc",
+        "candidateRequestSha256": "aeee590c096390345ffe4120d4f8cfea7914e1ed3b7911e7f7ea04ee8a0b1c85",
+        "baselineRequestSha256": "f22daa3357dc05e2e611cff3b88cc96f6753fa9e5f4711c18a71d9e208d2aeb5"
+      },
+      "author": "gpt-6.1-terra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-cc54435754d479be05505578",
+        "assignmentHash": "2d9f21d1e6fb371390f0ad308810dee7e5832388d73e6389173101dc71bba47e",
+        "domain": "grammar",
+        "targetKey": "target-a8e075a0cfa3d0ce4c0c2314",
+        "familyId": "family-73a66c77fa92b6c4158240a0",
+        "familyRationale": "The fixed structural family has partial exposure coverage; independence has not been verified.",
+        "expectedOriginal": {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "Between us, it was her."
+        ],
+        "criterion": "The message is complete. Object-form us follows between, and her is a natural complement of be; subject-form it is also suitable. More formal usage may prefer she as a complement, but no correction is required. Referents need not be named.",
+        "sourceIds": [
+          "new.pronouns"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-normal-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-03",
+        "canonicalInputSha256": "c5881e4ef7c023a44ac0aa4616a1d105259505e6240d7e0d08f98355ca5439e0",
+        "candidateRequestSha256": "35eb88234b6315ac2371d9047dcdf0db096a59896129ca757239b246acb94736",
+        "baselineRequestSha256": "61d22f1b56020a17661a1a31a1c2b49d19421b6261223533803f9ea66858c3fc"
+      },
+      "author": "gpt-6-astra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6.1-terra"
+      ],
+      "authorRecord": {
+        "caseId": "case-5bd2a65237641aa504931de0",
+        "assignmentHash": "58d6a768f5b66cc44766db6c4d791580d053c1795596cdc1042e693f960a2ef2",
+        "domain": "word",
+        "targetKey": "target-9662c04edd29e58ae81cdc97",
+        "familyId": "family-fa6863ec211d4a96e39b2dd1",
+        "familyRationale": "This fixed input uses a noun phrase as a title. Exposure coverage is partial and structural family independence is unverified; no novelty claim is made.",
+        "expectedOriginal": {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "Practical help for new volunteers"
+        ],
+        "criterion": "The explicitly selected title context licenses this noun phrase as a sufficient message. Help is a noun meaning assistance, consistent with the supplied definition, and practical naturally modifies it. The original is natural as a title and stays unchanged; no language variation requires clarification. These judgments do not certify English truth or family independence.",
+        "sourceIds": [
+          "lex.help"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "ai-consensus-only",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-c2e1243c98e59d955c44cf64",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "Identifiers match; the selected title context supports the noun phrase, labels and unchanged correction. Partial exposure coverage does not establish family independence."
+          },
+          "control": {
+            "itemId": "item-cddfbf30526f359bdd5f6f72",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft target key differs from the assigned key, making the joint label assessment unavailable. Independently, the unchanged phrase is a natural title. Exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-normal-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-03",
+        "canonicalInputSha256": "e5f09709246dc1f252811abb6e2085aa64dd56b605f9d42c7f2f753e0501e2b4",
+        "candidateRequestSha256": "26884cfab72e885b416062fbeba08d870490953d180eda74aaa42fef509e7c56",
+        "baselineRequestSha256": "d49ee0c5179870b63fe579bc225e80872038234ae852f7bb754169f21230d186"
+      },
+      "author": "gpt-6-astra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6.1-terra"
+      ],
+      "authorRecord": {
+        "caseId": "case-13d57ca2e37ddeee0fbf0221",
+        "assignmentHash": "0ec34dac41a93983abfd903934767e45d6eb016fef61202c1b9227f673d80a78",
+        "domain": "grammar",
+        "targetKey": "target-d9da4bcdceed45feb4e3ed76",
+        "familyId": "family-58a9a86e9dca769f7bedd47c",
+        "familyRationale": "Fixed diagnostic input; partial exposure coverage and unverified family independence do not establish novelty.",
+        "expectedOriginal": {
+          "meaningUsage": "needs_work",
+          "grammar": "natural",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "The delay made everyone restless."
+        ],
+        "criterion": "The sentence expresses a complete message and is grammatical. 'Restless' is an adjective functioning as an object complement describing 'everyone' in the causative construction make + object + adjective. Under the supplied targetCriterion, this is neither an adjective modifying a noun nor a subject description through a linking verb, so the specified target construction is missing. This is a criterion mismatch, not an English grammar error; preserve the natural original rather than rewriting it to complete the sample task. The supplied excerpt, 'Music makes', is too short to substantiate the construction analysis.",
+        "sourceIds": [
+          "new.make-adjective"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "ai-consensus-only",
+          "insufficient-source",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": true,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-006ffa6b1ffa40e7120c95f4",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "fail",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "fail",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": true,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "labels",
+              "source",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "Identifiers match. ‘Restless’ describes everyone, so the supplied adjective target is used appropriately. The claimed restrictive targetCriterion is not supplied. Keeping the natural original is valid; exposure coverage is partial."
+          },
+          "control": {
+            "itemId": "item-bcbdb20990cd8d1ee47c776c",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "fail",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": true,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "labels",
+              "source",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft targetKey conflicts with the assigned target, making the joint label assessment unavailable. The claimed restrictive targetCriterion is not supplied. The original is natural and can be retained; exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6.1-terra",
+          "dimension": "originalLabelSupport",
+          "grade": "fail"
+        },
+        {
+          "reviewer": "gpt-6.1-terra",
+          "dimension": "sourceClaimHonesty",
+          "grade": "fail"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-03",
+        "canonicalInputSha256": "c7810f91331e1fc180da6106ab9a871e7dad4023401a3290393c954350ac6ab3",
+        "candidateRequestSha256": "c7a2f9ea5ab98d76e6217c96dc6d7e9dd0d8616ed34f00b0a2c8018a3631d4c7",
+        "baselineRequestSha256": "7ffff88d1728c34ee4e016a0733aa20e80e642d4ae0803f6994065722ad22719"
+      },
+      "author": "gpt-6.1-sol",
+      "reviewers": [
+        "gpt-6.1-terra",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-3dc1743dead16225b0b7b1f1",
+        "assignmentHash": "df3ba923689eb1585a1d3c3379a35020ed4406f587789b0656dcff71f2f1d86d",
+        "domain": "word",
+        "targetKey": "target-8b724e9369fb09f35e066ff0",
+        "familyId": "family-e4853f36bb6ffa18dae292af",
+        "familyRationale": "Fixed diagnostic input; exposure coverage is partial and structural family independence has not been verified.",
+        "expectedOriginal": {
+          "meaningUsage": "needs_work",
+          "grammar": "natural",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "This book belongs on that shelf."
+        ],
+        "criterion": "The sentence expresses a complete message and is grammatical. Here, 'book' is a noun meaning a written text, not the target verb meaning to reserve or arrange something for a future time. The supplied source distinguishes these senses. Target use therefore needs work, but the natural original stays unchanged; replacing it with a reservation statement would change its message rather than correct its grammar. No relevant language variation requires resolution.",
+        "sourceIds": [
+          "lex.book"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-f33295f3d769751be3690468",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "The identifiers match. The original uses book as a noun rather than the assigned verb, but is grammatical and should remain unchanged. Partial exposure coverage does not support an independence pass."
+          },
+          "control": {
+            "itemId": "item-010224b7b3ffae5cbadd12b8",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "assignment",
+              "target",
+              "unavailable",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft target identifier conflicts with the assignment, so the joint label tuple cannot be certified. The sentence is grammatical and the unchanged correction preserves it. Exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-03",
+        "canonicalInputSha256": "aa21f13807964737b8807f575fe8379c9fe2af8437ea9308d445d35bd95a5ba7",
+        "candidateRequestSha256": "f1537ba1b7ee3a0593d9c0f1700e79b14d9cdf172a6ae211dd2871d89d39cfb2",
+        "baselineRequestSha256": "6cf90ccdb6287d0636eec21cf303b0e2ea9791c5f5635e9b83c5044d35f2cf5c"
+      },
+      "author": "gpt-6.1-sol",
+      "reviewers": [
+        "gpt-6.1-terra",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-6dea1a4cf4b545d150822e69",
+        "assignmentHash": "1512066724301d15ed08ed48cfc6f9e9249e2acc53587c2b0773b10c3f597379",
+        "domain": "grammar",
+        "targetKey": "target-d9da4bcdceed45feb4e3ed76",
+        "familyId": "family-62c4aec79d0032a637dbff4b",
+        "familyRationale": "The input tests an adjective describing the subject after linking feel, rather than a manner adverb. Structural-family independence and exposure coverage have not been established.",
+        "expectedOriginal": {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "contextNeeded": "none"
+        },
+        "acceptedCorrectionExamples": [
+          "This fabric feels soft."
+        ],
+        "criterion": "The sentence supplies a complete intended message about the fabric's texture. Here feels is a linking verb, so an adjective must describe the fabric: soft, not the manner adverb softly. Both original target use and grammar need work; replacing softly with soft is the minimal correction. The supplied excerpt supports adjective complements after some verbs but does not explicitly identify feel. No relevant language variation is established by the supplied evidence.",
+        "sourceIds": [
+          "new.link"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "source-support",
+          "ai-consensus-only",
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-terra",
+          "payloadValid": true,
+          "actual": {
+            "itemId": "item-64654ebccb2fff9e3e5d9ea2",
+            "grade": {
+              "assignmentAlignment": "pass",
+              "inputAndTargetValidity": "pass",
+              "originalLabelSupport": "pass",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": false,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "confirmed",
+              "exposure",
+              "unavailable"
+            ],
+            "shortEvidenceSummary": "The identifiers match, and the original labels and minimal adjective correction are supported. The source claim is bounded to the supplied excerpt. Partial exposure coverage does not establish family independence."
+          },
+          "control": {
+            "itemId": "item-f5145a85f7ca6220728dc801",
+            "grade": {
+              "assignmentAlignment": "fail",
+              "inputAndTargetValidity": "fail",
+              "originalLabelSupport": "unavailable",
+              "minimalCorrectionMeaning": "pass",
+              "sourceClaimHonesty": "pass",
+              "ambiguityHandling": "pass",
+              "exposureAndFamilyCompliance": "unavailable",
+              "criticalErrors": {
+                "wrongTarget": true,
+                "inventedEvidence": false,
+                "meaningConstraintViolation": false,
+                "forcedCertainty": false,
+                "knownExposureLeak": false
+              }
+            },
+            "reasonCodes": [
+              "target",
+              "unavailable",
+              "correction",
+              "source",
+              "ambiguity",
+              "exposure"
+            ],
+            "shortEvidenceSummary": "The draft target key differs from the assigned key, so the joint original-label tuple cannot be certified. Independently, the correction is minimal and the source claim is appropriately bounded. Exposure coverage is partial."
+          },
+          "controlCaught": true,
+          "englishDimensions": [
+            "assignmentAlignment",
+            "inputAndTargetValidity",
+            "originalLabelSupport",
+            "minimalCorrectionMeaning",
+            "sourceClaimHonesty",
+            "ambiguityHandling"
+          ],
+          "criticalFlags": [
+            "wrongTarget",
+            "inventedEvidence",
+            "meaningConstraintViolation",
+            "forcedCertainty",
+            "knownExposureLeak"
+          ],
+          "declaredRubricHash": "746a388948026d316b6ccb06a2d1502e3f5f534b3d3e133eb05638d0b80c29ea",
+          "referenceQualified": false,
+          "sourceQualified": false,
+          "mainDispatchAuthorized": false
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-03",
+        "canonicalInputSha256": "5702e1976c312c022f3ec3fc8b61599d98ead7bf3223e8c42da36461bee67d4a",
+        "candidateRequestSha256": "6ccbdc18e9dcd01fbdf2edf9b81acc84ff0b4927f771e7f428f832c883c5f18f",
+        "baselineRequestSha256": "561da1698af2ceb166065b67b75f020db720ae023efc549b1d466576626a5ac9"
+      },
+      "author": "gpt-6.1-terra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-27434bd6794985ce2eb2b94f",
+        "assignmentHash": "8943ec20994530b6f05d3f0f9be46bf09e8e53b76f41619eb6901731dbab4d78",
+        "domain": "word",
+        "targetKey": "target-9662c04edd29e58ae81cdc97",
+        "familyId": "family-297868881b6f6c44e471f95c",
+        "familyRationale": "The input is an unfinished fragment; family exposure and independence remain unverified.",
+        "expectedOriginal": {
+          "meaningUsage": "uncertain",
+          "grammar": "uncertain",
+          "contextNeeded": "message"
+        },
+        "acceptedCorrectionExamples": [],
+        "criterion": "The fragment does not specify a complete intended message, so neither target use nor grammar can be judged reliably and no correction is forced. The source supports the general characterization of fragments as incomplete sentences.",
+        "sourceIds": [
+          "new.fragments"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-03",
+        "canonicalInputSha256": "43d9ae5c59984ec3d516f66c7f2f58208a781543104f74c3ca04abd6b94b53c2",
+        "candidateRequestSha256": "0e5e894721c70a8643fa930d7b9bfb26655ae5c067bf8c11c7ce5d6f62c9f96a",
+        "baselineRequestSha256": "f88a6e0e4ee59a96e0aeb22f1fa81c3d2ffe3bf9c61ed689bd681ac1d1e3b6fc"
+      },
+      "author": "gpt-6.1-terra",
+      "reviewers": [
+        "gpt-6.1-sol",
+        "gpt-6-astra"
+      ],
+      "authorRecord": {
+        "caseId": "case-280a4321f4b4acac651c096f",
+        "assignmentHash": "200f3bad6c090b655b356f07200762eb601a869ec3afa926eef504f4bfbee24c",
+        "domain": "grammar",
+        "targetKey": "target-4818edf113611196a1a5c148",
+        "familyId": "family-af0c961b2f51c1db43130271",
+        "familyRationale": "The fixed input is an unfinished conditional clause; family exposure and independence remain unverified.",
+        "expectedOriginal": {
+          "meaningUsage": "uncertain",
+          "grammar": "uncertain",
+          "contextNeeded": "relationship"
+        },
+        "acceptedCorrectionExamples": [],
+        "criterion": "In sentence-writing mode, the conditional clause does not specify what depends on her agreement. Both judgments remain uncertain, and no correction is forced. The same wording could be a complete reply in a suitable conversational context, but none is supplied.",
+        "sourceIds": [
+          "new.fragments"
+        ],
+        "evidenceLevelClaim": "unresolved",
+        "unresolved": true,
+        "reasonCodes": [
+          "family-exposure-uncertain"
+        ]
+      },
+      "inputMatchesFrozenCase": true,
+      "proposedLabelsChanged": false,
+      "correctionExamplesChanged": false,
+      "peerReviews": [
+        {
+          "model": "gpt-6.1-sol",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        },
+        {
+          "model": "gpt-6-astra",
+          "payloadValid": false,
+          "failureCode": "REF4_REVIEW_FIELDS"
+        }
+      ],
+      "conflictingDimensions": [],
+      "englishConcerns": [
+        {
+          "reviewer": "gpt-6.1-sol",
+          "dimension": "payload",
+          "grade": "unavailable"
+        },
+        {
+          "reviewer": "gpt-6-astra",
+          "dimension": "payload",
+          "grade": "unavailable"
+        }
+      ],
+      "referenceQualified": false,
+      "sourceQualified": false,
+      "familyIndependenceVerified": false,
+      "mainDispatchAuthorized": false,
+      "developmentExposed": true
+    }
+  ],
+  "referenceQualified": false,
+  "sourceQualified": false,
+  "englishTruthCertified": false,
+  "mainDispatchAuthorized": false,
+  "independentFamilyCountClaim": 0,
+  "developmentExposed": true,
+  "doNotReuseAsFreshConfirmation": true
+}

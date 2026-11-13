@@ -1,0 +1,36 @@
+{
+  "protocol": "ai-quality-v147-correction-explanation-rebind-v1",
+  "phase": "phase111",
+  "taskIds": [
+    "8.2",
+    "34.3",
+    "34.4"
+  ],
+  "savedResponsesReplayed": 3,
+  "browserChecks": 6,
+  "unchangedPilotRequestBodies": 360,
+  "changedScreens": 9,
+  "changedCalibrationRequests": 54,
+  "identicalCalibrationRequests": 18,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "mainDispatchAuthorized": false,
+  "pilotGenerationsCompleted": 0,
+  "pilotGenerationsPlanned": 360,
+  "releaseVerdict": "held",
+  "availableMicros": "1770287",
+  "changedCountAllowanceMicros": "1890000",
+  "changedMinimumReservationMicros": "3208554",
+  "changedMaximumReservationMicros": "6425388",
+  "previousVotesRegraded": false,
+  "currentCalibrationPreparedHash": "5798987503923beb76fb67023cb730d47fb6e12791cdf44c034ec104c44560e3",
+  "document": "docs/AI_QUALITY_V147_CORRECTION_EXPLANATION_REBIND_20261109.md",
+  "calibrationImpactSha256": "185225bbe1d3294dff9d5025e505c8bb22e25a1b4a8caf7397c6768e66ffc14f",
+  "productFiles": {
+    "work/ai-quality-v147-target-display-20261109/app/feedback-detail.tsx": "f8e6cae99e10d4429e4a61246a9aa3e5f432d5e37f13aacd9db47d34e84eb00a",
+    "work/ai-quality-v147-target-display-20261109/lib/verified-feedback-explanation.ts": "2329b840535a614c621d05389c8bb3a99e922ae8c775dcddffbe987113884d12"
+  },
+  "replaySha256": "7ab0f47b9215d6cb4bdee2e9bfd69af3c11b74680db8fee77d521bfe471f2712",
+  "ledgerSha256": "be6d1df0079c9c78af4f3fb8ae5ade075a2b56a1b61b8d86219d2afd190416a4"
+}

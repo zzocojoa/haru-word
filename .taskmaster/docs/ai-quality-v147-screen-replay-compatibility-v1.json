@@ -1,0 +1,42 @@
+{
+  "historicalPanelRequests": 3,
+  "historicalPanelMatchedPairs": 6,
+  "historicalCalibrationMatches": 71,
+  "historicalCalibrationRequests": 72,
+  "identicalCurrentBodies": 18,
+  "changedCurrentBodies": 54,
+  "oldVotesRejectedOnChangedBodies": true,
+  "oldCompilerSourceGuardActive": true,
+  "currentCalibrationQualified": false,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "panelSha256": "fed25c56cab448e61f59c3d09247b7b427bde265ecf9dc60dc17d28730e3f181",
+  "calibrationSha256": "02047715484e91772c160c1b565a3f78f91d71a96070465b372f72a16021beca",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "phase": "phase142",
+  "protocol": "ai-quality-v147-screen-replay-compatibility-v1",
+  "tasks": [
+    "26.2",
+    "34.4"
+  ],
+  "document": "docs/AI_QUALITY_V147_SCREEN_REPLAY_COMPATIBILITY_20261109.md",
+  "archivedToolSha256": {
+    "ai-quality-v147-target-meaning-v1.mjs": "afca0217761ebe6da01eeb600cced7085587c349e4d168bd4e14c12bf3bc9ae2",
+    "ai-quality-v147-target-meaning-v2.mjs": "f940a6dc7937f70a257b6495312aa345a7cc4048daa9e5b9bd11a89e2301b8e5",
+    "test-ai-quality-v147-rendered-panel-review-v1.mjs": "a3282abe1c71d3adef66ca311373f8f5f942f78e2b675c35fadb62ea6ba88447"
+  },
+  "currentToolSha256": {
+    "ai-quality-v147-target-meaning-v1.mjs": "bc65e4c0df6e2c275ca98b3cc26cbebd0886d8921c44f6888e494126f0d17e0e",
+    "ai-quality-v147-target-meaning-v2.mjs": "0c64b390d4d5a92ca4a59311b9ba5def1e3e4ba0973091d580dcd738a0bc8d09",
+    "test-ai-quality-v147-rendered-panel-review-v1.mjs": "196ea5e792df9cbb01f878002d49038debf4ba913d3adb2a286e909895666067"
+  },
+  "evidenceSha256": {
+    "audit-screen-replay.mjs": "5c82b206b07c948cff204ffad7239bbea12d8b06c45d936581c38aba050a503f",
+    "screen-replay-audit.json": "f33243be12ffbac6bf8ed48c36652686dd89682582777b46857b515852e312b4",
+    "legacy-panel-node22-final.log": "5b2e847a90c5cc5b50827a9ee6ce40627cd468b5aa6036a3bb30ece7f3bba700",
+    "legacy-panel-node24-final.log": "14661cd7bfb592108cca2851239b0c8269f3e62e6166db457b39d6a23a6374d5",
+    "calibration-report-node22.log": "8e432a3f6f9f2ced53983b327bf2af9fe2214815b4251c4030e8541ce15f268b"
+  }
+}

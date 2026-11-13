@@ -1,0 +1,29 @@
+{
+  "phase": "phase140",
+  "profileCount": 2,
+  "completedReceiptsRecovered": 2,
+  "failedReceiptsRecovered": 2,
+  "pendingToUnknownPreserved": 2,
+  "forcedWriterTerminations": 2,
+  "noDuplicateProviderCallbacks": true,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "protocol": "ai-quality-v147-revised-pilot-recovery-v1",
+  "task": "26.3",
+  "document": "docs/AI_QUALITY_V147_REVISED_PILOT_RECOVERY_20261109.md",
+  "mainDispatchAuthorized": false,
+  "actualPilotGeneration": 0,
+  "actualPilotReviews": 0,
+  "beforeImagesVerified": 18,
+  "evidenceSha256": {
+    "test-restart-receipts.mjs": "e1455b4c557beac32f2536cb9718a5434b3225bd37c5770f5f53b83466d20667",
+    "recovery-result.json": "834518ef4c337c79da9fd17454eda865938c2aed694dd7653e764d4c2eceba9c",
+    "independent-recovery-audit.json": "ad56481e3aaa73e411ece35f8d7d5f96c548621b5d87e43036455585bb5b2fa7",
+    "audit-restart-receipts.py": "832b7feda9b81e1b62d9c19c83fb049a9dc07a8be09f6fd85eb5bef8f2904f94",
+    "receipt-test.log": "2fa7c2a6256f1c1a9e0e2637e6d7eac198e01eafed86c9450a23855219bee962",
+    "receipt-test-node22.log": "8b8f3183da735074bc0b524d1acc298b6677089a3ea0dd9d8fa3f3885b570439",
+    "client-recovery-test.log": "d452b72c428441f5417b2ef16afc9c2b2f61b9260e7b6cf19474b6904ea89bae"
+  }
+}

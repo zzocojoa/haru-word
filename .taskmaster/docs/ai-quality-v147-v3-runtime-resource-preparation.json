@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-11-06T17:29:40.332302+00:00",
+  "stage": "v3-runtime-lineage-resource-finalization",
+  "tag": "ai-quality-v147",
+  "planId": "ai-quality-v147-2026-11-06",
+  "task22Complete": true,
+  "child223Complete": true,
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-runtime-lineage-v3.mjs": "367ffaac0b4486a6745e191082a4d0d8cba190bfd81803411f16c4b8e8304471",
+    ".taskmaster/scripts/ai-quality-v147-persistent-worker-v3.mjs": "6b99a64d63b473519a663b04c3610f951dfbf2fa7eba21e8d61aa370d75683a1",
+    ".taskmaster/scripts/ai-quality-v147-runtime-resource-child-v3.mjs": "570272dcdc371c4b77f0c7cd71f7800a663cc7e97fb1187f5d02ec3cd284ec3e",
+    ".taskmaster/scripts/test-ai-quality-v147-runtime-resources-v3.mjs": "8df8411d2b3f7371ae4b090d8e7df9a277eb09feda624e7dda4918fecd6d19aa",
+    ".taskmaster/scripts/ai-quality-v147-process-panel-child-v3.mjs": "d7e3fabe51b9d039eb2292c2c903104680a1c4f0d33eed05fe05298a8938b18b",
+    ".taskmaster/scripts/test-ai-quality-v147-process-panel-v3.mjs": "cd2f1680e80067fb6241be95456572ce2b4be993372fcb03c12a0ff11bad865b",
+    ".taskmaster/scripts/test-ai-quality-v147-persistent-worker-v3.mjs": "6a05e477dc2bd48d96f038a0e1c0011904bfa5a5712a41cd18a5e3c6c10d7f48"
+  },
+  "historicalSources": {
+    ".taskmaster/scripts/ai-quality-v147-persistent-worker-v3.mjs": {
+      "sha256": "b0115ecd779502452f293b554b066e18faf494c9e711bf30c50890b505cbc627",
+      "archiveFile": "phase28/management-before/.taskmaster/scripts/ai-quality-v147-persistent-worker-v3.mjs",
+      "priorProgressFile": "phase27/progress-final.json",
+      "priorProgressSha256": "eb09165166e83fc7949efecf3329944a57facdc40bedc5e500a1ea492bb4c344"
+    },
+    ".taskmaster/scripts/ai-quality-v147-process-panel-child-v3.mjs": {
+      "sha256": "8c9be78027c8338a5c84fcc612b0e98157f3b7fbebafcce2bb2bc82256b314a3",
+      "archiveFile": "phase28/management-before/.taskmaster/scripts/ai-quality-v147-process-panel-child-v3.mjs",
+      "priorProgressFile": "phase27/progress-final.json",
+      "priorProgressSha256": "eb09165166e83fc7949efecf3329944a57facdc40bedc5e500a1ea492bb4c344"
+    },
+    ".taskmaster/scripts/test-ai-quality-v147-process-panel-v3.mjs": {
+      "sha256": "d20f5f8f4305626375cf90fb5b61ae8884a7a2b16afe0c3e7dfd2f311ca6785a",
+      "archiveFile": "phase28/management-before/.taskmaster/scripts/test-ai-quality-v147-process-panel-v3.mjs",
+      "priorProgressFile": "phase27/progress-final.json",
+      "priorProgressSha256": "eb09165166e83fc7949efecf3329944a57facdc40bedc5e500a1ea492bb4c344"
+    }
+  },
+  "checks": [
+    {
+      "name": "resources-node22-first",
+      "kind": "resources",
+      "groups": 11,
+      "exitCode": 0,
+      "log": "resources-node22-first.log",
+      "sha256": "aa693840488702cd7475dc01103344e780cc2bcc8d457f3e6222a6c6a3b135ca",
+      "allLogLinesParsed": 9
+    },
+    {
+      "name": "resources-node24-final",
+      "kind": "resources",
+      "groups": 11,
+      "exitCode": 0,
+      "log": "resources-node24-final.log",
+      "sha256": "bfbe9ea435f2b926e0f28351d5b49b63eb09f47688d1606c319446b5e88c3aa3",
+      "allLogLinesParsed": 9
+    },
+    {
+      "name": "persistent-node22-final",
+      "kind": "persistent",
+      "groups": 4,
+      "exitCode": 0,
+      "log": "persistent-node22-final.log",
+      "sha256": "ebbe80066b65685a62bf27524266a100620b38445382e2b21348605adf2b82cb",
+      "allLogLinesParsed": 7
+    },
+    {
+      "name": "persistent-node24-final",
+      "kind": "persistent",
+      "groups": 4,
+      "exitCode": 0,
+      "log": "persistent-node24-final.log",
+      "sha256": "a1e77ebd301766c56b0af4a7756b8b2bc4cd737d7c1cd836bd39a7183c6e0c66",
+      "allLogLinesParsed": 7
+    },
+    {
+      "name": "process-panel-node22-final",
+      "kind": "process",
+      "groups": 14,
+      "exitCode": 0,
+      "log": "process-panel-node22-final.log",
+      "sha256": "35db7aa65f25c3049e54635f01b338b8ad3b425d6a9d50bf2aaaad1817291a60",
+      "allLogLinesParsed": 15
+    },
+    {
+      "name": "process-panel-node24-final",
+      "kind": "process",
+      "groups": 14,
+      "exitCode": 0,
+      "log": "process-panel-node24-final.log",
+      "sha256": "35db7aa65f25c3049e54635f01b338b8ad3b425d6a9d50bf2aaaad1817291a60",
+      "allLogLinesParsed": 15
+    }
+  ],
+  "proofBindings": {
+    "start.json": "ef4fdc5dd97687ebec3b9994b03bfa7cb62aa165dcbddecd4f172accb3a72381",
+    "qualified-source-before-tests.json": "3ea74a531ebf2f67cd63df653fb8edae3985b1bc02335f4cdb8c998ab775f23f",
+    "lineage-first-source-before-tests.json": "fb5d6ac1b7c1448b65432c21fcb6ab5a8e907608f2343bb393d703e57f1f2f85",
+    "runtime-first-source-before-tests.json": "3ea74a531ebf2f67cd63df653fb8edae3985b1bc02335f4cdb8c998ab775f23f",
+    "v3-runtime-resource-raw-preservation.json": "17efa1ca008a0e0ae0545c94f3b8b42e5b35a816b1e29451cc16d7cd1c6b879f",
+    "product-regression-reuse.json": "ddbf3fec5ceeb30a0b44ced21f8926d024d6b6e9b7a1baa325b4d41956415354",
+    "runtime-reference-check.json": "ce0ff2616894acadda461baa577c25c9e34995a67e0beeb33b0001dcebcbd1d0",
+    "taskmaster-status-transitions.json": "5fd143dc0b5a52ce84375c252725261f876fed53b8be6663b449ef5cf5097ab1",
+    "runtime-closeout.json": "79dcce3797f51cf540aef9831d0496f517efaf02906ec8b08d03b142674fd62e",
+    "risk-design-historical-notice.json": "45358efa14051ebc3ef6a7430e5d06abb5930876977d52adcbae66e7c9ca932b"
+  },
+  "runtimeRestartLineageMeasured": true,
+  "automaticRestartsEach": 6,
+  "resourceGroupsEach": 11,
+  "normalPersistenceGroupsEach": 4,
+  "fiveRoleProcessFaultGroupsEach": 14,
+  "nodeForcedTerminationsEach": 15,
+  "targetedWorkerdForcedTerminationsEach": 6,
+  "sameUuidRecoveryProviderAdded": 0,
+  "freshSyntheticNamespacesOnly": true,
+  "separateStageApprovalRequired": true,
+  "oldBalancesReused": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "actualModelQualityMeasured": false,
+  "actualFinalEvaluationFrozen": false,
+  "liveDispatchSupported": false,
+  "powerLossDurabilityMeasured": false,
+  "releaseVerdict": "held",
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "runtime-lint-qualified.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "LocalWindows/synthetic responses;actual Englishquality,learner efficacy,live provider andotherOS/powerloss not measured.",
+    "The local Miniflare restart hook is bound toinstalled source;future runtime revisions require requalification.",
+    "Ambiguous/untracked orunknown runtime ownership isheld,never guessed orkilled byname. This doesnotprove safetyagainst anactively hostile same-user OS actor swapping filesystem handles.",
+    "Before-images precede explicitmanualreopen;not every automatic runtime database recovery."
+  ],
+  "proofSha256": "632aa51d3776089a1cd19954198a2e195ad2284527bef5b1bb8ef16a60196f4b"
+}

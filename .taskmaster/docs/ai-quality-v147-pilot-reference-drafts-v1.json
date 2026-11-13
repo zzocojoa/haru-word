@@ -1,0 +1,87 @@
+{
+  "protocol": "ai-quality-v147-pilot-reference-drafts-v1",
+  "recordedAtUtc": "2026-11-08T15:44:02.569466+00:00",
+  "document": "docs/AI_QUALITY_V147_PILOT_REFERENCE_DRAFTS_20261109.md",
+  "documentSha256": "7c98f9c6593b459d814b4e667d8d0ad679c549a9ac9832a36d7e4dc8f0c40168",
+  "referenceDraftsFile": ".taskmaster/evaluation/ai-quality-v147/pilot-reference-drafts-v1.json",
+  "sourceClaimsFile": ".taskmaster/evaluation/ai-quality-v147/pilot-reference-source-claims-v1.json",
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/pilot-reference-drafts-v1.json": "9ce084fb122ac7a98e6921d33baa88637cb39554f4335db04690706e8e75996b",
+    ".taskmaster/evaluation/ai-quality-v147/pilot-reference-source-claims-v1.json": "b28ad93744e91af9bd3225d040368680a187b01a848b052e7bf2d5c03a890562",
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/grammar/target-criteria.ts": "146483f42c9fb01162b2015c12e23a232b1264bbdde90fa570f25d53724dd096",
+    ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+    ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "36c433a1bc05bdc1d3b458d79e538915ed1ae5d0e32fe62800712bb034e3dd6b",
+    ".taskmaster/scripts/ai-quality-v147-pilot-input-preparation-v1.mjs": "58a9bc0c6206587c77f45346ead0734bb310b9d173ebce36ac495d7d14ec00ce"
+  },
+  "referenceDraftsAuthored": 60,
+  "node22ContractAccepted": 60,
+  "node24ContractAccepted": 60,
+  "existingSourceRecords": 26,
+  "newPrimaryReadRecords": 26,
+  "allSourceRecords": 52,
+  "ruleClaims": 27,
+  "productPolicies": 6,
+  "conditionalInterpretationCases": [
+    {
+      "caseId": "pilot-grammar-needsCorrection-02",
+      "issues": [
+        {
+          "id": "present-agreement-versus-past-intention",
+          "state": "peer-review-needed",
+          "condition": "Proposed repair follows the written present lead;review whether a missing past-time interpretation requires withholding.",
+          "decisionRequiredBeforeQualification": true
+        }
+      ]
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-07",
+      "issues": [
+        {
+          "id": "register-negative-concord",
+          "state": "unresolved",
+          "condition": "Proposed needs_work applies to standard written English;regional negative concord is not universally wrong.",
+          "decisionRequiredBeforeQualification": true
+        }
+      ]
+    }
+  ],
+  "observedStructuralOverlapGroups": {
+    "missing-main-clause": [
+      "pilot-word-insufficientContext-01",
+      "pilot-grammar-insufficientContext-01",
+      "pilot-grammar-insufficientContext-03",
+      "pilot-word-insufficientContext-05",
+      "pilot-grammar-insufficientContext-07",
+      "pilot-word-insufficientContext-07",
+      "pilot-word-insufficientContext-09",
+      "pilot-grammar-insufficientContext-10"
+    ],
+    "nominal-missing-main-predicate": [
+      "pilot-grammar-insufficientContext-02",
+      "pilot-word-insufficientContext-02",
+      "pilot-grammar-insufficientContext-04",
+      "pilot-grammar-insufficientContext-05",
+      "pilot-word-insufficientContext-06",
+      "pilot-grammar-insufficientContext-08",
+      "pilot-word-insufficientContext-10"
+    ]
+  },
+  "structuralAuditComplete": false,
+  "independentFamilyCountClaim": 0,
+  "actualReferenceModelResponses": 0,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "actualInputTokensMeasured": false,
+  "allCaseSemanticClaimsProven": false,
+  "referenceQualified": false,
+  "sourceQualified": false,
+  "familyIndependenceVerified": false,
+  "englishTruthCertified": false,
+  "mainDispatchAuthorized": false,
+  "goalComplete": false,
+  "releaseVerdict": "held"
+}

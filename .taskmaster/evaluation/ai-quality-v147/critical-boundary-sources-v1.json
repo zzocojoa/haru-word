@@ -1,0 +1,50 @@
+{
+  "protocol": "ai-quality-v147-critical-boundary-sources-v1",
+  "checkedAtUtc": "2026-11-08T05:11:15.787337+00:00",
+  "sourceScope": "Author/publisher chapter summaries or extracts only; no full chapter/body hash or independent grade certification.",
+  "sources": [
+    {
+      "id": "searle-force-content",
+      "title": "A taxonomy of illocutionary acts",
+      "author": "John R. Searle",
+      "publisher": "Cambridge University Press",
+      "doi": "10.1017/CBO9780511609213.003",
+      "url": "https://www.cambridge.org/core/books/abs/expression-and-meaning/taxonomy-of-illocutionary-acts/2CDFAF1E30D40F337B1380C70D6C73CA",
+      "excerpt": "a distinction between the illocutionary force of an utterance and its propositional content",
+      "paraphrase": "The author explicitly distinguishes the force of an utterance from its content and classifies types of force.",
+      "scopeLimit": "This does not specify project Boolean flags or label the Music example."
+    },
+    {
+      "id": "recanati-force-content",
+      "title": "Content, mode, and self-reference",
+      "author": "François Recanati",
+      "publisher": "Cambridge University Press",
+      "doi": "10.1017/CBO9780511619489.003",
+      "url": "https://www.cambridge.org/core/books/abs/john-searles-philosophy-of-language/content-mode-and-selfreference/F0F98DEF3A44F93CF1D7AB093951BEB8",
+      "excerpt": "the same proposition that would be the content of an assertion",
+      "paraphrase": "The author discusses one specified future action as content of an order, statement or question, while challenging a restriction on directive content.",
+      "scopeLimit": "Theory details are disputed. Similar topic words do not guarantee identical event, participants or time."
+    },
+    {
+      "id": "clause-type-force",
+      "title": "Clause Type, A Student’s Introduction to English Grammar, second edition",
+      "author": "Rodney Huddleston; Geoffrey K. Pullum; Brett Reynolds",
+      "publisher": "Cambridge University Press",
+      "url": "https://www.cambridge.org/highereducation/books/a-students-introduction-to-english-grammar/EB0ABC6005935012E5270C8470B2B740/clause-type/675210B6E6877604BE648512835ABE4C",
+      "excerpt": "characteristic but imperfect relations",
+      "paraphrase": "Clause forms have characteristic but imperfect relations to statements, questions and commands.",
+      "scopeLimit": "Do not infer the actual speech act from punctuation or clause form alone."
+    },
+    {
+      "id": "kroeger-speech-acts",
+      "title": "Special sentence types, Analyzing Grammar",
+      "author": "Paul R. Kroeger",
+      "publisher": "Cambridge University Press",
+      "doi": "10.1017/CBO9780511801679.012",
+      "url": "https://www.cambridge.org/core/books/abs/analyzing-grammar/special-sentence-types/FA85D4B84E6E0A2A6D5324D85470E769",
+      "excerpt": "making statements, asking questions, giving commands",
+      "paraphrase": "The summary distinguishes common speech actions and discusses their relation to sentence structures.",
+      "scopeLimit": "The summary supports a distinction, not exhaustive semantic equivalence or learner intent."
+    }
+  ]
+}

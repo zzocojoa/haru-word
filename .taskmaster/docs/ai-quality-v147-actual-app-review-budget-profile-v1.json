@@ -1,0 +1,17 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v3",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "f20723e1-04df-46a1-9a87-66095efb1afb",
+  "studyPlanHash": "066aa45687c5692bb7d32ae09434da91353efb9796f3369aab41006374d6a0fe",
+  "reservationMicros": "156241",
+  "countAllowanceMicros": "156241",
+  "expectedModelCalls": 12,
+  "expectedCountCalls": 12,
+  "runtimeDirectoryName": "ai-quality-v147-actual-app-review-runtime-20261112",
+  "collectorProtocol": "ai-quality-v147-fixed-product-review-v1",
+  "successStatus": "collected-fixed-product-review",
+  "maximumCombinedMicros": "1899480",
+  "restrictedMaximumMicros": "1743239",
+  "mainDispatchAuthorized": false
+}

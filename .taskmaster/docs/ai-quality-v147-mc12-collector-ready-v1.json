@@ -1,0 +1,33 @@
+{
+  "phase": "phase154",
+  "tasks": [
+    "25.1",
+    "34.3",
+    "34.4"
+  ],
+  "document": "docs/AI_QUALITY_V147_MC12_EXECUTOR_20261109.md",
+  "scopeSha256": "7e60ba8d44b741e36a39e5fa5f9eab6da21630399c5f0b50309fb3d9369456e6",
+  "budgetProfileFile": ".taskmaster/docs/ai-quality-v147-current-mc12-budget-profile-v1.json",
+  "budgetProfileSha256": "e102ad1141c7e537a9867206fd087d8fb1f90c6ad3094c7dd6cc9f290b304299",
+  "runtimeDirectoryName": "ai-quality-v147-current-mc12-runtime-20261109",
+  "reserveMicros": "713932",
+  "collectorSha256": "e86765816d6ff405c532e4c1c433c956e5af882cfe24fb3b2382adc87f57efd7",
+  "runnerSha256": "1137845c5dc042d619ee5c7b37a540f19854f43fcd116a3a0f7ccb4408ed76f1",
+  "syntheticChecks": 12,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "liveScopeApproved": false,
+  "mainDispatchAuthorized": false,
+  "noorFirstForCombinedApproval": true,
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "evidenceSha256": {
+    "collect-mc12.mjs": "e86765816d6ff405c532e4c1c433c956e5af882cfe24fb3b2382adc87f57efd7",
+    "run-mc12.mjs": "1137845c5dc042d619ee5c7b37a540f19854f43fcd116a3a0f7ccb4408ed76f1",
+    "test-mc12.mjs": "ba09753a72aced1e111e763d30a0dff0197e6e6a1852bb9fdf0dd87dc5066b3a",
+    "node24-initial.log": "84fa4ee32dd30d17b6c142e369f291f38c9b0249cc6f4332cf823f15786fd8b1",
+    "node24.log": "7c6c10b16f57cf723c61eece87777fa85d6c8a534e03c9a2a15a01e1f6ae2ac1",
+    "cli-no-approval.log": "b654ea76640edb392dc5170fb2199ebbfe0a78bce660810f7e6bc5c3711ddf76",
+    "ledger-before.json": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b"
+  }
+}

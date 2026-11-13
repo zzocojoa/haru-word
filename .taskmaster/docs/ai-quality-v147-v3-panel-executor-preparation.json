@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-11-06T14:59:53.315667+00:00",
+  "stage": "v3-synthetic-five-role-durable-panel-executor",
+  "tag": "ai-quality-v147",
+  "planId": "ai-quality-v147-2026-11-06",
+  "task22Complete": false,
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-panel-fixture-v3.mjs": "9faeeb70ef702cf13064eb5768c202b9f24dcbd46613ca6aac66cd26a2a6ffd7",
+    ".taskmaster/scripts/ai-quality-v147-panel-cli-v3.mjs": "3d767258fc3351e9bb541a038ae1a16c9825432dba1778ca851e755052751aae",
+    ".taskmaster/scripts/test-ai-quality-v147-panel-executor-v3.mjs": "236a951bbe16939b9cd379c0221f635098d8ca2cb6fe0f6dc54909747d4784cd",
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": "1cec4f2278db03e028cc974035aefcc72f4bb1369d64f860669f02ffc123b2f6",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "41a07c3e5316ac12070da44ed3023c0a221e59d386784ee285c356a7cae64681",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "f8c6cd176a1d7c30340b9e1ad1179bfbe019c3cceca22c9336592b5cf036caff",
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": "5f010f902da69e40e36ec7a85838de36abe28b1387dab485e5f0937ea6b99fb5"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "5d464fd5f30fdeaa65004cceeead59eb8612af1cde3865b68e71b15bfa619594",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3-fixture.mjs": "fcc36f2d69f1b7bb95d2d75cf16066afdc55fa45f5af22c644f0855374ee7efb",
+    ".taskmaster/scripts/ai-quality-v147-journal-v3.mjs": "78657f4fdfbd9e62b939cc4f4deb73995c9bc526a9f61af6c978f3f2bb6af880",
+    ".taskmaster/scripts/ai-quality-v147-recovery-v3.mjs": "3169cad265a286cb95d1be32000fdc0814778f53357a6ce6fd512e6cdc4e9b75",
+    ".taskmaster/scripts/ai-quality-v147-settlement-proof-v3.mjs": "9f7e1a4486a61984e5a7cbb7b54d3a0466c6a6efa01a098380909c251b59ab33",
+    ".taskmaster/scripts/ai-quality-v147-ai-panel.mjs": "08ade591043fe5ee392dd0b41fd3cba0c2a2ad2039a324a4aa982dc7facc780e",
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6"
+  },
+  "historicalCaptureSource": {
+    "file": ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs",
+    "sha256": "370ba3fceeb7397de923459bf915bfa13512d6c94875dcacf2bd59e9841cfa33",
+    "archiveFile": "phase25/management-before/.taskmaster/scripts/ai-quality-v147-capture-v3.mjs",
+    "priorProgressFile": "phase24/progress-final.json",
+    "priorProgressSha256": "df6c823702864252cb0842e19ed1f3a85163ce87ff1d9a7fb63c5b1300891186"
+  },
+  "checks": [
+    {
+      "name": "node22-final",
+      "kind": "panel",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "node22-final.log",
+      "sha256": "d8562b09c3f8319696594dcd8328954e28facf7e205c5d5809e6aa6e222d63c1"
+    },
+    {
+      "name": "node24-final",
+      "kind": "panel",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 1,
+      "exitCode": 0,
+      "log": "node24-final.log",
+      "sha256": "0b17579082208231e63bb15e6a8d3918152e65114c4a1bf73a769802425c1522"
+    },
+    {
+      "name": "capture-node22-final",
+      "kind": "capture-regression",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "capture-node22-final.log",
+      "sha256": "b0b6b9b9855c3447c7a064914016812078d462084f8b155383adbdff40c253c3"
+    },
+    {
+      "name": "capture-node24-final",
+      "kind": "capture-regression",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "capture-node24-final.log",
+      "sha256": "5dc98802b7bae14564cbcde1e1078a7bcf9134e1ced054eab4591963f1f34244"
+    },
+    {
+      "name": "settlement-node22-final",
+      "kind": "settlement-regression",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "settlement-node22-final.log",
+      "sha256": "cbe954bca226f8113faaea28ccd756585c8aedab0d47d1bc9559351b039ebd53"
+    },
+    {
+      "name": "settlement-node24-final",
+      "kind": "settlement-regression",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "settlement-node24-final.log",
+      "sha256": "1ad24773ebaf1c2878d05e034b9993b672e7783b902e4978b2794362313dbbc2"
+    }
+  ],
+  "proofBindings": {
+    "final-source-before-tests.json": "b186289b9650424946251ebc2baa90e3346d19195edb9dadc3a2e152690fbf33",
+    "v3-panel-executor-raw-preservation.json": "33c4d4b8692ed55a0ce1034821ad3c0f1f9f163abe2e69c07c2cc3296abd4981",
+    "product-regression-reuse.json": "65941bc0d066fcfbde4fd8b94c5a5d08634d2a52345fb1f7168cc87b5a1123d4",
+    "review-source-recheck.json": "5eaed7b9e0c1af0d4da04e7abe8c142cb1e346a27579118ce12cf9103bb5f58d",
+    "commands.json": "5a89c52d3516c046283f9049c32c72359af8db2fd2351286b509a7c7c1cc6d7e"
+  },
+  "syntheticOnly": true,
+  "syntheticDurableTransportIntegrated": true,
+  "calibrationGradeGateIntegrated": true,
+  "fullSyntheticHttpSlotsNode22": 2052,
+  "fullSyntheticStageSlots": [
+    180,
+    1872
+  ],
+  "fullSyntheticHttpRepeatedNode24": false,
+  "node24FullScaleNotRepeatedReason": "Whole-stage scale qualified onNode22;Node24 runs the10 focused tests,102-slot panel,draft role andsix actual CLI exits plusall13 capture/12 settlement regressions. No claim ofNode24 full2052 execution.",
+  "calibrationPreventsGeneration": true,
+  "fourNonselfVotesRequired": true,
+  "majorityVoteApplied": false,
+  "closedRepeatSends": 0,
+  "separateStageApprovalRequired": true,
+  "oldBalanceTransferred": false,
+  "reportActualCollectionIdsRetained": true,
+  "fullStagePhysicalCaptureFiles": 10260,
+  "fullStagePanelRawReviews": 1440,
+  "fullStageCalibrationRawReviews": 72,
+  "syntheticDissentHeld": 1,
+  "syntheticConsensusPass": 359,
+  "cliActualExitCode": 91,
+  "cliActualExitStagesEach": 6,
+  "guardRemovalContrast": {
+    "realSyntheticSends": 0,
+    "mutantSyntheticSends": 1
+  },
+  "currentBuiltWorkerFiveRoleIntegrated": false,
+  "actualFinalEvaluationFrozen": false,
+  "actualTokenBoundVerified": false,
+  "actualEnglishQualityMeasured": false,
+  "humanExpertValidation": false,
+  "learnerEfficacyMeasured": false,
+  "providerReceiptAuthenticated": false,
+  "liveDispatchSupported": false,
+  "powerLossDurabilityMeasured": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "releaseVerdict": "held",
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "Synthetic local transport/capture/provenance/control-flow proof only. Shared AI biases andactual English correctness are unmeasured.",
+    "Full newfive-role builtWorker/D1 integration remains;old12-cell Worker result is historical.",
+    "Final reference authoring contract,corpus/risk/sample,exactbody/token/prices andconcrete separate approval proposal precede any actualprovideraccess.",
+    "Source/code hashes bind supplied observations,not authenticated provider receipts orpower-loss durability."
+  ],
+  "proofSha256": "fa101fad83e3046063c8e98af2e8700c90bc8e0ea8b4cae8a92bb21fdd211d9a"
+}
