@@ -5,6 +5,8 @@ phase224: T38 실제 운영 단어·문법×Sol/Terra/Astra 6/6 교정 표시·�
 
 [운영 검증 결과](docs/AI_QUALITY_V148_OPERATING_VERIFICATION_20261113.md) · [예산·실행 원본](.taskmaster/docs/ai-quality-v148-operating-verification-v1.json) · [대시보드](http://127.0.0.1:4318/).
 
+[이번 GitHub 반영 범위·검증·보존 사항](docs/AI_QUALITY_V148_GITHUB_PR_20261113.md)을 확인할 수 있다.
+
 현재 AI 계약·장애 차단·복구 지침은 [OpenAI 운영 절차](docs/OPENAI_FEEDBACK.md)와 [v148 게시·복구 기록](docs/AI_QUALITY_V148_FEATURE_RELEASE_20261113.md)을 따른다.
 
 <!-- /ai-quality-v147-latest-run -->
