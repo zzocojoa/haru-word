@@ -16,6 +16,9 @@ import {SentenceFeedbackPanel} from '../app/sentence-feedback';
 import {AiRequestProvider} from '../app/ai-request-context';
 import type {SentenceFeedback} from '../lib/sentence-feedback';
 import {latestFeedback} from '../lib/recoverable-feedback';
+import {useFeedbackContext} from '../app/use-feedback-context';
+import {FeedbackContextInput} from '../app/feedback-context-input';
+import {grammarFeedbackInput} from '../lib/grammar/feedback-input';
 const params=new URLSearchParams(location.search),mode=params.get('mode')??'word',initial=params.get('sentence')??'Saved synthetic sentence.';
 const stage=params.get('stage')==='en'?'en':'sentence',requests=params.get('requests')==='1';
 const date='2026-11-03',createdAt=date+'T00:00:00.000Z';
@@ -51,11 +54,13 @@ function Word(){
 function Grammar(){
  const root=useRef<State>({...structuredClone(EMPTY),grammar:{auxiliary:grammar()}});
  const draft=useGrammarDraft('auxiliary',{currentState:root,save:async()=>false,stage:(_id,p)=>{root.current={...root.current,grammar:{auxiliary:p}};},canSave:false,saved:false,registerLeave:()=>()=>{}},true,4);
- const ai=useGrammarFeedback({lessonId:'auxiliary',contentVersion:4,latest:draft.latest,change:draft.change,flush:requests?async()=>true:draft.flush,canSave:requests});
+ const lesson=GRAMMAR_LESSONS.find(l=>l.id==='auxiliary')!;
+ const feedbackContext=useFeedbackContext('grammar',JSON.stringify(['auxiliary',4]),grammarFeedbackInput(lesson,draft.draft.sentence),'gpt-6.1-sol');
+ const ai=useGrammarFeedback({lessonId:'auxiliary',contentVersion:4,latest:draft.latest,change:draft.change,flush:requests?async()=>true:draft.flush,canSave:requests,context:{contextNote:feedbackContext.note,contextKind:feedbackContext.kind,expectedContextFingerprint:feedbackContext.fingerprint}});
  const changeSentence=(value:string)=>{ai.invalidate();draft.change(p=>updateGrammarSentence(p,value));};
- return <><DraftRecoveryNotice input={draft.persistent}/><GrammarWriting lesson={GRAMMAR_LESSONS.find(l=>l.id==='auxiliary')!} progress={draft.draft} retainedFeedback={latestFeedback(draft.persistent.lastFeedback,ai.retainedFeedback)}
+ return <><DraftRecoveryNotice input={draft.persistent}/><GrammarWriting lesson={lesson} progress={draft.draft} retainedFeedback={latestFeedback(draft.persistent.lastFeedback,ai.retainedFeedback)}
   canSave={true} aiPending={ai.pending} recoveryPending={ai.recoveryPending} aiError={ai.error} onAi={ai.check} onSentence={changeSentence} onCheck={()=>{}} onChecks={()=>{}} onFrame={()=>{}} onExplain={()=>{}} onComplete={()=>{}}/>
- <Controls snapshot={{mode,progress:draft.draft}}/></>;
+ <FeedbackContextInput context={feedbackContext}/><Controls snapshot={{mode,progress:draft.draft}}/></>;
 }
 function Harness(){
  const [owner,setOwner]=useState(params.get('owner')??'synthetic-owner');
