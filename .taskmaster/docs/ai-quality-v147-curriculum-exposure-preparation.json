@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "stage": "authored-curriculum-exposure-and-capacity-audit-v1",
+  "recordedAtUtc": "2026-11-07T03:05:45.552142+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "records": 1265,
+  "uniqueSurfaces": 255,
+  "newUniqueSurfaces": 253,
+  "combinedUniqueSurfaces": 426,
+  "editions": 4,
+  "sourceFiles": 5,
+  "groupsEachNode": 6,
+  "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/curriculum-exposure-audit-v1.json",
+  "activeBoundedInventoryFile": ".taskmaster/evaluation/ai-quality-v147/public-exposure-inventory-v2.json",
+  "activeBoundedInventorySha256": "431a45842e60b69114f26950bf0afff8b54730c20864432fb3f81cb02b84177d",
+  "implementationSha256": {
+    ".taskmaster/scripts/build-ai-quality-v147-curriculum-exposure-v1.mjs": "b114869df4d9a84d3faec28fbc10e928ce49ab0f1cf2ece3ebdda7dce8484ffb",
+    ".taskmaster/scripts/test-ai-quality-v147-curriculum-exposure-v1.mjs": "352b213bb16463dcdc06217303a8b2f3835653d6b0d2a192e0dd7a763b79c89e"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/curriculum-exposure-audit-v1.json": "23aed59a5a945f51ae194ee1be10eb5004283644437d3d8558b32288cf297ba8"
+  },
+  "sourceBindings": {
+    "lib/grammar/content-v2.ts": "fdccf9f7ed6a1b855fd32032e01af9af8838d278188f0e92aa0082a5caf453a7",
+    "lib/grammar/content-v3.ts": "9e32227c192b684b7b4748ed3b2685001a8fff83cc3cd70ca27f350ffbcd36d3",
+    "lib/grammar/content-v4.ts": "0a616f66b2e95abfbddb32c74b850107144231ecc2b6b35ddcd431e69156e7bd",
+    "lib/grammar/content.ts": "d7867e654da2c58a1e96f9d83a0a3ae55f922f2368652209dc170853dda4e01d",
+    "lib/grammar/wrong-choice-reasons.ts": "4bdb21563bbaba4dbc00a808d742c912540b744876ef4383a347bb1cc2582c9f"
+  },
+  "document": "docs/AI_QUALITY_V147_CURRICULUM_EXPOSURE_20261107.md",
+  "documentSha256": "85ed91d6731c059b098d6a858039ae2fb665c090b08b25b686c61eacea8b007c",
+  "checks": [
+    {
+      "name": "curriculum-node22-first",
+      "exitCode": 0,
+      "log": "curriculum-node22-first.log",
+      "sha256": "c711576d81b08f53e45bf60f6cdb7f1a504484b4b3ea47eafc37993489fc4a65"
+    },
+    {
+      "name": "curriculum-node24-final",
+      "exitCode": 0,
+      "log": "curriculum-node24-final.log",
+      "sha256": "331f6878e8f76b8b8b1462b5d4e5d6def9048375dc97a61f350e3181e591b3f6"
+    }
+  ],
+  "rawEvidenceFile": "curriculum-raw-preservation.json",
+  "rawEvidenceSha256": "061d6931fc749e5c75b6b7a7dacf298b244be96a977188d3442236ad0262c795",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "liveExecutorChanged": false,
+  "currentBoundedWireInventoryReplaced": false,
+  "completeCurriculumExposure": false,
+  "completeProjectExposure": false,
+  "actualEnglishQualityMeasured": false,
+  "actualInputTokensMeasured": false,
+  "liveDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "releaseVerdict": "held",
+  "sourceBoundReplay": {
+    "rootLocalCheckExitCode": 1,
+    "authoritativeSourceReplayExitCode": 0,
+    "differenceFile": "root-source-curriculum-provenance-difference.json",
+    "differenceSha256": "049105f93125803851e4543ee5b84046effcd005bd7e73c26f7da5e1b18b694a",
+    "replayLog": "source-bound-check-from-root.log",
+    "replayLogSha256": "86f9a834f6404ebfd18690f2784927c8b91cc2c432efadff5566232b4a713828",
+    "rootRawProductFilesChanged": false,
+    "hashContractWeakened": false
+  }
+}

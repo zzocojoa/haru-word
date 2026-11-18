@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "stage": "frozen-optin-public-exposure-evidence-integration",
+  "recordedAtUtc": "2026-11-07T02:04:14.080897+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "groupsEachNode": 14,
+  "publicInventoryRows": 18,
+  "publicInventoryUniqueSurfaces": 14,
+  "publicInventoryCoverage": "partial",
+  "requiredPolicyLocalIntegrationComplete": true,
+  "completeProjectExposureInventory": false,
+  "legacyFrozenWiresPreserved": true,
+  "actualIndependentFamiliesEstablished": false,
+  "actualEnglishQualityMeasured": false,
+  "actualRoleQualificationMeasured": false,
+  "actualInputTokensMeasured": false,
+  "counterFeesVerified": false,
+  "liveDispatchAuthorized": false,
+  "generationCapsChanged": false,
+  "fullNewScaleQualified": false,
+  "credentialChoice": "reuse-existing",
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "releaseVerdict": "held",
+  "inventoryFile": ".taskmaster/evaluation/ai-quality-v147/public-exposure-inventory-v1.json",
+  "document": "docs/AI_QUALITY_V147_EXPOSURE_EVIDENCE_20261107.md",
+  "documentSha256": "d59eee0cea6b2a3525e033b5056612cf8f04bb61927b41e6afce0cc33c8045da",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-exposure-v1.mjs": "dbca8e56cd9b9306844ba8acc2d9e88f415fa633f7cea0180f343086841acc06",
+    ".taskmaster/scripts/build-ai-quality-v147-public-exposure.mjs": "d977a4ef47ba7cb9edbd9ab8e57296a2f6b07a74304cf3bbb50324469aaf0e79",
+    ".taskmaster/scripts/ai-quality-v147-exposure-fixture-v1.mjs": "6f2b15d1d9ec405e5f2dc32a51340d1050b1ba5a9468344257408cf3c801a61a",
+    ".taskmaster/scripts/test-ai-quality-v147-exposure-v1.mjs": "e3d5d5a70d7045658bcce7fc596ff683559b6e392e0d6a8af7a3fff5431f6eed",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "47a05b1919c0c3be1a1bf53ceb7352f5e84dcc12e5db9d72a6c6bb8006453189",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "967a01bb762d376895ca820cfd59479db7ff52b48fc0ee608c5909573a391a88"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/public-exposure-inventory-v1.json": "513432dfa02eae768e4e0c20bb468ff61fbd4b72a5125a30773c280c129adae5"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": "2b10affaf7a505cd55d577356f742eb34017e47b00e2162211cd94e0f90c26ca",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "a8b39d1156ee5e220b138479b43217e108cea5f5e63bd606831c5ecf72466e4a",
+    ".taskmaster/scripts/ai-quality-v147-reference-fixture-v4.mjs": "2eee488c7de99ccf04ad6c75722ecad2ba9c09d69e0245b393c4450bc3015ab9",
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": "9fce5bbb8f8c8e0b7342ff676d3a4ff65f988c230fc6f07e51bf0531e0b977ac",
+    ".taskmaster/scripts/ai-quality-v147-input-count-v1.mjs": "e07e1d5c4a6ef4f6f66b99bd4c00895d02d941db433bfb954182d1435a700c44",
+    ".taskmaster/scripts/ai-quality-v147-input-count-store-v1.mjs": "425e928d65b5cd04b297cb64aabb94a0b9520764b9b4848082214227c21aa559",
+    ".taskmaster/scripts/ai-quality-v147-input-count-http-v1.mjs": "e0d73ecfa97fb90e66f0a8ce756bffa9840631f1f3e016c0f7f4130a7885b35f",
+    ".taskmaster/scripts/ai-quality-v147-panel-cli-v3.mjs": "78c66c5678292aad2e93c92d0d99f57ba2a5d2a7009fac1f7788ad3bad58d860",
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": "b40aa8251bc66e98603b6af273566acdf8621bd4aaacdf40d768c1d27357e128",
+    ".taskmaster/docs/ai-quality-v147-reference-readiness-draft.json": "34764e89714f20ad46dd7039e5b5535be651ce08ff9e471d9b772faa9c4dbbd8"
+  },
+  "historicalSources": {
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": {
+      "sha256": "b9e43d484184fd38197527f74cf549d13cc417f8b78c8a08d2f6099006df5c13",
+      "archiveFile": "phase35/management-before/.taskmaster/scripts/ai-quality-v147-reference-v4.mjs",
+      "priorProgressFile": "phase34/progress-final.json",
+      "priorProgressSha256": "c6d60de0b74f653b8f2d711f8d4fef7351bfe454cd0aad388e4b148080ab83ac"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": {
+      "sha256": "11cc2f481b55cfe086cf4d56c7d3659908528ec9738757f63db56fec382579ae",
+      "archiveFile": "phase35/management-before/.taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs",
+      "priorProgressFile": "phase34/progress-final.json",
+      "priorProgressSha256": "c6d60de0b74f653b8f2d711f8d4fef7351bfe454cd0aad388e4b148080ab83ac"
+    }
+  },
+  "checks": [
+    {
+      "name": "exposure-node22-final",
+      "kind": "exposure",
+      "exitCode": 0,
+      "log": "exposure-node22-final.log",
+      "sha256": "33bf86bf58fd75069ff44be043157336c4578ef2d7b4b016b68813376649a9f4"
+    },
+    {
+      "name": "exposure-node24-final",
+      "kind": "exposure",
+      "exitCode": 0,
+      "log": "exposure-node24-final.log",
+      "sha256": "07d793438e13865c879ab2f6ee8fa883bf80ab7c3720a39106025e756ea592b9"
+    },
+    {
+      "name": "reference-node22",
+      "kind": "reference",
+      "exitCode": 0,
+      "log": "reference-node22.log",
+      "sha256": "bea57e847e16cca6ae381c2b3088825cfe1e4e19d6afe5b4656ff296198d7063"
+    },
+    {
+      "name": "reference-node24",
+      "kind": "reference",
+      "exitCode": 0,
+      "log": "reference-node24.log",
+      "sha256": "c508b99695a6ec28c2e6e15149041f738ae6b2a1ca733ab1ce5c2c47b08c97af"
+    },
+    {
+      "name": "count-executor-node22",
+      "kind": "count",
+      "exitCode": 0,
+      "log": "count-executor-node22.log",
+      "sha256": "8a4222ff2a2e7a9b8f04b922137f2d2baca91be078db04a2a9a54379f58bd1c1"
+    },
+    {
+      "name": "count-executor-node24",
+      "kind": "count",
+      "exitCode": 0,
+      "log": "count-executor-node24.log",
+      "sha256": "ff5eb27ee5c86f1d923e8a4632d61a331619e8d79812c8e3af334fe170eba390"
+    },
+    {
+      "name": "legacy-executor-node22",
+      "kind": "executor",
+      "exitCode": 0,
+      "log": "legacy-executor-node22.log",
+      "sha256": "74f8071e3d1f6adbc357799b7dacd95f711ce6d5ac88cd04d39c9fc15adb4e15"
+    },
+    {
+      "name": "legacy-executor-node24",
+      "kind": "executor",
+      "exitCode": 0,
+      "log": "legacy-executor-node24.log",
+      "sha256": "59311c8f6b96c5ff4632ecb71ddfccfb52fc625bca7adc4f2af3da4750e7bff8"
+    },
+    {
+      "name": "worker-node22",
+      "kind": "worker",
+      "exitCode": 0,
+      "log": "worker-node22.log",
+      "sha256": "62182796e03fcc0128439c1d449e0842db5ef10d4447eb80ed327cf00fa1f958"
+    },
+    {
+      "name": "worker-node24",
+      "kind": "worker",
+      "exitCode": 0,
+      "log": "worker-node24.log",
+      "sha256": "6448cdf2c473992fdad8e0d90466ec08ab008e6ee856761b7ad7229870b574b1"
+    }
+  ],
+  "rawEvidenceFile": "exposure-raw-preservation.json",
+  "rawEvidenceSha256": "06569caba7ba51b3293186b64c0697b2950d9ebbeefa1cd78712288b5ec659f9",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

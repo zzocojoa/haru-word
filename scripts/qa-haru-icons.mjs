@@ -25,6 +25,7 @@ const cases = [
   'haru-record-icons-qa.cjs',
   'haru-system-icons-qa.cjs',
   'backup-workflow-qa.cjs',
+  'local-draft-qa.cjs',
 ];
 const engine = process.env.QA_BROWSER || 'chromium';
 

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "atUtc": "2026-11-06T12:27:56.146518+00:00",
+  "task": 22,
+  "stage": "v3-explicit-nonsettle-journal-recovery",
+  "task22Complete": false,
+  "checks": [
+    {
+      "name": "recovery-v3-node-v22.23.4-final",
+      "passed": 20,
+      "failed": 0,
+      "exitCode": 0,
+      "log": "recovery-v3-node-v22.23.4-final.log",
+      "sha256": "4f351b474686690c3da5ae812e24a1cac22f954680caa3714a88b2358e526dc8",
+      "evidenceDirectory": "recovery-v3-node-v22.23.4-final"
+    },
+    {
+      "name": "recovery-v3-node-v24.22.1-final",
+      "passed": 20,
+      "failed": 0,
+      "exitCode": 0,
+      "log": "recovery-v3-node-v24.22.1-final.log",
+      "sha256": "a71c47a5f0ca20e7fcc0323054b085cc8e3b638b1cc7b92e8111d46fd602f6fb",
+      "evidenceDirectory": "recovery-v3-node-v24.22.1-final"
+    }
+  ],
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-recovery-v3.mjs": "4d53ce77c5fc721a4c388eeba74e9539a057b745f757bbe2260f579493a92c18",
+    ".taskmaster/scripts/ai-quality-v147-recovery-v3-child.mjs": "f5d3d525d58a382c33e54913e7408a8971eb6f9eb3441e7dd1e9d5cbb7668986",
+    ".taskmaster/scripts/test-ai-quality-v147-recovery-v3.mjs": "e7226e956a7e8068d0c0be12227130a42a0e0707457f3e1c2e6b1261e4b64544"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3-fixture.mjs": "b5d89c99e0c663c241357a83a6acfbac0ea94fed16b54731b26af4fd98e4aae0",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8",
+    ".taskmaster/scripts/ai-quality-v147-journal-v3.mjs": "78657f4fdfbd9e62b939cc4f4deb73995c9bc526a9f61af6c978f3f2bb6af880",
+    ".taskmaster/scripts/ai-quality-v147-journal-v3-child.mjs": "08bba27ddbf1b734ef9a24ce528eded7e9e60f324b4e0908a03bb31eaf6f989a"
+  },
+  "proofBindings": {
+    "recovery-design.json": "d4b01a40345772dc266fcf6c09c7c07940bac67cb2264427677f12944da75e8c",
+    "v3-recovery-raw-preservation.json": "29bbf21d14bb39ce4095ac20e2d7a97e220460670f52b890aa83fbdbb3e874e9",
+    "product-regression-reuse.json": "617b1ce7832b91aeca1970997a15e4efc76699e5ba6822a46275ecf6e61de229",
+    "first-run-clarification.json": "89b0f0e2fe1180b05b058e688e3cda50a5108a1e71314b8038a18520cec948fb",
+    "recovery-first-core.mjs": "24607388af0f952c0322a2e33bf5827ed6c45d1da41e11d310ad4482fecd9bbe",
+    "recovery-first-child.mjs": "f5d3d525d58a382c33e54913e7408a8971eb6f9eb3441e7dd1e9d5cbb7668986",
+    "recovery-first-test.mjs": "15ce78d142622bcba6f00c2a80c6db81f3241bbc6cc3a87a07933ef89b7c7114",
+    "recovery-v3-node-v24.22.1-first.log": "5235fdb833e82755ad6f35f8baad66af93e0535a3cde4eaa5e9709e8da0e628e",
+    "recovery-v3-node-v24.22.1-first.exit.json": "5aec1653a461195fd004e4482f369fc847b8859fbb8bb1af2495f906461045e8",
+    "recovery-v3-node-v24.22.1-focused.log": "bc42408ab145a66c4b50ce5320859a9ed3888db3a55ae67555f87774ad85ef42",
+    "recovery-v3-node-v24.22.1-focused.exit.json": "8299db14fa8b3989b067601173031fab006a60372b218274e5f6909b44a83088",
+    "recovery-lint-first.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "recovery-lint-first.exit.json": "d45db54bba0c56e2691a52869729c0a3eade7f5d50545e7832a20e3262a9d422",
+    "recovery-lint-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "recovery-lint-final.exit.json": "d45db54bba0c56e2691a52869729c0a3eade7f5d50545e7832a20e3262a9d422",
+    "recovery-v3-node-v22.23.4-final.log": "4f351b474686690c3da5ae812e24a1cac22f954680caa3714a88b2358e526dc8",
+    "recovery-v3-node-v22.23.4-final.exit.json": "27f130d7feeda736c3365aefe0ebf04abdf6bfd3027d4fcbeb1430f619acd414",
+    "recovery-v3-node-v22.23.4-final/recovery-v3-observations.json": "c649fa8af62874668a77f8748f1acd290615a01f1a2ce243d8c505090ea1e2de",
+    "recovery-v3-node-v24.22.1-final.log": "a71c47a5f0ca20e7fcc0323054b085cc8e3b638b1cc7b92e8111d46fd602f6fb",
+    "recovery-v3-node-v24.22.1-final.exit.json": "7f9cb48efb2397539f11caacf87e2a6ccaa4cbec73889e930ca9c92717c46edb",
+    "recovery-v3-node-v24.22.1-final/recovery-v3-observations.json": "c9f884c423ed5b4ad684b02108b9c117d71c47d21137d2f160fad36f9b9600bb"
+  },
+  "syntheticOnly": true,
+  "explicitNonsettleRecoveryImplemented": true,
+  "originalBytePreservationVerified": true,
+  "freshInspectionRequired": true,
+  "processIdentityRequired": true,
+  "kernelMutexRequired": true,
+  "noResendVerified": true,
+  "actualWriterExitStagesEach": 10,
+  "actualRecovererExitStagesEach": 11,
+  "writerExitCode": 83,
+  "recovererExitCode": 84,
+  "actualWindowsRenameErrorEach": "EPERM",
+  "settleRecoveryImplemented": false,
+  "physicalCaptureIntegrated": false,
+  "actualWireEqualityVerified": false,
+  "runtimeIntegrated": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualHttpRequests": 0,
+  "actualPaidApprovalUsd": 0,
+  "liveDispatchSupported": false,
+  "powerLossDurabilityMeasured": false,
+  "actualFinalEvaluationFrozen": false,
+  "actualModelQualityMeasured": false,
+  "releaseVerdict": "held",
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "recovery-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "Recovery covers validated non-settle journal transitions only. Pending settle remains held until physical capture verification is integrated.",
+    "Writer10/recoverer11 are distinct actual process-exit stages perruntime. Additional setup,lease,audit-tamper andtraversal crashes are also retained as raw synthetic evidence.",
+    "Controlled partial append is a test fixture mutation,not an observed OS partial-write fault. Windows process-exit/fsync/rename tests do not prove power-loss durability.",
+    "Reference/main approval handoff,actual bodies/token/price freeze,calibration grade gate,capture/new executor andreal English-quality measurement remain incomplete."
+  ],
+  "proofSha256": "264dd230cdaacfaeb1d736137ee8d66b8b350be3a89927d000f2533a0544c623"
+}

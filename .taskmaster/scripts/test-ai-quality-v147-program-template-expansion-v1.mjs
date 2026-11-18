@@ -1,0 +1,49 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
+import {resolve,dirname} from 'node:path';
+import {createHash} from 'node:crypto';
+import {readFiniteStringTableV1,buildProgramTemplateExpansionV1,loadProgramTemplateExpansionV1,matchProgramTemplateExpansionV1} from './ai-quality-v147-program-template-expansion-v1.mjs';
+import {loadDiagnosticEnvelopeV1,compileDiagnosticEnvelopeV1} from './ai-quality-v147-diagnostic-envelope-v1.mjs';
+import {globalExposureMatchesV1} from './ai-quality-v147-global-exposure-v1.mjs';
+const sourceRoot=loadDiagnosticEnvelopeV1().prepared.sourceRoot,p=loadProgramTemplateExpansionV1(),r=p.result,out=resolve(process.env.QA_OUTPUT_DIR),sha=x=>createHash('sha256').update(x).digest('hex'),j=f=>JSON.parse(readFileSync(f,'utf8')),rows=[];
+mkdirSync(out,{recursive:false});const save=(f,v)=>writeFileSync(resolve(out,f),JSON.stringify(v,null,2)+'\n',{flag:'wx'}),pass=name=>rows.push({name,passed:true});
+const previousFile='.taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json',previous=j(resolve(sourceRoot,previousFile)),sources=Object.fromEntries([...new Set(previous.result.files.flatMap(f=>f.templates.map(t=>t.sourceFile)))].map(f=>[f,readFileSync(resolve(sourceRoot,f),'utf8')])),args=()=>({previousAudit:structuredClone(previous),sourceTexts:{...sources},mannerSource:readFileSync(resolve(sourceRoot,'lib/feedback-manner-adjectives.ts'),'utf8'),wordRows:j(resolve(sourceRoot,'data/words.json')),existingCorpus:j(resolve(sourceRoot,p.existingCorpusFile))});
+test('finite arrays and tuples are read from syntax;calls,spreads,holes,numbers,side effects and extra statements never execute',()=>{
+ assert.deepEqual(readFiniteStringTableV1('(["awful","helpful"] as const)'),['awful','helpful']);assert.deepEqual(readFiniteStringTableV1('[["lent","lend"],["paid","pay"]]'),[['lent','lend'],['paid','pay']]);
+ for(const expression of ['getWords()','[...words]','["a",,]','[1]','["a",["b"]]','[["a"],["b","c"]]','["a"];globalThis.TEMPLATE_AUDIT_EXECUTED=true','[globalThis.TEMPLATE_AUDIT_EXECUTED=true]','[`They ${run()} walk.`]'])assert.throws(()=>readFiniteStringTableV1(expression),/PT1_/);
+ assert.equal(globalThis.TEMPLATE_AUDIT_EXECUTED,undefined);save('finite-syntax-guards.json',{finiteLiteralsOnly:true,unsupportedExpressionsHeld:9,sourceExecutionPerformed:false});pass('finite syntax without execution');
+});
+test('all15 earlier candidates are explicitly classified:12English templates,1Korean UI and2SQL,with no UI/SQL in generated examples',()=>{
+ assert.equal(r.classifiedTemplates.length,15);assert.equal(r.classifiedTemplates.filter(x=>x.classification==='finite-English-test-template').length,12);assert.equal(r.classifiedTemplates.filter(x=>x.role==='excluded-korean-ui-guidance').length,1);assert.equal(r.classifiedTemplates.filter(x=>x.role==='excluded-sql-statement').length,2);assert.ok(r.generated.every(x=>!x.sentence.startsWith('DELETE')&&!/[가-힣]/.test(x.sentence)));assert.ok(r.classifiedTemplates.every(x=>x.sourceExecutionPerformed===false));save('candidate-roles.json',r.classifiedTemplates);pass('12English and3nonlearning source roles');
+});
+test('14POS-backed adjective values and actual finite tuples yield76records/69surfaces across5loops,all with independently checked source spans',()=>{
+ assert.deepEqual(r.counts,{candidateTemplates:15,englishTemplates:12,excludedUiTemplates:1,excludedSqlTemplates:2,adjectiveValues:14,loopGroups:5,generatedOccurrences:76,uniqueGeneratedSurfaces:69,generatedSurfacesOutside426:69,generatedSurfacesOutsideStatic433:68});
+ for(const row of r.classifiedTemplates)for(const at of [row.templateOrigin,row.loopOrigin,row.iterableOrigin].filter(Boolean)){const raw=readFileSync(resolve(sourceRoot,at.sourceFile),'utf8');assert.equal(sha(raw.slice(at.utf16Start,at.utf16End)),at.sourceSliceSha256);}
+ assert.equal(r.completeForSelectedTwelveTemplateExpressions,true);assert.equal(r.allProgramGeneratedInputsEnumerated,false);save('actual-template-expansions.json',p);pass('76finite records and complete source spans');
+});
+test('tuple bindings remain paired and generated roles do not create grammar labels or arbitrary morphology',()=>{
+ for(const frame of r.classifiedTemplates.filter(x=>x.classification==='finite-English-test-template')){
+  const records=r.generated.filter(g=>g.templateId===frame.templateId);assert.equal(records.length,frame.rows.length);for(const g of records){assert.deepEqual(g.bindings,Object.fromEntries(frame.bindings.map((name,i)=>[name,frame.rows[g.iterationIndex][i]])));assert.equal(g.role,frame.role);assert.equal(g.correctnessOrExpectedGradeAssigned,false);}
+ }
+ const first=r.generated.filter(g=>g.sentence.startsWith('The drummer played the rhythm '));assert.equal(first.length,4);for(const g of first)assert.ok((g.bindings.adjective==='skillful'&&g.bindings.adverb==='skillfully')||(g.bindings.adjective==='skilful'&&g.bindings.adverb==='skilfully'));
+ assert.ok(r.surfaces.some(x=>x.sentence==='They performed the task helpful.'));assert.ok(r.surfaces.some(x=>x.sentence==='They performed the task helpfully.'));assert.ok(!r.surfaces.some(x=>x.sentence==='They performed the task friend.'));save('paired-bindings-and-no-labels.json',{pairedTuplesPreserved:true,unlistedAdjectivesNotInvented:true,expectedGrammarGradesAssigned:false});pass('paired bindings and provenance-only roles');
+});
+test('dictionary mismatch,source change or unsupported hole cannot silently replace the frozen expansion',()=>{
+ const changedWords=args();changedWords.wordRows=changedWords.wordRows.filter(w=>w.word!=='helpful');assert.throws(()=>buildProgramTemplateExpansionV1(changedWords),/PT1_MANNER_PROVENANCE/);
+ const changedSource=args();const file='tests/ai-quality-morphology.test.mjs';changedSource.sourceTexts[file]+='\n// synthetic change';assert.throws(()=>buildProgramTemplateExpansionV1(changedSource),/PT1_SOURCE_CHANGED/);
+ const changedFrame=args();changedFrame.previousAudit.result.files.find(f=>f.templates.length>0).templates[0].id='unreviewed';assert.throws(()=>buildProgramTemplateExpansionV1(changedFrame),/PT1_TEMPLATE_SET/);save('binding-mutations-held.json',{dictionaryMismatchHeld:true,sourceChangeHeld:true,unreviewedFrameHeld:true});pass('frozen dictionary/source/template guards');
+});
+test('all69 generated surfaces are outside active426;normalized uppercase matches remain known and unknown inputs never gain freshness clearance',()=>{
+ const corpus=j(resolve(sourceRoot,p.existingCorpusFile));for(const row of r.surfaces)assert.equal(globalExposureMatchesV1(corpus,{sentence:row.sentence},'family-'+'0'.repeat(24)).length,0);
+ const hit=matchProgramTemplateExpansionV1(r,'THE DRUMMER PLAYED THE RHYTHM SKILLFUL.'),miss=matchProgramTemplateExpansionV1(r,'A separate unpublished probe arrived today.');assert.equal(hit.state,'known-finite-test-frame-surface');assert.equal(miss.state,'unresolved-not-a-freshness-clearance');assert.equal(hit.freshnessQualified,false);assert.equal(hit.englishCorrectnessCertified,false);assert.equal(miss.freshnessQualified,false);
+ const changed=structuredClone(r);changed.generated[0].sentence='changed';assert.throws(()=>matchProgramTemplateExpansionV1(changed,'They worked hard.'),/PT1_MATCH_BINDING/);save('legacy-contrast-and-held-claims.json',{outside426:69,outsideStatic433:68,uppercaseKnown:hit,unknownHeld:miss,completeProjectExposure:false});pass('69source-based gaps and no false clearance');
+});
+test('a modified real library-data copy is rejected before expansion,without rewriting active program or policy files',()=>{
+ const copy=resolve(out,'data-change-copy'),files=new Set([...Object.keys(previous.result.sourceBindings),previousFile,p.existingCorpusFile,'lib/feedback-manner-adjectives.ts','data/words.json']);for(const file of files){const target=resolve(copy,file);mkdirSync(dirname(target),{recursive:true});copyFileSync(resolve(sourceRoot,file),target);}const file=resolve(copy,'lib/feedback-manner-adjectives.ts');writeFileSync(file,readFileSync(file,'utf8')+'\n// synthetic change');assert.throws(()=>loadProgramTemplateExpansionV1(copy),/PT1_SOURCE_CHANGED/);save('real-data-change-held.json',{modifiedCopyRejected:true,activeSourceChanged:false,sourceExecutionPerformed:false});pass('real library-data preflight');
+});
+test('pending6diagnostic bodies/run/cost andNode24 bundle remain frozen;this local expansion changes no paid approval or live policy',()=>{
+ const prepared=loadDiagnosticEnvelopeV1(),bundle=compileDiagnosticEnvelopeV1(prepared),old=j(resolve(prepared.prepared.root,'outputs/ai-quality-v147-implementation-20261106/phase42/approval-review/diagnostic-envelope.json'));assert.deepEqual(bundle.requests,old.requests);assert.equal(bundle.maximumMicros,old.maximumMicros);assert.equal(bundle.spec.runId,old.spec.runId);assert.equal(bundle.approvedMicros,'0');if(process.versions.node.startsWith('24.'))assert.equal(bundle.hash,old.hash);
+ for(const k of ['completeProjectExposure','structuralFamiliesCertified','modelEvidenceProjectionAllowed','liveFreshnessPolicyChanged','actualEnglishQualityMeasured'])assert.equal(r[k],false);save('pending-diagnostic-unchanged.json',{nodeVersion:process.version,node24BundleHashUnchanged:process.versions.node.startsWith('24.')?bundle.hash===old.hash:null,bodyHashes:bundle.requests.map(x=>x.sha256),runId:bundle.spec.runId,maximumMicros:bundle.maximumMicros,actualProviderCalls:0,actualKeyReads:0});pass('pending six-request approval scope unchanged');
+});
+process.on('exit',()=>save('program-template-results.json',{passed:rows.length===8,groups:8,rows,nodeVersion:process.version,counts:r.counts,sourceExecutionPerformed:false,completeProjectExposure:false,modelEvidenceProjectionAllowed:false,liveFreshnessPolicyChanged:false,actualProviderCalls:0,actualCountApiCalls:0,actualKeyReads:0,newPaidApprovalUsd:0}));

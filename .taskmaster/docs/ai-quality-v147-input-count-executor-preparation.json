@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "stage": "synthetic-input-count-durable-executor-integration",
+  "recordedAtUtc": "2026-11-07T01:00:45.444480+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "executorIntegrated": true,
+  "groupsEachNode": 14,
+  "generationCapsChanged": false,
+  "credentialChoice": "reuse-existing",
+  "actualCountApiCalls": 0,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "actualInputTokenBoundsMeasured": false,
+  "counterFeesVerified": false,
+  "counterBudgetQualified": false,
+  "paymentQuoteReady": false,
+  "liveDispatchSupported": false,
+  "providerReceiptAuthenticated": false,
+  "powerLossDurabilityMeasured": false,
+  "actualEnglishQualityMeasured": false,
+  "fullCountScaleQualified": false,
+  "releaseVerdict": "held",
+  "document": "docs/AI_QUALITY_V147_INPUT_COUNT_EXECUTOR_20261107.md",
+  "documentSha256": "a096522e038de845db0f60bda0923c4c7a4559081e65cf6651a3d5ac02e959da",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "11cc2f481b55cfe086cf4d56c7d3659908528ec9738757f63db56fec382579ae",
+    ".taskmaster/scripts/ai-quality-v147-panel-cli-v3.mjs": "78c66c5678292aad2e93c92d0d99f57ba2a5d2a7009fac1f7788ad3bad58d860",
+    ".taskmaster/scripts/ai-quality-v147-input-count-store-v1.mjs": "425e928d65b5cd04b297cb64aabb94a0b9520764b9b4848082214227c21aa559",
+    ".taskmaster/scripts/ai-quality-v147-input-count-http-v1.mjs": "e0d73ecfa97fb90e66f0a8ce756bffa9840631f1f3e016c0f7f4130a7885b35f",
+    ".taskmaster/scripts/ai-quality-v147-input-count-fixture-v1.mjs": "fda5523c81f4cd2a6d2ed94882f0fef34114af6a64515a908ae8617df22445a4",
+    ".taskmaster/scripts/test-ai-quality-v147-input-count-executor-v1.mjs": "55c23edae5cb76a0a86c3b1983fb0908b55fe7cf2cda1a8c5e13109d1888d9d7"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-input-count-v1.mjs": "e07e1d5c4a6ef4f6f66b99bd4c00895d02d941db433bfb954182d1435a700c44",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-journal-v3.mjs": "78657f4fdfbd9e62b939cc4f4deb73995c9bc526a9f61af6c978f3f2bb6af880",
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": "2b10affaf7a505cd55d577356f742eb34017e47b00e2162211cd94e0f90c26ca",
+    ".taskmaster/scripts/ai-quality-v147-settlement-proof-v3.mjs": "9f7e1a4486a61984e5a7cbb7b54d3a0466c6a6efa01a098380909c251b59ab33",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "a8b39d1156ee5e220b138479b43217e108cea5f5e63bd606831c5ecf72466e4a",
+    ".taskmaster/scripts/ai-quality-v147-panel-fixture-v3.mjs": "9faeeb70ef702cf13064eb5768c202b9f24dcbd46613ca6aac66cd26a2a6ffd7",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "b9e43d484184fd38197527f74cf549d13cc417f8b78c8a08d2f6099006df5c13",
+    ".taskmaster/scripts/ai-quality-v147-reference-fixture-v4.mjs": "2eee488c7de99ccf04ad6c75722ecad2ba9c09d69e0245b393c4450bc3015ab9",
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": "9fce5bbb8f8c8e0b7342ff676d3a4ff65f988c230fc6f07e51bf0531e0b977ac",
+    ".taskmaster/scripts/test-ai-quality-v147-reference-v4.mjs": "b8c56957ba4dec979a90b2a8c0cdf62a6a4f49d79d5bd3e51181963d04e10912",
+    ".taskmaster/scripts/test-ai-quality-v147-panel-executor-v3.mjs": "236a951bbe16939b9cd379c0221f635098d8ca2cb6fe0f6dc54909747d4784cd",
+    ".taskmaster/scripts/test-ai-quality-v147-worker-panel-v3.mjs": "08b5086b2efcc43f31b56734c8a3fd9fde657b12b56d3b20a060b65076aca723"
+  },
+  "historicalSources": {
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": {
+      "sha256": "3d397fdafcf71f2c5bfc932ebca69cdc1750b65a243f5c00c1ecf0e3f8479cb8",
+      "archiveFile": "phase33/management-before/.taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs",
+      "priorProgressFile": "phase32/progress-final.json",
+      "priorProgressSha256": "4702b255221510d6a7859815563e6009525660e0c24aa5ca6b787f533ab2ad13"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-cli-v3.mjs": {
+      "sha256": "3d767258fc3351e9bb541a038ae1a16c9825432dba1778ca851e755052751aae",
+      "archiveFile": "phase33/management-before/.taskmaster/scripts/ai-quality-v147-panel-cli-v3.mjs",
+      "priorProgressFile": "phase32/progress-final.json",
+      "priorProgressSha256": "4702b255221510d6a7859815563e6009525660e0c24aa5ca6b787f533ab2ad13"
+    }
+  },
+  "checks": [
+    {
+      "name": "count-executor-node22-first",
+      "kind": "count-executor",
+      "exitCode": 0,
+      "log": "count-executor-node22-first.log",
+      "sha256": "45510faafe4006e4b4d1d11e57376da92d8bf0aa178c14534280189311a650f2"
+    },
+    {
+      "name": "count-executor-node24-final",
+      "kind": "count-executor",
+      "exitCode": 0,
+      "log": "count-executor-node24-final.log",
+      "sha256": "3044217e45cbaaa4236603942f55b859ceed77d56641a9c5a3683fa4de413760"
+    },
+    {
+      "name": "reference-node22",
+      "kind": "reference",
+      "exitCode": 0,
+      "log": "reference-node22.log",
+      "sha256": "27b08d3adc465337ace7eaf8175369b9b07ccc2888e79c79f5547c99037bbe2d"
+    },
+    {
+      "name": "reference-node24",
+      "kind": "reference",
+      "exitCode": 0,
+      "log": "reference-node24.log",
+      "sha256": "72e8b22f131b8bf9d2d859fd3768d4ae47391b500c492151ebcf9cee42a51641"
+    },
+    {
+      "name": "legacy-executor-node22",
+      "kind": "legacy-executor",
+      "exitCode": 0,
+      "log": "legacy-executor-node22.log",
+      "sha256": "59a1747396b49adbcb33f5a6113722fb696968c3019611a0e8aef588840a9ba5"
+    },
+    {
+      "name": "legacy-executor-node24",
+      "kind": "legacy-executor",
+      "exitCode": 0,
+      "log": "legacy-executor-node24.log",
+      "sha256": "5fcb72ff7601a997b00df980290c25c2e0b738f0dfc068cf993091b128007f64"
+    },
+    {
+      "name": "worker-node22",
+      "kind": "worker",
+      "exitCode": 0,
+      "log": "worker-node22.log",
+      "sha256": "924d9de224df251ed4b60e74de9ebd263eab21f574144301388cdca82a601fdb"
+    },
+    {
+      "name": "worker-node24",
+      "kind": "worker",
+      "exitCode": 0,
+      "log": "worker-node24.log",
+      "sha256": "7d6b960c2f9bc2c753adbbdf2d23586be42844b28463f3b382c1e5f0d41075c7"
+    }
+  ],
+  "rawEvidenceFile": "input-count-executor-raw-preservation.json",
+  "rawEvidenceSha256": "8fc76ea14ffae9e7db5dd7d3cda8868eb016669a0bbc18af0017e1944ecf4265",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-qualified2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

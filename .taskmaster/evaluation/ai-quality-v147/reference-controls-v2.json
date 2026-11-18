@@ -1,0 +1,748 @@
+{
+  "schemaVersion": 2,
+  "protocol": "ai-quality-v147-public-reference-controls-v2",
+  "stage": "source-reviewed-proposed-vectors-not-independent-role-qualification",
+  "oldControlFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": "b40aa8251bc66e98603b6af273566acdf8621bd4aaacdf40d768c1d27357e128",
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2"
+  },
+  "sources": [
+    {
+      "id": "verbs",
+      "requestedUrl": "https://dictionary.cambridge.org/us/grammar/british-grammar/verbs-types",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/verbs-types",
+      "status": 200,
+      "checkedAt": "2026-11-07T04:26:57.623362+00:00",
+      "method": "unauthenticated HTTPS;selected editorial body;comments excluded",
+      "selector": "article#page-content article.di",
+      "rawPageSha256": "eef5887fa59580a1a68986f7a5197cde206e5c64e6809f0d91521838a1b8c1a7",
+      "contentSha256": "fa6b333793ccbc96989576fe1c34f01b890d8bf6d641f69c1bc25f21b71e8dfb",
+      "contentHashScope": "Complete normalized selected editorial body,not excerpt-only.",
+      "contentTextLength": 5281,
+      "excerpt": "Main verbs have meanings related to actions, events and states.",
+      "excerptWords": 10,
+      "excerptSha256": "02fb55583b46dc0b3d10ade77aa5872067d05fe3dad2437617c0486a14b62e42",
+      "excerptFound": true,
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase40/control-source-fetch-first.json",
+      "captureSha256": "95385946022d5ef0450f18019bff68cfb64992a57fbbbfb6d520e84399148ae4"
+    },
+    {
+      "id": "agreement",
+      "requestedUrl": "https://dictionary.cambridge.org/grammar/british-grammar/agreement-subject-verb",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/agreement-subject-verb",
+      "status": 200,
+      "checkedAt": "2026-11-07T04:26:57.624359+00:00",
+      "method": "unauthenticated HTTPS;selected editorial body;comments excluded",
+      "selector": "article#page-content article.di",
+      "rawPageSha256": "26c23a97fe9a656f7d7d3719f5e64de2e7ddfeb50c70b3ffd12ac07c588067f8",
+      "contentSha256": "451bfcfc74c89561c7b415fdc699e3e484ab5cdd0b04bb1561c4d7047f51e9ed",
+      "contentHashScope": "Complete normalized selected editorial body,not excerpt-only.",
+      "contentTextLength": 687,
+      "excerpt": "The person and number of the subject of the clause determine the person and number of the verb of the clause.",
+      "excerptWords": 21,
+      "excerptSha256": "3bce896388469e747a422d3be6ee8ab0a9180e420ac5b8bf9de496630cae79d3",
+      "excerptFound": true,
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase40/control-source-fetch-first.json",
+      "captureSha256": "95385946022d5ef0450f18019bff68cfb64992a57fbbbfb6d520e84399148ae4"
+    },
+    {
+      "id": "negation",
+      "requestedUrl": "https://dictionary.cambridge.org/grammar/british-grammar/negation_2",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/negation_2",
+      "status": 200,
+      "checkedAt": "2026-11-07T04:26:57.624359+00:00",
+      "method": "unauthenticated HTTPS;selected editorial body;comments excluded",
+      "selector": "article#page-content article.di",
+      "rawPageSha256": "701f7af232d9230434584f74d0e1cdb9bbabf084057a298e42113d6f600767e7",
+      "contentSha256": "c3efec765b665f929da45bce34a0dec1ba8c22efdda1abf6dc07b2f0c115e72f",
+      "contentHashScope": "Complete normalized selected editorial body,not excerpt-only.",
+      "contentTextLength": 10273,
+      "excerpt": "When we want to say that something is not true or is not the case, we can use negative words, phrases or clauses.",
+      "excerptWords": 23,
+      "excerptSha256": "21b80f777096608d1d96c1361ef771ecd5f55e963c66d4fc0406d08c3c8ffbaf",
+      "excerptFound": true,
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase40/control-source-fetch-first.json",
+      "captureSha256": "95385946022d5ef0450f18019bff68cfb64992a57fbbbfb6d520e84399148ae4"
+    },
+    {
+      "id": "ellipsis",
+      "requestedUrl": "https://dictionary.cambridge.org/grammar/british-grammar/ellipsis",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/ellipsis",
+      "status": 200,
+      "checkedAt": "2026-11-07T04:26:57.625357+00:00",
+      "method": "unauthenticated HTTPS;selected editorial body;comments excluded",
+      "selector": "article#page-content article.di",
+      "rawPageSha256": "68c74e543dc1459c099bec187bb6f24e5f721b91ea3ea8d92bc2bd0fbd66f1fb",
+      "contentSha256": "eeac9b7be876b84003274b5b9bbbab7e3c48ed66dc39bc208d14386e75b549d7",
+      "contentHashScope": "Complete normalized selected editorial body,not excerpt-only.",
+      "contentTextLength": 5722,
+      "excerpt": "When we can easily understand everything in the sentence because of the surrounding text, we use textual ellipsis.",
+      "excerptWords": 18,
+      "excerptSha256": "4dab3189a1e4e3c25267eee0ae7b3b9d5014cee6e970b05c49c8ebf76203db4d",
+      "excerptFound": true,
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase40/control-source-fetch-first.json",
+      "captureSha256": "95385946022d5ef0450f18019bff68cfb64992a57fbbbfb6d520e84399148ae4"
+    },
+    {
+      "id": "present-simple",
+      "requestedUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+      "url": "https://learnenglish.britishcouncil.org/comment/156239",
+      "status": null,
+      "checkedAt": "2026-11-07T04:29:32.734684+00:00",
+      "method": "Official web search result,Present simple editorial section;not reader comments. Canonical open confirmed heading;native full read and later web find timed out.",
+      "rawPageSha256": null,
+      "excerpt": "We use doesn't for the third person singular (she/he/it) and don't for the others.",
+      "contentHashScope": "Selected verified editorial excerpt only;not full page or status200.",
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "excerptWords": 14,
+      "excerptSha256": "82c0a5c4fdbd9f7202144f0b6b45b48619a66136b1fed8103111399536283d8b",
+      "contentSha256": "82c0a5c4fdbd9f7202144f0b6b45b48619a66136b1fed8103111399536283d8b",
+      "excerptFound": true,
+      "captureFile": "phase40/control-source-web-excerpt.json",
+      "captureSha256": "57019671063a12e461ada1d9882d759ddeb643fd3e80960dd157b39ba9a17400"
+    }
+  ],
+  "controls": [
+    {
+      "id": "public-positive-agreement",
+      "legacyId": "public-positive-agreement",
+      "targetKey": "verb",
+      "targetSummary": "Assess main-verb identification and subject/verb number agreement in ordinary standard classroom English.",
+      "stratum": "normal",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "input": {
+        "sentence": "The divers check the ropes.",
+        "contextKind": "sentence",
+        "contextNote": ""
+      },
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "draftTargetKey": "verb",
+      "acceptedCorrectionExamples": [],
+      "criterion": "The plural subject divers agrees with check; check is a main verb describing the action.",
+      "proposedExpectedGrade": {
+        "assignmentAlignment": "pass",
+        "inputAndTargetValidity": "pass",
+        "originalLabelSupport": "pass",
+        "minimalCorrectionMeaning": "pass",
+        "sourceClaimHonesty": "pass",
+        "ambiguityHandling": "pass",
+        "exposureAndFamilyCompliance": "fail",
+        "criticalErrors": {
+          "wrongTarget": false,
+          "inventedEvidence": false,
+          "meaningConstraintViolation": false,
+          "forcedCertainty": false,
+          "knownExposureLeak": true
+        }
+      },
+      "dimensionRationale": {
+        "assignmentAlignment": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "The declared grammar assignment and record identifiers match."
+        },
+        "inputAndTargetValidity": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs"
+          ],
+          "reason": "This is a usable public diagnostic input for the declared target and stratum,not a claim its grammar is correct."
+        },
+        "originalLabelSupport": {
+          "grade": "pass",
+          "sourceIds": [
+            "agreement"
+          ],
+          "reason": "The original labels are supported for the specified standard classroom-English scope."
+        },
+        "minimalCorrectionMeaning": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No correction is needed for this natural complete original;keeping it does not alter the message."
+        },
+        "sourceClaimHonesty": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs",
+            "agreement"
+          ],
+          "reason": "The criterion makes only the supported grammatical claim and cites permitted editorial sources."
+        },
+        "ambiguityHandling": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No missing event,time,quantity or lexical sense is needed for this particular diagnostic judgment."
+        },
+        "exposureAndFamilyCompliance": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "This exact public input is already in GEX1;failure here measures exposure policy,not English grammar."
+        }
+      },
+      "criticalRationale": {
+        "wrongTarget": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "inventedEvidence": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "meaningConstraintViolation": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "forcedCertainty": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "knownExposureLeak": "Explicit known GEX1 sentence match."
+      },
+      "sourceReview": "same-author-Codex-source-based-proposal",
+      "independentlyAiQualified": false,
+      "allSevenDimensionsExplicit": true,
+      "allowedInHiddenEvaluation": false
+    },
+    {
+      "id": "public-false-natural-label",
+      "legacyId": "public-false-natural-label",
+      "targetKey": "verb",
+      "targetSummary": "Assess main-verb identification and subject/verb number agreement in ordinary standard classroom English.",
+      "stratum": "needsCorrection",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "input": {
+        "sentence": "The divers checks the ropes.",
+        "contextKind": "sentence",
+        "contextNote": ""
+      },
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "draftTargetKey": "verb",
+      "acceptedCorrectionExamples": [],
+      "criterion": "The verb agrees with the plural subject.",
+      "proposedExpectedGrade": {
+        "assignmentAlignment": "pass",
+        "inputAndTargetValidity": "pass",
+        "originalLabelSupport": "fail",
+        "minimalCorrectionMeaning": "unavailable",
+        "sourceClaimHonesty": "fail",
+        "ambiguityHandling": "pass",
+        "exposureAndFamilyCompliance": "fail",
+        "criticalErrors": {
+          "wrongTarget": false,
+          "inventedEvidence": false,
+          "meaningConstraintViolation": false,
+          "forcedCertainty": false,
+          "knownExposureLeak": true
+        }
+      },
+      "dimensionRationale": {
+        "assignmentAlignment": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "The declared grammar assignment and record identifiers match."
+        },
+        "inputAndTargetValidity": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs"
+          ],
+          "reason": "This is a usable public diagnostic input for the declared target and stratum,not a claim its grammar is correct."
+        },
+        "originalLabelSupport": {
+          "grade": "fail",
+          "sourceIds": [
+            "agreement"
+          ],
+          "reason": "Plural divers does not take checks in the declared standard classroom-English present-simple scope;the natural label is unsupported."
+        },
+        "minimalCorrectionMeaning": {
+          "grade": "unavailable",
+          "sourceIds": [
+            "agreement"
+          ],
+          "reason": "The erroneous original is labelled natural and has no proposed correction;there is no offered repair whose minimality/equivalence can be certified."
+        },
+        "sourceClaimHonesty": {
+          "grade": "fail",
+          "sourceIds": [
+            "agreement"
+          ],
+          "reason": "The criterion says the verb agrees,but that claim contradicts the supplied subject-number rule. No invented quotation/source identity is inferred from this alone."
+        },
+        "ambiguityHandling": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No missing event,time,quantity or lexical sense is needed for this particular diagnostic judgment."
+        },
+        "exposureAndFamilyCompliance": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "This exact public input is already in GEX1;failure here measures exposure policy,not English grammar."
+        }
+      },
+      "criticalRationale": {
+        "wrongTarget": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "inventedEvidence": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "meaningConstraintViolation": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "forcedCertainty": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "knownExposureLeak": "Explicit known GEX1 sentence match."
+      },
+      "sourceReview": "same-author-Codex-source-based-proposal",
+      "independentlyAiQualified": false,
+      "allSevenDimensionsExplicit": true,
+      "allowedInHiddenEvaluation": false
+    },
+    {
+      "id": "public-target-mismatch",
+      "legacyId": "public-target-mismatch",
+      "targetKey": "verb",
+      "targetSummary": "Assess main-verb identification and subject/verb number agreement in ordinary standard classroom English.",
+      "stratum": "normal",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "input": {
+        "sentence": "The divers check the ropes.",
+        "contextKind": "sentence",
+        "contextNote": ""
+      },
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "draftTargetKey": "noun",
+      "acceptedCorrectionExamples": [],
+      "criterion": "Check describes the action performed by the divers.",
+      "proposedExpectedGrade": {
+        "assignmentAlignment": "fail",
+        "inputAndTargetValidity": "fail",
+        "originalLabelSupport": "unavailable",
+        "minimalCorrectionMeaning": "pass",
+        "sourceClaimHonesty": "pass",
+        "ambiguityHandling": "pass",
+        "exposureAndFamilyCompliance": "fail",
+        "criticalErrors": {
+          "wrongTarget": true,
+          "inventedEvidence": false,
+          "meaningConstraintViolation": false,
+          "forcedCertainty": false,
+          "knownExposureLeak": true
+        }
+      },
+      "dimensionRationale": {
+        "assignmentAlignment": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "The assignment requests verb while the submitted draft targetKey is noun."
+        },
+        "inputAndTargetValidity": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "The submitted target does not match the frozen assignment;this is independent of the grammatical sentence."
+        },
+        "originalLabelSupport": {
+          "grade": "unavailable",
+          "sourceIds": [],
+          "reason": "The joint target/grammar/context tuple is not certified for a record bound to the wrong target;natural whole-sentence grammar alone does not establish it."
+        },
+        "minimalCorrectionMeaning": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No correction is needed for this natural complete original;keeping it does not alter the message."
+        },
+        "sourceClaimHonesty": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs",
+            "agreement"
+          ],
+          "reason": "The criterion makes only the supported grammatical claim and cites permitted editorial sources."
+        },
+        "ambiguityHandling": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No missing event,time,quantity or lexical sense is needed for this particular diagnostic judgment."
+        },
+        "exposureAndFamilyCompliance": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "This exact public input is already in GEX1;failure here measures exposure policy,not English grammar."
+        }
+      },
+      "criticalRationale": {
+        "wrongTarget": "Explicit planted defect described in the dimension rationale.",
+        "inventedEvidence": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "meaningConstraintViolation": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "forcedCertainty": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "knownExposureLeak": "Explicit known GEX1 sentence match."
+      },
+      "sourceReview": "same-author-Codex-source-based-proposal",
+      "independentlyAiQualified": false,
+      "allSevenDimensionsExplicit": true,
+      "allowedInHiddenEvaluation": false
+    },
+    {
+      "id": "public-negation-loss",
+      "legacyId": "public-negation-loss",
+      "targetKey": "verb",
+      "targetSummary": "Assess main-verb identification and subject/verb number agreement in ordinary standard classroom English.",
+      "stratum": "needsCorrection",
+      "sourceIds": [
+        "verbs",
+        "agreement",
+        "negation",
+        "present-simple"
+      ],
+      "input": {
+        "sentence": "The diver do not check the ropes.",
+        "contextKind": "sentence",
+        "contextNote": ""
+      },
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "draftTargetKey": "verb",
+      "acceptedCorrectionExamples": [
+        "The diver checks the ropes."
+      ],
+      "criterion": "Repair subject and verb agreement while preserving the participants, action and explicit negative meaning.",
+      "proposedExpectedGrade": {
+        "assignmentAlignment": "pass",
+        "inputAndTargetValidity": "pass",
+        "originalLabelSupport": "pass",
+        "minimalCorrectionMeaning": "fail",
+        "sourceClaimHonesty": "pass",
+        "ambiguityHandling": "pass",
+        "exposureAndFamilyCompliance": "fail",
+        "criticalErrors": {
+          "wrongTarget": false,
+          "inventedEvidence": false,
+          "meaningConstraintViolation": true,
+          "forcedCertainty": false,
+          "knownExposureLeak": true
+        }
+      },
+      "dimensionRationale": {
+        "assignmentAlignment": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "The declared grammar assignment and record identifiers match."
+        },
+        "inputAndTargetValidity": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs"
+          ],
+          "reason": "This is a usable public diagnostic input for the declared target and stratum,not a claim its grammar is correct."
+        },
+        "originalLabelSupport": {
+          "grade": "pass",
+          "sourceIds": [
+            "agreement",
+            "present-simple"
+          ],
+          "reason": "This v2 draft explicitly says target form and grammar need work for singular diver do not;it does not inherit the old universal appropriate value."
+        },
+        "minimalCorrectionMeaning": {
+          "grade": "fail",
+          "sourceIds": [
+            "negation",
+            "present-simple"
+          ],
+          "reason": "The sole proposed correction removes not and reverses the explicit negative proposition;does not check would retain it."
+        },
+        "sourceClaimHonesty": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs",
+            "agreement",
+            "negation"
+          ],
+          "reason": "The criterion makes only the supported grammatical claim and cites permitted editorial sources."
+        },
+        "ambiguityHandling": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No missing event,time,quantity or lexical sense is needed for this particular diagnostic judgment."
+        },
+        "exposureAndFamilyCompliance": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "This exact public input is already in GEX1;failure here measures exposure policy,not English grammar."
+        }
+      },
+      "criticalRationale": {
+        "wrongTarget": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "inventedEvidence": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "meaningConstraintViolation": "Explicit planted defect described in the dimension rationale.",
+        "forcedCertainty": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "knownExposureLeak": "Explicit known GEX1 sentence match."
+      },
+      "sourceReview": "same-author-Codex-source-based-proposal",
+      "independentlyAiQualified": false,
+      "allSevenDimensionsExplicit": true,
+      "allowedInHiddenEvaluation": false
+    },
+    {
+      "id": "public-false-source-attribution",
+      "legacyId": "public-false-source-attribution",
+      "targetKey": "verb",
+      "targetSummary": "Assess main-verb identification and subject/verb number agreement in ordinary standard classroom English.",
+      "stratum": "normal",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "input": {
+        "sentence": "The divers check the ropes.",
+        "contextKind": "sentence",
+        "contextNote": ""
+      },
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "draftTargetKey": "verb",
+      "acceptedCorrectionExamples": [],
+      "criterion": "The cited source says verbs have no relation to subject number.",
+      "proposedExpectedGrade": {
+        "assignmentAlignment": "pass",
+        "inputAndTargetValidity": "pass",
+        "originalLabelSupport": "pass",
+        "minimalCorrectionMeaning": "pass",
+        "sourceClaimHonesty": "fail",
+        "ambiguityHandling": "pass",
+        "exposureAndFamilyCompliance": "fail",
+        "criticalErrors": {
+          "wrongTarget": false,
+          "inventedEvidence": true,
+          "meaningConstraintViolation": false,
+          "forcedCertainty": false,
+          "knownExposureLeak": true
+        }
+      },
+      "dimensionRationale": {
+        "assignmentAlignment": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "The declared grammar assignment and record identifiers match."
+        },
+        "inputAndTargetValidity": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs"
+          ],
+          "reason": "This is a usable public diagnostic input for the declared target and stratum,not a claim its grammar is correct."
+        },
+        "originalLabelSupport": {
+          "grade": "pass",
+          "sourceIds": [
+            "agreement"
+          ],
+          "reason": "The original labels are supported for the specified standard classroom-English scope."
+        },
+        "minimalCorrectionMeaning": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No correction is needed for this natural complete original;keeping it does not alter the message."
+        },
+        "sourceClaimHonesty": {
+          "grade": "fail",
+          "sourceIds": [
+            "agreement"
+          ],
+          "reason": "The draft explicitly attributes the opposite of the subject-number rule to its cited source."
+        },
+        "ambiguityHandling": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "No missing event,time,quantity or lexical sense is needed for this particular diagnostic judgment."
+        },
+        "exposureAndFamilyCompliance": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "This exact public input is already in GEX1;failure here measures exposure policy,not English grammar."
+        }
+      },
+      "criticalRationale": {
+        "wrongTarget": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "inventedEvidence": "Explicit planted defect described in the dimension rationale.",
+        "meaningConstraintViolation": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "forcedCertainty": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "knownExposureLeak": "Explicit known GEX1 sentence match."
+      },
+      "sourceReview": "same-author-Codex-source-based-proposal",
+      "independentlyAiQualified": false,
+      "allSevenDimensionsExplicit": true,
+      "allowedInHiddenEvaluation": false
+    },
+    {
+      "id": "public-missing-reply-message",
+      "legacyId": "public-missing-reply-message",
+      "targetKey": "auxiliary",
+      "targetSummary": "Assess do as an auxiliary in a reply;do not invent an antecedent when the earlier message is absent.",
+      "stratum": "insufficientContext",
+      "sourceIds": [
+        "verbs",
+        "ellipsis"
+      ],
+      "input": {
+        "sentence": "They did.",
+        "contextKind": "reply",
+        "contextNote": ""
+      },
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "draftTargetKey": "auxiliary",
+      "acceptedCorrectionExamples": [],
+      "criterion": "This reply unambiguously states that they repaired the ropes.",
+      "proposedExpectedGrade": {
+        "assignmentAlignment": "pass",
+        "inputAndTargetValidity": "pass",
+        "originalLabelSupport": "fail",
+        "minimalCorrectionMeaning": "unavailable",
+        "sourceClaimHonesty": "fail",
+        "ambiguityHandling": "fail",
+        "exposureAndFamilyCompliance": "fail",
+        "criticalErrors": {
+          "wrongTarget": false,
+          "inventedEvidence": false,
+          "meaningConstraintViolation": false,
+          "forcedCertainty": true,
+          "knownExposureLeak": true
+        }
+      },
+      "dimensionRationale": {
+        "assignmentAlignment": {
+          "grade": "pass",
+          "sourceIds": [],
+          "reason": "The declared grammar assignment and record identifiers match."
+        },
+        "inputAndTargetValidity": {
+          "grade": "pass",
+          "sourceIds": [
+            "verbs"
+          ],
+          "reason": "This is a usable public diagnostic input for the declared target and stratum,not a claim its grammar is correct."
+        },
+        "originalLabelSupport": {
+          "grade": "fail",
+          "sourceIds": [
+            "ellipsis"
+          ],
+          "reason": "They did may be grammatical with an antecedent,but this record supplies no antecedent and declares no missing message while asserting a particular repair event."
+        },
+        "minimalCorrectionMeaning": {
+          "grade": "unavailable",
+          "sourceIds": [
+            "ellipsis"
+          ],
+          "reason": "No correction is offered and no antecedent identifies the intended event;equivalent message repair is not established. The reply is not declared universally ungrammatical."
+        },
+        "sourceClaimHonesty": {
+          "grade": "fail",
+          "sourceIds": [
+            "ellipsis"
+          ],
+          "reason": "The general ellipsis source cannot support the specific unprovided rope-repair event claimed by the criterion."
+        },
+        "ambiguityHandling": {
+          "grade": "fail",
+          "sourceIds": [
+            "ellipsis"
+          ],
+          "reason": "The criterion asserts one unprovided antecedent as unambiguous rather than requesting the missing message."
+        },
+        "exposureAndFamilyCompliance": {
+          "grade": "fail",
+          "sourceIds": [],
+          "reason": "This exact public input is already in GEX1;failure here measures exposure policy,not English grammar."
+        }
+      },
+      "criticalRationale": {
+        "wrongTarget": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "inventedEvidence": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "meaningConstraintViolation": "No corresponding critical assertion is established;an unsupported/uncertain dimension alone does not set this flag.",
+        "forcedCertainty": "Explicit planted defect described in the dimension rationale.",
+        "knownExposureLeak": "Explicit known GEX1 sentence match."
+      },
+      "sourceReview": "same-author-Codex-source-based-proposal",
+      "independentlyAiQualified": false,
+      "allSevenDimensionsExplicit": true,
+      "allowedInHiddenEvaluation": false
+    }
+  ],
+  "dimensions": [
+    "assignmentAlignment",
+    "inputAndTargetValidity",
+    "originalLabelSupport",
+    "minimalCorrectionMeaning",
+    "sourceClaimHonesty",
+    "ambiguityHandling",
+    "exposureAndFamilyCompliance"
+  ],
+  "criticalFlags": [
+    "wrongTarget",
+    "inventedEvidence",
+    "meaningConstraintViolation",
+    "forcedCertainty",
+    "knownExposureLeak"
+  ],
+  "usageScope": {
+    "status": "Codex-proposed-diagnostic-scope-not-product-policy-change",
+    "description": "Ordinary standard classroom-English finite-verb agreement/negation andcontext-dependent auxiliary ellipsis;not a verdict on every dialect/register or the unresolved quiet construction.",
+    "appliesOnlyToTheseSixPublicControls": true,
+    "changesProductGrammarPolicy": false
+  },
+  "gradingPolicy": {
+    "allDimensionsExplicit": true,
+    "noMissingCellDefaultsToPass": true,
+    "noCorrectionWithKnownError": "unavailable minimalCorrectionMeaning,not automatic pass",
+    "wrongTarget": "unavailable joint originalLabelSupport,not a whole-sentence grammar fail",
+    "knownPublicSentence": "exposure fail and knownExposureLeak,true for all six;does not mean all six English inputs are bad",
+    "missingReply": "whole-reply grammar may be valid with context;the asserted event lacks support"
+  },
+  "requestProposal": {
+    "publicControls": 6,
+    "models": 3,
+    "layouts": 2,
+    "reviewRequests": 36,
+    "itemsPerRequest": 2,
+    "additionalCallsApproved": 0,
+    "alreadyIncludedIn180Or1872": false,
+    "finalStageCountAndCostRecalculationRequired": true,
+    "layoutCounterbalanceProvesModelBiasRemoved": false
+  },
+  "actualProviderCalls": 0,
+  "actualJudgeCalls": 0,
+  "actualEnglishQualityMeasured": false,
+  "actualRoleQualificationMeasured": false,
+  "actualReferenceControlsQualified": false,
+  "humanReviewed": false,
+  "historicGoldOrScoresModified": false,
+  "liveDispatchAuthorized": false,
+  "newPaidApprovalUsd": 0
+}

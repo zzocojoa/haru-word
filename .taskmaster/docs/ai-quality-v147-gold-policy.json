@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 1,
+  "version": "ai-quality-v147-gold-policy-1",
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "pre-result development reference; final fresh gold sealed at T24/T35",
+  "contractFile": ".taskmaster/docs/ai-quality-v147-decision-contract-v4.json",
+  "contractSha256": "823b5c5a14c39ff8cfa423bb83ec3b22b8bebf839ce7e19e0143453f7ba15d79",
+  "dimensions": [
+    "meaning",
+    "grammar",
+    "correction",
+    "explanation",
+    "abstention"
+  ],
+  "dimensionValues": [
+    "pass",
+    "fail",
+    "uncertain",
+    "unavailable"
+  ],
+  "criticalFields": [
+    "approveBadGrammar",
+    "reverseMeaning",
+    "swapRoles",
+    "inventedIntent"
+  ],
+  "publicDevelopmentOnly": true,
+  "freshHoldout": false,
+  "actualModelJudgeMeasured": false,
+  "qualifiedIndependentReview": false,
+  "historicScoresModified": false,
+  "newPaidCalls": 0,
+  "referenceAuthor": "current Codex session; same-author, knows failures and code",
+  "casePolicy": [
+    "Compare the original target criterion and original grammar independently.",
+    "Each case declares allowed tuples/interpretations before model outputs. Equivalent grammatical corrections are not restricted to a single string, but novel alternatives require evidence-based review against the same frozen intent.",
+    "Do not add or remove an accepted alternative after observing results to raise the score. Record proposed changes and preserve the original grade; a new version requires newly sealed confirmation families.",
+    "A field-label policy mismatch is auxiliary; known original form error, correction equivalence and abstention are different dimensions.",
+    "Unavailable transport/parser/no-response is not an English grammar fail or a fabricated critical error; it remains a nonpass in the frozen denominator.",
+    "Score only visible factual explanations. Raw model reason errors and app-forced abstention are separate diagnostics.",
+    "A critical flag requires the corresponding visible bad approval/reversal/role swap/invented intent evidence; uncertainty alone does not establish a critical claim.",
+    "An unspecified permissible alternative goes to blind adjudication under preregistered rules; do not auto-fail on string difference or auto-pass on fluent wording."
+  ],
+  "developmentCases": [
+    {
+      "id": "G01",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "I asked.",
+      "target": "word ask/v. 질문하다",
+      "historyIds": [
+        "H09",
+        "H20"
+      ],
+      "input": {
+        "sentence": "I asked."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "correctedSentence": "I asked.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "Ask has an intransitive question-seeking use. Do not add an invented object just because no object is written."
+    },
+    {
+      "id": "G02",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "Those car belongs to Mia.",
+      "target": "grammar determiner: number agreement",
+      "historyIds": [
+        "H04",
+        "H20"
+      ],
+      "input": {
+        "sentence": "Those car belongs to Mia."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "uncertain",
+          "correctedSentence": "",
+          "contextNeeded": "quantity",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "Known singular/plural disagreement does not establish intended quantity. Ask, do not choose one car or several."
+    },
+    {
+      "id": "G03",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "Those car belongs to Mia.",
+      "target": "grammar determiner: number agreement",
+      "historyIds": [
+        "H04",
+        "H20"
+      ],
+      "input": {
+        "sentence": "Those car belongs to Mia.",
+        "contextNote": "차 한 대를 말해요."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "correctedSentence": "That car belongs to Mia.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "The explicitly supplied single-car context permits this alternative; do not reuse it for the unresolved case."
+    },
+    {
+      "id": "G04",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "Those car belongs to Mia.",
+      "target": "grammar determiner: number agreement",
+      "historyIds": [
+        "H04",
+        "H20"
+      ],
+      "input": {
+        "sentence": "Those car belongs to Mia.",
+        "contextNote": "차 여러 대를 말해요."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "correctedSentence": "Those cars belong to Mia.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "The explicitly supplied multiple-car context permits this alternative."
+    },
+    {
+      "id": "G05",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "She drives careful.",
+      "target": "grammar adverb: manner form",
+      "historyIds": [
+        "H05",
+        "H08",
+        "H19"
+      ],
+      "input": {
+        "sentence": "She drives careful."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "correctedSentence": "She drives carefully.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "The manner form is part of the requested adverb feature; this feature error can affect both target and grammar. Do not equate all -ly derivations with equivalent meaning."
+    },
+    {
+      "id": "G06",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "A book lies on the desk.",
+      "target": "word book/v. 예약하다",
+      "historyIds": [
+        "H05",
+        "H19"
+      ],
+      "input": {
+        "sentence": "A book lies on the desk."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "natural",
+          "correctedSentence": "A book lies on the desk.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "A correct noun sentence does not satisfy the selected verb sense, but grammar remains natural and the original is retained."
+    },
+    {
+      "id": "G07",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "Him helps I.",
+      "target": "grammar pronoun: subject/object case",
+      "historyIds": [
+        "H05",
+        "H19"
+      ],
+      "input": {
+        "sentence": "Him helps I."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "correctedSentence": "He helps me.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "Subject/object case can affect both target and original grammar; preserve the same participants and roles."
+    },
+    {
+      "id": "G08",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "Although the broth",
+      "target": "grammar conjunction: link propositions",
+      "historyIds": [
+        "H03",
+        "H19"
+      ],
+      "input": {
+        "sentence": "Although the broth"
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "uncertain",
+          "grammar": "uncertain",
+          "correctedSentence": "",
+          "contextNeeded": "relationship",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "An unfinished linked proposition supplies too little message; do not invent either event or complete it as an imperative."
+    },
+    {
+      "id": "G09",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "You might brought a torch.",
+      "target": "grammar modal: modal construction",
+      "historyIds": [
+        "H04",
+        "H19"
+      ],
+      "input": {
+        "sentence": "You might brought a torch."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "uncertain",
+          "correctedSentence": "",
+          "contextNeeded": "time",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "The form error is known, but choosing a safely equivalent correction requires the intended time. Do not call every modal-perfect alternative ungrammatical."
+    },
+    {
+      "id": "G10",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "She knows him.",
+      "target": "grammar pronoun: ordinary complete pronouns",
+      "historyIds": [
+        "H03",
+        "H19"
+      ],
+      "input": {
+        "sentence": "She knows him."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "correctedSentence": "She knows him.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "Unknown real-world identity alone is not a missing grammatical referent requiring a rewrite."
+    },
+    {
+      "id": "G11",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "Give help.",
+      "target": "word help/n. 도움",
+      "historyIds": [
+        "H09"
+      ],
+      "input": {
+        "sentence": "Give help."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "appropriate",
+          "grammar": "natural",
+          "correctedSentence": "Give help.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "A short command may have a noun complement; dictionary membership of help as a verb is not proof of a verb list."
+    },
+    {
+      "id": "G12",
+      "use": "public-development-reference; never fresh pilot/confirmation",
+      "original": "She is speaking quiet.",
+      "target": "grammar adverb: manner form",
+      "historyIds": [
+        "H06",
+        "H08"
+      ],
+      "input": {
+        "sentence": "She is speaking quiet."
+      },
+      "allowedProductAlternatives": [
+        {
+          "meaningUsage": "needs_work",
+          "grammar": "needs_work",
+          "correctedSentence": "She is speaking quietly.",
+          "contextNeeded": "none",
+          "expectedDimensionGrades": {
+            "meaning": "pass",
+            "grammar": "pass",
+            "correction": "pass",
+            "explanation": "pass",
+            "abstention": "pass"
+          }
+        }
+      ],
+      "referenceNotes": "Compare the actual manner edit. Unchanged is speaking must not supply a false explanation of that edit."
+    }
+  ],
+  "separationProbes": [
+    {
+      "id": "GP-TIME",
+      "caseId": "G09",
+      "wire": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "correctedSentence": "You might have brought a torch.",
+        "contextNeeded": "none"
+      },
+      "expectedAppOutcome": "accepted-by-bounded-parser; not semantic certification",
+      "expectedDimensionGrades": {
+        "meaning": "pass",
+        "grammar": "pass",
+        "correction": "uncertain",
+        "explanation": "pass",
+        "abstention": "fail"
+      },
+      "expectedCriticalFlags": {
+        "approveBadGrammar": false,
+        "reverseMeaning": false,
+        "swapRoles": false,
+        "inventedIntent": false
+      },
+      "reason": "The completed modal form can be grammatical, but unprovided intended time prevents an equivalence claim. Missing temporal clarification fails abstention; no proven meaning reversal is inferred."
+    }
+  ],
+  "finalFreshGoldTemplate": {
+    "caseId": null,
+    "familyId": null,
+    "targetCriterion": null,
+    "originalGrammarEvidence": null,
+    "allowedInterpretations": [],
+    "acceptedTupleConstraints": [],
+    "equivalentCorrectionCriteria": null,
+    "contextRequired": null,
+    "dimensionReferenceRationale": {
+      "meaning": null,
+      "grammar": null,
+      "correction": null,
+      "explanation": null,
+      "abstention": null
+    },
+    "criticalEvidenceConditions": {
+      "approveBadGrammar": null,
+      "reverseMeaning": null,
+      "swapRoles": null,
+      "inventedIntent": null
+    },
+    "authorId": null,
+    "reviewerId": null,
+    "preResultSealSha256": null
+  },
+  "sourcesChecked": {
+    "date": "2026-11-06",
+    "sources": [
+      {
+        "url": "https://www.oxfordlearnersdictionaries.com/definition/english/ask_1?q=ask",
+        "scope": "Official search result: ask question-seeking sense is intransitive/transitive; full Cambridge page403 is not claimed read."
+      },
+      {
+        "url": "https://dictionary.cambridge.org/grammar/british-grammar/this-",
+        "scope": "Official search result: this/that singular, these/those plural."
+      },
+      {
+        "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/modals-deductions-about-past",
+        "scope": "Full primary page read: perfect modal construction expresses deductions about past events; equivalence depends on intended use/time."
+      },
+      {
+        "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+        "scope": "Prior checked primary reference for adjective/adverb manner distinction."
+      }
+    ]
+  },
+  "priorCriteria": {
+    "file": "docs/JUDGMENT_V5_RUBRIC_CALIBRATION.md",
+    "sha256": "ba62afebba05a374b0098c26ca0762bcab24ff6a7480aef51c0cc1b3b0d7c363",
+    "policy": "Historical original kept; no rescoring old ledgers or importing prior budgets/thresholds."
+  },
+  "remaining": "T14 prepares separate judge witnesses, T25 measures judge calibration after approval, T24/T35 freeze actual new case gold and independent exposure metadata, T37 qualified/learner validation."
+}

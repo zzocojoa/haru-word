@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-11-06T15:31:55.716420+00:00",
+  "stage": "v3-current-built-worker-d1-panel-integration",
+  "tag": "ai-quality-v147",
+  "planId": "ai-quality-v147-2026-11-06",
+  "task22Complete": false,
+  "child221Complete": true,
+  "child222Status": "in-progress",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-worker-panel-fixture-v3.mjs": "bdeda948e06bb9bcd7096e8424178f38458dfa2832468627cc302027693fbb51",
+    ".taskmaster/scripts/ai-quality-v147-worker-panel-v3.mjs": "8ce915f165dc23d1a8e4eb39e5644bb4e5ad6da03d6eef52bd19c561fc13af7a",
+    ".taskmaster/scripts/test-ai-quality-v147-worker-panel-v3.mjs": "08b5086b2efcc43f31b56734c8a3fd9fde657b12b56d3b20a060b65076aca723"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-worker.mjs": "f80de7be66b37941a5e09c4b1ced247b01899aa67340241eb94a1569e209351d",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "41a07c3e5316ac12070da44ed3023c0a221e59d386784ee285c356a7cae64681",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "f8c6cd176a1d7c30340b9e1ad1179bfbe019c3cceca22c9336592b5cf036caff",
+    ".taskmaster/scripts/ai-quality-v147-panel-fixture-v3.mjs": "9faeeb70ef702cf13064eb5768c202b9f24dcbd46613ca6aac66cd26a2a6ffd7",
+    ".taskmaster/scripts/ai-quality-v147-synthetic-http-v3.mjs": "1cec4f2278db03e028cc974035aefcc72f4bb1369d64f860669f02ffc123b2f6",
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": "5f010f902da69e40e36ec7a85838de36abe28b1387dab485e5f0937ea6b99fb5",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "5d464fd5f30fdeaa65004cceeead59eb8612af1cde3865b68e71b15bfa619594",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-journal-v3.mjs": "78657f4fdfbd9e62b939cc4f4deb73995c9bc526a9f61af6c978f3f2bb6af880",
+    ".taskmaster/scripts/ai-quality-v147-recovery-v3.mjs": "3169cad265a286cb95d1be32000fdc0814778f53357a6ce6fd512e6cdc4e9b75",
+    ".taskmaster/scripts/ai-quality-v147-settlement-proof-v3.mjs": "9f7e1a4486a61984e5a7cbb7b54d3a0466c6a6efa01a098380909c251b59ab33",
+    ".taskmaster/scripts/ai-quality-v147-ai-panel.mjs": "08ade591043fe5ee392dd0b41fd3cba0c2a2ad2039a324a4aa982dc7facc780e",
+    ".taskmaster/scripts/ai-quality-v147-calibration.mjs": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6"
+  },
+  "checks": [
+    {
+      "name": "worker-panel-node22-second",
+      "nodeVersion": "v22.23.4",
+      "exitCode": 0,
+      "workerCells": 12,
+      "referenceSlots": 6,
+      "panelSlots": 132,
+      "controlledFailures": 2,
+      "log": "worker-panel-node22-second.log",
+      "sha256": "d049cda0f21a07ed0d4279235eb21ff60ab7a5858c81b251d441ec7ccf1f2067",
+      "all113LogLinesParsed": true,
+      "logEventCounts": {
+        "learning_state_loaded": 56,
+        "learning_state_saved": 28,
+        "openai_feedback_completed": 14,
+        "sentence_feedback_succeeded": 8,
+        "grammar_feedback_succeeded": 6,
+        "summary": 1
+      }
+    },
+    {
+      "name": "worker-panel-node24-final",
+      "nodeVersion": "v24.22.1",
+      "exitCode": 0,
+      "workerCells": 12,
+      "referenceSlots": 6,
+      "panelSlots": 132,
+      "controlledFailures": 2,
+      "log": "worker-panel-node24-final.log",
+      "sha256": "8fc1aabc5448ceae5a79b27da27d5cdacba8470c545e29385efff744d092a9b8",
+      "all113LogLinesParsed": true,
+      "logEventCounts": {
+        "learning_state_loaded": 56,
+        "learning_state_saved": 28,
+        "openai_feedback_completed": 14,
+        "sentence_feedback_succeeded": 8,
+        "grammar_feedback_succeeded": 6,
+        "summary": 1
+      }
+    }
+  ],
+  "proofBindings": {
+    "second-source-before-tests.json": "8ba9f9cec48fb020eb20445282484d8348192a8a0e4ac2bb3b84b35cc52410e6",
+    "first-source-before-tests.json": "97857bea2cc9bc5a9aa0e2c114aecc178a74f3f8a89c1241fbe9f0549184de13",
+    "v3-worker-panel-raw-preservation.json": "a078a24c62423ca3b7b7f7d70d52c89e06f913c72c824ed7f8b4860b63661561",
+    "qualification-clarification.json": "da3e1c74015578b6f2313b03e15d61632eb394933b15552120cd334289871a97",
+    "product-regression-reuse.json": "37b42acdaab3e1cbc730fe28d7111038f0b6c1a9e382c0460c8e7e92b36146be",
+    "taskmaster-status-transitions.json": "8ddae693762c606e707ec0fddd2b20b5b0fe5122c4db6ba4cc2ee1a61242d4ec"
+  },
+  "syntheticOnly": true,
+  "actualWorkerCellsEach": 12,
+  "actualWorkerProviderInterceptsEach": 14,
+  "primaryWorkerProviderInterceptsEach": 12,
+  "referenceSlotsEach": 6,
+  "panelSlotsEach": 132,
+  "fakeLeafHttpEach": 270,
+  "controlledBridgeFailuresEach": 2,
+  "sourceInventories": {
+    "baseline": 553,
+    "candidate": 547
+  },
+  "buildFilesEach": 407,
+  "actualRawVersusVisibleCompared": true,
+  "firstAnswersAndIndependentReviewSchedulePreserved": true,
+  "sameUuidPostAndGetProviderAdded": 0,
+  "otherOwnerReceiptHeld": true,
+  "actualWorkerProcessCrashesTested": false,
+  "actualModelQualityMeasured": false,
+  "actualFinalEvaluationFrozen": false,
+  "actualTokenBoundVerified": false,
+  "providerReceiptAuthenticated": false,
+  "powerLossDurabilityMeasured": false,
+  "liveDispatchSupported": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualPaidApprovalUsd": 0,
+  "releaseVerdict": "held",
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "worker-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "12cells covertwosyntheticappcases,not actual60-case Englishquality;allproviders/AIgradesarefake.",
+    "Two controlledNodebridge/capture interruptions;actualworkerd/Nodeprocesscrashes withpersistentD1 reopenandfullfive-role faultmatrix remain22.2.",
+    "Actualcorpus/referenceauthoring,body/token/price/risk/sample andnewseparate approval precedeliveaccess.",
+    "Product547inputs unchanged;oldproductchecks reused. Real iPhone/VoiceOver,learner efficacy andproduction remainunverified."
+  ],
+  "proofSha256": "41458707b180131b0fb5c1baa42beaaeca8d00a0f493ca31cdf163399aa19472"
+}

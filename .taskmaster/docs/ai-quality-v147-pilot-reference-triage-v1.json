@@ -1,0 +1,34 @@
+{
+  "protocol": "ai-quality-v147-pilot-reference-triage-v1",
+  "phase": "phase108",
+  "taskIds": [
+    "24.2",
+    "34.3"
+  ],
+  "cases": 60,
+  "peerReviewsReplayed": 120,
+  "currentGenerationBodies": 360,
+  "identicalPriorBodies": 360,
+  "sourceSupplementsPrepared": 12,
+  "explicitInsufficientSourceCases": 6,
+  "ambiguityCases": 7,
+  "calibrationHeldCases": [
+    "MC12"
+  ],
+  "qualifiedReferences": 0,
+  "familyIndependenceVerified": false,
+  "fullPilotModelCallsRemaining": 1800,
+  "countAllowanceForFullPilotMicros": "63000000",
+  "generalV3AvailableMicros": "3039780",
+  "ledgerSha256": "e2c77a097789856da746f75ea004cbec6642defd4f0acb4d9716248b95086fac",
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "auditSha256": "5a0eda0bc89f72a1acceeba33526f36215ca9ecb9afd63f34a148ce685ef5c21",
+  "bodyAuditSha256": "54befcc4846a455125637f47ede09045f598204b77763217baad6115361469ed",
+  "supplementSha256": "fcc8bd672a4f4927a1f728c651c1a29bff69891f1259ce94af10467e5d7b344c",
+  "document": "docs/AI_QUALITY_V147_PILOT_REFERENCE_TRIAGE_20261109.md",
+  "documentSha256": "0e41e4f4b50a8a5b009903266d43969d03467bd7abed6f491214f674f6d4a7c8"
+}

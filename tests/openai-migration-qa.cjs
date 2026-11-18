@@ -16,7 +16,7 @@ const word = words.find(w => w.word === 'arrive' && w.pos === 'v.');
 const feedback = (sentence, model, explanation = '과거 표현을 확인하는 합성 의견입니다.', context = {}) => ({
   original: sentence, correctedSentence: sentence === original ? correction : sentence,
   meaningUsage: 'appropriate', grammar: sentence === original ? 'needs_work' : 'natural', explanation,
-  provider: 'openai', requestedModel: model, model, promptVersion: 'reference-v5', validationVersion: 'judgment-v6', contextFingerprint: context.expectedContextFingerprint, ...(context.contextNote ? {contextNote:context.contextNote}: {}), createdAt: new Date().toISOString(),
+  provider: 'openai', requestedModel: model, model, promptVersion: 'reference-v7', validationVersion: 'judgment-v6', contextFingerprint: context.expectedContextFingerprint, ...(context.contextNote ? {contextNote:context.contextNote}: {}), createdAt: new Date().toISOString(),
 });
 const checks = [], errors = [], audits = [], postBodies = [];
 let observedAiPosts = 0;

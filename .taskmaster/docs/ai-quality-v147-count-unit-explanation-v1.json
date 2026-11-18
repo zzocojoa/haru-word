@@ -1,0 +1,38 @@
+{
+  "historicalProviderResponses": 3,
+  "browserChecks": 6,
+  "newlyExplainedScreens": 2,
+  "currentBuildSha256": "da5363d81afc9875023049e149eaf65cce2d408044f19e8e9305bc89ea40cb26",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "explanationCandidateRebound": false,
+  "learnerEfficacyMeasured": false,
+  "applyAndUndoChecks": 4,
+  "olderGrammarResponsesExcludedFromExactReplay": 6,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "productionWrites": 0,
+  "phase": "phase147",
+  "tasks": [
+    "8.2",
+    "37.2",
+    "24.1"
+  ],
+  "document": "docs/AI_QUALITY_V147_COUNT_UNIT_EXPLANATION_20261109.md",
+  "previousFreezeSha256": "1627145e64c5685b074e9920c2da6b8809841936dbb941653880bff411952f1c",
+  "replayedPilotCandidatePayloads": 180,
+  "changedPilotExplanations": 0,
+  "evidenceSha256": {
+    "actual-response-replay.json": "50b01616e2af888b1efa7019995a506aa421d0336d94b73efead583173f715f1",
+    "pilot-explanation-audit.json": "8b0b38654face8055f1c75820722efbbe60eaeebb4e64d885475d097e4ddea2b",
+    "test-initial.log": "eb9c7bb4fe33b0d6e9d72c82c3f3890d61fc4081e40f954dc7e562b6594889f1",
+    "test.log": "7507fabe5153a7a810a5e6d9c107eff28ac6409092a1f8e38ad921d621589525",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "build.log": "e236abefa8b910d183d507a97613dc1656d85754c47a39942c3842b71aa3037a",
+    "lint.log": "35bdb5b5e8ec9033f080396ffe6d229a4609391a38112660c989e99695530240",
+    "worker-browser.log": "97d72b4e74ada015a51e2a9925a91cce165982573964ef59465ea55d037c0cfc"
+  },
+  "productSourceSha256": {
+    "lib/judgment-correction.ts": "bc3c1abdb3b84ddc1c27be4c9c525b573c3b3cf904c4afd2174bc16d107ce7df",
+    "lib/verified-feedback-explanation.ts": "3a7694790984944a3cd5f634629dfb6187a6528fa847b1b3a00abcfa981f0759"
+  }
+}

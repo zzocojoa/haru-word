@@ -1,0 +1,1818 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "tag": "ai-quality-v147",
+  "task": 12,
+  "status": "design-only; no fresh evaluation cases authored",
+  "sourceHead": "7ce85ed49465b352e8304a741c8505124f86deb8",
+  "pilotOnly": true,
+  "releaseEligible": false,
+  "paidApprovalUsd": 0,
+  "newPaidCalls": 0,
+  "freshCaseTextsAuthored": 0,
+  "candidateFrozenForFreshAuthoring": false,
+  "stratumAxis": "Original grammar/correction action: normal=preserve original; needsCorrection=justified minimal correction; insufficientContext=withhold correction and ask reviewed clarification. Target-use label remains independent. Target-only uncertainty can belong to a correction stratum.",
+  "crossTable": {
+    "word": {
+      "normal": 10,
+      "needsCorrection": 12,
+      "insufficientContext": 8
+    },
+    "grammar": {
+      "normal": 10,
+      "needsCorrection": 13,
+      "insufficientContext": 7
+    }
+  },
+  "lessonIds": [
+    "noun",
+    "verb",
+    "pronoun",
+    "adjective",
+    "adverb",
+    "determiner",
+    "indefinite-article",
+    "definite-article",
+    "number",
+    "preposition",
+    "conjunction",
+    "auxiliary",
+    "modal",
+    "infinitive",
+    "exclamation"
+  ],
+  "slots": [
+    {
+      "id": "P-W01",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W02",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W03",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W04",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W05",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W06",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W07",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W08",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W09",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W10",
+      "domain": "word",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W11",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W12",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W13",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W14",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W15",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W16",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W17",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W18",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W19",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W20",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W21",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W22",
+      "domain": "word",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W23",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W24",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W25",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W26",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W27",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W28",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W29",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-W30",
+      "domain": "word",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G01",
+      "domain": "grammar",
+      "lessonId": "noun",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G02",
+      "domain": "grammar",
+      "lessonId": "noun",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G03",
+      "domain": "grammar",
+      "lessonId": "verb",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G04",
+      "domain": "grammar",
+      "lessonId": "verb",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G05",
+      "domain": "grammar",
+      "lessonId": "pronoun",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G06",
+      "domain": "grammar",
+      "lessonId": "pronoun",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G07",
+      "domain": "grammar",
+      "lessonId": "adjective",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G08",
+      "domain": "grammar",
+      "lessonId": "adjective",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G09",
+      "domain": "grammar",
+      "lessonId": "adverb",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G10",
+      "domain": "grammar",
+      "lessonId": "adverb",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G11",
+      "domain": "grammar",
+      "lessonId": "determiner",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G12",
+      "domain": "grammar",
+      "lessonId": "determiner",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G13",
+      "domain": "grammar",
+      "lessonId": "indefinite-article",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G14",
+      "domain": "grammar",
+      "lessonId": "indefinite-article",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G15",
+      "domain": "grammar",
+      "lessonId": "definite-article",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G16",
+      "domain": "grammar",
+      "lessonId": "definite-article",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G17",
+      "domain": "grammar",
+      "lessonId": "number",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G18",
+      "domain": "grammar",
+      "lessonId": "number",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G19",
+      "domain": "grammar",
+      "lessonId": "preposition",
+      "grammarStratum": "normal",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G20",
+      "domain": "grammar",
+      "lessonId": "preposition",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G21",
+      "domain": "grammar",
+      "lessonId": "conjunction",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G22",
+      "domain": "grammar",
+      "lessonId": "conjunction",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G23",
+      "domain": "grammar",
+      "lessonId": "auxiliary",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G24",
+      "domain": "grammar",
+      "lessonId": "auxiliary",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G25",
+      "domain": "grammar",
+      "lessonId": "modal",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G26",
+      "domain": "grammar",
+      "lessonId": "modal",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G27",
+      "domain": "grammar",
+      "lessonId": "infinitive",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G28",
+      "domain": "grammar",
+      "lessonId": "infinitive",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G29",
+      "domain": "grammar",
+      "lessonId": "exclamation",
+      "grammarStratum": "needsCorrection",
+      "status": "reserved-not-authored"
+    },
+    {
+      "id": "P-G30",
+      "domain": "grammar",
+      "lessonId": "exclamation",
+      "grammarStratum": "insufficientContext",
+      "status": "reserved-not-authored"
+    }
+  ],
+  "historyCoverage": [
+    {
+      "historyId": "H01",
+      "problem": "교정 중 인물·행동·대상 의미 변경",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        7,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H02",
+      "problem": "잘못된 원문을 natural로 승인",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        8,
+        9,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H03",
+      "problem": "불충분 입력의 의도·주어 창작",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        4,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H04",
+      "problem": "모호한 시간·수량을 임의 확정",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        5,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H05",
+      "problem": "목표 뜻/품사와 일반 문법 혼동",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        2,
+        3,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H06",
+      "problem": "잘못된 문법 규칙 설명",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        8,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H07",
+      "problem": "문장성분·품사·경계 설명 오류",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        8,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H08",
+      "problem": "정상 부사·불규칙 활용의 앱 과잉 거절",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        6,
+        12,
+        23,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H09",
+      "problem": "새 정상 명령문 부당 보류",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        4,
+        12,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H10",
+      "problem": "숨긴 구조·생성/로컬 한도의 전체 거절 결합",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        9,
+        20,
+        26,
+        32,
+        33,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H11",
+      "problem": "보완 필요인데 교정이 없거나 원문과 동일",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        9,
+        26,
+        32,
+        33,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H12",
+      "problem": "동일문장 재요청 잠금·미래 날짜 과거의견 우선",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        10,
+        23,
+        26,
+        32,
+        33,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H13",
+      "problem": "조동사 강도·시제 의미 보호 누락",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        7,
+        26,
+        32,
+        33,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H14",
+      "problem": "수량 순서/부호·절별부정·발화행위 보호 누락",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        7,
+        26,
+        32,
+        33,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H15",
+      "problem": "부정/인용 문맥 키워드로 보류 해제",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        4,
+        26,
+        32,
+        33,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H16",
+      "problem": "일반 메모·이전대화·과제틀 전송 범위 혼동",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        10,
+        15,
+        26,
+        32,
+        33,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H17",
+      "problem": "Worker 지원하지 않는 redirect로 발송 전 실패",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        11,
+        15,
+        20,
+        23,
+        26,
+        30,
+        31,
+        32,
+        33,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H18",
+      "problem": "로컬 TypeError의 통신오류 분류·과거 원인 불명",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        9,
+        11,
+        15,
+        20,
+        26,
+        31,
+        32,
+        33,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H19",
+      "problem": "대명사/접속절 목표 정의·rubric 계약 불일치",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        2,
+        3,
+        12,
+        13,
+        16,
+        21,
+        24,
+        26,
+        27,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H20",
+      "problem": "I asked·충돌 단복수의 과도한 단일 gold",
+      "validationChannel": "english-corpus-and-contract-controls",
+      "taskIds": [
+        1,
+        2,
+        4,
+        5,
+        12,
+        13,
+        16,
+        24,
+        26,
+        27,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40
+      ],
+      "requirement": "Cover fresh frame/context relation and accepted alternatives after T24 freeze; raw model and visible product separately."
+    },
+    {
+      "historyId": "H21",
+      "problem": "AI 채점과 작성자 리뷰 불일치",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        14,
+        21,
+        25,
+        26,
+        27,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H22",
+      "problem": "예산 부족·고정 분모 미측정",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        17,
+        18,
+        21,
+        22,
+        24,
+        25,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H23",
+      "problem": "거절 원문 부재·단계 진단의 인과 공백",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        9,
+        16,
+        20,
+        22,
+        26,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H24",
+      "problem": "EPERM·실행 중단·임시 원장·모듈 캐시/동시실행 복구",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        18,
+        19,
+        22,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H25",
+      "problem": "완료복구 검증 누락·402 포장·평가 종료 차단 허점",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        17,
+        19,
+        20,
+        22,
+        32,
+        33,
+        34,
+        35,
+        36,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H26",
+      "problem": "소표본·같은 작성자·부분가림·정형설명의 일반화 한계",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        12,
+        14,
+        15,
+        16,
+        21,
+        24,
+        25,
+        26,
+        27,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H27",
+      "problem": "앞뒤공백 정상 의견의 저장400",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        10,
+        23,
+        29,
+        30,
+        32,
+        33,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H28",
+      "problem": "receipt 조회 실패 후 pending UUID 소실·새 생성 가능",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        10,
+        18,
+        23,
+        29,
+        30,
+        32,
+        33,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H29",
+      "problem": "문법 문장 수정/undo의 독립복습 성적 삭제",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        10,
+        23,
+        29,
+        30,
+        32,
+        33,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    },
+    {
+      "historyId": "H30",
+      "problem": "수정중 완료 stage0–5·judgment-v6 DB 보호 호환 경계",
+      "validationChannel": "local-harness-methodology-or-operational-gate",
+      "taskIds": [
+        1,
+        10,
+        23,
+        29,
+        30,
+        32,
+        33,
+        38,
+        39,
+        40
+      ],
+      "requirement": "Do not count a language example as proof of lifecycle/storage/budget/production behavior; retain its actual gate evidence."
+    }
+  ],
+  "developerExposureInventory": [
+    {
+      "path": "data/evaluations/english-accuracy-2026-09-30-round-2.json",
+      "sha256": "8d3fd721b3ebf26b3757cd00cf0811b67aa7ef9cc0731eb9eb1192f173830768",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-09-30.json",
+      "sha256": "3cc2fe40f87d70a229829842498c8fd79bb1cf021114fa0664b8a3998895e8d3",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-cause-replay.json",
+      "sha256": "2fdf644b26cfa43543d782e728fff99b0ba0a67b38a1ce0a10261cd8a798b250",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-chunked-free.json",
+      "sha256": "e50ff0920f2e2398fe4c8acbdcbce5a514e1b3de47ba128d99ac8e1c0207beac",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "data/evaluations/english-accuracy-2026-10-01-original-first.json",
+      "sha256": "3dd0a542f8757fc0766fea9f4cc8f225b7042ad75ade31701022eee2bdb56bb6",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "data/words.json",
+      "sha256": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "lib/grammar/content-v2.ts",
+      "sha256": "fdccf9f7ed6a1b855fd32032e01af9af8838d278188f0e92aa0082a5caf453a7",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "lib/grammar/content-v3.ts",
+      "sha256": "9e32227c192b684b7b4748ed3b2685001a8fff83cc3cd70ca27f350ffbcd36d3",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "lib/grammar/content-v4.ts",
+      "sha256": "0a616f66b2e95abfbddb32c74b850107144231ecc2b6b35ddcd431e69156e7bd",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "lib/grammar/content.ts",
+      "sha256": "d7867e654da2c58a1e96f9d83a0a3ae55f922f2368652209dc170853dda4e01d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/accuracy-cause-diagnostics.test.mjs",
+      "sha256": "91e8f4b731a54cae6813445d37698606f184944d6a634f7406be1e5154ecd3e7",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-contract.test.mjs",
+      "sha256": "924e51bccc65c42f8caaeb7312517c2dc14d0efff67e3af7f44b2dcfcf624154",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-models.test.mjs",
+      "sha256": "160d55a6f278ac40842c674f79d8af5ec4c74221e1e029f347bf7212946ee37a",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-context-questions.test.mjs",
+      "sha256": "f209ddd71267b6f06bd8a6dee40536530f37ec1e455584a3933325cb2542d266",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-explanation.test.mjs",
+      "sha256": "70a050d28b6c6ff86f6b95ad0a2bda9bf86c25b5103a9a3a637540ea3fc37be1",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-input-boundaries.test.mjs",
+      "sha256": "755e620d43c63d3ae002b59086c5b8d7a58c52372f025cc7815a6d553ee873e8",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-morphology.test.mjs",
+      "sha256": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-schema-boundaries.test.mjs",
+      "sha256": "5cc50ab56618bab16f2f96859b66e13815f24d03a59265834ac0f8934ca2fb3f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-semantic-roles.test.mjs",
+      "sha256": "85b84bd8408d0d8f0ce6202eaa21b181113a91af64b33ca2ce5afa0ddf9874cd",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-target-boundaries.test.mjs",
+      "sha256": "8ce9b815fbbe369b77f11c1c3d1b428271241d1dcde6463ac2d4d3069078d8eb",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ai-quality-worker-equivalence.test.mjs",
+      "sha256": "8069b0eba19a4ada0e8ee14e0a3e04cfe7b606ca142bb8a64d4b9d5455aa0d59",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/american-ipa-data.test.mjs",
+      "sha256": "d0b5f1f90cb53c2559fc16dc50cca1b06379cc636fb28c1727031624dddd89b1",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/american-ipa-ui.test.mjs",
+      "sha256": "36b59a9a0c6e6a84a8751aeff2e4ab755a0393e74d115bc765435fa66e47f503",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/american-ipa.test.mjs",
+      "sha256": "cd9771c7e326fb24a6910164e4b737b323b7df4652d53ae6743d44677b698492",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/backup.test.mjs",
+      "sha256": "837e2217f0a6821f675a4fc0396d3369d8b5c669896d32ce29a13cc01360fd7d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/balanced-daily.test.mjs",
+      "sha256": "696c1851545d9092ee1d99b73f639beba4f04aeae219f548d46aee12c10c5bf6",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/braces-guard.test.mjs",
+      "sha256": "d574cc190779e2594db7025d28677302d8a7469bd83db353a2c494bc85c8f888",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/catalog-basics.test.mjs",
+      "sha256": "8e60ecca7f320d1f06bda2a375118b06ef0b77c42c2e72ce9abc39805284d42a",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/client-diagnostics.test.mjs",
+      "sha256": "78c8f4677baa0a6eff083eb28466f3a3365b2e6ac3656f6d6264893e3a205ff6",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/client-owner.test.mjs",
+      "sha256": "8d6250269ed74829277597f41e37a1b10dbb041feef2d8bac8adf36cb1ebee8c",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/client-request.test.mjs",
+      "sha256": "57a74b8efbd6edc751ed0adb3c93af243123795067bcf338c077ea9b5c62d011",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/connected-material.test.mjs",
+      "sha256": "036476eb34b8d30975ca1143ab8d0b49a6d18210b47f2a6a75b00f24b32ef09c",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/content-review.test.mjs",
+      "sha256": "fe99af191a8a4ef3534730339dfb1a9b807219242f734d6ecce10bf512d369c0",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/copy-density-harness.tsx",
+      "sha256": "f1eb0624b4a8b1dae1006e2c7abc4bfa2f470ec713b5e869b7e9978bdadf8769",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/daily-topup.test.mjs",
+      "sha256": "33fbe536fe450473ad3389ad0c6ab543b7bc5cb33eed33c753be79f19673b062",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/dependency-consumers.test.mjs",
+      "sha256": "70f0202886c63ddb8421139568bf1468dec2ff37d2e6c54301c4d8ea9ac4c6ac",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/dependency-security.test.mjs",
+      "sha256": "4c2f7a63f713142d92acf1e6c5cb8c515235da92848870853922eebd072eeadd",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/device-speech.test.mjs",
+      "sha256": "ea7b473da5ebde9e8c9c03a500b80075c053bb8f8a8d45b4f1f95a90140f6209",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/english-accuracy-results.test.mjs",
+      "sha256": "a446fc21700654e03ffe7fef2c3e3cd615c0bc180fe9f6a13d95bddfa1d7b148",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/english-accuracy.test.mjs",
+      "sha256": "a610dba5ccd7865423da7eb56cb78fa0a3477e6fb3ec41c0f46800d99d043976",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/export-security.test.mjs",
+      "sha256": "848b356674bdfa653d5b2fda1b98371128f7aebe85197d0e1b076ee606b1ee4f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/expression-translation.test.mjs",
+      "sha256": "77ff05094d4df5785a53e3e9939739d4b28769628cdea3dc0d5328fdbc3165c1",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/familiarity.test.mjs",
+      "sha256": "31af5cb2e08a1c09255ac54c0c9292ee63bc568664716b98aab5d56ccdc63516",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-correction-harness.tsx",
+      "sha256": "3864bb683a320e552983631b30b70dc207bfd5215b7d33fb63ac3216e7499836",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-correction.test.mjs",
+      "sha256": "e3e1518216ab0ddfa2189d47e88437c2a2b0783d8279923d019281ecb92c74e7",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-diagnostic-compat.test.mjs",
+      "sha256": "db01c461e93a00ca857ba8a6a0318cb5b4e5c1e060c2d559c56d06c446a07f84",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-export.test.mjs",
+      "sha256": "00428d09c9dcff197bbf306fac7ae083ee025f45cce609f3b640794a66a58037",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-generation-harness.tsx",
+      "sha256": "65e013fe0a360b9243ad1f994257c4d050dd4653a9d1d2d2affe40de974cce08",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-issue.test.mjs",
+      "sha256": "a7ee60a062b5d8bd57702209e893bac576144bd052361abef15ec021dbb1bf30",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-judgment.test.mjs",
+      "sha256": "d59949125a48ce6e73fc3c91ab4ca9483b3ed75044fd1d554e2fa89c882a77f9",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-refactor.test.mjs",
+      "sha256": "20ae644347e12b7aab43aa20c8aec1728808b19f51e9781bd4e4461533cfd315",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-requests.test.mjs",
+      "sha256": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-safety-api.test.mjs",
+      "sha256": "54a1c70e8cef016b829d99b2494ea9eacde9e7b502d9f7d7915e9b714b2acc8b",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-safety.test.mjs",
+      "sha256": "52b248ed189ff74aca820f0a517c3e674daf2061f417176dea10b7cdbc7da32d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-validation-stages.test.mjs",
+      "sha256": "48670166cdd0cad3f00a2b8f5ac7129fcc851e44a7d43dd5d7a8ff59f046ce50",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/feedback-word-forms.test.mjs",
+      "sha256": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/fixtures/american-ipa-regressions.json",
+      "sha256": "c5fae896df5bb54d672aaef0c59c8036cc25c79d202ac7cfc421cb7d02935212",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/fixtures/english-accuracy.json",
+      "sha256": "02a84a0c86252524e2627cbf7cd69f8d725ade70ebbf107c8aed986eabcd8e54",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/fixtures/feedback-diagnostic-compat.json",
+      "sha256": "de5690bd9aeb8bbbbc8a5179082ea98c2a31ac4023f46d21344794e875962472",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/fixtures/feedback-safety-replay.json",
+      "sha256": "b413deee4ce486d8eb35dd242518bafec97f05a2b10bc11f8fb78500cc7d670e",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/fixtures/judgment-decision-matrix.json",
+      "sha256": "c0959fcaae5d0140f376c3e2097716bab4f6457b2284f61fec33801ae591f3d7",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/fixtures/openai-request-equivalence.json",
+      "sha256": "2ecfd7830da79e2010e595868bb9881a1ce6379a0530827fb176aae64410be89",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/fixtures/openai-v147-policy-source.json",
+      "sha256": "c0d46ac1a73f3f7d77ad95f90691624d5c4d120e55d36039dd6967dcdff01cf1",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/free-accuracy-results.test.mjs",
+      "sha256": "67183585a8c2e606647e10fbd7194de1fbfa12f9841aeb39ee938447e28cc3c0",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/free-feedback-evaluation.test.mjs",
+      "sha256": "8bba6bb7973be8e347251bcc822372853e777a5c4ef5fd14bf672d10ff9606fa",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/grammar-content-review.test.mjs",
+      "sha256": "d01c799c70501cbfaae15f75ebad3e4314d47a5e7b0ee26f86e4affef32beed3",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/grammar-feedback-whitespace.test.mjs",
+      "sha256": "a2c6823def6b1a4b30be1a0b742a7ce41e68a7009e17c8ed656e572618613ffa",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/grammar.test.mjs",
+      "sha256": "758d21472a2efe1d717f8cb5d055b1e1c3592918ba021d1191f4989d51e832db",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/groq-fallback.test.mjs",
+      "sha256": "044b3a59db514a05f21284166e4deb9b08fd208817fdadc56237cbbb9d705938",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/image-practice-position-api.test.mjs",
+      "sha256": "cf963ad28fdbf5e2030906620b2d74decf867c0957a15552538628618741d312",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/image-practice-position.test.mjs",
+      "sha256": "c6a135849c2183fb68cf2fbf720e3635becf2adf478714314db3cdf7972cdb98",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/integration-consistency.test.mjs",
+      "sha256": "819b4cee7438e229629d3e8cd4f2ffd337af9714b132ff4ac48b58a23f051584",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/judgment-api.test.mjs",
+      "sha256": "130fb928b56cd579cf762ba2b542af51f25783e3b346f05c9d0985a3ca525ae6",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/judgment-decision-table.test.mjs",
+      "sha256": "cefda55931e9366ec8afbdc15af07509d0b1ca19f5d2a328e9560b10ace64616",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/judgment-feedback.test.mjs",
+      "sha256": "645b3a1433546b01b66530b43f9d10fefd6a635e4181ed6a6c425cb0835f0c82",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning-api.test.mjs",
+      "sha256": "289a27b8068861508c20b73da0132afb33caae11b41d78754e126920717b608a",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning-chunks.test.mjs",
+      "sha256": "5af0d4428b4bd0d6c76e282cb4e6805acef88a1ee368f04f9205bcd8d31e583d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning-commands.test.mjs",
+      "sha256": "886666e058b6ddf3d434f470aa6346ae0ac7cb89b93e82c529d39a27bccaa04c",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning-dates.test.mjs",
+      "sha256": "e7f6c3a13baa750a484edbbb9a23c13d78c3fa92967d800ce94f322299dcffee",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning-display.test.mjs",
+      "sha256": "2586bf3e443cd5eedfb0bfe11071899682774d06b8ced6895d8f5a72d7ed8d83",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning-journal.test.mjs",
+      "sha256": "978e4123e9618fe92b770c2e1a79a6fdcb9c50e443b988c92281858c18c9477c",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning-notices.test.mjs",
+      "sha256": "efaae9acb0dadb520f3ecb89885ef8077d582082a45344e52a0a04d0c84ea6a2",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/learning.test.mjs",
+      "sha256": "529b40fe7043c7761c061aec538ab4cb53def7d5a442253702795e40a17b0c02",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/local-draft-harness.tsx",
+      "sha256": "7a491c47198e22d3860393da4eaa69539ce317f64a2a1509c4fd9fd9ba43722c",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/local-learning-drafts.test.mjs",
+      "sha256": "65d1b14e46d8953c469f51f968e29d90d06bf9cb5bb0fe6700abb0b731c76321",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/material-line-endings.test.mjs",
+      "sha256": "e7eb4ca785ea7235a3f08c23ff2ee10be425fc578140aac656605b25eeb22b6d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/monthly-carryover-repair.test.mjs",
+      "sha256": "a81f114fb8f89aa551449a61b036a76410a5b5350f9bc41040c088b10151c42c",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/monthly-resume.test.mjs",
+      "sha256": "4566861dbcb5f496eeac9357b56dfa09aecca7375f73641898f72e7a522e4a29",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/navigation-history.test.mjs",
+      "sha256": "8842fd0bb404646c35650797f43149e11d1e0d3028a3222b060a36bafbfd8151",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/openai-feedback.test.mjs",
+      "sha256": "2731fc7b5861319af0f325308dbfcf1ff6f774b153c868fefb40af17ec5b3b95",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/openai-request-equivalence.test.mjs",
+      "sha256": "4ba8b31fddc287d617ae629aed4f59d6808da6249b2bcc3dfbc58b3b9b9e92a2",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/openai-routes.test.mjs",
+      "sha256": "b4e4dfdf17b6137f0d88c2adc867ed3c7b74d49bbbe15488062504d9fbc61510",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/openai-worker-transport.test.mjs",
+      "sha256": "22f68e45565e637569d59c3935ff295d1eac4025b21891054703b282aab970aa",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/original-feedback-evaluation.test.mjs",
+      "sha256": "4f8869af76727c766d05aa3da0b80cdfb7c8ba8b1106641a786aa113833d416f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/original-sentence-profile.test.mjs",
+      "sha256": "c3e21f45f2ce2a5136c5d0a3d18735b1e365a4b441bbfb225ed4d52de8354e40",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/oxford-web-catalog.test.mjs",
+      "sha256": "56d2f0e0a8b5677e8d37db1bee4d2dc617c8c5e37832ed2c13c09053235ce497",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/oxford-web-images.test.mjs",
+      "sha256": "425babc2e82f5998a72d9c5f4130bedaa629e39b7b576391569eba4780bdf9a2",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/pending-reviews-render.test.mjs",
+      "sha256": "47c91b8808e46d864a71fc2dea5116885365e48848c155c5ab433067b1a019e5",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/pronoun-target-contract.test.mjs",
+      "sha256": "d4a2a840304a2f1ac060b97972e07ed3e58cdb21645a62975df9e60ed1a1e849",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/pronunciation.test.mjs",
+      "sha256": "39e1e166196f6dc2f68384761b0163d9df08020eb02f1327c723ac5119541dd8",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/public-policy-generation.test.mjs",
+      "sha256": "2c1aec6aec8f79a7757ff7af9a46d99591a7e4575a2df18fd191fd913e242d27",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/purpose-regressions.test.mjs",
+      "sha256": "ae27fb0cba357d8bff1f8f8b61e1a54d716ec8ebde2979eda5630d30f28faca2",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-interruption.test.mjs",
+      "sha256": "550f00e7b76292c7f7bdd5a2f8abe415a7df132e72fed96f87b4e341b2650136",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-isolated-worker-lifecycle.test.mjs",
+      "sha256": "bd13cd01617c303bd3ecc58f81663ac512e066800c3237598ba1a2ab725dc60f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-lock-remediation.test.mjs",
+      "sha256": "55c69be68f51b8f7c419c0ef1120363ea09e1dd5989cc347a09248765d2a173a",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-preflight.test.mjs",
+      "sha256": "7504e4f24e318a11cb578cd5c3684d789d47a178bd568536b1db9f83a0f66c36",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-process.test.mjs",
+      "sha256": "adcfc8bc5a217b4deb89ad786191c579be769ffbcaa90f8acccc6d2a4d171b4f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-runner.test.mjs",
+      "sha256": "bb76f9c710f1e254fc32ab8e812ae976d072a8db3c565f02b476ec9f38cb2cf8",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-runtime.test.mjs",
+      "sha256": "6835577e7588243bb2e3b42ce5fceb2f931545d696fcadca2cf73fbd3bf33036",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/qa-worker-profile.test.mjs",
+      "sha256": "e0276596b70afedbb43aecbb422862bad25bd0a8149091703998697bd41a4d67",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/recoverable-feedback.test.mjs",
+      "sha256": "facc41261302e54acfd4cfe296163bf3e881e0ebcaff0e478daced75feeb55bc",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/refactor-contracts.test.mjs",
+      "sha256": "b7d1965157d044c05fb5d31bdd8cf0d4b93c888f4dd02422682b183b314d4162",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/remediation-followup.test.mjs",
+      "sha256": "a1c08365a1c465c6fd30390d128dcef700c1ab5502b5d432432ad8bc1d5c0095",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/remediation-judgment.test.mjs",
+      "sha256": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/repeat-learning.test.mjs",
+      "sha256": "26670e19c928cad5dd0eba63582a05fa229d0055d3b8c174b940b1c5c378d851",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/request-body.test.mjs",
+      "sha256": "a2f84fd096657b01dbf40e99ebd790f1ce885ef9e73f5aeb7759ab276c865db9",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/restore-client.test.mjs",
+      "sha256": "8fc9454365204fd3a9a7327a6cc50c56c71bcb4f0649fc552cece8f0c5559aae",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/restore-jobs.test.mjs",
+      "sha256": "fc65cca9d506076c42257bb2322535d9c827efc490a33092503e19dae4b939ea",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/review-calendar.test.mjs",
+      "sha256": "aecc4a1c834bf25423c0e2d34bebfabf67c57ebad40a37cd41b3d28d0eb84311",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/review-extension.test.mjs",
+      "sha256": "76c9eaf73eaa1aed309245b27717a61ff6e6f78301e29477ca1cfb0a5bf6dbb3",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/saved-summary-harness.tsx",
+      "sha256": "87c0172f6ae92e14227e8363ad812f8ef2fd09bc7a21d9457a9cf22fd1c0fc4d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/sentence-feedback.test.mjs",
+      "sha256": "58c39eca752a40fd197f8fca4814f1d0e593b237fb45d8cc656a27bb5875e3f7",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/sentence-structure.test.mjs",
+      "sha256": "2f48e64f92b2b1c6c0b1db2665a52378c8d2edf487e91c2b8a1fc2aa48ec67f1",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/sheet-swipe.test.mjs",
+      "sha256": "a77226f371f05bc0aaa2ebe85bc390b9696a3fade48ee9b5d94c2cd218f8b43f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/startup-assets.test.mjs",
+      "sha256": "ba82c93909ff5a9778e64342786a42f8db1c59ba315d0a30c8f55a0207846466",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/startup-diagnostics.test.mjs",
+      "sha256": "4944be4354c4f6d5b500113694e37b7be7bf9c8a10927c609a754f6b6e1cd22a",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/state-api.test.mjs",
+      "sha256": "7948ba4d9d7d22a2b863ba6f0517a368b4e2288810c66cc6af57ff66fc68d46f",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/state-collection-limits.test.mjs",
+      "sha256": "ecec79fff607445bd6bec4be9e2bd87d012ee780cacf53fd6af3154c2f0968d5",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/state-delta.test.mjs",
+      "sha256": "4196c4eb9bbb5f424fba922ae1b597019e2489b65bc7696a4f51a6840b7dd83c",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/state-response.test.mjs",
+      "sha256": "b6ea63839349a26d92246e43ed1bc9aa283c3bcee5b791bd705895cfc7f35e83",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/state-roundtrip.test.mjs",
+      "sha256": "7b8e2d51c545baf06c7266b3934d1682faa9ea9ec7d76b366e15af9256ae4b2b",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/study-clock-harness.tsx",
+      "sha256": "8ae58710f30a7dc188738e2400c629dd0ce155eee7793549c61c9c0df6bfa907",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/study-controller-harness.tsx",
+      "sha256": "f1172c90e432d194cc8a787ba298b53a880b50dde78a09fb97d6087fbcc1ac86",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/study-date.test.mjs",
+      "sha256": "ac5b6cfac9ff70e2f79c6788a3e4a839e97a8b75f1fbd79627b107b5d5766f5d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/study-draft.test.mjs",
+      "sha256": "7c96e93dd2787d59a53fd534cabc98cfedd59980aead390684e34de6f8d77d16",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/study-recovery.test.mjs",
+      "sha256": "37c06592d06887f12b86eee8f65bf21941e4aa514e705857718e5bb642c2691d",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/today-status.test.mjs",
+      "sha256": "db5e3e11ce8d90b12e111364d0e0607bfdfbb0e4a930b2d7b417e580cad75fc2",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/toolchain.test.mjs",
+      "sha256": "92b705ee87a45976f2a4c197d4c624ac1c1ed1b5881b0c135940f836642862ab",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/ux-text.test.mjs",
+      "sha256": "ed836d88ce65ad4248fc641161a54864d6484780c3f6f64a779ab77a0cb60a8b",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/view-restoration.test.mjs",
+      "sha256": "9d4c2cfcfc62b5332df51f3bea4d4489be214e31e18b705ff7cd7ae24aa833a6",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/word-editor-draft.test.mjs",
+      "sha256": "5da7d7fbad4b88f1a2630071351cc540a9b9b7b162141ab2798ccd089aedb90b",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/word-image-hosting.test.mjs",
+      "sha256": "88832576d5d83f7303783eb895ca77c8ac3f450a960aded0aee7753bb697bb77",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/word-image-prepare.test.mjs",
+      "sha256": "41cfd11417c60304c1aa173c9f517b6bbc00fe173ce816aad9c7751e767497bf",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/word-image-ui.test.mjs",
+      "sha256": "fa181dec710f14ced90c146d5b1680d9d64780efecdc0f6084dee31bf837eae5",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/word-image-upload.test.mjs",
+      "sha256": "620c78454378af6e0d1ff2a183fd7fac3746e4d4b1f5102dace5b466d333dea7",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/word-image-web.test.mjs",
+      "sha256": "d60a347a61751310b943c6ed63f3a09e59833acf6176c17da40f01975a0dd6c4",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    },
+    {
+      "path": "tests/word-image.test.mjs",
+      "sha256": "8606e2d18a3762a452c8fef6e03e18d0f3dc89f6f937e7072a696e39710809df",
+      "use": "developer-exposed-source-or-archive; not fresh holdout"
+    }
+  ],
+  "familyDefinition": "High-level error categories may repeat. A family is the syntactic frame, participant/temporal/quantity relation and contextual ambiguity operation. Mere changes of names, lemmas, number spelling, word order paraphrase or surface synonyms do not create a new family. Reviewer records the specific structural distinction.",
+  "corpusSeparation": {
+    "development": "All public105 matrix, curriculum, past API failures/responses and current synthetic regression cases are exposed; use for debugging only.",
+    "calibration": "12 fabricated witness outputs exercise judge behavior, separately labeled; never count them as pilot/confirmation predictions. T14 prepares, T25 measures.",
+    "pilot": "T24 authors 60 new inputs only after source/policy freeze. Compare against all known development/calibration families; same-author novelty is not independent authorship.",
+    "confirmatory": "T35 creates a newly sealed set after pilot decisions. No family shared with development/calibration/pilot; approved N/r and risk decision T34 required. Never reuse exposed pilot as confirmation."
+  },
+  "duplicateReview": {
+    "automatic": [
+      "Exact input + target + context normalized for whitespace and casing",
+      "Input token fingerprint ignoring trivial punctuation/number spelling; only a warning, not a semantic uniqueness proof",
+      "Declared familyId intersection across corpora"
+    ],
+    "requiredManual": [
+      "Check semantic equivalence and simple lexical replacement against exposed examples",
+      "Record source family and new structural/context relation; reject superficial paraphrase as fresh",
+      "Reviewer signs case/family classification before generation and sees no model results"
+    ],
+    "recordTemplate": {
+      "caseId": null,
+      "familyId": null,
+      "comparedExposureIds": [],
+      "exactDuplicate": null,
+      "semanticOrTemplateDuplicate": null,
+      "newStructuralRelation": null,
+      "reviewerId": null,
+      "reviewedBeforeResults": null,
+      "decision": null
+    },
+    "completedFreshReviews": 0
+  },
+  "independence": {
+    "currentAuthor": "current Codex session; knows historical failures and product fixes",
+    "currentLevel": "same-author design only; no independent reviewer",
+    "futureAuthor": "T24 author identified in sealed metadata; same author must be disclosed",
+    "futureReviewer": "Separate reviewer identity and exposure recorded; absent review cannot be inferred from a second AI label",
+    "qualifiedLearnerReview": "T37 qualified English reviewer and consented learners mandatory; not satisfied by this design or AI judge agreement"
+  },
+  "changeControl": [
+    "Record source, prompt, parser, curriculum, target, model, options, rubric and exposure hashes at freeze.",
+    "Any source/rubric/case/gold change after observing outputs invalidates that run for confirmatory claims; retain raw results and create a new version plus newly sealed families.",
+    "No replacement of failed/missing requests to improve the denominator. T18/T21 account for every frozen slot.",
+    "60 intentionally stratified cases and repeated outputs are diagnostic only; do not treat them as independent service-wide Bernoulli observations. T34 sets confirmation uncertainty/risk/sample design."
+  ],
+  "nextGates": {
+    "T13": "Known-example gold alternatives and five dimensions, before results",
+    "T14": "Judge witness preparation, not measured judge accuracy",
+    "T24": "Final new pilot texts, family review, actual request hashes and new cost proposal only after T22/T23/T34",
+    "T35": "Fresh confirmatory authoring/seal after pilot review",
+    "T37": "Independent qualified content and learner comprehension/transfer"
+  },
+  "historicalExposureReference": {
+    "file": "ROOT:outputs/ai-quality-v147-implementation-20261106/baseline.json",
+    "sha256": "c98c08792665f7f3ec9572e1553ba44e535ce9fba43e08e52d5c9138f549863f",
+    "evidenceFiles": 2482,
+    "causeSourceReferences": ".taskmaster/docs/ai-quality-v147-cause-register.json",
+    "policy": "All historical inputs, outputs, public tests and curriculum encountered in this session are exposed; absence from an automatic fingerprint warning is not proof of semantic independence."
+  }
+}

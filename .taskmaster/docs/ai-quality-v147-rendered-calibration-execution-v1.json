@@ -1,0 +1,99 @@
+{
+  "protocol": "ai-quality-v147-rendered-calibration-execution-v1",
+  "phase": "phase107",
+  "taskIds": [
+    "34.3",
+    "34.4"
+  ],
+  "status": "collected-rendered-calibration",
+  "failureCode": null,
+  "studyPlanHash": "2c96bc43df962814774d6abadeec3c3df748658f69ad4325dbfbd98a391298a8",
+  "fundingScopeHash": "b2e715d0407cd222f896e8e1d0e4d88ae7bfa88c7f4426e30839b19a0d9b0ec6",
+  "runtime": "outputs/ai-quality-v147-rendered-calibration-runtime-20261109",
+  "admittedPublicCases": 12,
+  "modelDenominator": 72,
+  "capturedModelUsage": 72,
+  "actualProviderCalls": 72,
+  "actualCountApiCalls": 72,
+  "actualKeyReads": 1,
+  "arithmeticMatches": 71,
+  "criticalFlagMisses": 0,
+  "groups": [
+    {
+      "key": "gpt-6.1-sol/input-first",
+      "captured": 12,
+      "gradeMatches": 12,
+      "allMatches": 12,
+      "criticalMisses": 0
+    },
+    {
+      "key": "gpt-6.1-sol/feedback-first",
+      "captured": 12,
+      "gradeMatches": 11,
+      "allMatches": 11,
+      "criticalMisses": 0
+    },
+    {
+      "key": "gpt-6.1-terra/input-first",
+      "captured": 12,
+      "gradeMatches": 12,
+      "allMatches": 12,
+      "criticalMisses": 0
+    },
+    {
+      "key": "gpt-6.1-terra/feedback-first",
+      "captured": 12,
+      "gradeMatches": 12,
+      "allMatches": 12,
+      "criticalMisses": 0
+    },
+    {
+      "key": "gpt-6-astra/input-first",
+      "captured": 12,
+      "gradeMatches": 12,
+      "allMatches": 12,
+      "criticalMisses": 0
+    },
+    {
+      "key": "gpt-6-astra/feedback-first",
+      "captured": 12,
+      "gradeMatches": 12,
+      "allMatches": 12,
+      "criticalMisses": 0
+    }
+  ],
+  "differenceRows": [
+    {
+      "index": 67,
+      "caseId": "MC12",
+      "model": "gpt-6.1-sol",
+      "layout": "feedback-first",
+      "gradeMatch": false,
+      "axesMatch": true,
+      "missedCriticalFlags": [],
+      "differentDimensions": [
+        "grammar"
+      ],
+      "differentAxes": [],
+      "reasonCodes": [
+        "grammar",
+        "confirmed"
+      ]
+    }
+  ],
+  "measuredUpperMicros": "7768752",
+  "earmarkMicros": "8567184",
+  "stageUsedUpperMicros": "3488388",
+  "countAllowanceRetainedMicros": "2520000",
+  "generalV3AvailableMicros": "3039780",
+  "existingCapMicros": "35000000",
+  "ledgerSha256": "e2c77a097789856da746f75ea004cbec6642defd4f0acb4d9716248b95086fac",
+  "mainDispatchAuthorized": false,
+  "englishTruthCertified": false,
+  "releaseVerdict": "held",
+  "terminalSha256": "02047715484e91772c160c1b565a3f78f91d71a96070465b372f72a16021beca",
+  "auditSha256": "e0b5d5137edb9ac6d63e141d209c75a81894aec0c4717d690444df2039b9bceb",
+  "admissionSha256": "778e872a20b302fd92a5ca82346559d005485ac5101233da4a318b1de48c2e30",
+  "document": "docs/AI_QUALITY_V147_FORMAL_CALIBRATION_ACTUAL_20261109.md",
+  "documentSha256": "b6eec73ac037debf75aa013c2aee6fd52f47883f9aa2098f079f16237055385d"
+}

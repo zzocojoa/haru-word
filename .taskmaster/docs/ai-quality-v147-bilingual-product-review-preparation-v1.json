@@ -1,0 +1,67 @@
+{
+  "protocol": "ai-quality-v147-bilingual-product-review-preparation-v1",
+  "phase": "phase174",
+  "status": "offline-prepared-not-calibrated",
+  "policyHash": "8aba31b46be90534f5edf8b51275eb20b4ee5864f587383ed56b4380fcad675c",
+  "syntheticObservations": 360,
+  "plannedSyntheticReviewSlots": 1440,
+  "availableSyntheticReviewSlots": 1260,
+  "unavailableSyntheticReviewSlots": 180,
+  "actualAppObservations": 6,
+  "preparedActualAppReviewSlots": 24,
+  "independentActualAiProductGrades": 0,
+  "originalGrammarAndKoreanIntentSeparate": true,
+  "parentAndVisibleFeedbackBound": true,
+  "sourceQualified": false,
+  "calibrationAcceptanceAllowed": false,
+  "referencesQualified": 0,
+  "formalPilotGenerations": 0,
+  "priorScoresRescored": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "mainDispatchAuthorized": false,
+  "ledgerSha256": "c252fd3a0b4887c014bdc5dc5218c399f9c88403f0b8ae46c82bd4db4b4ff649",
+  "generalAvailableMicros": "156241",
+  "restrictedUnusedMicros": "567509",
+  "conditionalRemainingMicros": "723750",
+  "tokenCountFeeOfficiallyConfirmed": false,
+  "calculationProvisionsReleased": false,
+  "fullPilotReviewCountProvisionMicros": "50400000",
+  "fullPilotPlusCalibrationCountProvisionMicros": "52920000",
+  "budgetInference": "At the retained engineering provision 0.035/count, 1440 planned product-review counts alone reserve 50.40 USD before generation/calibration/model costs. This is not a verified API fee or a new spending request.",
+  "sources": {
+    "captured": {
+      "file": "outputs/ai-quality-v147-implementation-20261106/phase169/captured-proposal-requests.json",
+      "sha256": "b7aa727f1dd7d2a47e4c5b501f9c1a7152eb82f4a7b6ac873c5019a5fde330ef"
+    },
+    "actual": {
+      "file": "outputs/ai-quality-v147-word-app-runtime-20261112/app-readback-evidence.json",
+      "sha256": "f8be5d8e7cb2eb04e5f1fe3e1a729376c48e54aac675a03962d66b0f580b6ca0"
+    },
+    "appPlan": {
+      "file": "outputs/ai-quality-v147-implementation-20261106/phase172/word-app-plan.json",
+      "sha256": "1a62be2661ae963b3e1d53de333f97af8c08dc634f8f0ff8935bb3a59aea493f"
+    },
+    "priorRubric": {
+      "file": "outputs/ai-quality-v147-implementation-20261106/phase98/prepared.json",
+      "sha256": "af5f71603a07cda1200b8dcf7c7790b31889b48259e1193194b77ba4c60ef6af"
+    },
+    "ledger": {
+      "file": ".taskmaster/docs/ai-quality-v147-evaluation-budget-ledger-v3.json",
+      "sha256": "c252fd3a0b4887c014bdc5dc5218c399f9c88403f0b8ae46c82bd4db4b4ff649"
+    }
+  },
+  "preparedFile": "outputs/ai-quality-v147-implementation-20261106/phase174/prepared-product-reviews.json",
+  "preparedSha256": "857a4692417d28b618fa96a3a517b1d731b15131f73d4c1bcf34fec92b6e7e13",
+  "document": "docs/AI_QUALITY_V147_BILINGUAL_PRODUCT_REVIEW_20261112.md",
+  "regressionChecks": 9,
+  "policyFile": ".taskmaster/docs/ai-quality-v147-bilingual-product-rubric-v1.json",
+  "moduleFile": ".taskmaster/scripts/ai-quality-v147-bilingual-product-review-v1.mjs",
+  "testFile": ".taskmaster/scripts/test-ai-quality-v147-bilingual-product-review-v1.mjs",
+  "implementationSha256": {
+    ".taskmaster/docs/ai-quality-v147-bilingual-product-rubric-v1.json": "80d2bc9ed1bd13f2b56e4abfeddf2ecc5e28d6263e7369a857642b3d3ccc02c1",
+    ".taskmaster/scripts/ai-quality-v147-bilingual-product-review-v1.mjs": "7cdeb8a877602f9464907b576487587a94b1dc554831ef0cfc311ea48541d5b6",
+    ".taskmaster/scripts/test-ai-quality-v147-bilingual-product-review-v1.mjs": "3689f5b087907069c19b03db4df49be5147d793520d1df201e19d79f1397c6fd"
+  }
+}

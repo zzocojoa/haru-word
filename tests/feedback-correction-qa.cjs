@@ -12,13 +12,13 @@ const {launchBrowser,closeBrowser}=require('./qa/runtime.cjs');
  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
  await page.route('**/*',route=>route.request().url()===base+'/'?route.continue():route.abort());
  const pass=name=>{checks.push(name);console.log('PASS '+name);};
- const reset=async(mode='word',sentence='She sing well.',uncertain=false)=>{const previous=await page.locator('main').getAttribute('data-harness-epoch');await page.evaluate(({mode,sentence,uncertain})=>window.correctionHarness.reset(mode,sentence,uncertain),{mode,sentence,uncertain});await page.waitForFunction(old=>document.querySelector('main')?.getAttribute('data-harness-epoch')!==old,previous);await page.getByRole('textbox',{name:'내 문장',exact:true}).waitFor();await page.waitForFunction(s=>document.querySelector('textarea')?.value===s,sentence);};
+ const reset=async(mode='word',sentence='She sing well.',uncertain=false)=>{const previous=await page.locator('main').getAttribute('data-harness-epoch');await page.evaluate(({mode,sentence,uncertain})=>window.correctionHarness.reset(mode,sentence,uncertain),{mode,sentence,uncertain});await page.waitForFunction(old=>document.querySelector('main')?.getAttribute('data-harness-epoch')!==old,previous);await page.getByRole('textbox',{name:'내 문장',exact:true}).waitFor();await page.waitForFunction(s=>document.querySelector('textarea')?.value===s,sentence);if(mode==='word')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('그녀는 노래를 잘해.');};
  const field=()=>page.getByRole('textbox',{name:'내 문장',exact:true});
  const apply=()=>page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true});
  const confirm=()=>page.getByRole('button',{name:'비교한 제안으로 바꾸기',exact:true});
  const undo=()=>page.getByRole('button',{name:'교정 적용 되돌리기',exact:true});
  try{
-  await page.goto(base+'/');await page.addScriptTag({path:directory+'/harness.js'});await field().waitFor();
+  await page.goto(base+'/');await page.addScriptTag({path:directory+'/harness.js'});await field().waitFor();await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('그녀는 노래를 잘해.');
   assert.equal(await page.evaluate(()=>window.correctionHarness.requests()),0);
   await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).click();
   await page.waitForFunction(()=>window.correctionHarness.requests()===1);
@@ -50,8 +50,8 @@ const {launchBrowser,closeBrowser}=require('./qa/runtime.cjs');
     await page.getByText('수업 목표는 해당 표현을 알맞게 사용했는지에 대한 의견이에요.',{exact:true}).waitFor();
     const text=await page.locator('main').innerText();
     if(version===4){assert.match(text,/보관된 v4 합성 설명과 질문을 유지합니다/);assert.doesNotMatch(text,/이미 일어난|앞뒤 내용에서/);}
-    else if(kind==='time'){assert.match(text,/이미 일어난 일을 말하나요, 앞으로 일어날 일을 말하나요/);assert.match(text,/수업 목표 · 확인 필요/);}
-    else{assert.match(text,/앞뒤 내용에서 각각 무슨 일이 일어나고/);assert.match(text,/수업 목표 · 판단 어려움/);}
+    else if(kind==='time'){assert.match(text,/이미 일어난 일을 말하나요, 앞으로 일어날 일을 말하나요/);assert.match(text,/수업 목표 · 보완 필요/);}
+    else{assert.match(text,/앞뒤 내용에서 각각 무슨 일이 일어나고/);assert.match(text,/수업 목표 · 문맥 확인 필요/);}
     assert.match(text,/문법 · 판단 어려움/);assert.equal(await apply().count(),0);assert.equal(await page.getByText('AI 교정 제안',{exact:true}).count(),0);
    }pass(version===4?'historical v4 explanations remain read-only without question conversion':'v5 temporal and relationship questions render separately without invented corrections');
   }

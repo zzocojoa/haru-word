@@ -1,0 +1,85 @@
+{
+  "protocol": "ai-quality-v147-product-calibration-source-catalog-v2",
+  "checkedAtUtc": "2026-11-08T01:00:47.381092+00:00",
+  "sources": [
+    {
+      "id": "present",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+      "paraphrase": "Editorial present-simple formation: third-person singular uses an inflected verb; present-simple negatives use do/does plus not.",
+      "scopeLimit": "English syntax only; not a score oracle.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "pronouns",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+      "paraphrase": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement.",
+      "scopeLimit": "Pronoun form evidence does not license exchanging actor and recipient.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "past-modal",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/modals-deductions-about-past",
+      "paraphrase": "Editorial explanation permits might have with a past participle for a possible past event.",
+      "scopeLimit": "It does not establish which time an underspecified learner intended.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "demonstratives",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/demonstratives",
+      "paraphrase": "Editorial explanation distinguishes singular this/that and plural these/those, including their use with nouns.",
+      "scopeLimit": "It does not choose the intended number for an inconsistent learner sentence.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "progressive",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-continuous",
+      "paraphrase": "Editorial formation table uses present be plus an ing-form and associates they with are.",
+      "scopeLimit": "Only form/agreement; no invented time/context.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "book",
+      "url": "https://www.merriam-webster.com/dictionary/book",
+      "paraphrase": "Dictionary lists book as a noun for a bound written/printed work and as a verb for reserving in advance.",
+      "scopeLimit": "Different requested sense/POS can be missed in a grammatically natural sentence.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "help",
+      "url": "https://www.merriam-webster.com/dictionary/help",
+      "paraphrase": "Dictionary includes help as both verb and a noun meaning aid or assistance.",
+      "scopeLimit": "Noun availability alone does not certify every collocation; combine with imperative syntax.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "quiet",
+      "url": "https://www.merriam-webster.com/dictionary/quiet",
+      "paraphrase": "Dictionary includes an adverb entry for quiet, meaning in a quiet manner.",
+      "scopeLimit": "Does not establish the register or naturalness of every collocation, including speaking quiet.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "manner",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "paraphrase": "Beginner editorial manner-adverb guidance gives quiet to quietly and normally places manner adverbs after the verb or object.",
+      "scopeLimit": "Pedagogical default does not exclude all dictionary-attested flat-adverb uses.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    }
+  ],
+  "freshFetchFailures": {
+    "CambridgeGrammarAndDictionary": 8,
+    "reason": "403",
+    "BritishCouncilA1A2PresentSimpleAndBe": "timeout; used accessible editorial grammar-reference pages instead"
+  },
+  "sourceTruthCertified": false,
+  "userCommentsUsedAsAuthority": false
+}

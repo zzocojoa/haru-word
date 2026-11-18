@@ -1,0 +1,35 @@
+{
+  "protocol": "ai-quality-v147-revised-pilot-rehearsal-v1",
+  "phase": "phase138",
+  "tasks": [
+    "24.4",
+    "26.1",
+    "26.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_REVISED_PILOT_REHEARSAL_20261109.md",
+  "readbackReceipts": 360,
+  "baselineStored": 177,
+  "candidateStored": 180,
+  "browserMatches": 357,
+  "reviewBodies": 1440,
+  "linkedReviews": 1428,
+  "heldReviews": 12,
+  "replacementReviews": 48,
+  "faultControlHeldReviews": 20,
+  "reviewPlanHash": "3e97eb299f7595ecc2f45cf8f9971ef71806c27ced93c86df2968faf1a5ec5fb",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "mainDispatchAuthorized": false,
+  "referencesQualified": 0,
+  "pilotGenerationsCompleted": 0,
+  "pilotReviewsCompleted": 0,
+  "evidenceSha256": {
+    "local-captures.json": "a64caf87360464574b076e6e5d0303eb87a67fb023db4c6ddc69864236e3aa5e",
+    "rendered.json": "e7dc0c405e43fbaf6c4649ae09469be7116b376a792aaee6661e4dac0884c2bc",
+    "review-handoff.json": "37fd2a99771af02d6dee99a5281007d5b2ee5558ddf20392cb33ad3726ac8b68",
+    "fault-control.json": "a10b772ff98c5014d17cb3d6fd1b448f183f98b53442a954ba1fc158e8916ec8",
+    "rehearsal-summary.json": "a687e5677cfae2fe01d3f7dd36302002d7428d1fd4418ce468f6acf833a24cc1",
+    "independent-audit.json": "21fc1480ce12a0d406476e692a2735924d207804a44211223406cfc3617d0f50"
+  }
+}

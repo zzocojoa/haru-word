@@ -10,7 +10,7 @@ export const feedbackContextFields = {
   expectedContextFingerprint: z.string().regex(/^[a-f0-9]{64}$/).optional(),
   contextKind:z.enum(FEEDBACK_CONTEXT_KINDS).optional(),
 };
-export type FeedbackContextRequest = { contextNote?: string; expectedContextFingerprint?: string;contextKind?:FeedbackContextKind };
+export type FeedbackContextRequest = { contextNote?: string; expectedContextFingerprint?: string;contextKind?:FeedbackContextKind;contextRole?:'intended_korean' };
 export type FeedbackInput = { sentence: string; [key: string]: string };
 // Legacy grammar results retain raw input; v5 uses the trimmed request sentence.
 // Accept only those two representations without rewriting the learner's draft.
@@ -23,8 +23,8 @@ export function feedbackMatchesRequest(feedback: { original: string; requestedMo
   return feedbackOriginalMatches(feedback.original, sentence) && feedback.requestedModel === modelId
     && (!fingerprint || feedback.contextFingerprint === fingerprint);
 }
-export function wordFeedbackInput(word: { word: string; pos: string }, meaning: string, sentence: string, contextNote = '', expression = word.word,contextKind:FeedbackContextKind='sentence'): FeedbackInput {
-  return { word: word.word, pos: word.pos, meaning, expression, sentence: sentence.trim(), ...(contextNote.trim() ? { contextNote: contextNote.trim() } : {}),...(contextKind!=='sentence'?{contextKind}:{}) };
+export function wordFeedbackInput(word: { word: string; pos: string }, meaning: string, sentence: string, contextNote = '', expression = word.word,contextKind:FeedbackContextKind='sentence',contextRole?:FeedbackContextRequest['contextRole']): FeedbackInput {
+  return { word: word.word, pos: word.pos, meaning, expression, sentence: sentence.trim(), ...(contextNote.trim() ? { contextNote: contextNote.trim() } : {}),...(contextKind!=='sentence'?{contextKind}:{}),...(contextRole?{contextRole}:{}) };
 }
 // This identifies the reviewed target/input, never authentication or ownership.
 // The receipt claim separately binds owner, revision and the actual generation profile.

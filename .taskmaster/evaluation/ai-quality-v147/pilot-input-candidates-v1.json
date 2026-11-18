@@ -1,0 +1,2073 @@
+{
+  "protocol": "ai-quality-v147-pilot-input-candidates-v1",
+  "recordedAtUtc": "2026-11-08T15:00:51.548336+00:00",
+  "purpose": "Full60 diagnostic input preparation,not confirmation corpus",
+  "priorStageFile": "phase81/staging-proposal.json",
+  "priorStageSha256": "1e403b2c7a1240f0036db2097d5d2c796495b0e26965eadfa73bcef92bce8078",
+  "cases": [
+    {
+      "id": "pilot-word-needsCorrection-01",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 1,
+      "lessonId": null,
+      "input": {
+        "sentence": "Why did the curator asked twice?",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-946215ad5352870dc13c9f78",
+        "description": "direct wh-question with duplicated past marking",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "ask",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-01",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 1,
+      "lessonId": null,
+      "input": {
+        "sentence": "Even if they ask again",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-389300c6b91f870102083171",
+        "description": "uncompleted concessive conditional antecedent",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "ask",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-01",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 1,
+      "lessonId": "noun",
+      "input": {
+        "sentence": "Honesty matters.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-eb68275fa65a233afc3cd211",
+        "description": "abstract uncount noun as finite-clause subject",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "classes",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-01",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 1,
+      "lessonId": "noun",
+      "input": {
+        "sentence": "Two luggage blocked the aisle.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-fc3b6fce2ccc35463639b0b1",
+        "description": "mass noun in explicit cardinal count requiring a nonspecific unit",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "classes",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-01",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 1,
+      "lessonId": "verb",
+      "input": {
+        "sentence": "If the courier had arrived",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-8c1ee009d1a9cad5d0f41726",
+        "description": "unfinished past-perfect conditional with no consequent",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "verbs",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "forms",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-01",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 1,
+      "lessonId": null,
+      "input": {
+        "sentence": "May I ask why?",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-ddff391631f1b741b6dd3d89",
+        "description": "permission modal with embedded interrogative ellipsis",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "ask",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-02",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 2,
+      "lessonId": "pronoun",
+      "input": {
+        "sentence": "The one beside her",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-2a05fa40198a34ec296113f6",
+        "description": "pronominal nominal plus prepositional modifier without a finite main message",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "pronouns",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-02",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 2,
+      "lessonId": null,
+      "input": {
+        "sentence": "The table that I booked",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-6037635d035ac4e17817a2f7",
+        "description": "noun phrase with restrictive reservation relative and no main predicate",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "book",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-02",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 2,
+      "lessonId": "verb",
+      "input": {
+        "sentence": "Neither route lead to the quay.",
+        "contextNote": "현재 지도에 표시된 길의 상태를 설명한다.",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-915c5f6d47a0cea103bc144c",
+        "description": "singular neither-subject with present finite-verb agreement",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "verbs",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "forms",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-02",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 2,
+      "lessonId": null,
+      "input": {
+        "sentence": "Her help were valuable.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-815289f27cf4e9fbd9e17d6b",
+        "description": "uncount assistance subject with past copula number mismatch",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "help",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-02",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 2,
+      "lessonId": null,
+      "input": {
+        "sentence": "We booked ahead.",
+        "contextNote": "앞선 질문은 “Did you arrange the dinner reservation?”였다.",
+        "contextKind": "reply"
+      },
+      "wordTarget": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-2ff21ad306829e2508153ea4",
+        "description": "intransitive reservation verb with temporal adverb",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "book",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-02",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 2,
+      "lessonId": "pronoun",
+      "input": {
+        "sentence": "Between us, it was her.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-56b362232faf1e5c00ae4ced",
+        "description": "prepositional object case plus natural predicative personal pronoun",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "pronouns",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-03",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 3,
+      "lessonId": null,
+      "input": {
+        "sentence": "Practical help for new volunteers",
+        "contextNote": "짧은 안내문에 붙일 제목이다.",
+        "contextKind": "title"
+      },
+      "wordTarget": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-ace49b57bf695c650e211568",
+        "description": "nominal assistance title with a beneficiary prepositional modifier",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "help",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-03",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 3,
+      "lessonId": "adjective",
+      "input": {
+        "sentence": "The delay made everyone restless.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-9c0279b4dc594b0b7439619b",
+        "description": "declarative past causative object-adjective complement",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "adjectives",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-03",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 3,
+      "lessonId": null,
+      "input": {
+        "sentence": "This book belongs on that shelf.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-f02c4e930995c53ef3a4d257",
+        "description": "homographic noun occurrence fails requested reservation-verb target",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "book",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-03",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 3,
+      "lessonId": "adjective",
+      "input": {
+        "sentence": "This fabric feels softly.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-919923fcaebf343070da5208",
+        "description": "sensory linking predicate requires adjective rather than manner adverb",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "adjectives",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-03",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 3,
+      "lessonId": null,
+      "input": {
+        "sentence": "With her help near the",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-26a4f990c4d87b35c05bf3d8",
+        "description": "unfinished prepositional complement within assistance adjunct",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "help",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-03",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 3,
+      "lessonId": "adverb",
+      "input": {
+        "sentence": "Only if she agrees",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-bc5cf0a304b0baa7f100a0ba",
+        "description": "focus adverb scoping an uncompleted conditional restriction",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "adverbs",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-04",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 4,
+      "lessonId": null,
+      "input": {
+        "sentence": "The guide explained it carefully.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-9ab4aa0d73e3b113cde29374",
+        "description": "grammatical derived manner adverb does not provide requested adjective",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "careful",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-04",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 4,
+      "lessonId": null,
+      "input": {
+        "sentence": "More careful than",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-4fc714273abcff5c6cfb5246",
+        "description": "unfinished comparative adjective construction",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "careful",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-04",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 4,
+      "lessonId": "adverb",
+      "input": {
+        "sentence": "She very enjoys sailing.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-a6cbfc2636c296d3c216760b",
+        "description": "degree adverb applied directly to verb instead of a licensed degree construction",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "adverbs",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-04",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 4,
+      "lessonId": "determiner",
+      "input": {
+        "sentence": "Either of these",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-46a902b411aed56b6558a724",
+        "description": "elliptical determiner-partitive without reply/title context",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "determiners",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-04",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 4,
+      "lessonId": null,
+      "input": {
+        "sentence": "Keep the corridor quiet.",
+        "contextNote": "",
+        "contextKind": "command"
+      },
+      "wordTarget": {
+        "word": "quiet",
+        "pos": "adj.",
+        "meaning": "조용한",
+        "expression": "quiet"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-36cb28d45c9dfbb7bb68b124",
+        "description": "imperative causative object-adjective complement",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "quiet-cambridge",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-04",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 4,
+      "lessonId": "determiner",
+      "input": {
+        "sentence": "Both my mittens are damp.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-4741467386b0b0bcbcaec033",
+        "description": "compatible predeterminer and possessive with plural agreement",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "short",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "determiners",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-05",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 5,
+      "lessonId": "definite-article",
+      "input": {
+        "sentence": "The receipt from the small wooden stall beside the western entrance to the market",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-52fd9c81541481e1959b5ed4",
+        "description": "identified nominal with nested prepositional modifiers but no independent predicate",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "articles",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-05",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 5,
+      "lessonId": null,
+      "input": {
+        "sentence": "The committee ask a question about the revised opening hours at yesterday's meeting.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-99bd9cbecc98d907736c2e8d",
+        "description": "declarative question-seeking event with explicit past-time anchoring",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "ask",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-05",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 5,
+      "lessonId": "indefinite-article",
+      "input": {
+        "sentence": "A university near the harbor awarded an honorary diploma to a local pilot.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-47d994e55064c526ac9dbf07",
+        "description": "indefinite articles selected by initial sound rather than initial letter",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "articles",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-05",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 5,
+      "lessonId": "indefinite-article",
+      "input": {
+        "sentence": "He carried an one-page permit in the transparent folder beside his toolkit.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-624a8acb85e2f41fc442f243",
+        "description": "indefinite article before a consonantal onset written with an initial vowel letter",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "articles",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-05",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 5,
+      "lessonId": null,
+      "input": {
+        "sentence": "A careful reviewer checked every number on the unsigned form at the reception desk.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-94e8cd36846ae5ff90423887",
+        "description": "attributive human adjective within a single transitive event",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "careful",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-05",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 5,
+      "lessonId": null,
+      "input": {
+        "sentence": "Although the room at the far end of the hallway was quiet throughout the afternoon",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "quiet",
+        "pos": "adj.",
+        "meaning": "조용한",
+        "expression": "quiet"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-3c6acd4dfde9656c26e68f04",
+        "description": "single dependent concessive proposition without a consequence",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "simple",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "quiet-cambridge",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-06",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 6,
+      "lessonId": "number",
+      "input": {
+        "sentence": "Three more than the number that we wrote in the wide margin yesterday afternoon",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-d62a8b3cc20ea4f7680e5771",
+        "description": "cardinal comparison with relative clause but no counted event or main message",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "numbers",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-06",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 6,
+      "lessonId": "number",
+      "input": {
+        "sentence": "Although she finished third, she was one of the five runners who qualified for the relay.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-b731abaa610759f15da9eef0",
+        "description": "ordinal placement and cardinal partitive within concessive-relative complex sentence",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "numbers",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-06",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 6,
+      "lessonId": null,
+      "input": {
+        "sentence": "Of the three routes, the footpath was the most quietest, so the hikers chose it for the recording.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "quiet",
+        "pos": "adj.",
+        "meaning": "조용한",
+        "expression": "quiet"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-c0fdecf6a36a29e40a7fd1ec",
+        "description": "duplicate superlative marking within explicit three-member comparison",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "quiet-cambridge",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-06",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 6,
+      "lessonId": "definite-article",
+      "input": {
+        "sentence": "It was oldest surviving map in the drawer, and every volunteer wanted to see it.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-825fba2500a8e8a904df46b0",
+        "description": "missing determiner before unique superlative attributive nominal",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "articles",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-06",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 6,
+      "lessonId": null,
+      "input": {
+        "sentence": "Although the wood had split near a hinge, the conservator repaired the panel skillfully without removing its painted surface.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "skillfully",
+        "pos": "adv.",
+        "meaning": "능숙하게",
+        "expression": "skillfully"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-24adcaa994f33c87d499c9b9",
+        "description": "concessive clause plus skilled manner and negative nonfinite adjunct",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "skillfully",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-06",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 6,
+      "lessonId": null,
+      "input": {
+        "sentence": "What the producer wanted to ask after the editor explained the missing caption",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-cef512db9bb343b57e08cfc5",
+        "description": "free-relative nominal with nested infinitive and no main assertion",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "ask",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-07",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 7,
+      "lessonId": null,
+      "input": {
+        "sentence": "When the recording ended, the host asked whether the caller wanted her name omitted from the transcript.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-f7f671ce57ef4d008a1e3a53",
+        "description": "past question seeking with embedded polar clause and temporal subordinate",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "ask",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-07",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 7,
+      "lessonId": "conjunction",
+      "input": {
+        "sentence": "Although the balcony was sheltered while the rain was blowing across the square",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-51963bc70cd8b6e1a3339172",
+        "description": "concessive-temporal dependent clauses without a main proposition",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "conjunctions",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-07",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 7,
+      "lessonId": "preposition",
+      "input": {
+        "sentence": "Although the platform was crowded, Nora waited between he and his brother until the gates opened.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-6e9320e7555e3307e3525064",
+        "description": "prepositional coordinated complement with nominative instead of object case",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "prepositions",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-07",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 7,
+      "lessonId": null,
+      "input": {
+        "sentence": "The hikers did not need no help once the replacement bridge was open, and the organizer wants to state clearly that no assistance was necessary.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-0f84e354ae45ac20e0c7227b",
+        "description": "negative concord with explicit same-message negative intent",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "help",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-07",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 7,
+      "lessonId": "preposition",
+      "input": {
+        "sentence": "After we had crossed the bridge, the path continued beyond the orchard and into a narrow ravine.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-6ef5e664bab00a28660d23cd",
+        "description": "temporal clause plus coordinated spatial prepositional complements",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "prepositions",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-07",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 7,
+      "lessonId": null,
+      "input": {
+        "sentence": "Because the help that had been promised to the cyclists still had not arrived when the last bus departed",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-9baadd7e262602e6bacfe064",
+        "description": "causal dependent proposition with relative and time clauses but no main proposition",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "help",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-08",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 8,
+      "lessonId": null,
+      "input": {
+        "sentence": "Whether the team should book the upper room or wait until the damaged lift has been repaired",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-d6d645a35110d217da2c2e1c",
+        "description": "embedded alternative question with no hosting proposition",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "book",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-08",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 8,
+      "lessonId": "auxiliary",
+      "input": {
+        "sentence": "The pump has been running since dawn, although none of the workers has touched its controls.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-12639a9bd9f97ce9280ccace",
+        "description": "perfect progressive and negative-quantifier perfect auxiliary constructions",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "verbs",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "progressive",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-08",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 8,
+      "lessonId": null,
+      "input": {
+        "sentence": "What the volunteers needed most was practical help that would let them finish the ramp before the entrance reopened.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-9769bcc786f176c56f6be8b9",
+        "description": "free-relative subject and assistance-noun predicate with causal relative clause",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "help",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-08",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 8,
+      "lessonId": null,
+      "input": {
+        "sentence": "The apprentice adjusted the tiny spring skillful after the mentor showed her how to keep the pressure even.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "skillfully",
+        "pos": "adv.",
+        "meaning": "능숙하게",
+        "expression": "skillfully"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-e80f460c1f615bfa36158c60",
+        "description": "requested skilled manner adverb replaced by adjective in manner position",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "skillfully",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-08",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 8,
+      "lessonId": "auxiliary",
+      "input": {
+        "sentence": "The drawers that have been stacked behind the screen since the carpenter left",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-13712be4676dd089c025fcc8",
+        "description": "relative perfect-passive construction modifying an unpredicated nominal",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "verbs",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "progressive",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-08",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 8,
+      "lessonId": "conjunction",
+      "input": {
+        "sentence": "Although the board approved the map, but the printer refused to publish it because two labels were missing.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-43d41bc0975b021081c444d9",
+        "description": "redundant concessive and coordinating link with a distinct embedded cause",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "ordinary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "conjunctions",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-09",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 9,
+      "lessonId": null,
+      "input": {
+        "sentence": "The school coordinator booked the smaller boat for the museum visit after checking that its covered deck would hold every pupil and the two accompanying teachers. The company sent a confirmation that listed the departure pier, the return time, and the number of seats, and the coordinator kept a printed copy in the office. Nobody was buying the boat or borrowing it from a friend; the group was paying for a scheduled journey operated by the company. Before accepting the arrangement, the teachers walked from the bus stop to the pier and measured how long the transfer would take. They chose a route with a level pavement so that the pupil who used crutches would not have to climb the steep steps behind the ticket booth. The museum agreed to keep the entrance open for a few extra minutes if the crossing took longer than expected. Each family received a note explaining where to meet, which waterproof clothes to bring, and whom to contact if a child was ill that morning. The note did not promise sunshine, because the timetable depended on conditions in the harbor. On the afternoon before the visit, the company confirmed that the vessel had passed its routine inspection and that the captain expected to follow the normal route. The coordinator then compared the passenger list with the seating plan and left two adjacent places for the teachers. A final envelope contained the tickets, the emergency telephone numbers, and a simple map showing the museum entrance. The teachers agreed that one of them would count the pupils before boarding while the other checked that nobody had left a bag at the bus stop. They planned to repeat those checks before the return journey rather than assume that the morning count would still be correct. The arrangement concerned one return trip for this particular group, not a season ticket or ownership of any equipment.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-2f5f009d24653a9795aedd14",
+        "description": "extended completed reservation narrative with accessibility/time conditions",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "book",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-09",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 9,
+      "lessonId": "modal",
+      "input": {
+        "sentence": "Tomorrow the field team must not inspected the sealed chamber before the safety officer has completed the pressure check. The instruction is a prohibition, not a request to carry out the inspection as soon as the visitors arrive. The chamber contains equipment that cannot be approached safely until the readings have been recorded and compared with the limits in the operating procedure. While that work is taking place, the team can review the diagrams in the meeting room and prepare questions about the maintenance schedule. The site manager will explain which parts of the system remain in service during the check and which parts have been isolated. A red notice will remain on the chamber door, and the key will stay with the safety officer rather than being passed between members of the visiting group. If the check identifies an unexpected reading, the officer will stop the planned demonstration and explain what further work is required. No visitor should interpret a delay as permission to enter through another door. The organizer has arranged a separate route to the viewing area so that the group can observe the external controls without crossing the barrier. That route must remain clear of delivery carts throughout the morning. After the check, the officer will decide whether the chamber can be opened for the supervised visit described in the schedule. The decision will be written down along with the time at which the check was completed. The visitors will then receive a short briefing that distinguishes the areas they may enter from the equipment they may only observe. The organizer will keep a list of everyone who has attended that briefing and will tell late arrivals where they must wait. The present instruction concerns the period before the pressure check is complete; it should not be rewritten as an obligation to inspect the chamber during that period. The team has been told that the entire visit may be postponed if the required conditions cannot be met.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-13d862ceba409d4a9c7519f6",
+        "description": "future anchored negative modal prohibition with malformed nonbase complement",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "modals",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-09",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 9,
+      "lessonId": null,
+      "input": {
+        "sentence": "The training officer has book four rooms for the visiting inspectors, whose two-day course starts next Monday at the old waterworks. The reservation concerns overnight accommodation, and the hotel has already sent a list showing the names assigned to each room. Two inspectors will arrive by train, while the other two will share a car with a colleague who is attending only the first day's demonstration. The officer asked the hotel to keep the rooms close together because the group will need to compare notes after the evening briefing. Breakfast is included, but the visitors will pay for their own meals at the station on the way home. A separate document explains how to reach the waterworks from the hotel without crossing the road where repairs are taking place. It also identifies a side entrance that remains accessible when deliveries block the main gate. The inspectors have been told to bring sturdy shoes and a copy of the previous inspection report. Their task is to observe the new equipment, ask questions about the maintenance schedule, and record any differences between the written procedure and the demonstration. They will not approve a change simply because the equipment looks recently installed. During the first session, the site manager will describe the work that can continue during a power failure and the work that must stop. In the afternoon, the visitors will follow the marked route through the building in pairs so that they can check one another's observations. The second morning is reserved for questions that could not be answered during the initial visit. Before departure, the officer will collect the room keys and confirm that the hotel has not charged the group for the colleague who is not staying overnight. The hotel arrangements are complete; no one is still deciding whether to make a reservation. The officer will send the final travel notice tomorrow, after confirming which platform the first train is expected to use.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-0563fa8d24f5dafafa9ac669",
+        "description": "unambiguous completed reservation with perfect auxiliary and wrong participle",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "book",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-09",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 9,
+      "lessonId": null,
+      "input": {
+        "sentence": "If the careful inspection of the lower walkway shows that the boards beside the loading gate are still secure after the recent rain, and if the measurements taken near the river agree with the figures in the engineer's report, and if the team responsible for the handrail can confirm that every new fixing has been checked before visitors arrive, while the caretaker completes the separate list of repairs inside the entrance building, and if the temporary lights continue to work when the main supply is switched off for the scheduled test, so that the emergency route can be seen from each doorway without anyone having to use a telephone as a torch, and if the delivery staff can move their equipment through the side yard without leaving boxes across the marked path, which must remain wide enough for a wheelchair and a person walking alongside it, and if the supervisor receives the missing diagram that explains how the raised section joins the older steps at the far end, where several people have previously mistaken a change in floor color for a change in level, and if the volunteers who are due to guide the first group have an opportunity to walk the whole route before the public opening, including the narrow turn beside the store room and the covered area where voices are difficult to hear, and if the signs prepared by the office make a clear distinction between the route that is already open and the section that must remain closed during the last stage of the work, without relying on a color difference that some visitors may not notice, and if the office can keep an accurate count of the people on the walkway throughout the morning rather than estimating the number from the tickets sold at the entrance, and if the weather forecast leaves enough time for the workers to secure the loose covers before another shower reaches the river, with a named member of the team available to explain any last-minute change to the volunteers",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-cd4e967cbcd28866dd2b2d69",
+        "description": "multi-condition antecedents without a consequent or decision",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "careful",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-09",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 9,
+      "lessonId": "infinitive",
+      "input": {
+        "sentence": "To determine whether the scratches on the glass appeared before the cabinet was moved from the upper gallery or during the journey through the narrow corridor, using the photographs that the installer took when the cabinet first arrived and the notes that the caretaker made after finding a loose panel beside the rear wall, while allowing for the fact that several of the older photographs were taken through a protective cover and do not show the surface with the same clarity as the more recent images, and without treating a reflection of the ceiling lights as evidence of a mark that can actually be felt on the glass, in consultation with the conservator who examined the wooden frame before the exhibition opened and can explain which cleaning materials were used near the lower corners, where a small amount of residue remains visible when the light strikes the panel from the side, and with reference to the delivery record that identifies the entrances used by the removal team, including the temporary doorway that was later closed when work began on the adjacent room, so that an account of the move does not accidentally describe a route that the team could not have taken on that date, while keeping separate the observations recorded at the time from recollections offered by people who learned about the scratches only after the cabinet had been placed in its present position, and after checking whether the protective wrapping had already been removed when the installer signed the final page of the delivery form, which lists the condition of the frame but does not contain a detailed description of the glass, taking into account the gap between the two sets of photographs and the possibility that the cabinet was cleaned during that interval without a separate note being added to the exhibition file, and making clear which questions the available records are capable of answering and which would remain uncertain even after those records had been compared",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-8f2e8b829d90fb6940a30c6b",
+        "description": "extended purpose infinitive with embedded questions and no independent action",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "infinitives",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-09",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 9,
+      "lessonId": "modal",
+      "input": {
+        "sentence": "The surveyors might return to the upper valley next month if the remaining snow has cleared from the narrow track by then. Their first visit established where the old retaining wall had moved, but it did not show whether the stream had changed its course beneath the fallen stones. A second visit could help them separate recent damage from features that already appear in photographs taken several years ago. The team will carry copies of those photographs so that the comparison does not depend entirely on memory. They may also bring a small camera that can record the underside of the footbridge without requiring anyone to climb onto the damaged bank. The landowner has agreed to unlock the gate, although the surveyors will still need to check which sections of the track are safe for a vehicle. If they have to continue on foot, they can leave the heavier equipment in a secure shed near the road. One member of the team should remain responsible for the written record while the others take measurements, because it is easy to confuse two similar stretches of wall when the notes are assembled later. Any report must distinguish what the surveyors have observed directly from what they think might be happening below the surface. They cannot assume that a crack has become wider merely because it looks different in a photograph taken from another angle. The team may ask the local maintenance workers whether they have noticed changes during periods of heavy rain, but those recollections will be recorded separately from the measurements. After the visit, the engineer can decide whether a further investigation would answer questions that the available evidence leaves open. No date has yet been promised for repair work, and the proposed return visit does not commit the owner to a particular design. The immediate aim is to collect enough reliable information to describe the present condition of the site.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-c5a272c7ba2c623481eb0480",
+        "description": "extended conditional modal possibility distinguishing possible observations from commitments",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "modals",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-normal-10",
+      "domain": "word",
+      "proposedStratum": "normal",
+      "allocationSlot": 10,
+      "lessonId": null,
+      "input": {
+        "sentence": "Working beneath a lamp that revealed every loose thread, the conservator repaired the torn banner skillfully without covering the faded signature along its lower edge. She began by placing a clean support behind the fabric so that the weight of the damaged section would not pull on the remaining stitches. A second worker recorded the position of each tear on a diagram, but he did not draw marks on the cloth itself. The team had agreed that the repair should make the banner safe to display while leaving the history of its use visible. For that reason, they selected a thread that would support the original material without pretending to be part of the old design. Several small test pieces helped them compare the tension of the new stitches before they touched the banner. Whenever a thread caught on a rough area, the conservator stopped and changed the angle of the needle instead of pulling harder. This made the work slower, but it protected the thin border around the painted letters. The museum director watched from the other side of the table and asked the photographer to keep a clear record of the process. No one wanted a later visitor to mistake a modern addition for an original feature. By the end of the day, the longest tear had a stable support and the remaining folds lay naturally across the padded surface. The conservator wrote down which materials she had used and where another repair might eventually be necessary. She also explained why the team had left a small stain in place: removing it would have risked damaging the surrounding dye. The finished work did not make the banner look new, and that was not its purpose. Instead, it allowed the museum to present the fragile object safely while retaining evidence of the people who had carried it. The staff scheduled another inspection before the exhibition opened so that any movement in the repaired section could be noticed early.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "skillfully",
+        "pos": "adv.",
+        "meaning": "능숙하게",
+        "expression": "skillfully"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-6f71751fe072d4949427cdd9",
+        "description": "extended skilled action narrative distinguishing intervention and preservation",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "skillfully",
+          "caseSupportReviewed": false
+        },
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "manner",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-insufficientContext-10",
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 10,
+      "lessonId": null,
+      "input": {
+        "sentence": "The help that the village committee had promised to the archive before the collection moved out of the damp store room, including the volunteers who knew how to carry the shallow drawers without tilting them and the driver who could bring a vehicle with enough space for the longest cases, together with the practical advice offered by the neighboring library about numbering the boxes before they left the building, which would have made it possible to locate a requested item without opening every container, and the extra time that several residents were willing to spend checking the labels against the old register after their normal work had finished, even though none of them had been responsible for the collection when it was first assembled, as well as the loan of sturdy tables on which the fragile sheets could be inspected one at a time rather than spread across the floor, where a passing visitor might accidentally step on an edge, and the offer from a local carpenter to make supports for the damaged frames using materials that would not rub against the painted surfaces, provided that the archive could identify the sizes it needed before he ordered the timber, plus the transport arrangements discussed with the museum on the other side of the valley, whose staff had moved a similar collection during the previous winter and could explain which parts of that operation had taken longer than expected, and the assistance that the school proposed to give with a public list of the items once the archive had checked which descriptions were suitable for publication, without including private addresses or repeating stories that the available records did not support, along with the committee's intention to appoint one contact person so that the archive would not receive several incompatible promises about the same task, and the suggestion that a short written record should accompany each completed job so that the next group would know exactly what had already been done",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-37dd43d040edafa3b5421049",
+        "description": "extended coordinated assistance noun phrase with no independent predicate",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "help",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-insufficientContext-10",
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "allocationSlot": 10,
+      "lessonId": "exclamation",
+      "input": {
+        "sentence": "Even though the spectators near the foot of the hill had already begun to call out expressions of relief when they saw the first rescuers return along the marked path, while the volunteers beside the road were still checking whether the whole walking group had been accounted for and the radio operator was waiting for a clear message from the team stationed beyond the bend, and although several people in the crowd wanted to congratulate the guide before anyone had explained exactly what had happened on the upper section of the trail, where the mist had made it difficult to see the next marker and a damaged handrail had forced the group to wait on a wider patch of ground, despite the organizer's request that visitors leave the narrow entrance to the path clear for the workers carrying equipment back to the vehicles, and even after a member of the walking group had confirmed that nobody required immediate treatment, because that statement did not establish whether every person who had started the walk was standing beside the road or whether someone was still helping the last volunteer bring down the spare bags, while the staff at the registration desk compared the names on the original list with the names supplied over the radio, taking care not to count the same person twice simply because one message used a first name and another used a surname, and although the photographer had lowered her camera and joined the people offering hot drinks to those who had returned, without assuming that the expressions of relief around her meant that the organizer had completed the final count, especially while a second vehicle remained parked farther down the road with its engine running and a worker was preparing space for the equipment that the last team would bring back, before the organizer had decided whether to make a public announcement or wait for one more direct report from the bend in the path",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-4b482dad0b77c2b4804dd4e6",
+        "description": "extended concessive background containing reactions but no completed main message",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "interjections",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-word-needsCorrection-10",
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 10,
+      "lessonId": null,
+      "input": {
+        "sentence": "At the public meeting, the reporter asked where did the donated maps come from, because the exhibition label named the donor but gave no account of the collection's earlier history. The question concerned the maps' origin, not the location of a delivery van or the address of the museum. Several residents had noticed pencil notes in the margins and wanted to know whether those notes had been made by a surveyor, a teacher, or a later owner. The curator explained that the museum had not yet identified every mark and would keep its description provisional until the records had been checked. She showed the audience a photograph of the box in which the maps had arrived, taking care to hide the address on the shipping label. The reporter wrote down the date of the donation and the reference number that would allow readers to find the public catalogue entry. He did not present the possible explanations as established facts. During the discussion, another visitor mentioned a local society that had once used similar paper for its field notes. That observation gave the curator a useful lead, but it did not prove that the society had owned these particular maps. A volunteer offered to search the society's published reports while the museum examined the condition of the paper. The group agreed that any account of the maps' history should distinguish direct documentation from reasonable guesses. The reporter planned a short article about that process rather than a dramatic story based on a single unverified remark. Before leaving, he checked the spelling of the donor's name against the version already published in the catalogue. The museum would not publish a revised description until it could explain which records supported each new statement. In the meantime, the existing label would remain beside the display, accompanied by a note saying that further research was in progress. Visitors were invited to share relevant public records through the museum's usual enquiry form.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "wordTarget": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-a0e00233e9c2cec23fa6f7a2",
+        "description": "extended indirect origin question retaining direct auxiliary inversion",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+          "sourceId": "ask",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-normal-10",
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "allocationSlot": 10,
+      "lessonId": "exclamation",
+      "input": {
+        "sentence": "How fortunate we were to find the little collection of letters before the roof above the store room finally gave way! We had gone upstairs to look for a spare table, not to search for historical documents, and the first box seemed to contain nothing more than empty folders. Beneath those folders, however, lay several bundles tied with cotton tape, each carrying a short note in the same small handwriting. We moved the box to a dry room and called the archivist rather than trying to separate the sheets ourselves. She explained that damp paper can tear even when it appears strong enough to handle. The caretaker found a clear space where the bundles could remain undisturbed until the archivist had the materials she needed. None of us knew at that point whether the letters were important, but we understood that they should not be thrown away simply because their envelopes looked ordinary. Over the following week, the archivist recorded the condition of each bundle and compared the names on the notes with the public catalogue. Some names were already familiar from the town's published history, while others required further investigation. We resisted the temptation to tell visitors a finished story before that work had been done. The collection might contain copies, unfinished drafts, or letters that had never been sent. A careful description would need to preserve those differences instead of treating every sheet as the same kind of record. When the damaged roof was eventually repaired, the store room contained only furniture and sealed equipment cases. The letters remained in their new location, where their condition could be monitored and their contents examined under suitable supervision. Our accidental discovery had not answered every historical question, but it had prevented a fragile group of documents from being lost before anyone could ask those questions properly. That was reason enough for all of us to be grateful.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-323d8f95084bea884d529fcc",
+        "description": "complete how-adjective exclamation followed by coherent past narrative",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "interjections",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    },
+    {
+      "id": "pilot-grammar-needsCorrection-10",
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "allocationSlot": 10,
+      "lessonId": "infinitive",
+      "input": {
+        "sentence": "The coordinator plans to delivered the revised route map to every guide tomorrow morning, before the first visitors reach the temporary entrance. The map shows a short diversion around the part of the courtyard where the drainage work is still in progress. It also marks the doorway that can be used by people who cannot manage the steps beside the ticket office. During the trial walk, two guides noticed that the signs at the far end of the diversion were difficult to see when a delivery vehicle was parked nearby. The coordinator asked the maintenance team to move those signs onto fixed supports rather than attach them to the temporary fence. A copy of the revised map will be kept at the entrance so that staff can answer questions without relying on a version stored on someone's telephone. The guides will have a short meeting before the gates open to compare the map with the route as it appears on the ground. If any barrier has been moved overnight, they will report the change before leading a group through the courtyard. The organizer wants visitors to receive the same basic information regardless of which guide they happen to ask. That does not mean the guides must repeat an identical speech; it means that the directions, restrictions, and access arrangements should be consistent. The office will record the version number printed in the corner of the map and will remove the older copies from the usual distribution points. Staff should not throw away the signed inspection record that explains why the diversion was introduced. That record is part of the account of the building work, whereas the loose maps are practical instructions for the current visit. The coordinator will check that distinction during the morning meeting. Once the work in the courtyard is finished, the route can be reviewed again, but tomorrow's visitors still need a clear and accurate description of the temporary arrangement.",
+        "contextNote": "",
+        "contextKind": "sentence"
+      },
+      "proposedFamily": {
+        "id": "pilot-proposed-87c2bcf51a214f6eb5332476",
+        "description": "prospective plan selecting an infinitive marker followed by malformed verb form",
+        "independenceVerified": false,
+        "structuralOverlapReviewed": false
+      },
+      "proposedLengthBand": "near-boundary",
+      "proposedComplexity": "complex",
+      "difficultyIndependentlyReviewed": false,
+      "sourceCandidates": [
+        {
+          "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+          "sourceId": "infinitives",
+          "caseSupportReviewed": false
+        }
+      ],
+      "referenceStatus": "not-authored-or-peer-qualified",
+      "referenceIsGold": false
+    }
+  ],
+  "privateDesignLabelsNotForProvider": true,
+  "finalCorpusFrozen": false,
+  "referenceQualified": false,
+  "sourceQualified": false,
+  "familyIndependenceVerified": false,
+  "actualInputTokensMeasured": false,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "expectedGradesAuthored": false,
+  "englishTruthCertified": false,
+  "goalComplete": false,
+  "draftRevision": 2
+}

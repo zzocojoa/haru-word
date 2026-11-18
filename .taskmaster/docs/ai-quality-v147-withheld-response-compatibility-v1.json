@@ -1,0 +1,30 @@
+{
+  "protocol": "ai-quality-v147-withheld-response-compatibility-v1",
+  "phase": "phase131",
+  "tasks": [
+    "8.2",
+    "15.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_WITHHELD_RESPONSE_COMPATIBILITY_20261109.md",
+  "browserChecks": 4,
+  "syntheticProviderRequests": 4,
+  "actualProviderCalls": 0,
+  "productionWrites": 0,
+  "unitTests": 898,
+  "frozenCandidateUnchanged": true,
+  "candidateFiles": {
+    "lib/judgment-feedback-contract.ts": "d645d0ff42d5cc6fdf1c8b7aa452f7e090a4f6bb093d48de02044278dcca1617",
+    "tests/ai-quality-context-questions.test.mjs": "e4848819e882f399a509fd2207826f24e04a0591dbae3d75c1505ff5ba167e6c"
+  },
+  "evidenceSha256": {
+    "before.log": "e5607a77451e09d84a27f0500c3214b566fadc60e2aaaf7023a194890c5d17af",
+    "focused.log": "e6271a847bf9898e8052d524ea9640a9646b8bb942e1e383f1f779edd3e378e5",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "lint.log": "79a1cc3ba176d21f31233ecf0985b0064b3cbbc849c9a2d1806419a22f3f0b0e",
+    "build.log": "0c7a052c68db3b30f1c85d737a7b9c6c67bc7fb8e7ca40e7e8c203134af04749",
+    "test.log": "32ccecc993154fec95d85e749ee5888698b638799eae317305212d6e109fa3ee",
+    "withheld-browser.json": "1e8b485bf32d0045f9232a93e4742d9eaeb3bb59e4dca40bd4d1bb9d163a1343",
+    "frozen-check.json": "3ec4d345f19bc3f5bf9c7fe1f6e07e47f95ce720b6d46740e836604342e9771c",
+    "verify-withheld-browser.mjs": "fd9ad002fe750c340dceaea16e0aa4a8dc2cf973981bc1d53536e00860a61cf3"
+  }
+}

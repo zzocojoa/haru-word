@@ -1,0 +1,26 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v3",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "c384abf1-a53f-45a5-8d0c-6ad34ecdbb61",
+  "studyPlanHash": "06e544d50fda120b237801ae1223b7eda0847924b8ec15d124b5dbbab7a71d6b",
+  "collectorProtocol": "ai-quality-v147-meaning-contrast-collector-v1",
+  "successStatus": "collected-meaning-contrast",
+  "runtimeDirectoryName": "ai-quality-v147-meaning-contrast-runtime-20261109",
+  "expectedModelCalls": 36,
+  "expectedCountCalls": 36,
+  "reservationMicros": "4283592",
+  "countAllowanceMicros": "1260000",
+  "rates": {
+    "gpt-6.1-sol": [2, 10],
+    "gpt-6.1-terra": [1, 5],
+    "gpt-6-astra": [10, 50]
+  },
+  "priceEvidenceSha256": "d0d845be62058435461dbb00b85f38fe794278f8b371fb8ee3e9b066312728d4",
+  "countCeiling": 8000,
+  "paddedInputCeiling": 10000,
+  "outputCeiling": 1024,
+  "countTariffVerified": false,
+  "automaticRetry": false,
+  "mainDispatchAuthorized": false
+}

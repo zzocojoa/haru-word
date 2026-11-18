@@ -1,0 +1,24 @@
+{
+  "protocol": "ai-quality-v147-first-reference-wave-ready-v1",
+  "phase": "phase122",
+  "tasks": [
+    "24.3",
+    "24.4",
+    "25.1"
+  ],
+  "firstWaveCases": 6,
+  "firstWaveRequests": 12,
+  "firstWaveUpperMicros": 1249116,
+  "collectorChecks": 5,
+  "actualProviderCalls": 0,
+  "mainDispatchAuthorized": false,
+  "liveScopeApproved": false,
+  "document": "docs/AI_QUALITY_V147_FIRST_REFERENCE_WAVE_SCOPE_20261109.md",
+  "evidenceSha256": {
+    "first-wave-scope.json": "8b99aa00dce5717f3d550ae68261c6b87d549c469c3a18338fa490b9f333f266",
+    "collect-first-wave.mjs": "ce080a3d2da3251647677ae66aa5b68183b8aeff1b06bbae2cd173be4de70b8b",
+    "run-first-wave.mjs": "a3bc79b0f40f6d991b77432de30970b348e3921a3d8ee9ff003dfa618883fa63",
+    "inspect.mjs": "0953afb6434757b752aa7800bad712e01554d0df5ef6ebc1737e86f12a3da0bd",
+    "test-final.log": "abf7300d6c601ca2f42becbe00baf67ec8908553bb229912d2d6445b6ea3143f"
+  }
+}

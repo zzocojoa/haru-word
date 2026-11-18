@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 17,
+  "recordedAtUtc": "2026-11-06T04:07:19.093379+00:00",
+  "status": "offline-budget-reservation-verified; no live dispatcher",
+  "protocol": "ai-quality-v147-pilot-v1",
+  "protocolIsFinalFrozenEvaluation": false,
+  "currentNewPaidApprovalMicros": "0",
+  "actualProviderCalls": 0,
+  "actualPaidEvaluationLedgersCreated": 0,
+  "roleLimits": {
+    "generation": 360,
+    "judge": 360,
+    "calibration": 36
+  },
+  "maximumPilotCalls": 756,
+  "confirmationAndProductionIncluded": false,
+  "amountRepresentation": "integer micro-USD decimal strings; exact BigInt rational arithmetic, ceil per request",
+  "generationOutputMax": 4096,
+  "priceSource": "synthetic-test fixtures only; current official quote and bound evidence still required by T24",
+  "existingCoreUse": "Read-only concepts from closed old cores: reserve whole group before dispatch, unknown/failed maximum, unique slots. No imports or execution; fixed7USD, old protocol, old balances and old model/body versions rejected.",
+  "storage": "Immutable replay-verified snapshots and complete commit descriptors,fsynced files,atomic HEAD,PID/start/command/executable/directory-bound lock; explicit T19 synthetic Windows recovery; no auto reset/reclaim",
+  "checks": [
+    {
+      "name": "budget",
+      "version": "node-v22.23.4",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-budget.mjs"
+      ],
+      "exitCode": 0,
+      "passed": 23,
+      "failed": 0,
+      "log": "budget-node-v22.23.4-final2.log",
+      "sha256": "c3b0ae8f656addf636cd66db50a442ab47b0276b76bcb24b070333865bb07ce9",
+      "evidenceDirectory": "budget-node-v22.23.4-final2"
+    },
+    {
+      "name": "budget",
+      "version": "node-v24.22.1",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-budget.mjs"
+      ],
+      "exitCode": 0,
+      "passed": 23,
+      "failed": 0,
+      "log": "budget-node-v24.22.1-final2.log",
+      "sha256": "c09594f977dbd6b0d0d7a69bd29e1ad6db42c108d9222f35ec159d38d21f508f",
+      "evidenceDirectory": "budget-node-v24.22.1-final2"
+    }
+  ],
+  "lint": {
+    "command": [
+      "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-process.mjs",
+      ".taskmaster/scripts/ai-quality-v147-budget.mjs",
+      ".taskmaster/scripts/ai-quality-v147-budget-store.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-budget.mjs",
+      ".taskmaster/scripts/ai-quality-v147-dispatch.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-dispatch.mjs",
+      ".taskmaster/scripts/ai-quality-v147-recovery.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-recovery.mjs"
+    ],
+    "exitCode": 0,
+    "warnings": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "log": "new-tools-explicit-lint.log"
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/test-ai-quality-v147-budget.mjs": "e61c2da53c9e14dca19e62e460061da7962fda2e154c27b7e9e961eeedbf8bfe",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8"
+  },
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase9/budget-checks.json",
+  "proofSha256": "ab8f336d737057723fa1e4ff334e7f5238280486cd3ac807db313aba409db89e",
+  "verified": "exact/one-micro-short/whole-batch/756role limits, two actual competing processes for same and different batches, failed/missing/overflow usage, approval0/reduction/closed old protocol, injected rename EPERM hold, foreign lock/tampered chain rejection",
+  "limitations": [
+    "No live dispatcher or actual pricing/approval proof. All positive caps and prices are synthetic.",
+    "Current Windows process interruption,real EPERM and strict recovery are separately covered by T19 preparation. Hardware power loss/directory-fsync and invoice equality are not established.",
+    "T16/T24 must verify exact frozen body/derived judge inputs,input bounds,quotes and user authorization before any real dispatcher exists."
+  ],
+  "revision": 2,
+  "previousPreparationFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase9/previous-budget-preparation.json"
+}

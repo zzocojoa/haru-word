@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "stage": "public-qualification-candidates-not-qualified-gold",
+  "catalogFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+  "catalogSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+  "controls": [
+    {
+      "id": "public-positive-agreement",
+      "lessonId": "verb",
+      "stratum": "normal",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "sentence": "The divers check the ropes.",
+      "contextKind": "sentence",
+      "contextNote": "",
+      "grammar": "natural",
+      "corrections": [],
+      "criterion": "The plural subject divers agrees with check; check is a main verb describing the action.",
+      "requiredFailureDimensions": [],
+      "requiredCriticalFlags": [],
+      "deliberatelyMalformedTarget": false
+    },
+    {
+      "id": "public-false-natural-label",
+      "lessonId": "verb",
+      "stratum": "needsCorrection",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "sentence": "The divers checks the ropes.",
+      "contextKind": "sentence",
+      "contextNote": "",
+      "grammar": "natural",
+      "corrections": [],
+      "criterion": "The verb agrees with the plural subject.",
+      "requiredFailureDimensions": [
+        "originalLabelSupport"
+      ],
+      "requiredCriticalFlags": [],
+      "deliberatelyMalformedTarget": false
+    },
+    {
+      "id": "public-target-mismatch",
+      "lessonId": "verb",
+      "stratum": "normal",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "sentence": "The divers check the ropes.",
+      "contextKind": "sentence",
+      "contextNote": "",
+      "grammar": "natural",
+      "corrections": [],
+      "criterion": "Check describes the action performed by the divers.",
+      "requiredFailureDimensions": [
+        "assignmentAlignment",
+        "inputAndTargetValidity"
+      ],
+      "requiredCriticalFlags": [
+        "wrongTarget"
+      ],
+      "deliberatelyMalformedTarget": true
+    },
+    {
+      "id": "public-negation-loss",
+      "lessonId": "verb",
+      "stratum": "needsCorrection",
+      "sourceIds": [
+        "verbs",
+        "agreement",
+        "negation"
+      ],
+      "sentence": "The diver do not check the ropes.",
+      "contextKind": "sentence",
+      "contextNote": "",
+      "grammar": "needs_work",
+      "corrections": [
+        "The diver checks the ropes."
+      ],
+      "criterion": "Repair subject and verb agreement while preserving the participants, action and explicit negative meaning.",
+      "requiredFailureDimensions": [
+        "minimalCorrectionMeaning"
+      ],
+      "requiredCriticalFlags": [
+        "meaningConstraintViolation"
+      ],
+      "deliberatelyMalformedTarget": false
+    },
+    {
+      "id": "public-false-source-attribution",
+      "lessonId": "verb",
+      "stratum": "normal",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "sentence": "The divers check the ropes.",
+      "contextKind": "sentence",
+      "contextNote": "",
+      "grammar": "natural",
+      "corrections": [],
+      "criterion": "The cited source says verbs have no relation to subject number.",
+      "requiredFailureDimensions": [
+        "sourceClaimHonesty"
+      ],
+      "requiredCriticalFlags": [
+        "inventedEvidence"
+      ],
+      "deliberatelyMalformedTarget": false
+    },
+    {
+      "id": "public-missing-reply-message",
+      "lessonId": "auxiliary",
+      "stratum": "insufficientContext",
+      "sourceIds": [
+        "verbs",
+        "ellipsis"
+      ],
+      "sentence": "They did.",
+      "contextKind": "reply",
+      "contextNote": "",
+      "grammar": "natural",
+      "corrections": [],
+      "criterion": "This reply unambiguously states that they repaired the ropes.",
+      "requiredFailureDimensions": [
+        "ambiguityHandling"
+      ],
+      "requiredCriticalFlags": [
+        "forcedCertainty"
+      ],
+      "deliberatelyMalformedTarget": false
+    }
+  ],
+  "partialExpectationsAreCodexProposals": true,
+  "fullSevenDimensionGradesFrozen": false,
+  "dropInControlExpectedGradeCompatible": false,
+  "actualReferenceControlsQualified": false,
+  "actualJudgeCalls": 0,
+  "expectedUnavailableWithoutAdditionalEvidence": [
+    "exposureAndFamilyCompliance"
+  ],
+  "exposure": {
+    "publicDevelopmentMaterial": true,
+    "allowedInFinalHiddenCorpus": false,
+    "familyLevelExclusionRequired": true,
+    "surfaceRewordingDoesNotCreateIndependentFamily": true,
+    "priorProjectExposureInventoryComplete": false,
+    "contentSha256ByControl": {
+      "public-positive-agreement": "d0e3bf668294d562968038d8b5b224b91c341f9e3948a414c5948ce9524dda45",
+      "public-false-natural-label": "709308520c180a61346fbe08c331f24820e00b28be375df50ea4f5d6e1700ac8",
+      "public-target-mismatch": "d0e3bf668294d562968038d8b5b224b91c341f9e3948a414c5948ce9524dda45",
+      "public-negation-loss": "ddd18d20ad4a923650217379e685cd26d8f0f50c7eb22e7090020ce8630c0464",
+      "public-false-source-attribution": "d0e3bf668294d562968038d8b5b224b91c341f9e3948a414c5948ce9524dda45",
+      "public-missing-reply-message": "271dfb237b8853551e511a940d3275009148ab947623b8aa984280cc5ce9e8c9"
+    }
+  },
+  "knownGap": "Current anonymous reference wire replaces exposureInventoryHash with a withheld hash and sends no underlying exposure inventory. A hash cannot establish family novelty or reviewer exposure compliance. Do not prelabel that dimension pass.",
+  "actualEnglishQualityMeasured": false,
+  "actualFinalCorpusFrozen": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "liveDispatchAuthorized": false
+}

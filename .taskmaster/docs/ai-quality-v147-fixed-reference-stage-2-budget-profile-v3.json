@@ -1,0 +1,50 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v2",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "1722ae13-f83a-55d0-a296-9ae763bfef8b",
+  "studyPlanHash": "77c1955e348936d33a43761513b2798f49e965a970a82748acfd445cd86d7020",
+  "collectorProtocol": "ai-quality-v147-fixed-reference-collector-v3",
+  "successStatus": "collected-fixed-reference-followup",
+  "runtimeDirectoryName": "ai-quality-v147-fixed-reference-stage-2-v3-runtime-20261109",
+  "expectedModelCalls": 29,
+  "expectedCountCalls": 29,
+  "reservationMicros": "2800000",
+  "countAllowanceMicros": "1015000",
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "pricingEvidenceFile": "phase84/official-pricing-observation.json",
+  "pricingEvidenceSha256": "a13554f6f9157c9a9ededb34ee47bf04efaad0c1d024960ebf21fcb875c03341",
+  "inheritedAuthorRecords": 7,
+  "newAuthorCalls": 5,
+  "newReviewCalls": 24,
+  "inputBoundDerivedFromActualCount": true,
+  "inputCountGuardNumerator": 5,
+  "inputCountGuardDenominator": 4,
+  "inputCountGuardIsDesignAssumption": true,
+  "countEndpointExactnessCertified": false,
+  "modelContextWindowUsedForCost": false,
+  "authorOutputCeiling": 3072,
+  "reviewOutputCeiling": 1024,
+  "countTariffVerified": false,
+  "invoiceVerified": false,
+  "originalFiveDollarClosed": true,
+  "newGrantCreated": false,
+  "automaticRetry": false,
+  "automaticResume": false,
+  "sourceQualified": false,
+  "referenceQualified": false,
+  "mainDispatchAuthorized": false
+}

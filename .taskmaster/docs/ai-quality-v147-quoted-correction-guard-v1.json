@@ -1,0 +1,31 @@
+{
+  "protocol": "ai-quality-v147-quoted-correction-guard-v1",
+  "phase": "phase128",
+  "tasks": [
+    "7.2",
+    "7.3"
+  ],
+  "document": "docs/AI_QUALITY_V147_QUOTED_CORRECTION_GUARD_20261109.md",
+  "localBlocked": 6,
+  "localAccepted": 6,
+  "routeChecks": 4,
+  "regressionReplays": 180,
+  "browserChecks": 4,
+  "actualProviderCalls": 0,
+  "productionWrites": 0,
+  "frozenCandidateUnchanged": true,
+  "candidateFiles": {
+    "lib/judgment-correction.ts": "559e248c3d462aab7a7ec1b81777d9ef5fe1ab39d73e92bba4922d1e467f4f08",
+    "tests/remediation-judgment.test.mjs": "66ee3d54e13c6f9666e77c04da937d17ae5f264f2169ec5807a6a5bbd2ac818f"
+  },
+  "evidenceSha256": {
+    "before.log": "20e464960ff04e86c4326cae7d1986803ba08fdc5c27bb6e9bac3203a296f8b5",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "lint.log": "79a1cc3ba176d21f31233ecf0985b0064b3cbbc849c9a2d1806419a22f3f0b0e",
+    "build.log": "8d0f2f3e7556e9ac25ef8bbdf17329c108b4d51868fe4498a42f8e7fc730ccc8",
+    "test.log": "15ad2796c94959d8f8cbd2aaedb83fbe7f5179be71ef7c511e7b1676e6ebd29c",
+    "check-routes.mjs": "a1ec3c91141d04b00e244efeb05a337316a1edbe350e741572a9df3e67039c26",
+    "route-result.json": "042d2346a02ff302aa15d0104d98efd4af9e368c1b6f51e45607b9e61e807d4d",
+    "replay.json": "a5c422dae2dc9889cf00f55025bb6695635884a8a750805215f8db44dd52c133"
+  }
+}

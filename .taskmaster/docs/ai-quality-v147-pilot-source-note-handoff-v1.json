@@ -1,0 +1,33 @@
+{
+  "candidateFreezeSha256": "14f2356880a8cd0cffdc0f211a4c541f4fe1e9acd9bff562afcfc5fc521432a8",
+  "firstWaveTerminalSha256": "aa3596ab3071edebd1072eb520e90d26a70ab6cfde36357f7991e127b22015e8",
+  "priorHandoffSha256": "112bf5014a9b5cb7845e43fb8506d7c6c160bf48e6355478a6e99d4399d732cf",
+  "previewHandoffSha256": "0e9ae891106b4a640d894d93062fd94f46110c75e0ebb8dc03f0b61484e4fb0b",
+  "sourceBackedNotes": 3,
+  "historicalResponsesRechecked": 6,
+  "changedPreviewReviews": 72,
+  "unchangedPreviewReviews": 1368,
+  "missingScreenSlots": 12,
+  "negativeControls": 5,
+  "previewDispatchRejected": true,
+  "referencesQualified": 0,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "mainDispatchAuthorized": false,
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "phase": "phase155",
+  "tasks": [
+    "24.2",
+    "24.3",
+    "26.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_SOURCE_NOTES_HANDOFF_20261109.md",
+  "compilerSha256": "84f0bf71da867b7e1391a74fcf905e8efcdf9273847601663806cc5c9f071c1d",
+  "evidenceSha256": {
+    "bind-pilot-references.mjs": "047ac5ca2a8f3a98e1a02d0af5637f69854f71f552620af106ce97881cbc5229",
+    "source-note-evidence.json": "2bd30a8c9473ba801c8b961a0b1aa51fc2e6bedf7f50c4785aa94d4e9e79f9db",
+    "preview.log": "7e0ebf800beac30bcd748b7e3f05987259d1eaf7e9fd7c5b094799d3454fc3bd",
+    "preview-initial.log": "94e1674d644e1582e57a0fcf1c8665b0f928de311976bf54456ff3db9ff6327d",
+    "regression.log": "62e78d54bce1bb735971aba53af85690e7a6be1793769a5f3bd8e9c05d911e0b"
+  }
+}

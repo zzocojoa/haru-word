@@ -184,8 +184,8 @@ test('contract 3 preserves explicit context through save, GET, full and chunk re
  }
 });
 
-test('contract 3 preserves archival v3 but protects v4/v5/v6 semantics; capability4 reads them without data-format migration',async()=>{
- for(const version of [4,5,6])for(const domain of ['word','grammar']){reset();
+test('contract 3 preserves archival v3 but protects v4 through v10 semantics; capability4 reads them without data-format migration',async()=>{
+ for(const version of [4,5,6,7,8,9,10])for(const domain of ['word','grammar']){reset();
  const state=mixed(),oldCapabilities={...capabilities,'X-Study-AI-Contract':'3'};
  const feedback={...modernJudgment,promptVersion:'reference-v'+version,validationVersion:'judgment-v'+version};
  if(domain==='word')Object.values(Object.values(state.sessions)[0].records)[0].aiFeedback=feedback;
@@ -200,8 +200,8 @@ test('contract 3 preserves archival v3 but protects v4/v5/v6 semantics; capabili
  }
 });
 
-for(const domain of ['word','grammar'])for(const operation of ['save','full restore','split restore'])test(`stored judgment-v6 ${domain} cannot be removed by contract3 ${operation}`,async()=>{
- const state=mixed(),replacement={...emptyState(),grammar:{}},feedback={...modernJudgment,promptVersion:'reference-v5',validationVersion:'judgment-v6'};
+for(const version of [6,10])for(const domain of ['word','grammar'])for(const operation of ['save','full restore','split restore'])test(`stored judgment-v${version} ${domain} cannot be removed by contract3 ${operation}`,async()=>{
+ const state=mixed(),replacement={...emptyState(),grammar:{}},feedback={...modernJudgment,promptVersion:version===10?'reference-v13':'reference-v5',validationVersion:'judgment-v'+version};
  if(domain==='word')Object.values(Object.values(state.sessions)[0].records)[0].aiFeedback=feedback;
  else state.grammar.noun.feedback=feedback;
  seed(state);const before=dump(),oldCapabilities={...capabilities,'X-Study-AI-Contract':'3'};

@@ -1,0 +1,37 @@
+{
+  "protocol": "ai-quality-v147-source-integration-v1",
+  "phase": "phase133",
+  "branch": "codex/ai-quality-v147",
+  "headBefore": "7ce85ed49465b352e8304a741c8505124f86deb8",
+  "tasks": [
+    "6.2",
+    "7.3",
+    "8.2",
+    "15.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_SOURCE_INTEGRATION_20261109.md",
+  "productFiles": 7,
+  "testFiles": 17,
+  "unitTests": 898,
+  "syntheticReplays": 180,
+  "browserChecks": 14,
+  "historicalProviderResponses": 3,
+  "actualProviderCalls": 0,
+  "productionWrites": 0,
+  "frozenCandidateUnchanged": true,
+  "mainDispatchAuthorized": false,
+  "priorBuildArchiveSha256": "0ecc256e78762ec85fc8bb0de4d9049400c83c22b1fc95b771d35ddfbdfd748f",
+  "evidenceSha256": {
+    "source-integration.json": "b60fa004df9d2caef8f157b6d1f8814f0d6fc86d724e77feaf13e98089318950",
+    "integration.log": "ea01b486a732135ff69d740e8239c159e8aba9c38e3de0814da21930802a8391",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "lint.log": "35bdb5b5e8ec9033f080396ffe6d229a4609391a38112660c989e99695530240",
+    "build.log": "92f92532abbedbe0c17db6d6e7bae2c8502b6c79baa3442360babcfdb7e7a5bf",
+    "test.log": "da4b4034eb654e41764e9b4d669b50bcbc3cab4360fdcf42c7e7eb2ef7ba5d28",
+    "actual-response-replay.json": "29e95c39935fbcc436944243bbe53c7dbdb76a3e0ced9ad47a6bbed2a462f900",
+    "withheld-browser.json": "1e8b485bf32d0045f9232a93e4742d9eaeb3bb59e4dca40bd4d1bb9d163a1343",
+    "replay.json": "a5c422dae2dc9889cf00f55025bb6695635884a8a750805215f8db44dd52c133",
+    "budget-before.log": "28c39abae5f905ca77a10fdeb0277980587460ad0e2f1556b7c4d42f699740c5",
+    "budget-after.log": "28c39abae5f905ca77a10fdeb0277980587460ad0e2f1556b7c4d42f699740c5"
+  }
+}

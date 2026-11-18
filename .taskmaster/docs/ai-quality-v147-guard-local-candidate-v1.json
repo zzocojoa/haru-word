@@ -1,0 +1,26 @@
+{
+  "protocol": "ai-quality-v147-guard-local-candidate-v1",
+  "phase": "phase124",
+  "tasks": [
+    "6.2",
+    "7.3"
+  ],
+  "checkout": "work/ai-quality-v147-guard-candidate-20261109",
+  "restoredSyntheticCorrections": 6,
+  "requestBodiesUnchanged": 180,
+  "browserChecks": 4,
+  "unitTests": 893,
+  "frozenCandidateUnchanged": true,
+  "actualProviderCalls": 0,
+  "mainDispatchAuthorized": false,
+  "document": "docs/AI_QUALITY_V147_GUARD_LOCAL_CANDIDATE_20261109.md",
+  "evidenceSha256": {
+    "replay.json": "a5c422dae2dc9889cf00f55025bb6695635884a8a750805215f8db44dd52c133",
+    "replay.log": "197f3d5eeb961500be56f7e7f9327f432ff8fedc60e60951b41599eb6c735161",
+    "source-audit.json": "9168b74322da63e32483276960f2d3b4217caac4f8defb7fd3b88867804752be",
+    "unit-final.log": "0b1f7eb682c4db539c33adaf082bba11015e8e31c26a9d88040e32810dcd1226",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "lint.log": "79a1cc3ba176d21f31233ecf0985b0064b3cbbc849c9a2d1806419a22f3f0b0e",
+    "build.log": "70fca1a8cea3789d62e7d7726b451a65d00f108465030d6fb05295c20dee2e11"
+  }
+}

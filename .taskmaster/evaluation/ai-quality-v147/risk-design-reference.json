@@ -1,0 +1,1397 @@
+{
+  "schemaVersion": 1,
+  "scipyVersion": "1.16.3",
+  "arithmeticOnly": true,
+  "actualProviderCalls": 0,
+  "generatedAtUtc": "2026-11-06T05:33:35.308189+00:00",
+  "zeroSamples": [
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.9,
+      "boundCount": 1,
+      "n": 460,
+      "upperAtZero": 0.004993112530348256,
+      "upperAtPrevious": 0.005003963508528186
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.9,
+      "boundCount": 1,
+      "n": 230,
+      "upperAtZero": 0.009961293887970627,
+      "upperAtPrevious": 0.010004574665187312
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.9,
+      "boundCount": 1,
+      "n": 114,
+      "upperAtZero": 0.019995499372598705,
+      "upperAtPrevious": 0.020170654014198017
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.9,
+      "boundCount": 1,
+      "n": 45,
+      "upperAtZero": 0.04988149268185345,
+      "upperAtPrevious": 0.05098576395752706
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.9,
+      "boundCount": 1,
+      "n": 22,
+      "upperAtZero": 0.09937197978870359,
+      "upperAtPrevious": 0.10384949805339536
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.9,
+      "boundCount": 1,
+      "n": 1,
+      "upperAtZero": 0.9,
+      "upperAtPrevious": null
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.9,
+      "boundCount": 6,
+      "n": 817,
+      "upperAtZero": 0.0049989013493348874,
+      "upperAtPrevious": 0.00500501209769677
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.9,
+      "boundCount": 6,
+      "n": 408,
+      "upperAtZero": 0.009984974049260744,
+      "upperAtPrevious": 0.010009383963213813
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.9,
+      "boundCount": 6,
+      "n": 203,
+      "upperAtZero": 0.01996714761286455,
+      "upperAtPrevious": 0.020064996509806223
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.9,
+      "boundCount": 6,
+      "n": 80,
+      "upperAtZero": 0.049891705836662324,
+      "upperAtPrevious": 0.05050702402136139
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.9,
+      "boundCount": 6,
+      "n": 39,
+      "upperAtZero": 0.0996603463454474,
+      "upperAtPrevious": 0.102144295974953
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.9,
+      "boundCount": 6,
+      "n": 2,
+      "upperAtZero": 0.8709005551264196,
+      "upperAtPrevious": 0.9833333333333334
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.9,
+      "boundCount": 114,
+      "n": 1405,
+      "upperAtZero": 0.004997282179825078,
+      "upperAtPrevious": 0.005000832582973013
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.9,
+      "boundCount": 114,
+      "n": 701,
+      "upperAtZero": 0.009990817542235225,
+      "upperAtPrevious": 0.010005018500783251
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.9,
+      "boundCount": 114,
+      "n": 349,
+      "upperAtZero": 0.01996641178480242,
+      "upperAtPrevious": 0.02002320825088559
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.9,
+      "boundCount": 114,
+      "n": 138,
+      "upperAtZero": 0.04972672497878036,
+      "upperAtPrevious": 0.05008044987645872
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.9,
+      "boundCount": 114,
+      "n": 67,
+      "upperAtZero": 0.09972631799424107,
+      "upperAtPrevious": 0.10115820195614676
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.9,
+      "boundCount": 114,
+      "n": 4,
+      "upperAtZero": 0.8279028068562573,
+      "upperAtPrevious": 0.9042736022944664
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "n": 598,
+      "upperAtZero": 0.004997058694271768,
+      "upperAtPrevious": 0.005005407993490534
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "n": 299,
+      "upperAtZero": 0.009969146792958019,
+      "upperAtPrevious": 0.010002432437730153
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "n": 149,
+      "upperAtZero": 0.019904816220827133,
+      "upperAtPrevious": 0.02003795168921734
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "n": 59,
+      "upperAtZero": 0.04950760988846832,
+      "upperAtPrevious": 0.05033933833047607
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "n": 29,
+      "upperAtZero": 0.09814462767729572,
+      "upperAtPrevious": 0.10146573557279313
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "n": 2,
+      "upperAtZero": 0.7763932022500009,
+      "upperAtPrevious": 0.95
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.95,
+      "boundCount": 6,
+      "n": 956,
+      "upperAtZero": 0.004995318242855559,
+      "upperAtPrevious": 0.005000535842590178
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.95,
+      "boundCount": 6,
+      "n": 477,
+      "upperAtZero": 0.009986471029744778,
+      "upperAtPrevious": 0.01000734568235115
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.95,
+      "boundCount": 6,
+      "n": 237,
+      "upperAtZero": 0.01999772618465044,
+      "upperAtPrevious": 0.020081605752731293
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.95,
+      "boundCount": 6,
+      "n": 94,
+      "upperAtZero": 0.049655532955619065,
+      "upperAtPrevious": 0.050175839600911806
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 6,
+      "n": 46,
+      "upperAtZero": 0.0988431096984215,
+      "upperAtPrevious": 0.100924895198242
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.95,
+      "boundCount": 6,
+      "n": 3,
+      "upperAtZero": 0.7972599334808886,
+      "upperAtPrevious": 0.9087129070824511
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "n": 1543,
+      "upperAtZero": 0.004998438621128605,
+      "upperAtPrevious": 0.005001672030628254
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "n": 770,
+      "upperAtZero": 0.00999122125182591,
+      "upperAtPrevious": 0.01000414853011999
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "n": 383,
+      "upperAtZero": 0.01998539922009048,
+      "upperAtPrevious": 0.02003718933655303
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "n": 151,
+      "upperAtZero": 0.049915963872459425,
+      "upperAtPrevious": 0.05024023452426145
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "n": 74,
+      "upperAtZero": 0.09921218657042807,
+      "upperAtPrevious": 0.10050056993491746
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "n": 4,
+      "upperAtZero": 0.8552840872102152,
+      "upperAtPrevious": 0.924021907790607
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.99,
+      "boundCount": 1,
+      "n": 919,
+      "upperAtZero": 0.004998532130475372,
+      "upperAtPrevious": 0.005003963508463188
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.99,
+      "boundCount": 1,
+      "n": 459,
+      "upperAtZero": 0.009982887366134207,
+      "upperAtPrevious": 0.010004574665053485
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.99,
+      "boundCount": 1,
+      "n": 228,
+      "upperAtZero": 0.019995499372315168,
+      "upperAtPrevious": 0.020082694803382112
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.99,
+      "boundCount": 1,
+      "n": 90,
+      "upperAtZero": 0.04988149268185638,
+      "upperAtPrevious": 0.05042758505119711
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.99,
+      "boundCount": 1,
+      "n": 44,
+      "upperAtZero": 0.09937197978872321,
+      "upperAtPrevious": 0.10156146276509805
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.99,
+      "boundCount": 1,
+      "n": 3,
+      "upperAtZero": 0.7845565309968116,
+      "upperAtPrevious": 0.9000000000000772
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.99,
+      "boundCount": 6,
+      "n": 1277,
+      "upperAtZero": 0.004996816109091131,
+      "upperAtPrevious": 0.005000722301406234
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.99,
+      "boundCount": 6,
+      "n": 637,
+      "upperAtZero": 0.009992020469203739,
+      "upperAtPrevious": 0.01000765231612056
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.99,
+      "boundCount": 6,
+      "n": 317,
+      "upperAtZero": 0.019977343608292716,
+      "upperAtPrevious": 0.020039925325997167
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.99,
+      "boundCount": 6,
+      "n": 125,
+      "upperAtZero": 0.04988802911330493,
+      "upperAtPrevious": 0.05028006430333557
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.99,
+      "boundCount": 6,
+      "n": 61,
+      "upperAtZero": 0.09955635593863152,
+      "upperAtPrevious": 0.10112877229551442
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.99,
+      "boundCount": 6,
+      "n": 3,
+      "upperAtZero": 0.881436889850293,
+      "upperAtPrevious": 0.9591751709536699
+    },
+    {
+      "maximumRisk": 0.005,
+      "familywiseConfidence": 0.99,
+      "boundCount": 114,
+      "n": 1864,
+      "upperAtZero": 0.004998927425344612,
+      "upperAtPrevious": 0.005001603971350415
+    },
+    {
+      "maximumRisk": 0.01,
+      "familywiseConfidence": 0.99,
+      "boundCount": 114,
+      "n": 930,
+      "upperAtZero": 0.009994205066610109,
+      "upperAtPrevious": 0.010004909094626615
+    },
+    {
+      "maximumRisk": 0.02,
+      "familywiseConfidence": 0.99,
+      "boundCount": 114,
+      "n": 463,
+      "upperAtZero": 0.019973573819613975,
+      "upperAtPrevious": 0.020016371068052513
+    },
+    {
+      "maximumRisk": 0.05,
+      "familywiseConfidence": 0.99,
+      "boundCount": 114,
+      "n": 183,
+      "upperAtZero": 0.04976478494803067,
+      "upperAtPrevious": 0.050031261040829535
+    },
+    {
+      "maximumRisk": 0.1,
+      "familywiseConfidence": 0.99,
+      "boundCount": 114,
+      "n": 89,
+      "upperAtZero": 0.09963874174874107,
+      "upperAtPrevious": 0.10071197881018287
+    },
+    {
+      "maximumRisk": 0.9,
+      "familywiseConfidence": 0.99,
+      "boundCount": 114,
+      "n": 5,
+      "upperAtZero": 0.8456100488718837,
+      "upperAtPrevious": 0.9032226363460175
+    }
+  ],
+  "pairedIntervals": [
+    {
+      "n": 30,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.09503385285530412
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.09503385285530412
+      },
+      "lower": -0.09503385285530412,
+      "upper": 0.09503385285530412
+    },
+    {
+      "n": 30,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.2271969304177172
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.2271969304177172
+      },
+      "lower": -0.2271969304177172,
+      "upper": 0.2271969304177172
+    },
+    {
+      "n": 30,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0017083156444657412,
+        "upper": 0.14859606865911348
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.09503385285530412
+      },
+      "lower": -0.09332553721083837,
+      "upper": 0.14859606865911348
+    },
+    {
+      "n": 30,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 1.4622983176543956e-05,
+        "upper": 0.29109747800826086
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.2271969304177172
+      },
+      "lower": -0.22718230743454068,
+      "upper": 0.29109747800826086
+    },
+    {
+      "n": 30,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.09503385285530412
+      },
+      "loss": {
+        "lower": 0.0017083156444657412,
+        "upper": 0.14859606865911348
+      },
+      "lower": -0.14859606865911348,
+      "upper": 0.09332553721083837
+    },
+    {
+      "n": 30,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.2271969304177172
+      },
+      "loss": {
+        "lower": 1.4622983176543956e-05,
+        "upper": 0.29109747800826086
+      },
+      "lower": -0.29109747800826086,
+      "upper": 0.22718230743454068
+    },
+    {
+      "n": 30,
+      "gains": 30,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.9049661471446959,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.09503385285530412
+      },
+      "lower": 0.8099322942893918,
+      "upper": 1.0
+    },
+    {
+      "n": 30,
+      "gains": 30,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.7728030695822828,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.2271969304177172
+      },
+      "lower": 0.5456061391645657,
+      "upper": 1.0
+    },
+    {
+      "n": 30,
+      "gains": 0,
+      "losses": 30,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.09503385285530412
+      },
+      "loss": {
+        "lower": 0.9049661471446959,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.8099322942893918
+    },
+    {
+      "n": 30,
+      "gains": 0,
+      "losses": 30,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.2271969304177172
+      },
+      "loss": {
+        "lower": 0.7728030695822828,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.5456061391645657
+    },
+    {
+      "n": 30,
+      "gains": 15,
+      "losses": 15,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.338892661609515,
+        "upper": 0.661107338390485
+      },
+      "loss": {
+        "lower": 0.338892661609515,
+        "upper": 0.661107338390485
+      },
+      "lower": -0.32221467678097,
+      "upper": 0.32221467678097
+    },
+    {
+      "n": 30,
+      "gains": 15,
+      "losses": 15,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.2114648815198715,
+        "upper": 0.7885351184801286
+      },
+      "loss": {
+        "lower": 0.2114648815198715,
+        "upper": 0.7885351184801286
+      },
+      "lower": -0.577070236960257,
+      "upper": 0.577070236960257
+    },
+    {
+      "n": 30,
+      "gains": 3,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.027815549739701455,
+        "upper": 0.238597857293251
+      },
+      "loss": {
+        "lower": 0.0017083156444657412,
+        "upper": 0.14859606865911348
+      },
+      "lower": -0.12078051891941202,
+      "upper": 0.23688954164878526
+    },
+    {
+      "n": 30,
+      "gains": 3,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.004923329670734798,
+        "upper": 0.3911013601562068
+      },
+      "loss": {
+        "lower": 1.4622983176543956e-05,
+        "upper": 0.29109747800826086
+      },
+      "lower": -0.2861741483375261,
+      "upper": 0.3910867371730302
+    },
+    {
+      "n": 60,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.04870291330998523
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.04870291330998523
+      },
+      "lower": -0.04870291330998523,
+      "upper": 0.04870291330998523
+    },
+    {
+      "n": 60,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.12090781508292173
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.12090781508292173
+      },
+      "lower": -0.12090781508292173,
+      "upper": 0.12090781508292173
+    },
+    {
+      "n": 60,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0008545229269508704,
+        "upper": 0.07663999493445713
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.04870291330998523
+      },
+      "lower": -0.04784839038303436,
+      "upper": 0.07663999493445713
+    },
+    {
+      "n": 60,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 7.311518317422016e-06,
+        "upper": 0.15675032991371005
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.12090781508292173
+      },
+      "lower": -0.1209005035646043,
+      "upper": 0.15675032991371005
+    },
+    {
+      "n": 60,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.04870291330998523
+      },
+      "loss": {
+        "lower": 0.0008545229269508704,
+        "upper": 0.07663999493445713
+      },
+      "lower": -0.07663999493445713,
+      "upper": 0.04784839038303436
+    },
+    {
+      "n": 60,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.12090781508292173
+      },
+      "loss": {
+        "lower": 7.311518317422016e-06,
+        "upper": 0.15675032991371005
+      },
+      "lower": -0.15675032991371005,
+      "upper": 0.1209005035646043
+    },
+    {
+      "n": 60,
+      "gains": 60,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.9512970866900151,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.04870291330998523
+      },
+      "lower": 0.9025941733800299,
+      "upper": 1.0
+    },
+    {
+      "n": 60,
+      "gains": 60,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.8790921849170783,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.12090781508292173
+      },
+      "lower": 0.7581843698341566,
+      "upper": 1.0
+    },
+    {
+      "n": 60,
+      "gains": 0,
+      "losses": 60,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.04870291330998523
+      },
+      "loss": {
+        "lower": 0.9512970866900151,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.9025941733800299
+    },
+    {
+      "n": 60,
+      "gains": 0,
+      "losses": 60,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.12090781508292173
+      },
+      "loss": {
+        "lower": 0.8790921849170783,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.7581843698341566
+    },
+    {
+      "n": 60,
+      "gains": 30,
+      "losses": 30,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.38741096301586814,
+        "upper": 0.6125890369841319
+      },
+      "loss": {
+        "lower": 0.38741096301586814,
+        "upper": 0.6125890369841319
+      },
+      "lower": -0.22517807396826378,
+      "upper": 0.22517807396826378
+    },
+    {
+      "n": 60,
+      "gains": 30,
+      "losses": 30,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.28825376188744223,
+        "upper": 0.7117462381125577
+      },
+      "loss": {
+        "lower": 0.28825376188744223,
+        "upper": 0.7117462381125577
+      },
+      "lower": -0.42349247622511543,
+      "upper": 0.42349247622511543
+    },
+    {
+      "n": 60,
+      "gains": 6,
+      "losses": 3,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.044452967768946236,
+        "upper": 0.18785738198898227
+      },
+      "loss": {
+        "lower": 0.013765157568287532,
+        "upper": 0.1241872104777509
+      },
+      "lower": -0.07973424270880466,
+      "upper": 0.17409222442069475
+    },
+    {
+      "n": 60,
+      "gains": 6,
+      "losses": 3,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.01627614162537337,
+        "upper": 0.28698718748003776
+      },
+      "loss": {
+        "lower": 0.0024222243317066298,
+        "upper": 0.21427558889591433
+      },
+      "lower": -0.19799944727054097,
+      "upper": 0.28456496314833113
+    },
+    {
+      "n": 120,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.02465540105580434
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.02465540105580434
+      },
+      "lower": -0.02465540105580434,
+      "upper": 0.02465540105580434
+    },
+    {
+      "n": 120,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.06240083995506914
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.06240083995506914
+      },
+      "lower": -0.06240083995506914,
+      "upper": 0.06240083995506914
+    },
+    {
+      "n": 120,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0004273527786856792,
+        "upper": 0.038920846860168466
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.02465540105580434
+      },
+      "lower": -0.02422804827711866,
+      "upper": 0.038920846860168466
+    },
+    {
+      "n": 120,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 3.655765841022925e-06,
+        "upper": 0.0813770704982654
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.06240083995506914
+      },
+      "lower": -0.06239718418922812,
+      "upper": 0.0813770704982654
+    },
+    {
+      "n": 120,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.02465540105580434
+      },
+      "loss": {
+        "lower": 0.0004273527786856792,
+        "upper": 0.038920846860168466
+      },
+      "lower": -0.038920846860168466,
+      "upper": 0.02422804827711866
+    },
+    {
+      "n": 120,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.06240083995506914
+      },
+      "loss": {
+        "lower": 3.655765841022925e-06,
+        "upper": 0.0813770704982654
+      },
+      "lower": -0.0813770704982654,
+      "upper": 0.06239718418922812
+    },
+    {
+      "n": 120,
+      "gains": 120,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.9753445989441957,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.02465540105580434
+      },
+      "lower": 0.9506891978883913,
+      "upper": 1.0
+    },
+    {
+      "n": 120,
+      "gains": 120,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.9375991600449308,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.06240083995506914
+      },
+      "lower": 0.8751983200898616,
+      "upper": 1.0
+    },
+    {
+      "n": 120,
+      "gains": 0,
+      "losses": 120,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.02465540105580434
+      },
+      "loss": {
+        "lower": 0.9753445989441957,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.9506891978883913
+    },
+    {
+      "n": 120,
+      "gains": 0,
+      "losses": 120,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.06240083995506914
+      },
+      "loss": {
+        "lower": 0.9375991600449308,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.8751983200898616
+    },
+    {
+      "n": 120,
+      "gains": 60,
+      "losses": 60,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.42140749188885207,
+        "upper": 0.5785925081111479
+      },
+      "loss": {
+        "lower": 0.42140749188885207,
+        "upper": 0.5785925081111479
+      },
+      "lower": -0.15718501622229586,
+      "upper": 0.15718501622229586
+    },
+    {
+      "n": 120,
+      "gains": 60,
+      "losses": 60,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.3479652648726575,
+        "upper": 0.6520347351273424
+      },
+      "loss": {
+        "lower": 0.3479652648726575,
+        "upper": 0.6520347351273424
+      },
+      "lower": -0.30406947025468495,
+      "upper": 0.30406947025468495
+    },
+    {
+      "n": 120,
+      "gains": 12,
+      "losses": 6,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.058720962674627085,
+        "upper": 0.15698351392816062
+      },
+      "loss": {
+        "lower": 0.021996128268525986,
+        "upper": 0.09629631737693808
+      },
+      "lower": -0.037575354702311,
+      "upper": 0.13498738565963464
+    },
+    {
+      "n": 120,
+      "gains": 12,
+      "losses": 6,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.03156628509462032,
+        "upper": 0.22098761482075135
+      },
+      "loss": {
+        "lower": 0.007995258775804103,
+        "upper": 0.15170558080357088
+      },
+      "lower": -0.12013929570895057,
+      "upper": 0.21299235604494726
+    },
+    {
+      "n": 1000,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.0029912495452490075
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.0029912495452490075
+      },
+      "lower": -0.0029912495452490075,
+      "upper": 0.0029912495452490075
+    },
+    {
+      "n": 1000,
+      "gains": 0,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.007702116236268718
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.007702116236268718
+      },
+      "lower": -0.007702116236268718,
+      "upper": 0.007702116236268718
+    },
+    {
+      "n": 1000,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 5.129197890907464e-05,
+        "upper": 0.00473499357549284
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.0029912495452490075
+      },
+      "lower": -0.002939957566339933,
+      "upper": 0.00473499357549284
+    },
+    {
+      "n": 1000,
+      "gains": 1,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 4.386926065761734e-07,
+        "upper": 0.010096481103852724
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.007702116236268718
+      },
+      "lower": -0.007701677543662142,
+      "upper": 0.010096481103852724
+    },
+    {
+      "n": 1000,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.0029912495452490075
+      },
+      "loss": {
+        "lower": 5.129197890907464e-05,
+        "upper": 0.00473499357549284
+      },
+      "lower": -0.00473499357549284,
+      "upper": 0.002939957566339933
+    },
+    {
+      "n": 1000,
+      "gains": 0,
+      "losses": 1,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.007702116236268718
+      },
+      "loss": {
+        "lower": 4.386926065761734e-07,
+        "upper": 0.010096481103852724
+      },
+      "lower": -0.010096481103852724,
+      "upper": 0.007701677543662142
+    },
+    {
+      "n": 1000,
+      "gains": 1000,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.997008750454751,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.0029912495452490075
+      },
+      "lower": 0.994017500909502,
+      "upper": 1.0
+    },
+    {
+      "n": 1000,
+      "gains": 1000,
+      "losses": 0,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.9922978837637313,
+        "upper": 1.0
+      },
+      "loss": {
+        "lower": 0.0,
+        "upper": 0.007702116236268718
+      },
+      "lower": 0.9845957675274626,
+      "upper": 1.0
+    },
+    {
+      "n": 1000,
+      "gains": 0,
+      "losses": 1000,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.0029912495452490075
+      },
+      "loss": {
+        "lower": 0.997008750454751,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.994017500909502
+    },
+    {
+      "n": 1000,
+      "gains": 0,
+      "losses": 1000,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.0,
+        "upper": 0.007702116236268718
+      },
+      "loss": {
+        "lower": 0.9922978837637313,
+        "upper": 1.0
+      },
+      "lower": -1.0,
+      "upper": -0.9845957675274626
+    },
+    {
+      "n": 1000,
+      "gains": 500,
+      "losses": 500,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.4735177312358993,
+        "upper": 0.5264822687641006
+      },
+      "loss": {
+        "lower": 0.4735177312358993,
+        "upper": 0.5264822687641006
+      },
+      "lower": -0.05296453752820135,
+      "upper": 0.05296453752820135
+    },
+    {
+      "n": 1000,
+      "gains": 500,
+      "losses": 500,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.4470543267423547,
+        "upper": 0.5529456732576454
+      },
+      "loss": {
+        "lower": 0.4470543267423547,
+        "upper": 0.5529456732576454
+      },
+      "lower": -0.10589134651529075,
+      "upper": 0.10589134651529075
+    },
+    {
+      "n": 1000,
+      "gains": 100,
+      "losses": 50,
+      "familywiseConfidence": 0.95,
+      "boundCount": 1,
+      "gain": {
+        "lower": 0.08478476766846738,
+        "upper": 0.11699153209636795
+      },
+      "loss": {
+        "lower": 0.039163535925589334,
+        "upper": 0.06286340351238291
+      },
+      "lower": 0.021921364156084464,
+      "upper": 0.07782799617077862
+    },
+    {
+      "n": 1000,
+      "gains": 100,
+      "losses": 50,
+      "familywiseConfidence": 0.95,
+      "boundCount": 114,
+      "gain": {
+        "lower": 0.07109300986402903,
+        "upper": 0.13518731669011097
+      },
+      "loss": {
+        "lower": 0.030057025466589057,
+        "upper": 0.07705709849656732
+      },
+      "lower": -0.005964088632538292,
+      "upper": 0.10513029122352191
+    }
+  ],
+  "n60ZeroErrorUpper95": 0.04870291330998523,
+  "scope": "Independent SciPy binomial-tail references for the offline calculator; not actual AI data or risk approval."
+}

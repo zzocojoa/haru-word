@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "protocol": "ai-quality-v147-direct-diagnostic-envelope-v1",
+  "approvalStatus": "unapproved",
+  "approvedMicros": "0",
+  "proposedRunId": "3cc6c803-9aca-4c05-9d9b-efebddd71063",
+  "officialFactsFile": "phase42/official-model-envelope-facts.json",
+  "officialFactsSha256": "7bd1c67dad443fe2a68c07e31df2953ef04e6c84f2095603535ff81a6c5b97de",
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-case-review-v1.mjs": "53f5631abfdd5e83cffb6eb0091085e7d151a4206180cdaff474473be02d37f4",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0",
+    ".taskmaster/evaluation/ai-quality-v147/case-review-dossier-g12-v1.json": "c5dd0c81a151c71a521f2c502cd8f0d9cc37843954331ba4a7f23dce5da2c034",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8"
+  },
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "scope": "Onlysixsource-diagnosticrequests.Nooldledgerorlimitreuse;kernelcalibrationroleisaccountingclassificationonly."
+}

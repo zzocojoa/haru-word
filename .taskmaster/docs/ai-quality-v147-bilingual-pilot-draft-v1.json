@@ -1,0 +1,67 @@
+{
+  "protocol": "ai-quality-v147-bilingual-pilot-draft-v1",
+  "status": "author-draft-local-transport-verified-independent-review-pending",
+  "outputDirectory": "outputs/ai-quality-v147-implementation-20261106/phase169",
+  "document": "docs/AI_QUALITY_V147_BILINGUAL_PILOT_DRAFT_20261112.md",
+  "candidateFreezeSha256": "ec6fb905d59c8a9771478520e094e794302ac147eba24a7380a911ae01a81c78",
+  "proposalSha256": "063e9cb689c4d3a69620b3428a643411c129211008af0f5d9c6c30e4eff4a835",
+  "newWordDrafts": 30,
+  "retainedGrammarDrafts": 30,
+  "retainedGrammarObjectsUnchanged": true,
+  "wordStratumAllocation": {
+    "normal": 10,
+    "needsCorrection": 10,
+    "insufficientContext": 10
+  },
+  "wordLengthAllocation": {
+    "short": 12,
+    "ordinary": 12,
+    "near-boundary": 6
+  },
+  "explicitIntentRole": "intended_korean",
+  "rubricDimensions": [
+    "meaning",
+    "grammar",
+    "correction",
+    "explanation",
+    "abstention"
+  ],
+  "selectedExposureFiles": 3090,
+  "exactSurfaceMatches": 0,
+  "legacyProgramBindingsCurrent": false,
+  "freshnessQualified": false,
+  "familyIndependenceVerified": false,
+  "independentReferenceReviews": 0,
+  "qualifiedReferences": 0,
+  "formalPilotCasesApproved": 0,
+  "capturedSyntheticRequests": 360,
+  "candidateSyntheticStoredDraftMatches": 180,
+  "baselineSyntheticStoredDraftMatches": 135,
+  "baselineAppValidationRejections": 45,
+  "actualProviderNetworkFailures": 0,
+  "receiptReadbacks": 360,
+  "duplicateProviderResends": 0,
+  "newFormalPilotGenerations": 0,
+  "newModelQualityMeasured": false,
+  "oldBankPreserved": true,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "mainDispatchAuthorized": false,
+  "paidScopeApproved": false,
+  "ledgerSha256": "8278c131cdc4df1916fa4260589aa4a60b0137cc215a4dc9bb65acbf5789a99f",
+  "evidenceSha256": {
+    "bilingual-pilot-proposal.json": "063e9cb689c4d3a69620b3428a643411c129211008af0f5d9c6c30e4eff4a835",
+    "rubric-proposal.json": "f085e63d49991459a144794f88d168e8ab5518826a35c068eaefa67f39ec6a43",
+    "exposure-screen.json": "241d1699b29405eab37a0879e6365d7e009eb4dc1fb92acbe8e2337961c26604",
+    "captured-proposal-requests.json": "b7aa727f1dd7d2a47e4c5b501f9c1a7152eb82f4a7b6ac873c5019a5fde330ef",
+    "capture-summary.json": "6546f2c87a2734942d291eabe40dd27a6da1d2b1dce2d4e215d5e088e1385deb",
+    "capture-journal.jsonl": "751181b099ef3a2929e158d90dde53d1ea84de893e6342844ba1fe16e195194d"
+  },
+  "runnerSha256": {
+    "compose.py": "a9eb9fb8afc9c130a51bdb1a8462f8d1a6a0b01bd7c6d1516df1ce2e7bbe4ca9",
+    "seal.mjs": "9576d2645c43bf354cbea577fa0904f650cbbe53c2edd20060700037717b444e",
+    "capture-proposal.mjs": "35608f4cf72cc4702429e6a497dd8c508c1ba8c3218d6c4a02e5d1a3855e04a9",
+    "audit-proposal.py": "1e9d92c6c7b6f1c6895a0f5521503b0f8c24f13bfa53f1dea9745a51fe806642"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 20,
+  "recordedAtUtc": "2026-11-06T04:46:29.912098+00:00",
+  "status": "offline fixed-stage diagnostic and stop-policy preparation verified",
+  "actualProviderCalls": 0,
+  "actualPaidApprovalUsd": 0,
+  "liveRunnerIntegrated": false,
+  "historyReclassified": false,
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-failures.mjs": "85e6767dd73b52904998c41ac69f9c15a33f581979ec18db03fd7e071fabaf4a",
+    ".taskmaster/scripts/test-ai-quality-v147-failures.mjs": "edd8d5eaf3c92c41ce4c6e64553d1206ec8339dfa0e628500c8eec519e6be1da"
+  },
+  "sourceBindings": {
+    "lib/openai-feedback.ts": "81c5c9f797a61dd46fce8603a01bffe4d0c00998522d32955666443d68c708b4",
+    "lib/openai-response.ts": "0af8eccf70416f2fa194caed71842186b6deb069b333a4c558aa4287fb6c2a3e",
+    "lib/provider-feedback-contract.ts": "8eaed13bad4a0064df451c09996d0ff649c65e07bd4e3f5800e74c6a581d2d06",
+    "lib/provider-feedback-error.ts": "3a95ff743c510040710fbe32c1e880d4738a14abc376891991446d448e5d2ba5",
+    "lib/judgment-feedback-contract.ts": "7af1463b1946f4c2fbc379b1cf3370104fa25c1dec287b93f557d3662b25338d",
+    "lib/feedback-issue.ts": "f8c604f9f5bd24da098d57226127249a251d976d1b6a0bebe4063f44943adb38",
+    "lib/sentence-feedback.ts": "6477f5554a0272ba87af2865f588eb75371f50be2ed5afb98e6602fd053531cc",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    "lib/ai-models.ts": "32ce6f0fb441ae36be8aeaefe8afdb0bd474c9b538f74d3b6df472878389e627"
+  },
+  "checks": [
+    {
+      "name": "failures-node-v22.23.4-source-v3",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-failures.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 15,
+      "failed": 0,
+      "log": "failures-node-v22.23.4-source-v3.log",
+      "sha256": "a6389393b1ea3d60f0bd430ec97b3d267d31b4fc9b0989734d03709817f28c2d",
+      "evidenceDirectory": "failures-node-v22.23.4-source-v3"
+    },
+    {
+      "name": "failures-node-v24.22.1-source-v3",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-failures.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 15,
+      "failed": 0,
+      "log": "failures-node-v24.22.1-source-v3.log",
+      "sha256": "69aff64cd6423c3c7687be7833a2374c0c81ad5c6ead4c5c317134d0220019b8",
+      "evidenceDirectory": "failures-node-v24.22.1-source-v3"
+    }
+  ],
+  "lint": {
+    "command": [
+      "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-failures.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-failures.mjs"
+    ],
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "failures-explicit-lint-v3.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase10/failure-checks-v3.json",
+  "proofSha256": "f75c66502d8511afc50cc9f30783a1b060a68d26d9e46ae89e1349e920a97fe9",
+  "proofBindings": {
+    "failures-node-v22.23.4-source-v3\\failure-stage-observations.json": "98d7e55ee3e8733c26f4cffca78109109b342e8a1988c15a3f9561c885dfb0ca",
+    "failures-node-v22.23.4-source-v3\\actual-app-adapter.mjs": "be6481f6ce7046e649dff9b218d0acfd12744567d47d324f33a63e8ea449212e",
+    "failures-node-v24.22.1-source-v3\\failure-stage-observations.json": "fba5607669ec2f4e1711dff4bcfeb927d8f4f16d053684de097ff9edfa38c73e",
+    "failures-node-v24.22.1-source-v3\\actual-app-adapter.mjs": "be6481f6ce7046e649dff9b218d0acfd12744567d47d324f33a63e8ea449212e",
+    "failures-node-v24.22.1-root-v3\\failure-stage-observations.json": "7581cec14ed7de796b7d50bd01c6d327f94d7679870c96d11b2f67f175cf0dd2",
+    "failures-node-v24.22.1-root-v3\\actual-app-adapter.mjs": "0b0e548494bfcf9f4e7c55cf319e4e47b5dfcb0ea9f727462a332006ac9e091f"
+  },
+  "ownedStages": 13,
+  "syntheticCurrentAppTransportsEach": 10,
+  "stopPolicy": "402/429,credential/configuration,transport/body uncertainty,storage/local bugs and unknown origin stop new run dispatch. Known format/app rejection is retained per slot; may continue other slots. Slot retry always never-resend. Integration enforcement remains T22.",
+  "privacy": "Whitelist projection only; no message/stack/raw body/Zod paths or values/secret fields. Data descriptors only,throwing getters/proxies ignored. Diagnostics never mutate ledger.",
+  "unknownOrigin": "Current adapter envelope errors can include a post-contract TypeError. Retain app_pipeline_unknown; never infer transport from Error name/message or rewrite historical unknown failures.",
+  "dispatchUsageEvidence": "Reserved/unused => not sent; consumed/terminal => may have been sent,exact network count stays unknown. Reported usage remains separate from bounded settled evidence; diagnostics do not change reservations.",
+  "limitations": [
+    "Tests used synthetic fixtures,including one fictional evaluation-shaped in-memory ledger. No real key/network/invoice or actual new evaluation approval. Diagnostics are pure and read-only; they do not authorize dispatch.",
+    "Current product app code unchanged. Some wrapped envelope/local origins remain unmeasured by the existing app; reporting preserves that uncertainty.",
+    "T22 must apply run-stop decisions in the integrated executor. T24 actual approved dispatch/authenticated receipt still unimplemented."
+  ],
+  "revision": 3,
+  "previousPreparationFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase10/failure-preparation-v2.json",
+  "previousPreparationSha256": "3b5548dce645725da5157072d8a522896b4a30063483357ffe61bfa4b4b305f1",
+  "readOnlyEvaluationMetadataSupported": true,
+  "rootReplay": {
+    "name": "failures-node-v24.22.1-root-v3",
+    "command": [
+      "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+      "--test",
+      ".taskmaster/scripts/test-ai-quality-v147-failures.mjs"
+    ],
+    "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어",
+    "exitCode": 0,
+    "passed": 15,
+    "failed": 0,
+    "log": "failures-node-v24.22.1-root-v3.log",
+    "sha256": "1c8b1b386bc16939f4a23505dbab022b87fb226ae18e3a9603b14b1333a0db29",
+    "evidenceDirectory": "failures-node-v24.22.1-root-v3"
+  },
+  "sourceSelection": "Manifest SOURCE and current decision-contract prompt version,regardless of ROOT/SOURCE invocation."
+}

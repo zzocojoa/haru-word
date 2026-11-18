@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "id": "ai-quality-v147-decision-contract-6",
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "local Korean intent flow verified; actual new model quality unmeasured",
+  "dimensions": [
+    "meaning",
+    "grammar",
+    "correction",
+    "explanation",
+    "abstention"
+  ],
+  "dimensionDefinitions": {
+    "meaning": "Judge original target use independently. Known incompleteness and missing completion content do not by themselves erase a supported target judgment. Presence alone does not establish correct use. Explicit reply/title/command forms remain separate.",
+    "grammar": "Judge original grammar independently of repair availability. In default sentence writing, a known incomplete sentence can be needs_work with no correction and message/relationship context. Unknown grammaticality can remain uncertain. Existing time/quantity uncertainty safeguards are preserved.",
+    "correction": "Natural originals remain unchanged, including missing/wrong targets. A correction must be minimal and preserve meaning. Several equivalent corrections can pass. A grammatical modal-perfect alternative with unestablished intended time is uncertain for equivalence, not automatically ungrammatical or critically invented. Responsible withholding passes when correction cannot be chosen safely.",
+    "explanation": "Assess only learner-visible factual claims, reviewed application rules and actual comparisons. Hidden model reasons are diagnostic only. A false visible grammar rule fails this dimension even when the correction is right. App-authored explanations do not certify hidden model-text accuracy.",
+    "abstention": "Withhold an unsafe interpretation/correction and ask for the specific missing message, time, quantity, target meaning or relationship. Target-only uncertainty may coexist with an independently justified grammar correction. Ordinary complete pronouns and valid commands do not need named real-world referents. Known target-form error may coexist with withheld correction."
+  },
+  "criticalFields": [
+    "approveBadGrammar",
+    "reverseMeaning",
+    "swapRoles",
+    "inventedIntent"
+  ],
+  "criticalPolicy": {
+    "approveBadGrammar": "Learner-visible approval of known incorrect original grammar; a target-only disagreement or unavailable response is not this error.",
+    "reverseMeaning": "Evidence of an actual meaning reversal, not merely an unconfirmed alternative interpretation.",
+    "swapRoles": "Evidence that a visible correction exchanges participants' semantic roles.",
+    "inventedIntent": "Evidence of an invented agent, event or speech act in the visible product output. A model's raw invention that the product independently withholds is a separate model diagnostic."
+  },
+  "wireLabels": {
+    "meaningUsage": [
+      "appropriate",
+      "needs_work",
+      "uncertain"
+    ],
+    "grammar": [
+      "natural",
+      "needs_work",
+      "uncertain"
+    ],
+    "contextNeeded": [
+      "none",
+      "message",
+      "time",
+      "quantity",
+      "target_meaning",
+      "relationship"
+    ]
+  },
+  "wireLabelPolicy": "Sufficient original target/grammar assessed independently; grammar uncertain has no correction; known malformed modal with unresolved time prefers grammar uncertain/time question. Actual English-form error and safe correction equivalence are separate dimensions.",
+  "invalidWireIsNotEnglishJudgment": true,
+  "rawModelAndVisibleProductSeparated": true,
+  "qualityAndFinancialThresholdsInherited": false,
+  "oldEvaluationsRescored": false,
+  "applicationOverrideIsNotModelAbstention": true,
+  "modelQualityMeasured": false,
+  "riskToleranceApproved": false,
+  "learnerUnderstandingVerified": false,
+  "sourceBindings": {
+    "instruction": "lib/judgment-policy.ts",
+    "wireSchemaAndParser": "lib/judgment-feedback-contract.ts",
+    "labelsAndStorage": "lib/sentence-feedback.ts",
+    "visibleExplanation": "lib/verified-feedback-explanation.ts",
+    "developmentMatrix": "tests/fixtures/judgment-decision-matrix.json",
+    "futureGradingTasks": [
+      13,
+      14,
+      21,
+      25,
+      27,
+      34,
+      35,
+      36
+    ],
+    "koreanIntentUi": "app/feedback-context-input.tsx"
+  },
+  "sufficiencyRequirements": {
+    "S1": "cause id and counterfactual evidence required; AQ-C01 app evidence is separate from opaque model causes",
+    "S2": "risk/N/r/uncertainty/multiple looks preregistered in T34, not inherited from old30/60 thresholds",
+    "S3": "exposed105 and new regression cases are development only; fresh families/repeats required",
+    "S4": "reviewed wording is not learner understanding; qualified review/comprehension/transfer required",
+    "S5": "Node/synthetic wire/local Worker not production-authenticated AI evidence",
+    "S6": "new issue→synthetic reproduction→cause→fix→fresh evaluation/new approval; bounded day1/day7 review"
+  },
+  "provenance": {
+    "priorDimensionDefinitionsSource": "ROOT:.taskmaster/docs/judgment-v5-rubric-candidate.json",
+    "priorSha256": "d05155fa440c4f7ea04eff7c643b5caacd7b21ef800fb1793134405dca069710",
+    "matrixSha256": "c0959fcaae5d0140f376c3e2097716bab4f6457b2284f61fec33801ae591f3d7",
+    "closedThresholdsCopied": false,
+    "actualContractEvidence": "ROOT:outputs/ai-quality-v147-implementation-20261106/input-boundaries-green.log"
+  },
+  "promptVersion": "reference-v9",
+  "validationVersion": "judgment-v7",
+  "publicAiContract": 4,
+  "previousContract": ".taskmaster/docs/ai-quality-v147-decision-contract-v5.json",
+  "previousContractSha256": "802e54d9d6344fe732e0d83f9b2f33202f22afec2fba5c97e5f73bc181776cc9",
+  "lexicalBoundary": "Recognizable inflection errors are separate from lexical target identity; derivation and actual requested POS remain target-use questions. Grammar lessons assess correct target-feature use. Natural originals keep their text even when the target is wrong/missing.",
+  "independentInputBoundary": "Unpunctuated token pairs are not independently proven fragments by a verb dictionary. Preserve explicit selected context, reviewed nominal/quantity/relation/location/slash-list guards; otherwise retain the model judgment. This is not a proof that an unconnected verb string is grammatical. A known incomplete wire with needs_work, empty correction/reason, and message/relationship context in sentence-writing mode preserves the model target judgment. Existing bounded guards continue to withhold unsupported confident completions; no new POS or general English rule detector is added.",
+  "quantityBoundary": "Conflicting number interpretation may keep known target error with grammar uncertain/no correction and the typed quantity question. Resolved context may support either declared minimal alternative. A quantity question cannot accompany settled grammar.",
+  "newVersionEffect": "reference-v9 includes intended Korean context for word study. Previous records remain readable. Existing contextNote request, storage and fingerprints are reused; no automatic AI calls or database migration.",
+  "verifiedCurrentScope": "Node24 unit906/906/type/lint/build0. Built local Worker6 checks; correction30 and draft/recovery40 browser checks, all with synthetic replies. New actual model responses0; no operational or English-accuracy certification.",
+  "checkedLanguageSources": [
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-formation_2",
+      "checked": "2026-11-06",
+      "use": "word-class derivation vs lexical inflection distinction"
+    },
+    {
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "checked": "2026-11-06",
+      "use": "manner adverb formation and context-sensitive meaning; no blanket -ly permission"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/who",
+      "checked": "2026-11-06",
+      "use": "who/whom form and subject/object distinction"
+    }
+  ],
+  "explanationBoundary": "A known reviewed rule is attached only to its actual bounded token edit. Unsupported or multiple edits use literal comparison; model free reasons are not teaching facts. No live or learner proof.",
+  "currentExplanationSourceSha256": "9664152a009664b6597e606bcbfcedc3ec68e17992dd96b3d9f8efae9d3136d6",
+  "referencePolicyFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+  "coreFlowAmendmentDocument": "docs/AI_QUALITY_V147_CORE_FLOW_PRIORITY_20261112.md",
+  "previousEvaluationsApplyToNewCandidate": false,
+  "koreanIntentAmendmentDocument": "docs/AI_QUALITY_V147_KOREAN_INTENT_20261112.md"
+}

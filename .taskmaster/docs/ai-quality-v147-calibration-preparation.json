@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 14,
+  "recordedAtUtc": "2026-11-06T01:48:57.208607+00:00",
+  "status": "offline-preparation-verified; actual calibration not executed",
+  "witnessesFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+  "witnessesSha256": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+  "coreFile": ".taskmaster/scripts/ai-quality-v147-calibration.mjs",
+  "coreSha256": "2c0a3b8ca910ca4a40868d0cb3e2a8f27e74f638792d37492f298cefdd9a29a6",
+  "testFile": ".taskmaster/scripts/test-ai-quality-v147-calibration.mjs",
+  "testSha256": "5f8265de981895bc63b0dd86c7972e1e2fd9cd9c68448572400bfaa0d56ceebb",
+  "sourceBindings": {
+    "lib/judgment-feedback-contract.ts": "7af1463b1946f4c2fbc379b1cf3370104fa25c1dec287b93f557d3662b25338d",
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/judgment-input.ts": "c59fca0e8a28acead01414a51186a3f82265459b945c22fed6c349b78362c691",
+    "lib/judgment-correction.ts": "5d02c8c83519461385e1f42e9df73870d93807c8ac46891c94be10a59ec0581f",
+    "lib/verified-feedback-explanation.ts": "d4daf4ca0521df1a5dc2c4684f3c98ed570d623a6a26e7d7854b7ebb970784a1",
+    "lib/sentence-feedback.ts": "6477f5554a0272ba87af2865f588eb75371f50be2ed5afb98e6602fd053531cc"
+  },
+  "witnessGroups": {
+    "normal": 4,
+    "clear_error": 4,
+    "ambiguous": 4
+  },
+  "hypotheticalVisibleFaults": 4,
+  "referenceAuthor": "same Codex implementation session",
+  "qualifiedIndependentReview": false,
+  "actualJudgeCalibrationMeasured": false,
+  "actualJudgeCalls": 0,
+  "plannedJudgeCalls": 36,
+  "newPaidApprovalUsd": 0,
+  "checks": {
+    "node22": {
+      "passed": 9,
+      "failed": 0,
+      "exitCode": 0
+    },
+    "node24": {
+      "passed": 9,
+      "failed": 0,
+      "exitCode": 0
+    }
+  },
+  "thresholds": {
+    "casesPerJudge": 12,
+    "minimumExactAcceptedGrades": 11,
+    "requiredCriticalMisses": 0,
+    "collectionCompleteRequired": true,
+    "maxPlannedCalls": 36
+  },
+  "reviewState": "Raw model grade,partially blinded same-author review,and explicit adjudication are separate. Missing,unknown or stale records remain held. No independent certification inferred.",
+  "scope": "Arithmetic/schema/privacy/review-procedure verification only; no model or English certification and no old score/ledger writes.",
+  "productRuntimeChanged": false,
+  "previousProductEvidence": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase5/progress-final.json",
+  "remaining": "T25 separately approved actual calibration, T37 independent qualified/learner validation and later release gates."
+}

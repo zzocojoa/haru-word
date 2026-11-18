@@ -1,0 +1,123 @@
+{
+  "protocol": "ai-quality-v147-assessment-calibration-sources-v1",
+  "checkedAtUtc": "2026-11-08T01:00:47.381092+00:00",
+  "sources": [
+    {
+      "id": "present",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-simple",
+      "paraphrase": "Editorial present-simple formation: third-person singular uses an inflected verb; present-simple negatives use do/does plus not.",
+      "scopeLimit": "English syntax only; not a score oracle.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "pronouns",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/personal-pronouns",
+      "paraphrase": "Editorial table distinguishes subject he/I from object him/me and she/her. Imperatives are an exception to the overt-subject requirement.",
+      "scopeLimit": "Pronoun form evidence does not license exchanging actor and recipient.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "past-modal",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/modals-deductions-about-past",
+      "paraphrase": "Editorial explanation permits might have with a past participle for a possible past event.",
+      "scopeLimit": "It does not establish which time an underspecified learner intended.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "demonstratives",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/demonstratives",
+      "paraphrase": "Editorial explanation distinguishes singular this/that and plural these/those, including their use with nouns.",
+      "scopeLimit": "It does not choose the intended number for an inconsistent learner sentence.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "progressive",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-continuous",
+      "paraphrase": "Editorial formation table uses present be plus an ing-form and associates they with are.",
+      "scopeLimit": "Only form/agreement; no invented time/context.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "book",
+      "url": "https://www.merriam-webster.com/dictionary/book",
+      "paraphrase": "Dictionary lists book as a noun for a bound written/printed work and as a verb for reserving in advance.",
+      "scopeLimit": "Different requested sense/POS can be missed in a grammatically natural sentence.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "help",
+      "url": "https://www.merriam-webster.com/dictionary/help",
+      "paraphrase": "Dictionary includes help as both verb and a noun meaning aid or assistance.",
+      "scopeLimit": "Noun availability alone does not certify every collocation; combine with imperative syntax.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "quiet",
+      "url": "https://www.merriam-webster.com/dictionary/quiet",
+      "paraphrase": "Dictionary includes an adverb entry for quiet, meaning in a quiet manner.",
+      "scopeLimit": "Does not establish the register or naturalness of every collocation, including speaking quiet.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "manner",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "paraphrase": "Beginner editorial manner-adverb guidance gives quiet to quietly and normally places manner adverbs after the verb or object.",
+      "scopeLimit": "Pedagogical default does not exclude all dictionary-attested flat-adverb uses.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "music",
+      "url": "https://www.merriam-webster.com/dictionary/music",
+      "paraphrase": "The editorial dictionary entry identifies music as a noun, including musical sounds and the art of arranging them.",
+      "scopeLimit": "Lexical noun evidence only. Does not establish a command or the entire learner message.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "passive",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/active-passive-voice",
+      "paraphrase": "Editorial active/passive examples retain the same event participants; passive uses be plus a past participle, and by can introduce the actor.",
+      "scopeLimit": "Supports semantic-role preservation across voice, not mandatory rewriting of a natural original.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "modal-future",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/talking-about-future",
+      "paraphrase": "The editorial future section permits may, might and could for uncertain future possibilities, illustrated with a base-form verb after might.",
+      "scopeLimit": "Does not establish the intended time of the underspecified torch sentence.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "verbatimQuote": null
+    },
+    {
+      "id": "ellipsis-replies",
+      "url": "https://www.cambridge.org/core/books/abs/grammar-for-english-language-teachers/ellipsis-and-substitution/5C3339217F5527DE02FB806083E9FCF9",
+      "checkedAtUtc": "2026-11-08T03:11:59.121206+00:00",
+      "publisher": "Cambridge University Press",
+      "verbatimQuote": "one word (or a few words) stands for a whole phrase.",
+      "paraphrase": "The chapter identifies short answers to questions as a clear case of situational ellipsis. Recoverable context licenses omitted material; this does not license inventing a command.",
+      "scopeLimit": "Supports recoverable reply fragments, not a score oracle or a universal sentence rule.",
+      "evidenceKind": "current-primary-editorial-web-read",
+      "sourceAccessFailurePreserved": "dictionary.cambridge.org ellipsis and clauses-and-sentences returned403; this accessible publisher chapter was read instead."
+    }
+  ],
+  "freshFetchFailures": {
+    "CambridgeGrammarAndDictionary": 8,
+    "reason": "403",
+    "BritishCouncilA1A2PresentSimpleAndBe": "timeout; used accessible editorial grammar-reference pages instead"
+  },
+  "sourceTruthCertified": false,
+  "userCommentsUsedAsAuthority": false,
+  "previousSourceFileSha256": "02694fcf521c050a3cbc5f8d186e16b4aa948880ed9ab63ee0496e8ea393b9f5",
+  "updatedAtUtc": "2026-11-08T01:23:21.245349+00:00",
+  "priorCatalogFileSha256": "1cc8e4c2beb4f69be10563a9a8379d3ea26ffc4cc62f70a5101682002f1d794b"
+}

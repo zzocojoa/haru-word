@@ -20,6 +20,55 @@
   let visibleTasks = [];
   let pollTimer;
   let requestGeneration = 0;
+  const desktopNavigation = matchMedia('(min-width: 761px)');
+  let desktopCollapsed = false, mobileNavigationOpen = false;
+  try { desktopCollapsed = localStorage.getItem('haru-dashboard-sidebar-collapsed') === 'true'; } catch { /* File snapshots may disable storage. */ }
+
+  function renderNavigation({ focusMenu = false, restoreFocus = false } = {}) {
+    const modal = !desktopNavigation.matches && mobileNavigationOpen;
+    const open = desktopNavigation.matches ? !desktopCollapsed : mobileNavigationOpen;
+    $('dashboard-shell').dataset.sidebarOpen = String(open);
+    $('plan-sidebar').hidden = !open;
+    $('sidebar-backdrop').hidden = !modal;
+    $('sidebar-toggle').setAttribute('aria-expanded', String(open));
+    $('sidebar-toggle').setAttribute('aria-label', open ? '플랜 메뉴 접기' : '플랜 메뉴 열기');
+    $('dashboard-content').inert = modal;
+    document.body.classList.toggle('sidebar-modal-open', modal);
+    if (modal) { $('plan-sidebar').setAttribute('role', 'dialog'); $('plan-sidebar').setAttribute('aria-modal', 'true'); }
+    else { $('plan-sidebar').removeAttribute('role'); $('plan-sidebar').removeAttribute('aria-modal'); }
+    if (focusMenu && open) $('sidebar-close').focus({ preventScroll: true });
+    if (restoreFocus) $('sidebar-toggle').focus({ preventScroll: true });
+  }
+  function closeNavigation() {
+    if (desktopNavigation.matches) {
+      desktopCollapsed = true;
+      try { localStorage.setItem('haru-dashboard-sidebar-collapsed', 'true'); } catch { /* Optional UI preference only. */ }
+    } else mobileNavigationOpen = false;
+    renderNavigation({ restoreFocus: true });
+  }
+  $('sidebar-toggle').addEventListener('click', () => {
+    if (desktopNavigation.matches) {
+      desktopCollapsed = !desktopCollapsed;
+      try { localStorage.setItem('haru-dashboard-sidebar-collapsed', String(desktopCollapsed)); } catch { /* Optional UI preference only. */ }
+    } else mobileNavigationOpen = !mobileNavigationOpen;
+    renderNavigation({ focusMenu: !desktopNavigation.matches && mobileNavigationOpen });
+  });
+  $('sidebar-close').addEventListener('click', closeNavigation);
+  $('sidebar-backdrop').addEventListener('click', closeNavigation);
+  desktopNavigation.addEventListener('change', () => {
+    const focusedInside = $('plan-sidebar').contains(document.activeElement);
+    mobileNavigationOpen = false;
+    renderNavigation({ restoreFocus: focusedInside && (!desktopNavigation.matches || desktopCollapsed) });
+  });
+  document.addEventListener('keydown', event => {
+    if (desktopNavigation.matches || !mobileNavigationOpen) return;
+    if (event.key === 'Escape') { event.preventDefault(); closeNavigation(); return; }
+    if (event.key !== 'Tab') return;
+    const controls = [...$('plan-sidebar').querySelectorAll('a[href],button:not(:disabled)')].filter(e => e.getClientRects().length);
+    const first = controls[0], last = controls.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  });
 
   function dateText(value) {
     if (!value || !Number.isFinite(new Date(value).getTime())) return '확인되지 않음';
@@ -41,11 +90,14 @@
     return '<span class="status ' + (ready?'ready':safe) + '">' + (ready?'착수 가능':statusLabels[safe]) + '</span>';
   }
   function renderPlans() {
-    $('plan-selector').hidden = catalog.plans.length < 2;
+    $('plan-selector').hidden = catalog.plans.length === 0;
+    $('plan-count').textContent = catalog.plans.length;
     const focused=document.activeElement?.closest('[data-plan-id]')?.dataset.planId;
-    $('plan-buttons').innerHTML=catalog.plans.map(p=>{
+    const orderedPlans = [...catalog.plans].sort((a,b)=>Number(b.kind==='current')-Number(a.kind==='current'));
+    $('plan-buttons').innerHTML=orderedPlans.map(p=>{
       const item=p.id===snapshot.plan.id?snapshot:planSnapshots[p.id],tasks=item?.tasks||[],leaves=units(tasks);
-      return '<button type="button" class="plan-choice" data-plan-id="'+escape(p.id)+'" aria-pressed="'+String(p.id===snapshot.plan.id)+'"><strong>'+escape(p.label)+'</strong><small>상위 '+tasks.length+'개 · 세부 '+leaves.length+'개 · '+doneCount(leaves)+' / '+leaves.length+' 완료</small></button>';
+      const label=p.label.replace(/^(?:이전 플랜|새 플랜)\s*·\s*/,''),done=doneCount(leaves);
+      return '<button type="button" class="plan-choice" data-plan-id="'+escape(p.id)+'" aria-pressed="'+String(p.id===snapshot.plan.id)+'"'+(p.id===snapshot.plan.id?' aria-current="page"':'')+'>'+(p.kind==='current'?'<span class="plan-current-label">현재 플랜</span>':'')+'<strong>'+escape(label)+'</strong><small>상위 '+tasks.length+'개 · 세부 '+leaves.length+'개</small><span class="plan-completion"><span>'+done+' / '+leaves.length+' 완료</span><span>'+ratio(done,leaves.length)+'%</span></span><span class="plan-mini-track" aria-hidden="true"><span style="width:'+ratio(done,leaves.length)+'%"></span></span></button>';
     }).join('');
     if(focused)[...$('plan-buttons').children].find(e=>e.dataset.planId===focused)?.focus({preventScroll:true});
     $('plan-context').textContent=snapshot.plan.context||'';
@@ -203,7 +255,8 @@
   }
   function reset() { state.phase='all';state.status='all';state.query='';state.highlighted=null;$('search').value='';$('status-filter').value='all';renderWork(); }
   document.addEventListener('click',event=>{
-    const plan=event.target.closest('[data-plan-id]');if(plan){switchPlan(plan.dataset.planId);return;}
+    const plan=event.target.closest('[data-plan-id]');if(plan){switchPlan(plan.dataset.planId);if(!desktopNavigation.matches)closeNavigation();return;}
+    if(event.target.closest('.sidebar-brand')&&!desktopNavigation.matches)closeNavigation();
     const target=event.target.closest('[data-jump]');if(target){jump(target.dataset.jump);return;}
     const phase=event.target.closest('[data-phase]');if(phase){state.phase=phase.dataset.phase;renderWork();}
   });
@@ -279,7 +332,7 @@
     finally{$('import-file').value='';}
   });
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&canConnect&&state.mode!=='imported')void refresh();});
-  renderAll();
+  renderNavigation();renderAll();
   if(canConnect){void refresh();pollTimer=setInterval(()=>{if(!document.hidden)void refresh();},5000);}
   window.addEventListener('pagehide',()=>clearInterval(pollTimer),{once:true});
 })();

@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "stage": "prequalification-semantic-source-audit-not-gold-replacement",
+  "recordedAtUtc": "2026-11-07T03:58:32.564335+00:00",
+  "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+  "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": "b40aa8251bc66e98603b6af273566acdf8621bd4aaacdf40d768c1d27357e128",
+    ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    "lib/grammar/target-criteria.ts": "146483f42c9fb01162b2015c12e23a232b1264bbdde90fa570f25d53724dd096"
+  },
+  "goldCaseAudits": [
+    {
+      "goldCaseId": "G01",
+      "reviewStatus": "partial-word-source-linked",
+      "sourceIds": [
+        "ask"
+      ],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G02",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G03",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G04",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G05",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G06",
+      "reviewStatus": "partial-word-source-linked",
+      "sourceIds": [
+        "book"
+      ],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G07",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G08",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G09",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G10",
+      "reviewStatus": "not-reevaluated-in-this-pass",
+      "sourceIds": [],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G11",
+      "reviewStatus": "partial-word-source-linked",
+      "sourceIds": [
+        "help"
+      ],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    },
+    {
+      "goldCaseId": "G12",
+      "reviewStatus": "held-register-and-collocation-unresolved",
+      "sourceIds": [
+        "quiet-cambridge",
+        "quiet-mw",
+        "manner"
+      ],
+      "oldAllowedAlternativesPreserved": true,
+      "newEnglishGoldCertified": false
+    }
+  ],
+  "controlAudits": [
+    {
+      "id": "public-positive-agreement",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "currentGexKnownRecordIds": [
+        "exposure-f655fe6eb116192b500c5b98"
+      ],
+      "currentGexExposureRuleRequiredGrade": "fail",
+      "currentGexKnownExposureLeakRequired": true,
+      "exposureConclusionScope": "Currentfrozenfresh-referencecomparisonrule;notanEnglishgrammarscore.",
+      "previousPartialFailureDimensions": [],
+      "previousPartialCriticalFlags": [],
+      "fullSevenDimensionGradeFrozen": false,
+      "dropInControlExpectedGradeReady": false,
+      "reviewIssues": [
+        "Allsevendimensionexpectations andnonselfAIqualification remainunfrozen."
+      ]
+    },
+    {
+      "id": "public-false-natural-label",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "currentGexKnownRecordIds": [
+        "exposure-5d00aba3c03ff474127db181"
+      ],
+      "currentGexExposureRuleRequiredGrade": "fail",
+      "currentGexKnownExposureLeakRequired": true,
+      "exposureConclusionScope": "Currentfrozenfresh-referencecomparisonrule;notanEnglishgrammarscore.",
+      "previousPartialFailureDimensions": [
+        "originalLabelSupport"
+      ],
+      "previousPartialCriticalFlags": [],
+      "fullSevenDimensionGradeFrozen": false,
+      "dropInControlExpectedGradeReady": false,
+      "reviewIssues": [
+        "Allsevendimensionexpectations andnonselfAIqualification remainunfrozen."
+      ]
+    },
+    {
+      "id": "public-target-mismatch",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "currentGexKnownRecordIds": [
+        "exposure-f655fe6eb116192b500c5b98"
+      ],
+      "currentGexExposureRuleRequiredGrade": "fail",
+      "currentGexKnownExposureLeakRequired": true,
+      "exposureConclusionScope": "Currentfrozenfresh-referencecomparisonrule;notanEnglishgrammarscore.",
+      "previousPartialFailureDimensions": [
+        "assignmentAlignment",
+        "inputAndTargetValidity"
+      ],
+      "previousPartialCriticalFlags": [
+        "wrongTarget"
+      ],
+      "fullSevenDimensionGradeFrozen": false,
+      "dropInControlExpectedGradeReady": false,
+      "reviewIssues": [
+        "Allsevendimensionexpectations andnonselfAIqualification remainunfrozen."
+      ]
+    },
+    {
+      "id": "public-negation-loss",
+      "sourceIds": [
+        "verbs",
+        "agreement",
+        "negation"
+      ],
+      "currentGexKnownRecordIds": [
+        "exposure-3116af3544c4d131e1a2fb10"
+      ],
+      "currentGexExposureRuleRequiredGrade": "fail",
+      "currentGexKnownExposureLeakRequired": true,
+      "exposureConclusionScope": "Currentfrozenfresh-referencecomparisonrule;notanEnglishgrammarscore.",
+      "previousPartialFailureDimensions": [
+        "minimalCorrectionMeaning"
+      ],
+      "previousPartialCriticalFlags": [
+        "meaningConstraintViolation"
+      ],
+      "fullSevenDimensionGradeFrozen": false,
+      "dropInControlExpectedGradeReady": false,
+      "reviewIssues": [
+        "Allsevendimensionexpectations andnonselfAIqualification remainunfrozen.",
+        "Existingcompiler hardcodes meaningUsage=appropriate;agreement-focusedgrammartargetneedsaseparateoriginal-labelreview soanegation-onlyexpectedfailmaybecross-contaminated."
+      ]
+    },
+    {
+      "id": "public-false-source-attribution",
+      "sourceIds": [
+        "verbs",
+        "agreement"
+      ],
+      "currentGexKnownRecordIds": [
+        "exposure-f655fe6eb116192b500c5b98"
+      ],
+      "currentGexExposureRuleRequiredGrade": "fail",
+      "currentGexKnownExposureLeakRequired": true,
+      "exposureConclusionScope": "Currentfrozenfresh-referencecomparisonrule;notanEnglishgrammarscore.",
+      "previousPartialFailureDimensions": [
+        "sourceClaimHonesty"
+      ],
+      "previousPartialCriticalFlags": [
+        "inventedEvidence"
+      ],
+      "fullSevenDimensionGradeFrozen": false,
+      "dropInControlExpectedGradeReady": false,
+      "reviewIssues": [
+        "Allsevendimensionexpectations andnonselfAIqualification remainunfrozen."
+      ]
+    },
+    {
+      "id": "public-missing-reply-message",
+      "sourceIds": [
+        "verbs",
+        "ellipsis"
+      ],
+      "currentGexKnownRecordIds": [
+        "exposure-8f0412fc40e6d896883b3fa0"
+      ],
+      "currentGexExposureRuleRequiredGrade": "fail",
+      "currentGexKnownExposureLeakRequired": true,
+      "exposureConclusionScope": "Currentfrozenfresh-referencecomparisonrule;notanEnglishgrammarscore.",
+      "previousPartialFailureDimensions": [
+        "ambiguityHandling"
+      ],
+      "previousPartialCriticalFlags": [
+        "forcedCertainty"
+      ],
+      "fullSevenDimensionGradeFrozen": false,
+      "dropInControlExpectedGradeReady": false,
+      "reviewIssues": [
+        "Allsevendimensionexpectations andnonselfAIqualification remainunfrozen.",
+        "Existingcompiler hardcodes contextNeeded=none whilecriterion assertsanunprovidedrepairevent;original-label/ambiguitydimensions needjointreview,notoneassumedfailure."
+      ]
+    }
+  ],
+  "blockingCases": [
+    {
+      "goldCaseId": "G12",
+      "witnessId": "N04",
+      "sourceIds": [
+        "quiet-cambridge",
+        "quiet-mw",
+        "manner"
+      ],
+      "reasonCodes": [
+        "flat-adverb-attested",
+        "register-not-declared",
+        "exact-speaking-collocation-not-established"
+      ],
+      "conclusion": "Do not certifycategoricalgrammar-error/allpasscalibrationgoldwithoutdeclaredvariety/registerandcase-specificreview. AttestedquietadverbdoesnotproveSheisspeakingquietnaturalineverycontext.",
+      "currentWitnessObservation": "CurrentN04feedbackisgenericanddoesnotassertanis-speakingedit. Itsgrammar/target/correctionallpassreference stilldependsontheunresolvedcategoricallabel.",
+      "oldGoldRowSha256": "d7ac554cbb947a2cc05a8b94fa2c80d4e6c6897effec55557e00ae65ed605265",
+      "oldWitnessRowSha256": "efe41a69d8ad042d00f5167e5c285afbb3ae0254b5fb239504b6e5445809db2c"
+    }
+  ],
+  "unresolvedControlDimensionIssues": [
+    "public-negation-loss",
+    "public-missing-reply-message"
+  ],
+  "allSevenDimensionControlGradesFrozen": false,
+  "qualifiedCalibrationGoldReady": false,
+  "actualReferenceControlsQualified": false,
+  "actualEnglishQualityMeasured": false,
+  "sourceAuditIsSameAuthorCodexProposal": true,
+  "humanReviewed": false,
+  "oldGoldOrScoresModified": false,
+  "actualProviderCalls": 0,
+  "actualJudgeCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "liveDispatchAuthorized": false
+}

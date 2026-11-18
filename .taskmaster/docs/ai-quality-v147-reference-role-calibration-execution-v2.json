@@ -1,0 +1,110 @@
+{
+  "protocol": "ai-quality-v147-reference-role-calibration-execution-v2",
+  "phase": "phase187",
+  "status": "reference-role-calibration-boundary-disagreement-held",
+  "parentTaskId": 24,
+  "activeSubtaskId": "24.3",
+  "supportingSubtaskId": "34.4",
+  "repairedPolicyBoundaryIds": [
+    "NO_REPAIR_NATURAL_KEEP",
+    "NO_REPAIR_ERROR_OR_UNKNOWN_MESSAGE"
+  ],
+  "policyVersion": 3,
+  "policyHash": "8952946a24a6788081c11aaba4719eed6e100c737a4a34b7cecc97920b731dc1",
+  "preparedFile": "outputs/ai-quality-v147-implementation-20261106/phase187/prepared-continuation.json",
+  "preparedSha256": "758f747e13c62fcbee4b61e857c6e6d4d90bbf51e7c2bf678545febeea732dd5",
+  "basePreparedFile": "outputs/ai-quality-v147-implementation-20261106/phase187/prepared-calibration.json",
+  "basePreparedSha256": "cbf04fd1c49903a8760508b9f3813ecb4a4c32beccfdbcda4aaab57da416b3a5",
+  "scopeFiles": [
+    ".taskmaster/docs/ai-quality-v147-reference-role-calibration-scope-v2.json",
+    ".taskmaster/docs/ai-quality-v147-reference-role-calibration-scope-v3.json"
+  ],
+  "runtimeTerminalFiles": [
+    "outputs/ai-quality-v147-reference-role-calibration-runtime-20261112/terminal.json",
+    "outputs/ai-quality-v147-reference-role-continuation-runtime-20261112/terminal.json"
+  ],
+  "runtimeTerminalSha256": [
+    "ae696a567287183280bea10baa85626460184df4deecf4f78e0d37c1eb30a924",
+    "c4c25e6dd835485bd37e04c579cfebaa5bad05126c0f9f11f82f214a8c201c9a"
+  ],
+  "actualProviderCalls": 6,
+  "actualCountCalls": 6,
+  "actualKeyReads": 2,
+  "firstCountReused": 1,
+  "firstCountInputTokens": 28387,
+  "exactGradeMatches": 59,
+  "judgments": 60,
+  "legacyControlAndAnchorJudgments": 42,
+  "newBoundaryJudgments": 18,
+  "coreBoundaryJudgmentsSupported": 18,
+  "criticalMisses": 0,
+  "strictRoleCalibrationPassed": false,
+  "referenceRoleQualified": false,
+  "referencesQualified": 0,
+  "mainDispatchAuthorized": false,
+  "englishTruthCertified": false,
+  "humanReviewPerformed": false,
+  "freshHoldout": false,
+  "historicalEvidenceModified": false,
+  "disagreement": {
+    "key": "gpt-6-astra/control-first",
+    "model": "gpt-6-astra",
+    "layout": "control-first",
+    "name": "omitted-supported-completion",
+    "itemId": "item-1fa6e76212bc63808c0d260a",
+    "grade": {
+      "assignmentAlignment": "pass",
+      "inputAndTargetValidity": "pass",
+      "originalLabelSupport": "pass",
+      "minimalCorrectionMeaning": "fail",
+      "sourceClaimHonesty": "pass",
+      "ambiguityHandling": "fail",
+      "exposureAndFamilyCompliance": "fail",
+      "criticalErrors": {
+        "wrongTarget": false,
+        "inventedEvidence": false,
+        "meaningConstraintViolation": false,
+        "forcedCertainty": false,
+        "knownExposureLeak": true
+      }
+    },
+    "shortEvidenceSummary": "Music is a fragment, but the bound Korean supports 'I listen to music every day.' Withholding that needed completion is unjustified despite the accurate criterion. No offered correction violates meaning. Inventory base 80 establishes exact exposure.",
+    "matched": false,
+    "mismatches": [
+      {
+        "dimension": "ambiguityHandling",
+        "expected": "pass",
+        "actual": "fail"
+      }
+    ],
+    "resolution": "No retrospective expectation or score change. Current policy says needless refusal can fail ambiguityHandling; the prospective pass expectation did not distinguish omission from ambiguity clearly enough. Keep the one-cell disagreement and clarify this boundary before role admission. All models still identify the supported completion as omitted."
+  },
+  "totalInputTokens": 170932,
+  "totalOutputTokens": 12299,
+  "combinedUsedUpperMicros": "1545707",
+  "countProvisionRetainedMicros": "210000",
+  "conditionalRemainingMicros": "1213206",
+  "fundingSettlementFile": "outputs/ai-quality-v147-implementation-20261106/phase187/funding-final.json",
+  "fundingSettlementSha256": "b71a7aca9bdac638a201318b12f4d7aa2476bddb076c10c3297128067ccff183",
+  "ledgerFile": ".taskmaster/docs/ai-quality-v147-evaluation-budget-ledger-v3.json",
+  "ledgerSha256": "a5fe335a82f16323ae1e8ac55c5c59376e66d8d5e0f6cb6fb490a3d21a5182f7",
+  "existingAdditionalGrantCapMicros": "35000000",
+  "collectorChecks": 7,
+  "continuationChecks": 2,
+  "checkExitCodes": [
+    0,
+    0
+  ],
+  "lintExitCode": 0,
+  "productCodeChanged": false,
+  "productBuildRerun": false,
+  "productionWrites": 0,
+  "deployed": false,
+  "changedImplementationFiles": [
+    ".taskmaster/scripts/ai-quality-v147-reference-role-calibration-v2.mjs",
+    ".taskmaster/scripts/ai-quality-v147-reference-role-collector-v2.mjs",
+    ".taskmaster/scripts/ai-quality-v147-reference-role-collector-v3.mjs",
+    ".taskmaster/scripts/test-ai-quality-v147-reference-role-calibration-v2.mjs",
+    ".taskmaster/scripts/test-ai-quality-v147-reference-role-collector-v3.mjs"
+  ]
+}

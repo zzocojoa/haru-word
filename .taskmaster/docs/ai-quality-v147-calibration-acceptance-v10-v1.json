@@ -1,0 +1,114 @@
+{
+  "protocol": "ai-quality-v147-calibration-acceptance-v10-v1",
+  "phase": "phase184",
+  "status": "declared-v10-calibration-accepted-pilot-references-held",
+  "calibrationAccepted": true,
+  "qualificationScope": "declared-AI-only-v10-public-calibration;maximum-four-members",
+  "sourceWitnessesQualified": 12,
+  "logicalJudgments": 72,
+  "gradeMatches": 72,
+  "axesMatches": 72,
+  "modelLayoutCells": [
+    {
+      "model": "gpt-6.1-sol",
+      "layout": "input-first",
+      "denominator": 12,
+      "matches": 12,
+      "axesMatches": 12,
+      "criticalMisses": 0,
+      "extraCriticalFlags": 0
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "layout": "feedback-first",
+      "denominator": 12,
+      "matches": 12,
+      "axesMatches": 12,
+      "criticalMisses": 0,
+      "extraCriticalFlags": 0
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "layout": "input-first",
+      "denominator": 12,
+      "matches": 12,
+      "axesMatches": 12,
+      "criticalMisses": 0,
+      "extraCriticalFlags": 0
+    },
+    {
+      "model": "gpt-6.1-terra",
+      "layout": "feedback-first",
+      "denominator": 12,
+      "matches": 12,
+      "axesMatches": 12,
+      "criticalMisses": 0,
+      "extraCriticalFlags": 0
+    },
+    {
+      "model": "gpt-6-astra",
+      "layout": "input-first",
+      "denominator": 12,
+      "matches": 12,
+      "axesMatches": 12,
+      "criticalMisses": 0,
+      "extraCriticalFlags": 0
+    },
+    {
+      "model": "gpt-6-astra",
+      "layout": "feedback-first",
+      "denominator": 12,
+      "matches": 12,
+      "axesMatches": 12,
+      "criticalMisses": 0,
+      "extraCriticalFlags": 0
+    }
+  ],
+  "maximumCalibratedGroupItems": 4,
+  "actuallyObservedCalibrationGroupItems": [
+    4
+  ],
+  "lowerOccupancyGeneralEquivalenceCertified": false,
+  "individualGroupedEquivalenceEstablished": false,
+  "sourceQualificationOccurredAfterMeasurement": true,
+  "oldPhysicalEvidenceRescored": false,
+  "originalExecutionRecordUnchanged": true,
+  "newProviderCalls": 0,
+  "newCountCalls": 0,
+  "newKeyReads": 0,
+  "budgetChanged": false,
+  "referencesQualified": 0,
+  "formalPilotGenerations": 0,
+  "formalPilotGrades": 0,
+  "freshHoldout": false,
+  "englishTruthCertified": false,
+  "mainDispatchAuthorized": false,
+  "acceptanceFile": "outputs/ai-quality-v147-implementation-20261106/phase184/calibration-acceptance.json",
+  "acceptanceSha256": "88500efd809d290c6d5bff8830b819a11ec7dd0154e1432e6e04574337cc1559",
+  "preparedFile": "outputs/ai-quality-v147-implementation-20261106/phase184/prepared-calibrated-groups-v10.json",
+  "preparedSha256": "035232713a659b17fcd9e6cd6aef08a55d25a0b9f8acdd131cf1879d534ff366",
+  "syntheticLogicalSlots": 1440,
+  "syntheticAvailableSlots": 1260,
+  "syntheticUnavailableSlots": 180,
+  "syntheticPhysicalRequests": 324,
+  "actualAppLogicalSlots": 24,
+  "actualAppPhysicalRequests": 12,
+  "fullPilotScopePreserved": true,
+  "oneCollectorInvocationLimit": 180,
+  "fullPilotRequiresFundedWaves": true,
+  "unitChecks": 5,
+  "unitExitCode": 0,
+  "moduleFile": ".taskmaster/scripts/ai-quality-v147-calibration-acceptance-v10-v1.mjs",
+  "testFile": ".taskmaster/scripts/test-ai-quality-v147-calibration-acceptance-v10-v1.mjs",
+  "ledgerSha256": "a5fe335a82f16323ae1e8ac55c5c59376e66d8d5e0f6cb6fb490a3d21a5182f7",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-calibration-acceptance-v10-v1.mjs": "af4b9460d967b633c457b0ac6367ee7d453bfaffffa1a487ce53b7340c444570",
+    ".taskmaster/scripts/test-ai-quality-v147-calibration-acceptance-v10-v1.mjs": "7128eac1101f0a88c74326018c201d29d74a10d6941f5f4556feb5510036c3fb"
+  },
+  "remaining": [
+    "qualification of all sixty current pilot references",
+    "fresh fixed generation/review scopes and funding within authorized cap",
+    "new-family confirmation and 1% risk design",
+    "AI-only understanding/transfer proxy and real production operation/day1/day7 follow-up"
+  ]
+}

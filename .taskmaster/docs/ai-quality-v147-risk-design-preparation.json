@@ -1,0 +1,92 @@
+{
+  "atUtc": "2026-11-06T05:43:15.026666+00:00",
+  "task": 34,
+  "checks": [
+    {
+      "name": "risk-node-v22.23.4-final2",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-risk-design.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "log": "risk-node-v22.23.4-final2.log",
+      "sha256": "0299b7361e741604951bfb952dd8d2e3ae56962a89e4bd0eef7f293f79be23fc",
+      "evidenceDirectory": "risk-node-v22.23.4-final2"
+    },
+    {
+      "name": "risk-node-v24.22.1-final2",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-risk-design.mjs"
+      ],
+      "cwd": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "log": "risk-node-v24.22.1-final2.log",
+      "sha256": "3ddf6cfc7530af66b93f398563df9fb51ea5fa5f21ea62c6b961b8920b744d61",
+      "evidenceDirectory": "risk-node-v24.22.1-final2"
+    }
+  ],
+  "lint": {
+    "exitCode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "log": "risk-and-verifier-lint-final2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "command": [
+      "node",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-risk-design.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-risk-design.mjs",
+      ".taskmaster/scripts/verify-ai-quality-v147-execution.mjs"
+    ]
+  },
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-risk-design.mjs": "57a161dd456684e3b4b7c743ebbcb447b61f70a99e75fd640a57fb524979d9c6",
+    ".taskmaster/scripts/test-ai-quality-v147-risk-design.mjs": "8bab6fe07bd9d7f6f8e938f0aa4b260d78ac3ed8fe6bade20ab74ee1f305d647",
+    ".taskmaster/evaluation/ai-quality-v147/risk-design-reference.json": "13277a523a22b9e675deede1edbff0089cf2a23dae706eb0c496ce862159c0c7",
+    ".taskmaster/docs/ai-quality-v147-risk-design-draft.json": "f7eb306d340e791cf7c69ad84cce060b466278e6c612e849f721a09e57d74d1c",
+    "docs/AI_QUALITY_V147_RISK_DESIGN_DRAFT_20261106.md": "3e1bdad390aa778765db7393fe9e7e518dc331c42c0ddc9f925dfbf123820944"
+  },
+  "sourceBindings": {
+    ".taskmaster/scripts/ai-quality-v147-report.mjs": "dc2645e908a8b3dc2db0f01788d468ddc56b4fe959b7105e23d545160f0d0bad",
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/docs/ai-quality-v147-evaluation-design.json": "8f1946ff213b363024311dd6d2b57988c8afc3357640009243b9680ebdd47d9d",
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/docs/ai-quality-v147-decision-contract-v4.json": "823b5c5a14c39ff8cfa423bb83ec3b22b8bebf839ce7e19e0143453f7ba15d79"
+  },
+  "proofBindings": {
+    "risk-node-v22.23.4-final2/risk-options.json": "f5edbe36ae4755d60f09dcfb1269cd7b98463232a44cc848f7708b33f9deffbe",
+    "risk-node-v22.23.4-final2/independent-risk-comparison.json": "07aa9041e1f11a4849fb6cd179d9e71e960104dc094637c4b33cf30046a0ee97",
+    "risk-node-v24.22.1-final2/risk-options.json": "f5edbe36ae4755d60f09dcfb1269cd7b98463232a44cc848f7708b33f9deffbe",
+    "risk-node-v24.22.1-final2/independent-risk-comparison.json": "07aa9041e1f11a4849fb6cd179d9e71e960104dc094637c4b33cf30046a0ee97"
+  },
+  "actualProviderCalls": 0,
+  "actualPaidApprovalUsd": 0,
+  "riskDesignApproved": false,
+  "sampleJustified": false,
+  "task34Complete": false,
+  "independentQualifiedReview": false,
+  "referenceSamples": 54,
+  "referencePairs": 56,
+  "referenceScipyVersion": "1.16.3",
+  "boundStatements": 114,
+  "status": "arithmetic verified; risk design still incomplete draft",
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase12/risk-design-checks.json",
+  "proofSha256": "c5da5a97b7435bbdf4ba2c4e422ca76a5ef2ebce921b408ef81e2c042a091c7a",
+  "limitations": [
+    "No independent qualified English/statistical review or owner risk approval. Current Codex is same-author implementation agent.",
+    "Sensitivity N is conditional on zero observed critical events and iid representative family sampling; actual family feasibility and paired effect/precision remain unproven.",
+    "Three sensitivity options are not selected operating limits or a paid budget. Prices,token bounds,reviewer capacity/fees and approvals remain unset.",
+    "All test metadata is fabricated arithmetic. No new corpus,AI responses,keys or learner data accessed."
+  ]
+}

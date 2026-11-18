@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "stage": "partial-lexical-evidence-and-usage-counterevidence",
+  "recordedAtUtc": "2026-11-07T03:58:32.564335+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "sourceCount": 8,
+  "nativeEditorialCaptures": 4,
+  "webExcerptOnlyCaptures": 4,
+  "sources": [
+    {
+      "id": "ask",
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/ask",
+      "url": "https://dictionary.cambridge.org/dictionary/english/ask",
+      "status": 200,
+      "checkedAt": "2026-11-07T03:53:40.120980+00:00",
+      "publisher": "Cambridge University Press & Assessment",
+      "method": "unauthenticated public HTTPS urllib",
+      "selector": ".entry-body",
+      "rawPageSha256": "544824d2f2ac21a4ae4d3f750610c575b5bbd3d048a72f0dea3b320011659e4f",
+      "contentSha256": "d5635fab2f1bd16920cc119a9decc6fc105b02292da867ee49d1ec85a3668b8d",
+      "contentHashScope": "Normalized selected editorial entry/body;not excerpt-only andnot a claim aboutallusages.",
+      "contentTextLength": 9400,
+      "excerpts": [
+        "to put a question to someone, or to request an answer from someone"
+      ],
+      "excerptWords": 13,
+      "excerptSha256": "e61db9cce9d82bc9d3ff63acf1fc7a1f265089dc7694c97f2e7976ef8fdae76d",
+      "allExcerptsFound": true,
+      "observedLabels": {
+        "verb": true,
+        "I or T": true
+      },
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036"
+    },
+    {
+      "id": "book",
+      "requestedUrl": "https://dictionary.cambridge.org/us/dictionary/english/book/",
+      "url": "https://dictionary.cambridge.org/us/dictionary/english/book/",
+      "status": null,
+      "retrievalStatus": "read-via-official-web-tool-content",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "publisher": "Cambridge University Press & Assessment",
+      "method": "web open/search;only verified quoted excerpts persisted",
+      "selector": "Official dictionary search extraction read;native selection didnotcontainbothexcerpts;not claimed fullHTMLcapture.",
+      "rawPageSha256": null,
+      "contentSha256": "35189650d0686fde78fdc28978ed97ba2017760d1872c3270fe4ab0aec113538",
+      "contentHashScope": "Checked quoted excerpt text only;not fullpageHTML/editorialbody.",
+      "contentTextLength": 98,
+      "excerpts": [
+        "a written text",
+        "to arrange to have a seat, room, performer, etc. at a particular time in the future"
+      ],
+      "excerptWords": 19,
+      "excerptSha256": "35189650d0686fde78fdc28978ed97ba2017760d1872c3270fe4ab0aec113538",
+      "allExcerptsFound": true,
+      "observedLabels": {
+        "noun": true,
+        "verb": true
+      },
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-web-excerpt-capture.json",
+      "captureSha256": "5451f0fd0e3351b0ea91af3890ab357798db3375406bfe0ac9a476e888f98961"
+    },
+    {
+      "id": "help",
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/help",
+      "url": "https://dictionary.cambridge.org/dictionary/english/help",
+      "status": 200,
+      "checkedAt": "2026-11-07T03:53:40.121979+00:00",
+      "publisher": "Cambridge University Press & Assessment",
+      "method": "unauthenticated public HTTPS urllib",
+      "selector": ".entry-body",
+      "rawPageSha256": "a3910354f583dd12e611b1d3cf21c037910bf433ffbed83e94d2839acc6c5196",
+      "contentSha256": "f6c75df71f18acbbbf3c7efb3320bcc0914fc7f016c5e3515fe7097138d818bd",
+      "contentHashScope": "Normalized selected editorial entry/body;not excerpt-only andnot a claim aboutallusages.",
+      "contentTextLength": 8151,
+      "excerpts": [
+        "the act of helping another person"
+      ],
+      "excerptWords": 6,
+      "excerptSha256": "a841a4063568cb5f48a93df52f5ce227a687eb4a8bb769a79597a85370cca171",
+      "allExcerptsFound": true,
+      "observedLabels": {
+        "noun": true,
+        "verb": true
+      },
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036"
+    },
+    {
+      "id": "careful",
+      "requestedUrl": "https://www.merriam-webster.com/dictionary/careful",
+      "url": "https://www.merriam-webster.com/dictionary/careful",
+      "status": null,
+      "retrievalStatus": "read-via-official-web-tool-content",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "publisher": "Merriam-Webster",
+      "method": "web open/search;only verified quoted excerpts persisted",
+      "selector": "Official web open dictionary entry read;nativeHTTP403 retained.",
+      "rawPageSha256": null,
+      "contentSha256": "2dc95a0231ab1dd27f9249875d690b1aaef3c3f9dd0b9057bbcb207181ecf8b4",
+      "contentHashScope": "Checked quoted excerpt text only;not fullpageHTML/editorialbody.",
+      "contentTextLength": 44,
+      "excerpts": [
+        "marked by wary caution or prudence",
+        "carefully"
+      ],
+      "excerptWords": 7,
+      "excerptSha256": "2dc95a0231ab1dd27f9249875d690b1aaef3c3f9dd0b9057bbcb207181ecf8b4",
+      "allExcerptsFound": true,
+      "observedLabels": {
+        "adjective": true,
+        "adverb": true
+      },
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-web-excerpt-capture.json",
+      "captureSha256": "5451f0fd0e3351b0ea91af3890ab357798db3375406bfe0ac9a476e888f98961"
+    },
+    {
+      "id": "quiet-cambridge",
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/quiet",
+      "url": "https://dictionary.cambridge.org/dictionary/english/quiet",
+      "status": 200,
+      "checkedAt": "2026-11-07T03:53:40.424334+00:00",
+      "publisher": "Cambridge University Press & Assessment",
+      "method": "unauthenticated public HTTPS urllib",
+      "selector": ".entry-body",
+      "rawPageSha256": "0e5273e6fcc45f13d3f176e6aeacb24ef5b49a0fef13b60d7dede3c0fb4b26d4",
+      "contentSha256": "5dd58f66cb2bbd778d1134c48bfbc4835b7849b020e53071222ecb691d4c2931",
+      "contentHashScope": "Normalized selected editorial entry/body;not excerpt-only andnot a claim aboutallusages.",
+      "contentTextLength": 4538,
+      "excerpts": [
+        "making very little noise"
+      ],
+      "excerptWords": 4,
+      "excerptSha256": "267c8f4187099c4bfdcd62430f98abd3bc5324d51d9c76771f986ba3686675cb",
+      "allExcerptsFound": true,
+      "observedLabels": {
+        "adjective": true
+      },
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036"
+    },
+    {
+      "id": "quiet-mw",
+      "requestedUrl": "https://www.merriam-webster.com/dictionary/quiet",
+      "url": "https://www.merriam-webster.com/dictionary/quiet",
+      "status": null,
+      "retrievalStatus": "read-via-official-web-tool-content",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "publisher": "Merriam-Webster",
+      "method": "web open/search;only verified quoted excerpts persisted",
+      "selector": "Official web open entry3of4 adverb definitionandeditorialexample read;nativeHTTP403 retained. Notrecentauto-collectedwebexamples.",
+      "rawPageSha256": null,
+      "contentSha256": "f518b5105cf4140cf2b4d4ce9dc5e9d100f22da59ef755235aa6c094c60fd236",
+      "contentHashScope": "Checked quoted excerpt text only;not fullpageHTML/editorialbody.",
+      "contentTextLength": 43,
+      "excerpts": [
+        "in a quiet manner",
+        "an engine that runs quiet"
+      ],
+      "excerptWords": 9,
+      "excerptSha256": "f518b5105cf4140cf2b4d4ce9dc5e9d100f22da59ef755235aa6c094c60fd236",
+      "allExcerptsFound": true,
+      "observedLabels": {
+        "adverb": true
+      },
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-web-excerpt-capture.json",
+      "captureSha256": "5451f0fd0e3351b0ea91af3890ab357798db3375406bfe0ac9a476e888f98961"
+    },
+    {
+      "id": "skillfully",
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/skillfully",
+      "url": "https://dictionary.cambridge.org/dictionary/english/skillfully",
+      "status": 200,
+      "checkedAt": "2026-11-07T03:53:40.946206+00:00",
+      "publisher": "Cambridge University Press & Assessment",
+      "method": "unauthenticated public HTTPS urllib",
+      "selector": ".entry-body",
+      "rawPageSha256": "1dfda2843cf539665b16392a354a3337fc79bdb1737c3bec1c1cb884a2bbe16e",
+      "contentSha256": "8cd3a7a1286d3eccdfa165a03843182433f709796da127b8c839340cff3142d2",
+      "contentHashScope": "Normalized selected editorial entry/body;not excerpt-only andnot a claim aboutallusages.",
+      "contentTextLength": 535,
+      "excerpts": [
+        "US spelling of skilfully"
+      ],
+      "excerptWords": 4,
+      "excerptSha256": "5ea1dcd5ed741f3b69b06ab38204a2fcbe47b1272ace45cc3f5d6037736a14d3",
+      "allExcerptsFound": true,
+      "observedLabels": {
+        "adverb": true
+      },
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036"
+    },
+    {
+      "id": "manner",
+      "requestedUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "status": null,
+      "retrievalStatus": "read-via-official-web-tool-content",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "publisher": "British Council",
+      "method": "web open/search;only verified quoted excerpts persisted",
+      "selector": "Official web open/search editorial lessontext read;communitycomments excluded;twonativetimeouts retained.",
+      "rawPageSha256": null,
+      "contentSha256": "741470d49996724dfc03c9e8ea53c100ad34a719855aa2d3025012858319a068",
+      "contentHashScope": "Checked quoted excerpt text only;not fullpageHTML/editorialbody.",
+      "contentTextLength": 78,
+      "excerpts": [
+        "Adverbs of manner are usually formed from adjectives by adding",
+        "quiet > quietly"
+      ],
+      "excerptWords": 13,
+      "excerptSha256": "741470d49996724dfc03c9e8ea53c100ad34a719855aa2d3025012858319a068",
+      "allExcerptsFound": true,
+      "observedLabels": {},
+      "fullCopyrightedPagePersisted": false,
+      "actualEnglishTruthCertified": false,
+      "captureFile": "phase39/lexical-web-excerpt-capture.json",
+      "captureSha256": "5451f0fd0e3351b0ea91af3890ab357798db3375406bfe0ac9a476e888f98961"
+    }
+  ],
+  "failedAttemptsPreserved": [
+    {
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036",
+      "id": "book",
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/book",
+      "checkedAt": "2026-11-07T03:53:40.121979+00:00",
+      "fetched": false,
+      "failure": "AssertionError: Selected excerpt absent"
+    },
+    {
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036",
+      "id": "careful",
+      "requestedUrl": "https://www.merriam-webster.com/dictionary/careful",
+      "checkedAt": "2026-11-07T03:53:40.121979+00:00",
+      "fetched": false,
+      "failure": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036",
+      "id": "quiet-mw",
+      "requestedUrl": "https://www.merriam-webster.com/dictionary/quiet",
+      "checkedAt": "2026-11-07T03:53:40.758971+00:00",
+      "fetched": false,
+      "failure": "HTTPError: HTTP Error 403: Forbidden"
+    },
+    {
+      "captureFile": "phase39/lexical-fetch-first.json",
+      "captureSha256": "29f9deed3c0875c0a4313f84de9b14d1f35c61713ef1751363d0ce019da12036",
+      "id": "manner",
+      "requestedUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "checkedAt": "2026-11-07T03:53:40.946206+00:00",
+      "fetched": false,
+      "failure": "TimeoutError: The read operation timed out"
+    },
+    {
+      "captureFile": "phase39/lexical-fetch-retry.json",
+      "captureSha256": "de1ca6da3c299b7c503230a612afe77c3a939ba4de5d4be570ec3b8084f04fe0",
+      "id": "book",
+      "requestedUrl": "https://dictionary.cambridge.org/dictionary/english/book",
+      "checkedAt": "2026-11-07T03:56:07.095531+00:00",
+      "fetched": false,
+      "failure": "AssertionError: Selected excerpt absent"
+    },
+    {
+      "captureFile": "phase39/lexical-fetch-retry.json",
+      "captureSha256": "de1ca6da3c299b7c503230a612afe77c3a939ba4de5d4be570ec3b8084f04fe0",
+      "id": "manner",
+      "requestedUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "checkedAt": "2026-11-07T03:56:07.095531+00:00",
+      "fetched": false,
+      "failure": "TimeoutError: The read operation timed out"
+    }
+  ],
+  "wordBindings": [
+    {
+      "id": "ask-question",
+      "lemma": "ask",
+      "partOfSpeech": "verb",
+      "senseKey": "question-seeking",
+      "sourceIds": [
+        "ask"
+      ],
+      "publicGoldCaseIds": [
+        "G01"
+      ],
+      "targetSummary": "Use ask as a verb in its question-seeking sense;do not require an object merelyfromthewrittenform.",
+      "supportedAtomicClaim": "Dictionary marks question-seeking ask asintransitive/transitive.",
+      "notProven": "Pragmatic appropriateness ofeverybareutterance oractuallearnerintent."
+    },
+    {
+      "id": "book-reservation",
+      "lemma": "book",
+      "partOfSpeech": "verb",
+      "senseKey": "arrange-reservation",
+      "sourceIds": [
+        "book"
+      ],
+      "publicGoldCaseIds": [
+        "G06"
+      ],
+      "targetSummary": "Use book as a verb forarrangingareservation;thehomographicnounalone doesnot satisfythisverbal target.",
+      "supportedAtomicClaim": "Dictionary separates book nounTEXT fromverbARRANGE.",
+      "notProven": "Sentence-widegrammar/appropriateness oractualuseofthesense fromspellingalone."
+    },
+    {
+      "id": "help-assistance",
+      "lemma": "help",
+      "partOfSpeech": "noun",
+      "senseKey": "act-of-helping",
+      "sourceIds": [
+        "help"
+      ],
+      "publicGoldCaseIds": [
+        "G11"
+      ],
+      "targetSummary": "Use help as a noun meaningassistance;theexistenceofaverb entrydoesnotmakethisoccurrenceaverb.",
+      "supportedAtomicClaim": "Dictionary listsuncountable help asanactofhelping,alongsideverbuses.",
+      "notProven": "Syntacticfunctionofeveryoccurrence orsentence-widetruthfromdictionarymembership."
+    }
+  ],
+  "registerPolicyChosen": false,
+  "allWordDomainSourcesPrepared": false,
+  "actualReferenceControlsQualified": false,
+  "actualEnglishQualityMeasured": false,
+  "actualJudgeCalls": 0,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "liveDispatchAuthorized": false
+}

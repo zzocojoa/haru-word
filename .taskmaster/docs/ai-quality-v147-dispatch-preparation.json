@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 18,
+  "recordedAtUtc": "2026-11-06T04:07:19.093379+00:00",
+  "status": "offline one-dispatch and captured/synthetic-receipt recovery preparation verified",
+  "liveEvaluationSupported": false,
+  "actualProviderCalls": 0,
+  "actualPaidApprovalUsd": 0,
+  "actualLiveReceiptAuthenticated": false,
+  "fixedSyntheticWireOnly": true,
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-dispatch.mjs": "ae295d08a14c60dec86fbe46ab9e582c6fa1ba8c6a21389d68e177a0b5f1b31b",
+    ".taskmaster/scripts/test-ai-quality-v147-dispatch.mjs": "9764822cfa752b28d31092ba22f2f4d474b4c658af2904498654a62bd9e7750b"
+  },
+  "dependencySha256": {
+    ".taskmaster/scripts/ai-quality-v147-budget.mjs": "968aeb35b5abba41cf78de5d64fcc74167029f27be57106c2a112e5b832cfbb8",
+    ".taskmaster/scripts/ai-quality-v147-budget-store.mjs": "4b98eff915f033a6220154a83d01c9389041ec6c315fe63b718f90c78069d9c4",
+    ".taskmaster/scripts/ai-quality-v147-process.mjs": "030d406ffbbfcab4e13ccd6e8f31b66459be7e98a993d44b4d263c0c5c7110e8"
+  },
+  "checks": [
+    {
+      "name": "dispatch",
+      "version": "node-v22.23.4",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-dispatch.mjs"
+      ],
+      "exitCode": 0,
+      "passed": 13,
+      "failed": 0,
+      "log": "dispatch-node-v22.23.4-final2.log",
+      "sha256": "a0c734e5988e52cf8a76e2504ecdfd030b60945074a616256d44fd595c36a790",
+      "evidenceDirectory": "dispatch-node-v22.23.4-final2",
+      "originalLog": "dispatch-node-v22.23.4-final2.log",
+      "originalLogSha256": "a0c734e5988e52cf8a76e2504ecdfd030b60945074a616256d44fd595c36a790",
+      "processBoundaryProof": "dispatch-node-v22.23.4-final2/process-boundaries.json",
+      "raceProof": "dispatch-node-v22.23.4-final2/dispatch-process-race.json",
+      "processBoundarySha256": "9ac6b0caecd73bcdee44b3ba81f5d0fa364379fb85394af89a25fa13623d6b95",
+      "raceSha256": "a96b230923cb3b64fa3cf418a4e1484c020ae3a09c9da33daa17485fb3dc8fd0"
+    },
+    {
+      "name": "dispatch",
+      "version": "node-v24.22.1",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        ".taskmaster/scripts/test-ai-quality-v147-dispatch.mjs"
+      ],
+      "exitCode": 0,
+      "passed": 13,
+      "failed": 0,
+      "log": "dispatch-node-v24.22.1-final2.log",
+      "sha256": "7ebab61ac84199bdd4c60d5740906d6b994aeb132412da95f43dcb52c17d738f",
+      "evidenceDirectory": "dispatch-node-v24.22.1-final2",
+      "originalLog": "dispatch-node-v24.22.1-final2.log",
+      "originalLogSha256": "7ebab61ac84199bdd4c60d5740906d6b994aeb132412da95f43dcb52c17d738f",
+      "processBoundaryProof": "dispatch-node-v24.22.1-final2/process-boundaries.json",
+      "raceProof": "dispatch-node-v24.22.1-final2/dispatch-process-race.json",
+      "processBoundarySha256": "0d070e7eb27a9e33a407b6ced98de26f0bdb1567d9d7af8ddf0cd219a10a937a",
+      "raceSha256": "f1481eafb218af58039c7fbb20059dd39323dce4e5782cf14488e4c31ff93942"
+    }
+  ],
+  "lint": {
+    "command": [
+      "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+      "node_modules/eslint/bin/eslint.js",
+      "--no-ignore",
+      ".taskmaster/scripts/ai-quality-v147-process.mjs",
+      ".taskmaster/scripts/ai-quality-v147-budget.mjs",
+      ".taskmaster/scripts/ai-quality-v147-budget-store.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-budget.mjs",
+      ".taskmaster/scripts/ai-quality-v147-dispatch.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-dispatch.mjs",
+      ".taskmaster/scripts/ai-quality-v147-recovery.mjs",
+      ".taskmaster/scripts/test-ai-quality-v147-recovery.mjs"
+    ],
+    "exitCode": 0,
+    "warnings": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "log": "new-tools-explicit-lint.log"
+  },
+  "proofFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase9/dispatch-checks.json",
+  "proofSha256": "b0016500d500f738da7e13fecd8f7ee24511d4b73f1d504c88519c18d4ddf809",
+  "requestIdentity": "run/spec/source version and phase,target model,case,role,repetition; deterministic same UUID",
+  "dispatchOrdering": "strict body/model/output-cap bind -> durable consumed transition -> at most one synthetic transport -> fsynced checksummed capture -> durable settlement",
+  "unknownPolicy": "consumed means possibly sent; retain maximum, never resend. No-transport recovery of same bound saved capture or local synthetic receipt. Terminal unchanged; recovery idempotent.",
+  "processStopsPerNodeRuntime": 4,
+  "realProcessRacePerRuntime": 1,
+  "limitations": [
+    "No network/credential adapter for real evaluation. Evaluation mode is rejected before store/callback.",
+    "Same-author synthetic receipts are procedural fixtures, not proof of a real authenticated provider/server receipt. T24 must bind trusted receipt retrieval and frozen approvals.",
+    "Only fixed synthetic wire bodies are checked here. T16/T24 must bind derived judge templates to generated results and the final actual wire bytes.",
+    "T19 strict synthetic Windows recovery is now verified separately; T22 integrated fault checks and T24 real adapter remain pending."
+  ],
+  "revision": 2,
+  "previousPreparationFile": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase9/previous-dispatch-preparation.json"
+}

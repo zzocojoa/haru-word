@@ -1,0 +1,34 @@
+{
+  "protocol": "ai-quality-v147-assessment-context-v1",
+  "version": 1,
+  "scope": "New synthetic main/calibration adapter. Forward actual product request fields and explicit normalized mode; keep English5/critical4/threeaxes separate from bounded product-policy compliance. Not live or qualification approval.",
+  "englishRubricProtocol": "ai-quality-v147-product-operational-rubric-v2",
+  "englishRubricHash": "5fc5d484eb55752e55558d4083639820c77c22262f04f0946f0e8832645c80da",
+  "productSources": {
+    "lib/feedback-context.ts": "ebf79ada3b93d1dc7fb32e428d66d910cb2e6c3c98236cac9be67d79b9640ef0",
+    "lib/judgment-input.ts": "c59fca0e8a28acead01414a51186a3f82265459b945c22fed6c349b78362c691",
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/judgment-feedback-contract.ts": "7af1463b1946f4c2fbc379b1cf3370104fa25c1dec287b93f557d3662b25338d"
+  },
+  "defaultContextKind": "sentence",
+  "allowedContextKinds": [
+    "sentence",
+    "reply",
+    "title",
+    "command"
+  ],
+  "boundedChecks": [
+    "guarded-message-both-uncertain",
+    "guarded-message-no-correction",
+    "guarded-message-reviewed-question-visible",
+    "natural-original-unchanged",
+    "uncertain-correction-empty",
+    "needs-work-different-correction"
+  ],
+  "policyPassMeaning": "All listed mechanically observable constraints passed. Does not establish full product policy, English correctness or source/judge qualification.",
+  "requestPolicy": "Every opted review must bind forwarded requestInput to the captured generation request before count/consume/transport. Hypothetical calibration controls are labelled hypothetical; no generator/version/expected scores enter the model data. Free text never selects contextKind.",
+  "separateChannels": "AI English grade and machine-derived policyCompliance remain distinct. Any policy fail holds that row even if all English votes pass. Calibration can deliberately contain policy failures; they are not learner output successes.",
+  "independentQualification": false,
+  "englishTruthCertified": false,
+  "liveDispatchAuthorized": false
+}

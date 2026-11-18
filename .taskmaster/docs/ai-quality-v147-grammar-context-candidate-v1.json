@@ -1,0 +1,228 @@
+{
+  "protocol": "ai-quality-v147-grammar-context-candidate-v1",
+  "phase": "phase209",
+  "status": "local-candidate-verified-live-quality-unmeasured",
+  "parentTaskId": 24,
+  "activeSubtaskId": "24.1",
+  "supportingSubtaskIds": [
+    "24.2",
+    "24.3"
+  ],
+  "candidateSource": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-context-candidate-20261113",
+  "promptVersion": "reference-v11",
+  "validationVersion": "judgment-v9",
+  "frozen": false,
+  "originalFrozenSource": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+  "originalJointFreezeFile": "outputs/ai-quality-v147-implementation-20261106/phase190/joint-evaluation-freeze.json",
+  "originalJointFreezeHash": "0db0095d1a0c44e2c2bff5bd6c1a6317f3e875cd0c1b635b63c21b151db4ee0f",
+  "originalProductFilesPreserved": 765,
+  "originalReferenceModulesPreserved": 19,
+  "changes": [
+    {
+      "file": "app/feedback-detail.tsx",
+      "beforeSha256": "7896b65c8b8f7ffbc64ef5879489f57c2f411ea18ff59be46a62232f41faf5a3",
+      "afterSha256": "1c216203cba47551efc0c14c2cefec6d31a1330d6ba76dd821c35bd096caf0bf"
+    },
+    {
+      "file": "app/sentence-feedback.tsx",
+      "beforeSha256": "9fb5096c1f35277d8a645e9942d7865e2844ea13fdfd6dc81e8cee8f71a8fd42",
+      "afterSha256": "28d39617ccf3eb903c6e542236c6dd02a737a016956f40cf07ced3e19ba5ddb4"
+    },
+    {
+      "file": "db/ai-compatibility.ts",
+      "beforeSha256": "10f6bb1a28596e842c2cd7543b634c3582da3c965ef684f4f2f7366844a14d96",
+      "afterSha256": "165644d7eedfaf650703d17d0d13ed420d60bc882a4d69c8551f22925cf8211c"
+    },
+    {
+      "file": "lib/ai-contract.ts",
+      "beforeSha256": "1b6896028ade20005b640e3a31b707f5fc90901931d05fe0e3f8eb9ad889446b",
+      "afterSha256": "df6b40f8f3c244ddc07250077a548005f1add1b3f045c1174ca013046426c921"
+    },
+    {
+      "file": "lib/ai-models.ts",
+      "beforeSha256": "00a88b8b5162fc843c3e678a84a8c3560fe974d1488ff4f48cab8ff3e11c997b",
+      "afterSha256": "adb7280d95460f324dd9565e3958751fa764563bf6304803f2d1384622b8a7fd"
+    },
+    {
+      "file": "lib/judgment-feedback-contract.ts",
+      "beforeSha256": "c0e2b62765865389ec419b76f0c0f23ef1838e35165ff20b90c74f758ccc5e43",
+      "afterSha256": "ce8ffb7f74a17bd916f212753a4641be4e9b476dbb101a70a35a119b76fc446c"
+    },
+    {
+      "file": "lib/judgment-policy.ts",
+      "beforeSha256": "22ee2d9ad534a1c5f8ffd9412bb484f5e4a3cb19872bc5a42867199ce4881e10",
+      "afterSha256": "d91d253922d52fc8a859f45bc5a6f7a07d1d0692a4396a52397f815e0fa2d1d3"
+    },
+    {
+      "file": "lib/verified-feedback-explanation.ts",
+      "beforeSha256": "d010652f568ecc25b5b2d411de3e67e268b69476870ca702b89f8f14770575a0",
+      "afterSha256": "2bdc0ce562f35d570f4813f7ac08bb050129130cfbe7955e2b6147b68d5552c9"
+    },
+    {
+      "file": "tests/ai-contract.test.mjs",
+      "beforeSha256": "2482e06e4725e30ddbf7afb8de5e6ef9b3144e0bebde2745dc1dfd49590cd329",
+      "afterSha256": "0646a07c07ceffa736cca82e81ff8e4212b711fedb5cc5fa64d4fafbf7e246bd"
+    },
+    {
+      "file": "tests/ai-quality-context-questions.test.mjs",
+      "beforeSha256": "9bd9b2fc5ea093c0731a36e9c667fea9ad825d9451d8dd74eeb0ce2036a7dd33",
+      "afterSha256": "b3b7c445ab9f45a1063838a9d692c007f8b5f2dda56a249ce76fe9037273b2b3"
+    },
+    {
+      "file": "tests/ai-quality-explanation.test.mjs",
+      "beforeSha256": "b13fcef7fefe3ede69553bdaaec6082236ca382832efeac9b57a67fda60b2256",
+      "afterSha256": "6f1b791caab6e53c12eb6f9be6605c952bde24951c4aa697859ddb0697bda073"
+    },
+    {
+      "file": "tests/ai-quality-target-boundaries.test.mjs",
+      "beforeSha256": "b499233ef213cc56ceb4d15eb409c637fdd88e2804516df2dacaf910bfc7bc9f",
+      "afterSha256": "14228c0ac4e77dd232911dd4d5071a9b43270942a2930fc053c38d5439e2cfa9"
+    },
+    {
+      "file": "tests/judgment-api.test.mjs",
+      "beforeSha256": "047d015226e3b71e4577bc6abba58f5e233265d792d7f84ff6c29680bdcba3fc",
+      "afterSha256": "c28b2740c077eb15a9fecfed76abd6c429935117cda4f2a2588b9586d543c0af"
+    },
+    {
+      "file": "tests/judgment-decision-table.test.mjs",
+      "beforeSha256": "9bd99e52b6649d8451bfa2bc1e21af720c8ee48dfb2cc880c5c42d96d68dc964",
+      "afterSha256": "c679c38757d3a23ad84817e0e9a11c3fd3a0e6a38e6de13aa17f44b9f4102e69"
+    },
+    {
+      "file": "tests/judgment-feedback.test.mjs",
+      "beforeSha256": "8b836a2b6858fc9a00c55411ed9321efcd5482a39b7e27b6c5cefd83c33474b8",
+      "afterSha256": "9e1ec8b4367430aa7445e4ee23c257a6827470c2ca49377fe1d93f3fd7a70dea"
+    },
+    {
+      "file": "tests/openai-request-equivalence.test.mjs",
+      "beforeSha256": "cf7088a4d2e15e0a8b981dc419b87f438a7548919b1ef394217f9d192830adac",
+      "afterSha256": "a68a454a989ca01f98fed6d2dda42d625a75640256300c8d931208b59322ca36"
+    },
+    {
+      "file": "tests/remediation-followup.test.mjs",
+      "beforeSha256": "471d4f1fadf4357f10ee8fd974305d653ed732f797bc1e623c1e423044544176",
+      "afterSha256": "83150d905989dc4ba9839971604d30c4320c46722e9ab03b47487622eff8b4dc"
+    },
+    {
+      "file": "tests/remediation-judgment.test.mjs",
+      "beforeSha256": "90aeff7d2d19494cea3bd68fba96ed2f96e03cc05e9d7b3f000a451459381b75",
+      "afterSha256": "6135e2fd48e890d42bb7f007035dec67821c1efc226e09867b0b1cdab1243db3"
+    }
+  ],
+  "patchFile": "outputs/ai-quality-v147-implementation-20261106/phase209/candidate.patch",
+  "comparisons": [
+    {
+      "name": "grammatical-original-unresolved-time",
+      "baseline": {
+        "accepted": false,
+        "reason": "unexpected_context_question"
+      },
+      "candidate": {
+        "accepted": true,
+        "grammar": "natural",
+        "correctedSentence": "The ferry will leave soon, but the date on the notice has not been filled in."
+      },
+      "synthetic": true
+    },
+    {
+      "name": "visible-form-error-unresolved-time",
+      "baseline": {
+        "accepted": true,
+        "grammar": "uncertain",
+        "correctedSentence": ""
+      },
+      "candidate": {
+        "accepted": true,
+        "grammar": "needs_work",
+        "correctedSentence": ""
+      },
+      "synthetic": true
+    },
+    {
+      "name": "known-defect-target-meaning-unresolved",
+      "baseline": {
+        "accepted": false,
+        "reason": "needs_work_missing_correction"
+      },
+      "candidate": {
+        "accepted": true,
+        "grammar": "needs_work",
+        "correctedSentence": ""
+      },
+      "synthetic": true
+    }
+  ],
+  "successCriteria": [
+    "Preserve original grammar independently of correction context.",
+    "Allow known defects to withhold a correction without relabeling them uncertain.",
+    "Keep natural originals unchanged while requested context is unresolved.",
+    "Reject chosen repairs while time, quantity, message or relationship remains unresolved.",
+    "Preserve existing Korean-intent flow, history, old-reader protection and revision/restore guards."
+  ],
+  "checks": {
+    "focusedTests": {
+      "command": "node --experimental-strip-types --test --test-reporter=spec <10 related test files>",
+      "passed": 97,
+      "failed": 0,
+      "exitCode": 0,
+      "log": "outputs/ai-quality-v147-implementation-20261106/phase209/focused-tests.log"
+    },
+    "typecheck": {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "exitCode": 0,
+      "log": "outputs/ai-quality-v147-implementation-20261106/phase209/typecheck.log"
+    },
+    "lint": {
+      "command": "node node_modules/eslint/bin/eslint.js . --ignore-pattern dist --ignore-pattern .next",
+      "exitCode": 0,
+      "errors": 0,
+      "existingWarnings": 15,
+      "log": "outputs/ai-quality-v147-implementation-20261106/phase209/lint.log"
+    },
+    "build": {
+      "command": "package build checks under Node24, then node scripts/run-framework.mjs build",
+      "exitCode": 0,
+      "log": "outputs/ai-quality-v147-implementation-20261106/phase209/build.log",
+      "warnings": [
+        "framework sourcemaps",
+        "large chunks",
+        "shared-dependency dynamic import",
+        "plugin timing"
+      ]
+    },
+    "initialFailures": [
+      "Two previous-policy test expectations failed, updated to the new independent grammar/context contract; final relevant suite 97/97.",
+      "Standalone Node24 had no bundled npm; invoked the existing package build sequence with that Node binary.",
+      "Build guard rejected a shared braces junction; copied locked braces locally without changing the guard or shared source, then framework build passed."
+    ]
+  },
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "newSpendUsd": 0,
+  "qualifiedReferences": 0,
+  "pilotGenerationsCompleted": 0,
+  "pilotGradesCompleted": 0,
+  "currentPaidFundingFile": ".taskmaster/docs/ai-quality-v147-reference-adjudication-execution-v1.json",
+  "currentRestrictedFundingRemainingMicros": "146621",
+  "previousResultsRescored": false,
+  "dispatchAuthorized": false,
+  "deploymentPerformed": false,
+  "compatibility": "Same API envelope4 and backup shape; judgment-v9 added to old-reader guards. No migration, DB schema or hosting binding change.",
+  "rollback": "Keep the original frozen candidate; prospective snapshot remains unpublished.",
+  "remaining": [
+    "Prospective reference encoding and evaluation inputs must be aligned before new candidate quality can be assessed.",
+    "Live AI quality and built browser runtime for the changed candidate were not measured.",
+    "Existing reference/pilot/release holds remain."
+  ],
+  "conditionalRemainingMicros": "146621",
+  "mainDispatchAuthorized": false,
+  "evidenceSha256": {
+    "outputs/ai-quality-v147-implementation-20261106/phase209/focused-tests.log": "29848d23e016e6d9915e73d709d3cd39616a5d2d21946a4ccde1cd7dd809453d",
+    "outputs/ai-quality-v147-implementation-20261106/phase209/typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "outputs/ai-quality-v147-implementation-20261106/phase209/lint.log": "deed6ae33529d047a24719c0d8efedf28ee06c5b7e0b3c29c44e544e292243aa",
+    "outputs/ai-quality-v147-implementation-20261106/phase209/build.log": "6f019168e36ffd61ef989ac68721e8d270364166fe567dd4272ded13bd11abd5",
+    "outputs/ai-quality-v147-implementation-20261106/phase209/candidate.patch": "facf2dc42563399a4edc0d166cad847cae241540e0a82b8e9d6d295047118cfd",
+    "outputs/ai-quality-v147-implementation-20261106/phase209/management-preservation.json": "7af6fffca9b5230b9bb31d64c2f94094d2ff8b5df77b01488b55689001074ccd"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "protocol": "ai-quality-v147-visible-question-preparation-v1",
+  "task": 34,
+  "subtask": "34.3",
+  "evidenceDirectory": "phase61",
+  "status": "synthetic-worker-storage-render-and-panel-projection-verified; actualEnglish-quality-held",
+  "document": "docs/AI_QUALITY_V147_VISIBLE_QUESTION_20261108.md",
+  "documentSha256": "2153111e1717b12a29757af51139b18caf310719a076d79065783895773f7859",
+  "testFile": ".taskmaster/scripts/test-ai-quality-v147-visible-question-v1.mjs",
+  "sourceBindings": {
+    ".taskmaster/scripts/test-ai-quality-v147-visible-question-v1.mjs": "24d36ba893fcecf51082a22874c97f832f70766852e7044397dbf3560704a116",
+    ".taskmaster/scripts/ai-quality-v147-worker.mjs": "f80de7be66b37941a5e09c4b1ced247b01899aa67340241eb94a1569e209351d",
+    ".taskmaster/scripts/ai-quality-v147-ai-panel.mjs": "a72405c490108623662ab19190f340fd53a97ba96458aa4a7c1708dc9720aabe",
+    ".taskmaster/scripts/ai-quality-v147-product-rubric-v1.mjs": "7f9a65896debbbe80df98c3ed7d2c5d7e353bd999f955e82395eecd930fd823e",
+    ".taskmaster/docs/ai-quality-v147-product-operational-rubric-v1.json": "1d20648b2242fb24bf42b19d7895c5428309a77c30b564ef410f6162cbd29ee7",
+    "lib/judgment-feedback-contract.ts": "7af1463b1946f4c2fbc379b1cf3370104fa25c1dec287b93f557d3662b25338d",
+    "lib/judgment-input.ts": "c59fca0e8a28acead01414a51186a3f82265459b945c22fed6c349b78362c691",
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/verified-feedback-explanation.ts": "d4daf4ca0521df1a5dc2c4684f3c98ed570d623a6a26e7d7854b7ebb970784a1",
+    "app/feedback-detail.tsx": "3d092ade98e270fe2a91dcfdc934e5c21f999a01d579e2e36758fe0326c4aabe",
+    "app/record-text.tsx": "934e932fb5cc7f461198a3a8ab410ebd9b5d7cae84c5412bf0c14d9c738add39"
+  },
+  "resultFiles": {
+    "question-node24-first/results.json": "168b1ffd3ce13ba7f183f267121610f3f5d772e220c6b19385fff6abf5b69b15",
+    "question-node22-final/results.json": "dd6c8f481f229a0301d1063f3ab3c67b9ea73f9ca81a5096b7203a261c0ceb36",
+    "question-node24-first-exit.json": "ca54a4033f2262173579d167b78118125da2fe9fb3e50d2a25a2500ce94a9512",
+    "question-node22-final-exit.json": "003d6f4b83fdc347e160cf77b891aeca07186dfba0a0bf0ff7486f47e6fc6bc2",
+    "lint-exit.json": "e41a7821401a67365029335f5db2a37a438432d9e14832b84fc4ac0fb11d707b"
+  },
+  "workerCellsEachNode": 66,
+  "reviewWiresEachNode": 264,
+  "componentBrowserRowsEachEngineEachNode": 67,
+  "engines": [
+    "chromium",
+    "webkit"
+  ],
+  "questionAlreadyEmbeddedInExplanation": true,
+  "phase60SeparateQuestionWidgetAssumptionSuperseded": true,
+  "fullLearnerUiCoverageVerified": false,
+  "actualEnglishQualityMeasured": false,
+  "referenceOrJudgeRoleQualified": false,
+  "riskDesignApproved": false,
+  "sampleJustified": false,
+  "finalEvaluationFrozen": false,
+  "newPaidScopeApproved": false,
+  "releaseEligible": false,
+  "goalComplete": false,
+  "campaignCapMicros": "5000000",
+  "currentConservativeMicros": "3788335",
+  "newActualProviderCalls": 0,
+  "newActualCountCalls": 0,
+  "newActualKeyReads": 0
+}

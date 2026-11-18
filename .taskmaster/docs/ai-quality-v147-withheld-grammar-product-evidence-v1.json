@@ -1,0 +1,36 @@
+{
+  "protocol": "ai-quality-v147-withheld-grammar-product-evidence-v1",
+  "phase": "phase100",
+  "status": "local-product-verified",
+  "taskIds": [
+    "8.2",
+    "8.3",
+    "15.2",
+    "15.3",
+    "33.3",
+    "34.4"
+  ],
+  "checkout": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-withheld-grammar-20261109",
+  "priorCheckout": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-explanation-followup-20261109",
+  "changedFiles": {
+    "app/feedback-detail.tsx": "b6f9b6d5e5b9521ab62759850cbfdc3e32d796b6de54ce2ea494ab12b87711a0",
+    "lib/verified-feedback-explanation.ts": "f2dad37f71d4c306ab7930b58f30f2f0d4e3864697050a42140167c95783250f",
+    "tests/ai-quality-explanation.test.mjs": "fe25e38a6c25532caa62159032a7314b5083ea20be40b3f86a452d4a2e7a3191"
+  },
+  "pairedRequests": 5,
+  "savedAndReread": 10,
+  "builtBrowserChecks": 12,
+  "legacyRecordsReread": 2,
+  "unitTests": 883,
+  "focusedTests": 29,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "productionWrites": 0,
+  "newModelQualityVerified": false,
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "patchSha256": "6b8ee8619f65ecbb79a0dfe128d5337c71237c688eaac8b70a31ca9439a8a108",
+  "workerProofSha256": "2cadd2d49555f5105ecd53a869e07c8ce904ecde88590ee197f4e748ef05a5c1",
+  "document": "docs/AI_QUALITY_V147_WITHHELD_GRAMMAR_PRODUCT_20261109.md",
+  "documentSha256": "751299bff200dc49b8f98e2eb76ab198b8f505bad0347cddcdaf505f6e7e39b6"
+}

@@ -518,12 +518,15 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     await assertUnchanged(beforeAudio, 'Listening does not save or grade a record');
 
     const sentenceInput = page.getByLabel('내 영어 문장', { exact: true });
+    const intendedKorean = '나는 이 사과가 좋아요.';
+    const intentInput = page.getByRole('textbox', { name: '의도한 한국어 문장', exact: true });
     const spoken = page.getByLabel('내 문장을 소리 내어 말해 봤어요', { exact: true });
     const active = (await qa.getState()).state;
     const activeId = active.settings.activeSessionId;
     const activeRecordId = active.sessions[activeId].ids[active.sessions[activeId].index];
     const originalGrades = grades(active.sessions[activeId].records[activeRecordId]);
     await sentenceInput.fill('I like this apple.');
+    await intentInput.fill(intendedKorean);
     const aiGate = new Promise(resolve => { releaseAi = resolve; });
     let syntheticAiCalls = 0;
     await page.route('**/api/sentence-feedback', async route => {
@@ -535,9 +538,16 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
         receipt: feedbackReceipt(route, 'failed'),
       } });
     });
-    await qa.click(feedbackPanel.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }), 'ai-reference-request');
+    const [aiRequest] = await Promise.all([
+      page.waitForRequest(request => request.method() === 'POST' && new URL(request.url()).pathname === '/api/sentence-feedback'),
+      qa.click(feedbackPanel.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }), 'ai-reference-request'),
+    ]);
+    const aiInput = aiRequest.postDataJSON();
+    assert.equal(aiInput.contextRole, 'intended_korean', 'The word request identifies the Korean intention explicitly');
+    assert.equal(aiInput.contextNote, intendedKorean, 'The word request carries exactly the synthetic Korean intention');
     await feedbackPanel.locator('svg.spin').waitFor();
     assert.notEqual(await sentenceInput.getAttribute('readonly'), null);
+    assert.equal(await intentInput.isDisabled(), true);
     assert.equal(await spoken.isDisabled(), true);
     assert.equal(await page.getByRole('button', { name: /^문장을 완성했어요/ }).isDisabled(), true);
     await qa.inspect('ai-reference-pending', { widths: [320, 1440], readOnly: false, icons: [
@@ -546,7 +556,9 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     releaseAi();
     await page.getByRole('alert').filter({ hasText: 'OpenAI 사용 한도로 점검하지 못했어요' }).waitFor();
     assert.equal(await sentenceInput.inputValue(), 'I like this apple.');
+    assert.equal(await intentInput.inputValue(), intendedKorean);
     assert.equal(await sentenceInput.getAttribute('readonly'), null);
+    assert.equal(await intentInput.isEnabled(), true);
     assert.equal(await spoken.isEnabled(), true);
     assert.equal(await page.getByRole('button', { name: /^문장을 완성했어요/ }).isEnabled(), true);
     assert.equal(syntheticAiCalls, 1);
@@ -554,7 +566,7 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     await returnHome();
     const final = await preserveGrades('Synthetic AI failure');
     assert.deepEqual(grades(final.sessions[activeId].records[activeRecordId]), originalGrades, 'AI reference requests do not complete or grade a sentence');
-    report.checks.push('P073–P080: speech events, external-link attributes, play/pause and AI pending controls retain their handlers/labels; a synthetic provider failure keeps the sentence and original grades, with no real AI generation');
+    report.checks.push('P073–P080: speech events, external-link attributes, play/pause and AI pending controls retain their handlers/labels; the synthetic request carries the exact intended Korean with contextRole=intended_korean; a synthetic provider failure keeps both the English sentence and Korean intention plus original grades, with no real AI generation');
   } catch (error) { failure = error; }
   finally { releaseAi?.(); }
   await qa.finish(failure);

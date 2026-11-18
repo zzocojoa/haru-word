@@ -1,0 +1,22 @@
+{
+  "historicalProviderResponses": 3,
+  "browserChecks": 6,
+  "applyAndUndoChecks": 4,
+  "olderGrammarResponsesExcludedFromExactReplay": 6,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "productionWrites": 0,
+  "protocol": "ai-quality-v147-actual-response-replay-v1",
+  "phase": "phase132",
+  "tasks": [
+    "15.2",
+    "26.2"
+  ],
+  "document": "docs/AI_QUALITY_V147_ACTUAL_RESPONSE_REPLAY_20261109.md",
+  "mainDispatchAuthorized": false,
+  "evidenceSha256": {
+    "actual-response-replay.json": "29e95c39935fbcc436944243bbe53c7dbdb76a3e0ced9ad47a6bbed2a462f900",
+    "verify-actual-replay.mjs": "9799ccd26316e25026f5bac0064e0831513da76bb07232d344e9219af50999ae",
+    "browser.log": "92aa6ea1b47b2cae7a74777a3b918b2ab05170b1131a8f6c03567fd14dbf2e05"
+  }
+}

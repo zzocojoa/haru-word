@@ -1,0 +1,31 @@
+// A distinct six-request public diagnostic. The old pilot kernel is reused only
+// for money accounting;its calibration role is not an English calibration claim.
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {digest,MODELS,PROTOCOL,PLAN,validateSpec,costUpperMicros,slotKey} from './ai-quality-v147-budget.mjs';
+import {loadCaseReviewV1,compileCaseReviewPlanV1} from './ai-quality-v147-case-review-v1.mjs';
+export const DIAGNOSTIC_ENVELOPE_V1='ai-quality-v147-direct-diagnostic-envelope-v1';
+const FILE='.taskmaster/evaluation/ai-quality-v147/direct-diagnostic-envelope-v1.json',read=f=>JSON.parse(readFileSync(f,'utf8')),sha=f=>createHash('sha256').update(readFileSync(f)).digest('hex'),textSha=s=>createHash('sha256').update(s).digest('hex');
+const check=(ok,c)=>{if(!ok)throw Error('DE1_'+c);};
+export function loadDiagnosticEnvelopeV1(sourceRoot=null){
+ const prepared=loadCaseReviewV1(sourceRoot),data=read(resolve(prepared.sourceRoot,FILE)),factsFile=resolve(prepared.root,'outputs/ai-quality-v147-implementation-20261106',data.officialFactsFile);check(data.protocol===DIAGNOSTIC_ENVELOPE_V1&&data.approvalStatus==='unapproved'&&data.approvedMicros==='0','PROTOCOL');
+ check(/^phase42\/official-model-envelope-facts\.json$/.test(data.officialFactsFile)&&sha(factsFile)===data.officialFactsSha256,'FACTS_BINDING');const facts=read(factsFile);for(const [f,h]of Object.entries(data.sourceBindings))check(sha(resolve(prepared.sourceRoot,f))===h,'SOURCE_BINDING');
+ check(facts.modelLimitRecords.length===3&&MODELS.every(modelId=>{const r=facts.modelLimitRecords.find(r=>r.modelId===modelId);return r&&r.maxInputTokens===922000&&r.maxOutputTokens===128000&&r.contextTokens===1050000;}),'MODEL_LIMITS');
+ check(facts.pricing.tier==='Standard'&&facts.pricing.regionalNumerator==='11'&&facts.pricing.regionalDenominator==='10'&&MODELS.every(m=>facts.pricing.models[m]),'PRICE_PROFILE');
+ return {prepared,data,facts,dataSha256:sha(resolve(prepared.sourceRoot,FILE)),dataSeal:digest(data),factsSeal:digest(facts)};
+}
+export function compileDiagnosticEnvelopeV1(p,mode='evaluation'){
+ check(['synthetic','evaluation'].includes(mode)&&digest(p.data)===p.dataSeal,'MODE');check(digest(p.facts)===p.factsSeal,'FACTS_CHANGED');const plan=compileCaseReviewPlanV1(p.prepared),requests=plan.requests.map(r=>{const descriptor={phase:'calibration',caseId:'g12-n04-'+r.layout,targetModelId:r.modelId,modelId:r.modelId,role:'calibration',repetition:1,inputTokenMax:p.facts.modelLimitRecords.find(x=>x.modelId===r.modelId).maxInputTokens,outputTokenMax:4096,inputBoundHash:digest({method:'official-model-max-input',modelId:r.modelId,maxInputTokens:922000,factsSha256:p.data.officialFactsSha256,actuallyMeasured:false}),bodyCommitment:textSha(r.requestRaw)};return {...r,budgetKey:slotKey(descriptor),descriptor};});
+ const sourceFiles=['.taskmaster/scripts/ai-quality-v147-diagnostic-envelope-v1.mjs','.taskmaster/scripts/ai-quality-v147-diagnostic-live-v1.mjs'],sourceSeal=digest({protocol:DIAGNOSTIC_ENVELOPE_V1,dataSha256:p.dataSha256,requestBodies:requests.map(r=>r.sha256),sourceFiles:Object.fromEntries(sourceFiles.map(f=>[f,sha(resolve(p.prepared.sourceRoot,f))])),runtime:{nodeVersion:process.version,platform:process.platform,arch:process.arch}}),spec={schemaVersion:1,protocol:PROTOCOL,planId:PLAN,runId:p.data.proposedRunId,mode,sourceSeal,quote:{kind:mode==='synthetic'?'synthetic-test':'verified-price',evidenceHash:p.data.officialFactsSha256,regionalNumerator:'11',regionalDenominator:'10',inputFactorNumerator:'1',inputFactorDenominator:'1',models:structuredClone(p.facts.pricing.models)},batches:[{id:'public-g12-n04-diagnostic-six',requests:requests.map(r=>r.descriptor)}]};validateSpec(spec);
+ const perRequest=requests.map(r=>({key:r.key,budgetKey:r.budgetKey,modelId:r.modelId,maximumMicros:costUpperMicros(spec,r.descriptor)})),maximumMicros=perRequest.reduce((n,r)=>n+BigInt(r.maximumMicros),0n).toString();check(maximumMicros==='132724592','ENVELOPE_ARITHMETIC');
+ const basis={protocol:DIAGNOSTIC_ENVELOPE_V1,purpose:'Public G12/N04 source diagnostic only;not main feedback calibration,fullquality,pilot180/1872 or the36publiccontrolrun.',boundMethod:'Officialmodelmaxinput922000anddocumentedmaximumStandardlongcontextinputcategory/output4096plus10percentregional;notmeasuredinput.',spec,requests,perRequest,maximumMicros,requestedApprovalMicros:'133000000',actualInputTokensMeasured:false,countApiNeeded:false,actualCountApiCalls:0,actualProviderCalls:0,approvedMicros:'0',oldBudgetTransferred:false,actualEnglishQualityQualified:false,liveDispatchAuthorized:false};return {...basis,hash:digest(basis)};
+}
+export function validateDiagnosticApprovalV1(bundle,approval){
+ const {hash,...basis}=bundle;check(hash===digest(basis),'BUNDLE_HASH');const evaluation=bundle.spec.mode==='evaluation';check(approval&&approval.sessionUserApproved===evaluation&&approval.authorizationSource===(evaluation?'current-user-message':'synthetic-fixture')&&approval.officialLimitsAndRatesRechecked===true&&approval.runId===bundle.spec.runId&&approval.bundleHash===bundle.hash&&approval.amountMicros===bundle.requestedApprovalMicros&&/^[a-f0-9]{64}$/.test(approval.evidenceHash),'USER_APPROVAL_REQUIRED');
+ return {schemaVersion:1,protocol:PROTOCOL,runId:bundle.spec.runId,specHash:digest(bundle.spec),kind:bundle.spec.mode==='evaluation'?'user-approval':'synthetic-test',amountMicros:approval.amountMicros,evidenceHash:approval.evidenceHash};
+}
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+ const p=loadDiagnosticEnvelopeV1(),bundle=compileDiagnosticEnvelopeV1(p);if(process.env.QA_OUTPUT_DIR){mkdirSync(resolve(process.env.QA_OUTPUT_DIR),{recursive:false});writeFileSync(resolve(process.env.QA_OUTPUT_DIR,'diagnostic-envelope.json'),JSON.stringify(bundle,null,2)+'\n',{flag:'wx'});}console.log(JSON.stringify({runId:bundle.spec.runId,bundleHash:bundle.hash,requests:6,maximumMicros:bundle.maximumMicros,requestedApprovalMicros:bundle.requestedApprovalMicros,approvedMicros:'0',actualProviderCalls:0,actualCountApiCalls:0,liveDispatchAuthorized:false}));
+}

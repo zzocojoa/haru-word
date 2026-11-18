@@ -84,7 +84,8 @@ export async function readDashboardSnapshot(root = PROJECT_ROOT, planId) {
     if(manifest.executionStarted&&entry.kind==='current'){
       snapshot.plan.context=text(manifest.execution?.dashboardContext,'승인한 수정 플랜 구현 진행 중. 새 유료 평가와 기존 사이트 배포를 포함하며 품질 미달·미측정이면 배포를 보류합니다.');
       const current=manifest.execution?.currentEvaluation;
-      snapshot.plan.budget=manifest.authorization?.paidEvaluationApproved===false&&!current
+      const scopedDiagnostic=manifest.fiveDollarDiagnosticExecutionFile&&manifest.authorization?.paidEvaluationApprovalScope==='public-g12-n04-diagnostic-only';
+      snapshot.plan.budget=scopedDiagnostic?text(manifest.execution?.dashboardBudget,entry.budget):manifest.authorization?.paidEvaluationApproved===false&&!current
         ?text(entry.budget)
         :current?'후속 평가 추가 US$'+current.approvedMaxUsd+' · 이번 보수적 사용 US$'+current.usedUsd+' · 이전 종료 원장과 별도':'새 평가 추가 US$'+manifest.authorization.newEvaluationMaxUsdBeforeTax+' · 보수적 사용 US$'+manifest.authorization.newEvaluationUsedUsdBeforeTax+' · 과거 평가 원장과 별도';
       const next=manifest.execution?.nextEvaluationProposal;

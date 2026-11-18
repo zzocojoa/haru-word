@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "stage": "hash-only-program-exclusion-collector-report-handoff-v1",
+  "recordedAtUtc": "2026-11-07T06:59:29.309570+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "groupsEachNode": 11,
+  "regressionUnitGroupsEachNode": 47,
+  "knownSurfaces": 69,
+  "sourceExpansions": 76,
+  "workerCellsEachNode": 12,
+  "controlledWorkerFaultsEachNode": 2,
+  "conditionalFull2052SkippedEachNode": 1,
+  "actualEnglishQualityMeasured": false,
+  "completeProjectExposure": false,
+  "structuralFamiliesCertified": false,
+  "sourceCataloguePlaintextForwarded": false,
+  "liveDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "indexFile": ".taskmaster/evaluation/ai-quality-v147/program-known-surfaces-index-v1.json",
+  "indexHash": "8e1085db3a349e3c51ca62e82228ea37224e1df94f10b450de6813f736acd13b",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-program-exclusion-v1.mjs": "742db2582a8c534e8ea4025969a9d5cb39d310a96b6a8f8781a7c8fd96505c83",
+    ".taskmaster/scripts/ai-quality-v147-program-exclusion-fixture-v1.mjs": "e6675e3538fa72e69849dd95231b94a5fe7ed10b510cb9639f1e2a99fb17ff70",
+    ".taskmaster/scripts/test-ai-quality-v147-program-exclusion-v1.mjs": "70b248323ddf1b970bd1588e90c6a88c8f356ec9034e20969569b6162fc0f74f",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "f23918794f72b7bcca80ce22b4cbb052ebb7869a90b9fe7984ea7d601f9f12e5",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "bc48ce6230b9bf34a7aa6af73ecdd92991050d955eb7f02c5fc405e6bd4ee4b9"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/program-known-surfaces-index-v1.json": "f5c0a8503ed93d42be05a973ec7b9fa3de13f3fdc47cdfaa227aeeb9f8bff752"
+  },
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/program-template-expansions-v1.json": "79eb3f379c207b6905162692e868650a4bb5899c1af109625ff5a31d44340234",
+    ".taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json": "1ab0a8f82d004cc588a1dc7b737c0d007dad58334e5e9d9a0d8be8a7fd56d8c0",
+    "tests/ai-quality-morphology.test.mjs": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+    "tests/balanced-daily.test.mjs": "696c1851545d9092ee1d99b73f639beba4f04aeae219f548d46aee12c10c5bf6",
+    "tests/feedback-requests.test.mjs": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+    "tests/feedback-word-forms.test.mjs": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+    "tests/remediation-judgment.test.mjs": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+    "lib/feedback-manner-adjectives.ts": "825f72b3dc9aad88f6c4240ea434f1e22fc67b9450bb827b8aa0743842251ab3",
+    "data/words.json": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f"
+  },
+  "historicalSources": {
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": {
+      "sha256": "3a4cc6ebbbd35d58b04f43370c67efc09c9389dc8eb952cfef334cd24a3755c2",
+      "archiveFile": "phase45/management-before/.taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs",
+      "priorProgressFile": "phase44/progress-final.json",
+      "priorProgressSha256": "977fdaf63ba5537bc59f746bbbfd02004efd646d7f4e64f6eaaf9af9d8e8f983"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": {
+      "sha256": "a8b39d1156ee5e220b138479b43217e108cea5f5e63bd606831c5ecf72466e4a",
+      "archiveFile": "phase45/management-before/.taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs",
+      "priorProgressFile": "phase44/progress-final.json",
+      "priorProgressSha256": "977fdaf63ba5537bc59f746bbbfd02004efd646d7f4e64f6eaaf9af9d8e8f983"
+    }
+  },
+  "document": "docs/AI_QUALITY_V147_PROGRAM_EXCLUSION_INTEGRATION_20261107.md",
+  "documentSha256": "3c5c38d10de6e1cdbe5a010e2c454a139e28da13f6e95c59b6966886cfd11f94",
+  "checks": [
+    {
+      "name": "exclusion-node22-final",
+      "log": "exclusion-node22-final.log",
+      "sha256": "c63f15002b4a8f1d6455b1a7b082c9bd7befc940b0f7d98838973cd508c89a71",
+      "exitCode": 0
+    },
+    {
+      "name": "exclusion-node24-final",
+      "log": "exclusion-node24-final.log",
+      "sha256": "13d0c564083c7978178c820e3b529616bd30ef7bfd201f199754bbd5d052b817",
+      "exitCode": 0
+    }
+  ],
+  "regressionChecks": [
+    {
+      "name": "global-node22-regression",
+      "kind": "global",
+      "groups": 9,
+      "resultFile": "global-exposure-results.json",
+      "log": "global-node22-regression.log",
+      "sha256": "f4b1f374dbdf03c51aab3a3806c82b2ce2f8dd596e0e3bf06ebe3d454ba3907d",
+      "exitCode": 0
+    },
+    {
+      "name": "count-node22-regression",
+      "kind": "count",
+      "groups": 14,
+      "resultFile": "input-count-executor-results.json",
+      "log": "count-node22-regression.log",
+      "sha256": "eb2e9c0487a4ac4da97ab3deab6db56c1ff4c34a20815bbd165415bcdfac6d4d",
+      "exitCode": 0
+    },
+    {
+      "name": "reference-node22-regression",
+      "kind": "reference",
+      "groups": 14,
+      "resultFile": "reference-results.json",
+      "log": "reference-node22-regression.log",
+      "sha256": "97d8f8dd96e2f927450a50bb9543047280cccde4dff47642f631528f4b384ecf",
+      "exitCode": 0
+    },
+    {
+      "name": "executor-node22-regression",
+      "kind": "executor",
+      "groups": 10,
+      "resultFile": null,
+      "log": "executor-node22-regression.log",
+      "sha256": "4e210613f01e6b380e5100a403928f4ded0a09f9f8f21a50f1e87d9b918017ea",
+      "exitCode": 0
+    },
+    {
+      "name": "worker-node22-regression",
+      "kind": "worker",
+      "groups": 12,
+      "resultFile": "worker-panel-v3-results.json",
+      "log": "worker-node22-regression.log",
+      "sha256": "e095c03f1ab3376781855dbb1a07802250fa3d109a408b60018b7b25889ca27c",
+      "exitCode": 0
+    },
+    {
+      "name": "global-node24-regression",
+      "kind": "global",
+      "groups": 9,
+      "resultFile": "global-exposure-results.json",
+      "log": "global-node24-regression.log",
+      "sha256": "62addd4763285873476aec85e457603a90c8a40284c4d25e8ebc10eef07b4ee4",
+      "exitCode": 0
+    },
+    {
+      "name": "count-node24-regression",
+      "kind": "count",
+      "groups": 14,
+      "resultFile": "input-count-executor-results.json",
+      "log": "count-node24-regression.log",
+      "sha256": "bc8c71af29a153483497fc5e9b58f3147ab295c8296a9b7fd6fdfc41e4ae10f8",
+      "exitCode": 0
+    },
+    {
+      "name": "reference-node24-regression",
+      "kind": "reference",
+      "groups": 14,
+      "resultFile": "reference-results.json",
+      "log": "reference-node24-regression.log",
+      "sha256": "7b9895af9114940f02ff6f9e9d0e0e43ca603634d7b5dbe9552d1d8463d6d190",
+      "exitCode": 0
+    },
+    {
+      "name": "executor-node24-regression",
+      "kind": "executor",
+      "groups": 10,
+      "resultFile": null,
+      "log": "executor-node24-regression.log",
+      "sha256": "a5426dc8a40e644af9a9bf85d483a6426fb23ce7c8ebaa13409e12e7e7698633",
+      "exitCode": 0
+    },
+    {
+      "name": "worker-node24-regression",
+      "kind": "worker",
+      "groups": 12,
+      "resultFile": "worker-panel-v3-results.json",
+      "log": "worker-node24-regression.log",
+      "sha256": "a3dd6a0d0319dc2a45b87dfe2e2027cd2425c7ecb139bc2c378f8c7060d7bb23",
+      "exitCode": 0
+    }
+  ],
+  "rawEvidenceFile": "program-exclusion-raw-preservation.json",
+  "rawEvidenceSha256": "9eb98ca6edf363214a50735624c5c7bc5bd8081e8127a4fdf05b508c356f87d2",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -32,6 +32,8 @@ on:
       - 'tests/today-status-qa.cjs'
       - 'tests/daily-topup-qa.cjs'
       - 'tests/repeat-learning-qa.cjs'
+      - 'tests/local-draft-qa.cjs'
+      - 'tests/local-draft-harness.tsx'
       - 'scripts/qa-haru-icons.mjs'
       - 'scripts/generate-startup-images.mjs'
       - '.github/workflows/haru-icons-qa.yml'
@@ -103,6 +105,7 @@ jobs:
             outputs/today-status/
             outputs/daily-topup/
             outputs/completion-matrix/
+            outputs/local-draft-qa/
             work/workflow-qa.json
             work/workflow-mobile.png
             work/workflow-desktop.png

@@ -1,0 +1,79 @@
+{
+  "repository": "eyaltoledano/claude-task-master",
+  "commit": "c0c98d367c55296bfe69e65680625b6db437af02",
+  "checkedDateKst": "2026-11-06",
+  "sources": [
+    {
+      "path": "assets/example_prd_rpg.txt",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/c0c98d367c55296bfe69e65680625b6db437af02/assets/example_prd_rpg.txt",
+      "sha256": "1dd06e744c77d0cdae879d7d952270afb526fe94270437cb892b1ee349a4b692",
+      "bytes": 14618,
+      "localEvidence": "outputs\\ai-quality-plan-20261106\\official\\assets__example_prd_rpg.txt"
+    },
+    {
+      "path": "apps/docs/capabilities/rpg-method.mdx",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/c0c98d367c55296bfe69e65680625b6db437af02/apps/docs/capabilities/rpg-method.mdx",
+      "sha256": "81f427ebb028a618eeb66adc2dc61b4a274ae78dce8d6b8b170c96f2c10af1bd",
+      "bytes": 8947,
+      "localEvidence": "outputs\\ai-quality-plan-20261106\\official\\apps__docs__capabilities__rpg-method.mdx"
+    },
+    {
+      "path": "apps/docs/capabilities/task-structure.mdx",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/c0c98d367c55296bfe69e65680625b6db437af02/apps/docs/capabilities/task-structure.mdx",
+      "sha256": "1b7651c69997f8d19427071c34a250865bbd6dd6e51c0b7d358767cc06f9fa2f",
+      "bytes": 10713,
+      "localEvidence": "outputs\\ai-quality-plan-20261106\\official\\apps__docs__capabilities__task-structure.mdx"
+    },
+    {
+      "path": "apps/docs/command-reference.mdx",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/c0c98d367c55296bfe69e65680625b6db437af02/apps/docs/command-reference.mdx",
+      "sha256": "818ebd4f99f13771e6224476a92d3632639f75cf1323dd34c516092f5d9e173b",
+      "bytes": 8229,
+      "localEvidence": "outputs\\ai-quality-plan-20261106\\official\\apps__docs__command-reference.mdx"
+    },
+    {
+      "path": "apps/docs/getting-started/quick-start/prd-quick.mdx",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/c0c98d367c55296bfe69e65680625b6db437af02/apps/docs/getting-started/quick-start/prd-quick.mdx",
+      "sha256": "acc55e7437ed4a01290fe3594a509abe99bcd9b5279bff795d80bebfca8b18f9",
+      "bytes": 4096,
+      "localEvidence": "outputs\\ai-quality-plan-20261106\\official\\apps__docs__getting-started__quick-start__prd-quick.mdx"
+    },
+    {
+      "path": "apps/docs/best-practices/advanced-tasks.mdx",
+      "url": "https://raw.githubusercontent.com/eyaltoledano/claude-task-master/c0c98d367c55296bfe69e65680625b6db437af02/apps/docs/best-practices/advanced-tasks.mdx",
+      "sha256": "6925ebe3c723404d1e5accfed6ecb9a5e071b0809412c999fd3499eea924789f",
+      "bytes": 5727,
+      "localEvidence": "outputs\\ai-quality-plan-20261106\\official\\apps__docs__best-practices__advanced-tasks.mdx"
+    }
+  ],
+  "installedVersion": "0.43.1",
+  "installedConfigPresent": false,
+  "registrationMethod": "Official MCP manual title/description/details/testStrategy/dependencies plus add_subtask; CLI tags add / validate-dependencies / generate. Automatic parse/analyze/expand are AI-backed and were not invoked.",
+  "compatibility": "Use the existing single tagged tasks.json format. Latest upstream docs may differ; actual installed CLI help and MCP schemas are authoritative for available parameters. No init/reset/config/model change.",
+  "rpgSectionMapping": [
+    "overview",
+    "functional-decomposition",
+    "structural-decomposition",
+    "dependency-graph",
+    "implementation-roadmap",
+    "test-strategy",
+    "architecture",
+    "risks",
+    "appendix"
+  ],
+  "revision": 2,
+  "additionalCheckedSources": [
+    {
+      "title": "OpenAI Evaluation best practices",
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "checkedDateKst": "2026-11-06",
+      "application": "Task-specific real distribution/edge/adversarial sets; calibrate with humans; repeated/continuous eval without automatic paid runs."
+    },
+    {
+      "title": "NIST confidence limits for proportion",
+      "url": "https://itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+      "checkedDateKst": "2026-11-06",
+      "application": "Small sample/rare failure uncertainty; no IID confidence claim for correlated curated cases."
+    }
+  ]
+}

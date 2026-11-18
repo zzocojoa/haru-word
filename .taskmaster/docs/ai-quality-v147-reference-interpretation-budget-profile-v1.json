@@ -1,0 +1,41 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v2",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "358b6931-576b-46e0-93fe-b375e3504753",
+  "studyPlanHash": "395d6ec39658a9da8ce0d54bc5759f4a2dd6a9c31117230c965dd8c27db99274",
+  "collectorProtocol": "ai-quality-v147-reference-interpretation-collector-v1",
+  "successStatus": "collected-reference-interpretation",
+  "runtimeDirectoryName": "ai-quality-v147-reference-interpretation-v1-runtime-20261109",
+  "expectedModelCalls": 6,
+  "expectedCountCalls": 6,
+  "reservationMicros": "650000",
+  "countAllowanceMicros": "210000",
+  "inputCeiling": 7000,
+  "outputCeiling": 1024,
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "pricingEvidenceFile": "phase84/official-pricing-observation.json",
+  "pricingEvidenceSha256": "a13554f6f9157c9a9ededb34ee47bf04efaad0c1d024960ebf21fcb875c03341",
+  "countTariffVerified": false,
+  "invoiceVerified": false,
+  "originalFiveDollarClosed": true,
+  "newGrantCreated": false,
+  "automaticRetry": false,
+  "pilotDenominatorPreserved": 60,
+  "substitutesForReferencePipeline": false,
+  "sourceQualified": false,
+  "englishTruthCertified": false
+}

@@ -1,0 +1,23 @@
+{
+  "protocol": "ai-quality-v147-fresh-blind-reference-review-v1",
+  "phase": "phase121",
+  "tasks": [
+    "24.2",
+    "24.3"
+  ],
+  "plannedCases": 60,
+  "referenceReviewRequests": 120,
+  "firstWaveRequests": 12,
+  "firstWaveUpperMicros": 1249116,
+  "referenceQualified": 0,
+  "actualProviderCalls": 0,
+  "mainDispatchAuthorized": false,
+  "document": "docs/AI_QUALITY_V147_FRESH_BLIND_REFERENCE_REVIEW_20261109.md",
+  "evidenceSha256": {
+    "blind-reference-review-plan.json": "f18c4b3e4f65d74d758a0e353fa7e67e0633256e53461b0fac9d4ac9bf470780",
+    "review-checks.json": "8d1296013077ca154d9932ee46fc2141230e1886f90296f522de8593ca2df6e0",
+    "lexical-facts.tsv": "27634c4f54ee526cbd23a5fde1678f3ce226bbf397016f4813ee76e58b3717fa",
+    "grammar-facts.tsv": "a242c8b06177e3adb98a3e020e4b3cbcf1882c54220bc0e2cbdb9f43c9e1b921",
+    "audit.log": "01dbcb4bf202b35afaee183afd7e1a788a0b8b2ed6b07923c8dd024b8f003e52"
+  }
+}

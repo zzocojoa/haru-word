@@ -1,0 +1,655 @@
+{
+  "index": {
+    "protocol": "ai-quality-v147-local-program-known-surfaces-v1",
+    "coverage": "partial",
+    "sourceCatalogueSha256": "79eb3f379c207b6905162692e868650a4bb5899c1af109625ff5a31d44340234",
+    "sourceReportHash": "ede62f95ef02d2c93a2e08c6eb37738356b2e152d6f250bd5446879f51eeba23",
+    "knownSurfaces": 69,
+    "sourceExpansions": 76,
+    "entries": [
+      {
+        "normalizedSha256": "0693b8610d852205f857c1bf6a2d1092f82abebc4d8e0a6ae7c2462b1c0625ed",
+        "sourceExpansionIds": [
+          "program-expansion-cdaa0158b869e75a08c51219"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "08464631ff09351f42f4c4405013ff5e0b65dd09ce37fec88f7ab2229240fd75",
+        "sourceExpansionIds": [
+          "program-expansion-1d70a93050a32375e7146e8f"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "099f47e719b9adf513041760fd23a6a099544113c53a4fe35b56b13843fb4b18",
+        "sourceExpansionIds": [
+          "program-expansion-c49b507d50b3f15cfc7dacd1"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "15b16a7e3ada1daf8cd115a86b64fdd14f61b824efcfff3da548a503a33e7ad4",
+        "sourceExpansionIds": [
+          "program-expansion-e3448a941e46561dcd96a0af"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "18fc8b126c1dc454509c55e3eea9727981b29fa5d05f9c848007af88185c1235",
+        "sourceExpansionIds": [
+          "program-expansion-9184dd39a14cd71206081db9"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "1a5408d1ee1b01e121911a3d9f0c25ae0e60d4cdc5f92eaa6bdf7e3ce0f8c4d5",
+        "sourceExpansionIds": [
+          "program-expansion-07947f6f82cdeb0a71bb6ed5",
+          "program-expansion-a160745d206052314e688ad6"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "1ac1396fe8a3428331b40dbb05e52458430b00a7624ed72fb745309f1ce45444",
+        "sourceExpansionIds": [
+          "program-expansion-d5bafd324f90e2e929433ddd",
+          "program-expansion-d7fdccd73991566539875c2f"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "1e036b94dca8109ec6bb3f552cd00da83dd14413b0eb0185d5845062921b2a12",
+        "sourceExpansionIds": [
+          "program-expansion-53ed0f64e3fb2ea4bb7dd767",
+          "program-expansion-e2e577f0742d074af57d4ae6"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "28b410e996281752ccee9cb32b20dc6e3d9ba78e1ecf75a419edb4421495ecb4",
+        "sourceExpansionIds": [
+          "program-expansion-aa192be4ad9969adfc81de8b"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "2a70d77d508cc0ad5817efb4649e05e1ea37bc60fb1eefb94518f7692c2c4d5e",
+        "sourceExpansionIds": [
+          "program-expansion-59eb1d9446e51c77fa007bb2"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "2e4d6b2fa89a1c2f70ae48c863edd12db2a179417dda520fdb1a1becc6106d6c",
+        "sourceExpansionIds": [
+          "program-expansion-a32ebfe4782a2f706e53191f"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "37180b81cb5e87cb9a642bf6c832debe9d39e95a64e467c293999aba559066e7",
+        "sourceExpansionIds": [
+          "program-expansion-14fd2efdf54e8df19b52b7dc"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "390d71ce9f12c780796cffb19869d23932436aa08647c983004ac8fa9a6e904a",
+        "sourceExpansionIds": [
+          "program-expansion-efb359c5803293e03b0fc7dd"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "429275072d1183666f9364420454e9c10fa885a9d8da321682b5fc7a3ccf6029",
+        "sourceExpansionIds": [
+          "program-expansion-21d2b70fdd2893062393a460"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "43dd2afdec7f1f73a7778f6f4392c632fc87418e7b1307518c630b09033bd071",
+        "sourceExpansionIds": [
+          "program-expansion-b4ec001029ef8401582c4c91"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "47dd943e6f94ea97b793dc4436f0fe482b9c77bc93d0a97120ab1a4cc1cc01f2",
+        "sourceExpansionIds": [
+          "program-expansion-9b4d21baba53722b758e7c0e"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "49a6e6eb10ac3f45e8336f8ab70d5ecc9961452f16b6268f2b5a2ba81dc9d6e0",
+        "sourceExpansionIds": [
+          "program-expansion-9f7c776f3a367aec59ed5108"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "4a00f3d79bc945f91447c4d98e8e3e3f84f2a14ddf8bf479b4649a805e1c15b7",
+        "sourceExpansionIds": [
+          "program-expansion-fbffe375162a40228602ba1b"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "57588ff94f491da0c8901648c224a3f29ecd66903930c9943a6f4c7d806379f8",
+        "sourceExpansionIds": [
+          "program-expansion-afd52334cd5b97eb964469c2"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "59b794c9e8639fdbc673cad07151dd531bec00bd76e4de00054457b9ab43ffd1",
+        "sourceExpansionIds": [
+          "program-expansion-7ade0e04a44d0a0a5e13f3b2",
+          "program-expansion-90703da08268693833a51272"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "5d53cd6702ccbc0d73caf12a31f23b32337ad868b9c9316ecd9b7f725f4b7aef",
+        "sourceExpansionIds": [
+          "program-expansion-58d0e530481cb7952e22302b"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "6548815193e88f15462dee277d828b14b715be56a7a4a78d874ceaa7d3d53454",
+        "sourceExpansionIds": [
+          "program-expansion-7d78b079bf72eae67e26633c"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "656bfda6eaaae2e5b8e6732e6cfb10ff9d6b1af9cda698e1090be9366cd584bc",
+        "sourceExpansionIds": [
+          "program-expansion-1004e156b9be9803c1d7c6a6"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "6a53b4a74fea7d97185fc04641b26daa46a40e68e8cd9a9b7af6f8a73a68426a",
+        "sourceExpansionIds": [
+          "program-expansion-91fa3273bbb3d0fa0aefd281"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "6c84e545d2fe70262ef63e952781f2825d965962e5feeaa21b17ad57866c27a8",
+        "sourceExpansionIds": [
+          "program-expansion-8c96da45d867e7818522e6c3"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "7bb3a31630b5f0972b2858783c133063a3af11313c9fc6be83dca662030ea3fd",
+        "sourceExpansionIds": [
+          "program-expansion-da72a141aca711364786dc80"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "7c9e5a254b286b63c0e9cebc9805aac72221a5c689a04a9065c4fbdb6fd93072",
+        "sourceExpansionIds": [
+          "program-expansion-596e502faec293763cb5743a"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "7e6e711033a56a307dd7fd73f846a4aa39861205c03992fa7112e9b0cf0c57cb",
+        "sourceExpansionIds": [
+          "program-expansion-09153a1dfe969f1fc37d7d95"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "7e74f6defae2526065db8a58c27bff791eb2c6213a6c8e1daa3140e9abd2fd28",
+        "sourceExpansionIds": [
+          "program-expansion-f9c7c89b331d03a65cfa5d78"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "8175e524f8b2ba33364cbca6f16bdf28d2830e25466a40334038d996979bb931",
+        "sourceExpansionIds": [
+          "program-expansion-5ba8e142b0d038231b040b85"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "8727e2e3a4b78642f7965170979098b07520b4d97ef27a165d3e179f899d64e6",
+        "sourceExpansionIds": [
+          "program-expansion-b819f85212c6cedf6a057fa6"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "8c3c03c6ea2ffa77457e59bd5551a645a384d8836b706e5478798fa66f84a0de",
+        "sourceExpansionIds": [
+          "program-expansion-edf6fa07fa8eafa08651ee32"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "8f0c4706a4c011eb4dbc4344a4d7cfd5385b750ae8985407d1844069a3a28e9d",
+        "sourceExpansionIds": [
+          "program-expansion-8595da2d22732e399bfa1d73"
+        ],
+        "roles": [
+          "parser-original-and-preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "966bb0ff4631573e89519845c5ebc9494db09dc88c50e75ca87878542c0e896e",
+        "sourceExpansionIds": [
+          "program-expansion-155a75ea4f474ca359779468"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "a0b53b68cfdb55ca792d3a296c638eeacd1854e77420770be04ea191bbf6e5a7",
+        "sourceExpansionIds": [
+          "program-expansion-e8f5b7dc50c5b70deb482bb9"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "a4561df7a2576687a898971cdfc223819755a2df09c06a2d4737a44fb6fd95be",
+        "sourceExpansionIds": [
+          "program-expansion-550a16e2a535d81ce0c3579d"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "a46a067ab6a863f85df597a8ff48c030f5d8c9c194c128d2f70f0255fdd4d451",
+        "sourceExpansionIds": [
+          "program-expansion-0431578e5213863e56914932",
+          "program-expansion-745f503c53ab7a26b0949be8"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "a54dd89a6155926d596d2f43403b7476ed0bf260c3113cacb1f7dbaecb2bc1db",
+        "sourceExpansionIds": [
+          "program-expansion-b438ba37aa5f1c4ec9c66ab6",
+          "program-expansion-eade13f36b66207605e3f0e7"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "a69e35a94fb0158c55e7255cadf9f4267000fc8dba4a0a290a102de9fa37de48",
+        "sourceExpansionIds": [
+          "program-expansion-e0edbb4422492301da707076"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "a8376bfe04d0f41261dfa2899fe1fe9880be8ca1714d5aea19e274837fc8a891",
+        "sourceExpansionIds": [
+          "program-expansion-430fec767ffbc51deda1db36"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "a9b268ccb3a064d0c8ee49d859e6bbd7c6eb336331644266725c75317c98c3ff",
+        "sourceExpansionIds": [
+          "program-expansion-aa9894b41d275109a8d9c3cf"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "aa0e9689ed6779baca921beb11f1a82e281b276537cf8b501274f90a8c8f025b",
+        "sourceExpansionIds": [
+          "program-expansion-56a7d1f3098a8351b9852647"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "ad3edfc83b32f88b73d628602afcead19e3650961eb169b8b93e6d34def48c23",
+        "sourceExpansionIds": [
+          "program-expansion-db0ac2b1b24406a87d1e93ef"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "af4807916ef0f6402c0ee82baa9e58a6c36446434ea2b0f4c294c8800899e645",
+        "sourceExpansionIds": [
+          "program-expansion-eecdd9d37e5226a26ad630b7"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "af640c8bc27d029baf4f1c10106b11a50fdbacfe78f414eed4bd48cdbc961007",
+        "sourceExpansionIds": [
+          "program-expansion-ef771ba08b7393fa1a11adbc"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "b098753a80b98819cfdceb2aa0a69ea1f7390ffe1504bc40d3a3292a1c2e179d",
+        "sourceExpansionIds": [
+          "program-expansion-2f80e1f8a4fcf16e82b55cfb"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "b646c7faaa85caf59200fd73a1a6f5799156c39bd2580e9d0182f96e7f8bd8fe",
+        "sourceExpansionIds": [
+          "program-expansion-71b00cc652d9446eaf41986e"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "b86b9fc82f293f380d8088ba2ad5f84430fa20c63b33ee557fc9cfa17c88c48b",
+        "sourceExpansionIds": [
+          "program-expansion-d37b36f502af85742d41de65"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "ba0b6d14be7a9a72bd4072450cf172819e9fe06f6017d88c22bb85c9c8ab591c",
+        "sourceExpansionIds": [
+          "program-expansion-b229f4a8bbdc301efcae5fca"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "ba61de2a1b73cb9b3ed45b9483381cb7047a8c0391a11d7fe212c593089b5858",
+        "sourceExpansionIds": [
+          "program-expansion-7d693acee7181c4651428341"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "c1fed884413463351fc45258c4bec9ff2ba8ddd6bd041f4f662a96206b650575",
+        "sourceExpansionIds": [
+          "program-expansion-b28ee53c12a6df66987d9e38"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "c20b8363d4667746e4283d3b5288bb03cc56a4f1c22417d0bcddfc1322672910",
+        "sourceExpansionIds": [
+          "program-expansion-bf0a6e63a4166938d7e05f6d"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "c7a11261140617b9d4a59a336d1394800a97302e696a295120f5e39ba212a541",
+        "sourceExpansionIds": [
+          "program-expansion-c83c3f2c9f9caf1ca4d10f03"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "cd71bc809effa970528e98b64dcfbe1cf1dad3c40aec6d8f8b0870c525d82cee",
+        "sourceExpansionIds": [
+          "program-expansion-7e1cc6466610804b9c4a4060"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "cda4de10a64a1562a353195c9acde539fb6fae461315e7951d3b0e1f6542d939",
+        "sourceExpansionIds": [
+          "program-expansion-5eddec4d9f24671317758f64"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "ce0a4a5e9d1c409f2480296925b72598e29c537d720fb54c5e176e58b036df59",
+        "sourceExpansionIds": [
+          "program-expansion-d3c630272e9bdf9551a114eb"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "d24abad291aff0891d51b4ee0b27036ed656db996b231a7da9064769de6db450",
+        "sourceExpansionIds": [
+          "program-expansion-da00c1b3fddad10ace98c879"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "d856ca994ce8d9b944aa255d2d755007b58e10598d05f17114d3e29ff6c47575",
+        "sourceExpansionIds": [
+          "program-expansion-37ae30345ef041c9caa1fe18"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "dfb151f933d0254dbda7158c4b33726d59116fdd79d9a4a5d473b83ad3298e70",
+        "sourceExpansionIds": [
+          "program-expansion-854540f83a4a0b7c1f9306ee"
+        ],
+        "roles": [
+          "parser-original-and-preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "e051afb1bb0a7feb1f8d2c68aae89c8d0b16d5586a6e2a00fc18809629289e06",
+        "sourceExpansionIds": [
+          "program-expansion-fa505fa2e2f19b25423a50df"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "e08845a611fa54cd8a5f088a5c929e1021d20e62568a792fb104795c9a96004c",
+        "sourceExpansionIds": [
+          "program-expansion-75c0dccae4a4307f7cab9a3b"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "e210b9314f5f5670482af3c93d380c3d09b4039e57f9391a0dd2bb7cb869980b",
+        "sourceExpansionIds": [
+          "program-expansion-dbeb721b16d3fc63f70b09e3"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "e2cad3b7f899cea2abed94f3efdf2fe661c44484d43dad5e087f0a895f95183e",
+        "sourceExpansionIds": [
+          "program-expansion-cdff58802f44f39792317020"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "e829ef5d92e4fe7baf2a319b9801e22d020f52ea6846e6bef7543f6b7c01e54c",
+        "sourceExpansionIds": [
+          "program-expansion-669fcc21fa73e0af2452b216",
+          "program-expansion-d00ab9b2e2794950386519a8"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "ea7aab3abac271a0d84c25494a0d4fc1913c7cd74d8a6727cdd2e9d9a5b88cfe",
+        "sourceExpansionIds": [
+          "program-expansion-08f041049e0bdf58bcb81d0c"
+        ],
+        "roles": [
+          "preservation-source"
+        ]
+      },
+      {
+        "normalizedSha256": "ebb876df4ba128ea7df30bb6f806070088ea27caa3f66e9a9133484cdf53a3aa",
+        "sourceExpansionIds": [
+          "program-expansion-7038d7043c61b7f7e7ca7c42"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "ec7020c45bb179e94b9f3cba47c985f03be7eb0f0395c6e434fd4e2ad8335770",
+        "sourceExpansionIds": [
+          "program-expansion-c997cc6214c246ee04eab9c3"
+        ],
+        "roles": [
+          "preservation-proposed-change"
+        ]
+      },
+      {
+        "normalizedSha256": "f22c030e25d8640ab3ac673cbc636f695b0212fa668803afa3d145dfe6732fbd",
+        "sourceExpansionIds": [
+          "program-expansion-f902b10e50fc4b4e06e044ea"
+        ],
+        "roles": [
+          "parser-proposed-correction-and-reverse-preservation-input"
+        ]
+      },
+      {
+        "normalizedSha256": "f33a5a08a31bdaf5d683ed61e9ed3e57f00bc4baea59f819b6aad462ad5cf59a",
+        "sourceExpansionIds": [
+          "program-expansion-7147f9c2c197a30d4f69bd49"
+        ],
+        "roles": [
+          "parser-original-and-bidirectional-preservation-input"
+        ]
+      }
+    ],
+    "completeProjectExposure": false,
+    "structuralFamiliesCertified": false,
+    "modelEvidenceProjectionAllowed": false,
+    "hash": "8e1085db3a349e3c51ca62e82228ea37224e1df94f10b450de6813f736acd13b"
+  },
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/program-template-expansions-v1.json": "79eb3f379c207b6905162692e868650a4bb5899c1af109625ff5a31d44340234",
+    ".taskmaster/evaluation/ai-quality-v147/program-literal-exposure-audit-v1.json": "1ab0a8f82d004cc588a1dc7b737c0d007dad58334e5e9d9a0d8be8a7fd56d8c0",
+    "tests/ai-quality-morphology.test.mjs": "533792d09a7a1b688e47f13c9c3f2598df85df5f7ca44b563b0587060ba7554f",
+    "tests/balanced-daily.test.mjs": "696c1851545d9092ee1d99b73f639beba4f04aeae219f548d46aee12c10c5bf6",
+    "tests/feedback-requests.test.mjs": "b576e0b4dad5c9e98cb97ab6932f8a0a4a7b3860cff2d659574eed47c594b655",
+    "tests/feedback-word-forms.test.mjs": "2b390191d51c341d0eba7ff4cab241d27b483795104da40992c1c96ca69a4d98",
+    "tests/remediation-judgment.test.mjs": "46fb4366e12e91174144d96e04dc32dd5db2e53238acfaae31a451f134cfbd51",
+    "lib/feedback-manner-adjectives.ts": "825f72b3dc9aad88f6c4240ea434f1e22fc67b9450bb827b8aa0743842251ab3",
+    "data/words.json": "52ccf74cef98591a62a18071257f5b0f5cbbc68306660ad4e03b3d231999180f"
+  }
+}

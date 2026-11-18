@@ -11,9 +11,10 @@ import {feedbackContextFingerprint,wordFeedbackInput} from '../lib/feedback-cont
 import {grammarFeedbackInput} from '../lib/grammar/feedback-input';
 import {parseJudgmentFeedback} from '../lib/judgment-feedback-contract';
 import {FeedbackDetail} from '../app/feedback-detail';
+import {AI_PROMPT_VERSION,AI_VALIDATION_VERSION} from '../lib/ai-models';
 
 const seed: SentenceFeedback = { original:'She sing well.',correctedSentence:'She sings well.',meaningUsage:'appropriate',grammar:'needs_work',explanation:'합성 교정 설명',
- model:'gpt-6.1-sol',provider:'openai',requestedModel:'gpt-6.1-sol',promptVersion:'reference-v5',validationVersion:'judgment-v6',createdAt:'2026-11-03T00:00:00.000Z' };
+ model:'gpt-6.1-sol',provider:'openai',requestedModel:'gpt-6.1-sol',promptVersion:AI_PROMPT_VERSION,validationVersion:AI_VALIDATION_VERSION,contextNote:'그녀는 노래를 잘해.',createdAt:'2026-11-03T00:00:00.000Z' };
 let wordFingerprint='',grammarFingerprint='';
 type Mode='word'|'grammar'|'reference';
 type Controls={reset:(mode:Mode,sentence?:string,uncertain?:boolean)=>void;showReference:(version:4|5,kind:'time'|'relationship')=>void;setSentence:(value:string)=>void;changeProposal:()=>void;setBusy:(value:boolean)=>void;setDelay:(value:boolean)=>void;finish:()=>void;requests:()=>number};
@@ -56,7 +57,7 @@ function Harness(){
  </main></AiRequestProvider></LocalDraftProvider>;
 }
 async function start(){
- wordFingerprint=await feedbackContextFingerprint('word',JSON.stringify(['a1111111-1111-4111-8111-111111111111','synthetic-entry']),wordFeedbackInput({word:'sing',pos:'v.'},'노래하다',seed.original),'gpt-6.1-sol');
+ wordFingerprint=await feedbackContextFingerprint('word',JSON.stringify(['a1111111-1111-4111-8111-111111111111','synthetic-entry']),wordFeedbackInput({word:'sing',pos:'v.'},'노래하다',seed.original,seed.contextNote,'sing','sentence','intended_korean'),'gpt-6.1-sol');
  grammarFingerprint=await feedbackContextFingerprint('grammar',JSON.stringify(['auxiliary',1]),grammarFeedbackInput(GRAMMAR_LESSONS.find(l=>l.id==='auxiliary')!,seed.original),'gpt-6.1-sol');
  seed.contextFingerprint=wordFingerprint;
  createRoot(document.getElementById('root')!).render(<Harness />);

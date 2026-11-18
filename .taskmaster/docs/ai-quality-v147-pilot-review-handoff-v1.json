@@ -1,0 +1,36 @@
+{
+  "protocol": "ai-quality-v147-pilot-review-handoff-v1",
+  "phase": "phase113",
+  "plannedGenerations": 360,
+  "completedLocalParents": 318,
+  "failedLocalParents": 36,
+  "missingLocalParents": 6,
+  "plannedReviews": 1440,
+  "rehearsalReviewBodies": 1272,
+  "heldReviews": 168,
+  "calibrationSlotsPreserved": 72,
+  "actualProviderCalls": 0,
+  "actualInputCountCalls": 0,
+  "referenceQualified": false,
+  "calibrationAcceptanceAllowed": false,
+  "mainDispatchAuthorized": false,
+  "receiptFailures": {
+    "provider_invalid_response": 30,
+    "provider_truncated": 6
+  },
+  "changedRepairs": 78,
+  "browserMatches": 318,
+  "isolatedWorkerInvocations": 354,
+  "ledgerSha256": "be6d1df0079c9c78af4f3fb8ae5ade075a2b56a1b61b8d86219d2afd190416a4",
+  "handoffSha256": "a0d39af87f5d6ad2cf02351aad09939de88a9128e8ee4a9d18d6eb6b39be08fa",
+  "planHash": "9f71a8f4fc901bd63e80a54002830713a0b8ebd636dd2b1b33280d302c283592",
+  "independentSlowRequestBodyMatches": null,
+  "pilotGenerationsCompleted": 0,
+  "pilotReviewsCompleted": 0,
+  "document": "docs/AI_QUALITY_V147_PILOT_REVIEW_HANDOFF_20261109.md",
+  "taskIds": [
+    "26.2"
+  ],
+  "auditSha256": "de4afb23955805f74e43c19893ca172a96e394a07a3bbeeea63f28bb18c8a282",
+  "handoffSourceSha256": "7f3de2e4f3157e56307051b004c76abe5c4bd52f6f8273f6e5e461ba9267648e"
+}

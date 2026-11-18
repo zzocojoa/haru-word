@@ -1,0 +1,27 @@
+{
+  "protocol": "ai-quality-v147-grammar-repair-guard-v1",
+  "phase": "phase114",
+  "replayed": 15,
+  "accepted": 12,
+  "ambiguousHeld": 3,
+  "adverseControlsBlocked": 4,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "workerStopped": true,
+  "browserChecks": 8,
+  "unchangedGenerationBodies": 360,
+  "pilotGenerationsCompleted": 0,
+  "pilotReviewsCompleted": 0,
+  "mainDispatchAuthorized": false,
+  "document": "docs/AI_QUALITY_V147_GRAMMAR_REPAIR_GUARD_20261109.md",
+  "taskIds": [
+    "6.2",
+    "7.2"
+  ],
+  "replaySha256": "2cec886722626ec13dc2ec772005df44277de57a908f0c9fab2c7b442ebdb46d",
+  "ledgerSha256": "be6d1df0079c9c78af4f3fb8ae5ade075a2b56a1b61b8d86219d2afd190416a4",
+  "productFiles": {
+    "work/ai-quality-v147-target-display-20261109/lib/judgment-correction.ts": "4146e45a2bcaa649b6dc83a90df954534ee1f6fbe157eb5f4ad777855bcd20e9",
+    "work/ai-quality-v147-target-display-20261109/tests/remediation-judgment.test.mjs": "e3dea95efeccd88d83ea02589fffb65cc617fa194cbb55516d6c32d6d141f93a"
+  }
+}

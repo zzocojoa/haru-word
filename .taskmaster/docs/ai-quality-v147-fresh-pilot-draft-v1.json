@@ -1,0 +1,26 @@
+{
+  "protocol": "ai-quality-v147-fresh-pilot-draft-v1",
+  "phase": "phase120",
+  "tasks": [
+    "6.2",
+    "24.2",
+    "24.4"
+  ],
+  "freshDraftCases": 60,
+  "plannedCases": 60,
+  "verifiedProductRequests": 360,
+  "knownSurfaceHashes": 953,
+  "referenceQualified": 0,
+  "actualProviderCalls": 0,
+  "mainDispatchAuthorized": false,
+  "document": "docs/AI_QUALITY_V147_FRESH_PILOT_DRAFT_20261109.md",
+  "baselineSyntheticAccepted": 171,
+  "candidateSyntheticAccepted": 174,
+  "candidateCasesBlocked": 2,
+  "evidenceSha256": {
+    "pilot-60-draft-v2.json": "79da4613985f951c9957209c4bdc7a0bf4ec7b763273d3a52f680f83f48c1347",
+    "pilot-60-capture.json": "f01f4ae363f8af7fc43c33b33cb134e04f55ceadbede98692a6e45e8af3ea516",
+    "compose.log": "081fb627ba0d87bcdf5568bffc869bf550c70b469e4dce81c401013326d3ef0e",
+    "capture.log": "b4fd6306b71b392dc92f53e1b3f12eb95413b1ece9bcf5689427861052fcd4eb"
+  }
+}

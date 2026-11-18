@@ -1,0 +1,279 @@
+{
+  "protocol": "ai-quality-v147-closed-day-provision-audit-v2",
+  "dayUtc": "2026-11-09",
+  "selected": [
+    {
+      "runId": "c384abf1-a53f-45a5-8d0c-6ad34ecdbb61",
+      "receiptCount": 36,
+      "provisionMicros": "1260000",
+      "receiptKeys": [
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-10-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-11-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-12-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-13-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-14-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-15-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-16-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-17-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-18-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-19-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-2-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-20-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-21-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-22-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-23-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-24-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-25-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-26-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-27-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-28-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-29-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-3-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-30-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-31-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-32-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-33-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-34-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-35-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-4-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-5-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-6-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-7-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-8-response.json",
+        "ai-quality-v147-meaning-contrast-runtime-20261109/count-9-response.json"
+      ]
+    },
+    {
+      "runId": "2dce7cd3-4607-4a50-8401-c3fd47318195",
+      "receiptCount": 3,
+      "provisionMicros": "105000",
+      "receiptKeys": [
+        "ai-quality-v147-witness-source-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-witness-source-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-witness-source-runtime-20261109/count-2-response.json"
+      ]
+    },
+    {
+      "runId": "85f95b75-a68e-4658-bec5-d2852a31786c",
+      "receiptCount": 36,
+      "provisionMicros": "1260000",
+      "receiptKeys": [
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-10-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-11-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-12-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-13-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-14-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-15-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-16-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-17-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-18-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-19-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-2-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-20-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-21-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-22-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-23-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-24-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-25-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-26-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-27-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-28-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-29-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-3-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-30-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-31-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-32-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-33-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-34-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-35-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-4-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-5-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-6-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-7-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-8-response.json",
+        "ai-quality-v147-assessment-boundary-runtime-20261109/count-9-response.json"
+      ]
+    },
+    {
+      "runId": "015ea416-4408-4739-aaad-1af02db22593",
+      "receiptCount": 3,
+      "provisionMicros": "105000",
+      "receiptKeys": [
+        "ai-quality-v147-main-source-v8-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-main-source-v8-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-main-source-v8-runtime-20261109/count-2-response.json"
+      ]
+    },
+    {
+      "runId": "7cd19c6f-ff9c-4523-900a-16eb1c718bf8",
+      "receiptCount": 3,
+      "provisionMicros": "105000",
+      "receiptKeys": [
+        "ai-quality-v147-rendered-review-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-rendered-review-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-rendered-review-runtime-20261109/count-2-response.json"
+      ]
+    },
+    {
+      "runId": "0a84443c-a57f-4227-b391-5956d2385f1a",
+      "receiptCount": 3,
+      "provisionMicros": "105000",
+      "receiptKeys": [
+        "ai-quality-v147-rendered-panel-review-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-rendered-panel-review-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-rendered-panel-review-runtime-20261109/count-2-response.json"
+      ]
+    },
+    {
+      "runId": "5a174341-9d55-4987-9dbf-dc5bd265fd5c",
+      "receiptCount": 24,
+      "provisionMicros": "840000",
+      "receiptKeys": [
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-10-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-11-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-12-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-13-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-14-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-15-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-16-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-17-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-18-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-19-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-2-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-20-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-21-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-22-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-23-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-3-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-4-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-5-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-6-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-7-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-8-response.json",
+        "ai-quality-v147-reference-supplement-runtime-20261109/count-9-response.json"
+      ]
+    },
+    {
+      "runId": "7f026c9c-8013-4de7-96f1-dad18c055cff",
+      "receiptCount": 6,
+      "provisionMicros": "210000",
+      "receiptKeys": [
+        "ai-quality-v147-product-correction-diagnostic-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-product-correction-diagnostic-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-product-correction-diagnostic-runtime-20261109/count-2-response.json",
+        "ai-quality-v147-product-correction-diagnostic-runtime-20261109/count-3-response.json",
+        "ai-quality-v147-product-correction-diagnostic-runtime-20261109/count-4-response.json",
+        "ai-quality-v147-product-correction-diagnostic-runtime-20261109/count-5-response.json"
+      ]
+    },
+    {
+      "runId": "47187494-37bb-4536-a52e-2dedca69e918",
+      "receiptCount": 3,
+      "provisionMicros": "105000",
+      "receiptKeys": [
+        "ai-quality-v147-complete-correction-live-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-complete-correction-live-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-complete-correction-live-runtime-20261109/count-2-response.json"
+      ]
+    },
+    {
+      "runId": "6471b989-412f-43dd-9d52-8ad4094d90b6",
+      "receiptCount": 12,
+      "provisionMicros": "420000",
+      "receiptKeys": [
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-0-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-1-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-10-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-11-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-2-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-3-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-4-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-5-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-6-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-7-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-8-response.json",
+        "ai-quality-v147-fresh-reference-first-wave-runtime-20261109/count-9-response.json"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "runId": "af8069cc-7d2d-4205-8f74-d3e1ce638303",
+      "receiptCount": 84,
+      "reason": "already-reassigned"
+    },
+    {
+      "runId": "a07a5716-1931-47bc-8bab-16767da5f609",
+      "receiptCount": 2,
+      "reason": "other-utc-day"
+    },
+    {
+      "runId": "6c867c04-2b27-4af7-9b25-a111a9e759eb",
+      "receiptCount": 6,
+      "reason": "other-utc-day"
+    },
+    {
+      "runId": "550ad17a-ef79-4d55-b713-7e739c9f5094",
+      "receiptCount": 48,
+      "reason": "other-utc-day"
+    },
+    {
+      "runId": "a8f34f11-fd15-4011-a97c-93477df31742",
+      "receiptCount": 3,
+      "reason": "other-utc-day"
+    },
+    {
+      "runId": "fb27af18-74db-4eea-a808-de570242d8dc",
+      "receiptCount": 3,
+      "reason": "other-utc-day"
+    },
+    {
+      "runId": "6612db23-da2b-409f-88e2-3821c67b75b1",
+      "receiptCount": 6,
+      "reason": "other-utc-day"
+    }
+  ],
+  "selectedRuns": 10,
+  "selectedReceipts": 129,
+  "candidateProvisionAdjustmentMicros": "4515000",
+  "beforeUsedUpperMicros": "34843759",
+  "beforeAvailableMicros": "156241",
+  "candidateUsedUpperMicros": "30328759",
+  "candidateAvailableMicros": "4671241",
+  "restrictedUnusedMicrosRetained": "567509",
+  "candidateConditionalRemainingMicros": "5238750",
+  "pastUnbilledContingencyMicrosRetained": "1000000",
+  "currentDayCountProvisionMicrosRetained": "2380000",
+  "originalFormalCalibrationCountProvisionMicrosRetained": "2520000",
+  "oldUnassignedHeldMicrosRetained": "7816",
+  "originalFiveDollarReopened": false,
+  "oldAllocationsChanged": false,
+  "newGrantCreated": false,
+  "candidateIsActualCashBalance": false,
+  "adjustmentApplied": false,
+  "countApiProvenFree": false,
+  "feeRiskDecisionRequired": true,
+  "invoiceVerified": false,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "phase": "phase176",
+  "status": "reconciliation-candidate-not-applied",
+  "document": "docs/AI_QUALITY_V147_CLOSED_DAY_PROVISION_AUDIT_20261112.md",
+  "regressionChecks": 7,
+  "currentLedgerSha256": "c252fd3a0b4887c014bdc5dc5218c399f9c88403f0b8ae46c82bd4db4b4ff649",
+  "inputHash": "faea369cccf8d8cc45556a603399adb4ed531970af158153fba39b1d68a84f30",
+  "evidenceFile": "outputs/ai-quality-v147-implementation-20261106/phase176/audit-preparation.json",
+  "evidenceSha256": "3af0d30dd9a39b8820c26ef68f24345fc6ca68b93a5cc46f15d3e829eca6a381",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-closed-day-provision-audit-v2.mjs": "eb8b8047002f6fb24c432251c94077f4a7ea7e6e6b828a00f9bc82cb96e89274",
+    ".taskmaster/scripts/test-ai-quality-v147-closed-day-provision-audit-v2.mjs": "84d480ea7d9425d1ed85044606727fbda8dbaabc8f9daa77ecd33f29e5d0c91a"
+  }
+}

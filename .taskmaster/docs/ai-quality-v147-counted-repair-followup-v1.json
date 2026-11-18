@@ -1,0 +1,34 @@
+{
+  "frozenCandidateRejected": 4,
+  "currentBrowserAccepted": 10,
+  "changedOrIncompleteBlocked": 6,
+  "syntheticCalls": 21,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "priorFreezeSha256": "87babecf62e8920dd54861c805675dc07d1ea2681778bc8a3aa12d118b39f02e",
+  "pilotCandidateRebound": false,
+  "sourceHashes": {
+    "lib/judgment-correction.ts": "cbce92da40b592fe30ebae69728f3d11d934515538bf779d86bb46c8f2ad4a25",
+    "lib/feedback-word-forms.ts": "0de665a64dd435fac863cc196ebbe510da2ec42fcde0feba456d9ef61dea01fe",
+    "tests/remediation-judgment.test.mjs": "e28663949902b4d3bdf14e135a0fc5ad7cc57daaac4aa4f37d44f111199aeaf6"
+  },
+  "protocol": "ai-quality-v147-counted-repair-followup-v1",
+  "phase": "phase143",
+  "tasks": [
+    "6.2",
+    "7.3",
+    "24.1"
+  ],
+  "document": "docs/AI_QUALITY_V147_COUNTED_REPAIR_FOLLOWUP_20261109.md",
+  "mainDispatchAuthorized": false,
+  "evidenceSha256": {
+    "count-repair-audit.json": "cb080a64faf1a1113a6ec0cc7c1f04af8effc2d547492cc63146347cf677f806",
+    "verify-count-repair.mjs": "c4fca5c479694f67e8ba54e8b08140c8c15ec346c6e02da40df05f0ca54bb736",
+    "worker-browser.log": "5ea47f933f1006edc3174aa0dfaf9869dddde42471dcf4b4d169d25e4c3f5a42",
+    "test.log": "0db0146c850c874606c2451c5bec8f8a0da6ada017554f02fc7a812471975c63",
+    "build.log": "c172786f384c7d78d9bf3c6831239d0294632cc861152c96b98b4d28a4ac32d0",
+    "typecheck.log": "302304dae6dfa71f31211837c732c0510177504fe6b5063786b269c5e1fef2ec",
+    "lint.log": "35bdb5b5e8ec9033f080396ffe6d229a4609391a38112660c989e99695530240"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "ai-quality-v147-decision-contract-8",
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "prospective-local-contract-two-development-responses-observed-not-qualified",
+  "previousContract": ".taskmaster/docs/ai-quality-v147-decision-contract-v7.json",
+  "previousContractSha256": "8d57f37866725bf65fcdddf6b392ff00d8a38ff9b62a19a155047d72a110c792",
+  "dimensions": [
+    "meaning",
+    "grammar",
+    "correction",
+    "explanation",
+    "abstention"
+  ],
+  "dimensionDefinitions": {
+    "meaning": "Judge original target use independently. Known incompleteness and missing completion content do not by themselves erase a supported target judgment. Presence alone does not establish correct use. Explicit reply/title/command forms remain separate.",
+    "grammar": "Judge ORIGINAL grammar independently of target use and correction readiness. Keep natural for grammatical originals, needs_work for visible defects, and uncertain only when original grammaticality cannot be judged. A missing time, quantity, message, relationship or target interpretation does not itself erase a supported original grammar judgment.",
+    "correction": "For explicit word contextRole intended_korean, compare completion and meaning repair to the supplied Korean intent; grammatical original English may have a changed correctedSentence. Do not infer a grammar error from that meaning difference. The same AI judges correspondence; no independent app semantic proof is claimed. Without that role, preserve original content under the existing minimal-correction policy.",
+    "explanation": "Assess only learner-visible factual claims, reviewed application rules and actual comparisons. Hidden model reasons are diagnostic only. A false visible grammar rule fails this dimension even when the correction is right. App-authored explanations do not certify hidden model-text accuracy.",
+    "abstention": "Withhold an unsafe interpretation/correction and ask for the specific missing message, time, quantity, target meaning or relationship. Target-only uncertainty may coexist with an independently justified grammar correction. Ordinary complete pronouns and valid commands do not need named real-world referents. Known target-form error may coexist with withheld correction."
+  },
+  "criticalFields": [
+    "approveBadGrammar",
+    "reverseMeaning",
+    "swapRoles",
+    "inventedIntent"
+  ],
+  "criticalPolicy": {
+    "approveBadGrammar": "Learner-visible approval of known incorrect original grammar; a target-only disagreement or unavailable response is not this error.",
+    "reverseMeaning": "Evidence of an actual meaning reversal, not merely an unconfirmed alternative interpretation.",
+    "swapRoles": "Evidence that a visible correction exchanges participants' semantic roles.",
+    "inventedIntent": "Evidence of an invented agent, event or speech act in the visible product output. A model's raw invention that the product independently withholds is a separate model diagnostic."
+  },
+  "wireLabels": {
+    "meaningUsage": [
+      "appropriate",
+      "needs_work",
+      "uncertain"
+    ],
+    "grammar": [
+      "natural",
+      "needs_work",
+      "uncertain"
+    ],
+    "contextNeeded": [
+      "none",
+      "message",
+      "time",
+      "quantity",
+      "target_meaning",
+      "relationship"
+    ]
+  },
+  "promptVersion": "reference-v11",
+  "validationVersion": "judgment-v9",
+  "publicAiContract": 4,
+  "correctionContextBoundary": {
+    "natural": "Repeat original while correction context is unresolved; grammar stays natural. Explicit intended Korean meaning repair keeps the existing exception.",
+    "needs_work": "Return a justified complete correction, or leave correction/reason empty and ask the required context kind; preserve needs_work.",
+    "uncertain": "No forced correction; ask for missing context.",
+    "unresolvedEdits": "No chosen repair with unresolved time, quantity, message or relationship. Target-only uncertainty can accompany an independently justified grammar repair.",
+    "sourceIntegrity": "Exact original edit spans, source membership and sufficiency checks remain. Mechanical decoding never establishes English truth or reference qualification."
+  },
+  "examples": [
+    {
+      "sentence": "The ferry will leave soon.",
+      "grammar": "natural",
+      "contextNeeded": "time",
+      "correctedSentence": "The ferry will leave soon."
+    },
+    {
+      "sentence": "You might brought a torch.",
+      "grammar": "needs_work",
+      "contextNeeded": "time",
+      "correctedSentence": ""
+    },
+    {
+      "sentence": "She sing well.",
+      "grammar": "needs_work",
+      "contextNeeded": "target_meaning",
+      "correctedSentence": "She sings well.",
+      "meaningUsage": "uncertain"
+    }
+  ],
+  "candidatePreparationFile": ".taskmaster/docs/ai-quality-v147-grammar-context-candidate-v1.json",
+  "actualDevelopmentEvidenceFile": ".taskmaster/docs/ai-quality-v147-context-candidate-actual-v1.json",
+  "modelEvidenceScope": "Two exposed Terra development cases; no independent score or qualification.",
+  "frozenEvaluationContractChanged": false,
+  "oldEvaluationsRescored": false,
+  "qualifiedReferences": 0,
+  "formalPilotGenerations": 0,
+  "mainDispatchAuthorized": false,
+  "releaseQualified": false,
+  "sourceBindings": {
+    "productInstruction": "lib/judgment-policy.ts",
+    "productSchemaAndParser": "lib/judgment-feedback-contract.ts",
+    "wordReferenceEncoding": ".taskmaster/scripts/ai-quality-v147-bilingual-reference-v2.mjs",
+    "grammarReferenceEncoding": ".taskmaster/scripts/ai-quality-v147-blind-reference-inspection-v3.mjs"
+  }
+}

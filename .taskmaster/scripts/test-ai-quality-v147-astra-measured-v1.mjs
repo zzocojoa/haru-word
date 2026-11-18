@@ -1,0 +1,56 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {mkdirSync,readFileSync,writeFileSync,appendFileSync,readdirSync,existsSync} from 'node:fs';import {resolve} from 'node:path';import {fileURLToPath} from 'node:url';import {spawn} from 'node:child_process';import {createServer} from 'node:http';
+import {digest} from './ai-quality-v147-budget.mjs';
+import {prepareMeasuredAstraV1,compileMeasuredAstraBudgetV1,runSyntheticMeasuredAstraV1,runAuthorizedMeasuredAstraV1} from './ai-quality-v147-astra-measured-v1.mjs';
+const prepared=prepareMeasuredAstraV1(),KEY='synthetic-credential-only',approval=p=>({sessionUserApproved:false,planHash:p.hash,amountMicros:'5000000',priorDebitMicros:'59060',evidenceHash:digest('synthetic')});
+const payload=()=>({goldCaseId:'G12',witnessId:'N04',assessments:prepared.base.prepared.data.questions.map(q=>({questionId:q.id,verdict:'not-established',sourceEvidence:[],feedbackQuotes:[],rationale:'Synthetic fixture only.'})),originalGrammar:'uncertain',declaredUsageScope:'',exactOriginalSupport:'not-established',categoricalGoldRecommendation:'hold',remainingUncertainty:['Synthetic.']});
+const response=(kind,input=1391)=>({status:200,contentType:'application/json',responseRaw:JSON.stringify(kind==='count'?{object:'response.input_tokens',input_tokens:input}:{model:'gpt-6-astra',service_tier:'default',status:'completed',usage:{input_tokens:input,output_tokens:250,total_tokens:input+250,input_tokens_details:{cached_tokens:0,cache_write_tokens:0}},output:[{type:'message',content:[{type:'output_text',text:JSON.stringify(payload())}]}]})});
+if(process.argv[2]==='--child'){
+ const root=resolve(process.argv[3]),fault=process.argv[4];try{await runSyntheticMeasuredAstraV1({prepared,approval:approval(prepared),runtimeRoot:root,loadExistingKey:()=>KEY,transport:async({kind})=>{appendFileSync(resolve(root,'calls.jsonl'),JSON.stringify({kind})+'\n');return response(kind);},testFault:s=>{if(s===fault)process.exit(91);}});process.exit(0);}catch{process.exit(75);}
+}
+const out=resolve(process.env.QA_OUTPUT_DIR);mkdirSync(out,{recursive:false});const rows=[],pass=name=>rows.push({name,passed:true}),save=(n,x)=>writeFileSync(resolve(out,n),JSON.stringify(x,null,2)+'\n',{flag:'wx'}),options=(n,more={})=>({prepared,approval:approval(prepared),runtimeRoot:resolve(out,n),loadExistingKey:()=>KEY,transport:async({kind})=>response(kind),...more});
+const receipts=()=>prepared.plan.requests.map((r,i)=>({requestSha256:r.sha256,projectionSha256:hashText(prepared.plan.countBodies[i]),responseSha256:hashText(response('count').responseRaw),localCounterRequestId:'synthetic',inputTokens:1391,measuredByOfficialEndpoint:false}));
+import {createHash} from 'node:crypto';const hashText=x=>createHash('sha256').update(x).digest('hex');
+const child=(root,fault='none')=>new Promise((ok,no)=>{const p=spawn(process.execPath,[fileURLToPath(import.meta.url),'--child',root,fault],{windowsHide:true,stdio:['ignore','pipe','pipe']});let err='';p.stderr.on('data',x=>err+=x);p.on('error',no);p.on('close',code=>ok({code,err}));});
+test('quote uses each exact count,prior debit,and full retained counter allowance',()=>{
+ const quote=compileMeasuredAstraBudgetV1(prepared,receipts(),'synthetic');assert.deepEqual(quote.perRequest,['240581','240581']);assert.equal(quote.generationMaximumMicros,'481162');assert.equal(quote.countAllowanceMicros,'481162');assert.equal(quote.maximumCampaignMicros,'1021384');assert.equal(quote.generationApprovalMicros,'4459778');assert.deepEqual(quote.inputTokens,[1391,1391]);assert.ok(quote.spec.batches.every(b=>b.requests[0].inputTokenMax===1391));save('measured-arithmetic.json',quote);pass('actual-count arithmetic/prior debit/counter allowance');
+});
+test('owned HTTP sends count,count,originalAstra,originalAstra and no old Terra/Sol',{timeout:120000},async()=>{
+ const requests=[],server=createServer(async(req,res)=>{let raw='';for await(const c of req)raw+=c;const kind=req.url==='/count'?'count':'model';requests.push({kind,raw});const r=response(kind);res.writeHead(200,{'content-type':r.contentType});res.end(r.responseRaw);});await new Promise(ok=>server.listen(0,'127.0.0.1',ok));let result;
+ try{result=await runSyntheticMeasuredAstraV1(options('http',{transport:async({kind,requestRaw})=>{const r=await fetch('http://127.0.0.1:'+server.address().port+'/'+kind,{method:'POST',body:requestRaw});return {status:r.status,contentType:r.headers.get('content-type'),responseRaw:await r.text()};}}));}finally{await new Promise(ok=>server.close(ok));}
+ assert.deepEqual(requests.map(x=>x.kind),['count','count','model','model']);assert.equal(requests[2].raw,prepared.plan.requests[0].requestRaw);assert.equal(requests[3].raw,prepared.plan.requests[1].requestRaw);assert.equal(result.collectedAstra,2);assert.equal(result.actualProviderCalls,0);assert.equal(result.campaignUpperMicros,'598324');assert.equal(result.countAllowanceRetained,true);assert.equal(result.countRequestsAssumedFree,false);assert.equal(result.englishQualityQualified,false);save('two-count-two-generation.json',result);pass('owned exact four HTTP events/no prior resend');
+});
+test('count failure/malformed/credential echo means no generation and full remaining hold',async()=>{
+ const failures=[];for(const kind of ['http','shape','echo','network']){let models=0;const r=await runSyntheticMeasuredAstraV1(options('bad-'+kind,{transport:async({kind:k})=>{if(k==='model')models++;if(kind==='network')throw Error(KEY);const v=response(k);if(kind==='http')v.status=429;if(kind==='shape')v.responseRaw='{}';if(kind==='echo')v.responseRaw=JSON.stringify({error:KEY});return v;}}));assert.equal(models,0);assert.equal(r.campaignUpperMicros,'5000000');assert.equal(r.collectedAstra,0);assert.ok(!JSON.stringify(r).includes(KEY));failures.push({kind,code:r.failureCode});}save('count-failures.json',failures);pass('four uncertain counts held/no generation');
+});
+test('an exact count too expensive stops before model dispatch',async()=>{
+ const r=await runSyntheticMeasuredAstraV1(options('large',{transport:async({kind})=>response(kind,200000)}));assert.equal(r.countCalls,2);assert.equal(r.modelCalls,0);assert.equal(r.failureCode,'AM1_CAMPAIGN_BUDGET');assert.equal(r.campaignUpperMicros,'5000000');save('expensive-count-held.json',r);pass('actual costly input rejected');
+});
+test('receipt swapped across full body/layout hashes cannot compile a quote',()=>{
+ const x=receipts();[x[0].requestSha256,x[1].requestSha256]=[x[1].requestSha256,x[0].requestSha256];assert.throws(()=>compileMeasuredAstraBudgetV1(prepared,x),/AM1_COUNT_BINDING/);pass('exact layout/body binding');
+});
+test('mutable plan change is held before any further dispatch',async()=>{
+ const p=prepareMeasuredAstraV1();let calls=0;const r=await runSyntheticMeasuredAstraV1(options('changed',{prepared:p,approval:approval(p),transport:async({kind})=>{calls++;return response(kind);},testFault:s=>{if(s==='count-after-consume')p.plan.countBodies[0]+=' ';}}));assert.equal(calls,0);assert.equal(r.campaignUpperMicros,'5000000');pass('in-memory plan mutation held');
+});
+test('physical count receipt change after quote stops before generation',async()=>{
+ const root=resolve(out,'count-tamper'),r=await runSyntheticMeasuredAstraV1(options('count-tamper',{testFault:s=>{if(s==='after-quote')writeFileSync(resolve(root,'count-0-receipt.json'),'{}');}}));assert.equal(r.modelCalls,0);assert.equal(r.failureCode,'AM1_COUNT_CAPTURE_BINDING');assert.equal(r.countAllowanceMicros,'481162');pass('physical count proof retained');
+});
+test('model usage must equal counted input;otherwise no second model call',async()=>{
+ const r=await runSyntheticMeasuredAstraV1(options('mismatch',{transport:async({kind})=>response(kind,kind==='count'?1391:1392)}));assert.equal(r.modelCalls,1);assert.equal(r.failureCode,'AM1_USAGE_MATCH');assert.equal(r.generationAccount.upperMicros,'240581');assert.equal(r.collectedAstra,0);save('model-count-mismatch.json',r);pass('count/actual mismatch held');
+});
+test('cap or prior debit changes reject before key access/files',async()=>{
+ for(const change of [{amountMicros:'6000000'},{priorDebitMicros:'0'},{sessionUserApproved:true}]){let reads=0;const root=resolve(out,'approval-'+Object.keys(change)[0]);await assert.rejects(runSyntheticMeasuredAstraV1(options('unused',{runtimeRoot:root,approval:{...approval(prepared),...change},loadExistingKey:()=>{reads++;return KEY;}})),/AM1_APPROVAL/);assert.equal(reads,0);assert.equal(existsSync(root),false);}await assert.rejects(runAuthorizedMeasuredAstraV1(options('wrong-live-root')),/AM1_LIVE_ROOT/);pass('aggregate authorization/not reset to fresh five');
+});
+test('echoing provider cannot persist the synthetic key',async()=>{
+ const root=resolve(out,'privacy'),r=await runSyntheticMeasuredAstraV1(options('privacy',{transport:async()=>({status:401,contentType:'application/json',responseRaw:JSON.stringify({error:KEY})})}));function scan(p){for(const f of readdirSync(p,{withFileTypes:true})){const q=resolve(p,f.name);if(f.isDirectory())scan(q);else assert.ok(!readFileSync(q,'utf8').includes(KEY));}}scan(root);assert.equal(r.failureCode,'AM1_CREDENTIAL_ECHO');pass('credential privacy');
+});
+test('two actual processes cannot duplicate count or generation',{timeout:120000},async()=>{
+ const root=resolve(out,'race'),r=await Promise.all([child(root),child(root)]);assert.deepEqual(r.map(x=>x.code).sort((a,b)=>a-b),[0,75]);assert.ok(r.every(x=>!x.err));const calls=readFileSync(resolve(root,'calls.jsonl'),'utf8').trim().split('\n').map(JSON.parse);assert.equal(calls.filter(x=>x.kind==='count').length,2);assert.equal(calls.filter(x=>x.kind==='model').length,2);save('two-process-once.json',r);pass('real process race/no duplicate requests');
+});
+test('actual child exits after count/model consumption never resume or resend',{timeout:120000},async()=>{
+ const result=[];for(const fault of ['count-after-consume','model-after-consume']){const root=resolve(out,fault),a=await child(root,fault);assert.equal(a.code,91);const b=await child(root);assert.equal(b.code,75);const file=resolve(root,'calls.jsonl'),calls=existsSync(file)?readFileSync(file,'utf8').trim().split('\n').map(JSON.parse):[];assert.equal(calls.filter(x=>x.kind==='model').length,0);assert.equal(calls.length,fault==='count-after-consume'?0:2);result.push({fault,a,b,calls});}save('real-exit-no-resend.json',result);pass('two real exits/no automatic recovery');
+});
+test('failed generation-store initialization produces a terminal full hold with no model request',async()=>{
+ const root=resolve(out,'store-blocked'),r=await runSyntheticMeasuredAstraV1(options('store-blocked',{testFault:s=>{if(s==='after-quote')writeFileSync(resolve(root,prepared.plan.runId),'blocked');}}));assert.equal(r.modelCalls,0);assert.equal(r.countCalls,2);assert.equal(r.campaignUpperMicros,'5000000');assert.equal(r.status,'held');assert.equal(existsSync(resolve(root,'terminal.json')),true);pass('store initialization fail-closed');
+});
+test.after(()=>save('astra-measured-results.json',{passed:rows.length===13,groups:rows.length,rows,nodeVersion:process.version,actualProviderCalls:0,actualCountApiCalls:0,capMicros:'5000000',priorDebitMicros:'59060',countRequestsAssumedFree:false,englishQualityQualified:false}));

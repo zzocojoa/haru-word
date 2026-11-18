@@ -1,0 +1,24 @@
+{
+  "protocol": "ai-quality-v147-correction-guard-comparison-v1",
+  "phase": "phase123",
+  "tasks": [
+    "6.2",
+    "7.3"
+  ],
+  "positiveControls": 6,
+  "adverseControls": 12,
+  "previewAcceptedReplays": 180,
+  "currentAcceptedReplays": 174,
+  "factChecksOnlyAdverseAccepted": 8,
+  "previewAdverseAccepted": 0,
+  "productChanged": false,
+  "actualProviderCalls": 0,
+  "mainDispatchAuthorized": false,
+  "document": "docs/AI_QUALITY_V147_CORRECTION_GUARD_COMPARISON_20261109.md",
+  "evidenceSha256": {
+    "comparison.json": "e91e1ac94ade9957d61d5ab0ffdde7f2b4179ed5834ab37238f8f847f818bb93",
+    "comparison.log": "6c7e990eed7db2a4da448db015a2a982999e64e2b8a898b7be6610269a52fbe3",
+    "compare-guards.mjs": "d8e5473489a6dd0860238973b69fd24b6d3ba686a65bb609903559369c4f9604",
+    "preview-rules.ts": "a4eeb793e9e631080edfc75bb35e72c32aac138c6124095a2dd83aab04d8815c"
+  }
+}

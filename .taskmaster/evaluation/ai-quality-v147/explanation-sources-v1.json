@@ -1,0 +1,113 @@
+{
+  "protocol": "ai-quality-v147-explanation-sources-v1",
+  "checkedAtUtc": "2026-11-08T06:30:24.458645+00:00",
+  "sourceScope": "Four carried publisher summaries plus two newly read primary language sources and one methodology document. No independent case/English certification.",
+  "carriedCatalogFile": ".taskmaster/evaluation/ai-quality-v147/critical-boundary-sources-v1.json",
+  "carriedCatalogHash": "356ed5815278caf52f23e166ce26f33aedb27a7317350d88262c3bf2f9e29f17",
+  "sources": [
+    {
+      "id": "searle-force-content",
+      "title": "A taxonomy of illocutionary acts",
+      "author": "John R. Searle",
+      "publisher": "Cambridge University Press",
+      "doi": "10.1017/CBO9780511609213.003",
+      "url": "https://www.cambridge.org/core/books/abs/expression-and-meaning/taxonomy-of-illocutionary-acts/2CDFAF1E30D40F337B1380C70D6C73CA",
+      "excerpt": "a distinction between the illocutionary force of an utterance and its propositional content",
+      "paraphrase": "The author explicitly distinguishes the force of an utterance from its content and classifies types of force.",
+      "scopeLimit": "This does not specify project Boolean flags or label the Music example.",
+      "kind": "language",
+      "accessScope": "Previously frozen publisher summary/extract, not refetched full chapter in phase71",
+      "previouslyCheckedAtUtc": "2026-11-08T05:11:15.787337+00:00"
+    },
+    {
+      "id": "recanati-force-content",
+      "title": "Content, mode, and self-reference",
+      "author": "François Recanati",
+      "publisher": "Cambridge University Press",
+      "doi": "10.1017/CBO9780511619489.003",
+      "url": "https://www.cambridge.org/core/books/abs/john-searles-philosophy-of-language/content-mode-and-selfreference/F0F98DEF3A44F93CF1D7AB093951BEB8",
+      "excerpt": "the same proposition that would be the content of an assertion",
+      "paraphrase": "The author discusses one specified future action as content of an order, statement or question, while challenging a restriction on directive content.",
+      "scopeLimit": "Theory details are disputed. Similar topic words do not guarantee identical event, participants or time.",
+      "kind": "language",
+      "accessScope": "Previously frozen publisher summary/extract, not refetched full chapter in phase71",
+      "previouslyCheckedAtUtc": "2026-11-08T05:11:15.787337+00:00"
+    },
+    {
+      "id": "clause-type-force",
+      "title": "Clause Type, A Student’s Introduction to English Grammar, second edition",
+      "author": "Rodney Huddleston; Geoffrey K. Pullum; Brett Reynolds",
+      "publisher": "Cambridge University Press",
+      "url": "https://www.cambridge.org/highereducation/books/a-students-introduction-to-english-grammar/EB0ABC6005935012E5270C8470B2B740/clause-type/675210B6E6877604BE648512835ABE4C",
+      "excerpt": "characteristic but imperfect relations",
+      "paraphrase": "Clause forms have characteristic but imperfect relations to statements, questions and commands.",
+      "scopeLimit": "Do not infer the actual speech act from punctuation or clause form alone.",
+      "kind": "language",
+      "accessScope": "Previously frozen publisher summary/extract, not refetched full chapter in phase71",
+      "previouslyCheckedAtUtc": "2026-11-08T05:11:15.787337+00:00"
+    },
+    {
+      "id": "kroeger-speech-acts",
+      "title": "Special sentence types, Analyzing Grammar",
+      "author": "Paul R. Kroeger",
+      "publisher": "Cambridge University Press",
+      "doi": "10.1017/CBO9780511801679.012",
+      "url": "https://www.cambridge.org/core/books/abs/analyzing-grammar/special-sentence-types/FA85D4B84E6E0A2A6D5324D85470E769",
+      "excerpt": "making statements, asking questions, giving commands",
+      "paraphrase": "The summary distinguishes common speech actions and discusses their relation to sentence structures.",
+      "scopeLimit": "The summary supports a distinction, not exhaustive semantic equivalence or learner intent.",
+      "kind": "language",
+      "accessScope": "Previously frozen publisher summary/extract, not refetched full chapter in phase71",
+      "previouslyCheckedAtUtc": "2026-11-08T05:11:15.787337+00:00"
+    },
+    {
+      "id": "murphy-please-pragmatics",
+      "kind": "language",
+      "title": "Separated by a common im/politeness marker: please in American and British web-based English",
+      "publisher": "Cambridge University Press",
+      "url": "https://www.cambridge.org/core/journals/english-language-and-linguistics/article/separated-by-a-common-impoliteness-marker-please-in-american-and-british-webbased-english/3EDE29FABD5DB11786565545E0DC1664",
+      "paraphrase": "Please occurs with imperatives and multiple communicative functions; its pragmatic effects depend on context and national variety. It can also carry urgency or mock politeness.",
+      "scopeLimit": "This study does not establish that adding please leaves all pragmatic meaning identical, and does not label the hatch control.",
+      "accessScope": "Read article sections2.1/6.1/6.2 through official publisher HTML"
+    },
+    {
+      "id": "bc-request-context",
+      "kind": "language",
+      "title": "Requests, offers and invitations",
+      "publisher": "British Council",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/requests-offers-invitations",
+      "paraphrase": "Polite requests can use question forms; the example forms and contextual explanation show that grammatical form and communicative function are not equivalent.",
+      "scopeLimit": "Only the main teaching text and the official LearnEnglish team context response were read. They do not independently certify any project score.",
+      "accessScope": "Read official lesson HTML"
+    },
+    {
+      "id": "openai-eval-method",
+      "kind": "methodology",
+      "title": "Evaluation best practices",
+      "publisher": "OpenAI",
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "paraphrase": "Set task-specific objectives and metrics, use specific clear detailed rubrics, include adversarial cases and control model-judge biases. Human-labelled calibration is recommended.",
+      "scopeLimit": "The user requires AI-only review. This does not satisfy human-labelled validation and must not be reported as English ground truth.",
+      "accessScope": "Fetched full official guide using OpenAI Docs MCP"
+    }
+  ],
+  "unavailablePages": [
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/imperative-",
+      "httpStatus": 403,
+      "searchSnippetOnly": true,
+      "usedAsReadPrimaryEvidence": false
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/please-and-thank-you",
+      "httpStatus": 403,
+      "searchSnippetOnly": true,
+      "usedAsReadPrimaryEvidence": false
+    },
+    {
+      "url": "https://assets.cambridge.org/97805216/12883/excerpt/9780521612883_excerpt.pdf",
+      "httpStatus": 503,
+      "usedAsReadPrimaryEvidence": false
+    }
+  ]
+}

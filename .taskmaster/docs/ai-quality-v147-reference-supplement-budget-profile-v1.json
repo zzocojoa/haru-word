@@ -1,0 +1,17 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v3",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "5a174341-9d55-4987-9dbf-dc5bd265fd5c",
+  "studyPlanHash": "18a9e57951f4e3b0e281a329445e15a6752df272c4edc36c742d0164e46408d2",
+  "collectorProtocol": "ai-quality-v147-reference-supplement-collector-v1",
+  "successStatus": "collected-reference-supplement",
+  "runtimeDirectoryName": "ai-quality-v147-reference-supplement-runtime-20261109",
+  "expectedModelCalls": 24,
+  "expectedCountCalls": 24,
+  "reservationMicros": "2308192",
+  "countAllowanceMicros": "840000",
+  "inputCeiling": 6000,
+  "outputCeiling": 768,
+  "mainDispatchAuthorized": false
+}

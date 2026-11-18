@@ -1,0 +1,76 @@
+{
+  "protocol": "ai-quality-v147-assessment-context-preparation-v1",
+  "recordedAtUtc": "2026-11-08T02:22:45.698849+00:00",
+  "evidenceDirectory": "phase66",
+  "task": 34,
+  "subtask": "34.3",
+  "document": "docs/AI_QUALITY_V147_ASSESSMENT_CONTEXT_20261108.md",
+  "documentSha256": "4e3f6479b7c0e4a7b000b7421f2806b05bb6c4d5957feb1420f095e38270132e",
+  "policyHash": "f07385afb526b63a19c69997189bad4739057866b7005a7b0205e643128d9374",
+  "canonicalProductSourceRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106",
+  "canonicalProductArchiveRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-product-build-20261106-phase18-final",
+  "rootManagementProductCopyMayDiffer": true,
+  "defaultContextKindExplicit": true,
+  "policyComplianceSeparateFromEnglishGrade": true,
+  "groupsEachNode": 14,
+  "legacyGroupsEachNode": 12,
+  "legacyEquivalenceBookendEachNode": 1,
+  "syntheticCountRequestsEachNode": 132,
+  "syntheticModelRequestsEachNode": 132,
+  "syntheticMainRowsEachNode": 12,
+  "archivedWorkerBodiesReprojectedEachNode": 24,
+  "freshWorkerExecuted": false,
+  "oldActual83Of84Regraded": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "currentConservativeMicros": "9530311",
+  "englishQualityQualified": false,
+  "referenceRoleQualified": false,
+  "releaseVerdict": "held",
+  "goalComplete": false,
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-assessment-context-v1.json": "c4e1d5961769aba702f2d6f619a9f601c8c72b07a971acef02030c27a9a80dd3",
+    ".taskmaster/scripts/ai-quality-v147-assessment-context-v1.mjs": "e224d7703560a41bb318b0744e6ddd719f532c57a426fb63c7a763b697d69b89",
+    ".taskmaster/scripts/ai-quality-v147-assessment-context-fixture-v1.mjs": "fbc3a1cb16e440cb02b33877c8f4dc507182310b3d8e3591d98edbf92355a310",
+    ".taskmaster/scripts/test-ai-quality-v147-assessment-context-v1.mjs": "9427aab58ffb3625a336d4b100ec5152cdf3f3f301b89666d8038a34d05cb71b",
+    ".taskmaster/scripts/ai-quality-v147-ai-panel.mjs": "980a0bd1b2c34dfcb299fcda8fdb012001c6e069390e3aff0b24881b91b9d134",
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": "a6d5dac3f0b1afb79da9dbdd6386b3e1a57d469c25204c25861db7fb1d64cb92",
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": "a22b7786c4b2cc6dfe228c4eddda994ae3969d8f36f5960a3f96d5549b2d0f1f",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "bb641255696cd668b63864c96438b494dd431736128ad2a041bf9a74ed50cbd6",
+    ".taskmaster/scripts/ai-quality-v147-product-rubric-v2.mjs": "2b3a4d58015915bfd3da96ad048a217316abe46ada7227fa43b18674a892f7f6",
+    "lib/feedback-context.ts": "ebf79ada3b93d1dc7fb32e428d66d910cb2e6c3c98236cac9be67d79b9640ef0",
+    "lib/judgment-input.ts": "c59fca0e8a28acead01414a51186a3f82265459b945c22fed6c349b78362c691",
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/judgment-feedback-contract.ts": "7af1463b1946f4c2fbc379b1cf3370104fa25c1dec287b93f557d3662b25338d"
+  },
+  "historicalSources": {
+    ".taskmaster/scripts/ai-quality-v147-ai-panel.mjs": {
+      "sha256": "a72405c490108623662ab19190f340fd53a97ba96458aa4a7c1708dc9720aabe",
+      "archiveFile": "phase66/management-before/.taskmaster/scripts/ai-quality-v147-ai-panel.mjs",
+      "priorProgressFile": "phase65/progress-final-v2.json",
+      "priorProgressSha256": "ab7d4f126f99035a825c529fc36323d013e58568410f2bd530a7a9a5bd186a9e"
+    },
+    ".taskmaster/scripts/ai-quality-v147-capture-v3.mjs": {
+      "sha256": "bcd3ab0a05bf3ce04cf5385c7d17002f88edd9fa8c8f476f0b158d2b80660288",
+      "archiveFile": "phase66/management-before/.taskmaster/scripts/ai-quality-v147-capture-v3.mjs",
+      "priorProgressFile": "phase65/progress-final-v2.json",
+      "priorProgressSha256": "ab7d4f126f99035a825c529fc36323d013e58568410f2bd530a7a9a5bd186a9e"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs": {
+      "sha256": "26cc008f72467edbe269c1ada598248df76f51b7f8a4131fa402ff3267502ebd",
+      "archiveFile": "phase66/management-before/.taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs",
+      "priorProgressFile": "phase65/progress-final-v2.json",
+      "priorProgressSha256": "ab7d4f126f99035a825c529fc36323d013e58568410f2bd530a7a9a5bd186a9e"
+    },
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": {
+      "sha256": "e1b31882c780e7cace3c7144ef0860cdb432d468a5eb002b617252ffc12b4576",
+      "archiveFile": "phase66/management-before/.taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs",
+      "priorProgressFile": "phase65/progress-final-v2.json",
+      "priorProgressSha256": "ab7d4f126f99035a825c529fc36323d013e58568410f2bd530a7a9a5bd186a9e"
+    }
+  },
+  "finalAffectedLegacyGroupsEachNode": 3,
+  "sourceAxesAffectVerdict": true,
+  "calibrationAxesAffectAdmission": true
+}

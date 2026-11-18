@@ -1,0 +1,30 @@
+{
+  "protocol": "ai-quality-v147-closed-day-calibration-earmark-v1",
+  "phase": "phase106",
+  "taskIds": [
+    "34.3"
+  ],
+  "status": "earmarked",
+  "scopeHash": "b2e715d0407cd222f896e8e1d0e4d88ae7bfa88c7f4426e30839b19a0d9b0ec6",
+  "studyPlanHash": "2c96bc43df962814774d6abadeec3c3df748658f69ad4325dbfbd98a391298a8",
+  "modelRequests": 72,
+  "countRequests": 72,
+  "earmarkMicros": "8567184",
+  "unassignedHeldMicros": "7816",
+  "generalV3AvailableMicros": "3039780",
+  "existingCapMicros": "35000000",
+  "ledgerSha256": "e2c77a097789856da746f75ea004cbec6642defd4f0acb4d9716248b95086fac",
+  "claimFile": "outputs/ai-quality-v147-evaluation-budget-v3-20261109/20261108-count-provision-rendered-calibration-once.json",
+  "claimSha256": "eb4dab8ba1044c64b5e4d5e67cb71ffe5205dd5a2956e0f762ef923853d21993",
+  "providerDispatchAuthorized": false,
+  "newGrantCreated": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "sourceQualified": false,
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "auditSha256": "c4dd860f7a1b1ee554d955baa78ff255fd054db705cbbbb567fb8f7fd9eb0357",
+  "document": "docs/AI_QUALITY_V147_CALIBRATION_EARMARK_20261109.md",
+  "documentSha256": "2bacab1b856b6d5d6155cbb57fcde8e8183b9c77db935b6699edaf9c25cb8f52"
+}

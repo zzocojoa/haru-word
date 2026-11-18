@@ -1,0 +1,57 @@
+{
+  "protocol": "ai-quality-v147-first-reference-wave-execution-v1",
+  "phase": "phase126",
+  "tasks": [
+    "24.2",
+    "25.1"
+  ],
+  "document": "docs/AI_QUALITY_V147_FIRST_REFERENCE_WAVE_RESULT_20261109.md",
+  "approvalFile": ".taskmaster/docs/ai-quality-v147-fresh-reference-first-wave-approval-v1.json",
+  "approvalSha256": "4cd188be639b5d8606db1b54c9072555e541bf7d86d9f3a0dfe38d06fd2bdd26",
+  "scopeSha256": "8b99aa00dce5717f3d550ae68261c6b87d549c469c3a18338fa490b9f333f266",
+  "auditSha256": "d3a45bd456210b8cb773d1e8edc988d963fd714dc33950f27fbd820a66582d1d",
+  "terminalSha256": "aa3596ab3071edebd1072eb520e90d26a70ab6cfde36357f7991e127b22015e8",
+  "ledgerSha256": "aa1aef364326c9b34ff355f6f32bffa33ebdb93d871aadd9046817afe490a07b",
+  "actualProviderCalls": 12,
+  "actualCountCalls": 12,
+  "validReviews": 10,
+  "agreementCases": 4,
+  "heldCases": 2,
+  "cases": [
+    {
+      "caseId": "fresh-word-needsCorrection-01",
+      "status": "held-source"
+    },
+    {
+      "caseId": "fresh-word-insufficientContext-01",
+      "status": "held-invalid"
+    },
+    {
+      "caseId": "fresh-grammar-normal-01",
+      "status": "agreement-needs-admission"
+    },
+    {
+      "caseId": "fresh-grammar-needsCorrection-01",
+      "status": "agreement-needs-admission"
+    },
+    {
+      "caseId": "fresh-grammar-insufficientContext-01",
+      "status": "agreement-needs-admission"
+    },
+    {
+      "caseId": "fresh-word-normal-01",
+      "status": "agreement-needs-admission"
+    }
+  ],
+  "referencesQualified": 0,
+  "pilotGenerationsCompleted": 0,
+  "mainDispatchAuthorized": false,
+  "beforeUsedUpperMicros": "33352466",
+  "beforeAvailableMicros": "1647534",
+  "additionalUsedUpperMicros": "33847900",
+  "additionalAvailableMicros": "1152100",
+  "reservedMicros": "0",
+  "stageUsedUpperMicros": "495434",
+  "approvedUpperMicros": "1249116",
+  "countAllowanceMicros": "420000"
+}

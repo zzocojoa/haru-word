@@ -1,0 +1,48 @@
+{
+  "protocol": "ai-quality-v147-core-flow-priority-v1",
+  "phase": "phase165",
+  "status": "core-flow-integrated-local-verified",
+  "document": "docs/AI_QUALITY_V147_CORE_FLOW_PRIORITY_20261112.md",
+  "tasks": [
+    "5.2",
+    "5.3",
+    "8.2",
+    "15.2"
+  ],
+  "candidate": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-core-flow-20261112",
+  "sourceCoverageBlocksLocalImplementation": false,
+  "releaseGatesPreserved": true,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "mainDispatchAuthorized": false,
+  "outputDirectory": "outputs/ai-quality-v147-implementation-20261106/phase165",
+  "sourceIntegrated": true,
+  "productFiles": 7,
+  "testFiles": 11,
+  "currentPromptVersion": "reference-v8",
+  "currentValidationVersion": "judgment-v7",
+  "publicAiContract": 4,
+  "unitTests": 904,
+  "browserChecks": 14,
+  "finalProductInputFiles": 435,
+  "oldFrozenProductInputsPreserved": 33,
+  "newModelQualityMeasured": false,
+  "previousEvaluationEvidenceIsHistorical": true,
+  "ledgerSha256": "8278c131cdc4df1916fa4260589aa4a60b0137cc215a4dc9bb65acbf5789a99f",
+  "checks": {
+    "sourceUnitExitCode": 0,
+    "sourceTypecheckExitCode": 0,
+    "sourceLintExitCode": 0,
+    "matchingCandidateBuildExitCode": 0,
+    "browserExitCode": 0
+  },
+  "evidenceSha256": {
+    "integration.json": "d79f91272dd2df0658653d56489900d00e81a8517bba1a2f887eb7f5516260ce",
+    "final-product-inputs.json": "4df1484ce79b89967f6c2b23bae3448a85d17ba20a024b5cbcc742c8f3637a7d",
+    "source-test.log": "72572c608bcf655b4d1af0a018b21941f5df57078337204657903f3b0834ef52",
+    "source-typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source-lint.log": "e6f611db392a2ee24399d39031f1baff732116118b32208f5d1ff2085f4d03f5",
+    "core-flow-browser.json": "c005e788ac7b1f25e267b5afb1bc97b2e3167fb5702d371262f72b1ace045c5c",
+    "build.log": "d2925a77d9fd1eaa010eb1a4ad0acb8793c383f04f75951762fce0dcae937bcd"
+  }
+}

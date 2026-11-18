@@ -1,0 +1,84 @@
+{
+  "protocol": "ai-quality-v147-direct-diagnostic-envelope-v2",
+  "scope": "public-g12-n04-diagnostic-only",
+  "approvedMicros": "5000000",
+  "conservativeMicros": "59060",
+  "actualProviderCalls": 4,
+  "actualKeyReads": 1,
+  "actualCountApiCalls": 0,
+  "planned": 6,
+  "collected": 4,
+  "distinctModels": 2,
+  "unsupportedGoldEligibilityClaims": 4,
+  "actualEnglishQualityQualified": false,
+  "oldBudgetsTransferred": false,
+  "runClosed": true,
+  "releaseVerdict": "held",
+  "evidenceDirectory": "phase47",
+  "document": "docs/AI_QUALITY_V147_FIVE_DOLLAR_DIAGNOSTIC_20261107.md",
+  "documentSha256": "664c0dc619ff1aeace584009f9d8f306ec0605f3ced6a1de2a594eafe03ad417",
+  "runtimeRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-direct-diagnostic-five-dollar-runtime-20261107",
+  "checks": [
+    {
+      "name": "v2-node24-final",
+      "exitCode": 0,
+      "log": "v2-node24-final.log",
+      "sha256": "9803be27a2c45d04224df527f7a8145173f77b9450b8bc70381500a61da90141",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-diagnostic-envelope-v2.mjs"
+      ]
+    },
+    {
+      "name": "v2-node22-final",
+      "exitCode": 0,
+      "log": "v2-node22-final.log",
+      "sha256": "857da5ccc667143f054fa47bd9090653dc2c9da7db9114e6f0fab378db4fcab3",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-diagnostic-envelope-v2.mjs"
+      ]
+    }
+  ],
+  "legacyChecks": [
+    {
+      "name": "v1-node24-regression",
+      "exitCode": 0,
+      "log": "v1-node24-regression.log",
+      "sha256": "23185dc7d2e0a43f169830c2b095caf6b8ebedeb407fc3647afc593c5fb86038",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v24.22.1\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-diagnostic-envelope-v1.mjs"
+      ]
+    },
+    {
+      "name": "v1-node22-regression",
+      "exitCode": 0,
+      "log": "v1-node22-regression.log",
+      "sha256": "b87e5efc04d4aecae199d10124e16f0f2c99ef1877f07c776b93a015d4f0119b",
+      "command": [
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\comprehensive-defect-audit-20261105\\work\\toolchains\\node-v22.23.4\\node.exe",
+        "--test",
+        "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\ai-quality-v147-20261106\\.taskmaster\\scripts\\test-ai-quality-v147-diagnostic-envelope-v1.mjs"
+      ]
+    }
+  ],
+  "sourceFilesSha256": {
+    ".taskmaster/scripts/ai-quality-v147-diagnostic-envelope-v2.mjs": "80aa3045d92013a55b6f49361d926f6f4d96839d487dd0f0cd642ff85c14705e",
+    ".taskmaster/scripts/ai-quality-v147-diagnostic-live-v2.mjs": "0f98d649f1aa013a73bf5152c54b1ab044e5005fd35f762596e215bd3fe825c6",
+    ".taskmaster/scripts/test-ai-quality-v147-diagnostic-envelope-v2.mjs": "60e6e58a170391b30a669a80578dff77772483e28554da5971ab330bd49c251e"
+  },
+  "approvalFile": "phase47/user-five-dollar-authorization.json",
+  "approvalSha256": "6cdc1da38dc40679a9a6c3b2481984013a34b9dd297e13519a0cb92a98b41eb9",
+  "factsFile": "phase47/official-five-dollar-facts.json",
+  "factsSha256": "3244932fb505e46781222a9e85dccdbe2bdf6124250deb952a3ff710d1f68462",
+  "resultFile": "phase47/actual-diagnostic-result.json",
+  "resultSha256": "e316f2aae0e68334389fd5e59932e5329317af4fbdb2046a3b527bbd67e78d98",
+  "analysisFile": "phase47/actual-diagnostic-analysis.json",
+  "analysisSha256": "8db7dbddd54b071c6b190222084ab9e6ef57cb2fc565702868f73e451a2707d4",
+  "bundleFile": "phase47/approved-five-dollar-envelope.json",
+  "bundleSha256": "66bb7e5e01fd467d1c4b80b69a050e12384a70db756410bbbf102058dbda2723"
+}

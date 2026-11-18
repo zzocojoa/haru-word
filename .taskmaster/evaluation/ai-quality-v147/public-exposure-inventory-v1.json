@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "inventory": {
+    "protocol": "ai-quality-v147-public-exposure-v1",
+    "scope": {
+      "kind": "public-development",
+      "description": "Two allowlisted public development catalogs only;other project/development/pilot/confirmation exposures are not yet inventoried."
+    },
+    "coverage": "partial",
+    "entries": [
+      {
+        "id": "exposure-735c80d10846efc914d789bb",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-f835b64c6088395b74e70856",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "I asked.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-28cadcc9df3e035f0c08fac1",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-eecf13f5fc187cc0b1cc62e8",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "Those car belongs to Mia.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-072a525909513ded91f47742",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-cf2e3bd7b3adf4f2cda5f5b5",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "Those car belongs to Mia.",
+          "contextKind": "sentence",
+          "contextNote": "차 한 대를 말해요."
+        }
+      },
+      {
+        "id": "exposure-e396c7b84ad1522a981b2d68",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-c183b1965c53c7b421c08b30",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "Those car belongs to Mia.",
+          "contextKind": "sentence",
+          "contextNote": "차 여러 대를 말해요."
+        }
+      },
+      {
+        "id": "exposure-ac2879d6880267b7b3e23c78",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-cefc5f156ac64d9c240725eb",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "She drives careful.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-946760a998c8aa85c6dbf665",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-08fdec89f965d81ab0329e8a",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "A book lies on the desk.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-85fd81baeb8b6cbe15b61db9",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-702861b3218a6b0f5b1da655",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "Him helps I.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-0eab1c5f42e8e49652dd4c5b",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-2bfe65828d015be9b30302a5",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "Although the broth",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-9c06ddd9d5caf5092657bdc4",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-b2eb723bc2d2f4bb24f95d6f",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "You might brought a torch.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-32c4c175517d5a0f3385aa97",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-879fa06246240cda83bdaa07",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "She knows him.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3fc7c93d31bff8a894be4f2c",
+        "domain": "word",
+        "targetKey": "public-target",
+        "familyId": "family-4f462419a3f606330bba4d7b",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "Give help.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-58976d1fdcd5f989c9977dce",
+        "domain": "grammar",
+        "targetKey": "public-target",
+        "familyId": "family-9abcb0ada112c3d467e2f8e8",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "She is speaking quiet.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-992212dfb3b487275c22fd59",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-915db8b5b5a30e16f9ee97bd",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "The divers check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-a5ccdfded6712bed11b4845c",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-c07f139fb3847397d5c1b965",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "The divers checks the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-3c81a0449b3697736e062d8e",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-39e504bf32130d82502d2f29",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "The divers check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-5df833f6348a1a3fdbfd6746",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-8c822b6ded915ba67e80a2d2",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "The diver do not check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-065297ebef2f522e79721ee7",
+        "domain": "grammar",
+        "targetKey": "verb",
+        "familyId": "family-f0fc65010d293116432442d9",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "The divers check the ropes.",
+          "contextKind": "sentence",
+          "contextNote": ""
+        }
+      },
+      {
+        "id": "exposure-e56888e8299e633644f12b6d",
+        "domain": "grammar",
+        "targetKey": "auxiliary",
+        "familyId": "family-fc879cefca1fcbf311396fc5",
+        "familyBrief": "Known public development input. Family relations to other rows remain unaudited;surface rewording is not independent novelty.",
+        "input": {
+          "sentence": "They did.",
+          "contextKind": "reply",
+          "contextNote": ""
+        }
+      }
+    ],
+    "provenanceHash": "b978ce8954b8be190295795334874d51bd864856eb7bf61b08dae2bb008c38cc",
+    "hash": "f18b2f441256df00143ad2de6c9a476fa42ac0cf4e11dacec3396621cdc047d3"
+  },
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": "b40aa8251bc66e98603b6af273566acdf8621bd4aaacdf40d768c1d27357e128"
+  },
+  "origins": [
+    {
+      "entryId": "exposure-735c80d10846efc914d789bb",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G01"
+    },
+    {
+      "entryId": "exposure-28cadcc9df3e035f0c08fac1",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G02"
+    },
+    {
+      "entryId": "exposure-072a525909513ded91f47742",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G03"
+    },
+    {
+      "entryId": "exposure-e396c7b84ad1522a981b2d68",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G04"
+    },
+    {
+      "entryId": "exposure-ac2879d6880267b7b3e23c78",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G05"
+    },
+    {
+      "entryId": "exposure-946760a998c8aa85c6dbf665",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G06"
+    },
+    {
+      "entryId": "exposure-85fd81baeb8b6cbe15b61db9",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G07"
+    },
+    {
+      "entryId": "exposure-0eab1c5f42e8e49652dd4c5b",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G08"
+    },
+    {
+      "entryId": "exposure-9c06ddd9d5caf5092657bdc4",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G09"
+    },
+    {
+      "entryId": "exposure-32c4c175517d5a0f3385aa97",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G10"
+    },
+    {
+      "entryId": "exposure-3fc7c93d31bff8a894be4f2c",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G11"
+    },
+    {
+      "entryId": "exposure-58976d1fdcd5f989c9977dce",
+      "sourceFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+      "recordId": "G12"
+    },
+    {
+      "entryId": "exposure-992212dfb3b487275c22fd59",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-positive-agreement"
+    },
+    {
+      "entryId": "exposure-a5ccdfded6712bed11b4845c",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-false-natural-label"
+    },
+    {
+      "entryId": "exposure-3c81a0449b3697736e062d8e",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-target-mismatch"
+    },
+    {
+      "entryId": "exposure-5df833f6348a1a3fdbfd6746",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-negation-loss"
+    },
+    {
+      "entryId": "exposure-065297ebef2f522e79721ee7",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-false-source-attribution"
+    },
+    {
+      "entryId": "exposure-e56888e8299e633644f12b6d",
+      "sourceFile": ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json",
+      "recordId": "public-missing-reply-message"
+    }
+  ],
+  "extractionPolicy": "Only original public inputs,domain/target keys andneutral unaudited-family description;no answers/labels/corrections/scores/judge identities. Partialallowlist,not complete projectexposure.",
+  "sourceRows": 18,
+  "uniqueNormalizedSentences": 14,
+  "independentFamilyCountCertified": false,
+  "completeProjectExposureInventory": false,
+  "actualEnglishQualityMeasured": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "liveDispatchAuthorized": false
+}

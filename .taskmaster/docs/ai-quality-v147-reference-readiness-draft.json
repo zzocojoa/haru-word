@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 1,
+  "revision": 2,
+  "planId": "ai-quality-v147-2026-11-06",
+  "task": 34,
+  "status": "documentation-contract-draft-not-api-implementation",
+  "recordedAtUtc": "2026-11-06T18:45:32.151432+00:00",
+  "document": "docs/AI_QUALITY_V147_REFERENCE_READINESS_20261107.md",
+  "humanReviewerRequired": false,
+  "ownerApproved": false,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "credentialPresenceInspected": false,
+  "newPaidApprovalUsd": 0,
+  "dispatchAuthorized": false,
+  "actualFreshCasesAuthored": 0,
+  "currentRuntimeImplementationChanged": false,
+  "currentReferenceExporterCompatibleWithProposedRecords": false,
+  "actualCountApiQueried": false,
+  "countApiBillingVerified": false,
+  "actualInputTokenBoundsVerified": false,
+  "actualPaymentQuoteReady": false,
+  "currentGaps": [
+    {
+      "id": "reference-fixture-echo",
+      "file": ".taskmaster/scripts/ai-quality-v147-wire-v3-fixture.mjs",
+      "observed": "Reference fixture returns only sentence,target,criterion from anexisting input. It isnot anapprovedfreshcase authoring contract.",
+      "sha256": "fcc36f2d69f1b7bb95d2d75cf16066afdc55fa45f5af22c644f0855374ee7efb"
+    },
+    {
+      "id": "reference-export-echo",
+      "file": ".taskmaster/scripts/ai-quality-v147-panel-report-v3.mjs",
+      "observed": "referencesFromClosedPreparation requiresdraft.sentence/target equalalready-supplied caseinput;new authoredinputs need aqualified separate export path.",
+      "sha256": "f8c6cd176a1d7c30340b9e1ad1179bfbe019c3cceca22c9336592b5cf036caff"
+    },
+    {
+      "id": "reference-grade-role",
+      "observed": "CurrentreferenceReview fixture reuses productfeedback grade structure. Proposedreference7dimensions/2items are notimplemented orqualified bytheexisting mainfeedback12witness calibration."
+    },
+    {
+      "id": "token-bound",
+      "observed": "Measuredbody bytes andsynthetic70000 inputtoken placeholder are not actualcounted prompt tokens. Officialcounter requires separately authorizedaccess;billing notestablished inchecked sources."
+    },
+    {
+      "id": "current-output-validator-pattern-subset",
+      "file": ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs",
+      "sha256": "5d464fd5f30fdeaa65004cceeead59eb8612af1cde3865b68e71b15bfa619594",
+      "observed": "PurevalidateV3Output rejects proposedIDpattern withW3_OUTPUT_PATTERN;currently only a specific length-pattern subset is supported. GeneralJSONSchema validation is not currentwire compatibility. Existingvalidator unchanged."
+    }
+  ],
+  "schemas": {
+    "referenceDraftRecord": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]{1,100}$"
+        },
+        "assignmentHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "word",
+            "grammar"
+          ]
+        },
+        "targetKey": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]{1,100}$"
+        },
+        "familyId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]{1,100}$"
+        },
+        "familyRationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "sentence": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            },
+            "contextKind": {
+              "type": "string",
+              "enum": [
+                "sentence",
+                "reply",
+                "title",
+                "command"
+              ]
+            },
+            "contextNote": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 500
+            }
+          },
+          "required": [
+            "sentence",
+            "contextKind",
+            "contextNote"
+          ],
+          "additionalProperties": false
+        },
+        "expectedOriginal": {
+          "type": "object",
+          "properties": {
+            "meaningUsage": {
+              "type": "string",
+              "enum": [
+                "appropriate",
+                "needs_work",
+                "uncertain"
+              ]
+            },
+            "grammar": {
+              "type": "string",
+              "enum": [
+                "natural",
+                "needs_work",
+                "uncertain"
+              ]
+            },
+            "contextNeeded": {
+              "type": "string",
+              "enum": [
+                "none",
+                "message",
+                "time",
+                "quantity",
+                "target_meaning",
+                "relationship"
+              ]
+            }
+          },
+          "required": [
+            "meaningUsage",
+            "grammar",
+            "contextNeeded"
+          ],
+          "additionalProperties": false
+        },
+        "acceptedCorrectionExamples": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "minItems": 0,
+          "maxItems": 2
+        },
+        "criterion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "sourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,100}$"
+          },
+          "minItems": 0,
+          "maxItems": 4
+        },
+        "evidenceLevelClaim": {
+          "type": "string",
+          "enum": [
+            "mechanically-verified",
+            "source-supported",
+            "ai-consensus",
+            "unresolved"
+          ]
+        },
+        "unresolved": {
+          "type": "boolean"
+        },
+        "reasonCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "source-support",
+              "ai-consensus-only",
+              "ambiguous",
+              "insufficient-source",
+              "family-exposure-uncertain",
+              "assignment-mismatch"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "caseId",
+        "assignmentHash",
+        "domain",
+        "targetKey",
+        "familyId",
+        "familyRationale",
+        "input",
+        "expectedOriginal",
+        "acceptedCorrectionExamples",
+        "criterion",
+        "sourceIds",
+        "evidenceLevelClaim",
+        "unresolved",
+        "reasonCodes"
+      ],
+      "additionalProperties": false
+    },
+    "referenceReviewRecord": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "itemId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_.-]{1,100}$"
+              },
+              "grade": {
+                "type": "object",
+                "properties": {
+                  "assignmentAlignment": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "uncertain",
+                      "unavailable"
+                    ]
+                  },
+                  "inputAndTargetValidity": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "uncertain",
+                      "unavailable"
+                    ]
+                  },
+                  "originalLabelSupport": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "uncertain",
+                      "unavailable"
+                    ]
+                  },
+                  "minimalCorrectionMeaning": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "uncertain",
+                      "unavailable"
+                    ]
+                  },
+                  "sourceClaimHonesty": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "uncertain",
+                      "unavailable"
+                    ]
+                  },
+                  "ambiguityHandling": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "uncertain",
+                      "unavailable"
+                    ]
+                  },
+                  "exposureAndFamilyCompliance": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "fail",
+                      "uncertain",
+                      "unavailable"
+                    ]
+                  },
+                  "criticalErrors": {
+                    "type": "object",
+                    "properties": {
+                      "wrongTarget": {
+                        "type": "boolean"
+                      },
+                      "inventedEvidence": {
+                        "type": "boolean"
+                      },
+                      "meaningConstraintViolation": {
+                        "type": "boolean"
+                      },
+                      "forcedCertainty": {
+                        "type": "boolean"
+                      },
+                      "knownExposureLeak": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "wrongTarget",
+                      "inventedEvidence",
+                      "meaningConstraintViolation",
+                      "forcedCertainty",
+                      "knownExposureLeak"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "assignmentAlignment",
+                  "inputAndTargetValidity",
+                  "originalLabelSupport",
+                  "minimalCorrectionMeaning",
+                  "sourceClaimHonesty",
+                  "ambiguityHandling",
+                  "exposureAndFamilyCompliance",
+                  "criticalErrors"
+                ],
+                "additionalProperties": false
+              },
+              "reasonCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "confirmed",
+                    "assignment",
+                    "target",
+                    "labels",
+                    "correction",
+                    "source",
+                    "ambiguity",
+                    "exposure",
+                    "unavailable"
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 8
+              },
+              "shortEvidenceSummary": {
+                "type": "string",
+                "minLength": 0,
+                "maxLength": 384
+              }
+            },
+            "required": [
+              "itemId",
+              "grade",
+              "reasonCodes",
+              "shortEvidenceSummary"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "assignmentContract": {
+    "caseIdsAndCaseCountFrozenBeforeAuthoring": true,
+    "fields": [
+      "caseId",
+      "assignmentHash",
+      "domain",
+      "targetKey",
+      "stratum",
+      "familyBrief",
+      "lengthBand",
+      "complexityBand",
+      "permittedSourcePackId",
+      "permittedSourceIds",
+      "exposureInventoryHash"
+    ],
+    "authorMaySee": "Assignmentandfrozen publicsource claims only. Nobaseline/candidate results,otherjudges,priorfailedanswers orimplementation-specific expectedgold.",
+    "targetBinding": "Trustedcatalog/lesson metadata supplies target,word/POS/sense orlessoncriterion. Authorcannot selectanothertarget tomake aresponsecorrect.",
+    "grammarContextKindEnum": [
+      "sentence",
+      "reply",
+      "title",
+      "command"
+    ],
+    "additionalContextNeededEnum": [
+      "none",
+      "message",
+      "time",
+      "quantity",
+      "target_meaning",
+      "relationship"
+    ],
+    "modelNoveltyClaimProvesFreshness": false
+  },
+  "semanticAcceptanceRequiredBeyondSchema": [
+    "caseId/assignmentHash/domain/targetKey match frozenassignment",
+    "Inputsentence<=2000 UTF16codeunits andcontextNote<=500,wellformedUnicode;JSONSchema codepointlimit alone doesnotprove appcompatibility",
+    "Knowninput contextKind isnot thecontextNeeded clarificationenum;quantity remains an allowedclarificationkind",
+    "Naturaloriginals remainunchanged;grammaruncertain hasno proposedcorrection;target-onlyuncertainty maycoexistwith independentlyjustifiedgrammar correction",
+    "Correctionexamples arenot an exhaustive literal whitelist;other safeequivalent minimalcorrections mayqualify",
+    "SourceIDs areunique membersofthefrozenpermittedpack;URLpresence/evidenceLevelClaim doesnot prove factualsupport",
+    "FamilyID andfamilyRationale requireexposure/structural review;renaming andmodelselfclaims neverincreaseindependentN",
+    "Sourcepackcontent/claimed supportandcertainty tiers arehonest;unresolved requiredjudgments stayheld",
+    "Bothnongenerator reviewers andrequiredrolecontrols qualify;disagreement/uncertain/unavailable/critical =>held",
+    "Exportactualdraftinput/reference plusclosedledger andallrawparent/review receipt/hash lineage;do not substitute theold echo reader"
+  ],
+  "proposedRecordBudgets": {
+    "draftRecordSerializedUtf8Max": 16384,
+    "frozenRelevantSourcePackSerializedUtf8Max": 8192,
+    "referenceSourcesPerRecordMax": 4,
+    "criterionCodeUnitMax": 2000,
+    "correctionExamplesMax": 2,
+    "limitsAreProposedNotImplemented": true,
+    "existingSerializedWireCap": 131072,
+    "actualNewRoleWireBoundsVerified": false,
+    "oversizePolicy": "Holdbeforeanyderivedpaidreview;retainaudit/consumption,no trimming/meaningchanges/replacement/retry. Actualcasepreparation feasibility must beverified beforefinalapproval."
+  },
+  "referenceReviewContract": {
+    "nongeneratorJudges": 2,
+    "reviewDimensions": [
+      "assignmentAlignment",
+      "inputAndTargetValidity",
+      "originalLabelSupport",
+      "minimalCorrectionMeaning",
+      "sourceClaimHonesty",
+      "ambiguityHandling",
+      "exposureAndFamilyCompliance"
+    ],
+    "criticalFlags": [
+      "wrongTarget",
+      "inventedEvidence",
+      "meaningConstraintViolation",
+      "forcedCertainty",
+      "knownExposureLeak"
+    ],
+    "reuseMainFeedbackGradeWithoutAdapter": false,
+    "proposedItemsPerReview": 2,
+    "itemRoles": "Oneproposedcase plusoneknownreference-control;bothopaque,randomizedorder,expectedcontrolgrade kept private. This is a design candidate,not qualified behavior.",
+    "embeddedControlQualification": {
+      "selectedOrApproved": false,
+      "controlsFrozen": false,
+      "expectedGradesActuallyVerified": false,
+      "purpose": "Qualifyreference-review behavior in itsown rubric rather thanassuming feedback-gradecalibration transfers.",
+      "allNeededBeforeReferenceAcceptance": true,
+      "extraCallsIfAdditionalQualificationNeeded": "Recompute stagecounts/bodies/tokenbounds/quote/approval;do not hidecalls inside old2052."
+    },
+    "schemaDoesNotProveSemanticOrInjectionSafety": true,
+    "currentMainCalibrationQualifiesReferenceRole": false
+  },
+  "projectionAndExport": {
+    "input": "Use actualauthoredsentence/context;derivegrader targetsummary fromtrustedbinding.",
+    "reference": "Compilecriterion andsourcepack claims withvalidated provenance,evidence tier,allowedalternatives anduncertainty. AIconsensus remainsAIconsensus.",
+    "provenance": [
+      "closedreference ledger",
+      "author raw/request/response/payload receipts",
+      "two reviewer rawgrades andcontroloutcomes",
+      "case/assignment/sourcepack/exposure fingerprints",
+      "newactualcase corpus hash"
+    ],
+    "newCorpusFreezeAfterPreparation": true,
+    "oldFixtureExportsRemainHistorical": true,
+    "modelRawAndLearnerVisibleSeparated": true
+  },
+  "inputCountProcedure": {
+    "status": "documentation-only-unexecuted",
+    "method": "POST",
+    "endpoint": "https://api.openai.com/v1/responses/input_tokens",
+    "supportedProjectionFields": [
+      "model",
+      "instructions",
+      "input",
+      "reasoning",
+      "text"
+    ],
+    "mustAlsoBindFullGenerationBodyHash": true,
+    "excludedCreateFields": [
+      "max_output_tokens",
+      "store",
+      "stream",
+      "service_tier"
+    ],
+    "excludedFieldsStillBoundForCostAndBehavior": true,
+    "schemaAndInstructionsIncluded": true,
+    "countAccuracyClaimFromOfficialGuide": true,
+    "actualProjectCompatibilityVerified": false,
+    "billingKnown": false,
+    "credentialsAuthorized": false,
+    "mustNotAssumeFree": true,
+    "steps": [
+      "Freeze actualbusinesscontract/source/corpus/body orderivedrecipe/options/price/caps andexplicitauthorization beforecredential/APIaccess",
+      "Resolvecredential reuse/newchoice underapplicablecredential workflow;none inspected inthisdocumentation turn",
+      "Confirmcounterpricing/limits andscopeit inapproval;no implicitzero-fee assumption",
+      "Count exactfinalresolved inputprojection includinginstructions/schema;bind countresult/header/time tobothprojectionhash andfullbody hash",
+      "Ifcountmissing/unknown/changed/overbound ormodel/profile/options changed,holdbeforegeneration;nevercharacters/4 orsilenttruncation",
+      "Reserveappropriatewholegroup,bill outputincludingreasoningonce,andretain maximumunknowncost;anyadditional preflightcharge must beaccounted for",
+      "Derivativereviews counttheiractualresolvedparentpayload,notanullrecipe template;preflightbeforepaidreview onlyafterallbindings remainvalid"
+    ]
+  },
+  "staticCalibrationAudit": {
+    "file": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase30/static-body-audit.json",
+    "sha256": "a09d4be2396cc1a0afc92a12167ff259aa9ceb0ac28d834b2cdcebcc9b8e7fdf",
+    "bodies": 72,
+    "bodyByteRange": {
+      "minimum": 5039,
+      "maximum": 5574
+    },
+    "bytesAreTokens": false,
+    "bodyHashesStableAcrossRunIdsAndSalts": true,
+    "expectedGradeMetadataAbsent": true,
+    "inputTokensMeasured": false,
+    "outputTokenCapChanged": false,
+    "isApprovedStandaloneRun": false
+  },
+  "remainingBeforeActualRun": [
+    "Owner risk/claim decision;question fromphase29 stillpending.",
+    "Real sourcepack/family/control corpusvalidation andfinalreference contracts.",
+    "Actualrole-specificbuilders/parsers/exporters underauthorizedimplementation scope;currentfixturesareunchanged.",
+    "Actualinputcount procedure/feecompatibility andexactstagequotes beforepaidgeneration.",
+    "Separatenewapprovals,credentialdecision,realAIcalibration/pilot/confirmation/learningproxies andrelease/production/day1/day7."
+  ],
+  "officialSources": [
+    {
+      "url": "https://developers.openai.com/api/docs/guides/token-counting",
+      "supports": "Exact inputcounts includeformattedmessages/tools/schemas;localcharactersare not thatcount."
+    },
+    {
+      "url": "https://developers.openai.com/api/reference/resources/responses/subresources/input_tokens/methods/count",
+      "supports": "Endpoint/requestfields/returnshape. No fee conclusion established bythisfetchedreference."
+    }
+  ],
+  "priorFrozenProof": "phase29/progress-final.json",
+  "priorFrozenProofSha256": "a5bad380985d3a99dc2fc454e8d23b5427567b9f83c7590c45c9014e93882157",
+  "currentDataValidatorCompatibleWithProposedIdPatterns": false,
+  "worksheetValidationLimits": {
+    "jsonSchemaValidationIsApiCompatibility": false,
+    "semanticAcceptanceImplemented": false,
+    "schemaCarrierIsNotDispatchableRequest": true,
+    "currentValidatorAudit": "ROOT:outputs/ai-quality-v147-implementation-20261106/phase30/current-validator-audit.json",
+    "currentValidatorAuditSha256": "c9142dc9d0e2194863696531ca7a465f1e3bbcbd11c387fbea01e29bbd8c3a27"
+  }
+}

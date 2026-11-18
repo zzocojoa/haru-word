@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "stage": "lexical-source-and-semantic-reference-prequalification-v1",
+  "recordedAtUtc": "2026-11-07T04:11:39.538545+00:00",
+  "planId": "ai-quality-v147-2026-11-06",
+  "groupsEachNode": 6,
+  "sourceCount": 8,
+  "nativeSelectedBodyCaptures": 4,
+  "webExcerptOnlyCaptures": 4,
+  "wordBindings": 3,
+  "wordAuthorBodies": 9,
+  "counterevidenceAuthorBodies": 3,
+  "controlAudits": 6,
+  "blockingGoldCaseIds": [
+    "G12"
+  ],
+  "blockingWitnessIds": [
+    "N04"
+  ],
+  "qualificationReadinessCliExitCode": 2,
+  "qualifiedCalibrationGoldReady": false,
+  "oldGoldOrScoresModified": false,
+  "allWordDomainSourcesPrepared": false,
+  "actualReferenceControlsQualified": false,
+  "actualEnglishQualityMeasured": false,
+  "actualInputTokensMeasured": false,
+  "liveDispatchAuthorized": false,
+  "coreRuntimeChanged": false,
+  "actualProviderCalls": 0,
+  "actualJudgeCalls": 0,
+  "actualKeyReads": 0,
+  "newPaidApprovalUsd": 0,
+  "releaseVerdict": "held",
+  "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+  "semanticAuditFile": ".taskmaster/evaluation/ai-quality-v147/semantic-reference-audit-v1.json",
+  "goldFile": ".taskmaster/docs/ai-quality-v147-gold-policy.json",
+  "witnessFile": ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json",
+  "implementationSha256": {
+    ".taskmaster/scripts/ai-quality-v147-lexical-reference-v1.mjs": "55646f6007351affb3617c2b182fd818539e1e56b5311c840352d392c83afa4e",
+    ".taskmaster/scripts/test-ai-quality-v147-lexical-reference-v1.mjs": "3e9787ba685d4fb34df646592860bf25d4bc9d7d16d8d0fd67698bd4f0669bad"
+  },
+  "dataSha256": {
+    ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+    ".taskmaster/evaluation/ai-quality-v147/semantic-reference-audit-v1.json": "28647e0041705ab9664686b94e47e0dc71972cdbc496e017c0fc63c099d4dbd3"
+  },
+  "sourceBindings": {
+    ".taskmaster/docs/ai-quality-v147-gold-policy.json": "2ab1f36d1965e175d09db570875c25c8b9c3f72f79f8967123e998589c3e5bc2",
+    ".taskmaster/evaluation/ai-quality-v147/calibration-witnesses.json": "5aaa5d9bce53ad68f3f4415ecf926277d9f93879d9d1fe814d99cd2a8638cad2",
+    ".taskmaster/evaluation/ai-quality-v147/reference-control-candidates-v1.json": "b40aa8251bc66e98603b6af273566acdf8621bd4aaacdf40d768c1d27357e128",
+    ".taskmaster/evaluation/ai-quality-v147/global-exposure-corpus-v1.json": "147f8dd416a6f43685b55a7894adbddba21b6453255ae664b0b1bd3e79611013",
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    "lib/grammar/target-criteria.ts": "146483f42c9fb01162b2015c12e23a232b1264bbdde90fa570f25d53724dd096",
+    ".taskmaster/scripts/ai-quality-v147-reference-v4.mjs": "56144a094f18cde1008c5db2106f285f323a198b1d364d639c5b95fc6e953a5f",
+    ".taskmaster/scripts/ai-quality-v147-global-exposure-v1.mjs": "7f791026b40d2ad62f278b45b5b54ebcc45453e56c69c79eee543d561813a0f9",
+    ".taskmaster/scripts/ai-quality-v147-panel-executor-v3.mjs": "3a4cc6ebbbd35d58b04f43370c67efc09c9389dc8eb952cfef334cd24a3755c2",
+    ".taskmaster/scripts/ai-quality-v147-budget-v3.mjs": "b45627138dc60e6df1f841ab6ccbdc7b1c016cd390af4e24d924870af5f2994a",
+    ".taskmaster/scripts/ai-quality-v147-wire-v3.mjs": "9a83ae71678c3094121575a4d7dd2c116ba47cbd1f12bb16bf2c84fbb8ccf3a0"
+  },
+  "document": "docs/AI_QUALITY_V147_LEXICAL_REFERENCE_AUDIT_20261107.md",
+  "documentSha256": "4e0013a7423aa8a65a2bfe05bd9c71e2504b030d3eda5f6c080fe68752713443",
+  "checks": [
+    {
+      "name": "lexical-node22-public-provenance-final",
+      "exitCode": 0,
+      "log": "lexical-node22-public-provenance-final.log",
+      "sha256": "3db8c8b433480fb28686f9ff32a6b70d2a6c5a23a9f202c8f8d1f810bd48b44a"
+    },
+    {
+      "name": "lexical-node24-public-provenance-final",
+      "exitCode": 0,
+      "log": "lexical-node24-public-provenance-final.log",
+      "sha256": "61c01bf0935341b7eb35c3d85903bfadc9b4af36d421d52f3d7a295a79b1ed6f"
+    }
+  ],
+  "rawEvidenceFile": "lexical-raw-preservation.json",
+  "rawEvidenceSha256": "9205f2191e0caaea71e99de86a5cca634adaba3a988ff95c210727196cd1bbcf",
+  "lint": {
+    "exitCode": 0,
+    "warnings": 0,
+    "log": "new-sources-lint-final2.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

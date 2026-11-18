@@ -1,0 +1,51 @@
+{
+  "protocol": "ai-quality-v147-revised-pilot-report-v1",
+  "plannedParents": 360,
+  "plannedReviews": 1440,
+  "voteStates": {
+    "missing": 4,
+    "graded": 1422,
+    "failed": 1,
+    "invalid": 1,
+    "no-screen": 12
+  },
+  "pairedVisibility": {
+    "both": 177,
+    "candidate-only": 3
+  },
+  "criticalParents": 1,
+  "dissentingParents": 3,
+  "observedUnanimousPasses": 348,
+  "observedUnanimousFailures": 1,
+  "qualifiedPasses": 0,
+  "heldParents": 360,
+  "unmeasuredComparisons": 180,
+  "actualProviderCalls": 0,
+  "englishQualityMeasured": false,
+  "learnerEfficacyMeasured": false,
+  "mainDispatchAuthorized": false,
+  "releaseVerdict": "held",
+  "handoffSha256": "37fd2a99771af02d6dee99a5281007d5b2ee5558ddf20392cb33ad3726ac8b68",
+  "draftSha256": "74cee048579a4405e8099a1f3a4cca6ed5f880c8b8d08d215a6d074016832b57",
+  "syntheticVotesSha256": "1006e04885321353f01ccbf2301dc3f4052baea626bfb9e34f15bdd767d685a9",
+  "syntheticReportSha256": "36d97281fa38ab06c0d03978b7628769100465e988f48f735fa82d946f8b8820",
+  "unsubmittedReviewStates": {
+    "missing": 1428,
+    "no-screen": 12
+  },
+  "phase": "phase141",
+  "tasks": [
+    "27.2",
+    "27.3"
+  ],
+  "document": "docs/AI_QUALITY_V147_REVISED_PILOT_REPORT_20261109.md",
+  "currentRenderedPanelQualified": false,
+  "legacyRenderedPanelFailure": "LS1_PRODUCT_SEMANTIC_SOURCE",
+  "evidenceSha256": {
+    "ai-quality-v147-revised-pilot-report-v1.mjs": "b5ae182ad57fe3a7b2d8e4bcee0dd15776991fe7518ef5ddec7e461da5ff751b",
+    "test-ai-quality-v147-revised-pilot-report-v1.mjs": "89ac5b73edf20b35f8c1a4f8b5c9f8c3743827f522e205039ba1d12160f9e71a",
+    "report-audit.json": "65d86763b23182a2394f924dfc498c3162370fdab040309e850e87e815f5ae37",
+    "report-node24.log": "56277ff3e390abd0b073253dd53a0ad47a5db4aed5c4ba347f697c9c65ee1648",
+    "previous-report-regression.log": "742408d516e5590c293ddbd94185b7145ca7d99a05112c9711cea954db604b2a"
+  }
+}

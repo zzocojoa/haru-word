@@ -1,0 +1,92 @@
+{
+  "protocol": "ai-quality-v147-reference-operational-rubric-v1",
+  "version": 1,
+  "status": "development-draft-after-public-diagnostics-not-independent-qualification",
+  "scope": "Reference-record review; independent dimensions, not product feedback generation.",
+  "gradeMeanings": {
+    "pass": "The supplied evidence supports this dimension within the declared task and language variety. This does not imply any other dimension passes.",
+    "fail": "A specific contradiction or violation of this dimension is established. Do not use fail merely because another dimension fails.",
+    "uncertain": "The dimension is applicable, but the available evidence leaves substantively competing interpretations unresolved.",
+    "unavailable": "A prerequisite or assessable object for this dimension is absent, or the specified dependency rule prevents a joint assessment. State what is missing. This is not a pass."
+  },
+  "dimensions": {
+    "assignmentAlignment": {
+      "question": "Do the submitted record's case, assignment, domain, declared target and family identifiers match the assigned record?",
+      "pass": "Identifiers and declared metadata match. This is a formal alignment check, not a judgment that every sentence or criterion complies semantically.",
+      "fail": "A submitted identifier or declared target conflicts with the assignment.",
+      "uncertainOrUnavailable": "Use unavailable when the identifiers or frozen assignment needed for comparison are absent.",
+      "boundary": "An unsupported claim about a missing message belongs to sourceClaimHonesty and ambiguityHandling; it does not by itself make matching identifiers fail."
+    },
+    "inputAndTargetValidity": {
+      "question": "Is this a usable example for the assigned target and diagnostic stratum, with the declared target correctly bound?",
+      "pass": "The input can test the requested target or lack-of-context behavior. An erroneous original or an intentionally incomplete reply can be a valid test input.",
+      "fail": "The declared target is wrong, the input is outside the task, or a specific input/target mismatch is established.",
+      "uncertainOrUnavailable": "Use uncertain if applicability is disputed; unavailable if essential input or target metadata is absent.",
+      "boundary": "Input validity does not assert grammatical correctness or a known antecedent. Missing context in an insufficient-context test does not alone invalidate the test."
+    },
+    "originalLabelSupport": {
+      "question": "Are all asserted original labels (meaningUsage, grammar, contextNeeded) jointly supported for the assigned target?",
+      "pass": "Each asserted label is supported independently. For grammar targets, meaningUsage concerns correct use/form of the requested construction, not merely whether a verb or word is present.",
+      "fail": "At least one asserted label is contradicted; for example, claiming that no context is needed while asserting an unknowable message meaning.",
+      "uncertainOrUnavailable": "Use uncertain for a genuinely unresolved label. If the draft is bound to the wrong declared target, use unavailable for this joint tuple; a separate observation of natural whole-sentence grammar cannot certify the tuple.",
+      "boundary": "A wrong target never makes an otherwise grammatical original ungrammatical. Do not infer agreement of the entire tuple from its grammar label alone."
+    },
+    "minimalCorrectionMeaning": {
+      "question": "Do the offered correction examples preserve the original message and constraints with only justified repair?",
+      "pass": "All offered examples are supported minimal meaning-preserving repairs; or no examples are offered and the original is independently natural and sufficiently interpretable, so keeping it is appropriate.",
+      "fail": "At least one offered example makes an established unnecessary change or violates meaning constraints, including negation, quantity, time, participants, event or speech act.",
+      "uncertainOrUnavailable": "Use uncertain when an offered repair's equivalence is disputed. With no offered repair and an erroneous original, use unavailable rather than fail solely for the missing repair. Also use unavailable when missing context prevents identifying the intended message.",
+      "boundary": "The draft's natural label is not an oracle. A supported unchanged natural original can pass this dimension even when target metadata or a source claim fails elsewhere."
+    },
+    "sourceClaimHonesty": {
+      "question": "Are the criterion's substantive assertions and attributed evidence supported by the supplied input, permitted sources and explicit limits?",
+      "pass": "Claims are supported and appropriately bounded. Direct reasoning from supplied facts need not pretend to be a source quotation.",
+      "fail": "A substantive claim is contradicted or asserts a particular unsupported fact as established, or an attribution misrepresents a source. This dimension includes unsupported criterion claims even without an explicit citation.",
+      "uncertainOrUnavailable": "Use uncertain when available support has conflicting interpretations; unavailable when necessary evidence is absent and the criterion appropriately withholds a conclusion.",
+      "boundary": "A false grammatical assertion can fail without inventedEvidence=true. A general language source cannot identify an absent conversation's particular event. URLs and source titles alone are not evidence."
+    },
+    "ambiguityHandling": {
+      "question": "Does the record preserve relevant uncertainty and identify missing context without inventing a unique interpretation?",
+      "pass": "No relevant ambiguity is established, or the record acknowledges it and requests the specific missing context without unsupported correction.",
+      "fail": "The record asserts unwarranted certainty, erases relevant ambiguity, or claims a missing antecedent/event is uniquely known.",
+      "uncertainOrUnavailable": "Use uncertain when the need for context is itself disputed; unavailable if the supplied record does not allow this behavior to be assessed.",
+      "boundary": "A reply can be potentially grammatical while its event is unknown. Do not call every context-dependent reply ungrammatical."
+    },
+    "exposureAndFamilyCompliance": {
+      "question": "Does supplied exposure/family evidence support independence under the declared policy?",
+      "pass": "Only when the policy's required coverage and family independence are positively supported.",
+      "fail": "A known sentence or family leak is established; public diagnostic status does not waive this failure.",
+      "uncertainOrUnavailable": "Use unavailable for incomplete required coverage unless a known leak already requires fail; use uncertain for unresolved structural-family similarity.",
+      "boundary": "A known public diagnostic must remain fail with knownExposureLeak=true even if every English judgment is correct. Rewording and unanimous AI votes do not establish novelty."
+    }
+  },
+  "criticalFlags": {
+    "wrongTarget": "True for an established wrong declared target or explicit assessment of a different required target. Do not set it solely because grammar or meaning is wrong.",
+    "inventedEvidence": "True when a source, quotation, measurement, supplied passage or other supporting evidence is fabricated or falsely represented as present. An unsupported inferred antecedent, without an assertion that such supporting evidence was supplied, is handled by sourceClaimHonesty/forcedCertainty and does not alone set this flag.",
+    "meaningConstraintViolation": "True when an offered correction demonstrably changes protected message constraints. With no offered correction, do not invent one and set this flag against it.",
+    "forcedCertainty": "True when a determinate interpretation or judgment is asserted despite a specific unresolved context/evidence requirement. Flag the assertion rather than declaring the input universally ungrammatical.",
+    "knownExposureLeak": "True for an established known input or family leak in the supplied exposure evidence. Diagnostic/public use does not waive it."
+  },
+  "boundaryRules": [
+    {"id": "ALIGNMENT_IDENTIFIERS_ONLY", "rule": "Matching formal identifiers can pass assignmentAlignment while an unsupported semantic claim fails another dimension."},
+    {"id": "INCOMPLETE_INPUT_CAN_TEST_ABSTENTION", "rule": "An incomplete-context diagnostic can pass inputAndTargetValidity while its overconfident labels or criterion fail."},
+    {"id": "WRONG_DECLARED_TARGET_JOINT_LABEL_UNAVAILABLE", "rule": "Wrong declared target requires assignmentAlignment=fail, inputAndTargetValidity=fail, originalLabelSupport=unavailable, wrongTarget=true; preserve independent grammar observations."},
+    {"id": "NO_REPAIR_NATURAL_KEEP", "rule": "No offered repair plus independently natural and interpretable original means minimalCorrectionMeaning=pass."},
+    {"id": "NO_REPAIR_ERROR_OR_UNKNOWN_MESSAGE", "rule": "No offered repair plus erroneous original or unknowable intended message means minimalCorrectionMeaning=unavailable; do not use fail only because no repair was offered."},
+    {"id": "CRITERION_ASSERTIONS_ARE_CLAIMS", "rule": "sourceClaimHonesty includes the criterion's substantive claims, not only explicit source quotations."},
+    {"id": "UNSUPPORTED_INFERENCE_NOT_FABRICATED_SOURCE", "rule": "Unsupported inferred intent alone is not fabricated supporting evidence; assess sourceClaimHonesty, ambiguityHandling and forcedCertainty explicitly."},
+    {"id": "CRITICAL_FLAGS_REQUIRE_CORRESPONDING_FAILURE", "rule": "inventedEvidence implies sourceClaimHonesty=fail; meaningConstraintViolation implies minimalCorrectionMeaning=fail; forcedCertainty implies ambiguityHandling=fail; knownExposureLeak implies exposureAndFamilyCompliance=fail. The reverse implications are not automatic."}
+  ],
+  "limitations": [
+    "This policy was developed after observing public diagnostics; it is development-exposed and is not a hidden validation set.",
+    "The policy is a same-author operational proposal, not independent English truth or qualified judge behavior.",
+    "Echoing the rubric hash binds the declared version only; it does not prove understanding, instruction compliance or semantic correctness.",
+    "Old expectations and scores must stay frozen. New evidence must use separately bound requests and a prospective evaluation design.",
+    "A structural consistency validator cannot infer whether an original is natural or whether meaning is preserved."
+  ],
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "independentQualification": false,
+  "englishTruthCertified": false,
+  "liveDispatchAuthorized": false
+}

@@ -1,0 +1,18 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v3",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "6612db23-da2b-409f-88e2-3821c67b75b1",
+  "studyPlanHash": "5e1bb7df7f2f68dbc28a5e71d4fbd9da7fa60cb49502cb10ee7e2e69e62db55c",
+  "collectorProtocol": "ai-quality-v147-word-app-diagnostic-v1",
+  "successStatus": "collected-word-app-diagnostic",
+  "runtimeDirectoryName": "ai-quality-v147-word-app-runtime-20261112",
+  "expectedModelCalls": 6,
+  "expectedCountCalls": 6,
+  "reservationMicros": "359582",
+  "countAllowanceMicros": "210000",
+  "maximumCombinedMicros": "1019168",
+  "restrictedMaximumMicros": "659586",
+  "mainDispatchAuthorized": false,
+  "parentSettlementSha256": "fba97c39c17a65c2bad127abc6f430954a765a9f2e6c90d095653f30fef9a464"
+}

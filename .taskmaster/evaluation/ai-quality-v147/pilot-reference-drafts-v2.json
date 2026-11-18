@@ -1,0 +1,3840 @@
+{
+  "protocol": "ai-quality-v147-pilot-reference-drafts-v2",
+  "recordedAtUtc": "2026-11-08T16:07:30.760276+00:00",
+  "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+  "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+  "sourceClaimsFile": ".taskmaster/evaluation/ai-quality-v147/pilot-reference-source-claims-v1.json",
+  "sourceClaimsSha256": "084fa87c6e2b7e01e8e763443536402adc6ff9f5766eab79aa9e91517e430b00",
+  "sourceClaimsHashScope": "UTF8 compact JSON semantic digest,not file bytes",
+  "productPolicyRules": [
+    {
+      "id": "message-sufficiency-first",
+      "sourceFile": "lib/judgment-policy.ts",
+      "sourceSha256": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+      "authorParaphrase": "Default sentence mode with a genuinely incomplete message withholds BOTH original judgments and supplies no invented correction."
+    },
+    {
+      "id": "explicit-context-kind",
+      "sourceFile": "lib/judgment-policy.ts",
+      "sourceSha256": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+      "authorParaphrase": "A separately selected reply/title/command can license recoverable ellipsis or a phrase;the note alone cannot select the mode."
+    },
+    {
+      "id": "lexical-inflection-separate",
+      "sourceFile": "lib/judgment-policy.ts",
+      "sourceSha256": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+      "authorParaphrase": "Recognizable lexical inflection need not fail word-target meaning;changed part of speech or a different sense is not mere inflection."
+    },
+    {
+      "id": "lesson-correct-use",
+      "sourceFile": "lib/judgment-policy.ts",
+      "sourceSha256": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+      "authorParaphrase": "Grammar targets assess the relevant feature form/role/agreement under targetCriterion,not mere token presence."
+    },
+    {
+      "id": "natural-original-unchanged",
+      "sourceFile": "lib/judgment-policy.ts",
+      "sourceSha256": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+      "authorParaphrase": "A grammatical original remains unchanged even when the requested target sense or part of speech is absent."
+    },
+    {
+      "id": "preserve-constraints",
+      "sourceFile": "lib/judgment-policy.ts",
+      "sourceSha256": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+      "authorParaphrase": "Repair must preserve participants/roles,negation,quantity,time,modality and speech act;unknown message content is not filled in."
+    }
+  ],
+  "sourceBindings": {
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/grammar/target-criteria.ts": "146483f42c9fb01162b2015c12e23a232b1264bbdde90fa570f25d53724dd096",
+    ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+    ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    ".taskmaster/evaluation/ai-quality-v147/pilot-reference-drafts-v1.json": "9ce084fb122ac7a98e6921d33baa88637cb39554f4335db04690706e8e75996b"
+  },
+  "cases": [
+    {
+      "caseId": "pilot-word-needsCorrection-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-01",
+        "canonicalInputSha256": "f96e7dc6307876af40ed3f4c29e916caccfd42cbd48293313b81487634263aa6",
+        "candidateRequestSha256": "f35ccf6a740b9642e59523708808f95905e880cd654de50c22016abd0cf56cf5",
+        "baselineRequestSha256": "5b3d2ed1f1756fe5bf4db8fd5b0c7bd72c62274a89ed3b7b8cca213317e5a028"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "targetBindingSha256": "9d6742ce7a9186c2c02cd885e5563acd8258ac52392f0fab06eea1bff9c9bcbf",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Why did the curator ask twice?"
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Auxiliary did carries the past question;ask remains the lexical target.Repair only the extra past marking and preserve the why question.",
+      "englishRuleClaimIds": [
+        "lexical-ask",
+        "do-main-form"
+      ],
+      "sourceIds": [
+        "lex.ask",
+        "new.do",
+        "new.verb-phrase"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-946215ad5352870dc13c9f78",
+        "structuralSignature": "do-question-double-past",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-01",
+        "canonicalInputSha256": "94d864dbfa31537a412b8575982736ee449c77caa8f01af9018f013e0f780148",
+        "candidateRequestSha256": "b765c49d7f8db10578371885cfe5c5759a1afd7aba4e702be5cd15b78c933e90",
+        "baselineRequestSha256": "482ff60965731899d1c22eaf93a129d0d8a9760be46f81dc2d567506a51a5ba8"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "targetBindingSha256": "9d6742ce7a9186c2c02cd885e5563acd8258ac52392f0fab06eea1bff9c9bcbf",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "A concessive/conditional subordinate clause gives no linked main proposition;do not invent what happens despite asking again. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-389300c6b91f870102083171",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-01",
+        "canonicalInputSha256": "bf5cdc790290c40c635bcb863063329ce711fb582a3ec7a6144df898a2ed5cb2",
+        "candidateRequestSha256": "546923f0bf0b3637bd920608182b7006d1c130f6cbf669cec7b8b47e02f822c8",
+        "baselineRequestSha256": "7ad5b54dde0dfd335a19def45ed69fb4111231f29f74017aead498c4e6639310"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "noun",
+      "targetBinding": {
+        "target": "명사",
+        "role": "사람·장소·사물·생각에 이름을 붙이는 말이에요.",
+        "pattern": "주어 자리: Birds sing. / 목적어 자리: I like birds.",
+        "task": "music을 좋아하는 다른 것으로 바꿔 보세요.",
+        "check": "사람·사물·생각의 이름을 넣었나요?",
+        "stem": "I like music.",
+        "targetCriterion": "Use a noun in a suitable nominal role and form. A noun can name a person, thing, place or idea; unrelated verb errors do not negate correct noun use."
+      },
+      "targetBindingSha256": "5d2f893df1d87c888e5470b57049af4b45cc77f640704b66774e53b9380156b1",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Honesty matters."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Honesty is an abstract noun used as subject;an overt physical object or countable plural is unnecessary.",
+      "englishRuleClaimIds": [
+        "uncountable-noun"
+      ],
+      "sourceIds": [
+        "new.uncount"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-eb68275fa65a233afc3cd211",
+        "structuralSignature": "abstract-noun-subject",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-01",
+        "canonicalInputSha256": "8c4647046b1b6bfba16ae330665064960f751632c4a7f7df508769910a2c416d",
+        "candidateRequestSha256": "63b0676b0250e64d1e34b5e19fdbe6249db68ec9952145dd7d854e06f9ab5bfd",
+        "baselineRequestSha256": "5804d62ac74c5a89ad09372fcf29cfe4ae7bf77ab7739b2f1add5e8f1b375a80"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "noun",
+      "targetBinding": {
+        "target": "명사",
+        "role": "사람·장소·사물·생각에 이름을 붙이는 말이에요.",
+        "pattern": "주어 자리: Birds sing. / 목적어 자리: I like birds.",
+        "task": "music을 좋아하는 다른 것으로 바꿔 보세요.",
+        "check": "사람·사물·생각의 이름을 넣었나요?",
+        "stem": "I like music.",
+        "targetCriterion": "Use a noun in a suitable nominal role and form. A noun can name a person, thing, place or idea; unrelated verb errors do not negate correct noun use."
+      },
+      "targetBindingSha256": "5d2f893df1d87c888e5470b57049af4b45cc77f640704b66774e53b9380156b1",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Two items of luggage blocked the aisle."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Luggage is an uncountable noun;introduce a counting unit without changing the stated two items or the aisle obstruction.",
+      "englishRuleClaimIds": [
+        "uncountable-noun"
+      ],
+      "sourceIds": [
+        "new.uncount"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-fc3b6fce2ccc35463639b0b1",
+        "structuralSignature": "counting-mass-noun-without-unit",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-01",
+        "canonicalInputSha256": "30b8c9b4f67a18f077a48bf23cc22a787ff3a706782267a6fa346fbe4b671871",
+        "candidateRequestSha256": "c25dfb6cc54bb2f62139019410e081474e96608e0ea4fae4d15f5ea50b6036a7",
+        "baselineRequestSha256": "f6587d84adcd451c89dc64135bba79d029ebf2b389538bd288e6bf8803c29d52"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "verb",
+      "targetBinding": {
+        "target": "동사",
+        "role": "무엇을 하거나 어떤 상태인지 나타내요.",
+        "pattern": "주어 + 동사: I work. / 주어 + 동사 + 대상: She likes tea.",
+        "task": "drink tea를 평소 하는 다른 행동으로 바꿔 보세요.",
+        "check": "주어가 하는 일이나 상태를 나타내는 동사가 있나요?",
+        "stem": "I drink tea.",
+        "targetCriterion": "Use a verb for an action or state with a suitable finite/nonfinite form, tense and subject agreement. State verbs are valid; an action-only verb is not required. If the verb-form error is known but a safe correction depends on a missing temporal interpretation, target needs_work may coexist with grammar uncertain and a time question."
+      },
+      "targetBindingSha256": "1460b9a71ed1ca09213a76de28f8b5f410507e7c2f5350a574fb984ced3d689f",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "If the courier had arrived is a dependent conditional with no consequence;recognizable past-perfect tokens do not license a guessed main message. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-8c1ee009d1a9cad5d0f41726",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-01",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-01",
+        "canonicalInputSha256": "b07179f65c2f69aa7c68df146d4a3e6b5c6532304e61b7f6fdee93dcc4faf425",
+        "candidateRequestSha256": "a93b4479a9b4ca7bcde94b0ab10cf40304af26da0732b87958973592e8937793",
+        "baselineRequestSha256": "010d40819d84b720f6629751f7f8b0758560d44bb56daff88bc13a639bca0366"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "targetBindingSha256": "9d6742ce7a9186c2c02cd885e5563acd8258ac52392f0fab06eea1bff9c9bcbf",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "May I ask why?"
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Question-seeking ask is a verb in a complete polite modal question;the understood why-question complement need not be invented.",
+      "englishRuleClaimIds": [
+        "lexical-ask"
+      ],
+      "sourceIds": [
+        "lex.ask"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-ddff391631f1b741b6dd3d89",
+        "structuralSignature": "permission-question",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-02",
+        "canonicalInputSha256": "39e6b89b854751b8dc38d4d756161ccc780f03f798898528acb1700f03de2289",
+        "candidateRequestSha256": "249aea1be3e730e75ff3162d82d39785ddabf221b6efd415d5ef2e072da3d70c",
+        "baselineRequestSha256": "a71385ccff490d7ab079accb29eb6a05ccca60d2b0bb140fc8dd2e28fa760ad2"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "pronoun",
+      "targetBinding": {
+        "target": "대명사",
+        "role": "문맥에서 알 수 있는 사람이나 대상을 명사 대신 가리켜요.",
+        "pattern": "주어: I·she·they / 목적어: me·her·them",
+        "task": "She를 가족이나 친구를 가리키는 다른 대명사로 바꿔 보세요.",
+        "check": "대명사가 누구를 가리키는지 알고, 주어·목적어 형태를 골랐나요?",
+        "stem": "She helps me.",
+        "targetCriterion": "Use pronouns in suitable roles and case forms, including subject and object forms. Case errors are target-use errors even when pronouns are present. Ordinary reference need not name a real person; accept natural it is me and context-supported short answers."
+      },
+      "targetBindingSha256": "d4d0f4bdc8d21e7d0dbf3752cbf71d2ba1f283074b3c84706046af2b42710360",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The one beside her is a nominal phrase without a matrix assertion;her presence alone cannot override the message-sufficiency first rule. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-2a05fa40198a34ec296113f6",
+        "structuralSignature": "nominal-missing-main-predicate",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-02",
+        "canonicalInputSha256": "c5c6ad6845bf08f7cfce465c2c39817eb1c509355781be330f1d5ea3fea68c5b",
+        "candidateRequestSha256": "875597c7358e411edad8e3b79e2d96a86429305e243ecc7dba10c10d44d46470",
+        "baselineRequestSha256": "3e54f4f0916288c145a1183e857fbcb11dcadb9c701381da1bcb3b81fb7c130f"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "targetBindingSha256": "8430b5ed39ef14e4f88a2362e2d07cbbf68bc22989c9856808a52a8b9341df7c",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "This is a noun phrase with a relative reservation clause but no main predicate;do not invent the table event. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-6037635d035ac4e17817a2f7",
+        "structuralSignature": "nominal-missing-main-predicate",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-02",
+        "canonicalInputSha256": "cfc0125305bb39ce02ac29faba69467e39f261ed2ff8abc4fb0adaa5832134b2",
+        "candidateRequestSha256": "62ff1c9d55f8d042ee4be46aeca62ead9ec7c7ae07bb476d35cee778b516bae0",
+        "baselineRequestSha256": "ce66bd63340ec109b9ab5f589da7c55bcc239f4072f4688b1d47874cb0e320da"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "verb",
+      "targetBinding": {
+        "target": "동사",
+        "role": "무엇을 하거나 어떤 상태인지 나타내요.",
+        "pattern": "주어 + 동사: I work. / 주어 + 동사 + 대상: She likes tea.",
+        "task": "drink tea를 평소 하는 다른 행동으로 바꿔 보세요.",
+        "check": "주어가 하는 일이나 상태를 나타내는 동사가 있나요?",
+        "stem": "I drink tea.",
+        "targetCriterion": "Use a verb for an action or state with a suitable finite/nonfinite form, tense and subject agreement. State verbs are valid; an action-only verb is not required. If the verb-form error is known but a safe correction depends on a missing temporal interpretation, target needs_work may coexist with grammar uncertain and a time question."
+      },
+      "targetBindingSha256": "1460b9a71ed1ca09213a76de28f8b5f410507e7c2f5350a574fb984ced3d689f",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Neither route leads to the quay."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The supplied contextNote explicitly describes the routes on the current map.This supports the written present-time reading:singular neither route takes leads in the standard-writing rule.Repair only agreement;do not invent a missing past-time question.This is a supported standard-written repair,not certification of all dialects or of the whole reference pipeline.",
+      "englishRuleClaimIds": [
+        "singular-agreement"
+      ],
+      "sourceIds": [
+        "new.agreement"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-915c5f6d47a0cea103bc144c",
+        "structuralSignature": "neither-singular-present-agreement",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false,
+      "interpretationUpdate": {
+        "reason": "The first author draft recorded a time issue despite an already supplied current-map note;the note was present before any of these model responses.",
+        "expectedOriginalChanged": false,
+        "correctionExamplesChanged": false,
+        "conditionalStandardWritingSupport": true,
+        "allVarietyGrammarCertified": false,
+        "sourceSpecificDialectAttestationProvided": false
+      },
+      "interpretationEvidence": {
+        "runtimeTerminalFile": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-reference-interpretation-v1-runtime-20261109\\terminal.json",
+        "runtimeTerminalSha256": "bf1a430462f65159311237275c389b790c56c92ec3e1648109ac99bd87cff355",
+        "models": 3,
+        "diagnosticOnly": true,
+        "doesNotGrantReferenceQualification": true
+      }
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-02",
+        "canonicalInputSha256": "62d09adf31a5140f58b3a0d874de8c9580c5e6bb0f52377f6ae6af0bda067493",
+        "candidateRequestSha256": "c400859bd844e44e75cef966f2b0bbabf064878b882ff96e5773ca608a030f5f",
+        "baselineRequestSha256": "93c8aab14affc9f627e16604734d624a2750b5e2c84c33761cd3cb538a39aa8a"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "targetBindingSha256": "6f869837628bb25725e634639f1dd35694b2a782e50fc6e4898f48b9cc5df430",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Her help was valuable."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Help is uncountable assistance and the singular subject of the past copular clause;repair agreement without changing the helper or event.",
+      "englishRuleClaimIds": [
+        "lexical-help",
+        "uncountable-noun",
+        "singular-agreement"
+      ],
+      "sourceIds": [
+        "lex.help",
+        "new.uncount",
+        "new.agreement"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-815289f27cf4e9fbd9e17d6b",
+        "structuralSignature": "mass-noun-copula-agreement",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-02",
+        "canonicalInputSha256": "3210a7ec1a638f6b442638af70d313350361eef601dcb9582168e2431917e155",
+        "candidateRequestSha256": "29d6f9461b006b2e46aea445dc5f80f5f7d05db2311b23169defb7cbcd546344",
+        "baselineRequestSha256": "fef29fddebaaa8e0974331a0fea00847f75b22869952b571fe8810e89364712f"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "targetBindingSha256": "8430b5ed39ef14e4f88a2362e2d07cbbf68bc22989c9856808a52a8b9341df7c",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "We booked ahead."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Booked is the reservation verb.The separately selected reply mode and supplied prior reservation question support the short response without requiring a newly invented object.",
+      "englishRuleClaimIds": [
+        "lexical-book"
+      ],
+      "sourceIds": [
+        "lex.book"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate",
+        "explicit-context-kind"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-2ff21ad306829e2508153ea4",
+        "structuralSignature": "context-supported-reservation-reply",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-02",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-02",
+        "canonicalInputSha256": "8c7bae910f952a3d4ed10bd0653a8dee5a3ad87b1cda37e149ef66fd99cc9fdc",
+        "candidateRequestSha256": "aeee590c096390345ffe4120d4f8cfea7914e1ed3b7911e7f7ea04ee8a0b1c85",
+        "baselineRequestSha256": "f22daa3357dc05e2e611cff3b88cc96f6753fa9e5f4711c18a71d9e208d2aeb5"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "pronoun",
+      "targetBinding": {
+        "target": "대명사",
+        "role": "문맥에서 알 수 있는 사람이나 대상을 명사 대신 가리켜요.",
+        "pattern": "주어: I·she·they / 목적어: me·her·them",
+        "task": "She를 가족이나 친구를 가리키는 다른 대명사로 바꿔 보세요.",
+        "check": "대명사가 누구를 가리키는지 알고, 주어·목적어 형태를 골랐나요?",
+        "stem": "She helps me.",
+        "targetCriterion": "Use pronouns in suitable roles and case forms, including subject and object forms. Case errors are target-use errors even when pronouns are present. Ordinary reference need not name a real person; accept natural it is me and context-supported short answers."
+      },
+      "targetBindingSha256": "d4d0f4bdc8d21e7d0dbf3752cbf71d2ba1f283074b3c84706046af2b42710360",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Between us, it was her."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Us is object form after between and her is a natural be-complement.No real-world antecedent or formal she-substitution is required.",
+      "englishRuleClaimIds": [
+        "object-pronoun"
+      ],
+      "sourceIds": [
+        "new.pronouns"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-56b362232faf1e5c00ae4ced",
+        "structuralSignature": "preposition-and-be-complement-pronoun",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-03",
+        "canonicalInputSha256": "c5881e4ef7c023a44ac0aa4616a1d105259505e6240d7e0d08f98355ca5439e0",
+        "candidateRequestSha256": "35eb88234b6315ac2371d9047dcdf0db096a59896129ca757239b246acb94736",
+        "baselineRequestSha256": "61d22f1b56020a17661a1a31a1c2b49d19421b6261223533803f9ea66858c3fc"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "targetBindingSha256": "6f869837628bb25725e634639f1dd35694b2a782e50fc6e4898f48b9cc5df430",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Practical help for new volunteers"
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Help is an assistance noun in the expressly selected heading/title.The noun phrase is licensed as a title,so do not add a subject or a new event.",
+      "englishRuleClaimIds": [
+        "lexical-help"
+      ],
+      "sourceIds": [
+        "lex.help"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate",
+        "explicit-context-kind"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-ace49b57bf695c650e211568",
+        "structuralSignature": "explicit-title-noun-phrase",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-03",
+        "canonicalInputSha256": "e5f09709246dc1f252811abb6e2085aa64dd56b605f9d42c7f2f753e0501e2b4",
+        "candidateRequestSha256": "26884cfab72e885b416062fbeba08d870490953d180eda74aaa42fef509e7c56",
+        "baselineRequestSha256": "d49ee0c5179870b63fe579bc225e80872038234ae852f7bb754169f21230d186"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "adjective",
+      "targetBinding": {
+        "target": "형용사",
+        "role": "사람이나 사물의 성질·상태를 설명해요.",
+        "pattern": "명사 앞: a quiet room / be 뒤: The room is quiet.",
+        "task": "사람이나 성질 한 부분을 바꿔 아는 사람을 설명해 보세요.",
+        "check": "형용사가 어떤 사람이나 사물을 설명하는지 말할 수 있나요?",
+        "stem": "My brother is kind.",
+        "targetCriterion": "Use an adjective to modify a noun or describe a subject through a linking verb. Do not treat a manner adjective used instead of a required adverb as correct adjective use."
+      },
+      "targetBindingSha256": "c8d815b9bfee65d1e6749646e0b9c31ff50364ff58c7211c1e194964b7221bf4",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The delay made everyone restless."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Restless is an adjective describing everyone in the make+object+complement construction;do not replace it with a manner adverb.",
+      "englishRuleClaimIds": [
+        "object-adjective-complement"
+      ],
+      "sourceIds": [
+        "new.make-adjective"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-9c0279b4dc594b0b7439619b",
+        "structuralSignature": "object-adjective-complement",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-03",
+        "canonicalInputSha256": "c7810f91331e1fc180da6106ab9a871e7dad4023401a3290393c954350ac6ab3",
+        "candidateRequestSha256": "c7a2f9ea5ab98d76e6217c96dc6d7e9dd0d8616ed34f00b0a2c8018a3631d4c7",
+        "baselineRequestSha256": "7ffff88d1728c34ee4e016a0733aa20e80e642d4ae0803f6994065722ad22719"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "targetBindingSha256": "8430b5ed39ef14e4f88a2362e2d07cbbf68bc22989c9856808a52a8b9341df7c",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "This book belongs on that shelf."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Book is the grammatical text noun,not the requested reservation verb.Do not rewrite a correct ownership statement to manufacture a reservation.",
+      "englishRuleClaimIds": [
+        "lexical-book"
+      ],
+      "sourceIds": [
+        "lex.book"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate",
+        "natural-original-unchanged"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-f02c4e930995c53ef3a4d257",
+        "structuralSignature": "homograph-noun-versus-target-verb",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-03",
+        "canonicalInputSha256": "aa21f13807964737b8807f575fe8379c9fe2af8437ea9308d445d35bd95a5ba7",
+        "candidateRequestSha256": "f1537ba1b7ee3a0593d9c0f1700e79b14d9cdf172a6ae211dd2871d89d39cfb2",
+        "baselineRequestSha256": "6cf90ccdb6287d0636eec21cf303b0e2ea9791c5f5635e9b83c5044d35f2cf5c"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "adjective",
+      "targetBinding": {
+        "target": "형용사",
+        "role": "사람이나 사물의 성질·상태를 설명해요.",
+        "pattern": "명사 앞: a quiet room / be 뒤: The room is quiet.",
+        "task": "사람이나 성질 한 부분을 바꿔 아는 사람을 설명해 보세요.",
+        "check": "형용사가 어떤 사람이나 사물을 설명하는지 말할 수 있나요?",
+        "stem": "My brother is kind.",
+        "targetCriterion": "Use an adjective to modify a noun or describe a subject through a linking verb. Do not treat a manner adjective used instead of a required adverb as correct adjective use."
+      },
+      "targetBindingSha256": "c8d815b9bfee65d1e6749646e0b9c31ff50364ff58c7211c1e194964b7221bf4",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "This fabric feels soft."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Feel describes the fabric quality here;soft is the proposed adjective complement rather than a manner adverb.Do not invent a person touching it.",
+      "englishRuleClaimIds": [
+        "adjective-complement"
+      ],
+      "sourceIds": [
+        "new.link"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-919923fcaebf343070da5208",
+        "structuralSignature": "linking-verb-adverb-for-adjective",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-03",
+        "canonicalInputSha256": "5702e1976c312c022f3ec3fc8b61599d98ead7bf3223e8c42da36461bee67d4a",
+        "candidateRequestSha256": "6ccbdc18e9dcd01fbdf2edf9b81acc84ff0b4927f771e7f428f832c883c5f18f",
+        "baselineRequestSha256": "561da1698af2ceb166065b67b75f020db720ae023efc549b1d466576626a5ac9"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "targetBindingSha256": "6f869837628bb25725e634639f1dd35694b2a782e50fc6e4898f48b9cc5df430",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "With her help near the ends inside an unfinished preposition phrase;do not supply a guessed place or task. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-26a4f990c4d87b35c05bf3d8",
+        "structuralSignature": "unfinished-prepositional-phrase",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-03",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-03",
+        "canonicalInputSha256": "43d9ae5c59984ec3d516f66c7f2f58208a781543104f74c3ca04abd6b94b53c2",
+        "candidateRequestSha256": "0e5e894721c70a8643fa930d7b9bfb26655ae5c067bf8c11c7ce5d6f62c9f96a",
+        "baselineRequestSha256": "f88a6e0e4ee59a96e0aeb22f1fa81c3d2ffe3bf9c61ed689bd681ac1d1e3b6fc"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "adverb",
+      "targetBinding": {
+        "target": "부사",
+        "role": "행동의 방식·빈도나 형용사 등의 정도를 더 자세히 설명해요.",
+        "pattern": "행동 방식: walk slowly / 빈도: often cook / 정도: very cold",
+        "task": "often을 빈도를 나타내는 다른 말로 바꿔 보세요.",
+        "check": "부사가 어떤 행동이나 성질을 더 자세히 설명하나요?",
+        "stem": "I often cook at home.",
+        "targetCriterion": "Use an adverb with a suitable form, role and position for manner, frequency, degree or another valid function. Not every adverb ends in -ly and not every -ly word is an adverb."
+      },
+      "targetBindingSha256": "d17e42c508cde9589bfe2adb0dc40002cb98fabe94a6e24f3ee8e6c0c9b2fd90",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Only if she agrees supplies a restricted condition but no consequence;do not invent an agreement event or the promised action. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-bc5cf0a304b0baa7f100a0ba",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-04",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-04",
+        "canonicalInputSha256": "be454bb70322e69784e69fd46dc8469c1b5521699d54d5299e5afe90b764056b",
+        "candidateRequestSha256": "856df4600dae41e20f2960c167b0b91b0423242752e36986b1775dbeb3c1e594",
+        "baselineRequestSha256": "7fbbf912d0e5b0d5b237c18eae05d95deafd8ddf37b239b2fb17bd3a9e32be01"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "targetBindingSha256": "41d9aad45ea7b79b9b14536c3550e9cc8676c7f60840f22e4121c52afcf465f6",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The guide explained it carefully."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Carefully is a grammatical manner adverb,not the requested careful adjective.Derivation changes the part of speech;keep the already natural sentence.",
+      "englishRuleClaimIds": [
+        "lexical-careful"
+      ],
+      "sourceIds": [
+        "lex.careful"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate",
+        "natural-original-unchanged"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-9ab4aa0d73e3b113cde29374",
+        "structuralSignature": "derived-adverb-versus-adjective-target",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-04",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-04",
+        "canonicalInputSha256": "e3522b318233e859ca1d9e16b32640cee6b323ebaeb02f13b769c960785474f5",
+        "candidateRequestSha256": "e8fa8ecd64175854c0df68ce5cde84456928b381ca0ac28bf641674c8f3574bc",
+        "baselineRequestSha256": "6e98e77e15023ac3df426820148e50b9c332d77385ae9e0b6bcd5b1857b8718e"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "targetBindingSha256": "41d9aad45ea7b79b9b14536c3550e9cc8676c7f60840f22e4121c52afcf465f6",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The incomplete comparison does not name its second term or a complete assertion;do not guess who is more careful. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-4fc714273abcff5c6cfb5246",
+        "structuralSignature": "unfinished-comparison",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-04",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-04",
+        "canonicalInputSha256": "aff128c890010bcfc2242a937064aef201210f547b5e11db0826d64521c8ccd0",
+        "candidateRequestSha256": "eb2f2ecc324e38ad4e8e411d33a52ad77bea8bd3b7f16a8556b70fdb235bc4cb",
+        "baselineRequestSha256": "59d448a2c89957a8d92e8948806ea6391339a42397db8610eb3303adb131aaca"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "adverb",
+      "targetBinding": {
+        "target": "부사",
+        "role": "행동의 방식·빈도나 형용사 등의 정도를 더 자세히 설명해요.",
+        "pattern": "행동 방식: walk slowly / 빈도: often cook / 정도: very cold",
+        "task": "often을 빈도를 나타내는 다른 말로 바꿔 보세요.",
+        "check": "부사가 어떤 행동이나 성질을 더 자세히 설명하나요?",
+        "stem": "I often cook at home.",
+        "targetCriterion": "Use an adverb with a suitable form, role and position for manner, frequency, degree or another valid function. Not every adverb ends in -ly and not every -ly word is an adverb."
+      },
+      "targetBindingSha256": "d17e42c508cde9589bfe2adb0dc40002cb98fabe94a6e24f3ee8e6c0c9b2fd90",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "She very much enjoys sailing."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Plain degree very is not the proposed suitable modifier of enjoys;very much is an attested repair before the verb.Preserve her degree of enjoyment and the sailing activity.",
+      "englishRuleClaimIds": [
+        "degree-very"
+      ],
+      "sourceIds": [
+        "new.very",
+        "new.very-much"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-a6cbfc2636c296d3c216760b",
+        "structuralSignature": "degree-modifier-before-main-verb",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-04",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-04",
+        "canonicalInputSha256": "9428a0e473970bcc3fef839503ea66d84c277b94f54c1b81a4599346acb8d6a3",
+        "candidateRequestSha256": "0290235770af40eb6e29d7016d69756ca7d3deea49843ca186e49625eb19a5fa",
+        "baselineRequestSha256": "d4af62aa8c617fb0bd8b6985aaa3f9491b05a718552bcdb1c14f0b378615d940"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "determiner",
+      "targetBinding": {
+        "target": "한정사",
+        "role": "명사 앞에서 어느 것인지, 누구의 것인지, 얼마나 있는지 범위를 정해요.",
+        "pattern": "this book / my bag / some water",
+        "task": "My를 This 또는 That으로 바꾸고 뜻 차이를 생각해 보세요.",
+        "check": "명사 앞에서 어느 것·누구 것·얼마나인지를 정했나요?",
+        "stem": "My bag is blue.",
+        "targetCriterion": "Use a determiner suitably with its noun, including number, reference or quantity. Avoid incompatible combinations such as a possessive determiner plus an article."
+      },
+      "targetBindingSha256": "8d25676c8cf40e8aaf219d51a8656eed827065754a60ed3d22a8fefe25740c34",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Either of these has no complete assertion or supplied choice context in default sentence mode;do not choose an item for the learner. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-46a902b411aed56b6558a724",
+        "structuralSignature": "nominal-missing-main-predicate",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-04",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-04",
+        "canonicalInputSha256": "ac3cad52e048c50d06393aecef963445cfdaa577e8eee027ae5a0182c9d03b29",
+        "candidateRequestSha256": "954263058ed04cfae98b8eeda046a50f8b5259b888a9003bf3e20ace3c0b1e8b",
+        "baselineRequestSha256": "82fa9fee4657d9b7228210bfc6051c9ef05789ecf73189514d114898202af849"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "quiet",
+        "pos": "adj.",
+        "meaning": "조용한",
+        "expression": "quiet"
+      },
+      "targetBindingSha256": "cbedcdb165cce547626c4042b32fe6bffe758a11b65969327022f4a941c7b30e",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Keep the corridor quiet."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Quiet is an adjective describing the corridor in a genuine imperative.Keep retains its understood imperative subject;do not change this into a factual statement.",
+      "englishRuleClaimIds": [
+        "lexical-quiet"
+      ],
+      "sourceIds": [
+        "lex.quiet-cambridge"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate",
+        "explicit-context-kind"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-36cb28d45c9dfbb7bb68b124",
+        "structuralSignature": "imperative-object-adjective",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-04",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-04",
+        "canonicalInputSha256": "a5dd7dc759a9a73398e19e61d6c0803cb60e343954904c87177e78ec338187bb",
+        "candidateRequestSha256": "62ca92fdd840bb73a7ba7f2527b8bab533593d97ad2f51b1ceb40eef3b97fde8",
+        "baselineRequestSha256": "f9864050d86a878f169cb09153163d4282a7a192f1cd2028b3334179a127dc04"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "determiner",
+      "targetBinding": {
+        "target": "한정사",
+        "role": "명사 앞에서 어느 것인지, 누구의 것인지, 얼마나 있는지 범위를 정해요.",
+        "pattern": "this book / my bag / some water",
+        "task": "My를 This 또는 That으로 바꾸고 뜻 차이를 생각해 보세요.",
+        "check": "명사 앞에서 어느 것·누구 것·얼마나인지를 정했나요?",
+        "stem": "My bag is blue.",
+        "targetCriterion": "Use a determiner suitably with its noun, including number, reference or quantity. Avoid incompatible combinations such as a possessive determiner plus an article."
+      },
+      "targetBindingSha256": "8d25676c8cf40e8aaf219d51a8656eed827065754a60ed3d22a8fefe25740c34",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Both my mittens are damp."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Both and possessive my precede plural mittens with are.The newly checked determiner-order source explicitly licenses both+possessive+noun;retain the natural original.",
+      "englishRuleClaimIds": [
+        "determiner-role"
+      ],
+      "sourceIds": [
+        "new.determiner-order"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-4741467386b0b0bcbcaec033",
+        "structuralSignature": "both-possessive-plural-noun",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-05",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-05",
+        "canonicalInputSha256": "33f7396c9c04689ddca47af5a3fd3164fc081c03736df86bc9799aa825d34496",
+        "candidateRequestSha256": "ff4a70e6bb5d65960ca1828cbd318f7dc176e8dd159b18cb0a1ec93d1437561c",
+        "baselineRequestSha256": "d5a2ef931ed01df36ca4ddcb2426158b38e2b985dbacda37f13d54025e145bee"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "definite-article",
+      "targetBinding": {
+        "target": "정관사",
+        "role": "말하는 사람과 듣는 사람이 어떤 대상인지 알 수 있을 때 the를 써요.",
+        "pattern": "I saw a dog. The dog was small. / Close the door.",
+        "task": "물건과 그 특징을 바꿔 두 문장을 써 보세요.",
+        "check": "the가 가리키는 대상을 상대도 알아볼 수 있나요?",
+        "stem": "I have a bag. The bag is blue.",
+        "targetCriterion": "Use the when the intended referent can be identified from discourse or ordinary presumed shared context; do not demand a named real-world identifier when there is no contradictory evidence. Do not require the for every noun or generic plural."
+      },
+      "targetBindingSha256": "18531adbca2e13546bf1cd9ac3810305154e7aee4d933a9f5a594bec7d63875d",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The long receipt noun phrase specifies a referent but no main predicate;ordinary article reference is not itself the reason for withholding. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-52fd9c81541481e1959b5ed4",
+        "structuralSignature": "nominal-missing-main-predicate",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-05",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-05",
+        "canonicalInputSha256": "2a5c652ce5f1100d8d8903e39d8bc97362af84c0ea902ddc9966afc870f292f2",
+        "candidateRequestSha256": "f085a5c4c59f4754820f27035247a4e58ffa0a8db44b967f096d782ea67ebd55",
+        "baselineRequestSha256": "33d30a3cf9574a8479e7cb2d781de89a8da9903b28878ef369b67e0c5721fd9b"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "targetBindingSha256": "9d6742ce7a9186c2c02cd885e5563acd8258ac52392f0fab06eea1bff9c9bcbf",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The committee asked a question about the revised opening hours at yesterday's meeting."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Yesterday fixes the meeting in the past;repair ask to asked without changing the time or number of committee members.",
+      "englishRuleClaimIds": [
+        "lexical-ask",
+        "do-main-form"
+      ],
+      "sourceIds": [
+        "lex.ask",
+        "new.do",
+        "new.verb-phrase"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-99bd9cbecc98d907736c2e8d",
+        "structuralSignature": "explicit-past-finite-form",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-05",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-05",
+        "canonicalInputSha256": "6d912b26fef8961c2b0744738b02a2fc67c3186865f298004dde4a4b8de99920",
+        "candidateRequestSha256": "67b8e002ebf945d4c14ee1ce9b9abb8cc0811e7fd3d36e68d167d6374c330016",
+        "baselineRequestSha256": "b8015e142fd9f7a6316248cd1cf53ebfffaa75e4d629aeb4f3ad2812e7e23007"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "indefinite-article",
+      "targetBinding": {
+        "target": "부정관사",
+        "role": "셀 수 있는 단수 명사를 하나 소개할 때 a 또는 an을 써요.",
+        "pattern": "a book / an apple / an hour / a university",
+        "task": "bag을 가지고 있는 다른 물건으로 바꾸고 a·an을 고르세요.",
+        "check": "셀 수 있는 단수 명사인가요? 다음 단어의 첫소리에 맞게 a·an을 골랐나요?",
+        "stem": "I have a bag.",
+        "targetCriterion": "Use a/an with a suitable singular count noun and choose the article by the following sound. An article merely being present is insufficient."
+      },
+      "targetBindingSha256": "2f6f1f764b2bce8c97cf572b6456deba37729fb1925127fa072feba5bccaab40",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "A university near the harbor awarded an honorary diploma to a local pilot."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "A university reflects consonantal initial sound,an honorary reflects silent h,and a local pilot is singular countable.Keep the original.",
+      "englishRuleClaimIds": [
+        "article-sound"
+      ],
+      "sourceIds": [
+        "new.articles"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-47d994e55064c526ac9dbf07",
+        "structuralSignature": "article-by-following-sound",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-05",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-05",
+        "canonicalInputSha256": "c369005a470a47685743965850300de2eda3eb9c81bb4f2dcd6a720af76e633d",
+        "candidateRequestSha256": "4977779db5939fab0aa0d7b9a0280d2dcf462787e4ea9ff77ae7fdf1e47bd030",
+        "baselineRequestSha256": "fdb06aba32a477cb6445f5fa92469ddc46161cceab6601478dc1a180a681b05b"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "indefinite-article",
+      "targetBinding": {
+        "target": "부정관사",
+        "role": "셀 수 있는 단수 명사를 하나 소개할 때 a 또는 an을 써요.",
+        "pattern": "a book / an apple / an hour / a university",
+        "task": "bag을 가지고 있는 다른 물건으로 바꾸고 a·an을 고르세요.",
+        "check": "셀 수 있는 단수 명사인가요? 다음 단어의 첫소리에 맞게 a·an을 골랐나요?",
+        "stem": "I have a bag.",
+        "targetCriterion": "Use a/an with a suitable singular count noun and choose the article by the following sound. An article merely being present is insufficient."
+      },
+      "targetBindingSha256": "2f6f1f764b2bce8c97cf572b6456deba37729fb1925127fa072feba5bccaab40",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "He carried a one-page permit in the transparent folder beside his toolkit."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "One begins with a consonantal sound despite its initial letter;use a without changing page count or the transparent-folder description.",
+      "englishRuleClaimIds": [
+        "article-sound"
+      ],
+      "sourceIds": [
+        "new.articles"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-624a8acb85e2f41fc442f243",
+        "structuralSignature": "article-before-consonantal-one",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-05",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-05",
+        "canonicalInputSha256": "dc70c5dd6a32f57871e599b7da28335c7c3dee9e079f87b28bc5a8ce94fd28f3",
+        "candidateRequestSha256": "849712da4b0d63ec95c686b66dae32988819bb7f9122960bcc29974e81a5a596",
+        "baselineRequestSha256": "570c505c3c894c40b5a5278c8e39506d00238aad9d94c337cdb320abce4a4a9b"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "targetBindingSha256": "41d9aad45ea7b79b9b14536c3550e9cc8676c7f60840f22e4121c52afcf465f6",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "A careful reviewer checked every number on the unsigned form at the reception desk."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Careful modifies reviewer in a complete finite sentence;it is the requested adjective rather than a manner adverb.",
+      "englishRuleClaimIds": [
+        "lexical-careful"
+      ],
+      "sourceIds": [
+        "lex.careful"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-94e8cd36846ae5ff90423887",
+        "structuralSignature": "attributive-adjective",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-05",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-05",
+        "canonicalInputSha256": "016d0044e01547f7689083a52081cf350ea20286581e94e23d9ebfe46e815004",
+        "candidateRequestSha256": "a7d45b4ed00cd7353509934600ecc2530ebf7336f3fa13f9f10bb449df2887a7",
+        "baselineRequestSha256": "5a3213a490766f25b0c6ff274ae37a7be654c069756f2cb975c1ab5927c08a8c"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "quiet",
+        "pos": "adj.",
+        "meaning": "조용한",
+        "expression": "quiet"
+      },
+      "targetBindingSha256": "cbedcdb165cce547626c4042b32fe6bffe758a11b65969327022f4a941c7b30e",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The although clause lacks the contrasting main proposition in default sentence mode;no automatic quiet-room story. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-3c6acd4dfde9656c26e68f04",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-06",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-06",
+        "canonicalInputSha256": "b1598c9c43702f4487091661f9c8cf60a62f143731d27655c4204893a5e876d6",
+        "candidateRequestSha256": "77ef941a5ec4051432fb9803798aed108306b06ba29a3cf200d3e820b12211cf",
+        "baselineRequestSha256": "be9a7c513181434f208b2c7a1630a2d14906ed64743f4603cc46dc6968bfe0a3"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "number",
+      "targetBinding": {
+        "target": "수사",
+        "role": "one·two는 개수, first·second는 순서를 나타내요.",
+        "pattern": "two books / the second floor / my first day",
+        "task": "개수와 물건을 바꿔 보세요.",
+        "check": "개수와 순서 중 필요한 표현을 골랐나요?",
+        "stem": "I have two bags.",
+        "targetCriterion": "Use a cardinal or ordinal for its intended quantity or order, with a suitable associated noun form. Do not invent a counted item for an isolated ambiguous quantity."
+      },
+      "targetBindingSha256": "12457d7a64cbc32c8785dca87afb6a678107b5d46c7b35f10e29af23cf224e89",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Three more than the number is a quantity phrase,not a complete stated message;do not invent the counted items or comparison outcome. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-d62a8b3cc20ea4f7680e5771",
+        "structuralSignature": "isolated-comparison-quantity",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-06",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-06",
+        "canonicalInputSha256": "c60909040abf5cf0e8eec2bc5666087b370b64d45becb5234a470e17e386262d",
+        "candidateRequestSha256": "4b1f65de1f41d694375c59cda8bfda72f6148b5fd4814a06f58a1a4ddab741a3",
+        "baselineRequestSha256": "37af5419edc5e984146f0d1849e0928b80c694abd487ea03c6f30e9e71092275"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "number",
+      "targetBinding": {
+        "target": "수사",
+        "role": "one·two는 개수, first·second는 순서를 나타내요.",
+        "pattern": "two books / the second floor / my first day",
+        "task": "개수와 물건을 바꿔 보세요.",
+        "check": "개수와 순서 중 필요한 표현을 골랐나요?",
+        "stem": "I have two bags.",
+        "targetCriterion": "Use a cardinal or ordinal for its intended quantity or order, with a suitable associated noun form. Do not invent a counted item for an isolated ambiguous quantity."
+      },
+      "targetBindingSha256": "12457d7a64cbc32c8785dca87afb6a678107b5d46c7b35f10e29af23cf224e89",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Although she finished third, she was one of the five runners who qualified for the relay."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Third gives finishing order and five counts plural runners.The newly checked source licenses ordinal adverbs and cardinal quantity;retain the complete natural sentence.",
+      "englishRuleClaimIds": [
+        "number-role"
+      ],
+      "sourceIds": [
+        "new.number-role"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-b731abaa610759f15da9eef0",
+        "structuralSignature": "cardinal-and-ordinal-in-complete-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-06",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-06",
+        "canonicalInputSha256": "72129c25da9948316f5c2141b1d48e1a353336e278e6176eec88990a0c9f0760",
+        "candidateRequestSha256": "eb12ea8829c9249ce2fd150de31f1d46b7dc6a29cfb0cfaef49dbab04a63ba66",
+        "baselineRequestSha256": "2d9a40f2526f078f34f985ef50dbd0fc8db2fb69ba6e490652ae31530feb8158"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "quiet",
+        "pos": "adj.",
+        "meaning": "조용한",
+        "expression": "quiet"
+      },
+      "targetBindingSha256": "cbedcdb165cce547626c4042b32fe6bffe758a11b65969327022f4a941c7b30e",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Of the three routes, the footpath was the quietest, so the hikers chose it for the recording."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The quiet target remains recognizable;remove duplicated superlative marking while preserving the comparison among three routes.",
+      "englishRuleClaimIds": [
+        "lexical-quiet",
+        "superlative-form"
+      ],
+      "sourceIds": [
+        "lex.quiet-cambridge",
+        "new.comparison",
+        "new.quiet-inflection"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-c0fdecf6a36a29e40a7fd1ec",
+        "structuralSignature": "double-superlative-marking",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-06",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-06",
+        "canonicalInputSha256": "f0e203de8073171354ab3348c26d1b522bc2e0f487946f2f81049d8b41df7ea3",
+        "candidateRequestSha256": "c35b24f2e5d83bc73fa0d765dadd9edcf0dc10d8cc4ce916cf360d85cb9264d8",
+        "baselineRequestSha256": "2e2cb166b965fd3525f21c8c869a3931f6b6dd18d5823cdb5520b2b0ed6019b6"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "definite-article",
+      "targetBinding": {
+        "target": "정관사",
+        "role": "말하는 사람과 듣는 사람이 어떤 대상인지 알 수 있을 때 the를 써요.",
+        "pattern": "I saw a dog. The dog was small. / Close the door.",
+        "task": "물건과 그 특징을 바꿔 두 문장을 써 보세요.",
+        "check": "the가 가리키는 대상을 상대도 알아볼 수 있나요?",
+        "stem": "I have a bag. The bag is blue.",
+        "targetCriterion": "Use the when the intended referent can be identified from discourse or ordinary presumed shared context; do not demand a named real-world identifier when there is no contradictory evidence. Do not require the for every noun or generic plural."
+      },
+      "targetBindingSha256": "18531adbca2e13546bf1cd9ac3810305154e7aee4d933a9f5a594bec7d63875d",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "It was the oldest surviving map in the drawer, and every volunteer wanted to see it."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Use the with the specified oldest surviving map;do not infer ownership or change the comparison to a different drawer.",
+      "englishRuleClaimIds": [
+        "superlative-form"
+      ],
+      "sourceIds": [
+        "new.comparison",
+        "new.quiet-inflection"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-825fba2500a8e8a904df46b0",
+        "structuralSignature": "missing-definite-before-superlative",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-06",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-06",
+        "canonicalInputSha256": "c59811ddfa470c9891c24483aaea091b3474106a6eb290877d797028e4d75573",
+        "candidateRequestSha256": "93f7addbe6c4ac99c9577a562e4d3cda1dcb7c8a22e2acd80db5df9fa275d96b",
+        "baselineRequestSha256": "150cc98072cefd4ba19aad8e5e0eeac17566ae24afe2b7ad11f4df1266a7fa3a"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "skillfully",
+        "pos": "adv.",
+        "meaning": "능숙하게",
+        "expression": "skillfully"
+      },
+      "targetBindingSha256": "6be9b7e68b4c2b8f900795a61baee06406d35012d0001a3ec74f239f7162079b",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Although the wood had split near a hinge, the conservator repaired the panel skillfully without removing its painted surface."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Skillfully is a manner adverb modifying repaired in the concessive main clause.Preserve the preceding split-wood condition and the unchanged painted surface.",
+      "englishRuleClaimIds": [
+        "lexical-skillfully",
+        "manner-adverb-role"
+      ],
+      "sourceIds": [
+        "lex.skillfully",
+        "new.manner",
+        "new.skillful"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-24adcaa994f33c87d499c9b9",
+        "structuralSignature": "concessive-manner-adverb",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-06",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-06",
+        "canonicalInputSha256": "1a61c85f2b529164be454f92bdcd8d8b1367394b731d8b7d90511ac7edefc4e0",
+        "candidateRequestSha256": "97f4d06a31437d442ef9a2dccf752ac98b59b76e4d61dc148220852724d0fc95",
+        "baselineRequestSha256": "c7fbb6a7279b40295268788d06cbbb260347d1e18463658fcb5910f4d7976aae"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "targetBindingSha256": "9d6742ce7a9186c2c02cd885e5563acd8258ac52392f0fab06eea1bff9c9bcbf",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "What the producer wanted to ask is a nominal/interrogative fragment without the complete message;the editor clause does not supply the missing matrix proposition. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-cef512db9bb343b57e08cfc5",
+        "structuralSignature": "nominal-missing-main-predicate",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-07",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-07",
+        "canonicalInputSha256": "a6bde7f57052e07817368570dddb015b89bb6d6a9866e16c2395ffed3a8e25a5",
+        "candidateRequestSha256": "516433270dfb8b3802b95aae89640580c715e81e3e1644c305a9cd42a9baa481",
+        "baselineRequestSha256": "63b010a4e89c6f31ba6488433ecc14330c84a82b4e38d8aa7116218a38d9493a"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "targetBindingSha256": "9d6742ce7a9186c2c02cd885e5563acd8258ac52392f0fab06eea1bff9c9bcbf",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "When the recording ended, the host asked whether the caller wanted her name omitted from the transcript."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Asked retains the question-seeking sense inside a complete event report.Whether introduces an indirect yes/no complement;do not require a direct quotation.",
+      "englishRuleClaimIds": [
+        "lexical-ask"
+      ],
+      "sourceIds": [
+        "lex.ask"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-f7f671ce57ef4d008a1e3a53",
+        "structuralSignature": "reported-whether-question",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-07",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-07",
+        "canonicalInputSha256": "84d54bce8911dfc7d71ebf55f3c52c8293a0664f383aa8ecf943cb17a1a0c9fd",
+        "candidateRequestSha256": "14db16bb7528ff41c033de722c9a2199ff2442913c899d5de1e092c66cc2202b",
+        "baselineRequestSha256": "3200443eeb698527f0ef41ccfdd54db38d7154ea364608a68bf4405c8ee31962"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "conjunction",
+      "targetBinding": {
+        "target": "접속사",
+        "role": "단어나 문장을 연결하고 추가·대조·이유 같은 관계를 나타내요.",
+        "pattern": "tea and coffee / tired but happy / because I am sick",
+        "task": "두 상태 중 하나를 바꾸고 연결 관계를 확인하세요.",
+        "check": "연결한 두 내용의 관계에 맞는 접속사를 골랐나요?",
+        "stem": "I am tired but happy.",
+        "targetCriterion": "Use a conjunction to connect suitable words, phrases or clauses and express a coherent relationship. For an unfinished message in default sentence-writing mode, withhold BOTH judgments as uncertain and ask for the intended linked propositions. This is different from a complete but demonstrably erroneous link, which needs target-use work. Explicit reason replies may license subordinate-clause ellipsis."
+      },
+      "targetBindingSha256": "292a96719dbf4740e54b2eff5584391848d85f9c0a183d15a9306ba7695633de",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Although/while connect only dependent material;the intended main linked proposition is absent.Both judgments remain uncertain under the authored conjunction criterion. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-51963bc70cd8b6e1a3339172",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-07",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-07",
+        "canonicalInputSha256": "874a7405090dcea79b22f49836200bafce7b5acbf104433ff588c8865f1f633a",
+        "candidateRequestSha256": "a67a4107ce7227799add8137c2fb49dc92f8d3805e323ab68a91973be7752a42",
+        "baselineRequestSha256": "eb7157647596ed7e3ba8006ff61771848488bf4fdb70f572ad2262d603d071dc"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "preposition",
+      "targetBinding": {
+        "target": "전치사",
+        "role": "뒤의 명사·대명사 등과 함께 장소·시간·방향 같은 관계를 나타내요.",
+        "pattern": "in the bag / at seven / to school / with me",
+        "task": "물건이나 장소를 바꿔 보세요.",
+        "check": "전치사와 뒤의 말이 장소·시간·방향 등의 관계를 나타내나요?",
+        "stem": "The key is in the bag.",
+        "targetCriterion": "Use a preposition in a suitable relation and phrase, with suitable complements. Distinguish prepositional to from infinitival to."
+      },
+      "targetBindingSha256": "63fb95536100e79f6aff94b7a017e09e7cb1137afeae22ad54c75f43ba5c6273",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Although the platform was crowded, Nora waited between him and his brother until the gates opened."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The preposition between takes object-form him,including in the coordinated complement.Preserve Nora,his brother and the wait-until-gates relation.",
+      "englishRuleClaimIds": [
+        "object-pronoun"
+      ],
+      "sourceIds": [
+        "new.pronouns"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-6e9320e7555e3307e3525064",
+        "structuralSignature": "object-case-in-preposition-coordination",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-07",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-07",
+        "canonicalInputSha256": "a41282c844f9ebdc74fe48f5f5781193ab8c6d0a8331c0648469aa4ae5d3e7ff",
+        "candidateRequestSha256": "de8bf8b4cbfd7210209ab7926fbc97046b7c256367c9e0ac78ce8d85fddc5d66",
+        "baselineRequestSha256": "c1280432e214488d74397193a8a7769fa02d800879e57c80e28b2509dab48b7c"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "targetBindingSha256": "6f869837628bb25725e634639f1dd35694b2a782e50fc6e4898f48b9cc5df430",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The hikers did not need any help once the replacement bridge was open, and the organizer wants to state clearly that no assistance was necessary."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Under standard written English,normalize the negative concord while preserving the explicitly stated no-assistance meaning.Dialect legitimacy is a separate unresolved register issue.",
+      "englishRuleClaimIds": [
+        "lexical-help",
+        "negative-concord"
+      ],
+      "sourceIds": [
+        "lex.help",
+        "new.negation"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [
+        {
+          "id": "register-negative-concord",
+          "state": "unresolved",
+          "condition": "Proposed needs_work applies to standard written English;regional negative concord is not universally wrong.",
+          "decisionRequiredBeforeQualification": true
+        }
+      ],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-0f84e354ae45ac20e0c7227b",
+        "structuralSignature": "negative-concord-with-explicit-meaning",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false,
+      "interpretationEvidence": {
+        "runtimeTerminalFile": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\ai-quality-v147-reference-interpretation-v1-runtime-20261109\\terminal.json",
+        "runtimeTerminalSha256": "bf1a430462f65159311237275c389b790c56c92ec3e1648109ac99bd87cff355",
+        "models": 3,
+        "diagnosticOnly": true,
+        "doesNotGrantReferenceQualification": true
+      }
+    },
+    {
+      "caseId": "pilot-grammar-normal-07",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-07",
+        "canonicalInputSha256": "2b8662c69cb76b6402ab56c495d45aa2dbcde3c0f54c5ebc6048d5c97de1310d",
+        "candidateRequestSha256": "2b5c4cdad089ab7ea1925d97dc10fcc0b14c3a6558b2364169a23fade2e782b7",
+        "baselineRequestSha256": "dc38fd015889ebad5e8a8fd9ba78148d54b05e774850c34e16bb37f8a6893dcd"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "preposition",
+      "targetBinding": {
+        "target": "전치사",
+        "role": "뒤의 명사·대명사 등과 함께 장소·시간·방향 같은 관계를 나타내요.",
+        "pattern": "in the bag / at seven / to school / with me",
+        "task": "물건이나 장소를 바꿔 보세요.",
+        "check": "전치사와 뒤의 말이 장소·시간·방향 등의 관계를 나타내나요?",
+        "stem": "The key is in the bag.",
+        "targetCriterion": "Use a preposition in a suitable relation and phrase, with suitable complements. Distinguish prepositional to from infinitival to."
+      },
+      "targetBindingSha256": "63fb95536100e79f6aff94b7a017e09e7cb1137afeae22ad54c75f43ba5c6273",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "After we had crossed the bridge, the path continued beyond the orchard and into a narrow ravine."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "After,beyond and into express the stated time/path relations with suitable noun complements.Directional movement does not require rewriting the stated route.",
+      "englishRuleClaimIds": [
+        "preposition-phrase"
+      ],
+      "sourceIds": [
+        "prior.prepositions"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-6ef5e664bab00a28660d23cd",
+        "structuralSignature": "complete-prepositional-path",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-07",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-07",
+        "canonicalInputSha256": "90f3fb5d782ab55b9a7213cf69f0d37252f24baaeed6f0950f692204922338c7",
+        "candidateRequestSha256": "6abcaabc7702e34c569438e52e40864b045a24d46dd4a8185d7202aa676b4c1c",
+        "baselineRequestSha256": "dc91b564980b3920391f097f1d925ae8abd4fddafc2a7baf4f17dd01edf9e866"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "targetBindingSha256": "6f869837628bb25725e634639f1dd35694b2a782e50fc6e4898f48b9cc5df430",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Because introduces a dependent reason without the asserted consequence;do not infer whether help was eventually needed or delivered. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-9baadd7e262602e6bacfe064",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-08",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-08",
+        "canonicalInputSha256": "c1c5df4042ea0e47cee85f1b514c7ee4ea97337caed050f29ad157575fed5ef8",
+        "candidateRequestSha256": "e382493d9a10fc10973f5794467a95508314502b0cd50ffeaa3d4c5a55dff7cc",
+        "baselineRequestSha256": "97dda1b7ec4791a4506c80f8fa51b3e1e674b38b1398688e7d1377644d8586d9"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "targetBindingSha256": "8430b5ed39ef14e4f88a2362e2d07cbbf68bc22989c9856808a52a8b9341df7c",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Whether introduces an unresolved alternative framed as an incomplete embedded question;do not choose booking or waiting for the team. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-d6d645a35110d217da2c2e1c",
+        "structuralSignature": "embedded-question-without-main-message",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-08",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-08",
+        "canonicalInputSha256": "33494fe5a6befd0645e4a50f53a9557647ce6df888274f0959d5405cde70a71a",
+        "candidateRequestSha256": "134b6750b5d816980c8e5821009a9c0bcbf51dcaa6b9d6ef4b354a82746c32b1",
+        "baselineRequestSha256": "185105c1e1a9f1df30b7834457ae714b7e29a9cadbc708ca18bab3c243bf9935"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "auxiliary",
+      "targetBinding": {
+        "target": "기본 조동사",
+        "role": "be·do·have가 다른 동사와 함께 진행·완료·의문·부정 등을 만들어요.",
+        "pattern": "be + -ing: I am reading. / do + 동사원형: Do you work?",
+        "task": "reading을 지금 하고 있는 다른 행동의 -ing형으로 바꿔 보세요.",
+        "check": "be·do·have가 다른 동사를 돕고 있나요? 뒤의 동사 형태를 확인했나요?",
+        "stem": "I am reading now.",
+        "targetCriterion": "Use an auxiliary construction with suitable auxiliary agreement and main-verb form, including licensed reply ellipsis. Lexical possession have is not an auxiliary just because the spelling is present. A recognizable construction with incorrect agreement still needs target-use work."
+      },
+      "targetBindingSha256": "6bc758114e146d13bc0bc53417756427de0c19136ed91a70d31049c1ebb45ea7",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The pump has been running since dawn, although none of the workers has touched its controls."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Has been running is a suitable present-perfect-continuous auxiliary chain;none of the workers has is a possible singular agreement.Keep since dawn.",
+      "englishRuleClaimIds": [
+        "perfect-form",
+        "singular-agreement"
+      ],
+      "sourceIds": [
+        "new.perfect",
+        "new.verb-phrase",
+        "new.agreement"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-12639a9bd9f97ce9280ccace",
+        "structuralSignature": "perfect-continuous-since",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-08",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-08",
+        "canonicalInputSha256": "649b9e809bee6f9cdde423eb510886b3ed030289a4f5e1e760e1cff8e75ada87",
+        "candidateRequestSha256": "9048694abc141c8097260ea0fb061faddc1de87ca66d00386d46fcf6bf52cffe",
+        "baselineRequestSha256": "d83e9f69483d7d73fc46dbb97b3e12dbc81eccf1bd5a19eb4f09d5c4d2489bcd"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "targetBindingSha256": "6f869837628bb25725e634639f1dd35694b2a782e50fc6e4898f48b9cc5df430",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "What the volunteers needed most was practical help that would let them finish the ramp before the entrance reopened."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Practical help is an assistance noun phrase in the complete what-cleft.The ramp/entrance constraints remain intact and no factual verification of volunteers is needed.",
+      "englishRuleClaimIds": [
+        "lexical-help"
+      ],
+      "sourceIds": [
+        "lex.help"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-9769bcc786f176c56f6be8b9",
+        "structuralSignature": "what-cleft-assistance-noun",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-08",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-08",
+        "canonicalInputSha256": "5444721032f2b099c79d67c49464a2adbff4fbef3ba308bb10e2aefbaec1eb13",
+        "candidateRequestSha256": "1fbb7951fa38cd5e95bd19545a1bc5666c13b72b71550e3b730d1a74d5fdb720",
+        "baselineRequestSha256": "d05b92c516b8fd9308238224bb6c73e7b9b4432c9e2ab987b9ab5c44160d34a8"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "skillfully",
+        "pos": "adv.",
+        "meaning": "능숙하게",
+        "expression": "skillfully"
+      },
+      "targetBindingSha256": "6be9b7e68b4c2b8f900795a61baee06406d35012d0001a3ec74f239f7162079b",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The apprentice adjusted the tiny spring skillfully after the mentor showed her how to keep the pressure even."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The bare adjective skillful is used where a manner adverb is required;both requested adverb use and grammar need repair.Preserve the spring adjustment and mentor relationship.",
+      "englishRuleClaimIds": [
+        "lexical-skillfully",
+        "manner-adverb-role"
+      ],
+      "sourceIds": [
+        "lex.skillfully",
+        "new.manner",
+        "new.skillful"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-e80f460c1f615bfa36158c60",
+        "structuralSignature": "manner-adjective-in-adverb-slot",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-08",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-08",
+        "canonicalInputSha256": "24881cdd26eb9cbfc9dd35156ea743dece3748eb23a491d758d9a7fa87a17e32",
+        "candidateRequestSha256": "e21ce0ca22fdd02689d1e855601d52286c157dde240df42d8b4df6dd8a5eba1a",
+        "baselineRequestSha256": "ac815ed001bcf9468cdd524981c750c5a560b5e8b0ce1782b21d13bc15ff5302"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "auxiliary",
+      "targetBinding": {
+        "target": "기본 조동사",
+        "role": "be·do·have가 다른 동사와 함께 진행·완료·의문·부정 등을 만들어요.",
+        "pattern": "be + -ing: I am reading. / do + 동사원형: Do you work?",
+        "task": "reading을 지금 하고 있는 다른 행동의 -ing형으로 바꿔 보세요.",
+        "check": "be·do·have가 다른 동사를 돕고 있나요? 뒤의 동사 형태를 확인했나요?",
+        "stem": "I am reading now.",
+        "targetCriterion": "Use an auxiliary construction with suitable auxiliary agreement and main-verb form, including licensed reply ellipsis. Lexical possession have is not an auxiliary just because the spelling is present. A recognizable construction with incorrect agreement still needs target-use work."
+      },
+      "targetBindingSha256": "6bc758114e146d13bc0bc53417756427de0c19136ed91a70d31049c1ebb45ea7",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Have been stacked occurs in a relative clause modifying drawers;there is no main assertion about those drawers.Do not append an invented location or action. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-13712be4676dd089c025fcc8",
+        "structuralSignature": "nominal-missing-main-predicate",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-08",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-08",
+        "canonicalInputSha256": "038841a868ee91dab8652d0c344acd59eeb7a1702da7a14ad95e8de37cccce6a",
+        "candidateRequestSha256": "3ca95cd6ca1024aba60c14feccee9178e842cc9f3ed03d35ad271978ab5b42b3",
+        "baselineRequestSha256": "f02cbb368c9e46c9bb83448012d07923fc13bb392d12dc21cd9020a629e0554f"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "conjunction",
+      "targetBinding": {
+        "target": "접속사",
+        "role": "단어나 문장을 연결하고 추가·대조·이유 같은 관계를 나타내요.",
+        "pattern": "tea and coffee / tired but happy / because I am sick",
+        "task": "두 상태 중 하나를 바꾸고 연결 관계를 확인하세요.",
+        "check": "연결한 두 내용의 관계에 맞는 접속사를 골랐나요?",
+        "stem": "I am tired but happy.",
+        "targetCriterion": "Use a conjunction to connect suitable words, phrases or clauses and express a coherent relationship. For an unfinished message in default sentence-writing mode, withhold BOTH judgments as uncertain and ask for the intended linked propositions. This is different from a complete but demonstrably erroneous link, which needs target-use work. Explicit reason replies may license subordinate-clause ellipsis."
+      },
+      "targetBindingSha256": "292a96719dbf4740e54b2eff5584391848d85f9c0a183d15a9306ba7695633de",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Although the board approved the map, the printer refused to publish it because two labels were missing."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Keep the concessive although clause with its main clause by removing redundant but;preserve refusal to publish and the two missing labels.",
+      "englishRuleClaimIds": [
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-43d41bc0975b021081c444d9",
+        "structuralSignature": "although-plus-but-double-link",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-09",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-09",
+        "canonicalInputSha256": "0a988a7ce6e7c9601dadedff95d001ccd99aa5ca7acc36d05f5c7e33722c6d2c",
+        "candidateRequestSha256": "0bcc3ccb8c3ad68570142fee39bfcc81ea9444f7642e2405c6e84fb483aa3295",
+        "baselineRequestSha256": "25cb5d836ca9302d1647c947ffcffd5db48fe2581ba0a22087415e4067a79bd5"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "targetBindingSha256": "8430b5ed39ef14e4f88a2362e2d07cbbf68bc22989c9856808a52a8b9341df7c",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The school coordinator booked the smaller boat for the museum visit after checking that its covered deck would hold every pupil and the two accompanying teachers. The company sent a confirmation that listed the departure pier, the return time, and the number of seats, and the coordinator kept a printed copy in the office. Nobody was buying the boat or borrowing it from a friend; the group was paying for a scheduled journey operated by the company. Before accepting the arrangement, the teachers walked from the bus stop to the pier and measured how long the transfer would take. They chose a route with a level pavement so that the pupil who used crutches would not have to climb the steep steps behind the ticket booth. The museum agreed to keep the entrance open for a few extra minutes if the crossing took longer than expected. Each family received a note explaining where to meet, which waterproof clothes to bring, and whom to contact if a child was ill that morning. The note did not promise sunshine, because the timetable depended on conditions in the harbor. On the afternoon before the visit, the company confirmed that the vessel had passed its routine inspection and that the captain expected to follow the normal route. The coordinator then compared the passenger list with the seating plan and left two adjacent places for the teachers. A final envelope contained the tickets, the emergency telephone numbers, and a simple map showing the museum entrance. The teachers agreed that one of them would count the pupils before boarding while the other checked that nobody had left a bag at the bus stop. They planned to repeat those checks before the return journey rather than assume that the morning count would still be correct. The arrangement concerned one return trip for this particular group, not a season ticket or ownership of any equipment."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Booked denotes the explicitly described paid trip reservation.The whole passage is complete;do not rewrite it into buying/owning the boat or change counts,access conditions or return trip.",
+      "englishRuleClaimIds": [
+        "lexical-book"
+      ],
+      "sourceIds": [
+        "lex.book"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-2f5f009d24653a9795aedd14",
+        "structuralSignature": "long-reservation-event",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-09",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-09",
+        "canonicalInputSha256": "4e7f6a1739ec3c153dd8ea494ca7f66895ee17143f3b49a8f94a1f03347ee4e0",
+        "candidateRequestSha256": "799d2badab94830ac6c3d62aa6d19e827d8c1709278b0b519fcc46a5de4e1415",
+        "baselineRequestSha256": "e560936b88112c4e7b9c1f44662d1130c07b3566e8bb3cd3f896feffa1ab1d6a"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "modal",
+      "targetBinding": {
+        "target": "법조동사",
+        "role": "can·must·should 등은 능력·필요·조언 같은 뜻을 동사에 더해요.",
+        "pattern": "can + 동사원형 / should + 동사원형: She can swim. You should rest.",
+        "task": "swim을 내가 할 수 있는 다른 행동으로 바꿔 보세요.",
+        "check": "능력·필요·조언 중 뜻을 골랐나요? can·must·should 뒤에 동사원형을 썼나요?",
+        "stem": "I can swim.",
+        "targetCriterion": "Use a modal with an appropriate base-form complement and intended meaning, including recoverable ellipsis in an explicit reply. A malformed past/participle form without enough time context requires withholding a chosen temporal correction and asking for time. Preserve modal strength; do not change possibility into obligation."
+      },
+      "targetBindingSha256": "6779ece99e001277e75a96b12b05ae18252508ca54958ae8bda5ded889315772",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Tomorrow the field team must not inspect the sealed chamber before the safety officer has completed the pressure check. The instruction is a prohibition, not a request to carry out the inspection as soon as the visitors arrive. The chamber contains equipment that cannot be approached safely until the readings have been recorded and compared with the limits in the operating procedure. While that work is taking place, the team can review the diagrams in the meeting room and prepare questions about the maintenance schedule. The site manager will explain which parts of the system remain in service during the check and which parts have been isolated. A red notice will remain on the chamber door, and the key will stay with the safety officer rather than being passed between members of the visiting group. If the check identifies an unexpected reading, the officer will stop the planned demonstration and explain what further work is required. No visitor should interpret a delay as permission to enter through another door. The organizer has arranged a separate route to the viewing area so that the group can observe the external controls without crossing the barrier. That route must remain clear of delivery carts throughout the morning. After the check, the officer will decide whether the chamber can be opened for the supervised visit described in the schedule. The decision will be written down along with the time at which the check was completed. The visitors will then receive a short briefing that distinguishes the areas they may enter from the equipment they may only observe. The organizer will keep a list of everyone who has attended that briefing and will tell late arrivals where they must wait. The present instruction concerns the period before the pressure check is complete; it should not be rewritten as an obligation to inspect the chamber during that period. The team has been told that the entire visit may be postponed if the required conditions cannot be met."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The explicitly future prohibition requires the base inspect after must.Preserve not and the pressure-check precondition;do not turn it into an order to inspect or a past certainty.",
+      "englishRuleClaimIds": [
+        "modal-form-strength"
+      ],
+      "sourceIds": [
+        "new.verb-phrase",
+        "new.modal-meaning"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-13d862ceba409d4a9c7519f6",
+        "structuralSignature": "future-negative-modal-nonbase",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-09",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-09",
+        "canonicalInputSha256": "370351c1ad266e639a3fe7f11494ef9e873692802332eaf25cd94458c3e0e377",
+        "candidateRequestSha256": "157905bdc792010d226fb9c2d77cde00fc4ed930bcb6df675de8944c22620d21",
+        "baselineRequestSha256": "d9859931b438a90b174193dc3699f9a7858937e262e3c9769a139f7d12ebfbf1"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "book",
+        "pos": "v.",
+        "meaning": "예약하다",
+        "expression": "book"
+      },
+      "targetBindingSha256": "8430b5ed39ef14e4f88a2362e2d07cbbf68bc22989c9856808a52a8b9341df7c",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The training officer has booked four rooms for the visiting inspectors, whose two-day course starts next Monday at the old waterworks. The reservation concerns overnight accommodation, and the hotel has already sent a list showing the names assigned to each room. Two inspectors will arrive by train, while the other two will share a car with a colleague who is attending only the first day's demonstration. The officer asked the hotel to keep the rooms close together because the group will need to compare notes after the evening briefing. Breakfast is included, but the visitors will pay for their own meals at the station on the way home. A separate document explains how to reach the waterworks from the hotel without crossing the road where repairs are taking place. It also identifies a side entrance that remains accessible when deliveries block the main gate. The inspectors have been told to bring sturdy shoes and a copy of the previous inspection report. Their task is to observe the new equipment, ask questions about the maintenance schedule, and record any differences between the written procedure and the demonstration. They will not approve a change simply because the equipment looks recently installed. During the first session, the site manager will describe the work that can continue during a power failure and the work that must stop. In the afternoon, the visitors will follow the marked route through the building in pairs so that they can check one another's observations. The second morning is reserved for questions that could not be answered during the initial visit. Before departure, the officer will collect the room keys and confirm that the hotel has not charged the group for the colleague who is not staying overnight. The hotel arrangements are complete; no one is still deciding whether to make a reservation. The officer will send the final travel notice tomorrow, after confirming which platform the first train is expected to use."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Perfect has selects booked.The completed hotel reservation and four-room count are explicitly supplied;do not turn it into an undecided future reservation.",
+      "englishRuleClaimIds": [
+        "lexical-book",
+        "perfect-form"
+      ],
+      "sourceIds": [
+        "lex.book",
+        "new.perfect",
+        "new.verb-phrase"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-0563fa8d24f5dafafa9ac669",
+        "structuralSignature": "perfect-participle-word-inflection",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-09",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-09",
+        "canonicalInputSha256": "b507398c9a1b1695b94c5b2f8e3b6a294702187e7ffd7027b86ee986434b156c",
+        "candidateRequestSha256": "7d288922c16c82568e32b0071ccfcac144d3fcb3fa4f7caefbad8ed8696859f9",
+        "baselineRequestSha256": "08622c3c689491557778060dc159b3f82c2a076f3aeb4eb522a785a5d95129b8"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "careful",
+        "pos": "adj.",
+        "meaning": "주의 깊은, 신중한",
+        "expression": "careful"
+      },
+      "targetBindingSha256": "41d9aad45ea7b79b9b14536c3550e9cc8676c7f60840f22e4121c52afcf465f6",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The long chain of if conditions never supplies its main consequence.Length does not resolve the absent message;retain every access/safety condition without finishing it. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-cd4e967cbcd28866dd2b2d69",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-09",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-09",
+        "canonicalInputSha256": "4e7f29aef31b44ad312719cf9d163eafa9b225c8ba054c6d9c490efdf1fee3b5",
+        "candidateRequestSha256": "24b2f45112f05224f30bbd43925c8701b77058f58b5644ff65d818aff866a1dd",
+        "baselineRequestSha256": "79d63b369a7c6fb5f0dd6cd4b022104aecef60b18e46f064870989b681a9e172"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "infinitive",
+      "targetBinding": {
+        "target": "부정사 표지",
+        "role": "to + 동사원형으로 원하는 행동이나 목적 등을 나타내요.",
+        "pattern": "want to learn / need to go / walk to relax",
+        "task": "learn English를 하고 싶은 다른 행동으로 바꿔 보세요.",
+        "check": "to 바로 뒤에 동사원형이 있나요? 명사 앞 전치사 to와 구분했나요?",
+        "stem": "I want to learn English.",
+        "targetCriterion": "Use to plus the base verb in a suitable infinitival construction. A missing to marker or unsuitable following verb form needs target-use work."
+      },
+      "targetBindingSha256": "21472a25f6fef386a9f98e52d48719f675e3803804ea967ad77cd5c7eb1f013f",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The long to-determine purpose construction and embedded clauses lack the main task or assertion;do not invent an investigator or a concluded cause of the scratches. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-8f2e8b829d90fb6940a30c6b",
+        "structuralSignature": "nonfinite-purpose-without-matrix",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-09",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-09",
+        "canonicalInputSha256": "9b5e02dac8fd60a0373fad9ebb4b296a90794f65187603857509606587869162",
+        "candidateRequestSha256": "52d1e69743ee85f034cf7d9cba574fe7625bd3ae0d07dd86c528068cb5dda326",
+        "baselineRequestSha256": "753e0643abd1b107c597d81aeb7e9f75f554ac748a6abee4b4e6437c9155813a"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "modal",
+      "targetBinding": {
+        "target": "법조동사",
+        "role": "can·must·should 등은 능력·필요·조언 같은 뜻을 동사에 더해요.",
+        "pattern": "can + 동사원형 / should + 동사원형: She can swim. You should rest.",
+        "task": "swim을 내가 할 수 있는 다른 행동으로 바꿔 보세요.",
+        "check": "능력·필요·조언 중 뜻을 골랐나요? can·must·should 뒤에 동사원형을 썼나요?",
+        "stem": "I can swim.",
+        "targetCriterion": "Use a modal with an appropriate base-form complement and intended meaning, including recoverable ellipsis in an explicit reply. A malformed past/participle form without enough time context requires withholding a chosen temporal correction and asking for time. Preserve modal strength; do not change possibility into obligation."
+      },
+      "targetBindingSha256": "6779ece99e001277e75a96b12b05ae18252508ca54958ae8bda5ded889315772",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The surveyors might return to the upper valley next month if the remaining snow has cleared from the narrow track by then. Their first visit established where the old retaining wall had moved, but it did not show whether the stream had changed its course beneath the fallen stones. A second visit could help them separate recent damage from features that already appear in photographs taken several years ago. The team will carry copies of those photographs so that the comparison does not depend entirely on memory. They may also bring a small camera that can record the underside of the footbridge without requiring anyone to climb onto the damaged bank. The landowner has agreed to unlock the gate, although the surveyors will still need to check which sections of the track are safe for a vehicle. If they have to continue on foot, they can leave the heavier equipment in a secure shed near the road. One member of the team should remain responsible for the written record while the others take measurements, because it is easy to confuse two similar stretches of wall when the notes are assembled later. Any report must distinguish what the surveyors have observed directly from what they think might be happening below the surface. They cannot assume that a crack has become wider merely because it looks different in a photograph taken from another angle. The team may ask the local maintenance workers whether they have noticed changes during periods of heavy rain, but those recollections will be recorded separately from the measurements. After the visit, the engineer can decide whether a further investigation would answer questions that the available evidence leaves open. No date has yet been promised for repair work, and the proposed return visit does not commit the owner to a particular design. The immediate aim is to collect enough reliable information to describe the present condition of the site."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Might,could,may,can and should express distinct possibilities/abilities/advice across complete clauses.Preserve uncertainty and do not upgrade a proposed visit to an obligation.",
+      "englishRuleClaimIds": [
+        "modal-form-strength"
+      ],
+      "sourceIds": [
+        "new.verb-phrase",
+        "new.modal-meaning"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-c5a272c7ba2c623481eb0480",
+        "structuralSignature": "long-modal-possibility",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-normal-10",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-normal-10",
+        "canonicalInputSha256": "bc7e30f3ddfc7ac2d6769668d1d823d46021f064db0f86bccc62170eb1592d87",
+        "candidateRequestSha256": "defc27a5efa39e678cce1f3a316e9c823121929d163329f80d83b91c1b3c943d",
+        "baselineRequestSha256": "c8db2f4a74c3ba324898614070c60ccad4e000330d76295ccc45407a9763aacd"
+      },
+      "domain": "word",
+      "proposedStratum": "normal",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "skillfully",
+        "pos": "adv.",
+        "meaning": "능숙하게",
+        "expression": "skillfully"
+      },
+      "targetBindingSha256": "6be9b7e68b4c2b8f900795a61baee06406d35012d0001a3ec74f239f7162079b",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "Working beneath a lamp that revealed every loose thread, the conservator repaired the torn banner skillfully without covering the faded signature along its lower edge. She began by placing a clean support behind the fabric so that the weight of the damaged section would not pull on the remaining stitches. A second worker recorded the position of each tear on a diagram, but he did not draw marks on the cloth itself. The team had agreed that the repair should make the banner safe to display while leaving the history of its use visible. For that reason, they selected a thread that would support the original material without pretending to be part of the old design. Several small test pieces helped them compare the tension of the new stitches before they touched the banner. Whenever a thread caught on a rough area, the conservator stopped and changed the angle of the needle instead of pulling harder. This made the work slower, but it protected the thin border around the painted letters. The museum director watched from the other side of the table and asked the photographer to keep a clear record of the process. No one wanted a later visitor to mistake a modern addition for an original feature. By the end of the day, the longest tear had a stable support and the remaining folds lay naturally across the padded surface. The conservator wrote down which materials she had used and where another repair might eventually be necessary. She also explained why the team had left a small stain in place: removing it would have risked damaging the surrounding dye. The finished work did not make the banner look new, and that was not its purpose. Instead, it allowed the museum to present the fragile object safely while retaining evidence of the people who had carried it. The staff scheduled another inspection before the exhibition opened so that any movement in the repaired section could be noticed early."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Skillfully describes the manner of repairing the banner.The entire passage is retained,including the signature,old material and deliberate stain retention.",
+      "englishRuleClaimIds": [
+        "lexical-skillfully",
+        "manner-adverb-role"
+      ],
+      "sourceIds": [
+        "lex.skillfully",
+        "new.manner",
+        "new.skillful"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-6f71751fe072d4949427cdd9",
+        "structuralSignature": "long-manner-conservation-event",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-insufficientContext-10",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-insufficientContext-10",
+        "canonicalInputSha256": "293a43a48815101de294c91a247e80875ca3e9d7df45ce1ebd693c07eb266712",
+        "candidateRequestSha256": "1df3e888b446c85de6228af711fa6eb9a6921b97cedb2aadfb046807a857bb4b",
+        "baselineRequestSha256": "a3af17b7b6b87a8c86dc9023352b9d5802b3d93f19ca1bf1bdd7e5a004493b92"
+      },
+      "domain": "word",
+      "proposedStratum": "insufficientContext",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "help",
+        "pos": "n.",
+        "meaning": "도움",
+        "expression": "help"
+      },
+      "targetBindingSha256": "6f869837628bb25725e634639f1dd35694b2a782e50fc6e4898f48b9cc5df430",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "message"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The long help noun phrase and its relative clauses have no matrix predicate.Do not turn the promises into completed assistance or invent an archive outcome. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure"
+      ],
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-37dd43d040edafa3b5421049",
+        "structuralSignature": "nominal-missing-main-predicate",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-insufficientContext-10",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-insufficientContext-10",
+        "canonicalInputSha256": "8e76a733c19ba241046ec06be163047a8998e1e1d8d82219adcdb684f1bc97d5",
+        "candidateRequestSha256": "ce1f061dc3b97eeac5b6832d89eb4009efbd262bd400ad584ec7c3cb43016297",
+        "baselineRequestSha256": "d602e82eab37ac85cca60a730e4bb5008137f0949e7c97f151029fdfec93f6e3"
+      },
+      "domain": "grammar",
+      "proposedStratum": "insufficientContext",
+      "lessonId": "exclamation",
+      "targetBinding": {
+        "target": "감탄사",
+        "role": "놀람·실수·인사 같은 반응을 짧게 나타내요.",
+        "pattern": "Wow! / Oops! / Hello!",
+        "task": "놀랐던 장면을 떠올리며 beautiful을 다른 말로 바꿔 보세요.",
+        "check": "느낀 감정이나 상황에 어울리는 반응을 골랐나요?",
+        "stem": "Wow! This is beautiful.",
+        "targetCriterion": "Use a natural interjection or exclamatory expression suited to the expressed reaction. Valid standalone reactions do not require an invented subject or event."
+      },
+      "targetBindingSha256": "7dfc991e7b0111c124f880bfcefb8ad81097aca60c853161d8449faa3626f9c7",
+      "expectedOriginal": {
+        "meaningUsage": "uncertain",
+        "grammar": "uncertain",
+        "contextNeeded": "relationship"
+      },
+      "acceptedCorrectionExamples": [],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The long subordinate chain describes relief but never completes its main proposition;mentioning expressions of relief is not a supplied standalone exclamation to certify. This is a product-policy withholding judgment,not a claim that every fragment is linguistically invalid in all contexts.",
+      "englishRuleClaimIds": [
+        "fragment-structure",
+        "clause-link"
+      ],
+      "sourceIds": [
+        "new.fragments",
+        "new.contrast",
+        "new.although"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "message-sufficiency-first"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-4b482dad0b77c2b4804dd4e6",
+        "structuralSignature": "missing-main-clause",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-word-needsCorrection-10",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-word-needsCorrection-10",
+        "canonicalInputSha256": "f662863dff9e43dd872234fd187fab453263b4c9d81fcdff7c23fdf45c09653f",
+        "candidateRequestSha256": "9b253c6d59477b5677349b25a396d66e4ed757629e2cb5ddb7cd445b9c7d8f97",
+        "baselineRequestSha256": "7e60357fd1c1cf3bc8badfcbce67c21a2176bf0a293b3b19aeb89cc499d71a45"
+      },
+      "domain": "word",
+      "proposedStratum": "needsCorrection",
+      "lessonId": null,
+      "targetBinding": {
+        "word": "ask",
+        "pos": "v.",
+        "meaning": "질문하다",
+        "expression": "ask"
+      },
+      "targetBindingSha256": "9d6742ce7a9186c2c02cd885e5563acd8258ac52392f0fab06eea1bff9c9bcbf",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "At the public meeting, the reporter asked where the donated maps came from, because the exhibition label named the donor but gave no account of the collection's earlier history. The question concerned the maps' origin, not the location of a delivery van or the address of the museum. Several residents had noticed pencil notes in the margins and wanted to know whether those notes had been made by a surveyor, a teacher, or a later owner. The curator explained that the museum had not yet identified every mark and would keep its description provisional until the records had been checked. She showed the audience a photograph of the box in which the maps had arrived, taking care to hide the address on the shipping label. The reporter wrote down the date of the donation and the reference number that would allow readers to find the public catalogue entry. He did not present the possible explanations as established facts. During the discussion, another visitor mentioned a local society that had once used similar paper for its field notes. That observation gave the curator a useful lead, but it did not prove that the society had owned these particular maps. A volunteer offered to search the society's published reports while the museum examined the condition of the paper. The group agreed that any account of the maps' history should distinguish direct documentation from reasonable guesses. The reporter planned a short article about that process rather than a dramatic story based on a single unverified remark. Before leaving, he checked the spelling of the donor's name against the version already published in the catalogue. The museum would not publish a revised description until it could explain which records supported each new statement. In the meantime, the existing label would remain beside the display, accompanied by a note saying that further research was in progress. Visitors were invited to share relevant public records through the museum's usual enquiry form."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "The asked-complement is an indirect question;remove auxiliary inversion and retain the past origin question.Do not change the donor,donation or map provenance claims.",
+      "englishRuleClaimIds": [
+        "lexical-ask",
+        "reported-question-order"
+      ],
+      "sourceIds": [
+        "lex.ask",
+        "new.reported-question"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lexical-inflection-separate"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-a0e00233e9c2cec23fa6f7a2",
+        "structuralSignature": "indirect-wh-question-inversion",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-normal-10",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-normal-10",
+        "canonicalInputSha256": "971823053358b2b6d3e304a82125ef8a6a68befb26842d150fe01ae9f9c4da96",
+        "candidateRequestSha256": "db0f8d735128f77c24c23f85f3acae9b85b0ae288a7c5945a1afc80f5078ab08",
+        "baselineRequestSha256": "81f8481ee8b1980e2ae1ce2a67024882f12d00109d786c445c90918bbbf30117"
+      },
+      "domain": "grammar",
+      "proposedStratum": "normal",
+      "lessonId": "exclamation",
+      "targetBinding": {
+        "target": "감탄사",
+        "role": "놀람·실수·인사 같은 반응을 짧게 나타내요.",
+        "pattern": "Wow! / Oops! / Hello!",
+        "task": "놀랐던 장면을 떠올리며 beautiful을 다른 말로 바꿔 보세요.",
+        "check": "느낀 감정이나 상황에 어울리는 반응을 골랐나요?",
+        "stem": "Wow! This is beautiful.",
+        "targetCriterion": "Use a natural interjection or exclamatory expression suited to the expressed reaction. Valid standalone reactions do not require an invented subject or event."
+      },
+      "targetBindingSha256": "7dfc991e7b0111c124f880bfcefb8ad81097aca60c853161d8449faa3626f9c7",
+      "expectedOriginal": {
+        "meaningUsage": "appropriate",
+        "grammar": "natural",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "How fortunate we were to find the little collection of letters before the roof above the store room finally gave way! We had gone upstairs to look for a spare table, not to search for historical documents, and the first box seemed to contain nothing more than empty folders. Beneath those folders, however, lay several bundles tied with cotton tape, each carrying a short note in the same small handwriting. We moved the box to a dry room and called the archivist rather than trying to separate the sheets ourselves. She explained that damp paper can tear even when it appears strong enough to handle. The caretaker found a clear space where the bundles could remain undisturbed until the archivist had the materials she needed. None of us knew at that point whether the letters were important, but we understood that they should not be thrown away simply because their envelopes looked ordinary. Over the following week, the archivist recorded the condition of each bundle and compared the names on the notes with the public catalogue. Some names were already familiar from the town's published history, while others required further investigation. We resisted the temptation to tell visitors a finished story before that work had been done. The collection might contain copies, unfinished drafts, or letters that had never been sent. A careful description would need to preserve those differences instead of treating every sheet as the same kind of record. When the damaged roof was eventually repaired, the store room contained only furniture and sealed equipment cases. The letters remained in their new location, where their condition could be monitored and their contents examined under suitable supervision. Our accidental discovery had not answered every historical question, but it had prevented a fragile group of documents from being lost before anyone could ask those questions properly. That was reason enough for all of us to be grateful."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "How fortunate we were is a supported how+adjective+subject+verb exclamative.The complete passage need not begin with a separate Wow token.",
+      "englishRuleClaimIds": [
+        "how-exclamation"
+      ],
+      "sourceIds": [
+        "new.exclamation"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "natural-original-unchanged",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-323d8f95084bea884d529fcc",
+        "structuralSignature": "how-adjective-exclamation",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    },
+    {
+      "caseId": "pilot-grammar-needsCorrection-10",
+      "inputBinding": {
+        "bankFile": ".taskmaster/evaluation/ai-quality-v147/pilot-input-candidates-v1.json",
+        "bankSha256": "2ed3e0c6147066fd153f5dbae89e36e3d1abc47a8f896039ed4a17c85255c8c5",
+        "caseId": "pilot-grammar-needsCorrection-10",
+        "canonicalInputSha256": "06c2cad5fbd584b3701e467e0de2db89087ba3966eba0cb2b5346ab2ff4aff69",
+        "candidateRequestSha256": "dd211d1c385f7940e6f048d41003aa05546a0ab2d9a038c4a5bdd2d55e0d8331",
+        "baselineRequestSha256": "7c66512120b78fd2c15e8937f4a39b5b18c86e8fcfe96add151f6b80781ec86c"
+      },
+      "domain": "grammar",
+      "proposedStratum": "needsCorrection",
+      "lessonId": "infinitive",
+      "targetBinding": {
+        "target": "부정사 표지",
+        "role": "to + 동사원형으로 원하는 행동이나 목적 등을 나타내요.",
+        "pattern": "want to learn / need to go / walk to relax",
+        "task": "learn English를 하고 싶은 다른 행동으로 바꿔 보세요.",
+        "check": "to 바로 뒤에 동사원형이 있나요? 명사 앞 전치사 to와 구분했나요?",
+        "stem": "I want to learn English.",
+        "targetCriterion": "Use to plus the base verb in a suitable infinitival construction. A missing to marker or unsuitable following verb form needs target-use work."
+      },
+      "targetBindingSha256": "21472a25f6fef386a9f98e52d48719f675e3803804ea967ad77cd5c7eb1f013f",
+      "expectedOriginal": {
+        "meaningUsage": "needs_work",
+        "grammar": "needs_work",
+        "contextNeeded": "none"
+      },
+      "acceptedCorrectionExamples": [
+        "The coordinator plans to deliver the revised route map to every guide tomorrow morning, before the first visitors reach the temporary entrance. The map shows a short diversion around the part of the courtyard where the drainage work is still in progress. It also marks the doorway that can be used by people who cannot manage the steps beside the ticket office. During the trial walk, two guides noticed that the signs at the far end of the diversion were difficult to see when a delivery vehicle was parked nearby. The coordinator asked the maintenance team to move those signs onto fixed supports rather than attach them to the temporary fence. A copy of the revised map will be kept at the entrance so that staff can answer questions without relying on a version stored on someone's telephone. The guides will have a short meeting before the gates open to compare the map with the route as it appears on the ground. If any barrier has been moved overnight, they will report the change before leading a group through the courtyard. The organizer wants visitors to receive the same basic information regardless of which guide they happen to ask. That does not mean the guides must repeat an identical speech; it means that the directions, restrictions, and access arrangements should be consistent. The office will record the version number printed in the corner of the map and will remove the older copies from the usual distribution points. Staff should not throw away the signed inspection record that explains why the diversion was introduced. That record is part of the account of the building work, whereas the loose maps are practical instructions for the current visit. The coordinator will check that distinction during the morning meeting. Once the work in the courtyard is finished, the route can be reviewed again, but tomorrow's visitors still need a clear and accurate description of the temporary arrangement."
+      ],
+      "correctionExamplesAreExhaustive": false,
+      "criterion": "Plans selects an infinitive with base deliver.Preserve tomorrow morning,the map recipient and all later route/access restrictions.",
+      "englishRuleClaimIds": [
+        "infinitive-form"
+      ],
+      "sourceIds": [
+        "new.infinitive"
+      ],
+      "productPolicyRuleIds": [
+        "preserve-constraints",
+        "lesson-correct-use"
+      ],
+      "sourceScopeReview": {
+        "authorReviewed": true,
+        "independentlyReviewed": false,
+        "qualified": false,
+        "scopeGaps": []
+      },
+      "openQuestions": [],
+      "familyReview": {
+        "proposedFamilyId": "pilot-proposed-87c2bcf51a214f6eb5332476",
+        "structuralSignature": "to-infinitive-past-form",
+        "independenceVerified": false,
+        "globalExposureCoverage": "partial",
+        "independentFamilyCountClaim": 0
+      },
+      "authorKind": "AI-agent-source-backed-proposal",
+      "peerReviewStatus": "not-dispatched",
+      "referenceIsGold": false,
+      "referenceQualified": false,
+      "mainDispatchAuthorized": false
+    }
+  ],
+  "expectedOriginalDraftsAuthored": 60,
+  "actualReferenceModelResponses": 0,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "referenceQualified": false,
+  "sourceQualified": false,
+  "familyIndependenceVerified": false,
+  "englishTruthCertified": false,
+  "mainDispatchAuthorized": false,
+  "goalComplete": false,
+  "draftRevision": 1,
+  "previousDraftFile": ".taskmaster/evaluation/ai-quality-v147/pilot-reference-drafts-v1.json",
+  "previousDraftSha256": "9ce084fb122ac7a98e6921d33baa88637cb39554f4335db04690706e8e75996b",
+  "actualInterpretationDiagnosticResponses": 6
+}

@@ -1,0 +1,36 @@
+{
+  "protocol": "ai-quality-v147-main-panel-v8-preparation-v1",
+  "phase": "phase98",
+  "status": "compiled-main-calibration-v8-qualification-held",
+  "taskIds": [
+    "34.3",
+    "34.4"
+  ],
+  "planHash": "37cd7a92d1017c3aa17f9592110bafc44fe8a214924f5cc3d91e21a5dfb1505a",
+  "rubricHash": "bbb3f66845b43403d7b404e7c7b3df86e119ec448c066150fdfb68fe6062d5f0",
+  "witnesses": 12,
+  "requests": 72,
+  "waves": 12,
+  "priorV7Supported": 9,
+  "priorDisputed": [
+    "MC02",
+    "MC05",
+    "MC08"
+  ],
+  "sourceQualifiedV8": 0,
+  "calibrationAcceptanceAllowed": false,
+  "mainDispatchAuthorized": false,
+  "actualProviderCalls": 0,
+  "actualCountCalls": 0,
+  "actualKeyReads": 0,
+  "reservationCreated": false,
+  "fullReservationUpperMicros": "8567184",
+  "waveReservationUpperMicros": "713932",
+  "countAllowanceMicros": "2520000",
+  "additionalAvailableMicros": "4115501",
+  "preparedSha256": "af5f71603a07cda1200b8dcf7c7790b31889b48259e1193194b77ba4c60ef6af",
+  "document": "docs/AI_QUALITY_V147_MAIN_PANEL_V8_20261109.md",
+  "documentSha256": "8d41c450b7664f16f83351c311534ec5c34d20b708eed18d7a70ed2469f88c72",
+  "testLogSha256": "09d30a2a0aeec2aa958039f91d6221e9bed230d1298561a919d7288e8b70ea4f",
+  "moduleSha256": "735bb37f8ae83ea4d6cf446efd59596e6d7af27dc4c85678212c7edd7e11c9f2"
+}

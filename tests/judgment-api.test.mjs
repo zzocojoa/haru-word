@@ -23,6 +23,27 @@ const currentWire=sentence=>({meaningUsage:'appropriate',grammar:'natural',corre
 const oldWire=sentence=>({meaningUsage:'appropriate',grammar:'natural',correctedSentence:sentence,explanation:'합성 v142 설명',structure:{status:'unavailable',translation:'',parts:[],note:'합성'}});
 const response=(body,value)=>Response.json({status:'completed',model:body.model,output:[{type:'message',role:'assistant',status:'completed',content:[{type:'output_text',text:JSON.stringify(value)}]}]});
 
+test('word requests explicitly bind Korean intent and complete an English fragment through one provider response',async t=>{
+ t.mock.method(console,'info',()=>{});r.env.feedback_judgment_enabled='true';
+ const sentence='Arrive',contextNote='저는 일찍 도착해요.';setup(sentence);let calls=0;
+ t.mock.method(globalThis,'fetch',async(_url,init)=>{
+  calls++;const body=JSON.parse(init.body),input=JSON.parse(body.input[0].content);
+  assert.equal(input.contextRole,'intended_korean');assert.equal(input.contextNote,contextNote);
+  return response(body,{...currentWire(sentence),grammar:'needs_work',correctedSentence:'I arrive early.',correctionReason:'검증용 의도 반영'});
+ });
+ const result=await routes.word.POST(request('word',sentence,{contextNote,contextRole:'intended_korean'}));
+ assert.equal(result.status,200);const body=await result.json();
+ assert.equal(body.feedback.correctedSentence,'I arrive early.');assert.equal(body.feedback.contextNote,contextNote);
+ assert.equal(calls,1);assert.equal(r.attempts,1);
+});
+
+test('explicit intent cannot silently fall back to the old structured mode',async t=>{
+ r.env.feedback_judgment_enabled='false';setup('Arrive');let calls=0;
+ t.mock.method(globalThis,'fetch',async()=>{calls++;throw Error('unexpected provider call');});
+ const response=await routes.word.POST(request('word','Arrive',{contextRole:'intended_korean',contextNote:'저는 일찍 도착해요.'}));
+ assert.equal(response.status,503);assert.equal(calls,0);assert.equal(r.attempts,0);
+});
+
 test('both actual routes activate the judgment candidate only for the exact explicit switch',async t=>{
  t.mock.method(console,'info',()=>{});
  for(const domain of ['word','grammar'])for(const flag of [undefined,'false','TRUE','true']){
@@ -31,7 +52,7 @@ test('both actual routes activate the judgment candidate only for the exact expl
   t.mock.method(globalThis,'fetch',async(_url,init)=>{calls++;sent=JSON.parse(init.body);return response(sent,active?currentWire(sentence):oldWire(sentence));});
   const result=await routes[domain].POST(request(domain,sentence)),body=await result.json();
   assert.equal(result.status,200);assert.equal(calls,1);assert.equal(r.attempts,1);
-  assert.equal(body.feedback.validationVersion,active?'judgment-v6':'structured-v1');assert.equal(body.feedback.promptVersion,active?'reference-v5':'reference-v1');
+  assert.equal(body.feedback.validationVersion,active?'judgment-v10':'structured-v1');assert.equal(body.feedback.promptVersion,active?'reference-v13':'reference-v1');
   assert.equal(Object.hasOwn(body.feedback,'structure'),!active);
   const instruction=domain==='word'?(active?helpers.systemInstruction:helpers.legacySystemInstruction):(active?helpers.grammarInstruction:helpers.legacyGrammarInstruction);
   assert.ok(sent.instructions.startsWith(instruction));
@@ -69,6 +90,29 @@ test('v4 routes reject outdated clients and changed context fingerprints before 
   assert.equal((await routes[domain].POST(request(domain,'She arrives home.',{expectedContextFingerprint:'0'.repeat(64),contextNote:'질문에 대한 답변'}))).status,409);
   assert.equal((await routes[domain].POST(request(domain,'She arrives home.',{contextNote:'x'.repeat(501)}))).status,400);
  }assert.equal(calls,0);assert.equal(r.attempts,0);
+});
+
+test('raw output limits and contradictions reach safe errors through both public routes without private diagnostics',async t=>{
+ const logs=[];for(const level of ['info','warn','error'])t.mock.method(console,level,(...args)=>logs.push(args.join(' ')));
+ r.env.feedback_judgment_enabled='true';
+ for(const domain of ['word','grammar'])for(const kind of ['exact','overflow','contradiction','hidden_structure']){
+  const sentence=domain==='word'?'She arrives home.':'I am writing.';setup(sentence);let calls=0;
+  t.mock.method(globalThis,'fetch',async(_url,init)=>{
+   calls++;const body=JSON.parse(init.body),value=currentWire(sentence);
+   value.targetReason='SYNTHETIC_PRIVATE_REASON'.padEnd(300,'x');
+   if(kind==='overflow')value.targetReason+=' ';
+   if(kind==='contradiction')value.correctedSentence='SYNTHETIC_PRIVATE_REWRITE';
+   if(kind==='hidden_structure')value.structure={translation:'SYNTHETIC_PRIVATE_STRUCTURE'};
+   return response(body,value);
+  });
+  const result=await routes[domain].POST(request(domain,sentence)),body=await result.json();
+  assert.equal(calls,1);assert.equal(r.attempts,1);
+  assert.equal(result.status,kind==='exact'?200:502,domain+'/'+kind);
+  if(kind==='exact'){assert.equal(body.feedback.original,sentence);assert.equal(body.feedback.correctedSentence,sentence);assert.equal(Object.hasOwn(body.feedback,'structure'),false);}
+  else assert.equal(body.code,'provider_invalid_response');
+  assert.doesNotMatch(JSON.stringify(body),/SYNTHETIC_PRIVATE/);
+ }
+ assert.doesNotMatch(logs.join('\n'),/SYNTHETIC_PRIVATE|SYNTHETIC_NEVER_REAL/);
 });
 
 test('v4 routes bind explicit context, model, target and curriculum stem without ordinary notes',async t=>{

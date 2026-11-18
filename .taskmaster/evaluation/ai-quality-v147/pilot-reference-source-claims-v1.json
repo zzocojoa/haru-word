@@ -1,0 +1,1025 @@
+{
+  "protocol": "ai-quality-v147-pilot-reference-source-claims-v1",
+  "recordedAtUtc": "2026-11-08T15:34:16.165452+00:00",
+  "scope": "Short primary evidence and bounded author claim mapping for fixed60 input drafts",
+  "sourceBindings": {
+    ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+    ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+    "lib/judgment-policy.ts": "96eab5b72b244630a84c153cfd82e9838755fbc758d85dca71c4239ed251e36f",
+    "lib/grammar/target-criteria.ts": "146483f42c9fb01162b2015c12e23a232b1264bbdde90fa570f25d53724dd096"
+  },
+  "sources": [
+    {
+      "id": "lex.ask",
+      "url": "https://dictionary.cambridge.org/dictionary/english/ask",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "ask",
+      "checkedAt": "2026-11-07T03:53:40.120980+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "lex.book",
+      "url": "https://dictionary.cambridge.org/us/dictionary/english/book/",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "book",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "lex.help",
+      "url": "https://dictionary.cambridge.org/dictionary/english/help",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "help",
+      "checkedAt": "2026-11-07T03:53:40.121979+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "lex.careful",
+      "url": "https://www.merriam-webster.com/dictionary/careful",
+      "publisher": "Merriam-Webster",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "careful",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "lex.quiet-cambridge",
+      "url": "https://dictionary.cambridge.org/dictionary/english/quiet",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "quiet-cambridge",
+      "checkedAt": "2026-11-07T03:53:40.424334+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "lex.quiet-mw",
+      "url": "https://www.merriam-webster.com/dictionary/quiet",
+      "publisher": "Merriam-Webster",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "quiet-mw",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "lex.skillfully",
+      "url": "https://dictionary.cambridge.org/dictionary/english/skillfully",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "skillfully",
+      "checkedAt": "2026-11-07T03:53:40.946206+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "lex.manner",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "publisher": "British Council",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/lexical-source-catalog-v1.json",
+      "catalogueSha256": "10adf904181aafecfd45f0cdd41c0a91350f10addd10c867c9a47aa17bb89540",
+      "sourceId": "manner",
+      "checkedAt": "2026-11-07T03:58:32.564335+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.classes",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/phrase",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "classes",
+      "checkedAt": "2026-11-07T01:15:54.248039+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.verbs",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/verbs-types?q=linking+verbs",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "verbs",
+      "checkedAt": "2026-11-07T01:15:54.248039+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.forms",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/basic",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "forms",
+      "checkedAt": "2026-11-07T01:15:54.249040+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.pronouns",
+      "url": "https://dictionary.cambridge.org/uk/grammar/british-grammar/pronouns-personal-i-me-you-he-it-etc",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "pronouns",
+      "checkedAt": "2026-11-07T01:15:54.249040+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.adverbs",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adverbs-and-adverb-phrases-position",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "adverbs",
+      "checkedAt": "2026-11-07T01:15:55.019661+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.determiners",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/modifiers",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "determiners",
+      "checkedAt": "2026-11-07T01:15:55.108693+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.articles",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/the",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "articles",
+      "checkedAt": "2026-11-07T01:15:55.226925+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.numbers",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/number",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "numbers",
+      "checkedAt": "2026-11-07T01:15:55.578432+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.prepositions",
+      "url": "https://dictionary.cambridge.org/de/grammatik/british-grammar/prepositional-phrases",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "prepositions",
+      "checkedAt": "2026-11-07T01:15:55.690103+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.conjunctions",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/coordinating-conjunctions",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "conjunctions",
+      "checkedAt": "2026-11-07T01:15:55.835081+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.progressive",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/present-continuous-",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "progressive",
+      "checkedAt": "2026-11-07T01:15:56.164132+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.modals",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/modality-forms",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "modals",
+      "checkedAt": "2026-11-07T01:15:56.237960+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.infinitives",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/infinitives-and-",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "infinitives",
+      "checkedAt": "2026-11-07T01:15:56.360533+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.agreement",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/subject-verb-agreement",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "agreement",
+      "checkedAt": "2026-11-07T01:15:56.791287+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.ellipsis",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/ellipsis",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "ellipsis",
+      "checkedAt": "2026-11-07T01:15:57.261445+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.adjectives",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/adjective-phrases-position",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "adjectives",
+      "checkedAt": "2026-11-07T01:18:15.867616+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.interjections",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/interjections-ouch-hooray",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "interjections",
+      "checkedAt": "2026-11-07T01:18:15.868617+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "prior.negation",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/negation_2",
+      "publisher": "Cambridge University Press & Assessment",
+      "catalogueFile": ".taskmaster/evaluation/ai-quality-v147/reference-source-catalog-v1.json",
+      "catalogueSha256": "206a27709558fe213f1c081bfe40f54c837f7ca09ecbf5a04f6f3d274a321ef2",
+      "sourceId": "negation",
+      "checkedAt": "2026-11-07T01:18:15.868617+00:00",
+      "evidenceKind": "existing-checked-excerpt-read-this-turn",
+      "scope": "Only the existing checked excerpt and explicit catalogue limits;not a full-case proof",
+      "fullCopyrightedPagePersisted": false
+    },
+    {
+      "id": "new.agreement",
+      "url": "https://owl.purdue.edu/owl/general_writing/grammar/subject_verb_agreement.html",
+      "title": "Making Subjects and Verbs Agree",
+      "publisher": "Purdue University",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "The words each, each one, either, neither, everyone, everybody, anybody, anyone, nobody, somebody, someone, and no one are singular",
+      "verifiedExcerptSha256": "ab93771704a84740374b707e1c3aa23688f345959547f545dd2acf87c3022bf1",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Guideline6 plus subject-number discussion;not proof of a particular learner tense intention",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.articles",
+      "url": "https://owl.purdue.edu/owl/general_writing/grammar/using_articles.html",
+      "title": "Using Articles",
+      "publisher": "Purdue University",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "using a or an depends on the sound that begins the next word.",
+      "verifiedExcerptSha256": "8f43d2b8e9553b10c8c4a4f5537072437bc59330b785a82ff2444a842c6f7c48",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Indefinite-article sound rule and the specific university/silent-h examples;not every noun in a long passage",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.fragments",
+      "url": "https://owl.purdue.edu/owl/general_writing/mechanics/sentence_fragments.html",
+      "title": "Sentence Fragments",
+      "publisher": "Purdue University",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "Fragments are incomplete sentences.",
+      "verifiedExcerptSha256": "383149c54d3bdc8d474ddecfc42353ccc164d820104e99b7839139739fd35721",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Dependent-clause/no-main-verb fragments and contextual stylistic exceptions;does not prescribe product uncertain labels",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.uncount",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/uncount-nouns",
+      "title": "Uncount nouns",
+      "publisher": "British Council",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "She had six separate items of luggage.",
+      "verifiedExcerptSha256": "fad9ab5d9dbb8dd4e685e0d23d50ecd04564574cee0cc0f55eaac35d2e69360e",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial introduction lists honesty/help/luggage;unit expressions count items without changing the substance noun",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.link",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/link-verbs",
+      "title": "Link verbs",
+      "publisher": "British Council",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "Some verbs are followed by either a noun or an adjective:",
+      "verifiedExcerptSha256": "d6bc55e1e931c8b278e48273402a87107d337f8a4f9864eb0513760ff29ba8bf",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial list includes feel;subject descriptions use adjective complements;case analysis remains an inference",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.very",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/very",
+      "title": "Very",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "We use very before adverbs and adjectives to add emphasis.",
+      "verifiedExcerptSha256": "9bc6331d6fd687cc27dd7fe397fade02e9cc34c574358d6995f061fc5f735718",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Degree use of very;not an assertion that the spelling very can never precede any verb in any construction",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.very-much",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/word-order-very-much",
+      "title": "Word order: very much",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "I very much enjoyed my stay in England.",
+      "verifiedExcerptSha256": "b411a3f95cea96562cbc1a3c4df67ddfaa0e033d63246f24917adb9910c3a191",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Very much before the verb or after its object;do not place it between verb and object",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.pronouns",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/pronouns-personal-i-me-you-he-it-etc",
+      "title": "Personal pronouns",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "We also use personal object pronouns as complements of the verb be:",
+      "verifiedExcerptSha256": "99f192cb5b8e6aeaf68b9cb42196c9aa0f57b0f5acd7b9c13c5082215bfd3d3d",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial subject/object section also licenses object forms after prepositions;not identification of real referents",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.contrast",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/conjunctions-contrasting?q=Conjunc-",
+      "title": "Conjunctions: contrasting",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "We use but to connect items which are the same grammatical type",
+      "verifiedExcerptSha256": "dab7a6169e344e7fa39d9b72cf64a731bfb1e1571d7b766a330df3125ff88616",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Coordination versus subordination;case-specific redundant although/but analysis is declared author inference",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.although",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/although",
+      "title": "Although or though?",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "the clause which they introduce is a subordinate clause, which needs a main clause to make it complete:",
+      "verifiedExcerptSha256": "a6ba55ae3808bc6af693f0c1e14dbe77b793b3f99c9928de88fc13348f7ae648",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Dependent concessive clauses;explicit reduced-clause exceptions prevent a blanket ban on all short clauses",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.comparison",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/comparative-superlative-adjectives",
+      "title": "Comparative and superlative adjectives",
+      "publisher": "British Council",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "We use the with superlative adjectives:",
+      "verifiedExcerptSha256": "6e78bdd958a7a1de30693c5dd397bc2a8b8c53eeaac48d8eecffeaad3c0f43d8",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Formation alternatives and determiner the;quiet-specific preference is not proved by the displayed adjective lists",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.negation",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/double-negatives-and-usage",
+      "title": "Double negatives and usage",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "Double negatives like this are not acceptable in formal situations or in writing.",
+      "verifiedExcerptSha256": "57eddde3a33f53368c67c62e7f531a95a46137cf43f25e955270de12544e1d57",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Explicitly acknowledges regional dialect negative concord;not proof that all dialects or every double negative are erroneous",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.do",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/do%29",
+      "title": "Do",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "We use the infinitive of the main verb without to",
+      "verifiedExcerptSha256": "0bbf57955d7062c3586b927206159d0b9fad9df51efcea2f0f71766b2e4b2632",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Question/negative forms and do/does/did plus bare main verb;no inference about a new participant",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.perfect",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/present-perfect",
+      "title": "Present perfect",
+      "publisher": "British Council",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "The present perfect is formed from the present tense of the verb have and the past participle of a verb.",
+      "verifiedExcerptSha256": "e3f533afbd96fdaaf91d248927ffeac917fd667c44796bbb58860181c7d4f0f8",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial simple/continuous forms;not all claims or community comments on the page",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.verb-phrase",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/verb-phrases",
+      "title": "Verb phrases",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "The first verb in a complex verb phrase indicates the time somebody did something",
+      "verifiedExcerptSha256": "9dc1756ac27b0bbeb0391b166f4705fe0aafbbef2c77ed3eb716a86defc52187",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial auxiliary-order table:modal+base,perfect have+participle,continuous be+ing;modal exception to agreement",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.modal-meaning",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/modal-verbs",
+      "title": "Modal verbs",
+      "publisher": "British Council",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "We use modals to show if we believe something is certain, possible or impossible:",
+      "verifiedExcerptSha256": "7dfce619874c136db79d82b0f307c625eb8db5a9f7dbc8c58b8522ec684642b3",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial possibility/ability/request discussion only;community explanations were not used",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.infinitive",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/infinitive-without-to",
+      "title": "Infinitives with and without to",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "The to-form consists of to plus the base form of the verb:",
+      "verifiedExcerptSha256": "74abab75283faf6237f3e3c688cd9ddaa4f5936bb045b3da532903b37deba134",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Form plus editorial list including plan;not a claim every to token is infinitival",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.exclamation",
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/exclamations",
+      "title": "Exclamations",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "We can use How + adjective/adverb + subject + verb:",
+      "verifiedExcerptSha256": "708790c775bec79ebc9bff0169277cf1ee93edf7699b57147cf1953c5ad86957",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "How-exclamatives and short reactions;not a demand for a named event",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.reported-question",
+      "url": "https://learnenglish.britishcouncil.org/comment/198536",
+      "title": "Reported speech: questions",
+      "publisher": "British Council",
+      "checkedAt": "2026-11-08T15:34:16.165452+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "In indirect speech, we change the question structure",
+      "verifiedExcerptSha256": "b68dbe35952d6d8b2d29f994f408a355caf44743f3365c6e1307b4f23c560258",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial grammar explanation on the checked official page,not the community answers;statement structure replaces question structure.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.determiner-order",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/determiners-position-and-order",
+      "title": "Determiners: position and order",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:36:21.138113+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "All, both and half can come before articles, demonstratives and possessives.",
+      "verifiedExcerptSha256": "8c62ded0fdb93e98ed211163a70bc9f967f4a2728c933c436ffe4b3aeeda9319",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "Editorial all/both/half section and table explicitly license both my parents;do not overgeneralize to two referring determiners.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.number-role",
+      "url": "https://dictionary.cambridge.org/de/grammatik/british-grammar/number",
+      "title": "Number",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:36:21.138113+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "Ordinal numbers are also used as adverbs:",
+      "verifiedExcerptSha256": "218670fb7d23083827469497c5a2956a2b1559576720444630efd2878206aed5",
+      "hashScope": "Only the short verified excerpt,not page HTML or complete editorial text",
+      "sourceScope": "English editorial numbers sections distinguish quantity/order and exemplify came tenth;not the German site navigation.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.make-adjective",
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/make",
+      "title": "Make",
+      "publisher": "Cambridge University Press & Assessment",
+      "checkedAt": "2026-11-08T15:38:42.402611+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "Music makes",
+      "verifiedExcerptSha256": "962a76024367beb93ff55d170e579fe69511976d0363f20b111ea6cb13fc0201",
+      "hashScope": "Only the short verified excerpt,not complete page text",
+      "sourceScope": "Editorial make+object+adjective-complement section and happy example,not a quotation of the new restless case.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.manner",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference/adverbials-manner",
+      "title": "Adverbials of manner",
+      "publisher": "British Council",
+      "checkedAt": "2026-11-08T15:38:42.402611+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "Adverbs of manner normally come after the verb:",
+      "verifiedExcerptSha256": "57af662fa57d77a129030695d4ba49701bfb6cc896919a6914186b86b93f9855",
+      "hashScope": "Only the short verified excerpt,not complete page text",
+      "sourceScope": "Editorial formation/function/position and linking-verb contrast;community comments excluded.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.skillful",
+      "url": "https://www.merriam-webster.com/dictionary/skillful",
+      "title": "Skillful",
+      "publisher": "Merriam-Webster",
+      "checkedAt": "2026-11-08T15:38:42.402611+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "accomplished with skill",
+      "verifiedExcerptSha256": "8df55c014d908fc986400decc2a79049c707bd64c1465d6b912cdd3434152eaf",
+      "hashScope": "Only the short verified excerpt,not complete page text",
+      "sourceScope": "Dictionary adjective headword skillful and derived adverb skillfully,editorial definitions/labels only;automatic web examples excluded.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.quiet-limit",
+      "url": "https://www.merriam-webster.com/dictionary/quiet",
+      "title": "Quiet",
+      "publisher": "Merriam-Webster",
+      "checkedAt": "2026-11-08T15:38:42.402611+00:00",
+      "evidenceKind": "web-open-editorial",
+      "verifiedExcerpt": "free from noise or uproar",
+      "verifiedExcerptSha256": "dc0c1b382756708c8faac28315169216d6431a635e8d8053a51154682ebdd365",
+      "hashScope": "Only the short verified excerpt,not complete page text",
+      "sourceScope": "Adjective and adverb entries confirm multiple roles;page does not independently establish quietest spelling or a stacking judgment.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    },
+    {
+      "id": "new.quiet-inflection",
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/american_english/quiet_1",
+      "title": "Quiet adjective,Oxford Advanced American Dictionary",
+      "publisher": "Oxford University Press",
+      "checkedAt": "2026-11-08T15:39:27.822866+00:00",
+      "evidenceKind": "web-search-editorial-extraction",
+      "verifiedExcerpt": "quieter, quietest",
+      "verifiedExcerptSha256": "992560148efdd23b640ed0d55dfa03123e91e460d4568fa4d03b778b773701bc",
+      "hashScope": "Only the short verified inflection-label excerpt,not the complete page",
+      "sourceScope": "Adjective entry explicitly lists quieter and quietest;the standard no-double-marking application still requires peer review.",
+      "fullCopyrightedPagePersisted": false,
+      "independentQualification": false
+    }
+  ],
+  "claims": [
+    {
+      "id": "lexical-ask",
+      "sourceIds": [
+        "lex.ask"
+      ],
+      "authorParaphrase": "The question-seeking ask entry permits intransitive and transitive verb uses.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "lexical-book",
+      "sourceIds": [
+        "lex.book"
+      ],
+      "authorParaphrase": "The reservation verb book differs from the homographic text noun.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "lexical-help",
+      "sourceIds": [
+        "lex.help"
+      ],
+      "authorParaphrase": "Help can be an uncountable assistance noun;spelling alone does not decide its syntactic role.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "lexical-careful",
+      "sourceIds": [
+        "lex.careful"
+      ],
+      "authorParaphrase": "Careful is an adjective;carefully is a related adverb,not merely a tense or number inflection.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "lexical-quiet",
+      "sourceIds": [
+        "lex.quiet-cambridge"
+      ],
+      "authorParaphrase": "Quiet has an adjective sense concerning little noise;its syntactic role must be read in the case.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "lexical-skillfully",
+      "sourceIds": [
+        "lex.skillfully"
+      ],
+      "authorParaphrase": "Skillfully is an American-spelling adverb;the older catalogue alone does not prove every derived-word use.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "uncountable-noun",
+      "sourceIds": [
+        "new.uncount"
+      ],
+      "authorParaphrase": "Honesty and help are listed among uncount nouns,and luggage is listed as uncountable;items/pieces can supply counting units.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "singular-agreement",
+      "sourceIds": [
+        "new.agreement"
+      ],
+      "authorParaphrase": "A singular subject such as neither takes singular agreement in the stated standard writing guidance.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "adjective-complement",
+      "sourceIds": [
+        "new.link"
+      ],
+      "authorParaphrase": "Linking feel can describe a subject by an adjective;this differs from an adverb describing the manner of an action.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "degree-very",
+      "sourceIds": [
+        "new.very",
+        "new.very-much"
+      ],
+      "authorParaphrase": "Degree very modifies adjectives/adverbs;very much is an attested modifier of enjoy with appropriate placement.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "article-sound",
+      "sourceIds": [
+        "new.articles"
+      ],
+      "authorParaphrase": "The immediately following sound determines a/an,including consonantal initial university and one and silent-h honorary.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "superlative-form",
+      "sourceIds": [
+        "new.comparison",
+        "new.quiet-inflection"
+      ],
+      "authorParaphrase": "Superlatives use a suitable form and commonly the;stacking most with an existing -est form is the proposed error analysis.",
+      "scopeLimit": "General superlative formation plus the dictionary quietest form support the proposed repair;full-case and multiple-repair judgments remain unqualified.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "object-pronoun",
+      "sourceIds": [
+        "new.pronouns"
+      ],
+      "authorParaphrase": "Object-form pronouns are licensed after prepositions and as be complements;ordinary pronouns do not need a real-world identification.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "clause-link",
+      "sourceIds": [
+        "new.contrast",
+        "new.although"
+      ],
+      "authorParaphrase": "But coordinates matching units;although introduces a dependent concessive clause linked to a main clause.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "fragment-structure",
+      "sourceIds": [
+        "new.fragments"
+      ],
+      "authorParaphrase": "A dependent clause or phrase without its main predicate can be a fragment;context can license some non-sentence uses.",
+      "scopeLimit": "The product choice of BOTH uncertain is a separate local policy,not a grammar rule stated by Purdue.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "negative-concord",
+      "sourceIds": [
+        "new.negation"
+      ],
+      "authorParaphrase": "The source contrasts standard writing with regional negative concord;normalization must retain the intended negative meaning.",
+      "scopeLimit": "An unspecified dialect/register cannot be certified wrong merely from negative concord;the new draft remains conditional.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "do-main-form",
+      "sourceIds": [
+        "new.do",
+        "new.verb-phrase"
+      ],
+      "authorParaphrase": "Auxiliary did carries the past question form;its following main verb is bare rather than another finite past form.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "perfect-form",
+      "sourceIds": [
+        "new.perfect",
+        "new.verb-phrase"
+      ],
+      "authorParaphrase": "Perfect have selects a past participle;perfect continuous combines have/has been with an ing main verb.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "modal-form-strength",
+      "sourceIds": [
+        "new.verb-phrase",
+        "new.modal-meaning"
+      ],
+      "authorParaphrase": "A modal is followed by a base form and its force must remain distinct from other modal meanings.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "infinitive-form",
+      "sourceIds": [
+        "new.infinitive"
+      ],
+      "authorParaphrase": "Infinitival to selects a base verb and can follow plan;prepositional to is a different construction.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "how-exclamation",
+      "sourceIds": [
+        "new.exclamation"
+      ],
+      "authorParaphrase": "A how-exclamative can use adjective/adverb followed by subject and verb.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "reported-question-order",
+      "sourceIds": [
+        "new.reported-question"
+      ],
+      "authorParaphrase": "A reported question uses subject-verb order;source tense guidance does not require changing unrelated temporal content.",
+      "scopeLimit": "The source supports the stated rule or lexical fact;the new case application still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "number-role",
+      "sourceIds": [
+        "new.number-role"
+      ],
+      "authorParaphrase": "Cardinals express quantity and ordinals order;an ordinal can function adverbially for finishing position.",
+      "scopeLimit": "The source supports this rule;the new complete sentence still requires independent peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "determiner-role",
+      "sourceIds": [
+        "new.determiner-order"
+      ],
+      "authorParaphrase": "Both can precede a possessive determiner and its noun,as in the source example both my parents.",
+      "scopeLimit": "The both+possessive combination is directly supported;the new sentence still requires peer review.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "object-adjective-complement",
+      "sourceIds": [
+        "new.make-adjective"
+      ],
+      "authorParaphrase": "Make can take an object and an adjective describing the resulting state of that object.",
+      "scopeLimit": "Primary rule/part-of-speech support does not itself qualify the new full sentence.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "manner-adverb-role",
+      "sourceIds": [
+        "new.manner",
+        "new.skillful"
+      ],
+      "authorParaphrase": "The skillful adjective and skillfully adverb have different roles;a post-object manner modifier can use the adverb.",
+      "scopeLimit": "Primary rule/part-of-speech support does not itself qualify the new full sentence.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    },
+    {
+      "id": "preposition-phrase",
+      "sourceIds": [
+        "prior.prepositions"
+      ],
+      "authorParaphrase": "A preposition heads a phrase with its complement,commonly a noun phrase;the beyond/into occurrences are case applications.",
+      "scopeLimit": "Primary rule/part-of-speech support does not itself qualify the new full sentence.",
+      "authorScopeReviewed": true,
+      "independentlyQualified": false
+    }
+  ],
+  "failedReads": [
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/nouns-countable-and-uncountable",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/neither-neither-nor-and-not-either",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/very",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/questions-indirect-questions",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/pronouns-personal-i-me-you-he-it-etc",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/although-or-though",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/comparison-adjectives-bigger-biggest-more-interesting",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/double-negatives-and-usage",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://learnenglish.britishcouncil.org/grammar/b1-b2-grammar/reported-speech-2-questions",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/exclamations",
+      "status": "web-open-failed;not used as read evidence"
+    },
+    {
+      "url": "https://dictionary.cambridge.org/us/dictionary/english/skillful",
+      "status": "web-open403;not used as source evidence"
+    },
+    {
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/quiet_1",
+      "status": "direct web-open403;official American editorial search content was checked separately"
+    }
+  ],
+  "sourceQualified": false,
+  "referenceQualified": false,
+  "actualProviderCalls": 0,
+  "actualCountApiCalls": 0,
+  "actualKeyReads": 0,
+  "mainDispatchAuthorized": false,
+  "draftRevision": 4
+}

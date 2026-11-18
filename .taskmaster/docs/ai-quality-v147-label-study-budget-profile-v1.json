@@ -1,0 +1,47 @@
+{
+  "protocol": "ai-quality-v147-evaluation-scope-v2",
+  "goalTag": "ai-quality-v147",
+  "authorizationSha256": "628ceafd54a60bdb0720bab46b5747ed1adc6790765331ed263309af6106b82b",
+  "runId": "45cf9034-af46-4dc6-9bd9-b253a12d289e",
+  "studyPlanHash": "3c021d134e1385f7083be153253b393b10cd4483153bb9f9d7b8ab191993d103",
+  "collectorProtocol": "ai-quality-v147-label-collector-v1",
+  "successStatus": "collected-label-diagnostic",
+  "runtimeDirectoryName": "ai-quality-v147-label-study-v1-runtime-20261108",
+  "expectedModelCalls": 108,
+  "expectedCountCalls": 108,
+  "reservationMicros": "10800000",
+  "countAllowanceMicros": "3650000",
+  "inputCeiling": 7000,
+  "outputCeiling": 1024,
+  "rates": {
+    "gpt-6.1-sol": [
+      2,
+      10
+    ],
+    "gpt-6.1-terra": [
+      1,
+      5
+    ],
+    "gpt-6-astra": [
+      10,
+      50
+    ]
+  },
+  "pricingEvidenceFile": "phase78/official-pricing-observation.json",
+  "pricingEvidenceSha256": "3ca5378cd9e2eb619fcf8fe333bbb1f5b6081f073d0b1d94c910a70efa3e318e",
+  "countTariffVerified": false,
+  "invoiceVerified": false,
+  "additionalAuthorizationMicros": "35000000",
+  "baseUsedMicros": "9312372",
+  "baseAvailableMicros": "25687628",
+  "originalFiveDollarClosed": true,
+  "newGrantCreated": false,
+  "automaticRetry": false,
+  "primaryVotes": 72,
+  "pairedOldPolicyVotes": 18,
+  "falseClaimTrapVotes": 12,
+  "resolvedContextVotes": 6,
+  "studyIsPublicDevelopment": true,
+  "sourceQualified": false,
+  "englishTruthCertified": false
+}

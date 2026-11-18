@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "id": "ai-quality-v147-decision-contract-1",
+  "planId": "ai-quality-v147-2026-11-06",
+  "status": "semantic-contract-reviewed; no live judge or risk approval",
+  "dimensions": [
+    "meaning",
+    "grammar",
+    "correction",
+    "explanation",
+    "abstention"
+  ],
+  "dimensionDefinitions": {
+    "meaning": "Original target use: lexical sense/POS for word study; correct feature use including relevant case/form/agreement for grammar lessons. A label-only mismatch is reported here, not as an English correction failure. A default incomplete message withholds both judgments; licensed replies/commands/reactions are different.",
+    "grammar": "Whether the original grammar assessment is justified. Do not infer a grammar error from a target-label mismatch, transport failure or unknown temporal equivalence. For a visibly malformed modal with unknown intended time, needs_work states the known form error and uncertain can responsibly withhold a safe correction; a case may expressly allow both original-grammar labels. The v5 product instruction still prefers uncertain plus no correction and a time question. Label-policy compliance is an auxiliary diagnostic.",
+    "correction": "Natural originals remain unchanged, including missing/wrong targets. A correction must be minimal and preserve meaning. Several equivalent corrections can pass. A grammatical modal-perfect alternative with unestablished intended time is uncertain for equivalence, not automatically ungrammatical or critically invented. Responsible withholding passes when correction cannot be chosen safely.",
+    "explanation": "Assess only learner-visible factual claims, reviewed application rules and actual comparisons. Hidden model reasons are diagnostic only. A false visible grammar rule fails this dimension even when the correction is right. App-authored explanations do not certify hidden model-text accuracy.",
+    "abstention": "Withhold unsafe interpretation/correction and ask for the specific missing message, time, target meaning or relationship. Do not withhold ordinary complete pronouns or valid commands merely because a named real-world referent is absent. Known target-form error can coexist with withheld correction."
+  },
+  "criticalFields": [
+    "approveBadGrammar",
+    "reverseMeaning",
+    "swapRoles",
+    "inventedIntent"
+  ],
+  "criticalPolicy": {
+    "approveBadGrammar": "Learner-visible approval of known incorrect original grammar; a target-only disagreement or unavailable response is not this error.",
+    "reverseMeaning": "Evidence of an actual meaning reversal, not merely an unconfirmed alternative interpretation.",
+    "swapRoles": "Evidence that a visible correction exchanges participants' semantic roles.",
+    "inventedIntent": "Evidence of an invented agent, event or speech act in the visible product output. A model's raw invention that the product independently withholds is a separate model diagnostic."
+  },
+  "wireLabels": {
+    "meaningUsage": [
+      "appropriate",
+      "needs_work",
+      "uncertain"
+    ],
+    "grammar": [
+      "natural",
+      "needs_work",
+      "uncertain"
+    ],
+    "contextNeeded": [
+      "none",
+      "message",
+      "time",
+      "target_meaning",
+      "relationship"
+    ]
+  },
+  "wireLabelPolicy": "Sufficient original target/grammar assessed independently; grammar uncertain has no correction; known malformed modal with unresolved time prefers grammar uncertain/time question. Actual English-form error and safe correction equivalence are separate dimensions.",
+  "invalidWireIsNotEnglishJudgment": true,
+  "rawModelAndVisibleProductSeparated": true,
+  "qualityAndFinancialThresholdsInherited": false,
+  "oldEvaluationsRescored": false,
+  "applicationOverrideIsNotModelAbstention": true,
+  "modelQualityMeasured": false,
+  "riskToleranceApproved": false,
+  "learnerUnderstandingVerified": false,
+  "sourceBindings": {
+    "instruction": "lib/judgment-policy.ts",
+    "wireSchemaAndParser": "lib/judgment-feedback-contract.ts",
+    "labelsAndStorage": "lib/sentence-feedback.ts",
+    "visibleExplanation": "lib/verified-feedback-explanation.ts",
+    "developmentMatrix": "tests/fixtures/judgment-decision-matrix.json",
+    "futureGradingTasks": [
+      13,
+      14,
+      21,
+      25,
+      27,
+      34,
+      35,
+      36
+    ]
+  },
+  "sufficiencyRequirements": {
+    "S1": "cause id and counterfactual evidence required; AQ-C01 app evidence is separate from opaque model causes",
+    "S2": "risk/N/r/uncertainty/multiple looks preregistered in T34, not inherited from old30/60 thresholds",
+    "S3": "exposed105 and new regression cases are development only; fresh families/repeats required",
+    "S4": "reviewed wording is not learner understanding; qualified review/comprehension/transfer required",
+    "S5": "Node/synthetic wire/local Worker not production-authenticated AI evidence",
+    "S6": "new issue→synthetic reproduction→cause→fix→fresh evaluation/new approval; bounded day1/day7 review"
+  },
+  "provenance": {
+    "priorDimensionDefinitionsSource": "ROOT:.taskmaster/docs/judgment-v5-rubric-candidate.json",
+    "priorSha256": "d05155fa440c4f7ea04eff7c643b5caacd7b21ef800fb1793134405dca069710",
+    "matrixSha256": "c0959fcaae5d0140f376c3e2097716bab4f6457b2284f61fec33801ae591f3d7",
+    "closedThresholdsCopied": false,
+    "actualContractEvidence": "ROOT:outputs/ai-quality-v147-implementation-20261106/input-boundaries-green.log"
+  }
+}
