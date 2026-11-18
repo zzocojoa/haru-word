@@ -434,6 +434,11 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     report.checks.push('P091–095: all source link names/destinations and return focus survive decorative icons without opening external sites');
 
     const field = page.getByRole('textbox', { name: '내 영어 문장', exact: true });
+    const intent = page.getByRole('textbox', { name: '의도한 한국어 문장', exact: true });
+    // The session's direct notice owns the English draft; the Korean intention
+    // has its own nested notice, with the same recovery button names.
+    const sentenceDraft = page.locator('.session-panel').filter({ has: field }).locator(':scope > .local-draft-notice');
+    const intentDraft = page.locator('.korean-intent-input').filter({ has: intent }).locator(':scope > .local-draft-notice');
     const openLesson = async () => {
       await qa.saved();
       const resume = button('중단한 학습 이어서');
@@ -442,11 +447,12 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       await page.waitForFunction(() => document.activeElement?.tagName === 'H2' && !!document.activeElement.closest('.session-panel'));
     };
     await openLesson();
+    assert.equal(await sentenceDraft.count(), 1); assert.equal(await intentDraft.count(), 1);
     await field.fill('A synthetic draft to recover.'); await waitDraft('A synthetic draft to recover.');
     await page.reload({ waitUntil: 'domcontentloaded' }); await openLesson();
     await waitValue(field, 'A synthetic draft to recover.');
     const draftBaseline = await qa.getState();
-    const undo = button('복구한 입력 되돌리기');
+    const undo = sentenceDraft.getByRole('button', { name: '복구한 입력 되돌리기', exact: true });
     await qa.inspect('draft-restored', { icons: [[svg(undo), 18, 'P090 restore undo']] });
     await qa.click(undo, 'draft-undo'); await waitValue(field, 'Existing server sentence.');
     assert.deepEqual(await qa.getState(), draftBaseline, 'undo does not grade or save recovered input');
@@ -462,15 +468,30 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     await page.reload({ waitUntil: 'domcontentloaded' }); await openLesson();
     await waitValue(field, 'Changed server sentence.');
     const comparisonBaseline = await qa.getState();
-    await page.locator('.local-draft-notice summary').filter({ hasText: '이 기기에 남은 다른 입력 확인' }).click();
-    await button('현재 입력과 비교').first().click();
-    const comparison = page.getByRole('group', { name: '임시 입력 복구 확인', exact: true });
+    await sentenceDraft.locator('summary').filter({ hasText: '이 기기에 남은 다른 입력 확인' }).click();
+    const compare = sentenceDraft.getByRole('button', { name: '현재 입력과 비교', exact: true });
+    const comparison = sentenceDraft.getByRole('group', { name: '임시 입력 복구 확인', exact: true });
+    const openEnglishComparison = async () => {
+      const count = await compare.count();
+      for (let index = 0; index < count; index++) {
+        await compare.nth(index).click(); await comparison.waitFor();
+        if (await comparison.getByText('A draft kept for explicit comparison.', { exact: true }).count() === 1) {
+          (report.draftComparisons ??= []).push({ candidates: count, selectedIndex: index + 1,
+            storedSentence: 'A draft kept for explicit comparison.' });
+          return;
+        }
+        await comparison.getByRole('button', { name: '취소', exact: true }).click();
+        await comparison.waitFor({ state: 'hidden' });
+      }
+      assert.fail('The English comparison must show the intended stored sentence');
+    };
+    await openEnglishComparison();
     await comparison.waitFor(); await qa.inspect('draft-comparison', compactMatrix);
     await qa.click(comparison.getByRole('button', { name: '취소', exact: true }), 'draft-comparison-cancel');
     assert.equal(await field.inputValue(), 'Changed server sentence.');
     assert.deepEqual(await qa.getState(), comparisonBaseline);
-    await button('현재 입력과 비교').first().click();
-    await qa.click(button('비교한 입력으로 이어쓰기'), 'draft-apply');
+    await openEnglishComparison();
+    await qa.click(comparison.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }), 'draft-apply');
     await waitValue(field, 'A draft kept for explicit comparison.');
     assert.deepEqual(await qa.getState(), comparisonBaseline);
     report.checks.push('P090: automatic recovery, undo, explicit comparison/cancel/apply preserve original scores, first answers and server revision');
@@ -497,14 +518,25 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       };
     });
     await field.fill('Retain my input when storage fails.');
-    const retry = button('기기 보관 다시 확인'); await retry.waitFor();
-    await qa.inspect('draft-storage-error', { icons: [[svg(retry), 18, 'P089 storage retry']] });
+    const intendedKorean = '기기 보관에 실패해도 이 한국어 의도를 유지해 주세요.';
+    await intent.fill(intendedKorean);
+    const retry = sentenceDraft.getByRole('button', { name: '기기 보관 다시 확인', exact: true });
+    const intentRetry = intentDraft.getByRole('button', { name: '기기 보관 다시 확인', exact: true });
+    await retry.waitFor(); await intentRetry.waitFor();
+    assert.equal(await field.inputValue(), 'Retain my input when storage fails.');
+    assert.equal(await intent.inputValue(), intendedKorean);
+    await qa.inspect('draft-storage-error', { icons: [
+      [svg(retry), 18, 'P089 English draft storage retry'],
+      [svg(intentRetry), 18, 'P089 Korean intention storage retry'],
+    ] });
     await page.evaluate(() => window.restoreQaStorage());
     await qa.click(retry, 'draft-storage-retry'); await retry.waitFor({ state: 'hidden' });
+    await intentRetry.waitFor({ state: 'hidden' });
     assert.equal(await field.inputValue(), 'Retain my input when storage fails.');
-    await waitDraft('Retain my input when storage fails.');
+    assert.equal(await intent.inputValue(), intendedKorean);
+    await waitDraft('Retain my input when storage fails.'); await waitDraft(intendedKorean);
     assert.deepEqual(await qa.getState(), deletionBaseline);
-    report.checks.push('P087/P089: cancel preserves device drafts; confirmed local delete and recoverable storage failure preserve displayed input and server records');
+    report.checks.push('P087/P089: cancel preserves device drafts; confirmed local delete and recoverable storage failure preserve English and Korean intention inputs and server records; retrying from the English draft clears both notices and persists both inputs');
 
     await openSettings();
     const logout = settings.getByRole('link', { name: '임시 입력을 지우고 로그아웃', exact: true });
