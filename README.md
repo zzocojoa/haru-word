@@ -7,6 +7,8 @@ phase224: T38 실제 운영 단어·문법×Sol/Terra/Astra 6/6 교정 표시·�
 
 [이번 GitHub 반영 범위·검증·보존 사항](docs/AI_QUALITY_V148_GITHUB_PR_20261113.md)을 확인할 수 있다.
 
+후속 로컬 브랜치의 [구버전 문맥 초안·React 보안 수정](docs/CONTEXT_DRAFT_SECURITY_FIX_20261113.md)은 운영 미반영이다.
+
 현재 AI 계약·장애 차단·복구 지침은 [OpenAI 운영 절차](docs/OPENAI_FEEDBACK.md)와 [v148 게시·복구 기록](docs/AI_QUALITY_V148_FEATURE_RELEASE_20261113.md)을 따른다.
 
 <!-- /ai-quality-v147-latest-run -->
