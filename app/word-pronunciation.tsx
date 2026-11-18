@@ -1,5 +1,5 @@
 "use client";
-import {ExternalLink} from 'lucide-react';
+import {HaruIcon} from '@/components/icons/haru-icon';
 import type {Word} from '@/lib/learning';
 import {dictionaryUrl} from '@/lib/catalog-basics';
 import {familyMeaningNote, pronunciationFor} from '@/lib/pronunciation';
@@ -26,10 +26,10 @@ export function WordPronunciation({word,meaning,showIpa=true}:WordPronunciationP
     {showIpa&&<WordIpa word={word} meaning={meaning}/>}
     {pronunciation.kind==='reviewed' ? <>
       <p className="small-note">{pronunciation.guide.note}</p>
-      <a className="dictionary-audio" href={pronunciation.guide.url} target="_blank" rel="noreferrer">미국식 사전 발음 듣기 <ExternalLink size={14}/></a>
+      <a className="dictionary-audio" href={pronunciation.guide.url} target="_blank" rel="noreferrer">미국식 사전 발음 듣기 <HaruIcon name="external-link" size={14}/></a>
     </> : pronunciation.kind==='dictionary' ? <>
       <p className="small-note">품사·뜻·시제에 따라 발음이 달라요. 이 뜻의 발음은 사전에서 확인해 주세요.</p>
-      <a className="dictionary-audio" href={dictionaryUrl(word.word)} target="_blank" rel="noreferrer">사전에서 발음 확인 <ExternalLink size={14}/></a>
+      <a className="dictionary-audio" href={dictionaryUrl(word.word)} target="_blank" rel="noreferrer">사전에서 발음 확인 <HaruIcon name="external-link" size={14}/></a>
     </> : <Speak text={word.word} dictionaryHref={dictionaryUrl(word.word)} showHelpInitially/>}
     {familyNote&&<p className="small-note">{familyNote}</p>}
   </div>;

@@ -41,6 +41,36 @@ const {build}=require('esbuild');
   // browser, user profile or server can match this absolute random directory.
   const script="$qaProfile=[IO.Path]::GetFullPath($env:HARU_QA_PROFILE); $qaOwned=@(Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -and $_.CommandLine.IndexOf($qaProfile,[StringComparison]::OrdinalIgnoreCase) -ge 0 }); $qaMatches=@($qaOwned | Where-Object { $_.Name -match '^(chrome|chrome-headless-shell|headless_shell|MiniBrowser|Playwright)\\.exe$' -and $_.CommandLine -notmatch '--type=' }); if($qaMatches.Count -ne 1){ throw ('Expected one owned QA browser process; matched names: '+(($qaOwned | Select-Object -ExpandProperty Name) -join ',')) }; Stop-Process -Id $qaMatches[0].ProcessId -Force -ErrorAction Stop; Write-Output 'owned-qa-browser-stopped'";
   if(process.platform==='win32')assert.match(execFileSync('powershell.exe',['-NoProfile','-Command',script],{encoding:'utf8',windowsHide:true,env:{...process.env,HARU_QA_PROFILE:profile}}),/owned-qa-browser-stopped/);
+  else if(process.platform==='linux'&&engine==='webkit'){
+   // Playwright 1.62's pw_run.sh starts MiniBrowser without exec, so both
+   // wrapper and native browser can carry the same persistent-profile argv.
+   const processes=execFileSync('ps',['-A','-o','pid=,ppid=,comm='],{encoding:'utf8'}).split('\n').flatMap(line=>{
+    const match=line.trim().match(/^(\d+)\s+(\d+)\s+(\S+)$/);return match?[{pid:Number(match[1]),ppid:Number(match[2]),comm:match[3]}]:[];
+   });
+   const byPid=new Map(processes.map(row=>[row.pid,row]));
+   const argsOf=pid=>fs.readFileSync('/proc/'+pid+'/cmdline','utf8').split('\0').filter(Boolean);
+   const startedAt=pid=>{const stat=fs.readFileSync('/proc/'+pid+'/stat','utf8');return stat.slice(stat.lastIndexOf(')')+2).split(/\s+/)[19];};
+   const owned=processes.flatMap(row=>{
+    try{
+     const args=argsOf(row.pid);if(!args.includes('--user-data-dir='+profile))return [];
+     const ancestry=[];let ancestor=row;
+     while(ancestor&&!ancestry.includes(ancestor.pid)){ancestry.push(ancestor.pid);if(ancestor.pid===process.pid)break;ancestor=byPid.get(ancestor.ppid);}
+     return [{...row,args,ancestry,executable:fs.readlinkSync('/proc/'+row.pid+'/exe'),startedAt:startedAt(row.pid)}];
+    }catch{return [];}
+   });
+   const matches=owned.filter(row=>row.comm==='MiniBrowser'&&path.basename(row.executable)==='MiniBrowser'
+    &&row.args.includes('--inspector-pipe')&&row.args.includes('--headless')&&row.ancestry.includes(process.pid));
+   console.log('Owned WebKit process selection '+JSON.stringify({qaPid:process.pid,profile:path.basename(profile),matches:matches.length,
+    processes:owned.map(row=>({pid:row.pid,ppid:row.ppid,comm:row.comm,executable:path.basename(row.executable),
+     launcher:row.args.some(arg=>path.basename(arg)==='pw_run.sh'),exactProfile:true,qaDescendant:row.ancestry.includes(process.pid),ancestry:row.ancestry}))}));
+   assert.equal(matches.length,1,'one native MiniBrowser with the exact QA profile and this QA process as ancestor');
+   const [browserProcess]=matches;
+   assert.equal(startedAt(browserProcess.pid),browserProcess.startedAt,'the selected QA process has not been replaced');
+   assert.deepEqual(argsOf(browserProcess.pid),browserProcess.args,'the selected QA browser still owns the exact profile argv');
+   assert.equal(fs.readlinkSync('/proc/'+browserProcess.pid+'/exe'),browserProcess.executable);
+   process.kill(browserProcess.pid,'SIGKILL');
+   console.log('Stopped uniquely owned QA MiniBrowser '+JSON.stringify({pid:browserProcess.pid,profile:path.basename(profile)}));
+  }
   else{
    const matches=execFileSync('ps',['-A','-o','pid=,comm=,args='],{encoding:'utf8'}).split('\n').filter(line=>line.includes(profile)&&!/--type=/.test(line)&&/chrome|chromium|MiniBrowser|WebKit/i.test(line));
    assert.equal(matches.length,1,'one uniquely owned QA main browser process');process.kill(Number(matches[0].trim().split(/\s+/)[0]),'SIGKILL');

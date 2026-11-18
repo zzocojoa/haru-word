@@ -1,6 +1,6 @@
 "use client";
 import type {ReactNode} from 'react';
-import { Loader2, Sparkles } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import type { SentenceFeedback } from '@/lib/sentence-feedback';
 import { sentenceFeedbackPresentation } from '@/lib/sentence-feedback-presentation';
 import { useSentenceFeedback } from './study/use-sentence-feedback';
@@ -39,9 +39,9 @@ export function SentenceFeedbackPanel({ sessionId, entryId,target, sentence, chi
     <FeedbackContextInput context={context} wordIntent disabled={busy||pending}/>
     {children}
     <section className="ai-feedback-panel" aria-label="AI 참고 의견">
-    <div className="ai-feedback-heading"><h3><Sparkles size={17} /> AI 참고 의견</h3><span className="small-note">선택</span></div>
+    <div className="ai-feedback-heading"><h3><HaruIcon name="ai-feedback" size={17} /> AI 참고 의견</h3><span className="small-note">선택</span></div>
     <button type="button" className="secondary-button" disabled={view.disabled||!context.fingerprint||(!context.note.trim()&&!recoveryPending)} onClick={check}>
-      {pending && <Loader2 size={16} className="spin" />}{!pending&&recoveryPending?'이전 AI 요청 결과 확인':view.label}
+      {pending && <HaruIcon name="loading" size={16} className="spin" />}{!pending&&recoveryPending?'이전 AI 요청 결과 확인':view.label}
     </button>
     <AiUseNotice />
     <FeedbackIssueNotice issue={error} />

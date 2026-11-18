@@ -1,6 +1,6 @@
 "use client";
 import { POS } from "@/lib/learning";
-import { ArrowRight, BookOpen, PencilLine } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import { DictionaryLinks } from "../ui";
 import { WordIpa, WordPronunciation } from '../word-pronunciation';
 import { ExpressionLine } from "../expression-line";
@@ -79,7 +79,7 @@ export function LearnStage({
       <ExpressionLine expression={expression} translation={expressionTranslation} />
       <div className="example-box">
         <div className="example-label">
-          <BookOpen size={15} />
+          <HaruIcon name="book-open" size={15} />
           <span>{content.source}</span>
         </div>
         <p lang="en">
@@ -99,7 +99,7 @@ export function LearnStage({
       </div>
       <details className="notes-details">
         <summary>
-          <PencilLine size={15} /> 표현·예문 수정하기
+          <HaruIcon name="pencil" size={15} /> 표현·예문 수정하기
         </summary>
         <ExpressionFields expression={expression} expressionTranslation={expressionTranslation}
           onExpressionChange={setExpression} onTranslationChange={setExpressionTranslation}
@@ -141,7 +141,7 @@ export function LearnStage({
         disabled={busy || !meaning.trim()}
         onClick={learn}
       >
-        뜻 저장하고 계속 <ArrowRight size={17} />
+        뜻 저장하고 계속 <HaruIcon name="arrow-right" size={17} />
       </button></div>
     </>
   );

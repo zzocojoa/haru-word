@@ -15,7 +15,7 @@ import {
   type State,
   type Word,
 } from "@/lib/learning";
-import { ArrowRight, NotebookPen, RotateCcw } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import { useMemo, useState } from "react";
 import { useVocabularyState } from '../learning/use-vocabulary-state';
 import { PendingReviews } from "../pending-reviews";
@@ -137,7 +137,7 @@ export function ReviewDesk({
                 key={kind}
               >
                 <div className="review-icon">
-                  {kind === "weekly" ? <RotateCcw /> : <NotebookPen />}
+                  <HaruIcon name={kind === "weekly" ? "calendar-repeat" : "calendar-pencil"} size={24} />
                 </div>
                 <h2>
                   {kind === "weekly"
@@ -233,7 +233,7 @@ export function ReviewDesk({
                         : latest
                           ? "다시 점검하기"
                           : "전체 점검 시작"}
-                      <ArrowRight size={17} />
+                      <HaruIcon name="arrow-right" size={17} />
                     </button>
                     {session &&
                       ids.some(
@@ -271,12 +271,15 @@ export function ReviewDesk({
                 disabled={busy || (!ids.length && !session)}
                 onClick={() => start("practice", undefined, session, mode)}
               >
-                {mode === "known"
-                  ? "아는 단어 다시 확인"
-                  : mode === "ko"
-                    ? "뜻→영어 추가 연습"
-                    : "문장 보완 연습"}{" "}
-                · {session ? "이어서" : ids.length + "개"}
+                <HaruIcon name={mode === "known" ? "repeat" : mode === "ko" ? "recall-card" : "sentence-write"} size={18} />
+                <span>
+                  {mode === "known"
+                    ? "아는 단어 다시 확인"
+                    : mode === "ko"
+                      ? "뜻→영어 추가 연습"
+                      : "문장 보완 연습"}{" "}
+                  · {session ? "이어서" : ids.length + "개"}
+                </span>
               </button>
             );
           })}

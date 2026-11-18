@@ -1,6 +1,7 @@
 "use client";
 import { exportLog } from "@/lib/learning";
-import { ArrowRight, Check, CircleDashed } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import { SessionRecords } from "../session-records";
 import { download } from "../ui";
 import { sessionCounts } from '@/lib/learning-display';
@@ -39,7 +40,7 @@ export function SessionSummary({
   return (
     <section className="learning-panel session-summary">
       <div className={saved ? "success-icon" : "summary-pending-icon"} aria-hidden="true">
-        {saved ? <Check /> : <CircleDashed />}
+        <HaruIcon name={saved ? "cloud-saved" : "unassessed"} size={24} />
       </div>
       <h2>
         {saved

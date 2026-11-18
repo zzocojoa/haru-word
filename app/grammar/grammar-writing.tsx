@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Check, Sparkles } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import type { GrammarLesson } from '@/lib/grammar/content';
 import type { GrammarProgress } from '@/lib/grammar/model';
 import type { SentenceFeedback } from '@/lib/sentence-feedback';
@@ -60,7 +60,7 @@ export function GrammarWriting({ lesson, progress,retainedFeedback,draftFeedback
     </div>
     <div className="grammar-ai-action">
       <button className="secondary-button" disabled={aiPending || !sentence.trim() || !canSave} onClick={onAi}>
-        <Sparkles size={18} aria-hidden="true" />{aiPending ? '참고 의견을 요청하고 있어요' : recoveryPending?'이전 AI 요청 결과 확인':'AI 참고 의견 요청'}
+        <HaruIcon name="ai-feedback" size={18} />{aiPending ? '참고 의견을 요청하고 있어요' : recoveryPending?'이전 AI 요청 결과 확인':'AI 참고 의견 요청'}
       </button>
       <AiUseNotice grammar />
     </div>
@@ -74,7 +74,7 @@ export function GrammarWriting({ lesson, progress,retainedFeedback,draftFeedback
     </fieldset>}
     <div className="grammar-actions">
       <button className="text-button" onClick={onExplain}>설명 다시 보기</button>
-      <button className="primary-button" disabled={!sentence.trim() || !check || !canSave || aiPending} onClick={onComplete}>수업 마치기<Check size={18} /></button>
+      <button className="primary-button" disabled={!sentence.trim() || !check || !canSave || aiPending} onClick={onComplete}>수업 마치기<HaruIcon name="check" size={18} /></button>
     </div>
   </div>;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { Cloud, Loader2 } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import type { LearningViewProps } from "./types";
 type SaveStatusProps = Pick<
   LearningViewProps,
@@ -17,7 +17,14 @@ export function SaveStatus({
       data-state={saving || loading ? "saving" : unsaved ? "error" : "saved"}
       role="status"
     >
-      {saving ? <Loader2 size={15} className="spin" /> : <Cloud size={16} />}
+      {loading || saving ? (
+        <HaruIcon name="loading" size={15} className="spin" />
+      ) : (
+        <HaruIcon
+          name={unsaved ? "cloud-unsaved" : signedIn ? "cloud-saved" : "cloud"}
+          size={16}
+        />
+      )}
       <span>
         {loading
           ? "기록 불러오는 중"

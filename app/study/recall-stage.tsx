@@ -1,7 +1,7 @@
 "use client";
 import { PartOfSpeechLabel } from '../grammar-terms';
 import { canGradeIndependently } from "@/lib/study-availability";
-import { ArrowRight } from "lucide-react";
+import { HaruIcon } from "@/components/icons/haru-icon";
 import type { StudySessionController } from "./use-study-session-controller";
 type RecallStageProps = Pick<
   StudySessionController,
@@ -78,7 +78,7 @@ export function RecallStage({
         {!revealed && (
           <div className="button-row study-actions">
             <button type="submit" disabled={busy} className="primary-button">
-              내 답 확인 <ArrowRight size={17} />
+              내 답 확인 <HaruIcon name="arrow-right" size={17} />
             </button>
             <button
               type="button"

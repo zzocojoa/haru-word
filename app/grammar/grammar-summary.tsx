@@ -1,5 +1,5 @@
 'use client';
-import { ArrowRight, Check, CheckCircle2, CircleHelp, LoaderCircle, RotateCcw } from 'lucide-react';
+import { HaruIcon } from '@/components/icons/haru-icon';
 import { answerCorrect, firstAnswerLabel, type GrammarLesson, type GrammarQuestion } from '@/lib/grammar/content';
 import { QUESTION_KEYS, type GrammarProgress } from '@/lib/grammar/model';
 import { CHECK_TEXT } from './grammar-presentation';
@@ -21,10 +21,10 @@ type Props = {
 
 export function GrammarSummary({ lesson, progress, dirty, error, canSave, date, onReview, onWriting, onWords }: Props) {
   const message = dirty ? error ? '완료 기록을 저장해 주세요.' : '완료 기록을 저장하고 있어요.' : '수업을 마쳤어요.';
-  const StatusIcon = dirty ? error ? CircleHelp : LoaderCircle : CheckCircle2;
+  const icon = dirty ? error ? 'cloud-unsaved' : 'loading' : 'check-circle';
   return <div className="grammar-stage">
     <div className="grammar-summary-heading" data-pending={dirty}>
-      <StatusIcon size={26} aria-hidden="true" />
+      <HaruIcon name={icon} size={26} />
       <div><p className="grammar-role" role="status">{message}</p><p className="small-note">수업을 마쳐도 내용을 모두 익혔다는 뜻은 아니에요.</p></div>
     </div>
     <p className="small-note">살펴보기 · {progress.contentVersion ? firstAnswerLabel(practiceForVersion(lesson.id,progress.contentVersion).observation, progress.observation) : '아직 확인 안 함 · 이전 수업 기록'}</p>
@@ -37,10 +37,10 @@ export function GrammarSummary({ lesson, progress, dirty, error, canSave, date, 
     <p className="grammar-review-recommendation">{grammarReviewStatus(lesson.id, progress, date).text || '원할 때 다른 문맥으로 확인해 보세요.'}</p>
     {progress.check !== 'appropriate' && <p className="small-note">다음 할 일 · 내 문장의 뜻과 형태를 보완해 보세요.</p>}
     <div className="grammar-actions">
-      <button className="secondary-button" disabled={!canSave || dirty} onClick={onReview}><RotateCcw size={17} />다른 3문제로 확인</button>
+      <button className="secondary-button" disabled={!canSave || dirty} onClick={onReview}><HaruIcon name="repeat" size={17} />다른 3문제로 확인</button>
       <button className="text-button" onClick={onWriting}>내 문장 보완</button>
     </div>
-    <button className="primary-button" onClick={onWords}>같은 품사의 단어 보기<ArrowRight size={18} /></button>
+    <button className="primary-button" onClick={onWords}>같은 품사의 단어 보기<HaruIcon name="arrow-right" size={18} /></button>
   </div>;
 }
 
@@ -49,7 +49,7 @@ function ResultList({ questions, answers, title }: { questions: GrammarQuestion[
     const answer = answers[QUESTION_KEYS[index]];
     const independent = !!answer && answerCorrect(question, answer.first) && answerCorrect(question, answer.latest) && !answer.helped;
     return <li key={index}>
-      <span className="grammar-result-icon" data-independent={independent} aria-hidden="true">{independent ? <Check size={18} /> : <RotateCcw size={18} />}</span>
+      <span className="grammar-result-icon" data-independent={independent} aria-hidden="true"><HaruIcon name={independent ? 'check' : 'repeat'} size={18} /></span>
       <div><span>{index + 1}. {firstAnswerLabel(question, answer)}</span><p>{answer && answerCorrect(question, answer.latest) ? '최근 답을 확인했어요.' : question.explanation}</p></div>
     </li>;
   })}</ul></div>;
