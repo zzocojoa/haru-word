@@ -30,6 +30,7 @@ module.exports = [
   "editor-save-qa.cjs",
   "expression-translation-qa.cjs",
   "familiarity-qa.cjs",
+  "familiarity-cleanup-qa.cjs",
   "familiarity-reveal-qa.cjs",
   "feedback-issue-qa.cjs",
   "feedback-safety-qa.cjs",

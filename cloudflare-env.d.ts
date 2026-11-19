@@ -7,6 +7,7 @@ declare namespace Cloudflare {
     word_image_upload_expires?: string;
     OPENAI_API_KEY?: string;
     OPENAI_ALLOWED_MODELS?: string;
+    FAMILIARITY_CLEANUP_TEST_USER_ID?: string;
     ai_feedback_enabled?: string;
     feedback_judgment_enabled?: string;
     google_api?: string;

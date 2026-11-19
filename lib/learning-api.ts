@@ -54,6 +54,14 @@ export function saveLearningState(data: SaveStateRequest) {
   }, REQUEST_TIMEOUT_MS.save, value => parseRevision(value, data.revision));
 }
 
+export function clearTestFamiliarityDraft(revision: number) {
+  return requestApi<StateRevision>('/api/state/familiarity-cleanup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ revision }),
+  }, REQUEST_TIMEOUT_MS.save, value => parseRevision(value, revision));
+}
+
 export function restoreLearningState(state: State, revision: number) {
   return requestApi<StateRevision>('/api/state/restore', {
     method: 'POST',

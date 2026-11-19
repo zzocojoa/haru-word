@@ -39,7 +39,18 @@ import { LocalDraftProvider } from './local-draft-context';
 
 const BackupDialog = lazy(() => import("./backup-dialog"));
 const StudySession = deferredView(() => import('./study-session'), feature => feature.StudySession, '학습');
-export default function LearningApp(props: { userId?: string | null; initialServerTime: number; grammarEnabled?: boolean; grammarPracticeEnabled?: boolean; grammarV3Enabled?: boolean; grammarV4Enabled?: boolean; imagePilotEnabled?: boolean }) {
+type LearningAppProps = {
+  userId?: string | null;
+  initialServerTime: number;
+  grammarEnabled?: boolean;
+  grammarPracticeEnabled?: boolean;
+  grammarV3Enabled?: boolean;
+  grammarV4Enabled?: boolean;
+  imagePilotEnabled?: boolean;
+  familiarityCleanupEnabled?: boolean;
+};
+
+export default function LearningApp(props: LearningAppProps) {
   return <LocalDraftProvider ownerId={props.userId??null}><NavigationProvider><StudyRecoveryProvider><LearningScreens {...props} /></StudyRecoveryProvider></NavigationProvider></LocalDraftProvider>;
 }
 function LearningScreens({
@@ -50,15 +61,8 @@ function LearningScreens({
   grammarV3Enabled = false,
   grammarV4Enabled = false,
   imagePilotEnabled = false,
-}: {
-  userId?: string | null;
-  initialServerTime: number;
-  grammarEnabled?: boolean;
-  grammarPracticeEnabled?: boolean;
-  grammarV3Enabled?: boolean;
-  grammarV4Enabled?: boolean;
-  imagePilotEnabled?: boolean;
-}) {
+  familiarityCleanupEnabled = false,
+}: LearningAppProps) {
   const {
     tab,
     showSession,
@@ -285,6 +289,7 @@ function LearningScreens({
                     assessmentWord={assessmentWord}
                     revealMeaning={revealMeaning}
                     markFamiliarity={markFamiliarity}
+                    onTestCleanup={familiarityCleanupEnabled ? store.cleanupTestFamiliarity : undefined}
                   />
                 ) : preparing ? (
                   <CandidatePreparation

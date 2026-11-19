@@ -6,7 +6,7 @@ const {pathToFileURL}=require('node:url');
 const {waitForWorker,accountHeaders}=require('./runtime.cjs');
 const {requireDisabledAiStatus}=require('./preflight.cjs');
 const freePort=()=>new Promise((resolve,reject)=>{const server=createServer();server.once('error',reject);server.listen(0,'127.0.0.1',()=>{const port=server.address().port;server.close(()=>resolve(port));});});
-function profileConfig(built,version,{imagePracticeEnabled=true,astryxFoundationEnabled=false,serverRoot=path.resolve('dist/server')}={}){
+function profileConfig(built,version,{imagePracticeEnabled=true,astryxFoundationEnabled=false,familiarityCleanupTestUserId,serverRoot=path.resolve('dist/server')}={}){
   if(![2,3,4].includes(version))throw Error('Unsupported QA grammar profile');
   if(typeof imagePracticeEnabled!=='boolean')throw Error('QA image practice flag must be boolean');
   if(typeof astryxFoundationEnabled!=='boolean')throw Error('QA foundation flag must be boolean');
@@ -17,12 +17,13 @@ function profileConfig(built,version,{imagePracticeEnabled=true,astryxFoundation
     r2_buckets:[{binding:'BUCKET',bucket_name:'qa-only'}],
     vars:{grammar_enabled:'true',grammar_practice_v2_enabled:'true',grammar_practice_v3_enabled:String(version>=3),grammar_practice_v4_enabled:String(version>=4),
       word_image_pilot_enabled:String(imagePracticeEnabled),astryx_foundation_enabled:String(astryxFoundationEnabled),large_backup_restore_enabled:'true',ai_feedback_enabled:'false',feedback_judgment_enabled:'true',
-      OPENAI_API_KEY:'synthetic-disabled',OPENAI_ALLOWED_MODELS:'gpt-6.1-sol,gpt-6.1-terra,gpt-6-astra'}};
+      OPENAI_API_KEY:'synthetic-disabled',OPENAI_ALLOWED_MODELS:'gpt-6.1-sol,gpt-6.1-terra,gpt-6-astra',
+      ...(familiarityCleanupTestUserId ? { FAMILIARITY_CLEANUP_TEST_USER_ID: familiarityCleanupTestUserId } : {})}};
 }
-async function grammarWorker(version,{signal,imagePracticeEnabled=true,astryxFoundationEnabled=false,serverRoot=path.resolve('dist/server')}={}){
+async function grammarWorker(version,{signal,serverRoot=path.resolve('dist/server'),...profileOptions}={}){
   signal?.throwIfAborted();
   const root=fs.mkdtempSync(path.resolve('work','grammar-profile-v'+version+'-'));
-  const configPath=path.join(root,'wrangler.json'),config=profileConfig(JSON.parse(fs.readFileSync(path.join(serverRoot,'wrangler.json'),'utf8')),version,{imagePracticeEnabled,astryxFoundationEnabled,serverRoot});
+  const configPath=path.join(root,'wrangler.json'),config=profileConfig(JSON.parse(fs.readFileSync(path.join(serverRoot,'wrangler.json'),'utf8')),version,{...profileOptions,serverRoot});
   fs.writeFileSync(configPath,JSON.stringify(config,null,2));
   const args=['--import',pathToFileURL(path.resolve('scripts/sites-env.mjs')).href,path.resolve('node_modules/wrangler/bin/wrangler.js')];
   for(const file of fs.readdirSync('drizzle').filter(name=>name.endsWith('.sql')).sort())execFileSync(process.execPath,[...args,'d1','execute','DB','--local','--config',configPath,'--persist-to',root,'--file',path.resolve('drizzle',file)],{windowsHide:true,stdio:'pipe',timeout:30000});
