@@ -520,13 +520,8 @@
   font-weight: 400;
   margin-top: 3px;
 }
-:is(.familiarity-prompt):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  font-size: 0.8125rem;
-  color: var(--ink);
-  margin: 22px 0 var(--space-3);
+:is(.familiarity-card .familiarity-actions):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
+  margin-top: var(--space-3);
 }
 :is(.familiarity-comparison .eyebrow):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   font-size: .75rem;
@@ -546,11 +541,6 @@
 :is(.familiarity-card>.notice):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   margin: 18px 0;
   font-size: 0.8125rem;
-}
-@media (max-width:560px) {
-  :is(.familiarity-prompt):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
-    font-size: 0.75rem;
-  }
 }
 :is(.ai-feedback-panel):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   margin: 20px 0;

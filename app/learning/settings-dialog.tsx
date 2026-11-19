@@ -151,7 +151,7 @@ export function SettingsDialog({
             onChange={value=>{if(reviewDayTrigger.current) rememberSettingsFocus(reviewDayTrigger.current);return save({...state,settings:{...state.settings,reviewDay:Number(value)}});}}
             options={['일','월','화','수','목','금','토'].map((day,i)=>({value:String(i),label:day+'요일'}))}/>
         </section>
-        <HelpDetails title="목표 수를 바꾸면?"><HaruParagraph>1~{MAX_DAILY_GOAL}개 · 기본 3개. 목표를 늘리면 회차를 마친 뒤 추가해요. 줄여도 기존 배정·기록은 유지해요.</HaruParagraph><HaruParagraph>후보가 부족하면 다른 쪽으로 채워요. 신규 쉬기 중에는 복습만 배정해요.</HaruParagraph></HelpDetails>
+        <HelpDetails title="목표 수를 바꾸면?"><HaruParagraph>1~{MAX_DAILY_GOAL}개 · 기본 3개. 목표를 늘리면 회차 후 추가해요. 줄여도 기존 배정·기록은 유지돼요. 후보가 부족하면 다른 쪽으로 채워요.</HaruParagraph></HelpDetails>
         <section className="settings-section" aria-label="친숙도 다시 확인"><HaruHeading level={3}>친숙도 다시 확인</HaruHeading><HaruButton label={["친숙도 다시 확인하기"].join('')} variant="secondary" icon={<HaruIcon name="eye" size={18} />}
           className="haru-migrated secondary-button"
           disabled={busy}

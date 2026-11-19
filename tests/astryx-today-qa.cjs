@@ -11,11 +11,31 @@ fs.mkdirSync(out,{recursive:true});
  await p.goto(base);await p.getByText('저장됨',{exact:true}).waitFor();
  const capture=async(view,scope)=>{for(const width of [390,1440]){await p.setViewportSize({width,height:900});await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));const styles=await p.locator(scope).evaluate(root=>{const selectors=['h2','h3','p','button','input','.daily-metrics','.familiarity-card','.progress-note'];return selectors.flatMap(selector=>[...root.querySelectorAll(selector)].filter(e=>e.getClientRects().length).map((e,index)=>{const visual=e.matches('input')?(e.closest('.haru-field-control')??e):e,s=getComputedStyle(visual);return{selector,index,text:e.textContent?.trim(),font:s.fontSize,weight:s.fontWeight,line:s.lineHeight,color:s.color,background:s.backgroundColor,padding:s.padding,margin:s.margin,border:s.border,radius:s.borderRadius,display:s.display,height:Math.round(visual.getBoundingClientRect().height*100)/100};}));});snapshots.push({view,width,styles});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await p.screenshot({path:path.join(out,view+'-'+width+'.png'),fullPage:true});}await p.setViewportSize({width:390,height:900});};
  const before=await get();await capture('today','.workspace');await p.getByRole('button',{name:/남은 단어 \d/}).click();await p.getByRole('button',{name:/전체 \d/}).click();assert.deepEqual(await get(),before);
+ if(!baseline){
+  const home=p.locator('.home-panel');
+  assert.equal(await home.locator('.home-title h2').innerText(),'오늘 배정');
+  assert.equal(await home.locator('.daily-metrics').getByText('오늘의 목표',{exact:true}).count(),1);
+  assert.equal(await home.locator('.daily-metrics').getByText('A1',{exact:true}).count(),0);
+  assert.equal(await p.getByRole('button',{name:/친숙도 확인/}).count(),1);
+ }
  await p.getByRole('button',{name:/학습 방식·출처/}).click();await p.getByRole('dialog').waitFor();await p.getByRole('heading',{name:'학습 방식과 자료 출처',exact:true}).waitFor();await capture('source','.source-dialog');
- assert.match(await p.locator('.source-dialog').innerText(),/3,809.*항목/s);assert.equal(await p.locator('.source-dialog a[href="/sources/oxford-source.pdf"]').count(),1);assert.equal(await p.locator('.source-dialog a[href="/sources/american-ipa.json"]').count(),1);assert.deepEqual(await get(),before);await p.getByRole('button',{name:'닫기',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});checks.push('today filters and source reading preserve full state/revision, source links and next action');
+ assert.match(await p.locator('.source-dialog').innerText(),/3,809.*항목/s);assert.equal(await p.locator('.source-dialog a[href="/sources/oxford-source.pdf"]').count(),1);assert.equal(await p.locator('.source-dialog a[href="/sources/american-ipa.json"]').count(),1);
+ if(!baseline){
+  const allocation=p.getByText('새 단어·복습 배정 기준',{exact:true});
+  const rule=p.getByText(/후보가 부족하면 다른 쪽으로 채우며/);
+  assert.equal(await rule.isVisible(),false);
+  await allocation.focus();await p.keyboard.press('Enter');
+  assert.equal(await rule.isVisible(),true);
+  assert.match(await rule.innerText(),/목표가 1개.*새 단어 쉬기/);
+ }
+ assert.deepEqual(await get(),before);await p.getByRole('button',{name:'닫기',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});checks.push('today filters and source reading preserve full state/revision, source links and next action');
  await p.getByRole('button',{name:'단어 20개 친숙도 확인',exact:true}).click();await p.getByLabel('내가 떠올린 뜻',{exact:false}).waitFor();await p.getByText('저장됨',{exact:true}).waitFor();await capture('familiarity-hidden','.learning-panel');
- if(!baseline){assert.equal(await p.locator('.astryx-card.haru-panel.learning-panel').count(),1);assert.ok(await p.locator('.learning-panel .haru-heading').count());assert.equal(await p.getByLabel('내가 떠올린 뜻',{exact:false}).getAttribute('maxlength'),'2000');assert.equal(await p.locator('.familiarity-card .word-stage h3').getAttribute('lang'),'en');assert.ok((await p.getByRole('button',{name:/뜻을 알아요/}).boundingBox()).height>=44);}
+ if(!baseline){assert.equal(await p.locator('.astryx-card.haru-panel.learning-panel').count(),1);assert.ok(await p.locator('.learning-panel .haru-heading').count());assert.equal(await p.getByLabel('내가 떠올린 뜻',{exact:false}).getAttribute('maxlength'),'2000');assert.equal(await p.locator('.familiarity-card .word-stage h3').getAttribute('lang'),'en');assert.ok((await p.getByRole('button',{name:/뜻을 알아요/}).boundingBox()).height>=44);
+  assert.equal(await p.getByText('표시를 고르면 뜻을 볼 수 있어요.',{exact:true}).count(),1);
+  assert.equal(await p.locator('.familiarity-prompt').count(),0);
+ }
  await p.getByLabel('내가 떠올린 뜻',{exact:false}).fill('합성 비교용 뜻');await p.getByRole('button',{name:'뜻을 알아요',exact:false}).click();await p.locator('.reference-meaning').waitFor();await p.getByText('저장됨',{exact:true}).waitFor();await capture('familiarity-revealed','.learning-panel');
+ if(!baseline)assert.equal(await p.getByText('표시를 고르면 뜻을 볼 수 있어요.',{exact:true}).count(),0);
  const revealed=await get(),ids=revealed.state.settings.assessments.A1.ids,id=ids[0];assert.equal(revealed.state.progress[id].familiarityCheck.answer,'합성 비교용 뜻');assert.equal(revealed.state.progress[id].en,undefined);await p.getByRole('button',{name:'뜻이 헷갈려요',exact:true}).click();await p.getByText('저장됨',{exact:true}).waitFor();const after=await get();assert.equal(after.state.progress[id].familiarityCheck.final,'uncertain');assert.equal(after.state.progress[id].en,undefined);assert.equal(after.state.settings.assessments.A1.index,1);assert.equal(ai,0);assert.deepEqual(errors,[]);checks.push('first guess/reveal/confirmation ordering stays separate from recall outcomes and AI');
  fs.writeFileSync(path.join(out,'result.json'),JSON.stringify({passed:true,baseline,checks,ai,errors,snapshots},null,2));console.log(JSON.stringify({passed:true,baseline,checks}));
  }finally{await closeBrowser(browser);}})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -45,7 +45,14 @@ fs.mkdirSync(out,{recursive:true});
    if(!baseline){
     assert.equal(await p.locator(scope+'.astryx-card').count(),1);
     assert.ok(await p.locator(scope+' .astryx-button').count());
-    if(scenario.stage===undefined){await p.getByRole('group',{name:'수업 표시'}).getByRole('button',{name:/^이어 하기\s*0$/}).click();assert.deepEqual(await get(),before);}
+    if(scenario.stage===undefined){
+     assert.equal(await p.locator('.grammar-catalog-heading .small-note').innerText(),'수업당 약 3~5분');
+     assert.match(await p.locator('.grammar-catalog-count').innerText(),/0\/15/);
+     assert.equal(await p.locator('.grammar-filter-result').innerText(),'하루 목표와 별도');
+     await p.getByRole('group',{name:'수업 표시'}).getByRole('button',{name:/^이어 하기\s*0$/}).click();
+     assert.match(await p.locator('.grammar-filter-result').innerText(),/이어 할 수업 0개/);
+     assert.deepEqual(await get(),before);
+    }
     if(scenario.view.startsWith('writing')){
      const field=p.getByRole('textbox',{name:'내 문장',exact:true});assert.equal(await field.getAttribute('maxlength'),'2000');assert.equal(await field.getAttribute('rows'),'4');
      assert.equal(await field.getAttribute('aria-describedby'),'grammar-sentence-count');

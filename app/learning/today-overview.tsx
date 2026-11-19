@@ -81,6 +81,15 @@ export function TodayOverview({
   const wordById = useMemo(() => new Map(words.map(w => [w.id, w])), [words]);
   const filteredIds = visibleIds.filter(id => filter === 'all' || statuses[id].recordStatus !== 'recorded');
   const additions = countDailyOrigins(suggestions, origins.byId);
+  const assessment = state.settings.assessments[state.settings.level];
+  const assessmentAction = assessment && !assessment.completed
+    ? "친숙도 확인 이어서"
+    : "단어 20개 친숙도 확인";
+  const primaryAction = unfinished
+    ? "중단한 학습 이어서"
+    : initialAssessment
+      ? assessmentAction
+      : suggestions.length ? "오늘의 학습 시작" : "지금 배정할 단어가 없어요";
   return (
     <HaruPanel className="learning-panel home-panel">
       <div className="panel-top">
@@ -100,13 +109,13 @@ export function TodayOverview({
             ? "오늘 회차를 마쳤어요"
             : unfinished
               ? "남은 단어를 이어서"
-              : "오늘 목표 " + state.settings.dailyGoal + "개"}
+              : "오늘 배정"}
         </HaruHeading>
-        {(!finished || remaining > 0) && <HaruParagraph className="muted">
+        {((!finished && !unfinished) || remaining > 0) && <HaruParagraph className="muted">
           {finished
             ? `목표까지 ${remaining}개 더 배울 수 있어요.`
             : unfinished
-              ? `학습 기록함 ${checked}/${assignedIds.length}개${remaining ? ` · 회차 후 ${remaining}개 추가 가능` : ''}`
+              ? `회차 후 ${remaining}개 추가 가능`
               : dailyAllocationRule(state.settings.dailyGoal, state.settings.newWordsPaused)}
         </HaruParagraph>}
       </div>
@@ -124,20 +133,24 @@ export function TodayOverview({
             {checked}<small>/ {visibleIds.length}개</small>
           </b>
         </div>
-        <div>
-          <span>{finished && !remaining ? "다음 학습 범위" : "학습 범위"}</span>
-          <b>
-            {state.settings.level}
-            <small>{assessed ? "친숙도 확인함" : "선택한 수준"}</small>
-          </b>
-        </div>
+        {finished && !remaining ? (
+          <div>
+            <span>다음 학습 범위</span>
+            <b>{state.settings.level}<small>{assessed ? "친숙도 확인함" : "친숙도 확인 전"}</small></b>
+          </div>
+        ) : (
+          <div>
+            <span>친숙도</span>
+            <b>{assessed ? "확인함" : "확인 전"}</b>
+          </div>
+        )}
       </div>
       {(monthlyRepair.cleared > 0 || monthlyRepair.replacements.length > 0 || monthlyRepair.unavailable > 0) && (
-        <section className="monthly-repair" aria-label="중복 배정 바로잡기">
-          <HaruHeading level={3}>완료한 단어가 다시 배정되었나요?</HaruHeading>
-          <HaruParagraph>이전 월말 점검에서 확인하지 않은 단어가 일일 복습에 잘못 포함됐어요.</HaruParagraph>
+        <section className="monthly-repair" aria-labelledby="monthly-repair-heading">
+          <HaruHeading level={3} id="monthly-repair-heading">중복 배정 바로잡기</HaruHeading>
+          <HaruParagraph>이전 월말 미점검 단어가 일일 복습에 잘못 들어갔어요.</HaruParagraph>
           <HaruParagraph>잘못된 복습 표시 {monthlyRepair.cleared}건 · 오늘 교체할 단어 {monthlyRepair.replacements.length}개</HaruParagraph>
-          <HaruParagraph>과거 성적과 월말 점검은 유지하고, 오늘 답·문장·수정 내용을 저장하지 않은 단어만 교체해요.</HaruParagraph>
+          <HaruParagraph>오늘 답·문장·수정 내용을 저장하지 않은 단어만 교체해요. 과거 성적과 월말 점검은 유지돼요.</HaruParagraph>
           {monthlyRepair.unavailable > 0 && <HaruParagraph>대체 후보가 부족한 {monthlyRepair.unavailable}개는 유지해요. 새 단어 쉬기 설정이나 학습 수준을 확인해 주세요.</HaruParagraph>}
           <HaruButton label={["오늘 배정 바로잡기"].join('')} variant={'secondary'} className="haru-migrated secondary-button full" disabled={busy || !monthlyRepair.changed} onClick={correctMonthlyCarryover}>오늘 배정 바로잡기</HaruButton>
         </section>
@@ -190,27 +203,14 @@ export function TodayOverview({
           </HaruButton>
         </div>
       ) : (
-        <HaruButton label={[(unfinished
-            ? "중단한 학습 이어서"
-            : initialAssessment
-              ? "단어 20개 친숙도 확인"
-              : !suggestions.length
-                ? "지금 배정할 단어가 없어요"
-                : "오늘의 학습 시작")].join('')} variant={'primary'}
+        <HaruButton label={primaryAction} variant="primary"
           className="haru-migrated primary-button full"
           disabled={
             busy || (!unfinished && !initialAssessment && !suggestions.length)
           }
           onClick={() => start("daily")}
          endContent={<HaruIcon name="arrow-right" size={17} />}>
-          {unfinished
-            ? "중단한 학습 이어서"
-            : initialAssessment
-              ? "단어 20개 친숙도 확인"
-              : !suggestions.length
-                ? "지금 배정할 단어가 없어요"
-                : "오늘의 학습 시작"}
-
+          {primaryAction}
         </HaruButton>
       )}
       {imagePractice}

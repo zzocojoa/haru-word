@@ -167,7 +167,8 @@ async function checkLayouts(page, dialog, label) {
         assert.equal(imageRequests.length, 0);
       } else {
         assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
-        assert.equal(await dialog.getByText('19개 · 성적은 기록하지 않아요', { exact: true }).count(), 1);
+        assert.equal(await dialog.getByText('19개', { exact: true }).count(), 1);
+        assert.equal(await dialog.getByText(/성적은 기록하지 않아요/).count(), 1);
         assert.equal(imageRequests.includes(catalog.entries[0].url), false);
       }
       checks.push('different selected meanings excluded; actual count/empty state preserved');
@@ -374,7 +375,8 @@ async function checkLayouts(page, dialog, label) {
     if (stage === 'full') {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
       const dialog = page.getByRole('dialog');
-      await dialog.getByText('3,809개 · 성적은 기록하지 않아요', { exact: true }).waitFor();
+      await dialog.getByText('3,809개', { exact: true }).waitFor();
+      assert.equal(await dialog.getByText(/성적은 기록하지 않아요/).count(), 1);
       await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled):not([aria-disabled=true])') !== null);
       assert.equal(await dialog.getByText('1 / 3809', { exact: true }).count(), 1);
       assert.deepEqual([...new Set(imageRequests)], allEntries.slice(0, 2).map(e => e.url));

@@ -93,6 +93,7 @@ export function LearningLog({
         <RecordActions state={state} words={words} date={date} now={now} busy={busy} onRestoreOpen={onRestoreOpen}/>
       </div>
       {journalFilter}
+      {list.length > 0 && <HaruParagraph className="small-note">날짜 · 한국 시간</HaruParagraph>}
       {!list.length ? (
         <div className="empty-state">
           <HaruIcon name="record-empty" size={32} />
@@ -162,9 +163,6 @@ export function LearningLog({
           이전 기록 더 보기
         </HaruButton>
       )}
-      <HaruParagraph className="small-note">
-        아직 확인하지 않은 항목은 성공률에서 제외해요. 날짜는 한국 시간 기준이에요.
-      </HaruParagraph>
     </HaruPanel>
   );
 }

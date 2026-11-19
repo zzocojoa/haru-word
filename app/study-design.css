@@ -1291,13 +1291,8 @@ select {
   font-weight: 400;
   margin-top: 3px;
 }
-.familiarity-prompt {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  font-size: 0.8125rem;
-  color: var(--ink);
-  margin: 22px 0 var(--space-3);
+.familiarity-card .familiarity-actions {
+  margin-top: var(--space-3);
 }
 .familiarity-comparison {
   display: grid;
@@ -1346,9 +1341,6 @@ select {
   .familiarity-comparison .revealed-meaning {
     border-left: 0;
     border-top: 1px solid var(--border);
-  }
-  .familiarity-prompt {
-    font-size: 0.75rem;
   }
 }
 .ai-feedback-panel {

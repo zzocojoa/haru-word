@@ -33,7 +33,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       await transmission.waitFor();
       assert.equal(await transmission.count(), 1);
       assert.equal(await transmission.isVisible(), true);
-      assert.equal(await transmission.textContent(), `요청하면 문장과 ${domain === 'grammar' ? '수업 목표를' : '단어·뜻을'} 선택한 OpenAI 모델에 보내요. API 데이터는 기본적으로 모델 학습에 쓰이지 않지만 보관·안전 점검 정책이 적용돼요. 개인정보는 넣지 마세요.`);
+      assert.equal(await transmission.textContent(), `요청하면 ${domain === 'grammar' ? '문장·수업 목표와 추가한 문맥을' : '한국어·영어 문장과 단어·뜻을'} 선택한 OpenAI 모델에 보내요. API 데이터는 기본적으로 모델 학습에 쓰이지 않지만 보관·안전 점검 정책이 적용돼요. 개인정보는 넣지 마세요.`);
       assert.equal(await transmission.evaluate(el => el.previousElementSibling?.tagName === 'BUTTON' && el.previousElementSibling.textContent.includes('AI 참고 의견 요청') && !el.closest('details')), true, 'transmission notice directly follows the request button without a disclosure');
       checks.push(domain + ': transmission/privacy notice is visible exactly once directly below the request button before any AI call');
       if(domain==='sentence')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('나는 집에 도착해요.');

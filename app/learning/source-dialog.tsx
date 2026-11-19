@@ -70,7 +70,7 @@ export function SourceDialog({
         <HaruParagraph>Wiktionary contributors의 자료를 선별하고 표기를 정리했어요. 해당 파생 부분은 CC BY-SA 4.0으로 제공해요. 기기 음성은 표시된 IPA와 다를 수 있어요.</HaruParagraph>
         <a className="source-link" href="/sources/american-ipa.json" target="_blank" rel="noreferrer"><HaruIcon name="pronunciation-document" size={20} /><span>발음 데이터·출처·라이선스</span><HaruIcon name="external-link" size={20} /></a>
         <HaruHeading level={3}>기록과 점검</HaruHeading>
-        <HaruParagraph>하루 목표는 새 단어를 절반 이상, 나머지는 복습으로 채워요. 목표가 1개면 학습한 날마다 번갈아 골라요. 후보가 부족하면 다른 쪽으로 채우며, ‘새 단어 쉬기’ 중에는 복습만 해요.</HaruParagraph>
+        <details className="notes-details"><summary>새 단어·복습 배정 기준</summary><HaruParagraph>하루 목표는 새 단어를 절반 이상, 나머지는 복습으로 채워요. 목표가 1개면 학습한 날마다 번갈아 골라요. 후보가 부족하면 다른 쪽으로 채우며, ‘새 단어 쉬기’ 중에는 복습만 해요.</HaruParagraph></details>
         <HaruParagraph>
           친숙도는 뜻이 얼마나 익숙한지 확인하는 자기평가이며 정식 수준 판정은 아니에요. 영어→뜻, 뜻→영어, 문장 사용은 따로 기록해요. 아직 확인하지 않은 항목은 성공·실패에 넣지 않아요. 주간에는 목표 단어 전체, 월말에는 배운 단어 전체를 확인해요.
         </HaruParagraph>

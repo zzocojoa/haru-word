@@ -17,7 +17,7 @@ export function FeedbackContextInput({context,disabled=false,wordIntent=false}:{
   const kindField=useMemo(()=><HaruSelector label="문장의 형식" disabled={disabled} value={context.kind} onChange={changeKind} options={FORMAT_OPTIONS}/>,[disabled,context.kind,changeKind]);
   const note=<>
     {noteField}
-    <p id={id+'-help'} className="small-note">{wordIntent?'먼저 말하고 싶은 뜻을 한국어로 쓰고, 아래 칸에 영어로 써 주세요. AI 검사 때 두 문장을 함께 전달해요.':'여기에 쓴 내용은 요청 버튼을 누를 때 AI에 함께 전달해요. 보완할 점은 자동으로 전달하지 않아요.'} {context.note.length}/500자</p>
+    <p id={id+'-help'} className="small-note">{wordIntent?'한국어로 먼저 쓰고, 오늘 단어를 넣어 영어로 써 보세요.':'여기에 쓴 내용은 요청 버튼을 누를 때 AI에 함께 전달해요. 보완할 점은 자동으로 전달하지 않아요.'} {context.note.length}/500자</p>
     <DraftRecoveryNotice input={context.persistent} labels={{sentence:label,frame:'문장의 형식'}} format={(key,value)=>key==='frame'?FEEDBACK_CONTEXT_KIND_TEXT[(Array.isArray(value)?value[0]:'sentence') as FeedbackContextKind]??'일반 문장':undefined}/>
   </>;
   return <>

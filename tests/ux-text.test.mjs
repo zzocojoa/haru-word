@@ -19,7 +19,17 @@ const { RecallStage } = await import('../work/ux-text-unit/study/recall-stage.mj
 const html = (component, props) => render(createElement(component, props));
 
 test('both AI notices disclose selected OpenAI transmission and qualified privacy without legacy fallback',()=>{
- for(const grammar of [false,true]){const result=html(AiUseNotice,{grammar});assert.ok(result.includes(grammar?'문장과 수업 목표를':'문장과 단어·뜻을'));for(const text of ['선택한 OpenAI 모델에 보내요.','개인정보는 넣지 마세요.','기본적으로 모델 학습에 쓰이지 않지만','보관·안전 점검 정책'])assert.ok(result.includes(text));assert.doesNotMatch(result,/<details|수업 목표을|Google|Groq|제로 보관/);}
+ for(const grammar of [false,true]){
+  const result=html(AiUseNotice,{grammar});
+  const [notice, retention]=result.split('<details');
+  assert.match(notice,grammar?/문장·수업 목표와 추가한 문맥을/:/한국어·영어 문장과 단어·뜻을/);
+  for(const text of ['선택한 OpenAI 모델에 보내요.','개인정보는 넣지 마세요.','기본적으로 모델 학습에 쓰이지 않지만','보관·안전 점검 정책'])assert.ok(notice.includes(text));
+  assert.match(retention,/24시간.*7일간.*만료한 내용은 다음 접근 때 삭제/);
+  assert.doesNotMatch(result,/Google|Groq|제로 보관/);
+  const recovery=html(AiUseNotice,{grammar,recovery:true});
+  assert.match(recovery,/지난 요청의 결과만 확인.*복구 기간이 끝나면 다음 요청에 사용량/);
+  assert.doesNotMatch(recovery,/OpenAI 모델에 보내요/);
+ }
 });
 
 test('position errors distinguish an unread cursor from an unconfirmed save without claiming a failed write', () => {

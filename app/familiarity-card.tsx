@@ -3,7 +3,7 @@ import {HaruPanel,HaruHeading,HaruParagraph} from './haru-content';
 import {HaruButton,HaruTextInput} from './haru-controls';
 
 import {useEffect,useRef,useState} from 'react';
-import {ArrowRight,Eye,Check} from 'lucide-react';
+import {ArrowRight,Check} from 'lucide-react';
 import {FAMILIARITY_TEXT,POS,type Familiarity,type FamiliarityCheck,type Word} from '@/lib/learning';
 import {DictionaryLinks} from './ui';
 
@@ -19,8 +19,7 @@ export function FamiliarityCard({word,check,busy,onReveal,onConfirm}:Props){
   <div className="word-stage"><HaruHeading level={3} ref={heading} tabIndex={-1} lang="en">{word.word}</HaruHeading><span className="muted">{POS[word.pos]} · {word.personal?'개인 추가':word.level}</span></div>
   {!pending?<>
    <label htmlFor="familiarity-answer">내가 떠올린 뜻 <span>선택 입력</span></label>
-   <HaruTextInput label="내가 떠올린 뜻" isLabelHidden aria-label="내가 떠올린 뜻 선택 입력" id="familiarity-answer" value={answer} maxLength={2000} onChange={e=>setAnswer(e.target.value)} placeholder="비교할 수 있도록 짧게 적어 보세요" autoComplete="off"/>
-   <HaruParagraph className="familiarity-prompt"><Eye size={16}/> 뜻을 떠올린 뒤 아래에서 골라 주세요.</HaruParagraph>
+   <HaruTextInput label="내가 떠올린 뜻" isLabelHidden aria-label="내가 떠올린 뜻 선택 입력" id="familiarity-answer" value={answer} maxLength={2000} onChange={e=>setAnswer(e.target.value)} autoComplete="off"/>
    <div className="familiarity-actions">{(['known','uncertain','new']as const).map((f,i)=><HaruButton label={[(i===0?'✓✓':i===1?'✓':'?'),(FAMILIARITY_TEXT[f])].join('')} variant={'secondary'} className="haru-migrated haru-native-action" key={f} disabled={busy} onClick={()=>onReveal(f,answer)}><span className="mark-symbol">{i===0?'✓✓':i===1?'✓':'?'}</span>{FAMILIARITY_TEXT[f]}</HaruButton>)}</div>
   </>:<>
    <section className="familiarity-comparison" aria-label="뜻 비교" aria-live="polite">

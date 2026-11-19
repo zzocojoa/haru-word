@@ -36,11 +36,11 @@ export function RecallStage({
 }: RecallStageProps) {
   return (
     <>
-      <HaruParagraph className="muted">
+      {!revealed && <HaruParagraph className="muted">
         {s.stage === "en"
-          ? "영어를 보고 뜻을 먼저 써 보세요."
-          : "뜻을 보고 영어 단어를 먼저 써 보세요."}
-      </HaruParagraph>
+          ? "한국어 뜻을 먼저 써 보세요."
+          : "영어 단어를 먼저 써 보세요."}
+      </HaruParagraph>}
       <div
         className={
           "word-stage recall " + (s.stage === "ko" ? "korean-cue" : "")
@@ -68,11 +68,6 @@ export function RecallStage({
           value={answer}
           maxLength={2000}
           onChange={(e) => setAnswer(e.target.value)}
-          placeholder={
-            s.stage === "en"
-              ? "떠오르는 뜻을 적어 주세요"
-              : "영어 단어를 적어 주세요"
-          }
           autoComplete="off"
           autoCapitalize="none"
           hasSpellCheck={false} />

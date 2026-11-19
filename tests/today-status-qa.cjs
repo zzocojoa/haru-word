@@ -45,7 +45,9 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     assert.match(await rows.nth(2).innerText(), /재학습 필요/);
     assert.match(await rows.nth(2).innerText(), /문장 보완 필요/);
     assert.equal(await rows.getByText('이월', { exact: true }).count(), 0);
-    await home.getByText(/학습 기록함 2\/3개/).waitFor();
+    const recordedMetric = home.locator('.daily-metrics > div').filter({ hasText: '학습 기록함' });
+    assert.match(await recordedMetric.innerText(), /학습 기록함\s+2\s*\/\s*3개/);
+    assert.doesNotMatch(await home.locator('.home-title').innerText(), /학습 기록함/);
     await home.getByText('오늘 배정 기준',{exact:true}).click();await home.getByText(/월말 점검이 남아도 다음 날 학습할 수/).waitFor();
     await p.getByRole('region', { name: '이어서 할 점검', exact: true }).getByText('전체 3개 · 미점검 3개', { exact: true }).waitFor();
     assert.deepEqual(await get(c), before);
@@ -70,6 +72,7 @@ const makeSession = kind => { const id = crypto.randomUUID(); return { id, kind,
     await put({ revision: updated.revision, settings: { ...updated.state.settings, newWordsPaused: true }, progress: {}, sessions: { [daily.id]: daily } });
     await p.reload(); await saved(p);
     await p.getByRole('heading', { name: '오늘 회차를 마쳤어요', exact: true }).waitFor();
+    await home.locator('.daily-metrics').getByText('다음 학습 범위', { exact: true }).waitFor();
     assert.equal(await rows.getByText('학습 기록함', { exact: true }).count(), 3);
     assert.equal(await rows.getByText('월말 점검 대기', { exact: true }).count(), 3);
     await home.getByText('새 단어 쉬기 중 · 남은 학습과 복습만 해요.', { exact: true }).waitFor();

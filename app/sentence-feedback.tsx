@@ -38,15 +38,17 @@ export function SentenceFeedbackPanel({ sessionId, entryId,target, sentence, chi
   const feedback=currentFeedback([storedFeedback,draftFeedback,retainedFeedback],sentence,modelId,context.fingerprint);
   const view = sentenceFeedbackPresentation({ sentence, feedback, busy, pending });
   const current=!!feedback&&feedbackMatchesContext(feedback,sentence,modelId,context.fingerprint);
+  const checkingPrevious = !pending && recoveryPending;
+  const actionLabel = checkingPrevious ? '이전 AI 요청 결과 확인' : view.label;
   return <>
     <FeedbackContextInput context={context} wordIntent disabled={busy||pending}/>
     {children}
     <HaruPanel role="region" className="ai-feedback-panel" aria-label="AI 참고 의견">
     <div className="ai-feedback-heading"><HaruHeading level={3}><HaruIcon name="ai-feedback" size={17} /> AI 참고 의견</HaruHeading><span className="small-note">선택</span></div>
-    <HaruButton label={[(!pending&&recoveryPending?'이전 AI 요청 결과 확인':view.label)].join('')} variant="secondary" icon={pending && <HaruIcon name="loading" size={16} className="spin" />} type="button" className="haru-migrated secondary-button" disabled={view.disabled||!context.fingerprint||(!context.note.trim()&&!recoveryPending)} onClick={check}>
-      {!pending&&recoveryPending?'이전 AI 요청 결과 확인':view.label}
+    <HaruButton label={actionLabel} variant="secondary" icon={pending && <HaruIcon name="loading" size={16} className="spin" />} type="button" className="haru-migrated secondary-button" disabled={view.disabled||!context.fingerprint||(!context.note.trim()&&!recoveryPending)} onClick={check}>
+      {actionLabel}
     </HaruButton>
-    <AiUseNotice />
+    <AiUseNotice recovery={checkingPrevious} />
     <FeedbackIssueNotice issue={error} />
     {feedback && <div aria-live="polite">
       {!current && <HaruParagraph className="notice">이전 문장·목표·모델·문맥에 대한 의견이거나 이전 버전의 기록이에요. 현재 조건으로 다시 요청해 주세요.</HaruParagraph>}

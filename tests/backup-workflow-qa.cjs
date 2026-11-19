@@ -79,7 +79,12 @@ const out=process.env.ASTRYX_QA_OUTPUT?require('node:path').join(process.env.AST
  // A later save between commit and reload must win over the uploaded snapshot.
  await open();await select();await safety();await prepare();const extra=words.find(w=>!state.progress[w.id]).id;
  await p.route('**/api/state/restore/jobs/*/commit',async route=>{const response=await route.fetch();assert.equal(response.status(),200);const now=await get();await put({revision:now.revision,progress:{[extra]:{notes:'saved after commit'}},sessions:{}});await route.fulfill({response});});
- await p.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click();await p.getByRole('heading',{name:'백업을 복원했어요.',exact:true}).waitFor();assert.match(await p.getByRole('dialog').innerText(),/21개 단어 기록/);assert.equal((await get()).state.progress[extra].notes,'saved after commit');assert.deepEqual((await get()).state.sessions,state.sessions);assert.match(await p.locator('[data-backup-step]').getAttribute('data-backup-step'),/6\/6/);assert.equal(await p.locator('[data-backup-step]').innerText(),'복원 완료');
+ const progressStatus=await p.locator('[data-backup-step]').elementHandle();
+ await p.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click();await p.getByRole('heading',{name:'백업을 복원했어요.',exact:true}).waitFor();assert.match(await p.getByRole('dialog').innerText(),/21개 단어 기록/);assert.equal((await get()).state.progress[extra].notes,'saved after commit');assert.deepEqual((await get()).state.sessions,state.sessions);assert.match(await p.locator('[data-backup-step]').getAttribute('data-backup-step'),/6\/6/);
+ const restoreStatus=p.getByRole('dialog').getByRole('status').filter({hasText:/복원 완료|회차를 복원했어요/});
+ assert.equal(await restoreStatus.count(),1);
+ assert.equal(await restoreStatus.evaluate((current,previous)=>current===previous,progressStatus),true);
+ assert.match(await restoreStatus.innerText(),/^21개 단어 기록 · \d+개 회차 복원 완료$/);
  checks.push('post-commit saves are included in the reloaded state and success counts; sentences, scores, settings and incomplete drafts survive');
  await p.screenshot({path:out+'/complete-mobile.png'});assert.deepEqual(errors,[]);const result={passed:true,checks,errors};fs.writeFileSync(out+'/result.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
  }finally{await closeBrowser(browser);}
