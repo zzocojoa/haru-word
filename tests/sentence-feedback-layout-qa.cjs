@@ -1,4 +1,4 @@
-const { currentAiHeaders: aiHeaders, currentOpenaiFeedback, feedbackReceipt } = require('./qa/openai-fixture.cjs');
+const { currentAiHeaders: aiHeaders, currentOpenaiFeedback, currentValidationVersion, feedbackReceipt } = require('./qa/openai-fixture.cjs');
 // Real application routes and persistence; synthetic learners and fixed AI results only.
 // Structures remain stored. Rechecks require an explicit click; editing retains
 // the prior proposal as read-only comparison rather than a fresh assessment.
@@ -36,7 +36,21 @@ fs.mkdirSync(out,{recursive:true});
     page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base);await saved();
     if(kind==='daily')await page.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();
     else {await page.getByRole('tab',{name:'단어장',exact:true}).click();await page.getByRole('tab',{name:'품사와 문장 연습',exact:true}).click();await page.locator('.grammar-tile').first().click()}
-    await saved();return context;
+    await saved();
+    if(kind==='daily'){
+      const intent=page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true});
+      const retry=page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true});
+      let posts=0;page.on('request',request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/api/sentence-feedback')posts++;});
+      assert.equal(await intent.inputValue(),'','historical feedback must not invent a Korean intention');
+      assert.equal(await retry.isDisabled(),true,'empty intention must keep an explicit recheck disabled');
+      const before=await snapshot(context);
+      await intent.fill('여자 친구와 친구들과 함께 가을에 여행을 갈 거예요.');
+      await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='AI 참고 의견 다시 요청'&&!button.disabled&&button.getAttribute('aria-disabled')!=='true'));
+      assert.equal(posts,0,'preparing the intention never generates feedback');
+      assert.deepEqual(await snapshot(context),before,'preparing an intention changes no stored scores or feedback');
+      check(true,'Empty intention blocks recheck; explicit synthetic intention enables it without an automatic request or state write');
+    }
+    return context;
   }
   const saved=()=>page.locator('.save-state').getByText('저장됨',{exact:true}).waitFor();
   async function capture(locator,name) {
@@ -68,12 +82,12 @@ fs.mkdirSync(out,{recursive:true});
     while(Date.now()<until){
       const state=await snapshot(page.context());
       const feedback=domain==='sentence'?Object.values(state.sessions)[0].records[word.id].aiFeedback:state.grammar.noun.feedback;
-      if(feedback?.validationVersion==='judgment-v6'&&feedback.original===result.original)break;
+      if(feedback?.validationVersion===currentValidationVersion&&feedback.original===result.original)break;
       await page.waitForTimeout(50);
     }
     const state=await snapshot(page.context());
     const stored=domain==='sentence'?Object.values(state.sessions)[0].records[word.id].aiFeedback:state.grammar.noun.feedback;
-    assert.equal(stored.validationVersion,'judgment-v6','current response is acknowledged before read-only snapshots');
+    assert.equal(stored.validationVersion,currentValidationVersion,'current response is acknowledged before read-only snapshots');
     await saved(); assert.equal(calls,1);
     await page.unroute(url);
   }
@@ -95,7 +109,7 @@ fs.mkdirSync(out,{recursive:true});
   }
   try {
     let context=await learner(unavailable);
-    await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='AI 참고 의견 다시 요청'&&!button.disabled));
+    await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='AI 참고 의견 다시 요청'&&!button.disabled&&button.getAttribute('aria-disabled')!=='true'));
     check(await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).isEnabled(),'Same-sentence recheck is enabled but never starts automatically');
     await hiddenStructure(page.locator('.ai-feedback-result'),unavailable);
     await capture(page.locator('.ai-feedback-panel'),'unavailable');

@@ -1,5 +1,6 @@
 "use client";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {Stack} from '@astryxdesign/core/Layout';
+import {HaruFrame, HaruTabList, HaruTabPanel} from './haru-frame';
 import { HaruIcon } from "@/components/icons/haru-icon";
 import {
   ArrowRight,
@@ -20,7 +21,6 @@ import { SourceDialog } from "./learning/source-dialog";
 import { TodayOverview } from "./learning/today-overview";
 import { ImagePracticeLauncher } from './learning/image-practice-launcher';
 import { useImagePracticePosition } from './learning/use-image-practice-position';
-import type { View } from "./learning/types";
 import { useLearningController } from "./learning/use-learning-controller";
 import { PendingReviews } from "./pending-reviews";
 import { LearningLog, ReviewDesk } from "./review-and-log";
@@ -159,17 +159,9 @@ function LearningScreens({
   return (
     <AiRequestProvider modelId={selectedAiModel(state.settings)}>
     <DeferredReloadBlocked.Provider value={saving || store.restoring ? 'busy' : unsaved ? 'unsaved' : false}>
-    <main
-      className="shell"
-      data-keyboard={keyboardOpen ? 'open' : undefined}
-      data-studying={
-        tab === "today" &&
-        ((showSession && active && !active.finished) || assessing || preparing)
-          ? "true"
-          : undefined
-      }
-    >
-      <header className="topbar">
+    <HaruFrame keyboardOpen={keyboardOpen}
+      studying={tab === "today" && Boolean((showSession && active && !active.finished) || assessing || preparing)}
+      header={<Stack direction="horizontal" gap={0} vAlign="center" className="topbar">
         <div className="brand">
           <span className="brand-icon">
             <HaruIcon name="brand" size={22} />
@@ -191,7 +183,8 @@ function LearningScreens({
             <HaruIcon name="settings" size={19} />
           </button>
         </div>
-      </header>
+      </Stack>}
+    >
       <div className="page-wrap">
         <div className="page-heading">
           <div>
@@ -215,42 +208,8 @@ function LearningScreens({
             }).format(new Date(date + "T12:00:00+09:00"))}
           </span>
         </div>
-        <Tabs
-          key={store.epoch}
-          value={tab}
-          onValueChange={v => { void requestTab(v as View); }}
-          className="main-tabs"
-        >
-          <TabsList className="main-nav" aria-label="학습 화면">
-            <TabsTrigger value="today" aria-label="오늘 학습">
-              <HaruIcon name="book-open" size={18} />
-              <span className="nav-label-wide">오늘 학습</span>
-              <span className="nav-label-compact" aria-hidden="true">
-                오늘 학습
-              </span>
-            </TabsTrigger>
-            <TabsTrigger value="library" aria-label="단어장">
-              <HaruIcon name="notebook" size={18} />
-              <span className="nav-label-wide">단어장</span>
-              <span className="nav-label-compact" aria-hidden="true">
-                단어장
-              </span>
-            </TabsTrigger>
-            <TabsTrigger value="review" aria-label="복습 점검">
-              <HaruIcon name="repeat" size={18} />
-              <span className="nav-label-wide">복습 점검</span>
-              <span className="nav-label-compact" aria-hidden="true">
-                복습 점검
-              </span>
-            </TabsTrigger>
-            <TabsTrigger value="log" aria-label="학습 기록">
-              <HaruIcon name="calendar-check" size={18} />
-              <span className="nav-label-wide">학습 기록</span>
-              <span className="nav-label-compact" aria-hidden="true">
-                학습 기록
-              </span>
-            </TabsTrigger>
-          </TabsList>
+        <Stack key={store.epoch} direction="vertical" className="main-tabs">
+          <HaruTabList value={tab} requestTab={requestTab} />
           <div className="navigation-body">
           {!loading && !signedIn && !error && (
             <div className="notice sign-in-notice">
@@ -273,7 +232,7 @@ function LearningScreens({
           {message && (
             <LearningMessage messageId={messageId} message={message} onDismiss={dismissMessage} />
           )}
-          <TabsContent value="today" forceMount hidden={tab !== "today"}>
+          <HaruTabPanel value="today" selected={tab}>
             <div className="workspace">
               <div className="main-study">
                 {loading ? (
@@ -406,8 +365,8 @@ function LearningScreens({
               </div>
               <LearningAside loading={loading} metrics={metrics} />
             </div>
-          </TabsContent>
-          <TabsContent value="library" forceMount hidden={tab !== "library"}>
+          </HaruTabPanel>
+          <HaruTabPanel value="library" selected={tab}>
             {navigation.visited.includes("library") && (
               <WordLibrary
                 imagePilotEnabled={imagePilotEnabled}
@@ -425,8 +384,8 @@ function LearningScreens({
                 retryBlocked={loading || saving || !signedIn || conflict || !clock.ready || store.restoring}
               />
             )}
-          </TabsContent>
-          <TabsContent value="review" forceMount hidden={tab !== "review"}>
+          </HaruTabPanel>
+          <HaruTabPanel value="review" selected={tab}>
             {navigation.visited.includes("review") && (
               <ReviewDesk
                 date={date}
@@ -437,8 +396,8 @@ function LearningScreens({
                 save={save}
               />
             )}
-          </TabsContent>
-          <TabsContent value="log" forceMount hidden={tab !== "log"}>
+          </HaruTabPanel>
+          <HaruTabPanel value="log" selected={tab}>
             {navigation.visited.includes("log") && (
               <LearningLog
                 now={clock.now}
@@ -453,9 +412,9 @@ function LearningScreens({
                 onStudyHome={() => { void requestTab("today"); }}
               />
             )}
-          </TabsContent>
+          </HaruTabPanel>
           </div>
-        </Tabs>
+        </Stack>
         <footer>
           <span>Oxford 3000</span>
           <button className="text-button" onClick={() => setAbout(true)}>
@@ -511,6 +470,9 @@ function LearningScreens({
           <BackupDialog
             date={date}
             now={clock.now}
+            clockReady={clock.ready}
+            clockSyncing={clock.syncing}
+            onClockRetry={clock.refresh}
             state={state}
             busy={busy}
             restoring={store.restoring}
@@ -525,7 +487,7 @@ function LearningScreens({
         </Suspense>
       )}
       <SourceDialog open={about} onOpenChange={setAbout} />
-    </main>
+    </HaruFrame>
     </DeferredReloadBlocked.Provider>
     </AiRequestProvider>
   );

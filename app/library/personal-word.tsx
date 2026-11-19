@@ -1,16 +1,11 @@
 "use client";
+import {HaruParagraph} from '../haru-content';
+import {HaruButton,HaruTextInput,HaruSelector} from '../haru-controls';
+import {EditorTextArea as HaruTextArea} from './editor-textarea';
 import {
-  DialogDescription,
   DialogHeader,
-  DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import {SheetDialogTitle as DialogTitle,SheetDialogDescription as DialogDescription} from '../sheet-dialog';
 import { POS, type Progress, type Word } from "@/lib/learning";
 import { useState } from "react";
 import { useEditorSubmission } from "./use-editor-submission";
@@ -43,57 +38,26 @@ export function PersonalWord({
         </DialogDescription>
       </DialogHeader>
       <div className="dialog-scroll">
-      {error && <p className="error-banner" role="alert">{error}</p>}
+      {error && <HaruParagraph className="error-banner" role="alert">{error}</HaruParagraph>}
       <fieldset className="editor-fields" disabled={submitting}>
-      <label>
-        영어 단어
-        <input
-          value={word}
+      <HaruTextInput label={["영어 단어"].join('')} value={word}
           onChange={(e) => setWord(e.target.value)}
-          maxLength={80}
-        />
-      </label>
-      <Select disabled={submitting} value={pos} onValueChange={setPos}>
-        <SelectTrigger aria-label="개인 단어 품사">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {Object.entries(POS).map(([v, t]) => (
-            <SelectItem key={v} value={v}>
-              {t}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <label>
-        학습할 한국어 뜻
-        <input
-          value={meaning}
+          maxLength={80} disabled={submitting} />
+      <HaruSelector label="개인 단어 품사" isLabelHidden containerClassName="haru-personal-pos" disabled={submitting} value={pos} onChange={setPos} options={Object.entries(POS).map(([value,label])=>({value,label}))} />
+      <HaruTextInput label={["학습할 한국어 뜻"].join('')} value={meaning}
           onChange={(e) => setMeaning(e.target.value)}
-          maxLength={2000}
-        />
-      </label>
-      <label>
-        영어 예문
-        <textarea
-          value={example}
+          maxLength={2000} disabled={submitting} />
+      <HaruTextArea rows={2} label={["영어 예문"].join('')} value={example}
           onChange={(e) => setExample(e.target.value)}
-          maxLength={2000}
-        />
-      </label>
-      <label>
-        예문 해석
-        <textarea
-          value={translation}
+          maxLength={2000} disabled={submitting} />
+      <HaruTextArea rows={2} label={["예문 해석"].join('')} value={translation}
           onChange={(e) => setTranslation(e.target.value)}
-          maxLength={2000}
-        />
-      </label>
+          maxLength={2000} disabled={submitting} />
       </fieldset>
       </div>
       <div className="dialog-actions">
-      <button
-        className="primary-button full"
+      <HaruButton label={[(failed ? '다시 저장' : '내 단어장에 추가')].join('')} variant="primary"
+        className="haru-migrated primary-button full"
         disabled={(failed ? retryBlocked : busy) || submitting || !word.trim() || !meaning.trim()}
         aria-busy={submitting}
         onClick={() =>
@@ -117,7 +81,7 @@ export function PersonalWord({
         }
       >
         {failed ? '다시 저장' : '내 단어장에 추가'}
-      </button>
+      </HaruButton>
       </div>
     </>
   );

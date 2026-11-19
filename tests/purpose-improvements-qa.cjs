@@ -1,4 +1,5 @@
 const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
+const {chooseOption}=require('./qa/select.cjs');
 const fs=require('node:fs');const assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base;const out='outputs/purpose-improvements';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));const content=JSON.parse(fs.readFileSync('data/content.json','utf8'));const word=(name,pos='n.')=>words.find(w=>w.word===name&&w.pos===pos);
@@ -10,7 +11,7 @@ const checks=[];const errors=[];const evidence=[];
  async function user(label,seed){const ctx=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('purpose_fixed_')+'_'+(++counter),'oai-authenticated-user-email':'audit@example.test'}});let data=await(await ctx.request.get(base+'/api/state')).json();const partial=seed?seed(data.state):{};assert.equal((await ctx.request.put(base+'/api/state',{data:{revision:data.revision,progress:{},sessions:{},...partial}})).status(),200);const p=await ctx.newPage();p.on('pageerror',e=>errors.push(label+': '+e.message));await p.goto(base);await p.getByText('저장됨',{exact:true}).waitFor();return {ctx,p,get:async()=> (await(await ctx.request.get(base+'/api/state')).json()).state};}
  const saved=p=>p.getByText('저장됨',{exact:true}).waitFor();
  async function shot(p,file){await p.screenshot({path:out+'/'+file+'.png',fullPage:true,animations:'disabled'});evidence.push(file+'.png');}
- async function pick(p,label,text){await p.getByRole('combobox',{name:label,exact:true}).selectOption(text);await saved(p);}
+ async function pick(p,label,text){await chooseOption(p.getByRole('combobox',{name:label,exact:true}),text);await saved(p);}
  async function logIssue(id,detail){checks.push({id,...detail});fs.writeFileSync(out+'/evidence.json',JSON.stringify({date,checks,errors,evidence},null,2));}
  try{
   // Run each stateful failure twice, using a fresh isolated local account each time.

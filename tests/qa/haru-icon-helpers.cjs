@@ -12,7 +12,7 @@ async function createIconQa(name) {
   await waitForWorker();
   await requireDisabledAiStatus(base, accountHeaders(name + '_preflight'));
   const engine = process.env.QA_BROWSER || 'chromium';
-  const out = path.resolve('outputs', name, engine);
+  const out = process.env.ASTRYX_QA_OUTPUT ? path.resolve(process.env.ASTRYX_QA_OUTPUT,engine) : path.resolve('outputs', name, engine);
   fs.mkdirSync(out, { recursive: true });
   const report = {
     passed: false, engine, actualDevice: false, syntheticAccount: true,
@@ -27,6 +27,8 @@ async function createIconQa(name) {
   // keeping script responses, module state and storage out of the real app page.
   const createIsolatedPage = async () => {
     const isolatedContext = await browser.newContext(contextOptions);
+    await isolatedContext.route('https://fonts.googleapis.com/**',route=>route.fulfill({body:'',contentType:'text/css'}));
+    await isolatedContext.route('https://fonts.gstatic.com/**',route=>route.abort());
     const isolatedPage = await isolatedContext.newPage();
     isolatedPage.setDefaultTimeout(15_000);
     isolatedPage.setDefaultNavigationTimeout(30_000);

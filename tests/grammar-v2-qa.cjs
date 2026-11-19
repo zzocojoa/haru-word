@@ -20,7 +20,7 @@ const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('
   async function solve(q) {
     if (q.kind === 'choice') { await click(q.answer); await click('답 확인'); assert.equal(await page.getByRole('button', { name: '답 확인', exact: true }).isDisabled(), true); }
     else {
-      for (const word of (q.orderFormat ? q.answer.replace(/[.!?]+$/, '') : q.answer).split(' ')) { const token = q.orderFormat ? q.options.find(t => t.toLowerCase() === word.toLowerCase()) : word; await page.locator('.grammar-options button:not([disabled])').filter({ hasText: new RegExp('^' + token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') }).first().click(); }
+      for (const word of (q.orderFormat ? q.answer.replace(/[.!?]+$/, '') : q.answer).split(' ')) { const token = q.orderFormat ? q.options.find(t => t.toLowerCase() === word.toLowerCase()) : word; await page.locator('.grammar-options').getByRole('button',{disabled:false}).filter({ hasText: new RegExp('^' + token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$') }).first().click(); }
       await click('내 답 확인');
       assert.equal(await page.getByRole('button', { name: '내 답 확인', exact: true }).isDisabled(), true);
     }

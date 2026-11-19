@@ -12,7 +12,7 @@ if (!['functional', 'performance'].includes(group)) throw new Error('Choose func
 const files = readdirSync(path.resolve('tests')).filter(name => name.endsWith('-qa.cjs')).sort();
 if (files.length !== manifest.length || files.some(name => !manifest.includes(name))) throw new Error('Register every browser QA script in tests/qa/manifest.cjs.');
 const cases = manifest.filter(name => performanceTests.has(name) === (group === 'performance'))
-  .flatMap(name => name === 'a1-content-qa.cjs' ? ['A1', 'A2', 'B1', 'B2'].map(level => [name, level]) : name === 'grammar-v4-compat-qa.cjs' ? [[name],[name,'new-v3']] : [[name]]);
+  .flatMap(name => name === 'a1-content-qa.cjs' ? ['A1', 'A2', 'B1', 'B2'].map(level => [name, level]) : name === 'grammar-v4-compat-qa.cjs' ? [[name],[name,'new-v3']] : name === 'image-practice-qa.cjs' ? [[name,'production'],[name,['enabled','development'].includes(process.env.QA_IMAGE_PILOT_MODE)?'all':'matrix']] : name === 'word-image-study-qa.cjs' ? [[name,'disabled'],[name,'enabled']] : [[name]]);
 if (process.argv.includes('--list')) { console.log(cases.map(args => args.join(' ')).join('\n')); process.exit(0); }
 (async () => {
   mkdirSync('work', { recursive: true });
@@ -35,11 +35,14 @@ if (process.argv.includes('--list')) { console.log(cases.map(args => args.join('
   for (const args of cases) {
     await waitForWorker(base,30_000,signal);
     let env = {...process.env,QA_ENGINE:process.env.QA_BROWSER||'chromium'};
-    const version = args[0] === 'grammar-v4-compat-qa.cjs' ? (args[1] === 'new-v3' ? 3 : 4) : Number(/^grammar-v([234])-qa\.cjs$/.exec(args[0])?.[1]);
-    if(version){
-      if(!profiles.has(version))profiles.set(version,await grammarWorker(version,{signal}));
-      const profile=profiles.get(version);
-      env={...env,QA_BASE_URL:profile.base,QA_WORKER_CONFIG:profile.configPath,QA_GRAMMAR_VERSION:String(version)};
+    const version = args[0] === 'grammar-qa.cjs' ? 4 : args[0] === 'grammar-v4-compat-qa.cjs' ? (args[1] === 'new-v3' ? 3 : 4) : Number(/^grammar-v([234])-qa\.cjs$/.exec(args[0])?.[1]);
+    const imageCase=args[0]==='image-practice-qa.cjs',imageStudyCase=args[0]==='word-image-study-qa.cjs',foundationCase=['astryx-foundation-qa.cjs','astryx-controls-qa.cjs'].includes(args[0]),profileKey=foundationCase?'astryx-foundation':imageCase?'image-'+args[1]:imageStudyCase?'image-study-'+args[1]:version;
+    if(version||imageCase||imageStudyCase||foundationCase){
+      if(!profiles.has(profileKey))profiles.set(profileKey,await grammarWorker(version||4,{signal,astryxFoundationEnabled:foundationCase,...(imageCase?{imagePracticeEnabled:args[1]!=='production'}:imageStudyCase?{imagePracticeEnabled:args[1]==='enabled'}:{})}));
+      const profile=profiles.get(profileKey);
+      env={...env,QA_BASE_URL:profile.base,QA_WORKER_CONFIG:profile.configPath,QA_GRAMMAR_VERSION:String(version||4)};
+      if(imageCase&&args[1]==='production')delete env.QA_IMAGE_PILOT_MODE;
+      if(imageStudyCase)env.QA_IMAGE_PILOT_MODE=args[1]==='enabled'?'enabled':'disabled';
       if(args[0]==='grammar-v4-compat-qa.cjs')env.QA_NEW_GRAMMAR_VERSION=String(version);
       validateEnvironment(env);await waitForWorker(profile.base,30_000,signal);
     }

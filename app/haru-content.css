@@ -1,0 +1,153 @@
+/* Structural defaults only. The generated compatibility layer retains existing design. */
+@layer haru-content {
+  .haru-table {width:100%;border-collapse:collapse;border-spacing:0;font-size:.875rem;line-height:calc(1.25 / .875);color:var(--ink);}
+  .haru-table :is(th,td) {width:auto;max-width:none;overflow:visible;padding:0;border:0;background:transparent;font:inherit;text-align:left;white-space:normal;}
+  .haru-table tr {background:transparent;border-bottom:1px solid var(--border);}
+  .haru-table tbody tr:last-child {border-bottom:0;}
+  .library-panel .astryx-table-scroll-wrapper {margin:0;width:100%;border-radius:0;}
+  .library-panel .library-filter {margin:0;min-width:0;}
+  .library-panel .library-filter .haru-field-control {border-color:var(--border);border-radius:9px;}
+  /* The trigger includes the composite border area in its 44px hit target. */
+  .library-panel .library-filter [role=combobox] {min-height:44px;margin-block:-1px;padding:9px 12px;}
+  .library-panel .library-search {margin:0;}
+  .library-panel .search-box>svg {z-index:1;pointer-events:none;}
+  .library-panel .library-search .haru-field-control {height:48px;padding:0 13px 0 40px;background:var(--card);}
+  .library-panel .library-search input {height:auto;padding:0;background:transparent;}
+  .library-panel .library-page-size {display:flex;flex-direction:row;align-items:center;width:auto;gap:8px;margin:0;}
+  .library-panel .library-page-size label {font-weight:400;white-space:nowrap;}
+  .library-panel .library-page-size .haru-field-control {min-width:72px;border-color:var(--border);border-radius:8px;}
+  .library-panel .library-page-size [role=combobox] {min-height:44px;margin-block:-1px;padding:9px 8px;font-size:.875rem;}
+  .library-panel .word-link {justify-content:flex-start;}
+  .session-panel .haru-study-field {margin:16px 0 7px;gap:8px;}
+  .session-panel .haru-study-field label {margin:0;}
+  .session-panel .haru-study-field label span {margin-left:0;font:inherit;}
+  .session-panel :is(.recall-field,.meaning-field,.standalone-study-field) {margin:0;}
+  .session-panel .recall-field input {font-size:inherit;line-height:inherit;text-align:inherit;}
+  .session-panel .meaning-field input {font-weight:600;}
+  .haru-panel {min-width:0;padding:0;border:0;border-radius:0;box-shadow:none;background:transparent;display:block;overflow:visible;}
+  .haru-heading,.haru-copy {font-family:inherit;display:block;margin:0;white-space:normal;overflow-wrap:anywhere;text-align:inherit;}
+  .haru-native-action {font:inherit;display:inline-block;min-height:0;padding:0;background:transparent;border:0;border-radius:0;}
+  .haru-migrated.text-button {border-radius:0;}
+  .familiarity-card .haru-field {margin:0;gap:0;}
+  .familiarity-card .haru-field label span {display:block;font-size:.75rem;font-weight:400;margin-top:3px;color:var(--caption);}
+}
+
+/* These values preserve the final native cascade, including its type selectors. */
+@layer haru-content-compat {
+  /* Size Core's label line box for the existing headword after the button reset. */
+  .library-panel .word-link {font-size:1.125rem;}
+  .library-panel .word-identity {flex-wrap:wrap;}
+  .library-panel .word-identity .word-link {flex:1 0 auto;width:max-content;}
+  .session-panel .haru-study-field .haru-field-control.answer-input {font-size:1rem;line-height:1.6;min-height:44px;}
+  .session-panel .meaning-field .haru-field-control {font-weight:600;}
+  .session-panel .sentence-writing-field .haru-field-control,.session-panel .sentence-writing-field textarea {line-height:1.9;}
+  .ai-feedback-heading .haru-heading {font-weight:400;}
+}
+
+@layer haru-content {
+  .haru-library-tabs .astryx-tab-strip {gap:0;}
+  .haru-library-tabs .astryx-tab-indicator {display:none;}
+  .haru-library-tabs [role=tab] {height:auto;border:0;border-radius:8px;font-weight:500;line-height:1.5;}
+  .grammar-tile .haru-grammar-tile-content {display:flex;flex-direction:column;gap:12px;min-width:0;height:100%;}
+  .grammar-filter-label {display:inline-flex;align-items:center;gap:8px;}
+  .grammar-choice-content {display:flex;align-items:center;gap:12px;}
+  .grammar-choice-content .grammar-choice-number {flex-shrink:0;}
+  .haru-grammar-writing {margin:0;gap:12px;}
+  .haru-grammar-writing label {font-size:1rem;font-weight:600;line-height:1.6;}
+  .haru-grammar-writing .haru-field-control {padding:16px;border:1px solid var(--input);border-radius:10px;font-size:1.125rem;font-weight:400;line-height:1.7;}
+  .haru-grammar-writing textarea {padding:0;border:0;border-radius:0;font-size:inherit;font-weight:inherit;line-height:inherit;}
+  .haru-grammar-radio {margin:0;gap:0;font:inherit;}
+  .haru-grammar-radio .astryx-radio-list {gap:0;align-items:stretch;}
+  .grammar-check .haru-grammar-radio .astryx-radio-list-item {display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 12px;margin-top:8px;border:1px solid var(--border);border-radius:8px;background:var(--card);font-size:1rem;line-height:1.6;cursor:pointer;}
+  .grammar-check .haru-grammar-radio .astryx-radio-list-item[data-selected=selected],
+  .grammar-check .haru-grammar-radio .astryx-radio-list-item:has(input:checked) {background:var(--accent);border-color:var(--ink);}
+  .haru-grammar-radio .grammar-check-options {gap:8px;}
+  .haru-grammar-radio .grammar-check-options .astryx-radio-list-item {flex:1 1 115px;}
+  .grammar-radio-label {font-family:inherit;font-size:1rem;font-weight:400;line-height:1.6;white-space:normal;overflow-wrap:anywhere;}
+  @media(min-width:1100px) {.grammar-tile .haru-grammar-tile-content {gap:8px;}}
+  @media(max-width:520px) {.grammar-tile .haru-grammar-tile-content {gap:8px;}}
+}
+
+/* Preserve the measured native grammar cascade and tab spacing. */
+@layer haru-content-compat {
+ .library-modes {display:flex;flex-direction:column;gap:8px;}
+ .library-modes>[data-slot=tabs-content] {flex:1;outline:none;}
+ .haru-library-tabs [role=tab] {border:1px solid transparent;line-height:1.6;}
+ .grammar-lesson .haru-migrated.haru-action {min-height:44px;}
+ .grammar-frame .haru-migrated[aria-pressed=true] {background:var(--action);border-color:var(--ink);}
+ .grammar-self-checks .haru-heading {font-size:inherit;line-height:var(--text-heading-3-leading);}
+ .grammar-check .haru-grammar-radio .astryx-radio-list-item {min-height:74px;}
+ .grammar-check:not(:has(.grammar-check-options))>.haru-grammar-radio {margin-top:-8px;}
+ .haru-grammar-radio .astryx-radio-indicator {transform:translateY(4px);}
+ @media(max-width:520px) {.grammar-lesson .grammar-stage>.haru-action.primary-button {min-height:48px;}}
+}
+
+@layer haru-content {
+ .haru-journal-filter,.haru-review-period,.haru-replay-selector {margin:0;}
+ .haru-review-period .review-period {padding:0;}
+ .haru-review-period [role=combobox],.haru-review-batch [role=combobox],.haru-journal-filter [role=combobox],.haru-replay-selector [role=combobox] {min-height:44px;margin-block:-1px;padding:11px 13px;font-size:1rem;white-space:normal;}
+ .haru-replay-selector {min-width:0;}
+ .haru-replay-selector .replay-selector {padding:0;min-width:0;}
+ .haru-journal-filter .journal-filter {padding:0;}
+}
+
+@layer haru-content-compat {
+ .haru-journal-filter {width:fit-content;max-width:100%;}
+ .haru-journal-filter .haru-field-control.journal-filter {padding:0;border:1px solid var(--input);border-radius:8px;background:transparent;}
+ .haru-journal-filter [role=combobox] {min-height:44px;margin-block:-1px;padding:8px 12px;}
+ .record-card .haru-heading {font-size:inherit;font-weight:inherit;line-height:var(--text-heading-3-leading);}
+}
+
+/* Keep settings rows and image controls at their measured native sizes. */
+@layer haru-content {
+ .haru-level-select,.haru-settings-select,.haru-ai-model-select,.haru-practice-number {margin:0;}
+ .haru-level-select {width:auto;flex-shrink:0;max-width:100%;}
+ .haru-level-select .level-select {padding:0;}
+ .settings-dialog .settings-field {display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);font-size:.875rem;font-weight:600;line-height:1.6;}
+ .settings-field>.haru-field {width:auto;max-width:100%;}
+ .haru-ai-model-select {gap:0;font-size:.875rem;font-weight:600;width:100%;}
+ .haru-ai-model-select label {margin:0;font:inherit;font-weight:600;}
+ .haru-level-select .haru-field-control,.haru-settings-select .haru-field-control,.haru-ai-model-select .haru-field-control {border-radius:8px;}
+ .haru-level-select [role=combobox],.haru-settings-select [role=combobox],.haru-ai-model-select [role=combobox] {min-height:44px;margin-block:-1px;padding:8px 12px;font-size:1rem;font-weight:600;line-height:1.6;white-space:normal;}
+ .haru-settings-select .haru-field-control,.haru-ai-model-select .haru-field-control {background:transparent;}
+ .haru-ai-model-select .haru-field-control {width:fit-content;max-width:100%;}
+ :is(.haru-level-select,.haru-settings-select,.haru-ai-model-select) :is(.astryx-selector-indicator-icon,.astryx-selector-check) {width:16px;height:16px;font-size:16px;}
+ .haru-level-select .level-select {border-color:var(--border);}
+ .haru-settings-select .haru-field-control:focus-within,.haru-ai-model-select .haru-field-control:focus-within {border-color:var(--ink);}
+ .haru-practice-number {gap:0;}
+ .haru-practice-number .haru-field-control {min-height:44px;}
+ .haru-practice-face {display:block;width:100%;white-space:normal;}
+ @media(max-width:520px) {.haru-level-select [role=combobox] {font-size:1rem;}}
+ @media(max-width:600px) {
+  .settings-dialog .settings-field {flex-direction:column;align-items:stretch;}
+  .settings-dialog .settings-field>.haru-field {width:100%;}
+ }
+}
+
+@layer haru-content-compat {
+ .word-dialog .haru-field {margin:var(--space-3) 0 var(--space-2);gap:var(--space-2);}
+ .word-dialog .haru-field label {margin:0;}
+ .word-dialog .editor-fields>.haru-field:first-child {margin-top:0;}
+ .word-dialog .haru-editor-area {display:block;margin:var(--space-3) 0 var(--space-2);padding:0;font-size:.875rem;line-height:1.6;}
+ .word-dialog .haru-editor-area>label {display:inline;margin:0;font:inherit;font-weight:600;}
+ /* Layout containment synthesizes the native inline baseline without clipping the focus ring. */
+ .word-dialog .haru-editor-area>.haru-field {display:inline-block;vertical-align:baseline;contain:layout;margin:var(--space-2) 0 0;}
+ .word-dialog :is(.editor-fields,.help-content)>.haru-editor-area:first-child {margin-top:0;}
+ .word-dialog .haru-personal-pos {width:fit-content;max-width:100%;margin:var(--space-3) 0;}
+ .word-dialog .haru-personal-pos .haru-field-control {width:fit-content;max-width:100%;border-radius:8px;background:transparent;}
+ .word-dialog .haru-personal-pos [role=combobox] {height:max(44px,2.25rem);min-height:44px;margin-block:-1px;padding:.5rem .75rem;}
+ .haru-personal-pos .astryx-selector-indicator-icon {width:16px;height:16px;font-size:16px;}
+ .haru-replay-selector .haru-field-control {border-radius:8px;background:transparent;}
+ .haru-replay-selector [role=combobox] {padding:calc(.5rem + 1px) .75rem;}
+ .haru-replay-selector .astryx-selector-indicator-icon {width:16px;height:16px;font-size:16px;}
+ .settings-dialog .haru-heading {font-weight:400;}
+ .image-practice-navigation .haru-action.haru-migrated {min-width:44px;min-height:44px;padding-inline:.25rem;}
+ .haru-practice-action {display:flex;align-items:center;justify-content:center;}
+ .image-practice-navigation .secondary-button .haru-practice-action {gap:10px;}
+ .image-practice-navigation .text-button .haru-practice-action {gap:7px;}
+ @media(max-width:480px) {
+  .image-practice-navigation .haru-action.haru-migrated {gap:.125rem;padding-inline:4px;}
+  .image-practice-navigation .haru-action .haru-practice-action {flex-direction:column;gap:.125rem;}
+  .haru-practice-action>svg {order:-1;}
+ }
+}

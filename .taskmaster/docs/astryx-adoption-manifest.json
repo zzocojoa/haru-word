@@ -1,0 +1,608 @@
+{
+  "schemaVersion": 1,
+  "planId": "astryx-adoption-2026-11-18",
+  "tag": "astryx-adoption",
+  "title": "Astryx 단계적 도입 · 디자인·학습·저장·복원 보존",
+  "description": "검사 데이터/QA 프로필 보완 → 버전·테마·CSS/Foundation → 공통 프레임/일반 화면 → 학습 입력 → 시트/복원 → 최종 품질/별도 승인 게시. 전면 재작성 없이 단계별 통과 후 확대한다.",
+  "planFile": "docs/ASTRYX_ADOPTION_PLAN_20261118.md",
+  "tasksFile": ".taskmaster/tasks/tasks.json",
+  "validationFile": ".taskmaster/docs/astryx-adoption-validation.json",
+  "planningStatus": "verified",
+  "executionStarted": true,
+  "phaseLabels": {
+    "1": "검사 보완·테마·CSS 검증",
+    "2": "단계적 화면 이관·품질·게시"
+  },
+  "baseline": {
+    "existingDashboardRoot": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어",
+    "existingDashboardUrl": "http://127.0.0.1:4318/",
+    "projectKey": "1edfbd772c95bb97feaa",
+    "productSource": "work/github-ai-quality-v148-20261113",
+    "productHead": "6912210f705424692c08d029e9c7040fa84b36bc",
+    "mainMerge": "405cc5571d277f4008192b293f4d53959e77afdc",
+    "productTree": "af0a3166c3d9dfa603536552748ee2a27c7b6628",
+    "publishedVersionRecorded": "v149",
+    "actualImplementationBaselineMustBeRechecked": true,
+    "auditReport": "outputs/astryx-audit-20261118/REVIEW.md",
+    "auditEvidenceRoot": "outputs/astryx-audit-20261118",
+    "auditSourceFiles": 323,
+    "auditProductTsx": 77,
+    "auditRegression": {
+      "runs": 36,
+      "passed": 32,
+      "failed": 4,
+      "diagnosticRuns": 2,
+      "fixtureFailures": 2,
+      "profileMismatchFailures": 2,
+      "originalFeedbackLayoutFullPass": false
+    },
+    "priorDefaultPlanId": "ai-quality-v147-2026-11-06",
+    "priorTagHashes": {
+      "master": "e08d8c67c894017056abe23c9f27f4369a910bce95223b5c5691531d9f94ffb1",
+      "judgment-remediation": "aa565e4fad66e3fd39e57e67bc2d8e61821fcdc15aaf82e82df4ec6280e21928",
+      "integration-remediation": "15c6d348bad24fdb0cce76e723b2a44c39efe1df65221f300cffd021c5154958",
+      "comprehensive-remediation": "cc9299dd328fed2846bda99ac044335a7493ce37d84d18622e1aabce7f456e1e",
+      "ai-quality-v147": "3427595dffea8441332d390571ede06f5d28409e2d0a8422b6c8996acfd21880"
+    },
+    "priorManifestHashes": {
+      ".taskmaster/docs/openai-migration-manifest.json": "2b66c21ae063fcf4aab6122c1e268aabb6220cf08006ec48495e097f745eab91",
+      ".taskmaster/docs/judgment-remediation-manifest.json": "f9f71ec10a82378c874ccfadfd630b87cb9eb35c3b2af415c795760fef417aac",
+      ".taskmaster/docs/integration-remediation-manifest.json": "7c752236271ce47a3f416a71ab8ff4bacc18b4cd5b20a10241195f05041d3510",
+      ".taskmaster/docs/comprehensive-remediation-manifest.json": "251a73318d9eb9bab67c33c0af8f69e0c72fe651814252e7cac8781c6beb572c",
+      ".taskmaster/docs/ai-quality-v147-manifest.json": "192512dffffe112f1f059f1c9e1744f66a7f8c5b8d666784dd38f4d4af1dd8a8"
+    },
+    "priorCounts": {
+      "master": {
+        "parents": 15,
+        "subtasks": 35,
+        "doneParents": 15,
+        "doneSubtasks": 35
+      },
+      "judgment-remediation": {
+        "parents": 18,
+        "subtasks": 49,
+        "doneParents": 18,
+        "doneSubtasks": 49
+      },
+      "integration-remediation": {
+        "parents": 12,
+        "subtasks": 41,
+        "doneParents": 12,
+        "doneSubtasks": 41
+      },
+      "comprehensive-remediation": {
+        "parents": 33,
+        "subtasks": 81,
+        "doneParents": 33,
+        "doneSubtasks": 81
+      },
+      "ai-quality-v147": {
+        "parents": 40,
+        "subtasks": 133,
+        "doneParents": 30,
+        "doneSubtasks": 103
+      }
+    }
+  },
+  "authorization": {
+    "planningApproved": true,
+    "planningApprovalDate": "2026-11-18",
+    "planningApprovalScope": "Task Master 새 플랜과 기존 대시보드 등록·검증. 제품 구현/게시 착수 요청으로 확대하지 않음",
+    "implementationApproved": true,
+    "paidEvaluationApproved": false,
+    "newPaidEvaluationMaxUsdBeforeTax": 0,
+    "newPaidEvaluationUsedUsdBeforeTax": 0,
+    "deploymentIncludedAndApproved": true,
+    "githubCommitPushPrApproved": true,
+    "productionQaWritesApproved": false,
+    "priorBudgetsClosedAndNotTransferred": true,
+    "implementationApproval": {
+      "date": "2026-11-18",
+      "scope": "사용자 목표: T1~T6 구현·검사 데이터/QA 프로필·테마/CSS/Foundation 로컬 검증 및 기존 대시보드 반영. T7 이후·게시·유료 AI·운영 QA쓰기는 제외"
+    },
+    "additionalImplementationApprovals": [
+      {
+        "id": "T7-20261118",
+        "scope": "T7 공통 프레임/4탭/스크롤/초점의 로컬 구현·검증 및 기존 Task Master/대시보드 반영",
+        "paidEvaluation": false,
+        "deployment": false,
+        "githubCommitPushPr": false
+      },
+      {
+        "id": "T8-20261118",
+        "scope": "사용자 목표: T8 일반 조작/상태/오류 공통 이관, 로컬 검증·Task Master·기존 대시보드 반영",
+        "paidEvaluation": false,
+        "deployment": false,
+        "githubCommitPushPr": false
+      },
+      {
+        "date": "2026-11-18",
+        "scope": "사용자 목표: T9~T18 단계별 이관·검증·Task Master/기존 대시보드 반영. 실기기·출시 관문을 실제 근거로 판정하며 과거 예산 재개/새 유료AI·운영QA쓰기 제외",
+        "taskRange": "T9-T18",
+        "paidCallsApproved": false,
+        "productionQaWritesApproved": false
+      }
+    ],
+    "publicationApproval": {
+      "recordedAt": "2026-11-19T05:07:06.214Z",
+      "source": "explicit user reply in this chat",
+      "reply": "승인 — GitHub 반영·기존 Site 게시 진행",
+      "review": "outputs/astryx-t9-t18-20261118/t18-preapproval-readiness.json",
+      "scope": [
+        "GitHub commit/push/PR",
+        "CI verification then merge",
+        "existing Site publication",
+        "read-only production verification",
+        "postmerge retention/cleanup"
+      ],
+      "paidAi": false,
+      "productionQaWrites": false
+    }
+  },
+  "registration": {
+    "method": "Task Master MCP add_task/add_subtask 수동 필드",
+    "taskMasterVersion": "0.43.1",
+    "parents": 18,
+    "subtasks": 62,
+    "modelCalls": 0,
+    "paidTelemetry": null,
+    "registeredAt": "2026-11-18T05:04:08.056Z",
+    "stagingReason": "MCP 저장의 과거 ID/metadata 자동 정규화를 격리하고 새 태그만 원본에 병합; 과거5태그 객체는 정확히 보존",
+    "verifiedAt": "2026-11-18T05:09:37.255Z"
+  },
+  "requirements": [
+    {
+      "id": "AX-R1",
+      "text": "최신 제품 기준·관리 원본·디자인·운영/평가 이력 보존",
+      "tasks": [
+        1
+      ]
+    },
+    {
+      "id": "AX-R2",
+      "text": "AI 결과 fixture·이미지 프로필 보완 후 원본 두 엔진 전체 통과",
+      "tasks": [
+        2
+      ]
+    },
+    {
+      "id": "AX-R3",
+      "text": "동일 버전·peer·npm lockfile·Codex 지침·실제 Worker 호환",
+      "tasks": [
+        3
+      ]
+    },
+    {
+      "id": "AX-R4",
+      "text": "전역 CSS·layer·토큰 충돌과 SSR/lazy 로드 순서 검증",
+      "tasks": [
+        4
+      ]
+    },
+    {
+      "id": "AX-R5",
+      "text": "화이트/차콜/라임·글꼴·16/14px·44/48px·light·한국어·대비/모션",
+      "tasks": [
+        5
+      ]
+    },
+    {
+      "id": "AX-R6",
+      "text": "실제 Astryx Foundation 통과 전 화면 이관 차단",
+      "tasks": [
+        6
+      ]
+    },
+    {
+      "id": "AX-R7",
+      "text": "기존4탭·window 스크롤·guard·초점·safe area",
+      "tasks": [
+        7
+      ]
+    },
+    {
+      "id": "AX-R8",
+      "text": "value/event·aria-disabled·실제 중복 요청0·오류 상시 노출",
+      "tasks": [
+        8
+      ]
+    },
+    {
+      "id": "AX-R9",
+      "text": "홈/친숙도·단어장·4학습 단계·문법15수업135문항·복습/기록·보조 화면",
+      "tasks": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "id": "AX-R10",
+      "text": "시트9종과 미저장/저장중·스와이프/Back·중첩 overlay 보호",
+      "tasks": [
+        15
+      ]
+    },
+    {
+      "id": "AX-R11",
+      "text": "백업/복원·revision·원자성·불확실 commit·한국 학습일",
+      "tasks": [
+        16
+      ]
+    },
+    {
+      "id": "AX-R12",
+      "text": "최종 영향 검사·실기기·성능·호환 복구·별도 승인 게시와 보관",
+      "tasks": [
+        17,
+        18
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "phase": 1,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 2,
+      "phase": 1,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 3,
+      "phase": 1,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 4,
+      "phase": 1,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 5,
+      "phase": 1,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 6,
+      "phase": 1,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 7,
+      "phase": 2,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 8,
+      "phase": 2,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 9,
+      "phase": 2,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 10,
+      "phase": 2,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 11,
+      "phase": 2,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 12,
+      "phase": 2,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 13,
+      "phase": 2,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 14,
+      "phase": 2,
+      "subtaskCount": 3,
+      "status": "done"
+    },
+    {
+      "id": 15,
+      "phase": 2,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 16,
+      "phase": 2,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 17,
+      "phase": 2,
+      "subtaskCount": 4,
+      "status": "done"
+    },
+    {
+      "id": 18,
+      "phase": 2,
+      "subtaskCount": 3,
+      "status": "in-progress"
+    }
+  ],
+  "gates": [
+    {
+      "id": "AX-P",
+      "name": "계획 등록·대시보드·이력 보존",
+      "criteria": "18/62 등록·의존성/요구 매핑·과거5태그/manifest/예산 보존·기존4318과 단일 HTML의6플랜 선택/새로고침 확인",
+      "tasks": [],
+      "result": {
+        "status": "passed",
+        "detail": "Task Master MCP 재조회18/62 모두pending·next T1, 선행관계/요구 매핑·과거5태그/manifest·실효 표시/예산 보존·기존4318의6플랜/새로고침·단일HTML·Chromium/WebKit 회귀3종 통과. 제품 구현/품질/실기기/게시 완료와 별개."
+      }
+    },
+    {
+      "id": "AX-G0",
+      "name": "검사 데이터·프로필 기준선",
+      "criteria": "필수 의도 검증을 유지한 원본 AI 레이아웃 전체와 이미지 활성/비활성 검사,두 엔진 통과",
+      "tasks": [
+        1,
+        2
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "최신main33f 기준·의도 빈값 차단 유지·현재 합성응답 v13/v10 보완. 원본 AI 레이아웃 Chromium/WebKit 각80확인, 이미지 활성matrix/비활성production 각2, 관련14단위 통과. 실제AI0·초기실패 근거 보존."
+      }
+    },
+    {
+      "id": "AX-G1",
+      "name": "테마·CSS·실제 Foundation",
+      "criteria": "같은 버전·peer·Worker/SSR·layer·16/14px·44/48px·light·한국어·오류/비활성 동작·computed style 실제 통과",
+      "tasks": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "실제 Astryx0.7.16 고정/peer·Node22/24 각926단위·타입/빌드·lint(기존15경고)·doctor fail0. 두 엔진 최종28/28 사례,16view 계산스타일/픽셀 일치, 16/14px·44/48px·light·한국어·SSR·axe·무요청/오류 상시노출 통과. 실제iPhone·최종품질/게시와 구분."
+      }
+    },
+    {
+      "id": "AX-G2",
+      "name": "일반 화면·학습 흐름",
+      "criteria": "4탭/스크롤/초점·일반 조작·초안/계정/최초 답·명시 AI/영수증·문법15/135·기록/이미지 분리 유지",
+      "tasks": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "T7~T14 이관·영향 검사 통과. T14 두 엔진46회·단위927·Node22 타입/빌드·린트 오류0, 설정4/이미지이동12조건 기준 대조(폭 직렬화3개 최대0.03px 별도). 실제iPhone·최종 성능·게시 완료와 구분."
+      }
+    },
+    {
+      "id": "AX-G3",
+      "name": "시트·백업·복원 보존",
+      "criteria": "시트10종·닫기 guard·중첩·키보드·revision·큰 복원/원자성·불확실 commit·학습일 유지",
+      "tasks": [
+        15,
+        16
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "T15 10종 native·132경로/80화면·20조합, T16 백업/복원/학습일14조합·24화면 통과.18.98MB 재개·안전복구·19.9MB·중복commit방지·충돌/날짜/초안·revision 보존. 실제iPhone은 별도AX-IOS 보류."
+      }
+    },
+    {
+      "id": "AX-G4",
+      "name": "최종 품질·성능·출시 준비",
+      "criteria": "최종 코드의 영향 회귀/단위/문법자료/타입/린트/Worker build와 정확한 baseline 대비 성능·호환 복구/미검증 보고",
+      "tasks": [
+        17
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "최종 Node22/24 각927단위·타입/린트/빌드0, 유효220(이전 성공 재사용)·후속28+smoke4 통과. 성능10측정/복구·호환·미검증 보고 완료. 빈기록18자+369ms·초기요청gzip+55,619B 공개; 성능무회귀 주장/새허용률 없음. T18 게시 승인은 별도."
+      }
+    },
+    {
+      "id": "AX-IOS",
+      "name": "실제 iPhone·IME·VoiceOver",
+      "criteria": "실제 기기/OS에서 키보드·IME·초점/스와이프·overlay 위치·보조기술 확인. WebKit 대체 금지",
+      "tasks": [
+        14,
+        15,
+        16,
+        17
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "사용자 iPhone16 Pro Max/iOS27.2.1 Safari·IME·VoiceOver M0–M7 통과. 수정X테두리/초점복귀·정상복구UI·백업44px정렬/터치·최종복원/reload 보존 모두통과 회신. 직접기기관찰과 구분, 최종근거 phase17.manualAccess.finalManualValidation. 임시연결종료."
+      }
+    },
+    {
+      "id": "AX-PUB",
+      "name": "이번 변경 승인·기존 Site 게시",
+      "criteria": "품질·실기기와 이 도입 변경의 게시 승인,정확한 검증 소스/빌드·기존 Site 절차·허용 읽기 확인",
+      "tasks": [
+        18
+      ],
+      "result": {
+        "status": "held",
+        "detail": "이번 변경 GitHub commit/push/PR·CI 후 병합·기존Site 게시를 사용자 명시 승인. 검증runtime 그대로 준비 중이며 실제 CI/병합/게시/읽기 검증은 아직 완료 아님."
+      }
+    }
+  ],
+  "invariants": [
+    "기존 Site ID·DB/R2 바인딩·접근/환경·npm lockfile 보존",
+    "API/백업 envelope·revision 충돌·복원 한도/원자성 보존",
+    "한국 학습일·친숙도·목표·회상 성적·문법 진도·이미지 위치 분리",
+    "초안·첫 답/도움·계정 분리·실패 재시도·영수증/불확실 commit 보호",
+    "새 AI는 명시 요청 OpenAI Responses만; 이번 플랜 실제 유료 호출0·과거 원장 재개0",
+    "기존 디자인·모바일4탭·글꼴/크기·오류 상시노출 유지",
+    "사용하지 않는50 UI 후보·CSS·브랜치/worktree를 자동 삭제하지 않음",
+    "새 Site/대시보드/DB·다크모드/과금/일일 AI 제한·새 개인 로그를 추가하지 않음"
+  ],
+  "execution": {
+    "implementationDone": true,
+    "quality": "passed",
+    "releaseReadiness": "ready-for-approval",
+    "publicationStatus": "approved-in-progress",
+    "paidCalls": 0,
+    "productionQaWrites": 0,
+    "dashboardContext": "T1–T17 완료(17/18·59/62·95%). 실제iPhone 최종통과·성능증가분 공개. 사용자 T18 GitHub/기존Site 게시 승인, 검증ready runtime 유지한 소스/관리이력 반영 준비. CI/병합·게시·운영읽기검증 진행 전/중; 유료AI·운영QA쓰기0.",
+    "dashboardBudget": "이번 플랜 유료 AI 평가 계획·승인·사용 US$0 · 과거 평가 원장/잔액과 분리 · 실제 AI 호출0 · 기존 예산 재개·합산 없음",
+    "implementationSource": "work/astryx-adoption-20261118",
+    "branch": "codex/astryx-foundation",
+    "implementationBaseline": "33f5de530c39fe816bebfdb754f751d3e093565f",
+    "implementationEvidenceRoot": "outputs/astryx-adoption-implementation-20261118",
+    "phase1ImplementationDone": true,
+    "phase1Quality": "passed",
+    "phase1ParentsDone": 6,
+    "phase1SubtasksDone": 20,
+    "phase1Evidence": ".taskmaster/docs/astryx-adoption-implementation.json",
+    "t7StartedAt": "2026-11-18T06:47:16.224Z",
+    "t7Approval": "사용자 목표: T7 공통 프레임·4탭·스크롤·초점 이관 및 로컬 검증/기존 대시보드 반영. T8 이후·게시·유료AI 제외",
+    "t7ImplementationDone": true,
+    "t7Quality": "passed",
+    "t7Evidence": ".taskmaster/docs/astryx-adoption-t7-implementation.json",
+    "nextTask": 17,
+    "t8Approval": "사용자 목표: T8 일반 조작/상태/오류 공통 이관, 로컬 검증·Task Master·기존 대시보드 반영. T9 이후/게시/유료AI 제외",
+    "t8StartedAt": "2026-11-18T07:45:28.332Z",
+    "t8Quality": "passed",
+    "t8ImplementationDone": true,
+    "t8Evidence": ".taskmaster/docs/astryx-adoption-t8-implementation.json",
+    "t9To18Approval": "사용자 목표: T9~T18 단계별 이관·검증·Task Master/기존 대시보드 반영. 실기기·출시 관문을 실제 근거로 판정하며 과거 예산 재개/새 유료AI·운영QA쓰기 제외",
+    "t9StartedAt": "2026-11-18T08:53:03.725Z",
+    "deviceValidation": {
+      "model": "iPhone 16 Pro Max",
+      "ios": "27.2.1",
+      "usbConnection": false,
+      "source": "사용자 직접 답변",
+      "manualSafariAvailable": true,
+      "manualVoiceOverAvailable": true,
+      "actualValidation": "not-run",
+      "wifiIpv4": "192.168.0.42",
+      "addressSource": "사용자 직접 회신",
+      "connectionScope": "one-device temporary HTTPS synthetic QA requested in this conversation"
+    },
+    "t9ImplementationDone": true,
+    "t9Quality": "passed",
+    "t9Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t10StartedAt": "2026-11-18T09:47:32.791Z",
+    "t10ImplementationDone": true,
+    "t10Quality": "passed",
+    "t10Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t11StartedAt": "2026-11-18T10:42:54.840Z",
+    "performanceBaselineStatus": "source-verified-compared-input-repair-final-validation",
+    "performanceBaselineRecovery": "outputs/astryx-t9-t18-20261118/baseline-recovery-result.json",
+    "t11ImplementationDone": true,
+    "t11Quality": "passed",
+    "t11Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t12StartedAt": "2026-11-18T11:50:43.813Z",
+    "t12ImplementationStatus": "verified",
+    "t12EvidenceRoot": "outputs/astryx-t9-t18-20261118/t12-current",
+    "t12ImplementationDone": true,
+    "t12Quality": "passed",
+    "t12Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t13StartedAt": "2026-11-18T12:28:24.051Z",
+    "t13ImplementationStatus": "verified",
+    "t13ImplementationDone": true,
+    "t13Quality": "passed",
+    "t13Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t14StartedAt": "2026-11-18T13:04:48.185Z",
+    "t14ImplementationStatus": "verified",
+    "t14Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t14ImplementationDone": true,
+    "t14Quality": "passed",
+    "t15StartedAt": "2026-11-18T14:06:56.272Z",
+    "t15ContractStatus": "verified-with-settings-and-isolated-adapter",
+    "t15SettingsStatus": "native-close-save-focus-verified",
+    "t15NativeInteropStatus": "verified",
+    "t15NativeKindsVerified": 10,
+    "t15CurrentKind": null,
+    "t15DirtyExitMotionStatus": "passed-both-engines",
+    "t15ImplementationDone": true,
+    "t15Quality": "passed-local",
+    "t15Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t15FinalSource": "outputs/astryx-t9-t18-20261118/t15-final-source.json",
+    "t16StartedAt": "2026-11-18T18:00:14.862Z",
+    "implementationTasksThrough": 16,
+    "t16ImplementationDone": true,
+    "t16Quality": "passed-local",
+    "t16Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t16FinalSource": "outputs/astryx-t9-t18-20261118/t16-final-source.json",
+    "t17StartedAt": "2026-11-18T18:51:48.263Z",
+    "t17Node24Checks": "passed",
+    "t17UnitTests": 927,
+    "t17Doctor": {
+      "pass": 11,
+      "warn": 2,
+      "fail": 0,
+      "purityFindings": 2043
+    },
+    "t17BrowserStatus": "Prior frozen source220 passed; revalidation pending for stable locale catalog",
+    "actualDeviceStatus": "one-client-address-received-latest-build-checks-pending",
+    "t17KnownOpenChecks": [
+      "final Node24 matrix and affected context/draft/review regression",
+      "remaining startup/history/lazy-asset comparison and final doctor",
+      "actual iPhone Safari/IME/VoiceOver/listening",
+      "release readiness/publication"
+    ],
+    "device": {
+      "model": "iPhone 16 Pro Max",
+      "ios": "27.2.1",
+      "usbConnection": false,
+      "source": "사용자 직접 답변",
+      "manualSafariAvailable": true,
+      "manualVoiceOverAvailable": true,
+      "actualValidation": "partial-user-reported",
+      "wifiIpv4": "192.168.0.42",
+      "addressSource": "사용자 직접 회신",
+      "connectionScope": "one-device temporary HTTPS synthetic QA requested in this conversation",
+      "preflightM0": {
+        "status": "passed",
+        "source": "user report",
+        "detail": "네 항목 통과 후 검사 시작을 눌렀음"
+      }
+    },
+    "t17LocalFunctional": "passed",
+    "t17PerformanceComparison": "measured-with-disclosed-overheads",
+    "t17Device": "passed-user-reported",
+    "t17Evidence": ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+    "t17DeviceEvidence": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+  },
+  "planningEvidenceRoot": "outputs/astryx-adoption-plan-20261118",
+  "implementationValidationFile": ".taskmaster/docs/astryx-adoption-implementation.json",
+  "dashboardValidationFile": ".taskmaster/docs/astryx-adoption-t9-t18-dashboard-validation.json"
+}

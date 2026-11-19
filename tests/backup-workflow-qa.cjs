@@ -3,11 +3,11 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
 const {launchBrowser,closeBrowser,base,accountHeaders,waitForWorker,axePath}=require('./qa/runtime.cjs');
 const {history}=require('./fixtures/backup-history.cjs');
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8'));
-const out='outputs/backup-workflow';fs.mkdirSync(out,{recursive:true});
+const out=process.env.ASTRYX_QA_OUTPUT?require('node:path').join(process.env.ASTRYX_QA_OUTPUT,process.env.QA_BROWSER||'chromium'):'outputs/backup-workflow';fs.mkdirSync(out,{recursive:true});
 (async()=>{
  await waitForWorker();const browser=await launchBrowser(),checks=[],errors=[];
  try{
- const c=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',extraHTTPHeaders:accountHeaders('restore_workflow')});
+ const c=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true,reducedMotion:'reduce',extraHTTPHeaders:accountHeaders('restore_workflow')});
  await c.route('**/api/study-clock',r=>r.fulfill({json:{serverTime:Date.now()}}));
  const get=async()=>{const r=await c.request.get(base+'/api/state');assert.equal(r.status(),200);return r.json();};
  const put=async(payload)=>{const r=await c.request.put(base+'/api/state',{data:payload});assert.equal(r.status(),200,await r.text());};
@@ -17,28 +17,57 @@ const out='outputs/backup-workflow';fs.mkdirSync(out,{recursive:true});
  const initial=await get();const seed=await c.request.post(base+'/api/state/restore',{headers:{'x-study-revision':String(initial.revision),'Content-Type':'application/json'},data:raw});assert.equal(seed.status(),200,await seed.text());
  const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));let downloads=0,deletes=0,commits=0;p.on('download',()=>downloads++);p.on('request',r=>{if(r.method()==='DELETE')deletes++;if(r.url().endsWith('/commit'))commits++;});
  const saved=()=>p.getByText('저장됨',{exact:true}).waitFor();
- const open=async()=>{await p.getByRole('tab',{name:'학습 기록',exact:true}).click();await p.getByRole('button',{name:'기록 관리',exact:true}).click();await p.getByRole('menuitem',{name:'백업으로 복원',exact:true}).click();await p.locator('[data-backup-step]').filter({hasText:'1/6'}).waitFor();};
+ const open=async()=>{await p.getByRole('tab',{name:'학습 기록',exact:true}).click();await p.getByRole('button',{name:'기록 관리',exact:true}).click();await p.getByRole('menuitem',{name:'백업으로 복원',exact:true}).click();await p.locator('[data-backup-step^="1/6"]').waitFor();};
  const select=async()=>{await p.waitForFunction(()=>document.querySelector('input[type=file]')&&!document.querySelector('input[type=file]').disabled);await p.locator('input[type=file]').setInputFiles({name:'any-name.json',mimeType:'application/json',buffer:Buffer.from(raw)});await p.locator('[data-safety-preview]').filter({hasText:'복원 가능'}).waitFor();};
- const safety=async()=>{const download=p.waitForEvent('download');await p.getByRole('button',{name:'현재 기록 먼저 백업받기',exact:true}).focus();await p.keyboard.press('Enter');await download;await p.getByRole('checkbox').focus();await p.keyboard.press('Space');};
+ let clockChecked=false;
+ const safety=async()=>{
+  const backupButton=p.getByRole('button',{name:'현재 기록 먼저 백업받기',exact:true});
+  if(clockChecked){await backupButton.focus();await Promise.all([p.waitForEvent('download'),p.keyboard.press('Enter')]);}
+  else await Promise.all([p.waitForEvent('download'),backupButton.tap()]);
+  const checkbox=p.getByRole('checkbox');await checkbox.scrollIntoViewIfNeeded();
+  assert.ok((await checkbox.boundingBox()).width>=44&&(await checkbox.boundingBox()).height>=44,'backup confirmation touch target');
+  if(!clockChecked){
+   clockChecked=true;let release,finish,routeFailure;const held=new Promise(resolve=>release=resolve),finished=new Promise(resolve=>finish=resolve);
+   const handler=async route=>{await held;try{await route.fulfill({status:503,json:{error:'synthetic clock unavailable'}});}catch(error){routeFailure=error;}finally{finish();}};
+   await p.route('**/api/study-clock',handler);
+   try{
+    const request=p.waitForRequest('**/api/study-clock');await p.evaluate(()=>window.dispatchEvent(new Event('focus')));await request;
+    await p.waitForFunction(()=>document.querySelector('.backup-dialog input[type=file]')?.disabled);
+    assert.equal(await checkbox.isDisabled(),false,'clock refresh must not block safety-file acknowledgment');
+    await checkbox.tap();assert.equal(await checkbox.isChecked(),true);
+    assert.equal(await p.getByRole('button',{name:'이 백업으로 복원',exact:true}).isDisabled(),true,'clock write guard is retained');
+   }finally{release();await finished;await p.unroute('**/api/study-clock',handler);}
+   assert.equal(routeFailure,undefined);
+   const retry=p.getByRole('dialog').getByRole('button',{name:'시간 다시 확인',exact:true});await p.waitForFunction(()=>{const buttons=[...document.querySelectorAll('.backup-dialog button')];return buttons.some(el=>el.textContent.trim()==='시간 다시 확인'&&el.getAttribute('aria-disabled')!=='true');});
+   await Promise.all([p.waitForResponse('**/api/study-clock'),retry.tap()]);
+   await p.waitForFunction(()=>!document.querySelector('.backup-dialog input[type=file]')?.disabled);
+   assert.equal(await checkbox.isChecked(),true,'clock retry retains the explicit acknowledgment');
+   assert.equal(await p.getByRole('button',{name:'이 백업으로 복원',exact:true}).isEnabled(),true);
+  }else{await checkbox.tap();assert.equal(await checkbox.isChecked(),true);}
+  await p.locator('.backup-ack>span').tap();assert.equal(await checkbox.isChecked(),false,'confirmation text is a working touch target');
+  await checkbox.focus();await p.keyboard.press('Space');assert.equal(await checkbox.isChecked(),true,'keyboard confirmation remains supported');
+ };
  const prepare=()=>p.getByRole('button',{name:'이 백업으로 복원',exact:true}).click();
- await p.goto(base);await saved();await open();await select();assert.equal(downloads,0);assert.match(await p.locator('[data-safety-preview]').innerText(),/MB.*단어.*회차.*복원 가능/);assert.match(await p.locator('[data-backup-step]').innerText(),/2\/6/);
+ await p.goto(base);await saved();await open();await select();assert.equal(downloads,0);assert.match(await p.locator('[data-safety-preview]').innerText(),/MB.*단어.*회차.*복원 가능/);assert.match(await p.locator('[data-backup-step]').getAttribute('data-backup-step'),/2\/6/);assert.match(await p.locator('[data-backup-step]').innerText(),/2\/3/);
  // At 200% text size the body can scroll, while close/action and keyboard focus stay usable.
  for(const width of [320,390,1440])for(const fontSize of ['16px','32px']){
   await p.setViewportSize({width,height:844});await p.evaluate(size=>document.documentElement.style.fontSize=size,fontSize);
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   assert.equal(await p.locator('.dialog-scroll').evaluate(el=>el.scrollWidth>el.clientWidth+1),false);
   assert.equal(await p.locator('.dialog-actions').evaluate(el=>{const r=el.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight+1}),true);
+  const alignment=await p.locator('.backup-ack').evaluate(el=>{const box=el.querySelector('[role=checkbox]').getBoundingClientRect(),text=el.querySelector(':scope>span').getBoundingClientRect(),style=getComputedStyle(el.querySelector(':scope>span'));return{display:getComputedStyle(el).display,width:box.width,height:box.height,offset:Math.abs(box.y+box.height/2-(text.y+parseFloat(style.paddingTop)+parseFloat(style.lineHeight)/2))};});
+  assert.equal(alignment.display,'flex');assert.ok(alignment.width>=44&&alignment.height>=44&&alignment.offset<=2,'checkbox aligns with the first text line across width/text scales');
  }
  await p.setViewportSize({width:390,height:844});await p.evaluate(()=>document.documentElement.style.fontSize='16px');
  await safety();for(let i=0;i<12;i++){await p.keyboard.press('Tab');assert.equal(await p.evaluate(()=>!!document.activeElement.closest('[role=dialog]')),true);}
  await p.addScriptTag({path:axePath});assert.deepEqual(await p.evaluate(async()=>(await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>v.id)),[]);
- checks.push('safety size/count/restorability precede downloading; keyboard download/acknowledgment, focus trap, 200% text and 320–1440 px work');
+ checks.push('safety size/count/restorability precede downloading; touch/text/keyboard acknowledgment, 44px aligned target, clock retry/write guard, focus trap and 200% text work');
  // Another device changes the revision after safety approval, before creating a job.
  let current=await get();await put({revision:current.revision,settings:{...current.state.settings,dailyGoal:4},progress:{},sessions:{}});await prepare();await p.getByRole('button',{name:'서버 기록 확인하기',exact:true}).waitFor();assert.match(await p.locator('[data-backup-step]').innerText(),/최신 기록/);assert.equal(await p.getByRole('alertdialog').count(),0);await p.getByRole('button',{name:'서버 기록 확인하기',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});assert.equal((await get()).state.settings.dailyGoal,4);
  // A revision change after upload must also discard only obsolete staging and reload.
  await open();await select();await safety();let altered=false;
- await p.route('**/api/state/restore/jobs/*/chunks/*',async route=>{await p.locator('[data-backup-step]').filter({hasText:'3/6'}).waitFor();await route.continue();});
- await p.route('**/api/state/restore/jobs/*/validate',async route=>{await p.locator('[data-backup-step]').filter({hasText:'4/6'}).waitFor();if(!altered){altered=true;const now=await get();await put({revision:now.revision,settings:{...now.state.settings,dailyGoal:6},progress:{},sessions:{}});}await route.continue();});
+ await p.route('**/api/state/restore/jobs/*/chunks/*',async route=>{await p.locator('[data-backup-step^="3/6"]').waitFor();await route.continue();});
+ await p.route('**/api/state/restore/jobs/*/validate',async route=>{await p.locator('[data-backup-step^="4/6"]').waitFor();if(!altered){altered=true;const now=await get();await put({revision:now.revision,settings:{...now.state.settings,dailyGoal:6},progress:{},sessions:{}});}await route.continue();});
  await prepare();await p.getByRole('button',{name:'서버 기록 확인하기',exact:true}).waitFor();await p.getByRole('button',{name:'서버 기록 확인하기',exact:true}).click();await p.getByRole('dialog').waitFor({state:'hidden'});await p.unroute('**/api/state/restore/jobs/*/validate');assert.equal((await get()).state.settings.dailyGoal,6);assert.equal((await(await c.request.get(base+'/api/state/restore/jobs')).json()).job,null);
  checks.push('revision conflicts before and after upload lead to a fresh server snapshot and discard obsolete staging only');
  // Force both the commit response and receipt lookup to fail: cancellation is forbidden until reload.
@@ -50,7 +79,7 @@ const out='outputs/backup-workflow';fs.mkdirSync(out,{recursive:true});
  // A later save between commit and reload must win over the uploaded snapshot.
  await open();await select();await safety();await prepare();const extra=words.find(w=>!state.progress[w.id]).id;
  await p.route('**/api/state/restore/jobs/*/commit',async route=>{const response=await route.fetch();assert.equal(response.status(),200);const now=await get();await put({revision:now.revision,progress:{[extra]:{notes:'saved after commit'}},sessions:{}});await route.fulfill({response});});
- await p.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click();await p.getByRole('heading',{name:'백업을 복원했어요.',exact:true}).waitFor();assert.match(await p.getByRole('dialog').innerText(),/21개 단어 기록/);assert.equal((await get()).state.progress[extra].notes,'saved after commit');assert.deepEqual((await get()).state.sessions,state.sessions);assert.match(await p.locator('[data-backup-step]').innerText(),/6\/6/);
+ await p.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click();await p.getByRole('heading',{name:'백업을 복원했어요.',exact:true}).waitFor();assert.match(await p.getByRole('dialog').innerText(),/21개 단어 기록/);assert.equal((await get()).state.progress[extra].notes,'saved after commit');assert.deepEqual((await get()).state.sessions,state.sessions);assert.match(await p.locator('[data-backup-step]').getAttribute('data-backup-step'),/6\/6/);assert.equal(await p.locator('[data-backup-step]').innerText(),'복원 완료');
  checks.push('post-commit saves are included in the reloaded state and success counts; sentences, scores, settings and incomplete drafts survive');
  await p.screenshot({path:out+'/complete-mobile.png'});assert.deepEqual(errors,[]);const result={passed:true,checks,errors};fs.writeFileSync(out+'/result.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
  }finally{await closeBrowser(browser);}

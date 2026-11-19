@@ -1,0 +1,3583 @@
+{
+  "planId": "astryx-adoption-2026-11-18",
+  "tag": "astryx-adoption",
+  "scope": "T9-T18",
+  "status": "in-progress",
+  "completed": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "phases": {
+    "9": {
+      "quality": "passed",
+      "unit": {
+        "passed": 926,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "node22": 0,
+        "node24": 0
+      },
+      "build": {
+        "node22": 0,
+        "node24": 0
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0
+      },
+      "doctor": {
+        "pass": 11,
+        "warn": 1,
+        "fail": 0
+      },
+      "browserPairs": 26,
+      "browserExitCodes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "visualDifferences": 0,
+      "source": "outputs/astryx-t9-t18-20261118/t9-final-source.json",
+      "evidence": "outputs/astryx-t9-t18-20261118/t9-final-verified"
+    },
+    "10": {
+      "quality": "passed",
+      "unit": {
+        "passed": 926,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "node22": 0
+      },
+      "build": {
+        "node22": 0
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0
+      },
+      "browserPairs": 26,
+      "browserResults": [
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-density-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-ui-density-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-plan-contract-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-ui-plan-contract-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-editor-save-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "refactor-boundaries-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-refactor-boundaries-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-ui-continuity-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "expression-translation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-expression-translation-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "state-roundtrip-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-state-roundtrip-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "integration-consistency-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-integration-consistency-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-image-practice-qa.cjs-matrix.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "pronunciation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-pronunciation-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-sheet-body-swipe-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-today-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\chromium-astryx-today-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-density-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-ui-density-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-plan-contract-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-ui-plan-contract-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-editor-save-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "refactor-boundaries-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-refactor-boundaries-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-ui-continuity-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "expression-translation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-expression-translation-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "state-roundtrip-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-state-roundtrip-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "integration-consistency-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-integration-consistency-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-image-practice-qa.cjs-matrix.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "pronunciation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-pronunciation-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-sheet-body-swipe-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-today-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-search-final\\webkit-astryx-today-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-library-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-ready-verified\\chromium-astryx-library-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-library-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t10-ready-verified\\webkit-astryx-library-qa.cjs.log"
+        }
+      ],
+      "source": "outputs/astryx-t9-t18-20261118/t10-final-source.json",
+      "sourceSnapshot": "outputs/astryx-t9-t18-20261118/t10-source-files",
+      "styles": "outputs/astryx-t9-t18-20261118/t10-style-evidence.json",
+      "excludedRuns": [
+        {
+          "engine": "chromium",
+          "phase": "t10-search-final",
+          "reason": "Diagnostic-removal edit inadvertently removed the test body. Exit0 excluded because the required result/screenshot artifacts were missing. Restored complete script; genuine2 runs replace them at t10-ready-verified."
+        },
+        {
+          "engine": "webkit",
+          "phase": "t10-search-final",
+          "reason": "Diagnostic-removal edit inadvertently removed the test body. Exit0 excluded because the required result/screenshot artifacts were missing. Restored complete script; genuine2 runs replace them at t10-ready-verified."
+        }
+      ],
+      "latestBuildLog": "work/astryx-adoption-20261118/.sites-runtime/t10-build-verified.log",
+      "node24TypeAndBuild": "T17 final cross-runtime check pending"
+    },
+    "11": {
+      "quality": "passed",
+      "browserPairs": 34,
+      "browserResults": [
+        {
+          "engine": "chromium",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-font-final\\chromium-study-layout-qa.cjs.log",
+          "phase": "t11-font-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sentence-feedback-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-font-final\\chromium-sentence-feedback-qa.cjs.log",
+          "phase": "t11-font-final"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-font-final\\webkit-study-layout-qa.cjs.log",
+          "phase": "t11-font-final"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sentence-feedback-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-font-final\\webkit-sentence-feedback-qa.cjs.log",
+          "phase": "t11-font-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sentence-feedback-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-verified\\chromium-sentence-feedback-layout-qa.cjs.log",
+          "phase": "t11-verified"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "draft-interaction-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-verified\\chromium-draft-interaction-qa.cjs.log",
+          "phase": "t11-verified"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "feedback-correction-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-verified\\chromium-feedback-correction-qa.cjs.log",
+          "phase": "t11-verified"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-verified\\chromium-local-draft-qa.cjs.log",
+          "phase": "t11-verified"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "study-recovery-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-study-recovery-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "saved-summary-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-saved-summary-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "clock-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-clock-continuity-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "study-controller-render-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-study-controller-render-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "study-clock-race-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-study-clock-race-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "feedback-safety-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-feedback-safety-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "feedback-issue-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-feedback-issue-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "refactor-boundaries-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-refactor-boundaries-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-ui-continuity-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "haru-session-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-retry\\chromium-haru-session-icons-qa.cjs.log",
+          "phase": "t11-chromium-retry"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "request-timeout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-chromium-clock-final\\chromium-request-timeout-qa.cjs.log",
+          "phase": "t11-chromium-clock-final"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sentence-feedback-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-remaining\\webkit-sentence-feedback-layout-qa.cjs.log",
+          "phase": "t11-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "draft-interaction-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-remaining\\webkit-draft-interaction-qa.cjs.log",
+          "phase": "t11-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "feedback-correction-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-remaining\\webkit-feedback-correction-qa.cjs.log",
+          "phase": "t11-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-remaining\\webkit-local-draft-qa.cjs.log",
+          "phase": "t11-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "request-timeout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-request-timeout-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-recovery-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-study-recovery-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "saved-summary-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-saved-summary-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "clock-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-clock-continuity-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-controller-render-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-study-controller-render-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-clock-race-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-study-clock-race-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "feedback-safety-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-feedback-safety-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "feedback-issue-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-feedback-issue-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "refactor-boundaries-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-refactor-boundaries-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-ui-continuity-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "haru-session-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t11-webkit-retry\\webkit-haru-session-icons-qa.cjs.log",
+          "phase": "t11-webkit-retry"
+        }
+      ],
+      "unit": {
+        "passed": 927,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "node22": 0
+      },
+      "build": {
+        "node22": 0
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0
+      },
+      "source": "outputs/astryx-t9-t18-20261118/t11-final-source.json",
+      "sourceSnapshot": "outputs/astryx-t9-t18-20261118/t11-source-files",
+      "styles": "outputs/astryx-t9-t18-20261118/t11-style-comparison-final.json",
+      "baselineRecovery": "outputs/astryx-t9-t18-20261118/baseline-reconstructed-build.json",
+      "notes": [
+        "Real study consumers: seven fields, 2000 UTF-16 maxlength, first answers/help/grades and hooks unchanged.",
+        "Stable system font comparison: 80 conditions per engine, exact-source reconstructed T8 baseline.",
+        "Stale word AI fixtures now supply explicit intended Korean; production intent guard unchanged. Fake test-clock readiness and modal-close completion are awaited before deadlines.",
+        "QA Worker accepts an absolute compiled serverRoot for isolated comparison builds; synthetic bindings/AI-disabled policy retained.",
+        "Astryx grammar QA script is registered as T12 preparation; its UI migration is not part of T11."
+      ],
+      "node24TypeAndBuild": "T17 final cross-runtime check pending"
+    },
+    "12": {
+      "quality": "passed",
+      "browserPairs": 28,
+      "browserResults": [
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-grammar-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-current\\chromium-astryx-grammar-qa.cjs.log",
+          "phase": "t12-current"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-ui-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-current\\chromium-grammar-ui-qa.cjs.log",
+          "phase": "t12-current"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-current\\chromium-grammar-qa.cjs.log",
+          "phase": "t12-current"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-v2-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-grammar-v2-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-v3-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-grammar-v3-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-v4-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-grammar-v4-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-v4-compat-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-grammar-v4-compat-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-v4-compat-qa.cjs",
+            "new-v3"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-grammar-v4-compat-qa.cjs-new-v3.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-mixed-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-grammar-mixed-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-astryx-navigation-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-navigation-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-local-draft-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-study-layout-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "haru-session-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-chromium-remaining\\chromium-haru-session-icons-qa.cjs.log",
+          "phase": "t12-chromium-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-grammar-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-astryx-grammar-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-ui-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-ui-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-v2-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-v2-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-v3-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-v3-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-v4-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-v4-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-v4-compat-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-v4-compat-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-v4-compat-qa.cjs",
+            "new-v3"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-v4-compat-qa.cjs-new-v3.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-mixed-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-grammar-mixed-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-astryx-navigation-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-navigation-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-local-draft-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-study-layout-qa.cjs.log",
+          "phase": "t12-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "haru-session-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t12-webkit\\webkit-haru-session-icons-qa.cjs.log",
+          "phase": "t12-webkit"
+        }
+      ],
+      "unit": {
+        "passed": 927,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "node22": 0
+      },
+      "build": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t12-build-fourth.log"
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0
+      },
+      "grammarSourceReview": {
+        "exitCode": 0
+      },
+      "source": "outputs/astryx-t9-t18-20261118/t12-final-source.json",
+      "sourceSnapshot": "outputs/astryx-t9-t18-20261118/t12-source-files",
+      "styles": "outputs/astryx-t9-t18-20261118/t12-style-final.json",
+      "nativeGeometry": "outputs/astryx-t9-t18-20261118/t12-native-geometry",
+      "nativeBaselineParity": "outputs/astryx-t9-t18-20261118/t12-native-baselines-match.json",
+      "iconCorrection": "outputs/astryx-t9-t18-20261118/action-icon-position-audit.json",
+      "notes": [
+        "Real grammar consumers and library inner TabList migrated; committed navigation, first/latest answers/help, UTF-16 maxlength, v1/v2/v3/v4 documents and separate self-checks retained.",
+        "RadioList is the actual public export; CLI RadioGroup is a discovery alias. Button lang is forwarded by the compatibility type.",
+        "Exact native grammar font/color/outer geometry matches at390/1440 in both engines; native74px radio rows and47px buttons preserved.",
+        "Original trailing icons at11 migrated actions restored from exact baseline JSX; both engine study80 and icon70-condition suites rerun with a focused icon-order assertion.",
+        "QA grammar flow uses v4 profile as required; repeated order tokens select by semantic disabled state. No original correctness assertions removed."
+      ],
+      "node24TypeAndBuild": "T17 final cross-runtime check pending"
+    },
+    "13": {
+      "quality": "passed",
+      "browserPairs": 24,
+      "browserResults": [
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-escape-capture\\chromium-ui-continuity-qa.cjs.log",
+          "phase": "t13-escape-capture"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "journal-navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-escape-capture\\chromium-journal-navigation-qa.cjs.log",
+          "phase": "t13-escape-capture"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "review-calendar-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-escape-capture\\chromium-review-calendar-qa.cjs.log",
+          "phase": "t13-escape-capture"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "review-extension-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-escape-capture\\chromium-review-extension-qa.cjs.log",
+          "phase": "t13-escape-capture"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-plan-contract-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-escape-capture\\chromium-ui-plan-contract-qa.cjs.log",
+          "phase": "t13-escape-capture"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-escape-capture\\chromium-backup-workflow-qa.cjs.log",
+          "phase": "t13-escape-capture"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-escape-capture\\chromium-navigation-qa.cjs.log",
+          "phase": "t13-escape-capture"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-chromium-remaining\\chromium-sheet-dismiss-qa.cjs.log",
+          "phase": "t13-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-chromium-remaining\\chromium-sheet-body-swipe-qa.cjs.log",
+          "phase": "t13-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-motion-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-chromium-remaining\\chromium-sheet-motion-qa.cjs.log",
+          "phase": "t13-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-chromium-remaining\\chromium-editor-save-qa.cjs.log",
+          "phase": "t13-chromium-remaining"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-chromium-remaining\\chromium-settings-dialog-qa.cjs.log",
+          "phase": "t13-chromium-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-ui-continuity-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "journal-navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-journal-navigation-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "review-calendar-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-review-calendar-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "review-extension-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-review-extension-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-plan-contract-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-ui-plan-contract-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-backup-workflow-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-navigation-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-sheet-dismiss-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-sheet-body-swipe-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-motion-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-sheet-motion-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-editor-save-qa.cjs.log",
+          "phase": "t13-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t13-webkit\\webkit-settings-dialog-qa.cjs.log",
+          "phase": "t13-webkit"
+        }
+      ],
+      "unit": {
+        "passed": 927,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "node22": 0
+      },
+      "build": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t13-build-escape-capture.log"
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0
+      },
+      "source": "outputs/astryx-t9-t18-20261118/t13-final-source.json",
+      "sourceSnapshot": "outputs/astryx-t9-t18-20261118/t13-source-files",
+      "styles": "outputs/astryx-t9-t18-20261118/t13-style-final.json",
+      "baseline": "outputs/astryx-t9-t18-20261118/t13-baseline",
+      "notes": [
+        "Review/record/replay controls, Core Table and read-only text migrated. Menus/Sheets retain their current Radix hosts.",
+        "Journal uses the public CollapsibleGroup/useCollapsible hook with original native headings/buttons, scoped arrow keys and lazy closed bodies. No private library DOM or package source inspected.",
+        "23 dates/26 attempts and11 word/warmup cards; exports read all records; browsing/replay do not write grades; explicit date correction changes only its selected attempt.",
+        "Core nonmodal Selector uses aria-activedescendant with trigger focus. Main page remains inert behind its parent modal.",
+        "Fixed real Escape double-dismissal: capture expanded Core combobox ownership before Core hides its popup, then suppress only Radix host dismissal. Both engines verify one Escape closes only the selector and retains parent/focus.",
+        "Cancelled AlertDialog presence is awaited before the next sheet Escape; original dirty/save/restore assertions retained.",
+        "16 journal views have zero computed typography/paint/outer geometry differences from native baseline."
+      ],
+      "node24TypeAndBuild": "T17 final cross-runtime check pending"
+    },
+    "14": {
+      "quality": "passed",
+      "browserPairs": 46,
+      "browserResults": [
+        {
+          "engine": "chromium",
+          "args": [
+            "haru-system-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-icons-fixed\\chromium-haru-system-icons-qa.cjs.log",
+          "phase": "t14-icons-fixed"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-icons-fixed\\chromium-settings-dialog-qa.cjs.log",
+          "phase": "t14-icons-fixed"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "device-speech-ui-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-nav-final\\chromium-device-speech-ui-qa.cjs.log",
+          "phase": "t14-chromium-nav-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "pronunciation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-nav-final\\chromium-pronunciation-qa.cjs.log",
+          "phase": "t14-chromium-nav-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-terms-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-nav-final\\chromium-grammar-terms-qa.cjs.log",
+          "phase": "t14-chromium-nav-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-nav-final\\chromium-local-draft-qa.cjs.log",
+          "phase": "t14-chromium-nav-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-today-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-nav-final\\chromium-astryx-today-qa.cjs.log",
+          "phase": "t14-chromium-nav-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-density-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-nav-final\\chromium-ui-density-qa.cjs.log",
+          "phase": "t14-chromium-nav-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-nav-final\\chromium-ui-continuity-qa.cjs.log",
+          "phase": "t14-chromium-nav-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-resume-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-resume-qa.cjs.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "front"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-front.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "back"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-back.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-matrix.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "lifecycle"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-lifecycle.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "error"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-error.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "network"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-network.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "editor"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-editor.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "eligible"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-eligible.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "empty"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-empty.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "full"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-full.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "extended"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-extended.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "isolation"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-isolation.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "production"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-chromium-final\\chromium-image-practice-qa.cjs-production.log",
+          "phase": "t14-chromium-final"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "haru-system-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-haru-system-icons-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-settings-dialog-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-resume-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-resume-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "device-speech-ui-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-device-speech-ui-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "pronunciation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-pronunciation-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-terms-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-grammar-terms-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-local-draft-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-today-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-astryx-today-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-density-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-ui-density-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-continuity-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-ui-continuity-qa.cjs.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "front"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-front.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "back"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-back.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-matrix.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "lifecycle"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-lifecycle.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "error"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-error.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "network"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-network.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "editor"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-editor.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "eligible"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-eligible.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "empty"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-empty.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "full"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-full.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "extended"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-extended.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "isolation"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-isolation.log",
+          "phase": "t14-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "production"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t14-webkit\\webkit-image-practice-qa.cjs-production.log",
+          "phase": "t14-webkit"
+        }
+      ],
+      "unit": {
+        "passed": 927,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t14-type-after-image.log"
+      },
+      "build": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t14-build-ninth.log"
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0
+      },
+      "source": "outputs/astryx-t9-t18-20261118/t14-final-source.json",
+      "sourceSnapshot": "outputs/astryx-t9-t18-20261118/t14-source-files",
+      "styles": "outputs/astryx-t9-t18-20261118/t14-style-final.json",
+      "assetEvidence": "outputs/astryx-t9-t18-20261118/t14-image-assets.json",
+      "actualPhoneValidation": "not-run",
+      "actualAudioListening": "not-run",
+      "node24TypeAndBuild": "T17 final cross-runtime check pending",
+      "notes": [
+        "Four settings/model controls use Core Selector; existing preference saves, locked/pending behavior, focused-control return and deliberate focus movement remain verified. Native checkbox/details and existing Radix overlays retained.",
+        "Image flip uses Core Button and explicit accessible front/back labels; independent position controller/revision/state schemas and no-front-answer policy unchanged. Numeric entry ref/error/form submit and original icon order/touch/focus preserved.",
+        "At 320px/200% found and fixed cropped counter/focus ring caused by generic button specificity, Core icon wrapper and column gaps; final six navigation conditions per engine exactly match native geometry/style.",
+        "Settings heading/label/selector styles match exact-source T8 comparison; three Chromium width serializations differ by at most 0.03px. No whole-image pixel identity claim.",
+        "Read-only approved WebP 3809 files all match manifest hashes. Missing full-image env initially failed resume; runner now runs existing asset preflight before image QA.",
+        "Four SSR assertions now match class tokens/visible button labels; positive IPA count/order, no interactive IPA, hidden/changed sense and cursor error wording assertions kept. Initial failures preserved.",
+        "Chromium non-image checks are reused after the final image-navigation-only CSS edit; all affected image checks and WebKit run against final build. No real AI calls, production QA writes, dependency/SQL/Site changes."
+      ]
+    },
+    "15": {
+      "quality": "passed-local",
+      "nativeKindsVerified": [
+        "settings",
+        "source",
+        "grammar-help",
+        "editor",
+        "personal",
+        "completed",
+        "date",
+        "export",
+        "restore",
+        "image"
+      ],
+      "contractEvidence": "outputs/astryx-t9-t18-20261118/t15-product-adapter/result.json",
+      "settingsBrowserEvidence": "outputs/astryx-t9-t18-20261118/t15-settings-motion/results.json",
+      "nativeClosePaths": "outputs/astryx-t9-t18-20261118/t15-settings-source-paths-v2/results.json",
+      "baseline": "outputs/astryx-t9-t18-20261118/t15-all-reference-loaded-second/results.json",
+      "notes": [
+        "Guard functions and data/API/controller ownership retained; settings auto-save and independent image-position closing remain explicit exceptions.",
+        "Native Dialog plus existing swipe presentation; retained Radix confirmations portal inside active native host and return focus to the actual previous owner.",
+        "Settings motion, nested confirmation, save conflict/retry and focus checks passed on Chromium/WebKit. Settings/source 20 close paths and 16 views passed; remaining native sheet migration in progress.",
+        "Reference UI for 9 original sheets plus image practice: 100 close paths/80 views captured from exact-source T8 reconstructed build; no original archive claim.",
+        "Measured hidden frame scrolling by 4px; using public Core inner padding and owned frame to preserve legacy negative scroll gutters. Final geometry checks pending.",
+        "New close-path test initially invoked browser Back instead of app edge Back; corrected using existing gesture, preserving actual browser navigation contract. Date has both footer Close and X, test now explicitly selects X.",
+        "Final comparison uses approved loaded images and completed export readiness on both sides. Prior missing thumbnail and T8 tab-id fixture mismatches retained as failed evidence.",
+        "Core document capture may cancel page overscroll before the sheet; control tests record that provenance and still require no new sheet cancellation, no dragging, native scrolling, dirty cancellation and focus return.",
+        "WebKit resume had a functional success followed by a timed-out Node process; the diagnostic run is excluded. Explicit esbuild service cleanup subsequently completed with exit0 on both engines."
+      ],
+      "actualPhoneValidation": "not-run",
+      "inProgressKind": null,
+      "fiveKindEvidence": {
+        "settingsSourceHelp": "outputs/astryx-t9-t18-20261118/t15-three-spacing/results.json",
+        "editorPersonal": "outputs/astryx-t9-t18-20261118/t15-fields-guard-fixed/results.json"
+      },
+      "compatibilityFixes": [
+        "Native-contained discard confirmation clicks were swallowed by the parent sheet swipe capture; reproduced in t15-five-guard-before and fixed, full sheet-dismiss passed on both engines.",
+        "Horizontal Back locks the owned native frame so the nested portal stays interactive; a nested confirmation suppresses transforms that would alter its fixed containing block.",
+        "Whole-form comparison found duplicated label spacing and selector width/zoom differences missed by T10 control-only checks. Owned label flow plus Core TextArea uses public props/targets and layout containment; label click/rows/maxlength checks passed.",
+        "Chromium editor/personal root/header/body/close/actions rectangles now exactly match T8 at390/1440 and100/200%; full WebKit comparison and final motion validation remain pending.",
+        "Record menu closes and releases its dismissal layer before opening a native sheet; immediate reopen/Escape reproduced and fixed. Both engines passed full navigation, backup workflow and sheet-dismiss.",
+        "Inside native padding never dismisses; cancelled/moved backdrop touch stays open, real touch backdrop goes through the existing guard, and a native cancel after padding touch does not reuse an earlier outside veto."
+      ],
+      "latestBuiltSource": "t15-final-source.json",
+      "guardFailureEvidence": "outputs/astryx-t9-t18-20261118/t15-five-guard-before/results.json",
+      "completedEvidence": [
+        "outputs/astryx-t9-t18-20261118/t15-completed-chromium-final/results.json",
+        "outputs/astryx-t9-t18-20261118/t15-completed-chromium/results.json",
+        "outputs/astryx-t9-t18-20261118/t15-completed-webkit/results.json"
+      ],
+      "dirtyExitMotion": "passed-on-both-engines",
+      "dirtyExitNote": "Confirmation exit is observed through its real animation before starting native sheet exit; at least four moving frames and monotone downward motion checked. Initial new test started during entrance hold; waits for real entrance animations now.",
+      "dateEvidence": [
+        "outputs/astryx-t9-t18-20261118/t15-date/results.json",
+        "outputs/astryx-t9-t18-20261118/t15-date-chromium/results.json",
+        "outputs/astryx-t9-t18-20261118/t15-date-webkit/results.json"
+      ],
+      "styles": "outputs/astryx-t9-t18-20261118/t15-final-style-verified-second.json",
+      "dateFixtureNote": "Fresh daily-session assertion now awaits the matching successful PUT instead of a stale Saved label; no retries, mutations or date/score assertions removed.",
+      "remainingChecks": [],
+      "restoreAndExportEvidence": "outputs/astryx-t9-t18-20261118/t15-record-menu/results.json",
+      "imageEvidence": "outputs/astryx-t9-t18-20261118/t15-image/results.json",
+      "imageEvidenceNote": "All native close paths and matrix passed both engines. Chromium resume exited0; WebKit resume functional report passed but process timed out during cleanup and is not a passing pair; diagnostics and fresh final run pending.",
+      "browserPairs": 20,
+      "browserResults": [
+        {
+          "engine": "webkit",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-first\\webkit-settings-dialog-qa.cjs.log",
+          "phase": "t15-final-first"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-first\\webkit-sheet-dismiss-qa.cjs.log",
+          "phase": "t15-final-first"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-webkit\\webkit-sheet-body-swipe-qa.cjs.log",
+          "phase": "t15-final-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-motion-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-webkit\\webkit-sheet-motion-qa.cjs.log",
+          "phase": "t15-final-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-webkit\\webkit-navigation-qa.cjs.log",
+          "phase": "t15-final-webkit"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-webkit\\webkit-editor-save-qa.cjs.log",
+          "phase": "t15-final-webkit"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-chromium\\chromium-settings-dialog-qa.cjs.log",
+          "phase": "t15-final-chromium"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-chromium\\chromium-sheet-dismiss-qa.cjs.log",
+          "phase": "t15-final-chromium"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-chromium\\chromium-sheet-body-swipe-qa.cjs.log",
+          "phase": "t15-final-chromium"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-motion-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-chromium\\chromium-sheet-motion-qa.cjs.log",
+          "phase": "t15-final-chromium"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-chromium\\chromium-navigation-qa.cjs.log",
+          "phase": "t15-final-chromium"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-chromium\\chromium-editor-save-qa.cjs.log",
+          "phase": "t15-final-chromium"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-resume-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image\\chromium-image-practice-resume-qa.cjs.log",
+          "phase": "t15-final-image"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-resume-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image\\webkit-image-practice-resume-qa.cjs.log",
+          "phase": "t15-final-image"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-sheets-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image-second\\chromium-astryx-sheets-qa.cjs.log",
+          "phase": "t15-final-image-second"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image-second\\chromium-image-practice-qa.cjs-matrix.log",
+          "phase": "t15-final-image-second"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "haru-system-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image-second\\chromium-haru-system-icons-qa.cjs.log",
+          "phase": "t15-final-image-second"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-sheets-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image-second\\webkit-astryx-sheets-qa.cjs.log",
+          "phase": "t15-final-image-second"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image-second\\webkit-image-practice-qa.cjs-matrix.log",
+          "phase": "t15-final-image-second"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "haru-system-icons-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t15-final-image-second\\webkit-haru-system-icons-qa.cjs.log",
+          "phase": "t15-final-image-second"
+        }
+      ],
+      "sheets": [
+        {
+          "engine": "chromium",
+          "closeChecks": 66,
+          "views": 40
+        },
+        {
+          "engine": "webkit",
+          "closeChecks": 66,
+          "views": 40
+        }
+      ],
+      "unit": {
+        "passed": 927,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0
+      },
+      "typecheck": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t15-final-type-second.log"
+      },
+      "build": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t15-final-build-second.log"
+      },
+      "source": "outputs/astryx-t9-t18-20261118/t15-final-source.json",
+      "sourceSnapshot": "outputs/astryx-t9-t18-20261118/t15-source-files",
+      "publication": "not-approved",
+      "scopeNote": "Six unaffected non-image cases and the unchanged image-position resume controller per engine reused after the final caption line-height and close-icon child edit. All10 sheets, image matrix and system-icon cases rerun against the last build. Native file/date controls and retained Radix confirmations preserve existing contracts; data/API/hooks unchanged."
+    },
+    "16": {
+      "quality": "passed-local",
+      "firstBrowserEvidence": "outputs/astryx-t9-t18-20261118/t16-first/results.json",
+      "firstBrowserPairs": 14,
+      "stylesBeforeFix": "outputs/astryx-t9-t18-20261118/t16-first-chromium-style.json",
+      "presentation": [
+        "Core Button actions and Text paragraphs",
+        "native file/date input and Radix confirmation/checkbox retained",
+        "compound DialogClose uses Core child with distinct dialog-footer-close slot"
+      ],
+      "notes": [
+        "The initial inherit-text experiment was reverted after measuring native24px paragraphs. Default common paragraph implementation restored.",
+        "Date compound Close retains native grid/position behavior, avoiding Core relative positioning and wrapping under existing data-slot selectors.",
+        "18.98MB resume/lost-commit/safety recovery and19.9MB restore passed both engines before the final presentation correction. Final-state browser/quality verification pending.",
+        "The old native date Close also wrapped under floating-X44px sizing. Earlier one-line-baseline assumption was incorrect. Form footer now has a distinct public data-slot, preserving the same guard while removing X sizing/offset. New final UI assertion checks one-line labels at100/200%; baseline retains its observed historical behavior."
+      ],
+      "actualPhoneValidation": "not-run",
+      "browserPairs": 14,
+      "browserResults": [
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-sheets-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\chromium-astryx-sheets-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\chromium-backup-workflow-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "backup-safety-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\chromium-backup-safety-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "large-backup-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\chromium-large-backup-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "backup-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\chromium-backup-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\chromium-editor-save-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-sheets-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\webkit-astryx-sheets-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-final-second\\webkit-backup-workflow-qa.cjs.log",
+          "phase": "t16-final-second"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "backup-safety-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-webkit-remaining\\webkit-backup-safety-qa.cjs.log",
+          "phase": "t16-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "large-backup-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-webkit-remaining\\webkit-large-backup-qa.cjs.log",
+          "phase": "t16-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "backup-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-webkit-remaining\\webkit-backup-qa.cjs.log",
+          "phase": "t16-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "editor-save-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-webkit-remaining\\webkit-editor-save-qa.cjs.log",
+          "phase": "t16-webkit-remaining"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-date-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-date-fixed\\webkit-study-date-qa.cjs.log",
+          "phase": "t16-date-fixed"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "study-date-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t9-t18-20261118\\t16-date-fixed\\chromium-study-date-qa.cjs.log",
+          "phase": "t16-date-fixed"
+        }
+      ],
+      "styles": "outputs/astryx-t9-t18-20261118/t16-final-second-style.json",
+      "unit": {
+        "passed": 927,
+        "failed": 0,
+        "exitCode": 0
+      },
+      "lint": {
+        "errors": 0,
+        "existingWarnings": 15,
+        "exitCode": 0,
+        "changedFixtures": 0
+      },
+      "typecheck": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t16-footer-type.log"
+      },
+      "build": {
+        "node22": 0,
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t16-footer-build.log"
+      },
+      "source": "outputs/astryx-t9-t18-20261118/t16-final-source.json",
+      "sourceSnapshot": "outputs/astryx-t9-t18-20261118/t16-source-files",
+      "remainingChecks": [],
+      "scopeNote": "UI/Text/Button only; file/date and retained semantic/confirmation controls unchanged. Form Close has its own slot. All affected backup/date paths run against the final product build; date-only fixture preserves real UI timers while midnight keeps virtual time. No API/lib/data/SQL/lock/Site/business-hook changes, paidAI or production QA writes."
+    },
+    "17": {
+      "quality": "passed-with-disclosed-performance-overheads",
+      "initialFinalRuntimeChecks": {
+        "source": "t16-final-source.json",
+        "node24": {
+          "unit": 927,
+          "grammar": 0,
+          "typecheck": 0,
+          "lint": {
+            "errors": 0,
+            "existingWarnings": 15
+          },
+          "build": 0
+        },
+        "logs": "work/astryx-adoption-20261118/.sites-runtime/t17-node24-*.log",
+        "finalChecksAfterQaAndCssRepairs": "passed; CSS/browser-fixture-only follow-up uses unchanged unit/type inputs and rebuilt Node22/24 artifacts"
+      },
+      "doctor": {
+        "sourceAndBuilt": {
+          "pass": 11,
+          "warn": 2,
+          "fail": 0,
+          "info": 10,
+          "purityFindings": 2046,
+          "sourceRead": 1005,
+          "builtRead": 14,
+          "imports": 51,
+          "importFiles": 20,
+          "componentUses": 98
+        },
+        "log": "work/astryx-adoption-20261118/.sites-runtime/t17-iphone2-clean-doctor.log",
+        "scope": "Fresh exact1960-source snapshot with readonly dependencies/build; CLI exclusions and junction traversal limit counts. Initial --built . on used product checkout reached20000-file cap and is not complete app coverage.",
+        "builtOutput": {
+          "pass": 11,
+          "warn": 1,
+          "fail": 0,
+          "info": 11,
+          "sourceRead": 214,
+          "builtRead": 6,
+          "log": "work/astryx-adoption-20261118/.sites-runtime/t17-iphone2-built-doctor.log",
+          "scope": "Explicit immutable build path; CSS usage checked, JSX purity intentionally not inspected on compiled build"
+        },
+        "formatReuse": {
+          "evidence": "outputs/astryx-t9-t18-20261118/t17-ready-format-verification.json",
+          "reason": "Only22 trailing whitespace removals in13 TSX files; emittedJS unchanged; final builds and smoke verified; no all-byte-equivalence claim"
+        }
+      },
+      "browserFirstPass": {
+        "chromium": {
+          "expected": 110,
+          "completed": 110,
+          "passed": 99,
+          "failed": [
+            [
+              "comprehensive-qa.cjs"
+            ],
+            [
+              "haru-content-icons-qa.cjs"
+            ],
+            [
+              "haru-record-icons-qa.cjs"
+            ],
+            [
+              "image-practice-qa.cjs",
+              "front"
+            ],
+            [
+              "purpose-improvements-qa.cjs"
+            ],
+            [
+              "sentence-structure-qa.cjs"
+            ],
+            [
+              "ui-plan-contract-qa.cjs"
+            ],
+            [
+              "ui-refresh-qa.cjs"
+            ],
+            [
+              "ui-continuity-qa.cjs"
+            ],
+            [
+              "ux-text-qa.cjs"
+            ],
+            [
+              "word-image-study-qa.cjs"
+            ]
+          ],
+          "evidence": "outputs/astryx-t9-t18-20261118/t17-wide-chromium/results.json"
+        },
+        "webkit": {
+          "expected": 108,
+          "completed": 108,
+          "passed": 96,
+          "failed": [
+            [
+              "comprehensive-qa.cjs"
+            ],
+            [
+              "haru-content-icons-qa.cjs"
+            ],
+            [
+              "haru-record-icons-qa.cjs"
+            ],
+            [
+              "image-practice-qa.cjs",
+              "front"
+            ],
+            [
+              "purpose-improvements-qa.cjs"
+            ],
+            [
+              "sentence-structure-qa.cjs"
+            ],
+            [
+              "sheet-dismiss-qa.cjs"
+            ],
+            [
+              "ui-plan-contract-qa.cjs"
+            ],
+            [
+              "ui-refresh-qa.cjs"
+            ],
+            [
+              "ui-continuity-qa.cjs"
+            ],
+            [
+              "ux-text-qa.cjs"
+            ],
+            [
+              "word-image-study-qa.cjs"
+            ]
+          ],
+          "evidence": "outputs/astryx-t9-t18-20261118/t17-wide-webkit/results.json"
+        }
+      },
+      "remainingChecks": [
+        "T18 separate GitHub/publication approval, source preparation, CI/merge, official existingSite publish, read-only postpublish verification and retention"
+      ],
+      "manualAccess": {
+        "status": "passed-user-reported; temporary gateway/backend stopped",
+        "gatewayTest": {
+          "passed": 1,
+          "failed": 0,
+          "exitCode": 0
+        },
+        "htmlStatus": 200,
+        "emptyStateStatus": 200,
+        "emptyRevision": 0,
+        "blockedAiPostStatus": 403,
+        "realDeviceChecked": true,
+        "httpsVerification": "outputs/astryx-t9-t18-20261118/t17-period-iphone-built-https-verification.json",
+        "nativeCryptoVerification": "outputs/astryx-t9-t18-20261118/iphone-https-verification.json",
+        "actualIphone": true,
+        "networkOpened": false,
+        "trustStoreChanged": false,
+        "temporaryServersStopped": true,
+        "allowedClient": "192.168.0.42",
+        "bindAddress": "192.168.0.115",
+        "prefixLength": 24,
+        "authorizationBasis": "User provided the requested iPhone Wi-Fi IPv4 in response to the one-device temporary connection question; applied within that scope",
+        "firewallChanged": false,
+        "smokeHistory": "outputs/astryx-t9-t18-20261118/t17-period-iphone-smoke-history.json",
+        "url": "https://192.168.0.115:54468",
+        "metadata": "outputs/astryx-t9-t18-20261118/iphone-manual-1795061689897.json",
+        "m0": {
+          "status": "passed",
+          "source": "user report in this chat",
+          "https": true,
+          "secureContext": true,
+          "nativeRandomUUID": true,
+          "nativeSubtleDigest": true,
+          "reply": "네 항목 통과 후 검사 시작을 눌렀음",
+          "certificateWarningObserved": true,
+          "certificateVisitResolved": true,
+          "agentDirectDeviceObservation": false,
+          "m0Passed": true
+        },
+        "m1m2": "passed-user-reported",
+        "checks": {
+          "M0": {
+            "status": "passed",
+            "source": "user report",
+            "scope": "HTTPS/secure context/nativeUUID/nativeDigest",
+            "priorStatus": "passed"
+          },
+          "M1": {
+            "status": "passed",
+            "source": "user report",
+            "scope": "four tabs portrait/landscape/zoom; no clipping or touch issue",
+            "priorStatus": "passed"
+          },
+          "M2": {
+            "status": "passed",
+            "source": "user report",
+            "scope": "search, Korean meaning and translation fields; last Hangul syllable after blur and keyboard scroll",
+            "priorStatus": "passed"
+          },
+          "M6": {
+            "status": "passed",
+            "source": "user report",
+            "scope": "VoiceOver tab labels/selection, settings modal containment/closed content/focus return",
+            "priorStatus": "passed",
+            "finalFollowup": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+          },
+          "M7": {
+            "status": "passed",
+            "source": "user report",
+            "scope": "image front/read order/pronunciation/stop/close; black rectangle separately open",
+            "priorStatus": "passed-with-separate-focus-observation",
+            "finalFollowup": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+          },
+          "M3": {
+            "status": "passed",
+            "source": "user report",
+            "scope": "provided English sentence and Korean intent survive save/exit/reload/resume",
+            "build": "t17-period",
+            "priorStatus": "passed",
+            "finalFollowup": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+          },
+          "M4": {
+            "status": "passed",
+            "source": "user report",
+            "scope": "settings/period selectors, X/outside/swipe, dirty cancel retain input",
+            "build": "t17-period",
+            "priorStatus": "passed"
+          },
+          "M5": {
+            "status": "passed",
+            "source": "user report and sanitized device UI flags",
+            "passed": [
+              "whole backup download",
+              "native file selection",
+              "outside tap veto",
+              "safety backup download",
+              "checkbox and restore button enable after readiness"
+            ],
+            "remaining": [],
+            "build": "t17-period",
+            "priorStatus": "partial-not-complete",
+            "finalFollowup": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json",
+            "finalPassed": [
+              "44px checkbox/text alignment and touch",
+              "final restore/record replacement",
+              "reload2 sessions and provided English preserved"
+            ]
+          }
+        },
+        "openFindings": [],
+        "fixture": "outputs/astryx-t9-t18-20261118/iphone-manual-fixture-proof.json",
+        "sessionPreservation": "outputs/astryx-t9-t18-20261118/iphone-session-resume-verified.json",
+        "finalSessionProof": "outputs/astryx-t9-t18-20261118/iphone-final-session-ready.json",
+        "latestDeviceBuild": "t17-iphone2",
+        "equivalentFinalSource": "t17-ready",
+        "equivalenceScope": "Only13 TSX whitespace edits; emitted JavaScript identical and all6 CSS files per runtime identical; build IDs and49 nonmap files differ",
+        "fullDeviceValidation": true,
+        "finalManualValidation": {
+          "recordedAt": "2026-11-19T04:51:47.134Z",
+          "status": "passed",
+          "model": "iPhone 16 Pro Max",
+          "os": "27.2.1",
+          "modelAndOsSource": "user report",
+          "method": "User-operated Safari/VoiceOver over temporary one-device synthetic HTTPS; replies in this chat; no direct agent device observation",
+          "agentDirectDeviceObservation": false,
+          "source": "t17-iphone2-source.json",
+          "build": "t17-iphone2-node24-dist-manifest.json",
+          "finalReadyEquivalence": "t17-ready-format-verification.json",
+          "fullBuildBytesIdentical": false,
+          "finalChecks": {
+            "pointerCloseOutline": {
+              "status": "passed",
+              "reply": "모두 통과"
+            },
+            "ordinaryDraftRecoveryUi": {
+              "status": "passed",
+              "reply": "모두 통과"
+            },
+            "voiceOverFocusReturn": {
+              "status": "passed",
+              "reply": "모두 통과"
+            },
+            "backupAckAlignmentAndTouch": {
+              "status": "passed",
+              "reply": "복원 완료·정렬·입력 보존 모두 통과"
+            },
+            "backupFinalCommitReloadAndInput": {
+              "status": "passed",
+              "reply": "복원 완료·정렬·입력 보존 모두 통과"
+            }
+          },
+          "syntheticServerRetainedRecords": {
+            "capture": "iphone-session-capture-1795063795413.json",
+            "sessions": 2,
+            "englishPreserved": true,
+            "rawInputPrinted": false,
+            "scope": "Read-only retained server records corroborate2 sessions and requested English text. This capture is not an independent commit trace; full restore/reload validation is the user report. Korean draft preservation belongs to separate M3 UI check, not this M5 server assertion."
+          },
+          "temporaryGateway": {
+            "metadata": "iphone-manual-1795061689897.json",
+            "url": "https://192.168.0.115:54468",
+            "allowedClient": "192.168.0.42",
+            "stoppedAfterChecks": true,
+            "listenPortsClosed": [
+              54468,
+              62753
+            ],
+            "firewallChanged": false,
+            "trustStoreChanged": false
+          },
+          "productionQaWrites": 0,
+          "paidAiCalls": 0,
+          "publication": 0,
+          "evidence": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+        },
+        "resolvedFindings": [
+          {
+            "id": "IOS-FOCUS-1",
+            "status": "resolved-user-device-confirmed",
+            "locations": [
+              "image close X",
+              "personal close X"
+            ],
+            "evidence": "outputs/astryx-t9-t18-20261118/iphone-focus-desktop-probe/results.json",
+            "fix": "Pointer-only native-close outline suppressed via owned input modality; keyboard outline/DOM focus retained; Node22 smoke6 passed",
+            "finalLocalEvidence": "outputs/astryx-t9-t18-20261118/t17-ready-functional-verification.json",
+            "finalDeviceEvidence": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+          },
+          {
+            "id": "IOS-UX-1",
+            "status": "resolved-user-device-confirmed",
+            "fix": "Ordinary auto-restoration returns to inputs without visible recovery controls; identical values/feedback excluded from choices; actual conflicts, undo after explicit selection, fingerprints and storage error paths kept",
+            "finalLocalEvidence": "outputs/astryx-t9-t18-20261118/t17-ready-functional-verification.json",
+            "finalDeviceEvidence": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+          },
+          {
+            "id": "IOS-BACKUP-1",
+            "status": "resolved-user-device-confirmed",
+            "source": "user report, real iPhone fixed flags, delayed-clock QA",
+            "evidence": "outputs/astryx-t9-t18-20261118/iphone-checkbox-device-before-summary.json",
+            "cause": "Global write-busy includes clock readiness and was also disabling local backup acknowledgment; scoped label flex is overridden by a more specific generic direct-child label rule",
+            "fix": "Acknowledge independent of busy while write/apply guards retained; in-dialog clock retry; explicit flex/44px target; visible3-step copy with internal6-state metadata retained",
+            "latestSource": "outputs/astryx-t9-t18-20261118/t17-iphone2-source.json",
+            "finalLocalEvidence": "outputs/astryx-t9-t18-20261118/t17-ready-functional-verification.json",
+            "finalDeviceEvidence": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json"
+          }
+        ]
+      },
+      "paidAiCalls": 0,
+      "productionQaWrites": 0,
+      "publication": "not-approved",
+      "finalFunctional": {
+        "source": "t17-ready-source.json",
+        "sourceFiles": 1960,
+        "changedSinceT16": 47,
+        "changedSinceT8": 130,
+        "browser": {
+          "effectivePassed": 220,
+          "effectiveFailed": 0,
+          "byEngine": [
+            {
+              "engine": "chromium",
+              "passed": 111
+            },
+            {
+              "engine": "webkit",
+              "passed": 109
+            }
+          ],
+          "rawInvocations": 430,
+          "rawFailures": 39,
+          "method": "Latest result per case/engine, replacing obsolete no-argument image profile with disabled/enabled; unaffected passes reused, impacted paths rerun on frozen final builds; not one 220-case execution against the last build"
+        },
+        "checks": {
+          "unit": {
+            "node22": 927,
+            "node24": 927,
+            "failed": 0,
+            "evidence": ".sites-runtime/t17-ready-node*-test.log",
+            "reusedBecause": null
+          },
+          "typecheck": {
+            "node22": 0,
+            "node24": 0
+          },
+          "grammar": {
+            "node22": 0,
+            "node24": 0,
+            "unchangedProtectedSources": true
+          },
+          "lintAndBuild": [
+            {
+              "label": "node22",
+              "task": "test",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node22-test.log"
+            },
+            {
+              "label": "node22",
+              "task": "typecheck",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node22-typecheck.log"
+            },
+            {
+              "label": "node22",
+              "task": "lint",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node22-lint.log"
+            },
+            {
+              "label": "node22",
+              "task": "build",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node22-build.log"
+            },
+            {
+              "label": "node24",
+              "task": "test",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node24-test.log"
+            },
+            {
+              "label": "node24",
+              "task": "typecheck",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node24-typecheck.log"
+            },
+            {
+              "label": "node24",
+              "task": "lint",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node24-lint.log"
+            },
+            {
+              "label": "node24",
+              "task": "build",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-ready-node24-build.log"
+            }
+          ],
+          "doctor": {
+            "pass": 11,
+            "warn": 2,
+            "fail": 0,
+            "info": 10,
+            "log": ".sites-runtime/t17-iphone2-clean-doctor.log",
+            "reusedBecause": "Only22 trailing whitespace removals in13 TSX files; esbuild output unchanged and final build smoke rerun. Build identifiers differ, not all bytes are identical."
+          }
+        },
+        "evidence": "outputs/astryx-t9-t18-20261118/t17-ready-functional-verification.json"
+      },
+      "currentFunctionalStatus": "Final ready Node22/24 unit927/type/lint/build exit0; effective220 and affected28+smoke4 passed; performance10 measured with overheads disclosed; actual iPhone M0-M7 and final corrections passed by user report",
+      "performanceStage1": {
+        "cases": 10,
+        "allExitCodesZero": true,
+        "evidence": "outputs/astryx-t9-t18-20261118/t17-performance/results.json",
+        "startupMedianMs": {
+          "baseline": 1875,
+          "after": 2061
+        },
+        "grammarTyping18Characters": {
+          "cpuThrottle": 4,
+          "samplesPerCondition": 3,
+          "history0": {
+            "baselineMedianMs": 2142,
+            "afterMedianMs": 3688
+          },
+          "history1825": {
+            "baselineMedianMs": 2924,
+            "afterMedianMs": 5342
+          }
+        },
+        "decision": "Input latency regressed; do not equate measurement-script pass with acceptable latency",
+        "memoryObservedPeakBytes": 86767598,
+        "maxBackupFileBytes": 20000000
+      },
+      "inputRemediation": {
+        "status": "final42-and-performance10-passed; measured overheads retained",
+        "stages": [
+          {
+            "name": "catalog-map",
+            "evidence": "outputs/astryx-t9-t18-20261118/t17-input-performance/results.json",
+            "timings": [
+              {
+                "variant": "baseline",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      2307,
+                      2233,
+                      2323
+                    ],
+                    "medianMs": 2307
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      2845,
+                      2881,
+                      2828
+                    ],
+                    "medianMs": 2845
+                  }
+                ]
+              },
+              {
+                "variant": "before",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      3526,
+                      3600,
+                      3528
+                    ],
+                    "medianMs": 3528
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      4931,
+                      4846,
+                      5130
+                    ],
+                    "medianMs": 4931
+                  }
+                ]
+              },
+              {
+                "variant": "after",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      3524,
+                      3420,
+                      3569
+                    ],
+                    "medianMs": 3524
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      4720,
+                      5067,
+                      4714
+                    ],
+                    "medianMs": 4720
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "word-table",
+            "evidence": "outputs/astryx-t9-t18-20261118/t17-table-input-performance/results.json",
+            "timings": [
+              {
+                "variant": "baseline",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      2206,
+                      2184,
+                      2186
+                    ],
+                    "medianMs": 2186
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      2820,
+                      2810,
+                      2912
+                    ],
+                    "medianMs": 2820
+                  }
+                ]
+              },
+              {
+                "variant": "before",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      3495,
+                      3445,
+                      3421
+                    ],
+                    "medianMs": 3445
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      4707,
+                      4932,
+                      4862
+                    ],
+                    "medianMs": 4862
+                  }
+                ]
+              },
+              {
+                "variant": "after",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      3249,
+                      3542,
+                      3314
+                    ],
+                    "medianMs": 3314
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      4577,
+                      4606,
+                      4727
+                    ],
+                    "medianMs": 4606
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "static-controls",
+            "evidence": "outputs/astryx-t9-t18-20261118/t17-controls-input-performance/results.json",
+            "timings": [
+              {
+                "variant": "baseline",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      2287,
+                      2252,
+                      2242
+                    ],
+                    "medianMs": 2252
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      2812,
+                      2984,
+                      2877
+                    ],
+                    "medianMs": 2877
+                  }
+                ]
+              },
+              {
+                "variant": "before",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      3441,
+                      3387,
+                      3261
+                    ],
+                    "medianMs": 3387
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      6342,
+                      6066,
+                      4763
+                    ],
+                    "medianMs": 6066
+                  }
+                ]
+              },
+              {
+                "variant": "after",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      2610,
+                      2516,
+                      2495
+                    ],
+                    "medianMs": 2516
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      3902,
+                      3901,
+                      3896
+                    ],
+                    "medianMs": 3901
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "period-selectors",
+            "evidence": "outputs/astryx-t9-t18-20261118/t17-period-input-performance/results.json",
+            "timings": [
+              {
+                "variant": "baseline",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      2163,
+                      2273,
+                      2160
+                    ],
+                    "medianMs": 2163
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      2772,
+                      3178,
+                      2914
+                    ],
+                    "medianMs": 2914
+                  }
+                ]
+              },
+              {
+                "variant": "before",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      2631,
+                      2633,
+                      2678
+                    ],
+                    "medianMs": 2633
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      4261,
+                      4056,
+                      4021
+                    ],
+                    "medianMs": 4056
+                  }
+                ]
+              },
+              {
+                "variant": "after",
+                "conditions": [
+                  {
+                    "sessions": 0,
+                    "samples": [
+                      2405,
+                      2292,
+                      2570
+                    ],
+                    "medianMs": 2405
+                  },
+                  {
+                    "sessions": 1825,
+                    "samples": [
+                      2906,
+                      2886,
+                      2830
+                    ],
+                    "medianMs": 2886
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "method": "18 characters including deliberate 30ms key delay, CPU4, 3 samples per0/1825 sessions; no arbitrary tolerance",
+        "renderEvidence": "outputs/astryx-t9-t18-20261118/t17-input-render-probe.json",
+        "cpuEvidence": "outputs/astryx-t9-t18-20261118/t17-input-cpu/summary.json",
+        "cpuAttributionLimit": "Client source maps unavailable: CPU trace paths are compiled chunks, not verified per-component source attribution",
+        "contextRegression": {
+          "test": "tests/sentence-structure-qa.cjs",
+          "checks": "latest note/format callbacks across cached control edits; backup/reload and old-write protections retained",
+          "engines": [
+            "chromium",
+            "webkit"
+          ],
+          "exitCodes": [
+            0,
+            0
+          ],
+          "evidence": "outputs/astryx-t9-t18-20261118/t17-period-context-smoke/results.json"
+        },
+        "node22": {
+          "unit": 927,
+          "typecheck": 0,
+          "lintErrors": 0,
+          "lintWarnings": 15,
+          "build": 0,
+          "source": "outputs/astryx-t9-t18-20261118/t17-period-source.json"
+        },
+        "node24": {
+          "unit": 927,
+          "typecheck": 0,
+          "lintErrors": 0,
+          "lintWarnings": 15,
+          "build": 0,
+          "source": "outputs/astryx-t9-t18-20261118/t17-period-source.json"
+        }
+      },
+      "functionalBeforeInputRemediation": {
+        "source": "t17-reflow-source.json",
+        "sourceFiles": 1960,
+        "changedSinceT16": 23,
+        "changedSinceT8": 126,
+        "browser": {
+          "effectivePassed": 220,
+          "effectiveFailed": 0,
+          "byEngine": [
+            {
+              "engine": "chromium",
+              "passed": 111
+            },
+            {
+              "engine": "webkit",
+              "passed": 109
+            }
+          ],
+          "rawInvocations": 348,
+          "rawFailures": 39,
+          "method": "Latest result per case/engine, replacing obsolete no-argument image profile with disabled/enabled; unaffected passes reused, impacted paths rerun on frozen final builds; not one 220-case execution against the last build"
+        },
+        "checks": {
+          "unit": {
+            "node22": 927,
+            "node24": 927,
+            "failed": 0,
+            "evidence": ".sites-runtime/t17-final-node*-unit.log",
+            "reusedBecause": "All unit/type inputs unchanged; only scoped CSS and a browser QA script changed afterward"
+          },
+          "typecheck": {
+            "node22": 0,
+            "node24": 0
+          },
+          "grammar": {
+            "node22": 0,
+            "node24": 0,
+            "unchangedProtectedSources": true
+          },
+          "lintAndBuild": [
+            {
+              "label": "node22",
+              "task": "lint",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-reflow-node22-lint.log"
+            },
+            {
+              "label": "node22",
+              "task": "build",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-reflow-node22-build.log"
+            },
+            {
+              "label": "node24",
+              "task": "lint",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-reflow-node24-lint.log"
+            },
+            {
+              "label": "node24",
+              "task": "build",
+              "code": 0,
+              "signal": null,
+              "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-reflow-node24-build.log"
+            }
+          ],
+          "doctor": {
+            "pass": 11,
+            "warn": 2,
+            "fail": 0,
+            "info": 10,
+            "purityFindings": 2043,
+            "log": ".sites-runtime/t17-final-reflow-doctor.log"
+          }
+        },
+        "evidence": "outputs/astryx-t9-t18-20261118/t17-functional-verification.json"
+      },
+      "finalPerformance": {
+        "evidence": "outputs/astryx-t9-t18-20261118/t17-ready-performance-summary.json",
+        "rawResults": "outputs/astryx-t9-t18-20261118/t17-ready-performance/results.json",
+        "measurementCases": 10,
+        "exitCodesZero": true,
+        "status": "measured; residual latency and bundle overhead disclosed; no new regression tolerance or blanket no-regression claim",
+        "startupMedianMs": {
+          "baseline": 1940,
+          "after": 2024
+        },
+        "input18Characters": [
+          {
+            "variant": "baseline",
+            "sessions": 0,
+            "characters": 18,
+            "typingMs": {
+              "samples": [
+                2111,
+                2107,
+                2192
+              ],
+              "median": 2111,
+              "min": 2107,
+              "max": 2192
+            }
+          },
+          {
+            "variant": "baseline",
+            "sessions": 1825,
+            "characters": 18,
+            "typingMs": {
+              "samples": [
+                2891,
+                2766,
+                2844
+              ],
+              "median": 2844,
+              "min": 2766,
+              "max": 2891
+            }
+          },
+          {
+            "variant": "before",
+            "sessions": 0,
+            "characters": 18,
+            "typingMs": {
+              "samples": [
+                2446,
+                2641,
+                2484
+              ],
+              "median": 2484,
+              "min": 2446,
+              "max": 2641
+            }
+          },
+          {
+            "variant": "before",
+            "sessions": 1825,
+            "characters": 18,
+            "typingMs": {
+              "samples": [
+                2685,
+                2697,
+                2873
+              ],
+              "median": 2697,
+              "min": 2685,
+              "max": 2873
+            }
+          },
+          {
+            "variant": "after",
+            "sessions": 0,
+            "characters": 18,
+            "typingMs": {
+              "samples": [
+                2480,
+                2415,
+                2561
+              ],
+              "median": 2480,
+              "min": 2415,
+              "max": 2561
+            }
+          },
+          {
+            "variant": "after",
+            "sessions": 1825,
+            "characters": 18,
+            "typingMs": {
+              "samples": [
+                2683,
+                2645,
+                2803
+              ],
+              "median": 2683,
+              "min": 2645,
+              "max": 2803
+            }
+          }
+        ],
+        "initialPayloadGzipBytes": {
+          "baseline": 725204,
+          "after": 780823
+        },
+        "limitations": [
+          "Only three samples per normal condition; slow history one sample.",
+          "Input includes deliberate30ms/character delay and mocked synthetic state.",
+          "Image readyMs is home-ready time, not image-open latency. Initial/lazy payload is requested disk raw/gzip, not hosted transfer or all generated chunks.",
+          "Slow CDP affects browser requests; APIRequestContext round trips remain unthrottled loopback.",
+          "Background OS activity and isolated idle phone gateway are not CPU-isolation guarantees."
+        ]
+      },
+      "deviceRemediation": {
+        "epoch": "t17-ready",
+        "node22": {
+          "unit": 927,
+          "typecheck": 0,
+          "lintErrors": 0,
+          "lintWarnings": 15,
+          "build": 0
+        },
+        "node24": {
+          "unit": 927,
+          "typecheck": 0,
+          "lintErrors": 0,
+          "lintWarnings": 15,
+          "build": 0
+        },
+        "apiLibHooksDataSqlLockSite": "unchanged from T8, freeze guard verified",
+        "paidAiCalls": 0,
+        "productionQaWrites": 0,
+        "status": "local-and-device-verified",
+        "finalSource": "outputs/astryx-t9-t18-20261118/t17-ready-source.json",
+        "finalFormatProof": "outputs/astryx-t9-t18-20261118/t17-ready-format-verification.json",
+        "affectedQa": {
+          "phone2Runs": 28,
+          "finalBuiltSmoke": 4,
+          "allExitCodesZero": true
+        },
+        "finalRuntimeChecks": {
+          "node22": 927,
+          "node24": 927,
+          "failed": 0,
+          "typecheck": 0,
+          "lint": 0,
+          "existingWarnings": 15,
+          "build": 0
+        },
+        "finalDeviceConfirmation": "passed-user-reported"
+      },
+      "priorFunctionalSnapshots": [
+        {
+          "source": "t17-period-source.json",
+          "sourceFiles": 1960,
+          "changedSinceT16": 30,
+          "changedSinceT8": 127,
+          "browser": {
+            "effectivePassed": 220,
+            "effectiveFailed": 0,
+            "byEngine": [
+              {
+                "engine": "chromium",
+                "passed": 111
+              },
+              {
+                "engine": "webkit",
+                "passed": 109
+              }
+            ],
+            "rawInvocations": 392,
+            "rawFailures": 39,
+            "method": "Latest result per case/engine, replacing obsolete no-argument image profile with disabled/enabled; unaffected passes reused, impacted paths rerun on frozen final builds; not one 220-case execution against the last build"
+          },
+          "checks": {
+            "unit": {
+              "node22": 927,
+              "node24": 927,
+              "failed": 0,
+              "evidence": ".sites-runtime/t17-period-node*-test.log",
+              "reusedBecause": null
+            },
+            "typecheck": {
+              "node22": 0,
+              "node24": 0
+            },
+            "grammar": {
+              "node22": 0,
+              "node24": 0,
+              "unchangedProtectedSources": true
+            },
+            "lintAndBuild": [
+              {
+                "label": "node22",
+                "task": "test",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node22-test.log"
+              },
+              {
+                "label": "node22",
+                "task": "typecheck",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node22-typecheck.log"
+              },
+              {
+                "label": "node22",
+                "task": "lint",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node22-lint.log"
+              },
+              {
+                "label": "node22",
+                "task": "build",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node22-build.log"
+              },
+              {
+                "label": "node24",
+                "task": "test",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node24-test.log"
+              },
+              {
+                "label": "node24",
+                "task": "typecheck",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node24-typecheck.log"
+              },
+              {
+                "label": "node24",
+                "task": "lint",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node24-lint.log"
+              },
+              {
+                "label": "node24",
+                "task": "build",
+                "code": 0,
+                "signal": null,
+                "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\work\\astryx-adoption-20261118\\.sites-runtime\\t17-period-node24-build.log"
+              }
+            ],
+            "doctor": {
+              "pass": 11,
+              "warn": 2,
+              "fail": 0,
+              "log": ".sites-runtime/t17-period-clean-doctor.log"
+            }
+          },
+          "evidence": "outputs/astryx-t9-t18-20261118/t17-period-functional-verification.json"
+        }
+      ],
+      "priorPerformanceSnapshots": [
+        {
+          "evidence": "outputs/astryx-t9-t18-20261118/t17-period-performance-summary.json",
+          "measurementCases": 10,
+          "exitCodesZero": true,
+          "firstSourceStageFailuresPreserved": true,
+          "status": "completed on t17-period; affected t17-iphone comparison pending"
+        }
+      ],
+      "localVerification": "outputs/astryx-t9-t18-20261118/t17-ready-local-verification.json",
+      "releaseReadiness": {
+        "status": "ready-for-approval",
+        "report": "docs/ASTRYX_T9_T18_IMPLEMENTATION_20261118.md",
+        "localEvidence": "outputs/astryx-t9-t18-20261118/t17-ready-local-verification.json",
+        "deviceEvidence": "outputs/astryx-t9-t18-20261118/iphone-final-manual-validation.json",
+        "performanceEvidence": "outputs/astryx-t9-t18-20261118/t17-ready-performance-summary.json",
+        "overheadsDisclosed": true,
+        "publicationApproved": false
+      }
+    },
+    "18": {
+      "status": "in-progress",
+      "approval": {
+        "recordedAt": "2026-11-19T05:07:06.214Z",
+        "source": "explicit user reply in this chat",
+        "reply": "승인 — GitHub 반영·기존 Site 게시 진행",
+        "review": "outputs/astryx-t9-t18-20261118/t18-preapproval-readiness.json",
+        "scope": [
+          "GitHub commit/push/PR",
+          "CI verification then merge",
+          "existing Site publication",
+          "read-only production verification",
+          "postmerge retention/cleanup"
+        ],
+        "paidAi": false,
+        "productionQaWrites": false
+      },
+      "preapprovalReview": "outputs/astryx-t9-t18-20261118/t18-review-source-manifest.json",
+      "runtimeUnchangedFromReady": true,
+      "publication": "not-yet-published"
+    }
+  },
+  "device": {
+    "model": "iPhone 16 Pro Max",
+    "ios": "27.2.1",
+    "usbConnection": false,
+    "source": "사용자 직접 답변",
+    "manualSafariAvailable": true,
+    "manualVoiceOverAvailable": true,
+    "actualValidation": "passed-user-reported",
+    "wifiIpv4": "192.168.0.42",
+    "addressSource": "사용자 직접 회신",
+    "connectionScope": "one-device temporary HTTPS synthetic QA requested in this conversation",
+    "preflightM0": {
+      "status": "passed",
+      "source": "user report",
+      "detail": "네 항목 통과 후 검사 시작을 눌렀음"
+    },
+    "agentDirectDeviceObservation": false
+  },
+  "actualPaidCalls": 0,
+  "productionQaWrites": 0,
+  "publication": "not-run",
+  "baselineRecovery": {
+    "status": "rebuilt-source-verified",
+    "evidence": "outputs/astryx-t9-t18-20261118/baseline-reconstructed-build.json",
+    "sourceFiles": 1945,
+    "sourceDrift": 0,
+    "buildFiles": 457,
+    "buildExitCode": 0,
+    "runtime": "v22.22.2",
+    "originalBuildAvailable": false,
+    "measurementsPending": false,
+    "finalComparison": "outputs/astryx-t9-t18-20261118/t17-ready-performance-summary.json"
+  },
+  "liveSourceAudit": {
+    "evidence": "outputs/astryx-t9-t18-20261118/live-v150-source-audit.json",
+    "savedVersion": 150,
+    "nativeDeploymentStatus": "succeeded",
+    "sameTreeAsImplementationBaseline": true,
+    "files": 1916,
+    "remoteWrites": 0,
+    "publication": 0
+  }
+}

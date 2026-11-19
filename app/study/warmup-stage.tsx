@@ -1,4 +1,7 @@
 "use client";
+import {HaruParagraph,HaruHeading} from '../haru-content';
+import {HaruButton,HaruTextInput} from '../haru-controls';
+
 import { PartOfSpeechLabel } from '../grammar-terms';
 import { canGradeIndependently } from "@/lib/study-availability";
 import { HaruIcon } from "@/components/icons/haru-icon";
@@ -29,51 +32,46 @@ export function WarmupStage({
 }: WarmupStageProps) {
   return (
     <>
-      <p className="muted">
+      <HaruParagraph className="muted">
         답을 보기 전에 이 단어의 뜻을 써 보세요.
-      </p>
+      </HaruParagraph>
       <div className="word-stage">
-        <h3 lang="en">{word.word}</h3>
+        <HaruHeading level={3} lang="en">{word.word}</HaruHeading>
         <span><PartOfSpeechLabel pos={word.pos} /></span>
       </div>
-      <label>
-        떠오르는 한국어 뜻
-        <input
-          value={answer}
+      <HaruTextInput label={"떠오르는 한국어 뜻"} containerClassName="haru-study-field labelled-study-field" value={answer}
           maxLength={2000}
           readOnly={revealed}
           onChange={(e) => setAnswer(e.target.value)}
-          autoComplete="off"
-        />
-      </label>
+          autoComplete="off" />
       {revealed ? (
         <div className="answer-box">
           <b>{content.meaning}</b>
           <div className="button-row study-actions">
-            <button
-              className="secondary-button"
+            <HaruButton label={["스스로 떠올렸어요"].join('')} variant="secondary"
+              className="haru-migrated secondary-button"
               disabled={!canGradeIndependently(busy, hint, answer)}
               onClick={() => warmup("independent")}
             >
               스스로 떠올렸어요
-            </button>
-            <button
-              className="secondary-button"
+            </HaruButton>
+            <HaruButton label={["다시 볼게요"].join('')} variant="secondary"
+              className="haru-migrated secondary-button"
               disabled={busy}
               onClick={() => warmup("help")}
             >
               다시 볼게요
-            </button>
+            </HaruButton>
           </div>
         </div>
       ) : (
-        <button
-          className="primary-button"
+        <HaruButton label={["뜻 확인 "].join('')} variant="primary" endContent={<HaruIcon name="eye" size={17} />}
+          className="haru-migrated primary-button"
           disabled={busy}
           onClick={revealWarmup}
         >
-          뜻 확인 <HaruIcon name="eye" size={17} />
-        </button>
+          뜻 확인
+        </HaruButton>
       )}
     </>
   );

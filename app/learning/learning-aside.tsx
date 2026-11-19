@@ -1,4 +1,6 @@
 "use client";
+import {HaruParagraph,HaruPanel} from '../haru-content';
+
 import type { LearningViewProps } from "./types";
 import { HelpDetails } from "../study-ui";
 type LearningAsideProps = Pick<LearningViewProps, "loading" | "metrics">;
@@ -15,15 +17,15 @@ export function LearningAside({ loading, metrics }: LearningAsideProps) {
           ].map(([n, t, d]) => (
             <div key={n}>
               <span>{n}</span>
-              <p>
+              <HaruParagraph>
                 <b>{t}</b>
                 <small>{d}</small>
-              </p>
+              </HaruParagraph>
             </div>
           ))}
         </div>
       </HelpDetails>
-      <section className="progress-note">
+      <HaruPanel className="progress-note">
         <div>
           <span>지금까지 학습한 단어·뜻</span>
           <b>
@@ -41,12 +43,12 @@ export function LearningAside({ loading, metrics }: LearningAsideProps) {
                 : "아직 확인 안 함"}
           </b>
         </div>
-        <p className="small-note">
+        <HaruParagraph className="small-note">
           확인한 항목만 집계 · 영어→뜻, 뜻→영어 기준
           {metrics.personalLearned > 0 &&
             ` 개인 추가 ${metrics.personalLearned}개도 학습했어요.`}
-        </p>
-      </section>
+        </HaruParagraph>
+      </HaruPanel>
     </aside>
   );
 }

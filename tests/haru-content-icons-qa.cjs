@@ -236,7 +236,26 @@ const textGeometry = element => {
     await dialog.getByRole('button', { name: '이동', exact: true }).click();
     await dialog.locator('#image-practice-number-error').waitFor();
     assert.equal(await numberInput.getAttribute('aria-invalid'), 'true');
+    assert.ok((await numberInput.getAttribute('aria-describedby'))?.split(/\s+/).includes('image-practice-number-error'),'the native number input references its visible error');
     assert.deepEqual(await position(), cursorBeforeInvalid);
+    report.imageJumpReadability=[];
+    for(const width of [320,390]){
+      await page.setViewportSize({width,height:844});await page.evaluate(()=>document.documentElement.style.fontSize='200%');await qa.settle();
+      const header=dialog.locator('[data-slot=dialog-header]'),headerBefore=await header.boundingBox();
+      assert.ok(headerBefore&&headerBefore.y>=0&&headerBefore.y+headerBefore.height<=844.5,'large-text number form keeps the complete header visible');
+      await dialog.locator('.haru-practice-number .haru-field-control').scrollIntoViewIfNeeded();await qa.settle();
+      const fit=await dialog.evaluate(root=>{
+        const elements=[root.querySelector('.haru-practice-number .haru-field-control'),[...root.querySelectorAll('.image-practice-jump button')].find(el=>el.textContent.trim()==='이동')];
+        return elements.map(element=>{if(!element)throw Error('Visible jump input and submit are required');const r=element.getBoundingClientRect(),clips=[];for(let parent=element.parentElement;parent;parent=parent.parentElement){const s=getComputedStyle(parent),p=parent.getBoundingClientRect(),left=p.left+parent.clientLeft,top=p.top+parent.clientTop;if(/^(auto|scroll|hidden|clip)$/.test(s.overflowX)&&(r.left<left-.5||r.right>left+parent.clientWidth+.5))clips.push('inline');if(/^(auto|scroll|hidden|clip)$/.test(s.overflowY)&&(r.top<top-.5||r.bottom>top+parent.clientHeight+.5))clips.push('block');}return {tag:element.tagName,top:r.top,bottom:r.bottom,clips};});
+      });
+      assert.ok(fit.every(item=>!item.clips.length&&item.top>=0&&item.bottom<=844.5),'large-text jump input/submit remain fully reachable: '+JSON.stringify({width,fit}));
+      const headerAfter=await header.boundingBox();assert.ok(Math.abs(headerAfter.y-headerBefore.y)<=.5,'jump controls scroll without moving the fixed header');
+      await page.locator('#image-practice-number-error').scrollIntoViewIfNeeded();await qa.settle();
+      assert.ok(Math.abs((await header.boundingBox()).y-headerBefore.y)<=.5,'reading the number error keeps its header fixed');
+      const violations=await page.evaluate(async()=> (await axe.run(document.querySelector('[role=dialog]'),{runOnly:['wcag2a','wcag2aa','wcag21aa']})).violations.map(v=>v.id));assert.deepEqual(violations,[]);
+      report.imageJumpReadability.push({width,textSize:200,fit,headerBefore,headerAfter,axeViolations:violations});
+    }
+    await page.evaluate(()=>document.documentElement.style.fontSize='100%');await page.setViewportSize({width:320,height:844});await numberInput.scrollIntoViewIfNeeded();await qa.settle();
     await numberInput.fill('3');
     await numberInput.press('Enter');
     await status.getByText('위치 저장됨', { exact: true }).waitFor();
@@ -273,12 +292,19 @@ const textGeometry = element => {
     ];
     await qa.inspect('library-list', { icons: libraryIcons });
     // Overflow alone misses a readable word squeezed into one glyph per line,
-    // or a SelectValue whose own clipping hides part of the selected label.
+    // or a selected value whose own clipping hides part of the label.
     const beforeLibraryReadability = await qa.getState();
     report.libraryReadability = [];
     const shortWords = library.locator('.word-link b').filter({ hasText: /^[a-z]{2,8}$/i });
-    const selectedValues = library.locator('.library-controls [data-slot=select-value]');
+    const filterControls = library.locator('.library-controls').getByRole('combobox');
+    // Public Selector source renders its value in a direct span with an id.
+    // Measure that text box as well as its button, without generated classes.
+    const selectedValues = filterControls.locator(':scope > span[id]');
     assert.ok(await shortWords.count() > 0, 'Visible short English words exist for layout inspection');
+    assert.equal(await filterControls.count(), 3, 'All three library filters are present');
+    for (const control of await filterControls.all()) {
+      assert.equal(await control.locator(':scope > span[id]').count(), 1, 'Each filter exposes one selected label');
+    }
     assert.equal(await selectedValues.count(), 3);
     for (const width of [320, 390, 430, 768, 1440]) for (const textSize of [100, 200]) {
       await page.setViewportSize({ width, height: 844 });
@@ -312,10 +338,35 @@ const textGeometry = element => {
     await qa.settle();
     assert.deepEqual(await qa.getState(), beforeLibraryReadability, 'Library readability inspection preserves records and revision');
     report.checks.push('Library 320–1440px/100–200%: short English words remain on one line and every selected filter label fits without clipping');
+    const longWord = words.filter(word => /^[a-z]{12,}$/i.test(word.word))
+      .sort((a, b) => b.word.length - a.word.length)[0];
+    assert.ok(longWord, 'A real long headword exists for the wrapping regression');
+    await search.fill(longWord.word);
+    const longHeadword = library.locator('.word-link b').filter({ hasText: new RegExp('^' + longWord.word + '$') });
+    await longHeadword.waitFor();
+    report.libraryLongWordReadability = [];
+    for (const width of [320, 768, 1440]) for (const textSize of [100, 200]) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.evaluate(size => { document.documentElement.style.fontSize = size + '%'; }, textSize);
+      await qa.settle();
+      const geometry = await longHeadword.evaluate(textGeometry);
+      report.libraryLongWordReadability.push({ width, textSize, geometry });
+      assert.ok(geometry.lines > 0 && geometry.inside && !geometry.clipped,
+        'A long headword wraps completely inside its button: ' + JSON.stringify({ width, textSize, geometry }));
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+    }
+    await search.fill('');
+    await page.evaluate(() => { document.documentElement.style.fontSize = '100%'; });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await qa.settle();
+    assert.deepEqual(await qa.getState(), beforeLibraryReadability, 'Long-word layout inspection preserves records and revision');
+    report.checks.push('Long headwords keep wrapping at 320/768/1440px and 100/200% without horizontal overflow or state writes');
     assert.equal(await previousPage.isDisabled(), true);
     await qa.click(nextPage, 'library-next-page');
     assert.equal(await previousPage.isDisabled(), false);
-    assert.match(await topPagination.getByRole('status').innerText(), /2\s*\//);
+    const pageStatus = topPagination.locator(':scope > [role=status]');
+    assert.equal(await pageStatus.count(), 1, 'The pagination owns one page counter');
+    assert.match(await pageStatus.innerText(), /2\s*\//);
     await qa.click(previousPage, 'library-previous-page');
     assert.equal(await previousPage.isDisabled(), true);
     await qa.click(posHelp, 'library-pos-help');
@@ -370,11 +421,13 @@ const textGeometry = element => {
     const beforeReadingReadability = await qa.getState();
     report.readingAudioReadability = [];
     const readingAudio = lesson.locator('.grammar-reading-tools .device-audio');
+    const readingAudioLabel = readingAudio.getByText('기기 음성 듣기', { exact: true });
+    assert.equal(await readingAudioLabel.count(), 1, 'The audio control has one visible text label');
     for (const width of [320, 390, 430]) for (const textSize of [100, 200]) {
       await page.setViewportSize({ width, height: 844 });
       await page.evaluate(size => { document.documentElement.style.fontSize = size + '%'; }, textSize);
       await qa.settle();
-      const geometry = await readingAudio.locator('span').evaluate(textGeometry);
+      const geometry = await readingAudioLabel.evaluate(textGeometry);
       report.readingAudioReadability.push({ width, textSize, ...geometry });
       assert.ok(geometry.lines >= 1 && geometry.lines <= 2 && geometry.inside && !geometry.clipped,
         'The device-audio label stays readable at ' + width + '/' + textSize + ': ' + JSON.stringify(geometry));

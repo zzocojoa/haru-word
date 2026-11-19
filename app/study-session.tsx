@@ -1,5 +1,8 @@
 "use client";
-import { Progress as ProgressBar } from "@/components/ui/progress";
+import {HaruPanel,HaruHeading,HaruParagraph} from './haru-content';
+import {HaruButton} from './haru-controls';
+
+import { HaruProgress as ProgressBar } from "./haru-controls";
 import { HaruIcon } from "@/components/icons/haru-icon";
 import { KIND_TEXT, reviewBatchEnd } from "@/lib/learning";
 import { LearnStage } from "./study/learn-stage";
@@ -111,16 +114,16 @@ export function StudySession(props: StudySessionProps) {
 
   if (!word || !content)
     return (
-      <section className="learning-panel">
-        <h2>학습 항목을 찾지 못했어요.</h2>
-        <button className="secondary-button" onClick={onClose}>
+      <HaruPanel className="learning-panel">
+        <HaruHeading level={2}>학습 항목을 찾지 못했어요.</HaruHeading>
+        <HaruButton label={["홈으로"].join('')} variant="secondary" className="haru-migrated secondary-button" onClick={onClose}>
           홈으로
-        </button>
-      </section>
+        </HaruButton>
+      </HaruPanel>
     );
   const recallStage = s.stage === "en" || s.stage === "ko";
   return (
-    <section className="learning-panel session-panel">
+    <HaruPanel className="learning-panel session-panel">
       <div className="panel-top">
         <div className="stage-label">
           <span className="level-badge">
@@ -138,16 +141,16 @@ export function StudySession(props: StudySessionProps) {
         />
       </div>
       {s.date !== date && (
-        <p className="small-note">
+        <HaruParagraph className="small-note">
           {s.date}에 시작한 회차를 이어가고 있어요. 오늘 입력한 결과는 {date}{" "}
           연습으로 기록돼요.
-        </p>
+        </HaruParagraph>
       )}
       <DraftRecoveryNotice input={draftPersistence}/>
       <div className="session-step-row">
-        <h2 ref={focus} tabIndex={-1}>
+        <HaruHeading level={2} ref={focus} tabIndex={-1}>
           {s.retryMode ? "다시 떠올리기" : STAGES[s.stage]}
-        </h2>
+        </HaruHeading>
         <span className="muted">
           {s.retryMode
             ? s.retry.length + "개 남음"
@@ -187,51 +190,51 @@ export function StudySession(props: StudySessionProps) {
         </ol>
       )}
       {s.practiceMode === "repeat" && (
-        <p className="small-note">
+        <HaruParagraph className="small-note">
           {s.period}의 단어를 다시 학습해요. 원래 완료 기록은 그대로 보관합니다.
-        </p>
+        </HaruParagraph>
       )}
       {s.kind === "monthly" && (
-        <p className="small-note">
+        <HaruParagraph className="small-note">
           전체 {total}개 · 이번 묶음 {reviewBatchEnd(s) - (s.batchStart || 0)}개
           · 문장은 선택 연습이에요.
-        </p>
+        </HaruParagraph>
       )}
       {s.reviewEnd !== undefined && (
-        <p className="small-note">
+        <HaruParagraph className="small-note">
           새로 추가된 {s.ids.length - s.reviewEnd}개는 진행 중인 점검을 마친 뒤
           이어서 확인해요. 기존 답과 순서는 그대로예요.
-        </p>
+        </HaruParagraph>
       )}
       {s.records[id!]?.historicalMeaningUnknown && (
-        <p className="notice">
+        <HaruParagraph className="notice">
           당시 뜻이 남아 있지 않은 이전 기록이에요. 현재 단어장의 뜻을
           참고하므로 사전과 함께 확인해 주세요.
-        </p>
+        </HaruParagraph>
       )}
       {seconds - boutStart >= 900 && (
-        <p className="notice">
+        <HaruParagraph className="notice">
           15분 동안 학습했어요. 저장하고 나가서 다음에 이어가도 좋아요.
-        </p>
+        </HaruParagraph>
       )}
 
       {paused && (
         <div className="pause-overlay">
           <PauseMessage />
-          <button
-            className="primary-button"
+          <HaruButton label={["계속 학습하기"].join('')} variant="primary"
+            className="haru-migrated primary-button"
             disabled={busy}
             onClick={toggleClock}
           >
             계속 학습하기
-          </button>
-          <button
-            className="text-button"
+          </HaruButton>
+          <HaruButton label={["저장하고 나가기"].join('')} variant="ghost"
+            className="haru-migrated text-button"
             disabled={busy}
             onClick={pauseAndExit}
           >
             저장하고 나가기
-          </button>
+          </HaruButton>
         </div>
       )}
       {!paused && (
@@ -315,24 +318,24 @@ export function StudySession(props: StudySessionProps) {
                   ? "15개 안팎씩 나누어 이어갈 수 있어요."
                   : "미완료 항목은 다음 학습에 먼저 배정해요."}
             </span>
-            <button
-              className="text-button"
+            <HaruButton label={["저장하고 나가기"].join('')} variant="ghost"
+              className="haru-migrated text-button"
               disabled={busy}
               onClick={pauseAndExit}
             >
               저장하고 나가기
-            </button>
+            </HaruButton>
           </div>
         </>
       )}
-    </section>
+    </HaruPanel>
   );
 }
 function PauseMessage() {
   return (
     <div>
-      <h2>잠시 쉬어 가요.</h2>
-      <p className="muted">타이머가 멈췄어요. 준비되면 이어서 해요.</p>
+      <HaruHeading level={2}>잠시 쉬어 가요.</HaruHeading>
+      <HaruParagraph className="muted">타이머가 멈췄어요. 준비되면 이어서 해요.</HaruParagraph>
     </div>
   );
 }

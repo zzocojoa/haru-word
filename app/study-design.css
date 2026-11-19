@@ -1048,7 +1048,7 @@ label input, label textarea {
   .section-heading {
     flex-direction: column;
   }
-  .list-count span, .word-table th:nth-child(2), .word-table td:nth-child(2) {
+  .list-count > span, .word-table th:nth-child(2), .word-table td:nth-child(2) {
     display: none;
   }
   .word-table th:first-child, .word-table td:first-child {
@@ -2060,7 +2060,7 @@ input[readonly] {
 .familiarity-tag.new {
   color: var(--ink);
 }
-.list-count span {
+.list-count > span {
   color: var(--caption);
 }
 .pagination {
@@ -2447,7 +2447,7 @@ footer {
     min-width: 0;
     flex: 1;
   }
-  .list-count span {
+  .list-count > span {
     display: none;
   }
   .word-table {

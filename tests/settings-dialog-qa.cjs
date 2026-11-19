@@ -1,12 +1,14 @@
 // Built local Worker only; synthetic account, no production or Google writes.
 const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
-const base = require('./qa/runtime.cjs').base, out = 'outputs/settings-dialog';
+const engine=process.env.QA_BROWSER||'chromium', baseline=process.env.ASTRYX_CAPTURE_BASELINE==='true';
+const base = require('./qa/runtime.cjs').base, out = process.env.ASTRYX_QA_OUTPUT ? require('node:path').join(process.env.ASTRYX_QA_OUTPUT,engine) : 'outputs/settings-dialog/'+engine;
 fs.mkdirSync(out, { recursive: true });
 (async () => {
-  const browser = await launchBrowser(), checks = [], errors = [], audits = [];
+  const browser = await launchBrowser(), checks = [], errors = [], audits = [], snapshots = [];
   try {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: { 'oai-authenticated-user-id': require('./qa/runtime.cjs').account('settings_dialog_'), 'oai-authenticated-user-email': 'qa@example.test' } });
+    await c.route('https://fonts.googleapis.com/**',route=>route.fulfill({body:'',contentType:'text/css'}));
     const get = async () => (await c.request.get(base + '/api/state')).json();
     const initial = await get(), words = JSON.parse(fs.readFileSync('data/words.json')), content = JSON.parse(fs.readFileSync('data/content.json'));
     const w = words.find(w => w.word === 'arrive' && w.pos === 'v.'), date = '2026-09-01', sid = crypto.randomUUID();
@@ -29,9 +31,25 @@ fs.mkdirSync(out, { recursive: true });
     await p.goto(base, { waitUntil: 'domcontentloaded' }); await p.getByText('저장됨', { exact: true }).waitFor();
     await p.getByRole('button', { name: '학습 설정', exact: true }).click();
     const d = p.getByRole('dialog'), body = d.locator('.dialog-scroll'), goal = d.getByRole('combobox', { name: '하루 목표', exact: true });
-    const enabled = async () => { await p.waitForFunction(() => { const el = document.querySelector('.settings-dialog [aria-label="하루 목표"]'); return el && !el.disabled; }); assert.ok(await goal.isEnabled()); };
+    const enabled = async () => {
+      const element=await goal.elementHandle();try{
+        await p.waitForFunction(el=>el instanceof HTMLButtonElement && !el.disabled && !el.closest('[aria-disabled="true"]'),element);
+        assert.ok(await goal.isEnabled());
+      }finally{await element.dispose();}
+    };
     const axe = async label => { await p.addScriptTag({ path: require('./qa/runtime.cjs').axePath }); const issues = await p.evaluate(async () => (await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) }))); audits.push({ label, issues }); assert.deepEqual(issues, [], label); };
     await enabled();
+    await p.evaluate(()=>document.fonts.ready);
+    const features=await p.evaluate(()=>({popover:typeof HTMLElement.prototype.showPopover==='function',anchor:CSS.supports('anchor-name','--haru-probe'),lightDark:CSS.supports('color','light-dark(#000,#fff)')}));
+    if(!baseline)assert.equal(await d.locator('.astryx-selector').count(),4,'four settings controls use Core Selector');
+    for(const name of ['학습 수준','하루 목표','주간 점검 요일']){
+      const control=d.getByRole('combobox',{name,exact:true});
+      await control.click();const popup=p.getByRole('listbox');await popup.waitFor();
+      assert.equal(await popup.evaluate(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0&&r.left>=-1&&r.right<=innerWidth+1&&r.top>=-1&&r.bottom<=innerHeight+1;}),true,name+' visible popup bounds');
+      await p.keyboard.press('Escape');await popup.waitFor({state:'hidden'});assert.ok(await d.isVisible());
+      assert.equal(await control.evaluate(el=>document.activeElement===el),true,name+' Escape keeps focus in settings');
+    }
+    assert.deepEqual(await get(),preserved,'opening settings and option menus never saves');
     for (const width of [320, 390, 430, 768, 1440]) {
       await p.setViewportSize({ width, height: 844 });
       for (const font of [100, 200]) {
@@ -39,10 +57,18 @@ fs.mkdirSync(out, { recursive: true });
         assert.equal(await p.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
         assert.equal(await d.evaluate(el => el.scrollWidth > el.clientWidth), false, `${width}/${font} dialog overflow`);
         const layout = await body.evaluate(el => {
-          const rows = [...el.children].filter(x => x.tagName === 'LABEL').map(x => x.getBoundingClientRect());
-          return { gap: getComputedStyle(el).gap, gaps: rows.slice(1).map((r, i) => r.top - rows[i].bottom), small: [...el.querySelectorAll('button,summary,a')].filter(x => { const r = x.getBoundingClientRect(); return r.height && (r.height < 44 || r.width < 44); }).map(x => x.textContent) };
+          const rows = [...el.children].filter(x => x.tagName === 'LABEL'||x.hasAttribute('data-settings-field')).map(x => x.getBoundingClientRect());
+          return { rowCount:rows.length, gap: getComputedStyle(el).gap, gaps: rows.slice(1).map((r, i) => r.top - rows[i].bottom), small: [...el.querySelectorAll('button,summary,a')].filter(x => { const r = x.getBoundingClientRect(); return r.height && (r.height < 44 || r.width < 44); }).map(x => x.textContent) };
         });
-        assert.ok(layout.gaps.every(g => g >= 15.9), JSON.stringify(layout)); assert.deepEqual(layout.small, []);
+        assert.equal(layout.rowCount,4); assert.ok(layout.gaps.every(g => g >= 15.9), JSON.stringify(layout)); assert.deepEqual(layout.small, []);
+        if(font===100&&[390,1440].includes(width)){
+          await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))));
+          snapshots.push({width,items:await d.evaluate(el=>[...el.querySelectorAll('h3,p,button[role=combobox]')].filter(e=>e.getClientRects().length&&!e.closest('[role=listbox]')).map(e=>{
+            const control=e.matches('[role=combobox]')&&e.closest('.haru-field-control'),paint=control||e,s=getComputedStyle(e),v=getComputedStyle(paint),r=paint.getBoundingClientRect();
+            return {kind:e.matches('[role=combobox]')?'selector':e.tagName,text:e.textContent.trim(),font:s.fontFamily,size:s.fontSize,weight:s.fontWeight,line:s.lineHeight,color:s.color,background:v.backgroundColor,border:v.border,radius:v.borderRadius,height:Math.round(r.height*100)/100};
+          }))});
+          await p.screenshot({path:out+'/ready-'+width+'.png'});
+        }
         await body.evaluate(el => el.scrollTop = 5000);
         const close = await d.getByRole('button', { name: '닫기', exact: true }).boundingBox(), header = await d.locator('[data-slot=dialog-header]').boundingBox();
         assert.ok(close.y >= 0 && close.y + close.height <= 844 && header.y >= 0);
@@ -50,7 +76,7 @@ fs.mkdirSync(out, { recursive: true });
       }
     }
     await p.setViewportSize({ width: 390, height: 844 });
-    const overlay = await p.locator('[data-slot=dialog-overlay]').evaluate(el => getComputedStyle(el).backgroundColor);
+    const overlay = await d.evaluate(el => el instanceof HTMLDialogElement ? getComputedStyle(el,'::backdrop').backgroundColor : getComputedStyle(document.querySelector('[data-slot=dialog-overlay]')).backgroundColor);
     assert.match(overlay, /rgba\(.+, 0\.48\)/);
     await axe('ready'); await p.screenshot({ path: out + '/ready-mobile.png' });
     checks.push('five widths × 100/200% text: translucent overlay, separated rows, 44px controls and fixed close/header');
@@ -95,6 +121,6 @@ fs.mkdirSync(out, { recursive: true });
     await p.getByRole('button', { name: '학습 설정', exact: true }).click(); await enabled(); assert.match(await goal.innerText(), /10/);
     assert.deepEqual((await get()).state.sessions, preserved.state.sessions); assert.deepEqual(errors, []);
     checks.push('conflict backup/cancel/explicit reload preserve historical scores and remote settings across reconnect');
-    fs.writeFileSync(out + '/result.json', JSON.stringify({ passed: true, checks, audits, errors }, null, 2)); console.log(JSON.stringify({ passed: true, checks }));
+    fs.writeFileSync(out + '/result.json', JSON.stringify({ passed: true, checks, audits, errors, features, snapshots }, null, 2)); console.log(JSON.stringify({ passed: true, checks }));
   } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

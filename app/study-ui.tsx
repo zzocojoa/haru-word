@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react';
+import {HaruStatus} from './haru-controls';
 import { HaruIcon } from '@/components/icons/haru-icon';
 
 export function StatusBadge({ tone = 'neutral', icon, children }: { tone?: 'success' | 'warning' | 'neutral'; icon?: ReactNode; children: ReactNode }) {
   const iconName = tone === 'success' ? 'check' : tone === 'warning' ? 'alert-circle' : 'unassessed';
-  return <span className={`status-badge ${tone === 'success' ? 'status-good' : tone === 'warning' ? 'status-warn' : 'status-neutral'}`}>
+  return <HaruStatus className={`status-badge ${tone === 'success' ? 'status-good' : tone === 'warning' ? 'status-warn' : 'status-neutral'}`}>
     {icon ?? <HaruIcon name={iconName} size={14} />}{children}
-  </span>;
+  </HaruStatus>;
 }
 
 /** Supplementary guidance is optional; failures and unsaved data stay inline. */

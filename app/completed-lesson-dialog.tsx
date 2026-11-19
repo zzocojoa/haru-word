@@ -1,6 +1,6 @@
 'use client';
-import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { SheetDialog, SheetDialogContent } from './sheet-dialog';
+import { DialogHeader } from '@/components/ui/dialog';
+import { SheetDialog, SheetDialogContent, SheetDialogTitle as DialogTitle, SheetDialogDescription as DialogDescription } from './sheet-dialog';
 import { deferredView } from './deferred-view';
 import type { CompletedLessonProps } from './completed-lesson';
 

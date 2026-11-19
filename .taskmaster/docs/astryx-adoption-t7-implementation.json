@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "taskId": 7,
+  "planId": "astryx-adoption-2026-11-18",
+  "tag": "astryx-adoption",
+  "status": "verified",
+  "source": {
+    "path": "work/astryx-adoption-20261118",
+    "branch": "codex/astryx-foundation",
+    "base": "33f5de530c39fe816bebfdb754f751d3e093565f",
+    "baseline": "T1–T6 verified working state",
+    "before": "outputs/astryx-t7-20261118/before.json",
+    "fingerprints": "outputs/astryx-t7-20261118/final-fingerprints.json",
+    "changed": [
+      "README.md",
+      "app/globals.css",
+      "app/learning-app.tsx",
+      "app/navigation.tsx",
+      "app/page.tsx",
+      "tests/qa/manifest.cjs",
+      "tests/ui-plan-contract-qa.cjs",
+      "docs/ASTRYX_FOUNDATION.md",
+      "src/themes/haru/haru.css",
+      "src/themes/haru/haru.js",
+      "tests/astryx-foundation-qa.cjs",
+      "themes/haru/haru.css",
+      "themes/haru/haru.js",
+      "themes/haru/haru.settings.ts",
+      "themes/haru/haru.theme.ts"
+    ],
+    "added": [
+      "app/haru-frame.tsx",
+      "app/haru-shell.css",
+      "tests/astryx-navigation-qa.cjs"
+    ]
+  },
+  "requirements": [
+    {
+      "id": "7.1",
+      "criteria": "Real AppShell heightauto/mobileNavfalse, one main/skip link, server page/layout retained, initial loading",
+      "evidence": [
+        "tests/astryx-navigation-qa.cjs",
+        "tests/design-qa.cjs",
+        "tests/startup-render-qa.cjs"
+      ]
+    },
+    {
+      "id": "7.2",
+      "criteria": "Real four TabList/Tab roles and bidirectional panels, controlled accepted selection only, original640px docking",
+      "evidence": [
+        "tests/astryx-navigation-qa.cjs"
+      ]
+    },
+    {
+      "id": "7.3",
+      "criteria": "Existing NavigationProvider/useTabPosition/flush hooks retained, filters/expanded/window scroll/focus and no inactive reactivation",
+      "evidence": [
+        "tests/ui-plan-contract-qa.cjs",
+        "tests/navigation-qa.cjs",
+        "tests/astryx-navigation-qa.cjs"
+      ]
+    },
+    {
+      "id": "7.4",
+      "criteria": "Keyboard inset, safearea rules,200%, reducedmotion, pending/failed save and retry, browser Back/Forward/swipe, fakeaccounts only",
+      "evidence": [
+        "tests/astryx-navigation-qa.cjs",
+        "tests/navigation-qa.cjs",
+        "tests/backup-workflow-qa.cjs",
+        "tests/local-draft-qa.cjs",
+        "tests/study-layout-qa.cjs"
+      ]
+    }
+  ],
+  "implementation": {
+    "realComponents": [
+      "AppShell",
+      "TabList",
+      "Tab"
+    ],
+    "height": "auto",
+    "mobileNav": false,
+    "mainAndSkipLink": "AppShell owned, startup remains separate initial phase",
+    "panels": "four mounted hidden sections linked by id/aria-controls/aria-labelledby",
+    "guard": "existing useTabNavigation/flush/useTabPosition, no optimistic selection, focus/click coalescing, rejection restores connected selected tab",
+    "mobileBreakpoint": "640px; 641px desktop flow",
+    "apiSchemaOrDatabaseMigration": false
+  },
+  "checks": {
+    "node22": {
+      "unit": {
+        "passed": 926,
+        "failed": 0,
+        "code": 0,
+        "log": "outputs/astryx-t7-20261118/verification/t7-unit.log"
+      },
+      "typecheck": {
+        "code": 0,
+        "log": "outputs/astryx-t7-20261118/verification/t7-type-6.log"
+      },
+      "lint": {
+        "code": 0,
+        "existingWarnings": 15,
+        "log": "outputs/astryx-t7-20261118/verification/t7-lint-final.log"
+      },
+      "grammar": {
+        "code": 0,
+        "log": "outputs/astryx-t7-20261118/verification/t7-grammar.log"
+      },
+      "build": {
+        "code": 0,
+        "log": "outputs/astryx-t7-20261118/verification/t7-build-5.log"
+      },
+      "runnerInventory": {
+        "code": 0,
+        "log": "outputs/astryx-t7-20261118/verification/t7-runner-final.log"
+      }
+    },
+    "node24": {
+      "version": "24.22.3",
+      "results": [
+        {
+          "name": "typecheck",
+          "code": 0
+        },
+        {
+          "name": "build",
+          "code": 0
+        }
+      ]
+    },
+    "doctor": {
+      "code": 0,
+      "pass": 11,
+      "warn": 1,
+      "fail": 0,
+      "log": "outputs/astryx-t7-20261118/verification/t7-doctor-final.log",
+      "warning": "Windows npm cmd shim detection; source-purity not inspected"
+    },
+    "browser": {
+      "scripts": 12,
+      "invocations": 24,
+      "passed": 24,
+      "results": [
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-astryx-navigation-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "design-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-design-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "ui-plan-contract-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-ui-plan-contract-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-navigation-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-local-draft-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-backup-workflow-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-settings-dialog-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-sheet-dismiss-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-study-layout-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sentence-feedback-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-sentence-feedback-layout-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-foundation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-astryx-foundation-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "startup-render-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\chromium-startup-render-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-astryx-navigation-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "design-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-design-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "ui-plan-contract-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-ui-plan-contract-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-navigation-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-local-draft-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-backup-workflow-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-settings-dialog-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-sheet-dismiss-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-study-layout-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sentence-feedback-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-sentence-feedback-layout-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-foundation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-astryx-foundation-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "startup-render-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-t7-20261118\\visual-final\\webkit-startup-render-qa.cjs.log"
+        }
+      ],
+      "note": "startup-render-qa checks both engines internally; its wrapper labels are not separate internal engine coverage"
+    },
+    "responsive": {
+      "widths": [
+        320,
+        390,
+        430,
+        640,
+        641,
+        768,
+        1440
+      ],
+      "textScales": [
+        100,
+        200
+      ],
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "evidence": "outputs/astryx-t7-20261118/shell-final"
+    },
+    "visual": {
+      "legacyViewsUnchanged": 16,
+      "comparison": "outputs/astryx-t7-20261118/legacy-style-comparison.json",
+      "screenshots": "outputs/astryx-t7-20261118/visual-settled",
+      "pixelDiffs": "outputs/astryx-t7-20261118/visual-comparison.json",
+      "wholeScreenshotsPixelIdentical": false,
+      "manualReview": [
+        "mobile Today",
+        "desktop Log",
+        "desktop Review"
+      ],
+      "safeArea": "existing env(safe-area-inset-bottom,0px) preserved; zero-inset6px fallback measured, physical inset not tested"
+    },
+    "dashboard": {
+      "groups": 39,
+      "plan": 6,
+      "sidebar": 15,
+      "multiPlan": 18,
+      "codes": [
+        0,
+        0,
+        0
+      ],
+      "validation": ".taskmaster/docs/astryx-adoption-t7-dashboard-validation.json",
+      "mcpReadback": "outputs/astryx-t7-20261118/task-master-readback.json",
+      "live": "outputs/astryx-t7-20261118/dashboard-live-final.json",
+      "previousPlansAndBudgetsUnchanged": 5,
+      "doneParents": 7,
+      "doneSubtasks": 24,
+      "nextTask": 8
+    }
+  },
+  "preservation": {
+    "contracts": [
+      "package.json",
+      "package-lock.json",
+      ".openai/hosting.json",
+      "app/use-tab-position.ts",
+      "app/learning/use-tab-navigation.ts",
+      "app/learning/use-learning-controller.ts",
+      "app/learning/use-session-commands.ts"
+    ],
+    "phase1Proof": "outputs/astryx-t7-20261118/phase1-preservation.json",
+    "previousTags": "five original hashes checked by progress/dashboard verifier",
+    "paidAiCalls": 0,
+    "productionQaWrites": 0,
+    "dependencyChanges": 0,
+    "deployment": false,
+    "githubWrites": false,
+    "deletedFiles": 0,
+    "ownedQaStopped": true
+  },
+  "recoveryHistory": [
+    {
+      "failure": "Astryx base position/padding displaced mobile dock and defeated original scroll retention",
+      "resolution": "Scoped public-class adapter restores fixed dock, original header/640px keyboard rules",
+      "evidence": "outputs/astryx-t7-20261118/visual-smoke"
+    },
+    {
+      "failure": "Touch audit treated clipped1px skip link as visible control",
+      "resolution": "Exclude actual clipped controls; focused skip link remains independently tested at44px+",
+      "evidence": "outputs/astryx-t7-20261118/visual-attempt2"
+    },
+    {
+      "finding": "Initial visual captures raced viewport/tab updates",
+      "resolution": "Selected tab wait + three animation frames; settled date/one-main/header measurements saved",
+      "evidence": "outputs/astryx-t7-20261118/visual-settled"
+    }
+  ],
+  "limitations": [
+    "T8 onward and final AX-G2/G3/G4 remain pending",
+    "Physical iPhone/IME/VoiceOver and actual nonzero safearea not tested",
+    "No remote Linux CI or production deployment",
+    "CLI sample PNG retains neutral colors; actual built Worker captures are authoritative",
+    "Full screenshot pixel identity is not claimed after component replacement"
+  ],
+  "verifiedAt": "2026-11-18T07:41:41.805Z",
+  "completionAudit": {
+    "requirements": [
+      "7.1",
+      "7.2",
+      "7.3",
+      "7.4"
+    ],
+    "covered": true,
+    "priorHistoryHashesPreserved": true,
+    "currentDashboardSourceHashesMatch": true,
+    "ordinarySourceAndQaPreserved": true,
+    "ownedWorkersStopped": true,
+    "unverified": [
+      "T8 onward and final AX-G2/G3/G4 remain pending",
+      "Physical iPhone/IME/VoiceOver and actual nonzero safearea not tested",
+      "No remote Linux CI or production deployment",
+      "CLI sample PNG retains neutral colors; actual built Worker captures are authoritative",
+      "Full screenshot pixel identity is not claimed after component replacement"
+    ]
+  }
+}

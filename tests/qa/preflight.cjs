@@ -24,4 +24,10 @@ async function requireDisabledAiStatus(base,headers,fetcher=fetch,signal){
   const response=await fetcher(base+'/api/sentence-feedback',{headers:{...headers,'X-Study-AI-Contract':'4'},signal:signal?AbortSignal.any([signal,timeout]):timeout});
   if(!response.ok||(await response.json()).enabled!==false)throw Error('Local QA Worker must confirm AI generation is disabled before tests run.');
 }
-module.exports={validateEnvironment,requireDisabledAiStatus};
+function imagePracticeStage(env=process.env,requested){
+  const enabled=env.QA_WORKER_CONFIG?JSON.parse(fs.readFileSync(env.QA_WORKER_CONFIG,'utf8')).vars?.word_image_pilot_enabled==='true':undefined;
+  const stage=requested||(['enabled','development'].includes(env.QA_IMAGE_PILOT_MODE)?'all':enabled?'matrix':'production');
+  if(enabled!==undefined&&enabled===(stage==='production'))throw Error('Image QA stage differs from the configured Worker profile: production requires images disabled; other stages require images enabled.');
+  return stage;
+}
+module.exports={validateEnvironment,requireDisabledAiStatus,imagePracticeStage};

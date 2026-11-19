@@ -1,5 +1,8 @@
 'use client';
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import {HaruParagraph} from '../haru-content';
+import {HaruButton,HaruTextInput} from '../haru-controls';
+
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import { HaruIcon } from '@/components/icons/haru-icon';
 import { cardMeaning } from '@/lib/catalog-basics';
 import type { Progress, Word } from '@/lib/learning';
@@ -48,8 +51,8 @@ export function ImagePracticeContent({ words, progress, controller }: { words: W
   const position = useSyncExternalStore(controller.subscribe, controller.getSnapshot, controller.getSnapshot);
   useEffect(() => { controller.open(); }, [controller]);
   return <>
-    <p className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개 · 성적은 기록하지 않아요</p>
-    {!deck.length ? <p role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</p>
+    <HaruParagraph className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개 · 성적은 기록하지 않아요</HaruParagraph>
+    {!deck.length ? <HaruParagraph role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</HaruParagraph>
       : position.available ? <PracticeCards deck={deck} position={position} controller={controller}/>
       : <PositionStatus position={position} controller={controller}/>}
   </>;
@@ -64,15 +67,15 @@ function PositionStatus({ position, controller, fallback = false, displayedEntry
     ? '연습 위치 저장 결과를 확인하지 못했어요. 다시 저장하면 서버 위치부터 확인해요.'
     : '연습 위치를 불러오지 못했어요. 다시 불러와 주세요.';
   return <div className="image-practice-status">
-    <p role="status" className="image-practice-position"><HaruIcon name={icon} size={16} /><span>{status === 'idle' || status === 'loading' ? '연습 위치 확인 중' : status === 'saving' ? '위치 저장 중'
+    <HaruParagraph role="status" className="image-practice-position"><HaruIcon name={icon} size={16} /><span>{status === 'idle' || status === 'loading' ? '연습 위치 확인 중' : status === 'saving' ? '위치 저장 중'
       : status === 'conflict' ? '다른 기기에서 연습 위치가 바뀌었어요.' : status === 'auth' ? '로그인을 확인한 뒤 다시 열어 주세요.'
-      : status === 'error' ? errorMessage : fallback ? '저장 위치 확인됨' : position.entryId ? '위치 저장됨' : '이동하면 위치가 저장돼요.'}</span></p>
-    {status === 'error' && <button type="button" className="text-button" onClick={controller.retry}>{position.available ? '다시 저장' : '다시 불러오기'}</button>}
+      : status === 'error' ? errorMessage : fallback ? '저장 위치 확인됨' : position.entryId ? '위치 저장됨' : '이동하면 위치가 저장돼요.'}</span></HaruParagraph>
+    {status === 'error' && <HaruButton label={[(position.available ? '다시 저장' : '다시 불러오기')].join('')} variant="ghost" type="button" className="haru-migrated text-button" onClick={controller.retry}>{position.available ? '다시 저장' : '다시 불러오기'}</HaruButton>}
     {status === 'conflict' && position.remote && <div className="image-practice-choices">
-      <button type="button" className="secondary-button" onClick={controller.useRemote}>다른 기기 위치로 이동</button>
-      <button type="button" className="secondary-button" onClick={() => controller.keepCurrent(displayedEntryId)}>현재 위치 저장</button>
+      <HaruButton label={["다른 기기 위치로 이동"].join('')} variant="secondary" type="button" className="haru-migrated secondary-button" onClick={controller.useRemote}>다른 기기 위치로 이동</HaruButton>
+      <HaruButton label={["현재 위치 저장"].join('')} variant="secondary" type="button" className="haru-migrated secondary-button" onClick={() => controller.keepCurrent(displayedEntryId)}>현재 위치 저장</HaruButton>
     </div>}
-    {position.storageWarning && <p className="small-note">기기 내 위치 복구를 사용할 수 없어요. 창을 나가기 전에 서버 저장을 확인해 주세요.</p>}
+    {position.storageWarning && <HaruParagraph className="small-note">기기 내 위치 복구를 사용할 수 없어요. 창을 나가기 전에 서버 저장을 확인해 주세요.</HaruParagraph>}
   </div>;
 }
 function PracticeCards({ deck, position, controller }: { deck: Card[]; position: PositionView; controller: ImagePracticePositionController }) {
@@ -93,13 +96,13 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
   return <>
     <PracticeCard key={`${deck[index].word.id}:${visit}:${position.displayVersion}`} card={deck[index]}/>
     <div className="image-practice-controls">
-      <p className="sr-only" aria-live="polite" aria-atomic="true">카드 {index + 1} / {deck.length}</p>
-      {resolved.fallback && <p className="small-note" role="status">이전에 보던 카드가 없어 다른 카드로 이동했어요. 이전·다음 버튼을 누르면 새 위치가 저장돼요.</p>}
+      <HaruParagraph className="sr-only" aria-live="polite" aria-atomic="true">카드 {index + 1} / {deck.length}</HaruParagraph>
+      {resolved.fallback && <HaruParagraph className="small-note" role="status">이전에 보던 카드가 없어 다른 카드로 이동했어요. 이전·다음 버튼을 누르면 새 위치가 저장돼요.</HaruParagraph>}
       <PositionStatus position={position} controller={controller} fallback={resolved.fallback} displayedEntryId={resolved.entryId}/>
       <nav className="image-practice-navigation" aria-label="이미지 연습 카드 이동">
-        <button type="button" className="secondary-button" disabled={index === 0 || position.status === 'auth'} onClick={() => move(index - 1)}><HaruIcon name="arrow-left" size={18} />이전</button>
-        <button ref={numberButton} type="button" className="text-button" aria-expanded={jump} aria-label={`카드 번호 ${index + 1} / ${deck.length}`} onClick={() => { setJump(!jump); setNumber(String(index + 1)); setNumberError(false); }}><HaruIcon name="card-grid" size={18} /><span>{index + 1} / {deck.length}</span></button>
-        <button type="button" className="secondary-button" disabled={index === deck.length - 1 || position.status === 'auth'} onClick={() => move(index + 1)}>다음<HaruIcon name="arrow-right" size={18} /></button>
+        <HaruButton label="이전" variant="secondary" type="button" className="haru-migrated secondary-button" disabled={index === 0 || position.status === 'auth'} onClick={() => move(index - 1)}><span className="haru-practice-action"><HaruIcon name="arrow-left" size={18} />이전</span></HaruButton>
+        <HaruButton label={`카드 번호 ${index + 1} / ${deck.length}`} variant="ghost" ref={numberButton} type="button" className="haru-migrated text-button" aria-expanded={jump} aria-label={`카드 번호 ${index + 1} / ${deck.length}`} onClick={() => { setJump(!jump); setNumber(String(index + 1)); setNumberError(false); }}><span className="haru-practice-action"><HaruIcon name="card-grid" size={18} /><span>{index + 1} / {deck.length}</span></span></HaruButton>
+        <HaruButton label="다음" variant="secondary" type="button" className="haru-migrated secondary-button" disabled={index === deck.length - 1 || position.status === 'auth'} onClick={() => move(index + 1)}><span className="haru-practice-action">다음<HaruIcon name="arrow-right" size={18} /></span></HaruButton>
       </nav>
       {jump && <form className="image-practice-jump" onSubmit={event => {
         event.preventDefault(); const next = practiceNumber(number, deck.length);
@@ -107,33 +110,36 @@ function PracticeCards({ deck, position, controller }: { deck: Card[]; position:
         else { move(next); numberButton.current?.focus({ preventScroll: true }); }
       }}>
         <label htmlFor="image-practice-number">카드 번호 (1–{deck.length})</label>
-        <input id="image-practice-number" type="text" inputMode="numeric" value={number} aria-invalid={numberError}
+        <HaruTextInput label={`카드 번호 (1–${deck.length})`} isLabelHidden containerClassName="haru-practice-number" id="image-practice-number" type="text" inputMode="numeric" value={number} status={numberError?{type:'error'}:undefined}
           aria-describedby={numberError ? 'image-practice-number-error' : undefined} onChange={event => { setNumber(event.target.value); setNumberError(false); }}/>
-        <button type="submit" className="secondary-button" disabled={position.status === 'auth'}>이동</button>
-        {numberError && <p id="image-practice-number-error" role="alert">1부터 {deck.length} 사이의 카드 번호를 입력해 주세요.</p>}
+        <HaruButton label={["이동"].join('')} variant="secondary" type="submit" className="haru-migrated secondary-button" disabled={position.status === 'auth'}>이동</HaruButton>
+        {numberError && <HaruParagraph id="image-practice-number-error" role="alert">1부터 {deck.length} 사이의 카드 번호를 입력해 주세요.</HaruParagraph>}
       </form>}
     </div>
   </>;
 }
 function PracticeCard({ card }: { card: Card }) {
+  const senseId=useId(), actionId=useId();
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [revealed, setRevealed] = useState(false);
   return <div className="dialog-scroll">
-    {failed ? <p role="alert">이미지를 불러오지 못했어요. 아래 이동 버튼으로 다른 카드를 볼 수 있어요.</p> : <>
-      <button type="button" className="image-practice-flip" disabled={!ready} onClick={() => setRevealed(value => !value)}>
+    {failed ? <HaruParagraph role="alert">이미지를 불러오지 못했어요. 아래 이동 버튼으로 다른 카드를 볼 수 있어요.</HaruParagraph> : <>
+      <HaruButton label={revealed ? "이미지 보기" : "단어·뜻 보기"} aria-label={revealed ? undefined : (SCENES[card.image.entryId] || "영단어를 떠올리는 그림")+" 단어·뜻 보기"} aria-labelledby={revealed ? `${senseId} ${actionId}` : undefined} type="button" className="haru-migrated haru-native-action image-practice-flip" disabled={!ready} onClick={() => setRevealed(value => !value)}>
+        <span className="haru-practice-face">
         <img className="image-practice-picture" hidden={revealed} src={card.image.url} width={card.image.width} height={card.image.height}
           alt={SCENES[card.image.entryId] || '영단어를 떠올리는 그림'} onLoad={() => setReady(true)} onError={() => setFailed(true)}/>
-        {revealed && <span className="image-practice-sense">
+        {revealed && <span id={senseId} className="image-practice-sense">
           <span lang="en" className="image-practice-answer">{card.word.word}</span>
           <WordIpa word={card.word} meaning={card.image.baseMeaning}/>
           <span className="image-practice-meaning">{card.image.baseMeaning}</span>
           <span className="small-note"><PartOfSpeechLabel pos={card.image.pos}/></span>
         </span>}
-        <span className="sr-only">{revealed ? '이미지 보기' : '단어·뜻 보기'}</span>
-      </button>
-      {!ready ? <p role="status">이미지 불러오는 중</p>
-        : <p className="small-note image-practice-hint"><HaruIcon name="card-flip" size={18} /><span>{revealed ? '카드를 누르면 이미지로 돌아가요.' : '단어를 떠올린 뒤 눌러 확인해 보세요.'}</span></p>}
+        <span id={actionId} className="sr-only">{revealed ? '이미지 보기' : '단어·뜻 보기'}</span>
+        </span>
+      </HaruButton>
+      {!ready ? <HaruParagraph role="status">이미지 불러오는 중</HaruParagraph>
+        : <HaruParagraph className="small-note image-practice-hint"><HaruIcon name="card-flip" size={18} /><span>{revealed ? '카드를 누르면 이미지로 돌아가요.' : '단어를 떠올린 뒤 눌러 확인해 보세요.'}</span></HaruParagraph>}
       {revealed && <HelpDetails title="발음"><WordPronunciation word={card.word} meaning={card.image.baseMeaning} showIpa={false}/></HelpDetails>}
     </>}
   </div>;

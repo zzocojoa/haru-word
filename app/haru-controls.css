@@ -1,0 +1,43 @@
+/* Scoped compatibility for existing Haru controls; public Astryx targets only. */
+@layer haru-controls {
+  .haru-action {font-family:inherit; font-size:.875rem; font-weight:650; line-height:1.5; border-radius:10px; box-shadow:none; background-image:none; gap:var(--space-2); white-space:normal; height:auto; min-width:0; overflow-wrap:anywhere;}
+  .haru-action.primary-button,.haru-action.secondary-button {min-height:48px; padding:var(--space-3) var(--space-4);}
+  .haru-action.primary-button {background:var(--action);color:var(--ink);border:1px solid transparent;}
+  .haru-action.secondary-button {background:var(--card);color:var(--ink);border:1px solid var(--input);}
+  .haru-action.secondary-button:hover:not([aria-disabled=true]) {background:var(--surface);border-color:var(--ink);}
+  .haru-action.text-button {min-height:44px;padding:0;color:var(--ink);background:transparent;border:0;font-weight:600;}
+  .haru-action[aria-disabled=true],.haru-icon-action[aria-disabled=true] {opacity:.5;cursor:not-allowed;}
+  .haru-icon-action {width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:1px solid var(--border);border-radius:10px;color:var(--ink);background:var(--card);}
+  .haru-icon-action.learning-message-close {border:0;border-radius:8px;background:transparent;color:var(--muted-foreground);}
+  .haru-field {width:100%;min-width:0;gap:var(--space-2);margin:var(--space-3) 0 var(--space-2);font-size:.875rem;line-height:1.6;}
+  .haru-field label {font-size:.875rem;font-weight:600;line-height:1.6;color:var(--ink);}
+  .haru-field-control {min-height:44px;height:auto;border:1px solid var(--input);border-radius:10px;background:var(--card);color:var(--ink);padding:11px 13px;box-shadow:none;font:inherit;font-size:1rem;line-height:1.6;}
+  .haru-field input,.haru-field textarea {width:100%;min-width:0;min-height:0;height:auto;margin:0;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);font-family:inherit;font-size:1rem;font-weight:400;line-height:1.6;outline:none;}
+  .haru-field textarea {resize:vertical;}
+  /* Keep the existing plain number field; its external alert supplies the error copy. */
+  .haru-practice-number .haru-field-control > :not(input) {display:none;}
+  .haru-field-control:has(>[role=combobox]) {padding:0;}
+  .haru-field-control>[role=combobox] {min-height:44px;padding:11px 13px;font-size:1rem;line-height:1.6;}
+  .haru-field input::placeholder,.haru-field textarea::placeholder {font-size:.875rem;color:var(--caption);}
+  .haru-field-control:focus-within {outline:2px solid var(--ink);outline-offset:2px;}
+  .haru-notice {min-width:0;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--ink);font-size:.875rem;padding:14px var(--space-4);overflow-wrap:anywhere;}
+  .haru-notice.error-banner {background:var(--danger-soft);color:var(--danger);border-color:#d19893;padding:var(--space-4);font-size:.8125rem;}
+  .haru-notice .astryx-banner {padding:0;background:transparent;color:inherit;border:0;border-radius:0;gap:var(--space-2);}
+  .haru-notice .astryx-banner-icon {display:none;}
+  .haru-notice .haru-notice-title {font-size:.875rem;font-weight:400;line-height:1.6;white-space:normal;color:inherit;}
+  .haru-notice.error-banner .haru-notice-title {font-size:.8125rem;}
+  .haru-notice .astryx-banner-content {padding:0;margin-top:var(--space-2);background:transparent;border:0;color:inherit;}
+  .haru-progress {height:8px;min-height:0;width:100%;}
+  .haru-progress .astryx-progress-bar-track {height:8px;border-radius:9999px;background:color-mix(in srgb,var(--ink) 20%,transparent);}
+  .haru-progress .astryx-progress-bar-fill {background:var(--ink);}
+  .haru-progress.session-progress {height:4px;margin:var(--space-3) 0 var(--space-4);}
+  .haru-progress.session-progress .astryx-progress-bar-track,.haru-progress.grammar-progress .astryx-progress-bar-track {height:4px;}
+  .haru-progress.grammar-progress {height:4px;}
+  .grammar-progress .astryx-progress-bar-fill {background:var(--ink);}
+  .haru-save-state {display:flex;align-items:center;gap:7px;font-size:.75rem;line-height:1.6;color:var(--caption);}
+  .haru-save-state[data-state=error] {color:var(--danger);}
+  .haru-status.status-badge {display:inline-flex;align-items:center;gap:var(--space-1);max-width:100%;white-space:normal;overflow-wrap:anywhere;font-size:.75rem;line-height:1.5;}
+  .haru-status.status-good {color:var(--success);background:var(--success-soft);}
+  .haru-status.status-warn {color:var(--warning);background:var(--warning-soft);}
+  .haru-status.status-neutral {color:var(--caption);background:var(--surface);}
+}

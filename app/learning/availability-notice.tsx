@@ -2,6 +2,7 @@ import { settingsActivity, SETTINGS_ACTIVITY_TEXT, type NoticeSurface } from '@/
 import { ClockStatus } from './clock-status';
 import { SaveError } from './save-error';
 import type { LearningViewProps } from './types';
+import {HaruNotice} from '../haru-controls';
 
 type AvailabilityNoticeProps = Pick<LearningViewProps,
   'loading' | 'saving' | 'signedIn' | 'unsaved' | 'error' | 'saveError' | 'conflict' | 'store' | 'state' | 'clock'
@@ -14,10 +15,9 @@ export function AvailabilityNotice({ surface, ...status }: AvailabilityNoticePro
     {status.error && <SaveError {...status} />}
     {!status.loading && status.signedIn && <ClockStatus clock={status.clock} />}
     {activity === 'signed-out' ? (
-      <div className="notice">
-        <p>{SETTINGS_ACTIVITY_TEXT[activity]}</p>
+      <HaruNotice className="notice" status="info" title={SETTINGS_ACTIVITY_TEXT[activity]}>
         <a className="text-button" href="/signin-with-chatgpt?return_to=%2F" target="_top">로그인하기</a>
-      </div>
-    ) : activity ? <p className="notice" role="status">{SETTINGS_ACTIVITY_TEXT[activity]}</p> : null}
+      </HaruNotice>
+    ) : activity ? <HaruNotice className="notice" status="info" role="status" title={SETTINGS_ACTIVITY_TEXT[activity]}/> : null}
   </>;
 }

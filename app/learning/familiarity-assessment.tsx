@@ -1,5 +1,8 @@
 "use client";
-import { Progress as ProgressBar } from "@/components/ui/progress";
+import {HaruPanel,HaruHeading,HaruParagraph} from '../haru-content';
+import {HaruButton} from '../haru-controls';
+
+import { HaruProgress as ProgressBar } from "../haru-controls";
 import { FAMILIARITY_TEXT, assessmentAdvice } from "@/lib/learning";
 import { ArrowRight, Check } from "lucide-react";
 import { FamiliarityCard } from "../familiarity-card";
@@ -31,7 +34,7 @@ export function FamiliarityAssessment({
   markFamiliarity,
 }: FamiliarityAssessmentProps) {
   return (
-    <section className="learning-panel">
+    <HaruPanel className="learning-panel">
       <div className="panel-top">
         <span className="level-badge">{state.settings.level}</span>
       </div>
@@ -40,10 +43,10 @@ export function FamiliarityAssessment({
           <div className="success-icon">
             <Check />
           </div>
-          <h2>친숙도를 확인했어요</h2>
-          <p className="muted">
+          <HaruHeading level={2}>친숙도를 확인했어요</HaruHeading>
+          <HaruParagraph className="muted">
             {assessmentAdvice(assessment, state.settings.level).text}
-          </p>
+          </HaruParagraph>
           <div className="assessment-results">
             {(["known", "uncertain", "new"] as const).map((f) => (
               <div key={f}>
@@ -57,25 +60,25 @@ export function FamiliarityAssessment({
               </div>
             ))}
           </div>
-          <p className="small-note">
+          <HaruParagraph className="small-note">
             정식 수준 시험은 아니에요. 결과를 참고해 학습 수준을 골라 주세요.
-          </p>
-          <details className="notes-details"><summary>수준 추천 기준</summary><p>같은 표시가 14개 이상이면 수준 조정을 제안해요. 정식 CEFR 시험이나 말하기 판정은 아니에요.</p></details>
+          </HaruParagraph>
+          <details className="notes-details"><summary>수준 추천 기준</summary><HaruParagraph>같은 표시가 14개 이상이면 수준 조정을 제안해요. 정식 CEFR 시험이나 말하기 판정은 아니에요.</HaruParagraph></details>
           <div className="button-row">
-            <button
-              className="primary-button"
+            <HaruButton label={["이 수준에서 학습하기 "].join('')} variant={'primary'}
+              className="haru-migrated primary-button"
               disabled={busy}
               onClick={() => {
                 setAssessing(false);
                 void start("daily");
               }}
-            >
-              이 수준에서 학습하기 <ArrowRight size={17} />
-            </button>
+             endContent={<ArrowRight size={17} />}>
+              이 수준에서 학습하기
+            </HaruButton>
             {assessmentAdvice(assessment, state.settings.level).suggested !==
               state.settings.level && (
-              <button
-                className="secondary-button"
+              <HaruButton label={["다른 수준 확인"].join('')} variant={'secondary'}
+                className="haru-migrated secondary-button"
                 disabled={busy}
                 onClick={() =>
                   beginAssessment(
@@ -85,14 +88,14 @@ export function FamiliarityAssessment({
                 }
               >
                 다른 수준 확인
-              </button>
+              </HaruButton>
             )}
           </div>
           {assessmentAdvice(assessment, state.settings.level).goal && (
             <div className="button-row batch-actions">
               {[1, 2].map((n) => (
-                <button
-                  className="secondary-button"
+                <HaruButton label={["하루 ",(n),"개로 설정"].join('')} variant={'secondary'}
+                  className="haru-migrated secondary-button"
                   disabled={busy}
                   aria-pressed={state.settings.dailyGoal === n}
                   key={n}
@@ -107,12 +110,12 @@ export function FamiliarityAssessment({
                   }
                 >
                   하루 {n}개로 설정
-                </button>
+                </HaruButton>
               ))}
             </div>
           )}
-          <button
-            className="text-button skip"
+          <HaruButton label={["저장하고 나가기"].join('')} variant={'ghost'}
+            className="haru-migrated text-button skip"
             disabled={busy}
             onClick={async () => {
               if (await save(state)) {
@@ -122,14 +125,14 @@ export function FamiliarityAssessment({
             }}
           >
             저장하고 나가기
-          </button>
+          </HaruButton>
         </>
       ) : (
         <>
-          <h2>뜻을 떠올리고, 확인해 보세요.</h2>
-          <p className="muted">
+          <HaruHeading level={2}>뜻을 떠올리고, 확인해 보세요.</HaruHeading>
+          <HaruParagraph className="muted">
             표시를 고른 뒤 뜻을 비교해요.
-          </p>
+          </HaruParagraph>
           {assessmentWord && (
             <FamiliarityCard
               key={assessmentWord.id}
@@ -152,14 +155,14 @@ export function FamiliarityAssessment({
             aria-label="친숙도 확인 진행률"
             value={(assessment.index / assessment.ids.length) * 100}
           />
-          <button
-            className="text-button skip"
+          <HaruButton label={["나중에 이어 하기"].join('')} variant={'ghost'}
+            className="haru-migrated text-button skip"
             onClick={() => setAssessing(false)}
           >
             나중에 이어 하기
-          </button>
+          </HaruButton>
         </>
       )}
-    </section>
+    </HaruPanel>
   );
 }

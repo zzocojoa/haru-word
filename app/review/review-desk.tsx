@@ -1,4 +1,7 @@
 "use client";
+import {HaruPanel,HaruHeading,HaruParagraph} from '../haru-content';
+import {HaruButton,HaruSelector} from '../haru-controls';
+
 import { cardMeaning } from "@/lib/catalog-basics";
 import { resumeMonthlyWriting } from '@/lib/learning/session-flow';
 import {
@@ -68,6 +71,12 @@ export function ReviewDesk({
         .reverse(),
     [month, date, state.progress, state.sessions],
   );
+  const periodFields = useMemo(() => ({
+    weekly: <HaruSelector label="주간 점검 기간" isLabelHidden containerClassName="haru-review-period" controlClassName="review-period" value={week}
+      onChange={setWeek} options={weeks.map(period => ({value:period,label:period+'부터 한 주'}))} />,
+    monthly: <HaruSelector label="월말 점검 기간" isLabelHidden containerClassName="haru-review-period" controlClassName="review-period" value={month}
+      onChange={setMonth} options={months.map(period => ({value:period,label:period}))} />,
+  }), [week, month, weeks, months]);
   const reviews = useMemo(
     () =>
       (["weekly", "monthly"] as const).map((kind) => {
@@ -131,7 +140,7 @@ export function ReviewDesk({
         {reviews.map(
           ({ kind, period, ids, session, latest, checked, retained }) => {
             return (
-              <section
+              <HaruPanel
                 className="wide-panel review-card"
                 data-review-kind={kind}
                 key={kind}
@@ -139,29 +148,17 @@ export function ReviewDesk({
                 <div className="review-icon">
                   <HaruIcon name={kind === "weekly" ? "calendar-repeat" : "calendar-pencil"} size={24} />
                 </div>
-                <h2>
+                <HaruHeading level={2}>
                   {kind === "weekly"
                     ? "주간 점검"
                     : "월말 쓰기"}
-                </h2>
-                <p className="muted">
+                </HaruHeading>
+                <HaruParagraph className="muted">
                   {kind === "weekly"
                     ? "그 주의 목표 단어 전체"
                     : "그달 배운 단어 전체 · 주간 통과 포함"}
-                </p>
-                <select
-                  className="review-period"
-                  aria-label={kind === "weekly" ? "주간 점검 기간" : "월말 점검 기간"}
-                  value={period}
-                  onChange={(event) => (kind === "weekly" ? setWeek : setMonth)(event.target.value)}
-                >
-                    {(kind === "weekly" ? weeks : months).map((p) => (
-                      <option key={p} value={p}>
-                        {p}
-                        {kind === "weekly" ? "부터 한 주" : ""}
-                      </option>
-                    ))}
-                </select>
+                </HaruParagraph>
+                {periodFields[kind]}
                 <div className="review-count">
                   <b>{ids.length}</b>
                   <span>
@@ -171,49 +168,29 @@ export function ReviewDesk({
                     </small>
                   </span>
                 </div>
-                {session && <p className="review-session-label small-note">{sessionLabels.get(session.id)?.number}회차 · {sessionLabels.get(session.id)?.started} 시작{sessionLabels.get(session.id)?.latest ? ' · 최신 회차' : ''}</p>}
+                {session && <HaruParagraph className="review-session-label small-note">{sessionLabels.get(session.id)?.number}회차 · {sessionLabels.get(session.id)?.started} 시작{sessionLabels.get(session.id)?.latest ? ' · 최신 회차' : ''}</HaruParagraph>}
                 {retained > 0 && (
-                  <p className="small-note">
+                  <HaruParagraph className="small-note">
                     날짜 변경 {retained}개 · 기존 점검의 답·순서 유지
-                  </p>
+                  </HaruParagraph>
                 )}
                 <HelpDetails title="점검 방식" className="review-checklist">
-                  <p>
+                  <HaruParagraph>
                     {kind === "weekly"
                       ? "뜻 확인 → 영어 단어 떠올리기 → 문장 쓰기"
                       : "뜻 보고 영어 단어 쓰기 → 문장 쓰기(선택)"}
-                  </p>
-                  <p>{kind === 'monthly' ? '미점검은 이 회차에 남아요. 실제 도움·문장 보완은 일일 복습에 반영해요.' : '도움 필요·미완료 항목은 다음 학습에 먼저 배정해요.'}</p>
-                  <p>
+                  </HaruParagraph>
+                  <HaruParagraph>{kind === 'monthly' ? '미점검은 이 회차에 남아요. 실제 도움·문장 보완은 일일 복습에 반영해요.' : '도움 필요·미완료 항목은 다음 학습에 먼저 배정해요.'}</HaruParagraph>
+                  <HaruParagraph>
                     {kind === "weekly"
                       ? "저장한 위치에서 다음에 이어 할 수 있어요."
                       : "설정한 개수씩 나누어 점검해요."}
-                  </p>
+                  </HaruParagraph>
                 </HelpDetails>
                 {kind === "monthly" && !session && (
-                  <label>
-                    한 번에 점검할 단어 수
-                    <select
-                      aria-label="월말 묶음 크기"
-                      value={state.settings.monthlyBatchSize || 15}
-                      disabled={busy}
-                      onChange={(e) =>
-                        save?.({
-                          ...state,
-                          settings: {
-                            ...state.settings,
-                            monthlyBatchSize: Number(e.target.value),
-                          },
-                        })
-                      }
-                    >
-                      {[1, 5, 10, 15].map((n) => (
-                        <option key={n} value={n}>
-                          {n}개씩 · {Math.ceil(ids.length / n)}묶음
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                  <HaruSelector label="한 번에 점검할 단어 수" containerClassName="haru-review-batch" value={String(state.settings.monthlyBatchSize || 15)} disabled={busy}
+                    onChange={value => save?.({...state,settings:{...state.settings,monthlyBatchSize:Number(value)}})}
+                    options={[1,5,10,15].map(n => ({value:String(n),label:n+'개씩 · '+Math.ceil(ids.length/n)+'묶음'}))} />
                 )}
                 {!ids.length ? (
                   <div className="empty-note">
@@ -223,8 +200,12 @@ export function ReviewDesk({
                   </div>
                 ) : (
                   <>
-                    <button
-                      className="primary-button full"
+                    <HaruButton label={[(session
+                        ? "중단한 점검 이어서"
+                        : latest
+                          ? "다시 점검하기"
+                          : "전체 점검 시작")].join('')} variant="primary" endContent={<HaruIcon name="arrow-right" size={17} />}
+                      className="haru-migrated primary-button full"
                       disabled={busy}
                       onClick={() => start(kind, period, session)}
                     >
@@ -233,8 +214,8 @@ export function ReviewDesk({
                         : latest
                           ? "다시 점검하기"
                           : "전체 점검 시작"}
-                      <HaruIcon name="arrow-right" size={17} />
-                    </button>
+
+                    </HaruButton>
                     {session &&
                       ids.some(
                         (id) =>
@@ -246,32 +227,36 @@ export function ReviewDesk({
                               ) === id,
                           ),
                       ) && (
-                        <p className="small-note">
+                        <HaruParagraph className="small-note">
                           이어서 시작하면 추가 단어도 함께 확인해요. 기존 답과 순서는 유지돼요.
-                        </p>
+                        </HaruParagraph>
                       )}
                   </>
                 )}
-              </section>
+              </HaruPanel>
             );
           },
         )}
       </div>
-      <section className="wide-panel practice-desk">
-        <h2>보완 연습</h2>
-        <p className="muted">
+      <HaruPanel className="wide-panel practice-desk">
+        <HaruHeading level={2}>보완 연습</HaruHeading>
+        <HaruParagraph className="muted">
           친숙도는 바뀌지 않아요. 한 번에 최대 20개를 연습해요.
-        </p>
-        {!practices.some(({ ids, session }) => ids.length || session) ? <p className="empty-practice" role="status">지금 보완할 항목이 없어요.</p> : <div className="practice-options">
+        </HaruParagraph>
+        {!practices.some(({ ids, session }) => ids.length || session) ? <HaruParagraph className="empty-practice" role="status">지금 보완할 항목이 없어요.</HaruParagraph> : <div className="practice-options">
           {practices.map(({ mode, ids, session }) => {
             return (
-              <button
+              <HaruButton label={[(mode === "known"
+                    ? "아는 단어 다시 확인"
+                    : mode === "ko"
+                      ? "뜻→영어 추가 연습"
+                      : "문장 보완 연습"),(" "),"· ",(session ? "이어서" : ids.length + "개")].join('')} variant="secondary" icon={<HaruIcon name={mode === "known" ? "repeat" : mode === "ko" ? "recall-card" : "sentence-write"} size={18} />}
                 key={mode}
-                className="secondary-button"
+                className="haru-migrated secondary-button"
                 disabled={busy || (!ids.length && !session)}
                 onClick={() => start("practice", undefined, session, mode)}
               >
-                <HaruIcon name={mode === "known" ? "repeat" : mode === "ko" ? "recall-card" : "sentence-write"} size={18} />
+
                 <span>
                   {mode === "known"
                     ? "아는 단어 다시 확인"
@@ -280,11 +265,11 @@ export function ReviewDesk({
                       : "문장 보완 연습"}{" "}
                   · {session ? "이어서" : ids.length + "개"}
                 </span>
-              </button>
+              </HaruButton>
             );
           })}
         </div>}
-      </section>
+      </HaruPanel>
     </>
   );
 }

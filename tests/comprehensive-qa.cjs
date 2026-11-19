@@ -1,5 +1,6 @@
 // Production-built Worker only. Every mutation uses an isolated local test account.
 const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
+const {chooseOption,selectedOption}=require('./qa/select.cjs');
 const assert=require('node:assert/strict');const fs=require('node:fs');
 const base=require('./qa/runtime.cjs').base,out='outputs/comprehensive-audit';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
@@ -46,14 +47,17 @@ function rejectOversizedUtf8(headers) {
    const ctx=await context(),p=await page(ctx);await p.clock.install({time:new Date(initial)});await syncClock(p);await p.goto(base);await saved(p);await p.getByRole('tab',{name:'복습 점검'}).click();
    const before=await p.locator('.daily-label').innerText();await p.clock.fastForward(70000);await p.evaluate(()=>window.dispatchEvent(new Event('focus')));
    assert.notEqual(await p.locator('.daily-label').innerText(),before);
-   if(initial.includes('09-27'))assert.match(await p.getByRole('combobox',{name:'주간 점검 기간'}).inputValue(),/2026-09-28/);
-   else{assert.match(await p.getByRole('combobox',{name:'월말 점검 기간'}).inputValue(),/2026-10/);await p.getByRole('tab',{name:'오늘 학습'}).click();await p.screenshot({path:out+'/midnight-after.png',fullPage:true});}
+   if(initial.includes('09-27'))assert.match(await selectedOption(p.getByRole('combobox',{name:'주간 점검 기간'})),/2026-09-28/);
+   else{assert.match(await selectedOption(p.getByRole('combobox',{name:'월말 점검 기간'})),/2026-10/);await p.getByRole('tab',{name:'오늘 학습'}).click();await p.screenshot({path:out+'/midnight-after.png',fullPage:true});}
    checks.push('open page refreshes Korean date and default review period at '+initial);await ctx.close();
   }
   const historic=await context(),hp=await page(historic),historicState=await state(historic);assert.equal((await historic.request.put(base+'/api/state',{data:{revision:historicState.revision,progress:{[words[0].id]:{meaning:content[words[0].id].meaning,studyDates:['2026-08-01'],lastStudied:'2026-08-01'}},sessions:{}}})).status(),200);
   await hp.clock.install({time:new Date('2026-09-30T14:59:55Z')});await syncClock(hp);await hp.goto(base);await saved(hp);await hp.getByRole('tab',{name:'복습 점검'}).click();
-  await hp.getByRole('combobox',{name:'월말 점검 기간'}).selectOption('2026-08');await hp.getByRole('combobox',{name:'월말 점검 기간'}).selectOption('2026-09');await hp.clock.fastForward(70000);await hp.getByRole('option',{name:'2026-10',exact:true}).waitFor({state:'attached'});
-  assert.match(await hp.getByRole('combobox',{name:'월말 점검 기간'}).inputValue(),/2026-09/);assert.equal(await hp.getByRole('option',{name:'2026-09',exact:true}).count(),1);assert.equal(await hp.getByRole('option',{name:'2026-10',exact:true}).count(),1);await historic.close();
+  const historicalMonth=hp.getByRole('combobox',{name:'월말 점검 기간'});
+  await chooseOption(historicalMonth,'2026-08');await chooseOption(historicalMonth,'2026-09');await hp.clock.fastForward(70000);
+  assert.match(await selectedOption(historicalMonth),/2026-09/);
+  const nativeMonth=await historicalMonth.evaluate(el=>el.tagName==='SELECT');if(!nativeMonth)await historicalMonth.click();
+  await hp.getByRole('option',{name:'2026-10',exact:true}).waitFor({state:'attached'});assert.equal(await hp.getByRole('option',{name:'2026-09',exact:true}).count(),1);assert.equal(await hp.getByRole('option',{name:'2026-10',exact:true}).count(),1);if(!nativeMonth)await hp.keyboard.press('Escape');await historic.close();
   checks.push('a deliberately chosen historical month remains selectable after midnight');
   // An open session must not lose an unsaved answer when the date hook updates.
   const ctx=await context();let data=await state(ctx);const sid=crypto.randomUUID(),id=words[0].id;

@@ -1,17 +1,18 @@
 'use client';
 import { createContext, useCallback, useContext, useId, useLayoutEffect, useMemo, useRef, useState, type ComponentProps } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from '@/components/ui/alert-dialog';
 import { useNavigationGuard } from './navigation';
-import { installSheetSwipe } from './sheet-swipe';
+import {NativeSheet} from './native-sheet';
 
 type Protection = { dirty: boolean; blocked: boolean };
-type SheetContext = { register: (id: string, value: Protection) => () => void; close: (beforeClose?: () => Promise<boolean>) => Promise<boolean>; blocked: () => boolean; dirty: () => boolean; disabled: boolean };
+type SheetContext = { register: (id: string, value: Protection) => () => void; close: (beforeClose?: () => Promise<boolean>) => Promise<boolean>; blocked: () => boolean; dirty: () => boolean; disabled: boolean; open:boolean;titleId:string;descriptionId:string };
 const Context = createContext<SheetContext | null>(null);
 
 /** UI dismissal only. Saved state and successful submit commands keep their existing paths. */
 export function SheetDialog({ navigationKey, blocked = false, dirty = false, open, onOpenChange, children, ...props }:
   ComponentProps<typeof Dialog> & { navigationKey: string; blocked?: boolean; dirty?: boolean }) {
+  const titleId=useId(),descriptionId=useId();
   const guards = useRef(new Map<string, Protection>());
   const [childrenBlocked, setChildrenBlocked] = useState(false);
   const [confirm, setConfirm] = useState(false);
@@ -48,7 +49,7 @@ export function SheetDialog({ navigationKey, blocked = false, dirty = false, ope
     return () => { guards.current.delete(id); setChildrenBlocked([...guards.current.values()].some(g => g.blocked)); };
   }, []);
   const disabled = blocked || childrenBlocked;
-  const context = useMemo(() => ({ register, close, blocked: isBlocked, dirty: isDirty, disabled }), [register, close, isBlocked, isDirty, disabled]);
+  const context = useMemo(() => ({ register, close, blocked: isBlocked, dirty: isDirty, disabled,open:!!open,titleId,descriptionId }), [register, close, isBlocked, isDirty, disabled,open,titleId,descriptionId]);
   useNavigationGuard(changed => !open || !changed.has(navigationKey) ? true : permit());
   return <Context.Provider value={context}>
     <Dialog {...props} open={open} onOpenChange={value => { if (value) onOpenChange?.(true); else void close(); }}>{children}</Dialog>
@@ -70,13 +71,13 @@ export function useSheetProtection(dirty: boolean, blocked = false) {
   useLayoutEffect(() => register?.(id, { dirty, blocked }), [register, id, dirty, blocked]);
 }
 
-export function SheetDialogContent({ children, className = '', ...props }: ComponentProps<typeof DialogContent>) {
-  const context = useContext(Context);
-  const [element, setElement] = useState<HTMLDivElement | null>(null);
-  const close = context?.close, blocked = context?.blocked, dirty = context?.dirty;
-  useLayoutEffect(() => element && close && blocked && dirty ? installSheetSwipe(element, close, blocked, dirty) : undefined, [element, close, blocked, dirty]);
-  return <DialogContent {...props} ref={setElement} className={`sheet-dialog ${className}`}>
-    <div className="sheet-handle" data-sheet-handle data-disabled={context?.disabled || undefined} aria-hidden="true"><span/></div>
-    {children}
-  </DialogContent>;
+export function SheetDialogTitle(props:ComponentProps<typeof DialogTitle>){
+  const context=useContext(Context);return <DialogTitle {...props} {...(context?{id:context.titleId}:{})}/>;
+}
+export function SheetDialogDescription(props:ComponentProps<typeof DialogDescription>){
+  const context=useContext(Context);return <DialogDescription {...props} {...(context?{id:context.descriptionId}:{})}/>;
+}
+export function SheetDialogContent(props:ComponentProps<typeof DialogContent>){
+  const context=useContext(Context);
+  return context?<NativeSheet {...props} open={context.open} titleId={context.titleId} descriptionId={context.descriptionId} disabled={context.disabled} close={context.close} blocked={context.blocked} dirty={context.dirty}/>:<DialogContent {...props}/>;
 }

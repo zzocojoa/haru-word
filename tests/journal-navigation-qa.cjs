@@ -2,12 +2,12 @@
 const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const base = require('./qa/runtime.cjs').base, out = 'outputs/journal-navigation';
+const base = require('./qa/runtime.cjs').base, out = process.env.ASTRYX_QA_OUTPUT ? require('node:path').join(process.env.ASTRYX_QA_OUTPUT,process.env.QA_BROWSER||'chromium') : 'outputs/journal-navigation';
 fs.mkdirSync(out, { recursive: true });
 const words = JSON.parse(fs.readFileSync('data/words.json', 'utf8'));
 const content = JSON.parse(fs.readFileSync('data/content.json', 'utf8'));
 const items = words.filter(w => w.level === 'A1' && content[w.id]).slice(0, 10);
-const ids = items.map(w => w.id), checks = [], errors = [], accessibility = [];
+const ids = items.map(w => w.id), checks = [], errors = [], accessibility = [], snapshots = [];
 const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 const state = { settings: { level: 'A1', dailyGoal: 10, assessments: {}, activeSessionId: null }, progress: {}, sessions: {} };
 for (let day = 0; day < 23; day++) {
@@ -44,6 +44,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     const c = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce', extraHTTPHeaders: {
       'oai-authenticated-user-id': require('./qa/runtime.cjs').account('journal_'), 'oai-authenticated-user-email': 'journal@example.test',
     } });
+    await c.route('https://fonts.googleapis.com/**',r=>r.fulfill({body:'',contentType:'text/css'}));
     const get = async () => (await c.request.get(base + '/api/state')).json();
     const initial = await get();
     const response = await c.request.post(base + '/api/state/restore', { headers: { 'x-study-revision': String(initial.revision), 'content-type': 'application/json' }, data: { format: 'haru-words-v1', exportedAt: new Date().toISOString(), state } });
@@ -55,6 +56,15 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     await p.goto(base); await p.getByText('저장됨', { exact: true }).waitFor();
     await p.getByRole('tab', { name: '학습 기록', exact: true }).click();
     const panel = p.getByRole('tabpanel', { name: '학습 기록', exact: true });
+    const capture = async view => {
+      for(const width of [390,1440]){
+        await p.setViewportSize({width,height:900});
+        await p.evaluate(async()=>{await document.fonts.ready;await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(r))));});
+        const styles=await panel.evaluate(root=>['.section-heading h2','p','button','.record-card h3','.record-card','th','td'].flatMap(selector=>[...root.querySelectorAll(selector)].filter(e=>e.getClientRects().length).slice(0,30).map((e,index)=>{const visual=e.matches('[role=combobox]')?(e.closest('.haru-field-control')??e):e,s=getComputedStyle(e),box=getComputedStyle(visual);return{selector,index,font:s.fontSize,weight:s.fontWeight,line:s.lineHeight,color:s.color,background:box.backgroundColor,border:box.border,padding:s.padding,radius:box.borderRadius,height:Math.round(visual.getBoundingClientRect().height*100)/100};})));
+        snapshots.push({view,width,styles});await p.screenshot({path:out+'/'+view+'-'+width+'.png',fullPage:true});
+      }
+      await p.setViewportSize({width:390,height:844});
+    };
     const days = panel.locator('.journal-day'), dayTriggers = panel.locator('.journal-day-trigger');
     const sessions = days.first().locator('.journal-session'), triggers = days.first().locator('.journal-session-trigger');
     const height = await panel.locator('.journal-list').evaluate(el => el.getBoundingClientRect().height);
@@ -72,6 +82,8 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.match(await dayTriggers.first().innerText(), /일일 학습 2/);
     assert.match(await dayTriggers.first().innerText(), /다시 학습 1/);
     assert.ok(height < 1800, 'ten collapsed date summaries must stay compact');
+    await capture('collapsed');
+    if(process.env.ASTRYX_CAPTURE_BASELINE!=='true')assert.equal(await panel.locator('.haru-disclosure.journal-day').count(),10);
     await p.screenshot({ path: out + '/collapsed-mobile.png', fullPage: true });
     checks.push('same-day attempts share one date heading, with accurate attempt and type counts and no double-counted word total');
 
@@ -81,9 +93,12 @@ for (let attempt = 1; attempt <= 3; attempt++) {
       accessibility.push({ label, violations }); assert.deepEqual(violations, [], label);
     };
     await axe('collapsed mobile journal');
+    await dayTriggers.first().focus();await p.keyboard.press('ArrowDown');assert.equal(await dayTriggers.nth(1).evaluate(e=>e===document.activeElement),true);
+    await p.keyboard.press('End');assert.equal(await dayTriggers.last().evaluate(e=>e===document.activeElement),true);
+    await p.keyboard.press('Home');assert.equal(await dayTriggers.first().evaluate(e=>e===document.activeElement),true);
     await dayTriggers.first().focus(); await p.keyboard.press('Enter');
     assert.equal(await dayTriggers.first().getAttribute('aria-expanded'), 'true');
-    assert.equal(await sessions.count(), 4);
+    assert.equal(await sessions.count(), 4);await capture('date-open');
     assert.equal(await panel.locator('.journal-session-trigger[aria-expanded=true]').count(), 0);
     assert.deepEqual(await sessions.locator('.journal-session-number').allTextContents(), ['4회차', '3회차', '2회차', '1회차']);
     const first = sessions.last(), rows = first.locator('.journal-word-trigger');
@@ -98,6 +113,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     await targetRows.nth(0).click();
     let detail = first.locator('.record-card:visible');
     for (const text of ['처음 확인한 친숙도', '영어→뜻', '뜻→영어', '내 문장', '말하기', '보완점', '다음 할 일', '보존할 보완점 0']) assert.ok((await detail.innerText()).includes(text));
+    await capture('word-open');
     await detail.getByText('저장한 AI 참고 의견', { exact: true }).click();
     assert.ok((await detail.innerText()).includes('저장한 교정 설명'));
     await targetRows.nth(1).click();
@@ -108,6 +124,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     await days.first().screenshot({ path: out + '/expanded-mobile.png' });
     await rows.first().click();
     assert.match(await first.locator('.record-card:visible').innerText(), /기억 깨우기 기록/);
+    await capture('warmup-open');
     checks.push('keyboard disclosure, one-word expansion, all outcomes, notes, saved AI feedback and warmup remain reachable');
 
     await p.getByRole('tab', { name: '단어장', exact: true }).click();
@@ -129,14 +146,14 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     await panel.getByRole('button', { name: '이전 기록 더 보기' }).click(); assert.equal(await days.count(), 20);
     await panel.getByRole('button', { name: '이전 기록 더 보기' }).click(); assert.equal(await days.count(), 23);
     assert.match(await panel.locator('.section-heading').innerText(), /23일 · 26회차/);
-    assert.equal(await panel.getByRole('status').count(), 0); // The range hint disappears once all dates are visible.
+    assert.equal(await panel.locator('p[role=status]').count(), 0); // The range hint disappears once all dates are visible.
     await panel.getByRole('combobox', { name: '기록 종류 필터' }).click(); await p.getByRole('option', { name: '주간 점검', exact: true }).click();
     assert.equal(await days.count(), 1); assert.equal(await dayTriggers.first().getAttribute('aria-expanded'), 'false');
     await panel.getByRole('combobox', { name: '기록 종류 필터' }).click(); await p.getByRole('option', { name: '일일 학습', exact: true }).click();
     assert.match(await dayTriggers.first().innerText(), /2회차/);
     await dayTriggers.first().click();
     assert.deepEqual(await sessions.locator('.journal-session-number').allTextContents(), ['2회차', '1회차']);
-    assert.match(await panel.getByRole('status').innerText(), /22일 · 23회차/);
+    assert.match(await panel.locator('p[role=status]').innerText(), /22일 · 23회차/);
     await panel.getByRole('combobox', { name: '기록 종류 필터' }).click(); await p.getByRole('option', { name: '월말 쓰기', exact: true }).click();
     assert.ok(await panel.getByRole('heading', { name: '이 종류의 학습 기록이 아직 없어요.' }).isVisible());
     assert.equal(await days.count(), 0);
@@ -200,7 +217,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.match(await dayTriggers.nth(1).innerText(), /2회차/);
     checks.push('correcting a date from the grouped journal moves only the chosen attempt; date counts update immediately and after reload while scores and other attempts remain intact');
     assert.deepEqual(errors, []);
-    const result = { passed: true, checks, accessibility, fixture: { dates: 23, sessions: 26, sameDayAttempts: 4 }, listHeight: height, browserErrors: errors };
-    fs.writeFileSync(out + '/verification.json', JSON.stringify(result, null, 2)); console.log(JSON.stringify(result));
+    const result = { passed: true, checks, accessibility, snapshots, fixture: { dates: 23, sessions: 26, sameDayAttempts: 4 }, listHeight: height, browserErrors: errors };
+    fs.writeFileSync(out + '/verification.json', JSON.stringify(result, null, 2)); console.log(JSON.stringify({...result,snapshots:undefined,views:snapshots.length}));
   } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exit(1); });

@@ -12,6 +12,7 @@ const until = async (check, label) => {
   await build({ entryPoints: ['lib/grammar/content.ts'], outfile: 'work/navigation-content.cjs', bundle: true, platform: 'node', format: 'cjs', logLevel: 'silent' });
   const { LESSON_MAP } = require('../work/navigation-content.cjs');
   const engine = process.env.QA_BROWSER || 'chromium';
+  const out = process.env.ASTRYX_QA_OUTPUT ? require('node:path').join(process.env.ASTRYX_QA_OUTPUT,engine) : 'outputs/navigation';
   const browser = await launchBrowser({ engine }), checks = [], errors = [];
   const context = await browser.newContext({ extraHTTPHeaders: accountHeaders('navigation'), viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const get = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1' } })).json();
@@ -109,8 +110,8 @@ const until = async (check, label) => {
       await client.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 150, y: 162 }] });
       assert.equal(await page.locator('.navigation-body').evaluate(e => e.style.transform.includes('translateX(')), true);
       assert.deepEqual(await chrome(), beforeDrag);
-      fs.mkdirSync('outputs/navigation', { recursive: true });
-      await page.screenshot({ path: 'outputs/navigation/body-swipe.png' });
+      fs.mkdirSync(out, { recursive: true });
+      await page.screenshot({ path: out+'/body-swipe.png' });
       await client.send('Input.dispatchTouchEvent', { type: 'touchCancel', touchPoints: [] });
       assert.equal(await input.isVisible(), true);
       await client.detach();
@@ -168,6 +169,7 @@ const until = async (check, label) => {
     await page.getByRole('menuitem', { name: '백업으로 복원', exact: true }).click(); await page.getByRole('dialog').waitFor();
     assert.equal(await page.getByRole('alertdialog').count(), 0);
     assert.equal((await get()).state.sessions[id].records[word.id].en, 'unmeasured');
+    await page.evaluate(()=>window.addEventListener('keydown',event=>{if(event.key!=='Escape')return;const root=document.querySelector('[role=dialog]');const before={nativeOpen:root instanceof HTMLDialogElement&&root.open,modal:root instanceof HTMLDialogElement&&root.matches(':modal'),active:document.activeElement?.tagName,type:document.activeElement?.getAttribute('type'),sheetDisabled:root?.querySelector('[data-sheet-handle]')?.getAttribute('data-disabled'),menus:[...document.querySelectorAll('[role=menu]')].map(el=>({state:el.getAttribute('data-state'),inert:!!el.closest('[inert]')}))};queueMicrotask(()=>{window.__qaNavigationEscape={...before,prevented:event.defaultPrevented};});},true));
     await page.keyboard.press('Escape'); await page.getByRole('dialog').waitFor({ state: 'hidden' });
     checks.push('backup export/import and nested confirmation navigate without applying a restore or reviving stale consent');
 
@@ -236,11 +238,11 @@ const until = async (check, label) => {
     await root.getByText('저장됨', { exact: true }).waitFor(); await root.goBack(); assert.match(root.url(), /favicon\.svg$/);
     checks.push('320–1440px, accessibility, original root Back leaves the site');
     assert.deepEqual(errors, []);
-    fs.mkdirSync('outputs/navigation', { recursive: true });
-    fs.writeFileSync(`outputs/navigation/${engine}.json`, JSON.stringify({ passed: true, engine, checks, actualIPhone: false, realGoogleCalls: 0 }, null, 2));
+    fs.mkdirSync(out, { recursive: true });
+    fs.writeFileSync(`${out}/${engine}.json`, JSON.stringify({ passed: true, engine, checks, actualIPhone: false, realGoogleCalls: 0 }, null, 2));
     console.log(JSON.stringify({ passed: true, engine, checks }));
   } catch (error) {
-    console.error(JSON.stringify({ engine, checks, errors, navigation: await page.evaluate(() => ({ trace: window.navigationTrace, historyLength: history.length, tab: document.querySelector('[role=tab][aria-selected=true]')?.textContent, dialogs: document.querySelectorAll('[role=dialog], [role=alertdialog]').length })) }));
+    console.error(JSON.stringify({ engine, checks, errors, navigation: await page.evaluate(() => ({ trace: window.navigationTrace, escape:window.__qaNavigationEscape, historyLength: history.length, tab: document.querySelector('[role=tab][aria-selected=true]')?.textContent, dialogs: document.querySelectorAll('[role=dialog], [role=alertdialog]').length })) }));
     throw error;
   } finally { await closeBrowser(browser); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

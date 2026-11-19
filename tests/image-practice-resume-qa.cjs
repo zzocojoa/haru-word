@@ -3,7 +3,7 @@ const fs = require('node:fs'), path = require('node:path'), assert = require('no
 const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker, axePath } = require('./qa/runtime.cjs');
 const { trackRequestConcurrency } = require('./qa/request-concurrency.cjs');
 const { history } = require('./fixtures/backup-history.cjs');
-const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/image-practice-resume/${engine}`;
+const engine = process.env.QA_BROWSER || 'chromium', out = process.env.ASTRYX_QA_OUTPUT ? path.join(process.env.ASTRYX_QA_OUTPUT,engine) : `outputs/image-practice-resume/${engine}`;
 const rows = JSON.parse(fs.readFileSync('data/word-image-ui.json')).entries;
 const ids = rows.map(row => row[0]), urls = rows.map(row => `/word-images/v1/${row[1]}.webp`);
 const headers = { 'X-Study-Grammar': '4', 'X-Study-Feedback-Structure': '1', 'X-Study-Sense-Keys': '1' };
@@ -172,7 +172,7 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
       await page.setViewportSize({ width, height: 844 }); await page.evaluate(size => document.documentElement.style.fontSize = `${size}%`, size);
       assert.equal(await dialog.evaluate(el => el.scrollWidth > el.clientWidth || document.documentElement.scrollWidth > innerWidth), false);
       const bounds = await dialog.locator('.image-practice-navigation').evaluate(nav => [...nav.querySelectorAll('button')].map(b => { const r = b.getBoundingClientRect(); return { width: r.width, height: r.height, left: r.left, right: r.right, bottom: r.bottom }; }));
-      assert.ok(bounds.every(r => r.width >= 44 && r.height >= 44 && r.left >= 0 && r.right <= width && r.bottom <= 844));
+      assert.ok(bounds.every(r => r.width >= 44 && r.height >= 44 && r.left >= 0 && r.right <= width && r.bottom <= 844),JSON.stringify({width,size,bounds}));
       for (const button of await dialog.locator('.image-practice-navigation button').all()) {
         await button.focus();
         const ring = await button.evaluate(el => {
@@ -262,6 +262,12 @@ const wait = async predicate => { for (let i = 0; i < 300; i++) { if (await pred
   } catch (error) {
     if (page) await page.screenshot({ path: `${out}/failure.png` }).catch(() => {});
     throw error;
-  } finally { positionRequests?.dispose(); await closeBrowser(browser); }
+  } finally {
+    positionRequests?.dispose();
+    if(process.env.QA_LIFECYCLE_DIAGNOSTIC)console.log(JSON.stringify({cleanupStarting:true,contexts:browser.contexts().length,resources:process.getActiveResourcesInfo()}));
+    try { await closeBrowser(browser); }
+    finally { require('esbuild').stop(); }
+    if(process.env.QA_LIFECYCLE_DIAGNOSTIC)console.log(JSON.stringify({cleanupComplete:true,resources:process.getActiveResourcesInfo()}));
+  }
 })().catch(error => { console.error(error); process.exitCode = 1; });
 

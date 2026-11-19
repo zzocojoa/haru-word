@@ -87,6 +87,13 @@ const stageTitles = { warmup: '기억 깨우기', learn: '단어 익히기', en:
       const bounds = await locator.boundingBox();
       assert.ok(bounds && Math.abs(bounds.width - size) <= 0.5 && Math.abs(bounds.height - size) <= 0.5,
         label + ' remains ' + size + 'px: ' + JSON.stringify(bounds));
+      if (['뜻 확인','뜻 저장하고 계속','문장을 완성했어요'].includes(label)) {
+        assert.equal(await locator.evaluate(svg => {
+          const button=svg.closest('button'),walker=document.createTreeWalker(button,NodeFilter.SHOW_TEXT);
+          let text;while((text=walker.nextNode()))if(text.textContent.trim()&&!text.parentElement.closest('[aria-hidden=true],[role=status]'))break;
+          return !!text&&!!(text.compareDocumentPosition(svg)&Node.DOCUMENT_POSITION_FOLLOWING);
+        }),true,label+' preserves the trailing icon order');
+      }
     };
     const inspect = async (name, stage, icons) => {
       const before = await get();

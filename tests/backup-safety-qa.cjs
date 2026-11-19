@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const { build } = require('esbuild');
 const { launchBrowser, closeBrowser, accountHeaders, base, waitForWorker, axePath } = require('./qa/runtime.cjs');
 const { emptyState, history, oversizedState } = require('./fixtures/backup-history.cjs');
-const out = 'outputs/backup-safety'; fs.mkdirSync(out, { recursive: true });
+const out = process.env.ASTRYX_QA_OUTPUT?require('node:path').join(process.env.ASTRYX_QA_OUTPUT,process.env.QA_BROWSER||'chromium'):'outputs/backup-safety'; fs.mkdirSync(out, { recursive: true });
 const envelope = state => JSON.stringify({ format: 'haru-words-v1', exportedAt: '2026-09-24T00:00:00.000Z', state });
 
 (async () => {

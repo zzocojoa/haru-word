@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { EventEmitter, once } = require('node:events');
 const { launchBrowser, closeBrowser, base, accountHeaders, axePath, waitForWorker } = require('./qa/runtime.cjs');
-const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-${engine}`;
+const engine = process.env.QA_BROWSER || 'chromium', out = process.env.ASTRYX_QA_OUTPUT ? require('node:path').join(process.env.ASTRYX_QA_OUTPUT,engine) : `outputs/editor-save-${engine}`;
 (async () => {
   await waitForWorker();
   const browser = await launchBrowser({ engine });
@@ -46,7 +46,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     await page.getByText('저장 중', { exact: true }).waitFor();
     await firstRequest;
     assert.equal(await expression().isDisabled(), true);
-    assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
+    assert.equal(await dialog.getByRole('combobox',{name:'학습할 뜻 선택',exact:true}).isDisabled(), true);
     await page.keyboard.press('Escape'); await dialog.getByRole('button',{name:'닫기',exact:true}).click();
     assert.equal(await dialog.isVisible(), true); assert.equal(await expression().inputValue(), 'work today');
     await held.continue(); await saved(); await dialog.waitFor({state:'hidden'});
@@ -71,10 +71,10 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     const beforeClockFailure = writes;
     await page.route('**/api/study-clock', route => route.fulfill({ status: 503, json: {} }));
     await page.evaluate(() => window.dispatchEvent(new Event('focus')));
-    await page.waitForFunction(() => [...document.querySelectorAll('[role=dialog] button')].some(button => button.textContent === '다시 저장' && button.disabled));
+    await page.waitForFunction(() => [...document.querySelectorAll('[role=dialog] button')].some(button => button.textContent === '다시 저장' && (button.disabled || button.getAttribute('aria-disabled') === 'true')));
     await retry().evaluate(button => button.click()); assert.equal(writes, beforeClockFailure);
     await page.unroute('**/api/study-clock'); await page.evaluate(() => window.dispatchEvent(new Event('focus')));
-    await page.waitForFunction(() => [...document.querySelectorAll('[role=dialog] button')].some(button => button.textContent === '다시 저장' && !button.disabled));
+    await page.waitForFunction(() => [...document.querySelectorAll('[role=dialog] button')].some(button => button.textContent === '다시 저장' && !button.disabled && button.getAttribute('aria-disabled') !== 'true'));
     fs.mkdirSync(out, { recursive: true });
     for (const width of [320, 390, 1440]) for (const size of [100, 200]) {
       await page.setViewportSize({ width, height: 844 });
@@ -90,7 +90,7 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     await page.getByText('저장 중', { exact: true }).waitFor();
     await retryRequest;
     assert.equal(writes, beforeRetry + 1); assert.equal(await expression().isDisabled(), true);
-    assert.equal(await dialog.getByLabel('학습할 뜻 선택').isDisabled(), true);
+    assert.equal(await dialog.getByRole('combobox',{name:'학습할 뜻 선택',exact:true}).isDisabled(), true);
     await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(), true);
     await held.continue(); await saved(); await dialog.waitFor({ state: 'hidden' }); mode = 'ready';
     await page.reload({ waitUntil: 'domcontentloaded' }); await saved(); await page.getByRole('tab', { name: '단어장', exact: true }).click(); await open('work');
@@ -101,7 +101,18 @@ const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/editor-save-
     await close(); await open('work');
     assert.equal(await dialog.getByRole('button', { name: '기록 저장', exact: true }).isDisabled(), true);
     assert.equal(await retry().count(), 0); await close();
-    mode = 'ready'; await page.getByRole('button', { name: '다시 시도', exact: true }).click(); await saved();
+    mode = 'hold'; const beforeOuterRetry = writes, outerRetryRequest = waitForHeld();
+    const outerRetry = page.getByRole('button', { name: '다시 시도', exact: true });
+    await outerRetry.evaluate(button => { button.click(); button.click(); button.click(); });
+    await outerRetryRequest; assert.equal(writes, beforeOuterRetry + 1);
+    await page.getByText('저장 중', { exact: true }).waitFor();
+    // The existing store replaces the error/retry surface with saving status.
+    // There is no retry action while that PUT is pending.
+    assert.equal(await outerRetry.count(), 0);
+    assert.equal(writes, beforeOuterRetry + 1);
+    const busyStyle = await page.locator('.save-state[data-state=saving]').evaluate(el => ({font:getComputedStyle(el).fontSize,display:getComputedStyle(el).display}));
+    assert.deepEqual(busyStyle,{font:'12px',display:'flex'});
+    await held.continue(); await saved(); mode = 'ready';
     checks.push('an unrelated editor cannot bypass a pending failed save; existing page retry still works');
     await page.getByRole('button', { name: /개인 단어 추가/ }).click();
     await dialog.getByLabel('영어 단어', { exact: true }).fill('commute');

@@ -28,10 +28,10 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
         restoration.schedule('history', () => {
           const saved = position as Position | undefined;
           const target = saved?.focus;
-          // Radix tabs activate on focus. Restoring an inactive tab would
+          // Tabs activate on focus. Restoring an inactive tab would
           // navigate away again after an otherwise successful Back.
           if (target?.isConnected && target.getClientRects().length && !target.matches('[role="tab"][aria-selected="false"]')) target.focus({ preventScroll: true });
-          else document.querySelector<HTMLElement>('[role="dialog"] h2, main h1')?.focus({ preventScroll: true });
+          else document.querySelector<HTMLElement>('[role="dialog"] h2, [role="main"] h1, main h1')?.focus({ preventScroll: true });
           window.scrollTo({ top: saved?.top ?? 0, behavior: 'instant' });
         });
       },

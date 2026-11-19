@@ -11,6 +11,11 @@ test('browser suite enumerates image resume and request concurrency separately f
     assert.equal(new Set(lists[group]).size, lists[group].length);
   }
   assert.ok(lists.functional.includes('image-practice-resume-qa.cjs'));
+  assert.ok(lists.functional.includes('astryx-foundation-qa.cjs'));
+  assert.ok(lists.functional.includes('image-practice-qa.cjs production'));
+  assert.ok(lists.functional.includes('image-practice-qa.cjs matrix'));
+  assert.ok(lists.functional.includes('word-image-study-qa.cjs disabled'));
+  assert.ok(lists.functional.includes('word-image-study-qa.cjs enabled'));
   assert.ok(lists.functional.includes('request-concurrency-qa.cjs'));
   assert.ok(lists.functional.includes('grammar-v4-compat-qa.cjs new-v3'));
   for(const version of [2,3,4])assert.ok(lists.functional.includes(`grammar-v${version}-qa.cjs`));

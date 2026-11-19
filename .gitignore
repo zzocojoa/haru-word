@@ -48,5 +48,13 @@ next-env.d.ts
 
 *.tsbuildinfo
 
+# Local Astryx editor captures/history; authored and built theme files stay reviewable.
+/themes/haru/preview.html
+/themes/haru/preview.png
+/themes/haru/sheet.html
+/themes/haru/sheet.png
+/themes/haru/haru.pictures.json
+/themes/haru/haru.history.json
+
 # Python content-generation cache
 __pycache__/

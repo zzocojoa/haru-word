@@ -1,4 +1,7 @@
 'use client';
+import {HaruParagraph,HaruHeading} from '../haru-content';
+import {HaruButton} from '../haru-controls';
+
 import { HaruIcon } from '@/components/icons/haru-icon';
 import { useState } from 'react';
 import { answerCorrect, assembledOrder, firstAnswerLabel, type GrammarQuestion as Question } from '@/lib/grammar/content';
@@ -28,33 +31,33 @@ export function GrammarQuestion({ question, legacyNote, answer, hinted, clued, c
   const correct = !!answer && answerCorrect(question, answer.latest);
   const feedbackTitle = answer ? correct ? '이번 답은 맞아요.' : '다시 확인해 보세요.' : '답을 확인했어요.';
   return <div className="grammar-stage">
-    {question.context && <div className="grammar-example"><p lang="en">{question.context}</p><p>{question.translation}</p></div>}
-    <h3 className="grammar-question">{question.prompt}</h3>
+    {question.context && <div className="grammar-example"><HaruParagraph lang="en">{question.context}</HaruParagraph><HaruParagraph>{question.translation}</HaruParagraph></div>}
+    <HaruHeading level={3} className="grammar-question">{question.prompt}</HaruHeading>
     {question.kind === 'order'
       ? <OrderAnswer question={question} answer={answer} selection={selection} onOrder={onOrder} onAnswer={onAnswer} disabled={disabled} />
       : <div className="grammar-choices">{question.options.map((option, index) => {
         const selected = selectedChoice === option;
-        return <button key={option} disabled={disabled} aria-pressed={selected}
-          className={`secondary-button ${selected ? 'is-selected' : ''}`} onClick={() => { setLocalChoice(option); onChoice?.(option); }}>
-          <span className="grammar-choice-number" aria-hidden="true">{selected ? <HaruIcon name="check" size={16} /> : index + 1}</span>{option}
-        </button>;
+        return <HaruButton label={[(option)].join('')} variant="secondary" key={option} disabled={disabled} aria-pressed={selected}
+          className={`haru-migrated ${`secondary-button ${selected ? 'is-selected' : ''}`}`} onClick={() => { setLocalChoice(option); onChoice?.(option); }}>
+          <span className="grammar-choice-content"><span className="grammar-choice-number" aria-hidden="true">{selected ? <HaruIcon name="check" size={16} /> : index + 1}</span>{option}</span>
+        </HaruButton>;
       })}</div>}
-    {question.kind === 'choice' && <button className="secondary-button" disabled={disabled || !selectedChoice || selectedChoice === answer?.latest} onClick={() => onAnswer(selectedChoice)}>답 확인</button>}
-    {question.clue && onClue && <button className="text-button grammar-hint" disabled={disabled || clued} onClick={onClue}><HaruIcon name="help-circle" size={17} />힌트 보기</button>}
-    {clued && !hinted && question.clue && <p className="grammar-message">{question.clue}</p>}
-    <button className="text-button grammar-hint" disabled={disabled || hinted} onClick={onHint}>
-      <HaruIcon name="eye" size={17} />답 보기 · 도움으로 기록
-    </button>
+    {question.kind === 'choice' && <HaruButton label={["답 확인"].join('')} variant="secondary" className="haru-migrated secondary-button" disabled={disabled || !selectedChoice || selectedChoice === answer?.latest} onClick={() => onAnswer(selectedChoice)}>답 확인</HaruButton>}
+    {question.clue && onClue && <HaruButton label={["힌트 보기"].join('')} variant="ghost" icon={<HaruIcon name="help-circle" size={17} />} className="haru-migrated text-button grammar-hint" disabled={disabled || clued} onClick={onClue}>힌트 보기</HaruButton>}
+    {clued && !hinted && question.clue && <HaruParagraph className="grammar-message">{question.clue}</HaruParagraph>}
+    <HaruButton label={["답 보기 · 도움으로 기록"].join('')} variant="ghost" icon={<HaruIcon name="eye" size={17} />} className="haru-migrated text-button grammar-hint" disabled={disabled || hinted} onClick={onHint}>
+      답 보기 · 도움으로 기록
+    </HaruButton>
     {(answer || hinted) && <div className="grammar-feedback" data-tone={answer ? correct ? 'success' : 'review' : 'neutral'} role="status">
       <b className="grammar-feedback-title">
         <HaruIcon name={correct ? 'check-circle' : answer ? 'alert-circle' : 'help-circle'} size={19} />{feedbackTitle}
       </b>
-      {hinted && <p>답: <span>{question.answer}</span></p>}
-      {answer && <p className="small-note">첫 답: {answer.first} · {firstAnswerLabel(question, answer)}{answer.attempts > 1 ? ` · ${answer.attempts}번 시도` : ''}</p>}
-      <p>{answer && !correct ? question.wrong?.[answer.latest] ?? question.explanation : question.explanation}</p>
-      {legacyNote&&<p className="small-note">{legacyNote}</p>}
+      {hinted && <HaruParagraph>답: <span>{question.answer}</span></HaruParagraph>}
+      {answer && <HaruParagraph className="small-note">첫 답: {answer.first} · {firstAnswerLabel(question, answer)}{answer.attempts > 1 ? ` · ${answer.attempts}번 시도` : ''}</HaruParagraph>}
+      <HaruParagraph>{answer && !correct ? question.wrong?.[answer.latest] ?? question.explanation : question.explanation}</HaruParagraph>
+      {legacyNote&&<HaruParagraph className="small-note">{legacyNote}</HaruParagraph>}
     </div>}
-    <button className="primary-button" disabled={disabled || !answer} onClick={onNext}>{nextLabel}<HaruIcon name="arrow-right" size={18} /></button>
+    <HaruButton label={[(nextLabel)].join('')} variant="primary" endContent={<HaruIcon name="arrow-right" size={18} />} className="haru-migrated primary-button" disabled={disabled || !answer} onClick={onNext}>{nextLabel}</HaruButton>
   </div>;
 }
 
@@ -62,15 +65,15 @@ function OrderAnswer({ question, answer, selection, onOrder, onAnswer, disabled 
   const selected = selection.filter(index => index < question.options.length);
   const text = assembledOrder(question,selected);
   return <>
-    <p>{question.translation}</p>
+    <HaruParagraph>{question.translation}</HaruParagraph>
     <div className="grammar-order-answer" aria-live="polite" lang={text ? 'en' : 'ko'} data-empty={!text}>{text || '아래 조각을 차례로 눌러 보세요.'}</div>
     <div className="grammar-options">{question.options.map((option, index) =>
-      <button className="secondary-button" key={`${index}-${option}`} disabled={disabled || selected.includes(index)} onClick={() => onOrder([...selected, index])} lang="en">{option}</button>
+      <HaruButton label={[(option)].join('')} variant="secondary" className="haru-migrated secondary-button" key={`${index}-${option}`} disabled={disabled || selected.includes(index)} onClick={() => onOrder([...selected, index])} lang="en">{option}</HaruButton>
     )}</div>
     <div className="grammar-actions grammar-order-actions">
-      <button className="text-button" disabled={disabled || !selected.length} onClick={() => onOrder(selected.slice(0, -1))}>마지막 조각 취소</button>
-      <button className="text-button" disabled={disabled || !selected.length} onClick={() => onOrder([])}>모두 지우고 다시 놓기</button>
-      <button className="secondary-button" disabled={disabled || selected.length !== question.options.length || text === answer?.latest} onClick={() => onAnswer(text)}>내 답 확인</button>
+      <HaruButton label={["마지막 조각 취소"].join('')} variant="ghost" className="haru-migrated text-button" disabled={disabled || !selected.length} onClick={() => onOrder(selected.slice(0, -1))}>마지막 조각 취소</HaruButton>
+      <HaruButton label={["모두 지우고 다시 놓기"].join('')} variant="ghost" className="haru-migrated text-button" disabled={disabled || !selected.length} onClick={() => onOrder([])}>모두 지우고 다시 놓기</HaruButton>
+      <HaruButton label={["내 답 확인"].join('')} variant="secondary" className="haru-migrated secondary-button" disabled={disabled || selected.length !== question.options.length || text === answer?.latest} onClick={() => onAnswer(text)}>내 답 확인</HaruButton>
     </div>
   </>;
 }

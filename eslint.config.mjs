@@ -20,6 +20,10 @@ const eslintConfig = defineConfig([
     ".vinext/**",
     ".wrangler/**",
     ".sites-runtime/**",
+    // Astryx emits declaration references; authored theme sources remain linted.
+    "themes/haru/*.d.ts",
+    "src/themes/haru/*.d.ts",
+    "src/themes/haru/haruTheme.doc.mjs",
   ]),
   {
     // Browser QA runs in Node's CommonJS loader; require() is intentional here.

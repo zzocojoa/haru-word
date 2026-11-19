@@ -1,4 +1,6 @@
 "use client";
+import {Text} from '@astryxdesign/core/Text';
+import {Spinner} from '@astryxdesign/core/Spinner';
 import { HaruIcon } from "@/components/icons/haru-icon";
 import type { LearningViewProps } from "./types";
 type SaveStatusProps = Pick<
@@ -12,13 +14,13 @@ export function SaveStatus({
   signedIn,
 }: SaveStatusProps) {
   return (
-    <span
-      className="save-state"
+    <Text type="inherit" color="inherit"
+      className="save-state haru-save-state"
       data-state={saving || loading ? "saving" : unsaved ? "error" : "saved"}
       role="status"
     >
       {loading || saving ? (
-        <HaruIcon name="loading" size={15} className="spin" />
+        <Spinner size="md" aria-hidden="true" />
       ) : (
         <HaruIcon
           name={unsaved ? "cloud-unsaved" : signedIn ? "cloud-saved" : "cloud"}
@@ -36,6 +38,6 @@ export function SaveStatus({
                 ? "저장됨"
                 : "로그인 전"}
       </span>
-    </span>
+    </Text>
   );
 }

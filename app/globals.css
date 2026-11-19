@@ -1,7 +1,12 @@
 
+/* Keep existing unlayered rules after utilities; isolate Astryx's controls. */
+@layer reset, theme, base, components, utilities, haru-legacy, astryx-base, astryx-theme, haru-shell, haru-controls, haru-content, haru-content-compat, haru-sheets;
 @import "tailwindcss" ;
 @import "tw-animate-css" ;
 @import "../vendor/shadcn-tailwind-4.13.0.css" ;
+@import "./study-design.css" layer(haru-legacy);
+@import "./grammar.css" layer(haru-legacy);
+@import "./startup-screen.css" layer(haru-legacy);
 @theme inline {
   --color-background:var(--background);
   --color-foreground:var(--foreground);

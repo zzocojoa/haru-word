@@ -4,7 +4,17 @@ import {createRequire} from 'node:module';
 import {mkdtempSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-const {validateEnvironment,requireDisabledAiStatus}=createRequire(import.meta.url)('./qa/preflight.cjs');
+const {validateEnvironment,requireDisabledAiStatus,imagePracticeStage}=createRequire(import.meta.url)('./qa/preflight.cjs');
+
+test('image stages follow the actual local profile and reject contradictory requests before browser setup',()=>{
+  const dir=mkdtempSync(join(tmpdir(),'haru-image-profile-')),file=join(dir,'worker.json'),env={QA_WORKER_CONFIG:file};
+  writeFileSync(file,JSON.stringify({vars:{word_image_pilot_enabled:'true'}}));
+  assert.equal(imagePracticeStage(env),'matrix');assert.equal(imagePracticeStage({...env,QA_IMAGE_PILOT_MODE:'enabled'}),'all');
+  assert.throws(()=>imagePracticeStage(env,'production'),/differs/);
+  writeFileSync(file,JSON.stringify({vars:{word_image_pilot_enabled:'false'}}));
+  assert.equal(imagePracticeStage(env),'production');assert.throws(()=>imagePracticeStage(env,'matrix'),/differs/);
+  assert.throws(()=>imagePracticeStage({...env,QA_IMAGE_PILOT_MODE:'enabled'}),/differs/);
+});
 test('QA preparation rejects hosted origins, wrong grammar profiles, live AI and absent full images',()=>{
   assert.throws(()=>validateEnvironment({QA_BASE_URL:'https://study.example'}),/loopback/);
   assert.throws(()=>validateEnvironment({QA_GRAMMAR_VERSION:'5'}),/must be/);

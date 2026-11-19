@@ -1,7 +1,7 @@
 // Verify the approved UI contract on the built LOCAL Worker; all records are synthetic.
 const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base=require('./qa/runtime.cjs').base,out='outputs/ui-plan-contract';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out=process.env.ASTRYX_QA_OUTPUT?require('node:path').join(process.env.ASTRYX_QA_OUTPUT,process.env.QA_BROWSER||'chromium'):'outputs/ui-plan-contract';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const selected=words.filter(w=>w.level==='A1').slice(0,10),ids=selected.map(w=>w.id);
 const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -21,7 +21,7 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
   const initial=await get();
   const nav=name=>p.getByRole('tab',{name,exact:true}).click();
   const fit=async label=>assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,label+' '+JSON.stringify(await p.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,x:scrollX,items:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&(r.right>innerWidth||r.left<0||el.scrollWidth>el.clientWidth+1)}).map(el=>({tag:el.tagName,class:el.className,scroll:el.scrollWidth,client:el.clientWidth,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right,text:el.textContent.slice(0,50)}))}))));
-  const checkTouch=async name=>{const small=await p.evaluate(()=>[...document.querySelectorAll('[role=dialog] button,[role=dialog] summary,[role=dialog] a')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&(r.width<44||r.height<44)}).map(el=>({text:el.textContent.trim().slice(0,40),class:el.className,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));touch.push({name,small});assert.deepEqual(small,[],name+' 44px touch area');};
+  const checkTouch=async name=>{const small=await p.evaluate(()=>[...document.querySelectorAll('[role=dialog] button,[role=dialog] summary,[role=dialog] a')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&getComputedStyle(el).clipPath!=='inset(50%)'&&(r.width<44||r.height<44)}).map(el=>({text:el.textContent.trim().slice(0,40),class:el.className,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})));touch.push({name,small});assert.deepEqual(small,[],name+' 44px touch area');};
   const axe=async label=>{await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const issues=await p.evaluate(async()=> (await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)})));audits.push({label,issues});assert.deepEqual(issues,[],label);};
   await nav('학습 기록');
   await p.locator('.journal-day-trigger').first().click();await p.locator('.journal-session-trigger').first().click();await p.locator('.journal-word-trigger').first().click();
@@ -43,9 +43,10 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   });
   const measureFrame=()=>dialog.evaluate(element=>{
+   const frame=element.querySelector('.haru-sheet-frame')||element;
    const rect=node=>{const {x,y,width,height}=node.getBoundingClientRect();return {x,y,width,height};};
    const read=selector=>{
-    const node=element.querySelector(selector);
+    const node=frame.querySelector(selector);
     if(!node)throw new Error('Missing word-editor frame element: '+selector);
     return rect(node);
    };
@@ -55,7 +56,7 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
     x:read(':scope > [data-slot=dialog-close]'),
     b:read(':scope > .dialog-actions > .primary-button'),
     scroller:read(':scope > .dialog-scroll'),
-    bodyScrollTop:element.querySelector(':scope > .dialog-scroll').scrollTop,
+    bodyScrollTop:frame.querySelector(':scope > .dialog-scroll').scrollTop,
     viewport:{width:innerWidth,height:innerHeight},fontsStatus:document.fonts.status,
    };
   });
@@ -95,7 +96,7 @@ const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric
   checks.push('settings, sources, personal entry and completed cards use the same nonoverlapping frame and pass axe');
   for(const width of [320,390,430,768,1440]){
    await p.setViewportSize({width,height:844});
-   for(const name of ['오늘 학습','단어장','복습 점검','학습 기록']){await nav(name);await fit(name+' '+width);if(width===390)touch.push({name,small:await p.evaluate(()=>[...document.querySelectorAll('button,summary,a,[role=combobox]')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&(r.width<44||r.height<44)}).map(el=>({text:el.textContent.trim().slice(0,40),class:el.className,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})))})}
+   for(const name of ['오늘 학습','단어장','복습 점검','학습 기록']){await nav(name);await fit(name+' '+width);if(width===390)touch.push({name,small:await p.evaluate(()=>[...document.querySelectorAll('button,summary,a,[role=combobox]')].filter(el=>{const r=el.getBoundingClientRect();return r.width&&r.height&&getComputedStyle(el).clipPath!=='inset(50%)'&&(r.width<44||r.height<44)}).map(el=>({text:el.textContent.trim().slice(0,40),class:el.className,width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})))})}
   }
   await p.setViewportSize({width:320,height:844});const zoom=await p.addStyleTag({content:'html{font-size:200% !important}'});
   for(const name of ['오늘 학습','단어장','복습 점검','학습 기록']){await nav(name);await fit(name+' 200%');}

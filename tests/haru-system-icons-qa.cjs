@@ -138,7 +138,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       [svg(settings.getByRole('button', { name: '이 기기의 임시 입력 삭제', exact: true })), 18, 'P087 local delete'],
       [svg(settings.getByRole('link', { name: '임시 입력을 지우고 로그아웃', exact: true })), 18, 'P088 local logout'],
       [svg(settings.getByRole('button', { name: '닫기', exact: true })), 16, 'P095 dialog close'],
-      [svg(goal), 16, 'P097 select trigger']);
+      [await goal.evaluate(el=>!!el.closest('.astryx-selector')) ? settings.locator('.astryx-selector:has([aria-label="하루 목표"]) .astryx-selector-indicator-icon svg') : svg(goal), 16, 'P097 select trigger']);
     await qa.inspect('settings', { icons });
     assert.equal(await pause.evaluate(element => element.tagName + ':' + element.type), 'INPUT:checkbox');
     assert.equal(await settings.getByRole('combobox', { name: 'AI 모델', exact: true }).isEnabled(), true,
@@ -150,7 +150,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
         await page.waitForFunction(name => {
           const active = document.activeElement;
           return active?.closest('.settings-dialog') && active.getAttribute('aria-label') === name
-            && active.getAttribute('role') === 'combobox' && !active.disabled;
+            && active.getAttribute('role') === 'combobox' && !active.disabled && active.getAttribute('aria-disabled')!=='true';
         }, name);
         evidence.returned = true;
       } finally {
@@ -173,6 +173,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       await qa.settle(); await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
       await qa.inspect('goal-options-' + width + '-' + textSize, { widths: [width], textSizes: [textSize],
         icons: [[page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).locator('svg'), 16, 'P098 selected option']] });
+      await page.keyboard.press('Escape');await page.getByRole('listbox').waitFor({state:'hidden'});
     }
     await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
     await page.keyboard.press('Escape');
@@ -186,18 +187,21 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       const element = await option.elementHandle();
       assert.ok(element, name + ' exists');
       try {
-        await page.waitForFunction(({ element, selected }) => document.activeElement === element
-          && element.getAttribute('aria-selected') === String(selected), { element, selected });
+        await page.waitForFunction(({ element, selected }) => {const active=document.activeElement;return (active===element || active?.getAttribute('aria-activedescendant')===element.id && active?.getAttribute('aria-controls')===element.closest('[role=listbox]')?.id) && element.getAttribute('aria-selected') === String(selected);}, { element, selected });
       } finally { await element.dispose(); }
     };
     const chooseOption = async (control, currentName, nextName) => {
       await control.focus(); await control.press('Space'); await page.getByRole('listbox').waitFor();
       await waitForOptionFocus(currentName, true);
-      await page.getByRole('option', { name: nextName, exact: true }).focus();
+      if(await control.evaluate(el=>el.closest('.astryx-selector')!==null)) {
+        const labels=await page.getByRole('option').allTextContents();
+        const index=labels.findIndex(text=>text.trim()===nextName);assert.ok(index>=0,nextName+' is an available option');
+        await page.keyboard.press('Home');for(let step=0;step<index;step++)await page.keyboard.press('ArrowDown');
+      }else await page.getByRole('option', { name: nextName, exact: true }).focus();
       await waitForOptionFocus(nextName, false);
       await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
     };
-    // Radix defers navigation focus with setTimeout. Observe each real keyboard
+    // Observe the active option through DOM focus or the combobox ARIA link. Observe each real keyboard
     // destination before the next key so Enter cannot select the previous item.
     await changeAndSave(async () => {
       await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
@@ -364,7 +368,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
         if (await settings.isVisible()) {
           await page.waitForFunction(() => {
             const element = document.querySelector('.settings-dialog [aria-label="하루 목표"]');
-            return element instanceof HTMLButtonElement && !element.disabled;
+            return element instanceof HTMLButtonElement && !element.disabled && element.getAttribute('aria-disabled')!=='true';
           });
         }
         await qa.settle();
