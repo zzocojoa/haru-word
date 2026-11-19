@@ -439,8 +439,8 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
 
     const field = page.getByRole('textbox', { name: '내 영어 문장', exact: true });
     const intent = page.getByRole('textbox', { name: '의도한 한국어 문장', exact: true });
-    // The session's direct notice owns the English draft; the Korean intention
-    // has its own nested notice, with the same recovery button names.
+    // Notices exist only for an error or an actual competing draft. Ordinary
+    // auto-restoration returns directly to the English/Korean input fields.
     const sentenceDraft = page.locator('.session-panel').filter({ has: field }).locator(':scope > .local-draft-notice');
     const intentDraft = page.locator('.korean-intent-input').filter({ has: intent }).locator(':scope > .local-draft-notice');
     const openLesson = async () => {
@@ -451,15 +451,17 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       await page.waitForFunction(() => document.activeElement?.tagName === 'H2' && !!document.activeElement.closest('.session-panel'));
     };
     await openLesson();
-    assert.equal(await sentenceDraft.count(), 1); assert.equal(await intentDraft.count(), 1);
+    assert.equal(await sentenceDraft.count(), 0); assert.equal(await intentDraft.count(), 0);
+    const ordinaryOriginalState = (await qa.getState()).state;
     await field.fill('A synthetic draft to recover.'); await waitDraft('A synthetic draft to recover.');
     await page.reload({ waitUntil: 'domcontentloaded' }); await openLesson();
     await waitValue(field, 'A synthetic draft to recover.');
-    const draftBaseline = await qa.getState();
-    const undo = sentenceDraft.getByRole('button', { name: '복구한 입력 되돌리기', exact: true });
-    await qa.inspect('draft-restored', { icons: [[svg(undo), 18, 'P090 restore undo']] });
-    await qa.click(undo, 'draft-undo'); await waitValue(field, 'Existing server sentence.');
-    assert.deepEqual(await qa.getState(), draftBaseline, 'undo does not grade or save recovered input');
+    const ordinaryDraftBaseline = await qa.getState();
+    assert.deepEqual(ordinaryDraftBaseline.state, ordinaryOriginalState, 'reload/resume preserves saved records, grades and first answers');
+    assert.equal(await sentenceDraft.count(), 0, 'ordinary restoration has no visible recovery tools');
+    assert.equal(await intentDraft.count(), 0, 'ordinary Korean input has no recovery tools');
+    await qa.inspect('draft-restored');
+    assert.deepEqual(await qa.getState(), ordinaryDraftBaseline, 'inspecting ordinary restoration does not grade, save or change the resumed revision');
     await field.fill('A draft kept for explicit comparison.'); await waitDraft('A draft kept for explicit comparison.');
     const latest = await qa.getState(), current = latest.state.sessions[lesson.id];
     const changed = { ...current,
@@ -476,6 +478,8 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     const compare = sentenceDraft.getByRole('button', { name: '현재 입력과 비교', exact: true });
     const comparison = sentenceDraft.getByRole('group', { name: '임시 입력 복구 확인', exact: true });
     const openEnglishComparison = async () => {
+      const tools = sentenceDraft.locator('details').first();
+      if (!await tools.evaluate(element => element.open)) await tools.locator('summary').click();
       const count = await compare.count();
       for (let index = 0; index < count; index++) {
         await compare.nth(index).click(); await comparison.waitFor();
@@ -498,7 +502,16 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     await qa.click(comparison.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }), 'draft-apply');
     await waitValue(field, 'A draft kept for explicit comparison.');
     assert.deepEqual(await qa.getState(), comparisonBaseline);
-    report.checks.push('P090: automatic recovery, undo, explicit comparison/cancel/apply preserve original scores, first answers and server revision');
+    const undo = sentenceDraft.getByRole('button', { name: '복구한 입력 되돌리기', exact: true });
+    if (!await undo.isVisible()) await sentenceDraft.locator('details').first().locator('summary').click();
+    await qa.inspect('draft-manual-choice', { icons: [[svg(undo), 18, 'P090 explicit-choice undo']] });
+    await qa.click(undo, 'draft-undo-explicit-choice'); await waitValue(field, 'Changed server sentence.');
+    assert.deepEqual(await qa.getState(), comparisonBaseline, 'undo after an explicit choice does not grade or save recovered input');
+    await openEnglishComparison();
+    await qa.click(comparison.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }), 'draft-reapply');
+    await waitValue(field, 'A draft kept for explicit comparison.');
+    assert.deepEqual(await qa.getState(), comparisonBaseline);
+    report.checks.push('P090: ordinary restoration has no visible tools; actual conflicting drafts retain comparison/cancel/apply and explicit-choice undo, preserving original scores, first answers and server revision');
 
     await openSettings();
     const deletionBaseline = await qa.getState(), localBefore = await draftRows();
