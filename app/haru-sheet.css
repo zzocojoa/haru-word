@@ -1,0 +1,64 @@
+/* Native presentation of the existing sheet frame and its original spacing. */
+@layer haru-sheets {
+ .haru-native-sheet {
+  position:fixed;inset:0;margin:auto;translate:none;transform:none;rotate:none;scale:none;
+  width:100%;max-width:calc(100% - 2rem);height:fit-content;max-height:92dvh;
+  /* Core's public inner padding supplies the final spacing step for legacy scroll gutters. */
+  padding:calc(var(--space-6) - var(--spacing-1));border:1px solid var(--border);border-radius:16px;
+  background:var(--card);color:var(--ink);font:inherit;box-shadow:none;overflow:hidden;
+ }
+ .haru-native-sheet::backdrop {background:rgb(24 29 21 / 48%);animation:haru-backdrop-enter 150ms ease;}
+ .haru-native-sheet[open] {display:flex;flex-direction:column;}
+ .haru-native-sheet[data-state=open] {animation:haru-sheet-enter 200ms ease;}
+ .haru-native-sheet .haru-sheet-frame {display:flex;flex:1 1 auto;flex-direction:column;min-width:0;min-height:0;gap:var(--space-4);padding:0;overflow:visible;}
+ .haru-native-sheet .haru-sheet-frame>[data-slot=dialog-header] {flex:0 0 auto;position:static;margin:0;padding:0 44px var(--space-3) 0;border-bottom:1px solid var(--border);text-align:left;}
+ .haru-native-sheet .sheet-handle {display:none;}
+ .haru-native-sheet .haru-sheet-close {position:absolute;top:8px;right:8px;z-index:3;display:grid;place-items:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:0 solid var(--ink);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;gap:normal;box-shadow:none;}
+ .haru-native-sheet .haru-sheet-close:hover {background:var(--surface);}
+ /* WebKit can mark native initial focus visible after a tap. Keep keyboard/AT focus intact. */
+ .haru-frame[data-haru-input=pointer] .haru-native-sheet :is(.haru-sheet-close,.image-practice-close):focus-visible {outline-style:none;}
+ /* A transformed native host would reposition its fixed confirmation portal. */
+ .haru-native-sheet:has([role=alertdialog]) {transform:none!important;}
+ .haru-native-sheet[data-state=closed] {pointer-events:none;animation:haru-sheet-exit 200ms ease both;}
+ .haru-native-sheet[data-state=closed]::backdrop {animation:haru-backdrop-exit 150ms ease both;}
+ .haru-native-sheet.source-dialog {font-size:.875rem;line-height:1.95;}
+ .haru-native-sheet.backup-export-dialog [data-slot=dialog-title] {font-size:1.25rem;}
+ .haru-backup-action {display:flex;align-items:center;justify-content:center;gap:10px;white-space:normal;}
+ /* Override the generic direct-child label rule and retain a 44px touch target. */
+ .haru-native-sheet.backup-dialog .backup-ack {display:flex;align-items:flex-start;gap:10px;min-height:44px;font-size:.875rem;line-height:1.65;cursor:pointer;}
+ .haru-native-sheet.backup-dialog .backup-ack>[data-slot=checkbox] {flex:0 0 44px;width:44px;min-width:44px;height:44px;min-height:44px;margin:0;}
+ .haru-native-sheet.backup-dialog .backup-ack>span {flex:1;min-width:0;padding-block:max(0px,calc((44px - 1.65em)/2));}
+ .haru-native-sheet.image-practice-dialog .haru-sheet-frame>[data-slot=dialog-header] {padding-right:0;}
+ .haru-native-sheet.image-practice-dialog .haru-sheet-frame>.haru-copy.text-sm {font-size:.875rem;line-height:1.25rem;color:var(--muted-foreground);}
+ .haru-native-sheet.image-practice-dialog .image-practice-close .haru-practice-action {gap:var(--space-2);}
+ .haru-native-sheet.image-practice-dialog:has(.haru-sheet-frame>.dialog-scroll) {height:92dvh;}
+ /* Account for Core padding in the body minimum; keep growing jump controls scrollable. */
+ .haru-native-sheet.image-practice-dialog .haru-sheet-frame:has(>.dialog-scroll) {display:grid;grid-template-rows:auto auto minmax(calc(min(4rem,24dvh) - var(--spacing-1)),1fr) minmax(0,max-content);}
+ @media(max-width:480px) {.haru-native-sheet.image-practice-dialog .haru-sheet-frame:has(>.dialog-scroll) {gap:8px;}}
+ @media(min-width:640px) {.haru-native-sheet {max-width:32rem;}}
+ @media(min-width:640px) {.haru-native-sheet.source-dialog {max-width:700px;}}
+ @media(min-width:641px) {
+  .haru-native-sheet.word-dialog {max-width:620px;padding:calc(28px - var(--spacing-1)) calc(30px - var(--spacing-1));}
+  .haru-native-sheet.completed-lesson {max-width:620px;padding:calc(28px - var(--spacing-1));}
+  .haru-native-sheet.backup-dialog {max-width:620px;}
+ }
+ @media(max-width:640px) {
+  .haru-native-sheet {inset:auto 0 0;margin:0;width:100%;max-width:100%;padding:calc(var(--space-6) - var(--spacing-1)) calc(var(--space-4) - var(--spacing-1)) calc(var(--space-4) + env(safe-area-inset-bottom,0px) - var(--spacing-1));border-bottom:0;border-radius:16px 16px 0 0;}
+  .haru-native-sheet[data-state=open] {animation:notebook-sheet 160ms ease;}
+  .haru-native-sheet .haru-sheet-frame>[data-slot=dialog-header] {margin-top:20px;}
+  .haru-native-sheet .sheet-handle {position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:center;margin-inline:auto;width:88px;min-height:44px;padding:0;border:0;border-radius:8px;background:transparent;cursor:grab;}
+  .haru-native-sheet .sheet-handle>span {width:36px;height:4px;border-radius:4px;background:var(--caption);opacity:.55;}
+  .haru-native-sheet .sheet-handle[data-disabled] {cursor:default;}
+  .haru-native-sheet[data-sheet-motion] {animation:none;transition:none;transform:translateY(var(--sheet-offset,0px));user-select:none;}
+  .haru-native-sheet[data-sheet-touched][data-state=open] {animation:none;transition:none;}
+  .haru-native-sheet[data-state=closed] {animation:sheet-dismiss 160ms ease both;}
+  .haru-native-sheet[data-sheet-dismissed] {animation:none;}
+  body:has(.shell[data-keyboard=open]) .haru-native-sheet {inset:var(--visual-viewport-top,0px) 0 auto;max-height:var(--visual-viewport-height,100dvh);border-radius:0;}
+ }
+ @media(max-width:560px) {.haru-native-sheet.source-dialog {padding:calc(25px - var(--spacing-1)) calc(20px - var(--spacing-1));}}
+ @keyframes haru-sheet-enter {from {opacity:0;transform:scale(.95);} to {opacity:1;transform:none;}}
+ @keyframes haru-sheet-exit {from {opacity:1;transform:none;} to {opacity:0;transform:scale(.95);}}
+ @keyframes haru-backdrop-enter {from {opacity:0;} to {opacity:1;}}
+ @keyframes haru-backdrop-exit {from {opacity:1;} to {opacity:0;}}
+ @media(prefers-reduced-motion:reduce) {.haru-native-sheet[data-state],.haru-native-sheet::backdrop {animation:none!important;}}
+}

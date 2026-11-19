@@ -1,0 +1,68 @@
+/* Structural adapter for the existing 640px, window-scrolling frame.
+   Public Astryx classes only; the legacy screen rules stay in their own layer. */
+@layer haru-shell {
+  .haru-frame .topbar {
+    justify-content: space-between;
+    gap: 0;
+    height: auto;
+    min-height: 64px;
+    padding: 8px max(var(--space-6),calc((100vw - 1152px)/2));
+  }
+  .haru-frame .page-wrap { width: 100%; }
+  .haru-frame .main-tabs { display: flex; flex-direction: column; gap: var(--space-6); }
+  .haru-frame .haru-tab-panel { flex: 1; outline: none; }
+  .haru-frame > a:focus { min-width: 44px; min-height: 44px; display: flex; align-items: center; }
+  .haru-frame .main-nav { display: block; }
+  .haru-frame .main-nav .astryx-tab-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(min(100%,8rem),1fr));
+    gap: var(--space-1);
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+  }
+  .haru-frame .main-nav .astryx-tab {
+    font-size: .875rem;
+    line-height: 1.428571;
+    font-weight: 600;
+    min-height: 48px;
+    height: auto;
+    padding: 10px var(--space-4);
+    border-radius: 8px;
+    gap: var(--space-2);
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  .haru-frame .main-nav .astryx-tab-indicator { display: none; }
+  .haru-frame .main-nav .astryx-tab svg { width: 18px; height: 18px; }
+  @media (max-width:640px) {
+    .haru-frame .topbar { min-height: 60px; padding: 8px var(--space-4); }
+    .haru-frame .main-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      border-radius: 0;
+      border: 0;
+      border-top: 1px solid var(--border);
+      background: var(--background);
+      padding: 6px var(--space-3) calc(6px + env(safe-area-inset-bottom,0px));
+      height: auto;
+    }
+    .haru-frame .main-tabs { gap: 0; }
+    .haru-frame[data-keyboard=open] .main-nav { display: none; }
+    .haru-frame .main-nav .astryx-tab-strip { grid-template-columns: repeat(4,minmax(0,1fr)); }
+    .haru-frame .main-nav .astryx-tab {
+      flex-direction: column;
+      font-size: .75rem;
+      line-height: 1.35;
+      min-height: 52px;
+      padding: 6px var(--space-1);
+      border-radius: 10px;
+      gap: var(--space-1);
+    }
+    .haru-frame .main-nav .astryx-tab svg { width: 20px; height: 20px; }
+  }
+}

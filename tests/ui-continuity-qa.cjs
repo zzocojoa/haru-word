@@ -36,7 +36,9 @@ function session(records, hour) {
     const tab = name => p.getByRole('tab', { name, exact: true }).click();
     const audit = async label => {
       await p.addScriptTag({ path: axePath });
-      assert.deepEqual(await p.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations.map(v => v.id)), [], label);
+      const violations=await p.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa'] })).violations.map(v => ({id:v.id,nodes:v.nodes.map(n=>({target:n.target,html:n.html,summary:n.failureSummary}))})));
+      if(violations.length)fs.writeFileSync(`${out}/axe-${label.replace(/\W+/g,'-')}.json`,JSON.stringify(violations,null,2));
+      assert.deepEqual(violations.map(v=>v.id), [], label);
     };
     assert.equal(await p.locator('.daily-origin.new').count(), 5);
     assert.equal(await p.locator('.daily-origin.returning').count(), 5);
@@ -52,9 +54,9 @@ function session(records, hour) {
     await p.getByRole('option').last().click(); assert.equal(await dialog.locator('.review-meaning').innerText(), alternate.meaning);
     assert.ok(await dialog.getByRole('button', { name: '다음', exact: true }).isDisabled());
     await selector.focus(); await p.keyboard.press('ArrowDown');
-    await p.waitForFunction(() => document.activeElement?.getAttribute('role') === 'option');
+    await p.waitForFunction(() => {const active=document.activeElement,id=active?.getAttribute('aria-activedescendant'),option=id?document.getElementById(id):active;return option?.getAttribute('role')==='option'&&option.getClientRects().length>0;});
     await p.keyboard.press('Home');
-    await p.waitForFunction(() => document.activeElement === document.querySelector('[role=option]'));
+    await p.waitForFunction(() => {const active=document.activeElement,id=active?.getAttribute('aria-activedescendant'),option=id?document.getElementById(id):active;return !!option&&option===option.closest('[role=listbox]')?.querySelector('[role=option]');});
     await p.keyboard.press('Enter');
     await dialog.locator('.review-meaning').getByText(first.records[targets[0].id].meaning, { exact: true }).waitFor();
     assert.equal(await dialog.locator('.review-meaning').innerText(), first.records[targets[0].id].meaning);
@@ -80,8 +82,23 @@ function session(records, hour) {
     await dialog.getByRole('button', { name: '다음', exact: true }).click();
     await body.evaluate(el => el.scrollTop = el.scrollHeight); assert.ok(await body.evaluate(el => el.scrollTop > 0));
     await dialog.getByRole('button', { name: '다음', exact: true }).click(); assert.equal(await body.evaluate(el => el.scrollTop), 0);
-    await selector.click(); await p.screenshot({ path: `${out}/replay-options-mobile.png` }); await audit('word selection');
-    await p.keyboard.press('Escape'); await audit('replay'); await dialog.getByRole('button', { name: '닫기', exact: true }).click();
+    await selector.click(); await p.screenshot({ path: `${out}/replay-options-mobile.png` });
+    const backgroundControls=p.locator('.topbar button,.main-nav [role=tab]');
+    assert.ok(await backgroundControls.count()>=5,'actual background controls are present');
+    assert.equal(await backgroundControls.evaluateAll(elements=>elements.every(e=>!!e.closest('[inert]'))),true,'modal background including idle live-region controls stays inert');
+    if(await selector.evaluate(e=>!!e.closest('.astryx-selector'))){
+      const listbox=p.getByRole('listbox');assert.equal(await selector.getAttribute('aria-controls'),await listbox.getAttribute('id'));
+      assert.equal(await selector.evaluate(e=>e===document.activeElement&&!e.closest('[inert]')),true,'nonmodal combobox retains its active focus owner');
+    }else{
+      assert.equal(await p.getByRole('dialog',{includeHidden:true}).evaluate(e=>!!e.closest('[inert]')),true,'modal selection isolates its parent dialog');
+    }
+    assert.equal(await p.getByRole('listbox').evaluate(e=>!!e.closest('[inert]')),false,'the active selection surface remains interactive');
+    await audit('word selection');
+    await p.keyboard.press('Escape');
+    await p.getByRole('listbox').waitFor({state:'hidden'});
+    assert.equal(await dialog.isVisible(),true,'Escape closes only the nested selector');
+    assert.equal(await selector.evaluate(e=>e===document.activeElement),true,'selection dismissal preserves its trigger focus');
+    await audit('replay'); await dialog.getByRole('button', { name: '닫기', exact: true }).click();
     assert.deepEqual(await get(), before, 'replay, selectors and layout inspection never write grades');
     checks.push('11 cards with distinct same-word meanings, notes without sentence, keyboard selection, fixed controls, scroll reset, 5 widths and 200% text');
 

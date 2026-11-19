@@ -1,7 +1,7 @@
 // Synthetic local accounts only; WebKit is not a physical iPhone test.
 const assert = require('node:assert/strict'), fs = require('node:fs');
 const { base, launchBrowser, closeBrowser, accountHeaders, waitForWorker, axePath } = require('./qa/runtime.cjs');
-const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/sheet-dismiss-${engine}`;
+const engine = process.env.QA_BROWSER || 'chromium', out = process.env.ASTRYX_QA_OUTPUT ? require('node:path').join(process.env.ASTRYX_QA_OUTPUT,engine) : `outputs/sheet-dismiss-${engine}`;
 fs.mkdirSync(out, { recursive: true });
 (async () => {
   await waitForWorker(); const browser = await launchBrowser({ engine });
@@ -87,6 +87,7 @@ fs.mkdirSync(out, { recursive: true });
 
     await tab('단어장'); await openWord(); const expression=()=>dialog.getByLabel('함께 익힐 표현',{exact:true}); await expression().fill('work with my team');
     await down(); await p.getByRole('alertdialog').waitFor(); await audit(); await p.getByRole('button',{name:'계속 편집',exact:true}).tap();
+    await p.locator('[role=alertdialog]').waitFor({state:'detached'});
     assert.equal(await expression().inputValue(),'work with my team');
     await gesture({region:'back',dx:180,dy:0}); await p.getByRole('alertdialog').waitFor(); await p.getByRole('button',{name:'계속 편집',exact:true}).tap();
     await p.getByRole('alertdialog').waitFor({state:'hidden'}); await p.waitForTimeout(200); assert.equal(await expression().inputValue(),'work with my team');
@@ -97,6 +98,8 @@ fs.mkdirSync(out, { recursive: true });
     await p.evaluate(()=>{Object.defineProperty(visualViewport,'height',{configurable:true,get:()=>innerHeight-300});visualViewport.dispatchEvent(new Event('resize'));});
     await p.locator('.shell[data-keyboard=open]').waitFor(); assert.equal((await down()).moved,false); assert.ok(await dialog.isVisible());
     await p.evaluate(()=>{delete visualViewport.height;visualViewport.dispatchEvent(new Event('resize'));}); await down(); await p.getByRole('button',{name:'계속 편집',exact:true}).click();
+    // The next Escape belongs to the sheet after its cancelled confirmation is detached.
+    await p.locator('[role=alertdialog]').waitFor({state:'detached'});
     assert.equal(await dialog.getByLabel('영어 단어',{exact:true}).inputValue(),'commute'); await p.keyboard.press('Escape'); await p.getByRole('button',{name:'변경 버리고 닫기',exact:true}).click(); await gone();
     checks.push('keyboard-open gesture does not dismiss personal draft; Escape uses the same protection');
 
@@ -121,7 +124,7 @@ fs.mkdirSync(out, { recursive: true });
     await p.locator('input[type=file]').setInputFiles({name:'sheet.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(backup))}); await p.locator('[data-safety-preview]').filter({hasText:'복원 가능'}).waitFor();
     const download=p.waitForEvent('download'); await p.getByRole('button',{name:'현재 기록 먼저 백업받기',exact:true}).click(); await download; await p.getByRole('checkbox').check(); await p.getByRole('button',{name:'이 백업으로 복원',exact:true}).click(); await p.getByRole('alertdialog').waitFor();
     await gesture({region:'alert'}); assert.ok(await p.getByRole('alertdialog').isVisible());
-    await p.route('**/api/state/restore/jobs/*/commit',route=>{held=route;}); await p.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click(); await p.locator('[data-backup-step]').filter({hasText:'서버에 반영 중'}).waitFor();
+    await p.route('**/api/state/restore/jobs/*/commit',route=>{held=route;}); await p.getByRole('button',{name:'기록 교체 · 복원',exact:true}).click(); await p.locator('[data-backup-step^="5/6"]').waitFor();
     assert.equal(await p.locator('.sheet-handle').getAttribute('data-disabled'),'true'); await down(); assert.ok(await dialog.isVisible()); assert.equal(await dialog.getByRole('button',{name:'닫기',exact:true}).count(),0);
     await held.continue(); await p.getByRole('heading',{name:'백업을 복원했어요.',exact:true}).waitFor(); await p.unroute('**/api/state/restore/jobs/*/commit'); await down(); await gone();
     assert.deepEqual((await get()).state,backup.state); checks.push('restore confirmation excluded; server commit cannot dismiss; completed restore can close with exact data preserved');

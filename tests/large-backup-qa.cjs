@@ -3,7 +3,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
 const {build}=require('esbuild');
 const {launchBrowser,closeBrowser,base,accountHeaders,waitForWorker,axePath}=require('./qa/runtime.cjs');
 const {history,emptyState}=require('./fixtures/backup-history.cjs');
-const out='outputs/large-backup';fs.mkdirSync(out,{recursive:true});
+const out=process.env.ASTRYX_QA_OUTPUT?require('node:path').join(process.env.ASTRYX_QA_OUTPUT,process.env.QA_BROWSER||'chromium'):'outputs/large-backup';fs.mkdirSync(out,{recursive:true});
 const envelope=state=>JSON.stringify({format:'haru-words-v1',exportedAt:'2026-09-24T00:00:00.000Z',state});
 (async()=>{
  await waitForWorker();await build({entryPoints:['lib/backup-analysis.ts'],outfile:'work/large-qa-analysis.mjs',bundle:true,format:'esm',platform:'node',logLevel:'silent'});
@@ -42,7 +42,7 @@ const envelope=state=>JSON.stringify({format:'haru-words-v1',exportedAt:'2026-09
   await page.getByRole('tab',{name:'학습 기록',exact:true}).click();await page.getByRole('button',{name:'기록 관리',exact:true}).click();await page.getByRole('menuitem',{name:'전체 백업',exact:true}).click();
   await page.getByText('현재 앱에서 복원 가능한 백업이에요.',{exact:true}).waitFor();const download=page.waitForEvent('download');await page.getByRole('button',{name:'백업 파일 다운로드',exact:true}).click();const exported=fs.readFileSync(await (await download).path(),'utf8');assert.deepEqual((await analyzeBackup(exported)).parsed.state,{...incoming,grammar:{}});
   checks.push('whole-export preview reports size and validates all 1,825 sessions before download');
-  await open();await select(recovery);await safety();await prepare();await page.getByRole('alertdialog').getByRole('button',{name:'취소',exact:true}).click();await page.getByRole('alertdialog').waitFor({state:'hidden'});assert.match(await page.locator('[data-backup-step]').innerText(),/5\/6/);
+  await open();await select(recovery);await safety();await prepare();await page.getByRole('alertdialog').getByRole('button',{name:'취소',exact:true}).click();await page.getByRole('alertdialog').waitFor({state:'hidden'});assert.match(await page.locator('[data-backup-step]').getAttribute('data-backup-step'),/5\/6/);
   for(const width of [320,390,1440]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.equal(await page.locator('.dialog-scroll').evaluate(el=>el.scrollWidth>el.clientWidth+1),false);}
   await page.setViewportSize({width:390,height:844});await page.locator('[data-slot=alert-dialog-overlay]').waitFor({state:'detached'});await page.evaluate(()=>Promise.all(document.getAnimations().map(a=>a.finished.catch(()=>{}))));await page.addScriptTag({path:axePath});const violations=await page.evaluate(async()=>(await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})).violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({html:n.html,summary:n.failureSummary}))})));fs.writeFileSync(out+'/accessibility.json',JSON.stringify(violations,null,2));assert.deepEqual(violations,[]);await page.screenshot({path:out+'/restore-mobile.png'});
   const cancelJob=page.getByRole('button',{name:'기존 복원 작업 취소'});

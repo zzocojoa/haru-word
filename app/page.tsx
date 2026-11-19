@@ -1,4 +1,12 @@
+import './haru-controls.css';
+import './haru-content.css';
+import './haru-content-compat.css';
+import './haru-sheet.css';
 import LearningApp from "./learning-app";
+import '@astryxdesign/core/reset.css';
+import '@astryxdesign/core/astryx.css';
+import '../src/themes/haru/haru.css';
+import './haru-shell.css';
 import { env } from 'cloudflare:workers';
 import { getChatGPTUser } from './chatgpt-auth';
 import { grammarV4Ready } from '@/lib/grammar/review';

@@ -1,7 +1,7 @@
 // Only local synthetic accounts. WebKit touch dispatch is not a physical iPhone test.
 const assert = require('node:assert/strict'), fs = require('node:fs');
 const { base, launchBrowser, closeBrowser, accountHeaders, waitForWorker } = require('./qa/runtime.cjs');
-const engine = process.env.QA_BROWSER || 'chromium', out = `outputs/sheet-body-swipe-${engine}`;
+const engine = process.env.QA_BROWSER || 'chromium', out = process.env.ASTRYX_QA_OUTPUT ? require('node:path').join(process.env.ASTRYX_QA_OUTPUT,engine) : `outputs/sheet-body-swipe-${engine}`;
 fs.mkdirSync(out, { recursive: true });
 (async () => {
   await waitForWorker(); const browser = await launchBrowser({ engine }); let p;
@@ -23,11 +23,14 @@ fs.mkdirSync(out, { recursive: true });
       const fire = (type, delta) => {
         const e = new Event(type, { bubbles: true, cancelable: true }), t = { identifier: 19, clientX: x, clientY: y + delta };
         Object.defineProperties(e, { touches: { value: /end|cancel/.test(type) ? [] : [t] }, changedTouches: { value: [t] } });
-        // Observe at the sheet, before Radix's document scroll lock. The lock
-        // may independently prevent overscroll on controls at the boundary.
-        let prevented = false;
+        // Core may cancel page overscroll during document capture. Record that
+        // separately from any cancellation added by the sheet recognizer.
+        let prevented = false,capture=false;
+        sheet.addEventListener(type, event => { capture=event.defaultPrevented; }, { once:true,capture:true });
         sheet.addEventListener(type, event => { prevented = event.defaultPrevented; }, { once: true });
-        el.dispatchEvent(e); return prevented;
+        el.dispatchEvent(e);
+        (window.__qaSheetBodyTouch??=[]).push({type,capture,prevented,tag:el.tagName,role:el.getAttribute('role'),label:el.getAttribute('aria-label'),scroll:[el.scrollTop,el.scrollHeight,el.clientHeight]});
+        return prevented;
       };
       const start = fire('touchstart', 0), smallMove = fire('touchmove', Math.sign(dy) * 3), move = fire('touchmove', dy);
       const moving = sheet.hasAttribute('data-sheet-dragging');
@@ -52,8 +55,11 @@ fs.mkdirSync(out, { recursive: true });
     assert.equal(await body.evaluate(el => el.scrollTop), 80, 'scroll position must be exposed by the body container');
     assert.equal((await drag(text, 150)).moving, false, 'a scrolled body must not dismiss');
     await atTop();
-    for (const control of [dialog.getByRole('textbox', { name: '함께 익힐 표현', exact: true }), dialog.getByRole('textbox', { name: '영어 예문', exact: true }), dialog.getByLabel('학습할 뜻 선택'), dialog.locator('summary').first()]) {
-      assert.deepEqual(await drag(control, 150), { start: false, smallMove: false, move: false, moving: false });
+    const controlTouches=[];
+    for (const control of [dialog.getByRole('textbox', { name: '함께 익힐 표현', exact: true }), dialog.getByRole('textbox', { name: '영어 예문', exact: true }), dialog.getByRole('combobox',{name:'학습할 뜻 선택',exact:true}), dialog.locator('summary').first()]) {
+      const observed=await drag(control,150),trace=await p.evaluate(()=>window.__qaSheetBodyTouch.slice(-4));
+      assert.deepEqual(observed, { start: false, smallMove: false, move: trace[2].capture, moving: false },JSON.stringify(trace));
+      controlTouches.push({tag:trace[2].tag,label:trace[2].label,beforeSheet:trace[2].capture,...observed});
     }
     await text.evaluate(el => { const r = document.createRange(); r.selectNodeContents(el); getSelection().addRange(r); });
     assert.equal((await drag(text, 150)).moving, false, 'text selection keeps ownership');
@@ -90,10 +96,14 @@ fs.mkdirSync(out, { recursive: true });
     await p.waitForFunction(() => !document.querySelector('.sheet-dialog')?.hasAttribute('data-sheet-motion'));
     await atTop(); await drag(text, 150); await p.getByRole('button', { name: '변경 버리고 닫기', exact: true }).click();
     await dialog.waitFor({ state: 'hidden' });
-    assert.equal(await p.getByRole('button', { name: 'a, an 부정관사', exact: true }).evaluate(el => el === document.activeElement), true);
+    const returnTarget = p.getByRole('button', { name: 'a, an 부정관사', exact: true });
+    // ViewRestoration intentionally waits two frames after the close commit.
+    // A missing/wrong destination still fails; do not race that async contract.
+    await p.waitForFunction(el => el === document.activeElement, await returnTarget.elementHandle(), { timeout: 5000 });
+    assert.equal(await returnTarget.evaluate(el => el === document.activeElement), true);
     assert.deepEqual(await (await c.request.get(base + '/api/state')).json(), before);
     assert.deepEqual(errors, []);
-    const report = { passed: true, engine, checks: ['word body downward boundary dismissal; tap/short/cancel/upward retained', 'scrolled body, inputs, select, summary and selection excluded', 'native Chromium scrolling/dismissal; WebKit event contract', 'discard cancel preserves draft; confirmed close restores focus and leaves server state unchanged'] };
+    const report = { passed: true, engine, controlTouches, checks: ['word body downward boundary dismissal; tap/short/cancel/upward retained', 'scrolled body, inputs, select, summary and selection excluded; no cancellation added after document scroll lock', 'native Chromium scrolling/dismissal; WebKit event contract', 'discard cancel preserves draft; confirmed close restores focus and leaves server state unchanged'] };
     fs.writeFileSync(`${out}/report.json`, JSON.stringify(report, null, 2)); console.log(JSON.stringify(report));
   } catch (e) { if (p) await p.screenshot({ path: `${out}/failure.png` }).catch(() => {}); throw e; }
   finally { await closeBrowser(browser); }

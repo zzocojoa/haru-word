@@ -1,4 +1,7 @@
 "use client";
+import {HaruPanel,HaruHeading,HaruParagraph} from '../haru-content';
+import {HaruButton} from '../haru-controls';
+
 import { confirmFamiliarity } from "@/lib/learning";
 import { ArrowRight } from "lucide-react";
 import { FamiliarityCard } from "../familiarity-card";
@@ -27,16 +30,16 @@ export function CandidatePreparation({
   setPreparing,
 }: CandidatePreparationProps) {
   return (
-    <section className="learning-panel">
-      <h2>
+    <HaruPanel className="learning-panel">
+      <HaruHeading level={2}>
         {candidate
           ? "이 단어, 얼마나 익숙한가요?"
           : "오늘 단어 준비 완료"}
-      </h2>
-      <p className="muted">
+      </HaruHeading>
+      <HaruParagraph className="muted">
         복습할 단어와 익숙하지 않은 단어부터 준비해요.
-      </p>
-      <details className="notes-details"><summary>단어 준비 순서</summary><p>이월한 단어, 뜻이 헷갈리는 단어, 처음 보는 단어 순서로 준비해요. 아는 단어도 나중에 다시 확인해요.</p></details>
+      </HaruParagraph>
+      <details className="notes-details"><summary>단어 준비 순서</summary><HaruParagraph>이월한 단어, 뜻이 헷갈리는 단어, 처음 보는 단어 순서로 준비해요. 아는 단어도 나중에 다시 확인해요.</HaruParagraph></details>
       {candidate ? (
         <FamiliarityCard
           key={candidate.id}
@@ -61,23 +64,23 @@ export function CandidatePreparation({
         />
       ) : (
         <>
-          <p className="prepared-words">
+          <HaruParagraph className="prepared-words">
             {suggestions
               .map((id) => words.find((w) => w.id === id)?.word)
               .join(" · ")}
-          </p>
-          <button
-            className="primary-button full"
+          </HaruParagraph>
+          <HaruButton label={["이 단어들로 시작 "].join('')} variant={'primary'}
+            className="haru-migrated primary-button full"
             disabled={busy || !suggestions.length}
             onClick={() => start("daily")}
-          >
-            이 단어들로 시작 <ArrowRight size={17} />
-          </button>
+           endContent={<ArrowRight size={17} />}>
+            이 단어들로 시작
+          </HaruButton>
         </>
       )}
-      <button className="text-button skip" onClick={() => setPreparing(false)}>
+      <HaruButton label={["학습 홈으로"].join('')} variant={'ghost'} className="haru-migrated text-button skip" onClick={() => setPreparing(false)}>
         학습 홈으로
-      </button>
-    </section>
+      </HaruButton>
+    </HaruPanel>
   );
 }

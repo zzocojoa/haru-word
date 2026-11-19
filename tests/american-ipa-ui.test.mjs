@@ -11,6 +11,9 @@ await build({ stdin: { contents: "export * from './app/word-pronunciation.tsx'; 
   platform: 'node', format: 'esm', jsx: 'automatic', packages: 'external' });
 const { WordPronunciation, WordIpa, LearnStage, WordEditor, Dialog, SentenceStage } = await import('../work/tests/american-ipa-ui.mjs');
 const word = name => WORDS.find(word => word.word === name);
+const ipaMarkers = value => [...value.matchAll(/<span\b[^>]*\bclass="([^"]*)"[^>]*>/g)].filter(match=>match[1].split(/\s+/).includes('word-ipa'));
+const ipaIndex = value => ipaMarkers(value)[0]?.index ?? -1;
+
 
 test('ordinary words show US IPA without removing device speech', () => {
   const quickly = word('quickly');
@@ -28,8 +31,8 @@ test('learning IPA follows the word before its image preview and appears only on
     setMeaning: noop, setExpression: noop, setExpressionTranslation: noop, setExample: noop, setTranslation: noop, learn: noop }));
   const imageIndex = html.indexOf('class="word-image-learn"');
   assert.ok(imageIndex >= 0, 'real learning image must be rendered');
-  assert.ok(html.indexOf('class="word-ipa"') < imageIndex, 'IPA must precede the image preview');
-  assert.equal((html.match(/class="word-ipa"/g) || []).length, 1);
+  assert.ok(ipaIndex(html) >= 0 && ipaIndex(html) < imageIndex, 'IPA must precede the image preview');
+  assert.equal(ipaMarkers(html).length, 1);
 });
 
 // Existing dictionary/audio policy remains a guard while the display uses v3.
@@ -42,16 +45,16 @@ test('conditional variants retain labels; text-only mode has no interactive desc
   const plain = renderToStaticMarkup(React.createElement(WordIpa, props));
   assert.doesNotMatch(plain, /<(?:a|button|input|details)\b/);
   assert.equal(renderToStaticMarkup(React.createElement(WordIpa, { ...props, meaning: '다른 뜻' })), '');
-  assert.equal(renderToStaticMarkup(React.createElement(WordPronunciation, { ...props, showIpa: false })).includes('class="word-ipa"'), false);
+  assert.equal(ipaMarkers(renderToStaticMarkup(React.createElement(WordPronunciation, { ...props, showIpa: false }))).length > 0, false);
 });
 
 test('editor places IPA below its title before the selected word metadata', () => {
   const read = word('read');
   const html = renderToStaticMarkup(React.createElement(Dialog, { open: true }, React.createElement(WordEditor,
     { word: read, activityDate: () => '2026-10-19', onSave: async () => true, busy: false, retryBlocked: false })));
-  const ipa = html.indexOf('class="word-ipa"');
+  const ipa = ipaIndex(html);
   assert.ok(ipa > html.indexOf('</h2>') && ipa < html.indexOf('data-slot="dialog-description"'), 'IPA must be directly below the editor title');
-  assert.equal((html.match(/class="word-ipa"/g) || []).length, 1);
+  assert.equal(ipaMarkers(html).length, 1);
 });
 
 test('sentence target displays IPA between its word and selected meaning', () => {
@@ -60,8 +63,8 @@ test('sentence target displays IPA between its word and selected meaning', () =>
     s: { id: 'fixture', records: { [read.id]: { meaning: content.meaning } } }, sentence: '', notes: '',
     setSentence: noop, setNotes: noop, setSpoken: noop, setAiPending: noop, storeFeedback: noop, sentenceDone: noop }));
   const headingEnd = html.indexOf('</h3>');
-  assert.ok(html.indexOf('class="word-ipa"') > headingEnd && html.indexOf('class="word-ipa"') < html.indexOf('읽다'), 'IPA must precede the selected sentence meaning');
-  assert.equal((html.match(/class="word-ipa"/g) || []).length, 1);
+  assert.ok(ipaIndex(html) > headingEnd && ipaIndex(html) < html.indexOf('읽다'), 'IPA must precede the selected sentence meaning');
+  assert.equal(ipaMarkers(html).length, 1);
 });
 
 test('sentence IPA does not replace an explicitly empty recorded meaning with the textbook sense', () => {
@@ -69,6 +72,6 @@ test('sentence IPA does not replace an explicitly empty recorded meaning with th
   const html = renderToStaticMarkup(React.createElement(SentenceStage, { word: read, content, id: read.id,
     s: { id: 'fixture', records: { [read.id]: { meaning: '' } } }, sentence: '', notes: '',
     setSentence: noop, setNotes: noop, setSpoken: noop, setAiPending: noop, storeFeedback: noop, sentenceDone: noop }));
-  assert.equal(html.includes('class="word-ipa"'), false, 'an explicit empty meaning must not receive fallback IPA');
+  assert.equal(ipaMarkers(html).length > 0, false, 'an explicit empty meaning must not receive fallback IPA');
   assert.ok(html.includes('사전에서 발음 확인'), 'unconfirmed sense keeps dictionary fallback');
 });

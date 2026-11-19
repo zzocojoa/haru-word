@@ -31,7 +31,9 @@ test('position errors distinguish an unread cursor from an unconfirmed save with
       ? '연습 위치 저장 결과를 확인하지 못했어요. 다시 저장하면 서버 위치부터 확인해요.'
       : '연습 위치를 불러오지 못했어요. 다시 불러와 주세요.'));
     assert.doesNotMatch(result, /연습 위치를 저장하지 못했어요|위치 저장됨/);
-    assert.match(result, available ? />다시 저장<\/button>/ : />다시 불러오기<\/button>/);
+    const retryLabel=available?'다시 저장':'다시 불러오기';
+    const retries=[...result.matchAll(/<button\b[^>]*>[\s\S]*?<\/button>/g)].filter(match=>match[0].replace(/<[^>]*>/g,'').trim()===retryLabel);
+    assert.equal(retries.length,1,'one visible retry action for this cursor state');
   }
 });
 
@@ -79,7 +81,9 @@ test('recall conceals the opposite answer and preserves independent/helped/unmea
     assert.match(before, /이번에는 건너뛰기/);
     const after = html(RecallStage, { ...props, revealed: true, hint: true });
     assert.ok(after.includes('concealedword') && after.includes('고유한 참고 뜻'));
-    assert.match(after, /disabled=""[^>]*>도움 없이 맞혔어요/);
+    const independent=[...after.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)].find(([, ,content])=>content.replace(/<[^>]*>/g,'').trim()==='도움 없이 맞혔어요');
+    assert.ok(independent,'the independent-result action remains visible');
+    assert.match(independent[1], /\s(?:disabled=""|aria-disabled="true")/);
     assert.match(after, /도움 필요.*기록해요/);
   }
 });

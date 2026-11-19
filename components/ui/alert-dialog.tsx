@@ -5,6 +5,7 @@ import { AlertDialog as AlertDialogPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { nativeModalContainer, nativeModalFocus, useNativeModalContainer } from "./native-modal-portal"
 
 function AlertDialog({
   ...props
@@ -23,8 +24,9 @@ function AlertDialogTrigger({
 function AlertDialogPortal({
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Portal>) {
+  const nativeContainer = useNativeModalContainer()
   return (
-    <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />
+    <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} container={props.container ?? nativeContainer} />
   )
 }
 
@@ -51,6 +53,8 @@ function AlertDialogContent({
 }: React.ComponentProps<typeof AlertDialogPrimitive.Content> & {
   size?: "default" | "sm"
 }) {
+  const nativeContainer = useNativeModalContainer()
+  const returnFocus = React.useRef<{ container: HTMLDialogElement; target: HTMLElement } | null>(null)
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay />
@@ -62,6 +66,25 @@ function AlertDialogContent({
           className
         )}
         {...props}
+        onOpenAutoFocus={event => {
+          returnFocus.current = nativeContainer ? { container: nativeContainer, target: nativeModalFocus(nativeContainer) } : null
+          props.onOpenAutoFocus?.(event)
+        }}
+        onCloseAutoFocus={event => {
+          props.onCloseAutoFocus?.(event)
+          const previous = returnFocus.current
+          if (event.defaultPrevented || !previous || nativeModalContainer() !== previous.container) return
+          event.preventDefault()
+          requestAnimationFrame(() => {
+            const { container, target } = previous
+            if (nativeModalContainer() !== container || !container.isConnected || !container.open) return
+            const active = container.ownerDocument.activeElement
+            if (active && active !== container && container.contains(active)) return
+            const usable = target.isConnected && container.contains(target) && !target.closest("[inert]") && !target.matches(":disabled")
+            const destination = usable ? target : container
+            destination.focus({ preventScroll: true })
+          })
+        }}
       />
     </AlertDialogPortal>
   )

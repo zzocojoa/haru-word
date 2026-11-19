@@ -214,7 +214,8 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     // Exercise the real overflowing desktop table through native keyboard input.
     await page.setViewportSize({ width: 768, height: 844 });
     await qa.settle();
-    const recordScroller = page.getByRole('region', { name: '단어별 학습 기록 가로 스크롤', exact: true });
+    const recordScroller = page.getByRole('region', { name: '단어별 학습 기록 가로 스크롤', exact: true })
+      .or(page.getByRole('group', { name: '단어별 학습 기록', exact: true }));
     const recordTable = recordScroller.getByRole('table', { name: '단어별 학습 기록', exact: true });
     assert.equal(await recordTable.getByRole('columnheader').count(), 6, 'The native table keeps all six column headers');
     assert.equal(await recordScroller.getAttribute('tabindex'), '0');
@@ -228,11 +229,11 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     assert.equal(await recordScroller.evaluate(element => element.matches(':focus-visible')), true,
       'Keyboard focus remains visibly indicated');
     await page.keyboard.press('ArrowRight');
-    await page.waitForFunction(() => document.querySelector('.journal-desktop [data-slot="table-container"]')?.scrollLeft > 0);
+    await page.waitForFunction(element => element.scrollLeft > 0, await recordScroller.elementHandle());
     const rightOffset = await recordScroller.evaluate(element => element.scrollLeft);
     await qa.capture('record-table-keyboard-768.png', false);
     await page.keyboard.press('ArrowLeft');
-    await page.waitForFunction(offset => document.querySelector('.journal-desktop [data-slot="table-container"]')?.scrollLeft < offset, rightOffset);
+    await page.waitForFunction(({element,offset}) => element.scrollLeft < offset, {element:await recordScroller.elementHandle(),offset:rightOffset});
     assert.equal(await page.evaluate(() => window.scrollX), 0, 'Arrow keys scroll the table instead of the page');
     await page.keyboard.press('Tab');
     assert.equal(await recordScroller.evaluate(element => document.activeElement === element), false,

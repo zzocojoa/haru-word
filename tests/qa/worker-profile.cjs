@@ -6,20 +6,23 @@ const {pathToFileURL}=require('node:url');
 const {waitForWorker,accountHeaders}=require('./runtime.cjs');
 const {requireDisabledAiStatus}=require('./preflight.cjs');
 const freePort=()=>new Promise((resolve,reject)=>{const server=createServer();server.once('error',reject);server.listen(0,'127.0.0.1',()=>{const port=server.address().port;server.close(()=>resolve(port));});});
-function profileConfig(built,version){
+function profileConfig(built,version,{imagePracticeEnabled=true,astryxFoundationEnabled=false,serverRoot=path.resolve('dist/server')}={}){
   if(![2,3,4].includes(version))throw Error('Unsupported QA grammar profile');
-  return {name:'haru-grammar-qa-v'+version,main:path.resolve('dist/server',built.main),compatibility_date:built.compatibility_date,
-    compatibility_flags:built.compatibility_flags,no_bundle:true,rules:built.rules,assets:{directory:path.resolve('dist/server',built.assets.directory)},
+  if(typeof imagePracticeEnabled!=='boolean')throw Error('QA image practice flag must be boolean');
+  if(typeof astryxFoundationEnabled!=='boolean')throw Error('QA foundation flag must be boolean');
+  if(typeof serverRoot!=='string'||!path.isAbsolute(serverRoot))throw Error('QA built server root must be absolute');
+  return {name:'haru-grammar-qa-v'+version,main:path.resolve(serverRoot,built.main),compatibility_date:built.compatibility_date,
+    compatibility_flags:built.compatibility_flags,no_bundle:true,rules:built.rules,assets:{directory:path.resolve(serverRoot,built.assets.directory)},
     d1_databases:[{binding:'DB',database_name:'qa-only',database_id:'00000000-0000-0000-0000-000000000001'}],
     r2_buckets:[{binding:'BUCKET',bucket_name:'qa-only'}],
     vars:{grammar_enabled:'true',grammar_practice_v2_enabled:'true',grammar_practice_v3_enabled:String(version>=3),grammar_practice_v4_enabled:String(version>=4),
-      word_image_pilot_enabled:'true',large_backup_restore_enabled:'true',ai_feedback_enabled:'false',feedback_judgment_enabled:'true',
+      word_image_pilot_enabled:String(imagePracticeEnabled),astryx_foundation_enabled:String(astryxFoundationEnabled),large_backup_restore_enabled:'true',ai_feedback_enabled:'false',feedback_judgment_enabled:'true',
       OPENAI_API_KEY:'synthetic-disabled',OPENAI_ALLOWED_MODELS:'gpt-6.1-sol,gpt-6.1-terra,gpt-6-astra'}};
 }
-async function grammarWorker(version,{signal}={}){
+async function grammarWorker(version,{signal,imagePracticeEnabled=true,astryxFoundationEnabled=false,serverRoot=path.resolve('dist/server')}={}){
   signal?.throwIfAborted();
   const root=fs.mkdtempSync(path.resolve('work','grammar-profile-v'+version+'-'));
-  const configPath=path.join(root,'wrangler.json'),config=profileConfig(JSON.parse(fs.readFileSync('dist/server/wrangler.json','utf8')),version);
+  const configPath=path.join(root,'wrangler.json'),config=profileConfig(JSON.parse(fs.readFileSync(path.join(serverRoot,'wrangler.json'),'utf8')),version,{imagePracticeEnabled,astryxFoundationEnabled,serverRoot});
   fs.writeFileSync(configPath,JSON.stringify(config,null,2));
   const args=['--import',pathToFileURL(path.resolve('scripts/sites-env.mjs')).href,path.resolve('node_modules/wrangler/bin/wrangler.js')];
   for(const file of fs.readdirSync('drizzle').filter(name=>name.endsWith('.sql')).sort())execFileSync(process.execPath,[...args,'d1','execute','DB','--local','--config',configPath,'--persist-to',root,'--file',path.resolve('drizzle',file)],{windowsHide:true,stdio:'pipe',timeout:30000});

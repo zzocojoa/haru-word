@@ -1,3 +1,4 @@
+const {chooseOption}=require('./qa/select.cjs');
 // Local built Worker only: isolated accounts, no hosted records or Google calls.
 const { launchBrowser, closeBrowser } = require('./qa/runtime.cjs');
 const fs = require('node:fs'), assert = require('node:assert/strict');
@@ -60,7 +61,7 @@ const oldContent = id => { const { expressionTranslation, ...old } = content[id]
   await dialog.getByRole('button', { name: '다른 뜻 추가', exact: true }).click();
   assert.equal(await dialog.getByLabel('함께 익힐 표현', { exact: true }).inputValue(), '');
   assert.equal(await dialog.getByLabel('표현의 한국어 뜻', { exact: true }).inputValue(), '');
-  await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption(content[arrive.id].meaning);
+  await chooseOption(dialog.getByRole('combobox',{name:'학습할 뜻 선택',exact:true}),content[arrive.id].meaning);
   assert.equal(await dialog.getByLabel('표현의 한국어 뜻', { exact: true }).inputValue(), '학교에 도착하다');
   await dialog.getByRole('button', { name: '닫기', exact: true }).click(); await dialog.waitFor({ state: 'hidden' });
   checks.push('reload and switching learning senses preserve the matching gloss and never inherit another sense');

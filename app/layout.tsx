@@ -2,9 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { WebFonts } from './web-fonts';
 import { startupImages } from '@/lib/startup-images';
 import "./globals.css";
-import "./study-design.css";
-import './grammar.css';
-import './startup-screen.css';
 
 export const metadata: Metadata = {
   title: "하루단어 · Oxford 3000",

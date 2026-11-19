@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "planId": "astryx-adoption-2026-11-18",
+  "tag": "astryx-adoption",
+  "date": "2026-11-18",
+  "scope": {
+    "tasks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "phase1Parents": 6,
+    "phase1Subtasks": 20,
+    "nextTask": 7,
+    "wholePlanComplete": false
+  },
+  "source": {
+    "path": "work/astryx-adoption-20261118",
+    "branch": "codex/astryx-foundation",
+    "base": "33f5de530c39fe816bebfdb754f751d3e093565f",
+    "baseline": "outputs/astryx-adoption-implementation-20261118/baseline.json",
+    "finalFingerprints": "outputs/astryx-adoption-implementation-20261118/final-source.json",
+    "reviewableFingerprints": "outputs/astryx-adoption-implementation-20261118/reviewable-fingerprints.json"
+  },
+  "checks": {
+    "node22": {
+      "version": "22.22.2",
+      "test": {
+        "passed": 926,
+        "failed": 0,
+        "code": 0,
+        "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-test-1.log"
+      },
+      "typecheck": {
+        "code": 0,
+        "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-types-final2.log"
+      },
+      "lint": {
+        "code": 0,
+        "errors": 0,
+        "existingWarnings": 15,
+        "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-lint-final3.log",
+        "finalChangedQa": {
+          "code": 0,
+          "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-qa-lint-final7.log"
+        }
+      },
+      "grammar": {
+        "code": 0,
+        "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-grammar-review.log"
+      },
+      "build": {
+        "code": 0,
+        "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-build-final2-node22.log"
+      }
+    },
+    "node24": {
+      "version": "24.22.3",
+      "test": {
+        "passed": 926,
+        "failed": 0,
+        "code": 0,
+        "log": "outputs/astryx-adoption-implementation-20261118/node24-test.log"
+      },
+      "typecheck": {
+        "code": 0,
+        "log": "outputs/astryx-adoption-implementation-20261118/node24-typecheck-final2.log"
+      },
+      "build": {
+        "code": 0,
+        "log": "outputs/astryx-adoption-implementation-20261118/node24-build-final2.log"
+      }
+    },
+    "doctor": {
+      "code": 0,
+      "pass": 11,
+      "warn": 1,
+      "fail": 0,
+      "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-doctor-final2.log",
+      "warning": "Windows npm .cmd shim detection; project CLI answeredBy is0.7.16/core0.7.16. Built inspection does not claim source purity."
+    },
+    "npmLockDryRun": {
+      "code": 0,
+      "log": "outputs/astryx-adoption-implementation-20261118/verification/astryx-lock-dry-run.log"
+    },
+    "browser": {
+      "uniqueRuns": 28,
+      "passed": 28,
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "cases": [
+        {
+          "engine": "chromium",
+          "args": [
+            "design-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-design-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-study-layout-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sentence-feedback-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-sentence-feedback-layout-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-settings-dialog-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-sheet-dismiss-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\css-final-v2\\chromium-sheet-body-swipe-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "sheet-motion-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-sheet-motion-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-navigation-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-local-draft-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-backup-workflow-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "grammar-v4-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-grammar-v4-qa.cjs.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-image-practice-qa.cjs-matrix.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "image-practice-qa.cjs",
+            "production"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\chromium-image-practice-qa.cjs-production.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "design-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-design-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "study-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-study-layout-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sentence-feedback-layout-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-sentence-feedback-layout-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "settings-dialog-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-settings-dialog-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-dismiss-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-sheet-dismiss-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-body-swipe-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\css-final-v2\\webkit-sheet-body-swipe-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "sheet-motion-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-sheet-motion-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "navigation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-navigation-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "local-draft-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-local-draft-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "backup-workflow-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-backup-workflow-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "grammar-v4-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-grammar-v4-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "matrix"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-image-practice-qa.cjs-matrix.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "image-practice-qa.cjs",
+            "production"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\compatibility-final\\webkit-image-practice-qa.cjs-production.log"
+        },
+        {
+          "engine": "chromium",
+          "args": [
+            "astryx-foundation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\css-final-v7\\chromium-astryx-foundation-qa.cjs.log"
+        },
+        {
+          "engine": "webkit",
+          "args": [
+            "astryx-foundation-qa.cjs"
+          ],
+          "code": 0,
+          "timedOut": false,
+          "log": "C:\\Users\\user\\Documents\\ChatGPT\\하루단어\\outputs\\astryx-adoption-implementation-20261118\\css-final-v7\\webkit-astryx-foundation-qa.cjs.log"
+        }
+      ],
+      "initialRuns": 26,
+      "initialPassed": 25,
+      "initialFailurePreserved": "outputs/astryx-adoption-implementation-20261118/compatibility-final/webkit-sheet-body-swipe-qa.cjs.log",
+      "finalFoundationEvidence": "outputs/astryx-adoption-implementation-20261118/foundation-final7",
+      "lateCssLazyScreensPerEngine": 4
+    },
+    "css": {
+      "computedViewComparisons": 16,
+      "pixelIdentical": 16,
+      "computedEvidence": "outputs/astryx-adoption-implementation-20261118/foundation-css-result.json",
+      "visualEvidence": "outputs/astryx-adoption-implementation-20261118/visual-comparison.json",
+      "ordinaryCssGzipBefore": 39271,
+      "ordinaryCssGzipAfter": 39396,
+      "ordinaryCssDeltaGzip": 125,
+      "foundationCssOnOrdinaryHome": false
+    },
+    "audit": {
+      "scope": "npm audit --omit=dev",
+      "before": {
+        "moderate": 1,
+        "high": 0,
+        "critical": 0,
+        "code": 1
+      },
+      "after": {
+        "moderate": 1,
+        "high": 0,
+        "critical": 0,
+        "code": 1
+      },
+      "newProductionAdvisories": 0,
+      "existingDependency": "next@16.4.1",
+      "beforeEvidence": "outputs/astryx-adoption-implementation-20261118/lockfile-baseline/audit.json",
+      "afterEvidence": "outputs/astryx-adoption-implementation-20261118/verification/astryx-audit-production.json"
+    },
+    "dashboard": {
+      "passed": true,
+      "groups": 39,
+      "plan": 6,
+      "sidebar": 15,
+      "multiPlan": 18,
+      "codes": [
+        0,
+        0,
+        0
+      ],
+      "validation": ".taskmaster/docs/astryx-adoption-dashboard-validation.json",
+      "mcpReadback": "outputs/astryx-adoption-implementation-20261118/task-master-readback.json",
+      "live": "outputs/astryx-adoption-implementation-20261118/dashboard-live-final.json"
+    }
+  },
+  "preservation": {
+    "priorTagsAndManifests": "outputs/astryx-adoption-implementation-20261118/preservation-check.json",
+    "product": "outputs/astryx-adoption-implementation-20261118/product-preservation.json",
+    "paidAiCalls": 0,
+    "productionWrites": 0,
+    "siteOrDatabaseChanges": 0,
+    "deletedFiles": 0
+  },
+  "limitations": [
+    "Physical iPhone/IME/VoiceOver not tested; WebKit emulation only.",
+    "No deployment, Git commit/push/PR or T7+ implementation.",
+    "Linux hosted CI not run; local Windows Node22/24 checks only.",
+    "CLI0.7.16 preview PNG retains neutral blue in this setup; actual built Worker screenshots and computed CSS are authoritative.",
+    "Existing production Next.js moderate advisory remains unchanged."
+  ],
+  "recoveryHistory": [
+    {
+      "issue": "Empty learner intention and obsolete current AI fixture versions",
+      "resolution": "Test-only explicit intention/current reference-v13 & judgment-v10; historical mock retained",
+      "evidence": "outputs/astryx-adoption-implementation-20261118/t2-result.json"
+    },
+    {
+      "issue": "WebKit focus observed before two scheduled frames",
+      "resolution": "Same focus destination waits at most5s, no product change",
+      "evidence": "outputs/astryx-adoption-implementation-20261118/css-final-v2/results.json"
+    },
+    {
+      "issue": "Generated declarations/doc lint rules",
+      "resolution": "Ignore exact generated declarations/doc; authored theme and tests remain linted"
+    },
+    {
+      "issue": "13px supporting text",
+      "resolution": "Explicit14px semantic supporting token; original failing checks retained",
+      "evidence": "outputs/astryx-adoption-implementation-20261118/foundation-final/chromium/failure.json"
+    },
+    {
+      "issue": "Supplemental coexistence QA opened fresh assessment or an old-day fixture instead of daily session",
+      "resolution": "Reuse synthetic restore fixture with current Korean study date and navigate to Today; lazy daily session verified in both engines",
+      "failedEvidence": [
+        "outputs/astryx-adoption-implementation-20261118/foundation-final4",
+        "outputs/astryx-adoption-implementation-20261118/foundation-final5"
+      ],
+      "passedEvidence": "outputs/astryx-adoption-implementation-20261118/foundation-final7"
+    }
+  ],
+  "completedAt": "2026-11-18T06:43:48.664Z",
+  "dependenciesEvidence": "outputs/astryx-adoption-implementation-20261118/dependencies.json"
+}

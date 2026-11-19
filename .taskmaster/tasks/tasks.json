@@ -6121,7 +6121,7 @@
             "id": 2,
             "title": "새 문제 분류·합성 재현·원인 환류",
             "description": "issueId→피해/빈도/원인층/최초관찰→개인정보 없는 합성 재현→원인 가설→담당→중단/복구→수정작업→새 확인세트→새run/예산 승인으로 연결한다. 관측된 중대 의미 훼손/기록 손실은 즉시 중단·검토; 같은 원인이면 기존대책의 한계를 기록한다.",
-            "details": "phase222: T32.1의5거시/13미시/30과거문제/6보완요구 감사·원문9지문 보존 대조. T39 후속1일/7일 일정과 새문제 모의추적 확인·시점미도래/담당미확정. T38 단어/문법×3모델6본문 로컬캡처 준비·실제운영전송미연결·전용계정/새운영범위승인대기. 제안상한기존35내US$1.019168·예약/사용0. 제품/게시변경/실제AI/토큰계산/운영QA쓰기0. 전체목표완료미입증.\n\nissueId→피해/빈도/원인층/최초관찰→개인정보 없는 합성 재현→원인 가설→담당→중단/복구→수정작업→새 확인세트→새run/예산 승인으로 연결한다. 관측된 중대 의미 훼손/기록 손실은 즉시 중단·검토; 같은 원인이면 기존대책의 한계를 기록한다.\n완료 근거: 새 오류 접수부터 합성 재현→수정→새 미공개 평가까지 한 건의 모의 추적을 검토한다. 창이 지나지 않았거나 점검이 없으면 운영검증 완료 표시 금지.\n계획 등록 당시 미착수. 현재 진행 상태와 근거는 status 및 실행 문서를 따른다. 신규 AI는 명시 요청의 OpenAI Responses만 사용한다. 운영 학습 기록·API/백업·revision/원자성·한국 학습일·독립 성적·reader5/judgment-v6 호환을 보존한다. 새 SQL/전면 재작성은 기본안이 아니다. 개인정보/비밀 로그 금지. 닫힌 원장/잔액 재사용 금지. 실패·미검증은 보류이며 완료로 바꾸지 않는다.\n\nphase227 / 2026-11-13: codex/fix-context-drafts-security 로컬 수정. 구버전 단어 상황 메모가 한국어 의도로 자동 복원되는 합성 재현 후 저장 키 분리·원문 보존·확인 가져오기로 수정. Dependabot #45/#46은 같은 GHSA-xqc2-xf4c-x3h3이며 React/RSC 19.2.9로 패치. Node22/24 단위 각924, Chromium/WebKit 초안 각22, 문법자료·타입·린트(기존15경고)·빌드 통과, audit 취약점0. 상세 docs/CONTEXT_DRAFT_SECURITY_FIX_20261113.md. 운영 미반영·유료AI/계산/운영쓰기0. T39 기간 점검과 품질 미입증 상태·기존 예산 유지.\n\nphase228 / 2026-11-18: 초안·React critical 수정 커밋 및 PR 준비. 제품 소스는11월13일 검증 후 그대로. 최신 audit critical0·high19(picomatch 상위 의존성 포함)·moderate1(Next.js), 고유 권고3건 별도 미해결. 운영미반영·유료AI0. 근거 docs/CONTEXT_DRAFT_SECURITY_FIX_20261113.md",
+            "details": "phase222: T32.1의5거시/13미시/30과거문제/6보완요구 감사·원문9지문 보존 대조. T39 후속1일/7일 일정과 새문제 모의추적 확인·시점미도래/담당미확정. T38 단어/문법×3모델6본문 로컬캡처 준비·실제운영전송미연결·전용계정/새운영범위승인대기. 제안상한기존35내US$1.019168·예약/사용0. 제품/게시변경/실제AI/토큰계산/운영QA쓰기0. 전체목표완료미입증.\n\nissueId→피해/빈도/원인층/최초관찰→개인정보 없는 합성 재현→원인 가설→담당→중단/복구→수정작업→새 확인세트→새run/예산 승인으로 연결한다. 관측된 중대 의미 훼손/기록 손실은 즉시 중단·검토; 같은 원인이면 기존대책의 한계를 기록한다.\n완료 근거: 새 오류 접수부터 합성 재현→수정→새 미공개 평가까지 한 건의 모의 추적을 검토한다. 창이 지나지 않았거나 점검이 없으면 운영검증 완료 표시 금지.\n계획 등록 당시 미착수. 현재 진행 상태와 근거는 status 및 실행 문서를 따른다. 신규 AI는 명시 요청의 OpenAI Responses만 사용한다. 운영 학습 기록·API/백업·revision/원자성·한국 학습일·독립 성적·reader5/judgment-v6 호환을 보존한다. 새 SQL/전면 재작성은 기본안이 아니다. 개인정보/비밀 로그 금지. 닫힌 원장/잔액 재사용 금지. 실패·미검증은 보류이며 완료로 바꾸지 않는다.\n\nphase227 / 2026-11-13: codex/fix-context-drafts-security 로컬 수정. 구버전 단어 상황 메모가 한국어 의도로 자동 복원되는 합성 재현 후 저장 키 분리·원문 보존·확인 가져오기로 수정. Dependabot #45/#46은 같은 GHSA-xqc2-xf4c-x3h3이며 React/RSC 19.2.9로 패치. Node22/24 단위 각924, Chromium/WebKit 초안 각22, 문법자료·타입·린트(기존15경고)·빌드 통과, audit 취약점0. 상세 docs/CONTEXT_DRAFT_SECURITY_FIX_20261113.md. 운영 미반영·유료AI/계산/운영쓰기0. T39 기간 점검과 품질 미입증 상태·기존 예산 유지.\n\nphase228 / 2026-11-18: 초안·React critical 수정 커밋 및 PR 준비. 제품 소스는11월13일 검증 후 그대로. 최신 audit critical0·high19(picomatch 상위 의존성 포함)·moderate1(Next.js), 고유 권고3건 별도 미해결. 운영미반영·유료AI0. 근거 docs/CONTEXT_DRAFT_SECURITY_FIX_20261113.md\n\nphase229 / 2026-11-18: PR61 병합·기존Site v149 게시성공. main Node22/24 각924·타입/린트/빌드 통과. 공개홈200·JS/CSS15지문 일치·익명저장/AI401. critical2건 fixed·별도3권고 유지. 설정/DB/R2/예산 유지·새AI/운영학습쓰기0. 임시사본810파일 정리·근거/원문/회귀 보존. 상세 docs/PR61_V149_ROLLOUT_20261118.md; T39 기간점검·품질미입증 상태 유지.",
             "status": "review",
             "dependencies": [
               1
@@ -6209,6 +6209,1270 @@
       "tags": [
         "ai-quality-v147"
       ]
+    }
+  },
+  "astryx-adoption": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "착수 시점 main·디자인·보존 계약 고정",
+        "description": "기본 폴더의 구버전 제품과 관리 원본을 구분하고 도입 기준을 고정한다.",
+        "details": "검토 기준 6912210/main405cc557/tree af0a3166을 다시 확인한다. 착수 시 더 최신 소스가 있으면 차이를 검토하고 기준을 갱신한다. 관리 원본은 현재 ROOT, 구현은 검증된 최신 제품 checkout에서 수행한다. 기존 사용자 변경·5개 과거 태그·평가/예산 원장·v149 초안/보안 패치를 보존한다. 제품 구현 착수 승인을 받은 뒤 진행한다.",
+        "testStrategy": "검토 inventory와 실제 HEAD/tree/제품 입력·hosting 선언 지문, 대시보드 projectKey와 원본 위치를 대조한다. API·DB·백업·revision·한국 날짜·성적 분리 계약을 체크리스트로 확인한다.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "실제 제품·관리 원본과 기준 지문 확인",
+            "description": "기본 폴더의 구버전 제품과 관리 원본을 구분하고 도입 기준을 고정한다.",
+            "details": "기본 폴더의 구버전 제품을 기준으로 설치하지 않는다. v149와 최신 main 차이를 확인해 제품 checkout/HEAD/tree와 ROOT 대시보드 원본을 기록한다.\n완료 검사: 검토 inventory와 실제 HEAD/tree/제품 입력·hosting 선언 지문, 대시보드 projectKey와 원본 위치를 대조한다. API·DB·백업·revision·한국 날짜·성적 분리 계약을 체크리스트로 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 1,
+            "updatedAt": "2026-11-18T05:17:51.309Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/baseline.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "기존 디자인·상태·보존 계약 명세",
+            "description": "기본 폴더의 구버전 제품과 관리 원본을 구분하고 도입 기준을 고정한다.",
+            "details": "화이트·차콜·라임, DM Sans/Noto Sans KR, 본문/입력16px·보조14px·작은 조작44px·주 행동48px을 고정한다. 초안·첫 답·도움·친숙도·문법 진도·revision·백업 계약을 분리한다.\n완료 검사: 검토 inventory와 실제 HEAD/tree/제품 입력·hosting 선언 지문, 대시보드 projectKey와 원본 위치를 대조한다. API·DB·백업·revision·한국 날짜·성적 분리 계약을 체크리스트로 확인한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 1,
+            "updatedAt": "2026-11-18T05:17:51.309Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/baseline.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "검사·복구·호출 경계 고정",
+            "description": "기본 폴더의 구버전 제품과 관리 원본을 구분하고 도입 기준을 고정한다.",
+            "details": "루프백·합성 계정·실제 AI 비활성·소유 프로세스 종료를 확인한다. 원래 실패/예산 이력 보존, 사용자 데이터 삭제0·역SQL0·Google/Groq 자동대체0를 완료 조건에 둔다.\n완료 검사: 검토 inventory와 실제 HEAD/tree/제품 입력·hosting 선언 지문, 대시보드 projectKey와 원본 위치를 대조한다. API·DB·백업·revision·한국 날짜·성적 분리 계약을 체크리스트로 확인한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 1,
+            "updatedAt": "2026-11-18T05:17:51.309Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/baseline.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T05:17:51.309Z",
+        "implementationEvidence": [
+          "outputs/astryx-adoption-implementation-20261118/baseline.json"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "검사 데이터·QA 프로필 보완과 기준선 재검증",
+        "description": "현재 실패한 AI 결과 검사 fixture와 이미지 검사 프로필을 보완한 뒤 도입 전 회귀 기준선을 확보한다.",
+        "details": "sentence-feedback-layout-qa.cjs:98의 한국어 의도 빈값과 활성 버튼 대기 충돌을 수정한다. 필수 의도·contextFingerprint·명시 클릭을 실제 계약에 맞춰 준비하며 제품의 필수 입력 검증을 완화하지 않는다. image-practice는 기능 활성 프로필의 matrix와 기능 비활성 production을 분리한다. 기존36회32통과/4실패와 진단2회는 과거 근거로 유지한다.",
+        "testStrategy": "원본 sentence-feedback-layout 전체와 이미지 matrix/production을 각각 맞는 프로필에서 Chromium/WebKit으로 실행한다. 빈 의도는 비활성·입력 후 활성·입력만으로 AI POST0, 현재 UUID/모델/문맥·영수증 계약 및 이후 레이아웃 검사 완료를 확인한다.",
+        "status": "done",
+        "dependencies": [
+          1
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "AI 결과 fixture를 현행 필수 의도 계약에 맞춤",
+            "description": "현재 실패한 AI 결과 검사 fixture와 이미지 검사 프로필을 보완한 뒤 도입 전 회귀 기준선을 확보한다.",
+            "details": "합성 의도/기록 응답·지문·현재 모델을 fixture에 명시한다. 빈 의도로 요청할 수 없는 부정 조건을 유지하고 단순 타임아웃 증가나 disabled 무시는 금지한다.\n완료 검사: 원본 sentence-feedback-layout 전체와 이미지 matrix/production을 각각 맞는 프로필에서 Chromium/WebKit으로 실행한다. 빈 의도는 비활성·입력 후 활성·입력만으로 AI POST0, 현재 UUID/모델/문맥·영수증 계약 및 이후 레이아웃 검사 완료를 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 2,
+            "updatedAt": "2026-11-18T05:28:17.907Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/t2-result.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "이미지 기능 플래그와 실행 항목 정합화",
+            "description": "현재 실패한 AI 결과 검사 fixture와 이미지 검사 프로필을 보완한 뒤 도입 전 회귀 기준선을 확보한다.",
+            "details": "활성 matrix와 비활성 production의 Worker 설정을 명시하고 잘못된 프로필이면 실행 전에 구분한다. 실제 원본 이미지만 사용하고 새 AI 이미지 생성은 하지 않는다.\n완료 검사: 원본 sentence-feedback-layout 전체와 이미지 matrix/production을 각각 맞는 프로필에서 Chromium/WebKit으로 실행한다. 빈 의도는 비활성·입력 후 활성·입력만으로 AI POST0, 현재 UUID/모델/문맥·영수증 계약 및 이후 레이아웃 검사 완료를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 2,
+            "updatedAt": "2026-11-18T05:28:17.907Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/t2-result.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "두 엔진 원본 전체 검사와 실패 이력 확보",
+            "description": "현재 실패한 AI 결과 검사 fixture와 이미지 검사 프로필을 보완한 뒤 도입 전 회귀 기준선을 확보한다.",
+            "details": "두 원본 검사를 끝까지 통과시킨 로그/캡처와 AST/동작 기준선을 보관한다. 기존 실패4회를 삭제하거나 새 성공률에 덮어쓰지 않는다. 미해결이면 T3 이후를 진행하지 않는다.\n완료 검사: 원본 sentence-feedback-layout 전체와 이미지 matrix/production을 각각 맞는 프로필에서 Chromium/WebKit으로 실행한다. 빈 의도는 비활성·입력 후 활성·입력만으로 AI POST0, 현재 UUID/모델/문맥·영수증 계약 및 이후 레이아웃 검사 완료를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 2,
+            "updatedAt": "2026-11-18T05:28:17.907Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/t2-result.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T05:28:17.907Z",
+        "implementationEvidence": [
+          "outputs/astryx-adoption-implementation-20261118/t2-result.json"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "프로젝트 Astryx 버전·peer·Codex 설정 준비",
+        "description": "검증된 최신 제품 checkout에서 npm/lockfile을 유지하며 필요한 패키지와 문서 접근을 설정한다.",
+        "details": "검토 버전0.7.16의 Core/CLI/theme-neutral을 같은 버전으로 고정하고 StyleX peer·lucide 해소·라이선스·실제 배포 의존성을 확인한다. npm run astryx 진입점과 필요한 Codex agents block만 추가하며 기존 지침을 보존한다. 전역 CLI 버전이 프로젝트/CI를 바꾸지 못하도록 로컬 버전 응답을 확인한다.",
+        "testStrategy": "npm ls·lockfile diff·로컬 CLI answeredBy·TypeScript subpath resolution을 확인한다. 새 설치 때문에 검증이 필요한 타입/린트/Worker 빌드를 실행한다. prebuilt CSS만 쓸 때 StyleX compiler plugin/heroicons/차트 패키지를 추가하지 않는다.",
+        "status": "done",
+        "dependencies": [
+          1,
+          2
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "정확한 버전과 peer·라이선스 확인",
+            "description": "검증된 최신 제품 checkout에서 npm/lockfile을 유지하며 필요한 패키지와 문서 접근을 설정한다.",
+            "details": "Core/CLI/theme 버전 및 @stylexjs/stylex peer를 고정하고 설치 결과를 lockfile로 검토한다. 호환 범위 변화나 취약점은 별도로 기록한다.\n완료 검사: npm ls·lockfile diff·로컬 CLI answeredBy·TypeScript subpath resolution을 확인한다. 새 설치 때문에 검증이 필요한 타입/린트/Worker 빌드를 실행한다. prebuilt CSS만 쓸 때 StyleX compiler plugin/heroicons/차트 패키지를 추가하지 않는다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 3,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              "work/astryx-adoption-20261118/.sites-runtime/astryx-peers.txt",
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "로컬 CLI·Codex 안내와 기존 지침 보존",
+            "description": "검증된 최신 제품 checkout에서 npm/lockfile을 유지하며 필요한 패키지와 문서 접근을 설정한다.",
+            "details": "npm run astryx 및 init --features agents --agent codex의 실제 diff를 검토한다. 사용자 규칙·Site 식별자·DB 바인딩·실행 설정을 덮어쓰지 않는다.\n완료 검사: npm ls·lockfile diff·로컬 CLI answeredBy·TypeScript subpath resolution을 확인한다. 새 설치 때문에 검증이 필요한 타입/린트/Worker 빌드를 실행한다. prebuilt CSS만 쓸 때 StyleX compiler plugin/heroicons/차트 패키지를 추가하지 않는다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 3,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              "work/astryx-adoption-20261118/.sites-runtime/astryx-doctor-1.log",
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "Vinext·Worker·RSC 설치 호환 검사",
+            "description": "검증된 최신 제품 checkout에서 npm/lockfile을 유지하며 필요한 패키지와 문서 접근을 설정한다.",
+            "details": "현재 Node22/24 CI 계약과 npm lockfile을 유지하며 실제 타입/빌드·SSR 환경에서 패키지가 해소되는지 확인한다. 선언상 React peer 일치만으로 완료하지 않는다.\n완료 검사: npm ls·lockfile diff·로컬 CLI answeredBy·TypeScript subpath resolution을 확인한다. 새 설치 때문에 검증이 필요한 타입/린트/Worker 빌드를 실행한다. prebuilt CSS만 쓸 때 StyleX compiler plugin/heroicons/차트 패키지를 추가하지 않는다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 3,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T06:18:43.615Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-implementation.json"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "CSS layer·전역 선택자·토큰 충돌 격리",
+        "description": "기존 화면과 Astryx 컴포넌트가 공존하도록 CSS 우선순위부터 검증한다.",
+        "details": "globals.css의 Tailwind import 앞에서 layer 순서를 먼저 정한다. study-design.css의 unlayered button/input/textarea/select/reset 규칙이 Astryx를 덮는 경로를 범위/레이어로 제한한다. --color-accent/--color-border 충돌을 computed style로 확인한다. 기존 @theme inline/:root를 유지하고 초기 tailwind-theme.css bridge는 생략한다. 큰 CSS 일괄 삭제/정규식 치환은 금지한다.",
+        "testStrategy": "기존 화면과 foundation의 padding/border/font/focus/background/disabled 계산 스타일, CSS 로드 순서, 전체·지연 청크의 스타일 포함을 비교한다. 변경 영향 화면을 양 엔진·320~1440·100/200%에서 검사한다.",
+        "status": "done",
+        "dependencies": [
+          3
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "reset·CSS import와 layer 순서 실측",
+            "description": "기존 화면과 Astryx 컴포넌트가 공존하도록 CSS 우선순위부터 검증한다.",
+            "details": "실제 빌드가 출력하는 CSS 순서를 확인한다. import hoist 여부를 보고 필요할 때만 최우선 layer 파일을 둔다. padding이0이 되는 실패를 검출한다.\n완료 검사: 기존 화면과 foundation의 padding/border/font/focus/background/disabled 계산 스타일, CSS 로드 순서, 전체·지연 청크의 스타일 포함을 비교한다. 변경 영향 화면을 양 엔진·320~1440·100/200%에서 검사한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 4,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/css-final",
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "전역 조작 스타일의 공존 범위 제한",
+            "description": "기존 화면과 Astryx 컴포넌트가 공존하도록 CSS 우선순위부터 검증한다.",
+            "details": "기존 버튼·필드·링크·focus 규칙이 미이관 화면과 새 컴포넌트에 미치는 영향을 대조한다. 최소 범위만 수정하며 저장/닫기/반응형 규칙을 보존한다.\n완료 검사: 기존 화면과 foundation의 padding/border/font/focus/background/disabled 계산 스타일, CSS 로드 순서, 전체·지연 청크의 스타일 포함을 비교한다. 변경 영향 화면을 양 엔진·320~1440·100/200%에서 검사한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 4,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "Tailwind·Astryx 의미 토큰 충돌 확인",
+            "description": "기존 화면과 Astryx 컴포넌트가 공존하도록 CSS 우선순위부터 검증한다.",
+            "details": "accent/border와 radius/spacing/shadow 매핑을 검사한다. bridge를 무조건 추가하거나 기존 토큰 전체를 재명명하지 않고 실제 충돌만 분리한다.\n완료 검사: 기존 화면과 foundation의 padding/border/font/focus/background/disabled 계산 스타일, CSS 로드 순서, 전체·지연 청크의 스타일 포함을 비교한다. 변경 영향 화면을 양 엔진·320~1440·100/200%에서 검사한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 4,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "로딩·동적 화면 CSS 회귀 검사",
+            "description": "기존 화면과 Astryx 컴포넌트가 공존하도록 CSS 우선순위부터 검증한다.",
+            "details": "SSR 최초 로딩, lazy 학습/문법/편집/백업의 스타일 순서와 FOUC·기존 화면 외형을 확인한다. legacy와 foundation 모두 정상이어야 통과한다.\n완료 검사: 기존 화면과 foundation의 padding/border/font/focus/background/disabled 계산 스타일, CSS 로드 순서, 전체·지연 청크의 스타일 포함을 비교한다. 변경 영향 화면을 양 엔진·320~1440·100/200%에서 검사한다.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 4,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T06:18:43.615Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-implementation.json"
+        ]
+      },
+      {
+        "id": 5,
+        "title": "하루단어 테마·크기·한국어·상태 표현 구현",
+        "description": "기본 Astryx 외형 대신 승인된 하루단어 디자인을 유지하는 정적 테마를 준비한다.",
+        "details": "화이트/차콜/라임과 의미별 상태색·DM Sans/Noto Sans KR을 유지한다. mode=light, 본문/입력16px·보조14px·조작44/48px·focus·긴 한국어 줄바꿈을 정의한다. built theme/CSS를 사용하고 새 다크모드·설정 저장 필드를 만들지 않는다. 라임 배경과 on-accent/hover/focus/disabled 대비를 함께 검증한다.",
+        "testStrategy": "기본28/32/36px·14px 값이 남지 않는지 대상별 computed style과 터치 영역으로 확인한다. 두 엔진/모바일·200%·reduced motion·axe·키보드를 검사하고 한국어 로딩/닫기/취소/오류 문구와 상태 의미를 대조한다.",
+        "status": "done",
+        "dependencies": [
+          4
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "화이트·차콜·라임과 글꼴 정적 테마",
+            "description": "기본 Astryx 외형 대신 승인된 하루단어 디자인을 유지하는 정적 테마를 준비한다.",
+            "details": "검토된 neutral 기반으로 팔레트/전경색을 함께 정의하고 production theme build와 SSR 최초 표시를 확인한다. mode=light로 기존 화면과 일치시킨다.\n완료 검사: 기본28/32/36px·14px 값이 남지 않는지 대상별 computed style과 터치 영역으로 확인한다. 두 엔진/모바일·200%·reduced motion·axe·키보드를 검사하고 한국어 로딩/닫기/취소/오류 문구와 상태 의미를 대조한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 5,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "글자·조작 높이·초점·줄바꿈 기준 반영",
+            "description": "기본 Astryx 외형 대신 승인된 하루단어 디자인을 유지하는 정적 테마를 준비한다.",
+            "details": "본문/입력16·보조14·작은 조작44·주 행동48을 실제 DOM에서 확인한다. 한국어 긴 행동/상태를 강제 생략하거나 버튼을 줄여 해결하지 않는다.\n완료 검사: 기본28/32/36px·14px 값이 남지 않는지 대상별 computed style과 터치 영역으로 확인한다. 두 엔진/모바일·200%·reduced motion·axe·키보드를 검사하고 한국어 로딩/닫기/취소/오류 문구와 상태 의미를 대조한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 5,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "한국어 내장 문구와 상태 의미 연결",
+            "description": "기본 Astryx 외형 대신 승인된 하루단어 디자인을 유지하는 정적 테마를 준비한다.",
+            "details": "사용하는 locale/catalog 지원 여부를 확인해 필요한 명시 문구/provider를 적용한다. 기록 완료·독립 성공·미측정·문법 완료와 실제 실패를 혼동하지 않는다.\n완료 검사: 기본28/32/36px·14px 값이 남지 않는지 대상별 computed style과 터치 영역으로 확인한다. 두 엔진/모바일·200%·reduced motion·axe·키보드를 검사하고 한국어 로딩/닫기/취소/오류 문구와 상태 의미를 대조한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 5,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "접근성·대비·모션 검증",
+            "description": "기본 Astryx 외형 대신 승인된 하루단어 디자인을 유지하는 정적 테마를 준비한다.",
+            "details": "색만으로 상태를 전달하지 않고 텍스트/아이콘을 유지한다. hover/press/focus/disabled·100/200%와 reduced motion, 키보드 사용을 캡처한다.\n완료 검사: 기본28/32/36px·14px 값이 남지 않는지 대상별 computed style과 터치 영역으로 확인한다. 두 엔진/모바일·200%·reduced motion·axe·키보드를 검사하고 한국어 로딩/닫기/취소/오류 문구와 상태 의미를 대조한다.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 5,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T06:18:43.615Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-implementation.json"
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Foundation 통과 판정과 단계 확대 허용",
+        "description": "실제 Astryx를 포함한 빌드·CSS·테마 검증을 통과해야 일반 화면 이관을 시작한다.",
+        "details": "Button/TextInput/TextArea/Card/Selector/Banner와 기존 화면을 함께 렌더링하는 개발용 검증 범위를 만든다. 수정할 기존 화면의 block/component를 CLI에서 먼저 읽는다. 성공 빌드·SSR/hydration·오류 상시노출·실제 조작 무요청/중복방지 증거 없이는 T7 이후로 확대하지 않는다. 검증 경로를 운영 사용자 흐름에 노출하지 않는다.",
+        "testStrategy": "관련 회귀·타입·린트·Worker build와 실제 두 브라우저를 실행한다. 44/48px·16px·padding/border·한국어·키보드·aria-disabled의 실제 무동작·Banner collapsible=false를 확인한다. 실패 시 foundation만 수정하고 제품 확대를 보류한다.",
+        "status": "done",
+        "dependencies": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Foundation 구성과 부정 조건 준비",
+            "description": "실제 Astryx를 포함한 빌드·CSS·테마 검증을 통과해야 일반 화면 이관을 시작한다.",
+            "details": "빈 padding/reset 충돌·잘못된 글자 크기·숨은 오류 행동·비활성 재실행을 검출할 관찰 조건을 준비한다. 컴포넌트 사용 예를 다시 읽어 실제 props를 사용한다.\n완료 검사: 관련 회귀·타입·린트·Worker build와 실제 두 브라우저를 실행한다. 44/48px·16px·padding/border·한국어·키보드·aria-disabled의 실제 무동작·Banner collapsible=false를 확인한다. 실패 시 foundation만 수정하고 제품 확대를 보류한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 6,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              "outputs/astryx-adoption-implementation-20261118/foundation",
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "실제 빌드·SSR·hydration·브라우저 검증",
+            "description": "실제 Astryx를 포함한 빌드·CSS·테마 검증을 통과해야 일반 화면 이관을 시작한다.",
+            "details": "Astryx가 포함된 제품 빌드에서 두 엔진과 기존 화면 공존을 검사한다. 기존 v149 기준선 통과를 새 도입 성공으로 재사용하지 않는다.\n완료 검사: 관련 회귀·타입·린트·Worker build와 실제 두 브라우저를 실행한다. 44/48px·16px·padding/border·한국어·키보드·aria-disabled의 실제 무동작·Banner collapsible=false를 확인한다. 실패 시 foundation만 수정하고 제품 확대를 보류한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 6,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "G1 근거와 확대/보류 판정",
+            "description": "실제 Astryx를 포함한 빌드·CSS·테마 검증을 통과해야 일반 화면 이관을 시작한다.",
+            "details": "검사별 명령/종료코드·캡처·입력/빌드 지문·미검증 범위를 남긴다. 해당 gate가 passed일 때만 후속 작업을 시작하고 실패 시 이전 UI를 유지한다.\n완료 검사: 관련 회귀·타입·린트·Worker build와 실제 두 브라우저를 실행한다. 44/48px·16px·padding/border·한국어·키보드·aria-disabled의 실제 무동작·Banner collapsible=false를 확인한다. 실패 시 foundation만 수정하고 제품 확대를 보류한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 6,
+            "updatedAt": "2026-11-18T06:18:43.615Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T06:18:43.615Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-implementation.json"
+        ]
+      },
+      {
+        "id": 7,
+        "title": "공통 프레임·4탭·스크롤·초점 이관",
+        "description": "기존 하단 네 탭과 window 스크롤·이동 보호를 유지하는 AppShell/TabList 구성을 적용한다.",
+        "details": "AppShell height=auto 및 기본 mobile drawer 비사용을 우선 검증한다. 기존 NavigationProvider·useTabPosition·guard·플러시를 그대로 거친 상태만 선택한다. main/skip link 중복을 방지하고 초기로딩·키보드가 열린 하단 메뉴 처리·safe area를 보존한다.\n\n2026-11-18 실제 실행 결과: 실제 AppShell/TabList·단일 main/한국어 skip·승인된 선택/중복차단·640px 하단4탭·window 스크롤/초점·키보드·Back/Forward 검증 완료. Node22 단위926/926·Node22/24 타입/Worker 빌드·린트(기존15경고) 통과. 관련 브라우저 래퍼24회 exit0, 기존 화면 계산 스타일16/16 일치. 실기기/최종품질/게시는 미완료. 근거: docs/ASTRYX_T7_IMPLEMENTATION_20261118.md 및 .taskmaster/docs/astryx-adoption-t7-implementation.json.",
+        "testStrategy": "design/ui-plan-contract/navigation 회귀를 두 엔진에서 수행한다. 탭별 필터/펼침/스크롤/초점, 방향키, Back/Forward/스와이프, 저장 중 이동 차단,200%·키보드 모사를 검사한다.",
+        "status": "done",
+        "dependencies": [
+          6
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "AppShell과 기존 main/SSR 경계 정리",
+            "description": "기존 하단 네 탭과 window 스크롤·이동 보호를 유지하는 AppShell/TabList 구성을 적용한다.",
+            "details": "서버 page/layout을 불필요하게 client로 바꾸지 않는다. 높이 auto·단일 main·skip link와 시작 로딩을 기존 상태 구조에 연결한다.\n완료 검사: design/ui-plan-contract/navigation 회귀를 두 엔진에서 수행한다. 탭별 필터/펼침/스크롤/초점, 방향키, Back/Forward/스와이프, 저장 중 이동 차단,200%·키보드 모사를 검사한다.\n\n2026-11-18 검증: AppShell height=auto/mobileNav=false, page/layout 서버 경계 유지, main/skip 각각1·초기화 StartupScreen 분리. startup-render/design/집중 QA 두 엔진 통과. 근거: outputs/astryx-t7-20261118.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 7,
+            "updatedAt": "2026-11-18T07:34:17.549Z",
+            "implementationEvidence": [
+              "outputs/astryx-t7-20261118/shell-attempt3",
+              ".taskmaster/docs/astryx-adoption-t7-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "하단4탭과 guarded 상태 연결",
+            "description": "기존 하단 네 탭과 window 스크롤·이동 보호를 유지하는 AppShell/TabList 구성을 적용한다.",
+            "details": "TabList의 role/tab/panel을 명시하고 모바일 네 탭 배치와 640px 기존 기준을 유지한다. drawer로 대체하지 않는다.\n완료 검사: design/ui-plan-contract/navigation 회귀를 두 엔진에서 수행한다. 탭별 필터/펼침/스크롤/초점, 방향키, Back/Forward/스와이프, 저장 중 이동 차단,200%·키보드 모사를 검사한다.\n\n2026-11-18 검증: 실제4 Tab/tabpanel 양방향ARIA와640/641 경계·100/200%·Arrow/Home/End 검증. 저장 대기/503 실패 중 선택 유지·중복 focus/click 차단·거절 초점·재시도 후 선택 통과. 근거: outputs/astryx-t7-20261118.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 7,
+            "updatedAt": "2026-11-18T07:34:17.549Z",
+            "implementationEvidence": [
+              "outputs/astryx-t7-20261118/shell-attempt3",
+              ".taskmaster/docs/astryx-adoption-t7-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "스크롤·초점·탭별 상태 복원",
+            "description": "기존 하단 네 탭과 window 스크롤·이동 보호를 유지하는 AppShell/TabList 구성을 적용한다.",
+            "details": "window scroll 복원과 기존 search/expanded 상태를 유지하고 focus 복원이 새 이동을 유발하지 않도록 회귀 검사한다.\n완료 검사: design/ui-plan-contract/navigation 회귀를 두 엔진에서 수행한다. 탭별 필터/펼침/스크롤/초점, 방향키, Back/Forward/스와이프, 저장 중 이동 차단,200%·키보드 모사를 검사한다.\n\n2026-11-18 검증: 기존 useTabPosition/flush 훅 지문 유지. 양 엔진에서 검색·기록 펼침·정확한 window 스크롤·inactive 초점 재이동 방지·저장된 문법 답안 유지 통과. 근거: outputs/astryx-t7-20261118.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 7,
+            "updatedAt": "2026-11-18T07:34:17.549Z",
+            "implementationEvidence": [
+              "outputs/astryx-t7-20261118/visual-attempt3",
+              ".taskmaster/docs/astryx-adoption-t7-implementation.json"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "키보드·safe area·Back 회귀",
+            "description": "기존 하단 네 탭과 window 스크롤·이동 보호를 유지하는 AppShell/TabList 구성을 적용한다.",
+            "details": "키보드가 입력을 가리지 않고 저장/학습 guard와 스와이프가 같은 경계를 따르는지 확인한다. 실제 기기 검사는 별도 gate로 남긴다.\n완료 검사: design/ui-plan-contract/navigation 회귀를 두 엔진에서 수행한다. 탭별 필터/펼침/스크롤/초점, 방향키, Back/Forward/스와이프, 저장 중 이동 차단,200%·키보드 모사를 검사한다.\n\n2026-11-18 검증: 키보드 모사·320~1440/200%·44px skip·Back/Forward/스와이프·저장/복원 guard 통과. safe-area 식 및0 fallback6px 유지. 실제 iPhone/IME/VoiceOver·비영 inset 미검증. 근거: outputs/astryx-t7-20261118.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 7,
+            "updatedAt": "2026-11-18T07:34:17.549Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t7-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T07:34:17.549Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t7-implementation.json"
+        ]
+      },
+      {
+        "id": 8,
+        "title": "일반 조작·상태·오류 표현 공통 이관",
+        "description": "행동·입력·선택·진행·오류 컴포넌트의 계약을 맞추고 단계별 공존 규칙을 확정한다.",
+        "details": "label/isDisabled/isLoading/onChange(value,event)와 기존 native 속성/refs를 대조한다. busy·저장·명시 AI 요청은 기존 훅을 유지한다. aria-disabled가 실제 요청을 막는지 검증한다. 오류와 복구 버튼은 항상 보이며 Banner의 기본 접힘/Toast만 표시하는 방식은 금지한다.\n2026-11-18 T8 검증 완료: 실제 공통 어댑터·표현/문맥 입력·진행·저장 오류/백업/진단·상태 연결. 단위926, Node22/24 타입/빌드, lint0오류/기존15경고, 관련19스크립트×2엔진38회 통과. API/저장 훅 등190파일 지문 보존. docs/ASTRYX_T8_IMPLEMENTATION_20261118.md 참조.",
+        "testStrategy": "클릭/Enter/Space/연타/submit·비활성 및 로딩 중 요청수·중복 저장0, labels/refs/maxlength/readOnly, 긴 오류·복구/백업행동 노출을 검사한다. 테스트를 새 DOM 의미에 맞추되 사용자 행동 단언을 유지한다.",
+        "status": "done",
+        "dependencies": [
+          6,
+          7
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Button·IconButton·입력·선택 계약 대조",
+            "description": "행동·입력·선택·진행·오류 컴포넌트의 계약을 맞추고 단계별 공존 규칙을 확정한다.",
+            "details": "원래 event 기반 핸들러를 value 계약에 연결하고 refs/form/required/길이 제한을 유지한다. 자동 changeAction을 도메인 저장/AI에 연결하지 않는다.\n완료 검사: 클릭/Enter/Space/연타/submit·비활성 및 로딩 중 요청수·중복 저장0, labels/refs/maxlength/readOnly, 긴 오류·복구/백업행동 노출을 검사한다. 테스트를 새 DOM 의미에 맞추되 사용자 행동 단언을 유지한다.\nT8 완료·2엔진 공통 계약 및 실제 앱 회귀 통과. .taskmaster/docs/astryx-adoption-t8-implementation.json 참조.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 8,
+            "updatedAt": "2026-11-18T08:44:49.818Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t8-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "비활성·로딩의 실제 중복/재실행 차단",
+            "description": "행동·입력·선택·진행·오류 컴포넌트의 계약을 맞추고 단계별 공존 규칙을 확정한다.",
+            "details": "aria-disabled와 native disabled 차이를 다루고 포커스·키보드·연타에서도 요청수가 증가하지 않는지 확인한다.\n완료 검사: 클릭/Enter/Space/연타/submit·비활성 및 로딩 중 요청수·중복 저장0, labels/refs/maxlength/readOnly, 긴 오류·복구/백업행동 노출을 검사한다. 테스트를 새 DOM 의미에 맞추되 사용자 행동 단언을 유지한다.\nT8 완료·2엔진 공통 계약 및 실제 앱 회귀 통과. .taskmaster/docs/astryx-adoption-t8-implementation.json 참조.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 8,
+            "updatedAt": "2026-11-18T08:44:49.818Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t8-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "오류·진행·배지와 복구 행동 유지",
+            "description": "행동·입력·선택·진행·오류 컴포넌트의 계약을 맞추고 단계별 공존 규칙을 확정한다.",
+            "details": "Banner 본문은 필요한 경우 collapsible=false. 저장 실패·미저장·충돌/불확실 결과는 상시 표시하고 기록완료/성공/미측정 의미를 유지한다.\n완료 검사: 클릭/Enter/Space/연타/submit·비활성 및 로딩 중 요청수·중복 저장0, labels/refs/maxlength/readOnly, 긴 오류·복구/백업행동 노출을 검사한다. 테스트를 새 DOM 의미에 맞추되 사용자 행동 단언을 유지한다.\nT8 완료·2엔진 공통 계약 및 실제 앱 회귀 통과. .taskmaster/docs/astryx-adoption-t8-implementation.json 참조.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 8,
+            "updatedAt": "2026-11-18T08:44:49.818Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t8-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T08:44:49.818Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t8-implementation.json"
+        ]
+      },
+      {
+        "id": 9,
+        "title": "오늘·친숙도·읽기 화면 이관",
+        "description": "오늘의 날짜·목표·다음 행동과 친숙도 흐름을 기존 디자인으로 이관한다.",
+        "details": "TodayOverview/LearningAside/StatusBadge/Source 본문부터 카드·제목·텍스트를 교체한다. 배정·기록 완료·독립 성공·후보 없음·친숙도 답 공개 순서는 기존 계산을 사용한다. source dialog의 기존 보호 껍데기는 T15 전까지 유지한다.",
+        "testStrategy": "design/ui-density/ui-continuity·today-status/familiarity 회귀, 처음 행동의 가시성, 빈 상태의 다음 행동과 읽기 동작의 서버 state/revision 불변을 확인한다.",
+        "status": "done",
+        "dependencies": [
+          7,
+          8
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "오늘·진행·보조 정보의 정적 표현",
+            "description": "오늘의 날짜·목표·다음 행동과 친숙도 흐름을 기존 디자인으로 이관한다.",
+            "details": "날짜·목표·학습 완료/미측정·다음 행동 우선순위와 라임 주 행동을 유지한다.\n완료 검사: design/ui-density/ui-continuity·today-status/familiarity 회귀, 처음 행동의 가시성, 빈 상태의 다음 행동과 읽기 동작의 서버 state/revision 불변을 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 9,
+            "updatedAt": "2026-11-18T09:47:32.824Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "친숙도·범위 준비와 답 공개 보존",
+            "description": "오늘의 날짜·목표·다음 행동과 친숙도 흐름을 기존 디자인으로 이관한다.",
+            "details": "선택·진행 UI만 바꾸며 최초 답/친숙도 확정·목표 배정을 혼합하지 않는다.\n완료 검사: design/ui-density/ui-continuity·today-status/familiarity 회귀, 처음 행동의 가시성, 빈 상태의 다음 행동과 읽기 동작의 서버 state/revision 불변을 확인한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 9,
+            "updatedAt": "2026-11-18T09:47:32.824Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "빈 상태·출처·읽기 무쓰기 확인",
+            "description": "오늘의 날짜·목표·다음 행동과 친숙도 흐름을 기존 디자인으로 이관한다.",
+            "details": "빈 목록에서 설정/친숙도/학습 홈으로 이동하는 경로를 유지하고 자료 출처·라이선스·발음 정책을 보존한다.\n완료 검사: design/ui-density/ui-continuity·today-status/familiarity 회귀, 처음 행동의 가시성, 빈 상태의 다음 행동과 읽기 동작의 서버 state/revision 불변을 확인한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 9,
+            "updatedAt": "2026-11-18T09:47:32.824Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T09:47:32.824Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+        ]
+      },
+      {
+        "id": 10,
+        "title": "단어장 검색·목록·뜻별 편집 이관",
+        "description": "검색·필터·10/30개 페이지·뜻별 편집을 변경된 조작 계약에 맞춰 이관한다.",
+        "details": "WordLibrary와 word-editor/personal-word를 좁게 교체한다. 뜻 키/학습자료·성적·중복 submit·필터/페이지/스크롤 복원은 유지한다. 단어별 내용을 원래 목록의 가독성과 반응형으로 표시하며 Table을 동일 외형이라고 가정하지 않는다.",
+        "testStrategy": "ui-density/ui-continuity/editor-save/ui-plan-contract·뜻별 성적/중복 제출 회귀, 320~1440/200%·포커스·입력 유지·서버 저장과 재조회 일치를 확인한다.",
+        "status": "done",
+        "dependencies": [
+          8,
+          9
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "검색·필터·페이지·목록 이관",
+            "description": "검색·필터·10/30개 페이지·뜻별 편집을 변경된 조작 계약에 맞춰 이관한다.",
+            "details": "검색을 우선 노출하고 10/30개·상하 페이지·뜻/품사/수준/친숙도·복귀 위치를 보존한다.\n완료 검사: ui-density/ui-continuity/editor-save/ui-plan-contract·뜻별 성적/중복 제출 회귀, 320~1440/200%·포커스·입력 유지·서버 저장과 재조회 일치를 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 10,
+            "updatedAt": "2026-11-18T10:42:54.873Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "뜻별 편집·개인 단어 입력 연결",
+            "description": "검색·필터·10/30개 페이지·뜻별 편집을 변경된 조작 계약에 맞춰 이관한다.",
+            "details": "기존 use-editor-submission·draft/ref/dirty를 유지해 뜻/표현/해석/메모 입력·중복 제출·저장 실패를 보호한다.\n완료 검사: ui-density/ui-continuity/editor-save/ui-plan-contract·뜻별 성적/중복 제출 회귀, 320~1440/200%·포커스·입력 유지·서버 저장과 재조회 일치를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 10,
+            "updatedAt": "2026-11-18T10:42:54.873Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "목록·편집·읽기/쓰기 회귀",
+            "description": "검색·필터·10/30개 페이지·뜻별 편집을 변경된 조작 계약에 맞춰 이관한다.",
+            "details": "성적/뜻 키/서버 revision·초점 복귀·긴 단어/한국어와200%를 검증한다. T15 전까지 시트 동작을 유지한다.\n완료 검사: ui-density/ui-continuity/editor-save/ui-plan-contract·뜻별 성적/중복 제출 회귀, 320~1440/200%·포커스·입력 유지·서버 저장과 재조회 일치를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 10,
+            "updatedAt": "2026-11-18T10:42:54.873Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T10:42:54.873Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+        ]
+      },
+      {
+        "id": 11,
+        "title": "단어 학습 입력·초안·AI 결과 이관",
+        "description": "기억·익히기·양방향 회상·문장 작성과 AI 표시를 이관하되 학습 판정/저장 훅은 유지한다.",
+        "details": "4학습 단계·힌트·최초 답·교정 비교·한국어 의도·명시 요청·영수증 재조회와 초안 키/계정 분리를 유지한다. 입력만으로 AI 호출하지 않는다. 과거 Google/Groq 기록은 읽되 신규 호출/대체는 금지한다. 수정된 원본 AI 레이아웃 검사 전체를 다시 사용한다.",
+        "testStrategy": "study-layout80조건, local-draft22확인, draft-interaction/request/feedback-layout 회귀를 양 엔진에서 실행한다. reload/강제종료/2탭/계정 전환·한글 composition·공백/빈값·실패/중복0를 확인한다. 합성 AI만 사용한다.",
+        "status": "done",
+        "dependencies": [
+          8,
+          10
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "기억·익히기·회상 단계의 조작 이관",
+            "description": "기억·익히기·양방향 회상·문장 작성과 AI 표시를 이관하되 학습 판정/저장 훅은 유지한다.",
+            "details": "답 숨김/공개·도움·en/ko·최초 답·타이머와 기존 제출 순서를 바꾸지 않는다.\n완료 검사: study-layout80조건, local-draft22확인, draft-interaction/request/feedback-layout 회귀를 양 엔진에서 실행한다. reload/강제종료/2탭/계정 전환·한글 composition·공백/빈값·실패/중복0를 확인한다. 합성 AI만 사용한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 11,
+            "updatedAt": "2026-11-18T11:50:43.841Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "문장·한국어 의도와 입력 보관 연결",
+            "description": "기억·익히기·양방향 회상·문장 작성과 AI 표시를 이관하되 학습 판정/저장 훅은 유지한다.",
+            "details": "value/ref·500/2000자 한도·composition·빈값 삭제·초안 키·기기 보관 정책을 유지한다.\n완료 검사: study-layout80조건, local-draft22확인, draft-interaction/request/feedback-layout 회귀를 양 엔진에서 실행한다. reload/강제종료/2탭/계정 전환·한글 composition·공백/빈값·실패/중복0를 확인한다. 합성 AI만 사용한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 11,
+            "updatedAt": "2026-11-18T11:50:43.841Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "명시 AI·영수증·이전 결과 표시 유지",
+            "description": "기억·익히기·양방향 회상·문장 작성과 AI 표시를 이관하되 학습 판정/저장 훅은 유지한다.",
+            "details": "AI는 버튼으로만 실행하고 응답 유실 후 같은 UUID 조회와 교정 보류/비교·과거 제공사 표기를 보존한다.\n완료 검사: study-layout80조건, local-draft22확인, draft-interaction/request/feedback-layout 회귀를 양 엔진에서 실행한다. reload/강제종료/2탭/계정 전환·한글 composition·공백/빈값·실패/중복0를 확인한다. 합성 AI만 사용한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 11,
+            "updatedAt": "2026-11-18T11:50:43.841Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "종료·재시도·초안/성적 분리 회귀",
+            "description": "기억·익히기·양방향 회상·문장 작성과 AI 표시를 이관하되 학습 판정/저장 훅은 유지한다.",
+            "details": "저장 중/실패는 중립, 성공 확인 후 완료 표시. 새로고침·강제 종료·2탭/계정 전환과 원본 feedback-layout 전체를 검사한다.\n완료 검사: study-layout80조건, local-draft22확인, draft-interaction/request/feedback-layout 회귀를 양 엔진에서 실행한다. reload/강제종료/2탭/계정 전환·한글 composition·공백/빈값·실패/중복0를 확인한다. 합성 AI만 사용한다.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 11,
+            "updatedAt": "2026-11-18T11:50:43.841Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T11:50:43.841Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+        ]
+      },
+      {
+        "id": 12,
+        "title": "문법 목록·v4 수업·작성·진도 이관",
+        "description": "15수업·135문항의 기존 내용과 진도/초안 계약을 유지하며 문법 화면을 이관한다.",
+        "details": "목록 묶음/필터·읽기·선택 문항·쓰기·자기 점검·요약을 교체한다. 단계 표시는 건너뛰기 행동이 아니며 최초/최근 답·도움·v2/v3/v4 저장 호환·문법 상황 문맥을 유지한다. 문법 완료를 숙달이나 단어 목표로 합산하지 않는다.",
+        "testStrategy": "grammar-ui/grammar-v4/호환 회귀와 local-draft/navigation을 양 엔진에서 실행한다.15수업135문항, 저장/재조회·답/자료 불변,200%·axe·키보드·빈 필터와 뒤로 가기를 확인한다.",
+        "status": "done",
+        "dependencies": [
+          11
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "문법 목록·묶음·필터·읽기 이관",
+            "description": "15수업·135문항의 기존 내용과 진도/초안 계약을 유지하며 문법 화면을 이관한다.",
+            "details": "품사/기호·자료·필터/그룹 복귀와 모바일 현재 단계/진행 표시를 유지한다.\n완료 검사: grammar-ui/grammar-v4/호환 회귀와 local-draft/navigation을 양 엔진에서 실행한다.15수업135문항, 저장/재조회·답/자료 불변,200%·axe·키보드·빈 필터와 뒤로 가기를 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 12,
+            "updatedAt": "2026-11-18T12:28:24.081Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "선택 문항·피드백·최초 답 유지",
+            "description": "15수업·135문항의 기존 내용과 진도/초안 계약을 유지하며 문법 화면을 이관한다.",
+            "details": "radio/선택 상태와 최초/최근 답·도움/시도·오답 이유를 유지하고 단계 건너뛰기를 만들지 않는다.\n완료 검사: grammar-ui/grammar-v4/호환 회귀와 local-draft/navigation을 양 엔진에서 실행한다.15수업135문항, 저장/재조회·답/자료 불변,200%·axe·키보드·빈 필터와 뒤로 가기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 12,
+            "updatedAt": "2026-11-18T12:28:24.081Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "작성·자기 점검·AI·문맥 초안 이관",
+            "description": "15수업·135문항의 기존 내용과 진도/초안 계약을 유지하며 문법 화면을 이관한다.",
+            "details": "문법 상황 문맥을 단어 한국어 의도와 합치지 않는다. 명시 AI와 실패/불확실/영수증 경계를 유지한다.\n완료 검사: grammar-ui/grammar-v4/호환 회귀와 local-draft/navigation을 양 엔진에서 실행한다.15수업135문항, 저장/재조회·답/자료 불변,200%·axe·키보드·빈 필터와 뒤로 가기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 12,
+            "updatedAt": "2026-11-18T12:28:24.081Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "15수업·135문항·버전 호환 회귀",
+            "description": "15수업·135문항의 기존 내용과 진도/초안 계약을 유지하며 문법 화면을 이관한다.",
+            "details": "v4 전체와 v2/v3 reader·draft·저장/재조회·기존 단어 기록 불변을 확인한다.\n완료 검사: grammar-ui/grammar-v4/호환 회귀와 local-draft/navigation을 양 엔진에서 실행한다.15수업135문항, 저장/재조회·답/자료 불변,200%·axe·키보드·빈 필터와 뒤로 가기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 12,
+            "updatedAt": "2026-11-18T12:28:24.081Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T12:28:24.081Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+        ]
+      },
+      {
+        "id": 13,
+        "title": "복습·기록·다시 보기·내보내기 이관",
+        "description": "주/월 회차·학습일 기록·다시 보기 UI를 이관하며 회차와 성적 의미를 유지한다.",
+        "details": "같은 기간의 서로 다른 회차·월말 대기·미측정·뜻별 기록을 유지한다.날짜→회차→단어 접기/필터/스크롤과 non-modal 기록 메뉴→백업창 전환을 보존한다. CSV/튜터용 출력 형식과 과거 학습 기록은 변경하지 않는다.",
+        "testStrategy": "review-calendar/review-extension/journal-navigation/ui-continuity/백업 메뉴 회귀,11카드·내용/메모·두 회상 방향·선택/초점 복원·읽기 무쓰기를 확인한다.",
+        "status": "done",
+        "dependencies": [
+          10,
+          11,
+          12
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "주/월 복습·이어 하기 회차 표시",
+            "description": "주/월 회차·학습일 기록·다시 보기 UI를 이관하며 회차와 성적 의미를 유지한다.",
+            "details": "동일 기간 회차 ID/번호와 미완료 재개를 유지하고 월말 대기를 일일 실패로 표시하지 않는다.\n완료 검사: review-calendar/review-extension/journal-navigation/ui-continuity/백업 메뉴 회귀,11카드·내용/메모·두 회상 방향·선택/초점 복원·읽기 무쓰기를 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 13,
+            "updatedAt": "2026-11-18T13:04:48.220Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "기록·다시 보기·필터/초점 복원",
+            "description": "주/월 회차·학습일 기록·다시 보기 UI를 이관하며 회차와 성적 의미를 유지한다.",
+            "details": "날짜/회차/단어 구조·11카드·뜻별 기록·문장 없는 보완점·200%를 유지한다.\n완료 검사: review-calendar/review-extension/journal-navigation/ui-continuity/백업 메뉴 회귀,11카드·내용/메모·두 회상 방향·선택/초점 복원·읽기 무쓰기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 13,
+            "updatedAt": "2026-11-18T13:04:48.220Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "기록 관리 메뉴·내보내기 계약",
+            "description": "주/월 회차·학습일 기록·다시 보기 UI를 이관하며 회차와 성적 의미를 유지한다.",
+            "details": "non-modal 메뉴와 창 전환·CSV/전체 백업·튜터 안내의 기존 형식/내용 보존을 검사한다. 복원 commit은 T16에서 다룬다.\n완료 검사: review-calendar/review-extension/journal-navigation/ui-continuity/백업 메뉴 회귀,11카드·내용/메모·두 회상 방향·선택/초점 복원·읽기 무쓰기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 13,
+            "updatedAt": "2026-11-18T13:04:48.220Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T13:04:48.220Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+        ]
+      },
+      {
+        "id": 14,
+        "title": "설정·모델·이미지·발음·도움말 이관",
+        "description": "보조 화면을 이관하되 별도 저장/위치/기기 기능 계약을 보존한다.",
+        "details": "목표/수준·모델 선택·기기 보관·출처,이미지 앞뒤/독립 위치 revision,기기 음성/IPA/사전 링크와 도움말을 유지한다. 실제 대상 브라우저의 anchor/Popover/light-dark 기능을 탐지한다. 검증 전 기존 Radix overlay를 유지하고 새 다크모드/AI 한도/외부 의존성을 추가하지 않는다.",
+        "testStrategy": "settings-dialog/image-practice matrix/resume/device-speech/pronunciation/용어 회귀,상태/저장/재조회·빈 목록·뜻별 이미지·앞면 답 비노출·키보드·뒤로 가기를 검사한다. 실제 음성 청취/실기기를 별도 기록한다.",
+        "status": "done",
+        "dependencies": [
+          9,
+          10,
+          12,
+          13
+        ],
+        "priority": "medium",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "설정·모델·기기 보관·출처 표현",
+            "description": "보조 화면을 이관하되 별도 저장/위치/기기 기능 계약을 보존한다.",
+            "details": "기존 목표/모델/로컬 초안 삭제/보관 정책·출처·진단 다운로드를 유지하고 새 저장 설정 필드를 만들지 않는다.\n완료 검사: settings-dialog/image-practice matrix/resume/device-speech/pronunciation/용어 회귀,상태/저장/재조회·빈 목록·뜻별 이미지·앞면 답 비노출·키보드·뒤로 가기를 검사한다. 실제 음성 청취/실기기를 별도 기록한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 14,
+            "updatedAt": "2026-11-18T14:06:56.301Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "이미지·기기 음성·IPA·도움말",
+            "description": "보조 화면을 이관하되 별도 저장/위치/기기 기능 계약을 보존한다.",
+            "details": "이미지 카드 앞면/독립 위치 저장과 뜻 매칭,기기 음성·사전 정책·도움말 노출을 유지한다. 새 이미지/음성 생성은 하지 않는다.\n완료 검사: settings-dialog/image-practice matrix/resume/device-speech/pronunciation/용어 회귀,상태/저장/재조회·빈 목록·뜻별 이미지·앞면 답 비노출·키보드·뒤로 가기를 검사한다. 실제 음성 청취/실기기를 별도 기록한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 14,
+            "updatedAt": "2026-11-18T14:06:56.301Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "구형 Safari·overlay 기능 탐지",
+            "description": "보조 화면을 이관하되 별도 저장/위치/기기 기능 계약을 보존한다.",
+            "details": "지원 기기와 feature detection/실제 메뉴 위치를 확인한다. 미확인 overlay는 기존 Radix 유지로 명시하고 실제 iPhone/VoiceOver를 에뮬레이션과 구분한다.\n완료 검사: settings-dialog/image-practice matrix/resume/device-speech/pronunciation/용어 회귀,상태/저장/재조회·빈 목록·뜻별 이미지·앞면 답 비노출·키보드·뒤로 가기를 검사한다. 실제 음성 청취/실기기를 별도 기록한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 14,
+            "updatedAt": "2026-11-18T14:06:56.301Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T14:06:56.301Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+        ]
+      },
+      {
+        "id": 15,
+        "title": "시트10종·중첩 확인·미저장 보호 이관",
+        "description": "일반 화면 검증 후 가장 위험한 대화상자와 닫기 동작을 한 종류씩 이관한다.",
+        "details": "SheetDialog의 dirty/blocked/child등록·async permit/close·중첩 AlertDialog·swipe/back/X/ESC 보호를 먼저 계약으로 유지한다. Astryx native dialog/top layer와 Radix portal/Provider/aria-hidden/초점의 혼용을 검증한다. form/info/required나 BottomSheet purpose만으로 기존 guard를 대체하지 않는다. 실제 이관 범위는 기존9종과 독립 이미지 연습을 합친10종이다.",
+        "testStrategy": "sheet-dismiss/sheet-body-swipe/sheet-motion/navigation/editor-save/settings-dialog·중첩 overlay 회귀.10시트×ESC/X/오버레이/Back/스와이프·저장 중 차단·실패 후 유지·취소/초점·visualViewport/200%와 실기기를 검사한다.",
+        "status": "done",
+        "dependencies": [
+          11,
+          12,
+          13,
+          14
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "기존 dirty/blocked/닫기 계약 대조",
+            "description": "일반 화면 검증 후 가장 위험한 대화상자와 닫기 동작을 한 종류씩 이관한다.",
+            "details": "서버 저장·AI·복원 중 닫기 불가와 미저장 확인·취소·중복 pending 확인을 명시하고 기존 훅/상태 소유권을 유지한다.\n완료 검사: sheet-dismiss/sheet-body-swipe/sheet-motion/navigation/editor-save/settings-dialog·중첩 overlay 회귀.10시트×ESC/X/오버레이/Back/스와이프·저장 중 차단·실패 후 유지·취소/초점·visualViewport/200%와 실기기를 검사한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 15,
+            "updatedAt": "2026-11-18T18:00:14.889Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t15-product-adapter/result.json",
+              "outputs/astryx-t9-t18-20261118/t15-final-source.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "native dialog·Radix 중첩·Provider 검증",
+            "description": "일반 화면 검증 후 가장 위험한 대화상자와 닫기 동작을 한 종류씩 이관한다.",
+            "details": "top layer/portal·스크린리더 트리·초점 trap/return·한국어 닫기와 중첩 확인/메뉴를 실제 브라우저에서 확인한다.\n완료 검사: sheet-dismiss/sheet-body-swipe/sheet-motion/navigation/editor-save/settings-dialog·중첩 overlay 회귀.10시트×ESC/X/오버레이/Back/스와이프·저장 중 차단·실패 후 유지·취소/초점·visualViewport/200%와 실기기를 검사한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 15,
+            "updatedAt": "2026-11-18T18:00:14.889Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t15-settings-source-paths-v2/results.json",
+              "outputs/astryx-t9-t18-20261118/t15-final-source.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "기존9종과 이미지 연습 시트 교체",
+            "description": "일반 화면 검증 후 가장 위험한 대화상자와 닫기 동작을 한 종류씩 이관한다.",
+            "details": "한 창의 모든 닫기 경로가 같은 guard를 통과한 뒤 다음 창으로 확대한다. 모바일 고정 제목/닫기/저장·스크롤 본문·키보드와 데스크톱을 유지한다.\n완료 검사: sheet-dismiss/sheet-body-swipe/sheet-motion/navigation/editor-save/settings-dialog·중첩 overlay 회귀.10시트×ESC/X/오버레이/Back/스와이프·저장 중 차단·실패 후 유지·취소/초점·visualViewport/200%와 실기기를 검사한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 15,
+            "updatedAt": "2026-11-18T18:00:14.889Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t15-image/results.json",
+              "outputs/astryx-t9-t18-20261118/t15-final-source.json"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "스와이프·Back·실패/저장 중 회귀",
+            "description": "일반 화면 검증 후 가장 위험한 대화상자와 닫기 동작을 한 종류씩 이관한다.",
+            "details": "단순/짧은/역방향/수평/다중터치/취소·키보드 열린 입력·저장 중 ESC/X/Back·실패 재시도를 검사한다.\n완료 검사: sheet-dismiss/sheet-body-swipe/sheet-motion/navigation/editor-save/settings-dialog·중첩 overlay 회귀.10시트×ESC/X/오버레이/Back/스와이프·저장 중 차단·실패 후 유지·취소/초점·visualViewport/200%와 실기기를 검사한다.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 15,
+            "updatedAt": "2026-11-18T18:00:14.889Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t15-final-source.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T18:00:14.889Z",
+        "implementationEvidence": [
+          "outputs/astryx-t9-t18-20261118/t15-final-source.json"
+        ]
+      },
+      {
+        "id": 16,
+        "title": "백업·복원·학습일 수정의 마지막 이관",
+        "description": "데이터 교체가 있는 화면은 마지막에 이관하고 revision·원자성과 불확실 결과 보호를 검증한다.",
+        "details": "백업 형식/용량/큰 복원·안전 백업·서버 스냅샷·단계 업로드/검증/commit을 유지한다. commit 결과 불명 시 취소/새 복원/추가 commit을 차단하고 서버 재조회로 확인한다. 한국 학습일 수정의 답·순서·기록 보존을 유지한다. 운영 기록으로 QA하지 않는다.",
+        "testStrategy": "backup-workflow/backup-safety/large-backup/editor-save/study-date 및 restore 계약 회귀.3MB 이상/상한 경계·입력 유지·응답 유실·서버 수정·충돌 전후 원자성/재조회,두 엔진/키보드/실기기를 확인한다.",
+        "status": "done",
+        "dependencies": [
+          15
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "안전 백업·내보내기와 복원 전 확인",
+            "description": "데이터 교체가 있는 화면은 마지막에 이관하고 revision·원자성과 불확실 결과 보호를 검증한다.",
+            "details": "기록 교체 경고·파일 크기/개수·복원 가능성·안전 백업 다운로드/확인을 숨기지 않고 한국어로 유지한다.\n완료 검사: backup-workflow/backup-safety/large-backup/editor-save/study-date 및 restore 계약 회귀.3MB 이상/상한 경계·입력 유지·응답 유실·서버 수정·충돌 전후 원자성/재조회,두 엔진/키보드/실기기를 확인한다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 16,
+            "updatedAt": "2026-11-18T18:51:48.294Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t16-final-source.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "큰 복원·revision·원자성 보존",
+            "description": "데이터 교체가 있는 화면은 마지막에 이관하고 revision·원자성과 불확실 결과 보호를 검증한다.",
+            "details": "분할 업로드·검증·commit과 기존 reader/API envelope/상한을 유지하고 충돌 시 새 스냅샷을 사용한다.\n완료 검사: backup-workflow/backup-safety/large-backup/editor-save/study-date 및 restore 계약 회귀.3MB 이상/상한 경계·입력 유지·응답 유실·서버 수정·충돌 전후 원자성/재조회,두 엔진/키보드/실기기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 16,
+            "updatedAt": "2026-11-18T18:51:48.294Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t16-final-source.json"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "불확실 commit·취소·복구 보호",
+            "description": "데이터 교체가 있는 화면은 마지막에 이관하고 revision·원자성과 불확실 결과 보호를 검증한다.",
+            "details": "응답 유실/commit 진행 중 닫기·취소/교체·중복 commit을 막고 서버 조회로만 결과를 확인한다.\n완료 검사: backup-workflow/backup-safety/large-backup/editor-save/study-date 및 restore 계약 회귀.3MB 이상/상한 경계·입력 유지·응답 유실·서버 수정·충돌 전후 원자성/재조회,두 엔진/키보드/실기기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 16,
+            "updatedAt": "2026-11-18T18:51:48.294Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t16-final-source.json"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "학습일 수정·호환·이상 조건 회귀",
+            "description": "데이터 교체가 있는 화면은 마지막에 이관하고 revision·원자성과 불확실 결과 보호를 검증한다.",
+            "details": "한국 날짜와 학습 기록/최초 답/문법/이미지 위치 분리를 유지한다.큰 파일·실패/충돌·재접속·저장 중 이동을 확인한다.\n완료 검사: backup-workflow/backup-safety/large-backup/editor-save/study-date 및 restore 계약 회귀.3MB 이상/상한 경계·입력 유지·응답 유실·서버 수정·충돌 전후 원자성/재조회,두 엔진/키보드/실기기를 확인한다.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 16,
+            "updatedAt": "2026-11-18T18:51:48.294Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t16-final-source.json"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-18T18:51:48.294Z",
+        "implementationEvidence": [
+          "outputs/astryx-t9-t18-20261118/t16-final-source.json"
+        ]
+      },
+      {
+        "id": 17,
+        "title": "전체 회귀·성능·실기기·출시 준비 판정",
+        "description": "UI 구현 완료와 품질/실기기/게시 완료를 분리하여 최종 결과를 판정한다.",
+        "details": "실제 마지막 변경 상태에서 필요한 단위/문법자료/타입/린트/Worker build와 두 브라우저의 영향 범위를 확인한다. 초기/지연 JS·CSS·입력 지연/SSR를 동일 baseline으로 비교하고 기존 성능 검사 임계값을 따른다.실기기 Safari/IME/VoiceOver 미확인은 별도 held이며 WebKit으로 통과시키지 않는다. 운영 위험·호환성·롤백·관측·무SQL/미검증을 보고한다.",
+        "testStrategy": "npm test/check:grammar-review/typecheck/lint/build 및 최종 변경 영향 브라우저·test:performance를 검사한다.외부AI0·운영 QA쓰기0·revision/초안/백업 보존과 기존 성적 불변을 확인한다.임의 회귀 허용 수치를 추가하지 않는다.",
+        "status": "done",
+        "dependencies": [
+          6,
+          16
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "최종 코드·영향 검사와 증거 고정",
+            "description": "UI 구현 완료와 품질/실기기/게시 완료를 분리하여 최종 결과를 판정한다.",
+            "details": "명령·exit code·실패/재시도·출력 지문을 남기고 구현 뒤 관련 코드가 바뀌면 영향 검사만 다시 실행한다.\n완료 검사: npm test/check:grammar-review/typecheck/lint/build 및 최종 변경 영향 브라우저·test:performance를 검사한다.외부AI0·운영 QA쓰기0·revision/초안/백업 보존과 기존 성적 불변을 확인한다.임의 회귀 허용 수치를 추가하지 않는다.",
+            "status": "done",
+            "dependencies": [],
+            "parentTaskId": 17,
+            "updatedAt": "2026-11-19T04:54:37.664Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t17-functional-verification.json",
+              "outputs/astryx-t9-t18-20261118/t17-performance/results.json",
+              "outputs/astryx-t9-t18-20261118/t17-period-functional-verification.json",
+              "outputs/astryx-t9-t18-20261118/iphone-focus-desktop-probe/results.json",
+              "outputs/astryx-t9-t18-20261118/t17-ready-local-verification.json",
+              "docs/ASTRYX_T9_T18_IMPLEMENTATION_20261118.md"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "초기/지연 번들·입력·SSR 성능 비교",
+            "description": "UI 구현 완료와 품질/실기기/게시 완료를 분리하여 최종 결과를 판정한다.",
+            "details": "기존 공용 학습gzip138032/CSS38632bytes를 당시 참고값으로 보존하고 정확한 현 baseline과 새 버전을 비교한다. 기존 검사 한도와 악화 판정 근거를 명시한다.\n완료 검사: npm test/check:grammar-review/typecheck/lint/build 및 최종 변경 영향 브라우저·test:performance를 검사한다.외부AI0·운영 QA쓰기0·revision/초안/백업 보존과 기존 성적 불변을 확인한다.임의 회귀 허용 수치를 추가하지 않는다.",
+            "status": "done",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 17,
+            "updatedAt": "2026-11-19T04:54:37.664Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t17-period-performance-summary.json",
+              "outputs/astryx-t9-t18-20261118/t17-ready-performance-summary.json",
+              "docs/ASTRYX_T9_T18_IMPLEMENTATION_20261118.md"
+            ]
+          },
+          {
+            "id": 3,
+            "title": "실제 iPhone·IME·VoiceOver 확인",
+            "description": "UI 구현 완료와 품질/실기기/게시 완료를 분리하여 최종 결과를 판정한다.",
+            "details": "사용 가능한 실제 기기/OS/브라우저와 키보드·한글 composition·스와이프·overlay 위치·초점을 검사한다. 미확보면 해당 gate는 held로 남긴다.\n완료 검사: npm test/check:grammar-review/typecheck/lint/build 및 최종 변경 영향 브라우저·test:performance를 검사한다.외부AI0·운영 QA쓰기0·revision/초안/백업 보존과 기존 성적 불변을 확인한다.임의 회귀 허용 수치를 추가하지 않는다.",
+            "status": "done",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 17,
+            "updatedAt": "2026-11-19T04:54:37.664Z",
+            "implementationEvidence": [
+              ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json",
+              "docs/ASTRYX_T9_T18_IMPLEMENTATION_20261118.md"
+            ]
+          },
+          {
+            "id": 4,
+            "title": "출시 준비·롤백·미검증 보고",
+            "description": "UI 구현 완료와 품질/실기기/게시 완료를 분리하여 최종 결과를 판정한다.",
+            "details": "제품 구현과 품질·실기기·승인·게시를 따로 표시한다. UI만 복구하면서 React19.2.9·v149 초안 분리·현재 reader·종료 카드·사용자 데이터는 보존한다.\n완료 검사: npm test/check:grammar-review/typecheck/lint/build 및 최종 변경 영향 브라우저·test:performance를 검사한다.외부AI0·운영 QA쓰기0·revision/초안/백업 보존과 기존 성적 불변을 확인한다.임의 회귀 허용 수치를 추가하지 않는다.",
+            "status": "done",
+            "dependencies": [
+              3
+            ],
+            "parentTaskId": 17,
+            "updatedAt": "2026-11-19T04:54:37.664Z",
+            "implementationEvidence": [
+              "docs/ASTRYX_T9_T18_IMPLEMENTATION_20261118.md"
+            ]
+          }
+        ],
+        "updatedAt": "2026-11-19T04:54:37.664Z",
+        "implementationEvidence": [
+          "docs/ASTRYX_T9_T18_IMPLEMENTATION_20261118.md"
+        ]
+      },
+      {
+        "id": 18,
+        "title": "별도 승인 후 기존 Site 게시·관측·산출물 정리",
+        "description": "출시 준비 통과와 이 도입 변경에 대한 게시 승인을 받은 후에만 기존 Site에 반영한다.",
+        "details": "이번 계획 등록은 제품 구현·게시·GitHub commit/push/PR·유료 평가·운영 QA쓰기 승인이 아니다.승인 시 기존 Site ID/DB/R2·접근/환경을 유지하고 검증된 소스/빌드만 공식 Sites 절차로 동기화·게시한다.이전 AI 플랜의 평가/배포 승인·예산을 새 플랜에 이전하지 않는다.",
+        "testStrategy": "승인 범위·commit/tree/archive·native deployment·공개 리소스 지문·기존401/no-store/종료 API 등 허용된 읽기 검사를 확인한다.정리 전 병합/CI·필수 근거·참조·절대 경로·타 작업 사용 여부를 확인한다.운영 학습 쓰기는 별도 승인 없이는0.",
+        "status": "in-progress",
+        "dependencies": [
+          17
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "출시 gate·이번 변경 승인·게시 소스 확인",
+            "description": "출시 준비 통과와 이 도입 변경에 대한 게시 승인을 받은 후에만 기존 Site에 반영한다.",
+            "details": "실기기/품질 보류와 승인 누락을 자동 완료로 바꾸지 않는다.정확한 소스/빌드·호환 복구와 기존 Site 설정을 대조한다.\n완료 검사: 승인 범위·commit/tree/archive·native deployment·공개 리소스 지문·기존401/no-store/종료 API 등 허용된 읽기 검사를 확인한다.정리 전 병합/CI·필수 근거·참조·절대 경로·타 작업 사용 여부를 확인한다.운영 학습 쓰기는 별도 승인 없이는0.",
+            "status": "in-progress",
+            "dependencies": [],
+            "parentTaskId": 18,
+            "updatedAt": "2026-11-19T05:07:06.251Z",
+            "implementationEvidence": [
+              "outputs/astryx-t9-t18-20261118/t18-preapproval-readiness.json"
+            ]
+          },
+          {
+            "id": 2,
+            "title": "기존 Site 공식 게시·허용 읽기 확인",
+            "description": "출시 준비 통과와 이 도입 변경에 대한 게시 승인을 받은 후에만 기존 Site에 반영한다.",
+            "details": "새 Site/DB 없이 공식 동기화/저장/게시를 수행하고 실제 배포 결과와 공개 리소스를 확인한다.미승인 운영 학습/AI 검사는 실행하지 않는다.\n완료 검사: 승인 범위·commit/tree/archive·native deployment·공개 리소스 지문·기존401/no-store/종료 API 등 허용된 읽기 검사를 확인한다.정리 전 병합/CI·필수 근거·참조·절대 경로·타 작업 사용 여부를 확인한다.운영 학습 쓰기는 별도 승인 없이는0.",
+            "status": "pending",
+            "dependencies": [
+              1
+            ],
+            "parentTaskId": 18
+          },
+          {
+            "id": 3,
+            "title": "사후 관측·복구·개발 산출물 보관 정리",
+            "description": "출시 준비 통과와 이 도입 변경에 대한 게시 승인을 받은 후에만 기존 Site에 반영한다.",
+            "details": "병합·CI/게시·후속 검증을 확인한 뒤 재사용 불가 임시물만 검토한다.회귀/원점수·예산·승인/실패·복구 근거·브랜치/worktree·비밀/DB를 보존하고 정리 표를 남긴다.\n완료 검사: 승인 범위·commit/tree/archive·native deployment·공개 리소스 지문·기존401/no-store/종료 API 등 허용된 읽기 검사를 확인한다.정리 전 병합/CI·필수 근거·참조·절대 경로·타 작업 사용 여부를 확인한다.운영 학습 쓰기는 별도 승인 없이는0.",
+            "status": "pending",
+            "dependencies": [
+              2
+            ],
+            "parentTaskId": 18
+          }
+        ],
+        "updatedAt": "2026-11-19T05:07:06.251Z",
+        "implementationEvidence": [
+          ".taskmaster/docs/astryx-adoption-t9-t18-implementation.json"
+        ]
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2026-11-19T05:07:06.251Z",
+      "taskCount": 18,
+      "completedCount": 17,
+      "tags": [
+        "astryx-adoption"
+      ],
+      "planId": "astryx-adoption-2026-11-18",
+      "created": "2026-11-18T04:51:50.622Z",
+      "description": "Tasks for astryx-adoption context",
+      "updated": "2026-11-18T04:54:27.674Z",
+      "title": "Astryx 단계적 도입",
+      "subtaskCount": 62,
+      "planningStatus": "registered",
+      "executionStarted": true
     }
   }
 }

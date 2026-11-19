@@ -1,0 +1,53 @@
+{
+  "name": "haru",
+  "like": "neutral",
+  "mode": "light-only",
+  "settings": [
+    {
+      "thing": "text-size",
+      "value": "16",
+      "source": "dial"
+    },
+    {
+      "thing": "font",
+      "value": "'DM Sans', 'Noto Sans KR', sans-serif",
+      "source": "dial"
+    },
+    {
+      "thing": "--color-accent",
+      "value": "#d9f95f",
+      "source": "token"
+    },
+    {
+      "thing": "--color-on-accent",
+      "value": "#242621",
+      "source": "token"
+    },
+    {
+      "thing": "--color-text-primary",
+      "value": "#242621",
+      "source": "token"
+    },
+    {
+      "thing": "--color-text-secondary",
+      "value": "#62675c",
+      "source": "token"
+    },
+    {
+      "thing": "--size-element-sm",
+      "value": "44px",
+      "source": "token"
+    },
+    {
+      "thing": "--size-element-md",
+      "value": "48px",
+      "source": "token"
+    },
+    {
+      "thing": "--size-element-lg",
+      "value": "48px",
+      "source": "token"
+    }
+  ],
+  "lifted": []
+}

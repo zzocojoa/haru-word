@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "mode": "data-and-browser",
+  "planId": "astryx-adoption-2026-11-18",
+  "tag": "astryx-adoption",
+  "parents": 18,
+  "subtasks": 62,
+  "previousPlans": 5,
+  "registeredPlans": 6,
+  "implementationStarted": true,
+  "paidModelCalls": 0,
+  "sourceHashes": {
+    ".taskmaster/tasks/tasks.json": "4b61b6732208a5bff3f6057cbd63e08b805828b27db34854e8b2725f8570f760",
+    ".taskmaster/docs/dashboard-plans.json": "066057d9a4fccea85cea80433c09b60732236244c9670707ba8150280313f501",
+    ".taskmaster/docs/openai-migration-manifest.json": "2b66c21ae063fcf4aab6122c1e268aabb6220cf08006ec48495e097f745eab91",
+    ".taskmaster/docs/judgment-remediation-manifest.json": "f9f71ec10a82378c874ccfadfd630b87cb9eb35c3b2af415c795760fef417aac",
+    ".taskmaster/docs/integration-remediation-manifest.json": "7c752236271ce47a3f416a71ab8ff4bacc18b4cd5b20a10241195f05041d3510",
+    ".taskmaster/docs/comprehensive-remediation-manifest.json": "251a73318d9eb9bab67c33c0af8f69e0c72fe651814252e7cac8781c6beb572c",
+    ".taskmaster/docs/ai-quality-v147-manifest.json": "192512dffffe112f1f059f1c9e1744f66a7f8c5b8d666784dd38f4d4af1dd8a8",
+    ".taskmaster/docs/astryx-adoption-manifest.json": "a29a6ab9561ab2b335fa3716927da65bfcce990d7287e80b4f2b69067f9dc90b"
+  },
+  "checks": [
+    {
+      "name": "18 parents/62 children, phase20/42, prerequisite graph, coverage, pending execution and separate quality/device/publication gates",
+      "passed": true
+    },
+    {
+      "name": "all five historical task objects and manifests unchanged, including AI30/40 and103/133",
+      "passed": true
+    },
+    {
+      "name": "actual4318 serves this ROOT and new default18/62, all6 independent counts/budgets/gates match source",
+      "passed": true
+    },
+    {
+      "name": "chromium: existing page refresh5→6, exact new/old counts, fixture-only progress/error/recovery, standalone HTML",
+      "passed": true
+    },
+    {
+      "name": "webkit: existing page refresh5→6, exact new/old counts, fixture-only progress/error/recovery, standalone HTML",
+      "passed": true
+    },
+    {
+      "name": "QA changed only isolated fixtures; canonical tasks/registry/all manifests unchanged",
+      "passed": true
+    }
+  ]
+}

@@ -1,4 +1,7 @@
 "use client";
+import {HaruParagraph,HaruHeading} from '../haru-content';
+import {HaruButton,HaruTextArea,HaruTextInput} from '../haru-controls';
+
 import { GrammarTermsHelp, PartOfSpeechLabel } from '../grammar-terms';
 import { HaruIcon } from "@/components/icons/haru-icon";
 import { SentenceFeedbackPanel } from "../sentence-feedback";
@@ -48,11 +51,11 @@ export function SentenceStage({
   const selectedMeaning = s.records[id!]?.meaning ?? content.meaning;
   return (
     <>
-      <p className="muted">말하고 싶은 내용을 한국어로 쓴 뒤, 오늘 단어를 사용해 영어 문장을 써 보세요.</p>
+      <HaruParagraph className="muted">말하고 싶은 내용을 한국어로 쓴 뒤, 오늘 단어를 사용해 영어 문장을 써 보세요.</HaruParagraph>
       <div className="sentence-target">
-        <h3 lang="en">
+        <HaruHeading level={3} lang="en">
           {word.word}
-        </h3>
+        </HaruHeading>
         <WordIpa word={word} meaning={selectedMeaning}/>
         <span>
           <PartOfSpeechLabel pos={word.pos} /> · {selectedMeaning}
@@ -74,15 +77,13 @@ export function SentenceStage({
         onUse={setSentence}
       >
       <label htmlFor="my-sentence">내 영어 문장</label>
-      <textarea
-        id="my-sentence"
+      <HaruTextArea label={"내 영어 문장"} isLabelHidden containerClassName="haru-study-field standalone-study-field sentence-writing-field" id="my-sentence"
         readOnly={aiPending}
         value={sentence}
         maxLength={2000}
         onChange={(e) => setSentence(e.target.value)}
         placeholder="오늘 있었던 일이나 평소 하는 일을 써 보세요."
-        rows={3}
-      />
+        rows={3} />
       <label className="check-label spoken-check-label">
         <input
           type="checkbox"
@@ -96,14 +97,12 @@ export function SentenceStage({
       <label htmlFor="sentence-note">
         보완할 점 <span className="muted">선택</span>
       </label>
-      <input
-        id="sentence-note"
+      <HaruTextInput label={"보완할 점 선택"} isLabelHidden containerClassName="haru-study-field standalone-study-field" id="sentence-note"
         readOnly={aiPending}
         value={notes}
         maxLength={2000}
         onChange={(e) => setNotes(e.target.value)}
-        placeholder="예: 전치사 확인하기, 과거형으로 바꾸기"
-      />
+        placeholder="예: 전치사 확인하기, 과거형으로 바꾸기" />
       </SentenceFeedbackPanel>
       <details className="notes-details">
         <summary>스스로 점검하기</summary>
@@ -112,48 +111,50 @@ export function SentenceStage({
           <li>누가 무엇을 하는지 분명한가요? 시제와 전치사도 확인해 보세요.</li>
           <li>예문에서 사람·시간·장소를 하나 바꿔 보세요.</li>
         </ul>
-        <button
-          className="text-button"
+        <HaruButton label={["예문 불러와 바꿔 쓰기"].join('')} variant="ghost"
+          className="haru-migrated text-button"
           disabled={busy}
           onClick={() => setSentence(content.example)}
         >
           예문 불러와 바꿔 쓰기
-        </button>
-        <p className="small-note">
+        </HaruButton>
+        <HaruParagraph className="small-note">
           문법이 헷갈리면 ‘문장 보완이 필요해요’를 골라 주세요. 단어 친숙도는 바뀌지 않아요.
-        </p>
+        </HaruParagraph>
         <div className="example-box">
-          <p className="small-note">{content.source}</p>
-          <p lang="en">{content.example}</p>
-          <p className="translation">{content.translation}</p>
+          <HaruParagraph className="small-note">{content.source}</HaruParagraph>
+          <HaruParagraph lang="en">{content.example}</HaruParagraph>
+          <HaruParagraph className="translation">{content.translation}</HaruParagraph>
         </div>
         <DictionaryLinks word={word.word} />
       </details>
       <div className="button-row study-actions">
-        <button
-          className="primary-button"
+        <HaruButton label={["문장을 완성했어요 "].join('')} variant="primary" endContent={<HaruIcon name="check" size={17} />}
+          className="haru-migrated primary-button"
           disabled={busy || !sentence.trim()}
           onClick={() => sentenceDone("written")}
         >
-          문장을 완성했어요 <HaruIcon name="check" size={17} />
-        </button>
-        <button
-          className="secondary-button"
+          문장을 완성했어요
+        </HaruButton>
+        <HaruButton label={["문장 보완이 필요해요"].join('')} variant="secondary"
+          className="haru-migrated secondary-button"
           disabled={busy || !sentence.trim()}
           onClick={() => sentenceDone("improve")}
         >
           문장 보완이 필요해요
-        </button>
+        </HaruButton>
       </div>
-      <button
-        className="text-button skip"
+      <HaruButton label={[(s.kind === "monthly"
+          ? "문장 쓰기 건너뛰기"
+          : "문장 쓰기는 다음에")].join('')} variant="ghost"
+        className="haru-migrated text-button skip"
         disabled={busy}
         onClick={() => sentenceDone("unmeasured")}
       >
         {s.kind === "monthly"
           ? "문장 쓰기 건너뛰기"
           : "문장 쓰기는 다음에"}
-      </button>
+      </HaruButton>
     </>
   );
 }

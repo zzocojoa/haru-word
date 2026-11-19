@@ -1,12 +1,19 @@
 "use client";
+import {HaruParagraph} from './haru-content';
+import {HaruButton} from './haru-controls';
+
 import { HaruIcon } from "@/components/icons/haru-icon";
-import { useEffect, useRef, useState, type ComponentProps, type Ref } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useEffect, useRef, useState, type Ref } from "react";
+import {HaruSelector} from './haru-controls';
 import { dictionaryUrl,koreanDictionaryUrl } from "@/lib/catalog-basics";
 import { LEVELS, type Level } from "@/lib/learning";
 import { speakOnDevice, type DeviceSpeechState } from "@/lib/device-speech";
 import { HelpDetails } from './study-ui';
-export function LevelSelect({value,onChange,disabled=false,triggerRef,onCloseAutoFocus}:{value:Level;onChange:(v:Level)=>void;disabled?:boolean;triggerRef?:Ref<HTMLButtonElement>;onCloseAutoFocus?:ComponentProps<typeof SelectContent>['onCloseAutoFocus']}){return <Select value={value} onValueChange={v=>onChange(v as Level)} disabled={disabled}><SelectTrigger ref={triggerRef} aria-label="학습 수준" className="level-select"><SelectValue/></SelectTrigger><SelectContent onCloseAutoFocus={onCloseAutoFocus}>{LEVELS.map(l=><SelectItem key={l} value={l}>{l} · {l==="A1"?"시작":l==="A2"?"기초":l==="B1"?"중급":"중상급"}</SelectItem>)}</SelectContent></Select>}
+export function LevelSelect({value,onChange,disabled=false,triggerRef,onBeforeChange}:{value:Level;onChange:(v:Level)=>void;disabled?:boolean;triggerRef?:Ref<HTMLButtonElement>;onBeforeChange?:()=>void}){
+  return <HaruSelector label="학습 수준" aria-label="학습 수준" isLabelHidden ref={triggerRef} containerClassName="haru-level-select" controlClassName="level-select" value={value} disabled={disabled}
+    onChange={next=>{onBeforeChange?.();onChange(next as Level);}}
+    options={LEVELS.map(level=>({value:level,label:level+' · '+(level==='A1'?'시작':level==='A2'?'기초':level==='B1'?'중급':'중상급')}))}/>;
+}
 export function Speak({text,dictionaryHref,showHelpInitially=false}:{text:string;dictionaryHref?:string;showHelpInitially?:boolean}) {
   const [state,setState] = useState<DeviceSpeechState & {text:string}>({status:'idle',message:'',text});
   const [attemptedText,setAttemptedText] = useState<string | undefined>(undefined);
@@ -21,14 +28,14 @@ export function Speak({text,dictionaryHref,showHelpInitially=false}:{text:string
   }
   return <div className="speak-wrap">
     <div className="audio-controls">
-      <button type="button" className="secondary-button device-audio" aria-label={`${text} 기기 음성 듣기`} onClick={speak}><HaruIcon name="volume" size={18}/><span>기기 음성 듣기</span></button>
+      <HaruButton label={`${text} 기기 음성 듣기`} variant="secondary" icon={<HaruIcon name="volume" size={18}/>} type="button" className="haru-migrated secondary-button device-audio" aria-label={`${text} 기기 음성 듣기`} onClick={speak}><span>기기 음성 듣기</span></HaruButton>
       {dictionary&&<a className="audio-dictionary" href={dictionary} target="_blank" rel="noreferrer">사전 발음 <HaruIcon name="external-link" size={14}/></a>}
       <span className="audio-message" data-state={status} role="status">{message}</span>
     </div>
     {(showHelpInitially||attemptedText===text)&&<HelpDetails title="음성 도움말" className="audio-help">
-      <p>볼륨·무음 설정과 이어폰 연결을 확인하세요.</p>
-      <p>앱에서 소리가 없으면 Safari 또는 Chrome으로 열어 보세요.</p>
-      <p>기기 음성은 사전 발음과 다를 수 있어요.</p>
+      <HaruParagraph>볼륨·무음 설정과 이어폰 연결을 확인하세요.</HaruParagraph>
+      <HaruParagraph>앱에서 소리가 없으면 Safari 또는 Chrome으로 열어 보세요.</HaruParagraph>
+      <HaruParagraph>기기 음성은 사전 발음과 다를 수 있어요.</HaruParagraph>
     </HelpDetails>}
   </div>;
 }

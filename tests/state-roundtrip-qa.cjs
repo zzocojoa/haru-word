@@ -1,3 +1,4 @@
+const {chooseOption}=require('./qa/select.cjs');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { launchBrowser, closeBrowser, accountHeaders, waitForWorker, base, axePath } = require('./qa/runtime.cjs');
@@ -65,7 +66,7 @@ async function openWork(page) {
     const rp = await restored.newPage(); diagnosticPage = rp; rp.on('pageerror', e => errors.push(e.message));
     await rp.goto(base); await saved(rp); await openWork(rp);
     for (const meaning of ['constructor', 'prototype', '__proto__']) {
-      await rp.getByRole('dialog').getByLabel('학습할 뜻 선택').selectOption(meaning);
+      await chooseOption(rp.getByRole('dialog').getByRole('combobox',{name:'학습할 뜻 선택',exact:true}),meaning);
       assert.equal(await rp.getByRole('dialog').getByLabel('함께 익힐 표현', { exact: true }).inputValue(), `literal ${meaning}`);
     }
     await restored.close(); checks.push('literal reserved senses: UI editing, saving, reload, validated export, actual restore and sense switching');

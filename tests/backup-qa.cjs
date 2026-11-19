@@ -1,7 +1,7 @@
 // Built local Worker only; every identity and record below is synthetic.
 const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base=require('./qa/runtime.cjs').base,out='outputs/backup-restore';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out=process.env.ASTRYX_QA_OUTPUT?require('node:path').join(process.env.ASTRYX_QA_OUTPUT,process.env.QA_BROWSER||'chromium'):'outputs/backup-restore';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json','utf8')),content=JSON.parse(fs.readFileSync('data/content.json','utf8'));
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const checks=[],errors=[],a11y=[],performance=[];let serial=0,posts=0,aiCalls=0;

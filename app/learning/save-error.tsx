@@ -16,6 +16,7 @@ import { DiagnosticDownload } from "./diagnostic-download";
 import { useId } from 'react';
 import { useNavigationState } from '../navigation';
 import { useStudyRecoverySnapshot } from '../study/study-recovery';
+import {HaruButton, HaruNotice} from '../haru-controls';
 type SaveErrorProps = Pick<
   LearningViewProps,
   "saveError" | "error" | "conflict" | "saving" | "unsaved" | "store" | "state"
@@ -33,35 +34,28 @@ export function SaveError({
   const recoverySnapshot = useStudyRecoverySnapshot();
   const [confirm, setConfirm] = useNavigationState(`reload.${id}`, false, true);
   return (
-    <div ref={saveError} className="error-banner" role="alert">
-      <p>{error}</p>
+    <HaruNotice ref={saveError} className="error-banner" status="error" title={error}>
       <div className="button-row">
         {!conflict && (
-          <button
-            className="secondary-button"
+          <HaruButton label="다시 시도"
             disabled={saving}
             onClick={() => (unsaved ? store.retry() : store.load())}
-          >
-            다시 시도
-          </button>
+          />
         )}
         {unsaved && (
-          <button
-            className="text-button"
+          <HaruButton label="현재 입력 백업" variant="ghost"
             onClick={() =>
               download(
                 "haru-unsaved-backup.json",
                 JSON.stringify(recoverySnapshot(state)),
               )
             }
-          >
-            현재 입력 백업
-          </button>
+          />
         )}
         {conflict && (
           <AlertDialog open={confirm} onOpenChange={setConfirm}>
             <AlertDialogTrigger asChild>
-              <button className="secondary-button">최신 기록 불러오기</button>
+              <HaruButton label="최신 기록 불러오기" />
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
@@ -88,6 +82,6 @@ export function SaveError({
         )}
         <DiagnosticDownload />
       </div>
-    </div>
+    </HaruNotice>
   );
 }

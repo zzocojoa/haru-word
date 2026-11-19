@@ -1,10 +1,11 @@
 // Local built Worker and synthetic identities. No hosted learner records.
 const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
-const fs=require('node:fs'),assert=require('node:assert/strict'),zlib=require('node:zlib');
-const base=require('./qa/runtime.cjs').base,out='outputs/startup-performance';fs.mkdirSync(out,{recursive:true});
+const fs=require('node:fs'),assert=require('node:assert/strict'),zlib=require('node:zlib'),path=require('node:path');
+const base=require('./qa/runtime.cjs').base,out=process.env.ASTRYX_QA_OUTPUT||'outputs/startup-performance';fs.mkdirSync(out,{recursive:true});
 (async()=>{const browser=await launchBrowser(),samples=[],errors=[];try{
  for(let i=0;i<3;i++){
   const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('startup_')+'_'+i,'oai-authenticated-user-email':'startup@example.test'}});
+  await c.route('https://fonts.googleapis.com/**',route=>route.abort());await c.route('https://fonts.gstatic.com/**',route=>route.abort());
   const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
   await p.addInitScript(()=>{window.__startup={longTasks:[],lcp:0};new PerformanceObserver(l=>window.__startup.longTasks.push(...l.getEntries().map(e=>Math.round(e.duration)))).observe({type:'longtask',buffered:true});new PerformanceObserver(l=>{window.__startup.lcp=l.getEntries().at(-1)?.startTime||0}).observe({type:'largest-contentful-paint',buffered:true});});
   const cdp=await c.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});
@@ -13,6 +14,6 @@ const base=require('./qa/runtime.cjs').base,out='outputs/startup-performance';fs
   samples.push({readyMs:ready,...await p.evaluate(()=>({lcpMs:Math.round(window.__startup.lcp),longTasksMs:window.__startup.longTasks,resources:performance.getEntriesByType('resource').filter(e=>e.name.includes('/_next/static/')).map(e=>({path:new URL(e.name).pathname,encodedBytes:e.encodedBodySize,decodedBytes:e.decodedBodySize,durationMs:Math.round(e.duration)}))}))});
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await c.close();
  }
- const dir='dist/client/_next/static/chunks/';const chunks=fs.readdirSync(dir).filter(f=>f.endsWith('.js')).map(name=>{const b=fs.readFileSync(dir+name);return{name,bytes:b.length,gzipBytes:zlib.gzipSync(b).length}}).sort((a,b)=>b.bytes-a.bytes);
- assert.deepEqual(errors,[]);const report={passed:true,environment:'Local built Worker, three cold Chromium contexts, 390px, CPU 4x slowdown, unthrottled loopback. Gzip is computed, not measured hosted transfer. Not actual iPhone or field Web Vitals.',samples,chunks,browserErrors:errors};fs.writeFileSync(out+'/measurements.json',JSON.stringify(report,null,2));console.log(JSON.stringify({passed:true,samples:samples.map(({resources,...s})=>s),largestChunk:chunks[0],browserErrors:errors}));
+ const dir=path.resolve(process.env.QA_BUILD_ROOT||'dist','client/_next/static/chunks');const chunks=fs.readdirSync(dir).filter(f=>f.endsWith('.js')).map(name=>{const b=fs.readFileSync(path.join(dir,name));return{name,bytes:b.length,gzipBytes:zlib.gzipSync(b).length}}).sort((a,b)=>b.bytes-a.bytes);
+ assert.deepEqual(errors,[]);const report={passed:true,environment:'Local built Worker, three cold Chromium contexts, 390px, CPU 4x slowdown, unthrottled loopback; external fonts blocked consistently for baseline/candidate. Gzip is computed, not measured hosted transfer. Not actual iPhone or field Web Vitals.',samples,chunks,browserErrors:errors};fs.writeFileSync(out+'/measurements.json',JSON.stringify(report,null,2));console.log(JSON.stringify({passed:true,samples:samples.map(({resources,...s})=>s),largestChunk:chunks[0],browserErrors:errors}));
 }finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

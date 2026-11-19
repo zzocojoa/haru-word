@@ -1,10 +1,10 @@
 // Built local Worker only: synthetic accounts and controlled clock responses.
 const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
-const base=require('./qa/runtime.cjs').base,out='outputs/study-date';fs.mkdirSync(out,{recursive:true});
+const base=require('./qa/runtime.cjs').base,out=process.env.ASTRYX_QA_OUTPUT?require('node:path').join(process.env.ASTRYX_QA_OUTPUT,process.env.QA_BROWSER||'chromium'):'outputs/study-date';fs.mkdirSync(out,{recursive:true});
 const words=JSON.parse(fs.readFileSync('data/words.json')),content=JSON.parse(fs.readFileSync('data/content.json'));
 const now=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const prior=new Date(now+'T12:00:00Z');prior.setUTCDate(prior.getUTCDate()-1);const yesterday=prior.toISOString().slice(0,10),dayLabel=new Intl.DateTimeFormat('ko-KR',{month:'long',day:'numeric',timeZone:'Asia/Seoul'}).format(new Date(now+'T12:00:00Z')),selected=words.filter(w=>w.level==='A1').slice(0,10);
-const checks=[],errors=[],layouts=[];let serial=0;
+const checks=[],errors=[],layouts=[],requestTraces=[],transitions=[];let serial=0,currentPage;
 async function checkDialogLayout(page, phase) {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   for (const width of [320,390,430,768,1440]) {
@@ -42,7 +42,9 @@ async function checkDialogLayout(page, phase) {
   checks.push(`${phase}: 320–1440px and 200% text, dialog body and native date field fit; vertical scroll and actions remain usable`);
 }
 (async()=>{const browser=await launchBrowser();
- const fresh=async()=>{const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('dates_')+'_'+serial++,'oai-authenticated-user-email':'dates@example.test'}});const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));return {c,p}};
+ const fresh=async()=>{const c=await browser.newContext({viewport:{width:390,height:844},extraHTTPHeaders:{'oai-authenticated-user-id':require('./qa/runtime.cjs').account('dates_')+'_'+serial++,'oai-authenticated-user-email':'dates@example.test'}});const p=await c.newPage();currentPage=p;const caseId=serial;p.on('pageerror',e=>errors.push(e.message));
+  p.on('request',r=>{if(new URL(r.url()).pathname==='/api/state'&&r.method()==='PUT'){const body=r.postDataJSON();requestTraces.push({caseId,kind:'request',revision:body.revision,sessions:Object.values(body.sessions||{}).map(s=>({id:s.id,kind:s.kind,date:s.date,stage:s.stage,finished:s.finished}))});}});
+  p.on('response',r=>{if(new URL(r.url()).pathname==='/api/state'&&r.request().method()==='PUT')requestTraces.push({caseId,kind:'response',status:r.status()});});return {c,p}};
  const state=async c=>(await c.request.get(base+'/api/state')).json();
  const saved=async p=>p.getByText('저장됨',{exact:true}).waitFor();
  const seed=async(c,date=now,needsReview=true)=>{const data=await state(c),sid=crypto.randomUUID();const progress=Object.fromEntries(words.filter(w=>w.level==='A1').map(w=>[w.id,{familiarity:'uncertain'}]));
@@ -55,7 +57,7 @@ async function checkDialogLayout(page, phase) {
  const open=async(p)=>{await p.goto(base);await saved(p);await p.locator('.daily-label').filter({hasText:dayLabel}).waitFor({state:'attached'})};
  try{
   // Reproduce the reported stored-day mismatch and recover without changing scores.
-  const {c,p}=await fresh(),source=await seed(c);await p.clock.install({time:new Date('2030-01-01T00:00:00Z')});await clock(p);await open(p);await p.getByRole('heading',{name:'오늘 회차를 마쳤어요'}).waitFor();
+  const {c,p}=await fresh(),source=await seed(c);await p.clock.setFixedTime(new Date('2030-01-01T00:00:00Z'));await clock(p);await open(p);await p.getByRole('heading',{name:'오늘 회차를 마쳤어요'}).waitFor();
   await p.getByRole('button',{name:'학습일 수정'}).click();await p.getByRole('dialog').waitFor();assert.equal(await p.getByLabel('실제로 공부한 날').inputValue(),yesterday);
   await checkDialogLayout(p,'ready');
   await p.screenshot({path:out+'/date-correction.png',fullPage:true});
@@ -70,8 +72,19 @@ async function checkDialogLayout(page, phase) {
   checks.push('reported ten-word completed-day case: correction, failed save, retry, reload, all results preserved; carryover remains explicit');
   await c.close();
   // Fully learned words no longer consume the corrected day's budget.
-  const complete=await fresh(),known=await seed(complete.c,now,false);await complete.p.clock.install({time:new Date('2030-01-01T00:00:00Z')});await clock(complete.p);await open(complete.p);await complete.p.getByRole('button',{name:'학습일 수정'}).click();await complete.p.getByRole('button',{name:'학습일 수정하기',exact:true}).click();await complete.p.getByRole('dialog').waitFor({state:'hidden'});await saved(complete.p);
-  await complete.p.getByRole('button',{name:'오늘의 학습 시작',exact:true}).click();await saved(complete.p);next=(await state(complete.c)).state;const freshSession=Object.values(next.sessions).find(s=>s.date===now&&s.kind==='daily');assert.ok(freshSession);assert.equal(freshSession.ids.length,10);assert.ok(freshSession.ids.every(id=>!known.ids.includes(id)));assert.equal(freshSession.createdAt.slice(0,10),now);checks.push('incorrect device date cannot affect a new session day or creation time; ten new words available after fully learned historical lesson');await complete.c.close();
+  const complete=await fresh(),known=await seed(complete.c,now,false);await complete.p.clock.setFixedTime(new Date('2030-01-01T00:00:00Z'));await clock(complete.p);await open(complete.p);await complete.p.getByRole('button',{name:'학습일 수정'}).click();await complete.p.getByRole('button',{name:'학습일 수정하기',exact:true}).click();await complete.p.getByRole('dialog').waitFor({state:'hidden'});await saved(complete.p);
+  // The shared view-restoration contract settles focus/scroll after two frames.
+  // Do not race the next pointer action against the close commit.
+  transitions.push(await complete.p.evaluate(async()=>{
+   const snapshot=()=>({scrollY,activeTag:document.activeElement?.tagName,modalCount:document.querySelectorAll('dialog:modal').length,bodyOverflow:getComputedStyle(document.body).overflow});
+   const before=snapshot();await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));return{before,after:snapshot()};
+  }));
+  const [newDailySaved]=await Promise.all([complete.p.waitForResponse(response=>{
+   if(response.request().method()!=='PUT'||new URL(response.url()).pathname!=='/api/state')return false;
+   return Object.values(response.request().postDataJSON().sessions||{}).some(s=>s.kind==='daily'&&s.date===now&&s.id!==known.id);
+  }),complete.p.getByRole('button',{name:'오늘의 학습 시작',exact:true}).click()]);
+  assert.equal(newDailySaved.status(),200);await saved(complete.p);
+  next=(await state(complete.c)).state;const freshSession=Object.values(next.sessions).find(s=>s.date===now&&s.kind==='daily');assert.ok(freshSession);assert.equal(freshSession.ids.length,10);assert.ok(freshSession.ids.every(id=>!known.ids.includes(id)));assert.equal(freshSession.createdAt.slice(0,10),now);checks.push('incorrect device date cannot affect a new session day or creation time; ten new words available after fully learned historical lesson');await complete.c.close();
   // A completed summary still open at midnight must give way to today's home.
   const midnight=await fresh(),old=await seed(midnight.c,yesterday,false);let data=await state(midnight.c);const ongoing={...old,finished:false,paused:false,stage:'sentence',index:9};assert.equal((await midnight.c.request.put(base+'/api/state',{data:{revision:data.revision,progress:{},sessions:{[old.id]:ongoing}}})).status(),200);
   await midnight.p.clock.install({time:new Date('2010-01-01T00:00:00Z')});await clock(midnight.p,yesterday+'T14:59:55Z');await midnight.p.goto(base);await saved(midnight.p);await midnight.p.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved(midnight.p);await midnight.p.getByRole('button',{name:'문장 쓰기는 다음에',exact:true}).click();await midnight.p.getByRole('heading',{name:'학습 기록을 저장했어요',exact:true}).waitFor();await midnight.p.clock.fastForward(70000);await midnight.p.locator('.daily-label').filter({hasText:dayLabel}).waitFor({state:'attached'});await midnight.p.getByRole('button',{name:'오늘의 학습 시작',exact:true}).waitFor();assert.equal((await state(midnight.c)).state.sessions[old.id].date,yesterday);checks.push('midnight replaces an open completed summary with today’s home without rewriting yesterday');await midnight.c.close();
@@ -80,6 +93,6 @@ async function checkDialogLayout(page, phase) {
   const failure=await fresh();await seed(failure.c);await failure.p.route('**/api/study-clock',r=>r.fulfill({status:503,json:{error:'clock unavailable'}}));await failure.p.goto(base);await saved(failure.p);await failure.p.getByRole('button',{name:'시간 다시 확인'}).waitFor();await failure.p.unroute('**/api/study-clock');await clock(failure.p);await failure.p.getByRole('button',{name:'시간 다시 확인'}).click();await failure.p.getByRole('button',{name:'학습일 수정'}).click();await failure.p.getByRole('dialog').waitFor();data=await state(failure.c);assert.equal((await failure.c.request.put(base+'/api/state',{data:{revision:data.revision,progress:{},sessions:{}}})).status(),200);await failure.p.getByRole('button',{name:'학습일 수정하기',exact:true}).click();await failure.p.getByRole('dialog').getByRole('alert').filter({hasText:'다른 기기'}).waitFor();assert.equal(Object.values((await state(failure.c)).state.sessions)[0].date,now);checks.push('clock fetch failure is recoverable; revision conflict prevents date overwrite');
   await checkDialogLayout(failure.p,'conflict');
   await failure.p.addScriptTag({path:require('./qa/runtime.cjs').axePath});const axe=await failure.p.evaluate(async()=>axe.run(document.querySelector('[role="dialog"]'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(axe.violations.length,0,JSON.stringify(axe.violations));assert.equal(await failure.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);checks.push('390px correction dialog: no horizontal overflow and zero axe violations');await failure.c.close();
-  assert.deepEqual(errors,[]);fs.writeFileSync(out+'/verification.json',JSON.stringify({checks,pageErrors:errors,layouts,passed:true},null,2));console.log(JSON.stringify({passed:true,checks},null,2));
- }catch(e){fs.writeFileSync(out+'/verification.json',JSON.stringify({checks,pageErrors:errors,error:String(e)},null,2));throw e}finally{await closeBrowser(browser)}
+  assert.deepEqual(errors,[]);fs.writeFileSync(out+'/verification.json',JSON.stringify({checks,pageErrors:errors,layouts,transitions,requestTraces,passed:true},null,2));console.log(JSON.stringify({passed:true,checks},null,2));
+ }catch(e){const ui=currentPage&&!currentPage.isClosed()?await currentPage.evaluate(()=>({events:window.__qaStartEvents,notices:[...document.querySelectorAll('.learning-message')].map(e=>e.textContent),modalCount:document.querySelectorAll('dialog:modal').length,date:document.querySelector('.daily-label')?.textContent})).catch(()=>null):null;fs.writeFileSync(out+'/verification.json',JSON.stringify({checks,pageErrors:errors,requestTraces,ui,error:String(e)},null,2));if(currentPage&&!currentPage.isClosed())await currentPage.screenshot({path:out+'/failure.png',timeout:3000}).catch(()=>{});throw e}finally{await closeBrowser(browser)}
 })();

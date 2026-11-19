@@ -1,3 +1,4 @@
+const {chooseOption}=require('./qa/select.cjs');
 // Local synthetic learner only. Exercise responsive navigation without changing scores.
 const assert = require('node:assert/strict'), fs = require('node:fs');
 const { base, launchBrowser, closeBrowser, accountHeaders, axePath } = require('./qa/runtime.cjs');
@@ -33,8 +34,8 @@ fs.mkdirSync(out, { recursive: true });
     await top.getByRole('button', { name: '다음 페이지' }).click(); assert.notEqual(await rows.first().innerText(), first);
     await bottom.getByRole('button', { name: '이전 페이지' }).click(); assert.equal(await rows.first().innerText(), first);
     assert.equal(await p.getByRole('heading', { name: '단어 찾기' }).evaluate(el => document.activeElement === el), true);
-    await p.getByLabel('페이지당 단어 수').selectOption('30'); assert.equal(await rows.count(), 30);
-    await p.getByLabel('페이지당 단어 수').selectOption('10');
+    await chooseOption(p.getByLabel('페이지당 단어 수'),'30'); assert.equal(await rows.count(), 30);
+    await chooseOption(p.getByLabel('페이지당 단어 수'),'10');
     await p.getByLabel('단어 또는 한국어 뜻 검색').fill('arrive'); assert.equal(await rows.count(), 1);
     await p.getByRole('button', { name: 'arrive 동사 도움말' }).click(); await p.getByRole('dialog').waitFor(); await p.keyboard.press('Escape');
     await p.getByRole('button', { name: '필터 초기화' }).click();

@@ -99,6 +99,13 @@ export function installSheetSwipe(element: HTMLElement, close: Close, blocked: (
     // continues from the release position instead of jumping back to the top.
     if (dirty() && !await animateTo(0, 180)) return;
     const allowed = await close(async () => {
+      const confirmation = element.matches('[data-haru-native-sheet]') && element.querySelector<HTMLElement>('[role=alertdialog]');
+      if (confirmation) {
+        // Keep its fixed portal at rest until it has left the native host.
+        await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+        await Promise.allSettled(confirmation.getAnimations().map(animation => animation.finished));
+        await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
+      }
       if (!drag || blocked() || disposed) return false;
       if (!await animateTo(drag.height + 24, 220)) return false;
       element.setAttribute('data-sheet-dismissed', ''); // No second Radix exit animation.
@@ -108,6 +115,8 @@ export function installSheetSwipe(element: HTMLElement, close: Close, blocked: (
   }
   const cancel = () => reset();
   const click = (e: MouseEvent) => {
+    // Native sheets host the retained confirmation inside their own DOM tree.
+    if (e.target instanceof Element && e.target.closest('[role=alertdialog]')) return;
     if (settling || drag?.moving) { e.preventDefault(); e.stopPropagation(); }
   };
   element.addEventListener('touchstart', start, { passive: false });

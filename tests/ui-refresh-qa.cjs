@@ -49,8 +49,8 @@ const session = (kind, time) => {const id=crypto.randomUUID();return {id,kind,da
    for(const name of ['오늘 학습','단어장','복습 점검','학습 기록']){
     await p.getByRole('tab',{name,exact:true}).click();
     assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,name+' '+width);
-    const labels=await p.getByRole('tablist',{name:'학습 화면',exact:true}).locator('[role=tab]').evaluateAll(tabs=>tabs.map(tab=>[...tab.querySelectorAll('.nav-label-wide,.nav-label-compact')].filter(label=>label.getClientRects().length>0).map(label=>label.className)));
-    assert.deepEqual(labels,Array.from({length:4},()=>[width<=640?'nav-label-compact':'nav-label-wide']),'one visible label per tab at '+width);
+    const labels=await p.getByRole('tablist',{name:'학습 화면',exact:true}).locator('[role=tab]').evaluateAll(tabs=>tabs.map(tab=>tab.innerText.trim()));
+    assert.deepEqual(labels,['오늘 학습','단어장','복습 점검','학습 기록'],'one visible label per tab at '+width);
     if(width===390){await audit(name);await p.screenshot({path:out+'/'+name+'.png'});}
    }
   }

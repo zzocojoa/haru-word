@@ -1,7 +1,9 @@
 'use client';
+import {HaruParagraph} from './haru-content';
+import {HaruButton} from './haru-controls';
 import { useState } from 'react';
-import { DialogClose, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { SheetDialog as Dialog, SheetDialogContent as DialogContent } from './sheet-dialog';
+import { DialogClose, DialogHeader } from '@/components/ui/dialog';
+import { SheetDialog as Dialog, SheetDialogContent as DialogContent, SheetDialogTitle as DialogTitle, SheetDialogDescription as DialogDescription } from './sheet-dialog';
 import { correctDailyStudyDate, isCalendarDate, previousDate } from '@/lib/study-date-correction';
 import type { State } from '@/lib/learning';
 import { HelpDetails } from './study-ui';
@@ -61,7 +63,7 @@ export function StudyDateDialog({ state, sessionId, date, saving, conflict, save
           <DialogDescription>날짜만 수정하며 답변과 성적은 유지해요.</DialogDescription>
         </DialogHeader>
         <div className="dialog-scroll">
-          <p>현재 기록: <b>{source.date}</b> · {source.ids.length}개</p>
+          <HaruParagraph>현재 기록: <b>{source.date}</b> · {source.ids.length}개</HaruParagraph>
           <label htmlFor="correct-study-date">실제로 공부한 날</label>
           <input
             id="correct-study-date"
@@ -71,16 +73,17 @@ export function StudyDateDialog({ state, sessionId, date, saving, conflict, save
             disabled={saving || !!pending}
             onChange={event => setChosen(event.target.value)}
           />
-          <p className="small-note">{source.date} → {chosen || '날짜 선택'}</p>
+          <HaruParagraph className="small-note">{source.date} → {chosen || '날짜 선택'}</HaruParagraph>
           <HelpDetails title="변경 영향">
-            <p>오늘 목표와 주간·월간 목록에 반영해요. 단어·답변·성적·AI 의견과 진행한 점검 순서는 유지해요.</p>
-            <p>보완 단어는 계속 이월돼요. 날짜를 바꿔도 새 단어만 배정되지는 않아요.</p>
+            <HaruParagraph>오늘 목표와 주간·월간 목록에 반영해요. 단어·답변·성적·AI 의견과 진행한 점검 순서는 유지해요.</HaruParagraph>
+            <HaruParagraph>보완 단어는 계속 이월돼요. 날짜를 바꿔도 새 단어만 배정되지는 않아요.</HaruParagraph>
           </HelpDetails>
-          {visibleError && <p role="alert" className="notice">{visibleError}</p>}
+          {visibleError && <HaruParagraph role="alert" className="notice">{visibleError}</HaruParagraph>}
         </div>
         <div className="button-row dialog-actions">
-          <button className="primary-button" disabled={blocked || invalidDate} onClick={submit}>{submitLabel}</button>
-          <DialogClose asChild><button className="secondary-button" disabled={saving}>닫기</button></DialogClose>
+          <HaruButton label={submitLabel} variant="primary" className="haru-migrated primary-button" disabled={blocked || invalidDate} onClick={submit}>{submitLabel}</HaruButton>
+          {/* The form action must not inherit the floating X button's fixed size/offset. */}
+          <DialogClose asChild><HaruButton label="닫기" variant="secondary" data-slot="dialog-footer-close" className="haru-migrated secondary-button" disabled={saving}>닫기</HaruButton></DialogClose>
         </div>
       </DialogContent>
     </Dialog>

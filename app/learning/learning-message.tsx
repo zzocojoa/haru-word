@@ -1,4 +1,5 @@
 "use client";
+import {HaruIconButton} from '../haru-controls';
 import { HaruIcon } from '@/components/icons/haru-icon';
 import { useLearningMessageLifetime } from './use-learning-message';
 
@@ -16,9 +17,7 @@ function MessageContent({ message, onDismiss }: MessageContentProps) {
   return (
     <div className="notice learning-message" {...readingInteractions}>
       <p role="status" aria-atomic="true">{message}</p>
-      <button type="button" className="learning-message-close" aria-label="안내 닫기" onClick={onDismiss}>
-        <HaruIcon name="x" size={20} />
-      </button>
+      <HaruIconButton label="안내 닫기" className="learning-message-close" icon={<HaruIcon name="x" size={20}/>} onClick={onDismiss}/>
     </div>
   );
 }

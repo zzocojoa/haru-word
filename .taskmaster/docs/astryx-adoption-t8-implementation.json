@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "taskId": 8,
+  "planId": "astryx-adoption-2026-11-18",
+  "tag": "astryx-adoption",
+  "status": "verified",
+  "source": {
+    "path": "work/astryx-adoption-20261118",
+    "branch": "codex/astryx-foundation",
+    "base": "33f5de530c39fe816bebfdb754f751d3e093565f",
+    "baseline": "T1–T7 verified working state",
+    "fingerprints": "outputs/astryx-t8-20261118/final-fingerprints.json",
+    "changed": [
+      "README.md",
+      "app/backup-dialog.tsx",
+      "app/expression-fields.tsx",
+      "app/feedback-context-input.tsx",
+      "app/globals.css",
+      "app/grammar/grammar-lesson.tsx",
+      "app/learning/availability-notice.tsx",
+      "app/learning/clock-status.tsx",
+      "app/learning/diagnostic-download.tsx",
+      "app/learning/familiarity-assessment.tsx",
+      "app/learning/learning-message.tsx",
+      "app/learning/save-error.tsx",
+      "app/learning/save-status.tsx",
+      "app/page.tsx",
+      "app/study-session.tsx",
+      "app/study-ui.tsx",
+      "tests/editor-save-qa.cjs",
+      "tests/feedback-safety-qa.cjs",
+      "tests/local-draft-qa.cjs",
+      "tests/openai-migration-qa.cjs",
+      "tests/qa/manifest.cjs",
+      "tests/qa/run.cjs",
+      "app/astryx-foundation/foundation.tsx",
+      "app/astryx-foundation/page.tsx",
+      "docs/ASTRYX_FOUNDATION.md"
+    ],
+    "added": [
+      "app/astryx-foundation/control-contracts.tsx",
+      "app/haru-controls.css",
+      "app/haru-controls.tsx",
+      "tests/astryx-controls-qa.cjs"
+    ]
+  },
+  "requirements": [
+    {
+      "id": "8.1",
+      "criteria": "Native events/labels/refs/form/required/UTF-16 maxlength/readOnly and single-value selector",
+      "source": [
+        "app/haru-controls.tsx",
+        "app/expression-fields.tsx",
+        "app/feedback-context-input.tsx"
+      ],
+      "tests": [
+        "astryx-controls-qa.cjs",
+        "editor-save-qa.cjs",
+        "local-draft-qa.cjs",
+        "openai-migration-qa.cjs"
+      ]
+    },
+    {
+      "id": "8.2",
+      "criteria": "Disabled/loading click/Enter/Space/implicit submit/rapid actions; held real PUT retry exactly once; no automatic AI",
+      "source": [
+        "app/haru-controls.tsx",
+        "app/learning/save-error.tsx"
+      ],
+      "tests": [
+        "astryx-controls-qa.cjs",
+        "editor-save-qa.cjs",
+        "local-draft-qa.cjs",
+        "openai-migration-qa.cjs",
+        "feedback-safety-qa.cjs"
+      ]
+    },
+    {
+      "id": "8.3",
+      "criteria": "Persistent long errors and retry/backup/conflict controls, separate unmeasured and record completion, progress0/100, 12px saved status, original message lifetime",
+      "source": [
+        "app/learning/save-error.tsx",
+        "app/learning/clock-status.tsx",
+        "app/learning/availability-notice.tsx",
+        "app/learning/save-status.tsx",
+        "app/learning/learning-message.tsx",
+        "app/study-ui.tsx"
+      ],
+      "tests": [
+        "astryx-controls-qa.cjs",
+        "clock-continuity-qa.cjs",
+        "backup-workflow-qa.cjs",
+        "learning-message-qa.cjs",
+        "study-layout-qa.cjs",
+        "sentence-feedback-layout-qa.cjs",
+        "today-status-qa.cjs"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "command": "npm test",
+      "runtime": "Node22.22.2",
+      "passed": 926,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "log": "outputs/astryx-t8-20261118/checks/unit.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "runtimes": [
+        "Node22.22.2",
+        "Node24.22.3"
+      ],
+      "exitCodes": [
+        0,
+        0
+      ],
+      "logs": [
+        "outputs/astryx-t8-20261118/checks/type22.log",
+        "outputs/astryx-t8-20261118/checks/type24.log"
+      ]
+    },
+    {
+      "command": "npm run build",
+      "runtimes": [
+        "Node22.22.2",
+        "Node24.22.3"
+      ],
+      "exitCodes": [
+        0,
+        0
+      ],
+      "logs": [
+        "outputs/astryx-t8-20261118/checks/build22.log",
+        "outputs/astryx-t8-20261118/checks/build24.log"
+      ]
+    },
+    {
+      "command": "npm run lint",
+      "errors": 0,
+      "existingWarnings": 15,
+      "exitCode": 0,
+      "log": "outputs/astryx-t8-20261118/checks/lint.log"
+    },
+    {
+      "command": "node --check + eslint changed QA after final readiness correction",
+      "exitCode": 0,
+      "log": "outputs/astryx-t8-20261118/checks/qa-lint.log"
+    },
+    {
+      "command": "npm run check:grammar-review",
+      "exitCode": 0,
+      "log": "outputs/astryx-t8-20261118/checks/grammar.log"
+    },
+    {
+      "command": "npm run astryx -- doctor --built dist/client",
+      "pass": 11,
+      "warn": 1,
+      "fail": 0,
+      "sourcePurityInspected": false,
+      "exitCode": 0,
+      "log": "outputs/astryx-t8-20261118/checks/doctor.log"
+    },
+    {
+      "command": "node tests/qa/run.cjs functional --list",
+      "exitCode": 0,
+      "log": "outputs/astryx-t8-20261118/checks/qa-inventory.log"
+    }
+  ],
+  "browser": {
+    "scripts": 19,
+    "engines": [
+      "chromium",
+      "webkit"
+    ],
+    "successfulFinalPairs": 38,
+    "allExitCodes": 0,
+    "timedOut": 0,
+    "evidence": "outputs/astryx-t8-20261118/browser-final-results.json",
+    "providerCalls": 0,
+    "realIphone": false
+  },
+  "preservation": {
+    "protectedSourceFiles": 190,
+    "sourceApiLibraryHooksSqlPackageLockSiteUnchanged": true,
+    "previousTags": 5,
+    "previousManifests": 5,
+    "phase1AndT7CanonicalEvidence": 4,
+    "paidAiCalls": 0,
+    "productionQaWrites": 0,
+    "dependencyChanges": 0,
+    "deployment": false,
+    "githubWrites": false,
+    "deletedFiles": 0,
+    "ownedQaStopped": true
+  },
+  "recoveryHistory": [
+    {
+      "finding": "TextArea maxLength is a soft counter; previous native UTF-16 limits and required must survive",
+      "resolution": "Map htmlMaxLength and native required/lang/form; emoji and SSR contract checks"
+    },
+    {
+      "finding": "Core required marker changed accessible names; selector inner trigger was shorter than44px",
+      "resolution": "Preserve original aria-label and apply44px to the actual combobox button; do not exclude it from the touch audit"
+    },
+    {
+      "finding": "Banner error styling does not imply role=alert, and nested progress track collapsed with100% height",
+      "resolution": "Explicit urgent role; persistent uncollapsed banner; public track4/8px and0/100 checks"
+    },
+    {
+      "finding": "Core Text changed saved status to16px/ink/block",
+      "resolution": "Scoped12px/caption/flex restoration; real home computed styles on both widths and engines"
+    },
+    {
+      "finding": "Older AI QA omitted required Korean intention and used stale v7/v6 synthetic replies",
+      "resolution": "Explicit synthetic intention and existing currentOpenaiFeedback helper; preserve request counts, original text, outcomes and receipts"
+    },
+    {
+      "finding": "WebKit key press raced async context identity readiness",
+      "resolution": "Wait for the actual request button to enable; assert zero automatic calls before pressing Enter"
+    },
+    {
+      "finding": "New global retry QA assumed an error button stayed mounted while saving and sent keys to restored page focus",
+      "resolution": "Assert existing error-to-saving transition and exactly one held PUT after three clicks; busy keyboard behavior is independently tested in the common contract fixture"
+    }
+  ],
+  "limits": [
+    "No deployment/GitHub write/paid AI/production QA writes",
+    "WebKit emulation is not actual iPhone/IME/VoiceOver",
+    "Single-value Selector adapter is not a blanket native required/multiple/form/ref substitute",
+    "Programmatic form.requestSubmit and direct API calls still require domain safeguards",
+    "No pixel identity or final performance certification claim"
+  ],
+  "dashboardValidationFile": ".taskmaster/docs/astryx-adoption-t8-dashboard-validation.json",
+  "verifiedAt": "2026-11-18T08:44:49.733Z",
+  "completionAudit": {
+    "passed": true,
+    "productRequirements": [
+      "8.1",
+      "8.2",
+      "8.3"
+    ],
+    "unit": 926,
+    "browserPairs": 38,
+    "dashboardGroups": 39,
+    "dashboardExitCodes": [
+      0,
+      0,
+      0
+    ],
+    "taskMasterReadback": {
+      "doneParents": 8,
+      "doneSubtasks": 27,
+      "nextId": 9,
+      "nextStatus": "pending"
+    },
+    "protectedSourceFiles": 190,
+    "priorTags": 5,
+    "priorManifests": 5,
+    "phase1AndT7Evidence": 4,
+    "dashboardSourceHashesMatchAfterMcp": true,
+    "ownedWorkerCheck": "No matching process after runner completion; lock absent",
+    "deletedProductOrEvidenceFiles": 0,
+    "verifiedAt": "2026-11-18T08:48:39.268Z"
+  }
+}

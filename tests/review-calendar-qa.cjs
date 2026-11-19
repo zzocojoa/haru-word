@@ -1,3 +1,5 @@
+const {chooseOption,selectedOption}=require('./qa/select.cjs');
+const period=async control=>(await selectedOption(control)).replace(/부터 한 주$/,'');
 const { launchBrowser, closeBrowser }=require('./qa/runtime.cjs');
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const base=require('./qa/runtime.cjs').base,out='outputs/review-calendar';fs.mkdirSync(out,{recursive:true});
@@ -13,19 +15,19 @@ const base=require('./qa/runtime.cjs').base,out='outputs/review-calendar';fs.mkd
  assert.equal((await c.request.put(base+'/api/state',{data:{revision:data.revision,progress,sessions}})).status(),200);
  const original=await get();await p.goto(base);await p.getByText('저장됨',{exact:true}).waitFor();await p.getByRole('tab',{name:'복습 점검',exact:true}).click();
  const week=p.getByRole('combobox',{name:'주간 점검 기간',exact:true}),month=p.getByRole('combobox',{name:'월말 점검 기간',exact:true});
- await week.focus();await p.keyboard.press('End');await p.keyboard.press('Enter');
- assert.equal(await week.inputValue(),'2024-01-01');assert.equal(await p.locator('[data-review-kind=weekly] .review-count b').innerText(),'1');
- await week.click();await p.keyboard.press('Escape');assert.equal(await week.inputValue(),'2024-01-01');assert.ok(await week.evaluate(el=>el===document.activeElement));
- checks.push('native period selection supports keyboard End/Enter and Escape, keeps the selected oldest week and focus');
- await month.selectOption('2025-12');assert.equal(await month.inputValue(),'2025-12');assert.equal(await p.locator('[data-review-kind=monthly] .review-count b').innerText(),'1');
- await p.getByRole('tab',{name:'단어장',exact:true}).click();await p.getByRole('tab',{name:'복습 점검',exact:true}).click();assert.equal(await month.inputValue(),'2025-12');assert.equal(await week.inputValue(),'2024-01-01');
+ await week.focus();await p.keyboard.press('Enter');await p.getByRole('listbox').waitFor();await p.keyboard.press('End');await p.keyboard.press('Enter');
+ assert.equal(await period(week),'2024-01-01');assert.equal(await p.locator('[data-review-kind=weekly] .review-count b').innerText(),'1');
+ await week.click();await p.keyboard.press('Escape');assert.equal(await period(week),'2024-01-01');assert.ok(await week.evaluate(el=>el===document.activeElement));
+ checks.push('period selection supports keyboard End/Enter and Escape, keeps the selected oldest week and focus');
+ await chooseOption(month,'2025-12');assert.equal(await period(month),'2025-12');assert.equal(await p.locator('[data-review-kind=monthly] .review-count b').innerText(),'1');
+ await p.getByRole('tab',{name:'단어장',exact:true}).click();await p.getByRole('tab',{name:'복습 점검',exact:true}).click();assert.equal(await period(month),'2025-12');assert.equal(await period(week),'2024-01-01');
  checks.push('historical monthly targets and explicit period selections survive tab changes without modifying saved history');
  await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});
  for(const control of [week,month]){
-  await control.focus();await p.keyboard.press('Home');await p.keyboard.press('Enter');
+  await control.click();await p.getByRole('listbox').waitFor();await p.keyboard.press('Home');await p.keyboard.press('Enter');
   const result=await p.evaluate(async()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(result.violations.length,0,JSON.stringify(result.violations));
  }
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await p.screenshot({path:out+'/historical-periods-mobile.png'});assert.deepEqual(await get(),original);assert.deepEqual(errors,[]);
- checks.push('both period selection states have zero axe violations; 390px layout fits and all interactions are read-only; OS picker UI is outside axe coverage');
+ checks.push('both period selection states have zero axe violations; 390px layout fits and all interactions are read-only; actual iPhone and VoiceOver remain separate checks');
  fs.writeFileSync(out+'/verification.json',JSON.stringify({passed:true,checks,axeStates:2,pageErrors:errors},null,2));console.log(JSON.stringify({passed:true,checks}));
 }finally{await closeBrowser(browser)}})().catch(e=>{console.error(e);process.exit(1)});

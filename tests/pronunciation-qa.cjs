@@ -1,3 +1,4 @@
+const {chooseOption}=require('./qa/select.cjs');
 // Local synthetic records only. Dictionary links are inspected without opening external audio.
 const assert=require('node:assert/strict'),fs=require('node:fs');
 const {base,launchBrowser,closeBrowser,accountHeaders,axePath,waitForWorker}=require('./qa/runtime.cjs');
@@ -55,7 +56,7 @@ const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric'
     await dialog.getByRole('button',{name:'다른 뜻 추가',exact:true}).click();
     await dialog.getByLabel('학습할 뜻',{exact:true}).fill('변경한 뜻');await page.waitForFunction(()=>document.querySelectorAll('.word-ipa').length===0);
     await dialog.getByLabel('학습할 뜻',{exact:true}).fill(content[entry.id].meaning);await dialog.locator('.word-ipa').waitFor();
-    await dialog.getByLabel('학습할 뜻 선택',{exact:true}).selectOption(content[entry.id].meaning);await dialog.locator('.word-ipa').waitFor();
+    await chooseOption(dialog.getByRole('combobox',{name:'학습할 뜻 선택',exact:true}),content[entry.id].meaning);await dialog.locator('.word-ipa').waitFor();
    }
    await page.keyboard.press('Escape');
    if(name==='read')await page.getByRole('button',{name:'변경 버리고 닫기',exact:true}).click();

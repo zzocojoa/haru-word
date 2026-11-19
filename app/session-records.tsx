@@ -1,10 +1,6 @@
+import {HaruPanel,HaruHeading,HaruParagraph} from './haru-content';
 import { memo } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import {HaruAccordion,HaruDisclosure} from './haru-disclosure';
 import { FeedbackDetail } from "./feedback-detail";
 import { RecordText } from './record-text';
 import { StatusBadge } from "./study-ui";
@@ -31,8 +27,8 @@ export const SessionRecords = memo(function SessionRecords({
   compact?: boolean;
 }) {
   const warmup = s.warmupIds.length > 0 && (
-    <article className="record-card">
-      <h3>기억 깨우기 기록</h3>
+    <HaruPanel role="article" className="record-card">
+      <HaruHeading level={3}>기억 깨우기 기록</HaruHeading>
       <dl>
         {s.warmupIds.map(id => (
           <div key={id}>
@@ -41,23 +37,23 @@ export const SessionRecords = memo(function SessionRecords({
           </div>
         ))}
       </dl>
-    </article>
+    </HaruPanel>
   );
   const records = s.ids.map(id => {
     const r = s.records[id];
     const w = words.find(w => w.id === entryIdFor(s, id));
     if (!r) return null;
     const detail = (
-      <article className="record-card" key={id}>
+      <HaruPanel role="article" className="record-card" key={id}>
         <header>
           <b>{w?.word}</b>
           <span>{r.lastPracticedOn || r.learnedOn || s.date} · {POS[w?.pos || ""]}</span>
         </header>
         <RecordText text={r.meaning} label="저장한 뜻" />
-        <p className="small-note">
+        <HaruParagraph className="small-note">
           회차 시작일 {s.date} · 학습한 날 {r.learnedOn || "이전 기록 · 날짜 미확인"}
           {r.lastPracticedOn && ` · 마지막 연습 ${r.lastPracticedOn}`}
-        </p>
+        </HaruParagraph>
         <dl>
           <div><dt>처음 확인한 친숙도</dt><dd>{r.familiarity ? FAMILIARITY_TEXT[r.familiarity] : "미확인"}</dd></div>
           <div>
@@ -79,15 +75,14 @@ export const SessionRecords = memo(function SessionRecords({
             <FeedbackDetail feedback={r.aiFeedback} />
           </details>
         )}
-      </article>
+      </HaruPanel>
     );
     if (!compact) return detail;
     const complete = sessionRecordComplete(s, r);
     const needsHelp = !complete && (r.en === "help" || r.ko === "help" || r.sentenceStatus === "improve");
     const unmeasured = r.en === "unmeasured" && r.ko === "unmeasured" && r.sentenceStatus === "unmeasured";
     return (
-      <AccordionItem value={"word:" + id} key={id} className="journal-word">
-        <AccordionTrigger className="journal-word-trigger">
+      <HaruDisclosure value={"word:" + id} key={id} className="journal-word" trigger={<>
           <span className="journal-word-summary">
             <span>
               <b lang="en">{w?.word || "단어"}</b>
@@ -98,21 +93,22 @@ export const SessionRecords = memo(function SessionRecords({
           <StatusBadge tone={complete ? "success" : needsHelp ? "warning" : "neutral"}>
             {complete ? "도움 없이 성공" : needsHelp ? "보완 필요" : unmeasured ? "아직 확인 안 함" : "진행 중"}
           </StatusBadge>
-        </AccordionTrigger>
-        <AccordionContent className="journal-word-detail">{detail}</AccordionContent>
-      </AccordionItem>
+        </>} triggerClassName="journal-word-trigger">
+
+        <div className="journal-word-detail">{detail}</div>
+      </HaruDisclosure>
     );
   });
   if (compact) return (
-    <Accordion type="single" collapsible className="journal-words">
+    <HaruAccordion type="single" collapsible className="journal-words">
       {warmup && (
-        <AccordionItem value="warmup">
-          <AccordionTrigger className="journal-word-trigger">기억 깨우기 · {s.warmupIds.length}개</AccordionTrigger>
-          <AccordionContent className="journal-word-detail">{warmup}</AccordionContent>
-        </AccordionItem>
+        <HaruDisclosure value="warmup" trigger={<>기억 깨우기 · {s.warmupIds.length}개</>} triggerClassName="journal-word-trigger">
+
+          <div className="journal-word-detail">{warmup}</div>
+        </HaruDisclosure>
       )}
       {records}
-    </Accordion>
+    </HaruAccordion>
   );
   return <div className="record-cards">{warmup}{records}</div>;
 });

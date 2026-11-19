@@ -83,8 +83,10 @@ const words = JSON.parse(fs.readFileSync('data/words.json'));
       await dialog.getByText('변경하면 자동으로 저장해요. 상단에서 저장 상태를 확인해 주세요.', { exact: true }).waitFor();
       assert.doesNotMatch(await dialog.innerText(), /Free 상태|무료 계정 상태/);
       assert.equal(await dialog.getByRole('button', { name: '닫기', exact: true }).count(), 1);
-      assert.equal(await dialog.locator('.dialog-scroll > label:not(.check-label)').first().evaluate(el => getComputedStyle(el).flexDirection), 'column', 'mobile labels must not collapse into a narrow vertical strip');
-      assert.deepEqual(await dialog.locator('[data-slot=select-value]').evaluateAll(values => values.filter(el => el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1).map(el => el.textContent)), [], 'selected settings must remain readable at 200% text');
+      assert.equal(await dialog.locator('.dialog-scroll > label:not(.check-label),.dialog-scroll > [data-settings-field]').first().evaluate(el => getComputedStyle(el).flexDirection), 'column', 'mobile labels must not collapse into a narrow vertical strip');
+      const selectedSettings=dialog.locator('[data-slot=select-value],.haru-field-control>[role=combobox]');
+      assert.ok(await selectedSettings.count()>=3,'actual settings selection values are present');
+      assert.deepEqual(await selectedSettings.evaluateAll(values => values.filter(el => el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1).map(el => el.textContent)), [], 'selected settings must remain readable at 200% text');
       await layout(`settings-${width}-${size}`);
       await dialog.getByRole('button', { name: '닫기', exact: true }).click();
     }

@@ -138,7 +138,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       [svg(settings.getByRole('button', { name: '이 기기의 임시 입력 삭제', exact: true })), 18, 'P087 local delete'],
       [svg(settings.getByRole('link', { name: '임시 입력을 지우고 로그아웃', exact: true })), 18, 'P088 local logout'],
       [svg(settings.getByRole('button', { name: '닫기', exact: true })), 16, 'P095 dialog close'],
-      [svg(goal), 16, 'P097 select trigger']);
+      [await goal.evaluate(el=>!!el.closest('.astryx-selector')) ? settings.locator('.astryx-selector:has([aria-label="하루 목표"]) .astryx-selector-indicator-icon svg') : svg(goal), 16, 'P097 select trigger']);
     await qa.inspect('settings', { icons });
     assert.equal(await pause.evaluate(element => element.tagName + ':' + element.type), 'INPUT:checkbox');
     assert.equal(await settings.getByRole('combobox', { name: 'AI 모델', exact: true }).isEnabled(), true,
@@ -150,7 +150,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
         await page.waitForFunction(name => {
           const active = document.activeElement;
           return active?.closest('.settings-dialog') && active.getAttribute('aria-label') === name
-            && active.getAttribute('role') === 'combobox' && !active.disabled;
+            && active.getAttribute('role') === 'combobox' && !active.disabled && active.getAttribute('aria-disabled')!=='true';
         }, name);
         evidence.returned = true;
       } finally {
@@ -173,6 +173,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       await qa.settle(); await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
       await qa.inspect('goal-options-' + width + '-' + textSize, { widths: [width], textSizes: [textSize],
         icons: [[page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).locator('svg'), 16, 'P098 selected option']] });
+      await page.keyboard.press('Escape');await page.getByRole('listbox').waitFor({state:'hidden'});
     }
     await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
     await page.keyboard.press('Escape');
@@ -186,18 +187,21 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       const element = await option.elementHandle();
       assert.ok(element, name + ' exists');
       try {
-        await page.waitForFunction(({ element, selected }) => document.activeElement === element
-          && element.getAttribute('aria-selected') === String(selected), { element, selected });
+        await page.waitForFunction(({ element, selected }) => {const active=document.activeElement;return (active===element || active?.getAttribute('aria-activedescendant')===element.id && active?.getAttribute('aria-controls')===element.closest('[role=listbox]')?.id) && element.getAttribute('aria-selected') === String(selected);}, { element, selected });
       } finally { await element.dispose(); }
     };
     const chooseOption = async (control, currentName, nextName) => {
       await control.focus(); await control.press('Space'); await page.getByRole('listbox').waitFor();
       await waitForOptionFocus(currentName, true);
-      await page.getByRole('option', { name: nextName, exact: true }).focus();
+      if(await control.evaluate(el=>el.closest('.astryx-selector')!==null)) {
+        const labels=await page.getByRole('option').allTextContents();
+        const index=labels.findIndex(text=>text.trim()===nextName);assert.ok(index>=0,nextName+' is an available option');
+        await page.keyboard.press('Home');for(let step=0;step<index;step++)await page.keyboard.press('ArrowDown');
+      }else await page.getByRole('option', { name: nextName, exact: true }).focus();
       await waitForOptionFocus(nextName, false);
       await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
     };
-    // Radix defers navigation focus with setTimeout. Observe each real keyboard
+    // Observe the active option through DOM focus or the combobox ARIA link. Observe each real keyboard
     // destination before the next key so Enter cannot select the previous item.
     await changeAndSave(async () => {
       await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
@@ -364,7 +368,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
         if (await settings.isVisible()) {
           await page.waitForFunction(() => {
             const element = document.querySelector('.settings-dialog [aria-label="하루 목표"]');
-            return element instanceof HTMLButtonElement && !element.disabled;
+            return element instanceof HTMLButtonElement && !element.disabled && element.getAttribute('aria-disabled')!=='true';
           });
         }
         await qa.settle();
@@ -435,8 +439,8 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
 
     const field = page.getByRole('textbox', { name: '내 영어 문장', exact: true });
     const intent = page.getByRole('textbox', { name: '의도한 한국어 문장', exact: true });
-    // The session's direct notice owns the English draft; the Korean intention
-    // has its own nested notice, with the same recovery button names.
+    // Notices exist only for an error or an actual competing draft. Ordinary
+    // auto-restoration returns directly to the English/Korean input fields.
     const sentenceDraft = page.locator('.session-panel').filter({ has: field }).locator(':scope > .local-draft-notice');
     const intentDraft = page.locator('.korean-intent-input').filter({ has: intent }).locator(':scope > .local-draft-notice');
     const openLesson = async () => {
@@ -447,15 +451,17 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       await page.waitForFunction(() => document.activeElement?.tagName === 'H2' && !!document.activeElement.closest('.session-panel'));
     };
     await openLesson();
-    assert.equal(await sentenceDraft.count(), 1); assert.equal(await intentDraft.count(), 1);
+    assert.equal(await sentenceDraft.count(), 0); assert.equal(await intentDraft.count(), 0);
+    const ordinaryOriginalState = (await qa.getState()).state;
     await field.fill('A synthetic draft to recover.'); await waitDraft('A synthetic draft to recover.');
     await page.reload({ waitUntil: 'domcontentloaded' }); await openLesson();
     await waitValue(field, 'A synthetic draft to recover.');
-    const draftBaseline = await qa.getState();
-    const undo = sentenceDraft.getByRole('button', { name: '복구한 입력 되돌리기', exact: true });
-    await qa.inspect('draft-restored', { icons: [[svg(undo), 18, 'P090 restore undo']] });
-    await qa.click(undo, 'draft-undo'); await waitValue(field, 'Existing server sentence.');
-    assert.deepEqual(await qa.getState(), draftBaseline, 'undo does not grade or save recovered input');
+    const ordinaryDraftBaseline = await qa.getState();
+    assert.deepEqual(ordinaryDraftBaseline.state, ordinaryOriginalState, 'reload/resume preserves saved records, grades and first answers');
+    assert.equal(await sentenceDraft.count(), 0, 'ordinary restoration has no visible recovery tools');
+    assert.equal(await intentDraft.count(), 0, 'ordinary Korean input has no recovery tools');
+    await qa.inspect('draft-restored');
+    assert.deepEqual(await qa.getState(), ordinaryDraftBaseline, 'inspecting ordinary restoration does not grade, save or change the resumed revision');
     await field.fill('A draft kept for explicit comparison.'); await waitDraft('A draft kept for explicit comparison.');
     const latest = await qa.getState(), current = latest.state.sessions[lesson.id];
     const changed = { ...current,
@@ -472,6 +478,8 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     const compare = sentenceDraft.getByRole('button', { name: '현재 입력과 비교', exact: true });
     const comparison = sentenceDraft.getByRole('group', { name: '임시 입력 복구 확인', exact: true });
     const openEnglishComparison = async () => {
+      const tools = sentenceDraft.locator('details').first();
+      if (!await tools.evaluate(element => element.open)) await tools.locator('summary').click();
       const count = await compare.count();
       for (let index = 0; index < count; index++) {
         await compare.nth(index).click(); await comparison.waitFor();
@@ -494,7 +502,16 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     await qa.click(comparison.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }), 'draft-apply');
     await waitValue(field, 'A draft kept for explicit comparison.');
     assert.deepEqual(await qa.getState(), comparisonBaseline);
-    report.checks.push('P090: automatic recovery, undo, explicit comparison/cancel/apply preserve original scores, first answers and server revision');
+    const undo = sentenceDraft.getByRole('button', { name: '복구한 입력 되돌리기', exact: true });
+    if (!await undo.isVisible()) await sentenceDraft.locator('details').first().locator('summary').click();
+    await qa.inspect('draft-manual-choice', { icons: [[svg(undo), 18, 'P090 explicit-choice undo']] });
+    await qa.click(undo, 'draft-undo-explicit-choice'); await waitValue(field, 'Changed server sentence.');
+    assert.deepEqual(await qa.getState(), comparisonBaseline, 'undo after an explicit choice does not grade or save recovered input');
+    await openEnglishComparison();
+    await qa.click(comparison.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }), 'draft-reapply');
+    await waitValue(field, 'A draft kept for explicit comparison.');
+    assert.deepEqual(await qa.getState(), comparisonBaseline);
+    report.checks.push('P090: ordinary restoration has no visible tools; actual conflicting drafts retain comparison/cancel/apply and explicit-choice undo, preserving original scores, first answers and server revision');
 
     await openSettings();
     const deletionBaseline = await qa.getState(), localBefore = await draftRows();

@@ -60,7 +60,7 @@ const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'n
     const audio = page.locator('.word-pronunciation .speak-wrap');
     const button = audio.getByRole('button', { name: 'quickly 기기 음성 듣기', exact: true });
     const help = audio.locator('.audio-help');
-    const message = audio.getByRole('status');
+    const message = audio.locator('.audio-message[role=status]');
     const control = async event => page.evaluate(name => window.__testAudio.utterance[name]?.(), event);
     await page.screenshot({ path: `${out}/idle-390.png` });
     await button.click();

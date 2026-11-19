@@ -1,5 +1,11 @@
 // Explicit inventory: additions and deletions require review.
 module.exports = [
+  "astryx-grammar-qa.cjs",
+  "astryx-library-qa.cjs",
+  "astryx-today-qa.cjs",
+  "astryx-controls-qa.cjs",
+  "astryx-foundation-qa.cjs",
+  "astryx-navigation-qa.cjs",
   "auth-boundary-qa.cjs",
   "saved-summary-qa.cjs",
   "local-draft-qa.cjs",
@@ -73,6 +79,7 @@ module.exports = [
   "sentence-feedback-layout-qa.cjs",
   "sentence-structure-qa.cjs",
   "sheet-dismiss-qa.cjs",
+  "astryx-sheets-qa.cjs",
   "sheet-body-swipe-qa.cjs",
   "sheet-motion-qa.cjs",
   "settings-dialog-qa.cjs",

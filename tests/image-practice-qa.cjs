@@ -1,9 +1,11 @@
+const {chooseOption}=require('./qa/select.cjs');
 // Local synthetic learner only; all non-loopback requests are blocked.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { base, accountHeaders, launchBrowser, closeBrowser, waitForWorker, axePath } = require('./qa/runtime.cjs');
 const { emptyState } = require('./fixtures/backup-history.cjs');
-const engine = process.env.QA_BROWSER || 'chromium', stage = process.argv[2] || (['development', 'enabled'].includes(process.env.QA_IMAGE_PILOT_MODE) ? 'all' : 'production');
+const { imagePracticeStage } = require('./qa/preflight.cjs');
+const engine = process.env.QA_BROWSER || 'chromium', stage = imagePracticeStage(process.env,process.argv[2]);
 const stages = ['front', 'back', 'lifecycle', 'network', 'error', 'editor', 'eligible', 'empty', 'matrix', 'full', 'extended'];
 if (stage === 'all') {
   const { spawnSync } = require('node:child_process');
@@ -14,7 +16,7 @@ if (stage === 'all') {
   process.exit(0);
 }
 if (![...stages, 'entry', 'production', 'isolation'].includes(stage)) throw Error('Unknown image-practice QA stage');
-const out = 'outputs/word-image-full/' + engine;
+const out = process.env.ASTRYX_QA_OUTPUT ? require('node:path').join(process.env.ASTRYX_QA_OUTPUT,engine,stage) : 'outputs/word-image-full/' + engine;
 const pilot = JSON.parse(fs.readFileSync('data/word-image-pilot-web.json'));
 const web = JSON.parse(fs.readFileSync('data/word-image-web-manifest.json'));
 const ui = JSON.parse(fs.readFileSync('data/word-image-ui.json'));
@@ -174,7 +176,7 @@ async function checkLayouts(page, dialog, label) {
       const entry = page.getByRole('button', { name: '이미지 연습', exact: true });
       await entry.focus(); await page.keyboard.press('Enter');
       const dialog = page.getByRole('dialog');
-      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
+      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled):not([aria-disabled=true])') !== null);
       await page.addScriptTag({ path: axePath });
       for (const width of [320, 390, 865, 1440]) for (const size of [100, 200]) {
         await page.setViewportSize({ width, height: 844 });
@@ -213,13 +215,13 @@ async function checkLayouts(page, dialog, label) {
       await page.waitForFunction(() => [...document.querySelectorAll('[role="dialog"] img')].every(image => image.complete && image.naturalWidth > 0));
       await page.screenshot({ path: out + '/editor.png', fullPage: false });
       await checkLayouts(page, dialog, 'editor');
-      await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption('다른 뜻');
+      await chooseOption(dialog.getByRole('combobox',{name:'학습할 뜻 선택',exact:true}),'다른 뜻');
       assert.equal(await dialog.locator('img').count(), 0, 'changed meaning hides preview immediately');
       await dialog.getByLabel('함께 익힐 표현', { exact: true }).fill('changed sample');
       await dialog.getByRole('button', { name: '닫기', exact: true }).click();
       await page.getByRole('alertdialog').getByRole('button', { name: '계속 편집', exact: true }).click();
       assert.equal(await dialog.getByLabel('함께 익힐 표현', { exact: true }).inputValue(), 'changed sample');
-      await dialog.getByLabel('학습할 뜻 선택', { exact: true }).selectOption('사과');
+      await chooseOption(dialog.getByRole('combobox',{name:'학습할 뜻 선택',exact:true}),'사과');
       assert.equal(await dialog.locator('img').count(), 1);
       await dialog.getByRole('button', { name: '다른 뜻 추가', exact: false }).click();
       assert.equal(await dialog.locator('img').count(), 0, 'empty new sense has no preview');
@@ -261,7 +263,7 @@ async function checkLayouts(page, dialog, label) {
       await page.evaluate(() => { window.qaOldImage.dispatchEvent(new Event('load')); delete window.qaOldImage; });
       assert.equal(await dialog.locator('.image-practice-flip').isDisabled(), true, 'old image event cannot enable a new card');
       await heldImages.get(catalog.entries[1].url).fulfill({ contentType: 'image/webp', body: imageBytes(catalog.entries[1]) });
-      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
+      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled):not([aria-disabled=true])') !== null);
       await dialog.getByRole('button', { name: '연습 닫기', exact: true }).click();
       checks.push('503 skip hides answer; late detached load cannot change next loading state; current response enables reveal');
     }
@@ -280,7 +282,25 @@ async function checkLayouts(page, dialog, label) {
       assert.equal(await dialog.locator('.image-practice-flip').isDisabled(), true);
       const markup = await dialog.innerHTML();
       assert.equal(/apple|사과|n\.|A1/.test(markup), false, 'front DOM has no answer or word metadata');
-      assert.equal(/apple|사과/.test(await page.locator('body').ariaSnapshot()), false, 'modal accessibility tree hides background answers');
+      const bodySnapshot=await page.locator('body').ariaSnapshot();
+      const nativeModal=await dialog.evaluate(element=>element instanceof HTMLDialogElement&&element.matches(':modal'));
+      if(nativeModal){
+        // Playwright 1.62.1's DOM-derived aria snapshot does not model native
+        // dialog/inert exclusion. Keep the front check and independently verify
+        // platform focus isolation and Chromium's actual accessibility tree.
+        assert.equal(/apple|사과/.test(await dialog.ariaSnapshot()),false,'native front accessible content has no answer');
+        const focus=await dialog.evaluate(element=>{
+          const initial=document.activeElement,background=[...document.querySelectorAll('button,input,textarea,select,a[href],[tabindex]')].filter(control=>control instanceof HTMLElement&&!element.contains(control)&&control.tabIndex>=0&&control.getClientRects().length&&!control.matches(':disabled'));
+          let escaped=0;for(const control of background){control.focus({preventScroll:true});if(!element.contains(document.activeElement))escaped++;}
+          if(initial instanceof HTMLElement)initial.focus({preventScroll:true});return{candidates:background.length,escaped,focusInside:element.contains(document.activeElement)};
+        });
+        assert.ok(focus.candidates>0,'real background focus targets are present');assert.equal(focus.escaped,0,'native modal blocks every background focus target');assert.equal(focus.focusInside,true);
+        const evidence={engine,nativeModal,focus,domSnapshotIncludesBackground:/apple|사과/.test(bodySnapshot),actualBrowserAXChecked:false};
+        if(engine==='chromium'){
+          const cdp=await context.newCDPSession(page);try{const tree=await cdp.send('Accessibility.getFullAXTree');const exposed=tree.nodes.filter(node=>!node.ignored);evidence.actualBrowserAXChecked=true;evidence.exposedNodeCount=exposed.length;evidence.exposedDialog=exposed.some(node=>node.role?.value==='dialog'&&node.name?.value==='이미지 연습');evidence.exposedAnswerNames=exposed.filter(node=>/apple|사과/.test(node.name?.value||'')).map(node=>node.name.value);fs.writeFileSync(out+'/front-accessibility.json',JSON.stringify(evidence,null,2));assert.equal(evidence.exposedDialog,true,'actual AX tree contains the named image dialog');assert.ok(exposed.filter(node=>node.role?.value==='button').length>=3,'actual AX tree contains the modal controls');assert.deepEqual(evidence.exposedAnswerNames,[],'actual Chromium accessibility tree excludes background answers');}finally{await cdp.detach();}
+        }
+        fs.writeFileSync(out+'/front-accessibility.json',JSON.stringify(evidence,null,2));
+      }else assert.equal(/apple|사과/.test(bodySnapshot),false,'retained modal accessibility tree hides background answers');
       assert.equal(await dialog.locator('img').count(), 1);
       await dialog.getByRole('button', { name: '다음', exact: true }).click();
       assert.equal(await dialog.locator('img').getAttribute('src'), catalog.entries[1].url);
@@ -297,6 +317,7 @@ async function checkLayouts(page, dialog, label) {
       const flip = dialog.locator('.image-practice-flip'), picture = dialog.locator('.image-practice-picture');
       assert.equal(await dialog.getByRole('button', { name: '단어 확인', exact: true }).count(), 0, 'no separate reveal button');
       assert.equal(/apple|사과/.test(await dialog.innerHTML()), false);
+        if(process.env.ASTRYX_CAPTURE_BASELINE!=='true')assert.equal(await flip.evaluate(el=>el.classList.contains('astryx-button')),true,'flip uses public Core Button');
       assert.equal(await dialog.locator('.word-ipa').count(), 0, 'front has no IPA DOM');
       await page.screenshot({ path: out + '/front.png', fullPage: false });
       await dialog.locator('.image-practice-picture').click();
@@ -354,7 +375,7 @@ async function checkLayouts(page, dialog, label) {
       await page.getByRole('button', { name: '이미지 연습', exact: true }).click();
       const dialog = page.getByRole('dialog');
       await dialog.getByText('3,809개 · 성적은 기록하지 않아요', { exact: true }).waitFor();
-      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
+      await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled):not([aria-disabled=true])') !== null);
       assert.equal(await dialog.getByText('1 / 3809', { exact: true }).count(), 1);
       assert.deepEqual([...new Set(imageRequests)], allEntries.slice(0, 2).map(e => e.url));
       checks.push('all 3809 textbook entries eligible; only current and next image requested');
@@ -369,7 +390,7 @@ async function checkLayouts(page, dialog, label) {
         assert.equal(await dialog.locator('[lang="en"]').count(), 0, 'new card has no English answer');
         assert.equal(await dialog.getByText(expected, { exact: true }).count(), 0, 'every front DOM hides its English answer');
         assert.equal((await dialog.locator('.dialog-scroll').innerHTML()).includes(catalog.entries[i].baseMeaning), false, 'every front card DOM hides its meaning');
-        await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled)') !== null);
+        await page.waitForFunction(() => document.querySelector('.image-practice-flip:not(:disabled):not([aria-disabled=true])') !== null);
         assert.deepEqual(await dialog.locator('img').evaluate(image => [image.naturalWidth, image.naturalHeight]), [catalog.entries[i].width, catalog.entries[i].height], 'web image decoded with the catalog dimensions');
         const allowed = new Set(catalog.entries.slice(0, i + 2).map(e => e.url));
         assert.equal(imageRequests.every(url => allowed.has(url)), true, 'every step fetches at most one image ahead');

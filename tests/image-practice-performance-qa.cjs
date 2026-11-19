@@ -1,6 +1,7 @@
 // Compare two local built Workers with identical synthetic snapshots and probes.
 const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
 const { createHash } = require('node:crypto');
+const { gzipSync } = require('node:zlib');
 const { base, localBase, accountHeaders, launchBrowser, closeBrowser, waitForWorker } = require('./qa/runtime.cjs');
 const { history } = require('./fixtures/backup-history.cjs');
 const baseline = localBase(process.env.QA_BASELINE_URL), out = process.env.QA_PERF_OUTPUT || 'outputs/image-practice-performance';
@@ -56,7 +57,7 @@ const report = { method: { repetitions: 3, histories: [0, 365, 1825], viewport: 
             await page.goto(origin, { waitUntil: 'domcontentloaded' }); await page.waitForFunction(() => window.imagePerf.ready !== null);
             const startup = await page.evaluate(() => ({ readyMs: window.imagePerf.ready, resources: performance.getEntriesByType('resource').filter(r => r.name.startsWith(location.origin)).map(r => ({ path: new URL(r.name).pathname, bytes: r.encodedBodySize, duration: r.duration })) }));
             assert.equal(images.length, 0); assert.equal(requests.includes('/api/image-practice/position'), false);
-            const dist = variant === 'baseline' ? process.env.QA_BASELINE_DIST : 'dist';
+            const dist = variant === 'baseline' ? process.env.QA_BASELINE_DIST : (process.env.QA_CANDIDATE_DIST || 'dist');
             assert.ok(dist, 'Provide QA_BASELINE_DIST');
             for (const resource of startup.resources.filter(r => r.path.endsWith('.js'))) {
               const source = fs.readFileSync(path.join(dist, 'client', resource.path));
@@ -70,9 +71,13 @@ const report = { method: { repetitions: 3, histories: [0, 365, 1825], viewport: 
             await page.waitForTimeout(100);
             assert.deepEqual([...new Set(images)], imageRows.slice(0, 2).map(row => `/word-images/v1/${row[1]}.webp`));
             assert.deepEqual(forbidden, []);
+            const practiceResources=await page.evaluate(()=>performance.getEntriesByType('resource').filter(r=>r.name.startsWith(location.origin)).map(r=>({path:new URL(r.name).pathname,bytes:r.encodedBodySize,duration:r.duration})));
+            const staticAssets=resources=>[...new Set(resources.filter(r=>/^\/_next\/static\/.*\.(js|css)$/.test(r.path)).map(r=>r.path))].map(name=>{const bytes=fs.readFileSync(path.join(dist,'client',name));return {path:name,bytes:bytes.length,gzipBytes:gzipSync(bytes).length,sha256:createHash('sha256').update(bytes).digest('hex')};});
+            const initialAssets=staticAssets(startup.resources),initialNames=new Set(initialAssets.map(r=>r.path)),lazyAssets=staticAssets(practiceResources).filter(r=>!initialNames.has(r.path));
             report.samples.push({ count, network, sample, variant, readyMs: Math.round(startup.readyMs), initialJsRequests: startup.resources.filter(r => r.path.endsWith('.js')).length,
               initialBytes: startup.resources.reduce((sum, r) => sum + r.bytes, 0), homePositionRequests: 0, homeImageRequests: 0, practiceImageRequests: images.length,
-              practicePositionRequests: requests.filter(p => p === '/api/image-practice/position').length }); save();
+              practicePositionRequests: requests.filter(p => p === '/api/image-practice/position').length, initialAssets, lazyAssets,
+              assetBytesMethod:'actual requested static assets; disk raw/gzip sizes, not hosted transfer' }); save();
           } finally { await context.close(); }
         }
       }

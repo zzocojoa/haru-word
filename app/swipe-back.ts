@@ -10,6 +10,7 @@ const dismissConfirmation = (target: EventTarget | null) => target instanceof El
 /** Own only the body's narrow left-edge gesture, not scrolling or browser toolbar Back. */
 export function installSwipeBack(navigation: NavigationHistory) {
   let drag: Drag | undefined, settling = false, timer = 0, disposed = false;
+  let backdropTap: { element: HTMLElement; id: number; x: number; y: number } | undefined;
   let releaseInert = () => {};
   const cue = document.createElement('div');
   cue.className = 'navigation-swipe-cue';
@@ -22,7 +23,7 @@ export function installSwipeBack(navigation: NavigationHistory) {
       s.element.style.transform = s.transform;
       s.element.style.transition = s.transition;
     }
-    drag = undefined; settling = false;
+    drag = undefined; backdropTap = undefined; settling = false;
     document.documentElement.removeAttribute('data-swiping');
     cue.remove(); releaseInert(); releaseInert = () => {};
   }
@@ -50,6 +51,7 @@ export function installSwipeBack(navigation: NavigationHistory) {
     return [...document.querySelectorAll<HTMLElement>('.page-heading, .navigation-body, .page-wrap > footer')].filter(visible);
   }
   function start(event: TouchEvent) {
+    backdropTap = undefined;
     if (settling) { if (!dismissConfirmation(event.target) && event.cancelable) event.preventDefault(); return; }
     if (drag) { reset(); return; }
     if (event.touches.length !== 1 || !event.cancelable || (window.visualViewport?.scale ?? 1) !== 1) return;
@@ -64,6 +66,14 @@ export function installSwipeBack(navigation: NavigationHistory) {
     // full-page snapshots from moving the header/nav, including at tab roots.
     if (!elements?.length) {
       if (target.closest('.shell, [data-slot="dialog-overlay"], [data-slot="alert-dialog-overlay"], [data-slot="popover-content"]')) event.preventDefault();
+      // Reserving the iOS edge also suppresses the click Core's native backdrop
+      // needs. Replay only a completed tap, through its existing click/close guard.
+      if (event.defaultPrevented && target.matches('dialog[data-haru-native-sheet]') && !target.getAnimations().some(animation => animation.playState === 'running')) {
+        const bounds = target.getBoundingClientRect();
+        if (touch.clientY < bounds.top || touch.clientY > bounds.bottom || touch.clientX < bounds.left || touch.clientX > bounds.right) {
+          backdropTap = { element: target, id: touch.identifier, x: touch.clientX, y: touch.clientY };
+        }
+      }
       return;
     }
     event.preventDefault();
@@ -72,6 +82,10 @@ export function installSwipeBack(navigation: NavigationHistory) {
       surfaces: elements.map(element => ({ element, transform: element.style.transform, transition: element.style.transition, base: getComputedStyle(element).transform })) };
   }
   function move(event: TouchEvent) {
+    if (backdropTap) {
+      const touch = event.touches.length === 1 && [...event.touches].find(t => t.identifier === backdropTap!.id);
+      if (!touch || swipeDirection(touch.clientX - backdropTap.x, touch.clientY - backdropTap.y) !== 'pending') backdropTap = undefined;
+    }
     if (!drag || settling) return;
     if (event.touches.length !== 1) { reset(); return; }
     const touch = [...event.touches].find(t => t.identifier === drag!.id);
@@ -93,6 +107,14 @@ export function installSwipeBack(navigation: NavigationHistory) {
     }
   }
   async function end(event: TouchEvent) {
+    const tap = backdropTap; backdropTap = undefined;
+    if (tap && !drag && !settling) {
+      const touch = [...event.changedTouches].find(t => t.identifier === tap.id);
+      if (touch && tap.element.isConnected && swipeDirection(touch.clientX - tap.x, touch.clientY - tap.y) === 'pending') {
+        tap.element.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, clientX: touch.clientX, clientY: touch.clientY }));
+      }
+      return;
+    }
     if (!drag || settling) return;
     const touch = [...event.changedTouches].find(t => t.identifier === drag!.id);
     if (!touch) { reset(); return; }
@@ -102,7 +124,10 @@ export function installSwipeBack(navigation: NavigationHistory) {
     settling = true;
     // Freeze interaction only while the existing asynchronous leave/save guard
     // decides. A late response cannot dismiss newly edited content or a new tab.
-    const locked = [...new Set([...drag.surfaces.map(s => s.element), ...document.querySelectorAll<HTMLElement>('.topbar, .main-nav')])];
+    // A native host must remain interactive for the confirmation portalled into it.
+    // Lock our content frame; the nested modal independently locks its background.
+    const locked = [...new Set([...drag.surfaces.map(s => s.element.matches('[data-haru-native-sheet]')
+      ? s.element.querySelector<HTMLElement>('.haru-sheet-frame') ?? s.element : s.element), ...document.querySelectorAll<HTMLElement>('.topbar, .main-nav')])];
     const inert = locked.map(element => element.inert);
     locked.forEach(element => { element.inert = true; });
     releaseInert = () => locked.forEach((element, index) => { element.inert = inert[index]; });

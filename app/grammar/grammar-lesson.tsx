@@ -1,8 +1,11 @@
 'use client';
+import {HaruPanel,HaruHeading,HaruParagraph} from '../haru-content';
+import {HaruButton} from '../haru-controls';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Lightbulb } from 'lucide-react';
 import { HaruIcon } from '@/components/icons/haru-icon';
-import { Progress } from '@/components/ui/progress';
+import { HaruProgress as Progress } from '../haru-controls';
 import { exampleFocusStart, type GrammarLesson as Lesson } from '@/lib/grammar/content';
 import { QUESTION_KEYS, combinedCheck, recordAnswer, recordObservationHelp, revealGrammarAnswer, updateGrammarSentence, type GrammarProgress } from '@/lib/grammar/model';
 import { practiceForVersion, lessonForVersion, legacyContentNote } from '@/lib/grammar/content-v4';
@@ -28,6 +31,11 @@ type Props = { lesson: Lesson; enhanced?: boolean; contentVersion?:2|3|4; persis
 export function GrammarLesson({ lesson: originalLesson, enhanced = true, contentVersion=2, persistence, activityDate, onBack, onWords }: Props) {
   const lessonId = originalLesson.id;
   const { draft: progress, latest, change, flush, dirty, saving, error,persistent } = useGrammarDraft(lessonId, persistence, enhanced,contentVersion);
+  const setWritingCheck = useCallback((check: NonNullable<GrammarProgress['check']>) => change(value => ({ ...value, check })), [change]);
+  const setWritingChecks = useCallback((key: 'meaning' | 'form', result: NonNullable<GrammarProgress['check']>) => change(value => {
+    const checks = { ...value.checks, [key]: result }; return { ...value, checks, check: combinedCheck(checks) };
+  }), [change]);
+  const setWritingFrame = useCallback((frame: string[]) => change(value => ({ ...value, frame })), [change]);
   const lesson = lessonForVersion(originalLesson, progress.contentVersion), practice = practiceForVersion(lessonId,progress.contentVersion);
   const {modelId}=useAiRequests();
   const feedbackContext=useFeedbackContext('grammar',JSON.stringify([lessonId,progress.contentVersion??1]),grammarFeedbackInput(lesson,progress.sentence),modelId);
@@ -82,14 +90,14 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
     await flush();
   }
 
-  return <section className="grammar-lesson" aria-label={`${lesson.title} 수업`}>
+  return <HaruPanel role="region" className="grammar-lesson" aria-label={`${lesson.title} 수업`}>
     <div className="grammar-toolbar">
-      <button className="text-button" onClick={() => void leave(onBack)}><HaruIcon name="list" size={18} />수업 목록</button>
+      <HaruButton label={["수업 목록"].join('')} variant="ghost" icon={<HaruIcon name="list" size={18} />} className="haru-migrated text-button" onClick={() => void leave(onBack)}>수업 목록</HaruButton>
       <span role="status" className="small-note">{error ? '저장 확인 필요' : saving ? '저장 중' : dirty ? '아직 저장 전' : '저장됨'}</span>
     </div>
     <div className="grammar-lesson-heading">
       <span className="level-badge">{lesson.pos}</span>
-      <h2 ref={heading} tabIndex={-1} aria-label={`${lesson.title} · ${step.label}`}>{lesson.title}</h2>
+      <HaruHeading level={2} ref={heading} tabIndex={-1} aria-label={`${lesson.title} · ${step.label}`}>{lesson.title}</HaruHeading>
       <span className="grammar-stage-label"><span className="grammar-phase-count">{step.phase + 1}/{step.steps.length} · </span>{step.label}</span>
     </div>
     <ol className="grammar-stepper" aria-label={reviewing ? '다시 확인 단계' : '수업 단계'}>{step.steps.map((label, index) =>
@@ -98,30 +106,30 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
       </li>
     )}</ol>
     <Progress className="grammar-progress" aria-label="수업 진행" value={step.percent} />
-    {error && <div role="alert" className="grammar-message"><p>{error}</p><button className="secondary-button" disabled={saving || !persistence.canSave} onClick={() => void flush()}>다시 저장</button></div>}
-    {!persistence.canSave && <p role="status" className="small-note">저장 상태를 확인한 뒤 계속할 수 있어요. 작성 중인 내용은 화면에 남아 있어요.</p>}
-    {reviewing && !!progress.review?.contentVersion && <p className="small-note">{progress.review.mode === 'scheduled' ? '다른 날 다시 확인' : '추가 연습 · 복습 일정 유지'} · 세트 {progress.review.setId?.toUpperCase()}{progress.review.reused ? ' · 다시 만나는 문제' : ''}</p>}
+    {error && <div role="alert" className="grammar-message"><HaruParagraph>{error}</HaruParagraph><HaruButton label={["다시 저장"].join('')} variant="secondary" className="haru-migrated secondary-button" disabled={saving || !persistence.canSave} onClick={() => void flush()}>다시 저장</HaruButton></div>}
+    {!persistence.canSave && <HaruParagraph role="status" className="small-note">저장 상태를 확인한 뒤 계속할 수 있어요. 작성 중인 내용은 화면에 남아 있어요.</HaruParagraph>}
+    {reviewing && !!progress.review?.contentVersion && <HaruParagraph className="small-note">{progress.review.mode === 'scheduled' ? '다른 날 다시 확인' : '추가 연습 · 복습 일정 유지'} · 세트 {progress.review.setId?.toUpperCase()}{progress.review.reused ? ' · 다시 만나는 문제' : ''}</HaruParagraph>}
     {!reviewing && progress.stage === 0 && (!!progress.contentVersion ? <GrammarReading practice={practice} progress={progress} disabled={!persistence.canSave}
       onHelp={observationHelp} onChoice={observationChoice => change(value => ({ ...value, observationChoice }))}
       onAnswer={text => change(value => ({ ...value, observation: recordAnswer(value.observation, text, !!value.observationHelp) }))}
       onNext={() => move(1)} /> : <div className="grammar-stage">
-      <p className="grammar-question">{lesson.notice}</p>
+      <HaruParagraph className="grammar-question">{lesson.notice}</HaruParagraph>
       <Examples lesson={lesson} />
-      <button className="secondary-button grammar-reveal" aria-expanded={notice} onClick={() => setNotice(value => !value)}>
-        <Lightbulb size={18} aria-hidden="true" />{notice ? '설명 접기' : '생각한 뒤 설명 확인'}
-      </button>
-      {notice && <p className="grammar-message">{lesson.noticeAnswer}</p>}
-      <button className="primary-button" disabled={!persistence.canSave} onClick={() => move(1)}>역할 알아보기<HaruIcon name="arrow-right" size={18} /></button>
+      <HaruButton label={[(notice ? '설명 접기' : '생각한 뒤 설명 확인')].join('')} variant="secondary" icon={<Lightbulb size={18} aria-hidden="true" />} className="haru-migrated secondary-button grammar-reveal" aria-expanded={notice} onClick={() => setNotice(value => !value)}>
+        {notice ? '설명 접기' : '생각한 뒤 설명 확인'}
+      </HaruButton>
+      {notice && <HaruParagraph className="grammar-message">{lesson.noticeAnswer}</HaruParagraph>}
+      <HaruButton label={["역할 알아보기"].join('')} variant="primary" endContent={<HaruIcon name="arrow-right" size={18} />} className="haru-migrated primary-button" disabled={!persistence.canSave} onClick={() => move(1)}>역할 알아보기</HaruButton>
     </div>)}
     {!reviewing && progress.stage === 1 && <div className="grammar-stage">
-      <p className="grammar-role">{lesson.role}</p>
+      <HaruParagraph className="grammar-role">{lesson.role}</HaruParagraph>
       <dl className="grammar-rules"><dt>놓이는 자리</dt><dd>{lesson.pattern}</dd>{!!progress.contentVersion && <><dt>흔한 실수</dt><dd>{practice.commonMistake}</dd></>}</dl>
-      <details className="grammar-guide"><summary>{!!progress.contentVersion ? '더 비교해 보기' : '흔한 실수와 비교'}</summary><p>{lesson.mistake}</p>{!!progress.contentVersion && practice.extra && <p>{practice.extra}</p>}</details>
+      <details className="grammar-guide"><summary>{!!progress.contentVersion ? '더 비교해 보기' : '흔한 실수와 비교'}</summary><HaruParagraph>{lesson.mistake}</HaruParagraph>{!!progress.contentVersion && practice.extra && <HaruParagraph>{practice.extra}</HaruParagraph>}</details>
       <GrammarTermsHelp pos={lesson.pos} />
       {progress.contentVersion === 4 && <ReviewedExamples id={lessonId} />}
       <div className="grammar-actions">
-        <button className="text-button" onClick={() => move(0)}>예문 다시 보기</button>
-        <button className="primary-button" disabled={!persistence.canSave} onClick={() => move(2)}>3문제 연습<HaruIcon name="arrow-right" size={18} /></button>
+        <HaruButton label={["예문 다시 보기"].join('')} variant="ghost" className="haru-migrated text-button" onClick={() => move(0)}>예문 다시 보기</HaruButton>
+        <HaruButton label={["3문제 연습"].join('')} variant="primary" endContent={<HaruIcon name="arrow-right" size={18} />} className="haru-migrated primary-button" disabled={!persistence.canSave} onClick={() => move(2)}>3문제 연습</HaruButton>
       </div>
     </div>}
     {question && (reviewing || progress.stage >= 2 && progress.stage <= 4) && <GrammarQuestion
@@ -134,9 +142,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
     {!reviewing && progress.stage === 5 && <><DraftRecoveryNotice input={persistent}/><FeedbackContextInput context={feedbackContext} disabled={!persistence.canSave||aiPending}/><GrammarWriting
       lesson={lesson} progress={progress} draftFeedback={persistent.lastFeedback} retainedFeedback={retainedFeedback} recoveryPending={recoveryPending} canSave={persistence.canSave} inputLocked={persistence.replacing} aiPending={aiPending} aiError={aiError} currentModelId={modelId} contextFingerprint={feedbackContext.fingerprint}
       onAi={() => void checkSentence()} onSentence={changeSentence}
-      onCheck={check => change(value => ({ ...value, check }))}
-      onChecks={(key, result) => change(value => { const checks = { ...value.checks, [key]: result }; return { ...value, checks, check: combinedCheck(checks) }; })}
-      onFrame={frame => change(value => ({ ...value, frame }))}
+      onCheck={setWritingCheck} onChecks={setWritingChecks} onFrame={setWritingFrame}
       onExplain={() => moveFromWriting(1)} onComplete={() => void complete()}
     /></>}
     {!reviewing && progress.stage === 6 && <GrammarSummary
@@ -144,13 +150,13 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
       onReview={() => change(value => enhanced ? startGrammarReview(lessonId, value, activityDate(),contentVersion) : { ...value, review: { index: 0, answers: {} } })}
       onWriting={() => moveFromWriting(5)} onWords={() => void leave(onWords)}
     />}
-    <p className="small-note grammar-source">학습용 작성 예문 · <a href={lesson.reference} target="_blank" rel="noreferrer">설명 참고 자료</a></p>
-  </section>;
+    <HaruParagraph className="small-note grammar-source">학습용 작성 예문 · <a href={lesson.reference} target="_blank" rel="noreferrer">설명 참고 자료</a></HaruParagraph>
+  </HaruPanel>;
 }
 
 function Examples({ lesson }: { lesson: Lesson }) {
   return <div className="grammar-examples">{lesson.examples.map(([en, ko, focus]) => {
     const start = exampleFocusStart(en, focus);
-    return <div className="grammar-example" key={en}><p lang="en">{start < 0 ? en : <>{en.slice(0, start)}<mark>{focus}</mark>{en.slice(start + focus.length)}</>}</p><p>{ko}</p><Speak text={en} /></div>;
+    return <div className="grammar-example" key={en}><HaruParagraph lang="en">{start < 0 ? en : <>{en.slice(0, start)}<mark>{focus}</mark>{en.slice(start + focus.length)}</>}</HaruParagraph><HaruParagraph>{ko}</HaruParagraph><Speak text={en} /></div>;
   })}<small>밑줄: 살펴볼 표현 · 학습용 작성 예문</small></div>;
 }

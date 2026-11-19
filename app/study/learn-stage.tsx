@@ -1,4 +1,7 @@
 "use client";
+import {HaruHeading,HaruParagraph} from '../haru-content';
+import {HaruButton,HaruTextInput,HaruTextArea} from '../haru-controls';
+
 import { POS } from "@/lib/learning";
 import { HaruIcon } from "@/components/icons/haru-icon";
 import { DictionaryLinks } from "../ui";
@@ -56,9 +59,9 @@ export function LearnStage({
         <span className="word-index">
           {word.personal ? "개인 추가" : `OXFORD ${word.level}`} · <PartOfSpeechLabel pos={word.pos} />
         </span>
-        <h3 lang="en">
+        <HaruHeading level={3} lang="en">
           {word.word}
-        </h3>
+        </HaruHeading>
         <WordIpa word={word} meaning={meaning}/>
         {image && <WordImagePreview image={image} className="word-image-learn"/>}
         <WordPronunciation word={word} meaning={meaning} showIpa={false}/>
@@ -68,13 +71,11 @@ export function LearnStage({
         <label htmlFor="study-meaning">
           학습할 뜻 <span className="muted">하나만 골라요</span>
         </label>
-        <input
-          id="study-meaning"
+        <HaruTextInput label={"학습할 뜻"} isLabelHidden containerClassName="haru-study-field meaning-field" id="study-meaning"
           value={meaning}
           maxLength={2000}
           onChange={(e) => setMeaning(e.target.value)}
-          placeholder="영한사전에서 확인한 한국어 뜻"
-        />
+          placeholder="영한사전에서 확인한 한국어 뜻" />
       </div>
       <ExpressionLine expression={expression} translation={expressionTranslation} />
       <div className="example-box">
@@ -82,10 +83,10 @@ export function LearnStage({
           <HaruIcon name="book-open" size={15} />
           <span>{content.source}</span>
         </div>
-        <p lang="en">
+        <HaruParagraph lang="en">
           {example || "사전에서 예문을 확인하고 아래에 기록해 주세요."}
-        </p>
-        <p className="translation">{translation}</p>
+        </HaruParagraph>
+        <HaruParagraph className="translation">{translation}</HaruParagraph>
         {content.attribution && (
           <a
             className="source-credit"
@@ -104,22 +105,12 @@ export function LearnStage({
         <ExpressionFields expression={expression} expressionTranslation={expressionTranslation}
           onExpressionChange={setExpression} onTranslationChange={setExpressionTranslation}
           help="표현이나 뜻을 바꾸면 표현 해석이 지워져요. 새 해석을 입력해 주세요." />
-        <label>
-          영어 예문
-          <textarea
-            value={example}
+        <HaruTextArea label={"영어 예문"} containerClassName="haru-study-field labelled-study-field" value={example}
             maxLength={2000}
-            onChange={(e) => setExample(e.target.value)}
-          />
-        </label>
-        <label>
-          예문의 한국어 해석
-          <textarea
-            value={translation}
+            onChange={(e) => setExample(e.target.value)} rows={2} />
+        <HaruTextArea label={"예문의 한국어 해석"} containerClassName="haru-study-field labelled-study-field" value={translation}
             maxLength={2000}
-            onChange={(e) => setTranslation(e.target.value)}
-          />
-        </label>
+            onChange={(e) => setTranslation(e.target.value)} rows={2} />
       </details>
       <DictionaryLinks word={word.word} />
       {!word.personal && (
@@ -133,16 +124,16 @@ export function LearnStage({
         </a>
       )}
       {materialConflict && <div className="notice" role="alert">
-        <p>단어장에서 같은 자료가 바뀌었어요. 최신 내용을 불러온 뒤 다시 수정해 주세요.</p>
-        <button className="secondary-button" disabled={busy} onClick={useLibraryMaterial}>단어장 최신 내용 적용</button>
+        <HaruParagraph>단어장에서 같은 자료가 바뀌었어요. 최신 내용을 불러온 뒤 다시 수정해 주세요.</HaruParagraph>
+        <HaruButton label={["단어장 최신 내용 적용"].join('')} variant="secondary" className="haru-migrated secondary-button" disabled={busy} onClick={useLibraryMaterial}>단어장 최신 내용 적용</HaruButton>
       </div>}
-      <div className="study-actions learn-actions"><button
-        className="primary-button full"
+      <div className="study-actions learn-actions"><HaruButton label={["뜻 저장하고 계속 "].join('')} variant="primary" endContent={<HaruIcon name="arrow-right" size={17} />}
+        className="haru-migrated primary-button full"
         disabled={busy || !meaning.trim()}
         onClick={learn}
       >
-        뜻 저장하고 계속 <HaruIcon name="arrow-right" size={17} />
-      </button></div>
+        뜻 저장하고 계속
+      </HaruButton></div>
     </>
   );
 }

@@ -11,7 +11,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
   try {
     for (const domain of ['sentence', 'grammar']) {
       const context = await browser.newContext({ extraHTTPHeaders: { ...accountHeaders('feedback_issues'), ...aiHeaders }, viewport: { width: 390, height: 844 } });
-      const page = await context.newPage(), errors = [], original = 'I like books.';
+      const page = await context.newPage(), errors = [], original = domain === 'sentence' ? 'I arrive home.' : 'I like books.';
       page.setDefaultTimeout(10000); page.on('pageerror', e => errors.push(e.message));
       const snapshot = async () => (await context.request.get(base + '/api/state', { headers: { 'X-Study-Grammar': '1' } })).json();
       const initial = await snapshot(), now = new Date().toISOString();
@@ -36,6 +36,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       assert.equal(await transmission.textContent(), `요청하면 문장과 ${domain === 'grammar' ? '수업 목표를' : '단어·뜻을'} 선택한 OpenAI 모델에 보내요. API 데이터는 기본적으로 모델 학습에 쓰이지 않지만 보관·안전 점검 정책이 적용돼요. 개인정보는 넣지 마세요.`);
       assert.equal(await transmission.evaluate(el => el.previousElementSibling?.tagName === 'BUTTON' && el.previousElementSibling.textContent.includes('AI 참고 의견 요청') && !el.closest('details')), true, 'transmission notice directly follows the request button without a disclosure');
       checks.push(domain + ': transmission/privacy notice is visible exactly once directly below the request button before any AI call');
+      if(domain==='sentence')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('나는 집에 도착해요.');
       await input.fill(original);
       let response, calls = 0;
       await page.route('**/api/' + domain + '-feedback', route => { if(route.request().method()!=='POST')return route.continue(); assert.equal(route.request().postDataJSON().expectedModelId,aiModel); calls++; return response.abort ? route.abort('failed') : route.fulfill({ status: response.status, json: response.body===null?null:{...response.body,...(response.status === 200 && response.body.feedback ? {feedback:currentOpenaiFeedback(route,response.body.feedback)} : {}),receipt:feedbackReceipt(route,response.status<400?'completed':'failed')} }); });
@@ -139,7 +140,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       else { await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); }
       await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
       assert.equal(calls, cases.length + 1, 'reload never calls a provider');
-      const next = 'I like tea.'; await input.fill(next);
+      const next = domain==='sentence'?'I arrive early.':'I like tea.';if(domain==='sentence')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('나는 일찍 도착해요.');await input.fill(next);
       response = success(next);
       await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
       await page.locator('[data-feedback-provider="OpenAI"]').waitFor();

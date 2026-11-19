@@ -15,6 +15,7 @@ const { history } = require('./fixtures/backup-history.cjs');
       const original = { settings: state.settings, progress: state.progress, sessions: state.sessions };
       state.grammar = { noun: { ...newLessonProgress('noun'), stage: 5, observation: { first: noun.observation.answer, latest: noun.observation.answer, helped: false, attempts: 1 }, answers: Object.fromEntries(noun.questions.map((q, i) => ['q' + (i + 1), { first: q.answer, latest: q.answer, helped: false, attempts: 1 }])), sentence: 'I like books.' } };
       const context = await browser.newContext({ viewport: { width: 390, height: 844 }, extraHTTPHeaders: accountHeaders('grammar_input_perf') });
+      await context.route('https://fonts.googleapis.com/**',route=>route.abort());await context.route('https://fonts.gstatic.com/**',route=>route.abort());
       const page = await context.newPage(); page.on('pageerror', e => errors.push(e.message));
       await page.route('**/api/state', route => {
         if (route.request().method() === 'PUT') {
@@ -42,7 +43,7 @@ const { history } = require('./fixtures/backup-history.cjs');
       await context.close();
     }
     assert.deepEqual(errors, []);
-    const report = { passed: true, environment: 'Local Worker, mocked synthetic snapshots, Chromium 390px, 4x CPU slowdown; not an iPhone measurement', results, errors };
-    fs.mkdirSync('outputs/grammar-input-performance', { recursive: true }); fs.writeFileSync('outputs/grammar-input-performance/result.json', JSON.stringify(report, null, 2)); console.log(JSON.stringify(report));
+    const report = { passed: true, environment: 'Local Worker, mocked synthetic snapshots, Chromium 390px, 4x CPU slowdown; external fonts blocked consistently for baseline/candidate; not an iPhone measurement', results, errors };
+    const out=process.env.ASTRYX_QA_OUTPUT||'outputs/grammar-input-performance';fs.mkdirSync(out, { recursive: true }); fs.writeFileSync(require('node:path').join(out,'result.json'), JSON.stringify(report, null, 2)); console.log(JSON.stringify(report));
   } finally { await closeBrowser(browser); }
 })().catch(e => { console.error(e); process.exitCode = 1; });
