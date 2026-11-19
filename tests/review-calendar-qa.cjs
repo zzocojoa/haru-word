@@ -20,6 +20,12 @@ const base=require('./qa/runtime.cjs').base,out='outputs/review-calendar';fs.mkd
  await week.click();await p.keyboard.press('Escape');assert.equal(await period(week),'2024-01-01');assert.ok(await week.evaluate(el=>el===document.activeElement));
  checks.push('period selection supports keyboard End/Enter and Escape, keeps the selected oldest week and focus');
  await chooseOption(month,'2025-12');assert.equal(await period(month),'2025-12');assert.equal(await p.locator('[data-review-kind=monthly] .review-count b').innerText(),'1');
+ const weeklyHelp=p.locator('[data-review-kind=weekly] .review-checklist');
+ const monthlyHelp=p.locator('[data-review-kind=monthly] .review-checklist');
+ await weeklyHelp.locator('summary').click();await monthlyHelp.locator('summary').click();
+ assert.match(await weeklyHelp.innerText(),/미완료 항목은 다음 학습/);
+ assert.match(await monthlyHelp.innerText(),/문장 쓰기\(선택\).*미점검은 이 회차에 남아요/s);
+ assert.equal(await monthlyHelp.getByText('저장한 위치부터 이어서 점검해요.',{exact:true}).count(),0);
  await p.getByRole('tab',{name:'단어장',exact:true}).click();await p.getByRole('tab',{name:'복습 점검',exact:true}).click();assert.equal(await period(month),'2025-12');assert.equal(await period(week),'2024-01-01');
  checks.push('historical monthly targets and explicit period selections survive tab changes without modifying saved history');
  await p.addScriptTag({path:require('./qa/runtime.cjs').axePath});

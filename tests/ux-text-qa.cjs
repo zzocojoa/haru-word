@@ -37,7 +37,7 @@ const words = JSON.parse(fs.readFileSync('data/words.json'));
     const seed = { revision: initial.revision, progress: {}, sessions: {}, settings: { ...initial.state.settings, assessments: { A1: { ids, index: 19, completed: false, marks: Object.fromEntries(ids.slice(0, 19).map(id => [id, 'new'])) } } } };
     assert.equal((await context.request.put(base + '/api/state', { data: seed })).status(), 200);
     await page.reload({ waitUntil: 'domcontentloaded' }); await saved();
-    await page.getByRole('button', { name: '단어 20개 친숙도 확인', exact: true }).click();
+    await page.getByRole('button', { name: '친숙도 확인 이어서', exact: true }).click();
     await restoreGuard('‘나중에 이어 하기’로 홈에 돌아온 뒤 백업을 복원해 주세요.', '나중에 이어 하기');
     await markFamiliarity(page, 'new');
     await page.getByRole('heading', { name: '친숙도를 확인했어요', exact: true }).waitFor();

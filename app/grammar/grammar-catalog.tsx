@@ -21,13 +21,13 @@ export function GrammarCatalog({ progress, headingRef, onOpen, filter, onFilter,
   const { counts, groups, visibleCount } = grammarCatalog(progress, filter, date);
   return <HaruPanel className="grammar-catalog">
     <header className="grammar-catalog-heading">
-      <div><HaruHeading level={2} ref={headingRef} tabIndex={-1}>품사와 문장 연습</HaruHeading><HaruParagraph className="small-note">15개 수업 · 수업당 약 3~5분</HaruParagraph></div>
-      <span className="grammar-catalog-count"><HaruIcon name="check" size={16} />수업 마침 <b>{counts.complete}/15</b></span>
+      <div><HaruHeading level={2} ref={headingRef} tabIndex={-1}>품사와 문장 연습</HaruHeading><HaruParagraph className="small-note">수업당 약 3~5분</HaruParagraph></div>
+      <span className="grammar-catalog-count"><HaruIcon name="check" size={16} />수업 마침 <b>{counts.complete}/{counts.all}</b></span>
     </header>
     <div className="grammar-filters" role="group" aria-label="수업 표시">
       {GRAMMAR_FILTERS.map(([value, label]) => <HaruButton label={`${label} ${counts[value]}`} variant="secondary" className="haru-migrated haru-native-action" key={value} ref={value === 'all' ? allFilter : undefined} aria-pressed={filter === value} onClick={() => { onExpandedGroups(grammarCatalog(progress, value, date).groups.map(group => group.title)); onFilter(value); }}><span className="grammar-filter-label">{label}<span>{counts[value]}</span></span></HaruButton>)}
     </div>
-    <HaruParagraph className="grammar-filter-result small-note" role="status">{filter === 'all' ? '자유롭게 선택 · 하루 목표와 별도' : `${filter === 'continue' ? '이어 할' : '다시 확인할'} 수업 ${visibleCount}개`}</HaruParagraph>
+    <HaruParagraph className="grammar-filter-result small-note" role="status">{filter === 'all' ? '하루 목표와 별도' : `${filter === 'continue' ? '이어 할' : '다시 확인할'} 수업 ${visibleCount}개`}</HaruParagraph>
     <div className="grammar-groups">{groups.map(({ title, number, entries }) => {
       const expanded = expandedGroups.includes(title);
       return <details key={title} className="grammar-group" open={expanded} onToggle={event => {

@@ -55,8 +55,8 @@ export function SessionSummary({
       <HaruParagraph className="muted">
         {s.finished
           ? "회차 마침"
-          : "이 위치에서 다음에 이어갈 수 있어요."}{" "}
-        아직 확인하지 않은 항목은 성공·실패에 포함하지 않아요.
+          : "여기서 이어갈 수 있어요."}{" "}
+        성공·실패 집계에서 미점검은 제외해요.
       </HaruParagraph>
       {s.date !== date && (
         <HaruParagraph className="notice">

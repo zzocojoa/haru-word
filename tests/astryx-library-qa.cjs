@@ -36,6 +36,7 @@ fs.mkdirSync(out,{recursive:true});
   const original=await p.getByLabel('학습할 뜻',{exact:true}).inputValue();assert.equal(await p.getByLabel('학습할 뜻',{exact:true}).getAttribute('readonly'),'');assert.equal(await p.getByLabel('학습할 뜻',{exact:true}).getAttribute('maxlength'),'2000');
   if(!baseline){
    const sense=p.getByRole('combobox',{name:'학습할 뜻 선택',exact:true});assert.equal(await sense.count(),1);
+   assert.equal(await p.getByRole('dialog').getByText('뜻마다 성적을 따로 저장해요.',{exact:true}).count(),1);
    await p.getByRole('button',{name:'다른 뜻 추가',exact:true}).click();await p.getByLabel('학습할 뜻',{exact:true}).fill('합성 새 뜻');
    await sense.click();await p.getByRole('option',{name:original,exact:true}).click();assert.equal(await p.getByLabel('학습할 뜻',{exact:true}).inputValue(),original);
    await sense.click();await p.getByRole('option',{name:'새로운 뜻 · 초안',exact:true}).click();assert.equal(await p.getByLabel('학습할 뜻',{exact:true}).inputValue(),'합성 새 뜻');

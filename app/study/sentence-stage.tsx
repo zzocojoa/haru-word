@@ -51,7 +51,6 @@ export function SentenceStage({
   const selectedMeaning = s.records[id!]?.meaning ?? content.meaning;
   return (
     <>
-      <HaruParagraph className="muted">말하고 싶은 내용을 한국어로 쓴 뒤, 오늘 단어를 사용해 영어 문장을 써 보세요.</HaruParagraph>
       <div className="sentence-target">
         <HaruHeading level={3} lang="en">
           {word.word}

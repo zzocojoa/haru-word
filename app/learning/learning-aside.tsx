@@ -44,7 +44,7 @@ export function LearningAside({ loading, metrics }: LearningAsideProps) {
           </b>
         </div>
         <HaruParagraph className="small-note">
-          확인한 항목만 집계 · 영어→뜻, 뜻→영어 기준
+          미점검 제외 · 영어→뜻, 뜻→영어 기준
           {metrics.personalLearned > 0 &&
             ` 개인 추가 ${metrics.personalLearned}개도 학습했어요.`}
         </HaruParagraph>

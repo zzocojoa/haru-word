@@ -32,9 +32,7 @@ export function WarmupStage({
 }: WarmupStageProps) {
   return (
     <>
-      <HaruParagraph className="muted">
-        답을 보기 전에 이 단어의 뜻을 써 보세요.
-      </HaruParagraph>
+      {!revealed && <HaruParagraph className="muted">뜻을 먼저 써 보세요.</HaruParagraph>}
       <div className="word-stage">
         <HaruHeading level={3} lang="en">{word.word}</HaruHeading>
         <span><PartOfSpeechLabel pos={word.pos} /></span>

@@ -149,7 +149,9 @@ const {build}=require('esbuild');
   for(const mode of ['word','grammar']){
    const requestSentence=mode==='grammar'?' \tSynthetic request grammar.\n ':'Synthetic request word.';
    await open(mode,'&requests=1');if(mode==='word')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('검증용 한국어 의도예요.');await field().fill(requestSentence);await page.waitForFunction(sentence=>window.draftHarness.snapshot().rows.some(row=>row.record.kind!=='request'&&row.record.values.sentence===sentence),requestSentence);const beforePosts=posts,beforeGets=gets;loseNext=true;
+   assert.match(await page.locator('.ai-use-notice').innerText(),/OpenAI 모델에 보내요.*개인정보/);
    await page.getByRole('button',{name:'AI 참고 의견 요청',exact:true}).click();await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).waitFor();await page.waitForFunction(()=>document.querySelectorAll('[role="alert"]').length>0||document.body.textContent.includes('연결 실패'));
+   assert.match(await page.locator('.ai-use-notice').innerText(),/지난 요청의 결과만 확인/);
    assert.equal(posts,beforePosts+1);await page.reload();await value(requestSentence);assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets);
    failLookup=true;await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).click();
    await page.waitForFunction(()=>!document.querySelector('.grammar-ai-action button:disabled')&&document.body.textContent.includes('이전 AI 요청 결과 확인'));

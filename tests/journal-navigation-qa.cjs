@@ -74,6 +74,8 @@ for (let attempt = 1; attempt <= 3; attempt++) {
       console.log(JSON.stringify({ baselineHeight: height })); return;
     }
     assert.equal(await days.count(), 10);
+    assert.equal(await panel.getByText('날짜 · 한국 시간', { exact: true }).count(), 1);
+    assert.equal(await panel.getByText('날짜는 한국 시간 기준이에요.', { exact: false }).count(), 0);
     assert.equal(await dayTriggers.locator('time[datetime="' + date + '"]').count(), 1);
     assert.equal(await panel.locator('.journal-day-trigger[aria-expanded=true]').count(), 0);
     assert.equal(await panel.locator('.journal-session').count(), 0);

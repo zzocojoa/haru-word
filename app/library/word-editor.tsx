@@ -110,7 +110,7 @@ export function WordEditor({
             다른 뜻 추가
           </HaruButton>
         </div>
-        <HaruParagraph className="small-note">다른 뜻은 추가해요. 성적도 따로 저장돼요.</HaruParagraph>
+        <HaruParagraph className="small-note">뜻마다 성적을 따로 저장해요.</HaruParagraph>
       </section>
       <HaruTextInput label={[(senseKey ? "선택한 학습 뜻" : "새로 학습할 뜻")].join('')} readOnly={!!senseKey}
           aria-label="학습할 뜻"

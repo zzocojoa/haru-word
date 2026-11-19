@@ -334,15 +334,11 @@ function LearningScreens({
                       busy={busy}
                       onResume={(s) => start(s.kind, s.period, s)}
                     />
-                    {!assessed && (
+                    {!assessed && (!initialAssessment || finished || unfinished) && (
                       <section className="assessment-invite">
                         <div>
                           <div>
-                            <h3>
-                              {initialAssessment
-                                ? "어디서 시작할까요?"
-                                : "친숙도 확인"}
-                            </h3>
+                            <h3>친숙도 확인</h3>
                             <p>
                               {state.settings.level} 단어 20개 · 정식 수준 시험은 아니에요.
                             </p>

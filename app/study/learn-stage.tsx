@@ -75,7 +75,7 @@ export function LearnStage({
           value={meaning}
           maxLength={2000}
           onChange={(e) => setMeaning(e.target.value)}
-          placeholder="영한사전에서 확인한 한국어 뜻" />
+          placeholder="사전에서 확인한 뜻" />
       </div>
       <ExpressionLine expression={expression} translation={expressionTranslation} />
       <div className="example-box">

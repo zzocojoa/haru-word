@@ -51,7 +51,7 @@ export function ImagePracticeContent({ words, progress, controller }: { words: W
   const position = useSyncExternalStore(controller.subscribe, controller.getSnapshot, controller.getSnapshot);
   useEffect(() => { controller.open(); }, [controller]);
   return <>
-    <HaruParagraph className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개 · 성적은 기록하지 않아요</HaruParagraph>
+    <HaruParagraph className="text-muted-foreground text-sm">{deck.length.toLocaleString('ko-KR')}개</HaruParagraph>
     {!deck.length ? <HaruParagraph role="status">현재 선택한 뜻으로 연습할 이미지가 없어요.</HaruParagraph>
       : position.available ? <PracticeCards deck={deck} position={position} controller={controller}/>
       : <PositionStatus position={position} controller={controller}/>}

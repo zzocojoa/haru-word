@@ -33,6 +33,7 @@ export function FamiliarityAssessment({
   revealMeaning,
   markFamiliarity,
 }: FamiliarityAssessmentProps) {
+  const check = assessmentWord ? state.progress[assessmentWord.id]?.familiarityCheck : undefined;
   return (
     <HaruPanel className="learning-panel">
       <div className="panel-top">
@@ -129,15 +130,15 @@ export function FamiliarityAssessment({
         </>
       ) : (
         <>
-          <HaruHeading level={2}>뜻을 떠올리고, 확인해 보세요.</HaruHeading>
-          <HaruParagraph className="muted">
-            표시를 고른 뒤 뜻을 비교해요.
-          </HaruParagraph>
+          <HaruHeading level={2}>친숙도 확인</HaruHeading>
+          {assessmentWord && (!check || check.final) && (
+            <HaruParagraph className="muted">표시를 고르면 뜻을 볼 수 있어요.</HaruParagraph>
+          )}
           {assessmentWord && (
             <FamiliarityCard
               key={assessmentWord.id}
               word={assessmentWord}
-              check={state.progress[assessmentWord.id]?.familiarityCheck}
+              check={check}
               busy={busy}
               onReveal={(initial, answer) =>
                 revealMeaning(assessmentWord.id, initial, answer)

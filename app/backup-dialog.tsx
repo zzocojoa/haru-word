@@ -16,16 +16,20 @@ export default function BackupDialog(props: BackupDialogProps) {
  const {state,busy,error,conflict,onClose}=props;
  const restoration=useViewRestoration();
  const {backup,baseline,name,reading,fileError,safetyError,acknowledged,setAcknowledged,confirm,setConfirm,success,caps,analysis,job,working,phase,reloadRequired,safetyPreview,stale,backedUp,allowed,step,applying:restoring,before,after,changes,recent,select,saveSafetyBackup,prepare,cancel,reload,apply,defer}=useBackupRestore(props);
- const displayStep=success?'복원 완료':restoring?'3/3 · 기록 복원 중':confirm||job?.status==='ready'?'3/3 · 최종 확인':phase?'3/3 · 복원 준비 중':backup?'2/3 · 현재 기록 보관':'1/3 · 백업 파일 선택';
+ const displayStep=restoring?'3/3 · 기록 복원 중':confirm||job?.status==='ready'?'3/3 · 최종 확인':phase?'3/3 · 복원 준비 중':backup?'2/3 · 현재 기록 보관':'1/3 · 백업 파일 선택';
  // The explicit record-menu destination must win over navigation history focus.
  function restoreFocus(event:Event) {
   event.preventDefault();
   restoration.schedule('destination',()=>document.querySelector<HTMLButtonElement>('[data-backup-trigger]')?.focus({preventScroll:true}));
  }
  return <><Dialog navigationKey="app.backup" blocked={restoring} open onOpenChange={open=>{if(!open&&!restoring)onClose()}}><DialogContent className="backup-dialog framed-dialog" showCloseButton={!restoring} onCloseAutoFocus={restoreFocus} onEscapeKeyDown={e=>{if(restoring)e.preventDefault()}} onInteractOutside={e=>e.preventDefault()}>
-  <DialogHeader><DialogTitle>{success?'백업을 복원했어요.':'백업으로 기록 복원'}</DialogTitle><DialogDescription>{success?'복원 내용을 저장했어요. 다른 기기에서도 이어갈 수 있어요.':'백업 시점의 기록·설정으로 교체해요.'}</DialogDescription></DialogHeader>
-  <HaruParagraph className="small-note" data-backup-step={step} role="status">{conflict?'복원 결과 확인 필요':reloadRequired?'최신 기록 확인 필요':displayStep}</HaruParagraph>
-  <div className="dialog-scroll">{success?<><HaruParagraph role="status">{after?.words.toLocaleString()}개 단어 기록 · {after?.sessions.toLocaleString()}개 회차를 복원했어요.</HaruParagraph></>:<>
+  <DialogHeader><DialogTitle>{success?'백업을 복원했어요.':'백업으로 기록 복원'}</DialogTitle><DialogDescription>{success?'다른 기기에서도 이어갈 수 있어요.':'백업 시점의 기록·설정으로 교체해요.'}</DialogDescription></DialogHeader>
+  <HaruParagraph className={success?undefined:"small-note"} data-backup-step={step} role="status">
+   {success
+    ? after?`${after.words.toLocaleString()}개 단어 기록 · ${after.sessions.toLocaleString()}개 회차 복원 완료`:'복원 완료'
+    : conflict?'복원 결과 확인 필요':reloadRequired?'최신 기록 확인 필요':displayStep}
+  </HaruParagraph>
+  {!success&&<div className="dialog-scroll">
    <label className="backup-file">복원할 백업 파일<input type="file" accept=".json,application/json" disabled={busy||working||reading||conflict||reloadRequired||!caps} onChange={e=>void select(e.target.files?.[0])}/></label>
    <HaruParagraph className="small-note">‘전체 백업’과 이전 ‘현재 입력 백업’을 지원해요. {caps?`최대 ${caps.maxBytes/1_000_000} MB · 단어 기록 5,000개 · 회차 10,000개.`:'지원 범위 확인 중'}</HaruParagraph>
    {job&&job.status!=='committed'&&<div className="backup-impact"><HaruParagraph>이어서 할 복원 · 전송 {job.received.length}/{job.total}</HaruParagraph><HaruParagraph className="small-note">같은 파일을 다시 선택하면 이어갈 수 있어요. 작업은 시작 후 24시간 동안 유지돼요.</HaruParagraph><HaruButton label="기존 복원 작업 취소" variant="ghost" className="haru-migrated text-button" disabled={working||restoring||conflict} onClick={()=>void cancel()}>기존 복원 작업 취소</HaruButton></div>}
@@ -53,8 +57,7 @@ export default function BackupDialog(props: BackupDialogProps) {
     {error&&<HaruParagraph role="alert" className="backup-error">{error}</HaruParagraph>}
 
    </>}
-  </>}
- </div>{success?<div className="dialog-actions"><HaruButton label="학습 기록 확인하기" variant="primary" className="haru-migrated primary-button full" onClick={onClose}>학습 기록 확인하기</HaruButton></div>:backup&&<div className="dialog-actions">{conflict||reloadRequired?<HaruButton label="서버 기록 확인하기" variant="secondary" className="haru-migrated secondary-button full" disabled={restoring||reading||working} onClick={()=>void reload()}>서버 기록 확인하기</HaruButton>:<HaruButton label={restoring?'서버에 복원 중':'이 백업으로 복원'} variant="primary" className="haru-migrated primary-button full" disabled={!allowed} onClick={()=>void prepare()}><span className="haru-backup-action">{restoring?<HaruIcon name="loading" size={16} className="spin"/>:<HaruIcon name="restore-file" size={16}/>} {restoring?'서버에 복원 중':'이 백업으로 복원'}</span></HaruButton>}</div>}
+ </div>}{success?<div className="dialog-actions"><HaruButton label="학습 기록 확인하기" variant="primary" className="haru-migrated primary-button full" onClick={onClose}>학습 기록 확인하기</HaruButton></div>:backup&&<div className="dialog-actions">{conflict||reloadRequired?<HaruButton label="서버 기록 확인하기" variant="secondary" className="haru-migrated secondary-button full" disabled={restoring||reading||working} onClick={()=>void reload()}>서버 기록 확인하기</HaruButton>:<HaruButton label={restoring?'서버에 복원 중':'이 백업으로 복원'} variant="primary" className="haru-migrated primary-button full" disabled={!allowed} onClick={()=>void prepare()}><span className="haru-backup-action">{restoring?<HaruIcon name="loading" size={16} className="spin"/>:<HaruIcon name="restore-file" size={16}/>} {restoring?'서버에 복원 중':'이 백업으로 복원'}</span></HaruButton>}</div>}
  </DialogContent></Dialog>
  <AlertDialog open={confirm} onOpenChange={setConfirm}><AlertDialogContent className="backup-confirm"><AlertDialogHeader><AlertDialogTitle>백업으로 현재 기록을 교체할까요?</AlertDialogTitle><AlertDialogDescription>백업의 단어 기록 {after?.words}개와 학습 회차 {after?.sessions}개로 교체합니다. 기존 기록으로 돌아가려면 방금 내려받은 백업이 필요합니다.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>취소</AlertDialogCancel><AlertDialogAction disabled={!allowed} onClick={e=>{e.preventDefault();void apply();}}>기록 교체 · 복원</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>
  </>;

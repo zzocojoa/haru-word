@@ -9,7 +9,7 @@ const base=require('./qa/runtime.cjs').base;const words=JSON.parse(fs.readFileSy
   const saved=()=>page.getByText('저장됨',{exact:true}).waitFor();const state=async()=> (await context.request.get(base+'/api/state')).json();
   await page.goto(base);await saved();await page.getByRole('button',{name:'단어 20개 친숙도 확인',exact:true}).click();
   await markFamiliarity(page,'known');await saved();await page.getByRole('button',{name:'나중에 이어 하기'}).click();await page.reload();await saved();
-  await page.getByRole('button',{name:'단어 20개 친숙도 확인',exact:true}).click();await page.getByText('1 / 20',{exact:true}).waitFor();
+  await page.getByRole('button',{name:'친숙도 확인 이어서',exact:true}).click();await page.getByText('1 / 20',{exact:true}).waitFor();
   for(let i=1;i<20;i++){await markFamiliarity(page,'known');await saved();}
   await page.getByRole('button',{name:'다른 수준 확인',exact:true}).waitFor();await page.getByRole('button',{name:'저장하고 나가기'}).click();assert.equal(Object.keys((await state()).state.sessions).length,0);checks.push('first-day preparation resumes and can end without fabricated study');
   await page.getByRole('button',{name:'오늘의 학습 시작',exact:true}).click();await page.getByRole('heading',{name:'이 단어, 얼마나 익숙한가요?'}).waitFor();
