@@ -1,7 +1,4 @@
 "use client";
-import { useState } from 'react';
-import { AlertDialog } from '@astryxdesign/core/AlertDialog';
-import { firstTestAssessmentEntry, isTestFamiliarityReveal } from '@/lib/learning/familiarity-cleanup';
 import {HaruPanel,HaruHeading,HaruParagraph} from '../haru-content';
 import {HaruButton} from '../haru-controls';
 
@@ -24,7 +21,6 @@ type FamiliarityAssessmentProps = Pick<
   | "markFamiliarity"
 > & {
   assessment: NonNullable<LearningViewProps["assessment"]>;
-  onTestCleanup?: () => Promise<boolean>;
 };
 export function FamiliarityAssessment({
   state,
@@ -38,12 +34,8 @@ export function FamiliarityAssessment({
   assessmentWord,
   revealMeaning,
   markFamiliarity,
-  onTestCleanup,
 }: FamiliarityAssessmentProps) {
-  const [cleanupOpen, setCleanupOpen] = useState(false);
   const check = assessmentWord ? state.progress[assessmentWord.id]?.familiarityCheck : undefined;
-  const canCleanUp = onTestCleanup && assessmentWord &&
-    firstTestAssessmentEntry(state.settings) === assessmentWord.id && isTestFamiliarityReveal(check);
   return (
     <HaruPanel className="learning-panel">
       <div className="panel-top">
@@ -172,31 +164,6 @@ export function FamiliarityAssessment({
           >
             나중에 이어 하기
           </HaruButton>
-          {canCleanUp && (
-            <>
-              <HaruButton label="테스트 진행 지우기" variant="ghost" disabled={busy} onClick={() => setCleanupOpen(true)}>
-                테스트 진행 지우기
-              </HaruButton>
-              <AlertDialog
-                isOpen={cleanupOpen}
-                onOpenChange={setCleanupOpen}
-                title="테스트 진행을 지울까요?"
-                description="이번 친숙도 확인과 첫 단어의 미확정 뜻 비교를 지워요. 기존 학습 기록은 그대로예요."
-                cancelLabel="취소"
-                actionLabel="테스트 진행 지우기"
-                isActionLoading={busy}
-                onAction={async () => {
-                  if (busy) return;
-                  const cleared = await onTestCleanup();
-                  setCleanupOpen(false);
-                  if (cleared) {
-                    setAssessing(false);
-                    setMessage('테스트 진행을 지웠어요.');
-                  }
-                }}
-              />
-            </>
-          )}
         </>
       )}
     </HaruPanel>

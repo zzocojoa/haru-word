@@ -47,7 +47,6 @@ type LearningAppProps = {
   grammarV3Enabled?: boolean;
   grammarV4Enabled?: boolean;
   imagePilotEnabled?: boolean;
-  familiarityCleanupEnabled?: boolean;
 };
 
 export default function LearningApp(props: LearningAppProps) {
@@ -61,7 +60,6 @@ function LearningScreens({
   grammarV3Enabled = false,
   grammarV4Enabled = false,
   imagePilotEnabled = false,
-  familiarityCleanupEnabled = false,
 }: LearningAppProps) {
   const {
     tab,
@@ -289,7 +287,6 @@ function LearningScreens({
                     assessmentWord={assessmentWord}
                     revealMeaning={revealMeaning}
                     markFamiliarity={markFamiliarity}
-                    onTestCleanup={familiarityCleanupEnabled ? store.cleanupTestFamiliarity : undefined}
                   />
                 ) : preparing ? (
                   <CandidatePreparation
