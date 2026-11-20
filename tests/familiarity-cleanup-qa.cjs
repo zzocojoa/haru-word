@@ -13,10 +13,9 @@ async function run() {
   const tester = accountHeaders('familiarity_cleanup');
   const worker = await grammarWorker(4, { familiarityCleanupTestUserId: tester['oai-authenticated-user-id'] });
   let browser;
-  const checks = [];
   try {
     browser = await launchBrowser();
-    const context = await browser.newContext({ extraHTTPHeaders: tester, viewport: { width: 390, height: 840 } });
+    const designated = await browser.newContext({ extraHTTPHeaders: tester, viewport: { width: 390, height: 840 } });
     const other = await browser.newContext({ extraHTTPHeaders: accountHeaders('other_learner') });
     const anonymous = await browser.newContext();
     const url = worker.base;
@@ -25,116 +24,85 @@ async function run() {
       assert.equal(response.status(), 200);
       return response.json();
     };
-    const save = async (account, data) => {
-      const response = await account.request.put(url + '/api/state', { headers: stateHeaders, data });
-      assert.equal(response.status(), 200, 'synthetic fixture save');
+    const seed = async (account, state) => {
+      const response = await account.request.put(url + '/api/state', {
+        headers: stateHeaders,
+        data: { ...state, revision: (await read(account)).revision },
+      });
+      assert.equal(response.status(), 200);
     };
-    const clear = (account, data, headers) => account.request.post(url + cleanupPath, { data, headers });
-    const old = history(2, 2);
-    old.settings.reviewDay = 4;
-    old.grammar = { noun: { stage: 0, answers: {}, sentence: 'Synthetic draft', updatedAt: '2026-10-01T12:00:00.000Z' } };
-    await save(context, { revision: (await read(context)).revision, ...old });
-    const original = await read(context);
-    assert.equal(Object.keys(original.state.sessions).length, 2);
-    assert.deepEqual(original.state.grammar, old.grammar);
 
-    const page = await context.newPage();
+    const historyFixture = history(2, 2);
+    historyFixture.settings.reviewDay = 4;
+    historyFixture.grammar = { noun: { stage: 0, answers: {}, sentence: 'Synthetic draft', updatedAt: '2026-10-01T12:00:00.000Z' } };
+    await seed(designated, historyFixture);
+    const original = await read(designated);
+    const page = await designated.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
-    const saved = () => page.getByText('저장됨', { exact: true }).waitFor();
-    const button = name => page.getByRole('button', { name, exact: true });
     await page.goto(url);
-    await saved();
-    await button('학습 설정').click();
-    await button('친숙도 다시 확인하기').click();
+    await page.getByText('저장됨', { exact: true }).waitFor();
+    await page.getByRole('button', { name: '학습 설정', exact: true }).click();
+    await page.getByRole('button', { name: '친숙도 다시 확인하기', exact: true }).click();
     await page.getByText('표시를 고르면 뜻을 볼 수 있어요.', { exact: true }).waitFor();
-    assert.equal(await button(cleanupLabel).count(), 0);
     await page.getByRole('button', { name: /처음 봐요$/ }).click();
     await page.locator('.reference-meaning').waitFor();
-    await saved();
-    const before = await read(context);
-    const { ids } = before.state.settings.assessments.A1;
-    const first = ids[0];
-    const draft = before.state.progress[first].familiarityCheck;
-    assert.equal(original.state.progress[first], undefined);
-    assert.deepEqual(Object.keys(before.state.progress[first]), ['familiarityCheck']);
+    await page.getByText('저장됨', { exact: true }).waitFor();
+    assert.equal(await page.getByRole('button', { name: cleanupLabel, exact: true }).count(), 0);
+    const pending = await read(designated);
+    const assessment = pending.state.settings.assessments.A1;
+    assert.equal(assessment.ids.length, 20);
+    assert.equal(assessment.index, 0);
+    const draft = pending.state.progress[assessment.ids[0]].familiarityCheck;
+    assert.equal(draft.initial, 'new');
+    assert.equal(draft.answer, '');
+    assert.equal(draft.final, undefined);
+    assert.deepEqual(pending.state.sessions, original.state.sessions);
+    assert.deepEqual(pending.state.grammar, original.state.grammar);
 
-    await save(other, { revision: (await read(other)).revision, ...before.state });
-    const otherBefore = await read(other);
-    assert.equal((await clear(anonymous, { revision: before.revision })).status(), 401);
-    assert.equal((await clear(other, { revision: otherBefore.revision })).status(), 404);
-    assert.equal((await clear(context, { revision: before.revision }, { Origin: 'https://example.test' })).status(), 403);
-    assert.equal((await clear(context, { revision: before.revision, entryId: first })).status(), 400);
-    assert.equal((await clear(context, { revision: before.revision - 1 })).status(), 409);
-    assert.deepEqual(await read(context), before);
-    assert.deepEqual(await read(other), otherBefore);
+    await seed(other, pending.state);
     const otherPage = await other.newPage();
+    otherPage.on('pageerror', error => errors.push(error.message));
     await otherPage.goto(url);
     await otherPage.getByText('저장됨', { exact: true }).waitFor();
     await otherPage.getByRole('button', { name: '친숙도 확인 이어서', exact: true }).click();
     await otherPage.locator('.reference-meaning').waitFor();
+    await otherPage.getByText('저장됨', { exact: true }).waitFor();
     assert.equal(await otherPage.getByRole('button', { name: cleanupLabel, exact: true }).count(), 0);
-    const otherContinued = await read(other);
-    checks.push('anonymous, other account, cross-origin, arbitrary target and stale revision rejected without a write; other account has no cleanup button');
+    const otherBefore = await read(other);
 
-    const dialog = page.getByRole('alertdialog', { name: '테스트 진행을 지울까요?' });
-    await button(cleanupLabel).click();
-    await dialog.getByRole('button', { name: '취소', exact: true }).click();
-    await dialog.waitFor({ state: 'hidden' });
-    assert.deepEqual(await read(context), before);
-    await button(cleanupLabel).click();
-    await dialog.getByRole('button', { name: cleanupLabel, exact: true }).click();
-    await page.getByText('테스트 진행을 지웠어요.', { exact: true }).waitFor();
-    await saved();
-    assert.deepEqual(await read(context), { revision: before.revision + 1, state: original.state });
-    await page.reload();
-    await saved();
-    assert.equal(await button('친숙도 확인 이어서').count(), 0);
-    assert.deepEqual(await read(other), otherContinued);
-    checks.push('cancel leaves state intact; confirmed cleanup removes the test assessment and draft-only row; reread preserves previous word, session, grammar and settings data');
-
-    const legacyWord = { familiarity: 'known', en: 'independent', notes: 'Synthetic older notes', lastStudied: '2026-10-01' };
-    const settings = structuredClone(before.state.settings);
-    settings.assessments.A2 = {
-      ids: [require('../data/words.json').find(word => word.level === 'A2').id],
-      index: 0, marks: {}, completed: false,
-    };
-    await save(context, { revision: before.revision + 1, settings, progress: { [first]: { ...legacyWord, familiarityCheck: draft } }, sessions: {} });
-    const retained = await read(context);
-    const race = await Promise.all([
-      clear(context, { revision: retained.revision }),
-      clear(context, { revision: retained.revision }),
-    ]);
-    assert.deepEqual(race.map(response => response.status()).sort(), [200, 409]);
-    const expected = structuredClone(retained);
-    expected.revision++;
-    delete expected.state.settings.assessments.A1;
-    delete expected.state.progress[first].familiarityCheck;
-    assert.deepEqual(await read(context), expected);
-    assert.deepEqual(expected.state.progress[first], legacyWord);
-    assert.deepEqual(await read(other), otherContinued);
-    checks.push('concurrent requests commit once; cleanup preserves same-word history fields, a different level assessment and the other account');
-
-    const protectedStates = [
-      { assessment: settings.assessments.A1, check: { ...draft, final: 'new' } },
-      { assessment: settings.assessments.A1, check: { ...draft, answer: 'Synthetic non-empty answer' } },
-      { assessment: { ...settings.assessments.A1, index: 1, marks: { [first]: 'new' } }, check: draft },
-    ];
-    for (const { assessment, check } of protectedStates) {
-      await save(context, {
-        revision: (await read(context)).revision,
-        settings: { ...settings, assessments: { ...settings.assessments, A1: assessment } },
-        progress: { [first]: { ...legacyWord, familiarityCheck: check } },
-        sessions: {},
-      });
-      const protectedState = await read(context);
-      assert.equal((await clear(context, { revision: protectedState.revision })).status(), 422);
-      assert.deepEqual(await read(context), protectedState);
+    const diagnosis = await designated.request.get(url + cleanupPath + '/status');
+    assert.equal(diagnosis.status(), 200);
+    assert.deepEqual(await diagnosis.json(), { bindingPresent: true, matchesCurrentLogin: true });
+    for (const [account, revision] of [
+      [designated, pending.revision],
+      [other, otherBefore.revision],
+      [anonymous, 0],
+    ]) {
+      const response = await account.request.post(url + cleanupPath, { data: { revision } });
+      assert.equal(response.status(), 410);
+      assert.equal(response.headers()['cache-control'], 'no-store');
     }
+    assert.deepEqual(await read(designated), pending);
+    assert.deepEqual(await read(other), otherBefore);
+
+    await page.reload();
+    await page.getByText('저장됨', { exact: true }).waitFor();
+    assert.equal(await page.getByRole('button', { name: '친숙도 확인 이어서', exact: true }).count(), 1);
     assert.deepEqual(errors, []);
-    checks.push('confirmed result, an entered answer and an advanced assessment are all ineligible');
     const engine = process.env.QA_BROWSER || 'chromium';
-    const result = { engine, passed: true, checks, browserErrors: errors, productionWrites: 0 };
+    const result = {
+      engine,
+      passed: true,
+      checks: [
+        'normal familiarity reveal saves the pending comparison and reload offers resume',
+        'button is absent at the same meaning comparison stage for both accounts',
+        'old cleanup requests return 410 even with a matching runtime binding',
+        'both account snapshots and revisions are preserved after the rejected requests',
+      ],
+      browserErrors: errors,
+      productionWrites: 0,
+    };
     writeFileSync(`work/familiarity-cleanup-${engine}-qa.json`, JSON.stringify(result, null, 2) + '\n');
     console.log(JSON.stringify(result));
   } finally {

@@ -3,8 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { EMPTY, type State } from '@/lib/learning';
 import { stateDelta } from '@/lib/state-delta';
 import { InvalidResponseError, RequestTimeoutError } from '@/lib/client-request';
-import { clearTestFamiliarityDraft, loadLearningState, restoreLearningState, saveLearningState } from '@/lib/learning-api';
-import { firstTestAssessmentEntry, isTestFamiliarityReveal, removeTestFamiliarityDraft } from '@/lib/learning/familiarity-cleanup';
+import { loadLearningState, restoreLearningState, saveLearningState } from '@/lib/learning-api';
 import { commitRestore } from '@/lib/restore-client';
 import type { StateSnapshot } from '@/lib/api-contracts';
 import type { GrammarProgress, LessonId } from '@/lib/grammar/model';
@@ -141,41 +140,6 @@ export function useLearningStore() {
     }
   }, [signedIn, conflict]);
 
-  const cleanupTestFamiliarity = useCallback(async () => {
-    const before = persisted.current;
-    const entryId = firstTestAssessmentEntry(before.settings);
-    if (lock.current || conflict || !signedIn || current.current !== before ||
-        !entryId || !isTestFamiliarityReveal(before.progress[entryId]?.familiarityCheck)) return false;
-
-    lock.current = true;
-    setSaving(true);
-    setError('');
-    try {
-      const result = await clearTestFamiliarityDraft(revision.current);
-      if (!result.ok) {
-        setConflict(result.response.status === 409 || result.response.status >= 500);
-        setError(result.data.error);
-        return false;
-      }
-      revision.current = result.data.revision;
-      const level = before.settings.level;
-      const saved = removeTestFamiliarityDraft(before, level, entryId);
-      const next = current.current === before ? saved : removeTestFamiliarityDraft(current.current, level, entryId);
-      persisted.current = saved;
-      current.current = next;
-      setState(next);
-      setUnsaved(next !== saved);
-      return true;
-    } catch {
-      setConflict(true);
-      setError('정리 결과를 확인하지 못했어요. 최신 기록을 확인해 주세요.');
-      return false;
-    } finally {
-      lock.current = false;
-      setSaving(false);
-    }
-  }, [conflict, signedIn]);
-
   const restore = useCallback(async (next: State, expected: State, jobId?: string) => {
     if (lock.current || !signedIn || unsaved || conflict || current.current !== expected) {
       setError('현재 기록이 바뀌었어요. 복원 미리보기를 다시 열어 주세요.');
@@ -220,5 +184,5 @@ export function useLearningStore() {
     }
   }, [signedIn, unsaved, conflict, applySnapshot]);
 
-  return { state, current, readSavedState, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, cleanupTestFamiliarity, retry: () => save(current.current) };
+  return { state, current, readSavedState, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
 }

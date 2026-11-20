@@ -7,7 +7,3 @@ export function getFamiliarityCleanupStatus(userId: string | null | undefined) {
     matchesCurrentLogin: !!userId && userId === testUserId,
   };
 }
-
-export function isFamiliarityCleanupAccount(userId: string | null | undefined) {
-  return getFamiliarityCleanupStatus(userId).matchesCurrentLogin;
-}
