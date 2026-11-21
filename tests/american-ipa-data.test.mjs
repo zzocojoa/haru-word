@@ -80,7 +80,8 @@ test('generated UI and public evidence are reproducible; check rejects stale fil
     const generated = [];
     for (const [index, eol] of ['\n', '\r\n'].entries()) {
       const cwd = path.join(root, String(index));
-      for (const [file, bytes] of [['docs/OXFORD_AMERICAN_IPA_DICTIONARY.md', md], ['data/words.json', words], ['data/content.json', content]]) {
+      for (const [file, bytes] of [['docs/OXFORD_AMERICAN_IPA_DICTIONARY.md', md], ['data/words.json', words],
+        ['data/content.json', content], ['data/catalog-content-revisions.json', readFileSync('data/catalog-content-revisions.json')]]) {
         mkdirSync(path.dirname(path.join(cwd, file)), { recursive: true });
         writeFileSync(path.join(cwd, file), bytes.toString().replaceAll('\r\n', '\n').replaceAll('\n', eol));
       }

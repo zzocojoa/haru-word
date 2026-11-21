@@ -1409,7 +1409,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | 711014818dc3b010 | ancient | ancient | adj. | A2 | 고대의 | /ˈeɪnʃənt/ (adj. · 고대의) | /ˈeɪn.ʃənt/ | 현재 품사의 대표형 | [W0861] · [J0861] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 복수 후보 |
 | c301e6b2fc222697 | ankle | ankle | n. | A2 | 발목 | /ˈæŋkəl/ (n. · 발목) | /ˈæŋ.k ə l/ | Cambridge US 대표형. 현재 품사·뜻에 적용 | [N037] · US | 개별 사전 대조<br>초판: 자동 매핑 |
 | 7cb39b5b500a2b9c | any | any | adv. | A2 | 조금이라도 | /ˈɛni/ (adv. · 조금이라도) | /ˈen.i/ | Cambridge US 대표형. 현재 품사·뜻에 적용 | [N001] · US | 개별 사전 대조<br>초판: 자동 매핑 |
-| 56ecc20111ebbe91 | anybody | anybody | pron. | A2 | 누구든 | /ˈɛnibədi/ (pron. · 누구든) | /ˈɛn.i.bə.di/ | 현재 품사의 대표형 | [W0862] · [J0862] · pron e0 · US | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| 56ecc20111ebbe91 | anybody | anybody | pron. | A2 | 누군가 (의문문에서) | /ˈɛnibədi/ (pron. · 누구든) | /ˈɛn.i.bə.di/ | 현재 품사의 대표형 | [W0862] · [J0862] · pron e0 · US | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 2a74e54685b0cd8e | anymore | anymore | adv. | A2 | 더 이상 (부정문에서) | /ˌɛniˈmɔr/ (adv. · 더 이상 (부정문에서)) | /ˌɛn.iˈmɔɹ/ | 현재 품사의 대표형 | [W0863] · [J0863] · adv e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 63f85e263e8e4725 | anyway | anyway | adv. | A2 | 어쨌든 | /ˈɛniweɪ/ (adv. · 어쨌든) | /ˈɛniweɪ/ | 현재 품사의 대표형 | [W0864] · [J0864] · adv e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 1419b8f5e9637adc | anywhere | anywhere | adv. | A2 | 어디든 | /ˈɛniwɛr/ (adv. · 어디든) | /ˈen.i.wer/ | Cambridge US 대표형. 현재 품사·뜻에 적용 | [N038] · US | 개별 사전 대조<br>초판: 복수 후보 |
@@ -1768,7 +1768,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | 683c704782598163 | gun | gun | n. | A2 | 총 | /ɡʌn/ (n. · 총) | /ˈɡʌn/ | 현재 품사의 대표형 | [W1137] · [J1137] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 5969ca5f127f43b4 | guy | guy | n. | A2 | 남자 | /ɡaɪ/ (n. · 남자) | [ɡaɪ] | 현재 품사의 대표형 | [W1138] · [J1138] · noun e0 · US | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 5d0385bf00fc8ec4 | habit | habit | n. | A2 | 습관 | /ˈhæbɪt/ (n. · 습관) | /ˈhæb.ɪt/ | 현재 품사의 대표형 | [W1139] · [J1139] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
-| 17297f2e24daa7de | half | half | adv. | A2 | 절반쯤 | /hæf/ (adv. · 절반쯤) | /ˈhæf/ | 현재 품사의 대표형 | [W0321] · [J0321] · adv e2 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| 17297f2e24daa7de | half | half | adv. | A2 | 절반만큼 | /hæf/ (adv. · 절반쯤) | /ˈhæf/ | 현재 품사의 대표형 | [W0321] · [J0321] · adv e2 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 6c9b2b0f4b84e7d8 | hall | hall | n. | A2 | 홀 (큰 방이나 강당) | /hɔl/ (n. · 홀 (큰 방이나 강당)) | /hɔl/ | 현재 품사의 대표형 | [W1140] · [J1140] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | f76993caa6c1db9d | happily | happily | adv. | A2 | 행복하게 | /ˈhæpəli/ (adv. · 행복하게) | /ˈhæp.ə.li/ | 현재 품사의 대표형 | [W1141] · [J1141] · adv e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | a8f474fd21b98d0b | have | have | auxiliary v. | A2 | 완료 시제를 만드는 조동사 | /hæv/ (auxiliary v. · 완료 시제를 만드는 조동사) | /ˈhæv/ | 현재 품사의 대표형 | [W0328] · [J0328] · verb e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
@@ -2228,7 +2228,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | 6a4b5c9fc33399ab | stone | stone | n. | A2 | 돌 | /stoʊn/ (n. · 돌) | /stoʊ̯n/ | 현재 품사의 대표형 | [W1475] · [J1475] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 56363d5d9718626d | storm | storm | n. | A2 | 폭풍 | /stɔrm/ (n. · 폭풍) | /stoɹm/ | 현재 품사의 대표형 | [W1476] · [J1476] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | e95818a59040c3e4 | storm | storm | v. | A2 | 성큼성큼 거칠게 움직이다 | /stɔrm/ (v. · 성큼성큼 거칠게 움직이다) | /stoɹm/ | 현재 품사의 대표형 | [W1476] · [J1476] · verb e1 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
-| 73bd3e4e53362781 | stove | stove | n. | A2 | 가스레인지 | /stoʊv/ (n. · 가스레인지) | /stoʊv/ | 현재 품사의 대표형 | [W1477] · [J1477] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| 73bd3e4e53362781 | stove | stove | n. | A2 | 조리용 레인지 | /stoʊv/ (n. · 가스레인지) | /stoʊv/ | 현재 품사의 대표형 | [W1477] · [J1477] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 4a96662c7da84c73 | straight | straight | adv. | A2 | 똑바로 | /streɪt/ (adv. · 똑바로) | /stɹeɪt/ | 현재 품사의 대표형 | [W1478] · [J1478] · adv e1 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 69f6d9834ca7a471 | straight | straight | adj. | A2 | 일직선의 | /streɪt/ (adj. · 일직선의) | /stɹeɪt/ | 현재 품사의 대표형 | [W1478] · [J1478] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 350622c8091598c6 | strange | strange | adj. | A2 | 이상한 | /streɪndʒ/ (adj. · 이상한) | [stɹeɪnd͡ʒ] | 현재 품사의 대표형 | [W1479] · [J1479] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
@@ -2699,7 +2699,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | f1d43dc22fac9757 | frightened | frightened | adj. | B1 | 겁먹은 | /ˈfraɪtənd/ (adj. · 겁먹은) | /ˈfɹaɪtn̩d/ | 현재 품사의 대표형 | [W1812] · [J1812] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 5176bdde92d8f3ed | frightening | frightening | adj. | B1 | 무서운 | /ˈfraɪtənɪŋ/ (adj. · 무서운) | /ˈfɹaɪtənɪŋ/ | 현재 품사의 대표형 | [W1813] · [J1813] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 복수 후보 |
 | bc106a885dc3fa4d | frozen | frozen | adj. | B1 | 냉동한 | /ˈfroʊzən/ (adj. · 냉동한) | /ˈfɹoʊzən/ | 현재 품사의 대표형 | [W1814] · [J1814] · adj e0 · US | 미국식·CMU 대조<br>초판: 자동 매핑 |
-| ae4385fa4b30ea27 | fry | fry | v. | B1 | 기름에 굽다 | /fraɪ/ (v. · 기름에 굽다) | /fɹaɪ/ | 현재 품사의 대표형 | [W1815] · [J1815] · verb e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
+| ae4385fa4b30ea27 | fry | fry | v. | B1 | 기름에 익히다 | /fraɪ/ (v. · 기름에 굽다) | /fɹaɪ/ | 현재 품사의 대표형 | [W1815] · [J1815] · verb e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 4f70c0af43c5c191 | fuel | fuel | n. | B1 | 연료 | /ˈfjuəl/ (n. · 연료) | /ˈfjuːəl/ | 현재 품사의 대표형 | [W1816] · [J1816] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 복수 후보 |
 | 97f5ab2c88999aca | function | function | n. | B1 | 기능 | /ˈfʌŋkʃən/ (n. · 기능) | [ˈfʌŋkʃn̩] | 현재 품사의 대표형 | [W1817] · [J1817] · noun e0 · US | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 3ee42d805f76ca03 | fur | fur | n. | B1 | 털 | /fɝ/ (n. · 털) | /fɝ/ | 현재 품사의 대표형 | [W1818] · [J1818] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
@@ -2946,7 +2946,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | d8b5593e06ed13e6 | politics | politics | n. | B1 | 정치 | /ˈpɑlətɪks/ (n. · 정치) | /ˈpɑ.lə.tɪks/ | 현재 품사의 대표형 | [W1985] · [J1985] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 39062c78e300ab80 | port | port | n. | B1 | 항구 | /pɔrt/ (n. · 항구) | /poɹt/ | 현재 품사의 대표형 | [W1986] · [J1986] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 5e4b7e25add0dcd8 | portrait | portrait | n. | B1 | 초상화 | /ˈpɔrtrət/ (n. · 초상화) | /ˈpɔɹtɹət/ | 현재 품사의 대표형 | [W1987] · [J1987] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
-| 5cb35b5d0cd5410b | possibly | possibly | adv. | B1 | 가능한 한 | /ˈpɑsɪbli/ (adv. · 가능한 한) | /ˈpɑ.sɪ.bli/ | 현재 품사의 대표형 | [W1988] · [J1988] · adv e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| 5cb35b5d0cd5410b | possibly | possibly | adv. | B1 | 가능한 범위를 강조 (can·could와 함께) | /ˈpɑsɪbli/ (adv. · 가능한 한) | /ˈpɑ.sɪ.bli/ | 현재 품사의 대표형 | [W1988] · [J1988] · adv e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 9857fd3ba53a726b | pot | pot | n. | B1 | 화분 | /pɑt/ (n. · 화분) | /pɑt/ | 현재 품사의 대표형 | [W1989] · [J1989] · noun e0 · US | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 5c421a1431afab98 | pour | pour | v. | B1 | 붓다 | /pɔr/ (v. · 붓다) | /poɹ/ | 현재 품사의 대표형 | [W1990] · [J1990] · verb e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 0fba97b11e6f899e | poverty | poverty | n. | B1 | 빈곤 | /ˈpɑvɚti/ (n. · 빈곤) | /ˈpɑːvɚti/ | 현재 품사의 대표형 | [W1991] · [J1991] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
@@ -3070,7 +3070,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | cabd32f5d4e1d963 | sensible | sensible | adj. | B1 | 분별 있는 | /ˈsɛnsəbəl/ (adj. · 분별 있는) | [ˈsɛn.sə.bl̩] | 현재 품사의 대표형 | [W2080] · [J2080] · adj e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 92296f76f2195332 | separate | separate | v. | B1 | 분리하다 | /ˈsɛpəreɪt/ (v. · 분리하다) | /ˈsep.ə.reɪt/ | 뜻·품사별 기존 선택 유지; 표기 정규화 | [C14] · US | 개별 사전 대조<br>초판: 사전 대조 |
 | 7142acd6db67ea94 | seriously | seriously | adv. | B1 | 진지하게 | /ˈsɪriəsli/ (adv. · 진지하게) | /ˈsɪɹ.i.əs.li/ | 현재 품사의 대표형 | [W2081] · [J2081] · adv e0 · US | 미국식·CMU 대조<br>초판: 자동 매핑 |
-| 8ff89bc3e38fc80c | servant | servant | n. | B1 | 공무원 (public servant) | /ˈsɝvənt/ (n. · 공무원 (public servant)) | /ˈsɝvənt/ | 현재 품사의 대표형 | [W2082] · [J2082] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| 8ff89bc3e38fc80c | servant | servant | n. | B1 | 하인·가사 사용인 | /ˈsɝvənt/ (n. · 공무원 (public servant)) | /ˈsɝvənt/ | 현재 품사의 대표형 | [W2082] · [J2082] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 5795cfac842d0bf2 | set | set (put) | v. | B1 | 설정하다 | /sɛt/ (v. · 설정하다) | /sɛt/ | 현재 품사의 대표형 | [W2083] · [J2083] · verb e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 658acc7e14b748dc | set | set (group) | n. | B1 | 세트 | /sɛt/ (n. · 세트) | /sɛt/ | 현재 품사의 대표형 | [W2083] · [J2083] · noun e1 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 614fc209ae25e6f1 | setting | setting | n. | B1 | 배경 | /ˈsɛtɪŋ/ (n. · 배경) | /ˈsɛtɪŋ/ | 현재 품사의 대표형 | [W2084] · [J2084] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
@@ -3086,7 +3086,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | be3c2a1710c12cf7 | shiny | shiny | adj. | B1 | 윤이 나는 | /ˈʃaɪni/ (adj. · 윤이 나는) | /ˈʃaɪ.ni/ | 현재 품사의 대표형 | [W2091] · [J2091] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | f7a3fc3757319793 | shoot | shoot | v. | B1 | 발사하다 | /ʃut/ (v. · 발사하다) | /ʃut/ | 현재 품사의 대표형 | [W2092] · [J2092] · verb e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 2fae7f15ba63467a | shy | shy | adj. | B1 | 수줍은 | /ʃaɪ/ (adj. · 수줍은) | /ʃaɪ/ | 현재 품사의 대표형 | [W2093] · [J2093] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
-| 6c1994d9056399e7 | sight | sight | n. | B1 | 봄 (보는 것) | /saɪt/ (n. · 봄 (보는 것)) | /saɪt/ | 현재 품사의 대표형 | [W2094] · [J2094] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
+| 6c1994d9056399e7 | sight | sight | n. | B1 | 눈으로 보는 일 | /saɪt/ (n. · 봄 (보는 것)) | /saɪt/ | 현재 품사의 대표형 | [W2094] · [J2094] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | ebcb2705670121f6 | signal | signal | n. | B1 | 신호 | /ˈsɪɡnəl/ (n. · 신호) | /ˈsɪɡnəl/ | 현재 품사의 대표형 | [W2095] · [J2095] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 3d8b1f116f4f3e6b | signal | signal | v. | B1 | 신호를 보내다 | /ˈsɪɡnəl/ (v. · 신호를 보내다) | /ˈsɪɡnəl/ | 현재 품사의 대표형 | [W2095] · [J2095] · verb e1 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | c1a856384d2349d9 | silent | silent | adj. | B1 | 말이 없는 | /ˈsaɪlənt/ (adj. · 말이 없는) | /ˈsaɪ̯lənt/ | 현재 품사의 대표형 | [W2096] · [J2096] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
@@ -3266,7 +3266,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | 3e746d63150082bc | written | written | adj. | B1 | 글로 쓴 | /ˈrɪtən/ (adj. · 글로 쓴) | /ˈɹɪ.tn̩/ | 현재 품사의 대표형 | [W2211] · [J2211] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | ab444d0f534a97cc | wrong | wrong | adv. | B1 | 잘못 | /rɔŋ/ (adv. · 잘못) | /ˈɹɔŋ/ | 현재 품사의 대표형 | [W0825] · [J0825] · adv e1 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | f390395271a67ba3 | young | young | n. | B1 | 새끼 | /jʌŋ/ (n. · 새끼) | /jʌŋ/ | 현재 품사의 대표형 | [W0832] · [J0832] · noun e1 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
-| ccef3e23140a51d7 | youth | youth | n. | B1 | 어린 시절 | /juθ/ (n. · 어린 시절) | /juθ/ | 현재 품사의 대표형 | [W2212] · [J2212] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| ccef3e23140a51d7 | youth | youth | n. | B1 | 젊은 시절 | /juθ/ (n. · 어린 시절) | /juθ/ | 현재 품사의 대표형 | [W2212] · [J2212] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 
 ### B2 · 839항목
 
@@ -3411,7 +3411,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | 40c9117231abd4ad | concept | concept | n. | B2 | 개념 | /ˈkɑnsɛpt/ (n. · 개념) | /ˈkɑn.sɛpt/ | 현재 품사의 대표형 | [W2305] · [J2305] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 30d6ec5f12c53e43 | concern | concern | n. | B2 | 걱정거리 | /kənˈsɝn/ (n. · 걱정거리) | /kənˈsɝn/ | 현재 품사의 대표형 | [W2306] · [J2306] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 8d520fc3d0ab1108 | concern | concern | v. | B2 | 걱정하게 하다 | /kənˈsɝn/ (v. · 걱정하게 하다) | /kənˈsɝn/ | 현재 품사의 대표형 | [W2306] · [J2306] · verb e1 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
-| c879ccce5ad776c2 | concerned | concerned | adj. | B2 | 걱정스러운 | /kənˈsɝnd/ (adj. · 걱정스러운) | /kənˈsɝnd/ | 현재 품사의 대표형 | [W2307] · [J2307] · adj e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| c879ccce5ad776c2 | concerned | concerned | adj. | B2 | 걱정하는 (be concerned about ~) | /kənˈsɝnd/ (adj. · 걱정스러운) | /kənˈsɝnd/ | 현재 품사의 대표형 | [W2307] · [J2307] · adj e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | f6600a828a5fa83b | conduct | conduct | v. | B2 | 실시하다 | /kənˈdʌkt/ (v. · 실시하다) | /kənˈdʌkt/ | v3 원문 재확인 · 실시하다 동사와 행동 명사의 강세·첫 모음 구분 유지 | [R40] · US | 개별 사전 대조<br>초판: 기존 검토 |
 | 8c37b8d4fb8a1d56 | conduct | conduct | n. | B2 | 행동 | /ˈkɑndʌkt/ (n. · 행동) | /ˈkɑːn.dʌkt/ | v3 원문 재확인 · 실시하다 동사와 행동 명사의 강세·첫 모음 구분 유지 | [R40] · US | 개별 사전 대조<br>초판: 기존 검토 |
 | 7b1d74bcb5ae8a95 | confidence | confidence | n. | B2 | 자신감 | /ˈkɑnfɪdəns/ (n. · 자신감) | /ˈkɑn.fɪ.dəns/ | 현재 품사의 대표형 | [W2308] · [J2308] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
@@ -3686,7 +3686,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | 8669f311584ecb19 | institution | institution | n. | B2 | 기관 | /ˌɪnstɪˈtuʃən/ (n. · 기관) | /ˌɪn.stɪˈtu.ʃən/ | 현재 품사의 대표형 | [W2491] · [J2491] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | a6b2cf6d43ff9d59 | insurance | insurance | n. | B2 | 보험 | /ɪnˈʃʊrəns/ (n. · 보험) | /ɪnˈʃʊɹ.əns/ | 현재 품사의 대표형 | [W2492] · [J2492] · noun e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 74673e5e988216ad | intended | intended | adj. | B2 | 의도된 | /ɪnˈtɛndɪd/ (adj. · 의도된) | /ɪnˈtɛndɪd/ | 현재 품사의 대표형 | [W2493] · [J2493] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 복수 후보 |
-| 79275bfe73b7b5cd | intense | intense | adj. | B2 | 집중적인 | /ɪnˈtɛns/ (adj. · 집중적인) | /ɪnˈtɛns/ | 현재 품사의 대표형 | [W2494] · [J2494] · adj e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| 79275bfe73b7b5cd | intense | intense | adj. | B2 | 강도 높은 | /ɪnˈtɛns/ (adj. · 집중적인) | /ɪnˈtɛns/ | 현재 품사의 대표형 | [W2494] · [J2494] · adj e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | edae7a2035209538 | internal | internal | adj. | B2 | 내부의 | /ɪnˈtɝnəl/ (adj. · 내부의) | /ɪnˈtɜɹ.nəl/ | 현재 품사의 대표형 | [W2495] · [J2495] · adj e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | 5c10aa715bc58dba | interpret | interpret | v. | B2 | 해석하다 | /ɪnˈtɝprət/ (v. · 해석하다) | /ɪnˈtɝː.prət/ | v3 원문 재확인 · Cambridge US의 마지막 약모음 /ə/를 대표형으로 채택 | [R45] · US | 개별 사전 대조<br>초판: 자동 매핑 |
 | 356406d1cad2731d | interrupt | interrupt | v. | B2 | 방해하다 | /ˌɪntəˈrʌpt/ (v. · 방해하다) | /ˌɪntəˈɹʌpt/ | 현재 품사의 대표형 | [W2497] · [J2497] · verb e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
@@ -4093,7 +4093,7 @@ console.log(JSON.stringify({result:'PASS', rows:rows.length, uniqueIds:seen.size
 | a879a8a97b9e730b | wherever | wherever | conj. | B2 | 어디든지 | /wɛrˈɛvɚ/ (conj. · 어디든지) | /werˈev.ɚ/ | Cambridge US 대표형. 현재 품사·뜻에 적용 | [N137] · US | 개별 사전 대조<br>초판: 복수 후보 |
 | 4008a16b95d13aab | whisper | whisper | v. | B2 | 속삭이다 | /ˈwɪspɚ/ (v. · 속삭이다) | /ˈwɪs.pɚ/ | Cambridge US 대표형. 현재 품사·뜻에 적용 | [N138] · US | 개별 사전 대조<br>초판: 복수 후보 |
 | f3ef90a1e8543037 | whisper | whisper | n. | B2 | 속삭임 | /ˈwɪspɚ/ (n. · 속삭임) | /ˈwɪs.pɚ/ | Cambridge US 대표형. 현재 품사·뜻에 적용 | [N138] · US | 개별 사전 대조<br>초판: 복수 후보 |
-| ce0282c1869e08bf | whom | whom | pron. | B2 | 누구에게 | /hum/ (pron. · 누구에게) | /hum/ | 현재 품사의 대표형 | [W2755] · [J2755] · pron e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
+| ce0282c1869e08bf | whom | whom | pron. | B2 | 누구를·누구에게 (who의 목적격) | /hum/ (pron. · 누구에게) | /hum/ | 현재 품사의 대표형 | [W2755] · [J2755] · pron e0 · GA | 미국식·CMU 대조<br>초판: 자동 매핑 |
 | ccf5a58b43ad7530 | widely | widely | adv. | B2 | 널리 | /ˈwaɪdli/ (adv. · 널리) | /ˈwaɪdli/ | 현재 품사의 대표형 | [W2756] · [J2756] · adv e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 1b6e84bbb870f9c9 | wildlife | wildlife | n. | B2 | 야생 동물 | /ˈwaɪldlaɪf/ (n. · 야생 동물) | /ˈwaɪldlaɪf/ | 현재 품사의 대표형 | [W2757] · [J2757] · noun e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |
 | 47061e1916900605 | willing | willing | adj. | B2 | 기꺼이 하는 | /ˈwɪlɪŋ/ (adj. · 기꺼이 하는) | /ˈwɪlɪŋ/ | 현재 품사의 대표형 | [W2758] · [J2758] · adj e0 · 공통 | 공통형·CMU 대조<br>초판: 자동 매핑 |

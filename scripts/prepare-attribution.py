@@ -8,7 +8,9 @@ content=json.loads(Path('data/content.json').read_text('utf-8'))
 validate_expression_translations(content, load_expression_translations(), require_applied=True)
 records=[{**w,**content[w['id']]} for w in words]
 root=Path('public/sources');root.mkdir(parents=True,exist_ok=True)
-(root/'learning-data.json').write_text(json.dumps({'glossLicense':'CC BY-SA 4.0','exampleLicenses':{'Tatoeba 참고 예문':'CC BY 2.0','학습용 작성 예문':'CC BY-SA 4.0'},'records':records},ensure_ascii=False),encoding='utf-8')
+metadata=json.dumps({'glossLicense':'CC BY-SA 4.0','exampleLicenses':{'Tatoeba 참고 예문':'CC BY 2.0','학습용 작성 예문':'CC BY-SA 4.0'}},ensure_ascii=False)
+rows=',\n'.join(json.dumps(row,ensure_ascii=False) for row in records)
+(root/'learning-data.json').write_text(metadata[:-1]+',"records":[\n'+rows+'\n]}\n',encoding='utf-8',newline='\n')
 shutil.copyfile('data/source-audit.json',root/'source-audit.json')
 credits='''하루단어 데이터 출처 및 변경 내역 · 2026-09-22
 
@@ -54,6 +56,9 @@ CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
 2026-09-30: 가족 관계 19항목(13개 예문)의 나이 정보와 close 동사 예문을 교열했습니다.
 한국어에 특정된 나이를 영어에도 younger/older로 명시하고, Tatoeba 후보 2개는 직접 작성한 예문으로 교체했습니다.
 변경된 자료는 override·수준별 검토 원장에 기록하며 사용자 편집과 과거 회차 자료는 유지합니다.
+
+2026-11-21: 학습 항목 20개의 한국어 뜻·표현·예문을 교열했습니다.
+한국어 번역을 다듬은 Tatoeba 예문은 기존 기여자 표시와 문장 링크를 함께 제공합니다.
 
 4. 발음
 2026-10-19: 사전 v3의 3,809항목·3,837개 조건별 발음을 뜻·품사 일치 시 표시합니다.

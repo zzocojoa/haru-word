@@ -306,8 +306,15 @@
           "id": "56ecc20111ebbe91",
           "status": "corrected",
           "beforeHash": "6b162e9012a11463a16555708acae43eefc595b240a413594dd460fccb3d8a8c",
-          "afterHash": "df195af92647ad2979b5a9cb1421ff07b9551faca9bd2403f3c2191bf811677b",
-          "reason": "긍정 의문문에서 가능한 사람을 묻는 뜻"
+          "afterHash": "58731af6885f1af854e0eb4963a70f61a17627cc080156ca893d2236a91a5874",
+          "reason": "긍정 의문문에서 가능한 사람을 묻는 뜻",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "df195af92647ad2979b5a9cb1421ff07b9551faca9bd2403f3c2191bf811677b",
+              "reason": "현재 의문문은 도와줄 사람이 있는지 묻는다. 학습 뜻은 누구에게나 열려 있다는 해석으로 읽힐 수 있다."
+            }
+          ]
         },
         {
           "id": "2a74e54685b0cd8e",
@@ -330,9 +337,18 @@
         },
         {
           "id": "c3034d8610fdcfaa",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "b0a2d4a1b47f4d15c6c0b16c0cfe168d3a167bd44b0976b3924b3ca4994d0c66",
-          "afterHash": "b0a2d4a1b47f4d15c6c0b16c0cfe168d3a167bd44b0976b3924b3ca4994d0c66"
+          "afterHash": "7c995fc07011ba173313e12f372ef5418d9ca9beb096f809d7f085373850bc7f",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "b0a2d4a1b47f4d15c6c0b16c0cfe168d3a167bd44b0976b3924b3ca4994d0c66",
+              "reason": "예문은 조용한 곳이 있는지 묻는다. 표현 번역은 어떤 곳도 괜찮다는 의미로 읽힌다.",
+              "previousExpressionTranslation": "조용한 곳 어디든"
+            }
+          ],
+          "reason": "2026-11-21 한국어 뜻·표현 점검"
         },
         {
           "id": "0b60d7114f7dcc63",
@@ -2670,9 +2686,18 @@
         },
         {
           "id": "17297f2e24daa7de",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "ef2e8357c06483e66b629fd7dbc947d113f37d822774879409924ddf21ca0c22",
-          "afterHash": "ef2e8357c06483e66b629fd7dbc947d113f37d822774879409924ddf21ca0c22"
+          "afterHash": "0e1f13a96f205a7f1bfded1f9a788c899cedc9716bcef3e77d2452be32a74782",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "ef2e8357c06483e66b629fd7dbc947d113f37d822774879409924ddf21ca0c22",
+              "reason": "half full은 절반이 찬 상태를 나타낸다. 쯤은 원문에 없는 근사 표현이다.",
+              "previousExpressionTranslation": "절반쯤 찬"
+            }
+          ],
+          "reason": "2026-11-21 한국어 뜻·표현 점검"
         },
         {
           "id": "6c9b2b0f4b84e7d8",
@@ -2829,7 +2854,15 @@
           "status": "corrected",
           "beforeHash": "820a75906df52aa8765826013065fcfbe1748f08b438e8d16306167cae7be9e0",
           "afterHash": "565225cf76441325d691ea44f2d0ed27c363519a8079aa74ff6a3dae25a649a0",
-          "reason": "관사 포함 표현"
+          "reason": "관사 포함 표현",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "565225cf76441325d691ea44f2d0ed27c363519a8079aa74ff6a3dae25a649a0",
+              "reason": "국가 단위의 휴일이라는 문맥에 맞추고 앱의 예문 번역과 용어를 통일한다.",
+              "previousExpressionTranslation": "국경일"
+            }
+          ]
         },
         {
           "id": "03edc9571945f588",
@@ -3323,9 +3356,17 @@
         },
         {
           "id": "4cd8a08b069dee59",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "f9c07c8527efc962e5e84642df59ac3c72dfdb5138de8e050fee5b07a92b8044",
-          "afterHash": "f9c07c8527efc962e5e84642df59ac3c72dfdb5138de8e050fee5b07a92b8044"
+          "afterHash": "5fce212086e097c3a2b20d236cb34ef676a6c0f8f306e212fb780cc3d2e706e4",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "f9c07c8527efc962e5e84642df59ac3c72dfdb5138de8e050fee5b07a92b8044",
+              "reason": "원문에서 군악대가 이끈 것은 행진이다. 기존 번역은 선두를 이끌었다고 옮겼다."
+            }
+          ],
+          "reason": "2026-11-21 한국어 뜻·표현 점검"
         },
         {
           "id": "66b3eb3cefe5a2d2",
@@ -5300,7 +5341,15 @@
           "status": "corrected",
           "beforeHash": "bcfba5b33742124ac5caee287c5ef9de2fc22344a9cd68eb6bd830681d1e5f5f",
           "afterHash": "7b36d80e75777ef1910fbcf435cebe80b758054f5876c9803f035a844d5ae78d",
-          "reason": "기본형 표현"
+          "reason": "기본형 표현",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "7b36d80e75777ef1910fbcf435cebe80b758054f5876c9803f035a844d5ae78d",
+              "reason": "이름을 서명하다는 한국어 결합이 어색하다. 이름을 써서 서명하는 동작을 담는다.",
+              "previousExpressionTranslation": "이름을 서명하다"
+            }
+          ]
         },
         {
           "id": "bf38c23fb8d9a155",
@@ -5719,8 +5768,16 @@
           "id": "73bd3e4e53362781",
           "status": "corrected",
           "beforeHash": "37ff1378f4e19a931d4a5c6b579b5a5fc52fe0ee189a5e30ec6a73e26ad3e2f8",
-          "afterHash": "456c1d699760e1aaf4d32ed45cd9720c668be45ae0ea6723b3c911b6983ffa58",
-          "reason": "예문과 맞는 조리기구 뜻 선택"
+          "afterHash": "e6803bb50846585ccb37fd0039b566b921566057fa3fd536e205179d4d332cf1",
+          "reason": "예문과 맞는 조리기구 뜻 선택",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "456c1d699760e1aaf4d32ed45cd9720c668be45ae0ea6723b3c911b6983ffa58",
+              "reason": "원문은 조리 기구의 열원이 무엇인지 밝히지 않는다. 가스레인지는 가스 방식만 가리킨다.",
+              "previousExpressionTranslation": "가스레인지 위에"
+            }
+          ]
         },
         {
           "id": "4a96662c7da84c73",

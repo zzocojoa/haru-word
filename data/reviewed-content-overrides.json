@@ -481,7 +481,9 @@
     "source": "학습용 작성 예문"
   },
   "4cd8a08b069dee59": {
-    "expression": "lead the parade"
+    "expression": "lead the parade",
+    "translation": "군악대가 행진을 이끌었다.",
+    "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #49998 (CM) & #11106879 (intertime) · 한국어 번역 교열 (2026-11-21)"
   },
   "bb8501631a875472": {
     "expression": "marry someone",
@@ -681,7 +683,7 @@
   },
   "6c1994d9056399e7": {
     "expression": "at the sight of someone",
-    "meaning": "봄 (보는 것)",
+    "meaning": "눈으로 보는 일",
     "example": "At the sight of her friend, she smiled.",
     "translation": "친구를 보자 그녀는 미소를 지었어요.",
     "source": "학습용 작성 예문"
@@ -717,7 +719,8 @@
     "meaning": "탓하다"
   },
   "c879ccce5ad776c2": {
-    "expression": "concerned about his health"
+    "expression": "concerned about his health",
+    "meaning": "걱정하는 (be concerned about ~)"
   },
   "04c55fd20c95d873": {
     "expression": "be delayed by a sandstorm"
@@ -2085,7 +2088,7 @@
     "meaning": "양"
   },
   "56ecc20111ebbe91": {
-    "meaning": "누구든"
+    "meaning": "누군가 (의문문에서)"
   },
   "2a74e54685b0cd8e": {
     "meaning": "더 이상 (부정문에서)",
@@ -3684,7 +3687,8 @@
     "expression": "an ordinary storm"
   },
   "73bd3e4e53362781": {
-    "meaning": "가스레인지"
+    "meaning": "조리용 레인지",
+    "translation": "빵은 오븐에 있고 수프는 레인지 위에 있어요."
   },
   "69f6d9834ca7a471": {
     "meaning": "일직선의"
@@ -4669,7 +4673,7 @@
     "meaning": "냉동한"
   },
   "ae4385fa4b30ea27": {
-    "meaning": "기름에 굽다"
+    "meaning": "기름에 익히다"
   },
   "3ee42d805f76ca03": {
     "meaning": "털"
@@ -5103,7 +5107,7 @@
     "meaning": "정책"
   },
   "5cb35b5d0cd5410b": {
-    "meaning": "가능한 한",
+    "meaning": "가능한 범위를 강조 (can·could와 함께)",
     "expression": "as much as you possibly can"
   },
   "5c421a1431afab98": {
@@ -5370,7 +5374,10 @@
     "expression": "seriously think about quitting"
   },
   "8ff89bc3e38fc80c": {
-    "meaning": "공무원 (public servant)"
+    "meaning": "하인·가사 사용인",
+    "expression": "a household servant",
+    "example": "She worked as a household servant, and her son later became a public servant.",
+    "translation": "그녀는 가사 사용인으로 일했고, 그녀의 아들은 나중에 공무원이 됐어요."
   },
   "5795cfac842d0bf2": {
     "expression": "set an alarm",
@@ -5790,9 +5797,9 @@
     "source": "학습용 작성 예문"
   },
   "ccef3e23140a51d7": {
-    "meaning": "어린 시절",
+    "meaning": "젊은 시절",
     "example": "She spent her youth in a small village.",
-    "translation": "그녀는 작은 마을에서 어린 시절을 보냈어요.",
+    "translation": "그녀는 젊은 시절을 작은 마을에서 보냈어요.",
     "expression": "during your youth",
     "source": "학습용 작성 예문"
   },
@@ -6622,7 +6629,8 @@
     "source": "학습용 작성 예문"
   },
   "79275bfe73b7b5cd": {
-    "meaning": "집중적인"
+    "meaning": "강도 높은",
+    "translation": "강도 높은 노력 끝에 우리는 의도한 결과를 얻었다."
   },
   "356406d1cad2731d": {
     "meaning": "방해하다"
@@ -7356,7 +7364,7 @@
     "expression": "whisper to someone"
   },
   "ce0282c1869e08bf": {
-    "meaning": "누구에게"
+    "meaning": "누구를·누구에게 (who의 목적격)"
   },
   "47061e1916900605": {
     "expression": "be willing to help"
@@ -7433,5 +7441,22 @@
     "translation": "떠나기 전에 창문을 닫아 주세요.",
     "expression": "close the window",
     "source": "학습용 작성 예문"
+  },
+  "17297f2e24daa7de": {
+    "meaning": "절반만큼",
+    "translation": "그 컵은 그녀의 것이고 절반이 차 있어요."
+  },
+  "df5e7abbf05d5c86": {
+    "expression": "walk across the road"
+  },
+  "e00bd73630d731d9": {
+    "translation": "아니요, 괜찮아요! 이미 마실 게 있어요."
+  },
+  "c3034d8610fdcfaa": {
+    "expression": "Is there anywhere quiet?"
+  },
+  "af4e5eda826124e9": {
+    "expression": "the very same route",
+    "translation": "우리는 서울을 경유하는 똑같은 경로를 이용했다."
   }
 }

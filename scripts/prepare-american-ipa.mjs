@@ -64,8 +64,14 @@ export function americanIpaCatalog(mdBytes, wordsBytes, contentBytes) {
 
 export function prepareAmericanIpa(check = false) {
   const catalog = americanIpaCatalog(readFileSync('docs/OXFORD_AMERICAN_IPA_DICTIONARY.md'), readFileSync('data/words.json'), readFileSync('data/content.json'));
+  const revisions = JSON.parse(readFileSync('data/catalog-content-revisions.json'));
+  const previousMeanings = Object.fromEntries(catalog.entries.flatMap(({ id, meaning }) => {
+    const previous = revisions[id]?.previousContent.meaning;
+    return previous && previous !== meaning ? [[id, previous]] : [];
+  }));
   const ui = { schemaVersion: catalog.schemaVersion, dictionaryVersion: catalog.dictionaryVersion, inputs: catalog.inputs,
-    entries: Object.fromEntries(catalog.entries.map(entry => [entry.id, entry.variants.map(({ ipa, usage }) => [ipa, usage])])) };
+    entries: Object.fromEntries(catalog.entries.map(entry => [entry.id, entry.variants.map(({ ipa, usage }) => [ipa, usage])])),
+    previousMeanings };
   // One source entry per line keeps the public evidence reviewable and scannable.
   const { entries, ...metadata } = catalog;
   const publicBytes = JSON.stringify(metadata).slice(0, -1) + ',"entries":[\n'

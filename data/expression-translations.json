@@ -26,8 +26,8 @@
   },
   "df5e7abbf05d5c86": {
     "meaning": "~을 가로질러",
-    "expression": "across the road",
-    "expressionTranslation": "길 건너편에"
+    "expression": "walk across the road",
+    "expressionTranslation": "길을 건너다"
   },
   "d99eed987d5112ce": {
     "meaning": "건너편으로",
@@ -167,7 +167,7 @@
   "b29978e7b4a058e0": {
     "meaning": "또 하나",
     "expression": "have another",
-    "expressionTranslation": "하나 더 먹다"
+    "expressionTranslation": "다른 것이 하나 더 있다"
   },
   "3e10a2c919ef6ffc": {
     "meaning": "대답",
@@ -1987,7 +1987,7 @@
   "fd04914cdca75241": {
     "meaning": "절반",
     "expression": "half of them",
-    "expressionTranslation": "그들의 절반"
+    "expressionTranslation": "그중 절반"
   },
   "3516f9a4d8efcd62": {
     "meaning": "손",
@@ -5585,7 +5585,7 @@
     "expressionTranslation": "조금이라도 더 나은"
   },
   "56ecc20111ebbe91": {
-    "meaning": "누구든",
+    "meaning": "누군가 (의문문에서)",
     "expression": "anybody here",
     "expressionTranslation": "여기에 있는 누군가"
   },
@@ -5606,8 +5606,8 @@
   },
   "c3034d8610fdcfaa": {
     "meaning": "어느 곳",
-    "expression": "anywhere quiet",
-    "expressionTranslation": "조용한 곳 어디든"
+    "expression": "Is there anywhere quiet?",
+    "expressionTranslation": "조용한 곳이 있나요?"
   },
   "0b60d7114f7dcc63": {
     "meaning": "앱; 애플리케이션",
@@ -7380,9 +7380,9 @@
     "expressionTranslation": "나쁜 습관을 들이다"
   },
   "17297f2e24daa7de": {
-    "meaning": "절반쯤",
+    "meaning": "절반만큼",
     "expression": "half full",
-    "expressionTranslation": "절반쯤 찬"
+    "expressionTranslation": "절반이 찬"
   },
   "6c9b2b0f4b84e7d8": {
     "meaning": "홀 (큰 방이나 강당)",
@@ -7502,7 +7502,7 @@
   "b9f79fcb065c4fb4": {
     "meaning": "휴일",
     "expression": "a national holiday",
-    "expressionTranslation": "국경일"
+    "expressionTranslation": "공휴일 (전국 단위)"
   },
   "03edc9571945f588": {
     "meaning": "자기 지역의",
@@ -9367,7 +9367,7 @@
   "22220f9d03a05b19": {
     "meaning": "서명하다",
     "expression": "sign your name",
-    "expressionTranslation": "이름을 서명하다"
+    "expressionTranslation": "이름을 써서 서명하다"
   },
   "bf38c23fb8d9a155": {
     "meaning": "은",
@@ -9680,9 +9680,9 @@
     "expressionTranslation": "화를 내며 성큼성큼 나가다"
   },
   "73bd3e4e53362781": {
-    "meaning": "가스레인지",
+    "meaning": "조리용 레인지",
     "expression": "on the stove",
-    "expressionTranslation": "가스레인지 위에"
+    "expressionTranslation": "레인지 위에"
   },
   "4a96662c7da84c73": {
     "meaning": "똑바로",
@@ -12010,9 +12010,9 @@
     "expressionTranslation": "냉동 채소"
   },
   "ae4385fa4b30ea27": {
-    "meaning": "기름에 굽다",
+    "meaning": "기름에 익히다",
     "expression": "fry an egg",
-    "expressionTranslation": "달걀을 기름에 굽다"
+    "expressionTranslation": "달걀 프라이를 만들다"
   },
   "4f70c0af43c5c191": {
     "meaning": "연료",
@@ -13245,7 +13245,7 @@
     "expressionTranslation": "가족 초상화"
   },
   "5cb35b5d0cd5410b": {
-    "meaning": "가능한 한",
+    "meaning": "가능한 범위를 강조 (can·could와 함께)",
     "expression": "as much as you possibly can",
     "expressionTranslation": "가능한 한 많이"
   },
@@ -13865,9 +13865,9 @@
     "expressionTranslation": "그만두는 것을 진지하게 생각하다"
   },
   "8ff89bc3e38fc80c": {
-    "meaning": "공무원 (public servant)",
-    "expression": "a public servant",
-    "expressionTranslation": "공무원"
+    "meaning": "하인·가사 사용인",
+    "expression": "a household servant",
+    "expressionTranslation": "가사 사용인"
   },
   "5795cfac842d0bf2": {
     "meaning": "설정하다",
@@ -13945,9 +13945,9 @@
     "expressionTranslation": "꽤 수줍은"
   },
   "6c1994d9056399e7": {
-    "meaning": "봄 (보는 것)",
+    "meaning": "눈으로 보는 일",
     "expression": "at the sight of someone",
-    "expressionTranslation": "누군가를 보고"
+    "expressionTranslation": "누군가를 보자"
   },
   "ebcb2705670121f6": {
     "meaning": "신호",
@@ -14845,9 +14845,9 @@
     "expressionTranslation": "새끼에게 먹이를 주다"
   },
   "ccef3e23140a51d7": {
-    "meaning": "어린 시절",
+    "meaning": "젊은 시절",
     "expression": "during your youth",
-    "expressionTranslation": "네 어린 시절에"
+    "expressionTranslation": "젊은 시절에"
   },
   "68f527f310fd52a5": {
     "meaning": "포기하다",
@@ -15545,7 +15545,7 @@
     "expressionTranslation": "모두를 걱정하게 하다"
   },
   "c879ccce5ad776c2": {
-    "meaning": "걱정스러운",
+    "meaning": "걱정하는 (be concerned about ~)",
     "expression": "concerned about his health",
     "expressionTranslation": "그의 건강을 걱정하는"
   },
@@ -16920,9 +16920,9 @@
     "expressionTranslation": "의도한 결과"
   },
   "79275bfe73b7b5cd": {
-    "meaning": "집중적인",
+    "meaning": "강도 높은",
     "expression": "intense effort",
-    "expressionTranslation": "집중적인 노력"
+    "expressionTranslation": "강도 높은 노력"
   },
   "edae7a2035209538": {
     "meaning": "내부의",
@@ -18861,8 +18861,8 @@
   },
   "af4e5eda826124e9": {
     "meaning": "바로 그",
-    "expression": "the very same",
-    "expressionTranslation": "바로 그 똑같은"
+    "expression": "the very same route",
+    "expressionTranslation": "똑같은 경로"
   },
   "b260c2caa7995220": {
     "meaning": "~을 경유하여",
@@ -18955,7 +18955,7 @@
     "expressionTranslation": "속삭이는 목소리로"
   },
   "ce0282c1869e08bf": {
-    "meaning": "누구에게",
+    "meaning": "누구를·누구에게 (who의 목적격)",
     "expression": "to whom",
     "expressionTranslation": "누구에게"
   },

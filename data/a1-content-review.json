@@ -49,9 +49,18 @@
         },
         {
           "id": "df5e7abbf05d5c86",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "b35b35c5e8cf544fafbfa47376c26ac9948f1aee803e4ed11d64f3de78ae7a1a",
-          "afterHash": "b35b35c5e8cf544fafbfa47376c26ac9948f1aee803e4ed11d64f3de78ae7a1a"
+          "afterHash": "50658575c812100d1223479ea81e25e38309f08981f40701f8431b63e336f20f",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "b35b35c5e8cf544fafbfa47376c26ac9948f1aee803e4ed11d64f3de78ae7a1a",
+              "reason": "표제어 뜻과 예문은 길을 건너는 이동을 가르친다. 표현 번역은 맞은편 위치를 뜻한다.",
+              "previousExpressionTranslation": "길 건너편에"
+            }
+          ],
+          "reason": "2026-11-21 한국어 뜻·표현 점검"
         },
         {
           "id": "d99eed987d5112ce",
@@ -229,7 +238,15 @@
           "id": "b29978e7b4a058e0",
           "status": "kept",
           "beforeHash": "d40d6b41e4d02c6124ec63474c23b5e1308d0ed84497996a9e6ac9f77223ace3",
-          "afterHash": "d40d6b41e4d02c6124ec63474c23b5e1308d0ed84497996a9e6ac9f77223ace3"
+          "afterHash": "d40d6b41e4d02c6124ec63474c23b5e1308d0ed84497996a9e6ac9f77223ace3",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "d40d6b41e4d02c6124ec63474c23b5e1308d0ed84497996a9e6ac9f77223ace3",
+              "reason": "예문은 고장 난 물건을 대체할 다른 물건이 있다는 뜻이다. 표현 번역만 음식으로 해석했다.",
+              "previousExpressionTranslation": "하나 더 먹다"
+            }
+          ]
         },
         {
           "id": "3e10a2c919ef6ffc",
@@ -2604,7 +2621,15 @@
           "status": "corrected",
           "reason": "대명사 용법 명확화",
           "beforeHash": "439199b3d6c9144af35ff65b9692de0e9ad24d9f1dc933284f6cc4069dab3a19",
-          "afterHash": "6bc74a66556bc670bd3d3eae5eb1aa5818e94edd5fc26a0ac66142a46f0165d5"
+          "afterHash": "6bc74a66556bc670bd3d3eae5eb1aa5818e94edd5fc26a0ac66142a46f0165d5",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "6bc74a66556bc670bd3d3eae5eb1aa5818e94edd5fc26a0ac66142a46f0165d5",
+              "reason": "여기서 them은 사람 대신 앞에서 언급한 사과 여섯 개를 가리킨다.",
+              "previousExpressionTranslation": "그들의 절반"
+            }
+          ]
         },
         {
           "id": "3516f9a4d8efcd62",
@@ -3947,9 +3972,17 @@
         },
         {
           "id": "e00bd73630d731d9",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "75bae87538b057f12ff42444c484b7dfcb03585f4cdbd7eb903dbcc63afbf00e",
-          "afterHash": "75bae87538b057f12ff42444c484b7dfcb03585f4cdbd7eb903dbcc63afbf00e"
+          "afterHash": "d00bc8768018439dcb78c0f7863e64700039c79b603429b4381be4755d95b74f",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "75bae87538b057f12ff42444c484b7dfcb03585f4cdbd7eb903dbcc63afbf00e",
+              "reason": "음료를 제안받고 정중히 거절하는 문장이다. 앞부분을 표현 번역과 같은 의미로 전달한다."
+            }
+          ],
+          "reason": "2026-11-21 한국어 뜻·표현 점검"
         },
         {
           "id": "8c008b22027c42fb",
