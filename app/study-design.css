@@ -1903,9 +1903,6 @@ input[readonly] {
   padding-top: 22px;
   padding-bottom: 20px;
 }
-.shell[data-studying=true] .page-heading h1 {
-  font-size: 24px;
-}
 .shell[data-studying=true] .page-heading .eyebrow, .shell[data-studying=true] .page-heading .muted {
   display: none;
 }
@@ -4247,7 +4244,6 @@ footer {
     padding: var(--space-3) 0;
   }
   .shell[data-studying=true] .page-heading h1 {
-    font-size: 1rem;
     color: var(--caption);
   }
   .shell[data-studying=true] .study-aside {
