@@ -146,9 +146,8 @@ const {build}=require('esbuild');
   for(const mode of ['word','grammar']){
    const requestSentence=mode==='grammar'?' \tSynthetic request grammar.\n ':'Synthetic request word.';
    await open(mode,'&requests=1');if(mode==='word')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('검증용 한국어 의도예요.');await field().fill(requestSentence);await page.waitForFunction(sentence=>window.draftHarness.snapshot().rows.some(row=>row.record.kind!=='request'&&row.record.values.sentence===sentence),requestSentence);const beforePosts=posts,beforeGets=gets;loseNext=true;
-   if(mode==='word')await page.getByText('AI 전송·보관 안내',{exact:true}).click();
-   assert.match(await page.locator('.ai-use-notice').innerText(),/OpenAI 모델에 보내요.*개인정보/);
-   if(mode==='word')await page.getByText('AI 전송·보관 안내',{exact:true}).click();
+   if(mode==='word')assert.equal(await page.locator('.ai-use-notice').count(),0);
+   else assert.match(await page.locator('.ai-use-notice').innerText(),/OpenAI 모델에 보내요.*개인정보/);
    await page.getByRole('button',{name:mode==='word'?'다시 요청':'AI 참고 의견 요청',exact:true}).click();await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).waitFor();await page.waitForFunction(()=>document.querySelectorAll('[role="alert"]').length>0||document.body.textContent.includes('연결 실패'));
    assert.match(await page.locator('p.ai-use-notice').innerText(),/지난 요청(의 결과만| 결과를) 확인/);
    assert.equal(posts,beforePosts+1);await page.reload();await value(requestSentence);assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets);
@@ -156,6 +155,7 @@ const {build}=require('esbuild');
    await page.waitForFunction(()=>!document.querySelector('.grammar-ai-action button:disabled')&&document.body.textContent.includes('이전 AI 요청 결과 확인'));
    assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets+1);
    await page.getByRole('button',{name:'이전 AI 요청 결과 확인',exact:true}).click();if(mode==='word')await page.getByText('결과 상세',{exact:true}).click();await page.getByText('복구한 합성 참고 의견',{exact:true}).waitFor();assert.equal(posts,beforePosts+1);assert.equal(gets,beforeGets+2);assert.equal(lookupIds.at(-1),lookupIds.at(-2));pass(mode+' lost AI response and receipt-less503 retain the same UUID; next explicit click only looks up, never posts');
+   if(mode==='word')assert.equal(await page.getByText('AI 전송·보관 안내',{exact:true}).count(),0);
    await page.evaluate(()=>window.draftHarness.clear());
   }
   await page.evaluate(()=>window.draftHarness.clear());await open('word');
