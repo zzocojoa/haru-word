@@ -73,9 +73,13 @@ async function transition(browser, viewport, sample, failFirst) {
     page.on('pageerror', err => errors.push(err.message));
     await page.goto(base, { waitUntil: 'domcontentloaded' });
     await saved(page);
+    const pageTitle = page.getByRole('heading', { name: '오늘 학습', exact: true, level: 1 });
+    const homeTitleSize = await pageTitle.evaluate(el => getComputedStyle(el).fontSize);
     await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
     await saved(page);
     const panel = page.locator('.session-panel');
+    await panel.waitFor();
+    assert.equal(await pageTitle.evaluate(el => getComputedStyle(el).fontSize), homeTitleSize);
     let input;
     if (sample.stage === 'sentence') {
       input = panel.getByRole('textbox', { name: '내 영어 문장', exact: true });

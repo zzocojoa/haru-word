@@ -763,9 +763,6 @@
   font-size: 0.8125rem;
   border-left: 3px solid var(--border);
 }
-:is(.shell[data-studying=true] .page-heading h1):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
-  font-size: 24px;
-}
 :is(.shell[data-studying=true] .page-heading .eyebrow):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)), :is(.shell[data-studying=true] .page-heading .muted):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   display: none;
 }
@@ -1923,7 +1920,6 @@
 }
 @media (max-width:640px) {
   :is(.shell[data-studying=true] .page-heading h1):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
-    font-size: 1rem;
     color: var(--caption);
   }
 }
