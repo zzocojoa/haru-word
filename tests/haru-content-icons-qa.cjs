@@ -33,7 +33,8 @@ const textGeometry = element => {
   try {
     const words = JSON.parse(fs.readFileSync('data/words.json', 'utf8'));
     const imageRows = JSON.parse(fs.readFileSync('data/word-image-ui.json', 'utf8')).entries;
-    const imageIds = imageRows.map(row => row[0]);
+    // This learner uses the current meanings; images kept only for old meanings are outside the deck.
+    const imageIds = imageRows.filter(([, , , , previousOnly]) => !previousOnly).map(([entryId]) => entryId);
     const imageRoot = process.env.QA_WORD_IMAGE_ASSET_ROOT || 'public/word-images-pilot';
     const positionPath = '/api/image-practice/position';
     const button = name => page.getByRole('button', { name, exact: true });

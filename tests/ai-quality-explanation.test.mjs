@@ -262,6 +262,22 @@ test('actual feedback components render the original, correction and factual fal
  const escaped=renderToStaticMarkup(createElement(RecordText,{text:'<script>synthetic</script>',label:'검사'}));assert.ok(escaped.includes('&lt;script&gt;'));assert.ok(!escaped.includes('<script>'));
 });
 
+test('compact sentence feedback omits comparison boilerplate and keeps real corrections and verified rules', () => {
+  const fallback = parse('She is speaking quiet.', 'She is speaking quietly.');
+  const originalExplanation = fallback.explanation;
+  const show = feedback => renderToStaticMarkup(createElement(FeedbackDetail, { feedback, compact: true }));
+  const generic = show({ ...fallback, explanation: originalExplanation.replaceAll('\n', '\r\n') });
+  assert.ok(generic.includes(fallback.original));
+  assert.ok(generic.includes(fallback.correctedSentence));
+  assert.match(generic, /문법 · 보완 필요/);
+  assert.doesNotMatch(generic, /원문과 교정문을 비교해 주세요|실제 바뀐 표현|세부 문법 규칙은 확인된 범위/);
+  assert.equal(fallback.explanation, originalExplanation);
+
+  const verified = show(parse('She can swims.', 'She can swim.'));
+  assert.match(verified, /교정 참고: .*동사원형/);
+  assert.doesNotMatch(verified, /원문과 교정문을 비교해 주세요/);
+});
+
 test('only a changed correction is shown and a known grammar issue has its own heading',()=>{
  const original='The children can carries two lanterns.';
  const correction='The children can carry two lanterns.';

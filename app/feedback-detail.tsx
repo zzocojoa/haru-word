@@ -12,6 +12,8 @@ import { clarificationQuestion } from '@/lib/judgment-policy';
 const TARGET_OPINION_TEXT = { appropriate: '수정 제안 없음', needs_work: '보완 필요', uncertain: '문맥 확인 필요' };
 const GRAMMAR_OPINION_TEXT = { natural: '수정 제안 없음', needs_work: '보완 필요', uncertain: '판단 어려움' };
 const LEGACY_TARGET_NEEDS_WORK_LINE = '목표: AI는 목표 뜻·용법을 별도로 확인할 필요가 있다고 보았어요.';
+const GENERIC_CORRECTION_LINE = '교정: 실제 바뀐 표현을 비교해 주세요. 이 변경에 대한 세부 문법 규칙은 확인된 범위를 넘어 단정하지 않아요.';
+const GRAMMAR_COMPARISON_PROMPT = ' 아래의 원문과 교정문을 비교해 주세요.';
 
 export function FeedbackDetail({ feedback, suggestionAction, grammarTarget = false, compact = false }: {
   feedback: SentenceFeedback;
@@ -27,6 +29,10 @@ export function FeedbackDetail({ feedback, suggestionAction, grammarTarget = fal
     ? explanationLines.indexOf(LEGACY_TARGET_NEEDS_WORK_LINE) : -1;
   if (legacyTargetLine >= 0) explanationLines[legacyTargetLine] = `목표: ${TARGET_NEEDS_WORK_EXPLANATION}`;
   const visibleExplanation = legacyTargetLine >= 0 ? explanationLines.join('\n') : feedback.explanation;
+  const compactExplanation = compact ? explanationLines
+    .filter(line => line.trim() !== GENERIC_CORRECTION_LINE)
+    .map(line => line.startsWith('문법: ') ? line.replace(GRAMMAR_COMPARISON_PROMPT, '') : line)
+    .join('\n').trim() : '';
   const question = explanationLines.find(line => line.startsWith(contextPrefix))?.slice(contextPrefix.length) ?? '';
   const knownIssue = ['judgment-v6', 'judgment-v7', 'judgment-v8', 'judgment-v9', 'judgment-v10'].includes(feedback.validationVersion ?? '')
     ? verifiedWithheldGrammarIssue(feedback, feedback.original, question) : undefined;
@@ -53,7 +59,7 @@ export function FeedbackDetail({ feedback, suggestionAction, grammarTarget = fal
         <HaruParagraph className="small-note">{['reference-v9','reference-v10','reference-v11','reference-v12','reference-v13'].includes(feedback.promptVersion??'') ? 'AI에 보낸 한국어 문장' : '이 의견에 전달한 문맥'}</HaruParagraph>
         <HaruParagraph className="feedback-record">{feedback.contextNote}</HaruParagraph>
       </>}
-      <HaruParagraph className="feedback-record">{visibleExplanation}</HaruParagraph>
+      {compactExplanation && <HaruParagraph className="feedback-record">{compactExplanation}</HaruParagraph>}
       <FeedbackAttribution feedback={feedback} showCaution={false} />
     </details>
   </section>;

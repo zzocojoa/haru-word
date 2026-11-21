@@ -8,7 +8,6 @@ import type { SentenceFeedback } from '@/lib/sentence-feedback';
 import { sentenceFeedbackPresentation } from '@/lib/sentence-feedback-presentation';
 import { useSentenceFeedback } from './study/use-sentence-feedback';
 import { FeedbackIssueNotice } from './feedback-issue-notice';
-import { AiUseNotice } from './ai-use-notice';
 import { FeedbackDetail } from './feedback-detail';
 import { FeedbackCorrection } from './feedback-correction';
 import {currentFeedback} from '@/lib/feedback-selection';
@@ -53,6 +52,6 @@ export function SentenceFeedbackPanel({ sessionId, entryId,target, sentence, chi
     <HaruButton label={actionLabel} variant="secondary" icon={pending && <HaruIcon name="loading" size={16} className="spin" />} type="button" className="haru-migrated secondary-button" disabled={view.disabled||!context.fingerprint||(!context.note.trim()&&!recoveryPending)} onClick={check}>
       {actionLabel}
     </HaruButton>
-    <AiUseNotice recovery={checkingPrevious} compact />
+    {checkingPrevious && <p className="small-note ai-use-notice">지난 요청 결과를 확인해요. 복구 기간이 끝난 뒤에는 새 요청에 사용량이 발생할 수 있어요.</p>}
   </HaruPanel></>;
 }

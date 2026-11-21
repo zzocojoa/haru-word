@@ -81,7 +81,7 @@ export function GrammarWriting({ lesson, progress,retainedFeedback,draftFeedback
       <HaruButton label={[(aiPending ? '참고 의견을 요청하고 있어요' : recoveryPending?'이전 AI 요청 결과 확인':'AI 참고 의견 요청')].join('')} variant="secondary" icon={<HaruIcon name="ai-feedback" size={18} />} className="haru-migrated secondary-button" disabled={aiPending || !sentence.trim() || !canSave} onClick={onAi}>
         {aiPending ? '참고 의견을 요청하고 있어요' : recoveryPending?'이전 AI 요청 결과 확인':'AI 참고 의견 요청'}
       </HaruButton>
-      <AiUseNotice grammar recovery={!aiPending && recoveryPending} />
+      <AiUseNotice recovery={!aiPending && recoveryPending} />
     </div>
     <FeedbackIssueNotice issue={aiError} />
     {visibleFeedback && <Feedback feedback={visibleFeedback} sentence={sentence} onSentence={onSentence} busy={!canSave || aiPending} current={feedbackMatchesContext(visibleFeedback,sentence,currentModelId??'',contextFingerprint)} />}
