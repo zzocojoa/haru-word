@@ -3,6 +3,7 @@ import {HaruPanel,HaruHeading,HaruParagraph} from '../haru-content';
 import {HaruButton} from '../haru-controls';
 
 import { exportLog } from "@/lib/learning";
+import type { Ref } from "react";
 import { ArrowRight } from "lucide-react";
 import { HaruIcon } from "@/components/icons/haru-icon";
 import { SessionRecords } from "../session-records";
@@ -24,8 +25,9 @@ type SessionSummaryProps = Pick<
   | "onRepeat"
   | "resume"
   | "state"
->;
+> & { headingRef?: Ref<HTMLHeadingElement> };
 export function SessionSummary({
+  headingRef,
   saved,
   s,
   date,
@@ -45,7 +47,7 @@ export function SessionSummary({
       <div className={saved ? "success-icon" : "summary-pending-icon"} aria-hidden="true">
         <HaruIcon name={saved ? "cloud-saved" : "unassessed"} size={24} />
       </div>
-      <HaruHeading level={2}>
+      <HaruHeading level={2} ref={headingRef} tabIndex={-1}>
         {saved
           ? s.date === date
             ? "학습 기록을 저장했어요"

@@ -549,6 +549,12 @@
 :is(.ai-feedback-issue p):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   margin: 0;
 }
+:is(.ai-feedback-heading):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
 :is(.ai-feedback-heading h3):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   display: flex;
   align-items: center;
@@ -556,8 +562,12 @@
   font-size: 1rem;
   margin: 0;
 }
-:is(.ai-feedback-result p):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
+:is(.ai-feedback-result p):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)), :is(.ai-feedback-result > .feedback-record):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   margin: var(--space-2) 0;
+}
+:is(.corrected-sentence):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
+  font-size: 18px;
+  font-weight: 600;
 }
 :is(.ai-feedback-panel>.secondary-button):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)):not(.haru-native-action) {
   margin: var(--space-2) 0;
@@ -1598,7 +1608,6 @@
   color: var(--ink);
 }
 :is(.review-card):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
-  border-top: 0;
   padding: var(--space-6);
 }
 :is(.review-card h2):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
@@ -1660,6 +1669,11 @@
 :is(.session-summary h2):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   font-size: 1.5rem;
 }
+:is(.session-summary > h2 + .muted):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) { margin-block-start: var(--space-2); }
+:is(.session-summary > .button-row):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) { margin-block: var(--space-4); }
+@media (max-width:640px) {
+  :is(.session-summary):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) { margin-block-end: var(--space-6); }
+}
 :is(.familiarity-card .word-stage):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   background: var(--surface);
   padding: var(--space-6) var(--space-3);
@@ -1688,6 +1702,9 @@
   background: var(--surface);
   border: 1px solid var(--border);
   padding: var(--space-4);
+}
+:is(.corrected-sentence):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
+  color: var(--ink);
 }
 :is(.record-card):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) {
   padding: var(--space-4);

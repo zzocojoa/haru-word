@@ -2,9 +2,9 @@ import type { SentenceFeedback } from './sentence-feedback.ts';
 import { feedbackSafetyIssue } from './feedback-safety.ts';
 
 const ACTION_LABELS = {
-  ready: 'AI 참고 의견 요청',
-  checking: '문장을 확인하고 있어요',
-  retryAnalysis: 'AI 참고 의견 다시 요청',
+  ready: '의견 요청',
+  checking: '확인 중…',
+  retryAnalysis: '다시 요청',
 } as const;
 
 type Input = { sentence: string; feedback?: SentenceFeedback; busy: boolean; pending: boolean };
@@ -16,7 +16,7 @@ export function sentenceFeedbackPresentation({ sentence, feedback, busy, pending
   const unsafeAnalysis = !!feedback && !!feedbackSafetyIssue(feedback);
   let action: keyof typeof ACTION_LABELS = 'ready';
   if (pending) action = 'checking';
-  else if (unchanged) {
+  else if (feedback) {
     action = 'retryAnalysis';
   }
   return {

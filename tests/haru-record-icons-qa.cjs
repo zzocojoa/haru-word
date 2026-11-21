@@ -541,7 +541,7 @@ const grades = record => Object.fromEntries(['familiarity', 'en', 'ko', 'sentenc
     });
     const [aiRequest] = await Promise.all([
       page.waitForRequest(request => request.method() === 'POST' && new URL(request.url()).pathname === '/api/sentence-feedback'),
-      qa.click(feedbackPanel.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }), 'ai-reference-request'),
+      qa.click(feedbackPanel.getByRole('button', { name: '의견 요청', exact: true }), 'ai-reference-request'),
     ]);
     const aiInput = aiRequest.postDataJSON();
     assert.equal(aiInput.contextRole, 'intended_korean', 'The word request identifies the Korean intention explicitly');

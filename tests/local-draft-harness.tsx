@@ -7,7 +7,7 @@ import {updateGrammarSentence,type GrammarProgress} from '../lib/grammar/model';
 import {GRAMMAR_LESSONS} from '../lib/grammar/content';
 import {LocalDraftProvider,useLocalDrafts} from '../app/local-draft-context';
 import {LocalDraftSettings} from '../app/local-draft-settings';
-import {DraftRecoveryNotice} from '../app/draft-recovery-notice';
+import {DraftStorageNotice} from '../app/draft-recovery-notice';
 import {useStudyDraft} from '../app/study/use-study-draft';
 import {useGrammarDraft} from '../app/grammar/use-grammar-draft';
 import {useGrammarFeedback} from '../app/grammar/use-grammar-feedback';
@@ -45,7 +45,7 @@ function Word(){
  return <><label>내 문장<textarea value={draft.draft.sentence} onChange={e=>{setSaved(false);draft.setSentence(e.target.value);}}/></label>
  <label>작성 중 답<input value={draft.draft.answer} onChange={e=>draft.setAnswer(e.target.value)}/></label>
  <label><input type="checkbox" checked={draft.draft.hint} onChange={e=>draft.setHint(e.target.checked)}/>도움 사용 표시</label>
- <DraftRecoveryNotice input={draft.persistent}/>
+ <DraftStorageNotice input={draft.persistent}/>
  <SentenceFeedbackPanel sessionId={server.id} entryId="synthetic" target={{word:'synthetic',pos:'adj.',meaning:'합성의',expression:'synthetic'}} sentence={draft.draft.sentence} feedback={draft.persistent.lastFeedback} busy={false} onPending={draft.setAiPending}
   onFeedback={async feedback=>{setServer(s=>({...s,records:{...s.records,synthetic:{...s.records.synthetic,sentence:draft.draft.sentence,aiFeedback:feedback}}}));setSaved(true);return true;}} onUse={draft.setSentence}/>
  <button onClick={()=>{setServer(s=>({...s,records:{...s.records,synthetic:{...s.records.synthetic,sentence:draft.draft.sentence}}}));setSaved(true);}}>저장 완료로 확인</button>
@@ -58,7 +58,7 @@ function Grammar(){
  const feedbackContext=useFeedbackContext('grammar',JSON.stringify(['auxiliary',4]),grammarFeedbackInput(lesson,draft.draft.sentence),'gpt-6.1-sol');
  const ai=useGrammarFeedback({lessonId:'auxiliary',contentVersion:4,latest:draft.latest,change:draft.change,flush:requests?async()=>true:draft.flush,canSave:requests,context:{contextNote:feedbackContext.note,contextKind:feedbackContext.kind,expectedContextFingerprint:feedbackContext.fingerprint}});
  const changeSentence=(value:string)=>{ai.invalidate();draft.change(p=>updateGrammarSentence(p,value));};
- return <><DraftRecoveryNotice input={draft.persistent}/><GrammarWriting lesson={lesson} progress={draft.draft} retainedFeedback={latestFeedback(draft.persistent.lastFeedback,ai.retainedFeedback)}
+ return <><DraftStorageNotice input={draft.persistent}/><GrammarWriting lesson={lesson} progress={draft.draft} retainedFeedback={latestFeedback(draft.persistent.lastFeedback,ai.retainedFeedback)}
   canSave={true} aiPending={ai.pending} recoveryPending={ai.recoveryPending} aiError={ai.error} onAi={ai.check} onSentence={changeSentence} onCheck={()=>{}} onChecks={()=>{}} onFrame={()=>{}} onExplain={()=>{}} onComplete={()=>{}}/>
  <FeedbackContextInput context={feedbackContext}/><Controls snapshot={{mode,progress:draft.draft}}/></>;
 }

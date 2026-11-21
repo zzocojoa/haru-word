@@ -212,7 +212,7 @@ function session() {
       const { context, page, get, s } = await setup('connected_assessment');
       await page.getByLabel('내 영어 문장', { exact: true }).fill('Saved before familiarity.');
       await page.getByRole('button', { name: '학습 설정', exact: true }).click();
-      await page.getByRole('dialog').getByRole('button', { name: '친숙도 다시 확인하기', exact: true }).click(); await saved(page);
+      await page.getByRole('dialog').getByRole('button', { name: '친숙도 다시 확인', exact: true }).click(); await saved(page);
       const snapshot = await get();
       assert.equal(snapshot.state.sessions[s.id].records[word.id].sentence, 'Saved before familiarity.');
       assert.equal(snapshot.state.settings.assessments.A1.index, 0);

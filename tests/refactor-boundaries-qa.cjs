@@ -111,7 +111,7 @@ const saved = p => p.getByText('저장됨', { exact: true }).waitFor();
       let expected,delivery;
       await p.route('**/api/grammar-feedback', async route => { expected=currentOpenaiFeedback(route,{original:sentence,correctedSentence:sentence,explanation:'합성 응답',meaningUsage:'appropriate',grammar:'natural',createdAt:now});const receipt=feedbackReceipt(route);requested();await hold;delivery=await route.fulfill({json:{feedback:expected,receipt}}).then(()=> 'fulfilled',()=> 'aborted'); });
       try {
-        await p.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await called;
+        await p.getByRole('button', { name: '의견 요청', exact: true }).click(); await called;
         if(mode==='active'){
           release();const end=Date.now()+10000;let stored;
           while(Date.now()<end){stored=(await get()).state.grammar.noun.feedback;if(stored?.contextFingerprint===expected.contextFingerprint)break;await p.waitForTimeout(25);}

@@ -44,16 +44,15 @@ export function SentenceFeedbackPanel({ sessionId, entryId,target, sentence, chi
     <FeedbackContextInput context={context} wordIntent disabled={busy||pending}/>
     {children}
     <HaruPanel role="region" className="ai-feedback-panel" aria-label="AI 참고 의견">
-    <div className="ai-feedback-heading"><HaruHeading level={3}><HaruIcon name="ai-feedback" size={17} /> AI 참고 의견</HaruHeading><span className="small-note">선택</span></div>
+    <HaruHeading className="ai-feedback-heading" level={3}><HaruIcon name="ai-feedback" size={17} /> AI 참고 의견</HaruHeading>
+    <FeedbackIssueNotice issue={error} compact />
+    {feedback && <section aria-live="polite">
+      {!current && <HaruParagraph className="notice">이전 문장·목표·모델·문맥에 대한 의견이거나 이전 버전의 기록이에요. 현재 조건으로 다시 요청해 주세요.</HaruParagraph>}
+      <FeedbackDetail feedback={feedback} compact suggestionAction={<FeedbackCorrection compact feedback={feedback} sentence={sentence} contextCurrent={current} busy={busy || pending} onApply={onUse} />} />
+    </section>}
     <HaruButton label={actionLabel} variant="secondary" icon={pending && <HaruIcon name="loading" size={16} className="spin" />} type="button" className="haru-migrated secondary-button" disabled={view.disabled||!context.fingerprint||(!context.note.trim()&&!recoveryPending)} onClick={check}>
       {actionLabel}
     </HaruButton>
-    <AiUseNotice recovery={checkingPrevious} />
-    <FeedbackIssueNotice issue={error} />
-    {feedback && <div aria-live="polite">
-      {!current && <HaruParagraph className="notice">이전 문장·목표·모델·문맥에 대한 의견이거나 이전 버전의 기록이에요. 현재 조건으로 다시 요청해 주세요.</HaruParagraph>}
-      {feedback.contextNote&&<details><summary>{['reference-v9','reference-v10','reference-v11','reference-v12','reference-v13'].includes(feedback.promptVersion??'')?'AI에 보낸 한국어 문장':'이 의견에 전달한 문맥'}</summary><HaruParagraph>{feedback.contextNote}</HaruParagraph></details>}
-      <FeedbackDetail feedback={feedback} suggestionAction={<FeedbackCorrection feedback={feedback} sentence={sentence} contextCurrent={current} busy={busy || pending} onApply={onUse} />} />
-    </div>}
+    <AiUseNotice recovery={checkingPrevious} compact />
   </HaruPanel></>;
 }

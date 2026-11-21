@@ -6,7 +6,7 @@ export type StudySessionProps = {
   state: State;
   session: Session;
   words: Word[];
-  save: (s: State) => Promise<boolean>;
+  save: (s: State, onSaved?: () => void) => Promise<boolean>;
   busy: boolean;
   saved: boolean;
   visible: boolean;

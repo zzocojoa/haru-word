@@ -72,12 +72,10 @@ fs.mkdirSync(out, { recursive: true });
     if (mode === 'recall-help') {
       await page.getByRole('button', { name: '도움 없이 맞혔어요', exact: true }).waitFor();
       assert.equal(await page.getByRole('button', { name: '도움 없이 맞혔어요', exact: true }).isDisabled(), true);
-      await page.locator('summary').filter({ hasText: '이 기기에 남은 다른 입력 확인' }).click();
-      await page.getByRole('button', { name: '현재 입력과 비교', exact: true }).first().click();
-      await page.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }).click();
+      assert.equal(await page.getByText('이 기기에 남은 다른 입력 확인', {exact: false}).count(), 0);
       assert.equal(await page.getByRole('textbox', { name: '한국어 뜻 입력', exact: true }).inputValue(), '');
       assert.equal(await page.getByRole('button', { name: '도움 없이 맞혔어요', exact: true }).isDisabled(), true);
-      const undo=page.getByRole('button',{name:'복구한 입력 되돌리기',exact:true});if(await undo.count()){await undo.click();assert.equal(await page.getByRole('button',{name:'도움 없이 맞혔어요',exact:true}).isDisabled(),true);}
+      assert.equal(await page.evaluate(()=>Object.values(localStorage).some(raw=>raw.includes('Earlier draft before help.'))),true);
       await page.getByRole('button', { name: '도움이 필요했어요', exact: true }).click();
       let after;
       for (let i = 0; i < 100; i++) { after = await get(); if (after.state.sessions[sid].records[ids[0]].en === 'help') break; await page.waitForTimeout(100); }

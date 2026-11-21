@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "planId": "learning-ux-refinement-2026-11-21",
+  "tag": "learning-ux-refinement",
+  "title": "하루단어 학습 화면 수정",
+  "description": "사용자와 확정한 과제 1~7의 완료 기준과 구현·검증 상태를 추적한다.",
+  "planFile": "docs/LEARNING_UX_REFINEMENT_PLAN_20261121.md",
+  "tasksFile": ".taskmaster/tasks/tasks.json",
+  "planningStatus": "registered",
+  "executionStarted": true,
+  "phaseLabels": {
+    "1": "학습 흐름·입력·AI",
+    "2": "복습 점검·요약·설정"
+  },
+  "baseline": {
+    "branch": "codex/learning-ux-refinement",
+    "worktree": "work/learning-ux-refinement-20261121",
+    "githubMain": "cc9d0677fea820a5dd3ea8c2bb667d445ad65a86",
+    "productionVersion": "v155",
+    "productionSource": "4833cadb9c972b18a08bfb693b0850206490758c",
+    "productTree": "9a635dd887854b0b5d2297d85df90dddb206639d",
+    "stitchPreview": "outputs/stitch-settings-preview-20261121/settings.html"
+  },
+  "authorization": {
+    "planningApproved": true,
+    "implementationApproved": true,
+    "publicationApproved": false,
+    "paidEvaluationApproved": false,
+    "newEvaluationUsedUsdBeforeTax": 0,
+    "productionLearningRecordWrites": 0
+  },
+  "tasks": [
+    {
+      "id": "1",
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": "2",
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": "3",
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": "4",
+      "phase": 1,
+      "subtaskCount": 3
+    },
+    {
+      "id": "5",
+      "phase": 2,
+      "subtaskCount": 3
+    },
+    {
+      "id": "6",
+      "phase": 2,
+      "subtaskCount": 3
+    },
+    {
+      "id": "7",
+      "phase": 2,
+      "subtaskCount": 3
+    }
+  ],
+  "requirements": [
+    {
+      "id": "과제 1",
+      "text": "오늘 학습과 문법 수업의 네 곳에서 수동 비교·선택 UI를 제거하고 조건이 맞는 초안만 자동 복구한다.",
+      "tasks": [
+        "1"
+      ]
+    },
+    {
+      "id": "과제 2",
+      "text": "‘뜻 저장하고 계속’ 성공 후 다음 단어와 ‘영어 → 뜻’ 단계가 모두 맨 위에서 열리게 한다.",
+      "tasks": [
+        "2"
+      ]
+    },
+    {
+      "id": "과제 3",
+      "text": "요청 전·처리 중·결과 후에 필요한 문구를 남기고 전송·보관, 판단 근거, 원문, 모델 정보는 접는다.",
+      "tasks": [
+        "3"
+      ]
+    },
+    {
+      "id": "과제 4",
+      "text": "‘문장을 완성했어요’ 저장 성공 후 다음 단어의 문장 만들기 또는 회차 결과가 모두 맨 위에서 열린다.",
+      "tasks": [
+        "4"
+      ]
+    },
+    {
+      "id": "과제 5",
+      "text": "‘복습 점검’의 ‘주간 점검’과 ‘월말 쓰기’에 좌우·아래와 같은 위쪽 테두리를 복원한다.",
+      "tasks": [
+        "5"
+      ]
+    },
+    {
+      "id": "과제 6",
+      "text": "‘학습 기록을 저장했어요’에서 세 구간의 간격, 모바일 하단 메뉴 겹침, 가로 화면의 저장 직후 제목을 개선한다.",
+      "tasks": [
+        "6"
+      ]
+    },
+    {
+      "id": "과제 7",
+      "text": "과제 7 확정 시안에 맞춰 일곱 기본 항목과 다섯 도움말을 배치하고 즉시 조치가 필요한 알림을 드러낸다.",
+      "tasks": [
+        "7"
+      ]
+    }
+  ],
+  "gates": [
+    {
+      "id": "UX-P",
+      "name": "수정 범위·계획 등록",
+      "criteria": "기준 GitHub main, 운영 소스 트리, 사용자 확정 과제 1~7, 선행 작업과 세부 작업 대조.",
+      "tasks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "v155와 같은 파일을 가진 main에서 별도 브랜치를 만들고 과제 1~7과 검증 기준을 등록했다."
+      }
+    },
+    {
+      "id": "UX-F",
+      "name": "기능·기록 보존 회귀",
+      "criteria": "안전한 자동 복구, 성공 후 화면 전환, 합성 AI 응답·교정, 설정 저장·실패 복구. 기존 데이터와 상태를 대조.",
+      "tasks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "6",
+        "7"
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "단위 934/934·타입·린트(기존 경고 15)·Worker 빌드 통과. 합성 계정 초안 보존, 저장 확인·실패 재시도, AI 요청·교정·오류, 설정 저장을 Chromium·WebKit에서 검증했다."
+      }
+    },
+    {
+      "id": "UX-V",
+      "name": "화면·접근성 검증",
+      "criteria": "Chromium·WebKit 모바일 세로·가로·데스크톱 화면에서 스크롤, 테두리, 메뉴 겹침, 설정의 접힘·초점을 대조.",
+      "tasks": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "result": {
+        "status": "passed",
+        "detail": "390×844·844×390·1440×900에서 각 5개 저장 전환을 두 브라우저로 확인했다. 추가 실패·재시도 6회, 두 복습 카드 4면, 요약 3개 간격과 하단 메뉴, 설정 접힘·키보드·자동 접근성 검사 통과. 실제 iPhone은 미검증이다."
+      }
+    },
+    {
+      "id": "UX-R",
+      "name": "운영 반영",
+      "criteria": "구현·로컬 회귀·변경 전후 비교와 별도 배포 승인.",
+      "tasks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "result": {
+        "status": "held",
+        "detail": "로컬 구현·검증 완료. 운영 배포는 별도 승인 대기 상태다. 운영 기록 쓰기와 실제 AI 요청은 0회다."
+      }
+    }
+  ],
+  "execution": {
+    "dashboardContext": "구현 7/7 · 세부 21/21 · 과제 1~7 로컬 구현·검증 완료 · 운영 배포 보류.",
+    "dashboardBudget": "신규 유료 AI 평가 승인·호출 없음 · 이번 계획 US$0.",
+    "publicationStatus": "held"
+  }
+}

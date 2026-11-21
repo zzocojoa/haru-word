@@ -27,11 +27,13 @@ function allocationQuota(goal: number, paused: boolean, singleIsNew = true) {
   return { newQuota, reviewQuota: goal - newQuota };
 }
 
-export function dailyAllocationRule(goal: number, paused = false): string {
+export function dailyAllocationRule(goal: number, paused = false, compact = false): string {
   if (paused) return `복습만 최대 ${goal}개 배정해요.`;
-  if (goal === 1) return '학습한 날을 기준으로 새 단어와 복습을 번갈아 배정해요.';
+  if (goal === 1) return compact ? '학습일마다 새 단어와 복습을 번갈아 배정해요.' : '학습한 날을 기준으로 새 단어와 복습을 번갈아 배정해요.';
   const { newQuota, reviewQuota } = allocationQuota(goal, paused);
-  return `새 단어 ${newQuota}개 · 복습 ${reviewQuota}개를 우선 배정해요.`;
+  return compact
+    ? `우선 배정 · 새 단어 ${newQuota}개 / 복습 ${reviewQuota}개`
+    : `새 단어 ${newQuota}개 · 복습 ${reviewQuota}개를 우선 배정해요.`;
 }
 
 function hash(value: string): number {

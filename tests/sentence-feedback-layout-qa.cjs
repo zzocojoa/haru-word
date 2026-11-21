@@ -39,13 +39,13 @@ fs.mkdirSync(out,{recursive:true});
     await saved();
     if(kind==='daily'){
       const intent=page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true});
-      const retry=page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true});
+      const retry=page.getByRole('button',{name:'다시 요청',exact:true});
       let posts=0;page.on('request',request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/api/sentence-feedback')posts++;});
       assert.equal(await intent.inputValue(),'','historical feedback must not invent a Korean intention');
       assert.equal(await retry.isDisabled(),true,'empty intention must keep an explicit recheck disabled');
       const before=await snapshot(context);
       await intent.fill('여자 친구와 친구들과 함께 가을에 여행을 갈 거예요.');
-      await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='AI 참고 의견 다시 요청'&&!button.disabled&&button.getAttribute('aria-disabled')!=='true'));
+      await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='다시 요청'&&!button.disabled&&button.getAttribute('aria-disabled')!=='true'));
       assert.equal(posts,0,'preparing the intention never generates feedback');
       assert.deepEqual(await snapshot(context),before,'preparing an intention changes no stored scores or feedback');
       check(true,'Empty intention blocks recheck; explicit synthetic intention enables it without an automatic request or state write');
@@ -76,8 +76,8 @@ fs.mkdirSync(out,{recursive:true});
       calls++;
       return route.fulfill({json:{feedback:currentOpenaiFeedback(route,result),receipt:feedbackReceipt(route)}});
     });
-    await page.getByRole('button',{name:domain === 'sentence'?'AI 참고 의견 다시 요청':'AI 참고 의견 요청',exact:true}).click();
-    await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
+    await page.getByRole('button',{name:domain === 'sentence'?'다시 요청':'AI 참고 의견 요청',exact:true}).click();
+    await page.locator('[data-feedback-provider="OpenAI"]').waitFor({state:'attached'});
     const until=Date.now()+10000;
     while(Date.now()<until){
       const state=await snapshot(page.context());
@@ -94,9 +94,18 @@ fs.mkdirSync(out,{recursive:true});
   async function hiddenStructure(view,result) {
     check(await view.locator('.sentence-structure').count()===0,'AI structures stay hidden');
     check(!(await view.textContent()).includes(result.structure.translation || result.structure.note),'Hidden AI structure text is absent from the result DOM');
-    check(await view.getByText('AI 참고 의견 · 정답 판정은 아니에요',{exact:true}).count()===1,'Each standalone result has one caution');
+    check(await view.getByText(/^(?:AI 참고 의견 · )?정답 판정은 아니에요$/).count()===1,'Each standalone result has one caution');
   }
   async function expandExplanation(view) {
+    const compact = view.getByText('결과 상세',{exact:true});
+    if(await compact.count()){
+      const details=compact.locator('..');
+      assert.equal(await details.evaluate(el=>el.open),false);
+      await compact.focus();await page.keyboard.press('Enter');
+      assert.equal(await details.evaluate(el=>el.open),true);
+      assert.ok((await details.locator('p').allTextContents()).includes(long.explanation));
+      return details;
+    }
     const details=view.locator('details.record-text').filter({has:page.getByText('판정·교정 참고 더 보기',{exact:true})});
     const summary=details.locator('summary');
     check(!await details.evaluate(el=>el.open),'Long explanation starts closed');
@@ -109,37 +118,37 @@ fs.mkdirSync(out,{recursive:true});
   }
   try {
     let context=await learner(unavailable);
-    await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='AI 참고 의견 다시 요청'&&!button.disabled&&button.getAttribute('aria-disabled')!=='true'));
-    check(await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).isEnabled(),'Same-sentence recheck is enabled but never starts automatically');
+    await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='다시 요청'&&!button.disabled&&button.getAttribute('aria-disabled')!=='true'));
+    check(await page.getByRole('button',{name:'다시 요청',exact:true}).isEnabled(),'Same-sentence recheck is enabled but never starts automatically');
     await hiddenStructure(page.locator('.ai-feedback-result'),unavailable);
     await capture(page.locator('.ai-feedback-panel'),'unavailable');
     if(!audit){let calls=0,release;const gate=new Promise(resolve=>release=resolve);
       await page.route('**/api/sentence-feedback',async r=>{if(r.request().method()!=='POST')return r.continue();calls++;await gate;await r.fulfill({status:429,json:{code:'provider_limit',error:'현재 사용 한도',providerStatus:429,receipt:feedbackReceipt(r,'failed')}})});
       const changed=unavailable.original+' Today.';
       await page.locator('#my-sentence').fill(changed);
-      const retry=page.getByRole('button',{name:'AI 참고 의견 요청',exact:true});
+      const retry=page.getByRole('button',{name:'다시 요청',exact:true});
       check(calls===0,'Editing alone never requests AI');
-      await retry.click();await page.getByRole('button',{name:'문장을 확인하고 있어요',exact:true}).waitFor();
-      check(await page.getByRole('button',{name:'문장을 확인하고 있어요',exact:true}).isDisabled(),'Pending retry cannot be submitted twice');
+      await retry.click();await page.getByRole('button',{name:'확인 중…',exact:true}).waitFor();
+      check(await page.getByRole('button',{name:'확인 중…',exact:true}).isDisabled(),'Pending retry cannot be submitted twice');
       await capture(page.locator('.ai-feedback-panel'),'pending');release();await page.getByRole('alert').waitFor();
-      check(await page.locator('.ai-feedback-result').getByText(unavailable.explanation,{exact:true}).isVisible(),'Failed explicit request preserves the previous result');
+      check(await page.locator('.ai-feedback-result').getByText(unavailable.explanation,{exact:true}).count()===1,'Failed explicit request preserves the previous result inside its disclosure');
       assert.equal(await page.locator('#my-sentence').inputValue(),changed);
       await hiddenStructure(page.locator('.ai-feedback-result'),unavailable);
       await capture(page.locator('.ai-feedback-panel'),'quota');await page.unroute('**/api/sentence-feedback');
       let updated;
       await page.route('**/api/sentence-feedback',r=>{if(r.request().method()!=='POST')return r.continue();calls++;updated=currentOpenaiFeedback(r,{...feedback,original:changed});return r.fulfill({json:{feedback:updated,receipt:feedbackReceipt(r)}})});
-      await retry.click();await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).waitFor();await saved();assert.equal(calls,2);
+      await retry.click();await page.getByRole('button',{name:'다시 요청',exact:true}).waitFor();await saved();assert.equal(calls,2);
       await page.reload();await saved();await page.getByRole('button',{name:'중단한 학습 이어서',exact:true}).click();await saved();assert.equal(calls,2);
       await hiddenStructure(page.locator('.ai-feedback-result'),updated);
       const stored=Object.values((await snapshot(context)).sessions)[0].records[word.id].aiFeedback;
       assert.deepEqual(stored,updated);check(calls===2,'Explicit retry survives reload without auto calls or structure loss');}
     await context.close();
     context=await learner(long);let view=page.locator('.ai-feedback-panel .ai-feedback-result');await view.waitFor();
-    check(await page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true}).count()===0,'Historical proposal is display-only until a current explicit request');
+    check(await page.getByRole('button',{name:'비교 후 적용',exact:true}).count()===0,'Historical proposal is display-only until a current explicit request');
     await requestCurrent(long);
     const dailyBefore=await snapshot(context);await hiddenStructure(view,long);
-    const use=page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true});
-    check(await use.evaluate(el=>!!(el.compareDocumentPosition([...el.closest('.ai-feedback-panel').querySelectorAll('details.record-text')].find(node=>node.querySelector('summary').textContent==='판정·교정 참고 더 보기'))&Node.DOCUMENT_POSITION_FOLLOWING)),'Apply action is before the long explanation');
+    const use=page.getByRole('button',{name:'비교 후 적용',exact:true});
+    check(await use.evaluate(el=>!!(el.compareDocumentPosition([...el.closest('.ai-feedback-panel').querySelectorAll('details')].find(node=>node.querySelector('summary')?.textContent==='결과 상세'))&Node.DOCUMENT_POSITION_FOLLOWING)),'Apply action is before the long explanation');
     await expandExplanation(view);await responsive(view,'long daily result');await capture(view,'daily-long-mobile');
     await page.setViewportSize({width:1440,height:1000});await capture(view,'daily-long-desktop');
     assert.deepEqual(await snapshot(context),dailyBefore,'Reading and expanding AI feedback must not rewrite records');

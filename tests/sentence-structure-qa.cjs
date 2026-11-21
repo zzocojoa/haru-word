@@ -42,7 +42,7 @@ fs.mkdirSync(out, { recursive:true });
     checks.push('cached context controls keep the current note/format callbacks across edits');
     const before=(await state()).state; let calls=0;
     await page.route('**/api/sentence-feedback',async route=>{if(route.request().method()!=='POST')return route.continue();calls++;assert.equal(route.request().headers()['x-study-feedback-structure'],'1');assert.equal(route.request().postDataJSON().contextNote,feedback.structure.translation);assert.equal(route.request().postDataJSON().contextKind??'sentence','sentence');await route.fulfill({json:{feedback:currentOpenaiFeedback(route,feedback),receipt:feedbackReceipt(route)}})});
-    const wordRequest=page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true});
+    const wordRequest=page.getByRole('button',{name:'다시 요청',exact:true});
     await until(()=>wordRequest.isEnabled(),'word AI control did not become ready');
     assert.equal(await page.locator('.ai-feedback-panel .sentence-structure').count(),0);await saved();assert.equal(calls,0);
     data=await state();assert.deepEqual(data.state.sessions[sid].records[word.id].aiFeedback.structure,feedback.structure);

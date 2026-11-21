@@ -30,6 +30,7 @@ export function useLearningController(initialServerTime: number) {
     signedIn,
     unsaved,
     conflict,
+    hasPendingTransition,
     current: currentState,
   } = store;
   const vocabulary = useVocabularyState(state);
@@ -39,9 +40,9 @@ export function useLearningController(initialServerTime: number) {
   const saveError = useRef<HTMLDivElement>(null);
   const { message, messageId, setMessage, dismissMessage } = useLearningMessage();
   useEffect(() => {
-    if (error && !backupOpen)
+    if (error && !backupOpen && !hasPendingTransition())
       saveError.current?.scrollIntoView({ block: "center", behavior: "auto" });
-  }, [error, backupOpen]);
+  }, [error, backupOpen, hasPendingTransition]);
   const [tab, navigateTab] = useNavigationState<View>('app.tab', 'today');
   const [visited, setVisited] = useState<View[]>(['today']);
   const navigation = { view: tab, visited: visited.includes(tab) ? visited : [...visited, tab] };

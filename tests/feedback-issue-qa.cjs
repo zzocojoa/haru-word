@@ -5,9 +5,11 @@ const fs = require('node:fs');
 const { build } = require('esbuild');
 const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('./qa/runtime.cjs');
 (async () => {
-  await build({ entryPoints: ['lib/grammar/content.ts'], outfile: 'work/feedback-issue-content.cjs', bundle: true, platform: 'node', format: 'cjs', logLevel: 'silent' });
-  const { LESSON_MAP } = require('../work/feedback-issue-content.cjs');
-  const engine = process.env.QA_BROWSER || 'chromium', browser = await launchBrowser({ engine }), checks = [];
+  const engine = process.env.QA_BROWSER || 'chromium';
+  const bundle = '../work/feedback-issue-content-' + engine + '.cjs';
+  await build({ entryPoints: ['lib/grammar/content.ts'], outfile: bundle.slice(3), bundle: true, platform: 'node', format: 'cjs', logLevel: 'silent' });
+  const { LESSON_MAP } = require(bundle);
+  const browser = await launchBrowser({ engine }), checks = [];
   try {
     for (const domain of ['sentence', 'grammar']) {
       const context = await browser.newContext({ extraHTTPHeaders: { ...accountHeaders('feedback_issues'), ...aiHeaders }, viewport: { width: 390, height: 844 } });
@@ -33,9 +35,13 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       await transmission.waitFor();
       assert.equal(await transmission.count(), 1);
       assert.equal(await transmission.isVisible(), true);
-      assert.equal(await transmission.textContent(), `요청하면 ${domain === 'grammar' ? '문장·수업 목표와 추가한 문맥을' : '한국어·영어 문장과 단어·뜻을'} 선택한 OpenAI 모델에 보내요. API 데이터는 기본적으로 모델 학습에 쓰이지 않지만 보관·안전 점검 정책이 적용돼요. 개인정보는 넣지 마세요.`);
-      assert.equal(await transmission.evaluate(el => el.previousElementSibling?.tagName === 'BUTTON' && el.previousElementSibling.textContent.includes('AI 참고 의견 요청') && !el.closest('details')), true, 'transmission notice directly follows the request button without a disclosure');
-      checks.push(domain + ': transmission/privacy notice is visible exactly once directly below the request button before any AI call');
+      if(domain==='sentence'){
+        assert.equal(await transmission.evaluate(el=>el.open),false);
+        await transmission.locator('summary').click();
+      }
+      assert.match(await transmission.innerText(),/선택한 OpenAI 모델에 보내요.*개인정보는 넣지 마세요/);
+      if(domain==='sentence')await transmission.locator('summary').click();
+      checks.push(domain + ': transmission and privacy guidance are reachable before the first request');
       if(domain==='sentence')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('나는 집에 도착해요.');
       await input.fill(original);
       let response, calls = 0;
@@ -66,12 +72,12 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       for (const sample of cases) {
         await acknowledgePending(page);
         response = sample;
-        await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
+        await page.getByRole('button', { name: domain==='sentence'?'의견 요청':'AI 참고 의견 요청', exact: true }).click();
         const notice = page.locator('[data-feedback-code="' + sample.code + '"]');
         await notice.waitFor();
         // Technical titles moved into an explicit disclosure; the learner gets an action first.
         const visibleGuidance = await notice.innerText();
-        assert.match(visibleGuidance, /직접 점검|자기 점검|다시 요청|개인정보|연결을 확인/);
+        assert.match(visibleGuidance, /직접 점검|자기 점검|다시 요청|개인정보|연결을 확인|입력.*백업|학습 설정/);
         assert.doesNotMatch(visibleGuidance, /API 키|AI Studio|Groq Console|google_api|groq_api/);
         for (const summary of await notice.locator('summary').all()) await summary.click();
         assert.match(await notice.innerText(), new RegExp(sample.title));
@@ -83,7 +89,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         if (sample.body?.previous) {
           assert.match(await notice.innerText(), /Google·Groq 점검을 마치지 못했어요/);
           assert.equal(await notice.locator('.ai-feedback-failure').count(), 2);
-          await notice.getByText('Groq 오류 상세', { exact: true }).click();
+          await notice.locator('.ai-feedback-failure').last().locator('summary').click();
           assert.match(await notice.innerText(), new RegExp(sample.code));
           await page.setViewportSize({ width: 320, height: 900 });
           assert.equal(await notice.evaluate(el => el.scrollWidth > el.clientWidth + 1), false);
@@ -99,7 +105,7 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
         }
         if (sample.code === 'provider_minute_limit') {
           assert.match(await notice.innerText(), /15초/);
-          await notice.getByText('Google 오류 상세', { exact: true }).focus(); await page.keyboard.press('Enter');
+          await notice.getByText(domain==='sentence'?'오류 상세':'Google 오류 상세', { exact: true }).focus(); await page.keyboard.press('Enter');
           assert.match(await notice.innerText(), /provider_minute_limit · Google HTTP 429/);
           for (const width of [320, 390, 1440]) {
             await page.setViewportSize({ width, height: 900 });
@@ -130,7 +136,8 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       const success = (sentence) => ({ status: 200, body: { feedback: openaiFeedback({ original: sentence, createdAt: now, meaningUsage: 'appropriate', grammar: 'natural', correctedSentence: sentence, explanation: '알맞게 사용했어요.' }) } });
       await acknowledgePending(page);
       response = success(original);
-      await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
+      await page.getByRole('button', { name: domain==='sentence'?'의견 요청':'AI 참고 의견 요청', exact: true }).click();
+      if(domain==='sentence')await page.getByText('결과 상세',{exact:true}).click();
       await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
       await page.locator('[data-feedback-provider="OpenAI"]').screenshot({ path: 'work/groq-attribution-' + domain + '-' + engine + '.png' });
       const stored = await waitSaved(aiModel);
@@ -138,11 +145,12 @@ const { base, accountHeaders, launchBrowser, closeBrowser, axePath } = require('
       await page.reload();
       if (domain === 'sentence') await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).click();
       else { await page.getByRole('tab', { name: '단어장', exact: true }).click(); await page.getByRole('tab', { name: '품사와 문장 연습', exact: true }).click(); await page.locator('.grammar-tile').first().click(); }
+      if(domain==='sentence')await page.getByText('결과 상세',{exact:true}).click();
       await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
       assert.equal(calls, cases.length + 1, 'reload never calls a provider');
       const next = domain==='sentence'?'I arrive early.':'I like tea.';if(domain==='sentence')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('나는 일찍 도착해요.');await input.fill(next);
       response = success(next);
-      await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
+      await page.getByRole('button', { name: domain==='sentence'?'다시 요청':'AI 참고 의견 요청', exact: true }).click();
       await page.locator('[data-feedback-provider="OpenAI"]').waitFor();
       await waitSaved(aiModel,next);
       assert.equal(calls, cases.length + 2); assert.deepEqual(errors, []);

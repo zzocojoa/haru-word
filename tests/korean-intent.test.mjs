@@ -15,9 +15,9 @@ test('the Korean intention is visible and required before the English answer and
    h('label',null,'내 영어 문장',h('textarea',{id:'my-sentence',defaultValue:'A person walk over the water.'}))));
  assert.ok(html.includes('의도한 한국어 문장'));
  assert.ok(html.indexOf('의도한 한국어 문장')<html.indexOf('내 영어 문장'));
- assert.ok(html.indexOf('내 영어 문장')<html.indexOf('AI 참고 의견 요청'));
+ assert.ok(html.indexOf('내 영어 문장')<html.indexOf('의견 요청'));
  assert.match(html, /<textarea[^>]*required=""/);
- const request=[...html.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)].find(([, ,content])=>content.replace(/<[^>]*>/g,'').trim()==='AI 참고 의견 요청');
+ const request=[...html.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)].find(([, ,content])=>content.replace(/<[^>]*>/g,'').trim()==='의견 요청');
  assert.ok(request,'the explicit request action remains visible');
  assert.match(request[1], /\s(?:disabled=""|aria-disabled="true")/);
 });

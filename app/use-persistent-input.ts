@@ -17,20 +17,19 @@ function restoreInput(options:Options,row:DraftChoice){
 }
 export function usePersistentInput(options:Options){
   const {store,state}=useLocalDrafts(),key=options.kind+':'+options.question;
-  const fresh=()=>({key,attempted:false,base:options.base as Values,observed:draftFingerprint(options.feedback),lastFeedback:options.feedback,
-    restored:false,undo:null as {before:Values;applied:string}|null,source:null as DraftChoice|null,cleared:state.cleared,clearedInput:null as string|null});
+  const fresh=()=>({key,base:options.base as Values,observed:draftFingerprint(options.feedback),lastFeedback:options.feedback,
+    restored:false,source:null as DraftChoice|null,cleared:state.cleared,clearedInput:null as string|null});
   const [snapshot,setSnapshot]=useState(fresh);
   const attemptedKey=useRef<string|null>(null);
   let active=snapshot;
   if(active.key!==key){active=fresh();setSnapshot(active);}
-  if(active.cleared!==state.cleared){active={...active,cleared:state.cleared,attempted:true,source:null,restored:false,undo:null,lastFeedback:options.feedback,clearedInput:draftFingerprint(options.values)};setSnapshot(active);}
+  if(active.cleared!==state.cleared){active={...active,cleared:state.cleared,source:null,restored:false,lastFeedback:options.feedback,clearedInput:draftFingerprint(options.values)};setSnapshot(active);}
   if(active.clearedInput!==null&&active.clearedInput!==draftFingerprint(options.values)){active={...active,clearedInput:null};setSnapshot(active);}
   const observed=draftFingerprint(options.feedback);
   if(active.observed!==observed){active={...active,observed,lastFeedback:options.feedback??active.lastFeedback};setSnapshot(active);}
   const valuesFingerprint=draftFingerprint(options.values),serverFingerprint=draftFingerprint(options.base);
   const lastFeedback=active.lastFeedback;
   const payloadFingerprint=draftFingerprint({kind:options.kind,base:options.saved&&valuesFingerprint===serverFingerprint?options.base:active.base,values:options.values,...(lastFeedback?{lastFeedback}:{})});
-  const choices=options.enabled!==false?distinctRows(store?.list(options.question,options.kind)??[]).filter(row=>rowPayload(row)!==payloadFingerprint):[];
   const ready=state.ready,available=state.available,ownerActive=state.active,cleared=state.cleared;
   const {kind,question,saved,enabled}=options;
   const initialBaseFingerprint=draftFingerprint(active.base),feedbackFingerprint=draftFingerprint(lastFeedback),source=active.source,restored=active.restored,clearedInput=active.clearedInput;
@@ -42,17 +41,18 @@ export function usePersistentInput(options:Options){
     queueMicrotask(()=>{
       if(!current||attemptedKey.current===key)return;
       attemptedKey.current=key;
+      if(options.edited||valuesFingerprint!==serverFingerprint||!store.refresh())return;
       const rows=distinctRows(store.list(question,kind)),only=rows.length===1?rows[0]:null;
       const needsRestore=only&&only.record.kind!=='request'&&(draftFingerprint(only.record.values)!==serverFingerprint
         ||only.record.lastFeedback&&draftFingerprint(only.record.lastFeedback)!==observed);
-      if(only&&only.record.kind!=='request'&&needsRestore&&!options.edited&&draftFingerprint(only.record.base)===serverFingerprint){
+      if(only&&only.record.kind!=='request'&&needsRestore&&draftFingerprint(only.record.base)===serverFingerprint){
         const applied=restoreInput(options,only);
-        if(applied)setSnapshot(previous=>({...previous,attempted:true,source:only,restored:true,lastFeedback:only.record.kind==='request'?previous.lastFeedback:only.record.lastFeedback??previous.lastFeedback,
-          undo:draftFingerprint(options.values)===draftFingerprint(applied)?null:{before:options.values,applied:draftFingerprint(applied)}}));
-      }else setSnapshot(previous=>({...previous,attempted:true}));
+        const retained=only.record.lastFeedback;
+        if(applied)setSnapshot(previous=>({...previous,source:only,restored:true,lastFeedback:retained??previous.lastFeedback}));
+      }
     });
     return()=>{current=false;};
-  },[store,ready,available,enabled,key,question,kind,serverFingerprint,observed,options]);
+  },[store,ready,available,enabled,key,question,kind,serverFingerprint,valuesFingerprint,observed,options]);
   useLayoutEffect(()=>{
     if(!store||!ready||!available||!ownerActive||enabled===false||clearedInput===valuesFingerprint)return;
     const feedbackMatches=feedbackFingerprint==='null'||feedbackFingerprint===observed;
@@ -67,19 +67,6 @@ export function usePersistentInput(options:Options){
       if(store.write(question,JSON.parse(payloadFingerprint) as DraftPayload)&&source&&source.record.instanceId!==store.instanceId&&!store.isInstanceActive(source.record.instanceId))store.remove(source.id,source.record);
     }
   },[store,ready,available,ownerActive,cleared,clearedInput,key,payloadFingerprint,saved,enabled,serverFingerprint,valuesFingerprint,initialBaseFingerprint,feedbackFingerprint,observed,question,kind,source,restored]);
-  function choose(id:string,current:string,candidate:string){
-    const row=store?.read(id);
-    if(!row||row.record.question!==options.question||row.record.kind!==options.kind||draftFingerprint(options.values)!==current||draftFingerprint(row.record)!==candidate)return false;
-    const value=restoreInput(options,row);if(!value)return false;
-    const retained=row.record.lastFeedback;
-    setSnapshot(previous=>({...previous,source:row,restored:true,lastFeedback:retained??previous.lastFeedback,
-      undo:draftFingerprint(options.values)===draftFingerprint(value)?null:{before:options.values,applied:draftFingerprint(value)}}));return true;
-  }
-  function undo(){
-    if(!active.undo||draftFingerprint(options.values)!==active.undo.applied)return;
-    if(options.kind==='word')options.onRestore(active.undo.before as WordDraftValues);else options.onRestore(active.undo.before as GrammarDraftValues);
-    setSnapshot(previous=>({...previous,restored:false,undo:null,source:null}));
-  }
   function captureAcknowledgement(){
     const rows=store?.refresh()?store.list(question,kind).filter(row=>row.record.kind!=='request'&&row.record.instanceId===store.instanceId
       &&draftFingerprint(row.record.values)===valuesFingerprint):[];
@@ -87,7 +74,6 @@ export function usePersistentInput(options:Options){
     // exact captured row again; newer edits and other page instances survive.
     return (ok:boolean)=>{if(ok)for(const row of rows)store?.remove(row.id,row.record);};
   }
-  return {lastFeedback,captureAcknowledgement,recovery:{choices,current:options.values,restored:active.restored,hasUndo:!!active.undo,canUndo:!!active.undo&&valuesFingerprint===active.undo.applied,undo,choose,
-    discard:(row:DraftChoice)=>store?.remove(row.id,row.record)},storage:{...state,enabled:!!store?.owner,retry:()=>store?.retry()}};
+  return {lastFeedback,captureAcknowledgement,storage:{...state,enabled:!!store?.owner,retry:()=>store?.retry()}};
 }
 export type InputRecovery=ReturnType<typeof usePersistentInput>;
