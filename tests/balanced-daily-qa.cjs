@@ -29,13 +29,13 @@ const oldDate = new Date(Date.parse(date + 'T12:00:00Z') - 86400000).toISOString
     const saved = () => p.getByText('저장됨', { exact: true }).waitFor();
     const openSettings = async () => { await p.getByRole('button', { name: '학습 설정', exact: true }).click(); };
     const closeSettings = async () => { await p.getByRole('dialog').getByRole('button', { name: '닫기', exact: true }).click(); await p.getByRole('dialog').waitFor({ state: 'hidden' }); };
-    const setGoal = async n => { await p.getByRole('combobox', { name: '하루 목표', exact: true }).click(); await p.getByRole('option', { name: n === 3 ? '3개 · 기본 목표' : n + '개', exact: true }).click(); await saved(); };
+    const setGoal = async n => { await p.getByRole('combobox', { name: '하루 목표', exact: true }).click(); await p.getByRole('option', { name: n + '개', exact: true }).click(); await saved(); };
     const split = async (n, r) => assert.equal(await p.locator('.daily-allocation').innerText(), `새 학습 ${n}개 · 이전 학습·복습 ${r}개`);
     await p.goto(base, { waitUntil: 'domcontentloaded' }); await saved();
     for (let n = 1; n <= 10; n++) {
       await openSettings(); await setGoal(n);
       const rule = await p.locator('.goal-allocation').innerText();
-      assert.ok(rule.includes(n === 1 ? '번갈아' : `새 단어 ${Math.ceil(n / 2)}개 · 복습 ${Math.floor(n / 2)}개`));
+      assert.ok(rule.includes(n === 1 ? '번갈아' : `새 단어 ${Math.ceil(n / 2)}개 / 복습 ${Math.floor(n / 2)}개`));
       // Yesterday's legacy round introduced words, so a one-word day reviews.
       await closeSettings(); await split(n === 1 ? 0 : Math.ceil(n / 2), n === 1 ? 1 : Math.floor(n / 2));
     }
@@ -52,10 +52,10 @@ const oldDate = new Date(Date.parse(date + 'T12:00:00Z') - 86400000).toISOString
       if (width === 390) await p.screenshot({ path: out + '/balanced-mobile.png', fullPage: true });
     }
     checks.push('pending review remains inspectable; four viewport widths have no overflow or automated accessibility violations');
-    await openSettings(); await p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기' }).check(); await saved();
+    await openSettings(); await p.getByRole('switch', { name: '복습만 하기' }).check(); await saved();
     assert.match(await p.locator('.goal-allocation').innerText(), /복습만 최대 10개/);
     await closeSettings(); await split(0, 10);
-    await openSettings(); await p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기' }).uncheck(); await saved(); await setGoal(3); await closeSettings(); await split(2, 1);
+    await openSettings(); await p.getByRole('switch', { name: '복습만 하기' }).uncheck(); await saved(); await setGoal(3); await closeSettings(); await split(2, 1);
     checks.push('new-word pause overrides the balanced rule and unpausing restores it');
     await p.getByRole('button', { name: '오늘의 학습 시작', exact: true }).click(); await saved();
     let data = await get(); const firstId = data.state.settings.activeSessionId, first = data.state.sessions[firstId];

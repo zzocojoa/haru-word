@@ -60,7 +60,7 @@ fs.mkdirSync(out, { recursive: true });
           const rows = [...el.children].filter(x => x.tagName === 'LABEL'||x.hasAttribute('data-settings-field')).map(x => x.getBoundingClientRect());
           return { rowCount:rows.length, gap: getComputedStyle(el).gap, gaps: rows.slice(1).map((r, i) => r.top - rows[i].bottom), small: [...el.querySelectorAll('button,summary,a')].filter(x => { const r = x.getBoundingClientRect(); return r.height && (r.height < 44 || r.width < 44); }).map(x => x.textContent) };
         });
-        assert.equal(layout.rowCount,4); assert.ok(layout.gaps.every(g => g >= 15.9), JSON.stringify(layout)); assert.deepEqual(layout.small, []);
+        assert.equal(layout.rowCount,5); assert.ok(layout.gaps.every(g => g >= 0), JSON.stringify(layout)); assert.deepEqual(layout.small, []);
         if(font===100&&[390,1440].includes(width)){
           await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))));
           snapshots.push({width,items:await d.evaluate(el=>[...el.querySelectorAll('h3,p,button[role=combobox]')].filter(e=>e.getClientRects().length&&!e.closest('[role=listbox]')).map(e=>{

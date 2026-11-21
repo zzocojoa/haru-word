@@ -20,7 +20,7 @@ import { GrammarReading } from './grammar-reading';
 import { Speak } from '../ui';
 import { GrammarTermsHelp } from '../grammar-terms';
 import { ReviewedExamples } from './reviewed-examples';
-import {DraftRecoveryNotice} from '../draft-recovery-notice';
+import {DraftStorageNotice} from '../draft-recovery-notice';
 import {useAiRequests} from '../ai-request-context';
 import {useFeedbackContext} from '../use-feedback-context';
 import {FeedbackContextInput} from '../feedback-context-input';
@@ -139,7 +139,7 @@ export function GrammarLesson({ lesson: originalLesson, enhanced = true, content
       choice={(reviewing ? progress.review : progress)?.choice} onChoice={choice => change(value => reviewing ? { ...value, review: { ...value.review!, choice } } : { ...value, choice })}
       onOrder={setOrder} onAnswer={answer} onHint={reveal} onNext={nextQuestion} disabled={!persistence.canSave}
     />}
-    {!reviewing && progress.stage === 5 && <><DraftRecoveryNotice input={persistent}/><FeedbackContextInput context={feedbackContext} disabled={!persistence.canSave||aiPending}/><GrammarWriting
+    {!reviewing && progress.stage === 5 && <><DraftStorageNotice input={persistent}/><FeedbackContextInput context={feedbackContext} disabled={!persistence.canSave||aiPending}/><GrammarWriting
       lesson={lesson} progress={progress} draftFeedback={persistent.lastFeedback} retainedFeedback={retainedFeedback} recoveryPending={recoveryPending} canSave={persistence.canSave} inputLocked={persistence.replacing} aiPending={aiPending} aiError={aiError} currentModelId={modelId} contextFingerprint={feedbackContext.fingerprint}
       onAi={() => void checkSentence()} onSentence={changeSentence}
       onCheck={setWritingCheck} onChecks={setWritingChecks} onFrame={setWritingFrame}

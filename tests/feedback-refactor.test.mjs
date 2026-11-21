@@ -14,10 +14,10 @@ const present = (result, sentence = original, overrides = {}) => sentenceFeedbac
 
 test('daily feedback allows explicit recheck of complete, unavailable and historical same-sentence results', () => {
   for (const [result, action, label, disabled] of [
-    [undefined, 'ready', 'AI 참고 의견 요청', false],
-    [legacy, 'retryAnalysis', 'AI 참고 의견 다시 요청', false],
-    [unavailable, 'retryAnalysis', 'AI 참고 의견 다시 요청', false],
-    [feedback, 'retryAnalysis', 'AI 참고 의견 다시 요청', false],
+    [undefined, 'ready', '의견 요청', false],
+    [legacy, 'retryAnalysis', '다시 요청', false],
+    [unavailable, 'retryAnalysis', '다시 요청', false],
+    [feedback, 'retryAnalysis', '다시 요청', false],
   ]) {
     const view = present(result);
     assert.equal(view.action, action); assert.equal(view.label, label); assert.equal(view.disabled, disabled);
@@ -25,7 +25,7 @@ test('daily feedback allows explicit recheck of complete, unavailable and histor
     if (result) {
       assert.equal(present(result, ' \n' + original + '  ').action, action);
       assert.deepEqual(present(result, 'A different sentence.'), {
-        action: 'ready', label: 'AI 참고 의견 요청', disabled: false, unchanged: false, canApply: true,
+        action: 'retryAnalysis', label: '다시 요청', disabled: false, unchanged: false, canApply: true,
       });
     }
   }
@@ -37,7 +37,7 @@ test('empty drafts, in-flight requests and blocked saves never enable another re
       assert.equal(present(result, sentence, { busy: true }).disabled, true);
       const pending = present(result, sentence, { pending: true });
       assert.equal(pending.disabled, true); assert.equal(pending.action, 'checking');
-      assert.equal(pending.label, '문장을 확인하고 있어요');
+      assert.equal(pending.label, '확인 중…');
     }
     assert.equal(present(result, ' \n ').disabled, true);
   }

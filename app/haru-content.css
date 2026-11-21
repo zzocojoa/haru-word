@@ -103,9 +103,15 @@
  .haru-level-select,.haru-settings-select,.haru-ai-model-select,.haru-practice-number {margin:0;}
  .haru-level-select {width:auto;flex-shrink:0;max-width:100%;}
  .haru-level-select .level-select {padding:0;}
- .settings-dialog .settings-field {display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);font-size:.875rem;font-weight:600;line-height:1.6;}
+ .settings-dialog .settings-field {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-2) var(--space-3);font-size:.875rem;line-height:1.6;padding-block:var(--space-2);border-bottom:1px solid var(--border);}
+ .settings-dialog .settings-field:has(.settings-field-message[role=alert]) {align-items:start;}
+ .settings-dialog :is(.goal-allocation,.settings-field-message) {flex-basis:100%;}
+ .settings-dialog .settings-familiarity {display:flex;justify-content:flex-end;padding-block:var(--space-3) var(--space-4);}
+ .settings-dialog .settings-switch-field {min-block-size:calc(var(--space-8) + var(--space-4));}
+ .settings-dialog .settings-switch-field .astryx-switch-field {margin:0;}
+ .settings-dialog .settings-pricing-link {display:inline-flex;align-items:center;min-block-size:calc(var(--space-8) + var(--space-3));}
  .settings-field>.haru-field {width:auto;max-width:100%;}
- .haru-ai-model-select {gap:0;font-size:.875rem;font-weight:600;width:100%;}
+ .haru-ai-model-select {gap:0;font-size:.875rem;font-weight:600;width:auto;}
  .haru-ai-model-select label {margin:0;font:inherit;font-weight:600;}
  .haru-level-select .haru-field-control,.haru-settings-select .haru-field-control,.haru-ai-model-select .haru-field-control {border-radius:8px;}
  .haru-level-select [role=combobox],.haru-settings-select [role=combobox],.haru-ai-model-select [role=combobox] {min-height:44px;margin-block:-1px;padding:8px 12px;font-size:1rem;font-weight:600;line-height:1.6;white-space:normal;}
@@ -118,10 +124,6 @@
  .haru-practice-number .haru-field-control {min-height:44px;}
  .haru-practice-face {display:block;width:100%;white-space:normal;}
  @media(max-width:520px) {.haru-level-select [role=combobox] {font-size:1rem;}}
- @media(max-width:600px) {
-  .settings-dialog .settings-field {flex-direction:column;align-items:stretch;}
-  .settings-dialog .settings-field>.haru-field {width:100%;}
- }
 }
 
 @layer haru-content-compat {

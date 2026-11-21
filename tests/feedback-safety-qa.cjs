@@ -32,7 +32,7 @@ fs.mkdirSync(out,{recursive:true});
     const panel=page.locator('.ai-feedback-panel');
     await panel.getByText('AI 설명 확인 필요',{exact:true}).waitFor();
     assert.equal(await panel.locator('.sentence-structure-parts').count(),0);
-    assert.equal(await panel.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true}).count(),0);
+    assert.equal(await panel.getByRole('button',{name:'비교 후 적용',exact:true}).count(),0);
     assert.equal(await page.getByLabel('내 영어 문장',{exact:true}).inputValue(),badWord.original);
     assert.deepEqual((await state()).state.sessions[sid].records[word.id].aiFeedback,badWord);
     assert.equal(calls,0);checks.push('saved unsafe word analysis is hidden without an API call or source rewrite');
@@ -46,9 +46,9 @@ fs.mkdirSync(out,{recursive:true});
     // Current word requests require a learner-provided Korean intention.
     await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('합성 검사: 어제 집에 도착했어요.');
     assert.equal(calls,0);
-    const retry=page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true});
+    const retry=page.getByRole('button',{name:'다시 요청',exact:true});
     // Context identity is computed asynchronously after the learner edits it.
-    await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='AI 참고 의견 다시 요청'&&!button.matches(':disabled,[aria-disabled=true]')));
+    await page.waitForFunction(()=>[...document.querySelectorAll('button')].some(button=>button.textContent==='다시 요청'&&!button.matches(':disabled,[aria-disabled=true]')));
     assert.equal(calls,0);
     await retry.focus();await page.keyboard.press('Enter');await panel.locator('.feedback-issue-notice').waitFor().catch(()=>page.getByRole('alert').waitFor());
     assert.equal(calls,1);assert.equal(await page.getByLabel('내 영어 문장',{exact:true}).inputValue(),badWord.original);

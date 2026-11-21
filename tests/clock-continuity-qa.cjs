@@ -35,7 +35,7 @@ const checks=[],errors=[];
  for(const name of ['단어장','복습 점검','학습 기록']){await p.getByRole('tab',{name,exact:true}).click();await p.getByRole('button',{name:'시간 다시 확인',exact:true}).waitFor()}
  await p.screenshot({path:out+'/clock-recovery-mobile.png'});
  checks.push('clock request times out once after 10 seconds; repeated wake events share its deadline and recovery is available on every tab');
- await p.getByRole('button',{name:'학습 설정',exact:true}).click();await p.getByText('문제가 생겼을 때',{exact:true}).click();
+ await p.getByRole('button',{name:'학습 설정',exact:true}).click();await p.getByText('문제 진단',{exact:true}).click();
  const download=p.waitForEvent('download');await p.getByRole('button',{name:'문제 진단 기록 받기',exact:true}).click();const diagnostic=fs.readFileSync(await(await download).path(),'utf8');const events=JSON.parse(diagnostic).events;
  assert.ok(events.some(e=>e.operation==='clock'&&e.outcome==='timeout'));assert.ok(events.some(e=>e.gates?.clockReady===false));
  for(const secret of [answer,sid,w.id,headers['oai-authenticated-user-id'],headers['oai-authenticated-user-email']])assert.ok(!diagnostic.includes(secret));

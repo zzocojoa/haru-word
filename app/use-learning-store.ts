@@ -22,6 +22,8 @@ export function useLearningStore() {
   }, []);
   const revision = useRef(0);
   const lock = useRef(false);
+  const pendingTransition = useRef<{ next: State; onSaved: () => void } | null>(null);
+  const hasPendingTransition = useCallback(() => pendingTransition.current !== null, []);
   const reconcileRestore=useRef(false);
   // A single phase keeps loading and splash visibility in sync. Once settled,
   // retries/reloads use the normal recovery surface, never the startup screen.
@@ -39,6 +41,7 @@ export function useLearningStore() {
   // Only validated reads/restores replace the entire local snapshot. Saves keep
   // their own acknowledgement path so newer in-flight grammar drafts survive.
   const applySnapshot = useCallback(({ state: next, revision: nextRevision }: StateSnapshot) => {
+    pendingTransition.current = null;
     revision.current = nextRevision;
     persisted.current = next;
     savedAvailable.current = true;
@@ -100,8 +103,8 @@ export function useLearningStore() {
     return () => window.removeEventListener('beforeunload', warn);
   }, [unsaved, restoring]);
 
-  const save = useCallback(async (next: State) => {
-    if (lock.current || conflict) return false;
+  const save = useCallback(async (next: State, onSaved?: () => void) => {
+    if (lock.current || conflict || (pendingTransition.current && !onSaved)) return false;
     if (!signedIn) {
       setError('로그인 후 학습 기록을 저장할 수 있어요.');
       return false;
@@ -109,8 +112,13 @@ export function useLearningStore() {
     lock.current = true;
     setSaving(true);
     setError('');
-    current.current = next;
-    setState(next);
+    if (onSaved) {
+      // Leave the current form in place until the server acknowledges its transition.
+      pendingTransition.current = { next, onSaved };
+    } else {
+      current.current = next;
+      setState(next);
+    }
     setUnsaved(true);
     // Compare with the last acknowledged state, including earlier failed changes.
     const { progress, sessions, settings, grammar } = stateDelta(persisted.current, next);
@@ -123,6 +131,14 @@ export function useLearningStore() {
       }
       revision.current = result.data.revision;
       persisted.current = next;
+      if (onSaved) {
+        const grammar = current.current.grammar;
+        const accepted = next.grammar === grammar ? next : { ...next, grammar };
+        pendingTransition.current = null;
+        current.current = accepted;
+        setState(accepted);
+        onSaved();
+      }
       // A grammar draft may have advanced while this snapshot was in flight.
       setUnsaved(current.current !== next);
       setConflict(false);
@@ -184,5 +200,9 @@ export function useLearningStore() {
     }
   }, [signedIn, unsaved, conflict, applySnapshot]);
 
-  return { state, current, readSavedState, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry: () => save(current.current) };
+  function retry() {
+    const pending = pendingTransition.current;
+    return pending ? save(pending.next, pending.onSaved) : save(current.current);
+  }
+  return { state, current, readSavedState, stageGrammar, getRevision:()=>revision.current, loading, initializing, saving, error, conflict, signedIn, unsaved, restoring, epoch, save, load, restore, retry, hasPendingTransition };
 }

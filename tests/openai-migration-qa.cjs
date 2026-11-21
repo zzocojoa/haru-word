@@ -71,7 +71,7 @@ let release;
     await page.reload(); await saved(); await settingsButton().click();
     assert.match(await choice.innerText(), /GPT-6.1 Terra/);
     checks.push('a real revision-protected choice survives reload and stays isolated from the other account');
-    await dialog.getByText('모델별 API 요금', { exact: true }).click();
+    await dialog.getByText('AI 모델·요금 안내', { exact: true }).click();
     assert.match(await dialog.innerText(), /GPT-6 Astra: \$10 \/ \$50/);
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 900 });
@@ -107,8 +107,8 @@ let release;
     await page.getByRole('option',{name:'대화의 짧은 답변',exact:true}).click();
     await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('어제 집에 도착한 일을 설명해요.');
     assert.equal(postBodies.length,0);
-    await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click();
-    await page.getByRole('button', { name: '문장을 확인하고 있어요', exact: false }).waitFor();
+    await page.getByRole('button', { name: '의견 요청', exact: true }).click();
+    await page.getByRole('button', { name: '확인 중…', exact: false }).waitFor();
     if (await settingsButton().isEnabled()) {
       await settingsButton().click(); assert.ok(await choice.isDisabled());
       await dialog.getByText('AI 의견을 요청하는 동안에는 모델을 바꿀 수 없어요.', { exact: true }).waitFor();
@@ -122,9 +122,9 @@ let release;
     assert.equal(stored.aiFeedback.contextNote,'어제 집에 도착한 일을 설명해요.');assert.equal(stored.aiFeedback.contextFingerprint,postBodies[0].expectedContextFingerprint);
     assert.equal(postBodies[0].contextKind,'reply');assert.equal(postBodies[0].contextRole,'intended_korean');
     checks.push('one explicit word request binds explicit context and model, locks selection and preserves independent outcomes');
-    const sentenceField=page.getByLabel('내 영어 문장',{exact:true}),apply=page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true});
+    const sentenceField=page.getByLabel('내 영어 문장',{exact:true}),apply=page.getByRole('button',{name:'비교 후 적용',exact:true});
     await apply.click();assert.equal(await sentenceField.inputValue(),original);await page.getByRole('button',{name:'비교한 제안으로 바꾸기',exact:true}).click();
-    assert.equal(await sentenceField.inputValue(),correction);await page.getByRole('button',{name:'교정 적용 되돌리기',exact:true}).click();assert.equal(await sentenceField.inputValue(),original);await saved();
+    assert.equal(await sentenceField.inputValue(),correction);await page.getByRole('button',{name:'되돌리기',exact:true}).click();assert.equal(await sentenceField.inputValue(),original);await saved();
     await sentenceField.fill('My newer sentence.');assert.equal(await apply.count(),0);await sentenceField.fill(original);await saved();
     checks.push('current proposals require comparison; undo preserves the original and stale edits hide apply without another request');
 

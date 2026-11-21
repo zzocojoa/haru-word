@@ -258,15 +258,19 @@ const stageTitles = { warmup: '기억 깨우기', learn: '단어 익히기', en:
       ? route.fulfill({ status: 503, json: { error: '검사용 저장하지 못했어요. 현재 입력을 보존한 뒤 다시 시도해 주세요.' } })
       : route.continue());
     await clickAfterScroll(button('문장을 완성했어요'), 'sentence-complete');
-    await page.getByRole('heading', { name: '기록 저장을 확인하고 있어요.', exact: true }).waitFor();
-    assert.equal(await page.locator('.session-summary .success-icon').count(), 0);
+    await page.getByText('검사용 저장하지 못했어요. 현재 입력을 보존한 뒤 다시 시도해 주세요.', { exact: true }).waitFor();
+    assert.equal(await page.locator('.session-summary').count(), 0);
+    assert.equal(await page.getByLabel('내 영어 문장', { exact: true }).inputValue(), sentence);
+    assert.equal(await page.getByLabel('보완할 점', { exact: false }).inputValue(), note);
+    assert.equal(await spoken.isChecked(), true);
     assert.deepEqual(await get(), beforeFailure, 'a failed final save cannot change the server revision or records');
-    await inspect('summary-pending', null, [[page.locator('.summary-pending-icon svg'), 24, '저장 미확인 요약']]);
+    await inspect('sentence-save-error', 'sentence', []);
     assert.equal((await get()).state.sessions[lesson.id].finished, false);
     await page.unroute('**/api/state');
     await clickAfterScroll(button('다시 시도'), 'save-retry');
     await page.getByRole('heading', { name: '학습 기록을 저장했어요', exact: true }).waitFor();
     await saved();
+    await page.waitForFunction(() => window.scrollY === 0 && document.activeElement?.textContent === '학습 기록을 저장했어요');
     assert.equal(await page.locator('.summary-pending-icon').count(), 0);
     const confirmed = await get(), recorded = confirmed.state.sessions[lesson.id].records[target.id];
     assert.equal(confirmed.state.sessions[lesson.id].finished, true);
@@ -276,7 +280,7 @@ const stageTitles = { warmup: '기억 깨우기', learn: '단어 익히기', en:
     assert.equal(recorded.sentenceStatus, 'written');
     assert.deepEqual(confirmed.state.sessions[history.id], historicalRecord);
     await inspect('summary-saved', null, [[page.locator('.session-summary .success-icon svg'), 24, '저장 확인 요약']]);
-    report.checks.push('503 keeps a neutral unconfirmed summary and unchanged server data; retry confirms storage, spoken practice and the original historical record');
+    report.checks.push('503 keeps the sentence form, typed inputs and server data; retry opens the confirmed summary at the top and preserves the historical record');
     assert.deepEqual(report.aiGenerationRequests, []);
     assert.deepEqual(report.errors, []);
     report.passed = true;

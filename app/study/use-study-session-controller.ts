@@ -23,6 +23,7 @@ import { recordAvailability } from "@/lib/client-diagnostics";
 import { studyMaterialEdit } from '@/lib/study-material-edit';
 import { studyRecoveryState } from '@/lib/study-recovery';
 import { useStudyRecoveryDraft } from './study-recovery';
+import { useViewRestoration } from '../use-view-restoration';
 export function useStudySessionController({
   date,
   activityDate,
@@ -64,12 +65,24 @@ export function useStudySessionController({
     if (visible) recordAvailability("lesson", { storeBusy, aiPending, answerPresent, hinted: hint, revealed }, s.stage);
   }, [visible, storeBusy, aiPending, answerPresent, hint, revealed, s.stage]);
   const focus = useRef<HTMLHeadingElement>(null);
+  const restoration = useViewRestoration();
+  const [topRequest, setTopRequest] = useState(0);
+  const positioned = useRef(0);
   const [showSummary, setShowSummary] = useState(false);
   useStudyRecoveryDraft(latest => showSummary ? latest : studyRecoveryState(
     latest, s, draft, content ? studyMaterial(draft, content, !!word?.personal) : undefined,
   ));
   // Finish the question's focus handoff before a visible input can be edited.
-  useLayoutEffect(() => { focus.current?.focus(); }, [question]);
+  useLayoutEffect(() => {
+    if (visible) focus.current?.focus({ preventScroll: positioned.current !== topRequest });
+  }, [question, topRequest, visible]);
+  useLayoutEffect(() => {
+    if (!visible || positioned.current === topRequest) return;
+    return restoration.schedule('destination', () => {
+      positioned.current = topRequest;
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  }, [restoration, topRequest, visible]);
 
   const { seconds, paused, boutStart, setPaused, setBoutStart } =
     useActivityTimer(s, showSummary, visible);
@@ -77,15 +90,22 @@ export function useStudySessionController({
   function timed(): Session {
     return { ...s, elapsed: seconds, paused };
   }
-  async function commit(next: State) {
+  async function commit(next: State, startAtTop = false) {
     const acknowledge=persistent.captureAcknowledgement();
     const ns = next.sessions[s.id];
     if (ns?.finished) {
       next = ensureCarryover(next, ns);
-      setPaused(true);
+      if (!startAtTop) setPaused(true);
     }
-    const ok=await save(next);
-    acknowledge(ok);
+    if (startAtTop) {
+      await save(next, () => {
+        acknowledge(true);
+        if (ns?.finished) setPaused(true);
+        setTopRequest(n => n + 1);
+      });
+      return;
+    }
+    acknowledge(await save(next));
   }
 
   function material() {
@@ -107,6 +127,7 @@ export function useStudySessionController({
         activityDate(),
         update.patch,
       ),
+      true,
     );
   }
   async function revealAnswer(needsHint = false) {
@@ -198,6 +219,7 @@ export function useStudySessionController({
         true,
         activityDate(),
       ),
+      result === 'written',
     );
   }
   async function revealWarmup() {
@@ -226,22 +248,36 @@ export function useStudySessionController({
     });
   }
   async function pauseAndExit() {
-    if (await prepareLeave()) setShowSummary(true);
+    await prepareLeave(() => {
+      setShowSummary(true);
+      setTopRequest(n => n + 1);
+    });
   }
-  async function prepareLeave() {
+  async function prepareLeave(onSaved?: () => void) {
     if (storeBusy || aiPending) return false;
     const latest = currentState.current;
     const session = latest.sessions[s.id];
-    if (!session || session.finished || showSummary) return true;
+    if (!session || session.finished || showSummary) {
+      onSaved?.();
+      return true;
+    }
     if (currentId(session) !== id || session.stage !== s.stage || session.retryMode !== s.retryMode) return false;
     const draftMaterial = id && session.stage === 'learn' ? material() : undefined;
     const update = draftMaterial ? studyMaterialEdit(draftMaterial, materialBaseline!, openedProgress, latest.progress[entryId!]) : undefined;
     if (update?.conflicts.length) { setMaterialConflict(true); return false; }
-    setPaused(true);
+    if (!onSaved) setPaused(true);
     const next = pausedStudyState(latest, { ...session, elapsed: Math.max(session.elapsed, seconds), paused: true }, id, draft,
       draftMaterial, activityDate(), update?.patch);
+    function applySavedMaterial() {
+      if (draftMaterial) replaceMaterial(draftMaterial, next.progress[entryId!]);
+    }
+    if (onSaved) return save(next, () => {
+      setPaused(true);
+      applySavedMaterial();
+      onSaved();
+    });
     const ok = await save(next);
-    if (ok && draftMaterial) replaceMaterial(draftMaterial, next.progress[entryId!]);
+    if (ok) applySavedMaterial();
     return ok;
   }
   // Re-register the current render's draft; cleanup only removes its own handler.

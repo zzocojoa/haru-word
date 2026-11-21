@@ -67,10 +67,10 @@ fs.mkdirSync(out,{recursive:true});
    fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));return;
   }
   if(mode==='recovery'){
-   await page.locator('summary').filter({hasText:'이 기기에 남은 다른 입력 확인'}).click();
-   await page.getByRole('button',{name:'현재 입력과 비교',exact:true}).first().click();
-   await page.getByRole('button',{name:'비교한 입력으로 이어쓰기',exact:true}).click();
-   preserved(await savedSentence('Recovered unfinished sentence.'));assert.equal(await input.inputValue(),'Recovered unfinished sentence.');
+   assert.equal(await page.getByText('이 기기에 남은 다른 입력 확인',{exact:false}).count(),0);
+   assert.equal(await input.inputValue(),seed.sentence);
+   assert.equal(await page.evaluate(()=>Object.values(localStorage).some(raw=>raw.includes('Recovered unfinished sentence.'))),true);
+   preserved((await snapshot()).state.grammar.noun);
   }
   await input.fill('I like books and music.');preserved(await savedSentence('I like books and music.'));
   if(mode==='explanation'){

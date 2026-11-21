@@ -43,7 +43,7 @@ async function run() {
     await page.goto(url);
     await page.getByText('저장됨', { exact: true }).waitFor();
     await page.getByRole('button', { name: '학습 설정', exact: true }).click();
-    await page.getByRole('button', { name: '친숙도 다시 확인하기', exact: true }).click();
+    await page.getByRole('button', { name: '친숙도 다시 확인', exact: true }).click();
     await page.getByText('표시를 고르면 뜻을 볼 수 있어요.', { exact: true }).waitFor();
     await page.getByRole('button', { name: /처음 봐요$/ }).click();
     await page.locator('.reference-meaning').waitFor();

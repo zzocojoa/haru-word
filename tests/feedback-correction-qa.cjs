@@ -14,21 +14,21 @@ const {launchBrowser,closeBrowser}=require('./qa/runtime.cjs');
  const pass=name=>{checks.push(name);console.log('PASS '+name);};
  const reset=async(mode='word',sentence='She sing well.',uncertain=false)=>{const previous=await page.locator('main').getAttribute('data-harness-epoch');await page.evaluate(({mode,sentence,uncertain})=>window.correctionHarness.reset(mode,sentence,uncertain),{mode,sentence,uncertain});await page.waitForFunction(old=>document.querySelector('main')?.getAttribute('data-harness-epoch')!==old,previous);await page.getByRole('textbox',{name:'내 문장',exact:true}).waitFor();await page.waitForFunction(s=>document.querySelector('textarea')?.value===s,sentence);if(mode==='word')await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('그녀는 노래를 잘해.');};
  const field=()=>page.getByRole('textbox',{name:'내 문장',exact:true});
- const apply=()=>page.getByRole('button',{name:'AI 제안으로 문장 바꾸기',exact:true});
+ const apply=()=>page.getByRole('button',{name:/^(비교 후 적용|AI 제안으로 문장 바꾸기)$/});
  const confirm=()=>page.getByRole('button',{name:'비교한 제안으로 바꾸기',exact:true});
- const undo=()=>page.getByRole('button',{name:'교정 적용 되돌리기',exact:true});
+ const undo=()=>page.getByRole('button',{name:/^(되돌리기|교정 적용 되돌리기)$/});
  try{
   await page.goto(base+'/');await page.addScriptTag({path:directory+'/harness.js'});await field().waitFor();await page.getByRole('textbox',{name:'의도한 한국어 문장',exact:true}).fill('그녀는 노래를 잘해.');
   assert.equal(await page.evaluate(()=>window.correctionHarness.requests()),0);
-  await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).click();
+  await page.getByRole('button',{name:'다시 요청',exact:true}).click();
   await page.waitForFunction(()=>window.correctionHarness.requests()===1);
-  await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).waitFor();
-  await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).click();
+  await page.getByRole('button',{name:'다시 요청',exact:true}).waitFor();
+  await page.getByRole('button',{name:'다시 요청',exact:true}).click();
   await page.waitForFunction(()=>window.correctionHarness.requests()===2);pass('same-sentence legacy and uncertain feedback recheck only after explicit clicks');
   await reset();await page.evaluate(()=>window.correctionHarness.setDelay(true));
-  await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).click();await page.waitForFunction(()=>window.correctionHarness.requests()===1);
-  assert.equal(await page.getByRole('button',{name:'문장을 확인하고 있어요',exact:true}).isDisabled(),true);await page.evaluate(()=>window.correctionHarness.finish());
-  await page.getByRole('button',{name:'AI 참고 의견 다시 요청',exact:true}).waitFor();assert.equal(await page.evaluate(()=>window.correctionHarness.requests()),1);pass('pending feedback prevents a second request and releases its lock on completion');
+  await page.getByRole('button',{name:'다시 요청',exact:true}).click();await page.waitForFunction(()=>window.correctionHarness.requests()===1);
+  assert.equal(await page.getByRole('button',{name:'확인 중…',exact:true}).isDisabled(),true);await page.evaluate(()=>window.correctionHarness.finish());
+  await page.getByRole('button',{name:'다시 요청',exact:true}).waitFor();assert.equal(await page.evaluate(()=>window.correctionHarness.requests()),1);pass('pending feedback prevents a second request and releases its lock on completion');
   for(const mode of ['word','grammar']){
    await reset(mode);await apply().click();assert.equal(await field().inputValue(),'She sing well.');await confirm().click();await page.waitForFunction(()=>document.querySelector('textarea')?.value==='She sings well.');
    assert.equal(await undo().isVisible(),true);await undo().click();await page.waitForFunction(()=>document.querySelector('textarea')?.value==='She sing well.');
@@ -38,8 +38,8 @@ const {launchBrowser,closeBrowser}=require('./qa/runtime.cjs');
    await field().fill('Edited after applying.');assert.equal(await undo().isDisabled(),true);assert.equal(await field().inputValue(),'Edited after applying.');pass(mode+' edits invalidate confirmation and protect later edits from undo');
   }
   await reset('word');await apply().click();await page.evaluate(()=>window.correctionHarness.changeProposal());await page.getByText('문장이나 제안이 바뀌었어요. 다시 비교해 주세요.',{exact:true}).waitFor();assert.equal(await confirm().isDisabled(),true);pass('a refreshed proposal invalidates the old confirmation');
-  await reset();await apply().click();await confirm().click();await undo().waitFor();await page.waitForFunction(()=>document.activeElement?.textContent==='교정 적용 되돌리기');assert.equal(await undo().evaluate(e=>e===document.activeElement),true);
-  await undo().click();await apply().waitFor();await page.waitForFunction(()=>document.activeElement?.textContent==='AI 제안으로 문장 바꾸기');assert.equal(await apply().evaluate(e=>e===document.activeElement),true);pass('keyboard focus follows apply and undo actions');
+  await reset();await apply().click();await confirm().click();await undo().waitFor();await page.waitForFunction(()=>document.activeElement?.textContent==='되돌리기');assert.equal(await undo().evaluate(e=>e===document.activeElement),true);
+  await undo().click();await apply().waitFor();await page.waitForFunction(()=>document.activeElement?.textContent==='비교 후 적용');assert.equal(await apply().evaluate(e=>e===document.activeElement),true);pass('keyboard focus follows apply and undo actions');
   await reset('grammar');await page.evaluate(()=>window.correctionHarness.setBusy(true));await page.waitForFunction(()=>[...document.querySelectorAll('button')].find(b=>b.textContent==='AI 제안으로 문장 바꾸기')?.matches(':disabled,[aria-disabled="true"]'));assert.equal(await apply().isDisabled(),true);pass('grammar corrections respect the save and request lock');
   for(const mode of ['word','grammar']){await reset(mode,'  She sings well.  ');assert.equal(await apply().count(),0);assert.equal(await field().inputValue(),'  She sings well.  ');}pass('whitespace-only differences do not offer an unnecessary rewrite');
   for(const version of [4,5]){

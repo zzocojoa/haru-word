@@ -130,15 +130,12 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
 
     await openSettings();
     const goal = settings.getByRole('combobox', { name: '하루 목표', exact: true });
-    const pause = settings.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기', exact: true });
-    const icons = [
-      ['학습 수준', 18], ['하루 목표 단어 수', 18], ['새 단어 쉬기 · 복습만 하기', 18], ['주간 점검 요일', 18], ['AI 참고 의견 모델', 20],
-    ].map(([name, size]) => [settings.locator('.settings-label').filter({ hasText: name }).locator('svg'), size, name]);
-    icons.push([svg(settings.getByRole('button', { name: '친숙도 다시 확인하기', exact: true })), 18, 'P085 reassessment'],
-      [svg(settings.getByRole('button', { name: '이 기기의 임시 입력 삭제', exact: true })), 18, 'P087 local delete'],
+    const pause = settings.getByRole('switch', { name: '복습만 하기', exact: true });
+    await settings.getByText('임시 입력·로그아웃',{exact:true}).click();
+    const icons = [[svg(settings.getByRole('button', { name: '임시 입력 삭제', exact: true })), 18, 'P087 local delete'],
       [svg(settings.getByRole('link', { name: '임시 입력을 지우고 로그아웃', exact: true })), 18, 'P088 local logout'],
       [svg(settings.getByRole('button', { name: '닫기', exact: true })), 16, 'P095 dialog close'],
-      [await goal.evaluate(el=>!!el.closest('.astryx-selector')) ? settings.locator('.astryx-selector:has([aria-label="하루 목표"]) .astryx-selector-indicator-icon svg') : svg(goal), 16, 'P097 select trigger']);
+      [await goal.evaluate(el=>!!el.closest('.astryx-selector')) ? settings.locator('.astryx-selector:has([aria-label="하루 목표"]) .astryx-selector-indicator-icon svg') : svg(goal), 16, 'P097 select trigger']];
     await qa.inspect('settings', { icons });
     assert.equal(await pause.evaluate(element => element.tagName + ':' + element.type), 'INPUT:checkbox');
     assert.equal(await settings.getByRole('combobox', { name: 'AI 모델', exact: true }).isEnabled(), true,
@@ -172,7 +169,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       await page.evaluate(size => document.documentElement.style.fontSize = size + '%', textSize);
       await qa.settle(); await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
       await qa.inspect('goal-options-' + width + '-' + textSize, { widths: [width], textSizes: [textSize],
-        icons: [[page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).locator('svg'), 16, 'P098 selected option']] });
+        icons: [[page.getByRole('option', { name: '3개', exact: true }).locator('svg'), 16, 'P098 selected option']] });
       await page.keyboard.press('Escape');await page.getByRole('listbox').waitFor({state:'hidden'});
     }
     await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
@@ -205,7 +202,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     // destination before the next key so Enter cannot select the previous item.
     await changeAndSave(async () => {
       await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
-      await waitForOptionFocus('3개 · 기본 목표', true);
+      await waitForOptionFocus('3개', true);
       await page.keyboard.press('Home'); await waitForOptionFocus('1개', false);
       await page.keyboard.press('ArrowDown'); await waitForOptionFocus('2개', false);
       await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
@@ -216,10 +213,10 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     await changeAndSave(async () => {
       await goal.focus(); await goal.press('Space'); await page.getByRole('listbox').waitFor();
       await waitForOptionFocus('2개', true);
-      await page.keyboard.press('ArrowDown'); await waitForOptionFocus('3개 · 기본 목표', false);
+      await page.keyboard.press('ArrowDown'); await waitForOptionFocus('3개', false);
       await page.keyboard.press('Enter'); await page.getByRole('listbox').waitFor({ state: 'hidden' });
     });
-    assert.equal((await goal.innerText()).trim(), '3개 · 기본 목표');
+    assert.equal((await goal.innerText()).trim(), '3개');
     assert.equal((await qa.getState()).state.settings.dailyGoal, 3);
     // Select restores focus asynchronously. Observe that return before moving
     // to the next native control, so Space cannot be stolen by closing content.
@@ -249,7 +246,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
         focused: element === document.activeElement, checked: element.checked, disabled: element.disabled,
         activeTag: document.activeElement?.tagName, activeLabel: document.activeElement?.getAttribute('aria-label'),
       }));
-      const selector = '.settings-dialog .check-label input[type="checkbox"]';
+      const selector = '.settings-dialog input[role="switch"][type="checkbox"]';
       try {
         await page.waitForFunction(selector => {
           const element = document.querySelector(selector);
@@ -327,7 +324,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     const delayedGoalSave = async (value, label, leaveWhileSaving) => {
       const before = await qa.getState();
       const currentName = (await goal.innerText()).trim();
-      const nextName = value === 3 ? '3개 · 기본 목표' : value + '개';
+      const nextName = value + '개';
       const evidence = { label, value, held: 0, routeErrors: [] };
       report.settingsFocus.push(evidence);
       let release, markHeld, rejectHeld, heldTimer;
@@ -386,7 +383,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       assert.deepEqual(evidence.routeErrors, [], label + ' route handling');
     };
     await delayedGoalSave(2, 'save-focus-move', async () => {
-      const help = settings.locator('summary').filter({ hasText: '목표 수를 바꾸면?' });
+      const help = settings.locator('summary').filter({ hasText: '목표 배정 안내' });
       await help.focus(); return help;
     });
     await delayedGoalSave(3, 'save-dialog-close', async () => {
@@ -439,8 +436,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
 
     const field = page.getByRole('textbox', { name: '내 영어 문장', exact: true });
     const intent = page.getByRole('textbox', { name: '의도한 한국어 문장', exact: true });
-    // Notices exist only for an error or an actual competing draft. Ordinary
-    // auto-restoration returns directly to the English/Korean input fields.
+    // Only storage errors have an inline notice; competing drafts remain local.
     const sentenceDraft = page.locator('.session-panel').filter({ has: field }).locator(':scope > .local-draft-notice');
     const intentDraft = page.locator('.korean-intent-input').filter({ has: intent }).locator(':scope > .local-draft-notice');
     const openLesson = async () => {
@@ -474,57 +470,27 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     await page.reload({ waitUntil: 'domcontentloaded' }); await openLesson();
     await waitValue(field, 'Changed server sentence.');
     const comparisonBaseline = await qa.getState();
-    await sentenceDraft.locator('summary').filter({ hasText: '이 기기에 남은 다른 입력 확인' }).click();
-    const compare = sentenceDraft.getByRole('button', { name: '현재 입력과 비교', exact: true });
-    const comparison = sentenceDraft.getByRole('group', { name: '임시 입력 복구 확인', exact: true });
-    const openEnglishComparison = async () => {
-      const tools = sentenceDraft.locator('details').first();
-      if (!await tools.evaluate(element => element.open)) await tools.locator('summary').click();
-      const count = await compare.count();
-      for (let index = 0; index < count; index++) {
-        await compare.nth(index).click(); await comparison.waitFor();
-        if (await comparison.getByText('A draft kept for explicit comparison.', { exact: true }).count() === 1) {
-          (report.draftComparisons ??= []).push({ candidates: count, selectedIndex: index + 1,
-            storedSentence: 'A draft kept for explicit comparison.' });
-          return;
-        }
-        await comparison.getByRole('button', { name: '취소', exact: true }).click();
-        await comparison.waitFor({ state: 'hidden' });
-      }
-      assert.fail('The English comparison must show the intended stored sentence');
-    };
-    await openEnglishComparison();
-    await comparison.waitFor(); await qa.inspect('draft-comparison', compactMatrix);
-    await qa.click(comparison.getByRole('button', { name: '취소', exact: true }), 'draft-comparison-cancel');
-    assert.equal(await field.inputValue(), 'Changed server sentence.');
-    assert.deepEqual(await qa.getState(), comparisonBaseline);
-    await openEnglishComparison();
-    await qa.click(comparison.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }), 'draft-apply');
-    await waitValue(field, 'A draft kept for explicit comparison.');
-    assert.deepEqual(await qa.getState(), comparisonBaseline);
-    const undo = sentenceDraft.getByRole('button', { name: '복구한 입력 되돌리기', exact: true });
-    if (!await undo.isVisible()) await sentenceDraft.locator('details').first().locator('summary').click();
-    await qa.inspect('draft-manual-choice', { icons: [[svg(undo), 18, 'P090 explicit-choice undo']] });
-    await qa.click(undo, 'draft-undo-explicit-choice'); await waitValue(field, 'Changed server sentence.');
-    assert.deepEqual(await qa.getState(), comparisonBaseline, 'undo after an explicit choice does not grade or save recovered input');
-    await openEnglishComparison();
-    await qa.click(comparison.getByRole('button', { name: '비교한 입력으로 이어쓰기', exact: true }), 'draft-reapply');
-    await waitValue(field, 'A draft kept for explicit comparison.');
-    assert.deepEqual(await qa.getState(), comparisonBaseline);
-    report.checks.push('P090: ordinary restoration has no visible tools; actual conflicting drafts retain comparison/cancel/apply and explicit-choice undo, preserving original scores, first answers and server revision');
+    assert.equal(await sentenceDraft.count(),0);
+    assert.equal(await intentDraft.count(),0);
+    assert.equal(await page.getByText('이 기기에 남은 다른 입력 확인',{exact:false}).count(),0);
+    assert.ok((await draftRows()).some(row=>JSON.stringify(row).includes('A draft kept for explicit comparison.')));
+    assert.deepEqual(await qa.getState(),comparisonBaseline);
+    await qa.inspect('draft-conflict-preserved');
+    report.checks.push('P090: automatic restoration is silent; a competing draft stays local and current input, saved grades and first answers stay unchanged');
 
     await openSettings();
+    await settings.getByText('임시 입력·로그아웃',{exact:true}).click();
     const deletionBaseline = await qa.getState(), localBefore = await draftRows();
     assert.ok(localBefore.length > 0);
-    await qa.click(button('이 기기의 임시 입력 삭제'), 'draft-delete-open');
+    await qa.click(button('임시 입력 삭제'), 'draft-delete-open');
     const deletion = page.getByRole('group', { name: '임시 입력 삭제 확인', exact: true });
     await qa.inspect('draft-delete-confirmation', compactMatrix);
     await qa.click(deletion.getByRole('button', { name: '취소', exact: true }), 'draft-delete-cancel');
     assert.deepEqual(await draftRows(), localBefore); assert.deepEqual(await qa.getState(), deletionBaseline);
-    await button('이 기기의 임시 입력 삭제').click(); await qa.click(button('기기 보관 항목 삭제'), 'draft-delete-confirm');
+    await button('임시 입력 삭제').click(); await qa.click(button('기기 보관 항목 삭제'), 'draft-delete-confirm');
     await settings.getByText('기기 보관 항목을 삭제했어요. 다시 편집하는 입력부터 새로 임시 보관해요.', { exact: true }).waitFor();
     assert.deepEqual(await draftRows(), []); assert.deepEqual(await qa.getState(), deletionBaseline);
-    await closeSettings(); assert.equal(await field.inputValue(), 'A draft kept for explicit comparison.');
+    await closeSettings(); assert.equal(await field.inputValue(), 'Changed server sentence.');
 
     await page.evaluate(() => {
       const original = Storage.prototype.setItem;
@@ -556,6 +522,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     report.checks.push('P087/P089: cancel preserves device drafts; confirmed local delete and recoverable storage failure preserve English and Korean intention inputs and server records; retrying from the English draft clears both notices and persists both inputs');
 
     await openSettings();
+    await settings.getByText('임시 입력·로그아웃', { exact: true }).click();
     const logout = settings.getByRole('link', { name: '임시 입력을 지우고 로그아웃', exact: true });
     assert.equal(await logout.getAttribute('href'), '/signout-with-chatgpt?return_to=%2F');
     // No provider/account session is contacted: intercept this synthetic context's

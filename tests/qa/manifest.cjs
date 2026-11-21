@@ -92,6 +92,7 @@ module.exports = [
   "study-controller-render-qa.cjs",
   "study-date-qa.cjs",
   "study-layout-qa.cjs",
+  "learning-ux-refinement-qa.cjs",
   "study-recovery-qa.cjs",
   "today-status-qa.cjs",
   "ui-plan-contract-qa.cjs",

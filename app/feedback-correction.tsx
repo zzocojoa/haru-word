@@ -8,8 +8,8 @@ import { feedbackSafetyIssue } from '@/lib/feedback-safety';
 import { compareCorrection, canConfirmCorrection, canUndoCorrection, type CorrectionComparison, type CorrectionUndo } from '@/lib/feedback-correction';
 import { RecordText } from './record-text';
 
-export function FeedbackCorrection({ feedback, sentence, busy = false, contextCurrent, onApply }: {
-  feedback: SentenceFeedback; sentence: string; busy?: boolean; contextCurrent:boolean; onApply: (sentence: string) => void;
+export function FeedbackCorrection({ feedback, sentence, busy = false, contextCurrent, onApply, compact = false }: {
+  feedback: SentenceFeedback; sentence: string; busy?: boolean; contextCurrent:boolean; onApply: (sentence: string) => void; compact?: boolean;
 }) {
   const [comparison, setComparison] = useState<CorrectionComparison | null>(null);
   const [undo, setUndo] = useState<CorrectionUndo | null>(null);
@@ -30,8 +30,10 @@ export function FeedbackCorrection({ feedback, sentence, busy = false, contextCu
     setComparison(compareCorrection(sentence, feedback));
   }
   if (!safe || (!available && !undo && !comparison)) return null;
+  const applyLabel = compact ? '비교 후 적용' : 'AI 제안으로 문장 바꾸기';
+  const undoLabel = compact ? '되돌리기' : '교정 적용 되돌리기';
   return <div className="feedback-correction-action">
-    {available && <HaruButton label={["AI 제안으로 문장 바꾸기"].join('')} variant="ghost" ref={applyButton} type="button" className="haru-migrated text-button" disabled={busy} onClick={choose}>AI 제안으로 문장 바꾸기</HaruButton>}
+    {available && <HaruButton label={applyLabel} variant="ghost" ref={applyButton} type="button" className="haru-migrated text-button" disabled={busy} onClick={choose}>{applyLabel}</HaruButton>}
     {comparison && <div className="notice" role="group" aria-label="교정 적용 확인">
       <HaruParagraph>내 문장과 AI 제안을 비교한 뒤 바꿔 주세요.</HaruParagraph>
       <HaruParagraph className="small-note">비교를 열었을 때의 내 문장</HaruParagraph><RecordText text={comparison.before} label="바꾸기 전 내 문장" lang="en" />
@@ -46,10 +48,10 @@ export function FeedbackCorrection({ feedback, sentence, busy = false, contextCu
       </div>
     </div>}
     {undo && <div>
-      <HaruButton label={["교정 적용 되돌리기"].join('')} variant="ghost" ref={undoButton} type="button" className="haru-migrated text-button" disabled={busy || !canUndoCorrection(sentence, undo)} onClick={() => {
+      <HaruButton label={undoLabel} variant="ghost" ref={undoButton} type="button" className="haru-migrated text-button" disabled={busy || !canUndoCorrection(sentence, undo)} onClick={() => {
         if (busy || !canUndoCorrection(sentence, undo)) return;
         restoreFocus.current = 'apply'; onApply(undo.before); setUndo(null);
-      }}>교정 적용 되돌리기</HaruButton>
+      }}>{undoLabel}</HaruButton>
       {!canUndoCorrection(sentence, undo) && <HaruParagraph className="small-note">이후에 편집한 문장을 유지해요. 바꾸기 전 문장은 아래에서 확인할 수 있어요.</HaruParagraph>}
       <details><summary>바꾸기 전 문장 확인</summary><RecordText text={undo.before} label="교정 적용 전 문장" lang="en" /></details>
     </div>}

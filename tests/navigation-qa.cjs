@@ -141,7 +141,7 @@ const until = async (check, label) => {
     await page.locator('.grammar-tile').first().click(); await input.waitFor(); assert.equal(await input.inputValue(), 'I like coffee and books.');
     let aiRoute;
     await page.route('**/api/grammar-feedback', route => { aiRoute = route; });
-    await page.getByRole('button', { name: 'AI 참고 의견 요청', exact: true }).click(); await until(() => !!aiRoute, 'AI request');
+    await page.getByRole('button', { name: '의견 요청', exact: true }).click(); await until(() => !!aiRoute, 'AI request');
     await back(); await page.locator('.grammar-catalog').waitFor();
     const lateFeedback=currentOpenaiFeedback(aiRoute,{original:'I like coffee and books.',correctedSentence:'I like coffee and books.',explanation:'합성 의견',meaningUsage:'appropriate',grammar:'natural',createdAt:now});
     const delivery=await aiRoute.fulfill({json:{feedback:lateFeedback,receipt:feedbackReceipt(aiRoute)}}).then(()=> 'fulfilled',()=> 'aborted');
@@ -186,7 +186,7 @@ const until = async (check, label) => {
     checks.push('daily Back pauses and saves ungraded input; existing exit/home buttons still work');
 
     await page.getByRole('button', { name: '학습 설정', exact: true }).click();
-    await page.getByRole('button', { name: '친숙도 다시 확인하기', exact: true }).click();
+    await page.getByRole('button', { name: '친숙도 다시 확인', exact: true }).click();
     await page.getByLabel('친숙도 확인 순서').waitFor();
     await back(); await page.getByRole('button', { name: '중단한 학습 이어서', exact: true }).waitFor();
     checks.push('closing settings and asynchronously opening familiarity is not lost; Back returns home');
@@ -218,7 +218,7 @@ const until = async (check, label) => {
     const remote = await get();
     assert.equal((await context.request.put(base + '/api/state', { data: { revision: remote.revision, settings: { ...remote.state.settings, dailyGoal: 2 }, progress: {}, sessions: {} } })).status(), 200);
     await page.getByRole('combobox', { name: '하루 목표', exact: true }).click();
-    await page.getByRole('option', { name: '3개 · 기본 목표', exact: true }).click();
+    await page.getByRole('option', { name: '3개', exact: true }).click();
     await page.getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
     await page.getByRole('alertdialog').getByRole('button', { name: '최신 기록 불러오기', exact: true }).click();
     await page.getByText('저장됨', { exact: true }).waitFor();

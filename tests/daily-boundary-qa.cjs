@@ -86,9 +86,9 @@ const makeSession = kind => ({ id: crypto.randomUUID(), kind, date: yesterday, p
     await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).waitFor();
     await p.getByText('오늘 배정 기준', {exact:true}).click();
     await p.getByText(/목표까지 7개는 아직 배정 전/).waitFor();
-    await setting(() => p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기', exact: true }).check());
+    await setting(() => p.getByRole('switch', { name: '복습만 하기', exact: true }).check());
     assert.equal(await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).count(), 0);
-    await setting(() => p.getByRole('checkbox', { name: '새 단어 쉬기 · 복습만 하기', exact: true }).uncheck());
+    await setting(() => p.getByRole('switch', { name: '복습만 하기', exact: true }).uncheck());
     await p.getByRole('button', { name: '추가 7개 학습하기', exact: true }).click(); await saved(p);
     await p.getByRole('button', { name: '저장하고 나가기', exact: true }).click(); await saved(p);
     await p.getByRole('button', { name: '학습 홈으로', exact: false }).click();

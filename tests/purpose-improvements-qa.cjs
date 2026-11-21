@@ -44,12 +44,12 @@ const checks=[];const errors=[];const evidence=[];
 
   const e=await user('content');await e.p.getByRole('tab',{name:'단어장',exact:true}).click();for(const [name,label,file]of [['train','train 명사','05-truncated-expression'],['would','would 법조동사','05-would-sense'],['fit','fit 형용사','05-fit-translation']]){await e.p.getByLabel('단어 또는 한국어 뜻 검색').fill(name);assert.equal(await e.p.getByLabel('단어 또는 한국어 뜻 검색').inputValue(),name);try{await e.p.getByRole('button',{name:label,exact:true}).click();}catch(error){fs.writeFileSync(out+'/content-readiness-failure.json',JSON.stringify({engine:process.env.QA_BROWSER,name,label,query:await e.p.getByLabel('단어 또는 한국어 뜻 검색').inputValue(),buttons:await e.p.getByRole('button').allTextContents(),dialogs:await e.p.getByRole('dialog').count()},null,2));await shot(e.p,'content-readiness-failure');throw error;}await e.p.getByRole('dialog').waitFor();await shot(e.p,file);await e.p.getByRole('button',{name:'닫기',exact:true}).click();await e.p.getByRole('dialog').waitFor({state:'hidden'});/* Close schedules destination focus after two frames; await that handoff before the next fill. */const trigger=await e.p.getByRole('button',{name:label,exact:true}).elementHandle();try{await e.p.waitForFunction(el=>document.activeElement===el,trigger,{timeout:5000});}finally{await trigger.dispose();}}
   await logIssue('CONTENT',{confirmed:true,corrected:['train: miss the train','would: 정중한 권유','fit: 건강한'],closeFocusRestored:true});
-  await e.p.getByRole('button',{name:'학습 설정',exact:true}).click();await e.p.getByText('저장·날짜·AI 안내',{exact:true}).click();
+  await e.p.getByRole('button',{name:'학습 설정',exact:true}).click();await e.p.getByText('AI 모델·요금 안내',{exact:true}).click();
   const settingsCopy=await e.p.getByRole('dialog').innerText();
-  for(const text of ['AI는 ‘참고 의견 요청’을 누를 때만 사용해요','모델 변경이나 기록 조회만으로 요청하지 않아요','OpenAI 사용 한도에 따라 요청이 제한될 수 있어요','실패해도 다른 모델로 자동 전송하지 않아요'])assert.ok(settingsCopy.includes(text),text);
+  for(const text of ['AI 의견을 요청할 때만 선택한 모델로 보내요','OpenAI 사용 한도에 따라 요청이 제한될 수 있어요'])assert.ok(settingsCopy.includes(text),text);
   assert.ok(!settingsCopy.includes('두 계정은 Free 상태를 유지'),'learner settings do not assign billing tasks');
   assert.ok(!settingsCopy.includes('별도 AI API를 사용하지'));
-  await e.p.getByRole('checkbox',{name:'새 단어 쉬기 · 복습만 하기',exact:true}).waitFor();
+  await e.p.getByRole('switch',{name:'복습만 하기',exact:true}).waitFor();
   const attribution=await e.ctx.request.get(base+'/sources/content-attribution.txt');assert.equal(attribution.status(),200);
   const sourceCopy=await attribution.text();
   for(const text of ['명시적으로 요청할 때만','OpenAI Responses API','자동 전송하지 않습니다','과거 Google·Groq 의견은 원래 제공사와 함께 보존'])assert.ok(sourceCopy.includes(text),text);
