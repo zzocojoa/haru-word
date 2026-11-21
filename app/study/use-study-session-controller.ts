@@ -74,13 +74,12 @@ export function useStudySessionController({
   ));
   // Finish the question's focus handoff before a visible input can be edited.
   useLayoutEffect(() => {
-    if (positioned.current === topRequest) focus.current?.focus();
-  }, [question, topRequest]);
+    if (visible) focus.current?.focus({ preventScroll: positioned.current !== topRequest });
+  }, [question, topRequest, visible]);
   useLayoutEffect(() => {
     if (!visible || positioned.current === topRequest) return;
     return restoration.schedule('destination', () => {
       positioned.current = topRequest;
-      focus.current?.focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: 'instant' });
     });
   }, [restoration, topRequest, visible]);

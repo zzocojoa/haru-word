@@ -2086,7 +2086,7 @@
   :is(.image-practice-navigation button > svg):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)) { order: -1; }
 }
 :is(.local-draft-notice .text-button):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)):not(.haru-native-action),
-:is(.settings-section[aria-label="이 기기의 임시 입력"] .text-button):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)):not(.haru-native-action) {
+:is(.local-draft-settings .text-button):where(.haru-library-tabs,.haru-library-tabs [role=tab],.haru-panel,.haru-heading,.haru-copy,.haru-migrated,.haru-field-control,.haru-table,.haru-table :is(thead,tbody,tr,th,td)):not(.haru-native-action) {
   min-width: 44px;
   min-height: 44px;
   max-width: 100%;

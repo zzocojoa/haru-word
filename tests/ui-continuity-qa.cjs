@@ -145,17 +145,17 @@ function session(records, hour) {
     await p.route('**/api/state', route => route.request().method() === 'PUT'
       ? route.fulfill({ status: 503, contentType: 'application/json', body: JSON.stringify({ error: '검사용 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.' }) }) : route.continue());
     await p.getByRole('button', { name: '문장을 완성했어요', exact: false }).click();
-    await p.getByRole('heading', { name: '기록 저장을 확인하고 있어요.', exact: true }).waitFor();
-    assert.equal(await p.locator('.summary-pending-icon').count(), 1);
-    assert.equal((await p.locator('.summary-pending-icon').boundingBox()).height, 48);
-    assert.equal(await p.locator('.session-summary .success-icon').count(), 0);
+    await p.getByText('검사용 저장하지 못했어요. 현재 입력을 백업한 뒤 다시 시도해 주세요.', { exact: true }).waitFor();
+    assert.equal(await p.locator('.session-summary').count(), 0);
+    assert.equal(await p.getByLabel('내 영어 문장', { exact: true }).inputValue(), 'I arrive home at six.');
     assert.equal((await (await empty.request.get(base + '/api/state')).json()).state.sessions[pending.id].finished, false);
-    await p.screenshot({ path: `${out}/summary-unsaved-mobile.png`, fullPage: true });
+    await p.screenshot({ path: `${out}/sentence-save-error-mobile.png`, fullPage: true });
     await p.unroute('**/api/state'); await p.getByRole('button', { name: '다시 시도', exact: true }).click();
     await p.getByRole('heading', { name: '학습 기록을 저장했어요', exact: true }).waitFor();
+    await p.waitForFunction(() => window.scrollY === 0 && document.activeElement?.textContent === '학습 기록을 저장했어요');
     assert.equal(await p.locator('.session-summary .success-icon').count(), 1);
     assert.equal(await p.locator('.summary-pending-icon').count(), 0);
-    checks.push('failed final save retains the sentence, shows a neutral pending icon, and only confirms success after retry');
+    checks.push('failed final save retains the sentence form and input; retry opens the confirmed summary at the top');
     assert.deepEqual(errors, []);
     const report = { passed: true, engine, checks, layouts, errors };
     fs.writeFileSync(`${out}/report.json`, JSON.stringify(report, null, 2)); console.log(JSON.stringify(report));

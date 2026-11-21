@@ -4748,7 +4748,7 @@ footer {
 .local-draft-notice { margin-block: 1rem; min-width: 0; overflow-wrap: anywhere; }
 .local-draft-logout { min-width: 44px; min-height: 44px; padding-block: 10px; cursor: pointer; }
 .local-draft-notice .text-button,
-.settings-section[aria-label="이 기기의 임시 입력"] .text-button {
+.local-draft-settings .text-button {
   min-width: 44px;
   min-height: 44px;
   max-width: 100%;

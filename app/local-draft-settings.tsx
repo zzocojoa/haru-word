@@ -11,7 +11,7 @@ export function LocalDraftSettings({busy}:{busy:boolean}){
   const {store,state}=useLocalDrafts(),{pendingCount}=useAiRequests();
   const [confirm,setConfirm]=useState(false),[deleted,setDeleted]=useState(false);
   if(!store?.owner)return null;
-  return <section aria-label="이 기기의 임시 입력">
+  return <section className="local-draft-settings" aria-label="이 기기의 임시 입력">
     {state.error&&<HaruParagraph role="status">기기 보관 상태를 확인하지 못했어요. 화면의 입력을 먼저 백업해 주세요.</HaruParagraph>}
     <HelpDetails title="임시 입력·로그아웃">
     <HaruParagraph className="small-note">작성 중인 입력과 이전 AI 제안을 이 브라우저에 계정별로 최대 7일간 평문으로 보관해요. 만료한 항목은 다음 접근 때 삭제해요.</HaruParagraph>

@@ -246,7 +246,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
         focused: element === document.activeElement, checked: element.checked, disabled: element.disabled,
         activeTag: document.activeElement?.tagName, activeLabel: document.activeElement?.getAttribute('aria-label'),
       }));
-      const selector = '.settings-dialog .check-label input[type="checkbox"]';
+      const selector = '.settings-dialog input[role="switch"][type="checkbox"]';
       try {
         await page.waitForFunction(selector => {
           const element = document.querySelector(selector);
@@ -383,7 +383,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
       assert.deepEqual(evidence.routeErrors, [], label + ' route handling');
     };
     await delayedGoalSave(2, 'save-focus-move', async () => {
-      const help = settings.locator('summary').filter({ hasText: '목표 수를 바꾸면?' });
+      const help = settings.locator('summary').filter({ hasText: '목표 배정 안내' });
       await help.focus(); return help;
     });
     await delayedGoalSave(3, 'save-dialog-close', async () => {
@@ -522,6 +522,7 @@ const { currentAiHeaders } = require('./qa/openai-fixture.cjs');
     report.checks.push('P087/P089: cancel preserves device drafts; confirmed local delete and recoverable storage failure preserve English and Korean intention inputs and server records; retrying from the English draft clears both notices and persists both inputs');
 
     await openSettings();
+    await settings.getByText('임시 입력·로그아웃', { exact: true }).click();
     const logout = settings.getByRole('link', { name: '임시 입력을 지우고 로그아웃', exact: true });
     assert.equal(await logout.getAttribute('href'), '/signout-with-chatgpt?return_to=%2F');
     // No provider/account session is contacted: intercept this synthetic context's
