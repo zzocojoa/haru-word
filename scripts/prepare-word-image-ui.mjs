@@ -8,12 +8,29 @@ const sha = value => createHash('sha256').update(value).digest('hex');
 const canonical = value => JSON.stringify(value, null, 2) + '\n';
 const origin = 'https://wordgrain-oxford-study.hoihou-o.chatgpt.site';
 
+// Restore the exact textbook used to approve the images. Each reviewed change
+// must match today's content as well as the original catalog's fingerprint.
+export function imageSourceContent(contentBytes, revisions) {
+  if (!Object.keys(revisions).length) return contentBytes;
+  const content = JSON.parse(contentBytes);
+  for (const [id, revision] of Object.entries(revisions)) {
+    const current = content[id];
+    assert.ok(current && revision.previousContent, 'Missing image content revision: ' + id);
+    assert.equal(sha(JSON.stringify(current)), revision.reviewedContentSha256, 'Unreviewed image content: ' + id);
+    assert.notDeepEqual(current, revision.previousContent, 'Redundant image content revision: ' + id);
+    if (revision.imageForPreviousMeaningOnly) assert.notEqual(current.meaning, revision.previousContent.meaning, id);
+    content[id] = revision.previousContent;
+  }
+  return Buffer.from(JSON.stringify(content));
+}
+
 // Keep the large provenance manifests out of the browser. Derived textbook fields
 // are safe only while this build gate binds them to the reviewed source snapshot.
-export function createWordImageUiCatalog(catalog, hosted, wordsBytes, contentBytes, pilot) {
-  const words = JSON.parse(wordsBytes), content = JSON.parse(contentBytes);
+export function createWordImageUiCatalog(catalog, hosted, wordsBytes, contentBytes, pilot, revisions = {}) {
+  const sourceBytes = imageSourceContent(contentBytes, revisions);
+  const words = JSON.parse(wordsBytes), content = JSON.parse(sourceBytes), currentContent = JSON.parse(contentBytes);
   assert.equal(catalog.dataset.wordsSha256, sha(wordsBytes), 'Textbook words changed');
-  assert.equal(catalog.dataset.contentSha256, sha(contentBytes), 'Textbook content changed');
+  assert.equal(catalog.dataset.contentSha256, sha(sourceBytes), 'Original image textbook content changed');
   assert.equal(words.length, 3809);
   assert.equal(catalog.entries.length, words.length);
   assert.equal(hosted.entries.length, words.length);
@@ -49,15 +66,25 @@ export function createWordImageUiCatalog(catalog, hosted, wordsBytes, contentByt
     schemaVersion: 1,
     dataset: { wordsSha256: sha(wordsBytes), contentSha256: sha(contentBytes) },
     catalogSha256: sha(canonical(catalog)), hostedSha256: sha(canonical(hosted)),
-    // entry ID, image hash, actual height. Width is fixed by the validated recipe.
-    entries: order.map(id => [id, source.get(id).sha256, source.get(id).height]),
+    // The optional old meaning keeps existing selections usable. A true fifth
+    // column limits images that no longer fit the current textbook meaning.
+    entries: order.map(id => {
+      const image = source.get(id);
+      const row = [id, image.sha256, image.height];
+      if (image.baseMeaning !== currentContent[id].meaning) {
+        row.push(image.baseMeaning);
+        if (revisions[id]?.imageForPreviousMeaningOnly) row.push(true);
+      }
+      return row;
+    }),
   };
 }
 
 export function prepareWordImageUi(check = false) {
   const json = file => JSON.parse(readFileSync(file));
   const result = createWordImageUiCatalog(json('data/word-image-web-manifest.json'), json('data/word-image-hosted-manifest.json'),
-    readFileSync('data/words.json'), readFileSync('data/content.json'), json('data/word-image-pilot-web.json'));
+    readFileSync('data/words.json'), readFileSync('data/content.json'), json('data/word-image-pilot-web.json'),
+    json('data/catalog-content-revisions.json'));
   const bytes = JSON.stringify(result) + '\n', file = 'data/word-image-ui.json';
   if (check) assert.equal(readFileSync(file, 'utf8'), bytes, 'UI index is stale; run npm run images:ui:prepare');
   else writeFileSync(file, bytes);

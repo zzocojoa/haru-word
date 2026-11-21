@@ -1,0 +1,252 @@
+{
+  "56ecc20111ebbe91": {
+    "previousContent": {
+      "meaning": "누구든",
+      "ipa": "",
+      "expression": "anybody here",
+      "example": "Can anybody here help me with this form?",
+      "translation": "여기 이 양식 작성을 도와줄 분이 있나요?",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "여기에 있는 누군가"
+    },
+    "reviewedContentSha256": "4646d5af27227c699ff31e8fab7ead2de59eda581b9170d1a54352626dc2cb7a"
+  },
+  "5cb35b5d0cd5410b": {
+    "previousContent": {
+      "meaning": "가능한 한",
+      "ipa": "",
+      "expression": "as much as you possibly can",
+      "example": "Upon arrival, read as much as you possibly can.",
+      "translation": "도착하자마자 가능한 한 많이 읽으세요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "가능한 한 많이"
+    },
+    "reviewedContentSha256": "b0f04ee34487defd1a56b200bf2cfae7f0c388619000b102042658e6725f9ef8"
+  },
+  "79275bfe73b7b5cd": {
+    "previousContent": {
+      "meaning": "집중적인",
+      "ipa": "",
+      "expression": "intense effort",
+      "example": "After intense effort, we achieved the intended result.",
+      "translation": "집중적인 노력 끝에 우리는 의도한 결과를 얻었다.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "집중적인 노력"
+    },
+    "reviewedContentSha256": "35acceba459d5196814922685adf420ae1fd102e4eb1f67eb8d19d726d174fee",
+    "imageForPreviousMeaningOnly": true
+  },
+  "17297f2e24daa7de": {
+    "previousContent": {
+      "meaning": "절반쯤",
+      "ipa": "",
+      "expression": "half full",
+      "example": "The cup is hers, and it is half full.",
+      "translation": "그 컵은 그녀의 것이고 절반쯤 차 있어요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "절반쯤 찬"
+    },
+    "reviewedContentSha256": "7564efcf563f0bd9dd0bf8b9a16a1741db9dcc36abd80e388dd2d7a06469ecbf"
+  },
+  "73bd3e4e53362781": {
+    "previousContent": {
+      "meaning": "가스레인지",
+      "ipa": "",
+      "expression": "on the stove",
+      "example": "The bread is in the oven, and the soup is on the stove.",
+      "translation": "빵은 오븐에 있고 수프는 가스레인지 위에 있어요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "가스레인지 위에"
+    },
+    "reviewedContentSha256": "8eaca46ec48ded9d0910a1a786e3384dc97bd7ec2cb7e4914e4c060d6698aba1"
+  },
+  "ae4385fa4b30ea27": {
+    "previousContent": {
+      "meaning": "기름에 굽다",
+      "ipa": "",
+      "expression": "fry an egg",
+      "example": "I had a go at frying an egg.",
+      "translation": "나는 달걀 프라이를 만들어 보았다.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "달걀을 기름에 굽다"
+    },
+    "reviewedContentSha256": "7b2aa49446458429094a5cf26214a54671c49c3b8d6dddbdbfdd70b3366437aa"
+  },
+  "8ff89bc3e38fc80c": {
+    "previousContent": {
+      "meaning": "공무원 (public servant)",
+      "ipa": "",
+      "expression": "a public servant",
+      "example": "A public servant should help the community.",
+      "translation": "공무원은 지역사회를 도와야 해요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "공무원"
+    },
+    "reviewedContentSha256": "4daef55adb2cc5e527167224cb019f8aa6f3577b35a2c77d114c782ce299c108",
+    "imageForPreviousMeaningOnly": true
+  },
+  "6c1994d9056399e7": {
+    "previousContent": {
+      "meaning": "봄 (보는 것)",
+      "ipa": "",
+      "expression": "at the sight of someone",
+      "example": "At the sight of her friend, she smiled.",
+      "translation": "친구를 보자 그녀는 미소를 지었어요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "누군가를 보고"
+    },
+    "reviewedContentSha256": "3f286cb5f1369e01ac7e35cacf4f4cc3f9868c96134a4cb1e8958745dba96f0d"
+  },
+  "ccef3e23140a51d7": {
+    "previousContent": {
+      "meaning": "어린 시절",
+      "ipa": "",
+      "expression": "during your youth",
+      "example": "She spent her youth in a small village.",
+      "translation": "그녀는 작은 마을에서 어린 시절을 보냈어요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "네 어린 시절에"
+    },
+    "reviewedContentSha256": "67a3e9aacca41589c57eb0e1b735685da4902dcc1b306816106fc6ae7db4dcef"
+  },
+  "c879ccce5ad776c2": {
+    "previousContent": {
+      "meaning": "걱정스러운",
+      "ipa": "",
+      "expression": "concerned about his health",
+      "example": "I am very concerned about his health.",
+      "translation": "난 그 사람의 건강이 너무 걱정돼.",
+      "source": "Tatoeba 참고 예문",
+      "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #260590 (CK) & #8361501 (Eunhee)",
+      "url": "https://tatoeba.org/en/sentences/show/260590",
+      "expressionTranslation": "그의 건강을 걱정하는"
+    },
+    "reviewedContentSha256": "7c21f79fb69a039f156b02df081991bee5c06a32d0c4cad4180643627b1fe7db"
+  },
+  "ce0282c1869e08bf": {
+    "previousContent": {
+      "meaning": "누구에게",
+      "ipa": "",
+      "expression": "to whom",
+      "example": "To whom did she speak in a whisper?",
+      "translation": "그녀는 누구에게 속삭였나요?",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "누구에게"
+    },
+    "reviewedContentSha256": "399b434fbf84def96d35537b21a97bf5954a42458f1aea7dc7e988988b8b3ad8"
+  },
+  "df5e7abbf05d5c86": {
+    "previousContent": {
+      "meaning": "~을 가로질러",
+      "ipa": "",
+      "expression": "across the road",
+      "example": "Walk across the road carefully.",
+      "translation": "도로를 조심해서 건너세요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "길 건너편에"
+    },
+    "reviewedContentSha256": "ca68183b749b4e33b3c2fab8ee30b21483311a17a9aa1b22fc985ce096242936"
+  },
+  "b29978e7b4a058e0": {
+    "previousContent": {
+      "meaning": "또 하나",
+      "ipa": "",
+      "expression": "have another",
+      "example": "This one is broken, but I have another.",
+      "translation": "이것은 고장 났지만, 나는 다른 것이 하나 더 있어요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "하나 더 먹다"
+    },
+    "reviewedContentSha256": "019151ff4159a7b6bbaff754562400c5afc6976a35078ba5859ffd3e47ae75af"
+  },
+  "fd04914cdca75241": {
+    "previousContent": {
+      "meaning": "절반",
+      "ipa": "",
+      "expression": "half of them",
+      "example": "I bought six apples and ate half of them.",
+      "translation": "나는 사과 여섯 개를 사서 그중 절반을 먹었어요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "그들의 절반"
+    },
+    "reviewedContentSha256": "24db255420ef755be722dc9bca7d914611cd3ced107ec0dba92f50c9564f3dfa"
+  },
+  "e00bd73630d731d9": {
+    "previousContent": {
+      "meaning": "아니요",
+      "ipa": "",
+      "expression": "no, thank you",
+      "example": "No, thanks! I already have a drink.",
+      "translation": "아니요, 고마워요! 이미 마실 것이 있어요.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "아니요, 괜찮아요"
+    },
+    "reviewedContentSha256": "a08eb6ee11ef73e31dcd0ce77c1d1ba31ccb2eb0b1553754e036388edd804c87"
+  },
+  "c3034d8610fdcfaa": {
+    "previousContent": {
+      "meaning": "어느 곳",
+      "ipa": "",
+      "expression": "anywhere quiet",
+      "example": "You can sit anywhere. Is there anywhere quiet?",
+      "translation": "어디든 앉아도 돼요. 조용한 곳이 있나요?",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "조용한 곳 어디든"
+    },
+    "reviewedContentSha256": "9377483484521ffc8e131f26413ad2e3aa6ae8fd15f555c40443cbddba71f3df"
+  },
+  "b9f79fcb065c4fb4": {
+    "previousContent": {
+      "meaning": "휴일",
+      "ipa": "",
+      "expression": "a national holiday",
+      "example": "Today is a national holiday.",
+      "translation": "오늘은 공휴일이야.",
+      "source": "Tatoeba 참고 예문",
+      "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #384553 (Dorenda) & #8367792 (Eunhee)",
+      "url": "https://tatoeba.org/en/sentences/show/384553",
+      "expressionTranslation": "국경일"
+    },
+    "reviewedContentSha256": "f155d3da48bc0ef3ba80822da9571c339161b694bfa2d53f728ae378d10d8ced"
+  },
+  "4cd8a08b069dee59": {
+    "previousContent": {
+      "meaning": "이끌다",
+      "ipa": "",
+      "expression": "lead the parade",
+      "example": "The parade was led by an army band.",
+      "translation": "그 퍼레이드의 선두는 군악대가 이끌고 있었다.",
+      "source": "Tatoeba 참고 예문",
+      "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #49998 (CM) & #11106879 (intertime)",
+      "url": "https://tatoeba.org/en/sentences/show/49998",
+      "expressionTranslation": "행진을 이끌다"
+    },
+    "reviewedContentSha256": "04a829d0e091451c86d5d61c6a9bf476845d7d25b5a099c0f5fcb5cb948e19e6"
+  },
+  "22220f9d03a05b19": {
+    "previousContent": {
+      "meaning": "서명하다",
+      "ipa": "",
+      "expression": "sign your name",
+      "example": "Don't forget to sign your name.",
+      "translation": "서명하는 것을 잊지 마세요.",
+      "source": "Tatoeba 참고 예문",
+      "attribution": "CC-BY 2.0 (France) Attribution: tatoeba.org #321149 (CK) & #11105141 (intertime)",
+      "url": "https://tatoeba.org/en/sentences/show/321149",
+      "expressionTranslation": "이름을 서명하다"
+    },
+    "reviewedContentSha256": "90f018000dde8d3a5bd0aed2ce430b3bf7029c70b0ae398e8b46fcdb28f3f086"
+  },
+  "af4e5eda826124e9": {
+    "previousContent": {
+      "meaning": "바로 그",
+      "ipa": "",
+      "expression": "the very same",
+      "example": "We took the very same route via Seoul.",
+      "translation": "우리는 서울을 경유하는 바로 그 경로를 이용했다.",
+      "source": "학습용 작성 예문",
+      "expressionTranslation": "바로 그 똑같은"
+    },
+    "reviewedContentSha256": "6a65fdd3cd44f6aa754973b28194d538cb7c5c38460c7e7586fc22bd8dbf1297"
+  }
+}

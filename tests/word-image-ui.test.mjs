@@ -5,7 +5,8 @@ import { createWordImageUiCatalog, prepareWordImageUi } from '../scripts/prepare
 
 const read = file => readFileSync(file), json = file => JSON.parse(read(file));
 const inputs = () => [json('data/word-image-web-manifest.json'), json('data/word-image-hosted-manifest.json'),
-  read('data/words.json'), read('data/content.json'), json('data/word-image-pilot-web.json')];
+  read('data/words.json'), read('data/content.json'), json('data/word-image-pilot-web.json'),
+  json('data/catalog-content-revisions.json')];
 
 test('the compact client index is reproducible, complete and retains the twenty practiced identities first', () => {
   const args = inputs(), actual = createWordImageUiCatalog(...args);
@@ -22,8 +23,17 @@ test('an edited textbook cannot reinterpret an approved image as a new meaning o
     if (field === 'meaning') data[args[0].entries[0].entryId].meaning = '새 뜻';
     else data[0].pos = 'v.';
     args[index] = Buffer.from(JSON.stringify(data));
-    assert.throws(() => createWordImageUiCatalog(...args), /Textbook .* changed/);
+    assert.throws(() => createWordImageUiCatalog(...args), /[Tt]extbook .* changed/);
   }
+});
+
+test('image content revisions authenticate both versions of the reviewed material', () => {
+  const args = inputs(), [id] = Object.keys(args[5]);
+  const current = JSON.parse(args[3]);
+  current[id].meaning = '검토 자료에 없는 뜻';
+  assert.throws(() => createWordImageUiCatalog(...args.with(3, Buffer.from(JSON.stringify(current)))), /Unreviewed image content/);
+  args[5][id].previousContent.meaning = '원래 이미지에서 검토하지 않은 뜻';
+  assert.throws(() => createWordImageUiCatalog(...args), /Original image textbook content changed/);
 });
 
 test('changed source provenance, swapped remote URLs and duplicate identities block publication', () => {

@@ -940,9 +940,17 @@
         },
         {
           "id": "c879ccce5ad776c2",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "07155d8cdd5d07dae244cf514dbfdfdf690ea8d5821d8ffd9cc3d3f197c2b411",
-          "afterHash": "07155d8cdd5d07dae244cf514dbfdfdf690ea8d5821d8ffd9cc3d3f197c2b411"
+          "afterHash": "b9632c3aef216423179927b3c6faa3eeb1f3ae0dbc45e21655356498366664b9",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "07155d8cdd5d07dae244cf514dbfdfdf690ea8d5821d8ffd9cc3d3f197c2b411",
+              "reason": "예문에서 화자가 걱정한다. 현재 뜻은 걱정을 불러일으키는 대상의 특성으로도 읽을 수 있다."
+            }
+          ],
+          "reason": "2026-11-21 한국어 뜻·표현 점검"
         }
       ]
     },
@@ -2746,8 +2754,16 @@
           "id": "79275bfe73b7b5cd",
           "status": "corrected",
           "beforeHash": "1c29115a224c23ca6024e916ffeebb18ecbb7bef3f6d93d1e2dbf1f3a9b556cc",
-          "afterHash": "e481509498e5dc636bc88dd5c1074b1ee0960f7ed252aac0a60d06dde8384914",
-          "reason": "집중적인 노력 뜻 선택"
+          "afterHash": "852359ec02ae2371bb02bc48978f8fcc94d769a20fc56a7887993e3323644b6e",
+          "reason": "집중적인 노력 뜻 선택",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "e481509498e5dc636bc88dd5c1074b1ee0960f7ed252aac0a60d06dde8384914",
+              "reason": "intense effort는 노력의 강도가 높다는 뜻이다. 집중적인 노력은 주의를 기울였다는 의미로 읽힐 수 있다.",
+              "previousExpressionTranslation": "집중적인 노력"
+            }
+          ]
         },
         {
           "id": "edae7a2035209538",
@@ -5277,9 +5293,18 @@
         },
         {
           "id": "af4e5eda826124e9",
-          "status": "kept",
+          "status": "corrected",
           "beforeHash": "effad1137e5d54c02425bdb979cd4d5490c8b54c59d754ac271abc56f05dfbb0",
-          "afterHash": "effad1137e5d54c02425bdb979cd4d5490c8b54c59d754ac271abc56f05dfbb0"
+          "afterHash": "141aab28fe8d9181c41207c7fa86d205604422ec8a7365a0ab7a6522eed4fdcf",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "effad1137e5d54c02425bdb979cd4d5490c8b54c59d754ac271abc56f05dfbb0",
+              "reason": "very same은 두 경로가 정확히 같다는 점을 강조한다. 바로 그 경로만 쓰면 동일성이 흐려진다.",
+              "previousExpressionTranslation": "바로 그 똑같은"
+            }
+          ],
+          "reason": "2026-11-21 한국어 뜻·표현 점검"
         },
         {
           "id": "b260c2caa7995220",
@@ -5398,8 +5423,15 @@
           "id": "ce0282c1869e08bf",
           "status": "corrected",
           "beforeHash": "3ed25e25585543d7d7ead03c57e49956169d264d9a6005b85dabf8319dec9b03",
-          "afterHash": "d084d0bc0c749e7282637e1c94014baace3ffe03dd2f0a91280eb8f1b4af8ffb",
-          "reason": "전치사 to의 목적격 뜻 선택"
+          "afterHash": "6e457fa225a1c0bc90aa4f3e20332ec35f14d4792d7aabd8e4496da07f744488",
+          "reason": "전치사 to의 목적격 뜻 선택",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "d084d0bc0c749e7282637e1c94014baace3ffe03dd2f0a91280eb8f1b4af8ffb",
+              "reason": "예문의 누구에게는 to whom에 알맞다. whom의 목적격 용법은 누구를로도 나타난다."
+            }
+          ]
         },
         {
           "id": "ccf5a58b43ad7530",

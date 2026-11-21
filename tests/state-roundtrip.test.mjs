@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import { readFileSync, mkdirSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import { build } from 'esbuild';
-import { EMPTY, newSession, senseProgress, allSenses } from '../lib/learning.ts';
+import { EMPTY, newSession, emptyRecord, senseProgress, allSenses } from '../lib/learning.ts';
 import { serializeBackup } from '../lib/backup-format.ts';
 
 const dir = 'work/state-roundtrip-tests'; mkdirSync(dir, { recursive: true });
-await build({ entryPoints: ['lib/backup-analysis.ts', 'lib/response-validation.ts', 'lib/learning-commands.ts', 'lib/word-editor-draft.ts', 'lib/restore-validation.ts', 'db/learning-state.ts', 'db/restore-jobs.ts'], outdir: dir, entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
+await build({ entryPoints: ['lib/backup-analysis.ts', 'lib/response-validation.ts', 'lib/learning-commands.ts', 'lib/word-editor-draft.ts', 'lib/restore-validation.ts', 'lib/catalog.ts', 'db/learning-state.ts', 'db/restore-jobs.ts'], outdir: dir, entryNames: '[name]', outExtension: { '.js': '.mjs' }, bundle: true, format: 'esm', platform: 'node', logLevel: 'silent' });
 await build({ entryPoints: ['app/api/state/route.ts'], outfile: dir + '/route.mjs', bundle: true, format: 'esm', platform: 'node', logLevel: 'silent', plugins: [{ name: 'test-boundaries', setup(b) {
   b.onResolve({ filter: /^cloudflare:workers$/ }, () => ({ path: 'env', namespace: 'model-env' }));
   b.onLoad({ filter: /.*/, namespace: 'model-env' }, () => ({ loader: 'js', contents: 'export const env={OPENAI_ALLOWED_MODELS:"gpt-6.1-sol,gpt-6.1-terra,gpt-6-astra"}' }));
@@ -21,6 +21,7 @@ const { createWordEditorDraft, wordSenseDraft, editWordEditorDraft } = await imp
 const { editedWordDraftsProgress } = await import('../work/state-roundtrip-tests/learning-commands.mjs');
 const { parsePart } = await import('../work/state-roundtrip-tests/restore-validation.mjs');
 const { restoreState } = await import('../work/state-roundtrip-tests/learning-state.mjs');
+const { cardContent, studyContent } = await import('../work/state-roundtrip-tests/catalog.mjs');
 const jobs = await import('../work/state-roundtrip-tests/restore-jobs.mjs');
 const words = JSON.parse(readFileSync('data/words.json')), content = JSON.parse(readFileSync('data/content.json'));
 const sqlite = new DatabaseSync(':memory:');
@@ -48,6 +49,53 @@ async function stage(state, revision = 0) {
   while (job.status !== 'ready') job = await jobs.validateRestoreJob(db, 'owner', job.id);
   return job;
 }
+
+test('all revised Oxford cards retain old saved senses, familiarity, completed material and review outcomes on read and restore', async () => {
+  const revisions = JSON.parse(readFileSync('data/catalog-content-revisions.json'));
+  const originals = Object.entries(revisions).map(([id, revision]) => [id, revision.previousContent]);
+  const progress = Object.fromEntries(originals.map(([id, old]) => {
+    const { meaning, expression, expressionTranslation, example, translation } = old;
+    const edited = { meaning, expression, expressionTranslation, example, translation,
+      notes: '이전 메모', en: 'independent', ko: 'help', studyDates: ['2026-11-19'], needsReview: true };
+    return [id, { ...edited, familiarity: 'uncertain',
+      familiarityCheck: { initial: 'known', final: 'uncertain', meaning, answer: '이전 답안' },
+      senses: { [meaning]: edited } }];
+  }));
+  const finished = [originals.slice(0, 10), originals.slice(10)].map((batch, index) => {
+    const date = '2026-11-' + (19 + index);
+    return { ...newSession(EMPTY, words, id => content[id], 'daily', date),
+      stage: 'done', finished: true, ids: batch.map(([id]) => id), wordKeys: {},
+      records: Object.fromEntries(batch.map(([id, old]) => [id, {
+        ...emptyRecord(old.meaning, 'uncertain'), entryId: id, material: old, learnedOn: date,
+        en: 'independent', ko: 'help', sentenceStatus: 'written', sentence: 'A saved sentence.',
+      }])) };
+  });
+  seedRows('word_progress', Object.entries(progress));
+  seedRows('study_sessions', finished.map(session => [session.id, session]));
+  const before = snapshot(), saved = await get();
+  assert.deepEqual(snapshot(), before);
+  assert.deepEqual(saved.state.progress, progress);
+  assert.deepEqual(saved.state.sessions, Object.fromEntries(finished.map(session => [session.id, session])));
+  for (const [id, old] of originals) {
+    const p = saved.state.progress[id];
+    const record = Object.values(saved.state.sessions).find(session => Object.hasOwn(session.records, id)).records[id];
+    assert.deepEqual(studyContent(id, record, p), old);
+    assert.equal(cardContent(id, p).meaning, old.meaning);
+    assert.deepEqual(cardContent(id), content[id]);
+    assert.notDeepEqual(content[id], old);
+    if (old.meaning !== content[id].meaning) {
+      const { material, ...legacyRecord } = record;
+      assert.equal(legacyRecord.meaning, material.meaning);
+      assert.deepEqual(studyContent(id, legacyRecord, undefined), old);
+      assert.deepEqual(cardContent(id, { meaning: old.meaning }), old);
+    }
+  }
+  const backup = await analyzeBackup(serializeBackup(saved.state));
+  assert.deepEqual(backup.parsed.state, saved.state);
+  const job = await stage(saved.state, saved.revision);
+  await jobs.commitRestoreJob(db, 'owner', job.id);
+  assert.deepEqual((await get()).state, saved.state);
+});
 
 test('literal reserved/inherited names survive editor → save → read → whole/part restore without prototype mutation', async () => {
   const id = words[0].id;

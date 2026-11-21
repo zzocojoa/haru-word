@@ -2,9 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { imageSourceContent } from '../scripts/prepare-word-image-ui.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
-const wordsBytes = readFileSync('data/words.json'), contentBytes = readFileSync('data/content.json');
+const wordsBytes = readFileSync('data/words.json');
+const revisions = JSON.parse(readFileSync('data/catalog-content-revisions.json'));
+const contentBytes = imageSourceContent(readFileSync('data/content.json'), revisions);
 const words = JSON.parse(wordsBytes), content = JSON.parse(contentBytes);
 
 test('the deployment metadata covers every Oxford identity and retains its reviewed meaning and part of speech', () => {

@@ -5,6 +5,7 @@ import { homedir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { imageSourceContent } from './prepare-word-image-ui.mjs';
 
 export const APPROVED_SOURCE_COMMIT = '228f8ba9e1594cbcb6286b24559100923eb68f6f';
 export const WEB_RECIPE = Object.freeze({ version: 1, width: 640, format: 'webp', quality: 82, effort: 6, withoutEnlargement: true });
@@ -58,7 +59,9 @@ function sourceSnapshot(sourceRoot, projectRoot) {
   if (git(sourceRoot, 'rev-parse', 'HEAD') !== APPROVED_SOURCE_COMMIT) fail('Expected approved image source commit 228f8ba');
   git(sourceRoot, 'diff', '--quiet', 'HEAD', '--', 'data/words.json', 'data/content.json', 'data/word-image-manifest.json');
   const manifestBytes = readFileSync(path.join(sourceRoot, 'data/word-image-manifest.json'));
-  const words = readFileSync(path.join(projectRoot, 'data/words.json')), content = readFileSync(path.join(projectRoot, 'data/content.json'));
+  const words = readFileSync(path.join(projectRoot, 'data/words.json'));
+  const content = imageSourceContent(readFileSync(path.join(projectRoot, 'data/content.json')),
+    JSON.parse(readFileSync(path.join(projectRoot, 'data/catalog-content-revisions.json'))));
   for (const [name, bytes] of [['words', words], ['content', content]]) {
     if (sha(readFileSync(path.join(sourceRoot, 'data', name + '.json'))) !== sha(bytes)) fail('Source and app textbook differ');
   }

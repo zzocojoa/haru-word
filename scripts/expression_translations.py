@@ -10,6 +10,15 @@ def load_expression_translations(path=DEFAULT_PATH):
     return json.loads(Path(path).read_text('utf-8'))
 
 
+def write_card_content(path, content):
+    # Keep one record per line so reviews and pre-push checks can read the catalog.
+    rows = (
+        json.dumps(entry_id) + ':' + json.dumps(card, ensure_ascii=False, separators=(',', ':'))
+        for entry_id, card in content.items()
+    )
+    Path(path).write_text('{\n' + ',\n'.join(rows) + '\n}\n', encoding='utf-8', newline='\n')
+
+
 def validate_expression_translations(content, glosses, *, require_applied=False):
     if not isinstance(content, dict) or not isinstance(glosses, dict):
         raise ValueError('Expression translations and content must be entry maps')

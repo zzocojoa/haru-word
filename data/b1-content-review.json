@@ -2251,8 +2251,16 @@
           "id": "ae4385fa4b30ea27",
           "status": "corrected",
           "beforeHash": "1a62727d215c69ee7cc408e9a9d234774c91b065e96276f610007086070e4df3",
-          "afterHash": "746f6f79bc15138cc71259188348ab94fc9d98891cd17771855cecf0354a6a2f",
-          "reason": "달걀 프라이의 뜻 선택"
+          "afterHash": "78051d55a5d3d03085b1f210d5dc1a608af77bacdab72f94d8720cbc9386e6bc",
+          "reason": "달걀 프라이의 뜻 선택",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "746f6f79bc15138cc71259188348ab94fc9d98891cd17771855cecf0354a6a2f",
+              "reason": "달걀 예문의 프라이는 자연스럽다. 표제어 뜻의 굽다는 뜨거운 기름이나 지방으로 익힌다는 핵심을 좁게 전달한다.",
+              "previousExpressionTranslation": "달걀을 기름에 굽다"
+            }
+          ]
         },
         {
           "id": "4f70c0af43c5c191",
@@ -3873,8 +3881,15 @@
           "id": "5cb35b5d0cd5410b",
           "status": "corrected",
           "beforeHash": "e3a07c30533e1b7227b47ddad7a00d4798a6f833e0ac4bd097ff0ddcb8ca4071",
-          "afterHash": "437917aa86ec10684babb26b8d7cb6cb3de6a84939a25180abd5154553d37828",
-          "reason": "가능성 아닌 최대 정도 표현"
+          "afterHash": "4428502ebe7b34e1aab30ea9281512cb3621ad18b2477190918cd0fac7445f57",
+          "reason": "가능성 아닌 최대 정도 표현",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "437917aa86ec10684babb26b8d7cb6cb3de6a84939a25180abd5154553d37828",
+              "reason": "가능한 한 많이는 as much as you can 전체에서 나온다. possibly는 can과 함께 가능 범위를 강조한다."
+            }
+          ]
         },
         {
           "id": "9857fd3ba53a726b",
@@ -4700,8 +4715,16 @@
           "id": "8ff89bc3e38fc80c",
           "status": "corrected",
           "beforeHash": "7409b25ba716955c800bb6a4db455d0952d0c8df5698bce62cdf692a9ef86fc8",
-          "afterHash": "a0f8b12911dc43dc5bcd9105e03d2339fca97bb0367a72c82427ed7f3f8cb303",
-          "reason": "공무원 합성어 뜻 명시"
+          "afterHash": "6c06a97af03f4fefa6ead3d36525af8d5e916aae8994280c26c9e4b6908c3ccc",
+          "reason": "공무원 합성어 뜻 명시",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "a0f8b12911dc43dc5bcd9105e03d2339fca97bb0367a72c82427ed7f3f8cb303",
+              "reason": "예문의 공무원은 public servant 전체의 뜻이다. 화면에서 표제어 servant의 뜻으로 기억할 여지가 있다.",
+              "previousExpressionTranslation": "공무원"
+            }
+          ]
         },
         {
           "id": "5795cfac842d0bf2",
@@ -4809,8 +4832,16 @@
           "id": "6c1994d9056399e7",
           "status": "corrected",
           "beforeHash": "7965d089d126215b0eb2d6cbe28f96a9df80ed91f84f346d37dff7cefb513c8e",
-          "afterHash": "83bfa7b97cbd5be0e23701fd8d26f8dbe312b67d818717eccc102a819f6af800",
-          "reason": "시야와 보는 행위 구분"
+          "afterHash": "26b916d439d634dc3502c1ed6a7c253a90d20eb85d57d06ec207d00057d56fcf",
+          "reason": "시야와 보는 행위 구분",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "83bfa7b97cbd5be0e23701fd8d26f8dbe312b67d818717eccc102a819f6af800",
+              "reason": "예문 번역은 맞다. 단독으로 보이는 봄은 계절을 먼저 떠올리기 쉽다.",
+              "previousExpressionTranslation": "누군가를 보고"
+            }
+          ]
         },
         {
           "id": "ebcb2705670121f6",
@@ -6000,8 +6031,16 @@
           "id": "ccef3e23140a51d7",
           "status": "corrected",
           "beforeHash": "b6482f57c6483dede60d30d56d15e5ca6560a115d6a8a5728f2ac49ad49b1ea5",
-          "afterHash": "5eea5b81f8c45979c97534373e386cfa21f5d4ccd063280eb9455d554a53a605",
-          "reason": "예문의 어린 시절 뜻 선택"
+          "afterHash": "beb308bebb35eccb81ec7e04824c2c28f489821cc4610d83257415bc13783006",
+          "reason": "예문의 어린 시절 뜻 선택",
+          "revisions": [
+            {
+              "reviewedAt": "2026-11-21",
+              "previousAfterHash": "5eea5b81f8c45979c97534373e386cfa21f5d4ccd063280eb9455d554a53a605",
+              "reason": "youth는 어린 때부터 젊은 시절까지 가리킬 수 있다. 예문에 시기를 어린 시절로 좁힐 단서가 없다.",
+              "previousExpressionTranslation": "네 어린 시절에"
+            }
+          ]
         }
       ]
     }

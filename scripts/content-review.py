@@ -1,7 +1,7 @@
 """Apply reviewed fixes and emit heuristic candidates, never auto-certify semantics."""
 import argparse,csv,json,re
 from pathlib import Path
-from expression_translations import apply_expression_translations
+from expression_translations import apply_expression_translations,write_card_content
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--apply',action='store_true')
@@ -17,7 +17,7 @@ if args.apply:
             content[key].pop('attribution',None)
             content[key].pop('url',None)
     content=apply_expression_translations(content)
-    path.write_text(json.dumps(content,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
+    write_card_content(path,content)
 words=json.loads(Path('data/words.json').read_text('utf-8'))
 # Includes valid particles/pronouns/numerals: these are review candidates, not failures.
 ending=re.compile(r'\b(?:a|an|the|of|to|for|with|in|on|at|by|from|my|your|his|her|their|our|two)$',re.I)
